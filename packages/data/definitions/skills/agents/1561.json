@@ -1140,7 +1140,7 @@
       "name": "微域气旋",
       "rowName": "伤害倍率",
       "levelGroup": "special",
-      "skillCategory": null,
+      "skillCategory": "uncategorized",
       "skillTargetIds": ["zzz-hp:skill:velina-special-ms4tnsha"],
       "skillTags": [],
       "source": {
@@ -1162,16 +1162,33 @@
         "growth": 0.063
       },
       "calculation": {
-        "kind": "unavailable",
-        "issues": [
+        "kind": "damage",
+        "segments": [
           {
-            "code": "unknown-category",
-            "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
+            "segmentId": "action:agent:1561:action:0021:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1561:action:0021:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.325,
+                  "growth": 0.03
+                }
+              }
+            ]
           }
         ]
       },
       "inputs": [],
-      "limitations": [],
+      "limitations": [
+        "采用具名的 ZZZ-HP 维琳娜气旋直伤约定：来源注记确认[微域气旋]与[广域气旋]只是方便处理列入[特殊技]大类、实则不属于任何类型，本动作按 uncategorized 结算直接伤害；专属目标增益按 zzz-hp:skill:velina-special-ms4tnsha 匹配，且不附加 special 大类条件，通用与元素增益仍按既有规则求值。消散爆炸命中处于风属性异常状态下的敌人时额外结算的 145%/255% 风属性[异放]是独立事件，本动作仅计算直接伤害，不自动追加消散异放，也不实现染色、生命周期、轮转或逐命中拆分。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
       "upstreamSkillId": "sk-velina-nk-1561021-main"
     }
   ]

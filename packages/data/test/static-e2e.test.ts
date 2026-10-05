@@ -80,7 +80,7 @@ async function inputFor(
     contractVersion: 1,
     gameVersion: "3.2",
     snapshotId:
-      "sha256:9ecee912cf7f42e9919ba4130659cf90f3432bd42f286792cd9f409ec7c0986f",
+      "sha256:43ca274239c6e292a18e310458c64597d0c27f6cf6290f7630cb263a6bd265c6",
   })
   expect(data.catalog.source.commit).toBe(reference.provenance.commit)
   expect(data.catalog.source.repository).toBe(reference.provenance.repository)
@@ -957,5 +957,86 @@ describe("remielle special Voidflare scenarios against the independent reference
       const factors = plain.value.segments[0]!.damage.factors.nonCritical
       expect(factors.anomalyDamageLevel).toBeDefined()
     }
+  })
+})
+
+describe("Velina Condensed Cyclone complete build", () => {
+  it("calculates the micro-domain cyclone from the reviewed equipment with independent expectations", async () => {
+    const build = builds.velina!
+    const data = await loadStaticCalculationData({
+      agents: [build.agentName],
+      wEngines: [build.wEngineName],
+    })
+    const actions = data.agents.find(
+      (entry) => entry.actions.entityId === build.actor.agentEntityId,
+    )!.actions
+    const actionId = "action:agent:1561:action:0021"
+    const resolution = {
+      agent: actions,
+      actionId,
+      mindscapeRank: build.actor.mindscapeRank,
+      levels: { special: { mode: "effective", value: 12 } },
+    } as const
+    const resolved = resolveAgentAction(resolution)
+    expect(resolved.ok).toBe(true)
+    if (!resolved.ok || resolved.calculation.kind !== "damage")
+      throw new Error("Expected an available micro-domain action")
+    expect(resolved.skillCategory).toBe("uncategorized")
+    expect(resolved.skillTargetIds).toEqual([
+      "zzz-hp:skill:velina-special-ms4tnsha",
+    ])
+    expect(resolved.calculation.segments[0]).toMatchObject({
+      damageKind: "regular",
+      element: "wind",
+      granularity: "aggregate",
+      repeat: 1,
+    })
+    const input: StaticActionCalculationInput = {
+      data,
+      actors: [build.actor],
+      actorId: build.actor.entityId,
+      action: resolved,
+      target: {
+        entityId: "entity:target",
+        teamId: "team:enemies",
+        baseDefense: 1000,
+        resistances: { wind: 0.2 },
+        isStunned: false,
+        baseStunDamageMultiplier: 1,
+      },
+      selections: [],
+    }
+    const result = calculate(input)
+    // 独立纯算式（来源属性 + 词条 + 音擎面板，不复用被测输出）：
+    // (797.574 + 75 + 684.02) × 1.6 + 316 = 2806.5504；
+    // 暴击率 0.05 + 0.08、暴伤 0.5、穿透 0.24。
+    close(result.panels[0]!.stats.attack!.value, 2806.5504, "panel attack")
+    close(result.panels[0]!.stats.criticalRate!.value, 0.13, "panel crit rate")
+    close(
+      result.panels[0]!.stats.criticalDamage!.value,
+      0.5,
+      "panel crit damage",
+    )
+    close(
+      result.panels[0]!.stats.penetrationRatio!.value,
+      0.24,
+      "panel penetration ratio",
+    )
+    // 非暴击 = 2806.5504 × 0.655 × 794/(794 + 1000 × (1 − 0.24)) × 0.8。
+    close(result.totals.nonCritical, 751.404204132819, "non-critical hit")
+    close(result.totals.critical, 1127.106306199228, "critical hit")
+    close(result.totals.expected, 800.245477401452, "expected hit")
+    expect(result.totals.displayedNonCritical).toBeNull()
+    expect(result.totals.displayedCritical).toBeNull()
+    expect(result.segments[0]!.granularity).toBe("aggregate")
+    expect(
+      resolveAgentAction({ ...resolution, requireIndividualHits: true }),
+    ).toMatchObject({
+      ok: false,
+      issues: [{ code: "individual-hits-required" }],
+    })
+    expect(
+      calculateStaticActionDamage({ ...input, requireIndividualHits: true }).ok,
+    ).toBe(false)
   })
 })

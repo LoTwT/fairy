@@ -723,6 +723,327 @@ describe("Lucy guard-pig panel proxy consumption", () => {
   })
 })
 
+describe("Velina Condensed Cyclone direct damage", () => {
+  // 具名 ZZZ-HP 维琳娜气旋直伤约定：uncategorized 分类、微域专属目标、单段风属性合计；
+  // 期望值由 Nanoka 万分比曲线与受控面板独立算出，不从生产转换器或被测输出反推。
+  const actionId = "action:agent:1561:action:0021"
+  const wideTarget = "zzz-hp:skill:velina-special-ms4tnzvq"
+  const microReleaseOption =
+    "agents:velina:mindscape:0:blk-legacy:legacy-team-anomalyReleaseMult"
+  const wideReleaseOption =
+    "agents:velina:mindscape:0:blk-legacy:eff-ms4tphp6-6zyuxs"
+  const microReleaseEffect =
+    "agent:1561:zzz-hp:legacy-team-anomalyReleaseMult:blk-legacy:mindscape:0"
+  const wideReleaseEffect =
+    "agent:1561:zzz-hp:eff-ms4tphp6-6zyuxs:blk-legacy:mindscape:0"
+  const coreBonusOption =
+    "agents:velina:mindscape:0:blk-legacy:legacy-self-dmgBonus"
+  const coreBonusEffect =
+    "agent:1561:zzz-hp:legacy-self-dmgBonus:blk-legacy:mindscape:0"
+
+  interface MicroOptions {
+    rank?: StaticActorConfiguration["mindscapeRank"]
+    level?: { mode: "trained" | "effective"; value: number }
+    coreSkillLevel?: StaticActorConfiguration["coreSkillLevel"]
+    criticalRate?: number
+    energyRegen?: number
+    damageBonuses?: Record<string, number>
+    resistances?: Record<string, number>
+    selections?: StaticActionCalculationInput["selections"]
+    skillLevels?: StaticActorConfiguration["skillLevels"]
+  }
+
+  async function microInput(
+    options: MicroOptions = {},
+  ): Promise<StaticActionCalculationInput> {
+    const rank = options.rank ?? 0
+    const input = await fixture("1561", rank)
+    const actions = input.data.agents[0]!.actions
+    const resolved = resolveAgentAction({
+      agent: actions,
+      actionId,
+      mindscapeRank: rank,
+      levels: {
+        special: options.level ?? { mode: "effective", value: 12 },
+      },
+    })
+    if (!resolved.ok || resolved.calculation.kind !== "damage")
+      throw new Error("expected a resolved micro-domain action")
+    return {
+      ...input,
+      action: resolved,
+      actors: [
+        {
+          ...input.actors[0]!,
+          coreSkillLevel: options.coreSkillLevel ?? 7,
+          ...(options.skillLevels === undefined
+            ? {}
+            : { skillLevels: options.skillLevels }),
+          panel: {
+            mode: "out-of-combat",
+            stats: {
+              attack: { unit: "attack-points", value: 1000 },
+              criticalRate: {
+                unit: "ratio",
+                value: options.criticalRate ?? 0,
+              },
+              criticalDamage: { unit: "ratio", value: 0.5 },
+              penetrationRatio: { unit: "ratio", value: 0 },
+              ...(options.energyRegen === undefined
+                ? {}
+                : {
+                    energyRegen: {
+                      unit: "energy-per-second" as const,
+                      value: options.energyRegen,
+                    },
+                  }),
+            },
+            penetrationValue: 0,
+            damageBonuses: options.damageBonuses ?? { wind: 0 },
+          },
+        },
+      ],
+      target: {
+        ...input.target,
+        baseDefense: 0,
+        resistances: options.resistances ?? { wind: 0 },
+      },
+      selections: options.selections ?? [],
+    }
+  }
+
+  it("consumes levels 1/12/16 as one wind aggregate with null displayed totals", async () => {
+    for (const [level, rank, expected] of [
+      [1, 0, 325],
+      [12, 0, 655],
+      [16, 5, 775],
+    ] as const) {
+      const input = await microInput({
+        rank,
+        level: { mode: "effective", value: level },
+      })
+      const result = calculate(input)
+      expect(result.segments).toHaveLength(1)
+      expect(result.segments[0]!.granularity).toBe("aggregate")
+      expect(result.segments[0]!.damage.factors.nonCritical.resistance).toBe(1)
+      expect(result.totals.nonCritical).toBeCloseTo(expected, 10)
+      expect(result.totals.critical).toBeCloseTo(expected * 1.5, 10)
+      expect(result.totals.expected).toBeCloseTo(expected, 10)
+      expect(result.totals.displayedNonCritical).toBeNull()
+      expect(result.totals.displayedCritical).toBeNull()
+    }
+  })
+
+  it("reads only the wind bonus and wind resistance", async () => {
+    const input = await microInput({
+      damageBonuses: { wind: 0.2 },
+      resistances: { wind: 0.1 },
+    })
+    const result = calculate(input)
+    expect(result.totals.nonCritical).toBeCloseTo(707.4, 10)
+    const shifted = calculate(
+      await microInput({
+        damageBonuses: { wind: 0.2, physical: 0.99 },
+        resistances: { wind: 0.1, physical: 0.99 },
+      }),
+    )
+    expect(shifted.totals).toEqual(result.totals)
+  })
+
+  it("does not append the dissipation release and keeps the aggregate guard clear", async () => {
+    const plain = calculate(await microInput())
+    expect(plain.totals.nonCritical).toBeCloseTo(655, 10)
+    for (const options of [
+      [microReleaseOption],
+      [wideReleaseOption],
+      [microReleaseOption, wideReleaseOption],
+    ] as const) {
+      const selected = calculate(
+        await microInput({
+          selections: options.map((optionId) => ({
+            holderId: "entity:actor",
+            optionId,
+            layers: 1,
+          })),
+        }),
+      )
+      expect(selected.totals).toEqual(plain.totals)
+      expect(
+        selected.segments[0]!.damage.evaluation.contributions.filter((entry) =>
+          [microReleaseEffect, wideReleaseEffect].includes(
+            entry.origin.effectId,
+          ),
+        ),
+      ).toEqual([])
+      expect(
+        selected.segments[0]!.damage.evaluation.contributions.some(
+          (entry) =>
+            entry.address.kind === "factor" &&
+            entry.address.channel === "base-multiplier-addition",
+        ),
+      ).toBe(false)
+    }
+  })
+  it("applies the selected core damage bonus without mixing release settlement", async () => {
+    const input = await microInput({
+      energyRegen: 2,
+      selections: [
+        { holderId: "entity:actor", optionId: coreBonusOption, layers: 1 },
+      ],
+    })
+    const result = calculate(input)
+    // (2 − 1.2) × 0.21 = 0.168 → 655 × 1.168 = 765.04。
+    expect(result.totals.nonCritical).toBeCloseTo(765.04, 10)
+    const contributions =
+      result.segments[0]!.damage.evaluation.contributions.filter(
+        (entry) => entry.origin.effectId === coreBonusEffect,
+      )
+    expect(contributions).toHaveLength(1)
+    expect(contributions[0]!.value.value).toBeCloseTo(0.168, 12)
+    expect(
+      result.segments[0]!.damage.evaluation.contributions.filter((entry) =>
+        [microReleaseEffect, wideReleaseEffect].includes(entry.origin.effectId),
+      ),
+    ).toEqual([])
+    // 不选择效果时直接动作在核心 1 与核心 7 均可用。
+    const unselected = await microInput({ energyRegen: 2 })
+    expect(unselected.action.ok).toBe(true)
+    expect(calculate(unselected).totals.nonCritical).toBeCloseTo(655, 10)
+    expect(
+      calculate(await microInput({ coreSkillLevel: 1, energyRegen: 2 })).totals
+        .nonCritical,
+    ).toBeCloseTo(655, 10)
+    // 已有异放选项保持原有核心 7 门槛，缺档拒绝而不补档。
+    expect(
+      calculateStaticActionDamage(
+        await microInput({
+          coreSkillLevel: 1,
+          selections: [
+            {
+              holderId: "entity:actor",
+              optionId: microReleaseOption,
+              layers: 1,
+            },
+          ],
+        }),
+      ),
+    ).toMatchObject({ ok: false, issues: [{ code: "MISSING_RANK" }] })
+  })
+  it("rejects forged classification, targets, tags, contexts and segment structure", async () => {
+    const input = await microInput()
+    const action = input.action
+    if (!action.ok || action.calculation.kind !== "damage")
+      throw new Error("fixture")
+    const segments = action.calculation.segments
+    const patchSegment = (patch: Record<string, unknown>) => ({
+      ...action,
+      calculation: {
+        kind: "damage" as const,
+        segments: segments.map((segment) => ({ ...segment, ...patch })),
+      },
+    })
+    const altered = [
+      { ...action, skillCategory: "special" as const },
+      { ...action, skillCategory: "enhanced-special" as const },
+      { ...action, skillCategory: "basic" as const },
+      { ...action, skillTags: ["zzz-hp:follow-up"] },
+      { ...action, skillTargetIds: [wideTarget] },
+      {
+        ...action,
+        resolutionContext: {
+          ...action.resolutionContext,
+          agentEntityId: "1031",
+        },
+      },
+      patchSegment({ element: "physical" }),
+      patchSegment({ granularity: "individual" }),
+      patchSegment({ repeat: 2 }),
+      patchSegment({ segmentId: "forged-segment" }),
+      patchSegment({
+        damageItems: [
+          { ...segments[0]!.damageItems[0]!, itemId: "forged-item" },
+        ],
+      }),
+      patchSegment({
+        damageItems: [{ ...segments[0]!.damageItems[0]!, stat: "health" }],
+      }),
+    ]
+    for (const forged of altered)
+      expect(
+        calculateStaticActionDamage({ ...input, action: forged }),
+      ).toMatchObject({
+        ok: false,
+        issues: [{ code: "CONTEXT_MISMATCH" }],
+      })
+    expect(
+      calculateStaticActionDamage({
+        ...input,
+        action: { ...action, resolutionContext: undefined },
+      } as unknown as StaticActionCalculationInput),
+    ).toMatchObject({
+      ok: false,
+      issues: [
+        { code: "CONTEXT_MISMATCH", pointer: "/action/resolutionContext" },
+      ],
+    })
+    // 角色影画与显式 final special 等级必须与解析上下文一致。
+    expect(
+      calculateStaticActionDamage({
+        ...input,
+        actors: [{ ...input.actors[0]!, mindscapeRank: 3 }],
+      }),
+    ).toMatchObject({ ok: false, issues: [{ code: "CONTEXT_MISMATCH" }] })
+    expect(
+      calculateStaticActionDamage({
+        ...input,
+        actors: [
+          {
+            ...input.actors[0]!,
+            skillLevels: { special: { mode: "effective", value: 10 } },
+          },
+        ],
+      }),
+    ).toMatchObject({
+      ok: false,
+      issues: [
+        {
+          code: "CONTEXT_MISMATCH",
+          pointer: "/actors/entity:actor/skillLevels/special",
+        },
+      ],
+    })
+  })
+
+  it("rejects strict individual hits and still refuses an active per-hit addition", async () => {
+    const input = await microInput()
+    expect(
+      calculateStaticActionDamage({ ...input, requireIndividualHits: true }).ok,
+    ).toBe(false)
+    // 受控测试：把已选独立异放规则改为无条件命中倍率加项，验证合计段仍拒绝真正生效的
+    // 逐命中加伤；这不是新的游戏效果，也不改变正式 definitions。
+    const forgedDefinitions = {
+      ...input.data.definitions,
+      effects: input.data.definitions.effects.map((rule) =>
+        rule.kind === "contribution" && rule.effectId === microReleaseEffect
+          ? { ...rule, when: { kind: "constant", value: true } }
+          : rule,
+      ),
+    } as unknown as StaticActionCalculationInput["data"]["definitions"]
+    const rejected = calculateStaticActionDamage({
+      ...input,
+      data: { ...input.data, definitions: forgedDefinitions },
+      selections: [
+        { holderId: "entity:actor", optionId: microReleaseOption, layers: 1 },
+      ],
+    })
+    expect(rejected.ok).toBe(false)
+    if (!rejected.ok)
+      expect(
+        rejected.issues.some((issue) => issue.message.includes("per-hit")),
+      ).toBe(true)
+  })
+})
+
 describe("static calculation assembly", () => {
   it("keeps Lucia M6 on initial health when her own health buff is selected", async () => {
     const input = await fixture("1451", 6)

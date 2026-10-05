@@ -155,6 +155,27 @@ globalThis.fairySingleElementActions = async () => {
     return { id, element: resolved.calculation.segments[0].element, granularity: resolved.calculation.segments[0].granularity, segments: result.value.segments.length, totals: result.value.totals, strictResolution: api.resolveAgentAction({ ...resolution, requireIndividualHits: true }).ok, strictCalculation: core.calculateStaticActionDamage({ ...request, requireIndividualHits: true }).ok }
   })
 }
+globalThis.fairyVelinaMicroDomain = async () => {
+  const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["Velina"], wEngines: ["Fusion Compiler"] }), import("@randomplay/core")])
+  const actions = data.agents[0].actions
+  const action = actions.actions.find(entry => entry.actionId === "action:agent:1561:action:0021")
+  const resolution = { agent: actions, actionId: action.actionId, mindscapeRank: 0, levels: { special: { mode: "effective", value: 12 } } }
+  const resolved = api.resolveAgentAction(resolution)
+  if (!resolved.ok) throw new Error(JSON.stringify(resolved.issues))
+  const request = { data, actors: [{ entityId: "entity:velina", teamId: "team:players", agentEntityId: "1561", mindscapeRank: 0, coreSkillLevel: 7, wEngine: { entityId: "14118", refinement: 1, eligible: true }, driveDiscs: { 1: { setEntityId: "31300", mainStat: { attribute: "health" }, substats: [] }, 2: { setEntityId: "31300", mainStat: { attribute: "attack" }, substats: [] }, 3: { setEntityId: "31300", mainStat: { attribute: "defense" }, substats: [] }, 4: { setEntityId: "31300", mainStat: { attribute: "anomalyProficiency" }, substats: [] }, 5: { setEntityId: "31000", mainStat: { attribute: "attack" }, substats: [] }, 6: { setEntityId: "31000", mainStat: { attribute: "attack" }, substats: [] } }, panel: { mode: "equipment" } }], actorId: "entity:velina", action: resolved, target: { entityId: "entity:target", teamId: "team:enemies", baseDefense: 1000, resistances: { wind: 0.2 }, isStunned: false, baseStunDamageMultiplier: 1 }, selections: [] }
+  const result = core.calculateStaticActionDamage(request)
+  if (!result.ok) throw new Error(JSON.stringify(result.issues))
+  return {
+    category: resolved.skillCategory,
+    targets: resolved.skillTargetIds,
+    element: resolved.calculation.segments[0].element,
+    granularity: resolved.calculation.segments[0].granularity,
+    panelAttack: result.value.panels[0].stats.attack.value,
+    totals: result.value.totals,
+    strictResolution: api.resolveAgentAction({ ...resolution, requireIndividualHits: true }).ok,
+    strictCalculation: core.calculateStaticActionDamage({ ...request, requireIndividualHits: true }).ok,
+  }
+}
 globalThis.fairyDefinitions = {
   starter: () => import("@randomplay/data/definitions/effects/starter.json"),
   automatic: () => import("@randomplay/data/definitions/effects/automatic.json"),
@@ -696,6 +717,46 @@ function defineScenarios(counts: {
             "definitions/skills/agents/1171.json",
             "definitions/attributes/agents/1181.json",
             "definitions/skills/agents/1181.json",
+            "definitions/attributes/drive-disc-affixes.json",
+            "definitions/effects/static.json",
+            "definitions/effects/static-catalog.json",
+          ],
+        },
+      ],
+    },
+    {
+      name: "velina-micro-domain",
+      steps: [
+        {
+          name: "initial",
+          act: async (page) => checkNameCatalogs(page),
+          sources: [],
+        },
+        {
+          name: "resolve-and-calculate",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyVelinaMicroDomain(),
+            )
+            expect(result.category).toBe("uncategorized")
+            expect(result.targets).toEqual([
+              "zzz-hp:skill:velina-special-ms4tnsha",
+            ])
+            expect(result.element).toBe("wind")
+            expect(result.granularity).toBe("aggregate")
+            expect(result.panelAttack).toBeCloseTo(2806.5504, 8)
+            expect(result.totals.nonCritical).toBeCloseTo(751.404204132819, 8)
+            expect(result.totals.critical).toBeCloseTo(1127.106306199228, 8)
+            expect(result.totals.expected).toBeCloseTo(800.245477401452, 8)
+            expect(result.totals.displayedNonCritical).toBeNull()
+            expect(result.totals.displayedCritical).toBeNull()
+            expect(result.strictResolution).toBe(false)
+            expect(result.strictCalculation).toBe(false)
+          },
+          sources: [
+            "definitions/attributes/agents/1561.json",
+            "definitions/skills/agents/1561.json",
+            "definitions/attributes/w-engines/14118.json",
             "definitions/attributes/drive-disc-affixes.json",
             "definitions/effects/static.json",
             "definitions/effects/static-catalog.json",

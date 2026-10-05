@@ -20749,16 +20749,14 @@
     "rowKind": "damage",
     "dazeRowIndex": 1,
     "sourceSignature": "6ea154e137ee879e6b37cd3f19e2e921e7b3e1f90e456860c54784307a3c1c53",
-    "skillCategory": null,
+    "skillCategory": "uncategorized",
     "element": "wind",
     "damageKind": "regular",
     "upstreamSkillId": "sk-velina-nk-1561021-main",
     "skillTargetIds": ["zzz-hp:skill:velina-special-ms4tnsha"],
-    "issues": [
-      {
-        "code": "unknown-category",
-        "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用具名的 ZZZ-HP 维琳娜气旋直伤约定：来源注记确认[微域气旋]与[广域气旋]只是方便处理列入[特殊技]大类、实则不属于任何类型，本动作按 uncategorized 结算直接伤害；专属目标增益按 zzz-hp:skill:velina-special-ms4tnsha 匹配，且不附加 special 大类条件，通用与元素增益仍按既有规则求值。消散爆炸命中处于风属性异常状态下的敌人时额外结算的 145%/255% 风属性[异放]是独立事件，本动作仅计算直接伤害，不自动追加消散异放，也不实现染色、生命周期、轮转或逐命中拆分。"
     ]
   },
   {

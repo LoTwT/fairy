@@ -13,7 +13,7 @@ import type {
   StaticDamageResult,
   StaticEffectCatalog,
 } from "../../src/effects/index.ts"
-import { general, inputFor } from "./static-fixtures.ts"
+import { general, inputFor, literal, rule } from "./static-fixtures.ts"
 import { resolveAgentAction } from "../../../data/src/skills/resolve.ts"
 import type { AgentActions } from "../../../data/src/skills/types.ts"
 const read = (path: string) =>
@@ -1935,6 +1935,167 @@ describe("velina cyclone catalog linkage", () => {
   )!
   it("publishes the cyclone target as uncategorized", () => {
     expect(target.category).toBe("uncategorized")
+  })
+
+  it("resolves the micro cyclone with its own target and strict individual-hit refusal", () => {
+    const agent = read(
+      "../../../data/definitions/skills/agents/1561.json",
+    ) as AgentActions
+    const action = resolveAgentAction({
+      agent,
+      actionId: "action:agent:1561:action:0021",
+      mindscapeRank: 0,
+      levels: { special: { mode: "effective", value: 12 } },
+    })
+    expect(action.ok).toBe(true)
+    if (action.ok) {
+      expect(action.skillCategory).toBe("uncategorized")
+      expect(action.skillTargetIds).toEqual([
+        "zzz-hp:skill:velina-special-ms4tnsha",
+      ])
+      expect(action.calculation).toMatchObject({
+        kind: "damage",
+        segments: [
+          {
+            damageKind: "regular",
+            element: "wind",
+            granularity: "aggregate",
+            repeat: 1,
+          },
+        ],
+      })
+    }
+    expect(
+      resolveAgentAction({
+        agent,
+        actionId: "action:agent:1561:action:0021",
+        mindscapeRank: 0,
+        levels: { special: { mode: "effective", value: 12 } },
+        requireIndividualHits: true,
+      }),
+    ).toMatchObject({
+      ok: false,
+      issues: [{ code: "individual-hits-required" }],
+    })
+  })
+
+  it("scopes each dissipation release effect to its own domain target on wind settlement hits", () => {
+    const microTargetId = "zzz-hp:skill:velina-special-ms4tnsha"
+    const wideTargetId = "zzz-hp:skill:velina-special-ms4tnzvq"
+    const microOption =
+      "agents:velina:mindscape:0:blk-legacy:legacy-team-anomalyReleaseMult"
+    const wideOption =
+      "agents:velina:mindscape:0:blk-legacy:eff-ms4tphp6-6zyuxs"
+    const microEffect =
+      "agent:1561:zzz-hp:legacy-team-anomalyReleaseMult:blk-legacy:mindscape:0"
+    const wideEffect =
+      "agent:1561:zzz-hp:eff-ms4tphp6-6zyuxs:blk-legacy:mindscape:0"
+    const settlement = oracle.tables.damage!.find(
+      (entry) => (entry as { kind?: string }).kind === "anomaly-settlement",
+    )!
+    const regular = oracle.tables.damage!.find(
+      (entry) => (entry as { kind?: string }).kind === "regular",
+    )!
+    const releaseInput = (
+      targetId: string,
+      element: "wind" | "physical",
+      kind: "anomaly-settlement" | "regular",
+    ) => {
+      const base = agentInput("1561", [microOption, wideOption], 0, 7)
+      const damage = structuredClone(
+        kind === "anomaly-settlement" ? settlement : regular,
+      ) as Record<string, unknown> & {
+        anomalySource?: { entityId: string; level: number }
+      }
+      if (damage.anomalySource)
+        damage.anomalySource = { entityId: "entity:attacker", level: 60 }
+      return {
+        ...base,
+        damage: damage as StaticCatalogDamageInput["damage"],
+        hit: { ...base.hit, element, skillTargetIds: [targetId] },
+      } as StaticCatalogDamageInput
+    }
+    const contribution = (input: StaticCatalogDamageInput, effectId: string) =>
+      calculateCatalogResult(input)
+        .evaluation.contributions.filter(
+          (entry) =>
+            entry.origin.effectId === effectId &&
+            entry.origin.beneficiaryId === input.hit.actorId,
+        )
+        .reduce((total, entry) => total + entry.value.value, 0)
+    // 合法目录夹具：同一异放结算命中只匹配所属气旋目标，微域 1.45 / 广域 2.55 不互相串贡献。
+    const micro = releaseInput(microTargetId, "wind", "anomaly-settlement")
+    expect(contribution(micro, microEffect)).toBeCloseTo(1.45, 8)
+    expect(contribution(micro, wideEffect)).toBe(0)
+    const wide = releaseInput(wideTargetId, "wind", "anomaly-settlement")
+    expect(contribution(wide, wideEffect)).toBeCloseTo(2.55, 8)
+    expect(contribution(wide, microEffect)).toBe(0)
+    for (const negative of [
+      releaseInput(microTargetId, "physical", "anomaly-settlement"),
+      releaseInput(microTargetId, "wind", "regular"),
+      releaseInput(wideTargetId, "physical", "anomaly-settlement"),
+      releaseInput(
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "wind",
+        "anomaly-settlement",
+      ),
+    ]) {
+      expect(contribution(negative, microEffect)).toBe(0)
+      expect(contribution(negative, wideEffect)).toBe(0)
+    }
+  })
+
+  it("matches only the controlled micro-domain tag rule, never category or wide-domain rules", () => {
+    // 明确属于测试的受控规则：来源为 environment:static-tests，不是新的游戏效果；
+    // 只验证独立目标标签匹配本身，不定义任何角色或武器语义。
+    const microTag = "zzz-hp:skill:velina-special-ms4tnsha"
+    const wideTag = "zzz-hp:skill:velina-special-ms4tnzvq"
+    const tagRule = (name: string, tag: string, value: number) =>
+      rule(
+        name,
+        {
+          kind: "factor-contribution",
+          channel: "damage-bonus",
+          value: literal("ratio", value),
+        },
+        { kind: "one-of", fact: "hit.skillTag", values: [tag] },
+      )
+    const microRule = tagRule("controlled-micro-target", microTag, 0.1)
+    const wideRule = tagRule("controlled-wide-target", wideTag, 0.2)
+    const categoryRule = tagRule(
+      "controlled-special-category",
+      "zzz-hp:category:special",
+      0.3,
+    )
+    const bonusAt = (skillTags: readonly string[]) => {
+      const input = inputFor([microRule, wideRule, categoryRule])
+      const result = calculateStaticDamage({
+        ...input,
+        hit: { ...input.hit, element: "wind", skillTags },
+      })
+      expect(result.ok, JSON.stringify(result)).toBe(true)
+      if (!result.ok) throw new Error("fixture")
+      return Object.fromEntries(
+        [microRule, wideRule, categoryRule].map((entry) => [
+          entry.effectId,
+          result.value.evaluation.contributions
+            .filter((c) => c.origin.effectId === entry.effectId)
+            .reduce((total, c) => total + c.value.value, 0),
+        ]),
+      )
+    }
+    const micro = bonusAt([microTag, "zzz-hp:category:uncategorized"])
+    expect(micro[microRule.effectId]).toBeCloseTo(0.1, 12)
+    expect(micro[wideRule.effectId]).toBe(0)
+    expect(micro[categoryRule.effectId]).toBe(0)
+    const wide = bonusAt([wideTag, "zzz-hp:category:uncategorized"])
+    expect(wide[wideRule.effectId]).toBeCloseTo(0.2, 12)
+    expect(wide[microRule.effectId]).toBe(0)
+    expect(wide[categoryRule.effectId]).toBe(0)
+    const special = bonusAt(["zzz-hp:category:special"])
+    expect(special[categoryRule.effectId]).toBeCloseTo(0.3, 12)
+    expect(special[microRule.effectId]).toBe(0)
+    expect(special[wideRule.effectId]).toBe(0)
   })
 
   const withPotential = (

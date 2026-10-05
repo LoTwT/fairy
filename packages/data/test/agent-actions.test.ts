@@ -874,6 +874,190 @@ describe("potential-level action catalogue", () => {
   })
 })
 
+describe("Velina Condensed Cyclone convention", () => {
+  // 固定来源注记：微域/广域气旋只是方便处理列入特殊技大类，实则不属于任何类型；
+  // 消散爆炸的 145%/255% 风属性异放是独立结算。期望倍率直接取 Nanoka 万分比曲线。
+  const actionId = "action:agent:1561:action:0021"
+  const microTarget = "zzz-hp:skill:velina-special-ms4tnsha"
+
+  it("opens the micro-domain cyclone as one wind aggregate row with its own target and boundaries", async () => {
+    const data = await agent("1561")
+    const action = data.actions.find((entry) => entry.actionId === actionId)!
+    expect(action.name).toBe("微域气旋")
+    expect(action.rowName).toBe("伤害倍率")
+    expect(action.branchId).toBe("agent:1561:branch:special-10")
+    expect(action.levelGroup).toBe("special")
+    expect(action.skillCategory).toBe("uncategorized")
+    expect(action.skillTargetIds).toEqual([microTarget])
+    expect(action.skillTags).toEqual([])
+    expect(action.inputs).toEqual([])
+    expect(action.potentialLevels).toBeUndefined()
+    expect(action.conditionalIdentity).toBeUndefined()
+    expect(action.source).toEqual({
+      path: "agents/1561/details.zh.json",
+      pointer: "/skill/special/description/9/param/0",
+    })
+    expect(action.descriptionSources).toEqual([])
+    expect(action.parameterIds).toEqual(["1561021"])
+    expect(action.sourceExpression).toBe("{Skill:1561021, Prop:1001}")
+    expect(action.damageCoefficient).toEqual({
+      levelGroup: "special",
+      base: 0.325,
+      growth: 0.03,
+    })
+    expect(action.dazeCoefficient).toEqual({
+      levelGroup: "special",
+      base: 1.375,
+      growth: 0.063,
+    })
+    expect(action.upstreamSkillId).toBe("sk-velina-nk-1561021-main")
+    expect(action.calculation).toEqual({
+      kind: "damage",
+      segments: [
+        {
+          segmentId: `${actionId}:total`,
+          damageKind: "regular",
+          element: "wind",
+          granularity: "aggregate",
+          repeat: 1,
+          items: [
+            {
+              itemId: `${actionId}:base`,
+              stat: "attack",
+              coefficient: {
+                levelGroup: "special",
+                base: 0.325,
+                growth: 0.03,
+              },
+            },
+          ],
+        },
+      ],
+    })
+    const limitations = action.limitations.join("\n")
+    expect(limitations).toContain("维琳娜气旋直伤约定")
+    expect(limitations).toContain("不自动追加消散异放")
+    expect(limitations).toContain(microTarget)
+    expect(limitations).toContain("不附加 special 大类条件")
+    expect(limitations).toContain("通用与元素增益仍按既有规则求值")
+    expect(limitations).toContain("内部命中数尚未核实")
+  })
+
+  it("resolves levels 1/12/16 with the documented training and mindscape semantics", async () => {
+    const data = await agent("1561")
+    const resolve = (
+      mindscapeRank: number,
+      level: SkillLevelInput,
+      requireIndividualHits?: boolean,
+    ) =>
+      resolveAgentAction({
+        agent: data,
+        actionId,
+        mindscapeRank,
+        levels: { special: level },
+        ...(requireIndividualHits === undefined
+          ? {}
+          : { requireIndividualHits }),
+      })
+    for (const [level, rank, damage, daze] of [
+      [1, 0, 0.325, 1.375],
+      [12, 0, 0.655, 2.068],
+      [16, 5, 0.775, 2.32],
+      [16, 6, 0.775, 2.32],
+    ] as const) {
+      const resolved = resolve(rank, { mode: "effective", value: level })
+      expect(resolved.ok, `L${level}@M${rank}`).toBe(true)
+      if (!resolved.ok) throw new Error("fixture")
+      expect(resolved.resolutionContext).toEqual({
+        agentEntityId: "1561",
+        mindscapeRank: rank,
+      })
+      expect(resolved.sourceDamageMultiplier).toBeCloseTo(damage, 12)
+      expect(resolved.dazeMultiplier).toBeCloseTo(daze, 12)
+      expect(resolved.skillCategory).toBe("uncategorized")
+      expect(resolved.skillTargetIds).toEqual([microTarget])
+    }
+    // M3 训练 12 → 最终 14；M5 最终 12 保持 12（训练 8）。
+    const m3 = resolve(3, { mode: "trained", value: 12 })
+    expect(m3.ok).toBe(true)
+    if (!m3.ok) throw new Error("fixture")
+    expect(m3.levels.special).toEqual({ trained: 12, bonus: 2, effective: 14 })
+    expect(m3.sourceDamageMultiplier).toBeCloseTo(0.325 + 0.03 * 13, 12)
+    const m5Trained = resolve(5, { mode: "trained", value: 12 })
+    expect(m5Trained.ok).toBe(true)
+    if (!m5Trained.ok) throw new Error("fixture")
+    expect(m5Trained.levels.special).toEqual({
+      trained: 12,
+      bonus: 4,
+      effective: 16,
+    })
+    expect(m5Trained.sourceDamageMultiplier).toBeCloseTo(0.775, 12)
+    const m5Effective = resolve(5, { mode: "effective", value: 12 })
+    expect(m5Effective.ok).toBe(true)
+    if (!m5Effective.ok) throw new Error("fixture")
+    expect(m5Effective.levels.special).toEqual({
+      trained: 8,
+      bonus: 4,
+      effective: 12,
+    })
+    expect(m5Effective.sourceDamageMultiplier).toBeCloseTo(0.655, 12)
+    // 未核实档位、越界、非整数与缺失培养等级照旧拒绝，不补档、不截断。
+    for (const resolution of [
+      () => resolve(0, { mode: "effective", value: 16 }),
+      () => resolve(0, { mode: "trained", value: 13 }),
+      () => resolve(0, { mode: "effective", value: 12.5 }),
+      () => resolve(5, { mode: "trained", value: 13 }),
+      () =>
+        resolveAgentAction({
+          agent: data,
+          actionId,
+          mindscapeRank: 0,
+          levels: {},
+        }),
+    ])
+      expect(resolution).toThrow()
+    expect(resolve(0, { mode: "effective", value: 12 }, true)).toMatchObject({
+      ok: false,
+      issues: [{ code: "individual-hits-required" }],
+    })
+  })
+
+  it("keeps the wide-domain row available and the dyed or deferred rows closed", async () => {
+    const data = await agent("1561")
+    const wide = data.actions.find(
+      (entry) => entry.actionId === "action:agent:1561:action:0019",
+    )!
+    expect(wide.name).toBe("广域气旋")
+    expect(wide.skillCategory).toBe("uncategorized")
+    expect(wide.skillTargetIds).toEqual([
+      "zzz-hp:skill:velina-special-ms4tnzvq",
+    ])
+    expect(wide.calculation).toMatchObject({
+      kind: "damage",
+      segments: [{ element: "wind", granularity: "aggregate", repeat: 1 }],
+    })
+    const dyed = data.actions.find(
+      (entry) => entry.actionId === "action:agent:1561:action:0020",
+    )!
+    expect(dyed.calculation).toMatchObject({
+      kind: "unavailable",
+      issues: [{ code: "unknown-element" }],
+    })
+    for (const [id, suffix] of [
+      ["1221", "0018"],
+      ["1221", "0024"],
+      ["1451", "0025"],
+    ] as const) {
+      const other = await agent(id)
+      expect(
+        other.actions.find(
+          (entry) => entry.actionId === `action:agent:${id}:action:${suffix}`,
+        )!.calculation.kind,
+      ).toBe("unavailable")
+    }
+  })
+})
+
 const guardPigActionId = (suffix: string) =>
   `action:agent:1151:action:${suffix}` as const
 
