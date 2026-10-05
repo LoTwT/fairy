@@ -184,6 +184,43 @@ Nanoka 的莱特 `/talent/1/desc` 与奥菲丝 `/passive/level/1301507/desc/0` �
 [agent-actions 测试](../../../packages/data/test/agent-actions.test.ts)与
 [static-calculation 测试](../../../packages/data/test/static-calculation.test.ts)。
 
+### 具名约定：维琳娜微域气旋直接伤害
+
+`action:agent:1561:action:0021`（微域气旋，培养组 `special`）采用具名的 **ZZZ-HP 维琳娜气旋直伤约定**：
+按 `uncategorized` 登记，风属性、`regular`、`aggregate`、`repeat: 1` 的单段攻击倍率，只绑定专属目标
+`zzz-hp:skill:velina-special-ms4tnsha`，不新增公共输入、公式或运行时计算链；专属目标增益按该目标匹配且
+不附加 `special` 大类条件，通用与元素增益仍按既有规则求值。倍率来自 Nanoka 3.2
+`agents/1561/details.zh.json`（sha256 `a2089f5f829ed8646e768deee3f9b1424b39df3ffc25ade1e8d8ebb99ecf6659`）
+的 `/skill/special/description/9/param/0` 与 `/param/1`，参数 `1561021`：伤害
+`(3250 + 300 × (L − 1)) / 10000`，失衡 `(13750 + 630 × (L − 1)) / 10000`；1/12/16 级为
+32.5%/65.5%/77.5% 与 137.5%/206.8%/232%。五类培养等级 +2 的来源仍为 `/talent/3/desc`
+与 `/talent/5/desc`。
+
+`skillCategory: "uncategorized"` 是来源注记支持的具名修正，不把来源临时归类当成事实：固定 ZZZ-HP
+技能来源 `0df40c5bc38f8da7ed0f9eed6be87fb8155b8357` 与增益来源
+`fac62407f3d3995f8200a66be0038f292b1455fa` 的 `zzz-hp-calculator-buffs.json`
+`/agents/44/mindscapeBuffs/0/effectBlocks/0/note` 都写明[微域气旋]与[广域气旋]只是方便处理列入
+[特殊技]大类、实则不属于任何类型；目录中 `/skillSubcategories/80`（微域）与 `/79`（广域）已是
+`categoryId` 转为 `uncategorized`、`countsAsFollowUp: false`，两个独立目标不附加 `special` 大类条件。
+`/skills/922`（`sk-velina-nk-1561021-main`）登记 `direct`、风、`baseMult 65.5`、
+`settlementMult 0`、`buffAnchorId velina-special-ms4tnsha`。上游原始运行数据仍带临时 `special`
+坐标；本约定不声称上游运行时已使用 `uncategorized`，也不冒称游戏内实测或逐命中拆分。
+
+消散爆炸命中风属性异常目标时额外结算的 145%/255% 风属性[异放]是独立事件，由效果目录中
+`agents:velina:mindscape:0:blk-legacy:legacy-team-anomalyReleaseMult` 与
+`agents:velina:mindscape:0:blk-legacy:eff-ms4tphp6-6zyuxs` 两条独立目标规则（分别匹配微域/广域目标、
+`anomaly-settlement` 与 `wind`，贡献 1.45/2.55）承载；本动作仅计算直接伤害，不自动追加消散异放，
+对 `regular` 命中显式选择这两条选项不产生倍率贡献，也不会误触发合计的逐命中附加拒绝。
+未实现染色属性、气旋生命周期、轮转与逐命中拆分；`repeat: 1` 不代表游戏实际单次命中，未知拆分继续
+拒绝 `requireIndividualHits` 与不支持的逐命中加伤。直接动作本身不继承异放选项的核心 7 门槛；
+显式选择现有选项时仍遵守其原有培养档位限制。
+
+独立期望、目标正反例、受控规则与打包/浏览器消费回归见
+[agent-actions 测试](../../../packages/data/test/agent-actions.test.ts)、
+[static-calculation 测试](../../../packages/data/test/static-calculation.test.ts)、
+[static-catalog-data 测试](../../../packages/core/test/effects/static-catalog-data.test.ts) 与
+[static-e2e 测试](../../../packages/data/test/static-e2e.test.ts)。
+
 ### 具名约定：克拉蕾锐化伤害
 
 克拉蕾（`1611`，锋御）的 25 条伤害动作在 3.2 增量中按 `special-mechanic` / `unknown-category` 暂记为
@@ -325,8 +362,8 @@ Nanoka `/talent/2/desc` 明确指向强化特殊技的极性紊乱：比例变�
 
 ## 覆盖、证据与生成
 
-本版共 1,308 条：1,126 条伤害计算、168 条仅失衡、4 条耀变、10 条待补；逐次命中已确认的动作仍为 1 条。
-待补项按互斥原因分为：3 条特殊机制且表达式未支持、6 条未知分类、1 条未知元素。
+本版共 1,308 条：1,127 条伤害计算、168 条仅失衡、4 条耀变、9 条待补；逐次命中已确认的动作仍为 1 条。
+待补项按互斥原因分为：3 条特殊机制且表达式未支持、5 条未知分类、1 条未知元素。
 混合属性阻塞按上述来源约定处理，不表示已经完成游戏内部命中与属性分配的核实。
 全部伤害、失衡和耀变倍率展示行均进入覆盖校验；缺失、新增或重复覆盖会拒绝生成。
 能量消耗、回复、治疗等其他参数仍由原始详情提供，不自动归一化为伤害。

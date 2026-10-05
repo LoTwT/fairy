@@ -399,8 +399,8 @@ assert.deepEqual(resolvedNicole.resolutionContext, { agentEntityId: "1031", mind
 assert.deepEqual(resolvedNicole.calculation.segments.map(segment => segment.repeat), [1, 3])
 const actionManifest = (await import("@randomplay/data/definitions/skills/manifest.json", { with: { type: "json" } })).default
 assert.equal(actionManifest.members.length, api.agentNames.length)
-assert.equal(actionManifest.coverage.damage, 1126)
-assert.equal(actionManifest.coverage.unavailable, 10)
+assert.equal(actionManifest.coverage.damage, 1127)
+assert.equal(actionManifest.coverage.unavailable, 9)
 assert.equal((await api.loadAgentLevel60Attributes("Astra Yao")).baseAttributes.attack.value, 640.7699)
 const discAffixes = await api.loadSDriveDiscMaxLevelAffixes()
 assert.deepEqual(discAffixes, (await import("@randomplay/data/definitions/attributes/drive-disc-affixes.json", { with: { type: "json" } })).default)
@@ -450,6 +450,33 @@ for (const [id, suffix, element, expected, mindscapeRank, optionId, selectedExpe
   assert.equal(api.resolveAgentAction({ ...resolution, requireIndividualHits: true }).ok, false)
   assert.equal(calculateStaticActionDamage({ ...request, requireIndividualHits: true }).ok, false)
 }
+// 维琳娜微域气旋：安装包根入口解析并计算具名直伤约定。期望值独立于实现：
+// 面板攻击 (797.574 + 75 + 684.02) × 1.6 + 316 = 2806.5504；暴击率 0.05 + 0.08、
+// 暴伤 0.5、穿透 0.24；1 级 32.5%、12 级 65.5%；防御 794/(794+1000×0.76)、风抗 0.2。
+const velinaData = await api.loadStaticCalculationData({ agents: ["Velina"], wEngines: ["Fusion Compiler"] })
+const velinaActions = velinaData.agents[0].actions
+const velinaAction = velinaActions.actions.find(entry => entry.actionId === "action:agent:1561:action:0021")
+assert.equal(velinaAction.skillCategory, "uncategorized")
+assert.deepEqual(velinaAction.skillTargetIds, ["zzz-hp:skill:velina-special-ms4tnsha"])
+const velinaResolution = { agent: velinaActions, actionId: velinaAction.actionId, mindscapeRank: 0, levels: { special: { mode: "effective", value: 12 } } }
+const velinaResolved = api.resolveAgentAction(velinaResolution)
+assert.equal(velinaResolved.ok, true)
+assert.equal(velinaResolved.skillCategory, "uncategorized")
+assert.deepEqual(velinaResolved.skillTargetIds, ["zzz-hp:skill:velina-special-ms4tnsha"])
+assert.equal(velinaResolved.calculation.kind, "damage")
+assert.equal(velinaResolved.calculation.segments.length, 1)
+assert.equal(velinaResolved.calculation.segments[0].element, "wind")
+assert.equal(velinaResolved.calculation.segments[0].granularity, "aggregate")
+const velinaRequest = { data: velinaData, actors: [{ entityId: "entity:velina", teamId: "team:players", agentEntityId: "1561", mindscapeRank: 0, coreSkillLevel: 7, wEngine: { entityId: "14118", refinement: 1, eligible: true }, driveDiscs: { 1: { setEntityId: "31300", mainStat: { attribute: "health" }, substats: [] }, 2: { setEntityId: "31300", mainStat: { attribute: "attack" }, substats: [] }, 3: { setEntityId: "31300", mainStat: { attribute: "defense" }, substats: [] }, 4: { setEntityId: "31300", mainStat: { attribute: "anomalyProficiency" }, substats: [] }, 5: { setEntityId: "31000", mainStat: { attribute: "attack" }, substats: [] }, 6: { setEntityId: "31000", mainStat: { attribute: "attack" }, substats: [] } }, panel: { mode: "equipment" } }], actorId: "entity:velina", action: velinaResolved, target: { entityId: "entity:target", teamId: "team:enemies", baseDefense: 1000, resistances: { wind: 0.2 }, isStunned: false, baseStunDamageMultiplier: 1 }, selections: [] }
+const velinaCalculation = value(calculateStaticActionDamage(velinaRequest))
+assert.ok(Math.abs(velinaCalculation.panels[0].stats.attack.value - 2806.5504) < 1e-8)
+assert.ok(Math.abs(velinaCalculation.totals.nonCritical - 751.404204132819) < 1e-8)
+assert.ok(Math.abs(velinaCalculation.totals.critical - 1127.106306199228) < 1e-8)
+assert.ok(Math.abs(velinaCalculation.totals.expected - 800.245477401452) < 1e-8)
+assert.equal(velinaCalculation.totals.displayedNonCritical, null)
+assert.equal(velinaCalculation.totals.displayedCritical, null)
+assert.equal(api.resolveAgentAction({ ...velinaResolution, requireIndividualHits: true }).ok, false)
+assert.equal(calculateStaticActionDamage({ ...velinaRequest, requireIndividualHits: true }).ok, false)
 const staticDefinitions = (await import("@randomplay/data/definitions/effects/static.json", { with: { type: "json" } })).default
 const staticCatalog = (await import("@randomplay/data/definitions/effects/static-catalog.json", { with: { type: "json" } })).default
 const staticCoverage = (await import("@randomplay/data/definitions/effects/static-coverage.json", { with: { type: "json" } })).default
