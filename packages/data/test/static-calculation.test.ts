@@ -1044,6 +1044,327 @@ describe("Velina Condensed Cyclone direct damage", () => {
   })
 })
 
+describe("generic assist entry action consumption", () => {
+  // 具名通用 assist 登场技直伤约定：受控局外面板攻击 1000、辅助 L12、防御与抗性恒等，
+  // 期望值取 Nanoka 万分比曲线的独立取值；四件套正例使用真实目录选项，
+  // 由支援大类命中一次 damage-bonus 0.2，关闭即恢复。
+  const rows = [
+    {
+      entityId: "1341",
+      suffix: "0001",
+      element: "ice",
+      multiplier: 13.612,
+      relatedBonuses: { ice: 0.2 },
+      unrelatedBonuses: { physical: 0.99 },
+      relatedResistances: { ice: 0.1 },
+      unrelatedResistances: { physical: 0.99 },
+    },
+    {
+      entityId: "1431",
+      suffix: "0001",
+      element: "physical",
+      multiplier: 8.008,
+      relatedBonuses: { physical: 0.2 },
+      unrelatedBonuses: { ice: 0.99 },
+      relatedResistances: { physical: 0.1 },
+      unrelatedResistances: { ice: 0.99 },
+    },
+  ] as const
+  const chaosJazzOption =
+    "drive-discs:chaos-jazz:setPieces:4:blk-legacy:eff-ms0fd373-nsyrwm"
+  const chaosJazzEffect =
+    "disc:31800:zzz-hp:eff-ms0fd373-nsyrwm:blk-legacy:setPieces:4"
+  const fourPiece = {
+    ...emptyDiscs,
+    1: equippedDisc("31800", "health"),
+    2: equippedDisc("31800", "attack"),
+    3: equippedDisc("31800", "defense"),
+    4: equippedDisc("31800", "attack"),
+    5: equippedDisc("31000", "attack"),
+    6: equippedDisc("31000", "attack"),
+  }
+  type OutOfCombatPanel = Extract<
+    StaticActorConfiguration["panel"],
+    { mode: "out-of-combat" }
+  >
+
+  async function assistInput(
+    row: (typeof rows)[number],
+    options: {
+      driveDiscs?: StaticActorConfiguration["driveDiscs"]
+      damageBonuses?: OutOfCombatPanel["damageBonuses"]
+      resistances?: StaticActionCalculationInput["target"]["resistances"]
+      selections?: StaticActionCalculationInput["selections"]
+    } = {},
+  ): Promise<StaticActionCalculationInput> {
+    const input = await fixture(row.entityId)
+    const action = resolveAgentAction({
+      agent: input.data.agents[0]!.actions,
+      actionId: `action:agent:${row.entityId}:action:${row.suffix}`,
+      mindscapeRank: 0,
+      levels: { assist: { mode: "effective", value: 12 } },
+    })
+    if (!action.ok || action.calculation.kind !== "damage")
+      throw new Error("expected a resolved entry action")
+    expect(action.skillCategory).toBe("assist")
+    return {
+      ...input,
+      action,
+      actors: [
+        {
+          ...input.actors[0]!,
+          driveDiscs: options.driveDiscs ?? emptyDiscs,
+          panel: {
+            mode: "out-of-combat",
+            stats: {
+              attack: { unit: "attack-points", value: 1000 },
+              criticalRate: { unit: "ratio", value: 0 },
+              criticalDamage: { unit: "ratio", value: 0.5 },
+              penetrationRatio: { unit: "ratio", value: 0 },
+            },
+            penetrationValue: 0,
+            damageBonuses: options.damageBonuses ?? { ice: 0, physical: 0 },
+          },
+        },
+      ],
+      target: {
+        ...input.target,
+        baseDefense: 0,
+        resistances: options.resistances ?? { ice: 0, physical: 0 },
+      },
+      selections: options.selections ?? [],
+    }
+  }
+
+  it.each(rows)(
+    "consumes $entityId:$suffix as one attack aggregate with null displayed totals",
+    async (row) => {
+      const input = await assistInput(row)
+      if (!input.action.ok || input.action.calculation.kind !== "damage")
+        throw new Error("fixture")
+      expect(input.action.sourceDamageMultiplier).toBeCloseTo(
+        row.multiplier,
+        12,
+      )
+      expect(input.action.calculation.segments).toHaveLength(1)
+      const actionSegment = input.action.calculation.segments[0]!
+      expect(actionSegment.segmentId).toBe(
+        `action:agent:${row.entityId}:action:${row.suffix}:total`,
+      )
+      expect(actionSegment.damageKind).toBe("regular")
+      expect(actionSegment.element).toBe(row.element)
+      expect(actionSegment.granularity).toBe("aggregate")
+      expect(actionSegment.repeat).toBe(1)
+      expect(actionSegment.damageItems).toHaveLength(1)
+      expect(actionSegment.damageItems[0]).toMatchObject({
+        itemId: `action:agent:${row.entityId}:action:${row.suffix}:base`,
+        stat: "attack",
+      })
+      expect(actionSegment.damageItems[0]!.damageMultiplier).toBeCloseTo(
+        row.multiplier,
+        12,
+      )
+      const result = calculate(input)
+      expect(result.segments).toHaveLength(1)
+      const segment = result.segments[0]!
+      expect(segment.granularity).toBe("aggregate")
+      expect(segment.repetition).toBe(1)
+      expect(result.totals.nonCritical).toBeCloseTo(1000 * row.multiplier, 10)
+      expect(result.totals.critical).toBeCloseTo(1500 * row.multiplier, 10)
+      expect(result.totals.expected).toBeCloseTo(1000 * row.multiplier, 10)
+      expect(result.totals.displayedNonCritical).toBeNull()
+      expect(result.totals.displayedCritical).toBeNull()
+      expect(segment.damage.evaluation.contributions).toEqual([])
+      expect(
+        calculateStaticActionDamage({ ...input, requireIndividualHits: true })
+          .ok,
+      ).toBe(false)
+    },
+  )
+
+  it.each(rows)(
+    "reads only the applicable element bonus and resistance for $entityId:$suffix",
+    async (row) => {
+      const input = await assistInput(row, {
+        damageBonuses: { ...row.relatedBonuses, ...row.unrelatedBonuses },
+        resistances: {
+          ...row.relatedResistances,
+          ...row.unrelatedResistances,
+        },
+      })
+      const result = calculate(input)
+      expect(result.totals.nonCritical).toBeCloseTo(
+        1000 * row.multiplier * 1.2 * 0.9,
+        10,
+      )
+      expect(
+        calculate({
+          ...input,
+          actors: [
+            {
+              ...input.actors[0]!,
+              panel: {
+                ...(input.actors[0]!.panel as OutOfCombatPanel),
+                damageBonuses: { ...row.relatedBonuses },
+              },
+            },
+          ],
+          target: {
+            ...input.target,
+            resistances: { ...row.relatedResistances },
+          },
+        }).totals,
+      ).toEqual(result.totals)
+    },
+  )
+
+  it.each(rows)(
+    "applies the reviewed four-piece support bonus once for $entityId:$suffix",
+    async (row) => {
+      const plain = calculate(await assistInput(row, { driveDiscs: fourPiece }))
+      const selected = calculate(
+        await assistInput(row, {
+          driveDiscs: fourPiece,
+          selections: [
+            {
+              holderId: "entity:actor",
+              optionId: chaosJazzOption,
+              layers: 1,
+            },
+          ],
+        }),
+      )
+      // 攻击 1000、L12：照 13612 → 16334.4；叶瞬光 8008 → 9609.6。
+      expect(plain.totals.nonCritical).toBeCloseTo(1000 * row.multiplier, 10)
+      expect(selected.totals.nonCritical).toBeCloseTo(
+        1000 * row.multiplier * 1.2,
+        10,
+      )
+      expect(
+        selected.segments[0]!.damage.evaluation.contributions.filter(
+          (entry) => entry.origin.effectId === chaosJazzEffect,
+        ),
+      ).toMatchObject([{ value: { value: 0.2 } }])
+      expect(selected.panels).toEqual(plain.panels)
+    },
+  )
+
+  it.each(rows)(
+    "still refuses an active per-hit addition on the aggregate entry action for $entityId:$suffix",
+    async (row) => {
+      const input = await assistInput(row, {
+        driveDiscs: fourPiece,
+        selections: [
+          { holderId: "entity:actor", optionId: chaosJazzOption, layers: 1 },
+        ],
+      })
+      // 受控测试：把已选四件套规则改为无条件命中倍率加项，验证合计段仍拒绝真正生效的
+      // 逐命中加伤；这不是新的游戏效果，也不改变正式 definitions。
+      const forgedDefinitions = {
+        ...input.data.definitions,
+        effects: input.data.definitions.effects.map((rule) =>
+          rule.kind === "contribution" && rule.effectId === chaosJazzEffect
+            ? {
+                ...rule,
+                when: { kind: "constant", value: true } as const,
+                operation: {
+                  kind: "factor-contribution",
+                  channel: "base-multiplier-addition",
+                  value: { kind: "literal", unit: "multiplier", value: 0.2 },
+                },
+              }
+            : rule,
+        ),
+      } as unknown as StaticActionCalculationInput["data"]["definitions"]
+      const rejected = calculateStaticActionDamage({
+        ...input,
+        data: { ...input.data, definitions: forgedDefinitions },
+      })
+      expect(rejected.ok).toBe(false)
+      if (!rejected.ok)
+        expect(
+          rejected.issues.some((issue) => issue.message.includes("per-hit")),
+        ).toBe(true)
+    },
+  )
+
+  it.each(rows)(
+    "rejects forged classification, targets, tags, element and segments for $entityId:$suffix",
+    async (row) => {
+      const input = await assistInput(row)
+      const action = input.action
+      if (!action.ok || action.calculation.kind !== "damage")
+        throw new Error("fixture")
+      const segments = action.calculation.segments
+      const patchSegment = (patch: Record<string, unknown>) => ({
+        ...action,
+        calculation: {
+          kind: "damage" as const,
+          segments: segments.map((segment) => ({ ...segment, ...patch })),
+        },
+      })
+      const otherElement = row.element === "ice" ? "physical" : "ice"
+      const altered = [
+        { ...action, skillCategory: "quick-assist" as const },
+        { ...action, skillCategory: "assist-follow-up" as const },
+        { ...action, skillTags: ["zzz-hp:follow-up"] },
+        { ...action, skillTargetIds: ["zzz-hp:skill:all-dodge-ms0dnpmr"] },
+        {
+          ...action,
+          resolutionContext: {
+            ...action.resolutionContext,
+            agentEntityId: "1031",
+          },
+        },
+        patchSegment({ element: otherElement }),
+        patchSegment({ granularity: "individual" }),
+        patchSegment({ repeat: 2 }),
+        patchSegment({ segmentId: "forged-segment" }),
+        patchSegment({
+          damageItems: [
+            { ...segments[0]!.damageItems[0]!, itemId: "forged-item" },
+          ],
+        }),
+        patchSegment({
+          damageItems: [{ ...segments[0]!.damageItems[0]!, stat: "health" }],
+        }),
+      ]
+      for (const forged of altered)
+        expect(
+          calculateStaticActionDamage({ ...input, action: forged }),
+        ).toMatchObject({
+          ok: false,
+          issues: [{ code: "CONTEXT_MISMATCH" }],
+        })
+      expect(
+        calculateStaticActionDamage({
+          ...input,
+          actors: [{ ...input.actors[0]!, mindscapeRank: 1 }],
+        }),
+      ).toMatchObject({ ok: false, issues: [{ code: "CONTEXT_MISMATCH" }] })
+      expect(
+        calculateStaticActionDamage({
+          ...input,
+          actors: [
+            {
+              ...input.actors[0]!,
+              skillLevels: { assist: { mode: "effective", value: 10 } },
+            },
+          ],
+        }),
+      ).toMatchObject({
+        ok: false,
+        issues: [
+          {
+            code: "CONTEXT_MISMATCH",
+            pointer: "/actors/entity:actor/skillLevels/assist",
+          },
+        ],
+      })
+    },
+  )
+})
+
 describe("static calculation assembly", () => {
   it("keeps Lucia M6 on initial health when her own health buff is selected", async () => {
     const input = await fixture("1451", 6)

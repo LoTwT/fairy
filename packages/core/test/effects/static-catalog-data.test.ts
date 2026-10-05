@@ -610,6 +610,161 @@ describe("fixed-source catalog conformance", () => {
         calculateCatalogResult({ ...input, selections: [] }).nonCritical,
     ).toBeCloseTo(1.2, 12)
   })
+  it("keeps generic assist exact while the directory class covers every support subcategory", () => {
+    // 明确属于测试的受控规则：来源为 environment:static-tests，不是新的游戏效果；
+    // 只验证 hit.skillCategory 精确比较与目录大类标签的边界，不定义角色语义。
+    const genericAssist = rule(
+      "controlled-generic-assist",
+      {
+        kind: "factor-contribution",
+        channel: "damage-bonus",
+        value: literal("ratio", 0.1),
+      },
+      { kind: "one-of", fact: "hit.skillCategory", values: ["assist"] },
+    )
+    const quickAssist = rule(
+      "controlled-quick-assist",
+      {
+        kind: "factor-contribution",
+        channel: "damage-bonus",
+        value: literal("ratio", 0.2),
+      },
+      { kind: "one-of", fact: "hit.skillCategory", values: ["quick-assist"] },
+    )
+    const anchor = rule(
+      "controlled-assist-anchor",
+      {
+        kind: "factor-contribution",
+        channel: "damage-bonus",
+        value: literal("ratio", 0.3),
+      },
+      {
+        kind: "one-of",
+        fact: "hit.skillTag",
+        values: ["zzz-hp:skill:controlled-assist-anchor"],
+      },
+    )
+    const controls = [genericAssist, quickAssist, anchor] as const
+    const bonusAt = (
+      skillCategory: string,
+      skillTags: readonly string[] = [],
+    ) => {
+      const input = inputFor(controls)
+      const result = calculateStaticDamage({
+        ...input,
+        hit: {
+          ...input.hit,
+          skillCategory: skillCategory as "basic",
+          skillTags,
+        },
+      })
+      expect(result.ok, JSON.stringify(result)).toBe(true)
+      if (!result.ok) throw new Error("fixture")
+      return Object.fromEntries(
+        controls.map((entry) => [
+          entry.effectId,
+          result.value.evaluation.contributions
+            .filter(
+              (contribution) => contribution.origin.effectId === entry.effectId,
+            )
+            .reduce(
+              (total, contribution) => total + contribution.value.value,
+              0,
+            ),
+        ]),
+      )
+    }
+    const generic = bonusAt("assist")
+    expect(generic[genericAssist.effectId]).toBeCloseTo(0.1, 12)
+    expect(generic[quickAssist.effectId]).toBe(0)
+    expect(generic[anchor.effectId]).toBe(0)
+    const quick = bonusAt("quick-assist")
+    expect(quick[quickAssist.effectId]).toBeCloseTo(0.2, 12)
+    expect(quick[genericAssist.effectId]).toBe(0)
+    for (const subcategory of [
+      "defensive-assist",
+      "evasive-assist",
+      "counter-assist",
+      "assist-follow-up",
+    ]) {
+      expect(bonusAt(subcategory)[genericAssist.effectId]).toBe(0)
+      expect(bonusAt(subcategory)[quickAssist.effectId]).toBe(0)
+    }
+    const anchored = bonusAt("assist", [
+      "zzz-hp:skill:controlled-assist-anchor",
+    ])
+    expect(anchored[anchor.effectId]).toBeCloseTo(0.3, 12)
+    expect(anchored[genericAssist.effectId]).toBeCloseTo(0.1, 12)
+  })
+  it("expands generic assist into the directory assist class for the real four-piece option", () => {
+    const optionId =
+      "drive-discs:chaos-jazz:setPieces:4:blk-legacy:eff-ms0fd373-nsyrwm"
+    const effectId =
+      "disc:31800:zzz-hp:eff-ms0fd373-nsyrwm:blk-legacy:setPieces:4"
+    const compareAt = (skillCategory: string) => {
+      const base = agentInput("1341", [])
+      const input: StaticCatalogDamageInput = {
+        ...base,
+        bindings: [
+          {
+            bindingId: "binding:static",
+            kind: "drive-disc",
+            holderId: "entity:attacker",
+            sourceEntityId: "31800",
+            eligible: true,
+            configuration: { setPieces: 4 },
+          },
+        ],
+        selections: [{ bindingId: "binding:static", optionId, layers: 1 }],
+        hit: { ...base.hit, skillCategory: skillCategory as "basic" },
+      }
+      const selected = calculateCatalogResult(input)
+      const disabled = calculateCatalogResult({ ...input, selections: [] })
+      return { selected, disabled }
+    }
+    for (const skillCategory of [
+      "assist",
+      "quick-assist",
+      "defensive-assist",
+      "evasive-assist",
+      "counter-assist",
+      "assist-follow-up",
+    ]) {
+      const { selected, disabled } = compareAt(skillCategory)
+      expect(
+        selected.nonCritical / disabled.nonCritical,
+        skillCategory,
+      ).toBeCloseTo(1.2, 12)
+      expect(
+        selected.evaluation.contributions.filter(
+          (contribution) => contribution.origin.effectId === effectId,
+        ),
+        skillCategory,
+      ).toMatchObject([{ value: { value: 0.2 } }])
+    }
+    for (const skillCategory of [
+      "basic",
+      "dash",
+      "dodge",
+      "special",
+      "enhanced-special",
+      "chain",
+      "ultimate",
+      "uncategorized",
+    ]) {
+      const { selected, disabled } = compareAt(skillCategory)
+      expect(
+        selected.nonCritical / disabled.nonCritical,
+        skillCategory,
+      ).toBeCloseTo(1, 12)
+      expect(
+        selected.evaluation.contributions.some(
+          (contribution) => contribution.origin.effectId === effectId,
+        ),
+        skillCategory,
+      ).toBe(false)
+    }
+  })
   it.each(["anomaly", "anomaly-settlement", "vortex", "disorder"] as const)(
     "consumes generic anomaly bonuses in the final %s damage path",
     (kind) => {

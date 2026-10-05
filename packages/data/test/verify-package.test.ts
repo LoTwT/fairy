@@ -399,8 +399,8 @@ assert.deepEqual(resolvedNicole.resolutionContext, { agentEntityId: "1031", mind
 assert.deepEqual(resolvedNicole.calculation.segments.map(segment => segment.repeat), [1, 3])
 const actionManifest = (await import("@randomplay/data/definitions/skills/manifest.json", { with: { type: "json" } })).default
 assert.equal(actionManifest.members.length, api.agentNames.length)
-assert.equal(actionManifest.coverage.damage, 1127)
-assert.equal(actionManifest.coverage.unavailable, 9)
+assert.equal(actionManifest.coverage.damage, 1129)
+assert.equal(actionManifest.coverage.unavailable, 7)
 assert.equal((await api.loadAgentLevel60Attributes("Astra Yao")).baseAttributes.attack.value, 640.7699)
 const discAffixes = await api.loadSDriveDiscMaxLevelAffixes()
 assert.deepEqual(discAffixes, (await import("@randomplay/data/definitions/attributes/drive-disc-affixes.json", { with: { type: "json" } })).default)
@@ -477,6 +477,33 @@ assert.equal(velinaCalculation.totals.displayedNonCritical, null)
 assert.equal(velinaCalculation.totals.displayedCritical, null)
 assert.equal(api.resolveAgentAction({ ...velinaResolution, requireIndividualHits: true }).ok, false)
 assert.equal(calculateStaticActionDamage({ ...velinaRequest, requireIndividualHits: true }).ok, false)
+// 通用 assist 登场技：安装包根入口解析并计算具名直伤约定，期望值独立于实现：
+// 受控局外面板攻击 1000、辅助最终 12；防御与抗性恒等，倍率 13.612 / 8.008；
+// 选择真实混沌爵士四件套支援大类选项一次 0.2 后分别乘 1.2。
+const assistData = await api.loadStaticCalculationData({ agents: ["Zhao", "Ye Shunguang"], wEngines: [] })
+for (const [id, suffix, element, multiplier] of [["1341", "0001", "ice", 13.612], ["1431", "0001", "physical", 8.008]]) {
+  const agent = assistData.agents.find(entry => entry.attributes.entityId === id).actions
+  const action = agent.actions.find(entry => entry.actionId === "action:agent:" + id + ":action:" + suffix)
+  assert.equal(action.skillCategory, "assist")
+  assert.deepEqual(action.skillTargetIds, [])
+  assert.deepEqual(action.skillTags, [])
+  assert.deepEqual(action.inputs, [])
+  const resolved = api.resolveAgentAction({ agent, actionId: action.actionId, mindscapeRank: 0, levels: { assist: { mode: "effective", value: 12 } } })
+  assert.equal(resolved.ok, true)
+  assert.equal(resolved.skillCategory, "assist")
+  assert.deepEqual(resolved.skillTargetIds, [])
+  const actor = { entityId: "entity:assist", teamId: "team:players", agentEntityId: id, mindscapeRank: 0, coreSkillLevel: 7, wEngine: null, driveDiscs: { 1: { setEntityId: "31800", mainStat: { attribute: "health" }, substats: [] }, 2: { setEntityId: "31800", mainStat: { attribute: "attack" }, substats: [] }, 3: { setEntityId: "31800", mainStat: { attribute: "defense" }, substats: [] }, 4: { setEntityId: "31800", mainStat: { attribute: "attack" }, substats: [] }, 5: { setEntityId: "31000", mainStat: { attribute: "attack" }, substats: [] }, 6: { setEntityId: "31000", mainStat: { attribute: "attack" }, substats: [] } }, panel: { mode: "out-of-combat", stats: { attack: { unit: "attack-points", value: 1000 }, criticalRate: { unit: "ratio", value: 0 }, criticalDamage: { unit: "ratio", value: 0.5 }, penetrationRatio: { unit: "ratio", value: 0 } }, penetrationValue: 0, damageBonuses: { [element]: 0 } } }
+  const request = { data: assistData, actors: [actor], actorId: actor.entityId, action: resolved, target: { entityId: "entity:enemy", teamId: "team:enemy", baseDefense: 0, resistances: { [element]: 0 }, isStunned: false, baseStunDamageMultiplier: 1 }, selections: [] }
+  const plain = value(calculateStaticActionDamage(request))
+  assert.ok(Math.abs(plain.totals.nonCritical - 1000 * multiplier) < 1e-8)
+  assert.equal(plain.segments[0].granularity, "aggregate")
+  assert.equal(plain.totals.displayedNonCritical, null)
+  const selected = value(calculateStaticActionDamage({ ...request, selections: [{ holderId: actor.entityId, optionId: "drive-discs:chaos-jazz:setPieces:4:blk-legacy:eff-ms0fd373-nsyrwm", layers: 1 }] }))
+  assert.ok(Math.abs(selected.totals.nonCritical - 1000 * multiplier * 1.2) < 1e-8)
+  assert.deepEqual(selected.panels, plain.panels)
+  assert.equal(api.resolveAgentAction({ agent, actionId: action.actionId, mindscapeRank: 0, levels: { assist: { mode: "effective", value: 12 } }, requireIndividualHits: true }).ok, false)
+  assert.equal(calculateStaticActionDamage({ ...request, requireIndividualHits: true }).ok, false)
+}
 const staticDefinitions = (await import("@randomplay/data/definitions/effects/static.json", { with: { type: "json" } })).default
 const staticCatalog = (await import("@randomplay/data/definitions/effects/static-catalog.json", { with: { type: "json" } })).default
 const staticCoverage = (await import("@randomplay/data/definitions/effects/static-coverage.json", { with: { type: "json" } })).default
@@ -875,7 +902,7 @@ void [wrongVoidflareStrength, mechanismName, duplicatedCatalogDefense, throughUn
 import { loadAgentLevel60Attributes, loadWEngineLevel60Attributes, loadSDriveDiscMaxLevelAffixes } from "@randomplay/data"
 import type { AgentLevel60Attributes, WEngineLevel60Attributes, SDriveDiscMaxLevelAffixes, PanelAttributeBonus } from "@randomplay/data"
 import { loadAgentActions, resolveAgentAction, resolveAgentSkillLevel } from "@randomplay/data"
-import type { AgentActions, ResolvedAgentAction, SkillLevelInput } from "@randomplay/data"
+import type { AgentActions, ResolvedAgentAction, SkillLevelInput, ActionSkillCategory } from "@randomplay/data"
 const actions: Promise<AgentActions | undefined> = loadAgentActions("Nicole")
 const level: SkillLevelInput = { mode: "effective", value: 15 }
 async function selectAction() {
@@ -888,6 +915,9 @@ async function selectAction() {
 const missingMode: SkillLevelInput = { value: 12 }
 // @ts-expect-error exact agent name required
 loadAgentActions("Unknown Nicole")
+const genericAssistCategory: ActionSkillCategory = "assist"
+// @ts-expect-error unknown action skill category literals stay rejected
+const unknownSkillCategory: ActionSkillCategory = "assist-support"
 const agentAttributes: Promise<AgentLevel60Attributes | undefined> = loadAgentLevel60Attributes("Astra Yao")
 const engineAttributes: Promise<WEngineLevel60Attributes | undefined> = loadWEngineLevel60Attributes("Elegant Vanity")
 const discAffixes: Promise<SDriveDiscMaxLevelAffixes> = loadSDriveDiscMaxLevelAffixes()
@@ -1099,7 +1129,7 @@ bossIds[0] = bossId
 simulIds.push(simulId)
 // @ts-expect-error readonly simul ID element
 simulIds[0] = simulId
-void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, numericMonsterId, numericShiyuId, numericBossId, numericSimulId, names, discNames, engineNames, booNames, monsterIdentityList, shiyuIdentityList, bossIdentityList, simulIdentityList, index, data, detail, all, discData, discDetail, allDiscs, engineData, engineDetail, allEngines, bangbooData, bangbooDetail, allBangboos, monsterData, monsterDetail, allMonsters, shiyuData, shiyuDetail, allShiyu, bossData, bossDetail, allBosses, simulData, simulDetail, allSimul, acceptsName, acceptsDriveDiscName, acceptsWEngineName, acceptsBangbooName, acceptsMonsterId, acceptsShiyuId, acceptsBossId, acceptsSimulId, wrong, wrongDisc, wrongEngine, wrongBangboo, wrongMonsterId, wrongShiyuId, wrongBossId, wrongSimulId]
+void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, numericMonsterId, numericShiyuId, numericBossId, numericSimulId, names, discNames, engineNames, booNames, monsterIdentityList, shiyuIdentityList, bossIdentityList, simulIdentityList, index, data, detail, all, discData, discDetail, allDiscs, engineData, engineDetail, allEngines, bangbooData, bangbooDetail, allBangboos, monsterData, monsterDetail, allMonsters, shiyuData, shiyuDetail, allShiyu, bossData, bossDetail, allBosses, simulData, simulDetail, allSimul, acceptsName, acceptsDriveDiscName, acceptsWEngineName, acceptsBangbooName, acceptsMonsterId, acceptsShiyuId, acceptsBossId, acceptsSimulId, wrong, wrongDisc, wrongEngine, wrongBangboo, wrongMonsterId, wrongShiyuId, wrongBossId, wrongSimulId, genericAssistCategory, unknownSkillCategory]
 `
     const typeFile = join(consumerDirectory, "smoke.ts")
     writeFileSync(typeFile, typeSource)

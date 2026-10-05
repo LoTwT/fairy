@@ -47,10 +47,10 @@ describe("action publication contract", () => {
     expect(manifest.coverage).toEqual({
       agents: 60,
       actions: 1308,
-      damage: 1127,
+      damage: 1129,
       dazeOnly: 168,
       luminize: 4,
-      unavailable: 9,
+      unavailable: 7,
       individualHitActions: 1,
     })
     index.entities.monsters.memberIds = []

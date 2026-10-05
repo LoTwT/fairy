@@ -15,6 +15,21 @@
       "resource": "zzz-hp/src/utils/skillTalentLevels.ts",
       "sha256": "0391667fba8f39c868ab6bc8aa3609c2b72313e0ae00bd273ccb220de06faa6d",
       "purpose": "五类技能等级、影画边界与独立耀变等级归属"
+    },
+    {
+      "resource": "zzz-hp/src/utils/skillTypes.ts",
+      "sha256": "512cb809830e54dc83e222b452740006a994f1f32e7d5581f054e7143d5308a2",
+      "purpose": "支援类型到目录坐标的映射：assist 归入 assist 大类且无子类坐标"
+    },
+    {
+      "resource": "zzz-hp/src/utils/resolvedHit.ts",
+      "sha256": "b5f4a0692cb2277728d77bc2c34f5416d092d93a39144a77396c11939687de00",
+      "purpose": "命中构造与技能上下文：实际传递技能匹配坐标"
+    },
+    {
+      "resource": "zzz-hp/src/utils/buffEffect.ts",
+      "sha256": "944d263a8bb3ed8531799792b7a3296bfb9e904002209442883039cf87f4ad95",
+      "purpose": "增益坐标匹配：逐 category/subcategory 比较技能上下文"
     }
   ]
 }

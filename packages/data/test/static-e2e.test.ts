@@ -80,7 +80,7 @@ async function inputFor(
     contractVersion: 1,
     gameVersion: "3.2",
     snapshotId:
-      "sha256:43ca274239c6e292a18e310458c64597d0c27f6cf6290f7630cb263a6bd265c6",
+      "sha256:595ccb241e136ab5c5d68619713173c2b1ebab6ca03e670c25967f0ff1c3276f",
   })
   expect(data.catalog.source.commit).toBe(reference.provenance.commit)
   expect(data.catalog.source.repository).toBe(reference.provenance.repository)
@@ -1039,4 +1039,177 @@ describe("Velina Condensed Cyclone complete build", () => {
       calculateStaticActionDamage({ ...input, requireIndividualHits: true }).ok,
     ).toBe(false)
   })
+})
+
+describe("generic assist entry-action complete builds", () => {
+  // 具名通用 assist 登场技直伤约定：两位角色 60 级、M0、核心 7、辅助最终 12；
+  // 1—4 槽混沌爵士（31800）、5—6 槽啄木鸟（31000），主词条生命/攻击/防御/攻击/攻击/攻击，
+  // 无副词条；照装备半糖雪兔（14134 R1）、叶瞬光装备星徽引擎（13004 R1）。
+  // 只比较四件套选项开关，不选择角色或音擎战斗效果。独立 Decimal 算式：
+  // 照 (690.6593 + 75 + 713.76) × 1.9 + 316 = 3126.89667，
+  //   非暴击 = 3126.89667 × 13.612 × 794/1794 × 0.8 = 15070.356331237351；
+  // 叶瞬光 (863.2102 + 75 + 594.8) × 2.15 + 316 = 3611.97193，
+  //   非暴击 = 3611.97193 × 8.008 × 794/1794 × 0.8 = 10241.332862902725。
+  // 暴击 = 非暴击 × 1.5；期望 = 非暴击 × (1 + CR × 0.5)，CR 分别 0.13 / 0.274。
+  // 独立 Decimal 期望值以十进制文本给出；运行时取最近的双精度表示参与容差比较。
+  const rows = [
+    {
+      agentName: "Zhao",
+      wEngineName: "Half-Sugar Bunny",
+      wEngineEntityId: "14134",
+      agentEntityId: "1341",
+      resistance: { ice: 0.2 },
+      panelAttack: 3126.89667,
+      criticalRate: 0.13,
+      closedNonCritical: Number("15070.356331237351"),
+      openNonCritical: Number("18084.427597484821"),
+      openExpected: Number("19259.915391321335"),
+    },
+    {
+      agentName: "Ye Shunguang",
+      wEngineName: "Starlight Engine",
+      wEngineEntityId: "13004",
+      agentEntityId: "1431",
+      resistance: { physical: 0.2 },
+      panelAttack: 3611.97193,
+      criticalRate: 0.274,
+      closedNonCritical: Number("10241.332862902725"),
+      openNonCritical: Number("12289.59943548327"),
+      openExpected: Number("13973.274558144477"),
+    },
+  ] as const
+  const chaosJazzOption =
+    "drive-discs:chaos-jazz:setPieces:4:blk-legacy:eff-ms0fd373-nsyrwm"
+  const chaosJazzEffect =
+    "disc:31800:zzz-hp:eff-ms0fd373-nsyrwm:blk-legacy:setPieces:4"
+
+  it.each(rows)(
+    "reproduces $agentName entry damage with the reviewed four-piece switch",
+    async (row) => {
+      const data = await loadStaticCalculationData({
+        agents: [row.agentName],
+        wEngines: [row.wEngineName],
+      })
+      const actor: StaticActorConfiguration = {
+        entityId: "entity:actor",
+        teamId: "team:players",
+        agentEntityId: row.agentEntityId,
+        coreSkillLevel: 7,
+        mindscapeRank: 0,
+        wEngine: {
+          entityId: row.wEngineEntityId,
+          refinement: 1,
+          eligible: true,
+        },
+        driveDiscs: {
+          1: {
+            setEntityId: "31800",
+            mainStat: { attribute: "health" },
+            substats: [],
+          },
+          2: {
+            setEntityId: "31800",
+            mainStat: { attribute: "attack" },
+            substats: [],
+          },
+          3: {
+            setEntityId: "31800",
+            mainStat: { attribute: "defense" },
+            substats: [],
+          },
+          4: {
+            setEntityId: "31800",
+            mainStat: { attribute: "attack" },
+            substats: [],
+          },
+          5: {
+            setEntityId: "31000",
+            mainStat: { attribute: "attack" },
+            substats: [],
+          },
+          6: {
+            setEntityId: "31000",
+            mainStat: { attribute: "attack" },
+            substats: [],
+          },
+        },
+        panel: { mode: "equipment" },
+      }
+      const resolved = resolveAgentAction({
+        agent: data.agents[0]!.actions,
+        actionId: `action:agent:${row.agentEntityId}:action:0001`,
+        mindscapeRank: 0,
+        levels: { assist: { mode: "effective", value: 12 } },
+      })
+      expect(resolved.ok).toBe(true)
+      if (!resolved.ok || resolved.calculation.kind !== "damage")
+        throw new Error("Expected the available entry action")
+      expect(resolved.skillCategory).toBe("assist")
+      expect(resolved.skillTargetIds).toEqual([])
+      const input: StaticActionCalculationInput = {
+        data,
+        actors: [actor],
+        actorId: actor.entityId,
+        action: resolved,
+        target: {
+          entityId: "entity:target",
+          teamId: "team:enemies",
+          baseDefense: 1000,
+          resistances: row.resistance,
+          isStunned: false,
+          baseStunDamageMultiplier: 1,
+        },
+        selections: [],
+      }
+      const closed = calculate(input)
+      close(closed.panels[0]!.stats.attack!.value, row.panelAttack, "attack")
+      close(
+        closed.panels[0]!.stats.criticalRate!.value,
+        row.criticalRate,
+        "critical rate",
+      )
+      close(
+        closed.panels[0]!.stats.criticalDamage!.value,
+        0.5,
+        "critical damage",
+      )
+      close(
+        closed.panels[0]!.stats.penetrationRatio?.value ?? 0,
+        0,
+        "penetration ratio",
+      )
+      close(
+        closed.totals.nonCritical,
+        row.closedNonCritical,
+        "closed non-critical",
+      )
+      close(closed.totals.critical!, row.closedNonCritical * 1.5, "closed crit")
+      close(
+        closed.totals.expected,
+        row.closedNonCritical * (1 + row.criticalRate * 0.5),
+        "closed expected",
+      )
+      const opened = calculate({
+        ...input,
+        selections: [
+          { holderId: actor.entityId, optionId: chaosJazzOption, layers: 1 },
+        ],
+      })
+      close(opened.totals.nonCritical, row.openNonCritical, "open non-critical")
+      close(opened.totals.critical!, row.openNonCritical * 1.5, "open crit")
+      close(opened.totals.expected, row.openExpected, "open expected")
+      expect(opened.panels).toEqual(closed.panels)
+      expect(opened.totals.displayedNonCritical).toBeNull()
+      expect(opened.totals.displayedCritical).toBeNull()
+      expect(
+        opened.segments[0]!.damage.evaluation.contributions.filter(
+          (entry) => entry.origin.effectId === chaosJazzEffect,
+        ),
+      ).toMatchObject([{ value: { value: 0.2 } }])
+      expect(
+        calculateStaticActionDamage({ ...input, requireIndividualHits: true })
+          .ok,
+      ).toBe(false)
+    },
+  )
 })

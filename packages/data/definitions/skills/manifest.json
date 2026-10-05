@@ -819,7 +819,7 @@
     "agents/1311.json": "37dfd339d288e9903ad61f908d92e80c8443ac787cf61a97fd007ae7282eef4e",
     "agents/1321.json": "fc4dd59115c87556a885c8fa71a383d985f68639059b0110b466aae4b7e7f7ea",
     "agents/1331.json": "8d7d19d9fc780277052f738b4613ac241f937a3360ae8f688ac4f01416f4c36e",
-    "agents/1341.json": "e4687617f7abb2fcb2e40fe25f60d21866704e54a1cd3686795ddc58d816d337",
+    "agents/1341.json": "89923d3ee955c74b89995c827e379245df0d711c733894779f0adf8cc779c481",
     "agents/1351.json": "44bca21b050121976b153f56ba6628f079b5f8580e4b96cecb61fa7a111c0670",
     "agents/1361.json": "96303186991ace3dfd6de07079bf602331da6850f43189255ca8ff5ca2e9f5db",
     "agents/1371.json": "b02acd4ec219eec8d20a16ca3ff2948ca008cd92763f30148dcfd3a8e44e8cae",
@@ -828,7 +828,7 @@
     "agents/1401.json": "0b2513a387bbf0cc588e0d4407b3a2f202474ccd9e01899513664b34d520170a",
     "agents/1411.json": "9cbd5914c619dd3b1ebcf1bd8dd65c9d5525718230a5d983070aaa992f68d47c",
     "agents/1421.json": "df244a6a5ccc7ac8ce02224933d997aead534699ca8ad44df4825a9fedab72e7",
-    "agents/1431.json": "ad39ab892f56b216148cb620637c432b1660bc67c5c2c748e3e0ee662f166822",
+    "agents/1431.json": "b0ebe085e9496c6355f21d0aa430149db91fbfe956e642dbb46d5c5e89fc3266",
     "agents/1441.json": "5efd3ba4ab1526ddded61119418d724cf2463600f22c3a78008f925658db84f6",
     "agents/1451.json": "5db5119ad589eaf51de0b488c25e74c63fb9ea8da91f2d1a55bbb06e7205e146",
     "agents/1461.json": "1e439a897e21cd5ff232644f53f24895f705a5e6c259534fce32e0dda2db1eba",
@@ -865,18 +865,33 @@
         "resource": "zzz-hp/src/utils/skillTalentLevels.ts",
         "sha256": "0391667fba8f39c868ab6bc8aa3609c2b72313e0ae00bd273ccb220de06faa6d",
         "purpose": "五类技能等级、影画边界与独立耀变等级归属"
+      },
+      {
+        "resource": "zzz-hp/src/utils/skillTypes.ts",
+        "sha256": "512cb809830e54dc83e222b452740006a994f1f32e7d5581f054e7143d5308a2",
+        "purpose": "支援类型到目录坐标的映射：assist 归入 assist 大类且无子类坐标"
+      },
+      {
+        "resource": "zzz-hp/src/utils/resolvedHit.ts",
+        "sha256": "b5f4a0692cb2277728d77bc2c34f5416d092d93a39144a77396c11939687de00",
+        "purpose": "命中构造与技能上下文：实际传递技能匹配坐标"
+      },
+      {
+        "resource": "zzz-hp/src/utils/buffEffect.ts",
+        "sha256": "944d263a8bb3ed8531799792b7a3296bfb9e904002209442883039cf87f4ad95",
+        "purpose": "增益坐标匹配：逐 category/subcategory 比较技能上下文"
       }
     ]
   },
-  "registrySha256": "17c1584438b853ec914b08860c96bd9accae006c240914057c5e70a55975af9f",
+  "registrySha256": "dca3ec222c89217b7374a7bbed44f5f5925ed3cb38ff50e7856816f289dda40c",
   "staticCatalogSha256": "3dd6ce5e6920f6b958cf6d85904d7941aa1a90893d4301a52e5757cf3ff6a82e",
   "coverage": {
     "agents": 60,
     "actions": 1308,
-    "damage": 1127,
+    "damage": 1129,
     "dazeOnly": 168,
     "luminize": 4,
-    "unavailable": 9,
+    "unavailable": 7,
     "individualHitActions": 1
   },
   "limitations": [
