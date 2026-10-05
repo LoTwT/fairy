@@ -12157,16 +12157,14 @@
     "rowKind": "damage",
     "dazeRowIndex": 1,
     "sourceSignature": "a76c8552c63c7334c1d617a4e1c2982c99a9118994ab8d02116d78875ba4a9e8",
-    "skillCategory": null,
+    "skillCategory": "assist",
     "element": "ice",
     "damageKind": "regular",
     "upstreamSkillId": "sk-zhao-nk-1341015-main",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "unknown-category",
-        "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用具名的通用 assist 登场技直伤约定：本动作按 generic assist 只计算所选招式的直接攻击力伤害。来源『发动时视为发动[快速支援]』只登记触发身份，不获得 quick-assist 等具体支援子类身份，也不自动触发[快速支援]、消耗[霜寒值]、开启[以太帷幕·涌泉]、蓄力或衔接[普通攻击：最终裁决]等生命周期事件。"
     ]
   },
   {
@@ -15347,16 +15345,14 @@
     "rowKind": "damage",
     "dazeRowIndex": 1,
     "sourceSignature": "f94f27af25ae83de2c52471c35543efb59bc37ee3a97e81b72b81615e8144456",
-    "skillCategory": null,
+    "skillCategory": "assist",
     "element": "physical",
     "damageKind": "regular",
     "upstreamSkillId": "sk-yeshunguang-direct-mtsgty6b",
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "unknown-category",
-        "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用具名的通用 assist 登场技直伤约定：本动作按 generic assist 只计算所选招式的直接攻击力伤害。来源『发动时视为发动[快速支援]』只登记触发身份，不获得 quick-assist 等具体支援子类身份，也不自动进入[明心境]、开启[以太帷幕·决裁]、产生空中状态或模拟后续衔接与生命周期事件。"
     ]
   },
   {

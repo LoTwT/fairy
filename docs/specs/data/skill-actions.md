@@ -253,6 +253,57 @@ Nanoka 的莱特 `/talent/1/desc` 与奥菲丝 `/passive/level/1301507/desc/0` �
 [ZZZ-HP 静态增益数据接入修订 9](zzz-hp-static-effects.md#修订-9锐化与锐暴公式及实体接入)，
 本节不重复定义。仅失衡的 3 条招架动作（0003—0005）照常返回 `daze-only`，不因锐化接入改变。
 
+### 具名约定：通用 assist 登场技直伤
+
+照的 `action:agent:1341:action:0001`（登场技：霜迸）与叶瞬光的 `action:agent:1431:action:0001`
+（登场技：照影）采用具名的 **通用 assist 登场技直伤约定**：两者培养组仍为 `assist`，增益分类登记为
+通用 `assist`（不是 `quick-assist` 等具体支援子类），分别按 `ice`、`physical` 登记为 `regular`、
+`aggregate`、`repeat: 1` 的单段攻击力倍率，只保留一个基础项；`skillTargetIds`、`skillTags`、
+`inputs` 均为空，不制造专属锚点，也不改变 `actionId`、`branchId`、参数身份、上游技能 ID 与来源签名。
+本动作只计算所选招式的直接攻击力伤害：调用方显式提供技能等级、影画与有效效果；不自动触发
+[快速支援]、[明心境]、[以太帷幕]、蓄力或衔接攻击，也不模拟后场/换入计时或生命周期事件。
+来源说明『发动时视为发动[快速支援]』只登记触发身份，不构成 `quick-assist` 伤害子类证据，
+`EntryAction` 也不因此扩展。两个动作仍是合计动作，`requireIndividualHits` 与生效的逐命中加伤照旧拒绝，
+`repeat: 1` 不代表已确认内部仅一次命中。
+
+倍率取自 Nanoka 3.2 `agents/1341/details.zh.json` 的 `/skill/assist/description/4/param/0` 与
+`/param/1`（参数 `1341015`）与 `agents/1431/details.zh.json` 的 `/skill/assist/description/6/param/0`
+与 `/param/1`（参数 `1431028`）；两者 `/skill/assist/description/0/desc` 同时给出触发身份说明。
+伤害/失衡曲线为：照 `(68030 + 6190 × (L − 1)) / 10000` 与 `(23020 + 1050 × (L − 1)) / 10000`，
+1/12/16 级为 680.3%/1361.2%/1608.8% 与 230.2%/345.7%/387.7%；叶瞬光
+`(40040 + 3640 × (L − 1)) / 10000` 与 `(12100 + 550 × (L − 1)) / 10000`，1/12/16 级为
+400.4%/800.8%/946.4% 与 121.0%/181.5%/203.5%。五类培养等级 +2 的来源为各角色 `/talent/3/desc`
+与 `/talent/5/desc`。
+
+固定 ZZZ-HP 技能来源 `0df40c5b` 的 `zzz-hp-calculator-buffs.json` 中，`/skills/1091`
+（`sk-zhao-nk-1341015-main`）登记 `direct`、`skillTypes: ["assist"]`、冰、`buffAnchorId: null`、
+12 级 `baseMult 1361.2`、`baseMultFactor 100`、`settlementMult 0`；`/skills/1010`
+（`sk-yeshunguang-direct-mtsgty6b`）同样登记 generic assist 与空锚点，物理、12 级 `baseMult 800.8`。
+两条行在技能固定提交与增益固定提交 `fac62407` 的同一份文件中都存在。实际匹配链只读固定
+Git 对象核对：`zzz-hp/src/utils/skillTypes.ts` 的 `SKILL_TYPE_COORD` 与 `buildSkillMatchCoords`
+把 `assist` 映射为 `{ category: "assist", subcategoryId: null }`；`resolvedHit.ts`
+在命中构造与 `buildSkillContextFromHit` 传递该坐标；`buffEffect.ts` 的
+`resolveSkillMatchCoords` / `skillTargetMatchesContext` 逐 category/subcategory 比较。
+三个源码资源连同上述 SHA-256 已登记在 [`evidence.json`](../../../packages/data/scripts/skills/evidence.json)；
+相关匹配函数在两个固定版本中一致（`buffEffect.ts` 整个文件并非字节相同，不据此声称整文件相同）。
+
+语义边界：`hit.skillCategory` 条件按登记值精确比较，通用 `assist` 不自动包含或继承
+`quick-assist`、`defensive-assist`、`evasive-assist`、`counter-assist`、`assist-follow-up`；
+目录大类 `zzz-hp:category:assist` 经既有分类归并展开，同时匹配通用 assist 与既有支援子类，
+具体招式锚点仍须真实匹配，不因大类相同而命中。通用与适用元素增益照常作用，无关元素、
+其他技能大类与专属锚点不串用。
+
+真实目录正例：`drive-discs:chaos-jazz:setPieces:4:blk-legacy:eff-ms0fd373-nsyrwm` 对应驱动盘
+`31800` 四件套支援大类 `damage-bonus 0.2`，精确来源
+`/driveDiscs/17/fourPieceBuffs/effectBlocks/0/effects/3`。受控面板攻击 1000、辅助最终 12、
+防御与抗性恒等时，照 13612 → 16334.4、叶瞬光 8008 → 9609.6；关闭选项恢复原值，命中一次只贡献
+一次 0.2。这是调用方显式选择有效状态，不模拟后场或换入计时，也不自动开启四件套。
+完整配装期望、受控规则与打包/浏览器回归见
+[agent-actions 测试](../../../packages/data/test/agent-actions.test.ts)、
+[static-calculation 测试](../../../packages/data/test/static-calculation.test.ts)、
+[static-e2e 测试](../../../packages/data/test/static-e2e.test.ts) 与
+[静态计算端到端对照验收](../../plans/static-e2e-acceptance.md#通用-assist-登场技完整配装追加2026-10-05)。
+
 ### 已知限制：卢西娅合唱末段生命附加伤害
 
 PR4 跳过此项实现，仅记录为已知限制。当前[卢西娅动作定义](../../../packages/data/definitions/skills/agents/1451.json)的行为是：
@@ -362,8 +413,8 @@ Nanoka `/talent/2/desc` 明确指向强化特殊技的极性紊乱：比例变�
 
 ## 覆盖、证据与生成
 
-本版共 1,308 条：1,127 条伤害计算、168 条仅失衡、4 条耀变、9 条待补；逐次命中已确认的动作仍为 1 条。
-待补项按互斥原因分为：3 条特殊机制且表达式未支持、5 条未知分类、1 条未知元素。
+本版共 1,308 条：1,129 条伤害计算、168 条仅失衡、4 条耀变、7 条待补；逐次命中已确认的动作仍为 1 条。
+待补项按互斥原因分为：3 条特殊机制且表达式未支持、3 条未知分类、1 条未知元素。
 混合属性阻塞按上述来源约定处理，不表示已经完成游戏内部命中与属性分配的核实。
 全部伤害、失衡和耀变倍率展示行均进入覆盖校验；缺失、新增或重复覆盖会拒绝生成。
 能量消耗、回复、治疗等其他参数仍由原始详情提供，不自动归一化为伤害。

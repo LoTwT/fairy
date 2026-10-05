@@ -6,8 +6,13 @@
 
 静态计算处理固定配置、有效增益和命中信息下的伤害。调用方提供 buff 是否有效、当前层数或档位及必要的状态事实；effects 求解属性依赖、效果条件和贡献，静态入口组装 core 输入并返回最终结果。
 
-动作倍率与培养等级可由 data 的[技能动作目录](../data/skill-actions.md)解析。`assist-follow-up` 在目录增益匹配中
-归入支援类别，但不属于入场事件；`uncategorized` 用于没有普通技能增益分类的独立结算（如耀变），其培养等级仍独立提供。
+动作倍率与培养等级可由 data 的[技能动作目录](../data/skill-actions.md)解析。通用 `assist` 与 `quick-assist`、
+`defensive-assist`、`evasive-assist`、`counter-assist`、`assist-follow-up` 在目录增益匹配中归入同一支援
+大类标签，因此支援大类条件同时匹配通用 assist 与既有子类；`hit.skillCategory` 条件仍按原值精确比较，
+通用 `assist` 不因此获得任一具体支援子类身份。入场仍只由[现有事件契约](execution.md#事件的事实)的四种
+`EntryAction` 决定：通用 `assist` 与 `assist-follow-up` 不扩展该类型、也不产生入场事件，既有
+`quick-assist`、`defensive-assist`、`evasive-assist` 的入场身份与契约保留；静态伤害分类不会自动产生
+入场事件。`uncategorized` 用于没有普通技能增益分类的独立结算（如耀变），其培养等级仍独立提供。
 
 - 接入范围为固定基线中现有 core 公式可以计算的静态增益。维护转换器时须补齐这些效果所需的通道和表达式，不能仅以当前 effects 不支持为由排除。
 - 新公式、新机制须在 core 建立相应契约后接入。每个未接入条目保留具体原因，缺失参数或未解决的语义冲突不得静默变成零贡献。

@@ -176,6 +176,23 @@ globalThis.fairyVelinaMicroDomain = async () => {
     strictCalculation: core.calculateStaticActionDamage({ ...request, requireIndividualHits: true }).ok,
   }
 }
+globalThis.fairyAssistEntry = async () => {
+  const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["Zhao", "Ye Shunguang"], wEngines: [] }), import("@randomplay/core")])
+  return [["1341", "ice", 13.612], ["1431", "physical", 8.008]].map(([id, element, multiplier]) => {
+    const agent = data.agents.find(entry => entry.attributes.entityId === id).actions
+    const action = agent.actions.find(entry => entry.actionId === "action:agent:" + id + ":action:0001")
+    const resolution = { agent, actionId: action.actionId, mindscapeRank: 0, levels: { assist: { mode: "effective", value: 12 } } }
+    const resolved = api.resolveAgentAction(resolution)
+    if (!resolved.ok) throw new Error(JSON.stringify(resolved.issues))
+    const actor = { entityId: "entity:assist", teamId: "team:players", agentEntityId: id, mindscapeRank: 0, coreSkillLevel: 7, wEngine: null, driveDiscs: { 1: { setEntityId: "31800", mainStat: { attribute: "health" }, substats: [] }, 2: { setEntityId: "31800", mainStat: { attribute: "attack" }, substats: [] }, 3: { setEntityId: "31800", mainStat: { attribute: "defense" }, substats: [] }, 4: { setEntityId: "31800", mainStat: { attribute: "attack" }, substats: [] }, 5: { setEntityId: "31000", mainStat: { attribute: "attack" }, substats: [] }, 6: { setEntityId: "31000", mainStat: { attribute: "attack" }, substats: [] } }, panel: { mode: "out-of-combat", stats: { attack: { unit: "attack-points", value: 1000 }, criticalRate: { unit: "ratio", value: 0 }, criticalDamage: { unit: "ratio", value: 0.5 }, penetrationRatio: { unit: "ratio", value: 0 } }, penetrationValue: 0, damageBonuses: { [element]: 0 } } }
+    const request = { data, actors: [actor], actorId: actor.entityId, action: resolved, target: { entityId: "entity:enemy", teamId: "team:enemy", baseDefense: 0, resistances: { [element]: 0 }, isStunned: false, baseStunDamageMultiplier: 1 }, selections: [] }
+    const plain = core.calculateStaticActionDamage(request)
+    if (!plain.ok) throw new Error(JSON.stringify(plain.issues))
+    const selected = core.calculateStaticActionDamage({ ...request, selections: [{ holderId: actor.entityId, optionId: "drive-discs:chaos-jazz:setPieces:4:blk-legacy:eff-ms0fd373-nsyrwm", layers: 1 }] })
+    if (!selected.ok) throw new Error(JSON.stringify(selected.issues))
+    return { id, category: resolved.skillCategory, targets: resolved.skillTargetIds, tags: resolved.skillTags, element: resolved.calculation.segments[0].element, granularity: resolved.calculation.segments[0].granularity, expected: 1000 * multiplier, plain: plain.value.totals.nonCritical, selected: selected.value.totals.nonCritical, displayed: selected.value.totals.displayedNonCritical, strictResolution: api.resolveAgentAction({ ...resolution, requireIndividualHits: true }).ok, strictCalculation: core.calculateStaticActionDamage({ ...request, requireIndividualHits: true }).ok }
+  })
+}
 globalThis.fairyDefinitions = {
   starter: () => import("@randomplay/data/definitions/effects/starter.json"),
   automatic: () => import("@randomplay/data/definitions/effects/automatic.json"),
@@ -757,6 +774,54 @@ function defineScenarios(counts: {
             "definitions/attributes/agents/1561.json",
             "definitions/skills/agents/1561.json",
             "definitions/attributes/w-engines/14118.json",
+            "definitions/attributes/drive-disc-affixes.json",
+            "definitions/effects/static.json",
+            "definitions/effects/static-catalog.json",
+          ],
+        },
+      ],
+    },
+    {
+      name: "generic-assist-entry",
+      steps: [
+        {
+          name: "initial",
+          act: async (page) => checkNameCatalogs(page),
+          sources: [],
+        },
+        {
+          name: "resolve-and-calculate",
+          act: async (page) => {
+            const results = await page.evaluate(() =>
+              (globalThis as any).fairyAssistEntry(),
+            )
+            for (const [index, element, multiplier] of [
+              [0, "ice", 13.612],
+              [1, "physical", 8.008],
+            ] as const) {
+              expect(results[index]).toMatchObject({
+                category: "assist",
+                targets: [],
+                tags: [],
+                element,
+                granularity: "aggregate",
+                displayed: null,
+                strictResolution: false,
+                strictCalculation: false,
+              })
+              expect(results[index].expected).toBeCloseTo(1000 * multiplier, 8)
+              expect(results[index].plain).toBeCloseTo(1000 * multiplier, 8)
+              expect(results[index].selected).toBeCloseTo(
+                1000 * multiplier * 1.2,
+                8,
+              )
+            }
+          },
+          sources: [
+            "definitions/attributes/agents/1341.json",
+            "definitions/skills/agents/1341.json",
+            "definitions/attributes/agents/1431.json",
+            "definitions/skills/agents/1431.json",
             "definitions/attributes/drive-disc-affixes.json",
             "definitions/effects/static.json",
             "definitions/effects/static-catalog.json",

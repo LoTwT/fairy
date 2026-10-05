@@ -216,6 +216,48 @@ describe("parseEffectRuleSet rejects context violations", () => {
   })
 })
 
+describe("generic assist category vocabulary", () => {
+  const withSkillCategory = (values: string[]) =>
+    parseModifiedRuleSet((ruleSet) => {
+      const effect = ruleSet.effects[2]! as unknown as {
+        scope: string
+        operation: object
+        when: object
+      }
+      effect.scope = "hit"
+      effect.operation = {
+        kind: "factor-contribution",
+        channel: "damage-bonus",
+        value: { kind: "literal", unit: "ratio", value: 0.1 },
+      }
+      effect.when = { kind: "one-of", fact: "hit.skillCategory", values }
+    })
+
+  it("accepts the generic assist hit category and rejects unknown literals", () => {
+    expect(withSkillCategory(["assist"]).ok).toBe(true)
+    expect(
+      withSkillCategory(["assist", "quick-assist", "assist-follow-up"]).ok,
+    ).toBe(true)
+    expectIssue(withSkillCategory(["assist-support"]), "INVALID_DEFINITION")
+  })
+
+  it("does not admit assist as an entry action", () => {
+    const withEntryAction = (values: string[]) =>
+      parseModifiedRuleSet((ruleSet) => {
+        const effect = ruleSet.effects[4]! as unknown as {
+          trigger: { when: object }
+        }
+        effect.trigger.when = {
+          kind: "one-of",
+          fact: "event.entryAction",
+          values,
+        }
+      })
+    expect(withEntryAction(["quick-assist"]).ok).toBe(true)
+    expectIssue(withEntryAction(["assist"]), "INVALID_DEFINITION")
+  })
+})
+
 describe("parseEffectRuleSet does not depend on bindings", () => {
   it("reports an invalid definition even when no binding would enable it", () => {
     const result = parseModifiedRuleSet((ruleSet) => {

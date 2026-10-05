@@ -1263,6 +1263,7 @@ assert.equal(
   type DisorderSourceAttribute,
   type EnergyGenerationFormulaInput,
   type EnergyGenerationRateFactorInput,
+  type EntryAction,
   type Factor,
   type FactorParams,
   type Formula,
@@ -1288,6 +1289,7 @@ assert.equal(
   type SettledDamageBonusFactorInput,
   type SheerDamageBonusFactorInput,
   type SheerDamageFormulaInput,
+  type SkillCategory,
   type SpecialVoidflareDamageLevelFactorInput,
   type StunDamageFactorInput,
   type VirtualAgentContributionRecord,
@@ -1454,6 +1456,11 @@ const historicalLuminizeHit: HistoricalLuminizeHit = {
 }
 // @ts-expect-error element and damageItems remain required on the public hit
 const missingLuminizeHitFields: HistoricalLuminizeHit = { actorId: "entity:remiel" }
+const genericAssistSkillCategory: SkillCategory = "assist"
+// @ts-expect-error unknown skill category literals stay rejected
+const unknownSkillCategoryLiteral: SkillCategory = "assist-support"
+// @ts-expect-error assist is a hit skill category, not an entry action
+const assistAsEntryAction: EntryAction = "assist"
 const luminizeStandardAnomalyDamageLevelInput: LuminizeAnomalyDamageLevelInput = 30
 const settledDamageBonusFactorId: "settled_damage_bonus" =
   SETTLED_DAMAGE_BONUS_FACTOR_ID
@@ -1929,6 +1936,9 @@ plainWithoutDefenseLevel
 luminizeDamageBranches
 historicalLuminizeHit
 missingLuminizeHitFields
+genericAssistSkillCategory
+unknownSkillCategoryLiteral
+assistAsEntryAction
 `,
     )
 

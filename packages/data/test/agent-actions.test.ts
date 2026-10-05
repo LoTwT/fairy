@@ -419,9 +419,9 @@ describe("agent action semantics", () => {
   })
 
   it("keeps unresolved classifications and special expressions unavailable", async () => {
-    const data = await agent("1341")
+    const data = await agent("1621")
     const unresolved = data.actions.find(
-      (a) => a.actionId === "action:agent:1341:action:0001",
+      (a) => a.actionId === "action:agent:1621:action:0022",
     )!
     expect(unresolved.damageCoefficient).not.toBeNull()
     expect(
@@ -1056,6 +1056,177 @@ describe("Velina Condensed Cyclone convention", () => {
       ).toBe("unavailable")
     }
   })
+})
+
+describe("generic assist entry-action convention", () => {
+  // 具名通用 assist 登场技直伤约定：照的霜迸、叶瞬光的照影按 generic assist 只计算
+  // 所选招式的直接攻击力伤害。期望倍率直接取 Nanoka 万分比曲线在 1/12/16 级的独立取值：
+  // 照 (68030 + 6190 × (L − 1)) / 10000、失衡 (23020 + 1050 × (L − 1)) / 10000；
+  // 叶瞬光 (40040 + 3640 × (L − 1)) / 10000、失衡 (12100 + 550 × (L − 1)) / 10000。
+  const rows = [
+    {
+      entityId: "1341",
+      suffix: "0001",
+      name: "登场技：霜迸",
+      branchId: "agent:1341:branch:assist-5",
+      element: "ice",
+      upstreamSkillId: "sk-zhao-nk-1341015-main",
+      damageBase: 6.803,
+      damageGrowth: 0.619,
+      dazeBase: 23020 / 10000,
+      dazeGrowth: 0.105,
+      level16Damage: 16.088,
+      level16Daze: 3.877,
+    },
+    {
+      entityId: "1431",
+      suffix: "0001",
+      name: "登场技：照影",
+      branchId: "agent:1431:branch:assist-7",
+      element: "physical",
+      upstreamSkillId: "sk-yeshunguang-direct-mtsgty6b",
+      damageBase: 4.004,
+      damageGrowth: 0.364,
+      dazeBase: 1.21,
+      dazeGrowth: 0.055,
+      level16Damage: 9.464,
+      level16Daze: 2.035,
+    },
+  ] as const
+
+  it.each(rows)(
+    "opens $name as one generic assist aggregate without subcategory identity",
+    async (row) => {
+      const data = await agent(row.entityId)
+      const actionId = `action:agent:${row.entityId}:action:${row.suffix}`
+      const action = data.actions.find((a) => a.actionId === actionId)!
+      expect(action.name).toBe(row.name)
+      expect(action.rowName).toBe("伤害倍率")
+      expect(action.branchId).toBe(row.branchId)
+      expect(action.levelGroup).toBe("assist")
+      expect(action.skillCategory).toBe("assist")
+      expect(action.skillTargetIds).toEqual([])
+      expect(action.skillTags).toEqual([])
+      expect(action.inputs).toEqual([])
+      expect(action.potentialLevels).toBeUndefined()
+      expect(action.conditionalIdentity).toBeUndefined()
+      expect(action.upstreamSkillId).toBe(row.upstreamSkillId)
+      expect(action.damageCoefficient).toEqual({
+        levelGroup: "assist",
+        base: row.damageBase,
+        growth: row.damageGrowth,
+      })
+      expect(action.dazeCoefficient).toEqual({
+        levelGroup: "assist",
+        base: row.dazeBase,
+        growth: row.dazeGrowth,
+      })
+      expect(action.calculation).toEqual({
+        kind: "damage",
+        segments: [
+          {
+            segmentId: `${actionId}:total`,
+            damageKind: "regular",
+            element: row.element,
+            granularity: "aggregate",
+            repeat: 1,
+            items: [
+              {
+                itemId: `${actionId}:base`,
+                stat: "attack",
+                coefficient: {
+                  levelGroup: "assist",
+                  base: row.damageBase,
+                  growth: row.damageGrowth,
+                },
+              },
+            ],
+          },
+        ],
+      })
+      const limitations = action.limitations.join("\n")
+      expect(limitations).toContain("通用 assist 登场技直伤约定")
+      expect(limitations).toContain("不获得 quick-assist 等具体支援子类身份")
+      expect(limitations).toContain("内部命中数尚未核实")
+    },
+  )
+
+  it.each(rows)(
+    "resolves $name at levels 1/12/16 with the documented mindscape semantics",
+    async (row) => {
+      const data = await agent(row.entityId)
+      const actionId = `action:agent:${row.entityId}:action:${row.suffix}`
+      const resolve = (
+        mindscapeRank: number,
+        level: SkillLevelInput,
+        requireIndividualHits?: boolean,
+      ) =>
+        resolveAgentAction({
+          agent: data,
+          actionId,
+          mindscapeRank,
+          levels: { assist: level },
+          ...(requireIndividualHits === undefined
+            ? {}
+            : { requireIndividualHits }),
+        })
+      for (const [level, rank, damage, daze] of [
+        [1, 0, row.damageBase, row.dazeBase],
+        [
+          12,
+          0,
+          row.damageBase + 11 * row.damageGrowth,
+          row.dazeBase + 11 * row.dazeGrowth,
+        ],
+        [16, 5, row.level16Damage, row.level16Daze],
+        [16, 6, row.level16Damage, row.level16Daze],
+      ] as const) {
+        const resolved = resolve(rank, { mode: "effective", value: level })
+        expect(resolved.ok, `L${level}@M${rank}`).toBe(true)
+        if (!resolved.ok) throw new Error("fixture")
+        expect(resolved.resolutionContext).toEqual({
+          agentEntityId: row.entityId,
+          mindscapeRank: rank,
+        })
+        expect(resolved.sourceDamageMultiplier).toBeCloseTo(damage, 12)
+        expect(resolved.dazeMultiplier).toBeCloseTo(daze, 12)
+        expect(resolved.skillCategory).toBe("assist")
+        expect(resolved.skillTargetIds).toEqual([])
+      }
+      // M5 最终 12 保持训练 8、提升 4，不再叠加；M5 训练 12 才是最终 16。
+      const m5Effective = resolve(5, { mode: "effective", value: 12 })
+      expect(m5Effective.ok).toBe(true)
+      if (!m5Effective.ok) throw new Error("fixture")
+      expect(m5Effective.levels.assist).toEqual({
+        trained: 8,
+        bonus: 4,
+        effective: 12,
+      })
+      expect(m5Effective.sourceDamageMultiplier).toBeCloseTo(
+        row.damageBase + 11 * row.damageGrowth,
+        12,
+      )
+      // M0 拒绝合法范围外的最终 16；未核实档位、越界、小数与缺失培养等级照旧拒绝。
+      for (const resolution of [
+        () => resolve(0, { mode: "effective", value: 16 }),
+        () => resolve(0, { mode: "trained", value: 13 }),
+        () => resolve(0, { mode: "effective", value: 12.5 }),
+        () => resolve(5, { mode: "trained", value: 13 }),
+        () =>
+          resolveAgentAction({
+            agent: data,
+            actionId,
+            mindscapeRank: 0,
+            levels: {},
+          }),
+      ])
+        expect(resolution).toThrow()
+      expect(resolve(0, { mode: "effective", value: 12 }, true)).toMatchObject({
+        ok: false,
+        issues: [{ code: "individual-hits-required" }],
+      })
+    },
+  )
 })
 
 const guardPigActionId = (suffix: string) =>
