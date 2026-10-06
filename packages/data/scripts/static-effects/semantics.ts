@@ -22,6 +22,20 @@ export interface SemanticsEvidenceReference {
 }
 
 /**
+ * ZZZ-HP 开发者修订导出的冻结证据：独立于 Nanoka integrated，也不属于固定
+ * 增益提交。原始文件保存在本机 raw（不进 Git/npm）；生成时按整文件摘要与
+ * Pointer 核对修订内容（见 developer-revision.ts），离线测试只使用已提交的
+ * 修订参数与摘要元数据，不依赖 raw 存在。
+ */
+export interface DeveloperRevisionEvidence {
+  /** 冻结导出文件相对数据包根目录（packages/data）的本地 raw 路径。 */
+  readonly path: string
+  readonly sha256: string
+  readonly exportedAt: string
+  readonly pointer: string
+}
+
+/**
  * 按特殊技最终等级取值的参数：value(level) = base + growth × level。
  * 表达式来自来源技能描述中的明确等级公式；由转换器生成合法等级表，
  * 与缺档猜测不同。
@@ -205,6 +219,27 @@ export type SourceSemantics =
       readonly evidence: readonly SemanticsEvidenceReference[]
       readonly verification: string
     }
+  | {
+      /**
+       * 固定来源把该记录的机制错误编码为上游通用 `special` 乘区；ZZZ-HP
+       * 开发者修订导出确认该记录实为异常伤害提升（anomalyDmgBonus），数值
+       * 不变。转换器按修订后的字段查映射编译（进入既有异常增伤乘区，限
+       * 普通异常、异放、乱流与耀变，不含紊乱），状态记为 corrected 并登记
+       * 具名差异；原始 stat、原值与固定源 Pointer 保留在覆盖报告，修订
+       * 证据以独立来源登记。原始 stat 或数值与登记不符即拒绝生成，不静默
+       * 套用到其他 special 记录。
+       */
+      readonly kind: "developer-revised-stat"
+      /** 修正所针对的原始来源字段名；来源记录仍使用该编码。 */
+      readonly originalStat: string
+      /** 修订后的来源字段名；必须在 FIELD_MAPPINGS 中有非拒绝映射。 */
+      readonly revisedStat: string
+      /** 修订后该记录的来源数值；与冻结导出及固定源原值同时核对。 */
+      readonly revisedValue: number
+      readonly differenceId: string
+      readonly evidence: readonly DeveloperRevisionEvidence[]
+      readonly verification: string
+    }
 
 const lucyEvidence = [
   {
@@ -312,6 +347,27 @@ const scarletCravingEvidence = (refinement: 1 | 2 | 3 | 4 | 5) => [
     sha256: "0f0095be51b0b67133f0e583b34c79fa8cfb0e2eff520f6c1a56a7947e755d9e",
   },
 ]
+
+/** 壳中之灵开发者修订导出：精炼 2—5 的异常伤害提升被固定来源记为 special。 */
+const angelRevisionFile =
+  "raw/zzz-hp/developer-revisions/zzz-hp-wengines-picked-1-2026-10-05.json"
+const angelRevisionSha256 =
+  "37bd836a70ec91e095133dc7de70599f6aa0bce073f090f3f5fc00da7d70345c"
+const angelRevisionExportedAt = "2026-10-05T13:34:25.341Z"
+const angelRevisionEvidence = (
+  refinement: 2 | 3 | 4 | 5,
+): readonly DeveloperRevisionEvidence[] => [
+  {
+    path: angelRevisionFile,
+    sha256: angelRevisionSha256,
+    exportedAt: angelRevisionExportedAt,
+    pointer: `/wengines/0/refinementBuffs/${refinement - 1}/effectBlocks/0/effects/2`,
+  },
+]
+const angelRevisionVerification = (refinement: 2 | 3 | 4 | 5): string => {
+  const value = { 2: "11.5", 3: "13", 4: "14.5", 5: "16" }[refinement]!
+  return `ZZZ-HP 开发者修订导出（exportedAt ${angelRevisionExportedAt}，整文件 SHA-256 ${angelRevisionSha256}，本机冻结于 ${angelRevisionFile}）按 ID 定位壳中之灵（wengines/0）后确认：精炼 ${refinement} 的 legacy-self-special 记录实为 anomalyDmgBonus（数值 ${value}%），effectBlocks 与 effects 两个表示同步改名，selfMods 数值从 special 迁至 anomalyDmgBonus。生成时逐字段核对导出与固定源仅存在该四条记录的登记差异。修订数据若交由上游 withRefinementAnomalyFlags 处理，会按 stat/kind/scope/target 从精炼 1 继承 appliesToAnomaly=true；Fairy 仍规范化固定旧源、不改写规范化记录（normalizationChanges 为空、stat 保持 special、记录不含该字段），修正后规则的 when 条件由修订字段映射与既有 whenFor 逻辑得到，与精炼 1 既有异常增伤规则一致（附件本身未写该字段，不冒充附件原始内容）。该修订导出不属于固定提交，不表示 ZZZ-HP 仓库已合入或发布。`
+}
 
 const burniceDetailsSha =
   "453f3284a6c8bcd52a4d2a99986d21beef4b695291d427fc43f4cad946902a18"
@@ -1010,4 +1066,40 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
       verification:
         "Nanoka 3.2 精炼 5 原文确认：发动[强化特殊技]或触发[毁伤]时，造成的电属性锐化伤害提升（数值见来源记录），持续 40 秒。固定来源 elementFilter=all 未编码电属性限制；Fairy 补显式电元素条件，锐化增伤通道本身只在锐化伤害命中适用，触发条件由调用方显式选择断言。",
     },
+  "w-engines/Angel_In_The_Shell/refinement/2/blk-legacy/legacy-self-special": {
+    kind: "developer-revised-stat",
+    originalStat: "special",
+    revisedStat: "anomalyDmgBonus",
+    revisedValue: 11.5,
+    differenceId: "angel-in-the-shell-anomaly-stat-revision",
+    evidence: angelRevisionEvidence(2),
+    verification: angelRevisionVerification(2),
+  },
+  "w-engines/Angel_In_The_Shell/refinement/3/blk-legacy/legacy-self-special": {
+    kind: "developer-revised-stat",
+    originalStat: "special",
+    revisedStat: "anomalyDmgBonus",
+    revisedValue: 13,
+    differenceId: "angel-in-the-shell-anomaly-stat-revision",
+    evidence: angelRevisionEvidence(3),
+    verification: angelRevisionVerification(3),
+  },
+  "w-engines/Angel_In_The_Shell/refinement/4/blk-legacy/legacy-self-special": {
+    kind: "developer-revised-stat",
+    originalStat: "special",
+    revisedStat: "anomalyDmgBonus",
+    revisedValue: 14.5,
+    differenceId: "angel-in-the-shell-anomaly-stat-revision",
+    evidence: angelRevisionEvidence(4),
+    verification: angelRevisionVerification(4),
+  },
+  "w-engines/Angel_In_The_Shell/refinement/5/blk-legacy/legacy-self-special": {
+    kind: "developer-revised-stat",
+    originalStat: "special",
+    revisedStat: "anomalyDmgBonus",
+    revisedValue: 16,
+    differenceId: "angel-in-the-shell-anomaly-stat-revision",
+    evidence: angelRevisionEvidence(5),
+    verification: angelRevisionVerification(5),
+  },
 }

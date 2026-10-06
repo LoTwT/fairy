@@ -25,7 +25,11 @@ import type {
 } from "@randomplay/shared"
 import identities from "./identities.json" with { type: "json" }
 import evidence from "./rank-evidence.json" with { type: "json" }
-import { SOURCE_SEMANTICS, type CoreSkillLevelSemantics } from "./semantics.ts"
+import {
+  SOURCE_SEMANTICS,
+  type CoreSkillLevelSemantics,
+  type DeveloperRevisionEvidence,
+} from "./semantics.ts"
 import { buildRemielleSpecialVoidflareMechanism } from "./mechanisms.ts"
 import { SUPPLEMENTS, type Supplement } from "./supplements.ts"
 import {
@@ -369,6 +373,19 @@ const nanokaReference = (path: string, pointer: string): SourceReference => ({
   pointer: pointer as `/${string}`,
 })
 /**
+ * 开发者修订导出证据：独立于固定提交与 Nanoka integrated；resourcePath 是
+ * 本机冻结 raw 文件相对数据包根目录的路径，生成时按整文件摘要核对。
+ */
+const developerRevisionReference = (
+  reference: DeveloperRevisionEvidence,
+): SourceReference => ({
+  sourceId: "zzz-hp-developer-revision",
+  version: reference.exportedAt,
+  locale: "zh",
+  resourcePath: reference.path,
+  pointer: reference.pointer as `/${string}`,
+})
+/**
  * 等级表达式取值按 12 位小数归一：base + growth × level 的十进制结果
  * 与二进制浮点误差解耦，生成表与验收值逐字一致。
  */
@@ -703,16 +720,37 @@ function whenFor(
   return { kind: "all", conditions }
 }
 
+/** 语义登记键：category/entityId/rankKind/rank/blockId/effectId 稳定组合。 */
+const semanticsKeyFor = (record: SourceRecord): string =>
+  `${record.category}/${record.entityId}/${record.rankKind}/${record.rank}/${record.blockId}/${record.raw.id}`
+
 function compile(
   record: SourceRecord,
   identity: SourceIdentity | null,
   effectId: EffectId,
   declaredSkillTargets: StaticEffectCatalog["skillTargets"][number][],
 ): { rule?: ContributionRule; variant: StaticCatalogVariant } {
-  const e = record.normalized ?? record.raw,
-    mapping = FIELD_MAPPINGS[e.stat]
+  const e = record.normalized ?? record.raw
+  const semantics = SOURCE_SEMANTICS[semanticsKeyFor(record)]
+  // 开发者定点修订：仅登记过的记录按修订后的字段查映射；来源原始编码或
+  // 数值与登记不符即拒绝生成，不静默套用，也不波及其他 special 记录。
+  if (semantics?.kind === "developer-revised-stat") {
+    if (record.raw.stat !== semantics.originalStat)
+      throw new Error(
+        `Developer revision expects stat ${semantics.originalStat} at ${record.pointer}, found ${record.raw.stat}`,
+      )
+    if (record.raw.value !== semantics.revisedValue)
+      throw new Error(
+        `Developer revision value mismatch at ${record.pointer}: ${record.raw.value} ≠ ${semantics.revisedValue}`,
+      )
+  }
+  const effectiveStat =
+    semantics?.kind === "developer-revised-stat"
+      ? semantics.revisedStat
+      : e.stat
+  const mapping = FIELD_MAPPINGS[effectiveStat]
   if (!mapping)
-    throw new Error(`Unregistered stat at ${record.pointer}: ${e.stat}`)
+    throw new Error(`Unregistered stat at ${record.pointer}: ${effectiveStat}`)
   const enhancesCissiaCore =
     record.category === "agents" &&
     record.entityId === "cissia" &&
@@ -752,10 +790,6 @@ function compile(
     record.category === "agents" &&
     (enhancesCissiaCore ||
       (record.rank === 0 && record.blockName.includes("核心被动")))
-  const semantics =
-    SOURCE_SEMANTICS[
-      `${record.category}/${record.entityId}/${record.rankKind}/${record.rank}/${record.blockId}/${e.id}`
-    ]
   const requirements: StaticCatalogVariant["inputs"][number][] = []
   let variant: StaticCatalogVariant = {
     configuration: {
@@ -1206,6 +1240,20 @@ function compile(
       ],
     }
   }
+  if (semantics?.kind === "developer-revised-stat") {
+    // 开发者修订后的字段映射已在映射查找前生效；这里登记修正状态、具名
+    // 差异与修订证据。原始 stat、原值与固定源 Pointer 保留在覆盖报告和
+    // 第一条 reference 中，修订证据独立成来源，不伪装成固定提交的一部分。
+    variant = {
+      ...variant,
+      status: "corrected",
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) => developerRevisionReference(ref)),
+      ],
+    }
+  }
   if (mapping.basePercentage)
     expression = {
       kind: "multiply",
@@ -1582,10 +1630,17 @@ export function convertSource(
           row.effectIds = [mergedId]
       }
     }
+    // 显示名使用修正后的有效字段（如开发者修订的 anomalyDmgBonus）；
+    // 原始 stat 保留在覆盖报告与固定源引用中，不因修正丢失追溯。
+    const firstSemantics = SOURCE_SEMANTICS[semanticsKeyFor(first)]
+    const displayStat =
+      firstSemantics?.kind === "developer-revised-stat"
+        ? firstSemantics.revisedStat
+        : first.raw.stat
     options.push({
       optionId,
       catalogEntityId: entity.catalogEntityId,
-      name: `${first.blockName} · ${first.raw.stat}`,
+      name: `${first.blockName} · ${displayStat}`,
       conditionDescription: [first.blockNote, first.raw.note]
         .filter(Boolean)
         .join("\n"),
@@ -1798,7 +1853,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "10",
+    revision: "11",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -2046,6 +2101,20 @@ export function convertSource(
           .filter((r) => r.catalogEntityId === "w-engines:Scarlet-Craving")
           .map((r) => reference(r.pointer)),
       },
+      {
+        differenceId: "angel-in-the-shell-anomaly-stat-revision",
+        explanation:
+          "壳中之灵（14150）精炼 2—5 的[触发的所有属性异常伤害和[紊乱]伤害提升]在固定来源 fac62407 中被错误编码为上游通用 special 乘区（legacy-self-special）。ZZZ-HP 开发者修订导出（exportedAt 2026-10-05T13:34:25.341Z，整文件 SHA-256 37bd836a70ec91e095133dc7de70599f6aa0bce073f090f3f5fc00da7d70345c，本机冻结 raw，来源 zzz-hp-developer-revision）确认这四条记录实为 anomalyDmgBonus，数值 11.5/13/14.5/16% 不变，effectBlocks 与 effects 同步改名，selfMods 数值从 special 迁至 anomalyDmgBonus；生成时逐字段核对导出与固定源仅存在该四条记录的登记差异。Fairy 按修订后的字段进入既有异常增伤乘区（普通异常、异放、乱流、耀变），不作用于普通直接伤害；紊乱伤害继续只由独立的 disorderDmgBonus 条款（10/11.5/13/14.5/16%）覆盖，不重复相乘。原始 stat、原值与固定源 Pointer 保留在覆盖报告；选项与效果 ID 保持稳定，不与精炼 1 的 anomalyDmgBonus 选项合并。上游若按修订后的数据运行 withRefinementAnomalyFlags，会按 stat/kind/scope/target 把精炼 1 的 appliesToAnomaly=true 继承给精炼 2—5；Fairy 的生成仍规范化固定旧源、不改写规范化记录（覆盖报告 normalizationChanges 为空、stat 保持 special、记录不含该字段），修正后规则的 when 条件由修订字段映射与既有 whenFor 逻辑得到，与精炼 1 既有异常增伤规则逐字一致（附件本身未写该字段，不冒充附件原始内容）。该导出是定点修订证据，不表示 ZZZ-HP 仓库已合入、发布或完成游戏实测。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes(
+                "angel-in-the-shell-anomaly-stat-revision",
+              ),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
     ],
   }
   const counts = Object.fromEntries(
@@ -2095,7 +2164,7 @@ export function convertSource(
           catalogEntityId: "agents:remiel",
           reason: "supported-with-scope",
           explanation:
-            "蕾米埃尔自身特殊虚曜对应的耀变已按 remielle-special-voidflare 具名机制接入（catalog.mechanisms 元数据 + core 目录分支）：anomalySource 携带 mechanism 时按角色等级 1—60、strength full（最低影画 1）/mindscape-6-quarter（最低影画 6）计算，旧 M6 锚点部分选项在该分支拒绝。普通异常/紊乱/异放/乱流仍拒绝她作为 anomalySource；她提供给其他异常来源的已映射团队增益继续独立可用。修订前 8 条 unsupported 与壳中之灵 4 条 special 乘区记录的计数不受本条影响。",
+            "蕾米埃尔自身特殊虚曜对应的耀变已按 remielle-special-voidflare 具名机制接入（catalog.mechanisms 元数据 + core 目录分支）：anomalySource 携带 mechanism 时按角色等级 1—60、strength full（最低影画 1）/mindscape-6-quarter（最低影画 6）计算，旧 M6 锚点部分选项在该分支拒绝。普通异常/紊乱/异放/乱流仍拒绝她作为 anomalySource；她提供给其他异常来源的已映射团队增益继续独立可用。壳中之灵 R2—R5 的 4 条 special 乘区记录已按开发者修订接入（见具名差异 angel-in-the-shell-anomaly-stat-revision），不再计入 unsupported。",
         },
       ],
       fieldMappings: FIELD_MAPPINGS,

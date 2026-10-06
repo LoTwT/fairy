@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "10",
+  "revision": "11",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -19519,10 +19519,10 @@
       "rankKind": "refinement",
       "stat": "special",
       "optionId": "w-engines:Angel_In_The_Shell:refinement:blk-legacy:legacy-self-special",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "formula-out-of-scope",
-      "explanation": "通用特殊乘区不属于当前 core 已登记的独立机制",
+      "effectIds": [
+        "w-engine:14150:zzz-hp:legacy-self-special:blk-legacy:refinement"
+      ],
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 11.5,
       "normalizedValue": 11.5
@@ -19534,10 +19534,10 @@
       "rankKind": "refinement",
       "stat": "special",
       "optionId": "w-engines:Angel_In_The_Shell:refinement:blk-legacy:legacy-self-special",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "formula-out-of-scope",
-      "explanation": "通用特殊乘区不属于当前 core 已登记的独立机制",
+      "effectIds": [
+        "w-engine:14150:zzz-hp:legacy-self-special:blk-legacy:refinement"
+      ],
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 13,
       "normalizedValue": 13
@@ -19549,10 +19549,10 @@
       "rankKind": "refinement",
       "stat": "special",
       "optionId": "w-engines:Angel_In_The_Shell:refinement:blk-legacy:legacy-self-special",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "formula-out-of-scope",
-      "explanation": "通用特殊乘区不属于当前 core 已登记的独立机制",
+      "effectIds": [
+        "w-engine:14150:zzz-hp:legacy-self-special:blk-legacy:refinement"
+      ],
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 14.5,
       "normalizedValue": 14.5
@@ -19564,10 +19564,10 @@
       "rankKind": "refinement",
       "stat": "special",
       "optionId": "w-engines:Angel_In_The_Shell:refinement:blk-legacy:legacy-self-special",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "formula-out-of-scope",
-      "explanation": "通用特殊乘区不属于当前 core 已登记的独立机制",
+      "effectIds": [
+        "w-engine:14150:zzz-hp:legacy-self-special:blk-legacy:refinement"
+      ],
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 16,
       "normalizedValue": 16
@@ -30272,11 +30272,11 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 849,
+    "rules": 850,
     "options": 834,
     "converted": 1237,
-    "corrected": 45,
-    "unsupported": 8,
+    "corrected": 49,
+    "unsupported": 4,
     "supplements": {
       "records": 10,
       "rules": 9,
@@ -30291,7 +30291,7 @@
     {
       "catalogEntityId": "agents:remiel",
       "reason": "supported-with-scope",
-      "explanation": "蕾米埃尔自身特殊虚曜对应的耀变已按 remielle-special-voidflare 具名机制接入（catalog.mechanisms 元数据 + core 目录分支）：anomalySource 携带 mechanism 时按角色等级 1—60、strength full（最低影画 1）/mindscape-6-quarter（最低影画 6）计算，旧 M6 锚点部分选项在该分支拒绝。普通异常/紊乱/异放/乱流仍拒绝她作为 anomalySource；她提供给其他异常来源的已映射团队增益继续独立可用。修订前 8 条 unsupported 与壳中之灵 4 条 special 乘区记录的计数不受本条影响。"
+      "explanation": "蕾米埃尔自身特殊虚曜对应的耀变已按 remielle-special-voidflare 具名机制接入（catalog.mechanisms 元数据 + core 目录分支）：anomalySource 携带 mechanism 时按角色等级 1—60、strength full（最低影画 1）/mindscape-6-quarter（最低影画 6）计算，旧 M6 锚点部分选项在该分支拒绝。普通异常/紊乱/异放/乱流仍拒绝她作为 anomalySource；她提供给其他异常来源的已映射团队增益继续独立可用。壳中之灵 R2—R5 的 4 条 special 乘区记录已按开发者修订接入（见具名差异 angel-in-the-shell-anomaly-stat-revision），不再计入 unsupported。"
     }
   ],
   "fieldMappings": {

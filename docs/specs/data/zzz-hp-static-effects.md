@@ -4,7 +4,7 @@
 
 ## 实际覆盖与使用限制
 
-[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 849 条规则与 834 个选择项。1,237 条 converted、45 条 corrected；8 条 unsupported 中，4 条属于当前 core 范围外公式（壳中之灵 R2—R5 的上游 `special` 乘区效果，属性异常与紊乱伤害提升依次为 11.5%、13%、14.5%、16%），另有 4 条是已迁移的重复部分记录（semantic-conflict）；原始位置缺少培养档位证据的 41 个位置已全部闭合。另有 10 条经核实的 Nanoka 补充来源记录（9 条已整合、1 条越界登记）。记录数包含各档精炼的来源位置，不等于独立机制数量。
+[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 850 条规则与 834 个选择项。1,237 条 converted、49 条 corrected；4 条 unsupported 全部是已迁移的重复部分记录（semantic-conflict）。壳中之灵（14150）精炼 2—5 的 4 条上游 `special` 乘区记录已按开发者修订接入异常增伤乘区（见[修订 11](#修订-11壳中之灵异常增伤来源修正)）；原始位置缺少培养档位证据的 41 个位置已全部闭合。另有 10 条经核实的 Nanoka 补充来源记录（9 条已整合、1 条越界登记）。记录数包含各档精炼的来源位置，不等于独立机制数量。
 
 核心档位仅开放 [rank-evidence.json](../../../packages/data/scripts/static-effects/rank-evidence.json)确认的键；缺档的同一角色其他选项仍可使用。两条反向缺项和空记录另列在报告中。目录入口对普通异常来源仍拒绝把蕾米埃尔作为 `anomalySource`；她本人特殊[虚曜]对应的耀变自修订 10 起按具名机制 `remielle-special-voidflare` 接入（见下文），她提供给其他来源异常的已映射增益继续正常计算。
 
@@ -16,10 +16,11 @@
 
 5 条修正对应 3 个具名差异：耀嘉音 2 影的两条来源记录合为参数修改；耀变精通只交由 core 换算一次；蕾米埃尔 6 影两条记录保留显式流明技能范围。目录 `differences` 保存解释与来源。修订 3 新增 1 个具名差异 `special-skill-level-expression`，修订 5 新增 2 个具名差异 `potential-branch-gate` 与 `potential-level-expression`，修订 6 新增 1 个具名差异 `independent-hit-contract`，修订 7 新增 2 个具名差异 `potential-partial-option-migration` 与 `potential-branch-scope` 并扩展前两者；修订 8 新增 `core-skill-level-parameters` 与 `core-enhancement-independent-increment`，修订 9 新增
 `claret-remnant-edge-self-target`、`claret-mindscape1-multiplier-encoding` 与
-`scarlet-craving-explicit-element`，并把 `core-skill-level-parameters` 的解释扩展到克拉蕾（见下）。
+`scarlet-craving-explicit-element`，并把 `core-skill-level-parameters` 的解释扩展到克拉蕾（见下）；
+修订 11 新增 `angel-in-the-shell-anomaly-stat-revision`（开发者修订导出确认的异常增伤字段修正）。
 
-固定输入重复生成的三个制品字节一致。来源参考夹具保留 1,271 个位置：当前 1,237 条 converted 逐条比对，
-5 个核心档位扩展与 10 个猩红渴望元素范围修正位置按来源数值比对，其余 19 个潜能位置按具名修正或迁移
+固定输入重复生成的三个制品字节一致。来源参考夹具保留 1,275 个位置：当前 1,237 条 converted 逐条比对，
+5 个核心档位扩展、10 个猩红渴望元素范围修正与 4 个壳中之灵开发者修订位置按来源数值比对，其余 19 个潜能位置按具名修正或迁移
 验证；corrected 的扩展行为另验，配合最终伤害、培养边界、历史属性、多来源、多个时间派生伤害项与
 打包消费测试。它验证原始上游函数，不表示完成 ZZZ-HP 整应用差分或游戏实测。
 
@@ -224,6 +225,46 @@ unavailable 35 → 10，技能清单摘要随之更新；洛克茜 3 条风眼�
   花羽轮舞辅助等级 12）进入[端到端验收](../../plans/static-e2e-acceptance.md#蕾米埃尔特殊虚曜场景追加)，
   期望值来自固定来源原函数与独立算式，并逐项复验父会话的独立 Decimal 验收值。
 
+### 修订 11：壳中之灵异常增伤来源修正
+
+规则集 revision 递增为 `11`。ZZZ-HP 开发者确认固定来源把壳中之灵（`Angel_In_The_Shell`，Fairy 14150）
+精炼 2—5 的[触发的所有属性异常伤害和[紊乱]伤害提升]错误编码为上游通用 `special` 乘区
+（`legacy-self-special`），并提供修订导出（exportedAt `2026-10-05T13:34:25.341Z`，整文件 SHA-256
+`37bd836a70ec91e095133dc7de70599f6aa0bce073f090f3f5fc00da7d70345c`）。该导出只含此一个音擎实体，
+是定点修订证据，不作为完整数据源替换固定 JSON，也不表示 ZZZ-HP 仓库已合入、发布或完成游戏实测。
+
+- **修正内容**：四条记录按修订后的 `anomalyDmgBonus` 字段进入既有
+  [FIELD_MAPPINGS.anomalyDmgBonus → anomaly-damage-bonus](../../../packages/data/scripts/static-effects/convert.ts)
+  映射，数值 11.5/13/14.5/16%（ratio 0.115/0.13/0.145/0.16）不变，只作用于普通异常、异放、乱流与耀变；
+  普通直接伤害不适用，紊乱继续只由独立的 `disorderDmgBonus` 条款（10/11.5/13/14.5/16%）覆盖，不重复相乘。
+  精炼 1 保持原始 `anomalyDmgBonus` 记录（10%）；两条原始效果 ID 不同，选项不合并。
+- **证据登记**：[semantics.ts](../../../packages/data/scripts/static-effects/semantics.ts) 以
+  `developer-revised-stat` 语义登记四条记录（原始字段、修订字段、数值与差异 ID），证据指向冻结导出的
+  effectBlocks 记录 Pointer；导出文件冻结于本机 `packages/data/raw/zzz-hp/developer-revisions/`（不进
+  Git/npm）。生成时按整文件摘要、exportedAt、按 ID 定位与逐字段差异集核对：导出与固定源实体只允许
+  登记的四组差异（effectBlocks 与 effects 两个表示的 stat 改名、selfMods 数值迁移），出现其他差异即
+  拒绝生成（[developer-revision.ts](../../../packages/data/scripts/static-effects/developer-revision.ts)）；
+  离线测试用合成输入复验该核对逻辑，不依赖 raw 存在。目录引用以独立来源 `zzz-hp-developer-revision`
+  登记（版本为 exportedAt，resourcePath 为冻结 raw 路径），不冒充固定提交或 Nanoka；固定
+  source-manifest 的旧文件摘要保持不变。
+- **跨精炼异常标记**：上游若在修订后的数据上运行 `withRefinementAnomalyFlags`，会按 stat/kind/scope/target
+  从精炼 1 继承 `appliesToAnomaly=true`；Fairy 的生成仍规范化固定旧源、不改写规范化记录（覆盖报告
+  `normalizationChanges` 为空、`stat` 保持 `special`、记录不含该字段），修正后规则的 `when` 与精炼 1
+  既有异常增伤规则逐字一致是由修订字段映射（`anomalyDmgBonus` 的 damageKinds）与既有 `whenFor`
+  逻辑得到，并由验收断言锁定；附件本身未写该字段，继承结论不冒充附件原始内容。
+- **覆盖状态**：4 条 unsupported → corrected（corrected 45 → 49、unsupported 8 → 4），新增 1 条合并
+  精炼规则（rules 849 → 850）；来源分母（187 实体、1,061 pack、1,290 记录）与选项数不变。原始
+  stat、原值与固定源 Pointer 保留在覆盖报告；选项显示名改为「精2 · anomalyDmgBonus」，optionId 与
+  效果 ID 保持稳定。
+- **独立验收**：来源参考夹具新增 4 个位置按来源数值比对（1,271 → 1,275）；具名差异与身份登记、
+  异常族正例（含耀变目录选择入口：精通 100 经固定 rate 0.002 折算为 1.2 倍、R5 再乘 1.16 得 139.2，
+  并按目录契约拒绝缺精通换算映射的输入；低层隔离保留）、直接伤害负例、紊乱条款隔离、R1—R5 档位
+  互斥与选值、同区加算（K=100 + 16% + 20% = 136）与普通增伤区分乘（×1.2 = 139.2）、武器持有者/
+  命中者/异常属性来源分离正反例（自己命中 116、他人命中 100）、历史 snapshot 与 current 来源隔离
+  对照（当前 50 攻 → 58、历史快照 200 攻 → 232，条款各只贡献一次 0.16）均有独立算式断言；data 侧
+  合成数据验证修正映射、陈旧登记拒绝与未登记 special 记录不受影响。技能动作字节不变，技能清单仅
+  更新 `staticCatalogSha256`。
+
 ## 交付目标与边界
 
 转换器覆盖代理人、音擎和驱动盘的来源盘点、身份映射、可重复转换与正式制品生成。在当前 core 公式能力范围内处理固定来源的全部可用静态效果；不能因为转换器或 effects 暂时缺少表达能力就把已有公式可以计算的效果列为暂不支持。
@@ -232,7 +273,7 @@ unavailable 35 → 10，技能清单摘要随之更新；洛克茜 3 条风眼�
 
 超出现有 core 契约的新公式、未登记的来源版本、邦布、关卡环境与伤害流程预设不在本转换器的支持范围内；新公式即使已经出现在固定来源内，也遵循这一边界。固定来源内的空记录、身份缺失、缺少参数与新公式条目分别登记，不能通过删除条目、造零值或只公布已成功的分母制造全量覆盖。
 
-现有 core 支持范围以本次 Fairy 基线的[公式规范](../core/index.md)为准。`sharpenDmgBonus` / `sharpenCritDmgBonus` 依赖的锐化/锐暴公式已于修订 9 接入；蕾米埃尔自身特殊虚曜对应的耀变已于修订 10 按具名机制接入，普通异常类仍不接受她作为异常强度提供者。上游通用 `special` 也不能通过新建任意最终倍率接口或暗乘基础伤害来绕过[特殊乘区边界](../core/factors/special.md)。已有耀变独立机制对应的 `specialMult` 等条目，应按明确来源映射到既有具体乘区；无法对应的条目记录原因。流明元素的标识和筛选属于已有耀变能力的适配，不能以 effects 的元素枚举尚缺 `lumiflux` 为由整体排除。
+现有 core 支持范围以本次 Fairy 基线的[公式规范](../core/index.md)为准。`sharpenDmgBonus` / `sharpenCritDmgBonus` 依赖的锐化/锐暴公式已于修订 9 接入；蕾米埃尔自身特殊虚曜对应的耀变已于修订 10 按具名机制接入，普通异常类仍不接受她作为异常强度提供者。上游通用 `special` 也不能通过新建任意最终倍率接口或暗乘基础伤害来绕过[特殊乘区边界](../core/factors/special.md)。已有耀变独立机制对应的 `specialMult` 等条目，应按明确来源映射到既有具体乘区；无法对应的条目记录原因。经开发者修订证据逐条核实的 `special` 条目按具名修正映射到既有乘区（修订 11 的壳中之灵），登记只针对该实体与记录，不构成全局把 `special` 当作异常增伤的规则。流明元素的标识和筛选属于已有耀变能力的适配，不能以 effects 的元素枚举尚缺 `lumiflux` 为由整体排除。
 
 ## 固定输入与证据
 

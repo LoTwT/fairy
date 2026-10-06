@@ -19346,6 +19346,13 @@
           "bindingId": "binding:source",
           "layers": 1
         }
+      ],
+      [
+        {
+          "optionId": "w-engines:Angel_In_The_Shell:refinement:blk-legacy:legacy-self-special",
+          "bindingId": "binding:source",
+          "layers": 1
+        }
       ]
     ],
     "actorSources": [
@@ -29105,6 +29112,74 @@
         "damage": 0,
         "bindings": 281,
         "selections": 512,
+        "actorSources": 2,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/30/refinementBuffs/1/effectBlocks/0/effects/2",
+      "expected": 0.115,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14150:zzz-hp:legacy-self-special:blk-legacy:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 2,
+        "bindings": 278,
+        "selections": 841,
+        "actorSources": 2,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/30/refinementBuffs/2/effectBlocks/0/effects/2",
+      "expected": 0.13,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14150:zzz-hp:legacy-self-special:blk-legacy:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 2,
+        "bindings": 279,
+        "selections": 841,
+        "actorSources": 2,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/30/refinementBuffs/3/effectBlocks/0/effects/2",
+      "expected": 0.145,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14150:zzz-hp:legacy-self-special:blk-legacy:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 2,
+        "bindings": 280,
+        "selections": 841,
+        "actorSources": 2,
+        "inputs": 0
+      }
+    },
+    {
+      "pointer": "/wengines/30/refinementBuffs/4/effectBlocks/0/effects/2",
+      "expected": 0.16,
+      "unit": "ratio",
+      "effectIds": [
+        "w-engine:14150:zzz-hp:legacy-self-special:blk-legacy:refinement"
+      ],
+      "input": {
+        "world": 0,
+        "hit": 0,
+        "damage": 2,
+        "bindings": 281,
+        "selections": 841,
         "actorSources": 2,
         "inputs": 0
       }
