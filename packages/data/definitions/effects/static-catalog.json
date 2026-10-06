@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "10",
+  "revision": "11",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -25762,7 +25762,7 @@
     {
       "optionId": "w-engines:Angel_In_The_Shell:refinement:blk-legacy:legacy-self-special",
       "catalogEntityId": "w-engines:Angel_In_The_Shell",
-      "name": "精2 · special",
+      "name": "精2 · anomalyDmgBonus",
       "conditionDescription": "装备者的异常精通提升103点；以太属性的装备者进入前场或发动[特殊技]、[强化特殊技]时获得增益效果：对处于属性异常状态下的敌人造成的伤害提升23%，触发的所有属性异常伤害和[紊乱]伤害提升11.5%，效果持续15秒，重复触发时刷新持续时间，换回后场时该效果移除。",
       "target": "self",
       "variants": [
@@ -25770,7 +25770,7 @@
           "configuration": {
             "refinements": [2]
           },
-          "status": "unsupported",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -25778,21 +25778,28 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/30/refinementBuffs/1/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "zzz-hp-developer-revision",
+              "version": "2026-10-05T13:34:25.341Z",
+              "locale": "zh",
+              "resourcePath": "raw/zzz-hp/developer-revisions/zzz-hp-wengines-picked-1-2026-10-05.json",
+              "pointer": "/wengines/0/refinementBuffs/1/effectBlocks/0/effects/2"
             }
           ],
-          "effectIds": [],
+          "effectIds": [
+            "w-engine:14150:zzz-hp:legacy-self-special:blk-legacy:refinement"
+          ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
-          "applicability": {},
-          "reason": "formula-out-of-scope",
-          "explanation": "通用特殊乘区不属于当前 core 已登记的独立机制"
+          "differences": ["angel-in-the-shell-anomaly-stat-revision"],
+          "applicability": {}
         },
         {
           "configuration": {
             "refinements": [3]
           },
-          "status": "unsupported",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -25800,21 +25807,28 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/30/refinementBuffs/2/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "zzz-hp-developer-revision",
+              "version": "2026-10-05T13:34:25.341Z",
+              "locale": "zh",
+              "resourcePath": "raw/zzz-hp/developer-revisions/zzz-hp-wengines-picked-1-2026-10-05.json",
+              "pointer": "/wengines/0/refinementBuffs/2/effectBlocks/0/effects/2"
             }
           ],
-          "effectIds": [],
+          "effectIds": [
+            "w-engine:14150:zzz-hp:legacy-self-special:blk-legacy:refinement"
+          ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
-          "applicability": {},
-          "reason": "formula-out-of-scope",
-          "explanation": "通用特殊乘区不属于当前 core 已登记的独立机制"
+          "differences": ["angel-in-the-shell-anomaly-stat-revision"],
+          "applicability": {}
         },
         {
           "configuration": {
             "refinements": [4]
           },
-          "status": "unsupported",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -25822,21 +25836,28 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/30/refinementBuffs/3/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "zzz-hp-developer-revision",
+              "version": "2026-10-05T13:34:25.341Z",
+              "locale": "zh",
+              "resourcePath": "raw/zzz-hp/developer-revisions/zzz-hp-wengines-picked-1-2026-10-05.json",
+              "pointer": "/wengines/0/refinementBuffs/3/effectBlocks/0/effects/2"
             }
           ],
-          "effectIds": [],
+          "effectIds": [
+            "w-engine:14150:zzz-hp:legacy-self-special:blk-legacy:refinement"
+          ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
-          "applicability": {},
-          "reason": "formula-out-of-scope",
-          "explanation": "通用特殊乘区不属于当前 core 已登记的独立机制"
+          "differences": ["angel-in-the-shell-anomaly-stat-revision"],
+          "applicability": {}
         },
         {
           "configuration": {
             "refinements": [5]
           },
-          "status": "unsupported",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -25844,15 +25865,22 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/30/refinementBuffs/4/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "zzz-hp-developer-revision",
+              "version": "2026-10-05T13:34:25.341Z",
+              "locale": "zh",
+              "resourcePath": "raw/zzz-hp/developer-revisions/zzz-hp-wengines-picked-1-2026-10-05.json",
+              "pointer": "/wengines/0/refinementBuffs/4/effectBlocks/0/effects/2"
             }
           ],
-          "effectIds": [],
+          "effectIds": [
+            "w-engine:14150:zzz-hp:legacy-self-special:blk-legacy:refinement"
+          ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
-          "applicability": {},
-          "reason": "formula-out-of-scope",
-          "explanation": "通用特殊乘区不属于当前 core 已登记的独立机制"
+          "differences": ["angel-in-the-shell-anomaly-stat-revision"],
+          "applicability": {}
         }
       ]
     },
@@ -46475,6 +46503,68 @@
           "locale": "zh",
           "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
           "pointer": "/wengines/65/refinementBuffs/4/effectBlocks/2/effects/0"
+        }
+      ]
+    },
+    {
+      "differenceId": "angel-in-the-shell-anomaly-stat-revision",
+      "explanation": "壳中之灵（14150）精炼 2—5 的[触发的所有属性异常伤害和[紊乱]伤害提升]在固定来源 fac62407 中被错误编码为上游通用 special 乘区（legacy-self-special）。ZZZ-HP 开发者修订导出（exportedAt 2026-10-05T13:34:25.341Z，整文件 SHA-256 37bd836a70ec91e095133dc7de70599f6aa0bce073f090f3f5fc00da7d70345c，本机冻结 raw，来源 zzz-hp-developer-revision）确认这四条记录实为 anomalyDmgBonus，数值 11.5/13/14.5/16% 不变，effectBlocks 与 effects 同步改名，selfMods 数值从 special 迁至 anomalyDmgBonus；生成时逐字段核对导出与固定源仅存在该四条记录的登记差异。Fairy 按修订后的字段进入既有异常增伤乘区（普通异常、异放、乱流、耀变），不作用于普通直接伤害；紊乱伤害继续只由独立的 disorderDmgBonus 条款（10/11.5/13/14.5/16%）覆盖，不重复相乘。原始 stat、原值与固定源 Pointer 保留在覆盖报告；选项与效果 ID 保持稳定，不与精炼 1 的 anomalyDmgBonus 选项合并。上游若按修订后的数据运行 withRefinementAnomalyFlags，会按 stat/kind/scope/target 把精炼 1 的 appliesToAnomaly=true 继承给精炼 2—5；Fairy 的生成仍规范化固定旧源、不改写规范化记录（覆盖报告 normalizationChanges 为空、stat 保持 special、记录不含该字段），修正后规则的 when 条件由修订字段映射与既有 whenFor 逻辑得到，与精炼 1 既有异常增伤规则逐字一致（附件本身未写该字段，不冒充附件原始内容）。该导出是定点修订证据，不表示 ZZZ-HP 仓库已合入、发布或完成游戏实测。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/30/refinementBuffs/1/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp-developer-revision",
+          "version": "2026-10-05T13:34:25.341Z",
+          "locale": "zh",
+          "resourcePath": "raw/zzz-hp/developer-revisions/zzz-hp-wengines-picked-1-2026-10-05.json",
+          "pointer": "/wengines/0/refinementBuffs/1/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/30/refinementBuffs/2/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp-developer-revision",
+          "version": "2026-10-05T13:34:25.341Z",
+          "locale": "zh",
+          "resourcePath": "raw/zzz-hp/developer-revisions/zzz-hp-wengines-picked-1-2026-10-05.json",
+          "pointer": "/wengines/0/refinementBuffs/2/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/30/refinementBuffs/3/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp-developer-revision",
+          "version": "2026-10-05T13:34:25.341Z",
+          "locale": "zh",
+          "resourcePath": "raw/zzz-hp/developer-revisions/zzz-hp-wengines-picked-1-2026-10-05.json",
+          "pointer": "/wengines/0/refinementBuffs/3/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/30/refinementBuffs/4/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp-developer-revision",
+          "version": "2026-10-05T13:34:25.341Z",
+          "locale": "zh",
+          "resourcePath": "raw/zzz-hp/developer-revisions/zzz-hp-wengines-picked-1-2026-10-05.json",
+          "pointer": "/wengines/0/refinementBuffs/4/effectBlocks/0/effects/2"
         }
       ]
     }

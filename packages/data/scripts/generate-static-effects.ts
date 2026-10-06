@@ -12,6 +12,10 @@ import {
 import { convertSource } from "./static-effects/convert.ts"
 import { loadSource } from "./static-effects/source.ts"
 import { SOURCE_SEMANTICS } from "./static-effects/semantics.ts"
+import {
+  developerRevisionEntries,
+  verifyDeveloperRevisionExport,
+} from "./static-effects/developer-revision.ts"
 import { SUPPLEMENTS } from "./static-effects/supplements.ts"
 import evidence from "./static-effects/rank-evidence.json" with { type: "json" }
 
@@ -97,6 +101,52 @@ async function verifyEvidenceReferences(
   }
 }
 
+/**
+ * 冻结的开发者修订导出先按整文件摘要与 exportedAt 核对，再执行纯结构的
+ * 按 ID 定位、指针身份与逐字段差异核对（仅登记差异）；raw 缺失、摘要不符
+ * 或出现未登记差异都拒绝生成。普通构建与测试不读取该本机文件。
+ */
+async function verifyDeveloperRevisionEvidence(
+  dataPackageRoot: string,
+  fixedWengines: readonly unknown[],
+): Promise<void> {
+  const entries = developerRevisionEntries(SOURCE_SEMANTICS)
+  if (!entries.length) return
+  const files = new Map<string, { sha256: string; exportedAt: string }>()
+  for (const semantics of Object.values(SOURCE_SEMANTICS)) {
+    if (semantics.kind !== "developer-revised-stat") continue
+    for (const reference of semantics.evidence) {
+      const known = files.get(reference.path)
+      if (!known)
+        files.set(reference.path, {
+          sha256: reference.sha256,
+          exportedAt: reference.exportedAt,
+        })
+      else if (
+        known.sha256 !== reference.sha256 ||
+        known.exportedAt !== reference.exportedAt
+      )
+        throw new Error(
+          `Inconsistent developer revision evidence registration: ${reference.path}`,
+        )
+    }
+  }
+  if (files.size !== 1)
+    throw new Error(
+      "Multiple developer revision export files are not supported yet",
+    )
+  const [path, expectation] = [...files.entries()][0]!
+  const bytes = await readFile(join(dataPackageRoot, path))
+  if (createHash("sha256").update(bytes).digest("hex") !== expectation.sha256)
+    throw new Error(`Developer revision file changed: ${path}`)
+  const document: unknown = JSON.parse(bytes.toString("utf8"))
+  if (
+    (document as { exportedAt?: unknown }).exportedAt !== expectation.exportedAt
+  )
+    throw new Error(`Developer revision exportedAt mismatch: ${path}`)
+  verifyDeveloperRevisionExport(fixedWengines, document, entries)
+}
+
 export async function generateStaticEffects(
   sourceRoot: string,
   outputDirectory: string,
@@ -109,6 +159,10 @@ export async function generateStaticEffects(
     integratedDirectory,
   )
   const source = await loadSource(resolve(sourceRoot))
+  await verifyDeveloperRevisionEvidence(
+    fileURLToPath(new URL("..", import.meta.url)),
+    source.data.wengines,
+  )
   await mkdir(dirname(output), { recursive: true })
   const publication = await mkdtemp(
     join(dirname(output), ".fairy-static-source-"),
@@ -133,12 +187,15 @@ export async function generateStaticEffects(
         entry.evidence,
         "parameters" in entry,
       )
+    // developer-revised-stat 的证据是冻结开发者导出，不属于 integrated，
+    // 由 verifyDeveloperRevisionEvidence 单独核对，不走 Nanoka 路径。
     for (const [key, semantics] of Object.entries(SOURCE_SEMANTICS))
-      await verifyEvidenceReferences(
-        publication,
-        `semantics:${key}`,
-        semantics.evidence,
-      )
+      if (semantics.kind !== "developer-revised-stat")
+        await verifyEvidenceReferences(
+          publication,
+          `semantics:${key}`,
+          semantics.evidence,
+        )
     for (const supplement of SUPPLEMENTS)
       await verifyEvidenceReferences(
         publication,

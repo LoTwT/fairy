@@ -24,7 +24,7 @@
 
 **ZZZ-HP 是增益数据与计算语义的第一信任来源。** Nanoka 用于基础资料、身份映射和缺失信息补充。冲突应保留来源与差异记录，不因来源不同自动用 Nanoka 或本项目推断覆盖 ZZZ-HP。
 
-当前增益基线固定为 `LoTwT/ZZZ-HP` 修复分支提交 [fac62407f3d3995f8200a66be0038f292b1455fa](https://github.com/LoTwT/ZZZ-HP/commit/fac62407f3d3995f8200a66be0038f292b1455fa)，规则集 revision 为 `10`（本基线的语义修订记录见[修订 10](../data/zzz-hp-static-effects.md#修订-10蕾米埃尔自身特殊虚曜接入)）。提交与仓库由[来源加载器](../../../packages/data/scripts/static-effects/source.ts)登记，固定资源的摘要由[来源清单](../../../packages/data/scripts/static-effects/source-manifest.json)维护；修订 10 起在原 12 个执行/求值资源外登记本人耀变读取语义涉及的 5 个固定文件摘要。2026-09-26 已完成本机评审并核验该提交可从 fork 远端取得；生成过程读取其固定 Git 对象，不读取修复工作区的未提交内容，也不表示原仓库已经合入。
+当前增益基线固定为 `LoTwT/ZZZ-HP` 修复分支提交 [fac62407f3d3995f8200a66be0038f292b1455fa](https://github.com/LoTwT/ZZZ-HP/commit/fac62407f3d3995f8200a66be0038f292b1455fa)，规则集 revision 为 `11`（本基线的语义修订记录见[修订 11](../data/zzz-hp-static-effects.md#修订-11壳中之灵异常增伤来源修正)）。提交与仓库由[来源加载器](../../../packages/data/scripts/static-effects/source.ts)登记，固定资源的摘要由[来源清单](../../../packages/data/scripts/static-effects/source-manifest.json)维护；修订 10 起在原 12 个执行/求值资源外登记本人耀变读取语义涉及的 5 个固定文件摘要；修订 11 的壳中之灵修正证据是冻结的开发者修订导出，独立登记于本机 raw，不属于该固定提交。2026-09-26 已完成本机评审并核验该提交可从 fork 远端取得；生成过程读取其固定 Git 对象，不读取修复工作区的未提交内容，也不表示原仓库已经合入。
 
 相对初始 `0df40c5bc38f8da7ed0f9eed6be87fb8155b8357` 基线，原 12 个资源中只有增益 JSON、`types/calculator.ts`、`utils/buffEffect.ts` 的内容变化。已接入效果的变化与限制见[修订 2](../data/zzz-hp-static-effects.md#修订-2转化边界与核心档位)。Nanoka 补充来源随[3.2 正式基线](../data/integration.md#nanoka-32-正式版本升级验收)；属性和技能动作继续保留各自未变化的语义证据版本。
 
@@ -154,7 +154,7 @@
 
 ## 对比与验收记录
 
-批量正式制品的 [1,232 条来源对比夹具](../../../packages/core/test/effects/fixtures/zzz-hp-static-catalog.json)与[目录验收](../../../packages/core/test/effects/static-catalog-data.test.ts)保留 1,232 个来源位置，覆盖当前 1,209 条 converted，并继续执行本轮四条 corrected 的核心 7 参考；其余 19 个潜能位置按具名修正或迁移验证，不套用旧数值。全部 34 条 corrected 记录另由相应具名差异用例验证。期望值来自固定上游的规范化、上下文筛选与数值求值函数，未运行上游整应用。下述小型代表夹具继续验证转换阈值和培养边界。
+批量正式制品的 [1,275 条来源对比夹具](../../../packages/core/test/effects/fixtures/zzz-hp-static-catalog.json)与[目录验收](../../../packages/core/test/effects/static-catalog-data.test.ts)保留 1,275 个来源位置：当前 1,237 条 converted 逐条比对，5 个核心档位扩展、10 个猩红渴望元素范围修正与 4 个壳中之灵开发者修订位置按来源数值比对；其余 19 个潜能位置按具名修正或迁移验证，不套用旧数值。全部 49 条 corrected 记录另由相应具名差异用例验证。期望值来自固定上游的规范化、上下文筛选与数值求值函数，未运行上游整应用。下述小型代表夹具继续验证转换阈值和培养边界。
 
 固定版本对比夹具位于 [zzz-hp-static.json](../../../packages/core/test/effects/fixtures/zzz-hp-static.json)，记录原始效果、JSON Pointer、输入和上游输出。上游输出通过 TypeScript AST 提取未修改的 `resolveConvertValue` / `resolveEffectBaseValue`，连同原始 `roundCalc`、技能键判断依赖离线执行得到；夹具记录求值文件的 SHA-256。
 

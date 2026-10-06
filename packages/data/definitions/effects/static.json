@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "10",
+  "revision": "11",
   "effects": [
     {
       "kind": "contribution",
@@ -72997,6 +72997,123 @@
         "value": {
           "kind": "parameter",
           "unit": "anomaly-proficiency-points",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14150:zzz-hp:legacy-self-special:blk-legacy:refinement",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14150"
+        },
+        "section": "精2",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/wengines/30/refinementBuffs/1/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "zzz-hp-developer-revision",
+            "version": "2026-10-05T13:34:25.341Z",
+            "locale": "zh",
+            "resourcePath": "raw/zzz-hp/developer-revisions/zzz-hp-wengines-picked-1-2026-10-05.json",
+            "pointer": "/wengines/0/refinementBuffs/1/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/wengines/30/refinementBuffs/2/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "zzz-hp-developer-revision",
+            "version": "2026-10-05T13:34:25.341Z",
+            "locale": "zh",
+            "resourcePath": "raw/zzz-hp/developer-revisions/zzz-hp-wengines-picked-1-2026-10-05.json",
+            "pointer": "/wengines/0/refinementBuffs/2/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/wengines/30/refinementBuffs/3/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "zzz-hp-developer-revision",
+            "version": "2026-10-05T13:34:25.341Z",
+            "locale": "zh",
+            "resourcePath": "raw/zzz-hp/developer-revisions/zzz-hp-wengines-picked-1-2026-10-05.json",
+            "pointer": "/wengines/0/refinementBuffs/3/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/wengines/30/refinementBuffs/4/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "zzz-hp-developer-revision",
+            "version": "2026-10-05T13:34:25.341Z",
+            "locale": "zh",
+            "resourcePath": "raw/zzz-hp/developer-revisions/zzz-hp-wengines-picked-1-2026-10-05.json",
+            "pointer": "/wengines/0/refinementBuffs/4/effectBlocks/0/effects/2"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "ratio",
+          "values": {
+            "2": 0.115,
+            "3": 0.13,
+            "4": 0.145,
+            "5": 0.16
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "anomaly-damage-bonus",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
           "name": "amount"
         }
       }

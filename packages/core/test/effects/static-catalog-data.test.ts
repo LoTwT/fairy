@@ -6,6 +6,7 @@ import {
   parseEffectRuleSet,
 } from "../../src/effects/index.ts"
 import type {
+  ContributionRule,
   CoreSkillLevel,
   MindscapeRank,
   StaticCatalogDamageInput,
@@ -955,6 +956,13 @@ describe("fixed-source catalog conformance", () => {
       `/wengines/65/refinementBuffs/${rank}/effectBlocks/2/effects/0`,
     ]),
   )
+  /** 壳中之灵精炼 2—5 的 special→anomalyDmgBonus 开发者修订位置；数值不变，仍按来源数值比对。 */
+  const developerRevisionCorrectedPointers = new Set(
+    [1, 2, 3, 4].map(
+      (packIndex) =>
+        `/wengines/30/refinementBuffs/${packIndex}/effectBlocks/0/effects/2`,
+    ),
+  )
   it("accounts for every converted source position with an independent reference result", () => {
     expect(oracle.sourceCommit).toBe(catalog.source.commit)
     expect(oracle.cases.map((c) => c.pointer).toSorted()).toEqual(
@@ -964,7 +972,8 @@ describe("fixed-source catalog conformance", () => {
             r.status === "converted" ||
             potentialExplainedPointers.has(r.pointer) ||
             coreRankExpandedPointers.has(r.pointer) ||
-            elementScopeCorrectedPointers.has(r.pointer),
+            elementScopeCorrectedPointers.has(r.pointer) ||
+            developerRevisionCorrectedPointers.has(r.pointer),
         )
         .map((r) => r.pointer)
         .toSorted(),
@@ -1155,6 +1164,945 @@ describe("fixed-source catalog conformance", () => {
         `${mismatch.hit.element}/${mismatch.damage.kind}`,
       ).toHaveLength(0)
     }
+  })
+
+  it("registers the Angel in the Shell anomaly stat revision with stable identities", () => {
+    const differenceId = "angel-in-the-shell-anomaly-stat-revision"
+    expect(
+      catalog.differences.some((d) => d.differenceId === differenceId),
+    ).toBe(true)
+    const option = catalog.options.find(
+      (o) =>
+        o.optionId ===
+        "w-engines:Angel_In_The_Shell:refinement:blk-legacy:legacy-self-special",
+    )!
+    expect(option.name).toBe("精2 · anomalyDmgBonus")
+    expect(option.target).toBe("self")
+    expect(option.variants.map((v) => v.configuration.refinements)).toEqual([
+      [2],
+      [3],
+      [4],
+      [5],
+    ])
+    const mergedEffectId =
+      "w-engine:14150:zzz-hp:legacy-self-special:blk-legacy:refinement"
+    for (const [index, variant] of option.variants.entries()) {
+      expect(variant.status).toBe("corrected")
+      expect(variant.differences).toContain(differenceId)
+      // 旧 ID 保留且唯一；原始固定源引用与开发者修订证据同时可追溯。
+      expect(variant.effectIds).toEqual([mergedEffectId])
+      expect(variant.references[0]!.sourceId).toBe("zzz-hp")
+      expect(variant.references[0]!.pointer).toBe(
+        `/wengines/30/refinementBuffs/${index + 1}/effectBlocks/0/effects/2`,
+      )
+      expect(
+        variant.references.some(
+          (reference) =>
+            reference.sourceId === "zzz-hp-developer-revision" &&
+            reference.version === "2026-10-05T13:34:25.341Z",
+        ),
+        `refinement ${index + 2}`,
+      ).toBe(true)
+    }
+    const merged = definitions.effects.find(
+      (effect): effect is ContributionRule =>
+        effect.kind === "contribution" && effect.effectId === mergedEffectId,
+    )!
+    expect(merged.operation).toMatchObject({
+      kind: "factor-contribution",
+      channel: "anomaly-damage-bonus",
+    })
+    expect(merged.parameters["amount"]).toMatchObject({
+      kind: "by-rank",
+      rank: "refinement",
+      values: { 2: 0.115, 3: 0.13, 4: 0.145, 5: 0.16 },
+    })
+    // 跨精炼异常标记等价：修订后的条件与精炼 1 既有规则（appliesToAnomaly=true）一致。
+    const refinementOne = definitions.effects.find(
+      (effect): effect is ContributionRule =>
+        effect.kind === "contribution" &&
+        effect.effectId ===
+          "w-engine:14150:zzz-hp:legacy-self-anomalyDmgBonus:blk-legacy:refinement:1",
+    )!
+    expect(merged.when).toEqual(refinementOne.when)
+  })
+
+  it("applies the revised anomaly bonus only to anomaly-family hits", () => {
+    const specialOption =
+      "w-engines:Angel_In_The_Shell:refinement:blk-legacy:legacy-self-special"
+    const disorderOption =
+      "w-engines:Angel_In_The_Shell:refinement:blk-legacy:legacy-self-disorderDmgBonus"
+    const refinementOneOption =
+      "w-engines:Angel_In_The_Shell:refinement:blk-legacy:legacy-self-anomalyDmgBonus"
+    type Family =
+      | "anomaly"
+      | "anomaly-settlement"
+      | "vortex"
+      | "disorder"
+      | "regular"
+    // 其他乘区独立凑成 K=100：攻击 100 × 倍率 1，异常精通 100（系数 1）、
+    // 目标防御 0（等级基数 50，系数 1）、等级 1（异常等级系数 1）、抗性/易伤/
+    // 失衡/耀变倍率/异化系数全部中性，异常暴击率 0（期望 = 非暴击）。
+    const angelInput = (params: {
+      kind: Family
+      refinement: 1 | 2 | 3 | 4 | 5
+      selections: readonly string[]
+      extraAnomalyBonus?: number
+      regularDamageBonus?: number
+    }): StaticCatalogDamageInput => ({
+      definitions,
+      catalog,
+      bindings: [
+        {
+          bindingId: "binding:static",
+          kind: "w-engine",
+          holderId: "entity:attacker",
+          sourceEntityId: "14150",
+          eligible: true,
+          configuration: { refinement: params.refinement },
+        },
+      ],
+      actorSources: [{ entityId: "entity:attacker", agentEntityId: "1401" }],
+      selections: params.selections.map((optionId) => ({
+        optionId,
+        bindingId: "binding:static",
+        layers: 1,
+      })),
+      world: {
+        entities: [
+          {
+            kind: "actor",
+            entityId: "entity:attacker",
+            teamId: "team:players",
+            generalStats: {
+              attack: general(100),
+              anomalyProficiency: general(100),
+            },
+            directStats: {
+              criticalRate: { baseValue: 0, additions: [] },
+              criticalDamage: { baseValue: 0, additions: [] },
+              penetrationRatio: { baseValue: 0, additions: [] },
+            },
+          },
+          {
+            kind: "actor",
+            entityId: "entity:enemy",
+            teamId: "team:enemies",
+            generalStats: {},
+            directStats: {},
+          },
+        ],
+        states: [],
+        distances: [],
+      },
+      hit: {
+        actorId: "entity:attacker",
+        targetId: "entity:enemy",
+        actionId: "action:oracle",
+        skillCategory: "basic",
+        element: "physical",
+        damageItems: [
+          {
+            mode: "direct",
+            role: "base",
+            itemId: "anomaly",
+            stat: "attack",
+            statSource: { entityId: "entity:attacker" },
+            damageMultiplier: 1,
+          },
+        ],
+        skillTags: [],
+      },
+      damage: (params.kind === "regular"
+        ? {
+            kind: "regular",
+            damageBonus: [],
+            defense: {
+              attackerLevel: 1,
+              targetBaseDefense: 0,
+              defensePercentageAdjustments: [],
+              penetrationValues: [],
+            },
+            resistance: {
+              targetResistance: 0,
+              targetResistanceReductions: [],
+              attackerResistanceIgnoreValues: [],
+            },
+            damageTaken: {
+              targetDamageTakenIncreases: [],
+              targetDamageTakenReductions: [],
+            },
+            stunDamage: {
+              isTargetStunned: false,
+              targetBaseStunDamageMultiplier: 1,
+              targetStunDamageMultiplierAdjustments: [],
+            },
+          }
+        : {
+            kind: params.kind,
+            damageBonus: params.regularDamageBonus
+              ? [params.regularDamageBonus]
+              : { settledMultiplier: 1 },
+            anomalySource: { entityId: "entity:attacker", level: 1 },
+            defense: {
+              targetBaseDefense: 0,
+              defensePercentageAdjustments: [],
+              penetrationValues: [],
+            },
+            resistance: {
+              targetResistance: 0,
+              targetResistanceReductions: [],
+              attackerResistanceIgnoreValues: [],
+            },
+            damageTaken: {
+              targetDamageTakenIncreases: [],
+              targetDamageTakenReductions: [],
+            },
+            stunDamage: {
+              isTargetStunned: false,
+              targetBaseStunDamageMultiplier: 1,
+              targetStunDamageMultiplierAdjustments: [],
+            },
+            anomalyDamageBonus: params.extraAnomalyBonus
+              ? [params.extraAnomalyBonus]
+              : [],
+            refringe: { mode: "settled", multiplier: 1 },
+            anomalyCriticalRate: 0,
+            anomalyCriticalDamage: [],
+          }) as unknown as StaticCatalogDamageInput["damage"],
+    })
+    // 正例：普通异常、异放、乱流命中 R5 均为 100 × (1 + 0.16) = 116。
+    for (const kind of ["anomaly", "anomaly-settlement", "vortex"] as const) {
+      expect(
+        calculateCatalogResult(
+          angelInput({ kind, refinement: 5, selections: [specialOption] }),
+        ).expected,
+        kind,
+      ).toBeCloseTo(116, 10)
+    }
+    // 耀变正例：目录路径要求同时选择精通换算映射，隔离验证改走同一规则集
+    // 的低层入口（中性耀变倍率、异化系数与精通），其余乘区同上凑成 100。
+    const luminize = calculateStaticDamage({
+      definitions,
+      bindings: [
+        {
+          bindingId: "binding:static",
+          kind: "w-engine",
+          holderId: "entity:attacker",
+          sourceEntityId: "14150",
+          eligible: true,
+          configuration: { refinement: 5 },
+        },
+      ],
+      selections: [
+        {
+          effectId:
+            "w-engine:14150:zzz-hp:legacy-self-special:blk-legacy:refinement",
+          bindingId: "binding:static",
+          layers: 1,
+        },
+      ],
+      world: {
+        entities: [
+          {
+            kind: "actor",
+            entityId: "entity:attacker",
+            teamId: "team:players",
+            generalStats: {
+              attack: general(100),
+              anomalyProficiency: general(100),
+            },
+            directStats: {
+              criticalRate: { baseValue: 0, additions: [] },
+              criticalDamage: { baseValue: 0, additions: [] },
+              penetrationRatio: { baseValue: 0, additions: [] },
+            },
+          },
+          {
+            kind: "actor",
+            entityId: "entity:enemy",
+            teamId: "team:enemies",
+            generalStats: {},
+            directStats: {},
+          },
+        ],
+        states: [],
+        distances: [],
+      },
+      hit: {
+        actorId: "entity:attacker",
+        targetId: "entity:enemy",
+        actionId: "action:oracle",
+        skillCategory: "basic",
+        element: "physical",
+        damageItems: [
+          {
+            itemId: "anomaly",
+            damageMultiplier: 1,
+            stat: "attack",
+            statSource: { entityId: "entity:attacker" },
+          },
+        ],
+      },
+      damage: {
+        kind: "luminize",
+        damageBonus: { settledMultiplier: 1 },
+        luminizeMultiplier: {
+          baseLuminizeMultiplier: 1,
+          remielleAnomalyProficiency: 0,
+          anomalyProficiencyConversionRate: 0,
+          multiplicativeLuminizeMultiplierAdjustments: [],
+        },
+        defense: {
+          attackerLevel: 1,
+          targetBaseDefense: 0,
+          defensePercentageAdjustments: [],
+          penetrationValues: [],
+        },
+        resistance: {
+          targetResistance: 0,
+          targetResistanceReductions: [],
+          attackerResistanceIgnoreValues: [],
+        },
+        damageTaken: {
+          targetDamageTakenIncreases: [],
+          targetDamageTakenReductions: [],
+        },
+        stunDamage: {
+          isTargetStunned: false,
+          targetBaseStunDamageMultiplier: 1,
+          targetStunDamageMultiplierAdjustments: [],
+        },
+        anomalyDamageBonus: [],
+        refringe: { settledMultiplier: 1 },
+      },
+    })
+    expect(luminize.ok, JSON.stringify(luminize)).toBe(true)
+    if (luminize.ok) expect(luminize.value.expected).toBeCloseTo(116, 10)
+    // 逐档选值：R2—R5 分别为 111.5/113/114.5/116；未选择时保持 100。
+    for (const [index, refinement] of ([2, 3, 4, 5] as const).entries()) {
+      const expected = [111.5, 113, 114.5, 116][index]!
+      expect(
+        calculateCatalogResult(
+          angelInput({
+            kind: "anomaly",
+            refinement,
+            selections: [specialOption],
+          }),
+        ).expected,
+        `refinement ${refinement}`,
+      ).toBeCloseTo(expected, 10)
+    }
+    expect(
+      calculateCatalogResult(
+        angelInput({ kind: "anomaly", refinement: 5, selections: [] }),
+      ).expected,
+    ).toBeCloseTo(100, 10)
+    // 负例：普通直接伤害不吃异常增伤项（合法但零贡献，而非报错）。
+    const regular = calculateCatalogResult(
+      angelInput({
+        kind: "regular",
+        refinement: 5,
+        selections: [specialOption],
+      }),
+    )
+    expect(
+      regular.evaluation.contributions.filter((c) =>
+        c.origin.effectId.includes("legacy-self-special"),
+      ),
+    ).toHaveLength(0)
+    // 紊乱只吃紊乱条款：异常项不为其另乘一遍；紊乱项按档位 16% 生效一次。
+    expect(
+      calculateCatalogResult(
+        angelInput({
+          kind: "disorder",
+          refinement: 5,
+          selections: [specialOption],
+        }),
+      ).expected,
+    ).toBeCloseTo(100, 10)
+    expect(
+      calculateCatalogResult(
+        angelInput({
+          kind: "disorder",
+          refinement: 5,
+          selections: [disorderOption],
+        }),
+      ).expected,
+    ).toBeCloseTo(116, 10)
+    expect(
+      calculateCatalogResult(
+        angelInput({
+          kind: "disorder",
+          refinement: 5,
+          selections: [specialOption, disorderOption],
+        }),
+      ).expected,
+    ).toBeCloseTo(116, 10)
+    expect(
+      calculateCatalogResult(
+        angelInput({
+          kind: "anomaly",
+          refinement: 5,
+          selections: [specialOption, disorderOption],
+        }),
+      ).expected,
+    ).toBeCloseTo(116, 10)
+    // 同区加算与普通增伤区相乘分开：额外同区异常 20% → 136；
+    // 额外普通增伤区 20% → 100 × 1.16 × 1.2 = 139.2。
+    expect(
+      calculateCatalogResult(
+        angelInput({
+          kind: "anomaly",
+          refinement: 5,
+          selections: [specialOption],
+          extraAnomalyBonus: 0.2,
+        }),
+      ).expected,
+    ).toBeCloseTo(136, 10)
+    expect(
+      calculateCatalogResult(
+        angelInput({
+          kind: "anomaly",
+          refinement: 5,
+          selections: [specialOption],
+          regularDamageBonus: 0.2,
+        }),
+      ).expected,
+    ).toBeCloseTo(139.2, 10)
+    // 档位互斥：精炼 1 绑定不能选择精 2—5 修正项；精炼 1 的原始选项仍可选。
+    const mismatch = calculateStaticDamageFromCatalog(
+      angelInput({
+        kind: "anomaly",
+        refinement: 1,
+        selections: [specialOption],
+      }),
+    )
+    expect(mismatch.ok).toBe(false)
+    if (!mismatch.ok)
+      expect(
+        mismatch.issues.some((issue) => issue.code === "MISSING_RANK"),
+      ).toBe(true)
+    expect(
+      calculateCatalogResult(
+        angelInput({ kind: "anomaly", refinement: 1, selections: [] }),
+      ).expected,
+    ).toBeCloseTo(100, 10)
+    expect(
+      calculateCatalogResult(
+        angelInput({
+          kind: "anomaly",
+          refinement: 1,
+          selections: [refinementOneOption],
+        }),
+      ).expected,
+    ).toBeCloseTo(110, 10)
+  })
+
+  /** 开发者修订后的壳中之灵精炼 2—5 选项；以下分离/快照/耀变用例共用。 */
+  const revisedAngelOption =
+    "w-engines:Angel_In_The_Shell:refinement:blk-legacy:legacy-self-special"
+  /** 命中者名下该修订条款实际消费的异常增伤贡献。 */
+  const revisedAngelContributions = (
+    result: StaticDamageResult,
+    entityId: string,
+  ) =>
+    result.evaluation.contributions.filter(
+      (entry) =>
+        entry.address.kind === "factor" &&
+        entry.address.channel === "anomaly-damage-bonus" &&
+        entry.address.entityId === entityId &&
+        entry.origin.effectId.includes("legacy-self-special"),
+    )
+
+  it("keeps the revised bonus on its weapon holder and triggering hit actor", () => {
+    const zeroDirectStats = {
+      criticalRate: { baseValue: 0, additions: [] },
+      criticalDamage: { baseValue: 0, additions: [] },
+      penetrationRatio: { baseValue: 0, additions: [] },
+    }
+    // 同队两名角色：武器只作用于装备者；K=100 由 100 攻、1 倍率与中性乘区组成。
+    const world: StaticCatalogDamageInput["world"] = {
+      entities: [
+        {
+          kind: "actor",
+          entityId: "entity:holder",
+          teamId: "team:players",
+          generalStats: {
+            attack: general(100),
+            anomalyProficiency: general(100),
+          },
+          directStats: zeroDirectStats,
+        },
+        {
+          kind: "actor",
+          entityId: "entity:attacker",
+          teamId: "team:players",
+          generalStats: {
+            attack: general(100),
+            anomalyProficiency: general(100),
+          },
+          directStats: zeroDirectStats,
+        },
+        {
+          kind: "actor",
+          entityId: "entity:enemy",
+          teamId: "team:enemies",
+          generalStats: {},
+          directStats: {},
+        },
+      ],
+      states: [],
+      distances: [],
+    }
+    const input = (params: {
+      weaponHolder: `entity:${string}`
+      hitActor: `entity:${string}`
+      selection: boolean
+    }): StaticCatalogDamageInput => ({
+      definitions,
+      catalog,
+      bindings: [
+        {
+          bindingId: "binding:static",
+          kind: "w-engine",
+          holderId: params.weaponHolder,
+          sourceEntityId: "14150",
+          eligible: true,
+          configuration: { refinement: 5 },
+        },
+      ],
+      actorSources: [
+        { entityId: "entity:holder", agentEntityId: "1401" },
+        { entityId: "entity:attacker", agentEntityId: "1401" },
+      ],
+      selections: params.selection
+        ? [
+            {
+              optionId: revisedAngelOption,
+              bindingId: "binding:static",
+              layers: 1,
+            },
+          ]
+        : [],
+      world,
+      hit: {
+        actorId: params.hitActor,
+        targetId: "entity:enemy",
+        actionId: "action:oracle",
+        skillCategory: "basic",
+        element: "physical",
+        damageItems: [
+          {
+            mode: "direct",
+            role: "base",
+            itemId: "anomaly",
+            stat: "attack",
+            statSource: { entityId: params.hitActor },
+            damageMultiplier: 1,
+          },
+        ],
+        skillTags: [],
+      },
+      damage: {
+        kind: "anomaly",
+        damageBonus: { settledMultiplier: 1 },
+        anomalySource: { entityId: params.hitActor, level: 1 },
+        defense: {
+          targetBaseDefense: 0,
+          defensePercentageAdjustments: [],
+          penetrationValues: [],
+        },
+        resistance: {
+          targetResistance: 0,
+          targetResistanceReductions: [],
+          attackerResistanceIgnoreValues: [],
+        },
+        damageTaken: {
+          targetDamageTakenIncreases: [],
+          targetDamageTakenReductions: [],
+        },
+        stunDamage: {
+          isTargetStunned: false,
+          targetBaseStunDamageMultiplier: 1,
+          targetStunDamageMultiplierAdjustments: [],
+        },
+        anomalyDamageBonus: [],
+        refringe: { mode: "settled", multiplier: 1 },
+        anomalyCriticalRate: 0,
+        anomalyCriticalDamage: [],
+      } as unknown as StaticCatalogDamageInput["damage"],
+    })
+    // 正例：装备者自己命中 R5 → 100 × (1 + 0.16) = 116，条款恰好贡献一次。
+    const applied = calculateCatalogResult(
+      input({
+        weaponHolder: "entity:attacker",
+        hitActor: "entity:attacker",
+        selection: true,
+      }),
+    )
+    expect(applied.expected).toBeCloseTo(116, 10)
+    expect(
+      revisedAngelContributions(applied, "entity:attacker").map(
+        (entry) => entry.value.value,
+      ),
+    ).toEqual([0.16])
+    // 负例：装备在另一名角色身上时，命中者伤害保持 100 且不消费该条款。
+    const otherActor = calculateCatalogResult(
+      input({
+        weaponHolder: "entity:holder",
+        hitActor: "entity:attacker",
+        selection: true,
+      }),
+    )
+    expect(otherActor.expected).toBeCloseTo(100, 10)
+    expect(revisedAngelContributions(otherActor, "entity:attacker")).toEqual([])
+  })
+
+  it("keeps historical snapshot and current attribute sources isolated for the revised bonus", () => {
+    const zeroDirectStats = {
+      criticalRate: { baseValue: 0, additions: [] },
+      criticalDamage: { baseValue: 0, additions: [] },
+      penetrationRatio: { baseValue: 0, additions: [] },
+    }
+    // 命中者（武器持有者）100 攻/100 精通；异常属性来源是同队另一角色：当前 50 攻、历史快照 200 攻。
+    const world: StaticCatalogDamageInput["world"] = {
+      entities: [
+        {
+          kind: "actor",
+          entityId: "entity:attacker",
+          teamId: "team:players",
+          generalStats: {
+            attack: general(100),
+            anomalyProficiency: general(100),
+          },
+          directStats: zeroDirectStats,
+        },
+        {
+          kind: "actor",
+          entityId: "entity:source",
+          teamId: "team:players",
+          generalStats: {
+            attack: general(50),
+            anomalyProficiency: general(100),
+          },
+          directStats: zeroDirectStats,
+        },
+        {
+          kind: "actor",
+          entityId: "entity:enemy",
+          teamId: "team:enemies",
+          generalStats: {},
+          directStats: {},
+        },
+      ],
+      states: [],
+      distances: [],
+    }
+    const attributeSource = (
+      snapshot: boolean,
+    ): {
+      entityId: `entity:${string}`
+      snapshotId?: `snapshot:${string}`
+    } =>
+      snapshot
+        ? { entityId: "entity:source", snapshotId: "snapshot:source" }
+        : { entityId: "entity:source" }
+    const input = (snapshot: boolean): StaticCatalogDamageInput => ({
+      definitions,
+      catalog,
+      bindings: [
+        {
+          bindingId: "binding:static",
+          kind: "w-engine",
+          holderId: "entity:attacker",
+          sourceEntityId: "14150",
+          eligible: true,
+          configuration: { refinement: 5 },
+        },
+      ],
+      actorSources: [
+        { entityId: "entity:attacker", agentEntityId: "1401" },
+        { entityId: "entity:source", agentEntityId: "1401" },
+      ],
+      selections: [
+        {
+          optionId: revisedAngelOption,
+          bindingId: "binding:static",
+          layers: 1,
+        },
+      ],
+      world,
+      snapshots: snapshot
+        ? [
+            {
+              snapshotId: "snapshot:source",
+              atSeconds: 0,
+              world: {
+                entities: world.entities.map((entity) =>
+                  entity.kind === "actor" && entity.entityId === "entity:source"
+                    ? { ...entity, generalStats: {}, directStats: {} }
+                    : entity,
+                ),
+                states: [],
+                distances: [],
+              },
+              attributes: [
+                {
+                  entityId: "entity:source",
+                  stat: "attack",
+                  stage: "current",
+                  value: { unit: "attack-points", value: 200 },
+                },
+                {
+                  entityId: "entity:source",
+                  stat: "anomalyProficiency",
+                  stage: "current",
+                  value: { unit: "anomaly-proficiency-points", value: 100 },
+                },
+                {
+                  entityId: "entity:source",
+                  stat: "penetrationRatio",
+                  stage: "current",
+                  value: { unit: "ratio", value: 0 },
+                },
+              ],
+            },
+          ]
+        : [],
+      hit: {
+        actorId: "entity:attacker",
+        targetId: "entity:enemy",
+        actionId: "action:oracle",
+        skillCategory: "basic",
+        element: "physical",
+        damageItems: [
+          {
+            mode: "direct",
+            role: "base",
+            itemId: "anomaly",
+            stat: "attack",
+            statSource: attributeSource(snapshot),
+            damageMultiplier: 1,
+          },
+        ],
+        skillTags: [],
+      },
+      damage: {
+        kind: "anomaly",
+        damageBonus: { settledMultiplier: 1 },
+        anomalySource: { ...attributeSource(snapshot), level: 1 },
+        defense: {
+          targetBaseDefense: 0,
+          defensePercentageAdjustments: [],
+          penetrationValues: [],
+        },
+        resistance: {
+          targetResistance: 0,
+          targetResistanceReductions: [],
+          attackerResistanceIgnoreValues: [],
+        },
+        damageTaken: {
+          targetDamageTakenIncreases: [],
+          targetDamageTakenReductions: [],
+        },
+        stunDamage: {
+          isTargetStunned: false,
+          targetBaseStunDamageMultiplier: 1,
+          targetStunDamageMultiplierAdjustments: [],
+        },
+        anomalyDamageBonus: [],
+        refringe: { mode: "settled", multiplier: 1 },
+        anomalyCriticalRate: 0,
+        anomalyCriticalDamage: [],
+      } as unknown as StaticCatalogDamageInput["damage"],
+    })
+    // 对照：同一来源实体的当前读数 50 → 58；历史快照读数 200 → 232（不得回填当前值）。
+    const current = calculateCatalogResult(input(false))
+    expect(current.expected).toBeCloseTo(58, 10)
+    const historical = calculateCatalogResult(input(true))
+    expect(historical.expected).toBeCloseTo(232, 10)
+    expect(historical.expected / current.expected).toBeCloseTo(4, 12)
+    for (const result of [current, historical]) {
+      expect(
+        revisedAngelContributions(result, "entity:attacker").map(
+          (entry) => entry.value.value,
+        ),
+      ).toEqual([0.16])
+    }
+  })
+
+  it("applies the revised bonus through the catalog Luminize selection entry", () => {
+    const mappingOption =
+      "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz"
+    const input = (params: {
+      withRevisedBonus: boolean
+      withMapping: boolean
+    }): StaticCatalogDamageInput => ({
+      definitions,
+      catalog,
+      bindings: [
+        {
+          bindingId: "binding:agent",
+          kind: "agent",
+          holderId: "entity:attacker",
+          sourceEntityId: "1581",
+          eligible: true,
+          configuration: { mindscapeRank: 0, coreSkillLevel: 7 },
+        },
+        {
+          bindingId: "binding:wengine",
+          kind: "w-engine",
+          holderId: "entity:attacker",
+          sourceEntityId: "14150",
+          eligible: true,
+          configuration: { refinement: 5 },
+        },
+      ] as StaticCatalogDamageInput["bindings"],
+      actorSources: [
+        { entityId: "entity:attacker", agentEntityId: "1581" },
+        { entityId: "entity:source", agentEntityId: "1311" },
+      ],
+      selections: [
+        ...(params.withMapping
+          ? [
+              {
+                optionId: mappingOption,
+                bindingId: "binding:agent",
+                layers: 1,
+              },
+            ]
+          : []),
+        ...(params.withRevisedBonus
+          ? [
+              {
+                optionId: revisedAngelOption,
+                bindingId: "binding:wengine",
+                layers: 1,
+              },
+            ]
+          : []),
+      ] as StaticCatalogDamageInput["selections"],
+      world: {
+        entities: [
+          {
+            kind: "actor",
+            entityId: "entity:attacker",
+            teamId: "team:players",
+            generalStats: {
+              attack: general(100),
+              anomalyProficiency: general(100),
+            },
+            directStats: {
+              criticalRate: { baseValue: 0, additions: [] },
+              criticalDamage: { baseValue: 0, additions: [] },
+              penetrationRatio: { baseValue: 0, additions: [] },
+            },
+          },
+          {
+            kind: "actor",
+            entityId: "entity:source",
+            teamId: "team:players",
+            generalStats: {
+              attack: general(100),
+              anomalyProficiency: general(100),
+            },
+            directStats: {
+              criticalRate: { baseValue: 0, additions: [] },
+              criticalDamage: { baseValue: 0, additions: [] },
+              penetrationRatio: { baseValue: 0, additions: [] },
+            },
+          },
+          {
+            kind: "actor",
+            entityId: "entity:enemy",
+            teamId: "team:enemies",
+            generalStats: {},
+            directStats: {},
+          },
+        ],
+        states: [],
+        distances: [],
+      },
+      hit: {
+        actorId: "entity:attacker",
+        targetId: "entity:enemy",
+        actionId: "action:oracle",
+        skillCategory: "basic",
+        element: "physical",
+        damageItems: [
+          {
+            mode: "direct",
+            role: "base",
+            itemId: "anomaly",
+            stat: "attack",
+            statSource: { entityId: "entity:attacker" },
+            damageMultiplier: 1,
+          },
+        ],
+        skillTags: [],
+      },
+      damage: {
+        kind: "luminize",
+        damageBonus: { settledMultiplier: 1 },
+        anomalySource: { entityId: "entity:source", level: 1 },
+        luminizeMultiplier: {
+          baseLuminizeMultiplier: 1,
+          multiplicativeLuminizeMultiplierAdjustments: [],
+        },
+        defense: {
+          attackerLevel: 1,
+          targetBaseDefense: 0,
+          defensePercentageAdjustments: [],
+          penetrationValues: [],
+        },
+        resistance: {
+          targetResistance: 0,
+          targetResistanceReductions: [],
+          attackerResistanceIgnoreValues: [],
+        },
+        damageTaken: {
+          targetDamageTakenIncreases: [],
+          targetDamageTakenReductions: [],
+        },
+        stunDamage: {
+          isTargetStunned: false,
+          targetBaseStunDamageMultiplier: 1,
+          targetStunDamageMultiplierAdjustments: [],
+        },
+        anomalyDamageBonus: [],
+        refringe: { mode: "settled", multiplier: 1 },
+      } as unknown as StaticCatalogDamageInput["damage"],
+    })
+    // 正式目录入口：精通 100 经固定映射 rate 0.002 折算为耀变倍率 1.2，R5 再乘 1.16 → 139.2。
+    const withBonus = calculateCatalogResult(
+      input({ withRevisedBonus: true, withMapping: true }),
+    )
+    expect(withBonus.factors.nonCritical["luminizeMultiplier"]).toBeCloseTo(
+      1.2,
+      12,
+    )
+    expect(withBonus.expected).toBeCloseTo(139.2, 10)
+    const withoutBonus = calculateCatalogResult(
+      input({ withRevisedBonus: false, withMapping: true }),
+    )
+    expect(withoutBonus.expected).toBeCloseTo(120, 10)
+    expect(withBonus.expected / withoutBonus.expected).toBeCloseTo(1.16, 12)
+    // 目录契约：耀变要求恰好一个精通换算映射；缺映射即拒绝，合法输入已覆盖目标路径。
+    const rejected = calculateStaticDamageFromCatalog(
+      input({ withRevisedBonus: true, withMapping: false }),
+    )
+    expect(rejected.ok).toBe(false)
+    if (!rejected.ok)
+      expect(
+        rejected.issues.some(
+          (issue) =>
+            issue.code === "INVALID_INPUT" &&
+            issue.message.includes(
+              "Luminize requires exactly one applicable proficiency parameter mapping",
+            ),
+        ),
+      ).toBe(true)
   })
 
   it("rejects Claret mindscape and refinement selections outside their evidence", () => {
