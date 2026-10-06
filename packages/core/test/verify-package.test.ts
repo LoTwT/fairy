@@ -442,7 +442,7 @@ assert.equal(
     anomalyProficiencyConversionRate: 0.002,
     multiplicativeLuminizeMultiplierAdjustments: [1.12],
   }),
-  (3.2 + 400 * 0.002) * 1.12,
+  3.2 * (1 + 400 * 0.002) * 1.12,
 )
 assert.equal(BASE_DAMAGE_FACTOR_ID, "base_damage")
 assert.equal(baseDamageFactor.factorId, BASE_DAMAGE_FACTOR_ID)

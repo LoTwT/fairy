@@ -18,6 +18,9 @@ function createInput(
   }
 }
 
+/** 代表值 A 的乘算期望：基础倍率 ×(1 + 400 × 0.002)。 */
+const baseScaledByProficiency = (base: number) => base * (1 + 400 * 0.002)
+
 describe("luminizeMultiplierFactor", () => {
   it("exposes its public identity and types", () => {
     expectTypeOf<LuminizeMultiplierFactorInput>().toEqualTypeOf<{
@@ -41,16 +44,16 @@ describe("luminizeMultiplierFactor", () => {
   })
 
   it.each([
-    [createInput(), 4],
+    [createInput(), baseScaledByProficiency(3.2)],
     [
       createInput({ multiplicativeLuminizeMultiplierAdjustments: [1.12] }),
-      4.48,
+      baseScaledByProficiency(3.2) * 1.12,
     ],
     [
       createInput({
         multiplicativeLuminizeMultiplierAdjustments: [1.12, 0.25],
       }),
-      1.12,
+      baseScaledByProficiency(3.2) * 1.12 * 0.25,
     ],
     [
       createInput({
@@ -64,11 +67,72 @@ describe("luminizeMultiplierFactor", () => {
     expect(luminizeMultiplierFactor.calculate(input)).toBe(expected)
   })
 
+  it("scales the base multiplier by the proficiency conversion instead of adding it", () => {
+    // 独立算式：结果 = 基础倍率 × (1 + 当前异常精通 × 换算率) × 各独立调整，
+    // 对应固定上游 computeRadianceMultZone：
+    // max(0, radianceMult/100) × multFactorPercentToRatio(radianceMultFactor)，
+    // 其中 radianceMult 为本次招式倍率百分点、radianceMultFactor 为
+    // 100 + 异常精通 × ratioPercent。精通 630、换算率 0.002 得到 ×2.26。
+    const proficiency = 630
+    const rate = 0.002
+    const m4 = 1.12
+    /**
+     * 按固定公式独立写出的乘算期望（`max(0, radianceMult/100) × 倍率修正/100`，
+     * `radianceMult` 为招式倍率百分点、倍率修正为 `100 + 精通 × ratioPercent`）；
+     * 它不执行上游原函数，实际执行摘要核对原函数的是参考生成器与父会话探针。
+     */
+    const upstreamRadianceMultZone = (
+      actionMultiplier: number,
+      adjustments: readonly number[],
+    ) => {
+      const radianceMultPercent = actionMultiplier * 100
+      const radianceMultFactorPercent = 100 + proficiency * rate * 100
+      return (
+        Math.max(0, radianceMultPercent / 100) *
+        (radianceMultFactorPercent / 100) *
+        adjustments.reduce((product, adjustment) => product * adjustment, 1)
+      )
+    }
+    const calculate = (base: number, adjustments: readonly number[]) =>
+      luminizeMultiplierFactor.calculate(
+        createInput({
+          baseLuminizeMultiplier: base,
+          remielleAnomalyProficiency: proficiency,
+          anomalyProficiencyConversionRate: rate,
+          multiplicativeLuminizeMultiplierAdjustments: adjustments,
+        }),
+      )
+
+    for (const base of [0, 1, 1.8, 3.2])
+      expect(calculate(base, [m4]), `base ${base}`).toBe(
+        upstreamRadianceMultZone(base, [m4]),
+      )
+    // 十进制对照值，与加算口径（3.2 时为 4.9952）不同。
+    expect(calculate(0, [m4])).toBe(0)
+    expect(calculate(1, [m4])).toBeCloseTo(2.5312, 12)
+    expect(calculate(1.8, [m4])).toBeCloseTo(4.55616, 12)
+    expect(calculate(3.2, [m4])).toBeCloseTo(8.09984, 12)
+  })
+
+  it("keeps the base multiplier for zero proficiency or a zero conversion rate", () => {
+    for (const input of [
+      createInput({
+        remielleAnomalyProficiency: 0,
+        multiplicativeLuminizeMultiplierAdjustments: [1.12],
+      }),
+      createInput({
+        anomalyProficiencyConversionRate: 0,
+        multiplicativeLuminizeMultiplierAdjustments: [1.12],
+      }),
+    ])
+      expect(luminizeMultiplierFactor.calculate(input)).toBe(3.2 * 1.12)
+  })
+
   it("applies repeated adjustments in array index order", () => {
     const input = createInput({
       multiplicativeLuminizeMultiplierAdjustments: [1.12, 0.25, 1.12],
     })
-    const expected = 4 * 1.12 * 0.25 * 1.12
+    const expected = baseScaledByProficiency(3.2) * 1.12 * 0.25 * 1.12
 
     expect(luminizeMultiplierFactor.calculate(input)).toBe(expected)
   })
@@ -87,7 +151,7 @@ describe("luminizeMultiplierFactor", () => {
           multiplicativeLuminizeMultiplierAdjustments: adjustments,
         }),
       ),
-    ).toBe(4 * 1.12 * 0.25)
+    ).toBe(baseScaledByProficiency(3.2) * 1.12 * 0.25)
   })
 
   it("does not modify or freeze its input or adjustment array", () => {
@@ -235,5 +299,28 @@ describe("luminizeMultiplierFactor", () => {
         }),
       ),
     ).toThrow(RangeError)
+  })
+
+  it("rejects a proficiency conversion that overflows the multiplied base", () => {
+    // 乘法口径的边界：MAX_VALUE ×(1 + 1 × 1) 溢出；旧加算口径返回 MAX_VALUE + 1。
+    expect(() =>
+      luminizeMultiplierFactor.calculate(
+        createInput({
+          baseLuminizeMultiplier: Number.MAX_VALUE,
+          remielleAnomalyProficiency: 1,
+          anomalyProficiencyConversionRate: 1,
+        }),
+      ),
+    ).toThrow(RangeError)
+    // 恒等换算仍合法：MAX_VALUE ×(1 + 0) 保持有限。
+    expect(
+      luminizeMultiplierFactor.calculate(
+        createInput({
+          baseLuminizeMultiplier: Number.MAX_VALUE,
+          remielleAnomalyProficiency: 0,
+          anomalyProficiencyConversionRate: 0,
+        }),
+      ),
+    ).toBe(Number.MAX_VALUE)
   })
 })

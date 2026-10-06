@@ -1853,7 +1853,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "11",
+    revision: "12",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -2060,7 +2060,7 @@ export function convertSource(
       {
         differenceId: "luminize-conversion-owner",
         explanation:
-          "依照当前 core 加算精通换算：3.2 + 400 × 0.002 = 4，由 core 唯一执行；不重复作为上游倍率修正增量。",
+          "依照当前 core 乘算精通换算：本次招式倍率 × (1 + 耀变时异常精通 × 换算率)，由 core 唯一执行；固定来源把同一记录编码为 radianceMultFactor 的乘算修正（基线 100 加精通换算百分点），因此不重复作为额外倍率贡献。",
         references: coverage
           .filter((r) => r.stat === "radianceMultFactor")
           .map((r) => reference(r.pointer)),

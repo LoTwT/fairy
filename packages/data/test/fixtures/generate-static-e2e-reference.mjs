@@ -709,9 +709,10 @@ function evaluateScenario(scenario, corrected, roundedPanel) {
  * - 面板与全部增益值仍来自固定上游纯函数和原始记录；
  * - 异常基础、两个等级区、特殊倍率区、防御区使用固定 remielUtils/damageCalc
  *   的原函数（未修改的提取声明）；
- * - 耀变倍率的精通换算按已评审的 luminize-conversion-owner 具名契约执行加算
- *   （基础倍率 + 精通 × 0.002），不沿用上游把该条记录编码为倍率修正区增量的
- *   乘算口径；其余乘区按上游本人耀变链独立相乘。
+ * - 耀变倍率同样由固定上游原函数建立：本次招式倍率百分点作为 radianceMult、
+ *   默认基线 100 加精通换算记录百分点作为 radianceMultFactor，交给未修改的
+ *   computeRadianceMultZone（max(0, radianceMult/100) × 倍率修正）；
+ *   不再手写"招式倍率 + 精通 × 0.002"的加算式。
  */
 function evaluateVoidflareScenario(scenario, build, reference, action) {
   const actor = build.actor
@@ -774,8 +775,21 @@ function evaluateVoidflareScenario(scenario, build, reference, action) {
     mutationZone,
     agentLevel: 60,
   })
-  // 耀变倍率：基础招式倍率（上游耀变技能记录）+ 完整当前精通 × 0.002。
-  const luminizeMultiplier = action.multipliers[0] + fullMastery * 0.002
+  // 耀变倍率：固定上游原函数 computeRadianceMultZone。
+  // 本次招式倍率是 radianceMult（百分点）；精通换算记录
+  // （/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/1，stat radianceMultFactor、
+  // mastery/final、ratioPercent 20）产出百分点后叠加默认基线 100，
+  // 由 multFactorPercentToRatio 除以 100，即 1 + 精通 × 0.002。
+  const luminizeConversion = convert(byEffect.get("remielLuminizeConvert"), {
+    final: { mastery: fullMastery },
+  })
+  const luminizeMultiplier = upstream.computeRadianceMultZone({
+    radianceMult: action.multipliers[0] * 100,
+    radianceMultFactor: upstream.combineMultFactorPercent(
+      100,
+      luminizeConversion,
+    ),
+  })
   // 特殊倍率区：M4 +12pp，M6 strength=quarter 由 -75pp 的 25% 表达。
   const mindscapeFour = byEffect.has("remielMindscapeFour")
   const specialMultZone = upstream.computeSpecialMultZone({

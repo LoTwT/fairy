@@ -310,7 +310,7 @@ describe("static damage integrates existing core formulas", () => {
       expect(result.expected).toBeCloseTo(base * 1.48, 10)
     },
   )
-  it("maps luminize addition and multiplication and reports its lack of a critical branch", () => {
+  it("maps luminize base addition, proficiency scaling and multiplier adjustments without a critical branch", () => {
     const input = inputFor([
       factor("luminize-multiplier-addition", 0.5),
       factor("luminize-multiplier-scale", 1.3),
@@ -318,12 +318,14 @@ describe("static damage integrates existing core formulas", () => {
     const result = ok(
       calculateStaticDamage({ ...input, damage: anomalyDamage("luminize") }),
     )
+    // 基础倍率 = 2 + 0.5；精通换算按乘法口径 (1 + 100 × 0.001)；
+    // 独立调整 1.3 最后相乘：2.5 × 1.1 × 1.3 = 3.575。
     expect(result.factors.nonCritical["luminizeMultiplier"]).toBeCloseTo(
-      3.38,
+      3.575,
       12,
     )
     expect(result.nonCritical).toBeCloseTo(
-      ((2000 * 3 * 794) / 1694) * 2 * 1.02 * 3.38,
+      ((2000 * 3 * 794) / 1694) * 2 * 1.02 * 3.575,
       10,
     )
     expect(result.critical).toBeNull()

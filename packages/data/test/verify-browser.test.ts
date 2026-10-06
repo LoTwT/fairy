@@ -126,6 +126,61 @@ globalThis.fairyStatic = async () => {
   if (!result.ok) throw new Error(JSON.stringify(result.issues))
   return { rate: result.value.criticalRate, expected: result.value.expected, nonCritical: result.value.nonCritical, records: coverage.default.summary.rawEffects }
 }
+globalThis.fairyRemielVoidflarePanel = async () => {
+  const [definitions, catalog, engine] = await Promise.all([
+    import("@randomplay/data/definitions/effects/static.json"),
+    import("@randomplay/data/definitions/effects/static-catalog.json"),
+    import("@randomplay/core"),
+  ])
+  // 手填局外面板实例（匿名数值）：M6/核心 7、空羽复归之诗 R1、槽 3—6 谶羽之誓四件。
+  // 面板直接使用填写值；穿透值 18 由调用方组装。独立 Decimal 全式
+  // 3931 × 2.5 × 6.3 × 1.326 × (1.8 × (1 + 630 × 0.002) × 1.12) × 1.15
+  //   × 794/(794+921.04−18) × 1.5 × 2 = 603772.8936244984302…；
+  // 旧加算口径未乘 M4 时为 1.8 + 630 × 0.002 = 3.06，乘 M4 后为 (1.8 + 630 × 0.002) × 1.12 = 3.4272，
+  // 与本实例的乘算结果 4.55616 明确不同。
+  const request = {
+    definitions: definitions.default,
+    catalog: catalog.default,
+    bindings: [
+      { bindingId: "binding:hand-agent", kind: "agent", holderId: "entity:hand", sourceEntityId: "1581", eligible: true, configuration: { mindscapeRank: 6, coreSkillLevel: 7 } },
+      { bindingId: "binding:hand-engine", kind: "w-engine", holderId: "entity:hand", sourceEntityId: "14158", eligible: true, configuration: { refinement: 1 } },
+      { bindingId: "binding:hand-disc", kind: "drive-disc", holderId: "entity:hand", sourceEntityId: "34100", eligible: true, configuration: { setPieces: 4 } },
+    ],
+    actorSources: [{ entityId: "entity:hand", agentEntityId: "1581" }],
+    selections: [
+      ...[
+        "agents:remiel:mindscape:0:blk-legacy:eff-ms7t5hb1-fqvxkz",
+        "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz",
+        "agents:remiel:mindscape:1:blk-legacy:eff-ms7tin2y-0pja8e",
+        "agents:remiel:mindscape:2:blk-ms7tkhei-q0ipfu:eff-ms7tkhei-lhivxl",
+        "agents:remiel:mindscape:4:blk-ms7tnn2n-4zw15u:eff-ms7tnn2n-mz69ez",
+      ].map((optionId) => ({ optionId, bindingId: "binding:hand-agent", layers: 1 })),
+      { optionId: "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8fa1dg-tcuhq7", bindingId: "binding:hand-engine", layers: 1 },
+      { optionId: "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fq2lr-16g8q5", bindingId: "binding:hand-disc", layers: 1 },
+      { optionId: "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fqlbs-bv91qb", bindingId: "binding:hand-disc", layers: 1 },
+    ],
+    world: { entities: [
+      { kind: "actor", entityId: "entity:hand", teamId: "team:players", generalStats: { attack: { baseValue: 3931, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] }, anomalyProficiency: { baseValue: 484, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] } }, directStats: { criticalRate: { baseValue: 0.074, additions: [] }, criticalDamage: { baseValue: 0.5, additions: [] }, penetrationRatio: { baseValue: 0, additions: [] }, sharpCriticalDamage: { baseValue: 0, additions: [] } } },
+      { kind: "actor", entityId: "entity:hand-enemy", teamId: "team:enemies", generalStats: {}, directStats: {} },
+    ], states: [], distances: [] },
+    hit: { actorId: "entity:hand", targetId: "entity:hand-enemy", actionId: "action:agent:1581:action:0014", skillCategory: "uncategorized", element: "lumiflux", skillTags: [], skillTargetIds: ["zzz-hp:skill:remiel-basic-ms8egxov"], damageItems: [{ mode: "direct", role: "base", itemId: "special-voidflare", stat: "attack", statSource: { entityId: "entity:hand" }, damageMultiplier: 1 }] },
+    damage: {
+      kind: "luminize",
+      damageBonus: [],
+      anomalyDamageBonus: [],
+      refringe: { mode: "from-effects" },
+      anomalySource: { mechanism: "remielle-special-voidflare", entityId: "entity:hand", level: 60, strength: "full" },
+      luminizeMultiplier: { baseLuminizeMultiplier: 1.8, multiplicativeLuminizeMultiplierAdjustments: [] },
+      defense: { targetBaseDefense: 921.04, defensePercentageAdjustments: [], penetrationValues: [18] },
+      resistance: { targetResistance: 0, targetResistanceReductions: [], attackerResistanceIgnoreValues: [] },
+      damageTaken: { targetDamageTakenIncreases: [], targetDamageTakenReductions: [] },
+      stunDamage: { isTargetStunned: false, targetBaseStunDamageMultiplier: 1, targetStunDamageMultiplierAdjustments: [] },
+    },
+  }
+  const result = engine.calculateStaticDamageFromCatalog(request)
+  if (!result.ok) throw new Error(JSON.stringify(result.issues))
+  return { factors: result.value.factors.nonCritical, nonCritical: result.value.nonCritical, expected: result.value.expected, critical: result.value.critical }
+}
 globalThis.fairyStaticInputs = async () => {
   const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["Ben"], wEngines: [] }), import("@randomplay/core")])
   const agent = data.agents[0].actions
@@ -693,6 +748,43 @@ function defineScenarios(counts: {
             "definitions/attributes/agents/1121.json",
             "definitions/skills/agents/1121.json",
             "definitions/attributes/drive-disc-affixes.json",
+            "definitions/effects/static.json",
+            "definitions/effects/static-catalog.json",
+          ],
+        },
+      ],
+    },
+    {
+      name: "remiel-voidflare-panel",
+      steps: [
+        {
+          name: "initial",
+          act: async (page) => checkNameCatalogs(page),
+          sources: [],
+        },
+        {
+          name: "hand-filled-panel",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyRemielVoidflarePanel(),
+            )
+            // 乘算口径 1.8 ×(1 + 630 × 0.002)× 1.12 = 4.55616；旧加算口径为 1.8 + 630 × 0.002 后乘 1.12。
+            expect(result.factors.luminizeMultiplier).toBeCloseTo(4.55616, 12)
+            expect(result.factors.luminizeMultiplier).not.toBeCloseTo(3.4272, 6)
+            expect(result.factors.anomalyProficiency).toBeCloseTo(6.3, 12)
+            expect(result.factors.damageBonus).toBeCloseTo(2.5, 12)
+            expect(result.factors.refringe).toBeCloseTo(1.326, 12)
+            expect(result.factors.defense).toBeCloseTo(
+              794 / (794 + 921.04 - 18),
+              12,
+            )
+            expect(result.factors.resistance).toBeCloseTo(1.5, 12)
+            expect(result.factors.anomalyDamageLevel).toBeCloseTo(2, 12)
+            expect(result.nonCritical).toBeCloseTo(603772.8936244984, 6)
+            expect(result.expected).toBe(result.nonCritical)
+            expect(result.critical).toBeNull()
+          },
+          sources: [
             "definitions/effects/static.json",
             "definitions/effects/static-catalog.json",
           ],

@@ -80,7 +80,7 @@ async function inputFor(
     contractVersion: 1,
     gameVersion: "3.2",
     snapshotId:
-      "sha256:360ba2a28482b2421fd3270e6d736fc335b9bdbf0a90197e2566979d866b3e5b",
+      "sha256:fc253be688277451bbb85a5b63c7615d175e627446d0a532c78723b288be7e6e",
   })
   expect(data.catalog.source.commit).toBe(reference.provenance.commit)
   expect(data.catalog.source.repository).toBe(reference.provenance.repository)
@@ -691,9 +691,9 @@ describe("remielle special Voidflare scenarios against the independent reference
     // 父会话按固定来源数据与独立 Decimal 算式得到的验收值；此处逐项复验。
     // 精确十进制保留为字符串，比较按最近 IEEE 754 值加容差执行。
     const oracle: Record<string, string> = {
-      "remiel-voidflare": "554657.7594933146483712",
-      "remiel-voidflare-m4": "621216.690632512406175744",
-      "remiel-voidflare-m6-quarter": "155304.172658128101543936",
+      "remiel-voidflare": "830806.5163474330052198400000",
+      "remiel-voidflare-m4": "930503.298309124965846220800000",
+      "remiel-voidflare-m6-quarter": "232625.82457728124146155520000000",
     }
     for (const [id, value] of Object.entries(oracle)) {
       const result = calculate(
@@ -813,7 +813,7 @@ describe("remielle special Voidflare scenarios against the independent reference
     )
     close(
       factors.luminizeMultiplier!,
-      3.2 + 0.002 * 468,
+      3.2 * (1 + 0.002 * 468),
       "solo luminize multiplier",
     )
     close(factors.resistance!, 1.5, "zero equivalent resistance with own M1")
@@ -1212,4 +1212,260 @@ describe("generic assist entry-action complete builds", () => {
       ).toBe(false)
     },
   )
+})
+
+describe("hand-filled user panel: Remielle basic-7 direct and Voidflare", () => {
+  /**
+   * 用户截图手填的局外面板（只保留匿名数值，不含账号或昵称信息）。装备身份只用于
+   * 显式增益的适用性与件数校验；面板按用户填写值直接使用，不重新叠加装备主副词条、
+   * 音擎高级属性或二件套属性。单位恒等项（穿透率、锐暴伤害）显式写出。
+   */
+  const panel: StaticPanelValues = {
+    health: { unit: "health-points", value: 11365 },
+    attack: { unit: "attack-points", value: 3931 },
+    defense: { unit: "defense-points", value: 886 },
+    impact: { unit: "impact-points", value: 83 },
+    criticalRate: { unit: "ratio", value: 0.074 },
+    criticalDamage: { unit: "ratio", value: 0.5 },
+    anomalyMastery: { unit: "anomaly-mastery-points", value: 115 },
+    anomalyProficiency: { unit: "anomaly-proficiency-points", value: 484 },
+    penetrationRatio: { unit: "ratio", value: 0 },
+    energyRegen: { unit: "energy-per-second", value: 1.2 },
+    sharpCriticalDamage: { unit: "ratio", value: 0 },
+  }
+  // 蕾米埃尔 1581、60 级、M6、核心 7；空羽复归之诗 14158 R1；
+  // 槽 1—2 混沌爵士 31800、槽 3—6 谶羽之誓 34100。
+  // 影画 6 使基础技能最终等级可达 16；16 是已含 M3/M5 的最终等级，不再叠加。
+  const actor: StaticActorConfiguration = {
+    entityId: "entity:remiel",
+    teamId: "team:players",
+    agentEntityId: "1581",
+    coreSkillLevel: 7,
+    mindscapeRank: 6,
+    wEngine: { entityId: "14158", refinement: 1, eligible: true },
+    driveDiscs: {
+      1: {
+        setEntityId: "31800",
+        mainStat: { attribute: "health" },
+        substats: [],
+      },
+      2: {
+        setEntityId: "31800",
+        mainStat: { attribute: "attack" },
+        substats: [],
+      },
+      3: {
+        setEntityId: "34100",
+        mainStat: { attribute: "defense" },
+        substats: [],
+      },
+      4: {
+        setEntityId: "34100",
+        mainStat: { attribute: "anomalyProficiency" },
+        substats: [],
+      },
+      5: {
+        setEntityId: "34100",
+        mainStat: { attribute: "attack" },
+        substats: [],
+      },
+      6: {
+        setEntityId: "34100",
+        mainStat: { attribute: "attack" },
+        substats: [],
+      },
+    },
+    panel: {
+      mode: "out-of-combat",
+      stats: panel,
+      penetrationValue: 18,
+      damageBonuses: { lumiflux: 0 },
+    },
+  }
+  // 用户明确启用的 8 个选项；动作入口的 holder 固定为本角色，装备适用性
+  // 由 actor 的 binding 推导，不由选择项提供。
+  const selections: StaticActionCalculationInput["selections"] = [
+    "agents:remiel:mindscape:0:blk-legacy:eff-ms7t5hb1-fqvxkz",
+    "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz",
+    "agents:remiel:mindscape:1:blk-legacy:eff-ms7tin2y-0pja8e",
+    "agents:remiel:mindscape:2:blk-ms7tkhei-q0ipfu:eff-ms7tkhei-lhivxl",
+    "agents:remiel:mindscape:4:blk-ms7tnn2n-4zw15u:eff-ms7tnn2n-mz69ez",
+    "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8fa1dg-tcuhq7",
+    "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fq2lr-16g8q5",
+    "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fqlbs-bv91qb",
+  ].map((optionId) => ({
+    holderId: actor.entityId,
+    optionId,
+    layers: 1,
+  }))
+  // 单人训练场、重置后入场 15s 内首发垂虹；70 级普通杜拉罕、非失衡，
+  // 敌基础防御 921.04、流明抗性 0、失衡乘数 1。防御区只用面板穿透值 18。
+  const target: StaticActionCalculationInput["target"] = {
+    entityId: "entity:target",
+    teamId: "team:enemies",
+    baseDefense: 921.04,
+    resistances: { lumiflux: 0 },
+    isStunned: false,
+    baseStunDamageMultiplier: 1,
+  }
+  // 独立 Decimal 算式（不读取被测实现）：3931 × 4.62 × 794/(794+921.04−18)。
+  const defenseZone = 794 / (794 + 921.04 - 18)
+  const directNonCritical = Number("8497.15309008626785461745156272097298826")
+  const directCritical = Number("12745.7296351294017819261773440814594824")
+  const directExpected = Number("8811.547754419459765238297270541648988828")
+  // 独立 Decimal 全式：
+  // 3931 × 2.5 × 6.3 × 1.326 × (1.8 × (1 + 630 × 0.002) × 1.12)
+  //   × 1.15 × 794/(794+921.04−18) × 1.5 × 2
+  // = 603772.8936244984302078913873568095036062
+  // 旧加算口径未乘 M4 时为 1.8 + 630 × 0.002 = 3.06，乘 M4 后为 (1.8 + 630 × 0.002) × 1.12
+  // = 3.4272；修复后的乘算口径为 1.8 × (1 + 630 × 0.002) × 1.12 = 4.55616。
+  const voidflareExpected = Number(
+    "603772.893624498430207891387356809503606279168434450572762",
+  )
+  it("reproduces the direct basic-7 hit from the hand-filled panel", async () => {
+    const data = await loadStaticCalculationData({
+      agents: ["Remielle"],
+      wEngines: ["Ode of Resurrected Wings"],
+    })
+    const action = resolveAgentAction({
+      agent: data.agents[0]!.actions,
+      actionId: "action:agent:1581:action:0013",
+      mindscapeRank: actor.mindscapeRank,
+      levels: { basic: { mode: "effective", value: 16 } },
+    })
+    expect(action.ok, JSON.stringify(action)).toBe(true)
+    if (!action.ok || action.calculation.kind !== "damage")
+      throw new Error("Expected the direct damage action")
+    expect(
+      action.calculation.segments[0]!.damageItems[0]!.damageMultiplier,
+    ).toBe(4.62)
+    const result = calculate({
+      data,
+      actors: [actor],
+      actorId: actor.entityId,
+      action,
+      target,
+      selections,
+    })
+    close(result.panels[0]!.stats.attack!.value, 3931, "panel attack")
+    close(
+      result.panels[0]!.stats.anomalyProficiency!.value,
+      484,
+      "panel proficiency",
+    )
+    close(result.totals.nonCritical, directNonCritical, "direct non-critical")
+    close(result.totals.critical!, directCritical, "direct critical")
+    close(result.totals.expected, directExpected, "direct expected")
+    expect(result.totals.displayedNonCritical).toBeNull()
+    expect(result.totals.displayedCritical).toBeNull()
+  })
+
+  it("scales the Voidflare action multiplier by the current proficiency conversion", async () => {
+    const data = await loadStaticCalculationData({
+      agents: ["Remielle"],
+      wEngines: ["Ode of Resurrected Wings"],
+    })
+    const action = resolveAgentAction({
+      agent: data.agents[0]!.actions,
+      actionId: "action:agent:1581:action:0014",
+      mindscapeRank: actor.mindscapeRank,
+      levels: { basic: { mode: "effective", value: 16 } },
+    })
+    expect(action.ok, JSON.stringify(action)).toBe(true)
+    if (!action.ok || action.calculation.kind !== "luminize")
+      throw new Error("Expected the Luminize action")
+    expect(action.calculation.multiplier).toBe(1.8)
+    const result = calculate({
+      data,
+      actors: [actor],
+      actorId: actor.entityId,
+      action,
+      target,
+      selections,
+      luminize: {
+        hit: {
+          element: "lumiflux",
+          damageItems: [
+            {
+              mode: "direct",
+              role: "base",
+              itemId: "special-voidflare",
+              stat: "attack",
+              statSource: { entityId: actor.entityId },
+              damageMultiplier: 1,
+            },
+          ],
+        },
+        damage: {
+          kind: "luminize",
+          damageBonus: [],
+          anomalyDamageBonus: [],
+          refringe: { mode: "from-effects" },
+          anomalySource: {
+            mechanism: "remielle-special-voidflare",
+            entityId: actor.entityId,
+            level: 60,
+            strength: "full",
+          },
+          luminizeMultiplier: {
+            baseLuminizeMultiplier: action.calculation.multiplier,
+            multiplicativeLuminizeMultiplierAdjustments: [],
+          },
+          // 具名来源唯一提供防御等级：不传 attackerLevel。
+          // 面板固定穿透值 18 由调用方组装（耀变分支不自动读取面板固定穿透）；
+          // 穿透率、穿透值与耀变专属抗穿只取自身来源。
+          defense: {
+            targetBaseDefense: 921.04,
+            defensePercentageAdjustments: [],
+            penetrationValues: [18],
+          },
+          resistance: {
+            targetResistance: 0,
+            targetResistanceReductions: [],
+            attackerResistanceIgnoreValues: [],
+          },
+          damageTaken: {
+            targetDamageTakenIncreases: [],
+            targetDamageTakenReductions: [],
+          },
+          stunDamage: {
+            isTargetStunned: false,
+            targetBaseStunDamageMultiplier: 1,
+            targetStunDamageMultiplierAdjustments: [],
+          },
+        },
+      },
+    })
+    expect(result.segments).toHaveLength(1)
+    const segment = result.segments[0]!
+    expect(segment.granularity).toBe("aggregate")
+    expect(segment.damage.critical).toBeNull()
+    expect(segment.damage.criticalSemantics).toBe("no-critical-settlement")
+    const factors = segment.damage.factors.nonCritical
+    // 当前/受限精通都是 484 + 96（音擎）+ 50（四件套）= 630。
+    close(factors.baseDamage!, 3931, "restricted attack")
+    close(factors.damageBonus!, 2.5, "level-60 settled bonus")
+    close(factors.anomalyProficiency!, 6.3, "proficiency zone")
+    close(factors.refringe!, 1.326, "mutation zone")
+    close(
+      factors.luminizeMultiplier!,
+      1.8 * (1 + 630 * 0.002) * 1.12,
+      "multiplied Luminize multiplier",
+    )
+    close(factors.anomalyDamageBonus!, 1.15, "anomaly damage bonus")
+    close(factors.defense!, defenseZone, "defense zone with penetration 18")
+    close(factors.resistance!, 1.5, "M1 radiance resistance ignore")
+    close(factors.anomalyDamageLevel!, 2, "special level zone")
+    close(
+      segment.damage.nonCritical,
+      voidflareExpected,
+      "single Voidflare instance",
+    )
+    expect(segment.damage.expected).toBe(segment.damage.nonCritical)
+    // 单次样本与显示整数 603773 相符；本测试不使用显示取整函数，也不把
+    // 整招（多次虚曜结算）总数当作实测值。
+    close(result.totals.nonCritical, voidflareExpected, "aggregate total")
+    expect(result.totals.displayedNonCritical).toBeNull()
+    expect(result.totals.displayedCritical).toBeNull()
+  })
 })
