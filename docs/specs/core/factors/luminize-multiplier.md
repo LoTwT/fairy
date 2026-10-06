@@ -5,9 +5,16 @@
 分别提供长按普通攻击、强化长按普通攻击、终结技和登场支援技的招式倍率；同文件 `:1952-2036` 说明
 招式倍率还会根据蕾米埃尔异常精通的一定比例提升。
 
-[蕾米埃尔详细机制攻略](https://a.4399.cn/gl/53681368_359313.html)进一步确认异常精通换算结果与招式
-耀变倍率直接相加，影画 4 的“额外提升 `12%`”在相加后作为独立倍率相乘。Nanoka 3.1 同文件 `:2094`
-和 `:2106` 分别确认影画 4 的 `12%` 与影画 6 特殊虚曜的 `25%` 伤害比例。
+精通换算的乘算口径由固定计算链确认：固定上游（ZZZ-HP 增益基线 `fac62407`，文件摘要见
+[ZZZ-HP 静态增益数据接入](../../data/zzz-hp-static-effects.md)）的
+`computeRadianceMultZone` 计算 `max(0, radianceMult / 100) × multFactorPercentToRatio(radianceMultFactor)`，
+其中 `radianceMult` 是招式倍率百分点（`100` 为 1 倍），核心被动的精通换算记录
+（`/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/1`，`stat: radianceMultFactor`、
+`from: mastery`、`ratioPercent: 20`）叠加到默认基线 `100` 后除以 `100`，即
+`1 + 异常精通 × 0.002`。异常精通换算结果因此与招式倍率相乘，不是相加。用户实测的单次耀变伤害
+与其独立 Decimal 复算一致，不再采用把第三方攻略表述解释为加算的旧记录；影画 4 的“额外提升 `12%`”
+仍作为独立倍率相乘。Nanoka 3.1 同文件 `:2094` 和 `:2106` 分别确认影画 4 的 `12%` 与影画 6
+特殊虚曜的 `25%` 伤害比例。
 
 ## 身份与公开契约
 
@@ -40,7 +47,7 @@ export declare const luminizeMultiplierFactor: Factor<LuminizeMultiplierFactorIn
   异常精通；
 - `anomalyProficiencyConversionRate` 是蕾米埃尔当前核心技等级提供的每点异常精通换算率。游戏文本中的
   `0.2%` 以 `0.002` 传入；
-- `multiplicativeLuminizeMultiplierAdjustments` 是在基础倍率与异常精通换算结果相加后依次相乘的非负
+- `multiplicativeLuminizeMultiplierAdjustments` 是在基础倍率与异常精通换算结果相乘后依次相乘的非负
   有限倍率。影画 4 以 `1.12` 传入，影画 6 产生的四分之一特殊虚曜可额外以 `0.25` 传入；
 - 空调整数组合法，表示没有额外乘法调整。
 
@@ -50,15 +57,18 @@ export declare const luminizeMultiplierFactor: Factor<LuminizeMultiplierFactorIn
 ## 计算规则
 
 ```text
-异常精通附加耀变倍率 = remielleAnomalyProficiency × anomalyProficiencyConversionRate
-加算后耀变倍率 = baseLuminizeMultiplier + 异常精通附加耀变倍率
-耀变倍率区结果 = 加算后耀变倍率
+异常精通换算倍率 = 1 + remielleAnomalyProficiency × anomalyProficiencyConversionRate
+精通缩放后耀变倍率 = baseLuminizeMultiplier × 异常精通换算倍率
+耀变倍率区结果 = 精通缩放后耀变倍率
 for adjustment of multiplicativeLuminizeMultiplierAdjustments:
   耀变倍率区结果 = 耀变倍率区结果 × adjustment
 ```
 
 例如核心技 F 级换算率为 `0.002`、蕾米埃尔异常精通为 `400`、招式耀变倍率为 `3.2` 时，基础结果为
-`4`；影画 4 同时适用时结果为 `4 × 1.12 = 4.48`。
+`3.2 × (1 + 400 × 0.002) = 5.76`；影画 4 同时适用时结果为 `5.76 × 1.12 = 6.4512`。异常精通
+`630`、招式倍率 `1.8` 的同一算式给出 `1.8 × 2.26 = 4.068`（影画 4 为 `4.55616`）。
+在精通换算与独立调整乘积均非零时，旧加算式与乘算式仅在基础倍率为 `1` 时相同；异常精通为 `0`、
+换算率为 `0` 或独立调整乘积为 `0` 时两种口径也相同。这些相同结果不能用来区分两种口径。
 
 乘法调整按数组索引顺序依次应用，内容相同的成员不合并或去重；稀疏数组空位按 `undefined` 成员处理并
 失败。计算使用 JavaScript `number` 的 IEEE 754 语义，不重排、不取整、不钳制，也不进行固定小数位
@@ -88,15 +98,15 @@ for adjustment of multiplicativeLuminizeMultiplierAdjustments:
 
 ## 有效性与失败行为
 
-| 失败条件                                                   | 行为              |
-| ---------------------------------------------------------- | ----------------- |
-| 输入不是非数组对象或为 `null`                              | 抛出 `TypeError`  |
-| 任一标量字段不是 `number`                                  | 抛出 `TypeError`  |
-| 任一标量字段不是有限数或小于 `0`                           | 抛出 `RangeError` |
-| `multiplicativeLuminizeMultiplierAdjustments` 不是数组     | 抛出 `TypeError`  |
-| 数组成员或稀疏空位不是 `number`                            | 抛出 `TypeError`  |
-| 数组成员不是有限数或小于 `0`                               | 抛出 `RangeError` |
-| 异常精通换算、加算后倍率或依序相乘后的最终结果不是有限数值 | 抛出 `RangeError` |
+| 失败条件                                                           | 行为              |
+| ------------------------------------------------------------------ | ----------------- |
+| 输入不是非数组对象或为 `null`                                      | 抛出 `TypeError`  |
+| 任一标量字段不是 `number`                                          | 抛出 `TypeError`  |
+| 任一标量字段不是有限数或小于 `0`                                   | 抛出 `RangeError` |
+| `multiplicativeLuminizeMultiplierAdjustments` 不是数组             | 抛出 `TypeError`  |
+| 数组成员或稀疏空位不是 `number`                                    | 抛出 `TypeError`  |
+| 数组成员不是有限数或小于 `0`                                       | 抛出 `RangeError` |
+| 异常精通换算倍率、精通缩放后倍率或依序相乘后的最终结果不是有限数值 | 抛出 `RangeError` |
 
 多个失败条件同时存在时，不承诺字段校验错误的优先级。计算不得修改或冻结输入对象及数组；`defineFactor` 按
 公共契约检查最终结果是否有限。
@@ -107,5 +117,6 @@ for adjustment of multiplicativeLuminizeMultiplierAdjustments:
 类型、`Factor` 定义和本乘区独有校验，不包含技能表、角色状态、虚曜状态或最终伤害公式。
 
 `packages/core/src/index.ts` 只负责重新导出公开 API。测试保存在
-`packages/core/test/luminize-multiplier.test.ts`，必须覆盖公开身份与类型、代表值、加算后乘算顺序、空数组、
-重复调整、稀疏数组、不可变性、全部字段失败及溢出。
+`packages/core/test/luminize-multiplier.test.ts`，必须覆盖公开身份与类型、代表值、精通乘算口径
+（基础倍率 `0`/`1`/`1.8`/`3.2` 与固定上游原函数复合的对照）、乘算顺序、空数组、重复调整、稀疏数组、
+不可变性、全部字段失败及溢出（含精通换算导致的溢出）。

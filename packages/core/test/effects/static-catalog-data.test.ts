@@ -2390,7 +2390,11 @@ describe("fixed-source catalog conformance", () => {
     const result = calculateStaticDamageFromCatalog(luminous)
     expect(result.ok, JSON.stringify(result)).toBe(true)
     if (result.ok) {
-      expect(result.value.factors.nonCritical["luminizeMultiplier"]).toBe(4)
+      // 耀变倍率独立算式：3.2 ×(1 + 持有人当前精通 400 × 0.002) = 5.76；
+      // 历史快照精通 300 只进入异常精通区。
+      expect(
+        result.value.factors.nonCritical["luminizeMultiplier"],
+      ).toBeCloseTo(5.76, 12)
       expect(result.value.factors.nonCritical["anomalyProficiency"]).toBe(3)
       expect(result.value.factors.nonCritical["baseDamage"]).toBe(5000)
       expect(result.value.factors.nonCritical["refringe"]).toBe(1.38)
@@ -2442,9 +2446,11 @@ describe("fixed-source catalog conformance", () => {
     })
     expect(enhanced.ok).toBe(true)
     if (enhanced.ok)
+      // M6 两条旧锚点在普通分支按基础倍率加算 +1.8 与倍率修正 0.25 进入；
+      // 精通换算按乘法口径：基础 (3.2 + 1.8) ×(1 + 400 × 0.002)× 0.25 = 2.25。
       expect(
         enhanced.value.factors.nonCritical["luminizeMultiplier"],
-      ).toBeCloseTo((3.2 + 0.8 + 1.8) * 0.25, 10)
+      ).toBeCloseTo((3.2 + 1.8) * (1 + 400 * 0.002) * 0.25, 10)
     expect(
       calculateStaticDamageFromCatalog({ ...luminous, selections: [] }).ok,
     ).toBe(false)

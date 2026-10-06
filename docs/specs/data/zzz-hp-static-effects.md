@@ -17,7 +17,8 @@
 5 条修正对应 3 个具名差异：耀嘉音 2 影的两条来源记录合为参数修改；耀变精通只交由 core 换算一次；蕾米埃尔 6 影两条记录保留显式流明技能范围。目录 `differences` 保存解释与来源。修订 3 新增 1 个具名差异 `special-skill-level-expression`，修订 5 新增 2 个具名差异 `potential-branch-gate` 与 `potential-level-expression`，修订 6 新增 1 个具名差异 `independent-hit-contract`，修订 7 新增 2 个具名差异 `potential-partial-option-migration` 与 `potential-branch-scope` 并扩展前两者；修订 8 新增 `core-skill-level-parameters` 与 `core-enhancement-independent-increment`，修订 9 新增
 `claret-remnant-edge-self-target`、`claret-mindscape1-multiplier-encoding` 与
 `scarlet-craving-explicit-element`，并把 `core-skill-level-parameters` 的解释扩展到克拉蕾（见下）；
-修订 11 新增 `angel-in-the-shell-anomaly-stat-revision`（开发者修订导出确认的异常增伤字段修正）。
+修订 11 新增 `angel-in-the-shell-anomaly-stat-revision`（开发者修订导出确认的异常增伤字段修正）；
+修订 12 更正 `luminize-conversion-owner` 的解释为固定来源的乘算口径（见[修订 12](#修订-12耀变精通换算乘算口径修正)）。
 
 固定输入重复生成的三个制品字节一致。来源参考夹具保留 1,275 个位置：当前 1,237 条 converted 逐条比对，
 5 个核心档位扩展、10 个猩红渴望元素范围修正与 4 个壳中之灵开发者修订位置按来源数值比对，其余 19 个潜能位置按具名修正或迁移
@@ -265,6 +266,35 @@ unavailable 35 → 10，技能清单摘要随之更新；洛克茜 3 条风眼�
   合成数据验证修正映射、陈旧登记拒绝与未登记 special 记录不受影响。技能动作字节不变，技能清单仅
   更新 `staticCatalogSha256`。
 
+### 修订 12：耀变精通换算乘算口径修正
+
+规则集 revision 递增为 `12`。本轮修正耀变倍率区的精通换算口径：core 此前把核心被动记录
+（`/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/1`，`stat: radianceMultFactor`、
+`from: mastery`、`ratioPercent: 20`）折算的异常精通结果与本次招式倍率**相加**；固定上游原函数
+`computeRadianceMultZone` 实际计算的是 `max(0, radianceMult/100) × multFactorPercentToRatio(radianceMultFactor)`，
+即招式倍率乘以 `1 + 异常精通 × 0.002`。用户实测单次耀变伤害与按乘算口径的独立 Decimal 复算相符，
+此前基础倍率为 `1` 的对照不能区分新旧口径。乘算规则与两种口径的等价条件见
+[耀变倍率区](../../core/factors/luminize-multiplier.md#计算规则)，公式与调用边界不变。
+
+- **core 落点**：共同 `luminizeMultiplierFactor` 改为 `基础倍率 × (1 + 精通 × 换算率) × 各独立调整`，
+  普通来源耀变、历史虚曜、完整特殊虚曜与 M6 quarter 共用同一落点；不新增最终伤害乘数、不做垂虹
+  专用补偿、不篡改面板抵消误差。公开字段、单位、非负有限校验、稀疏/非法输入拒绝、不可变性与
+  溢出拒绝契约保持，并按乘算重新核对溢出边界（精通换算放大基础倍率导致的溢出同样拒绝）。
+- **参数所有权不变**：`luminize-conversion-owner` 具名差异继续表示该精通换算由 core 唯一执行一次；
+  目录准备层仍只把已选择的对应规则作为 `luminize-proficiency-input` 传入持有人当前精通，不把同一条
+  转换同时输出为倍率加数。差异解释与目录文本按乘算口径更正，选项与效果 ID、稳定身份与
+  holder-current 读取语义均不变。
+- **覆盖状态**：来源分母（187 实体、1,061 pack、1,290 记录）与规则/选项数（850 规则、834 选项）
+  不变，状态计数保持 1,237 converted、49 corrected、4 unsupported。三个效果制品同次生成，
+  技能 60 位动作文件字节不变，技能清单只更新 `staticCatalogSha256`（
+  `a344ce113f774c26c5395502117909b422cecb053ebb17bcfe9594a1cf7fd453`），计算快照随目录字节更新为
+  `sha256:fc253be688277451bbb85a5b63c7615d175e627446d0a532c78723b288be7e6e`。
+- **独立验收**：固定上游原函数复合对照覆盖基础倍率 `0`/`1`/`1.8`/`3.2`（精通 630、换算率 `0.002`、
+  影画 4 `1.12`：`0` / `2.5312` / `4.55616` / `8.09984`），另覆盖精通 `0`、换算率 `0`、M4 与
+  quarter 档位的乘法顺序与溢出；端到端夹具的四个特殊虚曜场景按未修改的 `computeRadianceMultZone`
+  重建（招式倍率 3.2、完整/受限精通 468 → 6.1952），并新增用户手填局外面板的完整消费回归
+  （见[端到端对照验收](../../plans/static-e2e-acceptance.md#用户手填局外面板场景追加2026-10-06)）。
+
 ## 交付目标与边界
 
 转换器覆盖代理人、音擎和驱动盘的来源盘点、身份映射、可重复转换与正式制品生成。在当前 core 公式能力范围内处理固定来源的全部可用静态效果；不能因为转换器或 effects 暂时缺少表达能力就把已有公式可以计算的效果列为暂不支持。
@@ -361,7 +391,7 @@ pack 收集通常是有实际效果的块优先，其次 effects，最后适用�
 
 来源自转化若读取会排除自身贡献的阶段值，目录将其列为显式输入，避免把输出写回同一属性后再次读取；输入单位、阶段和预设见选项 `inputs`。条件描述中的潜能、姿态、资源或触发事实由调用方通过选择明确断言。已核实的互斥梯度通过 `exclusiveGroup` 校验，不能将全部条件项默认开启。
 
-例如精通 500 产生的异化系数为 0.1，未有其他增量时最终倍率只能是 1.1；不能既转换成一条 0.1 贡献，又给 helper 传精通 500，得到 1.2。保存的倍率为 1.38 时，当前精通或 buff 变化不应改变它。耀变基础倍率 3.2、精通 400、换算率 0.002 的加算结果为 4，精通贡献只出现一次；映射与上游结果存在差异时按来源规范登记具名差异，不修改已有 core 数学规则来消除差异。
+例如精通 500 产生的异化系数为 0.1，未有其他增量时最终倍率只能是 1.1；不能既转换成一条 0.1 贡献，又给 helper 传精通 500，得到 1.2。保存的倍率为 1.38 时，当前精通或 buff 变化不应改变它。耀变基础倍率 3.2、精通 400、换算率 0.002 的乘算结果为 `3.2 × (1 + 400 × 0.002) = 5.76`，精通贡献只出现一次；映射与上游结果存在差异时按来源规范登记具名差异，修改计算规则必须同步修订号与正式制品（见[修订 12](#修订-12耀变精通换算乘算口径修正)）。
 
 目录入口为需要时间派生的基础伤害项提供明确的准备输入，而不是从一个最终 `damageMultiplier` 反推：
 

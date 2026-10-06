@@ -515,7 +515,8 @@ assert.ok(staticResult.expected > staticResult.nonCritical)
 // 完成一例具名机制分支的数值计算。期望独立于实现：
 // 局外 A=1000 + 自身转模 0.4×1000=400 → 受限 A=1400；局外精通 100 + 音擎 96
 // + 四件 50 → 受限 P=246；等级 60 → 特殊增伤 1+0.025×60=2.5、等级区
-// 1+59/59=2；三异常异化 R=1+246×0.0002+0.1=1.1492；倍率=3.2+246×0.002=3.692。
+// 1+59/59=2；三异常异化 R=1+246×0.0002+0.1=1.1492；
+// 耀变倍率按固定上游乘算口径 3.2×(1+246×0.002)=4.7744（旧加算口径为 3.692）。
 const remielVoidflareMechanism = staticCatalog.mechanisms?.find((mechanism) => mechanism.mechanism === "remielle-special-voidflare")
 assert.ok(remielVoidflareMechanism, "the packed catalog declares the special Voidflare mechanism")
 assert.equal(remielVoidflareMechanism.agentEntityId, "1581")
@@ -568,13 +569,66 @@ assert.ok(Math.abs(remielVoidflare.factors.nonCritical.baseDamage - 1400) < 1e-9
 assert.ok(Math.abs(remielVoidflare.factors.nonCritical.damageBonus - 2.5) < 1e-12)
 assert.ok(Math.abs(remielVoidflare.factors.nonCritical.anomalyProficiency - 2.46) < 1e-12)
 assert.ok(Math.abs(remielVoidflare.factors.nonCritical.refringe - 1.1492) < 1e-12)
-assert.ok(Math.abs(remielVoidflare.factors.nonCritical.luminizeMultiplier - 3.692) < 1e-12)
+assert.ok(Math.abs(remielVoidflare.factors.nonCritical.luminizeMultiplier - 4.7744) < 1e-12)
 assert.ok(Math.abs(remielVoidflare.factors.nonCritical.anomalyDamageLevel - 2) < 1e-12)
-assert.ok(Math.abs(remielVoidflare.nonCritical - 1400 * 2.5 * 2.46 * 1.1492 * 3.692 * 2) < 1e-8)
+assert.ok(Math.abs(remielVoidflare.nonCritical - 1400 * 2.5 * 2.46 * 1.1492 * 4.7744 * 2) < 1e-8)
 // 提供重复 attackerLevel（即使与等级同值）在运行时被明确拒绝。
 const duplicated = calculateStaticDamageFromCatalog({ ...voidflareInput, damage: { ...voidflareInput.damage, defense: { ...voidflareInput.damage.defense, attackerLevel: 60 } } })
 assert.equal(duplicated.ok, false)
 assert.ok(!duplicated.ok && duplicated.issues.some((issue) => issue.pointer.includes("/damage/defense/attackerLevel")))
+// 手填局外面板实例（匿名数值）：M6/核心 7、空羽复归之诗 R1、槽 3—6 谶羽之誓四件，
+// 面板由用户直接填写（不重新叠加装备属性），穿透值 18 由调用方组装。
+// 独立 Decimal 全式：3931 × 2.5 × 6.3 × 1.326 × (1.8 × (1 + 630 × 0.002) × 1.12)
+//   × 1.15 × 794/(794+921.04−18) × 1.5 × 2 = 603772.8936244984302…
+// 旧加算口径未乘 M4 时为 1.8 + 630 × 0.002 = 3.06，乘 M4 后为 (1.8 + 630 × 0.002) × 1.12 = 3.4272，
+// 与本实例的乘算结果 4.55616 明确不同。
+const handPanelInput = {
+  definitions: staticDefinitions,
+  catalog: staticCatalog,
+  bindings: [
+    { bindingId: "binding:hand-agent", kind: "agent", holderId: "entity:hand", sourceEntityId: "1581", eligible: true, configuration: { mindscapeRank: 6, coreSkillLevel: 7 } },
+    { bindingId: "binding:hand-engine", kind: "w-engine", holderId: "entity:hand", sourceEntityId: "14158", eligible: true, configuration: { refinement: 1 } },
+    { bindingId: "binding:hand-disc", kind: "drive-disc", holderId: "entity:hand", sourceEntityId: "34100", eligible: true, configuration: { setPieces: 4 } },
+  ],
+  actorSources: [{ entityId: "entity:hand", agentEntityId: "1581" }],
+  selections: [
+    ...["agents:remiel:mindscape:0:blk-legacy:eff-ms7t5hb1-fqvxkz", "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz", "agents:remiel:mindscape:1:blk-legacy:eff-ms7tin2y-0pja8e", "agents:remiel:mindscape:2:blk-ms7tkhei-q0ipfu:eff-ms7tkhei-lhivxl", "agents:remiel:mindscape:4:blk-ms7tnn2n-4zw15u:eff-ms7tnn2n-mz69ez"].map((optionId) => ({ optionId, bindingId: "binding:hand-agent", layers: 1 })),
+    { optionId: "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8fa1dg-tcuhq7", bindingId: "binding:hand-engine", layers: 1 },
+    { optionId: "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fq2lr-16g8q5", bindingId: "binding:hand-disc", layers: 1 },
+    { optionId: "drive-discs:SuitFeatheredFate:setPieces:4:blk-ms0fq2lr-qfzbac:eff-ms0fqlbs-bv91qb", bindingId: "binding:hand-disc", layers: 1 },
+  ],
+  world: { entities: [
+    { kind: "actor", entityId: "entity:hand", teamId: "team:players", generalStats: { attack: { baseValue: 3931, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] }, anomalyProficiency: { baseValue: 484, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] } }, directStats: { criticalRate: { baseValue: 0.074, additions: [] }, criticalDamage: { baseValue: 0.5, additions: [] }, penetrationRatio: { baseValue: 0, additions: [] }, sharpCriticalDamage: { baseValue: 0, additions: [] } } },
+    { kind: "actor", entityId: "entity:hand-enemy", teamId: "team:enemies", generalStats: {}, directStats: {} },
+  ], states: [], distances: [] },
+  hit: { actorId: "entity:hand", targetId: "entity:hand-enemy", actionId: "action:agent:1581:action:0014", skillCategory: "uncategorized", element: "lumiflux", skillTags: [], skillTargetIds: ["zzz-hp:skill:remiel-basic-ms8egxov"], damageItems: [{ mode: "direct", role: "base", itemId: "special-voidflare", stat: "attack", statSource: { entityId: "entity:hand" }, damageMultiplier: 1 }] },
+  damage: {
+    kind: "luminize",
+    damageBonus: [],
+    anomalyDamageBonus: [],
+    refringe: { mode: "from-effects" },
+    anomalySource: { mechanism: "remielle-special-voidflare", entityId: "entity:hand", level: 60, strength: "full" },
+    luminizeMultiplier: { baseLuminizeMultiplier: 1.8, multiplicativeLuminizeMultiplierAdjustments: [] },
+    defense: { targetBaseDefense: 921.04, defensePercentageAdjustments: [], penetrationValues: [18] },
+    resistance: { targetResistance: 0, targetResistanceReductions: [], attackerResistanceIgnoreValues: [] },
+    damageTaken: { targetDamageTakenIncreases: [], targetDamageTakenReductions: [] },
+    stunDamage: { isTargetStunned: false, targetBaseStunDamageMultiplier: 1, targetStunDamageMultiplierAdjustments: [] },
+  },
+}
+const handPanel = value(calculateStaticDamageFromCatalog(handPanelInput))
+assert.ok(Math.abs(handPanel.factors.nonCritical.baseDamage - 3931) < 1e-9)
+assert.ok(Math.abs(handPanel.factors.nonCritical.damageBonus - 2.5) < 1e-12)
+assert.ok(Math.abs(handPanel.factors.nonCritical.anomalyProficiency - 6.3) < 1e-12)
+assert.ok(Math.abs(handPanel.factors.nonCritical.refringe - 1.326) < 1e-12)
+assert.ok(Math.abs(handPanel.factors.nonCritical.luminizeMultiplier - 4.55616) < 1e-12)
+assert.ok(Math.abs(handPanel.factors.nonCritical.luminizeMultiplier - 3.4272) > 1)
+assert.ok(Math.abs(handPanel.factors.nonCritical.anomalyDamageBonus - 1.15) < 1e-12)
+assert.ok(Math.abs(handPanel.factors.nonCritical.defense - 794 / (794 + 921.04 - 18)) < 1e-12)
+assert.ok(Math.abs(handPanel.factors.nonCritical.resistance - 1.5) < 1e-12)
+assert.ok(Math.abs(handPanel.factors.nonCritical.anomalyDamageLevel - 2) < 1e-12)
+assert.ok(Math.abs(handPanel.nonCritical - 603772.8936244984302) < 1e-6)
+assert.equal(handPanel.expected, handPanel.nonCritical)
+assert.equal(handPanel.critical, null)
 const rules = value(parseEffectRuleSet(automaticDefinitions.default))
 assert.equal(rules.ruleSetId, "automatic-effects")
 assert.equal(rules.revision, "1")

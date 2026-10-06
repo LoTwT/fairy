@@ -52,9 +52,15 @@ export const luminizeMultiplierFactor: Factor<LuminizeMultiplierFactorInput> =
         "Anomaly proficiency Luminize multiplier",
       )
 
+      const proficiencyScaledMultiplier = 1 + anomalyProficiencyMultiplier
+      assertFiniteResult(
+        proficiencyScaledMultiplier,
+        "Proficiency-scaled Luminize multiplier",
+      )
+
       let luminizeMultiplier =
-        baseLuminizeMultiplier + anomalyProficiencyMultiplier
-      assertFiniteResult(luminizeMultiplier, "Additive Luminize multiplier")
+        baseLuminizeMultiplier * proficiencyScaledMultiplier
+      assertFiniteResult(luminizeMultiplier, "Multiplied Luminize multiplier")
 
       const adjustmentCount = multiplicativeLuminizeMultiplierAdjustments.length
 

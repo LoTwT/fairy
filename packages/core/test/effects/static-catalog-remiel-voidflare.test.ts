@@ -418,7 +418,8 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
   it("computes the controlled reading split between restricted and full proficiency", () => {
     // 局外 A=1000、自身转模 40%×1000=400 → 受限 A=1400；
     // 局外精通 100 + 音擎 96 + 四件 50 → 受限 P=246；
-    // R 与耀变倍率读完整当前精通：无队友时同为 246。
+    // R 与耀变倍率读完整当前精通：无队友时同为 246，
+    // 耀变倍率 = 3.2 ×(1 + 246 × 0.002) = 4.7744。
     const result = resultFor(voidflareInput({ mindscapeRank: 1 }))
     expect(result.ok, JSON.stringify(result)).toBe(true)
     if (!result.ok) return
@@ -427,13 +428,13 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
     closeTo(factors.damageBonus!, 2.5, "level-60 settled bonus")
     closeTo(factors.anomalyProficiency!, 2.46, "restricted proficiency")
     closeTo(factors.refringe!, 1.1492, "full-proficiency refringe")
-    closeTo(factors.luminizeMultiplier!, 3.692, "full-proficiency multiplier")
+    closeTo(factors.luminizeMultiplier!, 4.7744, "full-proficiency multiplier")
     closeTo(factors.anomalyDamageLevel!, 2, "untruncated level zone")
     closeTo(factors.defense!, 1, "defense")
     closeTo(factors.resistance!, 1, "resistance")
     closeTo(
       result.value.nonCritical,
-      1400 * 2.5 * 2.46 * 1.1492 * 3.692 * 2,
+      1400 * 2.5 * 2.46 * 1.1492 * 4.7744 * 2,
       "controlled value",
     )
   })
@@ -534,7 +535,7 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
 
   it("excludes the in-combat proficiency baseline while R and the multiplier keep the full current reading", () => {
     // 世界局内精通 +100：受限 P 仍 246；完整当前精通 346 继续进入
-    // R=1+346/5000+0.1 与耀变倍率 3.2+346×0.002，其余乘区恒等。
+    // R=1+346/5000+0.1 与耀变倍率 3.2×(1+346×0.002)=5.4144，其余乘区恒等。
     const result = resultFor(
       withGeneralStat(
         voidflareInput({ mindscapeRank: 1 }),
@@ -556,19 +557,19 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
     closeTo(factors.refringe!, 1.1692, "full current proficiency refringe")
     closeTo(
       factors.luminizeMultiplier!,
-      3.892,
+      5.4144,
       "full current proficiency multiplier",
     )
     closeTo(
       result.value.nonCritical,
-      1400 * 2.5 * 2.46 * 1.1692 * 3.892 * 2,
+      1400 * 2.5 * 2.46 * 1.1692 * 5.4144 * 2,
       "independent in-combat baseline value",
     )
   })
 
   it("keeps the restricted proficiency while a teammate team-mastery effect feeds only R and the multiplier", () => {
     // 队友简·乔艾 R5 团队精通 +96：受限 P 仍 246，完整 P=342 只进入
-    // R=1.1684 与耀变倍率 3.884。
+    // R=1.1684 与耀变倍率 3.2×(1+342×0.002)=5.3888。
     const result = resultFor(
       voidflareInput({
         mindscapeRank: 1,
@@ -606,10 +607,10 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
       "restricted proficiency unchanged",
     )
     closeTo(factors.refringe!, 1.1684, "full proficiency refringe")
-    closeTo(factors.luminizeMultiplier!, 3.884, "full proficiency multiplier")
+    closeTo(factors.luminizeMultiplier!, 5.3888, "full proficiency multiplier")
     closeTo(
       result.value.nonCritical,
-      1400 * 2.5 * 2.46 * 1.1684 * 3.884 * 2,
+      1400 * 2.5 * 2.46 * 1.1684 * 5.3888 * 2,
       "teammate value",
     )
   })
@@ -636,10 +637,14 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
     const factors = result.value.factors.nonCritical
     closeTo(factors.anomalyProficiency!, 2.2, "restricted proficiency 100+120")
     closeTo(factors.refringe!, 1.12, "full proficiency refringe 100")
-    closeTo(factors.luminizeMultiplier!, 3.4, "full proficiency multiplier 100")
+    closeTo(
+      factors.luminizeMultiplier!,
+      3.84,
+      "full proficiency multiplier 100",
+    )
     closeTo(
       result.value.nonCritical,
-      1400 * 2.5 * 2.2 * 1.12 * 3.4 * 2,
+      1400 * 2.5 * 2.2 * 1.12 * 3.84 * 2,
       "exempt reading value",
     )
   })
@@ -763,7 +768,7 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
     if (base.ok)
       closeTo(
         base.value.factors.nonCritical.luminizeMultiplier!,
-        3.692,
+        4.7744,
         "M4 off",
       )
 
@@ -799,7 +804,7 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
     if (m4.ok) {
       closeTo(
         m4.value.factors.nonCritical.luminizeMultiplier!,
-        3.692 * 1.12,
+        4.7744 * 1.12,
         "M4 once",
       )
       closeTo(
@@ -842,7 +847,7 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
     if (quarter.ok)
       closeTo(
         quarter.value.factors.nonCritical.luminizeMultiplier!,
-        3.692 * 1.12 * 0.25,
+        4.7744 * 1.12 * 0.25,
         "M4 plus quarter",
       )
   })
@@ -920,7 +925,7 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
     if (zeroLayers.ok)
       closeTo(
         zeroLayers.value.factors.nonCritical.luminizeMultiplier!,
-        3.692 * 0.25,
+        4.7744 * 0.25,
         "M4 layers zero",
       )
   })

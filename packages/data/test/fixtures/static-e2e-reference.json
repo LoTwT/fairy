@@ -2502,7 +2502,7 @@
           "damageBonus": 2.5,
           "anomalyProficiency": 4.68,
           "refringe": 1.1936,
-          "luminizeMultiplier": 4.136,
+          "luminizeMultiplier": 6.1952,
           "anomalyDamageBonus": 1.35,
           "defense": 0.5,
           "resistance": 1.5,
@@ -2513,35 +2513,35 @@
         },
         "hits": [
           {
-            "nonCritical": 554657.7594933145,
+            "nonCritical": 830806.5163474329,
             "critical": null,
-            "expected": 554657.7594933145
+            "expected": 830806.5163474329
           }
         ],
         "totals": {
-          "nonCritical": 554657.7594933145,
+          "nonCritical": 830806.5163474329,
           "critical": null,
-          "expected": 554657.7594933145,
+          "expected": 830806.5163474329,
           "displayedNonCritical": null,
           "displayedCritical": null
         },
-        "upstreamStyleIntegerExpected": 554658
+        "upstreamStyleIntegerExpected": 830807
       },
       "upstreamAlignedTotals": {
-        "nonCritical": 554657.7594933145,
+        "nonCritical": 830806.5163474329,
         "critical": null,
-        "expected": 554657.7594933145,
+        "expected": 830806.5163474329,
         "displayedNonCritical": null,
         "displayedCritical": null
       },
       "upstreamRoundedTotals": {
-        "nonCritical": 554657.7594933145,
+        "nonCritical": 830806.5163474329,
         "critical": null,
-        "expected": 554657.7594933145,
+        "expected": 830806.5163474329,
         "displayedNonCritical": null,
         "displayedCritical": null
       },
-      "upstreamStyleIntegerExpected": 554658
+      "upstreamStyleIntegerExpected": 830807
     },
     "remiel-voidflare-m4": {
       "reference": {
@@ -2649,7 +2649,7 @@
           "damageBonus": 2.5,
           "anomalyProficiency": 4.68,
           "refringe": 1.1936,
-          "luminizeMultiplier": 4.136,
+          "luminizeMultiplier": 6.1952,
           "anomalyDamageBonus": 1.35,
           "defense": 0.5,
           "resistance": 1.5,
@@ -2660,35 +2660,35 @@
         },
         "hits": [
           {
-            "nonCritical": 621216.6906325123,
+            "nonCritical": 930503.2983091249,
             "critical": null,
-            "expected": 621216.6906325123
+            "expected": 930503.2983091249
           }
         ],
         "totals": {
-          "nonCritical": 621216.6906325123,
+          "nonCritical": 930503.2983091249,
           "critical": null,
-          "expected": 621216.6906325123,
+          "expected": 930503.2983091249,
           "displayedNonCritical": null,
           "displayedCritical": null
         },
-        "upstreamStyleIntegerExpected": 621217
+        "upstreamStyleIntegerExpected": 930503
       },
       "upstreamAlignedTotals": {
-        "nonCritical": 621216.6906325123,
+        "nonCritical": 930503.2983091249,
         "critical": null,
-        "expected": 621216.6906325123,
+        "expected": 930503.2983091249,
         "displayedNonCritical": null,
         "displayedCritical": null
       },
       "upstreamRoundedTotals": {
-        "nonCritical": 621216.6906325123,
+        "nonCritical": 930503.2983091249,
         "critical": null,
-        "expected": 621216.6906325123,
+        "expected": 930503.2983091249,
         "displayedNonCritical": null,
         "displayedCritical": null
       },
-      "upstreamStyleIntegerExpected": 621217
+      "upstreamStyleIntegerExpected": 930503
     },
     "remiel-voidflare-m6-quarter": {
       "reference": {
@@ -2796,7 +2796,7 @@
           "damageBonus": 2.5,
           "anomalyProficiency": 4.68,
           "refringe": 1.1936,
-          "luminizeMultiplier": 4.136,
+          "luminizeMultiplier": 6.1952,
           "anomalyDamageBonus": 1.35,
           "defense": 0.5,
           "resistance": 1.5,
@@ -2807,35 +2807,35 @@
         },
         "hits": [
           {
-            "nonCritical": 155304.17265812808,
+            "nonCritical": 232625.82457728122,
             "critical": null,
-            "expected": 155304.17265812808
+            "expected": 232625.82457728122
           }
         ],
         "totals": {
-          "nonCritical": 155304.17265812808,
+          "nonCritical": 232625.82457728122,
           "critical": null,
-          "expected": 155304.17265812808,
+          "expected": 232625.82457728122,
           "displayedNonCritical": null,
           "displayedCritical": null
         },
-        "upstreamStyleIntegerExpected": 155304
+        "upstreamStyleIntegerExpected": 232626
       },
       "upstreamAlignedTotals": {
-        "nonCritical": 155304.17265812808,
+        "nonCritical": 232625.82457728122,
         "critical": null,
-        "expected": 155304.17265812808,
+        "expected": 232625.82457728122,
         "displayedNonCritical": null,
         "displayedCritical": null
       },
       "upstreamRoundedTotals": {
-        "nonCritical": 155304.17265812808,
+        "nonCritical": 232625.82457728122,
         "critical": null,
-        "expected": 155304.17265812808,
+        "expected": 232625.82457728122,
         "displayedNonCritical": null,
         "displayedCritical": null
       },
-      "upstreamStyleIntegerExpected": 155304
+      "upstreamStyleIntegerExpected": 232626
     },
     "remiel-voidflare-elements": {
       "reference": {
@@ -2936,7 +2936,7 @@
           "damageBonus": 2.5,
           "anomalyProficiency": 4.68,
           "refringe": 1.1936,
-          "luminizeMultiplier": 4.136,
+          "luminizeMultiplier": 6.1952,
           "anomalyDamageBonus": 1.35,
           "defense": 0.5,
           "resistance": 1.4,
@@ -2947,35 +2947,35 @@
         },
         "hits": [
           {
-            "nonCritical": 517680.5755270936,
+            "nonCritical": 775419.415257604,
             "critical": null,
-            "expected": 517680.5755270936
+            "expected": 775419.415257604
           }
         ],
         "totals": {
-          "nonCritical": 517680.5755270936,
+          "nonCritical": 775419.415257604,
           "critical": null,
-          "expected": 517680.5755270936,
+          "expected": 775419.415257604,
           "displayedNonCritical": null,
           "displayedCritical": null
         },
-        "upstreamStyleIntegerExpected": 517681
+        "upstreamStyleIntegerExpected": 775419
       },
       "upstreamAlignedTotals": {
-        "nonCritical": 517680.5755270936,
+        "nonCritical": 775419.415257604,
         "critical": null,
-        "expected": 517680.5755270936,
+        "expected": 775419.415257604,
         "displayedNonCritical": null,
         "displayedCritical": null
       },
       "upstreamRoundedTotals": {
-        "nonCritical": 517680.5755270936,
+        "nonCritical": 775419.415257604,
         "critical": null,
-        "expected": 517680.5755270936,
+        "expected": 775419.415257604,
         "displayedNonCritical": null,
         "displayedCritical": null
       },
-      "upstreamStyleIntegerExpected": 517681
+      "upstreamStyleIntegerExpected": 775419
     }
   }
 }
