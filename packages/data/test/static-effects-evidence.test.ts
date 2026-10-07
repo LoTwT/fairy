@@ -30,6 +30,8 @@ describe("static effects evidence path", () => {
   let verifiedPublication: string
   let temporaryDirectory: string
 
+  // 发布副本复制与逐文件验证在 CI runner 上明显慢于本机（约 29 MB）；
+  // 集成层默认 hook 超时 10s 不足以覆盖，显式给出有界预算。
   beforeAll(async () => {
     temporaryDirectory = await mkdtemp(join(tmpdir(), "fairy-static-evidence-"))
     verifiedPublication = temporaryDirectory
@@ -37,7 +39,7 @@ describe("static effects evidence path", () => {
       integratedDirectory,
       join(temporaryDirectory, "verified"),
     )
-  })
+  }, 120_000)
 
   afterAll(async () => {
     await rm(temporaryDirectory, { recursive: true, force: true })
