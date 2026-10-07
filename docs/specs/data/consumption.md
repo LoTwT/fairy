@@ -333,7 +333,8 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 ## 验收入口
 
 `pnpm --filter @randomplay/data check` 覆盖名称生成、类型、API、静态/受管理发布准备及实际打包解包、离线安装；
-它在一次运行内只准备一次 `.generated/`，随后依次执行类型检查、常规测试与打包验收。
+它由 `check:source`（`prepare:consumer` + `typecheck:prepared` + `test:prepared`，一次运行只准备一次 `.generated/`）
+与 `verify:pack` 组成。core 的 `check` 同样拆出类型检查与常规测试的 `check:source`；根 `check` 保持原有完整覆盖。
 常规测试按 `vitest.config.ts` 的 project 分层：`pnpm --filter @randomplay/data test:fast` 只运行不启动真实进程、
 真实格式化或制品构建的快速单元与 API 层，适合日常迭代；`pnpm --filter @randomplay/data test:integration` 运行事务、
 真实进程、真实格式化与发布链路；`test` 运行两层全部常规测试（含 watch/coverage）。分层只影响入口选择，
@@ -344,5 +345,15 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 
 浏览器验收需要本机 Playwright Chromium（首次运行 `pnpm --filter @randomplay/data exec playwright install chromium`）；测试使用合成 fixture，包与浏览器验收使用已跟踪的完整静态快照。
 
-CI 的 Node 24 作业安装 Chromium 并运行 `verify:browser`；普通 `check` 不要求本机浏览器。
+PR CI 以 [check.yml](../../../.github/workflows/check.yml) 为唯一权威定义：源码检查与包消费检查分到两条独立
+runner lane 并行，Node 24.11.0 与 Node 24 都运行两条 lane。source lane 先运行 `pnpm check:quality`，再运行
+`pnpm --recursive --if-present check:source`；package lane 从冷检出依次运行两个包的 `verify:pack`，其中
+Node 24 另安装 Chromium 并运行 `verify:browser`。package lane 不依赖 source lane 的 `dist/`、`.generated/`
+或其它构建产物，同一 lane 内的构建、打包与准备步骤保持串行。每个 Node 的汇总检查名为 `Node 24.11.0` 与
+`Node 24`，只在两条 lane 都成功时通过，失败、取消或跳过都不产生成功。
+本地 `pnpm check` 仍包含质量检查、类型、全部常规测试与两个包的打包验收，覆盖不缩减。
+浏览器验收继续使用独立的 `pnpm --filter @randomplay/data verify:browser`。
+main 合并不再重复整轮检查，其前提是 main 要求经 PR 合并、两项必需检查通过并启用 strict 最新 base 规则，
+且这些规则对实际合并账号生效；合并复用对应 PR 的验证结果并核对合并内容，代码或 base 变化按实际失效范围重新
+验证。
 打包验收的临时 checkout 使用独立离线安装的依赖，避免 IDE 或直接启动测试时改写工作区依赖。

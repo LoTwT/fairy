@@ -62,7 +62,8 @@
   },
   "scripts": {
     "build": "tsdown",
-    "check": "pnpm prepare:consumer && pnpm typecheck:prepared && pnpm test:prepared && pnpm verify:pack",
+    "check": "pnpm check:source && pnpm verify:pack",
+    "check:source": "pnpm prepare:consumer && pnpm typecheck:prepared && pnpm test:prepared",
     "fetch:nanoka": "node scripts/nanoka-source.ts fetch",
     "verify:nanoka:snapshot": "node scripts/verify-nanoka-snapshot.ts",
     "generate:integrated": "node --disable-warning=ExperimentalWarning scripts/current-nanoka-dataset.ts generate",
