@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "12",
+  "revision": "13",
   "effects": [
     {
       "kind": "contribution",
@@ -46452,6 +46452,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/51/mindscapeBuffs/2/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1581/details.zh.json",
+            "pointer": "/talent/2/desc"
           }
         ]
       },
@@ -46491,7 +46498,23 @@
       },
       "when": {
         "kind": "all",
-        "conditions": []
+        "conditions": [
+          {
+            "kind": "all",
+            "conditions": []
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": [
+              "anomaly",
+              "anomaly-settlement",
+              "vortex",
+              "luminize",
+              "disorder"
+            ]
+          }
+        ]
       },
       "operation": {
         "kind": "factor-contribution",

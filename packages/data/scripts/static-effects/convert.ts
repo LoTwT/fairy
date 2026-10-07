@@ -1303,6 +1303,38 @@ function compile(
           ? semantics.minimumPotential
           : undefined
   let when = whenFor(e, mapping)
+  if (semantics?.kind === "attribute-anomaly-beneficiary-scope") {
+    // 来源记录未编码块 note 与 Nanoka 同文已明确的受益职业与伤害类别：
+    // general 会放行全部伤害种类，且只有 applyProfession 非空才检查职业。
+    // 记录出现任一与登记不符的编码时拒绝生成，不静默叠加或改写。
+    if (
+      e.scope !== "general" ||
+      e.applyTarget !== "team" ||
+      (e.applyProfession ?? "").trim() !== ""
+    )
+      throw new Error(
+        `Source field already encodes the beneficiary scope at ${record.pointer}: scope=${e.scope}, applyTarget=${e.applyTarget}, applyProfession=${String(e.applyProfession)}`,
+      )
+    when = {
+      kind: "all",
+      conditions: [when, oneOf("hit.damageKind", [...semantics.damageKinds])],
+    }
+    variant = {
+      ...variant,
+      status: "corrected",
+      applicability: {
+        ...variant.applicability,
+        beneficiaryProfession: semantics.profession,
+      },
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
   if (semantics?.kind === "explicit-element-scope") {
     // 上游 elementFilter=all 未编码正式文本的元素限制：补显式元素条件。
     when = {
@@ -1853,7 +1885,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "12",
+    revision: "13",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -2100,6 +2132,20 @@ export function convertSource(
         references: coverage
           .filter((r) => r.catalogEntityId === "w-engines:Scarlet-Craving")
           .map((r) => reference(r.pointer)),
+      },
+      {
+        differenceId: "remielle-mindscape2-attribute-anomaly-scope",
+        explanation:
+          "蕾米埃尔影画 2 的“队伍中[异常]角色对[幻色]效果下的敌人造成属性异常伤害时，无视目标15%的防御力”（块 note 与 Nanoka 天赋 2 同文）在固定来源 fac62407 中被记为 scope general、applyProfession null、appliesToAnomaly true：effectMatchesContext 对 general 直接放行全部伤害种类，职业门槛只在 applyProfession 非空时执行，因此显式选中后普通直伤以及未受限职业都会受益。Fairy 按已核对文本补充受益职业[异常]与异常类伤害种类，状态记为 corrected；来源原始 scope/applyTarget/appliesToAnomaly 与数值 15% 保留在覆盖报告。身份映射沿用固定来源调用链：hit.actorId 对应本次结算的异常类触发者（triggerAgentId，减防读取与职业门槛对象），damage.anomalySource（可带 snapshotId）对应异常强度提供者（anomalyPowerAgentId），二者都不是增益提供者，也不互为职业证据。伤害种类采用固定计算链的异常类范围（useTriggerBase 覆盖属性异常、异放、紊乱、乱流与耀变；攻略 3.4.1 亦说明紊乱应被视为一种属性异常效果），因此含 disorder，且与 anomalyDmgBonus/anomalyCritRate 等增伤或暴击通道各自独立，不共用适用集合；普通直伤（regular/sheer/sharpen）仍排除。该范围是沿用固定计算链的静态约定，不是游戏实测结论。[幻色]与消失后 8 秒仍由调用方显式选择表示条件有效，不模拟触发、计时或生命周期。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes(
+                "remielle-mindscape2-attribute-anomaly-scope",
+              ),
+            )
+            .flatMap((variant) => variant.references),
+        ),
       },
       {
         differenceId: "angel-in-the-shell-anomaly-stat-revision",

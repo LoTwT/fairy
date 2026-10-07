@@ -181,6 +181,65 @@ globalThis.fairyRemielVoidflarePanel = async () => {
   if (!result.ok) throw new Error(JSON.stringify(result.issues))
   return { factors: result.value.factors.nonCritical, nonCritical: result.value.nonCritical, expected: result.value.expected, critical: result.value.critical }
 }
+globalThis.fairyRemielMindscape2Scope = async () => {
+  const [definitions, catalog, engine] = await Promise.all([
+    import("@randomplay/data/definitions/effects/static.json"),
+    import("@randomplay/data/definitions/effects/static-catalog.json"),
+    import("@randomplay/core"),
+  ])
+  // 蕾米埃尔影画 2 忽防范围修正（revision 13）：同一选项只在[异常]职业的
+  // 属性异常伤害命中贡献一次 15% 忽防；普通直伤与未选中都不贡献。
+  const m2Option = "agents:remiel:mindscape:2:blk-ms7tkhei-q0ipfu:eff-ms7tlurw-vhelyf"
+  const input = (kind, selected) => ({
+    definitions: definitions.default,
+    catalog: catalog.default,
+    bindings: [
+      { bindingId: "binding:m2-agent", kind: "agent", holderId: "entity:m2", sourceEntityId: "1581", eligible: true, configuration: { mindscapeRank: 2, coreSkillLevel: 7 } },
+      { bindingId: "binding:m2-source", kind: "agent", holderId: "entity:m2-source", sourceEntityId: "1261", eligible: true, configuration: { mindscapeRank: 0, coreSkillLevel: 7 } },
+    ],
+    actorSources: [
+      { entityId: "entity:m2", agentEntityId: "1581" },
+      { entityId: "entity:m2-source", agentEntityId: "1261" },
+    ],
+    selections: selected ? [{ optionId: m2Option, bindingId: "binding:m2-agent", layers: 1 }] : [],
+    world: { entities: [
+      { kind: "actor", entityId: "entity:m2", teamId: "team:players", generalStats: { attack: { baseValue: 1000, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] }, anomalyProficiency: { baseValue: 100, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] } }, directStats: { criticalRate: { baseValue: 0, additions: [] }, criticalDamage: { baseValue: 0, additions: [] }, penetrationRatio: { baseValue: 0, additions: [] }, sharpCriticalDamage: { baseValue: 0, additions: [] } } },
+      { kind: "actor", entityId: "entity:m2-source", teamId: "team:players", generalStats: { anomalyProficiency: { baseValue: 100, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] } }, directStats: { penetrationRatio: { baseValue: 0, additions: [] } } },
+      { kind: "actor", entityId: "entity:enemy", teamId: "team:enemies", generalStats: {}, directStats: {} },
+    ], states: [], distances: [] },
+    hit: { actorId: "entity:m2", targetId: "entity:enemy", actionId: "action:oracle", skillCategory: "basic", element: "physical", skillTags: [], damageItems: [{ mode: "direct", role: "base", itemId: "base", stat: "attack", statSource: { entityId: "entity:m2" }, damageMultiplier: 5 }] },
+    damage: kind === "regular" ? {
+      kind: "regular",
+      damageBonus: [],
+      defense: { attackerLevel: 60, targetBaseDefense: 1000, defensePercentageAdjustments: [], penetrationValues: [] },
+      resistance: { targetResistance: 0, targetResistanceReductions: [], attackerResistanceIgnoreValues: [] },
+      damageTaken: { targetDamageTakenIncreases: [], targetDamageTakenReductions: [] },
+      stunDamage: { isTargetStunned: false, targetBaseStunDamageMultiplier: 1, targetStunDamageMultiplierAdjustments: [] },
+    } : {
+      kind: "anomaly",
+      damageBonus: { settledMultiplier: 1 },
+      anomalySource: { entityId: "entity:m2-source", level: 60 },
+      defense: { targetBaseDefense: 1000, defensePercentageAdjustments: [], penetrationValues: [] },
+      resistance: { targetResistance: 0, targetResistanceReductions: [], attackerResistanceIgnoreValues: [] },
+      damageTaken: { targetDamageTakenIncreases: [], targetDamageTakenReductions: [] },
+      stunDamage: { isTargetStunned: false, targetBaseStunDamageMultiplier: 1, targetStunDamageMultiplierAdjustments: [] },
+      anomalyDamageBonus: [],
+      refringe: { mode: "settled", multiplier: 1 },
+      anomalyCriticalRate: 0,
+      anomalyCriticalDamage: [],
+    },
+  })
+  const run = (kind, selected) => {
+    const result = engine.calculateStaticDamageFromCatalog(input(kind, selected))
+    if (!result.ok) throw new Error(JSON.stringify(result.issues))
+    return {
+      count: result.value.evaluation.contributions.filter((entry) => entry.address.kind === "factor" && entry.address.channel === "target-defense-adjustment").length,
+      defense: result.value.factors.nonCritical.defense,
+    }
+  }
+  return { anomaly: run("anomaly", true), direct: run("regular", true), off: run("anomaly", false) }
+}
+
 globalThis.fairyStaticInputs = async () => {
   const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["Ben"], wEngines: [] }), import("@randomplay/core")])
   const agent = data.agents[0].actions
@@ -783,6 +842,20 @@ function defineScenarios(counts: {
             expect(result.nonCritical).toBeCloseTo(603772.8936244984, 6)
             expect(result.expected).toBe(result.nonCritical)
             expect(result.critical).toBeNull()
+            // 影画 2 忽防范围修正：同一选项只在[异常]职业的属性异常伤害命中
+            // 贡献一次 15% 忽防；普通直伤与未选中都不贡献。
+            // 独立算式：防御区 = 794 / (794 + 1000 × (1 − 0.15)) 与 794 / (794 + 1000)。
+            const scope = await page.evaluate(() =>
+              (globalThis as any).fairyRemielMindscape2Scope(),
+            )
+            expect(scope.anomaly.count).toBe(1)
+            expect(scope.anomaly.defense).toBeCloseTo(
+              794 / (794 + 1000 * 0.85),
+              12,
+            )
+            expect(scope.direct.count).toBe(0)
+            expect(scope.direct.defense).toBeCloseTo(794 / (794 + 1000), 12)
+            expect(scope.off.count).toBe(0)
           },
           sources: [
             "definitions/effects/static.json",

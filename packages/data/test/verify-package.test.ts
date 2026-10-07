@@ -629,6 +629,58 @@ assert.ok(Math.abs(handPanel.factors.nonCritical.anomalyDamageLevel - 2) < 1e-12
 assert.ok(Math.abs(handPanel.nonCritical - 603772.8936244984302) < 1e-6)
 assert.equal(handPanel.expected, handPanel.nonCritical)
 assert.equal(handPanel.critical, null)
+
+// 蕾米埃尔影画 2 忽防范围修正（revision 13）：同一选项只在[异常]职业的属性异常
+// 伤害命中贡献一次 15% 忽防；普通直伤与未选中都不贡献。
+const m2Option = "agents:remiel:mindscape:2:blk-ms7tkhei-q0ipfu:eff-ms7tlurw-vhelyf"
+const m2Input = (kind, selected) => ({
+  definitions: staticDefinitions,
+  catalog: staticCatalog,
+  bindings: [
+    { bindingId: "binding:m2-agent", kind: "agent", holderId: "entity:m2", sourceEntityId: "1581", eligible: true, configuration: { mindscapeRank: 2, coreSkillLevel: 7 } },
+    { bindingId: "binding:m2-source", kind: "agent", holderId: "entity:m2-source", sourceEntityId: "1261", eligible: true, configuration: { mindscapeRank: 0, coreSkillLevel: 7 } },
+  ],
+  actorSources: [
+    { entityId: "entity:m2", agentEntityId: "1581" },
+    { entityId: "entity:m2-source", agentEntityId: "1261" },
+  ],
+  selections: selected ? [{ optionId: m2Option, bindingId: "binding:m2-agent", layers: 1 }] : [],
+  world: { entities: [
+    { kind: "actor", entityId: "entity:m2", teamId: "team:players", generalStats: { attack: { baseValue: 1000, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] }, anomalyProficiency: { baseValue: 100, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] } }, directStats: { criticalRate: { baseValue: 0, additions: [] }, criticalDamage: { baseValue: 0, additions: [] }, penetrationRatio: { baseValue: 0, additions: [] }, sharpCriticalDamage: { baseValue: 0, additions: [] } } },
+    { kind: "actor", entityId: "entity:m2-source", teamId: "team:players", generalStats: { anomalyProficiency: { baseValue: 100, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] } }, directStats: { penetrationRatio: { baseValue: 0, additions: [] } } },
+    { kind: "actor", entityId: "entity:enemy", teamId: "team:enemies", generalStats: {}, directStats: {} },
+  ], states: [], distances: [] },
+  hit: { actorId: "entity:m2", targetId: "entity:enemy", actionId: "action:oracle", skillCategory: "basic", element: "physical", skillTags: [], damageItems: [{ mode: "direct", role: "base", itemId: "base", stat: "attack", statSource: { entityId: "entity:m2" }, damageMultiplier: 5 }] },
+  damage: kind === "regular" ? {
+    kind: "regular",
+    damageBonus: [],
+    defense: { attackerLevel: 60, targetBaseDefense: 1000, defensePercentageAdjustments: [], penetrationValues: [] },
+    resistance: { targetResistance: 0, targetResistanceReductions: [], attackerResistanceIgnoreValues: [] },
+    damageTaken: { targetDamageTakenIncreases: [], targetDamageTakenReductions: [] },
+    stunDamage: { isTargetStunned: false, targetBaseStunDamageMultiplier: 1, targetStunDamageMultiplierAdjustments: [] },
+  } : {
+    kind: "anomaly",
+    damageBonus: { settledMultiplier: 1 },
+    anomalySource: { entityId: "entity:m2-source", level: 60 },
+    defense: { targetBaseDefense: 1000, defensePercentageAdjustments: [], penetrationValues: [] },
+    resistance: { targetResistance: 0, targetResistanceReductions: [], attackerResistanceIgnoreValues: [] },
+    damageTaken: { targetDamageTakenIncreases: [], targetDamageTakenReductions: [] },
+    stunDamage: { isTargetStunned: false, targetBaseStunDamageMultiplier: 1, targetStunDamageMultiplierAdjustments: [] },
+    anomalyDamageBonus: [],
+    refringe: { mode: "settled", multiplier: 1 },
+    anomalyCriticalRate: 0,
+    anomalyCriticalDamage: [],
+  },
+})
+const m2AdjustmentCount = (result) => result.evaluation.contributions.filter((entry) => entry.address.kind === "factor" && entry.address.channel === "target-defense-adjustment").length
+const m2Anomaly = value(calculateStaticDamageFromCatalog(m2Input("anomaly", true)))
+assert.equal(m2AdjustmentCount(m2Anomaly), 1)
+assert.ok(Math.abs(m2Anomaly.factors.nonCritical.defense - 794 / (794 + 1000 * 0.85)) < 1e-12)
+const m2Direct = value(calculateStaticDamageFromCatalog(m2Input("regular", true)))
+assert.equal(m2AdjustmentCount(m2Direct), 0)
+assert.ok(Math.abs(m2Direct.factors.nonCritical.defense - 794 / (794 + 1000)) < 1e-12)
+const m2Off = value(calculateStaticDamageFromCatalog(m2Input("anomaly", false)))
+assert.equal(m2AdjustmentCount(m2Off), 0)
 const rules = value(parseEffectRuleSet(automaticDefinitions.default))
 assert.equal(rules.ruleSetId, "automatic-effects")
 assert.equal(rules.revision, "1")
