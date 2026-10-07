@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "12",
+  "revision": "13",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -16551,7 +16551,7 @@
           "configuration": {
             "minimumMindscape": 2
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -16559,6 +16559,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/51/mindscapeBuffs/2/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1581/details.zh.json",
+              "pointer": "/talent/2/desc"
             }
           ],
           "effectIds": [
@@ -16566,8 +16573,10 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
-          "applicability": {}
+          "differences": ["remielle-mindscape2-attribute-anomaly-scope"],
+          "applicability": {
+            "beneficiaryProfession": "异常"
+          }
         }
       ]
     },
@@ -46503,6 +46512,26 @@
           "locale": "zh",
           "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
           "pointer": "/wengines/65/refinementBuffs/4/effectBlocks/2/effects/0"
+        }
+      ]
+    },
+    {
+      "differenceId": "remielle-mindscape2-attribute-anomaly-scope",
+      "explanation": "蕾米埃尔影画 2 的“队伍中[异常]角色对[幻色]效果下的敌人造成属性异常伤害时，无视目标15%的防御力”（块 note 与 Nanoka 天赋 2 同文）在固定来源 fac62407 中被记为 scope general、applyProfession null、appliesToAnomaly true：effectMatchesContext 对 general 直接放行全部伤害种类，职业门槛只在 applyProfession 非空时执行，因此显式选中后普通直伤以及未受限职业都会受益。Fairy 按已核对文本补充受益职业[异常]与异常类伤害种类，状态记为 corrected；来源原始 scope/applyTarget/appliesToAnomaly 与数值 15% 保留在覆盖报告。身份映射沿用固定来源调用链：hit.actorId 对应本次结算的异常类触发者（triggerAgentId，减防读取与职业门槛对象），damage.anomalySource（可带 snapshotId）对应异常强度提供者（anomalyPowerAgentId），二者都不是增益提供者，也不互为职业证据。伤害种类采用固定计算链的异常类范围（useTriggerBase 覆盖属性异常、异放、紊乱、乱流与耀变；攻略 3.4.1 亦说明紊乱应被视为一种属性异常效果），因此含 disorder，且与 anomalyDmgBonus/anomalyCritRate 等增伤或暴击通道各自独立，不共用适用集合；普通直伤（regular/sheer/sharpen）仍排除。该范围是沿用固定计算链的静态约定，不是游戏实测结论。[幻色]与消失后 8 秒仍由调用方显式选择表示条件有效，不模拟触发、计时或生命周期。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/51/mindscapeBuffs/2/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1581/details.zh.json",
+          "pointer": "/talent/2/desc"
         }
       ]
     },

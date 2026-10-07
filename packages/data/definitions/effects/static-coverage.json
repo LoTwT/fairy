@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "12",
+  "revision": "13",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -15731,7 +15731,7 @@
       "effectIds": [
         "agent:1581:zzz-hp:eff-ms7tlurw-vhelyf:blk-ms7tkhei-q0ipfu:mindscape:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 15,
       "normalizedValue": 15
@@ -30274,8 +30274,8 @@
     "rawEffects": 1290,
     "rules": 850,
     "options": 834,
-    "converted": 1237,
-    "corrected": 49,
+    "converted": 1236,
+    "corrected": 50,
     "unsupported": 4,
     "supplements": {
       "records": 10,

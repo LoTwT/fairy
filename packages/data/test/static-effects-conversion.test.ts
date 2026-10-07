@@ -156,7 +156,7 @@ describe("static data conversion", () => {
       ],
     }
     const result = convertSource(source, functions, [], [])
-    expect(result.definitions.revision).toBe("12")
+    expect(result.definitions.revision).toBe("13")
     for (const option of result.catalog.options) {
       const variant = option.variants[0]!
       const sameBlock = option.optionId.endsWith("unverified-same-block")
@@ -449,7 +449,7 @@ const angelData = (): SourceData => ({
 describe("developer stat revision", () => {
   it("maps the four registered records through the anomaly bonus channel", () => {
     const result = convertSource(angelData(), functions, [], [])
-    expect(result.definitions.revision).toBe("12")
+    expect(result.definitions.revision).toBe("13")
     const option = result.catalog.options.find(
       (o) =>
         o.optionId ===
@@ -694,5 +694,112 @@ describe("developer stat revision", () => {
         "mutation should be rejected",
       ).toThrow(/Developer revision|未登记差异|登记差异未逐字出现|exactly one/)
     }
+  })
+})
+
+/** 合成蕾米埃尔影画 2 块：仅含被修正的忽防记录。 */
+const remielData = (): SourceData => ({
+  agents: [
+    {
+      id: "remiel",
+      name: "蕾米埃尔",
+      profession: "异常",
+      mindscapeBuffs: Array.from({ length: 7 }, (_, rank) =>
+        rank === 2
+          ? {
+              effectBlocks: [
+                {
+                  id: "blk-ms7tkhei-q0ipfu",
+                  name: "影画2",
+                  note: "队伍中[异常]角色对[幻色]效果下的敌人造成属性异常伤害时，无视目标15%的防御力。",
+                  effects: [
+                    {
+                      id: "eff-ms7tlurw-vhelyf",
+                      scope: "general",
+                      applyTarget: "team",
+                      applySituation: "global",
+                      elementFilter: "all",
+                      kind: "fixed",
+                      stat: "reduceDefense",
+                      value: 15,
+                      appliesToAnomaly: true,
+                    },
+                  ],
+                },
+              ],
+            }
+          : {},
+      ),
+    },
+  ],
+  driveDiscs: [],
+  skillSubcategories: [],
+  followUpSkillRules: [],
+  wengines: [],
+})
+
+describe("remielle mindscape 2 attribute anomaly scope revision", () => {
+  it("adds the [异常] profession and attribute anomaly damage scope from the reviewed text", () => {
+    const result = convertSource(remielData(), functions, [], [])
+    expect(result.definitions.revision).toBe("13")
+    const option = result.catalog.options.find((o) =>
+      o.optionId.includes("eff-ms7tlurw-vhelyf"),
+    )!
+    const variant = option.variants[0]!
+    expect(variant.status).toBe("corrected")
+    expect(variant.differences).toEqual([
+      "remielle-mindscape2-attribute-anomaly-scope",
+    ])
+    expect(variant.applicability).toEqual({ beneficiaryProfession: "异常" })
+    const rule = result.definitions.effects.find(
+      (entry): entry is ContributionRule =>
+        entry.kind === "contribution" &&
+        entry.effectId.includes("eff-ms7tlurw-vhelyf"),
+    )!
+    expect(rule.when).toMatchObject({
+      kind: "all",
+      conditions: [
+        { kind: "all", conditions: [] },
+        {
+          kind: "one-of",
+          fact: "hit.damageKind",
+          values: [
+            "anomaly",
+            "anomaly-settlement",
+            "vortex",
+            "luminize",
+            "disorder",
+          ],
+        },
+      ],
+    })
+    const coverage = result.coverage.records.find((record) =>
+      record.pointer.endsWith("/effects/0"),
+    )!
+    expect(coverage.status).toBe("corrected")
+    expect(result.coverage.summary).toMatchObject({
+      converted: 0,
+      corrected: 1,
+      unsupported: 0,
+    })
+    expect(
+      result.catalog.differences.some(
+        (d) => d.differenceId === "remielle-mindscape2-attribute-anomaly-scope",
+      ),
+    ).toBe(true)
+  })
+  it("rejects a source that already encodes the profession or narrows the target", () => {
+    const encoded = remielData()
+    encoded.agents[0]!.mindscapeBuffs![2]!.effectBlocks![0]!.effects[0]!.applyProfession =
+      "异常"
+    expect(() => convertSource(encoded, functions, [], [])).toThrow(
+      /already encodes the beneficiary scope/,
+    )
+    const narrowed = remielData()
+    narrowed.agents[0]!.mindscapeBuffs![2]!.effectBlocks![0]!.effects[0]!.applyTarget =
+      "self"
+    expect(() => convertSource(narrowed, functions, [], [])).toThrow(
+      /already encodes the beneficiary scope/,
+    )
   })
 })

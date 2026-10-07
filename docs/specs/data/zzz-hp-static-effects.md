@@ -4,7 +4,7 @@
 
 ## 实际覆盖与使用限制
 
-[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 850 条规则与 834 个选择项。1,237 条 converted、49 条 corrected；4 条 unsupported 全部是已迁移的重复部分记录（semantic-conflict）。壳中之灵（14150）精炼 2—5 的 4 条上游 `special` 乘区记录已按开发者修订接入异常增伤乘区（见[修订 11](#修订-11壳中之灵异常增伤来源修正)）；原始位置缺少培养档位证据的 41 个位置已全部闭合。另有 10 条经核实的 Nanoka 补充来源记录（9 条已整合、1 条越界登记）。记录数包含各档精炼的来源位置，不等于独立机制数量。
+[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 850 条规则与 834 个选择项。1,236 条 converted、50 条 corrected；4 条 unsupported 全部是已迁移的重复部分记录（semantic-conflict）。壳中之灵（14150）精炼 2—5 的 4 条上游 `special` 乘区记录已按开发者修订接入异常增伤乘区（见[修订 11](#修订-11壳中之灵异常增伤来源修正)）；蕾米埃尔影画 2 的忽防记录按块 note 与 Nanoka 同文补充受益职业与属性异常伤害范围（见[修订 13](#修订-13蕾米埃尔影画-2-忽防范围修正)）；原始位置缺少培养档位证据的 41 个位置已全部闭合。另有 10 条经核实的 Nanoka 补充来源记录（9 条已整合、1 条越界登记）。记录数包含各档精炼的来源位置，不等于独立机制数量。
 
 核心档位仅开放 [rank-evidence.json](../../../packages/data/scripts/static-effects/rank-evidence.json)确认的键；缺档的同一角色其他选项仍可使用。两条反向缺项和空记录另列在报告中。目录入口对普通异常来源仍拒绝把蕾米埃尔作为 `anomalySource`；她本人特殊[虚曜]对应的耀变自修订 10 起按具名机制 `remielle-special-voidflare` 接入（见下文），她提供给其他来源异常的已映射增益继续正常计算。
 
@@ -18,12 +18,14 @@
 `claret-remnant-edge-self-target`、`claret-mindscape1-multiplier-encoding` 与
 `scarlet-craving-explicit-element`，并把 `core-skill-level-parameters` 的解释扩展到克拉蕾（见下）；
 修订 11 新增 `angel-in-the-shell-anomaly-stat-revision`（开发者修订导出确认的异常增伤字段修正）；
-修订 12 更正 `luminize-conversion-owner` 的解释为固定来源的乘算口径（见[修订 12](#修订-12耀变精通换算乘算口径修正)）。
+修订 12 更正 `luminize-conversion-owner` 的解释为固定来源的乘算口径（见[修订 12](#修订-12耀变精通换算乘算口径修正)）；
+修订 13 新增 `remielle-mindscape2-attribute-anomaly-scope`（蕾米埃尔影画 2 忽防的受益职业与伤害范围修正）。
 
-固定输入重复生成的三个制品字节一致。来源参考夹具保留 1,275 个位置：当前 1,237 条 converted 逐条比对，
-5 个核心档位扩展、10 个猩红渴望元素范围修正与 4 个壳中之灵开发者修订位置按来源数值比对，其余 19 个潜能位置按具名修正或迁移
-验证；corrected 的扩展行为另验，配合最终伤害、培养边界、历史属性、多来源、多个时间派生伤害项与
-打包消费测试。它验证原始上游函数，不表示完成 ZZZ-HP 整应用差分或游戏实测。
+固定输入重复生成的三个制品字节一致。来源参考夹具保留 1,275 个位置：当前 1,236 条 converted 逐条比对，
+5 个核心档位扩展、10 个猩红渴望元素范围修正与 4 个壳中之灵开发者修订位置按来源数值比对，其余 20 个位置
+（19 个潜能位置与蕾米埃尔影画 2 忽防位置）按具名修正或迁移验证；corrected 的扩展行为另验，配合最终伤害、
+培养边界、历史属性、多来源、多个时间派生伤害项与打包消费测试。它验证原始上游函数，不表示完成 ZZZ-HP
+整应用差分或游戏实测。
 
 ### 修订 2：转化边界与核心档位
 
@@ -294,6 +296,52 @@ unavailable 35 → 10，技能清单摘要随之更新；洛克茜 3 条风眼�
   quarter 档位的乘法顺序与溢出；端到端夹具的四个特殊虚曜场景按未修改的 `computeRadianceMultZone`
   重建（招式倍率 3.2、完整/受限精通 468 → 6.1952），并新增用户手填局外面板的完整消费回归
   （见[端到端对照验收](../../plans/static-e2e-acceptance.md#用户手填局外面板场景追加2026-10-06)）。
+
+### 修订 13：蕾米埃尔影画 2 忽防范围修正
+
+规则集 revision 递增为 `13`。本轮修正蕾米埃尔（1581）影画 2 的 15% 忽防记录
+（`/agents/51/mindscapeBuffs/2/effectBlocks/0/effects/1`，`stat: reduceDefense`、`value 15`、
+`optionId agents:remiel:mindscape:2:blk-ms7tkhei-q0ipfu:eff-ms7tlurw-vhelyf`）的受益范围。
+
+- **根因**：块 note 与 Nanoka `agents/1581/details.zh.json` 的 `/talent/2/desc` 同文限定
+  “队伍中[异常]角色对[幻色]效果下的敌人造成属性异常伤害时，无视目标15%的防御力”，而上游记录为
+  `scope: general`、`applyProfession: null`、`applySituation: global`、`appliesToAnomaly: true`。
+  固定 `effectMatchesContext` 对 `general` 直接放行全部伤害种类，职业门槛只在 `applyProfession`
+  非空时执行，`appliesToAnomaly: true` 只表示允许异常、并不只限于异常；因此显式选中后普通直伤与
+  未受限职业都会受益。
+- **修正**：按已核对文本补充受益职业[异常]（`applicability.beneficiaryProfession`）与异常类伤害种类
+  条件（`hit.damageKind` 限定普通异常、异放、乱流、耀变与紊乱），状态记为 corrected，具名差异
+  `remielle-mindscape2-attribute-anomaly-scope`；来源原始 `scope`/`applyTarget`/`appliesToAnomaly`、
+  数值与固定源 Pointer 保留在覆盖报告。[幻色]与消失后 8 秒仍由调用方显式选择表示条件有效，不模拟
+  触发、计时或生命周期。
+- **身份映射与读取对象**（按固定来源真实调用链核对）：`resolvedHit.ts` 的 `ResolvedHit` 以
+  `ownerAgentId` 表示流程归属（注释明确“异常类只用于伤害归属，减防/无视取 triggerAgentId”）、
+  `anomalyPowerAgentId` 表示异常强度提供者、`triggerAgentId` 表示异常类触发者；
+  `optimalAffixAlloc.ts`（约 998—1036）由 `hit.triggerAgentId` 取得触发者最终面板
+  `anomalyTriggerPanel`，元素取强度提供者；`damageCalc.ts`（约 557—580、623—659）的 `useTriggerBase`
+  覆盖属性异常/异放/紊乱/乱流/耀变，防御区从 `anomalyTriggerPanel` 读取 `ignoreDefense`/`reduceDefense`，
+  穿透率与穿透值取强度提供者面板 `anomalyBasePanel`（= `triggerFinalPanel`）。Fairy 对应：
+  `hit.actorId` = 本次结算的异常类触发者（职业门槛与减防读取对象），`damage.anomalySource`（可带
+  `snapshotId`）= 强度提供者；两者都不是增益提供者，也不互为职业证据。
+- **伤害种类边界**：采用固定计算链的异常类范围——`damageCalc.ts` 的 `useTriggerBase` 同时覆盖属性异常、
+  异放、紊乱、乱流与耀变（`skillNeedsDualAgents` 对 `mapEventKindToCalc` 的 `damageKind === 'anomaly'`
+  全类成立），攻略 3.4.1 亦说明“[紊乱]应被视为一种属性异常效果”。因此本条把 disorder 与普通异常、
+  异放、乱流、耀变一并纳入，**不套用** `anomalyDmgBonus`/`anomalyCritRate` 等增伤或暴击通道的适用拆分
+  （那是各自乘区的映射，各自独立登记），也不以文本未列明[紊乱]自造排除；普通直伤
+  （regular/sheer/sharpen）仍排除。该范围是沿用固定计算链的静态约定，不是游戏实测结论；若取得针对
+  本条忽防的相反证据，应先登记来源再调整。
+- **覆盖状态**：该位置 converted → corrected（1,237/49 → 1,236/50）；规则与选项数（850 规则、
+  834 选项）、来源分母与全部稳定 ID（optionId / effectId / Pointer）不变。三个效果制品同次生成，
+  技能 60 位动作文件字节不变，技能清单只更新 `staticCatalogSha256`（
+  `46b5a983fc775d9ba61d5932ed88ec81b77f7fa448968e9ce889daa6075cd11b`），计算快照随目录字节更新为
+  `sha256:19f624e1171ca5a39bbabcb4b8b04aa95d05ce94c1c0603b0641770e29dd6b1d`。
+- **独立验收**：目录数据回归覆盖同一选项开/关、M1 拒绝/M2 起合法、直伤（普通/贯穿/锐化）负例、
+  非异常职业（克拉蕾 1611）负例、触发者与强度提供者身份分离（异常职业触发者 + 非异常职业来源及其
+  反向）、真实历史 snapshot（历史强度按保存来源读取，本次目标防御与忽防按本次结算，开关该选项只
+  改变防御项且贡献恰一次）与特殊虚曜分支的一次 15% 忽防贡献；高层 `calculateStaticActionDamage`
+  以#197 手填面板同一输入追加 M2 选中/未选中回归，并与显式基线 `-0.1` 同选时按现有防御公式加算一次
+  （总调整 `-0.25`），期望均来自独立算式。data 侧合成转换覆盖新语义登记、陈旧来源（已编码职业或
+  改变目标）拒绝与覆盖计数。固定来源的忽防数值与显示口径不变。
 
 ## 交付目标与边界
 

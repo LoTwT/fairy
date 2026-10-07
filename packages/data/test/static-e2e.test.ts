@@ -80,7 +80,7 @@ async function inputFor(
     contractVersion: 1,
     gameVersion: "3.2",
     snapshotId:
-      "sha256:fc253be688277451bbb85a5b63c7615d175e627446d0a532c78723b288be7e6e",
+      "sha256:19f624e1171ca5a39bbabcb4b8b04aa95d05ce94c1c0603b0641770e29dd6b1d",
   })
   expect(data.catalog.source.commit).toBe(reference.provenance.commit)
   expect(data.catalog.source.repository).toBe(reference.provenance.repository)
@@ -1214,6 +1214,17 @@ describe("generic assist entry-action complete builds", () => {
   )
 })
 
+const voidflareAtDefenseZone = (adjustedDefense: number) =>
+  3931 *
+  2.5 *
+  6.3 *
+  1.326 *
+  (1.8 * (1 + 630 * 0.002) * 1.12) *
+  1.15 *
+  adjustedDefense *
+  1.5 *
+  2
+
 describe("hand-filled user panel: Remielle basic-7 direct and Voidflare", () => {
   /**
    * 用户截图手填的局外面板（只保留匿名数值，不含账号或昵称信息）。装备身份只用于
@@ -1467,5 +1478,165 @@ describe("hand-filled user panel: Remielle basic-7 direct and Voidflare", () => 
     close(result.totals.nonCritical, voidflareExpected, "aggregate total")
     expect(result.totals.displayedNonCritical).toBeNull()
     expect(result.totals.displayedCritical).toBeNull()
+  })
+
+  it("applies the mindscape 2 ignore-defense to the Voidflare settlement only when selected", async () => {
+    const data = await loadStaticCalculationData({
+      agents: ["Remielle"],
+      wEngines: ["Ode of Resurrected Wings"],
+    })
+    const action = resolveAgentAction({
+      agent: data.agents[0]!.actions,
+      actionId: "action:agent:1581:action:0014",
+      mindscapeRank: actor.mindscapeRank,
+      levels: { basic: { mode: "effective", value: 16 } },
+    })
+    expect(action.ok, JSON.stringify(action)).toBe(true)
+    if (!action.ok || action.calculation.kind !== "luminize")
+      throw new Error("Expected the Luminize action")
+    const actionMultiplier = action.calculation.multiplier
+    const ignoreDefenseOption =
+      "agents:remiel:mindscape:2:blk-ms7tkhei-q0ipfu:eff-ms7tlurw-vhelyf"
+    // 独立 Decimal 全式（同 #197 手填面板，防御区按目标防御与本次调整组装）：
+    // 3931 × 2.5 × 6.3 × 1.326 × (1.8 × (1 + 630 × 0.002) × 1.12) × 1.15
+    //   × 794/(794 + 921.04 × (1 + Σ调整) − 18) × 1.5 × 2
+    const run = (params: {
+      withIgnoreDefense: boolean
+      defensePercentageAdjustments: number[]
+    }) => {
+      const result = calculate({
+        data,
+        actors: [actor],
+        actorId: actor.entityId,
+        action,
+        target,
+        selections: [
+          ...selections,
+          ...(params.withIgnoreDefense
+            ? [
+                {
+                  holderId: actor.entityId,
+                  optionId: ignoreDefenseOption,
+                  layers: 1,
+                },
+              ]
+            : []),
+        ],
+        luminize: {
+          hit: {
+            element: "lumiflux",
+            damageItems: [
+              {
+                mode: "direct",
+                role: "base",
+                itemId: "special-voidflare",
+                stat: "attack",
+                statSource: { entityId: actor.entityId },
+                damageMultiplier: 1,
+              },
+            ],
+          },
+          damage: {
+            kind: "luminize",
+            damageBonus: [],
+            anomalyDamageBonus: [],
+            refringe: { mode: "from-effects" },
+            anomalySource: {
+              mechanism: "remielle-special-voidflare",
+              entityId: actor.entityId,
+              level: 60,
+              strength: "full",
+            },
+            luminizeMultiplier: {
+              baseLuminizeMultiplier: actionMultiplier,
+              multiplicativeLuminizeMultiplierAdjustments: [],
+            },
+            defense: {
+              targetBaseDefense: 921.04,
+              defensePercentageAdjustments: params.defensePercentageAdjustments,
+              penetrationValues: [18],
+            },
+            resistance: {
+              targetResistance: 0,
+              targetResistanceReductions: [],
+              attackerResistanceIgnoreValues: [],
+            },
+            damageTaken: {
+              targetDamageTakenIncreases: [],
+              targetDamageTakenReductions: [],
+            },
+            stunDamage: {
+              isTargetStunned: false,
+              targetBaseStunDamageMultiplier: 1,
+              targetStunDamageMultiplierAdjustments: [],
+            },
+          },
+        },
+      })
+      const segment = result.segments[0]!
+      return {
+        factors: segment.damage.factors.nonCritical,
+        contributions: segment.damage.evaluation.contributions.filter(
+          (entry) =>
+            entry.address.kind === "factor" &&
+            entry.address.channel === "target-defense-adjustment",
+        ),
+        nonCritical: segment.damage.nonCritical,
+      }
+    }
+    // 未选中：保持 #197 单次耀变期望 603772.8936244984…，没有任何忽防贡献。
+    const closed = run({
+      withIgnoreDefense: false,
+      defensePercentageAdjustments: [],
+    })
+    expect(closed.contributions).toHaveLength(0)
+    close(
+      closed.factors.defense!,
+      794 / (794 + 921.04 - 18),
+      "defense zone without the option",
+    )
+    close(
+      closed.nonCritical,
+      voidflareAtDefenseZone(794 / (794 + 921.04 - 18)),
+      "Voidflare without the option",
+    )
+    close(
+      closed.nonCritical,
+      Number("603772.8936244984302078913873568095036062"),
+      "unchanged #197 expectation",
+    )
+    // 选中：只贡献一次 15% 忽防，防御区按现有防御公式重算。
+    const opened = run({
+      withIgnoreDefense: true,
+      defensePercentageAdjustments: [],
+    })
+    expect(opened.contributions).toHaveLength(1)
+    close(opened.contributions[0]!.value.value, -0.15, "ignore-defense once")
+    close(
+      opened.factors.defense!,
+      794 / (794 + 921.04 * 0.85 - 18),
+      "defense zone with the option",
+    )
+    close(
+      opened.nonCritical,
+      voidflareAtDefenseZone(794 / (794 + 921.04 * 0.85 - 18)),
+      "Voidflare with the option",
+    )
+    // 与显式基线 −0.1 同选：两项按同一乘区加算为 −0.25，不重复计入。
+    const stacked = run({
+      withIgnoreDefense: true,
+      defensePercentageAdjustments: [-0.1],
+    })
+    expect(stacked.contributions).toHaveLength(1)
+    close(
+      stacked.factors.defense!,
+      794 / (794 + 921.04 * 0.75 - 18),
+      "defense zone with the stacked baseline",
+    )
+    close(
+      stacked.nonCritical,
+      voidflareAtDefenseZone(794 / (794 + 921.04 * 0.75 - 18)),
+      "Voidflare with the stacked baseline",
+    )
   })
 })

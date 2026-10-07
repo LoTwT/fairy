@@ -439,6 +439,76 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
     )
   })
 
+  it("applies the mindscape 2 attribute-anomaly ignore-defense only when explicitly selected", () => {
+    const optionId =
+      "agents:remiel:mindscape:2:blk-ms7tkhei-q0ipfu:eff-ms7tlurw-vhelyf"
+    const baseSelections = [
+      ...corePassiveOptions.map((id) => ({
+        optionId: id,
+        bindingId: REMIEL_BINDING,
+        layers: 1,
+      })),
+      { optionId: convertOption, bindingId: REMIEL_BINDING, layers: 1 },
+      {
+        optionId: engineMasteryOption,
+        bindingId: REMIEL_ENGINE_BINDING,
+        layers: 1,
+      },
+      {
+        optionId: fourPieceMasteryOption,
+        bindingId: REMIEL_DISC_BINDING,
+        layers: 1,
+      },
+    ]
+    const withOption = voidflareInput({
+      mindscapeRank: 2,
+      targetBaseDefense: 1000,
+      selections: [
+        ...baseSelections,
+        { optionId, bindingId: REMIEL_BINDING, layers: 1 },
+      ],
+    })
+    const withoutOption = voidflareInput({
+      mindscapeRank: 2,
+      targetBaseDefense: 1000,
+      selections: baseSelections,
+    })
+    // 独立算式：防御区 = 794 / (794 + 1000 × (1 − 0.15)) 与 794 / (794 + 1000)。
+    const adjustedDefense = 794 / (794 + 1000 * (1 - 0.15))
+    const unadjustedDefense = 794 / (794 + 1000)
+    const opened = resultFor(withOption)
+    expect(opened.ok, JSON.stringify(opened)).toBe(true)
+    if (!opened.ok) return
+    const contributions = opened.value.evaluation.contributions.filter(
+      (entry) =>
+        entry.address.kind === "factor" &&
+        entry.address.channel === "target-defense-adjustment",
+    )
+    // 显式选中只贡献一次 15% 忽防；选择条件（幻色及消失后 8 秒）由调用方断言。
+    expect(contributions).toHaveLength(1)
+    closeTo(contributions[0]!.value.value, -0.15, "ignore-defense contribution")
+    closeTo(
+      opened.value.factors.nonCritical.defense!,
+      adjustedDefense,
+      "adjusted defense zone",
+    )
+    const closed = resultFor(withoutOption)
+    expect(closed.ok, JSON.stringify(closed)).toBe(true)
+    if (!closed.ok) return
+    expect(
+      closed.value.evaluation.contributions.filter(
+        (entry) =>
+          entry.address.kind === "factor" &&
+          entry.address.channel === "target-defense-adjustment",
+      ),
+    ).toHaveLength(0)
+    closeTo(
+      closed.value.factors.nonCritical.defense!,
+      unadjustedDefense,
+      "defense zone without the option",
+    )
+  })
+
   it("excludes the world's in-combat final baseline from the restricted attack reading", () => {
     // 固定来源口径：受限攻击只读局外攻击 + 指定自身转模；世界里的普通局内
     // final 调整（ComponentStatInput 的 finalPercentage/finalFixed）不进入。

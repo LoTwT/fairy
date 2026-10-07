@@ -1,5 +1,6 @@
 import type {
   DamageElement,
+  DamageKind,
   SkillCategory,
   SpecialSkillLevel,
   Unit,
@@ -221,6 +222,30 @@ export type SourceSemantics =
     }
   | {
       /**
+       * 上游记录未编码块 note 与 Nanoka 同文已明确的受益职业和伤害类别
+       * （如蕾米埃尔影画 2 的"队伍中[异常]角色……造成属性异常伤害时，
+       * 无视目标15%的防御力"记为 scope general、applyProfession null、
+       * appliesToAnomaly true）：general 直接放行全部伤害种类且只有
+       * applyProfession 非空才检查职业，直伤与其他职业都会受益。
+       * 转换器按文本补充受益职业与伤害种类条件，状态记为 corrected 并登记
+       * 具名差异；来源原始 scope/applyTarget/appliesToAnomaly 保留在覆盖报告。
+       * 职业判断对象与减防读取对象是本次命中者（对应固定来源的异常类触发者
+       * triggerAgentId），不是增益提供者、异常强度提供者或历史快照来源。
+       */
+      readonly kind: "attribute-anomaly-beneficiary-scope"
+      /** 文本限定的受益职业；来源职业词汇原值（如 异常）。 */
+      readonly profession: string
+      /**
+       * 本条对应的伤害种类；按固定计算链的异常类范围登记，与 anomalyDmgBonus
+       * 等增伤通道各自独立，不共用同一适用集合。
+       */
+      readonly damageKinds: readonly DamageKind[]
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
        * 固定来源把该记录的机制错误编码为上游通用 `special` 乘区；ZZZ-HP
        * 开发者修订导出确认该记录实为异常伤害提升（anomalyDmgBonus），数值
        * 不变。转换器按修订后的字段查映射编译（进入既有异常增伤乘区，限
@@ -368,6 +393,15 @@ const angelRevisionVerification = (refinement: 2 | 3 | 4 | 5): string => {
   const value = { 2: "11.5", 3: "13", 4: "14.5", 5: "16" }[refinement]!
   return `ZZZ-HP 开发者修订导出（exportedAt ${angelRevisionExportedAt}，整文件 SHA-256 ${angelRevisionSha256}，本机冻结于 ${angelRevisionFile}）按 ID 定位壳中之灵（wengines/0）后确认：精炼 ${refinement} 的 legacy-self-special 记录实为 anomalyDmgBonus（数值 ${value}%），effectBlocks 与 effects 两个表示同步改名，selfMods 数值从 special 迁至 anomalyDmgBonus。生成时逐字段核对导出与固定源仅存在该四条记录的登记差异。修订数据若交由上游 withRefinementAnomalyFlags 处理，会按 stat/kind/scope/target 从精炼 1 继承 appliesToAnomaly=true；Fairy 仍规范化固定旧源、不改写规范化记录（normalizationChanges 为空、stat 保持 special、记录不含该字段），修正后规则的 when 条件由修订字段映射与既有 whenFor 逻辑得到，与精炼 1 既有异常增伤规则一致（附件本身未写该字段，不冒充附件原始内容）。该修订导出不属于固定提交，不表示 ZZZ-HP 仓库已合入或发布。`
 }
+
+/** 蕾米埃尔影画 2：块 note 与 Nanoka 天赋同文限定受益职业与伤害类别。 */
+const remielleMindscape2Evidence: readonly SemanticsEvidenceReference[] = [
+  {
+    path: "agents/1581/details.zh.json",
+    pointer: "/talent/2/desc",
+    sha256: "a6559f099b14b2adc35950138eb0af8336be7d9a1a4d57b800dda41dab9a18f6",
+  },
+]
 
 const burniceDetailsSha =
   "453f3284a6c8bcd52a4d2a99986d21beef4b695291d427fc43f4cad946902a18"
@@ -1101,5 +1135,22 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     differenceId: "angel-in-the-shell-anomaly-stat-revision",
     evidence: angelRevisionEvidence(5),
     verification: angelRevisionVerification(5),
+  },
+  // 蕾米埃尔影画 2 的[异常]角色忽防：来源记录 scope general、applyProfession
+  // 为空、appliesToAnomaly true，只表示允许异常而非限定职业或伤害类别。
+  "agents/remiel/mindscape/2/blk-ms7tkhei-q0ipfu/eff-ms7tlurw-vhelyf": {
+    kind: "attribute-anomaly-beneficiary-scope",
+    profession: "异常",
+    damageKinds: [
+      "anomaly",
+      "anomaly-settlement",
+      "vortex",
+      "luminize",
+      "disorder",
+    ],
+    differenceId: "remielle-mindscape2-attribute-anomaly-scope",
+    evidence: remielleMindscape2Evidence,
+    verification:
+      "块 note 与 Nanoka 天赋 2 同文：“队伍中[异常]角色对[幻色]效果下的敌人造成属性异常伤害时，无视目标15%的防御力”。上游记录未编码受益职业（applyProfession null）与伤害类别（scope general、appliesToAnomaly 仅表示允许异常），effectMatchesContext 对 general 直接放行且职业门槛只在 applyProfession 非空时执行，因此显式选中后普通直伤与非异常职业都会受益。身份映射沿用固定来源的真实调用链：resolvedHit.ts 的 ResolvedHit 以 ownerAgentId 表示流程归属（“异常类只用于伤害归属，减防/无视取 triggerAgentId”）、anomalyPowerAgentId 表示异常强度提供者、triggerAgentId 表示异常类触发者；optimalAffixAlloc.ts 由 hit.triggerAgentId 取得触发者最终面板（anomalyTriggerPanel），元素取强度提供者；damageCalc.ts 的防御区从 anomalyTriggerPanel 读取 ignoreDefense/reduceDefense，穿透率与穿透值取强度提供者面板（anomalyBasePanel = triggerFinalPanel）。因此 Fairy 的 hit.actorId 对应本次结算触发者（职业门槛与减防读取对象），damage.anomalySource（可带 snapshotId）对应强度提供者；不是增益提供者，也不是另一角色的职业证据。[幻色]与消失后 8 秒仍由调用方显式选择表示条件有效。伤害类别采用固定计算链的异常类范围：damageCalc.ts 的 useTriggerBase 同时覆盖属性异常、异放、紊乱、乱流与耀变（skillNeedsDualAgents 对 mapEventKindToCalc 的 damageKind === 'anomaly' 全类成立），攻略 3.4.1 亦说明“[紊乱]应被视为一种属性异常效果”；本条因此把 disorder 与普通异常、异放、乱流、耀变一并纳入，不套用 anomalyDmgBonus/anomalyCritRate 等增伤或暴击通道的适用拆分（那是各自乘区的映射），也不以文本未列明[紊乱]自造排除。该范围是沿用固定计算链的静态约定，不是游戏实测结论；普通直伤（regular/sheer/sharpen）仍排除。",
   },
 }
