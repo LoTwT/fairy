@@ -40,7 +40,15 @@ const oracle = read("./fixtures/zzz-hp-static-catalog.json") as {
 }
 const coverage = read(
   "../../../data/definitions/effects/static-coverage.json",
-) as { records: { pointer: string; status: string }[] }
+) as {
+  records: {
+    pointer: string
+    status: string
+    reason?: string
+    explanation?: string
+    effectIds: string[]
+  }[]
+}
 
 function referenceInput(pointer: string): StaticCatalogDamageInput {
   const vector = oracle.cases.find((entry) => entry.pointer === pointer)
@@ -994,6 +1002,15 @@ describe("fixed-source catalog conformance", () => {
   const attributeAnomalyScopeCorrectedPointers = new Set([
     "/agents/51/mindscapeBuffs/2/effectBlocks/0/effects/1",
   ])
+  /**
+   * 蕾米埃尔影画 1 的两条半状态记录：已并入完整状态选项，两处来源位置改为
+   * semantic-conflict 迁移入口；由本文件的具名完整状态用例验证，不把旧单选
+   * 结果当作上游期望值。
+   */
+  const completeStateMigratedPointers = new Set([
+    "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/1",
+    "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/2",
+  ])
   it("accounts for every converted source position with an independent reference result", () => {
     expect(oracle.sourceCommit).toBe(catalog.source.commit)
     expect(oracle.cases.map((c) => c.pointer).toSorted()).toEqual(
@@ -1005,7 +1022,8 @@ describe("fixed-source catalog conformance", () => {
             coreRankExpandedPointers.has(r.pointer) ||
             elementScopeCorrectedPointers.has(r.pointer) ||
             developerRevisionCorrectedPointers.has(r.pointer) ||
-            attributeAnomalyScopeCorrectedPointers.has(r.pointer),
+            attributeAnomalyScopeCorrectedPointers.has(r.pointer) ||
+            completeStateMigratedPointers.has(r.pointer),
         )
         .map((r) => r.pointer)
         .toSorted(),
@@ -1015,7 +1033,8 @@ describe("fixed-source catalog conformance", () => {
     for (const vector of oracle.cases) {
       if (
         potentialExplainedPointers.has(vector.pointer) ||
-        attributeAnomalyScopeCorrectedPointers.has(vector.pointer)
+        attributeAnomalyScopeCorrectedPointers.has(vector.pointer) ||
+        completeStateMigratedPointers.has(vector.pointer)
       )
         continue
       const values = Object.fromEntries(
@@ -1698,6 +1717,664 @@ describe("fixed-source catalog conformance", () => {
       current.factors.nonCritical.baseDamage! /
         opened.factors.nonCritical.baseDamage!,
     ).toBeCloseTo(4, 12)
+  })
+
+  it("exposes the Remielle mindscape 1 phase-transition-flow state as one complete option", () => {
+    const optionId =
+      "agents:remiel:mindscape:1:phase-transition-flow:other-character-anomaly-damage"
+    const differenceId = "remielle-mindscape1-complete-anomaly-state"
+    const positiveOptionId =
+      "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjecu-l3ocgm"
+    const negativeOptionId =
+      "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
+    const resistanceIgnoreOptionId =
+      "agents:remiel:mindscape:1:blk-legacy:eff-ms7tin2y-0pja8e"
+    const luminizeMappingOptionId =
+      "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz"
+    const positiveEffectId =
+      "agent:1581:zzz-hp:eff-ms7tjecu-l3ocgm:blk-legacy:mindscape:1"
+    const negativeEffectId =
+      "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
+
+    expect(catalog.revision).toBe("14")
+    expect(
+      catalog.differences.some((d) => d.differenceId === differenceId),
+      differenceId,
+    ).toBe(true)
+    // 完整状态选项：单一 corrected 变体同时引用两条既有规则，无额外门槛或必需输入；
+    // M1—M6 合法、只应用一次，解锁不自动启用。
+    const option = catalog.options.find((o) => o.optionId === optionId)!
+    expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
+    expect(option.conditionDescription).toBe(
+      "蕾米埃尔处于[相变时流]状态下时，队伍中其他角色造成的属性异常伤害提升10%。",
+    )
+    expect(option.target).toBe("team")
+    expect(option.variants).toHaveLength(1)
+    const variant = option.variants[0]!
+    expect(variant.status).toBe("corrected")
+    expect(variant.configuration).toEqual({ minimumMindscape: 1 })
+    expect(variant.maximumLayers).toBe(1)
+    expect(variant.inputs).toEqual([])
+    expect(variant.applicability).toEqual({})
+    expect(variant.differences).toEqual([differenceId])
+    expect(variant.effectIds).toEqual([positiveEffectId, negativeEffectId])
+    // 两个旧选项保留为带迁移说明的语义冲突入口，不再独立贡献。
+    for (const migratedOptionId of [positiveOptionId, negativeOptionId]) {
+      const migratedVariant = catalog.options.find(
+        (o) => o.optionId === migratedOptionId,
+      )!.variants[0]!
+      expect(migratedVariant.status, migratedOptionId).toBe("unsupported")
+      expect(migratedVariant.reason, migratedOptionId).toBe("semantic-conflict")
+      expect(migratedVariant.effectIds, migratedOptionId).toEqual([])
+      expect(migratedVariant.explanation, migratedOptionId).toContain(optionId)
+    }
+    for (const pointer of [
+      "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/1",
+      "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/2",
+    ]) {
+      const record = coverage.records.find((r) => r.pointer === pointer)!
+      expect(record.status, pointer).toBe("unsupported")
+      expect(record.reason, pointer).toBe("semantic-conflict")
+      expect(record.effectIds, pointer).toEqual([])
+      expect(record.explanation, pointer).toContain(optionId)
+    }
+    // 两条既有规则保留：team +0.1 与 holder −0.1，只进入异常增伤通道的
+    // 普通异常、异放、乱流与耀变；紊乱继续使用独立 disorderDmgBonus。
+    const ruleOf = (effectId: string) =>
+      definitions.effects.find(
+        (entry): entry is ContributionRule =>
+          entry.kind === "contribution" && entry.effectId === effectId,
+      )!
+    const positiveRule = ruleOf(positiveEffectId)
+    const negativeRule = ruleOf(negativeEffectId)
+    expect(positiveRule.beneficiary).toEqual({ kind: "team" })
+    expect(negativeRule.beneficiary).toEqual({ kind: "holder" })
+    expect(positiveRule.operation).toMatchObject({
+      kind: "factor-contribution",
+      channel: "anomaly-damage-bonus",
+    })
+    expect(negativeRule.operation).toMatchObject({
+      kind: "factor-contribution",
+      channel: "anomaly-damage-bonus",
+    })
+    expect(positiveRule.parameters["amount"]).toMatchObject({
+      kind: "constant",
+      unit: "ratio",
+      value: 0.1,
+    })
+    expect(negativeRule.parameters["amount"]).toMatchObject({
+      kind: "constant",
+      unit: "ratio",
+      value: -0.1,
+    })
+    for (const [label, rule] of [
+      ["positive", positiveRule],
+      ["negative", negativeRule],
+    ] as const) {
+      const damageKinds: string[] = []
+      const visit = (condition: unknown): void => {
+        if (!condition || typeof condition !== "object") return
+        const entry = condition as {
+          kind?: string
+          fact?: string
+          values?: string[]
+          conditions?: unknown[]
+        }
+        if (entry.kind === "one-of" && entry.fact === "hit.damageKind")
+          damageKinds.push(...(entry.values ?? []))
+        for (const child of entry.conditions ?? []) visit(child)
+      }
+      visit(rule.when)
+      expect(damageKinds, label).toEqual([
+        "anomaly",
+        "anomaly-settlement",
+        "vortex",
+        "luminize",
+      ])
+    }
+
+    type Choice =
+      | "none"
+      | "complete"
+      | "positive"
+      | "negative"
+      | "both-old"
+      | "mixed"
+    const choiceIds: Record<Choice, readonly string[]> = {
+      "none": [],
+      "complete": [optionId],
+      "positive": [positiveOptionId],
+      "negative": [negativeOptionId],
+      "both-old": [positiveOptionId, negativeOptionId],
+      "mixed": [optionId, positiveOptionId],
+    }
+    const input = (params: {
+      choice?: Choice
+      trigger?: "1581" | "1261"
+      kind?:
+        | "anomaly"
+        | "anomaly-settlement"
+        | "vortex"
+        | "luminize"
+        | "disorder"
+        | "regular"
+        | "sheer"
+        | "sharpen"
+      historical?: boolean
+      missingHistoricalProficiency?: boolean
+      existingBonus?: number
+      rank?: MindscapeRank
+      coreSkillLevel?: CoreSkillLevel
+      potentialLevel?: number
+      layers?: number
+      withResistanceIgnore?: boolean
+    }): StaticCatalogDamageInput => {
+      const kind = params.kind ?? "anomaly",
+        rank = params.rank ?? 1,
+        layers = params.layers ?? 1,
+        triggerId =
+          (params.trigger ?? "1261") === "1581"
+            ? "entity:remiel"
+            : "entity:jane",
+        snapshotId =
+          params.historical || params.missingHistoricalProficiency
+            ? ("snapshot:saved" as const)
+            : undefined
+      const statSource = {
+        entityId: "entity:source" as const,
+        ...(snapshotId ? { snapshotId } : {}),
+      }
+      const sourceActor = (attack: number) => ({
+        kind: "actor" as const,
+        entityId: "entity:source",
+        teamId: "team:players",
+        generalStats: {
+          attack: general(attack),
+          anomalyProficiency: general(100),
+        },
+        directStats: { penetrationRatio: { baseValue: 0, additions: [] } },
+      })
+      const historicalAttributes = [
+        {
+          entityId: "entity:source" as const,
+          stat: "attack" as const,
+          stage: "current" as const,
+          value: { unit: "attack-points" as const, value: 200 },
+        },
+        ...(params.missingHistoricalProficiency
+          ? []
+          : [
+              {
+                entityId: "entity:source" as const,
+                stat: "anomalyProficiency" as const,
+                stage: "current" as const,
+                value: {
+                  unit: "anomaly-proficiency-points" as const,
+                  value: 100,
+                },
+              },
+            ]),
+        {
+          entityId: "entity:source" as const,
+          stat: "penetrationRatio" as const,
+          stage: "current" as const,
+          value: { unit: "ratio" as const, value: 0 },
+        },
+      ]
+      return {
+        definitions,
+        catalog,
+        bindings: [
+          {
+            bindingId: "binding:static",
+            kind: "agent",
+            holderId: "entity:remiel",
+            sourceEntityId: "1581",
+            eligible: true,
+            configuration: {
+              mindscapeRank: rank,
+              coreSkillLevel: params.coreSkillLevel ?? 7,
+              ...(params.potentialLevel === undefined
+                ? {}
+                : { potentialLevel: params.potentialLevel }),
+            } as Extract<
+              StaticCatalogDamageInput["bindings"][number],
+              { kind: "agent" }
+            >["configuration"],
+          },
+        ],
+        actorSources: [
+          { entityId: "entity:remiel", agentEntityId: "1581" },
+          { entityId: "entity:jane", agentEntityId: "1261" },
+          { entityId: "entity:source", agentEntityId: "1261" },
+        ],
+        selections: [
+          ...choiceIds[params.choice ?? "none"].map((id) => ({
+            optionId: id,
+            bindingId: "binding:static",
+            layers,
+          })),
+          ...(kind === "luminize"
+            ? [
+                {
+                  optionId: luminizeMappingOptionId,
+                  bindingId: "binding:static",
+                  layers: 1,
+                },
+              ]
+            : []),
+          ...(params.withResistanceIgnore
+            ? [
+                {
+                  optionId: resistanceIgnoreOptionId,
+                  bindingId: "binding:static",
+                  layers: 1,
+                },
+              ]
+            : []),
+        ],
+        snapshots: snapshotId
+          ? [
+              {
+                snapshotId,
+                atSeconds: 0,
+                world: {
+                  entities: [sourceActor(200)],
+                  states: [],
+                  distances: [],
+                },
+                attributes: historicalAttributes,
+              },
+            ]
+          : [],
+        world: {
+          entities: [
+            {
+              kind: "actor",
+              entityId: "entity:remiel",
+              teamId: "team:players",
+              generalStats: {
+                attack: general(800),
+                anomalyProficiency: general(777),
+              },
+              directStats: {
+                criticalRate: { baseValue: 0, additions: [] },
+                criticalDamage: { baseValue: 0, additions: [] },
+                penetrationRatio: { baseValue: 0, additions: [] },
+                sharpCriticalDamage: { baseValue: 0, additions: [] },
+              },
+            },
+            {
+              kind: "actor",
+              entityId: "entity:jane",
+              teamId: "team:players",
+              generalStats: {
+                attack: general(100),
+                anomalyProficiency: general(100),
+              },
+              directStats: {
+                criticalRate: { baseValue: 0, additions: [] },
+                criticalDamage: { baseValue: 0, additions: [] },
+                penetrationRatio: { baseValue: 0, additions: [] },
+                sharpCriticalDamage: { baseValue: 0, additions: [] },
+              },
+            },
+            // 历史用例的强度来源只存在于快照，不在当前队伍中。
+            ...(snapshotId
+              ? []
+              : ([
+                  sourceActor(50),
+                ] as StaticCatalogDamageInput["world"]["entities"])),
+            {
+              kind: "actor",
+              entityId: "entity:enemy",
+              teamId: "team:enemies",
+              generalStats: {},
+              directStats: {},
+            },
+          ],
+          states: [],
+          distances: [],
+        },
+        hit: {
+          actorId: triggerId,
+          targetId: "entity:enemy",
+          actionId: "action:oracle",
+          skillCategory: "basic",
+          element: "physical",
+          damageItems: [
+            {
+              mode: "direct",
+              role: "base",
+              itemId: "base",
+              stat: "attack",
+              statSource,
+              damageMultiplier: 1,
+            },
+          ],
+          skillTags: [],
+        },
+        damage: (kind === "regular" || kind === "sheer" || kind === "sharpen"
+          ? {
+              kind,
+              ...(kind === "sheer" ? { sheerDamageBonus: [] } : {}),
+              ...(kind === "sharpen" ? { sharpenDamageBonus: [] } : {}),
+              ...(kind === "sheer"
+                ? {}
+                : {
+                    defense: {
+                      attackerLevel: 60,
+                      targetBaseDefense: 1000,
+                      defensePercentageAdjustments: [],
+                      penetrationValues: [],
+                    },
+                  }),
+              damageBonus: [],
+              resistance: {
+                targetResistance: 0,
+                targetResistanceReductions: [],
+                attackerResistanceIgnoreValues: [],
+              },
+              damageTaken: {
+                targetDamageTakenIncreases: [],
+                targetDamageTakenReductions: [],
+              },
+              stunDamage: {
+                isTargetStunned: false,
+                targetBaseStunDamageMultiplier: 1,
+                targetStunDamageMultiplierAdjustments: [],
+              },
+            }
+          : {
+              kind,
+              damageBonus: { settledMultiplier: 1 },
+              anomalySource: { ...statSource, level: 60 },
+              defense: {
+                targetBaseDefense: 1000,
+                defensePercentageAdjustments: [],
+                penetrationValues: [],
+              },
+              resistance: {
+                targetResistance: 0,
+                targetResistanceReductions: [],
+                attackerResistanceIgnoreValues: [],
+              },
+              damageTaken: {
+                targetDamageTakenIncreases: [],
+                targetDamageTakenReductions: [],
+              },
+              stunDamage: {
+                isTargetStunned: false,
+                targetBaseStunDamageMultiplier: 1,
+                targetStunDamageMultiplierAdjustments: [],
+              },
+              anomalyDamageBonus: params.existingBonus
+                ? [params.existingBonus]
+                : [],
+              refringe: { mode: "settled" as const, multiplier: 1 },
+              ...(kind === "luminize"
+                ? {
+                    luminizeMultiplier: {
+                      baseLuminizeMultiplier: 1,
+                      multiplicativeLuminizeMultiplierAdjustments: [],
+                    },
+                  }
+                : { anomalyCriticalRate: 0, anomalyCriticalDamage: [] }),
+            }) as unknown as StaticCatalogDamageInput["damage"],
+      } as unknown as StaticCatalogDamageInput
+    }
+    const anomalyBonusContributions = (result: StaticDamageResult) =>
+      result.evaluation.contributions.filter(
+        (entry) =>
+          entry.address.kind === "factor" &&
+          entry.address.channel === "anomaly-damage-bonus",
+      )
+    const resistanceIgnoreContributions = (result: StaticDamageResult) =>
+      result.evaluation.contributions.filter(
+        (entry) =>
+          entry.address.kind === "factor" &&
+          entry.address.channel === "attacker-resistance-ignore",
+      )
+    // 持有者自身触发：完整状态两项相加为净 0，与未选择一致。
+    const holderOff = calculateCatalogResult(
+      input({ choice: "none", trigger: "1581" }),
+    )
+    const holderOn = calculateCatalogResult(
+      input({ choice: "complete", trigger: "1581" }),
+    )
+    expect(holderOff.factors.nonCritical.anomalyDamageBonus).toBeCloseTo(1, 12)
+    expect(holderOn.factors.nonCritical.anomalyDamageBonus).toBeCloseTo(1, 12)
+    expect(
+      anomalyBonusContributions(holderOn).map((entry) => entry.value.value),
+    ).toEqual([0.1, -0.1])
+    expect(holderOn.expected).toBeCloseTo(holderOff.expected, 12)
+    // 队友触发：只有 team +10% 生效，自身 −10% 不作用于队友命中。
+    const teammateOff = calculateCatalogResult(
+      input({ choice: "none", trigger: "1261" }),
+    )
+    const teammateOn = calculateCatalogResult(
+      input({ choice: "complete", trigger: "1261" }),
+    )
+    expect(teammateOn.factors.nonCritical.anomalyDamageBonus).toBeCloseTo(
+      1.1,
+      12,
+    )
+    expect(
+      anomalyBonusContributions(teammateOn).map((entry) => entry.value.value),
+    ).toEqual([0.1])
+    expect(teammateOn.expected / teammateOff.expected).toBeCloseTo(1.1, 12)
+    // 同区已有 +0.3 时按加算：队友 1.3 → 1.4，持有者 1.3 保持 1.3。
+    expect(
+      calculateCatalogResult(
+        input({ choice: "none", trigger: "1261", existingBonus: 0.3 }),
+      ).factors.nonCritical.anomalyDamageBonus,
+    ).toBeCloseTo(1.3, 12)
+    expect(
+      calculateCatalogResult(
+        input({ choice: "complete", trigger: "1261", existingBonus: 0.3 }),
+      ).factors.nonCritical.anomalyDamageBonus,
+    ).toBeCloseTo(1.4, 12)
+    expect(
+      calculateCatalogResult(
+        input({ choice: "complete", trigger: "1581", existingBonus: 0.3 }),
+      ).factors.nonCritical.anomalyDamageBonus,
+    ).toBeCloseTo(1.3, 12)
+    // 合法 layers 0 表示关闭，不贡献；解锁不自动启用。
+    expect(
+      anomalyBonusContributions(
+        calculateCatalogResult(
+          input({ choice: "complete", trigger: "1261", layers: 0 }),
+        ),
+      ),
+    ).toHaveLength(0)
+    // M0 拒绝、M1—M6 合法且各档只应用一次。
+    const locked = calculateStaticDamageFromCatalog(
+      input({ choice: "complete", trigger: "1261", rank: 0 }),
+    )
+    expect(locked.ok).toBe(false)
+    if (!locked.ok)
+      expect(
+        locked.issues.some(
+          (issue) =>
+            issue.code === "CONTEXT_MISMATCH" &&
+            issue.pointer === "/selections/0",
+        ),
+        JSON.stringify(locked.issues),
+      ).toBe(true)
+    for (const rank of [1, 2, 3, 4, 5, 6] as const) {
+      const result = calculateCatalogResult(
+        input({ choice: "complete", trigger: "1261", rank }),
+      )
+      expect(
+        anomalyBonusContributions(result),
+        `mindscape ${rank}`,
+      ).toHaveLength(1)
+      expect(
+        result.factors.nonCritical.anomalyDamageBonus,
+        `mindscape ${rank}`,
+      ).toBeCloseTo(1.1, 12)
+    }
+    // 核心与潜能档位不额外加门槛，也不重复应用。
+    for (const configuration of [
+      { coreSkillLevel: 1 as CoreSkillLevel, potentialLevel: 6 },
+      { coreSkillLevel: 7 as CoreSkillLevel, potentialLevel: 0 },
+    ]) {
+      const result = calculateCatalogResult(
+        input({ choice: "complete", trigger: "1261", ...configuration }),
+      )
+      expect(
+        result.factors.nonCritical.anomalyDamageBonus,
+        JSON.stringify(configuration),
+      ).toBeCloseTo(1.1, 12)
+    }
+    // 旧记录不再接受单选、两项齐选、与完整选项混选或 layers 0。
+    for (const params of [
+      { choice: "positive" as const },
+      { choice: "negative" as const },
+      { choice: "both-old" as const },
+      { choice: "mixed" as const },
+      { choice: "positive" as const, layers: 0 },
+    ]) {
+      const result = calculateStaticDamageFromCatalog(
+        input({ trigger: "1261", ...params }),
+      )
+      expect(result.ok, JSON.stringify(params)).toBe(false)
+      if (!result.ok)
+        expect(
+          result.issues.some(
+            (issue) =>
+              issue.code === "INVALID_INPUT" &&
+              issue.message.includes("semantic-conflict") &&
+              issue.message.includes(optionId),
+          ),
+          JSON.stringify(result.issues),
+        ).toBe(true)
+    }
+    // 重复选择完整选项沿用 DUPLICATE_ID。
+    const duplicate = calculateStaticDamageFromCatalog({
+      ...input({ choice: "complete", trigger: "1261" }),
+      selections: [
+        { optionId, bindingId: "binding:static", layers: 1 },
+        { optionId, bindingId: "binding:static", layers: 1 },
+      ],
+    })
+    expect(duplicate.ok).toBe(false)
+    if (!duplicate.ok)
+      expect(
+        duplicate.issues.some((issue) => issue.code === "DUPLICATE_ID"),
+        JSON.stringify(duplicate.issues),
+      ).toBe(true)
+    // 历史强度来源与本次触发者分离：同一来源当前 50 / 历史 200 各自读取；
+    // 完整状态只随触发者身份变化（队友 55/220，持有者 50/200）。
+    const historicalTeammateOff = calculateCatalogResult(
+      input({ choice: "none", trigger: "1261", historical: true }),
+    )
+    const historicalTeammateOn = calculateCatalogResult(
+      input({ choice: "complete", trigger: "1261", historical: true }),
+    )
+    const historicalHolderOn = calculateCatalogResult(
+      input({ choice: "complete", trigger: "1581", historical: true }),
+    )
+    expect(historicalTeammateOn.factors.nonCritical.baseDamage).toBeCloseTo(
+      200,
+      12,
+    )
+    expect(
+      historicalTeammateOn.expected / historicalTeammateOff.expected,
+    ).toBeCloseTo(1.1, 12)
+    // 同一读取口径下历史强度 200 与当前 50 恰为 4 倍，其余乘区不变。
+    expect(historicalTeammateOn.expected / teammateOn.expected).toBeCloseTo(
+      4,
+      12,
+    )
+    expect(historicalHolderOn.expected).toBeCloseTo(
+      historicalTeammateOn.expected / 1.1,
+      12,
+    )
+    // 缺历史属性仍明确拒绝，不用当前值代替。
+    const missing = calculateStaticDamageFromCatalog(
+      input({
+        choice: "complete",
+        trigger: "1261",
+        missingHistoricalProficiency: true,
+      }),
+    )
+    expect(missing.ok).toBe(false)
+    if (!missing.ok)
+      expect(
+        missing.issues.some((issue) => issue.code === "MISSING_SNAPSHOT"),
+        JSON.stringify(missing.issues),
+      ).toBe(true)
+    // 四类适用：普通异常、异放、乱流由队友触发验证 +10%；耀变由持有者
+    // 触发（目录中只有她的耀变精通换算映射），两项同时出现、净 0。
+    for (const kind of ["anomaly", "anomaly-settlement", "vortex"] as const) {
+      const result = calculateCatalogResult(
+        input({ choice: "complete", trigger: "1261", kind }),
+      )
+      expect(result.factors.nonCritical.anomalyDamageBonus, kind).toBeCloseTo(
+        1.1,
+        12,
+      )
+      expect(anomalyBonusContributions(result), kind).toHaveLength(1)
+    }
+    const luminizeOn = calculateCatalogResult(
+      input({ choice: "complete", trigger: "1581", kind: "luminize" }),
+    )
+    expect(
+      anomalyBonusContributions(luminizeOn).map((entry) => entry.value.value),
+      "luminize",
+    ).toEqual([0.1, -0.1])
+    // 队友触发耀变在本目录没有可用的精通换算映射（只有蕾米埃尔本人持有），
+    // 目录入口明确拒绝该输入，不把它当作零贡献，本状态选项也不放开该限制。
+    const teammateLuminize = calculateStaticDamageFromCatalog(
+      input({ choice: "complete", trigger: "1261", kind: "luminize" }),
+    )
+    expect(teammateLuminize.ok).toBe(false)
+    if (!teammateLuminize.ok)
+      expect(
+        teammateLuminize.issues.some(
+          (issue) =>
+            issue.code === "INVALID_INPUT" &&
+            issue.message.includes("proficiency parameter mapping"),
+        ),
+        JSON.stringify(teammateLuminize.issues),
+      ).toBe(true)
+    // 负例：紊乱使用独立 disorderDmgBonus，三类直伤不受影响。
+    const disorder = calculateCatalogResult(
+      input({ choice: "complete", trigger: "1261", kind: "disorder" }),
+    )
+    expect(disorder.factors.nonCritical.anomalyDamageBonus).toBeCloseTo(1, 12)
+    expect(anomalyBonusContributions(disorder)).toHaveLength(0)
+    for (const kind of ["regular", "sheer", "sharpen"] as const) {
+      const result = calculateCatalogResult(
+        input({ choice: "complete", trigger: "1261", kind }),
+      )
+      expect(anomalyBonusContributions(result), kind).toHaveLength(0)
+    }
+    // 影画 1 的 50% 耀变专属抗穿是独立条款，不并入完整状态。
+    const resistanceIgnoreOnly = calculateCatalogResult(
+      input({ trigger: "1581", kind: "luminize", withResistanceIgnore: true }),
+    )
+    expect(resistanceIgnoreContributions(resistanceIgnoreOnly)).toHaveLength(1)
+    expect(
+      resistanceIgnoreContributions(resistanceIgnoreOnly)[0]!.value.value,
+    ).toBeCloseTo(0.5, 12)
+    expect(anomalyBonusContributions(resistanceIgnoreOnly)).toHaveLength(0)
+    expect(anomalyBonusContributions(luminizeOn)).toHaveLength(2)
+    expect(resistanceIgnoreContributions(luminizeOn)).toHaveLength(0)
+    // 两个独立选项可同时选择：耀变专属抗穿贡献一次，完整状态两项照常出现。
+    const bothOptions = calculateCatalogResult(
+      input({
+        choice: "complete",
+        trigger: "1581",
+        kind: "luminize",
+        withResistanceIgnore: true,
+      }),
+    )
+    expect(resistanceIgnoreContributions(bothOptions)).toHaveLength(1)
+    expect(
+      anomalyBonusContributions(bothOptions).map((entry) => entry.value.value),
+    ).toEqual([0.1, -0.1])
   })
 
   it("registers the Angel in the Shell anomaly stat revision with stable identities", () => {

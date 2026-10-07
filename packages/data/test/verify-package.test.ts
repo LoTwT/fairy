@@ -681,6 +681,50 @@ assert.equal(m2AdjustmentCount(m2Direct), 0)
 assert.ok(Math.abs(m2Direct.factors.nonCritical.defense - 794 / (794 + 1000)) < 1e-12)
 const m2Off = value(calculateStaticDamageFromCatalog(m2Input("anomaly", false)))
 assert.equal(m2AdjustmentCount(m2Off), 0)
+// 蕾米埃尔影画 1 完整状态（revision 14）：team +10% 与自身 −10% 合并为一个
+// 完整选项；队友异常命中得到 1.1，持有者自身命中净 0。旧 +10% 单选选项不再
+// 可用，返回带新选项 ID 的迁移错误。
+const completeOption = "agents:remiel:mindscape:1:phase-transition-flow:other-character-anomaly-damage"
+const legacyPositiveOption = "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjecu-l3ocgm"
+const m1Input = (trigger, optionId) => ({
+  definitions: staticDefinitions,
+  catalog: staticCatalog,
+  bindings: [
+    { bindingId: "binding:m1-agent", kind: "agent", holderId: "entity:m1", sourceEntityId: "1581", eligible: true, configuration: { mindscapeRank: 1, coreSkillLevel: 7 } },
+  ],
+  actorSources: [
+    { entityId: "entity:m1", agentEntityId: "1581" },
+    { entityId: "entity:m1-teammate", agentEntityId: "1261" },
+  ],
+  selections: optionId ? [{ optionId, bindingId: "binding:m1-agent", layers: 1 }] : [],
+  world: { entities: [
+    { kind: "actor", entityId: "entity:m1", teamId: "team:players", generalStats: { attack: { baseValue: 1000, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] }, anomalyProficiency: { baseValue: 100, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] } }, directStats: { criticalRate: { baseValue: 0, additions: [] }, criticalDamage: { baseValue: 0, additions: [] }, penetrationRatio: { baseValue: 0, additions: [] }, sharpCriticalDamage: { baseValue: 0, additions: [] } } },
+    { kind: "actor", entityId: "entity:m1-teammate", teamId: "team:players", generalStats: { attack: { baseValue: 100, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] }, anomalyProficiency: { baseValue: 100, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] } }, directStats: { criticalRate: { baseValue: 0, additions: [] }, criticalDamage: { baseValue: 0, additions: [] }, penetrationRatio: { baseValue: 0, additions: [] }, sharpCriticalDamage: { baseValue: 0, additions: [] } } },
+    { kind: "actor", entityId: "entity:m1-enemy", teamId: "team:enemies", generalStats: {}, directStats: {} },
+  ], states: [], distances: [] },
+  hit: { actorId: trigger, targetId: "entity:m1-enemy", actionId: "action:oracle", skillCategory: "basic", element: "physical", skillTags: [], damageItems: [{ mode: "direct", role: "base", itemId: "base", stat: "attack", statSource: { entityId: "entity:m1-teammate" }, damageMultiplier: 1 }] },
+  damage: {
+    kind: "anomaly",
+    damageBonus: { settledMultiplier: 1 },
+    anomalySource: { entityId: "entity:m1-teammate", level: 60 },
+    defense: { targetBaseDefense: 1000, defensePercentageAdjustments: [], penetrationValues: [] },
+    resistance: { targetResistance: 0, targetResistanceReductions: [], attackerResistanceIgnoreValues: [] },
+    damageTaken: { targetDamageTakenIncreases: [], targetDamageTakenReductions: [] },
+    stunDamage: { isTargetStunned: false, targetBaseStunDamageMultiplier: 1, targetStunDamageMultiplierAdjustments: [] },
+    anomalyDamageBonus: [],
+    refringe: { mode: "settled", multiplier: 1 },
+    anomalyCriticalRate: 0,
+    anomalyCriticalDamage: [],
+  },
+})
+const m1Teammate = value(calculateStaticDamageFromCatalog(m1Input("entity:m1-teammate", completeOption)))
+assert.ok(Math.abs(m1Teammate.factors.nonCritical.anomalyDamageBonus - 1.1) < 1e-12)
+const m1Holder = value(calculateStaticDamageFromCatalog(m1Input("entity:m1", completeOption)))
+assert.ok(Math.abs(m1Holder.factors.nonCritical.anomalyDamageBonus - 1) < 1e-12)
+assert.ok(Math.abs(m1Holder.expected - m1Teammate.expected / 1.1) < 1e-6)
+const m1Legacy = calculateStaticDamageFromCatalog(m1Input("entity:m1-teammate", legacyPositiveOption))
+assert.equal(m1Legacy.ok, false)
+assert.ok(!m1Legacy.ok && m1Legacy.issues.some((issue) => issue.code === "INVALID_INPUT" && issue.message.includes(completeOption)))
 const rules = value(parseEffectRuleSet(automaticDefinitions.default))
 assert.equal(rules.ruleSetId, "automatic-effects")
 assert.equal(rules.revision, "1")

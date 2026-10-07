@@ -4,7 +4,7 @@
 
 ## 实际覆盖与使用限制
 
-[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 850 条规则与 834 个选择项。1,236 条 converted、50 条 corrected；4 条 unsupported 全部是已迁移的重复部分记录（semantic-conflict）。壳中之灵（14150）精炼 2—5 的 4 条上游 `special` 乘区记录已按开发者修订接入异常增伤乘区（见[修订 11](#修订-11壳中之灵异常增伤来源修正)）；蕾米埃尔影画 2 的忽防记录按块 note 与 Nanoka 同文补充受益职业与属性异常伤害范围（见[修订 13](#修订-13蕾米埃尔影画-2-忽防范围修正)）；原始位置缺少培养档位证据的 41 个位置已全部闭合。另有 10 条经核实的 Nanoka 补充来源记录（9 条已整合、1 条越界登记）。记录数包含各档精炼的来源位置，不等于独立机制数量。
+[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 850 条规则与 835 个选择项。1,234 条 converted、50 条 corrected；6 条 unsupported 全部是已迁移的记录（4 条重复部分记录的 semantic-conflict 与蕾米埃尔影画 1 的两条半状态记录，见[修订 14](#修订-14蕾米埃尔影画-1-完整状态选项)），不代表功能退步。壳中之灵（14150）精炼 2—5 的 4 条上游 `special` 乘区记录已按开发者修订接入异常增伤乘区（见[修订 11](#修订-11壳中之灵异常增伤来源修正)）；蕾米埃尔影画 2 的忽防记录按块 note 与 Nanoka 同文补充受益职业与属性异常伤害范围（见[修订 13](#修订-13蕾米埃尔影画-2-忽防范围修正)）；原始位置缺少培养档位证据的 41 个位置已全部闭合。另有 10 条经核实的 Nanoka 补充来源记录（9 条已整合、1 条越界登记）。记录数包含各档精炼的来源位置，不等于独立机制数量。
 
 核心档位仅开放 [rank-evidence.json](../../../packages/data/scripts/static-effects/rank-evidence.json)确认的键；缺档的同一角色其他选项仍可使用。两条反向缺项和空记录另列在报告中。目录入口对普通异常来源仍拒绝把蕾米埃尔作为 `anomalySource`；她本人特殊[虚曜]对应的耀变自修订 10 起按具名机制 `remielle-special-voidflare` 接入（见下文），她提供给其他来源异常的已映射增益继续正常计算。
 
@@ -19,11 +19,12 @@
 `scarlet-craving-explicit-element`，并把 `core-skill-level-parameters` 的解释扩展到克拉蕾（见下）；
 修订 11 新增 `angel-in-the-shell-anomaly-stat-revision`（开发者修订导出确认的异常增伤字段修正）；
 修订 12 更正 `luminize-conversion-owner` 的解释为固定来源的乘算口径（见[修订 12](#修订-12耀变精通换算乘算口径修正)）；
-修订 13 新增 `remielle-mindscape2-attribute-anomaly-scope`（蕾米埃尔影画 2 忽防的受益职业与伤害范围修正）。
+修订 13 新增 `remielle-mindscape2-attribute-anomaly-scope`（蕾米埃尔影画 2 忽防的受益职业与伤害范围修正）；
+修订 14 新增 `remielle-mindscape1-complete-anomaly-state`（蕾米埃尔影画 1 的完整状态选择契约，见[修订 14](#修订-14蕾米埃尔影画-1-完整状态选项)）。
 
-固定输入重复生成的三个制品字节一致。来源参考夹具保留 1,275 个位置：当前 1,236 条 converted 逐条比对，
-5 个核心档位扩展、10 个猩红渴望元素范围修正与 4 个壳中之灵开发者修订位置按来源数值比对，其余 20 个位置
-（19 个潜能位置与蕾米埃尔影画 2 忽防位置）按具名修正或迁移验证；corrected 的扩展行为另验，配合最终伤害、
+固定输入重复生成的三个制品字节一致。来源参考夹具保留 1,275 个位置：当前 1,234 条 converted 逐条比对，
+5 个核心档位扩展、10 个猩红渴望元素范围修正与 4 个壳中之灵开发者修订位置按来源数值比对，其余 22 个位置
+（19 个潜能位置、蕾米埃尔影画 2 忽防位置与影画 1 的两条半状态记录）按具名修正或迁移验证；corrected 的扩展行为另验，配合最终伤害、
 培养边界、历史属性、多来源、多个时间派生伤害项与打包消费测试。它验证原始上游函数，不表示完成 ZZZ-HP
 整应用差分或游戏实测。
 
@@ -342,6 +343,54 @@ unavailable 35 → 10，技能清单摘要随之更新；洛克茜 3 条风眼�
   以#197 手填面板同一输入追加 M2 选中/未选中回归，并与显式基线 `-0.1` 同选时按现有防御公式加算一次
   （总调整 `-0.25`），期望均来自独立算式。data 侧合成转换覆盖新语义登记、陈旧来源（已编码职业或
   改变目标）拒绝与覆盖计数。固定来源的忽防数值与显示口径不变。
+
+### 修订 14：蕾米埃尔影画 1 完整状态选项
+
+规则集 revision 递增为 `14`。本轮把蕾米埃尔（1581）影画 1 的
+“蕾米埃尔处于[相变时流]状态下时，队伍中其他角色造成的属性异常伤害提升10%”
+从两条可独立切换的上游记录改为一个完整的静态状态选项。
+
+- **根因**：块 note 与 Nanoka 天赋 1（`agents/1581/details.zh.json` 的 `/talent/1/desc`）同文确认该条款
+  只提升**队伍中其他角色**；固定来源 fac62407 把它拆成同一块
+  （`/agents/51/mindscapeBuffs/1/effectBlocks/0`）的两条记录：`effects/1` 为 team `anomalyDmgBonus` +10、
+  `effects/2` 为自身 `anomalyDmgBonus` −10，后者把持有者自身排除。固定版上游允许逐 effect 独立切换
+  （`BuffEffectPickerModal.vue` 的 `isEnabled`/`setEnabled`/`toggleEffect` 按 effect、`toggleCard` 批量；
+  `panelBuffCalc.ts` 的 `buildDefaultBuffSelection` 默认全开并按 team/self 槽位分别选择；
+  `resolvePackMods` 对自身取 self+team、他人只取 team），因此上游不会强制成对激活。单选 +10% 会让
+  持有者自身也多算 10%（旧单选结果 656274.8843744549 即该半状态），只选 −10% 也不是该状态。
+- **修正**：新增完整状态选项
+  `agents:remiel:mindscape:1:phase-transition-flow:other-character-anomaly-damage`
+  （名称「相变时流 · 其他角色属性异常伤害」、`target: team`、单一 corrected 变体同时引用两条既有
+  effectId、`minimumMindscape: 1`、`maximumLayers: 1`、无必需输入与额外职业/潜能门槛）。M0 拒绝、
+  M1—M6 合法且只应用一次；不选或合法 `layers: 0` 表示关闭，解锁不自动启用。两条既有规则与数值
+  （team +0.1、holder −0.1）保持不变，仍在既有异常增伤乘区上求和。具名差异
+  `remielle-mindscape1-complete-anomaly-state` 记录该 Fairy 完整状态选择契约相对上游独立开关的修正，
+  并保留 source/note/Nanoka 追溯；来源清单补登记 `BuffEffectPickerModal.vue`
+  （`f99ec3f6e104e931a35dfbf507067ea3e69bb2e3a71ed006934354dd8de5af00`）与 `resolvedHit.ts`
+  （`b5f4a0692cb2277728d77bc2c34f5416d092d93a39144a77396c11939687de00`）两个固定文件摘要。
+- **旧选项迁移**：两个旧 optionId（`…blk-legacy:eff-ms7tjecu-l3ocgm` 与
+  `…blk-legacy:eff-ms7tjyzo-3v31wa`）保留在目录中作为带迁移说明的 `semantic-conflict` 入口，
+  `effectIds` 为空；单选、两项齐选、与完整选项混选以及 `layers: 0` 的旧项都在消费时返回指向新选项的
+  明确错误，不静默忽略。两处来源位置仍在覆盖报告中保留去向，**不是功能退步**——它们表达的是同一个
+  状态的拆分记录。`resolvedHit.ts` 的身份口径沿用修订 13：`hit.actorId` 是本结算的异常类触发者，
+  `damage.anomalySource`（可带 `snapshotId`）是异常强度提供者，两者都不是增益提供者。
+- **伤害种类边界**：沿用 `anomalyDmgBonus` 的既有映射（普通异常、异放、乱流、耀变）；紊乱继续只由
+  独立 `disorderDmgBonus` 覆盖，普通直伤（regular/sheer/sharpen）不受影响，与影画 1 的 50% 耀变专属
+  抗穿（`radianceResPen`，仅作用耀变命中）各自独立、互不并入。
+- **覆盖状态**：两个来源位置 converted → unsupported（semantic-conflict）：1,236/50/4 →
+  1,234/50/6；规则数 850 不变，选项数 834 → 835（新增完整选项；可用选项 830 → 829）。来源分母
+  （187 实体、1,061 pack、1,290 记录）不变，新完整变体为 corrected 但不新增原始来源分母。三个效果
+  制品同次生成；技能 60 位动作文件字节不变，技能清单只更新 `staticCatalogSha256`
+  （`c39b28420508b799fb51ba6b6c0ccc024ed1430940b2ce981280d448fab22b64`），计算快照随目录字节更新为
+  `sha256:e946d6b30b9747a3daeaac034fc14a4dc127c7e550ab63f0c54b1e1d4bf693c4`。
+- **独立验收**：core 目录数据回归覆盖目录/迁移入口形状、持有者自身净 0、队友同区 +0.1、同区已有 +0.3
+  时按加算（1.3 → 1.4 / 持有者保持 1.3）、`layers: 0` 关闭、旧项单选/齐选/混选/`layers: 0` 与重复
+  选择的明确错误、M0 拒绝与 M1—M6 各只应用一次、核心/潜能档位不额外加门槛、提供者/触发者/历史
+  snapshot 矩阵（同一来源当前 50 / 历史 200 各自读取、历史来源不在当前队伍也正常、缺历史属性仍报
+  `MISSING_SNAPSHOT`）、四类适用（普通异常、异放、乱流由队友触发；耀变由持有者触发且两项同时出现）
+  与紊乱/三类直伤负例、50% 耀变专属抗穿独立；高层 #197 手填面板场景选中完整状态后单次耀变保持
+  603772.8936244984…（完整状态与未选择一致，旧的半状态值不可再产生）；data 侧合成转换覆盖记录对签名
+  核对、半对/漂移/重复拒绝、数组重排只改变 Pointer 与缺省不生成。固定来源的数值与显示口径不变。
 
 ## 交付目标与边界
 

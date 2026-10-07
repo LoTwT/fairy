@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "13",
+  "revision": "14",
   "effects": [
     {
       "kind": "contribution",

@@ -156,7 +156,7 @@ describe("static data conversion", () => {
       ],
     }
     const result = convertSource(source, functions, [], [])
-    expect(result.definitions.revision).toBe("13")
+    expect(result.definitions.revision).toBe("14")
     for (const option of result.catalog.options) {
       const variant = option.variants[0]!
       const sameBlock = option.optionId.endsWith("unverified-same-block")
@@ -449,7 +449,7 @@ const angelData = (): SourceData => ({
 describe("developer stat revision", () => {
   it("maps the four registered records through the anomaly bonus channel", () => {
     const result = convertSource(angelData(), functions, [], [])
-    expect(result.definitions.revision).toBe("13")
+    expect(result.definitions.revision).toBe("14")
     const option = result.catalog.options.find(
       (o) =>
         o.optionId ===
@@ -741,7 +741,7 @@ const remielData = (): SourceData => ({
 describe("remielle mindscape 2 attribute anomaly scope revision", () => {
   it("adds the [异常] profession and attribute anomaly damage scope from the reviewed text", () => {
     const result = convertSource(remielData(), functions, [], [])
-    expect(result.definitions.revision).toBe("13")
+    expect(result.definitions.revision).toBe("14")
     const option = result.catalog.options.find((o) =>
       o.optionId.includes("eff-ms7tlurw-vhelyf"),
     )!
@@ -800,6 +800,239 @@ describe("remielle mindscape 2 attribute anomaly scope revision", () => {
       "self"
     expect(() => convertSource(narrowed, functions, [], [])).toThrow(
       /already encodes the beneficiary scope/,
+    )
+  })
+})
+
+/** 完整状态记录的固定源形状：显式叠层与默认字段，与源 JSON 一致。 */
+const remielCompleteStateEffect = (
+  id: string,
+  stat: string,
+  value: number,
+  applyTarget: "self" | "team",
+): SourceEffect => ({
+  id,
+  origin: "",
+  scope: "general",
+  applyTarget,
+  applySituation: "global",
+  applyProfession: null,
+  teamProfession: null,
+  teamProfessionValues: null,
+  teamProfessionMinCount: null,
+  skillSubcategoryId: null,
+  elementFilter: "all",
+  kind: "fixed",
+  stat,
+  value,
+  stackable: false,
+  maxStacks: 1,
+  valuePerStack: 0,
+  defaultStacks: 1,
+  appliesToAnomaly: true,
+  enabledDefault: true,
+  note: "",
+})
+
+/** 合成蕾米埃尔影画 1 块：独立抗穿记录 + 完整状态的两条记录。 */
+const remielMindscape1Data = (): SourceData => ({
+  agents: [
+    {
+      id: "remiel",
+      name: "蕾米埃尔",
+      profession: "异常",
+      mindscapeBuffs: Array.from({ length: 7 }, (_, rank) =>
+        rank === 1
+          ? {
+              effectBlocks: [
+                {
+                  id: "blk-legacy",
+                  name: "影画1",
+                  note: "进入战场时，蕾米埃尔获得3个特殊[虚曜]，在勘域模式中此效果180秒内最多触发一次；\n蕾米埃尔处于[相变时流]状态下时，队伍中其他角色造成的属性异常伤害提升10%。",
+                  effects: [
+                    remielCompleteStateEffect(
+                      "eff-ms7tin2y-0pja8e",
+                      "radianceResPen",
+                      50,
+                      "self",
+                    ),
+                    remielCompleteStateEffect(
+                      "eff-ms7tjecu-l3ocgm",
+                      "anomalyDmgBonus",
+                      10,
+                      "team",
+                    ),
+                    remielCompleteStateEffect(
+                      "eff-ms7tjyzo-3v31wa",
+                      "anomalyDmgBonus",
+                      -10,
+                      "self",
+                    ),
+                  ],
+                },
+              ],
+            }
+          : {},
+      ),
+    },
+  ],
+  driveDiscs: [],
+  skillSubcategories: [],
+  followUpSkillRules: [],
+  wengines: [],
+})
+
+describe("remielle mindscape 1 complete anomaly state", () => {
+  const optionId =
+    "agents:remiel:mindscape:1:phase-transition-flow:other-character-anomaly-damage"
+  const positiveOptionId =
+    "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjecu-l3ocgm"
+  const negativeOptionId =
+    "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
+  it("merges the team and holder records into one corrected complete option", () => {
+    const result = convertSource(remielMindscape1Data(), functions, [], [])
+    expect(result.definitions.revision).toBe("14")
+    const option = result.catalog.options.find((o) => o.optionId === optionId)!
+    expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
+    expect(option.conditionDescription).toBe(
+      "蕾米埃尔处于[相变时流]状态下时，队伍中其他角色造成的属性异常伤害提升10%。",
+    )
+    expect(option.target).toBe("team")
+    expect(option.variants).toHaveLength(1)
+    const variant = option.variants[0]!
+    expect(variant.status).toBe("corrected")
+    expect(variant.configuration).toEqual({ minimumMindscape: 1 })
+    expect(variant.maximumLayers).toBe(1)
+    expect(variant.inputs).toEqual([])
+    expect(variant.applicability).toEqual({})
+    expect(variant.differences).toEqual([
+      "remielle-mindscape1-complete-anomaly-state",
+    ])
+    expect(variant.effectIds).toEqual([
+      "agent:1581:zzz-hp:eff-ms7tjecu-l3ocgm:blk-legacy:mindscape:1",
+      "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1",
+    ])
+    for (const migratedOptionId of [positiveOptionId, negativeOptionId]) {
+      const variant = result.catalog.options.find(
+        (o) => o.optionId === migratedOptionId,
+      )!.variants[0]!
+      expect(variant.status).toBe("unsupported")
+      expect(variant.reason).toBe("semantic-conflict")
+      expect(variant.effectIds).toEqual([])
+      expect(variant.explanation).toContain(optionId)
+    }
+    // 独立抗穿选项保持可用，不并入完整状态。
+    const resistanceIgnore = result.catalog.options.find(
+      (o) =>
+        o.optionId ===
+        "agents:remiel:mindscape:1:blk-legacy:eff-ms7tin2y-0pja8e",
+    )!
+    expect(resistanceIgnore.variants[0]!.status).toBe("converted")
+    // 两条既有规则保留，数值与落点不变。
+    const ruleOf = (effectId: string) =>
+      result.definitions.effects.find(
+        (entry): entry is ContributionRule =>
+          entry.kind === "contribution" && entry.effectId === effectId,
+      )!
+    expect(
+      ruleOf("agent:1581:zzz-hp:eff-ms7tjecu-l3ocgm:blk-legacy:mindscape:1")
+        .parameters["amount"],
+    ).toMatchObject({ kind: "constant", unit: "ratio", value: 0.1 })
+    expect(
+      ruleOf("agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1")
+        .parameters["amount"],
+    ).toMatchObject({ kind: "constant", unit: "ratio", value: -0.1 })
+    // 两个来源位置保留在覆盖报告中，状态改为带原因的语义冲突。
+    for (const pointer of [
+      "/agents/0/mindscapeBuffs/1/effectBlocks/0/effects/1",
+      "/agents/0/mindscapeBuffs/1/effectBlocks/0/effects/2",
+    ]) {
+      const record = result.coverage.records.find(
+        (entry) => entry.pointer === pointer,
+      )!
+      expect(record.status).toBe("unsupported")
+      expect(record.reason).toBe("semantic-conflict")
+      expect(record.effectIds).toEqual([])
+    }
+    expect(result.coverage.summary).toMatchObject({
+      rawEffects: 3,
+      converted: 1,
+      corrected: 0,
+      unsupported: 2,
+    })
+    expect(
+      result.catalog.differences.some(
+        (d) => d.differenceId === "remielle-mindscape1-complete-anomaly-state",
+      ),
+    ).toBe(true)
+  })
+  it("keeps the stable identities when the source order changes", () => {
+    const reordered = remielMindscape1Data()
+    reordered.agents[0]!.mindscapeBuffs![1]!.effectBlocks![0]!.effects = [
+      ...[
+        ...reordered.agents[0]!.mindscapeBuffs![1]!.effectBlocks![0]!.effects,
+      ].reverse(),
+    ]
+    const result = convertSource(reordered, functions, [], [])
+    const option = result.catalog.options.find((o) => o.optionId === optionId)!
+    expect(option.variants[0]!.effectIds).toEqual([
+      "agent:1581:zzz-hp:eff-ms7tjecu-l3ocgm:blk-legacy:mindscape:1",
+      "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1",
+    ])
+    // 记录顺序变化只移动 Pointer，不改变选项身份。
+    expect(
+      result.coverage.records
+        .filter((record) => record.optionId === positiveOptionId)
+        .map((record) => record.pointer),
+    ).toEqual(["/agents/0/mindscapeBuffs/1/effectBlocks/0/effects/1"])
+  })
+  it("does not create the complete option when the pair is absent", () => {
+    const onlyM2 = convertSource(remielData(), functions, [], [])
+    expect(onlyM2.catalog.options.some((o) => o.optionId === optionId)).toBe(
+      false,
+    )
+  })
+  it("rejects stale registrations, half pairs and field drift", () => {
+    const drift = (mutate: (effects: SourceEffect[]) => void) => {
+      const source = remielMindscape1Data()
+      mutate(source.agents[0]!.mindscapeBuffs![1]!.effectBlocks![0]!.effects)
+      return () => convertSource(source, functions, [], [])
+    }
+    expect(
+      drift((effects) => {
+        effects[1]!.value = 20
+      }),
+    ).toThrow(/field drift/)
+    expect(
+      drift((effects) => {
+        effects[1]!.applyTarget = "self"
+      }),
+    ).toThrow(/field drift/)
+    expect(
+      drift((effects) => {
+        effects[1]!.stat = "dmgBonus"
+      }),
+    ).toThrow(/field drift/)
+    expect(
+      drift((effects) => {
+        effects.splice(1, 1)
+      }),
+    ).toThrow(/expects exactly one source record/)
+    expect(
+      drift((effects) => {
+        effects.push({ ...effects[1]! })
+      }),
+    ).toThrow(/Duplicate source effect/)
+    expect(
+      drift((effects) => {
+        effects[1]!.applyProfession = "异常"
+      }),
+    ).toThrow(/field drift/)
+    const note = remielMindscape1Data()
+    note.agents[0]!.mindscapeBuffs![1]!.effectBlocks![0]!.note =
+      "进入战场时，蕾米埃尔获得3个特殊[虚曜]。"
+    expect(() => convertSource(note, functions, [], [])).toThrow(
+      /block note drift/,
     )
   })
 })

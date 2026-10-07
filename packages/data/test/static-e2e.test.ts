@@ -80,7 +80,7 @@ async function inputFor(
     contractVersion: 1,
     gameVersion: "3.2",
     snapshotId:
-      "sha256:19f624e1171ca5a39bbabcb4b8b04aa95d05ce94c1c0603b0641770e29dd6b1d",
+      "sha256:e946d6b30b9747a3daeaac034fc14a4dc127c7e550ab63f0c54b1e1d4bf693c4",
   })
   expect(data.catalog.source.commit).toBe(reference.provenance.commit)
   expect(data.catalog.source.repository).toBe(reference.provenance.repository)
@@ -1638,5 +1638,133 @@ describe("hand-filled user panel: Remielle basic-7 direct and Voidflare", () => 
       voidflareAtDefenseZone(794 / (794 + 921.04 * 0.75 - 18)),
       "Voidflare with the stacked baseline",
     )
+  })
+
+  it("keeps the hand-filled Voidflare value with the complete mindscape 1 state selected", async () => {
+    const data = await loadStaticCalculationData({
+      agents: ["Remielle"],
+      wEngines: ["Ode of Resurrected Wings"],
+    })
+    const action = resolveAgentAction({
+      agent: data.agents[0]!.actions,
+      actionId: "action:agent:1581:action:0014",
+      mindscapeRank: actor.mindscapeRank,
+      levels: { basic: { mode: "effective", value: 16 } },
+    })
+    expect(action.ok, JSON.stringify(action)).toBe(true)
+    if (!action.ok || action.calculation.kind !== "luminize")
+      throw new Error("Expected the Luminize action")
+    const completeOptionId =
+      "agents:remiel:mindscape:1:phase-transition-flow:other-character-anomaly-damage"
+    const actionMultiplier = action.calculation.multiplier
+    const request = (
+      extra: StaticActionCalculationInput["selections"],
+    ): StaticActionCalculationInput => ({
+      data,
+      actors: [actor],
+      actorId: actor.entityId,
+      action,
+      target,
+      selections: [...selections, ...extra],
+      luminize: {
+        hit: {
+          element: "lumiflux" as const,
+          damageItems: [
+            {
+              mode: "direct" as const,
+              role: "base" as const,
+              itemId: "special-voidflare",
+              stat: "attack" as const,
+              statSource: { entityId: actor.entityId },
+              damageMultiplier: 1,
+            },
+          ],
+        },
+        damage: {
+          kind: "luminize" as const,
+          damageBonus: [],
+          anomalyDamageBonus: [],
+          refringe: { mode: "from-effects" as const },
+          anomalySource: {
+            mechanism: "remielle-special-voidflare" as const,
+            entityId: actor.entityId,
+            level: 60,
+            strength: "full" as const,
+          },
+          luminizeMultiplier: {
+            baseLuminizeMultiplier: actionMultiplier,
+            multiplicativeLuminizeMultiplierAdjustments: [],
+          },
+          defense: {
+            targetBaseDefense: 921.04,
+            defensePercentageAdjustments: [],
+            penetrationValues: [18],
+          },
+          resistance: {
+            targetResistance: 0,
+            targetResistanceReductions: [],
+            attackerResistanceIgnoreValues: [],
+          },
+          damageTaken: {
+            targetDamageTakenIncreases: [],
+            targetDamageTakenReductions: [],
+          },
+          stunDamage: {
+            isTargetStunned: false,
+            targetBaseStunDamageMultiplier: 1,
+            targetStunDamageMultiplierAdjustments: [],
+          },
+        },
+      },
+    })
+    const base = calculate(request([]))
+    // 完整状态：team +10% 与自身 −10% 同时生效（本次命中者是持有者本人），
+    // 单次耀变保持 #197 手填面板的 603772.8936244984…，不再出现只选旧 +10%
+    // 的半状态值 656274.8843744549，也不与 M2 忽防场景 657282.2297210818 混淆。
+    const complete = calculate(
+      request([
+        { holderId: actor.entityId, optionId: completeOptionId, layers: 1 },
+      ]),
+    )
+    close(
+      complete.totals.nonCritical,
+      voidflareExpected,
+      "complete state keeps the single Voidflare value",
+    )
+    close(
+      complete.totals.nonCritical,
+      base.totals.nonCritical,
+      "complete state equals the unselected value",
+    )
+    close(
+      complete.segments[0]!.damage.factors.nonCritical.anomalyDamageBonus!,
+      1.15,
+      "same-zone anomaly damage bonus stays at the explicit baseline",
+    )
+    close(
+      complete.segments[0]!.damage.factors.nonCritical.resistance!,
+      1.5,
+      "the independent 50% resistance ignore is unchanged",
+    )
+    // 旧记录不再接受独立选择：半状态错误值不可再由旧选项产生。
+    const legacy = calculateStaticActionDamage(
+      request([
+        {
+          holderId: actor.entityId,
+          optionId: "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjecu-l3ocgm",
+          layers: 1,
+        },
+      ]),
+    )
+    expect(legacy.ok).toBe(false)
+    if (!legacy.ok)
+      expect(
+        legacy.issues.some(
+          (issue) =>
+            issue.code === "INVALID_INPUT" &&
+            issue.message.includes(completeOptionId),
+        ),
+        JSON.stringify(legacy.issues),
+      ).toBe(true)
   })
 })

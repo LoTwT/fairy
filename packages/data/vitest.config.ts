@@ -23,6 +23,7 @@ const integrationTestFiles = [
   "test/agent-actions-publication.test.ts",
   "test/snapshot-build.test.ts",
   "test/snapshot-convert.test.ts",
+  "test/static-effects-evidence.test.ts",
   "test/update-report.test.ts",
 ]
 const packagingTestFiles = [
