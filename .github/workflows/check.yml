@@ -1,8 +1,9 @@
 name: Check
 
+# Pull requests verify the candidate merge result once. Merges do not repeat the full
+# check run on main: the merged commit reuses the corresponding pull request verification,
+# and a change to the merged content or base is re-verified for its actual scope.
 on:
-  push:
-    branches: [main]
   pull_request:
 
 permissions:
@@ -12,31 +13,122 @@ concurrency:
   group: check-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# Source checks and package consumption checks run on separate runners so neither lane waits
+# for the other. Both Node versions run both lanes. Each node's lanes are separate jobs
+# instead of one matrix so that the per-node summary below reads direct job results; a
+# matrix's aggregated result is not addressable per node, while these summaries must never
+# report success for a failed, cancelled, or skipped lane.
 jobs:
-  check:
-    name: Node ${{ matrix.node }}
+  source-node-24-11-0:
+    name: Source / Node 24.11.0
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    strategy:
-      fail-fast: false
-      matrix:
-        node: ["24.11.0", "24"]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           persist-credentials: false
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
-          node-version: ${{ matrix.node }}
+          node-version: "24.11.0"
       - name: Enable the repository package manager
         run: corepack enable
       - name: Install locked dependencies
         run: pnpm install --frozen-lockfile
-      - name: Check source, tests, and packed packages
-        run: pnpm check
+      - name: Check quality, package boundaries, and specification types
+        run: pnpm check:quality
+      - name: Check source, types, and regular tests in every package
+        run: pnpm --recursive --if-present check:source
+
+  source-node-24:
+    name: Source / Node 24
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "24"
+      - name: Enable the repository package manager
+        run: corepack enable
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Check quality, package boundaries, and specification types
+        run: pnpm check:quality
+      - name: Check source, types, and regular tests in every package
+        run: pnpm --recursive --if-present check:source
+
+  # The package lane starts from a cold checkout and never reuses the source lane's build
+  # output; within one workspace the build, packing, and prepare steps stay serial.
+  package-node-24-11-0:
+    name: Package / Node 24.11.0
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "24.11.0"
+      - name: Enable the repository package manager
+        run: corepack enable
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Verify the packed core package
+        run: pnpm --filter @randomplay/core verify:pack
+      - name: Verify the packed data package
+        run: pnpm --filter @randomplay/data verify:pack
+
+  package-node-24:
+    name: Package / Node 24
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "24"
+      - name: Enable the repository package manager
+        run: corepack enable
+      - name: Install locked dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Verify the packed core package
+        run: pnpm --filter @randomplay/core verify:pack
+      - name: Verify the packed data package
+        run: pnpm --filter @randomplay/data verify:pack
       - name: Install browser acceptance runtime
-        if: matrix.node == '24'
         run: pnpm --filter @randomplay/data exec playwright install --with-deps chromium
       - name: Verify Vite development and production consumption
-        if: matrix.node == '24'
         run: pnpm --filter @randomplay/data verify:browser
+
+  gate-node-24-11-0:
+    name: Node 24.11.0
+    needs: [source-node-24-11-0, package-node-24-11-0]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Require both lanes to succeed
+        run: |
+          echo "source lane: ${{ needs.source-node-24-11-0.result }}"
+          echo "package lane: ${{ needs.package-node-24-11-0.result }}"
+          test "${{ needs.source-node-24-11-0.result }}" = "success"
+          test "${{ needs.package-node-24-11-0.result }}" = "success"
+
+  gate-node-24:
+    name: Node 24
+    needs: [source-node-24, package-node-24]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Require both lanes to succeed
+        run: |
+          echo "source lane: ${{ needs.source-node-24.result }}"
+          echo "package lane: ${{ needs.package-node-24.result }}"
+          test "${{ needs.source-node-24.result }}" = "success"
+          test "${{ needs.package-node-24.result }}" = "success"

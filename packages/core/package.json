@@ -25,7 +25,8 @@
   },
   "scripts": {
     "build": "tsdown",
-    "check": "pnpm typecheck && pnpm test && pnpm verify:pack",
+    "check": "pnpm check:source && pnpm verify:pack",
+    "check:source": "pnpm typecheck && pnpm test",
     "prepack": "pnpm build",
     "test": "vitest run --exclude test/verify-package.test.ts",
     "test:watch": "vitest --exclude test/verify-package.test.ts",
