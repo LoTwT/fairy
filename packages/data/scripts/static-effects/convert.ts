@@ -26,7 +26,10 @@ import type {
 import identities from "./identities.json" with { type: "json" }
 import evidence from "./rank-evidence.json" with { type: "json" }
 import {
+  COMPLETE_STATE_OPTIONS,
   SOURCE_SEMANTICS,
+  type CompleteStateOptionRegistration,
+  type CompleteStateSourceRecord,
   type CoreSkillLevelSemantics,
   type DeveloperRevisionEvidence,
 } from "./semantics.ts"
@@ -1510,6 +1513,141 @@ function compile(
   }
 }
 
+/**
+ * 完整状态选项：把已核对的来源记录合并为一个完整状态选择，登记的记录
+ * 全部作为该选项的 effectIds 同时生效；原有选项保留为带迁移说明的
+ * semantic-conflict 入口，覆盖报告保留各来源位置的去向。只处理显式登记的
+ * 记录对：按 category/entity/rankKind/rank/block/effect 稳定身份定位并逐字段
+ * 核对原始与规范化记录，身份缺失、重复或字段漂移都拒绝生成；数组重排只
+ * 改变 Pointer，不改变身份。来源不含整对记录时（合成子集）不生成该选项；
+ * 只要出现任一条登记记录，就要求全部登记记录逐项吻合，避免只合并一半。
+ */
+function applyCompleteStateOptions(
+  registrations: readonly CompleteStateOptionRegistration[],
+  records: readonly SourceRecord[],
+  options: StaticCatalogOption[],
+  coverage: CoverageRecord[],
+): StaticCatalogOption[] {
+  const added: StaticCatalogOption[] = []
+  for (const registration of registrations) {
+    const identity = (
+      record: SourceRecord,
+      candidate: CompleteStateSourceRecord,
+    ) =>
+      `${record.category}:${record.entityId}` ===
+        registration.catalogEntityId &&
+      record.rankKind === candidate.rankKind &&
+      record.rank === candidate.rank &&
+      record.blockId === candidate.blockId &&
+      record.raw.id === candidate.effectId
+    if (
+      !registration.records.some((entry) =>
+        records.some((record) => identity(record, entry)),
+      )
+    )
+      continue
+    const effectIds: EffectId[] = [],
+      references: SourceReference[] = [],
+      migrated: {
+        record: SourceRecord
+        option: StaticCatalogOption
+        variant: StaticCatalogVariant
+      }[] = []
+    for (const entry of registration.records) {
+      const matches = records.filter((record) => identity(record, entry))
+      if (matches.length !== 1)
+        throw new Error(
+          `Complete state option ${registration.optionId} expects exactly one source record for ${entry.blockId}/${entry.effectId}, found ${matches.length}`,
+        )
+      const record = matches[0]!
+      if (!record.blockNote.includes(entry.blockNoteIncludes))
+        throw new Error(
+          `Complete state option ${registration.optionId} block note drift at ${record.pointer}`,
+        )
+      for (const [field, value] of Object.entries(entry.expectation))
+        for (const [label, document] of [
+          ["raw", record.raw],
+          ["normalized", record.normalized],
+        ] as const) {
+          if (document === undefined)
+            throw new Error(
+              `Complete state option ${registration.optionId} lost the ${label} record at ${record.pointer}`,
+            )
+          const actual = document[field as keyof SourceEffect]
+          if (JSON.stringify(actual) !== JSON.stringify(value))
+            throw new Error(
+              `Complete state option ${registration.optionId} ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(actual)}`,
+            )
+        }
+      const optionId = `${registration.catalogEntityId}:${entry.rankKind}:${entry.rank}:${idPart(entry.blockId)}:${idPart(entry.effectId)}`
+      const option = options.find(
+        (candidate) => candidate.optionId === optionId,
+      )
+      const variant =
+        option?.variants.length === 1 ? option.variants[0] : undefined
+      if (
+        !option ||
+        !variant ||
+        variant.status === "unsupported" ||
+        variant.effectIds.length !== 1
+      )
+        throw new Error(
+          `Complete state option ${registration.optionId} expects the selectable source option ${optionId}`,
+        )
+      effectIds.push(...variant.effectIds)
+      references.push(...variant.references)
+      migrated.push({ record, option, variant })
+    }
+    if (new Set(effectIds).size !== effectIds.length)
+      throw new Error(
+        `Complete state option ${registration.optionId} repeats an effect identity`,
+      )
+    added.push({
+      optionId: registration.optionId,
+      catalogEntityId: registration.catalogEntityId,
+      name: registration.name,
+      conditionDescription: registration.conditionDescription,
+      target: registration.target,
+      variants: [
+        {
+          configuration: { minimumMindscape: registration.minimumMindscape },
+          status: "corrected",
+          references: references as unknown as NonEmpty<SourceReference>,
+          effectIds,
+          maximumLayers: 1,
+          inputs: [],
+          applicability: {},
+          differences: [registration.differenceId],
+        },
+      ],
+    })
+    for (const entry of migrated) {
+      const explanation = `该记录已并入完整状态选项 ${registration.optionId}（行为修正 ${registration.differenceId}）：${registration.migrationExplanation}；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 ${entry.record.pointer}。`
+      options[options.indexOf(entry.option)] = {
+        ...entry.option,
+        variants: [
+          {
+            ...entry.variant,
+            effectIds: [],
+            status: "unsupported",
+            reason: "semantic-conflict",
+            explanation,
+          },
+        ],
+      }
+      for (const row of coverage.filter(
+        (candidate) => candidate.pointer === entry.record.pointer,
+      )) {
+        row.status = "unsupported"
+        row.reason = "semantic-conflict"
+        row.explanation = explanation
+        row.effectIds = []
+      }
+    }
+  }
+  return added
+}
+
 export function convertSource(
   data: SourceData,
   functions: SourceNormalization,
@@ -1683,6 +1821,16 @@ export function convertSource(
       variants: variants as unknown as NonEmpty<StaticCatalogVariant>,
     })
   }
+  // 完整状态选项在全部来源位置分组后合并：原记录仍保留各自选项作为
+  // 迁移入口，两条规则由完整选项同时引用。
+  options.push(
+    ...applyCompleteStateOptions(
+      COMPLETE_STATE_OPTIONS,
+      collected.records,
+      options,
+      coverage,
+    ),
+  )
   const astra = effects.find(
     (r) =>
       r.kind === "contribution" &&
@@ -1885,7 +2033,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "13",
+    revision: "14",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -2146,6 +2294,16 @@ export function convertSource(
             )
             .flatMap((variant) => variant.references),
         ),
+      },
+      {
+        differenceId: "remielle-mindscape1-complete-anomaly-state",
+        explanation:
+          "蕾米埃尔影画 1 的块 note 与 Nanoka 天赋 1（agents/1581/details.zh.json 的 /talent/1/desc）同文的后一条款为“蕾米埃尔处于[相变时流]状态下时，队伍中其他角色造成的属性异常伤害提升10%”。固定来源 fac62407 把该状态拆成同一块（/agents/51/mindscapeBuffs/1/effectBlocks/0）的两条记录：effects/1 为 team anomalyDmgBonus +10、effects/2 为自身 anomalyDmgBonus −10，后者把持有者自身排除。固定版上游允许逐 effect 独立切换——BuffEffectPickerModal.vue 的 isEnabled/setEnabled/toggleEffect 按 effect 开关、toggleCard 批量切换；panelBuffCalc.ts 的 buildDefaultBuffSelection 默认全部开启并按 team 共享、self 槽位分别选择；resolvePackMods 对自身取 self+team、他人只取 team（两个文件摘要登记在来源清单），因此上游不会强制两条成对激活。单选 +10% 会让持有者自身也多算 10%（半状态），只选 −10% 也不是该状态。Fairy 的完整状态选择契约因此提供一个完整选项 agents:remiel:mindscape:1:phase-transition-flow:other-character-anomaly-damage：单一 corrected 变体同时引用两条既有规则（effectId 与规则数值不变，team +0.1 与 holder −0.1 在既有异常增伤乘区一次求和），minimumMindscape 1、maximumLayers 1、无必需输入与额外职业/潜能门槛；M0 拒绝、M1—M6 合法且只应用一次，不选或合法 layers 0 表示关闭，解锁不自动启用。两个旧 optionId 保留为 semantic-conflict 迁移入口，不再接受单选、两项齐选或与完整选项混选；来源位置仍在覆盖报告中保留去向并说明不是功能退步。10% 只作用于普通异常、异放、乱流与耀变（anomalyDmgBonus 既有映射边界），紊乱继续使用独立 disorderDmgBonus，普通直伤（regular/sheer/sharpen）不受影响；影画 1 的 50% 耀变专属抗穿（radianceResPen）是独立条款，规则与选项保持独立，不并入本完整状态。",
+        references: [
+          reference("/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/1"),
+          reference("/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/2"),
+          nanokaReference("agents/1581/details.zh.json", "/talent/1/desc"),
+        ],
       },
       {
         differenceId: "angel-in-the-shell-anomaly-stat-revision",

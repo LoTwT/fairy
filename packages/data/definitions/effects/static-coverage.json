@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "13",
+  "revision": "14",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -23,8 +23,16 @@
         "sha256": "43ec23eafa28b8d0748636ab9885e1497fab8cd11e458268acd746c9adc40c09"
       },
       {
+        "path": "zzz-hp/src/components/calculator/BuffEffectPickerModal.vue",
+        "sha256": "f99ec3f6e104e931a35dfbf507067ea3e69bb2e3a71ed006934354dd8de5af00"
+      },
+      {
         "path": "zzz-hp/src/utils/damageCalc.ts",
         "sha256": "2ef2e81cd11af03a3f9a5df82622c238ae3b6f9596346eee97136b7a2b427a71"
+      },
+      {
+        "path": "zzz-hp/src/utils/resolvedHit.ts",
+        "sha256": "b5f4a0692cb2277728d77bc2c34f5416d092d93a39144a77396c11939687de00"
       },
       {
         "path": "zzz-hp/src/utils/multFactorPercent.ts",
@@ -15683,13 +15691,13 @@
       "rankKind": "mindscape",
       "stat": "anomalyDmgBonus",
       "optionId": "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjecu-l3ocgm",
-      "effectIds": [
-        "agent:1581:zzz-hp:eff-ms7tjecu-l3ocgm:blk-legacy:mindscape:1"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
       "normalizationChanges": [],
       "rawValue": 10,
-      "normalizedValue": 10
+      "normalizedValue": 10,
+      "reason": "semantic-conflict",
+      "explanation": "该记录已并入完整状态选项 agents:remiel:mindscape:1:phase-transition-flow:other-character-anomaly-damage（行为修正 remielle-mindscape1-complete-anomaly-state）：[相变时流]状态由 team +10% 与自身 −10% 两条记录同时生效才表示“队伍中其他角色”；块 note 与 Nanoka 天赋 1 同文确认该状态只提升队伍中其他角色；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/51/mindscapeBuffs/1/effectBlocks/0/effects/1。"
     },
     {
       "pointer": "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/2",
@@ -15698,13 +15706,13 @@
       "rankKind": "mindscape",
       "stat": "anomalyDmgBonus",
       "optionId": "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa",
-      "effectIds": [
-        "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
       "normalizationChanges": [],
       "rawValue": -10,
-      "normalizedValue": -10
+      "normalizedValue": -10,
+      "reason": "semantic-conflict",
+      "explanation": "该记录已并入完整状态选项 agents:remiel:mindscape:1:phase-transition-flow:other-character-anomaly-damage（行为修正 remielle-mindscape1-complete-anomaly-state）：[相变时流]状态由 team +10% 与自身 −10% 两条记录同时生效才表示“队伍中其他角色”；块 note 与 Nanoka 天赋 1 同文确认该状态只提升队伍中其他角色；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/51/mindscapeBuffs/1/effectBlocks/0/effects/2。"
     },
     {
       "pointer": "/agents/51/mindscapeBuffs/2/effectBlocks/0/effects/0",
@@ -30273,10 +30281,10 @@
     "emptyPacks": 366,
     "rawEffects": 1290,
     "rules": 850,
-    "options": 834,
-    "converted": 1236,
+    "options": 835,
+    "converted": 1234,
     "corrected": 50,
-    "unsupported": 4,
+    "unsupported": 6,
     "supplements": {
       "records": 10,
       "rules": 9,

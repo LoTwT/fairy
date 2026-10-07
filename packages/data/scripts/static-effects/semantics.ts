@@ -1,6 +1,7 @@
 import type {
   DamageElement,
   DamageKind,
+  MindscapeRank,
   SkillCategory,
   SpecialSkillLevel,
   Unit,
@@ -266,6 +267,58 @@ export type SourceSemantics =
       readonly verification: string
     }
 
+/**
+ * 完整状态选项登记：固定来源把同一游戏状态拆成多条可独立切换的记录
+ * （上游增益面板逐 effect 开关，自身读取 self+team、他人只取 team），而块
+ * note 与 Nanoka 同文已明确该状态只提升队伍中其他角色。Fairy 只提供一个
+ * 完整状态选项：登记的记录全部作为该选项的 effectIds 同时生效，原有选项
+ * 保留为带迁移说明的语义冲突入口，不再接受单选或齐选。本登记只覆盖已核对
+ * 的记录，不构成通用配对框架；记录身份或字段漂移即拒绝生成。
+ */
+export interface CompleteStateSourceRecord {
+  readonly rankKind: "mindscape" | "refinement" | "setPieces" | "fixed"
+  readonly rank: number
+  readonly blockId: string
+  readonly effectId: string
+  /** 记录所属块 note 必须包含的完整条款文字。 */
+  readonly blockNoteIncludes: string
+  /** 原始与规范化记录都逐字段核对的期望值；任一项缺失或漂移即拒绝生成。 */
+  readonly expectation: {
+    readonly stat: string
+    readonly value: number
+    readonly scope: string
+    readonly applyTarget: "self" | "team"
+    readonly applySituation: string
+    readonly applyProfession: null
+    readonly teamProfession: null
+    readonly teamProfessionValues: null
+    readonly elementFilter: "all"
+    readonly kind: "fixed"
+    readonly stackable: false
+    readonly maxStacks: number
+    readonly valuePerStack: number
+    readonly defaultStacks: number
+    readonly appliesToAnomaly: boolean
+    readonly enabledDefault: boolean
+    readonly note: ""
+  }
+}
+
+export interface CompleteStateOptionRegistration {
+  readonly optionId: string
+  readonly catalogEntityId: string
+  readonly name: string
+  readonly conditionDescription: string
+  readonly target: "self" | "team"
+  readonly minimumMindscape: MindscapeRank
+  readonly differenceId: string
+  /** 迁移入口的说明正文：该状态的记录必须一起生效及文本依据。 */
+  readonly migrationExplanation: string
+  readonly records: readonly CompleteStateSourceRecord[]
+  readonly evidence: readonly SemanticsEvidenceReference[]
+  readonly verification: string
+}
+
 const lucyEvidence = [
   {
     path: "agents/1151/details.zh.json",
@@ -394,12 +447,24 @@ const angelRevisionVerification = (refinement: 2 | 3 | 4 | 5): string => {
   return `ZZZ-HP 开发者修订导出（exportedAt ${angelRevisionExportedAt}，整文件 SHA-256 ${angelRevisionSha256}，本机冻结于 ${angelRevisionFile}）按 ID 定位壳中之灵（wengines/0）后确认：精炼 ${refinement} 的 legacy-self-special 记录实为 anomalyDmgBonus（数值 ${value}%），effectBlocks 与 effects 两个表示同步改名，selfMods 数值从 special 迁至 anomalyDmgBonus。生成时逐字段核对导出与固定源仅存在该四条记录的登记差异。修订数据若交由上游 withRefinementAnomalyFlags 处理，会按 stat/kind/scope/target 从精炼 1 继承 appliesToAnomaly=true；Fairy 仍规范化固定旧源、不改写规范化记录（normalizationChanges 为空、stat 保持 special、记录不含该字段），修正后规则的 when 条件由修订字段映射与既有 whenFor 逻辑得到，与精炼 1 既有异常增伤规则一致（附件本身未写该字段，不冒充附件原始内容）。该修订导出不属于固定提交，不表示 ZZZ-HP 仓库已合入或发布。`
 }
 
-/** 蕾米埃尔影画 2：块 note 与 Nanoka 天赋同文限定受益职业与伤害类别。 */
+/**
+ * 蕾米埃尔影画 2：块 note 与 Nanoka 天赋同文限定受益职业与伤害类别。
+ * 影画 1 同一份详情文件的天赋 1 原文确认“队伍中其他角色”条款。
+ */
+const remielleDetailsSha =
+  "a6559f099b14b2adc35950138eb0af8336be7d9a1a4d57b800dda41dab9a18f6"
 const remielleMindscape2Evidence: readonly SemanticsEvidenceReference[] = [
   {
     path: "agents/1581/details.zh.json",
     pointer: "/talent/2/desc",
-    sha256: "a6559f099b14b2adc35950138eb0af8336be7d9a1a4d57b800dda41dab9a18f6",
+    sha256: remielleDetailsSha,
+  },
+]
+const remielleMindscape1Evidence: readonly SemanticsEvidenceReference[] = [
+  {
+    path: "agents/1581/details.zh.json",
+    pointer: "/talent/1/desc",
+    sha256: remielleDetailsSha,
   },
 ]
 
@@ -1154,3 +1219,85 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
       "块 note 与 Nanoka 天赋 2 同文：“队伍中[异常]角色对[幻色]效果下的敌人造成属性异常伤害时，无视目标15%的防御力”。上游记录未编码受益职业（applyProfession null）与伤害类别（scope general、appliesToAnomaly 仅表示允许异常），effectMatchesContext 对 general 直接放行且职业门槛只在 applyProfession 非空时执行，因此显式选中后普通直伤与非异常职业都会受益。身份映射沿用固定来源的真实调用链：resolvedHit.ts 的 ResolvedHit 以 ownerAgentId 表示流程归属（“异常类只用于伤害归属，减防/无视取 triggerAgentId”）、anomalyPowerAgentId 表示异常强度提供者、triggerAgentId 表示异常类触发者；optimalAffixAlloc.ts 由 hit.triggerAgentId 取得触发者最终面板（anomalyTriggerPanel），元素取强度提供者；damageCalc.ts 的防御区从 anomalyTriggerPanel 读取 ignoreDefense/reduceDefense，穿透率与穿透值取强度提供者面板（anomalyBasePanel = triggerFinalPanel）。因此 Fairy 的 hit.actorId 对应本次结算触发者（职业门槛与减防读取对象），damage.anomalySource（可带 snapshotId）对应强度提供者；不是增益提供者，也不是另一角色的职业证据。[幻色]与消失后 8 秒仍由调用方显式选择表示条件有效。伤害类别采用固定计算链的异常类范围：damageCalc.ts 的 useTriggerBase 同时覆盖属性异常、异放、紊乱、乱流与耀变（skillNeedsDualAgents 对 mapEventKindToCalc 的 damageKind === 'anomaly' 全类成立），攻略 3.4.1 亦说明“[紊乱]应被视为一种属性异常效果”；本条因此把 disorder 与普通异常、异放、乱流、耀变一并纳入，不套用 anomalyDmgBonus/anomalyCritRate 等增伤或暴击通道的适用拆分（那是各自乘区的映射），也不以文本未列明[紊乱]自造排除。该范围是沿用固定计算链的静态约定，不是游戏实测结论；普通直伤（regular/sheer/sharpen）仍排除。",
   },
 }
+
+/**
+ * 蕾米埃尔影画 1 的完整状态登记：块 note 与 Nanoka 天赋 1 同文的后一个条款
+ * 是“蕾米埃尔处于[相变时流]状态下时，队伍中其他角色造成的属性异常伤害提升
+ * 10%”；固定来源把它记录为两条记录（team +10% 与自身 −10%），两条必须同时
+ * 生效才表达“其他角色”。
+ */
+export const COMPLETE_STATE_OPTIONS: readonly CompleteStateOptionRegistration[] =
+  [
+    {
+      optionId:
+        "agents:remiel:mindscape:1:phase-transition-flow:other-character-anomaly-damage",
+      catalogEntityId: "agents:remiel",
+      name: "相变时流 · 其他角色属性异常伤害",
+      conditionDescription:
+        "蕾米埃尔处于[相变时流]状态下时，队伍中其他角色造成的属性异常伤害提升10%。",
+      target: "team",
+      minimumMindscape: 1,
+      differenceId: "remielle-mindscape1-complete-anomaly-state",
+      migrationExplanation:
+        "[相变时流]状态由 team +10% 与自身 −10% 两条记录同时生效才表示“队伍中其他角色”；块 note 与 Nanoka 天赋 1 同文确认该状态只提升队伍中其他角色",
+      records: [
+        {
+          rankKind: "mindscape",
+          rank: 1,
+          blockId: "blk-legacy",
+          effectId: "eff-ms7tjecu-l3ocgm",
+          blockNoteIncludes:
+            "蕾米埃尔处于[相变时流]状态下时，队伍中其他角色造成的属性异常伤害提升10%",
+          expectation: {
+            stat: "anomalyDmgBonus",
+            value: 10,
+            scope: "general",
+            applyTarget: "team",
+            applySituation: "global",
+            applyProfession: null,
+            teamProfession: null,
+            teamProfessionValues: null,
+            elementFilter: "all",
+            kind: "fixed",
+            stackable: false,
+            maxStacks: 1,
+            valuePerStack: 0,
+            defaultStacks: 1,
+            appliesToAnomaly: true,
+            enabledDefault: true,
+            note: "",
+          },
+        },
+        {
+          rankKind: "mindscape",
+          rank: 1,
+          blockId: "blk-legacy",
+          effectId: "eff-ms7tjyzo-3v31wa",
+          blockNoteIncludes:
+            "蕾米埃尔处于[相变时流]状态下时，队伍中其他角色造成的属性异常伤害提升10%",
+          expectation: {
+            stat: "anomalyDmgBonus",
+            value: -10,
+            scope: "general",
+            applyTarget: "self",
+            applySituation: "global",
+            applyProfession: null,
+            teamProfession: null,
+            teamProfessionValues: null,
+            elementFilter: "all",
+            kind: "fixed",
+            stackable: false,
+            maxStacks: 1,
+            valuePerStack: 0,
+            defaultStacks: 1,
+            appliesToAnomaly: true,
+            enabledDefault: true,
+            note: "",
+          },
+        },
+      ],
+      evidence: remielleMindscape1Evidence,
+      verification:
+        "块 note 与 Nanoka 天赋 1（agents/1581/details.zh.json 的 /talent/1/desc）同文确认后一条款：“蕾米埃尔处于[相变时流]状态下时，队伍中其他角色造成的属性异常伤害提升10%”。固定来源把它编码为同一块的两条记录：team anomalyDmgBonus +10 与自身 anomalyDmgBonus −10，后者把持有者自身排除，两条必须同时生效才表示“其他角色”。上游允许逐 effect 独立开关（固定版 BuffEffectPickerModal.vue 的 isEnabled/setEnabled/toggleEffect 按 effect、toggleCard 批量；panelBuffCalc.ts 的 buildDefaultBuffSelection 默认全开并按 team/self 槽位分别选择；resolvePackMods 对自身取 self+team、他人只取 team），因此固定来源不会强制成对激活，单选旧 +10% 记录会给持有者自身也多算 10%。Fairy 按本登记只提供完整状态选项并保留旧选项为迁移入口。",
+    },
+  ]

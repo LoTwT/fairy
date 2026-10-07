@@ -240,6 +240,70 @@ globalThis.fairyRemielMindscape2Scope = async () => {
   return { anomaly: run("anomaly", true), direct: run("regular", true), off: run("anomaly", false) }
 }
 
+globalThis.fairyRemielMindscape1CompleteState = async () => {
+  const [definitions, catalog, engine] = await Promise.all([
+    import("@randomplay/data/definitions/effects/static.json"),
+    import("@randomplay/data/definitions/effects/static-catalog.json"),
+    import("@randomplay/core"),
+  ])
+  // 蕾米埃尔影画 1 完整状态（revision 14）：team +10% 与自身 −10% 合并为一个
+  // 完整选项；队友异常命中得到 1.1，持有者自身命中净 0。旧 +10% 单选选项不再
+  // 可用，返回带新选项 ID 的迁移错误。
+  const completeOption = "agents:remiel:mindscape:1:phase-transition-flow:other-character-anomaly-damage"
+  const legacyPositiveOption = "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjecu-l3ocgm"
+  const input = (trigger, optionId) => ({
+    definitions: definitions.default,
+    catalog: catalog.default,
+    bindings: [
+      { bindingId: "binding:m1-agent", kind: "agent", holderId: "entity:m1", sourceEntityId: "1581", eligible: true, configuration: { mindscapeRank: 1, coreSkillLevel: 7 } },
+    ],
+    actorSources: [
+      { entityId: "entity:m1", agentEntityId: "1581" },
+      { entityId: "entity:m1-teammate", agentEntityId: "1261" },
+    ],
+    selections: optionId ? [{ optionId, bindingId: "binding:m1-agent", layers: 1 }] : [],
+    world: { entities: [
+      { kind: "actor", entityId: "entity:m1", teamId: "team:players", generalStats: { attack: { baseValue: 1000, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] }, anomalyProficiency: { baseValue: 100, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] } }, directStats: { criticalRate: { baseValue: 0, additions: [] }, criticalDamage: { baseValue: 0, additions: [] }, penetrationRatio: { baseValue: 0, additions: [] }, sharpCriticalDamage: { baseValue: 0, additions: [] } } },
+      { kind: "actor", entityId: "entity:m1-teammate", teamId: "team:players", generalStats: { attack: { baseValue: 100, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] }, anomalyProficiency: { baseValue: 100, initialPercentage: [], initialFixed: [], finalPercentage: [], finalFixed: [] } }, directStats: { criticalRate: { baseValue: 0, additions: [] }, criticalDamage: { baseValue: 0, additions: [] }, penetrationRatio: { baseValue: 0, additions: [] }, sharpCriticalDamage: { baseValue: 0, additions: [] } } },
+      { kind: "actor", entityId: "entity:m1-enemy", teamId: "team:enemies", generalStats: {}, directStats: {} },
+    ], states: [], distances: [] },
+    hit: { actorId: trigger, targetId: "entity:m1-enemy", actionId: "action:oracle", skillCategory: "basic", element: "physical", skillTags: [], damageItems: [{ mode: "direct", role: "base", itemId: "base", stat: "attack", statSource: { entityId: "entity:m1-teammate" }, damageMultiplier: 1 }] },
+    damage: {
+      kind: "anomaly",
+      damageBonus: { settledMultiplier: 1 },
+      anomalySource: { entityId: "entity:m1-teammate", level: 60 },
+      defense: { targetBaseDefense: 1000, defensePercentageAdjustments: [], penetrationValues: [] },
+      resistance: { targetResistance: 0, targetResistanceReductions: [], attackerResistanceIgnoreValues: [] },
+      damageTaken: { targetDamageTakenIncreases: [], targetDamageTakenReductions: [] },
+      stunDamage: { isTargetStunned: false, targetBaseStunDamageMultiplier: 1, targetStunDamageMultiplierAdjustments: [] },
+      anomalyDamageBonus: [],
+      refringe: { mode: "settled", multiplier: 1 },
+      anomalyCriticalRate: 0,
+      anomalyCriticalDamage: [],
+    },
+  })
+  const run = (trigger, optionId) => {
+    const result = engine.calculateStaticDamageFromCatalog(input(trigger, optionId))
+    if (!result.ok) return { ok: false, issues: result.issues }
+    return {
+      ok: true,
+      bonus: result.value.factors.nonCritical.anomalyDamageBonus,
+      expected: result.value.expected,
+    }
+  }
+  return {
+    teammate: run("entity:m1-teammate", completeOption),
+    holder: run("entity:m1", completeOption),
+    legacy: (() => {
+      const result = engine.calculateStaticDamageFromCatalog(input("entity:m1-teammate", legacyPositiveOption))
+      return {
+        ok: result.ok,
+        mentionsCompleteOption: result.ok ? false : result.issues.some((issue) => issue.message.includes(completeOption)),
+      }
+    })(),
+  }
+}
+
 globalThis.fairyStaticInputs = async () => {
   const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["Ben"], wEngines: [] }), import("@randomplay/core")])
   const agent = data.agents[0].actions
@@ -856,6 +920,23 @@ function defineScenarios(counts: {
             expect(scope.direct.count).toBe(0)
             expect(scope.direct.defense).toBeCloseTo(794 / (794 + 1000), 12)
             expect(scope.off.count).toBe(0)
+            // 影画 1 完整状态：队友命中 1.1、持有者自身净 0；旧 +10% 单选
+            // 选项返回带完整选项 ID 的迁移错误。
+            const completeState = await page.evaluate(() =>
+              (globalThis as any).fairyRemielMindscape1CompleteState(),
+            )
+            expect(completeState.teammate.ok).toBe(true)
+            expect(completeState.teammate.bonus).toBeCloseTo(1.1, 12)
+            expect(completeState.holder.ok).toBe(true)
+            expect(completeState.holder.bonus).toBeCloseTo(1, 12)
+            expect(completeState.holder.expected).toBeCloseTo(
+              completeState.teammate.expected / 1.1,
+              9,
+            )
+            expect(completeState.legacy).toEqual({
+              ok: false,
+              mentionsCompleteOption: true,
+            })
           },
           sources: [
             "definitions/effects/static.json",

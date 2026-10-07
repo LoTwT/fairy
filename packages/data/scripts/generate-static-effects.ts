@@ -11,7 +11,11 @@ import {
 } from "./candidate-output.ts"
 import { convertSource } from "./static-effects/convert.ts"
 import { loadSource } from "./static-effects/source.ts"
-import { SOURCE_SEMANTICS } from "./static-effects/semantics.ts"
+import {
+  COMPLETE_STATE_OPTIONS,
+  SOURCE_SEMANTICS,
+  type CompleteStateOptionRegistration,
+} from "./static-effects/semantics.ts"
 import {
   developerRevisionEntries,
   verifyDeveloperRevisionExport,
@@ -102,6 +106,63 @@ async function verifyEvidenceReferences(
 }
 
 /**
+ * 完整状态选项登记的证据逐条核对；生成路径与测试使用同一入口，标识到
+ * optionId。默认核对生产登记；测试传入变更后的登记副本以核对拒绝行为。
+ */
+export async function verifyCompleteStateOptionEvidence(
+  publication: string,
+  registrations: readonly CompleteStateOptionRegistration[] = COMPLETE_STATE_OPTIONS,
+): Promise<readonly string[]> {
+  const verified: string[] = []
+  for (const registration of registrations) {
+    const label = `complete-state-option:${registration.optionId}`
+    await verifyEvidenceReferences(publication, label, registration.evidence)
+    verified.push(label)
+  }
+  return verified
+}
+
+/**
+ * 生成路径的来源证据验证：rank-evidence、来源语义与完整状态选项登记、
+ * 补充来源。返回实际验证的登记标识，测试据此核对登记确实被消费。
+ */
+export async function verifyStaticEffectsEvidence(
+  publication: string,
+): Promise<readonly string[]> {
+  const verified: string[] = []
+  for (const [key, entry] of Object.entries(evidence)) {
+    await verifyEvidenceReferences(
+      publication,
+      `rank-evidence:${key}`,
+      entry.evidence,
+      "parameters" in entry,
+    )
+    verified.push(`rank-evidence:${key}`)
+  }
+  // developer-revised-stat 的证据是冻结开发者导出，不属于 integrated，
+  // 由 verifyDeveloperRevisionEvidence 单独核对，不走 Nanoka 路径。
+  for (const [key, semantics] of Object.entries(SOURCE_SEMANTICS)) {
+    if (semantics.kind === "developer-revised-stat") continue
+    await verifyEvidenceReferences(
+      publication,
+      `semantics:${key}`,
+      semantics.evidence,
+    )
+    verified.push(`semantics:${key}`)
+  }
+  verified.push(...(await verifyCompleteStateOptionEvidence(publication)))
+  for (const supplement of SUPPLEMENTS) {
+    await verifyEvidenceReferences(
+      publication,
+      `supplement:${supplement.supplementId}`,
+      supplement.evidence,
+    )
+    verified.push(`supplement:${supplement.supplementId}`)
+  }
+  return verified
+}
+
+/**
  * 冻结的开发者修订导出先按整文件摘要与 exportedAt 核对，再执行纯结构的
  * 按 ID 定位、指针身份与逐字段差异核对（仅登记差异）；raw 缺失、摘要不符
  * 或出现未登记差异都拒绝生成。普通构建与测试不读取该本机文件。
@@ -180,28 +241,9 @@ export async function generateStaticEffects(
       throw new Error(
         "The identity/rank evidence belongs to a different Nanoka snapshot",
       )
-    for (const [key, entry] of Object.entries(evidence))
-      await verifyEvidenceReferences(
-        publication,
-        `rank-evidence:${key}`,
-        entry.evidence,
-        "parameters" in entry,
-      )
-    // developer-revised-stat 的证据是冻结开发者导出，不属于 integrated，
-    // 由 verifyDeveloperRevisionEvidence 单独核对，不走 Nanoka 路径。
-    for (const [key, semantics] of Object.entries(SOURCE_SEMANTICS))
-      if (semantics.kind !== "developer-revised-stat")
-        await verifyEvidenceReferences(
-          publication,
-          `semantics:${key}`,
-          semantics.evidence,
-        )
-    for (const supplement of SUPPLEMENTS)
-      await verifyEvidenceReferences(
-        publication,
-        `supplement:${supplement.supplementId}`,
-        supplement.evidence,
-      )
+    // 来源证据（rank-evidence、来源语义与完整状态选项登记、补充来源）由同一
+    // 入口逐条验证，标识可用于定位具体登记。
+    await verifyStaticEffectsEvidence(publication)
     const result = convertSource(source.data, source.functions, source.files)
     for (const entity of result.catalog.entities) {
       if (!entity.supplementProvenance) continue
