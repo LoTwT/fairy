@@ -23,15 +23,19 @@ import {
   teamDifferentialSlots,
   teamDifferentialTarget,
 } from "./fixtures/static-team-differential-cases.ts"
-import type { TeamDifferentialSlot } from "./fixtures/static-team-differential-cases.ts"
+import type {
+  TeamDifferentialPanel,
+  TeamDifferentialSlot,
+} from "./fixtures/static-team-differential-cases.ts"
 
 /**
- * 固定面板队伍差分回归：12 预设 / 36 状态 / 42 个独立事件。
+ * 固定面板队伍差分回归：12 原始预设 + 4 个边界预设，共 58 个独立事件。
  *
  * - 期望值来自 `fixtures/static-team-differential-reference.json`：固定上游原始
  *   记录 + 独立十进制有理数算式生成，不由本实现回填，也不能用被测函数生成；
  * - 上游真实整数返回来自 `fixtures/static-team-differential-upstream-returns.json`，
- *   只在比较投影中应用已证取整（含仪玄贯穿力 round(2)），不改本实现的数值与精度。
+ *   只覆盖原批次 42 个槽位，只在比较投影中应用已证取整（含仪玄贯穿力 round(2)）；
+ *   新增边界预设标记为 `pinned-records-only`，不比较也不补造上游整数。
  * - 面板、动作、状态与显式增益的唯一输入是
  *   `fixtures/static-team-differential-cases.ts`；除其中列出的增益组外，全部效果关闭。
  */
@@ -54,6 +58,26 @@ interface ReferenceCase {
   kind: "regular" | "sheer" | "sharpen" | "anomaly" | "disorder" | "luminize"
   team: string[]
   buffGroups: string[]
+  upstreamEvidence: "reviewed-adapter-run" | "pinned-records-only"
+  conversionBoundary?: {
+    optionId: string
+    pointers: string[]
+    position:
+      | "below-threshold"
+      | "at-threshold"
+      | "above-threshold"
+      | "at-cap"
+      | "above-cap"
+      | "off"
+    sourceUnit: "anomaly-proficiency-points" | "ratio"
+    sourceValue: string
+    initialBase: string
+    ratioPercent: string
+    cap: string | null
+    outputUnit: "attack-points" | "ratio"
+    expectedConversion: string
+    recordConversion: string
+  }
   selections: {
     holderId: `entity:${string}`
     optionId: string
@@ -297,8 +321,15 @@ function sourceInputs(slot: TeamDifferentialSlot): EffectNumericInput[] {
  * `panelOverrides`，选项取增益组声明；冻结参考只用于对照期望与一致性。
  */
 function livePanel(slot: TeamDifferentialSlot, key: string): ReferencePanel {
+  return panelWithOverride(key, slot.case.panelOverrides?.[key])
+}
+/** 声明面板的独立副本加可选覆盖；当前世界与保存世界的对照共用。 */
+function panelWithOverride(
+  key: string,
+  override?: Partial<TeamDifferentialPanel>,
+): ReferencePanel {
   const agent = teamDifferentialAgentByKey[key]!
-  const overridden = { ...agent.panel, ...slot.case.panelOverrides?.[key] }
+  const overridden = { ...agent.panel, ...override }
   const { damageBonuses, penetrationValue, ...stats } = overridden
   return {
     stats: { ...stats },
@@ -543,6 +574,27 @@ interface SlotComputation {
     damageBonuses: Record<string, number>
   }[]
 }
+/** 面板/直伤属性调整（`stat` 地址）按来源规则逐条取出，用于核对转换贡献。 */
+function conversionContributions(damage: StaticDamageResult, optionId: string) {
+  const effectIds = effectIdsOf(optionId)
+  return damage.evaluation.contributions.filter(
+    (contribution) =>
+      contribution.address.kind === "stat" &&
+      effectIds.includes(contribution.origin.effectId),
+  )
+}
+/** 防御区闭式：与参考生成器同口径，只用于交叉核对读数身份。 */
+function defenseZoneFromPanel(panel: {
+  penetrationRatio: number
+  penetrationValue: number
+}): number {
+  const ratio = Math.min(Math.max(panel.penetrationRatio, 0), 0.95)
+  const effectiveDefense = Math.max(
+    0,
+    teamDifferentialTarget.baseDefense * (1 - ratio) - panel.penetrationValue,
+  )
+  return effectiveDefense === 0 ? 1 : 794 / (794 + effectiveDefense)
+}
 const cache = new Map<string, SlotComputation>()
 function compute(slot: TeamDifferentialSlot): SlotComputation {
   const cached = cache.get(slot.slotId)
@@ -577,12 +629,17 @@ function compute(slot: TeamDifferentialSlot): SlotComputation {
 }
 describe("fixed-panel team differential fixtures", () => {
   it("keeps the frozen fixtures aligned with the loaded calculation data", () => {
-    expect(teamDifferentialSlots).toHaveLength(42)
+    expect(teamDifferentialSlots).toHaveLength(59)
     expect(new Set(Object.keys(reference.cases))).toEqual(
       new Set(slotsById.keys()),
     )
+    // 上游整数投影只覆盖校正适配器真实执行过的批次；新增边界没有执行结果。
+    const coveredSlotIds = teamDifferentialSlots
+      .filter((slot) => slot.upstreamEvidence === "reviewed-adapter-run")
+      .map((slot) => slot.slotId)
     expect(upstreamReturns.returns).toHaveLength(42)
-    expect(new Set(upstreamBySlot.keys())).toEqual(new Set(slotsById.keys()))
+    expect(coveredSlotIds).toHaveLength(42)
+    expect(new Set(upstreamBySlot.keys())).toEqual(new Set(coveredSlotIds))
     for (const slot of teamDifferentialSlots) {
       const entry = reference.cases[slot.slotId]!
       expect(entry.kind).toBe(
@@ -592,10 +649,44 @@ describe("fixed-panel team differential fixtures", () => {
             ? "anomaly"
             : "disorder",
       )
+      expect(entry.upstreamEvidence, slot.slotId).toBe(slot.upstreamEvidence)
+      expect(upstreamBySlot.has(slot.slotId), slot.slotId).toBe(
+        slot.upstreamEvidence === "reviewed-adapter-run",
+      )
       expect(entry.totals.nonCritical.length).toBeGreaterThan(0)
       expect(entry.totals.expected.length).toBeGreaterThan(0)
       expect(Object.keys(entry.factors.nonCritical).length).toBeGreaterThan(0)
       expect(entry.identity.baseStat.stat.length).toBeGreaterThan(0)
+      // 转换边界声明：来源事实由生成器从固定记录核对，这里核对与实时夹具一致。
+      const boundary = slot.case.conversionBoundary
+      if (boundary === undefined) {
+        expect(entry.conversionBoundary, slot.slotId).toBeUndefined()
+      } else {
+        const group = teamDifferentialBuffGroups[boundary.groupId]!
+        expect(entry.conversionBoundary, slot.slotId).toBeDefined()
+        expect(entry.conversionBoundary!.optionId, slot.slotId).toBe(
+          group.effects[0]!.optionId,
+        )
+        expect(entry.conversionBoundary!.pointers, slot.slotId).toEqual([
+          ...group.effects[0]!.pointers,
+        ])
+        expect(entry.conversionBoundary!.position, slot.slotId).toBe(
+          boundary.position,
+        )
+        expect(entry.conversionBoundary!.sourceUnit, slot.slotId).toBe(
+          boundary.sourceUnit,
+        )
+        expect(entry.conversionBoundary!.outputUnit, slot.slotId).toBe(
+          boundary.outputUnit,
+        )
+        expect(Number(entry.conversionBoundary!.sourceValue), slot.slotId).toBe(
+          boundary.sourceValue,
+        )
+        expect(
+          Number(entry.conversionBoundary!.expectedConversion),
+          slot.slotId,
+        ).toBe(boundary.expectedConversion)
+      }
       // 冻结参考必须与实时夹具一致：选项、每名成员的面板与当前读数。
       expect(entry.selections, slot.slotId).toEqual(liveSelections(slot))
       expect(referenceSelections(slot), slot.slotId).toEqual(
@@ -675,7 +766,7 @@ describe("fixed-panel team differential fixtures", () => {
     (slotId) => {
       const slot = slotsById.get(slotId)!
       const entry = reference.cases[slotId]!
-      const upstream = upstreamBySlot.get(slotId)!
+      const upstream = upstreamBySlot.get(slotId)
       const { action, damage, totals, panelResults } = compute(slot)
 
       // 三档全精度期望：只容忍浮点运算顺序，不吸收机制差异。
@@ -887,6 +978,11 @@ describe("fixed-panel team differential fixtures", () => {
       }
 
       // 上游真实返回：异常事件三档分别取整对照；仪玄只投影已证贯穿力 round(2)。
+      // 新增边界没有上游执行结果，明确不比较整数，也不补造整数。
+      expect(upstream !== undefined, slotId).toBe(
+        slot.upstreamEvidence === "reviewed-adapter-run",
+      )
+      if (upstream === undefined) return
       if (upstream.anomalyTiers) {
         expect(
           Math.round(damage.nonCritical),
@@ -1003,5 +1099,602 @@ describe("fixed-panel team differential fixtures", () => {
       1.7,
       "T4-2 astra song added",
     )
+  })
+
+  it("keeps the conversion threshold, cap and off boundaries explicit", () => {
+    const bounded = teamDifferentialSlots.filter(
+      (slot) => slot.case.conversionBoundary !== undefined,
+    )
+    expect(bounded.length).toBe(9)
+    for (const slot of bounded) {
+      const boundary = slot.case.conversionBoundary!
+      const frozen = reference.cases[slot.slotId]!.conversionBoundary!
+      const group = teamDifferentialBuffGroups[boundary.groupId]!
+      const optionId = group.effects[0]!.optionId
+      const damage = compute(slot).damage
+      const contributions = conversionContributions(damage, optionId)
+      const actorKey = slot.event.actor
+      if (boundary.position === "off") {
+        // 关闭效果：同面板下不产生任何贡献，读数保持声明值。
+        expect(contributions, slot.slotId).toEqual([])
+        expect(
+          damage.evaluation.contributions.some((contribution) =>
+            effectIdsOf(optionId).includes(contribution.origin.effectId),
+          ),
+          `${slot.slotId} off control`,
+        ).toBe(false)
+        // 关闭对照必须非平凡：同一面板选中该记录时确实有转换值。
+        expect(
+          Number(frozen.recordConversion),
+          `${slot.slotId} off control is not trivial`,
+        ).toBeGreaterThan(0)
+      } else {
+        // 贡献只出现一次，且落在声明的输出属性上；来源绑定仍是持有者，
+        // 受益实体是本次命中消费该读数的角色（团队转换不写成持有者自身）。
+        expect(contributions, slot.slotId).toHaveLength(1)
+        const contribution = contributions[0]!
+        expect(contribution.address.kind, slot.slotId).toBe("stat")
+        const address = contribution.address as {
+          stat: string
+          stage: string
+          entityId: string
+        }
+        expect(address.stat, slot.slotId).toBe(
+          boundary.outputUnit === "ratio" ? "penetrationRatio" : "attack",
+        )
+        expect(address.stage, slot.slotId).toBe(
+          boundary.outputUnit === "ratio" ? "direct" : "final-fixed",
+        )
+        expect(address.entityId, slot.slotId).toBe(actorEntityId(actorKey))
+        expect(contribution.origin.bindingId, slot.slotId).toBe(
+          agentBinding(group.holder).bindingId,
+        )
+        // 贡献值与冻结参考的边界期望一致（阈值/上限由固定记录推出）。
+        close(
+          contribution.value.value,
+          frozen.expectedConversion,
+          `${slot.slotId} conversion contribution`,
+        )
+      }
+      // 引擎实际输入取实时夹具的声明面板，不取参考；面板是权威局外输入。
+      const declared = livePanel(slot, actorKey)
+      if (boundary.outputUnit === "ratio") {
+        const read = damage.evaluation.attributes.find(
+          (attribute) =>
+            attribute.entityId === actorEntityId(actorKey) &&
+            attribute.stat === "penetrationRatio" &&
+            attribute.stage === "current",
+        )!
+        expect(read, `${slot.slotId} penetration read`).toBeDefined()
+        close(
+          read.value.value,
+          declared.stats.penetrationRatio! +
+            (boundary.position === "off"
+              ? 0
+              : Number(frozen.expectedConversion)),
+          `${slot.slotId} penetration after conversion`,
+        )
+      } else {
+        // 自身攻击转换：命中基础读数等于声明攻击加唯一一次转换。
+        close(
+          damage.evaluation.hit!.damageItems[0]!.finalStat,
+          declared.stats.attack! +
+            (boundary.position === "off"
+              ? 0
+              : Number(frozen.expectedConversion)),
+          `${slot.slotId} attack after conversion`,
+        )
+      }
+    }
+  })
+
+  it("keeps the anomaly strength source, trigger and buff holder separate", () => {
+    // D3-0 是原批次的双人紊乱；B1-0 把两个面板刻意拉开，互换不可能被掩盖。
+    for (const slotId of [
+      "D3-0/burnice-fire-disorder",
+      "B1-0/burnice-fire-disorder",
+    ]) {
+      const slot = slotsById.get(slotId)!
+      if (slot.event.kind !== "standard-disorder")
+        throw new Error(`${slotId} standard-disorder`)
+      const providerKey = slot.event.powerSource
+      const triggerKey = slot.event.actor
+      expect(providerKey, slotId).not.toBe(triggerKey)
+      const provider = livePanel(slot, providerKey)
+      const trigger = livePanel(slot, triggerKey)
+      const damage = compute(slot).damage
+      const multiplier = damage.evaluation.hit!.damageItems[0]!.damageMultiplier
+      // 基础属性、精通与穿透读强度提供者，不读出招者。
+      close(
+        damage.factors.nonCritical.baseDamage,
+        provider.stats.attack! * multiplier,
+        `${slotId} base damage from the power source`,
+      )
+      close(
+        damage.factors.nonCritical.anomalyProficiency,
+        provider.stats.anomalyProficiency! / 100,
+        `${slotId} proficiency from the power source`,
+      )
+      close(
+        damage.factors.nonCritical.defense,
+        defenseZoneFromPanel({
+          penetrationRatio: provider.stats.penetrationRatio!,
+          penetrationValue: provider.penetrationValue,
+        }),
+        `${slotId} defense from the power source`,
+      )
+      // 两个面板必须显著不同：否则把身份读错也看不出来。
+      expect(
+        Math.abs(provider.stats.attack! - trigger.stats.attack!) /
+          provider.stats.attack!,
+        `${slotId} attack separation`,
+      ).toBeGreaterThan(0.05)
+      expect(
+        Math.abs(
+          provider.stats.anomalyProficiency! -
+            trigger.stats.anomalyProficiency!,
+        ) / provider.stats.anomalyProficiency!,
+        `${slotId} proficiency separation`,
+      ).toBeGreaterThan(0.1)
+      expect(
+        provider.stats.penetrationRatio!,
+        `${slotId} penetration separation`,
+      ).not.toBe(trigger.stats.penetrationRatio!)
+      // 每项属性读数带实体与阶段；强度读数属提供者，触发者只承载自己的当前读数。
+      for (const stat of [
+        "attack",
+        "anomalyProficiency",
+        "penetrationRatio",
+      ] as const) {
+        const read = damage.evaluation.attributes.find(
+          (attribute) =>
+            attribute.entityId === actorEntityId(providerKey) &&
+            attribute.stat === stat,
+        )
+        expect(read, `${slotId} ${stat} read`).toBeDefined()
+        expect(read!.stage, `${slotId} ${stat} read stage`).toBe("current")
+      }
+      const triggerRead = damage.evaluation.attributes.find(
+        (attribute) =>
+          attribute.entityId === actorEntityId(triggerKey) &&
+          attribute.stat === "criticalRate",
+      )
+      expect(triggerRead, `${slotId} trigger read`).toBeDefined()
+      expect(triggerRead!.stage, `${slotId} trigger read stage`).toBe("current")
+      close(
+        triggerRead!.value.value,
+        trigger.stats.criticalRate!,
+        `${slotId} trigger current critical rate`,
+      )
+    }
+  })
+
+  it("keeps the disorder duration boundaries explicit and rejects invalid input", () => {
+    const multiplierOf = (slotId: string) =>
+      compute(slotsById.get(slotId)!).damage.evaluation.hit!.damageItems[0]!
+        .damageMultiplier
+    // 未经过：基础 10 秒全部剩余，火紊乱每 0.5 秒一档。
+    close(multiplierOf("C1-0/burnice-fire-disorder"), 14.5, "C1-0")
+    // 正小数剩余：7 − 0.25 = 6.75 秒 → floor(13.5) = 13 档。
+    close(multiplierOf("C1-1/burnice-fire-disorder"), 11, "C1-1")
+    // 低于半档的剩余（0.25 秒）不产生补偿档，回到基础倍率。
+    close(multiplierOf("C1-2/burnice-fire-disorder"), 4.5, "C1-2")
+    // 恰好耗尽与超过持续时间都被钳制到同一基础倍率，不是零伤害也不是拒绝。
+    close(multiplierOf("C1-3/burnice-fire-disorder"), 4.5, "C1-3 exhausted")
+    close(multiplierOf("C1-4/burnice-fire-disorder"), 4.5, "C1-4 clamped")
+    expect(
+      multiplierOf("C1-3/burnice-fire-disorder"),
+      "exhausted equals beyond",
+    ).toBe(multiplierOf("C1-4/burnice-fire-disorder"))
+    expect(
+      compute(slotsById.get("C1-3/burnice-fire-disorder")!).damage.nonCritical,
+      "exhausted is not zero damage",
+    ).toBeGreaterThan(0)
+    // 延长 3 秒后恰好耗尽：剩余 0，仍为基础倍率，且时长贡献只出现一次。
+    close(multiplierOf("C1-5/burnice-fire-disorder"), 4.5, "C1-5 extended")
+    const extended = compute(slotsById.get("C1-5/burnice-fire-disorder")!)
+    const durationContributions = (extended.damage.preparations ?? []).flatMap(
+      (preparation) => preparation.contributions,
+    )
+    expect(durationContributions, "C1-5 duration preparation").toHaveLength(1)
+    close(durationContributions[0]!.value.value, 3, "C1-5 duration seconds")
+    // 延长仍有余量：基础 10 秒已过、延长 3 秒还剩 1 秒，与同已过秒数的关闭档配对；
+    // "基础时长耗尽后丢弃延长"的错误实现会给出与关闭档相同的 4.5。
+    close(multiplierOf("C1-6/burnice-fire-disorder"), 5.5, "C1-6 extended")
+    expect(
+      multiplierOf("C1-6/burnice-fire-disorder"),
+      "extension still in effect differs from the same elapsed without it",
+    ).toBeGreaterThan(multiplierOf("C1-4/burnice-fire-disorder"))
+    const stillExtended = compute(slotsById.get("C1-6/burnice-fire-disorder")!)
+    const stillExtendedDuration = (
+      stillExtended.damage.preparations ?? []
+    ).flatMap((preparation) => preparation.contributions)
+    expect(stillExtendedDuration, "C1-6 duration preparation").toHaveLength(1)
+    close(stillExtendedDuration[0]!.value.value, 3, "C1-6 duration seconds")
+    const noExtensionPair = compute(
+      slotsById.get("C1-4/burnice-fire-disorder")!,
+    )
+    expect(
+      (noExtensionPair.damage.preparations ?? []).flatMap(
+        (preparation) => preparation.contributions,
+      ),
+      "C1-4 has no duration contribution",
+    ).toEqual([])
+    // 同一已过秒数下只有延长贡献与倍率不同：攻击读数不变，非暴击档按倍率比缩放
+    // （暴击与期望同为该倍率的派生，由逐槽位参考断言覆盖）。
+    close(
+      stillExtended.damage.evaluation.hit!.damageItems[0]!.finalStat,
+      noExtensionPair.damage.evaluation.hit!.damageItems[0]!.finalStat,
+      "C1-6 attack stat unchanged",
+    )
+    close(
+      stillExtended.damage.nonCritical,
+      noExtensionPair.damage.nonCritical *
+        (Number(
+          reference.cases["C1-6/burnice-fire-disorder"]!.identity.baseStat
+            .multiplier,
+        ) /
+          Number(
+            reference.cases["C1-4/burnice-fire-disorder"]!.identity.baseStat
+              .multiplier,
+          )),
+      "C1-6 damage scales with the extra disorder ticks",
+    )
+    // 非法输入必须被明确拒绝，不能被当成零剩余或零伤害。
+    const base = catalogInputFor(slotsById.get("C1-3/burnice-fire-disorder")!)
+    // 面板与事件仍取实时夹具；这里只把时长字段改成非法值以核对拒绝契约。
+    const baseItem = base.hit.damageItems[0] as unknown as Record<
+      string,
+      unknown
+    >
+    for (const [field, mutated] of [
+      ["elapsedSeconds", -1],
+      ["baseDurationSeconds", -10],
+    ] as const) {
+      const result = calculateStaticDamageFromCatalog({
+        ...base,
+        hit: {
+          ...base.hit,
+          damageItems: [
+            { ...baseItem, [field]: mutated },
+          ] as unknown as typeof base.hit.damageItems,
+        },
+      })
+      expect(result.ok, `${field} ${mutated}`).toBe(false)
+      if (result.ok) continue
+      expect(
+        result.issues.map((issue) => [issue.code, issue.pointer]),
+        `${field} ${mutated}`,
+      ).toEqual([["INVALID_INPUT", `/hit/damageItems/0/${field}`]])
+    }
+  })
+
+  /**
+   * 历史强度快照：固定上游没有时间快照对象，因此这里不做上游时间线模拟。
+   * 与之等价的上游可表达形式是「冻结强度面板 + 当前触发者面板」，也就是本批
+   * `D3-0` 的静态槽位；快照版本必须复现该槽位的冻结期望，而当前触发者的读数
+   * 仍按当前状态读取。强度读数（攻击/精通/穿透率）经公开 `snapshots` +
+   * `anomalySource.snapshotId`（伤害项 `statSource.snapshotId`）构造，不是把
+   * 当前面板改成旧值。
+   */
+  const snapshotStaticSlotId = "D3-0/burnice-fire-disorder"
+  const historicalSnapshotId = "snapshot:d3-0-historical" as const
+
+  /**
+   * 保存世界的触发者面板刻意与当前不同：如果无快照的读数（本次紊乱只消费触发者的
+   * 暴击率）错误取自保存世界，实际读数会是这里的值而不是当前面板值。
+   */
+  const savedWorldTriggerPanel = {
+    attack: 2222.5,
+    criticalRate: 0.75,
+  } as const
+
+  /** 以 `D3-0` 的实时输入为底，构造读取历史快照的等价输入。 */
+  function historicalSnapshotInput(options: {
+    /** 当前 world 是否仍观察到强度提供者。 */
+    observed: boolean
+    /** 快照缺少的保存读数（用于反例）。 */
+    omit?: "attack" | "anomalyProficiency" | "penetrationRatio"
+    /** 当前 world 中强度提供者的面板；省略即用声明面板。 */
+    currentProvider?: Partial<
+      (typeof teamDifferentialAgentByKey)[string]["panel"]
+    >
+  }) {
+    const slot = slotsById.get(snapshotStaticSlotId)!
+    const event = slot.event
+    if (event.kind !== "standard-disorder") throw new Error("disorder expected")
+    const providerKey = event.powerSource
+    const triggerKey = event.actor
+    // 保存的历史读数来自实时夹具的声明面板，不来自冻结参考。
+    const declared = livePanel(slot, providerKey)
+    const observations = [
+      {
+        entityId: actorEntityId(providerKey),
+        stat: "attack" as const,
+        stage: "current" as const,
+        value: {
+          unit: "attack-points" as const,
+          value: declared.stats.attack!,
+        },
+      },
+      {
+        entityId: actorEntityId(providerKey),
+        stat: "anomalyProficiency" as const,
+        stage: "current" as const,
+        value: {
+          unit: "anomaly-proficiency-points" as const,
+          value: declared.stats.anomalyProficiency!,
+        },
+      },
+      {
+        entityId: actorEntityId(providerKey),
+        stat: "penetrationRatio" as const,
+        stage: "current" as const,
+        value: {
+          unit: "ratio" as const,
+          value: declared.stats.penetrationRatio!,
+        },
+      },
+    ].filter(
+      (observation) =>
+        observation.stat !==
+        (options.omit as "attack" | "anomalyProficiency" | "penetrationRatio"),
+    )
+    const input = catalogInputFor(slot)
+    // 当前世界与保存世界分开构造：当前世界用变化后的提供者面板，保存世界保留声明
+    // 读数，但触发者面板刻意不同，使"错读保存世界"能被实际读数区分出来。
+    const currentWorldEntities = slot.team
+      .filter((key) => options.observed || key !== providerKey)
+      .map((key) =>
+        worldActor(
+          key,
+          key === providerKey && options.currentProvider !== undefined
+            ? panelWithOverride(key, options.currentProvider)
+            : panelWithOverride(key),
+        ),
+      )
+    const savedWorldEntities = slot.team.map((key) =>
+      worldActor(
+        key,
+        key === triggerKey
+          ? panelWithOverride(key, { ...savedWorldTriggerPanel })
+          : panelWithOverride(key),
+      ),
+    )
+    return {
+      ...input,
+      // 强度提供者可以不在当前 world；它仍须是已声明的目录角色身份，
+      // 因此只移除观察到的成员与绑定，保留 actorSources。
+      bindings: options.observed
+        ? input.bindings
+        : input.bindings.filter(
+            (binding) => binding.holderId !== actorEntityId(providerKey),
+          ),
+      world: {
+        ...input.world,
+        entities: [
+          ...currentWorldEntities,
+          input.world.entities.find(
+            (entity) => entity.entityId === teamDifferentialTarget.entityId,
+          )!,
+        ],
+      },
+      snapshots: [
+        {
+          snapshotId: historicalSnapshotId,
+          atSeconds: 0,
+          attributes: observations,
+          world: {
+            entities: savedWorldEntities,
+            states: [],
+            distances: [],
+          },
+        },
+      ],
+      hit: {
+        ...input.hit,
+        damageItems: [
+          {
+            ...input.hit.damageItems[0]!,
+            statSource: {
+              entityId: actorEntityId(providerKey),
+              snapshotId: historicalSnapshotId,
+            },
+          },
+        ] as unknown as StaticCatalogDamageInput["hit"]["damageItems"],
+      },
+      damage: {
+        ...input.damage,
+        // 快照只保存属性读数；穿透值与已结算增伤仍由调用方按冻结的强度输入给出。
+        anomalySource: {
+          ...(
+            input.damage as unknown as {
+              anomalySource: { entityId: string; level: number }
+            }
+          ).anomalySource,
+          snapshotId: historicalSnapshotId,
+        },
+      } as StaticCatalogDamageInput["damage"],
+    }
+  }
+
+  it("reads the historical anomaly strength from the saved snapshot, not the current panel", () => {
+    const slot = slotsById.get(snapshotStaticSlotId)!
+    const frozen = reference.cases[snapshotStaticSlotId]!
+    const providerKey = (slot.event as { powerSource: string }).powerSource
+    // 当前面板显著变化；若强度取自当前面板，结果不可能落在冻结容差内。
+    const changedProvider = {
+      attack: 1500.25,
+      anomalyProficiency: 480,
+      penetrationRatio: 0.3,
+    }
+    for (const observed of [true, false]) {
+      const result = calculateStaticDamageFromCatalog(
+        historicalSnapshotInput({ observed, currentProvider: changedProvider }),
+      )
+      expect(result.ok, JSON.stringify(result)).toBe(true)
+      if (!result.ok) return
+      const damage = result.value
+      // 与静态等价槽位（D3-0）的冻结期望一致：冻结强度 + 当前触发者。
+      close(
+        damage.nonCritical,
+        frozen.totals.nonCritical,
+        "snapshot nonCritical",
+      )
+      close(damage.critical, frozen.totals.critical, "snapshot critical")
+      close(damage.expected, frozen.totals.expected, "snapshot expected")
+      // 每项强度读数带保存快照的身份与阶段，数值等于保存（声明）读数而不是
+      // 变化后的当前面板；触发者读数仍是当前值、没有快照。
+      const savedProvider = livePanel(slot, providerKey)
+      for (const stat of [
+        "attack",
+        "anomalyProficiency",
+        "penetrationRatio",
+      ] as const) {
+        const read = damage.evaluation.attributes.find(
+          (attribute) =>
+            attribute.entityId === actorEntityId(providerKey) &&
+            attribute.stat === stat,
+        )
+        expect(read, `snapshot ${stat} read`).toBeDefined()
+        expect(read!.stage, `snapshot ${stat} stage`).toBe("current")
+        expect(read!.snapshotId, `snapshot ${stat} identity`).toBe(
+          historicalSnapshotId,
+        )
+        close(
+          read!.value.value,
+          savedProvider.stats[stat]!,
+          `snapshot ${stat} saved value`,
+        )
+        expect(
+          changedProvider[stat],
+          `snapshot ${stat} discriminator`,
+        ).not.toBe(savedProvider.stats[stat]!)
+      }
+      const triggerKey = slot.event.actor
+      const currentTrigger = livePanel(slot, triggerKey)
+      const triggerRead = damage.evaluation.attributes.find(
+        (attribute) =>
+          attribute.entityId === actorEntityId(triggerKey) &&
+          attribute.stat === "criticalRate",
+      )!
+      // 触发者读数必须来自当前 world：实体、阶段、无快照，且数值等于当前面板；
+      // 保存世界的触发者暴击率刻意不同（0.75），错读会在这里暴露。
+      expect(triggerRead.entityId, "trigger read entity").toBe(
+        actorEntityId(triggerKey),
+      )
+      expect(triggerRead.stage, "trigger read stage").toBe("current")
+      expect(
+        triggerRead.snapshotId,
+        "trigger read stays current",
+      ).toBeUndefined()
+      close(
+        triggerRead.value.value,
+        currentTrigger.stats.criticalRate!,
+        "trigger read current value",
+      )
+      expect(
+        savedWorldTriggerPanel.criticalRate,
+        "saved trigger panel is a real discriminator",
+      ).not.toBe(currentTrigger.stats.criticalRate!)
+      // 普通紊乱不消费触发者暴击率（异常暴击率走独立通道，此处为 0），
+      // 因此区分保存/当前触发者读数不改变三档伤害期望，只改变属性读取身份。
+      expect(
+        damage.criticalRate,
+        "disorder crit rate stays channel-based",
+      ).toBe(0)
+    }
+    // 未变化的当前面板 + 同一快照仍一致：快照读数与声明面板同值。
+    const unchanged = calculateStaticDamageFromCatalog(
+      historicalSnapshotInput({ observed: true }),
+    )
+    expect(unchanged.ok).toBe(true)
+    if (unchanged.ok)
+      close(
+        unchanged.value.expected,
+        frozen.totals.expected,
+        "snapshot with unchanged current panel",
+      )
+    // 反例：读当前面板（去掉快照）时必须明显不同，证明相等断言不是空的。
+    const unfrozenInput = historicalSnapshotInput({
+      observed: true,
+      currentProvider: changedProvider,
+    })
+    const { snapshotId: _unfrozenSnapshotId, ...anomalySourceWithoutSnapshot } =
+      (
+        unfrozenInput.damage as unknown as {
+          anomalySource: {
+            entityId: string
+            level: number
+            snapshotId?: string
+          }
+        }
+      ).anomalySource
+    const unfrozen = calculateStaticDamageFromCatalog({
+      ...unfrozenInput,
+      snapshots: [],
+      hit: {
+        ...unfrozenInput.hit,
+        damageItems: [
+          {
+            ...unfrozenInput.hit.damageItems[0]!,
+            statSource: { entityId: actorEntityId(providerKey) },
+          },
+        ],
+      },
+      damage: {
+        ...unfrozenInput.damage,
+        anomalySource: anomalySourceWithoutSnapshot,
+      } as StaticCatalogDamageInput["damage"],
+    })
+    expect(unfrozen.ok, JSON.stringify(unfrozen)).toBe(true)
+    if (unfrozen.ok) {
+      const frozenExpected = Number(frozen.totals.expected)
+      // 读取当前面板与冻结强度的相对差远大于浮点容差，相等断言不是空的。
+      expect(
+        Math.abs(unfrozen.value.expected - frozenExpected) / frozenExpected,
+        "current panel must not reproduce the frozen strength",
+      ).toBeGreaterThan(0.05)
+    }
+    // 反例：快照缺少任一保存读数时明确拒绝，不静默回落到当前面板。
+    for (const omit of [
+      "attack",
+      "anomalyProficiency",
+      "penetrationRatio",
+    ] as const) {
+      const missing = calculateStaticDamageFromCatalog(
+        historicalSnapshotInput({
+          observed: true,
+          currentProvider: changedProvider,
+          omit,
+        }),
+      )
+      expect(missing.ok, `missing ${omit}`).toBe(false)
+      if (missing.ok) continue
+      expect(
+        missing.issues.map((issue) => issue.code),
+        `missing ${omit}`,
+      ).toContain("MISSING_SNAPSHOT")
+    }
+    // 反例：异常强度提供者没有声明目录身份时明确拒绝。
+    const undeclared = calculateStaticDamageFromCatalog({
+      ...historicalSnapshotInput({
+        observed: false,
+        currentProvider: changedProvider,
+      }),
+      actorSources: slotsById
+        .get(snapshotStaticSlotId)!
+        .team.filter((key) => key !== providerKey)
+        .map((key) => ({
+          entityId: actorEntityId(key),
+          agentEntityId: teamDifferentialAgentByKey[key]!.agentEntityId,
+        })),
+    })
+    expect(undeclared.ok, JSON.stringify(undeclared)).toBe(false)
+    if (!undeclared.ok)
+      expect(
+        undeclared.issues.map((issue) => issue.pointer),
+        "undeclared anomaly source identity",
+      ).toContain("/damage/anomalySource")
   })
 })

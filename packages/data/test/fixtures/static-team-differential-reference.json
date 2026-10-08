@@ -1,6 +1,6 @@
 {
   "provenance": {
-    "fairyBaseline": "1cccf4d38d05a4976d34b5aee2e928b07a48c15e",
+    "fairyBaseline": "c77e549a6c503e257f554126203380295814fc40",
     "snapshotId": "sha256:e946d6b30b9747a3daeaac034fc14a4dc127c7e550ab63f0c54b1e1d4bf693c4",
     "effectsRevision": 14,
     "effectSource": {
@@ -14,6 +14,7 @@
       "sha256": "34b8dbeef2f710fd27379502d248f850da5a8c19dc6a0a7568ef51fb4c4fe19c"
     },
     "upstreamReturns": "static-team-differential-upstream-returns.json",
+    "upstreamReturnsScope": "The reviewed-adapter run covers the 12 original presets only. Boundary presets added later are pinned-records-only: they have no upstream integer return and are never compared against a fabricated integer.",
     "method": "Pinned upstream raw records for effect values and skill multipliers + extracted pinned pure functions as cross-checks + independently reproduced damage chains in exact decimal rational arithmetic. Fairy outputs and upstream rounded integers are never used as expectations.",
     "numberFormat": "totals, criticalRate, channels, durationPreparations and identity reads are decimal strings with at least 40 significant digits (ROUND_HALF_EVEN); factors and panels are JSON numbers. Regression tolerance stays max(1e-9, abs(reference) * 1e-12).",
     "resources": [
@@ -180,6 +181,7 @@
       "kind": "regular",
       "team": ["nicole"],
       "buffGroups": [],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [],
       "sourceInputs": [],
       "declaredPanels": {
@@ -302,6 +304,7 @@
       "kind": "regular",
       "team": ["nicole"],
       "buffGroups": ["nicole-defense"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:nicole",
@@ -437,6 +440,7 @@
       "kind": "regular",
       "team": ["nicole"],
       "buffGroups": ["nicole-defense"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:nicole",
@@ -572,6 +576,7 @@
       "kind": "anomaly",
       "team": ["jane"],
       "buffGroups": [],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [],
       "sourceInputs": [],
       "declaredPanels": {
@@ -700,6 +705,7 @@
       "kind": "anomaly",
       "team": ["jane"],
       "buffGroups": ["jane-frenzy"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:jane",
@@ -834,6 +840,7 @@
       "kind": "anomaly",
       "team": ["jane"],
       "buffGroups": ["jane-frenzy", "jane-bite"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:jane",
@@ -1002,6 +1009,7 @@
       "kind": "sheer",
       "team": ["yixuan"],
       "buffGroups": [],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [],
       "sourceInputs": [],
       "declaredPanels": {
@@ -1121,6 +1129,7 @@
       "kind": "sheer",
       "team": ["yixuan"],
       "buffGroups": ["yixuan-core"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:yixuan",
@@ -1253,6 +1262,7 @@
       "kind": "sheer",
       "team": ["yixuan"],
       "buffGroups": ["yixuan-core"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:yixuan",
@@ -1385,6 +1395,7 @@
       "kind": "sharpen",
       "team": ["claret"],
       "buffGroups": [],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [],
       "sourceInputs": [],
       "declaredPanels": {
@@ -1507,6 +1518,7 @@
       "kind": "sharpen",
       "team": ["claret"],
       "buffGroups": ["claret-state"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:claret",
@@ -1635,6 +1647,7 @@
       "kind": "sharpen",
       "team": ["claret"],
       "buffGroups": ["claret-state", "claret-m4"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:claret",
@@ -1775,6 +1788,7 @@
       "kind": "regular",
       "team": ["nicole", "astra"],
       "buffGroups": [],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [],
       "sourceInputs": [],
       "declaredPanels": {
@@ -1917,6 +1931,7 @@
       "kind": "regular",
       "team": ["nicole", "astra"],
       "buffGroups": ["astra-song"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:astra",
@@ -2082,6 +2097,7 @@
         "nicole-defense",
         "nicole-ether"
       ],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:astra",
@@ -2276,6 +2292,7 @@
       "kind": "anomaly",
       "team": ["jane", "remiel"],
       "buffGroups": [],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [],
       "sourceInputs": [],
       "declaredPanels": {
@@ -2421,6 +2438,7 @@
       "kind": "anomaly",
       "team": ["jane", "remiel"],
       "buffGroups": ["jane-frenzy", "remiel-m1-complete"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:jane",
@@ -2589,6 +2607,7 @@
         "jane-bite",
         "remiel-m2-ignore"
       ],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:jane",
@@ -2796,6 +2815,7 @@
       "kind": "disorder",
       "team": ["jane", "burnice"],
       "buffGroups": [],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [],
       "sourceInputs": [],
       "declaredPanels": {
@@ -2943,6 +2963,7 @@
       "kind": "disorder",
       "team": ["jane", "burnice"],
       "buffGroups": ["burnice-duration"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:burnice",
@@ -3101,6 +3122,7 @@
       "kind": "disorder",
       "team": ["jane", "burnice"],
       "buffGroups": ["burnice-duration"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:burnice",
@@ -3259,6 +3281,7 @@
       "kind": "luminize",
       "team": ["remiel", "jane", "velina"],
       "buffGroups": ["remiel-core"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:remiel",
@@ -3439,6 +3462,7 @@
       "kind": "anomaly",
       "team": ["remiel", "jane", "velina"],
       "buffGroups": ["remiel-core"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:remiel",
@@ -3626,6 +3650,7 @@
         "remiel-m2-mutation",
         "remiel-m4"
       ],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:remiel",
@@ -3844,6 +3869,7 @@
         "remiel-m2-mutation",
         "remiel-m4"
       ],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:remiel",
@@ -4055,6 +4081,7 @@
         "remiel-m1-complete",
         "remiel-m2-ignore"
       ],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:remiel",
@@ -4327,6 +4354,7 @@
         "remiel-m1-complete",
         "remiel-m2-ignore"
       ],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:remiel",
@@ -4575,6 +4603,7 @@
       "kind": "regular",
       "team": ["nicole", "astra", "rina"],
       "buffGroups": [],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [],
       "sourceInputs": [],
       "declaredPanels": {
@@ -4736,6 +4765,7 @@
       "kind": "regular",
       "team": ["nicole", "astra", "rina"],
       "buffGroups": ["astra-song", "astra-attack"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:astra",
@@ -4933,6 +4963,7 @@
         "nicole-ether",
         "rina-penetration"
       ],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:astra",
@@ -5162,6 +5193,7 @@
       "kind": "sheer",
       "team": ["yixuan", "astra", "nicole"],
       "buffGroups": ["yixuan-core"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:yixuan",
@@ -5334,6 +5366,7 @@
       "kind": "sheer",
       "team": ["yixuan", "astra", "nicole"],
       "buffGroups": ["yixuan-core", "astra-song", "astra-attack"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:yixuan",
@@ -5540,6 +5573,7 @@
         "nicole-defense",
         "nicole-ether"
       ],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:yixuan",
@@ -5762,6 +5796,7 @@
       "kind": "sharpen",
       "team": ["claret", "astra", "rina"],
       "buffGroups": [],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [],
       "sourceInputs": [],
       "declaredPanels": {
@@ -5923,6 +5958,7 @@
       "kind": "sharpen",
       "team": ["claret", "astra", "rina"],
       "buffGroups": ["claret-state", "claret-m4", "claret-remnant"],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:claret",
@@ -6114,6 +6150,7 @@
         "astra-attack",
         "rina-penetration"
       ],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:claret",
@@ -6342,6 +6379,7 @@
       "kind": "anomaly",
       "team": ["jane", "burnice", "remiel"],
       "buffGroups": [],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [],
       "sourceInputs": [],
       "declaredPanels": {
@@ -6506,6 +6544,7 @@
       "kind": "disorder",
       "team": ["jane", "burnice", "remiel"],
       "buffGroups": [],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [],
       "sourceInputs": [],
       "declaredPanels": {
@@ -6675,6 +6714,7 @@
         "burnice-duration",
         "remiel-m1-complete"
       ],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:jane",
@@ -6900,6 +6940,7 @@
         "burnice-duration",
         "remiel-m1-complete"
       ],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:jane",
@@ -7106,6 +7147,7 @@
         "remiel-m1-complete",
         "remiel-m2-ignore"
       ],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:jane",
@@ -7343,6 +7385,7 @@
         "remiel-m1-complete",
         "remiel-m2-ignore"
       ],
+      "upstreamEvidence": "reviewed-adapter-run",
       "selections": [
         {
           "holderId": "entity:jane",
@@ -7517,6 +7560,2598 @@
           "stat": "attack",
           "entityId": "entity:burnice",
           "multiplier": "14.5",
+          "value": "2900.75"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:burnice",
+            "stat": "attack",
+            "stage": "current",
+            "value": "2900.75"
+          },
+          {
+            "entityId": "entity:burnice",
+            "stat": "anomalyProficiency",
+            "stage": "current",
+            "value": "380"
+          },
+          {
+            "entityId": "entity:burnice",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.25"
+          }
+        ]
+      }
+    },
+    "A1-0/jane-assault": {
+      "presetId": "A1",
+      "caseId": "A1-0",
+      "label": "未达到起算阈值",
+      "eventId": "jane-assault",
+      "kind": "anomaly",
+      "team": ["jane"],
+      "buffGroups": ["jane-frenzy"],
+      "upstreamEvidence": "pinned-records-only",
+      "conversionBoundary": {
+        "optionId": "agents:jane:mindscape:0:blk-legacy:legacy-self-atk",
+        "pointers": ["/agents/43/mindscapeBuffs/0/effectBlocks/0/effects/0"],
+        "position": "below-threshold",
+        "sourceUnit": "anomaly-proficiency-points",
+        "sourceValue": "119.5",
+        "initialBase": "120",
+        "ratioPercent": "200",
+        "cap": "600",
+        "outputUnit": "attack-points",
+        "expectedConversion": "0",
+        "recordConversion": "0"
+      },
+      "selections": [
+        {
+          "holderId": "entity:jane",
+          "optionId": "agents:jane:mindscape:0:blk-legacy:legacy-self-atk",
+          "layers": 1
+        }
+      ],
+      "sourceInputs": [],
+      "declaredPanels": {
+        "entity:jane": {
+          "stats": {
+            "attack": 3100.5,
+            "health": 12600,
+            "defense": 790,
+            "impact": 86,
+            "anomalyProficiency": 119.5,
+            "anomalyMastery": 150,
+            "energyRegen": 1.2,
+            "criticalRate": 0.25,
+            "criticalDamage": 0.8,
+            "penetrationRatio": 0.1,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "physical": 0.3
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 3100.5,
+          "health": 12600,
+          "defense": 790,
+          "impact": 86,
+          "anomalyProficiency": 119.5,
+          "anomalyMastery": 150,
+          "energyRegen": 1.2,
+          "criticalRate": 0.25,
+          "criticalDamage": 0.8,
+          "penetrationRatio": 0.1,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "physical": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "33980.15084668173684184291460843298424361",
+        "critical": "33980.15084668173684184291460843298424361",
+        "expected": "33980.15084668173684184291460843298424361",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 22106.565,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 1.195,
+          "defense": 0.4947237771475,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        },
+        "critical": {
+          "baseDamage": 22106.565,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 1.195,
+          "defense": 0.4947237771475,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [],
+      "identity": {
+        "actorEntityId": "entity:jane",
+        "powerSourceEntityId": "entity:jane",
+        "damageBonusSource": "settled-power-source-element",
+        "durationAdjustmentSeconds": null,
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:jane",
+          "multiplier": "7.13",
+          "value": "3100.5"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:jane",
+            "stat": "attack",
+            "stage": "current",
+            "value": "3100.5"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "anomalyProficiency",
+            "stage": "current",
+            "value": "119.5"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0.1"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.25"
+          }
+        ]
+      }
+    },
+    "A1-1/jane-assault": {
+      "presetId": "A1",
+      "caseId": "A1-1",
+      "label": "恰好阈值",
+      "eventId": "jane-assault",
+      "kind": "anomaly",
+      "team": ["jane"],
+      "buffGroups": ["jane-frenzy"],
+      "upstreamEvidence": "pinned-records-only",
+      "conversionBoundary": {
+        "optionId": "agents:jane:mindscape:0:blk-legacy:legacy-self-atk",
+        "pointers": ["/agents/43/mindscapeBuffs/0/effectBlocks/0/effects/0"],
+        "position": "at-threshold",
+        "sourceUnit": "anomaly-proficiency-points",
+        "sourceValue": "120",
+        "initialBase": "120",
+        "ratioPercent": "200",
+        "cap": "600",
+        "outputUnit": "attack-points",
+        "expectedConversion": "0",
+        "recordConversion": "0"
+      },
+      "selections": [
+        {
+          "holderId": "entity:jane",
+          "optionId": "agents:jane:mindscape:0:blk-legacy:legacy-self-atk",
+          "layers": 1
+        }
+      ],
+      "sourceInputs": [],
+      "declaredPanels": {
+        "entity:jane": {
+          "stats": {
+            "attack": 3100.5,
+            "health": 12600,
+            "defense": 790,
+            "impact": 86,
+            "anomalyProficiency": 120,
+            "anomalyMastery": 150,
+            "energyRegen": 1.2,
+            "criticalRate": 0.25,
+            "criticalDamage": 0.8,
+            "penetrationRatio": 0.1,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "physical": 0.3
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 3100.5,
+          "health": 12600,
+          "defense": 790,
+          "impact": 86,
+          "anomalyProficiency": 120,
+          "anomalyMastery": 150,
+          "energyRegen": 1.2,
+          "criticalRate": 0.25,
+          "criticalDamage": 0.8,
+          "penetrationRatio": 0.1,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "physical": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "34122.32721005697423448660881181554903124",
+        "critical": "34122.32721005697423448660881181554903124",
+        "expected": "34122.32721005697423448660881181554903124",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 22106.565,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 1.2,
+          "defense": 0.4947237771475,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        },
+        "critical": {
+          "baseDamage": 22106.565,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 1.2,
+          "defense": 0.4947237771475,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [],
+      "identity": {
+        "actorEntityId": "entity:jane",
+        "powerSourceEntityId": "entity:jane",
+        "damageBonusSource": "settled-power-source-element",
+        "durationAdjustmentSeconds": null,
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:jane",
+          "multiplier": "7.13",
+          "value": "3100.5"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:jane",
+            "stat": "attack",
+            "stage": "current",
+            "value": "3100.5"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "anomalyProficiency",
+            "stage": "current",
+            "value": "120"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0.1"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.25"
+          }
+        ]
+      }
+    },
+    "A1-2/jane-assault": {
+      "presetId": "A1",
+      "caseId": "A1-2",
+      "label": "略高于阈值",
+      "eventId": "jane-assault",
+      "kind": "anomaly",
+      "team": ["jane"],
+      "buffGroups": ["jane-frenzy"],
+      "upstreamEvidence": "pinned-records-only",
+      "conversionBoundary": {
+        "optionId": "agents:jane:mindscape:0:blk-legacy:legacy-self-atk",
+        "pointers": ["/agents/43/mindscapeBuffs/0/effectBlocks/0/effects/0"],
+        "position": "above-threshold",
+        "sourceUnit": "anomaly-proficiency-points",
+        "sourceValue": "120.25",
+        "initialBase": "120",
+        "ratioPercent": "200",
+        "cap": "600",
+        "outputUnit": "attack-points",
+        "expectedConversion": "0.5",
+        "recordConversion": "0.5"
+      },
+      "selections": [
+        {
+          "holderId": "entity:jane",
+          "optionId": "agents:jane:mindscape:0:blk-legacy:legacy-self-atk",
+          "layers": 1
+        }
+      ],
+      "sourceInputs": [],
+      "declaredPanels": {
+        "entity:jane": {
+          "stats": {
+            "attack": 3100.5,
+            "health": 12600,
+            "defense": 790,
+            "impact": 86,
+            "anomalyProficiency": 120.25,
+            "anomalyMastery": 150,
+            "energyRegen": 1.2,
+            "criticalRate": 0.25,
+            "criticalDamage": 0.8,
+            "penetrationRatio": 0.1,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "physical": 0.3
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 3101,
+          "health": 12600,
+          "defense": 790,
+          "impact": 86,
+          "anomalyProficiency": 120.25,
+          "anomalyMastery": 150,
+          "energyRegen": 1.2,
+          "criticalRate": 0.25,
+          "criticalDamage": 0.8,
+          "penetrationRatio": 0.1,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "physical": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "34198.92956935977509383551742873236066734",
+        "critical": "34198.92956935977509383551742873236066734",
+        "expected": "34198.92956935977509383551742873236066734",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 22110.13,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 1.2025,
+          "defense": 0.4947237771475,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        },
+        "critical": {
+          "baseDamage": 22110.13,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 1.2025,
+          "defense": 0.4947237771475,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [],
+      "identity": {
+        "actorEntityId": "entity:jane",
+        "powerSourceEntityId": "entity:jane",
+        "damageBonusSource": "settled-power-source-element",
+        "durationAdjustmentSeconds": null,
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:jane",
+          "multiplier": "7.13",
+          "value": "3101"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:jane",
+            "stat": "attack",
+            "stage": "current",
+            "value": "3101"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "anomalyProficiency",
+            "stage": "current",
+            "value": "120.25"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0.1"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.25"
+          }
+        ]
+      }
+    },
+    "A1-3/jane-assault": {
+      "presetId": "A1",
+      "caseId": "A1-3",
+      "label": "恰好封顶",
+      "eventId": "jane-assault",
+      "kind": "anomaly",
+      "team": ["jane"],
+      "buffGroups": ["jane-frenzy"],
+      "upstreamEvidence": "pinned-records-only",
+      "conversionBoundary": {
+        "optionId": "agents:jane:mindscape:0:blk-legacy:legacy-self-atk",
+        "pointers": ["/agents/43/mindscapeBuffs/0/effectBlocks/0/effects/0"],
+        "position": "at-cap",
+        "sourceUnit": "anomaly-proficiency-points",
+        "sourceValue": "420",
+        "initialBase": "120",
+        "ratioPercent": "200",
+        "cap": "600",
+        "outputUnit": "attack-points",
+        "expectedConversion": "600",
+        "recordConversion": "600"
+      },
+      "selections": [
+        {
+          "holderId": "entity:jane",
+          "optionId": "agents:jane:mindscape:0:blk-legacy:legacy-self-atk",
+          "layers": 1
+        }
+      ],
+      "sourceInputs": [],
+      "declaredPanels": {
+        "entity:jane": {
+          "stats": {
+            "attack": 3100.5,
+            "health": 12600,
+            "defense": 790,
+            "impact": 86,
+            "anomalyProficiency": 420,
+            "anomalyMastery": 150,
+            "energyRegen": 1.2,
+            "criticalRate": 0.25,
+            "criticalDamage": 0.8,
+            "penetrationRatio": 0.1,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "physical": 0.3
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 3700.5,
+          "health": 12600,
+          "defense": 790,
+          "impact": 86,
+          "anomalyProficiency": 420,
+          "anomalyMastery": 150,
+          "energyRegen": 1.2,
+          "criticalRate": 0.25,
+          "criticalDamage": 0.8,
+          "penetrationRatio": 0.1,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "physical": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "142539.5424747155026742499389383751127771",
+        "critical": "142539.5424747155026742499389383751127771",
+        "expected": "142539.5424747155026742499389383751127771",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 26384.565,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 4.2,
+          "defense": 0.4947237771475,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        },
+        "critical": {
+          "baseDamage": 26384.565,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 4.2,
+          "defense": 0.4947237771475,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [],
+      "identity": {
+        "actorEntityId": "entity:jane",
+        "powerSourceEntityId": "entity:jane",
+        "damageBonusSource": "settled-power-source-element",
+        "durationAdjustmentSeconds": null,
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:jane",
+          "multiplier": "7.13",
+          "value": "3700.5"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:jane",
+            "stat": "attack",
+            "stage": "current",
+            "value": "3700.5"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "anomalyProficiency",
+            "stage": "current",
+            "value": "420"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0.1"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.25"
+          }
+        ]
+      }
+    },
+    "A1-4/jane-assault": {
+      "presetId": "A1",
+      "caseId": "A1-4",
+      "label": "略超过封顶",
+      "eventId": "jane-assault",
+      "kind": "anomaly",
+      "team": ["jane"],
+      "buffGroups": ["jane-frenzy"],
+      "upstreamEvidence": "pinned-records-only",
+      "conversionBoundary": {
+        "optionId": "agents:jane:mindscape:0:blk-legacy:legacy-self-atk",
+        "pointers": ["/agents/43/mindscapeBuffs/0/effectBlocks/0/effects/0"],
+        "position": "above-cap",
+        "sourceUnit": "anomaly-proficiency-points",
+        "sourceValue": "420.25",
+        "initialBase": "120",
+        "ratioPercent": "200",
+        "cap": "600",
+        "outputUnit": "attack-points",
+        "expectedConversion": "600",
+        "recordConversion": "600"
+      },
+      "selections": [
+        {
+          "holderId": "entity:jane",
+          "optionId": "agents:jane:mindscape:0:blk-legacy:legacy-self-atk",
+          "layers": 1
+        }
+      ],
+      "sourceInputs": [],
+      "declaredPanels": {
+        "entity:jane": {
+          "stats": {
+            "attack": 3100.5,
+            "health": 12600,
+            "defense": 790,
+            "impact": 86,
+            "anomalyProficiency": 420.25,
+            "anomalyMastery": 150,
+            "energyRegen": 1.2,
+            "criticalRate": 0.25,
+            "criticalDamage": 0.8,
+            "penetrationRatio": 0.1,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "physical": 0.3
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 3700.5,
+          "health": 12600,
+          "defense": 790,
+          "impact": 86,
+          "anomalyProficiency": 420.25,
+          "anomalyMastery": 150,
+          "energyRegen": 1.2,
+          "criticalRate": 0.25,
+          "criticalDamage": 0.8,
+          "penetrationRatio": 0.1,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "physical": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "142624.3874404742619020322305686955741537",
+        "critical": "142624.3874404742619020322305686955741537",
+        "expected": "142624.3874404742619020322305686955741537",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 26384.565,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 4.2025,
+          "defense": 0.4947237771475,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        },
+        "critical": {
+          "baseDamage": 26384.565,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 4.2025,
+          "defense": 0.4947237771475,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [],
+      "identity": {
+        "actorEntityId": "entity:jane",
+        "powerSourceEntityId": "entity:jane",
+        "damageBonusSource": "settled-power-source-element",
+        "durationAdjustmentSeconds": null,
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:jane",
+          "multiplier": "7.13",
+          "value": "3700.5"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:jane",
+            "stat": "attack",
+            "stage": "current",
+            "value": "3700.5"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "anomalyProficiency",
+            "stage": "current",
+            "value": "420.25"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0.1"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.25"
+          }
+        ]
+      }
+    },
+    "A1-5/jane-assault": {
+      "presetId": "A1",
+      "caseId": "A1-5",
+      "label": "关闭效果对照（同面板）",
+      "eventId": "jane-assault",
+      "kind": "anomaly",
+      "team": ["jane"],
+      "buffGroups": [],
+      "upstreamEvidence": "pinned-records-only",
+      "conversionBoundary": {
+        "optionId": "agents:jane:mindscape:0:blk-legacy:legacy-self-atk",
+        "pointers": ["/agents/43/mindscapeBuffs/0/effectBlocks/0/effects/0"],
+        "position": "off",
+        "sourceUnit": "anomaly-proficiency-points",
+        "sourceValue": "420.25",
+        "initialBase": "120",
+        "ratioPercent": "200",
+        "cap": "600",
+        "outputUnit": "attack-points",
+        "expectedConversion": "0",
+        "recordConversion": "600"
+      },
+      "selections": [],
+      "sourceInputs": [],
+      "declaredPanels": {
+        "entity:jane": {
+          "stats": {
+            "attack": 3100.5,
+            "health": 12600,
+            "defense": 790,
+            "impact": 86,
+            "anomalyProficiency": 420.25,
+            "anomalyMastery": 150,
+            "energyRegen": 1.2,
+            "criticalRate": 0.25,
+            "criticalDamage": 0.8,
+            "penetrationRatio": 0.1,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "physical": 0.3
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 3100.5,
+          "health": 12600,
+          "defense": 790,
+          "impact": 86,
+          "anomalyProficiency": 420.25,
+          "anomalyMastery": 150,
+          "energyRegen": 1.2,
+          "criticalRate": 0.25,
+          "criticalDamage": 0.8,
+          "penetrationRatio": 0.1,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "physical": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "119499.2334168870285170249779430457040032",
+        "critical": "119499.2334168870285170249779430457040032",
+        "expected": "119499.2334168870285170249779430457040032",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 22106.565,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 4.2025,
+          "defense": 0.4947237771475,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        },
+        "critical": {
+          "baseDamage": 22106.565,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 4.2025,
+          "defense": 0.4947237771475,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [],
+      "identity": {
+        "actorEntityId": "entity:jane",
+        "powerSourceEntityId": "entity:jane",
+        "damageBonusSource": "settled-power-source-element",
+        "durationAdjustmentSeconds": null,
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:jane",
+          "multiplier": "7.13",
+          "value": "3100.5"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:jane",
+            "stat": "attack",
+            "stage": "current",
+            "value": "3100.5"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "anomalyProficiency",
+            "stage": "current",
+            "value": "420.25"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0.1"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.25"
+          }
+        ]
+      }
+    },
+    "A2-0/nicole-cannon": {
+      "presetId": "A2",
+      "caseId": "A2-0",
+      "label": "未到封顶",
+      "eventId": "nicole-cannon",
+      "kind": "regular",
+      "team": ["nicole", "rina"],
+      "buffGroups": ["rina-penetration-below-cap"],
+      "upstreamEvidence": "pinned-records-only",
+      "conversionBoundary": {
+        "optionId": "agents:alexandrina:mindscape:0:blk-ms46w5pz-zdpplb:eff-ms46xqjt-g3gxeb",
+        "pointers": ["/agents/1/mindscapeBuffs/0/effectBlocks/0/effects/1"],
+        "position": "above-threshold",
+        "sourceUnit": "ratio",
+        "sourceValue": "0.6",
+        "initialBase": "0",
+        "ratioPercent": "25",
+        "cap": "18",
+        "outputUnit": "ratio",
+        "expectedConversion": "0.15",
+        "recordConversion": "0.15"
+      },
+      "selections": [
+        {
+          "holderId": "entity:rina",
+          "optionId": "agents:alexandrina:mindscape:0:blk-ms46w5pz-zdpplb:eff-ms46xqjt-g3gxeb",
+          "layers": 1
+        }
+      ],
+      "sourceInputs": [
+        {
+          "holderKey": "rina",
+          "unit": "ratio",
+          "value": 0.6,
+          "readFrom": "上限边界手填输入（合成，非声明面板派生）"
+        }
+      ],
+      "declaredPanels": {
+        "entity:nicole": {
+          "stats": {
+            "attack": 2750.25,
+            "health": 12000,
+            "defense": 820.5,
+            "impact": 88,
+            "anomalyProficiency": 120,
+            "anomalyMastery": 90,
+            "energyRegen": 1.56,
+            "criticalRate": 0.42,
+            "criticalDamage": 1.05,
+            "penetrationRatio": 0,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "ether": 0.3,
+            "auric-ink": 0.3
+          }
+        },
+        "entity:rina": {
+          "stats": {
+            "attack": 2400.25,
+            "health": 12500,
+            "defense": 800,
+            "impact": 83,
+            "anomalyProficiency": 160,
+            "anomalyMastery": 100,
+            "energyRegen": 1.8,
+            "criticalRate": 0.2,
+            "criticalDamage": 0.7,
+            "penetrationRatio": 0.24,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 27,
+          "damageBonuses": {
+            "electric": 0.2
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 2750.25,
+          "health": 12000,
+          "defense": 820.5,
+          "impact": 88,
+          "anomalyProficiency": 120,
+          "anomalyMastery": 90,
+          "energyRegen": 1.56,
+          "criticalRate": 0.42,
+          "criticalDamage": 1.05,
+          "penetrationRatio": 0.15,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "ether": 0.3,
+          "auric-ink": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "28268.5466793937201228571208633868844635",
+        "critical": "57950.52069275712625185709776994311315018",
+        "expected": "40734.9757650063506970371111641405005119",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0.42",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 35577.234,
+          "damageBonus": 1.3,
+          "critical": 1,
+          "defense": 0.5093387320672994,
+          "resistance": 1.2,
+          "damageTaken": 1,
+          "stunDamage": 1
+        },
+        "critical": {
+          "baseDamage": 35577.234,
+          "damageBonus": 1.3,
+          "critical": 2.05,
+          "defense": 0.5093387320672994,
+          "resistance": 1.2,
+          "damageTaken": 1,
+          "stunDamage": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [],
+      "identity": {
+        "actorEntityId": "entity:nicole",
+        "powerSourceEntityId": "entity:nicole",
+        "damageBonusSource": "panel-element",
+        "durationAdjustmentSeconds": null,
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:nicole",
+          "multiplier": "12.936",
+          "value": "2750.25"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:nicole",
+            "stat": "attack",
+            "stage": "current",
+            "value": "2750.25"
+          },
+          {
+            "entityId": "entity:nicole",
+            "stat": "criticalDamage",
+            "stage": "current",
+            "value": "1.05"
+          },
+          {
+            "entityId": "entity:nicole",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0.15"
+          },
+          {
+            "entityId": "entity:nicole",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.42"
+          }
+        ]
+      }
+    },
+    "A2-1/nicole-cannon": {
+      "presetId": "A2",
+      "caseId": "A2-1",
+      "label": "恰好封顶",
+      "eventId": "nicole-cannon",
+      "kind": "regular",
+      "team": ["nicole", "rina"],
+      "buffGroups": ["rina-penetration-at-cap"],
+      "upstreamEvidence": "pinned-records-only",
+      "conversionBoundary": {
+        "optionId": "agents:alexandrina:mindscape:0:blk-ms46w5pz-zdpplb:eff-ms46xqjt-g3gxeb",
+        "pointers": ["/agents/1/mindscapeBuffs/0/effectBlocks/0/effects/1"],
+        "position": "at-cap",
+        "sourceUnit": "ratio",
+        "sourceValue": "0.72",
+        "initialBase": "0",
+        "ratioPercent": "25",
+        "cap": "18",
+        "outputUnit": "ratio",
+        "expectedConversion": "0.18",
+        "recordConversion": "0.18"
+      },
+      "selections": [
+        {
+          "holderId": "entity:rina",
+          "optionId": "agents:alexandrina:mindscape:0:blk-ms46w5pz-zdpplb:eff-ms46xqjt-g3gxeb",
+          "layers": 1
+        }
+      ],
+      "sourceInputs": [
+        {
+          "holderKey": "rina",
+          "unit": "ratio",
+          "value": 0.72,
+          "readFrom": "上限边界手填输入（合成，非声明面板派生）"
+        }
+      ],
+      "declaredPanels": {
+        "entity:nicole": {
+          "stats": {
+            "attack": 2750.25,
+            "health": 12000,
+            "defense": 820.5,
+            "impact": 88,
+            "anomalyProficiency": 120,
+            "anomalyMastery": 90,
+            "energyRegen": 1.56,
+            "criticalRate": 0.42,
+            "criticalDamage": 1.05,
+            "penetrationRatio": 0,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "ether": 0.3,
+            "auric-ink": 0.3
+          }
+        },
+        "entity:rina": {
+          "stats": {
+            "attack": 2400.25,
+            "health": 12500,
+            "defense": 800,
+            "impact": 83,
+            "anomalyProficiency": 160,
+            "anomalyMastery": 100,
+            "energyRegen": 1.8,
+            "criticalRate": 0.2,
+            "criticalDamage": 0.7,
+            "penetrationRatio": 0.24,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 27,
+          "damageBonuses": {
+            "electric": 0.2
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 2750.25,
+          "health": 12000,
+          "defense": 820.5,
+          "impact": 88,
+          "anomalyProficiency": 120,
+          "anomalyMastery": 90,
+          "energyRegen": 1.56,
+          "criticalRate": 0.42,
+          "criticalDamage": 1.05,
+          "penetrationRatio": 0.18,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "ether": 0.3,
+          "auric-ink": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "28778.64786386676321506154960173787110789",
+        "critical": "58996.22812092686459087617668356263577118",
+        "expected": "41470.03157183200579290369297610427226647",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0.42",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 35577.234,
+          "damageBonus": 1.3,
+          "critical": 1,
+          "defense": 0.5185296640763694,
+          "resistance": 1.2,
+          "damageTaken": 1,
+          "stunDamage": 1
+        },
+        "critical": {
+          "baseDamage": 35577.234,
+          "damageBonus": 1.3,
+          "critical": 2.05,
+          "defense": 0.5185296640763694,
+          "resistance": 1.2,
+          "damageTaken": 1,
+          "stunDamage": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [],
+      "identity": {
+        "actorEntityId": "entity:nicole",
+        "powerSourceEntityId": "entity:nicole",
+        "damageBonusSource": "panel-element",
+        "durationAdjustmentSeconds": null,
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:nicole",
+          "multiplier": "12.936",
+          "value": "2750.25"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:nicole",
+            "stat": "attack",
+            "stage": "current",
+            "value": "2750.25"
+          },
+          {
+            "entityId": "entity:nicole",
+            "stat": "criticalDamage",
+            "stage": "current",
+            "value": "1.05"
+          },
+          {
+            "entityId": "entity:nicole",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0.18"
+          },
+          {
+            "entityId": "entity:nicole",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.42"
+          }
+        ]
+      }
+    },
+    "A2-2/nicole-cannon": {
+      "presetId": "A2",
+      "caseId": "A2-2",
+      "label": "略超过封顶",
+      "eventId": "nicole-cannon",
+      "kind": "regular",
+      "team": ["nicole", "rina"],
+      "buffGroups": ["rina-penetration-above-cap"],
+      "upstreamEvidence": "pinned-records-only",
+      "conversionBoundary": {
+        "optionId": "agents:alexandrina:mindscape:0:blk-ms46w5pz-zdpplb:eff-ms46xqjt-g3gxeb",
+        "pointers": ["/agents/1/mindscapeBuffs/0/effectBlocks/0/effects/1"],
+        "position": "above-cap",
+        "sourceUnit": "ratio",
+        "sourceValue": "0.8",
+        "initialBase": "0",
+        "ratioPercent": "25",
+        "cap": "18",
+        "outputUnit": "ratio",
+        "expectedConversion": "0.18",
+        "recordConversion": "0.18"
+      },
+      "selections": [
+        {
+          "holderId": "entity:rina",
+          "optionId": "agents:alexandrina:mindscape:0:blk-ms46w5pz-zdpplb:eff-ms46xqjt-g3gxeb",
+          "layers": 1
+        }
+      ],
+      "sourceInputs": [
+        {
+          "holderKey": "rina",
+          "unit": "ratio",
+          "value": 0.8,
+          "readFrom": "上限边界手填输入（合成，非声明面板派生）"
+        }
+      ],
+      "declaredPanels": {
+        "entity:nicole": {
+          "stats": {
+            "attack": 2750.25,
+            "health": 12000,
+            "defense": 820.5,
+            "impact": 88,
+            "anomalyProficiency": 120,
+            "anomalyMastery": 90,
+            "energyRegen": 1.56,
+            "criticalRate": 0.42,
+            "criticalDamage": 1.05,
+            "penetrationRatio": 0,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "ether": 0.3,
+            "auric-ink": 0.3
+          }
+        },
+        "entity:rina": {
+          "stats": {
+            "attack": 2400.25,
+            "health": 12500,
+            "defense": 800,
+            "impact": 83,
+            "anomalyProficiency": 160,
+            "anomalyMastery": 100,
+            "energyRegen": 1.8,
+            "criticalRate": 0.2,
+            "criticalDamage": 0.7,
+            "penetrationRatio": 0.24,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 27,
+          "damageBonuses": {
+            "electric": 0.2
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 2750.25,
+          "health": 12000,
+          "defense": 820.5,
+          "impact": 88,
+          "anomalyProficiency": 120,
+          "anomalyMastery": 90,
+          "energyRegen": 1.56,
+          "criticalRate": 0.42,
+          "criticalDamage": 1.05,
+          "penetrationRatio": 0.18,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "ether": 0.3,
+          "auric-ink": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "28778.64786386676321506154960173787110789",
+        "critical": "58996.22812092686459087617668356263577118",
+        "expected": "41470.03157183200579290369297610427226647",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0.42",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 35577.234,
+          "damageBonus": 1.3,
+          "critical": 1,
+          "defense": 0.5185296640763694,
+          "resistance": 1.2,
+          "damageTaken": 1,
+          "stunDamage": 1
+        },
+        "critical": {
+          "baseDamage": 35577.234,
+          "damageBonus": 1.3,
+          "critical": 2.05,
+          "defense": 0.5185296640763694,
+          "resistance": 1.2,
+          "damageTaken": 1,
+          "stunDamage": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [],
+      "identity": {
+        "actorEntityId": "entity:nicole",
+        "powerSourceEntityId": "entity:nicole",
+        "damageBonusSource": "panel-element",
+        "durationAdjustmentSeconds": null,
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:nicole",
+          "multiplier": "12.936",
+          "value": "2750.25"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:nicole",
+            "stat": "attack",
+            "stage": "current",
+            "value": "2750.25"
+          },
+          {
+            "entityId": "entity:nicole",
+            "stat": "criticalDamage",
+            "stage": "current",
+            "value": "1.05"
+          },
+          {
+            "entityId": "entity:nicole",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0.18"
+          },
+          {
+            "entityId": "entity:nicole",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.42"
+          }
+        ]
+      }
+    },
+    "B1-0/burnice-fire-disorder": {
+      "presetId": "B1",
+      "caseId": "B1-0",
+      "label": "提供者与触发者明显不同",
+      "eventId": "burnice-fire-disorder",
+      "kind": "disorder",
+      "team": ["jane", "burnice"],
+      "buffGroups": [],
+      "upstreamEvidence": "pinned-records-only",
+      "selections": [],
+      "sourceInputs": [],
+      "declaredPanels": {
+        "entity:jane": {
+          "stats": {
+            "attack": 3100.5,
+            "health": 12600,
+            "defense": 790,
+            "impact": 86,
+            "anomalyProficiency": 320.25,
+            "anomalyMastery": 150,
+            "energyRegen": 1.2,
+            "criticalRate": 0.9,
+            "criticalDamage": 0.8,
+            "penetrationRatio": 0.1,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "physical": 0.3
+          }
+        },
+        "entity:burnice": {
+          "stats": {
+            "attack": 1500.25,
+            "health": 13500,
+            "defense": 850,
+            "impact": 86,
+            "anomalyProficiency": 480,
+            "anomalyMastery": 148,
+            "energyRegen": 1.4,
+            "criticalRate": 0.22,
+            "criticalDamage": 0.9,
+            "penetrationRatio": 0.3,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 27,
+          "damageBonuses": {
+            "fire": 0.3
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 1500.25,
+          "health": 13500,
+          "defense": 850,
+          "impact": 86,
+          "anomalyProficiency": 480,
+          "anomalyMastery": 148,
+          "energyRegen": 1.4,
+          "criticalRate": 0.22,
+          "criticalDamage": 0.9,
+          "penetrationRatio": 0.3,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 27,
+        "damageBonuses": {
+          "fire": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "121100.3881200911223691815987215667607358",
+        "critical": "121100.3881200911223691815987215667607358",
+        "expected": "121100.3881200911223691815987215667607358",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 17252.875,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 4.8,
+          "defense": 0.5624312898802035,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        },
+        "critical": {
+          "baseDamage": 17252.875,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 4.8,
+          "defense": 0.5624312898802035,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [],
+      "identity": {
+        "actorEntityId": "entity:jane",
+        "powerSourceEntityId": "entity:burnice",
+        "damageBonusSource": "settled-power-source-element",
+        "durationAdjustmentSeconds": "0",
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:burnice",
+          "multiplier": "11.5",
+          "value": "1500.25"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:burnice",
+            "stat": "attack",
+            "stage": "current",
+            "value": "1500.25"
+          },
+          {
+            "entityId": "entity:burnice",
+            "stat": "anomalyProficiency",
+            "stage": "current",
+            "value": "480"
+          },
+          {
+            "entityId": "entity:burnice",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0.3"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.9"
+          }
+        ]
+      }
+    },
+    "C1-0/burnice-fire-disorder": {
+      "presetId": "C1",
+      "caseId": "C1-0",
+      "label": "未经过（已过 0 秒）",
+      "eventId": "burnice-fire-disorder",
+      "kind": "disorder",
+      "team": ["jane", "burnice"],
+      "buffGroups": [],
+      "upstreamEvidence": "pinned-records-only",
+      "selections": [],
+      "sourceInputs": [],
+      "declaredPanels": {
+        "entity:jane": {
+          "stats": {
+            "attack": 3100.5,
+            "health": 12600,
+            "defense": 790,
+            "impact": 86,
+            "anomalyProficiency": 320.25,
+            "anomalyMastery": 150,
+            "energyRegen": 1.2,
+            "criticalRate": 0.25,
+            "criticalDamage": 0.8,
+            "penetrationRatio": 0.1,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "physical": 0.3
+          }
+        },
+        "entity:burnice": {
+          "stats": {
+            "attack": 2900.75,
+            "health": 13500,
+            "defense": 850,
+            "impact": 86,
+            "anomalyProficiency": 380,
+            "anomalyMastery": 148,
+            "energyRegen": 1.4,
+            "criticalRate": 0.22,
+            "criticalDamage": 0.9,
+            "penetrationRatio": 0,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "fire": 0.3
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 2900.75,
+          "health": 13500,
+          "defense": 850,
+          "impact": 86,
+          "anomalyProficiency": 380,
+          "anomalyMastery": 148,
+          "energyRegen": 1.4,
+          "criticalRate": 0.22,
+          "criticalDamage": 0.9,
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "fire": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "194430.1768549945787960213076886814689106",
+        "critical": "194430.1768549945787960213076886814689106",
+        "expected": "194430.1768549945787960213076886814689106",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 42060.875,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 3.8,
+          "defense": 0.46787347381322775,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        },
+        "critical": {
+          "baseDamage": 42060.875,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 3.8,
+          "defense": 0.46787347381322775,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [],
+      "identity": {
+        "actorEntityId": "entity:jane",
+        "powerSourceEntityId": "entity:burnice",
+        "damageBonusSource": "settled-power-source-element",
+        "durationAdjustmentSeconds": "0",
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:burnice",
+          "multiplier": "14.5",
+          "value": "2900.75"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:burnice",
+            "stat": "attack",
+            "stage": "current",
+            "value": "2900.75"
+          },
+          {
+            "entityId": "entity:burnice",
+            "stat": "anomalyProficiency",
+            "stage": "current",
+            "value": "380"
+          },
+          {
+            "entityId": "entity:burnice",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.25"
+          }
+        ]
+      }
+    },
+    "C1-1/burnice-fire-disorder": {
+      "presetId": "C1",
+      "caseId": "C1-1",
+      "label": "正小数剩余（已过 3.25 秒）",
+      "eventId": "burnice-fire-disorder",
+      "kind": "disorder",
+      "team": ["jane", "burnice"],
+      "buffGroups": [],
+      "upstreamEvidence": "pinned-records-only",
+      "selections": [],
+      "sourceInputs": [],
+      "declaredPanels": {
+        "entity:jane": {
+          "stats": {
+            "attack": 3100.5,
+            "health": 12600,
+            "defense": 790,
+            "impact": 86,
+            "anomalyProficiency": 320.25,
+            "anomalyMastery": 150,
+            "energyRegen": 1.2,
+            "criticalRate": 0.25,
+            "criticalDamage": 0.8,
+            "penetrationRatio": 0.1,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "physical": 0.3
+          }
+        },
+        "entity:burnice": {
+          "stats": {
+            "attack": 2900.75,
+            "health": 13500,
+            "defense": 850,
+            "impact": 86,
+            "anomalyProficiency": 380,
+            "anomalyMastery": 148,
+            "energyRegen": 1.4,
+            "criticalRate": 0.22,
+            "criticalDamage": 0.9,
+            "penetrationRatio": 0,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "fire": 0.3
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 2900.75,
+          "health": 13500,
+          "defense": 850,
+          "impact": 86,
+          "anomalyProficiency": 380,
+          "anomalyMastery": 148,
+          "energyRegen": 1.4,
+          "criticalRate": 0.22,
+          "criticalDamage": 0.9,
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "fire": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "147498.7548555131287418092679017583557253",
+        "critical": "147498.7548555131287418092679017583557253",
+        "expected": "147498.7548555131287418092679017583557253",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 31908.25,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 3.8,
+          "defense": 0.46787347381322775,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        },
+        "critical": {
+          "baseDamage": 31908.25,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 3.8,
+          "defense": 0.46787347381322775,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [],
+      "identity": {
+        "actorEntityId": "entity:jane",
+        "powerSourceEntityId": "entity:burnice",
+        "damageBonusSource": "settled-power-source-element",
+        "durationAdjustmentSeconds": "0",
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:burnice",
+          "multiplier": "11",
+          "value": "2900.75"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:burnice",
+            "stat": "attack",
+            "stage": "current",
+            "value": "2900.75"
+          },
+          {
+            "entityId": "entity:burnice",
+            "stat": "anomalyProficiency",
+            "stage": "current",
+            "value": "380"
+          },
+          {
+            "entityId": "entity:burnice",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.25"
+          }
+        ]
+      }
+    },
+    "C1-2/burnice-fire-disorder": {
+      "presetId": "C1",
+      "caseId": "C1-2",
+      "label": "低于半档剩余（已过 9.75 秒）",
+      "eventId": "burnice-fire-disorder",
+      "kind": "disorder",
+      "team": ["jane", "burnice"],
+      "buffGroups": [],
+      "upstreamEvidence": "pinned-records-only",
+      "selections": [],
+      "sourceInputs": [],
+      "declaredPanels": {
+        "entity:jane": {
+          "stats": {
+            "attack": 3100.5,
+            "health": 12600,
+            "defense": 790,
+            "impact": 86,
+            "anomalyProficiency": 320.25,
+            "anomalyMastery": 150,
+            "energyRegen": 1.2,
+            "criticalRate": 0.25,
+            "criticalDamage": 0.8,
+            "penetrationRatio": 0.1,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "physical": 0.3
+          }
+        },
+        "entity:burnice": {
+          "stats": {
+            "attack": 2900.75,
+            "health": 13500,
+            "defense": 850,
+            "impact": 86,
+            "anomalyProficiency": 380,
+            "anomalyMastery": 148,
+            "energyRegen": 1.4,
+            "criticalRate": 0.22,
+            "criticalDamage": 0.9,
+            "penetrationRatio": 0,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "fire": 0.3
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 2900.75,
+          "health": 13500,
+          "defense": 850,
+          "impact": 86,
+          "anomalyProficiency": 380,
+          "anomalyMastery": 148,
+          "energyRegen": 1.4,
+          "criticalRate": 0.22,
+          "criticalDamage": 0.9,
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "fire": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "60340.39971361900721255833686890114552397",
+        "critical": "60340.39971361900721255833686890114552397",
+        "expected": "60340.39971361900721255833686890114552397",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 13053.375,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 3.8,
+          "defense": 0.46787347381322775,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        },
+        "critical": {
+          "baseDamage": 13053.375,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 3.8,
+          "defense": 0.46787347381322775,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [],
+      "identity": {
+        "actorEntityId": "entity:jane",
+        "powerSourceEntityId": "entity:burnice",
+        "damageBonusSource": "settled-power-source-element",
+        "durationAdjustmentSeconds": "0",
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:burnice",
+          "multiplier": "4.5",
+          "value": "2900.75"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:burnice",
+            "stat": "attack",
+            "stage": "current",
+            "value": "2900.75"
+          },
+          {
+            "entityId": "entity:burnice",
+            "stat": "anomalyProficiency",
+            "stage": "current",
+            "value": "380"
+          },
+          {
+            "entityId": "entity:burnice",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.25"
+          }
+        ]
+      }
+    },
+    "C1-3/burnice-fire-disorder": {
+      "presetId": "C1",
+      "caseId": "C1-3",
+      "label": "恰好耗尽（已过 10 秒）",
+      "eventId": "burnice-fire-disorder",
+      "kind": "disorder",
+      "team": ["jane", "burnice"],
+      "buffGroups": [],
+      "upstreamEvidence": "pinned-records-only",
+      "selections": [],
+      "sourceInputs": [],
+      "declaredPanels": {
+        "entity:jane": {
+          "stats": {
+            "attack": 3100.5,
+            "health": 12600,
+            "defense": 790,
+            "impact": 86,
+            "anomalyProficiency": 320.25,
+            "anomalyMastery": 150,
+            "energyRegen": 1.2,
+            "criticalRate": 0.25,
+            "criticalDamage": 0.8,
+            "penetrationRatio": 0.1,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "physical": 0.3
+          }
+        },
+        "entity:burnice": {
+          "stats": {
+            "attack": 2900.75,
+            "health": 13500,
+            "defense": 850,
+            "impact": 86,
+            "anomalyProficiency": 380,
+            "anomalyMastery": 148,
+            "energyRegen": 1.4,
+            "criticalRate": 0.22,
+            "criticalDamage": 0.9,
+            "penetrationRatio": 0,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "fire": 0.3
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 2900.75,
+          "health": 13500,
+          "defense": 850,
+          "impact": 86,
+          "anomalyProficiency": 380,
+          "anomalyMastery": 148,
+          "energyRegen": 1.4,
+          "criticalRate": 0.22,
+          "criticalDamage": 0.9,
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "fire": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "60340.39971361900721255833686890114552397",
+        "critical": "60340.39971361900721255833686890114552397",
+        "expected": "60340.39971361900721255833686890114552397",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 13053.375,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 3.8,
+          "defense": 0.46787347381322775,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        },
+        "critical": {
+          "baseDamage": 13053.375,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 3.8,
+          "defense": 0.46787347381322775,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [],
+      "identity": {
+        "actorEntityId": "entity:jane",
+        "powerSourceEntityId": "entity:burnice",
+        "damageBonusSource": "settled-power-source-element",
+        "durationAdjustmentSeconds": "0",
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:burnice",
+          "multiplier": "4.5",
+          "value": "2900.75"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:burnice",
+            "stat": "attack",
+            "stage": "current",
+            "value": "2900.75"
+          },
+          {
+            "entityId": "entity:burnice",
+            "stat": "anomalyProficiency",
+            "stage": "current",
+            "value": "380"
+          },
+          {
+            "entityId": "entity:burnice",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.25"
+          }
+        ]
+      }
+    },
+    "C1-4/burnice-fire-disorder": {
+      "presetId": "C1",
+      "caseId": "C1-4",
+      "label": "超过持续时间（已过 12 秒）",
+      "eventId": "burnice-fire-disorder",
+      "kind": "disorder",
+      "team": ["jane", "burnice"],
+      "buffGroups": [],
+      "upstreamEvidence": "pinned-records-only",
+      "selections": [],
+      "sourceInputs": [],
+      "declaredPanels": {
+        "entity:jane": {
+          "stats": {
+            "attack": 3100.5,
+            "health": 12600,
+            "defense": 790,
+            "impact": 86,
+            "anomalyProficiency": 320.25,
+            "anomalyMastery": 150,
+            "energyRegen": 1.2,
+            "criticalRate": 0.25,
+            "criticalDamage": 0.8,
+            "penetrationRatio": 0.1,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "physical": 0.3
+          }
+        },
+        "entity:burnice": {
+          "stats": {
+            "attack": 2900.75,
+            "health": 13500,
+            "defense": 850,
+            "impact": 86,
+            "anomalyProficiency": 380,
+            "anomalyMastery": 148,
+            "energyRegen": 1.4,
+            "criticalRate": 0.22,
+            "criticalDamage": 0.9,
+            "penetrationRatio": 0,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "fire": 0.3
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 2900.75,
+          "health": 13500,
+          "defense": 850,
+          "impact": 86,
+          "anomalyProficiency": 380,
+          "anomalyMastery": 148,
+          "energyRegen": 1.4,
+          "criticalRate": 0.22,
+          "criticalDamage": 0.9,
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "fire": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "60340.39971361900721255833686890114552397",
+        "critical": "60340.39971361900721255833686890114552397",
+        "expected": "60340.39971361900721255833686890114552397",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 13053.375,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 3.8,
+          "defense": 0.46787347381322775,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        },
+        "critical": {
+          "baseDamage": 13053.375,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 3.8,
+          "defense": 0.46787347381322775,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [],
+      "identity": {
+        "actorEntityId": "entity:jane",
+        "powerSourceEntityId": "entity:burnice",
+        "damageBonusSource": "settled-power-source-element",
+        "durationAdjustmentSeconds": "0",
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:burnice",
+          "multiplier": "4.5",
+          "value": "2900.75"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:burnice",
+            "stat": "attack",
+            "stage": "current",
+            "value": "2900.75"
+          },
+          {
+            "entityId": "entity:burnice",
+            "stat": "anomalyProficiency",
+            "stage": "current",
+            "value": "380"
+          },
+          {
+            "entityId": "entity:burnice",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.25"
+          }
+        ]
+      }
+    },
+    "C1-5/burnice-fire-disorder": {
+      "presetId": "C1",
+      "caseId": "C1-5",
+      "label": "延长 3 秒后恰好耗尽（已过 13 秒）",
+      "eventId": "burnice-fire-disorder",
+      "kind": "disorder",
+      "team": ["jane", "burnice"],
+      "buffGroups": ["burnice-duration"],
+      "upstreamEvidence": "pinned-records-only",
+      "selections": [
+        {
+          "holderId": "entity:burnice",
+          "optionId": "agents:burnice:mindscape:0:blk-ms4nig27-5ji2hh:eff-ms4nig27-6onrev",
+          "layers": 1
+        }
+      ],
+      "sourceInputs": [],
+      "declaredPanels": {
+        "entity:jane": {
+          "stats": {
+            "attack": 3100.5,
+            "health": 12600,
+            "defense": 790,
+            "impact": 86,
+            "anomalyProficiency": 320.25,
+            "anomalyMastery": 150,
+            "energyRegen": 1.2,
+            "criticalRate": 0.25,
+            "criticalDamage": 0.8,
+            "penetrationRatio": 0.1,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "physical": 0.3
+          }
+        },
+        "entity:burnice": {
+          "stats": {
+            "attack": 2900.75,
+            "health": 13500,
+            "defense": 850,
+            "impact": 86,
+            "anomalyProficiency": 380,
+            "anomalyMastery": 148,
+            "energyRegen": 1.4,
+            "criticalRate": 0.22,
+            "criticalDamage": 0.9,
+            "penetrationRatio": 0,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "fire": 0.3
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 2900.75,
+          "health": 13500,
+          "defense": 850,
+          "impact": 86,
+          "anomalyProficiency": 380,
+          "anomalyMastery": 148,
+          "energyRegen": 1.4,
+          "criticalRate": 0.22,
+          "criticalDamage": 0.9,
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "fire": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "60340.39971361900721255833686890114552397",
+        "critical": "60340.39971361900721255833686890114552397",
+        "expected": "60340.39971361900721255833686890114552397",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 13053.375,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 3.8,
+          "defense": 0.46787347381322775,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        },
+        "critical": {
+          "baseDamage": 13053.375,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 3.8,
+          "defense": 0.46787347381322775,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [
+        {
+          "seconds": "3",
+          "optionId": "agents:burnice:mindscape:0:blk-ms4nig27-5ji2hh:eff-ms4nig27-6onrev"
+        }
+      ],
+      "identity": {
+        "actorEntityId": "entity:jane",
+        "powerSourceEntityId": "entity:burnice",
+        "damageBonusSource": "settled-power-source-element",
+        "durationAdjustmentSeconds": "3",
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:burnice",
+          "multiplier": "4.5",
+          "value": "2900.75"
+        },
+        "attributeReads": [
+          {
+            "entityId": "entity:burnice",
+            "stat": "attack",
+            "stage": "current",
+            "value": "2900.75"
+          },
+          {
+            "entityId": "entity:burnice",
+            "stat": "anomalyProficiency",
+            "stage": "current",
+            "value": "380"
+          },
+          {
+            "entityId": "entity:burnice",
+            "stat": "penetrationRatio",
+            "stage": "current",
+            "value": "0"
+          },
+          {
+            "entityId": "entity:jane",
+            "stat": "criticalRate",
+            "stage": "current",
+            "value": "0.25"
+          }
+        ]
+      }
+    },
+    "C1-6/burnice-fire-disorder": {
+      "presetId": "C1",
+      "caseId": "C1-6",
+      "label": "延长部分仍有效（基础 10 秒已过，已过 12 秒）",
+      "eventId": "burnice-fire-disorder",
+      "kind": "disorder",
+      "team": ["jane", "burnice"],
+      "buffGroups": ["burnice-duration"],
+      "upstreamEvidence": "pinned-records-only",
+      "selections": [
+        {
+          "holderId": "entity:burnice",
+          "optionId": "agents:burnice:mindscape:0:blk-ms4nig27-5ji2hh:eff-ms4nig27-6onrev",
+          "layers": 1
+        }
+      ],
+      "sourceInputs": [],
+      "declaredPanels": {
+        "entity:jane": {
+          "stats": {
+            "attack": 3100.5,
+            "health": 12600,
+            "defense": 790,
+            "impact": 86,
+            "anomalyProficiency": 320.25,
+            "anomalyMastery": 150,
+            "energyRegen": 1.2,
+            "criticalRate": 0.25,
+            "criticalDamage": 0.8,
+            "penetrationRatio": 0.1,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "physical": 0.3
+          }
+        },
+        "entity:burnice": {
+          "stats": {
+            "attack": 2900.75,
+            "health": 13500,
+            "defense": 850,
+            "impact": 86,
+            "anomalyProficiency": 380,
+            "anomalyMastery": 148,
+            "energyRegen": 1.4,
+            "criticalRate": 0.22,
+            "criticalDamage": 0.9,
+            "penetrationRatio": 0,
+            "sharpCriticalDamage": 0
+          },
+          "penetrationValue": 18,
+          "damageBonuses": {
+            "fire": 0.3
+          }
+        }
+      },
+      "hitReadPanel": {
+        "stats": {
+          "attack": 2900.75,
+          "health": 13500,
+          "defense": 850,
+          "impact": 86,
+          "anomalyProficiency": 380,
+          "anomalyMastery": 148,
+          "energyRegen": 1.4,
+          "criticalRate": 0.22,
+          "criticalDamage": 0.9,
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "fire": 0.3
+        }
+      },
+      "totals": {
+        "nonCritical": "73749.37742775656437090463395087917786263",
+        "critical": "73749.37742775656437090463395087917786263",
+        "expected": "73749.37742775656437090463395087917786263",
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "criticalRate": "0",
+      "criticalSemantics": "critical-hit",
+      "factors": {
+        "nonCritical": {
+          "baseDamage": 15954.125,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 3.8,
+          "defense": 0.46787347381322775,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        },
+        "critical": {
+          "baseDamage": 15954.125,
+          "damageBonus": 1.3,
+          "anomalyProficiency": 3.8,
+          "defense": 0.46787347381322775,
+          "resistance": 1,
+          "damageTaken": 1,
+          "stunDamage": 1,
+          "anomalyDamageLevel": 2,
+          "anomalyDamageBonus": 1,
+          "refringe": 1,
+          "anomalyCritical": 1
+        }
+      },
+      "channels": [],
+      "durationPreparations": [
+        {
+          "seconds": "3",
+          "optionId": "agents:burnice:mindscape:0:blk-ms4nig27-5ji2hh:eff-ms4nig27-6onrev"
+        }
+      ],
+      "identity": {
+        "actorEntityId": "entity:jane",
+        "powerSourceEntityId": "entity:burnice",
+        "damageBonusSource": "settled-power-source-element",
+        "durationAdjustmentSeconds": "3",
+        "baseStat": {
+          "stat": "attack",
+          "entityId": "entity:burnice",
+          "multiplier": "5.5",
           "value": "2900.75"
         },
         "attributeReads": [
