@@ -1,0 +1,376 @@
+{
+  "provenance": {
+    "engine": "ZZZ-HP 固定来源独立计算链；计算与增益 fac62407f3d3995f8200a66be0038f292b1455fa，技能 0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
+    "adapter": "父会话修正版独立适配器：DamageEnemyInput.level 填代理人 60（原临时脚本误填敌人 70，被钳制所以数值未变），敌人 70 单独记录",
+    "adapterSha256": "7e6d8fff5c9f821848d9ece1bf3f38cdd1ded028168e9b918249f3ea2f7fff17",
+    "reviewedResultsSha256": "3084bf3181eba814cffc39d8e1c5910f45516eb81020e18db2f43a890d736975",
+    "originalIndependentResultsSha256": "41a828329e762bf123d487637d5252c218756599c7cdffebf9f32e5969297236",
+    "originalIndependentResultsNote": "上游会话原结果（保留历史，未被本次对照采用）",
+    "inputSha256": "41b487652400f3c7f6b89fd0086ee5abc681776c93c358cb679ddda67d973d63",
+    "materialDirectory": "/var/folders/4s/gltp69rs7tzgs6lp0mb4kbtc0000gn/T/fairy-team-differential-20261007-q1wtzrkv",
+    "roundingNotation": "expected/enginePick/anomalyTiers 都是上游引擎按返回字段取整后的真实整数；returnedField 记录取整发生在哪个返回字段。仪玄另有已证贯穿力 round(2) 提前取整。这里是引擎返回与展示口径，不是游戏逐次跳字。",
+    "tierNotation": "anomaly 事件的 enginePick=必暴击档（anomalyExpectedFullCrit）；其余事件 enginePick=期望档。noCritical/expected/fullCritical 只在 anomaly 事件分别独立返回。"
+  },
+  "returns": [
+    {
+      "slotId": "S1-0/nicole-cannon",
+      "pickKind": "direct",
+      "enginePick": 37419,
+      "returnedField": "directDamageExpected",
+      "expected": 37419
+    },
+    {
+      "slotId": "S1-1/nicole-cannon",
+      "pickKind": "direct",
+      "enginePick": 47795,
+      "returnedField": "directDamageExpected",
+      "expected": 47795
+    },
+    {
+      "slotId": "S1-2/nicole-cannon",
+      "pickKind": "direct",
+      "enginePick": 67994,
+      "returnedField": "directDamageExpected",
+      "expected": 67994
+    },
+    {
+      "slotId": "S2-0/jane-assault",
+      "pickKind": "anomaly",
+      "enginePick": 91064,
+      "returnedField": "anomalyExpected",
+      "expected": 91064,
+      "anomalyTiers": {
+        "noCritical": 91064,
+        "expected": 91064,
+        "fullCritical": 91064
+      }
+    },
+    {
+      "slotId": "S2-1/jane-assault",
+      "pickKind": "anomaly",
+      "enginePick": 102827,
+      "returnedField": "anomalyExpected",
+      "expected": 102827,
+      "anomalyTiers": {
+        "noCritical": 102827,
+        "expected": 102827,
+        "fullCritical": 102827
+      }
+    },
+    {
+      "slotId": "S2-2/jane-assault",
+      "pickKind": "anomaly",
+      "enginePick": 154240,
+      "returnedField": "anomalyExpected",
+      "expected": 149737,
+      "anomalyTiers": {
+        "noCritical": 102827,
+        "expected": 149737,
+        "fullCritical": 154240
+      }
+    },
+    {
+      "slotId": "S3-0/yixuan-charge",
+      "pickKind": "direct",
+      "enginePick": 113190,
+      "returnedField": "directDamageExpected",
+      "expected": 113190,
+      "pierceForceRounded": 2890.28
+    },
+    {
+      "slotId": "S3-1/yixuan-charge",
+      "pickKind": "direct",
+      "enginePick": 165432,
+      "returnedField": "directDamageExpected",
+      "expected": 165432,
+      "pierceForceRounded": 2890.28
+    },
+    {
+      "slotId": "S3-2/yixuan-charge",
+      "pickKind": "direct",
+      "enginePick": 212546,
+      "returnedField": "directDamageExpected",
+      "expected": 212546,
+      "pierceForceRounded": 2890.28
+    },
+    {
+      "slotId": "S4-0/claret-ultimate",
+      "pickKind": "direct",
+      "enginePick": 97003,
+      "returnedField": "directDamageExpected",
+      "expected": 97003
+    },
+    {
+      "slotId": "S4-1/claret-ultimate",
+      "pickKind": "direct",
+      "enginePick": 106868,
+      "returnedField": "directDamageExpected",
+      "expected": 106868
+    },
+    {
+      "slotId": "S4-2/claret-ultimate",
+      "pickKind": "direct",
+      "enginePick": 123309,
+      "returnedField": "directDamageExpected",
+      "expected": 123309
+    },
+    {
+      "slotId": "D1-0/nicole-cannon",
+      "pickKind": "direct",
+      "enginePick": 37419,
+      "returnedField": "directDamageExpected",
+      "expected": 37419
+    },
+    {
+      "slotId": "D1-1/nicole-cannon",
+      "pickKind": "direct",
+      "enginePick": 46321,
+      "returnedField": "directDamageExpected",
+      "expected": 46321
+    },
+    {
+      "slotId": "D1-2/nicole-cannon",
+      "pickKind": "direct",
+      "enginePick": 99145,
+      "returnedField": "directDamageExpected",
+      "expected": 99145
+    },
+    {
+      "slotId": "D2-0/jane-assault",
+      "pickKind": "anomaly",
+      "enginePick": 91064,
+      "returnedField": "anomalyExpected",
+      "expected": 91064,
+      "anomalyTiers": {
+        "noCritical": 91064,
+        "expected": 91064,
+        "fullCritical": 91064
+      }
+    },
+    {
+      "slotId": "D2-1/jane-assault",
+      "pickKind": "anomaly",
+      "enginePick": 113110,
+      "returnedField": "anomalyExpected",
+      "expected": 113110,
+      "anomalyTiers": {
+        "noCritical": 113110,
+        "expected": 113110,
+        "fullCritical": 113110
+      }
+    },
+    {
+      "slotId": "D2-2/jane-assault",
+      "pickKind": "anomaly",
+      "enginePick": 183913,
+      "returnedField": "anomalyExpected",
+      "expected": 178543,
+      "anomalyTiers": {
+        "noCritical": 122609,
+        "expected": 178543,
+        "fullCritical": 183913
+      }
+    },
+    {
+      "slotId": "D3-0/burnice-fire-disorder",
+      "pickKind": "disorder",
+      "enginePick": 154203,
+      "returnedField": "disorderExpected",
+      "expected": 154203
+    },
+    {
+      "slotId": "D3-1/burnice-fire-disorder",
+      "pickKind": "disorder",
+      "enginePick": 194430,
+      "returnedField": "disorderExpected",
+      "expected": 194430
+    },
+    {
+      "slotId": "D3-2/burnice-fire-disorder",
+      "pickKind": "disorder",
+      "enginePick": 154203,
+      "returnedField": "disorderExpected",
+      "expected": 154203
+    },
+    {
+      "slotId": "T1-0/remiel-radiance",
+      "pickKind": "radiance",
+      "enginePick": 307432,
+      "returnedField": "radianceExpected",
+      "expected": 307432
+    },
+    {
+      "slotId": "T1-0/jane-assault",
+      "pickKind": "anomaly",
+      "enginePick": 99879,
+      "returnedField": "anomalyExpected",
+      "expected": 99879,
+      "anomalyTiers": {
+        "noCritical": 99879,
+        "expected": 99879,
+        "fullCritical": 99879
+      }
+    },
+    {
+      "slotId": "T1-1/remiel-radiance",
+      "pickKind": "radiance",
+      "enginePick": 610667,
+      "returnedField": "radianceExpected",
+      "expected": 610667
+    },
+    {
+      "slotId": "T1-1/jane-assault",
+      "pickKind": "anomaly",
+      "enginePick": 118092,
+      "returnedField": "anomalyExpected",
+      "expected": 118092,
+      "anomalyTiers": {
+        "noCritical": 118092,
+        "expected": 118092,
+        "fullCritical": 118092
+      }
+    },
+    {
+      "slotId": "T1-2/remiel-radiance",
+      "pickKind": "radiance",
+      "enginePick": 1002471,
+      "returnedField": "radianceExpected",
+      "expected": 1002471
+    },
+    {
+      "slotId": "T1-2/jane-assault",
+      "pickKind": "anomaly",
+      "enginePick": 228586,
+      "returnedField": "anomalyExpected",
+      "expected": 228586,
+      "anomalyTiers": {
+        "noCritical": 228586,
+        "expected": 228586,
+        "fullCritical": 228586
+      }
+    },
+    {
+      "slotId": "T2-0/nicole-cannon",
+      "pickKind": "direct",
+      "enginePick": 37419,
+      "returnedField": "directDamageExpected",
+      "expected": 37419
+    },
+    {
+      "slotId": "T2-1/nicole-cannon",
+      "pickKind": "direct",
+      "enginePick": 66533,
+      "returnedField": "directDamageExpected",
+      "expected": 66533
+    },
+    {
+      "slotId": "T2-2/nicole-cannon",
+      "pickKind": "direct",
+      "enginePick": 107169,
+      "returnedField": "directDamageExpected",
+      "expected": 107169
+    },
+    {
+      "slotId": "T3-0/yixuan-charge",
+      "pickKind": "direct",
+      "enginePick": 165432,
+      "returnedField": "directDamageExpected",
+      "expected": 165432,
+      "pierceForceRounded": 2890.28
+    },
+    {
+      "slotId": "T3-1/yixuan-charge",
+      "pickKind": "direct",
+      "enginePick": 222682,
+      "returnedField": "directDamageExpected",
+      "expected": 222682,
+      "pierceForceRounded": 3250.28
+    },
+    {
+      "slotId": "T3-2/yixuan-charge",
+      "pickKind": "direct",
+      "enginePick": 249191,
+      "returnedField": "directDamageExpected",
+      "expected": 249191,
+      "pierceForceRounded": 3250.28
+    },
+    {
+      "slotId": "T4-0/claret-ultimate",
+      "pickKind": "direct",
+      "enginePick": 97003,
+      "returnedField": "directDamageExpected",
+      "expected": 97003
+    },
+    {
+      "slotId": "T4-1/claret-ultimate",
+      "pickKind": "direct",
+      "enginePick": 141094,
+      "returnedField": "directDamageExpected",
+      "expected": 141094
+    },
+    {
+      "slotId": "T4-2/claret-ultimate",
+      "pickKind": "direct",
+      "enginePick": 177220,
+      "returnedField": "directDamageExpected",
+      "expected": 177220
+    },
+    {
+      "slotId": "T5-0/jane-assault",
+      "pickKind": "anomaly",
+      "enginePick": 91064,
+      "returnedField": "anomalyExpected",
+      "expected": 91064,
+      "anomalyTiers": {
+        "noCritical": 91064,
+        "expected": 91064,
+        "fullCritical": 91064
+      }
+    },
+    {
+      "slotId": "T5-0/burnice-fire-disorder",
+      "pickKind": "disorder",
+      "enginePick": 154203,
+      "returnedField": "disorderExpected",
+      "expected": 154203
+    },
+    {
+      "slotId": "T5-1/jane-assault",
+      "pickKind": "anomaly",
+      "enginePick": 169664,
+      "returnedField": "anomalyExpected",
+      "expected": 164710,
+      "anomalyTiers": {
+        "noCritical": 113110,
+        "expected": 164710,
+        "fullCritical": 169664
+      }
+    },
+    {
+      "slotId": "T5-1/burnice-fire-disorder",
+      "pickKind": "disorder",
+      "enginePick": 194430,
+      "returnedField": "disorderExpected",
+      "expected": 194430
+    },
+    {
+      "slotId": "T5-2/jane-assault",
+      "pickKind": "anomaly",
+      "enginePick": 183913,
+      "returnedField": "anomalyExpected",
+      "expected": 178543,
+      "anomalyTiers": {
+        "noCritical": 122609,
+        "expected": 178543,
+        "fullCritical": 183913
+      }
+    },
+    {
+      "slotId": "T5-2/burnice-fire-disorder",
+      "pickKind": "disorder",
+      "enginePick": 211662,
+      "returnedField": "disorderExpected",
+      "expected": 211662
+    }
+  ]
+}
