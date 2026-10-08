@@ -7,7 +7,9 @@ import type {
 } from "@randomplay/shared"
 
 /**
- * 固定面板队伍差分批次的唯一输入来源：12 个预设、36 个状态、42 个独立事件。
+ * 固定面板队伍差分批次的唯一输入来源：原批次的单/双/三人预设，以及后续按业务边界
+ * 追加的转换阈值、身份分离与紊乱时长预设。槽位由预设/状态/事件的声明顺序展开，
+ * 不在注释里硬编码总数——当前数量由测试对夹具与冻结参考的一致性断言维护。
  *
  * 面板是已声明的局外最终值（合成夹具，不声称可达成配装）：不按装备重建、
  * 不补角色默认值、不重复叠加初始/核心/装备属性。除本文件显式列出的增益组外，
@@ -626,6 +628,67 @@ export const teamDifferentialBuffGroups: Readonly<
       },
     ],
   },
+  /**
+   * 上限边界专用的手动来源组：只选转换记录本身（`effects/1`），不含同一区块的
+   * 固定 `+12` 穿透率记录，使上限前后只由转换贡献解释。
+   */
+  "rina-penetration-below-cap": {
+    holder: "rina",
+    mappingStatus: "converted",
+    semanticNote:
+      "上限边界：手填穿透率 0.6，转换 0.15 未到固定上限 0.18；只选转换记录。",
+    effects: [
+      {
+        optionId:
+          "agents:alexandrina:mindscape:0:blk-ms46w5pz-zdpplb:eff-ms46xqjt-g3gxeb",
+        pointers: ["/agents/1/mindscapeBuffs/0/effectBlocks/0/effects/1"],
+        layers: 1,
+        source: {
+          unit: "ratio",
+          value: 0.6,
+          readFrom: "上限边界手填输入（合成，非声明面板派生）",
+        },
+      },
+    ],
+  },
+  "rina-penetration-at-cap": {
+    holder: "rina",
+    mappingStatus: "converted",
+    semanticNote:
+      "上限边界：手填穿透率 0.72，转换恰好达到固定上限 0.18；只选转换记录。",
+    effects: [
+      {
+        optionId:
+          "agents:alexandrina:mindscape:0:blk-ms46w5pz-zdpplb:eff-ms46xqjt-g3gxeb",
+        pointers: ["/agents/1/mindscapeBuffs/0/effectBlocks/0/effects/1"],
+        layers: 1,
+        source: {
+          unit: "ratio",
+          value: 0.72,
+          readFrom: "上限边界手填输入（合成，非声明面板派生）",
+        },
+      },
+    ],
+  },
+  "rina-penetration-above-cap": {
+    holder: "rina",
+    mappingStatus: "converted",
+    semanticNote:
+      "上限边界：手填穿透率 0.8，转换 0.2 被固定上限 0.18 钳制；只选转换记录。",
+    effects: [
+      {
+        optionId:
+          "agents:alexandrina:mindscape:0:blk-ms46w5pz-zdpplb:eff-ms46xqjt-g3gxeb",
+        pointers: ["/agents/1/mindscapeBuffs/0/effectBlocks/0/effects/1"],
+        layers: 1,
+        source: {
+          unit: "ratio",
+          value: 0.8,
+          readFrom: "上限边界手填输入（合成，非声明面板派生）",
+        },
+      },
+    ],
+  },
   "remiel-three-anomaly": {
     holder: "remiel",
     mappingStatus: "converted",
@@ -795,6 +858,38 @@ export interface TeamDifferentialCase {
   readonly eventOverrides?: Readonly<
     Record<string, { readonly elapsedSeconds: number }>
   >
+  /** 转换边界声明；省略表示本状态不检查转换阈值/上限语义。 */
+  readonly conversionBoundary?: TeamDifferentialConversionBoundary
+}
+
+/**
+ * 单个转换边界的声明：精确十进制输入、来源单位、输出单位与按固定记录算出的
+ * 期望贡献。阈值、比率与上限不在这里重复维护——参考生成器从固定原始记录读出，
+ * 断言与这里的期望贡献和位置标签一致；这里的读数由实时夹具提供给引擎输入。
+ */
+export interface TeamDifferentialConversionBoundary {
+  /** 提供固定记录与手填来源的增益组；关闭对照也指向该组以便核对来源事实。 */
+  readonly groupId: string
+  /** 来源读数单位：面板精通点或手填比率。 */
+  readonly sourceUnit: "anomaly-proficiency-points" | "ratio"
+  /** 精确十进制输入：面板读数或手填来源值。 */
+  readonly sourceValue: number
+  /** 贡献单位：转换落在攻击点或比率上。 */
+  readonly outputUnit: "attack-points" | "ratio"
+  /** 按固定记录的阈值/比率/上限算出的贡献；用于核对边界分类。 */
+  readonly expectedConversion: number
+  /**
+   * 边界位置：`below-threshold` 未达到起算阈值、`at-threshold` 恰好阈值、
+   * `above-threshold` 略高于阈值且未到上限、`at-cap` 恰好封顶、
+   * `above-cap` 略超过封顶、`off` 关闭效果对照。
+   */
+  readonly position:
+    | "below-threshold"
+    | "at-threshold"
+    | "above-threshold"
+    | "at-cap"
+    | "above-cap"
+    | "off"
 }
 
 export interface TeamDifferentialPreset {
@@ -803,6 +898,13 @@ export interface TeamDifferentialPreset {
   readonly team: readonly string[]
   readonly events: readonly string[]
   readonly purpose: string
+  /**
+   * 上游整数投影的证据来源。`reviewed-adapter-run` 表示该预设的事件经过父会话
+   * 校正适配器真实执行（static-team-differential-upstream-returns.json 只覆盖
+   * 这批槽位）；`pinned-records-only` 表示新增边界只有固定原始记录、提取纯函数
+   * 与独立十进制算式的证据，没有上游执行结果，不得用 Fairy 输出补造整数。
+   */
+  readonly upstreamEvidence: "reviewed-adapter-run" | "pinned-records-only"
   readonly cases: readonly TeamDifferentialCase[]
 }
 
@@ -812,6 +914,7 @@ export const teamDifferentialPresets: readonly TeamDifferentialPreset[] = [
     team: ["nicole"],
     events: ["nicole-cannon"],
     purpose: "以太直伤、减防与暴击率钳制；只算炮击一行，不叠加能量场。",
+    upstreamEvidence: "reviewed-adapter-run",
     cases: [
       { caseId: "S1-0", label: "基线", buffGroups: [] },
       {
@@ -832,6 +935,7 @@ export const teamDifferentialPresets: readonly TeamDifferentialPreset[] = [
     team: ["jane"],
     events: ["jane-assault"],
     purpose: "强击强度来源、阈值换算与异常专属暴击档位。",
+    upstreamEvidence: "reviewed-adapter-run",
     cases: [
       { caseId: "S2-0", label: "基线", buffGroups: [] },
       { caseId: "S2-1", label: "狂热", buffGroups: ["jane-frenzy"] },
@@ -847,6 +951,7 @@ export const teamDifferentialPresets: readonly TeamDifferentialPreset[] = [
     team: ["yixuan"],
     events: ["yixuan-charge"],
     purpose: "贯穿力、玄墨继承、忽防不进贯穿公式与暴击率钳制。",
+    upstreamEvidence: "reviewed-adapter-run",
     cases: [
       { caseId: "S3-0", label: "基线", buffGroups: [] },
       { caseId: "S3-1", label: "核心增伤", buffGroups: ["yixuan-core"] },
@@ -863,6 +968,7 @@ export const teamDifferentialPresets: readonly TeamDifferentialPreset[] = [
     team: ["claret"],
     events: ["claret-ultimate"],
     purpose: "防御缩放、锐暴与招式限定影画；不重复永久暴伤转暴击率。",
+    upstreamEvidence: "reviewed-adapter-run",
     cases: [
       { caseId: "S4-0", label: "基线", buffGroups: [] },
       {
@@ -882,6 +988,7 @@ export const teamDifferentialPresets: readonly TeamDifferentialPreset[] = [
     team: ["nicole", "astra"],
     events: ["nicole-cannon"],
     purpose: "攻击转模上限、增益加算与以太目标适用性。",
+    upstreamEvidence: "reviewed-adapter-run",
     cases: [
       { caseId: "D1-0", label: "基线", buffGroups: [] },
       { caseId: "D1-1", label: "耀嘉音咏叹", buffGroups: ["astra-song"] },
@@ -902,6 +1009,7 @@ export const teamDifferentialPresets: readonly TeamDifferentialPreset[] = [
     team: ["jane", "remiel"],
     events: ["jane-assault"],
     purpose: "影画 1 队友增伤与影画 2 适用忽防，来源身份无歧义。",
+    upstreamEvidence: "reviewed-adapter-run",
     cases: [
       { caseId: "D2-0", label: "基线", buffGroups: [] },
       {
@@ -926,6 +1034,7 @@ export const teamDifferentialPresets: readonly TeamDifferentialPreset[] = [
     team: ["jane", "burnice"],
     events: ["burnice-fire-disorder"],
     purpose: "紊乱时长、已过时间与触发者/强度来源分离；不做伤害加总。",
+    upstreamEvidence: "reviewed-adapter-run",
     cases: [
       { caseId: "D3-0", label: "10 秒灼烧、已过 3 秒", buffGroups: [] },
       {
@@ -947,6 +1056,7 @@ export const teamDifferentialPresets: readonly TeamDifferentialPreset[] = [
     events: ["remiel-radiance", "jane-assault"],
     purpose:
       "受限自身来源与完整当前面板、三异常额外能力、影画 1 自身/队友区分；事件彼此独立。",
+    upstreamEvidence: "reviewed-adapter-run",
     cases: [
       {
         caseId: "T1-0",
@@ -983,6 +1093,7 @@ export const teamDifferentialPresets: readonly TeamDifferentialPreset[] = [
     team: ["nicole", "astra", "rina"],
     events: ["nicole-cannon"],
     purpose: "三人攻击/暴击/元素/减防/穿透组合；丽娜来源取增益前数值。",
+    upstreamEvidence: "reviewed-adapter-run",
     cases: [
       { caseId: "T2-0", label: "基线", buffGroups: [] },
       {
@@ -1008,6 +1119,7 @@ export const teamDifferentialPresets: readonly TeamDifferentialPreset[] = [
     team: ["yixuan", "astra", "nicole"],
     events: ["yixuan-charge"],
     purpose: "收到攻击后的贯穿增量、忽防不变性与以太增伤。",
+    upstreamEvidence: "reviewed-adapter-run",
     cases: [
       { caseId: "T3-0", label: "仅核心", buffGroups: ["yixuan-core"] },
       {
@@ -1033,6 +1145,7 @@ export const teamDifferentialPresets: readonly TeamDifferentialPreset[] = [
     team: ["claret", "astra", "rina"],
     events: ["claret-ultimate"],
     purpose: "队友攻击与暴击下的锐暴与防御缩放；丽娜为电属性额外能力搭档。",
+    upstreamEvidence: "reviewed-adapter-run",
     cases: [
       { caseId: "T4-0", label: "基线", buffGroups: [] },
       {
@@ -1060,6 +1173,7 @@ export const teamDifferentialPresets: readonly TeamDifferentialPreset[] = [
     events: ["jane-assault", "burnice-fire-disorder"],
     purpose:
       "同队物理强击与火紊乱并列：影画 1 异常增伤与紊乱通道区分、影画 2 五类适用；不相加为轮转。",
+    upstreamEvidence: "reviewed-adapter-run",
     cases: [
       { caseId: "T5-0", label: "基线", buffGroups: [] },
       {
@@ -1085,18 +1199,248 @@ export const teamDifferentialPresets: readonly TeamDifferentialPreset[] = [
       },
     ],
   },
+  {
+    presetId: "A1",
+    team: ["jane"],
+    events: ["jane-assault"],
+    purpose:
+      "转换阈值与上限（简自身精通转攻击，固定记录阈值 120、比率 200%、上限 600）：" +
+      "未达到/恰好/略高于阈值、恰好/略超过封顶与关闭对照。" +
+      "中段取值 320.25 已由 S2/D2/T5 覆盖，不再重复。",
+    upstreamEvidence: "pinned-records-only",
+    cases: [
+      {
+        caseId: "A1-0",
+        label: "未达到起算阈值",
+        buffGroups: ["jane-frenzy"],
+        panelOverrides: { jane: { anomalyProficiency: 119.5 } },
+        conversionBoundary: {
+          groupId: "jane-frenzy",
+          sourceUnit: "anomaly-proficiency-points",
+          sourceValue: 119.5,
+          outputUnit: "attack-points",
+          expectedConversion: 0,
+          position: "below-threshold",
+        },
+      },
+      {
+        caseId: "A1-1",
+        label: "恰好阈值",
+        buffGroups: ["jane-frenzy"],
+        panelOverrides: { jane: { anomalyProficiency: 120 } },
+        conversionBoundary: {
+          groupId: "jane-frenzy",
+          sourceUnit: "anomaly-proficiency-points",
+          sourceValue: 120,
+          outputUnit: "attack-points",
+          expectedConversion: 0,
+          position: "at-threshold",
+        },
+      },
+      {
+        caseId: "A1-2",
+        label: "略高于阈值",
+        buffGroups: ["jane-frenzy"],
+        panelOverrides: { jane: { anomalyProficiency: 120.25 } },
+        conversionBoundary: {
+          groupId: "jane-frenzy",
+          sourceUnit: "anomaly-proficiency-points",
+          sourceValue: 120.25,
+          outputUnit: "attack-points",
+          expectedConversion: 0.5,
+          position: "above-threshold",
+        },
+      },
+      {
+        caseId: "A1-3",
+        label: "恰好封顶",
+        buffGroups: ["jane-frenzy"],
+        panelOverrides: { jane: { anomalyProficiency: 420 } },
+        conversionBoundary: {
+          groupId: "jane-frenzy",
+          sourceUnit: "anomaly-proficiency-points",
+          sourceValue: 420,
+          outputUnit: "attack-points",
+          expectedConversion: 600,
+          position: "at-cap",
+        },
+      },
+      {
+        caseId: "A1-4",
+        label: "略超过封顶",
+        buffGroups: ["jane-frenzy"],
+        panelOverrides: { jane: { anomalyProficiency: 420.25 } },
+        conversionBoundary: {
+          groupId: "jane-frenzy",
+          sourceUnit: "anomaly-proficiency-points",
+          sourceValue: 420.25,
+          outputUnit: "attack-points",
+          expectedConversion: 600,
+          position: "above-cap",
+        },
+      },
+      {
+        caseId: "A1-5",
+        label: "关闭效果对照（同面板）",
+        buffGroups: [],
+        panelOverrides: { jane: { anomalyProficiency: 420.25 } },
+        conversionBoundary: {
+          groupId: "jane-frenzy",
+          sourceUnit: "anomaly-proficiency-points",
+          sourceValue: 420.25,
+          outputUnit: "attack-points",
+          expectedConversion: 0,
+          position: "off",
+        },
+      },
+    ],
+  },
+  {
+    presetId: "A2",
+    team: ["nicole", "rina"],
+    events: ["nicole-cannon"],
+    purpose:
+      "手填来源转模上限（丽娜穿透率转穿透，固定记录比率 25%、上限 18 个百分点）：" +
+      "未到封顶、恰好封顶与略超过封顶；只选转换记录，不含同区块的固定 +12 穿透率。",
+    upstreamEvidence: "pinned-records-only",
+    cases: [
+      {
+        caseId: "A2-0",
+        label: "未到封顶",
+        buffGroups: ["rina-penetration-below-cap"],
+        conversionBoundary: {
+          groupId: "rina-penetration-below-cap",
+          sourceUnit: "ratio",
+          sourceValue: 0.6,
+          outputUnit: "ratio",
+          expectedConversion: 0.15,
+          position: "above-threshold",
+        },
+      },
+      {
+        caseId: "A2-1",
+        label: "恰好封顶",
+        buffGroups: ["rina-penetration-at-cap"],
+        conversionBoundary: {
+          groupId: "rina-penetration-at-cap",
+          sourceUnit: "ratio",
+          sourceValue: 0.72,
+          outputUnit: "ratio",
+          expectedConversion: 0.18,
+          position: "at-cap",
+        },
+      },
+      {
+        caseId: "A2-2",
+        label: "略超过封顶",
+        buffGroups: ["rina-penetration-above-cap"],
+        conversionBoundary: {
+          groupId: "rina-penetration-above-cap",
+          sourceUnit: "ratio",
+          sourceValue: 0.8,
+          outputUnit: "ratio",
+          expectedConversion: 0.18,
+          position: "above-cap",
+        },
+      },
+    ],
+  },
+  {
+    presetId: "B1",
+    team: ["jane", "burnice"],
+    events: ["burnice-fire-disorder"],
+    purpose:
+      "紊乱强度来源与触发者身份分离：提供者面板与触发者面板刻意拉开" +
+      "（攻击 1500.25 对 3100.5、精通 480 对 320.25、穿透率 0.3 对 0.1），" +
+      "同一组读数不可能被互换掩盖。",
+    upstreamEvidence: "pinned-records-only",
+    cases: [
+      {
+        caseId: "B1-0",
+        label: "提供者与触发者明显不同",
+        buffGroups: [],
+        panelOverrides: {
+          burnice: {
+            attack: 1500.25,
+            anomalyProficiency: 480,
+            penetrationRatio: 0.3,
+            penetrationValue: 27,
+          },
+          jane: { criticalRate: 0.9 },
+        },
+      },
+    ],
+  },
+  {
+    presetId: "C1",
+    team: ["jane", "burnice"],
+    events: ["burnice-fire-disorder"],
+    purpose:
+      "紊乱时长边界：未经过、正小数剩余、低于半档的剩余、恰好耗尽、超过持续时间，" +
+      "以及延长开启后的恰好耗尽；倍率仍由固定记录的时长折档规则给出。",
+    upstreamEvidence: "pinned-records-only",
+    cases: [
+      {
+        caseId: "C1-0",
+        label: "未经过（已过 0 秒）",
+        buffGroups: [],
+        eventOverrides: { "burnice-fire-disorder": { elapsedSeconds: 0 } },
+      },
+      {
+        caseId: "C1-1",
+        label: "正小数剩余（已过 3.25 秒）",
+        buffGroups: [],
+        eventOverrides: { "burnice-fire-disorder": { elapsedSeconds: 3.25 } },
+      },
+      {
+        caseId: "C1-2",
+        label: "低于半档剩余（已过 9.75 秒）",
+        buffGroups: [],
+        eventOverrides: { "burnice-fire-disorder": { elapsedSeconds: 9.75 } },
+      },
+      {
+        caseId: "C1-3",
+        label: "恰好耗尽（已过 10 秒）",
+        buffGroups: [],
+        eventOverrides: { "burnice-fire-disorder": { elapsedSeconds: 10 } },
+      },
+      {
+        caseId: "C1-4",
+        label: "超过持续时间（已过 12 秒）",
+        buffGroups: [],
+        eventOverrides: { "burnice-fire-disorder": { elapsedSeconds: 12 } },
+      },
+      {
+        caseId: "C1-5",
+        label: "延长 3 秒后恰好耗尽（已过 13 秒）",
+        buffGroups: ["burnice-duration"],
+        eventOverrides: { "burnice-fire-disorder": { elapsedSeconds: 13 } },
+      },
+      {
+        caseId: "C1-6",
+        label: "延长部分仍有效（基础 10 秒已过，已过 12 秒）",
+        buffGroups: ["burnice-duration"],
+        eventOverrides: { "burnice-fire-disorder": { elapsedSeconds: 12 } },
+      },
+    ],
+  },
 ]
 
 export interface TeamDifferentialSlot {
   readonly slotId: string
   readonly presetId: string
+  /** 继承自预设的上游证据来源，见 `TeamDifferentialPreset.upstreamEvidence`。 */
+  readonly upstreamEvidence: TeamDifferentialPreset["upstreamEvidence"]
   readonly case: TeamDifferentialCase
   readonly eventId: string
   readonly event: TeamDifferentialEvent
   readonly team: readonly string[]
 }
 
-/** 42 个独立事件槽位；顺序与预设/状态/事件声明的顺序一致。 */
+/**
+ * 事件槽位：按预设 → 状态 → 事件的声明顺序展开。数量不在这里硬编码，
+ * 由回归对夹具与冻结参考的逐槽位一致性断言维护。
+ */
 export const teamDifferentialSlots: readonly TeamDifferentialSlot[] =
   teamDifferentialPresets.flatMap((preset) =>
     preset.cases.flatMap((entry) =>
@@ -1106,6 +1450,7 @@ export const teamDifferentialSlots: readonly TeamDifferentialSlot[] =
         return {
           slotId: `${entry.caseId}/${eventId}`,
           presetId: preset.presetId,
+          upstreamEvidence: preset.upstreamEvidence,
           case: entry,
           eventId,
           event:

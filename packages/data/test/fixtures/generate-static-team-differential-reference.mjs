@@ -37,7 +37,8 @@ assert(
 // ── 固定来源 ──────────────────────────────────────────────────────────────
 const effectSourceCommit = "fac62407f3d3995f8200a66be0038f292b1455fa"
 const skillSourceCommit = "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357"
-const fairyBaseline = "1cccf4d38d05a4976d34b5aee2e928b07a48c15e"
+// 本轮再生时的 Fairy 基线：#201 合并后的 main；数值与来源事实与首版一致。
+const fairyBaseline = "c77e549a6c503e257f554126203380295814fc40"
 const snapshotId =
   "sha256:e946d6b30b9747a3daeaac034fc14a4dc127c7e550ab63f0c54b1e1d4bf693c4"
 const buffResource = "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json"
@@ -174,11 +175,33 @@ const upstreamReturns = JSON.parse(
     ),
   ),
 )
-assert.equal(upstreamReturns.returns.length, teamDifferentialSlots.length)
+// 上游整数返回只覆盖父会话校正适配器真实执行过的批次；新增边界没有上游执行
+// 结果，不得用 Fairy 输出或本脚本的期望补造整数。
+const upstreamSlotIds = new Set(
+  teamDifferentialSlots
+    .filter((slot) => slot.upstreamEvidence === "reviewed-adapter-run")
+    .map((slot) => slot.slotId),
+)
+const pinnedOnlySlotIds = new Set(
+  teamDifferentialSlots
+    .filter((slot) => slot.upstreamEvidence === "pinned-records-only")
+    .map((slot) => slot.slotId),
+)
+assert.equal(upstreamReturns.returns.length, upstreamSlotIds.size)
+assert.equal(
+  new Set(upstreamReturns.returns.map((entry) => entry.slotId)).size,
+  upstreamReturns.returns.length,
+  "duplicate upstream integer return",
+)
 assert.deepEqual(
   new Set(upstreamReturns.returns.map((entry) => entry.slotId)),
-  new Set(teamDifferentialSlots.map((slot) => slot.slotId)),
+  upstreamSlotIds,
 )
+for (const slotId of pinnedOnlySlotIds)
+  assert(
+    !upstreamReturns.returns.some((entry) => entry.slotId === slotId),
+    `${slotId} must not carry an upstream integer return`,
+  )
 
 // ── 十进制有理数 ──────────────────────────────────────────────────────────
 const abs = (value) => (value < 0n ? -value : value)
@@ -651,6 +674,155 @@ function verifyAgentActionSkill(event) {
   return record
 }
 
+/**
+ * 转换边界声明核对：阈值、比率与上限只从固定原始记录读取，不在这里重复维护。
+ * 断言边界位置标签与该记录算出的取值形状一致，并返回可冻结的边界事实。
+ */
+function verifyConversionBoundary(slot, record) {
+  const boundary = slot.case.conversionBoundary
+  if (boundary === undefined) return null
+  const group = teamDifferentialBuffGroups[boundary.groupId]
+  assert(group, `unknown boundary group ${boundary.groupId}`)
+  assert(
+    slot.team.includes(group.holder),
+    `${boundary.groupId} holder ${group.holder} is not in ${slot.slotId}`,
+  )
+  const source = group.effects[0]
+  assert.equal(
+    group.effects.length,
+    1,
+    `${boundary.groupId} must declare exactly one effect for its boundary`,
+  )
+  const raw = atPointer(effectData, source.pointers[0])
+  assert(raw && raw.kind === "convert", `${boundary.groupId} convert record`)
+  const convert = raw.convert
+  const sourceKey = CONVERT_SOURCE_KEYS[convert.from]
+  assert(sourceKey, `Unmapped convert source ${convert.from}`)
+  const model = STAT_MODEL[raw.stat]
+  assert(model, `Unmapped upstream stat ${raw.stat}`)
+  const off = boundary.position === "off"
+  // 关闭对照仍核对来源事实：组声明的手填值或面板读数与边界输入一致。
+  if (convert.panelSource === "manual") {
+    assert(
+      source.source,
+      `${boundary.groupId} manual convert requires a declared source value`,
+    )
+    assert.equal(
+      source.source.value,
+      boundary.sourceValue,
+      `${boundary.groupId} declared source value`,
+    )
+    assert.equal(source.source.unit, boundary.sourceUnit)
+  } else {
+    const panel = declaredPanel(group.holder, slot.case.panelOverrides)
+    assert.equal(
+      toNumber(panel[sourceKey.panelStat]),
+      boundary.sourceValue,
+      `${boundary.groupId} must read the declared panel ${sourceKey.panelStat}`,
+    )
+  }
+  if (off)
+    assert.equal(
+      slot.case.buffGroups.includes(boundary.groupId),
+      false,
+      `${slot.slotId} is the off control but selects its group`,
+    )
+  else
+    assert(
+      slot.case.buffGroups.includes(boundary.groupId),
+      `${slot.slotId} must select ${boundary.groupId}`,
+    )
+  const scale = R(sourceKey.scale)
+  const from = mul(R(boundary.sourceValue), scale)
+  const initialBase = R(convert.initialBase ?? 0)
+  const rate = div(R(convert.ratioPercent), 100)
+  const uncapped = mul(maximum(ZERO, sub(from, initialBase)), rate)
+  const cap =
+    convert.cap === null || convert.cap === undefined
+      ? null
+      : R(Math.abs(convert.cap))
+  const amount =
+    cap === null ? uncapped : clampRational(uncapped, neg(cap), cap)
+  // 按固定记录算出的转换值；关闭对照不选中该记录，贡献为 0，但仍记录该值。
+  const recordConversion =
+    model.scale === "percent" ? div(amount, R(100)) : amount
+  assert.equal(
+    model.scale === "percent",
+    boundary.outputUnit === "ratio",
+    `${slot.slotId} output unit ${boundary.outputUnit}`,
+  )
+  if (off)
+    assert.equal(
+      boundary.expectedConversion,
+      0,
+      `${slot.slotId} the off control contributes nothing`,
+    )
+  else
+    assert(
+      closeEnough(recordConversion, R(boundary.expectedConversion)),
+      `${slot.slotId} expected conversion ${toNumber(recordConversion)} != ${boundary.expectedConversion}`,
+    )
+  switch (boundary.position) {
+    case "below-threshold":
+      assert(compare(from, initialBase) < 0, `${slot.slotId} below-threshold`)
+      break
+    case "at-threshold":
+      assert.equal(compare(from, initialBase), 0, `${slot.slotId} at-threshold`)
+      break
+    case "above-threshold":
+      assert(compare(from, initialBase) > 0, `${slot.slotId} above-threshold`)
+      assert(compare(uncapped, ZERO) > 0, `${slot.slotId} above-threshold`)
+      if (cap !== null)
+        assert(
+          compare(uncapped, cap) < 0,
+          `${slot.slotId} above-threshold must stay below the cap`,
+        )
+      break
+    case "at-cap":
+      assert(cap !== null, `${slot.slotId} at-cap requires a cap`)
+      assert.equal(compare(uncapped, cap), 0, `${slot.slotId} at-cap`)
+      break
+    case "above-cap":
+      assert(cap !== null, `${slot.slotId} above-cap requires a cap`)
+      assert(compare(uncapped, cap) > 0, `${slot.slotId} above-cap`)
+      break
+    case "off":
+      // 关闭对照必须非平凡：同一面板选中该记录时确实有转换值。
+      assert(compare(uncapped, ZERO) > 0, `${slot.slotId} off control`)
+      break
+    default:
+      assert(false, `${slot.slotId} unknown boundary position`)
+  }
+  if (!off) {
+    const entry = record.resolved.find(
+      (item) => item.groupId === boundary.groupId,
+    )
+    assert(entry, `${slot.slotId} missing resolved boundary entry`)
+    assert(
+      closeEnough(entry.value, R(boundary.expectedConversion)),
+      `${slot.slotId} engine-facing boundary value`,
+    )
+  } else
+    assert.equal(
+      record.resolved.some((item) => item.groupId === boundary.groupId),
+      false,
+      `${slot.slotId} off control must not resolve its group`,
+    )
+  return {
+    optionId: source.optionId,
+    pointers: [...source.pointers],
+    position: boundary.position,
+    sourceUnit: boundary.sourceUnit,
+    sourceValue: decimalString(R(boundary.sourceValue)),
+    initialBase: decimalString(initialBase),
+    ratioPercent: decimalString(R(convert.ratioPercent)),
+    cap: cap === null ? null : decimalString(cap),
+    outputUnit: boundary.outputUnit,
+    expectedConversion: decimalString(R(boundary.expectedConversion)),
+    recordConversion: decimalString(recordConversion),
+  }
+}
+
 function evaluateSlot(slot) {
   const team = slot.team
   const overrides = slot.case.panelOverrides
@@ -739,6 +911,8 @@ function evaluateSlot(slot) {
     currentPanels = next
   }
   assert(stabilised, `conversion did not stabilise for ${slot.slotId}`)
+  // 转换边界声明：从固定记录核对阈值/比率/上限与期望贡献（关闭对照也核对来源事实）。
+  const boundary = verifyConversionBoundary(slot, { resolved })
 
   const hit = {
     actorKey,
@@ -949,6 +1123,7 @@ function evaluateSlot(slot) {
       criticalSemantics,
       factors,
       identity,
+      conversionBoundary: boundary,
     }
   }
 
@@ -1158,6 +1333,7 @@ function evaluateSlot(slot) {
       criticalSemantics,
       factors,
       identity,
+      conversionBoundary: boundary,
     }
   }
 
@@ -1304,6 +1480,7 @@ function evaluateSlot(slot) {
     criticalSemantics,
     factors,
     identity,
+    conversionBoundary: boundary,
   }
 }
 
@@ -1376,6 +1553,10 @@ for (const slot of teamDifferentialSlots) {
     kind: result.kind,
     team: slot.team,
     buffGroups: slot.case.buffGroups,
+    upstreamEvidence: slot.upstreamEvidence,
+    ...(result.conversionBoundary === null
+      ? {}
+      : { conversionBoundary: result.conversionBoundary }),
     selections: slot.case.buffGroups.flatMap((groupId) => {
       const group = teamDifferentialBuffGroups[groupId]
       return group.effects.map((effect) => ({
@@ -1519,6 +1700,8 @@ const fixture = {
       sha256: digests[`${buffResource}@${skillSourceCommit}`],
     },
     upstreamReturns: "static-team-differential-upstream-returns.json",
+    upstreamReturnsScope:
+      "The reviewed-adapter run covers the 12 original presets only. Boundary presets added later are pinned-records-only: they have no upstream integer return and are never compared against a fabricated integer.",
     method:
       "Pinned upstream raw records for effect values and skill multipliers + extracted pinned pure functions as cross-checks + independently reproduced damage chains in exact decimal rational arithmetic. Fairy outputs and upstream rounded integers are never used as expectations.",
     numberFormat:
