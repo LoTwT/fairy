@@ -266,6 +266,26 @@ export type SourceSemantics =
       readonly evidence: readonly DeveloperRevisionEvidence[]
       readonly verification: string
     }
+  | {
+      /**
+       * 固定来源把按层结算的机制错误编码为固定单次贡献（kind=fixed、
+       * stackable=false、maxStacks=1、valuePerStack=0），而块 note 与
+       * Nanoka 同文明确该数值按层生效且存在层数上限（青溟笼舍精炼 1—5 的
+       * 以太贯穿增伤：每层 10/11.5/13/14.5/16%，最多 2 层）。转换器保留
+       * 稳定 effectId / optionId 与既有条件，把该贡献改为按层编译：每层值
+       * 取来源 value，层数上限取登记值；状态记为 corrected 并登记具名差异。
+       * 原始与规范化记录的编码或数值与登记不符即拒绝生成。证据级别为
+       * “按一致描述纠错”，不是游戏实测结论。
+       */
+      readonly kind: "stacked-mechanism-correction"
+      /** 编译后的选项激活层数上限；来自描述的层数上限。 */
+      readonly maximumLayers: number
+      /** 原始记录应携带的来源数值；与冻结 JSON 及描述的每层值同时核对。 */
+      readonly expectedSourceValue: number
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
 
 /**
  * 完整状态选项登记：固定来源把同一游戏状态拆成多条可独立切换的记录
@@ -560,6 +580,49 @@ const lycaonPotentialBranchEvidence = [
     sha256: "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1",
   },
 ] as const
+
+/**
+ * 青溟笼舍（14137）：五档天赋 desc 与固定来源同一块的 note 逐字一致（去除
+ * 富文本标记后），把贯穿增伤条款写在“每层[青溟同行]、最多 2 层”之下。
+ */
+const qingmingBirdcageDetailsSha =
+  "34536f66858958cb71eb3d061a37d2d50aa74acb8d44911383e1fe8f161af8d4"
+const qingmingBirdcageEvidence: readonly SemanticsEvidenceReference[] = [
+  {
+    path: "w-engines/14137/details.zh.json",
+    pointer: "/talents/1/desc",
+    sha256: qingmingBirdcageDetailsSha,
+  },
+  {
+    path: "w-engines/14137/details.zh.json",
+    pointer: "/talents/2/desc",
+    sha256: qingmingBirdcageDetailsSha,
+  },
+  {
+    path: "w-engines/14137/details.zh.json",
+    pointer: "/talents/3/desc",
+    sha256: qingmingBirdcageDetailsSha,
+  },
+  {
+    path: "w-engines/14137/details.zh.json",
+    pointer: "/talents/4/desc",
+    sha256: qingmingBirdcageDetailsSha,
+  },
+  {
+    path: "w-engines/14137/details.zh.json",
+    pointer: "/talents/5/desc",
+    sha256: qingmingBirdcageDetailsSha,
+  },
+]
+const qingmingPerRefinementPierceBonus: Readonly<Record<number, string>> = {
+  1: "10%",
+  2: "11.5%",
+  3: "13%",
+  4: "14.5%",
+  5: "16%",
+}
+const qingmingBirdcageVerification = (refinement: number): string =>
+  `块 note 与 Nanoka 五档天赋同文（固定源 /wengines/92/refinementBuffs/${refinement - 1}/effectBlocks/0/note，Nanoka w-engines/14137 /talents/${refinement}/desc）：“每层[青溟同行]效果使装备者造成的以太伤害提升…%，[终结技]或[强化特殊技]造成的以太贯穿伤害提升${qingmingPerRefinementPierceBonus[refinement]}”，且全句声明最多叠加 2 层。同一块的以太增伤记录（kind=stacked、每层 8—12.8%、maxStacks=2）与此一致，而贯穿增伤记录被固定来源编码为 kind=fixed、value=${qingmingPerRefinementPierceBonus[refinement].replace("%", "")}、stackable=false、maxStacks=1、valuePerStack=0：resolveEffectBaseValue 对 fixed 非 stackable 直接返回 value，层数不参与取值，两层配置只会贡献单层值。Fairy 按本登记把该贡献改为按层编译：每层值取来源 value（即描述的单层百分比），选项与规则激活层数上限为 2，调用方按真实层数显式选择，0 层表示关闭；“进入接战直接获得 2 层”与 15 秒刷新不模拟，不把任何时点自动视为满层。effectId、optionId、精炼匹配、持有者、以太元素、贯穿伤害种类与[终结技]或[强化特殊技]（all-special-ms0fcqv7 为强化特殊技，不是任意特殊技）等既有条件保持不变；同块的固定暴击率条款不按层翻倍。证据级别为“按一致描述纠错”，未经游戏实测；若后续取得相反的游戏行为证据，应先登记来源再调整。`
 
 export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
   "agents/caesar/mindscape/0/blk-legacy/legacy-team-atk": {
@@ -1217,6 +1280,48 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     evidence: remielleMindscape2Evidence,
     verification:
       "块 note 与 Nanoka 天赋 2 同文：“队伍中[异常]角色对[幻色]效果下的敌人造成属性异常伤害时，无视目标15%的防御力”。上游记录未编码受益职业（applyProfession null）与伤害类别（scope general、appliesToAnomaly 仅表示允许异常），effectMatchesContext 对 general 直接放行且职业门槛只在 applyProfession 非空时执行，因此显式选中后普通直伤与非异常职业都会受益。身份映射沿用固定来源的真实调用链：resolvedHit.ts 的 ResolvedHit 以 ownerAgentId 表示流程归属（“异常类只用于伤害归属，减防/无视取 triggerAgentId”）、anomalyPowerAgentId 表示异常强度提供者、triggerAgentId 表示异常类触发者；optimalAffixAlloc.ts 由 hit.triggerAgentId 取得触发者最终面板（anomalyTriggerPanel），元素取强度提供者；damageCalc.ts 的防御区从 anomalyTriggerPanel 读取 ignoreDefense/reduceDefense，穿透率与穿透值取强度提供者面板（anomalyBasePanel = triggerFinalPanel）。因此 Fairy 的 hit.actorId 对应本次结算触发者（职业门槛与减防读取对象），damage.anomalySource（可带 snapshotId）对应强度提供者；不是增益提供者，也不是另一角色的职业证据。[幻色]与消失后 8 秒仍由调用方显式选择表示条件有效。伤害类别采用固定计算链的异常类范围：damageCalc.ts 的 useTriggerBase 同时覆盖属性异常、异放、紊乱、乱流与耀变（skillNeedsDualAgents 对 mapEventKindToCalc 的 damageKind === 'anomaly' 全类成立），攻略 3.4.1 亦说明“[紊乱]应被视为一种属性异常效果”；本条因此把 disorder 与普通异常、异放、乱流、耀变一并纳入，不套用 anomalyDmgBonus/anomalyCritRate 等增伤或暴击通道的适用拆分（那是各自乘区的映射），也不以文本未列明[紊乱]自造排除。该范围是沿用固定计算链的静态约定，不是游戏实测结论；普通直伤（regular/sheer/sharpen）仍排除。",
+  },
+  // 青溟笼舍（14137）精炼 1—5 的以太贯穿增伤：块 note 与 Nanoka 同文把该条款
+  // 写在“每层[青溟同行]”之下（最多 2 层），固定来源却把它编码为固定单次。
+  "w-engines/Qingming_Birdcage/refinement/1/blk-legacy/eff-ms1r9equ-l7imtb": {
+    kind: "stacked-mechanism-correction",
+    maximumLayers: 2,
+    expectedSourceValue: 10,
+    differenceId: "qingming-birdcage-pierce-stack-layers",
+    evidence: qingmingBirdcageEvidence,
+    verification: qingmingBirdcageVerification(1),
+  },
+  "w-engines/Qingming_Birdcage/refinement/2/blk-legacy/eff-ms1rarze-uhh4r4": {
+    kind: "stacked-mechanism-correction",
+    maximumLayers: 2,
+    expectedSourceValue: 11.5,
+    differenceId: "qingming-birdcage-pierce-stack-layers",
+    evidence: qingmingBirdcageEvidence,
+    verification: qingmingBirdcageVerification(2),
+  },
+  "w-engines/Qingming_Birdcage/refinement/3/blk-legacy/eff-ms1rby7h-cnwy4w": {
+    kind: "stacked-mechanism-correction",
+    maximumLayers: 2,
+    expectedSourceValue: 13,
+    differenceId: "qingming-birdcage-pierce-stack-layers",
+    evidence: qingmingBirdcageEvidence,
+    verification: qingmingBirdcageVerification(3),
+  },
+  "w-engines/Qingming_Birdcage/refinement/4/blk-legacy/eff-ms1rcyzb-2dozs0": {
+    kind: "stacked-mechanism-correction",
+    maximumLayers: 2,
+    expectedSourceValue: 14.5,
+    differenceId: "qingming-birdcage-pierce-stack-layers",
+    evidence: qingmingBirdcageEvidence,
+    verification: qingmingBirdcageVerification(4),
+  },
+  "w-engines/Qingming_Birdcage/refinement/5/blk-legacy/eff-ms1rdzo3-dwcqi1": {
+    kind: "stacked-mechanism-correction",
+    maximumLayers: 2,
+    expectedSourceValue: 16,
+    differenceId: "qingming-birdcage-pierce-stack-layers",
+    evidence: qingmingBirdcageEvidence,
+    verification: qingmingBirdcageVerification(5),
   },
 }
 

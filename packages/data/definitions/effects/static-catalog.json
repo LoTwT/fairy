@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "14",
+  "revision": "15",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -36790,7 +36790,7 @@
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -36798,14 +36798,49 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/3/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
             "w-engine:14137:zzz-hp:eff-ms1r9equ-l7imtb:blk-legacy:refinement:1"
           ],
-          "maximumLayers": 1,
+          "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["qingming-birdcage-pierce-stack-layers"],
           "applicability": {}
         }
       ]
@@ -36852,7 +36887,7 @@
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -36860,14 +36895,49 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/92/refinementBuffs/1/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/3/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
             "w-engine:14137:zzz-hp:eff-ms1rarze-uhh4r4:blk-legacy:refinement:2"
           ],
-          "maximumLayers": 1,
+          "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["qingming-birdcage-pierce-stack-layers"],
           "applicability": {}
         }
       ]
@@ -36914,7 +36984,7 @@
           "configuration": {
             "refinements": [3]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -36922,14 +36992,49 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/92/refinementBuffs/2/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/3/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
             "w-engine:14137:zzz-hp:eff-ms1rby7h-cnwy4w:blk-legacy:refinement:3"
           ],
-          "maximumLayers": 1,
+          "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["qingming-birdcage-pierce-stack-layers"],
           "applicability": {}
         }
       ]
@@ -36976,7 +37081,7 @@
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -36984,14 +37089,49 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/92/refinementBuffs/3/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/3/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
             "w-engine:14137:zzz-hp:eff-ms1rcyzb-2dozs0:blk-legacy:refinement:4"
           ],
-          "maximumLayers": 1,
+          "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["qingming-birdcage-pierce-stack-layers"],
           "applicability": {}
         }
       ]
@@ -37038,7 +37178,7 @@
           "configuration": {
             "refinements": [5]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -37046,14 +37186,49 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/92/refinementBuffs/4/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/3/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14137/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
             "w-engine:14137:zzz-hp:eff-ms1rdzo3-dwcqi1:blk-legacy:refinement:5"
           ],
-          "maximumLayers": 1,
+          "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["qingming-birdcage-pierce-stack-layers"],
           "applicability": {}
         }
       ]
@@ -44134,6 +44309,132 @@
           "differences": []
         }
       ]
+    },
+    {
+      "optionId": "nanoka:drive-discs:31200:two-piece-impact-percent",
+      "catalogEntityId": "drive-discs:SuitShockstarDisco",
+      "name": "2件套 · impact",
+      "conditionDescription": "冲击力+6%。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumSetPieces": 2
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "drive-discs/31200/details.zh.json",
+              "pointer": "/desc2"
+            }
+          ],
+          "effectIds": [
+            "disc:31200:nanoka:two-piece-impact-percent:setPieces:2"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:drive-discs:31500:two-piece-defense-percent",
+      "catalogEntityId": "drive-discs:SuitSoulRock",
+      "name": "2件套 · externalDefPercent",
+      "conditionDescription": "防御力+16%。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumSetPieces": 2
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "drive-discs/31500/details.zh.json",
+              "pointer": "/desc2"
+            }
+          ],
+          "effectIds": [
+            "disc:31500:nanoka:two-piece-defense-percent:setPieces:2"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:drive-discs:31900:two-piece-shield-value",
+      "catalogEntityId": "drive-discs:SuitProtoPunk",
+      "name": "2件套 · shieldValue",
+      "conditionDescription": "施加的护盾值提升15%。",
+      "target": "self",
+      "variants": [
+        {
+          "configuration": {
+            "minimumSetPieces": 2
+          },
+          "status": "unsupported",
+          "reason": "formula-out-of-scope",
+          "explanation": "二件套条款为施加的护盾值提升15%。护盾值不属于当前伤害计算的任何乘区，也没有已核实的护盾公式；不能把它伪装成属性、增伤或减伤规则。装备该套装 2 件及以上时静态计算正常进行（该条款不影响伤害），显式选择本选项会得到本错误。",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "drive-discs/31900/details.zh.json",
+              "pointer": "/desc2"
+            }
+          ],
+          "effectIds": [],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:drive-discs:33200:two-piece-daze-value",
+      "catalogEntityId": "drive-discs:SuitKingoftheSummit",
+      "name": "2件套 · dazeValue",
+      "conditionDescription": "攻击造成的失衡值提升6%",
+      "target": "self",
+      "variants": [
+        {
+          "configuration": {
+            "minimumSetPieces": 2
+          },
+          "status": "unsupported",
+          "reason": "formula-out-of-scope",
+          "explanation": "二件套条款为攻击造成的失衡值提升6%。这是失衡值（daze）加成，不是冲击力、攻击力或伤害加成；完整静态入口的 daze-only 分支不计算最终失衡值，当前没有已核实的失衡值乘区。装备该套装 2 件及以上时静态计算正常进行（该条款不影响伤害），显式选择本选项会得到本错误。",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "drive-discs/33200/details.zh.json",
+              "pointer": "/desc2"
+            }
+          ],
+          "effectIds": [],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
     }
   ],
   "skillTargets": [
@@ -46668,6 +46969,82 @@
           "locale": "zh",
           "resourcePath": "raw/zzz-hp/developer-revisions/zzz-hp-wengines-picked-1-2026-10-05.json",
           "pointer": "/wengines/0/refinementBuffs/4/effectBlocks/0/effects/2"
+        }
+      ]
+    },
+    {
+      "differenceId": "qingming-birdcage-pierce-stack-layers",
+      "explanation": "青溟笼舍（14137）精炼 1—5 的以太贯穿增伤：块 note 与 Nanoka 五档天赋（w-engines/14137/details.zh.json 的 /talents/1—5/desc）同文，把条款写在“每层[青溟同行]效果使装备者造成的以太伤害提升…%，[终结技]或[强化特殊技]造成的以太贯穿伤害提升…”之下，且全句声明最多叠加 2 层；同一块的以太增伤记录也按 kind=stacked、每层 8—12.8%、maxStacks=2 编码。固定来源 fac62407 却把贯穿增伤记为 kind=fixed、value=10/11.5/13/14.5/16、stackable=false、maxStacks=1、valuePerStack=0：resolveEffectBaseValue 对 fixed 非 stackable 直接返回 value，层数不参与取值，两层配置只贡献单层值。Fairy 按具名语义纠错改为按层编译：每层值保持来源 value（即描述的单层百分比），选项与规则激活层数上限为 2，调用方按真实层数显式选择，0 层表示关闭；“进入接战直接获得 2 层”与 15 秒刷新不模拟，不把任何时点自动视为满层。effectId、optionId、精炼匹配、持有者、以太元素、贯穿伤害种类与[终结技]或[强化特殊技]（all-special-ms0fcqv7 为强化特殊技目标，不是任意特殊技）等既有条件保持不变；同块的固定暴击率条款不按层翻倍。证据级别为“按一致描述纠错”（固定来源块 note、Nanoka 中英文与上游 note 相互一致），未经游戏实测；五档两层按描述应为 20/23/26/29/32%。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/92/refinementBuffs/1/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/92/refinementBuffs/2/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/92/refinementBuffs/3/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/92/refinementBuffs/4/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14137/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14137/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14137/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14137/details.zh.json",
+          "pointer": "/talents/4/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14137/details.zh.json",
+          "pointer": "/talents/5/desc"
         }
       ]
     }

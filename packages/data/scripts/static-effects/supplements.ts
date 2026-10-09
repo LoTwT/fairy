@@ -41,6 +41,8 @@ export interface SupplementVariantSpec {
     readonly coreSkillLevels?: readonly CoreSkillLevel[]
     readonly refinements?: readonly (1 | 2 | 3 | 4 | 5)[]
     readonly potentialLevels?: readonly PotentialLevel[]
+    /** 驱动盘套装二件套选项的件数门槛；与规则的 setPieces 配置条件一致。 */
+    readonly minimumSetPieces?: 2 | 4
   }
   readonly inputs: readonly StaticCatalogInputRequirement[]
   readonly applicability: StaticCatalogVariant["applicability"]
@@ -83,6 +85,25 @@ export type Supplement =
       readonly optionId: string
       readonly rule: SupplementRuleSpec
       readonly variant: SupplementVariantSpec
+      readonly supportedRanks: string
+      readonly computationTarget: string
+    })
+  | (SupplementBase & {
+      /**
+       * 在既有目录实体上登记一个如实不可选的选项变体（formula-out-of-scope）：
+       * 来源效果存在（如驱动盘二件套的护盾值、失衡值条款），但当前伤害计算
+       * 不承诺该乘区。不创建规则、不伪造数值；消费端显式选择时得到带解释的
+       * 明确错误，静态计算的覆盖注册表据此声明该套装二件套“已声明越界”。
+       */
+      readonly kind: "unsupported-option"
+      readonly catalogEntityId: string
+      readonly optionId: string
+      readonly name: string
+      readonly conditionDescription: string
+      readonly target: "self" | "team"
+      readonly minimumSetPieces: 2 | 4
+      readonly reason: "formula-out-of-scope"
+      readonly explanation: string
       readonly supportedRanks: string
       readonly computationTarget: string
     })
@@ -392,6 +413,192 @@ const identityInflectionBoundary: Supplement = {
   verification:
     "Nanoka 五档天赋文本核实（受到敌方攻击时，攻击者造成的伤害降低 6/7/8/9/10%，持续 12 秒）；本轮仅登记消费方向边界，不新增承伤计算。",
   computationTarget: "none",
+}
+
+/** 驱动盘二件套的件数门槛条件；与来源二件套规则的 setPieces 配置一致。 */
+const driveDiscTwoPieceConfig = (
+  minimumSetPieces: 2,
+): Condition<"configuration"> => ({
+  kind: "compare-number",
+  unit: "count",
+  operator: "gte",
+  left: {
+    kind: "configuration-number",
+    unit: "count",
+    field: "setPieces",
+  },
+  right: literal("count", minimumSetPieces),
+})
+
+const shockstarDiscoEvidence = [
+  {
+    path: "drive-discs/31200/details.zh.json",
+    pointer: "/desc2",
+    sha256: "109364e29c3ce07041963bfde98a39344645c8cfc59d32d7189e3e36bed7ee82",
+  },
+] as const
+
+/**
+ * 震星迪斯科（31200）二件套：冲击力 +6%。固定来源的二件套块只保留空 effects
+ * 与同文 note（/driveDiscs/28/twoPieceEffectBlocks/0），机器记录缺失；按
+ * integrated 描述补真实属性规则，使 equipment 面板可以重建该贡献。
+ */
+const shockstarDiscoTwoPieceImpact: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:drive-discs:31200:two-piece-impact-percent",
+  source: "nanoka-integrated@3.2 drive-discs/31200 /desc2",
+  catalogEntityId: "drive-discs:SuitShockstarDisco",
+  optionId: "nanoka:drive-discs:31200:two-piece-impact-percent",
+  supportedRanks: "2 件起",
+  computationTarget: "catalog option on the mapped drive-disc entity",
+  evidence: shockstarDiscoEvidence,
+  verification:
+    "Nanoka drive-discs/31200 /desc2 原文“冲击力+6%。”；固定来源 fac62407 的二件套块（/driveDiscs/28/twoPieceEffectBlocks/0）note 与此逐字相同但 effects 为空、twoPieceMods 全零，没有可转换的机器记录。按补充来源在既有 drive-discs:SuitShockstarDisco 实体登记二件套选项：冲击力按基础百分比进入局外初始阶段（initial-percentage），与“属性+百分比”类二件套条款（如荆棘玫瑰 34200 的 externalDefPercent → defense initial-percentage、激素朋克 31400 的 externalAtkPercent → attack initial-percentage）同一口径；2 件起按实际件数自动选中、同一套只生效一次。已结算局外面板输入已含该贡献，静态入口不再重复叠加。",
+  rule: {
+    effectId: "disc:31200:nanoka:two-piece-impact-percent:setPieces:2",
+    identity: { kind: "drive-disc", entityId: "31200" },
+    section: "2件套",
+    config: driveDiscTwoPieceConfig(2),
+    parameters: {
+      amount: { kind: "constant", unit: "ratio", value: 0.06 },
+    },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: {
+      kind: "stat-adjustment",
+      stat: "impact",
+      stage: "initial-percentage",
+      value: { kind: "parameter", unit: "ratio", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { minimumSetPieces: 2 },
+    inputs: [],
+    applicability: {},
+    conditionDescription: "冲击力+6%。",
+    name: "2件套 · impact",
+    target: "self",
+  },
+}
+
+const soulRockEvidence = [
+  {
+    path: "drive-discs/31500/details.zh.json",
+    pointer: "/desc2",
+    sha256: "bdf81529b0dad0bb91f0a7b6b14484af3b9b31ead6841103c177563aed101c0c",
+  },
+] as const
+
+/**
+ * 灵魂摇滚（31500）二件套：防御力 +16%。固定来源的二件套机器记录完全缺失
+ * （无块、无 effects、mods 全零）；按 integrated 描述补真实属性规则。
+ */
+const soulRockTwoPieceDefense: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:drive-discs:31500:two-piece-defense-percent",
+  source: "nanoka-integrated@3.2 drive-discs/31500 /desc2",
+  catalogEntityId: "drive-discs:SuitSoulRock",
+  optionId: "nanoka:drive-discs:31500:two-piece-defense-percent",
+  supportedRanks: "2 件起",
+  computationTarget: "catalog option on the mapped drive-disc entity",
+  evidence: soulRockEvidence,
+  verification:
+    "Nanoka drive-discs/31500 /desc2 原文“防御力+16%。”；固定来源 fac62407 没有任何二件套机器记录（twoPieceEffectBlocks 为 null、twoPieceEffects 为空、twoPieceMods 全零）。同文的“防御力+16%。”条款在荆棘玫瑰（34200）由来源编码为 externalDefPercent 并转换为 defense 的 initial-percentage，本补充沿用同一口径在既有 drive-discs:SuitSoulRock 实体登记二件套选项；2 件起按实际件数自动选中、同一套只生效一次。已结算局外面板输入已含该贡献，静态入口不再重复叠加；该防御进入面板后可被防御缩放类规则读取。",
+  rule: {
+    effectId: "disc:31500:nanoka:two-piece-defense-percent:setPieces:2",
+    identity: { kind: "drive-disc", entityId: "31500" },
+    section: "2件套",
+    config: driveDiscTwoPieceConfig(2),
+    parameters: {
+      amount: { kind: "constant", unit: "ratio", value: 0.16 },
+    },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: {
+      kind: "stat-adjustment",
+      stat: "defense",
+      stage: "initial-percentage",
+      value: { kind: "parameter", unit: "ratio", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { minimumSetPieces: 2 },
+    inputs: [],
+    applicability: {},
+    conditionDescription: "防御力+16%。",
+    name: "2件套 · externalDefPercent",
+    target: "self",
+  },
+}
+
+const protoPunkEvidence = [
+  {
+    path: "drive-discs/31900/details.zh.json",
+    pointer: "/desc2",
+    sha256: "9c6614381151e3568cd368deea6cbbf71579ed0c556f9faedf99b85f9cb904c8",
+  },
+] as const
+
+/**
+ * 原始朋克（31900）二件套：施加的护盾值 +15%。护盾值不属于当前伤害计算
+ * 承诺的任何乘区；如实登记为不可选的 formula-out-of-scope 选项，不伪造
+ * 属性或增伤规则。
+ */
+const protoPunkTwoPieceShieldBoundary: Supplement = {
+  kind: "unsupported-option",
+  supplementId: "nanoka:drive-discs:31900:two-piece-shield-value",
+  source: "nanoka-integrated@3.2 drive-discs/31900 /desc2",
+  catalogEntityId: "drive-discs:SuitProtoPunk",
+  optionId: "nanoka:drive-discs:31900:two-piece-shield-value",
+  name: "2件套 · shieldValue",
+  conditionDescription: "施加的护盾值提升15%。",
+  target: "self",
+  minimumSetPieces: 2,
+  reason: "formula-out-of-scope",
+  explanation:
+    "二件套条款为施加的护盾值提升15%。护盾值不属于当前伤害计算的任何乘区，也没有已核实的护盾公式；不能把它伪装成属性、增伤或减伤规则。装备该套装 2 件及以上时静态计算正常进行（该条款不影响伤害），显式选择本选项会得到本错误。",
+  supportedRanks: "2 件起（不可选）",
+  computationTarget:
+    "declared unavailable option on the mapped drive-disc entity",
+  evidence: protoPunkEvidence,
+  verification:
+    "Nanoka drive-discs/31900 /desc2 原文“施加的护盾值提升15%。”；固定来源 fac62407 没有该条款的机器记录（twoPieceEffectBlocks 为 null、twoPieceEffects 为空、twoPieceMods 全零）。当前公开路径计算己方对敌伤害，护盾值（施加的护盾量）不在已核实的乘区与公式范围内，本轮不新增护盾公式，也不把它记为零贡献后冒充接入；登记为 formula-out-of-scope 的不可选变体，供覆盖注册表与调用方得到明确解释。",
+}
+
+const kingOfTheSummitEvidence = [
+  {
+    path: "drive-discs/33200/details.zh.json",
+    pointer: "/desc2",
+    sha256: "706bc00711de5fba049ee0b8f6d9985762b236674d532311072037a609385c18",
+  },
+] as const
+
+/**
+ * 山大王（33200）二件套：攻击造成的失衡值 +6%。失衡值不属于当前伤害计算
+ * 承诺（完整入口的 daze-only 分支不计算最终失衡值）；如实登记为不可选的
+ * formula-out-of-scope 选项。该条款是失衡值，不是冲击力或增伤。
+ */
+const kingOfTheSummitTwoPieceDazeBoundary: Supplement = {
+  kind: "unsupported-option",
+  supplementId: "nanoka:drive-discs:33200:two-piece-daze-value",
+  source: "nanoka-integrated@3.2 drive-discs/33200 /desc2",
+  catalogEntityId: "drive-discs:SuitKingoftheSummit",
+  optionId: "nanoka:drive-discs:33200:two-piece-daze-value",
+  name: "2件套 · dazeValue",
+  conditionDescription: "攻击造成的失衡值提升6%",
+  target: "self",
+  minimumSetPieces: 2,
+  reason: "formula-out-of-scope",
+  explanation:
+    "二件套条款为攻击造成的失衡值提升6%。这是失衡值（daze）加成，不是冲击力、攻击力或伤害加成；完整静态入口的 daze-only 分支不计算最终失衡值，当前没有已核实的失衡值乘区。装备该套装 2 件及以上时静态计算正常进行（该条款不影响伤害），显式选择本选项会得到本错误。",
+  supportedRanks: "2 件起（不可选）",
+  computationTarget:
+    "declared unavailable option on the mapped drive-disc entity",
+  evidence: kingOfTheSummitEvidence,
+  verification:
+    "Nanoka drive-discs/33200 /desc2 原文“攻击造成的失衡值提升6%”；固定来源 fac62407 没有该条款的机器记录（twoPieceEffectBlocks 为 null、twoPieceEffects 为空、twoPieceMods 全零）。失衡值与伤害、冲击力是不同量纲：不能把它转换为 impact 或任何伤害乘区，也不在 daze-only 分支外新造最终失衡值公式。登记为 formula-out-of-scope 的不可选变体，供覆盖注册表与调用方得到明确解释。",
 }
 
 const potentialEvidence = (
@@ -832,4 +1039,8 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   ellenOrdinaryBladeDance,
   harumasaOrdinaryCritRate,
   harumasaOrdinaryCritDmg,
+  shockstarDiscoTwoPieceImpact,
+  soulRockTwoPieceDefense,
+  protoPunkTwoPieceShieldBoundary,
+  kingOfTheSummitTwoPieceDazeBoundary,
 ]

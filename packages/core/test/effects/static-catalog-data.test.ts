@@ -1011,6 +1011,18 @@ describe("fixed-source catalog conformance", () => {
     "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/1",
     "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/2",
   ])
+  /**
+   * 青溟笼舍精炼 1—5 的以太贯穿增伤位置：块 note 与 Nanoka 同文把该条款写在
+   * “每层[青溟同行]、最多 2 层”之下，固定来源却编码为固定单次；按一致描述
+   * 改为按层编译（每层 10/11.5/13/14.5/16%、上限 2）后，上游固定单次参考值
+   * 不再作为期望值，改由本文件的具名按层用例验证。
+   */
+  const qingmingPierceStackCorrectedPointers = new Set(
+    [0, 1, 2, 3, 4].map(
+      (packIndex) =>
+        `/wengines/92/refinementBuffs/${packIndex}/effectBlocks/0/effects/2`,
+    ),
+  )
   it("accounts for every converted source position with an independent reference result", () => {
     expect(oracle.sourceCommit).toBe(catalog.source.commit)
     expect(oracle.cases.map((c) => c.pointer).toSorted()).toEqual(
@@ -1023,7 +1035,8 @@ describe("fixed-source catalog conformance", () => {
             elementScopeCorrectedPointers.has(r.pointer) ||
             developerRevisionCorrectedPointers.has(r.pointer) ||
             attributeAnomalyScopeCorrectedPointers.has(r.pointer) ||
-            completeStateMigratedPointers.has(r.pointer),
+            completeStateMigratedPointers.has(r.pointer) ||
+            qingmingPierceStackCorrectedPointers.has(r.pointer),
         )
         .map((r) => r.pointer)
         .toSorted(),
@@ -1034,7 +1047,8 @@ describe("fixed-source catalog conformance", () => {
       if (
         potentialExplainedPointers.has(vector.pointer) ||
         attributeAnomalyScopeCorrectedPointers.has(vector.pointer) ||
-        completeStateMigratedPointers.has(vector.pointer)
+        completeStateMigratedPointers.has(vector.pointer) ||
+        qingmingPierceStackCorrectedPointers.has(vector.pointer)
       )
         continue
       const values = Object.fromEntries(
@@ -1736,7 +1750,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("14")
+    expect(catalog.revision).toBe("15")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -4535,12 +4549,12 @@ describe("velina cyclone catalog linkage", () => {
       "../../../data/definitions/effects/static-coverage.json",
     ) as { summary: { supplements: Record<string, number> } }
     expect(coverage.summary.supplements).toMatchObject({
-      records: 10,
-      integrated: 9,
-      rules: 9,
-      options: 4,
+      records: 14,
+      integrated: 11,
+      rules: 11,
+      options: 6,
       entities: 1,
-      outOfScope: 1,
+      outOfScope: 3,
     })
   })
 
@@ -6388,6 +6402,355 @@ describe("same-block core evidence scoping and independent damage items", () => 
           ),
           `${label}: ${JSON.stringify(result.issues)}`,
         ).toBe(true)
+    }
+  })
+})
+
+/**
+ * 青溟笼舍（14137）精炼 1—5 的以太贯穿增伤按层纠错（具名差异
+ * qingming-birdcage-pierce-stack-layers）：块 note 与 Nanoka 同文把该条款写在
+ * “每层[青溟同行]、最多 2 层”之下，固定来源却编码为固定单次。以下用例验证
+ * 按层编译后的目录形状、五档 0/1/2 层、非法层数、精炼匹配与技能/伤害种类
+ * 范围；期望值来自描述的每层数值（10/11.5/13/14.5/16%），不从生成器反推。
+ */
+describe("qingming birdcage pierce stack revision", () => {
+  const pierceOption = (refinement: 1 | 2 | 3 | 4 | 5) =>
+    `w-engines:Qingming_Birdcage:refinement:blk-legacy:eff-ms1${
+      [
+        "r9equ-l7imtb",
+        "rarze-uhh4r4",
+        "rby7h-cnwy4w",
+        "rcyzb-2dozs0",
+        "rdzo3-dwcqi1",
+      ][refinement - 1]!
+    }`
+  const pierceRule = (refinement: 1 | 2 | 3 | 4 | 5) =>
+    `w-engine:14137:zzz-hp:eff-ms1${
+      [
+        "r9equ-l7imtb",
+        "rarze-uhh4r4",
+        "rby7h-cnwy4w",
+        "rcyzb-2dozs0",
+        "rdzo3-dwcqi1",
+      ][refinement - 1]!
+    }:blk-legacy:refinement:${refinement}`
+  const perLayer = [0.1, 0.115, 0.13, 0.145, 0.16] as const
+  const difference = catalog.differences.find(
+    (d) => d.differenceId === "qingming-birdcage-pierce-stack-layers",
+  )
+
+  function qingmingInput(
+    refinement: 1 | 2 | 3 | 4 | 5,
+    layers: number,
+    hitOverride: Record<string, unknown> = {},
+    extraSelections: StaticCatalogDamageInput["selections"] = [],
+  ): StaticCatalogDamageInput {
+    return {
+      definitions,
+      catalog,
+      bindings: [
+        {
+          kind: "w-engine",
+          bindingId: "binding:cage",
+          holderId: "entity:holder",
+          sourceEntityId: "14137",
+          eligible: true,
+          configuration: { refinement },
+        },
+      ],
+      selections: [
+        {
+          optionId: pierceOption(refinement),
+          bindingId: "binding:cage",
+          layers,
+        },
+        ...extraSelections,
+      ],
+      actorSources: [{ entityId: "entity:holder", agentEntityId: "1471" }],
+      world: {
+        entities: [
+          {
+            kind: "actor",
+            entityId: "entity:holder",
+            teamId: "team:players",
+            generalStats: {
+              attack: general(1000),
+              sheerForce: general(500),
+            },
+            directStats: {
+              criticalRate: { baseValue: 0.1, additions: [] },
+              criticalDamage: { baseValue: 0.5, additions: [] },
+            },
+          },
+          {
+            kind: "actor",
+            entityId: "entity:enemy",
+            teamId: "team:enemies",
+            generalStats: {},
+            directStats: {},
+          },
+        ],
+        states: [],
+        distances: [],
+      },
+      hit: {
+        actorId: "entity:holder",
+        targetId: "entity:enemy",
+        actionId: "action:oracle",
+        skillCategory: "special",
+        element: "ether",
+        skillTags: [],
+        skillTargetIds: ["zzz-hp:skill:all-special-ms0fcqv7"],
+        damageItems: [
+          {
+            mode: "direct",
+            role: "base",
+            itemId: "base",
+            damageMultiplier: 2,
+            stat: "attack",
+            statSource: { entityId: "entity:holder" },
+          },
+        ],
+        ...hitOverride,
+      },
+      damage: {
+        kind: "sheer",
+        damageBonus: [],
+        sheerDamageBonus: [],
+        resistance: {
+          targetResistance: 0,
+          targetResistanceReductions: [],
+          attackerResistanceIgnoreValues: [],
+        },
+        damageTaken: {
+          targetDamageTakenIncreases: [],
+          targetDamageTakenReductions: [],
+        },
+        stunDamage: {
+          isTargetStunned: false,
+          targetBaseStunDamageMultiplier: 1,
+          targetStunDamageMultiplierAdjustments: [],
+        },
+      },
+    } as unknown as StaticCatalogDamageInput
+  }
+
+  it("registers the corrected stacked shape with stable identities at every refinement", () => {
+    expect(difference).toBeDefined()
+    for (const refinement of [1, 2, 3, 4, 5] as const) {
+      const option = catalog.options.find(
+        (o) => o.optionId === pierceOption(refinement),
+      )
+      expect(option?.variants, `R${refinement}`).toHaveLength(1)
+      const variant = option?.variants[0]
+      expect(variant?.status, `R${refinement}`).toBe("corrected")
+      expect(variant?.maximumLayers, `R${refinement}`).toBe(2)
+      expect(variant?.differences, `R${refinement}`).toContain(
+        "qingming-birdcage-pierce-stack-layers",
+      )
+      expect(variant?.configuration.refinements, `R${refinement}`).toEqual([
+        refinement,
+      ])
+      const rule = definitions.effects.find(
+        (r) => r.effectId === pierceRule(refinement),
+      )
+      expect(rule?.activation, `R${refinement}`).toMatchObject({
+        kind: "supplied",
+        maximumLayers: { value: 2 },
+      })
+      expect(
+        (rule?.parameters.amount as { value: number } | undefined)?.value,
+        `R${refinement}`,
+      ).toBeCloseTo(perLayer[refinement - 1]!, 12)
+      // 既有范围条件保持不变：以太贯穿伤害 + 强化特殊技目标或终结技，
+      // 不泛化为所有特殊技。
+      expect(
+        (rule as ContributionRule | undefined)?.when,
+        `R${refinement}`,
+      ).toMatchObject({
+        kind: "all",
+        conditions: [
+          { kind: "one-of", fact: "hit.damageKind", values: ["sheer"] },
+          {
+            kind: "any",
+            conditions: [
+              {
+                kind: "all",
+                conditions: [
+                  {
+                    kind: "one-of",
+                    fact: "hit.skillTag",
+                    values: ["zzz-hp:category:special"],
+                  },
+                  {
+                    kind: "one-of",
+                    fact: "hit.skillTag",
+                    values: ["zzz-hp:skill:all-special-ms0fcqv7"],
+                  },
+                ],
+              },
+              {
+                kind: "all",
+                conditions: [
+                  {
+                    kind: "one-of",
+                    fact: "hit.skillTag",
+                    values: ["zzz-hp:category:ultimate"],
+                  },
+                ],
+              },
+            ],
+          },
+          { kind: "one-of", fact: "hit.element", values: ["ether"] },
+        ],
+      })
+      const row = coverage.records.find(
+        (r) =>
+          r.pointer ===
+          `/wengines/92/refinementBuffs/${refinement - 1}/effectBlocks/0/effects/2`,
+      )
+      expect(row?.status, `R${refinement}`).toBe("corrected")
+      expect(row?.effectIds, `R${refinement}`).toEqual([pierceRule(refinement)])
+    }
+  })
+
+  it.each([1, 2, 3, 4, 5] as const)(
+    "scales the pierce bonus per layer at R%d and keeps zero layers disabled",
+    (refinement) => {
+      const perLayerValue = perLayer[refinement - 1]!
+      const zero = calculateStaticDamageFromCatalog(
+        qingmingInput(refinement, 0),
+      )
+      expect(zero.ok, JSON.stringify(zero)).toBe(true)
+      if (zero.ok)
+        expect(zero.value.factors.nonCritical.sheerDamageBonus).toBeCloseTo(
+          1,
+          12,
+        )
+      for (const [layers, expected] of [
+        [1, 1 + perLayerValue],
+        [2, 1 + 2 * perLayerValue],
+      ] as const) {
+        const result = calculateStaticDamageFromCatalog(
+          qingmingInput(refinement, layers),
+        )
+        expect(result.ok, JSON.stringify(result)).toBe(true)
+        if (result.ok) {
+          expect(result.value.factors.nonCritical.sheerDamageBonus).toBeCloseTo(
+            expected,
+            12,
+          )
+          // 末端乘区同样只按层数取值：非暴击 = 攻击 × 倍率 × 贯穿增伤。
+          expect(result.value.nonCritical).toBeCloseTo(1000 * 2 * expected, 9)
+        }
+      }
+    },
+  )
+
+  it.each([
+    ["above the cap", 3],
+    ["negative", -1],
+  ] as const)("rejects illegal layer counts: %s", (_, layers) => {
+    expect(
+      calculateStaticDamageFromCatalog(qingmingInput(1, layers)),
+    ).toMatchObject({
+      ok: false,
+      issues: [{ code: "INVALID_INPUT", pointer: "/selections/0/layers" }],
+    })
+  })
+
+  it("matches the selection to its own refinement rank", () => {
+    for (const refinement of [1, 2, 3, 4, 5] as const)
+      expect(
+        calculateStaticDamageFromCatalog(qingmingInput(refinement, 1)).ok,
+        `R${refinement}`,
+      ).toBe(true)
+    const mismatch = calculateStaticDamageFromCatalog({
+      ...qingmingInput(2, 1),
+      selections: [
+        { optionId: pierceOption(1), bindingId: "binding:cage", layers: 1 },
+      ],
+    })
+    expect(mismatch).toMatchObject({
+      ok: false,
+      issues: [{ code: "MISSING_RANK", pointer: "/selections/0" }],
+    })
+  })
+
+  it.each([
+    ["ether enhanced special with the registered target", {}, true],
+    [
+      "ultimate category without the special target",
+      { skillCategory: "ultimate", skillTargetIds: [] },
+      true,
+    ],
+    [
+      "plain special without the registered target",
+      { skillTargetIds: [] },
+      false,
+    ],
+    ["basic category", { skillCategory: "basic", skillTargetIds: [] }, false],
+    ["fire element", { element: "fire" }, false],
+  ] as const)(
+    "applies the R1 pierce bonus only to %s",
+    (_, hitOverride, applies) => {
+      const withBonus = calculateStaticDamageFromCatalog(
+        qingmingInput(1, 2, hitOverride),
+      )
+      expect(withBonus.ok, JSON.stringify(withBonus)).toBe(true)
+      const baseline = calculateStaticDamageFromCatalog(
+        qingmingInput(1, 0, hitOverride),
+      )
+      expect(baseline.ok, JSON.stringify(baseline)).toBe(true)
+      if (withBonus.ok && baseline.ok) {
+        const expected = applies ? 1.2 : 1
+        expect(
+          withBonus.value.factors.nonCritical.sheerDamageBonus,
+        ).toBeCloseTo(expected, 12)
+        expect(baseline.value.factors.nonCritical.sheerDamageBonus).toBeCloseTo(
+          1,
+          12,
+        )
+      }
+    },
+  )
+
+  it("keeps the fixed critical-rate clause off the layer scale", () => {
+    const critical = catalog.options.find(
+      (o) =>
+        o.optionId ===
+        "w-engines:Qingming_Birdcage:refinement:blk-legacy:legacy-self-critRate",
+    )
+    expect(critical?.variants[0]?.maximumLayers).toBe(1)
+    const rule = definitions.effects.find(
+      (r) =>
+        r.effectId ===
+        "w-engine:14137:zzz-hp:legacy-self-critRate:blk-legacy:refinement",
+    )
+    expect(rule?.activation).toMatchObject({
+      kind: "supplied",
+      maximumLayers: { value: 1 },
+    })
+    for (const layers of [1, 2] as const) {
+      const result = calculateStaticDamageFromCatalog(
+        qingmingInput(1, layers, {}, [
+          {
+            optionId:
+              "w-engines:Qingming_Birdcage:refinement:blk-legacy:legacy-self-critRate",
+            bindingId: "binding:cage",
+            layers: 1,
+          },
+        ]),
+      )
+      expect(result.ok, JSON.stringify(result)).toBe(true)
+      if (result.ok) {
+        // 暴击率固定 +20% 不随青溟层数翻倍；贯穿增伤按层取值。
+        expect(result.value.criticalRate).toBeCloseTo(0.3, 12)
+        expect(result.value.factors.nonCritical.sheerDamageBonus).toBeCloseTo(
+          1 + layers * 0.1,
+          12,
+        )
+      }
     }
   })
 })

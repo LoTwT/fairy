@@ -1891,7 +1891,7 @@ describe("static calculation assembly", () => {
     const input = await fixture()
     for (const version of [
       { ...input.data.version, packageVersion: "99.0.0" },
-      { ...input.data.version, contractVersion: 2 as 1 },
+      { ...input.data.version, contractVersion: 3 as 2 },
       { ...input.data.version, gameVersion: "unknown" },
       { ...input.data.version, snapshotId: "" },
     ]) {

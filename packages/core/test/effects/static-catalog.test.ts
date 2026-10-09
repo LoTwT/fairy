@@ -374,6 +374,141 @@ describe("catalog static calculation", () => {
       ).toEqual([2, 10])
     expect(calculateStaticDamageFromCatalog(input).ok).toBe(false)
   })
+  it("accepts optional original anomaly attribute metadata on direct items without changing the result", () => {
+    const input = fixture([contribution("base-multiplier-increase", 0.25)])
+    const base = input.hit.damageItems[0] as Extract<
+      StaticCatalogDamageItem,
+      { mode: "direct" }
+    >
+    const withoutMetadata = calculateStaticDamageFromCatalog(input)
+    expect(withoutMetadata.ok).toBe(true)
+    for (const originalAnomalyAttribute of [
+      "fire",
+      "electric",
+      "ether",
+      "ice",
+      "physical",
+      "auric-ink",
+      "frost",
+    ] as const) {
+      const annotated = calculateStaticDamageFromCatalog({
+        ...input,
+        hit: {
+          ...input.hit,
+          damageItems: [{ ...base, originalAnomalyAttribute }],
+        },
+      })
+      expect(annotated.ok, originalAnomalyAttribute).toBe(true)
+      if (annotated.ok && withoutMetadata.ok) {
+        // 元数据是来源归属声明：不重算传入倍率，不引入时间准备记录。
+        expect(annotated.value.expected).toBe(withoutMetadata.value.expected)
+        expect(annotated.value.nonCritical).toBe(
+          withoutMetadata.value.nonCritical,
+        )
+        expect(annotated.value.critical).toBe(withoutMetadata.value.critical)
+        expect(annotated.value.factors).toEqual(withoutMetadata.value.factors)
+        expect(annotated.value.preparations ?? []).toEqual(
+          withoutMetadata.value.preparations ?? [],
+        )
+      }
+    }
+  })
+  it.each([
+    ["wind", "wind"],
+    ["lumiflux", "lumiflux"],
+    ["PhysicaL", "typo"],
+    ["", "empty string"],
+    [null, "null"],
+    [undefined, "explicit undefined"],
+    [1, "number"],
+  ] as const)(
+    "rejects an illegal original anomaly attribute %s (%s) on direct items",
+    (value, _label) => {
+      const input = fixture()
+      const base = input.hit.damageItems[0] as Extract<
+        StaticCatalogDamageItem,
+        { mode: "direct" }
+      >
+      const result = calculateStaticDamageFromCatalog({
+        ...input,
+        hit: {
+          ...input.hit,
+          damageItems: [
+            {
+              ...base,
+              originalAnomalyAttribute: value,
+            } as unknown as StaticCatalogDamageItem,
+          ],
+        },
+      })
+      expect(result).toMatchObject({
+        ok: false,
+        issues: [
+          {
+            code: "INVALID_INPUT",
+            pointer: "/hit/damageItems/0/originalAnomalyAttribute",
+          },
+        ],
+      })
+    },
+  )
+  it("keeps the disorder field mandatory and the vortex mode closed to it", () => {
+    const disorder = anomalyInput(fixture(), "disorder")
+    const missing = calculateStaticDamageFromCatalog({
+      ...disorder,
+      hit: {
+        ...disorder.hit,
+        damageItems: [
+          {
+            mode: "standard-disorder",
+            role: "base",
+            itemId: "base",
+            stat: "attack",
+            statSource: { entityId: "entity:attacker" },
+            baseDurationSeconds: 10,
+            elapsedSeconds: 0,
+          } as unknown as StaticCatalogDamageItem,
+        ],
+      },
+    })
+    expect(missing).toMatchObject({
+      ok: false,
+      issues: [
+        {
+          code: "INVALID_INPUT",
+          pointer: "/hit/damageItems/0/originalAnomalyAttribute",
+        },
+      ],
+    })
+    const vortex = anomalyInput(fixture(), "vortex")
+    const carried = calculateStaticDamageFromCatalog({
+      ...vortex,
+      hit: {
+        ...vortex.hit,
+        damageItems: [
+          {
+            mode: "standard-vortex",
+            role: "base",
+            itemId: "base",
+            stat: "attack",
+            statSource: { entityId: "entity:attacker" },
+            profile: "shock",
+            baseDurationSeconds: 10,
+            originalAnomalyAttribute: "electric",
+          } as unknown as StaticCatalogDamageItem,
+        ],
+      },
+    })
+    expect(carried).toMatchObject({
+      ok: false,
+      issues: [
+        {
+          code: "INVALID_INPUT",
+          pointer: "/hit/damageItems/0/originalAnomalyAttribute",
+        },
+      ],
+    })
+  })
   it.each(["entity:attacker", "entity:source"] as const)(
     "keeps saved anomaly attributes and level independent of current %s values",
     (sourceEntityId) => {

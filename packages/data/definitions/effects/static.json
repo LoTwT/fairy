@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "14",
+  "revision": "15",
   "effects": [
     {
       "kind": "contribution",
@@ -49182,6 +49182,74 @@
     },
     {
       "kind": "contribution",
+      "effectId": "disc:31200:nanoka:two-piece-impact-percent:setPieces:2",
+      "source": {
+        "identity": {
+          "kind": "drive-disc",
+          "entityId": "31200"
+        },
+        "section": "2件套",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "drive-discs/31200/details.zh.json",
+            "pointer": "/desc2"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "setPieces"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 2
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.06
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
+        "stage": "initial-percentage",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "disc:31300:zzz-hp:legacy-self-mastery:blk-ms0fix95-nhot0j:setPieces:2",
       "source": {
         "identity": {
@@ -49377,6 +49445,74 @@
         "kind": "stat-adjustment",
         "stat": "attack",
         "stage": "final-percentage",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "disc:31500:nanoka:two-piece-defense-percent:setPieces:2",
+      "source": {
+        "identity": {
+          "kind": "drive-disc",
+          "entityId": "31500"
+        },
+        "section": "2件套",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "drive-discs/31500/details.zh.json",
+            "pointer": "/desc2"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "setPieces"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 2
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.16
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "defense",
+        "stage": "initial-percentage",
         "value": {
           "kind": "parameter",
           "unit": "ratio",
@@ -67624,6 +67760,41 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -67654,7 +67825,7 @@
         "maximumLayers": {
           "kind": "literal",
           "unit": "count",
-          "value": 1
+          "value": 2
         }
       },
       "scope": "hit",
@@ -67805,6 +67976,41 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/92/refinementBuffs/1/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -67835,7 +68041,7 @@
         "maximumLayers": {
           "kind": "literal",
           "unit": "count",
-          "value": 1
+          "value": 2
         }
       },
       "scope": "hit",
@@ -67986,6 +68192,41 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/92/refinementBuffs/2/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -68016,7 +68257,7 @@
         "maximumLayers": {
           "kind": "literal",
           "unit": "count",
-          "value": 1
+          "value": 2
         }
       },
       "scope": "hit",
@@ -68167,6 +68408,41 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/92/refinementBuffs/3/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -68197,7 +68473,7 @@
         "maximumLayers": {
           "kind": "literal",
           "unit": "count",
-          "value": 1
+          "value": 2
         }
       },
       "scope": "hit",
@@ -68348,6 +68624,41 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/92/refinementBuffs/4/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14137/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -68378,7 +68689,7 @@
         "maximumLayers": {
           "kind": "literal",
           "unit": "count",
-          "value": 1
+          "value": 2
         }
       },
       "scope": "hit",

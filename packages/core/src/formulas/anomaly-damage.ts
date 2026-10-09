@@ -73,6 +73,20 @@ export type DisorderSourceAttribute =
   | "auric-ink"
   | "frost"
 
+/**
+ * 原异常属性的合法枚举，与 `DisorderSourceAttribute` 一一对应；不含风、
+ * 流明等不可作为原异常结算的元素。公开类型与运行时校验共用同一来源。
+ */
+export const DISORDER_SOURCE_ATTRIBUTES: readonly DisorderSourceAttribute[] = [
+  "fire",
+  "electric",
+  "ether",
+  "ice",
+  "physical",
+  "auric-ink",
+  "frost",
+]
+
 export interface CalculateStandardDisorderDamageMultiplierParams {
   readonly originalAnomalyAttribute: DisorderSourceAttribute
   readonly remainingAnomalyDurationInSeconds: number

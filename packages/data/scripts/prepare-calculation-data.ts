@@ -224,6 +224,10 @@ export async function prepareCalculationData(
     agents[id] = { initialConversions: conversions, deriveSheerForce }
   }
   const twoPieceOptions: StaticPanelRules["twoPieceOptions"][number][] = []
+  const declaredOutOfScopeTwoPiece = new Map<
+    string,
+    { contributions: string[] }
+  >()
   for (const option of catalog.options) {
     if (!option.variants.some((v) => v.configuration.minimumSetPieces === 2))
       continue
@@ -231,13 +235,25 @@ export async function prepareCalculationData(
     const identity = catalog.entities.find(
       (e) => e.catalogEntityId === option.catalogEntityId,
     )?.identity
-    if (
-      option.variants.length !== 1 ||
-      variant.status === "unsupported" ||
-      variant.maximumLayers !== 1 ||
-      variant.inputs.length ||
-      identity?.kind !== "drive-disc"
-    )
+    if (option.variants.length !== 1 || identity?.kind !== "drive-disc")
+      throw new Error(`${option.optionId}: unsupported two-piece definition`)
+    if (variant.status === "unsupported") {
+      // 只接受目录如实声明的 formula-out-of-scope 二件套条款：该套装的
+      // 二件套效果存在但不在当前伤害计算范围，注册表据此声明消费状态；
+      // 其他不可用原因（缺身份、缺证据、语义冲突）仍是数据缺陷。
+      if (variant.reason !== "formula-out-of-scope")
+        throw new Error(`${option.optionId}: unsupported two-piece definition`)
+      const entityId = identity.entityId
+      if (declaredOutOfScopeTwoPiece.has(entityId))
+        throw new Error(
+          `${entityId}: duplicate declared out-of-scope two-piece option`,
+        )
+      declaredOutOfScopeTwoPiece.set(entityId, {
+        contributions: [option.conditionDescription],
+      })
+      continue
+    }
+    if (variant.maximumLayers !== 1 || variant.inputs.length)
       throw new Error(`${option.optionId}: unsupported two-piece definition`)
     const outputs: StaticPanelRules["twoPieceOptions"][number]["outputs"][number][] =
       []
@@ -268,8 +284,39 @@ export async function prepareCalculationData(
       outputs,
     })
   }
+  const driveDiscSets: StaticPanelRules["driveDiscSets"][number][] = []
+  for (const entity of catalog.entities) {
+    if (entity.identity?.kind !== "drive-disc") continue
+    const entityId = entity.identity.entityId
+    const options = twoPieceOptions.filter((o) => o.sourceEntityId === entityId)
+    const outOfScope = declaredOutOfScopeTwoPiece.get(entityId)
+    if (options.length && outOfScope)
+      throw new Error(
+        `${entity.catalogEntityId}: two-piece rules and out-of-scope declarations conflict`,
+      )
+    // 每个已映射套装的二件套消费状态都必须可分类：有规则、或由目录如实
+    // 声明越界；两者都不是时是数据缺陷，生成期即拒绝，不留给消费端猜。
+    if (options.length)
+      driveDiscSets.push({
+        sourceEntityId: entityId,
+        twoPieceConsumption: { kind: "auto-selected-options" },
+      })
+    else if (outOfScope)
+      driveDiscSets.push({
+        sourceEntityId: entityId,
+        twoPieceConsumption: {
+          kind: "declared-out-of-scope",
+          contributions: outOfScope.contributions,
+        },
+      })
+    else
+      throw new Error(
+        `${entity.catalogEntityId}: unclassified two-piece consumption; add verified rules or a declared boundary`,
+      )
+  }
   const panelRules: StaticPanelRules = {
     agents,
+    driveDiscSets,
     twoPieceOptions,
     damageElementInheritance,
   }

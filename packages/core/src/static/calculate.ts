@@ -716,23 +716,46 @@ function battleSelections(
     })
   }
   for (const binding of bindings) {
-    if (binding.kind !== "drive-disc" || binding.configuration.setPieces < 2)
-      continue
+    if (binding.kind !== "drive-disc") continue
+    // 套装身份独立于件数校验：任意件数的 setEntityId 都必须映射到已核实的
+    // 目录套装，不能只靠“≥2 件缺二件套定义”间接拦截未知身份。
+    const coverage = input.data.panelRules.driveDiscSets.find(
+      (s) => s.sourceEntityId === binding.sourceEntityId,
+    )
+    requireValue(
+      coverage,
+      `/bindings/${binding.bindingId}`,
+      "Unknown drive-disc set identity; it must match a cataloged set",
+      "MISSING_REFERENCE",
+    )
+    if (binding.configuration.setPieces < 2) continue
     const options = input.data.panelRules.twoPieceOptions.filter(
       (o) => o.sourceEntityId === binding.sourceEntityId,
     )
-    requireValue(
-      options.length,
-      `/bindings/${binding.bindingId}`,
-      "Missing two-piece definitions",
-      "MISSING_REFERENCE",
-    )
-    for (const option of options)
-      result.push({
-        optionId: option.optionId,
-        bindingId: binding.bindingId,
-        layers: 1,
-      })
+    if (coverage.twoPieceConsumption.kind === "auto-selected-options") {
+      // 规则支持的二件套：按件数自动选中且必须存在；规则丢失仍是数据错误。
+      requireValue(
+        options.length,
+        `/bindings/${binding.bindingId}`,
+        "Missing two-piece definitions",
+        "MISSING_REFERENCE",
+      )
+      for (const option of options)
+        result.push({
+          optionId: option.optionId,
+          bindingId: binding.bindingId,
+          layers: 1,
+        })
+    } else {
+      // 已声明越界的二件套（如护盾值、失衡值条款）：目录如实登记为不可选，
+      // 当前伤害计算不消费；注册表与目录选项不得互相矛盾。
+      requireValue(
+        !options.length,
+        `/bindings/${binding.bindingId}`,
+        "Drive-disc two-piece coverage disagrees with the catalog options",
+        "CONTEXT_MISMATCH",
+      )
+    }
   }
   return result
 }
