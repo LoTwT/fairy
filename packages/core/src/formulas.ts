@@ -244,6 +244,7 @@ export {
 export type { SharpenDamageFormulaInput } from "./formulas/sharpen-damage.ts"
 export {
   ANOMALY_DAMAGE_FORMULA_ID,
+  DISORDER_SOURCE_ATTRIBUTES,
   anomalyDamageFormula,
   calculateStandardDisorderDamageMultiplier,
   calculateStandardVortexDamageMultiplier,

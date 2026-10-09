@@ -736,17 +736,28 @@ describe("fixed-panel team differential fixtures", () => {
         ).toBe(entry.identity.actorEntityId)
       }
     }
-    // 数据版本与固定来源：快照、契约与固定提交在测试里直接可见。
+    // 数据版本与固定来源：历史独立参考与当前消费快照分别断言。
+    // 参考文件由 generate-static-team-differential-reference.mjs 从固定上游
+    // 再生，其 provenance 是冻结时的历史事实（基线 c77e549a、快照 e946d6、
+    // revision 14），不随当前制品演进改写；当前加载的数据用自身快照断言。
+    // 参考数值仍然有效：固定效果提交未变（下行断言），且本批 59 槽位不消费
+    // revision 15 改动的规则（逐槽数值对照在后续用例中锁定）。
     expect(loaded.version).toEqual({
       packageVersion: "0.2.1",
-      contractVersion: 1,
+      contractVersion: 2,
       gameVersion: "3.2",
-      snapshotId: reference.provenance.snapshotId,
+      snapshotId:
+        "sha256:61946f8150f84463116eac55437ecd9d356ec2f375b85b45cd48a4f52a3154e8",
     })
     expect(loaded.catalog.source.commit).toBe(
       reference.provenance.effectSource.commit,
     )
-    expect(reference.provenance.effectsRevision).toBe(14)
+    expect(reference.provenance).toMatchObject({
+      fairyBaseline: "c77e549a6c503e257f554126203380295814fc40",
+      snapshotId:
+        "sha256:e946d6b30b9747a3daeaac034fc14a4dc127c7e550ab63f0c54b1e1d4bf693c4",
+      effectsRevision: 14,
+    })
     // 耀变精通换算比例来自目录映射，与本批记录的 0.002 一致。
     const radiance = loaded.catalog.options.find(
       (option) =>

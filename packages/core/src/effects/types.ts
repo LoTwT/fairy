@@ -640,7 +640,13 @@ export type StaticCatalogDamageItem = {
   | {
       readonly mode: "direct"
       readonly damageMultiplier: number
-      /** 来源归属元数据；不据此重算已传入的直接倍率。 */
+      /**
+       * 来源归属元数据；不据此重算已传入的直接倍率，也不引入时间派生。
+       * 合法枚举与标准紊乱共用同一七值来源（DISORDER_SOURCE_ATTRIBUTES：
+       * fire/electric/ether/ice/physical/auric-ink/frost），显式提供非法值、
+       * null 或 undefined 均拒绝；省略表示不声明归属。存在真实归属
+       * requirement（目录 damageItemRequirements）时按原规则校验。
+       */
       readonly originalAnomalyAttribute?: import("../formulas.ts").CalculateStandardDisorderDamageMultiplierParams["originalAnomalyAttribute"]
     }
   | {

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "14",
+  "revision": "15",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -26055,7 +26055,7 @@
       "effectIds": [
         "w-engine:14137:zzz-hp:eff-ms1r9equ-l7imtb:blk-legacy:refinement:1"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 10,
       "normalizedValue": 10
@@ -26085,7 +26085,7 @@
       "effectIds": [
         "w-engine:14137:zzz-hp:eff-ms1rarze-uhh4r4:blk-legacy:refinement:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 11.5,
       "normalizedValue": 11.5
@@ -26115,7 +26115,7 @@
       "effectIds": [
         "w-engine:14137:zzz-hp:eff-ms1rby7h-cnwy4w:blk-legacy:refinement:3"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 13,
       "normalizedValue": 13
@@ -26145,7 +26145,7 @@
       "effectIds": [
         "w-engine:14137:zzz-hp:eff-ms1rcyzb-2dozs0:blk-legacy:refinement:4"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 14.5,
       "normalizedValue": 14.5
@@ -26175,7 +26175,7 @@
       "effectIds": [
         "w-engine:14137:zzz-hp:eff-ms1rdzo3-dwcqi1:blk-legacy:refinement:5"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 16,
       "normalizedValue": 16
@@ -30273,6 +30273,46 @@
       "supportedRanks": "core 7；潜能 0；层数 1—6",
       "computationTarget": "catalog option variant",
       "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:drive-discs:31200:two-piece-impact-percent",
+      "source": "nanoka-integrated@3.2 drive-discs/31200 /desc2",
+      "kind": "option",
+      "optionId": "nanoka:drive-discs:31200:two-piece-impact-percent",
+      "effectIds": ["disc:31200:nanoka:two-piece-impact-percent:setPieces:2"],
+      "supportedRanks": "2 件起",
+      "computationTarget": "catalog option on the mapped drive-disc entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:drive-discs:31500:two-piece-defense-percent",
+      "source": "nanoka-integrated@3.2 drive-discs/31500 /desc2",
+      "kind": "option",
+      "optionId": "nanoka:drive-discs:31500:two-piece-defense-percent",
+      "effectIds": ["disc:31500:nanoka:two-piece-defense-percent:setPieces:2"],
+      "supportedRanks": "2 件起",
+      "computationTarget": "catalog option on the mapped drive-disc entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:drive-discs:31900:two-piece-shield-value",
+      "source": "nanoka-integrated@3.2 drive-discs/31900 /desc2",
+      "kind": "unsupported-option",
+      "optionId": "nanoka:drive-discs:31900:two-piece-shield-value",
+      "supportedRanks": "2 件起（不可选）",
+      "computationTarget": "declared unavailable option on the mapped drive-disc entity",
+      "status": "out-of-scope",
+      "reason": "二件套条款为施加的护盾值提升15%。护盾值不属于当前伤害计算的任何乘区，也没有已核实的护盾公式；不能把它伪装成属性、增伤或减伤规则。装备该套装 2 件及以上时静态计算正常进行（该条款不影响伤害），显式选择本选项会得到本错误。"
+    },
+    {
+      "supplementId": "nanoka:drive-discs:33200:two-piece-daze-value",
+      "source": "nanoka-integrated@3.2 drive-discs/33200 /desc2",
+      "kind": "unsupported-option",
+      "optionId": "nanoka:drive-discs:33200:two-piece-daze-value",
+      "supportedRanks": "2 件起（不可选）",
+      "computationTarget": "declared unavailable option on the mapped drive-disc entity",
+      "status": "out-of-scope",
+      "reason": "二件套条款为攻击造成的失衡值提升6%。这是失衡值（daze）加成，不是冲击力、攻击力或伤害加成；完整静态入口的 daze-only 分支不计算最终失衡值，当前没有已核实的失衡值乘区。装备该套装 2 件及以上时静态计算正常进行（该条款不影响伤害），显式选择本选项会得到本错误。"
     }
   ],
   "summary": {
@@ -30280,18 +30320,18 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 850,
-    "options": 835,
-    "converted": 1234,
-    "corrected": 50,
+    "rules": 852,
+    "options": 839,
+    "converted": 1229,
+    "corrected": 55,
     "unsupported": 6,
     "supplements": {
-      "records": 10,
-      "rules": 9,
-      "options": 4,
+      "records": 14,
+      "rules": 11,
+      "options": 6,
       "entities": 1,
-      "integrated": 9,
-      "outOfScope": 1
+      "integrated": 11,
+      "outOfScope": 3
     }
   },
   "reverseGaps": ["w-engines/12014", "w-engines/13111"],

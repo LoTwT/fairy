@@ -1,6 +1,7 @@
 import {
   calculateStandardDisorderDamageMultiplier,
   calculateStandardVortexDamageMultiplier,
+  DISORDER_SOURCE_ATTRIBUTES,
 } from "../../formulas.ts"
 import type { LuminizeAnomalyDamageLevelInput } from "../../formulas.ts"
 import { parseEffectRuleSet } from "../parse-effect-rule-set.ts"
@@ -1206,7 +1207,9 @@ function prepareItem(
   const mode = item["mode"]
   const fields =
     mode === "direct"
-      ? ["damageMultiplier"]
+      ? // 直接倍率可携带可选的 originalAnomalyAttribute 归属元数据：
+        // 不据此重算传入倍率，也不引入时间派生；仅按公开类型的枚举校验。
+        ["damageMultiplier", "originalAnomalyAttribute"]
       : mode === "standard-disorder"
         ? ["originalAnomalyAttribute", "baseDurationSeconds", "elapsedSeconds"]
         : mode === "standard-vortex"
@@ -1264,9 +1267,18 @@ function prepareItem(
   if (mode === "standard-disorder")
     expectLiteral(
       item["originalAnomalyAttribute"],
-      ["fire", "electric", "ether", "ice", "physical", "auric-ink", "frost"],
+      DISORDER_SOURCE_ATTRIBUTES,
       { ...checks, pointer: `${pointer}/originalAnomalyAttribute` },
       "disorder source attribute",
+    )
+  if (mode === "direct" && Object.hasOwn(item, "originalAnomalyAttribute"))
+    // 可选元数据只在显式提供时校验：显式 undefined、null、数字、空串与
+    // 未知枚举都拒绝，与 exactOptionalPropertyTypes 的可选语义一致。
+    expectLiteral(
+      item["originalAnomalyAttribute"],
+      DISORDER_SOURCE_ATTRIBUTES,
+      { ...checks, pointer: `${pointer}/originalAnomalyAttribute` },
+      "original anomaly attribute",
     )
   if (mode === "standard-vortex")
     expectLiteral(

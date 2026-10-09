@@ -22,6 +22,7 @@ import {
   type DeveloperRevisionEntry,
 } from "../scripts/static-effects/developer-revision.ts"
 import evidence from "../scripts/static-effects/rank-evidence.json" with { type: "json" }
+import { SUPPLEMENTS } from "../scripts/static-effects/supplements.ts"
 import { SOURCE_SEMANTICS } from "../scripts/static-effects/semantics.ts"
 import type {
   SourceData,
@@ -156,7 +157,7 @@ describe("static data conversion", () => {
       ],
     }
     const result = convertSource(source, functions, [], [])
-    expect(result.definitions.revision).toBe("14")
+    expect(result.definitions.revision).toBe("15")
     for (const option of result.catalog.options) {
       const variant = option.variants[0]!
       const sameBlock = option.optionId.endsWith("unverified-same-block")
@@ -449,7 +450,7 @@ const angelData = (): SourceData => ({
 describe("developer stat revision", () => {
   it("maps the four registered records through the anomaly bonus channel", () => {
     const result = convertSource(angelData(), functions, [], [])
-    expect(result.definitions.revision).toBe("14")
+    expect(result.definitions.revision).toBe("15")
     const option = result.catalog.options.find(
       (o) =>
         o.optionId ===
@@ -741,7 +742,7 @@ const remielData = (): SourceData => ({
 describe("remielle mindscape 2 attribute anomaly scope revision", () => {
   it("adds the [异常] profession and attribute anomaly damage scope from the reviewed text", () => {
     const result = convertSource(remielData(), functions, [], [])
-    expect(result.definitions.revision).toBe("14")
+    expect(result.definitions.revision).toBe("15")
     const option = result.catalog.options.find((o) =>
       o.optionId.includes("eff-ms7tlurw-vhelyf"),
     )!
@@ -891,7 +892,7 @@ describe("remielle mindscape 1 complete anomaly state", () => {
     "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
   it("merges the team and holder records into one corrected complete option", () => {
     const result = convertSource(remielMindscape1Data(), functions, [], [])
-    expect(result.definitions.revision).toBe("14")
+    expect(result.definitions.revision).toBe("15")
     const option = result.catalog.options.find((o) => o.optionId === optionId)!
     expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
     expect(option.conditionDescription).toBe(
@@ -1034,5 +1035,294 @@ describe("remielle mindscape 1 complete anomaly state", () => {
     expect(() => convertSource(note, functions, [], [])).toThrow(
       /block note drift/,
     )
+  })
+})
+
+/**
+ * 青溟笼舍（14137）贯穿增伤按层纠错的合成转换：登记的“固定单次”编码按
+ * 每层值与上限 2 编译；编码或数值漂移时拒绝生成。
+ */
+const qingmingPierceEffect = (
+  effectId: string,
+  value: number,
+  kind: "fixed" | "stacked" = "fixed",
+): SourceEffect => ({
+  id: effectId,
+  scope: "skill",
+  applyTarget: "self",
+  applySituation: "global",
+  skillCategory: "special",
+  skillSubcategoryId: "all-special-ms0fcqv7",
+  skillTargets: [
+    { category: "special", subcategoryId: "all-special-ms0fcqv7" },
+    { category: "ultimate", subcategoryId: null },
+  ],
+  elementFilter: ["以太"],
+  kind,
+  stat: "pierceDmgBonus",
+  value,
+  stackable: false,
+  maxStacks: 1,
+  valuePerStack: 0,
+  defaultStacks: 1,
+  appliesToAnomaly: true,
+  note: "",
+})
+const qingmingPierceIds = [
+  "eff-ms1r9equ-l7imtb",
+  "eff-ms1rarze-uhh4r4",
+  "eff-ms1rby7h-cnwy4w",
+  "eff-ms1rcyzb-2dozs0",
+  "eff-ms1rdzo3-dwcqi1",
+] as const
+const qingmingData = (): SourceData => ({
+  agents: [],
+  driveDiscs: [],
+  skillSubcategories: [],
+  followUpSkillRules: [],
+  wengines: [
+    {
+      id: "Qingming_Birdcage",
+      name: "青溟笼舍",
+      profession: "命破",
+      refinementBuffs: [1, 2, 3, 4, 5].map((rank) => ({
+        effectBlocks: [
+          {
+            id: "blk-legacy",
+            name: `精${rank}`,
+            note: `每层[青溟同行]效果使装备者造成的以太贯穿伤害提升${
+              [10, 11.5, 13, 14.5, 16][rank - 1]
+            }%，最多叠加2层。`,
+            effects: [
+              {
+                id: "legacy-self-critRate",
+                scope: "general",
+                applyTarget: "self",
+                applySituation: "global",
+                elementFilter: "all",
+                kind: "fixed",
+                stat: "critRate",
+                value: [20, 23, 26, 29, 32][rank - 1]!,
+                stackable: false,
+                maxStacks: 1,
+                valuePerStack: 0,
+                defaultStacks: 1,
+                appliesToAnomaly: true,
+                note: "",
+              },
+              qingmingPierceEffect(
+                qingmingPierceIds[rank - 1]!,
+                [10, 11.5, 13, 14.5, 16][rank - 1]!,
+              ),
+            ],
+          },
+        ],
+      })),
+    },
+  ],
+})
+
+describe("qingming birdcage pierce stack correction", () => {
+  it("compiles the registered fixed encodings as per-layer contributions with a two-layer cap", () => {
+    const result = convertSource(qingmingData(), functions, [], [])
+    expect(result.definitions.revision).toBe("15")
+    for (const [index, effectId] of qingmingPierceIds.entries()) {
+      const option = result.catalog.options.find((o) =>
+        o.optionId.includes(effectId),
+      )!
+      expect(option.variants).toHaveLength(1)
+      const variant = option.variants[0]!
+      expect(variant.status).toBe("corrected")
+      expect(variant.maximumLayers).toBe(2)
+      expect(variant.differences).toEqual([
+        "qingming-birdcage-pierce-stack-layers",
+      ])
+      const rule = result.definitions.effects.find(
+        (entry): entry is ContributionRule =>
+          entry.kind === "contribution" && entry.effectId.includes(effectId),
+      )!
+      expect(rule.activation).toMatchObject({
+        kind: "supplied",
+        maximumLayers: { value: 2 },
+      })
+      expect((rule.parameters.amount as { value: number }).value).toBeCloseTo(
+        [0.1, 0.115, 0.13, 0.145, 0.16][index]!,
+        12,
+      )
+    }
+    // 同块的固定暴击率条款不按层翻倍。
+    const critOption = result.catalog.options.find((o) =>
+      o.optionId.includes("legacy-self-critRate"),
+    )!
+    expect(critOption.variants.every((v) => v.maximumLayers === 1)).toBe(true)
+    expect(
+      result.catalog.differences.some(
+        (d) => d.differenceId === "qingming-birdcage-pierce-stack-layers",
+      ),
+    ).toBe(true)
+  })
+
+  it("rejects drifted encodings instead of silently re-layering them", () => {
+    const alreadyStacked = qingmingData()
+    alreadyStacked.wengines[0]!.refinementBuffs![0]!.effectBlocks![0]!.effects[1] =
+      qingmingPierceEffect(qingmingPierceIds[0]!, 10, "stacked")
+    expect(() => convertSource(alreadyStacked, functions, [], [])).toThrowError(
+      /registered fixed encoding/,
+    )
+    const valueDrift = qingmingData()
+    valueDrift.wengines[0]!.refinementBuffs![0]!.effectBlocks![0]!.effects[1] =
+      qingmingPierceEffect(qingmingPierceIds[0]!, 12)
+    expect(() => convertSource(valueDrift, functions, [], [])).toThrowError(
+      /registered fixed encoding/,
+    )
+  })
+})
+
+/** 合成四个缺失二件套机器记录的驱动盘实体；note 按需注入。 */
+const discSetData = (
+  note: string | null = null,
+  withMachineRecord = false,
+): SourceData => ({
+  agents: [],
+  skillSubcategories: [],
+  followUpSkillRules: [],
+  wengines: [],
+  driveDiscs: [
+    {
+      id: "SuitShockstarDisco",
+      name: "震星迪斯科",
+      twoPieceEffectBlocks:
+        note === null
+          ? []
+          : [
+              {
+                id: "blk-ms0fmk43-cd0cj9",
+                name: "2件套",
+                note,
+                effects: withMachineRecord
+                  ? [
+                      {
+                        id: "eff-test",
+                        scope: "general",
+                        applyTarget: "self",
+                        applySituation: "global",
+                        elementFilter: "all",
+                        kind: "fixed",
+                        stat: "critRate",
+                        value: 6,
+                      },
+                    ]
+                  : [],
+              },
+            ],
+    },
+    { id: "SuitSoulRock", name: "灵魂摇滚" },
+    { id: "SuitProtoPunk", name: "原始朋克" },
+    { id: "SuitKingoftheSummit", name: "山大王" },
+  ],
+})
+
+const driveDiscSupplements = SUPPLEMENTS.filter((supplement) =>
+  supplement.supplementId.startsWith("nanoka:drive-discs:"),
+)
+
+describe("drive-disc two-piece supplements and boundaries", () => {
+  it("registers the impact and defense rules plus the two out-of-scope declarations", () => {
+    const result = convertSource(
+      discSetData("冲击力+6%。"),
+      functions,
+      [],
+      driveDiscSupplements,
+    )
+    const impact = result.catalog.options.find(
+      (o) => o.optionId === "nanoka:drive-discs:31200:two-piece-impact-percent",
+    )!
+    expect(impact.variants[0]!.configuration).toEqual({ minimumSetPieces: 2 })
+    expect(impact.variants[0]!.effectIds).toEqual([
+      "disc:31200:nanoka:two-piece-impact-percent:setPieces:2",
+    ])
+    const impactRule = result.definitions.effects.find(
+      (entry): entry is ContributionRule =>
+        entry.kind === "contribution" &&
+        entry.effectId ===
+          "disc:31200:nanoka:two-piece-impact-percent:setPieces:2",
+    )!
+    expect(impactRule.operation).toMatchObject({
+      kind: "stat-adjustment",
+      stat: "impact",
+      stage: "initial-percentage",
+    })
+    const defense = result.catalog.options.find(
+      (o) =>
+        o.optionId === "nanoka:drive-discs:31500:two-piece-defense-percent",
+    )!
+    expect(defense.variants[0]!.effectIds).toEqual([
+      "disc:31500:nanoka:two-piece-defense-percent:setPieces:2",
+    ])
+    for (const optionId of [
+      "nanoka:drive-discs:31900:two-piece-shield-value",
+      "nanoka:drive-discs:33200:two-piece-daze-value",
+    ]) {
+      const boundary = result.catalog.options.find(
+        (o) => o.optionId === optionId,
+      )!
+      expect(boundary.variants).toHaveLength(1)
+      expect(boundary.variants[0]!.status).toBe("unsupported")
+      expect(boundary.variants[0]!.reason).toBe("formula-out-of-scope")
+      expect(boundary.variants[0]!.effectIds).toEqual([])
+      expect(boundary.variants[0]!.explanation).toContain(
+        optionId.includes("31900") ? "护盾值" : "失衡值",
+      )
+    }
+    const outOfScope = result.coverage.supplementalRecords.filter(
+      (record) => record.status === "out-of-scope",
+    )
+    expect(outOfScope.map((record) => record.supplementId)).toContain(
+      "nanoka:drive-discs:31900:two-piece-shield-value",
+    )
+  })
+
+  it("rejects a fixed-source two-piece record colliding with the supplement", () => {
+    const withRecord = discSetData("冲击力+6%。", true)
+    expect(() =>
+      convertSource(withRecord, functions, [], driveDiscSupplements),
+    ).toThrowError(/collides with the fixed-source option/)
+  })
+
+  it("rejects a drifted two-piece block note", () => {
+    const drifted = discSetData("冲击力+7%。")
+    expect(() =>
+      convertSource(drifted, functions, [], driveDiscSupplements),
+    ).toThrowError(/two-piece block note drift/)
+  })
+
+  it("rejects a boundary declaration colliding with a fixed-source two-piece record", () => {
+    const protoPunkRecord = discSetData()
+    protoPunkRecord.driveDiscs[2] = {
+      id: "SuitProtoPunk",
+      name: "原始朋克",
+      twoPieceEffectBlocks: [
+        {
+          id: "blk-test",
+          name: "2件套",
+          note: "",
+          effects: [
+            {
+              id: "eff-test",
+              scope: "general",
+              applyTarget: "self",
+              applySituation: "global",
+              elementFilter: "all",
+              kind: "fixed",
+              stat: "critRate",
+              value: 6,
+            },
+          ],
+        },
+      ],
+    }
+    expect(() =>
+      convertSource(protoPunkRecord, functions, [], driveDiscSupplements),
+    ).toThrowError(/collides with the fixed-source option/)
   })
 })

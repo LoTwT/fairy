@@ -428,6 +428,51 @@ const twoPiecePack = (entity: SourceEntity): SourcePack => ({
   selfMods: entity.twoPieceMods ?? {},
 })
 
+/**
+ * 驱动盘二件套补充的防漂移守卫：目标必须是已映射的驱动盘实体；固定来源
+ * 不得已有同套装的二件套选项（每条收集到的二件套记录都会生成选项，补充
+ * 与真实记录并存会重复贡献）；来源二件套块留有 note 时必须与补充声明的
+ * 条款逐字一致。不可选的越界声明同样不得与真实二件套记录并存。
+ */
+function verifyDriveDiscTwoPieceSupplement(
+  data: SourceData,
+  entities: readonly StaticCatalogEntity[],
+  options: readonly StaticCatalogOption[],
+  supplement: {
+    readonly catalogEntityId: string
+    readonly conditionDescription: string
+  },
+): void {
+  const entity = entities.find(
+    (candidate) => candidate.catalogEntityId === supplement.catalogEntityId,
+  )
+  if (!entity || !entity.identity || entity.identity.kind !== "drive-disc")
+    throw new Error(
+      `Drive-disc two-piece supplement expects a mapped drive-disc entity: ${supplement.catalogEntityId}`,
+    )
+  const collision = options.find(
+    (option) =>
+      option.catalogEntityId === supplement.catalogEntityId &&
+      option.variants.some((v) => v.configuration.minimumSetPieces === 2),
+  )
+  if (collision)
+    throw new Error(
+      `Drive-disc two-piece supplement collides with the fixed-source option ${collision.optionId}: ${supplement.catalogEntityId}`,
+    )
+  const raw = data.driveDiscs.find((d) => d.id === entity.upstreamId)
+  if (!raw)
+    throw new Error(
+      `Drive-disc two-piece supplement lost its fixed-source entity: ${supplement.catalogEntityId}`,
+    )
+  const note = (raw.twoPieceEffectBlocks ?? []).find(
+    (block) => (block.note ?? "") !== "",
+  )?.note
+  if (note !== undefined && note !== supplement.conditionDescription)
+    throw new Error(
+      `Drive-disc two-piece block note drift at ${supplement.catalogEntityId}: ${JSON.stringify(note)} ≠ ${JSON.stringify(supplement.conditionDescription)}`,
+    )
+}
+
 export function collectSource(
   data: SourceData,
   functions: SourceNormalization,
@@ -1219,6 +1264,40 @@ function compile(
       ],
     }
   }
+  if (semantics?.kind === "stacked-mechanism-correction") {
+    // 防漂移：原始与规范化记录都必须仍是登记过的“固定单次”编码且数值一致；
+    // 上游修正或记录漂移时拒绝生成，不静默按层编译另一份含义。
+    for (const [label, document] of [
+      ["raw", record.raw],
+      ["normalized", record.normalized],
+    ] as const) {
+      if (
+        document === undefined ||
+        document.kind !== "fixed" ||
+        document.stackable !== false ||
+        document.maxStacks !== 1 ||
+        document.valuePerStack !== 0 ||
+        document.value !== semantics.expectedSourceValue
+      )
+        throw new Error(
+          `Stacked mechanism correction expects the registered fixed encoding at ${record.pointer} (${label}): value=${semantics.expectedSourceValue}, maxStacks=1`,
+        )
+    }
+    // 按层编译：每层值保持来源 value（描述的单层百分比），激活层数上限改用
+    // 登记值；条件、稳定 effectId / optionId 与参数表不动。
+    variant = {
+      ...variant,
+      status: "corrected",
+      maximumLayers: semantics.maximumLayers,
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
   if (semantics?.kind === "explicit-selection-state") {
     variant = {
       ...variant,
@@ -1934,6 +2013,49 @@ export function convertSource(
       })
       continue
     }
+    if (supplement.kind === "unsupported-option") {
+      // 如实不可选的声明选项：登记 formula-out-of-scope 变体与越界去向，
+      // 不创建规则；驱动盘二件套声明同样执行防漂移守卫。
+      if (supplement.minimumSetPieces === 2)
+        verifyDriveDiscTwoPieceSupplement(data, collected.entities, options, {
+          catalogEntityId: supplement.catalogEntityId,
+          conditionDescription: supplement.conditionDescription,
+        })
+      options.push({
+        optionId: supplement.optionId,
+        catalogEntityId: supplement.catalogEntityId,
+        name: supplement.name,
+        conditionDescription: supplement.conditionDescription,
+        target: supplement.target,
+        variants: [
+          {
+            configuration: { minimumSetPieces: supplement.minimumSetPieces },
+            status: "unsupported",
+            reason: supplement.reason,
+            explanation: supplement.explanation,
+            references: supplement.evidence.map((ref) =>
+              nanokaReference(ref.path, ref.pointer),
+            ) as unknown as NonEmpty<SourceReference>,
+            effectIds: [],
+            maximumLayers: 1,
+            inputs: [],
+            applicability: {},
+            differences: [],
+          },
+        ],
+      })
+      supplementalRecords.push({
+        supplementId: supplement.supplementId,
+        source: supplement.source,
+        kind: supplement.kind,
+        optionId: supplement.optionId,
+        supportedRanks: supplement.supportedRanks,
+        computationTarget: supplement.computationTarget,
+        status: "out-of-scope",
+        reason: supplement.explanation,
+      })
+      continue
+    }
     const rule: EffectRule = {
       kind: "contribution",
       effectId: supplement.rule.effectId,
@@ -1996,6 +2118,11 @@ export function convertSource(
         throw new Error(
           `Unknown supplement catalog entity: ${supplement.catalogEntityId}`,
         )
+      if (supplement.variant.configuration.minimumSetPieces === 2)
+        verifyDriveDiscTwoPieceSupplement(data, collected.entities, options, {
+          catalogEntityId: supplement.catalogEntityId,
+          conditionDescription: supplement.variant.conditionDescription,
+        })
       options.push({
         optionId: supplement.optionId,
         catalogEntityId: supplement.catalogEntityId,
@@ -2033,7 +2160,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "14",
+    revision: "15",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -2318,6 +2445,25 @@ export function convertSource(
             )
             .flatMap((variant) => variant.references),
         ),
+      },
+      {
+        differenceId: "qingming-birdcage-pierce-stack-layers",
+        explanation:
+          "青溟笼舍（14137）精炼 1—5 的以太贯穿增伤：块 note 与 Nanoka 五档天赋（w-engines/14137/details.zh.json 的 /talents/1—5/desc）同文，把条款写在“每层[青溟同行]效果使装备者造成的以太伤害提升…%，[终结技]或[强化特殊技]造成的以太贯穿伤害提升…”之下，且全句声明最多叠加 2 层；同一块的以太增伤记录也按 kind=stacked、每层 8—12.8%、maxStacks=2 编码。固定来源 fac62407 却把贯穿增伤记为 kind=fixed、value=10/11.5/13/14.5/16、stackable=false、maxStacks=1、valuePerStack=0：resolveEffectBaseValue 对 fixed 非 stackable 直接返回 value，层数不参与取值，两层配置只贡献单层值。Fairy 按具名语义纠错改为按层编译：每层值保持来源 value（即描述的单层百分比），选项与规则激活层数上限为 2，调用方按真实层数显式选择，0 层表示关闭；“进入接战直接获得 2 层”与 15 秒刷新不模拟，不把任何时点自动视为满层。effectId、optionId、精炼匹配、持有者、以太元素、贯穿伤害种类与[终结技]或[强化特殊技]（all-special-ms0fcqv7 为强化特殊技目标，不是任意特殊技）等既有条件保持不变；同块的固定暴击率条款不按层翻倍。证据级别为“按一致描述纠错”（固定来源块 note、Nanoka 中英文与上游 note 相互一致），未经游戏实测；五档两层按描述应为 20/23/26/29/32%。",
+        references: [
+          ...coverage
+            .filter(
+              (r) =>
+                r.catalogEntityId === "w-engines:Qingming_Birdcage" &&
+                r.stat === "pierceDmgBonus",
+            )
+            .map((r) => reference(r.pointer)),
+          nanokaReference("w-engines/14137/details.zh.json", "/talents/1/desc"),
+          nanokaReference("w-engines/14137/details.zh.json", "/talents/2/desc"),
+          nanokaReference("w-engines/14137/details.zh.json", "/talents/3/desc"),
+          nanokaReference("w-engines/14137/details.zh.json", "/talents/4/desc"),
+          nanokaReference("w-engines/14137/details.zh.json", "/talents/5/desc"),
+        ],
       },
     ],
   }
