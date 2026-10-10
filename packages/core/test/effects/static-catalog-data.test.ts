@@ -1852,7 +1852,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("16")
+    expect(catalog.revision).toBe("17")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -4651,10 +4651,12 @@ describe("velina cyclone catalog linkage", () => {
       "../../../data/definitions/effects/static-coverage.json",
     ) as { summary: { supplements: Record<string, number> } }
     expect(coverage.summary.supplements).toMatchObject({
-      records: 14,
-      integrated: 11,
-      rules: 11,
-      options: 6,
+      // 批次 02 新增 13 条音擎缺失被动补充（12 项条款；索魂影眸按评审
+      // R01 修复拆为 1/2/3 有效魂锁三个互斥完整档位）。
+      records: 27,
+      integrated: 24,
+      rules: 24,
+      options: 19,
       entities: 1,
       outOfScope: 3,
     })
@@ -7382,5 +7384,1013 @@ describe("batch 01 wengine rule corrections", () => {
         catalog.differences.some((d) => d.differenceId === differenceId),
         differenceId,
       ).toBe(true)
+  })
+})
+
+describe("w-engine missing passive supplements (batch 02)", () => {
+  /**
+   * 行为探针：以指定属性的最终值作为唯一伤害项的缩放属性（倍率 1），
+   * baseDamage 即该实体该属性的最终面板值；冲击力/防御由此进入真实读取链。
+   */
+  const wengineProbe = (
+    holderAgentEntityId: string,
+    engineEntityId: string,
+    refinement: 1 | 2 | 3 | 4 | 5,
+    selections: readonly { optionId: string; layers: number }[],
+    probeStat: "impact" | "defense" | "health" = "impact",
+    overrides: Partial<StaticCatalogDamageInput> = {},
+  ): StaticCatalogDamageInput => {
+    const base = inputFor()
+    const actor = base.world.entities[0]!
+    if (actor.kind !== "actor") throw new Error("fixture")
+    const probeValues: Record<string, number> = {
+      impact: 170,
+      defense: 800,
+      health: 24000,
+    }
+    const world =
+      probeStat === "impact"
+        ? base.world
+        : {
+            ...base.world,
+            entities: base.world.entities.map((entity) =>
+              entity.kind === "actor" && entity.entityId === "entity:attacker"
+                ? {
+                    ...entity,
+                    generalStats: {
+                      ...entity.generalStats,
+                      [probeStat]: general(probeValues[probeStat]!),
+                    },
+                  }
+                : entity,
+            ),
+          }
+    return {
+      ...base,
+      definitions,
+      catalog,
+      world,
+      bindings: [
+        {
+          kind: "w-engine",
+          bindingId: "binding:weapon",
+          sourceEntityId: engineEntityId,
+          holderId: "entity:attacker",
+          eligible: true,
+          configuration: { refinement },
+        },
+      ],
+      actorSources: [
+        { entityId: "entity:attacker", agentEntityId: holderAgentEntityId },
+      ],
+      selections: selections.map((selection) => ({
+        optionId: selection.optionId,
+        bindingId: "binding:weapon",
+        layers: selection.layers,
+      })),
+      hit: {
+        ...base.hit,
+        damageItems: [
+          {
+            mode: "direct",
+            role: "base",
+            itemId: "probe",
+            stat: probeStat,
+            statSource: { entityId: "entity:attacker" },
+            damageMultiplier: 1,
+          },
+        ],
+      },
+      damage: base.damage as Extract<
+        StaticCatalogDamageInput["damage"],
+        { kind: "regular" }
+      >,
+      ...overrides,
+    }
+  }
+  const layerIssue = (input: StaticCatalogDamageInput) =>
+    expect(calculateStaticDamageFromCatalog(input)).toMatchObject({
+      ok: false,
+      issues: [{ code: "INVALID_INPUT", pointer: "/selections/0/layers" }],
+    })
+
+  it("applies Identity Base's on-hit defense at all refinements (M19)", () => {
+    const option = "nanoka:w-engines:12013:defense-on-hit"
+    for (const [refinement, expected] of [
+      [1, 960],
+      [2, 984],
+      [3, 1008],
+      [4, 1032],
+      [5, 1056],
+    ] as const) {
+      const result = calculateCatalogResult(
+        wengineProbe(
+          "1071",
+          "12013",
+          refinement,
+          [{ optionId: option, layers: 1 }],
+          "defense",
+        ),
+      )
+      expect(result.factors.nonCritical.baseDamage, `R${refinement}`).toBe(
+        expected,
+      )
+    }
+    // 0 层表示关闭；未选择同样零贡献。
+    for (const selections of [[{ optionId: option, layers: 0 }], []] as const) {
+      const result = calculateCatalogResult(
+        wengineProbe("1071", "12013", 1, [...selections], "defense"),
+      )
+      expect(result.factors.nonCritical.baseDamage).toBe(800)
+    }
+    layerIssue(
+      wengineProbe(
+        "1071",
+        "12013",
+        1,
+        [{ optionId: option, layers: 2 }],
+        "defense",
+      ),
+    )
+    // 错误职业装备（击破持防护音擎）不贡献。
+    const wrongProfession = calculateCatalogResult(
+      wengineProbe(
+        "1011",
+        "12013",
+        1,
+        [{ optionId: option, layers: 1 }],
+        "defense",
+      ),
+    )
+    expect(wrongProfession.factors.nonCritical.baseDamage).toBe(800)
+  })
+
+  it("applies Restrainer's per-layer basic-attack damage bonus (M20)", () => {
+    const option = "nanoka:w-engines:14114:basic-attack-damage-stacks"
+    const bonusAt = (refinement: 1 | 5, layers: number) =>
+      calculateCatalogResult(
+        wengineProbe("1011", "14114", refinement, [
+          { optionId: option, layers },
+        ]),
+      ).factors.nonCritical.damageBonus
+    for (const [refinement, layers, expected] of [
+      [1, 0, 1],
+      [1, 1, 1.06],
+      [1, 3, 1.18],
+      [1, 5, 1.3],
+      [5, 5, 1.6],
+    ] as const)
+      expect(
+        bonusAt(refinement, layers),
+        `R${refinement}L${layers}`,
+      ).toBeCloseTo(expected, 12)
+    layerIssue(
+      wengineProbe("1011", "14114", 1, [{ optionId: option, layers: 6 }]),
+    )
+    // 受益范围是普通攻击直伤：非 basic 分类不受益；贯穿/锐化段仍受益。
+    const attackProbe = (category: "basic" | "dash") => ({
+      ...inputFor().hit,
+      skillCategory: category,
+      damageItems: [
+        {
+          mode: "direct",
+          role: "base",
+          itemId: "probe",
+          stat: "attack",
+          statSource: { entityId: "entity:attacker" },
+          damageMultiplier: 1,
+        },
+      ],
+    })
+    expect(
+      calculateCatalogResult(
+        wengineProbe(
+          "1011",
+          "14114",
+          1,
+          [{ optionId: option, layers: 5 }],
+          "impact",
+          {
+            hit: attackProbe(
+              "dash",
+            ) as unknown as StaticCatalogDamageInput["hit"],
+          },
+        ),
+      ).factors.nonCritical.damageBonus,
+    ).toBe(1)
+    expect(
+      calculateCatalogResult(
+        wengineProbe(
+          "1011",
+          "14114",
+          1,
+          [{ optionId: option, layers: 5 }],
+          "impact",
+          {
+            hit: attackProbe(
+              "basic",
+            ) as unknown as StaticCatalogDamageInput["hit"],
+          },
+        ),
+      ).factors.nonCritical.damageBonus,
+    ).toBeCloseTo(1.3, 12)
+    // 评审 R02 修复：目录把 skillTargets 展开为归一分类标签，扳机
+    // “普通攻击：协奏狙杀”（agents/1361 本体为追加攻击）可以由原始
+    // follow-up 分类 + 本人 basic 目标合法表达，仍属于[普通攻击]受益范围。
+    const followUpProbe = (extra: {
+      skillTargetIds?: string[]
+      skillTags?: string[]
+    }) =>
+      ({
+        ...inputFor().hit,
+        skillCategory: "follow-up",
+        ...extra,
+        damageItems: [
+          {
+            mode: "direct",
+            role: "base",
+            itemId: "probe",
+            stat: "attack",
+            statSource: { entityId: "entity:attacker" },
+            damageMultiplier: 1,
+          },
+        ],
+      }) as unknown as StaticCatalogDamageInput["hit"]
+    expect(
+      calculateCatalogResult(
+        wengineProbe(
+          "1361",
+          "14114",
+          1,
+          [{ optionId: option, layers: 5 }],
+          "impact",
+          {
+            hit: followUpProbe({
+              skillTargetIds: ["zzz-hp:skill:trigger-basic-ms0bzb1a"],
+            }),
+          },
+        ),
+      ).factors.nonCritical.damageBonus,
+      "raw follow-up + 本人 basic 目标",
+    ).toBeCloseTo(1.3, 12)
+    // 调用方保留的 basic 分类标签同样是目录承认的复合普攻身份。
+    expect(
+      calculateCatalogResult(
+        wengineProbe(
+          "1361",
+          "14114",
+          1,
+          [{ optionId: option, layers: 5 }],
+          "impact",
+          {
+            hit: followUpProbe({ skillTags: ["zzz-hp:category:basic"] }),
+          },
+        ),
+      ).factors.nonCritical.damageBonus,
+      "保留 basic 标签的复合命中",
+    ).toBeCloseTo(1.3, 12)
+    // 纯追加身份（无任何 basic 分类事实）不受益，不把所有追加攻击当普攻。
+    expect(
+      calculateCatalogResult(
+        wengineProbe(
+          "1361",
+          "14114",
+          1,
+          [{ optionId: option, layers: 5 }],
+          "impact",
+          {
+            hit: followUpProbe({}),
+          },
+        ),
+      ).factors.nonCritical.damageBonus,
+      "纯 follow-up",
+    ).toBe(1)
+    for (const kind of ["sheer", "sharpen"] as const) {
+      const base = inputFor()
+      const { defense, ...common } = base.damage as Extract<
+        typeof base.damage,
+        { kind: "regular" }
+      >
+      const result = calculateCatalogResult(
+        wengineProbe(
+          "1011",
+          "14114",
+          1,
+          [{ optionId: option, layers: 5 }],
+          "impact",
+          {
+            damage: {
+              ...common,
+              ...(kind === "sheer"
+                ? { sheerDamageBonus: [] }
+                : { sharpenDamageBonus: [], defense }),
+              kind,
+            } as unknown as Extract<
+              StaticCatalogDamageInput["damage"],
+              { kind: "regular" }
+            >,
+            ...(kind === "sharpen"
+              ? {
+                  world: {
+                    ...base.world,
+                    entities: base.world.entities.map((entity) =>
+                      entity.kind === "actor" &&
+                      entity.entityId === "entity:attacker"
+                        ? {
+                            ...entity,
+                            directStats: {
+                              ...entity.directStats,
+                              sharpCriticalDamage: {
+                                baseValue: 1.5,
+                                additions: [],
+                              },
+                            },
+                          }
+                        : entity,
+                    ),
+                  },
+                }
+              : {}),
+          },
+        ),
+      )
+      expect(result.factors.nonCritical.damageBonus, kind).toBeCloseTo(1.3, 12)
+    }
+    // 受益对象是装备者：队友命中不享受该增伤。
+    const base = wengineProbe("1011", "14114", 1, [
+      { optionId: option, layers: 5 },
+    ])
+    const holder = base.world.entities[0]!
+    const teammateHit = calculateCatalogResult({
+      ...base,
+      world: {
+        ...base.world,
+        entities: [
+          ...base.world.entities,
+          { ...holder, entityId: "entity:teammate" },
+        ],
+      },
+      actorSources: [
+        ...base.actorSources,
+        { entityId: "entity:teammate", agentEntityId: "1011" },
+      ],
+      hit: {
+        ...base.hit,
+        actorId: "entity:teammate",
+        damageItems: [
+          base.hit.damageItems.map((item) => ({
+            ...item,
+            statSource: { entityId: "entity:teammate" } as const,
+          }))[0]!,
+        ],
+      },
+    })
+    expect(teammateHit.factors.nonCritical.damageBonus).toBe(1)
+  })
+
+  it("applies Reverb Mark I's team impact after EX to every teammate", () => {
+    const option = "nanoka:w-engines:12004:team-impact-after-ex"
+    const base = wengineProbe("1031", "12004", 1, [
+      { optionId: option, layers: 1 },
+    ])
+    const holder = base.world.entities[0]!
+    const result = calculateCatalogResult({
+      ...base,
+      world: {
+        ...base.world,
+        entities: [
+          ...base.world.entities,
+          { ...holder, entityId: "entity:teammate" },
+        ],
+      },
+      actorSources: [
+        ...base.actorSources,
+        { entityId: "entity:teammate", agentEntityId: "1251" },
+      ],
+      hit: {
+        ...base.hit,
+        damageItems: [
+          ...base.hit.damageItems,
+          {
+            mode: "direct",
+            role: "base",
+            itemId: "probe-teammate",
+            stat: "impact",
+            statSource: { entityId: "entity:teammate" },
+            damageMultiplier: 1,
+          },
+        ],
+      },
+    })
+    // 装备者与队友的最终冲击力都乘 1.08（170 × 1.08 = 183.6）。
+    expect(result.factors.nonCritical.baseDamage).toBeCloseTo(367.2, 9)
+    const impacts = result.evaluation.attributes.filter(
+      (attribute) =>
+        attribute.stat === "impact" && attribute.stage === "current",
+    )
+    expect(impacts).toHaveLength(2)
+    for (const attribute of impacts)
+      expect(attribute.value.value).toBeCloseTo(183.6, 9)
+    // R5 提升到 12%；关闭与错误职业（击破持支援音擎）不贡献。
+    const r5 = calculateCatalogResult(
+      wengineProbe("1031", "12004", 5, [{ optionId: option, layers: 1 }]),
+    )
+    expect(r5.factors.nonCritical.baseDamage).toBeCloseTo(190.4, 9)
+    for (const selections of [[{ optionId: option, layers: 0 }], []] as const) {
+      expect(
+        calculateCatalogResult(
+          wengineProbe("1031", "12004", 1, [...selections]),
+        ).factors.nonCritical.baseDamage,
+      ).toBe(170)
+    }
+    expect(
+      calculateCatalogResult(
+        wengineProbe("1011", "12004", 1, [{ optionId: option, layers: 1 }]),
+      ).factors.nonCritical.baseDamage,
+    ).toBe(170)
+  })
+
+  it("applies Vortex Hatchet's active-character impact and lets Qingyi's conversion read it", () => {
+    const option = "nanoka:w-engines:12009:impact-as-active-character"
+    for (const [refinement, expected] of [
+      [1, 185.3],
+      [5, 192.1],
+    ] as const)
+      expect(
+        calculateCatalogResult(
+          wengineProbe("1251", "12009", refinement, [
+            { optionId: option, layers: 1 },
+          ]),
+        ).factors.nonCritical.baseDamage,
+        `R${refinement}`,
+      ).toBeCloseTo(expected, 9)
+    expect(
+      calculateCatalogResult(
+        wengineProbe("1251", "12009", 1, [{ optionId: option, layers: 0 }]),
+      ).factors.nonCritical.baseDamage,
+    ).toBe(170)
+    // 真实消费链：青衣冲击力转化读取最终冲击力（攻击 1000、倍率 2）。
+    const conversionOption =
+      "agents:qingyi:mindscape:0:blk-ms4b9fw6-467qoj:eff-ms4b9fw6-990jlw"
+    const conversionInput = agentInput("1251", [conversionOption])
+    const conversionAt = (refinement: 1 | 5 | null) =>
+      calculateCatalogResult({
+        ...conversionInput,
+        bindings: [
+          ...conversionInput.bindings,
+          {
+            kind: "w-engine",
+            bindingId: "binding:weapon",
+            sourceEntityId: "12009",
+            holderId: "entity:attacker",
+            eligible: true,
+            configuration: { refinement: refinement ?? 1 },
+          },
+        ],
+        ...(refinement === null
+          ? {}
+          : {
+              selections: [
+                ...conversionInput.selections,
+                { optionId: option, bindingId: "binding:weapon", layers: 1 },
+              ],
+            }),
+      }).factors.nonCritical.baseDamage
+    expect(conversionAt(null)).toBe(2600)
+    expect(conversionAt(1)).toBeCloseTo(2783.6, 9)
+    expect(conversionAt(5)).toBeCloseTo(2865.2, 9)
+  })
+
+  it("applies Steam Oven's impact per explicitly retained layer", () => {
+    const option = "nanoka:w-engines:13005:impact-per-retained-layer"
+    for (const [refinement, layers, expected] of [
+      [1, 8, 197.2],
+      [3, 4, 187.68],
+      [5, 8, 213.52],
+    ] as const)
+      expect(
+        calculateCatalogResult(
+          wengineProbe("1011", "13005", refinement, [
+            { optionId: option, layers },
+          ]),
+        ).factors.nonCritical.baseDamage,
+        `R${refinement}L${layers}`,
+      ).toBeCloseTo(expected, 9)
+    expect(
+      calculateCatalogResult(
+        wengineProbe("1011", "13005", 1, [{ optionId: option, layers: 0 }]),
+      ).factors.nonCritical.baseDamage,
+    ).toBe(170)
+    layerIssue(
+      wengineProbe("1011", "13005", 1, [{ optionId: option, layers: 9 }]),
+    )
+  })
+
+  it("applies Original Transmorpher's on-hit impact beside the existing HP option", () => {
+    const option = "nanoka:w-engines:13007:impact-on-hit"
+    for (const [refinement, expected] of [
+      [1, 187],
+      [5, 197.2],
+    ] as const)
+      expect(
+        calculateCatalogResult(
+          wengineProbe("1121", "13007", refinement, [
+            { optionId: option, layers: 1 },
+          ]),
+        ).factors.nonCritical.baseDamage,
+        `R${refinement}`,
+      ).toBeCloseTo(expected, 9)
+    // 与既有生命值上限选项共存：两条贡献各出现一次，互不重复。
+    const hpOption =
+      "w-engines:Original_Transmorpher:refinement:blk-ms1qaz5k-xk3ebx:eff-ms1qaz5k-v8hcwk"
+    const coexistBase = wengineProbe(
+      "1121",
+      "13007",
+      1,
+      [
+        { optionId: option, layers: 1 },
+        { optionId: hpOption, layers: 1 },
+      ],
+      "health",
+    )
+    const result = calculateCatalogResult({
+      ...coexistBase,
+      hit: {
+        ...coexistBase.hit,
+        damageItems: [
+          ...coexistBase.hit.damageItems,
+          {
+            mode: "direct",
+            role: "base",
+            itemId: "probe-impact",
+            stat: "impact",
+            statSource: { entityId: "entity:attacker" },
+            damageMultiplier: 1,
+          },
+        ],
+      },
+    })
+    expect(result.factors.nonCritical.baseDamage).toBeCloseTo(
+      24000 * 1.08 + 170 * 1.1,
+      9,
+    )
+    const catalogOptions = catalog.options.filter(
+      (o) => o.catalogEntityId === "w-engines:Original_Transmorpher",
+    )
+    expect(catalogOptions).toHaveLength(6)
+    expect(
+      catalogOptions.filter((o) => o.optionId.startsWith("nanoka:")),
+    ).toEqual([catalogOptions.find((o) => o.optionId === option)!])
+  })
+
+  it("applies Hellfire Gears' impact per EX stack beside the corrected flat regen", () => {
+    const option = "nanoka:w-engines:14110:impact-per-stack-after-ex"
+    for (const [refinement, layers, expected] of [
+      [1, 1, 187],
+      [1, 2, 204],
+      [5, 2, 238],
+    ] as const)
+      expect(
+        calculateCatalogResult(
+          wengineProbe("1011", "14110", refinement, [
+            { optionId: option, layers },
+          ]),
+        ).factors.nonCritical.baseDamage,
+        `R${refinement}L${layers}`,
+      ).toBeCloseTo(expected, 9)
+    layerIssue(
+      wengineProbe("1011", "14110", 1, [{ optionId: option, layers: 3 }]),
+    )
+    // 既有回能选项保留且批次 01 纠正不变：R1 固定 0.6 点/秒。
+    const regenOption =
+      "w-engines:Hellfire_Gears:refinement:blk-ms1nik02-6x9k3x:eff-ms1nik02-wn2n3p"
+    const regenRule = definitions.effects.find(
+      (entry): entry is ContributionRule =>
+        entry.kind === "contribution" &&
+        entry.effectId.startsWith("w-engine:14110:zzz-hp:eff-ms1nik02-wn2n3p"),
+    )
+    expect(regenRule!.operation).toMatchObject({
+      kind: "stat-adjustment",
+      stat: "energyRegen",
+      stage: "final-fixed",
+    })
+    expect(
+      (regenRule!.parameters.amount as { value: number }).value,
+    ).toBeCloseTo(0.6, 12)
+    expect(catalog.options.some((o) => o.optionId === regenOption)).toBe(true)
+    const both = calculateCatalogResult(
+      wengineProbe("1011", "14110", 1, [
+        { optionId: option, layers: 2 },
+        { optionId: regenOption, layers: 1 },
+      ]),
+    )
+    expect(both.factors.nonCritical.baseDamage).toBeCloseTo(204, 9)
+  })
+
+  it("applies Blazing Laurel's assist impact and keeps the wither rules separate", () => {
+    const option = "nanoka:w-engines:14116:impact-after-assist"
+    for (const [refinement, expected] of [
+      [1, 212.5],
+      [3, 225.25],
+      [5, 238],
+    ] as const)
+      expect(
+        calculateCatalogResult(
+          wengineProbe("1011", "14116", refinement, [
+            { optionId: option, layers: 1 },
+          ]),
+        ).factors.nonCritical.baseDamage,
+        `R${refinement}`,
+      ).toBeCloseTo(expected, 9)
+    // 既有[萎靡]暴伤选项保持独立（冰/火命中团队加成）：受益者元素为火的
+    // 珂蕾妲同时获得 20 层 × 1.5% 暴伤与冲击力条款，互不影响。
+    const witherOption =
+      "w-engines:Blazing_Laurel:refinement:blk-legacy:legacy-team-critDmg"
+    const witherResult = calculateCatalogResult(
+      wengineProbe("1101", "14116", 1, [
+        { optionId: option, layers: 1 },
+        { optionId: witherOption, layers: 20 },
+      ]),
+    )
+    const witherCrit = witherResult.evaluation.contributions.filter(
+      (contribution) =>
+        contribution.address.kind === "stat" &&
+        contribution.address.stat === "criticalDamage",
+    )
+    expect(
+      witherCrit.reduce((total, entry) => total + entry.value.value, 0),
+    ).toBeCloseTo(20 * 0.015, 12)
+    expect(witherResult.factors.nonCritical.baseDamage).toBeCloseTo(212.5, 9)
+  })
+
+  it("applies Ice-Jade Teapot's impact per tea layer independently of the team damage state", () => {
+    const option = "nanoka:w-engines:14125:impact-per-tea-layer"
+    for (const [refinement, layers, expected] of [
+      [1, 15, 187.85],
+      [1, 30, 205.7],
+      [5, 30, 241.4],
+    ] as const)
+      expect(
+        calculateCatalogResult(
+          wengineProbe("1011", "14125", refinement, [
+            { optionId: option, layers },
+          ]),
+        ).factors.nonCritical.baseDamage,
+        `R${refinement}L${layers}`,
+      ).toBeCloseTo(expected, 9)
+    layerIssue(
+      wengineProbe("1011", "14125", 1, [{ optionId: option, layers: 31 }]),
+    )
+    // 既有全队增伤是独立 10 秒状态：不随茶劲层数缩放，也不被本选项绑定。
+    const teamOption =
+      "w-engines:Ice-Jade_Teapot:refinement:blk-legacy:legacy-team-dmgBonus"
+    const withTeam = calculateCatalogResult(
+      wengineProbe("1011", "14125", 1, [
+        { optionId: option, layers: 30 },
+        { optionId: teamOption, layers: 1 },
+      ]),
+    )
+    expect(withTeam.factors.nonCritical.damageBonus).toBeCloseTo(1.2, 12)
+    expect(withTeam.factors.nonCritical.baseDamage).toBeCloseTo(205.7, 9)
+  })
+
+  it("applies Spectral Gaze's soul-chain tiers as one mutually exclusive complete state (R01)", () => {
+    // 评审 R01 修复：1/2/3 有效魂锁是三个互斥完整档位（每档 0/1 开关），
+    // 满层档位一次给出 每层×3+附加 的完整加成；不再有可独立选取的半状态。
+    const tiers = [
+      "nanoka:w-engines:14136:soul-chain-1-layer",
+      "nanoka:w-engines:14136:soul-chain-2-layer",
+      "nanoka:w-engines:14136:soul-chain-3-layer",
+    ] as const
+    // 五精炼 × 0/1/2/3 有效层的完整数值（基础冲击力 170）。
+    const tierValues = {
+      1: [0.04, 0.046, 0.052, 0.058, 0.064],
+      2: [0.08, 0.092, 0.104, 0.116, 0.128],
+      3: [0.2, 0.23, 0.26, 0.29, 0.32],
+    } as const
+    for (const refinement of [1, 2, 3, 4, 5] as const)
+      for (const tier of [1, 2, 3] as const)
+        expect(
+          calculateCatalogResult(
+            wengineProbe("1011", "14136", refinement, [
+              { optionId: tiers[tier - 1]!, layers: 1 },
+            ]),
+          ).factors.nonCritical.baseDamage,
+          `R${refinement} tier${tier}`,
+        ).toBeCloseTo(170 * (1 + tierValues[tier]![refinement - 1]!), 9)
+    // brief 验收锚点：R1 170/176.8/183.6/204；R5 170/180.88/191.76/224.4。
+    expect(
+      calculateCatalogResult(wengineProbe("1011", "14136", 1, [])).factors
+        .nonCritical.baseDamage,
+    ).toBe(170)
+    expect(
+      calculateCatalogResult(
+        wengineProbe("1011", "14136", 5, [{ optionId: tiers[2]!, layers: 1 }]),
+      ).factors.nonCritical.baseDamage,
+    ).toBeCloseTo(224.4, 9)
+    // 0 层表示关闭：单个档位 0 层、以及 0 层与其他档位混用都只按开启档位取值。
+    for (const [selections, expected] of [
+      [[{ optionId: tiers[0]!, layers: 0 }], 170],
+      [
+        [
+          { optionId: tiers[0]!, layers: 0 },
+          { optionId: tiers[1]!, layers: 1 },
+        ],
+        183.6,
+      ],
+      [
+        [
+          { optionId: tiers[0]!, layers: 1 },
+          { optionId: tiers[1]!, layers: 0 },
+        ],
+        176.8,
+      ],
+    ] as const)
+      expect(
+        calculateCatalogResult(
+          wengineProbe("1011", "14136", 1, [...selections]),
+        ).factors.nonCritical.baseDamage,
+        JSON.stringify(selections),
+      ).toBeCloseTo(expected, 9)
+    // 非法层数（负数/小数/超过 0—1 开关域）在目录入口拒绝。
+    for (const layers of [-1, 0.5, 2])
+      layerIssue(
+        wengineProbe("1011", "14136", 1, [
+          { optionId: tiers[0]!, layers: layers as number },
+        ]),
+      )
+    // 同一绑定混选多个档位被目录互斥组拒绝。
+    const mixed = calculateStaticDamageFromCatalog(
+      wengineProbe("1011", "14136", 1, [
+        { optionId: tiers[0]!, layers: 1 },
+        { optionId: tiers[1]!, layers: 1 },
+      ]),
+    )
+    expect(mixed.ok).toBe(false)
+    if (!mixed.ok)
+      expect(
+        mixed.issues.some((issue) => issue.code === "CONTEXT_MISMATCH"),
+      ).toBe(true)
+    const triple = calculateStaticDamageFromCatalog(
+      wengineProbe("1011", "14136", 1, [
+        { optionId: tiers[0]!, layers: 1 },
+        { optionId: tiers[1]!, layers: 1 },
+        { optionId: tiers[2]!, layers: 1 },
+      ]),
+    )
+    expect(triple.ok).toBe(false)
+    // 旧的半状态拆分 ID 不再存在，不能被选择。
+    for (const removed of [
+      "nanoka:w-engines:14136:impact-per-soul-chain-layer",
+      "nanoka:w-engines:14136:soul-chain-full-stack-impact",
+    ]) {
+      expect(catalog.options.some((o) => o.optionId === removed)).toBe(false)
+      const stale = calculateStaticDamageFromCatalog(
+        wengineProbe("1011", "14136", 1, [{ optionId: removed, layers: 1 }]),
+      )
+      expect(stale.ok).toBe(false)
+      if (!stale.ok)
+        expect(
+          stale.issues.some((issue) => issue.code === "MISSING_REFERENCE"),
+        ).toBe(true)
+    }
+    // 低层直接供给两个档位也按 supplied exclusiveGroup 拒绝（绕过目录无效）。
+    const bypass = calculateStaticDamage({
+      ...inputFor(),
+      definitions,
+      bindings: [
+        {
+          kind: "w-engine",
+          bindingId: "binding:weapon",
+          sourceEntityId: "14136",
+          holderId: "entity:attacker",
+          eligible: true,
+          configuration: { refinement: 1 },
+        },
+      ],
+      selections: [
+        {
+          effectId: "w-engine:14136:nanoka:soul-chain-1-layer",
+          bindingId: "binding:weapon",
+          layers: 1,
+        },
+        {
+          effectId: "w-engine:14136:nanoka:soul-chain-3-layer",
+          bindingId: "binding:weapon",
+          layers: 1,
+        },
+      ],
+    })
+    expect(bypass.ok).toBe(false)
+    if (!bypass.ok)
+      expect(
+        bypass.issues.some((issue) => issue.code === "UNIQUENESS_CONFLICT"),
+      ).toBe(true)
+    // 真实消费链：青衣转化读取满层档位 +20% 的最终冲击力（204 → 84×6=504）。
+    const conversionOption =
+      "agents:qingyi:mindscape:0:blk-ms4b9fw6-467qoj:eff-ms4b9fw6-990jlw"
+    const conversionInput = agentInput("1251", [conversionOption])
+    const fullTier = calculateCatalogResult({
+      ...conversionInput,
+      bindings: [
+        ...conversionInput.bindings,
+        {
+          kind: "w-engine",
+          bindingId: "binding:weapon",
+          sourceEntityId: "14136",
+          holderId: "entity:attacker",
+          eligible: true,
+          configuration: { refinement: 1 },
+        },
+      ],
+      selections: [
+        ...conversionInput.selections,
+        { optionId: tiers[2]!, bindingId: "binding:weapon", layers: 1 },
+      ],
+    })
+    expect(fullTier.factors.nonCritical.baseDamage).toBeCloseTo(3008, 9)
+    // 取得条件（后台电属性追加攻击）不作受益条件：任意元素/分类命中都贡献。
+    const anyHit = calculateCatalogResult(
+      wengineProbe(
+        "1011",
+        "14136",
+        1,
+        [{ optionId: tiers[0]!, layers: 1 }],
+        "impact",
+        {
+          hit: {
+            ...inputFor().hit,
+            skillCategory: "dash",
+            element: "ice",
+            damageItems: [
+              {
+                mode: "direct",
+                role: "base",
+                itemId: "probe",
+                stat: "impact",
+                statSource: { entityId: "entity:attacker" },
+                damageMultiplier: 1,
+              },
+            ],
+          } as unknown as StaticCatalogDamageInput["hit"],
+        },
+      ),
+    )
+    expect(anyHit.factors.nonCritical.baseDamage).toBeCloseTo(176.8, 9)
+    // 既有减防选项保留不变。
+    expect(
+      catalog.options.some(
+        (o) =>
+          o.optionId ===
+          "w-engines:Spectral_Gaze:refinement:blk-legacy:legacy-team-reduceDefense",
+      ),
+    ).toBe(true)
+  })
+
+  it("applies Head Lackey's fixed impact points independent of the base value", () => {
+    const option = "nanoka:w-engines:14157:fixed-impact-points"
+    for (const [refinement, expected] of [
+      [1, 200],
+      [3, 206],
+      [5, 212],
+    ] as const)
+      expect(
+        calculateCatalogResult(
+          wengineProbe("1011", "14157", refinement, [
+            { optionId: option, layers: 1 },
+          ]),
+        ).factors.nonCritical.baseDamage,
+        `R${refinement}`,
+      ).toBeCloseTo(expected, 9)
+    // 基础冲击力改变但固定增量恒为 30 点；百分比条款则随基础缩放。
+    for (const base of [100, 1000]) {
+      const base1 = wengineProbe("1011", "14157", 1, [
+        { optionId: option, layers: 1 },
+      ])
+      const fixed = calculateCatalogResult({
+        ...base1,
+        world: {
+          ...base1.world,
+          entities: base1.world.entities.map((entity) =>
+            entity.kind === "actor" && entity.entityId === "entity:attacker"
+              ? {
+                  ...entity,
+                  generalStats: {
+                    ...entity.generalStats,
+                    impact: general(base),
+                  },
+                }
+              : entity,
+          ),
+        },
+      })
+      expect(fixed.factors.nonCritical.baseDamage, `base=${base}`).toBe(
+        base + 30,
+      )
+      const percent = calculateCatalogResult({
+        ...wengineProbe("1011", "12009", 1, [
+          {
+            optionId: "nanoka:w-engines:12009:impact-as-active-character",
+            layers: 1,
+          },
+        ]),
+        world: {
+          ...base1.world,
+          entities: base1.world.entities.map((entity) =>
+            entity.kind === "actor" && entity.entityId === "entity:attacker"
+              ? {
+                  ...entity,
+                  generalStats: {
+                    ...entity.generalStats,
+                    impact: general(base),
+                  },
+                }
+              : entity,
+          ),
+        },
+      })
+      expect(
+        percent.factors.nonCritical.baseDamage,
+        `base=${base}`,
+      ).toBeCloseTo(base * 1.09, 9)
+    }
+    // 固定点数与百分比同时生效：同一持有者的音擎固定点与驱动盘百分比冲击
+    // 在同一条最终面板管道上各贡献一次（170 × 1.06 + 30 = 210.2）。
+    const combinedBase = wengineProbe("1011", "14157", 1, [
+      { optionId: option, layers: 1 },
+    ])
+    const combined = calculateCatalogResult({
+      ...combinedBase,
+      bindings: [
+        ...combinedBase.bindings,
+        {
+          kind: "drive-disc",
+          bindingId: "binding:disc",
+          sourceEntityId: "31200",
+          holderId: "entity:attacker",
+          eligible: true,
+          configuration: { setPieces: 2 },
+        },
+      ],
+      selections: [
+        ...combinedBase.selections,
+        {
+          optionId: "nanoka:drive-discs:31200:two-piece-impact-percent",
+          bindingId: "binding:disc",
+          layers: 1,
+        },
+      ],
+    })
+    expect(combined.factors.nonCritical.baseDamage).toBeCloseTo(
+      170 * 1.06 + 30,
+      9,
+    )
+  })
+
+  it("registers the supplement options without touching the fixed-source ones", () => {
+    const expected: readonly [string, number][] = [
+      ["w-engines:Identity_Base", 1],
+      ["w-engines:Weapon_S_1141", 1],
+      ["w-engines:Reverb_Mark_I", 1],
+      ["w-engines:Vortex_Hatchet", 1],
+      ["w-engines:Steam_Oven", 1],
+      ["w-engines:Original_Transmorpher", 6],
+      ["w-engines:Hellfire_Gears", 6],
+      ["w-engines:Blazing_Laurel", 3],
+      ["w-engines:Ice-Jade_Teapot", 2],
+      ["w-engines:Spectral_Gaze", 4],
+      ["w-engines:Head_Lackey", 8],
+    ]
+    for (const [catalogEntityId, count] of expected) {
+      const options = catalog.options.filter(
+        (o) => o.catalogEntityId === catalogEntityId,
+      )
+      expect(options, catalogEntityId).toHaveLength(count)
+      for (const option of options.filter((o) =>
+        o.optionId.startsWith("nanoka:w-engines:"),
+      )) {
+        expect(option.variants[0]!.status).toBe("converted")
+        expect(option.variants[0]!.configuration.refinements).toEqual([
+          1, 2, 3, 4, 5,
+        ])
+        expect(option.variants[0]!.differences).toEqual([])
+        expect(option.variants[0]!.references).toEqual(
+          ([1, 2, 3, 4, 5] as const).map((tier) =>
+            expect.objectContaining({
+              sourceId: "nanoka-integrated",
+              version: "3.2",
+              resourcePath: `w-engines/${option.variants[0]!.effectIds[0]!.split(":")[1]}/details.zh.json`,
+              pointer: `/talents/${tier}/desc`,
+            }),
+          ),
+        )
+      }
+    }
+    // 固定来源选项的原 stat/数值未被补充触碰（抽查既有形态）。
+    expect(
+      catalog.options
+        .find((o) => o.catalogEntityId === "w-engines:Head_Lackey")!
+        .variants[0]!.effectIds[0]!.startsWith("w-engine:14157:zzz-hp:"),
+    ).toBe(true)
   })
 })

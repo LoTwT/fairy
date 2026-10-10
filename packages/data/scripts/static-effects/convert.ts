@@ -2337,9 +2337,12 @@ export function convertSource(
       activation: {
         kind: "supplied",
         maximumLayers: literal("count", supplement.rule.maximumLayers),
+        ...(supplement.exclusiveGroup
+          ? { exclusiveGroup: supplement.exclusiveGroup }
+          : {}),
       },
       scope: supplement.rule.scope,
-      beneficiary: { kind: "holder" },
+      beneficiary: supplement.rule.beneficiary ?? { kind: "holder" },
       when: supplement.rule.when,
       operation: supplement.rule.operation,
     } as ContributionRule
@@ -2384,6 +2387,20 @@ export function convertSource(
         throw new Error(
           `Unknown supplement catalog entity: ${supplement.catalogEntityId}`,
         )
+      // 重复补充防护：固定来源若出现登记的同 stat 机器记录，说明该条款已有
+      // 真实编码，补充并存会重复贡献；拒绝生成并要求重新核对，不静默叠加。
+      if (supplement.conflictingSourceStats?.length) {
+        const conflict = collected.records.find(
+          (record) =>
+            `${record.category}:${record.entityId}` ===
+              supplement.catalogEntityId &&
+            supplement.conflictingSourceStats!.includes(record.raw.stat),
+        )
+        if (conflict)
+          throw new Error(
+            `Supplement ${supplement.supplementId} conflicts with the fixed-source record at ${conflict.pointer} (stat ${conflict.raw.stat}); re-review the clause instead of double-contributing`,
+          )
+      }
       if (supplement.variant.configuration.minimumSetPieces === 2)
         verifyDriveDiscTwoPieceSupplement(data, collected.entities, options, {
           catalogEntityId: supplement.catalogEntityId,
@@ -2394,6 +2411,11 @@ export function convertSource(
         catalogEntityId: supplement.catalogEntityId,
         name: supplement.variant.name,
         conditionDescription: supplement.variant.conditionDescription,
+        // 互斥完整状态组与规则的 supplied exclusiveGroup 同组同值：
+        // 目录入口按选项组拒绝混选，直接规则入口按激活组拒绝混选。
+        ...(supplement.exclusiveGroup
+          ? { exclusiveGroup: supplement.exclusiveGroup }
+          : {}),
         target: supplement.variant.target,
         variants: [variant],
       })
@@ -2426,7 +2448,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "16",
+    revision: "17",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
