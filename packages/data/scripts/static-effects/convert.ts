@@ -32,6 +32,7 @@ import {
   type CompleteStateSourceRecord,
   type CoreSkillLevelSemantics,
   type DeveloperRevisionEvidence,
+  type SourceSemantics,
 } from "./semantics.ts"
 import { buildRemielleSpecialVoidflareMechanism } from "./mechanisms.ts"
 import { SUPPLEMENTS, type Supplement } from "./supplements.ts"
@@ -355,6 +356,26 @@ export const FIELD_MAPPINGS: Readonly<Record<string, FieldMapping>> = {
     reason: "通用特殊乘区不属于当前 core 已登记的独立机制",
   },
   sharpenDmgBonus: factor("sharpen-damage-bonus", "ratio", ["sharpen"]),
+}
+/**
+ * C05 具名纠错的映射覆盖：登记过的 energyRegen 记录按固定回能点数/秒编译
+ * （value × 0.01），不再乘基础回能；未登记的 energyRegen 百分比语义不变。
+ */
+const FLAT_ENERGY_REGEN_MAPPING: FieldMapping = {
+  stat: "energyRegen",
+  unit: "energy-per-second",
+  stage: "final-fixed",
+  scale: 0.01,
+}
+/**
+ * 记录的受益对象：具名受益对象纠错（C07/C08）覆盖来源 applyTarget，
+ * 规则 beneficiary 与目录选项 target 使用同一口径。
+ */
+const effectiveApplyTarget = (record: SourceRecord): "self" | "team" => {
+  const semantics = SOURCE_SEMANTICS[semanticsKeyFor(record)]
+  return semantics?.kind === "beneficiary-target-correction"
+    ? semantics.correctedOptionTarget
+    : record.raw.applyTarget
 }
 const always = { kind: "constant", value: true } as const
 const literal = <U extends Unit>(unit: U, value: number) =>
@@ -796,7 +817,29 @@ function compile(
     semantics?.kind === "developer-revised-stat"
       ? semantics.revisedStat
       : e.stat
-  const mapping = FIELD_MAPPINGS[effectiveStat]
+  // C05 固定回能：登记过的 energyRegen 记录按固定点数/秒编译；编码或数值
+  // 与登记不符即拒绝生成，不静默套用到其他 energyRegen 记录。
+  if (semantics?.kind === "flat-energy-regen") {
+    for (const [label, document] of [
+      ["raw", record.raw],
+      ["normalized", record.normalized],
+    ] as const) {
+      if (
+        document === undefined ||
+        document.stat !== "energyRegen" ||
+        document.kind !== "fixed" ||
+        document.stackable === true ||
+        document.value !== semantics.expectedSourceValue
+      )
+        throw new Error(
+          `Flat energy regen correction expects the registered fixed energyRegen encoding at ${record.pointer} (${label}): value=${semantics.expectedSourceValue}`,
+        )
+    }
+  }
+  const mapping =
+    semantics?.kind === "flat-energy-regen"
+      ? FLAT_ENERGY_REGEN_MAPPING
+      : FIELD_MAPPINGS[effectiveStat]
   if (!mapping)
     throw new Error(`Unregistered stat at ${record.pointer}: ${effectiveStat}`)
   const enhancesCissiaCore =
@@ -945,6 +988,51 @@ function compile(
   const value =
     e.kind === "stacked" || e.stackable ? (e.valuePerStack ?? e.value) : e.value
   const amountUnit = mapping.basePercentage ? "ratio" : mapping.unit
+  // C01/C10 的来源数值纠错：原始与规范化记录都必须仍是登记的原值。
+  const valueCorrection =
+    semantics?.kind === "source-value-correction"
+      ? {
+          expected: semantics.expectedSourceValue,
+          corrected: semantics.correctedValue,
+        }
+      : semantics?.kind === "trigger-conditions-not-benefit-scope" &&
+          semantics.valueCorrection
+        ? {
+            expected: semantics.valueCorrection.expectedSourceValue,
+            corrected: semantics.valueCorrection.correctedValue,
+          }
+        : undefined
+  if (valueCorrection) {
+    for (const [label, document] of [
+      ["raw", record.raw],
+      ["normalized", record.normalized],
+    ] as const) {
+      const actual =
+        document === undefined
+          ? undefined
+          : document.kind === "stacked" || document.stackable === true
+            ? (document.valuePerStack ?? document.value)
+            : document.value
+      if (actual !== valueCorrection.expected)
+        throw new Error(
+          `Value correction expects ${valueCorrection.expected} at ${record.pointer} (${label}), found ${String(actual)}`,
+        )
+    }
+  }
+  if (semantics?.kind === "source-value-correction") {
+    variant = {
+      ...variant,
+      status: "corrected",
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
+  const compiledValue = valueCorrection ? valueCorrection.corrected : value
   let expression: NumericExpression<Unit, "contribution">
   let conversionInput: NumericExpression<Unit, "contribution"> | undefined
   if (e.kind === "convert") {
@@ -1068,7 +1156,7 @@ function compile(
     parameters["amount"] = {
       kind: "constant",
       unit: amountUnit,
-      value: value * mapping.scale,
+      value: compiledValue * mapping.scale,
     }
     expression = param(amountUnit, "amount")
   }
@@ -1459,6 +1547,151 @@ function compile(
       ],
     }
   }
+  if (semantics?.kind === "flat-energy-regen") {
+    variant = {
+      ...variant,
+      status: "corrected",
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
+  if (semantics?.kind === "trigger-conditions-not-benefit-scope") {
+    // 触发条件不是受益筛选：先核对来源编码未漂移，再移除登记的命中条件。
+    for (const [label, document] of [
+      ["raw", record.raw],
+      ["normalized", record.normalized],
+    ] as const) {
+      if (document === undefined)
+        throw new Error(
+          `Trigger scope correction lost the ${label} record at ${record.pointer}`,
+        )
+      if (
+        JSON.stringify(document.elementFilter) !==
+        JSON.stringify(semantics.expectedElementFilter)
+      )
+        throw new Error(
+          `Trigger scope correction expects elementFilter ${JSON.stringify(semantics.expectedElementFilter)} at ${record.pointer} (${label})`,
+        )
+      const categories = (document.skillTargets ?? []).map((t) => t.category)
+      if (
+        JSON.stringify(categories) !==
+        JSON.stringify(semantics.expectedSkillTargetCategories)
+      )
+        throw new Error(
+          `Trigger scope correction expects skill target categories ${JSON.stringify(semantics.expectedSkillTargetCategories)} at ${record.pointer} (${label})`,
+        )
+    }
+    const conditions = when.kind === "all" ? when.conditions : [when]
+    let removedElementConditions = 0
+    let removedSkillTargetConditions = 0
+    const keptConditions = conditions.filter((condition) => {
+      if (
+        semantics.removeElementCondition &&
+        condition.kind === "one-of" &&
+        condition.fact === "hit.element"
+      ) {
+        removedElementConditions += 1
+        return false
+      }
+      if (
+        semantics.removeSkillTargetConditions &&
+        condition.kind === "any" &&
+        condition.conditions.every(
+          (child) =>
+            child.kind === "all" &&
+            child.conditions.every(
+              (leaf) => leaf.kind === "one-of" && leaf.fact === "hit.skillTag",
+            ),
+        )
+      ) {
+        removedSkillTargetConditions += 1
+        return false
+      }
+      return true
+    })
+    if (
+      (semantics.removeElementCondition &&
+        semantics.expectedElementFilter !== "all" &&
+        removedElementConditions !== 1) ||
+      (semantics.removeSkillTargetConditions &&
+        semantics.expectedSkillTargetCategories.length > 0 &&
+        removedSkillTargetConditions !== 1)
+    )
+      throw new Error(
+        `Trigger scope correction did not find the registered trigger conditions at ${record.pointer}`,
+      )
+    when = { kind: "all", conditions: keptConditions }
+    variant = {
+      ...variant,
+      status: "corrected",
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
+  if (semantics?.kind === "beneficiary-target-correction") {
+    // 受益对象纠错：来源 applyTarget 与块 note / Nanoka 同文矛盾；规则
+    // beneficiary 与目录 target 同步按登记修正，其余条件与数值不变。
+    for (const [label, document] of [
+      ["raw", record.raw],
+      ["normalized", record.normalized],
+    ] as const) {
+      if (document === undefined)
+        throw new Error(
+          `Beneficiary target correction lost the ${label} record at ${record.pointer}`,
+        )
+      if (document.applyTarget !== semantics.expectedApplyTarget)
+        throw new Error(
+          `Beneficiary target correction expects applyTarget ${semantics.expectedApplyTarget} at ${record.pointer} (${label}), found ${document.applyTarget}`,
+        )
+      const actual =
+        document.kind === "stacked" || document.stackable === true
+          ? (document.valuePerStack ?? document.value)
+          : document.value
+      if (actual !== semantics.expectedSourceValue)
+        throw new Error(
+          `Beneficiary target correction expects ${semantics.expectedSourceValue} at ${record.pointer} (${label}), found ${String(actual)}`,
+        )
+    }
+    variant = {
+      ...variant,
+      status: "corrected",
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
+  if (semantics?.kind === "refinement-value-description") {
+    // 共享说明只描述精炼 1（T01）：块 note 漂移即拒绝；说明由选项组装覆盖。
+    if (record.blockNote !== semantics.expectedBlockNote)
+      throw new Error(
+        `Refinement-value-description block note drift at ${record.pointer}: ${JSON.stringify(record.blockNote)}`,
+      )
+    variant = {
+      ...variant,
+      status: "corrected",
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
   if (semantics?.kind === "damage-item-targeting") {
     const requirement = semantics.requirement
     // 倍率只作用于声明身份的伤害项：由 itemIds 精确绑定，缺项时求值层报 MISSING_REFERENCE。
@@ -1585,7 +1818,9 @@ function compile(
         !JSON.stringify(when).includes("hit.")
           ? "entity"
           : "hit",
-      beneficiary: { kind: e.applyTarget === "team" ? "team" : "holder" },
+      beneficiary: {
+        kind: effectiveApplyTarget(record) === "team" ? "team" : "holder",
+      },
       when,
       operation: operation as ContributionOperation,
     } as ContributionRule,
@@ -1774,9 +2009,10 @@ export function convertSource(
       if (compiled.rule) effects.push(compiled.rule)
       variants.push({
         ...compiled.variant,
-        ...(record.raw.applyTarget === first.raw.applyTarget
+        // 变体 target 覆盖与选项 target 都使用纠错后的受益对象口径。
+        ...(effectiveApplyTarget(record) === effectiveApplyTarget(first)
           ? {}
-          : { target: record.raw.applyTarget }),
+          : { target: effectiveApplyTarget(record) }),
       })
       coverage.push({
         pointer: record.pointer,
@@ -1886,17 +2122,47 @@ export function convertSource(
       firstSemantics?.kind === "developer-revised-stat"
         ? firstSemantics.revisedStat
         : first.raw.stat
+    // 共享说明纠错（T01）：登记必须覆盖该选项的全部精炼档且文本一致，
+    // 否则保持来源 note 原文；部分登记或文本不一致即拒绝生成。
+    const descriptionSemantics = records.map(
+      (record) => SOURCE_SEMANTICS[semanticsKeyFor(record)],
+    )
+    const refinementDescriptions = new Set(
+      descriptionSemantics
+        .filter(
+          (
+            entry,
+          ): entry is Extract<
+            SourceSemantics,
+            { kind: "refinement-value-description" }
+          > => entry?.kind === "refinement-value-description",
+        )
+        .map((entry) => entry.conditionDescription),
+    )
+    if (
+      refinementDescriptions.size > 1 ||
+      (refinementDescriptions.size === 1 &&
+        descriptionSemantics.some(
+          (entry) =>
+            entry?.kind === undefined ||
+            entry.kind !== "refinement-value-description",
+        ))
+    )
+      throw new Error(
+        `Refinement-value-description registration must cover every refinement consistently: ${optionId}`,
+      )
+    const sharedConditionDescription = [...refinementDescriptions][0]
     options.push({
       optionId,
       catalogEntityId: entity.catalogEntityId,
       name: `${first.blockName} · ${displayStat}`,
-      conditionDescription: [first.blockNote, first.raw.note]
-        .filter(Boolean)
-        .join("\n"),
+      conditionDescription:
+        sharedConditionDescription ??
+        [first.blockNote, first.raw.note].filter(Boolean).join("\n"),
       ...(first.entityId === "remiel" && first.blockId === "blk-ms7td2gs-rk1vtd"
         ? { exclusiveGroup: "remiel:team-profession-attack-tier" }
         : {}),
-      target: first.raw.applyTarget,
+      target: effectiveApplyTarget(first),
       variants: variants as unknown as NonEmpty<StaticCatalogVariant>,
     })
   }
@@ -2160,7 +2426,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "15",
+    revision: "16",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -2464,6 +2730,96 @@ export function convertSource(
           nanokaReference("w-engines/14137/details.zh.json", "/talents/4/desc"),
           nanokaReference("w-engines/14137/details.zh.json", "/talents/5/desc"),
         ],
+      },
+      {
+        differenceId: "wengine-flat-energy-regen",
+        explanation:
+          "11 件音擎共 55 条固定回能记录（聚宝箱、家政员、维序者-特化型、燃狱齿轮、灼心摇壶、啜泣摇篮、半糖雪兔（来源拼写为半塘雪兔）、铸梦炉歌、昨夜来电、思络成歌、首席跟班 × 精炼 1—5）在固定来源 fac62407 中被编入 energyRegen 百分比字段（经 basePercentage 读取为 基础回能 × value/100；基础回能 1.2 点/秒时 +0.4 记录实际增加 0.48 点/秒），而各块 note 与 Nanoka 五档天赋同文均为“能量自动回复提升若干点/秒”的固定值。Fairy 按具名登记把这些记录编译为固定回能加数（energy-per-second，value × 0.01），不随基础回能缩放；各记录的触发条件（位于后场、拥有护盾、非操作中等）仍由调用方显式选择声明，持续时间与同名被动限制不模拟。真正的百分比回能记录（摇摆爵士、月光安可二件套 +20%）不在登记内，energyRegen 的百分比语义保持不变。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes("wengine-flat-energy-regen"),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "myriad-eclipse-r4-critical-damage",
+        explanation:
+          "千面日陨（14129）精炼 4 的暴击伤害在固定来源 fac62407 中记为 62.25，而同块 note 与 Nanoka 五档天赋（w-engines/14129/details.zh.json 的 /talents/1—5/desc）同文为 45/51.75/58.5/65.25/72%：精炼 1—3、5 的记录数值与文本一致，精炼 4 与自身块 note 矛盾。Fairy 按具名登记修正精炼 4 为 0.6525，其余四档保持来源原值；effectId、optionId 与常驻属性通道不变。证据级别为块 note 与 Nanoka 同文纠错，未经游戏实测。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes("myriad-eclipse-r4-critical-damage"),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "myriad-eclipse-zero-verdict-ignore-defense-scope",
+        explanation:
+          "千面日陨（14129）精炼 1—4 的忽防记录被固定来源加上 elementFilter=[冰]，而块 note 与 Nanoka 五档天赋同文明确：[强化特殊技]、[连携技]、[终结技]造成冰属性伤害只是[零度处刑宣言]（持续 3 秒）的触发条件，状态期间“角色命中敌人时无视25/28.75/32.5/36.25%防御力”不限定命中元素；精炼 5 的记录（elementFilter=all）与此一致。Fairy 移除精炼 1—4 的冰元素命中条件，五档结构一致后按精炼合并为一条 by-rank 规则；[零度处刑宣言]状态有效由调用方显式选择声明，3 秒持续不模拟。数值保持来源原值，精炼 5 记录无需修正。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes(
+                "myriad-eclipse-zero-verdict-ignore-defense-scope",
+              ),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "promotion-stats-equipper-defense",
+        explanation:
+          "喵运当头（13017）五档防御提升的块 note 与 Nanoka 五档天赋（w-engines/13017/details.zh.json 的 /talents/1—5/desc）同文为「防御力提升8/9/10/11/12%；释放[强化特殊技]时，防御力额外提升同值，持续40秒」——受益对象是装备者；固定来源却把五档记为 applyTarget=team，上游会把防御加给队友。Fairy 修正受益对象为装备者（选项 target=self），常驻与强化特殊技触发两段保持分别生效：沿用来源 stacked 编码（每层 8/9/10/11/12%、最多 2 层），调用方以层数显式声明——1 层=仅常驻部分，2 层=常驻与强化特殊技触发的额外部分（40 秒内），0 层=关闭；40 秒持续与重复触发刷新不模拟。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes("promotion-stats-equipper-defense"),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "the-vault-r1-team-damage-bonus",
+        explanation:
+          "聚宝箱（13103）精炼 1 的增伤条款块 note 与 Nanoka 天赋 1 同文为「[强化特殊技]、[连携技]或[终结技]造成以太伤害时，所有单位对目标造成的伤害提升15%」，固定来源的精炼 1 记录却为 applyTarget=self（精炼 2—5 已是 team），队友无法受益。Fairy 修正精炼 1 为 team；修正后五档结构一致并按精炼合并为一条 by-rank 规则（0.15/0.175/0.2/0.22/0.24），触发与 2 秒持续仍由调用方显式选择声明。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes("the-vault-r1-team-damage-bonus"),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "bellicose-blaze-trigger-scope-ignore-defense",
+        explanation:
+          "嚣枪喧焰（14130）五档每层忽防的块 note 与 Nanoka 五档天赋同文：「装备者发动[追加攻击]造成火属性伤害时，装备者的攻击对敌人造成的伤害无视15/17.2/19.5/21.7/24%防御力，持续8秒，3秒内最多获得1层，最多叠加2层」。文本证明的只是火属性追加攻击命中为取得状态的触发条件。固定来源两处误编：(1) 精炼 1 每层记为 valuePerStack=16，与同块 note 及 Nanoka 的 15% 矛盾，修正为 0.15；(2) 以 scope=skill 的 follow_up 技能目标与 elementFilter=[火] 把该触发条件当成受益筛选，非火属性或非追加攻击的命中被排除。Fairy 修正精炼 1 数值并移除元素与追加攻击分类的受益筛选，保留固定来源 scope=skill 派生的直伤种类（regular/sheer/sharpen）限制与 2 层上限——中文「装备者的攻击」与英文「their attacks」均未界定异常类伤害是否受益，项目伤害分类契约亦不足以核定，异常受益范围保留待证，不以文本为已证结论。触发事实、8 秒持续与 3 秒取层间隔由调用方显式选择/层数声明，不模拟时间线。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes(
+                "bellicose-blaze-trigger-scope-ignore-defense",
+              ),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "blood-casket-refinement-aware-description",
+        explanation:
+          "血髓秘匣（13021）五档的转模数值（每超出 1% 暴击率提升 0.48/0.56/0.64/0.72/0.8% 增伤、上限 24/28/32/36/40%）在固定来源中正确，但五档共用同一块 note，均写精炼 1 的「1%暴击率 转 0.48% 增伤 / 转模增伤上限24%」，无法表达当前精炼（Nanoka /talents/1—5/desc 逐档明确）。Fairy 把选项共享说明覆盖为按精炼列值的文本，数值、规则与稳定 ID 不变。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes(
+                "blood-casket-refinement-aware-description",
+              ),
+            )
+            .flatMap((variant) => variant.references),
+        ),
       },
     ],
   }

@@ -157,7 +157,7 @@ describe("static data conversion", () => {
       ],
     }
     const result = convertSource(source, functions, [], [])
-    expect(result.definitions.revision).toBe("15")
+    expect(result.definitions.revision).toBe("16")
     for (const option of result.catalog.options) {
       const variant = option.variants[0]!
       const sameBlock = option.optionId.endsWith("unverified-same-block")
@@ -450,7 +450,7 @@ const angelData = (): SourceData => ({
 describe("developer stat revision", () => {
   it("maps the four registered records through the anomaly bonus channel", () => {
     const result = convertSource(angelData(), functions, [], [])
-    expect(result.definitions.revision).toBe("15")
+    expect(result.definitions.revision).toBe("16")
     const option = result.catalog.options.find(
       (o) =>
         o.optionId ===
@@ -742,7 +742,7 @@ const remielData = (): SourceData => ({
 describe("remielle mindscape 2 attribute anomaly scope revision", () => {
   it("adds the [异常] profession and attribute anomaly damage scope from the reviewed text", () => {
     const result = convertSource(remielData(), functions, [], [])
-    expect(result.definitions.revision).toBe("15")
+    expect(result.definitions.revision).toBe("16")
     const option = result.catalog.options.find((o) =>
       o.optionId.includes("eff-ms7tlurw-vhelyf"),
     )!
@@ -892,7 +892,7 @@ describe("remielle mindscape 1 complete anomaly state", () => {
     "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
   it("merges the team and holder records into one corrected complete option", () => {
     const result = convertSource(remielMindscape1Data(), functions, [], [])
-    expect(result.definitions.revision).toBe("15")
+    expect(result.definitions.revision).toBe("16")
     const option = result.catalog.options.find((o) => o.optionId === optionId)!
     expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
     expect(option.conditionDescription).toBe(
@@ -1125,7 +1125,7 @@ const qingmingData = (): SourceData => ({
 describe("qingming birdcage pierce stack correction", () => {
   it("compiles the registered fixed encodings as per-layer contributions with a two-layer cap", () => {
     const result = convertSource(qingmingData(), functions, [], [])
-    expect(result.definitions.revision).toBe("15")
+    expect(result.definitions.revision).toBe("16")
     for (const [index, effectId] of qingmingPierceIds.entries()) {
       const option = result.catalog.options.find((o) =>
         o.optionId.includes(effectId),
@@ -1324,5 +1324,693 @@ describe("drive-disc two-piece supplements and boundaries", () => {
     expect(() =>
       convertSource(protoPunkRecord, functions, [], driveDiscSupplements),
     ).toThrowError(/collides with the fixed-source option/)
+  })
+})
+
+/**
+ * 增益修复批次 01 的合成转换：C01/C05/C07/C08/C10/C11/T01 的具名登记按登记
+ * 语义编译；来源编码或数值漂移时拒绝生成。合成数据使用与固定来源一致的
+ * upstream id、blockId 与 effectId，命中生产登记键。
+ */
+const batch01Base: Pick<
+  SourceData,
+  "agents" | "driveDiscs" | "skillSubcategories" | "followUpSkillRules"
+> = {
+  agents: [],
+  driveDiscs: [],
+  skillSubcategories: [],
+  followUpSkillRules: [],
+}
+const batch01FixedEffect = (
+  id: string,
+  stat: string,
+  value: number,
+  extra: Partial<SourceEffect> = {},
+): SourceEffect => ({
+  id,
+  scope: "general",
+  applyTarget: "self",
+  applySituation: "global",
+  elementFilter: "all",
+  kind: "fixed",
+  stat,
+  value,
+  stackable: false,
+  maxStacks: 1,
+  valuePerStack: 0,
+  defaultStacks: 1,
+  note: "",
+  ...extra,
+})
+const refinementPacks = (
+  build: (
+    rank: 1 | 2 | 3 | 4 | 5,
+  ) => { id: string; name: string; note: string; effects: SourceEffect[] }[],
+) => ({
+  refinementBuffs: ([1, 2, 3, 4, 5] as const).map((rank) => ({
+    effectBlocks: build(rank),
+  })),
+})
+
+const myriadEclipseData = (
+  overrides: {
+    critDmgR4?: number
+    reduceElement?: "all" | string[]
+  } = {},
+): SourceData => ({
+  ...batch01Base,
+  wengines: [
+    {
+      id: "Myriad_Eclipse",
+      name: "千面日陨",
+      profession: "强攻",
+      ...refinementPacks((rank) => [
+        {
+          id: "blk-legacy",
+          name: `精${rank}`,
+          note: `暴击伤害提升${[45, 51.75, 58.5, 65.25, 72][rank - 1]}%；[强化特殊技]、[连携技]、[终结技]造成冰属性伤害时，角色获得[零度处刑宣言]效果，持续3秒；[零度处刑宣言]效果期间，角色命中敌人时无视${[25, 28.75, 32.5, 36.25, 40][rank - 1]}%防御力。`,
+          effects: [
+            batch01FixedEffect(
+              "legacy-self-critDmg",
+              "critDmg",
+              rank === 4
+                ? (overrides.critDmgR4 ?? 62.25)
+                : [45, 51.75, 58.5, 65.25, 72][rank - 1]!,
+            ),
+            batch01FixedEffect(
+              "legacy-self-reduceDefense",
+              "reduceDefense",
+              [25, 28.75, 32.5, 36.25, 40][rank - 1]!,
+              {
+                elementFilter:
+                  rank <= 4 ? (overrides.reduceElement ?? ["冰"]) : "all",
+              },
+            ),
+          ],
+        },
+      ]),
+    },
+  ],
+})
+
+describe("myriad eclipse batch 01 corrections", () => {
+  it("corrects the R4 critical damage value and removes the ice-element restriction on the state ignore-defense", () => {
+    const result = convertSource(myriadEclipseData(), functions, [], [])
+    const critOption = result.catalog.options.find((o) =>
+      o.optionId.endsWith(
+        "Myriad_Eclipse:refinement:blk-legacy:legacy-self-critDmg",
+      ),
+    )!
+    expect(critOption.variants.map((v) => v.status)).toEqual([
+      "converted",
+      "converted",
+      "converted",
+      "corrected",
+      "converted",
+    ])
+    expect(critOption.variants[3]!.differences).toEqual([
+      "myriad-eclipse-r4-critical-damage",
+    ])
+    const critRule = result.definitions.effects.find(
+      (entry): entry is ContributionRule =>
+        entry.kind === "contribution" &&
+        entry.effectId ===
+          "w-engine:14129:zzz-hp:legacy-self-critDmg:blk-legacy:refinement",
+    )!
+    expect(critRule.parameters.amount).toMatchObject({
+      kind: "by-rank",
+      values: { 1: 0.45, 2: 0.5175, 3: 0.585, 4: 0.6525, 5: 0.72 },
+    })
+    const defenseOption = result.catalog.options.find((o) =>
+      o.optionId.endsWith(
+        "Myriad_Eclipse:refinement:blk-legacy:legacy-self-reduceDefense",
+      ),
+    )!
+    for (const [index, status] of defenseOption.variants
+      .map((v) => v.status)
+      .entries())
+      expect(status).toBe(index <= 3 ? "corrected" : "converted")
+    for (const variant of defenseOption.variants.slice(0, 4))
+      expect(variant.differences).toEqual([
+        "myriad-eclipse-zero-verdict-ignore-defense-scope",
+      ])
+    // 冰元素条件移除后五档结构一致，合并为一条不带命中筛选的规则。
+    const defenseRule = result.definitions.effects.find(
+      (entry): entry is ContributionRule =>
+        entry.kind === "contribution" &&
+        entry.effectId ===
+          "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement",
+    )!
+    expect(defenseRule).toBeDefined()
+    expect(defenseRule.when).toEqual({ kind: "all", conditions: [] })
+    expect(defenseRule.parameters.amount).toMatchObject({
+      kind: "by-rank",
+      values: { 1: 0.25, 4: 0.3625, 5: 0.4 },
+    })
+  })
+
+  it("rejects drifted R4 critical damage values and drifted element encodings", () => {
+    expect(() =>
+      convertSource(myriadEclipseData({ critDmgR4: 63 }), functions, [], []),
+    ).toThrowError(/Value correction expects 62.25/)
+    expect(() =>
+      convertSource(
+        myriadEclipseData({ reduceElement: ["火"] }),
+        functions,
+        [],
+        [],
+      ),
+    ).toThrowError(/Trigger scope correction expects elementFilter/)
+  })
+})
+
+const promotionStatsData = (
+  overrides: { r1ApplyTarget?: "self" | "team" } = {},
+): SourceData => ({
+  ...batch01Base,
+  wengines: [
+    {
+      id: "Promotion Stats",
+      name: "喵运当头",
+      profession: "锋御",
+      ...refinementPacks((rank) => [
+        {
+          id: "blk-mtwn69lr-xfb4n8",
+          name: `精${rank}`,
+          note: `防御力提升${[8, 9, 10, 11, 12][rank - 1]}%；释放[强化特殊技]时，防御力额外提升${[8, 9, 10, 11, 12][rank - 1]}%，持续40秒，重复触发时刷新持续时间。`,
+          effects: [
+            {
+              id: "eff-mtwn69lr-2h2brm",
+              scope: "general",
+              applyTarget:
+                rank === 1 ? (overrides.r1ApplyTarget ?? "team") : "team",
+              applySituation: "global",
+              elementFilter: "all",
+              kind: "stacked",
+              stat: "inCombatDefPercent",
+              value: 0,
+              stackable: false,
+              maxStacks: 2,
+              valuePerStack: [8, 9, 10, 11, 12][rank - 1]!,
+              defaultStacks: 2,
+              note: "",
+            },
+          ],
+        },
+      ]),
+    },
+  ],
+})
+
+describe("promotion stats equipper defense correction", () => {
+  it("corrects all five refinements to the equipper while keeping the stacked two-layer encoding", () => {
+    const result = convertSource(promotionStatsData(), functions, [], [])
+    const option = result.catalog.options.find((o) =>
+      o.optionId.includes("Promotion%20Stats"),
+    )!
+    expect(option.target).toBe("self")
+    for (const variant of option.variants) {
+      expect(variant.status).toBe("corrected")
+      expect(variant.differences).toEqual(["promotion-stats-equipper-defense"])
+      expect(variant.maximumLayers).toBe(2)
+    }
+    const rule = result.definitions.effects.find(
+      (entry): entry is ContributionRule =>
+        entry.kind === "contribution" &&
+        entry.effectId ===
+          "w-engine:13017:zzz-hp:eff-mtwn69lr-2h2brm:blk-mtwn69lr-xfb4n8:refinement",
+    )!
+    expect(rule.beneficiary).toEqual({ kind: "holder" })
+    expect(rule.activation).toMatchObject({
+      kind: "supplied",
+      maximumLayers: { value: 2 },
+    })
+    expect(rule.parameters.amount).toMatchObject({
+      kind: "by-rank",
+      values: { 1: 0.08, 5: 0.12 },
+    })
+  })
+
+  it("rejects a source that already encodes the corrected target", () => {
+    expect(() =>
+      convertSource(
+        promotionStatsData({ r1ApplyTarget: "self" }),
+        functions,
+        [],
+        [],
+      ),
+    ).toThrowError(/Beneficiary target correction expects applyTarget team/)
+  })
+})
+
+const theVaultData = (
+  overrides: { r1ApplyTarget?: "self" | "team"; energyR2Value?: number } = {},
+): SourceData => ({
+  ...batch01Base,
+  wengines: [
+    {
+      id: "The_Vault",
+      name: "聚宝箱",
+      profession: "支援",
+      ...refinementPacks((rank) => [
+        {
+          id: "blk-legacy",
+          name: `精${rank}`,
+          note: `[强化特殊技]、[连携技]或[终结技]造成以太伤害时，所有单位对目标造成的伤害提升${[15, 17.5, 20, 22, 24][rank - 1]}%，装备者的能量自动回复提升${[0.5, 0.58, 0.65, 0.72, 0.8][rank - 1]}点/秒，持续2秒，同名被动效果之间不可叠加。`,
+          effects: [
+            batch01FixedEffect(
+              "legacy-self-dmgBonus",
+              "dmgBonus",
+              [15, 17.5, 20, 22, 24][rank - 1]!,
+              {
+                applyTarget:
+                  rank === 1 ? (overrides.r1ApplyTarget ?? "self") : "team",
+                appliesToAnomaly: true,
+              },
+            ),
+            batch01FixedEffect(
+              [
+                "eff-ms1zuvli-v2yjaz",
+                "eff-ms1zv3lq-wkhzfm",
+                "eff-ms1zv8x7-c9st7n",
+                "eff-ms1zve66-p2wn3a",
+                "eff-ms1zvkfu-7g8a4b",
+              ][rank - 1]!,
+              "energyRegen",
+              rank === 2
+                ? (overrides.energyR2Value ?? 58)
+                : [50, 58, 65, 72, 80][rank - 1]!,
+            ),
+          ],
+        },
+      ]),
+    },
+  ],
+})
+
+describe("the vault team damage bonus and flat energy regen corrections", () => {
+  it("corrects R1 to team, merges the five ranks, and compiles flat energy regen", () => {
+    const result = convertSource(theVaultData(), functions, [], [])
+    const damageOption = result.catalog.options.find((o) =>
+      o.optionId.endsWith(
+        "The_Vault:refinement:blk-legacy:legacy-self-dmgBonus",
+      ),
+    )!
+    expect(damageOption.target).toBe("team")
+    expect(damageOption.variants[0]!.status).toBe("corrected")
+    expect(damageOption.variants[0]!.differences).toEqual([
+      "the-vault-r1-team-damage-bonus",
+    ])
+    for (const variant of damageOption.variants.slice(1))
+      expect(variant.status).toBe("converted")
+    const damageRule = result.definitions.effects.find(
+      (entry): entry is ContributionRule =>
+        entry.kind === "contribution" &&
+        entry.effectId ===
+          "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement",
+    )!
+    expect(damageRule.beneficiary).toEqual({ kind: "team" })
+    expect(damageRule.parameters.amount).toMatchObject({
+      kind: "by-rank",
+      values: { 1: 0.15, 5: 0.24 },
+    })
+    // 固定回能：energy-per-second 加数，不再乘基础回能。
+    const flatEffects = [
+      "eff-ms1zuvli-v2yjaz",
+      "eff-ms1zv3lq-wkhzfm",
+      "eff-ms1zv8x7-c9st7n",
+      "eff-ms1zve66-p2wn3a",
+      "eff-ms1zvkfu-7g8a4b",
+    ] as const
+    for (const [index, effectId] of flatEffects.entries()) {
+      const rule = result.definitions.effects.find(
+        (entry): entry is ContributionRule =>
+          entry.kind === "contribution" &&
+          entry.effectId ===
+            `w-engine:13103:zzz-hp:${effectId}:blk-legacy:refinement:${index + 1}`,
+      )!
+      expect(rule.operation).toMatchObject({
+        kind: "stat-adjustment",
+        stat: "energyRegen",
+        stage: "final-fixed",
+        value: { kind: "parameter", unit: "energy-per-second", name: "amount" },
+      })
+      expect((rule.parameters.amount as { value: number }).value).toBeCloseTo(
+        [0.5, 0.58, 0.65, 0.72, 0.8][index]!,
+        12,
+      )
+      expect(rule.parameters.amount).toMatchObject({
+        unit: "energy-per-second",
+      })
+    }
+    const energyOption = result.catalog.options.find((o) =>
+      o.optionId.includes("eff-ms1zuvli-v2yjaz"),
+    )!
+    expect(energyOption.variants[0]!.status).toBe("corrected")
+    expect(energyOption.variants[0]!.differences).toEqual([
+      "wengine-flat-energy-regen",
+    ])
+  })
+
+  it("rejects drifted apply targets and drifted flat energy values", () => {
+    expect(() =>
+      convertSource(theVaultData({ r1ApplyTarget: "team" }), functions, [], []),
+    ).toThrowError(/Beneficiary target correction expects applyTarget self/)
+    expect(() =>
+      convertSource(theVaultData({ energyR2Value: 59 }), functions, [], []),
+    ).toThrowError(/Flat energy regen correction/)
+  })
+})
+
+const bellicoseBlazeData = (
+  overrides: { r1PerStack?: number; skillCategory?: string } = {},
+): SourceData => ({
+  ...batch01Base,
+  wengines: [
+    {
+      id: "Bellicose_Blaze",
+      name: "嚣枪喧焰",
+      profession: "强攻",
+      ...refinementPacks((rank) => [
+        {
+          id: "blk-legacy",
+          name: `精${rank}`,
+          note: `暴击率提升${[20, 23, 26, 29, 32][rank - 1]}%；装备者发动[追加攻击]造成火属性伤害时，装备者的攻击对敌人造成的伤害无视${[15, 17.2, 19.5, 21.7, 24][rank - 1]}%防御力，持续8秒，3秒内最多获得1层，最多叠加2层，重复触发时刷新持续时间。`,
+          effects: [
+            batch01FixedEffect(
+              "legacy-self-critRate",
+              "critRate",
+              [20, 23, 26, 29, 32][rank - 1]!,
+            ),
+            {
+              id: "legacy-self-reduceDefense",
+              scope: "skill",
+              applyTarget: "self",
+              applySituation: "global",
+              skillCategory: "follow_up",
+              skillSubcategoryId: null,
+              skillTargets: [
+                {
+                  category: overrides.skillCategory ?? "follow_up",
+                  subcategoryId: null,
+                },
+              ],
+              elementFilter: ["火"],
+              kind: "stacked",
+              stat: "reduceDefense",
+              value: 0,
+              stackable: false,
+              maxStacks: 2,
+              valuePerStack:
+                rank === 1
+                  ? (overrides.r1PerStack ?? 16)
+                  : [17.2, 19.5, 21.7, 24][rank - 2]!,
+              defaultStacks: 2,
+              note: "",
+            },
+          ],
+        },
+      ]),
+    },
+  ],
+})
+
+describe("bellicose blaze trigger scope and R1 per-stack corrections", () => {
+  it("removes the element and follow-up benefit filters and corrects R1 to 15% per stack", () => {
+    const result = convertSource(bellicoseBlazeData(), functions, [], [])
+    const option = result.catalog.options.find((o) =>
+      o.optionId.endsWith(
+        "Bellicose_Blaze:refinement:blk-legacy:legacy-self-reduceDefense",
+      ),
+    )!
+    for (const variant of option.variants) {
+      expect(variant.status).toBe("corrected")
+      expect(variant.differences).toEqual([
+        "bellicose-blaze-trigger-scope-ignore-defense",
+      ])
+      expect(variant.maximumLayers).toBe(2)
+    }
+    const rule = result.definitions.effects.find(
+      (entry): entry is ContributionRule =>
+        entry.kind === "contribution" &&
+        entry.effectId ===
+          "w-engine:14130:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement",
+    )!
+    // 受益筛选只剩直伤种类；元素与追加攻击分类条件均已移除。
+    expect(rule.when).toEqual({
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.damageKind",
+          values: ["regular", "sheer", "sharpen"],
+        },
+      ],
+    })
+    expect(rule.parameters.amount).toMatchObject({
+      kind: "by-rank",
+      values: { 1: 0.15, 2: 0.172, 5: 0.24 },
+    })
+    expect(rule.activation).toMatchObject({
+      maximumLayers: { value: 2 },
+    })
+  })
+
+  it("rejects drifted per-stack values and drifted skill target encodings", () => {
+    expect(() =>
+      convertSource(bellicoseBlazeData({ r1PerStack: 17 }), functions, [], []),
+    ).toThrowError(/Value correction expects 16/)
+    expect(() =>
+      convertSource(
+        bellicoseBlazeData({ skillCategory: "basic" }),
+        functions,
+        [],
+        [],
+      ),
+    ).toThrowError(/Trigger scope correction expects skill target categories/)
+  })
+})
+
+const bloodCasketData = (overrides: { note?: string } = {}): SourceData => ({
+  ...batch01Base,
+  wengines: [
+    {
+      id: "BloodCasket",
+      name: "血髓秘匣",
+      profession: "锋御",
+      ...refinementPacks((rank) => [
+        {
+          id: "blk-mtsg3tw6-5rsbpt",
+          name: "暴击率增伤转模",
+          note:
+            overrides.note ??
+            "局内实时规则\n超出100%暴击率时转模\n1%暴击率 转 0.48% 增伤\n转模增伤上限24%",
+          effects: [
+            {
+              id: "eff-mtsg3tw6-gydnli",
+              scope: "general",
+              applyTarget: "self",
+              applySituation: "global",
+              elementFilter: "all",
+              kind: "convert",
+              stat: "dmgBonus",
+              value: 0,
+              stackable: false,
+              maxStacks: 1,
+              valuePerStack: 0,
+              defaultStacks: 1,
+              convert: {
+                from: "critRate",
+                panelSource: "final",
+                ratioPercent: [48, 56, 64, 72, 80][rank - 1]!,
+                cap: [24, 28, 32, 36, 40][rank - 1]!,
+                defaultBase: null,
+                initialBase: 100,
+              },
+              note: "",
+            },
+          ],
+        },
+      ]),
+    },
+  ],
+})
+
+describe("blood casket refinement-aware description", () => {
+  it("overrides the shared R1-only description without changing the correct values", () => {
+    const result = convertSource(bloodCasketData(), functions, [], [])
+    const option = result.catalog.options.find((o) =>
+      o.optionId.endsWith(
+        "BloodCasket:refinement:blk-mtsg3tw6-5rsbpt:eff-mtsg3tw6-gydnli",
+      ),
+    )!
+    expect(option.conditionDescription).toBe(
+      "局内实时规则\n超出100%暴击率时转模\n1%暴击率 转 0.48/0.56/0.64/0.72/0.8% 增伤（按精炼1—5取值）\n转模增伤上限 24/28/32/36/40%（按精炼1—5取值）",
+    )
+    for (const variant of option.variants) {
+      expect(variant.status).toBe("corrected")
+      expect(variant.differences).toEqual([
+        "blood-casket-refinement-aware-description",
+      ])
+    }
+    const rule = result.definitions.effects.find(
+      (entry): entry is ContributionRule =>
+        entry.kind === "contribution" &&
+        entry.effectId ===
+          "w-engine:13021:zzz-hp:eff-mtsg3tw6-gydnli:blk-mtsg3tw6-5rsbpt:refinement",
+    )!
+    expect(rule.parameters.rate).toMatchObject({
+      kind: "by-rank",
+      values: { 1: 0.4799999999999999, 5: 0.8 },
+    })
+    expect(rule.parameters.cap).toMatchObject({
+      kind: "by-rank",
+      values: { 1: 0.24, 2: 0.28, 3: 0.32, 4: 0.36, 5: 0.4 },
+    })
+  })
+
+  it("rejects drifted shared notes and partially covered registrations", () => {
+    expect(() =>
+      convertSource(
+        bloodCasketData({
+          note: "局内实时规则\n超出100%暴击率时转模\n1%暴击率 转 0.48% 增伤\n转模增伤上限28%",
+        }),
+        functions,
+        [],
+        [],
+      ),
+    ).toThrowError(/Refinement-value-description block note drift/)
+    // 同一选项内登记必须覆盖全部精炼档：临时移除精炼 3 的登记键验证拒绝，
+    // 结束后立即恢复，不影响其他用例。
+    const partialKey =
+      "w-engines/BloodCasket/refinement/3/blk-mtsg3tw6-5rsbpt/eff-mtsg3tw6-gydnli"
+    const registrations = SOURCE_SEMANTICS as Record<string, unknown>
+    const saved = registrations[partialKey]
+    delete registrations[partialKey]
+    try {
+      expect(() =>
+        convertSource(bloodCasketData(), functions, [], []),
+      ).toThrowError(
+        /Refinement-value-description registration must cover every refinement consistently/,
+      )
+    } finally {
+      registrations[partialKey] = saved
+    }
+  })
+})
+
+describe("housekeeper flat energy regen and swing jazz percentage semantics", () => {
+  it("compiles the five housekeeper ranks as flat points per second", () => {
+    const source: SourceData = {
+      ...batch01Base,
+      wengines: [
+        {
+          id: "Housekeeper",
+          name: "家政员",
+          profession: "防护",
+          ...refinementPacks((rank) => [
+            {
+              id: "blk-legacy",
+              name: `精${rank}`,
+              note: `位于后场时，装备者的能量自动回复提升${[0.45, 0.52, 0.58, 0.65, 0.72][rank - 1]}点/秒；[强化特殊技]命中敌人时，装备者造成的物理伤害提升${[3, 3.5, 4, 4.4, 4.8][rank - 1]}%，最多叠加15层，持续1秒，重复触发时刷新持续时间。`,
+              effects: [
+                batch01FixedEffect(
+                  "legacy-self-energyRegen",
+                  "energyRegen",
+                  [45, 52, 58, 65, 72][rank - 1]!,
+                ),
+              ],
+            },
+          ]),
+        },
+      ],
+    }
+    const result = convertSource(source, functions, [], [])
+    const rule = result.definitions.effects.find(
+      (entry): entry is ContributionRule =>
+        entry.kind === "contribution" &&
+        entry.effectId ===
+          "w-engine:13106:zzz-hp:legacy-self-energyRegen:blk-legacy:refinement",
+    )!
+    expect(rule.operation).toMatchObject({
+      kind: "stat-adjustment",
+      stat: "energyRegen",
+      stage: "final-fixed",
+      value: { kind: "parameter", unit: "energy-per-second", name: "amount" },
+    })
+    expect(rule.parameters.amount).toMatchObject({
+      kind: "by-rank",
+      unit: "energy-per-second",
+      values: { 1: 0.45, 2: 0.52, 3: 0.58, 4: 0.65, 5: 0.72 },
+    })
+    const option = result.catalog.options.find((o) =>
+      o.optionId.endsWith(
+        "Housekeeper:refinement:blk-legacy:legacy-self-energyRegen",
+      ),
+    )!
+    for (const variant of option.variants) {
+      expect(variant.status).toBe("corrected")
+      expect(variant.differences).toEqual(["wengine-flat-energy-regen"])
+    }
+  })
+
+  it("keeps the genuine percentage energy regen records outside the correction", () => {
+    const percentageData: SourceData = {
+      ...batch01Base,
+      wengines: [],
+      driveDiscs: [
+        {
+          id: "SuitSwingJazz",
+          name: "摇摆爵士",
+          twoPieceEffectBlocks: [
+            {
+              id: "blk-ms0fdpvq-2u8wnk",
+              name: "2件套",
+              note: "能量自动回复+20%。",
+              effects: [
+                batch01FixedEffect(
+                  "legacy-self-energyRegen",
+                  "energyRegen",
+                  20,
+                  {
+                    appliesToAnomaly: true,
+                  },
+                ),
+              ],
+            },
+          ],
+        },
+      ],
+    }
+    const result = convertSource(percentageData, functions, [], [])
+    const rule = result.definitions.effects.find(
+      (entry): entry is ContributionRule =>
+        entry.kind === "contribution" &&
+        entry.effectId.startsWith("disc:31600:zzz-hp:legacy-self-energyRegen"),
+    )!
+    // 百分比语义保持：基础回能 × 0.2 的乘法表达式。
+    expect(rule.operation).toMatchObject({
+      kind: "stat-adjustment",
+      stat: "energyRegen",
+      stage: "final-fixed",
+      value: {
+        kind: "multiply",
+        value: {
+          kind: "stat",
+          stat: "energyRegen",
+          stage: "base",
+        },
+        coefficient: { kind: "parameter", unit: "ratio", name: "amount" },
+      },
+    })
+    expect((rule.parameters.amount as { value: number }).value).toBeCloseTo(
+      0.2,
+      12,
+    )
+    const variant = result.catalog.options.find(
+      (o) => o.catalogEntityId === "drive-discs:SuitSwingJazz",
+    )!.variants[0]!
+    expect(variant.status).toBe("converted")
+    expect(variant.differences).toEqual([])
   })
 })

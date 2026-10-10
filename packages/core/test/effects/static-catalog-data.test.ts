@@ -884,17 +884,45 @@ describe("fixed-source catalog conformance", () => {
       calculateCatalogResult({ ...unrelated, selections: [] }).expected,
     )
   })
-  it("preserves The Vault's different self/team targets across refinement ranks", () => {
+  it("applies The Vault's corrected R1 damage bonus to teammates like the other ranks", () => {
     const option = catalog.options.find(
       (o) =>
         o.optionId ===
         "w-engines:The_Vault:refinement:blk-legacy:legacy-self-dmgBonus",
     )!
+    // 精炼 1 修正为 team 后五档结构一致，合并为一条 by-rank 规则。
+    expect(option.target).toBe("team")
+    expect(option.variants[0]!.status).toBe("corrected")
+    expect(option.variants[0]!.differences).toEqual([
+      "the-vault-r1-team-damage-bonus",
+    ])
+    const mergedRule = definitions.effects.find(
+      (entry) =>
+        entry.kind === "contribution" &&
+        entry.effectId ===
+          "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement",
+    ) as ContributionRule
+    expect(mergedRule.beneficiary).toEqual({ kind: "team" })
+    expect(mergedRule.parameters.amount).toMatchObject({ kind: "by-rank" })
+    const vaultValues = (
+      mergedRule.parameters.amount as { values: Record<string, number> }
+    ).values
+    for (const [refinement, expected] of [
+      [1, 0.15],
+      [2, 0.175],
+      [3, 0.2],
+      [4, 0.22],
+      [5, 0.24],
+    ] as const)
+      expect(vaultValues[String(refinement)]!, `R${refinement}`).toBeCloseTo(
+        expected,
+        12,
+      )
     const input = agentInput("1311", [])
     const holder = input.world.entities[0]!
     if (holder.kind !== "actor") throw new Error("fixture")
     for (const [refinement, expectedBonus] of [
-      [1, 0],
+      [1, 0.15],
       [2, 0.175],
     ] as const) {
       const result = calculateStaticDamageFromCatalog({
@@ -1023,6 +1051,78 @@ describe("fixed-source catalog conformance", () => {
         `/wengines/92/refinementBuffs/${packIndex}/effectBlocks/0/effects/2`,
     ),
   )
+  /**
+   * 增益修复批次 01（修订 16）的具名纠错位置：受益对象（聚宝箱精炼 1、喵运
+   * 当头五档）、触发条件误用为受益筛选（千面日陨精炼 1—4、嚣枪喧焰五档）、
+   * 固定回能误编百分比（11 件音擎 × 5 精炼）、数值误录（千面日陨精炼 4、
+   * 嚣枪喧焰精炼 1）与共享说明（血髓秘匣五档）。上游参考值不再作为期望值，
+   * 由本文件的具名批次用例验证。
+   */
+  const batch01CorrectedPointers = new Set([
+    // C01：千面日陨精炼 4 暴伤 62.25 → 65.25。
+    "/wengines/22/refinementBuffs/3/effectBlocks/0/effects/0",
+    // C11：千面日陨精炼 1—4 忽防移除冰元素命中限制（精炼 5 原为 all）。
+    ...[0, 1, 2, 3].map(
+      (packIndex) =>
+        `/wengines/22/refinementBuffs/${packIndex}/effectBlocks/0/effects/1`,
+    ),
+    // C07：喵运当头五档防御 team → 装备者。
+    ...[0, 1, 2, 3, 4].map(
+      (packIndex) =>
+        `/wengines/28/refinementBuffs/${packIndex}/effectBlocks/0/effects/0`,
+    ),
+    // C08：聚宝箱精炼 1 增伤 self → team。
+    "/wengines/75/refinementBuffs/0/effectBlocks/0/effects/0",
+    // C10：嚣枪喧焰五档移除火元素/追加攻击受益限制；精炼 1 每层 16 → 15。
+    ...[0, 1, 2, 3, 4].map(
+      (packIndex) =>
+        `/wengines/29/refinementBuffs/${packIndex}/effectBlocks/0/effects/1`,
+    ),
+    // T01：血髓秘匣五档共享说明覆盖为按精炼列值（数值不变）。
+    ...[0, 1, 2, 3, 4].map(
+      (packIndex) =>
+        `/wengines/76/refinementBuffs/${packIndex}/effectBlocks/0/effects/0`,
+    ),
+    // C05：11 件音擎 × 5 精炼的固定回能记录（引擎在固定源中的下标）。
+    ...Object.entries({
+      23: 3,
+      27: 2,
+      33: 0,
+      41: 2,
+      48: 0,
+      58: 2,
+      61: 0,
+      74: 0,
+      75: 1,
+      86: 2,
+      95: 2,
+    }).flatMap(([engineIndex, effectIndex]) =>
+      [0, 1, 2, 3, 4].map(
+        (packIndex) =>
+          `/wengines/${engineIndex}/refinementBuffs/${packIndex}/effectBlocks/0/effects/${effectIndex}`,
+      ),
+    ),
+  ])
+  /**
+   * 批次 01 中期望值或夹具 effectId 已过期的位置：C01/C10 的数值修正、
+   * C05 的固定回能改值，以及 C11/C08 修正后按精炼合并导致夹具单档
+   * effectId 失效的位置；这些位置仍计入覆盖核对，但不按上游参考值比对。
+   */
+  const batch01StaleOraclePointers = new Set([
+    "/wengines/22/refinementBuffs/3/effectBlocks/0/effects/0",
+    "/wengines/29/refinementBuffs/0/effectBlocks/0/effects/1",
+    ...[0, 1, 2, 3, 4].map(
+      (packIndex) =>
+        `/wengines/22/refinementBuffs/${packIndex}/effectBlocks/0/effects/1`,
+    ),
+    ...[0, 1, 2, 3, 4].map(
+      (packIndex) =>
+        `/wengines/75/refinementBuffs/${packIndex}/effectBlocks/0/effects/0`,
+    ),
+    ...[...batch01CorrectedPointers].filter((pointer) =>
+      /^\/wengines\/(23|27|33|41|48|58|61|74|75|86|95)\//.test(pointer),
+    ),
+  ])
   it("accounts for every converted source position with an independent reference result", () => {
     expect(oracle.sourceCommit).toBe(catalog.source.commit)
     expect(oracle.cases.map((c) => c.pointer).toSorted()).toEqual(
@@ -1036,7 +1136,8 @@ describe("fixed-source catalog conformance", () => {
             developerRevisionCorrectedPointers.has(r.pointer) ||
             attributeAnomalyScopeCorrectedPointers.has(r.pointer) ||
             completeStateMigratedPointers.has(r.pointer) ||
-            qingmingPierceStackCorrectedPointers.has(r.pointer),
+            qingmingPierceStackCorrectedPointers.has(r.pointer) ||
+            batch01CorrectedPointers.has(r.pointer),
         )
         .map((r) => r.pointer)
         .toSorted(),
@@ -1048,7 +1149,8 @@ describe("fixed-source catalog conformance", () => {
         potentialExplainedPointers.has(vector.pointer) ||
         attributeAnomalyScopeCorrectedPointers.has(vector.pointer) ||
         completeStateMigratedPointers.has(vector.pointer) ||
-        qingmingPierceStackCorrectedPointers.has(vector.pointer)
+        qingmingPierceStackCorrectedPointers.has(vector.pointer) ||
+        batch01StaleOraclePointers.has(vector.pointer)
       )
         continue
       const values = Object.fromEntries(
@@ -1750,7 +1852,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("15")
+    expect(catalog.revision).toBe("16")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -6752,5 +6854,533 @@ describe("qingming birdcage pierce stack revision", () => {
         )
       }
     }
+  })
+})
+
+/**
+ * 增益修复批次 01（修订 16）：音擎现有规则纠错的具名回归。修正项的期望值
+ * 来自各块 note 与 Nanoka 五档天赋同文（按一致描述纠错，未经游戏实测），
+ * 不从生成器反推；嚣枪喧焰保留的直伤种类限制是固定来源 scope=skill 的
+ * 派生实现约定（异常类受益范围无文本证据，保留待证），其断言锁定的是
+ * 实现现状而不是来源已证范围。触发状态与层数均由选择显式声明，不模拟
+ * 时间线。
+ */
+describe("batch 01 wengine rule corrections", () => {
+  const contributionSum = (
+    result: ReturnType<typeof calculateCatalogResult>,
+    effectId: string,
+  ) =>
+    [
+      ...result.evaluation.contributions,
+      ...(result.preparations ?? []).flatMap((p) => p.contributions),
+    ]
+      .filter((entry) => entry.origin.effectId === effectId)
+      .reduce((sum, entry) => sum + entry.value.value, 0)
+
+  const contributionBeneficiaries = (
+    result: ReturnType<typeof calculateCatalogResult>,
+    effectId: string,
+  ) =>
+    new Set(
+      [
+        ...result.evaluation.contributions,
+        ...(result.preparations ?? []).flatMap((p) => p.contributions),
+      ]
+        .filter((entry) => entry.origin.effectId === effectId)
+        .map((entry) => entry.origin.beneficiaryId),
+    )
+
+  const wengineInput = (
+    sourceEntityId: string,
+    optionId: string,
+    layers: number,
+    refinement: 1 | 2 | 3 | 4 | 5,
+    overrides: {
+      /** 持有者代理人；音擎适用性要求职业与引擎一致。 */
+      agent?: string
+      element?: StaticCatalogDamageInput["hit"]["element"]
+      skillCategory?: StaticCatalogDamageInput["hit"]["skillCategory"]
+      skillTags?: string[]
+      energyRegenBase?: number
+      teammate?: boolean
+      /** 伤害项读取的属性；改为被调整的属性以消费对应贡献。 */
+      damageStat?: "attack" | "defense" | "energyRegen"
+    } = {},
+  ): StaticCatalogDamageInput => {
+    const base = inputFor()
+    const attacker = base.world.entities[0]!
+    if (attacker.kind !== "actor") throw new Error("fixture")
+    const agent = overrides.agent ?? "1111"
+    const holderStats = {
+      ...attacker.generalStats,
+      ...(overrides.energyRegenBase === undefined
+        ? {}
+        : { energyRegen: general(overrides.energyRegenBase) }),
+      ...(overrides.damageStat === "defense" ? { defense: general(1000) } : {}),
+    }
+    return {
+      definitions,
+      catalog,
+      bindings: [
+        {
+          kind: "w-engine",
+          bindingId: "binding:weapon",
+          holderId: "entity:attacker",
+          sourceEntityId,
+          eligible: true,
+          configuration: { refinement },
+        },
+      ],
+      selections: [{ optionId, bindingId: "binding:weapon", layers }],
+      actorSources: [
+        { entityId: "entity:attacker", agentEntityId: agent },
+        { entityId: "entity:teammate", agentEntityId: agent },
+      ],
+      world: {
+        ...base.world,
+        entities: [
+          { ...attacker, generalStats: holderStats },
+          { ...attacker, entityId: "entity:teammate" },
+          base.world.entities[1]!,
+        ],
+      },
+      hit: {
+        ...base.hit,
+        actorId: overrides.teammate ? "entity:teammate" : "entity:attacker",
+        element: overrides.element ?? base.hit.element,
+        skillCategory: overrides.skillCategory ?? base.hit.skillCategory,
+        skillTags: overrides.skillTags ?? [],
+        damageItems: [
+          {
+            mode: "direct",
+            role: "base",
+            itemId: "base",
+            damageMultiplier: 2,
+            stat: overrides.damageStat ?? "attack",
+            statSource: { entityId: "entity:attacker" },
+          },
+        ],
+      },
+      damage: base.damage as Extract<
+        StaticCatalogDamageInput["damage"],
+        { kind: "regular" }
+      >,
+    }
+  }
+
+  it("corrects the myriad eclipse R4 critical damage and keeps the other ranks at source values", () => {
+    const option = catalog.options.find(
+      (o) =>
+        o.optionId ===
+        "w-engines:Myriad_Eclipse:refinement:blk-legacy:legacy-self-critDmg",
+    )!
+    expect(option.variants.map((v) => v.status)).toEqual([
+      "converted",
+      "converted",
+      "converted",
+      "corrected",
+      "converted",
+    ])
+    expect(option.variants[3]!.differences).toEqual([
+      "myriad-eclipse-r4-critical-damage",
+    ])
+    const effectId =
+      "w-engine:14129:zzz-hp:legacy-self-critDmg:blk-legacy:refinement"
+    for (const [refinement, expected] of [
+      [1, 0.45],
+      [2, 0.5175],
+      [3, 0.585],
+      [4, 0.6525],
+      [5, 0.72],
+    ] as const) {
+      const result = calculateCatalogResult(
+        wengineInput("14129", option.optionId, 1, refinement),
+      )
+      expect(contributionSum(result, effectId), `R${refinement}`).toBeCloseTo(
+        expected,
+        12,
+      )
+    }
+  })
+
+  it("applies the myriad eclipse state ignore-defense to non-ice hits for every rank", () => {
+    const option = catalog.options.find(
+      (o) =>
+        o.optionId ===
+        "w-engines:Myriad_Eclipse:refinement:blk-legacy:legacy-self-reduceDefense",
+    )!
+    expect(option.variants.map((v) => v.status)).toEqual([
+      "corrected",
+      "corrected",
+      "corrected",
+      "corrected",
+      "converted",
+    ])
+    for (const variant of option.variants.slice(0, 4))
+      expect(variant.differences).toEqual([
+        "myriad-eclipse-zero-verdict-ignore-defense-scope",
+      ])
+    // 修正后五档结构一致，合并为一条不带命中筛选的规则；冰/非冰命中均受益。
+    const rule = definitions.effects.find(
+      (entry) =>
+        entry.kind === "contribution" &&
+        entry.effectId ===
+          "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement",
+    ) as ContributionRule
+    expect(rule.when).toEqual({ kind: "all", conditions: [] })
+    const effectId = rule.effectId
+    for (const [refinement, expected] of [
+      [1, 0.25],
+      [2, 0.2875],
+      [3, 0.325],
+      [4, 0.3625],
+      [5, 0.4],
+    ] as const) {
+      for (const element of ["ice", "fire"] as const) {
+        const result = calculateCatalogResult(
+          wengineInput("14129", option.optionId, 1, refinement, {
+            element,
+          }),
+        )
+        expect(
+          defenseAdjustments(result),
+          `R${refinement} ${element}`,
+        ).toHaveLength(1)
+        expect(
+          defenseAdjustments(result)[0]!.value.value,
+          `R${refinement} ${element}`,
+        ).toBeCloseTo(-expected, 12)
+        expect(contributionSum(result, effectId)).toBeCloseTo(-expected, 12)
+      }
+    }
+  })
+
+  it("removes the bellicose blaze trigger-as-scope filters and corrects R1 to 15% per stack", () => {
+    const option = catalog.options.find(
+      (o) =>
+        o.optionId ===
+        "w-engines:Bellicose_Blaze:refinement:blk-legacy:legacy-self-reduceDefense",
+    )!
+    for (const variant of option.variants) {
+      expect(variant.status).toBe("corrected")
+      expect(variant.differences).toEqual([
+        "bellicose-blaze-trigger-scope-ignore-defense",
+      ])
+      expect(variant.maximumLayers).toBe(2)
+    }
+    const rule = definitions.effects.find(
+      (entry) =>
+        entry.kind === "contribution" &&
+        entry.effectId ===
+          "w-engine:14130:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement",
+    ) as ContributionRule
+    // 受益筛选只剩直伤种类：装备者的攻击不限定元素或追加攻击分类。
+    expect(rule.when).toEqual({
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.damageKind",
+          values: ["regular", "sheer", "sharpen"],
+        },
+      ],
+    })
+    // 触发条件（火属性追加攻击命中）不代表受益命中：冰属性普攻同样享受。
+    const result = calculateCatalogResult(
+      wengineInput("14130", option.optionId, 1, 1, {
+        element: "ice",
+        skillCategory: "basic",
+      }),
+    )
+    expect(defenseAdjustments(result)[0]!.value.value).toBeCloseTo(-0.15, 12)
+    const twoLayers = calculateCatalogResult(
+      wengineInput("14130", option.optionId, 2, 1, {
+        element: "ice",
+        skillCategory: "basic",
+      }),
+    )
+    expect(
+      defenseAdjustments(twoLayers).reduce(
+        (sum, entry) => sum + entry.value.value,
+        0,
+      ),
+    ).toBeCloseTo(-0.3, 12)
+    const r5 = calculateCatalogResult(
+      wengineInput("14130", option.optionId, 1, 5, {
+        element: "physical",
+        skillCategory: "basic",
+      }),
+    )
+    expect(defenseAdjustments(r5)[0]!.value.value).toBeCloseTo(-0.24, 12)
+  })
+
+  it("limits the promotion stats defense to the equipper and keeps the two clauses separately selectable by layers", () => {
+    const option = catalog.options.find((o) =>
+      o.optionId.startsWith("w-engines:Promotion%20Stats:refinement:"),
+    )!
+    expect(option.target).toBe("self")
+    for (const variant of option.variants) {
+      expect(variant.status).toBe("corrected")
+      expect(variant.differences).toEqual(["promotion-stats-equipper-defense"])
+      expect(variant.maximumLayers).toBe(2)
+    }
+    const effectId =
+      "w-engine:13017:zzz-hp:eff-mtwn69lr-2h2brm:blk-mtwn69lr-xfb4n8:refinement"
+    // 常驻（1 层）与强化特殊技触发的额外部分（2 层）分别生效。
+    for (const [refinement, perLayer] of [
+      [1, 0.08],
+      [2, 0.09],
+      [3, 0.1],
+      [4, 0.11],
+      [5, 0.12],
+    ] as const) {
+      const permanent = calculateCatalogResult(
+        wengineInput("13017", option.optionId, 1, refinement, {
+          agent: "1611",
+          damageStat: "defense",
+        }),
+      )
+      expect(
+        contributionSum(permanent, effectId),
+        `R${refinement} 1层`,
+      ).toBeCloseTo(perLayer, 12)
+      const withSpecial = calculateCatalogResult(
+        wengineInput("13017", option.optionId, 2, refinement, {
+          agent: "1611",
+          damageStat: "defense",
+        }),
+      )
+      expect(
+        contributionSum(withSpecial, effectId),
+        `R${refinement} 2层`,
+      ).toBeCloseTo(2 * perLayer, 12)
+    }
+    // 装备者以外不受益：队友面板没有任何来自该规则的贡献。
+    const teammateView = calculateCatalogResult(
+      wengineInput("13017", option.optionId, 2, 3, {
+        agent: "1611",
+        damageStat: "defense",
+        teammate: true,
+      }),
+    )
+    expect(contributionBeneficiaries(teammateView, effectId)).toEqual(
+      new Set(["entity:attacker"]),
+    )
+  })
+
+  it("compiles the eleven flat energy regen engines independently of the base regen", () => {
+    // [引擎实体, 职业匹配的持有者代理人, 选项, 精炼 1 期望值, 规则]
+    const firstRankExpectations: readonly [
+      string,
+      string,
+      string,
+      number,
+      string,
+    ][] = [
+      [
+        "13103",
+        "1311",
+        "w-engines:The_Vault:refinement:blk-legacy:eff-ms1zuvli-v2yjaz",
+        0.5,
+        "w-engine:13103:zzz-hp:eff-ms1zuvli-v2yjaz:blk-legacy:refinement:1",
+      ],
+      [
+        "13106",
+        "1111",
+        "w-engines:Housekeeper:refinement:blk-legacy:legacy-self-energyRegen",
+        0.45,
+        "w-engine:13106:zzz-hp:legacy-self-energyRegen:blk-legacy:refinement",
+      ],
+      [
+        "13127",
+        "1121",
+        "w-engines:Peacekeeper_Specialized:refinement:blk-ms1q8l6m-sw89dm:eff-ms1zrtg4-v2bhlz",
+        0.4,
+        "w-engine:13127:zzz-hp:eff-ms1zrtg4-v2bhlz:blk-ms1q8l6m-sw89dm:refinement:1",
+      ],
+      [
+        "14110",
+        "1011",
+        "w-engines:Hellfire_Gears:refinement:blk-ms1nik02-6x9k3x:eff-ms1nik02-wn2n3p",
+        0.6,
+        "w-engine:14110:zzz-hp:eff-ms1nik02-wn2n3p:blk-ms1nik02-6x9k3x:refinement:1",
+      ],
+      [
+        "14117",
+        "1401",
+        "w-engines:Flamemaker_Shaker:refinement:blk-legacy:eff-ms1wkhh3-zq9asn",
+        0.6,
+        "w-engine:14117:zzz-hp:eff-ms1wkhh3-zq9asn:blk-legacy:refinement:1",
+      ],
+      [
+        "14121",
+        "1311",
+        "w-engines:Weeping_Cradle:refinement:blk-legacy:eff-ms1zwc3t-y6iv02",
+        0.6,
+        "w-engine:14121:zzz-hp:eff-ms1zwc3t-y6iv02:blk-legacy:refinement:1",
+      ],
+      [
+        "14134",
+        "1121",
+        "w-engines:Half-Sugar_Bunny:refinement:blk-legacy:eff-ms1zsp0c-otdfbz",
+        0.46,
+        "w-engine:14134:zzz-hp:eff-ms1zsp0c-otdfbz:blk-legacy:refinement:1",
+      ],
+      [
+        "14145",
+        "1311",
+        "w-engines:Dreamlit_Hearth:refinement:blk-legacy:eff-ms1zxwea-108qso",
+        0.4,
+        "w-engine:14145:zzz-hp:eff-ms1zxwea-108qso:blk-legacy:refinement:1",
+      ],
+      [
+        "14148",
+        "1011",
+        "w-engines:Yesterday_Calls:refinement:blk-legacy:legacy-self-energyRegen",
+        1.5,
+        "w-engine:14148:zzz-hp:legacy-self-energyRegen:blk-legacy:refinement",
+      ],
+      [
+        "14149",
+        "1311",
+        "w-engines:Thoughtbop:refinement:blk-legacy:eff-ms1zzc96-t16l30",
+        0.6,
+        "w-engine:14149:zzz-hp:eff-ms1zzc96-t16l30:blk-legacy:refinement:1",
+      ],
+      [
+        "14157",
+        "1011",
+        "w-engines:Head_Lackey:refinement:blk-legacy:eff-ms1ybpnc-milh2d",
+        0.4,
+        "w-engine:14157:zzz-hp:eff-ms1ybpnc-milh2d:blk-legacy:refinement:1",
+      ],
+    ]
+    // 不同基础回能下增量恒为固定点数/秒，不随基础缩放。
+    for (const base of [1.2, 5.0] as const)
+      for (const [
+        sourceEntityId,
+        agent,
+        optionId,
+        expected,
+        effectId,
+      ] of firstRankExpectations) {
+        const result = calculateCatalogResult(
+          wengineInput(sourceEntityId, optionId, 1, 1, {
+            agent,
+            energyRegenBase: base,
+            damageStat: "energyRegen",
+          }),
+        )
+        expect(
+          contributionSum(result, effectId),
+          `${optionId} base=${base}`,
+        ).toBeCloseTo(expected, 12)
+      }
+    // 家政员五档逐档核对（按精炼合并的 by-rank 表）。
+    const housekeeper = firstRankExpectations[1]!
+    const housekeeperEffect = housekeeper[4]!
+    for (const [refinement, expected] of [
+      [1, 0.45],
+      [2, 0.52],
+      [3, 0.58],
+      [4, 0.65],
+      [5, 0.72],
+    ] as const) {
+      const result = calculateCatalogResult(
+        wengineInput("13106", housekeeper[2]!, 1, refinement, {
+          agent: housekeeper[1]!,
+          energyRegenBase: 5.0,
+          damageStat: "energyRegen",
+        }),
+      )
+      expect(
+        contributionSum(result, housekeeperEffect),
+        `家政员 R${refinement}`,
+      ).toBeCloseTo(expected, 12)
+    }
+  })
+
+  it("keeps the genuine percentage energy regen records multiplying the base regen", () => {
+    const option = catalog.options.find(
+      (o) =>
+        o.optionId ===
+        "drive-discs:SuitSwingJazz:setPieces:2:blk-ms0di9po-jabf74:eff-ms0di9po-rmkbq6",
+    )!
+    expect(option.variants[0]!.status).toBe("converted")
+    expect(option.variants[0]!.differences).toEqual([])
+    const effectId =
+      "disc:31600:zzz-hp:eff-ms0di9po-rmkbq6:blk-ms0di9po-jabf74:setPieces:2"
+    for (const [base, expected] of [
+      [1.2, 0.24],
+      [5.0, 1.0],
+    ] as const) {
+      const result = calculateCatalogResult({
+        ...wengineInput("31600", option.optionId, 1, 1, {
+          energyRegenBase: base,
+          damageStat: "energyRegen",
+        }),
+        bindings: [
+          {
+            kind: "drive-disc",
+            bindingId: "binding:weapon",
+            holderId: "entity:attacker",
+            sourceEntityId: "31600",
+            eligible: true,
+            configuration: { setPieces: 2 },
+          },
+        ],
+      })
+      expect(contributionSum(result, effectId), `base=${base}`).toBeCloseTo(
+        expected,
+        12,
+      )
+    }
+  })
+
+  it("describes the blood casket conversion per refinement without changing the values", () => {
+    const option = catalog.options.find((o) =>
+      o.optionId.endsWith(
+        "BloodCasket:refinement:blk-mtsg3tw6-5rsbpt:eff-mtsg3tw6-gydnli",
+      ),
+    )!
+    expect(option.conditionDescription).toBe(
+      "局内实时规则\n超出100%暴击率时转模\n1%暴击率 转 0.48/0.56/0.64/0.72/0.8% 增伤（按精炼1—5取值）\n转模增伤上限 24/28/32/36/40%（按精炼1—5取值）",
+    )
+    for (const variant of option.variants) {
+      expect(variant.status).toBe("corrected")
+      expect(variant.differences).toEqual([
+        "blood-casket-refinement-aware-description",
+      ])
+    }
+    const rule = definitions.effects.find(
+      (entry) =>
+        entry.kind === "contribution" &&
+        entry.effectId ===
+          "w-engine:13021:zzz-hp:eff-mtsg3tw6-gydnli:blk-mtsg3tw6-5rsbpt:refinement",
+    ) as ContributionRule
+    expect(rule.parameters.rate).toMatchObject({
+      kind: "by-rank",
+      values: { 1: 0.4799999999999999, 2: 0.56, 3: 0.64, 4: 0.72, 5: 0.8 },
+    })
+    expect(rule.parameters.cap).toMatchObject({
+      kind: "by-rank",
+      values: { 1: 0.24, 2: 0.28, 3: 0.32, 4: 0.36, 5: 0.4 },
+    })
+  })
+
+  it("registers the batch 01 named differences with the corrected variants", () => {
+    for (const differenceId of [
+      "wengine-flat-energy-regen",
+      "myriad-eclipse-r4-critical-damage",
+      "myriad-eclipse-zero-verdict-ignore-defense-scope",
+      "promotion-stats-equipper-defense",
+      "the-vault-r1-team-damage-bonus",
+      "bellicose-blaze-trigger-scope-ignore-defense",
+      "blood-casket-refinement-aware-description",
+    ])
+      expect(
+        catalog.differences.some((d) => d.differenceId === differenceId),
+        differenceId,
+      ).toBe(true)
   })
 })

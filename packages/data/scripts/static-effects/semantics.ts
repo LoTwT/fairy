@@ -286,6 +286,100 @@ export type SourceSemantics =
       readonly evidence: readonly SemanticsEvidenceReference[]
       readonly verification: string
     }
+  | {
+      /**
+       * 固定来源把“能量自动回复提升若干点/秒”的固定值编入 energyRegen 百分比
+       * 字段（读取为基础回能 × value/100，基础回能 1.2 时 +0.4 记录实际增加
+       * 0.48 点/秒）；块 note 与 Nanoka 同文均为固定点数/秒。转换器按具名登记
+       * 把该记录编译为固定回能加数（energy-per-second，value × 0.01），不随
+       * 基础回能缩放；真正的百分比回能记录（摇摆爵士/月光安可二件套 +20%）
+       * 不在登记内，energyRegen 的百分比语义保持不变。原始与规范化记录的
+       * stat、编码或数值与登记不符即拒绝生成。
+       */
+      readonly kind: "flat-energy-regen"
+      /** 原始记录应携带的来源数值（= 固定点数/秒 × 100）；漂移即拒绝。 */
+      readonly expectedSourceValue: number
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
+       * 固定来源的记录数值与其自身块 note 及 Nanoka 同文矛盾（如千面日陨
+       * 精炼 4 的暴伤记 62.25，note 与 Nanoka 均为 65.25）：按登记的修正值
+       * 编译，原值保留在覆盖报告与固定源引用中。原始与规范化数值与登记的
+       * 期望原值不符即拒绝生成，防止来源升级时静默套用旧修正。
+       */
+      readonly kind: "source-value-correction"
+      readonly expectedSourceValue: number
+      readonly correctedValue: number
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
+       * 固定来源的 applyTarget 与块 note 及 Nanoka 同文矛盾（如聚宝箱精炼 1
+       * 的“所有单位”记为 self、喵运当头五档的装备者防御记为 team）：按登记
+       * 修正受益对象，规则 beneficiary 与目录选项 target 同步更正，其余条件、
+       * 数值与稳定 ID 不变。原始与规范化 applyTarget 或数值与登记不符即拒绝。
+       */
+      readonly kind: "beneficiary-target-correction"
+      readonly expectedApplyTarget: "self" | "team"
+      /** 修正后的目录对象："self" 表示仅装备者（holder），"team" 表示全队。 */
+      readonly correctedOptionTarget: "self" | "team"
+      /** 原始记录应携带的来源数值（fixed 记录取 value，stacked 记录取 valuePerStack）。 */
+      readonly expectedSourceValue: number
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
+       * 来源把状态的触发条件（元素命中、追加攻击分类）编码为增益的受益筛选：
+       * 块 note 与 Nanoka 同文证明该元素／招式分类只是取得状态的触发条件，
+       * 状态期间的受益不限定触发时的元素或追加攻击分类。转换器按登记移除
+       * 对应的命中条件；嚣枪喧焰规则保留固定来源 scope=skill 派生的直伤种类
+       * （regular/sheer/sharpen）限制与层数上限——中文与英文文本及项目伤害
+       * 分类契约均未界定异常类是否受益，该范围保留待证，不以文本为已证结论。
+       * 触发事实、持续秒数与层数由调用方显式选择声明，不模拟时间线。个别
+       * 记录伴随来源数值误录（嚣枪喧焰精炼 1 每层 16 应为 15），由
+       * valueCorrection 一并登记。编码或数值漂移即拒绝。
+       */
+      readonly kind: "trigger-conditions-not-benefit-scope"
+      /** 移除以元素命中筛选受益的条件（对应来源 elementFilter）。 */
+      readonly removeElementCondition: boolean
+      /** 移除以技能目标/追加攻击分类筛选受益的条件（对应来源 scope=skill）。 */
+      readonly removeSkillTargetConditions: boolean
+      /** 防漂移：登记时来源记录应携带的 elementFilter 原值。 */
+      readonly expectedElementFilter: "all" | readonly string[]
+      /** 防漂移：登记时来源记录 skillTargets 的分类序列（无目标时为空数组）。 */
+      readonly expectedSkillTargetCategories: readonly string[]
+      /** 可选：同记录每层/固定数值的来源误录与修正值。 */
+      readonly valueCorrection?: {
+        readonly expectedSourceValue: number
+        readonly correctedValue: number
+      }
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
+       * 五档精炼共用同一块 note，但 note 数值只描述精炼 1（血髓秘匣五档均写
+       * “1%暴击率 转 0.48% 增伤 / 上限24%”）；来源数值本身按精炼正确，仅共享
+       * 说明无法表达当前精炼。选项的 conditionDescription 按登记的精炼感知
+       * 文本覆盖，数值、规则与稳定 ID 不变；块 note 漂移即拒绝生成。
+       */
+      readonly kind: "refinement-value-description"
+      /** 覆盖后的选项说明，须能表达全部精炼档位的取值。 */
+      readonly conditionDescription: string
+      /** 防漂移：登记时各档共用的块 note 原文。 */
+      readonly expectedBlockNote: string
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
 
 /**
  * 完整状态选项登记：固定来源把同一游戏状态拆成多条可独立切换的记录
@@ -623,6 +717,685 @@ const qingmingPerRefinementPierceBonus: Readonly<Record<number, string>> = {
 }
 const qingmingBirdcageVerification = (refinement: number): string =>
   `块 note 与 Nanoka 五档天赋同文（固定源 /wengines/92/refinementBuffs/${refinement - 1}/effectBlocks/0/note，Nanoka w-engines/14137 /talents/${refinement}/desc）：“每层[青溟同行]效果使装备者造成的以太伤害提升…%，[终结技]或[强化特殊技]造成的以太贯穿伤害提升${qingmingPerRefinementPierceBonus[refinement]}”，且全句声明最多叠加 2 层。同一块的以太增伤记录（kind=stacked、每层 8—12.8%、maxStacks=2）与此一致，而贯穿增伤记录被固定来源编码为 kind=fixed、value=${qingmingPerRefinementPierceBonus[refinement].replace("%", "")}、stackable=false、maxStacks=1、valuePerStack=0：resolveEffectBaseValue 对 fixed 非 stackable 直接返回 value，层数不参与取值，两层配置只会贡献单层值。Fairy 按本登记把该贡献改为按层编译：每层值取来源 value（即描述的单层百分比），选项与规则激活层数上限为 2，调用方按真实层数显式选择，0 层表示关闭；“进入接战直接获得 2 层”与 15 秒刷新不模拟，不把任何时点自动视为满层。effectId、optionId、精炼匹配、持有者、以太元素、贯穿伤害种类与[终结技]或[强化特殊技]（all-special-ms0fcqv7 为强化特殊技，不是任意特殊技）等既有条件保持不变；同块的固定暴击率条款不按层翻倍。证据级别为“按一致描述纠错”，未经游戏实测；若后续取得相反的游戏行为证据，应先登记来源再调整。`
+
+// —— 增益修复批次 01：音擎现有规则纠错（C01/C05/C07/C08/C10/C11/T01）——
+// 证据依据：ZZZ-HP 开发者反馈 2026-10-10 与 Fairy 结合 Nanoka 文本复核清单
+// （F2/F5/F15）及固定来源各块 note；一律为“按一致描述纠错”，未经游戏实测。
+
+/** 音擎天赋证据：按精炼档读取 integrated /talents/{rank}/desc。 */
+const wengineTalentEvidence = (
+  nanokaId: string,
+  sha256: string,
+  refinement: 1 | 2 | 3 | 4 | 5,
+): readonly SemanticsEvidenceReference[] => [
+  {
+    path: `w-engines/${nanokaId}/details.zh.json`,
+    pointer: `/talents/${refinement}/desc`,
+    sha256,
+  },
+]
+
+/** 千面日陨（14129）：五档暴伤 45/51.75/58.5/65.25/72%，固定来源 R4 记 62.25。 */
+const myriadEclipseSha =
+  "8884f4df64dc76eeec448954a70fa3185751e08c445afcf287506e3f9b968ac9"
+const myriadEclipseIgnoreDefensePercent: Readonly<
+  Record<1 | 2 | 3 | 4 | 5, string>
+> = { 1: "25", 2: "28.75", 3: "32.5", 4: "36.25", 5: "40" }
+
+/** 喵运当头（13017）：五档防御 8/9/10/11/12%，常驻与强化特殊技触发各一段。 */
+const promotionStatsSha =
+  "7232bf1bd3ec685545e44250e88602c024e5e5c8d26c3e959e05aa002093c3e1"
+const promotionStatsDefensePercent: Readonly<
+  Record<1 | 2 | 3 | 4 | 5, number>
+> = { 1: 8, 2: 9, 3: 10, 4: 11, 5: 12 }
+
+/** 聚宝箱（13103）：精炼 1 增伤 15% 受益对象为“所有单位”，固定来源记 self。 */
+const theVaultSha =
+  "bf2b958f4e77151cb7d84641ca65a0caed5b4eabfd376b23f6180838e341a156"
+
+/** 嚣枪喧焰（14130）：五档每层忽防 15/17.2/19.5/21.7/24%，固定来源 R1 记 16。 */
+const bellicoseBlazeSha =
+  "5e592499b36fbf076fd6dc38ae4c7b2f45523a5195ebf01b007c91a4f1c4bf0e"
+const bellicoseBlazePerStackPercent: Readonly<
+  Record<1 | 2 | 3 | 4 | 5, string>
+> = { 1: "15", 2: "17.2", 3: "19.5", 4: "21.7", 5: "24" }
+
+/** 血髓秘匣（13021）：五档换算 0.48/0.56/0.64/0.72/0.8%、上限 24—40%。 */
+const bloodCasketSha =
+  "eef5da868448dbd66f2dce088bfe57d47116487e798d06008c8dfd91bf36da26"
+/** 血髓秘匣五档共用的块 note 原文（数值只描述精炼 1）。 */
+const bloodCasketSharedBlockNote =
+  "局内实时规则\n超出100%暴击率时转模\n1%暴击率 转 0.48% 增伤\n转模增伤上限24%"
+/** 血髓秘匣覆盖后的精炼感知说明。 */
+const bloodCasketRefinementDescription =
+  "局内实时规则\n超出100%暴击率时转模\n1%暴击率 转 0.48/0.56/0.64/0.72/0.8% 增伤（按精炼1—5取值）\n转模增伤上限 24/28/32/36/40%（按精炼1—5取值）"
+
+const formatFlatPoints = (sourceValue: number): string =>
+  String(sourceValue / 100)
+
+/**
+ * C05：11 件音擎五档“能量自动回复提升若干点/秒”被固定来源编入 energyRegen
+ * 百分比字段。records.value 为来源数值（固定点数/秒 × 100）；notePrefix 是
+ * 各档块 note 回能条款中数值前的原文片段。
+ */
+interface FlatEnergyRegenRecord {
+  readonly rank: 1 | 2 | 3 | 4 | 5
+  readonly blockId: string
+  readonly effectId: string
+  readonly value: number
+}
+interface FlatEnergyRegenEngine {
+  readonly upstreamId: string
+  readonly name: string
+  readonly nanokaId: string
+  readonly sha256: string
+  readonly notePrefix: string
+  readonly records: readonly [
+    FlatEnergyRegenRecord,
+    FlatEnergyRegenRecord,
+    FlatEnergyRegenRecord,
+    FlatEnergyRegenRecord,
+    FlatEnergyRegenRecord,
+  ]
+}
+const flatEnergyRegenEngines: readonly FlatEnergyRegenEngine[] = [
+  {
+    upstreamId: "The_Vault",
+    name: "聚宝箱",
+    nanokaId: "13103",
+    sha256: theVaultSha,
+    notePrefix: "装备者的能量自动回复提升",
+    records: [
+      {
+        rank: 1,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zuvli-v2yjaz",
+        value: 50,
+      },
+      {
+        rank: 2,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zv3lq-wkhzfm",
+        value: 58,
+      },
+      {
+        rank: 3,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zv8x7-c9st7n",
+        value: 65,
+      },
+      {
+        rank: 4,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zve66-p2wn3a",
+        value: 72,
+      },
+      {
+        rank: 5,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zvkfu-7g8a4b",
+        value: 80,
+      },
+    ],
+  },
+  {
+    upstreamId: "Housekeeper",
+    name: "家政员",
+    nanokaId: "13106",
+    sha256: "245041a7d461871ad49477a8f0956f99847409424135ed34f7b712616ed9818d",
+    notePrefix: "位于后场时，装备者的能量自动回复提升",
+    records: [
+      {
+        rank: 1,
+        blockId: "blk-legacy",
+        effectId: "legacy-self-energyRegen",
+        value: 45,
+      },
+      {
+        rank: 2,
+        blockId: "blk-legacy",
+        effectId: "legacy-self-energyRegen",
+        value: 52,
+      },
+      {
+        rank: 3,
+        blockId: "blk-legacy",
+        effectId: "legacy-self-energyRegen",
+        value: 58,
+      },
+      {
+        rank: 4,
+        blockId: "blk-legacy",
+        effectId: "legacy-self-energyRegen",
+        value: 65,
+      },
+      {
+        rank: 5,
+        blockId: "blk-legacy",
+        effectId: "legacy-self-energyRegen",
+        value: 72,
+      },
+    ],
+  },
+  {
+    upstreamId: "Peacekeeper_Specialized",
+    name: "维序者-特化型",
+    nanokaId: "13127",
+    sha256: "6ede50ba4109867976d76b4dbce456a11f346ea42873c26c1dcdadbc122eacd3",
+    notePrefix: "拥有护盾时，装备者的能量自动回复提升",
+    records: [
+      {
+        rank: 1,
+        blockId: "blk-ms1q8l6m-sw89dm",
+        effectId: "eff-ms1zrtg4-v2bhlz",
+        value: 40,
+      },
+      {
+        rank: 2,
+        blockId: "blk-ms1q8zbq-ysi7mh",
+        effectId: "eff-ms1zryw8-45jrln",
+        value: 46,
+      },
+      {
+        rank: 3,
+        blockId: "blk-ms1q978x-r8ti67",
+        effectId: "eff-ms1zs2h2-udy588",
+        value: 52,
+      },
+      {
+        rank: 4,
+        blockId: "blk-ms1q9c8o-q2of3b",
+        effectId: "eff-ms1zs6yo-puc1b9",
+        value: 58,
+      },
+      {
+        rank: 5,
+        blockId: "blk-ms1q9gz1-0kwnlx",
+        effectId: "eff-ms1zsavo-fzwwl8",
+        value: 64,
+      },
+    ],
+  },
+  {
+    upstreamId: "Hellfire_Gears",
+    name: "燃狱齿轮",
+    nanokaId: "14110",
+    sha256: "ff9ccb3fa3763e4d5ddd7b828574c14f55dfca722acd8d03a7f778ea7bcdca8b",
+    notePrefix: "位于后场时，装备者的能量自动回复提升",
+    records: [
+      {
+        rank: 1,
+        blockId: "blk-ms1nik02-6x9k3x",
+        effectId: "eff-ms1nik02-wn2n3p",
+        value: 60,
+      },
+      {
+        rank: 2,
+        blockId: "blk-ms1nj1mz-5ajt8k",
+        effectId: "eff-ms1nj1mz-33h9yh",
+        value: 75,
+      },
+      {
+        rank: 3,
+        blockId: "blk-ms1njfpo-c2y68w",
+        effectId: "eff-ms1njfpo-2zrguc",
+        value: 90,
+      },
+      {
+        rank: 4,
+        blockId: "blk-ms1njtyu-fcmkxt",
+        effectId: "eff-ms1njtyu-cvmyau",
+        value: 105,
+      },
+      {
+        rank: 5,
+        blockId: "blk-ms1nk22a-ty79n2",
+        effectId: "eff-ms1nk22a-0hwofq",
+        value: 120,
+      },
+    ],
+  },
+  {
+    upstreamId: "Flamemaker_Shaker",
+    name: "灼心摇壶",
+    nanokaId: "14117",
+    sha256: "94bbddbe3344be28498493520e2dc78e1f2772498397ab7d42256bfc2c465d3e",
+    notePrefix: "位于后场时，装备者的能量自动回复提升",
+    records: [
+      {
+        rank: 1,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1wkhh3-zq9asn",
+        value: 60,
+      },
+      {
+        rank: 2,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1wtkfw-xqz9lo",
+        value: 75,
+      },
+      {
+        rank: 3,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1wu9xl-0og37t",
+        value: 90,
+      },
+      {
+        rank: 4,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1wuy85-zp3e2n",
+        value: 105,
+      },
+      {
+        rank: 5,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1wvm5e-jl6dgb",
+        value: 120,
+      },
+    ],
+  },
+  {
+    upstreamId: "Weeping_Cradle",
+    name: "啜泣摇篮",
+    nanokaId: "14121",
+    sha256: "1ba0d52482bf316cf987ac17999bc6a0510fc90153e930664656286078daa4dd",
+    notePrefix: "位于后场时，装备者的能量自动回复提升",
+    records: [
+      {
+        rank: 1,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zwc3t-y6iv02",
+        value: 60,
+      },
+      {
+        rank: 2,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zwnfa-ib972o",
+        value: 75,
+      },
+      {
+        rank: 3,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zwut7-09s4nv",
+        value: 90,
+      },
+      {
+        rank: 4,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zx37b-e1s233",
+        value: 105,
+      },
+      {
+        rank: 5,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zxc6r-9ssiac",
+        value: 120,
+      },
+    ],
+  },
+  {
+    upstreamId: "Half-Sugar_Bunny",
+    name: "半糖雪兔",
+    nanokaId: "14134",
+    sha256: "91cbdf1c39ac0864b0c1df0a7078aecc0f8d9eeae912143fedcffd8e1e3a24c6",
+    notePrefix: "装备者的能量自动回复提升",
+    records: [
+      {
+        rank: 1,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zsp0c-otdfbz",
+        value: 46,
+      },
+      {
+        rank: 2,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1ztd1n-xwqo0p",
+        value: 53,
+      },
+      {
+        rank: 3,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zto8e-t2e2w4",
+        value: 60,
+      },
+      {
+        rank: 4,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1ztwyr-lmgwoh",
+        value: 67,
+      },
+      {
+        rank: 5,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zu3k5-k5egz1",
+        value: 74,
+      },
+    ],
+  },
+  {
+    upstreamId: "Dreamlit_Hearth",
+    name: "铸梦炉歌",
+    nanokaId: "14145",
+    sha256: "66c53683ba91fc669dcd91f08a6f229c2ac8954ed734ad6d9d60a77bbe751d97",
+    notePrefix: "装备者的能量自动回复提升",
+    records: [
+      {
+        rank: 1,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zxwea-108qso",
+        value: 40,
+      },
+      {
+        rank: 2,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zy5kv-qxy242",
+        value: 46,
+      },
+      {
+        rank: 3,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zye58-m5xsoq",
+        value: 52,
+      },
+      {
+        rank: 4,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zymuj-jgthl4",
+        value: 58,
+      },
+      {
+        rank: 5,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zyw66-9cnhly",
+        value: 64,
+      },
+    ],
+  },
+  {
+    upstreamId: "Yesterday_Calls",
+    name: "昨夜来电",
+    nanokaId: "14148",
+    sha256: "3245466324100f866c221d3aa6d6de4621ecedef8a9e10f6d1c70953f409601e",
+    notePrefix: "位于后场时，装备者的能量自动回复提升",
+    records: [
+      {
+        rank: 1,
+        blockId: "blk-legacy",
+        effectId: "legacy-self-energyRegen",
+        value: 150,
+      },
+      {
+        rank: 2,
+        blockId: "blk-legacy",
+        effectId: "legacy-self-energyRegen",
+        value: 170,
+      },
+      {
+        rank: 3,
+        blockId: "blk-legacy",
+        effectId: "legacy-self-energyRegen",
+        value: 190,
+      },
+      {
+        rank: 4,
+        blockId: "blk-legacy",
+        effectId: "legacy-self-energyRegen",
+        value: 210,
+      },
+      {
+        rank: 5,
+        blockId: "blk-legacy",
+        effectId: "legacy-self-energyRegen",
+        value: 230,
+      },
+    ],
+  },
+  {
+    upstreamId: "Thoughtbop",
+    name: "思络成歌",
+    nanokaId: "14149",
+    sha256: "7aeb67fed1144128ab46d06004b4075f449f230306420c3316633f0fa47cd252",
+    notePrefix: "装备者为非操作中角色时，能量自动回复提升",
+    records: [
+      {
+        rank: 1,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zzc96-t16l30",
+        value: 60,
+      },
+      {
+        rank: 2,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zzkj9-gxjv06",
+        value: 69,
+      },
+      {
+        rank: 3,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1zzstk-8h3ev8",
+        value: 78,
+      },
+      {
+        rank: 4,
+        blockId: "blk-legacy",
+        effectId: "eff-ms2001or-sr6i90",
+        value: 87,
+      },
+      {
+        rank: 5,
+        blockId: "blk-legacy",
+        effectId: "eff-ms200bfx-381kfh",
+        value: 96,
+      },
+    ],
+  },
+  {
+    upstreamId: "Head_Lackey",
+    name: "首席跟班",
+    nanokaId: "14157",
+    sha256: "5f0852373824739812d5e4fed0f362d80638bddea1a868892d08373710e4066c",
+    notePrefix: "装备者为非操作中角色时，能量自动回复提升",
+    records: [
+      {
+        rank: 1,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1ybpnc-milh2d",
+        value: 40,
+      },
+      {
+        rank: 2,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1yc25b-jcc7jk",
+        value: 46,
+      },
+      {
+        rank: 3,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1yc8f7-xtmpu8",
+        value: 52,
+      },
+      {
+        rank: 4,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1ycgri-brrrrl",
+        value: 58,
+      },
+      {
+        rank: 5,
+        blockId: "blk-legacy",
+        effectId: "eff-ms1ycsvo-3n3n2g",
+        value: 64,
+      },
+    ],
+  },
+]
+
+const flatEnergyRegenVerification = (
+  engine: FlatEnergyRegenEngine,
+  record: FlatEnergyRegenRecord,
+): string => {
+  const flat = formatFlatPoints(record.value)
+  const flatWithBase = formatFlatPoints(record.value * 1.2)
+  return `块 note 与 Nanoka 同文（固定源 /wengines/*/refinementBuffs/${record.rank - 1}/effectBlocks/0/note，Nanoka w-engines/${engine.nanokaId} 的 /talents/${record.rank}/desc）均写明「${engine.notePrefix}${flat}点/秒」，是固定回能点数，不是基础回能百分比。固定来源却把该条款编入 energyRegen 百分比字段（value=${record.value}，经 basePercentage 读取为 基础回能 × ${flat}；基础回能 1.2 点/秒时实际增加 ${flatWithBase} 点/秒）。Fairy 按本登记把${engine.name}精炼 ${record.rank}编译为固定回能加数：+${flat} 点/秒（energy-per-second，value × 0.01），不随基础回能缩放；触发条件仍由调用方显式选择声明，持续时间与同名被动限制不模拟。真正的百分比回能记录（摇摆爵士、月光安可二件套 +20%）不在登记内，energyRegen 的百分比语义保持不变。来源 stat、编码或数值漂移即拒绝生成，不静默套用到其他 energyRegen 记录。`
+}
+
+const promotionStatsVerification = (refinement: 1 | 2 | 3 | 4 | 5): string => {
+  const percent = promotionStatsDefensePercent[refinement]!
+  return `块 note 与 Nanoka 同文（固定源 /wengines/28/refinementBuffs/${refinement - 1}/effectBlocks/0/note，Nanoka w-engines/13017 的 /talents/${refinement}/desc）：「防御力提升${percent}%；释放[强化特殊技]时，防御力额外提升${percent}%，持续40秒，重复触发时刷新持续时间」——防御提升只作用于装备者。固定来源却把五档记为 applyTarget=team，上游 resolvePackMods 会让队友也获得该防御。Fairy 按本登记修正受益对象为装备者（规则 beneficiary=holder、选项 target=self）；常驻与强化特殊技触发两段保持分别生效：沿用来源 stacked 编码（每层 ${percent}%、最多 2 层），调用方以层数显式声明——1 层表示仅常驻部分生效，2 层表示常驻与强化特殊技触发的额外部分（40 秒内）同时生效，0 层表示整条关闭；40 秒持续与重复触发刷新不模拟。effectId、optionId、精炼匹配与数值保持不变；applyTarget 或数值漂移即拒绝生成。`
+}
+
+const theVaultTeamDamageBonusVerification = `块 note 与 Nanoka 同文（固定源 /wengines/75/refinementBuffs/0/effectBlocks/0/note，Nanoka w-engines/13103 的 /talents/1/desc）：「[强化特殊技]、[连携技]或[终结技]造成以太伤害时，所有单位对目标造成的伤害提升15%」——受益对象是所有单位（全队）。固定来源的精炼 1 记录却为 applyTarget=self，与同块回能记录（装备者）混同，队友无法受益；精炼 2—5 已是 team。Fairy 按本登记只修正精炼 1 为 team；修正后五档结构一致，按精炼合并为一条 by-rank 规则（0.15/0.175/0.2/0.22/0.24），触发与 2 秒持续仍由调用方显式选择声明。数值保持来源原值；applyTarget 或数值漂移即拒绝生成。`
+
+const bellicoseBlazeVerification = (refinement: 1 | 2 | 3 | 4 | 5): string => {
+  const perStack = bellicoseBlazePerStackPercent[refinement]!
+  const valuePart =
+    refinement === 1
+      ? "固定来源两处误编：(1) 每层忽防记为 valuePerStack=16，与同块 note 及 Nanoka 的 15% 矛盾，Fairy 修正为 0.15；(2) "
+      : "固定来源误编："
+  return `块 note 与 Nanoka 同文（固定源 /wengines/29/refinementBuffs/${refinement - 1}/effectBlocks/0/note，Nanoka w-engines/14130 的 /talents/${refinement}/desc）：「装备者发动[追加攻击]造成火属性伤害时，装备者的攻击对敌人造成的伤害无视${perStack}%防御力，持续8秒，3秒内最多获得1层，最多叠加2层」。文本证明的只是火属性追加攻击命中为取得状态的触发条件。${valuePart}以 scope=skill 的 follow_up 技能目标与 elementFilter=[火] 把该触发条件当成受益筛选，非火属性或非追加攻击的命中被排除。Fairy 按本登记移除元素与追加攻击分类的受益筛选，保留固定来源 scope=skill 派生的直伤种类（regular/sheer/sharpen）限制与 2 层上限——中文「装备者的攻击」与英文「their attacks」均未界定异常类伤害是否受益，项目伤害分类契约亦不足以核定，异常受益范围保留待证，不以文本为已证结论。触发事实、8 秒持续、3 秒取层间隔与层数由调用方显式选择/层数声明，不模拟时间线。编码或数值漂移即拒绝生成。`
+}
+
+const myriadEclipseIgnoreDefenseVerification = (
+  refinement: 1 | 2 | 3 | 4 | 5,
+): string => {
+  const percent = myriadEclipseIgnoreDefensePercent[refinement]!
+  return `块 note 与 Nanoka 同文（固定源 /wengines/22/refinementBuffs/${refinement - 1}/effectBlocks/0/note，Nanoka w-engines/14129 的 /talents/${refinement}/desc）：「[强化特殊技]、[连携技]、[终结技]造成冰属性伤害时，角色获得[零度处刑宣言]效果，持续3秒；[零度处刑宣言]效果期间，角色命中敌人时无视${percent}%防御力」——冰属性强化特殊技/连携/终结命中只是触发条件，状态期间的忽防面向角色全部命中，不限定冰属性。固定来源却给精炼 ${refinement} 的忽防记录加了 elementFilter=[冰]（精炼 5 为 all，与本档 note 语义一致）。Fairy 按本登记移除该元素条件；[零度处刑宣言]状态有效由调用方显式选择声明，3 秒持续不模拟。数值 ${percent}% 保持来源原值；elementFilter 或 skillTargets 编码漂移即拒绝生成。`
+}
+
+const bloodCasketDescriptionVerification = (
+  refinement: 1 | 2 | 3 | 4 | 5,
+): string => {
+  const rate: Readonly<Record<1 | 2 | 3 | 4 | 5, string>> = {
+    1: "0.48",
+    2: "0.56",
+    3: "0.64",
+    4: "0.72",
+    5: "0.8",
+  }
+  const cap: Readonly<Record<1 | 2 | 3 | 4 | 5, string>> = {
+    1: "24",
+    2: "28",
+    3: "32",
+    4: "36",
+    5: "40",
+  }
+  return `固定源 /wengines/76/refinementBuffs/${refinement - 1}/effectBlocks/0/note 与其余四档同文，均写「1%暴击率 转 0.48% 增伤 / 转模增伤上限24%」，只描述精炼 1；Nanoka w-engines/13021 的 /talents/${refinement}/desc 明确精炼 ${refinement} 为每超出 1% 暴击率提升 ${rate[refinement]!}% 增伤、上限 ${cap[refinement]!}%。Fairy 的来源数值（convert 的 ratioPercent 与 cap 按精炼 48/56/64/72/80 与 24/28/32/36/40）本身正确，本登记只把选项共享说明覆盖为按精炼列值的文本，数值、规则与稳定 ID 不变。块 note 漂移（与登记原文不符）即拒绝生成。`
+}
+
+/**
+ * 本批具名登记的构造入口：以固定来源的稳定身份键（category/entityId/
+ * rankKind/rank/blockId/effectId）逐条生成，登记表数值与来源原值一一对应。
+ */
+export const wengineCorrectionRegistrations = (): Record<
+  string,
+  SourceSemantics
+> => {
+  const registrations: Record<string, SourceSemantics> = {}
+  // C05：11 件音擎 × 5 精炼，共 55 条固定回能记录。
+  for (const engine of flatEnergyRegenEngines)
+    for (const record of engine.records)
+      registrations[
+        `w-engines/${engine.upstreamId}/refinement/${record.rank}/${record.blockId}/${record.effectId}`
+      ] = {
+        kind: "flat-energy-regen",
+        expectedSourceValue: record.value,
+        differenceId: "wengine-flat-energy-regen",
+        evidence: wengineTalentEvidence(
+          engine.nanokaId,
+          engine.sha256,
+          record.rank,
+        ),
+        verification: flatEnergyRegenVerification(engine, record),
+      }
+  // C01：千面日陨精炼 4 暴伤 62.25 → 65.25（块 note 与 Nanoka 五档同文）。
+  registrations[
+    "w-engines/Myriad_Eclipse/refinement/4/blk-legacy/legacy-self-critDmg"
+  ] = {
+    kind: "source-value-correction",
+    expectedSourceValue: 62.25,
+    correctedValue: 65.25,
+    differenceId: "myriad-eclipse-r4-critical-damage",
+    evidence: ([1, 2, 3, 4, 5] as const).map(
+      (rank) => wengineTalentEvidence("14129", myriadEclipseSha, rank)[0]!,
+    ),
+    verification:
+      "固定源 /wengines/22/refinementBuffs/3/effectBlocks/0 的块 note 写明「暴击伤害提升65.25%」，Nanoka w-engines/14129 的 /talents/1—5/desc 五档为 45/51.75/58.5/65.25/72%：精炼 1—3、5 的记录数值与文本一致，精炼 4 的记录数值 62.25 与自身块 note 及 Nanoka 同文矛盾。Fairy 按本登记把精炼 4 的暴伤修为 0.6525，其余四档保持来源原值；常驻暴伤条款与[零度处刑宣言]触发的忽防状态（另一条记录）互不影响，effectId 与 optionId 不变。原始数值漂移（≠62.25）即拒绝生成，防止来源升级时静默套用旧修正。证据级别为块 note 与 Nanoka 同文纠错，未经游戏实测。",
+  }
+  // C11：千面日陨精炼 1—4 的忽防不应限定冰元素命中；精炼 5 原为 all，无需登记。
+  for (const refinement of [1, 2, 3, 4] as const)
+    registrations[
+      `w-engines/Myriad_Eclipse/refinement/${refinement}/blk-legacy/legacy-self-reduceDefense`
+    ] = {
+      kind: "trigger-conditions-not-benefit-scope",
+      removeElementCondition: true,
+      removeSkillTargetConditions: false,
+      expectedElementFilter: ["冰"],
+      expectedSkillTargetCategories: [],
+      differenceId: "myriad-eclipse-zero-verdict-ignore-defense-scope",
+      evidence: wengineTalentEvidence("14129", myriadEclipseSha, refinement),
+      verification: myriadEclipseIgnoreDefenseVerification(refinement),
+    }
+  // C07：喵运当头五档防御只给装备者（team → self）。
+  for (const refinement of [1, 2, 3, 4, 5] as const)
+    registrations[
+      `w-engines/Promotion Stats/refinement/${refinement}/blk-mtwn69lr-xfb4n8/eff-mtwn69lr-2h2brm`
+    ] = {
+      kind: "beneficiary-target-correction",
+      expectedApplyTarget: "team",
+      correctedOptionTarget: "self",
+      expectedSourceValue: promotionStatsDefensePercent[refinement]!,
+      differenceId: "promotion-stats-equipper-defense",
+      evidence: wengineTalentEvidence("13017", promotionStatsSha, refinement),
+      verification: promotionStatsVerification(refinement),
+    }
+  // C08：聚宝箱精炼 1 的增伤受益对象 self → team（“所有单位”）。
+  registrations[
+    "w-engines/The_Vault/refinement/1/blk-legacy/legacy-self-dmgBonus"
+  ] = {
+    kind: "beneficiary-target-correction",
+    expectedApplyTarget: "self",
+    correctedOptionTarget: "team",
+    expectedSourceValue: 15,
+    differenceId: "the-vault-r1-team-damage-bonus",
+    evidence: wengineTalentEvidence("13103", theVaultSha, 1),
+    verification: theVaultTeamDamageBonusVerification,
+  }
+  // C10：嚣枪喧焰五档——移除火元素/追加攻击受益限制；精炼 1 每层 16 → 15。
+  for (const refinement of [1, 2, 3, 4, 5] as const)
+    registrations[
+      `w-engines/Bellicose_Blaze/refinement/${refinement}/blk-legacy/legacy-self-reduceDefense`
+    ] = {
+      kind: "trigger-conditions-not-benefit-scope",
+      removeElementCondition: true,
+      removeSkillTargetConditions: true,
+      expectedElementFilter: ["火"],
+      expectedSkillTargetCategories: ["follow_up"],
+      ...(refinement === 1
+        ? {
+            valueCorrection: {
+              expectedSourceValue: 16,
+              correctedValue: 15,
+            },
+          }
+        : {}),
+      differenceId: "bellicose-blaze-trigger-scope-ignore-defense",
+      evidence: wengineTalentEvidence("14130", bellicoseBlazeSha, refinement),
+      verification: bellicoseBlazeVerification(refinement),
+    }
+  // T01：血髓秘匣共享说明只描述精炼 1，覆盖为按精炼列值的文本。
+  for (const refinement of [1, 2, 3, 4, 5] as const)
+    registrations[
+      `w-engines/BloodCasket/refinement/${refinement}/blk-mtsg3tw6-5rsbpt/eff-mtsg3tw6-gydnli`
+    ] = {
+      kind: "refinement-value-description",
+      conditionDescription: bloodCasketRefinementDescription,
+      expectedBlockNote: bloodCasketSharedBlockNote,
+      differenceId: "blood-casket-refinement-aware-description",
+      evidence: wengineTalentEvidence("13021", bloodCasketSha, refinement),
+      verification: bloodCasketDescriptionVerification(refinement),
+    }
+  return registrations
+}
 
 export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
   "agents/caesar/mindscape/0/blk-legacy/legacy-team-atk": {
@@ -1323,6 +2096,8 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     evidence: qingmingBirdcageEvidence,
     verification: qingmingBirdcageVerification(5),
   },
+  // 增益修复批次 01 的具名登记（C01/C05/C07/C08/C10/C11/T01）。
+  ...wengineCorrectionRegistrations(),
 }
 
 /**
