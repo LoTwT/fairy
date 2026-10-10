@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "15",
+  "revision": "16",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -19815,7 +19815,7 @@
       "effectIds": [
         "w-engine:14130:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -19830,7 +19830,7 @@
       "effectIds": [
         "w-engine:14130:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -19845,7 +19845,7 @@
       "effectIds": [
         "w-engine:14130:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -19860,7 +19860,7 @@
       "effectIds": [
         "w-engine:14130:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -19875,7 +19875,7 @@
       "effectIds": [
         "w-engine:14130:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -19965,7 +19965,7 @@
       "effectIds": [
         "w-engine:13021:zzz-hp:eff-mtsg3tw6-gydnli:blk-mtsg3tw6-5rsbpt:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -19980,7 +19980,7 @@
       "effectIds": [
         "w-engine:13021:zzz-hp:eff-mtsg3tw6-gydnli:blk-mtsg3tw6-5rsbpt:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -19995,7 +19995,7 @@
       "effectIds": [
         "w-engine:13021:zzz-hp:eff-mtsg3tw6-gydnli:blk-mtsg3tw6-5rsbpt:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -20010,7 +20010,7 @@
       "effectIds": [
         "w-engine:13021:zzz-hp:eff-mtsg3tw6-gydnli:blk-mtsg3tw6-5rsbpt:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -20025,7 +20025,7 @@
       "effectIds": [
         "w-engine:13021:zzz-hp:eff-mtsg3tw6-gydnli:blk-mtsg3tw6-5rsbpt:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -21315,7 +21315,7 @@
       "effectIds": [
         "w-engine:14145:zzz-hp:eff-ms1zxwea-108qso:blk-legacy:refinement:1"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 40,
       "normalizedValue": 40
@@ -21330,7 +21330,7 @@
       "effectIds": [
         "w-engine:14145:zzz-hp:eff-ms1zy5kv-qxy242:blk-legacy:refinement:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 46,
       "normalizedValue": 46
@@ -21345,7 +21345,7 @@
       "effectIds": [
         "w-engine:14145:zzz-hp:eff-ms1zye58-m5xsoq:blk-legacy:refinement:3"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 52,
       "normalizedValue": 52
@@ -21360,7 +21360,7 @@
       "effectIds": [
         "w-engine:14145:zzz-hp:eff-ms1zymuj-jgthl4:blk-legacy:refinement:4"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 58,
       "normalizedValue": 58
@@ -21375,7 +21375,7 @@
       "effectIds": [
         "w-engine:14145:zzz-hp:eff-ms1zyw66-9cnhly:blk-legacy:refinement:5"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 64,
       "normalizedValue": 64
@@ -21765,7 +21765,7 @@
       "effectIds": [
         "w-engine:14117:zzz-hp:eff-ms1wkhh3-zq9asn:blk-legacy:refinement:1"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 60,
       "normalizedValue": 60
@@ -21780,7 +21780,7 @@
       "effectIds": [
         "w-engine:14117:zzz-hp:eff-ms1wtkfw-xqz9lo:blk-legacy:refinement:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 75,
       "normalizedValue": 75
@@ -21795,7 +21795,7 @@
       "effectIds": [
         "w-engine:14117:zzz-hp:eff-ms1wu9xl-0og37t:blk-legacy:refinement:3"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 90,
       "normalizedValue": 90
@@ -21810,7 +21810,7 @@
       "effectIds": [
         "w-engine:14117:zzz-hp:eff-ms1wuy85-zp3e2n:blk-legacy:refinement:4"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 105,
       "normalizedValue": 105
@@ -21825,7 +21825,7 @@
       "effectIds": [
         "w-engine:14117:zzz-hp:eff-ms1wvm5e-jl6dgb:blk-legacy:refinement:5"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 120,
       "normalizedValue": 120
@@ -22815,7 +22815,7 @@
       "effectIds": [
         "w-engine:14134:zzz-hp:eff-ms1zsp0c-otdfbz:blk-legacy:refinement:1"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 46,
       "normalizedValue": 46
@@ -22830,7 +22830,7 @@
       "effectIds": [
         "w-engine:14134:zzz-hp:eff-ms1ztd1n-xwqo0p:blk-legacy:refinement:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 53,
       "normalizedValue": 53
@@ -22845,7 +22845,7 @@
       "effectIds": [
         "w-engine:14134:zzz-hp:eff-ms1zto8e-t2e2w4:blk-legacy:refinement:3"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 60,
       "normalizedValue": 60
@@ -22860,7 +22860,7 @@
       "effectIds": [
         "w-engine:14134:zzz-hp:eff-ms1ztwyr-lmgwoh:blk-legacy:refinement:4"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 67,
       "normalizedValue": 67
@@ -22875,7 +22875,7 @@
       "effectIds": [
         "w-engine:14134:zzz-hp:eff-ms1zu3k5-k5egz1:blk-legacy:refinement:5"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 74,
       "normalizedValue": 74
@@ -23115,7 +23115,7 @@
       "effectIds": [
         "w-engine:14157:zzz-hp:eff-ms1ybpnc-milh2d:blk-legacy:refinement:1"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 40,
       "normalizedValue": 40
@@ -23130,7 +23130,7 @@
       "effectIds": [
         "w-engine:14157:zzz-hp:eff-ms1yc25b-jcc7jk:blk-legacy:refinement:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 46,
       "normalizedValue": 46
@@ -23145,7 +23145,7 @@
       "effectIds": [
         "w-engine:14157:zzz-hp:eff-ms1yc8f7-xtmpu8:blk-legacy:refinement:3"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 52,
       "normalizedValue": 52
@@ -23160,7 +23160,7 @@
       "effectIds": [
         "w-engine:14157:zzz-hp:eff-ms1ycgri-brrrrl:blk-legacy:refinement:4"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 58,
       "normalizedValue": 58
@@ -23175,7 +23175,7 @@
       "effectIds": [
         "w-engine:14157:zzz-hp:eff-ms1ycsvo-3n3n2g:blk-legacy:refinement:5"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 64,
       "normalizedValue": 64
@@ -23490,7 +23490,7 @@
       "effectIds": [
         "w-engine:14110:zzz-hp:eff-ms1nik02-wn2n3p:blk-ms1nik02-6x9k3x:refinement:1"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 60,
       "normalizedValue": 60
@@ -23505,7 +23505,7 @@
       "effectIds": [
         "w-engine:14110:zzz-hp:eff-ms1nj1mz-33h9yh:blk-ms1nj1mz-5ajt8k:refinement:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 75,
       "normalizedValue": 75
@@ -23520,7 +23520,7 @@
       "effectIds": [
         "w-engine:14110:zzz-hp:eff-ms1njfpo-2zrguc:blk-ms1njfpo-c2y68w:refinement:3"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 90,
       "normalizedValue": 90
@@ -23535,7 +23535,7 @@
       "effectIds": [
         "w-engine:14110:zzz-hp:eff-ms1njtyu-cvmyau:blk-ms1njtyu-fcmkxt:refinement:4"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 105,
       "normalizedValue": 105
@@ -23550,7 +23550,7 @@
       "effectIds": [
         "w-engine:14110:zzz-hp:eff-ms1nk22a-0hwofq:blk-ms1nk22a-ty79n2:refinement:5"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 120,
       "normalizedValue": 120
@@ -23640,7 +23640,7 @@
       "effectIds": [
         "w-engine:13106:zzz-hp:legacy-self-energyRegen:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 45,
       "normalizedValue": 45
@@ -23655,7 +23655,7 @@
       "effectIds": [
         "w-engine:13106:zzz-hp:legacy-self-energyRegen:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 52,
       "normalizedValue": 52
@@ -23670,7 +23670,7 @@
       "effectIds": [
         "w-engine:13106:zzz-hp:legacy-self-energyRegen:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 58,
       "normalizedValue": 58
@@ -23685,7 +23685,7 @@
       "effectIds": [
         "w-engine:13106:zzz-hp:legacy-self-energyRegen:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 65,
       "normalizedValue": 65
@@ -23700,7 +23700,7 @@
       "effectIds": [
         "w-engine:13106:zzz-hp:legacy-self-energyRegen:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 72,
       "normalizedValue": 72
@@ -24960,7 +24960,7 @@
       "effectIds": [
         "w-engine:14129:zzz-hp:legacy-self-critDmg:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 62.25,
       "normalizedValue": 62.25
@@ -24988,9 +24988,9 @@
       "stat": "reduceDefense",
       "optionId": "w-engines:Myriad_Eclipse:refinement:blk-legacy:legacy-self-reduceDefense",
       "effectIds": [
-        "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:1"
+        "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 25,
       "normalizedValue": 25
@@ -25003,9 +25003,9 @@
       "stat": "reduceDefense",
       "optionId": "w-engines:Myriad_Eclipse:refinement:blk-legacy:legacy-self-reduceDefense",
       "effectIds": [
-        "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:2"
+        "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 28.75,
       "normalizedValue": 28.75
@@ -25018,9 +25018,9 @@
       "stat": "reduceDefense",
       "optionId": "w-engines:Myriad_Eclipse:refinement:blk-legacy:legacy-self-reduceDefense",
       "effectIds": [
-        "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:3"
+        "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 32.5,
       "normalizedValue": 32.5
@@ -25033,9 +25033,9 @@
       "stat": "reduceDefense",
       "optionId": "w-engines:Myriad_Eclipse:refinement:blk-legacy:legacy-self-reduceDefense",
       "effectIds": [
-        "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:4"
+        "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 36.25,
       "normalizedValue": 36.25
@@ -25048,7 +25048,7 @@
       "stat": "reduceDefense",
       "optionId": "w-engines:Myriad_Eclipse:refinement:blk-legacy:legacy-self-reduceDefense",
       "effectIds": [
-        "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:5"
+        "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement"
       ],
       "status": "converted",
       "normalizationChanges": [],
@@ -25590,7 +25590,7 @@
       "effectIds": [
         "w-engine:13127:zzz-hp:eff-ms1zrtg4-v2bhlz:blk-ms1q8l6m-sw89dm:refinement:1"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 40,
       "normalizedValue": 40
@@ -25605,7 +25605,7 @@
       "effectIds": [
         "w-engine:13127:zzz-hp:eff-ms1zryw8-45jrln:blk-ms1q8zbq-ysi7mh:refinement:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 46,
       "normalizedValue": 46
@@ -25620,7 +25620,7 @@
       "effectIds": [
         "w-engine:13127:zzz-hp:eff-ms1zs2h2-udy588:blk-ms1q978x-r8ti67:refinement:3"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 52,
       "normalizedValue": 52
@@ -25635,7 +25635,7 @@
       "effectIds": [
         "w-engine:13127:zzz-hp:eff-ms1zs6yo-puc1b9:blk-ms1q9c8o-q2of3b:refinement:4"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 58,
       "normalizedValue": 58
@@ -25650,7 +25650,7 @@
       "effectIds": [
         "w-engine:13127:zzz-hp:eff-ms1zsavo-fzwwl8:blk-ms1q9gz1-0kwnlx:refinement:5"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 64,
       "normalizedValue": 64
@@ -25815,7 +25815,7 @@
       "effectIds": [
         "w-engine:13017:zzz-hp:eff-mtwn69lr-2h2brm:blk-mtwn69lr-xfb4n8:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -25830,7 +25830,7 @@
       "effectIds": [
         "w-engine:13017:zzz-hp:eff-mtwn69lr-2h2brm:blk-mtwn69lr-xfb4n8:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -25845,7 +25845,7 @@
       "effectIds": [
         "w-engine:13017:zzz-hp:eff-mtwn69lr-2h2brm:blk-mtwn69lr-xfb4n8:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -25860,7 +25860,7 @@
       "effectIds": [
         "w-engine:13017:zzz-hp:eff-mtwn69lr-2h2brm:blk-mtwn69lr-xfb4n8:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -25875,7 +25875,7 @@
       "effectIds": [
         "w-engine:13017:zzz-hp:eff-mtwn69lr-2h2brm:blk-mtwn69lr-xfb4n8:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -28530,7 +28530,7 @@
       "effectIds": [
         "w-engine:13103:zzz-hp:eff-ms1zuvli-v2yjaz:blk-legacy:refinement:1"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 50,
       "normalizedValue": 50
@@ -28545,7 +28545,7 @@
       "effectIds": [
         "w-engine:13103:zzz-hp:eff-ms1zv3lq-wkhzfm:blk-legacy:refinement:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 58,
       "normalizedValue": 58
@@ -28560,7 +28560,7 @@
       "effectIds": [
         "w-engine:13103:zzz-hp:eff-ms1zv8x7-c9st7n:blk-legacy:refinement:3"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 65,
       "normalizedValue": 65
@@ -28575,7 +28575,7 @@
       "effectIds": [
         "w-engine:13103:zzz-hp:eff-ms1zve66-p2wn3a:blk-legacy:refinement:4"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 72,
       "normalizedValue": 72
@@ -28590,7 +28590,7 @@
       "effectIds": [
         "w-engine:13103:zzz-hp:eff-ms1zvkfu-7g8a4b:blk-legacy:refinement:5"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 80,
       "normalizedValue": 80
@@ -28603,9 +28603,9 @@
       "stat": "dmgBonus",
       "optionId": "w-engines:The_Vault:refinement:blk-legacy:legacy-self-dmgBonus",
       "effectIds": [
-        "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement:1"
+        "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 15,
       "normalizedValue": 15
@@ -28618,7 +28618,7 @@
       "stat": "dmgBonus",
       "optionId": "w-engines:The_Vault:refinement:blk-legacy:legacy-self-dmgBonus",
       "effectIds": [
-        "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement:2"
+        "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement"
       ],
       "status": "converted",
       "normalizationChanges": [],
@@ -28633,7 +28633,7 @@
       "stat": "dmgBonus",
       "optionId": "w-engines:The_Vault:refinement:blk-legacy:legacy-self-dmgBonus",
       "effectIds": [
-        "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement:3"
+        "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement"
       ],
       "status": "converted",
       "normalizationChanges": [],
@@ -28648,7 +28648,7 @@
       "stat": "dmgBonus",
       "optionId": "w-engines:The_Vault:refinement:blk-legacy:legacy-self-dmgBonus",
       "effectIds": [
-        "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement:4"
+        "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement"
       ],
       "status": "converted",
       "normalizationChanges": [],
@@ -28663,7 +28663,7 @@
       "stat": "dmgBonus",
       "optionId": "w-engines:The_Vault:refinement:blk-legacy:legacy-self-dmgBonus",
       "effectIds": [
-        "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement:5"
+        "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement"
       ],
       "status": "converted",
       "normalizationChanges": [],
@@ -28680,7 +28680,7 @@
       "effectIds": [
         "w-engine:14149:zzz-hp:eff-ms1zzc96-t16l30:blk-legacy:refinement:1"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 60,
       "normalizedValue": 60
@@ -28695,7 +28695,7 @@
       "effectIds": [
         "w-engine:14149:zzz-hp:eff-ms1zzkj9-gxjv06:blk-legacy:refinement:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 69,
       "normalizedValue": 69
@@ -28710,7 +28710,7 @@
       "effectIds": [
         "w-engine:14149:zzz-hp:eff-ms1zzstk-8h3ev8:blk-legacy:refinement:3"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 78,
       "normalizedValue": 78
@@ -28725,7 +28725,7 @@
       "effectIds": [
         "w-engine:14149:zzz-hp:eff-ms2001or-sr6i90:blk-legacy:refinement:4"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 87,
       "normalizedValue": 87
@@ -28740,7 +28740,7 @@
       "effectIds": [
         "w-engine:14149:zzz-hp:eff-ms200bfx-381kfh:blk-legacy:refinement:5"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 96,
       "normalizedValue": 96
@@ -29580,7 +29580,7 @@
       "effectIds": [
         "w-engine:14121:zzz-hp:eff-ms1zwc3t-y6iv02:blk-legacy:refinement:1"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 60,
       "normalizedValue": 60
@@ -29595,7 +29595,7 @@
       "effectIds": [
         "w-engine:14121:zzz-hp:eff-ms1zwnfa-ib972o:blk-legacy:refinement:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 75,
       "normalizedValue": 75
@@ -29610,7 +29610,7 @@
       "effectIds": [
         "w-engine:14121:zzz-hp:eff-ms1zwut7-09s4nv:blk-legacy:refinement:3"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 90,
       "normalizedValue": 90
@@ -29625,7 +29625,7 @@
       "effectIds": [
         "w-engine:14121:zzz-hp:eff-ms1zx37b-e1s233:blk-legacy:refinement:4"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 105,
       "normalizedValue": 105
@@ -29640,7 +29640,7 @@
       "effectIds": [
         "w-engine:14121:zzz-hp:eff-ms1zxc6r-9ssiac:blk-legacy:refinement:5"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 120,
       "normalizedValue": 120
@@ -29880,7 +29880,7 @@
       "effectIds": [
         "w-engine:14148:zzz-hp:legacy-self-energyRegen:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 150,
       "normalizedValue": 150
@@ -29895,7 +29895,7 @@
       "effectIds": [
         "w-engine:14148:zzz-hp:legacy-self-energyRegen:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 170,
       "normalizedValue": 170
@@ -29910,7 +29910,7 @@
       "effectIds": [
         "w-engine:14148:zzz-hp:legacy-self-energyRegen:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 190,
       "normalizedValue": 190
@@ -29925,7 +29925,7 @@
       "effectIds": [
         "w-engine:14148:zzz-hp:legacy-self-energyRegen:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 210,
       "normalizedValue": 210
@@ -29940,7 +29940,7 @@
       "effectIds": [
         "w-engine:14148:zzz-hp:legacy-self-energyRegen:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 230,
       "normalizedValue": 230
@@ -30320,10 +30320,10 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 852,
+    "rules": 844,
     "options": 839,
-    "converted": 1229,
-    "corrected": 55,
+    "converted": 1153,
+    "corrected": 131,
     "unsupported": 6,
     "supplements": {
       "records": 14,

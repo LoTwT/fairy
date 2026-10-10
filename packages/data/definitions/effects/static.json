@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "15",
+  "revision": "16",
   "effects": [
     {
       "kind": "contribution",
@@ -57873,11 +57873,25 @@
             "pointer": "/wengines/28/refinementBuffs/0/effectBlocks/0/effects/0"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13017/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/28/refinementBuffs/1/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13017/details.zh.json",
+            "pointer": "/talents/2/desc"
           },
           {
             "sourceId": "zzz-hp",
@@ -57887,6 +57901,13 @@
             "pointer": "/wengines/28/refinementBuffs/2/effectBlocks/0/effects/0"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13017/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
@@ -57894,11 +57915,25 @@
             "pointer": "/wengines/28/refinementBuffs/3/effectBlocks/0/effects/0"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13017/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/28/refinementBuffs/4/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13017/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -57930,7 +57965,7 @@
       },
       "scope": "entity",
       "beneficiary": {
-        "kind": "team"
+        "kind": "holder"
       },
       "when": {
         "kind": "all",
@@ -58330,11 +58365,25 @@
             "pointer": "/wengines/76/refinementBuffs/0/effectBlocks/0/effects/0"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13021/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/76/refinementBuffs/1/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13021/details.zh.json",
+            "pointer": "/talents/2/desc"
           },
           {
             "sourceId": "zzz-hp",
@@ -58344,6 +58393,13 @@
             "pointer": "/wengines/76/refinementBuffs/2/effectBlocks/0/effects/0"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13021/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
@@ -58351,11 +58407,25 @@
             "pointer": "/wengines/76/refinementBuffs/3/effectBlocks/0/effects/0"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13021/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/76/refinementBuffs/4/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13021/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -58587,6 +58657,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/75/refinementBuffs/0/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13103/details.zh.json",
+            "pointer": "/talents/1/desc"
           }
         ]
       },
@@ -58608,7 +58685,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.5
         }
       },
@@ -58633,23 +58710,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -58669,6 +58732,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/75/refinementBuffs/1/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13103/details.zh.json",
+            "pointer": "/talents/2/desc"
           }
         ]
       },
@@ -58690,7 +58760,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.58
         }
       },
@@ -58715,23 +58785,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -58751,6 +58807,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/75/refinementBuffs/2/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13103/details.zh.json",
+            "pointer": "/talents/3/desc"
           }
         ]
       },
@@ -58772,7 +58835,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.65
         }
       },
@@ -58797,23 +58860,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -58833,6 +58882,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/75/refinementBuffs/3/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13103/details.zh.json",
+            "pointer": "/talents/4/desc"
           }
         ]
       },
@@ -58854,7 +58910,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.72
         }
       },
@@ -58879,23 +58935,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -58915,6 +58957,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/75/refinementBuffs/4/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13103/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -58936,7 +58985,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.8
         }
       },
@@ -58961,29 +59010,15 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
     {
       "kind": "contribution",
-      "effectId": "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement:1",
+      "effectId": "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement",
       "source": {
         "identity": {
           "kind": "w-engine",
@@ -58997,268 +59032,35 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/75/refinementBuffs/0/effectBlocks/0/effects/0"
-          }
-        ]
-      },
-      "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "eq",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "refinement"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 1
-        }
-      },
-      "parameters": {
-        "amount": {
-          "kind": "constant",
-          "unit": "ratio",
-          "value": 0.15
-        }
-      },
-      "activation": {
-        "kind": "supplied",
-        "maximumLayers": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 1
-        }
-      },
-      "scope": "hit",
-      "beneficiary": {
-        "kind": "holder"
-      },
-      "when": {
-        "kind": "all",
-        "conditions": []
-      },
-      "operation": {
-        "kind": "factor-contribution",
-        "channel": "damage-bonus",
-        "value": {
-          "kind": "parameter",
-          "unit": "ratio",
-          "name": "amount"
-        }
-      }
-    },
-    {
-      "kind": "contribution",
-      "effectId": "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement:2",
-      "source": {
-        "identity": {
-          "kind": "w-engine",
-          "entityId": "13103"
-        },
-        "section": "精2",
-        "references": [
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13103/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
           {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/75/refinementBuffs/1/effectBlocks/0/effects/0"
-          }
-        ]
-      },
-      "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "eq",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "refinement"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 2
-        }
-      },
-      "parameters": {
-        "amount": {
-          "kind": "constant",
-          "unit": "ratio",
-          "value": 0.17500000000000002
-        }
-      },
-      "activation": {
-        "kind": "supplied",
-        "maximumLayers": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 1
-        }
-      },
-      "scope": "hit",
-      "beneficiary": {
-        "kind": "team"
-      },
-      "when": {
-        "kind": "all",
-        "conditions": []
-      },
-      "operation": {
-        "kind": "factor-contribution",
-        "channel": "damage-bonus",
-        "value": {
-          "kind": "parameter",
-          "unit": "ratio",
-          "name": "amount"
-        }
-      }
-    },
-    {
-      "kind": "contribution",
-      "effectId": "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement:3",
-      "source": {
-        "identity": {
-          "kind": "w-engine",
-          "entityId": "13103"
-        },
-        "section": "精3",
-        "references": [
+          },
           {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/75/refinementBuffs/2/effectBlocks/0/effects/0"
-          }
-        ]
-      },
-      "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "eq",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "refinement"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 3
-        }
-      },
-      "parameters": {
-        "amount": {
-          "kind": "constant",
-          "unit": "ratio",
-          "value": 0.2
-        }
-      },
-      "activation": {
-        "kind": "supplied",
-        "maximumLayers": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 1
-        }
-      },
-      "scope": "hit",
-      "beneficiary": {
-        "kind": "team"
-      },
-      "when": {
-        "kind": "all",
-        "conditions": []
-      },
-      "operation": {
-        "kind": "factor-contribution",
-        "channel": "damage-bonus",
-        "value": {
-          "kind": "parameter",
-          "unit": "ratio",
-          "name": "amount"
-        }
-      }
-    },
-    {
-      "kind": "contribution",
-      "effectId": "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement:4",
-      "source": {
-        "identity": {
-          "kind": "w-engine",
-          "entityId": "13103"
-        },
-        "section": "精4",
-        "references": [
+          },
           {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/75/refinementBuffs/3/effectBlocks/0/effects/0"
-          }
-        ]
-      },
-      "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "eq",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "refinement"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 4
-        }
-      },
-      "parameters": {
-        "amount": {
-          "kind": "constant",
-          "unit": "ratio",
-          "value": 0.22
-        }
-      },
-      "activation": {
-        "kind": "supplied",
-        "maximumLayers": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 1
-        }
-      },
-      "scope": "hit",
-      "beneficiary": {
-        "kind": "team"
-      },
-      "when": {
-        "kind": "all",
-        "conditions": []
-      },
-      "operation": {
-        "kind": "factor-contribution",
-        "channel": "damage-bonus",
-        "value": {
-          "kind": "parameter",
-          "unit": "ratio",
-          "name": "amount"
-        }
-      }
-    },
-    {
-      "kind": "contribution",
-      "effectId": "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement:5",
-      "source": {
-        "identity": {
-          "kind": "w-engine",
-          "entityId": "13103"
-        },
-        "section": "精5",
-        "references": [
+          },
           {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -59269,25 +59071,21 @@
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "eq",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "refinement"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 5
-        }
+        "kind": "constant",
+        "value": true
       },
       "parameters": {
         "amount": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "refinement",
           "unit": "ratio",
-          "value": 0.24
+          "values": {
+            "1": 0.15,
+            "2": 0.17500000000000002,
+            "3": 0.2,
+            "4": 0.22,
+            "5": 0.24
+          }
         }
       },
       "activation": {
@@ -59699,11 +59497,25 @@
             "pointer": "/wengines/33/refinementBuffs/0/effectBlocks/0/effects/0"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13106/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/33/refinementBuffs/1/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13106/details.zh.json",
+            "pointer": "/talents/2/desc"
           },
           {
             "sourceId": "zzz-hp",
@@ -59713,6 +59525,13 @@
             "pointer": "/wengines/33/refinementBuffs/2/effectBlocks/0/effects/0"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13106/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
@@ -59720,11 +59539,25 @@
             "pointer": "/wengines/33/refinementBuffs/3/effectBlocks/0/effects/0"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13106/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/33/refinementBuffs/4/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13106/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -59736,7 +59569,7 @@
         "amount": {
           "kind": "by-rank",
           "rank": "refinement",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "values": {
             "1": 0.45,
             "2": 0.52,
@@ -59767,23 +59600,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -60288,6 +60107,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13127/details.zh.json",
+            "pointer": "/talents/1/desc"
           }
         ]
       },
@@ -60309,7 +60135,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.4
         }
       },
@@ -60334,23 +60160,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -60370,6 +60182,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13127/details.zh.json",
+            "pointer": "/talents/2/desc"
           }
         ]
       },
@@ -60391,7 +60210,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.46
         }
       },
@@ -60416,23 +60235,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -60452,6 +60257,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13127/details.zh.json",
+            "pointer": "/talents/3/desc"
           }
         ]
       },
@@ -60473,7 +60285,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.52
         }
       },
@@ -60498,23 +60310,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -60534,6 +60332,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13127/details.zh.json",
+            "pointer": "/talents/4/desc"
           }
         ]
       },
@@ -60555,7 +60360,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.58
         }
       },
@@ -60580,23 +60385,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -60616,6 +60407,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13127/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -60637,7 +60435,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.64
         }
       },
@@ -60662,23 +60460,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -62472,6 +62256,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/61/refinementBuffs/0/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14110/details.zh.json",
+            "pointer": "/talents/1/desc"
           }
         ]
       },
@@ -62493,7 +62284,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.6
         }
       },
@@ -62518,23 +62309,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -62554,6 +62331,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/61/refinementBuffs/1/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14110/details.zh.json",
+            "pointer": "/talents/2/desc"
           }
         ]
       },
@@ -62575,7 +62359,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.75
         }
       },
@@ -62600,23 +62384,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -62636,6 +62406,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/61/refinementBuffs/2/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14110/details.zh.json",
+            "pointer": "/talents/3/desc"
           }
         ]
       },
@@ -62657,7 +62434,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.9
         }
       },
@@ -62682,23 +62459,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -62718,6 +62481,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/61/refinementBuffs/3/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14110/details.zh.json",
+            "pointer": "/talents/4/desc"
           }
         ]
       },
@@ -62739,7 +62509,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 1.05
         }
       },
@@ -62764,23 +62534,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -62800,6 +62556,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/61/refinementBuffs/4/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14110/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -62821,7 +62584,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 1.2
         }
       },
@@ -62846,23 +62609,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -63033,6 +62782,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/58/refinementBuffs/0/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14117/details.zh.json",
+            "pointer": "/talents/1/desc"
           }
         ]
       },
@@ -63054,7 +62810,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.6
         }
       },
@@ -63079,23 +62835,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -63115,6 +62857,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/58/refinementBuffs/1/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14117/details.zh.json",
+            "pointer": "/talents/2/desc"
           }
         ]
       },
@@ -63136,7 +62885,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.75
         }
       },
@@ -63161,23 +62910,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -63197,6 +62932,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/58/refinementBuffs/2/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14117/details.zh.json",
+            "pointer": "/talents/3/desc"
           }
         ]
       },
@@ -63218,7 +62960,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.9
         }
       },
@@ -63243,23 +62985,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -63279,6 +63007,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/58/refinementBuffs/3/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14117/details.zh.json",
+            "pointer": "/talents/4/desc"
           }
         ]
       },
@@ -63300,7 +63035,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 1.05
         }
       },
@@ -63325,23 +63060,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -63361,6 +63082,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/58/refinementBuffs/4/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14117/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -63382,7 +63110,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 1.2
         }
       },
@@ -63407,23 +63135,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -64687,6 +64401,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/27/refinementBuffs/0/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14121/details.zh.json",
+            "pointer": "/talents/1/desc"
           }
         ]
       },
@@ -64708,7 +64429,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.6
         }
       },
@@ -64733,23 +64454,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -64769,6 +64476,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/27/refinementBuffs/1/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14121/details.zh.json",
+            "pointer": "/talents/2/desc"
           }
         ]
       },
@@ -64790,7 +64504,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.75
         }
       },
@@ -64815,23 +64529,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -64851,6 +64551,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/27/refinementBuffs/2/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14121/details.zh.json",
+            "pointer": "/talents/3/desc"
           }
         ]
       },
@@ -64872,7 +64579,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.9
         }
       },
@@ -64897,23 +64604,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -64933,6 +64626,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/27/refinementBuffs/3/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14121/details.zh.json",
+            "pointer": "/talents/4/desc"
           }
         ]
       },
@@ -64954,7 +64654,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 1.05
         }
       },
@@ -64979,23 +64679,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -65015,6 +64701,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/27/refinementBuffs/4/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14121/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -65036,7 +64729,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 1.2
         }
       },
@@ -65061,23 +64754,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -65807,6 +65486,41 @@
             "pointer": "/wengines/22/refinementBuffs/3/effectBlocks/0/effects/0"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14129/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14129/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14129/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14129/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14129/details.zh.json",
+            "pointer": "/talents/5/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
@@ -65828,7 +65542,7 @@
             "1": 0.45,
             "2": 0.5175,
             "3": 0.585,
-            "4": 0.6225,
+            "4": 0.6525,
             "5": 0.72
           }
         }
@@ -65862,7 +65576,7 @@
     },
     {
       "kind": "contribution",
-      "effectId": "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:1",
+      "effectId": "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement",
       "source": {
         "identity": {
           "kind": "w-engine",
@@ -65876,328 +65590,56 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/22/refinementBuffs/0/effectBlocks/0/effects/1"
-          }
-        ]
-      },
-      "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "eq",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "refinement"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 1
-        }
-      },
-      "parameters": {
-        "amount": {
-          "kind": "constant",
-          "unit": "ratio",
-          "value": 0.25
-        }
-      },
-      "activation": {
-        "kind": "supplied",
-        "maximumLayers": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 1
-        }
-      },
-      "scope": "hit",
-      "beneficiary": {
-        "kind": "holder"
-      },
-      "when": {
-        "kind": "all",
-        "conditions": [
-          {
-            "kind": "one-of",
-            "fact": "hit.element",
-            "values": ["ice"]
-          }
-        ]
-      },
-      "operation": {
-        "kind": "factor-contribution",
-        "channel": "target-defense-adjustment",
-        "value": {
-          "kind": "multiply",
-          "unit": "ratio",
-          "value": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
           },
-          "coefficient": {
-            "kind": "literal",
-            "unit": "multiplier",
-            "value": -1
-          }
-        }
-      }
-    },
-    {
-      "kind": "contribution",
-      "effectId": "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:2",
-      "source": {
-        "identity": {
-          "kind": "w-engine",
-          "entityId": "14129"
-        },
-        "section": "精2",
-        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14129/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
           {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/22/refinementBuffs/1/effectBlocks/0/effects/1"
-          }
-        ]
-      },
-      "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "eq",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "refinement"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 2
-        }
-      },
-      "parameters": {
-        "amount": {
-          "kind": "constant",
-          "unit": "ratio",
-          "value": 0.28750000000000003
-        }
-      },
-      "activation": {
-        "kind": "supplied",
-        "maximumLayers": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 1
-        }
-      },
-      "scope": "hit",
-      "beneficiary": {
-        "kind": "holder"
-      },
-      "when": {
-        "kind": "all",
-        "conditions": [
-          {
-            "kind": "one-of",
-            "fact": "hit.element",
-            "values": ["ice"]
-          }
-        ]
-      },
-      "operation": {
-        "kind": "factor-contribution",
-        "channel": "target-defense-adjustment",
-        "value": {
-          "kind": "multiply",
-          "unit": "ratio",
-          "value": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
           },
-          "coefficient": {
-            "kind": "literal",
-            "unit": "multiplier",
-            "value": -1
-          }
-        }
-      }
-    },
-    {
-      "kind": "contribution",
-      "effectId": "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:3",
-      "source": {
-        "identity": {
-          "kind": "w-engine",
-          "entityId": "14129"
-        },
-        "section": "精3",
-        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14129/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
           {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/22/refinementBuffs/2/effectBlocks/0/effects/1"
-          }
-        ]
-      },
-      "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "eq",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "refinement"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 3
-        }
-      },
-      "parameters": {
-        "amount": {
-          "kind": "constant",
-          "unit": "ratio",
-          "value": 0.325
-        }
-      },
-      "activation": {
-        "kind": "supplied",
-        "maximumLayers": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 1
-        }
-      },
-      "scope": "hit",
-      "beneficiary": {
-        "kind": "holder"
-      },
-      "when": {
-        "kind": "all",
-        "conditions": [
-          {
-            "kind": "one-of",
-            "fact": "hit.element",
-            "values": ["ice"]
-          }
-        ]
-      },
-      "operation": {
-        "kind": "factor-contribution",
-        "channel": "target-defense-adjustment",
-        "value": {
-          "kind": "multiply",
-          "unit": "ratio",
-          "value": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
           },
-          "coefficient": {
-            "kind": "literal",
-            "unit": "multiplier",
-            "value": -1
-          }
-        }
-      }
-    },
-    {
-      "kind": "contribution",
-      "effectId": "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:4",
-      "source": {
-        "identity": {
-          "kind": "w-engine",
-          "entityId": "14129"
-        },
-        "section": "精4",
-        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14129/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
           {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/22/refinementBuffs/3/effectBlocks/0/effects/1"
-          }
-        ]
-      },
-      "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "eq",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "refinement"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 4
-        }
-      },
-      "parameters": {
-        "amount": {
-          "kind": "constant",
-          "unit": "ratio",
-          "value": 0.3625
-        }
-      },
-      "activation": {
-        "kind": "supplied",
-        "maximumLayers": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 1
-        }
-      },
-      "scope": "hit",
-      "beneficiary": {
-        "kind": "holder"
-      },
-      "when": {
-        "kind": "all",
-        "conditions": [
-          {
-            "kind": "one-of",
-            "fact": "hit.element",
-            "values": ["ice"]
-          }
-        ]
-      },
-      "operation": {
-        "kind": "factor-contribution",
-        "channel": "target-defense-adjustment",
-        "value": {
-          "kind": "multiply",
-          "unit": "ratio",
-          "value": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
           },
-          "coefficient": {
-            "kind": "literal",
-            "unit": "multiplier",
-            "value": -1
-          }
-        }
-      }
-    },
-    {
-      "kind": "contribution",
-      "effectId": "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:5",
-      "source": {
-        "identity": {
-          "kind": "w-engine",
-          "entityId": "14129"
-        },
-        "section": "精5",
-        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14129/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
           {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -66208,25 +65650,21 @@
         ]
       },
       "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "eq",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "refinement"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 5
-        }
+        "kind": "constant",
+        "value": true
       },
       "parameters": {
         "amount": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "refinement",
           "unit": "ratio",
-          "value": 0.4
+          "values": {
+            "1": 0.25,
+            "2": 0.28750000000000003,
+            "3": 0.325,
+            "4": 0.3625,
+            "5": 0.4
+          }
         }
       },
       "activation": {
@@ -66374,11 +65812,25 @@
             "pointer": "/wengines/29/refinementBuffs/0/effectBlocks/0/effects/1"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14130/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/29/refinementBuffs/1/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14130/details.zh.json",
+            "pointer": "/talents/2/desc"
           },
           {
             "sourceId": "zzz-hp",
@@ -66388,6 +65840,13 @@
             "pointer": "/wengines/29/refinementBuffs/2/effectBlocks/0/effects/1"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14130/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
@@ -66395,11 +65854,25 @@
             "pointer": "/wengines/29/refinementBuffs/3/effectBlocks/0/effects/1"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14130/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/29/refinementBuffs/4/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14130/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -66413,7 +65886,7 @@
           "rank": "refinement",
           "unit": "ratio",
           "values": {
-            "1": 0.16,
+            "1": 0.15,
             "2": 0.172,
             "3": 0.195,
             "4": 0.217,
@@ -66440,26 +65913,6 @@
             "kind": "one-of",
             "fact": "hit.damageKind",
             "values": ["regular", "sheer", "sharpen"]
-          },
-          {
-            "kind": "any",
-            "conditions": [
-              {
-                "kind": "all",
-                "conditions": [
-                  {
-                    "kind": "one-of",
-                    "fact": "hit.skillTag",
-                    "values": ["zzz-hp:follow-up"]
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "kind": "one-of",
-            "fact": "hit.element",
-            "values": ["fire"]
           }
         ]
       },
@@ -66901,6 +66354,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/23/refinementBuffs/0/effectBlocks/0/effects/3"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14134/details.zh.json",
+            "pointer": "/talents/1/desc"
           }
         ]
       },
@@ -66922,7 +66382,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.46
         }
       },
@@ -66947,23 +66407,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -66983,6 +66429,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/23/refinementBuffs/1/effectBlocks/0/effects/3"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14134/details.zh.json",
+            "pointer": "/talents/2/desc"
           }
         ]
       },
@@ -67004,7 +66457,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.53
         }
       },
@@ -67029,23 +66482,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -67065,6 +66504,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/23/refinementBuffs/2/effectBlocks/0/effects/3"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14134/details.zh.json",
+            "pointer": "/talents/3/desc"
           }
         ]
       },
@@ -67086,7 +66532,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.6
         }
       },
@@ -67111,23 +66557,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -67147,6 +66579,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/23/refinementBuffs/3/effectBlocks/0/effects/3"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14134/details.zh.json",
+            "pointer": "/talents/4/desc"
           }
         ]
       },
@@ -67168,7 +66607,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.67
         }
       },
@@ -67193,23 +66632,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -67229,6 +66654,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/23/refinementBuffs/4/effectBlocks/0/effects/3"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14134/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -67250,7 +66682,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.74
         }
       },
@@ -67275,23 +66707,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -70891,6 +70309,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/86/refinementBuffs/0/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14145/details.zh.json",
+            "pointer": "/talents/1/desc"
           }
         ]
       },
@@ -70912,7 +70337,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.4
         }
       },
@@ -70937,23 +70362,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -70973,6 +70384,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/86/refinementBuffs/1/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14145/details.zh.json",
+            "pointer": "/talents/2/desc"
           }
         ]
       },
@@ -70994,7 +70412,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.46
         }
       },
@@ -71019,23 +70437,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -71055,6 +70459,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/86/refinementBuffs/2/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14145/details.zh.json",
+            "pointer": "/talents/3/desc"
           }
         ]
       },
@@ -71076,7 +70487,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.52
         }
       },
@@ -71101,23 +70512,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -71137,6 +70534,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/86/refinementBuffs/3/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14145/details.zh.json",
+            "pointer": "/talents/4/desc"
           }
         ]
       },
@@ -71158,7 +70562,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.58
         }
       },
@@ -71183,23 +70587,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -71219,6 +70609,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/86/refinementBuffs/4/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14145/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -71240,7 +70637,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.64
         }
       },
@@ -71265,23 +70662,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -72209,11 +71592,25 @@
             "pointer": "/wengines/48/refinementBuffs/0/effectBlocks/0/effects/0"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14148/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/48/refinementBuffs/1/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14148/details.zh.json",
+            "pointer": "/talents/2/desc"
           },
           {
             "sourceId": "zzz-hp",
@@ -72223,6 +71620,13 @@
             "pointer": "/wengines/48/refinementBuffs/2/effectBlocks/0/effects/0"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14148/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
@@ -72230,11 +71634,25 @@
             "pointer": "/wengines/48/refinementBuffs/3/effectBlocks/0/effects/0"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14148/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/48/refinementBuffs/4/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14148/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -72246,7 +71664,7 @@
         "amount": {
           "kind": "by-rank",
           "rank": "refinement",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "values": {
             "1": 1.5,
             "2": 1.7,
@@ -72277,23 +71695,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -72405,6 +71809,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/41/refinementBuffs/0/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14149/details.zh.json",
+            "pointer": "/talents/1/desc"
           }
         ]
       },
@@ -72426,7 +71837,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.6
         }
       },
@@ -72451,23 +71862,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -72487,6 +71884,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/41/refinementBuffs/1/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14149/details.zh.json",
+            "pointer": "/talents/2/desc"
           }
         ]
       },
@@ -72508,7 +71912,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.6900000000000001
         }
       },
@@ -72533,23 +71937,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -72569,6 +71959,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/41/refinementBuffs/2/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14149/details.zh.json",
+            "pointer": "/talents/3/desc"
           }
         ]
       },
@@ -72590,7 +71987,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.78
         }
       },
@@ -72615,23 +72012,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -72651,6 +72034,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/41/refinementBuffs/3/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14149/details.zh.json",
+            "pointer": "/talents/4/desc"
           }
         ]
       },
@@ -72672,7 +72062,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.87
         }
       },
@@ -72697,23 +72087,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -72733,6 +72109,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/41/refinementBuffs/4/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14149/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -72754,7 +72137,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.96
         }
       },
@@ -72779,23 +72162,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -75446,6 +74815,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/95/refinementBuffs/0/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14157/details.zh.json",
+            "pointer": "/talents/1/desc"
           }
         ]
       },
@@ -75467,7 +74843,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.4
         }
       },
@@ -75492,23 +74868,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -75528,6 +74890,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/95/refinementBuffs/1/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14157/details.zh.json",
+            "pointer": "/talents/2/desc"
           }
         ]
       },
@@ -75549,7 +74918,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.46
         }
       },
@@ -75574,23 +74943,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -75610,6 +74965,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/95/refinementBuffs/2/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14157/details.zh.json",
+            "pointer": "/talents/3/desc"
           }
         ]
       },
@@ -75631,7 +74993,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.52
         }
       },
@@ -75656,23 +75018,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -75692,6 +75040,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/95/refinementBuffs/3/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14157/details.zh.json",
+            "pointer": "/talents/4/desc"
           }
         ]
       },
@@ -75713,7 +75068,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.58
         }
       },
@@ -75738,23 +75093,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },
@@ -75774,6 +75115,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/95/refinementBuffs/4/effectBlocks/0/effects/2"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14157/details.zh.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -75795,7 +75143,7 @@
       "parameters": {
         "amount": {
           "kind": "constant",
-          "unit": "ratio",
+          "unit": "energy-per-second",
           "value": 0.64
         }
       },
@@ -75820,23 +75168,9 @@
         "stat": "energyRegen",
         "stage": "final-fixed",
         "value": {
-          "kind": "multiply",
+          "kind": "parameter",
           "unit": "energy-per-second",
-          "value": {
-            "kind": "stat",
-            "unit": "energy-per-second",
-            "entity": {
-              "role": "beneficiary"
-            },
-            "stat": "energyRegen",
-            "stage": "base",
-            "at": "evaluation"
-          },
-          "coefficient": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
+          "name": "amount"
         }
       }
     },

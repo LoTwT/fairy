@@ -741,13 +741,13 @@ describe("fixed-panel team differential fixtures", () => {
     // 再生，其 provenance 是冻结时的历史事实（基线 c77e549a、快照 e946d6、
     // revision 14），不随当前制品演进改写；当前加载的数据用自身快照断言。
     // 参考数值仍然有效：固定效果提交未变（下行断言），且本批 59 槽位不消费
-    // revision 15 改动的规则（逐槽数值对照在后续用例中锁定）。
+    // revision 15 与 16 改动的规则（逐槽数值对照在后续用例中锁定）。
     expect(loaded.version).toEqual({
       packageVersion: "0.2.1",
       contractVersion: 2,
       gameVersion: "3.2",
       snapshotId:
-        "sha256:61946f8150f84463116eac55437ecd9d356ec2f375b85b45cd48a4f52a3154e8",
+        "sha256:0b2fbbe962f9e5fe3c4d91242255bb06d4700a762ef0a657c424feeaf6efcbaa",
     })
     expect(loaded.catalog.source.commit).toBe(
       reference.provenance.effectSource.commit,

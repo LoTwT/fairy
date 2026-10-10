@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "15",
+  "revision": "16",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -26269,7 +26269,7 @@
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -26277,6 +26277,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/29/refinementBuffs/0/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14130/details.zh.json",
+              "pointer": "/talents/1/desc"
             }
           ],
           "effectIds": [
@@ -26284,14 +26291,14 @@
           ],
           "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["bellicose-blaze-trigger-scope-ignore-defense"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -26299,6 +26306,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/29/refinementBuffs/1/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14130/details.zh.json",
+              "pointer": "/talents/2/desc"
             }
           ],
           "effectIds": [
@@ -26306,14 +26320,14 @@
           ],
           "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["bellicose-blaze-trigger-scope-ignore-defense"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [3]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -26321,6 +26335,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/29/refinementBuffs/2/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14130/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ],
           "effectIds": [
@@ -26328,14 +26349,14 @@
           ],
           "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["bellicose-blaze-trigger-scope-ignore-defense"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -26343,6 +26364,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/29/refinementBuffs/3/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14130/details.zh.json",
+              "pointer": "/talents/4/desc"
             }
           ],
           "effectIds": [
@@ -26350,14 +26378,14 @@
           ],
           "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["bellicose-blaze-trigger-scope-ignore-defense"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [5]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -26365,6 +26393,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/29/refinementBuffs/4/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14130/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
@@ -26372,7 +26407,7 @@
           ],
           "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["bellicose-blaze-trigger-scope-ignore-defense"],
           "applicability": {}
         }
       ]
@@ -26519,14 +26554,14 @@
       "optionId": "w-engines:BloodCasket:refinement:blk-mtsg3tw6-5rsbpt:eff-mtsg3tw6-gydnli",
       "catalogEntityId": "w-engines:BloodCasket",
       "name": "暴击率增伤转模 · dmgBonus",
-      "conditionDescription": "局内实时规则\n超出100%暴击率时转模\n1%暴击率 转 0.48% 增伤\n转模增伤上限24%",
+      "conditionDescription": "局内实时规则\n超出100%暴击率时转模\n1%暴击率 转 0.48/0.56/0.64/0.72/0.8% 增伤（按精炼1—5取值）\n转模增伤上限 24/28/32/36/40%（按精炼1—5取值）",
       "target": "self",
       "variants": [
         {
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -26534,6 +26569,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/76/refinementBuffs/0/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13021/details.zh.json",
+              "pointer": "/talents/1/desc"
             }
           ],
           "effectIds": [
@@ -26541,14 +26583,14 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["blood-casket-refinement-aware-description"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -26556,6 +26598,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/76/refinementBuffs/1/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13021/details.zh.json",
+              "pointer": "/talents/2/desc"
             }
           ],
           "effectIds": [
@@ -26563,14 +26612,14 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["blood-casket-refinement-aware-description"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [3]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -26578,6 +26627,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/76/refinementBuffs/2/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13021/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ],
           "effectIds": [
@@ -26585,14 +26641,14 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["blood-casket-refinement-aware-description"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -26600,6 +26656,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/76/refinementBuffs/3/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13021/details.zh.json",
+              "pointer": "/talents/4/desc"
             }
           ],
           "effectIds": [
@@ -26607,14 +26670,14 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["blood-casket-refinement-aware-description"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [5]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -26622,6 +26685,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/76/refinementBuffs/4/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13021/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
@@ -26629,7 +26699,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["blood-casket-refinement-aware-description"],
           "applicability": {}
         }
       ]
@@ -28713,7 +28783,7 @@
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -28721,6 +28791,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/86/refinementBuffs/0/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14145/details.zh.json",
+              "pointer": "/talents/1/desc"
             }
           ],
           "effectIds": [
@@ -28728,7 +28805,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -28744,7 +28821,7 @@
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -28752,6 +28829,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/86/refinementBuffs/1/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14145/details.zh.json",
+              "pointer": "/talents/2/desc"
             }
           ],
           "effectIds": [
@@ -28759,7 +28843,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -28775,7 +28859,7 @@
           "configuration": {
             "refinements": [3]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -28783,6 +28867,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/86/refinementBuffs/2/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14145/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ],
           "effectIds": [
@@ -28790,7 +28881,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -28806,7 +28897,7 @@
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -28814,6 +28905,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/86/refinementBuffs/3/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14145/details.zh.json",
+              "pointer": "/talents/4/desc"
             }
           ],
           "effectIds": [
@@ -28821,7 +28919,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -28837,7 +28935,7 @@
           "configuration": {
             "refinements": [5]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -28845,6 +28943,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/86/refinementBuffs/4/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14145/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
@@ -28852,7 +28957,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -29472,7 +29577,7 @@
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -29480,6 +29585,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/58/refinementBuffs/0/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14117/details.zh.json",
+              "pointer": "/talents/1/desc"
             }
           ],
           "effectIds": [
@@ -29487,7 +29599,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -29503,7 +29615,7 @@
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -29511,6 +29623,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/58/refinementBuffs/1/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14117/details.zh.json",
+              "pointer": "/talents/2/desc"
             }
           ],
           "effectIds": [
@@ -29518,7 +29637,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -29534,7 +29653,7 @@
           "configuration": {
             "refinements": [3]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -29542,6 +29661,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/58/refinementBuffs/2/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14117/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ],
           "effectIds": [
@@ -29549,7 +29675,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -29565,7 +29691,7 @@
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -29573,6 +29699,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/58/refinementBuffs/3/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14117/details.zh.json",
+              "pointer": "/talents/4/desc"
             }
           ],
           "effectIds": [
@@ -29580,7 +29713,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -29596,7 +29729,7 @@
           "configuration": {
             "refinements": [5]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -29604,6 +29737,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/58/refinementBuffs/4/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14117/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
@@ -29611,7 +29751,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -31174,7 +31314,7 @@
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -31182,6 +31322,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/23/refinementBuffs/0/effectBlocks/0/effects/3"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14134/details.zh.json",
+              "pointer": "/talents/1/desc"
             }
           ],
           "effectIds": [
@@ -31189,7 +31336,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -31205,7 +31352,7 @@
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -31213,6 +31360,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/23/refinementBuffs/1/effectBlocks/0/effects/3"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14134/details.zh.json",
+              "pointer": "/talents/2/desc"
             }
           ],
           "effectIds": [
@@ -31220,7 +31374,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -31236,7 +31390,7 @@
           "configuration": {
             "refinements": [3]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -31244,6 +31398,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/23/refinementBuffs/2/effectBlocks/0/effects/3"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14134/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ],
           "effectIds": [
@@ -31251,7 +31412,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -31267,7 +31428,7 @@
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -31275,6 +31436,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/23/refinementBuffs/3/effectBlocks/0/effects/3"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14134/details.zh.json",
+              "pointer": "/talents/4/desc"
             }
           ],
           "effectIds": [
@@ -31282,7 +31450,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -31298,7 +31466,7 @@
           "configuration": {
             "refinements": [5]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -31306,6 +31474,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/23/refinementBuffs/4/effectBlocks/0/effects/3"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14134/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
@@ -31313,7 +31488,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -31686,7 +31861,7 @@
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -31694,6 +31869,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/95/refinementBuffs/0/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14157/details.zh.json",
+              "pointer": "/talents/1/desc"
             }
           ],
           "effectIds": [
@@ -31701,7 +31883,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -31717,7 +31899,7 @@
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -31725,6 +31907,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/95/refinementBuffs/1/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14157/details.zh.json",
+              "pointer": "/talents/2/desc"
             }
           ],
           "effectIds": [
@@ -31732,7 +31921,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -31748,7 +31937,7 @@
           "configuration": {
             "refinements": [3]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -31756,6 +31945,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/95/refinementBuffs/2/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14157/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ],
           "effectIds": [
@@ -31763,7 +31959,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -31779,7 +31975,7 @@
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -31787,6 +31983,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/95/refinementBuffs/3/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14157/details.zh.json",
+              "pointer": "/talents/4/desc"
             }
           ],
           "effectIds": [
@@ -31794,7 +31997,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -31810,7 +32013,7 @@
           "configuration": {
             "refinements": [5]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -31818,6 +32021,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/95/refinementBuffs/4/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14157/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
@@ -31825,7 +32035,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -32317,7 +32527,7 @@
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -32325,6 +32535,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/61/refinementBuffs/0/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14110/details.zh.json",
+              "pointer": "/talents/1/desc"
             }
           ],
           "effectIds": [
@@ -32332,7 +32549,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -32348,7 +32565,7 @@
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -32356,6 +32573,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/61/refinementBuffs/1/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14110/details.zh.json",
+              "pointer": "/talents/2/desc"
             }
           ],
           "effectIds": [
@@ -32363,7 +32587,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -32379,7 +32603,7 @@
           "configuration": {
             "refinements": [3]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -32387,6 +32611,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/61/refinementBuffs/2/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14110/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ],
           "effectIds": [
@@ -32394,7 +32625,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -32410,7 +32641,7 @@
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -32418,6 +32649,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/61/refinementBuffs/3/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14110/details.zh.json",
+              "pointer": "/talents/4/desc"
             }
           ],
           "effectIds": [
@@ -32425,7 +32663,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -32441,7 +32679,7 @@
           "configuration": {
             "refinements": [5]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -32449,6 +32687,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/61/refinementBuffs/4/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14110/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
@@ -32456,7 +32701,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -32627,7 +32872,7 @@
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -32635,6 +32880,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/33/refinementBuffs/0/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13106/details.zh.json",
+              "pointer": "/talents/1/desc"
             }
           ],
           "effectIds": [
@@ -32642,14 +32894,14 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -32657,6 +32909,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/33/refinementBuffs/1/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13106/details.zh.json",
+              "pointer": "/talents/2/desc"
             }
           ],
           "effectIds": [
@@ -32664,14 +32923,14 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [3]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -32679,6 +32938,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/33/refinementBuffs/2/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13106/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ],
           "effectIds": [
@@ -32686,14 +32952,14 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -32701,6 +32967,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/33/refinementBuffs/3/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13106/details.zh.json",
+              "pointer": "/talents/4/desc"
             }
           ],
           "effectIds": [
@@ -32708,14 +32981,14 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [5]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -32723,6 +32996,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/33/refinementBuffs/4/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13106/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
@@ -32730,7 +33010,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -34788,7 +35068,7 @@
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -34796,6 +35076,41 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/22/refinementBuffs/3/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14129/details.zh.json",
+              "pointer": "/talents/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14129/details.zh.json",
+              "pointer": "/talents/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14129/details.zh.json",
+              "pointer": "/talents/3/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14129/details.zh.json",
+              "pointer": "/talents/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14129/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
@@ -34803,7 +35118,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["myriad-eclipse-r4-critical-damage"],
           "applicability": {}
         },
         {
@@ -34841,7 +35156,7 @@
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -34849,21 +35164,28 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/22/refinementBuffs/0/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14129/details.zh.json",
+              "pointer": "/talents/1/desc"
             }
           ],
           "effectIds": [
-            "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:1"
+            "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement"
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["myriad-eclipse-zero-verdict-ignore-defense-scope"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -34871,21 +35193,28 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/22/refinementBuffs/1/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14129/details.zh.json",
+              "pointer": "/talents/2/desc"
             }
           ],
           "effectIds": [
-            "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:2"
+            "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement"
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["myriad-eclipse-zero-verdict-ignore-defense-scope"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [3]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -34893,21 +35222,28 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/22/refinementBuffs/2/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14129/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ],
           "effectIds": [
-            "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:3"
+            "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement"
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["myriad-eclipse-zero-verdict-ignore-defense-scope"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -34915,14 +35251,21 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/22/refinementBuffs/3/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14129/details.zh.json",
+              "pointer": "/talents/4/desc"
             }
           ],
           "effectIds": [
-            "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:4"
+            "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement"
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["myriad-eclipse-zero-verdict-ignore-defense-scope"],
           "applicability": {}
         },
         {
@@ -34940,7 +35283,7 @@
             }
           ],
           "effectIds": [
-            "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:5"
+            "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement"
           ],
           "maximumLayers": 1,
           "inputs": [],
@@ -35973,7 +36316,7 @@
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -35981,6 +36324,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13127/details.zh.json",
+              "pointer": "/talents/1/desc"
             }
           ],
           "effectIds": [
@@ -35988,7 +36338,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -36004,7 +36354,7 @@
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -36012,6 +36362,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13127/details.zh.json",
+              "pointer": "/talents/2/desc"
             }
           ],
           "effectIds": [
@@ -36019,7 +36376,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -36035,7 +36392,7 @@
           "configuration": {
             "refinements": [3]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -36043,6 +36400,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13127/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ],
           "effectIds": [
@@ -36050,7 +36414,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -36066,7 +36430,7 @@
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -36074,6 +36438,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13127/details.zh.json",
+              "pointer": "/talents/4/desc"
             }
           ],
           "effectIds": [
@@ -36081,7 +36452,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -36097,7 +36468,7 @@
           "configuration": {
             "refinements": [5]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -36105,6 +36476,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13127/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
@@ -36112,7 +36490,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -36360,13 +36738,13 @@
       "catalogEntityId": "w-engines:Promotion Stats",
       "name": "精1 · inCombatDefPercent",
       "conditionDescription": "防御力提升8%；释放[强化特殊技]时，防御力额外提升8%，持续40秒，重复触发时刷新持续时间。",
-      "target": "team",
+      "target": "self",
       "variants": [
         {
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -36374,6 +36752,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/28/refinementBuffs/0/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13017/details.zh.json",
+              "pointer": "/talents/1/desc"
             }
           ],
           "effectIds": [
@@ -36381,14 +36766,14 @@
           ],
           "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["promotion-stats-equipper-defense"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -36396,6 +36781,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/28/refinementBuffs/1/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13017/details.zh.json",
+              "pointer": "/talents/2/desc"
             }
           ],
           "effectIds": [
@@ -36403,14 +36795,14 @@
           ],
           "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["promotion-stats-equipper-defense"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [3]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -36418,6 +36810,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/28/refinementBuffs/2/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13017/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ],
           "effectIds": [
@@ -36425,14 +36824,14 @@
           ],
           "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["promotion-stats-equipper-defense"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -36440,6 +36839,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/28/refinementBuffs/3/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13017/details.zh.json",
+              "pointer": "/talents/4/desc"
             }
           ],
           "effectIds": [
@@ -36447,14 +36853,14 @@
           ],
           "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["promotion-stats-equipper-defense"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [5]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -36462,6 +36868,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/28/refinementBuffs/4/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13017/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
@@ -36469,7 +36882,7 @@
           ],
           "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["promotion-stats-equipper-defense"],
           "applicability": {}
         }
       ]
@@ -41149,7 +41562,7 @@
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -41157,6 +41570,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/75/refinementBuffs/0/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13103/details.zh.json",
+              "pointer": "/talents/1/desc"
             }
           ],
           "effectIds": [
@@ -41164,7 +41584,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -41180,7 +41600,7 @@
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -41188,6 +41608,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/75/refinementBuffs/1/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13103/details.zh.json",
+              "pointer": "/talents/2/desc"
             }
           ],
           "effectIds": [
@@ -41195,7 +41622,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -41211,7 +41638,7 @@
           "configuration": {
             "refinements": [3]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -41219,6 +41646,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/75/refinementBuffs/2/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13103/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ],
           "effectIds": [
@@ -41226,7 +41660,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -41242,7 +41676,7 @@
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -41250,6 +41684,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/75/refinementBuffs/3/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13103/details.zh.json",
+              "pointer": "/talents/4/desc"
             }
           ],
           "effectIds": [
@@ -41257,7 +41698,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -41273,7 +41714,7 @@
           "configuration": {
             "refinements": [5]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -41281,6 +41722,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/75/refinementBuffs/4/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13103/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
@@ -41288,7 +41736,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -41298,13 +41746,13 @@
       "catalogEntityId": "w-engines:The_Vault",
       "name": "精1 · dmgBonus",
       "conditionDescription": "[强化特殊技]、[连携技]或[终结技]造成以太伤害时，所有单位对目标造成的伤害提升15%，装备者的能量自动回复提升0.5点/秒，持续2秒，同名被动效果之间不可叠加。",
-      "target": "self",
+      "target": "team",
       "variants": [
         {
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -41312,14 +41760,21 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/75/refinementBuffs/0/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13103/details.zh.json",
+              "pointer": "/talents/1/desc"
             }
           ],
           "effectIds": [
-            "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement:1"
+            "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement"
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["the-vault-r1-team-damage-bonus"],
           "applicability": {}
         },
         {
@@ -41337,13 +41792,12 @@
             }
           ],
           "effectIds": [
-            "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement:2"
+            "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement"
           ],
           "maximumLayers": 1,
           "inputs": [],
           "differences": [],
-          "applicability": {},
-          "target": "team"
+          "applicability": {}
         },
         {
           "configuration": {
@@ -41360,13 +41814,12 @@
             }
           ],
           "effectIds": [
-            "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement:3"
+            "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement"
           ],
           "maximumLayers": 1,
           "inputs": [],
           "differences": [],
-          "applicability": {},
-          "target": "team"
+          "applicability": {}
         },
         {
           "configuration": {
@@ -41383,13 +41836,12 @@
             }
           ],
           "effectIds": [
-            "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement:4"
+            "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement"
           ],
           "maximumLayers": 1,
           "inputs": [],
           "differences": [],
-          "applicability": {},
-          "target": "team"
+          "applicability": {}
         },
         {
           "configuration": {
@@ -41406,13 +41858,12 @@
             }
           ],
           "effectIds": [
-            "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement:5"
+            "w-engine:13103:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement"
           ],
           "maximumLayers": 1,
           "inputs": [],
           "differences": [],
-          "applicability": {},
-          "target": "team"
+          "applicability": {}
         }
       ]
     },
@@ -41427,7 +41878,7 @@
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -41435,6 +41886,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/41/refinementBuffs/0/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14149/details.zh.json",
+              "pointer": "/talents/1/desc"
             }
           ],
           "effectIds": [
@@ -41442,7 +41900,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -41458,7 +41916,7 @@
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -41466,6 +41924,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/41/refinementBuffs/1/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14149/details.zh.json",
+              "pointer": "/talents/2/desc"
             }
           ],
           "effectIds": [
@@ -41473,7 +41938,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -41489,7 +41954,7 @@
           "configuration": {
             "refinements": [3]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -41497,6 +41962,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/41/refinementBuffs/2/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14149/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ],
           "effectIds": [
@@ -41504,7 +41976,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -41520,7 +41992,7 @@
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -41528,6 +42000,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/41/refinementBuffs/3/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14149/details.zh.json",
+              "pointer": "/talents/4/desc"
             }
           ],
           "effectIds": [
@@ -41535,7 +42014,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -41551,7 +42030,7 @@
           "configuration": {
             "refinements": [5]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -41559,6 +42038,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/41/refinementBuffs/4/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14149/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
@@ -41566,7 +42052,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -43035,7 +43521,7 @@
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -43043,6 +43529,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/27/refinementBuffs/0/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14121/details.zh.json",
+              "pointer": "/talents/1/desc"
             }
           ],
           "effectIds": [
@@ -43050,7 +43543,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -43066,7 +43559,7 @@
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -43074,6 +43567,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/27/refinementBuffs/1/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14121/details.zh.json",
+              "pointer": "/talents/2/desc"
             }
           ],
           "effectIds": [
@@ -43081,7 +43581,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -43097,7 +43597,7 @@
           "configuration": {
             "refinements": [3]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -43105,6 +43605,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/27/refinementBuffs/2/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14121/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ],
           "effectIds": [
@@ -43112,7 +43619,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -43128,7 +43635,7 @@
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -43136,6 +43643,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/27/refinementBuffs/3/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14121/details.zh.json",
+              "pointer": "/talents/4/desc"
             }
           ],
           "effectIds": [
@@ -43143,7 +43657,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -43159,7 +43673,7 @@
           "configuration": {
             "refinements": [5]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -43167,6 +43681,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/27/refinementBuffs/4/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14121/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
@@ -43174,7 +43695,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -43556,7 +44077,7 @@
           "configuration": {
             "refinements": [1]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -43564,6 +44085,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/48/refinementBuffs/0/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14148/details.zh.json",
+              "pointer": "/talents/1/desc"
             }
           ],
           "effectIds": [
@@ -43571,14 +44099,14 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -43586,6 +44114,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/48/refinementBuffs/1/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14148/details.zh.json",
+              "pointer": "/talents/2/desc"
             }
           ],
           "effectIds": [
@@ -43593,14 +44128,14 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [3]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -43608,6 +44143,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/48/refinementBuffs/2/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14148/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ],
           "effectIds": [
@@ -43615,14 +44157,14 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [4]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -43630,6 +44172,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/48/refinementBuffs/3/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14148/details.zh.json",
+              "pointer": "/talents/4/desc"
             }
           ],
           "effectIds": [
@@ -43637,14 +44186,14 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         },
         {
           "configuration": {
             "refinements": [5]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -43652,6 +44201,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/48/refinementBuffs/4/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14148/details.zh.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
@@ -43659,7 +44215,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["wengine-flat-energy-regen"],
           "applicability": {}
         }
       ]
@@ -47044,6 +47600,1140 @@
           "version": "3.2",
           "locale": "zh",
           "resourcePath": "w-engines/14137/details.zh.json",
+          "pointer": "/talents/5/desc"
+        }
+      ]
+    },
+    {
+      "differenceId": "wengine-flat-energy-regen",
+      "explanation": "11 件音擎共 55 条固定回能记录（聚宝箱、家政员、维序者-特化型、燃狱齿轮、灼心摇壶、啜泣摇篮、半糖雪兔（来源拼写为半塘雪兔）、铸梦炉歌、昨夜来电、思络成歌、首席跟班 × 精炼 1—5）在固定来源 fac62407 中被编入 energyRegen 百分比字段（经 basePercentage 读取为 基础回能 × value/100；基础回能 1.2 点/秒时 +0.4 记录实际增加 0.48 点/秒），而各块 note 与 Nanoka 五档天赋同文均为“能量自动回复提升若干点/秒”的固定值。Fairy 按具名登记把这些记录编译为固定回能加数（energy-per-second，value × 0.01），不随基础回能缩放；各记录的触发条件（位于后场、拥有护盾、非操作中等）仍由调用方显式选择声明，持续时间与同名被动限制不模拟。真正的百分比回能记录（摇摆爵士、月光安可二件套 +20%）不在登记内，energyRegen 的百分比语义保持不变。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/86/refinementBuffs/0/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14145/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/86/refinementBuffs/1/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14145/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/86/refinementBuffs/2/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14145/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/86/refinementBuffs/3/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14145/details.zh.json",
+          "pointer": "/talents/4/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/86/refinementBuffs/4/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14145/details.zh.json",
+          "pointer": "/talents/5/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/58/refinementBuffs/0/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14117/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/58/refinementBuffs/1/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14117/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/58/refinementBuffs/2/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14117/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/58/refinementBuffs/3/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14117/details.zh.json",
+          "pointer": "/talents/4/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/58/refinementBuffs/4/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14117/details.zh.json",
+          "pointer": "/talents/5/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/23/refinementBuffs/0/effectBlocks/0/effects/3"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14134/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/23/refinementBuffs/1/effectBlocks/0/effects/3"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14134/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/23/refinementBuffs/2/effectBlocks/0/effects/3"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14134/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/23/refinementBuffs/3/effectBlocks/0/effects/3"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14134/details.zh.json",
+          "pointer": "/talents/4/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/23/refinementBuffs/4/effectBlocks/0/effects/3"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14134/details.zh.json",
+          "pointer": "/talents/5/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/95/refinementBuffs/0/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14157/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/95/refinementBuffs/1/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14157/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/95/refinementBuffs/2/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14157/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/95/refinementBuffs/3/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14157/details.zh.json",
+          "pointer": "/talents/4/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/95/refinementBuffs/4/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14157/details.zh.json",
+          "pointer": "/talents/5/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/61/refinementBuffs/0/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14110/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/61/refinementBuffs/1/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14110/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/61/refinementBuffs/2/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14110/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/61/refinementBuffs/3/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14110/details.zh.json",
+          "pointer": "/talents/4/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/61/refinementBuffs/4/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14110/details.zh.json",
+          "pointer": "/talents/5/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/33/refinementBuffs/0/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13106/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/33/refinementBuffs/1/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13106/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/33/refinementBuffs/2/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13106/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/33/refinementBuffs/3/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13106/details.zh.json",
+          "pointer": "/talents/4/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/33/refinementBuffs/4/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13106/details.zh.json",
+          "pointer": "/talents/5/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13127/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13127/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13127/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13127/details.zh.json",
+          "pointer": "/talents/4/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13127/details.zh.json",
+          "pointer": "/talents/5/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/75/refinementBuffs/0/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13103/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/75/refinementBuffs/1/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13103/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/75/refinementBuffs/2/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13103/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/75/refinementBuffs/3/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13103/details.zh.json",
+          "pointer": "/talents/4/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/75/refinementBuffs/4/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13103/details.zh.json",
+          "pointer": "/talents/5/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/41/refinementBuffs/0/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14149/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/41/refinementBuffs/1/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14149/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/41/refinementBuffs/2/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14149/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/41/refinementBuffs/3/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14149/details.zh.json",
+          "pointer": "/talents/4/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/41/refinementBuffs/4/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14149/details.zh.json",
+          "pointer": "/talents/5/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/27/refinementBuffs/0/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14121/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/27/refinementBuffs/1/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14121/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/27/refinementBuffs/2/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14121/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/27/refinementBuffs/3/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14121/details.zh.json",
+          "pointer": "/talents/4/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/27/refinementBuffs/4/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14121/details.zh.json",
+          "pointer": "/talents/5/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/48/refinementBuffs/0/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14148/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/48/refinementBuffs/1/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14148/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/48/refinementBuffs/2/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14148/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/48/refinementBuffs/3/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14148/details.zh.json",
+          "pointer": "/talents/4/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/48/refinementBuffs/4/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14148/details.zh.json",
+          "pointer": "/talents/5/desc"
+        }
+      ]
+    },
+    {
+      "differenceId": "myriad-eclipse-r4-critical-damage",
+      "explanation": "千面日陨（14129）精炼 4 的暴击伤害在固定来源 fac62407 中记为 62.25，而同块 note 与 Nanoka 五档天赋（w-engines/14129/details.zh.json 的 /talents/1—5/desc）同文为 45/51.75/58.5/65.25/72%：精炼 1—3、5 的记录数值与文本一致，精炼 4 与自身块 note 矛盾。Fairy 按具名登记修正精炼 4 为 0.6525，其余四档保持来源原值；effectId、optionId 与常驻属性通道不变。证据级别为块 note 与 Nanoka 同文纠错，未经游戏实测。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/22/refinementBuffs/3/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14129/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14129/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14129/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14129/details.zh.json",
+          "pointer": "/talents/4/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14129/details.zh.json",
+          "pointer": "/talents/5/desc"
+        }
+      ]
+    },
+    {
+      "differenceId": "myriad-eclipse-zero-verdict-ignore-defense-scope",
+      "explanation": "千面日陨（14129）精炼 1—4 的忽防记录被固定来源加上 elementFilter=[冰]，而块 note 与 Nanoka 五档天赋同文明确：[强化特殊技]、[连携技]、[终结技]造成冰属性伤害只是[零度处刑宣言]（持续 3 秒）的触发条件，状态期间“角色命中敌人时无视25/28.75/32.5/36.25%防御力”不限定命中元素；精炼 5 的记录（elementFilter=all）与此一致。Fairy 移除精炼 1—4 的冰元素命中条件，五档结构一致后按精炼合并为一条 by-rank 规则；[零度处刑宣言]状态有效由调用方显式选择声明，3 秒持续不模拟。数值保持来源原值，精炼 5 记录无需修正。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/22/refinementBuffs/0/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14129/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/22/refinementBuffs/1/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14129/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/22/refinementBuffs/2/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14129/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/22/refinementBuffs/3/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14129/details.zh.json",
+          "pointer": "/talents/4/desc"
+        }
+      ]
+    },
+    {
+      "differenceId": "promotion-stats-equipper-defense",
+      "explanation": "喵运当头（13017）五档防御提升的块 note 与 Nanoka 五档天赋（w-engines/13017/details.zh.json 的 /talents/1—5/desc）同文为「防御力提升8/9/10/11/12%；释放[强化特殊技]时，防御力额外提升同值，持续40秒」——受益对象是装备者；固定来源却把五档记为 applyTarget=team，上游会把防御加给队友。Fairy 修正受益对象为装备者（选项 target=self），常驻与强化特殊技触发两段保持分别生效：沿用来源 stacked 编码（每层 8/9/10/11/12%、最多 2 层），调用方以层数显式声明——1 层=仅常驻部分，2 层=常驻与强化特殊技触发的额外部分（40 秒内），0 层=关闭；40 秒持续与重复触发刷新不模拟。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/28/refinementBuffs/0/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13017/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/28/refinementBuffs/1/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13017/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/28/refinementBuffs/2/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13017/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/28/refinementBuffs/3/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13017/details.zh.json",
+          "pointer": "/talents/4/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/28/refinementBuffs/4/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13017/details.zh.json",
+          "pointer": "/talents/5/desc"
+        }
+      ]
+    },
+    {
+      "differenceId": "the-vault-r1-team-damage-bonus",
+      "explanation": "聚宝箱（13103）精炼 1 的增伤条款块 note 与 Nanoka 天赋 1 同文为「[强化特殊技]、[连携技]或[终结技]造成以太伤害时，所有单位对目标造成的伤害提升15%」，固定来源的精炼 1 记录却为 applyTarget=self（精炼 2—5 已是 team），队友无法受益。Fairy 修正精炼 1 为 team；修正后五档结构一致并按精炼合并为一条 by-rank 规则（0.15/0.175/0.2/0.22/0.24），触发与 2 秒持续仍由调用方显式选择声明。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/75/refinementBuffs/0/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13103/details.zh.json",
+          "pointer": "/talents/1/desc"
+        }
+      ]
+    },
+    {
+      "differenceId": "bellicose-blaze-trigger-scope-ignore-defense",
+      "explanation": "嚣枪喧焰（14130）五档每层忽防的块 note 与 Nanoka 五档天赋同文：「装备者发动[追加攻击]造成火属性伤害时，装备者的攻击对敌人造成的伤害无视15/17.2/19.5/21.7/24%防御力，持续8秒，3秒内最多获得1层，最多叠加2层」。文本证明的只是火属性追加攻击命中为取得状态的触发条件。固定来源两处误编：(1) 精炼 1 每层记为 valuePerStack=16，与同块 note 及 Nanoka 的 15% 矛盾，修正为 0.15；(2) 以 scope=skill 的 follow_up 技能目标与 elementFilter=[火] 把该触发条件当成受益筛选，非火属性或非追加攻击的命中被排除。Fairy 修正精炼 1 数值并移除元素与追加攻击分类的受益筛选，保留固定来源 scope=skill 派生的直伤种类（regular/sheer/sharpen）限制与 2 层上限——中文「装备者的攻击」与英文「their attacks」均未界定异常类伤害是否受益，项目伤害分类契约亦不足以核定，异常受益范围保留待证，不以文本为已证结论。触发事实、8 秒持续与 3 秒取层间隔由调用方显式选择/层数声明，不模拟时间线。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/29/refinementBuffs/0/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14130/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/29/refinementBuffs/1/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14130/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/29/refinementBuffs/2/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14130/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/29/refinementBuffs/3/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14130/details.zh.json",
+          "pointer": "/talents/4/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/29/refinementBuffs/4/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14130/details.zh.json",
+          "pointer": "/talents/5/desc"
+        }
+      ]
+    },
+    {
+      "differenceId": "blood-casket-refinement-aware-description",
+      "explanation": "血髓秘匣（13021）五档的转模数值（每超出 1% 暴击率提升 0.48/0.56/0.64/0.72/0.8% 增伤、上限 24/28/32/36/40%）在固定来源中正确，但五档共用同一块 note，均写精炼 1 的「1%暴击率 转 0.48% 增伤 / 转模增伤上限24%」，无法表达当前精炼（Nanoka /talents/1—5/desc 逐档明确）。Fairy 把选项共享说明覆盖为按精炼列值的文本，数值、规则与稳定 ID 不变。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/76/refinementBuffs/0/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13021/details.zh.json",
+          "pointer": "/talents/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/76/refinementBuffs/1/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13021/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/76/refinementBuffs/2/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13021/details.zh.json",
+          "pointer": "/talents/3/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/76/refinementBuffs/3/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13021/details.zh.json",
+          "pointer": "/talents/4/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/wengines/76/refinementBuffs/4/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/13021/details.zh.json",
           "pointer": "/talents/5/desc"
         }
       ]
