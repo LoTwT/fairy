@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "16",
+  "revision": "17",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -30313,6 +30313,136 @@
       "computationTarget": "declared unavailable option on the mapped drive-disc entity",
       "status": "out-of-scope",
       "reason": "二件套条款为攻击造成的失衡值提升6%。这是失衡值（daze）加成，不是冲击力、攻击力或伤害加成；完整静态入口的 daze-only 分支不计算最终失衡值，当前没有已核实的失衡值乘区。装备该套装 2 件及以上时静态计算正常进行（该条款不影响伤害），显式选择本选项会得到本错误。"
+    },
+    {
+      "supplementId": "nanoka:w-engines:12013:defense-on-hit",
+      "source": "nanoka-integrated@3.2 w-engines/12013 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:12013:defense-on-hit",
+      "effectIds": ["w-engine:12013:nanoka:defense-on-hit"],
+      "supportedRanks": "refinement 1—5",
+      "computationTarget": "catalog option on the mapped w-engine entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:14114:basic-attack-damage-stacks",
+      "source": "nanoka-integrated@3.2 w-engines/14114 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:14114:basic-attack-damage-stacks",
+      "effectIds": ["w-engine:14114:nanoka:basic-attack-damage-stacks"],
+      "supportedRanks": "refinement 1—5；层数 0—5",
+      "computationTarget": "catalog option on the mapped w-engine entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:12004:team-impact-after-ex",
+      "source": "nanoka-integrated@3.2 w-engines/12004 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:12004:team-impact-after-ex",
+      "effectIds": ["w-engine:12004:nanoka:team-impact-after-ex"],
+      "supportedRanks": "refinement 1—5",
+      "computationTarget": "catalog option on the mapped w-engine entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:12009:impact-as-active-character",
+      "source": "nanoka-integrated@3.2 w-engines/12009 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:12009:impact-as-active-character",
+      "effectIds": ["w-engine:12009:nanoka:impact-as-active-character"],
+      "supportedRanks": "refinement 1—5",
+      "computationTarget": "catalog option on the mapped w-engine entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:13005:impact-per-retained-layer",
+      "source": "nanoka-integrated@3.2 w-engines/13005 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:13005:impact-per-retained-layer",
+      "effectIds": ["w-engine:13005:nanoka:impact-per-retained-layer"],
+      "supportedRanks": "refinement 1—5；层数 0—8",
+      "computationTarget": "catalog option on the mapped w-engine entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:13007:impact-on-hit",
+      "source": "nanoka-integrated@3.2 w-engines/13007 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:13007:impact-on-hit",
+      "effectIds": ["w-engine:13007:nanoka:impact-on-hit"],
+      "supportedRanks": "refinement 1—5",
+      "computationTarget": "catalog option on the mapped w-engine entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:14110:impact-per-stack-after-ex",
+      "source": "nanoka-integrated@3.2 w-engines/14110 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:14110:impact-per-stack-after-ex",
+      "effectIds": ["w-engine:14110:nanoka:impact-per-stack-after-ex"],
+      "supportedRanks": "refinement 1—5；层数 0—2",
+      "computationTarget": "catalog option on the mapped w-engine entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:14116:impact-after-assist",
+      "source": "nanoka-integrated@3.2 w-engines/14116 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:14116:impact-after-assist",
+      "effectIds": ["w-engine:14116:nanoka:impact-after-assist"],
+      "supportedRanks": "refinement 1—5",
+      "computationTarget": "catalog option on the mapped w-engine entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:14125:impact-per-tea-layer",
+      "source": "nanoka-integrated@3.2 w-engines/14125 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:14125:impact-per-tea-layer",
+      "effectIds": ["w-engine:14125:nanoka:impact-per-tea-layer"],
+      "supportedRanks": "refinement 1—5；层数 0—30",
+      "computationTarget": "catalog option on the mapped w-engine entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:14136:soul-chain-1-layer",
+      "source": "nanoka-integrated@3.2 w-engines/14136 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:14136:soul-chain-1-layer",
+      "effectIds": ["w-engine:14136:nanoka:soul-chain-1-layer"],
+      "supportedRanks": "refinement 1—5；有效[魂锁] 1 层完整档位（0/1）",
+      "computationTarget": "catalog option on the mapped w-engine entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:14136:soul-chain-2-layer",
+      "source": "nanoka-integrated@3.2 w-engines/14136 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:14136:soul-chain-2-layer",
+      "effectIds": ["w-engine:14136:nanoka:soul-chain-2-layer"],
+      "supportedRanks": "refinement 1—5；有效[魂锁] 2 层完整档位（0/1）",
+      "computationTarget": "catalog option on the mapped w-engine entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:14136:soul-chain-3-layer",
+      "source": "nanoka-integrated@3.2 w-engines/14136 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:14136:soul-chain-3-layer",
+      "effectIds": ["w-engine:14136:nanoka:soul-chain-3-layer"],
+      "supportedRanks": "refinement 1—5；有效[魂锁] 3 层完整档位（0/1）",
+      "computationTarget": "catalog option on the mapped w-engine entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:14157:fixed-impact-points",
+      "source": "nanoka-integrated@3.2 w-engines/14157 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:14157:fixed-impact-points",
+      "effectIds": ["w-engine:14157:nanoka:fixed-impact-points"],
+      "supportedRanks": "refinement 1—5",
+      "computationTarget": "catalog option on the mapped w-engine entity",
+      "status": "integrated"
     }
   ],
   "summary": {
@@ -30320,17 +30450,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 844,
-    "options": 839,
+    "rules": 857,
+    "options": 852,
     "converted": 1153,
     "corrected": 131,
     "unsupported": 6,
     "supplements": {
-      "records": 14,
-      "rules": 11,
-      "options": 6,
+      "records": 27,
+      "rules": 24,
+      "options": 19,
       "entities": 1,
-      "integrated": 11,
+      "integrated": 24,
       "outOfScope": 3
     }
   },

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "16",
+  "revision": "17",
   "effects": [
     {
       "kind": "contribution",
@@ -54439,6 +54439,98 @@
     },
     {
       "kind": "contribution",
+      "effectId": "w-engine:12004:nanoka:team-impact-after-ex",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "12004"
+        },
+        "section": "潮汐",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/12004/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/12004/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/12004/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/12004/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/12004/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "ratio",
+          "values": {
+            "1": 0.08,
+            "2": 0.09,
+            "3": 0.1,
+            "4": 0.11,
+            "5": 0.12
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "team"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
+        "stage": "final-percentage",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "w-engine:12005:zzz-hp:legacy-self-anomalyControl:blk-legacy:refinement",
       "source": {
         "identity": {
@@ -54705,6 +54797,98 @@
       "operation": {
         "kind": "stat-adjustment",
         "stat": "attack",
+        "stage": "final-percentage",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:12009:nanoka:impact-as-active-character",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "12009"
+        },
+        "section": "疾潮",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/12009/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/12009/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/12009/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/12009/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/12009/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "ratio",
+          "values": {
+            "1": 0.09,
+            "2": 0.1,
+            "3": 0.11,
+            "4": 0.12,
+            "5": 0.13
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
         "stage": "final-percentage",
         "value": {
           "kind": "parameter",
@@ -55141,6 +55325,98 @@
         "value": {
           "kind": "parameter",
           "unit": "anomaly-proficiency-points",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:12013:nanoka:defense-on-hit",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "12013"
+        },
+        "section": "沉击",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/12013/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/12013/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/12013/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/12013/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/12013/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "ratio",
+          "values": {
+            "1": 0.2,
+            "2": 0.23,
+            "3": 0.26,
+            "4": 0.29,
+            "5": 0.32
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "defense",
+        "stage": "final-percentage",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
           "name": "amount"
         }
       }
@@ -55632,6 +55908,190 @@
       "operation": {
         "kind": "stat-adjustment",
         "stat": "attack",
+        "stage": "final-percentage",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:13005:nanoka:impact-per-retained-layer",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "13005"
+        },
+        "section": "浓厚汤底",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13005/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13005/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13005/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13005/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13005/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "ratio",
+          "values": {
+            "1": 0.02,
+            "2": 0.023,
+            "3": 0.026,
+            "4": 0.029,
+            "5": 0.032
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 8
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
+        "stage": "final-percentage",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:13007:nanoka:impact-on-hit",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "13007"
+        },
+        "section": "骑士飞踢",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13007/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13007/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13007/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13007/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13007/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "ratio",
+          "values": {
+            "1": 0.1,
+            "2": 0.115,
+            "3": 0.13,
+            "4": 0.145,
+            "5": 0.16
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
         "stage": "final-percentage",
         "value": {
           "kind": "parameter",
@@ -62242,6 +62702,98 @@
     },
     {
       "kind": "contribution",
+      "effectId": "w-engine:14110:nanoka:impact-per-stack-after-ex",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14110"
+        },
+        "section": "热血施工",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14110/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14110/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14110/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14110/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14110/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "ratio",
+          "values": {
+            "1": 0.1,
+            "2": 0.125,
+            "3": 0.15,
+            "4": 0.175,
+            "5": 0.2
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 2
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
+        "stage": "final-percentage",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "w-engine:14110:zzz-hp:eff-ms1nik02-wn2n3p:blk-ms1nik02-6x9k3x:refinement:1",
       "source": {
         "identity": {
@@ -62611,6 +63163,210 @@
         "value": {
           "kind": "parameter",
           "unit": "energy-per-second",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14114:nanoka:basic-attack-damage-stacks",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14114"
+        },
+        "section": "束缚枷锁",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14114/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14114/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14114/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14114/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14114/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "ratio",
+          "values": {
+            "1": 0.06,
+            "2": 0.075,
+            "3": 0.09,
+            "4": 0.105,
+            "5": 0.12
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 5
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular", "sheer", "sharpen"]
+          },
+          {
+            "kind": "any",
+            "conditions": [
+              {
+                "kind": "one-of",
+                "fact": "hit.skillCategory",
+                "values": ["basic"]
+              },
+              {
+                "kind": "one-of",
+                "fact": "hit.skillTag",
+                "values": ["zzz-hp:category:basic"]
+              }
+            ]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "damage-bonus",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14116:nanoka:impact-after-assist",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14116"
+        },
+        "section": "流动之火",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14116/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14116/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14116/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14116/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14116/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "ratio",
+          "values": {
+            "1": 0.25,
+            "2": 0.2875,
+            "3": 0.325,
+            "4": 0.3625,
+            "5": 0.4
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
+        "stage": "final-percentage",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
           "name": "amount"
         }
       }
@@ -65261,6 +66017,98 @@
     },
     {
       "kind": "contribution",
+      "effectId": "w-engine:14125:nanoka:impact-per-tea-layer",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14125"
+        },
+        "section": "泠泠连奏",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14125/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14125/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14125/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14125/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14125/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "ratio",
+          "values": {
+            "1": 0.007,
+            "2": 0.0088,
+            "3": 0.0105,
+            "4": 0.0122,
+            "5": 0.014
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 30
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
+        "stage": "final-percentage",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "w-engine:14125:zzz-hp:legacy-team-dmgBonus:blk-legacy:refinement",
       "source": {
         "identity": {
@@ -66981,6 +67829,285 @@
       "operation": {
         "kind": "stat-adjustment",
         "stat": "health",
+        "stage": "final-percentage",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14136:nanoka:soul-chain-1-layer",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14136"
+        },
+        "section": "捕风寻踪",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14136/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14136/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14136/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14136/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14136/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "ratio",
+          "values": {
+            "1": 0.04,
+            "2": 0.046,
+            "3": 0.052,
+            "4": 0.058,
+            "5": 0.064
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        },
+        "exclusiveGroup": "spectral-gaze:soul-chain-effective-layers"
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
+        "stage": "final-percentage",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14136:nanoka:soul-chain-2-layer",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14136"
+        },
+        "section": "捕风寻踪",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14136/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14136/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14136/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14136/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14136/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "ratio",
+          "values": {
+            "1": 0.08,
+            "2": 0.092,
+            "3": 0.104,
+            "4": 0.116,
+            "5": 0.128
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        },
+        "exclusiveGroup": "spectral-gaze:soul-chain-effective-layers"
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
+        "stage": "final-percentage",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14136:nanoka:soul-chain-3-layer",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14136"
+        },
+        "section": "捕风寻踪",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14136/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14136/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14136/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14136/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14136/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "ratio",
+          "values": {
+            "1": 0.2,
+            "2": 0.23,
+            "3": 0.26,
+            "4": 0.29,
+            "5": 0.32
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        },
+        "exclusiveGroup": "spectral-gaze:soul-chain-effective-layers"
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
         "stage": "final-percentage",
         "value": {
           "kind": "parameter",
@@ -74795,6 +75922,98 @@
         "value": {
           "kind": "parameter",
           "unit": "anomaly-proficiency-points",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14157:nanoka:fixed-impact-points",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14157"
+        },
+        "section": "天才的扈从",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14157/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14157/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14157/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14157/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14157/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "impact-points",
+          "values": {
+            "1": 30,
+            "2": 33,
+            "3": 36,
+            "4": 39,
+            "5": 42
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
+        "stage": "final-fixed",
+        "value": {
+          "kind": "parameter",
+          "unit": "impact-points",
           "name": "amount"
         }
       }

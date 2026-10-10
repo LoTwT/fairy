@@ -34,6 +34,11 @@ export interface SupplementRuleSpec {
   readonly when: Condition<"contribution">
   readonly operation: ContributionOperation
   readonly maximumLayers: number
+  /**
+   * 补充规则的受益者；缺省 holder。全队受益的条款（如残响Ⅰ型 EX 后
+   * 全队冲击力）声明 team，与目录选项 target 同口径。
+   */
+  readonly beneficiary?: { readonly kind: "holder" | "team" }
 }
 
 export interface SupplementVariantSpec {
@@ -56,6 +61,20 @@ export interface SupplementBase {
   readonly source: string
   readonly evidence: readonly SupplementEvidenceReference[]
   readonly verification: string
+  /**
+   * 重复补充防护：固定来源同实体若出现这些 stat 的机器记录，说明该条款
+   * 已有真实编码（或上游补充了编码），补充并存会造成重复贡献；生成期
+   * 拒绝并要求重新核对，不静默叠加。仅作用于固定来源实体上的补充。
+   */
+  readonly conflictingSourceStats?: readonly string[]
+  /**
+   * 同一来源绑定内的互斥完整状态组（复用公开类型既有的
+   * StaticCatalogOption.exclusiveGroup 与 supplied activation 的
+   * exclusiveGroup）：同组选项在目录入口与直接规则入口都只能选择一条。
+   * 用于把同一机制的互斥档位（如索魂影眸的有效魂锁层数）表达为完整的
+   * 单选状态，不引入跨选项推理或时间线。
+   */
+  readonly exclusiveGroup?: string
 }
 
 /** 在既有目录实体新增选项的补充来源；不创建重复实体。 */
@@ -601,6 +620,568 @@ const kingOfTheSummitTwoPieceDazeBoundary: Supplement = {
     "Nanoka drive-discs/33200 /desc2 原文“攻击造成的失衡值提升6%”；固定来源 fac62407 没有该条款的机器记录（twoPieceEffectBlocks 为 null、twoPieceEffects 为空、twoPieceMods 全零）。失衡值与伤害、冲击力是不同量纲：不能把它转换为 impact 或任何伤害乘区，也不在 daze-only 分支外新造最终失衡值公式。登记为 formula-out-of-scope 的不可选变体，供覆盖注册表与调用方得到明确解释。",
 }
 
+/** 音擎五档精炼天赋证据：w-engines/<id>/details.zh.json 的 /talents/1—5/desc。 */
+const wengineTalentEvidence = (
+  entityId: string,
+  sha256: string,
+): readonly SupplementEvidenceReference[] =>
+  ([1, 2, 3, 4, 5] as const).map((tier) => ({
+    path: `w-engines/${entityId}/details.zh.json`,
+    pointer: `/talents/${tier}/desc`,
+    sha256,
+  }))
+
+/** 按精炼取值的比例参数表。 */
+const refinementRatio = (
+  values: readonly [number, number, number, number, number],
+) =>
+  ({
+    kind: "by-rank",
+    rank: "refinement",
+    unit: "ratio",
+    values: {
+      1: values[0],
+      2: values[1],
+      3: values[2],
+      4: values[3],
+      5: values[4],
+    },
+  }) as const
+
+/** 战斗内百分比冲击力条款的统一操作：impact 的 final-percentage。 */
+const impactFinalPercentage = (name: string) =>
+  ({
+    kind: "stat-adjustment",
+    stat: "impact",
+    stage: "final-percentage",
+    value: { kind: "parameter", unit: "ratio", name },
+  }) as const
+
+const wengineSupplement = (entityId: string, slug: string) => ({
+  supplementId: `nanoka:w-engines:${entityId}:${slug}`,
+  optionId: `nanoka:w-engines:${entityId}:${slug}`,
+  effectId: `w-engine:${entityId}:nanoka:${slug}` as EffectId,
+})
+
+/** 冲击力条款可能出现的固定来源 stat 名；出现即触发重复补充防护。 */
+const impactSourceStats = [
+  "impact",
+  "inCombatImpactPercent",
+  "externalImpactPercent",
+] as const
+
+/**
+ * 「恒等式」-本格（12013）：受击后装备者防御力提升（M19）。固定来源五档块
+ * 只有 note、effects 为空；音擎高级属性（randProperty 防御力）是常驻面板
+ * 词条，不能替代本条件被动。
+ */
+const identityBaseDefenseOnHit: Supplement = {
+  kind: "option",
+  ...wengineSupplement("12013", "defense-on-hit"),
+  source: "nanoka-integrated@3.2 w-engines/12013 /talents/1—5/desc",
+  catalogEntityId: "w-engines:Identity_Base",
+  supportedRanks: "refinement 1—5",
+  computationTarget: "catalog option on the mapped w-engine entity",
+  conflictingSourceStats: ["def", "inCombatDefPercent", "externalDefPercent"],
+  evidence: wengineTalentEvidence(
+    "12013",
+    "71351b0c818f362454bff43a4d4fed98fc25120648eee884ab2e88a4b63a1415",
+  ),
+  verification:
+    "Nanoka 五档天赋逐档核实：受到敌方攻击时，装备者的防御力提升 20/23/26/29/32%，持续 8 秒；固定来源 fac62407 五档精炼块的 note 与此同文但 effects 为空（无机器记录）。本被动是受击后的条件增益，与音擎高级属性（randProperty 为“防御力”的常驻面板词条）互不替代，也不把它并入局外初始阶段：按 inCombatDefPercent 同类条款的既有口径进入 defense 的 final-percentage。受击触发与 8 秒持续由调用方显式选择断言，不模拟时间线。",
+  rule: {
+    effectId: wengineSupplement("12013", "defense-on-hit").effectId,
+    identity: { kind: "w-engine", entityId: "12013" },
+    section: "沉击",
+    config: { kind: "constant", value: true },
+    parameters: { amount: refinementRatio([0.2, 0.23, 0.26, 0.29, 0.32]) },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: {
+      kind: "stat-adjustment",
+      stat: "defense",
+      stage: "final-percentage",
+      value: { kind: "parameter", unit: "ratio", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "受到敌方攻击时，装备者的防御力提升（按精炼 20/23/26/29/32%），持续8秒；受击状态由调用方显式选择断言。音擎高级属性的常驻防御力不替代本被动。",
+    name: "沉击 · def",
+    target: "self",
+  },
+}
+
+/**
+ * 拘缚者（14114）：攻击命中后每层[普通攻击]伤害提升（M20，本批只补伤害
+ * 条款；同句的失衡值条款不在本选项内，覆盖声明留待后续批次统一处理）。
+ */
+const restrainerBasicAttackDamageStacks: Supplement = {
+  kind: "option",
+  ...wengineSupplement("14114", "basic-attack-damage-stacks"),
+  source: "nanoka-integrated@3.2 w-engines/14114 /talents/1—5/desc",
+  catalogEntityId: "w-engines:Weapon_S_1141",
+  supportedRanks: "refinement 1—5；层数 0—5",
+  computationTarget: "catalog option on the mapped w-engine entity",
+  conflictingSourceStats: ["dmgBonus", "skillDmgBonus"],
+  evidence: wengineTalentEvidence(
+    "14114",
+    "477d278159a7473afdaaadcced62eea6e95c74c7ad6ea2e0b6140395ca10621f",
+  ),
+  verification:
+    "Nanoka 五档天赋逐档核实：攻击命中敌人时，[普通攻击]造成的伤害和失衡值提升 6/7.5/9/10.5/12%，最多叠加 5 层，持续 8 秒，同一招式内最多触发一次，每层效果单独结算持续时间；固定来源 fac62407 五档块只有 note、effects 为空。本选项只接入伤害条款：攻击命中是取得层数的触发条件（由调用方按有效层数显式选择断言，同一招式限一次与逐层 8 秒持续不模拟）。受益范围是装备者造成的普通攻击伤害：伤害种类为直伤 regular/sheer/sharpen（部分角色的普通攻击存在贯穿/锐化段，不收缩为 regular），命中身份沿用目录已建立的普攻受益分类编码——原始 skillCategory 为 basic，或命中携带目录归一的 zzz-hp:category:basic 标签（含扳机“普通攻击：协奏狙杀”这类本体为追加攻击、但目录按已核实 skillTarget 标明 category basic/countsAsFollowUp 的复合身份；按评审 R02 修复，与固定来源既有普攻规则同一分类口径）。不把任意追加攻击当普攻：纯追加身份（无 basic 分类事实）不受益；不改全局 hit.skillCategory 的原值精确比较语义。失衡值条款不属于当前伤害计算承诺，本批不实现，留待后续批次统一登记覆盖说明，不能据此宣称该音擎全部条款完整。",
+  rule: {
+    effectId: wengineSupplement("14114", "basic-attack-damage-stacks").effectId,
+    identity: { kind: "w-engine", entityId: "14114" },
+    section: "束缚枷锁",
+    config: { kind: "constant", value: true },
+    parameters: {
+      amount: refinementRatio([0.06, 0.075, 0.09, 0.105, 0.12]),
+    },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.damageKind",
+          values: ["regular", "sheer", "sharpen"],
+        },
+        {
+          // 原始 basic 分类，或目录归一的普攻分类标签（skillTargets 展开的
+          // zzz-hp:category:basic，含本体为追加攻击的普攻复合身份）。
+          kind: "any",
+          conditions: [
+            { kind: "one-of", fact: "hit.skillCategory", values: ["basic"] },
+            {
+              kind: "one-of",
+              fact: "hit.skillTag",
+              values: ["zzz-hp:category:basic"],
+            },
+          ],
+        },
+      ],
+    },
+    operation: {
+      kind: "factor-contribution",
+      channel: "damage-bonus",
+      value: { kind: "parameter", unit: "ratio", name: "amount" },
+    },
+    maximumLayers: 5,
+  },
+  variant: {
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "攻击命中敌人时，[普通攻击]造成的伤害提升（按精炼每层 6/7.5/9/10.5/12%），最多叠加5层，每层持续8秒、同一招式内最多触发一次；有效层数由调用方显式选择，0 层表示关闭。受益范围为普通攻击直伤（原始 basic 分类或目录归一的普攻分类标签，含本体为追加攻击的普攻复合身份；纯追加身份不受益）。本选项只含伤害条款，[普通攻击]造成的失衡值提升不在本选项内。",
+    name: "束缚枷锁 · skillDmgBonus",
+    target: "self",
+  },
+}
+
+/** 「残响」-Ⅰ型（12004）：发动[强化特殊技]后全队冲击力提升。 */
+const reverbMarkITeamImpactAfterEx: Supplement = {
+  kind: "option",
+  ...wengineSupplement("12004", "team-impact-after-ex"),
+  source: "nanoka-integrated@3.2 w-engines/12004 /talents/1—5/desc",
+  catalogEntityId: "w-engines:Reverb_Mark_I",
+  supportedRanks: "refinement 1—5",
+  computationTarget: "catalog option on the mapped w-engine entity",
+  conflictingSourceStats: impactSourceStats,
+  evidence: wengineTalentEvidence(
+    "12004",
+    "064c40023d0c399a94ae32ad5b5c404b4208fb40e3e9a4fcb3c1f1ad6488316e",
+  ),
+  verification:
+    "Nanoka 五档天赋逐档核实：发动[强化特殊技]时，全队角色冲击力提升 8/9/10/11/12%，持续 10 秒，20 秒内最多触发一次，同名被动效果之间不可叠加；固定来源 fac62407 五档块只有 note、effects 为空。受益对象是全队（与同家族「残响」-Ⅲ型既有 inCombatAtkPercent 记录的 team 编码同构），规则 beneficiary=team、目录 target=team；发动[强化特殊技]的触发事实、10 秒持续、20 秒间隔与同名被动不可叠加由调用方显式选择断言，不模拟时间线或唯一性。",
+  rule: {
+    effectId: wengineSupplement("12004", "team-impact-after-ex").effectId,
+    identity: { kind: "w-engine", entityId: "12004" },
+    section: "潮汐",
+    config: { kind: "constant", value: true },
+    parameters: { amount: refinementRatio([0.08, 0.09, 0.1, 0.11, 0.12]) },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: impactFinalPercentage("amount"),
+    maximumLayers: 1,
+    beneficiary: { kind: "team" },
+  },
+  variant: {
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "发动[强化特殊技]时，全队角色冲击力提升（按精炼 8/9/10/11/12%），持续10秒，20秒内最多触发一次，同名被动效果之间不可叠加；触发状态由调用方显式选择断言。",
+    name: "潮汐 · impact",
+    target: "team",
+  },
+}
+
+/** 「湍流」-斧型（12009）：接战状态下成为当前操作角色时装备者冲击力提升。 */
+const vortexHatchetImpactAsActive: Supplement = {
+  kind: "option",
+  ...wengineSupplement("12009", "impact-as-active-character"),
+  source: "nanoka-integrated@3.2 w-engines/12009 /talents/1—5/desc",
+  catalogEntityId: "w-engines:Vortex_Hatchet",
+  supportedRanks: "refinement 1—5",
+  computationTarget: "catalog option on the mapped w-engine entity",
+  conflictingSourceStats: impactSourceStats,
+  evidence: wengineTalentEvidence(
+    "12009",
+    "5ae75e57e305582bf7b5b5a8ff824045dcad4cce43cf50646d51cb26ceefb758",
+  ),
+  verification:
+    "Nanoka 五档天赋逐档核实：成为接战状态下的当前操作角色时，装备者的冲击力提升 9/10/11/12/13%，持续 10 秒，20 秒内最多触发一次；固定来源 fac62407 五档块只有 note、effects 为空。成为当前操作角色是触发条件，由调用方显式选择断言；冲击力按既有战斗内百分比条款进入 impact 的 final-percentage。",
+  rule: {
+    effectId: wengineSupplement("12009", "impact-as-active-character").effectId,
+    identity: { kind: "w-engine", entityId: "12009" },
+    section: "疾潮",
+    config: { kind: "constant", value: true },
+    parameters: { amount: refinementRatio([0.09, 0.1, 0.11, 0.12, 0.13]) },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: impactFinalPercentage("amount"),
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "成为接战状态下的当前操作角色时，装备者的冲击力提升（按精炼 9/10/11/12/13%），持续10秒，20秒内最多触发一次；状态与触发由调用方显式选择断言。",
+    name: "疾潮 · impact",
+    target: "self",
+  },
+}
+
+/**
+ * 人为刀俎（13005）：每 10 点能量取得 1 层的冲击力提升。有效层数必须是
+ * 调用方显式声明的保留层数，不以当前能量除 10 推导。
+ */
+const steamOvenImpactPerRetainedLayer: Supplement = {
+  kind: "option",
+  ...wengineSupplement("13005", "impact-per-retained-layer"),
+  source: "nanoka-integrated@3.2 w-engines/13005 /talents/1—5/desc",
+  catalogEntityId: "w-engines:Steam_Oven",
+  supportedRanks: "refinement 1—5；层数 0—8",
+  computationTarget: "catalog option on the mapped w-engine entity",
+  conflictingSourceStats: impactSourceStats,
+  evidence: wengineTalentEvidence(
+    "13005",
+    "0eef324292cba51d5f2a2e31984fcec31c78f846db6f9528685bac9ddec1cb4a",
+  ),
+  verification:
+    "Nanoka 五档天赋逐档核实：每拥有10点能量值，装备者的冲击力提升 2/2.3/2.6/2.9/3.2%，最多叠加 8 层，能量消耗后该增益效果仍然保留，持续 8 秒，每层效果单独结算持续时间；固定来源 fac62407 五档块只有 note、effects 为空。取得与保留层数由调用方按实际有效层数显式选择（0 层表示关闭）：不实现“当前能量 ÷ 10”的自动推导，能量消耗后的保留与每层独立 8 秒持续也不模拟。",
+  rule: {
+    effectId: wengineSupplement("13005", "impact-per-retained-layer").effectId,
+    identity: { kind: "w-engine", entityId: "13005" },
+    section: "浓厚汤底",
+    config: { kind: "constant", value: true },
+    parameters: {
+      amount: refinementRatio([0.02, 0.023, 0.026, 0.029, 0.032]),
+    },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: impactFinalPercentage("amount"),
+    maximumLayers: 8,
+  },
+  variant: {
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "每拥有10点能量值，装备者的冲击力提升（按精炼每层 2/2.3/2.6/2.9/3.2%），最多叠加8层，能量消耗后保留8秒；有效保留层数由调用方显式选择，不从当前能量值推导。",
+    name: "浓厚汤底 · impact",
+    target: "self",
+  },
+}
+
+/** 正版变身器（13007）：受击后装备者冲击力提升；已有的生命值上限条款不动。 */
+const originalTransmorpherImpactOnHit: Supplement = {
+  kind: "option",
+  ...wengineSupplement("13007", "impact-on-hit"),
+  source: "nanoka-integrated@3.2 w-engines/13007 /talents/1—5/desc",
+  catalogEntityId: "w-engines:Original_Transmorpher",
+  supportedRanks: "refinement 1—5",
+  computationTarget: "catalog option on the mapped w-engine entity",
+  conflictingSourceStats: impactSourceStats,
+  evidence: wengineTalentEvidence(
+    "13007",
+    "a005e0ced36c0cd4236900b57ece1a64c6b2b2157358ea25d4b8c79ecf1e94fe",
+  ),
+  verification:
+    "Nanoka 五档天赋逐档核实：生命值上限提升 8—12.5%（固定来源已有 inCombatHpPercent 机器记录，本批不重复加入）；受到敌方攻击时，装备者的冲击力提升 10/11.5/13/14.5/16%，持续 12 秒——该条款在固定来源没有任何机器记录。受击触发与 12 秒持续由调用方显式选择断言；冲击力进入 impact 的 final-percentage。",
+  rule: {
+    effectId: wengineSupplement("13007", "impact-on-hit").effectId,
+    identity: { kind: "w-engine", entityId: "13007" },
+    section: "骑士飞踢",
+    config: { kind: "constant", value: true },
+    parameters: {
+      amount: refinementRatio([0.1, 0.115, 0.13, 0.145, 0.16]),
+    },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: impactFinalPercentage("amount"),
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "受到敌方攻击时，装备者的冲击力提升（按精炼 10/11.5/13/14.5/16%），持续12秒；受击状态由调用方显式选择断言。已有的生命值上限提升条款为独立选项，不重复加入。",
+    name: "骑士飞踢 · impact",
+    target: "self",
+  },
+}
+
+/** 燃狱齿轮（14110）：发动[强化特殊技]后每层冲击力提升；已有的回能条款不动。 */
+const hellfireGearsImpactPerStack: Supplement = {
+  kind: "option",
+  ...wengineSupplement("14110", "impact-per-stack-after-ex"),
+  source: "nanoka-integrated@3.2 w-engines/14110 /talents/1—5/desc",
+  catalogEntityId: "w-engines:Hellfire_Gears",
+  supportedRanks: "refinement 1—5；层数 0—2",
+  computationTarget: "catalog option on the mapped w-engine entity",
+  conflictingSourceStats: impactSourceStats,
+  evidence: wengineTalentEvidence(
+    "14110",
+    "ff9ccb3fa3763e4d5ddd7b828574c14f55dfca722acd8d03a7f778ea7bcdca8b",
+  ),
+  verification:
+    "Nanoka 五档天赋逐档核实：位于后场时能量自动回复提升 0.6—1.2 点/秒（批次 01 已按固定回能纠正，本批不重复）；发动[强化特殊技]时，装备者的冲击力提升 10/12.5/15/17.5/20%，最多叠加 2 层，持续 10 秒，每层效果单独结算持续时间——该条款在固定来源没有任何机器记录。发动[强化特殊技]的触发由调用方按有效层数显式选择断言，逐层 10 秒持续不模拟。",
+  rule: {
+    effectId: wengineSupplement("14110", "impact-per-stack-after-ex").effectId,
+    identity: { kind: "w-engine", entityId: "14110" },
+    section: "热血施工",
+    config: { kind: "constant", value: true },
+    parameters: {
+      amount: refinementRatio([0.1, 0.125, 0.15, 0.175, 0.2]),
+    },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: impactFinalPercentage("amount"),
+    maximumLayers: 2,
+  },
+  variant: {
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "发动[强化特殊技]时，装备者的冲击力提升（按精炼每层 10/12.5/15/17.5/20%），最多叠加2层，每层持续10秒；有效层数由调用方显式选择。已有的后场回能条款为独立选项。",
+    name: "热血施工 · impact",
+    target: "self",
+  },
+}
+
+/** 焰心桂冠（14116）：快速/极限支援后装备者冲击力提升；已有[萎靡]规则不混入。 */
+const blazingLaurelImpactAfterAssist: Supplement = {
+  kind: "option",
+  ...wengineSupplement("14116", "impact-after-assist"),
+  source: "nanoka-integrated@3.2 w-engines/14116 /talents/1—5/desc",
+  catalogEntityId: "w-engines:Blazing_Laurel",
+  supportedRanks: "refinement 1—5",
+  computationTarget: "catalog option on the mapped w-engine entity",
+  conflictingSourceStats: impactSourceStats,
+  evidence: wengineTalentEvidence(
+    "14116",
+    "0b2ae556d5d4547007bbc24f0b2f6a1eaf5623b7fde691b070fd3f03099fc21a",
+  ),
+  verification:
+    "Nanoka 五档天赋逐档核实：发动[快速支援]或[极限支援]时，装备者的冲击力提升 25/28.75/32.5/36.25/40%，持续 8 秒；同句的[萎靡]暴击伤害/增伤规则已由固定来源机器记录覆盖（critDmg 精炼 1—4、dmgBonus 精炼 5），冲击力条款则没有任何机器记录，固定来源 note 也未包含该句。本选项只接入冲击力条款，不与[萎靡]层数或其伤害规则绑定；快速/极限支援触发与 8 秒持续由调用方显式选择断言。",
+  rule: {
+    effectId: wengineSupplement("14116", "impact-after-assist").effectId,
+    identity: { kind: "w-engine", entityId: "14116" },
+    section: "流动之火",
+    config: { kind: "constant", value: true },
+    parameters: {
+      amount: refinementRatio([0.25, 0.2875, 0.325, 0.3625, 0.4]),
+    },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: impactFinalPercentage("amount"),
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "发动[快速支援]或[极限支援]时，装备者的冲击力提升（按精炼 25/28.75/32.5/36.25/40%），持续8秒；触发状态由调用方显式选择断言。已有的[萎靡]暴击伤害/增伤规则为独立选项，不受本选项影响。",
+    name: "流动之火 · impact",
+    target: "self",
+  },
+}
+
+/**
+ * 玉壶青冰（14125）：每层[茶劲]的装备者冲击力提升。获得[茶劲]时 ≥15 层
+ * 的全队增伤是独立的 10 秒状态（已有机器记录），不与当前[茶劲]层数绑定。
+ */
+const iceJadeTeapotImpactPerTeaLayer: Supplement = {
+  kind: "option",
+  ...wengineSupplement("14125", "impact-per-tea-layer"),
+  source: "nanoka-integrated@3.2 w-engines/14125 /talents/1—5/desc",
+  catalogEntityId: "w-engines:Ice-Jade_Teapot",
+  supportedRanks: "refinement 1—5；层数 0—30",
+  computationTarget: "catalog option on the mapped w-engine entity",
+  conflictingSourceStats: impactSourceStats,
+  evidence: wengineTalentEvidence(
+    "14125",
+    "428ba7f98360c8c9094c3b79827d093798e2058ce793667346433447e82f8130",
+  ),
+  verification:
+    "Nanoka 五档天赋逐档核实：[普通攻击]命中敌人时获得1层[茶劲]，每层[茶劲]使装备者的冲击力提升 0.7/0.88/1.05/1.22/1.4%，最多叠加 30 层，持续 8 秒，每层效果单独结算持续时间；固定来源只编码了后半句的全队增伤（获得[茶劲]时若 ≥15 层，全队造成的伤害提升 20—32%、独立 10 秒状态、同名被动不可叠加），[茶劲]冲击力条款没有机器记录。本选项只按有效[茶劲]层数提供装备者冲击力，不把既有全队增伤选项与本层状态强制绑定（≥15 层触发与 10 秒持续由该独立选项自身的显式选择表达）；每层 8 秒独立持续不模拟。",
+  rule: {
+    effectId: wengineSupplement("14125", "impact-per-tea-layer").effectId,
+    identity: { kind: "w-engine", entityId: "14125" },
+    section: "泠泠连奏",
+    config: { kind: "constant", value: true },
+    parameters: {
+      amount: refinementRatio([0.007, 0.0088, 0.0105, 0.0122, 0.014]),
+    },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: impactFinalPercentage("amount"),
+    maximumLayers: 30,
+  },
+  variant: {
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "[普通攻击]命中敌人时获得1层[茶劲]，每层[茶劲]使装备者的冲击力提升（按精炼 0.7/0.88/1.05/1.22/1.4%），最多叠加30层，每层持续8秒；有效层数由调用方显式选择。获得[茶劲]时≥15层触发的全队增伤是独立的10秒状态，由既有选项单独表达，不与当前[茶劲]层数绑死。",
+    name: "泠泠连奏 · impact",
+    target: "self",
+  },
+}
+
+/**
+ * 索魂影眸（14136）：有效[魂锁]层数的三个互斥完整档位（评审 R01 修复）。
+ * 取得层数需后台电属性追加攻击触发原减防效果；状态有效后的受益不以本次
+ * 命中元素或分类作条件。源文只规定同一[魂锁]状态的每层加成与叠满 3 层的
+ * 一次性附加，没有独立持续的“满层额外”状态，因此不能拆成可独立选取的
+ * 部分贡献：调用方声明当前有效层数，选择恰好一个完整档位（0/1 开关），
+ * 目录与直接规则入口都拒绝同组混选。满 3 层档位一次给出完整加成
+ * （每层×3 + 满层附加），不要求追踪叠层或 12 秒计时。
+ */
+const spectralGazeSoulChainTierData = [
+  {
+    tier: 1,
+    // 每层 4/4.6/5.2/5.8/6.4% × 1。
+    values: [0.04, 0.046, 0.052, 0.058, 0.064] as const,
+  },
+  {
+    tier: 2,
+    // 每层值 × 2：8/9.2/10.4/11.6/12.8%。
+    values: [0.08, 0.092, 0.104, 0.116, 0.128] as const,
+  },
+  {
+    tier: 3,
+    // 每层值 × 3 + 满层附加 8/9.2/10.4/11.6/12.8% = 20/23/26/29/32%。
+    values: [0.2, 0.23, 0.26, 0.29, 0.32] as const,
+  },
+] as const
+
+const spectralGazeSoulChainTiers: readonly Supplement[] =
+  spectralGazeSoulChainTierData.map(
+    (tier): Supplement => ({
+      kind: "option",
+      ...wengineSupplement("14136", `soul-chain-${tier.tier}-layer`),
+      source: "nanoka-integrated@3.2 w-engines/14136 /talents/1—5/desc",
+      catalogEntityId: "w-engines:Spectral_Gaze",
+      supportedRanks: `refinement 1—5；有效[魂锁] ${tier.tier} 层完整档位（0/1）`,
+      computationTarget: "catalog option on the mapped w-engine entity",
+      conflictingSourceStats: impactSourceStats,
+      exclusiveGroup: "spectral-gaze:soul-chain-effective-layers",
+      evidence: wengineTalentEvidence(
+        "14136",
+        "37e8a83a0bccda551819a1d5687de962d69fed6cfc0252e3861d370fff3e28bd",
+      ),
+      verification:
+        "Nanoka 五档天赋逐档核实：装备者的[追加攻击]命中敌人并造成电属性伤害时，目标的防御力降低 25—40%（固定来源已有 reduceDefense 机器记录覆盖）；该效果触发时如果自身不是当前操作中的角色，装备者获得1层[魂锁]，最多叠加3层，同一招式内最多触发一次；每层[魂锁]使装备者的冲击力提升 4/4.6/5.2/5.8/6.4%，持续 12 秒，每层效果单独结算持续时间，[魂锁]层数叠满时额外给装备者的冲击力提升 8/9.2/10.4/11.6/12.8%。[魂锁]条款在固定来源没有任何机器记录，note 也未包含该句。满层附加没有独立持续时间或另行触发的状态证据，与每层条款同属一个[魂锁]状态：本批按评审 R01 修复把有效层数表达为 1/2/3 层三个互斥完整档位（同组 exclusiveGroup，同绑定只能选择一个档位，未选或 0 层表示关闭），档位数值为该层数下的完整加成——1 层 4—6.4%、2 层为每层值×2（8—12.8%）、3 层为每层值×3+满层附加（20—32%）。取得层数的条件（后台电属性追加攻击触发原减防）由调用方按当前有效层数选择档位断言，不作为受益条件：状态有效后冲击力提升不以本次命中的元素或技能分类筛选；逐层 12 秒独立持续不模拟，不追踪叠层历史。",
+      rule: {
+        effectId: wengineSupplement("14136", `soul-chain-${tier.tier}-layer`)
+          .effectId,
+        identity: { kind: "w-engine", entityId: "14136" },
+        section: "捕风寻踪",
+        config: { kind: "constant", value: true },
+        parameters: { amount: refinementRatio(tier.values) },
+        scope: "entity",
+        when: { kind: "constant", value: true },
+        operation: impactFinalPercentage("amount"),
+        maximumLayers: 1,
+      },
+      variant: {
+        configuration: { refinements: [1, 2, 3, 4, 5] },
+        inputs: [],
+        applicability: {},
+        conditionDescription:
+          tier.tier === 3
+            ? "当前有 3 层有效[魂锁]（叠满）时，装备者的冲击力提升 20/23/26/29/32%（按精炼取值，即每层 4/4.6/5.2/5.8/6.4% × 3 层 + 叠满额外 8/9.2/10.4/11.6/12.8%，一次完整计算）；选择本档位即断言当前有效魂锁恰为 3 层，与 1/2 层档位互斥，0 层表示关闭。取得条件（后台电属性追加攻击触发减防）不作受益条件，不以命中元素或分类筛选。"
+            : `当前有 ${tier.tier} 层有效[魂锁]时，装备者的冲击力提升 ${[null, "4/4.6/5.2/5.8/6.4", "8/9.2/10.4/11.6/12.8"][tier.tier]}%（按精炼取值，即每层值 × ${tier.tier} 层的完整档位）；选择本档位即断言当前有效魂锁恰为 ${tier.tier} 层，与其他档位互斥，0 层表示关闭。取得条件（后台电属性追加攻击触发减防）不作受益条件，不以命中元素或分类筛选。`,
+        name: `捕风寻踪 · soulChain${tier.tier}Layer`,
+        target: "self",
+      },
+    }),
+  )
+
+/**
+ * 首席跟班（14157）：装备者冲击力提升固定点数。固定点数与百分比冲击力
+ * 区分明确；可被既有冲击力读取链消费，不宣称实现最终失衡值。
+ */
+const headLackeyFixedImpactPoints: Supplement = {
+  kind: "option",
+  ...wengineSupplement("14157", "fixed-impact-points"),
+  source: "nanoka-integrated@3.2 w-engines/14157 /talents/1—5/desc",
+  catalogEntityId: "w-engines:Head_Lackey",
+  supportedRanks: "refinement 1—5",
+  computationTarget: "catalog option on the mapped w-engine entity",
+  conflictingSourceStats: impactSourceStats,
+  evidence: wengineTalentEvidence(
+    "14157",
+    "5f0852373824739812d5e4fed0f362d80638bddea1a868892d08373710e4066c",
+  ),
+  verification:
+    "Nanoka 五档天赋逐档核实：装备者的冲击力提升 30/33/36/39/42 点（固定点数，不是百分比）；固定来源已编码同句的火抗无视（resPen）、非操作中回能（批次 01 已纠正的固定回能）与强化特殊技触发的全队增伤，唯独冲击力点数没有机器记录。按固定来源 atk/def 点数的既有口径进入 impact 的 final-fixed：不随基础冲击力缩放，也不写成百分比；基础冲击力改变时固定增量不变。冲击力进入面板后可供既有读取链消费（如冲击力转化），本选项不实现最终失衡值。",
+  rule: {
+    effectId: wengineSupplement("14157", "fixed-impact-points").effectId,
+    identity: { kind: "w-engine", entityId: "14157" },
+    section: "天才的扈从",
+    config: { kind: "constant", value: true },
+    parameters: {
+      amount: {
+        kind: "by-rank",
+        rank: "refinement",
+        unit: "impact-points",
+        values: { 1: 30, 2: 33, 3: 36, 4: 39, 5: 42 },
+      },
+    },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: {
+      kind: "stat-adjustment",
+      stat: "impact",
+      stage: "final-fixed",
+      value: { kind: "parameter", unit: "impact-points", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "装备者的冲击力提升固定点数（按精炼 30/33/36/39/42 点）；与百分比冲击力分别计算，不随基础冲击力缩放，可供既有冲击力读取链消费，不实现最终失衡值。",
+    name: "天才的扈从 · impact",
+    target: "self",
+  },
+}
+
 const potentialEvidence = (
   entityId: string,
   sha256: string,
@@ -1043,4 +1624,15 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   soulRockTwoPieceDefense,
   protoPunkTwoPieceShieldBoundary,
   kingOfTheSummitTwoPieceDazeBoundary,
+  identityBaseDefenseOnHit,
+  restrainerBasicAttackDamageStacks,
+  reverbMarkITeamImpactAfterEx,
+  vortexHatchetImpactAsActive,
+  steamOvenImpactPerRetainedLayer,
+  originalTransmorpherImpactOnHit,
+  hellfireGearsImpactPerStack,
+  blazingLaurelImpactAfterAssist,
+  iceJadeTeapotImpactPerTeaLayer,
+  ...spectralGazeSoulChainTiers,
+  headLackeyFixedImpactPoints,
 ]

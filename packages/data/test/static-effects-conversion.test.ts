@@ -22,7 +22,10 @@ import {
   type DeveloperRevisionEntry,
 } from "../scripts/static-effects/developer-revision.ts"
 import evidence from "../scripts/static-effects/rank-evidence.json" with { type: "json" }
-import { SUPPLEMENTS } from "../scripts/static-effects/supplements.ts"
+import {
+  SUPPLEMENTS,
+  type Supplement,
+} from "../scripts/static-effects/supplements.ts"
 import { SOURCE_SEMANTICS } from "../scripts/static-effects/semantics.ts"
 import type {
   SourceData,
@@ -157,7 +160,7 @@ describe("static data conversion", () => {
       ],
     }
     const result = convertSource(source, functions, [], [])
-    expect(result.definitions.revision).toBe("16")
+    expect(result.definitions.revision).toBe("17")
     for (const option of result.catalog.options) {
       const variant = option.variants[0]!
       const sameBlock = option.optionId.endsWith("unverified-same-block")
@@ -450,7 +453,7 @@ const angelData = (): SourceData => ({
 describe("developer stat revision", () => {
   it("maps the four registered records through the anomaly bonus channel", () => {
     const result = convertSource(angelData(), functions, [], [])
-    expect(result.definitions.revision).toBe("16")
+    expect(result.definitions.revision).toBe("17")
     const option = result.catalog.options.find(
       (o) =>
         o.optionId ===
@@ -742,7 +745,7 @@ const remielData = (): SourceData => ({
 describe("remielle mindscape 2 attribute anomaly scope revision", () => {
   it("adds the [异常] profession and attribute anomaly damage scope from the reviewed text", () => {
     const result = convertSource(remielData(), functions, [], [])
-    expect(result.definitions.revision).toBe("16")
+    expect(result.definitions.revision).toBe("17")
     const option = result.catalog.options.find((o) =>
       o.optionId.includes("eff-ms7tlurw-vhelyf"),
     )!
@@ -892,7 +895,7 @@ describe("remielle mindscape 1 complete anomaly state", () => {
     "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
   it("merges the team and holder records into one corrected complete option", () => {
     const result = convertSource(remielMindscape1Data(), functions, [], [])
-    expect(result.definitions.revision).toBe("16")
+    expect(result.definitions.revision).toBe("17")
     const option = result.catalog.options.find((o) => o.optionId === optionId)!
     expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
     expect(option.conditionDescription).toBe(
@@ -1125,7 +1128,7 @@ const qingmingData = (): SourceData => ({
 describe("qingming birdcage pierce stack correction", () => {
   it("compiles the registered fixed encodings as per-layer contributions with a two-layer cap", () => {
     const result = convertSource(qingmingData(), functions, [], [])
-    expect(result.definitions.revision).toBe("16")
+    expect(result.definitions.revision).toBe("17")
     for (const [index, effectId] of qingmingPierceIds.entries()) {
       const option = result.catalog.options.find((o) =>
         o.optionId.includes(effectId),
@@ -2012,5 +2015,500 @@ describe("housekeeper flat energy regen and swing jazz percentage semantics", ()
     )!.variants[0]!
     expect(variant.status).toBe("converted")
     expect(variant.differences).toEqual([])
+  })
+})
+
+/**
+ * 增益修复批次 02 的合成转换：11 件音擎缺失被动按 Nanoka 补充登记编译为
+ * 12 个目录选项（索魂影眸拆每层与满层附加两条）；固定来源出现同条款
+ * stat 的机器记录时拒绝生成，防止补充与真实记录重复贡献。
+ */
+const batch02Entities = [
+  ["Identity_Base", "「恒等式」-本格", "防护"],
+  ["Weapon_S_1141", "拘缚者", "击破"],
+  ["Reverb_Mark_I", "「残响」-Ⅰ型", "支援"],
+  ["Vortex_Hatchet", "「湍流」-斧型", "击破"],
+  ["Steam_Oven", "人为刀俎", "击破"],
+  ["Original_Transmorpher", "正版变身器", "防护"],
+  ["Hellfire_Gears", "燃狱齿轮", "击破"],
+  ["Blazing_Laurel", "焰心桂冠", "击破"],
+  ["Ice-Jade_Teapot", "玉壶青冰", "击破"],
+  ["Spectral_Gaze", "索魂影眸", "击破"],
+  ["Head_Lackey", "首席跟班", "击破"],
+] as const
+
+/** 与生产登记键不冲突的合成共存记录：证明既有条款选项与补充并存不重复。 */
+const batch02CoexistingRecords: Readonly<
+  Record<string, (rank: 1 | 2 | 3 | 4 | 5) => SourceEffect[]>
+> = {
+  "Original_Transmorpher": (rank) => [
+    batch01FixedEffect("eff-coexist-hp", "inCombatHpPercent", 7 + rank),
+  ],
+  "Hellfire_Gears": () => [
+    batch01FixedEffect("eff-coexist-regen", "energyRegen", 60),
+  ],
+  "Blazing_Laurel": () => [
+    batch01FixedEffect("eff-coexist-crit", "critDmg", 1.5, {
+      applyTarget: "team",
+    }),
+  ],
+  "Ice-Jade_Teapot": () => [
+    batch01FixedEffect("eff-coexist-dmg", "dmgBonus", 20, {
+      applyTarget: "team",
+    }),
+  ],
+  "Spectral_Gaze": () => [
+    batch01FixedEffect("eff-coexist-reduceDef", "reduceDefense", 25, {
+      applyTarget: "team",
+    }),
+  ],
+  "Head_Lackey": () => [
+    batch01FixedEffect("eff-coexist-resPen", "resPen", 15, {
+      elementFilter: ["火"],
+    }),
+    {
+      ...batch01FixedEffect("eff-coexist-dmg", "dmgBonus", 0, {
+        applyTarget: "team",
+      }),
+      kind: "stacked",
+      maxStacks: 2,
+      valuePerStack: 12.5,
+      defaultStacks: 2,
+    },
+    batch01FixedEffect("eff-coexist-regen", "energyRegen", 40),
+  ],
+}
+
+const batch02WengineData = (
+  overrides: Readonly<Record<string, SourceEffect[]>> = {},
+): SourceData => ({
+  ...batch01Base,
+  wengines: batch02Entities.map(([id, name, profession]) => ({
+    id,
+    name,
+    profession,
+    ...refinementPacks((rank) => [
+      {
+        id: "blk-batch02",
+        name: `精${rank}`,
+        note: "",
+        effects: [
+          ...(batch02CoexistingRecords[id]?.(rank) ?? []).map((effect) => ({
+            ...effect,
+            // 跨档保持同 id，与真实 legacy 记录一样按精炼合并为单选项。
+          })),
+          ...(overrides[id] ?? []),
+        ],
+      },
+    ]),
+  })),
+})
+
+const batch02Supplements = SUPPLEMENTS.filter(
+  (supplement): supplement is Extract<Supplement, { kind: "option" }> =>
+    supplement.kind === "option" &&
+    batch02Entities.some(
+      ([id]) => `w-engines:${id}` === supplement.catalogEntityId,
+    ),
+)
+
+describe("w-engine missing passive supplements (batch 02)", () => {
+  it("registers thirteen supplement options beside the preserved fixed-source clauses", () => {
+    // 索魂影眸按评审 R01 修复拆为 1/2/3 有效魂锁三个互斥完整档位。
+    expect(batch02Supplements).toHaveLength(13)
+    const result = convertSource(
+      batch02WengineData(),
+      functions,
+      [],
+      batch02Supplements,
+    )
+    // 六个已有机器记录的实体保留 8 个来源选项（首席跟班 3 条），补充新增 13 个。
+    const supplementOptionIds = new Set(
+      batch02Supplements.map((supplement) => supplement.optionId),
+    )
+    expect(
+      result.catalog.options.filter((o) => supplementOptionIds.has(o.optionId)),
+    ).toHaveLength(13)
+    expect(result.coverage.supplementalRecords).toHaveLength(13)
+    expect(result.coverage.summary.supplements).toMatchObject({
+      records: 13,
+      rules: 13,
+      options: 13,
+      integrated: 13,
+    })
+    const preservedIds = [
+      "w-engines:Original_Transmorpher:refinement:blk-batch02:eff-coexist-hp",
+      "w-engines:Hellfire_Gears:refinement:blk-batch02:eff-coexist-regen",
+      "w-engines:Blazing_Laurel:refinement:blk-batch02:eff-coexist-crit",
+      "w-engines:Ice-Jade_Teapot:refinement:blk-batch02:eff-coexist-dmg",
+      "w-engines:Spectral_Gaze:refinement:blk-batch02:eff-coexist-reduceDef",
+      "w-engines:Head_Lackey:refinement:blk-batch02:eff-coexist-resPen",
+      "w-engines:Head_Lackey:refinement:blk-batch02:eff-coexist-dmg",
+      "w-engines:Head_Lackey:refinement:blk-batch02:eff-coexist-regen",
+    ]
+    for (const optionId of preservedIds)
+      expect(
+        result.catalog.options.some((o) => o.optionId === optionId),
+        optionId,
+      ).toBe(true)
+    // 无记录实体的来源 pack 保持 no-effect-record，不伪造覆盖。
+    for (const pack of result.coverage.packs.filter(
+      (entry) => entry.catalogEntityId === "w-engines:Identity_Base",
+    ))
+      expect(pack.status).toBe("no-effect-record")
+  })
+
+  it("compiles each supplement with the frozen refinement values, stages and layers", () => {
+    const result = convertSource(
+      batch02WengineData(),
+      functions,
+      [],
+      batch02Supplements,
+    )
+    for (const expected of [
+      {
+        optionId: "nanoka:w-engines:12013:defense-on-hit",
+        effectId: "w-engine:12013:nanoka:defense-on-hit",
+        entity: "w-engines:Identity_Base",
+        target: "self",
+        layers: 1,
+        unit: "ratio",
+        values: { 1: 0.2, 2: 0.23, 3: 0.26, 4: 0.29, 5: 0.32 },
+        operation: {
+          kind: "stat-adjustment",
+          stat: "defense",
+          stage: "final-percentage",
+        },
+        beneficiary: { kind: "holder" },
+      },
+      {
+        optionId: "nanoka:w-engines:14114:basic-attack-damage-stacks",
+        effectId: "w-engine:14114:nanoka:basic-attack-damage-stacks",
+        entity: "w-engines:Weapon_S_1141",
+        target: "self",
+        layers: 5,
+        unit: "ratio",
+        values: { 1: 0.06, 2: 0.075, 3: 0.09, 4: 0.105, 5: 0.12 },
+        operation: { kind: "factor-contribution", channel: "damage-bonus" },
+        beneficiary: { kind: "holder" },
+      },
+      {
+        optionId: "nanoka:w-engines:12004:team-impact-after-ex",
+        effectId: "w-engine:12004:nanoka:team-impact-after-ex",
+        entity: "w-engines:Reverb_Mark_I",
+        target: "team",
+        layers: 1,
+        unit: "ratio",
+        values: { 1: 0.08, 2: 0.09, 3: 0.1, 4: 0.11, 5: 0.12 },
+        operation: {
+          kind: "stat-adjustment",
+          stat: "impact",
+          stage: "final-percentage",
+        },
+        beneficiary: { kind: "team" },
+      },
+      {
+        optionId: "nanoka:w-engines:12009:impact-as-active-character",
+        effectId: "w-engine:12009:nanoka:impact-as-active-character",
+        entity: "w-engines:Vortex_Hatchet",
+        target: "self",
+        layers: 1,
+        unit: "ratio",
+        values: { 1: 0.09, 2: 0.1, 3: 0.11, 4: 0.12, 5: 0.13 },
+        operation: {
+          kind: "stat-adjustment",
+          stat: "impact",
+          stage: "final-percentage",
+        },
+        beneficiary: { kind: "holder" },
+      },
+      {
+        optionId: "nanoka:w-engines:13005:impact-per-retained-layer",
+        effectId: "w-engine:13005:nanoka:impact-per-retained-layer",
+        entity: "w-engines:Steam_Oven",
+        target: "self",
+        layers: 8,
+        unit: "ratio",
+        values: { 1: 0.02, 2: 0.023, 3: 0.026, 4: 0.029, 5: 0.032 },
+        operation: {
+          kind: "stat-adjustment",
+          stat: "impact",
+          stage: "final-percentage",
+        },
+        beneficiary: { kind: "holder" },
+      },
+      {
+        optionId: "nanoka:w-engines:13007:impact-on-hit",
+        effectId: "w-engine:13007:nanoka:impact-on-hit",
+        entity: "w-engines:Original_Transmorpher",
+        target: "self",
+        layers: 1,
+        unit: "ratio",
+        values: { 1: 0.1, 2: 0.115, 3: 0.13, 4: 0.145, 5: 0.16 },
+        operation: {
+          kind: "stat-adjustment",
+          stat: "impact",
+          stage: "final-percentage",
+        },
+        beneficiary: { kind: "holder" },
+      },
+      {
+        optionId: "nanoka:w-engines:14110:impact-per-stack-after-ex",
+        effectId: "w-engine:14110:nanoka:impact-per-stack-after-ex",
+        entity: "w-engines:Hellfire_Gears",
+        target: "self",
+        layers: 2,
+        unit: "ratio",
+        values: { 1: 0.1, 2: 0.125, 3: 0.15, 4: 0.175, 5: 0.2 },
+        operation: {
+          kind: "stat-adjustment",
+          stat: "impact",
+          stage: "final-percentage",
+        },
+        beneficiary: { kind: "holder" },
+      },
+      {
+        optionId: "nanoka:w-engines:14116:impact-after-assist",
+        effectId: "w-engine:14116:nanoka:impact-after-assist",
+        entity: "w-engines:Blazing_Laurel",
+        target: "self",
+        layers: 1,
+        unit: "ratio",
+        values: { 1: 0.25, 2: 0.2875, 3: 0.325, 4: 0.3625, 5: 0.4 },
+        operation: {
+          kind: "stat-adjustment",
+          stat: "impact",
+          stage: "final-percentage",
+        },
+        beneficiary: { kind: "holder" },
+      },
+      {
+        optionId: "nanoka:w-engines:14125:impact-per-tea-layer",
+        effectId: "w-engine:14125:nanoka:impact-per-tea-layer",
+        entity: "w-engines:Ice-Jade_Teapot",
+        target: "self",
+        layers: 30,
+        unit: "ratio",
+        values: { 1: 0.007, 2: 0.0088, 3: 0.0105, 4: 0.0122, 5: 0.014 },
+        operation: {
+          kind: "stat-adjustment",
+          stat: "impact",
+          stage: "final-percentage",
+        },
+        beneficiary: { kind: "holder" },
+      },
+      {
+        // 评审 R01 修复：1/2/3 有效魂锁是三个互斥完整档位（每档 0/1 开关），
+        // 2 层=每层值×2、3 层=每层值×3+满层附加，一次给出完整加成。
+        optionId: "nanoka:w-engines:14136:soul-chain-1-layer",
+        effectId: "w-engine:14136:nanoka:soul-chain-1-layer",
+        entity: "w-engines:Spectral_Gaze",
+        target: "self",
+        layers: 1,
+        unit: "ratio",
+        values: { 1: 0.04, 2: 0.046, 3: 0.052, 4: 0.058, 5: 0.064 },
+        operation: {
+          kind: "stat-adjustment",
+          stat: "impact",
+          stage: "final-percentage",
+        },
+        beneficiary: { kind: "holder" },
+      },
+      {
+        optionId: "nanoka:w-engines:14136:soul-chain-2-layer",
+        effectId: "w-engine:14136:nanoka:soul-chain-2-layer",
+        entity: "w-engines:Spectral_Gaze",
+        target: "self",
+        layers: 1,
+        unit: "ratio",
+        values: { 1: 0.08, 2: 0.092, 3: 0.104, 4: 0.116, 5: 0.128 },
+        operation: {
+          kind: "stat-adjustment",
+          stat: "impact",
+          stage: "final-percentage",
+        },
+        beneficiary: { kind: "holder" },
+      },
+      {
+        optionId: "nanoka:w-engines:14136:soul-chain-3-layer",
+        effectId: "w-engine:14136:nanoka:soul-chain-3-layer",
+        entity: "w-engines:Spectral_Gaze",
+        target: "self",
+        layers: 1,
+        unit: "ratio",
+        values: { 1: 0.2, 2: 0.23, 3: 0.26, 4: 0.29, 5: 0.32 },
+        operation: {
+          kind: "stat-adjustment",
+          stat: "impact",
+          stage: "final-percentage",
+        },
+        beneficiary: { kind: "holder" },
+      },
+      {
+        optionId: "nanoka:w-engines:14157:fixed-impact-points",
+        effectId: "w-engine:14157:nanoka:fixed-impact-points",
+        entity: "w-engines:Head_Lackey",
+        target: "self",
+        layers: 1,
+        unit: "impact-points",
+        values: { 1: 30, 2: 33, 3: 36, 4: 39, 5: 42 },
+        operation: {
+          kind: "stat-adjustment",
+          stat: "impact",
+          stage: "final-fixed",
+        },
+        beneficiary: { kind: "holder" },
+      },
+    ]) {
+      const option = result.catalog.options.find(
+        (o) => o.optionId === expected.optionId,
+      )!
+      expect(option.catalogEntityId, expected.optionId).toBe(expected.entity)
+      expect(option.target, expected.optionId).toBe(expected.target)
+      expect(option.variants, expected.optionId).toHaveLength(1)
+      expect(
+        option.variants[0]!.configuration,
+        expected.optionId,
+      ).toMatchObject({ refinements: [1, 2, 3, 4, 5] })
+      expect(option.variants[0]!.maximumLayers, expected.optionId).toBe(
+        expected.layers,
+      )
+      expect(option.variants[0]!.effectIds, expected.optionId).toEqual([
+        expected.effectId,
+      ])
+      const rule = result.definitions.effects.find(
+        (entry): entry is ContributionRule =>
+          entry.kind === "contribution" && entry.effectId === expected.effectId,
+      )!
+      expect(rule.operation, expected.optionId).toMatchObject(
+        expected.operation,
+      )
+      expect(rule.beneficiary, expected.optionId).toEqual(expected.beneficiary)
+      expect(rule.activation, expected.optionId).toMatchObject({
+        kind: "supplied",
+      })
+      // 索魂三档位：目录选项与规则 supplied 激活同组互斥；其余补充无组。
+      if (expected.optionId.startsWith("nanoka:w-engines:14136:soul-chain-")) {
+        expect(option.exclusiveGroup, expected.optionId).toBe(
+          "spectral-gaze:soul-chain-effective-layers",
+        )
+        expect(rule.activation, expected.optionId).toMatchObject({
+          exclusiveGroup: "spectral-gaze:soul-chain-effective-layers",
+        })
+      } else {
+        expect(option.exclusiveGroup, expected.optionId).toBeUndefined()
+        expect(
+          (rule.activation as { exclusiveGroup?: string }).exclusiveGroup,
+          expected.optionId,
+        ).toBeUndefined()
+      }
+      expect(rule.parameters.amount, expected.optionId).toMatchObject({
+        kind: "by-rank",
+        rank: "refinement",
+        unit: expected.unit,
+        values: expected.values,
+      })
+      expect(rule.source.references, expected.optionId).toEqual(
+        ([1, 2, 3, 4, 5] as const).map((tier) => ({
+          sourceId: "nanoka-integrated",
+          version: "3.2",
+          locale: "zh",
+          resourcePath: `w-engines/${expected.effectId.split(":")[1]}/details.zh.json`,
+          pointer: `/talents/${tier}/desc`,
+        })),
+      )
+    }
+    // 拘缚者只作用于普通攻击直伤（评审 R02 修复）：原始 basic 分类，或目录
+    // 归一的普攻分类标签（skillTargets 展开的复合普攻身份）。
+    const restrainer = result.definitions.effects.find(
+      (entry): entry is ContributionRule =>
+        entry.kind === "contribution" &&
+        entry.effectId === "w-engine:14114:nanoka:basic-attack-damage-stacks",
+    )!
+    expect(restrainer.when).toEqual({
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.damageKind",
+          values: ["regular", "sheer", "sharpen"],
+        },
+        {
+          kind: "any",
+          conditions: [
+            { kind: "one-of", fact: "hit.skillCategory", values: ["basic"] },
+            {
+              kind: "one-of",
+              fact: "hit.skillTag",
+              values: ["zzz-hp:category:basic"],
+            },
+          ],
+        },
+      ],
+    })
+    // 其余 stat 型补充是实体作用域、无命中条件（受益不以命中元素或分类筛选）。
+    for (const effectId of [
+      "w-engine:12013:nanoka:defense-on-hit",
+      "w-engine:14136:nanoka:soul-chain-3-layer",
+    ]) {
+      const rule = result.definitions.effects.find(
+        (entry): entry is ContributionRule =>
+          entry.kind === "contribution" && entry.effectId === effectId,
+      )!
+      expect(rule.scope).toBe("entity")
+      expect(rule.when).toEqual({ kind: "constant", value: true })
+    }
+    // 旧的半状态拆分 ID 不再生成为目录选项。
+    for (const removed of [
+      "nanoka:w-engines:14136:impact-per-soul-chain-layer",
+      "nanoka:w-engines:14136:soul-chain-full-stack-impact",
+    ])
+      expect(
+        result.catalog.options.some((o) => o.optionId === removed),
+        removed,
+      ).toBe(false)
+  })
+
+  it("rejects fixed-source records that would double a supplemented clause", () => {
+    const withDefense = batch02WengineData({
+      Identity_Base: [
+        batch01FixedEffect("eff-guard-def", "inCombatDefPercent", 20),
+      ],
+    })
+    expect(() =>
+      convertSource(withDefense, functions, [], batch02Supplements),
+    ).toThrowError(
+      /Supplement nanoka:w-engines:12013:defense-on-hit conflicts with the fixed-source record/,
+    )
+    const withBasicDamage = batch02WengineData({
+      Weapon_S_1141: [batch01FixedEffect("eff-guard-dmg", "skillDmgBonus", 6)],
+    })
+    expect(() =>
+      convertSource(withBasicDamage, functions, [], batch02Supplements),
+    ).toThrowError(
+      /Supplement nanoka:w-engines:14114:basic-attack-damage-stacks conflicts with the fixed-source record/,
+    )
+    // 重复补充防护按登记 stat 生效：把首席跟班的防护列表换成已有回能记录的
+    // stat 后，同实体共存记录即触发拒绝（机制与真实 impact 编码等价）。
+    const probe: Supplement = {
+      ...batch02Supplements.find(
+        (supplement) =>
+          supplement.supplementId ===
+          "nanoka:w-engines:14157:fixed-impact-points",
+      )!,
+      conflictingSourceStats: ["energyRegen"],
+    }
+    const replaced = batch02Supplements.map((supplement) =>
+      supplement.supplementId === probe.supplementId ? probe : supplement,
+    )
+    expect(() =>
+      convertSource(batch02WengineData(), functions, [], replaced),
+    ).toThrowError(
+      /Supplement nanoka:w-engines:14157:fixed-impact-points conflicts with the fixed-source record/,
+    )
+    // 共存的既有条款 stat 不在防护列表内：正常生成（前一用例已验证）。
+    expect(() =>
+      convertSource(batch02WengineData(), functions, [], batch02Supplements),
+    ).not.toThrow()
   })
 })
