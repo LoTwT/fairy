@@ -103,7 +103,13 @@ function effectiveSkillCategoryTags(
     for (const id of skillTargetIds) {
       const target = catalog.skillTargets.find((t) => t.targetId === id)
       if (!target) continue
-      tags.push(`zzz-hp:category:${target.category}`)
+      // 目标展开的分类标签与原始分类（下方）同用别名归一：独立结算项的
+      // 最终分类校验按归一化大类比较（follow-up → follow_up、
+      // enhanced-special → special），避免同一分类在原始/目标两条展开
+      // 路径产生两个不同标签而被误判冲突。when 匹配的规则条件不受影响。
+      tags.push(
+        `zzz-hp:category:${SKILL_CATEGORY_GROUPS[target.category] ?? target.category}`,
+      )
       if (target.countsAsFollowUp) tags.push("zzz-hp:follow-up")
     }
   return tags

@@ -9,6 +9,7 @@ import type {
   SkillCategory,
   SourceIdentity,
   SpecialSkillLevel,
+  StaticCatalogDamageItemRequirement,
   StaticCatalogEntity,
   StaticCatalogInputRequirement,
   StaticCatalogVariant,
@@ -72,6 +73,13 @@ export interface SupplementVariantSpec {
   }
   readonly inputs: readonly StaticCatalogInputRequirement[]
   readonly applicability: StaticCatalogVariant["applicability"]
+  /**
+   * 声明式伤害项要求：与固定来源 damage-item-targeting 语义共用同一
+   * StaticCatalogDamageItemRequirement 契约。选中该选项时，命中必须包含
+   * 满足身份与元数据的伤害项；由规则的 itemIds 精确绑定，消费端据此发现
+   * 需要提供的独立项。仅 hit-adjustment 的补充选项需要登记。
+   */
+  readonly damageItemRequirements?: readonly StaticCatalogDamageItemRequirement[]
   readonly conditionDescription: string
   readonly name: string
   readonly target: "self" | "team"
@@ -123,6 +131,12 @@ export interface SupplementBase {
     readonly agentEntityId: string
     readonly category: SkillCategory
     readonly name: string
+    /**
+     * 目标表达真实追加攻击身份（如零号·安比影画 6 的电磁涡流）时为 true：
+     * 命中以 skillTargetIds 选中该目标即展开 zzz-hp:follow-up 标签，能消费
+     * 目录既有的追加攻击增益，不要求调用方手工补标签；缺省 false。
+     */
+    readonly countsAsFollowUp?: boolean
   }
   /**
    * 同一来源绑定内的互斥完整状态组（复用公开类型既有的
@@ -2899,7 +2913,309 @@ const crimsonMoonCasketSquadDamageBonus: Supplement = {
   },
 }
 
+/** 直接伤害倍率条款可能出现的固定来源 stat 名；出现即触发重复补充防护。 */
+const directMultiplierSourceStats = [
+  "directDmgMult",
+  "directDmgMultFactor",
+] as const
+
+/** 伊芙琳核心被动七行第二句：125% 倍率只提升具名连携与两个终结技。 */
+const evelynPassiveNamedSkillMultiplierEvidence = (
+  [1, 2, 3, 4, 5, 6, 7] as const
+).map((rank) => ({
+  path: "agents/1321/details.zh.json",
+  pointer: `/passive/level/${1321501 + rank - 1}/desc/1`,
+  sha256: "ec99d046c695ada6f090a4da5a38bfe5951552996ead6a85ce7f5385727c8783",
+  rank,
+}))
+
+/**
+ * 伊芙琳（M04，批次 08）：影画 6[光与影的牵绊]的[月辉丝·弦]独立追击。
+ * 连携/终结取得[弦影绝锋]后，[普通攻击]、[冲刺攻击]、[特殊技]或[强化特殊
+ * 技]命中主要攻击目标时，额外释放一段[月辉丝·弦]，造成等同于伊芙琳 375%
+ * 攻击力的火属性伤害，该伤害被视为[连携技]伤害。每次命中结算一次独立
+ * 事件；20 秒持续、16 次上限与刷新不模拟，不绑定到任何已有触发动作。
+ */
+const evelynMindscape6LunaluxGarroteFollowUp: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:agents:evelyn:m6-lunalux-garrote-follow-up",
+  source: "nanoka-integrated@3.2 agents/1321 /talent/6/desc",
+  catalogEntityId: "agents:evelyn",
+  optionId: "nanoka:agents:evelyn:m6-lunalux-garrote-follow-up",
+  supportedRanks: "影画 6 及以上；层数 0—1",
+  computationTarget: "catalog option on the mapped agent entity",
+  // 条款上下文：影画 6 的真实锚块（note 完整描述 M6、effects 为空）；块内
+  // 或该 rank 任何位置出现直接倍率机器记录、锚块缺失或 note 任何变化
+  // （包括保留原文再追加冲突句）都拒绝生成并要求重新核对。
+  clauseContextGuard: {
+    rankKind: "mindscape",
+    rank: 6,
+    stats: directMultiplierSourceStats,
+    anchorBlocks: [
+      {
+        blockId: "blk-ms4jc3w4-9he24i",
+        frozenNote:
+          "发动[连携技]或[终结技]时，伊芙琳将获得[弦影绝锋]，持续20秒；[弦影绝锋]期间，伊芙琳发动[普通攻击]、[冲刺攻击]、[特殊技]或[强化特殊技]命中主要攻击目标时，将额外释放一段[月辉丝·弦]进行追击，对范围内敌人造成等同于伊芙琳375%攻击力的火属性伤害，该伤害会被视为[连携技]伤害，最多触发16次，再次获得[弦影绝锋]时刷新可触发次数。",
+      },
+    ],
+  },
+  skillTarget: {
+    targetId: "evelyn-lunalux-garrote",
+    agentEntityId: "1321",
+    category: "chain",
+    name: "月辉丝·弦",
+  },
+  evidence: [
+    {
+      path: "agents/1321/details.zh.json",
+      pointer: "/talent/6/desc",
+      sha256:
+        "ec99d046c695ada6f090a4da5a38bfe5951552996ead6a85ce7f5385727c8783",
+    },
+    ...evelynPassiveNamedSkillMultiplierEvidence,
+  ],
+  verification:
+    "Nanoka 影画 6（agents/1321/details.zh.json 的 /talent/6/desc，英文文件同文核对：she additionally executes a Lunalux Garrote follow-up attack, dealing Fire DMG equal to 375% of her ATK… This DMG is considered Chain Attack DMG and can trigger up to 16 times）确认：发动[连携技]或[终结技]时伊芙琳获得[弦影绝锋]，持续 20 秒；期间[普通攻击]、[冲刺攻击]、[特殊技]或[强化特殊技]命中主要攻击目标时，额外释放一段[月辉丝·弦]进行追击，对范围内敌人造成等同于伊芙琳 375% 攻击力的火属性伤害，该伤害被视为[连携技]伤害，最多触发 16 次，再次获得时刷新次数。固定 ZZZ-HP 来源的影画 6 块（blk-ms4jc3w4-9he24i）只有 note、effects 为空，按补充来源在既有 agents:evelyn 实体新增选项。倍率固定 375%，不随技能等级、核心或潜能变化，不虚造训练倍率行；每次命中结算一次独立事件，16 次上限、20 秒持续与刷新由调用方显式声明，不模拟时间线与次数累计，也不把本目标绑定到任何已有触发动作（普通动作组装不自动追加）。“被视为[连携技]伤害”是文本明确的分类证据：目录为[月辉丝·弦]登记稳定独立目标（upstreamId 为 null），独立项按 chain 分类显式结算，普通连携/终结分类增益正常作用本伤害；核心被动七行（/passive/level/1321501—1321507/desc/1，中英文逐档同文核对）同时证明 125% 倍率只提升[连携技：月辉丝·绊]、[终结技：月辉丝·弦音]与[终结技：月辉丝·弦影]三个具名技能，[月辉丝·弦]不在列表——旧倍率规则对新目标已按具名语义修正排除（见 SOURCE_SEMANTICS 的 evelyn-lunalux-multiplier-scope）。独立结算目标、零初始倍率与逐次声明是本项目采用的独立结算契约，不是原始游戏证据。",
+  rule: {
+    effectId: "agent:1321:nanoka:m6-lunalux-garrote-follow-up:mindscape:6",
+    identity: { kind: "agent", entityId: "1321" },
+    section: "影画6：光与影的牵绊（月辉丝·弦）",
+    config: mindscapeFrom(6),
+    parameters: {
+      amount: { kind: "constant", unit: "multiplier", value: 3.75 },
+    },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        { kind: "one-of", fact: "hit.damageKind", values: ["regular"] },
+        { kind: "one-of", fact: "hit.element", values: ["fire"] },
+        {
+          kind: "one-of",
+          fact: "hit.skillTag",
+          values: ["zzz-hp:skill:evelyn-lunalux-garrote"],
+        },
+      ],
+    },
+    operation: {
+      kind: "hit-adjustment",
+      field: "damageMultiplier",
+      operator: "add",
+      itemIds: ["evelyn:lunalux-garrote"],
+      value: { kind: "parameter", unit: "multiplier", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { minimumMindscape: 6 },
+    inputs: [],
+    applicability: {},
+    damageItemRequirements: [
+      {
+        itemId: "evelyn:lunalux-garrote",
+        stat: "attack",
+        role: "base",
+        allowedModes: ["direct"],
+        source: "holder-current",
+        requiredDirectMultiplier: 0,
+        requiredSkillCategory: "chain",
+      },
+    ],
+    conditionDescription:
+      "影画 6：连携/终结取得[弦影绝锋]后，[普通攻击]、[冲刺攻击]、[特殊技]或[强化特殊技]命中主要攻击目标时，额外释放一段[月辉丝·弦]，对范围内敌人造成等同于伊芙琳 375% 攻击力的火属性伤害（该伤害被视为[连携技]伤害）。本次追击由调用方声明触发并显式结算：命中须携带独立目标并以连携分类结算，16 次上限、20 秒持续与刷新不模拟。",
+    name: "影画6 · 月辉丝·弦（独立追击）",
+    target: "self",
+  },
+}
+
+/**
+ * 零号·安比（M12，批次 08）：影画 6[前传主角]的电磁涡流独立追加伤害。
+ * 触发 6 次[白雷]的额外伤害时引发电磁涡流，对目标及其周围敌人造成零号·
+ * 安比 1000% 攻击力的电属性伤害，该伤害被视为[追加攻击]伤害。第六次白雷
+ * 引发的是一次涡流：六次计数不自动累计，1000% 不乘 6，也不计作白雷本身。
+ */
+const s0anbyMindscape6ElectromagneticVortex: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:agents:s0anby:m6-electromagnetic-vortex",
+  source: "nanoka-integrated@3.2 agents/1381 /talent/6/desc",
+  catalogEntityId: "agents:s0anby",
+  optionId: "nanoka:agents:s0anby:m6-electromagnetic-vortex",
+  supportedRanks: "影画 6 及以上；层数 0—1",
+  computationTarget: "catalog option on the mapped agent entity",
+  // 条款上下文：影画 6 的真实空 pack；该位置出现任何新编码即拒绝生成。
+  clauseContextGuard: {
+    rankKind: "mindscape",
+    rank: 6,
+    stats: directMultiplierSourceStats,
+    expectsEmptyPack: true,
+  },
+  skillTarget: {
+    targetId: "s0anby-electromagnetic-vortex",
+    agentEntityId: "1381",
+    category: "follow-up",
+    name: "电磁涡流",
+    countsAsFollowUp: true,
+  },
+  evidence: [
+    {
+      path: "agents/1381/details.zh.json",
+      pointer: "/talent/6/desc",
+      sha256:
+        "600ca2500fb32c4bace09c67b196265e6f33fc276fa43f868f999ca4b416fe61",
+    },
+  ],
+  verification:
+    "Nanoka 影画 6（agents/1381/details.zh.json 的 /talent/6/desc，英文文件同文核对：Upon triggering 6 instances of White Thunder's additional DMG, an electromagnetic vortex will be generated, dealing 1,000% of Soldier 0 - Anby's ATK as Electric DMG… This DMG is considered Aftershock DMG）确认：触发 6 次[白雷]的额外伤害时引发电磁涡流，对目标及其周围的敌人造成零号·安比 1000% 攻击力的电属性伤害，该伤害被视为[追加攻击]伤害。固定 ZZZ-HP 来源的影画 6 是真实空 pack，按补充来源在既有 agents:s0anby 实体新增选项。倍率固定 1000%（一次涡流），不随技能等级、核心或潜能变化，不虚造训练倍率行，也不抄[白雷]的技能倍率或把潜能连携分类附条件搬到本目标；第六次白雷额外伤害引发的是本次涡流的单一事件：六次白雷计数不自动累计、1000% 不乘 6、不计作白雷本身，触发事实由调用方声明并显式结算一次，不模拟计数、时间线与次数累计。目录为电磁涡流登记稳定独立目标（upstreamId 为 null），分类为文本明确的[追加攻击]（follow-up）且 countsAsFollowUp=true：命中以 skillTargetIds 选中该目标即展开 zzz-hp:follow-up 标签，能消费目录既有的追加攻击增益，不要求调用方手工补标签；普通/潜能分支的 M6 天赋同一条（与[电极化]等潜能分支条款互不并集）。独立结算目标、零初始倍率与逐次声明是本项目采用的独立结算契约，不是原始游戏证据。",
+  rule: {
+    effectId: "agent:1381:nanoka:m6-electromagnetic-vortex:mindscape:6",
+    identity: { kind: "agent", entityId: "1381" },
+    section: "影画6：前传主角（电磁涡流）",
+    config: mindscapeFrom(6),
+    parameters: {
+      amount: { kind: "constant", unit: "multiplier", value: 10 },
+    },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        { kind: "one-of", fact: "hit.damageKind", values: ["regular"] },
+        { kind: "one-of", fact: "hit.element", values: ["electric"] },
+        {
+          kind: "one-of",
+          fact: "hit.skillTag",
+          values: ["zzz-hp:skill:s0anby-electromagnetic-vortex"],
+        },
+      ],
+    },
+    operation: {
+      kind: "hit-adjustment",
+      field: "damageMultiplier",
+      operator: "add",
+      itemIds: ["s0anby:electromagnetic-vortex"],
+      value: { kind: "parameter", unit: "multiplier", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { minimumMindscape: 6 },
+    inputs: [],
+    applicability: {},
+    damageItemRequirements: [
+      {
+        itemId: "s0anby:electromagnetic-vortex",
+        stat: "attack",
+        role: "base",
+        allowedModes: ["direct"],
+        source: "holder-current",
+        requiredDirectMultiplier: 0,
+        requiredSkillCategory: "follow-up",
+      },
+    ],
+    conditionDescription:
+      "影画 6：触发 6 次[白雷]的额外伤害时引发电磁涡流，对目标及其周围的敌人造成零号·安比 1000% 攻击力的电属性伤害（该伤害被视为[追加攻击]伤害）。本次涡流由调用方声明触发并显式结算一次：命中须携带独立目标并以追加攻击分类结算（自动计入追加攻击增益），六次计数不自动累计，1000% 不乘 6，也不计作白雷本身。",
+    name: "影画6 · 电磁涡流（独立追击）",
+    target: "self",
+  },
+}
+
+/**
+ * 琉音（M13，批次 08）：影画 6[真言]的余音额外物理伤害。经[核心被动]使
+ * 其他队友以终结技入场后，该队友获得[余音]效果，其攻击命中敌人时琉音对
+ * 敌人造成额外一次等同于琉音 480% 攻击力的物理属性伤害，该伤害被视为
+ * [强化特殊技]伤害。队友只是触发者：本次伤害按琉音面板与强化特殊技
+ * 分类结算，hit.actorId 是琉音，不把余音队友伪装为该次伤害者。
+ */
+const dialynMindscape6AftertoneEcho: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:agents:dialyn:m6-aftertone-echo",
+  source: "nanoka-integrated@3.2 agents/1481 /talent/6/desc",
+  catalogEntityId: "agents:dialyn",
+  optionId: "nanoka:agents:dialyn:m6-aftertone-echo",
+  supportedRanks: "影画 6 及以上；层数 0—1",
+  computationTarget: "catalog option on the mapped agent entity",
+  // 条款上下文：影画 6 的真实空 pack；该位置出现任何新编码即拒绝生成。
+  clauseContextGuard: {
+    rankKind: "mindscape",
+    rank: 6,
+    stats: directMultiplierSourceStats,
+    expectsEmptyPack: true,
+  },
+  skillTarget: {
+    targetId: "dialyn-aftertone-echo",
+    agentEntityId: "1481",
+    // 目录既有强化特殊技技能目标（如 all-special-ms0fcqv7）的分类均为归一
+    // 大类 special；独立目标同用该分类，命中即展开 zzz-hp:category:special，
+    // 既有强化特殊技分类增益正常作用；独立项的结算分类仍声明
+    // enhanced-special（求值别名归一到 special，同一标签）。
+    category: "special",
+    name: "余音额外伤害",
+  },
+  evidence: [
+    {
+      path: "agents/1481/details.zh.json",
+      pointer: "/talent/6/desc",
+      sha256:
+        "c335486522cb3958f1430551fb07616364cd01f13cbe988c7bde6d21a41ca3ed",
+    },
+  ],
+  verification:
+    "Nanoka 影画 6（agents/1481/details.zh.json 的 /talent/6/desc，英文文件同文核对：With this effect, landing an attack causes Dialyn to deal an additional instance of Physical DMG equal to 480% of Dialyn's ATK. This DMG is treated as EX Special Attack DMG）确认：通过[核心被动]使其他队友以终结技入场后，该队友获得[余音]效果，其攻击命中敌人时琉音对敌人造成额外一次等同于琉音 480% 攻击力的物理属性伤害，该伤害被视为[强化特殊技]伤害，1 秒内最多触发一次，最多触发 12 次，重复获得时刷新次数，同时只能有一名队友获得[余音]。固定 ZZZ-HP 来源的影画 6 是真实空 pack，按补充来源在既有 agents:dialyn 实体新增选项。倍率固定 480%，按琉音自身面板结算：结算请求的 hit.actorId 与伤害项 statSource 都是琉音，队友只是触发者而不是该次伤害者或面板来源，不把余音队友的面板、攻击或暴击数据串用到本次伤害；普通/潜能分支的 M6 天赋同一条。触发事实（队友经核心被动终结入场取得[余音]且其攻击命中）由调用方声明并显式结算一次：1 秒冷却、12 次上限、刷新与唯一余音持有人不模拟，不把本目标绑定到队友的动作（队友动作解析不自动追加）。目录为余音额外伤害登记稳定独立目标（upstreamId 为 null），分类为文本明确的[强化特殊技]：目录目标分类沿既有强化特殊技技能目标（如 all-special-ms0fcqv7）的归一大类 special，独立项的结算分类声明 enhanced-special（求值别名归一到 special，同一标签），独立项按强化特殊技分类结算，现有强化特殊技分类增益正常作用本伤害。独立结算目标、零初始倍率与逐次声明是本项目采用的独立结算契约，不是原始游戏证据。",
+  rule: {
+    effectId: "agent:1481:nanoka:m6-aftertone-echo:mindscape:6",
+    identity: { kind: "agent", entityId: "1481" },
+    section: "影画6：真言（余音额外伤害）",
+    config: mindscapeFrom(6),
+    parameters: {
+      amount: { kind: "constant", unit: "multiplier", value: 4.8 },
+    },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        { kind: "one-of", fact: "hit.damageKind", values: ["regular"] },
+        { kind: "one-of", fact: "hit.element", values: ["physical"] },
+        {
+          kind: "one-of",
+          fact: "hit.skillTag",
+          values: ["zzz-hp:skill:dialyn-aftertone-echo"],
+        },
+      ],
+    },
+    operation: {
+      kind: "hit-adjustment",
+      field: "damageMultiplier",
+      operator: "add",
+      itemIds: ["dialyn:aftertone-echo"],
+      value: { kind: "parameter", unit: "multiplier", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { minimumMindscape: 6 },
+    inputs: [],
+    applicability: {},
+    damageItemRequirements: [
+      {
+        itemId: "dialyn:aftertone-echo",
+        stat: "attack",
+        role: "base",
+        allowedModes: ["direct"],
+        source: "holder-current",
+        requiredDirectMultiplier: 0,
+        requiredSkillCategory: "enhanced-special",
+      },
+    ],
+    conditionDescription:
+      "影画 6：经[核心被动]使队友以终结技入场取得[余音]后，该队友攻击命中敌人时，琉音对敌人造成额外一次等同于琉音 480% 攻击力的物理属性伤害（该伤害被视为[强化特殊技]伤害）。本次伤害由调用方声明触发并显式结算：hit.actorId 与伤害项均按琉音结算（队友只是触发者），命中须携带独立目标并以强化特殊技分类结算；1 秒冷却、12 次上限、刷新与唯一持有人不模拟。",
+    name: "影画6 · 余音（独立追击）",
+    target: "self",
+  },
+}
+
 export const SUPPLEMENTS: readonly Supplement[] = [
+  evelynMindscape6LunaluxGarroteFollowUp,
+  s0anbyMindscape6ElectromagneticVortex,
+  dialynMindscape6AftertoneEcho,
   nekomataOrdinaryDmgBonus,
   nekomataOrdinaryShow,
   redAxis,

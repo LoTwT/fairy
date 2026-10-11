@@ -160,7 +160,7 @@ describe("static data conversion", () => {
       ],
     }
     const result = convertSource(source, functions, [], [])
-    expect(result.definitions.revision).toBe("22")
+    expect(result.definitions.revision).toBe("23")
     for (const option of result.catalog.options) {
       const variant = option.variants[0]!
       const sameBlock = option.optionId.endsWith("unverified-same-block")
@@ -453,7 +453,7 @@ const angelData = (): SourceData => ({
 describe("developer stat revision", () => {
   it("maps the four registered records through the anomaly bonus channel", () => {
     const result = convertSource(angelData(), functions, [], [])
-    expect(result.definitions.revision).toBe("22")
+    expect(result.definitions.revision).toBe("23")
     const option = result.catalog.options.find(
       (o) =>
         o.optionId ===
@@ -745,7 +745,7 @@ const remielData = (): SourceData => ({
 describe("remielle mindscape 2 attribute anomaly scope revision", () => {
   it("adds the [异常] profession and attribute anomaly damage scope from the reviewed text", () => {
     const result = convertSource(remielData(), functions, [], [])
-    expect(result.definitions.revision).toBe("22")
+    expect(result.definitions.revision).toBe("23")
     const option = result.catalog.options.find((o) =>
       o.optionId.includes("eff-ms7tlurw-vhelyf"),
     )!
@@ -895,7 +895,7 @@ describe("remielle mindscape 1 complete anomaly state", () => {
     "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
   it("merges the team and holder records into one corrected complete option", () => {
     const result = convertSource(remielMindscape1Data(), functions, [], [])
-    expect(result.definitions.revision).toBe("22")
+    expect(result.definitions.revision).toBe("23")
     const option = result.catalog.options.find((o) => o.optionId === optionId)!
     expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
     expect(option.conditionDescription).toBe(
@@ -1128,7 +1128,7 @@ const qingmingData = (): SourceData => ({
 describe("qingming birdcage pierce stack correction", () => {
   it("compiles the registered fixed encodings as per-layer contributions with a two-layer cap", () => {
     const result = convertSource(qingmingData(), functions, [], [])
-    expect(result.definitions.revision).toBe("22")
+    expect(result.definitions.revision).toBe("23")
     for (const [index, effectId] of qingmingPierceIds.entries()) {
       const option = result.catalog.options.find((o) =>
         o.optionId.includes(effectId),
@@ -3830,7 +3830,7 @@ describe("agent batch 06 impact and energy regen supplements", () => {
       integrated: 6,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("22")
+    expect(result.definitions.revision).toBe("23")
 
     const caesar = result.catalog.options.find(
       (o) => o.optionId === "nanoka:agents:caesar:stance-switch-impact",
@@ -4361,7 +4361,7 @@ describe("batch 07 Roxy and Crimson Moon Casket supplements", () => {
       integrated: 4,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("22")
+    expect(result.definitions.revision).toBe("23")
     const entities = result.catalog.entities.filter((e) =>
       ["nanoka:agents:1621", "nanoka:w-engines:14162"].includes(
         e.catalogEntityId,
@@ -4690,5 +4690,863 @@ describe("batch 07 Roxy and Crimson Moon Casket supplements", () => {
     expect(() =>
       convertSource(batch07Data(), functions, [], mismatched),
     ).toThrowError(/mixes layer maxima/)
+  })
+})
+
+/**
+ * 增益修复批次 08（修订 23）：伊芙琳[月辉丝·弦]、零号·安比电磁涡流与琉音
+ * 余音三条影画 6 独立追击补充的登记形态、伤害项要求与来源守卫；伊芙琳核心
+ * 被动 125% 具名倍率范围修正（exclude-skill-target-scope）的防漂移与既有
+ * chain/ultimate 行为保留。数值断言来自冻结 Nanoka 3.2 天赋原文（中英文
+ * 交叉核对），不从生成器反推。
+ */
+const batch08SupplementIds = [
+  "nanoka:agents:evelyn:m6-lunalux-garrote-follow-up",
+  "nanoka:agents:s0anby:m6-electromagnetic-vortex",
+  "nanoka:agents:dialyn:m6-aftertone-echo",
+] as const
+
+const batch08Supplements = SUPPLEMENTS.filter((supplement) =>
+  (batch08SupplementIds as readonly string[]).includes(supplement.supplementId),
+)
+
+/** 伊芙琳影画 6 锚块的冻结完整 note（固定来源 fac62407 的真实块原文）。 */
+const batch08EvelynAnchorNote =
+  "发动[连携技]或[终结技]时，伊芙琳将获得[弦影绝锋]，持续20秒；[弦影绝锋]期间，伊芙琳发动[普通攻击]、[冲刺攻击]、[特殊技]或[强化特殊技]命中主要攻击目标时，将额外释放一段[月辉丝·弦]进行追击，对范围内敌人造成等同于伊芙琳375%攻击力的火属性伤害，该伤害会被视为[连携技]伤害，最多触发16次，再次获得[弦影绝锋]时刷新可触发次数。"
+
+/** 伊芙琳核心被动（额外能力：潜袭支点）块 note 的关键条款原文。 */
+const batch08EvelynPassiveNote =
+  "队伍中存在[击破]角色或[支援]角色时触发：\n伊芙琳的[连携技]和[终结技]造成的伤害提升30%；当伊芙琳的暴击率大于等于80%时，[连携技：月辉丝·绊]、[终结技：月辉丝·弦音]和[终结技：月辉丝·弦影]的伤害倍率提升至原本的125%。"
+
+/**
+ * 批次 08 的固定来源夹具：伊芙琳 rank 0 携带真实的额外能力两记录（30% 增伤
+ * 与 25% 倍率修正）供具名范围修正消费；三实体 rank 6 还原真实上下文（伊芙琳
+ * 锚块 note 完整、effects 为空；零号·安比与琉音为空 pack）。
+ */
+const batch08Data = (
+  overrides: {
+    extraPacks?: Readonly<
+      Record<string, { rank: number; block: SourceBlock4Test }>
+    >
+  } = {},
+): SourceData => {
+  const agent = (
+    id: string,
+    name: string,
+    blocks: Readonly<Record<number, SourceBlock4Test>> = {},
+  ) =>
+    batch03AgentEntity(
+      id,
+      name,
+      Object.fromEntries([
+        ...Object.entries(blocks),
+        ...Object.entries(byRank(overrides.extraPacks?.[id])),
+      ]),
+    )
+  const byRank = (
+    pack: { rank: number; block: SourceBlock4Test } | undefined,
+  ): Record<number, SourceBlock4Test> =>
+    pack === undefined ? {} : { [pack.rank]: pack.block }
+  return {
+    agents: [
+      agent("evelyn", "伊芙琳", {
+        0: {
+          id: "blk-ms4j94x5-1mflp4",
+          note: batch08EvelynPassiveNote,
+          effects: [
+            {
+              ...batch03BaseEffect,
+              id: "eff-ms4j94x5-3elaxq",
+              stat: "skillDmgBonus",
+              value: 30,
+              scope: "skill",
+              applySituation: "global",
+              skillTargets: [
+                { category: "chain", subcategoryId: null },
+                { category: "ultimate", subcategoryId: null },
+              ],
+            },
+            {
+              ...batch03BaseEffect,
+              id: "eff-ms4j9nhd-9ya68m",
+              stat: "directDmgMultFactor",
+              value: 25,
+              scope: "skill",
+              applySituation: "global",
+              skillTargets: [
+                { category: "chain", subcategoryId: null },
+                { category: "ultimate", subcategoryId: null },
+              ],
+            },
+          ],
+        },
+        6: {
+          id: "blk-ms4jc3w4-9he24i",
+          note: batch08EvelynAnchorNote,
+          effects: [],
+        },
+      }),
+      agent("s0anby", "零号·安比", {
+        0: {
+          id: "blk-legacy",
+          note: "零号·安比对拥有[银星]标记的敌人造成的伤害提升25%。",
+          effects: [
+            {
+              ...batch03BaseEffect,
+              id: "eff-ms4je0ab-hnmslw",
+              stat: "dmgBonus",
+              value: 25,
+              applySituation: "global",
+            },
+          ],
+        },
+      }),
+      agent("dialyn", "琉音", {
+        2: {
+          id: "blk-legacy",
+          note: "琉音的[连携技]造成的伤害提升15%。",
+          effects: [
+            {
+              ...batch03BaseEffect,
+              id: "legacy-team-dmgBonus",
+              stat: "dmgBonus",
+              value: 15,
+              applyTarget: "team",
+              applySituation: "global",
+            },
+          ],
+        },
+      }),
+    ],
+    driveDiscs: [],
+    skillSubcategories: [],
+    followUpSkillRules: [],
+    wengines: [],
+  }
+}
+
+describe("batch 08 M6 independent follow-up supplements", () => {
+  it("registers the three options, rules, targets, and requirements", () => {
+    const result = convertSource(
+      batch08Data(),
+      functions,
+      [],
+      batch08Supplements,
+    )
+    expect(result.coverage.summary.supplements).toMatchObject({
+      records: 3,
+      rules: 3,
+      options: 3,
+      entities: 0,
+      integrated: 3,
+      outOfScope: 0,
+    })
+    expect(result.definitions.revision).toBe("23")
+    const expected: readonly (readonly [
+      optionId: string,
+      effectId: string,
+      itemId: string,
+      targetId: string,
+      category: string,
+      countsAsFollowUp: boolean,
+      multiplier: number,
+      element: string,
+      requiredCategory: string,
+    ])[] = [
+      [
+        "nanoka:agents:evelyn:m6-lunalux-garrote-follow-up",
+        "agent:1321:nanoka:m6-lunalux-garrote-follow-up:mindscape:6",
+        "evelyn:lunalux-garrote",
+        "zzz-hp:skill:evelyn-lunalux-garrote",
+        "chain",
+        false,
+        3.75,
+        "fire",
+        "chain",
+      ],
+      [
+        "nanoka:agents:s0anby:m6-electromagnetic-vortex",
+        "agent:1381:nanoka:m6-electromagnetic-vortex:mindscape:6",
+        "s0anby:electromagnetic-vortex",
+        "zzz-hp:skill:s0anby-electromagnetic-vortex",
+        "follow-up",
+        true,
+        10,
+        "electric",
+        "follow-up",
+      ],
+      [
+        "nanoka:agents:dialyn:m6-aftertone-echo",
+        "agent:1481:nanoka:m6-aftertone-echo:mindscape:6",
+        "dialyn:aftertone-echo",
+        "zzz-hp:skill:dialyn-aftertone-echo",
+        "special",
+        false,
+        4.8,
+        "physical",
+        "enhanced-special",
+      ],
+    ]
+    for (const [
+      optionId,
+      effectId,
+      itemId,
+      targetId,
+      category,
+      countsAsFollowUp,
+      multiplier,
+      element,
+      requiredCategory,
+    ] of expected) {
+      const option = result.catalog.options.find(
+        (o) => o.optionId === optionId,
+      )!
+      expect(option.target, optionId).toBe("self")
+      const variant = option.variants[0]!
+      expect(variant, optionId).toMatchObject({
+        status: "converted",
+        maximumLayers: 1,
+        configuration: { minimumMindscape: 6 },
+        inputs: [],
+        effectIds: [effectId],
+      })
+      expect(variant.damageItemRequirements, optionId).toEqual([
+        {
+          itemId,
+          stat: "attack",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: requiredCategory,
+        },
+      ])
+      const target = result.catalog.skillTargets.find(
+        (t) => t.targetId === targetId,
+      )!
+      expect(target, optionId).toMatchObject({
+        upstreamId: null,
+        agentEntityId: optionId.includes("evelyn")
+          ? "1321"
+          : optionId.includes("s0anby")
+            ? "1381"
+            : "1481",
+        category,
+        countsAsFollowUp,
+      })
+      const rule = result.definitions.effects.find(
+        (r) => r.effectId === effectId,
+      ) as ContributionRule
+      expect(rule.operation, optionId).toEqual({
+        kind: "hit-adjustment",
+        field: "damageMultiplier",
+        operator: "add",
+        itemIds: [itemId],
+        value: { kind: "parameter", unit: "multiplier", name: "amount" },
+      })
+      expect(rule.parameters, optionId).toEqual({
+        amount: { kind: "constant", unit: "multiplier", value: multiplier },
+      })
+      expect(rule.when, optionId).toEqual({
+        kind: "all",
+        conditions: [
+          { kind: "one-of", fact: "hit.damageKind", values: ["regular"] },
+          { kind: "one-of", fact: "hit.element", values: [element] },
+          { kind: "one-of", fact: "hit.skillTag", values: [targetId] },
+        ],
+      })
+      expect(rule.scope, optionId).toBe("hit")
+      expect(rule.beneficiary, optionId).toEqual({ kind: "holder" })
+    }
+  })
+
+  it("excludes the Evelyn M6 target from the named-skill 125% rule only", () => {
+    const result = convertSource(
+      batch08Data(),
+      functions,
+      [],
+      batch08Supplements,
+    )
+    // 125% 记录：保留稳定 ID 与 chain/ultimate 大类条件，追加对新独立目标
+    // 的排除；variant 记 corrected 与具名差异。
+    const multiplierRule = result.definitions.effects.find(
+      (r) =>
+        r.effectId ===
+        "agent:1321:zzz-hp:eff-ms4j9nhd-9ya68m:blk-ms4j94x5-1mflp4:mindscape:0",
+    ) as ContributionRule
+    expect(multiplierRule.operation).toMatchObject({
+      channel: "base-multiplier-increase",
+    })
+    // when 追加对独立目标的排除；原大类筛选（chain/ultimate）原样保留。
+    expect(multiplierRule.when!.kind).toBe("all")
+    const whenConditions = (
+      multiplierRule.when as unknown as {
+        conditions: readonly unknown[]
+      }
+    ).conditions
+    expect(whenConditions).toHaveLength(2)
+    expect(whenConditions[0]).toMatchObject({ kind: "all" })
+    expect(JSON.stringify(whenConditions[0])).toContain("zzz-hp:category:chain")
+    expect(JSON.stringify(whenConditions[0])).toContain(
+      "zzz-hp:category:ultimate",
+    )
+    expect(whenConditions[1]).toEqual({
+      kind: "not",
+      condition: {
+        kind: "one-of",
+        fact: "hit.skillTag",
+        values: ["zzz-hp:skill:evelyn-lunalux-garrote"],
+      },
+    })
+    const option = result.catalog.options.find(
+      (o) =>
+        o.optionId ===
+        "agents:evelyn:mindscape:0:blk-ms4j94x5-1mflp4:eff-ms4j9nhd-9ya68m",
+    )!
+    const variant = option.variants[0]!
+    expect(variant.status).toBe("corrected")
+    expect(variant.differences).toContain("evelyn-lunalux-multiplier-scope")
+    // 差异说明登记进目录。
+    expect(
+      result.catalog.differences.some(
+        (d) => d.differenceId === "evelyn-lunalux-multiplier-scope",
+      ),
+    ).toBe(true)
+    // 同块一般连携/终结增伤（+30%）保持原行为：converted、无排除条件。
+    const bonusRule = result.definitions.effects.find(
+      (r) =>
+        r.effectId ===
+        "agent:1321:zzz-hp:eff-ms4j94x5-3elaxq:blk-ms4j94x5-1mflp4:mindscape:0",
+    ) as ContributionRule
+    expect(JSON.stringify(bonusRule.when)).not.toContain(
+      "zzz-hp:skill:evelyn-lunalux-garrote",
+    )
+    const bonusOption = result.catalog.options.find(
+      (o) =>
+        o.optionId ===
+        "agents:evelyn:mindscape:0:blk-ms4j94x5-1mflp4:eff-ms4j94x5-3elaxq",
+    )!
+    expect(bonusOption.variants[0]!.status).toBe("converted")
+    expect(bonusOption.variants[0]!.differences).toEqual([])
+  })
+
+  it("rejects encoding drift of the corrected 125% record in both representations", () => {
+    for (const [label, mutation] of [
+      ["stat", (e: SourceEffect) => ({ ...e, stat: "directDmgMult" })],
+      ["value", (e: SourceEffect) => ({ ...e, value: 30 })],
+      ["scope", (e: SourceEffect) => ({ ...e, scope: "general" })],
+      [
+        "targets",
+        (e: SourceEffect) => ({ ...e, skillTargets: [{ category: "chain" }] }),
+      ],
+    ] as const) {
+      const mutated = batch08Data()
+      const block = mutated.agents[0]!.mindscapeBuffs![0]!.effectBlocks![0]!
+      block.effects = block.effects.map((e) =>
+        e.id === "eff-ms4j9nhd-9ya68m" ? mutation(e) : e,
+      )
+      expect(
+        () => convertSource(mutated, functions, [], batch08Supplements),
+        label,
+      ).toThrowError(/Named-skill scope correction expects/)
+    }
+  })
+
+  it("locks the evidence pointers of the three supplements", () => {
+    const byId = new Map(batch08Supplements.map((s) => [s.supplementId, s]))
+    const evelyn = byId.get(
+      "nanoka:agents:evelyn:m6-lunalux-garrote-follow-up",
+    )!
+    // 天赋 Pointer + 核心被动七行第二句（rank 与 /passive/level 行键一一对应，
+    // 生成路径按 data.json level 元数据核对映射）。
+    expect(evelyn.evidence).toHaveLength(8)
+    expect(evelyn.evidence[0]).toMatchObject({
+      path: "agents/1321/details.zh.json",
+      pointer: "/talent/6/desc",
+    })
+    for (const [index, reference] of evelyn.evidence.slice(1).entries())
+      expect(reference).toMatchObject({
+        pointer: `/passive/level/${1321501 + index}/desc/1`,
+        rank: index + 1,
+      })
+    for (const [entityId, supplementId] of [
+      ["1381", "nanoka:agents:s0anby:m6-electromagnetic-vortex"],
+      ["1481", "nanoka:agents:dialyn:m6-aftertone-echo"],
+    ] as const) {
+      const supplement = byId.get(supplementId)!
+      expect(supplement.evidence).toHaveLength(1)
+      expect(supplement.evidence[0]).toMatchObject({
+        path: `agents/${entityId}/details.zh.json`,
+        pointer: "/talent/6/desc",
+      })
+    }
+  })
+
+  it("rejects same-clause multiplier encodings in the registered M6 contexts", () => {
+    // 伊芙琳 rank 6 锚块内出现直接倍率编码：同条款上下文拒绝。
+    const anchorRecord: SourceEffect = {
+      ...batch03BaseEffect,
+      id: "eff-m6-clause",
+      stat: "directDmgMultFactor",
+      value: 25,
+      applySituation: "global",
+    }
+    expect(() =>
+      convertSource(
+        batch08Data({
+          extraPacks: {
+            evelyn: {
+              rank: 6,
+              block: {
+                id: "blk-ms4jc3w4-9he24i",
+                note: batch08EvelynAnchorNote,
+                effects: [anchorRecord],
+              },
+            },
+          },
+        }),
+        functions,
+        [],
+        batch08Supplements,
+      ),
+    ).toThrowError(
+      /conflicts with the fixed-source record .* in the registered clause context agents:evelyn mindscape rank 6/,
+    )
+    // 归一删除后 raw pack 仍有锚块内容：锚块要求 effects 为空的真实上下文。
+    const dropping = {
+      ...functions,
+      collectEffectsFromPack: (pack: SourcePack) =>
+        (functions.collectEffectsFromPack(pack) ?? []).filter(
+          (effect) => effect.id !== "eff-m6-clause",
+        ),
+    }
+    expect(() =>
+      convertSource(
+        batch08Data({
+          extraPacks: {
+            evelyn: {
+              rank: 6,
+              block: {
+                id: "blk-ms4jc3w4-9he24i",
+                note: batch08EvelynAnchorNote,
+                effects: [anchorRecord],
+              },
+            },
+          },
+        }),
+        dropping,
+        [],
+        batch08Supplements,
+      ),
+    ).toThrowError(/conflicts with the fixed-source record/)
+    // 零号·安比与琉音的 rank 6 是真实空 pack：任何新编码（无论 stat）拒绝。
+    const anyRecord: SourceEffect = {
+      ...batch03BaseEffect,
+      id: "eff-m6-anything",
+      stat: "dmgBonus",
+      value: 10,
+      applySituation: "global",
+    }
+    for (const agent of ["s0anby", "dialyn"] as const) {
+      expect(
+        () =>
+          convertSource(
+            batch08Data({
+              extraPacks: {
+                [agent]: {
+                  rank: 6,
+                  block: {
+                    id: "blk-m6-new",
+                    note: "上游未来补编码的影画 6 块。",
+                    effects: [anyRecord],
+                  },
+                },
+              },
+            }),
+            functions,
+            [],
+            batch08Supplements,
+          ),
+        agent,
+      ).toThrowError(
+        new RegExp(
+          `registered agents:${agent} mindscape rank 6 as a currently empty pack`,
+        ),
+      )
+    }
+  })
+
+  it("rejects anchor note drift, appended clauses, and missing anchors", () => {
+    // 保留全部原文、末尾追加冲突句：完整冻结 note 逐字比对拒绝。
+    const appended = batch08Data()
+    const block = appended.agents[0]!.mindscapeBuffs![6]!.effectBlocks![0]!
+    block.note = `${batch08EvelynAnchorNote}月辉丝·弦的伤害倍率提升至原本的125%。`
+    expect(() =>
+      convertSource(appended, functions, [], batch08Supplements),
+    ).toThrowError(/anchor block blk-ms4jc3w4-9he24i note .* before generating/)
+    // 关键数值漂移（375% → 400%）同样拒绝。
+    const drifted = batch08Data()
+    const driftedBlock =
+      drifted.agents[0]!.mindscapeBuffs![6]!.effectBlocks![0]!
+    driftedBlock.note = batch08EvelynAnchorNote.replace("375%", "400%")
+    expect(() =>
+      convertSource(drifted, functions, [], batch08Supplements),
+    ).toThrowError(
+      /anchor block blk-ms4jc3w4-9he24i note drifted .* expected the frozen full note/,
+    )
+    // 锚块被换成其他块 id：拒绝。
+    const missing = batch08Data()
+    const missingBlock =
+      missing.agents[0]!.mindscapeBuffs![6]!.effectBlocks![0]!
+    missingBlock.id = "blk-renamed"
+    expect(() =>
+      convertSource(missing, functions, [], batch08Supplements),
+    ).toThrowError(
+      /lost its anchor block blk-ms4jc3w4-9he24i at agents:evelyn mindscape rank 6/,
+    )
+  })
+
+  it("does not reject independent records outside the registered contexts", () => {
+    // 伊芙琳 rank 0 的 25% 记录（夹具内置）与 rank 2 的独立倍率条款不受
+    // rank 6 守卫影响；rank 1 出现的直接倍率记录也不触发。
+    expect(() =>
+      convertSource(
+        batch08Data({
+          extraPacks: {
+            evelyn: {
+              rank: 1,
+              block: {
+                id: "blk-legacy",
+                note: "另一个独立机制：连携技伤害倍率提升25%。",
+                effects: [
+                  {
+                    ...batch03BaseEffect,
+                    id: "eff-m1-independence",
+                    stat: "directDmgMultFactor",
+                    value: 25,
+                    scope: "skill",
+                    applySituation: "global",
+                    skillTargets: [{ category: "chain", subcategoryId: null }],
+                  },
+                ],
+              },
+            },
+          },
+        }),
+        functions,
+        [],
+        batch08Supplements,
+      ),
+    ).not.toThrow()
+    // 琉音 rank 2 的真实连携增伤（夹具内置）与零号·安比 rank 0 记录正常编译。
+    const result = convertSource(
+      batch08Data(),
+      functions,
+      [],
+      batch08Supplements,
+    )
+    expect(
+      result.catalog.options.some(
+        (o) =>
+          o.optionId ===
+          "agents:dialyn:mindscape:2:blk-legacy:legacy-team-dmgBonus",
+      ),
+    ).toBe(true)
+  })
+
+  it("rejects damage item requirements without matching hit-adjustment rules", () => {
+    const mismatched = batch08Supplements.map(
+      (supplement): Supplement =>
+        supplement.kind === "option" &&
+        supplement.supplementId ===
+          "nanoka:agents:s0anby:m6-electromagnetic-vortex"
+          ? {
+              ...supplement,
+              variant: {
+                ...supplement.variant,
+                damageItemRequirements: [
+                  {
+                    ...supplement.variant.damageItemRequirements![0]!,
+                    itemId: "s0anby:unknown-item",
+                  },
+                ],
+              },
+            }
+          : supplement,
+    )
+    expect(() =>
+      convertSource(batch08Data(), functions, [], mismatched),
+    ).toThrowError(
+      /adjusts undeclared damage item s0anby:electromagnetic-vortex|declares damage item requirement s0anby:unknown-item/,
+    )
+  })
+
+  it("rejects colliding declared skill targets", () => {
+    // 同 ID 目标重复登记：拒绝。
+    const duplicated = [
+      ...batch08Supplements,
+      {
+        ...batch08Supplements[0]!,
+        supplementId: "nanoka:agents:evelyn:duplicate-target",
+        optionId: "nanoka:agents:evelyn:duplicate-target",
+      },
+    ]
+    expect(() =>
+      convertSource(batch08Data(), functions, [], duplicated),
+    ).toThrowError(
+      /repeats the declared skill target zzz-hp:skill:evelyn-lunalux-garrote/,
+    )
+    // 固定来源出现同 ID 技能子分类：上游补了编码，拒绝并要求重新核对。
+    const upstreamData = (): SourceData => ({
+      ...batch08Data(),
+      skillSubcategories: [
+        {
+          id: "evelyn-lunalux-garrote",
+          agentId: "evelyn",
+          categoryId: "chain",
+          name: "月辉丝·弦",
+        },
+      ],
+    })
+    expect(() =>
+      convertSource(upstreamData(), functions, [], batch08Supplements),
+    ).toThrowError(
+      /Supplement skill target zzz-hp:skill:evelyn-lunalux-garrote collides with a fixed-source or declared target/,
+    )
+  })
+
+  it("keeps the guards stable under agent, block and record reordering", () => {
+    const reordered = batch08Data()
+    reordered.agents.reverse()
+    for (const agent of reordered.agents)
+      for (const pack of agent.mindscapeBuffs ?? [])
+        for (const block of pack.effectBlocks ?? []) block.effects.reverse()
+    expect(() =>
+      convertSource(reordered, functions, [], batch08Supplements),
+    ).not.toThrow()
+  })
+
+  /**
+   * 伊芙琳旧倍率共存守卫：完整身份存在性（上游改名/移除原核心块或记录
+   * 即拒绝）、normalized 删除不降级为通用 unsupported、完整 skillTargets
+   * 元组与核心块冻结完整 note 的双份核对；数值与 when 契约不变。
+   */
+  it("rejects the loss of the registered Evelyn multiplier identity when the M6 supplement participates", () => {
+    // 原核心块改名：语义键落空，旧 25% 继续编译却不再排除 M6 → 拒绝生成。
+    const renamed = batch08Data()
+    renamed.agents[0]!.mindscapeBuffs![0]!.effectBlocks![0]!.id =
+      "blk-renamed-upstream"
+    expect(() =>
+      convertSource(renamed, functions, [], batch08Supplements),
+    ).toThrowError(
+      /lost its registered source record .*evelyn.*m6-lunalux-garrote/,
+    )
+    // 旧倍率记录被上游移除：同样拒绝。
+    const removed = batch08Data()
+    const removedBlock =
+      removed.agents[0]!.mindscapeBuffs![0]!.effectBlocks![0]!
+    removedBlock.effects = removedBlock.effects.filter(
+      (e) => e.id !== "eff-ms4j9nhd-9ya68m",
+    )
+    expect(() =>
+      convertSource(removed, functions, [], batch08Supplements),
+    ).toThrowError(/lost its registered source record/)
+  })
+
+  it("does not require the identity when the dependent supplement is absent", () => {
+    // 依赖的 M6 补充不参与本次转换时，局部夹具的块改名不被无条件检查误拒。
+    const renamed = batch08Data()
+    renamed.agents[0]!.mindscapeBuffs![0]!.effectBlocks![0]!.id =
+      "blk-renamed-upstream"
+    const withoutEvelyn = batch08Supplements.filter(
+      (s) =>
+        s.supplementId !== "nanoka:agents:evelyn:m6-lunalux-garrote-follow-up",
+    )
+    expect(() =>
+      convertSource(renamed, functions, [], withoutEvelyn),
+    ).not.toThrow()
+  })
+
+  it("rejects normalized removal of the registered multiplier record instead of degrading to unsupported", () => {
+    // normalized 删除不再走通用 unsupported 降级：登记校验先行拒绝。
+    const dropping: SourceNormalization = {
+      ...functions,
+      collectEffectsFromPack: (pack: SourcePack) =>
+        (functions.collectEffectsFromPack(pack) ?? []).filter(
+          (effect) => effect.id !== "eff-ms4j9nhd-9ya68m",
+        ),
+    }
+    expect(() =>
+      convertSource(batch08Data(), dropping, [], batch08Supplements),
+    ).toThrowError(/Named-skill scope correction lost the normalized record/)
+  })
+
+  it("rejects full skill-target drift beyond categories", () => {
+    // 仅 subcategoryId 漂移（category 列表不变）：完整元组校验拒绝，
+    // 不再让普通连携对照从 2500 漂移到 2000。
+    const drifted = batch08Data()
+    const block = drifted.agents[0]!.mindscapeBuffs![0]!.effectBlocks![0]!
+    block.effects = block.effects.map((e) =>
+      e.id === "eff-ms4j9nhd-9ya68m"
+        ? {
+            ...e,
+            skillTargets: [
+              {
+                category: "chain",
+                subcategoryId: "evelyn-lunalux-garrote",
+              },
+              { category: "ultimate", subcategoryId: null },
+            ],
+          }
+        : e,
+    )
+    expect(() =>
+      convertSource(drifted, functions, [], batch08Supplements),
+    ).toThrowError(
+      /Named-skill scope correction expects .*found directDmgMultFactor 25 on skill .*evelyn-lunalux-garrote/,
+    )
+  })
+
+  it("rejects appended or replaced block notes in both raw and normalized representations", () => {
+    // raw 侧核心块 note 追加冲突句：冻结完整 note 逐字比对拒绝。
+    const appended = batch08Data()
+    const block = appended.agents[0]!.mindscapeBuffs![0]!.effectBlocks![0]!
+    block.note = `${batch08EvelynPassiveNote}月辉丝·弦的伤害倍率提升至原本的125%。`
+    expect(() =>
+      convertSource(appended, functions, [], batch08Supplements),
+    ).toThrowError(
+      /Named-skill scope correction expects the registered block note/,
+    )
+    // 仅 normalized 侧块 note 被改写（raw 保持原文）：同样拒绝。
+    const normalizedNote: SourceNormalization = {
+      ...functions,
+      normalizeAgent: (entity) => {
+        const normalized = functions.normalizeAgent(entity)
+        return {
+          ...normalized,
+          mindscapeBuffs: (normalized.mindscapeBuffs ?? []).map((pack) => ({
+            ...pack,
+            effectBlocks: (pack.effectBlocks ?? []).map((candidate) =>
+              candidate.id === "blk-ms4j94x5-1mflp4"
+                ? {
+                    ...candidate,
+                    note: `${candidate.note ?? ""}月辉丝·弦的伤害倍率提升至原本的125%。`,
+                  }
+                : candidate,
+            ),
+          })),
+        }
+      },
+    }
+    expect(() =>
+      convertSource(batch08Data(), normalizedNote, [], batch08Supplements),
+    ).toThrowError(
+      /Named-skill scope correction expects the registered block note/,
+    )
+  })
+
+  /**
+   * 独立伤害补充的 requirement/itemIds 必须完整双向对应——额外规则目标
+   * 会让未声明项也收到倍率贡献，缺失/空要求让消费端无从发现独立项
+   * （预填倍率失去零值校验）。
+   */
+  it("requires the independent damage item contract to be bidirectional and complete", () => {
+    type VortexOption = Extract<Supplement, { kind: "option" }>
+    const vortexOnly = (
+      transform: (supplement: VortexOption) => VortexOption,
+    ): Supplement[] =>
+      batch08Supplements.map((supplement) =>
+        supplement.kind === "option" &&
+        supplement.supplementId ===
+          "nanoka:agents:s0anby:m6-electromagnetic-vortex"
+          ? transform(supplement)
+          : supplement,
+      )
+    // 规则追加未声明的额外目标：ATK1000 独立项 0 + 其他项 2 会从 12000
+    // 变 22000（额外项也收到 +10），生成期拒绝。
+    const extraTarget = vortexOnly((supplement) => ({
+      ...supplement,
+      rule: {
+        ...supplement.rule,
+        operation: {
+          ...supplement.rule.operation,
+          itemIds: ["s0anby:electromagnetic-vortex", "s0anby:unrelated-event"],
+        },
+      },
+    }))
+    expect(() =>
+      convertSource(batch08Data(), functions, [], extraTarget),
+    ).toThrowError(/adjusts undeclared damage item s0anby:unrelated-event/)
+    // 缺失 requirements：消费端无从发现独立项，预填倍率失去零值校验。
+    const withoutRequirements = vortexOnly((supplement) => {
+      const { damageItemRequirements: _omitted, ...variant } =
+        supplement.variant
+      return { ...supplement, variant }
+    })
+    expect(() =>
+      convertSource(batch08Data(), functions, [], withoutRequirements),
+    ).toThrowError(/without declared damageItemRequirements/)
+    // 空数组同样拒绝。
+    const emptyRequirements = vortexOnly((supplement) => ({
+      ...supplement,
+      variant: { ...supplement.variant, damageItemRequirements: [] },
+    }))
+    expect(() =>
+      convertSource(batch08Data(), functions, [], emptyRequirements),
+    ).toThrowError(/without declared damageItemRequirements/)
+  })
+
+  it("rejects supplements whose hit-adjustment rules omit precise itemIds", () => {
+    type VortexOption = Extract<Supplement, { kind: "option" }>
+    const vortexOnly = (
+      transform: (supplement: VortexOption) => VortexOption,
+    ): Supplement[] =>
+      batch08Supplements.map((supplement) =>
+        supplement.kind === "option" &&
+        supplement.supplementId ===
+          "nanoka:agents:s0anby:m6-electromagnetic-vortex"
+          ? transform(supplement)
+          : supplement,
+      )
+    // 双遗漏：规则省略 itemIds 且变体省略伤害项要求。省略 itemIds 的
+    // hit-adjustment 会退化为调整全部基础伤害项——独立项 0 + 其他项 2
+    // 的 ATK1000 请求会从 12000 变 22000，预填 10 的独立项变 20/20000；
+    // 内部补充边界只支持精确非空目标，两字段同时缺失不能视作“无独立项”。
+    const omitItemIds = (operation: VortexOption["rule"]["operation"]) => {
+      const { itemIds: _omitted, ...rest } = operation as {
+        itemIds?: unknown
+      } & Record<string, unknown>
+      return rest as VortexOption["rule"]["operation"]
+    }
+    const bothOmitted = vortexOnly((supplement) => {
+      const { damageItemRequirements: _omitted, ...variant } =
+        supplement.variant
+      return {
+        ...supplement,
+        rule: {
+          ...supplement.rule,
+          operation: omitItemIds(supplement.rule.operation),
+        },
+        variant,
+      }
+    })
+    expect(() =>
+      convertSource(batch08Data(), functions, [], bothOmitted),
+    ).toThrowError(/hit-adjustment rule without precise non-empty itemIds/)
+    // 合法主规则搭配省略 itemIds 的附加 hit-adjustment：合并集合非空不能
+    // 掩盖附加规则的全项退化，逐条核验同样拒绝。
+    const additionalWildcard = vortexOnly((supplement) => ({
+      ...supplement,
+      additionalRules: [
+        {
+          ...supplement.rule,
+          effectId: "agent:1381:nanoka:m6-electromagnetic-vortex:extra",
+          operation: omitItemIds(supplement.rule.operation),
+        },
+      ],
+    }))
+    expect(() =>
+      convertSource(batch08Data(), functions, [], additionalWildcard),
+    ).toThrowError(/hit-adjustment rule without precise non-empty itemIds/)
   })
 })

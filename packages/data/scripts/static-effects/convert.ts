@@ -836,6 +836,59 @@ const semanticsKeyFor = (record: SourceRecord): string =>
   `${record.category}/${record.entityId}/${record.rankKind}/${record.rank}/${record.blockId}/${record.raw.id}`
 
 /**
+ * 具名倍率范围修正（exclude-skill-target-scope）的防漂移前置校验：完整
+ * skillTargets 元组（category 与 subcategoryId）与核心块冻结完整 note 都按
+ * 登记核对 raw 与 normalized 两份表示；normalized 缺失、子类身份漂移或
+ * note 追加/替换/缺失都拒绝生成。必须在 compile 的通用 unsupported 降级
+ * （规范化移除、公式超范围）之前执行：否则登记记录会静默降级成通用
+ * unsupported，倍率修正消失而旧规则继续编译。
+ */
+function verifyExcludeSkillTargetScopeRecord(
+  record: SourceRecord,
+  semantics: Extract<SourceSemantics, { kind: "exclude-skill-target-scope" }>,
+): void {
+  const targetTuples = (document: SourceEffect) =>
+    (document.skillTargets ?? [])
+      .map((target) => ({
+        category: target.category,
+        subcategoryId: target.subcategoryId ?? null,
+      }))
+      .toSorted((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)))
+  const expectedTuples = semantics.expectedSkillTargets
+    .map((target) => ({
+      category: target.category,
+      subcategoryId: target.subcategoryId,
+    }))
+    .toSorted((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)))
+  for (const [label, document] of [
+    ["raw", record.raw],
+    ["normalized", record.normalized],
+  ] as const) {
+    if (document === undefined)
+      throw new Error(
+        `Named-skill scope correction lost the normalized record at ${record.pointer}; the registered encoding must survive normalization before the coexistence correction can apply`,
+      )
+    if (
+      document.stat !== semantics.expectedStat ||
+      document.value !== semantics.expectedValue ||
+      document.scope !== semantics.expectedScope ||
+      JSON.stringify(targetTuples(document)) !== JSON.stringify(expectedTuples)
+    )
+      throw new Error(
+        `Named-skill scope correction expects ${semantics.expectedStat} ${String(semantics.expectedValue)} on ${semantics.expectedScope} ${JSON.stringify(semantics.expectedSkillTargets)} at ${record.pointer} (${label}), found ${document.stat} ${String(document.value)} on ${document.scope} ${JSON.stringify(document.skillTargets ?? [])}; re-review the clause instead of silently re-scoping`,
+      )
+  }
+  for (const [label, note] of [
+    ["raw", record.blockNote],
+    ["normalized", record.normalizedBlockNote],
+  ] as const)
+    if (note !== semantics.expectedSourceBlockNote)
+      throw new Error(
+        `Named-skill scope correction expects the registered block note at ${record.pointer} (${label}); the frozen clause text drifted — re-review the clause instead of silently re-scoping`,
+      )
+}
+
+/**
  * 具名完整状态登记的防漂移前置校验：原始与规范化记录都必须仍在、
  * 登记的编码字段逐字段一致、块 note 关键条款齐全。必须在 compile 的通用
  * unsupported 降级（规范化移除、公式超范围）之前执行：否则被登记记录会
@@ -902,6 +955,10 @@ function compile(
   // 本组必须在字段映射和通用 unsupported 之前核验；降级不能掩盖源漂移。
   if (semantics?.kind === "complete-state-tanuki-wish")
     verifyRegisteredCompleteStateRecord(record, semantics)
+  // 具名倍率范围修正：完整 skillTargets 与核心块冻结 note 的校验同样早于
+  // 通用 unsupported 降级——normalized 删除不能再静默绕过登记。
+  if (semantics?.kind === "exclude-skill-target-scope")
+    verifyExcludeSkillTargetScopeRecord(record, semantics)
   // 开发者定点修订：仅登记过的记录按修订后的字段查映射；来源原始编码或
   // 数值与登记不符即拒绝生成，不静默套用，也不波及其他 special 记录。
   if (semantics?.kind === "developer-revised-stat") {
@@ -2054,6 +2111,36 @@ function compile(
       ],
     }
   }
+  if (semantics?.kind === "exclude-skill-target-scope") {
+    // 具名倍率范围修正：倍率只描述具名技能，固定来源编为整个技能大类。
+    // 防漂移核对（完整 skillTargets 元组与核心块冻结 note）已在 compile
+    // 开头先行执行并早于通用 unsupported 降级；此处只追加对登记独立目标
+    // 的排除——普通大类命中保持原行为（25% 照常），携带独立目标的命中
+    // 不再放大。
+    when = {
+      kind: "all",
+      conditions: [
+        when,
+        {
+          kind: "not",
+          condition: oneOf("hit.skillTag", [
+            `zzz-hp:skill:${semantics.excludedTargetId}`,
+          ]),
+        },
+      ],
+    }
+    variant = {
+      ...variant,
+      status: "corrected",
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
   if (semantics?.kind === "damage-item-targeting") {
     const requirement = semantics.requirement
     // 倍率只作用于声明身份的伤害项：由 itemIds 精确绑定，缺项时求值层报 MISSING_REFERENCE。
@@ -2782,6 +2869,27 @@ export function convertSource(
     options: StaticCatalogOption[] = [],
     coverage: CoverageRecord[] = [],
     declaredSkillTargets: StaticEffectCatalog["skillTargets"][number][] = []
+  // 依赖存在性：exclude-skill-target-scope 修正被某补充依赖时，该补充
+  // 参与本次转换则其登记的来源记录完整身份（语义键）必须仍被收集到——
+  // 上游把原核心块或记录改名、移除都会让语义键落空，旧倍率不再排除而
+  // 继续编译（M6 倍率被错误放大），必须拒绝生成并要求重新核对。依赖补充
+  // 不参与时不做无条件检查，避免误拒完全无此角色的局部转换夹具。
+  const semanticsKeyIndex = new Set(
+    collected.records.map((record) => semanticsKeyFor(record)),
+  )
+  for (const [key, semantics] of Object.entries(SOURCE_SEMANTICS)) {
+    if (semantics.kind !== "exclude-skill-target-scope") continue
+    if (
+      !semantics.dependentSupplementIds.some((id) =>
+        supplements.some((supplement) => supplement.supplementId === id),
+      )
+    )
+      continue
+    if (!semanticsKeyIndex.has(key))
+      throw new Error(
+        `The exclude-skill-target-scope correction ${semantics.differenceId} lost its registered source record (${key}); the dependent supplement ${semantics.dependentSupplementIds.join(", ")} is present while the excluded multiplier identity is missing — re-review the clause before generating`,
+      )
+  }
   const groups = new Map<string, SourceRecord[]>()
   for (const record of collected.records) {
     const pack =
@@ -3149,7 +3257,9 @@ export function convertSource(
         agentEntityId: declared.agentEntityId,
         category: declared.category,
         name: declared.name,
-        countsAsFollowUp: false,
+        // 真实追加攻击身份（如零号·安比电磁涡流）随目标展开 follow-up 标签；
+        // 普通独立目标保持 false。
+        countsAsFollowUp: declared.countsAsFollowUp === true,
       })
     }
     if (supplement.kind === "unsupported-option") {
@@ -3232,6 +3342,55 @@ export function convertSource(
         `Supplement ${supplement.supplementId} mixes layer maxima across its complete-state rules`,
       )
     const supplementRules = ruleSpecs.map(buildSupplementRule)
+    // 独立伤害补充契约：内部补充机制的 hit-adjustment（主规则与
+    // additionalRules 逐条核验）只支持精确非空 itemIds 绑定的独立伤害项。
+    // 省略 itemIds 的全项倍率是公共 DSL 的既有能力，不进入内部补充登记：
+    // 双遗漏（规则省略 itemIds 且变体省略伤害项要求）或附加规则省略目标
+    // 都会把独立补充退化为调整全部基础伤害项——独立项 0 + 其他项 2 的
+    // ATK1000 请求会从 12000 变 22000、预填 10 的独立项变 20/20000。声明
+    // 的伤害项要求与规则的精确 itemIds 必须完整双向覆盖：额外规则目标让
+    // 未声明的项也收到倍率贡献，缺失/空要求让消费端无从发现独立项；属性
+    // /增伤补充（stat-adjustment/factor-contribution）与合法多独立项声明
+    // 继续可用。
+    for (const rule of supplementRules)
+      if (
+        rule.kind === "contribution" &&
+        rule.operation.kind === "hit-adjustment" &&
+        (!rule.operation.itemIds || !rule.operation.itemIds.length)
+      )
+        throw new Error(
+          `Supplement ${supplement.supplementId} registers a hit-adjustment rule without precise non-empty itemIds; the internal supplement boundary only supports independent damage items bound by exact itemIds — a rule adjusting every item cannot be declared here, re-review the clause`,
+        )
+    const adjustedItemIds = [
+      ...new Set(
+        supplementRules.flatMap((rule) =>
+          rule.kind === "contribution" &&
+          rule.operation.kind === "hit-adjustment"
+            ? (rule.operation.itemIds ?? [])
+            : [],
+        ),
+      ),
+    ]
+    const declaredRequirements = supplement.variant.damageItemRequirements ?? []
+    if (adjustedItemIds.length && !declaredRequirements.length)
+      throw new Error(
+        `Supplement ${supplement.supplementId} binds hit-adjustment damage items ${JSON.stringify(adjustedItemIds)} without declared damageItemRequirements; the catalog cannot discover the independent items — declare one requirement per itemId`,
+      )
+    {
+      const declaredItemIds = new Set(
+        declaredRequirements.map((requirement) => requirement.itemId),
+      )
+      for (const itemId of adjustedItemIds)
+        if (!declaredItemIds.has(itemId))
+          throw new Error(
+            `Supplement ${supplement.supplementId} adjusts undeclared damage item ${itemId}; re-review the binding`,
+          )
+      for (const requirement of declaredRequirements)
+        if (!adjustedItemIds.includes(requirement.itemId))
+          throw new Error(
+            `Supplement ${supplement.supplementId} declares damage item requirement ${requirement.itemId} without a matching hit-adjustment rule; re-review the binding`,
+          )
+    }
     const variant: StaticCatalogVariant = {
       ...(supplement.variant.target === undefined
         ? {}
@@ -3246,6 +3405,13 @@ export function convertSource(
       inputs: supplement.variant.inputs,
       applicability: supplement.variant.applicability,
       differences: [],
+      // 声明式伤害项要求随补充透传：与固定来源 damage-item-targeting 的
+      // damageItemRequirements 同一契约，目录入口据此发现并校验独立项。
+      ...(supplement.variant.damageItemRequirements === undefined
+        ? {}
+        : {
+            damageItemRequirements: supplement.variant.damageItemRequirements,
+          }),
       // 声明式同队受益者随补充透传；目录消费端据此要求每次启用选择携带
       // beneficiaryActorId 并把受益集合收敛为该实体。
       ...(supplement.variant.declaredTeammateBeneficiary === undefined
@@ -3441,7 +3607,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "22",
+    revision: "23",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -3581,6 +3747,19 @@ export function convertSource(
           reference("/agents/47/mindscapeBuffs/0/effectBlocks/0/effects/0"),
           reference("/agents/34/mindscapeBuffs/0/effectBlocks/0/effects/0"),
           reference("/agents/34/mindscapeBuffs/0/effectBlocks/0/effects/1"),
+        ],
+      },
+      {
+        differenceId: "evelyn-lunalux-multiplier-scope",
+        explanation:
+          "伊芙琳核心被动（额外能力：潜袭支点）的 125% 倍率修正按 Nanoka 核心被动七行（1321501—1321507/desc/1，中英文逐档同文）只描述具名技能[连携技：月辉丝·绊]、[终结技：月辉丝·弦音]与[终结技：月辉丝·弦影]；固定来源把该修正编为整个连携/终结大类的 base-multiplier-increase，影画 6 新登记的[月辉丝·弦]独立追击目标（category chain）会被同一大类条件命中，3.75 倍率被错误放大到 4.6875。修正保留原稳定 effectId、数值与 chain/ultimate 大类条件，仅追加对 evelyn-lunalux-garrote 目标的排除：携带该目标的命中不吃本倍率，普通连携/终结命中保持 25% 不变；同块的一般连携/终结增伤（skillDmgBonus +30%）不受影响，仍作用于[月辉丝·弦]；影画 4 的显式护盾暴伤按既有规则不变。",
+        references: [
+          reference("/agents/4/mindscapeBuffs/0/effectBlocks/1/effects/1"),
+          nanokaReference("agents/1321/details.zh.json", "/talent/6/desc"),
+          nanokaReference(
+            "agents/1321/details.zh.json",
+            "/passive/level/1321507/desc/1",
+          ),
         ],
       },
       {

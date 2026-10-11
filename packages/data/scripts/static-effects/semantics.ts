@@ -443,6 +443,51 @@ export type SourceSemantics =
     }
   | {
       /**
+       * 记录的倍率修正只描述具名技能（如伊芙琳核心被动“[月辉丝·绊]、
+       * [月辉丝·弦音]与[月辉丝·弦影]的伤害倍率提升至原本的 125%”），固定
+       * 来源把它编为整个技能大类的 base-multiplier-increase；同一大类内的
+       * 新独立追击目标（影画 6 的[月辉丝·弦]）不在具名列表中，直接沿用
+       * 大类条件会把追击倍率错误放大。转换器保留原稳定 ID、数值与大类
+       * 条件，只追加对登记独立目标的明确排除：命中携带该目标时不吃本
+       * 倍率修正，普通大类命中保持原行为；状态记为 corrected 并登记具名
+       * 差异。防漂移校验（完整 skillTargets 元组与核心块冻结完整 note，
+       * raw/normalized 双份）在 compile 开头执行、早于通用 unsupported
+       * 降级；原始与规范化记录的编码与登记不符即拒绝生成。
+       */
+      readonly kind: "exclude-skill-target-scope"
+      /** 被排除的独立目标 ID（目录 targetId 的 zzz-hp:skill: 尾段）。 */
+      readonly excludedTargetId: string
+      /**
+       * 依赖本修正存在的补充登记：该补充参与本次转换而登记的来源记录
+       * 完整身份（语义键）缺失——上游把原核心块或记录改名、移除都会让
+       * 语义键落空、旧倍率不再排除而继续编译——生成期拒绝并要求重新
+       * 核对。依赖补充不参与时不做无条件检查，避免误拒局部转换夹具。
+       */
+      readonly dependentSupplementIds: readonly string[]
+      /** 防漂移：登记时来源记录应逐字段保持的编码。 */
+      readonly expectedStat: string
+      readonly expectedValue: number
+      readonly expectedScope: string
+      /**
+       * 防漂移：登记时来源记录 skillTargets 的完整元组（category 与
+       * subcategoryId，空子类为 null）；子类身份漂移即拒绝，不能只比对
+       * category 序列。
+       */
+      readonly expectedSkillTargets: readonly {
+        readonly category: string
+        readonly subcategoryId: string | null
+      }[]
+      /**
+       * 防漂移：固定来源 raw/normalized 核心块的真实完整 note 原文；
+       * 追加、替换或缺失都拒绝，不从待验证输入推导期望。
+       */
+      readonly expectedSourceBlockNote: string
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
        * 固定来源把同一按层状态的各条款拆成多条可独立切换的记录（莱特
        * [昂扬]：基础每层 1.25% 的 stacked 记录 + 冲击力转化的 convert
        * 记录 + 影画 2 的两条复制记录），而块 note 与 Nanoka 同文说明它们
@@ -2060,6 +2105,35 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     evidence: lycaonPotentialBranchEvidence,
     verification:
       "Nanoka 潜能分支（1141508—1141514）明确：[强化特殊技：狂猎时刻]、[支援突击：复仇反扑]或[支援突击：复仇反扑·冰舞]命中敌人时，目标的冰属性伤害抗性降低 25%、受到的其他属性伤害提升 30%。30% 其他元素贡献是潜能 1 起的新增效果（普通分支 1141507 只有 25% 冰抗），只对该记录补充潜能门槛；25% 冰抗记录在两条分支都存在，保持所有潜能可用。该贡献在来源与 Fairy 均位于 damage-bonus 通道，保留现状，不在本 PR 改写为抗性修复。",
+  },
+  // 伊芙琳：核心被动 125% 倍率只描述具名连携与两个终结技；影画 6 的
+  // [月辉丝·弦]独立追击目标明确排除，普通连携/终结命中保持原行为。
+  "agents/evelyn/mindscape/0/blk-ms4j94x5-1mflp4/eff-ms4j9nhd-9ya68m": {
+    kind: "exclude-skill-target-scope",
+    excludedTargetId: "evelyn-lunalux-garrote",
+    dependentSupplementIds: [
+      "nanoka:agents:evelyn:m6-lunalux-garrote-follow-up",
+    ],
+    expectedStat: "directDmgMultFactor",
+    expectedValue: 25,
+    expectedScope: "skill",
+    expectedSkillTargets: [
+      { category: "chain", subcategoryId: null },
+      { category: "ultimate", subcategoryId: null },
+    ],
+    expectedSourceBlockNote:
+      "队伍中存在[击破]角色或[支援]角色时触发：\n伊芙琳的[连携技]和[终结技]造成的伤害提升30%；当伊芙琳的暴击率大于等于80%时，[连携技：月辉丝·绊]、[终结技：月辉丝·弦音]和[终结技：月辉丝·弦影]的伤害倍率提升至原本的125%。",
+    differenceId: "evelyn-lunalux-multiplier-scope",
+    evidence: [
+      {
+        path: "agents/1321/details.zh.json",
+        pointer: "/talent/6/desc",
+        sha256:
+          "ec99d046c695ada6f090a4da5a38bfe5951552996ead6a85ce7f5385727c8783",
+      },
+    ],
+    verification:
+      "Nanoka 核心被动七行（/passive/level/1321501—1321507/desc/1，中英文逐档同文核对）明确：暴击率大于等于 80% 时，伤害倍率提升至原本的 125% 只作用于[连携技：月辉丝·绊]、[终结技：月辉丝·弦音]和[终结技：月辉丝·弦影]三个具名技能；影画 6 的[月辉丝·弦]（/talent/6/desc）是独立的追击释放，不在该具名列表中。固定来源把 125% 编为整个连携/终结大类的 base-multiplier-increase，新增的[月辉丝·弦]独立目标（category chain）会被同一大类条件命中，3.75 倍率被错误放大到 4.6875。按具名语义修正：保留原稳定 effectId、数值与 chain/ultimate 大类条件，仅追加对 evelyn-lunalux-garrote 目标的排除——携带该目标的命中不吃本倍率，普通连携/终结命中保持 25% 不变；同块的一般连携/终结增伤（skillDmgBonus +30%）不受影响，仍作用于[月辉丝·弦]；影画 4 的显式护盾暴伤（/talent/4/desc 中英文已核对）按既有规则不变，取得护盾的连携/终结触发条件不是暴伤受益限制。防漂移完整守卫：完整 skillTargets 元组（category 与 subcategoryId）与核心块冻结完整 note（raw/normalized 双份）逐字核对，上游把原块或记录改名、移除、normalized 删除降级、子类身份漂移或 note 追加/替换/缺失都拒绝生成并要求重新核对；依赖的影画 6 补充参与转换时其登记来源记录的完整身份必须仍存在。排除范围只针对这一个新独立目标与本规则的共存，不重构技能大类条件，也不扩及其他待证事项。",
   },
   // 艾莲：核心被动 100% 暴伤的受益范围扩展属于潜能分支。
   "agents/ellen/mindscape/0/blk-legacy/legacy-self-critDmg": {
