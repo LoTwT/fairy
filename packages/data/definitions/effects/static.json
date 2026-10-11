@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "21",
+  "revision": "22",
   "effects": [
     {
       "kind": "contribution",
@@ -49462,6 +49462,326 @@
     },
     {
       "kind": "contribution",
+      "effectId": "agent:1621:nanoka:initial-energy-regen-conversion:attack",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1621"
+        },
+        "section": "核心被动：热夜初拥（初始能量自动回复转化 · 攻击力）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621507/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "threshold": {
+          "kind": "constant",
+          "unit": "energy-per-second",
+          "value": -1.2
+        },
+        "rate": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 500
+        },
+        "cap": {
+          "kind": "by-rank",
+          "rank": "coreSkillLevel",
+          "unit": "attack-points",
+          "values": {
+            "1": 480,
+            "2": 560,
+            "3": 640,
+            "4": 720,
+            "5": 800,
+            "6": 880,
+            "7": 960
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "attack",
+        "stage": "final-fixed",
+        "value": {
+          "kind": "minimum",
+          "unit": "attack-points",
+          "operands": [
+            {
+              "kind": "convert",
+              "unit": "attack-points",
+              "input": {
+                "kind": "maximum",
+                "unit": "energy-per-second",
+                "operands": [
+                  {
+                    "kind": "literal",
+                    "unit": "energy-per-second",
+                    "value": 0
+                  },
+                  {
+                    "kind": "add",
+                    "unit": "energy-per-second",
+                    "operands": [
+                      {
+                        "kind": "input",
+                        "unit": "energy-per-second",
+                        "name": "roxy:initial-energy-regen:source"
+                      },
+                      {
+                        "kind": "parameter",
+                        "unit": "energy-per-second",
+                        "name": "threshold"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "rate": {
+                "kind": "parameter",
+                "unit": "multiplier",
+                "name": "rate"
+              }
+            },
+            {
+              "kind": "parameter",
+              "unit": "attack-points",
+              "name": "cap"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1621:nanoka:initial-energy-regen-conversion:impact",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1621"
+        },
+        "section": "核心被动：热夜初拥（初始能量自动回复转化 · 冲击力）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621507/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "threshold": {
+          "kind": "constant",
+          "unit": "energy-per-second",
+          "value": -1.2
+        },
+        "rate": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 40
+        },
+        "cap": {
+          "kind": "by-rank",
+          "rank": "coreSkillLevel",
+          "unit": "impact-points",
+          "values": {
+            "1": 40,
+            "2": 46,
+            "3": 52,
+            "4": 58,
+            "5": 64,
+            "6": 70,
+            "7": 76.8
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
+        "stage": "final-fixed",
+        "value": {
+          "kind": "minimum",
+          "unit": "impact-points",
+          "operands": [
+            {
+              "kind": "convert",
+              "unit": "impact-points",
+              "input": {
+                "kind": "maximum",
+                "unit": "energy-per-second",
+                "operands": [
+                  {
+                    "kind": "literal",
+                    "unit": "energy-per-second",
+                    "value": 0
+                  },
+                  {
+                    "kind": "add",
+                    "unit": "energy-per-second",
+                    "operands": [
+                      {
+                        "kind": "input",
+                        "unit": "energy-per-second",
+                        "name": "roxy:initial-energy-regen:source"
+                      },
+                      {
+                        "kind": "parameter",
+                        "unit": "energy-per-second",
+                        "name": "threshold"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "rate": {
+                "kind": "parameter",
+                "unit": "multiplier",
+                "name": "rate"
+              }
+            },
+            {
+              "kind": "parameter",
+              "unit": "impact-points",
+              "name": "cap"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "disc:31000:zzz-hp:legacy-self-critRate:blk-ms0air06-97bcyw:setPieces:2",
       "source": {
         "identity": {
@@ -79325,6 +79645,281 @@
       "operation": {
         "kind": "factor-contribution",
         "channel": "sharpen-damage-bonus",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14162:nanoka:crit-rate",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14162"
+        },
+        "section": "绯月银棺：暴击率",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14162/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14162/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14162/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14162/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14162/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "ratio",
+          "values": {
+            "1": 0.24,
+            "2": 0.26,
+            "3": 0.28,
+            "4": 0.3,
+            "5": 0.32
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "criticalRate",
+        "stage": "direct",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14162:nanoka:squad-damage-bonus",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14162"
+        },
+        "section": "绯月银棺：全队增伤（触发状态）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14162/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14162/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14162/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14162/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14162/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "ratio",
+          "values": {
+            "1": 0.2,
+            "2": 0.23,
+            "3": 0.26,
+            "4": 0.29,
+            "5": 0.32
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "team-except-holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "damage-bonus",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14162:nanoka:wind-resistance-ignore",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14162"
+        },
+        "section": "绯月银棺：风属性伤害抗性无视",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14162/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14162/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14162/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14162/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14162/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "ratio",
+          "values": {
+            "1": 0.15,
+            "2": 0.173,
+            "3": 0.195,
+            "4": 0.218,
+            "5": 0.24
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "one-of",
+        "fact": "hit.element",
+        "values": ["wind"]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "attacker-resistance-ignore",
         "value": {
           "kind": "parameter",
           "unit": "ratio",

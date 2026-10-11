@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "21",
+  "revision": "22",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -1154,6 +1154,32 @@
       "element": null
     },
     {
+      "catalogEntityId": "nanoka:agents:1621",
+      "upstreamId": null,
+      "name": "洛克茜",
+      "identity": {
+        "kind": "agent",
+        "entityId": "1621"
+      },
+      "status": "mapped",
+      "profession": "击破",
+      "element": "wind",
+      "supplementProvenance": {
+        "sourceId": "nanoka-integrated",
+        "version": "3.2",
+        "resources": [
+          {
+            "path": "agents/1621/details.zh.json",
+            "sha256": "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e"
+          },
+          {
+            "path": "agents/1621/data.json",
+            "sha256": "8a0e467f6cfd8f9d612669a21726730461deddff10d2f5fea088e0ed2bc89aa1"
+          }
+        ]
+      }
+    },
+    {
       "catalogEntityId": "nanoka:w-engines:13111",
       "upstreamId": null,
       "name": "旋钻机-赤轴",
@@ -1175,6 +1201,32 @@
           {
             "path": "w-engines/13111/data.json",
             "sha256": "f15b78db778f650eadc03281d0408aba6b6a4bba603c2d8db304a129a2d757b6"
+          }
+        ]
+      }
+    },
+    {
+      "catalogEntityId": "nanoka:w-engines:14162",
+      "upstreamId": null,
+      "name": "绯月银棺",
+      "identity": {
+        "kind": "w-engine",
+        "entityId": "14162"
+      },
+      "status": "mapped",
+      "profession": "击破",
+      "element": null,
+      "supplementProvenance": {
+        "sourceId": "nanoka-integrated",
+        "version": "3.2",
+        "resources": [
+          {
+            "path": "w-engines/14162/details.zh.json",
+            "sha256": "bc7c46871ff259a1c249fe62493ff69d22aa279273e084efcb0783bc4f48a456"
+          },
+          {
+            "path": "w-engines/14162/data.json",
+            "sha256": "1a9e005ff93a9479c72da50e19f58b46bf411cc814e08bdd37cbd7681df4e1d1"
           }
         ]
       }
@@ -47099,6 +47151,262 @@
           "inputs": [],
           "applicability": {},
           "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1621:initial-energy-regen-conversion",
+      "catalogEntityId": "nanoka:agents:1621",
+      "name": "核心被动 · 初始能量自动回复转化",
+      "conditionDescription": "初始能量自动回复大于 1.2 时，超过部分每 0.01 攻击力提升 5 点、冲击力提升 0.4 点，按核心 1—7 分别封顶（攻击 480/560/640/720/800/880/960 点，冲击 40/46/52/58/64/70/76.8 点）；初始能量自动回复由调用方显式输入（必填、无默认值），两项同时生效或同时关闭，是同一完整状态。本选项只覆盖该句条款，不包含同段其他机制。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621501/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621502/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621503/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621504/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621505/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621506/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621507/desc/0"
+            }
+          ],
+          "effectIds": [
+            "agent:1621:nanoka:initial-energy-regen-conversion:attack",
+            "agent:1621:nanoka:initial-energy-regen-conversion:impact"
+          ],
+          "maximumLayers": 1,
+          "inputs": [
+            {
+              "name": "roxy:initial-energy-regen:source",
+              "unit": "energy-per-second",
+              "description": "initial energyRegen，洛克茜的初始能量自动回复（energy-per-second，显式手工读数，必填且无默认值；是初始值，不含局内回能增益，不用当前回能或音擎面板回能代替）；超过 1.2 的部分每 0.01 攻击力 +5、冲击力 +0.4，按核心档分别封顶（攻击 480—960、冲击 40—76.8 点），低于等于 1.2 贡献 0，越界按表达式钳制，非整 0.01 按连续表达式不自行取整"
+            }
+          ],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:w-engines:14162:crit-rate",
+      "catalogEntityId": "nanoka:w-engines:14162",
+      "name": "绯月银棺 · critRate",
+      "conditionDescription": "装备者暴击率提升 24/26/28/30/32%（按精炼 1—5）；持有者常驻收益，由调用方选中本选项断言装备生效，不依赖任何触发状态。与风抗忽视、触发增伤相互独立。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "refinements": [1, 2, 3, 4, 5]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14162/details.zh.json",
+              "pointer": "/talents/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14162/details.zh.json",
+              "pointer": "/talents/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14162/details.zh.json",
+              "pointer": "/talents/3/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14162/details.zh.json",
+              "pointer": "/talents/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14162/details.zh.json",
+              "pointer": "/talents/5/desc"
+            }
+          ],
+          "effectIds": ["w-engine:14162:nanoka:crit-rate"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:w-engines:14162:wind-resistance-ignore",
+      "catalogEntityId": "nanoka:w-engines:14162",
+      "name": "绯月银棺 · resPen",
+      "conditionDescription": "装备者造成的伤害无视目标 15/17.3/19.5/21.8/24% 风属性伤害抗性（按精炼 1—5）；持有者的风属性伤害收益（按命中元素筛选，覆盖现有抗性区契约支持的全部风伤种类），常驻条款，不依赖强化特殊技触发。与暴击率、触发增伤相互独立。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "refinements": [1, 2, 3, 4, 5]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14162/details.zh.json",
+              "pointer": "/talents/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14162/details.zh.json",
+              "pointer": "/talents/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14162/details.zh.json",
+              "pointer": "/talents/3/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14162/details.zh.json",
+              "pointer": "/talents/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14162/details.zh.json",
+              "pointer": "/talents/5/desc"
+            }
+          ],
+          "effectIds": ["w-engine:14162:nanoka:wind-resistance-ignore"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:w-engines:14162:squad-damage-bonus",
+      "catalogEntityId": "nanoka:w-engines:14162",
+      "name": "绯月银棺 · teamDmgBonus",
+      "conditionDescription": "装备者发动[强化特殊技]造成风属性伤害时，全队其他角色造成的伤害提升 20/23/26/29/32%（按精炼 1—5），持续 50 秒，重复触发刷新持续时间；触发事实由调用方启用本选项断言，50 秒与刷新不模拟。受益者是持有者同队其他角色（本人与异队不受益），增伤不按元素或技能筛选受益者的伤害。伤害提升效果全队唯一：同一队伍最多一个启用来源，须声明单一有效来源（只在一名持有者的绑定上启用）；失衡值提升条款不在本选项。与暴击率、风抗忽视相互独立。",
+      "target": "team",
+      "variants": [
+        {
+          "target": "team",
+          "configuration": {
+            "refinements": [1, 2, 3, 4, 5]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14162/details.zh.json",
+              "pointer": "/talents/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14162/details.zh.json",
+              "pointer": "/talents/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14162/details.zh.json",
+              "pointer": "/talents/3/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14162/details.zh.json",
+              "pointer": "/talents/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14162/details.zh.json",
+              "pointer": "/talents/5/desc"
+            }
+          ],
+          "effectIds": ["w-engine:14162:nanoka:squad-damage-bonus"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "squadUniqueEffect": true
         }
       ]
     }

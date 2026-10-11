@@ -81,6 +81,13 @@ export interface SupplementVariantSpec {
    * 消费端校验声明实体并只把该实体纳入受益集合；不引入时间线或位置引擎。
    */
   readonly declaredTeammateBeneficiary?: true
+  /**
+   * 全队唯一效果声明（透传到目录变体）：该选项表示的效果全队唯一，目录
+   * 选择阶段按（持有者队伍， optionId）跨绑定强制单一启用来源；同队第二
+   * 个启用选择被拒绝，要求调用方声明单一有效来源。用于“伤害提升效果
+   * 全队唯一”这类条款，见 StaticCatalogVariant.squadUniqueEffect。
+   */
+  readonly squadUniqueEffect?: true
 }
 
 export interface SupplementBase {
@@ -167,8 +174,20 @@ export interface SupplementBase {
   }
 }
 
+/**
+ * 同一选项内与主规则同时启用的额外贡献规则（完整状态的多通道落点，如
+ * 洛克茜初始回能同时转攻击与冲击）：全部规则共用同一变体、同一输入与
+ * 同一层数语义，变体 effectIds 按登记顺序引用全部规则；每条额外规则的
+ * maximumLayers 必须与主规则一致，生成期不一致即拒绝。0 层关闭同时关闭
+ * 全部规则，1 层启用同时生效，不允许单条作为对外半状态选项。
+ */
+export interface SupplementAdditionalRule {
+  readonly additionalRules?: readonly SupplementRuleSpec[]
+}
+
 /** 在既有目录实体新增选项的补充来源；不创建重复实体。 */
-export interface SupplementOption extends SupplementBase {
+export interface SupplementOption
+  extends SupplementBase, SupplementAdditionalRule {
   readonly kind: "option"
   readonly catalogEntityId: string
   readonly optionId: string
@@ -180,23 +199,25 @@ export interface SupplementOption extends SupplementBase {
 
 export type Supplement =
   | SupplementOption
-  | (SupplementBase & {
-      readonly kind: "option-variant"
-      readonly optionId: string
-      readonly rule: SupplementRuleSpec
-      readonly variant: SupplementVariantSpec
-      readonly supportedRanks: string
-      readonly computationTarget: string
-    })
-  | (SupplementBase & {
-      readonly kind: "entity"
-      readonly entity: StaticCatalogEntity
-      readonly optionId: string
-      readonly rule: SupplementRuleSpec
-      readonly variant: SupplementVariantSpec
-      readonly supportedRanks: string
-      readonly computationTarget: string
-    })
+  | (SupplementBase &
+      SupplementAdditionalRule & {
+        readonly kind: "option-variant"
+        readonly optionId: string
+        readonly rule: SupplementRuleSpec
+        readonly variant: SupplementVariantSpec
+        readonly supportedRanks: string
+        readonly computationTarget: string
+      })
+  | (SupplementBase &
+      SupplementAdditionalRule & {
+        readonly kind: "entity"
+        readonly entity: StaticCatalogEntity
+        readonly optionId: string
+        readonly rule: SupplementRuleSpec
+        readonly variant: SupplementVariantSpec
+        readonly supportedRanks: string
+        readonly computationTarget: string
+      })
   | (SupplementBase & {
       /**
        * 在既有目录实体上登记一个如实不可选的选项变体（formula-out-of-scope）：
@@ -809,6 +830,25 @@ const coreImpactPoints = (
     kind: "by-rank",
     rank: "coreSkillLevel",
     unit: "impact-points",
+    values: {
+      1: values[0],
+      2: values[1],
+      3: values[2],
+      4: values[3],
+      5: values[4],
+      6: values[5],
+      7: values[6],
+    },
+  }) as const
+
+/** 按核心等级取值的攻击点数参数表（1—7 档字面值，不插值）。 */
+const coreAttackPoints = (
+  values: readonly [number, number, number, number, number, number, number],
+) =>
+  ({
+    kind: "by-rank",
+    rank: "coreSkillLevel",
+    unit: "attack-points",
     values: {
       1: values[0],
       2: values[1],
@@ -2487,6 +2527,378 @@ const alexandrinaMindscape4DeployedDollsEnergyRegen: Supplement = {
   },
 }
 
+/**
+ * 洛克茜（PR07，批次 07）：初始能量自动回复超过 1.2 的部分同时转化攻击力
+ * 与冲击力的完整状态。两项是同一完整状态选择：0 层同时关闭、1 层同时
+ * 生效，一条显式输入（energy-per-second）供两条规则消费；两项独立封顶
+ * （低核心档两个封顶点不同），不先共用封顶比例。固定 ZZZ-HP 来源没有
+ * 洛克茜实体（增益 JSON 全文无 Roxy/洛克茜），按补充实体登记真实身份。
+ */
+const ROXY_INPUT = "roxy:initial-energy-regen:source"
+const roxyInitialEnergyRegenConversion: Supplement = {
+  kind: "entity",
+  supplementId: "nanoka:agents:1621:initial-energy-regen-conversion",
+  source:
+    "nanoka-integrated@3.2 agents/1621 /passive/level/1621501—1621507/desc/0",
+  optionId: "nanoka:agents:1621:initial-energy-regen-conversion",
+  supportedRanks: "核心 1—7",
+  computationTarget: "catalog entity + complete-state option (two rules)",
+  evidence: agentPassiveEvidence(
+    "1621",
+    "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e",
+    1621501,
+  ),
+  verification:
+    "Nanoka 核心被动七行（agents/1621/details.zh.json 的 /passive/level/1621501—1621507/desc/0 第 2 句，data.json level 元数据 1—7 逐行核对，被动行 name 元数据为核心被动：热夜初拥，英文文件同文核对：第 7 级为 When Roxy's initial Energy Regen exceeds 1.2, for every 0.01 above this value, ATK increases by 5, up to a maximum increase of 960, and Impact increases by 0.4, up to a maximum increase of 76.8）确认：洛克茜的初始能量自动回复大于 1.2 时，超过部分每超过 0.01，攻击力提升 5 点、冲击力提升 0.4 点，最多提升攻击 480/560/640/720/800/880/960 点、冲击 40/46/52/58/64/70/76.8 点（按核心 1—7，逐档字面值，不按最高档线性插值）。固定 ZZZ-HP 增益 JSON 没有任何洛克茜实体或记录，按补充来源创建目录实体（真实 agent 1621/击破/风，weaponType {2:击破}、elementType {204:风属性} 沿 details 官方枚举核验）。输入是显式必填、无默认值的“初始能量自动回复”读数（energy-per-second），按绑定隔离：不读 world 当前回能、不把局内回能增益或音擎面板当初始快照、不由战斗中的 E 误替代。两项输出按连续表达式静态契约：ATK=min(capA, max(0,E−1.2)×500)、Impact=min(capI, max(0,E−1.2)×40)，独立封顶：封顶点按完整读数 E 计，核心 1 的攻击/冲击分别在 E=2.16/2.20（超出量 0.96/1.00），核心 6 在 E=2.96/2.95（超出量 1.76/1.75），非整 0.01 的游戏取整未证，不自行 floor。输出阶段沿既有局内固定点数转化口径（批次 06 琉音 final-fixed 冲击、固定来源 atk/def 点数）采用 attack/impact 的 final-fixed：来源的“初始”限定的是输入读数，未证明输出面板结算阶段，该阶段选择是契约推定，未经游戏实测。两项作为同一完整状态选择（一个变体引用两条规则、共用同一输入），0 层同时关闭、1 层同时生效，不提供单条半状态选项；本补充只覆盖该句条款，同段的风能获取、[特殊技：恕不远送]触发、浸染/净化全队暴伤与锐暴条款及影画不在本次范围，不宣称整角色效果已完整。",
+  entity: {
+    catalogEntityId: "nanoka:agents:1621",
+    upstreamId: null,
+    name: "洛克茜",
+    identity: { kind: "agent", entityId: "1621" },
+    status: "mapped",
+    profession: "击破",
+    element: "wind",
+    supplementProvenance: {
+      sourceId: "nanoka-integrated",
+      version: "3.2",
+      resources: [
+        {
+          path: "agents/1621/details.zh.json",
+          sha256:
+            "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e",
+        },
+        {
+          path: "agents/1621/data.json",
+          sha256:
+            "8a0e467f6cfd8f9d612669a21726730461deddff10d2f5fea088e0ed2bc89aa1",
+        },
+      ],
+    },
+  },
+  rule: {
+    effectId: "agent:1621:nanoka:initial-energy-regen-conversion:attack",
+    identity: { kind: "agent", entityId: "1621" },
+    section: "核心被动：热夜初拥（初始能量自动回复转化 · 攻击力）",
+    config: { kind: "constant", value: true },
+    parameters: {
+      threshold: { kind: "constant", unit: "energy-per-second", value: -1.2 },
+      rate: { kind: "constant", unit: "multiplier", value: 500 },
+      cap: coreAttackPoints([480, 560, 640, 720, 800, 880, 960]),
+    },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: {
+      kind: "stat-adjustment",
+      stat: "attack",
+      stage: "final-fixed",
+      value: {
+        kind: "minimum",
+        unit: "attack-points",
+        operands: [
+          {
+            kind: "convert",
+            unit: "attack-points",
+            input: {
+              kind: "maximum",
+              unit: "energy-per-second",
+              operands: [
+                literal("energy-per-second", 0),
+                {
+                  kind: "add",
+                  unit: "energy-per-second",
+                  operands: [
+                    {
+                      kind: "input",
+                      unit: "energy-per-second",
+                      name: ROXY_INPUT,
+                    },
+                    {
+                      kind: "parameter",
+                      unit: "energy-per-second",
+                      name: "threshold",
+                    },
+                  ],
+                },
+              ],
+            },
+            rate: { kind: "parameter", unit: "multiplier", name: "rate" },
+          },
+          { kind: "parameter", unit: "attack-points", name: "cap" },
+        ],
+      },
+    },
+    maximumLayers: 1,
+  },
+  additionalRules: [
+    {
+      effectId: "agent:1621:nanoka:initial-energy-regen-conversion:impact",
+      identity: { kind: "agent", entityId: "1621" },
+      section: "核心被动：热夜初拥（初始能量自动回复转化 · 冲击力）",
+      config: { kind: "constant", value: true },
+      parameters: {
+        threshold: { kind: "constant", unit: "energy-per-second", value: -1.2 },
+        rate: { kind: "constant", unit: "multiplier", value: 40 },
+        cap: coreImpactPoints([40, 46, 52, 58, 64, 70, 76.8]),
+      },
+      scope: "entity",
+      when: { kind: "constant", value: true },
+      operation: {
+        kind: "stat-adjustment",
+        stat: "impact",
+        stage: "final-fixed",
+        value: {
+          kind: "minimum",
+          unit: "impact-points",
+          operands: [
+            {
+              kind: "convert",
+              unit: "impact-points",
+              input: {
+                kind: "maximum",
+                unit: "energy-per-second",
+                operands: [
+                  literal("energy-per-second", 0),
+                  {
+                    kind: "add",
+                    unit: "energy-per-second",
+                    operands: [
+                      {
+                        kind: "input",
+                        unit: "energy-per-second",
+                        name: ROXY_INPUT,
+                      },
+                      {
+                        kind: "parameter",
+                        unit: "energy-per-second",
+                        name: "threshold",
+                      },
+                    ],
+                  },
+                ],
+              },
+              rate: { kind: "parameter", unit: "multiplier", name: "rate" },
+            },
+            { kind: "parameter", unit: "impact-points", name: "cap" },
+          ],
+        },
+      },
+      maximumLayers: 1,
+    },
+  ],
+  variant: {
+    configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+    inputs: [
+      {
+        name: ROXY_INPUT,
+        unit: "energy-per-second",
+        description:
+          "initial energyRegen，洛克茜的初始能量自动回复（energy-per-second，显式手工读数，必填且无默认值；是初始值，不含局内回能增益，不用当前回能或音擎面板回能代替）；超过 1.2 的部分每 0.01 攻击力 +5、冲击力 +0.4，按核心档分别封顶（攻击 480—960、冲击 40—76.8 点），低于等于 1.2 贡献 0，越界按表达式钳制，非整 0.01 按连续表达式不自行取整",
+      },
+    ],
+    applicability: {},
+    conditionDescription:
+      "初始能量自动回复大于 1.2 时，超过部分每 0.01 攻击力提升 5 点、冲击力提升 0.4 点，按核心 1—7 分别封顶（攻击 480/560/640/720/800/880/960 点，冲击 40/46/52/58/64/70/76.8 点）；初始能量自动回复由调用方显式输入（必填、无默认值），两项同时生效或同时关闭，是同一完整状态。本选项只覆盖该句条款，不包含同段其他机制。",
+    name: "核心被动 · 初始能量自动回复转化",
+    target: "self",
+  },
+}
+
+/**
+ * 绯月银棺（PR07，批次 07）：固定 ZZZ-HP 增益 JSON 没有该音擎（全文无
+ * 绯月/Crimson Moon Casket），按补充实体登记真实 w-engine 14162（击破，
+ * weaponType {2:击破}）。本条是常驻暴击率：五档 24/26/28/30/32%，持有者
+ * 收益；与风抗忽视、触发增伤相互独立选择。
+ */
+const crimsonMoonCasketCritRate: Supplement = {
+  kind: "entity",
+  supplementId: "nanoka:w-engines:14162:crit-rate",
+  source: "nanoka-integrated@3.2 w-engines/14162 /talents/1—5/desc",
+  optionId: "nanoka:w-engines:14162:crit-rate",
+  supportedRanks: "精炼 1—5",
+  computationTarget: "catalog entity + option",
+  evidence: wengineTalentEvidence(
+    "14162",
+    "bc7c46871ff259a1c249fe62493ff69d22aa279273e084efcb0783bc4f48a456",
+  ),
+  verification:
+    "Nanoka 五档天赋（w-engines/14162/details.zh.json 的 /talents/1—5/desc，英文文件同文核对）逐档确认：装备者暴击率提升 24/26/28/30/32%（按精炼 1—5）。固定 ZZZ-HP 增益 JSON 没有绯月银棺实体，按补充来源创建目录实体（真实 w-engine 14162/击破，weaponType {2:击破} 沿 details 官方枚举核验；职业门槛由目录消费端按装备者职业执行，音擎不限仅洛克茜装备）。暴击率是持有者常驻收益：按既有音擎暴击率契约（青溟笼舍 legacy-self-critRate 同构）进入 criticalRate 的 direct，受益对象是装备者本人，不是全队，也不由任何触发状态开启；不凭此条款赋予属性异常伤害暴击能力（异常暴击是独立通道）。与同实体的风抗忽视、触发增伤选项相互独立，各自分别选择。",
+  entity: {
+    catalogEntityId: "nanoka:w-engines:14162",
+    upstreamId: null,
+    name: "绯月银棺",
+    identity: { kind: "w-engine", entityId: "14162" },
+    status: "mapped",
+    profession: "击破",
+    element: null,
+    supplementProvenance: {
+      sourceId: "nanoka-integrated",
+      version: "3.2",
+      resources: [
+        {
+          path: "w-engines/14162/details.zh.json",
+          sha256:
+            "bc7c46871ff259a1c249fe62493ff69d22aa279273e084efcb0783bc4f48a456",
+        },
+        {
+          path: "w-engines/14162/data.json",
+          sha256:
+            "1a9e005ff93a9479c72da50e19f58b46bf411cc814e08bdd37cbd7681df4e1d1",
+        },
+      ],
+    },
+  },
+  rule: {
+    effectId: "w-engine:14162:nanoka:crit-rate",
+    identity: { kind: "w-engine", entityId: "14162" },
+    section: "绯月银棺：暴击率",
+    config: { kind: "constant", value: true },
+    parameters: {
+      amount: {
+        kind: "by-rank",
+        rank: "refinement",
+        unit: "ratio",
+        values: { 1: 0.24, 2: 0.26, 3: 0.28, 4: 0.3, 5: 0.32 },
+      },
+    },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: {
+      kind: "stat-adjustment",
+      stat: "criticalRate",
+      stage: "direct",
+      value: { kind: "parameter", unit: "ratio", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "装备者暴击率提升 24/26/28/30/32%（按精炼 1—5）；持有者常驻收益，由调用方选中本选项断言装备生效，不依赖任何触发状态。与风抗忽视、触发增伤相互独立。",
+    name: "绯月银棺 · critRate",
+    target: "self",
+  },
+}
+
+/**
+ * 绯月银棺（PR07，批次 07）第二条：造成的伤害无视目标 15/17.3/19.5/21.8/24%
+ * 风属性伤害抗性。持有者造成的风伤收益，attacker-resistance-ignore 通道；
+ * 常驻条款，不附加“EX 造成风伤”触发条件，也不无依据加直伤限制（风抗只
+ * 对风伤生效，按命中元素筛选，全伤害种类沿用现有抗性区契约）。
+ */
+const crimsonMoonCasketWindResIgnore: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:w-engines:14162:wind-resistance-ignore",
+  source: "nanoka-integrated@3.2 w-engines/14162 /talents/1—5/desc",
+  catalogEntityId: "nanoka:w-engines:14162",
+  optionId: "nanoka:w-engines:14162:wind-resistance-ignore",
+  supportedRanks: "精炼 1—5",
+  computationTarget: "catalog option on the supplement entity",
+  evidence: wengineTalentEvidence(
+    "14162",
+    "bc7c46871ff259a1c249fe62493ff69d22aa279273e084efcb0783bc4f48a456",
+  ),
+  verification:
+    "Nanoka 五档天赋（w-engines/14162/details.zh.json 的 /talents/1—5/desc，英文文件同文核对：DMG dealt ignores 15/17.3/19.5/21.8/24% of the target's Wind RES）逐档确认：装备者造成的伤害无视目标 15/17.3/19.5/21.8/24% 风属性伤害抗性（按精炼 1—5）。在绯月银棺补充实体（nanoka:w-engines:14162）上新增选项。这是持有者造成的风伤收益：按既有抗穿通道进入 attacker-resistance-ignore，条件只按命中元素筛选（wind，与固定来源 agent:1021 物理 resPen 的元素级条件同构），受益对象是装备者本人，不是目标减抗、不是全队穿抗。风抗忽视只对风属性伤害有意义，因此按 hit.element 筛选即可表达完整范围：普通直伤、贯穿、锐化、异常、紊乱、乱流、耀变等全部风伤种类沿用现有抗性区契约，不无依据加直伤限制；同句“装备者发动[强化特殊技]造成风属性伤害”是第三条触发增伤的取得条件，不是本常驻条款的触发，不附加到本选项。与暴击率、触发增伤选项相互独立。",
+  rule: {
+    effectId: "w-engine:14162:nanoka:wind-resistance-ignore",
+    identity: { kind: "w-engine", entityId: "14162" },
+    section: "绯月银棺：风属性伤害抗性无视",
+    config: { kind: "constant", value: true },
+    parameters: {
+      amount: {
+        kind: "by-rank",
+        rank: "refinement",
+        unit: "ratio",
+        values: { 1: 0.15, 2: 0.173, 3: 0.195, 4: 0.218, 5: 0.24 },
+      },
+    },
+    scope: "hit",
+    when: {
+      kind: "one-of",
+      fact: "hit.element",
+      values: ["wind"],
+    },
+    operation: {
+      kind: "factor-contribution",
+      channel: "attacker-resistance-ignore",
+      value: { kind: "parameter", unit: "ratio", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "装备者造成的伤害无视目标 15/17.3/19.5/21.8/24% 风属性伤害抗性（按精炼 1—5）；持有者的风属性伤害收益（按命中元素筛选，覆盖现有抗性区契约支持的全部风伤种类），常驻条款，不依赖强化特殊技触发。与暴击率、触发增伤相互独立。",
+    name: "绯月银棺 · resPen",
+    target: "self",
+  },
+}
+
+/**
+ * 绯月银棺（PR07，批次 07）第三条：装备者发动[强化特殊技]造成风属性伤害时，
+ * 全队其他角色造成的伤害提升 20/23/26/29/32%，持续 50 秒、重复触发刷新，
+ * 伤害提升效果全队唯一。EX+风是取得该状态的条件，由调用方启用选择显式
+ * 断言，不当作其他队友当前伤害的元素/技能受益筛选；受益者是同队其他实体
+ * （holder 排除、异队排除）；50 秒与刷新不模拟。全队唯一按目录选择阶段的
+ * 窄跨绑定约束（squadUniqueEffect）强制：同队最多一个启用来源，调用方声明
+ * 单一有效来源，不猜 highest-value 或时间覆盖；引擎层 per-beneficiary
+ * uniqueness 分组不能表达该约束（两名持有者互相受益时受益集合不重叠），
+ * 不声称由数值引擎强制。同句的失衡值提升（16—25.6%）不做最终失衡输出，
+ * 覆盖登记留批次 10。
+ */
+const crimsonMoonCasketSquadDamageBonus: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:w-engines:14162:squad-damage-bonus",
+  source: "nanoka-integrated@3.2 w-engines/14162 /talents/1—5/desc",
+  catalogEntityId: "nanoka:w-engines:14162",
+  optionId: "nanoka:w-engines:14162:squad-damage-bonus",
+  supportedRanks: "精炼 1—5",
+  computationTarget: "catalog option on the supplement entity",
+  evidence: wengineTalentEvidence(
+    "14162",
+    "bc7c46871ff259a1c249fe62493ff69d22aa279273e084efcb0783bc4f48a456",
+  ),
+  verification:
+    "Nanoka 五档天赋（w-engines/14162/details.zh.json 的 /talents/1—5/desc，英文文件同文核对：DMG dealt by all other squad members increases by 20/23/26/29/32%, for 50s. Repeated triggers reset the duration. Only one instance of the DMG increase effect can exist in the same squad）逐档确认：装备者发动[强化特殊技]造成风属性伤害时，全队其他角色造成的伤害提升 20/23/26/29/32%（按精炼 1—5），持续 50 秒，重复触发时刷新持续时间，伤害提升效果全队唯一。在绯月银棺补充实体上新增选项。触发后的增伤仅同队其他实体：规则受益者是 team-except-holder（持有者本人排除、异队排除）；“EX 造成风伤”只是取得该状态的条件，由调用方启用本选项（layers 1）显式断言已触发，不作为其他队友当前伤害的元素或技能受益筛选（增伤作用于受益者的全部伤害种类，与聚宝箱 team dmgBonus 同构）；50 秒持续与重复触发刷新不模拟时间线。“伤害提升效果全队唯一”按目录选择阶段的窄跨绑定约束实现：变体声明 squadUniqueEffect，同一队伍内该选项最多一个启用来源（layers > 0），第二个启用选择返回 CONTEXT_MISMATCH，要求调用方声明单一有效来源（只在一名持有者的绑定上启用），不猜 highest-value 或时间覆盖；0 层关闭与职业不适配的零贡献绑定不占用队伍名额。不能用绑定内 exclusiveGroup 替代（它只按 bindingId 分组），也不能依赖规则级 uniqueness（evaluate.ts 按 key+team+beneficiary+address 分组，两名持有者各受对方增益时受益集合不重叠，无法表达整队唯一），引擎层数值不变。两名持有者各持一份绯月银棺且都触发时，游戏内仅一个实例生效、排除哪名持有者由来源文本未证明，本契约要求调用方按实际单一有效来源声明。同句的失衡值提升 16/18.4/20.8/23.2/25.6% 不做最终失衡输出，覆盖登记留批次 10；与暴击率、风抗忽视两项常驻条款相互独立，团队状态关闭时常驻条款仍可用。",
+  rule: {
+    effectId: "w-engine:14162:nanoka:squad-damage-bonus",
+    identity: { kind: "w-engine", entityId: "14162" },
+    section: "绯月银棺：全队增伤（触发状态）",
+    config: { kind: "constant", value: true },
+    parameters: {
+      amount: {
+        kind: "by-rank",
+        rank: "refinement",
+        unit: "ratio",
+        values: { 1: 0.2, 2: 0.23, 3: 0.26, 4: 0.29, 5: 0.32 },
+      },
+    },
+    scope: "hit",
+    when: { kind: "constant", value: true },
+    operation: {
+      kind: "factor-contribution",
+      channel: "damage-bonus",
+      value: { kind: "parameter", unit: "ratio", name: "amount" },
+    },
+    maximumLayers: 1,
+    beneficiary: { kind: "team-except-holder" },
+  },
+  variant: {
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    inputs: [],
+    applicability: {},
+    squadUniqueEffect: true,
+    conditionDescription:
+      "装备者发动[强化特殊技]造成风属性伤害时，全队其他角色造成的伤害提升 20/23/26/29/32%（按精炼 1—5），持续 50 秒，重复触发刷新持续时间；触发事实由调用方启用本选项断言，50 秒与刷新不模拟。受益者是持有者同队其他角色（本人与异队不受益），增伤不按元素或技能筛选受益者的伤害。伤害提升效果全队唯一：同一队伍最多一个启用来源，须声明单一有效来源（只在一名持有者的绑定上启用）；失衡值提升条款不在本选项。与暴击率、风抗忽视相互独立。",
+    name: "绯月银棺 · teamDmgBonus",
+    target: "team",
+  },
+}
+
 export const SUPPLEMENTS: readonly Supplement[] = [
   nekomataOrdinaryDmgBonus,
   nekomataOrdinaryShow,
@@ -2522,4 +2934,8 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   dialynInitialCritRateImpact,
   lighterMindscape4FrontlineEnergyRegen,
   alexandrinaMindscape4DeployedDollsEnergyRegen,
+  roxyInitialEnergyRegenConversion,
+  crimsonMoonCasketCritRate,
+  crimsonMoonCasketWindResIgnore,
+  crimsonMoonCasketSquadDamageBonus,
 ]

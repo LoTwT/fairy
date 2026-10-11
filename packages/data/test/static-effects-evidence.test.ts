@@ -57,6 +57,12 @@ describe("static effects evidence path", () => {
       "nanoka:agents:dialyn:initial-crit-rate-impact",
       "nanoka:agents:lighter:mindscape-4-frontline-energy-regen",
       "nanoka:agents:alexandrina:mindscape-4-deployed-dolls-energy-regen",
+      // 批次 07：洛克茜初始回能转化（被动行 rank 与 data.json level 元数据
+      // 的映射）与绯月银棺三条（五档天赋逐档 Pointer）。
+      "nanoka:agents:1621:initial-energy-regen-conversion",
+      "nanoka:w-engines:14162:crit-rate",
+      "nanoka:w-engines:14162:wind-resistance-ignore",
+      "nanoka:w-engines:14162:squad-damage-bonus",
     ])
       expect(verified).toContain(`supplement:${supplementId}`)
   })

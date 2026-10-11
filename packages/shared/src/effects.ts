@@ -865,6 +865,18 @@ export interface StaticCatalogVariant {
    * 引擎，也不从命中身份推断前后场。
    */
   readonly declaredTeammateBeneficiary?: true
+  /**
+   * 全队唯一效果声明：该变体表示的效果（如绯月银棺的“伤害提升效果全队
+   * 唯一”）在同一队伍中最多存在一个有效来源实例。目录选择阶段按
+   * （持有者队伍， optionId）跨绑定强制：同队第二个启用（layers > 0）的
+   * 选择返回 CONTEXT_MISMATCH，要求调用方声明单一有效来源（只在一名
+   * 有效持有者的绑定上启用），不猜 highest-value 或时间覆盖，也不模拟
+   * 时间线；0 层关闭沿既有关闭语义，不占用队伍名额，职业不适配等既有
+   * 零贡献绑定同样不占用。字段只接受字面量 true。引擎层不新增约束：规则
+   * 级 uniqueness 按 beneficiary 分组，两名持有者互相受益时受益集合不
+   * 重叠，不能表达跨来源整队唯一，不得宣称已由数值引擎强制。
+   */
+  readonly squadUniqueEffect?: true
   readonly applicability: StaticCatalogApplicability
   readonly differences: readonly string[]
   /** 只登记已有 core 耀变精通换算；不开放任意参数路径。 */
