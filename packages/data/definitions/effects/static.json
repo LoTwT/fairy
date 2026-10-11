@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "17",
+  "revision": "18",
   "effects": [
     {
       "kind": "contribution",
@@ -1176,6 +1176,94 @@
       "operation": {
         "kind": "factor-contribution",
         "channel": "attacker-resistance-ignore",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1031:nanoka:mindscape-1-ex-damage:mindscape:1",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1031"
+        },
+        "section": "影画1",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1031/details.zh.json",
+            "pointer": "/talent/1/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.16
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular", "sheer", "sharpen"]
+          },
+          {
+            "kind": "all",
+            "conditions": [
+              {
+                "kind": "one-of",
+                "fact": "hit.skillTag",
+                "values": ["zzz-hp:category:special"]
+              },
+              {
+                "kind": "one-of",
+                "fact": "hit.skillTag",
+                "values": ["zzz-hp:skill:all-special-ms0fcqv7"]
+              }
+            ]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "damage-bonus",
         "value": {
           "kind": "parameter",
           "unit": "ratio",
@@ -4276,6 +4364,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/31/mindscapeBuffs/4/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1081/details.zh.json",
+            "pointer": "/talent/4/desc"
           }
         ]
       },
@@ -4294,19 +4389,13 @@
           "value": 4
         }
       },
-      "parameters": {
-        "amount": {
-          "kind": "constant",
-          "unit": "ratio",
-          "value": 0.01
-        }
-      },
+      "parameters": {},
       "activation": {
         "kind": "supplied",
         "maximumLayers": {
           "kind": "literal",
           "unit": "count",
-          "value": 32
+          "value": 1
         }
       },
       "scope": "hit",
@@ -4344,12 +4433,35 @@
         ]
       },
       "operation": {
-        "kind": "factor-contribution",
-        "channel": "damage-bonus",
+        "kind": "stat-adjustment",
+        "stat": "criticalRate",
+        "stage": "direct",
         "value": {
-          "kind": "parameter",
+          "kind": "minimum",
           "unit": "ratio",
-          "name": "amount"
+          "operands": [
+            {
+              "kind": "maximum",
+              "unit": "ratio",
+              "operands": [
+                {
+                  "kind": "literal",
+                  "unit": "ratio",
+                  "value": 0
+                },
+                {
+                  "kind": "input",
+                  "unit": "ratio",
+                  "name": "agent:1081:zzz-hp:eff-ms4ebxf4-pk138x:blk-ms4ebxf4-o288xu:mindscape:4:source"
+                }
+              ]
+            },
+            {
+              "kind": "literal",
+              "unit": "ratio",
+              "value": 0.32
+            }
+          ]
         }
       }
     },
@@ -5260,6 +5372,84 @@
                 ]
               }
             ]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "damage-bonus",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1101:nanoka:enhanced-basic-second-per-layer:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1101"
+        },
+        "section": "普通攻击：砸扁，粉碎（潜能分支：强化普攻二段）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1101/details.zh.json",
+            "pointer": "/skill/basic/description/1/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "potentialLevel"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.1
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 2
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular", "sheer", "sharpen"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:koleda-enhanced-basic-second"]
           }
         ]
       },
@@ -15931,6 +16121,125 @@
           "kind": "parameter",
           "unit": "ratio",
           "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1251:nanoka:flash-voltage-consumed-damage:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1251"
+        },
+        "section": "普通攻击：醉花月云转（闪络电压消耗）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1251/details.zh.json",
+            "pointer": "/skill/basic/description/2/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "threshold": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": -0.75
+        },
+        "rate": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 1
+        },
+        "cap": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.25
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular", "sheer", "sharpen"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:qingyi-basic-ms4bcr00"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "damage-bonus",
+        "value": {
+          "kind": "minimum",
+          "unit": "ratio",
+          "operands": [
+            {
+              "kind": "convert",
+              "unit": "ratio",
+              "input": {
+                "kind": "maximum",
+                "unit": "ratio",
+                "operands": [
+                  {
+                    "kind": "literal",
+                    "unit": "ratio",
+                    "value": 0
+                  },
+                  {
+                    "kind": "add",
+                    "unit": "ratio",
+                    "operands": [
+                      {
+                        "kind": "input",
+                        "unit": "ratio",
+                        "name": "agent:1251:nanoka:flash-voltage-consumed-damage:mindscape:0:source"
+                      },
+                      {
+                        "kind": "parameter",
+                        "unit": "ratio",
+                        "name": "threshold"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "rate": {
+                "kind": "parameter",
+                "unit": "multiplier",
+                "name": "rate"
+              }
+            },
+            {
+              "kind": "parameter",
+              "unit": "ratio",
+              "name": "cap"
+            }
+          ]
         }
       }
     },
@@ -52712,6 +53021,13 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/driveDiscs/16/fourPieceBuffs/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "drive-discs/33600/details.zh.json",
+            "pointer": "/desc4"
           }
         ]
       },
@@ -52751,13 +53067,7 @@
       },
       "when": {
         "kind": "all",
-        "conditions": [
-          {
-            "kind": "one-of",
-            "fact": "hit.targetState",
-            "values": ["stunned"]
-          }
-        ]
+        "conditions": []
       },
       "operation": {
         "kind": "factor-contribution",

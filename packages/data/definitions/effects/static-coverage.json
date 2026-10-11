@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "17",
+  "revision": "18",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -11793,7 +11793,7 @@
       "effectIds": [
         "agent:1081:zzz-hp:eff-ms4ebxf4-pk138x:blk-ms4ebxf4-o288xu:mindscape:4"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -18930,7 +18930,7 @@
       "effectIds": [
         "disc:33600:zzz-hp:legacy-self-dmgBonus:blk-legacy:setPieces:4"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 25,
       "normalizedValue": 25
@@ -30443,6 +30443,40 @@
       "supportedRanks": "refinement 1—5",
       "computationTarget": "catalog option on the mapped w-engine entity",
       "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:nicole:mindscape-1-ex-damage",
+      "source": "nanoka-integrated@3.2 agents/1031 /talent/1/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:nicole:mindscape-1-ex-damage",
+      "effectIds": ["agent:1031:nanoka:mindscape-1-ex-damage:mindscape:1"],
+      "supportedRanks": "影画 1 及以上",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:qingyi:flash-voltage-consumed-damage",
+      "source": "nanoka-integrated@3.2 agents/1251 /skill/basic/description/2/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:qingyi:flash-voltage-consumed-damage",
+      "effectIds": [
+        "agent:1251:nanoka:flash-voltage-consumed-damage:mindscape:0"
+      ],
+      "supportedRanks": "无培养门槛；消耗电压 0—100%（比例 0—1）",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:koleda:enhanced-basic-second-per-layer",
+      "source": "nanoka-integrated@3.2 agents/1101 /skill/basic/description/1/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:koleda:enhanced-basic-second-per-layer",
+      "effectIds": [
+        "agent:1101:nanoka:enhanced-basic-second-per-layer:mindscape:0"
+      ],
+      "supportedRanks": "潜能 1—6；消耗层数 0—2",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
     }
   ],
   "summary": {
@@ -30450,17 +30484,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 857,
-    "options": 852,
-    "converted": 1153,
-    "corrected": 131,
+    "rules": 860,
+    "options": 855,
+    "converted": 1151,
+    "corrected": 133,
     "unsupported": 6,
     "supplements": {
-      "records": 27,
-      "rules": 24,
-      "options": 19,
+      "records": 30,
+      "rules": 27,
+      "options": 22,
       "entities": 1,
-      "integrated": 24,
+      "integrated": 27,
       "outOfScope": 3
     }
   },

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "17",
+  "revision": "18",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -4888,7 +4888,7 @@
     {
       "optionId": "agents:billy:mindscape:4:blk-ms4ebxf4-o288xu:eff-ms4ebxf4-pk138x",
       "catalogEntityId": "agents:billy",
-      "name": "影画4 · skillDmgBonus",
+      "name": "影画4 · criticalRate",
       "conditionDescription": "[强化特殊技]命中敌人时，招式的暴击率随自身与目标之间的距离而提升；比利与目标距离越近，提升效果越显著，最高提升32%。",
       "target": "self",
       "variants": [
@@ -4896,7 +4896,7 @@
           "configuration": {
             "minimumMindscape": 4
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -4904,14 +4904,27 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/31/mindscapeBuffs/4/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1081/details.zh.json",
+              "pointer": "/talent/4/desc"
             }
           ],
           "effectIds": [
             "agent:1081:zzz-hp:eff-ms4ebxf4-pk138x:blk-ms4ebxf4-o288xu:mindscape:4"
           ],
-          "maximumLayers": 32,
-          "inputs": [],
-          "differences": [],
+          "maximumLayers": 1,
+          "inputs": [
+            {
+              "name": "agent:1081:zzz-hp:eff-ms4ebxf4-pk138x:blk-ms4ebxf4-o288xu:mindscape:4:source",
+              "unit": "ratio",
+              "description": "manual ratio，本次[强化特殊技]命中按自身与目标距离获得的暴击率提升（0—0.32，距离越近越显著）；由调用方按实际距离显式输入，不使用默认值，不推导距离函数，越界读数按表达式钳制"
+            }
+          ],
+          "differences": ["billy-mindscape4-hit-scope-critical-rate"],
           "applicability": {}
         }
       ]
@@ -24655,7 +24668,7 @@
           "configuration": {
             "minimumSetPieces": 4
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -24663,6 +24676,13 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/driveDiscs/16/fourPieceBuffs/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "drive-discs/33600/details.zh.json",
+              "pointer": "/desc4"
             }
           ],
           "effectIds": [
@@ -24670,7 +24690,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["shining-aria-stagger-entry-triggered-state"],
           "applicability": {}
         }
       ]
@@ -45748,6 +45768,104 @@
           "differences": []
         }
       ]
+    },
+    {
+      "optionId": "nanoka:agents:nicole:mindscape-1-ex-damage",
+      "catalogEntityId": "agents:nicole",
+      "name": "影画1 · dmgBonus",
+      "conditionDescription": "[强化特殊技]造成的伤害提升16%（影画1及以上）；作用于妮可本人的强化特殊技直伤（蓄力、炮击、能量场），普通特殊技、其他招式与队友不受益。同句的异常积蓄提升与能量场持续时间延长不在伤害计算范围。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 1
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1031/details.zh.json",
+              "pointer": "/talent/1/desc"
+            }
+          ],
+          "effectIds": ["agent:1031:nanoka:mindscape-1-ex-damage:mindscape:1"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:qingyi:flash-voltage-consumed-damage",
+      "catalogEntityId": "agents:qingyi",
+      "name": "闪络电压消耗 · dmgBonus",
+      "conditionDescription": "本次[普通攻击：醉花月云转]消耗的[闪络电压]中超过 75% 的部分，每 1% 使本次招式造成的伤害提升 1%（失衡值 +0.5% 不在伤害计算范围）。选择本选项并输入本次消耗比例；受益范围是突进与终结一击两段醉花月云转直伤。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {},
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1251/details.zh.json",
+              "pointer": "/skill/basic/description/2/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1251:nanoka:flash-voltage-consumed-damage:mindscape:0"
+          ],
+          "maximumLayers": 1,
+          "inputs": [
+            {
+              "name": "agent:1251:nanoka:flash-voltage-consumed-damage:mindscape:0:source",
+              "unit": "ratio",
+              "description": "manual ratio，本次[普通攻击：醉花月云转]实际消耗的[闪络电压]比例（0—1）；是本次招式消耗的所有电压，不是施放后剩余电压。超过 75% 的部分每 1% 使本次招式伤害 +1%（75% → 0、80% → +5%、100% → +25%），越界读数按表达式钳制，不使用默认值，不模拟积攒/消耗"
+            }
+          ],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:koleda:enhanced-basic-second-per-layer",
+      "catalogEntityId": "agents:koleda",
+      "name": "强化普攻二段 · dmgBonus",
+      "conditionDescription": "潜能分支：本次强化[普通攻击]消耗的每层[熔炉升温]使第二段强化普攻造成的伤害提升 10%（最多 2 层，按本次实际消耗选择 0/1/2 层）。只作用于第二段强化普攻（含协同版本）；消耗触发的全队伤害 +35%（持续 40 秒）是独立选项，不与本次层数绑定。失衡值 +20% 不在伤害计算范围。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "potentialLevels": [1, 2, 3, 4, 5, 6]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1101/details.zh.json",
+              "pointer": "/skill/basic/description/1/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1101:nanoka:enhanced-basic-second-per-layer:mindscape:0"
+          ],
+          "maximumLayers": 2,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
     }
   ],
   "skillTargets": [
@@ -46125,6 +46243,14 @@
       "agentEntityId": "1291",
       "category": "special",
       "name": "强化特殊技：魂狩·惩戒",
+      "countsAsFollowUp": false
+    },
+    {
+      "targetId": "zzz-hp:skill:koleda-enhanced-basic-second",
+      "upstreamId": null,
+      "agentEntityId": "1101",
+      "category": "basic",
+      "name": "强化普攻第二段",
       "countsAsFollowUp": false
     },
     {
@@ -49492,6 +49618,46 @@
           "locale": "zh",
           "resourcePath": "w-engines/13021/details.zh.json",
           "pointer": "/talents/5/desc"
+        }
+      ]
+    },
+    {
+      "differenceId": "billy-mindscape4-hit-scope-critical-rate",
+      "explanation": "比利（1081）影画 4 的块 note 与 Nanoka 天赋 4（agents/1081/details.zh.json 的 /talent/4/desc）同文：「[强化特殊技]命中敌人时，招式的暴击率随自身与目标之间的距离而提升；距离越近效果越显著，最高提升32%」。固定来源 fac62407 把该条款编码为 stacked skillDmgBonus（32 层 × 1%、defaultStacks 32），既把它放进通用增伤乘区、又用 32 个离散层表达连续距离。Fairy 按具名登记修正为 hit 作用域的 criticalRate direct 贡献（复用浅羽悠真命中局部暴击率的既有落点）：数值由调用方按本次命中的实际距离显式输入（比例 0—0.32，越界读数按表达式钳制），不推导距离函数、不设默认值，激活层数上限 1 并废除来源层数编码——旧的 32 层用法在目录层按层数上限拒绝，不静默重新解释；effectId、optionId、M4 门槛与强化特殊技（all-special-ms0fcqv7）+直伤种类的命中条件保持不变，仅比利本人命中获得，不改全局面板暴击率。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/31/mindscapeBuffs/4/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1081/details.zh.json",
+          "pointer": "/talent/4/desc"
+        }
+      ]
+    },
+    {
+      "differenceId": "shining-aria-stagger-entry-triggered-state",
+      "explanation": "流光咏叹（33600）四件套后一条款「当场上有敌人进入失衡状态时，装备者造成的伤害提升25%，持续18秒，重复触发时刷新持续时间」（块 note 与 Nanoka /desc4 同文）在固定来源 fac62407 中被编码为 applySituation: stagger，固定版 effectMatchesContext 据此要求目标当前处于失衡。进入失衡只是触发事实：该增益是持续 18 秒的状态，期间目标是否失衡不影响受益。Fairy 移除派生的 hit.targetState 条件，状态是否仍有效由调用方显式选择 supplied 实例声明——当前目标未失衡但声明状态有效仍 +25%，当前目标处于失衡但未声明状态不自动获得；触发、18 秒持续与刷新不模拟时间线。四件门槛、自身受益与独立的普攻命中 +36 异常精通/8 秒条款保持独立开关，数值与稳定 ID 不变。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/driveDiscs/16/fourPieceBuffs/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "drive-discs/33600/details.zh.json",
+          "pointer": "/desc4"
         }
       ]
     }

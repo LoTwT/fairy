@@ -160,7 +160,7 @@ describe("static data conversion", () => {
       ],
     }
     const result = convertSource(source, functions, [], [])
-    expect(result.definitions.revision).toBe("17")
+    expect(result.definitions.revision).toBe("18")
     for (const option of result.catalog.options) {
       const variant = option.variants[0]!
       const sameBlock = option.optionId.endsWith("unverified-same-block")
@@ -453,7 +453,7 @@ const angelData = (): SourceData => ({
 describe("developer stat revision", () => {
   it("maps the four registered records through the anomaly bonus channel", () => {
     const result = convertSource(angelData(), functions, [], [])
-    expect(result.definitions.revision).toBe("17")
+    expect(result.definitions.revision).toBe("18")
     const option = result.catalog.options.find(
       (o) =>
         o.optionId ===
@@ -745,7 +745,7 @@ const remielData = (): SourceData => ({
 describe("remielle mindscape 2 attribute anomaly scope revision", () => {
   it("adds the [异常] profession and attribute anomaly damage scope from the reviewed text", () => {
     const result = convertSource(remielData(), functions, [], [])
-    expect(result.definitions.revision).toBe("17")
+    expect(result.definitions.revision).toBe("18")
     const option = result.catalog.options.find((o) =>
       o.optionId.includes("eff-ms7tlurw-vhelyf"),
     )!
@@ -895,7 +895,7 @@ describe("remielle mindscape 1 complete anomaly state", () => {
     "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
   it("merges the team and holder records into one corrected complete option", () => {
     const result = convertSource(remielMindscape1Data(), functions, [], [])
-    expect(result.definitions.revision).toBe("17")
+    expect(result.definitions.revision).toBe("18")
     const option = result.catalog.options.find((o) => o.optionId === optionId)!
     expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
     expect(option.conditionDescription).toBe(
@@ -1128,7 +1128,7 @@ const qingmingData = (): SourceData => ({
 describe("qingming birdcage pierce stack correction", () => {
   it("compiles the registered fixed encodings as per-layer contributions with a two-layer cap", () => {
     const result = convertSource(qingmingData(), functions, [], [])
-    expect(result.definitions.revision).toBe("17")
+    expect(result.definitions.revision).toBe("18")
     for (const [index, effectId] of qingmingPierceIds.entries()) {
       const option = result.catalog.options.find((o) =>
         o.optionId.includes(effectId),
@@ -2510,5 +2510,541 @@ describe("w-engine missing passive supplements (batch 02)", () => {
     expect(() =>
       convertSource(batch02WengineData(), functions, [], batch02Supplements),
     ).not.toThrow()
+  })
+})
+
+/**
+ * 增益修复批次 03（修订 18）的合成转换回归：C02 比利影画 4 改为命中局部
+ * 暴击率显式输入、C13 流光咏叹四件套移除“目标当前失衡”受益条件，以及
+ * M01 妮可影画 1、M17 青衣闪络电压、M18 珂蕾妲强化普攻二段三条代理人补充。
+ * 防漂移守卫与定向重复补充防护按登记拒绝，不静默套用另一份含义。
+ */
+const batch03BillyEffect: SourceEffect = {
+  id: "eff-ms4ebxf4-pk138x",
+  origin: "",
+  scope: "skill",
+  applyTarget: "self",
+  applySituation: "global",
+  applyProfession: null,
+  teamProfession: null,
+  teamProfessionValues: null,
+  teamProfessionMinCount: null,
+  skillCategory: "special",
+  skillSubcategoryId: "all-special-ms0fcqv7",
+  skillTargets: [
+    { category: "special", subcategoryId: "all-special-ms0fcqv7" },
+  ],
+  elementFilter: "all",
+  kind: "stacked",
+  stat: "skillDmgBonus",
+  value: 0,
+  stackable: false,
+  maxStacks: 32,
+  valuePerStack: 1,
+  defaultStacks: 32,
+  enabledDefault: true,
+  note: "",
+}
+
+const batch03BaseEffect: SourceEffect = {
+  id: "legacy-self-dmgBonus",
+  origin: "",
+  scope: "general",
+  applyTarget: "self",
+  applySituation: "stagger",
+  applyProfession: null,
+  teamProfession: null,
+  teamProfessionValues: null,
+  teamProfessionMinCount: null,
+  skillSubcategoryId: null,
+  elementFilter: "all",
+  kind: "fixed",
+  stat: "dmgBonus",
+  value: 25,
+  stackable: false,
+  maxStacks: 1,
+  valuePerStack: 0,
+  defaultStacks: 1,
+  enabledDefault: true,
+  note: "",
+}
+
+/** C13 的冻结记录形态：额外带 appliesToAnomaly: true。 */
+const batch03AriaDamageEffect: SourceEffect = {
+  ...batch03BaseEffect,
+  appliesToAnomaly: true,
+}
+
+const batch03AgentEntity = (
+  id: string,
+  name: string,
+  mindscapeBlocks: Readonly<Record<number, SourceBlock4Test>> = {},
+): SourceEntity => ({
+  id,
+  name,
+  mindscapeBuffs: Array.from(
+    { length: 7 },
+    (_, rank): SourcePack =>
+      rank in mindscapeBlocks
+        ? {
+            effectBlocks: [
+              {
+                id: mindscapeBlocks[rank]!.id,
+                name: `影画${rank}`,
+                note: mindscapeBlocks[rank]!.note,
+                effects: [...mindscapeBlocks[rank]!.effects],
+              },
+            ],
+          }
+        : {},
+  ),
+})
+
+interface SourceBlock4Test {
+  id: string
+  note: string
+  effects: readonly SourceEffect[]
+}
+
+const batch03Data = (
+  overrides: {
+    billyEffect?: Partial<SourceEffect>
+    ariaDamageEffect?: Partial<SourceEffect>
+    extraAgentRecords?: Readonly<Record<string, SourceEffect[]>>
+    skillSubcategories?: SourceData["skillSubcategories"]
+  } = {},
+): SourceData => ({
+  agents: [
+    batch03AgentEntity("billy", "比利", {
+      4: {
+        id: "blk-ms4ebxf4-o288xu",
+        note: "[强化特殊技]命中敌人时，招式的暴击率随自身与目标之间的距离而提升；比利与目标距离越近，提升效果越显著，最高提升32%。",
+        effects: [{ ...batch03BillyEffect, ...overrides.billyEffect }],
+      },
+    }),
+    batch03AgentEntity("nicole", "妮可", {
+      6: {
+        id: "blk-legacy",
+        note: "能量场对敌人造成伤害时，所有单位对该目标的暴击率提升1.5%，最多叠加10层，持续12秒，每层效果单独结算持续时间。",
+        effects: [
+          {
+            ...batch03BaseEffect,
+            id: "legacy-team-critRate",
+            stat: "critRate",
+            value: 0,
+            kind: "stacked",
+            stackable: true,
+            maxStacks: 10,
+            valuePerStack: 1.5,
+            defaultStacks: 10,
+            applyTarget: "team",
+            applySituation: "global",
+          },
+        ],
+      },
+      ...(overrides.extraAgentRecords?.nicole
+        ? {
+            0: {
+              id: "blk-extra",
+              note: "",
+              effects: overrides.extraAgentRecords.nicole,
+            },
+          }
+        : {}),
+    }),
+    batch03AgentEntity("qingyi", "青衣", {
+      6: {
+        id: "blk-legacy",
+        note: "[普通攻击：醉花月云转]的打断等级大幅提升，招式的暴击伤害额外提升100%。",
+        effects: [
+          {
+            ...batch03BaseEffect,
+            id: "legacy-self-critDmg",
+            stat: "critDmg",
+            value: 100,
+            applySituation: "global",
+            scope: "skill",
+            skillCategory: "basic",
+            skillSubcategoryId: "qingyi-basic-ms4bcr00",
+            skillTargets: [
+              { category: "basic", subcategoryId: "qingyi-basic-ms4bcr00" },
+            ],
+          },
+        ],
+      },
+      ...(overrides.extraAgentRecords?.qingyi
+        ? {
+            0: {
+              id: "blk-extra",
+              note: "",
+              effects: overrides.extraAgentRecords.qingyi,
+            },
+          }
+        : {}),
+    }),
+    batch03AgentEntity("koleda", "珂蕾妲", {
+      0: {
+        id: "blk-mttou4li-pfihup",
+        note: "消耗[熔炉升温]发动强化普攻时获得，持续40s",
+        effects: [
+          {
+            ...batch03BaseEffect,
+            id: "eff-mttou4li-rea0ai",
+            stat: "dmgBonus",
+            value: 35,
+            applyTarget: "team",
+            applySituation: "global",
+          },
+        ],
+      },
+      ...(overrides.extraAgentRecords?.koleda
+        ? {
+            4: {
+              id: "blk-extra",
+              note: "",
+              effects: overrides.extraAgentRecords.koleda,
+            },
+          }
+        : {}),
+    }),
+  ],
+  driveDiscs: [
+    {
+      id: "SuitShiningAria",
+      name: "流光咏叹",
+      fourPieceBuffs: {
+        effectBlocks: [
+          {
+            id: "blk-legacy",
+            name: "4件套",
+            note: "装备者发动[普通攻击]命中敌人时，自身异常精通提升36点，持续8秒，重复触发时刷新持续时间；当场上有敌人进入失衡状态时，装备者造成的伤害提升25%，持续18秒，重复触发时刷新持续时间。",
+            effects: [
+              {
+                ...batch03BaseEffect,
+                id: "legacy-self-mastery",
+                stat: "mastery",
+                value: 36,
+                applySituation: "global",
+              },
+              { ...batch03AriaDamageEffect, ...overrides.ariaDamageEffect },
+            ],
+          },
+        ],
+      },
+    },
+  ],
+  skillSubcategories: overrides.skillSubcategories ?? [],
+  followUpSkillRules: [],
+  wengines: [],
+})
+
+const batch03Supplements = SUPPLEMENTS.filter(
+  (supplement) =>
+    supplement.kind === "option" &&
+    [
+      "nanoka:nicole:mindscape-1-ex-damage",
+      "nanoka:qingyi:flash-voltage-consumed-damage",
+      "nanoka:koleda:enhanced-basic-second-per-layer",
+    ].includes(supplement.supplementId),
+)
+
+describe("agent and drive-disc batch 03 corrections and supplements", () => {
+  it("corrects Billy's M4 record into a hit-scope critical rate with an explicit clamped input", () => {
+    const result = convertSource(batch03Data(), functions, [], [])
+    const record = result.coverage.records.find(
+      (r) =>
+        r.pointer === "/agents/0/mindscapeBuffs/4/effectBlocks/0/effects/0",
+    )!
+    expect(record.status).toBe("corrected")
+    expect(record.effectIds).toEqual([
+      "agent:1081:zzz-hp:eff-ms4ebxf4-pk138x:blk-ms4ebxf4-o288xu:mindscape:4",
+    ])
+    const rule = result.definitions.effects.find(
+      (r) =>
+        r.effectId ===
+        "agent:1081:zzz-hp:eff-ms4ebxf4-pk138x:blk-ms4ebxf4-o288xu:mindscape:4",
+    ) as ContributionRule
+    expect(rule.scope).toBe("hit")
+    expect(rule.beneficiary).toEqual({ kind: "holder" })
+    expect(rule.activation).toMatchObject({
+      kind: "supplied",
+      maximumLayers: { value: 1 },
+    })
+    expect(rule.parameters).toEqual({})
+    expect(rule.operation).toMatchObject({
+      kind: "stat-adjustment",
+      stat: "criticalRate",
+      stage: "direct",
+    })
+    const value = (rule.operation as { value: { kind: string } }).value
+    expect(value.kind).toBe("minimum")
+    const option = result.catalog.options.find(
+      (o) =>
+        o.optionId ===
+        "agents:billy:mindscape:4:blk-ms4ebxf4-o288xu:eff-ms4ebxf4-pk138x",
+    )!
+    expect(option.name).toBe("影画4 · criticalRate")
+    expect(option.variants[0]).toMatchObject({
+      status: "corrected",
+      maximumLayers: 1,
+      configuration: { minimumMindscape: 4 },
+      differences: ["billy-mindscape4-hit-scope-critical-rate"],
+      inputs: [
+        {
+          name: "agent:1081:zzz-hp:eff-ms4ebxf4-pk138x:blk-ms4ebxf4-o288xu:mindscape:4:source",
+          unit: "ratio",
+        },
+      ],
+    })
+  })
+
+  it("rejects drifted Billy M4 encodings instead of re-layering another meaning", () => {
+    const drifts: readonly Partial<SourceEffect>[] = [
+      { maxStacks: 16 },
+      { stat: "dmgBonus" },
+      { valuePerStack: 2 },
+      { skillSubcategoryId: null, skillTargets: [] },
+    ]
+    for (const drift of drifts)
+      expect(
+        () =>
+          convertSource(batch03Data({ billyEffect: drift }), functions, [], []),
+        JSON.stringify(drift),
+      ).toThrowError(/Hit-scope direct-stat correction .* field drift/)
+  })
+
+  it("removes the Shining Aria stagger condition while keeping the mastery clause intact", () => {
+    const result = convertSource(batch03Data(), functions, [], [])
+    const ariaRule = result.definitions.effects.find(
+      (r) =>
+        r.effectId ===
+        "disc:33600:zzz-hp:legacy-self-dmgBonus:blk-legacy:setPieces:4",
+    ) as ContributionRule
+    expect(ariaRule.when).toEqual({ kind: "all", conditions: [] })
+    expect(ariaRule.parameters).toMatchObject({
+      amount: { kind: "constant", value: 0.25 },
+    })
+    const ariaOption = result.catalog.options.find(
+      (o) =>
+        o.optionId ===
+        "drive-discs:SuitShiningAria:setPieces:4:blk-legacy:legacy-self-dmgBonus",
+    )!
+    expect(ariaOption.target).toBe("self")
+    expect(ariaOption.variants[0]).toMatchObject({
+      status: "corrected",
+      maximumLayers: 1,
+      differences: ["shining-aria-stagger-entry-triggered-state"],
+    })
+    // 独立的 +36 异常精通条款保持原样：general 状态、未被修正触碰。
+    const masteryRule = result.definitions.effects.find(
+      (r) =>
+        r.effectId ===
+        "disc:33600:zzz-hp:legacy-self-mastery:blk-legacy:setPieces:4",
+    ) as ContributionRule
+    expect(masteryRule.when).toEqual({ kind: "all", conditions: [] })
+    expect(masteryRule.operation).toMatchObject({
+      kind: "stat-adjustment",
+      stat: "anomalyProficiency",
+      stage: "final-fixed",
+    })
+    const masteryOption = result.catalog.options.find(
+      (o) =>
+        o.optionId ===
+        "drive-discs:SuitShiningAria:setPieces:4:blk-legacy:legacy-self-mastery",
+    )!
+    expect(masteryOption.variants[0]!.status).toBe("converted")
+    expect(masteryOption.variants[0]!.differences).toEqual([])
+  })
+
+  it("rejects a Shining Aria record whose stagger encoding drifted", () => {
+    const drifts: readonly Partial<SourceEffect>[] = [
+      { applySituation: "global" },
+      { value: 30 },
+      { stat: "skillDmgBonus" },
+    ]
+    for (const drift of drifts)
+      expect(
+        () =>
+          convertSource(
+            batch03Data({ ariaDamageEffect: drift }),
+            functions,
+            [],
+            [],
+          ),
+        JSON.stringify(drift),
+      ).toThrowError(/Triggered-state correction expects/)
+  })
+
+  it("registers the three agent supplements with their gates, inputs and named target", () => {
+    const result = convertSource(
+      batch03Data(),
+      functions,
+      [],
+      batch03Supplements,
+    )
+    expect(result.coverage.summary.supplements).toMatchObject({
+      records: 3,
+      rules: 3,
+      options: 3,
+      integrated: 3,
+    })
+    const nicole = result.catalog.options.find(
+      (o) => o.optionId === "nanoka:agents:nicole:mindscape-1-ex-damage",
+    )!
+    expect(nicole.target).toBe("self")
+    expect(nicole.variants[0]).toMatchObject({
+      status: "converted",
+      maximumLayers: 1,
+      configuration: { minimumMindscape: 1 },
+      inputs: [],
+    })
+    const nicoleRule = result.definitions.effects.find(
+      (r) =>
+        r.effectId === "agent:1031:nanoka:mindscape-1-ex-damage:mindscape:1",
+    ) as ContributionRule
+    expect(nicoleRule.config).toMatchObject({
+      kind: "compare-number",
+      operator: "gte",
+      right: { value: 1 },
+    })
+    expect(
+      JSON.stringify(nicoleRule.when).includes("all-special-ms0fcqv7"),
+    ).toBe(true)
+
+    const qingyi = result.catalog.options.find(
+      (o) =>
+        o.optionId === "nanoka:agents:qingyi:flash-voltage-consumed-damage",
+    )!
+    expect(qingyi.variants[0]!.inputs).toHaveLength(1)
+    expect(qingyi.variants[0]!.inputs[0]).toMatchObject({
+      unit: "ratio",
+    })
+    const qingyiRule = result.definitions.effects.find(
+      (r) =>
+        r.effectId ===
+        "agent:1251:nanoka:flash-voltage-consumed-damage:mindscape:0",
+    ) as ContributionRule
+    expect(qingyiRule.parameters).toMatchObject({
+      threshold: { value: -0.75 },
+      rate: { value: 1 },
+      cap: { value: 0.25 },
+    })
+    expect(
+      JSON.stringify(qingyiRule.when).includes("qingyi-basic-ms4bcr00"),
+    ).toBe(true)
+
+    const koleda = result.catalog.options.find(
+      (o) =>
+        o.optionId === "nanoka:agents:koleda:enhanced-basic-second-per-layer",
+    )!
+    expect(koleda.variants[0]).toMatchObject({
+      maximumLayers: 2,
+      configuration: { potentialLevels: [1, 2, 3, 4, 5, 6] },
+    })
+    const koledaRule = result.definitions.effects.find(
+      (r) =>
+        r.effectId ===
+        "agent:1101:nanoka:enhanced-basic-second-per-layer:mindscape:0",
+    ) as ContributionRule
+    expect(koledaRule.parameters).toMatchObject({
+      amount: { value: 0.1 },
+    })
+    expect(
+      JSON.stringify(koledaRule.when).includes("koleda-enhanced-basic-second"),
+    ).toBe(true)
+    // 具名目标进入目录：upstreamId 为 null、归属珂蕾妲、basic 分类。
+    expect(result.catalog.skillTargets).toContainEqual({
+      targetId: "zzz-hp:skill:koleda-enhanced-basic-second",
+      upstreamId: null,
+      agentEntityId: "1101",
+      category: "basic",
+      name: "强化普攻第二段",
+      countsAsFollowUp: false,
+    })
+  })
+
+  it("rejects fixed-source records that would double a supplemented clause", () => {
+    // 妮可：特殊技锚点上的增伤机器记录会与影画 1 补充重复贡献。
+    const nicoleConflict: SourceEffect = {
+      ...batch03BaseEffect,
+      id: "eff-conflict",
+      stat: "skillDmgBonus",
+      value: 16,
+      scope: "skill",
+      applySituation: "global",
+      skillCategory: "special",
+      skillSubcategoryId: "all-special-ms0fcqv7",
+      skillTargets: [
+        { category: "special", subcategoryId: "all-special-ms0fcqv7" },
+      ],
+    }
+    expect(() =>
+      convertSource(
+        batch03Data({ extraAgentRecords: { nicole: [nicoleConflict] } }),
+        functions,
+        [],
+        batch03Supplements,
+      ),
+    ).toThrowError(
+      /Supplement nanoka:nicole:mindscape-1-ex-damage conflicts with the fixed-source record .* on the registered skill targets/,
+    )
+    // 青衣：醉花月云转锚点上的增伤记录触发定向防护。
+    const qingyiConflict: SourceEffect = {
+      ...nicoleConflict,
+      id: "eff-conflict-qingyi",
+      stat: "dmgBonus",
+      skillCategory: "basic",
+      skillSubcategoryId: "qingyi-basic-ms4bcr00",
+      skillTargets: [
+        { category: "basic", subcategoryId: "qingyi-basic-ms4bcr00" },
+      ],
+    }
+    expect(() =>
+      convertSource(
+        batch03Data({ extraAgentRecords: { qingyi: [qingyiConflict] } }),
+        functions,
+        [],
+        batch03Supplements,
+      ),
+    ).toThrowError(
+      /Supplement nanoka:qingyi:flash-voltage-consumed-damage conflicts with the fixed-source record/,
+    )
+    // 珂蕾妲：basic 锚点上的增伤记录触发定向防护；既有全队 35% 不受影响
+    //（general 记录没有技能目标锚点，前一用例已验证可共存）。
+    const koledaConflict: SourceEffect = {
+      ...nicoleConflict,
+      id: "eff-conflict-koleda",
+      skillCategory: "basic",
+      skillSubcategoryId: null,
+      skillTargets: [{ category: "basic", subcategoryId: null }],
+    }
+    expect(() =>
+      convertSource(
+        batch03Data({ extraAgentRecords: { koleda: [koledaConflict] } }),
+        functions,
+        [],
+        batch03Supplements,
+      ),
+    ).toThrowError(
+      /Supplement nanoka:koleda:enhanced-basic-second-per-layer conflicts with the fixed-source record/,
+    )
+  })
+
+  it("rejects a supplement skill target colliding with a fixed-source anchor", () => {
+    const withUpstreamTarget = batch03Data({
+      skillSubcategories: [
+        {
+          id: "koleda-enhanced-basic-second",
+          agentId: "koleda",
+          categoryId: "basic",
+          name: "强化普攻第二段",
+        },
+      ],
+    })
+    expect(() =>
+      convertSource(withUpstreamTarget, functions, [], batch03Supplements),
+    ).toThrowError(
+      /Supplement skill target zzz-hp:skill:koleda-enhanced-basic-second collides with a fixed-source or declared target/,
+    )
   })
 })

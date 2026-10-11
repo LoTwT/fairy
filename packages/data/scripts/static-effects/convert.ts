@@ -1692,6 +1692,112 @@ function compile(
       ],
     }
   }
+  if (semantics?.kind === "hit-scope-direct-stat-input") {
+    // 防漂移：原始与规范化记录都必须仍是登记的来源编码；上游修正或漂移
+    // 时拒绝生成，不静默把另一份含义编译成命中局部属性。
+    for (const [label, document] of [
+      ["raw", record.raw],
+      ["normalized", record.normalized],
+    ] as const) {
+      if (document === undefined)
+        throw new Error(
+          `Hit-scope direct-stat correction lost the ${label} record at ${record.pointer}`,
+        )
+      for (const [field, value] of Object.entries(semantics.expectedEncoding)) {
+        const actual = document[field as keyof SourceEffect]
+        if (JSON.stringify(actual) !== JSON.stringify(value))
+          throw new Error(
+            `Hit-scope direct-stat correction ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(actual)}`,
+          )
+      }
+    }
+    // 层数编码废除：参数改为空，数值由显式输入按登记上下限钳制；激活层数
+    // 上限取登记值，旧层数用法在目录层被拒绝并由具名差异说明迁移。
+    const inputName = `${effectId}:source`
+    for (const key of Object.keys(parameters)) delete parameters[key]
+    requirements.push({
+      name: inputName,
+      unit: "ratio",
+      description: semantics.inputDescription,
+    })
+    operation = {
+      kind: "stat-adjustment",
+      stat: semantics.stat,
+      stage: "direct",
+      value: {
+        kind: "minimum",
+        unit: "ratio",
+        operands: [
+          {
+            kind: "maximum",
+            unit: "ratio",
+            operands: [
+              literal("ratio", semantics.minimum),
+              { kind: "input", unit: "ratio", name: inputName },
+            ],
+          },
+          literal("ratio", semantics.maximum),
+        ],
+      },
+    } as typeof operation
+    variant = {
+      ...variant,
+      status: "corrected",
+      maximumLayers: semantics.maximumLayers,
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
+  if (semantics?.kind === "triggered-state-not-benefit-condition") {
+    // 防漂移：登记字段的来源编码变化即拒绝；进入失衡只是触发事实。
+    for (const [label, document] of [
+      ["raw", record.raw],
+      ["normalized", record.normalized],
+    ] as const) {
+      if (document === undefined)
+        throw new Error(
+          `Triggered-state correction lost the ${label} record at ${record.pointer}`,
+        )
+      if (document.applySituation !== semantics.expectedApplySituation)
+        throw new Error(
+          `Triggered-state correction expects applySituation ${semantics.expectedApplySituation} at ${record.pointer} (${label}), found ${String(document.applySituation)}`,
+        )
+      if (
+        document.stat !== semantics.expectedStat ||
+        document.value !== semantics.expectedValue
+      )
+        throw new Error(
+          `Triggered-state correction expects ${semantics.expectedStat} ${semantics.expectedValue} at ${record.pointer} (${label}), found ${document.stat} ${String(document.value)}`,
+        )
+    }
+    // 移除 applySituation: stagger 派生的目标当前失衡条件；限时状态是否仍
+    // 有效由调用方显式选择 supplied 实例声明，当前失衡但未声明不自动获得。
+    if (when.kind === "all") {
+      const filtered = when.conditions.filter(
+        (condition) =>
+          !(
+            condition.kind === "one-of" && condition.fact === "hit.targetState"
+          ),
+      )
+      when = { kind: "all", conditions: filtered }
+    }
+    variant = {
+      ...variant,
+      status: "corrected",
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
   if (semantics?.kind === "damage-item-targeting") {
     const requirement = semantics.requirement
     // 倍率只作用于声明身份的伤害项：由 itemIds 精确绑定，缺项时求值层报 MISSING_REFERENCE。
@@ -2121,7 +2227,9 @@ export function convertSource(
     const displayStat =
       firstSemantics?.kind === "developer-revised-stat"
         ? firstSemantics.revisedStat
-        : first.raw.stat
+        : firstSemantics?.kind === "hit-scope-direct-stat-input"
+          ? firstSemantics.stat
+          : first.raw.stat
     // 共享说明纠错（T01）：登记必须覆盖该选项的全部精炼档且文本一致，
     // 否则保持来源 note 原文；部分登记或文本不一致即拒绝生成。
     const descriptionSemantics = records.map(
@@ -2267,6 +2375,8 @@ export function convertSource(
   let supplementalRules = 0
   let supplementalOptions = 0
   const supplementEntities: StaticCatalogEntity[] = []
+  const supplementSkillTargets: StaticEffectCatalog["skillTargets"][number][] =
+    []
   for (const supplement of supplements) {
     if (supplement.kind === "boundary") {
       supplementalRecords.push({
@@ -2278,6 +2388,24 @@ export function convertSource(
         reason: supplement.reason,
       })
       continue
+    }
+    // 补充条款的具名技能目标（upstreamId 为 null）：登记进目录供技能生成器
+    // 绑定与消费端显式选中；同 ID 目标重复登记即拒绝。
+    if (supplement.skillTarget) {
+      const declared = supplement.skillTarget
+      const targetId = `zzz-hp:skill:${declared.targetId}`
+      if (supplementSkillTargets.some((t) => t.targetId === targetId))
+        throw new Error(
+          `Supplement ${supplement.supplementId} repeats the declared skill target ${targetId}`,
+        )
+      supplementSkillTargets.push({
+        targetId,
+        upstreamId: null,
+        agentEntityId: declared.agentEntityId,
+        category: declared.category,
+        name: declared.name,
+        countsAsFollowUp: false,
+      })
     }
     if (supplement.kind === "unsupported-option") {
       // 如实不可选的声明选项：登记 formula-out-of-scope 变体与越界去向，
@@ -2401,6 +2529,32 @@ export function convertSource(
             `Supplement ${supplement.supplementId} conflicts with the fixed-source record at ${conflict.pointer} (stat ${conflict.raw.stat}); re-review the clause instead of double-contributing`,
           )
       }
+      // 定向重复补充防护：实体上存在同 stat 家族的其他条款时，以 stat 家族
+      // + 原始/规范化记录 skillTargets 命中登记分类或具名子分类定位同一条款
+      // （不限定来源 scope 字段）；两份表示都核对。
+      if (supplement.conflictingSourceRecords) {
+        const expectation = supplement.conflictingSourceRecords
+        const anchored = (document: SourceEffect | undefined) =>
+          document !== undefined &&
+          expectation.stats.includes(document.stat) &&
+          (document.skillTargets ?? []).some(
+            (target) =>
+              expectation.skillTargetCategories?.includes(target.category) ||
+              expectation.skillTargetSubcategoryIds?.includes(
+                target.subcategoryId ?? "",
+              ),
+          )
+        const conflict = collected.records.find(
+          (record) =>
+            `${record.category}:${record.entityId}` ===
+              supplement.catalogEntityId &&
+            (anchored(record.raw) || anchored(record.normalized)),
+        )
+        if (conflict)
+          throw new Error(
+            `Supplement ${supplement.supplementId} conflicts with the fixed-source record at ${conflict.pointer} (stat ${conflict.raw.stat} on the registered skill targets); re-review the clause instead of double-contributing`,
+          )
+      }
       if (supplement.variant.configuration.minimumSetPieces === 2)
         verifyDriveDiscTwoPieceSupplement(data, collected.entities, options, {
           catalogEntityId: supplement.catalogEntityId,
@@ -2448,7 +2602,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "17",
+    revision: "18",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -2489,6 +2643,16 @@ export function convertSource(
   for (const target of declaredSkillTargets)
     if (!skillTargets.some((t) => t.targetId === target.targetId))
       skillTargets.push(target)
+  // 补充来源登记的具名技能目标（如珂蕾妲潜能强化普攻第二段）：固定来源
+  // 没有该招式的真实锚点时由本项目采用独立身份；与固定来源目标撞 ID 说明
+  // 上游补了编码，拒绝生成并要求重新核对，不静默覆盖。
+  for (const target of supplementSkillTargets) {
+    if (skillTargets.some((t) => t.targetId === target.targetId))
+      throw new Error(
+        `Supplement skill target ${target.targetId} collides with a fixed-source or declared target; re-review the anchor binding`,
+      )
+    skillTargets.push(target)
+  }
   const catalog: StaticEffectCatalog = {
     schemaVersion: 1,
     ruleSetId: definitions.ruleSetId,
@@ -2838,6 +3002,34 @@ export function convertSource(
             .filter((variant) =>
               variant.differences.includes(
                 "blood-casket-refinement-aware-description",
+              ),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "billy-mindscape4-hit-scope-critical-rate",
+        explanation:
+          "比利（1081）影画 4 的块 note 与 Nanoka 天赋 4（agents/1081/details.zh.json 的 /talent/4/desc）同文：「[强化特殊技]命中敌人时，招式的暴击率随自身与目标之间的距离而提升；距离越近效果越显著，最高提升32%」。固定来源 fac62407 把该条款编码为 stacked skillDmgBonus（32 层 × 1%、defaultStacks 32），既把它放进通用增伤乘区、又用 32 个离散层表达连续距离。Fairy 按具名登记修正为 hit 作用域的 criticalRate direct 贡献（复用浅羽悠真命中局部暴击率的既有落点）：数值由调用方按本次命中的实际距离显式输入（比例 0—0.32，越界读数按表达式钳制），不推导距离函数、不设默认值，激活层数上限 1 并废除来源层数编码——旧的 32 层用法在目录层按层数上限拒绝，不静默重新解释；effectId、optionId、M4 门槛与强化特殊技（all-special-ms0fcqv7）+直伤种类的命中条件保持不变，仅比利本人命中获得，不改全局面板暴击率。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes(
+                "billy-mindscape4-hit-scope-critical-rate",
+              ),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "shining-aria-stagger-entry-triggered-state",
+        explanation:
+          "流光咏叹（33600）四件套后一条款「当场上有敌人进入失衡状态时，装备者造成的伤害提升25%，持续18秒，重复触发时刷新持续时间」（块 note 与 Nanoka /desc4 同文）在固定来源 fac62407 中被编码为 applySituation: stagger，固定版 effectMatchesContext 据此要求目标当前处于失衡。进入失衡只是触发事实：该增益是持续 18 秒的状态，期间目标是否失衡不影响受益。Fairy 移除派生的 hit.targetState 条件，状态是否仍有效由调用方显式选择 supplied 实例声明——当前目标未失衡但声明状态有效仍 +25%，当前目标处于失衡但未声明状态不自动获得；触发、18 秒持续与刷新不模拟时间线。四件门槛、自身受益与独立的普攻命中 +36 异常精通/8 秒条款保持独立开关，数值与稳定 ID 不变。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes(
+                "shining-aria-stagger-entry-triggered-state",
               ),
             )
             .flatMap((variant) => variant.references),

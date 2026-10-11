@@ -13,6 +13,7 @@ import type {
   StaticDamageInput,
   StaticDamageResult,
   StaticEffectCatalog,
+  Unit,
 } from "../../src/effects/index.ts"
 import { general, inputFor, literal, rule } from "./static-fixtures.ts"
 import { resolveAgentAction } from "../../../data/src/skills/resolve.ts"
@@ -1104,6 +1105,16 @@ describe("fixed-source catalog conformance", () => {
     ),
   ])
   /**
+   * 增益修复批次 03（修订 18）的具名纠错位置：C02 比利影画 4 由 stacked
+   * skillDmgBonus 改为命中局部暴击率显式输入，C13 流光咏叹四件套移除
+   * “目标当前失衡”受益条件；两处上游参考值（0.01/层、25% 失衡内增伤）
+   * 不再作为期望值，改由本文件的具名批次用例验证。
+   */
+  const batch03CorrectedPointers = new Set([
+    "/agents/31/mindscapeBuffs/4/effectBlocks/0/effects/0",
+    "/driveDiscs/16/fourPieceBuffs/effectBlocks/0/effects/1",
+  ])
+  /**
    * 批次 01 中期望值或夹具 effectId 已过期的位置：C01/C10 的数值修正、
    * C05 的固定回能改值，以及 C11/C08 修正后按精炼合并导致夹具单档
    * effectId 失效的位置；这些位置仍计入覆盖核对，但不按上游参考值比对。
@@ -1137,7 +1148,8 @@ describe("fixed-source catalog conformance", () => {
             attributeAnomalyScopeCorrectedPointers.has(r.pointer) ||
             completeStateMigratedPointers.has(r.pointer) ||
             qingmingPierceStackCorrectedPointers.has(r.pointer) ||
-            batch01CorrectedPointers.has(r.pointer),
+            batch01CorrectedPointers.has(r.pointer) ||
+            batch03CorrectedPointers.has(r.pointer),
         )
         .map((r) => r.pointer)
         .toSorted(),
@@ -1150,7 +1162,8 @@ describe("fixed-source catalog conformance", () => {
         attributeAnomalyScopeCorrectedPointers.has(vector.pointer) ||
         completeStateMigratedPointers.has(vector.pointer) ||
         qingmingPierceStackCorrectedPointers.has(vector.pointer) ||
-        batch01StaleOraclePointers.has(vector.pointer)
+        batch01StaleOraclePointers.has(vector.pointer) ||
+        batch03CorrectedPointers.has(vector.pointer)
       )
         continue
       const values = Object.fromEntries(
@@ -1852,7 +1865,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("17")
+    expect(catalog.revision).toBe("18")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -4652,11 +4665,12 @@ describe("velina cyclone catalog linkage", () => {
     ) as { summary: { supplements: Record<string, number> } }
     expect(coverage.summary.supplements).toMatchObject({
       // 批次 02 新增 13 条音擎缺失被动补充（12 项条款；索魂影眸按评审
-      // R01 修复拆为 1/2/3 有效魂锁三个互斥完整档位）。
-      records: 27,
-      integrated: 24,
-      rules: 24,
-      options: 19,
+      // R01 修复拆为 1/2/3 有效魂锁三个互斥完整档位）；批次 03 再增
+      // 妮可影画 1、青衣闪络电压、珂蕾妲强化普攻二段三条代理人补充。
+      records: 30,
+      integrated: 27,
+      rules: 27,
+      options: 22,
       entities: 1,
       outOfScope: 3,
     })
@@ -8392,5 +8406,538 @@ describe("w-engine missing passive supplements (batch 02)", () => {
         .find((o) => o.catalogEntityId === "w-engines:Head_Lackey")!
         .variants[0]!.effectIds[0]!.startsWith("w-engine:14157:zzz-hp:"),
     ).toBe(true)
+  })
+})
+
+/**
+ * 增益修复批次 03（修订 18）：C02 比利影画 4 命中局部暴击率、C13 流光咏叹
+ * 四件套持续状态、M01 妮可影画 1 强化特殊技增伤、M17 青衣闪络电压消耗增伤与
+ * M18 珂蕾妲潜能强化普攻二段按层增伤的具名回归。修正项期望值来自块 note 与
+ * Nanoka 同文（按一致描述纠错，未经游戏实测），不从生成器反推；显式输入、
+ * 层数与状态有效由选择声明，不模拟距离、电压积攒或时间线。
+ */
+describe("agent and drive-disc batch 03 corrections and supplements", () => {
+  /** 解析真实动作并把其分类、目标与基础项接入目录命中。 */
+  const resolvedActionInput = (
+    agentEntityId: string,
+    actionSuffix: string,
+    selections: readonly { optionId: string; layers: number }[],
+    options: {
+      potentialLevel?: number
+      mindscapeRank?: MindscapeRank
+      numericInputs?: readonly {
+        name: string
+        unit: Unit
+        value: number
+      }[]
+    } = {},
+  ): StaticCatalogDamageInput => {
+    const agent = read(
+      `../../../data/definitions/skills/agents/${agentEntityId}.json`,
+    ) as AgentActions
+    const action = resolveAgentAction({
+      agent,
+      actionId: `action:agent:${agentEntityId}:action:${actionSuffix}`,
+      mindscapeRank: options.mindscapeRank ?? 0,
+      levels: {
+        basic: { mode: "trained", value: 12 },
+        assist: { mode: "trained", value: 12 },
+        dodge: { mode: "trained", value: 12 },
+        special: { mode: "trained", value: 12 },
+        chain: { mode: "trained", value: 12 },
+      },
+      ...(options.potentialLevel === undefined
+        ? {}
+        : { potentialLevel: options.potentialLevel }),
+    })
+    if (
+      !action.ok ||
+      action.calculation.kind !== "damage" ||
+      !action.skillCategory
+    )
+      throw new Error("Expected resolved damage action")
+    expect(action.calculation.segments).toHaveLength(1)
+    const segment = action.calculation.segments[0]!
+    const base = agentInput(
+      agentEntityId,
+      selections.map((entry) => entry.optionId),
+      options.mindscapeRank ?? 0,
+      7,
+      options.potentialLevel,
+    )
+    const [firstItem, ...remainingItems] = segment.damageItems.map((item) => ({
+      ...item,
+      mode: "direct" as const,
+      role: "base" as const,
+      statSource: { entityId: "entity:attacker" as const },
+    }))
+    if (!firstItem) throw new Error("Expected nonempty action damage items")
+    return {
+      ...base,
+      ...(options.numericInputs?.length
+        ? {
+            inputs: options.numericInputs.map((entry) => ({
+              bindingId: "binding:static",
+              name: entry.name,
+              value: { unit: entry.unit, value: entry.value },
+            })),
+          }
+        : {}),
+      selections: selections.map((entry) => ({
+        ...entry,
+        bindingId: "binding:static",
+      })),
+      hit: {
+        ...base.hit,
+        actionId: action.actionId,
+        skillCategory: action.skillCategory,
+        skillTargetIds: action.skillTargetIds,
+        skillTags: action.skillTags,
+        element: segment.element,
+        damageItems: [firstItem, ...remainingItems],
+      },
+    }
+  }
+
+  it("registers the batch 03 corrections and named differences with stable identities", () => {
+    const billy = catalog.options.find(
+      (o) =>
+        o.optionId ===
+        "agents:billy:mindscape:4:blk-ms4ebxf4-o288xu:eff-ms4ebxf4-pk138x",
+    )!
+    expect(billy.name).toBe("影画4 · criticalRate")
+    expect(billy.target).toBe("self")
+    expect(billy.variants[0]).toMatchObject({
+      status: "corrected",
+      maximumLayers: 1,
+      configuration: { minimumMindscape: 4 },
+      differences: ["billy-mindscape4-hit-scope-critical-rate"],
+      inputs: [
+        {
+          name: "agent:1081:zzz-hp:eff-ms4ebxf4-pk138x:blk-ms4ebxf4-o288xu:mindscape:4:source",
+          unit: "ratio",
+        },
+      ],
+    })
+    const billyRule = definitions.effects.find(
+      (r) => r.effectId === billy.variants[0]!.effectIds[0]!,
+    ) as ContributionRule
+    expect(billyRule.scope).toBe("hit")
+    expect(billyRule.operation).toMatchObject({
+      kind: "stat-adjustment",
+      stat: "criticalRate",
+      stage: "direct",
+    })
+    expect(billyRule.parameters).toEqual({})
+    const aria = catalog.options.find(
+      (o) =>
+        o.optionId ===
+        "drive-discs:SuitShiningAria:setPieces:4:blk-legacy:legacy-self-dmgBonus",
+    )!
+    expect(aria.variants[0]).toMatchObject({
+      status: "corrected",
+      maximumLayers: 1,
+      differences: ["shining-aria-stagger-entry-triggered-state"],
+      inputs: [],
+    })
+    const ariaRule = definitions.effects.find(
+      (r) => r.effectId === aria.variants[0]!.effectIds[0]!,
+    ) as ContributionRule
+    expect(ariaRule.when).toEqual({ kind: "all", conditions: [] })
+    expect(catalog.differences.map((d) => d.differenceId)).toEqual(
+      expect.arrayContaining([
+        "billy-mindscape4-hit-scope-critical-rate",
+        "shining-aria-stagger-entry-triggered-state",
+      ]),
+    )
+  })
+
+  it("applies Billy's M4 hit-scope critical rate from the explicit input on EX hits only (C02)", () => {
+    const option =
+      "agents:billy:mindscape:4:blk-ms4ebxf4-o288xu:eff-ms4ebxf4-pk138x"
+    const inputName =
+      "agent:1081:zzz-hp:eff-ms4ebxf4-pk138x:blk-ms4ebxf4-o288xu:mindscape:4:source"
+    const exInput = (value: number) =>
+      resolvedActionInput("1081", "0017", [{ optionId: option, layers: 1 }], {
+        mindscapeRank: 4,
+        numericInputs: [{ name: inputName, unit: "ratio", value }],
+      })
+    // 0/中间/32% 的显式提升量只进入本次 EX 命中的暴击率，增伤乘区不变。
+    for (const [value, expectedRate] of [
+      [0, 0.25],
+      [0.16, 0.41],
+      [0.32, 0.57],
+    ] as const) {
+      const result = calculateCatalogResult(exInput(value))
+      expect(result.criticalRate, `input ${value}`).toBeCloseTo(
+        expectedRate,
+        12,
+      )
+      expect(result.factors.nonCritical.damageBonus, `input ${value}`).toBe(1)
+    }
+    // 越界读数按表达式钳制；负值取 0，超过 32% 取上限。
+    for (const [value, expectedRate] of [
+      [-0.1, 0.25],
+      [0.5, 0.57],
+    ] as const) {
+      expect(calculateCatalogResult(exInput(value)).criticalRate).toBeCloseTo(
+        expectedRate,
+        12,
+      )
+    }
+    // 暴击伤害按命中局部暴击率结算：critical = nonCritical × (1 + 暴伤 0.5)。
+    const critical = calculateCatalogResult(exInput(0.32))
+    expect(critical.critical).toBeCloseTo(critical.nonCritical * 1.5, 9)
+    // M3 未解锁拒绝；旧 32 层用法按新层数上限拒绝，不静默重新解释。
+    for (const bad of [
+      resolvedActionInput("1081", "0017", [{ optionId: option, layers: 1 }], {
+        mindscapeRank: 3,
+        numericInputs: [{ name: inputName, unit: "ratio", value: 0.32 }],
+      }),
+      resolvedActionInput("1081", "0017", [{ optionId: option, layers: 32 }], {
+        mindscapeRank: 4,
+        numericInputs: [{ name: inputName, unit: "ratio", value: 0.32 }],
+      }),
+    ])
+      expect(calculateStaticDamageFromCatalog(bad)).toMatchObject({
+        ok: false,
+      })
+    // 必填输入缺失与单位错误分别报 MISSING_FACT / UNIT_MISMATCH。
+    expect(
+      calculateStaticDamageFromCatalog(
+        resolvedActionInput("1081", "0017", [{ optionId: option, layers: 1 }], {
+          mindscapeRank: 4,
+        }),
+      ),
+    ).toMatchObject({ ok: false, issues: [{ code: "MISSING_FACT" }] })
+    expect(
+      calculateStaticDamageFromCatalog(
+        resolvedActionInput("1081", "0017", [{ optionId: option, layers: 1 }], {
+          mindscapeRank: 4,
+          numericInputs: [{ name: inputName, unit: "count", value: 32 }],
+        }),
+      ),
+    ).toMatchObject({ ok: false, issues: [{ code: "UNIT_MISMATCH" }] })
+    // 普通特殊技（0014，无强化特殊技目标）不获得该暴击率。
+    const normalSpecial = calculateCatalogResult(
+      resolvedActionInput("1081", "0014", [{ optionId: option, layers: 1 }], {
+        mindscapeRank: 4,
+        numericInputs: [{ name: inputName, unit: "ratio", value: 0.32 }],
+      }),
+    )
+    expect(normalSpecial.criticalRate).toBeCloseTo(0.25, 12)
+    // 普攻命中同样不获得；命中的暴击率保持基础面板 0.25。
+    const basicHit = calculateCatalogResult(
+      resolvedActionInput("1081", "0006", [{ optionId: option, layers: 1 }], {
+        mindscapeRank: 4,
+        numericInputs: [{ name: inputName, unit: "ratio", value: 0.32 }],
+      }),
+    )
+    expect(basicHit.criticalRate).toBeCloseTo(0.25, 12)
+    // 队友命中不获得：绑定持有者是比利，命中者是其他实体。
+    const ex = exInput(0.32)
+    const holder = ex.world.entities[0]!
+    if (holder.kind !== "actor") throw new Error("fixture")
+    const teammateHit = calculateCatalogResult({
+      ...ex,
+      world: {
+        ...ex.world,
+        entities: [
+          ...ex.world.entities,
+          { ...holder, entityId: "entity:teammate" },
+        ],
+      },
+      actorSources: [
+        ...ex.actorSources,
+        { entityId: "entity:teammate", agentEntityId: "1311" },
+      ],
+      hit: {
+        ...ex.hit,
+        actorId: "entity:teammate",
+        damageItems: ex.hit.damageItems.map((item) => ({
+          ...item,
+          statSource: { entityId: "entity:teammate" },
+        })) as unknown as StaticCatalogDamageInput["hit"]["damageItems"],
+      },
+    })
+    expect(teammateHit.criticalRate).toBeCloseTo(0.25, 12)
+  })
+
+  it("applies Nicole's M1 EX damage bonus to every real EX action and nothing else (M01)", () => {
+    const option = "nanoka:agents:nicole:mindscape-1-ex-damage"
+    for (const suffix of ["0021", "0022", "0023"]) {
+      const result = calculateCatalogResult(
+        resolvedActionInput("1031", suffix, [{ optionId: option, layers: 1 }], {
+          mindscapeRank: 1,
+        }),
+      )
+      expect(result.factors.nonCritical.damageBonus, suffix).toBeCloseTo(
+        1.16,
+        12,
+      )
+    }
+    // M0 未解锁拒绝。
+    expect(
+      calculateStaticDamageFromCatalog(
+        resolvedActionInput("1031", "0021", [{ optionId: option, layers: 1 }], {
+          mindscapeRank: 0,
+        }),
+      ),
+    ).toMatchObject({ ok: false, issues: [{ code: "CONTEXT_MISMATCH" }] })
+    // 普通特殊技（0020）与普攻（0006）不受益。
+    for (const suffix of ["0020", "0006"]) {
+      const result = calculateCatalogResult(
+        resolvedActionInput("1031", suffix, [{ optionId: option, layers: 1 }], {
+          mindscapeRank: 1,
+        }),
+      )
+      expect(result.factors.nonCritical.damageBonus, suffix).toBe(1)
+    }
+    // 队友的强化特殊技命中不受益：选项绑定持有者是妮可。
+    const ex = resolvedActionInput(
+      "1031",
+      "0021",
+      [{ optionId: option, layers: 1 }],
+      { mindscapeRank: 1 },
+    )
+    const holder = ex.world.entities[0]!
+    if (holder.kind !== "actor") throw new Error("fixture")
+    const teammateHit = calculateCatalogResult({
+      ...ex,
+      world: {
+        ...ex.world,
+        entities: [
+          ...ex.world.entities,
+          { ...holder, entityId: "entity:teammate" },
+        ],
+      },
+      actorSources: [
+        ...ex.actorSources,
+        { entityId: "entity:teammate", agentEntityId: "1081" },
+      ],
+      hit: {
+        ...ex.hit,
+        actorId: "entity:teammate",
+        damageItems: ex.hit.damageItems.map((item) => ({
+          ...item,
+          statSource: { entityId: "entity:teammate" },
+        })) as unknown as StaticCatalogDamageInput["hit"]["damageItems"],
+      },
+    })
+    expect(teammateHit.factors.nonCritical.damageBonus).toBe(1)
+  })
+
+  it("applies Qingyi's flash-voltage damage bonus to both Drunk-on-Moonlight hits with the anchors (M17)", () => {
+    const option = "nanoka:agents:qingyi:flash-voltage-consumed-damage"
+    const inputName =
+      "agent:1251:nanoka:flash-voltage-consumed-damage:mindscape:0:source"
+    const bonusAt = (suffix: string, consumed: number) =>
+      calculateCatalogResult(
+        resolvedActionInput("1251", suffix, [{ optionId: option, layers: 1 }], {
+          numericInputs: [{ name: inputName, unit: "ratio", value: consumed }],
+        }),
+      ).factors.nonCritical.damageBonus
+    // 突进与终结一击两段都按消耗电压获得增益；核算锚点 75/80/100%。
+    for (const suffix of ["0013", "0014"]) {
+      expect(bonusAt(suffix, 0.75), suffix).toBe(1)
+      expect(bonusAt(suffix, 0.8), suffix).toBeCloseTo(1.05, 12)
+      expect(bonusAt(suffix, 1), suffix).toBeCloseTo(1.25, 12)
+      expect(bonusAt(suffix, 0.3), suffix).toBe(1)
+      expect(bonusAt(suffix, 1.2), suffix).toBeCloseTo(1.25, 12)
+    }
+    // 必填输入缺失拒绝；不是施放后剩余电压的读数约定在输入说明里。
+    expect(
+      calculateStaticDamageFromCatalog(
+        resolvedActionInput("1251", "0013", [{ optionId: option, layers: 1 }]),
+      ),
+    ).toMatchObject({ ok: false, issues: [{ code: "MISSING_FACT" }] })
+    // 同一文件的其他招式（一煞 0006、强化特殊技 0020）不受益。
+    for (const suffix of ["0006", "0020"]) {
+      const result = calculateCatalogResult(
+        resolvedActionInput("1251", suffix, [{ optionId: option, layers: 1 }], {
+          numericInputs: [{ name: inputName, unit: "ratio", value: 1 }],
+        }),
+      )
+      expect(result.factors.nonCritical.damageBonus, suffix).toBe(1)
+    }
+  })
+
+  it("applies Koleda's per-furnace-layer damage to the potential second enhanced basic only (M18)", () => {
+    const option = "nanoka:agents:koleda:enhanced-basic-second-per-layer"
+    const target = catalog.skillTargets.find(
+      (t) => t.targetId === "zzz-hp:skill:koleda-enhanced-basic-second",
+    )
+    expect(target).toMatchObject({
+      upstreamId: null,
+      agentEntityId: "1101",
+      category: "basic",
+    })
+    const bonusAt = (suffix: string, layers: number, potentialLevel: number) =>
+      calculateCatalogResult(
+        resolvedActionInput("1101", suffix, [{ optionId: option, layers }], {
+          potentialLevel,
+        }),
+      ).factors.nonCritical.damageBonus
+    // 强化普攻二段与协同版本都按本次消耗层数获得 +10%/层。
+    for (const suffix of ["0011", "0012"]) {
+      expect(bonusAt(suffix, 0, 1), suffix).toBe(1)
+      expect(bonusAt(suffix, 1, 1), suffix).toBeCloseTo(1.1, 12)
+      expect(bonusAt(suffix, 2, 6), suffix).toBeCloseTo(1.2, 12)
+    }
+    // 非法层数（3）拒绝；潜能 0 缺档拒绝（变体只声明潜能 1—6）。
+    expect(
+      calculateStaticDamageFromCatalog(
+        resolvedActionInput("1101", "0011", [{ optionId: option, layers: 3 }], {
+          potentialLevel: 1,
+        }),
+      ),
+    ).toMatchObject({ ok: false, issues: [{ code: "INVALID_INPUT" }] })
+    expect(
+      calculateStaticDamageFromCatalog(
+        resolvedActionInput("1101", "0011", [{ optionId: option, layers: 1 }], {
+          potentialLevel: 0,
+        }),
+      ),
+    ).toMatchObject({ ok: false, issues: [{ code: "MISSING_RANK" }] })
+    // 普通第二段普攻（0007）与第一段强化普攻（0010）不受益。
+    for (const suffix of ["0007", "0010"]) {
+      const result = calculateCatalogResult(
+        resolvedActionInput("1101", suffix, [{ optionId: option, layers: 2 }], {
+          potentialLevel: 1,
+        }),
+      )
+      expect(result.factors.nonCritical.damageBonus, suffix).toBe(1)
+    }
+    // 与独立的全队 +35%（40 秒）选项同选时各自贡献一次。
+    const teamOption =
+      "agents:koleda:mindscape:0:blk-mttou4li-pfihup:eff-mttou4li-rea0ai"
+    const combined = calculateCatalogResult(
+      resolvedActionInput(
+        "1101",
+        "0011",
+        [
+          { optionId: option, layers: 2 },
+          { optionId: teamOption, layers: 1 },
+        ],
+        { potentialLevel: 1 },
+      ),
+    )
+    expect(combined.factors.nonCritical.damageBonus).toBeCloseTo(1.55, 12)
+    // 只选全队选项时第二段不获得按层加成。
+    const teamOnly = calculateCatalogResult(
+      resolvedActionInput(
+        "1101",
+        "0011",
+        [{ optionId: teamOption, layers: 1 }],
+        {
+          potentialLevel: 1,
+        },
+      ),
+    )
+    expect(teamOnly.factors.nonCritical.damageBonus).toBeCloseTo(1.35, 12)
+  })
+
+  it("keeps Shining Aria's four-piece damage state independent of the current stagger (C13)", () => {
+    const damageOption =
+      "drive-discs:SuitShiningAria:setPieces:4:blk-legacy:legacy-self-dmgBonus"
+    const masteryOption =
+      "drive-discs:SuitShiningAria:setPieces:4:blk-legacy:legacy-self-mastery"
+    const ariaInput = (
+      selections: readonly { optionId: string; layers: number }[],
+      targetStunned?: boolean,
+      setPieces: 2 | 4 = 4,
+    ): StaticCatalogDamageInput => {
+      const base = agentInput("1031", [])
+      if (base.damage.kind !== "regular") throw new Error("fixture")
+      return {
+        ...base,
+        bindings: [
+          {
+            bindingId: "binding:disc",
+            kind: "drive-disc",
+            holderId: "entity:attacker",
+            sourceEntityId: "33600",
+            eligible: true,
+            configuration: { setPieces },
+          },
+        ],
+        selections: selections.map((entry) => ({
+          ...entry,
+          bindingId: "binding:disc",
+        })),
+        // 静态入口把 isTargetStunned 映射为命中的 targetState 事实。
+        damage: {
+          ...base.damage,
+          stunDamage: {
+            ...base.damage.stunDamage,
+            isTargetStunned: targetStunned ?? false,
+          },
+        },
+      }
+    }
+    // 状态开关 × 当前失衡矩阵：声明有效的 18 秒状态照常 +25%，
+    // 未声明时不因目标当前失衡自动获得。
+    for (const targetStunned of [false, true] as const) {
+      const selected = calculateCatalogResult(
+        ariaInput([{ optionId: damageOption, layers: 1 }], targetStunned),
+      )
+      expect(
+        selected.factors.nonCritical.damageBonus,
+        `stunned=${String(targetStunned)}`,
+      ).toBeCloseTo(1.25, 12)
+      const unselected = calculateCatalogResult(ariaInput([], targetStunned))
+      expect(
+        unselected.factors.nonCritical.damageBonus,
+        `stunned=${String(targetStunned)}`,
+      ).toBe(1)
+    }
+    // 2 件套不满足四件门槛，选择 4 件选项被拒绝。
+    expect(
+      calculateStaticDamageFromCatalog(
+        ariaInput([{ optionId: damageOption, layers: 1 }], undefined, 2),
+      ),
+    ).toMatchObject({ ok: false })
+    // 独立的普攻命中 +36 异常精通条款保持自己的开关，两状态不绑定。
+    const withMastery = calculateCatalogResult(
+      ariaInput(
+        [
+          { optionId: damageOption, layers: 1 },
+          { optionId: masteryOption, layers: 1 },
+        ],
+        false,
+      ),
+    )
+    expect(withMastery.factors.nonCritical.damageBonus).toBeCloseTo(1.25, 12)
+    const masteryOnly = calculateCatalogResult(
+      ariaInput([{ optionId: masteryOption, layers: 1 }], undefined),
+    )
+    expect(masteryOnly.factors.nonCritical.damageBonus).toBe(1)
+    // 装备者本人受益：队友命中不获得该四件增伤。
+    const selected = ariaInput([{ optionId: damageOption, layers: 1 }])
+    const holder = selected.world.entities[0]!
+    if (holder.kind !== "actor") throw new Error("fixture")
+    const teammateHit = calculateCatalogResult({
+      ...selected,
+      world: {
+        ...selected.world,
+        entities: [
+          ...selected.world.entities,
+          { ...holder, entityId: "entity:teammate" },
+        ],
+      },
+      actorSources: [
+        ...selected.actorSources,
+        { entityId: "entity:teammate", agentEntityId: "1311" },
+      ],
+      hit: {
+        ...selected.hit,
+        actorId: "entity:teammate",
+        damageItems: selected.hit.damageItems.map((item) => ({
+          ...item,
+          statSource: { entityId: "entity:teammate" },
+        })) as unknown as StaticCatalogDamageInput["hit"]["damageItems"],
+      },
+    })
+    expect(teammateHit.factors.nonCritical.damageBonus).toBe(1)
   })
 })

@@ -380,6 +380,54 @@ export type SourceSemantics =
       readonly evidence: readonly SemanticsEvidenceReference[]
       readonly verification: string
     }
+  | {
+      /**
+       * 固定来源把命中局部的直接属性增益错误编码为其他通道的层数记录
+       * （如比利影画 4 的“强化特殊技命中暴击率最高 32%”被记为 stacked
+       * skillDmgBonus、32 层 × 1%），而块 note 与 Nanoka 同文明确该数值是
+       * 本次命中的暴击率提升。转换器按登记修正为 hit 作用域的直接属性
+       * 贡献：数值改由调用方显式输入（比例，登记上下限内按表达式钳制，
+       * 不推导距离等函数、不设默认值），废除来源层数编码，激活层数上限
+       * 改为登记值；旧层数用法在目录层被拒绝并由具名差异说明迁移。原始
+       * 与规范化记录的编码字段与登记不符即拒绝生成。
+       */
+      readonly kind: "hit-scope-direct-stat-input"
+      /** 修正后的直接属性落点（如 criticalRate）。 */
+      readonly stat: "criticalRate"
+      /** 目录 inputs 的说明文字；声明输入含义、单位与合法范围。 */
+      readonly inputDescription: string
+      /** 输入下限（比例）；低于下限的读数按表达式钳制为下限。 */
+      readonly minimum: number
+      /** 输入上限（比例）；高于上限的读数按表达式钳制为上限。 */
+      readonly maximum: number
+      /** 修正后的激活层数上限；来源的 maxStacks 编码废除。 */
+      readonly maximumLayers: number
+      /** 防漂移：登记时来源记录应逐字段保持的编码。 */
+      readonly expectedEncoding: Readonly<Record<string, unknown>>
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
+       * 固定来源把“敌人进入失衡状态时触发”的限时增益记录编码为
+       * applySituation: stagger（受益要求目标当前处于失衡），而块 note 与
+       * Nanoka 同文明确进入失衡只是触发事实：增益持续登记秒数，期间是否
+       * 失衡不影响受益。转换器移除派生的 hit.targetState 条件；状态是否
+       * 仍有效由调用方显式选择 supplied 实例声明——当前失衡但未声明状态
+       * 不自动获得，声明有效但目标已退出失衡仍照常贡献。触发、持续与
+       * 刷新不模拟时间线。原始与规范化记录的登记字段漂移即拒绝生成。
+       */
+      readonly kind: "triggered-state-not-benefit-condition"
+      /** 防漂移：登记时来源记录的 applySituation 原值。 */
+      readonly expectedApplySituation: "stagger"
+      /** 防漂移：登记时来源记录的 stat 与数值。 */
+      readonly expectedStat: string
+      readonly expectedValue: number
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
 
 /**
  * 完整状态选项登记：固定来源把同一游戏状态拆成多条可独立切换的记录
@@ -2098,6 +2146,62 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
   },
   // 增益修复批次 01 的具名登记（C01/C05/C07/C08/C10/C11/T01）。
   ...wengineCorrectionRegistrations(),
+  // 增益修复批次 03 的具名登记（C02 比利影画 4、C13 流光咏叹四件套）。
+  "agents/billy/mindscape/4/blk-ms4ebxf4-o288xu/eff-ms4ebxf4-pk138x": {
+    kind: "hit-scope-direct-stat-input",
+    stat: "criticalRate",
+    inputDescription:
+      "manual ratio，本次[强化特殊技]命中按自身与目标距离获得的暴击率提升（0—0.32，距离越近越显著）；由调用方按实际距离显式输入，不使用默认值，不推导距离函数，越界读数按表达式钳制",
+    minimum: 0,
+    maximum: 0.32,
+    maximumLayers: 1,
+    expectedEncoding: {
+      scope: "skill",
+      applyTarget: "self",
+      applySituation: "global",
+      skillCategory: "special",
+      skillSubcategoryId: "all-special-ms0fcqv7",
+      skillTargets: [
+        { category: "special", subcategoryId: "all-special-ms0fcqv7" },
+      ],
+      elementFilter: "all",
+      kind: "stacked",
+      stat: "skillDmgBonus",
+      value: 0,
+      stackable: false,
+      maxStacks: 32,
+      valuePerStack: 1,
+      defaultStacks: 32,
+    },
+    differenceId: "billy-mindscape4-hit-scope-critical-rate",
+    evidence: [
+      {
+        path: "agents/1081/details.zh.json",
+        pointer: "/talent/4/desc",
+        sha256:
+          "db23f77d15c7779bee2b415c95d9d5db147c8009cae3710599a27d44a0ba1041",
+      },
+    ],
+    verification:
+      "块 note 与 Nanoka 影画 4（agents/1081/details.zh.json 的 /talent/4/desc）同文：[强化特殊技]命中敌人时，招式的暴击率随自身与目标距离提升、距离越近越显著、最高 32%。固定来源把该条款编码为 stacked skillDmgBonus（32 层 × 1%、defaultStacks 32），既不是伤害加成、也不能用层数表达连续距离。修正为 hit 作用域 criticalRate direct：数值由调用方显式输入（比例 0—0.32，表达式钳制），激活层数上限 1，废除来源层数编码；旧层数用法（如 layers 32）按目录层数上限拒绝并由具名差异说明迁移。受益范围保持来源编码的强化特殊技目标（all-special-ms0fcqv7）与直伤种类，仅比利本人命中获得，普通特殊技、普攻与其他角色不受益，不改全局面板暴击率。",
+  },
+  "drive-discs/SuitShiningAria/setPieces/4/blk-legacy/legacy-self-dmgBonus": {
+    kind: "triggered-state-not-benefit-condition",
+    expectedApplySituation: "stagger",
+    expectedStat: "dmgBonus",
+    expectedValue: 25,
+    differenceId: "shining-aria-stagger-entry-triggered-state",
+    evidence: [
+      {
+        path: "drive-discs/33600/details.zh.json",
+        pointer: "/desc4",
+        sha256:
+          "6bf0a0e55dadadd48925a629b0df5d14d6c2256e915ffcaca9d46550ad3a4a47",
+      },
+    ],
+    verification:
+      "块 note 与 Nanoka 四件套描述（drive-discs/33600/details.zh.json 的 /desc4）同文：装备者发动[普通攻击]命中敌人时异常精通 +36（8 秒，独立条款不变）；当场上有敌人进入失衡状态时，装备者造成的伤害提升 25%，持续 18 秒，重复触发刷新。固定来源把后一条款编码为 applySituation: stagger，固定版 effectMatchesContext 据此要求目标当前处于失衡——而“进入失衡”只是触发事实，增益持续 18 秒、期间目标是否失衡不影响受益。修正为移除派生的 hit.targetState 条件：18 秒状态是否仍有效由调用方显式选择 supplied 实例声明，当前失衡但未声明状态不自动获得，声明有效但目标已退出失衡仍照常 +25%；触发、持续与刷新不模拟时间线。四件门槛、自身受益与独立的 +36 异常精通条款保持不变，两种持续状态不绑成同一开关。",
+  },
 }
 
 /**
