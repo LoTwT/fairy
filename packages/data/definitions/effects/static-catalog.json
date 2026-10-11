@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "20",
+  "revision": "21",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -46768,6 +46768,334 @@
             "agent:1101:nanoka:enhanced-basic-second-per-layer:mindscape:0"
           ],
           "maximumLayers": 2,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:caesar:stance-switch-impact",
+      "catalogEntityId": "agents:caesar",
+      "name": "攻防转换 · impact",
+      "conditionDescription": "触发[精准格挡]、[防御反击]或[招架支援]时，自身冲击力提升 (8+特殊技最终等级)%（1—16 级为 9%—24%），持续 3 秒；触发事实与持续由调用方显式选择断言。等级为已含影画加级的最终等级，不重复加级。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "specialSkillLevels": [
+              1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
+            ]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1071/details.zh.json",
+              "pointer": "/skill/special/description/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1071/details.zh.json",
+              "pointer": "/skill/special/description/5/param/0/desc"
+            }
+          ],
+          "effectIds": ["agent:1071:nanoka:stance-switch-impact:mindscape:0"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:lighter:morale-burst-impact",
+      "catalogEntityId": "agents:lighter",
+      "name": "士气喷发 · impact",
+      "conditionDescription": "[士气喷发]状态中，威力提升后的招式命中敌人会持续消耗[士气]，每消耗 10 点[士气]使冲击力提升（核心 1—7 每层 1/1.17/1.33/1.5/1.67/1.83/2%），最多 10 层（即来源上限 10%—20%），持续 6 秒；有效层数由调用方显式选择，不从当前士气推导，0 层表示关闭。与[昂扬]完整状态是不同机制，各自独立选择。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161501/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161502/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161503/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161504/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161505/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161506/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161507/desc/0"
+            }
+          ],
+          "effectIds": ["agent:1161:nanoka:morale-burst-impact:mindscape:0"],
+          "maximumLayers": 10,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:jufufu:tigers-roar-impact",
+      "catalogEntityId": "agents:jufufu",
+      "name": "虎啸 · impact",
+      "conditionDescription": "橘福福处于[虎啸]效果中时，冲击力提升固定点数（核心 1—7 为 25/29.2/33.3/37.5/41.7/45.8/50 点），状态持续 30 秒；[虎啸]状态由调用方显式选择断言。受益对象是橘福福自身，与全队暴伤、连携/终结增伤条款相互独立。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1391/details.zh.json",
+              "pointer": "/passive/level/1391501/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1391/details.zh.json",
+              "pointer": "/passive/level/1391502/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1391/details.zh.json",
+              "pointer": "/passive/level/1391503/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1391/details.zh.json",
+              "pointer": "/passive/level/1391504/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1391/details.zh.json",
+              "pointer": "/passive/level/1391505/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1391/details.zh.json",
+              "pointer": "/passive/level/1391506/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1391/details.zh.json",
+              "pointer": "/passive/level/1391507/desc/0"
+            }
+          ],
+          "effectIds": ["agent:1391:nanoka:tigers-roar-impact:mindscape:0"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:dialyn:initial-crit-rate-impact",
+      "catalogEntityId": "agents:dialyn",
+      "name": "核心被动 · impact（初始暴击率转化）",
+      "conditionDescription": "初始暴击率超过 50% 时，每超过 1%，冲击力提升（核心 1—7 为 1.4/1.5/1.6/1.7/1.8/1.9/2 点），最多提升 100 点；由调用方显式输入琉音的初始暴击率（不含局内暴击率增益），50%/51%/75%/100% 在核心 7 下分别为 0/2/50/100 点。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1481/details.zh.json",
+              "pointer": "/passive/level/1481049/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1481/details.zh.json",
+              "pointer": "/passive/level/1481050/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1481/details.zh.json",
+              "pointer": "/passive/level/1481051/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1481/details.zh.json",
+              "pointer": "/passive/level/1481052/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1481/details.zh.json",
+              "pointer": "/passive/level/1481053/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1481/details.zh.json",
+              "pointer": "/passive/level/1481054/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1481/details.zh.json",
+              "pointer": "/passive/level/1481055/desc/0"
+            }
+          ],
+          "effectIds": [
+            "agent:1481:nanoka:initial-crit-rate-impact:mindscape:0"
+          ],
+          "maximumLayers": 1,
+          "inputs": [
+            {
+              "name": "agent:1481:nanoka:initial-crit-rate-impact:mindscape:0:source",
+              "unit": "ratio",
+              "description": "initial critRate，琉音的初始暴击率（比例，1% = 0.01；是初始值，不含局内暴击率增益，不用当前面板值代替）；超过 50% 的部分每 1% 按核心档位换算 1.4—2 点冲击力、封顶 100 点，低于或等于 50% 贡献 0，越界读数按表达式钳制，不使用默认值，不自动读取"
+            }
+          ],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:lighter:mindscape-4-frontline-energy-regen",
+      "catalogEntityId": "agents:lighter",
+      "name": "影画4 · energyRegen（前场角色）",
+      "conditionDescription": "莱特位于后场时，仅当前前场角色的能量自动回复效率提升 10%（受益者基础回能 × 10%；基础回能 1.2/5.0 下分别 +0.12/+0.5 点/秒）；选择本选项即断言莱特位于后场，并须以 beneficiaryActorId 显式声明当前前场角色（持有者同队的另一名实体），后场队友与莱特本人不受益。同句的后场回复 4 点能量（18 秒冷却）是独立瞬时机制，不在本选项内。",
+      "target": "team",
+      "variants": [
+        {
+          "target": "team",
+          "configuration": {
+            "minimumMindscape": 4
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/talent/4/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1161:nanoka:mindscape-4-frontline-energy-regen:mindscape:4"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "declaredTeammateBeneficiary": true
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:alexandrina:mindscape-4-deployed-dolls-energy-regen",
+      "catalogEntityId": "agents:alexandrina",
+      "name": "影画4 · energyRegen",
+      "conditionDescription": "杜苏拉和安娜塔莎均被指派在外时，丽娜的能量自动回复速度提升 0.5 点/秒（固定点数/秒，不随基础回能缩放）；任一玩偶返回丽娜身边时效果结束。两个玩偶均在外的有效状态由调用方显式选择（0/1），不从单只召唤物推断，不模拟返回过程。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 4
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1211/details.zh.json",
+              "pointer": "/talent/4/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1211:nanoka:mindscape-4-deployed-dolls-energy-regen:mindscape:4"
+          ],
+          "maximumLayers": 1,
           "inputs": [],
           "applicability": {},
           "differences": []

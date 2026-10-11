@@ -750,6 +750,7 @@ export function validateStaticCatalog(
           "parameterMapping",
           "damageItemRequirements",
           "layerCountInputName",
+          "declaredTeammateBeneficiary",
         ],
         checks(vp),
         "variant",
@@ -806,6 +807,22 @@ export function validateStaticCatalog(
           checks(`${vp}/layerCountInputName`),
           "layer count input name",
         )
+      // 声明式同队受益者：字段只接受字面量 true；受益者不是持有者，选项的
+      // 有效 target 必须是 team，避免把“同队另一名实体”静默折算成 self。
+      if (variant["declaredTeammateBeneficiary"] !== undefined) {
+        if (variant["declaredTeammateBeneficiary"] !== true)
+          collector.report(
+            "INVALID_INPUT",
+            `${vp}/declaredTeammateBeneficiary`,
+            "Expected the literal true",
+          )
+        if ((variant["target"] ?? option["target"]) !== "team")
+          collector.report(
+            "INVALID_DEFINITION",
+            `${vp}/declaredTeammateBeneficiary`,
+            "A declared teammate beneficiary requires the team option target",
+          )
+      }
       const config = expectObject(
         variant["configuration"],
         checks(`${vp}/configuration`),
@@ -1660,7 +1677,7 @@ export function calculateStaticDamageFromCatalog(
     if (!selection) continue
     rejectUnknownFields(
       selection,
-      ["optionId", "bindingId", "layers"],
+      ["optionId", "bindingId", "layers", "beneficiaryActorId"],
       checks(p),
       "option selection",
     )
@@ -1799,6 +1816,66 @@ export function calculateStaticDamageFromCatalog(
       continue
     }
     if (layers === 0) continue
+    // 声明式同队受益者：启用（layers > 0）的选择按变体声明校验。需要声明的
+    // 变体缺声明、不需要声明的变体带声明、声明实体未观察/无身份/非同队/是
+    // 持有者本人，都是输入错误；不用近似（如把命中角色当前场角色）兜底。
+    const declaredTeammateBeneficiary =
+      variant.declaredTeammateBeneficiary === true
+    const beneficiaryActorId = selection["beneficiaryActorId"]
+    if (beneficiaryActorId !== undefined || declaredTeammateBeneficiary) {
+      if (!declaredTeammateBeneficiary)
+        collector.report(
+          "CONTEXT_MISMATCH",
+          `${p}/beneficiaryActorId`,
+          `This option does not take a declared beneficiary actor; ${explain}`,
+        )
+      else {
+        if (beneficiaryActorId === undefined)
+          collector.report(
+            "MISSING_FACT",
+            `${p}/beneficiaryActorId`,
+            `This option requires the declared beneficiary actor identity; ${explain}`,
+          )
+        else if (
+          typeof beneficiaryActorId !== "string" ||
+          !isEntityId(beneficiaryActorId)
+        )
+          collector.report(
+            "INVALID_INPUT",
+            `${p}/beneficiaryActorId`,
+            `Expected the declared beneficiary actor identity; ${explain}`,
+          )
+        else {
+          const declaredObservation = world.actors.get(beneficiaryActorId)
+          const declaredIdentity = actors.get(beneficiaryActorId)
+          const holderObservation = world.actors.get(binding.holderId)
+          if (
+            declaredObservation === undefined ||
+            declaredIdentity === undefined
+          )
+            collector.report(
+              "MISSING_FACT",
+              `${p}/beneficiaryActorId`,
+              `The declared beneficiary actor "${beneficiaryActorId}" must be an observed actor with identity facts; ${explain}`,
+            )
+          else if (beneficiaryActorId === binding.holderId)
+            collector.report(
+              "CONTEXT_MISMATCH",
+              `${p}/beneficiaryActorId`,
+              `The declared beneficiary must be a teammate other than the holder; ${explain}`,
+            )
+          else if (
+            holderObservation === undefined ||
+            declaredObservation.teamId !== holderObservation.teamId
+          )
+            collector.report(
+              "CONTEXT_MISMATCH",
+              `${p}/beneficiaryActorId`,
+              `The declared beneficiary actor must be on the holder's team; ${explain}`,
+            )
+        }
+      }
+    }
     // 特殊虚曜分支：基础区只读受限攻击，动作倍率与档位语义已由具名机制表达；
     // 逐命中调整与被 strength 取代的旧倍率通道在选中时明确拒绝，不静默丢弃。
     if (specialVoidflareRequested) {
@@ -2003,6 +2080,24 @@ export function calculateStaticDamageFromCatalog(
           (e.element !== null &&
             variant.applicability.beneficiaryElements.includes(e.element))),
     )
+    // 声明式同队受益者把受益集合收敛为声明的单个实体：与原受益集合
+    // （同队、职业、元素、队伍职业人数筛选后的合法候选）求交而不是替换，
+    // 声明实体落在筛选结果之外时该选择保持原有的零贡献契约，不新增报错；
+    // 也不与全队候选并列，防止未被声明的队友同时受益。观察、身份、同队
+    // 与非持有者的输入错误校验在启用选择阶段先行执行。
+    const declaredBeneficiaryId =
+      variant.declaredTeammateBeneficiary === true &&
+      typeof selection["beneficiaryActorId"] === "string"
+        ? (selection["beneficiaryActorId"] as EntityId)
+        : undefined
+    const beneficiaryCandidates: Condition<"contribution"> = {
+      kind: "any",
+      conditions: beneficiaries.map(([entityId]) => ({
+        kind: "same-entity",
+        left: { role: "beneficiary" },
+        right: { role: "entity", entityId },
+      })),
+    }
     const guard: Condition<"contribution"> = {
       kind: "all",
       conditions: [
@@ -2011,14 +2106,19 @@ export function calculateStaticDamageFromCatalog(
           left: { role: "holder" },
           right: { role: "entity", entityId: binding.holderId },
         },
-        {
-          kind: "any",
-          conditions: beneficiaries.map(([entityId]) => ({
-            kind: "same-entity",
-            left: { role: "beneficiary" },
-            right: { role: "entity", entityId },
-          })),
-        },
+        declaredBeneficiaryId === undefined
+          ? beneficiaryCandidates
+          : {
+              kind: "all",
+              conditions: [
+                {
+                  kind: "same-entity",
+                  left: { role: "beneficiary" },
+                  right: { role: "entity", entityId: declaredBeneficiaryId },
+                },
+                beneficiaryCandidates,
+              ],
+            },
       ],
     }
     for (const effectId of variant.effectIds) {

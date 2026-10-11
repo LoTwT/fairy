@@ -713,6 +713,12 @@ function battleSelections(
       optionId: selection.optionId,
       bindingId: binding.bindingId,
       layers: selection.layers,
+      // 声明式同队受益者原样透传给目录消费层校验；0 层关闭时无需提供
+      // （字段存在时仍原样透传，由目录按既有关闭语义跳过声明检查），
+      // 不从动作角色或任何位置状态自动补全。
+      ...(selection.beneficiaryActorId === undefined
+        ? {}
+        : { beneficiaryActorId: selection.beneficiaryActorId }),
     })
   }
   for (const binding of bindings) {

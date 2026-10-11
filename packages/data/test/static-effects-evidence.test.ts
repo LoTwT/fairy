@@ -48,6 +48,17 @@ describe("static effects evidence path", () => {
   it("verifies the registered complete state option evidence through the generator entry", async () => {
     const verified = await verifyStaticEffectsEvidence(verifiedPublication)
     expect(verified).toContain(label)
+    // 批次 06 的六项补充证据（含被动行 rank 与 data.json level 元数据的映射）
+    // 也由同一入口逐条核验。
+    for (const supplementId of [
+      "nanoka:agents:caesar:stance-switch-impact",
+      "nanoka:agents:lighter:morale-burst-impact",
+      "nanoka:agents:jufufu:tigers-roar-impact",
+      "nanoka:agents:dialyn:initial-crit-rate-impact",
+      "nanoka:agents:lighter:mindscape-4-frontline-energy-regen",
+      "nanoka:agents:alexandrina:mindscape-4-deployed-dolls-energy-regen",
+    ])
+      expect(verified).toContain(`supplement:${supplementId}`)
   })
 
   it("rejects a stale digest or a missing pointer for the complete state option", async () => {

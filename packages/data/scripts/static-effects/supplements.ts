@@ -8,6 +8,7 @@ import type {
   PotentialLevel,
   SkillCategory,
   SourceIdentity,
+  SpecialSkillLevel,
   StaticCatalogEntity,
   StaticCatalogInputRequirement,
   StaticCatalogVariant,
@@ -24,6 +25,12 @@ export interface SupplementEvidenceReference {
   readonly path: string
   readonly pointer: string
   readonly sha256: string
+  /**
+   * 被动行证据（/passive/level/<id>）对应的核心等级（1—7）：提供后生成器
+   * 按同目录 data.json 的 level 元数据核对逐档映射，防止把等级行错绑到
+   * 另一档位的证据。
+   */
+  readonly rank?: number
 }
 
 export interface SupplementRuleSpec {
@@ -38,9 +45,13 @@ export interface SupplementRuleSpec {
   readonly maximumLayers: number
   /**
    * 补充规则的受益者；缺省 holder。全队受益的条款（如残响Ⅰ型 EX 后
-   * 全队冲击力）声明 team，与目录选项 target 同口径。
+   * 全队冲击力）声明 team，与目录选项 target 同口径；受益者是持有者同队
+   * 其他实体且由调用方逐次声明的条款（如莱特后场时的当前前场角色）声明
+   * team-except-holder，并配合变体的 declaredTeammateBeneficiary 使用。
    */
-  readonly beneficiary?: { readonly kind: "holder" | "team" }
+  readonly beneficiary?: {
+    readonly kind: "holder" | "team" | "team-except-holder"
+  }
 }
 
 export interface SupplementVariantSpec {
@@ -50,6 +61,12 @@ export interface SupplementVariantSpec {
     readonly coreSkillLevels?: readonly CoreSkillLevel[]
     readonly refinements?: readonly (1 | 2 | 3 | 4 | 5)[]
     readonly potentialLevels?: readonly PotentialLevel[]
+    /**
+     * 该选项有证据支持的特殊技最终等级（1—16）；依赖特殊技等级的补充条款
+     * （如凯撒攻防转换的 8+最终等级表达式）必须列出，与固定来源的
+     * special-skill-level 语义共用同一档位契约。
+     */
+    readonly specialSkillLevels?: readonly SpecialSkillLevel[]
     /** 驱动盘套装二件套选项的件数门槛；与规则的 setPieces 配置条件一致。 */
     readonly minimumSetPieces?: 2 | 4
   }
@@ -58,6 +75,12 @@ export interface SupplementVariantSpec {
   readonly conditionDescription: string
   readonly name: string
   readonly target: "self" | "team"
+  /**
+   * 声明式同队受益者：受益者是持有者同队的另一名实体，由每次选择以
+   * beneficiaryActorId 显式声明（如莱特位于后场时的当前前场角色）。目录
+   * 消费端校验声明实体并只把该实体纳入受益集合；不引入时间线或位置引擎。
+   */
+  readonly declaredTeammateBeneficiary?: true
 }
 
 export interface SupplementBase {
@@ -102,6 +125,46 @@ export interface SupplementBase {
    * 单选状态，不引入跨选项推理或时间线。
    */
   readonly exclusiveGroup?: string
+  /**
+   * 具名来源上下文守卫：按完整实体 + 培养位置（rankKind/rank）定位本批
+   * 条款在固定来源中的真实上下文，登记该上下文的冻结预期——已存在的
+   * 锚块（块 id + 冻结完整 note 原文）或真实缺失（该位置当前没有任何
+   * 块/记录）。上下文内出现登记 stat 家族的机器记录（raw 或 normalized
+   * 任一表示）、锚块缺失、note 与冻结全文不一致（追加、插入、替换任一
+   * 变化，包括保留全部旧内容再追加新句）或已登记缺失的位置出现任何新
+   * 编码，都拒绝生成并要求重新核对条款归属；其他 rank/独立机制的同 stat
+   * 记录不受影响，按实体身份与块 id 匹配，不依赖数组位置或局部 ID 子串。
+   * 归一化可以改写记录 stat（如未知 stat 被归一为 dmgBonus），因此两份
+   * 表示都必须核对；该守卫不替代 loadSource 对 19 个固定资源的 SHA 校验。
+   */
+  readonly clauseContextGuard?: {
+    readonly rankKind: "mindscape"
+    readonly rank: number
+    /**
+     * 冲突 stat 家族：该培养位置内任一记录的 raw 或 normalized stat 命中
+     * 即拒绝。固定来源当前没有条款块时（如凯撒攻防转换），此项同时登记
+     * “该位置没有这些 stat 的编码”这一真实缺失现状。
+     */
+    readonly stats: readonly string[]
+    /**
+     * 锚块（条款所在的真实块）：块必须存在于该位置的 raw pack，且 note
+     * 与登记的冻结全文逐字一致；缺失或任何变化（追加、插入、替换，包括
+     * 保留全部旧内容再追加新句）即拒绝——锚块上下文的变化要求重新
+     * review 是有意的固定来源约束，不做空白宽松归一。stat 检查作用于
+     * 整个培养位置（捕捉其他块/新块的同条款编码），锚块按身份区分条款
+     * 归属，不与同位置其他机制的块混同。
+     */
+    readonly anchorBlocks?: readonly {
+      readonly blockId: string
+      /** 冻结的完整原始 note（取自已固定 fac62407 的真实块全文）。 */
+      readonly frozenNote: string
+    }[]
+    /**
+     * 登记该位置当前真实为空（无任何块/记录）：出现任何新编码（无论
+     * stat）即拒绝并要求复核。
+     */
+    readonly expectsEmptyPack?: true
+  }
 }
 
 /** 在既有目录实体新增选项的补充来源；不创建重复实体。 */
@@ -689,6 +752,73 @@ const wengineSupplement = (entityId: string, slug: string) => ({
   optionId: `nanoka:w-engines:${entityId}:${slug}`,
   effectId: `w-engine:${entityId}:nanoka:${slug}` as EffectId,
 })
+
+/** 影画门槛条件；门槛值来自来源天赋描述。 */
+const mindscapeFrom = (minimum: number): Condition<"configuration"> => ({
+  kind: "compare-number",
+  unit: "count",
+  operator: "gte",
+  left: {
+    kind: "configuration-number",
+    unit: "count",
+    field: "mindscapeRank",
+  },
+  right: literal("count", minimum),
+})
+
+/**
+ * 代理人核心被动逐档证据：/passive/level/<id>/desc/0 的连续 7 行，rank 为
+ * 该行在 data.json level 元数据中的真实核心等级；生成器按 rank 逐行核对
+ * 等级映射，防止把档位证据错绑到相邻行。
+ */
+const agentPassiveEvidence = (
+  entityId: string,
+  sha256: string,
+  firstKey: number,
+): readonly SupplementEvidenceReference[] =>
+  [1, 2, 3, 4, 5, 6, 7].map((rank) => ({
+    path: `agents/${entityId}/details.zh.json`,
+    pointer: `/passive/level/${firstKey + rank - 1}/desc/0`,
+    sha256,
+    rank,
+  }))
+
+/** 按核心等级取值的参数表（1—7 档字面值，不插值）。 */
+const coreRatio = (
+  values: readonly [number, number, number, number, number, number, number],
+) =>
+  ({
+    kind: "by-rank",
+    rank: "coreSkillLevel",
+    unit: "ratio",
+    values: {
+      1: values[0],
+      2: values[1],
+      3: values[2],
+      4: values[3],
+      5: values[4],
+      6: values[5],
+      7: values[6],
+    },
+  }) as const
+
+const coreImpactPoints = (
+  values: readonly [number, number, number, number, number, number, number],
+) =>
+  ({
+    kind: "by-rank",
+    rank: "coreSkillLevel",
+    unit: "impact-points",
+    values: {
+      1: values[0],
+      2: values[1],
+      3: values[2],
+      4: values[3],
+      5: values[4],
+      6: values[5],
+      7: values[6],
+    },
+  }) as const
 
 /** 冲击力条款可能出现的固定来源 stat 名；出现即触发重复补充防护。 */
 const impactSourceStats = [
@@ -1909,6 +2039,454 @@ const koledaEnhancedBasicSecondPerLayer: Supplement = {
     target: "self",
   },
 }
+/**
+ * 凯撒（S01，批次 06）：攻防转换的冲击力提升。触发[精准格挡]、[防御反击]
+ * 或[招架支援]后 3 秒内自身冲击力提升 (8+特殊技最终等级)%，按既有
+ * specialSkillLevel 档位契约查表（1—16 由等级表达式生成），不默认最高级。
+ */
+const caesarStanceSwitchImpact: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:agents:caesar:stance-switch-impact",
+  source: "nanoka-integrated@3.2 agents/1071 /skill/special/description/4/desc",
+  catalogEntityId: "agents:caesar",
+  optionId: "nanoka:agents:caesar:stance-switch-impact",
+  supportedRanks: "特殊技最终等级 1—16",
+  computationTarget: "catalog option on the mapped agent entity",
+  // 固定来源没有攻防转换块（该条款是特殊技被动，mindscape rank 0 只有
+  // 坚韧之壁与战意激昂两块），登记这一真实缺失现状：rank 0 出现任何冲击力
+  // 族编码（raw 或归一后）都要求重新核对条款归属，不编造已存在的块 ID。
+  clauseContextGuard: {
+    rankKind: "mindscape",
+    rank: 0,
+    stats: impactSourceStats,
+  },
+  evidence: [
+    {
+      path: "agents/1071/details.zh.json",
+      pointer: "/skill/special/description/4/desc",
+      sha256:
+        "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294",
+    },
+    {
+      path: "agents/1071/details.zh.json",
+      pointer: "/skill/special/description/5/param/0/desc",
+      sha256:
+        "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294",
+    },
+  ],
+  verification:
+    "Nanoka 特殊技描述（agents/1071/details.zh.json 的 /skill/special/description/4/desc 与 /skill/special/description/5/param/0/desc，英文文件同文核对）确认：凯撒触发[精准格挡]、[防御反击]或[招架支援]时，自身冲击力提升 {CAL:8+AvatarSkillLevel(1)*1,1,2}%，持续 3 秒。固定 ZZZ-HP 来源没有任何冲击力机器记录，按补充来源在既有 agents:caesar 实体新增选项。数值按特殊技最终等级查表（8+等级：1 级 9%、16 级 24%），与露西/卢西娅的 special-skill-level 档位契约共用同一表达式生成表：输入是已含影画加级的最终等级，影画 3/5 的技能等级提升由调用方在提供等级时结算，本选项不再重复加级；缺档等级按既有契约拒绝，不默认最高级。触发事实与 3 秒持续由调用方显式选择断言，不模拟时间线；局内百分比冲击进入 impact 的 final-percentage。",
+  rule: {
+    effectId: "agent:1071:nanoka:stance-switch-impact:mindscape:0",
+    identity: { kind: "agent", entityId: "1071" },
+    section: "特殊技：攻防转换",
+    config: { kind: "constant", value: true },
+    parameters: {
+      amount: {
+        kind: "by-rank",
+        rank: "specialSkillLevel",
+        unit: "ratio",
+        values: Object.fromEntries(
+          (
+            [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] as const
+          ).map((level) => [level, (8 + level) / 100]),
+        ),
+      } as AnyParameter,
+    },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: impactFinalPercentage("amount"),
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: {
+      specialSkillLevels: [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+      ],
+    },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "触发[精准格挡]、[防御反击]或[招架支援]时，自身冲击力提升 (8+特殊技最终等级)%（1—16 级为 9%—24%），持续 3 秒；触发事实与持续由调用方显式选择断言。等级为已含影画加级的最终等级，不重复加级。",
+    name: "攻防转换 · impact",
+    target: "self",
+  },
+}
+
+/**
+ * 莱特（S01，批次 06）：[士气喷发]中每消耗 10 点士气的冲击力提升。每层 1—2%
+ * 随核心档位逐档变化，最高 10 层即来源上限（10%—20%），持续 6 秒。有效层数是
+ * 调用方声明的完整状态层数，不用当前士气推导，也不自动消耗士气；与[昂扬]
+ * 完整状态（施加时冲击力转化）是不同机制，互不替换对方的读数。
+ */
+const lighterMoraleBurstImpact: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:agents:lighter:morale-burst-impact",
+  source:
+    "nanoka-integrated@3.2 agents/1161 /passive/level/1161501—1161507/desc/0",
+  catalogEntityId: "agents:lighter",
+  optionId: "nanoka:agents:lighter:morale-burst-impact",
+  supportedRanks: "核心 1—7；层数 0—10",
+  computationTarget: "catalog option on the mapped agent entity",
+  // 条款上下文：核心被动所在 mindscape rank 0 的 blk-legacy（助燃剂块），
+  // 与同 rank 的[昂扬]块（blk-ms4aoho0-grnxav，记录 stat 为 dmgBonus）按
+  // 块身份区分，不混同。
+  clauseContextGuard: {
+    rankKind: "mindscape",
+    rank: 0,
+    stats: impactSourceStats,
+    anchorBlocks: [
+      {
+        blockId: "blk-legacy",
+        frozenNote:
+          "[士气喷发]状态下，轻拳起攻或刺拳连击命中敌人时，目标的冰属性伤害抗性和火属性伤害抗性降低15%，持续30秒；",
+      },
+    ],
+  },
+  evidence: agentPassiveEvidence(
+    "1161",
+    "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5",
+    1161501,
+  ),
+  verification:
+    "Nanoka 核心被动七行（agents/1161/details.zh.json 的 /passive/level/1161501—1161507/desc/0，data.json level 元数据 1—7 逐行核对，英文文件同文核对：第 7 级为 With every 10 points of Morale consumed, Lighter's Impact increases by 2%, up to a maximum increase of 20%）确认：威力提升后的招式命中敌人时会持续消耗[士气]，每消耗 10 点[士气]，莱特的冲击力提升 1/1.17/1.33/1.5/1.67/1.83/2%（按核心 1—7），最多提升 10/11.7/13.3/15/16.7/18.3/20%，持续 6 秒。固定 ZZZ-HP 来源没有任何冲击力机器记录（[昂扬]的冲击力单次转化记录属另一机制，修订 19 已并入完整状态选项），按补充来源在既有 agents:lighter 实体新增选项。数值取来源字面值，不按等差插值；层数表达有效[士气喷发]状态：调用方按已消耗的每 10 点士气显式选择层数（0 层关闭、最多 10 层），10 层即为来源上限，不用当前士气值除以 10 推导，也不自动消耗士气；6 秒持续与士气消耗过程不模拟。与[昂扬]完整状态选项独立：昂扬读获得时冲击力快照，本选项不替换或复用该读数。",
+  rule: {
+    effectId: "agent:1161:nanoka:morale-burst-impact:mindscape:0",
+    identity: { kind: "agent", entityId: "1161" },
+    section: "核心被动：斗志昂扬（士气喷发）",
+    config: { kind: "constant", value: true },
+    parameters: {
+      amount: coreRatio([0.01, 0.0117, 0.0133, 0.015, 0.0167, 0.0183, 0.02]),
+    },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: impactFinalPercentage("amount"),
+    maximumLayers: 10,
+  },
+  variant: {
+    configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "[士气喷发]状态中，威力提升后的招式命中敌人会持续消耗[士气]，每消耗 10 点[士气]使冲击力提升（核心 1—7 每层 1/1.17/1.33/1.5/1.67/1.83/2%），最多 10 层（即来源上限 10%—20%），持续 6 秒；有效层数由调用方显式选择，不从当前士气推导，0 层表示关闭。与[昂扬]完整状态是不同机制，各自独立选择。",
+    name: "士气喷发 · impact",
+    target: "self",
+  },
+}
+
+/**
+ * 橘福福（S01，批次 06）：[虎啸]状态中的自身固定冲击力点数。按核心七档取
+ * 25—50 点；是自身固定点数，不是全队冲击，也不是百分比；与既有[虎啸]暴伤、
+ * 连携/终结增伤选项共存，不重复既有条款。
+ */
+const jufufuTigersRoarImpact: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:agents:jufufu:tigers-roar-impact",
+  source:
+    "nanoka-integrated@3.2 agents/1391 /passive/level/1391501—1391507/desc/0",
+  catalogEntityId: "agents:jufufu",
+  optionId: "nanoka:agents:jufufu:tigers-roar-impact",
+  supportedRanks: "核心 1—7",
+  computationTarget: "catalog option on the mapped agent entity",
+  // 条款上下文：核心被动（虎虎生威）所在 mindscape rank 0 的 blk-legacy；
+  // 影画 4 的 critDmg 记录在 rank 4，不受本守卫影响。
+  clauseContextGuard: {
+    rankKind: "mindscape",
+    rank: 0,
+    stats: impactSourceStats,
+    anchorBlocks: [
+      {
+        blockId: "blk-legacy",
+        frozenNote:
+          "「虎威」命中敌人时，若拥有至少100点[威风]且橘福福不为当前操作中角色，橘福福会围绕目标敌人，发动[连携技：虎釜震煞]；\n发动时，全队角色获得[虎啸]效果：暴击伤害提升20%，橘福福的初始攻击力大于等于2800点时，每超过100点攻击力会使暴击伤害额外提升5%，最多额外提升30%；\n[虎啸]状态下，角色的[连携技]/[终结技]造成的伤害提升20%/40%；",
+      },
+    ],
+  },
+  evidence: agentPassiveEvidence(
+    "1391",
+    "cfb0b4b580900d4c3e6c668c63e89b5f61d69e577db361b19bca86d063b36ae6",
+    1391501,
+  ),
+  verification:
+    "Nanoka 核心被动七行（agents/1391/details.zh.json 的 /passive/level/1391501—1391507/desc/0，data.json level 元数据 1—7 逐行核对，英文文件同文核对，第 7 级英文为 While Ju Fufu is in the Tiger's Roar state, Impact increases by 50）确认：橘福福处于[虎啸]效果中时，冲击力提升 25/29.2/33.3/37.5/41.7/45.8/50 点（按核心 1—7）。固定 ZZZ-HP 来源已编码同状态的暴击伤害与连携/终结增伤，唯独冲击力点数没有机器记录，按补充来源在既有 agents:jufufu 实体新增选项，与既有条款共存、不重复贡献。数值取来源字面值；受益对象是橘福福自身（不是全队），量纲是固定点数（不是百分比）：按固定来源 atk/def 点数与批次 02 首席跟班固定冲击力的既有口径进入 impact 的 final-fixed，基础冲击力变化时固定增量不变。[虎啸]的取得与 30 秒持续由调用方显式选择断言，重复触发刷新不模拟。",
+  rule: {
+    effectId: "agent:1391:nanoka:tigers-roar-impact:mindscape:0",
+    identity: { kind: "agent", entityId: "1391" },
+    section: "核心被动：虎虎生威（虎啸）",
+    config: { kind: "constant", value: true },
+    parameters: {
+      amount: coreImpactPoints([25, 29.2, 33.3, 37.5, 41.7, 45.8, 50]),
+    },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: {
+      kind: "stat-adjustment",
+      stat: "impact",
+      stage: "final-fixed",
+      value: { kind: "parameter", unit: "impact-points", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "橘福福处于[虎啸]效果中时，冲击力提升固定点数（核心 1—7 为 25/29.2/33.3/37.5/41.7/45.8/50 点），状态持续 30 秒；[虎啸]状态由调用方显式选择断言。受益对象是橘福福自身，与全队暴伤、连携/终结增伤条款相互独立。",
+    name: "虎啸 · impact",
+    target: "self",
+  },
+}
+
+/**
+ * 琉音（S01，批次 06）：初始暴击率超过 50% 的部分转冲击力。每超 1% 提升
+ * 1.4—2 点（按核心 1—7），最多 100 点。读取的是初始暴击率（不含局内暴击率
+ * 增益），沿用直接属性显式 :source 输入契约；输出阶段沿既有固定冲击力点数
+ * 的面板契约，来源只证明换算与上限，未证明面板结算阶段。
+ */
+const dialynInitialCritRateImpact: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:agents:dialyn:initial-crit-rate-impact",
+  source:
+    "nanoka-integrated@3.2 agents/1481 /passive/level/1481049—1481055/desc/0",
+  catalogEntityId: "agents:dialyn",
+  optionId: "nanoka:agents:dialyn:initial-crit-rate-impact",
+  supportedRanks: "核心 1—7",
+  computationTarget: "catalog option on the mapped agent entity",
+  // 条款上下文：核心被动（五星客服热线）所在 mindscape rank 0 的
+  // blk-legacy；同 rank 的场外连线块（blk-ms0gb49m-zmm1r1）与影画 4 的
+  // atk 记录（rank 4）按位置/块身份区分。
+  clauseContextGuard: {
+    rankKind: "mindscape",
+    rank: 0,
+    stats: impactSourceStats,
+    anchorBlocks: [
+      {
+        blockId: "blk-legacy",
+        frozenNote:
+          "[强化特殊技：布！]命中敌人时，敌人获得[恶意投诉]效果，[恶意投诉]效果下敌人进入失衡状态后的失衡持续时间提升2秒，失衡易伤倍率提升30%",
+      },
+    ],
+  },
+  evidence: agentPassiveEvidence(
+    "1481",
+    "c335486522cb3958f1430551fb07616364cd01f13cbe988c7bde6d21a41ca3ed",
+    1481049,
+  ),
+  verification:
+    "Nanoka 核心被动七行（agents/1481/details.zh.json 的 /passive/level/1481049—1481055/desc/0；该代理人的核心行键为 1481049—1481055，data.json level 元数据 1—7 逐行核对，英文文件同文核对，第 7 级英文为 Impact increases by 2 for each additional 1%, up to a maximum increase of 100）确认：进入战场时初始暴击率超过 50% 的情况下，每超过 1%，冲击力提升 1.4/1.5/1.6/1.7/1.8/1.9/2 点（按核心 1—7），最多提升 100 点。固定 ZZZ-HP 来源没有任何冲击力机器记录，按补充来源在既有 agents:dialyn 实体新增选项。输入必须区分直接属性的初始/当前阶段：沿用电位差/精准制导等直接属性转化先例的必填显式 :source 输入（比例 1% = 0.01），描述明确为初始暴击率，不冒称自动读取，也不把局内暴击率增益的当前值当初始值；越界与低于 50% 的读数按表达式钳制（核心 7：49%/50% → 0、51% → 2 点、75% → 50 点、100% 及以上 → 100 点封顶）。输出阶段按既有面板契约分层说明：来源证明的是固定点数、阈值与上限，本实现采用 impact 的 final-fixed（与批次 02 首席跟班固定冲击力及固定来源 atk/def 点数同口径），该阶段选择是契约推定，来源未证明面板结算阶段，未经游戏实测。",
+  rule: {
+    effectId: "agent:1481:nanoka:initial-crit-rate-impact:mindscape:0",
+    identity: { kind: "agent", entityId: "1481" },
+    section: "核心被动：五星客服热线（初始暴击率转化）",
+    config: { kind: "constant", value: true },
+    parameters: {
+      threshold: { kind: "constant", unit: "ratio", value: -0.5 },
+      rate: {
+        kind: "by-rank",
+        rank: "coreSkillLevel",
+        unit: "multiplier",
+        values: { 1: 140, 2: 150, 3: 160, 4: 170, 5: 180, 6: 190, 7: 200 },
+      },
+      cap: { kind: "constant", unit: "impact-points", value: 100 },
+    },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: {
+      kind: "stat-adjustment",
+      stat: "impact",
+      stage: "final-fixed",
+      value: {
+        kind: "minimum",
+        unit: "impact-points",
+        operands: [
+          {
+            kind: "convert",
+            unit: "impact-points",
+            input: {
+              kind: "maximum",
+              unit: "ratio",
+              operands: [
+                literal("ratio", 0),
+                {
+                  kind: "add",
+                  unit: "ratio",
+                  operands: [
+                    {
+                      kind: "input",
+                      unit: "ratio",
+                      name: "agent:1481:nanoka:initial-crit-rate-impact:mindscape:0:source",
+                    },
+                    { kind: "parameter", unit: "ratio", name: "threshold" },
+                  ],
+                },
+              ],
+            },
+            rate: { kind: "parameter", unit: "multiplier", name: "rate" },
+          },
+          { kind: "parameter", unit: "impact-points", name: "cap" },
+        ],
+      },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+    inputs: [
+      {
+        name: "agent:1481:nanoka:initial-crit-rate-impact:mindscape:0:source",
+        unit: "ratio",
+        description:
+          "initial critRate，琉音的初始暴击率（比例，1% = 0.01；是初始值，不含局内暴击率增益，不用当前面板值代替）；超过 50% 的部分每 1% 按核心档位换算 1.4—2 点冲击力、封顶 100 点，低于或等于 50% 贡献 0，越界读数按表达式钳制，不使用默认值，不自动读取",
+      },
+    ],
+    applicability: {},
+    conditionDescription:
+      "初始暴击率超过 50% 时，每超过 1%，冲击力提升（核心 1—7 为 1.4/1.5/1.6/1.7/1.8/1.9/2 点），最多提升 100 点；由调用方显式输入琉音的初始暴击率（不含局内暴击率增益），50%/51%/75%/100% 在核心 7 下分别为 0/2/50/100 点。",
+    name: "核心被动 · impact（初始暴击率转化）",
+    target: "self",
+  },
+}
+
+/**
+ * 莱特（M14，批次 06）：影画 4 后场时仅当前前场角色的能量自动回复效率 +10%。
+ * 按真实百分比回能契约（摇摆爵士二件套同构：受益者基础回能 × 10%），不是固定
+ * +0.1 点/秒；受益者由每次选择显式声明为持有者同队的另一名实体（声明式
+ * 同队受益者），全队不同时受益、后场的莱特本人不受益、不从命中身份推断
+ * 前场。进入士气喷发给后场回复 4 点能量/18 秒冷却不在本批，留批次 10。
+ */
+const lighterMindscape4FrontlineEnergyRegen: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:agents:lighter:mindscape-4-frontline-energy-regen",
+  source: "nanoka-integrated@3.2 agents/1161 /talent/4/desc",
+  catalogEntityId: "agents:lighter",
+  optionId: "nanoka:agents:lighter:mindscape-4-frontline-energy-regen",
+  supportedRanks: "影画 4 及以上",
+  computationTarget: "catalog option on the mapped agent entity",
+  // 条款上下文：mindscape rank 4 的真实空 pack（影画 4 无任何块/记录）；
+  // 其他 rank（如影画 1）的独立回能条款不受影响。
+  clauseContextGuard: {
+    rankKind: "mindscape",
+    rank: 4,
+    stats: ["energyRegen"],
+    expectsEmptyPack: true,
+  },
+  evidence: [
+    {
+      path: "agents/1161/details.zh.json",
+      pointer: "/talent/4/desc",
+      sha256:
+        "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5",
+    },
+  ],
+  verification:
+    "Nanoka 影画 4（agents/1161/details.zh.json 的 /talent/4/desc，英文文件同文核对：When Lighter is off-field, the Energy Regen for the on-field character is increased by 10%）确认：莱特位于后场时，前场角色的能量自动回复效率提升 10%。固定 ZZZ-HP 来源的 mindscape 4 没有任何机器记录，按补充来源在既有 agents:lighter 实体新增选项。这是百分比效率提升，按现有真实百分比回能契约编码（与摇摆爵士二件套 +20% 同构：受益者基础回能 × 10%，基础回能 1.2/5.0 下分别 +0.12/+0.5 点/秒），不是固定 +0.1 点/秒。受益对象是当前前场角色且仅此一名：选择本选项即断言莱特位于后场，调用方以 beneficiaryActorId 显式声明当前前场角色（必须是持有者同队的另一名实体，目录校验其观察与身份并拒绝持有者本人），全队不同时受益、后场队友不受益，不从命中角色或任何位置引擎推断前场（后台攻击也可能有命中角色，不能把 hitActor 当前场角色）。同句“进入[士气喷发]状态时为后场角色回复 4 点能量，18 秒内最多触发一次”是独立瞬时机制，不在本批（留批次 10 统一登记覆盖说明），不并入本选项。",
+  rule: {
+    effectId:
+      "agent:1161:nanoka:mindscape-4-frontline-energy-regen:mindscape:4",
+    identity: { kind: "agent", entityId: "1161" },
+    section: "影画4",
+    config: mindscapeFrom(4),
+    parameters: {
+      amount: { kind: "constant", unit: "ratio", value: 0.1 },
+    },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: {
+      kind: "stat-adjustment",
+      stat: "energyRegen",
+      stage: "final-fixed",
+      value: {
+        kind: "multiply",
+        unit: "energy-per-second",
+        value: {
+          kind: "stat",
+          unit: "energy-per-second",
+          entity: { role: "beneficiary" },
+          stat: "energyRegen",
+          stage: "base",
+          at: "evaluation",
+        },
+        coefficient: { kind: "parameter", unit: "ratio", name: "amount" },
+      },
+    },
+    maximumLayers: 1,
+    beneficiary: { kind: "team-except-holder" },
+  },
+  variant: {
+    configuration: { minimumMindscape: 4 },
+    inputs: [],
+    applicability: {},
+    declaredTeammateBeneficiary: true,
+    conditionDescription:
+      "莱特位于后场时，仅当前前场角色的能量自动回复效率提升 10%（受益者基础回能 × 10%；基础回能 1.2/5.0 下分别 +0.12/+0.5 点/秒）；选择本选项即断言莱特位于后场，并须以 beneficiaryActorId 显式声明当前前场角色（持有者同队的另一名实体），后场队友与莱特本人不受益。同句的后场回复 4 点能量（18 秒冷却）是独立瞬时机制，不在本选项内。",
+    name: "影画4 · energyRegen（前场角色）",
+    target: "team",
+  },
+}
+
+/**
+ * 丽娜（M15，批次 06）：影画 4 两个玩偶均被指派在外时自身能量自动回复速度
+ * +0.5 点/秒。固定点数/秒（非百分比、非全队）；任一玩偶返回即状态结束，
+ * 由调用方以 0/1 显式选择声明，不从单只召唤物推断，不模拟召唤物行为。
+ */
+const alexandrinaMindscape4DeployedDollsEnergyRegen: Supplement = {
+  kind: "option",
+  supplementId:
+    "nanoka:agents:alexandrina:mindscape-4-deployed-dolls-energy-regen",
+  source: "nanoka-integrated@3.2 agents/1211 /talent/4/desc",
+  catalogEntityId: "agents:alexandrina",
+  optionId: "nanoka:agents:alexandrina:mindscape-4-deployed-dolls-energy-regen",
+  supportedRanks: "影画 4 及以上",
+  computationTarget: "catalog option on the mapped agent entity",
+  // 条款上下文：mindscape rank 4 的真实空 pack；影画 1 的穿透率条款在
+  // rank 1，不受本守卫影响。
+  clauseContextGuard: {
+    rankKind: "mindscape",
+    rank: 4,
+    stats: ["energyRegen"],
+    expectsEmptyPack: true,
+  },
+  evidence: [
+    {
+      path: "agents/1211/details.zh.json",
+      pointer: "/talent/4/desc",
+      sha256:
+        "ff04332f6e00a8e4ef654a1da8bfffbb577d90219c26b9f37cb1f4f69c0b9615",
+    },
+  ],
+  verification:
+    "Nanoka 影画 4（agents/1211/details.zh.json 的 /talent/4/desc，英文文件同文核对：Rina's Energy Regen increases by 0.5/s when both Drusilla and Anastella are deployed. The effect ends when Drusilla or Anastella returns to Rina.）确认：杜苏拉和安娜塔莎均被指派在外时，丽娜的能量自动回复速度提升 0.5 点/秒；任一返回丽娜身边时对应增益效果结束。固定 ZZZ-HP 来源的 mindscape 4 没有任何机器记录，按补充来源在既有 agents:alexandrina 实体新增选项。这是固定点数/秒（0.5 点/秒），不是百分比效率、不是全队效果、也不是基础回能的 50%：按批次 01 固定回能纠错后的固定回能编码（energy-per-second final-fixed，不随基础回能缩放），受益对象是丽娜自身，任一基础回能下增量恒为 +0.5。两个玩偶均在外的有效状态由调用方以 0/1 显式选择声明（0 层关闭），不从单只召唤物存在与否推断，也不模拟召唤物返回过程或持续时间。",
+  rule: {
+    effectId:
+      "agent:1211:nanoka:mindscape-4-deployed-dolls-energy-regen:mindscape:4",
+    identity: { kind: "agent", entityId: "1211" },
+    section: "影画4",
+    config: mindscapeFrom(4),
+    parameters: {
+      amount: { kind: "constant", unit: "energy-per-second", value: 0.5 },
+    },
+    scope: "entity",
+    when: { kind: "constant", value: true },
+    operation: {
+      kind: "stat-adjustment",
+      stat: "energyRegen",
+      stage: "final-fixed",
+      value: { kind: "parameter", unit: "energy-per-second", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { minimumMindscape: 4 },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "杜苏拉和安娜塔莎均被指派在外时，丽娜的能量自动回复速度提升 0.5 点/秒（固定点数/秒，不随基础回能缩放）；任一玩偶返回丽娜身边时效果结束。两个玩偶均在外的有效状态由调用方显式选择（0/1），不从单只召唤物推断，不模拟返回过程。",
+    name: "影画4 · energyRegen",
+    target: "self",
+  },
+}
+
 export const SUPPLEMENTS: readonly Supplement[] = [
   nekomataOrdinaryDmgBonus,
   nekomataOrdinaryShow,
@@ -1938,4 +2516,10 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   nicoleMindscape1ExDamage,
   qingyiFlashVoltageConsumedDamage,
   koledaEnhancedBasicSecondPerLayer,
+  caesarStanceSwitchImpact,
+  lighterMoraleBurstImpact,
+  jufufuTigersRoarImpact,
+  dialynInitialCritRateImpact,
+  lighterMindscape4FrontlineEnergyRegen,
+  alexandrinaMindscape4DeployedDollsEnergyRegen,
 ]

@@ -305,29 +305,44 @@ describe("Yuzuha additional ability complete state", () => {
     ).toBe(false)
   })
 
-  it("preserves anomaly classifications and team boundaries without benefiting direct damage", () => {
-    for (const actor of ["holder", "teammate", "outsider"] as const)
-      for (const kind of [
-        "anomaly",
-        "anomaly-settlement",
-        "disorder",
-        "vortex",
-        "luminize",
-        "regular",
-        "sheer",
-        "sharpen",
-      ] as const) {
-        const on = evaluate(request({ am: 150, mindscape: 6, actor, kind }))
-        const off = evaluate(request({ actor, kind, selected: false }))
-        const expected =
-          actor !== "outsider" &&
-          !["regular", "sheer", "sharpen"].includes(kind)
-            ? 0.13
-            : 0
-        expect(bonus(on)).toBeCloseTo(expected, 12)
-        expect(on.expected / off.expected).toBeCloseTo(1 + expected, 12)
-      }
-  })
+  it.each([
+    ["holder", "anomaly"],
+    ["holder", "anomaly-settlement"],
+    ["holder", "disorder"],
+    ["holder", "vortex"],
+    ["holder", "luminize"],
+    ["holder", "regular"],
+    ["holder", "sheer"],
+    ["holder", "sharpen"],
+    ["teammate", "anomaly"],
+    ["teammate", "anomaly-settlement"],
+    ["teammate", "disorder"],
+    ["teammate", "vortex"],
+    ["teammate", "luminize"],
+    ["teammate", "regular"],
+    ["teammate", "sheer"],
+    ["teammate", "sharpen"],
+    ["outsider", "anomaly"],
+    ["outsider", "anomaly-settlement"],
+    ["outsider", "disorder"],
+    ["outsider", "vortex"],
+    ["outsider", "luminize"],
+    ["outsider", "regular"],
+    ["outsider", "sheer"],
+    ["outsider", "sharpen"],
+  ] as const)(
+    "preserves anomaly classifications and team boundaries without benefiting direct damage for %s / %s",
+    (actor, kind) => {
+      const on = evaluate(request({ am: 150, mindscape: 6, actor, kind }))
+      const off = evaluate(request({ actor, kind, selected: false }))
+      const expected =
+        actor !== "outsider" && !["regular", "sheer", "sharpen"].includes(kind)
+          ? 0.13
+          : 0
+      expect(bonus(on)).toBeCloseTo(expected, 12)
+      expect(on.expected / off.expected).toBeCloseTo(1 + expected, 12)
+    },
+  )
 
   it("keeps M1 resistance independent and does not activate the state from configuration", () => {
     const resistanceOnly = evaluate(

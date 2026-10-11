@@ -1881,7 +1881,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("20")
+    expect(catalog.revision).toBe("21")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -4682,11 +4682,13 @@ describe("velina cyclone catalog linkage", () => {
     expect(coverage.summary.supplements).toMatchObject({
       // 批次 02 新增 13 条音擎缺失被动补充（12 项条款；索魂影眸按评审
       // R01 修复拆为 1/2/3 有效魂锁三个互斥完整档位）；批次 03 再增
-      // 妮可影画 1、青衣闪络电压、珂蕾妲强化普攻二段三条代理人补充。
-      records: 30,
-      integrated: 27,
-      rules: 27,
-      options: 22,
+      // 妮可影画 1、青衣闪络电压、珂蕾妲强化普攻二段三条代理人补充；
+      // 批次 04 再增凯撒/莱特/橘福福/琉音冲击力与莱特/丽娜影画 4 回能
+      // 六条代理人补充。
+      records: 36,
+      integrated: 33,
+      rules: 33,
+      options: 28,
       entities: 1,
       outOfScope: 3,
     })

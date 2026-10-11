@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "20",
+  "revision": "21",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -30477,6 +30477,70 @@
       "supportedRanks": "潜能 1—6；消耗层数 0—2",
       "computationTarget": "catalog option on the mapped agent entity",
       "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:caesar:stance-switch-impact",
+      "source": "nanoka-integrated@3.2 agents/1071 /skill/special/description/4/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:caesar:stance-switch-impact",
+      "effectIds": ["agent:1071:nanoka:stance-switch-impact:mindscape:0"],
+      "supportedRanks": "特殊技最终等级 1—16",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:lighter:morale-burst-impact",
+      "source": "nanoka-integrated@3.2 agents/1161 /passive/level/1161501—1161507/desc/0",
+      "kind": "option",
+      "optionId": "nanoka:agents:lighter:morale-burst-impact",
+      "effectIds": ["agent:1161:nanoka:morale-burst-impact:mindscape:0"],
+      "supportedRanks": "核心 1—7；层数 0—10",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:jufufu:tigers-roar-impact",
+      "source": "nanoka-integrated@3.2 agents/1391 /passive/level/1391501—1391507/desc/0",
+      "kind": "option",
+      "optionId": "nanoka:agents:jufufu:tigers-roar-impact",
+      "effectIds": ["agent:1391:nanoka:tigers-roar-impact:mindscape:0"],
+      "supportedRanks": "核心 1—7",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:dialyn:initial-crit-rate-impact",
+      "source": "nanoka-integrated@3.2 agents/1481 /passive/level/1481049—1481055/desc/0",
+      "kind": "option",
+      "optionId": "nanoka:agents:dialyn:initial-crit-rate-impact",
+      "effectIds": ["agent:1481:nanoka:initial-crit-rate-impact:mindscape:0"],
+      "supportedRanks": "核心 1—7",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:lighter:mindscape-4-frontline-energy-regen",
+      "source": "nanoka-integrated@3.2 agents/1161 /talent/4/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:lighter:mindscape-4-frontline-energy-regen",
+      "effectIds": [
+        "agent:1161:nanoka:mindscape-4-frontline-energy-regen:mindscape:4"
+      ],
+      "supportedRanks": "影画 4 及以上",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:alexandrina:mindscape-4-deployed-dolls-energy-regen",
+      "source": "nanoka-integrated@3.2 agents/1211 /talent/4/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:alexandrina:mindscape-4-deployed-dolls-energy-regen",
+      "effectIds": [
+        "agent:1211:nanoka:mindscape-4-deployed-dolls-energy-regen:mindscape:4"
+      ],
+      "supportedRanks": "影画 4 及以上",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
     }
   ],
   "summary": {
@@ -30484,17 +30548,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 854,
-    "options": 857,
+    "rules": 860,
+    "options": 863,
     "converted": 1139,
     "corrected": 133,
     "unsupported": 18,
     "supplements": {
-      "records": 30,
-      "rules": 27,
-      "options": 22,
+      "records": 36,
+      "rules": 33,
+      "options": 28,
       "entities": 1,
-      "integrated": 27,
+      "integrated": 33,
       "outOfScope": 3
     }
   },

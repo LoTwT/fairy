@@ -853,6 +853,18 @@ export interface StaticCatalogVariant {
    * (bindingId, name) 输入。省略该字段时目录沿用逐层展开行为。
    */
   readonly layerCountInputName?: string
+  /**
+   * 声明式同队受益者选择：该选项生效时，受益者是持有者同队的另一名实体，
+   * 由每次选择以 `beneficiaryActorId` 显式声明（表达调用方声明的事实，例如
+   * 持有者位于后场时的当前前场角色）。字段校验只作用于启用的选择：
+   * 声明该字段的变体要求选项 target 为 team，且每个启用（layers > 0）的
+   * 选择必须携带声明，并由目录入口校验声明实体存在、有身份、与持有者
+   * 同队且不是持有者；受益集合收敛为声明实体与同队/职业/元素/人数筛选
+   * 后合法受益集合的交集，声明实体落在筛选之外时保持既有的零贡献契约。
+   * 0 层关闭沿既有关闭语义：不贡献、不需要声明。不引入时间线或队伍位置
+   * 引擎，也不从命中身份推断前后场。
+   */
+  readonly declaredTeammateBeneficiary?: true
   readonly applicability: StaticCatalogApplicability
   readonly differences: readonly string[]
   /** 只登记已有 core 耀变精通换算；不开放任意参数路径。 */

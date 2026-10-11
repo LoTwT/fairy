@@ -160,7 +160,7 @@ describe("static data conversion", () => {
       ],
     }
     const result = convertSource(source, functions, [], [])
-    expect(result.definitions.revision).toBe("20")
+    expect(result.definitions.revision).toBe("21")
     for (const option of result.catalog.options) {
       const variant = option.variants[0]!
       const sameBlock = option.optionId.endsWith("unverified-same-block")
@@ -453,7 +453,7 @@ const angelData = (): SourceData => ({
 describe("developer stat revision", () => {
   it("maps the four registered records through the anomaly bonus channel", () => {
     const result = convertSource(angelData(), functions, [], [])
-    expect(result.definitions.revision).toBe("20")
+    expect(result.definitions.revision).toBe("21")
     const option = result.catalog.options.find(
       (o) =>
         o.optionId ===
@@ -745,7 +745,7 @@ const remielData = (): SourceData => ({
 describe("remielle mindscape 2 attribute anomaly scope revision", () => {
   it("adds the [异常] profession and attribute anomaly damage scope from the reviewed text", () => {
     const result = convertSource(remielData(), functions, [], [])
-    expect(result.definitions.revision).toBe("20")
+    expect(result.definitions.revision).toBe("21")
     const option = result.catalog.options.find((o) =>
       o.optionId.includes("eff-ms7tlurw-vhelyf"),
     )!
@@ -895,7 +895,7 @@ describe("remielle mindscape 1 complete anomaly state", () => {
     "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
   it("merges the team and holder records into one corrected complete option", () => {
     const result = convertSource(remielMindscape1Data(), functions, [], [])
-    expect(result.definitions.revision).toBe("20")
+    expect(result.definitions.revision).toBe("21")
     const option = result.catalog.options.find((o) => o.optionId === optionId)!
     expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
     expect(option.conditionDescription).toBe(
@@ -1128,7 +1128,7 @@ const qingmingData = (): SourceData => ({
 describe("qingming birdcage pierce stack correction", () => {
   it("compiles the registered fixed encodings as per-layer contributions with a two-layer cap", () => {
     const result = convertSource(qingmingData(), functions, [], [])
-    expect(result.definitions.revision).toBe("20")
+    expect(result.definitions.revision).toBe("21")
     for (const [index, effectId] of qingmingPierceIds.entries()) {
       const option = result.catalog.options.find((o) =>
         o.optionId.includes(effectId),
@@ -3610,5 +3610,691 @@ describe("lighter elation complete state", () => {
         (rule) => rule.effectId === completeStateEffectId,
       ),
     ).toBe(true)
+  })
+})
+
+/**
+ * 增益修复批次 06（修订 21）：代理人冲击力与回能六项补充的登记形态、证据
+ * rank 映射与具名来源上下文守卫。数值断言来自冻结 Nanoka 3.2 逐档原文
+ * （中英文交叉核对），不从生成器反推；证据摘要在生成路径由
+ * verifyStaticEffectsEvidence 逐条核对（含被动行 rank 与 data.json level
+ * 元数据的映射）。守卫按真实固定源上下文登记：三项核心被动条款锚定各自
+ * mindscape rank 0 的 blk-legacy（冻结 note 关键文本），两条影画 4 条款
+ * 登记 rank 4 的真实空 pack，凯撒登记 rank 0 无攻防转换编码的真实缺失。
+ */
+const batch06SupplementIds = [
+  "nanoka:agents:caesar:stance-switch-impact",
+  "nanoka:agents:lighter:morale-burst-impact",
+  "nanoka:agents:jufufu:tigers-roar-impact",
+  "nanoka:agents:dialyn:initial-crit-rate-impact",
+  "nanoka:agents:lighter:mindscape-4-frontline-energy-regen",
+  "nanoka:agents:alexandrina:mindscape-4-deployed-dolls-energy-regen",
+] as const
+
+const batch06Supplements = SUPPLEMENTS.filter((supplement) =>
+  (batch06SupplementIds as readonly string[]).includes(supplement.supplementId),
+)
+
+/**
+ * 批次 06 的固定来源上下文夹具：块 id 与 note 均取自冻结 fac62407 的真实
+ * 内容（莱特/橘福福/琉音的核心被动 blk-legacy 原文、橘福福影画 4 与琉音
+ * 影画 4 的真实记录），守卫按这些真实上下文登记。
+ */
+const batch06Data = (
+  overrides: {
+    extraAgentRecords?: Readonly<Record<string, SourceEffect[]>>
+    extraPacks?: Readonly<
+      Record<string, { rank: number; block: SourceBlock4Test }>
+    >
+  } = {},
+): SourceData => {
+  const agent = (
+    id: string,
+    name: string,
+    blocks: Readonly<Record<number, SourceBlock4Test>> = {},
+  ) =>
+    batch03AgentEntity(
+      id,
+      name,
+      Object.fromEntries(
+        Object.entries(blocks).map(([rank, block]) => [
+          Number(rank),
+          {
+            ...block,
+            effects: [
+              ...block.effects,
+              ...(overrides.extraAgentRecords?.[id] ?? []),
+            ],
+          },
+        ]),
+      ),
+    )
+  return {
+    agents: [
+      agent("caesar", "凯撒", {
+        0: {
+          id: "blk-legacy",
+          note: "[荣光之盾]存在期间，持有者的攻击力提升1000点，[荣光之盾]效果结束后，该增益效果仍然保留，持续5秒。",
+          effects: [
+            {
+              ...batch03BaseEffect,
+              id: "legacy-team-atk",
+              stat: "atk",
+              value: 1000,
+              applyTarget: "team",
+              applySituation: "global",
+            },
+          ],
+        },
+        ...(overrides.extraPacks?.caesar
+          ? {
+              [overrides.extraPacks.caesar.rank]:
+                overrides.extraPacks.caesar.block,
+            }
+          : {}),
+      }),
+      agent("lighter", "莱特", {
+        0: {
+          id: "blk-legacy",
+          note: "[士气喷发]状态下，轻拳起攻或刺拳连击命中敌人时，目标的冰属性伤害抗性和火属性伤害抗性降低15%，持续30秒；",
+          effects: [
+            {
+              ...batch03BaseEffect,
+              id: "legacy-team-resPen",
+              stat: "resPen",
+              value: 15,
+              applyTarget: "team",
+              applySituation: "global",
+            },
+          ],
+        },
+        ...(overrides.extraPacks?.lighter
+          ? {
+              [overrides.extraPacks.lighter.rank]:
+                overrides.extraPacks.lighter.block,
+            }
+          : {}),
+      }),
+      agent("alexandrina", "丽娜", {
+        0: {
+          id: "blk-ms46w5pz-zdpplb",
+          note: "指派杜苏拉或安娜塔莎进行攻击时，队伍中其他角色的穿透率随丽娜自身的穿透率提升，提升效果等同于丽娜25%穿透率+12%，最高提升30%，杜苏拉和安娜塔莎均返回丽娜身边后，对应增益效果结束。",
+          effects: [
+            {
+              ...batch03BaseEffect,
+              id: "eff-ms46w5pz-93ry6b",
+              stat: "penRate",
+              value: 12,
+              applyTarget: "team",
+              applySituation: "global",
+            },
+          ],
+        },
+        ...(overrides.extraPacks?.alexandrina
+          ? {
+              [overrides.extraPacks.alexandrina.rank]:
+                overrides.extraPacks.alexandrina.block,
+            }
+          : {}),
+      }),
+      agent("jufufu", "橘福福", {
+        0: {
+          id: "blk-legacy",
+          note: "「虎威」命中敌人时，若拥有至少100点[威风]且橘福福不为当前操作中角色，橘福福会围绕目标敌人，发动[连携技：虎釜震煞]；\n发动时，全队角色获得[虎啸]效果：暴击伤害提升20%，橘福福的初始攻击力大于等于2800点时，每超过100点攻击力会使暴击伤害额外提升5%，最多额外提升30%；\n[虎啸]状态下，角色的[连携技]/[终结技]造成的伤害提升20%/40%；",
+          effects: [
+            {
+              ...batch03BaseEffect,
+              id: "legacy-team-critDmg",
+              stat: "critDmg",
+              value: 20,
+              applyTarget: "team",
+              applySituation: "global",
+            },
+          ],
+        },
+        4: {
+          id: "blk-legacy",
+          note: "橘福福处于[虎啸]状态下时，自身的暴击伤害提升35%。",
+          effects: [
+            {
+              ...batch03BaseEffect,
+              id: "legacy-self-critDmg",
+              stat: "critDmg",
+              value: 35,
+              applySituation: "global",
+            },
+          ],
+        },
+        ...(overrides.extraPacks?.jufufu
+          ? {
+              [overrides.extraPacks.jufufu.rank]:
+                overrides.extraPacks.jufufu.block,
+            }
+          : {}),
+      }),
+      agent("dialyn", "琉音", {
+        0: {
+          id: "blk-legacy",
+          note: "[强化特殊技：布！]命中敌人时，敌人获得[恶意投诉]效果，[恶意投诉]效果下敌人进入失衡状态后的失衡持续时间提升2秒，失衡易伤倍率提升30%",
+          effects: [
+            {
+              ...batch03BaseEffect,
+              id: "legacy-team-staggerVulnerable",
+              stat: "staggerVulnerable",
+              value: 30,
+              applyTarget: "team",
+              applySituation: "global",
+            },
+          ],
+        },
+        4: {
+          id: "blk-legacy",
+          note: "[好评如潮]效果下，琉音攻击力提升500点。",
+          effects: [
+            {
+              ...batch03BaseEffect,
+              id: "legacy-self-atk",
+              stat: "atk",
+              value: 500,
+              applySituation: "global",
+            },
+          ],
+        },
+        ...(overrides.extraPacks?.dialyn
+          ? {
+              [overrides.extraPacks.dialyn.rank]:
+                overrides.extraPacks.dialyn.block,
+            }
+          : {}),
+      }),
+    ],
+    driveDiscs: [],
+    skillSubcategories: [],
+    followUpSkillRules: [],
+    wengines: [],
+  }
+}
+
+describe("agent batch 06 impact and energy regen supplements", () => {
+  it("registers the six supplements with their gates, ranks and beneficiaries", () => {
+    const result = convertSource(
+      batch06Data(),
+      functions,
+      [],
+      batch06Supplements,
+    )
+    expect(result.coverage.summary.supplements).toMatchObject({
+      records: 6,
+      rules: 6,
+      options: 6,
+      integrated: 6,
+      outOfScope: 0,
+    })
+    expect(result.definitions.revision).toBe("21")
+
+    const caesar = result.catalog.options.find(
+      (o) => o.optionId === "nanoka:agents:caesar:stance-switch-impact",
+    )!
+    expect(caesar.target).toBe("self")
+    expect(caesar.variants[0]).toMatchObject({
+      status: "converted",
+      maximumLayers: 1,
+      configuration: {
+        specialSkillLevels: [
+          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+        ],
+      },
+      inputs: [],
+    })
+    const caesarRule = result.definitions.effects.find(
+      (r) =>
+        r.effectId === "agent:1071:nanoka:stance-switch-impact:mindscape:0",
+    ) as ContributionRule
+    expect(caesarRule.parameters.amount).toMatchObject({
+      kind: "by-rank",
+      rank: "specialSkillLevel",
+      unit: "ratio",
+      values: { 1: 0.09, 12: 0.2, 16: 0.24 },
+    })
+    expect(caesarRule.operation).toMatchObject({
+      kind: "stat-adjustment",
+      stat: "impact",
+      stage: "final-percentage",
+    })
+    expect(caesarRule.beneficiary).toEqual({ kind: "holder" })
+
+    const morale = result.catalog.options.find(
+      (o) => o.optionId === "nanoka:agents:lighter:morale-burst-impact",
+    )!
+    expect(morale.variants[0]).toMatchObject({
+      maximumLayers: 10,
+      configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+    })
+    const moraleRule = result.definitions.effects.find(
+      (r) => r.effectId === "agent:1161:nanoka:morale-burst-impact:mindscape:0",
+    ) as ContributionRule
+    expect(moraleRule.parameters.amount).toMatchObject({
+      rank: "coreSkillLevel",
+      values: {
+        1: 0.01,
+        2: 0.0117,
+        3: 0.0133,
+        4: 0.015,
+        5: 0.0167,
+        6: 0.0183,
+        7: 0.02,
+      },
+    })
+
+    const roar = result.catalog.options.find(
+      (o) => o.optionId === "nanoka:agents:jufufu:tigers-roar-impact",
+    )!
+    expect(roar.variants[0]).toMatchObject({
+      maximumLayers: 1,
+      configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+    })
+    const roarRule = result.definitions.effects.find(
+      (r) => r.effectId === "agent:1391:nanoka:tigers-roar-impact:mindscape:0",
+    ) as ContributionRule
+    expect(roarRule.parameters.amount).toMatchObject({
+      unit: "impact-points",
+      values: { 1: 25, 4: 37.5, 7: 50 },
+    })
+    expect(roarRule.operation).toMatchObject({
+      stat: "impact",
+      stage: "final-fixed",
+    })
+
+    const dialyn = result.catalog.options.find(
+      (o) => o.optionId === "nanoka:agents:dialyn:initial-crit-rate-impact",
+    )!
+    expect(dialyn.variants[0]!.inputs).toHaveLength(1)
+    expect(dialyn.variants[0]!.inputs[0]).toMatchObject({
+      unit: "ratio",
+      name: "agent:1481:nanoka:initial-crit-rate-impact:mindscape:0:source",
+    })
+    const dialynRule = result.definitions.effects.find(
+      (r) =>
+        r.effectId === "agent:1481:nanoka:initial-crit-rate-impact:mindscape:0",
+    ) as ContributionRule
+    expect(dialynRule.parameters).toMatchObject({
+      threshold: { value: -0.5 },
+      rate: { rank: "coreSkillLevel", values: { 1: 140, 7: 200 } },
+      cap: { unit: "impact-points", value: 100 },
+    })
+    expect(dialynRule.operation).toMatchObject({
+      stat: "impact",
+      stage: "final-fixed",
+    })
+
+    const frontline = result.catalog.options.find(
+      (o) =>
+        o.optionId ===
+        "nanoka:agents:lighter:mindscape-4-frontline-energy-regen",
+    )!
+    expect(frontline.target).toBe("team")
+    expect(frontline.variants[0]).toMatchObject({
+      maximumLayers: 1,
+      configuration: { minimumMindscape: 4 },
+      declaredTeammateBeneficiary: true,
+    })
+    const frontlineRule = result.definitions.effects.find(
+      (r) =>
+        r.effectId ===
+        "agent:1161:nanoka:mindscape-4-frontline-energy-regen:mindscape:4",
+    ) as ContributionRule
+    expect(frontlineRule.beneficiary).toEqual({ kind: "team-except-holder" })
+    expect(frontlineRule.parameters.amount).toMatchObject({
+      unit: "ratio",
+      value: 0.1,
+    })
+    expect(frontlineRule.operation).toMatchObject({
+      kind: "stat-adjustment",
+      stat: "energyRegen",
+      stage: "final-fixed",
+    })
+    // 百分比契约：受益者基础回能 × 10%，与摇摆爵士二件套同构。
+    expect(JSON.stringify(frontlineRule.operation)).toContain(
+      '"role":"beneficiary"',
+    )
+
+    const dolls = result.catalog.options.find(
+      (o) =>
+        o.optionId ===
+        "nanoka:agents:alexandrina:mindscape-4-deployed-dolls-energy-regen",
+    )!
+    expect(dolls.target).toBe("self")
+    expect(dolls.variants[0]).toMatchObject({
+      maximumLayers: 1,
+      configuration: { minimumMindscape: 4 },
+    })
+    const dollsRule = result.definitions.effects.find(
+      (r) =>
+        r.effectId ===
+        "agent:1211:nanoka:mindscape-4-deployed-dolls-energy-regen:mindscape:4",
+    ) as ContributionRule
+    expect(dollsRule.parameters.amount).toMatchObject({
+      unit: "energy-per-second",
+      value: 0.5,
+    })
+    expect(dollsRule.operation).toMatchObject({
+      stat: "energyRegen",
+      stage: "final-fixed",
+    })
+    expect(dollsRule.beneficiary).toEqual({ kind: "holder" })
+  })
+
+  it("locks the passive-row rank bindings of the evidence references", () => {
+    // 证据引用的 rank 与 /passive/level 行键一一对应；生成路径按 data.json
+    // 的 level 元数据核对映射，登记漂移会让生成失败。
+    const byId = new Map(batch06Supplements.map((s) => [s.supplementId, s]))
+    const morale = byId.get("nanoka:agents:lighter:morale-burst-impact")!
+    expect(morale.evidence).toHaveLength(7)
+    for (const [index, reference] of morale.evidence.entries())
+      expect(reference).toMatchObject({
+        path: "agents/1161/details.zh.json",
+        pointer: `/passive/level/${1161501 + index}/desc/0`,
+        rank: index + 1,
+      })
+    const roar = byId.get("nanoka:agents:jufufu:tigers-roar-impact")!
+    for (const [index, reference] of roar.evidence.entries())
+      expect(reference).toMatchObject({
+        pointer: `/passive/level/${1391501 + index}/desc/0`,
+        rank: index + 1,
+      })
+    const dialyn = byId.get("nanoka:agents:dialyn:initial-crit-rate-impact")!
+    for (const [index, reference] of dialyn.evidence.entries())
+      expect(reference).toMatchObject({
+        pointer: `/passive/level/${1481049 + index}/desc/0`,
+        rank: index + 1,
+      })
+    const caesar = byId.get("nanoka:agents:caesar:stance-switch-impact")!
+    expect(caesar.evidence.map((r) => r.pointer)).toEqual([
+      "/skill/special/description/4/desc",
+      "/skill/special/description/5/param/0/desc",
+    ])
+  })
+
+  it("rejects same-clause encodings in the registered contexts, including normalized drift", () => {
+    // 影画 4 上下文（真实空 pack）出现回能编码：raw 记录在归一化删除后
+    // 也不能绕过（守卫读 raw pack 本身）。
+    const m4Record: SourceEffect = {
+      ...batch03BaseEffect,
+      id: "eff-m4-clause",
+      stat: "energyRegen",
+      value: 20,
+      applySituation: "global",
+    }
+    const m4Block = (note: string): SourceBlock4Test => ({
+      id: "blk-m4-clause",
+      note,
+      effects: [m4Record],
+    })
+    const rank4Pack = (agent: string, block: SourceBlock4Test) => ({
+      [agent]: { rank: 4, block },
+    })
+    for (const label of ["lighter", "alexandrina"] as const) {
+      expect(
+        () =>
+          convertSource(
+            batch06Data({
+              extraPacks: rank4Pack(
+                label,
+                m4Block("莱特位于后场时，前场角色的能量自动回复效率提升10%。"),
+              ),
+            }),
+            functions,
+            [],
+            batch06Supplements,
+          ),
+        `${label} raw energyRegen at rank 4`,
+      ).toThrowError(/registered .* mindscape rank 4 as a currently empty pack/)
+      const dropping = {
+        ...functions,
+        collectEffectsFromPack: (pack: SourcePack) =>
+          (functions.collectEffectsFromPack(pack) ?? []).filter(
+            (effect) => effect.id !== "eff-m4-clause",
+          ),
+      }
+      expect(
+        () =>
+          convertSource(
+            batch06Data({
+              extraPacks: rank4Pack(
+                label,
+                m4Block(
+                  "杜苏拉和安娜塔莎均被指派在外时，能量自动回复速度提升0.5点/秒。",
+                ),
+              ),
+            }),
+            dropping,
+            [],
+            batch06Supplements,
+          ),
+        `${label} normalization dropped the record`,
+      ).toThrowError(/registered .* mindscape rank 4 as a currently empty pack/)
+    }
+    // 归一 stat 变义：raw 记录不是回能 stat，但归一表示被改写为 energyRegen。
+    const remeaning = {
+      ...functions,
+      collectEffectsFromPack: (pack: SourcePack) =>
+        (functions.collectEffectsFromPack(pack) ?? []).map((effect) =>
+          effect.id === "eff-m4-clause"
+            ? { ...effect, stat: "energyRegen" }
+            : effect,
+        ),
+    }
+    const disguised: SourceEffect = {
+      ...batch03BaseEffect,
+      id: "eff-m4-clause",
+      stat: "critDmg",
+      value: 35,
+      applySituation: "global",
+    }
+    expect(
+      () =>
+        convertSource(
+          {
+            ...batch06Data(),
+            agents: batch06Data().agents.map((agent) =>
+              agent.id === "lighter"
+                ? {
+                    ...agent,
+                    mindscapeBuffs: agent.mindscapeBuffs!.map((pack, rank) =>
+                      rank === 4
+                        ? {
+                            ...pack,
+                            effectBlocks: [
+                              {
+                                id: "blk-m4-clause",
+                                name: "影画4",
+                                note: "影画4 的独立机制记录。",
+                                effects: [disguised],
+                              },
+                            ],
+                          }
+                        : pack,
+                    ),
+                  }
+                : agent,
+            ),
+          },
+          remeaning,
+          [],
+          batch06Supplements,
+        ),
+      "normalized stat becomes energyRegen",
+    ).toThrowError(/registered .* mindscape rank 4 as a currently empty pack/)
+    // 核心被动上下文（rank 0 锚块）出现冲击力族编码：raw stat 与归一改写
+    // 两种表示都会被拒绝。
+    const impactRecord: SourceEffect = {
+      ...batch03BaseEffect,
+      id: "eff-impact-clause",
+      stat: "impact",
+      value: 10,
+      applySituation: "global",
+    }
+    // 真实固定源的 normalizeAgent 会把未知 stat（如 impact）归一为
+    // dmgBonus（评审探针已证），记录因此可以编译而守卫按 raw 表示拒绝；
+    // 合成夹具按同一真实行为包装归一函数后再验证 raw 路径。
+    const impactNormalizing: SourceNormalization = {
+      ...functions,
+      normalizeAgent: (entity) => {
+        const normalized = functions.normalizeAgent(entity)
+        return {
+          ...normalized,
+          mindscapeBuffs: (normalized.mindscapeBuffs ?? []).map((pack) => ({
+            ...pack,
+            effectBlocks: (pack.effectBlocks ?? []).map((block) => ({
+              ...block,
+              effects: block.effects.map((record) =>
+                record.id === "eff-impact-clause" && record.stat === "impact"
+                  ? { ...record, stat: "dmgBonus" }
+                  : record,
+              ),
+            })),
+          })),
+        }
+      },
+    }
+    for (const agent of ["caesar", "lighter", "jufufu", "dialyn"] as const) {
+      expect(
+        () =>
+          convertSource(
+            batch06Data({
+              extraAgentRecords: {
+                [agent]: [impactRecord],
+              },
+            }),
+            impactNormalizing,
+            [],
+            batch06Supplements,
+          ),
+        `${agent} raw impact at rank 0`,
+      ).toThrowError(
+        new RegExp(
+          `conflicts with the fixed-source record .* in the registered clause context agents:${agent} mindscape rank 0`,
+        ),
+      )
+    }
+    // 冲击力族的归一变义路径（normalized stat 命中守卫名单）只有在冲击力
+    // stat 进入字段映射后才可达：当前归一表示为未注册 stat 时记录编译先行
+    // 拒绝（Unregistered stat），同样不会进入制品。可达的归一变义由上面的
+    // energyRegen 用例覆盖（注册 stat 改写后守卫按 normalized 表示拒绝）。
+  })
+
+  it("does not reject independent same-stat records outside the registered contexts", () => {
+    // 其他 rank 的独立回能条款（如影画 1）不与影画 4 补充冲突。
+    for (const entity of ["lighter", "alexandrina"] as const) {
+      expect(
+        () =>
+          convertSource(
+            batch06Data({
+              extraPacks: {
+                [entity]: {
+                  rank: 1,
+                  block: {
+                    id: "blk-legacy",
+                    note: "另一个独立机制：使用终结技后自身能量自动回复效率提升10%。",
+                    effects: [
+                      {
+                        ...batch03BaseEffect,
+                        id: "eff-m1-regen",
+                        stat: "energyRegen",
+                        value: 10,
+                        applySituation: "global",
+                      },
+                    ],
+                  },
+                },
+              },
+            }),
+            functions,
+            [],
+            batch06Supplements,
+          ),
+        entity,
+      ).not.toThrow()
+    }
+    // 橘福福影画 4 暴伤与琉音影画 4 攻击是真实独立条款（夹具内置），
+    // 与 rank 0 冲击守卫互不影响；同块的其他 stat 记录也不触发。
+    expect(() =>
+      convertSource(
+        batch06Data({
+          extraAgentRecords: {
+            lighter: [
+              {
+                ...batch03BaseEffect,
+                id: "eff-ok",
+                stat: "skillDmgBonus",
+                value: 30,
+                applySituation: "global",
+              },
+            ],
+          },
+        }),
+        functions,
+        [],
+        batch06Supplements,
+      ),
+    ).not.toThrow()
+  })
+
+  it("rejects anchor notes that keep all original content but append a conflicting impact clause", () => {
+    // 保留锚块 note 全部原文、仅在末尾追加与补录条款冲突的新句子时，锚块
+    // 上下文已经改变（固定来源出现了同条款的新编码依据），必须拒绝并要求
+    // 复核；子串包含检查无法发现这种追加，守卫按完整冻结 note 全文比对。
+    const appends: Readonly<Record<string, string>> = {
+      jufufu: "橘福福处于[虎啸]效果中，冲击力提升75点。",
+      lighter:
+        "威力提升后的招式命中敌人时，每消耗10点[士气]，冲击力提升2%，最多提升20%，持续6秒；",
+      dialyn: "初始暴击率超过50%时，每超过1%，冲击力提升2点，最多提升100点；",
+    }
+    for (const [agent, appended] of Object.entries(appends)) {
+      const mutated = batch06Data()
+      const block = mutated.agents
+        .find((candidate) => candidate.id === agent)!
+        .mindscapeBuffs![0]!.effectBlocks!.find(
+          (candidate) => candidate.id === "blk-legacy",
+        )!
+      block.note = `${block.note}${appended}`
+      expect(
+        () => convertSource(mutated, functions, [], batch06Supplements),
+        `${agent} appended "${appended}"`,
+      ).toThrowError(/anchor block blk-legacy note .* before generating/)
+    }
+  })
+
+  it("rejects anchor block drift and missing anchors with real context texts", () => {
+    // 橘福福核心被动 note 的关键文本漂移（虎啸数值变化）即拒绝。
+    const drifted = batch06Data()
+    const block = drifted.agents[3]!.mindscapeBuffs![0]!.effectBlocks![0]!
+    block.note = block.note!.replace("暴击伤害提升20%", "暴击伤害提升25%")
+    expect(() =>
+      convertSource(drifted, functions, [], batch06Supplements),
+    ).toThrowError(
+      /anchor block blk-legacy note drifted .* expected the frozen full note/,
+    )
+    // 莱特核心被动锚块缺失（被换成其他块 id）即拒绝。
+    const missing = batch06Data()
+    const lighterBlock =
+      missing.agents[1]!.mindscapeBuffs![0]!.effectBlocks![0]!
+    lighterBlock.id = "blk-renamed"
+    expect(() =>
+      convertSource(missing, functions, [], batch06Supplements),
+    ).toThrowError(
+      /lost its anchor block blk-legacy at agents:lighter mindscape rank 0/,
+    )
+  })
+
+  it("keeps the guards stable under agent, block and record reordering", () => {
+    const reordered = batch06Data()
+    reordered.agents.reverse()
+    for (const agent of reordered.agents)
+      for (const pack of agent.mindscapeBuffs ?? [])
+        for (const block of pack.effectBlocks ?? []) block.effects.reverse()
+    expect(() =>
+      convertSource(reordered, functions, [], batch06Supplements),
+    ).not.toThrow()
   })
 })

@@ -3190,6 +3190,11 @@ export function convertSource(
       inputs: supplement.variant.inputs,
       applicability: supplement.variant.applicability,
       differences: [],
+      // 声明式同队受益者随补充透传；目录消费端据此要求每次启用选择携带
+      // beneficiaryActorId 并把受益集合收敛为该实体。
+      ...(supplement.variant.declaredTeammateBeneficiary === undefined
+        ? {}
+        : { declaredTeammateBeneficiary: true as const }),
     }
     effects.push(rule)
     supplementalRules += 1
@@ -3257,6 +3262,65 @@ export function convertSource(
             `Supplement ${supplement.supplementId} conflicts with the fixed-source record at ${conflict.pointer} (stat ${conflict.raw.stat} on the registered skill targets); re-review the clause instead of double-contributing`,
           )
       }
+      // 具名来源上下文守卫：按本批条款的真实培养位置定位“同条款”上下文。
+      // 已登记缺失的位置出现任何新编码、锚块缺失或 note 关键文本漂移、
+      // 位置内任一记录（raw 或 normalized 表示）命中 stat 家族，都拒绝生成
+      // 并要求重新核对条款归属；其他 rank/独立机制的同 stat 记录不受影响。
+      // 归一化可能改写记录 stat（未知 stat 会被上游归一为 dmgBonus），因此
+      // 两份表示都必须核对；该守卫按实体/块身份匹配，不依赖数组位置。
+      if (supplement.clauseContextGuard) {
+        const context = supplement.clauseContextGuard
+        const sourceEntity = data.agents.find(
+          (agent) => agent.id === entity.upstreamId,
+        )
+        if (!sourceEntity)
+          throw new Error(
+            `Supplement ${supplement.supplementId} lost its fixed-source entity: ${supplement.catalogEntityId}`,
+          )
+        const contextPack = sourceEntity.mindscapeBuffs?.[context.rank] ?? {}
+        const contextRecords = collected.records.filter(
+          (record) =>
+            record.category === "agents" &&
+            record.entityId === entity.upstreamId &&
+            record.rankKind === "mindscape" &&
+            record.rank === context.rank,
+        )
+        if (context.expectsEmptyPack === true) {
+          const hasContent =
+            (contextPack.effectBlocks?.length ?? 0) > 0 ||
+            (contextPack.effects?.length ?? 0) > 0 ||
+            contextRecords.length > 0
+          if (hasContent)
+            throw new Error(
+              `Supplement ${supplement.supplementId} registered ${supplement.catalogEntityId} mindscape rank ${String(context.rank)} as a currently empty pack; the fixed source now encodes content there — re-review the clause before generating`,
+            )
+        }
+        for (const anchor of context.anchorBlocks ?? []) {
+          const block = (contextPack.effectBlocks ?? []).find(
+            (candidate) => candidate.id === anchor.blockId,
+          )
+          if (!block)
+            throw new Error(
+              `Supplement ${supplement.supplementId} lost its anchor block ${anchor.blockId} at ${supplement.catalogEntityId} mindscape rank ${String(context.rank)}; re-review the clause context before generating`,
+            )
+          // 锚块 note 与冻结全文逐字比对：追加、插入、替换任何变化（包括
+          // 保留全部旧内容再追加新句）都视为上下文漂移，不做空白宽松归一。
+          if ((block.note ?? "") !== anchor.frozenNote)
+            throw new Error(
+              `Supplement ${supplement.supplementId} anchor block ${anchor.blockId} note drifted at ${supplement.catalogEntityId} mindscape rank ${String(context.rank)}: expected the frozen full note; re-review the clause context before generating`,
+            )
+        }
+        const conflict = contextRecords.find(
+          (record) =>
+            context.stats.includes(record.raw.stat) ||
+            (record.normalized !== undefined &&
+              context.stats.includes(record.normalized.stat)),
+        )
+        if (conflict)
+          throw new Error(
+            `Supplement ${supplement.supplementId} conflicts with the fixed-source record at ${conflict.pointer} (stat ${conflict.raw.stat}) in the registered clause context ${supplement.catalogEntityId} mindscape rank ${String(context.rank)}; re-review the clause instead of double-contributing`,
+          )
+      }
       if (supplement.variant.configuration.minimumSetPieces === 2)
         verifyDriveDiscTwoPieceSupplement(data, collected.entities, options, {
           catalogEntityId: supplement.catalogEntityId,
@@ -3304,7 +3368,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "20",
+    revision: "21",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
