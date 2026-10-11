@@ -160,7 +160,7 @@ describe("static data conversion", () => {
       ],
     }
     const result = convertSource(source, functions, [], [])
-    expect(result.definitions.revision).toBe("19")
+    expect(result.definitions.revision).toBe("20")
     for (const option of result.catalog.options) {
       const variant = option.variants[0]!
       const sameBlock = option.optionId.endsWith("unverified-same-block")
@@ -453,7 +453,7 @@ const angelData = (): SourceData => ({
 describe("developer stat revision", () => {
   it("maps the four registered records through the anomaly bonus channel", () => {
     const result = convertSource(angelData(), functions, [], [])
-    expect(result.definitions.revision).toBe("19")
+    expect(result.definitions.revision).toBe("20")
     const option = result.catalog.options.find(
       (o) =>
         o.optionId ===
@@ -745,7 +745,7 @@ const remielData = (): SourceData => ({
 describe("remielle mindscape 2 attribute anomaly scope revision", () => {
   it("adds the [异常] profession and attribute anomaly damage scope from the reviewed text", () => {
     const result = convertSource(remielData(), functions, [], [])
-    expect(result.definitions.revision).toBe("19")
+    expect(result.definitions.revision).toBe("20")
     const option = result.catalog.options.find((o) =>
       o.optionId.includes("eff-ms7tlurw-vhelyf"),
     )!
@@ -895,7 +895,7 @@ describe("remielle mindscape 1 complete anomaly state", () => {
     "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
   it("merges the team and holder records into one corrected complete option", () => {
     const result = convertSource(remielMindscape1Data(), functions, [], [])
-    expect(result.definitions.revision).toBe("19")
+    expect(result.definitions.revision).toBe("20")
     const option = result.catalog.options.find((o) => o.optionId === optionId)!
     expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
     expect(option.conditionDescription).toBe(
@@ -1128,7 +1128,7 @@ const qingmingData = (): SourceData => ({
 describe("qingming birdcage pierce stack correction", () => {
   it("compiles the registered fixed encodings as per-layer contributions with a two-layer cap", () => {
     const result = convertSource(qingmingData(), functions, [], [])
-    expect(result.definitions.revision).toBe("19")
+    expect(result.definitions.revision).toBe("20")
     for (const [index, effectId] of qingmingPierceIds.entries()) {
       const option = result.catalog.options.find((o) =>
         o.optionId.includes(effectId),

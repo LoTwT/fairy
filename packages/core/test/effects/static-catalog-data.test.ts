@@ -1047,6 +1047,14 @@ describe("fixed-source catalog conformance", () => {
     "/agents/50/mindscapeBuffs/0/effectBlocks/1/effects/1",
     "/agents/50/mindscapeBuffs/2/effectBlocks/0/effects/1",
     "/agents/50/mindscapeBuffs/2/effectBlocks/0/effects/2",
+    // 柚叶八条正/负部分记录已迁移；独立锚点由 yuzuha-complete-state 验证，
+    // 固定上游 oracle 保持原始值，不把旧半状态输出当作纠错后的期望。
+    ...[0, 1, 2, 3].map(
+      (index) => `/agents/27/mindscapeBuffs/0/effectBlocks/1/effects/${index}`,
+    ),
+    ...[1, 2, 3, 4].map(
+      (index) => `/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/${index}`,
+    ),
   ])
   /**
    * 青溟笼舍精炼 1—5 的以太贯穿增伤位置：块 note 与 Nanoka 同文把该条款写在
@@ -1873,7 +1881,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("19")
+    expect(catalog.revision).toBe("20")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
