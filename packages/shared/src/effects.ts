@@ -842,6 +842,17 @@ export interface StaticCatalogVariant {
   readonly effectIds: readonly EffectId[]
   readonly maximumLayers: number
   readonly inputs: readonly StaticCatalogInputRequirement[]
+  /**
+   * 完整状态层数桥接：声明后该选项的 `selection.layers` 表示逻辑状态层数
+   * （严格整数 0..maximumLayers，0 层关闭），目录把它派生为绑定作用域内的
+   * count 输入（单位 count）供给实际展开的 supplied selection，展开本身固定
+   * `layers: 1`（一次完整状态）。该名字必须是所引用贡献中真实消费的 count
+   * 输入名，且不能与外部 inputs 要求同名；声明的变体在定义阶段要求真实消费
+   * 该输入的 contribution 恰好一条（`supplied`、`maximumLayers` 字面量 count
+   * 1，按解析字段比较），允许引用相关 modification。调用方不能再手工提供同一
+   * (bindingId, name) 输入。省略该字段时目录沿用逐层展开行为。
+   */
+  readonly layerCountInputName?: string
   readonly applicability: StaticCatalogApplicability
   readonly differences: readonly string[]
   /** 只登记已有 core 耀变精通换算；不开放任意参数路径。 */

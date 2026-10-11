@@ -160,7 +160,7 @@ describe("static data conversion", () => {
       ],
     }
     const result = convertSource(source, functions, [], [])
-    expect(result.definitions.revision).toBe("18")
+    expect(result.definitions.revision).toBe("19")
     for (const option of result.catalog.options) {
       const variant = option.variants[0]!
       const sameBlock = option.optionId.endsWith("unverified-same-block")
@@ -453,7 +453,7 @@ const angelData = (): SourceData => ({
 describe("developer stat revision", () => {
   it("maps the four registered records through the anomaly bonus channel", () => {
     const result = convertSource(angelData(), functions, [], [])
-    expect(result.definitions.revision).toBe("18")
+    expect(result.definitions.revision).toBe("19")
     const option = result.catalog.options.find(
       (o) =>
         o.optionId ===
@@ -745,7 +745,7 @@ const remielData = (): SourceData => ({
 describe("remielle mindscape 2 attribute anomaly scope revision", () => {
   it("adds the [异常] profession and attribute anomaly damage scope from the reviewed text", () => {
     const result = convertSource(remielData(), functions, [], [])
-    expect(result.definitions.revision).toBe("18")
+    expect(result.definitions.revision).toBe("19")
     const option = result.catalog.options.find((o) =>
       o.optionId.includes("eff-ms7tlurw-vhelyf"),
     )!
@@ -895,7 +895,7 @@ describe("remielle mindscape 1 complete anomaly state", () => {
     "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
   it("merges the team and holder records into one corrected complete option", () => {
     const result = convertSource(remielMindscape1Data(), functions, [], [])
-    expect(result.definitions.revision).toBe("18")
+    expect(result.definitions.revision).toBe("19")
     const option = result.catalog.options.find((o) => o.optionId === optionId)!
     expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
     expect(option.conditionDescription).toBe(
@@ -1128,7 +1128,7 @@ const qingmingData = (): SourceData => ({
 describe("qingming birdcage pierce stack correction", () => {
   it("compiles the registered fixed encodings as per-layer contributions with a two-layer cap", () => {
     const result = convertSource(qingmingData(), functions, [], [])
-    expect(result.definitions.revision).toBe("18")
+    expect(result.definitions.revision).toBe("19")
     for (const [index, effectId] of qingmingPierceIds.entries()) {
       const option = result.catalog.options.find((o) =>
         o.optionId.includes(effectId),
@@ -3046,5 +3046,569 @@ describe("agent and drive-disc batch 03 corrections and supplements", () => {
     ).toThrowError(
       /Supplement skill target zzz-hp:skill:koleda-enhanced-basic-second collides with a fixed-source or declared target/,
     )
+  })
+})
+
+/**
+ * 莱特（1161）[昂扬]完整状态的合成转换：基础记录改写为一条完整贡献
+ * （冲击力输入 + 目录层数派生 + 总上限），影画 2 的 120% 由配置修改直接
+ * 作用于同一条贡献；被取代的三条部分记录只保留 unsupported 迁移入口，
+ * 不再生成可执行贡献。记录按稳定身份定位：agents/blocks/effects 数组
+ * 重排只改变 Pointer。固定来源的编码、块 note 或读取字段漂移即拒绝。
+ */
+const lighterElationBaseBlockNote =
+  "队伍中存在[强攻]角色或与自身阵营相同的角色时触发：\n[士气喷发]状态下，莱特第五段[普通攻击]命中敌人时，全队角色获得一层[昂扬]，最多叠加20层，持续30秒，重复触发时刷新持续时间；\n每拥有一层[昂扬]，代理人造成的冰属性伤害和火属性伤害提升1.25%，获得[昂扬]时，若莱特的冲击力高于170点，每超过10点冲击力会使每层[昂扬]提供的增益效果额外提升0.25%；队伍中任意角色发动[连携技]时，会刷新全队角色[昂扬]的持续时间；\n[昂扬]最多使代理人造成的冰属性伤害和火属性伤害提升75%。"
+
+const lighterElationM2BlockNote =
+  "通过[核心被动：助燃剂]对敌人施加[溃败]效果时，目标的失衡易伤倍率提升25%；[额外能力：斗志昂扬]中由[昂扬]提供的冰属性伤害和火属性伤害增益效果提升至原本的120%。"
+
+const lighterElationStacked = (rank: 0 | 2): SourceEffect => ({
+  id: rank === 0 ? "eff-ms4aoho0-q3wbdv" : "eff-ms4b0whf-x6n1xw",
+  scope: "general",
+  applyTarget: "team",
+  applySituation: "global",
+  applyProfession: null,
+  teamProfession: null,
+  teamProfessionValues: null,
+  teamProfessionMinCount: null,
+  skillSubcategoryId: null,
+  elementFilter: rank === 0 ? ["冰", "火"] : ["火", "冰"],
+  kind: "stacked",
+  stat: "dmgBonus",
+  value: 0,
+  stackable: false,
+  maxStacks: 20,
+  valuePerStack: rank === 0 ? 1.25 : 0.25,
+  defaultStacks: 20,
+  enabledDefault: true,
+  note: "",
+})
+
+const lighterElationConversion = (rank: 0 | 2): SourceEffect => ({
+  id: rank === 0 ? "eff-ms4atnfh-29yr0r" : "eff-ms4b2g6y-2q6n1w",
+  scope: "general",
+  applyTarget: "team",
+  applySituation: "global",
+  applyProfession: null,
+  teamProfession: null,
+  teamProfessionValues: null,
+  teamProfessionMinCount: null,
+  skillSubcategoryId: null,
+  elementFilter: ["火", "冰"],
+  kind: "convert",
+  stat: "dmgBonus",
+  value: 0,
+  stackable: false,
+  maxStacks: 1,
+  valuePerStack: 0,
+  defaultStacks: 1,
+  enabledDefault: true,
+  note: "",
+  convert: {
+    from: "impact",
+    panelSource: "manual",
+    ratioPercent: rank === 0 ? 50 : 10,
+    cap: rank === 0 ? 50 : 10,
+    defaultBase: 270,
+    initialBase: 170,
+  },
+})
+
+const lighterElationStagger: SourceEffect = {
+  id: "legacy-team-staggerVulnerable",
+  scope: "general",
+  applyTarget: "team",
+  applySituation: "global",
+  applyProfession: null,
+  teamProfession: null,
+  teamProfessionValues: null,
+  teamProfessionMinCount: null,
+  skillSubcategoryId: null,
+  elementFilter: "all",
+  kind: "fixed",
+  stat: "staggerVulnerable",
+  value: 25,
+  stackable: false,
+  maxStacks: 1,
+  valuePerStack: 0,
+  defaultStacks: 1,
+  enabledDefault: true,
+  note: "",
+}
+
+interface LighterElationOptions {
+  readonly extraAgent?: boolean
+}
+
+const lighterElationData = (
+  options: LighterElationOptions = {},
+): SourceData => {
+  const lighter: SourceEntity = {
+    id: "lighter",
+    name: "莱特",
+    element: "火",
+    profession: "击破",
+    mindscapeBuffs: [
+      {
+        effectBlocks: [
+          {
+            id: "blk-ms4aoho0-grnxav",
+            name: "额外能力：斗志昂扬",
+            note: lighterElationBaseBlockNote,
+            effects: [lighterElationStacked(0), lighterElationConversion(0)],
+          },
+        ],
+      },
+      {},
+      {
+        effectBlocks: [
+          {
+            id: "blk-legacy",
+            name: "影画2",
+            note: lighterElationM2BlockNote,
+            effects: [
+              lighterElationStagger,
+              lighterElationStacked(2),
+              lighterElationConversion(2),
+            ],
+          },
+        ],
+      },
+      {},
+      {},
+      {},
+      {},
+    ],
+  }
+  const miyabi: SourceEntity = {
+    id: "miyabi",
+    name: "星见雅",
+    element: "冰",
+    profession: "异常",
+    mindscapeBuffs: [{}, {}, {}, {}, {}, {}, {}],
+  }
+  return {
+    agents: options.extraAgent ? [lighter, miyabi] : [lighter],
+    wengines: [],
+    driveDiscs: [],
+    skillSubcategories: [],
+    followUpSkillRules: [],
+  }
+}
+
+/**
+ * 另一实体（安比 1011）的独立记录合法复用莱特基础记录的局部块/效果 ID：
+ * 局部 ID 只在实体内部唯一，因此规则查找必须用含实体身份的完整 effectId。
+ */
+const anbyElationLocalIdReuse = (): SourceEntity => ({
+  id: "anby",
+  name: "安比",
+  element: "电",
+  profession: "击破",
+  mindscapeBuffs: [
+    {
+      effectBlocks: [
+        {
+          id: "blk-ms4aoho0-grnxav",
+          name: "额外能力：斗志昂扬",
+          note: lighterElationBaseBlockNote,
+          effects: [lighterElationStacked(0)],
+        },
+      ],
+    },
+    {},
+    {},
+    {},
+    {},
+    {},
+    {},
+  ],
+})
+
+const completeStateOptionId =
+  "agents:lighter:mindscape:0:elation-complete-state"
+const completeStateEffectId =
+  "agent:1161:zzz-hp:eff-ms4aoho0-q3wbdv:blk-ms4aoho0-grnxav:mindscape:0"
+const scaleModificationId =
+  "agent:1161:zzz-hp:complete-state-elation-scale:eff-ms4b0whf-x6n1xw"
+const replacedRuleIds = [
+  "agent:1161:zzz-hp:eff-ms4atnfh-29yr0r:blk-ms4aoho0-grnxav:mindscape:0",
+  "agent:1161:zzz-hp:eff-ms4b0whf-x6n1xw:blk-legacy:mindscape:2",
+  "agent:1161:zzz-hp:eff-ms4b2g6y-2q6n1w:blk-legacy:mindscape:2",
+] as const
+const legacyPartialOptionIds = [
+  "agents:lighter:mindscape:0:blk-ms4aoho0-grnxav:eff-ms4aoho0-q3wbdv",
+  "agents:lighter:mindscape:0:blk-ms4aoho0-grnxav:eff-ms4atnfh-29yr0r",
+  "agents:lighter:mindscape:2:blk-legacy:eff-ms4b0whf-x6n1xw",
+  "agents:lighter:mindscape:2:blk-legacy:eff-ms4b2g6y-2q6n1w",
+] as const
+
+describe("lighter elation complete state", () => {
+  it("compiles one complete contribution and one scale modification", () => {
+    const result = convertSource(lighterElationData(), functions, [], [])
+    const completeRule = result.definitions.effects.find(
+      (entry): entry is ContributionRule =>
+        entry.kind === "contribution" &&
+        entry.effectId === completeStateEffectId,
+    )
+    expect(completeRule).toBeDefined()
+    expect(completeRule!.operation.kind).toBe("factor-contribution")
+    expect(completeRule!.activation).toEqual({
+      kind: "supplied",
+      maximumLayers: { kind: "literal", unit: "count", value: 1 },
+    })
+    // 命中元素：冰/火（来源编码）之外显式覆盖烈霜。
+    expect(JSON.stringify(completeRule!.when)).toContain("frost")
+    // 被取代的三条记录不再生成可执行贡献，M2 不再有第二份完整状态。
+    for (const effectId of replacedRuleIds)
+      expect(
+        result.definitions.effects.some((rule) => rule.effectId === effectId),
+        effectId,
+      ).toBe(false)
+    expect(
+      result.definitions.effects.some((rule) =>
+        rule.effectId.includes("complete-state-elation-m2"),
+      ),
+    ).toBe(false)
+    const scale = result.definitions.effects.find(
+      (rule) => rule.effectId === scaleModificationId,
+    )
+    expect(scale).toMatchObject({
+      kind: "modification",
+      phase: "configuration",
+      target: { kind: "effect", effectId: completeStateEffectId },
+      modifications: [
+        {
+          field: "output",
+          change: { operator: "scale", value: { value: 1.2 } },
+        },
+      ],
+    })
+    const option = result.catalog.options.find(
+      (candidate) => candidate.optionId === completeStateOptionId,
+    )!
+    expect(option.target).toBe("team")
+    expect(option.variants).toHaveLength(1)
+    const variant = option.variants[0]!
+    expect(variant.status).toBe("corrected")
+    expect(variant.effectIds).toEqual([completeStateEffectId])
+    expect(variant.maximumLayers).toBe(20)
+    expect(variant.applicability).toEqual({})
+    expect(variant.layerCountInputName).toContain(":layers")
+    expect(variant.inputs.map((entry) => entry.name)).toEqual([
+      expect.stringContaining(":source"),
+    ])
+    // 完整状态选项在目录中唯一可选；M2 不再有第二个选项。
+    const selectable = result.catalog.options.filter((candidate) =>
+      candidate.variants.some(
+        (entry) =>
+          entry.status === "corrected" &&
+          entry.effectIds.includes(completeStateEffectId as never),
+      ),
+    )
+    expect(selectable.map((candidate) => candidate.optionId)).toEqual([
+      completeStateOptionId,
+    ])
+    // 四条旧部分选项继续作为语义冲突迁移入口，来源位置保留在覆盖报告。
+    for (const optionId of legacyPartialOptionIds) {
+      const migrated = result.catalog.options.find(
+        (candidate) => candidate.optionId === optionId,
+      )!
+      expect(migrated.variants[0]!.status, optionId).toBe("unsupported")
+      expect(migrated.variants[0]!.reason, optionId).toBe("semantic-conflict")
+      expect(migrated.variants[0]!.effectIds, optionId).toEqual([])
+      expect(migrated.variants[0]!.explanation, optionId).toContain(
+        "昂扬 · 完整状态",
+      )
+    }
+    for (const pointer of [
+      "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/0",
+      "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/1",
+      "/agents/0/mindscapeBuffs/2/effectBlocks/0/effects/1",
+      "/agents/0/mindscapeBuffs/2/effectBlocks/0/effects/2",
+    ]) {
+      const record = result.coverage.records.find(
+        (entry) => entry.pointer === pointer,
+      )!
+      expect(record.status, pointer).toBe("unsupported")
+      expect(record.reason, pointer).toBe("semantic-conflict")
+      expect(record.effectIds, pointer).toEqual([])
+    }
+    expect(result.coverage.summary).toMatchObject({
+      rawEffects: 5,
+      unsupported: 4,
+    })
+    // 独立的影画 2 失衡易伤保持可用。
+    const stagger = result.catalog.options.find((candidate) =>
+      candidate.optionId.endsWith("legacy-team-staggerVulnerable"),
+    )!
+    expect(stagger.variants[0]!.status).toBe("converted")
+  })
+
+  it("keeps stable identities when agents, blocks and effects are reordered", () => {
+    const reordered = lighterElationData({ extraAgent: true })
+    reordered.agents = reordered.agents.toReversed()
+    const lighter = reordered.agents.find((agent) => agent.id === "lighter")!
+    lighter.mindscapeBuffs![0]!.effectBlocks =
+      lighter.mindscapeBuffs![0]!.effectBlocks!.toReversed()
+    for (const block of lighter.mindscapeBuffs![0]!.effectBlocks!)
+      block.effects = block.effects.toReversed()
+    for (const block of lighter.mindscapeBuffs![2]!.effectBlocks!)
+      block.effects = block.effects.toReversed()
+    const baseline = convertSource(lighterElationData(), functions, [], [])
+    const result = convertSource(reordered, functions, [], [])
+    const option = result.catalog.options.find(
+      (candidate) => candidate.optionId === completeStateOptionId,
+    )!
+    expect(option.variants[0]!.effectIds).toEqual([completeStateEffectId])
+    expect(option.variants[0]!.inputs[0]!.name).toBe(
+      baseline.catalog.options.find(
+        (candidate) => candidate.optionId === completeStateOptionId,
+      )!.variants[0]!.inputs[0]!.name,
+    )
+    expect(
+      result.definitions.effects.find(
+        (rule) => rule.effectId === scaleModificationId,
+      ),
+    ).toMatchObject({
+      target: { kind: "effect", effectId: completeStateEffectId },
+    })
+    // 记录顺序变化只移动 Pointer，不改变稳定身份与选项去重。
+    const baseRecord = result.coverage.records.find((entry) =>
+      entry.optionId.endsWith("eff-ms4aoho0-q3wbdv"),
+    )!
+    expect(baseRecord.pointer).toBe(
+      "/agents/1/mindscapeBuffs/0/effectBlocks/0/effects/1",
+    )
+    expect(result.coverage.summary.entities).toBe(2)
+  })
+
+  it("skips the group when absent and rejects partial or duplicated records", () => {
+    const withoutGroup = convertSource(
+      {
+        agents: [
+          {
+            id: "miyabi",
+            name: "星见雅",
+            element: "冰",
+            profession: "异常",
+            mindscapeBuffs: [{}, {}, {}, {}, {}, {}, {}],
+          },
+        ],
+        wengines: [],
+        driveDiscs: [],
+        skillSubcategories: [],
+        followUpSkillRules: [],
+      },
+      functions,
+      [],
+      [],
+    )
+    expect(
+      withoutGroup.catalog.options.some(
+        (candidate) => candidate.optionId === completeStateOptionId,
+      ),
+    ).toBe(false)
+    const missing = lighterElationData()
+    missing.agents[0]!.mindscapeBuffs![2]!.effectBlocks![0]!.effects = [
+      lighterElationStagger,
+      lighterElationStacked(2),
+    ]
+    expect(() => convertSource(missing, functions, [], [])).toThrow(
+      /Complete-state elation lost its source record/,
+    )
+    const orphan = lighterElationData()
+    orphan.agents[0]!.mindscapeBuffs![0] = {}
+    expect(() => convertSource(orphan, functions, [], [])).toThrow(
+      /Complete-state elation registration lost its base record/,
+    )
+    const duplicated = lighterElationData()
+    duplicated.agents[0]!.mindscapeBuffs![0]!.effectBlocks![0]!.effects = [
+      lighterElationStacked(0),
+      { ...lighterElationStacked(0) },
+    ]
+    expect(() => convertSource(duplicated, functions, [], [])).toThrow(
+      /Duplicate source effect/,
+    )
+  })
+
+  it("rejects raw and normalized field drift, including block note changes", () => {
+    const drift = (mutate: (effects: SourceEffect[]) => void) => {
+      const source = lighterElationData()
+      mutate(source.agents[0]!.mindscapeBuffs![0]!.effectBlocks![0]!.effects)
+      return () => convertSource(source, functions, [], [])
+    }
+    // 每层值属于登记的来源编码：改值先触发字段漂移拒绝（逐字段守卫）。
+    expect(
+      drift((effects) => {
+        effects[0]!.valuePerStack = 2
+      }),
+    ).toThrow(/field drift.*valuePerStack=2/)
+    expect(
+      drift((effects) => {
+        effects[0]!.appliesToAnomaly = false
+      }),
+    ).toThrow(/field drift/)
+    expect(
+      drift((effects) => {
+        effects[1]!.convert!.panelSource = "final"
+      }),
+    ).toThrow(/field drift/)
+    expect(
+      drift((effects) => {
+        effects[1]!.convert!.defaultBase = 999
+      }),
+    ).toThrow(/field drift/)
+    const m2Drift = (
+      mutate: (effects: SourceEffect[]) => void,
+    ): (() => ReturnType<typeof convertSource>) => {
+      const source = lighterElationData()
+      mutate(source.agents[0]!.mindscapeBuffs![2]!.effectBlocks![0]!.effects)
+      return () => convertSource(source, functions, [], [])
+    }
+    expect(
+      m2Drift((effects) => {
+        effects[1]!.elementFilter = ["火"]
+      }),
+    ).toThrow(/field drift/)
+    expect(
+      m2Drift((effects) => {
+        effects[2]!.convert!.panelSource = "final"
+      }),
+    ).toThrow(/field drift/)
+    expect(
+      m2Drift((effects) => {
+        effects[2]!.convert!.defaultBase = 999
+      }),
+    ).toThrow(/field drift/)
+    const noteDrift = lighterElationData()
+    noteDrift.agents[0]!.mindscapeBuffs![0]!.effectBlocks![0]!.note =
+      "每层昂扬使代理人造成的冰属性伤害和火属性伤害提升2.5%。"
+    expect(() => convertSource(noteDrift, functions, [], [])).toThrow(
+      /block note drift/,
+    )
+    const m2NoteDrift = lighterElationData()
+    m2NoteDrift.agents[0]!.mindscapeBuffs![2]!.effectBlocks![0]!.note =
+      "通过[核心被动：助燃剂]对敌人施加[溃败]效果时，目标的失衡易伤倍率提升25%。"
+    expect(() => convertSource(m2NoteDrift, functions, [], [])).toThrow(
+      /block note drift/,
+    )
+    // 仅规范化副本漂移也必须拒绝：归一化不改变登记语义。
+    const normalizedDrift: SourceNormalization = {
+      ...functions,
+      normalizeAgent: (entity) => {
+        const normalized = structuredClone(functions.normalizeAgent(entity))
+        const effects =
+          normalized.mindscapeBuffs?.[0]?.effectBlocks?.[0]?.effects
+        if (effects?.[0]?.id === "eff-ms4aoho0-q3wbdv")
+          effects[0]!.valuePerStack = 9
+        return normalized
+      },
+    }
+    expect(() =>
+      convertSource(lighterElationData(), normalizedDrift, [], []),
+    ).toThrow(/normalized field drift/)
+  })
+
+  it("resolves the base contribution by full identity when another entity reuses local ids", () => {
+    const source = lighterElationData()
+    source.agents = [source.agents[0]!, anbyElationLocalIdReuse()]
+    const result = convertSource(source, functions, [], [])
+    // 昂扬完整状态仍精确指向莱特的完整贡献；局部 ID 相同的另一实体记录
+    // 不参与定位。
+    const option = result.catalog.options.find(
+      (candidate) => candidate.optionId === completeStateOptionId,
+    )!
+    expect(option.variants[0]!.effectIds).toEqual([completeStateEffectId])
+    // 两份实体规则各自保留：安比的记录编译为自己的完整身份规则，
+    // 不被莱特的贡献顶替，也不影响莱特规则的形态。
+    const reused = result.definitions.effects.find(
+      (rule) =>
+        rule.effectId ===
+        "agent:1011:zzz-hp:eff-ms4aoho0-q3wbdv:blk-ms4aoho0-grnxav:mindscape:0",
+    )
+    expect(reused).toMatchObject({ kind: "contribution" })
+    expect(
+      result.definitions.effects.find(
+        (rule) => rule.effectId === completeStateEffectId,
+      ),
+    ).toMatchObject({
+      kind: "contribution",
+      activation: {
+        kind: "supplied",
+        maximumLayers: { kind: "literal", unit: "count", value: 1 },
+      },
+    })
+  })
+
+  it("verifies registered elation records before generic degradations", () => {
+    // 规范化删除任一被取代记录：必须按具名登记拒绝，不能降级成
+    // “上游加载规范化移除了该原始记录”的通用 unsupported。
+    const normalizedRemoval = (effectId: string): SourceNormalization => ({
+      ...functions,
+      normalizeAgent: (entity) => {
+        const normalized = structuredClone(functions.normalizeAgent(entity))
+        for (const pack of normalized.mindscapeBuffs ?? [])
+          for (const block of pack.effectBlocks ?? []) {
+            const index = block.effects.findIndex(
+              (entry) => entry.id === effectId,
+            )
+            if (index >= 0) block.effects.splice(index, 1)
+          }
+        return normalized
+      },
+    })
+    for (const effectId of [
+      "eff-ms4atnfh-29yr0r",
+      "eff-ms4b0whf-x6n1xw",
+      "eff-ms4b2g6y-2q6n1w",
+    ])
+      expect(
+        () =>
+          convertSource(
+            lighterElationData(),
+            normalizedRemoval(effectId),
+            [],
+            [],
+          ),
+        effectId,
+      ).toThrow(/lost the normalized record/)
+    // 编码变义（stat 改为公式超范围的 special）：同样在通用降级前拒绝。
+    const statDrift = lighterElationData()
+    statDrift.agents[0]!.mindscapeBuffs![2]!.effectBlocks![0]!.effects[2]!.stat =
+      "special"
+    expect(() => convertSource(statDrift, functions, [], [])).toThrow(
+      /field drift.*stat="special"/,
+    )
+  })
+
+  it("rejects every registered elation note clause the formula depends on", () => {
+    const noteDrift = (
+      from: string,
+      to: string,
+    ): (() => ReturnType<typeof convertSource>) => {
+      const source = lighterElationData()
+      const block = source.agents[0]!.mindscapeBuffs![0]!.effectBlocks![0]!
+      block.note = block.note!.replace(from, to)
+      return () => convertSource(source, functions, [], [])
+    }
+    expect(noteDrift("高于170点", "高于180点")).toThrow(/block note drift/)
+    expect(noteDrift("最多叠加20层", "最多叠加30层")).toThrow(
+      /block note drift/,
+    )
+    expect(noteDrift("获得[昂扬]时", "每次造成伤害时")).toThrow(
+      /block note drift/,
+    )
+    // 固定正文正例仍然通过。
+    expect(
+      convertSource(
+        lighterElationData(),
+        functions,
+        [],
+        [],
+      ).definitions.effects.some(
+        (rule) => rule.effectId === completeStateEffectId,
+      ),
+    ).toBe(true)
   })
 })

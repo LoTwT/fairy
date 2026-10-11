@@ -428,7 +428,71 @@ export type SourceSemantics =
       readonly evidence: readonly SemanticsEvidenceReference[]
       readonly verification: string
     }
-
+  | {
+      /**
+       * 固定来源把同一按层状态的各条款拆成多条可独立切换的记录（莱特
+       * [昂扬]：基础每层 1.25% 的 stacked 记录 + 冲击力转化的 convert
+       * 记录 + 影画 2 的两条复制记录），而块 note 与 Nanoka 同文说明它们
+       * 共同表示一个完整状态：总增益为 `min(上限, (每层增益 + max(0,
+       * 获得时冲击力 − 170) × 每点增量) × 层数)`，上限作用于乘层数后的
+       * 总增益，影画 2 起对同一状态整体 ×1.2。转换器把基础记录改写为这
+       * 一条完整贡献（supplied、maximumLayers=1）：冲击力按登记输入名
+       * 要求调用方显式提供（无默认值），层数由目录按登记的输入名从
+       * selection.layers 派生；影画 2 的 120% 由配置阶段 output scale
+       * 修改直接作用于同一条贡献（M0—M6 共用同一选项，随影画自动生效）。
+       * 被取代的三条来源记录（基础转化与影画 2 的两条复制）不再生成可执行
+       * 贡献：只编译为带迁移说明的 unsupported 选项，来源位置保留在覆盖
+       * 报告中。原始与规范化记录的 stat、编码与数值与登记不符即拒绝生成。
+       */
+      readonly kind: "complete-state-elation"
+      /** 记录在完整状态中的角色：基础记录被改写为完整贡献。 */
+      readonly role: "base"
+      /** 完整状态的层数上限（如昂扬 20 层）。 */
+      readonly maximumLayers: number
+      /** 每层基础增益；与来源 stacked 每层值一致（防漂移）。 */
+      readonly perLayerGain: number
+      /** 超过阈值后每点冲击力增加的每层增益（如 0.00025）。 */
+      readonly perPointGain: number
+      /** 转化阈值（冲击力点数，如 170）。 */
+      readonly threshold: number
+      /** 完整状态总增益上限（如 0.75；影画强化后由 output scale 放大）。 */
+      readonly maximum: number
+      /** 目录 inputs 上的获得时冲击力输入名（与转化记录编译一致）。 */
+      readonly impactInputName: string
+      /** 目录层数派生的 count 输入名（完整贡献内部使用）。 */
+      readonly layerCountInputName: string
+      /**
+       * 命中元素补充：登记的来源元素之外，按冻结证据与来源同一分支结算
+       * 的元素（烈霜按冰属性结算伤害与增益，命中枚举本身仍是 frost）。
+       * 只在具名完整状态规则的命中元素条件里追加，不改全局元素归并。
+       */
+      readonly additionalHitElements: readonly ("frost" | "ice" | "fire")[]
+      /** 防漂移：登记时来源记录应逐字段保持的编码。 */
+      readonly expectedEncoding: Readonly<Record<string, unknown>>
+      /** 防漂移：记录所属块 note 必须包含的关键条款，改变原文即拒绝生成。 */
+      readonly expectedBlockNoteIncludes: readonly string[]
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
+       * [昂扬]完整状态中被取代的来源记录（基础转化与影画 2 的两条按层复制）：
+       * 只保留 unsupported 迁移入口与覆盖报告去向，不再生成可执行贡献。
+       * 原始与规范化记录的编码与数值与登记不符即拒绝生成。
+       */
+      readonly kind: "complete-state-elation"
+      readonly role: "replaced"
+      /** 来源记录的层数上限（仅用于迁移入口的选项上限核对）。 */
+      readonly maximumLayers: number
+      /** 防漂移：登记时来源记录应逐字段保持的编码。 */
+      readonly expectedEncoding: Readonly<Record<string, unknown>>
+      /** 防漂移：记录所属块 note 必须包含的关键条款，改变原文即拒绝生成。 */
+      readonly expectedBlockNoteIncludes: readonly string[]
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
 /**
  * 完整状态选项登记：固定来源把同一游戏状态拆成多条可独立切换的记录
  * （上游增益面板逐 effect 开关，自身读取 self+team、他人只取 team），而块
@@ -1445,6 +1509,132 @@ export const wengineCorrectionRegistrations = (): Record<
   return registrations
 }
 
+/**
+ * 莱特（1161）[昂扬]的冻结证据：额外能力的中文逐档说明（核心 1—7 的每层
+ * 1.25%、冲击力转化条款与 75% 总上限相同）与影画 2 天赋原文。
+ */
+const lighterElationEvidence: readonly SemanticsEvidenceReference[] = (
+  [1161501, 1161502, 1161503, 1161504, 1161505, 1161506, 1161507] as const
+).map((row) => ({
+  path: "agents/1161/details.zh.json",
+  pointer: `/passive/level/${row}/desc/1`,
+  sha256: "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5",
+}))
+
+const lighterElationMindscape2Evidence: readonly SemanticsEvidenceReference[] =
+  [
+    {
+      path: "agents/1161/details.zh.json",
+      pointer: "/passive/level/1161501/desc/1",
+      sha256:
+        "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5",
+    },
+    {
+      path: "agents/1161/details.zh.json",
+      pointer: "/talent/2/desc",
+      sha256:
+        "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5",
+    },
+  ]
+
+/**
+ * 烈霜按冰属性结算伤害与增益的冻结证据：星见雅（1091）的烈霜属性说明
+ * （“烈霜属性会基于冰属性结算伤害与增益效果”）。昂扬正文的“冰属性伤害”
+ * 因此必须覆盖有正式动作的烈霜命中（如 /skill/assist 的霜刃斩击，动作
+ * 元素的命中枚举是 frost），而不是把 frost 归并为 ice 或漏掉。
+ */
+const lighterElationFrostEvidence: readonly SemanticsEvidenceReference[] = [
+  {
+    path: "agents/1091/details.zh.json",
+    pointer: "/specialElementType/desc",
+    sha256: "45f70931c081d73d085eadea5a23d6c21cc314019090d0577a76a9b3f722973e",
+  },
+]
+
+/** 基础 stacked 记录的登记编码（rank 0 与影画 2 复制记录只差每层值）。 */
+function lighterBaseEncoding(rank: 0 | 2) {
+  const elementFilter = rank === 0 ? ["冰", "火"] : ["火", "冰"]
+  return {
+    stat: "dmgBonus",
+    scope: "general",
+    applyTarget: "team",
+    applySituation: "global",
+    applyProfession: null,
+    teamProfession: null,
+    teamProfessionValues: null,
+    teamProfessionMinCount: null,
+    skillSubcategoryId: null,
+    elementFilter,
+    kind: "stacked",
+    value: 0,
+    stackable: false,
+    maxStacks: 20,
+    valuePerStack: rank === 0 ? 1.25 : 0.25,
+    defaultStacks: 20,
+    // 来源记录不含异常受益标记；出现该字段（无论 true/false）都会改变
+    // 命中伤害种类范围，按漂移拒绝。
+    appliesToAnomaly: null,
+    enabledDefault: true,
+    note: "",
+  } as const
+}
+
+/** 转化记录的登记编码（rank 0 的 50% 与影画 2 的 10% 复制记录）。 */
+function lighterConversionEncoding(rank: 0 | 2, ratioPercent: 50 | 10) {
+  return {
+    stat: "dmgBonus",
+    scope: "general",
+    applyTarget: "team",
+    applySituation: "global",
+    applyProfession: null,
+    teamProfession: null,
+    teamProfessionValues: null,
+    teamProfessionMinCount: null,
+    skillSubcategoryId: null,
+    elementFilter: ["火", "冰"],
+    kind: "convert",
+    value: 0,
+    stackable: false,
+    maxStacks: 1,
+    valuePerStack: 0,
+    defaultStacks: 1,
+    appliesToAnomaly: null,
+    enabledDefault: true,
+    note: "",
+    convertFrom: "impact",
+    convertRatioPercent: ratioPercent,
+    convertCap: rank === 0 ? 50 : 10,
+    convertInitialBase: 170,
+    convertPanelSource: "manual",
+    convertDefaultBase: 270,
+  } as const
+}
+
+/** 额外能力块 note 必须包含的关键条款（固定来源原文；漂移即拒绝生成）。 */
+const lighterElationBaseBlockNoteIncludes = [
+  "每拥有一层[昂扬]，代理人造成的冰属性伤害和火属性伤害提升1.25%",
+  "每超过10点冲击力会使每层[昂扬]提供的增益效果额外提升0.25%",
+  "[昂扬]最多使代理人造成的冰属性伤害和火属性伤害提升75%",
+  // 完整状态硬编码依赖的读取时点、转化阈值与层数上限：获得[昂扬]时的
+  // 冲击力快照读数、170 点阈值、最多 20 层重写原文即拒绝生成。
+  "获得[昂扬]时，若莱特的冲击力高于170点",
+  "全队角色获得一层[昂扬]，最多叠加20层",
+] as const
+
+/** 影画 2 块 note 必须包含的关键条款（固定来源原文；漂移即拒绝生成）。 */
+const lighterElationMindscape2BlockNoteIncludes = [
+  "[额外能力：斗志昂扬]中由[昂扬]提供的冰属性伤害和火属性伤害增益效果提升至原本的120%",
+] as const
+
+const lighterElationCompleteStateVerification =
+  "固定来源把[昂扬]拆成两条可独立切换的记录：/agents/50/mindscapeBuffs/0/effectBlocks/1/effects/0 的每层 1.25% stacked 与 /effects/1 的冲击力转化 convert；块 note 与 Nanoka 额外能力说明（agents/1161/details.zh.json 的 /passive/level/1161501—1161507/desc/1，核心 1—7 同文）一致：每层[昂扬]使代理人造成的冰属性伤害和火属性伤害提升 1.25%；获得[昂扬]时若莱特冲击力高于 170 点，每超过 10 点使每层增益额外提升 0.25%（即每点 0.00025）；[昂扬]最多使冰/火伤害提升 75%。因此完整状态的总增益是 min(0.75, (0.0125 + max(0, 获得时冲击力 − 170) × 0.00025) × 层数)：上限作用于乘层数后的总增益（I200/L5 为 10%），不是把单次 50% 转化按层重复累加，也不是把 75% 除以 20 后当作每层封顶。命中元素按来源正文“冰属性伤害和火属性伤害”限制；烈霜按冰属性结算伤害与增益（agents/1091/details.zh.json 的 /specialElementType/desc），其命中枚举 frost 由本具名规则显式覆盖，不改全局元素归并。转换器只保留一条完整贡献：基础记录改写为上述表达式，supplied、maximumLayers 1（一次性完整状态），获得时冲击力按原有转化输入名要求调用方显式提供（无默认值，不读取当前面板），层数由目录按登记输入名从 selection.layers 派生（0 层关闭，不要求冲击力）。来源的被取代记录不再生成独立增益。显式冲击输入与层数由调用方声明，不模拟时间线。"
+
+const lighterElationConversionReplacedVerification =
+  "固定来源 /agents/50/mindscapeBuffs/0/effectBlocks/1/effects/1 的转化记录（convert impact、manual、ratioPercent 50、cap 50、initialBase 170）没有层数：把它当独立增益会得到 I200 单次 15%，与每层 1.25% stacked 记录叠加后 I200/L5 合计 21.25%，而完整状态应为每层 2% × 5 = 10%。块 note 与 Nanoka 说明里的 75% 上限作用于整个按层状态，故该记录并入基础记录改写出的完整状态贡献（min(0.75, (0.0125 + max(0, I−170)×0.00025) × L)），自身只编译为带迁移说明的 unsupported 选项，不生成可执行贡献。原始与规范化记录的 stat、编码与数值由登记逐字段防漂移。"
+
+const lighterElationM2DuplicatesReplacedVerification =
+  "固定来源把影画 2 的「[昂扬]效果提升至原本的 120%」另记为两条记录（/agents/50/mindscapeBuffs/2/effectBlocks/0/effects/1 为每层 +0.25% 的 stacked、/effects/2 为单次冲击力转化 convert、ratioPercent 10、maxStacks 1），块 note 与 Nanoka 天赋 2（agents/1161/details.zh.json 的 /talent/2/desc）同文说明这是对同一[昂扬]状态整体的乘数，不是第二个昂扬，也不构成第二条完整贡献（单次转化没有层数，不能按层重复累加）。两条记录因此都并入完整状态（只保留迁移说明，不再生成可执行贡献），120% 由配置阶段 output scale 1.2 修改直接作用于同一条完整贡献；M0—M6 共用同一选项，影画 2 起随配置自动强化一次。影画 2 的独立失衡易伤 +25%（/effects/0）保持独立选项与数值不变。"
+
 export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
   "agents/caesar/mindscape/0/blk-legacy/legacy-team-atk": {
     kind: "core-skill-level",
@@ -2201,6 +2391,58 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     ],
     verification:
       "块 note 与 Nanoka 四件套描述（drive-discs/33600/details.zh.json 的 /desc4）同文：装备者发动[普通攻击]命中敌人时异常精通 +36（8 秒，独立条款不变）；当场上有敌人进入失衡状态时，装备者造成的伤害提升 25%，持续 18 秒，重复触发刷新。固定来源把后一条款编码为 applySituation: stagger，固定版 effectMatchesContext 据此要求目标当前处于失衡——而“进入失衡”只是触发事实，增益持续 18 秒、期间目标是否失衡不影响受益。修正为移除派生的 hit.targetState 条件：18 秒状态是否仍有效由调用方显式选择 supplied 实例声明，当前失衡但未声明状态不自动获得，声明有效但目标已退出失衡仍照常 +25%；触发、持续与刷新不模拟时间线。四件门槛、自身受益与独立的 +36 异常精通条款保持不变，两种持续状态不绑成同一开关。",
+  },
+  // 莱特（1161）[昂扬]：基础记录改写为一条完整状态贡献（含冲击力转化与
+  // 总上限），影画 2 的 120% 由配置修改直接作用于同一条贡献；被取代的
+  // 三条记录只保留迁移入口，不再生成可执行贡献。
+  "agents/lighter/mindscape/0/blk-ms4aoho0-grnxav/eff-ms4aoho0-q3wbdv": {
+    kind: "complete-state-elation",
+    role: "base",
+    maximumLayers: 20,
+    perLayerGain: 0.0125,
+    perPointGain: 0.00025,
+    threshold: 170,
+    maximum: 0.75,
+    impactInputName:
+      "agent:1161:zzz-hp:eff-ms4atnfh-29yr0r:blk-ms4aoho0-grnxav:mindscape:0:source",
+    layerCountInputName:
+      "agent:1161:zzz-hp:eff-ms4aoho0-q3wbdv:blk-ms4aoho0-grnxav:mindscape:0:layers",
+    additionalHitElements: ["frost"],
+    expectedEncoding: lighterBaseEncoding(0),
+    expectedBlockNoteIncludes: lighterElationBaseBlockNoteIncludes,
+    differenceId: "complete-state-elation-correction",
+    evidence: [...lighterElationEvidence, ...lighterElationFrostEvidence],
+    verification: lighterElationCompleteStateVerification,
+  },
+  "agents/lighter/mindscape/0/blk-ms4aoho0-grnxav/eff-ms4atnfh-29yr0r": {
+    kind: "complete-state-elation",
+    role: "replaced",
+    maximumLayers: 20,
+    expectedEncoding: lighterConversionEncoding(0, 50),
+    expectedBlockNoteIncludes: lighterElationBaseBlockNoteIncludes,
+    differenceId: "complete-state-elation-correction",
+    evidence: lighterElationEvidence,
+    verification: lighterElationConversionReplacedVerification,
+  },
+  "agents/lighter/mindscape/2/blk-legacy/eff-ms4b0whf-x6n1xw": {
+    kind: "complete-state-elation",
+    role: "replaced",
+    maximumLayers: 20,
+    expectedEncoding: lighterBaseEncoding(2),
+    expectedBlockNoteIncludes: lighterElationMindscape2BlockNoteIncludes,
+    differenceId: "complete-state-elation-correction",
+    evidence: lighterElationMindscape2Evidence,
+    verification: lighterElationM2DuplicatesReplacedVerification,
+  },
+  "agents/lighter/mindscape/2/blk-legacy/eff-ms4b2g6y-2q6n1w": {
+    kind: "complete-state-elation",
+    role: "replaced",
+    maximumLayers: 20,
+    expectedEncoding: lighterConversionEncoding(2, 10),
+    expectedBlockNoteIncludes: lighterElationMindscape2BlockNoteIncludes,
+    differenceId: "complete-state-elation-correction",
+    evidence: lighterElationMindscape2Evidence,
+    verification: lighterElationM2DuplicatesReplacedVerification,
   },
 }
 

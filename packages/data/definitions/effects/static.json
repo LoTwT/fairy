@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "18",
+  "revision": "19",
   "effects": [
     {
       "kind": "contribution",
@@ -8166,6 +8166,180 @@
       }
     },
     {
+      "kind": "modification",
+      "phase": "configuration",
+      "effectId": "agent:1161:zzz-hp:complete-state-elation-scale:eff-ms4b0whf-x6n1xw",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1161"
+        },
+        "section": "影画2 · 昂扬完整状态强化",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/50/mindscapeBuffs/0/effectBlocks/1/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161501/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161502/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161503/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161504/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161505/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161506/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161507/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161501/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161502/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161503/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161504/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161505/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161506/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161507/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/specialElementType/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161501/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/talent/2/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 2
+        }
+      },
+      "parameters": {},
+      "target": {
+        "kind": "effect",
+        "effectId": "agent:1161:zzz-hp:eff-ms4aoho0-q3wbdv:blk-ms4aoho0-grnxav:mindscape:0"
+      },
+      "modifications": [
+        {
+          "field": "output",
+          "unit": "ratio",
+          "change": {
+            "operator": "scale",
+            "value": {
+              "kind": "literal",
+              "unit": "multiplier",
+              "value": 1.2
+            }
+          }
+        }
+      ]
+    },
+    {
       "kind": "contribution",
       "effectId": "agent:1161:zzz-hp:eff-ms4aoho0-q3wbdv:blk-ms4aoho0-grnxav:mindscape:0",
       "source": {
@@ -8230,73 +8404,6 @@
             "locale": "zh",
             "resourcePath": "agents/1161/details.zh.json",
             "pointer": "/passive/level/1161507/desc/1"
-          }
-        ]
-      },
-      "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 0
-        }
-      },
-      "parameters": {
-        "amount": {
-          "kind": "constant",
-          "unit": "ratio",
-          "value": 0.0125
-        }
-      },
-      "activation": {
-        "kind": "supplied",
-        "maximumLayers": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 20
-        }
-      },
-      "scope": "hit",
-      "beneficiary": {
-        "kind": "team"
-      },
-      "when": {
-        "kind": "all",
-        "conditions": []
-      },
-      "operation": {
-        "kind": "factor-contribution",
-        "channel": "damage-bonus",
-        "value": {
-          "kind": "parameter",
-          "unit": "ratio",
-          "name": "amount"
-        }
-      }
-    },
-    {
-      "kind": "contribution",
-      "effectId": "agent:1161:zzz-hp:eff-ms4atnfh-29yr0r:blk-ms4aoho0-grnxav:mindscape:0",
-      "source": {
-        "identity": {
-          "kind": "agent",
-          "entityId": "1161"
-        },
-        "section": "额外能力：斗志昂扬",
-        "references": [
-          {
-            "sourceId": "zzz-hp",
-            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-            "locale": "zh",
-            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-            "pointer": "/agents/50/mindscapeBuffs/0/effectBlocks/1/effects/1"
           },
           {
             "sourceId": "nanoka-integrated",
@@ -8346,6 +8453,13 @@
             "locale": "zh",
             "resourcePath": "agents/1161/details.zh.json",
             "pointer": "/passive/level/1161507/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/specialElementType/desc"
           }
         ]
       },
@@ -8365,20 +8479,15 @@
         }
       },
       "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.0125
+        },
         "threshold": {
           "kind": "constant",
           "unit": "impact-points",
           "value": -170
-        },
-        "rate": {
-          "kind": "constant",
-          "unit": "multiplier",
-          "value": 0.005
-        },
-        "cap": {
-          "kind": "constant",
-          "unit": "ratio",
-          "value": 0.5
         }
       },
       "activation": {
@@ -8395,7 +8504,17 @@
       },
       "when": {
         "kind": "all",
-        "conditions": []
+        "conditions": [
+          {
+            "kind": "all",
+            "conditions": []
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["ice", "fire", "frost"]
+          }
+        ]
       },
       "operation": {
         "kind": "factor-contribution",
@@ -8405,45 +8524,74 @@
           "unit": "ratio",
           "operands": [
             {
-              "kind": "convert",
+              "kind": "literal",
               "unit": "ratio",
-              "input": {
-                "kind": "maximum",
-                "unit": "impact-points",
+              "value": 0.75
+            },
+            {
+              "kind": "multiply",
+              "unit": "ratio",
+              "value": {
+                "kind": "add",
+                "unit": "ratio",
                 "operands": [
                   {
                     "kind": "literal",
-                    "unit": "impact-points",
-                    "value": 0
+                    "unit": "ratio",
+                    "value": 0.0125
                   },
                   {
-                    "kind": "add",
-                    "unit": "impact-points",
-                    "operands": [
-                      {
-                        "kind": "input",
-                        "unit": "impact-points",
-                        "name": "agent:1161:zzz-hp:eff-ms4atnfh-29yr0r:blk-ms4aoho0-grnxav:mindscape:0:source"
-                      },
-                      {
-                        "kind": "parameter",
-                        "unit": "impact-points",
-                        "name": "threshold"
-                      }
-                    ]
+                    "kind": "convert",
+                    "unit": "ratio",
+                    "input": {
+                      "kind": "maximum",
+                      "unit": "impact-points",
+                      "operands": [
+                        {
+                          "kind": "literal",
+                          "unit": "impact-points",
+                          "value": 0
+                        },
+                        {
+                          "kind": "add",
+                          "unit": "impact-points",
+                          "operands": [
+                            {
+                              "kind": "input",
+                              "unit": "impact-points",
+                              "name": "agent:1161:zzz-hp:eff-ms4atnfh-29yr0r:blk-ms4aoho0-grnxav:mindscape:0:source"
+                            },
+                            {
+                              "kind": "parameter",
+                              "unit": "impact-points",
+                              "name": "threshold"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "rate": {
+                      "kind": "literal",
+                      "unit": "multiplier",
+                      "value": 0.00025
+                    }
                   }
                 ]
               },
-              "rate": {
-                "kind": "parameter",
+              "coefficient": {
+                "kind": "convert",
                 "unit": "multiplier",
-                "name": "rate"
+                "input": {
+                  "kind": "input",
+                  "unit": "count",
+                  "name": "agent:1161:zzz-hp:eff-ms4aoho0-q3wbdv:blk-ms4aoho0-grnxav:mindscape:0:layers"
+                },
+                "rate": {
+                  "kind": "literal",
+                  "unit": "multiplier",
+                  "value": 1
+                }
               }
-            },
-            {
-              "kind": "parameter",
-              "unit": "ratio",
-              "name": "cap"
             }
           ]
         }
@@ -8539,192 +8687,6 @@
           "kind": "parameter",
           "unit": "ratio",
           "name": "amount"
-        }
-      }
-    },
-    {
-      "kind": "contribution",
-      "effectId": "agent:1161:zzz-hp:eff-ms4b0whf-x6n1xw:blk-legacy:mindscape:2",
-      "source": {
-        "identity": {
-          "kind": "agent",
-          "entityId": "1161"
-        },
-        "section": "影画2",
-        "references": [
-          {
-            "sourceId": "zzz-hp",
-            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-            "locale": "zh",
-            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-            "pointer": "/agents/50/mindscapeBuffs/2/effectBlocks/0/effects/1"
-          }
-        ]
-      },
-      "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 2
-        }
-      },
-      "parameters": {
-        "amount": {
-          "kind": "constant",
-          "unit": "ratio",
-          "value": 0.0025
-        }
-      },
-      "activation": {
-        "kind": "supplied",
-        "maximumLayers": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 20
-        }
-      },
-      "scope": "hit",
-      "beneficiary": {
-        "kind": "team"
-      },
-      "when": {
-        "kind": "all",
-        "conditions": []
-      },
-      "operation": {
-        "kind": "factor-contribution",
-        "channel": "damage-bonus",
-        "value": {
-          "kind": "parameter",
-          "unit": "ratio",
-          "name": "amount"
-        }
-      }
-    },
-    {
-      "kind": "contribution",
-      "effectId": "agent:1161:zzz-hp:eff-ms4b2g6y-2q6n1w:blk-legacy:mindscape:2",
-      "source": {
-        "identity": {
-          "kind": "agent",
-          "entityId": "1161"
-        },
-        "section": "影画2",
-        "references": [
-          {
-            "sourceId": "zzz-hp",
-            "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-            "locale": "zh",
-            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-            "pointer": "/agents/50/mindscapeBuffs/2/effectBlocks/0/effects/2"
-          }
-        ]
-      },
-      "config": {
-        "kind": "compare-number",
-        "unit": "count",
-        "operator": "gte",
-        "left": {
-          "kind": "configuration-number",
-          "unit": "count",
-          "field": "mindscapeRank"
-        },
-        "right": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 2
-        }
-      },
-      "parameters": {
-        "threshold": {
-          "kind": "constant",
-          "unit": "impact-points",
-          "value": -170
-        },
-        "rate": {
-          "kind": "constant",
-          "unit": "multiplier",
-          "value": 0.001
-        },
-        "cap": {
-          "kind": "constant",
-          "unit": "ratio",
-          "value": 0.1
-        }
-      },
-      "activation": {
-        "kind": "supplied",
-        "maximumLayers": {
-          "kind": "literal",
-          "unit": "count",
-          "value": 1
-        }
-      },
-      "scope": "hit",
-      "beneficiary": {
-        "kind": "team"
-      },
-      "when": {
-        "kind": "all",
-        "conditions": []
-      },
-      "operation": {
-        "kind": "factor-contribution",
-        "channel": "damage-bonus",
-        "value": {
-          "kind": "minimum",
-          "unit": "ratio",
-          "operands": [
-            {
-              "kind": "convert",
-              "unit": "ratio",
-              "input": {
-                "kind": "maximum",
-                "unit": "impact-points",
-                "operands": [
-                  {
-                    "kind": "literal",
-                    "unit": "impact-points",
-                    "value": 0
-                  },
-                  {
-                    "kind": "add",
-                    "unit": "impact-points",
-                    "operands": [
-                      {
-                        "kind": "input",
-                        "unit": "impact-points",
-                        "name": "agent:1161:zzz-hp:eff-ms4b2g6y-2q6n1w:blk-legacy:mindscape:2:source"
-                      },
-                      {
-                        "kind": "parameter",
-                        "unit": "impact-points",
-                        "name": "threshold"
-                      }
-                    ]
-                  }
-                ]
-              },
-              "rate": {
-                "kind": "parameter",
-                "unit": "multiplier",
-                "name": "rate"
-              }
-            },
-            {
-              "kind": "parameter",
-              "unit": "ratio",
-              "name": "cap"
-            }
-          ]
         }
       }
     },

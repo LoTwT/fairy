@@ -1039,6 +1039,14 @@ describe("fixed-source catalog conformance", () => {
   const completeStateMigratedPointers = new Set([
     "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/1",
     "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/2",
+    // 莱特[昂扬]的四条部分记录（基础/转化与影画 2 的两条复制）已并入
+    // “昂扬 · 完整状态”单一选项，来源位置改为 semantic-conflict 迁移入口；
+    // 由具名完整状态用例（pr04-elation-complete-state）按独立公式的锚点矩阵
+    // 验证，不把旧的独立按层结果当作上游期望值。
+    "/agents/50/mindscapeBuffs/0/effectBlocks/1/effects/0",
+    "/agents/50/mindscapeBuffs/0/effectBlocks/1/effects/1",
+    "/agents/50/mindscapeBuffs/2/effectBlocks/0/effects/1",
+    "/agents/50/mindscapeBuffs/2/effectBlocks/0/effects/2",
   ])
   /**
    * 青溟笼舍精炼 1—5 的以太贯穿增伤位置：块 note 与 Nanoka 同文把该条款写在
@@ -1865,7 +1873,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("18")
+    expect(catalog.revision).toBe("19")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,

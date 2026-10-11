@@ -397,6 +397,17 @@ const nanokaReference = (path: string, pointer: string): SourceReference => ({
   pointer: pointer as `/${string}`,
 })
 /**
+ * 莱特影画 2 的 120% 强化证据（完整状态的比例修改需要独立引用）；
+ * 与语义登记里的同一原文位置一致。
+ */
+const lighterElationMindscape2EvidenceReferences = (): SourceReference[] => [
+  nanokaReference(
+    "agents/1161/details.zh.json",
+    "/passive/level/1161501/desc/1",
+  ),
+  nanokaReference("agents/1161/details.zh.json", "/talent/2/desc"),
+]
+/**
  * 开发者修订导出证据：独立于固定提交与 Nanoka integrated；resourcePath 是
  * 本机冻结 raw 文件相对数据包根目录的路径，生成时按整文件摘要核对。
  */
@@ -428,6 +439,25 @@ export interface SourceRecord {
   raw: SourceEffect
   normalized: SourceEffect | undefined
 }
+
+/**
+ * 正式编译使用的完整来源效果身份：实体身份、rankKind/rank、块与效果全部
+ * 参与。局部块/效果 ID 只在实体内部唯一，不同实体可以合法复用；不得用
+ * 局部 ID 子串或后缀定位规则。
+ */
+function sourceEffectId(
+  record: SourceRecord,
+  entity: { readonly identity: SourceIdentity | null },
+): EffectId {
+  const prefix =
+    record.category === "agents"
+      ? "agent"
+      : record.category === "w-engines"
+        ? "w-engine"
+        : "disc"
+  return `${prefix}:${entity.identity?.entityId ?? "unmatched"}:zzz-hp:${idPart(record.raw.id)}:${idPart(record.blockId)}:${record.rankKind}:${record.rank}`
+}
+
 export interface CoverageRecord {
   pointer: string
   catalogEntityId: string
@@ -793,6 +823,51 @@ function whenFor(
 const semanticsKeyFor = (record: SourceRecord): string =>
   `${record.category}/${record.entityId}/${record.rankKind}/${record.rank}/${record.blockId}/${record.raw.id}`
 
+/**
+ * [昂扬]完整状态登记记录的防漂移前置校验：原始与规范化记录都必须仍在、
+ * 登记的编码字段逐字段一致、块 note 关键条款齐全。必须在 compile 的通用
+ * unsupported 降级（规范化移除、公式超范围）之前执行：否则被登记记录会
+ * 静默降级成通用 unsupported，失去约定的具名迁移说明。
+ */
+function verifyCompleteStateElationRecord(
+  record: SourceRecord,
+  semantics: Extract<SourceSemantics, { kind: "complete-state-elation" }>,
+): void {
+  for (const [label, document] of [
+    ["raw", record.raw],
+    ["normalized", record.normalized],
+  ] as const) {
+    if (document === undefined)
+      throw new Error(
+        `Complete-state elation correction lost the ${label} record at ${record.pointer}`,
+      )
+    const flattened: Record<string, unknown> = {
+      ...document,
+      convertFrom: document.convert?.from,
+      convertPanelSource: document.convert?.panelSource,
+      convertRatioPercent: document.convert?.ratioPercent,
+      convertCap: document.convert?.cap,
+      convertDefaultBase: document.convert?.defaultBase,
+      convertInitialBase: document.convert?.initialBase,
+    }
+    delete flattened.convert
+    for (const [field, value] of Object.entries(semantics.expectedEncoding)) {
+      const actual = flattened[field]
+      if (JSON.stringify(actual ?? null) !== JSON.stringify(value))
+        throw new Error(
+          `Complete-state elation correction ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(actual ?? null)}`,
+        )
+    }
+  }
+  // 块 note 是本状态“同文纠错”的依据：登记的关键条款任一缺失即拒绝，
+  // 不用 effect.note（空串）代替机制原文核对。
+  for (const clause of semantics.expectedBlockNoteIncludes)
+    if (!record.blockNote.includes(clause))
+      throw new Error(
+        `Complete-state elation block note drift at ${record.pointer}: missing ${JSON.stringify(clause)}`,
+      )
+}
+
 function compile(
   record: SourceRecord,
   identity: SourceIdentity | null,
@@ -955,6 +1030,10 @@ function compile(
   })
   if (!identity)
     return unsupported("missing-identity", "当前 Fairy 没有已核实的来源实体 ID")
+  // 具名登记的完整状态记录先做防漂移校验，早于任何通用 unsupported 降级：
+  // 规范化删除或编码变义必须终止生成，不能被当作“已迁移”入口。
+  if (semantics?.kind === "complete-state-elation")
+    verifyCompleteStateElationRecord(record, semantics)
   if (!record.normalized)
     return unsupported("semantic-conflict", "上游加载规范化移除了该原始记录")
   if (mapping.reason) return unsupported("formula-out-of-scope", mapping.reason)
@@ -1753,6 +1832,139 @@ function compile(
       ],
     }
   }
+  if (semantics?.kind === "complete-state-elation") {
+    // 原始/规范化存在性、登记编码与块 note 关键条款已在 compile 入口由
+    // verifyCompleteStateElationRecord 校验（早于任何通用 unsupported 降级）；
+    // 这里只补需要映射信息的每层基础增益核对。
+    // 每层基础增益必须与来源记录一致（M0 1.25%、影画 2 复制记录 0.25%）。
+    const registeredPerLayerGain =
+      (record.normalized ?? record.raw).kind === "stacked"
+        ? ((record.normalized ?? record.raw).valuePerStack ??
+            (record.normalized ?? record.raw).value) * mapping.scale
+        : undefined
+    if (
+      semantics.role === "base" &&
+      registeredPerLayerGain !== semantics.perLayerGain
+    )
+      throw new Error(
+        `Complete-state elation per-layer gain drift at ${record.pointer}: ${String(registeredPerLayerGain)} != ${semantics.perLayerGain}`,
+      )
+    variant = {
+      ...variant,
+      // 旧选项不再接受独立选择：四条记录都迁移为带说明的语义冲突入口，
+      // 由完整状态选项统一取代（基础记录改写出的规则只由完整状态引用）。
+      status: "unsupported",
+      reason: "semantic-conflict",
+      explanation: `该来源记录是[昂扬]完整状态的一部分，已被完整状态选项取代：块 note 与 Nanoka 同文说明[昂扬]总增益按同一层数与同一获得时冲击力整体计算（影画 2 的 120% 是同一状态的比例强化）。请改选昂扬 · 完整状态；本记录不再单独生成按层增益。来源 ${record.pointer}。`,
+      effectIds: [],
+      maximumLayers: semantics.role === "base" ? 1 : variant.maximumLayers,
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+    if (semantics.role === "base") {
+      // 完整状态表达式：min(maximum, (perLayerGain + max(0, 冲击力 − 阈值)
+      // × perPointGain) × 层数)；层数由目录按登记的 count 输入名派生。
+      const unit = mapping.unit
+      const impactInput: NumericExpression<Unit, "contribution"> = {
+        kind: "input",
+        unit: "impact-points",
+        name: semantics.impactInputName,
+      }
+      // 完整状态按正文表达“冰属性伤害和火属性伤害”受益：命中元素条件显式
+      // 编入规则本身（目录 guard 的元素过滤只对持续通道启用，这里是命中
+      // 局部的通用增伤，必须在 when 里限制）；登记的补充命中元素（烈霜按
+      // 冰属性结算）一并覆盖，命中枚举本身保持精确比较。
+      const completeElementFilter = record.raw.elementFilter
+      if (
+        record.raw.applyTarget === "team" &&
+        Array.isArray(completeElementFilter) &&
+        completeElementFilter.length > 0
+      )
+        when = {
+          kind: "all",
+          conditions: [
+            when,
+            oneOf("hit.element", [
+              ...new Set([
+                ...completeElementFilter.map((element) => elementMap[element]!),
+                ...semantics.additionalHitElements,
+              ]),
+            ]),
+          ],
+        }
+      // 完整状态表达式：min(0.75, (0.0125 + max(0, 冲击力 − 170) × 每点
+      // 0.00025) × 层数)；参数用规范单位字面量，不经过来源百分数缩放。
+      // 阈值在表达式里以负数常量参与 add：登记的阈值是点数值（170）。
+      parameters["threshold"] = {
+        kind: "constant",
+        unit: "impact-points",
+        value: -semantics.threshold,
+      }
+      Object.assign(operation, {
+        kind: "factor-contribution",
+        channel: mapping.channel!,
+        value: {
+          kind: "minimum",
+          unit,
+          operands: [
+            literal(unit, semantics.maximum),
+            {
+              kind: "multiply",
+              unit,
+              value: {
+                kind: "add",
+                unit,
+                operands: [
+                  literal(unit, semantics.perLayerGain),
+                  {
+                    kind: "convert",
+                    unit,
+                    input: {
+                      kind: "maximum",
+                      unit: "impact-points",
+                      operands: [
+                        literal("impact-points", 0),
+                        {
+                          kind: "add",
+                          unit: "impact-points",
+                          operands: [
+                            impactInput,
+                            param("impact-points", "threshold"),
+                          ],
+                        },
+                      ],
+                    },
+                    rate: literal("multiplier", semantics.perPointGain),
+                  },
+                ],
+              },
+              coefficient: {
+                kind: "convert",
+                unit: "multiplier",
+                input: {
+                  kind: "input",
+                  unit: "count",
+                  name: semantics.layerCountInputName,
+                },
+                rate: literal("multiplier", 1),
+              },
+            },
+          ],
+        },
+      })
+      requirements.push({
+        name: semantics.impactInputName,
+        unit: "impact-points",
+        description:
+          "莱特获得[昂扬]时的冲击力（显式快照读数，手工输入）；与同一状态的其余部分共用同一读数，不使用预设或当前面板",
+      })
+    }
+  }
   if (semantics?.kind === "triggered-state-not-benefit-condition") {
     // 防漂移：登记字段的来源编码变化即拒绝；进入失衡只是触发事实。
     for (const [label, document] of [
@@ -1902,6 +2114,13 @@ function compile(
       differences: [...variant.differences, "luminize-explicit-element"],
     }
   }
+  // 被完整状态取代的来源记录不再生成可执行贡献：只有 unsupported 迁移
+  // 入口（variant）与覆盖报告去向保留，旧 effectId 在规则集里不存在。
+  if (
+    semantics?.kind === "complete-state-elation" &&
+    semantics.role === "replaced"
+  )
+    return { variant }
   return {
     variant,
     rule: {
@@ -2068,6 +2287,257 @@ function applyCompleteStateOptions(
   return added
 }
 
+/**
+ * [昂扬]完整状态：基础记录改写为一条完整贡献后，生成 M0—M6 共用的完整
+ * 状态选项与影画 2 的配置阶段 120% 修改（直接作用于同一条完整贡献）；旧
+ * 的四条部分选项已由语义登记标记为迁移入口。
+ * 合成输入（来源数组重排、二件套或补充来源等具名测试）可能不包含这组记录，
+ * 此时跳过合成；只缺基础记录是来源结构不一致，拒绝生成，不静默丢弃上限
+ * 或迁移入口。记录按 category/entity/rankKind/rank/block/effect 稳定身份
+ * 定位（数组重排只改变 Pointer），登记键集合必须逐条唯一吻合。
+ */
+function buildElationCompleteStateOptions(
+  collected: ReturnType<typeof collectSource>,
+  effects: EffectRule[],
+  options: readonly StaticCatalogOption[],
+): StaticCatalogOption[] | undefined {
+  const completeStateOptionId =
+    "agents:lighter:mindscape:0:elation-complete-state"
+  const lighterEntity = collected.entities.find(
+    (candidate) => candidate.catalogEntityId === "agents:lighter",
+  )
+  const baseRecord = collected.records.find((candidate) => {
+    const semantics = SOURCE_SEMANTICS[semanticsKeyFor(candidate)]
+    return (
+      semantics?.kind === "complete-state-elation" && semantics.role === "base"
+    )
+  })
+  // 合成输入（来源数组重排、二件套/补充来源等具名测试）可能不包含这组
+  // 记录：基础记录不存在时，只要没有被取代记录跳过合成；仍有被取代
+  // 记录说明来源结构不一致，拒绝生成，不静默丢弃上限或迁移入口。
+  if (baseRecord === undefined) {
+    const orphanReplacement = collected.records.find((candidate) => {
+      const semantics = SOURCE_SEMANTICS[semanticsKeyFor(candidate)]
+      return (
+        semantics?.kind === "complete-state-elation" &&
+        semantics.role === "replaced"
+      )
+    })
+    if (orphanReplacement !== undefined)
+      throw new Error(
+        `Complete-state elation registration lost its base record: ${orphanReplacement.pointer}`,
+      )
+    return undefined
+  }
+  if (lighterEntity === undefined)
+    throw new Error(
+      "Complete-state elation registration lost its catalog entity",
+    )
+  // 登记键集合：同一实体的全部 complete-state-elation 记录。Pointer 只用于
+  // 追溯与报错，不作为查找键；数组重排不改变身份。
+  const registeredKeys = Object.entries(SOURCE_SEMANTICS)
+    .filter(
+      ([key, entry]) =>
+        entry?.kind === "complete-state-elation" &&
+        key.startsWith(`${baseRecord.category}/${baseRecord.entityId}/`),
+    )
+    .map(([key]) => key)
+  const groupRecords = collected.records.filter((candidate) =>
+    registeredKeys.includes(semanticsKeyFor(candidate)),
+  )
+  const foundKeys = groupRecords.map((record) => semanticsKeyFor(record))
+  if (new Set(foundKeys).size !== foundKeys.length)
+    throw new Error(
+      `Complete-state elation found duplicate source records: ${foundKeys.length} matches for ${new Set(foundKeys).size} registered identities`,
+    )
+  const missingKeys = registeredKeys.filter((key) => !foundKeys.includes(key))
+  if (missingKeys.length)
+    throw new Error(
+      `Complete-state elation lost its source record: ${missingKeys.join(", ")} (found ${foundKeys.join(", ")})`,
+    )
+  const baseSemantics = SOURCE_SEMANTICS[
+    semanticsKeyFor(baseRecord)
+  ] as Extract<
+    SourceSemantics,
+    { kind: "complete-state-elation"; role: "base" }
+  >
+  // 按与正式编译相同的完整效果身份精确定位基础贡献：实体身份、rankKind/
+  // rank、块与效果全部参与。局部块/效果 ID 只在实体内部唯一，不同实体
+  // 可以合法复用，因此不能用局部 ID 子串查找。
+  const baseRule = effects.find(
+    (candidate): candidate is ContributionRule =>
+      candidate.kind === "contribution" &&
+      candidate.effectId === sourceEffectId(baseRecord, lighterEntity),
+  )
+  if (
+    baseRule === undefined ||
+    baseRule.operation.kind !== "factor-contribution"
+  )
+    throw new Error(
+      `Complete-state elation lost its corrected base contribution: ${baseRecord.pointer}`,
+    )
+  /** 从完整状态表达式里读出登记的两个输入名，缺失即拒绝生成。 */
+  const readInputNames = (
+    expression: unknown,
+    found: { impact?: string; layers?: string },
+  ): { impact?: string; layers?: string } => {
+    if (typeof expression !== "object" || expression === null) return found
+    const entry = expression as {
+      readonly kind?: string
+      readonly name?: string
+      readonly unit?: string
+      readonly operands?: readonly unknown[]
+      readonly input?: unknown
+      readonly rate?: unknown
+      readonly value?: unknown
+      readonly coefficient?: unknown
+    }
+    if (
+      entry.kind === "input" &&
+      typeof entry.name === "string" &&
+      entry.name.endsWith(baseSemantics.impactInputName)
+    )
+      found.impact ??= entry.name
+    if (
+      entry.kind === "convert" &&
+      typeof entry.rate === "object" &&
+      entry.rate !== null &&
+      (entry.rate as { kind?: string }).kind === "literal" &&
+      typeof entry.input === "object" &&
+      entry.input !== null &&
+      (entry.input as { kind?: string }).kind === "input" &&
+      (entry.input as { unit?: string }).unit === "count" &&
+      typeof (entry.input as { name?: string }).name === "string"
+    )
+      found.layers ??= (entry.input as { name: string }).name
+    for (const nested of [
+      entry.operands,
+      entry.input,
+      entry.rate,
+      entry.value,
+      entry.coefficient,
+    ])
+      if (Array.isArray(nested))
+        for (const item of nested) readInputNames(item, found)
+      else if (nested !== undefined) readInputNames(nested, found)
+    return found
+  }
+  const names = readInputNames(baseRule.operation.value, {})
+  if (names.impact === undefined || names.layers === undefined)
+    throw new Error(
+      `Complete-state elation expression lost its impact or layer-count input: ${baseRecord.pointer}`,
+    )
+  const impactInputName = names.impact
+  const layerCountInputName = names.layers
+  // 完整状态按正文表达“冰属性伤害和火属性伤害”受益：命中元素条件显式
+  // 编入规则本身（目录 guard 的元素过滤只对持续通道启用，这里是命中
+  // 局部的通用增伤，必须在 when 里限制，不能给冰/火角色造成的其他元素
+  // 命中也加成）。受益范围保持队伍口径：按伤害命中元素筛选，不按受益角色
+  // 的固有元素筛选（目录 applicability 不再设置 beneficiaryElements）。
+  const completeVariant = (): StaticCatalogVariant => ({
+    configuration: {},
+    status: "corrected",
+    references: baseRule.source.references,
+    effectIds: [baseRule.effectId],
+    maximumLayers: baseSemantics.maximumLayers,
+    layerCountInputName,
+    inputs: [
+      {
+        name: impactInputName,
+        unit: "impact-points",
+        description:
+          "莱特获得[昂扬]时的冲击力（显式快照读数，手工输入）；与同一状态的其余部分共用同一读数，不使用预设或当前面板",
+      },
+    ],
+    applicability: {},
+    differences: [baseSemantics.differenceId],
+  })
+  // 旧的四条部分选项状态核对：必须已由语义登记迁移为不可选入口，且
+  // 覆盖报告保留各自来源去向。目录选项身份按来源实体 ID 组键（如
+  // agents:lighter:mindscape:0:blk-...），不按数值身份拼接；记录集合已按
+  // 登记键核对唯一与完整，Pointer 只用于追溯与报错。
+  const lighterOptionIdOf = (record: {
+    readonly rankKind: string
+    readonly rank: number
+    readonly blockId: string
+    readonly raw: { readonly id: string }
+  }): string =>
+    `agents:lighter:${record.rankKind}:${record.rank}:${idPart(record.blockId)}:${idPart(record.raw.id)}`
+  for (const record of groupRecords) {
+    const option = options.find(
+      (candidate) => candidate.optionId === lighterOptionIdOf(record),
+    )
+    if (
+      option === undefined ||
+      !option.variants.some((variant) => variant.status === "unsupported")
+    )
+      throw new Error(
+        `Complete-state elation expects a migrated partial option: ${semanticsKeyFor(record)} at ${record.pointer} / want ${lighterOptionIdOf(record)} / found ${option === undefined ? "none" : option.variants.map((variant) => variant.status).join(",")} / have ${options
+          .map((candidate) => candidate.optionId)
+          .filter((optionId) => optionId.includes("ms4aoho0"))
+          .join(",")}`,
+      )
+  }
+  const completeStateOptions: StaticCatalogOption[] = [
+    {
+      optionId: completeStateOptionId,
+      catalogEntityId: "agents:lighter",
+      name: "昂扬 · 完整状态",
+      conditionDescription:
+        "队伍中存在[强攻]角色或与自身阵营相同的角色时，[士气喷发]状态下莱特第五段[普通攻击]命中敌人使全队获得一层[昂扬]，最多 20 层、持续 30 秒、重复触发刷新；每层使代理人造成的冰属性伤害和火属性伤害提升 1.25%；获得[昂扬]时若莱特冲击力高于 170 点，每超过 10 点使每层增益额外提升 0.25%；[昂扬]最多使冰/火伤害提升 75%。获得时冲击力与层数由调用方声明。",
+      target: "team",
+      variants: [completeVariant()],
+    },
+  ]
+  const m2Source = groupRecords.find(
+    (candidate) =>
+      candidate.rank === 2 &&
+      candidate.blockId === "blk-legacy" &&
+      candidate.raw.id === "eff-ms4b0whf-x6n1xw",
+  )
+  if (m2Source === undefined)
+    throw new Error("Complete-state elation lost the mindscape-2 scale record")
+  const scaleModificationId =
+    "agent:1161:zzz-hp:complete-state-elation-scale:eff-ms4b0whf-x6n1xw" as EffectId
+  // 影画 2 的 120% 直接作用于唯一的完整状态贡献：同一个 optionId 在 M0—M6
+  // 选择，配置阶段修改按 binding 的 mindscapeRank >= 2 自动生效一次，不生成
+  // 第二条贡献，也不给同一状态第二组输入名。
+  effects.push({
+    kind: "modification",
+    phase: "configuration",
+    effectId: scaleModificationId,
+    source: {
+      identity: baseRule.source.identity,
+      section: "影画2 · 昂扬完整状态强化",
+      references: [
+        ...baseRule.source.references,
+        ...lighterElationMindscape2EvidenceReferences(),
+      ] as NonEmpty<SourceReference>,
+    },
+    config: {
+      kind: "compare-number",
+      unit: "count",
+      operator: "gte",
+      left: {
+        kind: "configuration-number",
+        unit: "count",
+        field: "mindscapeRank",
+      },
+      right: literal("count", 2),
+    },
+    parameters: {},
+    target: { kind: "effect", effectId: baseRule.effectId },
+    modifications: [
+      {
+        field: "output",
+        unit: "ratio",
+        change: { operator: "scale", value: literal("multiplier", 1.2) },
+      },
+    ],
+  })
+  return completeStateOptions
+}
+
 export function convertSource(
   data: SourceData,
   functions: SourceNormalization,
@@ -2099,13 +2569,7 @@ export function convertSource(
       )!
     const variants: StaticCatalogVariant[] = []
     for (const record of records.toSorted((a, b) => a.rank - b.rank)) {
-      const prefix =
-        record.category === "agents"
-          ? "agent"
-          : record.category === "w-engines"
-            ? "w-engine"
-            : "disc"
-      const effectId: EffectId = `${prefix}:${entity.identity?.entityId ?? "unmatched"}:zzz-hp:${idPart(record.raw.id)}:${idPart(record.blockId)}:${record.rankKind}:${record.rank}`
+      const effectId: EffectId = sourceEffectId(record, entity)
       const compiled = compile(
         record,
         entity.identity,
@@ -2275,7 +2739,15 @@ export function convertSource(
     })
   }
   // 完整状态选项在全部来源位置分组后合并：原记录仍保留各自选项作为
-  // 迁移入口，两条规则由完整选项同时引用。
+  // 迁移入口，两条规则由完整选项同时引用。[昂扬]完整状态在同一层字节
+  // 只合成一次，避免按来源位置重复生成同一目录选项身份。
+  const elationCompleteStateOptions = buildElationCompleteStateOptions(
+    collected,
+    effects,
+    options,
+  )
+  if (elationCompleteStateOptions !== undefined)
+    options.push(...elationCompleteStateOptions)
   options.push(
     ...applyCompleteStateOptions(
       COMPLETE_STATE_OPTIONS,
@@ -2602,7 +3074,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "18",
+    revision: "19",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -3031,6 +3503,18 @@ export function convertSource(
               variant.differences.includes(
                 "shining-aria-stagger-entry-triggered-state",
               ),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "complete-state-elation-correction",
+        explanation:
+          "莱特（1161）[昂扬]：固定来源把它拆成基础 stacked（每层 1.25%）与单次转化（convert impact、ratioPercent 50、cap 50）两条记录，影画 2 又复制出两条（每层 +0.25%、转化 ratioPercent 10），四条都能被独立开关。块 note 与 Nanoka 额外能力说明（agents/1161/details.zh.json 的 /passive/level/1161501—1161507/desc/1）与天赋 2（/talent/2/desc）同文说明它们共同表示同一个按层状态：总增益为 min(0.75, (0.0125 + max(0, 获得时冲击力 − 170) × 0.00025) × 层数)，上限作用于乘层数后的总量，影画 2 起对该状态整体 ×1.2（总上限 90%，同一状态只强化一次，随配置自动生效）。Fairy 只保留一条完整贡献（supplied、一次完整状态），M0—M6 共用同一个“昂扬 · 完整状态”选项：获得时冲击力按登记的输入名要求调用方显式提供（无默认值），层数由目录按登记的 count 输入名从 selection.layers 派生（0 层关闭且不要求冲击力）；影画 2 的 120% 由配置阶段 output scale 1.2 修改直接作用于该贡献，不生成第二套状态或输入。命中元素按来源正文“冰属性伤害和火属性伤害”限制，并覆盖按冰属性结算的烈霜命中（agents/1091/details.zh.json 的 /specialElementType/desc，命中枚举 frost），不按受益角色的固有元素筛选。四条旧目录项都迁移为带说明的语义冲突入口：原先的基础记录被改写为上述完整贡献（不再是部分增益），其余三条被取代的记录不再生成可执行贡献，来源位置仍在覆盖报告中保留去向；影画 2 的失衡易伤 +25% 是独立机制，保持独立选项与数值不变。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes("complete-state-elation-correction"),
             )
             .flatMap((variant) => variant.references),
         ),
