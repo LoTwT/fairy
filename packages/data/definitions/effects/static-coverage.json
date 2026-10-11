@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "22",
+  "revision": "23",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -12799,7 +12799,7 @@
       "effectIds": [
         "agent:1321:zzz-hp:eff-ms4j9nhd-9ya68m:blk-ms4j94x5-1mflp4:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 25,
       "normalizedValue": 25
@@ -30225,6 +30225,38 @@
   ],
   "supplementalRecords": [
     {
+      "supplementId": "nanoka:agents:evelyn:m6-lunalux-garrote-follow-up",
+      "source": "nanoka-integrated@3.2 agents/1321 /talent/6/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:evelyn:m6-lunalux-garrote-follow-up",
+      "effectIds": [
+        "agent:1321:nanoka:m6-lunalux-garrote-follow-up:mindscape:6"
+      ],
+      "supportedRanks": "影画 6 及以上；层数 0—1",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:s0anby:m6-electromagnetic-vortex",
+      "source": "nanoka-integrated@3.2 agents/1381 /talent/6/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:s0anby:m6-electromagnetic-vortex",
+      "effectIds": ["agent:1381:nanoka:m6-electromagnetic-vortex:mindscape:6"],
+      "supportedRanks": "影画 6 及以上；层数 0—1",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:dialyn:m6-aftertone-echo",
+      "source": "nanoka-integrated@3.2 agents/1481 /talent/6/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:dialyn:m6-aftertone-echo",
+      "effectIds": ["agent:1481:nanoka:m6-aftertone-echo:mindscape:6"],
+      "supportedRanks": "影画 6 及以上；层数 0—1",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
       "supplementId": "nanoka:nekomata:ordinary-dmg-bonus",
       "source": "nanoka-integrated@3.2 agents/1021 /passive/level/1021507/desc/0",
       "kind": "option-variant",
@@ -30643,17 +30675,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 865,
-    "options": 867,
-    "converted": 1139,
-    "corrected": 133,
+    "rules": 868,
+    "options": 870,
+    "converted": 1138,
+    "corrected": 134,
     "unsupported": 18,
     "supplements": {
-      "records": 40,
-      "rules": 38,
-      "options": 32,
+      "records": 43,
+      "rules": 41,
+      "options": 35,
       "entities": 3,
-      "integrated": 37,
+      "integrated": 40,
       "outOfScope": 3
     }
   },

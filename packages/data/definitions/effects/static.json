@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "22",
+  "revision": "23",
   "effects": [
     {
       "kind": "contribution",
@@ -22478,6 +22478,140 @@
     },
     {
       "kind": "contribution",
+      "effectId": "agent:1321:nanoka:m6-lunalux-garrote-follow-up:mindscape:6",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1321"
+        },
+        "section": "影画6：光与影的牵绊（月辉丝·弦）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1321/details.zh.json",
+            "pointer": "/talent/6/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1321/details.zh.json",
+            "pointer": "/passive/level/1321501/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1321/details.zh.json",
+            "pointer": "/passive/level/1321502/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1321/details.zh.json",
+            "pointer": "/passive/level/1321503/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1321/details.zh.json",
+            "pointer": "/passive/level/1321504/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1321/details.zh.json",
+            "pointer": "/passive/level/1321505/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1321/details.zh.json",
+            "pointer": "/passive/level/1321506/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1321/details.zh.json",
+            "pointer": "/passive/level/1321507/desc/1"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 6
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 3.75
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["fire"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:evelyn-lunalux-garrote"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "add",
+        "itemIds": ["evelyn:lunalux-garrote"],
+        "value": {
+          "kind": "parameter",
+          "unit": "multiplier",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "agent:1321:zzz-hp:eff-ms4j94x5-3elaxq:blk-ms4j94x5-1mflp4:mindscape:0",
       "source": {
         "identity": {
@@ -22688,6 +22822,13 @@
             "locale": "zh",
             "resourcePath": "agents/1321/details.zh.json",
             "pointer": "/passive/level/1321507/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1321/details.zh.json",
+            "pointer": "/talent/6/desc"
           }
         ]
       },
@@ -22729,39 +22870,52 @@
         "kind": "all",
         "conditions": [
           {
-            "kind": "one-of",
-            "fact": "hit.damageKind",
-            "values": ["regular", "sheer", "sharpen"]
-          },
-          {
-            "kind": "one-of",
-            "fact": "hit.damageKind",
-            "values": ["regular", "sheer", "sharpen"]
-          },
-          {
-            "kind": "any",
+            "kind": "all",
             "conditions": [
               {
-                "kind": "all",
-                "conditions": [
-                  {
-                    "kind": "one-of",
-                    "fact": "hit.skillTag",
-                    "values": ["zzz-hp:category:chain"]
-                  }
-                ]
+                "kind": "one-of",
+                "fact": "hit.damageKind",
+                "values": ["regular", "sheer", "sharpen"]
               },
               {
-                "kind": "all",
+                "kind": "one-of",
+                "fact": "hit.damageKind",
+                "values": ["regular", "sheer", "sharpen"]
+              },
+              {
+                "kind": "any",
                 "conditions": [
                   {
-                    "kind": "one-of",
-                    "fact": "hit.skillTag",
-                    "values": ["zzz-hp:category:ultimate"]
+                    "kind": "all",
+                    "conditions": [
+                      {
+                        "kind": "one-of",
+                        "fact": "hit.skillTag",
+                        "values": ["zzz-hp:category:chain"]
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "all",
+                    "conditions": [
+                      {
+                        "kind": "one-of",
+                        "fact": "hit.skillTag",
+                        "values": ["zzz-hp:category:ultimate"]
+                      }
+                    ]
                   }
                 ]
               }
             ]
+          },
+          {
+            "kind": "not",
+            "condition": {
+              "kind": "one-of",
+              "fact": "hit.skillTag",
+              "values": ["zzz-hp:skill:evelyn-lunalux-garrote"]
+            }
           }
         ]
       },
@@ -27116,6 +27270,91 @@
         "value": {
           "kind": "parameter",
           "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1381:nanoka:m6-electromagnetic-vortex:mindscape:6",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1381"
+        },
+        "section": "影画6：前传主角（电磁涡流）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1381/details.zh.json",
+            "pointer": "/talent/6/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 6
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 10
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["electric"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:s0anby-electromagnetic-vortex"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "add",
+        "itemIds": ["s0anby:electromagnetic-vortex"],
+        "value": {
+          "kind": "parameter",
+          "unit": "multiplier",
           "name": "amount"
         }
       }
@@ -35891,6 +36130,91 @@
               "name": "cap"
             }
           ]
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1481:nanoka:m6-aftertone-echo:mindscape:6",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1481"
+        },
+        "section": "影画6：真言（余音额外伤害）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1481/details.zh.json",
+            "pointer": "/talent/6/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 6
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 4.8
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["physical"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:dialyn-aftertone-echo"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "add",
+        "itemIds": ["dialyn:aftertone-echo"],
+        "value": {
+          "kind": "parameter",
+          "unit": "multiplier",
+          "name": "amount"
         }
       }
     },

@@ -1131,6 +1131,14 @@ describe("fixed-source catalog conformance", () => {
     "/driveDiscs/16/fourPieceBuffs/effectBlocks/0/effects/1",
   ])
   /**
+   * 批次 08 的具名范围修正位置：伊芙琳核心被动 125% 倍率只描述具名连携
+   * 与两个终结技，修正追加对影画 6[月辉丝·弦]独立目标的排除；普通连携/
+   * 终结命中的上游参考值（0.25）不变，仍按原期望值比对。
+   */
+  const batch08CorrectedPointers = new Set([
+    "/agents/4/mindscapeBuffs/0/effectBlocks/1/effects/1",
+  ])
+  /**
    * 批次 01 中期望值或夹具 effectId 已过期的位置：C01/C10 的数值修正、
    * C05 的固定回能改值，以及 C11/C08 修正后按精炼合并导致夹具单档
    * effectId 失效的位置；这些位置仍计入覆盖核对，但不按上游参考值比对。
@@ -1165,7 +1173,8 @@ describe("fixed-source catalog conformance", () => {
             completeStateMigratedPointers.has(r.pointer) ||
             qingmingPierceStackCorrectedPointers.has(r.pointer) ||
             batch01CorrectedPointers.has(r.pointer) ||
-            batch03CorrectedPointers.has(r.pointer),
+            batch03CorrectedPointers.has(r.pointer) ||
+            batch08CorrectedPointers.has(r.pointer),
         )
         .map((r) => r.pointer)
         .toSorted(),
@@ -1881,7 +1890,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("22")
+    expect(catalog.revision).toBe("23")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -4686,11 +4695,12 @@ describe("velina cyclone catalog linkage", () => {
       // 批次 04 再增凯撒/莱特/橘福福/琉音冲击力与莱特/丽娜影画 4 回能
       // 六条代理人补充；批次 07 再增洛克茜初始回能转化（新实体，单选项
       // 双规则完整状态）与绯月银棺三条（新实体 + 暴击率，实体上再挂
-      // 风抗无视与全队增伤两个选项）四条补充。
-      records: 40,
-      integrated: 37,
-      rules: 38,
-      options: 32,
+      // 风抗无视与全队增伤两个选项）四条补充；批次 08 再增伊芙琳/零号·
+      // 安比/琉音影画 6 独立追击三条代理人补充。
+      records: 43,
+      integrated: 40,
+      rules: 41,
+      options: 35,
       entities: 3,
       outOfScope: 3,
     })

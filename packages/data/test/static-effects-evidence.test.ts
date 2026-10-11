@@ -63,6 +63,11 @@ describe("static effects evidence path", () => {
       "nanoka:w-engines:14162:crit-rate",
       "nanoka:w-engines:14162:wind-resistance-ignore",
       "nanoka:w-engines:14162:squad-damage-bonus",
+      // 批次 08：伊芙琳/零号·安比/琉音影画 6 独立追击（天赋 Pointer 与
+      // 伊芙琳核心被动七行的 rank 映射）。
+      "nanoka:agents:evelyn:m6-lunalux-garrote-follow-up",
+      "nanoka:agents:s0anby:m6-electromagnetic-vortex",
+      "nanoka:agents:dialyn:m6-aftertone-echo",
     ])
       expect(verified).toContain(`supplement:${supplementId}`)
   })

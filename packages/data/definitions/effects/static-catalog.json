@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "22",
+  "revision": "23",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -7962,7 +7962,7 @@
             "minimumMindscape": 0,
             "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -8019,6 +8019,13 @@
               "locale": "zh",
               "resourcePath": "agents/1321/details.zh.json",
               "pointer": "/passive/level/1321507/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1321/details.zh.json",
+              "pointer": "/talent/6/desc"
             }
           ],
           "effectIds": [
@@ -8026,7 +8033,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["evelyn-lunalux-multiplier-scope"],
           "applicability": {}
         }
       ]
@@ -45614,6 +45621,182 @@
       ]
     },
     {
+      "optionId": "nanoka:agents:evelyn:m6-lunalux-garrote-follow-up",
+      "catalogEntityId": "agents:evelyn",
+      "name": "影画6 · 月辉丝·弦（独立追击）",
+      "conditionDescription": "影画 6：连携/终结取得[弦影绝锋]后，[普通攻击]、[冲刺攻击]、[特殊技]或[强化特殊技]命中主要攻击目标时，额外释放一段[月辉丝·弦]，对范围内敌人造成等同于伊芙琳 375% 攻击力的火属性伤害（该伤害被视为[连携技]伤害）。本次追击由调用方声明触发并显式结算：命中须携带独立目标并以连携分类结算，16 次上限、20 秒持续与刷新不模拟。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 6
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1321/details.zh.json",
+              "pointer": "/talent/6/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1321/details.zh.json",
+              "pointer": "/passive/level/1321501/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1321/details.zh.json",
+              "pointer": "/passive/level/1321502/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1321/details.zh.json",
+              "pointer": "/passive/level/1321503/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1321/details.zh.json",
+              "pointer": "/passive/level/1321504/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1321/details.zh.json",
+              "pointer": "/passive/level/1321505/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1321/details.zh.json",
+              "pointer": "/passive/level/1321506/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1321/details.zh.json",
+              "pointer": "/passive/level/1321507/desc/1"
+            }
+          ],
+          "effectIds": [
+            "agent:1321:nanoka:m6-lunalux-garrote-follow-up:mindscape:6"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "evelyn:lunalux-garrote",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "chain"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:s0anby:m6-electromagnetic-vortex",
+      "catalogEntityId": "agents:s0anby",
+      "name": "影画6 · 电磁涡流（独立追击）",
+      "conditionDescription": "影画 6：触发 6 次[白雷]的额外伤害时引发电磁涡流，对目标及其周围的敌人造成零号·安比 1000% 攻击力的电属性伤害（该伤害被视为[追加攻击]伤害）。本次涡流由调用方声明触发并显式结算一次：命中须携带独立目标并以追加攻击分类结算（自动计入追加攻击增益），六次计数不自动累计，1000% 不乘 6，也不计作白雷本身。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 6
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1381/details.zh.json",
+              "pointer": "/talent/6/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1381:nanoka:m6-electromagnetic-vortex:mindscape:6"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "s0anby:electromagnetic-vortex",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "follow-up"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:dialyn:m6-aftertone-echo",
+      "catalogEntityId": "agents:dialyn",
+      "name": "影画6 · 余音（独立追击）",
+      "conditionDescription": "影画 6：经[核心被动]使队友以终结技入场取得[余音]后，该队友攻击命中敌人时，琉音对敌人造成额外一次等同于琉音 480% 攻击力的物理属性伤害（该伤害被视为[强化特殊技]伤害）。本次伤害由调用方声明触发并显式结算：hit.actorId 与伤害项均按琉音结算（队友只是触发者），命中须携带独立目标并以强化特殊技分类结算；1 秒冷却、12 次上限、刷新与唯一持有人不模拟。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 6
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1481/details.zh.json",
+              "pointer": "/talent/6/desc"
+            }
+          ],
+          "effectIds": ["agent:1481:nanoka:m6-aftertone-echo:mindscape:6"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "dialyn:aftertone-echo",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "enhanced-special"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "optionId": "nanoka:w-engines:13111:refinement:red-axis",
       "catalogEntityId": "nanoka:w-engines:13111",
       "name": "红莲电机 · dmgBonus",
@@ -47733,6 +47916,14 @@
       "countsAsFollowUp": false
     },
     {
+      "targetId": "zzz-hp:skill:dialyn-aftertone-echo",
+      "upstreamId": null,
+      "agentEntityId": "1481",
+      "category": "special",
+      "name": "余音额外伤害",
+      "countsAsFollowUp": false
+    },
+    {
       "targetId": "zzz-hp:skill:ellen-basic-ms4ftctx",
       "upstreamId": "ellen-basic-ms4ftctx",
       "agentEntityId": "1191",
@@ -47762,6 +47953,14 @@
       "agentEntityId": "1191",
       "category": "dodge",
       "name": "冲刺攻击：冰渊潜袭",
+      "countsAsFollowUp": false
+    },
+    {
+      "targetId": "zzz-hp:skill:evelyn-lunalux-garrote",
+      "upstreamId": null,
+      "agentEntityId": "1321",
+      "category": "chain",
+      "name": "月辉丝·弦",
       "countsAsFollowUp": false
     },
     {
@@ -48003,6 +48202,14 @@
       "category": "ultimate",
       "name": "缭乱终幕",
       "countsAsFollowUp": false
+    },
+    {
+      "targetId": "zzz-hp:skill:s0anby-electromagnetic-vortex",
+      "upstreamId": null,
+      "agentEntityId": "1381",
+      "category": "follow-up",
+      "name": "电磁涡流",
+      "countsAsFollowUp": true
     },
     {
       "targetId": "zzz-hp:skill:s0anby-special-ms0bqshd",
@@ -49454,6 +49661,33 @@
           "locale": "zh",
           "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
           "pointer": "/agents/34/mindscapeBuffs/0/effectBlocks/0/effects/1"
+        }
+      ]
+    },
+    {
+      "differenceId": "evelyn-lunalux-multiplier-scope",
+      "explanation": "伊芙琳核心被动（额外能力：潜袭支点）的 125% 倍率修正按 Nanoka 核心被动七行（1321501—1321507/desc/1，中英文逐档同文）只描述具名技能[连携技：月辉丝·绊]、[终结技：月辉丝·弦音]与[终结技：月辉丝·弦影]；固定来源把该修正编为整个连携/终结大类的 base-multiplier-increase，影画 6 新登记的[月辉丝·弦]独立追击目标（category chain）会被同一大类条件命中，3.75 倍率被错误放大到 4.6875。修正保留原稳定 effectId、数值与 chain/ultimate 大类条件，仅追加对 evelyn-lunalux-garrote 目标的排除：携带该目标的命中不吃本倍率，普通连携/终结命中保持 25% 不变；同块的一般连携/终结增伤（skillDmgBonus +30%）不受影响，仍作用于[月辉丝·弦]；影画 4 的显式护盾暴伤按既有规则不变。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/4/mindscapeBuffs/0/effectBlocks/1/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1321/details.zh.json",
+          "pointer": "/talent/6/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1321/details.zh.json",
+          "pointer": "/passive/level/1321507/desc/1"
         }
       ]
     },
