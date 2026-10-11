@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "20",
+  "revision": "21",
   "effects": [
     {
       "kind": "contribution",
@@ -3307,6 +3307,88 @@
       "operation": {
         "kind": "factor-contribution",
         "channel": "attacker-resistance-ignore",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1071:nanoka:stance-switch-impact:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1071"
+        },
+        "section": "特殊技：攻防转换",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1071/details.zh.json",
+            "pointer": "/skill/special/description/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1071/details.zh.json",
+            "pointer": "/skill/special/description/5/param/0/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "specialSkillLevel",
+          "unit": "ratio",
+          "values": {
+            "1": 0.09,
+            "2": 0.1,
+            "3": 0.11,
+            "4": 0.12,
+            "5": 0.13,
+            "6": 0.14,
+            "7": 0.15,
+            "8": 0.16,
+            "9": 0.17,
+            "10": 0.18,
+            "11": 0.19,
+            "12": 0.2,
+            "13": 0.21,
+            "14": 0.22,
+            "15": 0.23,
+            "16": 0.24
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
+        "stage": "final-percentage",
         "value": {
           "kind": "parameter",
           "unit": "ratio",
@@ -8158,6 +8240,196 @@
         "kind": "stat-adjustment",
         "stat": "criticalDamage",
         "stage": "direct",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1161:nanoka:mindscape-4-frontline-energy-regen:mindscape:4",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1161"
+        },
+        "section": "影画4",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/talent/4/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.1
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "team-except-holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "energyRegen",
+        "stage": "final-fixed",
+        "value": {
+          "kind": "multiply",
+          "unit": "energy-per-second",
+          "value": {
+            "kind": "stat",
+            "unit": "energy-per-second",
+            "entity": {
+              "role": "beneficiary"
+            },
+            "stat": "energyRegen",
+            "stage": "base",
+            "at": "evaluation"
+          },
+          "coefficient": {
+            "kind": "parameter",
+            "unit": "ratio",
+            "name": "amount"
+          }
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1161:nanoka:morale-burst-impact:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1161"
+        },
+        "section": "核心被动：斗志昂扬（士气喷发）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1161/details.zh.json",
+            "pointer": "/passive/level/1161507/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "coreSkillLevel",
+          "unit": "ratio",
+          "values": {
+            "1": 0.01,
+            "2": 0.0117,
+            "3": 0.0133,
+            "4": 0.015,
+            "5": 0.0167,
+            "6": 0.0183,
+            "7": 0.02
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 10
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
+        "stage": "final-percentage",
         "value": {
           "kind": "parameter",
           "unit": "ratio",
@@ -13259,6 +13531,74 @@
         "value": {
           "kind": "parameter",
           "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1211:nanoka:mindscape-4-deployed-dolls-energy-regen:mindscape:4",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1211"
+        },
+        "section": "影画4",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1211/details.zh.json",
+            "pointer": "/talent/4/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "energy-per-second",
+          "value": 0.5
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "energyRegen",
+        "stage": "final-fixed",
+        "value": {
+          "kind": "parameter",
+          "unit": "energy-per-second",
           "name": "amount"
         }
       }
@@ -27606,6 +27946,114 @@
     },
     {
       "kind": "contribution",
+      "effectId": "agent:1391:nanoka:tigers-roar-impact:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1391"
+        },
+        "section": "核心被动：虎虎生威（虎啸）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1391/details.zh.json",
+            "pointer": "/passive/level/1391501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1391/details.zh.json",
+            "pointer": "/passive/level/1391502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1391/details.zh.json",
+            "pointer": "/passive/level/1391503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1391/details.zh.json",
+            "pointer": "/passive/level/1391504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1391/details.zh.json",
+            "pointer": "/passive/level/1391505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1391/details.zh.json",
+            "pointer": "/passive/level/1391506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1391/details.zh.json",
+            "pointer": "/passive/level/1391507/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "coreSkillLevel",
+          "unit": "impact-points",
+          "values": {
+            "1": 25,
+            "2": 29.2,
+            "3": 33.3,
+            "4": 37.5,
+            "5": 41.7,
+            "6": 45.8,
+            "7": 50
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
+        "stage": "final-fixed",
+        "value": {
+          "kind": "parameter",
+          "unit": "impact-points",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "agent:1391:zzz-hp:eff-ms4bvw63-5q1zql:blk-legacy:mindscape:0",
       "source": {
         "identity": {
@@ -35283,6 +35731,166 @@
           "kind": "parameter",
           "unit": "ratio",
           "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1481:nanoka:initial-crit-rate-impact:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1481"
+        },
+        "section": "核心被动：五星客服热线（初始暴击率转化）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1481/details.zh.json",
+            "pointer": "/passive/level/1481049/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1481/details.zh.json",
+            "pointer": "/passive/level/1481050/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1481/details.zh.json",
+            "pointer": "/passive/level/1481051/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1481/details.zh.json",
+            "pointer": "/passive/level/1481052/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1481/details.zh.json",
+            "pointer": "/passive/level/1481053/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1481/details.zh.json",
+            "pointer": "/passive/level/1481054/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1481/details.zh.json",
+            "pointer": "/passive/level/1481055/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "threshold": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": -0.5
+        },
+        "rate": {
+          "kind": "by-rank",
+          "rank": "coreSkillLevel",
+          "unit": "multiplier",
+          "values": {
+            "1": 140,
+            "2": 150,
+            "3": 160,
+            "4": 170,
+            "5": 180,
+            "6": 190,
+            "7": 200
+          }
+        },
+        "cap": {
+          "kind": "constant",
+          "unit": "impact-points",
+          "value": 100
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "impact",
+        "stage": "final-fixed",
+        "value": {
+          "kind": "minimum",
+          "unit": "impact-points",
+          "operands": [
+            {
+              "kind": "convert",
+              "unit": "impact-points",
+              "input": {
+                "kind": "maximum",
+                "unit": "ratio",
+                "operands": [
+                  {
+                    "kind": "literal",
+                    "unit": "ratio",
+                    "value": 0
+                  },
+                  {
+                    "kind": "add",
+                    "unit": "ratio",
+                    "operands": [
+                      {
+                        "kind": "input",
+                        "unit": "ratio",
+                        "name": "agent:1481:nanoka:initial-crit-rate-impact:mindscape:0:source"
+                      },
+                      {
+                        "kind": "parameter",
+                        "unit": "ratio",
+                        "name": "threshold"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "rate": {
+                "kind": "parameter",
+                "unit": "multiplier",
+                "name": "rate"
+              }
+            },
+            {
+              "kind": "parameter",
+              "unit": "impact-points",
+              "name": "cap"
+            }
+          ]
         }
       }
     },

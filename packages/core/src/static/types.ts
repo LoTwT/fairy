@@ -93,6 +93,14 @@ export interface StaticActionCalculationInput {
     readonly holderId: EntityId
     readonly optionId: string
     readonly layers: number
+    /**
+     * 声明式同队受益者：仅当所选选项声明 declaredTeammateBeneficiary 且
+     * layers > 0 时必须提供（0 层关闭沿既有关闭语义，无需声明）；必须是
+     * 持有者同队的另一名有身份实体。本入口原样透传给目录消费层校验
+     * （观察、身份、同队、非本人与选项适用性），不从动作角色自动补全，
+     * 也不引入位置状态。未声明该字段的选项不接受该字段。
+     */
+    readonly beneficiaryActorId?: EntityId
   }[]
   readonly inputs?: readonly EffectNumericInput[]
   readonly observedWorld?: Pick<WorldObservation, "states" | "distances">
