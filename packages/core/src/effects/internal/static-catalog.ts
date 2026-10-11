@@ -123,6 +123,57 @@ function isStatAdjustment(
   )
 }
 
+/** 表达式树里是否存在指定名称、指定单位的 input 读取。 */
+function expressionConsumesInput(
+  value: unknown,
+  name: string,
+  unit: string,
+): boolean {
+  if (typeof value !== "object" || value === null) return false
+  const entry = value as {
+    readonly kind?: unknown
+    readonly name?: unknown
+    readonly unit?: unknown
+    readonly operands?: readonly unknown[]
+    readonly input?: unknown
+    readonly rate?: unknown
+    readonly value?: unknown
+    readonly coefficient?: unknown
+    readonly left?: unknown
+    readonly right?: unknown
+    readonly condition?: unknown
+    readonly conditions?: readonly unknown[]
+    readonly maximum?: unknown
+    readonly limit?: unknown
+  }
+  if (entry.kind === "input" && entry.name === name && entry.unit === unit)
+    return true
+  for (const nested of [
+    entry.operands,
+    entry.input,
+    entry.rate,
+    entry.value,
+    entry.coefficient,
+    entry.left,
+    entry.right,
+    entry.condition,
+    entry.maximum,
+    entry.limit,
+  ])
+    if (Array.isArray(nested)) {
+      for (const item of nested)
+        if (expressionConsumesInput(item, name, unit)) return true
+    } else if (
+      nested !== undefined &&
+      expressionConsumesInput(nested, name, unit)
+    )
+      return true
+  if (Array.isArray(entry.conditions))
+    for (const condition of entry.conditions)
+      if (expressionConsumesInput(condition, name, unit)) return true
+  return false
+}
+
 /** JSON 目录与 TypeScript 调用共享校验；不信任类型断言或未选中条目的引用。 */
 export function validateStaticCatalog(
   catalogValue: unknown,
@@ -698,6 +749,7 @@ export function validateStaticCatalog(
           "differences",
           "parameterMapping",
           "damageItemRequirements",
+          "layerCountInputName",
         ],
         checks(vp),
         "variant",
@@ -742,6 +794,17 @@ export function validateStaticCatalog(
           "INVALID_INPUT",
           `${vp}/maximumLayers`,
           "Layer maximum must be a positive safe integer",
+        )
+      // 完整状态层数桥接：声明的 count 输入名必须非空，且必须真实对应
+      // 所引用贡献里消费的 count 输入；该贡献必须是一次 supplied 完整状态
+      // （maximumLayers 1），防止把普通叠层选项静默改成单实例。详细校验在
+      // effectIds 解析后进行（需要已解析的规则）。
+      const layerCountInputName = variant["layerCountInputName"]
+      if (layerCountInputName !== undefined)
+        expectNonEmptyString(
+          layerCountInputName,
+          checks(`${vp}/layerCountInputName`),
+          "layer count input name",
         )
       const config = expectObject(
         variant["configuration"],
@@ -861,6 +924,42 @@ export function validateStaticCatalog(
             "Unknown difference",
           )
       }
+      if (typeof layerCountInputName === "string") {
+        const named = layerCountInputName
+        // 声明的层数输入必须由所引用的贡献真实消费（同 binding 的 count
+        // input），且该贡献是一次 supplied 完整状态；不允许靠名称猜测。
+        // 该变体的 contribution 必须恰好一条（允许引用的 modification）：
+        // 多引用普通叠层或第二条贡献会在展开时派生同键冲突，定义阶段即拒绝。
+        const consumers = effectIds.flatMap((id) => {
+          const effect = effects.get(id as EffectId)
+          return effect?.kind === "contribution" ? [effect] : []
+        })
+        const literalOne = (expression: unknown): boolean => {
+          if (typeof expression !== "object" || expression === null)
+            return false
+          const entry = expression as {
+            readonly kind?: unknown
+            readonly unit?: unknown
+            readonly value?: unknown
+          }
+          return (
+            entry.kind === "literal" &&
+            entry.unit === "count" &&
+            entry.value === 1
+          )
+        }
+        if (
+          consumers.length !== 1 ||
+          consumers[0]!.activation.kind !== "supplied" ||
+          !literalOne(consumers[0]!.activation.maximumLayers) ||
+          !expressionConsumesInput(consumers[0]!.operation, named, "count")
+        )
+          collector.report(
+            "INVALID_DEFINITION",
+            `${vp}/layerCountInputName`,
+            "The layer-count input must be consumed as a count input by exactly one supplied single-instance contribution (maximumLayers literal count 1) in this variant",
+          )
+      }
       const refs =
         expectArray(
           variant["references"],
@@ -928,6 +1027,17 @@ export function validateStaticCatalog(
             "Unknown input unit",
           )
       }
+      // 派生层数名不得与外部输入要求同名：调用方不能手工提供同一
+      // (bindingId, name)，若同时列为必填则该选项没有任何可满足的输入。
+      if (
+        typeof layerCountInputName === "string" &&
+        inputNames.has(layerCountInputName)
+      )
+        collector.report(
+          "INVALID_DEFINITION",
+          `${vp}/layerCountInputName`,
+          "The layer-count input name must not be an external input requirement of the same variant",
+        )
       const applies = expectObject(
         variant["applicability"],
         checks(`${vp}/applicability`),
@@ -1504,6 +1614,15 @@ export function calculateStaticDamageFromCatalog(
         })
       : undefined
   const expanded: StaticEffectSelection[] = []
+  /**
+   * 完整状态层数桥接派生的内部 count 输入：键为 (bindingId, name)，值是
+   * 该绑定上经目录严格校验的逻辑层数。外部 inputs 不能提供同一键，多个
+   * 选择产生同一键也不允许静默覆盖。
+   */
+  const derivedLayerInputs = new Map<
+    string,
+    { bindingId: string; name: string; value: number }
+  >()
   const durationIds = new Set(
     parsed.value.effects
       .filter(
@@ -1913,7 +2032,29 @@ export function calculateStaticDamageFromCatalog(
         )
         continue
       }
-      expanded.push({ effectId, bindingId: binding.bindingId, layers })
+      // 完整状态层数桥接：声明 layerCountInputName 的选项把 selection.layers
+      // 作为逻辑状态层数派生为绑定作用域内的 count 输入，实际展开固定
+      // layers 1（一次完整状态）；未声明的选项保持逐层展开行为。
+      const layerCountInputName = variant.layerCountInputName
+      if (layerCountInputName === undefined) {
+        expanded.push({ effectId, bindingId: binding.bindingId, layers })
+      } else {
+        const key = JSON.stringify([binding.bindingId, layerCountInputName])
+        if (derivedLayerInputs.has(key)) {
+          collector.report(
+            "DUPLICATE_ID",
+            p,
+            `Multiple selections derive the same layer-count input ${layerCountInputName}; ${explain}`,
+          )
+          continue
+        }
+        derivedLayerInputs.set(key, {
+          bindingId: binding.bindingId,
+          name: layerCountInputName,
+          value: layers,
+        })
+        expanded.push({ effectId, bindingId: binding.bindingId, layers: 1 })
+      }
       const list = guards.get(effectId) ?? []
       list.push(
         preparesDuration &&
@@ -2169,6 +2310,37 @@ export function calculateStaticDamageFromCatalog(
     ...lowInput
   } = low as StaticDamageInput &
     Pick<StaticCatalogDamageInput, "catalog" | "actorSources">
+  // 完整状态层数桥接：派生 count 输入并入低层 inputs；外部 inputs 不能
+  // 提供同一 (bindingId, name)（即使数值相同也拒绝），层数的唯一来源是
+  // 目录里经严格校验的 selection.layers。
+  let bridgedInput = lowInput
+  if (derivedLayerInputs.size > 0) {
+    const externalInputs = input.inputs ?? []
+    const externalKeys = new Set(
+      externalInputs.map((entry) =>
+        JSON.stringify([entry.bindingId, entry.name]),
+      ),
+    )
+    for (const [key, derived] of derivedLayerInputs)
+      if (externalKeys.has(key))
+        collector.report(
+          "DUPLICATE_ID",
+          "/inputs",
+          `Input ${derived.name} of binding ${derived.bindingId} is derived from selection.layers and must not be provided externally`,
+        )
+    if (!collector.isEmpty) return failure(collector)
+    bridgedInput = {
+      ...lowInput,
+      inputs: [
+        ...externalInputs,
+        ...[...derivedLayerInputs.values()].map((derived) => ({
+          bindingId: derived.bindingId,
+          name: derived.name,
+          value: { unit: "count" as const, value: derived.value },
+        })),
+      ],
+    } as StaticDamageInput
+  }
   const durationSelections = expanded.filter((selection) =>
     durationIds.has(selection.effectId),
   )
@@ -2204,9 +2376,9 @@ export function calculateStaticDamageFromCatalog(
           ? source.originalAnomalyAttribute
           : profileElements[source.profile]
       const durationResult = evaluateStaticDamage({
-        ...lowInput,
+        ...bridgedInput,
         selections: durationSelections,
-        hit: { ...lowInput.hit, element },
+        hit: { ...bridgedInput.hit, element },
       })
       if (!durationResult.ok) return durationResult
       const durationContributions =
@@ -2252,11 +2424,11 @@ export function calculateStaticDamageFromCatalog(
       return { ...item, damageMultiplier: multiplier }
     }) as unknown as StaticDamageInput["hit"]["damageItems"]
     const evaluated = evaluateStaticDamage({
-      ...lowInput,
+      ...bridgedInput,
       selections: preparesDuration
         ? expanded.filter((selection) => !durationIds.has(selection.effectId))
         : expanded,
-      hit: { ...lowInput.hit, damageItems: preparedItems },
+      hit: { ...bridgedInput.hit, damageItems: preparedItems },
     })
     if (!evaluated.ok) return evaluated
     const consumed = new Set<FactorChannel>()

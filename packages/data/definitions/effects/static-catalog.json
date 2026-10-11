@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "18",
+  "revision": "19",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -10716,7 +10716,7 @@
             "minimumMindscape": 0,
             "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
           },
-          "status": "converted",
+          "status": "unsupported",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -10773,17 +10773,79 @@
               "locale": "zh",
               "resourcePath": "agents/1161/details.zh.json",
               "pointer": "/passive/level/1161507/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161501/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161502/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161503/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161504/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161505/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161506/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161507/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1091/details.zh.json",
+              "pointer": "/specialElementType/desc"
             }
           ],
-          "effectIds": [
-            "agent:1161:zzz-hp:eff-ms4aoho0-q3wbdv:blk-ms4aoho0-grnxav:mindscape:0"
+          "effectIds": [],
+          "maximumLayers": 1,
+          "inputs": [
+            {
+              "name": "agent:1161:zzz-hp:eff-ms4atnfh-29yr0r:blk-ms4aoho0-grnxav:mindscape:0:source",
+              "unit": "impact-points",
+              "description": "莱特获得[昂扬]时的冲击力（显式快照读数，手工输入）；与同一状态的其余部分共用同一读数，不使用预设或当前面板"
+            }
           ],
-          "maximumLayers": 20,
-          "inputs": [],
-          "differences": [],
+          "differences": ["complete-state-elation-correction"],
           "applicability": {
             "beneficiaryElements": ["ice", "fire"]
-          }
+          },
+          "reason": "semantic-conflict",
+          "explanation": "该来源记录是[昂扬]完整状态的一部分，已被完整状态选项取代：块 note 与 Nanoka 同文说明[昂扬]总增益按同一层数与同一获得时冲击力整体计算（影画 2 的 120% 是同一状态的比例强化）。请改选昂扬 · 完整状态；本记录不再单独生成按层增益。来源 /agents/50/mindscapeBuffs/0/effectBlocks/1/effects/0。"
         }
       ]
     },
@@ -10799,7 +10861,7 @@
             "minimumMindscape": 0,
             "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
           },
-          "status": "converted",
+          "status": "unsupported",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -10856,11 +10918,58 @@
               "locale": "zh",
               "resourcePath": "agents/1161/details.zh.json",
               "pointer": "/passive/level/1161507/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161501/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161502/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161503/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161504/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161505/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161506/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161507/desc/1"
             }
           ],
-          "effectIds": [
-            "agent:1161:zzz-hp:eff-ms4atnfh-29yr0r:blk-ms4aoho0-grnxav:mindscape:0"
-          ],
+          "effectIds": [],
           "maximumLayers": 1,
           "inputs": [
             {
@@ -10870,10 +10979,12 @@
               "preset": 270
             }
           ],
-          "differences": [],
+          "differences": ["complete-state-elation-correction"],
           "applicability": {
             "beneficiaryElements": ["fire", "ice"]
-          }
+          },
+          "reason": "semantic-conflict",
+          "explanation": "该来源记录是[昂扬]完整状态的一部分，已被完整状态选项取代：块 note 与 Nanoka 同文说明[昂扬]总增益按同一层数与同一获得时冲击力整体计算（影画 2 的 120% 是同一状态的比例强化）。请改选昂扬 · 完整状态；本记录不再单独生成按层增益。来源 /agents/50/mindscapeBuffs/0/effectBlocks/1/effects/1。"
         }
       ]
     },
@@ -10952,7 +11063,7 @@
           "configuration": {
             "minimumMindscape": 2
           },
-          "status": "converted",
+          "status": "unsupported",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -10960,17 +11071,31 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/50/mindscapeBuffs/2/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161501/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/talent/2/desc"
             }
           ],
-          "effectIds": [
-            "agent:1161:zzz-hp:eff-ms4b0whf-x6n1xw:blk-legacy:mindscape:2"
-          ],
+          "effectIds": [],
           "maximumLayers": 20,
           "inputs": [],
-          "differences": [],
+          "differences": ["complete-state-elation-correction"],
           "applicability": {
             "beneficiaryElements": ["fire", "ice"]
-          }
+          },
+          "reason": "semantic-conflict",
+          "explanation": "该来源记录是[昂扬]完整状态的一部分，已被完整状态选项取代：块 note 与 Nanoka 同文说明[昂扬]总增益按同一层数与同一获得时冲击力整体计算（影画 2 的 120% 是同一状态的比例强化）。请改选昂扬 · 完整状态；本记录不再单独生成按层增益。来源 /agents/50/mindscapeBuffs/2/effectBlocks/0/effects/1。"
         }
       ]
     },
@@ -10985,7 +11110,7 @@
           "configuration": {
             "minimumMindscape": 2
           },
-          "status": "converted",
+          "status": "unsupported",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -10993,11 +11118,23 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/50/mindscapeBuffs/2/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161501/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/talent/2/desc"
             }
           ],
-          "effectIds": [
-            "agent:1161:zzz-hp:eff-ms4b2g6y-2q6n1w:blk-legacy:mindscape:2"
-          ],
+          "effectIds": [],
           "maximumLayers": 1,
           "inputs": [
             {
@@ -11007,10 +11144,12 @@
               "preset": 270
             }
           ],
-          "differences": [],
+          "differences": ["complete-state-elation-correction"],
           "applicability": {
             "beneficiaryElements": ["fire", "ice"]
-          }
+          },
+          "reason": "semantic-conflict",
+          "explanation": "该来源记录是[昂扬]完整状态的一部分，已被完整状态选项取代：块 note 与 Nanoka 同文说明[昂扬]总增益按同一层数与同一获得时冲击力整体计算（影画 2 的 120% 是同一状态的比例强化）。请改选昂扬 · 完整状态；本记录不再单独生成按层增益。来源 /agents/50/mindscapeBuffs/2/effectBlocks/0/effects/2。"
         }
       ]
     },
@@ -44616,6 +44755,147 @@
       ]
     },
     {
+      "optionId": "agents:lighter:mindscape:0:elation-complete-state",
+      "catalogEntityId": "agents:lighter",
+      "name": "昂扬 · 完整状态",
+      "conditionDescription": "队伍中存在[强攻]角色或与自身阵营相同的角色时，[士气喷发]状态下莱特第五段[普通攻击]命中敌人使全队获得一层[昂扬]，最多 20 层、持续 30 秒、重复触发刷新；每层使代理人造成的冰属性伤害和火属性伤害提升 1.25%；获得[昂扬]时若莱特冲击力高于 170 点，每超过 10 点使每层增益额外提升 0.25%；[昂扬]最多使冰/火伤害提升 75%。获得时冲击力与层数由调用方声明。",
+      "target": "team",
+      "variants": [
+        {
+          "configuration": {},
+          "status": "corrected",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/agents/50/mindscapeBuffs/0/effectBlocks/1/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161501/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161502/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161503/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161504/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161505/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161506/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161507/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161501/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161502/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161503/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161504/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161505/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161506/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1161/details.zh.json",
+              "pointer": "/passive/level/1161507/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1091/details.zh.json",
+              "pointer": "/specialElementType/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1161:zzz-hp:eff-ms4aoho0-q3wbdv:blk-ms4aoho0-grnxav:mindscape:0"
+          ],
+          "maximumLayers": 20,
+          "layerCountInputName": "agent:1161:zzz-hp:eff-ms4aoho0-q3wbdv:blk-ms4aoho0-grnxav:mindscape:0:layers",
+          "inputs": [
+            {
+              "name": "agent:1161:zzz-hp:eff-ms4atnfh-29yr0r:blk-ms4aoho0-grnxav:mindscape:0:source",
+              "unit": "impact-points",
+              "description": "莱特获得[昂扬]时的冲击力（显式快照读数，手工输入）；与同一状态的其余部分共用同一读数，不使用预设或当前面板"
+            }
+          ],
+          "applicability": {},
+          "differences": ["complete-state-elation-correction"]
+        }
+      ]
+    },
+    {
       "optionId": "agents:remiel:mindscape:1:phase-transition-flow:other-character-anomaly-damage",
       "catalogEntityId": "agents:remiel",
       "name": "相变时流 · 其他角色属性异常伤害",
@@ -49658,6 +49938,383 @@
           "locale": "zh",
           "resourcePath": "drive-discs/33600/details.zh.json",
           "pointer": "/desc4"
+        }
+      ]
+    },
+    {
+      "differenceId": "complete-state-elation-correction",
+      "explanation": "莱特（1161）[昂扬]：固定来源把它拆成基础 stacked（每层 1.25%）与单次转化（convert impact、ratioPercent 50、cap 50）两条记录，影画 2 又复制出两条（每层 +0.25%、转化 ratioPercent 10），四条都能被独立开关。块 note 与 Nanoka 额外能力说明（agents/1161/details.zh.json 的 /passive/level/1161501—1161507/desc/1）与天赋 2（/talent/2/desc）同文说明它们共同表示同一个按层状态：总增益为 min(0.75, (0.0125 + max(0, 获得时冲击力 − 170) × 0.00025) × 层数)，上限作用于乘层数后的总量，影画 2 起对该状态整体 ×1.2（总上限 90%，同一状态只强化一次，随配置自动生效）。Fairy 只保留一条完整贡献（supplied、一次完整状态），M0—M6 共用同一个“昂扬 · 完整状态”选项：获得时冲击力按登记的输入名要求调用方显式提供（无默认值），层数由目录按登记的 count 输入名从 selection.layers 派生（0 层关闭且不要求冲击力）；影画 2 的 120% 由配置阶段 output scale 1.2 修改直接作用于该贡献，不生成第二套状态或输入。命中元素按来源正文“冰属性伤害和火属性伤害”限制，并覆盖按冰属性结算的烈霜命中（agents/1091/details.zh.json 的 /specialElementType/desc，命中枚举 frost），不按受益角色的固有元素筛选。四条旧目录项都迁移为带说明的语义冲突入口：原先的基础记录被改写为上述完整贡献（不再是部分增益），其余三条被取代的记录不再生成可执行贡献，来源位置仍在覆盖报告中保留去向；影画 2 的失衡易伤 +25% 是独立机制，保持独立选项与数值不变。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/50/mindscapeBuffs/0/effectBlocks/1/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161501/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161502/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161503/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161504/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161505/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161506/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161507/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161501/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161502/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161503/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161504/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161505/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161506/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161507/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1091/details.zh.json",
+          "pointer": "/specialElementType/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/50/mindscapeBuffs/0/effectBlocks/1/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161501/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161502/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161503/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161504/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161505/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161506/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161507/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161501/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161502/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161503/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161504/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161505/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161506/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161507/desc/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/50/mindscapeBuffs/2/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161501/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/talent/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/50/mindscapeBuffs/2/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161501/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/talent/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/50/mindscapeBuffs/0/effectBlocks/1/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161501/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161502/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161503/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161504/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161505/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161506/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161507/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161501/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161502/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161503/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161504/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161505/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161506/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1161/details.zh.json",
+          "pointer": "/passive/level/1161507/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1091/details.zh.json",
+          "pointer": "/specialElementType/desc"
         }
       ]
     }

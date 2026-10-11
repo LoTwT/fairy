@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "18",
+  "revision": "19",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -13685,10 +13685,10 @@
       "rankKind": "mindscape",
       "stat": "dmgBonus",
       "optionId": "agents:lighter:mindscape:0:blk-ms4aoho0-grnxav:eff-ms4aoho0-q3wbdv",
-      "effectIds": [
-        "agent:1161:zzz-hp:eff-ms4aoho0-q3wbdv:blk-ms4aoho0-grnxav:mindscape:0"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "该来源记录是[昂扬]完整状态的一部分，已被完整状态选项取代：块 note 与 Nanoka 同文说明[昂扬]总增益按同一层数与同一获得时冲击力整体计算（影画 2 的 120% 是同一状态的比例强化）。请改选昂扬 · 完整状态；本记录不再单独生成按层增益。来源 /agents/50/mindscapeBuffs/0/effectBlocks/1/effects/0。",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -13700,10 +13700,10 @@
       "rankKind": "mindscape",
       "stat": "dmgBonus",
       "optionId": "agents:lighter:mindscape:0:blk-ms4aoho0-grnxav:eff-ms4atnfh-29yr0r",
-      "effectIds": [
-        "agent:1161:zzz-hp:eff-ms4atnfh-29yr0r:blk-ms4aoho0-grnxav:mindscape:0"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "该来源记录是[昂扬]完整状态的一部分，已被完整状态选项取代：块 note 与 Nanoka 同文说明[昂扬]总增益按同一层数与同一获得时冲击力整体计算（影画 2 的 120% 是同一状态的比例强化）。请改选昂扬 · 完整状态；本记录不再单独生成按层增益。来源 /agents/50/mindscapeBuffs/0/effectBlocks/1/effects/1。",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -13745,10 +13745,10 @@
       "rankKind": "mindscape",
       "stat": "dmgBonus",
       "optionId": "agents:lighter:mindscape:2:blk-legacy:eff-ms4b0whf-x6n1xw",
-      "effectIds": [
-        "agent:1161:zzz-hp:eff-ms4b0whf-x6n1xw:blk-legacy:mindscape:2"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "该来源记录是[昂扬]完整状态的一部分，已被完整状态选项取代：块 note 与 Nanoka 同文说明[昂扬]总增益按同一层数与同一获得时冲击力整体计算（影画 2 的 120% 是同一状态的比例强化）。请改选昂扬 · 完整状态；本记录不再单独生成按层增益。来源 /agents/50/mindscapeBuffs/2/effectBlocks/0/effects/1。",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -13760,10 +13760,10 @@
       "rankKind": "mindscape",
       "stat": "dmgBonus",
       "optionId": "agents:lighter:mindscape:2:blk-legacy:eff-ms4b2g6y-2q6n1w",
-      "effectIds": [
-        "agent:1161:zzz-hp:eff-ms4b2g6y-2q6n1w:blk-legacy:mindscape:2"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "该来源记录是[昂扬]完整状态的一部分，已被完整状态选项取代：块 note 与 Nanoka 同文说明[昂扬]总增益按同一层数与同一获得时冲击力整体计算（影画 2 的 120% 是同一状态的比例强化）。请改选昂扬 · 完整状态；本记录不再单独生成按层增益。来源 /agents/50/mindscapeBuffs/2/effectBlocks/0/effects/2。",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -30484,11 +30484,11 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 860,
-    "options": 855,
-    "converted": 1151,
+    "rules": 858,
+    "options": 856,
+    "converted": 1147,
     "corrected": 133,
-    "unsupported": 6,
+    "unsupported": 10,
     "supplements": {
       "records": 30,
       "rules": 27,
