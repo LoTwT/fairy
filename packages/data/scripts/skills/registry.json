@@ -3383,7 +3383,7 @@
     "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": "sk-koleda-nk-1101006-强化普攻二段",
-    "skillTargetIds": [],
+    "skillTargetIds": ["zzz-hp:skill:koleda-enhanced-basic-second"],
     "issues": []
   },
   {
@@ -3400,7 +3400,7 @@
     "element": "fire",
     "damageKind": "regular",
     "upstreamSkillId": null,
-    "skillTargetIds": [],
+    "skillTargetIds": ["zzz-hp:skill:koleda-enhanced-basic-second"],
     "issues": []
   },
   {

@@ -4,7 +4,9 @@ import type {
   ContributionOperation,
   CoreSkillLevel,
   EffectId,
+  MindscapeRank,
   PotentialLevel,
+  SkillCategory,
   SourceIdentity,
   StaticCatalogEntity,
   StaticCatalogInputRequirement,
@@ -43,6 +45,8 @@ export interface SupplementRuleSpec {
 
 export interface SupplementVariantSpec {
   readonly configuration: {
+    /** 影画门槛（如影画 1 起解锁的天赋条款）；与规则的 mindscapeRank 配置条件一致。 */
+    readonly minimumMindscape?: MindscapeRank
     readonly coreSkillLevels?: readonly CoreSkillLevel[]
     readonly refinements?: readonly (1 | 2 | 3 | 4 | 5)[]
     readonly potentialLevels?: readonly PotentialLevel[]
@@ -67,6 +71,29 @@ export interface SupplementBase {
    * 拒绝并要求重新核对，不静默叠加。仅作用于固定来源实体上的补充。
    */
   readonly conflictingSourceStats?: readonly string[]
+  /**
+   * 定向重复补充防护：stat 级名单过粗（实体上存在同 stat 的其他条款）时，
+   * 以同实体 stat 家族 + raw/normalized 记录的 skillTargets 命中登记分类或
+   * 具名子分类（锚点）定位同一条款——固定来源同实体出现 stat 命中且
+   * skillTargets 命中登记锚点的机器记录即拒绝生成。不限定来源 scope 字段。
+   */
+  readonly conflictingSourceRecords?: {
+    readonly stats: readonly string[]
+    readonly skillTargetCategories?: readonly string[]
+    readonly skillTargetSubcategoryIds?: readonly string[]
+  }
+  /**
+   * 补充条款的受益范围依赖固定来源没有的精确招式身份（如珂蕾妲潜能强化
+   * 普攻第二段）时，登记本项目采用的具名技能目标（upstreamId 为 null，
+   * 不是来源技能）：技能生成器把它绑定到声明动作的 skillTargetIds，消费
+   * 端以该目标显式选中。固定来源出现同 ID 的真实目标即拒绝生成。
+   */
+  readonly skillTarget?: {
+    readonly targetId: string
+    readonly agentEntityId: string
+    readonly category: SkillCategory
+    readonly name: string
+  }
   /**
    * 同一来源绑定内的互斥完整状态组（复用公开类型既有的
    * StaticCatalogOption.exclusiveGroup 与 supplied activation 的
@@ -1609,6 +1636,279 @@ const harumasaOrdinaryCritDmg: Supplement = {
     target: "self",
   },
 }
+
+/**
+ * 妮可（M01，批次 03）：影画 1 的[强化特殊技]伤害提升。固定来源 mindscape 1
+ * 没有任何机器记录；受益范围是妮可本人的强化特殊技直伤（蓄力、炮击、能量场
+ * 三个真实动作均携带 all-special-ms0fcqv7 目标），普通特殊技与其他招式不受益。
+ * 同句的异常积蓄提升与能量场持续时间延长不在伤害计算范围，覆盖登记留待批次 10。
+ */
+const nicoleMindscape1ExDamage: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:nicole:mindscape-1-ex-damage",
+  source: "nanoka-integrated@3.2 agents/1031 /talent/1/desc",
+  catalogEntityId: "agents:nicole",
+  optionId: "nanoka:agents:nicole:mindscape-1-ex-damage",
+  supportedRanks: "影画 1 及以上",
+  computationTarget: "catalog option on the mapped agent entity",
+  conflictingSourceRecords: {
+    stats: ["skillDmgBonus", "dmgBonus"],
+    skillTargetCategories: ["special"],
+  },
+  evidence: [
+    {
+      path: "agents/1031/details.zh.json",
+      pointer: "/talent/1/desc",
+      sha256:
+        "f648a8ff0d98f18d9348c7b10c79d234bf4d52d8d6ac0d92e596822a9016aaf8",
+    },
+  ],
+  verification:
+    "Nanoka 影画 1（agents/1031/details.zh.json 的 /talent/1/desc）确认：[强化特殊技]造成的伤害和累积的属性异常积蓄值提升 16%；发动时每多蓄力 0.1 秒，能量场持续时间提升 0.15 秒。固定 ZZZ-HP 来源的 mindscape 1 没有任何机器记录，按补充来源在既有 agents:nicole 实体新增选项，只接入伤害部分（+16%）：受益范围是妮可本人的强化特殊技直伤——目录按强化特殊技目标（all-special-ms0fcqv7，与固定来源既有强化特殊技记录同一锚点）与直伤种类匹配，真实动作映射中属于该 EX 的蓄力（action:0021）、炮击（action:0022）、能量场（action:0023）命中均获得同一加成，普通特殊技（action:0020，无该目标）、其他招式与队友不受益。异常积蓄提升与能量场持续时间延长不属于当前伤害计算的最终输出，不在本选项表达，覆盖登记留待批次 10；M0 不解锁，选择本选项即断言影画 1 及以上。",
+  rule: {
+    effectId: "agent:1031:nanoka:mindscape-1-ex-damage:mindscape:1",
+    identity: { kind: "agent", entityId: "1031" },
+    section: "影画1",
+    config: {
+      kind: "compare-number",
+      unit: "count",
+      operator: "gte",
+      left: {
+        kind: "configuration-number",
+        unit: "count",
+        field: "mindscapeRank",
+      },
+      right: literal("count", 1),
+    },
+    parameters: {
+      amount: { kind: "constant", unit: "ratio", value: 0.16 },
+    },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.damageKind",
+          values: [...directKinds, "sharpen"],
+        },
+        {
+          kind: "all",
+          conditions: [
+            {
+              kind: "one-of",
+              fact: "hit.skillTag",
+              values: ["zzz-hp:category:special"],
+            },
+            {
+              kind: "one-of",
+              fact: "hit.skillTag",
+              values: ["zzz-hp:skill:all-special-ms0fcqv7"],
+            },
+          ],
+        },
+      ],
+    },
+    operation: {
+      kind: "factor-contribution",
+      channel: "damage-bonus",
+      value: { kind: "parameter", unit: "ratio", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { minimumMindscape: 1 },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "[强化特殊技]造成的伤害提升16%（影画1及以上）；作用于妮可本人的强化特殊技直伤（蓄力、炮击、能量场），普通特殊技、其他招式与队友不受益。同句的异常积蓄提升与能量场持续时间延长不在伤害计算范围。",
+    name: "影画1 · dmgBonus",
+    target: "self",
+  },
+}
+
+/**
+ * 青衣（M17，批次 03）：[普通攻击：醉花月云转]消耗[闪络电压]中超过 75% 部分
+ * 的每 1% 使本次招式伤害 +1%。数值由调用方显式输入本次实际消耗的电压比例
+ * （0—1），不是施放后的剩余电压；75% → 0、80% → +5%、100% → +25%。
+ */
+const qingyiFlashVoltageConsumedDamage: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:qingyi:flash-voltage-consumed-damage",
+  source: "nanoka-integrated@3.2 agents/1251 /skill/basic/description/2/desc",
+  catalogEntityId: "agents:qingyi",
+  optionId: "nanoka:agents:qingyi:flash-voltage-consumed-damage",
+  supportedRanks: "无培养门槛；消耗电压 0—100%（比例 0—1）",
+  computationTarget: "catalog option on the mapped agent entity",
+  conflictingSourceRecords: {
+    stats: ["skillDmgBonus", "dmgBonus"],
+    skillTargetSubcategoryIds: ["qingyi-basic-ms4bcr00"],
+  },
+  evidence: [
+    {
+      path: "agents/1251/details.zh.json",
+      pointer: "/skill/basic/description/2/desc",
+      sha256:
+        "d5344fa4979038c19f4120a2e9466aba07ed69be20ec2e948c367db4a59b16ef",
+    },
+  ],
+  verification:
+    "Nanoka 普通攻击描述（agents/1251/details.zh.json 的 /skill/basic/description/2/desc，闪络）确认：发动[普通攻击：醉花月云转]时，青衣会消耗所有[闪络电压]并退出[闪络]状态，所消耗的[闪络电压]中超过 75% 的部分，每 1% 使本次招式造成的伤害/失衡值额外提升 1%/0.5%。固定 ZZZ-HP 来源没有任何机器记录覆盖该条款（同技能的影画 6 暴伤记录编码的是另一条款），按补充来源在既有 agents:qingyi 实体新增选项，只接入伤害部分：max(0, 消耗电压 − 75%) × 1%，上限 +25%（电压至多 100%），锚点为 75% → 0、80% → +5%、100% → +25%。受益范围是携带醉花月云转目标（qingyi-basic-ms4bcr00）的直伤命中——真实动作映射中突进（action:0013）与终结一击（action:0014）都带该目标，一煞、醉花云、强化特殊技与队友不受益。消耗量由调用方显式输入本次招式实际消耗的电压比例（0—1，不是施放后剩余电压，越界读数按表达式钳制），不模拟积攒、消耗与闪络状态进出；失衡值 +0.5%/1% 不做最终输出，覆盖登记留待批次 10。",
+  rule: {
+    effectId: "agent:1251:nanoka:flash-voltage-consumed-damage:mindscape:0",
+    identity: { kind: "agent", entityId: "1251" },
+    section: "普通攻击：醉花月云转（闪络电压消耗）",
+    config: { kind: "constant", value: true },
+    parameters: {
+      threshold: { kind: "constant", unit: "ratio", value: -0.75 },
+      rate: { kind: "constant", unit: "multiplier", value: 1 },
+      cap: { kind: "constant", unit: "ratio", value: 0.25 },
+    },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.damageKind",
+          values: [...directKinds, "sharpen"],
+        },
+        {
+          kind: "one-of",
+          fact: "hit.skillTag",
+          values: ["zzz-hp:skill:qingyi-basic-ms4bcr00"],
+        },
+      ],
+    },
+    operation: {
+      kind: "factor-contribution",
+      channel: "damage-bonus",
+      value: {
+        kind: "minimum",
+        unit: "ratio",
+        operands: [
+          {
+            kind: "convert",
+            unit: "ratio",
+            input: {
+              kind: "maximum",
+              unit: "ratio",
+              operands: [
+                literal("ratio", 0),
+                {
+                  kind: "add",
+                  unit: "ratio",
+                  operands: [
+                    {
+                      kind: "input",
+                      unit: "ratio",
+                      name: "agent:1251:nanoka:flash-voltage-consumed-damage:mindscape:0:source",
+                    },
+                    { kind: "parameter", unit: "ratio", name: "threshold" },
+                  ],
+                },
+              ],
+            },
+            rate: { kind: "parameter", unit: "multiplier", name: "rate" },
+          },
+          { kind: "parameter", unit: "ratio", name: "cap" },
+        ],
+      },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: {},
+    inputs: [
+      {
+        name: "agent:1251:nanoka:flash-voltage-consumed-damage:mindscape:0:source",
+        unit: "ratio",
+        description:
+          "manual ratio，本次[普通攻击：醉花月云转]实际消耗的[闪络电压]比例（0—1）；是本次招式消耗的所有电压，不是施放后剩余电压。超过 75% 的部分每 1% 使本次招式伤害 +1%（75% → 0、80% → +5%、100% → +25%），越界读数按表达式钳制，不使用默认值，不模拟积攒/消耗",
+      },
+    ],
+    applicability: {},
+    conditionDescription:
+      "本次[普通攻击：醉花月云转]消耗的[闪络电压]中超过 75% 的部分，每 1% 使本次招式造成的伤害提升 1%（失衡值 +0.5% 不在伤害计算范围）。选择本选项并输入本次消耗比例；受益范围是突进与终结一击两段醉花月云转直伤。",
+    name: "闪络电压消耗 · dmgBonus",
+    target: "self",
+  },
+}
+
+/**
+ * 珂蕾妲（M18，批次 03）：潜能分支的强化普攻第二段按消耗[熔炉升温]层数提升。
+ * 每消耗一层 +10% 伤害（最多 2 层），只作用于第二段强化普攻（含协同版本）；
+ * 层数为本次强化普攻实际消耗的有效层数，全队 +35%（40 秒）是独立既有选项。
+ */
+const koledaEnhancedBasicSecondPerLayer: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:koleda:enhanced-basic-second-per-layer",
+  source: "nanoka-integrated@3.2 agents/1101 /skill/basic/description/1/desc",
+  catalogEntityId: "agents:koleda",
+  optionId: "nanoka:agents:koleda:enhanced-basic-second-per-layer",
+  supportedRanks: "潜能 1—6；消耗层数 0—2",
+  computationTarget: "catalog option on the mapped agent entity",
+  conflictingSourceRecords: {
+    stats: ["skillDmgBonus", "dmgBonus"],
+    skillTargetCategories: ["basic"],
+  },
+  skillTarget: {
+    targetId: "koleda-enhanced-basic-second",
+    agentEntityId: "1101",
+    category: "basic",
+    name: "强化普攻第二段",
+  },
+  evidence: [
+    {
+      path: "agents/1101/details.zh.json",
+      pointer: "/skill/basic/description/1/desc",
+      sha256:
+        "4234d05a53ae34e4558929d46d222aab7435b094ab8877f312ca5b19403839e7",
+    },
+  ],
+  verification:
+    "Nanoka 普通攻击潜能分支描述（agents/1101/details.zh.json 的 /skill/basic/description/1/desc，被动行的 potential 节点为 110100—110105；普通分支 description/0 无此条款）确认：[熔炉升温]最多 2 层，发动强化[普通攻击]消耗所有层数；每消耗一层，第二段强化[普通攻击]造成的伤害提升 10%、失衡值提升 20%。固定 ZZZ-HP 来源只编码了同句的全队伤害 +35%（独立 40 秒状态，原样保留），没有任何机器记录覆盖按层条款，按补充来源在既有 agents:koleda 实体新增选项，只接入伤害部分：每消耗一层 +10%，激活层数上限 2（0/1/2 层由调用方按本次实际消耗显式选择），只作用于潜能分支的第二段强化普攻。固定来源与上游技能表都没有第二段的技能锚点（ZZZ-HP 无 koleda 的 skillSubcategories，倍率行 buffAnchorId 为 null），本登记按既有独立目标机制采用具名目标 zzz-hp:skill:koleda-enhanced-basic-second（upstreamId 为 null，不是来源技能），技能生成器把它绑定到强化普攻二段（action:0011）与协同版本（action:0012）两个动作；普通第二段普攻（action:0007）、第一段强化普攻（action:0010）、其他招式与队友不受益，不以宽泛 basic 类别替代第二段。失衡值 +20% 不做最终输出，覆盖登记留待批次 10。",
+  rule: {
+    effectId: "agent:1101:nanoka:enhanced-basic-second-per-layer:mindscape:0",
+    identity: { kind: "agent", entityId: "1101" },
+    section: "普通攻击：砸扁，粉碎（潜能分支：强化普攻二段）",
+    config: potentialFrom(1),
+    parameters: {
+      amount: { kind: "constant", unit: "ratio", value: 0.1 },
+    },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.damageKind",
+          values: [...directKinds, "sharpen"],
+        },
+        {
+          kind: "one-of",
+          fact: "hit.skillTag",
+          values: ["zzz-hp:skill:koleda-enhanced-basic-second"],
+        },
+      ],
+    },
+    operation: {
+      kind: "factor-contribution",
+      channel: "damage-bonus",
+      value: { kind: "parameter", unit: "ratio", name: "amount" },
+    },
+    maximumLayers: 2,
+  },
+  variant: {
+    configuration: { potentialLevels: [1, 2, 3, 4, 5, 6] },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "潜能分支：本次强化[普通攻击]消耗的每层[熔炉升温]使第二段强化普攻造成的伤害提升 10%（最多 2 层，按本次实际消耗选择 0/1/2 层）。只作用于第二段强化普攻（含协同版本）；消耗触发的全队伤害 +35%（持续 40 秒）是独立选项，不与本次层数绑定。失衡值 +20% 不在伤害计算范围。",
+    name: "强化普攻二段 · dmgBonus",
+    target: "self",
+  },
+}
 export const SUPPLEMENTS: readonly Supplement[] = [
   nekomataOrdinaryDmgBonus,
   nekomataOrdinaryShow,
@@ -1635,4 +1935,7 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   iceJadeTeapotImpactPerTeaLayer,
   ...spectralGazeSoulChainTiers,
   headLackeyFixedImpactPoints,
+  nicoleMindscape1ExDamage,
+  qingyiFlashVoltageConsumedDamage,
+  koledaEnhancedBasicSecondPerLayer,
 ]

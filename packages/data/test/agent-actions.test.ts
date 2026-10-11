@@ -526,6 +526,30 @@ describe("agent action semantics", () => {
     ).toEqual([])
   })
 
+  it("binds Koleda's potential enhanced-basic second segment to its named target", async () => {
+    const data = await agent("1101")
+    // 强化普攻二段与协同版本共享同一具名目标（upstreamId 为 null 的项目
+    // 采纳身份），供批次 03 的按层增伤规则精确匹配。
+    const second = data.actions.find(
+      (a) => a.rowName === "强化普攻二段伤害倍率",
+    )!
+    const cooperative = data.actions.find(
+      (a) => a.rowName === "强化普攻二段伤害倍率（协同）",
+    )!
+    expect(second.skillTargetIds).toEqual([
+      "zzz-hp:skill:koleda-enhanced-basic-second",
+    ])
+    expect(cooperative.skillTargetIds).toEqual([
+      "zzz-hp:skill:koleda-enhanced-basic-second",
+    ])
+    // 普通第二段普攻与第一段强化普攻保持空目标，不借用第二段身份。
+    for (const rowName of ["二段伤害倍率", "强化普攻一段伤害倍率"])
+      expect(
+        data.actions.find((a) => a.rowName === rowName)!.skillTargetIds,
+        rowName,
+      ).toEqual([])
+  })
+
   it("rebuilds all 60 catalogs without dropped source rows and rejects semantic or level-bonus drift", async () => {
     const ids = [...new Set(registry.map((entry) => entry.entityId))]
     expect(ids).toHaveLength(60)

@@ -585,7 +585,7 @@
       "rowName": "强化普攻二段伤害倍率",
       "levelGroup": "basic",
       "skillCategory": "basic",
-      "skillTargetIds": [],
+      "skillTargetIds": ["zzz-hp:skill:koleda-enhanced-basic-second"],
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
@@ -650,7 +650,7 @@
       "rowName": "强化普攻二段伤害倍率（协同）",
       "levelGroup": "basic",
       "skillCategory": "basic",
-      "skillTargetIds": [],
+      "skillTargetIds": ["zzz-hp:skill:koleda-enhanced-basic-second"],
       "skillTags": [],
       "source": {
         "path": "agents/1101/details.zh.json",
