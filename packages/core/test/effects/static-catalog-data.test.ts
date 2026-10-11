@@ -1881,7 +1881,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("21")
+    expect(catalog.revision).toBe("22")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -4684,12 +4684,14 @@ describe("velina cyclone catalog linkage", () => {
       // R01 修复拆为 1/2/3 有效魂锁三个互斥完整档位）；批次 03 再增
       // 妮可影画 1、青衣闪络电压、珂蕾妲强化普攻二段三条代理人补充；
       // 批次 04 再增凯撒/莱特/橘福福/琉音冲击力与莱特/丽娜影画 4 回能
-      // 六条代理人补充。
-      records: 36,
-      integrated: 33,
-      rules: 33,
-      options: 28,
-      entities: 1,
+      // 六条代理人补充；批次 07 再增洛克茜初始回能转化（新实体，单选项
+      // 双规则完整状态）与绯月银棺三条（新实体 + 暴击率，实体上再挂
+      // 风抗无视与全队增伤两个选项）四条补充。
+      records: 40,
+      integrated: 37,
+      rules: 38,
+      options: 32,
+      entities: 3,
       outOfScope: 3,
     })
   })

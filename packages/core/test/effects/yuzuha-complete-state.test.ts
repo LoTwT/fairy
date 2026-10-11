@@ -260,7 +260,7 @@ describe("Yuzuha additional ability complete state", () => {
       }
   })
 
-  it("uses the same option at every core and mindscape, with explicit AM independent of the panel", () => {
+  it("keeps the complete-state metadata: base AM, core 7 bonus and one required input without preset", () => {
     const attributes = read(
       "../../../data/definitions/attributes/agents/1411.json",
     )
@@ -277,17 +277,39 @@ describe("Yuzuha additional ability complete state", () => {
     expect(completeVariant().layerCountInputName).toBeUndefined()
     expect(completeVariant().inputs).toHaveLength(1)
     expect(completeVariant().inputs[0]!.preset).toBeUndefined()
-    for (const core of [1, 2, 3, 4, 5, 6, 7] as const)
-      for (const mindscape of (core === 7
-        ? [0, 1, 2, 3, 4, 5, 6]
-        : [0, 1]) as readonly MindscapeRank[])
-        for (const am of [88, 124, 175])
-          expect(bonus(evaluate(request({ core, mindscape, am })))).toBeCloseTo(
-            (am === 88 ? 0 : am === 124 ? 0.048 : 0.15) *
-              (mindscape === 0 ? 1 : 1.3),
-            12,
-          )
   })
+
+  it.each([
+    [1, 0],
+    [1, 1],
+    [2, 0],
+    [2, 1],
+    [3, 0],
+    [3, 1],
+    [4, 0],
+    [4, 1],
+    [5, 0],
+    [5, 1],
+    [6, 0],
+    [6, 1],
+    [7, 0],
+    [7, 1],
+    [7, 2],
+    [7, 3],
+    [7, 4],
+    [7, 5],
+    [7, 6],
+  ] as const)(
+    "uses the same option at core %s / mindscape %s with explicit AM independent of the panel",
+    (core, mindscape) => {
+      for (const am of [88, 124, 175] as const)
+        expect(bonus(evaluate(request({ core, mindscape, am })))).toBeCloseTo(
+          (am === 88 ? 0 : am === 124 ? 0.048 : 0.15) *
+            (mindscape === 0 ? 1 : 1.3),
+          12,
+        )
+    },
+  )
 
   it("requires AM only for the enabled state and rejects illegal or duplicate layers", () => {
     expect(bonus(evaluate(request({ layers: 0 })))).toBe(0)

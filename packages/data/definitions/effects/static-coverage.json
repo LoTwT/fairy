@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "21",
+  "revision": "22",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -1154,6 +1154,32 @@
       "element": null
     },
     {
+      "catalogEntityId": "nanoka:agents:1621",
+      "upstreamId": null,
+      "name": "洛克茜",
+      "identity": {
+        "kind": "agent",
+        "entityId": "1621"
+      },
+      "status": "mapped",
+      "profession": "击破",
+      "element": "wind",
+      "supplementProvenance": {
+        "sourceId": "nanoka-integrated",
+        "version": "3.2",
+        "resources": [
+          {
+            "path": "agents/1621/details.zh.json",
+            "sha256": "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e"
+          },
+          {
+            "path": "agents/1621/data.json",
+            "sha256": "8a0e467f6cfd8f9d612669a21726730461deddff10d2f5fea088e0ed2bc89aa1"
+          }
+        ]
+      }
+    },
+    {
       "catalogEntityId": "nanoka:w-engines:13111",
       "upstreamId": null,
       "name": "旋钻机-赤轴",
@@ -1175,6 +1201,32 @@
           {
             "path": "w-engines/13111/data.json",
             "sha256": "f15b78db778f650eadc03281d0408aba6b6a4bba603c2d8db304a129a2d757b6"
+          }
+        ]
+      }
+    },
+    {
+      "catalogEntityId": "nanoka:w-engines:14162",
+      "upstreamId": null,
+      "name": "绯月银棺",
+      "identity": {
+        "kind": "w-engine",
+        "entityId": "14162"
+      },
+      "status": "mapped",
+      "profession": "击破",
+      "element": null,
+      "supplementProvenance": {
+        "sourceId": "nanoka-integrated",
+        "version": "3.2",
+        "resources": [
+          {
+            "path": "w-engines/14162/details.zh.json",
+            "sha256": "bc7c46871ff259a1c249fe62493ff69d22aa279273e084efcb0783bc4f48a456"
+          },
+          {
+            "path": "w-engines/14162/data.json",
+            "sha256": "1a9e005ff93a9479c72da50e19f58b46bf411cc814e08bdd37cbd7681df4e1d1"
           }
         ]
       }
@@ -30541,6 +30593,49 @@
       "supportedRanks": "影画 4 及以上",
       "computationTarget": "catalog option on the mapped agent entity",
       "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:1621:initial-energy-regen-conversion",
+      "source": "nanoka-integrated@3.2 agents/1621 /passive/level/1621501—1621507/desc/0",
+      "kind": "entity",
+      "optionId": "nanoka:agents:1621:initial-energy-regen-conversion",
+      "effectIds": [
+        "agent:1621:nanoka:initial-energy-regen-conversion:attack",
+        "agent:1621:nanoka:initial-energy-regen-conversion:impact"
+      ],
+      "supportedRanks": "核心 1—7",
+      "computationTarget": "catalog entity + complete-state option (two rules)",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:14162:crit-rate",
+      "source": "nanoka-integrated@3.2 w-engines/14162 /talents/1—5/desc",
+      "kind": "entity",
+      "optionId": "nanoka:w-engines:14162:crit-rate",
+      "effectIds": ["w-engine:14162:nanoka:crit-rate"],
+      "supportedRanks": "精炼 1—5",
+      "computationTarget": "catalog entity + option",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:14162:wind-resistance-ignore",
+      "source": "nanoka-integrated@3.2 w-engines/14162 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:14162:wind-resistance-ignore",
+      "effectIds": ["w-engine:14162:nanoka:wind-resistance-ignore"],
+      "supportedRanks": "精炼 1—5",
+      "computationTarget": "catalog option on the supplement entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:14162:squad-damage-bonus",
+      "source": "nanoka-integrated@3.2 w-engines/14162 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:14162:squad-damage-bonus",
+      "effectIds": ["w-engine:14162:nanoka:squad-damage-bonus"],
+      "supportedRanks": "精炼 1—5",
+      "computationTarget": "catalog option on the supplement entity",
+      "status": "integrated"
     }
   ],
   "summary": {
@@ -30548,21 +30643,26 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 860,
-    "options": 863,
+    "rules": 865,
+    "options": 867,
     "converted": 1139,
     "corrected": 133,
     "unsupported": 18,
     "supplements": {
-      "records": 36,
-      "rules": 33,
-      "options": 28,
-      "entities": 1,
-      "integrated": 33,
+      "records": 40,
+      "rules": 38,
+      "options": 32,
+      "entities": 3,
+      "integrated": 37,
       "outOfScope": 3
     }
   },
-  "reverseGaps": ["w-engines/12014", "w-engines/13111"],
+  "reverseGaps": [
+    "agents/1621",
+    "w-engines/12014",
+    "w-engines/13111",
+    "w-engines/14162"
+  ],
   "deferredMechanisms": [
     {
       "catalogEntityId": "agents:remiel",

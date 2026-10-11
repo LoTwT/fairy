@@ -160,7 +160,7 @@ describe("static data conversion", () => {
       ],
     }
     const result = convertSource(source, functions, [], [])
-    expect(result.definitions.revision).toBe("21")
+    expect(result.definitions.revision).toBe("22")
     for (const option of result.catalog.options) {
       const variant = option.variants[0]!
       const sameBlock = option.optionId.endsWith("unverified-same-block")
@@ -453,7 +453,7 @@ const angelData = (): SourceData => ({
 describe("developer stat revision", () => {
   it("maps the four registered records through the anomaly bonus channel", () => {
     const result = convertSource(angelData(), functions, [], [])
-    expect(result.definitions.revision).toBe("21")
+    expect(result.definitions.revision).toBe("22")
     const option = result.catalog.options.find(
       (o) =>
         o.optionId ===
@@ -745,7 +745,7 @@ const remielData = (): SourceData => ({
 describe("remielle mindscape 2 attribute anomaly scope revision", () => {
   it("adds the [异常] profession and attribute anomaly damage scope from the reviewed text", () => {
     const result = convertSource(remielData(), functions, [], [])
-    expect(result.definitions.revision).toBe("21")
+    expect(result.definitions.revision).toBe("22")
     const option = result.catalog.options.find((o) =>
       o.optionId.includes("eff-ms7tlurw-vhelyf"),
     )!
@@ -895,7 +895,7 @@ describe("remielle mindscape 1 complete anomaly state", () => {
     "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
   it("merges the team and holder records into one corrected complete option", () => {
     const result = convertSource(remielMindscape1Data(), functions, [], [])
-    expect(result.definitions.revision).toBe("21")
+    expect(result.definitions.revision).toBe("22")
     const option = result.catalog.options.find((o) => o.optionId === optionId)!
     expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
     expect(option.conditionDescription).toBe(
@@ -1128,7 +1128,7 @@ const qingmingData = (): SourceData => ({
 describe("qingming birdcage pierce stack correction", () => {
   it("compiles the registered fixed encodings as per-layer contributions with a two-layer cap", () => {
     const result = convertSource(qingmingData(), functions, [], [])
-    expect(result.definitions.revision).toBe("21")
+    expect(result.definitions.revision).toBe("22")
     for (const [index, effectId] of qingmingPierceIds.entries()) {
       const option = result.catalog.options.find((o) =>
         o.optionId.includes(effectId),
@@ -3830,7 +3830,7 @@ describe("agent batch 06 impact and energy regen supplements", () => {
       integrated: 6,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("21")
+    expect(result.definitions.revision).toBe("22")
 
     const caesar = result.catalog.options.find(
       (o) => o.optionId === "nanoka:agents:caesar:stance-switch-impact",
@@ -4296,5 +4296,399 @@ describe("agent batch 06 impact and energy regen supplements", () => {
     expect(() =>
       convertSource(reordered, functions, [], batch06Supplements),
     ).not.toThrow()
+  })
+})
+
+/**
+ * 增益修复批次 07（修订 22）：洛克茜初始回能转化与绯月银棺三条补充的登记
+ * 形态、逐档字面值、多规则完整状态与防重复守卫。数值断言来自冻结 Nanoka
+ * 3.2 逐档原文（中英文交叉核对），不从生成器反推；证据摘要在生成路径由
+ * verifyStaticEffectsEvidence 逐条核对（含被动行 rank 与 data.json level
+ * 元数据的映射）。两个实体在固定来源 fac62407 都不存在，防重复守卫按
+ * catalog ID 与真实身份核对，上游未来出现同实体时拒绝生成。
+ */
+const batch07SupplementIds = [
+  "nanoka:agents:1621:initial-energy-regen-conversion",
+  "nanoka:w-engines:14162:crit-rate",
+  "nanoka:w-engines:14162:wind-resistance-ignore",
+  "nanoka:w-engines:14162:squad-damage-bonus",
+] as const
+
+const batch07Supplements = SUPPLEMENTS.filter((supplement) =>
+  (batch07SupplementIds as readonly string[]).includes(supplement.supplementId),
+)
+
+/** 批次 07 的固定来源夹具：固定来源没有洛克茜与绯月银棺，仅保留一个已映射
+ * 代理人（凯撒，identity 1071）供 catalog ID 与身份撞车守卫测试使用。 */
+const batch07Data = (): SourceData => ({
+  agents: [
+    batch03AgentEntity("caesar", "凯撒", {
+      0: {
+        id: "blk-legacy",
+        note: "[荣光之盾]存在期间，持有者的攻击力提升1000点，[荣光之盾]效果结束后，该增益效果仍然保留，持续5秒。",
+        effects: [
+          {
+            ...batch03BaseEffect,
+            id: "legacy-team-atk",
+            stat: "atk",
+            value: 1000,
+            applyTarget: "team",
+            applySituation: "global",
+          },
+        ],
+      },
+    }),
+  ],
+  driveDiscs: [],
+  skillSubcategories: [],
+  followUpSkillRules: [],
+  wengines: [],
+})
+
+describe("batch 07 Roxy and Crimson Moon Casket supplements", () => {
+  it("registers the two entities and four options with five rules", () => {
+    const result = convertSource(
+      batch07Data(),
+      functions,
+      [],
+      batch07Supplements,
+    )
+    expect(result.coverage.summary.supplements).toMatchObject({
+      records: 4,
+      rules: 5,
+      options: 4,
+      entities: 2,
+      integrated: 4,
+      outOfScope: 0,
+    })
+    expect(result.definitions.revision).toBe("22")
+    const entities = result.catalog.entities.filter((e) =>
+      ["nanoka:agents:1621", "nanoka:w-engines:14162"].includes(
+        e.catalogEntityId,
+      ),
+    )
+    expect(entities).toHaveLength(2)
+    expect(
+      entities.find((e) => e.catalogEntityId === "nanoka:agents:1621"),
+    ).toMatchObject({
+      upstreamId: null,
+      name: "洛克茜",
+      identity: { kind: "agent", entityId: "1621" },
+      status: "mapped",
+      profession: "击破",
+      element: "wind",
+      supplementProvenance: {
+        sourceId: "nanoka-integrated",
+        version: "3.2",
+        resources: [
+          { path: "agents/1621/details.zh.json" },
+          { path: "agents/1621/data.json" },
+        ],
+      },
+    })
+    expect(
+      entities.find((e) => e.catalogEntityId === "nanoka:w-engines:14162"),
+    ).toMatchObject({
+      upstreamId: null,
+      name: "绯月银棺",
+      identity: { kind: "w-engine", entityId: "14162" },
+      profession: "击破",
+    })
+
+    // 洛克茜：一个完整状态选项引用两条规则，共用同一显式输入。
+    const roxy = result.catalog.options.find(
+      (o) =>
+        o.optionId === "nanoka:agents:1621:initial-energy-regen-conversion",
+    )!
+    expect(roxy.target).toBe("self")
+    expect(roxy.variants[0]).toMatchObject({
+      status: "converted",
+      maximumLayers: 1,
+      configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+      effectIds: [
+        "agent:1621:nanoka:initial-energy-regen-conversion:attack",
+        "agent:1621:nanoka:initial-energy-regen-conversion:impact",
+      ],
+      inputs: [
+        {
+          name: "roxy:initial-energy-regen:source",
+          unit: "energy-per-second",
+        },
+      ],
+    })
+    const attack = result.definitions.effects.find(
+      (r) =>
+        r.effectId ===
+        "agent:1621:nanoka:initial-energy-regen-conversion:attack",
+    ) as ContributionRule
+    expect(attack.operation).toMatchObject({
+      kind: "stat-adjustment",
+      stat: "attack",
+      stage: "final-fixed",
+    })
+    expect(attack.parameters.cap).toMatchObject({
+      kind: "by-rank",
+      rank: "coreSkillLevel",
+      unit: "attack-points",
+      values: {
+        1: 480,
+        2: 560,
+        3: 640,
+        4: 720,
+        5: 800,
+        6: 880,
+        7: 960,
+      },
+    })
+    expect(attack.parameters.rate).toEqual({
+      kind: "constant",
+      unit: "multiplier",
+      value: 500,
+    })
+    expect(attack.parameters.threshold).toEqual({
+      kind: "constant",
+      unit: "energy-per-second",
+      value: -1.2,
+    })
+    const impact = result.definitions.effects.find(
+      (r) =>
+        r.effectId ===
+        "agent:1621:nanoka:initial-energy-regen-conversion:impact",
+    ) as ContributionRule
+    expect(impact.operation).toMatchObject({
+      kind: "stat-adjustment",
+      stat: "impact",
+      stage: "final-fixed",
+    })
+    expect(impact.parameters.cap).toMatchObject({
+      values: { 1: 40, 2: 46, 3: 52, 4: 58, 5: 64, 6: 70, 7: 76.8 },
+    })
+    expect(impact.parameters.rate).toEqual({
+      kind: "constant",
+      unit: "multiplier",
+      value: 40,
+    })
+    // 两条规则共用同一输入名。
+    const attackInput = JSON.stringify(attack.operation).match(
+      /"name":"roxy:initial-energy-regen:source"/,
+    )
+    const impactInput = JSON.stringify(impact.operation).match(
+      /"name":"roxy:initial-energy-regen:source"/,
+    )
+    expect(attackInput).not.toBeNull()
+    expect(impactInput).not.toBeNull()
+
+    // 绯月银棺：三个独立选项，精炼 1—5 逐档字面值；team 选项声明全队唯一。
+    const crit = result.catalog.options.find(
+      (o) => o.optionId === "nanoka:w-engines:14162:crit-rate",
+    )!
+    expect(crit.variants[0]).toMatchObject({
+      configuration: { refinements: [1, 2, 3, 4, 5] },
+      maximumLayers: 1,
+    })
+    const critRule = result.definitions.effects.find(
+      (r) => r.effectId === "w-engine:14162:nanoka:crit-rate",
+    ) as ContributionRule
+    expect(critRule.operation).toMatchObject({
+      kind: "stat-adjustment",
+      stat: "criticalRate",
+      stage: "direct",
+    })
+    expect(critRule.parameters.amount).toMatchObject({
+      rank: "refinement",
+      values: { 1: 0.24, 2: 0.26, 3: 0.28, 4: 0.3, 5: 0.32 },
+    })
+
+    const resPen = result.catalog.options.find(
+      (o) => o.optionId === "nanoka:w-engines:14162:wind-resistance-ignore",
+    )!
+    expect(resPen.variants[0]).toMatchObject({
+      configuration: { refinements: [1, 2, 3, 4, 5] },
+    })
+    expect(resPen.variants[0].squadUniqueEffect).toBeUndefined()
+    const resPenRule = result.definitions.effects.find(
+      (r) => r.effectId === "w-engine:14162:nanoka:wind-resistance-ignore",
+    ) as ContributionRule
+    expect(resPenRule.operation).toMatchObject({
+      kind: "factor-contribution",
+      channel: "attacker-resistance-ignore",
+    })
+    expect(resPenRule.scope).toBe("hit")
+    expect(resPenRule.when).toEqual({
+      kind: "one-of",
+      fact: "hit.element",
+      values: ["wind"],
+    })
+    expect(resPenRule.parameters.amount).toMatchObject({
+      values: { 1: 0.15, 2: 0.173, 3: 0.195, 4: 0.218, 5: 0.24 },
+    })
+
+    const team = result.catalog.options.find(
+      (o) => o.optionId === "nanoka:w-engines:14162:squad-damage-bonus",
+    )!
+    expect(team.target).toBe("team")
+    expect(team.variants[0]).toMatchObject({
+      configuration: { refinements: [1, 2, 3, 4, 5] },
+      squadUniqueEffect: true,
+    })
+    const teamRule = result.definitions.effects.find(
+      (r) => r.effectId === "w-engine:14162:nanoka:squad-damage-bonus",
+    ) as ContributionRule
+    expect(teamRule.operation).toMatchObject({
+      kind: "factor-contribution",
+      channel: "damage-bonus",
+    })
+    expect(teamRule.beneficiary).toEqual({ kind: "team-except-holder" })
+    expect(teamRule.when).toEqual({ kind: "constant", value: true })
+    expect(teamRule.parameters.amount).toMatchObject({
+      values: { 1: 0.2, 2: 0.23, 3: 0.26, 4: 0.29, 5: 0.32 },
+    })
+  })
+
+  it("does not depend on the supplement registration order", () => {
+    const data = batch07Data()
+    const forward = convertSource(data, functions, [], batch07Supplements)
+    const reversed = convertSource(
+      data,
+      functions,
+      [],
+      [...batch07Supplements].reverse(),
+    )
+    const byId = (effects: readonly { effectId: string }[]) =>
+      effects.map((e) => e.effectId).sort()
+    expect(byId(reversed.definitions.effects)).toEqual(
+      byId(forward.definitions.effects),
+    )
+    const optionIds = (options: readonly { optionId: string }[]) =>
+      options.map((o) => o.optionId).sort()
+    expect(optionIds(reversed.catalog.options)).toEqual(
+      optionIds(forward.catalog.options),
+    )
+    expect(
+      reversed.catalog.entities.map((e) => e.catalogEntityId).toSorted(),
+    ).toEqual(forward.catalog.entities.map((e) => e.catalogEntityId).toSorted())
+  })
+
+  it("rejects catalog-id and identity collisions for supplement entities", () => {
+    const entity = (supplement: Extract<Supplement, { kind: "entity" }>) =>
+      supplement
+    // catalog ID 撞固定来源实体：拒绝。
+    const idCollision = batch07Supplements.map((supplement) =>
+      supplement.kind === "entity" &&
+      supplement.supplementId === "nanoka:w-engines:14162:crit-rate"
+        ? entity({
+            ...supplement,
+            entity: {
+              ...supplement.entity,
+              catalogEntityId: "agents:caesar",
+            },
+          })
+        : supplement,
+    )
+    expect(() =>
+      convertSource(batch07Data(), functions, [], idCollision),
+    ).toThrowError(/collides with a fixed-source catalog entity/)
+    // 真实身份撞固定来源实体（上游未来出现同实体的守卫路径）：拒绝。
+    const identityCollision = batch07Supplements.map((supplement) =>
+      supplement.kind === "entity" &&
+      supplement.supplementId === "nanoka:w-engines:14162:crit-rate"
+        ? entity({
+            ...supplement,
+            entity: {
+              ...supplement.entity,
+              identity: { kind: "agent", entityId: "1071" },
+            },
+          })
+        : supplement,
+    )
+    expect(() =>
+      convertSource(batch07Data(), functions, [], identityCollision),
+    ).toThrowError(/repeats the identity agent\/1071/)
+    // 两个补充实体互撞（同 catalog ID 或同身份）：拒绝。
+    const duplicated = [
+      ...batch07Supplements.filter(
+        (s) => s.supplementId !== "nanoka:w-engines:14162:crit-rate",
+      ),
+      ...batch07Supplements
+        .filter(
+          (s) =>
+            s.supplementId ===
+            "nanoka:agents:1621:initial-energy-regen-conversion",
+        )
+        .map((supplement) =>
+          supplement.kind === "entity"
+            ? entity({
+                ...supplement,
+                supplementId: "nanoka:agents:1621:duplicate",
+                entity: {
+                  ...supplement.entity,
+                  catalogEntityId: "nanoka:agents:1621",
+                },
+              })
+            : supplement,
+        ),
+    ]
+    expect(() =>
+      convertSource(batch07Data(), functions, [], duplicated),
+    ).toThrowError(/Duplicate supplement entity/)
+  })
+
+  it("rejects option ids that repeat and unknown target entities", () => {
+    // 选项 ID 重复（补充实体已创建的 optionId 以 option 类补充再登记一次）：
+    // 拒绝，不静默并存。
+    const critEntity = batch07Supplements.find(
+      (s) => s.supplementId === "nanoka:w-engines:14162:crit-rate",
+    ) as Extract<Supplement, { kind: "entity" }>
+    const duplicateOptionId = [
+      ...batch07Supplements.filter(
+        (s) =>
+          s.supplementId !== "nanoka:w-engines:14162:wind-resistance-ignore",
+      ),
+      {
+        ...critEntity,
+        kind: "option" as const,
+        supplementId: "nanoka:w-engines:14162:crit-rate-again",
+        catalogEntityId: "nanoka:w-engines:14162",
+        optionId: "nanoka:w-engines:14162:crit-rate",
+      },
+    ]
+    expect(() =>
+      convertSource(batch07Data(), functions, [], duplicateOptionId),
+    ).toThrowError(/repeats the option id nanoka:w-engines:14162:crit-rate/)
+    // 指向不存在的实体：拒绝（含未登记的补充实体）。
+    const unknownTarget = batch07Supplements.map((supplement) =>
+      supplement.kind === "option" &&
+      supplement.supplementId ===
+        "nanoka:w-engines:14162:wind-resistance-ignore"
+        ? { ...supplement, catalogEntityId: "nanoka:w-engines:99999" }
+        : supplement,
+    )
+    expect(() =>
+      convertSource(batch07Data(), functions, [], unknownTarget),
+    ).toThrowError(/Unknown supplement catalog entity/)
+  })
+
+  it("rejects complete-state rules with mismatched layer maxima", () => {
+    const mismatched = batch07Supplements.map(
+      (supplement): Supplement =>
+        supplement.kind === "entity" &&
+        supplement.supplementId ===
+          "nanoka:agents:1621:initial-energy-regen-conversion"
+          ? {
+              ...supplement,
+              ...(supplement.additionalRules === undefined
+                ? {}
+                : {
+                    additionalRules: supplement.additionalRules.map((rule) => ({
+                      ...rule,
+                      maximumLayers: 2,
+                    })),
+                  }),
+            }
+          : supplement,
+    )
+    expect(() =>
+      convertSource(batch07Data(), functions, [], mismatched),
+    ).toThrowError(/mixes layer maxima/)
   })
 })

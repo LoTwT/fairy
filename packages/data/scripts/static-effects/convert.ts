@@ -37,7 +37,11 @@ import {
   type SourceSemantics,
 } from "./semantics.ts"
 import { buildRemielleSpecialVoidflareMechanism } from "./mechanisms.ts"
-import { SUPPLEMENTS, type Supplement } from "./supplements.ts"
+import {
+  SUPPLEMENTS,
+  type Supplement,
+  type SupplementRuleSpec,
+} from "./supplements.ts"
 import {
   BUFF_RESOURCE,
   SOURCE_COMMIT,
@@ -3079,6 +3083,45 @@ export function convertSource(
   const supplementEntities: StaticCatalogEntity[] = []
   const supplementSkillTargets: StaticEffectCatalog["skillTargets"][number][] =
     []
+  // 补充实体索引与防重复守卫：先按全部实体类补充建立 catalog ID 索引，
+  // 不依赖登记数组顺序（后续 option 类补充可指向补充实体）；catalog ID
+  // 撞车、与固定来源实体或其他补充实体的身份撞车都拒绝生成——上游未来
+  // 出现同实体时要求重新 review，不能与补充实体静默并存。
+  const supplementEntitiesById = new Map<string, StaticCatalogEntity>()
+  for (const supplement of supplements) {
+    if (supplement.kind !== "entity") continue
+    const entity = supplement.entity
+    if (
+      collected.entities.some(
+        (candidate) => candidate.catalogEntityId === entity.catalogEntityId,
+      )
+    )
+      throw new Error(
+        `Supplement entity ${entity.catalogEntityId} collides with a fixed-source catalog entity; re-review the clause instead of coexisting`,
+      )
+    if (supplementEntitiesById.has(entity.catalogEntityId))
+      throw new Error(`Duplicate supplement entity: ${entity.catalogEntityId}`)
+    const identity = entity.identity
+    if (
+      identity !== null &&
+      (collected.entities.some(
+        (candidate) =>
+          candidate.identity !== null &&
+          candidate.identity.kind === identity.kind &&
+          candidate.identity.entityId === identity.entityId,
+      ) ||
+        [...supplementEntitiesById.values()].some(
+          (candidate) =>
+            candidate.identity !== null &&
+            candidate.identity.kind === identity.kind &&
+            candidate.identity.entityId === identity.entityId,
+        ))
+    )
+      throw new Error(
+        `Supplement entity ${entity.catalogEntityId} repeats the identity ${identity.kind}/${identity.entityId} of another entity; re-review the clause instead of coexisting`,
+      )
+    supplementEntitiesById.set(entity.catalogEntityId, entity)
+  }
   for (const supplement of supplements) {
     if (supplement.kind === "boundary") {
       supplementalRecords.push({
@@ -3152,30 +3195,43 @@ export function convertSource(
       })
       continue
     }
-    const rule: EffectRule = {
-      kind: "contribution",
-      effectId: supplement.rule.effectId,
-      source: {
-        identity: supplement.rule.identity,
-        section: supplement.rule.section,
-        references: supplement.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ) as unknown as NonEmpty<SourceReference>,
-      },
-      config: supplement.rule.config,
-      parameters: supplement.rule.parameters,
-      activation: {
-        kind: "supplied",
-        maximumLayers: literal("count", supplement.rule.maximumLayers),
-        ...(supplement.exclusiveGroup
-          ? { exclusiveGroup: supplement.exclusiveGroup }
-          : {}),
-      },
-      scope: supplement.rule.scope,
-      beneficiary: supplement.rule.beneficiary ?? { kind: "holder" },
-      when: supplement.rule.when,
-      operation: supplement.rule.operation,
-    } as ContributionRule
+    const buildSupplementRule = (spec: SupplementRuleSpec): EffectRule =>
+      ({
+        kind: "contribution",
+        effectId: spec.effectId,
+        source: {
+          identity: spec.identity,
+          section: spec.section,
+          references: supplement.evidence.map((ref) =>
+            nanokaReference(ref.path, ref.pointer),
+          ) as unknown as NonEmpty<SourceReference>,
+        },
+        config: spec.config,
+        parameters: spec.parameters,
+        activation: {
+          kind: "supplied",
+          maximumLayers: literal("count", spec.maximumLayers),
+          ...(supplement.exclusiveGroup
+            ? { exclusiveGroup: supplement.exclusiveGroup }
+            : {}),
+        },
+        scope: spec.scope,
+        beneficiary: spec.beneficiary ?? { kind: "holder" },
+        when: spec.when,
+        operation: spec.operation,
+      }) as ContributionRule
+    // 同一选项的多条完整状态规则：全部规则共用同一变体、输入与层数上限；
+    // 层数上限不一致即拒绝（0 层同时关闭、1 层同时生效，不提供半状态）。
+    const ruleSpecs = [supplement.rule, ...(supplement.additionalRules ?? [])]
+    if (
+      ruleSpecs.some(
+        (spec) => spec.maximumLayers !== supplement.rule.maximumLayers,
+      )
+    )
+      throw new Error(
+        `Supplement ${supplement.supplementId} mixes layer maxima across its complete-state rules`,
+      )
+    const supplementRules = ruleSpecs.map(buildSupplementRule)
     const variant: StaticCatalogVariant = {
       ...(supplement.variant.target === undefined
         ? {}
@@ -3185,7 +3241,7 @@ export function convertSource(
       references: supplement.evidence.map((ref) =>
         nanokaReference(ref.path, ref.pointer),
       ) as unknown as NonEmpty<SourceReference>,
-      effectIds: [supplement.rule.effectId],
+      effectIds: supplementRules.map((rule) => rule.effectId),
       maximumLayers: supplement.rule.maximumLayers,
       inputs: supplement.variant.inputs,
       applicability: supplement.variant.applicability,
@@ -3195,14 +3251,23 @@ export function convertSource(
       ...(supplement.variant.declaredTeammateBeneficiary === undefined
         ? {}
         : { declaredTeammateBeneficiary: true as const }),
+      // 全队唯一效果声明随补充透传；目录选择阶段按（持有者队伍， optionId）
+      // 跨绑定强制单一启用来源。
+      ...(supplement.variant.squadUniqueEffect === undefined
+        ? {}
+        : { squadUniqueEffect: true as const }),
     }
-    effects.push(rule)
-    supplementalRules += 1
+    for (const rule of supplementRules) effects.push(rule)
+    supplementalRules += supplementRules.length
     if (supplement.kind === "option-variant") {
       const option = options.find((o) => o.optionId === supplement.optionId)!
       ;(option.variants as unknown as StaticCatalogVariant[]).push(variant)
     }
     if (supplement.kind === "entity") {
+      if (options.some((o) => o.optionId === supplement.optionId))
+        throw new Error(
+          `Supplement ${supplement.supplementId} repeats the option id ${supplement.optionId}`,
+        )
       supplementEntities.push(supplement.entity)
       options.push({
         optionId: supplement.optionId,
@@ -3215,12 +3280,20 @@ export function convertSource(
       supplementalOptions += 1
     }
     if (supplement.kind === "option") {
-      const entity = collected.entities.find(
-        (candidate) => candidate.catalogEntityId === supplement.catalogEntityId,
-      )
+      // 补充选项可指向固定来源实体或补充实体（后者先建立索引，不依赖登记
+      // 顺序）；两类实体都必须真实存在。
+      const entity =
+        collected.entities.find(
+          (candidate) =>
+            candidate.catalogEntityId === supplement.catalogEntityId,
+        ) ?? supplementEntitiesById.get(supplement.catalogEntityId)
       if (!entity)
         throw new Error(
           `Unknown supplement catalog entity: ${supplement.catalogEntityId}`,
+        )
+      if (options.some((o) => o.optionId === supplement.optionId))
+        throw new Error(
+          `Supplement ${supplement.supplementId} repeats the option id ${supplement.optionId}`,
         )
       // 重复补充防护：固定来源若出现登记的同 stat 机器记录，说明该条款已有
       // 真实编码，补充并存会重复贡献；拒绝生成并要求重新核对，不静默叠加。
@@ -3346,7 +3419,7 @@ export function convertSource(
       source: supplement.source,
       kind: supplement.kind,
       optionId: supplement.optionId,
-      effectIds: [supplement.rule.effectId],
+      effectIds: supplementRules.map((rule) => rule.effectId),
       supportedRanks: supplement.supportedRanks,
       computationTarget: supplement.computationTarget,
       status: "integrated",
@@ -3368,7 +3441,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "21",
+    revision: "22",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -3868,7 +3941,12 @@ export function convertSource(
           ).length,
         },
       },
-      reverseGaps: ["w-engines/12014", "w-engines/13111"],
+      reverseGaps: [
+        "agents/1621",
+        "w-engines/12014",
+        "w-engines/13111",
+        "w-engines/14162",
+      ],
       deferredMechanisms: [
         {
           catalogEntityId: "agents:remiel",

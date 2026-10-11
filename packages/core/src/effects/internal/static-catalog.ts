@@ -751,6 +751,7 @@ export function validateStaticCatalog(
           "damageItemRequirements",
           "layerCountInputName",
           "declaredTeammateBeneficiary",
+          "squadUniqueEffect",
         ],
         checks(vp),
         "variant",
@@ -823,6 +824,17 @@ export function validateStaticCatalog(
             "A declared teammate beneficiary requires the team option target",
           )
       }
+      // 全队唯一效果声明：字段只接受字面量 true；跨绑定的整队唯一在选择
+      // 阶段强制（见选择循环），这里只拒绝非法声明形状。
+      if (
+        variant["squadUniqueEffect"] !== undefined &&
+        variant["squadUniqueEffect"] !== true
+      )
+        collector.report(
+          "INVALID_INPUT",
+          `${vp}/squadUniqueEffect`,
+          "Expected the literal true",
+        )
       const config = expectObject(
         variant["configuration"],
         checks(`${vp}/configuration`),
@@ -1656,7 +1668,8 @@ export function calculateStaticDamageFromCatalog(
   const mappings: { variant: StaticCatalogVariant; bindingId: string }[] = []
   const seenSelections = new Set<string>(),
     exclusive = new Set<string>(),
-    equipment = new Set<string>()
+    equipment = new Set<string>(),
+    squadUniqueSources = new Map<string, string>()
   for (const binding of input.bindings) {
     const key = JSON.stringify([
       binding.holderId,
@@ -2058,6 +2071,21 @@ export function calculateStaticDamageFromCatalog(
     )
       continue
     const holderActor = world.actors.get(binding.holderId)!
+    // 全队唯一效果：同队最多一个启用来源（跨绑定），调用方以单一启用选择
+    // 声明有效来源；第二个启用选择明确拒绝，不猜最高值或时间覆盖。职业
+    // 不适配等既有零贡献绑定已在上方跳过，不占用队伍名额；0 层关闭同样
+    // 不占用。键为（持有者队伍， optionId）：同队两名持有者（不同绑定）
+    // 冲突，异队各持有互不冲突。
+    if (variant.squadUniqueEffect === true) {
+      const teamKey = JSON.stringify([holderActor.teamId, option.optionId])
+      if (squadUniqueSources.has(teamKey))
+        collector.report(
+          "CONTEXT_MISMATCH",
+          p,
+          `The squad-unique effect of ${option.optionId} allows only one active source per team; declare a single effective source by enabling it on one binding only; ${explain}`,
+        )
+      else squadUniqueSources.set(teamKey, binding.bindingId)
+    }
     const gate = variant.applicability.teamProfession
     const count = gate
       ? [...actors].filter(
