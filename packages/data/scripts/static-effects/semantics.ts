@@ -63,7 +63,20 @@ export interface CoreSkillLevelSemantics {
   readonly verification: string
 }
 
+export const YUZUHA_COMPLETE_STATE_OPTION_ID =
+  "agents:yuzuha:mindscape:0:tanuki-wish-complete-state"
+export const YUZUHA_COMPLETE_STATE_DIFFERENCE_ID =
+  "yuzuha-additional-ability-complete-state"
+
 export type SourceSemantics =
+  | {
+      /** 八条正/负部分记录全部迁移；新身份承载阈值钳零后的两条完整贡献。 */
+      readonly kind: "complete-state-tanuki-wish"
+      readonly expectedEncoding: Readonly<Record<string, unknown>>
+      readonly expectedBlockNoteIncludes: readonly string[]
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
   | CoreSkillLevelSemantics
   | {
       /**
@@ -1635,7 +1648,95 @@ const lighterElationConversionReplacedVerification =
 const lighterElationM2DuplicatesReplacedVerification =
   "固定来源把影画 2 的「[昂扬]效果提升至原本的 120%」另记为两条记录（/agents/50/mindscapeBuffs/2/effectBlocks/0/effects/1 为每层 +0.25% 的 stacked、/effects/2 为单次冲击力转化 convert、ratioPercent 10、maxStacks 1），块 note 与 Nanoka 天赋 2（agents/1161/details.zh.json 的 /talent/2/desc）同文说明这是对同一[昂扬]状态整体的乘数，不是第二个昂扬，也不构成第二条完整贡献（单次转化没有层数，不能按层重复累加）。两条记录因此都并入完整状态（只保留迁移说明，不再生成可执行贡献），120% 由配置阶段 output scale 1.2 修改直接作用于同一条完整贡献；M0—M6 共用同一选项，影画 2 起随配置自动强化一次。影画 2 的独立失衡易伤 +25%（/effects/0）保持独立选项与数值不变。"
 
+const yuzuhaAdditionalAbilityEvidence: readonly SemanticsEvidenceReference[] = [
+  ...[1411049, 1411050, 1411051, 1411052, 1411053, 1411054, 1411055].map(
+    (row) => ({
+      path: "agents/1411/details.zh.json",
+      pointer: `/passive/level/${row}/desc/1`,
+      sha256:
+        "3c58a01094de2dc0c6298d8989a8b00f02f30afe36320524a01742ff7f99d560",
+    }),
+  ),
+  ...["/passive/level/1411049/desc/0", "/talent/1/desc"].map((pointer) => ({
+    path: "agents/1411/details.zh.json",
+    pointer,
+    sha256: "3c58a01094de2dc0c6298d8989a8b00f02f30afe36320524a01742ff7f99d560",
+  })),
+]
+
+function yuzuhaPartialState(
+  rank: 0 | 1,
+  stat: "anomalyDmgBonus" | "disorderDmgBonus",
+  conversion: boolean,
+  appliesToAnomaly: true | null = true,
+): SourceSemantics {
+  return {
+    kind: "complete-state-tanuki-wish",
+    expectedEncoding: {
+      stat,
+      scope: "general",
+      applyTarget: "team",
+      applySituation: "global",
+      applyProfession: null,
+      teamProfession: null,
+      teamProfessionValues: null,
+      teamProfessionMinCount: null,
+      skillCategory: null,
+      skillSubcategoryId: null,
+      skillTargets: null,
+      elementFilter: "all",
+      origin: "",
+      kind: conversion ? "convert" : "fixed",
+      value: conversion ? 0 : rank === 0 ? -20 : -6,
+      stackable: false,
+      maxStacks: 1,
+      valuePerStack: 0,
+      defaultStacks: 1,
+      appliesToAnomaly,
+      enabledDefault: true,
+      note: "",
+      convertPresent: conversion,
+      convertFrom: conversion ? "anomalyControl" : null,
+      convertPanelSource: conversion ? "manual" : null,
+      convertRatioPercent: conversion ? (rank === 0 ? 20 : 6) : null,
+      convertCap: conversion ? (rank === 0 ? 40 : 12) : null,
+      convertInitialBase: conversion ? 0 : null,
+      convertDefaultBase: conversion ? 201 : null,
+    },
+    expectedBlockNoteIncludes:
+      rank === 0
+        ? [
+            "队伍中存在[异常]角色或与自身阵营相同的角色时触发",
+            "若柚叶的异常掌控大于100点，每超过1点异常掌控",
+            "拥有[狸之愿]效果的角色",
+            "所有属性异常伤害和[紊乱]伤害提升0.2%，最多提升20%",
+            "当柚叶的异常掌控达到200点时，上述增益效果达到最大值",
+          ]
+        : ["[额外能力]中属性异常伤害和[紊乱]伤害增益效果提升至原本的130%"],
+    evidence: yuzuhaAdditionalAbilityEvidence,
+    verification:
+      "固定来源四条基础记录与四条 M1 记录被拆成独立正转化和负数抵消选项；配对高掌控时已有 20%/26% 上限正确，但 AM88 产生 -2.4%/-3.12%，且单选半状态不完整。块 note 与 Nanoka 3.2 全七档额外能力、M1 天赋同文：base=min(0.20,max(0,AM-100)*0.002)，M1—M6 对同一状态输出乘 1.3 一次。八条旧贡献全部退出，新完整状态统一启用异常与紊乱分支。AM 保留 manual 显式必填读数，无默认值；读取阶段 Q02 待证，不自动读取 current/final/external。编队资格、狸之愿有效状态和40秒持续/刷新由调用方声明；不扩展异常积蓄或瞬时能量输出，非整点游戏精度未实测。",
+  }
+}
+
 export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
+  "agents/yuzuha/mindscape/0/blk-ms38y9v7-07td4j/eff-ms38y9v7-2ded3l":
+    yuzuhaPartialState(0, "anomalyDmgBonus", true),
+  "agents/yuzuha/mindscape/0/blk-ms38y9v7-07td4j/eff-ms3969fx-lmmkyw":
+    yuzuhaPartialState(0, "disorderDmgBonus", true, null),
+  "agents/yuzuha/mindscape/0/blk-ms38y9v7-07td4j/eff-ms396xt1-3qbf2a":
+    yuzuhaPartialState(0, "anomalyDmgBonus", false),
+  "agents/yuzuha/mindscape/0/blk-ms38y9v7-07td4j/eff-ms39auzc-mtr7ac":
+    yuzuhaPartialState(0, "disorderDmgBonus", false),
+  "agents/yuzuha/mindscape/1/blk-legacy/eff-ms44bnmi-zp616x":
+    yuzuhaPartialState(1, "anomalyDmgBonus", true),
+  "agents/yuzuha/mindscape/1/blk-legacy/eff-ms44dh8h-xb20mu":
+    yuzuhaPartialState(1, "disorderDmgBonus", true),
+  "agents/yuzuha/mindscape/1/blk-legacy/eff-ms44eue1-n53aou":
+    yuzuhaPartialState(1, "anomalyDmgBonus", false),
+  "agents/yuzuha/mindscape/1/blk-legacy/eff-ms44fa80-f595zx":
+    yuzuhaPartialState(1, "disorderDmgBonus", false),
+
   "agents/caesar/mindscape/0/blk-legacy/legacy-team-atk": {
     kind: "core-skill-level",
     baseEvidenceKey: "caesar:blk-legacy:mindscape:0:legacy-team-atk",

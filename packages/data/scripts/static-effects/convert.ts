@@ -28,6 +28,8 @@ import evidence from "./rank-evidence.json" with { type: "json" }
 import {
   COMPLETE_STATE_OPTIONS,
   SOURCE_SEMANTICS,
+  YUZUHA_COMPLETE_STATE_OPTION_ID,
+  YUZUHA_COMPLETE_STATE_DIFFERENCE_ID,
   type CompleteStateOptionRegistration,
   type CompleteStateSourceRecord,
   type CoreSkillLevelSemantics,
@@ -436,6 +438,7 @@ export interface SourceRecord {
   blockId: string
   blockName: string
   blockNote: string
+  normalizedBlockNote: string | undefined
   raw: SourceEffect
   normalized: SourceEffect | undefined
 }
@@ -686,6 +689,11 @@ export function collectSource(
             rankKind: entry.rankKind,
             ...record,
             raw: record.effect,
+            normalizedBlockNote: entry.normalized.effectBlocks?.find(
+              (block) =>
+                block.id === record.blockId &&
+                block.effects.some((effect) => effect.id === record.effect.id),
+            )?.note,
             normalized: actual.find((e) => e.id === record.effect.id),
           })
         }
@@ -824,25 +832,31 @@ const semanticsKeyFor = (record: SourceRecord): string =>
   `${record.category}/${record.entityId}/${record.rankKind}/${record.rank}/${record.blockId}/${record.raw.id}`
 
 /**
- * [昂扬]完整状态登记记录的防漂移前置校验：原始与规范化记录都必须仍在、
+ * 具名完整状态登记的防漂移前置校验：原始与规范化记录都必须仍在、
  * 登记的编码字段逐字段一致、块 note 关键条款齐全。必须在 compile 的通用
  * unsupported 降级（规范化移除、公式超范围）之前执行：否则被登记记录会
  * 静默降级成通用 unsupported，失去约定的具名迁移说明。
  */
-function verifyCompleteStateElationRecord(
+function verifyRegisteredCompleteStateRecord(
   record: SourceRecord,
-  semantics: Extract<SourceSemantics, { kind: "complete-state-elation" }>,
+  semantics: Extract<
+    SourceSemantics,
+    { kind: "complete-state-elation" | "complete-state-tanuki-wish" }
+  >,
 ): void {
+  const mechanism =
+    semantics.kind === "complete-state-elation" ? "elation" : "tanuki-wish"
   for (const [label, document] of [
     ["raw", record.raw],
     ["normalized", record.normalized],
   ] as const) {
     if (document === undefined)
       throw new Error(
-        `Complete-state elation correction lost the ${label} record at ${record.pointer}`,
+        `Complete-state ${mechanism} correction lost the ${label} record at ${record.pointer}`,
       )
     const flattened: Record<string, unknown> = {
       ...document,
+      convertPresent: document.convert !== undefined,
       convertFrom: document.convert?.from,
       convertPanelSource: document.convert?.panelSource,
       convertRatioPercent: document.convert?.ratioPercent,
@@ -855,17 +869,22 @@ function verifyCompleteStateElationRecord(
       const actual = flattened[field]
       if (JSON.stringify(actual ?? null) !== JSON.stringify(value))
         throw new Error(
-          `Complete-state elation correction ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(actual ?? null)}`,
+          `Complete-state ${mechanism} correction ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(actual ?? null)}`,
         )
     }
   }
   // 块 note 是本状态“同文纠错”的依据：登记的关键条款任一缺失即拒绝，
   // 不用 effect.note（空串）代替机制原文核对。
-  for (const clause of semantics.expectedBlockNoteIncludes)
-    if (!record.blockNote.includes(clause))
-      throw new Error(
-        `Complete-state elation block note drift at ${record.pointer}: missing ${JSON.stringify(clause)}`,
-      )
+  const notes =
+    semantics.kind === "complete-state-tanuki-wish"
+      ? [record.blockNote, record.normalizedBlockNote]
+      : [record.blockNote]
+  for (const note of notes)
+    for (const clause of semantics.expectedBlockNoteIncludes)
+      if (!note?.includes(clause))
+        throw new Error(
+          `Complete-state ${mechanism} block note drift at ${record.pointer}: missing ${JSON.stringify(clause)}`,
+        )
 }
 
 function compile(
@@ -876,6 +895,9 @@ function compile(
 ): { rule?: ContributionRule; variant: StaticCatalogVariant } {
   const e = record.normalized ?? record.raw
   const semantics = SOURCE_SEMANTICS[semanticsKeyFor(record)]
+  // 本组必须在字段映射和通用 unsupported 之前核验；降级不能掩盖源漂移。
+  if (semantics?.kind === "complete-state-tanuki-wish")
+    verifyRegisteredCompleteStateRecord(record, semantics)
   // 开发者定点修订：仅登记过的记录按修订后的字段查映射；来源原始编码或
   // 数值与登记不符即拒绝生成，不静默套用，也不波及其他 special 记录。
   if (semantics?.kind === "developer-revised-stat") {
@@ -1033,7 +1055,25 @@ function compile(
   // 具名登记的完整状态记录先做防漂移校验，早于任何通用 unsupported 降级：
   // 规范化删除或编码变义必须终止生成，不能被当作“已迁移”入口。
   if (semantics?.kind === "complete-state-elation")
-    verifyCompleteStateElationRecord(record, semantics)
+    verifyRegisteredCompleteStateRecord(record, semantics)
+  if (semantics?.kind === "complete-state-tanuki-wish")
+    return {
+      variant: {
+        ...variant,
+        effectIds: [],
+        status: "unsupported",
+        reason: "semantic-conflict",
+        explanation: `该正转化或负数抵消记录已迁移至 ${YUZUHA_COMPLETE_STATE_OPTION_ID}（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 ${record.pointer}。`,
+        inputs: [],
+        differences: [YUZUHA_COMPLETE_STATE_DIFFERENCE_ID],
+        references: [
+          ...variant.references,
+          ...semantics.evidence.map((ref) =>
+            nanokaReference(ref.path, ref.pointer),
+          ),
+        ],
+      },
+    }
   if (!record.normalized)
     return unsupported("semantic-conflict", "上游加载规范化移除了该原始记录")
   if (mapping.reason) return unsupported("formula-out-of-scope", mapping.reason)
@@ -1834,7 +1874,7 @@ function compile(
   }
   if (semantics?.kind === "complete-state-elation") {
     // 原始/规范化存在性、登记编码与块 note 关键条款已在 compile 入口由
-    // verifyCompleteStateElationRecord 校验（早于任何通用 unsupported 降级）；
+    // verifyRegisteredCompleteStateRecord 校验（早于任何通用 unsupported 降级）；
     // 这里只补需要映射信息的每层基础增益核对。
     // 每层基础增益必须与来源记录一致（M0 1.25%、影画 2 复制记录 0.25%）。
     const registeredPerLayerGain =
@@ -2285,6 +2325,195 @@ function applyCompleteStateOptions(
     }
   }
   return added
+}
+
+/** 柚叶的八条完整身份必须同时在场；旧规则不复用，阻止低层半状态残留。 */
+function buildYuzuhaCompleteStateOption(
+  collected: ReturnType<typeof collectSource>,
+  effects: EffectRule[],
+  options: readonly StaticCatalogOption[],
+): StaticCatalogOption[] {
+  const entity = collected.entities.find(
+    (candidate) => candidate.catalogEntityId === "agents:yuzuha",
+  )
+  if (!entity) return [] // 不含该实体的合成输入不要求本组。
+  if (entity.identity?.kind !== "agent" || entity.identity.entityId !== "1411")
+    throw new Error(
+      "Complete-state tanuki-wish lost its reviewed agent identity",
+    )
+  const registrations = Object.entries(SOURCE_SEMANTICS).filter(
+    ([, entry]) => entry.kind === "complete-state-tanuki-wish",
+  )
+  const entries = registrations.map(([key, semantics]) => {
+    const matches = collected.records.filter(
+      (record) => semanticsKeyFor(record) === key,
+    )
+    if (matches.length !== 1)
+      throw new Error(
+        `Complete-state tanuki-wish expects exactly one source record: ${key}; found ${matches.length}`,
+      )
+    const record = matches[0]!
+    const optionId = `${record.category}:${idPart(record.entityId)}:${record.rankKind}:${record.rank}:${idPart(record.blockId)}:${idPart(record.raw.id)}`
+    const variant = options.find((option) => option.optionId === optionId)
+      ?.variants[0]
+    if (
+      variant?.status !== "unsupported" ||
+      variant.reason !== "semantic-conflict" ||
+      variant.effectIds.length !== 0
+    )
+      throw new Error(
+        `Complete-state tanuki-wish lost its migrated option: ${optionId}`,
+      )
+    return { record, semantics, variant }
+  })
+  const [firstReference, ...remainingReferences] = [
+    ...new Map(
+      entries
+        .flatMap((entry) => entry.variant.references)
+        .map((ref) => [JSON.stringify(ref), ref]),
+    ).values(),
+  ]
+  if (!firstReference)
+    throw new Error("Complete-state tanuki-wish lost its source references")
+  const references: NonEmpty<SourceReference> = [
+    firstReference,
+    ...remainingReferences,
+  ]
+  const coreLevels = [1, 2, 3, 4, 5, 6, 7] as const
+  for (const { record, variant } of entries)
+    if (
+      record.rank === 0 &&
+      JSON.stringify(variant.configuration.coreSkillLevels) !==
+        JSON.stringify(coreLevels)
+    )
+      throw new Error(
+        `Complete-state tanuki-wish lost its core rank evidence: ${semanticsKeyFor(record)}`,
+      )
+  const inputName = "yuzuha:tanuki-wish:anomaly-mastery"
+  const value: NumericExpression<"ratio", "contribution"> = {
+    kind: "minimum",
+    unit: "ratio",
+    operands: [
+      literal("ratio", 0.2),
+      {
+        kind: "convert",
+        unit: "ratio",
+        rate: literal("multiplier", 0.002),
+        input: {
+          kind: "maximum",
+          unit: "anomaly-mastery-points",
+          operands: [
+            literal("anomaly-mastery-points", 0),
+            {
+              kind: "add",
+              unit: "anomaly-mastery-points",
+              operands: [
+                {
+                  kind: "input",
+                  unit: "anomaly-mastery-points",
+                  name: inputName,
+                },
+                literal("anomaly-mastery-points", -100),
+              ],
+            },
+          ],
+        },
+      },
+    ],
+  }
+  const branchEffectIds = {
+    anomalyDmgBonus:
+      "agent:1411:zzz-hp:tanuki-wish-complete-state:anomalyDmgBonus",
+    disorderDmgBonus:
+      "agent:1411:zzz-hp:tanuki-wish-complete-state:disorderDmgBonus",
+  } as const satisfies Record<string, EffectId>
+  for (const stat of ["anomalyDmgBonus", "disorderDmgBonus"] as const) {
+    const effectId = branchEffectIds[stat]
+    const source = {
+      identity: entity.identity,
+      section: "额外能力：人多乐趣大 · 完整状态",
+      references,
+    }
+    effects.push(
+      {
+        kind: "contribution",
+        effectId,
+        source,
+        config: always,
+        parameters: {},
+        activation: { kind: "supplied", maximumLayers: literal("count", 1) },
+        scope: "hit",
+        beneficiary: { kind: "team" },
+        when: oneOf("hit.damageKind", FIELD_MAPPINGS[stat]!.damageKinds!),
+        operation: {
+          kind: "factor-contribution",
+          channel: "anomaly-damage-bonus",
+          value,
+        },
+      },
+      {
+        kind: "modification",
+        phase: "configuration",
+        effectId: `${effectId}:mindscape-1-scale` as EffectId,
+        source: { ...source, section: "影画1 · 额外能力完整状态强化" },
+        config: {
+          kind: "compare-number",
+          unit: "count",
+          operator: "gte",
+          left: {
+            kind: "configuration-number",
+            unit: "count",
+            field: "mindscapeRank",
+          },
+          right: literal("count", 1),
+        },
+        parameters: {},
+        target: { kind: "effect", effectId },
+        modifications: [
+          {
+            field: "output",
+            unit: "ratio",
+            change: { operator: "scale", value: literal("multiplier", 1.3) },
+          },
+        ],
+      },
+    )
+  }
+  return [
+    {
+      optionId: YUZUHA_COMPLETE_STATE_OPTION_ID,
+      catalogEntityId: entity.catalogEntityId,
+      name: "狸之愿 · 额外能力完整状态",
+      target: "team",
+      conditionDescription:
+        "队伍中存在其他[异常]角色或与柚叶同阵营的角色，且受益角色拥有[狸之愿]时，按柚叶显式异常掌控 AM 使其属性异常与紊乱伤害提升 min(20%, max(0, AM−100)×0.2%)；影画1起对同一增益乘1.3。[狸之愿]由对应强化特殊技/终结技命中施加，持续40秒、重复触发刷新；编队资格与本次有效状态由调用方声明，不自动推断持续时间。读取阶段仍待证，保留手工读数；异常积蓄效率不在本输出范围。",
+      variants: [
+        {
+          configuration: {
+            minimumMindscape: 0,
+            coreSkillLevels: [...coreLevels],
+          },
+          status: "corrected",
+          references,
+          effectIds: [
+            branchEffectIds.anomalyDmgBonus,
+            branchEffectIds.disorderDmgBonus,
+          ],
+          maximumLayers: 1,
+          inputs: [
+            {
+              name: inputName,
+              unit: "anomaly-mastery-points",
+              description:
+                "柚叶异常掌控（显式手工读数，必填且无默认值；读取阶段待证）",
+            },
+          ],
+          applicability: {},
+          differences: [YUZUHA_COMPLETE_STATE_DIFFERENCE_ID],
+        },
+      ],
+    },
+  ]
 }
 
 /**
@@ -2741,6 +2970,7 @@ export function convertSource(
   // 完整状态选项在全部来源位置分组后合并：原记录仍保留各自选项作为
   // 迁移入口，两条规则由完整选项同时引用。[昂扬]完整状态在同一层字节
   // 只合成一次，避免按来源位置重复生成同一目录选项身份。
+  options.push(...buildYuzuhaCompleteStateOption(collected, effects, options))
   const elationCompleteStateOptions = buildElationCompleteStateOptions(
     collected,
     effects,
@@ -3074,7 +3304,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "19",
+    revision: "20",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -3503,6 +3733,18 @@ export function convertSource(
               variant.differences.includes(
                 "shining-aria-stagger-entry-triggered-state",
               ),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: YUZUHA_COMPLETE_STATE_DIFFERENCE_ID,
+        explanation:
+          "柚叶（1411）固定来源的八条部分记录合为一个显式完整状态：base=min(0.20,max(0,AM−100)×0.002)，影画1—6由配置阶段output scale 1.3强化一次；属性异常与紊乱分支共用必填manual异常掌控输入。旧配对AM≥200时20%/26%上限已正确，本修订纠正AM88的−2.4%/−3.12%和部分状态独立选择问题，不套用更新上游40%/52%的cap问题。旧八条选项保留semantic-conflict迁移入口，八条低层贡献全部退出，新身份供完整状态选用。核心1—7同文证据来自冻结Nanoka 3.2；通用异常分类沿用anomaly/anomaly-settlement/vortex/luminize，紊乱为disorder，不扩大直伤。M1独立10%抗性条款不参与1.3缩放。编队资格、狸之愿有效状态及40秒持续/刷新由调用方声明，非整点游戏精度未实测；Q02读取阶段待证，保留手工读数，不引入current/final/external。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes(YUZUHA_COMPLETE_STATE_DIFFERENCE_ID),
             )
             .flatMap((variant) => variant.references),
         ),

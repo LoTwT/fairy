@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "19",
+  "revision": "20",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -21941,7 +21941,7 @@
             "minimumMindscape": 0,
             "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
           },
-          "status": "converted",
+          "status": "unsupported",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -21998,22 +21998,78 @@
               "locale": "zh",
               "resourcePath": "agents/1411/details.zh.json",
               "pointer": "/passive/level/1411055/desc/1"
-            }
-          ],
-          "effectIds": [
-            "agent:1411:zzz-hp:eff-ms38y9v7-2ded3l:blk-ms38y9v7-07td4j:mindscape:0"
-          ],
-          "maximumLayers": 1,
-          "inputs": [
+            },
             {
-              "name": "agent:1411:zzz-hp:eff-ms38y9v7-2ded3l:blk-ms38y9v7-07td4j:mindscape:0:source",
-              "unit": "anomaly-mastery-points",
-              "description": "manual anomalyControl，由来源角色在指定结算阶段读取；不使用默认值",
-              "preset": 201
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411050/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411051/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411052/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411053/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411054/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411055/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/talent/1/desc"
             }
           ],
-          "differences": [],
-          "applicability": {}
+          "effectIds": [],
+          "maximumLayers": 1,
+          "inputs": [],
+          "differences": ["yuzuha-additional-ability-complete-state"],
+          "applicability": {},
+          "reason": "semantic-conflict",
+          "explanation": "该正转化或负数抵消记录已迁移至 agents:yuzuha:mindscape:0:tanuki-wish-complete-state（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 /agents/27/mindscapeBuffs/0/effectBlocks/1/effects/0。"
         }
       ]
     },
@@ -22029,7 +22085,7 @@
             "minimumMindscape": 0,
             "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
           },
-          "status": "converted",
+          "status": "unsupported",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -22086,22 +22142,78 @@
               "locale": "zh",
               "resourcePath": "agents/1411/details.zh.json",
               "pointer": "/passive/level/1411055/desc/1"
-            }
-          ],
-          "effectIds": [
-            "agent:1411:zzz-hp:eff-ms3969fx-lmmkyw:blk-ms38y9v7-07td4j:mindscape:0"
-          ],
-          "maximumLayers": 1,
-          "inputs": [
+            },
             {
-              "name": "agent:1411:zzz-hp:eff-ms3969fx-lmmkyw:blk-ms38y9v7-07td4j:mindscape:0:source",
-              "unit": "anomaly-mastery-points",
-              "description": "manual anomalyControl，由来源角色在指定结算阶段读取；不使用默认值",
-              "preset": 201
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411050/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411051/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411052/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411053/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411054/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411055/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/talent/1/desc"
             }
           ],
-          "differences": [],
-          "applicability": {}
+          "effectIds": [],
+          "maximumLayers": 1,
+          "inputs": [],
+          "differences": ["yuzuha-additional-ability-complete-state"],
+          "applicability": {},
+          "reason": "semantic-conflict",
+          "explanation": "该正转化或负数抵消记录已迁移至 agents:yuzuha:mindscape:0:tanuki-wish-complete-state（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 /agents/27/mindscapeBuffs/0/effectBlocks/1/effects/1。"
         }
       ]
     },
@@ -22117,7 +22229,7 @@
             "minimumMindscape": 0,
             "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
           },
-          "status": "converted",
+          "status": "unsupported",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -22174,15 +22286,78 @@
               "locale": "zh",
               "resourcePath": "agents/1411/details.zh.json",
               "pointer": "/passive/level/1411055/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411050/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411051/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411052/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411053/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411054/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411055/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/talent/1/desc"
             }
           ],
-          "effectIds": [
-            "agent:1411:zzz-hp:eff-ms396xt1-3qbf2a:blk-ms38y9v7-07td4j:mindscape:0"
-          ],
+          "effectIds": [],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
-          "applicability": {}
+          "differences": ["yuzuha-additional-ability-complete-state"],
+          "applicability": {},
+          "reason": "semantic-conflict",
+          "explanation": "该正转化或负数抵消记录已迁移至 agents:yuzuha:mindscape:0:tanuki-wish-complete-state（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 /agents/27/mindscapeBuffs/0/effectBlocks/1/effects/2。"
         }
       ]
     },
@@ -22198,7 +22373,7 @@
             "minimumMindscape": 0,
             "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
           },
-          "status": "converted",
+          "status": "unsupported",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -22255,15 +22430,78 @@
               "locale": "zh",
               "resourcePath": "agents/1411/details.zh.json",
               "pointer": "/passive/level/1411055/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411050/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411051/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411052/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411053/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411054/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411055/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/talent/1/desc"
             }
           ],
-          "effectIds": [
-            "agent:1411:zzz-hp:eff-ms39auzc-mtr7ac:blk-ms38y9v7-07td4j:mindscape:0"
-          ],
+          "effectIds": [],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
-          "applicability": {}
+          "differences": ["yuzuha-additional-ability-complete-state"],
+          "applicability": {},
+          "reason": "semantic-conflict",
+          "explanation": "该正转化或负数抵消记录已迁移至 agents:yuzuha:mindscape:0:tanuki-wish-complete-state（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 /agents/27/mindscapeBuffs/0/effectBlocks/1/effects/3。"
         }
       ]
     },
@@ -22278,7 +22516,7 @@
           "configuration": {
             "minimumMindscape": 1
           },
-          "status": "converted",
+          "status": "unsupported",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -22286,22 +22524,78 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/1"
-            }
-          ],
-          "effectIds": [
-            "agent:1411:zzz-hp:eff-ms44bnmi-zp616x:blk-legacy:mindscape:1"
-          ],
-          "maximumLayers": 1,
-          "inputs": [
+            },
             {
-              "name": "agent:1411:zzz-hp:eff-ms44bnmi-zp616x:blk-legacy:mindscape:1:source",
-              "unit": "anomaly-mastery-points",
-              "description": "manual anomalyControl，由来源角色在指定结算阶段读取；不使用默认值",
-              "preset": 201
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411050/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411051/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411052/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411053/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411054/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411055/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/talent/1/desc"
             }
           ],
-          "differences": [],
-          "applicability": {}
+          "effectIds": [],
+          "maximumLayers": 1,
+          "inputs": [],
+          "differences": ["yuzuha-additional-ability-complete-state"],
+          "applicability": {},
+          "reason": "semantic-conflict",
+          "explanation": "该正转化或负数抵消记录已迁移至 agents:yuzuha:mindscape:0:tanuki-wish-complete-state（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 /agents/27/mindscapeBuffs/1/effectBlocks/0/effects/1。"
         }
       ]
     },
@@ -22316,7 +22610,7 @@
           "configuration": {
             "minimumMindscape": 1
           },
-          "status": "converted",
+          "status": "unsupported",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -22324,22 +22618,78 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/2"
-            }
-          ],
-          "effectIds": [
-            "agent:1411:zzz-hp:eff-ms44dh8h-xb20mu:blk-legacy:mindscape:1"
-          ],
-          "maximumLayers": 1,
-          "inputs": [
+            },
             {
-              "name": "agent:1411:zzz-hp:eff-ms44dh8h-xb20mu:blk-legacy:mindscape:1:source",
-              "unit": "anomaly-mastery-points",
-              "description": "manual anomalyControl，由来源角色在指定结算阶段读取；不使用默认值",
-              "preset": 201
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411050/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411051/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411052/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411053/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411054/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411055/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/talent/1/desc"
             }
           ],
-          "differences": [],
-          "applicability": {}
+          "effectIds": [],
+          "maximumLayers": 1,
+          "inputs": [],
+          "differences": ["yuzuha-additional-ability-complete-state"],
+          "applicability": {},
+          "reason": "semantic-conflict",
+          "explanation": "该正转化或负数抵消记录已迁移至 agents:yuzuha:mindscape:0:tanuki-wish-complete-state（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 /agents/27/mindscapeBuffs/1/effectBlocks/0/effects/2。"
         }
       ]
     },
@@ -22354,7 +22704,7 @@
           "configuration": {
             "minimumMindscape": 1
           },
-          "status": "converted",
+          "status": "unsupported",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -22362,15 +22712,78 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/3"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411050/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411051/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411052/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411053/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411054/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411055/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/talent/1/desc"
             }
           ],
-          "effectIds": [
-            "agent:1411:zzz-hp:eff-ms44eue1-n53aou:blk-legacy:mindscape:1"
-          ],
+          "effectIds": [],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
-          "applicability": {}
+          "differences": ["yuzuha-additional-ability-complete-state"],
+          "applicability": {},
+          "reason": "semantic-conflict",
+          "explanation": "该正转化或负数抵消记录已迁移至 agents:yuzuha:mindscape:0:tanuki-wish-complete-state（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 /agents/27/mindscapeBuffs/1/effectBlocks/0/effects/3。"
         }
       ]
     },
@@ -22385,7 +22798,7 @@
           "configuration": {
             "minimumMindscape": 1
           },
-          "status": "converted",
+          "status": "unsupported",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -22393,15 +22806,78 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/4"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411050/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411051/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411052/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411053/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411054/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411055/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/talent/1/desc"
             }
           ],
-          "effectIds": [
-            "agent:1411:zzz-hp:eff-ms44fa80-f595zx:blk-legacy:mindscape:1"
-          ],
+          "effectIds": [],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
-          "applicability": {}
+          "differences": ["yuzuha-additional-ability-complete-state"],
+          "applicability": {},
+          "reason": "semantic-conflict",
+          "explanation": "该正转化或负数抵消记录已迁移至 agents:yuzuha:mindscape:0:tanuki-wish-complete-state（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 /agents/27/mindscapeBuffs/1/effectBlocks/0/effects/4。"
         }
       ]
     },
@@ -44755,6 +45231,157 @@
       ]
     },
     {
+      "optionId": "agents:yuzuha:mindscape:0:tanuki-wish-complete-state",
+      "catalogEntityId": "agents:yuzuha",
+      "name": "狸之愿 · 额外能力完整状态",
+      "target": "team",
+      "conditionDescription": "队伍中存在其他[异常]角色或与柚叶同阵营的角色，且受益角色拥有[狸之愿]时，按柚叶显式异常掌控 AM 使其属性异常与紊乱伤害提升 min(20%, max(0, AM−100)×0.2%)；影画1起对同一增益乘1.3。[狸之愿]由对应强化特殊技/终结技命中施加，持续40秒、重复触发刷新；编队资格与本次有效状态由调用方声明，不自动推断持续时间。读取阶段仍待证，保留手工读数；异常积蓄效率不在本输出范围。",
+      "variants": [
+        {
+          "configuration": {
+            "minimumMindscape": 0,
+            "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
+          },
+          "status": "corrected",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/agents/27/mindscapeBuffs/0/effectBlocks/1/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411050/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411051/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411052/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411053/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411054/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411055/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/passive/level/1411049/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1411/details.zh.json",
+              "pointer": "/talent/1/desc"
+            },
+            {
+              "sourceId": "zzz-hp",
+              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/agents/27/mindscapeBuffs/0/effectBlocks/1/effects/1"
+            },
+            {
+              "sourceId": "zzz-hp",
+              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/agents/27/mindscapeBuffs/0/effectBlocks/1/effects/2"
+            },
+            {
+              "sourceId": "zzz-hp",
+              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/agents/27/mindscapeBuffs/0/effectBlocks/1/effects/3"
+            },
+            {
+              "sourceId": "zzz-hp",
+              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "zzz-hp",
+              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "zzz-hp",
+              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/3"
+            },
+            {
+              "sourceId": "zzz-hp",
+              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/4"
+            }
+          ],
+          "effectIds": [
+            "agent:1411:zzz-hp:tanuki-wish-complete-state:anomalyDmgBonus",
+            "agent:1411:zzz-hp:tanuki-wish-complete-state:disorderDmgBonus"
+          ],
+          "maximumLayers": 1,
+          "inputs": [
+            {
+              "name": "yuzuha:tanuki-wish:anomaly-mastery",
+              "unit": "anomaly-mastery-points",
+              "description": "柚叶异常掌控（显式手工读数，必填且无默认值；读取阶段待证）"
+            }
+          ],
+          "applicability": {},
+          "differences": ["yuzuha-additional-ability-complete-state"]
+        }
+      ]
+    },
+    {
       "optionId": "agents:lighter:mindscape:0:elation-complete-state",
       "catalogEntityId": "agents:lighter",
       "name": "昂扬 · 完整状态",
@@ -49938,6 +50565,887 @@
           "locale": "zh",
           "resourcePath": "drive-discs/33600/details.zh.json",
           "pointer": "/desc4"
+        }
+      ]
+    },
+    {
+      "differenceId": "yuzuha-additional-ability-complete-state",
+      "explanation": "柚叶（1411）固定来源的八条部分记录合为一个显式完整状态：base=min(0.20,max(0,AM−100)×0.002)，影画1—6由配置阶段output scale 1.3强化一次；属性异常与紊乱分支共用必填manual异常掌控输入。旧配对AM≥200时20%/26%上限已正确，本修订纠正AM88的−2.4%/−3.12%和部分状态独立选择问题，不套用更新上游40%/52%的cap问题。旧八条选项保留semantic-conflict迁移入口，八条低层贡献全部退出，新身份供完整状态选用。核心1—7同文证据来自冻结Nanoka 3.2；通用异常分类沿用anomaly/anomaly-settlement/vortex/luminize，紊乱为disorder，不扩大直伤。M1独立10%抗性条款不参与1.3缩放。编队资格、狸之愿有效状态及40秒持续/刷新由调用方声明，非整点游戏精度未实测；Q02读取阶段待证，保留手工读数，不引入current/final/external。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/27/mindscapeBuffs/0/effectBlocks/1/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411050/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411051/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411052/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411053/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411054/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411055/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411050/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411051/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411052/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411053/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411054/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411055/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/talent/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/27/mindscapeBuffs/0/effectBlocks/1/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411050/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411051/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411052/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411053/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411054/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411055/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411050/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411051/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411052/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411053/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411054/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411055/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/talent/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/27/mindscapeBuffs/0/effectBlocks/1/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411050/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411051/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411052/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411053/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411054/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411055/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411050/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411051/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411052/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411053/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411054/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411055/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/talent/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/27/mindscapeBuffs/0/effectBlocks/1/effects/3"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411050/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411051/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411052/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411053/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411054/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411055/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411050/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411051/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411052/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411053/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411054/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411055/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/talent/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411050/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411051/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411052/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411053/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411054/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411055/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/talent/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411050/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411051/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411052/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411053/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411054/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411055/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/talent/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/3"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411050/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411051/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411052/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411053/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411054/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411055/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/talent/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/4"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411050/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411051/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411052/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411053/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411054/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411055/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/talent/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/27/mindscapeBuffs/0/effectBlocks/1/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411050/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411051/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411052/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411053/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411054/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411055/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/passive/level/1411049/desc/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1411/details.zh.json",
+          "pointer": "/talent/1/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/27/mindscapeBuffs/0/effectBlocks/1/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/27/mindscapeBuffs/0/effectBlocks/1/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/27/mindscapeBuffs/0/effectBlocks/1/effects/3"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/3"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/27/mindscapeBuffs/1/effectBlocks/0/effects/4"
         }
       ]
     },

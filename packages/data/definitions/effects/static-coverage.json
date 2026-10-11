@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "19",
+  "revision": "20",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -17742,10 +17742,10 @@
       "rankKind": "mindscape",
       "stat": "anomalyDmgBonus",
       "optionId": "agents:yuzuha:mindscape:0:blk-ms38y9v7-07td4j:eff-ms38y9v7-2ded3l",
-      "effectIds": [
-        "agent:1411:zzz-hp:eff-ms38y9v7-2ded3l:blk-ms38y9v7-07td4j:mindscape:0"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "该正转化或负数抵消记录已迁移至 agents:yuzuha:mindscape:0:tanuki-wish-complete-state（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 /agents/27/mindscapeBuffs/0/effectBlocks/1/effects/0。",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -17757,10 +17757,10 @@
       "rankKind": "mindscape",
       "stat": "disorderDmgBonus",
       "optionId": "agents:yuzuha:mindscape:0:blk-ms38y9v7-07td4j:eff-ms3969fx-lmmkyw",
-      "effectIds": [
-        "agent:1411:zzz-hp:eff-ms3969fx-lmmkyw:blk-ms38y9v7-07td4j:mindscape:0"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "该正转化或负数抵消记录已迁移至 agents:yuzuha:mindscape:0:tanuki-wish-complete-state（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 /agents/27/mindscapeBuffs/0/effectBlocks/1/effects/1。",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -17772,10 +17772,10 @@
       "rankKind": "mindscape",
       "stat": "anomalyDmgBonus",
       "optionId": "agents:yuzuha:mindscape:0:blk-ms38y9v7-07td4j:eff-ms396xt1-3qbf2a",
-      "effectIds": [
-        "agent:1411:zzz-hp:eff-ms396xt1-3qbf2a:blk-ms38y9v7-07td4j:mindscape:0"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "该正转化或负数抵消记录已迁移至 agents:yuzuha:mindscape:0:tanuki-wish-complete-state（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 /agents/27/mindscapeBuffs/0/effectBlocks/1/effects/2。",
       "normalizationChanges": [],
       "rawValue": -20,
       "normalizedValue": -20
@@ -17787,10 +17787,10 @@
       "rankKind": "mindscape",
       "stat": "disorderDmgBonus",
       "optionId": "agents:yuzuha:mindscape:0:blk-ms38y9v7-07td4j:eff-ms39auzc-mtr7ac",
-      "effectIds": [
-        "agent:1411:zzz-hp:eff-ms39auzc-mtr7ac:blk-ms38y9v7-07td4j:mindscape:0"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "该正转化或负数抵消记录已迁移至 agents:yuzuha:mindscape:0:tanuki-wish-complete-state（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 /agents/27/mindscapeBuffs/0/effectBlocks/1/effects/3。",
       "normalizationChanges": [],
       "rawValue": -20,
       "normalizedValue": -20
@@ -17802,10 +17802,10 @@
       "rankKind": "mindscape",
       "stat": "anomalyDmgBonus",
       "optionId": "agents:yuzuha:mindscape:1:blk-legacy:eff-ms44bnmi-zp616x",
-      "effectIds": [
-        "agent:1411:zzz-hp:eff-ms44bnmi-zp616x:blk-legacy:mindscape:1"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "该正转化或负数抵消记录已迁移至 agents:yuzuha:mindscape:0:tanuki-wish-complete-state（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 /agents/27/mindscapeBuffs/1/effectBlocks/0/effects/1。",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -17817,10 +17817,10 @@
       "rankKind": "mindscape",
       "stat": "disorderDmgBonus",
       "optionId": "agents:yuzuha:mindscape:1:blk-legacy:eff-ms44dh8h-xb20mu",
-      "effectIds": [
-        "agent:1411:zzz-hp:eff-ms44dh8h-xb20mu:blk-legacy:mindscape:1"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "该正转化或负数抵消记录已迁移至 agents:yuzuha:mindscape:0:tanuki-wish-complete-state（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 /agents/27/mindscapeBuffs/1/effectBlocks/0/effects/2。",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -17832,10 +17832,10 @@
       "rankKind": "mindscape",
       "stat": "anomalyDmgBonus",
       "optionId": "agents:yuzuha:mindscape:1:blk-legacy:eff-ms44eue1-n53aou",
-      "effectIds": [
-        "agent:1411:zzz-hp:eff-ms44eue1-n53aou:blk-legacy:mindscape:1"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "该正转化或负数抵消记录已迁移至 agents:yuzuha:mindscape:0:tanuki-wish-complete-state（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 /agents/27/mindscapeBuffs/1/effectBlocks/0/effects/3。",
       "normalizationChanges": [],
       "rawValue": -6,
       "normalizedValue": -6
@@ -17847,10 +17847,10 @@
       "rankKind": "mindscape",
       "stat": "disorderDmgBonus",
       "optionId": "agents:yuzuha:mindscape:1:blk-legacy:eff-ms44fa80-f595zx",
-      "effectIds": [
-        "agent:1411:zzz-hp:eff-ms44fa80-f595zx:blk-legacy:mindscape:1"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "该正转化或负数抵消记录已迁移至 agents:yuzuha:mindscape:0:tanuki-wish-complete-state（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 /agents/27/mindscapeBuffs/1/effectBlocks/0/effects/4。",
       "normalizationChanges": [],
       "rawValue": -6,
       "normalizedValue": -6
@@ -30484,11 +30484,11 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 858,
-    "options": 856,
-    "converted": 1147,
+    "rules": 854,
+    "options": 857,
+    "converted": 1139,
     "corrected": 133,
-    "unsupported": 10,
+    "unsupported": 18,
     "supplements": {
       "records": 30,
       "rules": 27,
