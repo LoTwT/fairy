@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "25",
+  "revision": "26",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -27284,7 +27284,7 @@
     {
       "optionId": "w-engines:Blazing_Laurel:refinement:blk-legacy:legacy-team-dmgBonus",
       "catalogEntityId": "w-engines:Blazing_Laurel",
-      "name": "精5 · dmgBonus",
+      "name": "精5 · critDmg",
       "conditionDescription": "装备者的[普通攻击]命中敌人时，对目标施加一层[萎靡]，最多叠加20层，持续30秒，重复触发时刷新持续时间；队伍中任意角色攻击命中敌人时，目标每拥有一层[萎靡]，本次攻击中冰属性伤害和火属性伤害的暴击伤害提升2.4%，该效果全队唯一。",
       "target": "team",
       "variants": [
@@ -27292,7 +27292,7 @@
           "configuration": {
             "refinements": [5]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -27300,6 +27300,20 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/60/refinementBuffs/4/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14116/details.zh.json",
+              "pointer": "/talents/5/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "w-engines/14116/details.en.json",
+              "pointer": "/talents/5/desc"
             }
           ],
           "effectIds": [
@@ -27307,7 +27321,7 @@
           ],
           "maximumLayers": 20,
           "inputs": [],
-          "differences": [],
+          "differences": ["blazing-laurel-r5-wilt-critical-damage"],
           "applicability": {
             "beneficiaryElements": ["fire", "ice"]
           }
@@ -46693,7 +46707,7 @@
       "optionId": "nanoka:w-engines:14116:impact-after-assist",
       "catalogEntityId": "w-engines:Blazing_Laurel",
       "name": "流动之火 · impact",
-      "conditionDescription": "发动[快速支援]或[极限支援]时，装备者的冲击力提升（按精炼 25/28.75/32.5/36.25/40%），持续8秒；触发状态由调用方显式选择断言。已有的[萎靡]暴击伤害/增伤规则为独立选项，不受本选项影响。",
+      "conditionDescription": "发动[快速支援]或[极限支援]时，装备者的冲击力提升（按精炼 25/28.75/32.5/36.25/40%），持续8秒；触发状态由调用方显式选择断言。已有的[萎靡]暴击伤害规则为独立选项，不受本选项影响。",
       "target": "self",
       "variants": [
         {
@@ -50388,6 +50402,26 @@
     }
   ],
   "differences": [
+    {
+      "differenceId": "blazing-laurel-r5-wilt-critical-damage",
+      "explanation": "固定来源 fac62407 的焰心桂冠 R5 萎靡记录误写 stat=dmgBonus，但所属块 note 与 Nanoka 3.2 中英文 /talents/5/desc 一致写明冰、火伤害的暴击伤害每层提升 2.4%，最多 20 层；五档原文均为暴伤，R1—4 已编码为 critDmg。仅该完整来源身份改用 critDmg 映射（criticalDamage direct 加数），保留 2.4%、20 层、团队与既有受益角色元素筛选、击破装备适配及公开 option/effect ID；历史 ID 中的 dmgBonus 保留作兼容身份，不再表示落点。来源 stat 与 Pointer 保留在覆盖报告，R5 标记 corrected，R1—4 的 1.5/1.72/1.95/2.17 数值不改。普通攻击只是施加萎靡的触发；有效状态与层数仍由调用方显式声明，30 秒、刷新及全队唯一不新增通用模拟。此为按一致描述纠错，未作游戏实测或混合元素命中契约扩展。",
+      "references": [
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "w-engines/14116/details.zh.json",
+          "pointer": "/talents/5/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "en",
+          "resourcePath": "w-engines/14116/details.en.json",
+          "pointer": "/talents/5/desc"
+        }
+      ]
+    },
     {
       "differenceId": "remielle-special-voidflare-restricted-reads",
       "explanation": "本人耀变专用读取沿固定来源 remielSelfRadiancePanel/optimalAffixAlloc 的口径以具名机制元数据登记：受限攻击 = 局外攻击 + 蕾米自身角色来源的攻击转模（3 条档位记录）；受限精通 = 局外精通 + 自身装备且职业适配音擎的精通效果（13 个来源实体、去重后 31 条规则）+ 自身驱动盘四件套精通效果（5 条），二件套精通已在局外面板只计一次；异化与耀变倍率的精通转换、通用抗穿仍读完整当前面板（含队友效果），耀变专属抗穿只取自身来源。飞鸟星梦（14133）的以太白名单在自身基础精通专用读取中不排除流明（上游专用读取无 effectMatchesElement 过滤），普通 current 精通读取仍保留以太条件；该项单独列入元素豁免标记。旧 M6 两条锚点选项在新机制分支明确拒绝，strength 档位已表达四分之一与完整强度。",

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "25",
+  "revision": "26",
   "effects": [
     {
       "kind": "contribution",
@@ -65054,6 +65054,20 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/60/refinementBuffs/4/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14116/details.zh.json",
+            "pointer": "/talents/5/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "w-engines/14116/details.en.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -65087,7 +65101,7 @@
           "value": 20
         }
       },
-      "scope": "hit",
+      "scope": "entity",
       "beneficiary": {
         "kind": "team"
       },
@@ -65096,8 +65110,9 @@
         "conditions": []
       },
       "operation": {
-        "kind": "factor-contribution",
-        "channel": "damage-bonus",
+        "kind": "stat-adjustment",
+        "stat": "criticalDamage",
+        "stage": "direct",
         "value": {
           "kind": "parameter",
           "unit": "ratio",

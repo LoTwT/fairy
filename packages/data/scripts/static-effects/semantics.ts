@@ -70,6 +70,17 @@ export const YUZUHA_COMPLETE_STATE_DIFFERENCE_ID =
 
 export type SourceSemantics =
   | {
+      /** 固定记录的乘区与块原文及 Nanoka 一致描述矛盾；只覆盖登记身份。 */
+      readonly kind: "source-stat-correction"
+      readonly correctedStat: "critDmg"
+      readonly expectedProfession: string
+      readonly expectedEncoding: Readonly<Record<string, unknown>>
+      readonly expectedSourceBlockNote: string
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
       /** 八条正/负部分记录全部迁移；新身份承载阈值钳零后的两条完整贡献。 */
       readonly kind: "complete-state-tanuki-wish"
       readonly expectedEncoding: Readonly<Record<string, unknown>>
@@ -1838,6 +1849,52 @@ function yuzuhaPartialState(
 }
 
 export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
+  "w-engines/Blazing_Laurel/refinement/5/blk-legacy/legacy-team-dmgBonus": {
+    kind: "source-stat-correction",
+    correctedStat: "critDmg",
+    expectedProfession: "击破",
+    expectedEncoding: {
+      stat: "dmgBonus",
+      scope: "general",
+      kind: "stacked",
+      value: 0,
+      stackable: false,
+      valuePerStack: 2.4,
+      maxStacks: 20,
+      applyTarget: "team",
+      applySituation: "global",
+      applyProfession: null,
+      teamProfession: null,
+      teamProfessionValues: null,
+      teamProfessionMinCount: null,
+      elementFilter: ["火", "冰"],
+      skillCategory: null,
+      skillSubcategoryId: null,
+      skillTargets: null,
+      appliesToAnomaly: null,
+      convert: null,
+      note: "",
+    },
+    expectedSourceBlockNote:
+      "装备者的[普通攻击]命中敌人时，对目标施加一层[萎靡]，最多叠加20层，持续30秒，重复触发时刷新持续时间；队伍中任意角色攻击命中敌人时，目标每拥有一层[萎靡]，本次攻击中冰属性伤害和火属性伤害的暴击伤害提升2.4%，该效果全队唯一。",
+    differenceId: "blazing-laurel-r5-wilt-critical-damage",
+    evidence: [
+      {
+        path: "w-engines/14116/details.zh.json",
+        pointer: "/talents/5/desc",
+        sha256:
+          "0b2ae556d5d4547007bbc24f0b2f6a1eaf5623b7fde691b070fd3f03099fc21a",
+      },
+      {
+        path: "w-engines/14116/details.en.json",
+        pointer: "/talents/5/desc",
+        sha256:
+          "25cf01fce238107474bfd8c229f53b0b83ecb6d7a616e166e16882beb9992b6f",
+      },
+    ],
+    verification:
+      "固定来源 fac62407 的焰心桂冠 R5 萎靡记录误写 stat=dmgBonus，但所属块 note 与 Nanoka 3.2 中英文 /talents/5/desc 一致写明冰、火伤害的暴击伤害每层提升 2.4%，最多 20 层；五档原文均为暴伤，R1—4 已编码为 critDmg。仅该完整来源身份改用 critDmg 映射（criticalDamage direct 加数），保留 2.4%、20 层、团队与既有受益角色元素筛选、击破装备适配及公开 option/effect ID；历史 ID 中的 dmgBonus 保留作兼容身份，不再表示落点。来源 stat 与 Pointer 保留在覆盖报告，R5 标记 corrected，R1—4 的 1.5/1.72/1.95/2.17 数值不改。普通攻击只是施加萎靡的触发；有效状态与层数仍由调用方显式声明，30 秒、刷新及全队唯一不新增通用模拟。此为按一致描述纠错，未作游戏实测或混合元素命中契约扩展。",
+  },
   "agents/yuzuha/mindscape/0/blk-ms38y9v7-07td4j/eff-ms38y9v7-2ded3l":
     yuzuhaPartialState(0, "anomalyDmgBonus", true),
   "agents/yuzuha/mindscape/0/blk-ms38y9v7-07td4j/eff-ms3969fx-lmmkyw":
