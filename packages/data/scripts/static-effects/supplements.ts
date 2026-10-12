@@ -4714,6 +4714,108 @@ const cannonRotorCriticalHitBonusDamage: Supplement = {
   },
 }
 
+/**
+ * 本（Ben，批次 13）：影画 2[以守为攻]的格挡反击附伤。在[特殊技]或
+ * [强化特殊技]中成功触发格挡反击时，额外造成本 300% 防御力的伤害。两条
+ * 触发路径（技能目录的特殊技格挡反击 action:0014 与强化特殊技格挡反击
+ * action:0017）是导航证据：附伤本身不继承路径的动作分类或元素，也不绑定
+ * 任何已有动作（主动攻击/追加攻击/格挡追击段不经本选项结算）。触发已
+ * 发生由调用方选中本选项并提供独立项断言；格挡成功检测、时间窗、追击
+ * 次数、盾值与冷却不模拟。
+ */
+const benBiggerMindscape2BlockCounterDefenseDamage: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:agents:benbigger:m2-block-counter-defense-damage",
+  source: "nanoka-integrated@3.2 agents/1121 /talent/2/desc",
+  catalogEntityId: "agents:benbigger",
+  optionId: "nanoka:agents:benbigger:m2-block-counter-defense-damage",
+  supportedRanks: "影画 2—6；层数 0—1",
+  computationTarget: "catalog option on the mapped agent entity",
+  // 条款上下文：影画 2 是固定来源的真实空 pack（无块、无记录、无机器
+  // 编码）；该位置出现任何新编码即拒绝生成并要求重新核对。影画 0 的
+  // 团队暴率与影画 4 的反击增伤记录在其他 rank，不受本守卫影响。
+  clauseContextGuard: {
+    rankKind: "mindscape",
+    rank: 2,
+    stats: directMultiplierSourceStats,
+    expectsEmptyPack: true,
+  },
+  skillTarget: {
+    targetId: "benbigger-block-counter-bonus-damage",
+    agentEntityId: "1121",
+    // 文本没有「被视为[X]伤害」分句：uncategorized 是本项目的独立结算
+    // 约定（锁最终有效分类、不消费普通分类增益），不是游戏分类定论。
+    category: "uncategorized",
+    name: "本格挡反击附伤",
+  },
+  evidence: [
+    {
+      path: "agents/1121/details.zh.json",
+      pointer: "/talent/2/desc",
+      sha256:
+        "7b29944c5851ca9da2b53fb909af7db7f34875043c4f44138b05cd9cdb41e741",
+    },
+  ],
+  verification:
+    "Nanoka 影画 2（agents/1121/details.zh.json 的 /talent/2/desc，英文文件同文核对：When successfully triggering a Block Counter during Ben's Special Attack or EX Special Attack, inflict an additional 300% of Ben's DEF as DMG）确认：在[特殊技]或[强化特殊技]中，成功触发格挡反击时，额外造成本 300% 防御力的伤害。固定 ZZZ-HP 来源的影画 2 是真实空 pack（effectBlocks/effects 为空、selfMods/teamMods 全 0），按补充来源在既有 agents:benbigger 实体新增选项；固定来源的整体 agent note（暂不支持本主 C、防御未纳入计算）是上游对本主 C 支持度的说明，不代表本项目没有防御力读取能力。触发路径导航：技能目录的特殊技格挡反击（action:agent:1121:action:0014，physical）与强化特殊技格挡反击（action:agent:1121:action:0017，fire）是文本所指的两条触发动作；主动攻击段（0013/0015）、追加攻击（0016）与格挡追击（0018）不自动等同 M2 触发，普通动作组装不自动追加本附伤。成功触发格挡反击是调用方显式声明的触发事实：选中本选项并提供独立项即断言触发已发生，本实现不检测格挡输入、时间窗、追击次数、盾值或冷却，每次显式结算一次，倍率只经关联 hit-adjustment 贡献一次。倍率为本 300% 防御力：伤害项读取绑定持有者（本）的当前防御力（holder-current，无快照），不读攻击力。附伤元素两处来源（中英文文本、固定源空块、data.json）均未标注：规则不按元素筛选，独立结算的 hit.element 由调用方按实际游戏行为显式声明，不把本固有火属性、触发动作的 physical/fire 或成功格挡本身当作证据。附伤暴击能力来源无证据：本选项不默许任何默认概率，最终暴击概率由调用方以 hit.declaredCriticalRate 显式声明（有限 [0,1]、无默认值、替换该次独立命中的最终概率，不读本面板普通暴击率；启用本选项而缺声明按 MISSING_FACT 拒绝），与命中作用域暴击率贡献互斥；r=0、r=1 与中间值都是调用方自选的条件计算假设，不是游戏结论。结果的 critical 分支沿用普通暴击伤害来源及本命中合法暴伤贡献（未显式指定来源时读取本当前普通暴击伤害；显式来源与暴伤贡献按既有普通伤害读取契约，见执行契约的静态伤害计算）：这是调用方采用的 regular 条件计算模型，不证明游戏附伤能暴击或继承该暴击伤害。附伤以 regular 直伤独立项结算，分类为 uncategorized（独立目标身份、零初始倍率、逐次声明与 uncategorized 分类是本项目采用的独立结算契约，不是原始游戏证据）：影画 4 反击增伤记录的 skillTargets 只含 special 分类，主动作用格挡反击动作段，uncategorized 独立项不消费影画 4 增伤（影画 4 是否覆盖本附伤未经游戏实测，属登记证据边界）；影画 0 团队暴率是实体作用域增益，不参与也不冲突本独立项的声明概率，对普通命中照常作用。与比格气缸（若本装备）是两个来源、两个事件：两选项均独占结算，同一请求混合两独立项或同时启用会被明确拒绝，合法共存是同一装备/世界下的两次独立结算，比格气缸命中级必暴的作用域不触及本独立项。适用职业防护由目录绑定适用性校验。",
+  rule: {
+    effectId: "agent:1121:nanoka:m2-block-counter-defense-damage:mindscape:2",
+    identity: { kind: "agent", entityId: "1121" },
+    section: "影画2：以守为攻（格挡反击附伤）",
+    config: mindscapeFrom(2),
+    parameters: {
+      amount: { kind: "constant", unit: "multiplier", value: 3 },
+    },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        { kind: "one-of", fact: "hit.damageKind", values: ["regular"] },
+        {
+          kind: "one-of",
+          fact: "hit.skillTag",
+          values: ["zzz-hp:skill:benbigger-block-counter-bonus-damage"],
+        },
+      ],
+    },
+    operation: {
+      kind: "hit-adjustment",
+      field: "damageMultiplier",
+      operator: "add",
+      itemIds: ["benbigger:block-counter-bonus-damage"],
+      value: { kind: "parameter", unit: "multiplier", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { minimumMindscape: 2 },
+    inputs: [],
+    applicability: {},
+    // 独占结算：声明最终暴击概率与被结算的独立项一一对应，不留多项共享
+    // 一个声明概率的歧义（目录入口在选择阶段强制）。
+    exclusiveDamageItem: true,
+    damageItemRequirements: [
+      {
+        itemId: "benbigger:block-counter-bonus-damage",
+        stat: "defense",
+        role: "base",
+        allowedModes: ["direct"],
+        source: "holder-current",
+        requiredDirectMultiplier: 0,
+        requiredSkillCategory: "uncategorized",
+        // 最终暴击概率必须由调用方显式声明（hit.declaredCriticalRate），
+        // 无默认值：不默许读本面板普通暴击率充当该次独立命中的概率
+        // （来源未证明附伤的暴击能力）。
+        requiredCriticalRateDeclaration: true,
+      },
+    ],
+    conditionDescription:
+      "影画 2：在[特殊技]或[强化特殊技]中，成功触发格挡反击时，额外造成本 300% 防御力的伤害。本次附伤由调用方声明触发并显式结算：命中须只携带本独立项（独占结算，混合其他伤害项会被拒绝）、以 uncategorized 分类结算、读取本当前防御力，并显式声明本次独立附伤采用的最终暴击概率（hit.declaredCriticalRate，无默认值；元素同样由调用方按实际结算声明，来源未标注）。结果的暴击分支沿用普通暴击伤害来源及本命中合法暴伤贡献（未显式指定来源时读本当前普通暴击伤害），是本接口的条件计算模型，不证明游戏附伤能暴击或继承该暴击伤害。格挡成功检测、时间窗、追击次数、盾值与冷却不模拟；[特殊技]/[强化特殊技]的主动攻击、追加攻击与格挡追击段不经本选项结算。",
+    name: "以守为攻 · 格挡反击附伤（独立结算）",
+    target: "self",
+  },
+}
+
 export const SUPPLEMENTS: readonly Supplement[] = [
   evelynMindscape6LunaluxGarroteFollowUp,
   s0anbyMindscape6ElectromagneticVortex,
@@ -4764,4 +4866,5 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   ...pr10ReviewFixClauses,
   bigCylinderRetaliationDefenseDamage,
   cannonRotorCriticalHitBonusDamage,
+  benBiggerMindscape2BlockCounterDefenseDamage,
 ]
