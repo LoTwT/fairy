@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "23",
+  "revision": "24",
   "effects": [
     {
       "kind": "contribution",
@@ -39120,6 +39120,222 @@
     },
     {
       "kind": "contribution",
+      "effectId": "agent:1511:nanoka:m6-vibrato-modified-nonphysical:mindscape:6",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1511"
+        },
+        "section": "影画6：天使的妄想（颤音：改异放）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1511/details.zh.json",
+            "pointer": "/talent/6/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 6
+        }
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["ether", "electric", "fire", "ice", "wind"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:nangongyu-vibrato-modified"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "add",
+        "itemIds": ["nangongyu:vibrato-modified"],
+        "value": {
+          "kind": "multiply",
+          "unit": "multiplier",
+          "value": {
+            "kind": "literal",
+            "unit": "multiplier",
+            "value": 5
+          },
+          "coefficient": {
+            "kind": "add",
+            "unit": "ratio",
+            "operands": [
+              {
+                "kind": "literal",
+                "unit": "ratio",
+                "value": 1
+              },
+              {
+                "kind": "convert",
+                "unit": "ratio",
+                "input": {
+                  "kind": "input",
+                  "unit": "count",
+                  "name": "nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical:layers"
+                },
+                "rate": {
+                  "kind": "literal",
+                  "unit": "multiplier",
+                  "value": 0.25
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1511:nanoka:m6-vibrato-modified-physical:mindscape:6",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1511"
+        },
+        "section": "影画6：天使的妄想（颤音：改异放）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1511/details.zh.json",
+            "pointer": "/talent/6/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 6
+        }
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["physical"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:nangongyu-vibrato-modified"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "add",
+        "itemIds": ["nangongyu:vibrato-modified"],
+        "value": {
+          "kind": "multiply",
+          "unit": "multiplier",
+          "value": {
+            "kind": "literal",
+            "unit": "multiplier",
+            "value": 4.991
+          },
+          "coefficient": {
+            "kind": "add",
+            "unit": "ratio",
+            "operands": [
+              {
+                "kind": "literal",
+                "unit": "ratio",
+                "value": 1
+              },
+              {
+                "kind": "convert",
+                "unit": "ratio",
+                "input": {
+                  "kind": "input",
+                  "unit": "count",
+                  "name": "nanoka:agents:nangongyu:m6-vibrato-modified-physical:layers"
+                },
+                "rate": {
+                  "kind": "literal",
+                  "unit": "multiplier",
+                  "value": 0.25
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "agent:1511:zzz-hp:eff-ms4ce5wb-mhws4j:blk-legacy:mindscape:0",
       "source": {
         "identity": {
@@ -39291,6 +39507,13 @@
             "locale": "zh",
             "resourcePath": "agents/1511/details.zh.json",
             "pointer": "/passive/level/1511055/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1511/details.zh.json",
+            "pointer": "/talent/6/desc"
           }
         ]
       },
@@ -39332,19 +39555,32 @@
         "kind": "all",
         "conditions": [
           {
-            "kind": "one-of",
-            "fact": "hit.damageKind",
-            "values": ["anomaly-settlement"]
+            "kind": "all",
+            "conditions": [
+              {
+                "kind": "one-of",
+                "fact": "hit.damageKind",
+                "values": ["anomaly-settlement"]
+              },
+              {
+                "kind": "one-of",
+                "fact": "hit.damageKind",
+                "values": ["anomaly-settlement"]
+              },
+              {
+                "kind": "one-of",
+                "fact": "hit.element",
+                "values": ["ether", "electric", "fire", "ice", "wind"]
+              }
+            ]
           },
           {
-            "kind": "one-of",
-            "fact": "hit.damageKind",
-            "values": ["anomaly-settlement"]
-          },
-          {
-            "kind": "one-of",
-            "fact": "hit.element",
-            "values": ["ether", "electric", "fire", "ice", "wind"]
+            "kind": "not",
+            "condition": {
+              "kind": "one-of",
+              "fact": "hit.skillTag",
+              "values": ["zzz-hp:skill:nangongyu-vibrato-modified"]
+            }
           }
         ]
       },
@@ -39388,6 +39624,13 @@
             "locale": "zh",
             "resourcePath": "agents/1511/details.zh.json",
             "pointer": "/passive/level/1511055/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1511/details.zh.json",
+            "pointer": "/talent/6/desc"
           }
         ]
       },
@@ -39429,19 +39672,32 @@
         "kind": "all",
         "conditions": [
           {
-            "kind": "one-of",
-            "fact": "hit.damageKind",
-            "values": ["anomaly-settlement"]
+            "kind": "all",
+            "conditions": [
+              {
+                "kind": "one-of",
+                "fact": "hit.damageKind",
+                "values": ["anomaly-settlement"]
+              },
+              {
+                "kind": "one-of",
+                "fact": "hit.damageKind",
+                "values": ["anomaly-settlement"]
+              },
+              {
+                "kind": "one-of",
+                "fact": "hit.element",
+                "values": ["physical"]
+              }
+            ]
           },
           {
-            "kind": "one-of",
-            "fact": "hit.damageKind",
-            "values": ["anomaly-settlement"]
-          },
-          {
-            "kind": "one-of",
-            "fact": "hit.element",
-            "values": ["physical"]
+            "kind": "not",
+            "condition": {
+              "kind": "one-of",
+              "fact": "hit.skillTag",
+              "values": ["zzz-hp:skill:nangongyu-vibrato-modified"]
+            }
           }
         ]
       },
@@ -39485,6 +39741,13 @@
             "locale": "zh",
             "resourcePath": "agents/1511/details.zh.json",
             "pointer": "/passive/level/1511055/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1511/details.zh.json",
+            "pointer": "/talent/6/desc"
           }
         ]
       },
@@ -39526,14 +39789,27 @@
         "kind": "all",
         "conditions": [
           {
-            "kind": "one-of",
-            "fact": "hit.damageKind",
-            "values": ["anomaly-settlement"]
+            "kind": "all",
+            "conditions": [
+              {
+                "kind": "one-of",
+                "fact": "hit.damageKind",
+                "values": ["anomaly-settlement"]
+              },
+              {
+                "kind": "one-of",
+                "fact": "hit.damageKind",
+                "values": ["anomaly-settlement"]
+              }
+            ]
           },
           {
-            "kind": "one-of",
-            "fact": "hit.damageKind",
-            "values": ["anomaly-settlement"]
+            "kind": "not",
+            "condition": {
+              "kind": "one-of",
+              "fact": "hit.skillTag",
+              "values": ["zzz-hp:skill:nangongyu-vibrato-modified"]
+            }
           }
         ]
       },
@@ -40072,6 +40348,20 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/9/mindscapeBuffs/2/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1511/details.zh.json",
+            "pointer": "/talent/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1511/details.zh.json",
+            "pointer": "/talent/6/desc"
           }
         ]
       },
@@ -40113,19 +40403,32 @@
         "kind": "all",
         "conditions": [
           {
-            "kind": "one-of",
-            "fact": "hit.damageKind",
-            "values": ["anomaly-settlement"]
+            "kind": "all",
+            "conditions": [
+              {
+                "kind": "one-of",
+                "fact": "hit.damageKind",
+                "values": ["anomaly-settlement"]
+              },
+              {
+                "kind": "one-of",
+                "fact": "hit.damageKind",
+                "values": ["anomaly-settlement"]
+              },
+              {
+                "kind": "one-of",
+                "fact": "hit.targetState",
+                "values": ["stunned"]
+              }
+            ]
           },
           {
-            "kind": "one-of",
-            "fact": "hit.damageKind",
-            "values": ["anomaly-settlement"]
-          },
-          {
-            "kind": "one-of",
-            "fact": "hit.targetState",
-            "values": ["stunned"]
+            "kind": "not",
+            "condition": {
+              "kind": "one-of",
+              "fact": "hit.skillTag",
+              "values": ["zzz-hp:skill:nangongyu-vibrato-modified"]
+            }
           }
         ]
       },

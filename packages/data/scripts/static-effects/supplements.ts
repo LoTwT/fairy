@@ -96,6 +96,20 @@ export interface SupplementVariantSpec {
    * 全队唯一”这类条款，见 StaticCatalogVariant.squadUniqueEffect。
    */
   readonly squadUniqueEffect?: true
+  /**
+   * 完整状态层数桥接（透传到目录变体的 layerCountInputName）：声明后
+   * selection.layers 表示逻辑状态层数（0 关闭、严格安全整数
+   * 0..layerCountMaximumLayers），目录按绑定派生 count 输入，实际展开固定
+   * 单实例；规则必须是 maximumLayers 为 1 的单条 supplied 贡献，且其值
+   * 表达式真实消费该 count 输入（目录定义校验强制，不靠名称猜测）。不
+   * 声明时保持补充的普通逐层展开语义。
+   */
+  readonly layerCountInputName?: string
+  /**
+   * 桥接选项的逻辑层数上限（编译为目录变体 maximumLayers）；仅可与
+   * layerCountInputName 一起声明，二者必须同时提供。
+   */
+  readonly layerCountMaximumLayers?: number
 }
 
 export interface SupplementBase {
@@ -3212,6 +3226,178 @@ const dialynMindscape6AftertoneEcho: Supplement = {
   },
 }
 
+/** 异放乘区 stat 家族：影画 6[颤音：改]结算比例的未来机器编码会命中。 */
+const anomalyReleaseMultiplierStats = [
+  "anomalyReleaseMult",
+  "anomalyReleaseMultFactor",
+] as const
+
+/** 南宫羽影画 6 空块的冻结完整 note（实际空块：note 完整、effects 为空）。 */
+const nangongyuMindscape6FrozenNote =
+  "当敌人进入失衡状态时，[颤音：改]会被全部清除，[颤音：改]被清除时，若敌人处于以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、冰属性异常状态、风属性异常状态下，南宫羽会对目标造成一次[异放]伤害：额外结算一次属性异常伤害，相对于原属性异常伤害的比例为800%/400%/1000%/70%/100%/40%，敌人身上每有1层[颤音：改]，该次[异放]的伤害比例额外提升25%；[颤音：改]与[颤音]无法相互叠加。"
+
+/** 南宫羽影画 6 的完整状态层数桥接输入名（按元素分组各一条，互不冲突）。 */
+const nangongyuMindscape6LayerInput = (group: string) =>
+  `nanoka:agents:nangongyu:m6-vibrato-modified-${group}:layers`
+
+/**
+ * 南宫羽（M03，批次 09）：影画 6[天使的妄想]的[颤音：改]一次异放结算。
+ * 敌人不处于失衡时按所列事件累计、最多 4 层；进入失衡时全部清除，清除时
+ * 若存在原属性异常则结算一次。每层把基础结算比例再提升 25%（不是每层多
+ * 一次异放，也不是复利）；0 层关闭，有效层严格整数 1—4。倍率 = 原异常
+ * 系数 × M6 比例（固定提交 publicAnomalySkills.ts 的系数表，五非物理属性
+ * 归一为 5、物理 7.13×0.7=4.991），完整倍率由规则按 count 桥接一次赋值。
+ * 两个元素分组选项共用同一独立结算目标与伤害项，按 hit.element 裁决。
+ */
+const nangongyuMindscape6VibratoModified = (
+  group: "nonphysical" | "physical",
+): Supplement => ({
+  kind: "option",
+  supplementId: `nanoka:agents:nangongyu:m6-vibrato-modified-${group}`,
+  source: "nanoka-integrated@3.2 agents/1511 /talent/6/desc",
+  catalogEntityId: "agents:nangongyu",
+  optionId: `nanoka:agents:nangongyu:m6-vibrato-modified-${group}`,
+  supportedRanks: "影画 6 及以上；层数 0—4（0 关闭，有效层 1—4）",
+  computationTarget: "catalog option on the mapped agent entity",
+  // 条款上下文：影画 6 的真实空块；该 rank 任何位置出现异放乘区家族的
+  // 机器记录、锚块缺失或 note 任何变化（包括保留原文再追加冲突句）都
+  // 拒绝生成并要求重新核对。
+  clauseContextGuard: {
+    rankKind: "mindscape",
+    rank: 6,
+    stats: anomalyReleaseMultiplierStats,
+    anchorBlocks: [
+      {
+        blockId: "blk-ms4dtzxa-touyxm",
+        frozenNote: nangongyuMindscape6FrozenNote,
+      },
+    ],
+  },
+  // 独立结算目标只登记一次：两个元素分组选项共用同一[颤音：改]结算身份。
+  ...(group === "nonphysical"
+    ? {
+        skillTarget: {
+          targetId: "nangongyu-vibrato-modified",
+          agentEntityId: "1511",
+          // 异放结算是显式结算事件，不属于任何技能大类；沿[超凶爪印]/
+          // 微域气旋等独立目标的 uncategorized 分类契约，不据此冒充游戏
+          // 技能分类证据。
+          category: "uncategorized" as SkillCategory,
+          name: "颤音：改异放结算",
+        },
+      }
+    : {}),
+  evidence: [
+    {
+      path: "agents/1511/details.zh.json",
+      pointer: "/talent/6/desc",
+      sha256:
+        "623a202f3d6b33c5c32d2ef6958595d02f0649cd76e57679858108b753a262b8",
+    },
+  ],
+  verification:
+    group === "nonphysical"
+      ? "Nanoka 影画 6（agents/1511/details.zh.json 的 /talent/6/desc，英文文件同文核对：When the enemy is not Stunned … the enemy gains 1 stacks of Vibrato: Modified … Vibrato: Modified can stack up to 4 times. When the enemy becomes Stunned, all Vibrato: Modified stacks are cleared. When Vibrato: Modified is cleared, if the enemy is under an Ether, Electric, Fire, Physical, Ice, or Wind Anomaly, Nangong Yu triggers an instance of Abloom DMG … equal to 800%/400%/1,000%/70%/100%/40% of the original Attribute Anomaly DMG. Each stack … increases this Abloom DMG ratio by an additional 25%. Vibrato: Modified cannot stack with Vibrato）确认：敌人不处于失衡时按所列事件累计[颤音：改]、最多 4 层；进入失衡时全部清除，清除时若敌人处于六种原属性异常之一，南宫羽结算一次[异放]伤害，比例为原属性异常伤害的以太 800%/电 400%/火 1000%/物理 70%/冰 100%/风 40%，每层再提升该比例的 25%；[颤音：改]与[颤音]无法相互叠加。固定 ZZZ-HP 来源的影画 6 块（blk-ms4dtzxa-touyxm）note 完整、effects 为空，是实际空块而不是缺失实体，按补充来源在既有 agents:nangongyu 实体新增选项。倍率归一推导：固定提交 zzz-hp/src/utils/publicAnomalySkills.ts（blob eb7ffa39，整文件 SHA-256 336a5578…，注释明确倍率不额外 ×10/×20）给出原异常系数 以太 62.5%/电 125%/火 50%/物理 713%/冰 500%/风 1250%，与 M6 比例相乘得 以太 5/电 5/火 5/冰 5/风 5、物理 7.13×0.7=4.991（保留精度，不四舍五入为 5，也不是旧 M0 的 4.49）；该推导是二者结合的静态归一，未经游戏实测。本选项覆盖五种非物理原异常（以太/电/火/冰/风），按 hit.element 匹配；物理走同组的 physical 选项，两组互不叠加、由元素裁决，同启两组时仅元素命中者贡献。结算契约：调用方声明[颤音：改]已被清除且存在原属性异常的本次事件与有效层数（selection.layers 0 关闭、严格整数 1—4，由目录层数桥接派生 count 输入），hit 携带独立目标并以 anomaly-settlement 伤害种类结算；伤害项（nangongyu:vibrato-modified、attack、base、direct）damageMultiplier 必须为 0，完整倍率 5×(1+0.25×L) 由本规则一次赋值——原异常系数已并入归一基础值，不存在第二次乘/加系数；statSource 必须与 damage.anomalySource 的实体/快照一致，异放复用原异常虚拟来源的攻击、异常精通、等级、穿透与已声明快照，南宫羽只是本次效果持有者与结算角色，不因此改用她的实时面板。天赋倍率与核心/特殊技培养档位无关，不设核心档位限制；风属性经 hit.element=wind 真实可算，不据此声称标准风紊乱已支持（标准紊乱七值来源不含 wind，本登记不使用 originalAnomalyAttribute 元数据也不改其枚举）。旧 M0/M2 普通颤音规则经具名修正排除本独立目标（见 SOURCE_SEMANTICS 的 nangongyu-vibrato-modified-exclusivity），普通颤音结算保持原行为。首句失衡值 +50%、累计事件的具体层数（重击 +1/+2）与清空时序不做最终输出，留批次 10 登记；独立结算目标、零初始倍率、逐次声明与 uncategorized 独立分类要求（要求项声明 requiredSkillCategory，借用普通/连携/追加攻击分类、保留分类标签或混入其他真实目标的命中按最终有效分类冲突拒绝，独立异放不吃按技能分类筛选的增益）是本项目采用的独立结算契约，不是原始游戏证据。"
+      : "同 nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical 的登记与归一推导：物理原异常的 M6 比例为 70%、原异常系数 7.13（固定提交 publicAnomalySkills.ts，物理属性异常 713%），归一基础倍率 7.13×0.7=4.991——保留精度，不四舍五入为 5，也不是旧 M0 物理来源项的 4.49；每层仍 +25% 基础比例（4.991×(1+0.25×L)，L=1—4 依次 6.23875/7.4865/8.73425/9.982）。固定来源影画 6 空块守卫、独立结算目标、层数桥接、anomaly-source 快照契约、uncategorized 独立分类要求、与普通颤音的互斥排除及留批次 10 的边界同 nonphysical 选项逐字适用；本选项只覆盖物理原异常（hit.element=physical），与非物理分组互不叠加、由元素裁决。",
+  rule: {
+    effectId: `agent:1511:nanoka:m6-vibrato-modified-${group}:mindscape:6`,
+    identity: { kind: "agent", entityId: "1511" },
+    section: "影画6：天使的妄想（颤音：改异放）",
+    config: mindscapeFrom(6),
+    parameters: {},
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.damageKind",
+          values: ["anomaly-settlement"],
+        },
+        {
+          kind: "one-of",
+          fact: "hit.element",
+          values:
+            group === "nonphysical"
+              ? ["ether", "electric", "fire", "ice", "wind"]
+              : ["physical"],
+        },
+        {
+          kind: "one-of",
+          fact: "hit.skillTag",
+          values: ["zzz-hp:skill:nangongyu-vibrato-modified"],
+        },
+      ],
+    },
+    operation: {
+      kind: "hit-adjustment",
+      field: "damageMultiplier",
+      operator: "add",
+      itemIds: ["nangongyu:vibrato-modified"],
+      value: {
+        kind: "multiply",
+        unit: "multiplier",
+        value: {
+          kind: "literal",
+          unit: "multiplier",
+          value: group === "nonphysical" ? 5 : 4.991,
+        },
+        coefficient: {
+          kind: "add",
+          unit: "ratio",
+          operands: [
+            { kind: "literal", unit: "ratio", value: 1 },
+            {
+              kind: "convert",
+              unit: "ratio",
+              input: {
+                kind: "input",
+                unit: "count",
+                name: nangongyuMindscape6LayerInput(group),
+              },
+              rate: { kind: "literal", unit: "multiplier", value: 0.25 },
+            },
+          ],
+        },
+      },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { minimumMindscape: 6 },
+    layerCountInputName: nangongyuMindscape6LayerInput(group),
+    layerCountMaximumLayers: 4,
+    inputs: [],
+    applicability: {},
+    damageItemRequirements: [
+      {
+        itemId: "nangongyu:vibrato-modified",
+        stat: "attack",
+        role: "base",
+        allowedModes: ["direct"],
+        source: "anomaly-source",
+        requiredDirectMultiplier: 0,
+        // round1 修复 R01：独立结算分类契约。目标元数据的 uncategorized
+        // 只负责标签展开；这里显式声明 requiredSkillCategory 复用既有
+        // 最终有效分类守卫——原始分类、保留分类标签、合法目标展开的分类
+        // 与追加攻击标签都参与比较，借用普通/连携/追加攻击分类或混入其他
+        // 真实目标的命中按 CONTEXT_MISMATCH 拒绝，独立异放不吃按技能分类
+        // 筛选的增益。
+        requiredSkillCategory: "uncategorized",
+      },
+    ],
+    conditionDescription:
+      group === "nonphysical"
+        ? "影画 6：敌人不处于失衡时按所列事件累计[颤音：改]（最多 4 层），进入失衡时全部清除；清除时若存在原属性异常，南宫羽结算一次[异放]伤害，基础比例 = 原异常系数 × M6 比例（以太/电/火/冰/风归一为 5），每层再 +25%。本选项覆盖五种非物理原异常，按本次结算声明的命中元素匹配（物理走同组的物理选项）。调用方声明本次清除事件与有效层数（selection.layers：0 关闭、严格整数 1—4）：命中以 uncategorized 分类携带独立目标、以 damage.kind=anomaly-settlement 结算，伤害项倍率从 0 开始由规则一次赋值，statSource 与 damage.anomalySource 一致（复用原异常虚拟来源与快照）；携带其他技能分类/分类标签/其他真实目标按冲突拒绝。"
+        : "影画 6：敌人不处于失衡时按所列事件累计[颤音：改]（最多 4 层），进入失衡时全部清除；清除时若存在原属性异常，南宫羽结算一次[异放]伤害，基础比例 = 原异常系数 × M6 比例（物理 7.13×0.7=4.991，保留精度），每层再 +25%。本选项只覆盖物理原异常（hit.element=physical），非物理原异常走同组的非物理选项。调用方声明本次清除事件与有效层数（selection.layers：0 关闭、严格整数 1—4）：命中以 uncategorized 分类携带独立目标、以 damage.kind=anomaly-settlement 结算，伤害项倍率从 0 开始由规则一次赋值，statSource 与 damage.anomalySource 一致（复用原异常虚拟来源与快照）；携带其他技能分类/分类标签/其他真实目标按冲突拒绝。",
+    name:
+      group === "nonphysical"
+        ? "影画6 · 颤音：改（非物理异放结算）"
+        : "影画6 · 颤音：改（物理异放结算）",
+    target: "self",
+  },
+})
+
 export const SUPPLEMENTS: readonly Supplement[] = [
   evelynMindscape6LunaluxGarroteFollowUp,
   s0anbyMindscape6ElectromagneticVortex,
@@ -3254,4 +3440,6 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   crimsonMoonCasketCritRate,
   crimsonMoonCasketWindResIgnore,
   crimsonMoonCasketSquadDamageBonus,
+  nangongyuMindscape6VibratoModified("nonphysical"),
+  nangongyuMindscape6VibratoModified("physical"),
 ]

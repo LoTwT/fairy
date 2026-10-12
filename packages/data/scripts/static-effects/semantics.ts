@@ -100,8 +100,45 @@ export type SourceSemantics =
        * 来源块原文及补充来源同时证明：该结算允许失衡内与失衡恢复后的固定快照；
        * 记录中的 applySituation: stagger 不构成游戏只允许失衡内结算的证据。
        * 是否失衡仍独立影响实际失衡乘区，由其他规则照常表达。
+       *
+       * 可选 vibratoModifiedExclusion：影画 6 的[颤音：改]与普通[颤音]无法
+       * 相互叠加（Nanoka /talent/6/desc 明文）；携带[颤音：改]独立结算目标
+       * 的命中不再吃本普通颤音贡献，普通颤音结算保持原行为。防漂移按
+       * raw/normalized 编码与冻结块 note 双份核对；依赖的补充参与转换而
+       * 本记录缺失时拒绝生成。
        */
       readonly kind: "stagger-recovery-settlement"
+      readonly vibratoModifiedExclusion?: {
+        /** 被排除的独立目标 ID（目录 targetId 的 zzz-hp:skill: 尾段）。 */
+        readonly excludedTargetId: string
+        readonly dependentSupplementIds: readonly string[]
+        readonly differenceId: string
+        /** 防漂移：登记时来源记录（raw 与 normalized）应逐字段保持的编码。 */
+        readonly expectedEncoding: Readonly<Record<string, unknown>>
+        /** 防漂移：固定来源 raw/normalized 核心块的真实完整 note 原文。 */
+        readonly expectedSourceBlockNote: string
+      }
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
+       * 颤音：改共存排除（独立登记）：影画 6 明文[颤音：改]与[颤音]无法相互
+       * 叠加；固定来源把普通颤音条款编为不限独立结算身份的异常放乘区记录，
+       * 携带[颤音：改]独立目标的命中会同时吃旧贡献。转换器保留原稳定
+       * effectId、数值与既有条件，仅追加对登记独立目标的排除：携带该目标
+       * 的命中不吃本贡献，普通颤音结算保持原行为。防漂移（raw/normalized
+       * 编码与冻结块 note）在 compile 开头执行、早于通用 unsupported 降级；
+       * 依赖的补充参与转换而本记录缺失时拒绝生成。
+       */
+      readonly kind: "exclude-settlement-target"
+      readonly excludedTargetId: string
+      readonly dependentSupplementIds: readonly string[]
+      readonly differenceId: string
+      /** 防漂移：登记时来源记录（raw 与 normalized）应逐字段保持的编码。 */
+      readonly expectedEncoding: Readonly<Record<string, unknown>>
+      /** 防漂移：固定来源 raw/normalized 块的真实完整 note 原文。 */
+      readonly expectedSourceBlockNote: string
       readonly evidence: readonly SemanticsEvidenceReference[]
       readonly verification: string
     }
@@ -634,6 +671,42 @@ const nangongyuEvidence = [
     sha256: "623a202f3d6b33c5c32d2ef6958595d02f0649cd76e57679858108b753a262b8",
   },
 ] as const
+
+/** 南宫羽影画 6[天使的妄想]天赋证据（批次 09 补充与共存排除共用）。 */
+const nangongyuMindscape6Evidence = [
+  {
+    path: "agents/1511/details.zh.json",
+    pointer: "/talent/6/desc",
+    sha256: "623a202f3d6b33c5c32d2ef6958595d02f0649cd76e57679858108b753a262b8",
+  },
+] as const
+
+/** 南宫羽影画 2 天赋证据（每层 +10% 只强化普通[颤音]结算的原文）。 */
+const nangongyuTalent2Evidence = [
+  {
+    path: "agents/1511/details.zh.json",
+    pointer: "/talent/2/desc",
+    sha256: "623a202f3d6b33c5c32d2ef6958595d02f0649cd76e57679858108b753a262b8",
+  },
+] as const
+
+/** 南宫羽核心被动块的冻结完整 note（三条普通颤音记录所在块）。 */
+const nangongyuCorePassiveFrozenNote =
+  "南宫羽的异常精通提升120点；\n敌人处于失衡状态时，任意角色对其造成一次[异放]伤害、[紊乱]伤害、使其进入一次属性异常状态时会为其累计1层[颤音]；\n同一敌人最多可被叠加4层[颤音]；\n若[颤音]叠加到最大层数且敌人处于以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、冰属性异常状态、风属性异常状态下时或当敌人持有[颤音]并从失衡状态恢复时，所有[颤音]会被清除；\n[颤音]被清除时，若敌人处于上述属性异常状态下，南宫羽会对目标造成一次[异放]伤害：额外结算一次属性异常伤害，相对于原属性异常伤害的比例为720%/360%/900%/63%/90%/36%，敌人身上每有1层[颤音]，该次[异放]的伤害比例额外提升25%，同一次失衡期间，若[颤音]已被清除，则敌人无法再被施加[颤音]；\n南宫羽的[普通攻击：可爱地雷飞天撞]或[强化特殊技：相当沉重的爱意]命中敌人时，会使自身的属性异常积蓄效率提升35%，造成的失衡值提升20%，使全队造成的伤害提升25%，持续30秒，重复触发时刷新持续时间；"
+
+/** 批次 09 的[颤音：改]共存排除登记（三条核心被动普通颤音记录共用）。 */
+const nangongyuVibratoModifiedExclusion = (options: {
+  readonly expectedEncoding: Readonly<Record<string, unknown>>
+}) => ({
+  excludedTargetId: "nangongyu-vibrato-modified",
+  dependentSupplementIds: [
+    "nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical",
+    "nanoka:agents:nangongyu:m6-vibrato-modified-physical",
+  ],
+  differenceId: "nangongyu-vibrato-modified-exclusivity",
+  expectedSourceBlockNote: nangongyuCorePassiveFrozenNote,
+  ...options,
+})
 
 const nekomataPotentialEvidence = [
   {
@@ -1886,24 +1959,97 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
       "Nanoka 核心被动第 7 级确认：物理异常状态下的敌人被触发[紊乱]效果时，每有 1 秒物理异常状态剩余时间，[紊乱]效果的伤害倍率提升 18%、最多提升 180%。来源记录 elementFilter 限定物理且为团队目标，不能简化为受益者属性筛选：倍率按声明身份精确绑定本次被结算的物理原异常紊乱基础项，层数 0—10 由调用方显式提供，不模拟经过时间。",
   },
   // 南宫羽：来源块原文与 Nanoka 同时证明持有颤音并从失衡恢复时也可结算。
+  // 影画 6 的[颤音：改]与[颤音]无法相互叠加：三条普通颤音记录追加对
+  // nangongyu-vibrato-modified 独立结算目标的排除（见批次 09 补充）。
   "agents/nangongyu/mindscape/0/blk-ms4cegmd-bwnttd/eff-ms4cey14-kzw7xx": {
     kind: "stagger-recovery-settlement",
-    evidence: nangongyuEvidence,
+    vibratoModifiedExclusion: nangongyuVibratoModifiedExclusion({
+      expectedEncoding: {
+        scope: "anomalyRelease",
+        applyTarget: "self",
+        applySituation: "stagger",
+        elementFilter: ["以太", "电", "火", "冰", "风"],
+        kind: "fixed",
+        stat: "anomalyReleaseMult",
+        value: 450,
+        stackable: false,
+        maxStacks: 1,
+        valuePerStack: 0,
+      },
+    }),
+    evidence: [...nangongyuEvidence, ...nangongyuMindscape6Evidence],
     verification:
-      "Nanoka 核心被动第 7 级确认：若[颤音]叠加到最大层数且敌人处于各属性异常状态下，或当敌人持有[颤音]并从失衡状态恢复时，所有[颤音]会被清除，清除时造成一次[异放]伤害。固定 JSON 的 applySituation: stagger 不构成游戏只允许失衡内结算的证据；调用方显式提供本次结算与层数，允许失衡内与恢复后的固定快照，是否失衡仍独立影响实际失衡乘区。",
+      "Nanoka 核心被动第 7 级确认：若[颤音]叠加到最大层数且敌人处于各属性异常状态下，或当敌人持有[颤音]并从失衡状态恢复时，所有[颤音]会被清除，清除时造成一次[异放]伤害。固定 JSON 的 applySituation: stagger 不构成游戏只允许失衡内结算的证据；调用方显式提供本次结算与层数，允许失衡内与恢复后的固定快照，是否失衡仍独立影响实际失衡乘区。批次 09 追加：影画 6[颤音：改]（/talent/6/desc）明文与[颤音]无法相互叠加，携带 nangongyu-vibrato-modified 独立目标的命中不再吃本五元素基础比例（4.5），普通颤音结算保持原行为。",
   },
   "agents/nangongyu/mindscape/0/blk-ms4cegmd-bwnttd/eff-ms4clm2r-e6xquw": {
     kind: "stagger-recovery-settlement",
-    evidence: nangongyuEvidence,
+    vibratoModifiedExclusion: nangongyuVibratoModifiedExclusion({
+      expectedEncoding: {
+        scope: "anomalyRelease",
+        applyTarget: "self",
+        applySituation: "stagger",
+        elementFilter: ["物理"],
+        kind: "fixed",
+        stat: "anomalyReleaseMult",
+        value: 449,
+        stackable: false,
+        maxStacks: 1,
+        valuePerStack: 0,
+      },
+    }),
+    evidence: [...nangongyuEvidence, ...nangongyuMindscape6Evidence],
     verification:
-      "同上：物理来源项与五元素来源项使用同一颤音清除机制；失衡内与恢复后的固定快照均可结算，倍率精度差异按来源原值保留（物理 449%）。",
+      "同上：物理来源项与五元素来源项使用同一颤音清除机制；失衡内与恢复后的固定快照均可结算，倍率精度差异按来源原值保留（物理 449%）。批次 09 追加：[颤音：改]与[颤音]无法相互叠加，携带 nangongyu-vibrato-modified 独立目标的命中不再吃本物理基础比例（4.49），普通颤音结算保持原行为。",
   },
   "agents/nangongyu/mindscape/0/blk-ms4cegmd-bwnttd/eff-ms4cm9a5-wou1p2": {
     kind: "stagger-recovery-settlement",
-    evidence: nangongyuEvidence,
+    vibratoModifiedExclusion: nangongyuVibratoModifiedExclusion({
+      expectedEncoding: {
+        scope: "anomalyRelease",
+        applyTarget: "self",
+        applySituation: "stagger",
+        elementFilter: "all",
+        kind: "stacked",
+        stat: "anomalyReleaseMultFactor",
+        value: 0,
+        stackable: false,
+        maxStacks: 4,
+        valuePerStack: 25,
+      },
+    }),
+    evidence: [...nangongyuEvidence, ...nangongyuMindscape6Evidence],
     verification:
-      "同上：颤音每层 +25%、最多 4 层，同一乘区增量相加（4 层为 ×2），由调用方显式提供本次结算层数；失衡内与恢复后的固定快照均可结算。",
+      "同上：颤音每层 +25%、最多 4 层，同一乘区增量相加（4 层为 ×2），由调用方显式提供本次结算层数；失衡内与恢复后的固定快照均可结算。批次 09 追加：[颤音：改]与[颤音]无法相互叠加，携带 nangongyu-vibrato-modified 独立目标的命中不再吃本每层增量，普通颤音结算保持原行为。",
   },
+  // 南宫羽影画 2：每层普通颤音 +10% 只强化[核心被动：天才偶像]的[颤音]
+  // 结算，不强化[颤音：改]；独立登记排除（该记录保留来源的失衡内条件）。
+  "agents/nangongyu/mindscape/2/blk-legacy/legacy-team-anomalyReleaseMultFactor":
+    {
+      kind: "exclude-settlement-target",
+      excludedTargetId: "nangongyu-vibrato-modified",
+      dependentSupplementIds: [
+        "nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical",
+        "nanoka:agents:nangongyu:m6-vibrato-modified-physical",
+      ],
+      differenceId: "nangongyu-vibrato-modified-exclusivity",
+      expectedEncoding: {
+        scope: "anomalyRelease",
+        applyTarget: "self",
+        applySituation: "stagger",
+        elementFilter: "all",
+        kind: "stacked",
+        stat: "anomalyReleaseMultFactor",
+        value: 0,
+        stackable: false,
+        maxStacks: 4,
+        valuePerStack: 10,
+      },
+      expectedSourceBlockNote:
+        "每层[颤音]使[核心被动：天才偶像]中[异放]的伤害比例额外提升10%；\n[额外能力：天使队长]提供的失衡易伤倍率额外提升30%；\n操作中的角色[连携技]重击命中同时处于属性异常和失衡状态下的敌人时，会对敌人触发[极性紊乱]，对目标造成原本[紊乱]效果25%的伤害，敌人在同一失衡期间仅能触发一次该效果。",
+      evidence: [...nangongyuTalent2Evidence, ...nangongyuMindscape6Evidence],
+      verification:
+        "Nanoka 影画 2（agents/1511/details.zh.json 的 /talent/2/desc，英文同文：Each stack of Vibrato's additional Abloom DMG ratio increase from Core Passive: Prodigious Idol increases by an additional 10%）确认：每层[颤音]只使[核心被动：天才偶像]中[颤音]结算的[异放]伤害比例额外提升 10%，不强化影画 6 的[颤音：改]；固定来源把该记录的实际受益对象编为 self（ID 中的 team 前缀不作为语义依据），并保留 applySituation: stagger 的失衡内条件。影画 6（/talent/6/desc）明文[颤音：改]与[颤音]无法相互叠加：携带 nangongyu-vibrato-modified 独立目标的命中不再吃本每层 +10%，普通颤音结算（含失衡内条件与 4 层上限）保持原行为；[额外能力]的失衡易伤与极性紊乱是独立条款，不随本排除关闭。防漂移：raw/normalized 编码（scope/applyTarget/applySituation/elementFilter/kind/stat/value/stackable/maxStacks/valuePerStack）与块 note 冻结全文逐字核对，任一漂移或 normalized 删除都拒绝生成；依赖的两个批次 09 补充参与转换而本记录缺失时同样拒绝。",
+    },
   // 佩洛伊斯：核心被动的终结技分支增益。
   "agents/pyrois/mindscape/0/blk-legacy/legacy-self-critDmg": {
     kind: "explicit-selection-state",

@@ -68,6 +68,11 @@ describe("static effects evidence path", () => {
       "nanoka:agents:evelyn:m6-lunalux-garrote-follow-up",
       "nanoka:agents:s0anby:m6-electromagnetic-vortex",
       "nanoka:agents:dialyn:m6-aftertone-echo",
+      // 批次 09：南宫羽影画 6[颤音：改]两个元素分组完整状态补充（天赋
+      // Pointer）；四条普通颤音记录的共存排除证据（/passive、/talent/2 与
+      // /talent/6）同样经 semantics 条目由同一入口核验。
+      "nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical",
+      "nanoka:agents:nangongyu:m6-vibrato-modified-physical",
     ])
       expect(verified).toContain(`supplement:${supplementId}`)
   })

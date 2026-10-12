@@ -160,7 +160,7 @@ describe("static data conversion", () => {
       ],
     }
     const result = convertSource(source, functions, [], [])
-    expect(result.definitions.revision).toBe("23")
+    expect(result.definitions.revision).toBe("24")
     for (const option of result.catalog.options) {
       const variant = option.variants[0]!
       const sameBlock = option.optionId.endsWith("unverified-same-block")
@@ -453,7 +453,7 @@ const angelData = (): SourceData => ({
 describe("developer stat revision", () => {
   it("maps the four registered records through the anomaly bonus channel", () => {
     const result = convertSource(angelData(), functions, [], [])
-    expect(result.definitions.revision).toBe("23")
+    expect(result.definitions.revision).toBe("24")
     const option = result.catalog.options.find(
       (o) =>
         o.optionId ===
@@ -745,7 +745,7 @@ const remielData = (): SourceData => ({
 describe("remielle mindscape 2 attribute anomaly scope revision", () => {
   it("adds the [异常] profession and attribute anomaly damage scope from the reviewed text", () => {
     const result = convertSource(remielData(), functions, [], [])
-    expect(result.definitions.revision).toBe("23")
+    expect(result.definitions.revision).toBe("24")
     const option = result.catalog.options.find((o) =>
       o.optionId.includes("eff-ms7tlurw-vhelyf"),
     )!
@@ -895,7 +895,7 @@ describe("remielle mindscape 1 complete anomaly state", () => {
     "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
   it("merges the team and holder records into one corrected complete option", () => {
     const result = convertSource(remielMindscape1Data(), functions, [], [])
-    expect(result.definitions.revision).toBe("23")
+    expect(result.definitions.revision).toBe("24")
     const option = result.catalog.options.find((o) => o.optionId === optionId)!
     expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
     expect(option.conditionDescription).toBe(
@@ -1128,7 +1128,7 @@ const qingmingData = (): SourceData => ({
 describe("qingming birdcage pierce stack correction", () => {
   it("compiles the registered fixed encodings as per-layer contributions with a two-layer cap", () => {
     const result = convertSource(qingmingData(), functions, [], [])
-    expect(result.definitions.revision).toBe("23")
+    expect(result.definitions.revision).toBe("24")
     for (const [index, effectId] of qingmingPierceIds.entries()) {
       const option = result.catalog.options.find((o) =>
         o.optionId.includes(effectId),
@@ -3830,7 +3830,7 @@ describe("agent batch 06 impact and energy regen supplements", () => {
       integrated: 6,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("23")
+    expect(result.definitions.revision).toBe("24")
 
     const caesar = result.catalog.options.find(
       (o) => o.optionId === "nanoka:agents:caesar:stance-switch-impact",
@@ -4361,7 +4361,7 @@ describe("batch 07 Roxy and Crimson Moon Casket supplements", () => {
       integrated: 4,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("23")
+    expect(result.definitions.revision).toBe("24")
     const entities = result.catalog.entities.filter((e) =>
       ["nanoka:agents:1621", "nanoka:w-engines:14162"].includes(
         e.catalogEntityId,
@@ -4841,7 +4841,7 @@ describe("batch 08 M6 independent follow-up supplements", () => {
       integrated: 3,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("23")
+    expect(result.definitions.revision).toBe("24")
     const expected: readonly (readonly [
       optionId: string,
       effectId: string,
@@ -5548,5 +5548,723 @@ describe("batch 08 M6 independent follow-up supplements", () => {
     expect(() =>
       convertSource(batch08Data(), functions, [], additionalWildcard),
     ).toThrowError(/hit-adjustment rule without precise non-empty itemIds/)
+  })
+})
+
+/**
+ * 增益修复批次 09（修订 24）：南宫羽影画 6[颤音：改]两个元素分组完整状态
+ * 补充的登记形态、层数桥接透传与来源守卫；四条普通颤音规则（M0 五元素
+ * 基础 450%、M0 物理 449%、M0 每层 +25%、M2 每层 +10%）的[颤音：改]共存
+ * 排除与防漂移。数值断言来自冻结 Nanoka 3.2 天赋原文与固定提交
+ * publicAnomalySkills.ts 系数表（中英文交叉核对），不从生成器反推。
+ */
+const batch09SupplementIds = [
+  "nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical",
+  "nanoka:agents:nangongyu:m6-vibrato-modified-physical",
+] as const
+
+const batch09Supplements = SUPPLEMENTS.filter((supplement) =>
+  (batch09SupplementIds as readonly string[]).includes(supplement.supplementId),
+)
+
+/** 南宫羽核心被动块的冻结完整 note（三条普通颤音记录所在块）。 */
+const batch09NangongyuCorePassiveNote =
+  "南宫羽的异常精通提升120点；\n敌人处于失衡状态时，任意角色对其造成一次[异放]伤害、[紊乱]伤害、使其进入一次属性异常状态时会为其累计1层[颤音]；\n同一敌人最多可被叠加4层[颤音]；\n若[颤音]叠加到最大层数且敌人处于以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、冰属性异常状态、风属性异常状态下时或当敌人持有[颤音]并从失衡状态恢复时，所有[颤音]会被清除；\n[颤音]被清除时，若敌人处于上述属性异常状态下，南宫羽会对目标造成一次[异放]伤害：额外结算一次属性异常伤害，相对于原属性异常伤害的比例为720%/360%/900%/63%/90%/36%，敌人身上每有1层[颤音]，该次[异放]的伤害比例额外提升25%，同一次失衡期间，若[颤音]已被清除，则敌人无法再被施加[颤音]；\n南宫羽的[普通攻击：可爱地雷飞天撞]或[强化特殊技：相当沉重的爱意]命中敌人时，会使自身的属性异常积蓄效率提升35%，造成的失衡值提升20%，使全队造成的伤害提升25%，持续30秒，重复触发时刷新持续时间；"
+
+/** 南宫羽影画 2 块的冻结完整 note（M2 每层 +10% 记录所在块）。 */
+const batch09NangongyuMindscape2Note =
+  "每层[颤音]使[核心被动：天才偶像]中[异放]的伤害比例额外提升10%；\n[额外能力：天使队长]提供的失衡易伤倍率额外提升30%；\n操作中的角色[连携技]重击命中同时处于属性异常和失衡状态下的敌人时，会对敌人触发[极性紊乱]，对目标造成原本[紊乱]效果25%的伤害，敌人在同一失衡期间仅能触发一次该效果。"
+
+/** 南宫羽影画 6 锚块的冻结完整 note（实际空块：note 完整、effects 为空）。 */
+const batch09NangongyuMindscape6Note =
+  "当敌人进入失衡状态时，[颤音：改]会被全部清除，[颤音：改]被清除时，若敌人处于以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、冰属性异常状态、风属性异常状态下，南宫羽会对目标造成一次[异放]伤害：额外结算一次属性异常伤害，相对于原属性异常伤害的比例为800%/400%/1000%/70%/100%/40%，敌人身上每有1层[颤音：改]，该次[异放]的伤害比例额外提升25%；[颤音：改]与[颤音]无法相互叠加。"
+
+const batch09VibratoEffect = (
+  id: string,
+  overrides: Partial<SourceEffect>,
+): SourceEffect => ({
+  ...batch03BaseEffect,
+  id,
+  scope: "anomalyRelease",
+  ...overrides,
+})
+
+/**
+ * 批次 09 的固定来源夹具：南宫羽 rank 0 携带核心被动真实五记录（精通、
+ * 五元素基础 450%、物理基础 449%、每层 +25%、团队增伤），rank 2 携带
+ * 影画 2 真实三记录（每层 +10%、失衡易伤、极性紊乱），rank 6 还原实际
+ * 空块（锚块 note 完整、effects 为空）。
+ */
+const batch09Data = (
+  overrides: {
+    extraPacks?: Readonly<
+      Record<string, { rank: number; block: SourceBlock4Test }>
+    >
+  } = {},
+): SourceData => {
+  const agent = (
+    id: string,
+    name: string,
+    blocks: Readonly<Record<number, SourceBlock4Test>> = {},
+  ) =>
+    batch03AgentEntity(
+      id,
+      name,
+      Object.fromEntries([
+        ...Object.entries(blocks),
+        ...Object.entries(
+          Object.fromEntries(
+            [overrides.extraPacks?.[id]]
+              .filter((p) => p !== undefined)
+              .map((p) => [String(p!.rank), p!.block] as const),
+          ),
+        ),
+      ]),
+    )
+  return {
+    agents: [
+      agent("nangongyu", "南宫羽", {
+        0: {
+          id: "blk-ms4cegmd-bwnttd",
+          note: batch09NangongyuCorePassiveNote,
+          effects: [
+            batch09VibratoEffect("eff-ms4cegmd-ob1826", {
+              stat: "mastery",
+              value: 120,
+              scope: "general",
+              applySituation: "global",
+            }),
+            batch09VibratoEffect("eff-ms4cey14-kzw7xx", {
+              stat: "anomalyReleaseMult",
+              value: 450,
+              applySituation: "stagger",
+              elementFilter: ["以太", "电", "火", "冰", "风"],
+            }),
+            batch09VibratoEffect("eff-ms4clm2r-e6xquw", {
+              stat: "anomalyReleaseMult",
+              value: 449,
+              applySituation: "stagger",
+              elementFilter: ["物理"],
+            }),
+            batch09VibratoEffect("eff-ms4cm9a5-wou1p2", {
+              stat: "anomalyReleaseMultFactor",
+              value: 0,
+              applySituation: "stagger",
+              kind: "stacked",
+              maxStacks: 4,
+              valuePerStack: 25,
+              defaultStacks: 4,
+            }),
+            batch09VibratoEffect("eff-ms4cyc74-h4xcin", {
+              stat: "dmgBonus",
+              value: 25,
+              scope: "general",
+              applyTarget: "team",
+              applySituation: "global",
+            }),
+          ],
+        },
+        2: {
+          id: "blk-legacy",
+          note: batch09NangongyuMindscape2Note,
+          effects: [
+            batch09VibratoEffect("legacy-team-anomalyReleaseMultFactor", {
+              stat: "anomalyReleaseMultFactor",
+              value: 0,
+              applySituation: "stagger",
+              kind: "stacked",
+              maxStacks: 4,
+              valuePerStack: 10,
+              defaultStacks: 4,
+            }),
+            batch09VibratoEffect("eff-ms4dpmaw-3wtd1m", {
+              stat: "staggerVulnerable",
+              value: 30,
+              scope: "general",
+              applyTarget: "team",
+              applySituation: "global",
+            }),
+            batch09VibratoEffect("eff-ms4dq0l7-5lfpti", {
+              stat: "disorderBaseMultFactor",
+              value: -75,
+              scope: "skill",
+              applySituation: "stagger",
+            }),
+          ],
+        },
+        6: {
+          id: "blk-ms4dtzxa-touyxm",
+          note: batch09NangongyuMindscape6Note,
+          effects: [],
+        },
+      }),
+    ],
+    driveDiscs: [],
+    skillSubcategories: [],
+    followUpSkillRules: [],
+    wengines: [],
+  }
+}
+
+describe("batch 09 Nangongyu M6 vibrato-modified supplements", () => {
+  it("registers the two complete-state options with bridged layer counts", () => {
+    const result = convertSource(
+      batch09Data(),
+      functions,
+      [],
+      batch09Supplements,
+    )
+    expect(result.definitions.revision).toBe("24")
+    expect(result.coverage.summary.supplements).toMatchObject({
+      records: 2,
+      rules: 2,
+      options: 2,
+      entities: 0,
+      integrated: 2,
+      outOfScope: 0,
+    })
+    for (const [group, optionId, effectId, layerInput, base, elements] of [
+      [
+        "nonphysical",
+        "nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical",
+        "agent:1511:nanoka:m6-vibrato-modified-nonphysical:mindscape:6",
+        "nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical:layers",
+        5,
+        ["ether", "electric", "fire", "ice", "wind"],
+      ],
+      [
+        "physical",
+        "nanoka:agents:nangongyu:m6-vibrato-modified-physical",
+        "agent:1511:nanoka:m6-vibrato-modified-physical:mindscape:6",
+        "nanoka:agents:nangongyu:m6-vibrato-modified-physical:layers",
+        4.991,
+        ["physical"],
+      ],
+    ] as const) {
+      const option = result.catalog.options.find(
+        (o) => o.optionId === optionId,
+      )!
+      expect(option.target, group).toBe("self")
+      const variant = option.variants[0]!
+      expect(variant, group).toMatchObject({
+        status: "converted",
+        maximumLayers: 4,
+        layerCountInputName: layerInput,
+        configuration: { minimumMindscape: 6 },
+        inputs: [],
+        effectIds: [effectId],
+      })
+      expect(variant.damageItemRequirements, group).toEqual([
+        {
+          itemId: "nangongyu:vibrato-modified",
+          stat: "attack",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "anomaly-source",
+          requiredDirectMultiplier: 0,
+          // round1 修复 R01：独立结算分类契约——复用既有最终有效分类守卫，
+          // 借用普通/连携/追加攻击分类或混入其他真实目标的命中按冲突拒绝。
+          requiredSkillCategory: "uncategorized",
+        },
+      ])
+      const rule = result.definitions.effects.find(
+        (r) => r.effectId === effectId,
+      ) as ContributionRule
+      expect(rule.scope, group).toBe("hit")
+      expect(rule.beneficiary, group).toEqual({ kind: "holder" })
+      // 完整倍率表达式：归一基础 × (1 + 0.25 × 层数)，count 输入由目录桥接
+      // 派生；规则单实例（maximumLayers 1），不把逻辑层数展开成多次结算。
+      expect(rule.activation).toEqual({
+        kind: "supplied",
+        maximumLayers: { kind: "literal", unit: "count", value: 1 },
+      })
+      expect(rule.operation, group).toEqual({
+        kind: "hit-adjustment",
+        field: "damageMultiplier",
+        operator: "add",
+        itemIds: ["nangongyu:vibrato-modified"],
+        value: {
+          kind: "multiply",
+          unit: "multiplier",
+          value: { kind: "literal", unit: "multiplier", value: base },
+          coefficient: {
+            kind: "add",
+            unit: "ratio",
+            operands: [
+              { kind: "literal", unit: "ratio", value: 1 },
+              {
+                kind: "convert",
+                unit: "ratio",
+                input: { kind: "input", unit: "count", name: layerInput },
+                rate: { kind: "literal", unit: "multiplier", value: 0.25 },
+              },
+            ],
+          },
+        },
+      })
+      expect(rule.when, group).toEqual({
+        kind: "all",
+        conditions: [
+          {
+            kind: "one-of",
+            fact: "hit.damageKind",
+            values: ["anomaly-settlement"],
+          },
+          { kind: "one-of", fact: "hit.element", values: [...elements] },
+          {
+            kind: "one-of",
+            fact: "hit.skillTag",
+            values: ["zzz-hp:skill:nangongyu-vibrato-modified"],
+          },
+        ],
+      })
+    }
+    // 独立目标只登记一次，两分组共用；uncategorized 分类不冒充游戏技能分类。
+    const targets = result.catalog.skillTargets.filter((t) =>
+      t.targetId.startsWith("zzz-hp:skill:nangongyu-vibrato-modified"),
+    )
+    expect(targets).toHaveLength(1)
+    expect(targets[0]).toMatchObject({
+      upstreamId: null,
+      agentEntityId: "1511",
+      category: "uncategorized",
+      countsAsFollowUp: false,
+    })
+    // 差异说明登记进目录。
+    expect(
+      result.catalog.differences.some(
+        (d) => d.differenceId === "nangongyu-vibrato-modified-exclusivity",
+      ),
+    ).toBe(true)
+  })
+
+  it("appends the vibrato-modified exclusion to the four normal-vibrato rules only", () => {
+    const result = convertSource(
+      batch09Data(),
+      functions,
+      [],
+      batch09Supplements,
+    )
+    const excludedEffectIds = [
+      "agent:1511:zzz-hp:eff-ms4cey14-kzw7xx:blk-ms4cegmd-bwnttd:mindscape:0",
+      "agent:1511:zzz-hp:eff-ms4clm2r-e6xquw:blk-ms4cegmd-bwnttd:mindscape:0",
+      "agent:1511:zzz-hp:eff-ms4cm9a5-wou1p2:blk-ms4cegmd-bwnttd:mindscape:0",
+      "agent:1511:zzz-hp:legacy-team-anomalyReleaseMultFactor:blk-legacy:mindscape:2",
+    ]
+    for (const effectId of excludedEffectIds) {
+      const rule = result.definitions.effects.find(
+        (r) => r.effectId === effectId,
+      ) as ContributionRule
+      expect(rule.when!.kind).toBe("all")
+      const conditions = (
+        rule.when as unknown as { conditions: readonly unknown[] }
+      ).conditions
+      expect(conditions.length, effectId).toBeGreaterThanOrEqual(2)
+      expect(JSON.stringify(conditions.at(-1))).toEqual(
+        JSON.stringify({
+          kind: "not",
+          condition: {
+            kind: "one-of",
+            fact: "hit.skillTag",
+            values: ["zzz-hp:skill:nangongyu-vibrato-modified"],
+          },
+        }),
+      )
+      // 数值与既有条件保持：M0 基础 4.5/4.49、每层 0.25、M2 每层 0.1 与
+      // 失衡内条件都原样保留。
+      expect(JSON.stringify(rule.when)).toContain("anomaly-settlement")
+      if (effectId.includes("ms4cey14"))
+        expect(rule.parameters).toMatchObject({
+          amount: { kind: "constant", unit: "multiplier", value: 4.5 },
+        })
+      if (effectId.includes("ms4clm2r"))
+        expect(rule.parameters).toMatchObject({
+          amount: { kind: "constant", unit: "multiplier", value: 4.49 },
+        })
+      if (effectId.includes("ms4cm9a5"))
+        expect(rule.parameters).toMatchObject({
+          amount: { kind: "constant", unit: "ratio", value: 0.25 },
+        })
+      if (effectId.includes("legacy-team"))
+        expect(rule.parameters).toMatchObject({
+          amount: { kind: "constant", unit: "ratio", value: 0.1 },
+        })
+      // M2 保留失衡内条件（既有行为），M0 三条不因排除恢复该条件。
+      const hasStunned = JSON.stringify(rule.when).includes('"stunned"')
+      expect(hasStunned, effectId).toBe(effectId.includes("legacy-team"))
+    }
+    for (const effectId of excludedEffectIds) {
+      const option = result.catalog.options.find((o) =>
+        o.variants.some((v) => v.effectIds.includes(effectId as never)),
+      )!
+      const variant = option.variants.find((v) =>
+        v.effectIds.includes(effectId as never),
+      )!
+      expect(variant.status, effectId).toBe("corrected")
+      expect(variant.differences, effectId).toContain(
+        "nangongyu-vibrato-modified-exclusivity",
+      )
+      if (!effectId.includes("legacy-team"))
+        expect(variant.differences, effectId).toContain(
+          "stagger-recovery-settlement",
+        )
+    }
+    // 同块独立条款不受排除影响：精通/团队增伤/失衡易伤/极性紊乱保持
+    // 原状态，无排除条件。
+    for (const untouched of [
+      "agent:1511:zzz-hp:eff-ms4cegmd-ob1826:blk-ms4cegmd-bwnttd:mindscape:0",
+      "agent:1511:zzz-hp:eff-ms4cyc74-h4xcin:blk-ms4cegmd-bwnttd:mindscape:0",
+      "agent:1511:zzz-hp:eff-ms4dpmaw-3wtd1m:blk-legacy:mindscape:2",
+      "agent:1511:zzz-hp:eff-ms4dq0l7-5lfpti:blk-legacy:mindscape:2",
+    ]) {
+      const rule = result.definitions.effects.find(
+        (r) => r.effectId === untouched,
+      ) as ContributionRule
+      expect(JSON.stringify(rule.when), untouched).not.toContain(
+        "zzz-hp:skill:nangongyu-vibrato-modified",
+      )
+    }
+  })
+
+  it("rejects encoding drift of the four excluded records in both representations", () => {
+    const fixedMutations = [
+      ["value", (e: SourceEffect) => ({ ...e, value: 455 })],
+      ["stackable", (e: SourceEffect) => ({ ...e, stackable: true })],
+      [
+        "elementFilter",
+        (e: SourceEffect) => ({ ...e, elementFilter: "all" as const }),
+      ],
+      ["scope", (e: SourceEffect) => ({ ...e, scope: "general" })],
+    ] as const
+    const stackedMutations = [
+      ["value", (e: SourceEffect) => ({ ...e, value: 25 })],
+      ["kind", (e: SourceEffect) => ({ ...e, kind: "fixed" as const })],
+      ["maxStacks", (e: SourceEffect) => ({ ...e, maxStacks: 5 })],
+      ["valuePerStack", (e: SourceEffect) => ({ ...e, valuePerStack: 30 })],
+      ["scope", (e: SourceEffect) => ({ ...e, scope: "general" })],
+    ] as const
+    const targets = [
+      {
+        rank: 0,
+        id: "eff-ms4cey14-kzw7xx",
+        label: "m0-nonphysical",
+        mutations: fixedMutations,
+      },
+      {
+        rank: 0,
+        id: "eff-ms4clm2r-e6xquw",
+        label: "m0-physical",
+        mutations: fixedMutations,
+      },
+      {
+        rank: 0,
+        id: "eff-ms4cm9a5-wou1p2",
+        label: "m0-layers",
+        mutations: stackedMutations,
+      },
+      {
+        rank: 2,
+        id: "legacy-team-anomalyReleaseMultFactor",
+        label: "m2-layers",
+        mutations: stackedMutations,
+      },
+    ]
+    for (const target of targets)
+      for (const [label, mutation] of target.mutations) {
+        const mutated = batch09Data()
+        const block =
+          mutated.agents[0]!.mindscapeBuffs![target.rank]!.effectBlocks![0]!
+        block.effects = block.effects.map((e) =>
+          e.id === target.id ? mutation(e) : e,
+        )
+        expect(
+          () => convertSource(mutated, functions, [], batch09Supplements),
+          `${target.label}:${label}`,
+        ).toThrowError(/Settlement-target exclusion .* field drift/)
+      }
+  })
+
+  it("rejects block note drift, appended clauses and normalized removal for the excluded records", () => {
+    // 保留全部原文、末尾追加冲突句：完整冻结 note 逐字比对拒绝。
+    for (const [rank, note, label] of [
+      [0, batch09NangongyuCorePassiveNote, "core"],
+      [2, batch09NangongyuMindscape2Note, "m2"],
+    ] as const) {
+      const appended = batch09Data()
+      appended.agents[0]!.mindscapeBuffs![rank]!.effectBlocks![0]!.note =
+        `${note}颤音：改的比例额外提升50%。`
+      expect(
+        () => convertSource(appended, functions, [], batch09Supplements),
+        label,
+      ).toThrowError(
+        /Settlement-target exclusion .* expects the registered block note/,
+      )
+    }
+    // 关键数值漂移（450% → 460%）同样拒绝。
+    const drifted = batch09Data()
+    drifted.agents[0]!.mindscapeBuffs![0]!.effectBlocks![0]!.note =
+      batch09NangongyuCorePassiveNote.replace("720%", "730%")
+    expect(() =>
+      convertSource(drifted, functions, [], batch09Supplements),
+    ).toThrowError(
+      /Settlement-target exclusion .* expects the registered block note/,
+    )
+    // normalized 删除不再走通用 unsupported 降级：登记校验先行拒绝。
+    const dropping: SourceNormalization = {
+      ...functions,
+      collectEffectsFromPack: (pack: SourcePack) =>
+        (functions.collectEffectsFromPack(pack) ?? []).filter(
+          (effect) => effect.id !== "legacy-team-anomalyReleaseMultFactor",
+        ),
+    }
+    expect(() =>
+      convertSource(batch09Data(), dropping, [], batch09Supplements),
+    ).toThrowError(/Settlement-target exclusion .* lost the normalized record/)
+    // 仅 normalized 侧块 note 被改写（raw 保持原文）：同样拒绝。
+    const normalizedNote: SourceNormalization = {
+      ...functions,
+      normalizeAgent: (entity) => {
+        const normalized = functions.normalizeAgent(entity)
+        return {
+          ...normalized,
+          mindscapeBuffs: (normalized.mindscapeBuffs ?? []).map((pack) => ({
+            ...pack,
+            effectBlocks: (pack.effectBlocks ?? []).map((candidate) =>
+              candidate.id === "blk-ms4cegmd-bwnttd"
+                ? {
+                    ...candidate,
+                    note: `${candidate.note ?? ""}颤音：改的比例额外提升50%。`,
+                  }
+                : candidate,
+            ),
+          })),
+        }
+      },
+    }
+    expect(() =>
+      convertSource(batch09Data(), normalizedNote, [], batch09Supplements),
+    ).toThrowError(
+      /Settlement-target exclusion .* expects the registered block note/,
+    )
+  })
+
+  it("rejects the loss of any excluded identity when an M6 supplement participates", () => {
+    // 上游移除 M2 每层记录：语义键落空，旧贡献不再排除 → 拒绝生成。
+    const removed = batch09Data()
+    const m2Block = removed.agents[0]!.mindscapeBuffs![2]!.effectBlocks![0]!
+    m2Block.effects = m2Block.effects.filter(
+      (e) => e.id !== "legacy-team-anomalyReleaseMultFactor",
+    )
+    expect(() =>
+      convertSource(removed, functions, [], batch09Supplements),
+    ).toThrowError(
+      /settlement-target exclusion .* lost its registered source record .*nangongyu.*m6-vibrato-modified/,
+    )
+    // 核心被动块改名：三条 M0 记录语义键同时落空 → 同样拒绝。
+    const renamed = batch09Data()
+    renamed.agents[0]!.mindscapeBuffs![0]!.effectBlocks![0]!.id =
+      "blk-renamed-upstream"
+    expect(() =>
+      convertSource(renamed, functions, [], batch09Supplements),
+    ).toThrowError(/lost its registered source record/)
+  })
+
+  it("does not require the identities when the dependent supplements are absent", () => {
+    const renamed = batch09Data()
+    renamed.agents[0]!.mindscapeBuffs![0]!.effectBlocks![0]!.id =
+      "blk-renamed-upstream"
+    expect(() => convertSource(renamed, functions, [], [])).not.toThrow()
+  })
+
+  it("rejects machine encodings in the registered M6 clause context and anchor drift", () => {
+    // 影画 6 锚块内出现异放乘区编码：同条款上下文拒绝。
+    const anchorRecord: SourceEffect = batch09VibratoEffect("eff-m6-clause", {
+      stat: "anomalyReleaseMult",
+      value: 800,
+    })
+    expect(() =>
+      convertSource(
+        batch09Data({
+          extraPacks: {
+            nangongyu: {
+              rank: 6,
+              block: {
+                id: "blk-ms4dtzxa-touyxm",
+                note: batch09NangongyuMindscape6Note,
+                effects: [anchorRecord],
+              },
+            },
+          },
+        }),
+        functions,
+        [],
+        batch09Supplements,
+      ),
+    ).toThrowError(
+      /conflicts with the fixed-source record .* in the registered clause context agents:nangongyu mindscape rank 6/,
+    )
+    // 归一删除后 raw pack 仍有锚块内容：raw/normalized 双份核对拒绝。
+    const dropping = {
+      ...functions,
+      collectEffectsFromPack: (pack: SourcePack) =>
+        (functions.collectEffectsFromPack(pack) ?? []).filter(
+          (effect) => effect.id !== "eff-m6-clause",
+        ),
+    }
+    expect(() =>
+      convertSource(
+        batch09Data({
+          extraPacks: {
+            nangongyu: {
+              rank: 6,
+              block: {
+                id: "blk-ms4dtzxa-touyxm",
+                note: batch09NangongyuMindscape6Note,
+                effects: [anchorRecord],
+              },
+            },
+          },
+        }),
+        dropping,
+        [],
+        batch09Supplements,
+      ),
+    ).toThrowError(/conflicts with the fixed-source record/)
+    // 锚块 note 追加冲突句（保留原文）与关键数值漂移都拒绝。
+    for (const note of [
+      `${batch09NangongyuMindscape6Note}颤音：改额外提升50%。`,
+      batch09NangongyuMindscape6Note.replace("800%", "900%"),
+    ]) {
+      const drifted = batch09Data()
+      drifted.agents[0]!.mindscapeBuffs![6]!.effectBlocks![0]!.note = note
+      expect(() =>
+        convertSource(drifted, functions, [], batch09Supplements),
+      ).toThrowError(
+        /anchor block blk-ms4dtzxa-touyxm note .* re-review the clause context/,
+      )
+    }
+    // 锚块被换成其他块 id：拒绝。
+    const missing = batch09Data()
+    missing.agents[0]!.mindscapeBuffs![6]!.effectBlocks![0]!.id = "blk-renamed"
+    expect(() =>
+      convertSource(missing, functions, [], batch09Supplements),
+    ).toThrowError(
+      /lost its anchor block blk-ms4dtzxa-touyxm at agents:nangongyu mindscape rank 6/,
+    )
+  })
+
+  it("does not reject independent records of other ranks and stays stable under reordering", () => {
+    // 其他 rank 的独立异放乘区条款不受 rank 6 守卫影响。
+    const independent: SourceEffect = batch09VibratoEffect(
+      "eff-m4-independence",
+      { stat: "anomalyReleaseMult", value: 300 },
+    )
+    expect(() =>
+      convertSource(
+        batch09Data({
+          extraPacks: {
+            nangongyu: {
+              rank: 4,
+              block: {
+                id: "blk-legacy",
+                note: "另一个独立机制：异放伤害比例提升300%。",
+                effects: [independent],
+              },
+            },
+          },
+        }),
+        functions,
+        [],
+        batch09Supplements,
+      ),
+    ).not.toThrow()
+    // 数组重排：代理、块内记录顺序变化不改变稳定身份与守卫。
+    const reordered = batch09Data()
+    reordered.agents.reverse()
+    for (const pack of reordered.agents[0]!.mindscapeBuffs ?? [])
+      for (const block of pack.effectBlocks ?? []) block.effects.reverse()
+    expect(() =>
+      convertSource(reordered, functions, [], batch09Supplements),
+    ).not.toThrow()
+  })
+
+  it("locks the evidence pointers of the two supplements", () => {
+    for (const supplement of batch09Supplements) {
+      expect(supplement.evidence).toHaveLength(1)
+      expect(supplement.evidence[0]).toMatchObject({
+        path: "agents/1511/details.zh.json",
+        pointer: "/talent/6/desc",
+        sha256:
+          "623a202f3d6b33c5c32d2ef6958595d02f0649cd76e57679858108b753a262b8",
+      })
+    }
+  })
+
+  it("guards the layer-count bridge against incomplete or incompatible declarations", () => {
+    type VibratoOption = Extract<Supplement, { kind: "option" }>
+    const nonphysicalOnly = (
+      transform: (supplement: VibratoOption) => VibratoOption,
+    ): Supplement[] =>
+      batch09Supplements.map((supplement) =>
+        supplement.kind === "option" &&
+        supplement.supplementId ===
+          "nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical"
+          ? transform(supplement)
+          : supplement,
+      )
+    // 只声明逻辑层数上限、不声明桥接名：拒绝。
+    const nameless = nonphysicalOnly((supplement) => {
+      const { layerCountInputName: _omitted, ...variant } = supplement.variant
+      return { ...supplement, variant }
+    })
+    expect(() =>
+      convertSource(batch09Data(), functions, [], nameless),
+    ).toThrowError(
+      /must declare layerCountInputName and layerCountMaximumLayers together/,
+    )
+    // 只声明桥接名、不声明逻辑层数上限：拒绝。
+    const boundless = nonphysicalOnly((supplement) => {
+      const { layerCountMaximumLayers: _omitted, ...variant } =
+        supplement.variant
+      return { ...supplement, variant }
+    })
+    expect(() =>
+      convertSource(batch09Data(), functions, [], boundless),
+    ).toThrowError(
+      /must declare layerCountInputName and layerCountMaximumLayers together/,
+    )
+    // 桥接选项叠加 additionalRules：目录只允许一条消费 count 的贡献，拒绝。
+    const withAdditional = nonphysicalOnly((supplement) => ({
+      ...supplement,
+      additionalRules: [
+        {
+          ...supplement.rule,
+          effectId: "agent:1511:nanoka:m6-extra:mindscape:6",
+        },
+      ],
+    }))
+    expect(() =>
+      convertSource(batch09Data(), functions, [], withAdditional),
+    ).toThrowError(/cannot combine the layer-count bridge with additionalRules/)
+    // 桥接规则的实例层数上限不是 1：逻辑层数会被展开成多次完整结算，拒绝。
+    const stacked = nonphysicalOnly((supplement) => ({
+      ...supplement,
+      rule: { ...supplement.rule, maximumLayers: 4 },
+      variant: { ...supplement.variant, layerCountMaximumLayers: 4 },
+    }))
+    expect(() =>
+      convertSource(batch09Data(), functions, [], stacked),
+    ).toThrowError(/must expand a single complete instance \(maximumLayers 1\)/)
+    // 非法逻辑层数上限：拒绝。
+    const invalid = nonphysicalOnly((supplement) => ({
+      ...supplement,
+      variant: {
+        ...supplement.variant,
+        layerCountMaximumLayers: 1.5,
+      },
+    }))
+    expect(() =>
+      convertSource(batch09Data(), functions, [], invalid),
+    ).toThrowError(/declares an invalid logical layer maximum/)
   })
 })
