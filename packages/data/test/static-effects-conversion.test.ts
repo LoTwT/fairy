@@ -160,7 +160,7 @@ describe("static data conversion", () => {
       ],
     }
     const result = convertSource(source, functions, [], [])
-    expect(result.definitions.revision).toBe("24")
+    expect(result.definitions.revision).toBe("25")
     for (const option of result.catalog.options) {
       const variant = option.variants[0]!
       const sameBlock = option.optionId.endsWith("unverified-same-block")
@@ -453,7 +453,7 @@ const angelData = (): SourceData => ({
 describe("developer stat revision", () => {
   it("maps the four registered records through the anomaly bonus channel", () => {
     const result = convertSource(angelData(), functions, [], [])
-    expect(result.definitions.revision).toBe("24")
+    expect(result.definitions.revision).toBe("25")
     const option = result.catalog.options.find(
       (o) =>
         o.optionId ===
@@ -745,7 +745,7 @@ const remielData = (): SourceData => ({
 describe("remielle mindscape 2 attribute anomaly scope revision", () => {
   it("adds the [异常] profession and attribute anomaly damage scope from the reviewed text", () => {
     const result = convertSource(remielData(), functions, [], [])
-    expect(result.definitions.revision).toBe("24")
+    expect(result.definitions.revision).toBe("25")
     const option = result.catalog.options.find((o) =>
       o.optionId.includes("eff-ms7tlurw-vhelyf"),
     )!
@@ -895,7 +895,7 @@ describe("remielle mindscape 1 complete anomaly state", () => {
     "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
   it("merges the team and holder records into one corrected complete option", () => {
     const result = convertSource(remielMindscape1Data(), functions, [], [])
-    expect(result.definitions.revision).toBe("24")
+    expect(result.definitions.revision).toBe("25")
     const option = result.catalog.options.find((o) => o.optionId === optionId)!
     expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
     expect(option.conditionDescription).toBe(
@@ -1128,7 +1128,7 @@ const qingmingData = (): SourceData => ({
 describe("qingming birdcage pierce stack correction", () => {
   it("compiles the registered fixed encodings as per-layer contributions with a two-layer cap", () => {
     const result = convertSource(qingmingData(), functions, [], [])
-    expect(result.definitions.revision).toBe("24")
+    expect(result.definitions.revision).toBe("25")
     for (const [index, effectId] of qingmingPierceIds.entries()) {
       const option = result.catalog.options.find((o) =>
         o.optionId.includes(effectId),
@@ -1220,11 +1220,13 @@ const discSetData = (
             ],
     },
     { id: "SuitSoulRock", name: "灵魂摇滚" },
+    { id: "SuitFreedomBlues", name: "自由蓝调" },
     { id: "SuitProtoPunk", name: "原始朋克" },
     { id: "SuitKingoftheSummit", name: "山大王" },
   ],
 })
 
+/** 全部驱动盘越界/补充声明：二件套与本批的四件套按同一机制生成。 */
 const driveDiscSupplements = SUPPLEMENTS.filter((supplement) =>
   supplement.supplementId.startsWith("nanoka:drive-discs:"),
 )
@@ -1301,7 +1303,10 @@ describe("drive-disc two-piece supplements and boundaries", () => {
 
   it("rejects a boundary declaration colliding with a fixed-source two-piece record", () => {
     const protoPunkRecord = discSetData()
-    protoPunkRecord.driveDiscs[2] = {
+    const protoPunkIndex = protoPunkRecord.driveDiscs.findIndex(
+      (disc) => disc.id === "SuitProtoPunk",
+    )
+    protoPunkRecord.driveDiscs[protoPunkIndex] = {
       id: "SuitProtoPunk",
       name: "原始朋克",
       twoPieceEffectBlocks: [
@@ -3830,7 +3835,7 @@ describe("agent batch 06 impact and energy regen supplements", () => {
       integrated: 6,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("24")
+    expect(result.definitions.revision).toBe("25")
 
     const caesar = result.catalog.options.find(
       (o) => o.optionId === "nanoka:agents:caesar:stance-switch-impact",
@@ -4361,7 +4366,7 @@ describe("batch 07 Roxy and Crimson Moon Casket supplements", () => {
       integrated: 4,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("24")
+    expect(result.definitions.revision).toBe("25")
     const entities = result.catalog.entities.filter((e) =>
       ["nanoka:agents:1621", "nanoka:w-engines:14162"].includes(
         e.catalogEntityId,
@@ -4841,7 +4846,7 @@ describe("batch 08 M6 independent follow-up supplements", () => {
       integrated: 3,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("24")
+    expect(result.definitions.revision).toBe("25")
     const expected: readonly (readonly [
       optionId: string,
       effectId: string,
@@ -5714,7 +5719,7 @@ describe("batch 09 Nangongyu M6 vibrato-modified supplements", () => {
       [],
       batch09Supplements,
     )
-    expect(result.definitions.revision).toBe("24")
+    expect(result.definitions.revision).toBe("25")
     expect(result.coverage.summary.supplements).toMatchObject({
       records: 2,
       rules: 2,
@@ -6266,5 +6271,947 @@ describe("batch 09 Nangongyu M6 vibrato-modified supplements", () => {
     expect(() =>
       convertSource(batch09Data(), functions, [], invalid),
     ).toThrowError(/declares an invalid logical layer maximum/)
+  })
+})
+
+/**
+ * 批次 10（PR10）越界覆盖登记：不可选声明只登记、不创建规则，生成期
+ * 守卫按实体类型核对声明本身（实体映射、配置域与取值、选项身份、驱动盘
+ * 件数 note/冲突、音擎五档真实缺失状态、代理人真实空 pack/锚块、同词表
+ * 已有记录冲突），并对真实错误输入给出具名拒绝。
+ */
+const batch10SupplementIds = [
+  "nanoka:drive-discs:31200:four-piece-daze-value",
+  "nanoka:drive-discs:31300:four-piece-anomaly-buildup-resistance",
+  "nanoka:drive-discs:31500:four-piece-damage-taken-reduction",
+  "nanoka:w-engines:12003:ex-energy-recovery",
+  "nanoka:w-engines:12012:anomaly-triggered-energy-recovery",
+  "nanoka:w-engines:13002:decibel-and-energy-generation",
+  "nanoka:w-engines:13011:damage-taken-and-energy-generation-rate",
+  "nanoka:w-engines:13016:damage-taken-and-miasma-contamination",
+  "nanoka:w-engines:12008:daze-on-main-target",
+  "nanoka:w-engines:12007:ex-daze",
+  "nanoka:w-engines:14003:charge-consumed-daze",
+  "nanoka:w-engines:13006:target-hp-daze",
+  "nanoka:w-engines:14114:basic-attack-daze",
+  "nanoka:agents:nicole:mindscape-1-anomaly-buildup-and-field-duration",
+  "nanoka:agents:qingyi:flash-voltage-daze",
+  "nanoka:agents:koleda:enhanced-basic-second-daze",
+  "nanoka:agents:lighter:mindscape-4-morale-burst-energy",
+  "nanoka:w-engines:14162:daze-value",
+  "nanoka:agents:nangongyu:m6-vibrato-daze",
+  "nanoka:agents:1621:wind-energy-acquisition",
+  "nanoka:agents:yuzuha:extra-ability-anomaly-buildup-efficiency",
+  "nanoka:agents:yuzuha:mindscape-1-entry-energy",
+  // 12014 由 coverage-only boundary 迁移的单份目录可发现声明。
+  "nanoka:w-engines:12014:attacker-damage-reduction",
+  // 前批已修/已补提供者同一被动段的确定缺口。
+  "nanoka:w-engines:13127:ex-and-assist-anomaly-buildup",
+  "nanoka:w-engines:14148:ex-physical-daze-stacks",
+  "nanoka:agents:lighter:morale-acquisition",
+  "nanoka:agents:lighter:collapse-stun-duration",
+  "nanoka:agents:dialyn:positive-reviews-and-complaints",
+  "nanoka:agents:dialyn:malicious-complaint-stun-duration",
+  "nanoka:agents:nangongyu:core-buildup-and-daze",
+  "nanoka:agents:nangongyu:downbeat-acquisition",
+] as const
+
+const batch10Supplements = SUPPLEMENTS.filter((supplement) =>
+  (batch10SupplementIds as readonly string[]).includes(supplement.supplementId),
+)
+
+/** 声明所依赖的既有补充（补充实体与同提供者既有选项）也参与本次转换。 */
+const batch10SupportingIds = [
+  "nanoka:w-engines:14162:crit-rate",
+  "nanoka:w-engines:14162:wind-resistance-ignore",
+  "nanoka:w-engines:14162:squad-damage-bonus",
+  "nanoka:agents:1621:initial-energy-regen-conversion",
+] as const
+
+/** 柚叶固定来源记录（与真实来源逐字段一致的编码；applyTarget 固定 team）。 */
+const batch10YuzuhaRecord = (
+  id: string,
+  stat: string,
+  value: number,
+  overrides: {
+    readonly convert?: { readonly ratioPercent: number; readonly cap: number }
+    readonly appliesToAnomaly?: boolean
+  },
+): SourceEffect => ({
+  ...batch03BaseEffect,
+  id,
+  stat,
+  value,
+  applyTarget: "team",
+  applySituation: "global",
+  kind: overrides.convert ? "convert" : "fixed",
+  ...(overrides.convert
+    ? {
+        convert: {
+          from: "anomalyControl",
+          panelSource: "manual",
+          ratioPercent: overrides.convert.ratioPercent,
+          cap: overrides.convert.cap,
+          defaultBase: 201,
+          initialBase: 0,
+        },
+      }
+    : {}),
+  ...(overrides.appliesToAnomaly === true ? { appliesToAnomaly: true } : {}),
+})
+
+/** 柚叶额外能力整句的冻结 note（固定来源 blk-ms38y9v7-07td4j 原文）。 */
+const batch10YuzuhaAbilityNote =
+  "队伍中存在[异常]角色或与自身阵营相同的角色时触发：\n若柚叶的异常掌控大于100点，每超过1点异常掌控会使拥有[狸之愿]效果的角色的属性异常积蓄效率提升0.2%，最多提升20%，还会使其所有属性异常伤害和[紊乱]伤害提升0.2%，最多提升20%，当柚叶的异常掌控达到200点时，上述增益效果达到最大值。"
+
+/** 南宫羽核心被动块的冻结 note（固定来源 blk-ms4cegmd-bwnttd 原文）。 */
+const batch10NangongyuCoreNote =
+  "南宫羽的异常精通提升120点；\n敌人处于失衡状态时，任意角色对其造成一次[异放]伤害、[紊乱]伤害、使其进入一次属性异常状态时会为其累计1层[颤音]；\n同一敌人最多可被叠加4层[颤音]；\n若[颤音]叠加到最大层数且敌人处于以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、冰属性异常状态、风属性异常状态下时或当敌人持有[颤音]并从失衡状态恢复时，所有[颤音]会被清除；\n[颤音]被清除时，若敌人处于上述属性异常状态下，南宫羽会对目标造成一次[异放]伤害：额外结算一次属性异常伤害，相对于原属性异常伤害的比例为720%/360%/900%/63%/90%/36%，敌人身上每有1层[颤音]，该次[异放]的伤害比例额外提升25%，同一次失衡期间，若[颤音]已被清除，则敌人无法再被施加[颤音]；\n南宫羽的[普通攻击：可爱地雷飞天撞]或[强化特殊技：相当沉重的爱意]命中敌人时，会使自身的属性异常积蓄效率提升35%，造成的失衡值提升20%，使全队造成的伤害提升25%，持续30秒，重复触发时刷新持续时间；"
+
+/** 琉音影画 0 块（blk-legacy）的冻结 note（恶意投诉失衡时长 + 易伤原文）。 */
+const batch10DialynComplaintNote =
+  "[强化特殊技：布！]命中敌人时，敌人获得[恶意投诉]效果，[恶意投诉]效果下敌人进入失衡状态后的失衡持续时间提升2秒，失衡易伤倍率提升30%"
+
+/** 柚叶影画 1 块的冻结 note（固定来源 blk-legacy 原文，不含瞬时能量句）。 */
+const batch10YuzuhaMindscape1Note =
+  "处于[甜蜜惊吓]状态下的敌人全属性伤害抗性降低10%；[额外能力]中属性异常伤害和[紊乱]伤害增益效果提升至原本的130%。"
+
+const batch10SupplementsWithSupport = SUPPLEMENTS.filter((supplement) =>
+  [
+    ...(batch10SupplementIds as readonly string[]),
+    ...(batch10SupportingIds as readonly string[]),
+  ].includes(supplement.supplementId),
+)
+
+/** 九件音擎与拘缚者在批内核对时的真实状态：五档块只有 note、effects 为空。 */
+const batch10NoteOnlyRefinements = (
+  overrides: {
+    readonly records?: readonly SourceEffect[]
+    readonly dropNoteTier?: number
+  } = {},
+): SourcePack[] =>
+  [1, 2, 3, 4, 5].map(
+    (tier): SourcePack => ({
+      effectBlocks: [
+        {
+          id: `blk-note-${tier}`,
+          name: `精炼${tier}`,
+          note:
+            overrides.dropNoteTier === tier
+              ? ""
+              : `固定来源只有 note 的越界条款（第 ${tier} 档）。`,
+          effects: [],
+        },
+      ],
+      effects: tier === 1 ? [...(overrides.records ?? [])] : [],
+    }),
+  )
+
+const batch10Wengine = (
+  id: string,
+  name: string,
+  overrides: {
+    readonly records?: readonly SourceEffect[]
+    readonly dropNoteTier?: number
+    readonly refinementBuffs?: readonly SourcePack[]
+  } = {},
+): SourceEntity => ({
+  id,
+  name,
+  fixedBuffs: { effectBlocks: [], effects: [] },
+  refinementBuffs: [
+    ...(overrides.refinementBuffs ??
+      batch10NoteOnlyRefinements({
+        ...(overrides.records ? { records: overrides.records } : {}),
+        ...(overrides.dropNoteTier === undefined
+          ? {}
+          : { dropNoteTier: overrides.dropNoteTier }),
+      })),
+  ],
+})
+
+/** 批次 10 夹具的四件套块（note 与 effects 可控）。 */
+const batch10Disc = (
+  id: string,
+  name: string,
+  fourPieceNote: string,
+  fourPieceEffects: readonly SourceEffect[] = [],
+): SourceEntity => ({
+  id,
+  name,
+  fourPieceBuffs: {
+    effectBlocks: [
+      {
+        id: "blk-four",
+        name: "4件套",
+        note: fourPieceNote,
+        effects: [...fourPieceEffects],
+      },
+    ],
+    effects: [],
+  },
+})
+
+/** 批次 10 的固定来源夹具：真实块 id/note（南宫羽锚块）与真实缺失状态。 */
+const batch10Data = (
+  overrides: {
+    readonly driveDiscFourPieceNote?: Readonly<Record<string, string>>
+    readonly wengineRecords?: Readonly<Record<string, readonly SourceEffect[]>>
+    readonly wengineDropNoteTier?: Readonly<Record<string, number>>
+    readonly driveDiscFourPieceRecords?: Readonly<
+      Record<string, SourceEffect[]>
+    >
+    readonly agentRecords?: Readonly<
+      Record<
+        string,
+        { readonly rank: number; readonly effects: readonly SourceEffect[] }
+      >
+    >
+    readonly underminesAnchorNote?: string
+    readonly yuzuhaAbilityNote?: string
+    readonly yuzuhaMindscape1Note?: string
+    readonly nangongyuCoreNote?: string
+    readonly dialynComplaintNote?: string
+    readonly refinementOverrides?: Readonly<
+      Record<string, readonly SourcePack[]>
+    >
+  } = {},
+): SourceData => {
+  const discNotes = overrides.driveDiscFourPieceNote ?? {}
+  const agent = (
+    id: string,
+    name: string,
+    blocks: Readonly<Record<number, SourceBlock4Test>> = {},
+  ) => {
+    if (id === "yuzuha") {
+      // 柚叶：与真实固定来源逐字段一致的记录（额外能力四记录 + 影画 1 的
+      // 抗性与四条 130% 记录；applyTarget team、appliesToAnomaly 与 convert
+      // 参数按来源原值），影画 1 块按需追加注入记录（energyRegen 冲突负例）。
+      const records: Readonly<Record<number, readonly SourceEffect[]>> = {
+        0: [
+          batch10YuzuhaRecord("eff-ms38y9v7-2ded3l", "anomalyDmgBonus", 0, {
+            convert: { ratioPercent: 20, cap: 40 },
+            appliesToAnomaly: true,
+          }),
+          batch10YuzuhaRecord("eff-ms3969fx-lmmkyw", "disorderDmgBonus", 0, {
+            convert: { ratioPercent: 20, cap: 40 },
+          }),
+          batch10YuzuhaRecord("eff-ms396xt1-3qbf2a", "anomalyDmgBonus", -20, {
+            appliesToAnomaly: true,
+          }),
+          batch10YuzuhaRecord("eff-ms39auzc-mtr7ac", "disorderDmgBonus", -20, {
+            appliesToAnomaly: true,
+          }),
+        ],
+        1: [
+          batch10YuzuhaRecord("legacy-team-resPen", "resPen", 10, {
+            appliesToAnomaly: true,
+          }),
+          batch10YuzuhaRecord("eff-ms44bnmi-zp616x", "anomalyDmgBonus", 0, {
+            convert: { ratioPercent: 6, cap: 12 },
+            appliesToAnomaly: true,
+          }),
+          batch10YuzuhaRecord("eff-ms44dh8h-xb20mu", "disorderDmgBonus", 0, {
+            convert: { ratioPercent: 6, cap: 12 },
+            appliesToAnomaly: true,
+          }),
+          batch10YuzuhaRecord("eff-ms44eue1-n53aou", "anomalyDmgBonus", -6, {
+            appliesToAnomaly: true,
+          }),
+          batch10YuzuhaRecord("eff-ms44fa80-f595zx", "disorderDmgBonus", -6, {
+            appliesToAnomaly: true,
+          }),
+          ...(overrides.agentRecords?.yuzuha?.effects ?? []),
+        ],
+      }
+      return batch03AgentEntity("yuzuha", "柚叶", {
+        0: {
+          id: "blk-ms38y9v7-07td4j",
+          note: overrides.yuzuhaAbilityNote ?? batch10YuzuhaAbilityNote,
+          effects: records[0]!,
+        },
+        1: {
+          id: "blk-legacy",
+          note: overrides.yuzuhaMindscape1Note ?? batch10YuzuhaMindscape1Note,
+          effects: records[1]!,
+        },
+      })
+    }
+    const base = batch03AgentEntity(id, name, blocks)
+    const injected = overrides.agentRecords?.[id]
+    if (!injected) return base
+    return {
+      ...base,
+      mindscapeBuffs: base.mindscapeBuffs!.map((pack, rank) =>
+        rank === injected.rank
+          ? {
+              effectBlocks: [
+                {
+                  id: `blk-extra-${id}`,
+                  name: "登记位置新编码",
+                  note: "",
+                  effects: [...injected.effects],
+                },
+              ],
+            }
+          : pack,
+      ),
+    }
+  }
+  return {
+    agents: [
+      agent("nicole", "妮可"),
+      agent("qingyi", "青衣"),
+      agent("koleda", "珂蕾妲"),
+      agent("lighter", "莱特"),
+      agent("yuzuha", "柚叶"),
+      agent("dialyn", "琉音", {
+        0: {
+          id: "blk-legacy",
+          note: overrides.dialynComplaintNote ?? batch10DialynComplaintNote,
+          effects: [],
+        },
+      }),
+      agent("nangongyu", "南宫羽", {
+        0: {
+          id: "blk-ms4cegmd-bwnttd",
+          note: overrides.nangongyuCoreNote ?? batch10NangongyuCoreNote,
+          effects: [],
+        },
+        6: {
+          id: "blk-ms4dtzxa-touyxm",
+          note:
+            overrides.underminesAnchorNote ?? batch09NangongyuMindscape6Note,
+          effects: [],
+        },
+      }),
+    ],
+    wengines: [
+      ["Lunar_Noviluna", "「月相」-朔"],
+      ["Magnetic_Storm_Charlie", "「电磁暴」-叁式"],
+      ["Slice_Of_Time", "时光切片"],
+      ["Spring_Embrace", "春日融融"],
+      ["Reel_Projector", "光影刻刀"],
+      ["Vortex_Arrow", "「湍流」-矢型"],
+      ["Vortex_Revolver", "「湍流」-铳型"],
+      ["Six_Shooter", "左轮转子"],
+      ["Precious_Fossilized_Core", "贵重骨核"],
+      ["Weapon_S_1141", "拘缚者"],
+      ["Peacekeeper_Specialized", "维序者-特化型"],
+      ["Yesterday_Calls", "昨夜来电"],
+    ].map(([id, name]) =>
+      batch10Wengine(id!, name!, {
+        ...(overrides.wengineRecords?.[id!]
+          ? { records: overrides.wengineRecords[id!]! }
+          : id === "Peacekeeper_Specialized" || id === "Yesterday_Calls"
+            ? {
+                // 这两件来源已有真实机器记录（回能等）：新声明不得因实体
+                // 存在已支持记录而被误拒，也不套用 note-only 空实体守卫。
+                records: [
+                  {
+                    ...batch03BaseEffect,
+                    id: `existing-${id}-record`,
+                    stat: "energyRegen",
+                    value: 1,
+                  },
+                ],
+              }
+            : {}),
+        ...(overrides.wengineDropNoteTier?.[id!] === undefined
+          ? {}
+          : { dropNoteTier: overrides.wengineDropNoteTier[id!]! }),
+        ...(overrides.refinementOverrides?.[id!]
+          ? { refinementBuffs: overrides.refinementOverrides[id!]! }
+          : {}),
+      }),
+    ),
+    driveDiscs: [
+      batch10Disc(
+        "SuitShockstarDisco",
+        "震星迪斯科",
+        discNotes.SuitShockstarDisco ??
+          "[普通攻击]、[冲刺攻击]、[闪避反击]对主要攻击目标造成的失衡值提升20%。",
+        overrides.driveDiscFourPieceRecords?.SuitShockstarDisco ?? [],
+      ),
+      batch10Disc(
+        "SuitFreedomBlues",
+        "自由蓝调",
+        discNotes.SuitFreedomBlues ??
+          "[强化特殊技]命中敌人时，根据装备者的属性类型，使目标对应属性异常积蓄抗性降低20%，持续8秒，相同属性类型的效果不可叠加。",
+        overrides.driveDiscFourPieceRecords?.SuitFreedomBlues ?? [],
+      ),
+      batch10Disc(
+        "SuitSoulRock",
+        "灵魂摇滚",
+        discNotes.SuitSoulRock ?? "",
+        overrides.driveDiscFourPieceRecords?.SuitSoulRock ?? [],
+      ),
+    ],
+    skillSubcategories: [],
+    followUpSkillRules: [],
+  }
+}
+
+const batch10Options = (supplements: readonly Supplement[]) =>
+  convertSource(
+    batch10Data(),
+    functions,
+    [],
+    supplements,
+  ).catalog.options.filter((option) =>
+    (batch10SupplementIds as readonly string[]).includes(option.optionId),
+  )
+
+describe("batch 10 unsupported clause declarations", () => {
+  it("registers the thirty-one declarations as unsupported variants without new rules", () => {
+    const baseline = convertSource(
+      batch10Data(),
+      functions,
+      [],
+      batch10SupplementsWithSupport.filter(
+        (supplement) =>
+          !(batch10SupplementIds as readonly string[]).includes(
+            supplement.supplementId,
+          ),
+      ),
+    )
+    const result = convertSource(
+      batch10Data(),
+      functions,
+      [],
+      batch10SupplementsWithSupport,
+    )
+    expect(batch10Supplements).toHaveLength(31)
+    const options = result.catalog.options.filter((option) =>
+      (batch10SupplementIds as readonly string[]).includes(option.optionId),
+    )
+    expect(options).toHaveLength(31)
+    // 不可选登记不创建规则：与只含既有补充的基线逐条相同。
+    expect(result.definitions.effects).toEqual(baseline.definitions.effects)
+    for (const option of options) {
+      expect(option.variants, option.optionId).toHaveLength(1)
+      const variant = option.variants[0]!
+      expect(variant.status, option.optionId).toBe("unsupported")
+      expect(variant.reason, option.optionId).toBe("formula-out-of-scope")
+      expect(variant.effectIds, option.optionId).toEqual([])
+      expect(variant.maximumLayers, option.optionId).toBe(1)
+      expect(variant.inputs, option.optionId).toEqual([])
+      expect(variant.explanation?.length ?? 0, option.optionId).toBeGreaterThan(
+        20,
+      )
+      for (const reference of variant.references)
+        expect(reference, option.optionId).toMatchObject({
+          sourceId: "nanoka-integrated",
+          version: "3.2",
+        })
+    }
+    const configurationOf = (optionId: string) =>
+      options.find((option) => option.optionId === optionId)!.variants[0]!
+        .configuration
+    expect(
+      configurationOf("nanoka:drive-discs:31200:four-piece-daze-value"),
+    ).toEqual({ minimumSetPieces: 4 })
+    expect(
+      configurationOf("nanoka:w-engines:12003:ex-energy-recovery"),
+    ).toEqual({
+      refinements: [1, 2, 3, 4, 5],
+    })
+    expect(configurationOf("nanoka:agents:qingyi:flash-voltage-daze")).toEqual(
+      {},
+    )
+    expect(
+      configurationOf("nanoka:agents:koleda:enhanced-basic-second-daze"),
+    ).toEqual({
+      potentialLevels: [1, 2, 3, 4, 5, 6],
+    })
+    expect(configurationOf("nanoka:agents:nangongyu:m6-vibrato-daze")).toEqual({
+      minimumMindscape: 6,
+    })
+    const records = result.coverage.supplementalRecords.filter((record) =>
+      (batch10SupplementIds as readonly string[]).includes(record.supplementId),
+    )
+    expect(records).toHaveLength(31)
+    for (const record of records) {
+      expect(record, record.supplementId).toMatchObject({
+        kind: "unsupported-option",
+        status: "out-of-scope",
+      })
+      expect(record.optionId, record.supplementId).toBe(record.supplementId)
+      expect(record.reason?.length ?? 0).toBeGreaterThan(20)
+    }
+  })
+
+  it("rejects unmapped entities, wrong configuration domains and duplicate ids", () => {
+    const override = (
+      supplementId: string,
+      patch: Partial<Supplement>,
+    ): readonly Supplement[] =>
+      batch10SupplementsWithSupport.map((supplement) =>
+        supplement.supplementId === supplementId
+          ? ({ ...supplement, ...patch } as Supplement)
+          : supplement,
+      )
+    // 未知实体：登记必须挂到既有目录实体。
+    expect(() =>
+      convertSource(
+        batch10Data(),
+        functions,
+        [],
+        override("nanoka:w-engines:12003:ex-energy-recovery", {
+          catalogEntityId: "w-engines:Missing",
+        } as Partial<Supplement>),
+      ),
+    ).toThrowError(/Unknown unsupported-option catalog entity/)
+    // 未映射实体（身份映射为 null 的占位实体）：拒绝。
+    expect(() =>
+      convertSource(
+        {
+          ...batch10Data(),
+          wengines: [
+            ...batch10Data().wengines,
+            {
+              id: "none",
+              name: "未选择",
+              fixedBuffs: { effectBlocks: [], effects: [] },
+            },
+          ],
+        },
+        functions,
+        [],
+        override("nanoka:w-engines:12003:ex-energy-recovery", {
+          catalogEntityId: "w-engines:none",
+        } as Partial<Supplement>),
+      ),
+    ).toThrowError(/expects a mapped catalog entity/)
+    // 配置域不符：套装门槛不能挂到代理人身上。
+    expect(() =>
+      convertSource(
+        batch10Data(),
+        functions,
+        [],
+        override("nanoka:agents:qingyi:flash-voltage-daze", {
+          configuration: { minimumSetPieces: 4 },
+        } as Partial<Supplement>),
+      ),
+    ).toThrowError(
+      /declares the configuration key minimumSetPieces for a agent entity/,
+    )
+    // 取值不真实：空精炼档/非法件数。
+    expect(() =>
+      convertSource(
+        batch10Data(),
+        functions,
+        [],
+        override("nanoka:w-engines:12003:ex-energy-recovery", {
+          configuration: { refinements: [] },
+        } as Partial<Supplement>),
+      ),
+    ).toThrowError(/must declare the verified refinements/)
+    expect(() =>
+      convertSource(
+        batch10Data(),
+        functions,
+        [],
+        override("nanoka:drive-discs:31200:four-piece-daze-value", {
+          configuration: { minimumSetPieces: 3 },
+        } as unknown as Partial<Supplement>),
+      ),
+    ).toThrowError(/must declare the verified set-piece threshold/)
+    // 选项 ID 撞车：与既有声明重复。
+    expect(() =>
+      convertSource(
+        batch10Data(),
+        functions,
+        [],
+        override("nanoka:agents:qingyi:flash-voltage-daze", {
+          optionId: "nanoka:agents:lighter:mindscape-4-morale-burst-energy",
+        } as Partial<Supplement>),
+      ),
+    ).toThrowError(/repeats the option id/)
+  })
+
+  it("rejects four-piece note drift and duplicate four-piece declarations", () => {
+    expect(() =>
+      convertSource(
+        batch10Data({
+          driveDiscFourPieceNote: { SuitShockstarDisco: "失衡值提升21%。" },
+        }),
+        functions,
+        [],
+        batch10SupplementsWithSupport,
+      ),
+    ).toThrowError(/four-piece block note drift/)
+    // 固定来源补出同件数记录（会生成同件数选项）即拒绝并存。
+    expect(() =>
+      convertSource(
+        batch10Data({
+          driveDiscFourPieceRecords: {
+            SuitFreedomBlues: [
+              {
+                ...batch03BaseEffect,
+                id: "legacy-four-piece",
+                stat: "mastery",
+                value: 20,
+              },
+            ],
+          },
+        }),
+        functions,
+        [],
+        batch10SupplementsWithSupport,
+      ),
+    ).toThrowError(
+      /four-piece supplement collides with the fixed-source option/,
+    )
+  })
+
+  it("rejects w-engine declarations once the source stops looking unencoded", () => {
+    expect(() =>
+      convertSource(
+        batch10Data({
+          wengineRecords: {
+            Lunar_Noviluna: [
+              {
+                ...batch03BaseEffect,
+                id: "new-energy-record",
+                stat: "energyRegen",
+                value: 20,
+              },
+            ],
+          },
+        }),
+        functions,
+        [],
+        batch10SupplementsWithSupport,
+      ),
+    ).toThrowError(/refinement tiers as currently unencoded/)
+    expect(() =>
+      convertSource(
+        batch10Data({ wengineDropNoteTier: { Vortex_Arrow: 4 } }),
+        functions,
+        [],
+        batch10SupplementsWithSupport,
+      ),
+    ).toThrowError(/lost the clause note/)
+    // 已有 stat 词表可编码的条款（春日融融的能量获得效率）出现记录即拒绝。
+    expect(() =>
+      convertSource(
+        batch10Data({
+          wengineRecords: {
+            Spring_Embrace: [
+              {
+                ...batch03BaseEffect,
+                id: "upstream-energyRegen",
+                stat: "energyRegen",
+                value: 10,
+              },
+            ],
+          },
+        }),
+        functions,
+        [],
+        batch10SupplementsWithSupport,
+      ),
+    ).toThrowError(
+      /refinement tiers as currently unencoded|conflicts with the fixed-source record/,
+    )
+  })
+
+  it("rejects agent declarations when the registered location gains records or drifts", () => {
+    for (const [agentId, rank, supplementId, pattern] of [
+      [
+        "nicole",
+        1,
+        "nanoka:agents:nicole:mindscape-1-anomaly-buildup-and-field-duration",
+        /currently empty pack/,
+      ],
+      [
+        "lighter",
+        4,
+        "nanoka:agents:lighter:mindscape-4-morale-burst-energy",
+        /currently empty pack/,
+      ],
+    ] as const) {
+      expect(() =>
+        convertSource(
+          batch10Data({
+            agentRecords: {
+              [agentId]: {
+                rank,
+                effects: [
+                  {
+                    ...batch03BaseEffect,
+                    id: `new-${agentId}-record`,
+                    stat: "dmgBonus",
+                    value: 10,
+                  },
+                ],
+              },
+            },
+          }),
+          functions,
+          [],
+          batch10SupplementsWithSupport,
+        ),
+      ).toThrowError(pattern)
+      // 合法对照：登记位置没有新编码时正常生成。
+      const option = batch10Options(batch10SupplementsWithSupport).find(
+        (candidate) => candidate.optionId === supplementId,
+      )
+      expect(option, supplementId).toBeDefined()
+    }
+    expect(() =>
+      convertSource(
+        batch10Data({
+          underminesAnchorNote: "南宫羽攻击造成的失衡值提升50%。",
+        }),
+        functions,
+        [],
+        batch10SupplementsWithSupport,
+      ),
+    ).toThrowError(/anchor block .* note drifted/)
+    // 柚叶额外能力锚块 note 漂移（保留原文再追加）即拒绝。
+    expect(() =>
+      convertSource(
+        batch10Data({
+          yuzuhaAbilityNote: `${batch10YuzuhaAbilityNote}（追加句）`,
+        }),
+        functions,
+        [],
+        batch10SupplementsWithSupport,
+      ),
+    ).toThrowError(/blk-ms38y9v7-07td4j note drifted/)
+    // 柚叶影画 1 块 note 漂移即拒绝；合法对照（原 note）正常生成。
+    expect(() =>
+      convertSource(
+        batch10Data({
+          yuzuhaMindscape1Note: batch10YuzuhaMindscape1Note.replace(
+            "130%",
+            "120%",
+          ),
+        }),
+        functions,
+        [],
+        batch10SupplementsWithSupport,
+      ),
+    ).toThrowError(
+      /blk-legacy note drifted|Complete-state tanuki-wish block note drift/,
+    )
+    expect(
+      batch10Options(batch10SupplementsWithSupport).find(
+        (option) =>
+          option.optionId === "nanoka:agents:yuzuha:mindscape-1-entry-energy",
+      ),
+    ).toBeDefined()
+    // 影画 1 出现 energyRegen 机器记录（该条款类别的唯一可编码量）即拒绝重核。
+    expect(() =>
+      convertSource(
+        batch10Data({
+          agentRecords: {
+            yuzuha: {
+              rank: 1,
+              effects: [
+                {
+                  ...batch03BaseEffect,
+                  id: "upstream-entry-energy",
+                  stat: "energyRegen",
+                  value: 30,
+                },
+              ],
+            },
+          },
+        }),
+        functions,
+        [],
+        batch10SupplementsWithSupport,
+      ),
+    ).toThrowError(/conflicts with the fixed-source record .* energyRegen/)
+  })
+
+  it("carries the real 12014 entity for the migrated boundary clause", () => {
+    const withoutCarriedClause = batch10SupplementsWithSupport.filter(
+      (supplement) =>
+        supplement.supplementId !==
+        "nanoka:w-engines:12014:attacker-damage-reduction",
+    )
+    const baseline = convertSource(
+      batch10Data(),
+      functions,
+      [],
+      withoutCarriedClause,
+    )
+    const result = convertSource(
+      batch10Data(),
+      functions,
+      [],
+      batch10SupplementsWithSupport,
+    )
+    const entity = result.catalog.entities.find(
+      (candidate) => candidate.catalogEntityId === "nanoka:w-engines:12014",
+    )
+    expect(entity).toMatchObject({
+      upstreamId: null,
+      name: "「恒等式」-变格",
+      identity: { kind: "w-engine", entityId: "12014" },
+      status: "mapped",
+      profession: "防护",
+      element: null,
+    })
+    // 真实元数据溯源（integrated 中英文与 data.json 摘要）。
+    expect(
+      entity!.supplementProvenance?.resources.map((resource) => resource.path),
+    ).toEqual(["w-engines/12014/details.zh.json", "w-engines/12014/data.json"])
+    // 补充实体不进入固定来源分母：实体总数与不含该声明的基线相同。
+    expect(result.coverage.summary.entities).toBe(
+      baseline.coverage.summary.entities,
+    )
+    expect(result.coverage.summary.supplements.entities).toBe(
+      baseline.coverage.summary.supplements.entities + 1,
+    )
+    // 同一条款只有一份可发现声明：旧 boundary 记录不再并存。
+    expect(
+      result.catalog.options
+        .filter((option) => option.catalogEntityId === "nanoka:w-engines:12014")
+        .map((option) => option.optionId),
+    ).toEqual(["nanoka:w-engines:12014:attacker-damage-reduction"])
+    const records = result.coverage.supplementalRecords.filter((record) =>
+      record.supplementId.includes("12014"),
+    )
+    expect(records).toHaveLength(1)
+    expect(records[0]).toMatchObject({
+      source: "nanoka-integrated@3.2 w-engines/12014 /talents/1—5/desc",
+      kind: "unsupported-option",
+      optionId: "nanoka:w-engines:12014:attacker-damage-reduction",
+      status: "out-of-scope",
+    })
+    expect(records[0]!.reason?.length ?? 0).toBeGreaterThan(20)
+  })
+
+  it("rejects colliding carried entities and protects the registered clause context", () => {
+    const carried = batch10SupplementsWithSupport.find(
+      (supplement) =>
+        supplement.supplementId ===
+        "nanoka:w-engines:12014:attacker-damage-reduction",
+    )!
+    if (carried.kind !== "unsupported-option" || !carried.entity)
+      throw new Error("carried entity fixture missing")
+    // 目录 ID 撞车：第二个补充实体使用同一 catalogEntityId 即拒绝。
+    expect(() =>
+      convertSource(
+        batch10Data(),
+        functions,
+        [],
+        [
+          ...batch10SupplementsWithSupport,
+          {
+            ...carried,
+            supplementId: "nanoka:w-engines:12014:duplicate-catalog-id",
+            optionId: "nanoka:w-engines:12014:duplicate-catalog-id",
+          } as Supplement,
+        ],
+      ),
+    ).toThrowError(/Duplicate supplement entity: nanoka:w-engines:12014/)
+    // 身份撞车：另一个补充实体声明同一 w-engine/12014 身份即拒绝。
+    expect(() =>
+      convertSource(
+        batch10Data(),
+        functions,
+        [],
+        [
+          ...batch10SupplementsWithSupport,
+          {
+            ...carried,
+            supplementId: "nanoka:w-engines:12014-duplicate-identity",
+            optionId: "nanoka:w-engines:12014-duplicate-identity",
+            catalogEntityId: "nanoka:w-engines:12014-duplicate-identity",
+            entity: {
+              ...carried.entity,
+              catalogEntityId: "nanoka:w-engines:12014-duplicate-identity",
+            },
+          } as Supplement,
+        ],
+      ),
+    ).toThrowError(/repeats the identity w-engine\/12014/)
+    // 该条款的配置守卫仍生效：空精炼档拒绝；合法对照正常生成。
+    expect(() =>
+      convertSource(
+        batch10Data(),
+        functions,
+        [],
+        batch10SupplementsWithSupport.map((supplement) =>
+          supplement.supplementId ===
+          "nanoka:w-engines:12014:attacker-damage-reduction"
+            ? ({
+                ...supplement,
+                configuration: { refinements: [] },
+              } as Supplement)
+            : supplement,
+        ),
+      ),
+    ).toThrowError(/must declare the verified refinements/)
+    expect(
+      batch10Options(batch10SupplementsWithSupport).find(
+        (option) =>
+          option.optionId ===
+          "nanoka:w-engines:12014:attacker-damage-reduction",
+      ),
+    ).toBeDefined()
+    // 南宫羽核心锚块与琉音 blk-legacy 锚块 note 漂移即拒绝；合法对照正常。
+    expect(() =>
+      convertSource(
+        batch10Data({
+          nangongyuCoreNote: batch10NangongyuCoreNote.replace("35%", "34%"),
+        }),
+        functions,
+        [],
+        batch10SupplementsWithSupport,
+      ),
+    ).toThrowError(/blk-ms4cegmd-bwnttd note drifted/)
+    expect(() =>
+      convertSource(
+        batch10Data({ dialynComplaintNote: "恶意投诉：失衡持续时间提升2秒。" }),
+        functions,
+        [],
+        batch10SupplementsWithSupport,
+      ),
+    ).toThrowError(/blk-legacy note drifted/)
+    for (const optionId of [
+      "nanoka:agents:nangongyu:core-buildup-and-daze",
+      "nanoka:agents:dialyn:malicious-complaint-stun-duration",
+      "nanoka:agents:lighter:morale-acquisition",
+      "nanoka:w-engines:13127:ex-and-assist-anomaly-buildup",
+      "nanoka:w-engines:14148:ex-physical-daze-stacks",
+    ])
+      expect(
+        batch10Options(batch10SupplementsWithSupport).find(
+          (option) => option.optionId === optionId,
+        ),
+        optionId,
+      ).toBeDefined()
+  })
+
+  it("is stable under supplement reordering", () => {
+    const byId = (options: readonly { optionId: string }[]) =>
+      options.toSorted((a, b) => a.optionId.localeCompare(b.optionId))
+    const ordered = byId(batch10Options(batch10SupplementsWithSupport))
+    const shuffled = byId(
+      batch10Options(batch10SupplementsWithSupport.toReversed()),
+    )
+    expect(shuffled).toEqual(ordered)
+    // 其他实体或无关 rank 的机器记录不影响本批声明（不误拒）。
+    const unrelated = convertSource(
+      batch10Data({
+        agentRecords: {},
+        wengineRecords: {},
+      }),
+      functions,
+      [],
+      batch10SupplementsWithSupport,
+    )
+    expect(
+      unrelated.catalog.options.filter((option) =>
+        (batch10SupplementIds as readonly string[]).includes(option.optionId),
+      ),
+    ).toHaveLength(31)
   })
 })

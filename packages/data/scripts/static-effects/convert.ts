@@ -41,6 +41,7 @@ import {
   SUPPLEMENTS,
   type Supplement,
   type SupplementRuleSpec,
+  type SupplementVariantSpec,
 } from "./supplements.ts"
 import {
   BUFF_RESOURCE,
@@ -487,48 +488,298 @@ const twoPiecePack = (entity: SourceEntity): SourcePack => ({
 })
 
 /**
- * 驱动盘二件套补充的防漂移守卫：目标必须是已映射的驱动盘实体；固定来源
- * 不得已有同套装的二件套选项（每条收集到的二件套记录都会生成选项，补充
- * 与真实记录并存会重复贡献）；来源二件套块留有 note 时必须与补充声明的
- * 条款逐字一致。不可选的越界声明同样不得与真实二件套记录并存。
+ * 驱动盘件数门槛补充的防漂移守卫（二/四件套共用）：目标必须是已映射的驱动盘
+ * 实体；固定来源不得已有同套装同件数门槛的选项（每条收集到的该件数记录都会
+ * 生成选项，补充与真实记录并存会重复贡献或重复声明）；来源对应件数块留有
+ * note 时必须与补充声明的条款逐字一致。不可选的越界声明同样不得与真实记录
+ * 并存。
  */
-function verifyDriveDiscTwoPieceSupplement(
+function verifyDriveDiscSetPiecesSupplement(
   data: SourceData,
   entities: readonly StaticCatalogEntity[],
   options: readonly StaticCatalogOption[],
   supplement: {
     readonly catalogEntityId: string
+    readonly setPieces: 2 | 4
     readonly conditionDescription: string
   },
 ): void {
+  const label = supplement.setPieces === 2 ? "two-piece" : "four-piece"
   const entity = entities.find(
     (candidate) => candidate.catalogEntityId === supplement.catalogEntityId,
   )
   if (!entity || !entity.identity || entity.identity.kind !== "drive-disc")
     throw new Error(
-      `Drive-disc two-piece supplement expects a mapped drive-disc entity: ${supplement.catalogEntityId}`,
+      `Drive-disc ${label} supplement expects a mapped drive-disc entity: ${supplement.catalogEntityId}`,
     )
   const collision = options.find(
     (option) =>
       option.catalogEntityId === supplement.catalogEntityId &&
-      option.variants.some((v) => v.configuration.minimumSetPieces === 2),
+      option.variants.some(
+        (v) => v.configuration.minimumSetPieces === supplement.setPieces,
+      ),
   )
   if (collision)
     throw new Error(
-      `Drive-disc two-piece supplement collides with the fixed-source option ${collision.optionId}: ${supplement.catalogEntityId}`,
+      `Drive-disc ${label} supplement collides with the fixed-source option ${collision.optionId}: ${supplement.catalogEntityId}`,
     )
   const raw = data.driveDiscs.find((d) => d.id === entity.upstreamId)
   if (!raw)
     throw new Error(
-      `Drive-disc two-piece supplement lost its fixed-source entity: ${supplement.catalogEntityId}`,
+      `Drive-disc ${label} supplement lost its fixed-source entity: ${supplement.catalogEntityId}`,
     )
-  const note = (raw.twoPieceEffectBlocks ?? []).find(
-    (block) => (block.note ?? "") !== "",
-  )?.note
+  const blocks =
+    supplement.setPieces === 2
+      ? raw.twoPieceEffectBlocks
+      : raw.fourPieceBuffs?.effectBlocks
+  const note = (blocks ?? []).find((block) => (block.note ?? "") !== "")?.note
   if (note !== undefined && note !== supplement.conditionDescription)
     throw new Error(
-      `Drive-disc two-piece block note drift at ${supplement.catalogEntityId}: ${JSON.stringify(note)} ≠ ${JSON.stringify(supplement.conditionDescription)}`,
+      `Drive-disc ${label} block note drift at ${supplement.catalogEntityId}: ${JSON.stringify(note)} ≠ ${JSON.stringify(supplement.conditionDescription)}`,
     )
+}
+
+/**
+ * 具名来源上下文守卫：按本批条款的真实培养位置定位“同条款”上下文。已登记
+ * 缺失的位置出现任何新编码、锚块缺失或 note 关键文本漂移、位置内任一记录
+ * （raw 或 normalized 表示）命中 stat 家族，都拒绝生成并要求重新核对条款
+ * 归属；其他 rank/独立机制的同 stat 记录不受影响。归一化可能改写记录 stat
+ * （未知 stat 会被上游归一为 dmgBonus），因此两份表示都必须核对；该守卫按
+ * 实体/块身份匹配，不依赖数组位置。可执行补充选项与不可选越界声明共用。
+ */
+function verifyClauseContextGuard(
+  data: SourceData,
+  records: readonly SourceRecord[],
+  entity: StaticCatalogEntity,
+  registration: {
+    readonly supplementId: string
+    readonly catalogEntityId: string
+    readonly clauseContextGuard?: Supplement["clauseContextGuard"]
+  },
+): void {
+  const context = registration.clauseContextGuard
+  if (!context) return
+  const sourceEntity = data.agents.find(
+    (agent) => agent.id === entity.upstreamId,
+  )
+  if (!sourceEntity)
+    throw new Error(
+      `Supplement ${registration.supplementId} lost its fixed-source entity: ${registration.catalogEntityId}`,
+    )
+  const contextPack = sourceEntity.mindscapeBuffs?.[context.rank] ?? {}
+  const contextRecords = records.filter(
+    (record) =>
+      record.category === "agents" &&
+      record.entityId === entity.upstreamId &&
+      record.rankKind === "mindscape" &&
+      record.rank === context.rank,
+  )
+  if (context.expectsEmptyPack === true) {
+    const hasContent =
+      (contextPack.effectBlocks?.length ?? 0) > 0 ||
+      (contextPack.effects?.length ?? 0) > 0 ||
+      contextRecords.length > 0
+    if (hasContent)
+      throw new Error(
+        `Supplement ${registration.supplementId} registered ${registration.catalogEntityId} mindscape rank ${String(context.rank)} as a currently empty pack; the fixed source now encodes content there — re-review the clause before generating`,
+      )
+  }
+  for (const anchor of context.anchorBlocks ?? []) {
+    const block = (contextPack.effectBlocks ?? []).find(
+      (candidate) => candidate.id === anchor.blockId,
+    )
+    if (!block)
+      throw new Error(
+        `Supplement ${registration.supplementId} lost its anchor block ${anchor.blockId} at ${registration.catalogEntityId} mindscape rank ${String(context.rank)}; re-review the clause context before generating`,
+      )
+    // 锚块 note 与冻结全文逐字比对：追加、插入、替换任何变化（包括保留全部
+    // 旧内容再追加新句）都视为上下文漂移，不做空白宽松归一。
+    if ((block.note ?? "") !== anchor.frozenNote)
+      throw new Error(
+        `Supplement ${registration.supplementId} anchor block ${anchor.blockId} note drifted at ${registration.catalogEntityId} mindscape rank ${String(context.rank)}: expected the frozen full note; re-review the clause context before generating`,
+      )
+  }
+  const conflict = contextRecords.find(
+    (record) =>
+      context.stats.includes(record.raw.stat) ||
+      (record.normalized !== undefined &&
+        context.stats.includes(record.normalized.stat)),
+  )
+  if (conflict)
+    throw new Error(
+      `Supplement ${registration.supplementId} conflicts with the fixed-source record at ${conflict.pointer} (stat ${conflict.raw.stat}) in the registered clause context ${registration.catalogEntityId} mindscape rank ${String(context.rank)}; re-review the clause instead of double-contributing`,
+    )
+}
+
+/** 安全整数闭区间校验（越界声明的培养档位取值核对）。 */
+function isSafeIntegerInRange(
+  value: unknown,
+  minimum: number,
+  maximum: number,
+): boolean {
+  return (
+    Number.isSafeInteger(value) &&
+    (value as number) >= minimum &&
+    (value as number) <= maximum
+  )
+}
+
+/**
+ * 越界声明（批次 10）的生成器守卫：不可选登记只允许挂到既有目录实体，且
+ * 登记声明本身必须可核对——实体已映射、配置域与实体类型一致、取值真实、
+ * 选项 ID 唯一；音擎五档声明还要求本批核对时的真实缺失状态（五个精炼块
+ * 只有 note、effects 为空）仍然成立。上游在这些位置补出机器记录、实体
+ * 类型变更或 ID 撞车都拒绝生成并要求重新核对，不静默并存。声明可在固定
+ * 来源没有目录实体时携带一个仅含真实元数据的补充实体（复用同一实体
+ * prepass 的目录 ID/身份唯一性检查），实体本身不创建可执行规则。
+ */
+function verifyUnsupportedOptionRegistration(
+  data: SourceData,
+  records: readonly SourceRecord[],
+  entities: readonly StaticCatalogEntity[],
+  supplementEntities: ReadonlyMap<string, StaticCatalogEntity>,
+  options: readonly StaticCatalogOption[],
+  supplement: {
+    readonly supplementId: string
+    readonly catalogEntityId: string
+    readonly optionId: string
+    readonly conditionDescription: string
+    readonly configuration: SupplementVariantSpec["configuration"]
+    readonly conflictingSourceStats?: readonly string[]
+    readonly expectsNoteOnlyRefinementTiers?: true
+  },
+): StaticCatalogEntity {
+  const entity =
+    entities.find(
+      (candidate) => candidate.catalogEntityId === supplement.catalogEntityId,
+    ) ?? supplementEntities.get(supplement.catalogEntityId)
+  if (!entity)
+    throw new Error(
+      `Unknown unsupported-option catalog entity: ${supplement.catalogEntityId}`,
+    )
+  if (!entity.identity)
+    throw new Error(
+      `Unsupported-option supplement expects a mapped catalog entity: ${supplement.catalogEntityId}`,
+    )
+  if (options.some((option) => option.optionId === supplement.optionId))
+    throw new Error(
+      `Supplement ${supplement.supplementId} repeats the option id ${supplement.optionId}`,
+    )
+  const configuration = supplement.configuration
+  const keys = Object.keys(configuration)
+  const validRanks = (value: unknown, minimum: number, maximum: number) =>
+    Array.isArray(value) &&
+    value.length > 0 &&
+    value.every(
+      (rank) =>
+        isSafeIntegerInRange(rank, minimum, maximum) &&
+        value.indexOf(rank) === value.lastIndexOf(rank),
+    )
+  const rejectKeys = (allowed: readonly string[]) => {
+    for (const key of keys)
+      if (!allowed.includes(key))
+        throw new Error(
+          `Unsupported-option supplement ${supplement.supplementId} declares the configuration key ${key} for a ${entity.identity!.kind} entity; re-review the registered cultivation range`,
+        )
+  }
+  if (entity.identity.kind === "agent") {
+    rejectKeys(["minimumMindscape", "coreSkillLevels", "potentialLevels"])
+    if (
+      configuration.minimumMindscape !== undefined &&
+      !isSafeIntegerInRange(configuration.minimumMindscape, 0, 6)
+    )
+      throw new Error(
+        `Unsupported-option supplement ${supplement.supplementId} declares an invalid minimumMindscape`,
+      )
+    if (
+      configuration.coreSkillLevels !== undefined &&
+      !validRanks(configuration.coreSkillLevels, 1, 7)
+    )
+      throw new Error(
+        `Unsupported-option supplement ${supplement.supplementId} declares invalid coreSkillLevels`,
+      )
+    if (
+      configuration.potentialLevels !== undefined &&
+      !validRanks(configuration.potentialLevels, 0, 6)
+    )
+      throw new Error(
+        `Unsupported-option supplement ${supplement.supplementId} declares invalid potentialLevels`,
+      )
+  } else if (entity.identity.kind === "w-engine") {
+    rejectKeys(["refinements"])
+    if (!validRanks(configuration.refinements, 1, 5))
+      throw new Error(
+        `Unsupported-option supplement ${supplement.supplementId} must declare the verified refinements of a w-engine clause`,
+      )
+  } else if (entity.identity.kind === "drive-disc") {
+    rejectKeys(["minimumSetPieces"])
+    if (
+      configuration.minimumSetPieces !== 2 &&
+      configuration.minimumSetPieces !== 4
+    )
+      throw new Error(
+        `Unsupported-option supplement ${supplement.supplementId} must declare the verified set-piece threshold of a drive-disc clause`,
+      )
+    verifyDriveDiscSetPiecesSupplement(data, entities, options, {
+      catalogEntityId: supplement.catalogEntityId,
+      setPieces: configuration.minimumSetPieces,
+      conditionDescription: supplement.conditionDescription,
+    })
+  } else
+    throw new Error(
+      `Unsupported-option supplement ${supplement.supplementId} targets an unreviewed catalog entity kind: ${entity.identity.kind}`,
+    )
+  if (entity.identity.kind === "agent")
+    verifyClauseContextGuard(data, records, entity, supplement)
+  // 重复声明防护：该条款类别在当前机器词表里可被编码的 stat（如春日融融的
+  // 能量获得效率可被编成 energyRegen）一旦出现，说明上游已有真实编码或补编码，
+  // 声明必须重核而不是并存。
+  if (supplement.conflictingSourceStats?.length) {
+    const conflict = records.find(
+      (record) =>
+        `${record.category}:${record.entityId}` ===
+          supplement.catalogEntityId &&
+        supplement.conflictingSourceStats!.includes(record.raw.stat),
+    )
+    if (conflict)
+      throw new Error(
+        `Supplement ${supplement.supplementId} conflicts with the fixed-source record at ${conflict.pointer} (stat ${conflict.raw.stat}); re-review the clause instead of double-declaring`,
+      )
+  }
+  if (supplement.expectsNoteOnlyRefinementTiers === true) {
+    if (entity.identity.kind !== "w-engine")
+      throw new Error(
+        `Supplement ${supplement.supplementId} registers note-only refinement tiers on a non w-engine entity`,
+      )
+    const raw = data.wengines.find((w) => w.id === entity.upstreamId)
+    if (!raw)
+      throw new Error(
+        `Supplement ${supplement.supplementId} lost its fixed-source entity: ${supplement.catalogEntityId}`,
+      )
+    const tiers = raw.refinementBuffs ?? []
+    if (tiers.length !== 5)
+      throw new Error(
+        `Supplement ${supplement.supplementId} expects five refinement tiers at ${supplement.catalogEntityId}`,
+      )
+    for (const [index, tier] of tiers.entries()) {
+      const blocks = tier.effectBlocks ?? []
+      if (!blocks.some((block) => (block.note ?? "") !== ""))
+        throw new Error(
+          `Supplement ${supplement.supplementId} lost the clause note at ${supplement.catalogEntityId} refinement ${String(index + 1)}`,
+        )
+    }
+    const conflict = records.find(
+      (record) =>
+        record.category === "w-engines" &&
+        record.entityId === entity.upstreamId &&
+        record.rankKind === "refinement",
+    )
+    if (conflict)
+      throw new Error(
+        `Supplement ${supplement.supplementId} registered ${supplement.catalogEntityId} refinement tiers as currently unencoded; the fixed source now encodes ${conflict.pointer} (stat ${conflict.raw.stat}) — re-review the clause before generating`,
+      )
+  }
+  return entity
 }
 
 export function collectSource(
@@ -3308,14 +3559,20 @@ export function convertSource(
   const supplementEntities: StaticCatalogEntity[] = []
   const supplementSkillTargets: StaticEffectCatalog["skillTargets"][number][] =
     []
-  // 补充实体索引与防重复守卫：先按全部实体类补充建立 catalog ID 索引，
+  // 补充实体索引与防重复守卫：先按全部实体类补充（独立实体补充，或
+  // unsupported 声明为反向缺项条款携带的实体）建立 catalog ID 索引，
   // 不依赖登记数组顺序（后续 option 类补充可指向补充实体）；catalog ID
   // 撞车、与固定来源实体或其他补充实体的身份撞车都拒绝生成——上游未来
   // 出现同实体时要求重新 review，不能与补充实体静默并存。
   const supplementEntitiesById = new Map<string, StaticCatalogEntity>()
   for (const supplement of supplements) {
-    if (supplement.kind !== "entity") continue
-    const entity = supplement.entity
+    const entity =
+      supplement.kind === "entity"
+        ? supplement.entity
+        : supplement.kind === "unsupported-option"
+          ? supplement.entity
+          : undefined
+    if (!entity) continue
     if (
       collected.entities.some(
         (candidate) => candidate.catalogEntityId === entity.catalogEntityId,
@@ -3346,6 +3603,8 @@ export function convertSource(
         `Supplement entity ${entity.catalogEntityId} repeats the identity ${identity.kind}/${identity.entityId} of another entity; re-review the clause instead of coexisting`,
       )
     supplementEntitiesById.set(entity.catalogEntityId, entity)
+    // 实体只登记目录元数据：unsupported 携带的实体不创建任何可执行规则。
+    supplementEntities.push(entity)
   }
   for (const supplement of supplements) {
     if (supplement.kind === "boundary") {
@@ -3381,12 +3640,16 @@ export function convertSource(
     }
     if (supplement.kind === "unsupported-option") {
       // 如实不可选的声明选项：登记 formula-out-of-scope 变体与越界去向，
-      // 不创建规则；驱动盘二件套声明同样执行防漂移守卫。
-      if (supplement.minimumSetPieces === 2)
-        verifyDriveDiscTwoPieceSupplement(data, collected.entities, options, {
-          catalogEntityId: supplement.catalogEntityId,
-          conditionDescription: supplement.conditionDescription,
-        })
+      // 不创建规则；生成期核对实体映射、配置域与取值、选项身份，并按实体
+      // 类型执行最窄守卫（驱动盘件数 note/冲突、音擎五档真实缺失状态）。
+      verifyUnsupportedOptionRegistration(
+        data,
+        collected.records,
+        collected.entities,
+        supplementEntitiesById,
+        options,
+        supplement,
+      )
       options.push({
         optionId: supplement.optionId,
         catalogEntityId: supplement.catalogEntityId,
@@ -3395,7 +3658,7 @@ export function convertSource(
         target: supplement.target,
         variants: [
           {
-            configuration: { minimumSetPieces: supplement.minimumSetPieces },
+            configuration: supplement.configuration,
             status: "unsupported",
             reason: supplement.reason,
             explanation: supplement.explanation,
@@ -3592,7 +3855,6 @@ export function convertSource(
         throw new Error(
           `Supplement ${supplement.supplementId} repeats the option id ${supplement.optionId}`,
         )
-      supplementEntities.push(supplement.entity)
       options.push({
         optionId: supplement.optionId,
         catalogEntityId: supplement.entity.catalogEntityId,
@@ -3659,68 +3921,11 @@ export function convertSource(
             `Supplement ${supplement.supplementId} conflicts with the fixed-source record at ${conflict.pointer} (stat ${conflict.raw.stat} on the registered skill targets); re-review the clause instead of double-contributing`,
           )
       }
-      // 具名来源上下文守卫：按本批条款的真实培养位置定位“同条款”上下文。
-      // 已登记缺失的位置出现任何新编码、锚块缺失或 note 关键文本漂移、
-      // 位置内任一记录（raw 或 normalized 表示）命中 stat 家族，都拒绝生成
-      // 并要求重新核对条款归属；其他 rank/独立机制的同 stat 记录不受影响。
-      // 归一化可能改写记录 stat（未知 stat 会被上游归一为 dmgBonus），因此
-      // 两份表示都必须核对；该守卫按实体/块身份匹配，不依赖数组位置。
-      if (supplement.clauseContextGuard) {
-        const context = supplement.clauseContextGuard
-        const sourceEntity = data.agents.find(
-          (agent) => agent.id === entity.upstreamId,
-        )
-        if (!sourceEntity)
-          throw new Error(
-            `Supplement ${supplement.supplementId} lost its fixed-source entity: ${supplement.catalogEntityId}`,
-          )
-        const contextPack = sourceEntity.mindscapeBuffs?.[context.rank] ?? {}
-        const contextRecords = collected.records.filter(
-          (record) =>
-            record.category === "agents" &&
-            record.entityId === entity.upstreamId &&
-            record.rankKind === "mindscape" &&
-            record.rank === context.rank,
-        )
-        if (context.expectsEmptyPack === true) {
-          const hasContent =
-            (contextPack.effectBlocks?.length ?? 0) > 0 ||
-            (contextPack.effects?.length ?? 0) > 0 ||
-            contextRecords.length > 0
-          if (hasContent)
-            throw new Error(
-              `Supplement ${supplement.supplementId} registered ${supplement.catalogEntityId} mindscape rank ${String(context.rank)} as a currently empty pack; the fixed source now encodes content there — re-review the clause before generating`,
-            )
-        }
-        for (const anchor of context.anchorBlocks ?? []) {
-          const block = (contextPack.effectBlocks ?? []).find(
-            (candidate) => candidate.id === anchor.blockId,
-          )
-          if (!block)
-            throw new Error(
-              `Supplement ${supplement.supplementId} lost its anchor block ${anchor.blockId} at ${supplement.catalogEntityId} mindscape rank ${String(context.rank)}; re-review the clause context before generating`,
-            )
-          // 锚块 note 与冻结全文逐字比对：追加、插入、替换任何变化（包括
-          // 保留全部旧内容再追加新句）都视为上下文漂移，不做空白宽松归一。
-          if ((block.note ?? "") !== anchor.frozenNote)
-            throw new Error(
-              `Supplement ${supplement.supplementId} anchor block ${anchor.blockId} note drifted at ${supplement.catalogEntityId} mindscape rank ${String(context.rank)}: expected the frozen full note; re-review the clause context before generating`,
-            )
-        }
-        const conflict = contextRecords.find(
-          (record) =>
-            context.stats.includes(record.raw.stat) ||
-            (record.normalized !== undefined &&
-              context.stats.includes(record.normalized.stat)),
-        )
-        if (conflict)
-          throw new Error(
-            `Supplement ${supplement.supplementId} conflicts with the fixed-source record at ${conflict.pointer} (stat ${conflict.raw.stat}) in the registered clause context ${supplement.catalogEntityId} mindscape rank ${String(context.rank)}; re-review the clause instead of double-contributing`,
-          )
-      }
+      verifyClauseContextGuard(data, collected.records, entity, supplement)
       if (supplement.variant.configuration.minimumSetPieces === 2)
-        verifyDriveDiscTwoPieceSupplement(data, collected.entities, options, {
+        verifyDriveDiscSetPiecesSupplement(data, collected.entities, options, {
           catalogEntityId: supplement.catalogEntityId,
+          setPieces: 2,
           conditionDescription: supplement.variant.conditionDescription,
         })
       options.push({
@@ -3765,7 +3970,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "24",
+    revision: "25",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
