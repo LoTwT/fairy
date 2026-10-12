@@ -117,6 +117,8 @@ describe("static effects evidence path", () => {
       // 批次 12：比格气缸受击附伤与加农转子暴击附伤（五档天赋逐档 Pointer）。
       "nanoka:w-engines:13112:retaliation-defense-damage",
       "nanoka:w-engines:14001:critical-hit-bonus-damage",
+      // 批次 13：本影画 2[以守为攻]格挡反击附伤（天赋 Pointer）。
+      "nanoka:agents:benbigger:m2-block-counter-defense-damage",
     ])
       expect(verified).toContain(`supplement:${supplementId}`)
   })

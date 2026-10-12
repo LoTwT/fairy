@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "27",
+  "revision": "28",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -49595,6 +49595,51 @@
           "exclusiveDamageItem": true
         }
       ]
+    },
+    {
+      "optionId": "nanoka:agents:benbigger:m2-block-counter-defense-damage",
+      "catalogEntityId": "agents:benbigger",
+      "name": "以守为攻 · 格挡反击附伤（独立结算）",
+      "conditionDescription": "影画 2：在[特殊技]或[强化特殊技]中，成功触发格挡反击时，额外造成本 300% 防御力的伤害。本次附伤由调用方声明触发并显式结算：命中须只携带本独立项（独占结算，混合其他伤害项会被拒绝）、以 uncategorized 分类结算、读取本当前防御力，并显式声明本次独立附伤采用的最终暴击概率（hit.declaredCriticalRate，无默认值；元素同样由调用方按实际结算声明，来源未标注）。结果的暴击分支沿用普通暴击伤害来源及本命中合法暴伤贡献（未显式指定来源时读本当前普通暴击伤害），是本接口的条件计算模型，不证明游戏附伤能暴击或继承该暴击伤害。格挡成功检测、时间窗、追击次数、盾值与冷却不模拟；[特殊技]/[强化特殊技]的主动攻击、追加攻击与格挡追击段不经本选项结算。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 2
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1121/details.zh.json",
+              "pointer": "/talent/2/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1121:nanoka:m2-block-counter-defense-damage:mindscape:2"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "benbigger:block-counter-bonus-damage",
+              "stat": "defense",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized",
+              "requiredCriticalRateDeclaration": true
+            }
+          ],
+          "exclusiveDamageItem": true
+        }
+      ]
     }
   ],
   "skillTargets": [
@@ -49804,6 +49849,14 @@
       "agentEntityId": "1471",
       "category": "special",
       "name": "强化特殊技：山摇·怒",
+      "countsAsFollowUp": false
+    },
+    {
+      "targetId": "zzz-hp:skill:benbigger-block-counter-bonus-damage",
+      "upstreamId": null,
+      "agentEntityId": "1121",
+      "category": "uncategorized",
+      "name": "本格挡反击附伤",
       "countsAsFollowUp": false
     },
     {
