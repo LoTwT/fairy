@@ -48,6 +48,9 @@ describe("static effects evidence path", () => {
   it("verifies the registered complete state option evidence through the generator entry", async () => {
     const verified = await verifyStaticEffectsEvidence(verifiedPublication)
     expect(verified).toContain(label)
+    expect(verified).toContain(
+      "semantics:w-engines/Blazing_Laurel/refinement/5/blk-legacy/legacy-team-dmgBonus",
+    )
     // 批次 06 的六项补充证据（含被动行 rank 与 data.json level 元数据的映射）
     // 也由同一入口逐条核验。
     for (const supplementId of [

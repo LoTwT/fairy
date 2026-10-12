@@ -399,7 +399,7 @@ const reference = (pointer: string): SourceReference => ({
 const nanokaReference = (path: string, pointer: string): SourceReference => ({
   sourceId: "nanoka-integrated",
   version: "3.2",
-  locale: "zh",
+  locale: path.endsWith("/details.en.json") ? "en" : "zh",
   resourcePath: path,
   pointer: pointer as `/${string}`,
 })
@@ -1086,6 +1086,38 @@ function whenFor(
 const semanticsKeyFor = (record: SourceRecord): string =>
   `${record.category}/${record.entityId}/${record.rankKind}/${record.rank}/${record.blockId}/${record.raw.id}`
 
+/** 乘区纠错在字段映射与 unsupported 降级前核对两份编码及冻结块说明。 */
+function verifySourceStatCorrectionRecord(
+  record: SourceRecord,
+  semantics: Extract<SourceSemantics, { kind: "source-stat-correction" }>,
+): void {
+  for (const [label, document] of [
+    ["raw", record.raw],
+    ["normalized", record.normalized],
+  ] as const) {
+    if (document === undefined)
+      throw new Error(
+        `Source-stat correction ${semantics.differenceId} lost the ${label} record at ${record.pointer}`,
+      )
+    for (const [field, expected] of Object.entries(semantics.expectedEncoding))
+      if (
+        JSON.stringify(document[field as keyof SourceEffect] ?? null) !==
+        JSON.stringify(expected)
+      )
+        throw new Error(
+          `Source-stat correction ${semantics.differenceId} ${label} field drift at ${record.pointer}: ${field}`,
+        )
+  }
+  for (const [label, note] of [
+    ["raw", record.blockNote],
+    ["normalized", record.normalizedBlockNote],
+  ] as const)
+    if (note !== semantics.expectedSourceBlockNote)
+      throw new Error(
+        `Source-stat correction ${semantics.differenceId} ${label} block note drift at ${record.pointer}`,
+      )
+}
+
 /**
  * 具名倍率范围修正（exclude-skill-target-scope）的防漂移前置校验：完整
  * skillTargets 元组（category 与 subcategoryId）与核心块冻结完整 note 都按
@@ -1246,6 +1278,8 @@ function compile(
   const e = record.normalized ?? record.raw
   const semantics = SOURCE_SEMANTICS[semanticsKeyFor(record)]
   // 本组必须在字段映射和通用 unsupported 之前核验；降级不能掩盖源漂移。
+  if (semantics?.kind === "source-stat-correction")
+    verifySourceStatCorrectionRecord(record, semantics)
   if (semantics?.kind === "complete-state-tanuki-wish")
     verifyRegisteredCompleteStateRecord(record, semantics)
   // 具名倍率范围修正：完整 skillTargets 与核心块冻结 note 的校验同样早于
@@ -1276,7 +1310,9 @@ function compile(
   const effectiveStat =
     semantics?.kind === "developer-revised-stat"
       ? semantics.revisedStat
-      : e.stat
+      : semantics?.kind === "source-stat-correction"
+        ? semantics.correctedStat
+        : e.stat
   // C05 固定回能：登记过的 energyRegen 记录按固定点数/秒编译；编码或数值
   // 与登记不符即拒绝生成，不静默套用到其他 energyRegen 记录。
   if (semantics?.kind === "flat-energy-regen") {
@@ -1501,7 +1537,10 @@ function compile(
         )
     }
   }
-  if (semantics?.kind === "source-value-correction") {
+  if (
+    semantics?.kind === "source-value-correction" ||
+    semantics?.kind === "source-stat-correction"
+  ) {
     variant = {
       ...variant,
       status: "corrected",
@@ -3221,6 +3260,24 @@ export function convertSource(
   const semanticsKeyIndex = new Set(
     collected.records.map((record) => semanticsKeyFor(record)),
   )
+  // 实体参与转换时，其已登记纠错记录必须存在；块/记录改名、删除或移到
+  // 其他培养域/档位不能让纠错登记落空。完全不含该实体的局部夹具仍可用。
+  for (const [key, semantics] of Object.entries(SOURCE_SEMANTICS)) {
+    if (semantics.kind !== "source-stat-correction") continue
+    const [category, entityId] = key.split("/")
+    const entity = collected.entities.find(
+      (entry) => entry.catalogEntityId === `${category}:${entityId}`,
+    )
+    if (!entity) continue
+    if (!semanticsKeyIndex.has(key))
+      throw new Error(
+        `Source-stat correction ${semantics.differenceId} lost its registered source record (${key})`,
+      )
+    if (entity.profession !== semantics.expectedProfession)
+      throw new Error(
+        `Source-stat correction ${semantics.differenceId} entity profession drift (${key})`,
+      )
+  }
   for (const [key, semantics] of Object.entries(SOURCE_SEMANTICS)) {
     if (semantics.kind !== "exclude-skill-target-scope") continue
     if (
@@ -3400,9 +3457,11 @@ export function convertSource(
     const displayStat =
       firstSemantics?.kind === "developer-revised-stat"
         ? firstSemantics.revisedStat
-        : firstSemantics?.kind === "hit-scope-direct-stat-input"
-          ? firstSemantics.stat
-          : first.raw.stat
+        : firstSemantics?.kind === "source-stat-correction"
+          ? firstSemantics.correctedStat
+          : firstSemantics?.kind === "hit-scope-direct-stat-input"
+            ? firstSemantics.stat
+            : first.raw.stat
     // 共享说明纠错（T01）：登记必须覆盖该选项的全部精炼档且文本一致，
     // 否则保持来源 note 原文；部分登记或文本不一致即拒绝生成。
     const descriptionSemantics = records.map(
@@ -3970,7 +4029,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "25",
+    revision: "26",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -4035,6 +4094,15 @@ export function convertSource(
     ),
     mechanisms: [remielleMechanism],
     differences: [
+      ...Object.values(SOURCE_SEMANTICS)
+        .filter((entry) => entry.kind === "source-stat-correction")
+        .map((entry) => ({
+          differenceId: entry.differenceId,
+          explanation: entry.verification,
+          references: entry.evidence.map((ref) =>
+            nanokaReference(ref.path, ref.pointer),
+          ),
+        })),
       {
         differenceId: "remielle-special-voidflare-restricted-reads",
         explanation:

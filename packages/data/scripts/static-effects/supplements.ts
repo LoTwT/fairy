@@ -1284,7 +1284,7 @@ const blazingLaurelImpactAfterAssist: Supplement = {
     "0b2ae556d5d4547007bbc24f0b2f6a1eaf5623b7fde691b070fd3f03099fc21a",
   ),
   verification:
-    "Nanoka 五档天赋逐档核实：发动[快速支援]或[极限支援]时，装备者的冲击力提升 25/28.75/32.5/36.25/40%，持续 8 秒；同句的[萎靡]暴击伤害/增伤规则已由固定来源机器记录覆盖（critDmg 精炼 1—4、dmgBonus 精炼 5），冲击力条款则没有任何机器记录，固定来源 note 也未包含该句。本选项只接入冲击力条款，不与[萎靡]层数或其伤害规则绑定；快速/极限支援触发与 8 秒持续由调用方显式选择断言。",
+    "Nanoka 五档天赋逐档核实：发动[快速支援]或[极限支援]时，装备者的冲击力提升 25/28.75/32.5/36.25/40%，持续 8 秒；同句的[萎靡]暴击伤害规则由固定来源机器记录覆盖（精炼 5 的 dmgBonus 编码按 blazing-laurel-r5-wilt-critical-damage 具名修正为 critDmg），冲击力条款则没有任何机器记录，固定来源 note 也未包含该句。本选项只接入冲击力条款，不与[萎靡]层数或其伤害规则绑定；快速/极限支援触发与 8 秒持续由调用方显式选择断言。",
   rule: {
     effectId: wengineSupplement("14116", "impact-after-assist").effectId,
     identity: { kind: "w-engine", entityId: "14116" },
@@ -1303,7 +1303,7 @@ const blazingLaurelImpactAfterAssist: Supplement = {
     inputs: [],
     applicability: {},
     conditionDescription:
-      "发动[快速支援]或[极限支援]时，装备者的冲击力提升（按精炼 25/28.75/32.5/36.25/40%），持续8秒；触发状态由调用方显式选择断言。已有的[萎靡]暴击伤害/增伤规则为独立选项，不受本选项影响。",
+      "发动[快速支援]或[极限支援]时，装备者的冲击力提升（按精炼 25/28.75/32.5/36.25/40%），持续8秒；触发状态由调用方显式选择断言。已有的[萎靡]暴击伤害规则为独立选项，不受本选项影响。",
     name: "流动之火 · impact",
     target: "self",
   },

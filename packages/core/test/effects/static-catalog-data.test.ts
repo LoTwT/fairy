@@ -1183,7 +1183,9 @@ describe("fixed-source catalog conformance", () => {
             batch01CorrectedPointers.has(r.pointer) ||
             batch03CorrectedPointers.has(r.pointer) ||
             batch08CorrectedPointers.has(r.pointer) ||
-            batch09CorrectedPointers.has(r.pointer),
+            batch09CorrectedPointers.has(r.pointer) ||
+            r.pointer ===
+              "/wengines/60/refinementBuffs/4/effectBlocks/0/effects/0",
         )
         .map((r) => r.pointer)
         .toSorted(),
@@ -1221,6 +1223,24 @@ describe("fixed-source catalog conformance", () => {
         ...result.value.evaluation.contributions,
         ...(result.value.preparations ?? []).flatMap((p) => p.contributions),
       ]
+      if (
+        vector.pointer ===
+        "/wengines/60/refinementBuffs/4/effectBlocks/0/effects/0"
+      ) {
+        const wilt = contributions.filter(
+          (entry) =>
+            vector.effectIds.includes(entry.origin.effectId) &&
+            entry.origin.beneficiaryId === input.hit.actorId,
+        )
+        expect(wilt.length).toBeGreaterThan(0)
+        expect(
+          wilt.every(
+            (entry) =>
+              entry.address.kind === "stat" &&
+              entry.address.stat === "criticalDamage",
+          ),
+        ).toBe(true)
+      }
       const actual = contributions
         .filter(
           (c) =>
@@ -1899,7 +1919,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("25")
+    expect(catalog.revision).toBe("26")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
