@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "23",
+  "revision": "24",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -14516,7 +14516,7 @@
       "effectIds": [
         "agent:1511:zzz-hp:legacy-team-anomalyReleaseMultFactor:blk-legacy:mindscape:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -30668,6 +30668,30 @@
       "supportedRanks": "精炼 1—5",
       "computationTarget": "catalog option on the supplement entity",
       "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical",
+      "source": "nanoka-integrated@3.2 agents/1511 /talent/6/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical",
+      "effectIds": [
+        "agent:1511:nanoka:m6-vibrato-modified-nonphysical:mindscape:6"
+      ],
+      "supportedRanks": "影画 6 及以上；层数 0—4（0 关闭，有效层 1—4）",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:nangongyu:m6-vibrato-modified-physical",
+      "source": "nanoka-integrated@3.2 agents/1511 /talent/6/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:nangongyu:m6-vibrato-modified-physical",
+      "effectIds": [
+        "agent:1511:nanoka:m6-vibrato-modified-physical:mindscape:6"
+      ],
+      "supportedRanks": "影画 6 及以上；层数 0—4（0 关闭，有效层 1—4）",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
     }
   ],
   "summary": {
@@ -30675,17 +30699,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 868,
-    "options": 870,
-    "converted": 1138,
-    "corrected": 134,
+    "rules": 870,
+    "options": 872,
+    "converted": 1137,
+    "corrected": 135,
     "unsupported": 18,
     "supplements": {
-      "records": 43,
-      "rules": 41,
-      "options": 35,
+      "records": 45,
+      "rules": 43,
+      "options": 37,
       "entities": 3,
-      "integrated": 40,
+      "integrated": 42,
       "outOfScope": 3
     }
   },

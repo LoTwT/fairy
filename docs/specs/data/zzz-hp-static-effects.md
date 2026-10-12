@@ -4,7 +4,7 @@
 
 ## 实际覆盖与使用限制
 
-[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 868 条规则与 870 个选择项。1,138 条 converted、134 条 corrected；18 条 unsupported 全部是已迁移的记录（既有 6 条：4 条重复部分记录与蕾米埃尔影画 1 的两条半状态记录，见[修订 14](#修订-14蕾米埃尔影画-1-完整状态选项)；莱特[昂扬]的四条部分记录，见[修订 19](#修订-19莱特昂扬完整状态与目录层数桥接)；柚叶额外能力的八条部分记录，见[修订 20](#修订-20柚叶额外能力完整状态与影画-1-强化)），不代表功能退步。壳中之灵（14150）精炼 2—5 的 4 条上游 `special` 乘区记录已按开发者修订接入异常增伤乘区（见[修订 11](#修订-11壳中之灵异常增伤来源修正)）；蕾米埃尔影画 2 的忽防记录按块 note 与 Nanoka 同文补充受益职业与属性异常伤害范围（见[修订 13](#修订-13蕾米埃尔影画-2-忽防范围修正)）；青溟笼舍五档贯穿增伤按一致描述改为按层编译（见[修订 15](#修订-15青溟笼舍贯穿增伤按层纠错与驱动盘二件套补充)）；原始位置缺少培养档位证据的 41 个位置已全部闭合。另有 43 条经核实的 Nanoka 补充来源记录（40 条已整合、3 条越界登记，含震星迪斯科/灵魂摇滚的真实二件套规则、原始朋克/山大王的越界声明、批次 02 的 13 条音擎缺失被动选项——索魂影眸按有效魂锁层数拆为三个互斥完整档位——批次 03 的 3 条代理人补充：妮可影画 1 强化特殊技伤害、青衣闪络电压消耗增伤、珂蕾妲潜能强化普攻二段按层增伤，批次 06 的 6 条代理人补充：凯撒攻防转换冲击力、莱特士气喷发冲击力、橘福福虎啸固定冲击点数、琉音初始暴率转冲击、莱特影画 4 前场角色回能与丽娜影画 4 双玩偶回能，批次 07 的 4 条新实体补充：洛克茜初始回能转攻击/冲击的完整状态与绯月银棺暴击率、风抗无视、全队增伤三选项，与批次 08 的 3 条影画 6 独立追击补充：伊芙琳[月辉丝·弦]、零号·安比电磁涡流与琉音余音）。记录数包含各档精炼的来源位置，不等于独立机制数量。
+[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)是逐条结果的权威记录：187 个来源实体、1,061 个 pack（366 个空 pack）、1,290 条原始效果，生成 870 条规则与 872 个选择项。1,137 条 converted、135 条 corrected；18 条 unsupported 全部是已迁移的记录（既有 6 条：4 条重复部分记录与蕾米埃尔影画 1 的两条半状态记录，见[修订 14](#修订-14蕾米埃尔影画-1-完整状态选项)；莱特[昂扬]的四条部分记录，见[修订 19](#修订-19莱特昂扬完整状态与目录层数桥接)；柚叶额外能力的八条部分记录，见[修订 20](#修订-20柚叶额外能力完整状态与影画-1-强化)），不代表功能退步。壳中之灵（14150）精炼 2—5 的 4 条上游 `special` 乘区记录已按开发者修订接入异常增伤乘区（见[修订 11](#修订-11壳中之灵异常增伤来源修正)）；蕾米埃尔影画 2 的忽防记录按块 note 与 Nanoka 同文补充受益职业与属性异常伤害范围（见[修订 13](#修订-13蕾米埃尔影画-2-忽防范围修正)）；青溟笼舍五档贯穿增伤按一致描述改为按层编译（见[修订 15](#修订-15青溟笼舍贯穿增伤按层纠错与驱动盘二件套补充)）；原始位置缺少培养档位证据的 41 个位置已全部闭合。另有 45 条经核实的 Nanoka 补充来源记录（42 条已整合、3 条越界登记，含震星迪斯科/灵魂摇滚的真实二件套规则、原始朋克/山大王的越界声明、批次 02 的 13 条音擎缺失被动选项——索魂影眸按有效魂锁层数拆为三个互斥完整档位——批次 03 的 3 条代理人补充：妮可影画 1 强化特殊技伤害、青衣闪络电压消耗增伤、珂蕾妲潜能强化普攻二段按层增伤，批次 06 的 6 条代理人补充：凯撒攻防转换冲击力、莱特士气喷发冲击力、橘福福虎啸固定冲击点数、琉音初始暴率转冲击、莱特影画 4 前场角色回能与丽娜影画 4 双玩偶回能，批次 07 的 4 条新实体补充：洛克茜初始回能转攻击/冲击的完整状态与绯月银棺暴击率、风抗无视、全队增伤三选项，与批次 08 的 3 条影画 6 独立追击补充：伊芙琳[月辉丝·弦]、零号·安比电磁涡流与琉音余音，批次 09 的 2 条影画 6 完整状态补充：南宫羽[颤音：改]非物理与物理元素分组异放结算）。记录数包含各档精炼的来源位置，不等于独立机制数量。
 
 核心档位仅开放 [rank-evidence.json](../../../packages/data/scripts/static-effects/rank-evidence.json)确认的键；缺档的同一角色其他选项仍可使用。四条反向缺项（洛克茜 1621、恒等式-变格 12014、旋钻机-赤轴 13111、绯月银棺 14162）和空记录另列在报告中。目录入口对普通异常来源仍拒绝把蕾米埃尔作为 `anomalySource`；她本人特殊[虚曜]对应的耀变自修订 10 起按具名机制 `remielle-special-voidflare` 接入（见下文），她提供给其他来源异常的已映射增益继续正常计算。
 
@@ -26,7 +26,7 @@
 修订 17 不新增具名差异，13 条音擎缺失被动补充（12 项条款，索魂影眸拆三个互斥完整档位）按既有 Nanoka 补充来源机制登记（见[修订 17](#修订-17音擎缺失被动补齐批次-02)）；
 修订 18 新增 2 个具名差异：`billy-mindscape4-hit-scope-critical-rate` 与 `shining-aria-stagger-entry-triggered-state`（代理人与驱动盘普通增益的批次纠错，见[修订 18](#修订-18代理人与驱动盘普通增益纠错批次-03)）；
 修订 19 新增 `complete-state-elation-correction`（莱特[昂扬]完整状态与目录层数桥接，见[修订 19](#修订-19莱特昂扬完整状态与目录层数桥接)），规则集 revision 递增为 `19`；
-修订 20 新增 `yuzuha-additional-ability-complete-state`（柚叶额外能力完整状态与影画 1 强化，见[修订 20](#修订-20柚叶额外能力完整状态与影画-1-强化)）；修订 21 不新增具名差异，六项代理人冲击力与回能补充按既有 Nanoka 补充来源机制登记，并为“受益者是持有者同队的另一名实体”引入声明式同队受益者选择契约（见[修订 21](#修订-21代理人冲击力与回能补充批次-06)）；修订 22 不新增具名差异，洛克茜初始回能转化与绯月银棺三条款按补充实体机制登记，并为“伤害提升效果全队唯一”引入全队唯一效果的选择阶段跨绑定契约（见[修订 22](#修订-22洛克茜初始回能转化与绯月银棺批次-07)）；修订 23 新增 `evelyn-lunalux-multiplier-scope`（伊芙琳核心被动 125% 具名倍率范围修正，见[修订 23](#修订-23三个影画-6-独立追击批次-08)），当前 revision 为 `23`。
+修订 20 新增 `yuzuha-additional-ability-complete-state`（柚叶额外能力完整状态与影画 1 强化，见[修订 20](#修订-20柚叶额外能力完整状态与影画-1-强化)）；修订 21 不新增具名差异，六项代理人冲击力与回能补充按既有 Nanoka 补充来源机制登记，并为“受益者是持有者同队的另一名实体”引入声明式同队受益者选择契约（见[修订 21](#修订-21代理人冲击力与回能补充批次-06)）；修订 22 不新增具名差异，洛克茜初始回能转化与绯月银棺三条款按补充实体机制登记，并为“伤害提升效果全队唯一”引入全队唯一效果的选择阶段跨绑定契约（见[修订 22](#修订-22洛克茜初始回能转化与绯月银棺批次-07)）；修订 23 新增 `evelyn-lunalux-multiplier-scope`（伊芙琳核心被动 125% 具名倍率范围修正，见[修订 23](#修订-23三个影画-6-独立追击批次-08)）；修订 24 新增 `nangongyu-vibrato-modified-exclusivity`（南宫羽普通颤音四规则对[颤音：改]独立结算目标的共存排除，见[修订 24](#修订-24南宫羽影画-6-颤音改一次异放结算批次-09)），当前 revision 为 `24`。
 
 固定输入重复生成的三个制品字节一致。来源参考夹具保留 1,275 个位置：当前 1,133 条 converted 逐条比对，
 5 个核心档位扩展、10 个猩红渴望元素范围修正、4 个壳中之灵开发者修订、5 个血髓秘匣说明修正、4 个嚣枪喧焰精炼 2—5、
@@ -591,6 +591,131 @@ AM 是调用方显式提供的柚叶异常掌控，单位 `anomaly-mastery-point
 - **覆盖状态**：rules 865 → 868、options 867 → 870、skillTargets 103 → 106、differences 31 → 32；converted 1,139 → 1,138、corrected 133 → 134（伊芙琳 125% 具名范围修正），来源分母（187 实体、1,061 pack、1,290 记录）与实体数不变；补充来源记录 40 → 43（integrated 37 → 40、越界 3 不变）。既有规则/选项/实体除上段伊芙琳具名修正外逐身份零改动。三项补充登记具名来源上下文守卫：伊芙琳冻结影画 6 锚块完整 note（追加冲突句、数值漂移或锚块缺失即拒绝）并登记直接倍率 stat 家族 raw/normalized 双核，零号·安比与琉音登记影画 6 真实空 pack（任何新编码即拒绝）；其他 rank 的独立倍率条款不受守卫影响。
 - **独立验收**：core 目录级 9 个用例（`packages/core/test/effects/pr08-m6-independent-followups.test.ts`）覆盖登记形态（目标元数据/要求/规则 when 与 operation/参数字面值）、三角色 ATK 1000/500 线性（3750/1875、10000/5000、4800/2400）、重复查询不积累、0 层关闭、M0—M5 拒绝、非法层 -1/0.5/2 拒绝；缺项/预填非零/错 stat/错 role/读他人或历史快照/借用分类拒绝，错误元素与缺目标保持零贡献，另一角色目标拒绝，两名持有者同场各归各的贡献；伊芙琳组合证明（普通连携命中 25%+30% 均生效 2500/×1.3，M6 命中 3750 无 25% 且通用 30% 生效，普攻专属 +12% 不作用且同配置普攻命中正例生效），涡流 Aftershock 身份经真实[电极化]追加攻击增伤（潜能 0/6 档 ×1.25/×1.5）与白雷 special 分类借用拒绝，余音按琉音自身面板线性、队友攻击变化不影响、伪装面板来源拒绝、chaos-jazz 四件套经 all-special 子类声明生效且不声明不侵入；大矩阵用 it.each 逐组合独立预算。data 侧合成转换（`static-effects-conversion.test.ts` 批次 08 小节）覆盖登记形态、125% 修正的 when/差异/正例保留与编码漂移拒绝（stat/value/scope/skillTargets 四路）、证据 Pointer 锁定、守卫矩阵（锚块内冲突编码、归一删除、空 pack 新编码、note 追加/漂移/锚块缺失、其他 rank 不误拒、每条 hit-adjustment 的精确非空目标与 requirement/itemIds 双向对应、同 ID 目标重复与上游撞 ID、重排稳定），以及完整共存守卫：原核心块改名/记录移除使语义身份落空时拒绝生成、normalized 删除不再降级为通用 unsupported、完整 skillTargets 元组（含 subcategoryId）漂移拒绝、raw/normalized 核心块冻结完整 note 追加/替换拒绝、依赖补充缺席时不做无条件检查；`static-effects-evidence.test.ts` 断言三项补充标签经生成入口逐条核验。发布制品消费（`packages/data/test/pr08-m6-catalog-entry.test.ts`，经正式 data 装载与 core 目录公共入口）验证三条独立追击经装载制品结算锚点数值，三名角色全部可计算动作解析不自动携带 M6 独立项或独立目标（白雷动作保留 special 分类与追加攻击标签）。
 - **边界**：三项倍率固定，不随技能等级、核心或潜能变化，不虚造训练倍率行；触发（弦影绝锋与指定攻击命中、六次白雷计数、余音取得与队友命中）、持续（20 秒/1 秒）、次数（16/12）、刷新与唯一持有人由调用方显式声明，不模拟时间线；不把新目标绑定到已有触发动作，技能 60 位动作文件与 registry 字节不变，技能清单仅更新 `staticCatalogSha256`（`9ec1048e1a3665c6a06d30536ade21f50c644c028feef4f16a0d33aa1c0db0fb`），计算快照更新为 `sha256:32ce8ad3bcb8be88e2ee3e2f368b693f2d52b3f506bed2fa8e1ded53b4827efe`。当前属性读取是静态接口采用的结算契约，不宣称游戏历史快照时点已实测。PR09 南宫羽、PR10 越界条款与 RUNBOOK 保留候选全部不扩入。
+
+### 修订 24：南宫羽影画 6[颤音：改]一次异放结算（批次 09）
+
+规则集 revision 递增为 `24`。本修订按 2026-10-11 十批增益修复清单实施批次 09 的 M03：南宫羽（1511）影画 6[天使的妄想]的[颤音：改]一次异放结算。敌人不处于失衡时按所列事件累计[颤音：改]、最多 4 层；进入失衡时全部清除，清除时若存在六种原属性异常之一则结算一次。固定来源影画 6 的 `blk-ms4dtzxa-touyxm` 是 note 完整、effects 为空的实际空块（不是缺失实体），按既有 Nanoka 补充来源机制在已映射目录实体上登记为**两个元素分组的完整状态选项**；天赋比例与层数来自 Nanoka integrated 3.2 冻结天赋（中英文核对），原异常系数来自固定 ZZZ-HP 提交的系数表，归一倍率为二者推导，未经游戏实测。
+
+| 事项 | 对象（optionId / itemId）                                                                               | 条款                                                                                                                                                 | 编码与边界                                                                                                                                                                                                                                                                                                            |
+| ---- | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| M03  | 南宫羽 1511（`nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical` / `nangongyu:vibrato-modified`） | [颤音：改]被清除且存在原属性异常时，结算一次[异放]：额外结算一次属性异常伤害，比例为原异常伤害的以太 800%/电 400%/火 1000%/冰 100%/风 40%，每层 +25% | 独立目标 `zzz-hp:skill:nangongyu-vibrato-modified`（upstreamId null、category uncategorized）；归一基础 = 原异常系数 × M6 比例（五非物理属性 5），`hit-adjustment damageMultiplier/add` 完整倍率表达式 `5 × (1 + 0.25 × L)` 经 `layerCountInputName` 派生 count 输入一次赋值；元素条件按 hit.element 匹配五非物理属性 |
+| M03  | 南宫羽 1511（`nanoka:agents:nangongyu:m6-vibrato-modified-physical` / `nangongyu:vibrato-modified`）    | 同上，物理原异常：M6 比例 70%                                                                                                                        | 归一基础 7.13 × 0.7 = 4.991（保留精度，不四舍五入为 5，也不是旧 M0 的 4.49），完整倍率 `4.991 × (1 + 0.25 × L)`；两组共用同一独立目标与伤害项，按元素裁决，互不叠加                                                                                                                                                   |
+
+- **归一推导与职责分层**：Nanoka 影画 6（`agents/1511/details.zh.json` 的 `/talent/6/desc`，英文同文核对）证明 M6 比例、层数上限与[颤音：改]/[颤音]互不叠加；原异常系数来自固定提交 `zzz-hp/src/utils/publicAnomalySkills.ts`（blob `eb7ffa39`，整文件 SHA-256 `336a5578…`，注释明确倍率不额外 ×10/×20）：以太 62.5%/电 125%/火 50%/物理 713%/冰 500%/风 1250%。二者相乘得归一基础（五非物理 5、物理 4.991）——该表格是二者结合的静态归一推导，未经游戏实测。调用方只声明本次清除事件、有效层数（1—4）与原异常来源；原异常系数已并入归一基础，不存在第二次乘/加系数。
+- **完整状态与层数桥接**：两个选项各是单条 supplied 贡献（`maximumLayers` 字面量 1），变体声明 `layerCountInputName`（每选项独立命名，按绑定隔离）与逻辑层数上限 4：`selection.layers` 0 关闭、严格安全整数 1—4，负数/小数/5 在 `/selections/.../layers` 拒绝；实际展开固定单实例，完整倍率（含层数 ×0.25 乘区）由规则一次赋值，不把逻辑层数展开成多次完整结算，也不是复利。机制侧为补充变体新增 `layerCountInputName`/`layerCountMaximumLayers` 透传（声明必须成对、逻辑上限为安全整数 ≥1、桥接选项不得叠加 additionalRules、规则实例层数必须为 1），沿用目录既有的桥接定义校验（恰好一条贡献真实消费派生 count 输入）；core/shared 无改动。
+- **独立结算请求字段**（调用方经 `calculateStaticDamageFromCatalog` 显式结算，完整动作入口不会自动派生 M6 段）：`damage.kind` 为 `anomaly-settlement`（执行时命中的 `damageKind` 事实由它派生，不是本目录 API 的输入字段；清除发生在进入失衡时，目标通常处于失衡——是否失衡仍独立影响实际失衡乘区）；`hit.skillCategory` 为 `uncategorized`，且命中不得借用其他技能分类、保留分类标签或混入其他真实目标——要求项声明 `requiredSkillCategory: "uncategorized"` 复用既有最终有效分类守卫（原始分类、保留标签、合法目标展开的分类与追加攻击标签都参与比较），冲突按 CONTEXT_MISMATCH 拒绝，独立异放不吃按技能分类筛选的增益；`hit.skillTargetIds` 携带独立目标 ID；`hit.element` 声明原异常属性（六值均可消费，含真实风异放 `wind`——不据此声称标准风紊乱已支持，本登记不使用 `originalAnomalyAttribute` 元数据、不改标准紊乱七值枚举）；`hit.damageItems` 提供声明 `itemId` 的 direct/base/attack 独立项，`damageMultiplier` 必须为 0，`statSource` 必须与 `damage.anomalySource` 的实体/快照一致（异放复用原异常虚拟来源的攻击、异常精通、等级、穿透与已声明快照；南宫羽是效果持有者与结算角色，不因此改用她的实时面板，原异常来源可以是任意其他角色）；绑定 `mindscapeRank ≥ 6`（天赋倍率与核心/特殊技培养档位无关，不设核心档位门槛）。请求示例：
+  ```ts
+  import rawDefinitions from "@randomplay/data/definitions/effects/static.json" with { type: "json" }
+  import rawCatalog from "@randomplay/data/definitions/effects/static-catalog.json" with { type: "json" }
+  import {
+    calculateStaticDamageFromCatalog,
+    parseEffectRuleSet,
+  } from "@randomplay/core"
+  import type {
+    StaticCatalogDamageInput,
+    StaticEffectCatalog,
+  } from "@randomplay/core"
+
+  const parsed = parseEffectRuleSet(rawDefinitions)
+  if (!parsed.ok) throw new Error(JSON.stringify(parsed.issues))
+
+  const request: StaticCatalogDamageInput = {
+    definitions: parsed.value,
+    // JSON 导入的数组推断与公开 NonEmpty 约束不重叠，这里只做最小边界断言；
+    // 目录入口在运行时仍按 StaticEffectCatalog 校验结构。
+    catalog: rawCatalog as unknown as StaticEffectCatalog,
+    // 绑定与身份职责：南宫羽是效果持有者与结算角色（hit.actorId）；
+    // 原异常来源是另一名实体（此处柏妮思），不因持有者改用她的实时面板。
+    bindings: [
+      {
+        bindingId: "binding:nangongyu",
+        kind: "agent",
+        holderId: "entity:nangongyu",
+        sourceEntityId: "1511",
+        eligible: true,
+        configuration: { mindscapeRank: 6, coreSkillLevel: 7 },
+      },
+    ],
+    actorSources: [
+      { entityId: "entity:nangongyu", agentEntityId: "1511" },
+      { entityId: "entity:burnice", agentEntityId: "1171" },
+    ],
+    // 状态职责：selection.layers 声明本次清除时的有效层数
+    // （0 关闭、严格整数 1—4）。
+    selections: [
+      {
+        optionId: "nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical",
+        bindingId: "binding:nangongyu",
+        layers: 4,
+      },
+    ],
+    // world 按 WorldObservation 提供 entity:nangongyu、entity:burnice 与
+    // 目标实体；原异常来源的攻击/异常精通/穿透从该实体或其快照读取，
+    // 保存等级则由调用方在 damage.anomalySource.level 显式提供（不自动推断）。
+    world,
+    hit: {
+      actorId: "entity:nangongyu",
+      targetId: "entity:enemy",
+      actionId: "action:vibrato-modified-settlement",
+      skillCategory: "uncategorized",
+      element: "ether",
+      skillTags: [],
+      skillTargetIds: ["zzz-hp:skill:nangongyu-vibrato-modified"],
+      damageItems: [
+        {
+          mode: "direct",
+          role: "base",
+          itemId: "nangongyu:vibrato-modified",
+          damageMultiplier: 0,
+          stat: "attack",
+          statSource: { entityId: "entity:burnice" },
+        },
+      ],
+    },
+    damage: {
+      kind: "anomaly-settlement",
+      // 原异常来源职责：异常精通与穿透率从该实体（或其保存快照）读取；
+      // 防御区所用保存等级由调用方在此显式声明（不随 world 自动推断）；
+      // 伤害项 statSource 须与之一致（可带 snapshotId 复用保存的快照）。
+      anomalySource: { entityId: "entity:burnice", level: 60 },
+      // 已声明历史乘区职责：原异常状态保存的增伤/异化结果原样复用。
+      damageBonus: { settledMultiplier: 1 },
+      refringe: { mode: "settled", multiplier: 1 },
+      defense: {
+        attackerLevel: 60,
+        targetBaseDefense: 1000,
+        defensePercentageAdjustments: [],
+        penetrationValues: [],
+      },
+      // 目标当前乘区职责：结算时目标的实时抗性/减易伤/失衡状态。
+      resistance: {
+        targetResistance: 0,
+        targetResistanceReductions: [],
+        attackerResistanceIgnoreValues: [],
+      },
+      damageTaken: {
+        targetDamageTakenIncreases: [],
+        targetDamageTakenReductions: [],
+      },
+      stunDamage: {
+        isTargetStunned: true,
+        targetBaseStunDamageMultiplier: 1.5,
+        targetStunDamageMultiplierAdjustments: [],
+      },
+      anomalyDamageBonus: [],
+      anomalyCriticalRate: 0,
+      anomalyCriticalDamage: [],
+    },
+  }
+  const result = calculateStaticDamageFromCatalog(request)
+  // 归一倍率职责：5 × (1 + 0.25×4) = 10 由规则一次赋值；
+  // 基础伤害区 = 10 × 原异常来源攻击力（1000 → 10000）。
+  ```
+- **与普通颤音/M2 的共存**：影画 6 明文[颤音：改]与[颤音]无法相互叠加，影画 2（`/talent/2/desc`）的每层 +10% 只强化[核心被动：天才偶像]中普通[颤音]的异放比例。固定来源把普通颤音编为不限独立结算身份的异常放乘区记录（五元素基础 450%、物理 449%、每层 +25%、影画 2 每层 +10%——实际 applyTarget self，不按 ID 中的 team 前缀猜语义），携带[颤音：改]独立目标的命中会同时吃旧贡献。本批按具名语义修正（新具名差异 `nangongyu-vibrato-modified-exclusivity`；三条 M0 记录经既有 `stagger-recovery-settlement` 登记扩展 `vibratoModifiedExclusion` 字段，M2 记录独立登记新语义 `exclude-settlement-target`）：四条规则保留原稳定 effectId、数值、元素筛选与既有条件（M2 保留失衡内条件），仅追加对独立目标的排除——携带该目标的命中不吃普通颤音贡献，普通颤音结算（基础+叠层+M2，失衡内与恢复后快照均可）保持原行为；影画 2 的失衡易伤、极性紊乱与核心被动的精通/团队增伤等独立条款不受影响，不因互斥关闭。防漂移：raw/normalized 编码（scope/applyTarget/applySituation/elementFilter/kind/stat/value/stackable/maxStacks/valuePerStack）与所属块冻结完整 note 逐字核对，任一漂移或 normalized 删除都拒绝生成；依赖的两个批次 09 补充参与转换而任一登记记录缺失时同样拒绝。
+- **空块守卫**：两个补充登记影画 6 锚块（`blk-ms4dtzxa-touyxm` 冻结完整 note）与异放乘区 stat 家族（`anomalyReleaseMult`/`anomalyReleaseMultFactor`）：该 rank 任何位置出现家族机器记录、锚块缺失或 note 任何变化（含保留原文再追加）都拒绝生成；其他 rank 的独立异放乘区条款不受影响，代理人与块记录重排稳定。
+- **覆盖状态**：rules 868 → 870、options 870 → 872、skillTargets 106 → 107、differences 32 → 33；converted 1,138 → 1,137、corrected 134 → 135（M2 每层记录转为 corrected），来源分母（187 实体、1,061 pack、1,290 记录）与实体数不变；补充来源记录 43 → 45（integrated 40 → 42、越界 3 不变）。既有规则/选项/实体除上述四条共存修正外逐身份零改动。
+- **独立验收**：core 目录级用例（`packages/core/test/effects/pr09-vibrato-modified.test.ts`，大矩阵用 it.each 逐组合独立预算）覆盖六属性 × L1—4 矩阵与两个 ATK 锚点（1000/2400，含物理 6.23875/7.4865/8.73425/9.982 精度链）、M0—M5 拒绝与核心档位不变、0 关闭/未选择/非法层数/重复选择/重复调用无累计、独立项契约（缺项 MISSING_REFERENCE、预填非零/错 stat/错 role CONTEXT_MISMATCH）、anomaly-source 与快照路径（历史快照 200 ≠ 当前 1000、半快照与缺读数拒绝）、普通颤音正例保持（4.5×2.4=10.8、4.49×2.4=10.776）与同配置 M6 不叠旧基础/25%/10%、M2 失衡易伤照常作用、两组元素裁决与组外零贡献、缺目标/借直伤种类拒绝、附加伤害项不吃倍率、另一持有者绑定不串用，以及分类锁定：两个选项都以合法非零请求为对照，只改变原始分类、保留 category 标签、follow-up 标签或附加南宫羽自身真实普攻目标之一即按 CONTEXT_MISMATCH 拒绝，同配置真实珂蕾妲连携 +35% 团队增伤不得污染独立结算（缺少该锁定时该组合会把期望伤害 ×1.35）；`pr09-layer-bridge-hit-adjustment.test.ts` 以受控合成目录锁定 hit-adjustment 消费桥接 count 输入的公共入口契约。data 侧合成转换（`static-effects-conversion.test.ts` 批次 09 小节）覆盖登记形态（含 requiredSkillCategory 要求字段）、四条旧规则的排除应用与数值保留、编码/块 note/归一删除漂移矩阵、依赖丢失与缺席不误检、空块守卫与重排稳定、桥接声明守卫（缺字段/附加规则/实例层数/非法上限）；`static-effects-evidence.test.ts` 断言两条补充标签经生成入口逐条核验。发布制品消费（`packages/data/test/pr09-vibrato-modified-entry.test.ts`，经正式 data 装载与 core 目录公共入口）验证六属性 × L1—4 经装载制品结算锚点数值（原异常来源为另一角色的虚拟面板），南宫羽全部可计算动作解析不自动携带 M6 独立项或独立目标。
+- **边界**：M6 首句「南宫羽攻击造成的失衡值提升 50%」不做最终输出，留批次 10 登记；累计事件的具体层数（EX/普攻重击 +1、终结重击 +2）、清空时序与同次失衡期间不能再施加的规则不模拟，由调用方声明；不纠正旧 M0 物理来源项 4.49 的精度候选（Q03）；技能 60 位动作文件与 registry 字节不变，技能清单仅更新 `staticCatalogSha256`（`095043de9b4e5a85aff23e62f04f2ed9b5e911a90f255b4f8025597dd28dc0f8`），计算快照更新为 `sha256:f4e2ce9f76e62556e274ed9d27a73fdd9d1fc85a4e4465a2e86366bd8e9a6638`。PR10 越界条款与 RUNBOOK 保留候选不扩入。
 
 ## 交付目标与边界
 

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "23",
+  "revision": "24",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -12803,6 +12803,13 @@
               "locale": "zh",
               "resourcePath": "agents/1511/details.zh.json",
               "pointer": "/passive/level/1511055/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1511/details.zh.json",
+              "pointer": "/talent/6/desc"
             }
           ],
           "effectIds": [
@@ -12810,7 +12817,10 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": ["stagger-recovery-settlement"],
+          "differences": [
+            "stagger-recovery-settlement",
+            "nangongyu-vibrato-modified-exclusivity"
+          ],
           "applicability": {}
         }
       ]
@@ -12849,6 +12859,13 @@
               "locale": "zh",
               "resourcePath": "agents/1511/details.zh.json",
               "pointer": "/passive/level/1511055/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1511/details.zh.json",
+              "pointer": "/talent/6/desc"
             }
           ],
           "effectIds": [
@@ -12856,7 +12873,10 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": ["stagger-recovery-settlement"],
+          "differences": [
+            "stagger-recovery-settlement",
+            "nangongyu-vibrato-modified-exclusivity"
+          ],
           "applicability": {}
         }
       ]
@@ -12895,6 +12915,13 @@
               "locale": "zh",
               "resourcePath": "agents/1511/details.zh.json",
               "pointer": "/passive/level/1511055/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1511/details.zh.json",
+              "pointer": "/talent/6/desc"
             }
           ],
           "effectIds": [
@@ -12902,7 +12929,10 @@
           ],
           "maximumLayers": 4,
           "inputs": [],
-          "differences": ["stagger-recovery-settlement"],
+          "differences": [
+            "stagger-recovery-settlement",
+            "nangongyu-vibrato-modified-exclusivity"
+          ],
           "applicability": {}
         }
       ]
@@ -13112,7 +13142,7 @@
           "configuration": {
             "minimumMindscape": 2
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -13120,6 +13150,20 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/9/mindscapeBuffs/2/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1511/details.zh.json",
+              "pointer": "/talent/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1511/details.zh.json",
+              "pointer": "/talent/6/desc"
             }
           ],
           "effectIds": [
@@ -13127,7 +13171,7 @@
           ],
           "maximumLayers": 4,
           "inputs": [],
-          "differences": [],
+          "differences": ["nangongyu-vibrato-modified-exclusivity"],
           "applicability": {}
         }
       ]
@@ -47592,6 +47636,94 @@
           "squadUniqueEffect": true
         }
       ]
+    },
+    {
+      "optionId": "nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical",
+      "catalogEntityId": "agents:nangongyu",
+      "name": "影画6 · 颤音：改（非物理异放结算）",
+      "conditionDescription": "影画 6：敌人不处于失衡时按所列事件累计[颤音：改]（最多 4 层），进入失衡时全部清除；清除时若存在原属性异常，南宫羽结算一次[异放]伤害，基础比例 = 原异常系数 × M6 比例（以太/电/火/冰/风归一为 5），每层再 +25%。本选项覆盖五种非物理原异常，按本次结算声明的命中元素匹配（物理走同组的物理选项）。调用方声明本次清除事件与有效层数（selection.layers：0 关闭、严格整数 1—4）：命中以 uncategorized 分类携带独立目标、以 damage.kind=anomaly-settlement 结算，伤害项倍率从 0 开始由规则一次赋值，statSource 与 damage.anomalySource 一致（复用原异常虚拟来源与快照）；携带其他技能分类/分类标签/其他真实目标按冲突拒绝。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 6
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1511/details.zh.json",
+              "pointer": "/talent/6/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1511:nanoka:m6-vibrato-modified-nonphysical:mindscape:6"
+          ],
+          "maximumLayers": 4,
+          "layerCountInputName": "nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical:layers",
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "nangongyu:vibrato-modified",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "anomaly-source",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:nangongyu:m6-vibrato-modified-physical",
+      "catalogEntityId": "agents:nangongyu",
+      "name": "影画6 · 颤音：改（物理异放结算）",
+      "conditionDescription": "影画 6：敌人不处于失衡时按所列事件累计[颤音：改]（最多 4 层），进入失衡时全部清除；清除时若存在原属性异常，南宫羽结算一次[异放]伤害，基础比例 = 原异常系数 × M6 比例（物理 7.13×0.7=4.991，保留精度），每层再 +25%。本选项只覆盖物理原异常（hit.element=physical），非物理原异常走同组的非物理选项。调用方声明本次清除事件与有效层数（selection.layers：0 关闭、严格整数 1—4）：命中以 uncategorized 分类携带独立目标、以 damage.kind=anomaly-settlement 结算，伤害项倍率从 0 开始由规则一次赋值，statSource 与 damage.anomalySource 一致（复用原异常虚拟来源与快照）；携带其他技能分类/分类标签/其他真实目标按冲突拒绝。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 6
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1511/details.zh.json",
+              "pointer": "/talent/6/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1511:nanoka:m6-vibrato-modified-physical:mindscape:6"
+          ],
+          "maximumLayers": 4,
+          "layerCountInputName": "nanoka:agents:nangongyu:m6-vibrato-modified-physical:layers",
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "nangongyu:vibrato-modified",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "anomaly-source",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized"
+            }
+          ]
+        }
+      ]
     }
   ],
   "skillTargets": [
@@ -48057,6 +48189,14 @@
       "agentEntityId": "1511",
       "category": "basic",
       "name": "可爱地雷飞天撞",
+      "countsAsFollowUp": false
+    },
+    {
+      "targetId": "zzz-hp:skill:nangongyu-vibrato-modified",
+      "upstreamId": null,
+      "agentEntityId": "1511",
+      "category": "uncategorized",
+      "name": "颤音：改异放结算",
       "countsAsFollowUp": false
     },
     {
@@ -49688,6 +49828,54 @@
           "locale": "zh",
           "resourcePath": "agents/1321/details.zh.json",
           "pointer": "/passive/level/1321507/desc/1"
+        }
+      ]
+    },
+    {
+      "differenceId": "nangongyu-vibrato-modified-exclusivity",
+      "explanation": "南宫羽影画 6[天使的妄想]（Nanoka agents/1511 的 /talent/6/desc，中英文同文）明文：[颤音：改]与[颤音]无法相互叠加，且影画 2（/talent/2/desc）的每层 +10% 只强化[核心被动：天才偶像]中普通[颤音]的异放比例。固定来源把普通颤音条款编为不限独立结算身份的异常放乘区记录（五元素基础 450%、物理 449%、每层 +25%、影画 2 每层 +10%），批次 09 新登记的[颤音：改]独立结算目标（nangongyu-vibrato-modified）携带的 anomaly-settlement 命中会被同一乘区命中，新结算错误叠上旧基础与每层增量。修正保留四条记录的原稳定 effectId、数值、元素筛选与既有条件（含影画 2 的失衡内条件），仅追加对该独立目标的排除：携带该目标的命中不吃普通颤音贡献，普通颤音结算（基础+叠层+M2，失衡内与恢复后快照均可）保持原行为；影画 2 的失衡易伤、极性紊乱与核心被动的精通/团队增伤等独立条款不受影响。防漂移：raw/normalized 编码（scope/applyTarget/applySituation/elementFilter/kind/stat/value/stackable/maxStacks/valuePerStack）与所属块冻结完整 note 逐字核对，任一漂移或 normalized 删除都拒绝生成；依赖的两个批次 09 补充参与转换而任一登记记录缺失时同样拒绝。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/9/mindscapeBuffs/0/effectBlocks/1/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/9/mindscapeBuffs/0/effectBlocks/1/effects/2"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/9/mindscapeBuffs/0/effectBlocks/1/effects/3"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/9/mindscapeBuffs/2/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1511/details.zh.json",
+          "pointer": "/talent/6/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1511/details.zh.json",
+          "pointer": "/talent/2/desc"
         }
       ]
     },

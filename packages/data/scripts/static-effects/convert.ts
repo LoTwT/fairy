@@ -889,6 +889,48 @@ function verifyExcludeSkillTargetScopeRecord(
 }
 
 /**
+ * [颤音：改]共存排除（exclude-settlement-target 与 stagger-recovery-settlement
+ * 的 vibratoModifiedExclusion）的防漂移前置校验：raw 与 normalized 两份表示
+ * 的登记编码逐字段一致、所属块 note 与冻结全文逐字一致；normalized 缺失、
+ * 编码漂移或 note 追加/替换/缺失都拒绝生成。与 evelyn 修正同样必须在
+ * compile 的通用 unsupported 降级之前执行，降级不能掩盖源漂移。
+ */
+function verifySettlementExclusionRecord(
+  record: SourceRecord,
+  semantics: {
+    readonly excludedTargetId: string
+    readonly differenceId: string
+    readonly expectedEncoding: Readonly<Record<string, unknown>>
+    readonly expectedSourceBlockNote: string
+  },
+): void {
+  for (const [label, document] of [
+    ["raw", record.raw],
+    ["normalized", record.normalized],
+  ] as const) {
+    if (document === undefined)
+      throw new Error(
+        `Settlement-target exclusion ${semantics.differenceId} lost the ${label} record at ${record.pointer}; the registered encoding must survive normalization before the coexistence correction can apply`,
+      )
+    for (const [field, value] of Object.entries(semantics.expectedEncoding)) {
+      const actual = document[field as keyof SourceEffect]
+      if (JSON.stringify(actual ?? null) !== JSON.stringify(value))
+        throw new Error(
+          `Settlement-target exclusion ${semantics.differenceId} ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(actual ?? null)}, expected ${JSON.stringify(value)}; re-review the clause instead of silently re-scoping`,
+        )
+    }
+  }
+  for (const [label, note] of [
+    ["raw", record.blockNote],
+    ["normalized", record.normalizedBlockNote],
+  ] as const)
+    if (note !== semantics.expectedSourceBlockNote)
+      throw new Error(
+        `Settlement-target exclusion ${semantics.differenceId} expects the registered block note at ${record.pointer} (${label}); the frozen clause text drifted — re-review the clause instead of silently re-scoping`,
+      )
+}
+
+/**
  * 具名完整状态登记的防漂移前置校验：原始与规范化记录都必须仍在、
  * 登记的编码字段逐字段一致、块 note 关键条款齐全。必须在 compile 的通用
  * unsupported 降级（规范化移除、公式超范围）之前执行：否则被登记记录会
@@ -959,6 +1001,15 @@ function compile(
   // 通用 unsupported 降级——normalized 删除不能再静默绕过登记。
   if (semantics?.kind === "exclude-skill-target-scope")
     verifyExcludeSkillTargetScopeRecord(record, semantics)
+  // [颤音：改]共存排除：登记编码与冻结块 note 的校验同样早于通用
+  // unsupported 降级（独立登记与 stagger-recovery 扩展字段共用）。
+  if (semantics?.kind === "exclude-settlement-target")
+    verifySettlementExclusionRecord(record, semantics)
+  if (
+    semantics?.kind === "stagger-recovery-settlement" &&
+    semantics.vibratoModifiedExclusion !== undefined
+  )
+    verifySettlementExclusionRecord(record, semantics.vibratoModifiedExclusion)
   // 开发者定点修订：仅登记过的记录按修订后的字段查映射；来源原始编码或
   // 数值与登记不符即拒绝生成，不静默套用，也不波及其他 special 记录。
   if (semantics?.kind === "developer-revised-stat") {
@@ -1725,6 +1776,48 @@ function compile(
           nanokaReference(ref.path, ref.pointer),
         ),
       ],
+    }
+  }
+  // [颤音：改]共存排除（批次 09）：独立登记的记录或声明扩展字段的
+  // stagger-recovery 记录都追加对独立结算目标的排除——携带该目标的命中
+  // 不吃本普通颤音贡献，普通颤音结算保持原行为；防漂移校验已在 compile
+  // 开头先行执行。
+  {
+    const exclusion =
+      semantics?.kind === "exclude-settlement-target"
+        ? semantics
+        : semantics?.kind === "stagger-recovery-settlement"
+          ? semantics.vibratoModifiedExclusion
+          : undefined
+    if (exclusion !== undefined) {
+      when = {
+        kind: "all",
+        conditions: [
+          when,
+          {
+            kind: "not",
+            condition: oneOf("hit.skillTag", [
+              `zzz-hp:skill:${exclusion.excludedTargetId}`,
+            ]),
+          },
+        ],
+      }
+      variant = {
+        ...variant,
+        status: "corrected",
+        differences: [...variant.differences, exclusion.differenceId],
+        // 扩展字段路径的证据引用已由 stagger-recovery 处理器随完整
+        // evidence 数组追加；独立登记路径在此追加自己的证据引用。
+        references:
+          semantics?.kind === "exclude-settlement-target"
+            ? [
+                ...variant.references,
+                ...semantics.evidence.map((ref) =>
+                  nanokaReference(ref.path, ref.pointer),
+                ),
+              ]
+            : variant.references,
+      }
     }
   }
   if (semantics?.kind === "flat-energy-regen") {
@@ -2890,6 +2983,30 @@ export function convertSource(
         `The exclude-skill-target-scope correction ${semantics.differenceId} lost its registered source record (${key}); the dependent supplement ${semantics.dependentSupplementIds.join(", ")} is present while the excluded multiplier identity is missing — re-review the clause before generating`,
       )
   }
+  // 依赖存在性（[颤音：改]共存排除）：exclude-settlement-target 与
+  // stagger-recovery-settlement 的 vibratoModifiedExclusion 同样在依赖的
+  // 批次 09 补充参与转换时要求登记的来源记录完整身份仍被收集到——上游把
+  // 普通颤音记录改名、移除或降级都会让旧贡献漏进新[颤音：改]结算，必须
+  // 拒绝生成并要求重新核对；依赖补充不参与时不做无条件检查。
+  for (const [key, semantics] of Object.entries(SOURCE_SEMANTICS)) {
+    const exclusion =
+      semantics.kind === "exclude-settlement-target"
+        ? semantics
+        : semantics.kind === "stagger-recovery-settlement"
+          ? semantics.vibratoModifiedExclusion
+          : undefined
+    if (exclusion === undefined) continue
+    if (
+      !exclusion.dependentSupplementIds.some((id) =>
+        supplements.some((supplement) => supplement.supplementId === id),
+      )
+    )
+      continue
+    if (!semanticsKeyIndex.has(key))
+      throw new Error(
+        `The settlement-target exclusion ${exclusion.differenceId} lost its registered source record (${key}); the dependent supplement ${exclusion.dependentSupplementIds.join(", ")} is present while the excluded normal-vibrato identity is missing — re-review the clause before generating`,
+      )
+  }
   const groups = new Map<string, SourceRecord[]>()
   for (const record of collected.records) {
     const pack =
@@ -3341,6 +3458,39 @@ export function convertSource(
       throw new Error(
         `Supplement ${supplement.supplementId} mixes layer maxima across its complete-state rules`,
       )
+    // 完整状态层数桥接（批次 09 起）：声明 layerCountInputName 的选项把
+    // selection.layers 解释为逻辑状态层数（0 关闭、严格整数
+    // 0..layerCountMaximumLayers），目录派生绑定作用域 count 输入，实际展开
+    // 固定单实例。桥接只允许一条 maximumLayers=1 的 supplied 贡献（目录
+    // 定义校验强制其值表达式真实消费该 count 输入）；逻辑层数上限与规则
+    // 实例层数上限因此解耦，不声明桥接的补充保持变体层数 = 规则层数。
+    if (
+      supplement.variant.layerCountInputName !== undefined ||
+      supplement.variant.layerCountMaximumLayers !== undefined
+    ) {
+      if (
+        supplement.variant.layerCountInputName === undefined ||
+        supplement.variant.layerCountMaximumLayers === undefined
+      )
+        throw new Error(
+          `Supplement ${supplement.supplementId} must declare layerCountInputName and layerCountMaximumLayers together`,
+        )
+      if (
+        !Number.isSafeInteger(supplement.variant.layerCountMaximumLayers) ||
+        supplement.variant.layerCountMaximumLayers < 1
+      )
+        throw new Error(
+          `Supplement ${supplement.supplementId} declares an invalid logical layer maximum ${String(supplement.variant.layerCountMaximumLayers)}`,
+        )
+      if ((supplement.additionalRules ?? []).length > 0)
+        throw new Error(
+          `Supplement ${supplement.supplementId} cannot combine the layer-count bridge with additionalRules; the catalog allows exactly one contribution consuming the derived count input`,
+        )
+      if (supplement.rule.maximumLayers !== 1)
+        throw new Error(
+          `Supplement ${supplement.supplementId} bridges selection.layers to a count input, so its rule must expand a single complete instance (maximumLayers 1), found ${String(supplement.rule.maximumLayers)}`,
+        )
+    }
     const supplementRules = ruleSpecs.map(buildSupplementRule)
     // 独立伤害补充契约：内部补充机制的 hit-adjustment（主规则与
     // additionalRules 逐条核验）只支持精确非空 itemIds 绑定的独立伤害项。
@@ -3401,7 +3551,15 @@ export function convertSource(
         nanokaReference(ref.path, ref.pointer),
       ) as unknown as NonEmpty<SourceReference>,
       effectIds: supplementRules.map((rule) => rule.effectId),
-      maximumLayers: supplement.rule.maximumLayers,
+      // 桥接选项的逻辑层数上限；普通补充保持变体层数 = 规则实例层数。
+      maximumLayers:
+        supplement.variant.layerCountMaximumLayers ??
+        supplement.rule.maximumLayers,
+      ...(supplement.variant.layerCountInputName === undefined
+        ? {}
+        : {
+            layerCountInputName: supplement.variant.layerCountInputName,
+          }),
       inputs: supplement.variant.inputs,
       applicability: supplement.variant.applicability,
       differences: [],
@@ -3607,7 +3765,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "23",
+    revision: "24",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -3760,6 +3918,19 @@ export function convertSource(
             "agents/1321/details.zh.json",
             "/passive/level/1321507/desc/1",
           ),
+        ],
+      },
+      {
+        differenceId: "nangongyu-vibrato-modified-exclusivity",
+        explanation:
+          "南宫羽影画 6[天使的妄想]（Nanoka agents/1511 的 /talent/6/desc，中英文同文）明文：[颤音：改]与[颤音]无法相互叠加，且影画 2（/talent/2/desc）的每层 +10% 只强化[核心被动：天才偶像]中普通[颤音]的异放比例。固定来源把普通颤音条款编为不限独立结算身份的异常放乘区记录（五元素基础 450%、物理 449%、每层 +25%、影画 2 每层 +10%），批次 09 新登记的[颤音：改]独立结算目标（nangongyu-vibrato-modified）携带的 anomaly-settlement 命中会被同一乘区命中，新结算错误叠上旧基础与每层增量。修正保留四条记录的原稳定 effectId、数值、元素筛选与既有条件（含影画 2 的失衡内条件），仅追加对该独立目标的排除：携带该目标的命中不吃普通颤音贡献，普通颤音结算（基础+叠层+M2，失衡内与恢复后快照均可）保持原行为；影画 2 的失衡易伤、极性紊乱与核心被动的精通/团队增伤等独立条款不受影响。防漂移：raw/normalized 编码（scope/applyTarget/applySituation/elementFilter/kind/stat/value/stackable/maxStacks/valuePerStack）与所属块冻结完整 note 逐字核对，任一漂移或 normalized 删除都拒绝生成；依赖的两个批次 09 补充参与转换而任一登记记录缺失时同样拒绝。",
+        references: [
+          reference("/agents/9/mindscapeBuffs/0/effectBlocks/1/effects/1"),
+          reference("/agents/9/mindscapeBuffs/0/effectBlocks/1/effects/2"),
+          reference("/agents/9/mindscapeBuffs/0/effectBlocks/1/effects/3"),
+          reference("/agents/9/mindscapeBuffs/2/effectBlocks/0/effects/0"),
+          nanokaReference("agents/1511/details.zh.json", "/talent/6/desc"),
+          nanokaReference("agents/1511/details.zh.json", "/talent/2/desc"),
         ],
       },
       {
