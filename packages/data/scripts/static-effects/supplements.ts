@@ -22,6 +22,73 @@ import type {
  * rank-evidence.json 单独维护，本文件不重复登记。
  */
 
+/**
+ * 音擎共存机器记录的冻结形状：与来源 SourceEffect 同形的可执行字段集
+ * （守卫逐字段核对 raw 与 normalized 两份表示；字段缺省按登记原样比较，
+ * 不做空白宽松归一）。
+ */
+export interface WengineRecordShape {
+  readonly id: string
+  readonly origin?: string
+  readonly scope: string
+  readonly applyTarget: "self" | "team"
+  readonly applySituation?: string
+  readonly applyProfession?: string | null
+  readonly teamProfession?: string | null
+  readonly teamProfessionValues?: (number | null)[] | null
+  readonly teamProfessionMinCount?: number | null
+  readonly skillCategory?: string
+  readonly skillSubcategoryId?: string | null
+  readonly skillTargets?: { category: string; subcategoryId?: string | null }[]
+  readonly elementFilter: "all" | readonly string[]
+  readonly kind: "fixed" | "stacked" | "convert"
+  readonly stat: string
+  readonly value: number
+  readonly stackable?: boolean
+  readonly maxStacks?: number
+  readonly valuePerStack?: number
+  readonly defaultStacks?: number
+  readonly convert?: {
+    readonly from: string
+    readonly panelSource?: string
+    readonly ratioPercent: number
+    readonly cap?: number | null
+    readonly defaultBase?: number | null
+    readonly initialBase?: number
+  }
+  readonly appliesToAnomaly?: boolean
+  readonly enabledDefault?: boolean
+  readonly note?: string
+}
+
+/** 冻结形状逐字段核对的权威字段清单（与 WengineRecordShape 一一对应）。 */
+export const WENGINE_RECORD_SHAPE_FIELDS: readonly string[] = Object.freeze([
+  "id",
+  "origin",
+  "scope",
+  "applyTarget",
+  "applySituation",
+  "applyProfession",
+  "teamProfession",
+  "teamProfessionValues",
+  "teamProfessionMinCount",
+  "skillCategory",
+  "skillSubcategoryId",
+  "skillTargets",
+  "elementFilter",
+  "kind",
+  "stat",
+  "value",
+  "stackable",
+  "maxStacks",
+  "valuePerStack",
+  "defaultStacks",
+  "convert",
+  "appliesToAnomaly",
+  "enabledDefault",
+  "note",
+])
+
 export interface SupplementEvidenceReference {
   readonly path: string
   readonly pointer: string
@@ -97,6 +164,14 @@ export interface SupplementVariantSpec {
    */
   readonly squadUniqueEffect?: true
   /**
+   * 独占伤害项声明（透传到目录变体的 exclusiveDamageItem）：启用该选项时，
+   * 命中的伤害项必须恰好是本变体 damageItemRequirements 声明的唯一项；
+   * 混合请求被目录明确拒绝，不静默丢弃多余项。用于自带命中级机制（如
+   * 必定暴击）会把同一请求全部伤害项卷入的选项；声明时必须恰好登记一个
+   * 伤害项要求（convert 生成期同样校验）。
+   */
+  readonly exclusiveDamageItem?: true
+  /**
    * 完整状态层数桥接（透传到目录变体的 layerCountInputName）：声明后
    * selection.layers 表示逻辑状态层数（0 关闭、严格安全整数
    * 0..layerCountMaximumLayers），目录按绑定派生 count 输入，实际展开固定
@@ -142,7 +217,12 @@ export interface SupplementBase {
    */
   readonly skillTarget?: {
     readonly targetId: string
-    readonly agentEntityId: string
+    /**
+     * 目标所属代理人；不属于任何固定代理人的目标（如音擎附伤的独立
+     * 结算目标，任意职业适配的装备者都可能是命中角色）登记 null，
+     * 目录消费端跳过“目标属于另一代理人”的所有权校验。
+     */
+    readonly agentEntityId: string | null
     readonly category: SkillCategory
     readonly name: string
     /**
@@ -199,6 +279,47 @@ export interface SupplementBase {
      * stat）即拒绝并要求复核。
      */
     readonly expectsEmptyPack?: true
+  }
+  /**
+   * 音擎精炼五档的具名来源上下文守卫（批次 12）：按固定来源 refinementBuffs
+   * 的五个精炼档定位条款上下文。每档锚块（块 id + 冻结完整 note 原文）必须
+   * 存在且 note 逐字一致；五个精炼档内任一来源记录（raw 或 normalized 表示，
+   * 归一化可能改写 stat）命中登记 stat 家族即拒绝生成并要求重新核对条款归属
+   * （未来同条款机器编码、raw/normalized 变义都触发）。可登记共存既有机器
+   * 记录的冻结形状（每档锚块内必须存在该 effectId 且 stat 一致的记录），
+   * 共存前提漂移或缺失即拒绝。块与记录按身份匹配，数组重排不误伤；其他
+   * 条款（stat 不在登记家族内）不误拒。该守卫不替代 loadSource 对固定资源
+   * 的 SHA 校验。
+   */
+  readonly wengineRefinementContextGuard?: {
+    /** 冲突 stat 家族：五个精炼档内任一记录的 raw 或 normalized stat 命中即拒绝。 */
+    readonly stats: readonly string[]
+    /** 五个精炼档（1—5）的锚块：块 id 与冻结完整 note。 */
+    readonly tiers: readonly {
+      readonly blockId: string
+      readonly frozenNote: string
+    }[]
+    /**
+     * 共存既有机器记录的冻结形状（可选，如加农转子的常驻 ATK 记录）：按
+     * 完整来源身份（实体、精炼档、锚块、effect ID）在五个精炼档内核对——
+     * 锚块内必须存在该记录，且该档恰好存在一条同 ID 的来源记录，其 raw
+     * 与 normalized 表示都存活并逐字段等于登记的冻结形状（见
+     * WENGINE_RECORD_SHAPE_FIELDS；字段省略按登记原样核对，不从待验输入
+     * 推导期望）。锚块缺失、记录缺失或重复、normalized 缺失、任一表示的
+     * 任一字段漂移都拒绝生成，不静默降级。记录的可执行输出仍由正式转换
+     * 和来源参考夹具逐位置锁定。
+     */
+    readonly coexistingRecords?: readonly {
+      readonly effectId: string
+      /**
+       * 五档逐档的冻结形状（raw 与 normalized 独立登记；字面值取自已核对
+       * 的真实固定源，两份表示在此记录上相同，如未来来源分化须重新登记）。
+       */
+      readonly tiers: readonly {
+        readonly raw: WengineRecordShape
+        readonly normalized: WengineRecordShape
+      }[]
+    }[]
   }
 }
 
@@ -4284,6 +4405,315 @@ const pr10ReviewFixClauses: readonly Supplement[] = [
   },
 ]
 
+/**
+ * 直接伤害倍率条款可能出现的固定来源 stat 名（批次 08 同族）：音擎附伤的
+ * 未来机器编码会命中；比格气缸另核 critRate（“必定触发暴击”若被上游编码
+ * 为命中/技能暴击率记录，同样说明该条款已有真实编码）。
+ */
+const wengineDirectDamageSourceStats = [
+  "directDmgMult",
+  "directDmgMultFactor",
+] as const
+
+/** 比格气缸（Big_Cylinder / Nanoka 13112）五档精炼块的冻结完整 note。 */
+const bigCylinderRefinementNotes = [
+  "受到的伤害降低7.5%；受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者600%防御力的伤害，且必定触发暴击，7.5秒内最多触发一次。",
+  "受到的伤害降低8.5%；受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者690%防御力的伤害，且必定触发暴击，7.5秒内最多触发一次。",
+  "受到的伤害降低9.5%；受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者780%防御力的伤害，且必定触发暴击，7.5秒内最多触发一次。",
+  "受到的伤害降低10.5%；受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者870%防御力的伤害，且必定触发暴击，7.5秒内最多触发一次。",
+  "受到的伤害降低12%；受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者960%防御力的伤害，且必定触发暴击，7.5秒内最多触发一次。",
+] as const
+
+/** 加农转子（Cannon_Rotor / Nanoka 14001）五档精炼块的冻结完整 note。 */
+const cannonRotorRefinementNotes = [
+  "攻击力提升7.5%；攻击命中敌人并触发暴击时，额外造成200%攻击力的伤害，8秒内最多触发一次。",
+  "攻击力提升8.6%；攻击命中敌人并触发暴击时，额外造成200%攻击力的伤害，7.5秒内最多触发一次。",
+  "攻击力提升9.7%；攻击命中敌人并触发暴击时，额外造成200%攻击力的伤害，7秒内最多触发一次。",
+  "攻击力提升10.8%；攻击命中敌人并触发暴击时，额外造成200%攻击力的伤害，6.5秒内最多触发一次。",
+  "攻击力提升12%；攻击命中敌人并触发暴击时，额外造成200%攻击力的伤害，6秒内最多触发一次。",
+] as const
+
+/**
+ * 比格气缸（批次 12）：受击后下一次攻击命中的一次额外防御力伤害。
+ * 五档 600/690/780/870/960% 装备者防御力；中文“额外造成…伤害，且必定
+ * 触发暴击”支持附伤命中必暴（英文主语歧义如实登记，不据其扩展），本批
+ * 仅实现附伤范围：hit 作用域暴击率 +1.0 只随本独立目标参与求值，选项同
+ * 时声明独占伤害项，启用时命中只能携带本独立项（混合请求被目录拒绝）。
+ */
+const bigCylinderRetaliationDefenseDamage: Supplement = {
+  kind: "option",
+  ...wengineSupplement("13112", "retaliation-defense-damage"),
+  source: "nanoka-integrated@3.2 w-engines/13112 /talents/1—5/desc",
+  catalogEntityId: "w-engines:Big_Cylinder",
+  supportedRanks: "refinement 1—5；层数 0—1",
+  computationTarget:
+    "catalog option on the mapped w-engine entity (two-rule complete state)",
+  // 条款上下文：五档精炼块全部 note-only（effects 为空）；锚块缺失、note
+  // 漂移（含保留原文再追加）或五档内出现直接倍率/暴击率家族的机器记录
+  // （raw 或 normalized 任一表示）都拒绝生成并要求重新核对。
+  wengineRefinementContextGuard: {
+    stats: [...wengineDirectDamageSourceStats, "critRate"],
+    tiers: [
+      {
+        blockId: "blk-ms1q9sxu-g88pag",
+        frozenNote: bigCylinderRefinementNotes[0]!,
+      },
+      {
+        blockId: "blk-ms1qa2rg-yt84b0",
+        frozenNote: bigCylinderRefinementNotes[1]!,
+      },
+      {
+        blockId: "blk-ms1qaa60-bhvo32",
+        frozenNote: bigCylinderRefinementNotes[2]!,
+      },
+      {
+        blockId: "blk-ms1qafjw-h0do1p",
+        frozenNote: bigCylinderRefinementNotes[3]!,
+      },
+      {
+        blockId: "blk-ms1qal4m-scu6gi",
+        frozenNote: bigCylinderRefinementNotes[4]!,
+      },
+    ],
+  },
+  skillTarget: {
+    targetId: "big-cylinder-retaliation",
+    // 音擎附伤不属于任何固定代理人：任意防护职业装备者都可能是命中角色。
+    agentEntityId: null,
+    category: "uncategorized",
+    name: "比格气缸受击附伤",
+  },
+  evidence: wengineTalentEvidence(
+    "13112",
+    "86a2ce694134ea780dcfe2181938f1bc91dbe7af70a653cbc78fc994875c3201",
+  ),
+  verification:
+    "Nanoka 五档天赋逐档核实（w-engines/13112/details.zh.json 的 /talents/1—5/desc，英文文件同文核对：After being attacked, the next attack to hit an enemy will trigger a critical hit and deal 600%—960% of the equipper's DEF as additional DMG, triggerable once every 7.5s）：受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者 600/690/780/870/960% 防御力的伤害，且必定触发暴击，7.5 秒内最多触发一次。固定 ZZZ-HP 来源的五档精炼块只有 note、effects 为空，按补充来源在既有 w-engines:Big_Cylinder 实体新增选项。受击与下一次攻击命中是调用方显式声明的触发事实，7.5 秒冷却与次数上限不模拟，每次显式结算一次，倍率只经关联 hit-adjustment 贡献一次。“必定触发暴击”的归属：中文五档均为“额外造成…伤害，且必定触发暴击”，暴击分句紧随附伤、无独立主语，据此实现附伤独立命中必暴；英文译文把主语读成下一次攻击、存在更宽读法，该歧义如实登记、不据其扩展——本批只实现附伤范围的必暴，不据此声称游戏中的触发招式本体不受影响，触发招式的精确影响范围未经游戏实测，取得证据时应先登记来源再调整。实现为 hit 作用域 criticalRate direct +1.0，只随本独立目标参与求值；因该命中级贡献会卷入同一请求的全部伤害项，选项同时声明独占伤害项（exclusiveDamageItem）：启用时命中只能携带本独立项，混合请求被目录明确拒绝，普通命中的暴击率不受影响。附伤元素两处来源（中英文文本、块 note、data.json 面板字段）均未标注：规则不按元素筛选，独立结算的 hit.element 由调用方按实际游戏行为显式声明，不凭装备者元素、触发招式类别或音擎名称猜默认值。附伤以 regular 直伤独立项结算（固定来源同构条款直接倍率机器编码 directDmgMult 的直伤去向；本项目独立结算契约沿爪印先例）：伤害项读取绑定持有者当前防御力（holder-current，无快照），要求零初始倍率与 uncategorized 分类——独立目标身份、零初始倍率、逐次声明与 uncategorized 分类是本项目采用的独立结算契约，不是原始游戏证据。首句“受到的伤害降低7.5—12%”是装备者承伤方向，固定来源无机器记录，不属于本选项，也不折算为目标易伤或自身减伤。适用职业防护由目录绑定适用性校验（不适配职业零贡献）。",
+  rule: {
+    effectId: wengineSupplement("13112", "retaliation-defense-damage").effectId,
+    identity: { kind: "w-engine", entityId: "13112" },
+    section: "万斤顶（受击附伤）",
+    config: { kind: "constant", value: true },
+    parameters: {
+      amount: {
+        kind: "by-rank",
+        rank: "refinement",
+        unit: "multiplier",
+        values: { 1: 6, 2: 6.9, 3: 7.8, 4: 8.7, 5: 9.6 },
+      },
+    },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        { kind: "one-of", fact: "hit.damageKind", values: ["regular"] },
+        {
+          kind: "one-of",
+          fact: "hit.skillTag",
+          values: ["zzz-hp:skill:big-cylinder-retaliation"],
+        },
+      ],
+    },
+    operation: {
+      kind: "hit-adjustment",
+      field: "damageMultiplier",
+      operator: "add",
+      itemIds: ["big-cylinder:retaliation"],
+      value: { kind: "parameter", unit: "multiplier", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  additionalRules: [
+    {
+      effectId: (wengineSupplement("13112", "retaliation-defense-damage")
+        .effectId + ":guaranteed-critical") as EffectId,
+      identity: { kind: "w-engine", entityId: "13112" },
+      section: "万斤顶（受击附伤 · 必定暴击）",
+      config: { kind: "constant", value: true },
+      parameters: {},
+      scope: "hit",
+      when: {
+        kind: "all",
+        conditions: [
+          { kind: "one-of", fact: "hit.damageKind", values: ["regular"] },
+          {
+            kind: "one-of",
+            fact: "hit.skillTag",
+            values: ["zzz-hp:skill:big-cylinder-retaliation"],
+          },
+        ],
+      },
+      operation: {
+        kind: "stat-adjustment",
+        stat: "criticalRate",
+        stage: "direct",
+        value: literal("ratio", 1),
+      },
+      maximumLayers: 1,
+    },
+  ],
+  variant: {
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    inputs: [],
+    applicability: {},
+    damageItemRequirements: [
+      {
+        itemId: "big-cylinder:retaliation",
+        stat: "defense",
+        role: "base",
+        allowedModes: ["direct"],
+        source: "holder-current",
+        requiredDirectMultiplier: 0,
+        requiredSkillCategory: "uncategorized",
+      },
+    ],
+    // 独占伤害项：该选项自带命中级必暴（hit 作用域暴击率 +1.0 会卷入同一
+    // 请求的全部伤害项），启用时命中只能携带本选项声明的唯一独立项；
+    // 混合请求按 CONTEXT_MISMATCH 拒绝（目录入口能力，选择阶段强制）。
+    exclusiveDamageItem: true,
+    conditionDescription:
+      "受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者 600/690/780/870/960% 防御力的伤害（按精炼 1—5），该额外伤害必定暴击，7.5 秒内最多触发一次。本次附伤由调用方声明触发并显式结算：命中须只携带本独立项（独占结算，混合其他伤害项会被拒绝）、以 uncategorized 分类结算、读取装备者当前防御力（元素由调用方按实际结算声明，来源未标注）；7.5 秒冷却与触发检测不模拟。首句承伤降低不属于本选项。",
+    name: "万斤顶 · 受击附伤（独立结算）",
+    target: "self",
+  },
+}
+
+/**
+ * 加农转子（批次 12）：攻击暴击触发的一次额外攻击力伤害。五档均为
+ * 200% 攻击力（触发间隔 8—6 秒随精炼缩短，不模拟）；触发攻击暴击是调用方
+ * 声明的事实，不证明附伤本身的暴击能力——附伤最终暴击概率由调用方显式
+ * 声明（declaredCriticalRate，无默认、替换语义），选项独占结算且缺声明
+ * 拒绝；critical 分支沿用当前普通暴击伤害（条件计算模型，非游戏实测）。
+ * 常驻 ATK 选项保持独立共存。
+ */
+const cannonRotorCriticalHitBonusDamage: Supplement = {
+  kind: "option",
+  ...wengineSupplement("14001", "critical-hit-bonus-damage"),
+  source: "nanoka-integrated@3.2 w-engines/14001 /talents/1—5/desc",
+  catalogEntityId: "w-engines:Cannon_Rotor",
+  supportedRanks: "refinement 1—5；层数 0—1",
+  computationTarget: "catalog option on the mapped w-engine entity",
+  // 条款上下文：每档锚块 blk-legacy 的 note 冻结、常驻 ATK 机器记录
+  // （legacy-self-inCombatAtkPercent / inCombatAtkPercent）的共存形状逐档核对；
+  // 锚块缺失、note 漂移、共存记录缺失或变义、五档内出现直接倍率家族的
+  // 机器记录（raw 或 normalized 任一表示）都拒绝生成并要求重新核对。
+  wengineRefinementContextGuard: {
+    stats: wengineDirectDamageSourceStats,
+    tiers: cannonRotorRefinementNotes.map((note) => ({
+      blockId: "blk-legacy",
+      frozenNote: note,
+    })),
+    coexistingRecords: [
+      {
+        effectId: "legacy-self-inCombatAtkPercent",
+        // 冻结形状字面值取自真实固定源 fac62407 的五档记录（指针
+        // /wengines/20/refinementBuffs/{0..4}/effectBlocks/0/effects/0）；
+        // raw 与 normalized 在该记录上逐字段相同（归一化不改写此记录），
+        // 两份形状独立登记，未来来源分化须重新核对登记。
+        tiers: ([7.5, 8.6, 9.7, 10.8, 12] as const).map((value) => {
+          const shape: WengineRecordShape = {
+            id: "legacy-self-inCombatAtkPercent",
+            origin: "",
+            scope: "general",
+            applyTarget: "self",
+            applySituation: "global",
+            applyProfession: null,
+            teamProfession: null,
+            teamProfessionValues: null,
+            teamProfessionMinCount: null,
+            skillSubcategoryId: null,
+            elementFilter: "all",
+            kind: "fixed",
+            stat: "inCombatAtkPercent",
+            value,
+            stackable: false,
+            maxStacks: 1,
+            valuePerStack: 0,
+            defaultStacks: 1,
+            enabledDefault: true,
+            note: "",
+          }
+          return { raw: shape, normalized: shape }
+        }),
+      },
+    ],
+  },
+  skillTarget: {
+    targetId: "cannon-rotor-bonus-damage",
+    // 音擎附伤不属于任何固定代理人：任意强攻职业装备者都可能是命中角色。
+    agentEntityId: null,
+    category: "uncategorized",
+    name: "加农转子暴击附伤",
+  },
+  evidence: wengineTalentEvidence(
+    "14001",
+    "e4ccbd28edd40413c974cbb05b520ac284b0c0006bd62529e8d7409b05cd95ea",
+  ),
+  verification:
+    "Nanoka 五档天赋逐档核实（w-engines/14001/details.zh.json 的 /talents/1—5/desc，英文文件同文核对：Landing a critical hit on an enemy will inflict an additional 200% of ATK as DMG, triggerable once every 8/7.5/7/6.5/6s）：攻击命中敌人并触发暴击时，额外造成 200% 攻击力的伤害（五档同值），8/7.5/7/6.5/6 秒内最多触发一次。固定 ZZZ-HP 来源每档 blk-legacy 只编码常驻 inCombatAtkPercent 记录（既有选项与公开 ID 保持原样，与本补充共存、互不重复计算），附伤句无机器记录，按补充来源在既有 w-engines:Cannon_Rotor 实体新增选项。触发攻击命中并暴击是调用方显式声明的事实，触发间隔与次数上限不模拟，每次显式结算一次，倍率只经关联 hit-adjustment 贡献一次；触发攻击暴击不自动证明额外伤害本身必暴或不可暴——来源无该证据，附伤的暴击能力未被证实：本选项不默许任何默认概率，最终暴击概率由调用方以 hit.declaredCriticalRate 显式声明（有限 [0,1]、无默认值、替换该次独立命中的最终概率，不叠加持有者面板暴击率；启用本选项而缺声明按 MISSING_FACT 拒绝），与命中作用域暴击率贡献互斥。结果的 critical 分支沿用装备者当前普通暴击伤害：这是调用方采用的 regular 条件计算模型，不证明游戏附伤能暴击或继承该暴击伤害（独立 item/target 与 holder-current 的结构先例来自批次 08；批次 09 南宫羽是 anomaly-settlement，不共享普通双暴通道）。附伤元素两处来源（中英文文本、块 note、data.json 面板字段）均未标注：规则不按元素筛选，独立结算的 hit.element 由调用方按实际游戏行为显式声明，不凭装备者元素、触发招式类别或音擎名称猜默认值。附伤以 regular 直伤独立项结算：伤害项读取绑定持有者当前攻击力（holder-current，无快照），要求零初始倍率与 uncategorized 分类——独立目标身份、零初始倍率、逐次声明与 uncategorized 分类是本项目采用的独立结算契约，不是原始游戏证据。适用职业强攻由目录绑定适用性校验（不适配职业零贡献）。",
+  rule: {
+    effectId: wengineSupplement("14001", "critical-hit-bonus-damage").effectId,
+    identity: { kind: "w-engine", entityId: "14001" },
+    section: "口径超规（暴击附伤）",
+    config: { kind: "constant", value: true },
+    parameters: {
+      amount: {
+        kind: "by-rank",
+        rank: "refinement",
+        unit: "multiplier",
+        values: { 1: 2, 2: 2, 3: 2, 4: 2, 5: 2 },
+      },
+    },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        { kind: "one-of", fact: "hit.damageKind", values: ["regular"] },
+        {
+          kind: "one-of",
+          fact: "hit.skillTag",
+          values: ["zzz-hp:skill:cannon-rotor-bonus-damage"],
+        },
+      ],
+    },
+    operation: {
+      kind: "hit-adjustment",
+      field: "damageMultiplier",
+      operator: "add",
+      itemIds: ["cannon-rotor:bonus-damage"],
+      value: { kind: "parameter", unit: "multiplier", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    inputs: [],
+    applicability: {},
+    // 独占结算：声明最终暴击概率与被结算的独立项一一对应，不留多项共享
+    // 一个声明概率的歧义（目录入口在选择阶段强制）。
+    exclusiveDamageItem: true,
+    damageItemRequirements: [
+      {
+        itemId: "cannon-rotor:bonus-damage",
+        stat: "attack",
+        role: "base",
+        allowedModes: ["direct"],
+        source: "holder-current",
+        requiredDirectMultiplier: 0,
+        requiredSkillCategory: "uncategorized",
+        // 最终暴击概率必须由调用方显式声明（hit.declaredCriticalRate），
+        // 无默认值：不默许读取装备者面板普通暴击率充当该次独立命中的
+        // 概率（来源未证明附伤的暴击能力）。
+        requiredCriticalRateDeclaration: true,
+      },
+    ],
+    conditionDescription:
+      "攻击命中敌人并触发暴击时，额外造成 200% 攻击力的伤害（五档同值），8/7.5/7/6.5/6 秒内最多触发一次。本次附伤由调用方声明触发攻击暴击并显式结算：命中须只携带本独立项（独占结算，混合其他伤害项会被拒绝）、以 uncategorized 分类结算、读取装备者当前攻击力，并显式声明本次独立附伤采用的最终暴击概率（hit.declaredCriticalRate，无默认值；元素同样由调用方按实际结算声明，来源未标注）。结果的暴击分支沿用装备者当前普通暴击伤害，是本接口的条件计算模型，不证明游戏附伤能暴击或继承该暴击伤害。触发间隔与暴击检测不模拟。同音擎的常驻攻击力选项独立共存。",
+    name: "口径超规 · 暴击附伤（独立结算）",
+    target: "self",
+  },
+}
+
 export const SUPPLEMENTS: readonly Supplement[] = [
   evelynMindscape6LunaluxGarroteFollowUp,
   s0anbyMindscape6ElectromagneticVortex,
@@ -4332,4 +4762,6 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   ...pr10WEngineBoundaries,
   ...pr10ProviderBoundaries,
   ...pr10ReviewFixClauses,
+  bigCylinderRetaliationDefenseDamage,
+  cannonRotorCriticalHitBonusDamage,
 ]

@@ -31,7 +31,7 @@ import {
   rejectUnknownFields,
   type FieldChecks,
 } from "./checks.ts"
-import { evaluateEffects } from "./evaluate.ts"
+import { evaluateEffects, evaluateEffectsForStaticHit } from "./evaluate.ts"
 import { IssueCollector, failure } from "./issues.ts"
 import { prepareSelectedEffects, readPreparedInternal } from "./prepare.ts"
 import { supplyEffectState } from "./state.ts"
@@ -365,6 +365,38 @@ export function evaluateStaticDamage(input: StaticDamageInput): Result<{
     { ...checks, pointer: "/hit" },
     "static hit",
   )
+  // 静态声明的最终暴击概率：先校验取值与适用范围，
+  // 再在组装普通 HitContext 前剥离该静态字段，经内部参数送入求值。
+  const declaredCriticalRate = hitObject?.["declaredCriticalRate"]
+  if (declaredCriticalRate !== undefined) {
+    if (
+      typeof declaredCriticalRate !== "number" ||
+      !Number.isFinite(declaredCriticalRate) ||
+      declaredCriticalRate < 0 ||
+      declaredCriticalRate > 1
+    )
+      collector.report(
+        "INVALID_INPUT",
+        "/hit/declaredCriticalRate",
+        "The declared critical rate must be a finite number within [0, 1]",
+      )
+    // 声明适用范围只在 kind 可安全判定（受支持的字符串）时检查：非法
+    // damage 保持 /damage 的结构化失败返回，不因提前解引用而抛异常；
+    // 合法非 regular 的 kind 照常拒绝声明。
+    const damageKind = (
+      object["damage"] as { kind?: unknown } | null | undefined
+    )?.["kind"]
+    if (
+      typeof damageKind === "string" &&
+      DAMAGE_KINDS.includes(damageKind as StaticDamageParameters["kind"]) &&
+      damageKind !== "regular"
+    )
+      collector.report(
+        "INVALID_INPUT",
+        "/hit/declaredCriticalRate",
+        `The declared critical rate only supports regular damage settlement, not "${damageKind}"`,
+      )
+  }
   if (hitObject !== undefined) {
     rejectUnknownFields(
       hitObject,
@@ -378,6 +410,7 @@ export function evaluateStaticDamage(input: StaticDamageInput): Result<{
         "damageItems",
         "element",
         "actionSnapshotId",
+        "declaredCriticalRate",
       ],
       { ...checks, pointer: "/hit" },
       "static hit",
@@ -399,9 +432,10 @@ export function evaluateStaticDamage(input: StaticDamageInput): Result<{
     hitObject === undefined
   )
     return failure(collector)
+  const { declaredCriticalRate: _declared, ...hitContextSource } = hitObject
   const hit = validateHitContext(
     {
-      ...hitObject,
+      ...hitContextSource,
       hitId: "hit:static",
       actionInstanceId: "action-instance:static",
       actionSnapshotId:
@@ -418,6 +452,42 @@ export function evaluateStaticDamage(input: StaticDamageInput): Result<{
     "/hit",
   )
   if (hit === undefined || !collector.isEmpty) return failure(collector)
+  // 声明概率的结算范围：恰好一个伤害项，且该项实际缩放属性读取当前命中
+  // 角色的当前属性（不借另一实体或保存快照）；与 criticalRate 的属性来源
+  // 重定向并存是两种概率来源，明确拒绝。到达此处时取值校验已通过（非法
+  // 取值在上方的失败返回中拦截），安全收窄为 number。
+  const declaredRate: number | undefined =
+    declaredCriticalRate === undefined
+      ? undefined
+      : (declaredCriticalRate as number)
+  if (declaredRate !== undefined) {
+    if (hit.attributeSources?.criticalRate !== undefined)
+      collector.report(
+        "CONTEXT_MISMATCH",
+        "/hit/declaredCriticalRate",
+        "The declared critical rate conflicts with the redirected criticalRate attribute source; settle with exactly one probability source",
+      )
+    if (hit.damageItems.length !== 1)
+      collector.report(
+        "INVALID_INPUT",
+        "/hit/declaredCriticalRate",
+        "The declared critical rate requires exactly one damage item",
+      )
+    else {
+      const item = hit.damageItems[0]!
+      const source = item.statSource ?? hit.attributeSources?.[item.stat]
+      if (
+        source !== undefined &&
+        (source.entityId !== hit.actorId || source.snapshotId !== undefined)
+      )
+        collector.report(
+          "INVALID_INPUT",
+          "/hit/declaredCriticalRate",
+          `The declared critical rate requires the damage item to scale the hit actor's current attributes, not ${JSON.stringify(source)}`,
+        )
+    }
+    if (!collector.isEmpty) return failure(collector)
+  }
   if (!world.actors.has(hit.actorId) || !world.actors.has(hit.targetId)) {
     collector.report(
       "MISSING_FACT",
@@ -556,15 +626,26 @@ export function evaluateStaticDamage(input: StaticDamageInput): Result<{
         : kind === "sharpen"
           ? ["sharpCriticalDamage", "penetrationRatio"]
           : ["anomalyProficiency", "penetrationRatio"]
-  const evaluated = evaluateEffects(prepared.value, state.value, {
-    kind: "hit",
+  const evaluationInput = {
+    kind: "hit" as const,
     atSeconds,
     world: input.world,
     observedSnapshots: [],
     hit,
     stats,
     ...(input.inputs === undefined ? {} : { inputs: input.inputs }),
-  })
+  }
+  // 已验证的声明最终暴击概率经内部静态入口传入求值；公共 evaluateEffects
+  // 的三参数契约与普通命中分支保持原样。
+  const evaluated =
+    declaredRate === undefined
+      ? evaluateEffects(prepared.value, state.value, evaluationInput)
+      : evaluateEffectsForStaticHit(
+          prepared.value,
+          state.value,
+          evaluationInput,
+          declaredRate,
+        )
   if (!evaluated.ok) return evaluated
   return { ok: true, value: { hit, evaluation: evaluated.value } }
 }

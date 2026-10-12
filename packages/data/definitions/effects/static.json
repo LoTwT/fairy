@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "26",
+  "revision": "27",
   "effects": [
     {
       "kind": "contribution",
@@ -61855,6 +61855,200 @@
     },
     {
       "kind": "contribution",
+      "effectId": "w-engine:13112:nanoka:retaliation-defense-damage",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "13112"
+        },
+        "section": "万斤顶（受击附伤）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13112/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13112/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13112/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13112/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13112/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "multiplier",
+          "values": {
+            "1": 6,
+            "2": 6.9,
+            "3": 7.8,
+            "4": 8.7,
+            "5": 9.6
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:big-cylinder-retaliation"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "add",
+        "itemIds": ["big-cylinder:retaliation"],
+        "value": {
+          "kind": "parameter",
+          "unit": "multiplier",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:13112:nanoka:retaliation-defense-damage:guaranteed-critical",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "13112"
+        },
+        "section": "万斤顶（受击附伤 · 必定暴击）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13112/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13112/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13112/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13112/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/13112/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:big-cylinder-retaliation"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "criticalRate",
+        "stage": "direct",
+        "value": {
+          "kind": "literal",
+          "unit": "ratio",
+          "value": 1
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "w-engine:13113:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement",
       "source": {
         "identity": {
@@ -63097,6 +63291,110 @@
         "value": {
           "kind": "parameter",
           "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14001:nanoka:critical-hit-bonus-damage",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14001"
+        },
+        "section": "口径超规（暴击附伤）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14001/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14001/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14001/details.zh.json",
+            "pointer": "/talents/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14001/details.zh.json",
+            "pointer": "/talents/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "w-engines/14001/details.zh.json",
+            "pointer": "/talents/5/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "refinement",
+          "unit": "multiplier",
+          "values": {
+            "1": 2,
+            "2": 2,
+            "3": 2,
+            "4": 2,
+            "5": 2
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:cannon-rotor-bonus-damage"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "add",
+        "itemIds": ["cannon-rotor:bonus-damage"],
+        "value": {
+          "kind": "parameter",
+          "unit": "multiplier",
           "name": "amount"
         }
       }

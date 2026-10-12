@@ -114,6 +114,9 @@ describe("static effects evidence path", () => {
       "nanoka:agents:dialyn:malicious-complaint-stun-duration",
       "nanoka:agents:nangongyu:core-buildup-and-daze",
       "nanoka:agents:nangongyu:downbeat-acquisition",
+      // 批次 12：比格气缸受击附伤与加农转子暴击附伤（五档天赋逐档 Pointer）。
+      "nanoka:w-engines:13112:retaliation-defense-damage",
+      "nanoka:w-engines:14001:critical-hit-bonus-damage",
     ])
       expect(verified).toContain(`supplement:${supplementId}`)
   })

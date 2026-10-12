@@ -39,9 +39,11 @@ import {
 import { buildRemielleSpecialVoidflareMechanism } from "./mechanisms.ts"
 import {
   SUPPLEMENTS,
+  WENGINE_RECORD_SHAPE_FIELDS,
   type Supplement,
   type SupplementRuleSpec,
   type SupplementVariantSpec,
+  type WengineRecordShape,
 } from "./supplements.ts"
 import {
   BUFF_RESOURCE,
@@ -608,6 +610,146 @@ function verifyClauseContextGuard(
   if (conflict)
     throw new Error(
       `Supplement ${registration.supplementId} conflicts with the fixed-source record at ${conflict.pointer} (stat ${conflict.raw.stat}) in the registered clause context ${registration.catalogEntityId} mindscape rank ${String(context.rank)}; re-review the clause instead of double-contributing`,
+    )
+}
+
+/**
+ * 音擎精炼五档的具名来源上下文守卫（批次 12）：与 verifyClauseContextGuard
+ * 同构，但作用域是 w-engine 的五个精炼档。每档锚块必须存在且 note 与冻结
+ * 完整原文逐字一致；五个精炼档内任一来源记录（raw 或 normalized 表示，
+ * 归一化可能改写 stat）命中登记 stat 家族即拒绝——未来同条款机器编码或
+ * raw/normalized 变义都触发重新核对。可登记共存既有机器记录的冻结形状：
+ * 每档锚块内必须存在该 effectId 的记录且 stat 一致，共存前提漂移或缺失
+ * 即拒绝。块与记录按身份匹配，数组重排不误伤；stat 不在登记家族内的其他
+ * 条款记录不误拒。该守卫不替代 loadSource 对固定资源的 SHA 校验。
+ */
+/**
+ * 冻结记录形状的逐字段核对：对 WENGINE_RECORD_SHAPE_FIELDS 的每个
+ * 字段比较实际记录与登记形状（缺省字段按登记原样比较，值按 JSON 归一后
+ * 比较）。任一字段漂移（含上游补出登记中缺省的字段）即拒绝并指明字段与
+ * 两边的值；不做空白宽松归一，也不用通用深比较。
+ */
+function verifyWengineRecordShape(
+  actual: SourceEffect,
+  frozen: WengineRecordShape,
+  label: string,
+  context: string,
+): void {
+  for (const field of WENGINE_RECORD_SHAPE_FIELDS) {
+    const normalizeValue = (value: unknown): string =>
+      value === undefined ? "<absent>" : JSON.stringify(value)
+    const actualValue = normalizeValue(actual[field as keyof SourceEffect])
+    const frozenValue = normalizeValue(
+      frozen[field as keyof WengineRecordShape],
+    )
+    if (actualValue !== frozenValue)
+      throw new Error(
+        `Supplement ${label} field ${field} drifted to ${actualValue} (expected ${frozenValue}) at ${context}; re-review the shared clause context before generating`,
+      )
+  }
+}
+
+function verifyWengineRefinementContextGuard(
+  data: SourceData,
+  records: readonly SourceRecord[],
+  entity: StaticCatalogEntity,
+  registration: {
+    readonly supplementId: string
+    readonly catalogEntityId: string
+    readonly wengineRefinementContextGuard?: Supplement["wengineRefinementContextGuard"]
+  },
+): void {
+  const guard = registration.wengineRefinementContextGuard
+  if (!guard) return
+  if (entity.identity?.kind !== "w-engine")
+    throw new Error(
+      `Supplement ${registration.supplementId} registers a w-engine refinement context guard on a non w-engine entity: ${registration.catalogEntityId}`,
+    )
+  const raw = data.wengines.find((w) => w.id === entity.upstreamId)
+  if (!raw)
+    throw new Error(
+      `Supplement ${registration.supplementId} lost its fixed-source entity: ${registration.catalogEntityId}`,
+    )
+  const tiers = raw.refinementBuffs ?? []
+  if (tiers.length !== 5 || guard.tiers.length !== 5)
+    throw new Error(
+      `Supplement ${registration.supplementId} expects five refinement tiers at ${registration.catalogEntityId}; found ${String(tiers.length)} source tiers and ${String(guard.tiers.length)} registered anchors`,
+    )
+  for (const [index, tier] of tiers.entries()) {
+    const anchor = guard.tiers[index]!
+    const block = (tier.effectBlocks ?? []).find(
+      (candidate) => candidate.id === anchor.blockId,
+    )
+    if (!block)
+      throw new Error(
+        `Supplement ${registration.supplementId} lost its anchor block ${anchor.blockId} at ${registration.catalogEntityId} refinement ${String(index + 1)}; re-review the clause context before generating`,
+      )
+    // 锚块 note 与冻结全文逐字比对：追加、插入、替换任何变化（包括保留全部
+    // 旧内容再追加新句）都视为上下文漂移，不做空白宽松归一。
+    if ((block.note ?? "") !== anchor.frozenNote)
+      throw new Error(
+        `Supplement ${registration.supplementId} anchor block ${anchor.blockId} note drifted at ${registration.catalogEntityId} refinement ${String(index + 1)}: expected the frozen full note; re-review the clause context before generating`,
+      )
+    for (const expected of guard.coexistingRecords ?? []) {
+      // 锚块内必须存在该记录（结构存在性：记录移出锚块即拒绝重核）。
+      if (!(block.effects ?? []).some((e) => e.id === expected.effectId))
+        throw new Error(
+          `Supplement ${registration.supplementId} lost the coexisting record ${expected.effectId} in anchor block ${anchor.blockId} at ${registration.catalogEntityId} refinement ${String(index + 1)}; re-review the shared clause context before generating`,
+        )
+      // 按完整来源身份（实体、精炼档、effect ID）定位该档的 SourceRecord：
+      // 恰好一条；缺失或同档重复都是共存前提漂移。
+      const matches = records.filter(
+        (record) =>
+          record.category === "w-engines" &&
+          record.entityId === entity.upstreamId &&
+          record.rankKind === "refinement" &&
+          record.rank === index + 1 &&
+          record.raw.id === expected.effectId,
+      )
+      if (matches.length !== 1)
+        throw new Error(
+          `Supplement ${registration.supplementId} expects exactly one coexisting source record ${expected.effectId} at ${registration.catalogEntityId} refinement ${String(index + 1)} (found ${String(matches.length)}); re-review the shared clause context before generating`,
+        )
+      const record = matches[0]!
+      // normalized 表示必须存活：归一化删除该记录时不得让通用 unsupported
+      // 降级把整次生成报成功。
+      if (record.normalized === undefined)
+        throw new Error(
+          `Supplement ${registration.supplementId} lost the normalized coexisting record ${expected.effectId} at ${registration.catalogEntityId} refinement ${String(index + 1)}; the shared clause context must survive normalization — re-review before generating`,
+        )
+      // raw 与 normalized 各自独立逐字段核对冻结形状；字段缺省按登记原样
+      // 比较，不做空白宽松归一，也不从待验输入推导期望。
+      verifyWengineRecordShape(
+        record.raw,
+        expected.tiers[index]!.raw,
+        `${registration.supplementId} coexisting record ${expected.effectId} raw`,
+        `${registration.catalogEntityId} refinement ${String(index + 1)}`,
+      )
+      verifyWengineRecordShape(
+        record.normalized,
+        expected.tiers[index]!.normalized,
+        `${registration.supplementId} coexisting record ${expected.effectId} normalized`,
+        `${registration.catalogEntityId} refinement ${String(index + 1)}`,
+      )
+    }
+  }
+  const conflict = records.find(
+    (record) =>
+      record.category === "w-engines" &&
+      record.entityId === entity.upstreamId &&
+      record.rankKind === "refinement" &&
+      (guard.stats.includes(record.raw.stat) ||
+        (record.normalized !== undefined &&
+          guard.stats.includes(record.normalized.stat))),
+  )
+  if (conflict)
+    throw new Error(
+      `Supplement ${registration.supplementId} conflicts with the fixed-source record at ${conflict.pointer} (stat ${conflict.raw.stat}${
+        conflict.normalized !== undefined &&
+        conflict.normalized.stat !== conflict.raw.stat
+          ? `, normalized ${conflict.normalized.stat}`
+          : ""
+      }) in the registered refinement clause context ${registration.catalogEntityId}; re-review the clause instead of double-contributing`,
     )
 }
 
@@ -3863,6 +4005,47 @@ export function convertSource(
             `Supplement ${supplement.supplementId} declares damage item requirement ${requirement.itemId} without a matching hit-adjustment rule; re-review the binding`,
           )
     }
+    // 独占伤害项声明：必须恰好对应一个伤害项要求——启用时命中的伤害项被
+    // 锁定为该唯一项；多要求或零要求都不能构成“唯一项”的声明形状。
+    if (
+      supplement.variant.exclusiveDamageItem === true &&
+      (supplement.variant.damageItemRequirements ?? []).length !== 1
+    )
+      throw new Error(
+        `Supplement ${supplement.supplementId} declares exclusiveDamageItem with ${(supplement.variant.damageItemRequirements ?? []).length} damage item requirements; the sole-damage-item contract requires exactly one`,
+      )
+    // 声明最终暴击概率的要求项：必须位于独占变体的唯一要求项上，且该
+    // 要求项是 base 角色、仅 direct 模式、holder-current——与目录定义
+    // 阶段的同一形状约束一致，登记侧提前拒绝。
+    for (const [index, requirement] of (
+      supplement.variant.damageItemRequirements ?? []
+    ).entries())
+      if (requirement.requiredCriticalRateDeclaration === true) {
+        const shape = `${supplement.supplementId} requirement ${String(index)} (${requirement.itemId})`
+        if (supplement.variant.exclusiveDamageItem !== true)
+          throw new Error(
+            `Supplement ${shape} requires a declared critical rate but its variant does not declare exclusiveDamageItem`,
+          )
+        if ((supplement.variant.damageItemRequirements ?? []).length !== 1)
+          throw new Error(
+            `Supplement ${shape} requires a declared critical rate but is not the single damage item requirement`,
+          )
+        if (requirement.role !== "base")
+          throw new Error(
+            `Supplement ${shape} requires a declared critical rate but uses role ${String(requirement.role)}`,
+          )
+        if (
+          requirement.allowedModes.length !== 1 ||
+          requirement.allowedModes[0] !== "direct"
+        )
+          throw new Error(
+            `Supplement ${shape} requires a declared critical rate but allows non-direct preparation modes`,
+          )
+        if (requirement.source !== "holder-current")
+          throw new Error(
+            `Supplement ${shape} requires a declared critical rate but uses source ${String(requirement.source)}`,
+          )
+      }
     const variant: StaticCatalogVariant = {
       ...(supplement.variant.target === undefined
         ? {}
@@ -3902,6 +4085,11 @@ export function convertSource(
       ...(supplement.variant.squadUniqueEffect === undefined
         ? {}
         : { squadUniqueEffect: true as const }),
+      // 独占伤害项声明随补充透传；目录选择阶段把启用请求的伤害项锁定为
+      // 声明的唯一项。生成期校验：声明必须恰好对应一个伤害项要求。
+      ...(supplement.variant.exclusiveDamageItem === undefined
+        ? {}
+        : { exclusiveDamageItem: true as const }),
     }
     for (const rule of supplementRules) effects.push(rule)
     supplementalRules += supplementRules.length
@@ -3981,6 +4169,12 @@ export function convertSource(
           )
       }
       verifyClauseContextGuard(data, collected.records, entity, supplement)
+      verifyWengineRefinementContextGuard(
+        data,
+        collected.records,
+        entity,
+        supplement,
+      )
       if (supplement.variant.configuration.minimumSetPieces === 2)
         verifyDriveDiscSetPiecesSupplement(data, collected.entities, options, {
           catalogEntityId: supplement.catalogEntityId,
@@ -4029,7 +4223,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "26",
+    revision: "27",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],

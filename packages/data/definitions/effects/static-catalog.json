@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "26",
+  "revision": "27",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -49451,6 +49451,150 @@
           "differences": []
         }
       ]
+    },
+    {
+      "optionId": "nanoka:w-engines:13112:retaliation-defense-damage",
+      "catalogEntityId": "w-engines:Big_Cylinder",
+      "name": "万斤顶 · 受击附伤（独立结算）",
+      "conditionDescription": "受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者 600/690/780/870/960% 防御力的伤害（按精炼 1—5），该额外伤害必定暴击，7.5 秒内最多触发一次。本次附伤由调用方声明触发并显式结算：命中须只携带本独立项（独占结算，混合其他伤害项会被拒绝）、以 uncategorized 分类结算、读取装备者当前防御力（元素由调用方按实际结算声明，来源未标注）；7.5 秒冷却与触发检测不模拟。首句承伤降低不属于本选项。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "refinements": [1, 2, 3, 4, 5]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13112/details.zh.json",
+              "pointer": "/talents/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13112/details.zh.json",
+              "pointer": "/talents/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13112/details.zh.json",
+              "pointer": "/talents/3/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13112/details.zh.json",
+              "pointer": "/talents/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/13112/details.zh.json",
+              "pointer": "/talents/5/desc"
+            }
+          ],
+          "effectIds": [
+            "w-engine:13112:nanoka:retaliation-defense-damage",
+            "w-engine:13112:nanoka:retaliation-defense-damage:guaranteed-critical"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "big-cylinder:retaliation",
+              "stat": "defense",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized"
+            }
+          ],
+          "exclusiveDamageItem": true
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:w-engines:14001:critical-hit-bonus-damage",
+      "catalogEntityId": "w-engines:Cannon_Rotor",
+      "name": "口径超规 · 暴击附伤（独立结算）",
+      "conditionDescription": "攻击命中敌人并触发暴击时，额外造成 200% 攻击力的伤害（五档同值），8/7.5/7/6.5/6 秒内最多触发一次。本次附伤由调用方声明触发攻击暴击并显式结算：命中须只携带本独立项（独占结算，混合其他伤害项会被拒绝）、以 uncategorized 分类结算、读取装备者当前攻击力，并显式声明本次独立附伤采用的最终暴击概率（hit.declaredCriticalRate，无默认值；元素同样由调用方按实际结算声明，来源未标注）。结果的暴击分支沿用装备者当前普通暴击伤害，是本接口的条件计算模型，不证明游戏附伤能暴击或继承该暴击伤害。触发间隔与暴击检测不模拟。同音擎的常驻攻击力选项独立共存。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "refinements": [1, 2, 3, 4, 5]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14001/details.zh.json",
+              "pointer": "/talents/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14001/details.zh.json",
+              "pointer": "/talents/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14001/details.zh.json",
+              "pointer": "/talents/3/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14001/details.zh.json",
+              "pointer": "/talents/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "w-engines/14001/details.zh.json",
+              "pointer": "/talents/5/desc"
+            }
+          ],
+          "effectIds": ["w-engine:14001:nanoka:critical-hit-bonus-damage"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "cannon-rotor:bonus-damage",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized",
+              "requiredCriticalRateDeclaration": true
+            }
+          ],
+          "exclusiveDamageItem": true
+        }
+      ]
     }
   ],
   "skillTargets": [
@@ -49663,6 +49807,14 @@
       "countsAsFollowUp": false
     },
     {
+      "targetId": "zzz-hp:skill:big-cylinder-retaliation",
+      "upstreamId": null,
+      "agentEntityId": null,
+      "category": "uncategorized",
+      "name": "比格气缸受击附伤",
+      "countsAsFollowUp": false
+    },
+    {
       "targetId": "zzz-hp:skill:burnice-assist-ms4ng8ye",
       "upstreamId": "burnice-assist-ms4ng8ye",
       "agentEntityId": "1171",
@@ -49708,6 +49860,14 @@
       "agentEntityId": "1071",
       "category": "special",
       "name": "强化特殊技：超强力盾击",
+      "countsAsFollowUp": false
+    },
+    {
+      "targetId": "zzz-hp:skill:cannon-rotor-bonus-damage",
+      "upstreamId": null,
+      "agentEntityId": null,
+      "category": "uncategorized",
+      "name": "加农转子暴击附伤",
       "countsAsFollowUp": false
     },
     {

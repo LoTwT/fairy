@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "26",
+  "revision": "27",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -31020,6 +31020,29 @@
       "computationTarget": "declared unavailable option on the mapped agent entity",
       "status": "out-of-scope",
       "reason": "核心被动同段的资源部分：接战状态下每秒回复3.8点[重拍]、队伍中任意角色使敌人进入属性异常状态时额外回复12点（每6秒最多触发一次）、上限100点、进入战场时初始30点。这是特殊角色资源方向，不是每秒自动回能（Energy Regen），也不折算成 energyRegen；当前公开静态伤害计算不输出该资源，不新增公式或时间线。与 M6 [颤音：改]及其 +50% 失衡是不同条款，本声明不涉及。显式选择本选项会得到本错误。"
+    },
+    {
+      "supplementId": "nanoka:w-engines:13112:retaliation-defense-damage",
+      "source": "nanoka-integrated@3.2 w-engines/13112 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:13112:retaliation-defense-damage",
+      "effectIds": [
+        "w-engine:13112:nanoka:retaliation-defense-damage",
+        "w-engine:13112:nanoka:retaliation-defense-damage:guaranteed-critical"
+      ],
+      "supportedRanks": "refinement 1—5；层数 0—1",
+      "computationTarget": "catalog option on the mapped w-engine entity (two-rule complete state)",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:w-engines:14001:critical-hit-bonus-damage",
+      "source": "nanoka-integrated@3.2 w-engines/14001 /talents/1—5/desc",
+      "kind": "option",
+      "optionId": "nanoka:w-engines:14001:critical-hit-bonus-damage",
+      "effectIds": ["w-engine:14001:nanoka:critical-hit-bonus-damage"],
+      "supportedRanks": "refinement 1—5；层数 0—1",
+      "computationTarget": "catalog option on the mapped w-engine entity",
+      "status": "integrated"
     }
   ],
   "summary": {
@@ -31027,17 +31050,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 870,
-    "options": 903,
+    "rules": 873,
+    "options": 905,
     "converted": 1136,
     "corrected": 136,
     "unsupported": 18,
     "supplements": {
-      "records": 75,
-      "rules": 43,
-      "options": 37,
+      "records": 77,
+      "rules": 46,
+      "options": 39,
       "entities": 4,
-      "integrated": 42,
+      "integrated": 44,
       "outOfScope": 33
     }
   },

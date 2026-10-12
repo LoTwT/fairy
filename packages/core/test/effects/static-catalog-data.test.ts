@@ -1919,7 +1919,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("26")
+    expect(catalog.revision).toBe("27")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -4729,12 +4729,14 @@ describe("velina cyclone catalog linkage", () => {
       // [颤音：改]两个元素分组完整状态补充；批次 10 再增不可选越界登记
       // （不创建规则，integrated 与补充 rules/options 不变）：含恒等式-变格
       // 12014 由 coverage-only boundary 迁移为目录实体 + 单份声明（补充
-      // 实体 3 → 4）与前批提供者同条款缺口；合计 outOfScope 3 → 33、
-      // records 45 → 75。
-      records: 75,
-      integrated: 42,
-      rules: 43,
-      options: 37,
+      // 实体 3 → 4）与前批提供者同条款缺口；批次 12 再增比格气缸受击附伤
+      // （单选项双规则完整状态）与加农转子暴击附伤两条音擎补充：合计
+      // outOfScope 3 → 33、records 45 → 77、rules 43 → 46、options 37 → 39、
+      // integrated 42 → 44。
+      records: 77,
+      integrated: 44,
+      rules: 46,
+      options: 39,
       entities: 4,
       outOfScope: 33,
     })
