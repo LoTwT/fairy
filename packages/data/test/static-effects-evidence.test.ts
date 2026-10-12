@@ -73,6 +73,44 @@ describe("static effects evidence path", () => {
       // /talent/6）同样经 semantics 条目由同一入口核验。
       "nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical",
       "nanoka:agents:nangongyu:m6-vibrato-modified-physical",
+      // 批次 10 的未支持条款覆盖登记（三件驱动盘 /desc4、音擎五档
+      // /talents/1—5/desc、代理人影画/技能/核心被动描述），证据同样经生成
+      // 入口逐条核对 path/Pointer/摘要。
+      "nanoka:drive-discs:31200:four-piece-daze-value",
+      "nanoka:drive-discs:31300:four-piece-anomaly-buildup-resistance",
+      "nanoka:drive-discs:31500:four-piece-damage-taken-reduction",
+      "nanoka:w-engines:12003:ex-energy-recovery",
+      "nanoka:w-engines:12012:anomaly-triggered-energy-recovery",
+      "nanoka:w-engines:13002:decibel-and-energy-generation",
+      "nanoka:w-engines:13011:damage-taken-and-energy-generation-rate",
+      "nanoka:w-engines:13016:damage-taken-and-miasma-contamination",
+      "nanoka:w-engines:12008:daze-on-main-target",
+      "nanoka:w-engines:12007:ex-daze",
+      "nanoka:w-engines:14003:charge-consumed-daze",
+      "nanoka:w-engines:13006:target-hp-daze",
+      "nanoka:w-engines:14114:basic-attack-daze",
+      "nanoka:agents:nicole:mindscape-1-anomaly-buildup-and-field-duration",
+      "nanoka:agents:qingyi:flash-voltage-daze",
+      "nanoka:agents:koleda:enhanced-basic-second-daze",
+      "nanoka:agents:lighter:mindscape-4-morale-burst-energy",
+      "nanoka:w-engines:14162:daze-value",
+      "nanoka:agents:nangongyu:m6-vibrato-daze",
+      "nanoka:agents:1621:wind-energy-acquisition",
+      // 柚叶额外能力积蓄效率与本影画 1 瞬时能量（七档 /passive/level/…/desc/1
+      // 与 /talent/1，逐条经同一入口核对）。
+      "nanoka:agents:yuzuha:extra-ability-anomaly-buildup-efficiency",
+      "nanoka:agents:yuzuha:mindscape-1-entry-energy",
+      // 12014 目录实体声明（五档天赋 Pointer）与前批提供者同条款缺口登记：
+      // 13127/14148 五档、莱特/琉音/南宫羽同核心段。
+      "nanoka:w-engines:12014:attacker-damage-reduction",
+      "nanoka:w-engines:13127:ex-and-assist-anomaly-buildup",
+      "nanoka:w-engines:14148:ex-physical-daze-stacks",
+      "nanoka:agents:lighter:morale-acquisition",
+      "nanoka:agents:lighter:collapse-stun-duration",
+      "nanoka:agents:dialyn:positive-reviews-and-complaints",
+      "nanoka:agents:dialyn:malicious-complaint-stun-duration",
+      "nanoka:agents:nangongyu:core-buildup-and-daze",
+      "nanoka:agents:nangongyu:downbeat-acquisition",
     ])
       expect(verified).toContain(`supplement:${supplementId}`)
   })

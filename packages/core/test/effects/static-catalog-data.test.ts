@@ -1899,7 +1899,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("24")
+    expect(catalog.revision).toBe("25")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -4706,13 +4706,17 @@ describe("velina cyclone catalog linkage", () => {
       // 双规则完整状态）与绯月银棺三条（新实体 + 暴击率，实体上再挂
       // 风抗无视与全队增伤两个选项）四条补充；批次 08 再增伊芙琳/零号·
       // 安比/琉音影画 6 独立追击三条代理人补充；批次 09 再增南宫羽
-      // [颤音：改]两个元素分组完整状态补充。
-      records: 45,
+      // [颤音：改]两个元素分组完整状态补充；批次 10 再增不可选越界登记
+      // （不创建规则，integrated 与补充 rules/options 不变）：含恒等式-变格
+      // 12014 由 coverage-only boundary 迁移为目录实体 + 单份声明（补充
+      // 实体 3 → 4）与前批提供者同条款缺口；合计 outOfScope 3 → 33、
+      // records 45 → 75。
+      records: 75,
       integrated: 42,
       rules: 43,
       options: 37,
-      entities: 3,
-      outOfScope: 3,
+      entities: 4,
+      outOfScope: 33,
     })
   })
 
@@ -8404,7 +8408,8 @@ describe("w-engine missing passive supplements (batch 02)", () => {
   it("registers the supplement options without touching the fixed-source ones", () => {
     const expected: readonly [string, number][] = [
       ["w-engines:Identity_Base", 1],
-      ["w-engines:Weapon_S_1141", 1],
+      // 拘缚者（14114）在批次 10 另有一条不可选失衡值声明。
+      ["w-engines:Weapon_S_1141", 2],
       ["w-engines:Reverb_Mark_I", 1],
       ["w-engines:Vortex_Hatchet", 1],
       ["w-engines:Steam_Oven", 1],
@@ -8423,6 +8428,15 @@ describe("w-engine missing passive supplements (batch 02)", () => {
       for (const option of options.filter((o) =>
         o.optionId.startsWith("nanoka:w-engines:"),
       )) {
+        // 批次 10 在同一实体新增的不可选越界声明（拘缚者失衡值条款）按
+        // 不可选契约断言，不改写批次 02 可执行选项的身份与配置。
+        if (option.variants[0]!.status === "unsupported") {
+          expect(option.variants[0]!.reason, option.optionId).toBe(
+            "formula-out-of-scope",
+          )
+          expect(option.variants[0]!.effectIds, option.optionId).toEqual([])
+          continue
+        }
         expect(option.variants[0]!.status).toBe("converted")
         expect(option.variants[0]!.configuration.refinements).toEqual([
           1, 2, 3, 4, 5,

@@ -249,9 +249,10 @@ export type Supplement =
   | (SupplementBase & {
       /**
        * 在既有目录实体上登记一个如实不可选的选项变体（formula-out-of-scope）：
-       * 来源效果存在（如驱动盘二件套的护盾值、失衡值条款），但当前伤害计算
-       * 不承诺该乘区。不创建规则、不伪造数值；消费端显式选择时得到带解释的
-       * 明确错误，静态计算的覆盖注册表据此声明该套装二件套“已声明越界”。
+       * 来源效果存在（如驱动盘二/四件套的护盾值、失衡值、承伤条款，或音擎
+       * 五档、代理人影画/技能条款的越界部分），但当前公开静态伤害计算不承诺
+       * 该量。不创建规则、不伪造数值；消费端显式选择时得到带解释的明确错误，
+       * 覆盖报告据此声明该条款“已声明越界”。
        */
       readonly kind: "unsupported-option"
       readonly catalogEntityId: string
@@ -259,11 +260,29 @@ export type Supplement =
       readonly name: string
       readonly conditionDescription: string
       readonly target: "self" | "team"
-      readonly minimumSetPieces: 2 | 4
+      /**
+       * 条款在既有目录实体上的真实培养范围：驱动盘件数门槛、音擎精炼档、
+       * 代理人影画/核心/潜能档。生成期要求域名与实体类型一致（见 convert.ts
+       * 的越界登记守卫），不伪造套装门槛，也不声明无法核对的档位。
+       */
+      readonly configuration: SupplementVariantSpec["configuration"]
+      /**
+       * 音擎五档越界声明依赖的真实缺失状态（本批核对时该音擎的五个精炼块
+       * 都只有 note、effects 为空）：声明后生成期逐档核对这一状态，上游补出
+       * 任何精炼档机器效果记录即拒绝生成并要求重新核对，不静默并存。
+       */
+      readonly expectsNoteOnlyRefinementTiers?: true
       readonly reason: "formula-out-of-scope"
       readonly explanation: string
       readonly supportedRanks: string
       readonly computationTarget: string
+      /**
+       * 该条款在固定来源没有目录实体（反向缺项，如「恒等式」-变格 12014）
+       * 时随声明携带的补充实体：只含从 integrated 核对过的真实目录元数据
+       * （名称/职业/溯源），复用既有补充实体 prepass 的目录 ID 与身份唯一性
+       * 检查；实体本身不创建任何可执行规则，条款仍以 unsupported 变体登记。
+       */
+      readonly entity?: StaticCatalogEntity
     })
   | (SupplementBase & {
       readonly kind: "boundary"
@@ -560,17 +579,64 @@ const redAxis: Supplement = {
   },
 }
 
-/** 恒等式-变格（w-engines/12014）：敌方输出/己方承伤方向，公开路径不接入。 */
-const identityInflectionBoundary: Supplement = {
-  kind: "boundary",
-  supplementId: "nanoka:w-engines:12014:boundary",
+/**
+ * 恒等式-变格（w-engines/12014）：「致眩」五档使攻击者造成的伤害降低
+ * 6/7/8/9/10%，持续 12 秒，属于敌方输出/己方承伤方向。该音擎在固定来源
+ * 没有目录实体，按 integrated 真实元数据随声明携带补充实体（名称、职业、
+ * 中英文与 data.json 摘要），使本条款可从正式目录发现并在显式选择时得到
+ * 本条具名拒绝；声明本身不创建可执行规则，也不把该条款折算成己方对敌
+ * 输出的减伤或易伤。旧 coverage-only boundary 记录由本声明唯一迁移。
+ */
+const identityInflectionAttackerDamageReduction: Supplement = {
+  kind: "unsupported-option",
+  supplementId: "nanoka:w-engines:12014:attacker-damage-reduction",
   source: "nanoka-integrated@3.2 w-engines/12014 /talents/1—5/desc",
-  reason:
-    "五档使攻击者造成的伤害降低 6/7/8/9/10%，属于敌方输出/己方承伤方向；当前公开路径计算己方对敌伤害，不能把它转换成 target damage-taken-reduction 来降低己方输出，也不能报告其增益为零后视为接入。保留五档来源证据，待承伤计算产品建立后另行接入。",
-  evidence: [],
+  catalogEntityId: "nanoka:w-engines:12014",
+  optionId: "nanoka:w-engines:12014:attacker-damage-reduction",
+  name: "「恒等式」-变格 · attackerDamageReduction",
+  conditionDescription:
+    "受到敌方攻击时，攻击者造成的伤害降低6/7/8/9/10%，持续12秒（按精炼 1—5，五档同文）。这是装备者受击后降低该攻击者输出的敌方减益：团队受到该敌人攻击时均可受益，受益范围按 team 概括；本批不计算承伤，也不把它折算成己方对敌伤害的减伤或易伤。",
+  target: "team",
+  configuration: { refinements: [1, 2, 3, 4, 5] },
+  reason: "formula-out-of-scope",
+  explanation:
+    "五档天赋「致眩」为受到敌方攻击时，攻击者造成的伤害降低6/7/8/9/10%，持续12秒。这是装备者受击后降低该攻击者输出的敌方减益，作用对象是该攻击者、受益范围是团队（团队受到该敌人攻击时均可受益），不是己方全队无条件获得直接减伤；当前公开静态伤害计算从己方对敌伤害入口计算，不计算承伤，也不新增该公式。不把它折算成目标减伤/减易伤、各类增伤或零贡献冒充支持，待承伤计算产品建立后另行接入。该音擎在固定来源没有目录实体（反向缺项），本声明随选项携带一个仅含真实目录元数据的补充实体（名称与职业按 integrated 核对、不创建可执行规则），使本条款可从正式目录发现并经显式选择得到本条具名拒绝。五档均为不可选。显式选择本选项会得到本错误。",
+  supportedRanks: "精炼 1—5（不可选）",
+  computationTarget:
+    "declared unavailable option on the supplement w-engine entity",
+  entity: {
+    catalogEntityId: "nanoka:w-engines:12014",
+    upstreamId: null,
+    name: "「恒等式」-变格",
+    identity: { kind: "w-engine", entityId: "12014" },
+    status: "mapped",
+    profession: "防护",
+    element: null,
+    supplementProvenance: {
+      sourceId: "nanoka-integrated",
+      version: "3.2",
+      resources: [
+        {
+          path: "w-engines/12014/details.zh.json",
+          sha256:
+            "8b63e7e33ecf102c30023fe5692377055689d56001affe0a318148e1dba41d2e",
+        },
+        {
+          path: "w-engines/12014/data.json",
+          sha256:
+            "91e2160ccd9b97a88acf254e82c37b05d648ac12842264f0b91baa7fd31567ba",
+        },
+      ],
+    },
+  },
+  // 该常量位于同文件辅助函数之前，五档证据在此显式列出（同一 path/Pointer/摘要）。
+  evidence: ([1, 2, 3, 4, 5] as const).map((tier) => ({
+    path: "w-engines/12014/details.zh.json",
+    pointer: `/talents/${tier}/desc`,
+    sha256: "8b63e7e33ecf102c30023fe5692377055689d56001affe0a318148e1dba41d2e",
+  })),
   verification:
-    "Nanoka 五档天赋文本核实（受到敌方攻击时，攻击者造成的伤害降低 6/7/8/9/10%，持续 12 秒）；本轮仅登记消费方向边界，不新增承伤计算。",
-  computationTarget: "none",
+    "Nanoka 五档天赋逐档核实（w-engines/12014/details.zh.json 的 /talents/1—5/desc，英文同文为 When attacked, reduces the attacker's DMG by 6% for 12s）：五档分别为 6/7/8/9/10%，持续 12 秒。该音擎在固定来源没有目录实体（coverage 的 reverseGaps 原有 w-engines/12014），元数据按 integrated 核对：中文名「恒等式」-变格、英文名 [Identity] Inflection、weaponType {5:防护}、rarity 2（Weapon_B_Common_14），data.json id 12014 与 identity 一致。本声明不创建可执行规则，只把原 coverage-only boundary 迁移为目录可发现的单份不可选变体；不把该条款写成目标减伤/减易伤或零贡献。",
 }
 
 /** 驱动盘二件套的件数门槛条件；与来源二件套规则的 setPieces 配置一致。 */
@@ -713,7 +779,7 @@ const protoPunkTwoPieceShieldBoundary: Supplement = {
   name: "2件套 · shieldValue",
   conditionDescription: "施加的护盾值提升15%。",
   target: "self",
-  minimumSetPieces: 2,
+  configuration: { minimumSetPieces: 2 },
   reason: "formula-out-of-scope",
   explanation:
     "二件套条款为施加的护盾值提升15%。护盾值不属于当前伤害计算的任何乘区，也没有已核实的护盾公式；不能把它伪装成属性、增伤或减伤规则。装备该套装 2 件及以上时静态计算正常进行（该条款不影响伤害），显式选择本选项会得到本错误。",
@@ -747,7 +813,7 @@ const kingOfTheSummitTwoPieceDazeBoundary: Supplement = {
   name: "2件套 · dazeValue",
   conditionDescription: "攻击造成的失衡值提升6%",
   target: "self",
-  minimumSetPieces: 2,
+  configuration: { minimumSetPieces: 2 },
   reason: "formula-out-of-scope",
   explanation:
     "二件套条款为攻击造成的失衡值提升6%。这是失衡值（daze）加成，不是冲击力、攻击力或伤害加成；完整静态入口的 daze-only 分支不计算最终失衡值，当前没有已核实的失衡值乘区。装备该套装 2 件及以上时静态计算正常进行（该条款不影响伤害），显式选择本选项会得到本错误。",
@@ -3398,6 +3464,826 @@ const nangongyuMindscape6VibratoModified = (
   },
 })
 
+/**
+ * 批次 10（PR10）：未支持增益条款的覆盖登记。为本任务已审计、但当前公开
+ * 静态伤害计算不承诺的条款提供目录可发现、带具体说明、显式选中明确拒绝的
+ * 不可选登记。不创建规则、不新增失衡值/积蓄量/即时资源/护盾/承伤公式，
+ * 不把这些量映射成 impact/dmgBonus/energyRegen 等其他量，也不以零贡献冒充
+ * 支持；既有已支持的伤害、属性与每秒回能选项逐身份保留。
+ */
+const pr10DriveDiscBoundaries: readonly Supplement[] = [
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:drive-discs:31200:four-piece-daze-value",
+    source: "nanoka-integrated@3.2 drive-discs/31200 /desc4",
+    catalogEntityId: "drive-discs:SuitShockstarDisco",
+    optionId: "nanoka:drive-discs:31200:four-piece-daze-value",
+    name: "4件套 · dazeValue",
+    conditionDescription:
+      "[普通攻击]、[冲刺攻击]、[闪避反击]对主要攻击目标造成的失衡值提升20%。",
+    target: "self",
+    configuration: { minimumSetPieces: 4 },
+    reason: "formula-out-of-scope",
+    explanation:
+      "四件套条款为[普通攻击]、[冲刺攻击]、[闪避反击]对主要攻击目标造成的失衡值提升20%。这是失衡值（daze）加成，不是冲击力、攻击力或伤害加成；完整静态入口的 daze-only 分支不计算最终失衡值，当前没有已核实的失衡值乘区。装备该套装 4 件及以上时静态计算正常进行（该条款不影响伤害），显式选择本选项会得到本错误。",
+    supportedRanks: "4 件起（不可选）",
+    computationTarget:
+      "declared unavailable option on the mapped drive-disc entity",
+    evidence: [
+      {
+        path: "drive-discs/31200/details.zh.json",
+        pointer: "/desc4",
+        sha256:
+          "109364e29c3ce07041963bfde98a39344645c8cfc59d32d7189e3e36bed7ee82",
+      },
+    ],
+    verification:
+      "Nanoka drive-discs/31200 /desc4 原文与固定来源 fac62407 的四件套块（/driveDiscs/28/fourPieceBuffs/effectBlocks/0，note 同文、effects 为空）核实：4pc 为[普通攻击]、[冲刺攻击]、[闪避反击]对主要攻击目标造成的失衡值提升20%（动作范围与主要攻击目标由原文给出，不据简称猜）。本批不新增最终失衡值公式，也不把它映射为 impact 或任何伤害乘区；登记为 formula-out-of-scope 的不可选变体，供覆盖注册表与调用方得到明确解释。",
+  },
+  {
+    kind: "unsupported-option",
+    supplementId:
+      "nanoka:drive-discs:31300:four-piece-anomaly-buildup-resistance",
+    source: "nanoka-integrated@3.2 drive-discs/31300 /desc4",
+    catalogEntityId: "drive-discs:SuitFreedomBlues",
+    optionId: "nanoka:drive-discs:31300:four-piece-anomaly-buildup-resistance",
+    name: "4件套 · anomalyBuildupResistance",
+    // 四件套 note 守卫要求公开条件与来源 note 逐字一致；受益范围按结构化
+    // target=team 表达（对象侧减益对全队积蓄有效），子条款限制见说明。
+    conditionDescription:
+      "[强化特殊技]命中敌人时，根据装备者的属性类型，使目标对应属性异常积蓄抗性降低20%，持续8秒，相同属性类型的效果不可叠加。",
+    target: "team",
+    configuration: { minimumSetPieces: 4 },
+    reason: "formula-out-of-scope",
+    explanation:
+      "四件套条款为[强化特殊技]命中敌人时，根据装备者的属性类型，使目标对应属性异常积蓄抗性降低20%（持续8秒，相同属性类型的效果不可叠加）。这是作用在目标上的属性异常积蓄抗性减益（积蓄量方向，受益范围是全队而非仅装备者的积蓄），不是异常精通、减防或易伤；当前公开静态伤害计算不计算异常积蓄量，也没有已核实的积蓄抗性乘区。装备该套装 4 件及以上时静态计算正常进行（该条款不影响伤害），显式选择本选项会得到本错误。",
+    supportedRanks: "4 件起（不可选）",
+    computationTarget:
+      "declared unavailable option on the mapped drive-disc entity",
+    evidence: [
+      {
+        path: "drive-discs/31300/details.zh.json",
+        pointer: "/desc4",
+        sha256:
+          "f7936957a70b83abe7661006f25fa4c5256bb2e7bac64d157989cb078f6852b6",
+      },
+    ],
+    verification:
+      "Nanoka drive-discs/31300 /desc4 原文与固定来源 fac62407 的四件套块（/driveDiscs/23/fourPieceBuffs/effectBlocks/0，note 同文、effects 为空）核实：4pc 触发为[强化特殊技]命中敌人（受益范围是目标对应属性异常积蓄抗性，按装备者属性类型），持续时间 8 秒、相同属性类型不可叠加均由原文给出。本批不新增异常积蓄量/积蓄抗性公式，也不把它折算为异常精通、目标防御或易伤；登记为 formula-out-of-scope 的不可选变体。",
+  },
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:drive-discs:31500:four-piece-damage-taken-reduction",
+    source: "nanoka-integrated@3.2 drive-discs/31500 /desc4",
+    catalogEntityId: "drive-discs:SuitSoulRock",
+    optionId: "nanoka:drive-discs:31500:four-piece-damage-taken-reduction",
+    name: "4件套 · damageTakenReduction",
+    conditionDescription:
+      "受到敌方攻击并损失生命值时，装备者受到的伤害降低40%，持续2.5秒，15秒内最多触发一次。",
+    target: "self",
+    configuration: { minimumSetPieces: 4 },
+    reason: "formula-out-of-scope",
+    explanation:
+      "四件套条款为受到敌方攻击并损失生命值时，装备者受到的伤害降低40%（持续2.5秒，15秒内最多触发一次）。这是己方承伤方向；当前公开静态伤害计算计算己方对敌伤害，不能把它写成目标的减易伤——damage-taken-reduction 通道的语义是“受击方=本次伤害目标”，用在持有者身上会错误降低己方输出。装备该套装 4 件及以上时静态计算正常进行（该条款不影响伤害），显式选择本选项会得到本错误。",
+    supportedRanks: "4 件起（不可选）",
+    computationTarget:
+      "declared unavailable option on the mapped drive-disc entity",
+    evidence: [
+      {
+        path: "drive-discs/31500/details.zh.json",
+        pointer: "/desc4",
+        sha256:
+          "bdf81529b0dad0bb91f0a7b6b14484af3b9b31ead6841103c177563aed101c0c",
+      },
+    ],
+    verification:
+      "Nanoka drive-discs/31500 /desc4 原文核实：4pc 触发为受到敌方攻击并损失生命值，装备者受到的伤害降低40%，持续2.5秒，15秒内最多触发一次；固定来源 fac62407 的该位置没有四件套块/机器记录（fourPieceBuffs.effectBlocks 为空、effects 为空、mods 全零），本登记据此声明真实缺失。不把它转换为目标减易伤或其他乘区，也不记为零贡献冒充接入；登记为 formula-out-of-scope 的不可选变体。",
+  },
+]
+
+interface Pr10WEngineBoundarySpec {
+  readonly entityId: string
+  /** 固定来源目录实体 ID 使用来源实体名（如 w-engines:Lunar_Noviluna）。 */
+  readonly catalogName: string
+  readonly sha256: string
+  readonly slug: string
+  readonly name: string
+  readonly conditionDescription: string
+  readonly explanation: string
+  readonly verification: string
+  readonly conflictingSourceStats?: readonly string[]
+  /**
+   * 受益范围（缺省 self）：源文字明确队友/全队或对象侧受益的条款按 team
+   * 概括，文字仍保留子条款限制；归属未确认的资源不推断改写。
+   */
+  readonly target?: "self" | "team"
+}
+
+/** 音擎五档越界登记（S05）：即时能量/喧响/承伤/能量获得效率/秽息/失衡。 */
+const pr10WEngineBoundarySpecs: readonly Pr10WEngineBoundarySpec[] = [
+  {
+    entityId: "12003",
+    catalogName: "Lunar_Noviluna",
+    sha256: "2f6ce555847c472d952f5d7f37d31e63cb23aabf6acafe6ee13c90a54688cf52",
+    slug: "ex-energy-recovery",
+    name: "新月 · instantEnergy",
+    conditionDescription:
+      "发动[强化特殊技]时，装备者回复3/3.5/4/4.5/5点能量，12秒内最多触发一次。",
+    explanation:
+      "五档天赋为发动[强化特殊技]时装备者回复3/3.5/4/4.5/5点能量（12秒内最多触发一次）。这是即时能量（资源回复）方向，不是每秒自动回能（Energy Regen）、不是能量获得效率；当前公开静态伤害计算不输出即时资源。不把它折算成 energyRegen、增伤或任何伤害乘区，也不记为零贡献冒充接入。装备该音擎时静态计算正常进行，显式选择本选项会得到本错误。",
+    verification:
+      "Nanoka 五档天赋逐档核实（w-engines/12003/details.zh.json 的 /talents/1—5/desc，英文同文为 generates 3/3.5/4/4.5/5 Energy）：固定来源 fac62407 的五个精炼块只有同文 note、effects 为空，本批核对时无任何机器效果记录。即时资源不在当前公开静态伤害计算承诺范围；登记为 formula-out-of-scope 的不可选变体，不新增资源公式、不映射为每秒回能。",
+  },
+  {
+    entityId: "12012",
+    catalogName: "Magnetic_Storm_Charlie",
+    sha256: "45271f96bb6ee1b6bcb1ad2eeef692f4370019e15777cf4806432d306218014b",
+    slug: "anomaly-triggered-energy-recovery",
+    name: "过载电荷 · instantEnergy",
+    conditionDescription:
+      "队伍中任意角色对敌人施加属性异常效果时，装备者回复3.5/4/4.5/5/5.5点能量，12秒内最多触发一次。",
+    explanation:
+      "五档天赋为队伍中任意角色对敌人施加属性异常效果时装备者回复3.5/4/4.5/5/5.5点能量（12秒内最多触发一次）。这是即时能量（资源回复）方向与队友触发的取得条件，不是每秒自动回能或能量获得效率；当前公开静态伤害计算不输出即时资源。不把它折算成 energyRegen、异常增伤或任何伤害乘区，也不记为零贡献冒充接入。装备该音擎时静态计算正常进行，显式选择本选项会得到本错误。",
+    verification:
+      "Nanoka 五档天赋逐档核实（w-engines/12012/details.zh.json 的 /talents/1—5/desc，英文同文为 Whenever a squad member inflicts an Attribute Anomaly on an enemy, the equipper generates 3.5/4/4.5/5/5.5 Energy）：固定来源 fac62407 的五个精炼块只有同文 note、effects 为空。取得条件（任意角色施加属性异常）由原文给出，不据此扩大或收缩受益范围；即时资源不在当前公开静态伤害计算承诺范围，登记为 formula-out-of-scope 的不可选变体。",
+  },
+  {
+    entityId: "13002",
+    catalogName: "Slice_Of_Time",
+    sha256: "bd6450e90efb54b2291039d9b312039f3329220d5b58fff7f7360fff3fe0b09e",
+    slug: "decibel-and-energy-generation",
+    name: "说「茄子」 · decibelAndInstantEnergy",
+    conditionDescription:
+      "队伍中任意角色发动[闪避反击]/[强化特殊技]/[支援攻击]/[连携技]时，额外获得20/23/26/29/32、25/28.5/32/35.5/40、30/34.5/39/43.5/48、35/40/45/50/55点喧响值，并为装备者回复0.7/0.8/0.9/1/1.1点能量（按精炼 1—5），12秒内最多触发一次，不同招式分别结算冷却时间，同名被动效果之间不可叠加。",
+    explanation:
+      "五档天赋为队伍中任意角色发动[闪避反击]/[强化特殊技]/[支援攻击]/[连携技]时额外获得喧响值（四类招式各自取值）并为装备者回复0.7/0.8/0.9/1/1.1点能量（12秒内最多触发一次、各招式独立冷却、同名被动不可叠加）。喧响值（Decibel）与即时能量都是资源方向，不是每秒自动回能与能量获得效率；当前公开静态伤害计算不输出这两类资源。不把它们折算成 energyRegen、喧响生成率、增伤或任何伤害乘区，也不记为零贡献冒充接入。装备该音擎时静态计算正常进行，显式选择本选项会得到本错误。",
+    verification:
+      "Nanoka 五档天赋逐档核实（w-engines/13002/details.zh.json 的 /talents/1—5/desc，英文同文为 generates 20/25/30/35 more Decibels … generates 0.7 Energy for the equipper，逐档 23/28.5/34.5/40、26/32/39/45、29/35.5/43.5/50、32/40/48/55 与 0.8/0.9/1/1.1）：固定来源 fac62407 的五个精炼块只有同文 note、effects 为空。动作范围、触发、12 秒冷却与逐招独立冷却、同名不可叠加均按原文登记；即时资源与喧响值不在当前公开静态伤害计算承诺范围，登记为 formula-out-of-scope 的不可选变体。",
+  },
+  {
+    entityId: "13011",
+    catalogName: "Spring_Embrace",
+    sha256: "7a1f903fc6ae49c90a3db86ecd9883d017440f73742aee2e4f49bda239d898ca",
+    slug: "damage-taken-and-energy-generation-rate",
+    name: "热泉汤 · damageTakenAndEnergyGenerationRate",
+    // 混合范围：减伤属于装备者，能量获得效率明确转交新的前场角色，按 team
+    // 概括并在 conditionDescription 保留子条款限制（不扩公共枚举）。
+    target: "team",
+    conditionDescription:
+      "受到的伤害降低7.5/8.5/9.5/10.5/12%（按精炼 1—5，该段仅装备者受益）；受到敌方攻击时，装备者的能量获得效率提升10/11.5/13/14.5/16%，持续12秒；装备者换回后场时，该增益效果将传递给当前操作中的角色，并刷新持续时间，同名被动效果之间不可叠加——效率条款的受益范围随传递覆盖前场角色，故整体按 team 概括、子条款限制见本说明。",
+    explanation:
+      "五档天赋包含两个方向：受到的伤害降低7.5/8.5/9.5/10.5/12%是己方承伤方向，不能写成目标减易伤（damage-taken-reduction 通道语义是受击方=本次伤害目标）；受到敌方攻击时的能量获得效率提升10/11.5/13/14.5/16%（持续12秒、换回后场时传递并刷新、同名不可叠加）属于能量获得效率区（Energy Generation Rate），与每秒自动回能（Energy Regen）和即时能量都是不同的量，当前公开静态计算不输出该效率区。本批不新增该公式，也不把它折算成固定/百分比每秒回能、即时能量或任何伤害乘区，不记为零贡献冒充接入。装备该音擎时静态计算正常进行，显式选择本选项会得到本错误。",
+    verification:
+      "Nanoka 五档天赋逐档核实（w-engines/13011/details.zh.json 的 /talents/1—5/desc，英文同文为 Reduces DMG taken by 7.5% … the equipper's Energy Generation Rate increases by 10% for 12s … transferred to the new on-field character with its duration refreshed）：固定来源 fac62407 的五个精炼块只有同文 note、effects 为空；登记时额外核对当前机器词表没有该条款的编码，若上游把该条编成每秒回能（energyRegen）等已有 stat，conflictingSourceStats 守卫会拒绝生成并要求重新核对。受伤降低与能量获得效率均不在当前公开静态伤害计算承诺范围，登记为 formula-out-of-scope 的不可选变体。",
+    conflictingSourceStats: ["energyRegen"],
+  },
+  {
+    entityId: "13016",
+    catalogName: "Reel_Projector",
+    sha256: "a3b2ef0f4a3f9b1a07017cfa6eb012d152a545c9a728fb1424d5d936c8ccde26",
+    slug: "damage-taken-and-miasma-contamination",
+    name: "镌刻倏忽 · damageTakenAndMiasmaContamination",
+    // 任一满足生命值门槛的队友受益，按 team 概括。
+    target: "team",
+    conditionDescription:
+      "队伍中角色生命值大于等于50%时，受到的伤害降低7.5/8.6/9.7/10.8/12%，受到的[秽息浸染]值降低10/11.5/13/14.5/16%（按精炼 1—5），该效果全队唯一；受益者是生命值达标的队友（不限于装备者）。",
+    explanation:
+      "五档天赋为队伍中角色生命值大于等于50%时受到的伤害降低7.5/8.6/9.7/10.8/12%、受到的[秽息浸染]值降低10/11.5/13/14.5/16%（该效果全队唯一）。受伤降低是己方承伤方向；[秽息浸染]值不是伤害乘区（core 的秽盾削减值/效率是另一机制），当前公开静态伤害计算不输出这两项。不把它们折算成目标减易伤、防御调整、各类增伤或零贡献，也不新增公式。装备该音擎时静态计算正常进行，显式选择本选项会得到本错误。",
+    verification:
+      "Nanoka 五档天赋逐档核实（w-engines/13016/details.zh.json 的 /talents/1—5/desc，英文同文为 they take 7.5% less DMG, and 10% less Miasma Contamination … Only one instance of this effect can exist in the same squad；逐档 8.6/9.7/10.8 与 11.5/13/14.5 按档核对）：固定来源 fac62407 的五个精炼块只有同文 note、effects 为空。生命值门槛与全队唯一均按原文登记、由调用方断言；登记为 formula-out-of-scope 的不可选变体。",
+  },
+  {
+    entityId: "12008",
+    catalogName: "Vortex_Arrow",
+    sha256: "961a9e97aea4d2476f9f2570a4c8394088e86f3ede0e206fdddb050d0168fdbd",
+    slug: "daze-on-main-target",
+    name: "巨浪 · dazeValue",
+    conditionDescription:
+      "攻击命中敌人时，装备者对主要攻击目标造成的失衡值提升8/9/10/11/12%（按精炼 1—5）。",
+    explanation:
+      "五档天赋为攻击命中敌人时装备者对主要攻击目标造成的失衡值提升8/9/10/11/12%。这是失衡值（daze）加成，不是冲击力、攻击力或伤害加成；完整静态入口的 daze-only 分支不计算最终失衡值，当前没有已核实的失衡值乘区。装备该音擎时静态计算正常进行（该条款不影响伤害），显式选择本选项会得到本错误。",
+    verification:
+      "Nanoka 五档天赋逐档核实（w-engines/12008/details.zh.json 的 /talents/1—5/desc，英文同文为 The equipper's attacks inflict 8% more Daze on their main target）：固定来源 fac62407 的五个精炼块只有同文 note、effects 为空。动作范围（攻击命中、主要攻击目标）按原文登记；登记为 formula-out-of-scope 的不可选变体，不映射为 impact 或任何伤害乘区。",
+  },
+  {
+    entityId: "12007",
+    catalogName: "Vortex_Revolver",
+    sha256: "06c4185be93eb398856e53e84d31f630da93b4a19d4c44180892e9fbec68906f",
+    slug: "ex-daze",
+    name: "暗涌 · dazeValue",
+    conditionDescription:
+      "[强化特殊技]造成的失衡值提升10/11.5/13/14.5/16%（按精炼 1—5）。",
+    explanation:
+      "五档天赋为[强化特殊技]造成的失衡值提升10/11.5/13/14.5/16%。这是失衡值（daze）加成，不是冲击力、攻击力或伤害加成；完整静态入口的 daze-only 分支不计算最终失衡值。装备该音擎时静态计算正常进行（该条款不影响伤害），显式选择本选项会得到本错误。",
+    verification:
+      "Nanoka 五档天赋逐档核实（w-engines/12007/details.zh.json 的 /talents/1—5/desc，英文同文为 EX Special Attacks inflict 10% more Daze）：固定来源 fac62407 的五个精炼块只有同文 note、effects 为空。受益招式范围（强化特殊技）按原文登记；登记为 formula-out-of-scope 的不可选变体。",
+  },
+  {
+    entityId: "14003",
+    catalogName: "Six_Shooter",
+    sha256: "72049744c5cfe643bff5ed1921ced8ad548d52156429b85b0d90b243350b4f05",
+    slug: "charge-consumed-daze",
+    name: "开火！ · chargeConsumedDaze",
+    conditionDescription:
+      "每3秒为装备者提供1层充能效果，最多叠加6层；发动[强化特殊技]时，消耗所有充能，每层充能效果使招式造成的失衡值提升4/4.6/5.2/5.8/6.4%（按精炼 1—5）。",
+    explanation:
+      "五档天赋为每3秒提供1层充能（最多6层）并在发动[强化特殊技]时消耗所有充能，每层使招式造成的失衡值提升4/4.6/5.2/5.8/6.4%。充能取得是时间线机制（不模拟）；失衡值是 daze 加成，不是冲击力、攻击力或伤害加成，完整静态入口的 daze-only 分支不计算最终失衡值。装备该音擎时静态计算正常进行（该条款不影响伤害），显式选择本选项会得到本错误。",
+    verification:
+      "Nanoka 五档天赋逐档核实（w-engines/14003/details.zh.json 的 /talents/1—5/desc，英文同文为 gains 1 Charge stack every 3s, stacking up to 6 times … each stack consumed increases the skill's Daze inflicted by 4%）：固定来源 fac62407 的五个精炼块只有同文 note、effects 为空。充能层数与每层值按原文登记，静态入口不自动按时间供层；登记为 formula-out-of-scope 的不可选变体。",
+  },
+  {
+    entityId: "13006",
+    catalogName: "Precious_Fossilized_Core",
+    sha256: "f7c6ab49fe4b785dc3002d4753b935353bd7723d6e863b58c71a8bd39334e3d2",
+    slug: "target-hp-daze",
+    name: "巨兽猎手 · dazeValue",
+    conditionDescription:
+      "敌方生命值大于等于50%时，装备者对目标造成的失衡值提升10/11.5/13/14.5/16%；敌方生命值大于等于75%时，该增益效果额外提升10/11.5/13/14.5/16%（按精炼 1—5）。",
+    explanation:
+      "五档天赋为敌方生命值大于等于50%时装备者对目标造成的失衡值提升10/11.5/13/14.5/16%，大于等于75%时额外提升同档幅度。这是失衡值（daze）加成，不是冲击力、攻击力或伤害加成；目标生命阈值是取得条件（由调用方声明，不模拟），完整静态入口的 daze-only 分支不计算最终失衡值。装备该音擎时静态计算正常进行（该条款不影响伤害），显式选择本选项会得到本错误。",
+    verification:
+      "Nanoka 五档天赋逐档核实（w-engines/13006/details.zh.json 的 /talents/1—5/desc，英文同文为 When the target's HP is no lower than 50%, the equipper inflicts 10% more Daze … no lower than 75%, this bonus is further increased by 10%）：固定来源 fac62407 的五个精炼块只有同文 note、effects 为空。两个生命阈值与额外提升按原文登记；登记为 formula-out-of-scope 的不可选变体。",
+  },
+]
+
+const pr10WEngineBoundaries: readonly Supplement[] =
+  pr10WEngineBoundarySpecs.map(
+    (spec): Supplement => ({
+      kind: "unsupported-option",
+      supplementId: `nanoka:w-engines:${spec.entityId}:${spec.slug}`,
+      source: `nanoka-integrated@3.2 w-engines/${spec.entityId} /talents/1—5/desc`,
+      catalogEntityId: `w-engines:${spec.catalogName}`,
+      optionId: `nanoka:w-engines:${spec.entityId}:${spec.slug}`,
+      name: spec.name,
+      conditionDescription: spec.conditionDescription,
+      target: spec.target ?? "self",
+      configuration: { refinements: [1, 2, 3, 4, 5] },
+      expectsNoteOnlyRefinementTiers: true,
+      reason: "formula-out-of-scope",
+      explanation: spec.explanation,
+      supportedRanks: "精炼 1—5（不可选）",
+      computationTarget:
+        "declared unavailable option on the mapped w-engine entity",
+      ...(spec.conflictingSourceStats === undefined
+        ? {}
+        : { conflictingSourceStats: spec.conflictingSourceStats }),
+      evidence: wengineTalentEvidence(spec.entityId, spec.sha256),
+      verification: spec.verification,
+    }),
+  )
+
+/**
+ * 前批提供者同一被动词条内的越界部分（批次 10）：既有可执行选项按身份保留，
+ * 这些附带部分单独登记为不可选，不重复、不替换既有贡献。
+ */
+const pr10ProviderBoundaries: readonly Supplement[] = [
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:w-engines:14114:basic-attack-daze",
+    source: "nanoka-integrated@3.2 w-engines/14114 /talents/1—5/desc",
+    catalogEntityId: "w-engines:Weapon_S_1141",
+    optionId: "nanoka:w-engines:14114:basic-attack-daze",
+    name: "束缚枷锁 · dazeValue",
+    conditionDescription:
+      "攻击命中敌人时，[普通攻击]造成的失衡值提升6/7.5/9/10.5/12%（按精炼 1—5，每层，最多 5 层，持续 8 秒，同一招式内最多触发一次，每层效果单独结算持续时间）。",
+    target: "self",
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    expectsNoteOnlyRefinementTiers: true,
+    reason: "formula-out-of-scope",
+    explanation:
+      "五档天赋同一句的失衡值部分：攻击命中敌人时[普通攻击]造成的失衡值提升6/7.5/9/10.5/12%（最多 5 层、每层 8 秒）。同句的伤害部分已有可执行选项（nanoka:w-engines:14114:basic-attack-damage-stacks），本选项不重复也不替换它；失衡值不是冲击力、攻击力或伤害加成，完整静态入口的 daze-only 分支不计算最终失衡值。装备该音擎时静态计算正常进行，显式选择本选项会得到本错误。",
+    supportedRanks: "精炼 1—5（不可选）",
+    computationTarget:
+      "declared unavailable option on the mapped w-engine entity",
+    evidence: wengineTalentEvidence(
+      "14114",
+      "477d278159a7473afdaaadcced62eea6e95c74c7ad6ea2e0b6140395ca10621f",
+    ),
+    verification:
+      "Nanoka 五档天赋逐档核实（w-engines/14114/details.zh.json 的 /talents/1—5/desc，英文同文为 DMG and Daze from Basic Attacks increase by 6% for 8s, stacking up to 5 times）：固定来源 fac62407 的五个精炼块只有同文 note、effects 为空。只登记失衡值部分，动作范围与层数按原文给出；与既有伤害选项共存，不宣称该音擎全部条款完整。",
+  },
+  {
+    kind: "unsupported-option",
+    supplementId:
+      "nanoka:agents:nicole:mindscape-1-anomaly-buildup-and-field-duration",
+    source: "nanoka-integrated@3.2 agents/1031 /talent/1/desc",
+    catalogEntityId: "agents:nicole",
+    optionId:
+      "nanoka:agents:nicole:mindscape-1-anomaly-buildup-and-field-duration",
+    name: "影画1 · anomalyBuildupAndFieldDuration",
+    conditionDescription:
+      "累积的属性异常积蓄值提升16%；发动时每多蓄力0.1秒，能量场持续时间提升0.15秒（影画 1 及以上）。",
+    target: "self",
+    configuration: { minimumMindscape: 1 },
+    clauseContextGuard: {
+      rankKind: "mindscape",
+      rank: 1,
+      stats: [],
+      expectsEmptyPack: true,
+    },
+    reason: "formula-out-of-scope",
+    explanation:
+      "影画 1 同一句的越界部分：[强化特殊技]累积的属性异常积蓄值提升16%，以及每多蓄力0.1秒使能量场持续时间提升0.15秒。同句的伤害 +16% 已有可执行选项（nanoka:agents:nicole:mindscape-1-ex-damage），本选项不重复也不替换它；异常积蓄量与能量场持续时间不是当前公开静态伤害计算的输出，不能折算成异常精通、增伤或任何伤害乘区。选择影画 1 及以上时静态计算正常进行，显式选择本选项会得到本错误。",
+    supportedRanks: "影画 1 及以上（不可选）",
+    computationTarget: "declared unavailable option on the mapped agent entity",
+    evidence: [
+      {
+        path: "agents/1031/details.zh.json",
+        pointer: "/talent/1/desc",
+        sha256:
+          "f648a8ff0d98f18d9348c7b10c79d234bf4d52d8d6ac0d92e596822a9016aaf8",
+      },
+    ],
+    verification:
+      "Nanoka 影画 1 原文核实（agents/1031/details.zh.json 的 /talent/1/desc，英文同文为 The DMG and the Anomaly Buildup inflicted … increases by 16% … the duration of the energy field … increases by 0.15s）：固定来源的 mindscape rank 1 是真实空 pack（无块、无 effects、无记录），登记这一真实缺失现状；同排位出现任何新编码即拒绝生成并要求重新核对。只登记积蓄与持续时间部分，不重复既有伤害选项。",
+  },
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:agents:qingyi:flash-voltage-daze",
+    source: "nanoka-integrated@3.2 agents/1251 /skill/basic/description/2/desc",
+    catalogEntityId: "agents:qingyi",
+    optionId: "nanoka:agents:qingyi:flash-voltage-daze",
+    name: "闪络电压消耗 · dazeValue",
+    conditionDescription:
+      "所消耗的[闪络电压]中超过75%的部分，每1%使本次招式造成的失衡值额外提升0.5%（本次消耗比例由调用方显式输入）。",
+    target: "self",
+    configuration: {},
+    reason: "formula-out-of-scope",
+    explanation:
+      "同一句的失衡值部分：所消耗的[闪络电压]中超过75%的部分，每1%使本次[普通攻击：醉花月云转]造成的失衡值额外提升0.5%（上限 +12.5%）。同句的伤害 +1%/1% 已有可执行选项（nanoka:agents:qingyi:flash-voltage-consumed-damage），本选项不重复也不替换它；失衡值不是冲击力、攻击力或伤害加成，完整静态入口的 daze-only 分支不计算最终失衡值。显式选择本选项会得到本错误。",
+    supportedRanks: "无培养门槛（不可选）",
+    computationTarget: "declared unavailable option on the mapped agent entity",
+    evidence: [
+      {
+        path: "agents/1251/details.zh.json",
+        pointer: "/skill/basic/description/2/desc",
+        sha256:
+          "d5344fa4979038c19f4120a2e9466aba07ed69be20ec2e948c367db4a59b16ef",
+      },
+    ],
+    verification:
+      "Nanoka 普通攻击描述原文核实（agents/1251/details.zh.json 的 /skill/basic/description/2/desc，英文同文为 her Damage and Daze inflicted by this skill will be increased by 1%/0.5%）：条款在固定来源没有对应位置与机器记录；消耗比例与越界钳制沿用既有伤害选项的显式输入契约，本登记不新增输入、不新增公式。只登记失衡值部分。",
+  },
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:agents:koleda:enhanced-basic-second-daze",
+    source: "nanoka-integrated@3.2 agents/1101 /skill/basic/description/1/desc",
+    catalogEntityId: "agents:koleda",
+    optionId: "nanoka:agents:koleda:enhanced-basic-second-daze",
+    name: "强化普攻二段 · dazeValue",
+    conditionDescription:
+      "潜能分支：每消耗一层[熔炉升温]，第二段强化[普通攻击]造成的失衡值提升20%（最多 2 层，按本次实际消耗选择 0/1/2 层）。",
+    target: "self",
+    configuration: { potentialLevels: [1, 2, 3, 4, 5, 6] },
+    reason: "formula-out-of-scope",
+    explanation:
+      "潜能分支同一句的失衡值部分：每消耗一层[熔炉升温]，第二段强化[普通攻击]造成的失衡值提升20%（最多 2 层）。同句的伤害 +10%/层已有可执行选项（nanoka:agents:koleda:enhanced-basic-second-per-layer），消耗触发的全队 +35% 是既有独立选项；本选项不重复也不替换它们。失衡值不是冲击力、攻击力或伤害加成，完整静态入口的 daze-only 分支不计算最终失衡值。显式选择本选项会得到本错误。",
+    supportedRanks: "潜能 1—6（不可选）",
+    computationTarget: "declared unavailable option on the mapped agent entity",
+    evidence: [
+      {
+        path: "agents/1101/details.zh.json",
+        pointer: "/skill/basic/description/1/desc",
+        sha256:
+          "4234d05a53ae34e4558929d46d222aab7435b094ab8877f312ca5b19403839e7",
+      },
+    ],
+    verification:
+      "Nanoka 潜能分支描述原文核实（agents/1101/details.zh.json 的 /skill/basic/description/1/desc，被动行 110100—110105；英文同文为 inflicts 20% more Daze）：条款在固定来源没有对应第二段锚点与机器记录；层数语义与既有伤害选项一致（本次实际消耗 0/1/2 层），本登记不新增输入与公式，只登记失衡值部分。",
+  },
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:agents:lighter:mindscape-4-morale-burst-energy",
+    source: "nanoka-integrated@3.2 agents/1161 /talent/4/desc",
+    catalogEntityId: "agents:lighter",
+    optionId: "nanoka:agents:lighter:mindscape-4-morale-burst-energy",
+    name: "影画4 · instantEnergy",
+    conditionDescription:
+      "进入[士气喷发]状态时，为后场角色回复4点能量，18秒内最多触发一次（影画 4 及以上）；受益者是后场队友，不限于莱特本人。",
+    target: "team",
+    configuration: { minimumMindscape: 4 },
+    clauseContextGuard: {
+      rankKind: "mindscape",
+      rank: 4,
+      stats: [],
+      expectsEmptyPack: true,
+    },
+    reason: "formula-out-of-scope",
+    explanation:
+      "影画 4 同一句的独立瞬时机制：进入[士气喷发]状态时为后场角色回复4点能量（18秒内最多触发一次）。这是即时能量方向，不是每秒自动回能效率；同句的“莱特位于后场时前场角色能量自动回复效率提升10%”已有可执行选项（nanoka:agents:lighter:mindscape-4-frontline-energy-regen），本选项不替换、不重复该每秒回能贡献，也不把 4 点能量折算成 energyRegen。显式选择本选项会得到本错误。",
+    supportedRanks: "影画 4 及以上（不可选）",
+    computationTarget: "declared unavailable option on the mapped agent entity",
+    evidence: [
+      {
+        path: "agents/1161/details.zh.json",
+        pointer: "/talent/4/desc",
+        sha256:
+          "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5",
+      },
+    ],
+    verification:
+      "Nanoka 影画 4 原文核实（agents/1161/details.zh.json 的 /talent/4/desc，英文同文为 Upon entering the Morale Burst state, Lighter restores 4 Energy for off-field characters. This effect can trigger once every 18s）：固定来源的 mindscape rank 4 是真实空 pack，登记这一真实缺失现状；同排位出现任何新编码即拒绝生成并要求重新核对。只登记瞬时能量部分，不替换既有每秒回能选项。",
+  },
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:w-engines:14162:daze-value",
+    source: "nanoka-integrated@3.2 w-engines/14162 /talents/1—5/desc",
+    catalogEntityId: "nanoka:w-engines:14162",
+    optionId: "nanoka:w-engines:14162:daze-value",
+    name: "永夜辗眠 · dazeValue",
+    conditionDescription:
+      "装备者发动[强化特殊技]造成风属性伤害时，造成的失衡值提升16/18.4/20.8/23.2/25.6%（按精炼 1—5），持续50秒，重复触发时刷新持续时间；EX+风伤是该失衡增益的取得条件，受益攻击不限于触发时的该次 EX。",
+    target: "self",
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    reason: "formula-out-of-scope",
+    explanation:
+      "五档天赋同一句的失衡值部分：装备者发动[强化特殊技]造成风属性伤害时造成的失衡值提升16/18.4/20.8/23.2/25.6%，持续50秒、重复触发时刷新持续时间；EX+风伤是取得该状态的条件，受益攻击不能因此被缩成只增强触发时的该次 EX。同句的全队其他角色增伤已有可执行选项（nanoka:w-engines:14162:squad-damage-bonus），本选项不重复也不替换它；增伤句的“全队唯一”不扩到本失衡条款。失衡值不是冲击力、攻击力或伤害加成，完整静态入口的 daze-only 分支不计算最终失衡值。显式选择本选项会得到本错误。",
+    supportedRanks: "精炼 1—5（不可选）",
+    computationTarget:
+      "declared unavailable option on the supplement w-engine entity",
+    evidence: wengineTalentEvidence(
+      "14162",
+      "bc7c46871ff259a1c249fe62493ff69d22aa279273e084efcb0783bc4f48a456",
+    ),
+    verification:
+      "Nanoka 五档天赋逐档核实（w-engines/14162/details.zh.json 的 /talents/1—5/desc，英文同文为 Daze dealt increases by 16% … for 50s. Repeated triggers reset the duration）：该音擎是补充实体（固定来源无该音擎），本登记只覆盖失衡值条款；公开说明按原文保留持续 50 秒与重复触发刷新（同句两段共享该持续句），“全队唯一”属增伤句不扩到失衡句；取得条件（EX 造成风伤）由调用方声明，本选项不新增触发模拟。",
+  },
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:agents:nangongyu:m6-vibrato-daze",
+    source: "nanoka-integrated@3.2 agents/1511 /talent/6/desc",
+    catalogEntityId: "agents:nangongyu",
+    optionId: "nanoka:agents:nangongyu:m6-vibrato-daze",
+    name: "影画6 · dazeValue",
+    conditionDescription: "南宫羽攻击造成的失衡值提升50%（影画 6 及以上）。",
+    target: "self",
+    configuration: { minimumMindscape: 6 },
+    clauseContextGuard: {
+      rankKind: "mindscape",
+      rank: 6,
+      stats: [],
+      anchorBlocks: [
+        {
+          blockId: "blk-ms4dtzxa-touyxm",
+          frozenNote: nangongyuMindscape6FrozenNote,
+        },
+      ],
+    },
+    reason: "formula-out-of-scope",
+    explanation:
+      "影画 6 同一句的失衡值部分：南宫羽攻击造成的失衡值提升50%。这是失衡值（daze）加成，不是冲击力、攻击力或伤害加成；同句的[颤音：改]异放结算已有可执行选项（nanoka:agents:nangongyu:m6-vibrato-modified-*），本选项不重复也不替换它（异放结算与失衡值加成相互独立）。完整静态入口的 daze-only 分支不计算最终失衡值，本批不新增公式。显式选择本选项会得到本错误。",
+    supportedRanks: "影画 6 及以上（不可选）",
+    computationTarget: "declared unavailable option on the mapped agent entity",
+    evidence: [
+      {
+        path: "agents/1511/details.zh.json",
+        pointer: "/talent/6/desc",
+        sha256:
+          "623a202f3d6b33c5c32d2ef6958595d02f0649cd76e57679858108b753a262b8",
+      },
+    ],
+    verification:
+      "Nanoka 影画 6 原文核实（agents/1511/details.zh.json 的 /talent/6/desc，英文同文为 Nangong Yu's attacks deal 50% more Daze）：固定来源的影画 6 是 note 完整、effects 为空的实际空块（blk-ms4dtzxa-touyxm），本登记沿用既有[颤音：改]登记的同一条冻结完整 note 作为锚块守卫（锚块缺失、note 任何变化或该 rank 出现新编码即拒绝生成）。只登记失衡值部分。",
+  },
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:agents:1621:wind-energy-acquisition",
+    source:
+      "nanoka-integrated@3.2 agents/1621 /passive/level/1621501—1621507/desc/0",
+    catalogEntityId: "nanoka:agents:1621",
+    optionId: "nanoka:agents:1621:wind-energy-acquisition",
+    name: "核心被动 · windEnergy",
+    conditionDescription:
+      "每消耗25点能量，获得1点[风能]，[风能]上限为3点（核心被动首句）。",
+    target: "self",
+    configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+    reason: "formula-out-of-scope",
+    explanation:
+      "核心被动首句的越界部分：每消耗25点能量获得1点[风能]、[风能]上限为3点。[风能]是战斗内角色资源（即时资源方向），当前公开静态伤害计算不计算资源获取；同段“初始能量自动回复超过1.2 的转化”已有可执行选项（nanoka:agents:1621:initial-energy-regen-conversion），本选项不重复、不替换该转化，也不把[风能]折算成能量、增伤或任何伤害乘区，不记为零贡献冒充接入。显式选择本选项会得到本错误。",
+    supportedRanks: "核心 1—7（不可选）",
+    computationTarget:
+      "declared unavailable option on the supplement agent entity",
+    evidence: agentPassiveEvidence(
+      "1621",
+      "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e",
+      1621501,
+    ),
+    verification:
+      "Nanoka 核心被动七行逐档核实（agents/1621/details.zh.json 的 /passive/level/1621501—1621507/desc/0 首句，data.json level 元数据 1—7 逐行核对）：七档文本一致，每消耗25点能量获得1点[风能]、上限3点。洛克茜是补充实体（固定来源无该角色），本登记只覆盖该句；资源获取不在当前公开静态伤害计算承诺范围，登记为 formula-out-of-scope 的不可选变体。",
+  },
+  {
+    kind: "unsupported-option",
+    supplementId:
+      "nanoka:agents:yuzuha:extra-ability-anomaly-buildup-efficiency",
+    source:
+      "nanoka-integrated@3.2 agents/1411 /passive/level/1411049—1411055/desc/1",
+    catalogEntityId: "agents:yuzuha",
+    optionId: "nanoka:agents:yuzuha:extra-ability-anomaly-buildup-efficiency",
+    name: "额外能力：人多乐趣大 · anomalyBuildupEfficiency",
+    conditionDescription:
+      "队伍中存在[异常]角色或与自身阵营相同的角色时触发：若柚叶的异常掌控大于100点，每超过1点使拥有[狸之愿]效果的角色的属性异常积蓄效率提升0.2%，最多提升20%（异常掌控达到200点时达到最大值；核心 1—7 同文）。",
+    target: "team",
+    configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+    clauseContextGuard: {
+      rankKind: "mindscape",
+      rank: 0,
+      stats: [],
+      anchorBlocks: [
+        {
+          blockId: "blk-ms38y9v7-07td4j",
+          frozenNote:
+            "队伍中存在[异常]角色或与自身阵营相同的角色时触发：\n若柚叶的异常掌控大于100点，每超过1点异常掌控会使拥有[狸之愿]效果的角色的属性异常积蓄效率提升0.2%，最多提升20%，还会使其所有属性异常伤害和[紊乱]伤害提升0.2%，最多提升20%，当柚叶的异常掌控达到200点时，上述增益效果达到最大值。",
+        },
+      ],
+    },
+    reason: "formula-out-of-scope",
+    explanation:
+      "额外能力同一句的积蓄效率部分：队伍中存在[异常]角色或与自身阵营相同的角色时触发——若柚叶的异常掌控大于100点，每超过1点使拥有[狸之愿]效果的角色的属性异常积蓄效率提升0.2%、最多20%（掌控 200 点时达到最大值）。这是异常积蓄效率（积蓄量方向），不是异常精通、异常伤害或紊乱伤害；当前公开静态伤害计算不输出积蓄量/积蓄效率，也不新增该公式。同句的属性异常伤害与[紊乱]伤害部分已有可执行选项（agents:yuzuha:mindscape:0:tanuki-wish-complete-state）。影画 1 的 130% 强化按 M1 原文只作用于[额外能力]中属性异常伤害和[紊乱]伤害增益，不扩大到本积蓄效率条款，本声明不借用该强化。显式选择本选项会得到本错误。",
+    supportedRanks: "核心 1—7（不可选）",
+    computationTarget: "declared unavailable option on the mapped agent entity",
+    evidence: ([1, 2, 3, 4, 5, 6, 7] as const).map((rank) => ({
+      path: "agents/1411/details.zh.json",
+      pointer: `/passive/level/${1411049 + rank - 1}/desc/1`,
+      sha256:
+        "3c58a01094de2dc0c6298d8989a8b00f02f30afe36320524a01742ff7f99d560",
+      rank,
+    })),
+    verification:
+      "Nanoka 额外能力逐档核实（agents/1411/details.zh.json 的 /passive/level/1411049—1411055/desc/1，data.json level 元数据 1—7 与 rank 逐档核对；英文同文为 every point over increases the Anomaly Buildup Rate of characters with Tanuki Wish by 0.2%, up to a maximum of 20%, and all Attribute Anomaly DMG and Disorder DMG by 0.2%）：七档同文，积蓄效率与属性异常/紊乱伤害同句并列。固定来源同位置的额外能力块（agents/yuzuha mindscapeBuffs/0 effectBlocks 的 blk-ms38y9v7-07td4j）note 与整句同文，只编码异常伤害与紊乱伤害两组记录，没有积蓄效率记录；本登记冻结锚块完整 note，锚块缺失或 note 任何变化即拒绝生成。只登记积蓄效率部分，不重复完整状态选项，也不把 M1 的 130% 扩大到积蓄。",
+  },
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:agents:yuzuha:mindscape-1-entry-energy",
+    source: "nanoka-integrated@3.2 agents/1411 /talent/1/desc",
+    catalogEntityId: "agents:yuzuha",
+    optionId: "nanoka:agents:yuzuha:mindscape-1-entry-energy",
+    name: "影画1 · instantEnergy",
+    conditionDescription:
+      "柚叶进入战场时，回复30点能量，在勘域模式中该效果每180秒最多触发一次（影画 1 及以上）。",
+    target: "self",
+    configuration: { minimumMindscape: 1 },
+    clauseContextGuard: {
+      rankKind: "mindscape",
+      rank: 1,
+      stats: ["energyRegen"],
+      anchorBlocks: [
+        {
+          blockId: "blk-legacy",
+          frozenNote:
+            "处于[甜蜜惊吓]状态下的敌人全属性伤害抗性降低10%；[额外能力]中属性异常伤害和[紊乱]伤害增益效果提升至原本的130%。",
+        },
+      ],
+    },
+    reason: "formula-out-of-scope",
+    explanation:
+      "影画 1 同一条目的瞬时能量部分：柚叶进入战场时回复30点能量（勘域模式每180秒最多触发一次）。这是即时资源方向，不是每秒自动回能（Energy Regen）；当前公开静态伤害计算不输出即时资源，本批不新增该公式，也不把 30 点能量折算成 energyRegen。同条目的[甜蜜惊吓]全属性抗性降低10% 与“[额外能力]中属性异常伤害和[紊乱]伤害提升至原本的130%”已有可执行选项（agents:yuzuha:mindscape:1:blk-legacy:legacy-team-resPen 与 agents:yuzuha:mindscape:0:tanuki-wish-complete-state 的影画 1 配置强化），本选项不重复、不替换，也不把 130% 扩大到积蓄效率或本瞬时能量。显式选择本选项会得到本错误。",
+    supportedRanks: "影画 1 及以上（不可选）",
+    computationTarget: "declared unavailable option on the mapped agent entity",
+    evidence: [
+      {
+        path: "agents/1411/details.zh.json",
+        pointer: "/talent/1/desc",
+        sha256:
+          "3c58a01094de2dc0c6298d8989a8b00f02f30afe36320524a01742ff7f99d560",
+      },
+    ],
+    verification:
+      "Nanoka 影画 1 原文核实（agents/1411/details.zh.json 的 /talent/1/desc，英文同文为 Yuzuha regains 30 Energy when she enters the battlefield. In Investigation Zone Mode, this effect can trigger at most once every 180s… The Attribute Anomaly DMG and Disorder DMG buff from her Additional Ability is increased to 130% of its original value）：固定来源影画 1 块（blk-legacy）note 只含全属性抗性与 130% 两句、没有瞬时能量句，本登记冻结该锚块完整 note（锚块缺失或 note 任何变化即拒绝生成）并登记 rank 1 不得出现 energyRegen 机器记录（出现即拒绝重核）。只登记瞬时能量部分，不重复既有抗性/130% 选项，也不把 130% 的适用范围扩大。",
+  },
+]
+
+/**
+ * 修复轮 R02：前九批已修/已补提供者同一被动段中仍未登记的确定缺口
+ * （维序者-特化型 13127 积蓄、昨夜来电 14148 失衡层数、莱特/琉音/南宫羽
+ * 同核心的资源与失衡延长、南宫羽 M0 同核心的积蓄与失衡）。这些量在正式
+ * 目录没有具名不可选去向，逐档按 integrated 原文核对；不新增任何量值
+ * 计算，既有伤害/回能/暴伤/冲击选项按身份保留。
+ */
+const pr10ReviewFixClauses: readonly Supplement[] = [
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:w-engines:13127:ex-and-assist-anomaly-buildup",
+    source: "nanoka-integrated@3.2 w-engines/13127 /talents/1—5/desc",
+    catalogEntityId: "w-engines:Peacekeeper_Specialized",
+    optionId: "nanoka:w-engines:13127:ex-and-assist-anomaly-buildup",
+    name: "标准格挡术 · anomalyBuildup",
+    conditionDescription:
+      "[强化特殊技]和[支援突击]累积的属性异常积蓄值提升36/40/45/50/55%（按精炼 1—5）；“拥有护盾”是同句每秒自动回能条款的取得条件，不扩到本积蓄条款。",
+    target: "self",
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    reason: "formula-out-of-scope",
+    explanation:
+      "五档天赋同句的异常积蓄值部分：[强化特殊技]和[支援突击]累积的属性异常积蓄值提升36/40/45/50/55%。这是异常积蓄值（积蓄量方向），不是异常精通、伤害加成或每秒自动回能；当前公开静态伤害计算不输出积蓄量/积蓄值，也不新增该公式。同句的每秒自动回能（拥有护盾时 0.4/0.46/0.52/0.58/0.64 点/秒）已有可执行选项，本选项不重复、不替换；“拥有护盾”只是回能句的取得条件，无据不扩到积蓄句。显式选择本选项会得到本错误。",
+    supportedRanks: "精炼 1—5（不可选）",
+    computationTarget:
+      "declared unavailable option on the mapped w-engine entity",
+    evidence: wengineTalentEvidence(
+      "13127",
+      "6ede50ba4109867976d76b4dbce456a11f346ea42873c26c1dcdadbc122eacd3",
+    ),
+    verification:
+      "Nanoka 五档天赋逐档核实（w-engines/13127/details.zh.json 的 /talents/1—5/desc，英文同文为 The Anomaly Buildup of EX Special Attacks and Assist Follow-Ups increase by 36%）：五档字面值为 36/40/45/50/55%，第一句回能按档为 0.4/0.46/0.52/0.58/0.64 点/秒。固定来源该音擎五档只有回能机器记录（既有 corrected 选项）、没有积蓄编码；本声明不套用 note-only 空实体守卫（该实体已有机器记录），也不因已有 energyRegen 记录误拒，证据按整文件摘要与逐档 Pointer 核对。",
+  },
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:w-engines:14148:ex-physical-daze-stacks",
+    source: "nanoka-integrated@3.2 w-engines/14148 /talents/1—5/desc",
+    catalogEntityId: "w-engines:Yesterday_Calls",
+    optionId: "nanoka:w-engines:14148:ex-physical-daze-stacks",
+    name: "7×24 · dazeStacks",
+    conditionDescription:
+      "装备者发动[强化特殊技]造成物理属性伤害后，装备者攻击造成的失衡值提升9/10.3/11.7/13/14.5%（按精炼 1—5），最多叠加3层、持续10秒；EX+物理是该增益的取得条件，受益攻击不限该次 EX，也不限物理。",
+    target: "self",
+    configuration: { refinements: [1, 2, 3, 4, 5] },
+    reason: "formula-out-of-scope",
+    explanation:
+      "五档天赋同句的失衡值部分：装备者发动[强化特殊技]造成物理属性伤害时，装备者攻击造成的失衡值提升9/10.3/11.7/13/14.5%（最多叠加3层、持续10秒）。EX 造成物理伤害是该失衡增益的取得条件，不是收益范围限制——后续装备者的攻击按原文受益，本声明只登记条款、不生成层数事件或最终失衡值。同句的每秒自动回能与 3 层时的全队暴击伤害（30/34.5/39/43.5/48%，持续40秒、重复触发刷新、全队唯一）已有可执行选项，本选项不重复、不替换，也不把 3 层暴伤的全队唯一扩到失衡条款。失衡值（daze）不在当前机器词表，不接受把物理触发缩成收益范围。显式选择本选项会得到本错误。",
+    supportedRanks: "精炼 1—5（不可选）",
+    computationTarget:
+      "declared unavailable option on the mapped w-engine entity",
+    evidence: wengineTalentEvidence(
+      "14148",
+      "3245466324100f866c221d3aa6d6de4621ecedef8a9e10f6d1c70953f409601e",
+    ),
+    verification:
+      "Nanoka 五档天赋逐档核实（w-engines/14148/details.zh.json 的 /talents/1—5/desc，英文同文为 the Daze dealt by the equipper's attacks increases by 9% for 10s, stacking up to 3 times）：五档为 9/10.3/11.7/13/14.5%，最多 3 层、持续 10 秒；取得条件（EX 造成物理伤害）与暴伤句（30/34.5/39/43.5/48%、40 秒、刷新、全队唯一）按原文分列。固定来源该音擎五档只有回能与暴伤机器记录（既有选项）、没有失衡编码；本声明不套用 note-only 空实体守卫，也不因已有 energyRegen/critDmg 记录误拒。",
+  },
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:agents:lighter:morale-acquisition",
+    source:
+      "nanoka-integrated@3.2 agents/1161 /passive/level/1161501—1161507/desc/0",
+    catalogEntityId: "agents:lighter",
+    optionId: "nanoka:agents:lighter:morale-acquisition",
+    name: "核心被动 · moraleAcquisition",
+    conditionDescription:
+      "莱特随时间自动获得[士气]：每秒回复2.9点，队伍中任意角色每消耗1点能量值额外回复0.26点，上限100点；[士气喷发]期间停止随时间自动获得[士气]、退出时保留未消耗[士气]（核心 1—7 同文）。",
+    target: "self",
+    configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+    reason: "formula-out-of-scope",
+    explanation:
+      "核心被动同段的资源部分：莱特随时间自动获得[士气]，每秒回复2.9点，队伍中任意角色每消耗1点能量值额外回复0.26点[士气]，最多拥有100点；[士气喷发]状态下不再随时间自动获得、退出时保留尚未消耗的[士气]。这是特殊角色资源方向，不是每秒自动回能（Energy Regen），也不折算成 energyRegen；当前公开静态伤害计算不输出战斗内资源获取，本批不新增资源公式或时间线。状态取得/消耗条件（回复至80点的下一次换入快速支援、80点以上第五段普攻进入[士气喷发]、每消耗10点士气冲击力提升、持续6秒）按原文保留在说明中，由调用方声明，不生成自动事件；同核心已支持的冲击力选项（nanoka:agents:lighter:morale-burst-impact）与[溃败]失衡延长（另有独立声明）不重复、不替换。显式选择本选项会得到本错误。",
+    supportedRanks: "核心 1—7（不可选）",
+    computationTarget: "declared unavailable option on the mapped agent entity",
+    evidence: agentPassiveEvidence(
+      "1161",
+      "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5",
+      1161501,
+    ),
+    verification:
+      "Nanoka 核心被动七行逐档核实（agents/1161/details.zh.json 的 /passive/level/1161501—1161507/desc/0，data.json level 元数据 1—7 与 rank 逐档核对；英文同文为 Lighter automatically gains Morale over time, at a rate of 2.9 points per second. For each point of Energy consumed by any squad member, Lighter recovers an additional 0.26 Morale, up to a maximum of 100）：七档同文；只有每 10 点士气提升冲击力的比例随核心档变化（既有已支持选项）。资源取得与状态边界在固定来源没有机器记录（该段文字不在 mindscapeBuffs 的块 note 中），证据按整文件摘要与逐档 Pointer 核对；不把它转成 energyRegen 或自动事件。",
+  },
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:agents:lighter:collapse-stun-duration",
+    source:
+      "nanoka-integrated@3.2 agents/1161 /passive/level/1161501—1161507/desc/0",
+    catalogEntityId: "agents:lighter",
+    optionId: "nanoka:agents:lighter:collapse-stun-duration",
+    name: "核心被动 · collapseStunDuration",
+    conditionDescription:
+      "[士气喷发]状态下终结一击命中敌人时施加[溃败]：敌人进入失衡后的失衡持续时间提升3秒，从失衡状态恢复前对同一目标最多触发一次（核心 1—7 同文）。",
+    target: "team",
+    configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+    reason: "formula-out-of-scope",
+    explanation:
+      "核心被动同段的[溃败]部分：[士气喷发]状态下终结一击命中敌人时施加[溃败]，使该敌人进入失衡状态后的失衡持续时间提升3秒，从失衡状态恢复前[溃败]对同一目标最多触发一次。这是失衡持续时间（stun duration）方向，不是已支持的冲击力或失衡值：当前公开静态伤害计算的 daze-only 分支在进入目录执行前返回，不计算最终失衡时长，也不新增该公式。受益范围是全队（更长的失衡窗口对所有队友生效），与同句已支持的冲击力选项和抗性降低选项相互独立、不重复不替换。显式选择本选项会得到本错误。",
+    supportedRanks: "核心 1—7（不可选）",
+    computationTarget: "declared unavailable option on the mapped agent entity",
+    evidence: agentPassiveEvidence(
+      "1161",
+      "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5",
+      1161501,
+    ),
+    verification:
+      "Nanoka 核心被动七行逐档核实（agents/1161/details.zh.json 的 /passive/level/1161501—1161507/desc/0；英文同文为 it applies the Collapse effect on the target, extending its Stunned duration by 3s. The Collapse effect can trigger only once on the same target before they recover from Stun）：七档同文。该句在固定来源没有机器记录（rank 2 块 note 只登记了[溃败]相关的失衡易伤倍率），证据按整文件摘要与逐档 Pointer 核对；只登记持续时间增量，不把它折算为冲击力/易伤或最终失衡值。",
+  },
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:agents:dialyn:positive-reviews-and-complaints",
+    source:
+      "nanoka-integrated@3.2 agents/1481 /passive/level/1481049—1481055/desc/0",
+    catalogEntityId: "agents:dialyn",
+    optionId: "nanoka:agents:dialyn:positive-reviews-and-complaints",
+    name: "核心被动 · positiveReviewsAndComplaints",
+    conditionDescription:
+      "琉音进入战场时初始拥有60点[好评]；接战状态下每秒积攒0.6点，指定EX（石头/剪刀/布！）的重击命中时积攒7.5点（同一招式一次）；上限120点。每当[好评]积攒至90点或发动[终结技]时获得1点[客诉]，上限1点（核心 1—7 同文）。",
+    target: "self",
+    configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+    reason: "formula-out-of-scope",
+    explanation:
+      "核心被动同段的资源部分：琉音入场初始拥有60点[好评]、接战每秒积攒0.6点、指定EX重击命中积攒7.5点（同一招式一次、上限120点）；好评满90点或发动[终结技]时获得1点[客诉]（上限1点）。这是特殊角色资源方向，不是每秒自动回能，也不折算成 energyRegen；当前公开静态伤害计算不输出战斗内资源，也不新增公式或时间线。资源消费与连携升级条件按原文保留在说明中：好评至少90点时，经[连携技：迎宾踏垫]/[强化特殊技：送客！]/[快速支援：呼叫转移]打开[连携技]窗口后，下一位出场角色的该次[连携技]升级为[终结技]，队友以此方式发动[终结技]时琉音消耗60点[好评]（不是打开窗口当下消耗）；另一条路径是好评至少90点时[强化特殊技：送客！]命中未打开[连携技]窗口的敌人，消耗90点[好评]强制打开窗口，下一位出场角色同样升级为[终结技]。以上条件由调用方声明，不生成事件。已支持的初始暴击率转冲击选项（nanoka:agents:dialyn:initial-crit-rate-impact）与[恶意投诉]失衡时长（另有独立声明）不重复、不替换。显式选择本选项会得到本错误。",
+    supportedRanks: "核心 1—7（不可选）",
+    computationTarget: "declared unavailable option on the mapped agent entity",
+    evidence: agentPassiveEvidence(
+      "1481",
+      "c335486522cb3958f1430551fb07616364cd01f13cbe988c7bde6d21a41ca3ed",
+      1481049,
+    ),
+    verification:
+      "Nanoka 核心被动七行逐档核实（agents/1481/details.zh.json 的 /passive/level/1481049—1481055/desc/0，data.json level 元数据 1—7 与 rank 逐档核对；英文同文为 Dialyn starts with 60 Positive Reviews … gains 0.6 Positive Reviews per second … gains 7.5 … up to a maximum of 120 … Dialyn obtains 1 Customer Complaint. A maximum of 1 Customer Complaint can be held）：好评取得与客诉句七档同文，只有初始暴击率转冲击比例随核心档变化（既有已支持选项）。资源取得与消费条件在固定来源没有机器记录，证据按整文件摘要与逐档 Pointer 核对。",
+  },
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:agents:dialyn:malicious-complaint-stun-duration",
+    source:
+      "nanoka-integrated@3.2 agents/1481 /passive/level/1481049—1481055/desc/0",
+    catalogEntityId: "agents:dialyn",
+    optionId: "nanoka:agents:dialyn:malicious-complaint-stun-duration",
+    name: "核心被动 · maliciousComplaintStunDuration",
+    conditionDescription:
+      "[强化特殊技：布！]命中敌人时施加[恶意投诉]：敌人进入失衡状态后的失衡持续时间提升2秒，从失衡状态恢复前对同一目标最多触发一次、与同类失衡延长不叠加、敌人失衡结束时效果结束（核心 1—7 同文）。",
+    target: "team",
+    configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+    reason: "formula-out-of-scope",
+    explanation:
+      "核心被动同句的失衡持续时间部分：[恶意投诉]效果下敌人进入失衡状态后的失衡持续时间提升2秒，从失衡状态恢复前对同一目标最多触发一次，失衡持续时间提升效果与同类效果不可叠加，敌人失衡结束时效果结束。这是失衡持续时间（stun duration）方向，与同句已支持的失衡易伤倍率（+15/17.5/20/22.5/25/27.5/30% 按核心 1—7）是不同量——易伤已支持不等于时长已支持；当前公开静态伤害计算不输出最终失衡时长，daze-only 分支在进入目录执行前返回，也不新增该公式。受益范围是全队（更长的失衡窗口所有队友共享）。显式选择本选项会得到本错误。",
+    supportedRanks: "核心 1—7（不可选）",
+    computationTarget: "declared unavailable option on the mapped agent entity",
+    evidence: agentPassiveEvidence(
+      "1481",
+      "c335486522cb3958f1430551fb07616364cd01f13cbe988c7bde6d21a41ca3ed",
+      1481049,
+    ),
+    verification:
+      "Nanoka 核心被动七行逐档核实（agents/1481/details.zh.json 的 /passive/level/1481049—1481055/desc/0；英文同文为 the Stun duration is extended by 2s … can trigger on the same target only once. The Stun duration bonus does not stack with similar effects）：七档同文。固定来源的 mindscape rank 0 blk-legacy 块登记该句全文（note 同文、只编码 30% 失衡易伤记录），本登记冻结该锚块完整 note，锚块缺失或 note 任何变化即拒绝生成；只登记时长增量，不重复易伤选项、不把易伤已支持当作时长已支持。",
+    clauseContextGuard: {
+      rankKind: "mindscape",
+      rank: 0,
+      stats: [],
+      anchorBlocks: [
+        {
+          blockId: "blk-legacy",
+          frozenNote:
+            "[强化特殊技：布！]命中敌人时，敌人获得[恶意投诉]效果，[恶意投诉]效果下敌人进入失衡状态后的失衡持续时间提升2秒，失衡易伤倍率提升30%",
+        },
+      ],
+    },
+  },
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:agents:nangongyu:core-buildup-and-daze",
+    source:
+      "nanoka-integrated@3.2 agents/1511 /passive/level/1511049—1511055/desc/0",
+    catalogEntityId: "agents:nangongyu",
+    optionId: "nanoka:agents:nangongyu:core-buildup-and-daze",
+    name: "核心被动 · coreBuildupAndDaze",
+    conditionDescription:
+      "指定[普通攻击：可爱地雷飞天撞]或[强化特殊技：相当沉重的爱意]命中敌人时，自身属性异常积蓄效率提升17/20/23/26/29/32/35%、自身造成的失衡值提升11/12.5/14/15.5/17/18.5/20%（按核心 1—7，逐档字面值），持续30秒、重复触发时刷新。",
+    target: "self",
+    configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+    reason: "formula-out-of-scope",
+    explanation:
+      "核心被动同句的积蓄与失衡部分：指定普攻/EX 命中敌人后，自身属性异常积蓄效率提升17/20/23/26/29/32/35%、自身造成的失衡值提升11/12.5/14/15.5/17/18.5/20%（按核心 1—7 逐档字面值，不按最高核心插值），持续30秒、重复触发时刷新。这是异常积蓄效率与失衡值方向，不是异常精通或伤害加成；当前公开静态伤害计算不输出积蓄量与最终失衡值，也不新增该公式。同句的全队伤害提升（13/15/17/19/21/23/25%）已有可执行选项，本选项不重复、不替换；M0 [颤音]/M6 [颤音：改]的显式层数与快照契约、影画 2 的独立条款不受影响。显式选择本选项会得到本错误。",
+    supportedRanks: "核心 1—7（不可选）",
+    computationTarget: "declared unavailable option on the mapped agent entity",
+    evidence: agentPassiveEvidence(
+      "1511",
+      "623a202f3d6b33c5c32d2ef6958595d02f0649cd76e57679858108b753a262b8",
+      1511049,
+    ),
+    verification:
+      "Nanoka 核心被动七行逐档核实（agents/1511/details.zh.json 的 /passive/level/1511049—1511055/desc/0，data.json level 元数据 1—7 与 rank 逐档核对；英文同文为 her Anomaly Buildup Rate increases by 35%, and her Daze dealt increases by 20%, and the whole squad's DMG dealt increases by 25% for 30s）：逐档字面值蓄积 17/20/23/26/29/32/35%、失衡 11/12.5/14/15.5/17/18.5/20%、团队增伤 13/15/17/19/21/23/25%。固定来源 mindscape rank 0 blk-ms4cegmd-bwnttd 是该核心被动块（note 同文、只编码精通/异放/团队增伤记录），本登记冻结该锚块完整 note，锚块缺失或 note 任何变化即拒绝生成；本声明不套用 note-only 空实体守卫，也不因块内已有 dmgBonus/anomalyReleaseMult 记录误拒。",
+    clauseContextGuard: {
+      rankKind: "mindscape",
+      rank: 0,
+      stats: [],
+      anchorBlocks: [
+        {
+          blockId: "blk-ms4cegmd-bwnttd",
+          frozenNote:
+            "南宫羽的异常精通提升120点；\n敌人处于失衡状态时，任意角色对其造成一次[异放]伤害、[紊乱]伤害、使其进入一次属性异常状态时会为其累计1层[颤音]；\n同一敌人最多可被叠加4层[颤音]；\n若[颤音]叠加到最大层数且敌人处于以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、冰属性异常状态、风属性异常状态下时或当敌人持有[颤音]并从失衡状态恢复时，所有[颤音]会被清除；\n[颤音]被清除时，若敌人处于上述属性异常状态下，南宫羽会对目标造成一次[异放]伤害：额外结算一次属性异常伤害，相对于原属性异常伤害的比例为720%/360%/900%/63%/90%/36%，敌人身上每有1层[颤音]，该次[异放]的伤害比例额外提升25%，同一次失衡期间，若[颤音]已被清除，则敌人无法再被施加[颤音]；\n南宫羽的[普通攻击：可爱地雷飞天撞]或[强化特殊技：相当沉重的爱意]命中敌人时，会使自身的属性异常积蓄效率提升35%，造成的失衡值提升20%，使全队造成的伤害提升25%，持续30秒，重复触发时刷新持续时间；",
+        },
+      ],
+    },
+  },
+  {
+    kind: "unsupported-option",
+    supplementId: "nanoka:agents:nangongyu:downbeat-acquisition",
+    source:
+      "nanoka-integrated@3.2 agents/1511 /passive/level/1511049—1511055/desc/0",
+    catalogEntityId: "agents:nangongyu",
+    optionId: "nanoka:agents:nangongyu:downbeat-acquisition",
+    name: "核心被动 · downbeatAcquisition",
+    conditionDescription:
+      "进入战场时初始拥有30点[重拍]；接战状态下每秒回复3.8点，队伍中任意角色使敌人进入属性异常状态时额外回复12点（每6秒最多触发一次）；上限100点（核心 1—7 同文）。",
+    target: "self",
+    configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+    reason: "formula-out-of-scope",
+    explanation:
+      "核心被动同段的资源部分：接战状态下每秒回复3.8点[重拍]、队伍中任意角色使敌人进入属性异常状态时额外回复12点（每6秒最多触发一次）、上限100点、进入战场时初始30点。这是特殊角色资源方向，不是每秒自动回能（Energy Regen），也不折算成 energyRegen；当前公开静态伤害计算不输出该资源，不新增公式或时间线。与 M6 [颤音：改]及其 +50% 失衡是不同条款，本声明不涉及。显式选择本选项会得到本错误。",
+    supportedRanks: "核心 1—7（不可选）",
+    computationTarget: "declared unavailable option on the mapped agent entity",
+    evidence: agentPassiveEvidence(
+      "1511",
+      "623a202f3d6b33c5c32d2ef6958595d02f0649cd76e57679858108b753a262b8",
+      1511049,
+    ),
+    verification:
+      "Nanoka 核心被动七行逐档核实（agents/1511/details.zh.json 的 /passive/level/1511049—1511055/desc/0；英文同文为 Nangong Yu restores 3.8 Downbeats/s … an additional 12 Downbeats. This effect can trigger once every 6s … up to 100 Downbeats, and starts with 30 …）：七档同文。该资源句在固定来源没有机器记录，证据按整文件摘要与逐档 Pointer 核对；只登记资源取得与上限，不生成自动事件、不折算为每秒回能。",
+  },
+]
+
 export const SUPPLEMENTS: readonly Supplement[] = [
   evelynMindscape6LunaluxGarroteFollowUp,
   s0anbyMindscape6ElectromagneticVortex,
@@ -3405,7 +4291,7 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   nekomataOrdinaryDmgBonus,
   nekomataOrdinaryShow,
   redAxis,
-  identityInflectionBoundary,
+  identityInflectionAttackerDamageReduction,
   soldier11FlameProwess,
   lycaonIceHunt,
   alexandrinaPerfectService,
@@ -3442,4 +4328,8 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   crimsonMoonCasketSquadDamageBonus,
   nangongyuMindscape6VibratoModified("nonphysical"),
   nangongyuMindscape6VibratoModified("physical"),
+  ...pr10DriveDiscBoundaries,
+  ...pr10WEngineBoundaries,
+  ...pr10ProviderBoundaries,
+  ...pr10ReviewFixClauses,
 ]
