@@ -6,6 +6,7 @@ import {
 import type { LuminizeAnomalyDamageLevelInput } from "../../formulas.ts"
 import { parseEffectRuleSet } from "../parse-effect-rule-set.ts"
 import type {
+  BindingId,
   Condition,
   ContributionRule,
   EffectId,
@@ -758,6 +759,7 @@ export function validateStaticCatalog(
           "layerCountInputName",
           "declaredTeammateBeneficiary",
           "squadUniqueEffect",
+          "exclusiveDamageItem",
         ],
         checks(vp),
         "variant",
@@ -841,6 +843,84 @@ export function validateStaticCatalog(
           `${vp}/squadUniqueEffect`,
           "Expected the literal true",
         )
+      // 独占伤害项声明：只接受字面量 true，且变体必须恰好登记一个伤害项
+      // 要求——启用时命中的伤害项被锁定为该唯一项（选择循环强制），不把
+      // 该声明扩展成通用的多项组合校验。
+      if (variant["exclusiveDamageItem"] !== undefined) {
+        if (variant["exclusiveDamageItem"] !== true)
+          collector.report(
+            "INVALID_INPUT",
+            `${vp}/exclusiveDamageItem`,
+            "Expected the literal true",
+          )
+        const exclusiveRequirements = expectArray(
+          variant["damageItemRequirements"],
+          checks(`${vp}/damageItemRequirements`),
+          "damage item requirements",
+        )
+        if (exclusiveRequirements?.length !== 1)
+          collector.report(
+            "INVALID_DEFINITION",
+            `${vp}/exclusiveDamageItem`,
+            "An exclusive damage item declaration requires exactly one damage item requirement",
+          )
+      }
+      // 声明最终暴击概率的要求项：必须位于独占变体的唯一要求项上，且该
+      // 要求项是 base 角色、仅 direct 模式、holder-current——概率声明与
+      // 被结算的独立项一一对应，不允许多项命中级覆盖的模糊定义。
+      if (variant["damageItemRequirements"] !== undefined) {
+        const requirementList = expectArray(
+          variant["damageItemRequirements"],
+          checks(`${vp}/damageItemRequirements`),
+          "damage item requirements",
+        )
+        if (requirementList !== undefined)
+          for (const [ri, requirementValue] of requirementList.entries()) {
+            const requirement = expectObject(
+              requirementValue,
+              checks(`${vp}/damageItemRequirements/${ri}`),
+              "damage item requirement",
+            )
+            if (requirement?.["requiredCriticalRateDeclaration"] === undefined)
+              continue
+            const declarationPointer = `${vp}/damageItemRequirements/${ri}/requiredCriticalRateDeclaration`
+            if (variant["exclusiveDamageItem"] !== true)
+              collector.report(
+                "INVALID_DEFINITION",
+                declarationPointer,
+                "A required critical rate declaration must sit on an exclusive damage item variant",
+              )
+            if (requirementList.length !== 1)
+              collector.report(
+                "INVALID_DEFINITION",
+                declarationPointer,
+                "A required critical rate declaration must sit on the single damage item requirement of its variant",
+              )
+            if (requirement["role"] !== "base")
+              collector.report(
+                "INVALID_DEFINITION",
+                declarationPointer,
+                "A required critical rate declaration requires the base damage item role",
+              )
+            const modes = requirement["allowedModes"]
+            if (
+              !Array.isArray(modes) ||
+              modes.length !== 1 ||
+              modes[0] !== "direct"
+            )
+              collector.report(
+                "INVALID_DEFINITION",
+                declarationPointer,
+                "A required critical rate declaration requires the direct damage preparation mode only",
+              )
+            if (requirement["source"] !== "holder-current")
+              collector.report(
+                "INVALID_DEFINITION",
+                declarationPointer,
+                "A required critical rate declaration requires the holder-current damage item source",
+              )
+          }
+      }
       const config = expectObject(
         variant["configuration"],
         checks(`${vp}/configuration`),
@@ -1166,6 +1246,7 @@ export function validateStaticCatalog(
               "source",
               "requiredDirectMultiplier",
               "requiredSkillCategory",
+              "requiredCriticalRateDeclaration",
               "originalAnomalyAttribute",
             ],
             checks(rp),
@@ -1237,6 +1318,15 @@ export function validateStaticCatalog(
               "INVALID_INPUT",
               `${rp}/requiredSkillCategory`,
               "Unknown required skill category",
+            )
+          if (
+            requirement["requiredCriticalRateDeclaration"] !== undefined &&
+            requirement["requiredCriticalRateDeclaration"] !== true
+          )
+            collector.report(
+              "INVALID_INPUT",
+              `${rp}/requiredCriticalRateDeclaration`,
+              "Expected the literal true",
             )
           if (
             requirement["originalAnomalyAttribute"] !== undefined &&
@@ -1525,6 +1615,22 @@ export function calculateStaticDamageFromCatalog(
     checks("/hit/skillCategory"),
     "skill category",
   )
+  // 声明最终暴击概率的取值校验（归属/缺声明/误带字段在选择循环判定；
+  // regular/唯一项/缩放来源等结算范围由低层公共入口强制）。
+  const declaredCriticalRate = hit["declaredCriticalRate"]
+  if (declaredCriticalRate !== undefined) {
+    if (
+      typeof declaredCriticalRate !== "number" ||
+      !Number.isFinite(declaredCriticalRate) ||
+      declaredCriticalRate < 0 ||
+      declaredCriticalRate > 1
+    )
+      collector.report(
+        "INVALID_INPUT",
+        "/hit/declaredCriticalRate",
+        "The declared critical rate must be a finite number within [0, 1]",
+      )
+  }
   const items = (
     expectArray(
       hit["damageItems"],
@@ -1676,6 +1782,13 @@ export function calculateStaticDamageFromCatalog(
     exclusive = new Set<string>(),
     equipment = new Set<string>(),
     squadUniqueSources = new Map<string, string>()
+  // 声明最终暴击概率的有效归属：当前命中 actor 上合法启用（layers > 0、
+  // eligible、职业适配、holder === actor）且要求项校验通过的独占选项。
+  const declarationOwners: {
+    readonly optionId: string
+    readonly bindingId: BindingId
+    readonly itemId: string
+  }[] = []
   for (const binding of input.bindings) {
     const key = JSON.stringify([
       binding.holderId,
@@ -1950,6 +2063,17 @@ export function calculateStaticDamageFromCatalog(
           `Input ${requirement.name} requires ${requirement.unit}; ${explain}`,
         )
     }
+    // 声明最终暴击概率的归属：只有当前命中 actor 的
+    // 唯一有效启用要求项授权该声明。0 层关闭、绑定 ineligible、职业不
+    // 适配、目录受益筛选把当前 actor 筛掉或其他持有者的选择都不授权
+    // （也不强制声明）；误带字段且无授权来源按非法输入拒绝，有效但错
+    // 持有者按上下文冲突拒绝。错持有者的拒绝在生效校验内先行；owner
+    // 登记复用下方算出的最终受益集合，延后到该集合之后执行。
+    const declarationRequirement = variant.damageItemRequirements?.find(
+      (requirement) =>
+        (requirement as { requiredCriticalRateDeclaration?: true })
+          .requiredCriticalRateDeclaration === true,
+    )
     // 伤害项要求：仅对实际生效（层数大于 0）的选中选项校验；缺项报 MISSING_REFERENCE。
     if (variant.damageItemRequirements !== undefined && layers > 0) {
       const disorderAttributeSource = (
@@ -2069,6 +2193,36 @@ export function calculateStaticDamageFromCatalog(
             )
         }
       }
+      // 独占伤害项：启用该变体时，命中的伤害项必须恰好是其声明的唯一项。
+      // 该变体自带命中级机制（如必定暴击），会把同一请求的全部伤害项卷入；
+      // 混合请求明确拒绝，不静默丢弃多余项。0 层关闭不进入本分支。
+      if (variant.exclusiveDamageItem === true) {
+        const declaredItemIds = new Set(
+          variant.damageItemRequirements.map(
+            (requirement) => requirement.itemId,
+          ),
+        )
+        for (const item of items) {
+          const itemId = (item as { itemId?: unknown }).itemId
+          if (!declaredItemIds.has(itemId as string))
+            collector.report(
+              "CONTEXT_MISMATCH",
+              p,
+              `Independent damage item ${JSON.stringify(declaredItemIds.size === 1 ? [...declaredItemIds][0] : [...declaredItemIds])} must settle as the sole damage item of the hit; remove ${JSON.stringify(itemId)} or settle it in a separate request; ${explain}`,
+            )
+        }
+      }
+      if (declarationRequirement !== undefined) {
+        if (binding.holderId !== input.hit.actorId) {
+          if (declaredCriticalRate !== undefined)
+            collector.report(
+              "CONTEXT_MISMATCH",
+              p,
+              `The declared critical rate belongs to the hit actor's settlement, but ${option.optionId} is bound to holder ${JSON.stringify(binding.holderId)}; enable the option on the current actor's binding or settle separately; ${explain}`,
+              { bindingId: binding.bindingId },
+            )
+        }
+      }
     }
     const holder = actors.get(binding.holderId)!
     if (
@@ -2124,6 +2278,25 @@ export function calculateStaticDamageFromCatalog(
       typeof selection["beneficiaryActorId"] === "string"
         ? (selection["beneficiaryActorId"] as EntityId)
         : undefined
+    // 声明归属登记：复用本次选择的最终受益集合（含声明受益者交集，如
+    // 有），只有当前命中 actor 仍在集合中，该要求项才授权并强制声明；
+    // 被受益筛选（队伍职业人数、受益职业/元素）筛掉的选择不授权也不
+    // 强制，保持其原有零贡献语义。规则 when 仍只决定贡献，不反向求值
+    // 任意 when 来授权字段。
+    if (
+      declarationRequirement !== undefined &&
+      binding.holderId === input.hit.actorId &&
+      (declaredBeneficiaryId === undefined
+        ? beneficiaries
+        : beneficiaries.filter(([id]) => id === declaredBeneficiaryId)
+      ).some(([id]) => id === binding.holderId)
+    ) {
+      declarationOwners.push({
+        optionId: option.optionId,
+        bindingId: binding.bindingId,
+        itemId: declarationRequirement.itemId,
+      })
+    }
     const beneficiaryCandidates: Condition<"contribution"> = {
       kind: "any",
       conditions: beneficiaries.map(([entityId]) => ({
@@ -2213,6 +2386,35 @@ export function calculateStaticDamageFromCatalog(
     }
     if (variant.parameterMapping)
       mappings.push({ variant, bindingId: binding.bindingId })
+  }
+  // 声明最终暴击概率的请求级裁决：一个声明最多归属一个有效要求项；
+  // 缺声明只对真正具备归属的启用项报告，误带字段且无归属来源拒绝。
+  if (declarationOwners.length > 1) {
+    const [first, ...rest] = declarationOwners
+    collector.report(
+      "CONTEXT_MISMATCH",
+      "/hit/declaredCriticalRate",
+      `The declared critical rate must belong to exactly one enabled settlement; ${JSON.stringify(first!.itemId)} of ${first!.optionId} conflicts with ${rest
+        .map((owner) => JSON.stringify(owner.itemId))
+        .join(", ")}; settle each declared settlement in its own request`,
+    )
+  } else if (declaredCriticalRate !== undefined && !declarationOwners.length) {
+    collector.report(
+      "INVALID_INPUT",
+      "/hit/declaredCriticalRate",
+      "The declared critical rate requires an enabled exclusive settlement that requires the declaration; settle the request with the option enabled or omit the field",
+    )
+  } else if (
+    declaredCriticalRate === undefined &&
+    declarationOwners.length === 1
+  ) {
+    const [owner] = declarationOwners
+    collector.report(
+      "MISSING_FACT",
+      "/hit/declaredCriticalRate",
+      `The final critical rate of this settlement must be declared explicitly (${JSON.stringify(owner!.itemId)} of ${owner!.optionId}); no default probability is assumed from the holder's panel`,
+      { bindingId: owner!.bindingId },
+    )
   }
   const skillTargetIds =
     hit["skillTargetIds"] === undefined

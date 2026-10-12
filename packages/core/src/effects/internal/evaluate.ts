@@ -733,6 +733,7 @@ function selectedAdjustmentsFor(
 function collectLayersForAddress(
   address: ConsumptionAddress,
   context: EvaluationContext,
+  options: { readonly hitScopeOnly?: boolean } = {},
 ): LayerCandidate[] | undefined {
   const candidates: LayerCandidate[] = []
   // 只有命中局部的消费地址才纳入命中作用域规则；通用属性节点不因本次查询带命中而被污染。
@@ -741,6 +742,11 @@ function collectLayersForAddress(
   for (const entry of context.prepared.contributions) {
     const rule = entry.rule
     const ruleIsHitScope = rule.scope === "hit"
+    if (options.hitScopeOnly === true && !ruleIsHitScope) {
+      // 声明概率的冲突判定只看命中作用域层：非 hit 作用域规则在候选
+      // 收集可能为其解析状态、实例或目标之前即排除，不索取无关事实。
+      continue
+    }
     if (ruleIsHitScope && !includeHitScope) {
       continue
     }
@@ -842,6 +848,31 @@ function collectLayersForAddress(
     }
   }
   return candidates
+}
+
+/**
+ * 声明概率的冲突判定：当前消费地址上是否存在**适用的** hit 作用域层。
+ * 复用候选收集的激活、有效实例/层、受益者语义与 when 条件判断，但只
+ * 收集 hit 作用域规则，也不求值被声明替换的输出、贡献阶段输出修改或
+ * 按值唯一性选择——层是否适用与它的输出值无关（输出字面 0 也冲突）。
+ * 返回 undefined 表示判定失败（问题已报告）；null 表示没有适用层。
+ */
+function findApplicableHitScopedLayer(
+  address: ConsumptionAddress,
+  context: EvaluationContext,
+): LayerCandidate | null | undefined {
+  const candidates = collectLayersForAddress(address, context, {
+    hitScopeOnly: true,
+  })
+  if (candidates === undefined) {
+    return undefined
+  }
+  for (const candidate of candidates) {
+    if (evaluateCondition(candidate.entry.rule.when, context, candidate)) {
+      return candidate
+    }
+  }
+  return null
 }
 
 /**
@@ -1958,6 +1989,34 @@ export function evaluateEffects(
 ):
   | { readonly ok: true; readonly value: EvaluationResult }
   | ReturnType<typeof failure> {
+  return evaluateEffectsInternal(prepared, state, input, undefined)
+}
+
+/**
+ * 仅供静态 regular 结算的内部命中求值入口：把已通过低层校验的声明最终
+ * 暴击概率送到现有命中求值函数。不进入公共 EvaluationInput/Event 契约，
+ * 公共 evaluateEffects 三参数调用与普通命中分支保持原样；该函数不从
+ * 公共 barrel 导出。
+ */
+export function evaluateEffectsForStaticHit(
+  prepared: PreparedEffects,
+  state: EffectState,
+  input: EvaluationInput,
+  declaredCriticalRate: number,
+):
+  | { readonly ok: true; readonly value: EvaluationResult }
+  | ReturnType<typeof failure> {
+  return evaluateEffectsInternal(prepared, state, input, declaredCriticalRate)
+}
+
+function evaluateEffectsInternal(
+  prepared: PreparedEffects,
+  state: EffectState,
+  input: EvaluationInput,
+  declaredCriticalRate: number | undefined,
+):
+  | { readonly ok: true; readonly value: EvaluationResult }
+  | ReturnType<typeof failure> {
   const preparedInternal = readPreparedInternal(prepared)
   const stateInternal = readStateInternal(state)
   const collector = new IssueCollector()
@@ -2145,7 +2204,7 @@ export function evaluateEffects(
     }
     return { ok: true, value: result }
   }
-  const result = evaluateHitQuery(context, hitStats)
+  const result = evaluateHitQuery(context, hitStats, declaredCriticalRate)
   if (result === undefined || !collector.isEmpty) {
     return failure(collector)
   }
@@ -2291,6 +2350,7 @@ function evaluateContributionsQuery(
 function evaluateHitQuery(
   context: EvaluationContext,
   additionalStats: readonly Stat[] = [],
+  declaredCriticalRate?: number,
 ): EvaluationResult | undefined {
   const hit = context.hit
   if (hit === null) {
@@ -2366,10 +2426,50 @@ function evaluateHitQuery(
   )
   for (const stat of new Set(additionalStats))
     readAttribute(stat, hit.attributeSources?.[stat])
-  const criticalRate = readAttribute(
-    "criticalRate",
-    hit.attributeSources?.criticalRate,
-  )
+  let criticalRate: number
+  if (declaredCriticalRate === undefined) {
+    criticalRate = readAttribute(
+      "criticalRate",
+      hit.attributeSources?.criticalRate,
+    )
+  } else {
+    // 声明替换最终概率：不读取命中角色面板暴击率，也不把声明伪装成
+    // current 属性观察或一条贡献。仅与**本命中实际生效**的命中作用域
+    // criticalRate/direct 调整互斥——复用与普通读取相同的消费地址、激活/
+    // 有效层、受益者与 when 判断（关闭的层、其他受益者/绑定、条件不成立
+    // 的层不构成冲突），但不为该判定求值被替换的 CR 输出、贡献阶段输出
+    // 修改或按值唯一性选择；实体作用域的普通暴击率增益不参与形成最终
+    // 概率，不因此报冲突或索取其输出事实，也不被伪报为概率消费。
+    const rateSource = hit.attributeSources?.criticalRate
+    const rateEntityId = rateSource?.entityId ?? hit.actorId
+    const rateHitId = rateEntityId === hit.actorId ? hit.hitId : null
+    const conflicting = findApplicableHitScopedLayer(
+      {
+        kind: "stat",
+        stat: "criticalRate",
+        stage: "direct",
+        entityId: rateEntityId,
+        hitId: rateHitId,
+      },
+      context,
+    )
+    if (conflicting === undefined) {
+      return undefined
+    }
+    if (conflicting !== null) {
+      context.collector.report(
+        "CONTEXT_MISMATCH",
+        "/hit/declaredCriticalRate",
+        `The declared critical rate conflicts with the applicable hit-scoped critical rate adjustment ${conflicting.entry.rule.effectId}; settle with exactly one probability semantics`,
+        {
+          effectId: conflicting.entry.rule.effectId,
+          bindingId: conflicting.entry.bindingId,
+        },
+      )
+      return undefined
+    }
+    criticalRate = declaredCriticalRate
+  }
   if (!context.collector.isEmpty) return undefined
   const itemAdjustments = context.prepared.contributions.flatMap((entry) =>
     entry.rule.operation.kind === "hit-adjustment"

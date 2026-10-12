@@ -813,6 +813,16 @@ export interface StaticCatalogDamageItemRequirement {
    * 分类）时目录返回 CONTEXT_MISMATCH，防止独立项吃到普通分类增益。
    */
   readonly requiredSkillCategory?: SkillCategory
+  /**
+   * 该独立项的最终暴击概率必须由调用方显式声明（hit.declaredCriticalRate），
+   * 无默认值：启用该要求所在选项时缺声明返回 MISSING_FACT，不能默许读取
+   * 装备者面板普通暴击率充当该次独立命中的概率。只接受字面量 true；声明
+   * 该字段的伤害项要求必须位于 exclusiveDamageItem 变体的唯一要求项上
+   * （role base、仅 direct、holder-current）。声明替换最终概率，结果的
+   * critical 分支继续采用当前普通暴击伤害（调用方选择的 regular 条件
+   * 模型），不证明游戏附伤能暴击或继承该暴击伤害。
+   */
+  readonly requiredCriticalRateDeclaration?: true
   /** 原异常归属：standard-disorder 项核对 originalAnomalyAttribute；direct 项核对归属元数据。 */
   readonly originalAnomalyAttribute?: DamageElement
 }
@@ -865,6 +875,18 @@ export interface StaticCatalogVariant {
    * 引擎，也不从命中身份推断前后场。
    */
   readonly declaredTeammateBeneficiary?: true
+  /**
+   * 独占伤害项声明：启用（layers > 0）该变体时，命中的伤害项必须恰好是
+   * 本变体 damageItemRequirements 声明的唯一伤害项——每个声明项在场，
+   * 且不得携带任何其他伤害项；混合请求按 CONTEXT_MISMATCH 明确拒绝，
+   * 不静默丢弃多余项。用于自带命中级机制（如比格气缸受击附伤的必定
+   * 暴击）会把同一请求的全部伤害项卷入的选项，把结算范围锁定为其声明
+   * 的独立项；0 层关闭不施加独占，未声明的选项沿用目录公开的多项请求
+   * 契约。只接受字面量 true；声明时变体必须恰好登记一个伤害项要求。
+   * 这是目录入口的选择校验能力，不是通用逐伤害项结算模型；低层入口
+   * 绕过目录时不强制该元数据。
+   */
+  readonly exclusiveDamageItem?: true
   /**
    * 全队唯一效果声明：该变体表示的效果（如绯月银棺的“伤害提升效果全队
    * 唯一”）在同一队伍中最多存在一个有效来源实例。目录选择阶段按

@@ -324,6 +324,19 @@ export type StaticHit = Pick<
 > & {
   readonly element: DamageElement
   readonly actionSnapshotId?: SnapshotId
+  /**
+   * 调用方显式声明的本次结算命中最终暴击概率（替换语义，不加数）：
+   * 缺省时沿用读取命中角色当前暴击率（含命中作用域贡献）的既有路径。
+   * 存在时必须是有限数且 0 ≤ r ≤ 1；仅支持 regular 直伤的单一伤害项
+   * 结算，且该项实际缩放属性须读取当前命中角色的当前属性；与
+   * `attributeSources.criticalRate` 或本命中实际生效的命中作用域
+   * criticalRate 调整并存时按冲突拒绝。r=0/1 表示调用方声明的单次
+   * 非/必暴结果，中间值是调用方声明的条件期望，不是引擎抽签；结果的
+   * `critical`/`nonCritical` 始终是两个条件分支（critical 继续采用当前
+   * 普通暴击伤害，是调用方选择的 regular 条件模型，不证明游戏附伤
+   * 继承该暴击伤害或能暴击）。
+   */
+  readonly declaredCriticalRate?: number
 }
 
 export type StaticDefenseInput = Omit<
