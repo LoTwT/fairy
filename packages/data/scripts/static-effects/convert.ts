@@ -3603,6 +3603,26 @@ export function convertSource(
     options: StaticCatalogOption[] = [],
     coverage: CoverageRecord[] = [],
     declaredSkillTargets: StaticEffectCatalog["skillTargets"][number][] = []
+  // 缺失条款与共存记录先验证，再编译普通记录；未知 stat / unsupported
+  // 不得抢先掩盖完整来源上下文的漂移。实体缺失仍由补充身份校验拒绝。
+  for (const supplement of supplements) {
+    if (
+      supplement.kind !== "option" ||
+      supplement.clauseContextGuard === undefined
+    )
+      continue
+    const entity = collected.entities.find(
+      (candidate) => candidate.catalogEntityId === supplement.catalogEntityId,
+    )
+    if (entity !== undefined)
+      verifyClauseContextGuard(
+        data,
+        functions,
+        collected.records,
+        entity,
+        supplement,
+      )
+  }
   // 依赖存在性：exclude-skill-target-scope 修正被某补充依赖时，该补充
   // 参与本次转换则其登记的来源记录完整身份（语义键）必须仍被收集到——
   // 上游把原核心块或记录改名、移除都会让语义键落空，旧倍率不再排除而
@@ -4397,13 +4417,7 @@ export function convertSource(
             `Supplement ${supplement.supplementId} conflicts with the fixed-source record at ${conflict.pointer} (stat ${conflict.raw.stat} on the registered skill targets); re-review the clause instead of double-contributing`,
           )
       }
-      verifyClauseContextGuard(
-        data,
-        functions,
-        collected.records,
-        entity,
-        supplement,
-      )
+
       verifyWengineRefinementContextGuard(
         data,
         collected.records,
@@ -4458,7 +4472,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "31",
+    revision: "32",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],

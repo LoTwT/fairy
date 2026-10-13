@@ -31,7 +31,10 @@ import {
   rejectUnknownFields,
   type FieldChecks,
 } from "./checks.ts"
-import { evaluateEffects, evaluateEffectsForStaticHit } from "./evaluate.ts"
+import {
+  evaluateEffectsForStaticHit,
+  type ReplacedStunOutput,
+} from "./evaluate.ts"
 import { IssueCollector, failure } from "./issues.ts"
 import { prepareSelectedEffects, readPreparedInternal } from "./prepare.ts"
 import { supplyEffectState } from "./state.ts"
@@ -316,6 +319,7 @@ export function calculateStaticDamage(
 export function evaluateStaticDamage(input: StaticDamageInput): Result<{
   readonly hit: HitContext
   readonly evaluation: StaticDamageResult["evaluation"]
+  readonly replacedStunOutputs: readonly ReplacedStunOutput[]
 }> {
   const collector = new IssueCollector()
   const checks = {
@@ -635,19 +639,20 @@ export function evaluateStaticDamage(input: StaticDamageInput): Result<{
     stats,
     ...(input.inputs === undefined ? {} : { inputs: input.inputs }),
   }
-  // 已验证的声明最终暴击概率经内部静态入口传入求值；公共 evaluateEffects
-  // 的三参数契约与普通命中分支保持原样。
-  const evaluated =
-    declaredRate === undefined
-      ? evaluateEffects(prepared.value, state.value, evaluationInput)
-      : evaluateEffectsForStaticHit(
-          prepared.value,
-          state.value,
-          evaluationInput,
-          declaredRate,
-        )
+  // 目录输入校验复用本次真实求值确认的被替代来源，不另行推断 when。
+  const replacedStunOutputs: ReplacedStunOutput[] = []
+  const evaluated = evaluateEffectsForStaticHit(
+    prepared.value,
+    state.value,
+    evaluationInput,
+    declaredRate,
+    replacedStunOutputs,
+  )
   if (!evaluated.ok) return evaluated
-  return { ok: true, value: { hit, evaluation: evaluated.value } }
+  return {
+    ok: true,
+    value: { hit, evaluation: evaluated.value, replacedStunOutputs },
+  }
 }
 
 function finiteSum(values: readonly number[]): number {
@@ -675,6 +680,17 @@ export function calculateDamageFromEvaluation(
   },
 ): StaticDamageResult {
   const applicableChannels = new Set<FactorChannel>()
+  const replacement = evaluation.contributions.find(
+    (entry) =>
+      entry.address.kind === "hit" &&
+      entry.address.field === "stunDamageMultiplier",
+  )
+  // 结构与单项有限性已在输入边界验证；不求和已被丢弃的合法普通加数。
+  if (
+    replacement !== undefined &&
+    damage.stunDamage.targetBaseStunDamageMultiplier < 0
+  )
+    throw new Error("Target base stun damage multiplier must be non-negative")
   const take = (channel: FactorChannel): number[] => {
     applicableChannels.add(channel)
     return evaluation.contributions
@@ -725,13 +741,20 @@ export function calculateDamageFromEvaluation(
         ...take("damage-taken-reduction"),
       ],
     },
-    stunDamage: {
-      ...damage.stunDamage,
-      targetStunDamageMultiplierAdjustments: [
-        ...damage.stunDamage.targetStunDamageMultiplierAdjustments,
-        ...take("stun-damage-adjustment"),
-      ],
-    },
+    stunDamage:
+      replacement === undefined
+        ? {
+            ...damage.stunDamage,
+            targetStunDamageMultiplierAdjustments: [
+              ...damage.stunDamage.targetStunDamageMultiplierAdjustments,
+              ...take("stun-damage-adjustment"),
+            ],
+          }
+        : {
+            isTargetStunned: damage.stunDamage.isTargetStunned,
+            targetBaseStunDamageMultiplier: replacement.value.value,
+            targetStunDamageMultiplierAdjustments: [],
+          },
   }
   const defense =
     damage.kind === "sheer"

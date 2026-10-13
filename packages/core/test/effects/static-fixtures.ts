@@ -19,11 +19,20 @@ export const general = (baseValue: number): GeneralStatInput => ({
   finalFixed: [],
 })
 
+export function rule<O extends ContributionOperation>(
+  name: string,
+  operation: O,
+  when?: Condition<"contribution">,
+): Extract<ContributionRule, { readonly scope: "hit" }> & {
+  readonly operation: O
+}
 export function rule(
   name: string,
   operation: ContributionOperation,
   when: Condition<"contribution"> = always,
-): Extract<ContributionRule, { readonly scope: "hit" }> {
+): Omit<Extract<ContributionRule, { readonly scope: "hit" }>, "operation"> & {
+  readonly operation: ContributionOperation
+} {
   return {
     kind: "contribution",
     effectId: `environment:static:${name}`,
@@ -47,7 +56,7 @@ export function rule(
     beneficiary: { kind: "holder" },
     when,
     operation,
-  }
+  } as const
 }
 
 export function definitions(effects: RuleSet["effects"]): RuleSet {

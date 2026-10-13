@@ -331,7 +331,16 @@ agent 来源绑定支持可选的 `potentialLevel`（整数域 0—6），含义
 提供的 `additionalAbilityActive`；core 用该事实重新计算期望的 `skillTargetIds` 与 `skillTags`，再与解析结果
 严格比较，缺失、类型错误、多余事实或身份不匹配都返回 `CONTEXT_MISMATCH`，不借由放宽数组比较掩盖错误。
 
-### 声明式同队受益者选择
+### 激活上下文与同队受益者选择
+
+目录与完整动作的每个 selection 都可携带 `trigger?: TriggerContext`，原样透传至
+低层 supplied 选择；不会按当前目标或时刻补造入场事件。`snapshots` 和 `atSeconds`
+仍由调用方提供，trigger 与同队受益者声明互相独立。叶瞬光帷幕选择要求入场敌人
+`trigger.actorId`、`activationSnapshotId` 及绑定级 `veilVulnerabilityBonusAtEntry`
+比例输入；使用 `staticSourceBindingId(holderId, "agent", "1431")` 构造输入绑定。
+0 层关闭无需这组事实；低层 `StaticEffectSelection` 仍只接受正层数，关闭时省略选择。
+条件计算与尚未验证的换算见[帷幕登记](../data/zzz-hp-static-effects.md#修订-32叶瞬光帷幕易伤)，
+结果在 `segments[].damage.evaluation.contributions` 中以具名 `replace` 来源报告。
 
 选项选择支持可选的 `beneficiaryActorId`，只作用于声明 `declaredTeammateBeneficiary` 的目录选项
 （如莱特影画 4 的“仅当前前场角色”条款）：受益者是持有者同队的另一名实体，由调用方以该字段显式声明

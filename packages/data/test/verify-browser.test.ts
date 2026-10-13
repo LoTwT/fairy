@@ -1,3 +1,4 @@
+import { veilConsumerSource } from "./fixtures/veil-consumer.ts"
 import {
   mkdirSync,
   mkdtempSync,
@@ -113,6 +114,8 @@ it("consumes the offline-installed package in real Vite development and producti
       join(consumerDirectory, "main.js"),
       `import * as api from "@randomplay/data"
 globalThis.fairy = api
+${veilConsumerSource}
+globalThis.fairyYeVeil = async () => verifyVeilConsumer(api, (await import("@randomplay/core")).calculateStaticActionDamage)
 globalThis.fairyDirectAttributes = () => import("@randomplay/data/definitions/attributes/agents/1311.json")
 globalThis.fairyDirectActions = () => import("@randomplay/data/definitions/skills/agents/1031.json")
 globalThis.fairyStatic = async () => {
@@ -995,6 +998,27 @@ function defineScenarios(counts: {
             "definitions/attributes/drive-disc-affixes.json",
             "definitions/effects/static.json",
             "definitions/effects/static-catalog.json",
+          ],
+        },
+        {
+          name: "yeshunguang-veil-entry-replacement",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyYeVeil(),
+            )
+            expect(result).toMatchObject({
+              active: 2.375,
+              moved: 2.375,
+              zero: 1,
+              missing: false,
+            })
+            expect(result.ordinary).toBeCloseTo(1.95)
+          },
+          sources: [
+            "definitions/attributes/agents/1431.json",
+            "definitions/skills/agents/1431.json",
+            "definitions/attributes/agents/1141.json",
+            "definitions/skills/agents/1141.json",
           ],
         },
         {

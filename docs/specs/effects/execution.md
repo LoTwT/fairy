@@ -304,6 +304,40 @@
 
 具体数值公式、裁剪和错误行为引用 [core 规范](../core/index.md)，此处只规定落点。效果求值校验通过也不表示已经完成整条伤害公式计算。
 
+### 本命中失衡乘区替代
+
+`stun-damage-replacement` 仅用于 `scope: hit`、`supplied` 贡献。`bonus` 和
+`maximumBonus` 都是贡献阶段 `ratio` 表达式，分别要求有限非负、有限且在 `[0,2]`。
+非法字面量、错误单位、未知字段在定义校验拒绝，依赖输入的越界值在实际求值拒绝。
+本操作的条件计算为 `1 + min(bonus, maximumBonus)`，输出
+`{kind: "hit", field: "stunDamageMultiplier", hitId}`、`operator: "replace"`、
+`Quantity<"multiplier">`，并保留完整来源与配置修改归因。它不接受 `uniqueness`、
+输出数值修改或贡献阶段参数修改；配置阶段参数修改仍可使用，结果仍须满足值域。
+具名数据的输入语义及未验证的游戏换算见[叶瞬光帷幕登记](../data/zzz-hp-static-effects.md#修订-32叶瞬光帷幕易伤)。
+
+实际适用层必须携带 `trigger`；`trigger.actorId` 表示捕获敌人，
+`activationSnapshotId` 引用入场快照。快照时点须等于层 `startedAt`，且不晚于求值；
+历史和当前 world 都必须观察到持有者及该敌人，两者为敌对 actor。本次命中必须由
+持有者攻击该敌人，种类为 `regular` 或 `sharpen`、来源为 `direct`。每个伤害项按
+`item.statSource → hit.attributeSources[item.stat] → hit.actorId` 解析的缩放来源
+都须是持有者当前属性，允许多项，不能混入其他角色或保存的属性快照。
+快照只验证捕获上下文，不存储或核实输入比例，也不检测跨独立请求换数。
+
+先按有效来源、配置、实例/层、受益者及真实 `when` 确定候选；超过一个实际适用层
+即报 `CONTEXT_MISMATCH`，在读取任一数值前判定，包括相同值、同一来源的多个实例。
+关闭、过期或条件不成立的层不形成冲突。同世界其他受益者的普通命中不受影响。
+
+替代生效时，普通 `stun-damage-adjustment` 的来源及条件依赖仍需成立，但其输出
+表达式、输出修改和按值唯一性不再求值或报告为已消费。目录仅延迟可证明由这些
+被丢弃输出独占的输入要求，并以本次真实求值确认豁免；其他通道、真实条件、独立
+声明前提、显式额外属性查询仍须提供事实。已提供的非法输入不被豁免。
+`panel` 与 `contributions` 查询不消费命中替代，也不删除普通实体贡献。
+
+静态适配以最终值作为该次 `stunDamageFactor` 的基础，普通调整数组为空，保留原
+`isTargetStunned`；结果 `[1,3]` 位于两状态合法区间内。关闭后恢复普通基础和加数。
+原始基线仍须合法（包括非负基础、有限数组项）；被丢弃的有限加数不求和，避免无关
+溢出。普通失衡 helper 的定义与状态钳制不改变，暴击、增伤、抗性等其他乘区独立。
+
 ### 来源保证必暴
 
 `operation: { kind: "guaranteed-critical", itemId }` 只表达来源保证**最终暴击概率为 1**。定义仅允许 `scope: hit` 和精确非空的单个 `itemId`，不接受任意概率、数值表达式、stat 或运算符。它没有可数值修改的输出：配置/贡献阶段的 output 修改和没有输出表达式可作用的贡献阶段 parameter 修改均报 `INVALID_MODIFICATION`；配置参数仍可供原 `when` 使用。多层不增加概率，唯一性选择沿用原来源策略，固定输出值为 1。

@@ -183,7 +183,7 @@ describe("Grace M6 frozen note-only clause and precise scale compilation", () =>
     expect(supplements).toHaveLength(2)
     const result = convert()
     const before = convertSource(source(), functions, [], [])
-    expect(result.definitions.revision).toBe("31")
+    expect(result.definitions.revision).toBe("32")
     for (const rule of before.definitions.effects)
       expect(
         result.definitions.effects.find((e) => e.effectId === rule.effectId),
@@ -256,7 +256,7 @@ describe("Grace M6 frozen note-only clause and precise scale compilation", () =>
             ].includes(name)
               ? "Normalization generated unaccounted source effects at /agents/0/mindscapeBuffs/6"
               : representation === "raw" && name === "unknown stat"
-                ? "Unregistered stat at /agents/0/mindscapeBuffs/6/effectBlocks/0/effects/0: unknownFutureStat"
+                ? "Supplement nanoka:agents:grace:m6-special-grenades coexisting clause drift"
                 : /anchor|clause|re-review/
           expect(() => convert(data, normalization)).toThrow(expected)
         },

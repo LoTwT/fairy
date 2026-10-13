@@ -497,6 +497,14 @@ export type ContributionOperation =
   | StatOperation
   | FactorOperation
   | {
+      /** 声明的入场帷幕比例替代本命中的普通失衡乘区；不推算游戏换算。 */
+      readonly kind: "stun-damage-replacement"
+      /** 调用方已确定的入场比例，有限非负；85% 写 0.85。 */
+      readonly bonus: NumericExpression<"ratio", "contribution">
+      /** 有限 [0,2]；本次最终乘数为 1 + min(bonus, maximumBonus)。 */
+      readonly maximumBonus: NumericExpression<"ratio", "contribution">
+    }
+  | {
       /** 实际适用时保证唯一 regular/direct 独立项的最终暴击概率为 1。 */
       readonly kind: "guaranteed-critical"
       readonly itemId: string
@@ -612,10 +620,30 @@ export type ContributionRule = RuleBase & {
         readonly scope: "entity"
         readonly operation: Exclude<
           ContributionOperation,
-          { readonly kind: "hit-adjustment" | "guaranteed-critical" }
+          {
+            readonly kind:
+              | "hit-adjustment"
+              | "guaranteed-critical"
+              | "stun-damage-replacement"
+          }
         >
       }
-    | { readonly scope: "hit"; readonly operation: ContributionOperation }
+    | {
+        readonly scope: "hit"
+        readonly operation: Exclude<
+          ContributionOperation,
+          { readonly kind: "stun-damage-replacement" }
+        >
+      }
+    | {
+        readonly scope: "hit"
+        readonly operation: Extract<
+          ContributionOperation,
+          { readonly kind: "stun-damage-replacement" }
+        >
+        readonly uniqueness?: never
+        readonly activation: Extract<Activation, { readonly kind: "supplied" }>
+      }
   )
 
 export type InstantOperation =

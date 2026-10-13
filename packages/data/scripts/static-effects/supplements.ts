@@ -5399,7 +5399,222 @@ const graceMindscape6Grenades = (enhanced: boolean): Supplement => {
   }
 }
 
+/** 入场比例由调用方声明；中英 based-on 文本未给出普通总乘数到比例的换算。 */
+const yeshunguangVeilVulnerability: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:agents:yeshunguang:veil-vulnerability",
+  source:
+    "nanoka-integrated@3.2 agents/1431 /passive/level/1431501—1431507/desc/0 + /talent/4/desc",
+  catalogEntityId: "agents:yeshunguang",
+  optionId: "nanoka:agents:yeshunguang:veil-vulnerability",
+  supportedRanks: "核心 1—7；影画 0—6；层数 0—1",
+  computationTarget:
+    "declared entry veil bonus replaces this hit's ordinary stun damage factor",
+  clauseContextGuard: [
+    {
+      rankKind: "mindscape",
+      rank: 0,
+      stats: ["staggerVulnerable"],
+      anchorBlocks: [
+        {
+          blockId: "blk-legacy",
+          frozenName: "核心被动：照破无明",
+          frozenEnabledDefault: true,
+          frozenNote:
+            "进入战场时，获得[合道]效果，暴击率提升30%，造成的伤害提升25%。",
+        },
+      ],
+      coexistingRecords: [
+        {
+          blockId: "blk-legacy",
+          raw: {
+            id: "legacy-self-critRate",
+            origin: "核心被动",
+            scope: "general",
+            applyTarget: "self",
+            applySituation: "global",
+            applyProfession: null,
+            teamProfession: null,
+            teamProfessionValues: null,
+            teamProfessionMinCount: null,
+            skillSubcategoryId: null,
+            elementFilter: "all",
+            kind: "fixed",
+            stat: "critRate",
+            value: 30,
+            stackable: false,
+            maxStacks: 1,
+            valuePerStack: 0,
+            defaultStacks: 1,
+            enabledDefault: true,
+            note: "",
+          },
+          normalized: {
+            id: "legacy-self-critRate",
+            origin: "核心被动",
+            scope: "general",
+            applyTarget: "self",
+            applySituation: "global",
+            applyProfession: null,
+            teamProfession: null,
+            teamProfessionValues: null,
+            teamProfessionMinCount: null,
+            skillSubcategoryId: null,
+            elementFilter: "all",
+            kind: "fixed",
+            stat: "critRate",
+            value: 30,
+            stackable: false,
+            maxStacks: 1,
+            valuePerStack: 0,
+            defaultStacks: 1,
+            enabledDefault: true,
+            note: "",
+          },
+        },
+        {
+          blockId: "blk-legacy",
+          raw: {
+            id: "legacy-self-dmgBonus",
+            origin: "核心被动",
+            scope: "general",
+            applyTarget: "self",
+            applySituation: "global",
+            applyProfession: null,
+            teamProfession: null,
+            teamProfessionValues: null,
+            teamProfessionMinCount: null,
+            skillSubcategoryId: null,
+            elementFilter: "all",
+            kind: "fixed",
+            stat: "dmgBonus",
+            value: 25,
+            stackable: false,
+            maxStacks: 1,
+            valuePerStack: 0,
+            defaultStacks: 1,
+            appliesToAnomaly: true,
+            enabledDefault: true,
+            note: "进入战场时，获得[合道]效果，暴击率提升30%，造成的伤害提升25%。",
+          },
+          normalized: {
+            id: "legacy-self-dmgBonus",
+            origin: "核心被动",
+            scope: "general",
+            applyTarget: "self",
+            applySituation: "global",
+            applyProfession: null,
+            teamProfession: null,
+            teamProfessionValues: null,
+            teamProfessionMinCount: null,
+            skillSubcategoryId: null,
+            elementFilter: "all",
+            kind: "fixed",
+            stat: "dmgBonus",
+            value: 25,
+            stackable: false,
+            maxStacks: 1,
+            valuePerStack: 0,
+            defaultStacks: 1,
+            appliesToAnomaly: true,
+            enabledDefault: true,
+            note: "进入战场时，获得[合道]效果，暴击率提升30%，造成的伤害提升25%。",
+          },
+        },
+      ],
+    },
+    {
+      rankKind: "mindscape",
+      rank: 4,
+      stats: ["staggerVulnerable"],
+      anchorBlocks: [
+        {
+          blockId: "blk-ms33yyc3-xr2q7r",
+          frozenName: "影画4",
+          frozenEnabledDefault: true,
+          frozenNote:
+            "进入战场时，获得1000点喧响值，在勘域模式中此效果180秒内最多触发一次；[以太帷幕·决裁]提供的帷幕易伤加成上限提升至200%。",
+        },
+      ],
+      coexistingRecords: [],
+    },
+  ],
+  evidence: (
+    [
+      [
+        "zh",
+        "8eeb89663329e6c021692386def9f86e19e01da5560b3b2e4b3720649cd77cad",
+      ],
+      [
+        "en",
+        "f97dddc1f6ba8661ba3f4564e1aec42afb1b20eb93d957d62fa805e1d5d6f630",
+      ],
+    ] as const
+  ).flatMap(([language, sha256]) => [
+    ...[1, 2, 3, 4, 5, 6, 7].map((rank) => ({
+      path: `agents/1431/details.${language}.json`,
+      pointer: `/passive/level/${1431500 + rank}/desc/0`,
+      rank,
+      sha256,
+    })),
+    {
+      path: `agents/1431/details.${language}.json`,
+      pointer: "/talent/4/desc",
+      sha256,
+    },
+  ]),
+  verification:
+    "Nanoka 3.2 核心七档中英文描述均规定敌人进入以太帷幕·决裁时，基于当时失衡易伤施加帷幕易伤；叶瞬光招式改算帷幕易伤而不计算普通失衡易伤，加成上限110%；影画4将上限提高至200%。固定 rank0 只编码合道暴率30%/增伤25%，note不含帷幕公式；rank4是真实note-only块，冻结全文不表示实施喧响或180秒条款。中英“基于/based on”未证明普通失衡总乘数S到比例B的换算。本项目采用显式条件输入：调用方已确定的入场帷幕比例B（ratio，85%填0.85，有限非负、无默认），本命中最终失衡乘数为1+min(B,cap)，影画0—3 cap=1.1、4—6 cap=2，核心1—7相同；不从S、S−1或当前状态推算。B=0仍有效替代为1，0层才关闭。trigger.actorId是捕获敌人，activationSnapshotId给出入场时点与双方敌对观察，须匹配当前holder直伤目标；B与该事件的真实性由调用方负责，引擎不从快照核对B、不储存或跨请求冻结B。只支持holder-current缩放的regular/sharpen direct命中，不额外生成伤害项，不实施时间线。当前正式35个动作中32个伤害动作均解析为regular、3个为daze-only；分类保持原样，显式sharpen支持不证明凛刃动作映射已核实或游戏实测。普通失衡基线和队友加数被替代，其他乘区与真实when依赖保留；重复有效替代拒绝，来源单独归因。原合道及影画选项独立保留。",
+  rule: {
+    effectId: "agent:1431:nanoka:veil-vulnerability:mindscape:0",
+    identity: { kind: "agent", entityId: "1431" },
+    section: "核心被动：照破无明（帷幕易伤）",
+    config: { kind: "constant", value: true },
+    parameters: {
+      maximumVeilBonus: {
+        kind: "by-rank",
+        rank: "mindscapeRank",
+        unit: "ratio",
+        values: { 0: 1.1, 1: 1.1, 2: 1.1, 3: 1.1, 4: 2, 5: 2, 6: 2 },
+      },
+    },
+    scope: "hit",
+    when: { kind: "constant", value: true },
+    operation: {
+      kind: "stun-damage-replacement",
+      bonus: {
+        kind: "input",
+        unit: "ratio",
+        name: "veilVulnerabilityBonusAtEntry",
+      },
+      maximumBonus: {
+        kind: "parameter",
+        unit: "ratio",
+        name: "maximumVeilBonus",
+      },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+    inputs: [
+      {
+        name: "veilVulnerabilityBonusAtEntry",
+        unit: "ratio",
+        description:
+          "调用方已确定的本次入场帷幕比例B（85%填0.85，有限非负、无默认）；普通失衡总乘数S到B的换算待证，不由本输入推算。",
+      },
+    ],
+    applicability: {},
+    conditionDescription:
+      "敌人本次进入以太帷幕·决裁后叶瞬光本人命中；显式提供入场敌人trigger、双方敌对快照及已确定比例B（85%=0.85）。条件模型1+min(B,影画0—3:1.1/4—6:2)替代普通失衡乘区，核心1—7相同；S→B换算待证。B=0仍替代，0层关闭；只结算本人当前属性regular/sharpen直伤，新入场须成组换事件、快照与B，历史真实性和状态时长由调用方负责。",
+    name: "以太帷幕·决裁 · 帷幕易伤（声明入场比例）",
+    target: "self",
+  },
+}
+
 export const SUPPLEMENTS: readonly Supplement[] = [
+  yeshunguangVeilVulnerability,
   graceMindscape6Grenades(false),
   graceMindscape6Grenades(true),
   evelynMindscape6LunaluxGarroteFollowUp,
