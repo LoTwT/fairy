@@ -47,6 +47,7 @@ export interface SourceBlock {
   name: string
   note?: string
   effects: SourceEffect[]
+  enabledDefault?: boolean
 }
 export interface SourcePack {
   effectBlocks?: SourceBlock[]

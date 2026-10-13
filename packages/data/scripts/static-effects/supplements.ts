@@ -23,11 +23,11 @@ import type {
  */
 
 /**
- * 音擎共存机器记录的冻结形状：与来源 SourceEffect 同形的可执行字段集
+ * 共存机器记录的冻结形状：与来源 SourceEffect 同形的可执行字段集
  * （守卫逐字段核对 raw 与 normalized 两份表示；字段缺省按登记原样比较，
  * 不做空白宽松归一）。
  */
-export interface WengineRecordShape {
+export interface SourceRecordShape {
   readonly id: string
   readonly origin?: string
   readonly scope: string
@@ -61,8 +61,8 @@ export interface WengineRecordShape {
   readonly note?: string
 }
 
-/** 冻结形状逐字段核对的权威字段清单（与 WengineRecordShape 一一对应）。 */
-export const WENGINE_RECORD_SHAPE_FIELDS: readonly string[] = Object.freeze([
+/** 冻结形状逐字段核对的权威字段清单（与 SourceRecordShape 一一对应）。 */
+export const SOURCE_RECORD_SHAPE_FIELDS: readonly string[] = Object.freeze([
   "id",
   "origin",
   "scope",
@@ -212,6 +212,18 @@ export interface ClauseContextGuardEntry {
     readonly blockId: string
     /** 冻结的完整原始 note（取自已固定 fac62407 的真实块全文）。 */
     readonly frozenNote: string
+    readonly frozenName?: string
+    readonly frozenEnabledDefault?: boolean
+  }[]
+  /**
+   * 该位置完整的既有机器记录集合。登记时同时冻结锚块集合及每条记录的
+   * raw/normalized 执行字段，任一新增、删除、迁位、重复或归一化丢失均拒绝。
+   * 用于简 M6：CR/CD 与待补附伤共用真实块，不能把整个位置当成空 pack。
+   */
+  readonly coexistingRecords?: readonly {
+    readonly blockId: string
+    readonly raw: SourceRecordShape
+    readonly normalized: SourceRecordShape
   }[]
   /**
    * 登记该位置当前真实为空（无任何块/记录）：出现任何新编码（无论
@@ -314,7 +326,7 @@ export interface SupplementBase {
      * 完整来源身份（实体、精炼档、锚块、effect ID）在五个精炼档内核对——
      * 锚块内必须存在该记录，且该档恰好存在一条同 ID 的来源记录，其 raw
      * 与 normalized 表示都存活并逐字段等于登记的冻结形状（见
-     * WENGINE_RECORD_SHAPE_FIELDS；字段省略按登记原样核对，不从待验输入
+     * SOURCE_RECORD_SHAPE_FIELDS；字段省略按登记原样核对，不从待验输入
      * 推导期望）。锚块缺失、记录缺失或重复、normalized 缺失、任一表示的
      * 任一字段漂移都拒绝生成，不静默降级。记录的可执行输出仍由正式转换
      * 和来源参考夹具逐位置锁定。
@@ -326,8 +338,8 @@ export interface SupplementBase {
        * 的真实固定源，两份表示在此记录上相同，如未来来源分化须重新登记）。
        */
       readonly tiers: readonly {
-        readonly raw: WengineRecordShape
-        readonly normalized: WengineRecordShape
+        readonly raw: SourceRecordShape
+        readonly normalized: SourceRecordShape
       }[]
     }[]
   }
@@ -4466,7 +4478,7 @@ const cannonRotorRefinementNotes = [
  * 比格气缸（批次 12）：受击后下一次攻击命中的一次额外防御力伤害。
  * 五档 600/690/780/870/960% 装备者防御力；中文“额外造成…伤害，且必定
  * 触发暴击”支持附伤命中必暴（英文主语歧义如实登记，不据其扩展），本批
- * 仅实现附伤范围：hit 作用域暴击率 +1.0 只随本独立目标参与求值，选项同
+ * 仅实现附伤范围：来源 guaranteed-critical 保证本独立项最终概率为 1，选项同
  * 时声明独占伤害项，启用时命中只能携带本独立项（混合请求被目录拒绝）。
  */
 const bigCylinderRetaliationDefenseDamage: Supplement = {
@@ -4517,7 +4529,7 @@ const bigCylinderRetaliationDefenseDamage: Supplement = {
     "86a2ce694134ea780dcfe2181938f1bc91dbe7af70a653cbc78fc994875c3201",
   ),
   verification:
-    "Nanoka 五档天赋逐档核实（w-engines/13112/details.zh.json 的 /talents/1—5/desc，英文文件同文核对：After being attacked, the next attack to hit an enemy will trigger a critical hit and deal 600%—960% of the equipper's DEF as additional DMG, triggerable once every 7.5s）：受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者 600/690/780/870/960% 防御力的伤害，且必定触发暴击，7.5 秒内最多触发一次。固定 ZZZ-HP 来源的五档精炼块只有 note、effects 为空，按补充来源在既有 w-engines:Big_Cylinder 实体新增选项。受击与下一次攻击命中是调用方显式声明的触发事实，7.5 秒冷却与次数上限不模拟，每次显式结算一次，倍率只经关联 hit-adjustment 贡献一次。“必定触发暴击”的归属：中文五档均为“额外造成…伤害，且必定触发暴击”，暴击分句紧随附伤、无独立主语，据此实现附伤独立命中必暴；英文译文把主语读成下一次攻击、存在更宽读法，该歧义如实登记、不据其扩展——本批只实现附伤范围的必暴，不据此声称游戏中的触发招式本体不受影响，触发招式的精确影响范围未经游戏实测，取得证据时应先登记来源再调整。实现为 hit 作用域 criticalRate direct +1.0，只随本独立目标参与求值；因该命中级贡献会卷入同一请求的全部伤害项，选项同时声明独占伤害项（exclusiveDamageItem）：启用时命中只能携带本独立项，混合请求被目录明确拒绝，普通命中的暴击率不受影响。附伤元素两处来源（中英文文本、块 note、data.json 面板字段）均未标注：规则不按元素筛选，独立结算的 hit.element 由调用方按实际游戏行为显式声明，不凭装备者元素、触发招式类别或音擎名称猜默认值。附伤以 regular 直伤独立项结算（固定来源同构条款直接倍率机器编码 directDmgMult 的直伤去向；本项目独立结算契约沿爪印先例）：伤害项读取绑定持有者当前防御力（holder-current，无快照），要求零初始倍率与 uncategorized 分类——独立目标身份、零初始倍率、逐次声明与 uncategorized 分类是本项目采用的独立结算契约，不是原始游戏证据。首句“受到的伤害降低7.5—12%”是装备者承伤方向，固定来源无机器记录，不属于本选项，也不折算为目标易伤或自身减伤。适用职业防护由目录绑定适用性校验（不适配职业零贡献）。",
+    "Nanoka 五档天赋逐档核实（w-engines/13112/details.zh.json 的 /talents/1—5/desc，英文文件同文核对：After being attacked, the next attack to hit an enemy will trigger a critical hit and deal 600%—960% of the equipper's DEF as additional DMG, triggerable once every 7.5s）：受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者 600/690/780/870/960% 防御力的伤害，且必定触发暴击，7.5 秒内最多触发一次。固定 ZZZ-HP 来源的五档精炼块只有 note、effects 为空，按补充来源在既有 w-engines:Big_Cylinder 实体新增选项。受击与下一次攻击命中是调用方显式声明的触发事实，7.5 秒冷却与次数上限不模拟，每次显式结算一次，倍率只经关联 hit-adjustment 贡献一次。“必定触发暴击”的归属：中文五档均为“额外造成…伤害，且必定触发暴击”，暴击分句紧随附伤、无独立主语，据此实现附伤独立命中必暴；英文译文把主语读成下一次攻击、存在更宽读法，该歧义如实登记、不据其扩展——本批只实现附伤范围的必暴，不据此声称游戏中的触发招式本体不受影响，触发招式的精确影响范围未经游戏实测，取得证据时应先登记来源再调整。实现为 hit 作用域 guaranteed-critical，仅在本具名独立项实际适用时保证最终暴击概率为 1，普通暴率及其加数不参与概率结算；显式 criticalRate 属性来源（含本人、他人及保存快照）或 declaredCriticalRate 不能与活动必暴并存。目录 exclusiveDamageItem 与 core 唯一 regular/direct 项边界共同拒绝混合请求，必暴不写通用面板。普通暴伤保留显式实体、保存快照和合法命中贡献，未指定来源才读取持有者当前普通暴伤；nonCritical 保留反事实分支，expected 等于 critical。附伤元素两处来源（中英文文本、块 note、data.json 面板字段）均未标注：规则不按元素筛选，独立结算的 hit.element 由调用方按实际游戏行为显式声明，不凭装备者元素、触发招式类别或音擎名称猜默认值。附伤以 regular 直伤独立项结算（固定来源同构条款直接倍率机器编码 directDmgMult 的直伤去向；本项目独立结算契约沿爪印先例）：伤害项读取绑定持有者当前防御力（holder-current，无快照），要求零初始倍率与 uncategorized 分类——独立目标身份、零初始倍率、逐次声明与 uncategorized 分类是本项目采用的独立结算契约，不是原始游戏证据。首句“受到的伤害降低7.5—12%”是装备者承伤方向，固定来源无机器记录，不属于本选项，也不折算为目标易伤或自身减伤。适用职业防护由目录绑定适用性校验（不适配职业零贡献）。",
   rule: {
     effectId: wengineSupplement("13112", "retaliation-defense-damage").effectId,
     identity: { kind: "w-engine", entityId: "13112" },
@@ -4573,10 +4585,8 @@ const bigCylinderRetaliationDefenseDamage: Supplement = {
         ],
       },
       operation: {
-        kind: "stat-adjustment",
-        stat: "criticalRate",
-        stage: "direct",
-        value: literal("ratio", 1),
+        kind: "guaranteed-critical",
+        itemId: "big-cylinder:retaliation",
       },
       maximumLayers: 1,
     },
@@ -4596,12 +4606,12 @@ const bigCylinderRetaliationDefenseDamage: Supplement = {
         requiredSkillCategory: "uncategorized",
       },
     ],
-    // 独占伤害项：该选项自带命中级必暴（hit 作用域暴击率 +1.0 会卷入同一
-    // 请求的全部伤害项），启用时命中只能携带本选项声明的唯一独立项；
+    // 独占伤害项：来源保证本具名项最终必暴，core 也验证唯一 regular/direct 项；
+    // 启用时命中只能携带本选项声明的唯一独立项；
     // 混合请求按 CONTEXT_MISMATCH 拒绝（目录入口能力，选择阶段强制）。
     exclusiveDamageItem: true,
     conditionDescription:
-      "受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者 600/690/780/870/960% 防御力的伤害（按精炼 1—5），该额外伤害必定暴击，7.5 秒内最多触发一次。本次附伤由调用方声明触发并显式结算：命中须只携带本独立项（独占结算，混合其他伤害项会被拒绝）、以 uncategorized 分类结算、读取装备者当前防御力（元素由调用方按实际结算声明，来源未标注）；7.5 秒冷却与触发检测不模拟。首句承伤降低不属于本选项。",
+      "受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者 600/690/780/870/960% 防御力的伤害（按精炼 1—5），该额外伤害由来源保证最终暴击概率为 1，不接受显式 criticalRate 来源或 declaredCriticalRate，普通暴伤保留既有来源契约；7.5 秒内最多触发一次。本次附伤由调用方声明触发并显式结算：命中须只携带本独立项（独占结算，混合其他伤害项会被拒绝）、以 uncategorized 分类结算、读取装备者当前防御力（元素由调用方按实际结算声明，来源未标注）；7.5 秒冷却与触发检测不模拟。首句承伤降低不属于本选项。",
     name: "万斤顶 · 受击附伤（独立结算）",
     target: "self",
   },
@@ -4640,7 +4650,7 @@ const cannonRotorCriticalHitBonusDamage: Supplement = {
         // raw 与 normalized 在该记录上逐字段相同（归一化不改写此记录），
         // 两份形状独立登记，未来来源分化须重新核对登记。
         tiers: ([7.5, 8.6, 9.7, 10.8, 12] as const).map((value) => {
-          const shape: WengineRecordShape = {
+          const shape: SourceRecordShape = {
             id: "legacy-self-inCombatAtkPercent",
             origin: "",
             scope: "general",
@@ -5027,6 +5037,248 @@ const miyabiFrostburnBreakDamage: Supplement = {
   },
 }
 
+/** 简 M6 同块的既有普通 CR/CD；raw 与固定来源归一化后的字段逐项一致。 */
+const janeMindscape6CoexistingRecords = [
+  { id: "legacy-self-critRate", stat: "critRate", value: 20 },
+  { id: "legacy-self-critDmg", stat: "critDmg", value: 40 },
+].map(({ id, stat, value }) => {
+  const shape: SourceRecordShape = {
+    id,
+    origin: "",
+    scope: "general",
+    applyTarget: "self",
+    applySituation: "global",
+    applyProfession: null,
+    teamProfession: null,
+    teamProfessionValues: null,
+    teamProfessionMinCount: null,
+    skillSubcategoryId: null,
+    elementFilter: "all",
+    kind: "fixed",
+    stat,
+    value,
+    stackable: false,
+    maxStacks: 1,
+    valuePerStack: 0,
+    defaultStacks: 1,
+    enabledDefault: true,
+    note: "",
+  }
+  return { blockId: "blk-legacy", raw: shape, normalized: { ...shape } }
+})
+
+const janeMindscape6ProficiencyDamage: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:agents:jane:m6-proficiency-damage",
+  source: "nanoka-integrated@3.2 agents/1261 /talent/6/desc",
+  catalogEntityId: "agents:jane",
+  optionId: "nanoka:agents:jane:m6-proficiency-damage",
+  supportedRanks: "影画 6；层数 0—1",
+  computationTarget: "catalog option on the mapped agent entity",
+  clauseContextGuard: {
+    rankKind: "mindscape",
+    rank: 6,
+    stats: directMultiplierSourceStats,
+    anchorBlocks: [
+      {
+        blockId: "blk-legacy",
+        frozenName: "影画6",
+        frozenEnabledDefault: true,
+        frozenNote:
+          "[狂热]状态下，简的暴击率提升20%，暴击伤害提升40%；\n\n（下面这条暂未补充）\n队伍中任意角色对敌人施加[强击]效果时，简将直接进入[狂热]状态，并使[狂热心流]回复至上限，此次[强击]伤害触发暴击时，将会对目标发动一次额外攻击，造成等同于简1600%异常精通的物理伤害。",
+      },
+    ],
+    coexistingRecords: janeMindscape6CoexistingRecords,
+  },
+  skillTarget: {
+    targetId: "jane-m6-proficiency-damage",
+    agentEntityId: "1261",
+    category: "uncategorized",
+    name: "简影画六精通附伤",
+  },
+  evidence: [
+    {
+      path: "agents/1261/details.zh.json",
+      pointer: "/talent/6/desc",
+      sha256:
+        "b69786037562711fda0389dc86940257a5df4504e100940781ce91a0311fa9ef",
+    },
+    {
+      path: "agents/1261/details.en.json",
+      pointer: "/talent/6/desc",
+      sha256:
+        "766e9864c4051ce8206a3e82e6b3f2124434063ac79f9a04557c99f2933ac689",
+    },
+  ],
+  verification:
+    "Nanoka 3.2 简影画 6 中英文 /talent/6/desc 均确认：队伍任意角色施加强击后，该次强击暴击时，简额外攻击一次，造成简自身 1600% 异常精通的物理伤害。固定 ZZZ-HP rank 6 的真实 blk-legacy 同时保留狂热状态的普通暴率 +20% / 普通暴伤 +40% 记录，note 明言附伤暂未补充；完整共存记录与块上下文分别核对 raw/normalized，不能把该位置登记为空，也不重复生成旧增益。触发强击已暴击由调用方声明，不等于新附伤必暴：本项目沿既有 declaredCriticalRate 条件计算契约，要求调用方显式给出新附伤的最终概率 r（有限 [0,1]、无默认值、替换最终概率）。普通实体暴率不能代替 r；普通暴伤使用既有显式来源及本命中合法暴伤贡献，未指定来源才读取简当前普通暴伤；不据此证明游戏中附伤能暴击或继承该暴伤。以 anomalyProficiency 点数 ×16 计算，一次赋值，不再乘攻击力或异常精通/100，不读异常掌控、触发队友或原异常虚拟代理人属性。holder-current、regular/direct、最终 uncategorized、具名目标、零初始倍率与独占一次结算是项目条件计算契约，并非来源对游戏分类或快照行为的证明；不借普通攻击、连携、追加攻击等分类增益，不自动追加到普通动作，不模拟狂热状态、强击判定或时间线。既有强击暴伤/异常增伤保持异常范围，与本 regular 附伤分离。",
+  rule: {
+    effectId: "agent:1261:nanoka:m6-proficiency-damage:mindscape:6",
+    identity: { kind: "agent", entityId: "1261" },
+    section: "「肮脏」技巧（精通附伤）",
+    config: mindscapeFrom(6),
+    parameters: { amount: { kind: "constant", unit: "multiplier", value: 16 } },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        { kind: "one-of", fact: "hit.damageKind", values: ["regular"] },
+        {
+          kind: "one-of",
+          fact: "hit.skillTag",
+          values: ["zzz-hp:skill:jane-m6-proficiency-damage"],
+        },
+        { kind: "one-of", fact: "hit.element", values: ["physical"] },
+      ],
+    },
+    operation: {
+      kind: "hit-adjustment",
+      field: "damageMultiplier",
+      operator: "add",
+      itemIds: ["jane:m6-proficiency-damage"],
+      value: { kind: "parameter", unit: "multiplier", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: { minimumMindscape: 6 },
+    inputs: [],
+    applicability: {},
+    exclusiveDamageItem: true,
+    damageItemRequirements: [
+      {
+        itemId: "jane:m6-proficiency-damage",
+        stat: "anomalyProficiency",
+        role: "base",
+        allowedModes: ["direct"],
+        source: "holder-current",
+        requiredDirectMultiplier: 0,
+        requiredSkillCategory: "uncategorized",
+        requiredCriticalRateDeclaration: true,
+      },
+    ],
+    conditionDescription:
+      "队伍角色施加的该次强击暴击后，声明简触发一次物理附伤（自身当前异常精通 ×16）。独占 uncategorized 独立项、零初始倍率；调用方必须显式声明新附伤最终暴击概率 hit.declaredCriticalRate，触发强击已暴击不代替此声明。普通暴伤沿既有来源与命中贡献，这是条件计算，不证明附伤的游戏暴击能力或暴伤继承。狂热 CR/CD 选项独立选择，不自动加入。",
+    name: "「肮脏」技巧 · 精通附伤（独立结算）",
+    target: "self",
+  },
+}
+
+const aliceMindscape6ProficiencyDamage: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:agents:alice:m6-proficiency-damage",
+  source: "nanoka-integrated@3.2 agents/1401 /talent/6/desc",
+  catalogEntityId: "agents:alice",
+  optionId: "nanoka:agents:alice:m6-proficiency-damage",
+  supportedRanks: "影画 6；层数 0—1",
+  computationTarget: "catalog option on the mapped agent entity",
+  clauseContextGuard: {
+    rankKind: "mindscape",
+    rank: 6,
+    stats: [],
+    expectsEmptyPack: true,
+  },
+  skillTarget: {
+    targetId: "alice-m6-proficiency-damage",
+    agentEntityId: "1401",
+    category: "uncategorized",
+    name: "爱丽丝影画六精通附伤",
+  },
+  evidence: [
+    {
+      path: "agents/1401/details.zh.json",
+      pointer: "/talent/6/desc",
+      sha256:
+        "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
+    },
+    {
+      path: "agents/1401/details.en.json",
+      pointer: "/talent/6/desc",
+      sha256:
+        "08eddd31bd56875c8c757156c28cf00493ec08267c9eb73b27f8f85583a827c8",
+    },
+  ],
+  verification:
+    "Nanoka 3.2 爱丽丝影画 6 中英文 /talent/6/desc 均确认：三段蓄力普通攻击或终结技使爱丽丝进入决胜状态，状态中队伍任意角色命中后，爱丽丝发动一次额外攻击，造成自身 3300% 异常精通的物理伤害，必定暴击。固定 ZZZ-HP rank 6 是真实空 pack，无 note 或机器记录，未来出现任何新块（含 note-only）或编码都需重新核对。一次事件读取绑定爱丽丝当前 anomalyProficiency 点数 ×33，不再乘攻击力或异常精通/100，不读异常掌控、触发队友或原异常虚拟代理人属性。必暴由具名附伤的 hit guaranteed-critical 来源规则保证最终概率为 1，与倍率规则同变体同步启闭，沿实际绑定、受益者、有效层与 when 判断。普通 CR 及其加数被替代，不因概率结算要求普通 CR 事实；其他真实表达式或条件的 CR 依赖仍保留。显式 criticalRate 属性来源（含本人、他人及保存快照）与 declaredCriticalRate 均不能与活动必暴共存。exclusiveDamageItem 和 core 唯一 regular/direct 项边界拒绝混合伤害项；来源必暴独立归因，不写入通用面板。普通 CD 保留显式实体、保存快照与合法命中贡献，未指定来源时才读爱丽丝当前普通暴伤；nonCritical 为反事实分支，expected 等于 critical。这一普通暴伤来源、holder-current、regular/direct、最终 uncategorized、具名目标、零初始倍率与独占一次结算是项目计算契约，不能当作游戏分类或快照实测。不把英文 follow up 描述直接映射成项目追加攻击标签，不借普通动作分类增益。调用方声明决胜状态内本次触发已发生；30 秒、1 秒触发间隔、最多 6 次及再次获得刷新只记边界，不模拟状态/时间线，不自动乘 6，不自动向普通动作追加；核心周期附伤与极性强击不由本选项计算。",
+  rule: {
+    effectId: "agent:1401:nanoka:m6-proficiency-damage:mindscape:6",
+    identity: { kind: "agent", entityId: "1401" },
+    section: "心中的百里香（精通附伤）",
+    config: mindscapeFrom(6),
+    parameters: { amount: { kind: "constant", unit: "multiplier", value: 33 } },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        { kind: "one-of", fact: "hit.damageKind", values: ["regular"] },
+        {
+          kind: "one-of",
+          fact: "hit.skillTag",
+          values: ["zzz-hp:skill:alice-m6-proficiency-damage"],
+        },
+        { kind: "one-of", fact: "hit.element", values: ["physical"] },
+      ],
+    },
+    operation: {
+      kind: "hit-adjustment",
+      field: "damageMultiplier",
+      operator: "add",
+      itemIds: ["alice:m6-proficiency-damage"],
+      value: { kind: "parameter", unit: "multiplier", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  additionalRules: [
+    {
+      effectId:
+        "agent:1401:nanoka:m6-proficiency-damage:mindscape:6:guaranteed-critical",
+      identity: { kind: "agent", entityId: "1401" },
+      section: "心中的百里香（精通附伤 · 必定暴击）",
+      config: mindscapeFrom(6),
+      parameters: {},
+      scope: "hit",
+      when: {
+        kind: "all",
+        conditions: [
+          { kind: "one-of", fact: "hit.damageKind", values: ["regular"] },
+          {
+            kind: "one-of",
+            fact: "hit.skillTag",
+            values: ["zzz-hp:skill:alice-m6-proficiency-damage"],
+          },
+          { kind: "one-of", fact: "hit.element", values: ["physical"] },
+        ],
+      },
+      operation: {
+        kind: "guaranteed-critical",
+        itemId: "alice:m6-proficiency-damage",
+      },
+      maximumLayers: 1,
+    },
+  ],
+  variant: {
+    configuration: { minimumMindscape: 6 },
+    inputs: [],
+    applicability: {},
+    exclusiveDamageItem: true,
+    damageItemRequirements: [
+      {
+        itemId: "alice:m6-proficiency-damage",
+        stat: "anomalyProficiency",
+        role: "base",
+        allowedModes: ["direct"],
+        source: "holder-current",
+        requiredDirectMultiplier: 0,
+        requiredSkillCategory: "uncategorized",
+      },
+    ],
+    conditionDescription:
+      "决胜状态内队伍角色命中后，声明爱丽丝触发一次物理必暴附伤（自身当前异常精通 ×33）。独占 uncategorized 独立项、零初始倍率；来源保证本次附伤最终暴击概率为 1，不接受显式 criticalRate 来源或 declaredCriticalRate。普通暴伤沿既有来源契约；30 秒状态、1 秒间隔、最多 6 次及刷新由调用方管理，本次不自动乘 6。核心周期附伤不属于本选项。",
+    name: "心中的百里香 · 精通必暴附伤（独立结算）",
+    target: "self",
+  },
+}
+
 export const SUPPLEMENTS: readonly Supplement[] = [
   evelynMindscape6LunaluxGarroteFollowUp,
   s0anbyMindscape6ElectromagneticVortex,
@@ -5079,4 +5331,6 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   cannonRotorCriticalHitBonusDamage,
   benBiggerMindscape2BlockCounterDefenseDamage,
   miyabiFrostburnBreakDamage,
+  janeMindscape6ProficiencyDamage,
+  aliceMindscape6ProficiencyDamage,
 ]

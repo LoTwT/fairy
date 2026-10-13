@@ -265,7 +265,7 @@
 
 `scope` 决定规则的适用性与可读上下文，输出地址表示实际消费位置：通用面板与实体贡献查询使用 `hitId: null`；命中查询的通用和局部贡献统一使用当前命中 ID。来源作用域可通过 `origin.effectId` 找回，不能靠输出的 `hitId` 反推定义作用域。逐命中属性只影响进攻方本次计算；注册面向特定敌人的减益时，必须有对应目标事实与生命周期，不能仅添加一个通道就假定所有敌人已被施加减益。
 
-命中暴击率使用 `scope: hit` 下的 `stat-adjustment / criticalRate / direct`，输出为 `{ kind: stat, stat: criticalRate, stage: direct, entityId: hit.actorId, hitId }`，与该命中消费的通用暴击率贡献共同归约和去重。输入与输出均不另设命中暴击率分支；`hit-adjustment` 处理倍率，输出地址为 `{ kind: hit, field: damageMultiplier, hitId }`，指定基础伤害项时另带 `itemId`。
+普通命中暴击率加数使用 `scope: hit` 下的 `stat-adjustment / criticalRate / direct`，输出为 `{ kind: stat, stat: criticalRate, stage: direct, entityId: hit.actorId, hitId }`，与该命中消费的通用暴击率贡献共同归约和去重；数值 +1 仍是加数，不代表来源必暴。`hit-adjustment` 处理倍率，输出地址为 `{ kind: hit, field: damageMultiplier, hitId }`，指定基础伤害项时另带 `itemId`。来源必暴使用下述独立的固定最终概率语义。
 
 | 输出                                 | core 或调用方输入                                                      | 数值方向                             |
 | ------------------------------------ | ---------------------------------------------------------------------- | ------------------------------------ |
@@ -304,6 +304,16 @@
 
 具体数值公式、裁剪和错误行为引用 [core 规范](../core/index.md)，此处只规定落点。效果求值校验通过也不表示已经完成整条伤害公式计算。
 
+### 来源保证必暴
+
+`operation: { kind: "guaranteed-critical", itemId }` 只表达来源保证**最终暴击概率为 1**。定义仅允许 `scope: hit` 和精确非空的单个 `itemId`，不接受任意概率、数值表达式、stat 或运算符。它没有可数值修改的输出：配置/贡献阶段的 output 修改和没有输出表达式可作用的贡献阶段 parameter 修改均报 `INVALID_MODIFICATION`；配置参数仍可供原 `when` 使用。多层不增加概率，唯一性选择沿用原来源策略，固定输出值为 1。
+
+求值针对当前 actor、hit 和实际存在的具名项，按有效绑定、实例/层、受益者、原 `when` 与唯一性选择判定。未选、0 层、条件不成立、非本受益者或 item 不匹配时不产生保证，也不额外限制普通概率/声明路径。必要 when 事实缺失和真实属性依赖仍按既有结构化错误处理。实际适用时，公共 `evaluateEffects` 和静态 core 入口均要求本次只有该唯一项、`damageKind: regular`、`origin.kind: direct`；混合项或非 regular/direct 报 `CONTEXT_MISMATCH`，缺少伤害类别事实报 `MISSING_FACT`。目录的独占、培养、分类、holder-current 和零初始倍率要求继续生效。
+
+活动必暴与任何显式 `hit.attributeSources.criticalRate`（包括本人 current、他人及有效快照）或低层 `declaredCriticalRate`（包括 1）冲突，报 `CONTEXT_MISMATCH`。目录无声明 owner 的既有 `INVALID_INPUT` 前置拒绝保留；字段结构错误仍可先被格式校验拒绝。普通实体/hit CR 增减不影响最终 1，概率结算不读取被替代的普通 CR，也不求其输出表达式/输出修改或索取相关事实。其他实际表达式、when 或调用方明确查询的属性仍可读取普通 CR，缺项和循环依赖不被隐藏。
+
+结果贡献使用地址 `{ kind: hit, field: criticalRate, hitId, itemId }`、`operator: guarantee`、固定 `{ unit: ratio, value: 1 }`，保留 effect/binding/instance/layer/beneficiary 归因。不伪造 `current CR=1` 的属性观察，不将被替代的普通 CR 贡献报告为本次概率消费，不更新世界或通用面板。普通暴伤默认、显式实体、保存快照和合法命中暴伤贡献保持；未指定 CD 来源才读取命中角色当前普通 CD，缺必要 CD 事实仍失败。`nonCritical` 保留反事实分支，`critical` 使用原 CD 模型，`expected === critical`。
+
 ### 静态伤害计算
 
 `calculateStaticDamage` 接收规则、来源绑定、显式效果选择、原始世界属性、命中与 core 所需基线，返回贡献、属性、非暴击/暴击伤害、期望及各乘区。它建立独立 supplied 状态，再沿用准备、状态导入与命中求值，不调用事件推进。每次改变培养配置或选择均重新调用；输入不变，重复调用不会累计贡献。
@@ -311,14 +321,14 @@
 - `continuous` 仍由配置决定；`selections` 只选择 `supplied` 效果，未选择即关闭。选中未知来源、不适用配置或其他激活类型时报错。准备阶段只为本次选择的 supplied 规则、continuous 规则及相关修改选参；普通 `prepareEffects` 仍准备全部符合配置的规则。
 - 层数和互斥组由定义校验，目标由规则的选择器与实际队伍推导。装备适用性由调用方给出 `eligible`，引擎不根据实体 ID 猜测阵营或职业。不能把预设默认值当作本次有效状态。
 - `atSeconds` 省略为静态时点 0，快照省略为空；需要历史读取时仍须提供真实快照或规则声明的显式 `input`。触发角色来自可选 `selection.trigger`，静态入口不生成战斗历史。
-- 基线数据不能包含本次规则再次提供的贡献。敌人抗性、防御、失衡倍率等必须明确给出；无增益的数组显式写 `[]`。普通/贯穿伤害的暴伤、锐化伤害的锐暴伤害以及有防御区公式的穿透率、异常公式的异常精通由本次命中求值读取。低层命中原有的暴击率读取保持兼容：未声明最终暴击概率的静态命中仍须提供该属性；声明后是否仍需普通暴击率只取决于其他真实依赖（普通暴击伤害的条件分支事实要求始终保持）。
+- 基线数据不能包含本次规则再次提供的贡献。敌人抗性、防御、失衡倍率等必须明确给出；无增益的数组显式写 `[]`。普通/贯穿伤害的暴伤、锐化伤害的锐暴伤害以及有防御区公式的穿透率、异常公式的异常精通由本次命中求值读取。低层命中原有的暴击率读取保持兼容：未声明最终暴击概率且没有[活动来源必暴](#来源保证必暴)的静态命中仍须提供该属性；声明概率或来源必暴替代普通概率读取后，是否仍需普通暴击率只取决于其他真实依赖（普通暴击伤害的条件分支事实要求始终保持）。
 - `regular` 使用普通伤害，`sheer` 使用贯穿伤害；`anomaly/disorder/vortex/anomaly-settlement` 使用当前 core 异常伤害公式，基础倍率由调用方先按对应机制确认；`luminize` 使用耀光公式。异常/耀光的 `damageBonus` 可以是尚未结算的贡献数组，也可以是 `{ settledMultiplier }`。后者保留给定快照或特殊固定乘区，不再叠加当前 `damage-bonus`，相关贡献列为本次不适用。跨角色虚拟快照可先由 core 的 `calculateVirtualAgentSnapshot` 构造，再明确提供本次使用的属性与已结算增伤。
 - 普通及异常暴击率只在计算期望时裁剪至 `[0, 1]`，暴伤裁剪仍由各 core 公式负责。耀光没有暴击分支，返回 `critical: null`。计算过程不做显示舍入。
 - 已登记但不适用于该伤害公式的贡献进入 `notApplicableContributions`，例如能量生成或贯穿伤害中的减防；未登记通道在规则校验时直接拒绝。原始基线非法或 core 计算失败返回 `INVALID_INPUT`，不输出半组伤害结果。
 
 每项可通过 `statSource` 指定属性来源，其他乘区属性通过 `hit.attributeSources` 指定。来源没有 snapshotId 时读取该实体的当前属性；指定 snapshotId 时只读取已保存的 current 属性项，缺失报 `MISSING_SNAPSHOT`。结果属性携带 snapshotId 区分同一实体的历史和当前值；不能以当前世界兜底。
 
-`hit.declaredCriticalRate` 是静态命中可选的**声明最终暴击概率**：由调用方显式声明本次结算命中的最终暴击 r（`expected = (1−r)×nonCritical + r×critical`），替换语义而非加数——不读取命中角色面板普通暴击率，也不把声明写回世界属性、伪造成 current 属性观察或一条贡献。字段缺省时完全沿用既有路径（读面板暴击率并消费命中作用域暴击率调整），无默认值。
+`hit.declaredCriticalRate` 是静态命中可选的**声明最终暴击概率**：由调用方显式声明本次结算命中的最终暴击 r（`expected = (1−r)×nonCritical + r×critical`），替换语义而非加数——不读取命中角色面板普通暴击率，也不把声明写回世界属性、伪造成 current 属性观察或一条贡献。字段缺省且没有[活动来源必暴](#来源保证必暴)时沿用普通路径（读面板暴击率并消费命中作用域暴击率调整），声明无默认值。
 
 - 取值必须是有限数且 `0 ≤ r ≤ 1`（NaN/±Infinity/负数/>1/非数值报 `INVALID_INPUT`，指向 `/hit/declaredCriticalRate`，不静默钳制非法声明）；仅支持 `regular` 且恰好一个伤害项的结算，该项实际缩放属性须解析为当前命中角色的当前属性（`item.statSource` → `hit.attributeSources[item.stat]` → 缺省命中角色；借另一实体或保存快照拒绝）；与 `hit.attributeSources.criticalRate` 并存是两种概率来源，按 `CONTEXT_MISMATCH` 拒绝。伤害种类只在可安全判定（受支持字符串）时参与该适用范围检查；damage 形状非法（缺失、null 等）保持 `/damage` 的结构化失败返回，不因声明分支读取伤害种类而抛异常或追加声明错误。
 - 与**本命中实际生效**的命中作用域 `criticalRate/direct` 调整互斥（按冲突 `CONTEXT_MISMATCH` 拒绝并指明 effectId/bindingId）：判断只看该消费地址上是否存在适用的 hit 作用域层——复用与普通读取相同的激活/有效层、受益者与 when 语义（关闭的层、其他受益者/绑定或条件不成立的层不构成冲突，输出字面 0 的适用层同样冲突），但不为该判定求值被替换的 CR 输出、贡献阶段输出修改或按值唯一性选择；实体作用域候选在收集前即排除，其输出依赖缺失不产生缺事实错误。实体作用域的普通暴击率增益不参与形成最终概率、不因存在而报冲突，也不被伪报为概率消费。其他表达式真实依赖普通暴击率时（如暴击率转增伤的转换），仍按原有世界属性/贡献依赖读取并如实记账，声明不覆盖这些 stat-read。

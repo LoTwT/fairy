@@ -948,23 +948,48 @@ function validateContributionOperation(
   }
   const kind = expectLiteral(
     object["kind"],
-    ["stat-adjustment", "factor-contribution", "hit-adjustment"],
+    [
+      "stat-adjustment",
+      "factor-contribution",
+      "hit-adjustment",
+      "guaranteed-critical",
+    ],
     checks,
     "operation kind",
   )
   if (kind === undefined) {
     return false
   }
-  if (kind === "hit-adjustment" && scope !== "hit") {
+  if (
+    (kind === "hit-adjustment" || kind === "guaranteed-critical") &&
+    scope !== "hit"
+  ) {
     checks.collector.report(
       "INVALID_DEFINITION",
       pointer,
-      'hit-adjustment requires scope "hit"',
+      `${kind} requires scope "hit"`,
     )
     return false
   }
   const hitScope = scope === "hit"
   switch (kind) {
+    case "guaranteed-critical": {
+      if (
+        expectNonEmptyString(
+          object["itemId"],
+          { ...checks, pointer: `${pointer}/itemId` },
+          "damage item identity",
+        ) === undefined
+      )
+        return false
+      rejectUnknownFields(
+        object,
+        ["kind", "itemId"],
+        checks,
+        "guaranteed-critical",
+      )
+      return true
+    }
     case "stat-adjustment": {
       const stat = expectLiteral(
         object["stat"],

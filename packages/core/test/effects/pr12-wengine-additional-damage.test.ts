@@ -246,7 +246,7 @@ function engineInput(
 
 describe("batch 12 w-engine additional damage", () => {
   it("registers the two independent targets, options, and rules under revision 27", () => {
-    expect(catalog.revision).toBe("29")
+    expect(catalog.revision).toBe("30")
     for (const engine of ENGINE_CASES) {
       const target = catalog.skillTargets.find(
         (t) => t.targetId === engine.targetId,
@@ -367,7 +367,7 @@ describe("batch 12 w-engine additional damage", () => {
         values: { 1: 2, 2: 2, 3: 2, 4: 2, 5: 2 },
       },
     })
-    // 比格气缸必定暴击：hit 作用域 criticalRate direct +1.0，只随独立目标
+    // 比格气缸必定暴击：来源保证最终概率为 1，只随独立目标
     // 参与求值（窄解释：不作用于触发招式整段，见补充登记 verification）。
     const critRule = definitions.effects.find(
       (e) => e.effectId === BIG_CYLINDER_CRIT,
@@ -376,10 +376,8 @@ describe("batch 12 w-engine additional damage", () => {
     if (critRule.kind !== "contribution") throw new Error("unreachable")
     expect(critRule.scope).toBe("hit")
     expect(critRule.operation).toEqual({
-      kind: "stat-adjustment",
-      stat: "criticalRate",
-      stage: "direct",
-      value: { kind: "literal", unit: "ratio", value: 1 },
+      kind: "guaranteed-critical",
+      itemId: "big-cylinder:retaliation",
     })
     expect(critRule.when).toEqual({
       kind: "all",

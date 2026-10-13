@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "29",
+  "revision": "30",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -31068,6 +31068,29 @@
       "supportedRanks": "核心 1—7；影画 0—6",
       "computationTarget": "catalog option on the mapped agent entity",
       "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:jane:m6-proficiency-damage",
+      "source": "nanoka-integrated@3.2 agents/1261 /talent/6/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:jane:m6-proficiency-damage",
+      "effectIds": ["agent:1261:nanoka:m6-proficiency-damage:mindscape:6"],
+      "supportedRanks": "影画 6；层数 0—1",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:alice:m6-proficiency-damage",
+      "source": "nanoka-integrated@3.2 agents/1401 /talent/6/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:alice:m6-proficiency-damage",
+      "effectIds": [
+        "agent:1401:nanoka:m6-proficiency-damage:mindscape:6",
+        "agent:1401:nanoka:m6-proficiency-damage:mindscape:6:guaranteed-critical"
+      ],
+      "supportedRanks": "影画 6；层数 0—1",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
     }
   ],
   "summary": {
@@ -31075,17 +31098,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 876,
-    "options": 907,
+    "rules": 879,
+    "options": 909,
     "converted": 1134,
     "corrected": 138,
     "unsupported": 18,
     "supplements": {
-      "records": 79,
-      "rules": 49,
-      "options": 41,
+      "records": 81,
+      "rules": 52,
+      "options": 43,
       "entities": 4,
-      "integrated": 46,
+      "integrated": 48,
       "outOfScope": 33
     }
   },

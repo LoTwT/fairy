@@ -1568,3 +1568,36 @@ export type SynchronizationApiContract = [
       : false
   >,
 ]
+
+/** 来源必暴固定最终概率，不属于 entity 属性加数或可缩放的数值输出。 */
+export type GuaranteedCriticalContract = [
+  Assert<
+    {
+      kind: "guaranteed-critical"
+      itemId: "extra"
+    } extends ContributionOperation
+      ? true
+      : false
+  >,
+  Assert<
+    NotAssignable<
+      { kind: "guaranteed-critical"; itemId: "extra" },
+      Extract<ContributionRule, { scope: "entity" }>["operation"]
+    >
+  >,
+  Assert<
+    NotAssignable<
+      {
+        address: {
+          kind: "hit"
+          hitId: "hit:extra"
+          field: "criticalRate"
+          itemId: "extra"
+        }
+        operator: "guarantee"
+        value: { unit: "ratio"; value: 0.5 }
+      },
+      ResolvedOutput
+    >
+  >,
+]

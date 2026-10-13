@@ -497,6 +497,11 @@ export type ContributionOperation =
   | StatOperation
   | FactorOperation
   | {
+      /** 实际适用时保证唯一 regular/direct 独立项的最终暴击概率为 1。 */
+      readonly kind: "guaranteed-critical"
+      readonly itemId: string
+    }
+  | {
       readonly kind: "hit-adjustment"
       readonly field: "damageMultiplier"
       readonly operator: "add" | "scale"
@@ -607,7 +612,7 @@ export type ContributionRule = RuleBase & {
         readonly scope: "entity"
         readonly operation: Exclude<
           ContributionOperation,
-          { readonly kind: "hit-adjustment" }
+          { readonly kind: "hit-adjustment" | "guaranteed-critical" }
         >
       }
     | { readonly scope: "hit"; readonly operation: ContributionOperation }

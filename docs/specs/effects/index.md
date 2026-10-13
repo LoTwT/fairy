@@ -77,6 +77,7 @@ integrated 来源资料 → definitions 效果定义
 - `stat-adjustment`：通用属性区分初始/最终百分比、固定值；暴击率、暴伤、穿透率、锐暴伤害等直接属性用 `direct`，配合 `scope: hit` 表达单次命中的属性调整。
 - `factor-contribution`：向已登记 Factor 通道提供贡献，如 `0.1` 增伤，不把最终倍率 `1.1` 当作加数。
 - `hit-adjustment`：对匹配命中的倍率进行 `scale`。
+- `guaranteed-critical`：来源保证唯一具名 regular/direct 项的最终暴击概率为 1；活动性、冲突与归因见[来源保证必暴](execution.md#来源保证必暴)。
 
 实体作用域和命中作用域分开。6 影震音的暴击率提高不会写回角色通用面板。一次性回能和追加攻击也不会作为持续贡献在每次查询时重新输出。各落点与 core 参数的唯一映射维护在[输出适配](execution.md#输出适配)。
 
