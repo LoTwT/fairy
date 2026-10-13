@@ -229,6 +229,10 @@ void main().catch((error: unknown) => {
 读取选项的 `optionId`、`name`、`conditionDescription` 和各 `variants` 的培养、层数、输入及支持限制。
 选择选项表示调用方确认条件当前成立，`holderId` 必须指向对应持有者。
 
+格莉丝 M6 原手雷组合的两条显式选择直接作用于原动作项，使用 `resolveAgentAction` 返回的
+原倍率，不预先手动强化或追加事件。选项、目标与合计条件见[格莉丝影画六强化](../data/zzz-hp-static-effects.md#修订-31格莉丝影画六原手雷组合强化批次-16)；
+衍生涡流、循环与脉冲的 M6 范围仍需补证。
+
 主示例的三个选项无需额外数值输入。若选择攻击转化等选项，还须按适用 variant 的 `inputs` 提供
 同名、同单位的读取值，并用公开的 `staticSourceBindingId(holderId, "agent", agentEntityId)`
 关联代理人来源；音擎和套装分别使用 `"w-engine"`、`"drive-disc"` 及对应实体 ID。

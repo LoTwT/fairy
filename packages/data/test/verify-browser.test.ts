@@ -333,6 +333,18 @@ globalThis.fairySingleElementActions = async () => {
     return { id, element: resolved.calculation.segments[0].element, granularity: resolved.calculation.segments[0].granularity, segments: result.value.segments.length, totals: result.value.totals, strictResolution: api.resolveAgentAction({ ...resolution, requireIndividualHits: true }).ok, strictCalculation: core.calculateStaticActionDamage({ ...request, requireIndividualHits: true }).ok }
   })
 }
+globalThis.fairyGraceGrenades = async () => {
+  const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["Grace"], wEngines: [] }), import("@randomplay/core")])
+  return [["0012", "special"], ["0013", "ex-special"]].map(([suffix, branch]) => {
+    const action = api.resolveAgentAction({ agent: data.agents[0].actions, actionId: "action:agent:1181:action:" + suffix, mindscapeRank: 6, levels: { special: { mode: "effective", value: 12 } } })
+    const actor = { entityId: "entity:grace", teamId: "team:players", agentEntityId: "1181", mindscapeRank: 6, coreSkillLevel: 7, potentialLevel: 6, wEngine: null, driveDiscs: { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null }, panel: { mode: "out-of-combat", stats: { attack: { unit: "attack-points", value: 1000 }, criticalRate: { unit: "ratio", value: 0 }, criticalDamage: { unit: "ratio", value: 0.5 }, penetrationRatio: { unit: "ratio", value: 0 } }, penetrationValue: 0, damageBonuses: { electric: 0.5 } } }
+    const request = { data, actors: [actor], actorId: actor.entityId, action, target: { entityId: "entity:enemy", teamId: "team:enemy", baseDefense: 0, resistances: { electric: 0 }, isStunned: false, baseStunDamageMultiplier: 1 }, selections: [{ holderId: actor.entityId, optionId: "nanoka:agents:grace:m6-" + branch + "-grenades", layers: 1 }] }
+    const enhanced = core.calculateStaticActionDamage(request)
+    const plain = core.calculateStaticActionDamage({ ...request, selections: [] })
+    if (!enhanced.ok || !plain.ok) throw new Error(JSON.stringify({ enhanced, plain }))
+    return { suffix, targets: action.skillTargetIds, plain: plain.value.totals.nonCritical, enhanced: enhanced.value.totals.nonCritical }
+  })
+}
 globalThis.fairyVelinaMicroDomain = async () => {
   const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["Velina"], wEngines: ["Fusion Compiler"] }), import("@randomplay/core")])
   const actions = data.agents[0].actions
@@ -984,6 +996,27 @@ function defineScenarios(counts: {
             "definitions/effects/static.json",
             "definitions/effects/static-catalog.json",
           ],
+        },
+        {
+          name: "grace-m6-original-grenades",
+          act: async (page) => {
+            const results = await page.evaluate(() =>
+              (globalThis as any).fairyGraceGrenades(),
+            )
+            expect(results).toHaveLength(2)
+            expect(results[0].targets).toContain(
+              "zzz-hp:skill:grace-special-grenades",
+            )
+            expect(results[1].targets).toEqual([
+              "zzz-hp:skill:all-special-ms0fcqv7",
+              "zzz-hp:skill:grace-ex-special-grenades",
+            ])
+            expect(results[0].plain).toBeCloseTo(1275)
+            expect(results[0].enhanced).toBeCloseTo(5100)
+            expect(results[1].plain).toBeCloseTo(10023)
+            expect(results[1].enhanced).toBeCloseTo(30069)
+          },
+          sources: [],
         },
       ],
     },

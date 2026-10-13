@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "30",
+  "revision": "31",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -45733,6 +45733,294 @@
       ]
     },
     {
+      "optionId": "nanoka:agents:grace:m6-special-grenades",
+      "catalogEntityId": "agents:grace",
+      "name": "影画6 · 起爆扳机（工程清障）",
+      "conditionDescription": "本次已消耗全部电能发动工程清障，所有原组合手雷命中且各次乘区相同：原一颗变两颗，每颗×2，原合计×4。使用原动作倍率，不重复手动强化；不包含涡流、电磁场、循环或脉冲/异放的未证M6修正。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 6
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1181/details.zh.json",
+              "pointer": "/talent/6/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1181/details.zh.json",
+              "pointer": "/skill/special/description/0/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1181/details.zh.json",
+              "pointer": "/skill/special/description/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1181/details.zh.json",
+              "pointer": "/skill/special/description/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1181/details.zh.json",
+              "pointer": "/skill/special/description/3/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1181/details.zh.json",
+              "pointer": "/skill/special/description/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1181/details.zh.json",
+              "pointer": "/skill/special/description/5/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1181/details.zh.json",
+              "pointer": "/skill/special/description/6/param/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1181/details.en.json",
+              "pointer": "/talent/6/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1181/details.en.json",
+              "pointer": "/skill/special/description/0/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1181/details.en.json",
+              "pointer": "/skill/special/description/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1181/details.en.json",
+              "pointer": "/skill/special/description/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1181/details.en.json",
+              "pointer": "/skill/special/description/3/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1181/details.en.json",
+              "pointer": "/skill/special/description/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1181/details.en.json",
+              "pointer": "/skill/special/description/5/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1181/details.en.json",
+              "pointer": "/skill/special/description/6/param/0"
+            }
+          ],
+          "effectIds": ["agent:1181:nanoka:m6-special-grenades:mindscape:6"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "action:agent:1181:action:0012:base",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:grace:m6-ex-special-grenades",
+      "catalogEntityId": "agents:grace",
+      "name": "影画6 · 起爆扳机（超规工程清障（原两颗手雷））",
+      "conditionDescription": "本次已消耗全部电能发动超规工程清障（原两颗手雷），所有原组合手雷命中且各次乘区相同：原两颗变三颗，每颗×2，原合计×3。使用原动作倍率，不重复手动强化；不包含涡流、电磁场、循环或脉冲/异放的未证M6修正。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 6
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1181/details.zh.json",
+              "pointer": "/talent/6/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1181/details.zh.json",
+              "pointer": "/skill/special/description/0/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1181/details.zh.json",
+              "pointer": "/skill/special/description/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1181/details.zh.json",
+              "pointer": "/skill/special/description/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1181/details.zh.json",
+              "pointer": "/skill/special/description/3/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1181/details.zh.json",
+              "pointer": "/skill/special/description/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1181/details.zh.json",
+              "pointer": "/skill/special/description/5/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1181/details.zh.json",
+              "pointer": "/skill/special/description/7/param/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1181/details.en.json",
+              "pointer": "/talent/6/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1181/details.en.json",
+              "pointer": "/skill/special/description/0/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1181/details.en.json",
+              "pointer": "/skill/special/description/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1181/details.en.json",
+              "pointer": "/skill/special/description/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1181/details.en.json",
+              "pointer": "/skill/special/description/3/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1181/details.en.json",
+              "pointer": "/skill/special/description/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1181/details.en.json",
+              "pointer": "/skill/special/description/5/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1181/details.en.json",
+              "pointer": "/skill/special/description/7/param/0"
+            }
+          ],
+          "effectIds": ["agent:1181:nanoka:m6-ex-special-grenades:mindscape:6"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "action:agent:1181:action:0013:base",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "optionId": "nanoka:agents:evelyn:m6-lunalux-garrote-follow-up",
       "catalogEntityId": "agents:evelyn",
       "name": "影画6 · 月辉丝·弦（独立追击）",
@@ -50273,6 +50561,22 @@
       "agentEntityId": "1321",
       "category": "chain",
       "name": "月辉丝·弦",
+      "countsAsFollowUp": false
+    },
+    {
+      "targetId": "zzz-hp:skill:grace-ex-special-grenades",
+      "upstreamId": null,
+      "agentEntityId": "1181",
+      "category": "enhanced-special",
+      "name": "超规工程清障（原两颗手雷）",
+      "countsAsFollowUp": false
+    },
+    {
+      "targetId": "zzz-hp:skill:grace-special-grenades",
+      "upstreamId": null,
+      "agentEntityId": "1181",
+      "category": "special",
+      "name": "工程清障",
       "countsAsFollowUp": false
     },
     {

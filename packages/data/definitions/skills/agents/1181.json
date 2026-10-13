@@ -732,7 +732,7 @@
       "rowName": "伤害倍率",
       "levelGroup": "special",
       "skillCategory": "special",
-      "skillTargetIds": [],
+      "skillTargetIds": ["zzz-hp:skill:grace-special-grenades"],
       "skillTags": [],
       "source": {
         "path": "agents/1181/details.zh.json",
@@ -797,7 +797,10 @@
       "rowName": "伤害倍率",
       "levelGroup": "special",
       "skillCategory": "enhanced-special",
-      "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+      "skillTargetIds": [
+        "zzz-hp:skill:all-special-ms0fcqv7",
+        "zzz-hp:skill:grace-ex-special-grenades"
+      ],
       "skillTags": [],
       "source": {
         "path": "agents/1181/details.zh.json",

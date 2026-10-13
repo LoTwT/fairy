@@ -5279,7 +5279,129 @@ const aliceMindscape6ProficiencyDamage: Supplement = {
   },
 }
 
+/** 原手雷组合的合计强化；不推断潜能衍生手雷的增颗或倍率归属。 */
+const graceMindscape6Grenades = (enhanced: boolean): Supplement => {
+  const suffix = enhanced ? "ex-special" : "special"
+  const actionId = `action:agent:1181:action:${enhanced ? "0013" : "0012"}`
+  const skillCategory = enhanced ? "enhanced-special" : "special"
+  const name = enhanced ? "超规工程清障（原两颗手雷）" : "工程清障"
+  return {
+    kind: "option",
+    supplementId: `nanoka:agents:grace:m6-${suffix}-grenades`,
+    source:
+      "nanoka-integrated@3.2 agents/1181 /talent/6/desc + /skill/special/description",
+    catalogEntityId: "agents:grace",
+    optionId: `nanoka:agents:grace:m6-${suffix}-grenades`,
+    supportedRanks: "影画 6；潜能 0—6；层数 0—1",
+    computationTarget: "original grenade combination damage multiplier",
+    clauseContextGuard: {
+      rankKind: "mindscape",
+      rank: 6,
+      stats: directMultiplierSourceStats,
+      anchorBlocks: [
+        {
+          blockId: "blk-ms4oag6c-pzzlxs",
+          frozenName: "影画6",
+          frozenEnabledDefault: true,
+          frozenNote:
+            "消耗所有[电能]发动[特殊技]或[强化特殊技]时，能够强化招式效果，额外投掷一颗手雷，并使每颗手雷造成的伤害提升至原本的200%。",
+        },
+      ],
+      coexistingRecords: [],
+    },
+    skillTarget: {
+      targetId: `grace-${suffix}-grenades`,
+      agentEntityId: "1181",
+      category: skillCategory,
+      name,
+    },
+    evidence: (
+      [
+        [
+          "zh",
+          "39982521b198f62299a1cb4092dc1a3802c6b62748d04bcfda8f0f24b5afbdcf",
+        ],
+        [
+          "en",
+          "297e4569d52b871555ade0eb95920f40fd9aa5d9e3946404dd5903bcb4315a1a",
+        ],
+      ] as const
+    ).flatMap(([language, sha256]) =>
+      [
+        "/talent/6/desc",
+        ...[0, 1, 2, 3, 4, 5].map(
+          (index) => `/skill/special/description/${index}/desc`,
+        ),
+        `/skill/special/description/${enhanced ? 7 : 6}/param/0`,
+      ].map((pointer) => ({
+        path: `agents/1181/details.${language}.json`,
+        pointer,
+        sha256,
+      })),
+    ),
+    verification: `Nanoka 3.2 中英文 /talent/6/desc 与固定来源 rank6 的真实 note-only 块 blk-ms4oag6c-pzzlxs 一致：消耗全部电能发动特殊技或强化特殊技时，额外投掷一颗手雷，每颗伤害提升至原本的200%。普通/潜能描述 /skill/special/description/0—3 均保留普通一颗、强化两颗原手雷；倍率行 1181005 为单颗原式，1181006 原式已乘2。全部手雷命中且各次属性、元素、分类、暴击与其他乘区相同时，普通1→2颗且每颗×2，原合计×4；强化2→3颗且每颗×2，原合计×3。这是由文本与原式推导的合计表达，未经游戏实测。本选项只用 scale ${enhanced ? 3 : 4} 调整 ${actionId}:base，不改原倍率，不添加独立事件，不当作一般增伤；调用方传原始解析倍率，不能先手工乘M6。具名目标与精确原项是项目匹配契约，混合请求的其他项不受本倍率贡献影响。潜能1—6的涡流集束手雷、电磁场、工程清障·循环（29次原式除29的既有近似）和脉冲手雷/异放为不同来源行；现有证据未明确M6增颗与每颗倍率在这些衍生行的归属，未登记其M6修正，不表示游戏中它们不受益。选择1层仅声明本次消耗全部电能的强化已经触发，0层关闭；不模拟电能检测、脉冲、时间线、逐次命中、异常积蓄或失衡。技能最终等级沿既有输入，不重复增加M3/M5。`,
+    rule: {
+      effectId: `agent:1181:nanoka:m6-${suffix}-grenades:mindscape:6`,
+      identity: { kind: "agent", entityId: "1181" },
+      section: `影画6：起爆扳机（${name}）`,
+      config: mindscapeFrom(6),
+      parameters: {
+        amount: {
+          kind: "constant",
+          unit: "multiplier",
+          value: enhanced ? 3 : 4,
+        },
+      },
+      scope: "hit",
+      when: {
+        kind: "all",
+        conditions: [
+          { kind: "one-of", fact: "hit.damageKind", values: ["regular"] },
+          { kind: "one-of", fact: "hit.element", values: ["electric"] },
+          {
+            kind: "one-of",
+            fact: "hit.skillCategory",
+            values: [skillCategory],
+          },
+          {
+            kind: "one-of",
+            fact: "hit.skillTag",
+            values: [`zzz-hp:skill:grace-${suffix}-grenades`],
+          },
+        ],
+      },
+      operation: {
+        kind: "hit-adjustment",
+        field: "damageMultiplier",
+        operator: "scale",
+        itemIds: [`${actionId}:base`],
+        value: { kind: "parameter", unit: "multiplier", name: "amount" },
+      },
+      maximumLayers: 1,
+    },
+    variant: {
+      configuration: { minimumMindscape: 6 },
+      inputs: [],
+      applicability: {},
+      damageItemRequirements: [
+        {
+          itemId: `${actionId}:base`,
+          stat: "attack",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+        },
+      ],
+      conditionDescription: `本次已消耗全部电能发动${name}，所有原组合手雷命中且各次乘区相同：${enhanced ? "原两颗变三颗，每颗×2，原合计×3" : "原一颗变两颗，每颗×2，原合计×4"}。使用原动作倍率，不重复手动强化；不包含涡流、电磁场、循环或脉冲/异放的未证M6修正。`,
+      name: `影画6 · 起爆扳机（${name}）`,
+      target: "self",
+    },
+  }
+}
+
 export const SUPPLEMENTS: readonly Supplement[] = [
+  graceMindscape6Grenades(false),
+  graceMindscape6Grenades(true),
   evelynMindscape6LunaluxGarroteFollowUp,
   s0anbyMindscape6ElectromagneticVortex,
   dialynMindscape6AftertoneEcho,
