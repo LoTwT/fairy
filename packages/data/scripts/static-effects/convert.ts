@@ -40,6 +40,7 @@ import { buildRemielleSpecialVoidflareMechanism } from "./mechanisms.ts"
 import {
   SUPPLEMENTS,
   WENGINE_RECORD_SHAPE_FIELDS,
+  type ClauseContextGuardEntry,
   type Supplement,
   type SupplementRuleSpec,
   type SupplementVariantSpec,
@@ -561,6 +562,21 @@ function verifyClauseContextGuard(
 ): void {
   const context = registration.clauseContextGuard
   if (!context) return
+  const guards = Array.isArray(context) ? context : [context]
+  for (const guard of guards)
+    verifySingleClauseContextGuard(data, records, entity, registration, guard)
+}
+
+function verifySingleClauseContextGuard(
+  data: SourceData,
+  records: readonly SourceRecord[],
+  entity: StaticCatalogEntity,
+  registration: {
+    readonly supplementId: string
+    readonly catalogEntityId: string
+  },
+  context: ClauseContextGuardEntry,
+): void {
   const sourceEntity = data.agents.find(
     (agent) => agent.id === entity.upstreamId,
   )
@@ -1314,6 +1330,45 @@ function verifyExcludeSkillTargetScopeRecord(
 }
 
 /**
+ * 烈霜结算元素范围修正（settlement-element-scope）的防漂移前置校验：
+ * raw 与 normalized 两份记录按登记编码逐字段核对（含 elementFilter 与完整
+ * skillTargets 元组），所属块 note 与冻结完整原文逐字核对；normalized 缺失、
+ * 任一字段漂移或 note 追加/替换/缺失都拒绝生成。与 source-stat-correction 同样
+ * 必须在 compile 的通用 unsupported 降级之前执行：否则登记记录会静默降级成
+ * 通用 unsupported，元素修正消失而旧规则继续按 [ice] 编译。
+ */
+function verifySettlementElementScopeRecord(
+  record: SourceRecord,
+  semantics: Extract<SourceSemantics, { kind: "settlement-element-scope" }>,
+): void {
+  for (const [label, document] of [
+    ["raw", record.raw],
+    ["normalized", record.normalized],
+  ] as const) {
+    if (document === undefined)
+      throw new Error(
+        `Settlement element scope correction ${semantics.differenceId} lost the ${label} record at ${record.pointer}`,
+      )
+    for (const [field, expected] of Object.entries(semantics.expectedEncoding))
+      if (
+        JSON.stringify(document[field as keyof SourceEffect] ?? null) !==
+        JSON.stringify(expected)
+      )
+        throw new Error(
+          `Settlement element scope correction ${semantics.differenceId} ${label} field drift at ${record.pointer}: ${field}`,
+        )
+  }
+  for (const [label, note] of [
+    ["raw", record.blockNote],
+    ["normalized", record.normalizedBlockNote],
+  ] as const)
+    if (note !== semantics.expectedSourceBlockNote)
+      throw new Error(
+        `Settlement element scope correction ${semantics.differenceId} ${label} block note drift at ${record.pointer}`,
+      )
+}
+
+/**
  * [颤音：改]共存排除（exclude-settlement-target 与 stagger-recovery-settlement
  * 的 vibratoModifiedExclusion）的防漂移前置校验：raw 与 normalized 两份表示
  * 的登记编码逐字段一致、所属块 note 与冻结全文逐字一致；normalized 缺失、
@@ -1428,6 +1483,10 @@ function compile(
   // 通用 unsupported 降级——normalized 删除不能再静默绕过登记。
   if (semantics?.kind === "exclude-skill-target-scope")
     verifyExcludeSkillTargetScopeRecord(record, semantics)
+  // 烈霜结算元素范围修正：登记编码与冻结块 note 的校验同样早于通用
+  // unsupported 降级（源漂移不能被降级掩盖）。
+  if (semantics?.kind === "settlement-element-scope")
+    verifySettlementElementScopeRecord(record, semantics)
   // [颤音：改]共存排除：登记编码与冻结块 note 的校验同样早于通用
   // unsupported 降级（独立登记与 stagger-recovery 扩展字段共用）。
   if (semantics?.kind === "exclude-settlement-target")
@@ -2174,6 +2233,48 @@ function compile(
       kind: "all",
       conditions: [when, oneOf("hit.element", [semantics.element])],
     }
+    variant = {
+      ...variant,
+      status: "corrected",
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
+  if (semantics?.kind === "settlement-element-scope") {
+    // 上游 elementFilter 只登记了目录实体固有元素（ice），而同分支结算证据
+    // （烈霜按冰属性结算伤害与增益）与正式动作目录证明该条款必须覆盖 frost
+    // 命中：保留登记元素并显式追加补充元素。元素条件来自 whenFor 的
+    // elementFilter 展开（self + 数组过滤），按事实改写该 one-of 的值集；
+    // 找不到登记元素条件即拒绝（编码守卫已核对 elementFilter，此处缺失
+    // 说明展开逻辑漂移，不能静默跳过）。
+    if (when.kind !== "all") {
+      throw new Error(
+        `Settlement element scope correction ${semantics.differenceId} expected an element condition at ${record.pointer}; the when shape drifted`,
+      )
+    }
+    const expectedElements = (record.raw.elementFilter as readonly string[])
+      .map((element) => elementMap[element]!)
+      .filter((element) => element !== "lumiflux")
+    const elementIndex = when.conditions.findIndex(
+      (condition) =>
+        condition.kind === "one-of" &&
+        condition.fact === "hit.element" &&
+        JSON.stringify(condition.values) === JSON.stringify(expectedElements),
+    )
+    if (elementIndex < 0)
+      throw new Error(
+        `Settlement element scope correction ${semantics.differenceId} lost the registered element condition ${JSON.stringify(expectedElements)} at ${record.pointer}`,
+      )
+    const conditions = [...when.conditions]
+    conditions[elementIndex] = oneOf("hit.element", [
+      ...new Set([...expectedElements, semantics.additionalElement]),
+    ])
+    when = { kind: "all", conditions }
     variant = {
       ...variant,
       status: "corrected",
@@ -3420,6 +3521,25 @@ export function convertSource(
         `Source-stat correction ${semantics.differenceId} entity profession drift (${key})`,
       )
   }
+  // 烈霜结算元素范围修正的登记身份存在性：该 kind 的具名修正只在完整语义
+  // 键命中后于 compile 校验——上游把登记记录删除、改 ID 或迁到其他培养位置
+  // 会让语义键落空、修正静默消失（元素条件退回来源原样），锚块 note 与
+  // stat 家族守卫都不能证明两条原记录仍存在。与 source-stat-correction 同
+  // 一实体存在边界：对应实体参与转换时登记键必须仍在收集索引中（完整键
+  // 全等，不做局部 ID 子串或默认回退），完全不含该实体的局部转换不受影响；
+  // 也不依赖传入的 supplements——两条元素修正按全局登记逐记录生效。
+  for (const [key, semantics] of Object.entries(SOURCE_SEMANTICS)) {
+    if (semantics.kind !== "settlement-element-scope") continue
+    const [category, entityId] = key.split("/")
+    const entity = collected.entities.find(
+      (entry) => entry.catalogEntityId === `${category}:${entityId}`,
+    )
+    if (!entity) continue
+    if (!semanticsKeyIndex.has(key))
+      throw new Error(
+        `The settlement element scope correction ${semantics.differenceId} lost its registered source record (${key}); the entity ${entity.catalogEntityId} participates in conversion while the registered identity is missing, renamed, or moved — re-review the clause before generating`,
+      )
+  }
   for (const [key, semantics] of Object.entries(SOURCE_SEMANTICS)) {
     if (semantics.kind !== "exclude-skill-target-scope") continue
     if (
@@ -4223,7 +4343,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "28",
+    revision: "29",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -4714,6 +4834,23 @@ export function convertSource(
             )
             .flatMap((variant) => variant.references),
         ),
+      },
+      {
+        differenceId: "miyabi-frost-settlement-element-scope",
+        explanation:
+          "星见雅（1091）两条基线规则的命中元素过滤只登记了目录实体固有元素 ice，而该属性的结算分支证据与正式动作目录证明其合法受益命中还包含 frost：烈霜属性基于冰属性结算伤害与增益效果（agents/1091/details.zh.json 与 details.en.json 的 /specialElementType/desc 中英文同文），正式技能目录中星见雅的全部元素伤害行（霜月 0011—0013、风花后三段 0008—0010、快速/支援 0001/0005、连携 0014、终结 0015、闪反 0017、特殊/强化特殊 0018—0020 共 14 行）使用命中枚举 frost，其余为 physical 3 行与招架支援 daze-only 3 行，没有任何 ice 命中行——两条规则在真实 frost 命中上零贡献（批次 14 红测复现）。Fairy 按具名登记只修正这两条完整身份：终结技后自身冰属性伤害 +30%（/agents/22/mindscapeBuffs/0/effectBlocks/0/effects/0）与额外能力[普通攻击：霜月]无视 30% 冰属性伤害抗性（/agents/22/mindscapeBuffs/0/effectBlocks/1/effects/1，保留 basic+霜月精确目标），都在命中元素条件里保留 ice 并显式加入 frost；数值、通道、其余条件与稳定 ID 不变，不改全局元素归并、不扫描修全角色，同块的霜月 +60% 增伤记录（elementFilter=all）与星见雅其余五条影画记录不在登记内。防漂移：raw 与 normalized 两份记录编码（含 elementFilter 与完整 skillTargets 元组）与所属块冻结完整 note 逐字核对，先于通用 unsupported 降级拒绝；未来偏移的记录不再静默纠正。证据级别为同文结算分支映射与正式动作目录枚举，未经游戏实测。",
+        references: [
+          reference("/agents/22/mindscapeBuffs/0/effectBlocks/0/effects/0"),
+          reference("/agents/22/mindscapeBuffs/0/effectBlocks/1/effects/1"),
+          nanokaReference(
+            "agents/1091/details.zh.json",
+            "/specialElementType/desc",
+          ),
+          nanokaReference(
+            "agents/1091/details.en.json",
+            "/specialElementType/desc",
+          ),
+        ],
       },
     ],
   }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "28",
+  "revision": "29",
   "effects": [
     {
       "kind": "contribution",
@@ -4736,6 +4736,282 @@
     },
     {
       "kind": "contribution",
+      "effectId": "agent:1091:nanoka:frostburn-break-damage:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1091"
+        },
+        "section": "核心被动：寒炎（霜灼·破）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/passive/level/1091501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/passive/level/1091502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/passive/level/1091503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/passive/level/1091504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/passive/level/1091505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/passive/level/1091506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/passive/level/1091507/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/talent/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1091/details.en.json",
+            "pointer": "/talent/4/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "coreSkillLevel",
+          "unit": "multiplier",
+          "values": {
+            "1": 7.5,
+            "2": 8.75,
+            "3": 10,
+            "4": 11.25,
+            "5": 12.5,
+            "6": 13.75,
+            "7": 15
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:miyabi-frostburn-break-damage"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["frost"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "add",
+        "itemIds": ["miyabi:frostburn-break-damage"],
+        "value": {
+          "kind": "parameter",
+          "unit": "multiplier",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1091:nanoka:m4-rupture-frostburn-break-bonus:mindscape:4",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1091"
+        },
+        "section": "影画4：皲裂（霜灼·破增伤）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/passive/level/1091501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/passive/level/1091502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/passive/level/1091503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/passive/level/1091504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/passive/level/1091505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/passive/level/1091506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/passive/level/1091507/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/talent/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1091/details.en.json",
+            "pointer": "/talent/4/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "amount": {
+          "kind": "by-rank",
+          "rank": "mindscapeRank",
+          "unit": "ratio",
+          "values": {
+            "0": 0,
+            "1": 0,
+            "2": 0,
+            "3": 0,
+            "4": 0.3,
+            "5": 0.3,
+            "6": 0.3
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:miyabi-frostburn-break-damage"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["frost"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "damage-bonus",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
       "effectId": "agent:1091:zzz-hp:eff-ms4msho4-rjt6sj:blk-ms4msho4-fuuot6:mindscape:0",
       "source": {
         "identity": {
@@ -4941,6 +5217,20 @@
             "locale": "zh",
             "resourcePath": "agents/1091/details.zh.json",
             "pointer": "/passive/level/1091507/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/specialElementType/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1091/details.en.json",
+            "pointer": "/specialElementType/desc"
           }
         ]
       },
@@ -5009,7 +5299,7 @@
           {
             "kind": "one-of",
             "fact": "hit.element",
-            "values": ["ice"]
+            "values": ["ice", "frost"]
           }
         ]
       },
@@ -5215,6 +5505,20 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/22/mindscapeBuffs/0/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1091/details.zh.json",
+            "pointer": "/specialElementType/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1091/details.en.json",
+            "pointer": "/specialElementType/desc"
           }
         ]
       },
@@ -5258,7 +5562,7 @@
           {
             "kind": "one-of",
             "fact": "hit.element",
-            "values": ["ice"]
+            "values": ["ice", "frost"]
           }
         ]
       },

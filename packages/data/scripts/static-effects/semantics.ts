@@ -259,6 +259,30 @@ export type SourceSemantics =
     }
   | {
       /**
+       * 上游 elementFilter 只登记了目录实体的固有元素枚举（如烈霜角色实体
+       * 固有元素 ice），而同一结算分支的证据（星见雅 /specialElementType：
+       * 烈霜属性基于冰属性结算伤害与增益，中英文同文）与正式动作目录证明
+       * 该条款的合法受益命中还包含另一个命中枚举（frost——星见雅正式动作
+       * 的元素伤害行全部使用 physical/frost，无 ice）。转换器保留登记元素
+       * 并显式追加补充元素，只在具名完整身份规则的命中元素条件里追加，
+       * 不改全局元素归并、不扫描修全角色。防漂移：raw 与 normalized 两份
+       * 记录编码（含 elementFilter 与完整 skillTargets 元组）与冻结完整块
+       * note 逐字核对，先于通用 unsupported 降级拒绝；未来偏移的记录不再
+       * 静默纠正，也不以局部 ID 子串定位。
+       */
+      readonly kind: "settlement-element-scope"
+      /** 按结算证据显式追加的命中元素枚举（保留登记元素）。 */
+      readonly additionalElement: "frost"
+      /** 防漂移：登记时来源记录（raw 与 normalized）应逐字段保持的编码。 */
+      readonly expectedEncoding: Readonly<Record<string, unknown>>
+      /** 防漂移：固定来源 raw/normalized 块的真实完整 note 原文。 */
+      readonly expectedSourceBlockNote: string
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
        * 记录按固定来源字段转换，但来源自身的字段与块说明文字存在具名差异
        * （如克拉蕾[残锋]锐暴提升的 applyTarget=self 与说明"全队[锋御]"、
        * 影画一"倍率提升至原本的130%"被记为 skillDmgBonus +30）：
@@ -1693,6 +1717,90 @@ const lighterElationFrostEvidence: readonly SemanticsEvidenceReference[] = [
   },
 ]
 
+/**
+ * 星见雅（1091）烈霜结算的中英文证据：烈霜属性基于冰属性结算伤害与增益
+ * （/specialElementType/desc，zh SHA 45f70931…、en SHA bad069eb…，两文件
+ * 与固定来源版本核对）。两条批次 14 的元素修正共用。
+ */
+const miyabiFrostSettlementEvidence: readonly SemanticsEvidenceReference[] = [
+  {
+    path: "agents/1091/details.zh.json",
+    pointer: "/specialElementType/desc",
+    sha256: "45f70931c081d73d085eadea5a23d6c21cc314019090d0577a76a9b3f722973e",
+  },
+  {
+    path: "agents/1091/details.en.json",
+    pointer: "/specialElementType/desc",
+    sha256: "bad069eb3645dde14af355e4121faef405c296d938bb0d7a512eb9f3b9c39a35",
+  },
+]
+
+/**
+ * 星见雅影画 0 两个真实块的冻结完整 note（固定源 /agents/22/
+ * mindscapeBuffs/0/effectBlocks/0 与 /1）。批次 14 的两条元素修正按各自
+ * 所属块冻结。
+ */
+const miyabiUltimateBlockNote =
+  "招式发动时，获得3点[落霜]，自身造成的冰属性伤害提升30%，持续12秒；"
+const miyabiAdditionalAbilityBlockNote =
+  "队伍中存在[支援]角色或与自身阵营相同的角色或其他[异常]角色时触发：\n[普通攻击：霜月]造成的伤害提升60%；队伍中任意角色触发[紊乱]效果时，星见雅获得2点[落霜]，且在下一次[霜月架势]期间，[普通攻击：霜月]将无视目标30%冰属性伤害抗性。"
+
+/** 终结技后冰伤 +30% 记录（blk-legacy/effects/0）的登记编码。 */
+const miyabiUltimateDamageBonusEncoding = {
+  id: "legacy-self-dmgBonus",
+  origin: "",
+  scope: "general",
+  applyTarget: "self",
+  applySituation: "global",
+  applyProfession: null,
+  teamProfession: null,
+  teamProfessionValues: null,
+  teamProfessionMinCount: null,
+  skillCategory: null,
+  skillSubcategoryId: null,
+  skillTargets: null,
+  elementFilter: ["冰"],
+  kind: "fixed",
+  stat: "dmgBonus",
+  value: 30,
+  stackable: false,
+  maxStacks: 1,
+  valuePerStack: 0,
+  defaultStacks: 1,
+  appliesToAnomaly: null,
+  enabledDefault: true,
+  convert: null,
+  note: "",
+} as const
+
+/** 额外能力霜月 30% 冰抗忽视记录（blk-ms4msho4-fuuot6/effects/1）的登记编码。 */
+const miyabiShimotsukiResPenEncoding = {
+  id: "eff-ms4mu14z-vj4c3r",
+  origin: "",
+  scope: "skill",
+  applyTarget: "self",
+  applySituation: "global",
+  applyProfession: null,
+  teamProfession: null,
+  teamProfessionValues: null,
+  teamProfessionMinCount: null,
+  skillCategory: "basic",
+  skillSubcategoryId: "miyabi-basic-ms4mtpk5",
+  skillTargets: [{ category: "basic", subcategoryId: "miyabi-basic-ms4mtpk5" }],
+  elementFilter: ["冰"],
+  kind: "fixed",
+  stat: "resPen",
+  value: 30,
+  stackable: false,
+  maxStacks: 1,
+  valuePerStack: 0,
+  defaultStacks: 1,
+  appliesToAnomaly: null,
+  enabledDefault: true,
+  convert: null,
+  note: "",
+} as const
+
 /** 基础 stacked 记录的登记编码（rank 0 与影画 2 复制记录只差每层值）。 */
 function lighterBaseEncoding(rank: 0 | 2) {
   const elementFilter = rank === 0 ? ["冰", "火"] : ["火", "冰"]
@@ -2821,6 +2929,32 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     differenceId: "complete-state-elation-correction",
     evidence: lighterElationMindscape2Evidence,
     verification: lighterElationM2DuplicatesReplacedVerification,
+  },
+
+  // —— 增益修复批次 14：星见雅（miyabi）两条冰元素过滤的烈霜结算修正 ——
+  // 证据：agents/1091 的 /specialElementType/desc 中英文同文（烈霜属性基于
+  // 冰属性结算伤害与增益）+ 正式动作目录（星见雅元素伤害行全部
+  // physical/frost，无 ice）；红测复现见批次 14 作者记录。仅这两条完整身份
+  // 修正，保留 ice 并显式加入 frost；不改全局元素归并、不扫描修全角色。
+  "agents/miyabi/mindscape/0/blk-legacy/legacy-self-dmgBonus": {
+    kind: "settlement-element-scope",
+    additionalElement: "frost",
+    expectedEncoding: miyabiUltimateDamageBonusEncoding,
+    expectedSourceBlockNote: miyabiUltimateBlockNote,
+    differenceId: "miyabi-frost-settlement-element-scope",
+    evidence: miyabiFrostSettlementEvidence,
+    verification:
+      "固定源 /agents/22/mindscapeBuffs/0/effectBlocks/0（终结技：名残雪）的块 note 与记录把条款编为自身造成的冰属性伤害提升 30%（elementFilter=[冰]）。星见雅的烈霜属性按冰属性结算伤害与增益效果（Nanoka agents/1091/details.zh.json 与 details.en.json 的 /specialElementType/desc 中英文同文），其正式动作目录的全部元素伤害行使用命中枚举 frost（霜月 0011—0013、风花后三段 0008—0010、连携 0014、终结 0015、闪反 0017、特殊/强化特殊 0018—0020 与快速/支援 0001/0005 共 14 行；其余为 physical 3 行与招架 daze-only 3 行），没有任何 ice 命中行：该条款在真实 frost 命中上零贡献（批次 14 红测复现）。Fairy 按本登记在该具名完整身份的命中元素条件里保留 ice 并显式加入 frost，数值、通道、其余条件与稳定 ID 不变；额外能力的霜月 +60% 增伤记录（eff-ms4msho4-rjt6sj，elementFilter=all）不在登记内。防漂移：raw 与 normalized 两份记录编码（含 elementFilter）与所属块冻结完整 note 逐字核对，先于通用 unsupported 降级拒绝；未来偏移的记录不再静默纠正。证据级别为同文结算分支映射与正式动作目录枚举，未经游戏实测。",
+  },
+  "agents/miyabi/mindscape/0/blk-ms4msho4-fuuot6/eff-ms4mu14z-vj4c3r": {
+    kind: "settlement-element-scope",
+    additionalElement: "frost",
+    expectedEncoding: miyabiShimotsukiResPenEncoding,
+    expectedSourceBlockNote: miyabiAdditionalAbilityBlockNote,
+    differenceId: "miyabi-frost-settlement-element-scope",
+    evidence: miyabiFrostSettlementEvidence,
+    verification:
+      "固定源 /agents/22/mindscapeBuffs/0/effectBlocks/1（额外能力：同沐霜雪）的 resPen 记录把「[普通攻击：霜月]将无视目标30%冰属性伤害抗性」编为 basic+霜月（miyabi-basic-ms4mtpk5）目标上的 elementFilter=[冰]。星见雅的烈霜按冰属性结算伤害与增益（agents/1091 /specialElementType/desc 中英文同文），真实霜月动作（0011—0013）的命中枚举是 frost：该 30% 冰抗忽视在霜月 frost 命中上零贡献（批次 14 红测复现）。Fairy 按本登记只扩命中元素：保留 ice 并显式加入 frost，basic+霜月精确目标、数值、通道与稳定 ID 全部保持，不泄漏给霜灼·破独立事件（uncategorized 目标不匹配本条件）。同块的霜月 +60% 增伤记录（eff-ms4msho4-rjt6sj）没有元素过滤，不在登记内。防漂移：raw 与 normalized 两份记录编码（含完整 skillTargets 元组与 elementFilter）与所属块冻结完整 note 逐字核对，先于通用 unsupported 降级拒绝；未来偏移的记录不再静默纠正，也不以局部 ID 子串定位。证据级别为同文结算分支映射与正式动作目录枚举，未经游戏实测。",
   },
 }
 

@@ -1032,6 +1032,16 @@ describe("fixed-source catalog conformance", () => {
     "/agents/51/mindscapeBuffs/2/effectBlocks/0/effects/1",
   ])
   /**
+   * 批次 14 的星见雅两条元素修正位置：终结技冰伤 +30% 与霜月 30% 冰抗忽视
+   * 的 elementFilter=[冰] 按烈霜结算证据扩展为 [ice, frost] 后转为 corrected，
+   * 数值与其余条件不变，仍按来源数值比对（frost 命中的消费回归见
+   * pr14-miyabi-frostburn-break.test.ts）。
+   */
+  const batch14ElementScopeCorrectedPointers = new Set([
+    "/agents/22/mindscapeBuffs/0/effectBlocks/0/effects/0",
+    "/agents/22/mindscapeBuffs/0/effectBlocks/1/effects/1",
+  ])
+  /**
    * 蕾米埃尔影画 1 的两条半状态记录：已并入完整状态选项，两处来源位置改为
    * semantic-conflict 迁移入口；由本文件的具名完整状态用例验证，不把旧单选
    * 结果当作上游期望值。
@@ -1176,6 +1186,7 @@ describe("fixed-source catalog conformance", () => {
             potentialExplainedPointers.has(r.pointer) ||
             coreRankExpandedPointers.has(r.pointer) ||
             elementScopeCorrectedPointers.has(r.pointer) ||
+            batch14ElementScopeCorrectedPointers.has(r.pointer) ||
             developerRevisionCorrectedPointers.has(r.pointer) ||
             attributeAnomalyScopeCorrectedPointers.has(r.pointer) ||
             completeStateMigratedPointers.has(r.pointer) ||
@@ -1919,7 +1930,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("28")
+    expect(catalog.revision).toBe("29")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -4731,12 +4742,14 @@ describe("velina cyclone catalog linkage", () => {
       // 12014 由 coverage-only boundary 迁移为目录实体 + 单份声明（补充
       // 实体 3 → 4）与前批提供者同条款缺口；批次 12 再增比格气缸受击附伤
       // （单选项双规则完整状态）与加农转子暴击附伤两条音擎补充；批次 13
-      // 再增本影画 2 格挡反击附伤一条代理人补充：合计 outOfScope 3 → 33、
-      // records 45 → 78、rules 43 → 47、options 37 → 40、integrated 42 → 45。
-      records: 78,
-      integrated: 45,
-      rules: 47,
-      options: 40,
+      // 再增本影画 2 格挡反击附伤一条代理人补充；批次 14 再增星见雅霜灼·破
+      // 一条代理人补充（单选项双规则：主伤害 + 影画 4 同事件增伤）：合计
+      // outOfScope 3 → 33、records 45 → 79、rules 43 → 49、options 37 → 41、
+      // integrated 42 → 46。
+      records: 79,
+      integrated: 46,
+      rules: 49,
+      options: 41,
       entities: 4,
       outOfScope: 33,
     })

@@ -51,6 +51,13 @@ describe("static effects evidence path", () => {
     expect(verified).toContain(
       "semantics:w-engines/Blazing_Laurel/refinement/5/blk-legacy/legacy-team-dmgBonus",
     )
+    // 批次 14 的两条星见雅元素修正（烈霜结算中英文证据）同样逐条核验。
+    expect(verified).toContain(
+      "semantics:agents/miyabi/mindscape/0/blk-legacy/legacy-self-dmgBonus",
+    )
+    expect(verified).toContain(
+      "semantics:agents/miyabi/mindscape/0/blk-ms4msho4-fuuot6/eff-ms4mu14z-vj4c3r",
+    )
     // 批次 06 的六项补充证据（含被动行 rank 与 data.json level 元数据的映射）
     // 也由同一入口逐条核验。
     for (const supplementId of [
@@ -119,6 +126,8 @@ describe("static effects evidence path", () => {
       "nanoka:w-engines:14001:critical-hit-bonus-damage",
       // 批次 13：本影画 2[以守为攻]格挡反击附伤（天赋 Pointer）。
       "nanoka:agents:benbigger:m2-block-counter-defense-damage",
+      // 批次 14：星见雅霜灼·破（核心被动七行被动 rank 映射 + 影画 4 天赋）。
+      "nanoka:agents:miyabi:frostburn-break-damage",
     ])
       expect(verified).toContain(`supplement:${supplementId}`)
   })
