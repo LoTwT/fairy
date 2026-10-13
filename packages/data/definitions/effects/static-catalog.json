@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "31",
+  "revision": "32",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -45729,6 +45729,147 @@
           "inputs": [],
           "applicability": {},
           "differences": ["remielle-mindscape1-complete-anomaly-state"]
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:yeshunguang:veil-vulnerability",
+      "catalogEntityId": "agents:yeshunguang",
+      "name": "以太帷幕·决裁 · 帷幕易伤（声明入场比例）",
+      "conditionDescription": "敌人本次进入以太帷幕·决裁后叶瞬光本人命中；显式提供入场敌人trigger、双方敌对快照及已确定比例B（85%=0.85）。条件模型1+min(B,影画0—3:1.1/4—6:2)替代普通失衡乘区，核心1—7相同；S→B换算待证。B=0仍替代，0层关闭；只结算本人当前属性regular/sharpen直伤，新入场须成组换事件、快照与B，历史真实性和状态时长由调用方负责。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1431/details.zh.json",
+              "pointer": "/passive/level/1431501/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1431/details.zh.json",
+              "pointer": "/passive/level/1431502/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1431/details.zh.json",
+              "pointer": "/passive/level/1431503/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1431/details.zh.json",
+              "pointer": "/passive/level/1431504/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1431/details.zh.json",
+              "pointer": "/passive/level/1431505/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1431/details.zh.json",
+              "pointer": "/passive/level/1431506/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1431/details.zh.json",
+              "pointer": "/passive/level/1431507/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1431/details.zh.json",
+              "pointer": "/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1431/details.en.json",
+              "pointer": "/passive/level/1431501/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1431/details.en.json",
+              "pointer": "/passive/level/1431502/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1431/details.en.json",
+              "pointer": "/passive/level/1431503/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1431/details.en.json",
+              "pointer": "/passive/level/1431504/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1431/details.en.json",
+              "pointer": "/passive/level/1431505/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1431/details.en.json",
+              "pointer": "/passive/level/1431506/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1431/details.en.json",
+              "pointer": "/passive/level/1431507/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1431/details.en.json",
+              "pointer": "/talent/4/desc"
+            }
+          ],
+          "effectIds": ["agent:1431:nanoka:veil-vulnerability:mindscape:0"],
+          "maximumLayers": 1,
+          "inputs": [
+            {
+              "name": "veilVulnerabilityBonusAtEntry",
+              "unit": "ratio",
+              "description": "调用方已确定的本次入场帷幕比例B（85%填0.85，有限非负、无默认）；普通失衡总乘数S到B的换算待证，不由本输入推算。"
+            }
+          ],
+          "applicability": {},
+          "differences": []
         }
       ]
     },

@@ -70,7 +70,10 @@ const completeStateOperation = {
       },
     ],
   },
-} as unknown as ContributionRule["operation"]
+} as unknown as Extract<
+  ContributionRule["operation"],
+  { kind: "factor-contribution" }
+>
 
 /** maximumLayers 字面量的键顺序可替换，用于验证目录不按 JSON 字节比较。 */
 function completeStateActivation(
@@ -130,7 +133,10 @@ function boundaryFixture(options: BoundaryOptions = {}): {
     operation: {
       ...completeStateOperation,
       value: { kind: "literal", unit: "ratio", value: 0.01 },
-    } as unknown as ContributionRule["operation"],
+    } as unknown as Extract<
+      ContributionRule["operation"],
+      { kind: "factor-contribution" }
+    >,
   }
   const modification: RuleSet["effects"][number] = {
     kind: "modification",

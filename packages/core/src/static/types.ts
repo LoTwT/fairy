@@ -93,6 +93,8 @@ export interface StaticActionCalculationInput {
     readonly holderId: EntityId
     readonly optionId: string
     readonly layers: number
+    /** 调用方提供的激活事件与历史快照引用，原样透传；不由当前命中补造。 */
+    readonly trigger?: import("../effects/types.ts").TriggerContext
     /**
      * 声明式同队受益者：仅当所选选项声明 declaredTeammateBeneficiary 且
      * layers > 0 时必须提供（0 层关闭沿既有关闭语义，无需声明）；必须是

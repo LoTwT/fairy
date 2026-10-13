@@ -61,6 +61,52 @@ import {
   validateWorldObservation,
 } from "./world.ts"
 
+/** 只识别普通失衡输出独占的目录输入；未知/独立前提保持必填。 */
+function discardedStunInputOwners(
+  name: string,
+  variant: StaticCatalogVariant,
+  rules: readonly EffectRule[],
+): readonly string[] | undefined {
+  const reads = (value: unknown): boolean => {
+    if (Array.isArray(value)) return value.some(reads)
+    if (!isPlainObject(value)) return false
+    return (
+      (value["kind"] === "input" && value["name"] === name) ||
+      Object.values(value).some(reads)
+    )
+  }
+  if (variant.parameterMapping !== undefined) return undefined
+  const owners = new Set<string>()
+  for (const id of variant.effectIds) {
+    const rule = rules.find((entry) => entry.effectId === id)
+    if (rule === undefined) return undefined
+    if (!reads(rule)) continue
+    if (
+      rule.kind === "contribution" &&
+      rule.operation.kind === "factor-contribution" &&
+      rule.operation.channel === "stun-damage-adjustment"
+    ) {
+      const { operation, ...remainder } = rule
+      if (reads(remainder) || !reads(operation.value)) return undefined
+      owners.add(rule.effectId)
+    } else if (rule.kind === "modification" && rule.phase === "contribution") {
+      const target = rules.find(
+        (entry) => entry.effectId === rule.target.effectId,
+      )
+      if (
+        target?.kind !== "contribution" ||
+        target.operation.kind !== "factor-contribution" ||
+        target.operation.channel !== "stun-damage-adjustment"
+      )
+        return undefined
+      // 贡献阶段的参数/输出修改都在目标 when 之后求值。目标可由其他选项
+      // 选中；展开后仍须以本次实际替代的 (bindingId, effectId) 确认归属。
+      owners.add(target.effectId)
+    } else return undefined
+  }
+  return owners.size > 0 ? [...owners] : undefined
+}
+
 const unavailableReasons = [
   "missing-identity",
   "missing-rank-evidence",
@@ -1758,6 +1804,12 @@ export function calculateStaticDamageFromCatalog(
         })
       : undefined
   const expanded: StaticEffectSelection[] = []
+  const deferredStunInputs: {
+    bindingId: string
+    effectIds: readonly string[]
+    pointer: string
+    message: string
+  }[] = []
   /**
    * 完整状态层数桥接派生的内部 count 输入：键为 (bindingId, name)，值是
    * 该绑定上经目录严格校验的逻辑层数。外部 inputs 不能提供同一键，多个
@@ -1812,7 +1864,7 @@ export function calculateStaticDamageFromCatalog(
     if (!selection) continue
     rejectUnknownFields(
       selection,
-      ["optionId", "bindingId", "layers", "beneficiaryActorId"],
+      ["optionId", "bindingId", "layers", "beneficiaryActorId", "trigger"],
       checks(p),
       "option selection",
     )
@@ -2053,13 +2105,23 @@ export function calculateStaticDamageFromCatalog(
       const provided = input.inputs?.find(
         (v) => v.bindingId === binding.bindingId && v.name === requirement.name,
       )
-      if (!provided)
-        collector.report(
-          "MISSING_FACT",
-          p,
-          `Missing input ${requirement.name}; ${explain}`,
+      if (!provided) {
+        const effectIds = discardedStunInputOwners(
+          requirement.name,
+          variant,
+          parsed.value.effects,
         )
-      else if (provided.value?.unit !== requirement.unit)
+        const message = `Missing input ${requirement.name}; ${explain}`
+        if (effectIds === undefined)
+          collector.report("MISSING_FACT", p, message)
+        else
+          deferredStunInputs.push({
+            bindingId: binding.bindingId,
+            effectIds,
+            pointer: p,
+            message,
+          })
+      } else if (provided.value?.unit !== requirement.unit)
         collector.report(
           "UNIT_MISMATCH",
           p,
@@ -2347,7 +2409,18 @@ export function calculateStaticDamageFromCatalog(
       // layers 1（一次完整状态）；未声明的选项保持逐层展开行为。
       const layerCountInputName = variant.layerCountInputName
       if (layerCountInputName === undefined) {
-        expanded.push({ effectId, bindingId: binding.bindingId, layers })
+        expanded.push({
+          effectId,
+          bindingId: binding.bindingId,
+          layers,
+          ...(selection["trigger"] === undefined
+            ? {}
+            : {
+                trigger: selection["trigger"] as NonNullable<
+                  StaticEffectSelection["trigger"]
+                >,
+              }),
+        })
       } else {
         const key = JSON.stringify([binding.bindingId, layerCountInputName])
         if (derivedLayerInputs.has(key)) {
@@ -2363,7 +2436,18 @@ export function calculateStaticDamageFromCatalog(
           name: layerCountInputName,
           value: layers,
         })
-        expanded.push({ effectId, bindingId: binding.bindingId, layers: 1 })
+        expanded.push({
+          effectId,
+          bindingId: binding.bindingId,
+          layers: 1,
+          ...(selection["trigger"] === undefined
+            ? {}
+            : {
+                trigger: selection["trigger"] as NonNullable<
+                  StaticEffectSelection["trigger"]
+                >,
+              }),
+        })
       }
       const list = guards.get(effectId) ?? []
       list.push(
@@ -2770,6 +2854,20 @@ export function calculateStaticDamageFromCatalog(
       hit: { ...bridgedInput.hit, damageItems: preparedItems },
     })
     if (!evaluated.ok) return evaluated
+    for (const deferred of deferredStunInputs) {
+      if (
+        !deferred.effectIds.every((effectId) =>
+          evaluated.value.replacedStunOutputs.some(
+            (output) =>
+              output.bindingId === deferred.bindingId &&
+              output.effectId === effectId,
+          ),
+        )
+      ) {
+        collector.report("MISSING_FACT", deferred.pointer, deferred.message)
+      }
+    }
+    if (!collector.isEmpty) return failure(collector)
     const consumed = new Set<FactorChannel>()
     const contributions = evaluated.value.evaluation.contributions
     const take = (channel: FactorChannel): number => {

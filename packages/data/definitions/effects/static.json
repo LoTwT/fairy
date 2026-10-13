@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "31",
+  "revision": "32",
   "effects": [
     {
       "kind": "contribution",
@@ -32735,6 +32735,180 @@
               }
             }
           ]
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1431:nanoka:veil-vulnerability:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1431"
+        },
+        "section": "核心被动：照破无明（帷幕易伤）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1431/details.zh.json",
+            "pointer": "/passive/level/1431501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1431/details.zh.json",
+            "pointer": "/passive/level/1431502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1431/details.zh.json",
+            "pointer": "/passive/level/1431503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1431/details.zh.json",
+            "pointer": "/passive/level/1431504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1431/details.zh.json",
+            "pointer": "/passive/level/1431505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1431/details.zh.json",
+            "pointer": "/passive/level/1431506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1431/details.zh.json",
+            "pointer": "/passive/level/1431507/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1431/details.zh.json",
+            "pointer": "/talent/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1431/details.en.json",
+            "pointer": "/passive/level/1431501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1431/details.en.json",
+            "pointer": "/passive/level/1431502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1431/details.en.json",
+            "pointer": "/passive/level/1431503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1431/details.en.json",
+            "pointer": "/passive/level/1431504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1431/details.en.json",
+            "pointer": "/passive/level/1431505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1431/details.en.json",
+            "pointer": "/passive/level/1431506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1431/details.en.json",
+            "pointer": "/passive/level/1431507/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1431/details.en.json",
+            "pointer": "/talent/4/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "maximumVeilBonus": {
+          "kind": "by-rank",
+          "rank": "mindscapeRank",
+          "unit": "ratio",
+          "values": {
+            "0": 1.1,
+            "1": 1.1,
+            "2": 1.1,
+            "3": 1.1,
+            "4": 2,
+            "5": 2,
+            "6": 2
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "stun-damage-replacement",
+        "bonus": {
+          "kind": "input",
+          "unit": "ratio",
+          "name": "veilVulnerabilityBonusAtEntry"
+        },
+        "maximumBonus": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "maximumVeilBonus"
         }
       }
     },

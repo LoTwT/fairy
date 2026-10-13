@@ -114,6 +114,7 @@ function walkReadsTrigger(value: unknown): boolean {
     return false
   }
   const record = value as Record<string, unknown>
+  if (record["kind"] === "stun-damage-replacement") return true
   const role = record["role"]
   if (
     role === "triggerActor" ||

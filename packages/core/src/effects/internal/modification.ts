@@ -26,6 +26,7 @@ interface TargetProfile {
   readonly boundedExtension: boolean
   readonly hitScope: boolean
   readonly guaranteedCritical: boolean
+  readonly stunDamageReplacement: boolean
 }
 
 function readTargetProfile(
@@ -101,6 +102,11 @@ function readTargetProfile(
       typeof operation === "object" &&
       operation !== null &&
       (operation as Record<string, unknown>)["kind"] === "guaranteed-critical",
+    stunDamageReplacement:
+      typeof operation === "object" &&
+      operation !== null &&
+      (operation as Record<string, unknown>)["kind"] ===
+        "stun-damage-replacement",
   }
 }
 
@@ -143,11 +149,14 @@ function validateChange(
   }
   switch (field) {
     case "parameter": {
-      if (target?.guaranteedCritical && pending.phase === "contribution") {
+      if (
+        (target?.guaranteedCritical || target?.stunDamageReplacement) &&
+        pending.phase === "contribution"
+      ) {
         checks.collector.report(
           "INVALID_MODIFICATION",
           pointer,
-          "A guaranteed-critical source has no numeric contribution expression; only configuration parameters can modify its conditions",
+          "This source only accepts configuration parameter modifications",
         )
         return false
       }
@@ -214,11 +223,11 @@ function validateChange(
       return true
     }
     case "output": {
-      if (target?.guaranteedCritical) {
+      if (target?.guaranteedCritical || target?.stunDamageReplacement) {
         checks.collector.report(
           "INVALID_MODIFICATION",
           pointer,
-          "A guaranteed-critical source has no numeric output to modify",
+          "This source does not accept numeric output modifications",
         )
         return false
       }

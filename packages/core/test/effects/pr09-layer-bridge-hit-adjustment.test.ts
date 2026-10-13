@@ -80,7 +80,10 @@ const rule: ContributionRule = {
         ],
       },
     },
-  } as unknown as ContributionRule["operation"],
+  } as unknown as Extract<
+    ContributionRule["operation"],
+    { kind: "hit-adjustment" }
+  >,
 }
 
 const definitions: RuleSet = {

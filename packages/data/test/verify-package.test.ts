@@ -1,3 +1,4 @@
+import { veilConsumerSource } from "./fixtures/veil-consumer.ts"
 import { execFileSync, spawnSync } from "node:child_process"
 import {
   cpSync,
@@ -452,6 +453,8 @@ for (const [id, suffix, element, expected, mindscapeRank, optionId, selectedExpe
   assert.equal(api.resolveAgentAction({ ...resolution, requireIndividualHits: true }).ok, false)
   assert.equal(calculateStaticActionDamage({ ...request, requireIndividualHits: true }).ok, false)
 }
+${veilConsumerSource}
+await verifyVeilConsumer(api, calculateStaticActionDamage)
 // 维琳娜微域气旋：安装包根入口解析并计算具名直伤约定。期望值独立于实现：
 // 面板攻击 (797.574 + 75 + 684.02) × 1.6 + 316 = 2806.5504；暴击率 0.05 + 0.08、
 // 暴伤 0.5、穿透 0.24；1 级 32.5%、12 级 65.5%；防御 794/(794+1000×0.76)、风抗 0.2。

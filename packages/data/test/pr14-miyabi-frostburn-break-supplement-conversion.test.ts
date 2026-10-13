@@ -177,7 +177,7 @@ const normalizedMutationFunctions = (
 describe("batch 14 Miyabi frostburn break supplement conversion", () => {
   it("registers the option, target, and both rules beside the preserved fixed-source clauses", () => {
     const result = convert(pr14MiyabiData())
-    expect(result.definitions.revision).toBe("31")
+    expect(result.definitions.revision).toBe("32")
     // 影画 0 的既有条款照常转换（公开 ID 与 effectId 保持），两条元素修正
     // 将命中元素扩展为 [ice, frost]，其余条件与数值不变。
     const ultRule = result.definitions.effects.find(
@@ -547,7 +547,7 @@ describe("batch 14 Miyabi frostburn break supplement conversion", () => {
         },
       ],
     })
-    expect(ordered.definitions.revision).toBe("31")
+    expect(ordered.definitions.revision).toBe("32")
 
     // 合法真实重排（实体数组、rank 0 块数组与块内记录数组顺序全部反转，
     // 先断言三类顺序确实改变；定义 rank 的影画档数组不参与重排）不改变
@@ -799,7 +799,9 @@ describe("batch 14 Miyabi settlement element scope correction conversion", () =>
     )
     expect(() =>
       convert(drift((e) => e, "blk-legacy", `${MIYABI_ULTIMATE_NOTE}追加句。`)),
-    ).toThrow(/Settlement element scope correction.*block note drift/)
+    ).toThrow(
+      /Supplement nanoka:agents:miyabi:frostburn-break-damage anchor block blk-legacy note drifted/,
+    )
     // normalized 删除（归一化不再收集该记录）同样拒绝——重命名归一化记录
     // 会先触发收集不变量（未入账的归一化效果），同为拒绝，不静默降级。
     expect(() =>
@@ -999,6 +1001,6 @@ describe("batch 14 settlement element scope identity presence", () => {
       },
       [],
     )
-    expect(result.definitions.revision).toBe("31")
+    expect(result.definitions.revision).toBe("32")
   })
 })

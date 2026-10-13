@@ -99,16 +99,24 @@ interface GuaranteedCriticalAddress {
   readonly itemId: string
 }
 
+interface StunDamageReplacementAddress {
+  readonly kind: "hit"
+  readonly hitId: string
+  readonly field: "stunDamageMultiplier"
+  readonly itemId?: never
+}
+
 type ConsumptionAddress =
   | OutputAddress
   | FactorAddress
   | HitAddress
   | GuaranteedCriticalAddress
+  | StunDamageReplacementAddress
 
 interface EvaluatedLayer {
   readonly candidate: LayerCandidate
   readonly address: ConsumptionAddress
-  readonly operator: "add" | "scale" | "guarantee"
+  readonly operator: "add" | "scale" | "guarantee" | "replace"
   readonly value: number
   readonly appliedModifications: readonly EffectId[]
 }
@@ -765,7 +773,9 @@ function collectLayersForAddress(
       continue
     }
     if (address.kind === "hit") {
-      if (address.field === "criticalRate") {
+      if (address.field === "stunDamageMultiplier") {
+        if (rule.operation.kind !== "stun-damage-replacement") continue
+      } else if (address.field === "criticalRate") {
         if (
           rule.operation.kind !== "guaranteed-critical" ||
           rule.operation.itemId !== address.itemId
@@ -783,7 +793,8 @@ function collectLayersForAddress(
       }
     } else if (
       rule.operation.kind === "hit-adjustment" ||
-      rule.operation.kind === "guaranteed-critical"
+      rule.operation.kind === "guaranteed-critical" ||
+      rule.operation.kind === "stun-damage-replacement"
     ) {
       continue
     } else if (address.kind === "stat") {
@@ -1159,6 +1170,8 @@ function evaluateSingleLayer(
   if (!evaluateCondition(rule.when, context, layer)) {
     return null
   }
+  if (rule.operation.kind === "stun-damage-replacement")
+    return evaluateStunDamageReplacementLayer(layer, context)
   if (rule.operation.kind === "guaranteed-critical") {
     // 定义边界禁止数值输出修改；固定来源事实不执行加算、缩放或输出表达式。
     return {
@@ -2030,20 +2043,31 @@ export function evaluateEffects(
 }
 
 /**
- * 仅供静态 regular 结算的内部命中求值入口：把已通过低层校验的声明最终
- * 暴击概率送到现有命中求值函数。不进入公共 EvaluationInput/Event 契约，
- * 公共 evaluateEffects 三参数调用与普通命中分支保持原样；该函数不从
- * 公共 barrel 导出。
+ * 静态适配的内部入口：传入已校验的声明暴击率，并回传本次实际被替代的
+ * 普通失衡输出身份供目录检查必填输入。不进入公共输入/结果契约，不保存
+ * 跨请求状态；公共 evaluateEffects 保持三参数，该入口不从公共 barrel 导出。
  */
 export function evaluateEffectsForStaticHit(
   prepared: PreparedEffects,
   state: EffectState,
   input: EvaluationInput,
-  declaredCriticalRate: number,
+  declaredCriticalRate: number | undefined,
+  replacedStunOutputs: ReplacedStunOutput[],
 ):
   | { readonly ok: true; readonly value: EvaluationResult }
   | ReturnType<typeof failure> {
-  return evaluateEffectsInternal(prepared, state, input, declaredCriticalRate)
+  return evaluateEffectsInternal(
+    prepared,
+    state,
+    input,
+    declaredCriticalRate,
+    replacedStunOutputs,
+  )
+}
+
+export interface ReplacedStunOutput {
+  readonly effectId: string
+  readonly bindingId: string
 }
 
 function evaluateEffectsInternal(
@@ -2051,6 +2075,7 @@ function evaluateEffectsInternal(
   state: EffectState,
   input: EvaluationInput,
   declaredCriticalRate: number | undefined,
+  replacedStunOutputs?: ReplacedStunOutput[],
 ):
   | { readonly ok: true; readonly value: EvaluationResult }
   | ReturnType<typeof failure> {
@@ -2241,7 +2266,12 @@ function evaluateEffectsInternal(
     }
     return { ok: true, value: result }
   }
-  const result = evaluateHitQuery(context, hitStats, declaredCriticalRate)
+  const result = evaluateHitQuery(
+    context,
+    hitStats,
+    declaredCriticalRate,
+    replacedStunOutputs,
+  )
   if (result === undefined || !collector.isEmpty) {
     return failure(collector)
   }
@@ -2384,15 +2414,148 @@ function evaluateContributionsQuery(
   }
 }
 
+/** 只消费已声明的入场比例；快照验证归属与时点，不声称校验 B 的游戏真实性。 */
+function evaluateStunDamageReplacementLayer(
+  layer: LayerCandidate,
+  context: EvaluationContext,
+): EvaluatedLayer | undefined {
+  const operation = layer.entry.rule.operation
+  if (operation.kind !== "stun-damage-replacement") return undefined
+  const hit = context.hit!
+  const origin = {
+    effectId: layer.entry.rule.effectId,
+    bindingId: layer.entry.bindingId,
+  }
+  const reject = (
+    message: string,
+    code:
+      | "CONTEXT_MISMATCH"
+      | "MISSING_FACT"
+      | "INVALID_INPUT" = "CONTEXT_MISMATCH",
+  ) => {
+    context.collector.report(code, "/hit", message, origin)
+    return undefined
+  }
+  if (
+    (hit.damageKind !== "regular" && hit.damageKind !== "sharpen") ||
+    hit.origin.kind !== "direct"
+  )
+    return reject(
+      "Stun damage replacement requires regular/sharpen direct damage",
+    )
+  const trigger = layer.trigger
+  if (trigger === null)
+    return reject(
+      "Stun damage replacement requires its entry trigger",
+      "MISSING_FACT",
+    )
+  if (hit.actorId !== layer.entry.holderId || hit.targetId !== trigger.actorId)
+    return reject(
+      "Stun damage replacement must belong to the hit holder and its captured enemy",
+    )
+  const snapshot = context.snapshots.get(trigger.activationSnapshotId)
+  if (
+    snapshot === undefined ||
+    snapshot.atSeconds > context.atSeconds ||
+    snapshot.atSeconds !== layer.layer?.startedAt
+  )
+    return reject(
+      "Stun damage replacement requires the original entry snapshot time",
+    )
+  const history = validateWorldObservation(
+    snapshot.world,
+    context.collector,
+    "/snapshots/world",
+  )
+  if (history === undefined) return undefined
+  for (const world of [history, context.world]) {
+    const holder = world.actors.get(layer.entry.holderId)
+    const enemy = world.actors.get(trigger.actorId)
+    if (holder === undefined || enemy === undefined)
+      return reject(
+        "Both the holder and captured enemy must be observed actors at entry and at the hit",
+        "MISSING_FACT",
+      )
+    if (holder.teamId === enemy.teamId)
+      return reject(
+        "The captured enemy must oppose the holder at entry and at the hit",
+      )
+  }
+  for (const item of hit.damageItems) {
+    const source = item.statSource ?? hit.attributeSources?.[item.stat]
+    if (
+      source !== undefined &&
+      (source.entityId !== layer.entry.holderId ||
+        source.snapshotId !== undefined)
+    )
+      return reject(
+        "Stun damage replacement only supports damage scaled from the holder's current attributes",
+      )
+  }
+  const bonus = evaluateExpression(operation.bonus, context, layer)
+  const maximum = evaluateExpression(operation.maximumBonus, context, layer)
+  if (!context.collector.isEmpty) return undefined
+  if (
+    !Number.isFinite(bonus) ||
+    bonus < 0 ||
+    !Number.isFinite(maximum) ||
+    maximum < 0 ||
+    maximum > 2
+  )
+    return reject(
+      "Replacement bonus must be non-negative and its maximum must be within [0, 2]",
+      "INVALID_INPUT",
+    )
+  return {
+    candidate: layer,
+    address: { kind: "hit", hitId: hit.hitId, field: "stunDamageMultiplier" },
+    operator: "replace",
+    value: 1 + Math.min(bonus, maximum),
+    appliedModifications: layer.entry.appliedModificationIds,
+  }
+}
+
+function resolveStunDamageReplacement(
+  context: EvaluationContext,
+): EvaluatedLayer | null | undefined {
+  const address: StunDamageReplacementAddress = {
+    kind: "hit",
+    hitId: context.hit!.hitId,
+    field: "stunDamageMultiplier",
+  }
+  const candidates = collectLayersForAddress(address, context)
+  if (candidates === undefined) return undefined
+  const applicable = candidates.filter((layer) =>
+    evaluateCondition(layer.entry.rule.when, context, layer),
+  )
+  if (!context.collector.isEmpty) return undefined
+  // 先数真实适用层，再求任一输出；缺事实的重复来源不能被降成单来源。
+  if (applicable.length > 1) {
+    context.collector.report(
+      "CONTEXT_MISMATCH",
+      "/hit",
+      "A hit accepts exactly one effective stun damage replacement layer; duplicate sources cannot be combined",
+    )
+    return undefined
+  }
+  if (applicable.length === 0) return null
+  const evaluated = evaluateStunDamageReplacementLayer(applicable[0]!, context)
+  if (evaluated !== undefined) context.shared.consumed.add(evaluated)
+  return evaluated
+}
+
 function evaluateHitQuery(
   context: EvaluationContext,
   additionalStats: readonly Stat[] = [],
   declaredCriticalRate?: number,
+  replacedStunOutputs?: ReplacedStunOutput[],
 ): EvaluationResult | undefined {
   const hit = context.hit
   if (hit === null) {
     return undefined
   }
+  const stunReplacement = resolveStunDamageReplacement(context)
+  if (stunReplacement === undefined) return undefined
   const guarantees: EvaluatedLayer[] = []
   for (const item of hit.damageItems) {
     const selected = selectedAdjustmentsFor(
@@ -2655,6 +2818,24 @@ function evaluateHitQuery(
     })
   }
   for (const channel of factorChannels(context)) {
+    if (stunReplacement !== null && channel === "stun-damage-adjustment") {
+      const candidates = collectLayersForAddress(
+        { kind: "factor", channel, entityId: hit.actorId, hitId: hit.hitId },
+        context,
+      )
+      if (candidates === undefined) return undefined
+      for (const layer of candidates) {
+        if (evaluateCondition(layer.entry.rule.when, context, layer)) {
+          replacedStunOutputs?.push({
+            effectId: layer.entry.rule.effectId,
+            bindingId: layer.entry.bindingId,
+          })
+        }
+      }
+      if (!context.collector.isEmpty) return undefined
+      // 普通通道保留真实候选与 when；被替代输出、输出修改及按值唯一性不消费。
+      continue
+    }
     if (
       selectedAdjustmentsFor(
         { kind: "factor", channel, entityId: hit.actorId, hitId: hit.hitId },

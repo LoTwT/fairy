@@ -1930,7 +1930,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("31")
+    expect(catalog.revision).toBe("32")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -4745,11 +4745,12 @@ describe("velina cyclone catalog linkage", () => {
       // 再增本影画 2 格挡反击附伤一条代理人补充；批次 14 再增星见雅霜灼·破
       // 一条代理人补充（单选项双规则：主伤害 + 影画 4 同事件增伤）；批次 15
       // 再增简与爱丽丝 M6 精通附伤两条补充（爱丽丝同选项另有必暴规则）；
-      // 批次 16 再增格莉丝 M6 普通/强化特殊技原手雷组合两条倍率补充。
-      records: 83,
-      integrated: 50,
-      rules: 54,
-      options: 45,
+      // 批次 16 再增格莉丝 M6 普通/强化特殊技原手雷组合两条倍率补充；
+      // 批次 17 再增叶瞬光帷幕易伤一条条件输入与失衡乘区替代补充。
+      records: 84,
+      integrated: 51,
+      rules: 55,
+      options: 46,
       entities: 4,
       outOfScope: 33,
     })

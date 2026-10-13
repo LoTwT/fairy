@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "31",
+  "revision": "32",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -30251,6 +30251,16 @@
   ],
   "supplementalRecords": [
     {
+      "supplementId": "nanoka:agents:yeshunguang:veil-vulnerability",
+      "source": "nanoka-integrated@3.2 agents/1431 /passive/level/1431501—1431507/desc/0 + /talent/4/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:yeshunguang:veil-vulnerability",
+      "effectIds": ["agent:1431:nanoka:veil-vulnerability:mindscape:0"],
+      "supportedRanks": "核心 1—7；影画 0—6；层数 0—1",
+      "computationTarget": "declared entry veil bonus replaces this hit's ordinary stun damage factor",
+      "status": "integrated"
+    },
+    {
       "supplementId": "nanoka:agents:grace:m6-special-grenades",
       "source": "nanoka-integrated@3.2 agents/1181 /talent/6/desc + /skill/special/description",
       "kind": "option",
@@ -31118,17 +31128,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 881,
-    "options": 911,
+    "rules": 882,
+    "options": 912,
     "converted": 1134,
     "corrected": 138,
     "unsupported": 18,
     "supplements": {
-      "records": 83,
-      "rules": 54,
-      "options": 45,
+      "records": 84,
+      "rules": 55,
+      "options": 46,
       "entities": 4,
-      "integrated": 50,
+      "integrated": 51,
       "outOfScope": 33
     }
   },

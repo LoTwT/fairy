@@ -491,6 +491,15 @@ export type ResolvedOutput =
       readonly address: {
         readonly kind: "hit"
         readonly hitId: HitId
+        readonly field: "stunDamageMultiplier"
+      }
+      readonly operator: "replace"
+      readonly value: Quantity<"multiplier">
+    }
+  | {
+      readonly address: {
+        readonly kind: "hit"
+        readonly hitId: HitId
         readonly field: "criticalRate"
         readonly itemId: string
       }
@@ -768,6 +777,8 @@ export interface StaticCatalogDamageInput {
   readonly selections: readonly {
     readonly optionId: string
     readonly bindingId: BindingId
+    /** 真实激活上下文，原样透传；不根据本次命中伪造入场事实。 */
+    readonly trigger?: TriggerContext
     /** 0 明确关闭该选项；仍校验选项、来源、档位和层数身份。 */
     readonly layers: number
     /**

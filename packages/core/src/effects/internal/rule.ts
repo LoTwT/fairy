@@ -953,6 +953,7 @@ function validateContributionOperation(
       "factor-contribution",
       "hit-adjustment",
       "guaranteed-critical",
+      "stun-damage-replacement",
     ],
     checks,
     "operation kind",
@@ -961,7 +962,9 @@ function validateContributionOperation(
     return false
   }
   if (
-    (kind === "hit-adjustment" || kind === "guaranteed-critical") &&
+    (kind === "hit-adjustment" ||
+      kind === "guaranteed-critical" ||
+      kind === "stun-damage-replacement") &&
     scope !== "hit"
   ) {
     checks.collector.report(
@@ -973,6 +976,41 @@ function validateContributionOperation(
   }
   const hitScope = scope === "hit"
   switch (kind) {
+    case "stun-damage-replacement": {
+      rejectUnknownFields(
+        object,
+        ["kind", "bonus", "maximumBonus"],
+        checks,
+        kind,
+      )
+      for (const name of ["bonus", "maximumBonus"] as const) {
+        const expression = validateNumericExpression(
+          object[name],
+          expressionContextFor(
+            fields,
+            collector,
+            "contribution",
+            true,
+            knownStates,
+            knownActions,
+          ),
+          `${pointer}/${name}`,
+          "ratio",
+        )
+        if (expression === undefined) return false
+        if (
+          expression.kind === "literal" &&
+          (expression.value < 0 ||
+            (name === "maximumBonus" && expression.value > 2))
+        )
+          collector.report(
+            "INVALID_DEFINITION",
+            `${pointer}/${name}`,
+            "Replacement bonus must be non-negative and its maximum must be within [0, 2]",
+          )
+      }
+      return collector.isEmpty
+    }
     case "guaranteed-critical": {
       if (
         expectNonEmptyString(
@@ -1250,7 +1288,30 @@ function validateContributionRule(
   ) {
     return false
   }
+  if (
+    (object["operation"] as { kind: string }).kind ===
+      "stun-damage-replacement" &&
+    activation !== "supplied"
+  ) {
+    checks.collector.report(
+      "INVALID_DEFINITION",
+      `${checks.pointer}/activation`,
+      "Stun damage replacement requires a supplied activation context",
+    )
+    return false
+  }
   if (object["uniqueness"] !== undefined) {
+    if (
+      (object["operation"] as { kind: string }).kind ===
+      "stun-damage-replacement"
+    ) {
+      checks.collector.report(
+        "INVALID_DEFINITION",
+        `${checks.pointer}/uniqueness`,
+        "Stun damage replacement does not select a uniqueness winner",
+      )
+      return false
+    }
     const uniquenessChecks: FieldChecks = {
       ...checks,
       pointer: `${checks.pointer}/uniqueness`,
