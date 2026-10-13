@@ -6648,7 +6648,7 @@
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-grace-nk-1181005-main",
-    "skillTargetIds": [],
+    "skillTargetIds": ["zzz-hp:skill:grace-special-grenades"],
     "issues": []
   },
   {
@@ -6665,7 +6665,10 @@
     "element": "electric",
     "damageKind": "regular",
     "upstreamSkillId": "sk-grace-nk-1181006-main",
-    "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
+    "skillTargetIds": [
+      "zzz-hp:skill:all-special-ms0fcqv7",
+      "zzz-hp:skill:grace-ex-special-grenades"
+    ],
     "issues": []
   },
   {

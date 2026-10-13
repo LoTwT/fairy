@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "30",
+  "revision": "31",
   "effects": [
     {
       "kind": "contribution",
@@ -11294,6 +11294,396 @@
         "value": {
           "kind": "parameter",
           "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1181:nanoka:m6-ex-special-grenades:mindscape:6",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1181"
+        },
+        "section": "影画6：起爆扳机（超规工程清障（原两颗手雷））",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/talent/6/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/skill/special/description/0/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/skill/special/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/skill/special/description/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/skill/special/description/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/skill/special/description/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/skill/special/description/5/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/skill/special/description/7/param/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/talent/6/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/skill/special/description/0/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/skill/special/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/skill/special/description/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/skill/special/description/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/skill/special/description/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/skill/special/description/5/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/skill/special/description/7/param/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 6
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 3
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["electric"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillCategory",
+            "values": ["enhanced-special"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:grace-ex-special-grenades"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "scale",
+        "itemIds": ["action:agent:1181:action:0013:base"],
+        "value": {
+          "kind": "parameter",
+          "unit": "multiplier",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1181:nanoka:m6-special-grenades:mindscape:6",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1181"
+        },
+        "section": "影画6：起爆扳机（工程清障）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/talent/6/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/skill/special/description/0/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/skill/special/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/skill/special/description/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/skill/special/description/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/skill/special/description/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/skill/special/description/5/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/skill/special/description/6/param/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/talent/6/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/skill/special/description/0/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/skill/special/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/skill/special/description/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/skill/special/description/3/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/skill/special/description/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/skill/special/description/5/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/skill/special/description/6/param/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 6
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "multiplier",
+          "value": 4
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["electric"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillCategory",
+            "values": ["special"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:grace-special-grenades"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "scale",
+        "itemIds": ["action:agent:1181:action:0012:base"],
+        "value": {
+          "kind": "parameter",
+          "unit": "multiplier",
           "name": "amount"
         }
       }

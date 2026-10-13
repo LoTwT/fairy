@@ -124,6 +124,18 @@ Nanoka 的莱特 `/talent/1/desc` 与奥菲丝 `/passive/level/1301507/desc/0` �
 纳入，不是 dash、dodge-counter 或 follow-up。维琳娜的染色属性动作仍不可用，原因具体化为
 缺少可选择的染色元素集合证据。
 
+### 具名约定：格莉丝影画六原手雷组合
+
+`action:agent:1181:action:0012` 和 `0013` 分别绑定项目具名目标
+`zzz-hp:skill:grace-special-grenades` 与 `zzz-hp:skill:grace-ex-special-grenades`，后者保留原有
+`zzz-hp:skill:all-special-ms0fcqv7`。两行引用普通与潜能分支的共同原手雷组合，原倍率不变；
+显式选择对应 M6 选项后，按原 `:base` 项强化一次，无需改写解析结果。颗数推导、选项与低层
+请求约束见[格莉丝影画六强化](zzz-hp-static-effects.md#修订-31格莉丝影画六原手雷组合强化批次-16)。
+
+`0014` 涡流、`0015` 循环、`0016` 脉冲仍按原潜能限制和倍率独立解析，未登记 M6 修正；这不构成
+游戏中 M6 对它们无效的结论。原合计粒度及逐命中限制继续适用，不从增颗文本推定内部命中拆分，
+不修改失衡倍率或异常积蓄。
+
 ### 具名约定：露西亲卫队小猪面板代算
 
 `action:agent:1151:action:0011`—`0014`（亲卫队小猪：抄家伙！的棒球棍、拳套、弹弓，

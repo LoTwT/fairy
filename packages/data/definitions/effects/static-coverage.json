@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "30",
+  "revision": "31",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -30251,6 +30251,26 @@
   ],
   "supplementalRecords": [
     {
+      "supplementId": "nanoka:agents:grace:m6-special-grenades",
+      "source": "nanoka-integrated@3.2 agents/1181 /talent/6/desc + /skill/special/description",
+      "kind": "option",
+      "optionId": "nanoka:agents:grace:m6-special-grenades",
+      "effectIds": ["agent:1181:nanoka:m6-special-grenades:mindscape:6"],
+      "supportedRanks": "影画 6；潜能 0—6；层数 0—1",
+      "computationTarget": "original grenade combination damage multiplier",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:grace:m6-ex-special-grenades",
+      "source": "nanoka-integrated@3.2 agents/1181 /talent/6/desc + /skill/special/description",
+      "kind": "option",
+      "optionId": "nanoka:agents:grace:m6-ex-special-grenades",
+      "effectIds": ["agent:1181:nanoka:m6-ex-special-grenades:mindscape:6"],
+      "supportedRanks": "影画 6；潜能 0—6；层数 0—1",
+      "computationTarget": "original grenade combination damage multiplier",
+      "status": "integrated"
+    },
+    {
       "supplementId": "nanoka:agents:evelyn:m6-lunalux-garrote-follow-up",
       "source": "nanoka-integrated@3.2 agents/1321 /talent/6/desc",
       "kind": "option",
@@ -31098,17 +31118,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 879,
-    "options": 909,
+    "rules": 881,
+    "options": 911,
     "converted": 1134,
     "corrected": 138,
     "unsupported": 18,
     "supplements": {
-      "records": 81,
-      "rules": 52,
-      "options": 43,
+      "records": 83,
+      "rules": 54,
+      "options": 45,
       "entities": 4,
-      "integrated": 48,
+      "integrated": 50,
       "outOfScope": 33
     }
   },
