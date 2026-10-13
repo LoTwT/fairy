@@ -181,7 +181,7 @@ const DIRECT_DAMAGE_EFFECT = (stat: string, value: number): SourceEffect => ({
 describe("batch 12 w-engine additional damage supplements", () => {
   it("registers both options, targets, and rules beside the preserved fixed-source clause", () => {
     const result = convert(pr12WengineData())
-    expect(result.definitions.revision).toBe("29")
+    expect(result.definitions.revision).toBe("30")
     // 加农转子的常驻 ATK 记录照常转换为既有选项（公开 ID 保持）。
     expect(
       result.catalog.options.some(
@@ -303,10 +303,8 @@ describe("batch 12 w-engine additional damage supplements", () => {
           "w-engine:13112:nanoka:retaliation-defense-damage:guaranteed-critical",
     )!
     expect(critRule.operation).toEqual({
-      kind: "stat-adjustment",
-      stat: "criticalRate",
-      stage: "direct",
-      value: { kind: "literal", unit: "ratio", value: 1 },
+      kind: "guaranteed-critical",
+      itemId: "big-cylinder:retaliation",
     })
     // 覆盖报告登记两条补充。
     expect(

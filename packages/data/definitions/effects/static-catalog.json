@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "29",
+  "revision": "30",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -49484,7 +49484,7 @@
       "optionId": "nanoka:w-engines:13112:retaliation-defense-damage",
       "catalogEntityId": "w-engines:Big_Cylinder",
       "name": "万斤顶 · 受击附伤（独立结算）",
-      "conditionDescription": "受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者 600/690/780/870/960% 防御力的伤害（按精炼 1—5），该额外伤害必定暴击，7.5 秒内最多触发一次。本次附伤由调用方声明触发并显式结算：命中须只携带本独立项（独占结算，混合其他伤害项会被拒绝）、以 uncategorized 分类结算、读取装备者当前防御力（元素由调用方按实际结算声明，来源未标注）；7.5 秒冷却与触发检测不模拟。首句承伤降低不属于本选项。",
+      "conditionDescription": "受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者 600/690/780/870/960% 防御力的伤害（按精炼 1—5），该额外伤害由来源保证最终暴击概率为 1，不接受显式 criticalRate 来源或 declaredCriticalRate，普通暴伤保留既有来源契约；7.5 秒内最多触发一次。本次附伤由调用方声明触发并显式结算：命中须只携带本独立项（独占结算，混合其他伤害项会被拒绝）、以 uncategorized 分类结算、读取装备者当前防御力（元素由调用方按实际结算声明，来源未标注）；7.5 秒冷却与触发检测不模拟。首句承伤降低不属于本选项。",
       "target": "self",
       "variants": [
         {
@@ -49770,6 +49770,108 @@
           "exclusiveDamageItem": true
         }
       ]
+    },
+    {
+      "optionId": "nanoka:agents:jane:m6-proficiency-damage",
+      "catalogEntityId": "agents:jane",
+      "name": "「肮脏」技巧 · 精通附伤（独立结算）",
+      "conditionDescription": "队伍角色施加的该次强击暴击后，声明简触发一次物理附伤（自身当前异常精通 ×16）。独占 uncategorized 独立项、零初始倍率；调用方必须显式声明新附伤最终暴击概率 hit.declaredCriticalRate，触发强击已暴击不代替此声明。普通暴伤沿既有来源与命中贡献，这是条件计算，不证明附伤的游戏暴击能力或暴伤继承。狂热 CR/CD 选项独立选择，不自动加入。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 6
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1261/details.zh.json",
+              "pointer": "/talent/6/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1261/details.en.json",
+              "pointer": "/talent/6/desc"
+            }
+          ],
+          "effectIds": ["agent:1261:nanoka:m6-proficiency-damage:mindscape:6"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "jane:m6-proficiency-damage",
+              "stat": "anomalyProficiency",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized",
+              "requiredCriticalRateDeclaration": true
+            }
+          ],
+          "exclusiveDamageItem": true
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:alice:m6-proficiency-damage",
+      "catalogEntityId": "agents:alice",
+      "name": "心中的百里香 · 精通必暴附伤（独立结算）",
+      "conditionDescription": "决胜状态内队伍角色命中后，声明爱丽丝触发一次物理必暴附伤（自身当前异常精通 ×33）。独占 uncategorized 独立项、零初始倍率；来源保证本次附伤最终暴击概率为 1，不接受显式 criticalRate 来源或 declaredCriticalRate。普通暴伤沿既有来源契约；30 秒状态、1 秒间隔、最多 6 次及刷新由调用方管理，本次不自动乘 6。核心周期附伤不属于本选项。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 6
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1401/details.zh.json",
+              "pointer": "/talent/6/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1401/details.en.json",
+              "pointer": "/talent/6/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1401:nanoka:m6-proficiency-damage:mindscape:6",
+            "agent:1401:nanoka:m6-proficiency-damage:mindscape:6:guaranteed-critical"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "alice:m6-proficiency-damage",
+              "stat": "anomalyProficiency",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized"
+            }
+          ],
+          "exclusiveDamageItem": true
+        }
+      ]
     }
   ],
   "skillTargets": [
@@ -49812,6 +49914,14 @@
       "category": "ultimate",
       "name": "s0anby ultimate 追加攻击",
       "countsAsFollowUp": true
+    },
+    {
+      "targetId": "zzz-hp:skill:alice-m6-proficiency-damage",
+      "upstreamId": null,
+      "agentEntityId": "1401",
+      "category": "uncategorized",
+      "name": "爱丽丝影画六精通附伤",
+      "countsAsFollowUp": false
     },
     {
       "targetId": "zzz-hp:skill:all-dodge-ms0dnpmr",
@@ -50187,6 +50297,14 @@
       "agentEntityId": "1291",
       "category": "special",
       "name": "强化特殊技：魂狩·惩戒",
+      "countsAsFollowUp": false
+    },
+    {
+      "targetId": "zzz-hp:skill:jane-m6-proficiency-damage",
+      "upstreamId": null,
+      "agentEntityId": "1261",
+      "category": "uncategorized",
+      "name": "简影画六精通附伤",
       "countsAsFollowUp": false
     },
     {

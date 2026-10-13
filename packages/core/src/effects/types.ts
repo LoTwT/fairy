@@ -488,6 +488,16 @@ type ResolvedStatOutput = {
 export type ResolvedOutput =
   | ResolvedStatOutput
   | {
+      readonly address: {
+        readonly kind: "hit"
+        readonly hitId: HitId
+        readonly field: "criticalRate"
+        readonly itemId: string
+      }
+      readonly operator: "guarantee"
+      readonly value: { readonly unit: "ratio"; readonly value: 1 }
+    }
+  | {
       [C in FactorChannel]: {
         readonly address: {
           readonly kind: "factor"

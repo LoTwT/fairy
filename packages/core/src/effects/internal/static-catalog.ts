@@ -1399,13 +1399,16 @@ export function validateStaticCatalog(
             )
           else {
             const rule = mapped[0] as ContributionRule
-            const expression = rule.operation.value
+            const expression =
+              rule.operation.kind === "factor-contribution"
+                ? rule.operation.value
+                : undefined
             const matchesSource =
               mapping["source"] === "input"
-                ? expression.kind === "input" &&
+                ? expression?.kind === "input" &&
                   expression.name === mapping["inputName"] &&
                   inputNames.has(expression.name)
-                : expression.kind === "stat" &&
+                : expression?.kind === "stat" &&
                   expression.stat === "anomalyProficiency" &&
                   expression.entity.role === "holder" &&
                   expression.at === "evaluation" &&

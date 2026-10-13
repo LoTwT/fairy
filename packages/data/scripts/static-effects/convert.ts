@@ -39,12 +39,12 @@ import {
 import { buildRemielleSpecialVoidflareMechanism } from "./mechanisms.ts"
 import {
   SUPPLEMENTS,
-  WENGINE_RECORD_SHAPE_FIELDS,
+  SOURCE_RECORD_SHAPE_FIELDS,
   type ClauseContextGuardEntry,
   type Supplement,
   type SupplementRuleSpec,
   type SupplementVariantSpec,
-  type WengineRecordShape,
+  type SourceRecordShape,
 } from "./supplements.ts"
 import {
   BUFF_RESOURCE,
@@ -552,6 +552,7 @@ function verifyDriveDiscSetPiecesSupplement(
  */
 function verifyClauseContextGuard(
   data: SourceData,
+  functions: SourceNormalization,
   records: readonly SourceRecord[],
   entity: StaticCatalogEntity,
   registration: {
@@ -564,11 +565,19 @@ function verifyClauseContextGuard(
   if (!context) return
   const guards = Array.isArray(context) ? context : [context]
   for (const guard of guards)
-    verifySingleClauseContextGuard(data, records, entity, registration, guard)
+    verifySingleClauseContextGuard(
+      data,
+      functions,
+      records,
+      entity,
+      registration,
+      guard,
+    )
 }
 
 function verifySingleClauseContextGuard(
   data: SourceData,
+  functions: SourceNormalization,
   records: readonly SourceRecord[],
   entity: StaticCatalogEntity,
   registration: {
@@ -585,6 +594,8 @@ function verifySingleClauseContextGuard(
       `Supplement ${registration.supplementId} lost its fixed-source entity: ${registration.catalogEntityId}`,
     )
   const contextPack = sourceEntity.mindscapeBuffs?.[context.rank] ?? {}
+  const normalizedPack =
+    functions.normalizeAgent(sourceEntity).mindscapeBuffs?.[context.rank] ?? {}
   const contextRecords = records.filter(
     (record) =>
       record.category === "agents" &&
@@ -596,6 +607,8 @@ function verifySingleClauseContextGuard(
     const hasContent =
       (contextPack.effectBlocks?.length ?? 0) > 0 ||
       (contextPack.effects?.length ?? 0) > 0 ||
+      (normalizedPack.effectBlocks?.length ?? 0) > 0 ||
+      (normalizedPack.effects?.length ?? 0) > 0 ||
       contextRecords.length > 0
     if (hasContent)
       throw new Error(
@@ -616,6 +629,102 @@ function verifySingleClauseContextGuard(
       throw new Error(
         `Supplement ${registration.supplementId} anchor block ${anchor.blockId} note drifted at ${registration.catalogEntityId} mindscape rank ${String(context.rank)}: expected the frozen full note; re-review the clause context before generating`,
       )
+  }
+  if (context.coexistingRecords !== undefined) {
+    const anchors = context.anchorBlocks ?? []
+    const expectedRecords = context.coexistingRecords
+    const fail = (detail: string): never => {
+      throw new Error(
+        `Supplement ${registration.supplementId} coexisting clause drift at ${registration.catalogEntityId} mindscape rank ${String(context.rank)}: ${detail}; re-review before generating`,
+      )
+    }
+    for (const [representation, pack] of [
+      ["raw", contextPack],
+      ["normalized", normalizedPack],
+    ] as const) {
+      const blocks = pack.effectBlocks ?? []
+      if (
+        blocks.length !== anchors.length ||
+        new Set(blocks.map((b) => b.id)).size !== blocks.length
+      )
+        fail(`${representation} anchor block set changed`)
+      for (const anchor of anchors) {
+        const block = blocks.find((b) => b.id === anchor.blockId)
+        if (
+          !block ||
+          block.note !== anchor.frozenNote ||
+          (anchor.frozenName !== undefined &&
+            block.name !== anchor.frozenName) ||
+          (anchor.frozenEnabledDefault !== undefined &&
+            block.enabledDefault !== anchor.frozenEnabledDefault)
+        )
+          fail(`${representation} anchor ${anchor.blockId} changed`)
+        const expected = expectedRecords.filter(
+          (r) => r.blockId === anchor.blockId,
+        )
+        const effects = block!.effects
+        if (
+          effects.length !== expected.length ||
+          new Set(effects.map((e) => e.id)).size !== effects.length
+        )
+          fail(`${representation} record set changed in ${anchor.blockId}`)
+        for (const frozen of expected) {
+          const actual = effects.find((e) => e.id === frozen[representation].id)
+          if (!actual)
+            fail(
+              `${representation} record ${frozen[representation].id} missing or moved`,
+            )
+          verifySourceRecordShape(
+            actual!,
+            frozen[representation],
+            registration.supplementId,
+            `${representation} ${anchor.blockId}`,
+          )
+        }
+      }
+      // 旧 pack 同时保存扁平 effects；它是另一读取路径，不能在主块存在时
+      // 静默藏入同条款的新编码。按身份核对，不依赖原数组顺序。
+      if (pack.effects !== undefined) {
+        if (
+          pack.effects.length !== expectedRecords.length ||
+          new Set(pack.effects.map((e) => e.id)).size !== pack.effects.length
+        )
+          fail(`${representation} flattened record set changed`)
+        for (const frozen of expectedRecords) {
+          const actual = pack.effects.find(
+            (e) => e.id === frozen[representation].id,
+          )
+          if (!actual) fail(`${representation} flattened record missing`)
+          verifySourceRecordShape(
+            actual!,
+            frozen[representation],
+            registration.supplementId,
+            `${representation} flattened effects`,
+          )
+        }
+      }
+    }
+    if (contextRecords.length !== expectedRecords.length)
+      fail("collected record set changed")
+    for (const frozen of expectedRecords) {
+      const record = contextRecords.find(
+        (r) => r.blockId === frozen.blockId && r.raw.id === frozen.raw.id,
+      )
+      if (!record?.normalized)
+        fail(`normalized record ${frozen.raw.id} missing`)
+      verifySourceRecordShape(
+        record!.raw,
+        frozen.raw,
+        registration.supplementId,
+        "collected raw",
+      )
+      verifySourceRecordShape(
+        record!.normalized!,
+        frozen.normalized,
+        registration.supplementId,
+        "collected normalized",
+      )
+    }
   }
   const conflict = contextRecords.find(
     (record) =>
@@ -640,24 +749,22 @@ function verifySingleClauseContextGuard(
  * 条款记录不误拒。该守卫不替代 loadSource 对固定资源的 SHA 校验。
  */
 /**
- * 冻结记录形状的逐字段核对：对 WENGINE_RECORD_SHAPE_FIELDS 的每个
+ * 冻结记录形状的逐字段核对：对 SOURCE_RECORD_SHAPE_FIELDS 的每个
  * 字段比较实际记录与登记形状（缺省字段按登记原样比较，值按 JSON 归一后
  * 比较）。任一字段漂移（含上游补出登记中缺省的字段）即拒绝并指明字段与
  * 两边的值；不做空白宽松归一，也不用通用深比较。
  */
-function verifyWengineRecordShape(
+function verifySourceRecordShape(
   actual: SourceEffect,
-  frozen: WengineRecordShape,
+  frozen: SourceRecordShape,
   label: string,
   context: string,
 ): void {
-  for (const field of WENGINE_RECORD_SHAPE_FIELDS) {
+  for (const field of SOURCE_RECORD_SHAPE_FIELDS) {
     const normalizeValue = (value: unknown): string =>
       value === undefined ? "<absent>" : JSON.stringify(value)
     const actualValue = normalizeValue(actual[field as keyof SourceEffect])
-    const frozenValue = normalizeValue(
-      frozen[field as keyof WengineRecordShape],
-    )
+    const frozenValue = normalizeValue(frozen[field as keyof SourceRecordShape])
     if (actualValue !== frozenValue)
       throw new Error(
         `Supplement ${label} field ${field} drifted to ${actualValue} (expected ${frozenValue}) at ${context}; re-review the shared clause context before generating`,
@@ -735,13 +842,13 @@ function verifyWengineRefinementContextGuard(
         )
       // raw 与 normalized 各自独立逐字段核对冻结形状；字段缺省按登记原样
       // 比较，不做空白宽松归一，也不从待验输入推导期望。
-      verifyWengineRecordShape(
+      verifySourceRecordShape(
         record.raw,
         expected.tiers[index]!.raw,
         `${registration.supplementId} coexisting record ${expected.effectId} raw`,
         `${registration.catalogEntityId} refinement ${String(index + 1)}`,
       )
-      verifyWengineRecordShape(
+      verifySourceRecordShape(
         record.normalized,
         expected.tiers[index]!.normalized,
         `${registration.supplementId} coexisting record ${expected.effectId} normalized`,
@@ -793,6 +900,7 @@ function isSafeIntegerInRange(
  */
 function verifyUnsupportedOptionRegistration(
   data: SourceData,
+  functions: SourceNormalization,
   records: readonly SourceRecord[],
   entities: readonly StaticCatalogEntity[],
   supplementEntities: ReadonlyMap<string, StaticCatalogEntity>,
@@ -888,7 +996,7 @@ function verifyUnsupportedOptionRegistration(
       `Unsupported-option supplement ${supplement.supplementId} targets an unreviewed catalog entity kind: ${entity.identity.kind}`,
     )
   if (entity.identity.kind === "agent")
-    verifyClauseContextGuard(data, records, entity, supplement)
+    verifyClauseContextGuard(data, functions, records, entity, supplement)
   // 重复声明防护：该条款类别在当前机器词表里可被编码的 stat（如春日融融的
   // 能量获得效率可被编成 energyRegen）一旦出现，说明上游已有真实编码或补编码，
   // 声明必须重核而不是并存。
@@ -3965,6 +4073,7 @@ export function convertSource(
       // 类型执行最窄守卫（驱动盘件数 note/冲突、音擎五档真实缺失状态）。
       verifyUnsupportedOptionRegistration(
         data,
+        functions,
         collected.records,
         collected.entities,
         supplementEntitiesById,
@@ -4288,7 +4397,13 @@ export function convertSource(
             `Supplement ${supplement.supplementId} conflicts with the fixed-source record at ${conflict.pointer} (stat ${conflict.raw.stat} on the registered skill targets); re-review the clause instead of double-contributing`,
           )
       }
-      verifyClauseContextGuard(data, collected.records, entity, supplement)
+      verifyClauseContextGuard(
+        data,
+        functions,
+        collected.records,
+        entity,
+        supplement,
+      )
       verifyWengineRefinementContextGuard(
         data,
         collected.records,
@@ -4343,7 +4458,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "29",
+    revision: "30",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],

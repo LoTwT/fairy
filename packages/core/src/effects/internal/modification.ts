@@ -25,6 +25,7 @@ interface TargetProfile {
   readonly timedLifetime: boolean
   readonly boundedExtension: boolean
   readonly hitScope: boolean
+  readonly guaranteedCritical: boolean
 }
 
 function readTargetProfile(
@@ -96,6 +97,10 @@ function readTargetProfile(
     timedLifetime,
     boundedExtension,
     hitScope: targetEntry["scope"] === "hit",
+    guaranteedCritical:
+      typeof operation === "object" &&
+      operation !== null &&
+      (operation as Record<string, unknown>)["kind"] === "guaranteed-critical",
   }
 }
 
@@ -138,6 +143,14 @@ function validateChange(
   }
   switch (field) {
     case "parameter": {
+      if (target?.guaranteedCritical && pending.phase === "contribution") {
+        checks.collector.report(
+          "INVALID_MODIFICATION",
+          pointer,
+          "A guaranteed-critical source has no numeric contribution expression; only configuration parameters can modify its conditions",
+        )
+        return false
+      }
       const allowed =
         pending.phase === "configuration" || pending.phase === "contribution"
       if (!allowed) {
@@ -201,6 +214,14 @@ function validateChange(
       return true
     }
     case "output": {
+      if (target?.guaranteedCritical) {
+        checks.collector.report(
+          "INVALID_MODIFICATION",
+          pointer,
+          "A guaranteed-critical source has no numeric output to modify",
+        )
+        return false
+      }
       const allowed =
         pending.phase === "configuration" || pending.phase === "contribution"
       if (!allowed) {

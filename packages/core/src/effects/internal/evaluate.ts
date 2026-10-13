@@ -92,12 +92,23 @@ interface HitAddress {
   readonly itemId?: string
 }
 
-type ConsumptionAddress = OutputAddress | FactorAddress | HitAddress
+interface GuaranteedCriticalAddress {
+  readonly kind: "hit"
+  readonly hitId: string
+  readonly field: "criticalRate"
+  readonly itemId: string
+}
+
+type ConsumptionAddress =
+  | OutputAddress
+  | FactorAddress
+  | HitAddress
+  | GuaranteedCriticalAddress
 
 interface EvaluatedLayer {
   readonly candidate: LayerCandidate
   readonly address: ConsumptionAddress
-  readonly operator: "add" | "scale"
+  readonly operator: "add" | "scale" | "guarantee"
   readonly value: number
   readonly appliedModifications: readonly EffectId[]
 }
@@ -754,18 +765,26 @@ function collectLayersForAddress(
       continue
     }
     if (address.kind === "hit") {
-      // 命中倍率地址只接受 hit-adjustment 操作，在下方统一收集。
-      if (rule.operation.kind !== "hit-adjustment") {
-        continue
+      if (address.field === "criticalRate") {
+        if (
+          rule.operation.kind !== "guaranteed-critical" ||
+          rule.operation.itemId !== address.itemId
+        )
+          continue
+      } else {
+        if (rule.operation.kind !== "hit-adjustment") continue
+        if (
+          address.itemId === undefined
+            ? rule.operation.itemIds !== undefined
+            : rule.operation.itemIds !== undefined &&
+              !rule.operation.itemIds.includes(address.itemId)
+        )
+          continue
       }
-      if (
-        address.itemId === undefined
-          ? rule.operation.itemIds !== undefined
-          : rule.operation.itemIds !== undefined &&
-            !rule.operation.itemIds.includes(address.itemId)
-      )
-        continue
-    } else if (rule.operation.kind === "hit-adjustment") {
+    } else if (
+      rule.operation.kind === "hit-adjustment" ||
+      rule.operation.kind === "guaranteed-critical"
+    ) {
       continue
     } else if (address.kind === "stat") {
       const operation = rule.operation
@@ -1139,6 +1158,21 @@ function evaluateSingleLayer(
   const rule = layer.entry.rule
   if (!evaluateCondition(rule.when, context, layer)) {
     return null
+  }
+  if (rule.operation.kind === "guaranteed-critical") {
+    // 定义边界禁止数值输出修改；固定来源事实不执行加算、缩放或输出表达式。
+    return {
+      candidate: layer,
+      address: {
+        kind: "hit",
+        hitId: context.hit!.hitId,
+        field: "criticalRate",
+        itemId: rule.operation.itemId,
+      },
+      operator: "guarantee",
+      value: 1,
+      appliedModifications: layer.entry.appliedModificationIds,
+    }
   }
   const modifications = context.prepared.modifications.filter(
     (modification) =>
@@ -1659,15 +1693,18 @@ function selectUnique(
         key,
         list,
         // 来源层归约同样逐步检查，不把溢出留到最终值再判断。
-        combined: foldNumericExpression(
-          list.map((entry) => entry.value),
-          adding ? 0 : 1,
-          adding
-            ? (sum, value) => sum + value
-            : (product, value) => product * value,
-          context,
-          `A uniqueness candidate of "${list[0]!.candidate.entry.rule.effectId}"`,
-        ),
+        combined:
+          list[0]!.operator === "guarantee"
+            ? 1
+            : foldNumericExpression(
+                list.map((entry) => entry.value),
+                adding ? 0 : 1,
+                adding
+                  ? (sum, value) => sum + value
+                  : (product, value) => product * value,
+                context,
+                `A uniqueness candidate of "${list[0]!.candidate.entry.rule.effectId}"`,
+              ),
       }
     })
     .toSorted((left, right) => (left.key < right.key ? -1 : 1))
@@ -2356,6 +2393,50 @@ function evaluateHitQuery(
   if (hit === null) {
     return undefined
   }
+  const guarantees: EvaluatedLayer[] = []
+  for (const item of hit.damageItems) {
+    const selected = selectedAdjustmentsFor(
+      {
+        kind: "hit",
+        hitId: hit.hitId,
+        field: "criticalRate",
+        itemId: item.itemId,
+      },
+      context,
+    )
+    if (selected === undefined || !context.collector.isEmpty) return undefined
+    guarantees.push(...selected)
+  }
+  if (guarantees.length > 0) {
+    const origin = guarantees[0]!.candidate.entry
+    if (
+      hit.damageItems.length !== 1 ||
+      hit.damageKind !== "regular" ||
+      hit.origin.kind !== "direct"
+    ) {
+      context.collector.report(
+        hit.damageKind === undefined ? "MISSING_FACT" : "CONTEXT_MISMATCH",
+        "/hit",
+        "A source-guaranteed critical hit requires exactly its named damage item in a regular/direct hit",
+        { effectId: origin.rule.effectId, bindingId: origin.bindingId },
+      )
+      return undefined
+    }
+    if (
+      declaredCriticalRate !== undefined ||
+      hit.attributeSources?.criticalRate !== undefined
+    ) {
+      context.collector.report(
+        "CONTEXT_MISMATCH",
+        declaredCriticalRate !== undefined
+          ? "/hit/declaredCriticalRate"
+          : "/hit/attributeSources/criticalRate",
+        "A source-guaranteed critical hit conflicts with an explicit critical rate source or declaration",
+        { effectId: origin.rule.effectId, bindingId: origin.bindingId },
+      )
+      return undefined
+    }
+  }
   const attributes: EvaluationResult["attributes"][number][] = []
   const addAttribute = (
     attribute: EvaluationResult["attributes"][number],
@@ -2427,7 +2508,10 @@ function evaluateHitQuery(
   for (const stat of new Set(additionalStats))
     readAttribute(stat, hit.attributeSources?.[stat])
   let criticalRate: number
-  if (declaredCriticalRate === undefined) {
+  if (guarantees.length > 0) {
+    criticalRate = 1
+    for (const guarantee of guarantees) context.shared.consumed.add(guarantee)
+  } else if (declaredCriticalRate === undefined) {
     criticalRate = readAttribute(
       "criticalRate",
       hit.attributeSources?.criticalRate,
@@ -2638,7 +2722,9 @@ function toResolvedContribution(layer: EvaluatedLayer): ResolvedContribution {
         : STAT_UNIT_MAP[layer.address.stat]
       : layer.address.kind === "factor"
         ? FACTOR_CHANNEL_UNITS[layer.address.channel as FactorChannel]
-        : "multiplier"
+        : layer.address.field === "criticalRate"
+          ? "ratio"
+          : "multiplier"
   return {
     address: layer.address as unknown as ResolvedOutput["address"],
     operator: layer.operator,

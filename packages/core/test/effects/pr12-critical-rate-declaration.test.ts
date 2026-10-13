@@ -838,25 +838,26 @@ describe("Low-level public entry boundaries of the declared critical rate", () =
 })
 
 describe("Declared critical rate conflicts with hit-scoped critical rate adjustments", () => {
-  it("rejects a declared rate together with an applicable hit-scoped critical rate layer", () => {
-    // 真实比格气缸必暴规则（hit 作用域 criticalRate direct +1）手选于另一
-    // 绑定，命中携带其独立目标使 when 成立：与声明并存按冲突拒绝，错误
-    // 携带 effectId/bindingId。
+  it("rejects a declared rate together with an applicable named guaranteed-critical source", () => {
+    // 真实比格气缸来源现为具名 guaranteed-critical，须同时匹配独立项
+    // 与目标条件才与声明冲突；仅给加农转子项贴上目标标签不构成必暴。
     const base = lowLevelInput({
       declaredCriticalRate: 0.25,
       skillTags: ["zzz-hp:skill:big-cylinder-retaliation"],
     })
     const result = calculateStaticDamage({
       ...base,
+      hit: {
+        ...base.hit,
+        damageItems: [
+          {
+            itemId: "big-cylinder:retaliation",
+            stat: "attack",
+            damageMultiplier: 0,
+          },
+        ],
+      },
       bindings: [
-        {
-          bindingId: "binding:engine",
-          kind: "w-engine" as const,
-          holderId: "entity:attacker",
-          sourceEntityId: "14001",
-          eligible: true,
-          configuration: { refinement: 1 },
-        },
         {
           bindingId: "binding:big-cylinder",
           kind: "w-engine" as const,
@@ -867,11 +868,6 @@ describe("Declared critical rate conflicts with hit-scoped critical rate adjustm
         },
       ],
       selections: [
-        {
-          effectId: CANNON_ROTOR_DAMAGE,
-          bindingId: "binding:engine",
-          layers: 1,
-        },
         {
           effectId: BIG_CYLINDER_CRIT,
           bindingId: "binding:big-cylinder",
@@ -886,13 +882,13 @@ describe("Declared critical rate conflicts with hit-scoped critical rate adjustm
           issue.code === "CONTEXT_MISMATCH" &&
           issue.pointer === "/hit/declaredCriticalRate",
       )!
-      expect(conflict.message.includes(BIG_CYLINDER_CRIT)).toBe(true)
+      expect(conflict.effectId).toBe(BIG_CYLINDER_CRIT)
       expect(conflict.bindingId).toBe("binding:big-cylinder")
     }
   })
 
   it("does not treat inapplicable hit-scoped critical layers as conflicts", () => {
-    // 同一规则在不携带其独立目标的命中上 when 不成立：不构成冲突。
+    // 同一规则在无独立目标或不匹配具名项的命中上不适用，不构成冲突。
     const noTag = calculateStaticDamage({
       ...lowLevelInput({ declaredCriticalRate: 0.25 }),
       bindings: [

@@ -143,7 +143,7 @@ const FUTURE_ENCODING_LEGACY: SourceEffect = {
 describe("batch 13 Ben M2 block counter supplement conversion", () => {
   it("registers the option, target, and rule beside the preserved fixed-source clauses", () => {
     const result = convert(pr13BenData())
-    expect(result.definitions.revision).toBe("29")
+    expect(result.definitions.revision).toBe("30")
     // 影画 0/4 的既有条款照常转换（公开 ID 与 effectId 保持）。
     for (const [optionId, effectId, record] of [
       [
