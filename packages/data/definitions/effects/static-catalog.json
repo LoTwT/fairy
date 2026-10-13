@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "28",
+  "revision": "29",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -12419,7 +12419,7 @@
           "configuration": {
             "minimumMindscape": 0
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -12427,6 +12427,20 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/22/mindscapeBuffs/0/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1091/details.zh.json",
+              "pointer": "/specialElementType/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1091/details.en.json",
+              "pointer": "/specialElementType/desc"
             }
           ],
           "effectIds": [
@@ -12434,7 +12448,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["miyabi-frost-settlement-element-scope"],
           "applicability": {}
         }
       ]
@@ -12532,7 +12546,7 @@
             "minimumMindscape": 0,
             "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -12589,6 +12603,20 @@
               "locale": "zh",
               "resourcePath": "agents/1091/details.zh.json",
               "pointer": "/passive/level/1091507/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1091/details.zh.json",
+              "pointer": "/specialElementType/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1091/details.en.json",
+              "pointer": "/specialElementType/desc"
             }
           ],
           "effectIds": [
@@ -12596,7 +12624,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["miyabi-frost-settlement-element-scope"],
           "applicability": {}
         }
       ]
@@ -49640,6 +49668,108 @@
           "exclusiveDamageItem": true
         }
       ]
+    },
+    {
+      "optionId": "nanoka:agents:miyabi:frostburn-break-damage",
+      "catalogEntityId": "agents:miyabi",
+      "name": "寒炎 · 霜灼·破（独立结算）",
+      "conditionDescription": "核心被动[寒炎]：对附着[冰焰]的敌人施加[霜寒]效果时，消除[冰焰]并触发[霜灼·破]，对目标造成星见雅攻击力缩放的烈霜伤害（按核心 1—7 为 750/875/1000/1125/1250/1375/1500%）。触发已发生由调用方选中本选项并提供独立项断言：命中须只携带本独立项（独占结算，混合其他伤害项会被拒绝）、以 uncategorized 分类结算、读取星见雅当前攻击力，并显式声明本次独立命中的最终暴击概率（hit.declaredCriticalRate，无默认值；烈霜命中按 frost 结算，规则限定 hit.element=frost，非烈霜命中零贡献）。结果的暴击分支沿用普通暴击伤害来源及本命中合法暴伤贡献（未显式指定来源时读星见雅当前普通暴击伤害），是本接口的条件计算模型，不证明游戏内该伤害能暴击或继承该暴击伤害。影画 4 起[皲裂]自动对同一事件伤害 +30%（影画 0—3 不生效，不要求另行选择）；同句的 250 点喧响值不模拟。异常积蓄、冰焰/霜寒/霜灼状态机、落霜取得、10 秒触发间隔与[霜灼]状态不模拟；霜月/风花等普通动作不经本选项结算。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1091/details.zh.json",
+              "pointer": "/passive/level/1091501/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1091/details.zh.json",
+              "pointer": "/passive/level/1091502/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1091/details.zh.json",
+              "pointer": "/passive/level/1091503/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1091/details.zh.json",
+              "pointer": "/passive/level/1091504/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1091/details.zh.json",
+              "pointer": "/passive/level/1091505/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1091/details.zh.json",
+              "pointer": "/passive/level/1091506/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1091/details.zh.json",
+              "pointer": "/passive/level/1091507/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1091/details.zh.json",
+              "pointer": "/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1091/details.en.json",
+              "pointer": "/talent/4/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1091:nanoka:frostburn-break-damage:mindscape:0",
+            "agent:1091:nanoka:m4-rupture-frostburn-break-bonus:mindscape:4"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "miyabi:frostburn-break-damage",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized",
+              "requiredCriticalRateDeclaration": true
+            }
+          ],
+          "exclusiveDamageItem": true
+        }
+      ]
     }
   ],
   "skillTargets": [
@@ -50113,6 +50243,14 @@
       "agentEntityId": "1091",
       "category": "basic",
       "name": "风花",
+      "countsAsFollowUp": false
+    },
+    {
+      "targetId": "zzz-hp:skill:miyabi-frostburn-break-damage",
+      "upstreamId": null,
+      "agentEntityId": "1091",
+      "category": "uncategorized",
+      "name": "霜灼·破",
       "countsAsFollowUp": false
     },
     {
@@ -54840,6 +54978,40 @@
           "version": "3.2",
           "locale": "zh",
           "resourcePath": "agents/1091/details.zh.json",
+          "pointer": "/specialElementType/desc"
+        }
+      ]
+    },
+    {
+      "differenceId": "miyabi-frost-settlement-element-scope",
+      "explanation": "星见雅（1091）两条基线规则的命中元素过滤只登记了目录实体固有元素 ice，而该属性的结算分支证据与正式动作目录证明其合法受益命中还包含 frost：烈霜属性基于冰属性结算伤害与增益效果（agents/1091/details.zh.json 与 details.en.json 的 /specialElementType/desc 中英文同文），正式技能目录中星见雅的全部元素伤害行（霜月 0011—0013、风花后三段 0008—0010、快速/支援 0001/0005、连携 0014、终结 0015、闪反 0017、特殊/强化特殊 0018—0020 共 14 行）使用命中枚举 frost，其余为 physical 3 行与招架支援 daze-only 3 行，没有任何 ice 命中行——两条规则在真实 frost 命中上零贡献（批次 14 红测复现）。Fairy 按具名登记只修正这两条完整身份：终结技后自身冰属性伤害 +30%（/agents/22/mindscapeBuffs/0/effectBlocks/0/effects/0）与额外能力[普通攻击：霜月]无视 30% 冰属性伤害抗性（/agents/22/mindscapeBuffs/0/effectBlocks/1/effects/1，保留 basic+霜月精确目标），都在命中元素条件里保留 ice 并显式加入 frost；数值、通道、其余条件与稳定 ID 不变，不改全局元素归并、不扫描修全角色，同块的霜月 +60% 增伤记录（elementFilter=all）与星见雅其余五条影画记录不在登记内。防漂移：raw 与 normalized 两份记录编码（含 elementFilter 与完整 skillTargets 元组）与所属块冻结完整 note 逐字核对，先于通用 unsupported 降级拒绝；未来偏移的记录不再静默纠正。证据级别为同文结算分支映射与正式动作目录枚举，未经游戏实测。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/22/mindscapeBuffs/0/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/22/mindscapeBuffs/0/effectBlocks/1/effects/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1091/details.zh.json",
+          "pointer": "/specialElementType/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "en",
+          "resourcePath": "agents/1091/details.en.json",
           "pointer": "/specialElementType/desc"
         }
       ]

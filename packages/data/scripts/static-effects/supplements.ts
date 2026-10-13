@@ -187,6 +187,39 @@ export interface SupplementVariantSpec {
   readonly layerCountMaximumLayers?: number
 }
 
+/**
+ * 单个培养位置的具名来源上下文守卫条目：见 SupplementBase.clauseContextGuard
+ * 的总说明；历史登记为单对象，跨多个培养位置的条款登记为数组逐条执行。
+ */
+export interface ClauseContextGuardEntry {
+  readonly rankKind: "mindscape"
+  readonly rank: number
+  /**
+   * 冲突 stat 家族：该培养位置内任一记录的 raw 或 normalized stat 命中
+   * 即拒绝。固定来源当前没有条款块时（如凯撒攻防转换），此项同时登记
+   * “该位置没有这些 stat 的编码”这一真实缺失现状。
+   */
+  readonly stats: readonly string[]
+  /**
+   * 锚块（条款所在的真实块）：块必须存在于该位置的 raw pack，且 note
+   * 与登记的冻结全文逐字一致；缺失或任何变化（追加、插入、替换，包括
+   * 保留全部旧内容再追加新句）即拒绝——锚块上下文的变化要求重新
+   * review 是有意的固定来源约束，不做空白宽松归一。stat 检查作用于
+   * 整个培养位置（捕捉其他块/新块的同条款编码），锚块按身份区分条款
+   * 归属，不与同位置其他机制的块混同。
+   */
+  readonly anchorBlocks?: readonly {
+    readonly blockId: string
+    /** 冻结的完整原始 note（取自已固定 fac62407 的真实块全文）。 */
+    readonly frozenNote: string
+  }[]
+  /**
+   * 登记该位置当前真实为空（无任何块/记录）：出现任何新编码（无论
+   * stat）即拒绝并要求复核。
+   */
+  readonly expectsEmptyPack?: true
+}
+
 export interface SupplementBase {
   readonly supplementId: string
   readonly source: string
@@ -251,35 +284,12 @@ export interface SupplementBase {
    * 记录不受影响，按实体身份与块 id 匹配，不依赖数组位置或局部 ID 子串。
    * 归一化可以改写记录 stat（如未知 stat 被归一为 dmgBonus），因此两份
    * 表示都必须核对；该守卫不替代 loadSource 对 19 个固定资源的 SHA 校验。
+   * 单对象为历史形态；补充条款横跨多个培养位置时（如批次 14 的核心被动
+   * rank 0 锚块与影画 4 真实空位）登记为数组，逐位置执行同一校验。
    */
-  readonly clauseContextGuard?: {
-    readonly rankKind: "mindscape"
-    readonly rank: number
-    /**
-     * 冲突 stat 家族：该培养位置内任一记录的 raw 或 normalized stat 命中
-     * 即拒绝。固定来源当前没有条款块时（如凯撒攻防转换），此项同时登记
-     * “该位置没有这些 stat 的编码”这一真实缺失现状。
-     */
-    readonly stats: readonly string[]
-    /**
-     * 锚块（条款所在的真实块）：块必须存在于该位置的 raw pack，且 note
-     * 与登记的冻结全文逐字一致；缺失或任何变化（追加、插入、替换，包括
-     * 保留全部旧内容再追加新句）即拒绝——锚块上下文的变化要求重新
-     * review 是有意的固定来源约束，不做空白宽松归一。stat 检查作用于
-     * 整个培养位置（捕捉其他块/新块的同条款编码），锚块按身份区分条款
-     * 归属，不与同位置其他机制的块混同。
-     */
-    readonly anchorBlocks?: readonly {
-      readonly blockId: string
-      /** 冻结的完整原始 note（取自已固定 fac62407 的真实块全文）。 */
-      readonly frozenNote: string
-    }[]
-    /**
-     * 登记该位置当前真实为空（无任何块/记录）：出现任何新编码（无论
-     * stat）即拒绝并要求复核。
-     */
-    readonly expectsEmptyPack?: true
-  }
+  readonly clauseContextGuard?:
+    | ClauseContextGuardEntry
+    | readonly ClauseContextGuardEntry[]
   /**
    * 音擎精炼五档的具名来源上下文守卫（批次 12）：按固定来源 refinementBuffs
    * 的五个精炼档定位条款上下文。每档锚块（块 id + 冻结完整 note 原文）必须
@@ -1027,6 +1037,25 @@ const coreRatio = (
     kind: "by-rank",
     rank: "coreSkillLevel",
     unit: "ratio",
+    values: {
+      1: values[0],
+      2: values[1],
+      3: values[2],
+      4: values[3],
+      5: values[4],
+      6: values[5],
+      7: values[6],
+    },
+  }) as const
+
+/** 按核心等级取值的倍率参数表（1—7 档字面值，不插值；multiplier 单位）。 */
+const coreMultiplier = (
+  values: readonly [number, number, number, number, number, number, number],
+) =>
+  ({
+    kind: "by-rank",
+    rank: "coreSkillLevel",
+    unit: "multiplier",
     values: {
       1: values[0],
       2: values[1],
@@ -4816,6 +4845,188 @@ const benBiggerMindscape2BlockCounterDefenseDamage: Supplement = {
   },
 }
 
+/**
+ * 星见雅（Miyabi，批次 14）：核心被动[寒炎]的[霜灼·破]一次独立伤害与影画 4
+ * [皲裂]的同事件增伤。星见雅对附着[冰焰]的敌人施加[霜寒]效果时，消除[冰焰]
+ * 并触发[霜灼·破]，对目标造成星见雅攻击力缩放的烈霜伤害（按核心 1—7 取
+ * 750%—1500%）。触发已发生由调用方选中本选项并提供独立项断言；异常积蓄、
+ * 冰焰/霜寒/霜灼状态机、落霜取得、10 秒触发间隔与[霜灼]状态不模拟。影画 4
+ * 起[皲裂]对同一独立事件的伤害 +30%（同变体 additionalRules，随影画自动
+ * 生效一次，不生成第二份可漏选的完整附伤）；同句的 250 点喧响值是即时资源
+ * 产出，不属于任何伤害乘区，不模拟。
+ */
+const miyabiFrostburnBreakDamage: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:agents:miyabi:frostburn-break-damage",
+  source:
+    "nanoka-integrated@3.2 agents/1091 /passive/level/1091501—1091507/desc/0 + /talent/4/desc",
+  catalogEntityId: "agents:miyabi",
+  optionId: "nanoka:agents:miyabi:frostburn-break-damage",
+  supportedRanks: "核心 1—7；影画 0—6",
+  computationTarget: "catalog option on the mapped agent entity",
+  // 条款上下文：核心被动所在 mindscape rank 0 的两个真实块（终结技与额外
+  // 能力）按锚块冻结完整 note，rank 0 位置出现直接倍率机器记录（raw 或
+  // normalized）即拒绝生成并要求重新核对；影画 4 是真实空 pack
+  // （effectBlocks/effects 均为空），[皲裂]语义只从 Nanoka /talent/4/desc
+  // 补充登记，该位置出现任何新编码（无论 stat，含 note-only 块）同样拒绝
+  // ——不伪造 M4 来源 note 或机器记录，也不让未来的上游编码与补充规则
+  // 静默重复贡献。
+  clauseContextGuard: [
+    {
+      rankKind: "mindscape",
+      rank: 0,
+      stats: directMultiplierSourceStats,
+      anchorBlocks: [
+        {
+          blockId: "blk-legacy",
+          frozenNote:
+            "招式发动时，获得3点[落霜]，自身造成的冰属性伤害提升30%，持续12秒；",
+        },
+        {
+          blockId: "blk-ms4msho4-fuuot6",
+          frozenNote:
+            "队伍中存在[支援]角色或与自身阵营相同的角色或其他[异常]角色时触发：\n[普通攻击：霜月]造成的伤害提升60%；队伍中任意角色触发[紊乱]效果时，星见雅获得2点[落霜]，且在下一次[霜月架势]期间，[普通攻击：霜月]将无视目标30%冰属性伤害抗性。",
+        },
+      ],
+    },
+    {
+      rankKind: "mindscape",
+      rank: 4,
+      stats: [],
+      expectsEmptyPack: true,
+    },
+  ],
+  skillTarget: {
+    targetId: "miyabi-frostburn-break-damage",
+    agentEntityId: "1091",
+    // 文本没有「被视为[X]伤害」分句：uncategorized 是本项目的独立结算
+    // 约定（锁最终有效分类、不消费普通分类增益），不是游戏分类定论。
+    category: "uncategorized",
+    name: "霜灼·破",
+  },
+  evidence: [
+    // 核心被动七行：倍率逐档核对（data.json level 元数据 1—7 逐行映射）。
+    ...agentPassiveEvidence(
+      "1091",
+      "45f70931c081d73d085eadea5a23d6c21cc314019090d0577a76a9b3f722973e",
+      1091501,
+    ),
+    // 影画 4[皲裂]：中英文同文核对（+30% 与 250 喧响值）。
+    {
+      path: "agents/1091/details.zh.json",
+      pointer: "/talent/4/desc",
+      sha256:
+        "45f70931c081d73d085eadea5a23d6c21cc314019090d0577a76a9b3f722973e",
+    },
+    {
+      path: "agents/1091/details.en.json",
+      pointer: "/talent/4/desc",
+      sha256:
+        "bad069eb3645dde14af355e4121faef405c296d938bb0d7a512eb9f3b9c39a35",
+    },
+  ],
+  verification:
+    "Nanoka 核心被动七行（agents/1091/details.zh.json 的 /passive/level/1091501—1091507/desc/0，data.json level 元数据 1—7 逐行核对，英文文件同文核对，英文数值为千分位逗号格式 1,000% 等）确认：星见雅对附着[冰焰]的敌人施加[霜寒]效果时，将会消除[冰焰]并触发[霜灼·破]，对目标造成星见雅 750/875/1000/1125/1250/1375/1500% 攻击力（按核心 1—7）的烈霜伤害。固定 ZZZ-HP 来源的 rank 0 只有终结技块（blk-legacy）与额外能力块（blk-ms4msho4-fuuot6），没有核心寒炎机器记录；影画 4 是真实空 pack，[皲裂]语义（agents/1091 /talent/4/desc 中英文同文：[霜灼·破]造成的伤害提升30%，触发时额外获得250点喧响值）只从 Nanoka 补充登记。触发事实（对附着[冰焰]的敌人施加[霜寒]）由调用方选中本选项并提供独立项断言：不模拟异常积蓄、冰焰/霜寒/霜灼状态机、落霜取得、10 秒触发间隔、[霜灼]状态与 250 喧响值（即时资源产出不属于任何伤害乘区）。来源直接明确的是烈霜伤害与星见雅攻击力缩放，没有直接命名本项目的伤害分类枚举；本项目按已批准的 regular/direct 独立结算契约接入（分类锁定为 uncategorized，不归类为 anomaly/anomaly-settlement，不加入异常精通/等级乘区，也不与碎冰等同——这是项目契约映射，不是来源原文或游戏实测），倍率一次赋值读绑定持有者（星见雅）当前攻击力（holder-current，无快照）。烈霜按冰属性结算伤害与增益（/specialElementType/desc 中英文同文），命中元素枚举保持 frost（正式动作目录的元素伤害行全部 physical/frost，目录实体固有元素 ice 是资料属性）：规则条件按来源明文限定 hit.element=frost，非烈霜命中零贡献，不伪装 hit.element=ice 绕过。影画 4 起[皲裂]对同一独立事件的伤害 +30%：以同一变体的 additionalRules 登记进既有 damage-bonus 通道（与同通道其他增伤加法合并；影画语义按绑定档位查表取值——M0—3 为 0、M4—6 为 0.3，全档显式列出不缺档，选中即随影画自动生效一次，0 层关闭同时关闭两条规则，不生成第二份可同时开启而重复赋值的完整附伤，也不要求调用方另选可漏掉的 M4 强化开关）。显式暴击概率是项目的条件计算契约：来源未证明霜灼·破的暴击概率/能力，最终概率由调用方以 hit.declaredCriticalRate 显式声明（有限 [0,1]、无默认值、替换该次独立命中的最终概率；启用而缺声明按 MISSING_FACT 拒绝），r=0/1/中间值都是调用方自选的条件计算假设，不是游戏结论；critical 分支沿用普通暴击伤害来源及本命中合法暴伤贡献（未显式指定来源时读星见雅当前普通暴击伤害），不证明游戏内该伤害能暴击或继承该暴击伤害。uncategorized 分类、独立目标（zzz-hp:skill:miyabi-frostburn-break-damage）、零初始倍率、一次赋值、独占结算与逐次声明是本项目采用的独立结算契约，不是原始游戏证据：防止借用 basic/chain/追加攻击或普通动作目标套增益；正式动作解析不自动派生该独立项，霜月（0011—0013）/风花（0006—0010）等普通动作不经本选项结算。终结技后的冰伤 +30%（legacy-self-dmgBonus）经批次 14 元素修正后覆盖 frost 命中，与本事件同通道加法共存（合计 ×1.60 是通道映射，非游戏实测）；额外能力的霜月增伤与冰抗忽视保持 basic+霜月精确目标，不作用于本独立事件；M1 减防、M2 普攻/闪反增伤及暴率、M6 霜月增伤的身份/数值/条件保持，M2 实体暴率不参与声明概率。",
+  rule: {
+    effectId: "agent:1091:nanoka:frostburn-break-damage:mindscape:0",
+    identity: { kind: "agent", entityId: "1091" },
+    section: "核心被动：寒炎（霜灼·破）",
+    config: { kind: "constant", value: true },
+    parameters: {
+      amount: coreMultiplier([7.5, 8.75, 10, 11.25, 12.5, 13.75, 15]),
+    },
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        { kind: "one-of", fact: "hit.damageKind", values: ["regular"] },
+        {
+          kind: "one-of",
+          fact: "hit.skillTag",
+          values: ["zzz-hp:skill:miyabi-frostburn-break-damage"],
+        },
+        { kind: "one-of", fact: "hit.element", values: ["frost"] },
+      ],
+    },
+    operation: {
+      kind: "hit-adjustment",
+      field: "damageMultiplier",
+      operator: "add",
+      itemIds: ["miyabi:frostburn-break-damage"],
+      value: { kind: "parameter", unit: "multiplier", name: "amount" },
+    },
+    maximumLayers: 1,
+  },
+  additionalRules: [
+    {
+      // 影画 4[皲裂]：对同一独立事件的伤害 +30%（damage-bonus 通道）。影画
+      // 语义不用规则配置门槛表达——配置不满足会把整个选择在目录阶段拒绝
+      // （M0—3 连主事件都无法结算）；按绑定影画档位查表取值（M0—3 为 0、
+      // M4—6 为 0.3，全档显式列出不缺档），与主规则共用同一变体、同一输入
+      // 与同一层数语义，选中即随影画自动生效一次，0 层关闭同时关闭。
+      effectId:
+        "agent:1091:nanoka:m4-rupture-frostburn-break-bonus:mindscape:4",
+      identity: { kind: "agent", entityId: "1091" },
+      section: "影画4：皲裂（霜灼·破增伤）",
+      config: { kind: "constant", value: true },
+      parameters: {
+        amount: {
+          kind: "by-rank",
+          rank: "mindscapeRank",
+          unit: "ratio",
+          values: { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0.3, 5: 0.3, 6: 0.3 },
+        },
+      },
+      scope: "hit",
+      when: {
+        kind: "all",
+        conditions: [
+          { kind: "one-of", fact: "hit.damageKind", values: ["regular"] },
+          {
+            kind: "one-of",
+            fact: "hit.skillTag",
+            values: ["zzz-hp:skill:miyabi-frostburn-break-damage"],
+          },
+          { kind: "one-of", fact: "hit.element", values: ["frost"] },
+        ],
+      },
+      operation: {
+        kind: "factor-contribution",
+        channel: "damage-bonus",
+        value: { kind: "parameter", unit: "ratio", name: "amount" },
+      },
+      maximumLayers: 1,
+    },
+  ],
+  variant: {
+    configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
+    inputs: [],
+    applicability: {},
+    // 独占结算：声明最终暴击概率与被结算的独立项一一对应，不留多项共享
+    // 一个声明概率的歧义（目录入口在选择阶段强制）。
+    exclusiveDamageItem: true,
+    damageItemRequirements: [
+      {
+        itemId: "miyabi:frostburn-break-damage",
+        stat: "attack",
+        role: "base",
+        allowedModes: ["direct"],
+        source: "holder-current",
+        requiredDirectMultiplier: 0,
+        requiredSkillCategory: "uncategorized",
+        // 最终暴击概率必须由调用方显式声明（hit.declaredCriticalRate），
+        // 无默认值：不默许读取星见雅面板普通暴击率充当该次独立命中的
+        // 概率（来源未证明霜灼·破的暴击能力）。
+        requiredCriticalRateDeclaration: true,
+      },
+    ],
+    conditionDescription:
+      "核心被动[寒炎]：对附着[冰焰]的敌人施加[霜寒]效果时，消除[冰焰]并触发[霜灼·破]，对目标造成星见雅攻击力缩放的烈霜伤害（按核心 1—7 为 750/875/1000/1125/1250/1375/1500%）。触发已发生由调用方选中本选项并提供独立项断言：命中须只携带本独立项（独占结算，混合其他伤害项会被拒绝）、以 uncategorized 分类结算、读取星见雅当前攻击力，并显式声明本次独立命中的最终暴击概率（hit.declaredCriticalRate，无默认值；烈霜命中按 frost 结算，规则限定 hit.element=frost，非烈霜命中零贡献）。结果的暴击分支沿用普通暴击伤害来源及本命中合法暴伤贡献（未显式指定来源时读星见雅当前普通暴击伤害），是本接口的条件计算模型，不证明游戏内该伤害能暴击或继承该暴击伤害。影画 4 起[皲裂]自动对同一事件伤害 +30%（影画 0—3 不生效，不要求另行选择）；同句的 250 点喧响值不模拟。异常积蓄、冰焰/霜寒/霜灼状态机、落霜取得、10 秒触发间隔与[霜灼]状态不模拟；霜月/风花等普通动作不经本选项结算。",
+    name: "寒炎 · 霜灼·破（独立结算）",
+    target: "self",
+  },
+}
+
 export const SUPPLEMENTS: readonly Supplement[] = [
   evelynMindscape6LunaluxGarroteFollowUp,
   s0anbyMindscape6ElectromagneticVortex,
@@ -4867,4 +5078,5 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   bigCylinderRetaliationDefenseDamage,
   cannonRotorCriticalHitBonusDamage,
   benBiggerMindscape2BlockCounterDefenseDamage,
+  miyabiFrostburnBreakDamage,
 ]

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "28",
+  "revision": "29",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -14272,7 +14272,7 @@
       "effectIds": [
         "agent:1091:zzz-hp:legacy-self-dmgBonus:blk-legacy:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 30,
       "normalizedValue": 30
@@ -14302,7 +14302,7 @@
       "effectIds": [
         "agent:1091:zzz-hp:eff-ms4mu14z-vj4c3r:blk-ms4msho4-fuuot6:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 30,
       "normalizedValue": 30
@@ -31055,6 +31055,19 @@
       "supportedRanks": "影画 2—6；层数 0—1",
       "computationTarget": "catalog option on the mapped agent entity",
       "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:miyabi:frostburn-break-damage",
+      "source": "nanoka-integrated@3.2 agents/1091 /passive/level/1091501—1091507/desc/0 + /talent/4/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:miyabi:frostburn-break-damage",
+      "effectIds": [
+        "agent:1091:nanoka:frostburn-break-damage:mindscape:0",
+        "agent:1091:nanoka:m4-rupture-frostburn-break-bonus:mindscape:4"
+      ],
+      "supportedRanks": "核心 1—7；影画 0—6",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
     }
   ],
   "summary": {
@@ -31062,17 +31075,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 874,
-    "options": 906,
-    "converted": 1136,
-    "corrected": 136,
+    "rules": 876,
+    "options": 907,
+    "converted": 1134,
+    "corrected": 138,
     "unsupported": 18,
     "supplements": {
-      "records": 78,
-      "rules": 47,
-      "options": 40,
+      "records": 79,
+      "rules": 49,
+      "options": 41,
       "entities": 4,
-      "integrated": 45,
+      "integrated": 46,
       "outOfScope": 33
     }
   },
