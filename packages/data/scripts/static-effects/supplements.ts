@@ -1,4 +1,5 @@
 import { LUCY_GUARD_BOAR_SUPPLEMENTS } from "./lucy-guard-boar.ts"
+import { ROXY_MINDSCAPE_SUPPLEMENTS } from "./roxy-mindscapes.ts"
 import type {
   AnyParameter,
   Condition,
@@ -6123,6 +6124,7 @@ const astraYaoMindscape4QuickAssistDamage: Supplement = {
 }
 
 export const SUPPLEMENTS: readonly Supplement[] = [
+  ...ROXY_MINDSCAPE_SUPPLEMENTS,
   ...LUCY_GUARD_BOAR_SUPPLEMENTS,
   astraYaoMindscape4QuickAssistDamage,
   aliceCorePeriodicDamage,

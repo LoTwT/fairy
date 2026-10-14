@@ -374,6 +374,36 @@
 
 `calculateStaticDamageFromCatalog` 在上述路径前校验选项目录、展开静态选择并准备倍率。身份/职业与互斥、已选缺档/缺输入、耀变唯一参数映射、异常来源及时间派生规则集中在[数据接入规范](../data/zzz-hp-static-effects.md)，类型以 `StaticCatalogDamageInput` 为准。luminize 的 `anomalySource` 携带 `mechanism: "remielle-special-voidflare"` 时走具名机制分支：受限攻击/精通在独立求值上下文中读取，抗穿按具名来源元数据区分通用与耀变专属，strength 档位并入耀变倍率乘区；完整契约见[静态计算输入组装](../core/static-calculation.md#蕾米埃尔自身特殊虚曜)。表中标明“目录”的新通道在低层入口仅作为不适用贡献返回，不隐式更改原有倍率。时间派生来源保留在结果 `preparations`，不要求时间线。
 
+### 洛克茜 M6 的实际提供者归属
+
+具名规则 `agent:1621:nanoka:m6-wind-resistance-ignore` 的来源与选择门槛见
+[固定影画条款](../data/zzz-hp-static-effects.md#修订-38洛克茜固定影画伤害侧增益)。
+普通配置、激活、受益者及 `when` 条件成立后，该规则要求命中 actor 为绑定 holder，
+元素为 wind，伤害类别为 regular、anomaly、disorder、vortex 或 anomaly-settlement。
+公共 hit 查询缺少该规则读取的 damageKind 时仍报 `MISSING_FACT`，不推测类别。
+
+基础伤害项的实际提供者按既有顺序读取：`item.statSource`，其次为
+`hit.attributeSources[item.stat]`，均省略时为 actor。异常、紊乱、乱流与异常释放还要求
+实际 `anomalyProficiency` 提供者为同一 holder；目录的 `anomalySource` 按原路径组装为
+这个属性来源。比较运行时实例身份，同名角色的另一实例仍属于外部来源。
+不把 actor 或 beneficiary 改写为历史提供者，不用属性数值相等代替身份相同。
+
+所有基础项同属 holder 时只产生一次忽视贡献；全部属于他人时本规则不产生贡献，
+普通伤害仍可计算。同实体的 current 与历史 snapshot 可共存，快照按原身份和保存的
+读数消费，缺少必需快照事实仍失败。CR、CD、穿透等其他合法属性来源保持原契约。
+
+若 M6 已适用，且基础项同时包含 holder 与他人来源，整次 resistance factor 无法表达
+部分项受益，因此返回 `CONTEXT_MISMATCH`，pointer 为 `/hit/damageItems`，附本层
+effectId 与 bindingId，要求按基础属性提供者拆成独立请求。零倍率或相同属性值不消除
+来源混合。未选、目录 0 层、非 wind、其他 actor、类别越界、原条件不成立，或异常类
+AP 属于他人时，不增加这项混合拒绝。低层关闭沿用省略 selection，supplied 0 层仍非法。
+
+这项共同归属及拆分要求是项目对来源文本的条件计算边界，未经游戏实测。检查位于
+共用层求值、普通条件之后及输出修改之前，公共查询、低层伤害、目录和动作入口一致；
+其他抗性忽视与本效果的合法数值修改保持原流程。该保留 effectId 必须仍为 agent1621
+来源、contribution、hit、holder、attacker-resistance-ignore，身份挪用报
+`INVALID_DEFINITION`；不改变公共字段、DSL 或错误码集合。
+
 ## 校验与验收
 
 ### 爱丽丝核心周期附伤的条件结算

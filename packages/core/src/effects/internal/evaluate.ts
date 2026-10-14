@@ -56,6 +56,10 @@ import {
   isEntityId,
 } from "./vocabulary.ts"
 import { validateNumericInputs } from "./numeric-input.ts"
+import {
+  ROXY_M6_WIND_RESISTANCE_IGNORE,
+  resolveRoxyM6ProviderApplicability,
+} from "./roxy-m6-provider.ts"
 
 interface LayerCandidate {
   readonly entry: PreparedContributionEntry
@@ -1183,6 +1187,22 @@ function evaluateSingleLayer(
   }
   if (!evaluateCondition(rule.when, context, layer)) {
     return null
+  }
+  if (rule.effectId === ROXY_M6_WIND_RESISTANCE_IGNORE) {
+    const applicability = resolveRoxyM6ProviderApplicability(
+      layer.entry.holderId,
+      context.hit,
+    )
+    if (applicability === "inapplicable") return null
+    if (applicability === "mixed") {
+      context.collector.report(
+        "CONTEXT_MISMATCH",
+        "/hit/damageItems",
+        "Roxy M6 requires damage from different base attribute providers to be split into separate requests",
+        { effectId: rule.effectId, bindingId: layer.entry.bindingId },
+      )
+      return undefined
+    }
   }
   if (rule.operation.kind === "stun-damage-replacement")
     return evaluateStunDamageReplacementLayer(layer, context)

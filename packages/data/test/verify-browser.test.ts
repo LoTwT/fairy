@@ -1,4 +1,5 @@
 import { hugoAttackConsumerSource } from "./fixtures/hugo-stun-teammates-consumer.ts"
+import { roxyMindscapeConsumerSource } from "./fixtures/roxy-mindscape-consumer.ts"
 import { lucyGuardBoarConsumerSource } from "./fixtures/lucy-guard-boar-consumer.ts"
 import { yanagiPolarityConsumerSource } from "./fixtures/yanagi-polarity-consumer.ts"
 import { aliceCorePeriodicConsumerSource } from "./fixtures/alice-core-periodic-consumer.ts"
@@ -124,6 +125,8 @@ ${lucyGuardBoarConsumerSource}
 globalThis.fairyLucyGuardBoar = async () => verifyLucyGuardBoarConsumer(api, await import("@randomplay/core"))
 ${hugoAttackConsumerSource}
 globalThis.fairyHugoAttack = async () => verifyHugoAttackConsumer(api, await import("@randomplay/core"))
+${roxyMindscapeConsumerSource}
+globalThis.fairyRoxyMindscapes = async () => verifyRoxyMindscapeConsumer(api, await import("@randomplay/core"))
 ${yanagiPolarityConsumerSource}
 globalThis.fairyYanagiPolarity = async () => verifyYanagiPolarityConsumer(api, await import("@randomplay/core"))
 ${astraYaoM4ConsumerSource}
@@ -1013,6 +1016,20 @@ function defineScenarios(counts: {
             "definitions/effects/static.json",
             "definitions/effects/static-catalog.json",
           ],
+        },
+        {
+          name: "roxy-fixed-mindscapes",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyRoxyMindscapes(),
+            )
+            expect(result).toEqual({
+              ultimate: 67146.975,
+              combined: 99761.22,
+              nonWindIgnore: 0,
+              rejectedLowRank: true,
+            })
+          },
         },
         {
           name: "hugo-other-stun-teammate-count",

@@ -31,6 +31,10 @@ import type {
 import identities from "./identities.json" with { type: "json" }
 import evidence from "./rank-evidence.json" with { type: "json" }
 import {
+  ROXY_ULTIMATE_ACTION,
+  verifyRoxyMindscapeRegistrations,
+} from "./roxy-mindscapes.ts"
+import {
   COMPLETE_STATE_OPTIONS,
   HUGO_ATTACK_SOURCE_KEY,
   HUGO_ATTACK_COUNT_DIFFERENCE_ID,
@@ -3981,6 +3985,7 @@ export function convertSource(
     options: StaticCatalogOption[] = [],
     coverage: CoverageRecord[] = [],
     declaredSkillTargets: StaticEffectCatalog["skillTargets"][number][] = []
+  verifyRoxyMindscapeRegistrations(supplements)
   verifyYanagiPolarityIsolation(collected.records, collected.entities)
   // 缺失条款与共存记录先验证，再编译普通记录；未知 stat / unsupported
   // 不得抢先掩盖完整来源上下文的漂移。实体缺失仍由补充身份校验拒绝。
@@ -4866,10 +4871,14 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "37",
+    revision: "38",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
-    actions: [],
+    actions: effects.some(
+      (effect) => effect.effectId === "agent:1621:nanoka:m4-ultimate-damage",
+    )
+      ? [ROXY_ULTIMATE_ACTION]
+      : [],
   }
   const skillTargets: StaticEffectCatalog["skillTargets"][number][] =
     data.skillSubcategories
