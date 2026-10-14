@@ -1,3 +1,13 @@
+import { readFileSync } from "node:fs"
+import type {
+  RuleSet as LucyRuleSet,
+  StaticEffectCatalog as LucyCatalog,
+} from "../../src/effects/types.ts"
+import { makeLucyGuardBoarRequest } from "../../../data/test/fixtures/lucy-guard-boar-consumer.ts"
+import {
+  calculateDeclaredLucyGuardBoar,
+  rejectHistoricalLucyOwner,
+} from "../../../../docs/specs/effects/contract-examples.ts"
 import { describe, expect, it } from "vitest"
 import { parseEffectRuleSet, prepareEffects } from "../../src/effects/index.ts"
 import { readPreparedInternal } from "../../src/effects/internal/prepare.ts"
@@ -81,4 +91,48 @@ describe("spec contract examples conform to the runtime validator", () => {
       prepared.value.stateParameters[0]!.parameters["lingerSeconds"]?.value,
     ).toBeCloseTo(7.5, 12)
   })
+})
+
+it("executes Lucy's documented inheritance/M6 example and current-only counterexample", () => {
+  const definitions = JSON.parse(
+    readFileSync(
+      new URL("../../../data/definitions/effects/static.json", import.meta.url),
+      "utf8",
+    ),
+  ) as LucyRuleSet
+  const catalog = JSON.parse(
+    readFileSync(
+      new URL(
+        "../../../data/definitions/effects/static-catalog.json",
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+  ) as LucyCatalog
+  const request = makeLucyGuardBoarRequest(definitions, catalog)
+  if (request.settlement.kind !== "m6-explosion")
+    throw new Error("Expected the explicit M6 fixture")
+  const result = calculateDeclaredLucyGuardBoar(
+    definitions,
+    catalog,
+    request.world,
+    request.boar.ownStats,
+    request.settlement.damage,
+  )
+  expect(result.ok, JSON.stringify(result)).toBe(true)
+  if (result.ok)
+    expect(result.value.settlement!.expected).toBeCloseTo(9298.411222531886, 8)
+  let rejected: ReturnType<typeof rejectHistoricalLucyOwner> | undefined
+  expect(() => {
+    rejected = rejectHistoricalLucyOwner(request)
+  }).not.toThrow()
+  expect(rejected?.ok).toBe(false)
+  if (rejected && !rejected.ok)
+    expect(
+      rejected.issues.some(
+        (issue) =>
+          issue.code === "CONTEXT_MISMATCH" &&
+          issue.pointer === "/boar/ownerSource/snapshotId",
+      ),
+    ).toBe(true)
 })

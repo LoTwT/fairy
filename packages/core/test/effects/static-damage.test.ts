@@ -10,6 +10,8 @@ import {
 import type {
   AliceCorePeriodicRule,
   AstraYaoM4Rule,
+  LucyGuardBoarInheritanceRule,
+  LucyGuardBoarM6Rule,
   ContributionRule,
   EffectNumericInput,
   FactorChannel,
@@ -48,7 +50,13 @@ function issue(
 function factor(
   channel: FactorChannel,
   value: number,
-): Exclude<ContributionRule, AliceCorePeriodicRule | AstraYaoM4Rule> {
+): Exclude<
+  ContributionRule,
+  | AliceCorePeriodicRule
+  | AstraYaoM4Rule
+  | LucyGuardBoarInheritanceRule
+  | LucyGuardBoarM6Rule
+> {
   const unit =
     channel === "attacker-penetration-value"
       ? "defense-points"

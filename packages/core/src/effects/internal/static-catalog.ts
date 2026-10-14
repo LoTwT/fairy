@@ -1,4 +1,9 @@
 import {
+  isLucyGuardBoarRule,
+  validateLucyGuardBoarCatalog,
+} from "./lucy-guard-boar-rules.ts"
+import { calculateLucyGuardBoar } from "./lucy-guard-boar.ts"
+import {
   calculateStandardDisorderDamageMultiplier,
   calculateStandardVortexDamageMultiplier,
   DISORDER_SOURCE_ATTRIBUTES,
@@ -543,7 +548,8 @@ export function validateStaticCatalog(
     if (!mechanism) continue
     if (
       mechanism["mechanism"] === ALICE_CORE_PERIODIC_MECHANISM ||
-      mechanism["mechanism"] === ASTRA_YAO_M4_MECHANISM
+      mechanism["mechanism"] === ASTRA_YAO_M4_MECHANISM ||
+      mechanism["mechanism"] === "lucy-guard-boar"
     )
       continue
     rejectUnknownFields(
@@ -1498,6 +1504,12 @@ export function validateStaticCatalog(
       definitions,
       collector,
     )
+  if (collector.isEmpty)
+    validateLucyGuardBoarCatalog(
+      catalogValue as StaticEffectCatalog,
+      definitions,
+      collector,
+    )
   return collector.isEmpty
     ? { ok: true, value: catalogValue as StaticEffectCatalog }
     : failure(collector)
@@ -1600,6 +1612,9 @@ function prepareItem(
 }
 
 export function calculateStaticDamageFromCatalog(
+  input: import("../types.ts").LucyGuardBoarCatalogInput,
+): Result<import("../types.ts").LucyGuardBoarResult>
+export function calculateStaticDamageFromCatalog(
   input: import("../types.ts").AstraYaoM4CatalogInput,
 ): Result<import("../types.ts").AstraYaoM4DamageResult>
 export function calculateStaticDamageFromCatalog(
@@ -1612,13 +1627,17 @@ export function calculateStaticDamageFromCatalog(
   input:
     | StaticCatalogDamageInput
     | AliceCorePeriodicCatalogInput
-    | import("../types.ts").AstraYaoM4CatalogInput,
+    | import("../types.ts").AstraYaoM4CatalogInput
+    | import("../types.ts").LucyGuardBoarCatalogInput,
 ): Result<
   | StaticDamageResult
   | AliceCorePeriodicDamageResult
   | import("../types.ts").AstraYaoM4DamageResult
+  | import("../types.ts").LucyGuardBoarResult
 > {
   if (input && typeof input === "object" && "mechanism" in input) {
+    if (input.mechanism === "lucy-guard-boar")
+      return calculateLucyGuardBoar(input, true)
     if (input.mechanism === ASTRA_YAO_M4_MECHANISM)
       return calculateAstraYaoM4Damage(input, true)
     if (input.mechanism === ALICE_CORE_PERIODIC_MECHANISM)
@@ -2745,7 +2764,8 @@ export function calculateOrdinaryStaticDamageFromCatalog(
   const definitions = {
     ...parsed.value,
     effects: parsed.value.effects.map((rule): EffectRule => {
-      if (isAliceCorePeriodicRule(rule)) return rule
+      if (isAliceCorePeriodicRule(rule) || isLucyGuardBoarRule(rule))
+        return rule
       if (isAstraYaoM4Rule(rule))
         return astraM4 ? bridgeAstraYaoM4Rule(rule) : rule
       if (

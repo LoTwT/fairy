@@ -1,3 +1,4 @@
+import { buildLucyGuardBoarMechanism } from "./lucy-guard-boar.ts"
 import type {
   AnyParameter,
   Condition,
@@ -5,6 +6,8 @@ import type {
   ContributionRule,
   AliceCorePeriodicRule,
   AstraYaoM4Rule,
+  LucyGuardBoarInheritanceRule,
+  LucyGuardBoarM6Rule,
   CoreSkillLevel,
   PotentialLevel,
   DamageElement,
@@ -598,6 +601,39 @@ function verifySingleClauseContextGuard(
   const contextPack = sourceEntity.mindscapeBuffs?.[context.rank] ?? {}
   const normalizedEntity = functions.normalizeAgent(sourceEntity)
   const normalizedPack = normalizedEntity.mindscapeBuffs?.[context.rank] ?? {}
+  if (context.frozenPackModifiers !== undefined) {
+    for (const [representation, source] of [
+      ["raw", sourceEntity],
+      ["normalized", normalizedEntity],
+    ] as const) {
+      const pack = source.mindscapeBuffs?.[context.rank]
+      const frozen = context.frozenPackModifiers[representation]
+      const equalModifiers = (
+        actual: Record<string, number> | undefined,
+        expected: Readonly<Record<string, number>>,
+      ) =>
+        actual !== undefined &&
+        Object.keys(actual).length === Object.keys(expected).length &&
+        Object.entries(expected).every(
+          ([key, value]) => Object.hasOwn(actual, key) && actual[key] === value,
+        )
+      if (
+        !pack ||
+        Object.keys(pack).toSorted().join() !==
+          ["effectBlocks", "effects", "selfMods", "teamMods"]
+            .toSorted()
+            .join() ||
+        !Array.isArray(pack.effectBlocks) ||
+        !Array.isArray(pack.effects) ||
+        source.mindscapeNotes?.[context.rank] !== frozen.mindscapeNote ||
+        !equalModifiers(pack.selfMods, frozen.selfMods) ||
+        !equalModifiers(pack.teamMods, frozen.teamMods)
+      )
+        throw new Error(
+          `Supplement ${registration.supplementId} ${representation} coexisting pack mirror drift at mindscape rank ${context.rank}; re-review presence, modifiers and note before generating`,
+        )
+    }
+  }
   if (context.emptyPackModifierKeys !== undefined) {
     for (const [representation, source] of [
       ["raw", sourceEntity],
@@ -690,6 +726,14 @@ function verifySingleClauseContextGuard(
             block.enabledDefault !== anchor.frozenEnabledDefault)
         )
           fail(`${representation} anchor ${anchor.blockId} changed`)
+        if (
+          context.frozenPackModifiers !== undefined &&
+          JSON.stringify(Object.keys(block!).toSorted()) !==
+            JSON.stringify(
+              ["id", "name", "note", "enabledDefault", "effects"].toSorted(),
+            )
+        )
+          fail(`${representation} anchor ${anchor.blockId} field set changed`)
         const expected = expectedRecords.filter(
           (r) => r.blockId === anchor.blockId,
         )
@@ -710,6 +754,7 @@ function verifySingleClauseContextGuard(
             frozen[representation],
             registration.supplementId,
             `${representation} ${anchor.blockId}`,
+            context.frozenPackModifiers !== undefined,
           )
         }
       }
@@ -731,6 +776,7 @@ function verifySingleClauseContextGuard(
             frozen[representation],
             registration.supplementId,
             `${representation} flattened effects`,
+            context.frozenPackModifiers !== undefined,
           )
         }
       }
@@ -748,12 +794,14 @@ function verifySingleClauseContextGuard(
         frozen.raw,
         registration.supplementId,
         "collected raw",
+        context.frozenPackModifiers !== undefined,
       )
       verifySourceRecordShape(
         record!.normalized!,
         frozen.normalized,
         registration.supplementId,
         "collected normalized",
+        context.frozenPackModifiers !== undefined,
       )
     }
   }
@@ -790,7 +838,25 @@ function verifySourceRecordShape(
   frozen: SourceRecordShape,
   label: string,
   context: string,
+  exactFields = false,
 ): void {
+  // 固定 normalizeAgent 会显式保留 skillTargets/convert 等已知 undefined 字段；
+  // JSON 原件将其省略。只将这些已知空缺视为相同，未知键（含 undefined）仍拒绝。
+  if (
+    exactFields &&
+    JSON.stringify(
+      Object.keys(actual)
+        .filter(
+          (field) =>
+            actual[field as keyof SourceEffect] !== undefined ||
+            !SOURCE_RECORD_SHAPE_FIELDS.includes(field),
+        )
+        .toSorted(),
+    ) !== JSON.stringify(Object.keys(frozen).toSorted())
+  )
+    throw new Error(
+      `Supplement ${label} record field set drifted at ${context}; re-review the shared clause context before generating`,
+    )
   for (const field of SOURCE_RECORD_SHAPE_FIELDS) {
     const normalizeValue = (value: unknown): string =>
       value === undefined ? "<absent>" : JSON.stringify(value)
@@ -1138,7 +1204,7 @@ export function collectSource(
         for (let rank = 0; rank <= 6; rank++)
           entries.push({
             raw: raw.mindscapeBuffs?.[rank] ?? {},
-            normalized: normalized.mindscapeBuffs![rank]!,
+            normalized: normalized.mindscapeBuffs?.[rank] ?? {},
             pointer: `/${sourceKey}/${ei}/mindscapeBuffs/${rank}`,
             rank,
             rankKind: "mindscape",
@@ -3816,7 +3882,10 @@ export function convertSource(
         (v) =>
           effects.find((e) => e.effectId === v.effectIds[0]) as Exclude<
             ContributionRule,
-            AliceCorePeriodicRule | AstraYaoM4Rule
+            | AliceCorePeriodicRule
+            | AstraYaoM4Rule
+            | LucyGuardBoarInheritanceRule
+            | LucyGuardBoarM6Rule
           >,
       )
       const structure = (rule: ContributionRule) =>
@@ -4103,7 +4172,10 @@ export function convertSource(
     // 绑定与消费端显式选中；同 ID 目标重复登记即拒绝。
     if (supplement.skillTarget) {
       const declared = supplement.skillTarget
-      const targetId = `zzz-hp:skill:${declared.targetId}`
+      const targetId =
+        supplement.supplementId === "nanoka:agents:lucy:m6-boar-rain"
+          ? "nanoka:lucy-m6-boar-rain"
+          : `zzz-hp:skill:${declared.targetId}`
       if (supplementSkillTargets.some((t) => t.targetId === targetId))
         throw new Error(
           `Supplement ${supplement.supplementId} repeats the declared skill target ${targetId}`,
@@ -4507,7 +4579,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "34",
+    revision: "35",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -4571,6 +4643,7 @@ export function convertSource(
       a.targetId.localeCompare(b.targetId),
     ),
     mechanisms: [
+      ...buildLucyGuardBoarMechanism(effects, options),
       remielleMechanism,
       ...effects.flatMap((rule) => {
         if (

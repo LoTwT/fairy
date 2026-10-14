@@ -1,3 +1,4 @@
+import { LUCY_GUARD_BOAR_FACTION } from "./static-effects/lucy-guard-boar.ts"
 import { createHash } from "node:crypto"
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises"
 import { dirname, join, resolve } from "node:path"
@@ -130,6 +131,34 @@ export async function verifyStaticEffectsEvidence(
   publication: string,
 ): Promise<readonly string[]> {
   const verified: string[] = []
+  const factionBytes = await readFile(
+    join(publication, "verified", "integrated", LUCY_GUARD_BOAR_FACTION.path),
+  )
+  if (
+    createHash("sha256").update(factionBytes).digest("hex") !==
+    LUCY_GUARD_BOAR_FACTION.sha256
+  )
+    throw new Error("Lucy faction evidence belongs to a different Nanoka index")
+  const members = (
+    JSON.parse(factionBytes.toString("utf8")) as {
+      entities: {
+        agents: { members: Record<string, { sourceRecord: { camp: number } }> }
+      }
+    }
+  ).entities.agents.members
+  const factionMembers = Object.entries(members)
+    .filter(([, member]) => member.sourceRecord.camp === 4)
+    .map(([id]) => id)
+    .toSorted()
+  if (
+    JSON.stringify(factionMembers) !==
+    JSON.stringify(LUCY_GUARD_BOAR_FACTION.agentEntityIds)
+  )
+    throw new Error("Lucy same-faction agent membership changed")
+  for (const pointer of LUCY_GUARD_BOAR_FACTION.pointers)
+    if (!jsonPointerExists(JSON.parse(factionBytes.toString("utf8")), pointer))
+      throw new Error(`Lucy faction evidence pointer missing: ${pointer}`)
+  verified.push("mechanism:lucy-guard-boar:faction")
   for (const [key, entry] of Object.entries(evidence)) {
     await verifyEvidenceReferences(
       publication,

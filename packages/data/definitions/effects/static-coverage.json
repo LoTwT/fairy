@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "34",
+  "revision": "35",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -30251,6 +30251,26 @@
   ],
   "supplementalRecords": [
     {
+      "supplementId": "nanoka:agents:lucy:guard-boar-inheritance",
+      "source": "nanoka-integrated@3.2 agents/1151 passive core1—7",
+      "kind": "option",
+      "optionId": "nanoka:agents:lucy:guard-boar-inheritance",
+      "effectIds": ["agent:1151:nanoka:guard-boar-inheritance:mindscape:0"],
+      "supportedRanks": "核心1—7；影画0—6；层数0—1",
+      "computationTarget": "explicit own plus Lucy current guard-boar attributes, selected Cheer On deduplicated",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:lucy:m6-boar-rain",
+      "source": "nanoka-integrated@3.2 agents/1151 /talent/6/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:lucy:m6-boar-rain",
+      "effectIds": ["agent:1151:nanoka:m6-boar-rain:mindscape:6"],
+      "supportedRanks": "影画6；核心1—7；层数0—1",
+      "computationTarget": "one explicit guard-boar M6 fire explosion, 3×resolved boar ATK",
+      "status": "integrated"
+    },
+    {
       "supplementId": "nanoka:agents:astrayao:m4-quick-assist-bonus-damage",
       "source": "nanoka-integrated@3.2 agents/1311 /talent/4/desc",
       "kind": "option",
@@ -31150,17 +31170,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 884,
-    "options": 914,
+    "rules": 886,
+    "options": 916,
     "converted": 1134,
     "corrected": 138,
     "unsupported": 18,
     "supplements": {
-      "records": 86,
-      "rules": 57,
-      "options": 48,
+      "records": 88,
+      "rules": 59,
+      "options": 50,
       "entities": 4,
-      "integrated": 53,
+      "integrated": 55,
       "outOfScope": 33
     }
   },

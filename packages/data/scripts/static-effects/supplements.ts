@@ -1,3 +1,4 @@
+import { LUCY_GUARD_BOAR_SUPPLEMENTS } from "./lucy-guard-boar.ts"
 import type {
   AnyParameter,
   Condition,
@@ -232,6 +233,17 @@ export interface ClauseContextGuardEntry {
   readonly expectsEmptyPack?: true
   /** 已存在的空档：同时冻结完整零值 modifier 键集合和空 note，缺档不能当空。 */
   readonly emptyPackModifierKeys?: readonly string[]
+  /** 非空培养档的真实镜像 modifier 和 note；raw/normalized 各自冻结。 */
+  readonly frozenPackModifiers?: Readonly<
+    Record<
+      "raw" | "normalized",
+      {
+        readonly mindscapeNote: string
+        readonly selfMods: Readonly<Record<string, number>>
+        readonly teamMods: Readonly<Record<string, number>>
+      }
+    >
+  >
 }
 
 export interface SupplementBase {
@@ -6111,6 +6123,7 @@ const astraYaoMindscape4QuickAssistDamage: Supplement = {
 }
 
 export const SUPPLEMENTS: readonly Supplement[] = [
+  ...LUCY_GUARD_BOAR_SUPPLEMENTS,
   astraYaoMindscape4QuickAssistDamage,
   aliceCorePeriodicDamage,
   yeshunguangVeilVulnerability,

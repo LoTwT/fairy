@@ -1169,7 +1169,9 @@ function evaluateSingleLayer(
   const rule = layer.entry.rule
   if (
     rule.operation.kind === "alice-core-periodic-damage" ||
-    rule.operation.kind === "astra-yao-m4-quick-assist-damage"
+    rule.operation.kind === "astra-yao-m4-quick-assist-damage" ||
+    rule.operation.kind === "lucy-guard-boar-inheritance" ||
+    rule.operation.kind === "lucy-guard-boar-m6-damage"
   ) {
     context.collector.report(
       "CONTEXT_MISMATCH",
@@ -2119,13 +2121,15 @@ function evaluateEffectsInternal(
         (entry) =>
           entry.rule.effectId === instance.effectId &&
           (entry.rule.operation.kind === "alice-core-periodic-damage" ||
-            entry.rule.operation.kind === "astra-yao-m4-quick-assist-damage"),
+            entry.rule.operation.kind === "astra-yao-m4-quick-assist-damage" ||
+            entry.rule.operation.kind === "lucy-guard-boar-inheritance" ||
+            entry.rule.operation.kind === "lucy-guard-boar-m6-damage"),
       )
     )
       collector.report(
         "CONTEXT_MISMATCH",
         "",
-        "Alice periodic damage requires its named event settlement",
+        "The selected named mechanism requires its dedicated settlement input",
         { effectId: instance.effectId, bindingId: instance.bindingId },
       )
   }

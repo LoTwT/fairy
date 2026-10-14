@@ -16,6 +16,7 @@ import type {
   ActionId,
   EffectId,
   SourceBinding,
+  SourceReference,
   StatUnitMap,
   Stat,
   DirectStat,
@@ -406,6 +407,166 @@ export interface StaticDamageInput {
   readonly inputs?: readonly EffectNumericInput[]
   readonly snapshots?: readonly SavedSnapshot[]
   readonly atSeconds?: number
+}
+
+/** 小猪自有值显式给出；当前值组合属于调用方选择的条件模型。 */
+export interface LucyGuardBoarOwnStats {
+  readonly attack: Quantity<"attack-points">
+  readonly impact: Quantity<"impact-points">
+  readonly anomalyProficiency: Quantity<"anomaly-proficiency-points">
+  readonly criticalRate: Quantity<"ratio">
+  readonly criticalDamage: Quantity<"ratio">
+  readonly penetrationRatio: Quantity<"ratio">
+}
+export type LucyGuardBoarTeamCondition =
+  | { readonly kind: "not-satisfied" }
+  | {
+      readonly kind: "teammate"
+      readonly entityId: EntityId
+      readonly reason: "same-element" | "same-faction" | "rupture"
+    }
+
+export interface LucyGuardBoarConditionalModel {
+  readonly statComposition: "own-plus-owner-current-without-selected-lucy-cheer"
+  readonly otherEffects: "lucy-options-only"
+  readonly damageFactors: "explicit-boar-baseline"
+  readonly criticalDamage: "resolved-boar"
+}
+export interface LucyGuardBoarM6Event {
+  readonly eventId: EventId
+  readonly sourceBindingId: BindingId
+  readonly triggerActorId: EntityId
+  readonly targetId: EntityId
+  readonly skillCategory: "enhanced-special"
+  readonly cheerOn: true
+}
+export interface LucyGuardBoarDamageInput {
+  readonly mechanism: "lucy-guard-boar"
+  readonly definitions: RuleSet
+  readonly bindings: readonly SourceBinding[]
+  readonly selections: readonly {
+    readonly effectId: EffectId
+    readonly bindingId: BindingId
+    readonly layers: number
+  }[]
+  readonly world: WorldObservation
+  readonly sourceBindingId: BindingId
+  readonly atSeconds: number
+  readonly boar: {
+    readonly entityId: EntityId
+    readonly ownerSource: {
+      readonly entityId: EntityId
+      readonly snapshotId?: never
+    }
+    readonly ownStats: LucyGuardBoarOwnStats
+  }
+  readonly teamCondition: LucyGuardBoarTeamCondition
+  readonly conditionalModel: LucyGuardBoarConditionalModel
+  readonly inputs?: readonly EffectNumericInput[]
+  readonly snapshots?: readonly SavedSnapshot[]
+  readonly settlement:
+    | { readonly kind: "attributes" }
+    | {
+        readonly kind: "m6-explosion"
+        readonly event: LucyGuardBoarM6Event
+        readonly criticalRate: Quantity<"ratio">
+        readonly damage: Extract<
+          StaticDamageParameters,
+          { readonly kind: "regular" }
+        >
+      }
+  readonly hit?: never
+  readonly damage?: never
+  readonly damageItems?: never
+  readonly attributeSources?: never
+  readonly declaredCriticalRate?: never
+}
+export interface LucyGuardBoarCatalogInput extends Omit<
+  LucyGuardBoarDamageInput,
+  "selections"
+> {
+  readonly catalog: StaticEffectCatalog
+  readonly actorSources: StaticCatalogDamageInput["actorSources"]
+  readonly selections: readonly {
+    readonly optionId: string
+    readonly bindingId: BindingId
+    readonly layers: number
+  }[]
+}
+export interface LucyGuardBoarDirectContribution {
+  readonly effectId: EffectId
+  readonly bindingId: BindingId
+  readonly sourceEntityId: EntityId
+  readonly beneficiaryId: EntityId
+  readonly stat: "attack" | "criticalDamage"
+  readonly sourceValue: Quantity<"attack-points" | "ratio">
+  readonly multiplier: number
+  readonly value: Quantity<"attack-points" | "ratio">
+  readonly references: NonEmpty<SourceReference>
+}
+export interface LucyGuardBoarResult {
+  readonly mechanism: "lucy-guard-boar"
+  readonly inheritanceStatus: "applied" | "inactive"
+  readonly attributes: LucyGuardBoarOwnStats
+  readonly provenance: {
+    readonly holderId: EntityId
+    readonly sourceBindingId: BindingId
+    readonly boarId: EntityId
+    readonly ownerSource: {
+      readonly entityId: EntityId
+      readonly stage: "current"
+    }
+    readonly teamCondition: LucyGuardBoarTeamCondition
+    readonly teamConditionEvidence: "caller-asserted" | "catalog-verified"
+    readonly conditionalModel: LucyGuardBoarConditionalModel
+    readonly ownStats: LucyGuardBoarOwnStats
+    readonly ownerReadings: EvaluationResult["attributes"]
+    readonly selectedOwnerContributions: readonly ResolvedContribution[]
+    readonly removedOwnerCheerContributions: readonly LucyGuardBoarDirectContribution[]
+    readonly boarCheerContributions: readonly LucyGuardBoarDirectContribution[]
+    readonly inheritanceContributions: readonly {
+      readonly stat: Exclude<keyof LucyGuardBoarOwnStats, "penetrationRatio">
+      readonly value: Quantity<
+        | "attack-points"
+        | "impact-points"
+        | "anomaly-proficiency-points"
+        | "ratio"
+      >
+      readonly effectId: EffectId
+      readonly bindingId: BindingId
+      readonly sourceEntityId: EntityId
+      readonly beneficiaryId: EntityId
+      readonly stage: "current"
+      readonly references: NonEmpty<SourceReference>
+    }[]
+    readonly conversionInput: null | {
+      readonly bindingId: BindingId
+      readonly name: string
+      readonly value: Quantity<"attack-points">
+      readonly source: "derived-owner-initial" | "caller-provided"
+      readonly ownerId: EntityId
+      readonly stage: "initial"
+    }
+  }
+  readonly settlement:
+    | null
+    | (StaticDamageResult & {
+        readonly status: "applied" | "inactive"
+        readonly event: LucyGuardBoarM6Event
+        readonly effectId: EffectId
+        readonly bindingId: BindingId
+        readonly references: NonEmpty<SourceReference>
+        readonly attackProvider: {
+          readonly entityId: EntityId
+          readonly stage: "current"
+        }
+        readonly beneficiaryId: EntityId
+        readonly itemId: "lucy:m6-boar-rain"
+        readonly skillTargetId: "nanoka:lucy-m6-boar-rain"
+        readonly element: "fire"
+        readonly skillCategory: "uncategorized"
+        readonly skillTags: readonly []
+      })
 }
 
 /** 来源文本只证明触发关系及 3×耀嘉音 ATK；其余读取属于显式条件模型。 */
@@ -809,6 +970,13 @@ export interface TransitionResult {
 
 /** 公开纯函数接口；全部实现由包入口导出。 */
 export interface EffectEngine {
+  calculateStaticDamage(
+    input: LucyGuardBoarDamageInput,
+  ): Result<LucyGuardBoarResult>
+  calculateStaticDamageFromCatalog(
+    input: LucyGuardBoarCatalogInput,
+  ): Result<LucyGuardBoarResult>
+
   calculateStaticDamage(
     input: AstraYaoM4DamageInput,
   ): Result<AstraYaoM4DamageResult>

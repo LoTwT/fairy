@@ -1775,3 +1775,99 @@ export function calculateDeclaredAstraYaoM4(
     },
   })
 }
+
+import type {
+  LucyGuardBoarCatalogInput,
+  LucyGuardBoarOwnStats,
+  LucyGuardBoarResult,
+} from "../../../packages/core/dist/index.mjs"
+
+/** 固定例子的身份为 Lucy、同火属性「11号」、亲卫队小猪和敌人；属性由调用方显式提供。 */
+export function calculateDeclaredLucyGuardBoar(
+  definitions: RuleSet,
+  catalog: StaticEffectCatalog,
+  world: WorldObservation,
+  ownStats: LucyGuardBoarOwnStats,
+  damage: Extract<
+    LucyGuardBoarCatalogInput["settlement"],
+    { kind: "m6-explosion" }
+  >["damage"],
+): Result<LucyGuardBoarResult> {
+  return calculateStaticDamageFromCatalog({
+    mechanism: "lucy-guard-boar",
+    definitions,
+    catalog,
+    world,
+    sourceBindingId: "binding:lucy",
+    atSeconds: 10,
+    bindings: [
+      {
+        kind: "agent",
+        bindingId: "binding:lucy",
+        holderId: "entity:lucy",
+        sourceEntityId: "1151",
+        eligible: true,
+        configuration: {
+          mindscapeRank: 6,
+          coreSkillLevel: 1,
+          specialSkillLevel: 12,
+        },
+      },
+    ],
+    actorSources: [
+      { entityId: "entity:lucy", agentEntityId: "1151" },
+      { entityId: "entity:trigger", agentEntityId: "1041" },
+    ],
+    selections: [
+      "nanoka:agents:lucy:guard-boar-inheritance",
+      "nanoka:agents:lucy:m6-boar-rain",
+      "agents:lucy:mindscape:0:blk-legacy:legacy-team-atk",
+      "agents:lucy:mindscape:0:blk-legacy:eff-ms384fjz-fgct7r",
+      "agents:lucy:mindscape:4:blk-legacy:legacy-team-critDmg",
+    ].map((optionId) => ({ optionId, bindingId: "binding:lucy", layers: 1 })),
+    boar: {
+      entityId: "entity:boar",
+      ownerSource: { entityId: "entity:lucy" },
+      ownStats,
+    },
+    teamCondition: {
+      kind: "teammate",
+      entityId: "entity:trigger",
+      reason: "same-element",
+    },
+    conditionalModel: {
+      statComposition: "own-plus-owner-current-without-selected-lucy-cheer",
+      otherEffects: "lucy-options-only",
+      damageFactors: "explicit-boar-baseline",
+      criticalDamage: "resolved-boar",
+    },
+    settlement: {
+      kind: "m6-explosion",
+      event: {
+        eventId: "event:lucy-m6",
+        sourceBindingId: "binding:lucy",
+        triggerActorId: "entity:trigger",
+        targetId: "entity:enemy",
+        skillCategory: "enhanced-special",
+        cheerOn: true,
+      },
+      criticalRate: { unit: "ratio", value: 0.31 },
+      damage,
+    },
+  })
+}
+
+/** 故意构造运行时反例：保存属性不能冒充 current 继承；应返回 CONTEXT_MISMATCH。 */
+export function rejectHistoricalLucyOwner(
+  request: LucyGuardBoarCatalogInput,
+): Result<LucyGuardBoarResult> {
+  const invalidOwner: LucyGuardBoarCatalogInput["boar"]["ownerSource"] = {
+    entityId: "entity:lucy",
+    // @ts-expect-error current-only 字段同时受公开类型与运行时语义检查
+    snapshotId: "snapshot:past",
+  }
+  return calculateStaticDamageFromCatalog({
+    ...request,
+    boar: { ...request.boar, ownerSource: invalidOwner },
+  })
+}

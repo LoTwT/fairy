@@ -516,6 +516,92 @@ CONTEXT_MISMATCH、MISSING_FACT、MISSING_REFERENCE、MISSING_SNAPSHOT 等，
 坏嵌套返回结构化问题而非 TypeError。可执行示例见
 [calculateDeclaredAstraYaoM4](contract-examples.ts)。
 
+### 露西小猪继承与一次 M6 猪雨
+
+`lucy-guard-boar` 是具名条件模型，分别由 `LucyGuardBoarDamageInput`（低层）和
+`LucyGuardBoarCatalogInput`（目录及高层窄转发）提供。固定中英核心文本证明继承
+ATK/冲击/异常精通、额外能力条件下的 CR/CD，以及核心 1—7 对小猪[加油！]的
+140/150/160/170/180/190/200% 强化；M6 文本证明另一名同队角色处于[加油！]时
+强化特殊技命中后，一只小猪爆炸造成小猪 ATK 的 300% 火伤。
+文本未证明自有属性数值、读取时点、叠加顺序、爆炸暴击能力或完整乘区归属；
+以下算法必须由调用方显式确认，不视为游戏实测。
+
+世界保留真实 summon：`boar.entityId` 指向已部署的 `summonKind: "lucy-guard-boar"`，
+owner 是 `sourceBindingId` 指向的 eligible agent/1151 holder，二者同队。
+同一请求只允许一个 eligible Lucy 来源绑定。触发队友、Lucy、boar、敌人分别保留真实 ID，
+不把 summon 伪装成 actor，也不改写 world。
+`boar.ownerSource` 仅为本 holder current；实际可读的非 undefined `snapshotId` 一律拒绝，
+包括原型继承与不可枚举属性，不回退保存阶段。
+`ownStats` 必填六个有单位的有限非负量：ATK、Impact、AP、CR、CD、穿透率；
+自有 CR/穿透率域为 [0,1]，其余不设人为上限。
+
+`teamCondition` 为 `not-satisfied`，或另一实例队友及
+`same-element | same-faction | rupture` 理由。低层标明 caller-asserted；
+目录按 actorSources 与正式元素、职业“命破”及具名阵营清单验证。
+阵营清单仅由固定 integrated index 的 camp=4 得到
+1071/1151/1161/1171/1281/1351，mechanism 保存逐成员来源引用；
+不向旧目录实体添加阵营字段。false 条件也遍历所有同队其他 actor，缺身份为错误。
+Lucy 自己不能满足条件；另一个同名运行实例可以，异队无效。
+该身份条件在继承关闭时仍须合法。
+
+条件确认固定四个字面量：
+`statComposition="own-plus-owner-current-without-selected-lucy-cheer"`、
+`otherEffects="lucy-options-only"`、`damageFactors="explicit-boar-baseline"`、
+`criticalDamage="resolved-boar"`。
+world 与 ownStats 是选中效果加入前的调用方基线；隐藏在基线中的同源加油无法自动识别，
+调用方不得预先混入后再选择同项。
+
+允许同一个 Lucy binding 的五个来源：新增继承、M6 和原加油固定值/初始攻击转化/M4。
+三条旧规则通过原准备器、状态与求值器得到真实贡献，原规则参数与公式不另行实现。
+设 A/T/P/R/D 为本次 Lucy current 属性，C 为两条已选旧加油实际 ATK 贡献之和，
+M 为已选 M4 实际 CD 贡献，h 为当前核心档固定倍率。继承启用时：
+
+- boar ATK = own ATK + (A − C) + hC；Impact/AP = own + T/P。
+- 队伍条件成立：CR = own CR + R；CD = own CD + (D − M) + M。
+- 条件不成立：CR = own CR；CD = own CD + M。
+- 穿透率始终等于 own 穿透率。M4 不乘 h，加油不放大整块继承属性。
+
+继承关闭时 ATK = own ATK + C，CD = own CD + M，其余保留 own；
+仍可独立选择旧两条加油或 M4。C/M 未选或合法零层即为零，不因解锁或 cheerOn 自动启用。
+只有继承启用才读取 owner Impact/AP，且仅队伍条件成立时读取 owner CR/CD。
+属性 CR 允许超过 1；爆炸概率是另外的显式 ratio [0,1]，不从属性 CR 夹取或推导。
+
+转化旧规则读取 owner initial ATK。正层转化未给输入时，具名入口用既有属性求值派生，
+并标为 `derived-owner-initial`；显式同名输入必须等于同一 owner 的实际 initial ATK，
+单位必须为 attack-points，关闭时也不能藏矛盾输入。另一 binding 的同名输入拒绝。
+转化关闭且未显式给值时，不索取 initial ATK。初始与 current 阶段的差异仍真实保留。
+
+完整定义先解析校验。其他正层 supplied 来源即使 when=false 也返回 CONTEXT_MISMATCH；
+eligible 且 config 匹配的 continuous 候选，以及会修改本次已选允许目标的
+configuration/contribution 修改候选，在准备器应用修改前拒绝。
+activation timing 修改因这些目标是 supplied、没有计时配置，已由规则解析器
+先返回 INVALID_MODIFICATION。未选或合法零层的其他 supplied 保留结构、身份、
+档位、层数验证，不求其输出事实。普通入口仍按原语义消费它们。
+
+`settlement.kind="attributes"` 只返回属性，选中正层 M6 为冲突；
+`m6-explosion` 必填 eventId/sourceBindingId/triggerActorId/targetId、
+`skillCategory="enhanced-special"` 与 `cheerOn=true`。
+触发者必须为另一 observed 同队 actor，target 为 observed 敌方 actor；
+cheerOn 是本次触发断言，不自动打开加油选项。atSeconds 有限非负。
+M6 最低影画 6，合法零层也检查门槛；未选可在低影画关闭，但仍校验完整事件与条件模型。
+
+一次 M6 使用唯一 item `lucy:m6-boar-rain`、
+target `nanoka:lucy-m6-boar-rain`，fire / regular / uncategorized / 空 skillTags，
+固定 3×已解析 boar ATK。damage 的其余基线乘区、最终概率全部显式提供，
+CD 用已解析 boar CD、穿透率用 own 值，复用原 regular 公式返回 nonCritical/critical/expected。
+未选或零层 M6 返回 inactive 与三个零结果，属性及其他已选依赖仍正常求值。
+不接收普通 hit/items、任意倍率、元素、分类、snapshot 或其他属性来源覆盖。
+
+结果 `LucyGuardBoarResult` 分开记录 own、owner 实际读取、移除的 owner 加油、
+直接给 boar 的加油/M4、继承贡献以及 M6 的 effect/binding/references 与各运行身份。
+重复求值不改变输入、不累计状态。错误保持结构化 Result，不以裸 TypeError 表示坏嵌套。
+可执行正例和历史来源反例见
+[calculateDeclaredLucyGuardBoar 与 rejectHistoricalLucyOwner](contract-examples.ts)。
+
+旧四条小猪动作继续遵守[露西面板代算约定](../data/skill-actions.md#具名约定露西亲卫队小猪面板代算)，
+本路径不接收这四条动作。M6 后续回旋挥击须由调用方另选旧动作；
+持续延长、三次上限/刷新、三只小猪、随机攻击、攻击频率、冷却/能量和自动排队均未实现。
+
 ### 两层校验
 
 TypeScript 可以拒绝不相容单位、属性阶段、部分身份混用、错误规则分支和已声明的禁止字段。部分档位表的非空约束与实际所选档位由运行时校验；它不会验证任意 JSON，也不能静态证明字符串参数名存在、目标规则操作匹配或运行时没有依赖环。
