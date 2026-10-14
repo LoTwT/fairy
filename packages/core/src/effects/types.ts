@@ -408,6 +408,88 @@ export interface StaticDamageInput {
   readonly atSeconds?: number
 }
 
+/** 来源文本只证明触发关系及 3×耀嘉音 ATK；其余读取属于显式条件模型。 */
+export interface AstraYaoM4Event {
+  readonly eventId: EventId
+  readonly sourceBindingId: BindingId
+  readonly triggerActorId: EntityId
+  readonly targetId: EntityId
+  readonly triggerSpecialty: "attack"
+  readonly idyllicCadenza: true
+  readonly enteredViaQuickAssist: true
+  readonly nextQuickAssistHeavyHit: true
+}
+
+export interface AstraYaoM4ConditionalModel {
+  readonly attackReading: "holder-current"
+  readonly factorBeneficiary: "trigger-actor-current"
+  readonly criticalRate: Quantity<"ratio">
+  readonly criticalDamageSource: AttributeSource
+  readonly penetrationRatioSource: AttributeSource
+}
+
+export interface AstraYaoM4DamageInput extends Omit<
+  StaticDamageInput,
+  "mechanism" | "hit" | "damage" | "atSeconds"
+> {
+  readonly mechanism: "astra-yao-m4-quick-assist-damage"
+  readonly event: AstraYaoM4Event
+  readonly conditionalModel: AstraYaoM4ConditionalModel
+  readonly atSeconds: number
+  readonly damage: Extract<StaticDamageParameters, { readonly kind: "regular" }>
+  readonly hit: Omit<StaticHit, "attributeSources" | "declaredCriticalRate"> & {
+    readonly attributeSources?: never
+    readonly declaredCriticalRate?: never
+    readonly skillCategory: "uncategorized"
+  }
+}
+
+export interface AstraYaoM4CatalogInput extends Omit<
+  StaticCatalogDamageInput,
+  "mechanism" | "hit" | "damage" | "atSeconds"
+> {
+  readonly mechanism: "astra-yao-m4-quick-assist-damage"
+  readonly event: AstraYaoM4Event
+  readonly conditionalModel: AstraYaoM4ConditionalModel
+  readonly atSeconds: number
+  readonly damage: Extract<
+    StaticCatalogDamageInput["damage"],
+    { readonly kind: "regular" }
+  >
+  readonly hit: Omit<
+    StaticCatalogDamageInput["hit"],
+    "attributeSources" | "declaredCriticalRate"
+  > & {
+    readonly attributeSources?: never
+    readonly declaredCriticalRate?: never
+    readonly skillCategory: "uncategorized"
+  }
+}
+
+export interface AstraYaoM4DamageResult extends StaticDamageResult {
+  readonly mechanism: "astra-yao-m4-quick-assist-damage"
+  readonly status: "applied" | "inactive"
+  readonly provenance: {
+    readonly event: AstraYaoM4Event
+    readonly sourceBindingId: BindingId
+    readonly effectId: EffectId
+    readonly holderId: EntityId
+    readonly triggerActorId: EntityId
+    readonly hitActorId: EntityId
+    readonly beneficiaryId: EntityId
+    readonly attackProvider: {
+      readonly entityId: EntityId
+      readonly stage: "current"
+    }
+    readonly criticalDamageSource: AttributeSource
+    readonly penetrationRatioSource: AttributeSource
+    readonly targetId: EntityId
+    readonly criticalRate: Quantity<"ratio">
+    readonly specialtyEvidence: "caller-asserted" | "catalog-verified"
+    readonly conditionalModel: AstraYaoM4ConditionalModel
+  }
+}
+
 /** 调用方声明的原强击实际结果；snapshot 只见证历史身份与时点。 */
 export interface OriginalPhysicalAnomalyFact {
   readonly eventId: EventId
@@ -727,6 +809,12 @@ export interface TransitionResult {
 
 /** 公开纯函数接口；全部实现由包入口导出。 */
 export interface EffectEngine {
+  calculateStaticDamage(
+    input: AstraYaoM4DamageInput,
+  ): Result<AstraYaoM4DamageResult>
+  calculateStaticDamageFromCatalog(
+    input: AstraYaoM4CatalogInput,
+  ): Result<AstraYaoM4DamageResult>
   calculateStaticDamage(
     input: AliceCorePeriodicDamageInput,
   ): Result<AliceCorePeriodicDamageResult>

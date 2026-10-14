@@ -441,6 +441,81 @@ effect、原事件事实及有效比例；启用只有一条真实比例 contrib
 `calculateDeclaredAliceCorePeriod`，来源与生成守卫见
 [修订 33](../data/zzz-hp-static-effects.md#修订-33爱丽丝核心周期附伤)。
 
+### 耀嘉音 M4 跨角色附伤的条件结算
+
+`astra-yao-m4-quick-assist-damage` 只结算一次调用方声明已发生的事件。中英 M4 文本支持：
+咏叹华彩中，其他同队强攻角色通过快速支援入场，下一次快速支援重击额外造成
+3×耀嘉音 ATK 的伤害。文本没有证明附伤的元素、暴击能力、命中归属、属性读取时点
+或其他乘区归属；以下是显式项目条件模型，不是游戏实测结论。
+
+| 身份或读取                     | 契约                                                                                                               |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| 来源持有者                     | event.sourceBindingId 对应 eligible 的 agent/1311，当前世界中的耀嘉音实例                                          |
+| 触发者、hit actor、beneficiary | event.triggerActorId，必须与 holder 不同且同队，命中同一 observed 敌人                                             |
+| 职业                           | 低层 triggerSpecialty=attack 是调用方断言；目录从本触发者的 actorSources 映射核验正式 profession=强攻              |
+| ATK 提供者                     | holder 的 current 最终 ATK，包含实际适用的实体属性贡献；不是核心转模的 initial 输入                                |
+| 分类、元素                     | regular / uncategorized；元素必填且合法，不从耀嘉音或触发动作推断                                                  |
+| 最终概率                       | conditionalModel.criticalRate 的 ratio 数量，有限 [0,1]，无默认；不读双方面板 CR 或触发重击的暴击结果              |
+| CD、穿透率                     | conditionalModel 中两个独立 AttributeSource，必须显式指向本 holder 或本 trigger 的 current 或保存 current 阶段属性 |
+| 其余普通乘区                   | trigger 当前命中消费的普通贡献；damage 基线仍是调用方显式提供的条件参数，不能视为已核实的游戏面板                  |
+
+`AstraYaoM4Event` 必填合法 eventId/sourceBindingId/triggerActorId/targetId，
+triggerSpecialty="attack"，idyllicCadenza、enteredViaQuickAssist、nextQuickAssistHeavyHit
+三个字面量 true；atSeconds 必须显式有限且非负。职业和触发事实不构成游戏时间线验证，
+目录的身份核验也以调用方 actorSources 映射为前提。此入口不建立队列、不去重跨请求 eventId，
+不检测 3 秒或 15 秒窗口，不实施同句异常积蓄或失衡条款。
+
+`AstraYaoM4ConditionalModel` 固定 attackReading="holder-current"、
+factorBeneficiary="trigger-actor-current"。CD/穿透快照必须存在、保存指定实体和属性的
+current 值与 actor 身份、时点不晚于事件；缺失不回退当前值。非 hit actor 的当前来源
+不消费 trigger 命中级 stat 加数；保存值不再叠加当前实体或命中级 stat 加数。
+r=0/1 仍计算两个普通 CD 条件分支，expected=(1-r)×nonCritical+r×critical，
+不会省略未取分支需要的 CD/穿透事实。ATK 必须有限非负，合法 ATK=0 仍可为 applied。
+
+唯一 item 为 `astrayao:m4-quick-assist-bonus-damage`：attack、输入倍率严格为 0，
+statSource 显式为本 holder current，无 snapshotId；目录还要求 direct/base。
+唯一目录目标为 `zzz-hp:skill:astrayao-m4-quick-assist-bonus-damage`，
+其 agentEntityId=1311 表示来源所有者，只有本具名入口在身份校验后采用这一归属。
+普通目标所有权、旧 declaredCriticalRate、来源必暴及帷幕来源限制保持原契约。
+低层不增加 skillTargetIds，内部补本目标；显式 skillTags 至多包含本目标和
+`zzz-hp:category:uncategorized`。不得携带 hit.declaredCriticalRate、hit.attributeSources、
+其他项、目标、分类标签或 follow-up 身份。
+
+封闭 operation 为 `{ kind: "astra-yao-m4-quick-assist-damage", multiplier: { unit: "multiplier", value: 3 } }`。
+仅允许 agent1311、hit scope、supplied 最大一层、M4/核心1—7、team-except-holder、
+true when、空参数；不接受 uniqueness、任意输出表达式或针对它的修改。
+目录必须保持规则↔单选项↔mechanism 双向唯一、完整同源 references、team 目标、
+单变体与唯一独占伤害项要求。坏定义或 metadata 在未选和 0 层也拒绝。
+普通 prepare 可包含未启用规则，实际消费必须走具名入口；未知 mechanism 结构化拒绝。
+内部只将验证后的 operation 桥接为本项一次 +3 和独立概率，不改写调用方对象、
+目录、hit actor 或面板 CR；桥接上下文不是公开普通输入。
+
+启用1层、合法 M4—6/核心1—7且受益有效为 applied；未选或0层为 inactive，
+三个伤害读数均为0，但保留显式概率，仍验证所有身份、属性来源和其他已选依赖。
+M0—3 可以关闭，不能启用。所有选中来源均按 eligible、层数与最终受益范围判定；
+唯一有效来源必须等于 event.sourceBindingId，多个有效来源明确拒绝，不挑最高值。
+同 holder 重复绑定继续先按既有结构规则拒绝。被过滤、关闭的另一来源不构成活动冲突。
+
+普通实体/命中增益可共存。耀嘉音核心 initial ATK 输入仍必填，其实际作用于 holder
+的 ATK 贡献进入 current 读取，M2 沿旧转换修改执行；M6 的自身招式分类不会扩散至本项。
+实际匹配本项的其他精确或 wildcard 倍率 add/scale 一律报 CONTEXT_MISMATCH，
+inactive 也不能被注入倍率；另一项、未选、条件不成立或非本受益者不造成污染冲突。
+缺失 when 事实仍是错误。实际适用的命中 CR 或来源必暴与声明概率冲突，包括 r=1，
+不先求被替代 CR 输出或唯一性赢家；不消费的实体 CR 不索取其输出事实。
+Alice 周期或其他独立事件不能借本入口激活。
+
+`calculateStaticDamage`、`calculateStaticDamageFromCatalog` 和 EffectEngine 提供具名 overload。
+`calculateStaticActionDamage` 对同一完整具名目录输入作窄转发，复用目录的绑定和 actorSources
+校验；此分支由调用方显式提供 world，不从普通动作或配装自动生成事件、面板或附伤。
+普通动作解析、segments、items 与其他入口的返回类型保持。
+结果扩展 StaticDamageResult，携 mechanism、status 和 provenance：
+event、effect/sourceBinding、holder/trigger/hitActor/beneficiary/target、ATK current 提供者、
+CD/穿透来源、r 及 caller-asserted/catalog-verified 职业依据。inactive 不报告新 operation 消费；
+合法零 ATK 的 applied 仍保留真实来源贡献。错误沿用 INVALID_INPUT、UNIT_MISMATCH、
+CONTEXT_MISMATCH、MISSING_FACT、MISSING_REFERENCE、MISSING_SNAPSHOT 等，
+坏嵌套返回结构化问题而非 TypeError。可执行示例见
+[calculateDeclaredAstraYaoM4](contract-examples.ts)。
+
 ### 两层校验
 
 TypeScript 可以拒绝不相容单位、属性阶段、部分身份混用、错误规则分支和已声明的禁止字段。部分档位表的非空约束与实际所选档位由运行时校验；它不会验证任意 JSON，也不能静态证明字符串参数名存在、目标规则操作匹配或运行时没有依赖环。

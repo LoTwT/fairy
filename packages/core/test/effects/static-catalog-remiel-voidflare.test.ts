@@ -1501,7 +1501,7 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
   it.each([false, true])(
     "rejects the undeclared remielle mechanism while normal calls stay compatible, legacy=%s",
     (legacy) => {
-      // 只删除被测蕾米机制；旧无机制目录另成完整定义/选项组，不留下孤立的新 Alice 规则。
+      // 只删除被测蕾米机制；旧无机制目录移除其他具名规则、选项与专用目标，保持引用闭合。
       const compatibleDefinitions = legacy
         ? {
             ...definitions,
@@ -1509,7 +1509,8 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
               (rule) =>
                 !(
                   rule.kind === "contribution" &&
-                  rule.operation.kind === "alice-core-periodic-damage"
+                  (rule.operation.kind === "alice-core-periodic-damage" ||
+                    rule.operation.kind === "astra-yao-m4-quick-assist-damage")
                 ),
             ),
           }
@@ -1521,9 +1522,19 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
         ),
         options: legacy
           ? catalog.options.filter(
-              (o) => o.optionId !== "nanoka:agents:alice:core-periodic-damage",
+              (o) =>
+                o.optionId !== "nanoka:agents:alice:core-periodic-damage" &&
+                o.optionId !==
+                  "nanoka:agents:astrayao:m4-quick-assist-bonus-damage",
             )
           : catalog.options,
+        skillTargets: legacy
+          ? catalog.skillTargets.filter(
+              (t) =>
+                t.targetId !==
+                "zzz-hp:skill:astrayao-m4-quick-assist-bonus-damage",
+            )
+          : catalog.skillTargets,
       }
       if (legacy) delete (legacyCatalog as { mechanisms?: unknown }).mechanisms
       const requested = resultFor({

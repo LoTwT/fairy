@@ -197,7 +197,7 @@ describe("batch 14 Miyabi frostburn break through the published data package", (
     expect(definitions.ok, JSON.stringify(definitions)).toBe(true)
     if (!definitions.ok) throw new Error(JSON.stringify(definitions.issues))
     const catalog = calculationData.catalog as StaticEffectCatalog
-    expect(catalog.revision).toBe("33")
+    expect(catalog.revision).toBe("34")
     expect(
       catalog.skillTargets.some((t) => t.targetId === FROSTBURN_TARGET),
     ).toBe(true)

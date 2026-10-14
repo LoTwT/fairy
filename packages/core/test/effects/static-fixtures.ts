@@ -1,5 +1,6 @@
 import type {
   AliceCorePeriodicRule,
+  AstraYaoM4Rule,
   Condition,
   ContributionOperation,
   ContributionRule,
@@ -26,7 +27,7 @@ export function rule<O extends ContributionOperation>(
   when?: Condition<"contribution">,
 ): Exclude<
   Extract<ContributionRule, { readonly scope: "hit" }>,
-  AliceCorePeriodicRule
+  AliceCorePeriodicRule | AstraYaoM4Rule
 > & {
   readonly operation: O
 }
@@ -37,7 +38,7 @@ export function rule(
 ): Omit<
   Exclude<
     Extract<ContributionRule, { readonly scope: "hit" }>,
-    AliceCorePeriodicRule
+    AliceCorePeriodicRule | AstraYaoM4Rule
   >,
   "operation"
 > & {

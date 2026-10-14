@@ -230,6 +230,8 @@ export interface ClauseContextGuardEntry {
    * stat）即拒绝并要求复核。
    */
   readonly expectsEmptyPack?: true
+  /** 已存在的空档：同时冻结完整零值 modifier 键集合和空 note，缺档不能当空。 */
+  readonly emptyPackModifierKeys?: readonly string[]
 }
 
 export interface SupplementBase {
@@ -5933,7 +5935,183 @@ const aliceCorePeriodicDamage: Supplement = {
   },
 }
 
+const astraYaoMindscape4QuickAssistDamage: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:agents:astrayao:m4-quick-assist-bonus-damage",
+  source: "nanoka-integrated@3.2 agents/1311 /talent/4/desc",
+  catalogEntityId: "agents:astrayao",
+  optionId: "nanoka:agents:astrayao:m4-quick-assist-bonus-damage",
+  supportedRanks: "影画 4—6；核心 1—7；层数 0—1",
+  computationTarget:
+    "one declared Attack teammate quick-assist heavy hit bonus, 3×Astra Yao current ATK",
+  clauseContextGuard: {
+    rankKind: "mindscape",
+    rank: 4,
+    stats: [],
+    expectsEmptyPack: true,
+    emptyPackModifierKeys: [
+      "hp",
+      "inCombatHpPercent",
+      "inCombatAtkPercent",
+      "inCombatDefPercent",
+      "externalHpPercent",
+      "externalAtkPercent",
+      "externalDefPercent",
+      "atk",
+      "def",
+      "dmgBonus",
+      "critRate",
+      "critDmg",
+      "penRate",
+      "reduceDefense",
+      "resPen",
+      "mastery",
+      "anomalyControl",
+      "anomalyControlPercent",
+      "energyRegen",
+      "energyRegenFlat",
+      "pierce",
+      "pierceDmgBonus",
+      "sharpenDmgBonus",
+      "sharpenCritDmgBonus",
+      "dmgPenalty",
+      "vulnerable",
+      "directVulnerable",
+      "anomalyVulnerable",
+      "dmgReduction",
+      "directDmgReduction",
+      "anomalyDmgReduction",
+      "globalStaggerVulnerable",
+      "staggerVulnerable",
+      "staggerVulnerableOnly",
+      "special",
+      "anomalyCritRate",
+      "anomalyCritDmg",
+      "anomalyDmgBonus",
+      "anomalyReleaseDmgBonus",
+      "anomalyReleaseCritRate",
+      "anomalyReleaseCritDmg",
+      "anomalyReleaseMult",
+      "directDmgMult",
+      "settlementDmgMult",
+      "anomalyMult",
+      "disorderBaseMult",
+      "anomalyDuration",
+      "disorderCompMult",
+      "turbulenceBaseMult",
+      "turbulenceCompMult",
+      "disorderDmgBonus",
+      "turbulenceDmgBonus",
+      "radianceMult",
+      "radianceDmgBonus",
+      "radianceResPen",
+      "specialMult",
+      "mutationCoeff",
+      "skillDmgBonus",
+      "skillMultiplierBonus",
+      "directDmgMultFactor",
+      "anomalyMultFactor",
+      "anomalyReleaseMultFactor",
+      "disorderBaseMultFactor",
+      "turbulenceBaseMultFactor",
+      "radianceMultFactor",
+      "specialMultFactor",
+      "mutationCoeffFactor",
+    ],
+  },
+  skillTarget: {
+    targetId: "astrayao-m4-quick-assist-bonus-damage",
+    agentEntityId: "1311",
+    category: "uncategorized",
+    name: "耀嘉音 M4 · 强攻队友快速支援附伤",
+  },
+  evidence: [
+    {
+      path: "agents/1311/details.zh.json",
+      pointer: "/talent/4/desc",
+      sha256:
+        "3cd6bd1f7deb82e82b306d166d411226ff13a8978bbca1f4aec056838790bd47",
+      rank: 4,
+    },
+    {
+      path: "agents/1311/details.en.json",
+      pointer: "/talent/4/desc",
+      sha256:
+        "06e2a6eb0756fcea545b01af7bd46019ab43adefe61e37031f559c713a1843c8",
+      rank: 4,
+    },
+  ],
+  verification:
+    "中英 M4 全文仅支持咏叹华彩中其他强攻队友快速支援入场、下一次快速支援重击额外造成 300% 耀嘉音 ATK 伤害；固定 M4 档真实存在，空 effects/blocks、完整全零 mods、空 note 均冻结。项目显式条件模型：hit actor/beneficiary 是本次强攻队友，ATK 是来源绑定耀嘉音当前最终值；regular/uncategorized、元素、暴击概率及 CD/穿透来源均由调用方显式选择，其他普通乘区由 trigger 当前命中消费。这些读取层级、元素和暴击能力不是游戏实测结论。不把触发者 ATK、耀嘉音 initial ATK 转模输入或双方普通暴击率冒充本项来源；不激活同句积蓄/失衡条款，不验证全队 3 秒、15 秒窗口或重复 eventId。",
+  rule: {
+    effectId: "agent:1311:nanoka:m4-quick-assist-bonus-damage:mindscape:4",
+    identity: { kind: "agent", entityId: "1311" },
+    section: "后颈的碎发（一次强攻队友快速支援附伤）",
+    config: {
+      kind: "all",
+      conditions: [
+        {
+          kind: "compare-number",
+          unit: "count",
+          operator: "gte",
+          left: {
+            kind: "configuration-number",
+            unit: "count",
+            field: "mindscapeRank",
+          },
+          right: { kind: "literal", unit: "count", value: 4 },
+        },
+        {
+          kind: "compare-number",
+          unit: "count",
+          operator: "gte",
+          left: {
+            kind: "configuration-number",
+            unit: "count",
+            field: "coreSkillLevel",
+          },
+          right: { kind: "literal", unit: "count", value: 1 },
+        },
+      ],
+    },
+    parameters: {},
+    scope: "hit",
+    beneficiary: { kind: "team-except-holder" },
+    when: { kind: "constant", value: true },
+    operation: {
+      kind: "astra-yao-m4-quick-assist-damage",
+      multiplier: { unit: "multiplier", value: 3 },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: {
+      minimumMindscape: 4,
+      coreSkillLevels: [1, 2, 3, 4, 5, 6, 7],
+    },
+    inputs: [],
+    applicability: {},
+    target: "team",
+    name: "后颈的碎发 · 强攻队友快速支援附伤（显式条件模型）",
+    conditionDescription:
+      "只由具名 astra-yao-m4-quick-assist-damage 事件结算一次 3×耀嘉音当前 ATK；队友为实际命中者。regular/uncategorized、元素、声明概率与 CD/穿透来源是条件模型，不是游戏实测结论。未选/0 层仍验证完整依赖，不向普通动作自动追加。",
+    exclusiveDamageItem: true,
+    damageItemRequirements: [
+      {
+        itemId: "astrayao:m4-quick-assist-bonus-damage",
+        stat: "attack",
+        role: "base",
+        allowedModes: ["direct"],
+        source: "holder-current",
+        requiredDirectMultiplier: 0,
+        requiredSkillCategory: "uncategorized",
+      },
+    ],
+  },
+}
+
 export const SUPPLEMENTS: readonly Supplement[] = [
+  astraYaoMindscape4QuickAssistDamage,
   aliceCorePeriodicDamage,
   yeshunguangVeilVulnerability,
   graceMindscape6Grenades(false),

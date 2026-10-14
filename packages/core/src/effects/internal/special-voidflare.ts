@@ -417,7 +417,8 @@ export function assembleRemielleSpecialVoidflareReadings(options: {
           effects: lowInput.definitions.effects.map((effect) =>
             exemptEffectIds.has(effect.effectId) &&
             effect.kind === "contribution" &&
-            !isAliceCorePeriodicRule(effect)
+            !isAliceCorePeriodicRule(effect) &&
+            !isAstraYaoM4Rule(effect)
               ? { ...effect, when: stripElementFilters(effect.when) }
               : effect,
           ),
@@ -532,3 +533,4 @@ export function remielleSpecialVoidflareDamageBonus(level: number): {
     settledMultiplier: calculateSpecialVoidflareDamageBonusMultiplier(level),
   }
 }
+import { isAstraYaoM4Rule } from "./astra-yao-m4.ts"

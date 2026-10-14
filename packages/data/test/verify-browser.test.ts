@@ -117,6 +117,8 @@ it("consumes the offline-installed package in real Vite development and producti
 globalThis.fairy = api
 ${aliceCorePeriodicConsumerSource}
 globalThis.fairyAliceCorePeriodic = async () => verifyAliceCorePeriodicConsumer(api, await import("@randomplay/core"))
+${astraYaoM4ConsumerSource}
+globalThis.fairyAstraYaoM4 = async () => verifyAstraYaoM4Consumer(api, await import("@randomplay/core"))
 ${veilConsumerSource}
 globalThis.fairyYeVeil = async () => verifyVeilConsumer(api, (await import("@randomplay/core")).calculateStaticActionDamage)
 globalThis.fairyDirectAttributes = () => import("@randomplay/data/definitions/attributes/agents/1311.json")
@@ -1002,6 +1004,21 @@ function defineScenarios(counts: {
             "definitions/effects/static.json",
             "definitions/effects/static-catalog.json",
           ],
+        },
+        {
+          name: "astra-yao-m4-cross-actor-conditional-damage",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyAstraYaoM4(),
+            )
+            expect(result.expected).toBeCloseTo(12241.385843410926, 8)
+            expect(result.low).toBe(result.expected)
+            expect(result).toMatchObject({
+              inactive: 0,
+              holder: "entity:astra",
+              trigger: "entity:trigger",
+            })
+          },
         },
         {
           name: "alice-core-periodic-declared-actual-damage",
@@ -2935,3 +2952,4 @@ function defineScenarios(counts: {
     },
   ]
 }
+import { astraYaoM4ConsumerSource } from "./fixtures/astra-yao-m4-consumer.ts"

@@ -1699,3 +1699,79 @@ export function calculateDeclaredAliceCorePeriod(
   }
   return calculateStaticDamageFromCatalog(input)
 }
+
+import type {
+  AstraYaoM4CatalogInput,
+  AstraYaoM4DamageResult,
+  AstraYaoM4ConditionalModel,
+} from "../../../packages/core/dist/index.mjs"
+
+/** 每个数值均由调用方显式提供；命中者是猫又，ATK 来源是另一实例耀嘉音。 */
+export function calculateDeclaredAstraYaoM4(
+  definitions: RuleSet,
+  catalog: StaticEffectCatalog,
+  world: WorldObservation,
+  damage: AstraYaoM4CatalogInput["damage"],
+  conditionalModel: AstraYaoM4ConditionalModel,
+  element: AstraYaoM4CatalogInput["hit"]["element"],
+  atSeconds: number,
+): Result<AstraYaoM4DamageResult> {
+  return calculateStaticDamageFromCatalog({
+    mechanism: "astra-yao-m4-quick-assist-damage",
+    definitions,
+    catalog,
+    world,
+    damage,
+    conditionalModel,
+    atSeconds,
+    bindings: [
+      {
+        kind: "agent",
+        bindingId: "binding:astra",
+        holderId: "entity:astra",
+        sourceEntityId: "1311",
+        eligible: true,
+        configuration: { mindscapeRank: 4, coreSkillLevel: 7 },
+      },
+    ],
+    selections: [
+      {
+        optionId: "nanoka:agents:astrayao:m4-quick-assist-bonus-damage",
+        bindingId: "binding:astra",
+        layers: 1,
+      },
+    ],
+    actorSources: [
+      { entityId: "entity:astra", agentEntityId: "1311" },
+      { entityId: "entity:trigger", agentEntityId: "1021" },
+    ],
+    event: {
+      eventId: "event:m4",
+      sourceBindingId: "binding:astra",
+      triggerActorId: "entity:trigger",
+      targetId: "entity:enemy",
+      triggerSpecialty: "attack",
+      idyllicCadenza: true,
+      enteredViaQuickAssist: true,
+      nextQuickAssistHeavyHit: true,
+    },
+    hit: {
+      actorId: "entity:trigger",
+      targetId: "entity:enemy",
+      actionId: "action:astra-m4-event",
+      skillCategory: "uncategorized",
+      element,
+      skillTargetIds: ["zzz-hp:skill:astrayao-m4-quick-assist-bonus-damage"],
+      damageItems: [
+        {
+          itemId: "astrayao:m4-quick-assist-bonus-damage",
+          stat: "attack",
+          statSource: { entityId: "entity:astra" },
+          mode: "direct",
+          role: "base",
+          damageMultiplier: 0,
+        },
+      ],
+    },
+  })
+}

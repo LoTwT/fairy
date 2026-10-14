@@ -120,7 +120,10 @@ function validateSourceIdentity(
   return { kind, entityId }
 }
 
-function validateSourceReference(value: unknown, checks: FieldChecks): boolean {
+export function validateSourceReference(
+  value: unknown,
+  checks: FieldChecks,
+): boolean {
   const object = expectObject(value, checks, "source reference")
   if (object === undefined) {
     return false
@@ -956,6 +959,7 @@ function validateContributionOperation(
       "guaranteed-critical",
       "stun-damage-replacement",
       "alice-core-periodic-damage",
+      "astra-yao-m4-quick-assist-damage",
     ],
     checks,
     "operation kind",
@@ -967,7 +971,8 @@ function validateContributionOperation(
     (kind === "hit-adjustment" ||
       kind === "guaranteed-critical" ||
       kind === "stun-damage-replacement" ||
-      kind === "alice-core-periodic-damage") &&
+      kind === "alice-core-periodic-damage" ||
+      kind === "astra-yao-m4-quick-assist-damage") &&
     scope !== "hit"
   ) {
     checks.collector.report(
@@ -979,6 +984,30 @@ function validateContributionOperation(
   }
   const hitScope = scope === "hit"
   switch (kind) {
+    case "astra-yao-m4-quick-assist-damage": {
+      rejectUnknownFields(object, ["kind", "multiplier"], checks, kind)
+      const fixedChecks = { ...checks, pointer: `${pointer}/multiplier` }
+      const multiplier = expectObject(
+        object["multiplier"],
+        fixedChecks,
+        "fixed multiplier",
+      )
+      if (multiplier) {
+        rejectUnknownFields(
+          multiplier,
+          ["unit", "value"],
+          fixedChecks,
+          "fixed multiplier",
+        )
+        if (multiplier["unit"] !== "multiplier" || multiplier["value"] !== 3)
+          collector.report(
+            "INVALID_DEFINITION",
+            fixedChecks.pointer,
+            "Astra Yao M4 requires the fixed multiplier quantity 3",
+          )
+      }
+      return collector.isEmpty
+    }
     case "alice-core-periodic-damage": {
       rejectUnknownFields(object, ["kind", "ratio"], checks, kind)
       const ratioChecks = { ...checks, pointer: `${pointer}/ratio` }
@@ -1333,8 +1362,13 @@ function validateContributionRule(
   }
   if (
     (object["operation"] as { kind: string }).kind ===
-    "alice-core-periodic-damage"
+      "alice-core-periodic-damage" ||
+    (object["operation"] as { kind: string }).kind ===
+      "astra-yao-m4-quick-assist-damage"
   ) {
+    const astra =
+      (object["operation"] as { kind: string }).kind ===
+      "astra-yao-m4-quick-assist-damage"
     const active = object["activation"] as Record<string, unknown>
     const maximum = active["maximumLayers"] as
       | Record<string, unknown>
@@ -1357,7 +1391,8 @@ function validateContributionRule(
             condition.left.kind === "configuration-number" &&
             condition.left.field === field &&
             condition.right.kind === "literal" &&
-            condition.right.value === (field === "mindscapeRank" ? 0 : 1),
+            condition.right.value ===
+              (field === "mindscapeRank" ? (astra ? 4 : 0) : 1),
         ),
       )
     if (
@@ -1366,19 +1401,19 @@ function validateContributionRule(
       maximum?.["kind"] !== "literal" ||
       maximum["unit"] !== "count" ||
       maximum["value"] !== 1 ||
-      beneficiary["kind"] !== "holder" ||
+      beneficiary["kind"] !== (astra ? "team-except-holder" : "holder") ||
       when["kind"] !== "constant" ||
       when["value"] !== true ||
       Object.keys(object["parameters"] as object).length !== 0 ||
       object["uniqueness"] !== undefined ||
       source.identity.kind !== "agent" ||
-      source.identity.entityId !== "1401" ||
+      source.identity.entityId !== (astra ? "1311" : "1401") ||
       !requiredConfiguration
     ) {
       checks.collector.report(
         "INVALID_DEFINITION",
         checks.pointer,
-        "Alice periodic damage requires the Alice agent source, one supplied layer, holder beneficiary, true condition, no parameters or uniqueness",
+        "Named damage requires its exact agent source, configuration, beneficiary, one supplied layer, true condition, no parameters or uniqueness",
       )
       return false
     }
@@ -2207,6 +2242,17 @@ export function validateRuleSetStructure(
       r.kind === "contribution" &&
       r.operation.kind === "alice-core-periodic-damage",
   )
+  const astraM4 = effects.filter(
+    (r) =>
+      r.kind === "contribution" &&
+      r.operation.kind === "astra-yao-m4-quick-assist-damage",
+  )
+  if (astraM4.length > 1)
+    collector.report(
+      "DUPLICATE_ID",
+      "/effects",
+      "Only one Astra Yao M4 rule may be defined",
+    )
   if (periodic.length > 1)
     collector.report(
       "DUPLICATE_ID",
@@ -2217,12 +2263,14 @@ export function validateRuleSetStructure(
     if (
       rule.kind === "modification" &&
       rule.target.kind === "effect" &&
-      periodic.map((p) => p.effectId).includes(rule.target.effectId)
+      [...periodic, ...astraM4]
+        .map((p) => p.effectId)
+        .includes(rule.target.effectId)
     )
       collector.report(
         "INVALID_MODIFICATION",
         `/effects/${index}/target`,
-        "The fixed Alice periodic source does not accept modifications",
+        "Fixed named damage sources do not accept modifications",
         { effectId: rule.effectId },
       )
   const statesById = new Map<string, Record<string, unknown>>()

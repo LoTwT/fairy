@@ -459,6 +459,8 @@ for (const [id, suffix, element, expected, mindscapeRank, optionId, selectedExpe
 }
 ${aliceCorePeriodicConsumerSource}
 await verifyAliceCorePeriodicConsumer(api, await import("@randomplay/core"))
+${astraYaoM4ConsumerSource}
+await verifyAstraYaoM4Consumer(api, await import("@randomplay/core"))
 ${veilConsumerSource}
 await verifyVeilConsumer(api, calculateStaticActionDamage)
 // 维琳娜微域气旋：安装包根入口解析并计算具名直伤约定。期望值独立于实现：
@@ -1018,6 +1020,7 @@ console.log(JSON.stringify({ agents: api.agentNames, bangboos: api.bangbooNames,
       )
     const typeSource = `import { loadStaticCalculationData } from "@randomplay/data"
 ${aliceCorePeriodicConsumerTypes}
+${astraYaoM4ConsumerTypes}
 import type { StaticCalculationData as CoreCalculationData, StaticActionCalculationInput, StaticCatalogDamageInput, StaticCatalogDefenseInput, StaticCatalogLuminizeDamageBranch, StaticCatalogMechanism, RemielleSpecialVoidflareAnomalySource } from "@randomplay/core"
 const jointData: Promise<CoreCalculationData> = loadStaticCalculationData({ agents: ["Ben"], wEngines: [] })
 async function typedCalculation(input: Omit<StaticActionCalculationInput, "data">) {
@@ -1716,3 +1719,7 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
     )
   }, 300_000)
 })
+import {
+  astraYaoM4ConsumerSource,
+  astraYaoM4ConsumerTypes,
+} from "./fixtures/astra-yao-m4-consumer.ts"

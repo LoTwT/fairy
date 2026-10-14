@@ -497,6 +497,11 @@ export type ContributionOperation =
   | StatOperation
   | FactorOperation
   | {
+      /** 耀嘉音 M4 具名跨角色附伤；固定一次 3×持有者 ATK。 */
+      readonly kind: "astra-yao-m4-quick-assist-damage"
+      readonly multiplier: { readonly unit: "multiplier"; readonly value: 3 }
+    }
+  | {
       /** 仅由爱丽丝具名单次结算消费；不进入普通命中或数值修改。 */
       readonly kind: "alice-core-periodic-damage"
       readonly ratio: {
@@ -636,6 +641,7 @@ export type ContributionRule =
                   | "guaranteed-critical"
                   | "stun-damage-replacement"
                   | "alice-core-periodic-damage"
+                  | "astra-yao-m4-quick-assist-damage"
               }
             >
           }
@@ -647,6 +653,7 @@ export type ContributionRule =
                 readonly kind:
                   | "stun-damage-replacement"
                   | "alice-core-periodic-damage"
+                  | "astra-yao-m4-quick-assist-damage"
               }
             >
           }
@@ -664,6 +671,18 @@ export type ContributionRule =
           }
       ))
   | AliceCorePeriodicRule
+  | AstraYaoM4Rule
+
+export type AstraYaoM4Rule = Omit<
+  AliceCorePeriodicRule,
+  "operation" | "beneficiary"
+> & {
+  readonly operation: Extract<
+    ContributionOperation,
+    { readonly kind: "astra-yao-m4-quick-assist-damage" }
+  >
+  readonly beneficiary: { readonly kind: "team-except-holder" }
+}
 
 export type AliceCorePeriodicRule = RuleBase & {
   readonly kind: "contribution"
@@ -1040,6 +1059,17 @@ export interface AliceCorePeriodicCatalogMechanism {
 export type StaticCatalogMechanism =
   | RemielleStaticCatalogMechanism
   | AliceCorePeriodicCatalogMechanism
+  | AstraYaoM4CatalogMechanism
+
+export interface AstraYaoM4CatalogMechanism {
+  readonly mechanism: "astra-yao-m4-quick-assist-damage"
+  readonly agentEntityId: "1311"
+  readonly optionId: string
+  readonly effectId: EffectId
+  readonly itemId: "astrayao:m4-quick-assist-bonus-damage"
+  readonly skillTargetId: "zzz-hp:skill:astrayao-m4-quick-assist-bonus-damage"
+  readonly references: NonEmpty<SourceReference>
+}
 
 export interface StaticEffectCatalog {
   readonly schemaVersion: 1
