@@ -294,23 +294,45 @@ function validateSelections(
 
 /** 每次调用建立独立静态状态；不推进事件、不推断默认 buff 或历史读取值。 */
 export function calculateStaticDamage(
+  input: import("../types.ts").AstraYaoM4DamageInput,
+): Result<import("../types.ts").AstraYaoM4DamageResult>
+export function calculateStaticDamage(
   input: AliceCorePeriodicDamageInput,
 ): Result<AliceCorePeriodicDamageResult>
 export function calculateStaticDamage(
   input: StaticDamageInput,
 ): Result<StaticDamageResult>
 export function calculateStaticDamage(
-  input: StaticDamageInput | AliceCorePeriodicDamageInput,
-): Result<StaticDamageResult | AliceCorePeriodicDamageResult> {
-  if (input && typeof input === "object" && "mechanism" in input)
-    return calculateAliceCorePeriodicDamage(input, false)
+  input:
+    | StaticDamageInput
+    | AliceCorePeriodicDamageInput
+    | import("../types.ts").AstraYaoM4DamageInput,
+): Result<
+  | StaticDamageResult
+  | AliceCorePeriodicDamageResult
+  | import("../types.ts").AstraYaoM4DamageResult
+> {
+  if (input && typeof input === "object" && "mechanism" in input) {
+    if (input.mechanism === ASTRA_YAO_M4_MECHANISM)
+      return calculateAstraYaoM4Damage(input, false)
+    if (input.mechanism === "alice-core-periodic-damage")
+      return calculateAliceCorePeriodicDamage(input, false)
+    const collector = new IssueCollector()
+    collector.report(
+      "INVALID_INPUT",
+      "/mechanism",
+      "Unknown named damage mechanism",
+    )
+    return failure(collector)
+  }
   return calculateOrdinaryStaticDamage(input)
 }
 
-function calculateOrdinaryStaticDamage(
+export function calculateOrdinaryStaticDamage(
   input: StaticDamageInput,
+  astraM4?: ValidatedAstraYaoM4Context,
 ): Result<StaticDamageResult> {
-  const evaluated = evaluateStaticDamage(input)
+  const evaluated = evaluateStaticDamage(input, astraM4)
   if (!evaluated.ok) return evaluated
   const collector = new IssueCollector()
   try {
@@ -333,7 +355,10 @@ function calculateOrdinaryStaticDamage(
 }
 
 /** 目录适配复用同一校验、选择、依赖展开与求值，再准备 core 的派生输入。 */
-export function evaluateStaticDamage(input: StaticDamageInput): Result<{
+export function evaluateStaticDamage(
+  input: StaticDamageInput,
+  astraM4?: ValidatedAstraYaoM4Context,
+): Result<{
   readonly hit: HitContext
   readonly evaluation: StaticDamageResult["evaluation"]
   readonly replacedStunOutputs: readonly ReplacedStunOutput[]
@@ -662,8 +687,9 @@ export function evaluateStaticDamage(input: StaticDamageInput): Result<{
     prepared.value,
     state.value,
     evaluationInput,
-    declaredRate,
+    astraM4?.conditionalModel.criticalRate.value ?? declaredRate,
     replacedStunOutputs,
+    astraM4,
   )
   if (!evaluated.ok) return evaluated
   return {
@@ -946,3 +972,8 @@ export function calculateDamageFromEvaluation(
     ),
   }
 }
+import {
+  ASTRA_YAO_M4_MECHANISM,
+  calculateAstraYaoM4Damage,
+  type ValidatedAstraYaoM4Context,
+} from "./astra-yao-m4.ts"

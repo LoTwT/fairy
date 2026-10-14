@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "33",
+  "revision": "34",
   "effects": [
     {
       "kind": "contribution",
@@ -22688,6 +22688,92 @@
           "kind": "parameter",
           "unit": "ratio",
           "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1311:nanoka:m4-quick-assist-bonus-damage:mindscape:4",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1311"
+        },
+        "section": "后颈的碎发（一次强攻队友快速支援附伤）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1311/details.zh.json",
+            "pointer": "/talent/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1311/details.en.json",
+            "pointer": "/talent/4/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 4
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "coreSkillLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 1
+            }
+          }
+        ]
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "team-except-holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "astra-yao-m4-quick-assist-damage",
+        "multiplier": {
+          "unit": "multiplier",
+          "value": 3
         }
       }
     },

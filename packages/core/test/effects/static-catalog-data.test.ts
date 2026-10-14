@@ -1935,7 +1935,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("33")
+    expect(catalog.revision).toBe("34")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -4752,11 +4752,12 @@ describe("velina cyclone catalog linkage", () => {
       // 再增简与爱丽丝 M6 精通附伤两条补充（爱丽丝同选项另有必暴规则）；
       // 批次 16 再增格莉丝 M6 普通/强化特殊技原手雷组合两条倍率补充；
       // 批次 17 再增叶瞬光帷幕易伤一条条件输入与失衡乘区替代补充；
-      // 批次 18 再增爱丽丝一次核心周期附伤的具名比例补充。
-      records: 85,
-      integrated: 52,
-      rules: 56,
-      options: 47,
+      // 批次 18 再增爱丽丝一次核心周期附伤的具名比例补充；
+      // 批次 19 再增耀嘉音 M4 一次强攻队友快速支援附伤。
+      records: 86,
+      integrated: 53,
+      rules: 57,
+      options: 48,
       entities: 4,
       outOfScope: 33,
     })
@@ -5689,12 +5690,13 @@ describe("same-block core evidence scoping and independent damage items", () => 
       .toSorted()
     // 影画默认不继承同块核心证据；只有显式记录级登记的依赖保留核心门槛：
     // 希希芙 1 影防御强化（核心强化）、凯撒 2 影攻击增益（核心比例强化）、
-    // 潘引壶 6 影通窍强化（核心转换率与封顶变化）
+    // 潘引壶 6 影通窍强化（核心转换率与封顶变化）、耀嘉音 M4 具名封闭配置。
     expect(gatedMindscape).toEqual([
       "agents:caesar:mindscape:2:blk-legacy:legacy-team-atk",
       "agents:cissia:mindscape:1:blk-legacy:eff-ms4lkt33-igdjwu",
       "agents:cissia:mindscape:1:blk-legacy:legacy-team-reduceDefense",
       "agents:panyinhu:mindscape:6:blk-legacy:legacy-team-pierce",
+      "nanoka:agents:astrayao:m4-quick-assist-bonus-damage",
     ])
     // 真正按核心等级选参的选项保持既有档位：60% 潜能分支只有已核实核心 7
     const bonus = "agents:nekomata:mindscape:0:blk-legacy:legacy-self-dmgBonus"

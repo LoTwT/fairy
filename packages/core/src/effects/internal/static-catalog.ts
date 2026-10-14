@@ -541,7 +541,11 @@ export function validateStaticCatalog(
     const mp = `/catalog/mechanisms/${mi}`,
       mechanism = expectObject(mechanismValue, checks(mp), "catalog mechanism")
     if (!mechanism) continue
-    if (mechanism["mechanism"] === ALICE_CORE_PERIODIC_MECHANISM) continue
+    if (
+      mechanism["mechanism"] === ALICE_CORE_PERIODIC_MECHANISM ||
+      mechanism["mechanism"] === ASTRA_YAO_M4_MECHANISM
+    )
+      continue
     rejectUnknownFields(
       mechanism,
       [
@@ -1488,6 +1492,12 @@ export function validateStaticCatalog(
       definitions,
       collector,
     )
+  if (collector.isEmpty)
+    validateAstraYaoM4Catalog(
+      catalogValue as StaticEffectCatalog,
+      definitions,
+      collector,
+    )
   return collector.isEmpty
     ? { ok: true, value: catalogValue as StaticEffectCatalog }
     : failure(collector)
@@ -1590,21 +1600,43 @@ function prepareItem(
 }
 
 export function calculateStaticDamageFromCatalog(
+  input: import("../types.ts").AstraYaoM4CatalogInput,
+): Result<import("../types.ts").AstraYaoM4DamageResult>
+export function calculateStaticDamageFromCatalog(
   input: AliceCorePeriodicCatalogInput,
 ): Result<AliceCorePeriodicDamageResult>
 export function calculateStaticDamageFromCatalog(
   input: StaticCatalogDamageInput,
 ): Result<StaticDamageResult>
 export function calculateStaticDamageFromCatalog(
-  input: StaticCatalogDamageInput | AliceCorePeriodicCatalogInput,
-): Result<StaticDamageResult | AliceCorePeriodicDamageResult> {
-  if (input && typeof input === "object" && "mechanism" in input)
-    return calculateAliceCorePeriodicDamage(input, true)
+  input:
+    | StaticCatalogDamageInput
+    | AliceCorePeriodicCatalogInput
+    | import("../types.ts").AstraYaoM4CatalogInput,
+): Result<
+  | StaticDamageResult
+  | AliceCorePeriodicDamageResult
+  | import("../types.ts").AstraYaoM4DamageResult
+> {
+  if (input && typeof input === "object" && "mechanism" in input) {
+    if (input.mechanism === ASTRA_YAO_M4_MECHANISM)
+      return calculateAstraYaoM4Damage(input, true)
+    if (input.mechanism === ALICE_CORE_PERIODIC_MECHANISM)
+      return calculateAliceCorePeriodicDamage(input, true)
+    const collector = new IssueCollector()
+    collector.report(
+      "INVALID_INPUT",
+      "/mechanism",
+      "Unknown named damage mechanism",
+    )
+    return failure(collector)
+  }
   return calculateOrdinaryStaticDamageFromCatalog(input)
 }
 
-function calculateOrdinaryStaticDamageFromCatalog(
+export function calculateOrdinaryStaticDamageFromCatalog(
   input: StaticCatalogDamageInput,
+  astraM4?: ValidatedAstraYaoM4Context,
 ): Result<StaticDamageResult> {
   const collector = new IssueCollector()
   const checks = (pointer: string) => ({
@@ -2553,7 +2585,9 @@ function calculateOrdinaryStaticDamageFromCatalog(
     }
     if (
       target.agentEntityId &&
-      target.agentEntityId !== actors.get(input.hit.actorId)?.identity?.entityId
+      target.agentEntityId !==
+        actors.get(input.hit.actorId)?.identity?.entityId &&
+      !(astraM4 && target.targetId === ASTRA_YAO_M4_TARGET)
     )
       collector.report(
         "CONTEXT_MISMATCH",
@@ -2702,10 +2736,18 @@ function calculateOrdinaryStaticDamageFromCatalog(
           : {}),
       }
     : undefined
+  if (astraM4?.active)
+    expanded.push({
+      effectId: astraM4.effectId,
+      bindingId: astraM4.bindingId,
+      layers: 1,
+    })
   const definitions = {
     ...parsed.value,
     effects: parsed.value.effects.map((rule): EffectRule => {
       if (isAliceCorePeriodicRule(rule)) return rule
+      if (isAstraYaoM4Rule(rule))
+        return astraM4 ? bridgeAstraYaoM4Rule(rule) : rule
       if (
         rule.kind === "contribution" &&
         rule.operation.kind === "factor-contribution" &&
@@ -2739,6 +2781,14 @@ function calculateOrdinaryStaticDamageFromCatalog(
     hit: {
       ...lowHit,
       skillTags: [...tags],
+      ...(astraM4
+        ? {
+            attributeSources: {
+              criticalDamage: astraM4.conditionalModel.criticalDamageSource,
+              penetrationRatio: astraM4.conditionalModel.penetrationRatioSource,
+            },
+          }
+        : {}),
       ...(anomalyAttributeSource
         ? {
             attributeSources: {
@@ -2876,13 +2926,16 @@ function calculateOrdinaryStaticDamageFromCatalog(
         })
       return { ...item, damageMultiplier: multiplier }
     }) as unknown as StaticDamageInput["hit"]["damageItems"]
-    const evaluated = evaluateStaticDamage({
-      ...bridgedInput,
-      selections: preparesDuration
-        ? expanded.filter((selection) => !durationIds.has(selection.effectId))
-        : expanded,
-      hit: { ...bridgedInput.hit, damageItems: preparedItems },
-    })
+    const evaluated = evaluateStaticDamage(
+      {
+        ...bridgedInput,
+        selections: preparesDuration
+          ? expanded.filter((selection) => !durationIds.has(selection.effectId))
+          : expanded,
+        hit: { ...bridgedInput.hit, damageItems: preparedItems },
+      },
+      astraM4,
+    )
     if (!evaluated.ok) return evaluated
     for (const deferred of deferredStunInputs) {
       if (
@@ -3025,3 +3078,12 @@ function calculateOrdinaryStaticDamageFromCatalog(
     return failure(collector)
   }
 }
+import {
+  ASTRA_YAO_M4_MECHANISM,
+  ASTRA_YAO_M4_TARGET,
+  bridgeAstraYaoM4Rule,
+  calculateAstraYaoM4Damage,
+  isAstraYaoM4Rule,
+  validateAstraYaoM4Catalog,
+  type ValidatedAstraYaoM4Context,
+} from "./astra-yao-m4.ts"

@@ -4,6 +4,7 @@ import type {
   ContributionOperation,
   ContributionRule,
   AliceCorePeriodicRule,
+  AstraYaoM4Rule,
   CoreSkillLevel,
   PotentialLevel,
   DamageElement,
@@ -595,8 +596,37 @@ function verifySingleClauseContextGuard(
       `Supplement ${registration.supplementId} lost its fixed-source entity: ${registration.catalogEntityId}`,
     )
   const contextPack = sourceEntity.mindscapeBuffs?.[context.rank] ?? {}
-  const normalizedPack =
-    functions.normalizeAgent(sourceEntity).mindscapeBuffs?.[context.rank] ?? {}
+  const normalizedEntity = functions.normalizeAgent(sourceEntity)
+  const normalizedPack = normalizedEntity.mindscapeBuffs?.[context.rank] ?? {}
+  if (context.emptyPackModifierKeys !== undefined) {
+    for (const [representation, source] of [
+      ["raw", sourceEntity],
+      ["normalized", normalizedEntity],
+    ] as const) {
+      const pack = source.mindscapeBuffs?.[context.rank]
+      const sameKeys = (value: object, expected: readonly string[]) =>
+        JSON.stringify(Object.keys(value).sort()) ===
+        JSON.stringify([...expected].sort())
+      if (
+        !pack ||
+        source.mindscapeNotes?.[context.rank] !== "" ||
+        !sameKeys(pack, ["effectBlocks", "effects", "selfMods", "teamMods"]) ||
+        !Array.isArray(pack.effectBlocks) ||
+        pack.effectBlocks.length !== 0 ||
+        !Array.isArray(pack.effects) ||
+        pack.effects.length !== 0 ||
+        [pack.selfMods, pack.teamMods].some(
+          (mods) =>
+            !mods ||
+            !sameKeys(mods, context.emptyPackModifierKeys!) ||
+            Object.values(mods).some((value) => value !== 0),
+        )
+      )
+        throw new Error(
+          `Supplement ${registration.supplementId} ${representation} existing empty pack drift at mindscape rank ${String(context.rank)}; re-review presence, zero modifiers and empty note before generating`,
+        )
+    }
+  }
   const contextRecords = records.filter(
     (record) =>
       record.category === "agents" &&
@@ -3786,7 +3816,7 @@ export function convertSource(
         (v) =>
           effects.find((e) => e.effectId === v.effectIds[0]) as Exclude<
             ContributionRule,
-            AliceCorePeriodicRule
+            AliceCorePeriodicRule | AstraYaoM4Rule
           >,
       )
       const structure = (rule: ContributionRule) =>
@@ -4229,10 +4259,13 @@ export function convertSource(
     const adjustedItemIds = [
       ...new Set(
         supplementRules.flatMap((rule) =>
-          rule.kind === "contribution" &&
-          rule.operation.kind === "hit-adjustment"
-            ? (rule.operation.itemIds ?? [])
-            : [],
+          rule.kind !== "contribution"
+            ? []
+            : rule.operation.kind === "hit-adjustment"
+              ? (rule.operation.itemIds ?? [])
+              : rule.operation.kind === "astra-yao-m4-quick-assist-damage"
+                ? ["astrayao:m4-quick-assist-bonus-damage"]
+                : [],
         ),
       ),
     ]
@@ -4474,7 +4507,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "33",
+    revision: "34",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -4539,6 +4572,30 @@ export function convertSource(
     ),
     mechanisms: [
       remielleMechanism,
+      ...effects.flatMap((rule) => {
+        if (
+          rule.kind !== "contribution" ||
+          rule.operation.kind !== "astra-yao-m4-quick-assist-damage"
+        )
+          return []
+        const option = options.find((o) =>
+          o.variants.some((v) => v.effectIds.includes(rule.effectId)),
+        )
+        if (!option)
+          throw new Error("Astra Yao M4 rule is missing its catalog option")
+        return [
+          {
+            mechanism: "astra-yao-m4-quick-assist-damage" as const,
+            agentEntityId: "1311" as const,
+            optionId: option.optionId,
+            effectId: rule.effectId,
+            itemId: "astrayao:m4-quick-assist-bonus-damage" as const,
+            skillTargetId:
+              "zzz-hp:skill:astrayao-m4-quick-assist-bonus-damage" as const,
+            references: rule.source.references,
+          },
+        ]
+      }),
       ...effects.flatMap((rule) => {
         if (
           rule.kind !== "contribution" ||

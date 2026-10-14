@@ -1167,11 +1167,14 @@ function evaluateSingleLayer(
   address: ConsumptionAddress,
 ): EvaluatedLayer | null | undefined {
   const rule = layer.entry.rule
-  if (rule.operation.kind === "alice-core-periodic-damage") {
+  if (
+    rule.operation.kind === "alice-core-periodic-damage" ||
+    rule.operation.kind === "astra-yao-m4-quick-assist-damage"
+  ) {
     context.collector.report(
       "CONTEXT_MISMATCH",
       "",
-      "Alice periodic damage requires its named event settlement",
+      "This damage operation requires its named event settlement",
       { effectId: rule.effectId, bindingId: layer.entry.bindingId },
     )
     return undefined
@@ -2062,6 +2065,7 @@ export function evaluateEffectsForStaticHit(
   input: EvaluationInput,
   declaredCriticalRate: number | undefined,
   replacedStunOutputs: ReplacedStunOutput[],
+  astraM4?: ValidatedAstraYaoM4Context,
 ):
   | { readonly ok: true; readonly value: EvaluationResult }
   | ReturnType<typeof failure> {
@@ -2071,6 +2075,7 @@ export function evaluateEffectsForStaticHit(
     input,
     declaredCriticalRate,
     replacedStunOutputs,
+    astraM4,
   )
 }
 
@@ -2085,6 +2090,7 @@ function evaluateEffectsInternal(
   input: EvaluationInput,
   declaredCriticalRate: number | undefined,
   replacedStunOutputs?: ReplacedStunOutput[],
+  astraM4?: ValidatedAstraYaoM4Context,
 ):
   | { readonly ok: true; readonly value: EvaluationResult }
   | ReturnType<typeof failure> {
@@ -2112,7 +2118,8 @@ function evaluateEffectsInternal(
       preparedInternal.contributions.some(
         (entry) =>
           entry.rule.effectId === instance.effectId &&
-          entry.rule.operation.kind === "alice-core-periodic-damage",
+          (entry.rule.operation.kind === "alice-core-periodic-damage" ||
+            entry.rule.operation.kind === "astra-yao-m4-quick-assist-damage"),
       )
     )
       collector.report(
@@ -2296,6 +2303,7 @@ function evaluateEffectsInternal(
     hitStats,
     declaredCriticalRate,
     replacedStunOutputs,
+    astraM4,
   )
   if (result === undefined || !collector.isEmpty) {
     return failure(collector)
@@ -2574,10 +2582,66 @@ function evaluateHitQuery(
   additionalStats: readonly Stat[] = [],
   declaredCriticalRate?: number,
   replacedStunOutputs?: ReplacedStunOutput[],
+  astraM4?: ValidatedAstraYaoM4Context,
 ): EvaluationResult | undefined {
   const hit = context.hit
   if (hit === null) {
     return undefined
+  }
+  if (astraM4) {
+    const candidates = collectLayersForAddress(
+      {
+        kind: "hit",
+        hitId: hit.hitId,
+        field: "damageMultiplier",
+        itemId: ASTRA_YAO_M4_ITEM,
+      },
+      context,
+      { hitScopeOnly: true },
+    )
+    if (candidates === undefined) return undefined
+    for (const candidate of candidates) {
+      if (
+        candidate.entry.rule.effectId === astraM4.effectId &&
+        candidate.entry.bindingId === astraM4.bindingId
+      )
+        continue
+      if (evaluateCondition(candidate.entry.rule.when, context, candidate)) {
+        context.collector.report(
+          "CONTEXT_MISMATCH",
+          "/hit/damageItems",
+          "M4's fixed multiplier cannot consume another applicable item adjustment",
+          {
+            effectId: candidate.entry.rule.effectId,
+            bindingId: candidate.entry.bindingId,
+          },
+        )
+        return undefined
+      }
+    }
+    if (!context.collector.isEmpty) return undefined
+    // 先判定真实适用性，不为冲突求被替代输出或唯一性赢家。
+    const conflicting = findApplicableHitScopedLayer(
+      {
+        kind: "hit",
+        hitId: hit.hitId,
+        field: "criticalRate",
+        itemId: ASTRA_YAO_M4_ITEM,
+      },
+      context,
+    )
+    if (conflicting)
+      context.collector.report(
+        "CONTEXT_MISMATCH",
+        "/conditionalModel/criticalRate",
+        "M4's explicit probability conflicts with an applicable source guarantee",
+        {
+          effectId: conflicting.entry.rule.effectId,
+          bindingId: conflicting.entry.bindingId,
+        },
+      )
+    if (conflicting === undefined || !context.collector.isEmpty)
+      return undefined
   }
   const stunReplacement = resolveStunDamageReplacement(context)
   if (stunReplacement === undefined) return undefined
@@ -2767,6 +2831,7 @@ function evaluateHitQuery(
     })
   }
   for (const itemId of new Set(itemAdjustments)) {
+    if (astraM4 && itemId !== ASTRA_YAO_M4_ITEM) continue
     if (hit.damageItems.some((item) => item.itemId === itemId)) continue
     const selected = selectedAdjustmentsFor(
       { kind: "hit", hitId: hit.hitId, field: "damageMultiplier", itemId },
@@ -2945,3 +3010,7 @@ function toResolvedContribution(layer: EvaluatedLayer): ResolvedContribution {
     appliedModifications: layer.appliedModifications,
   } as unknown as ResolvedContribution
 }
+import {
+  ASTRA_YAO_M4_ITEM,
+  type ValidatedAstraYaoM4Context,
+} from "./astra-yao-m4.ts"

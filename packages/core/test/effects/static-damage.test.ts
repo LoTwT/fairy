@@ -9,6 +9,7 @@ import {
 } from "../../src/effects/index.ts"
 import type {
   AliceCorePeriodicRule,
+  AstraYaoM4Rule,
   ContributionRule,
   EffectNumericInput,
   FactorChannel,
@@ -47,7 +48,7 @@ function issue(
 function factor(
   channel: FactorChannel,
   value: number,
-): Exclude<ContributionRule, AliceCorePeriodicRule> {
+): Exclude<ContributionRule, AliceCorePeriodicRule | AstraYaoM4Rule> {
   const unit =
     channel === "attacker-penetration-value"
       ? "defense-points"

@@ -146,3 +146,12 @@ export type {
   StaticCatalogPlainAnomalySource,
   RemielleSpecialVoidflareAnomalySource,
 } from "./types.ts"
+export type {
+  AstraYaoM4Rule,
+  AstraYaoM4CatalogMechanism,
+  AstraYaoM4Event,
+  AstraYaoM4ConditionalModel,
+  AstraYaoM4DamageInput,
+  AstraYaoM4CatalogInput,
+  AstraYaoM4DamageResult,
+} from "./types.ts"

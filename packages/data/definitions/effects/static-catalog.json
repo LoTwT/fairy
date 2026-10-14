@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "33",
+  "revision": "34",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -45733,6 +45733,58 @@
       ]
     },
     {
+      "optionId": "nanoka:agents:astrayao:m4-quick-assist-bonus-damage",
+      "catalogEntityId": "agents:astrayao",
+      "name": "后颈的碎发 · 强攻队友快速支援附伤（显式条件模型）",
+      "conditionDescription": "只由具名 astra-yao-m4-quick-assist-damage 事件结算一次 3×耀嘉音当前 ATK；队友为实际命中者。regular/uncategorized、元素、声明概率与 CD/穿透来源是条件模型，不是游戏实测结论。未选/0 层仍验证完整依赖，不向普通动作自动追加。",
+      "target": "team",
+      "variants": [
+        {
+          "target": "team",
+          "configuration": {
+            "minimumMindscape": 4,
+            "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1311/details.zh.json",
+              "pointer": "/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1311/details.en.json",
+              "pointer": "/talent/4/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1311:nanoka:m4-quick-assist-bonus-damage:mindscape:4"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "astrayao:m4-quick-assist-bonus-damage",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized"
+            }
+          ],
+          "exclusiveDamageItem": true
+        }
+      ]
+    },
+    {
       "optionId": "nanoka:agents:alice:core-periodic-damage",
       "catalogEntityId": "agents:alice",
       "name": "剑心双虹 · 周期附伤（声明原实际伤害）",
@@ -50579,6 +50631,14 @@
       "countsAsFollowUp": false
     },
     {
+      "targetId": "zzz-hp:skill:astrayao-m4-quick-assist-bonus-damage",
+      "upstreamId": null,
+      "agentEntityId": "1311",
+      "category": "uncategorized",
+      "name": "耀嘉音 M4 · 强攻队友快速支援附伤",
+      "countsAsFollowUp": false
+    },
+    {
       "targetId": "zzz-hp:skill:astrayao-special-ms38sp46",
       "upstreamId": "astrayao-special-ms38sp46",
       "agentEntityId": "1311",
@@ -51433,6 +51493,30 @@
           "locale": "zh",
           "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
           "pointer": "/agents/51/mindscapeBuffs/6/effectBlocks/0/effects/1"
+        }
+      ]
+    },
+    {
+      "mechanism": "astra-yao-m4-quick-assist-damage",
+      "agentEntityId": "1311",
+      "optionId": "nanoka:agents:astrayao:m4-quick-assist-bonus-damage",
+      "effectId": "agent:1311:nanoka:m4-quick-assist-bonus-damage:mindscape:4",
+      "itemId": "astrayao:m4-quick-assist-bonus-damage",
+      "skillTargetId": "zzz-hp:skill:astrayao-m4-quick-assist-bonus-damage",
+      "references": [
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1311/details.zh.json",
+          "pointer": "/talent/4/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "en",
+          "resourcePath": "agents/1311/details.en.json",
+          "pointer": "/talent/4/desc"
         }
       ]
     },

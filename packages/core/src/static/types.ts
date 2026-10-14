@@ -75,6 +75,7 @@ export interface StaticActorConfiguration {
 }
 
 export interface StaticActionCalculationInput {
+  readonly mechanism?: never
   readonly data: StaticCalculationData
   readonly actors: readonly StaticActorConfiguration[]
   readonly actorId: EntityId

@@ -772,6 +772,38 @@ function battleSelections(
 
 /** 完整静态计算；全部数据由调用方提供，不装载文件、网络或 data 包。 */
 export function calculateStaticActionDamage(
+  input: import("../effects/types.ts").AstraYaoM4CatalogInput,
+): Result<import("../effects/types.ts").AstraYaoM4DamageResult>
+export function calculateStaticActionDamage(
+  input: StaticActionCalculationInput,
+): Result<StaticActionCalculationResult>
+export function calculateStaticActionDamage(
+  input:
+    | StaticActionCalculationInput
+    | import("../effects/types.ts").AstraYaoM4CatalogInput,
+): Result<
+  | StaticActionCalculationResult
+  | import("../effects/types.ts").AstraYaoM4DamageResult
+> {
+  // 具名附伤直接转发显式世界与绑定，不从普通动作推导或生成事件。
+  if (input && typeof input === "object" && "mechanism" in input) {
+    if (input.mechanism === "astra-yao-m4-quick-assist-damage")
+      return calculateStaticDamageFromCatalog(input)
+    return {
+      ok: false,
+      issues: [
+        {
+          code: "INVALID_INPUT",
+          pointer: "/mechanism",
+          message: "Unknown static action mechanism",
+        },
+      ],
+    }
+  }
+  return calculateOrdinaryStaticActionDamage(input)
+}
+
+function calculateOrdinaryStaticActionDamage(
   input: StaticActionCalculationInput,
 ): Result<StaticActionCalculationResult> {
   try {
@@ -1026,6 +1058,7 @@ export function calculateStaticActionDamage(
       effects: input.data.definitions.effects.map((rule) =>
         rule.kind === "contribution" &&
         !isAliceCorePeriodicRule(rule) &&
+        !isAstraYaoM4Rule(rule) &&
         included.has(rule.effectId)
           ? { ...rule, when: { kind: "constant", value: false } }
           : rule,
@@ -1293,3 +1326,4 @@ export function calculateStaticActionDamage(
     throw error
   }
 }
+import { isAstraYaoM4Rule } from "../effects/internal/astra-yao-m4.ts"

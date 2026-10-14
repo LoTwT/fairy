@@ -61,6 +61,7 @@ export interface SourceEntity {
   profession?: string
   element?: string
   mindscapeBuffs?: SourcePack[]
+  mindscapeNotes?: string[]
   refinementBuffs?: SourcePack[]
   fixedBuffs?: SourcePack
   twoPieceEffectBlocks?: SourceBlock[]
