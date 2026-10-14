@@ -39,7 +39,7 @@ describe("batch 08 M6 follow-ups through the published data package", () => {
     )
     if (!definitions.ok) throw new Error(JSON.stringify(definitions.issues))
     const catalog = calculationData.catalog as StaticEffectCatalog
-    expect(catalog.revision).toBe("32")
+    expect(catalog.revision).toBe("33")
     // 正式目录登记三条选项与三个具名独立目标。
     for (const optionId of [EVELYN_M6, S0ANBY_M6, DIALYN_M6])
       expect(

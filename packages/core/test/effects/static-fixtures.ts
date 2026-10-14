@@ -1,4 +1,5 @@
 import type {
+  AliceCorePeriodicRule,
   Condition,
   ContributionOperation,
   ContributionRule,
@@ -23,14 +24,23 @@ export function rule<O extends ContributionOperation>(
   name: string,
   operation: O,
   when?: Condition<"contribution">,
-): Extract<ContributionRule, { readonly scope: "hit" }> & {
+): Exclude<
+  Extract<ContributionRule, { readonly scope: "hit" }>,
+  AliceCorePeriodicRule
+> & {
   readonly operation: O
 }
 export function rule(
   name: string,
   operation: ContributionOperation,
   when: Condition<"contribution"> = always,
-): Omit<Extract<ContributionRule, { readonly scope: "hit" }>, "operation"> & {
+): Omit<
+  Exclude<
+    Extract<ContributionRule, { readonly scope: "hit" }>,
+    AliceCorePeriodicRule
+  >,
+  "operation"
+> & {
   readonly operation: ContributionOperation
 } {
   return {

@@ -1601,3 +1601,101 @@ export type GuaranteedCriticalContract = [
     >
   >,
 ]
+
+import { calculateStaticDamageFromCatalog } from "../../../packages/core/dist/index.mjs"
+import type {
+  AliceCorePeriodicCatalogInput,
+  AliceCorePeriodicDamageResult,
+  StaticEffectCatalog,
+} from "../../../packages/core/dist/index.mjs"
+
+/** 调用方声明一次已发生事件及原实际结果；不从当前面板构造这个读数。 */
+export function calculateDeclaredAliceCorePeriod(
+  definitions: RuleSet,
+  catalog: StaticEffectCatalog,
+  originalSettledDamage: number,
+  wasOriginalAnomalyCritical: boolean,
+): Result<AliceCorePeriodicDamageResult> {
+  const world: WorldObservation = {
+    entities: [
+      {
+        kind: "actor",
+        entityId: "entity:alice",
+        teamId: "team:players",
+        generalStats: {},
+        directStats: {},
+      },
+      {
+        kind: "actor",
+        entityId: "entity:original-applier",
+        teamId: "team:players",
+        generalStats: {},
+        directStats: {},
+      },
+      {
+        kind: "actor",
+        entityId: "entity:enemy",
+        teamId: "team:enemies",
+        generalStats: {},
+        directStats: {},
+      },
+    ],
+    states: [],
+    distances: [],
+  }
+  const input: AliceCorePeriodicCatalogInput = {
+    mechanism: "alice-core-periodic-damage",
+    definitions,
+    catalog,
+    bindings: [
+      {
+        kind: "agent",
+        bindingId: "binding:alice",
+        holderId: "entity:alice",
+        sourceEntityId: "1401",
+        eligible: true,
+        configuration: { coreSkillLevel: 7, mindscapeRank: 0 },
+      },
+    ],
+    selections: [
+      {
+        optionId: "nanoka:agents:alice:core-periodic-damage",
+        bindingId: "binding:alice",
+        layers: 1,
+      },
+    ],
+    actorSources: [{ entityId: "entity:alice", agentEntityId: "1401" }],
+    world,
+    snapshots: [
+      {
+        snapshotId: "snapshot:original-assault",
+        atSeconds: 2,
+        attributes: [],
+        world,
+      },
+    ],
+    atSeconds: 4,
+    event: {
+      eventId: "event:declared-period",
+      actorId: "entity:alice",
+      targetId: "entity:enemy",
+      sourceBindingId: "binding:alice",
+      originalAnomalyEventId: "event:original-assault",
+      originalAnomalySnapshotId: "snapshot:original-assault",
+      originalAnomalyActive: true,
+    },
+    originalAnomalies: [
+      {
+        eventId: "event:original-assault",
+        snapshotId: "snapshot:original-assault",
+        sourceActorId: "entity:original-applier",
+        targetId: "entity:enemy",
+        kind: "assault",
+        element: "physical",
+        isAnomalyCritical: wasOriginalAnomalyCritical,
+        settledDamage: { unit: "damage-points", value: originalSettledDamage },
+      },
+    ],
+  }
+  return calculateStaticDamageFromCatalog(input)
+}

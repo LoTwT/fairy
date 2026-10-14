@@ -350,7 +350,7 @@
 
 ### 静态伤害计算
 
-`calculateStaticDamage` 接收规则、来源绑定、显式效果选择、原始世界属性、命中与 core 所需基线，返回贡献、属性、非暴击/暴击伤害、期望及各乘区。它建立独立 supplied 状态，再沿用准备、状态导入与命中求值，不调用事件推进。每次改变培养配置或选择均重新调用；输入不变，重复调用不会累计贡献。
+`calculateStaticDamage(StaticDamageInput)` 接收规则、来源绑定、显式效果选择、原始世界属性、命中与 core 所需基线，返回贡献、属性、非暴击/暴击伤害、期望及各乘区。它建立独立 supplied 状态，再沿用准备、状态导入与命中求值，不调用事件推进。每次改变培养配置或选择均重新调用；输入不变，重复调用不会累计贡献。
 
 - `continuous` 仍由配置决定；`selections` 只选择 `supplied` 效果，未选择即关闭。选中未知来源、不适用配置或其他激活类型时报错。准备阶段只为本次选择的 supplied 规则、continuous 规则及相关修改选参；普通 `prepareEffects` 仍准备全部符合配置的规则。
 - 层数和互斥组由定义校验，目标由规则的选择器与实际队伍推导。装备适用性由调用方给出 `eligible`，引擎不根据实体 ID 猜测阵营或职业。不能把预设默认值当作本次有效状态。
@@ -374,6 +374,72 @@
 `calculateStaticDamageFromCatalog` 在上述路径前校验选项目录、展开静态选择并准备倍率。身份/职业与互斥、已选缺档/缺输入、耀变唯一参数映射、异常来源及时间派生规则集中在[数据接入规范](../data/zzz-hp-static-effects.md)，类型以 `StaticCatalogDamageInput` 为准。luminize 的 `anomalySource` 携带 `mechanism: "remielle-special-voidflare"` 时走具名机制分支：受限攻击/精通在独立求值上下文中读取，抗穿按具名来源元数据区分通用与耀变专属，strength 档位并入耀变倍率乘区；完整契约见[静态计算输入组装](../core/static-calculation.md#蕾米埃尔自身特殊虚曜)。表中标明“目录”的新通道在低层入口仅作为不适用贡献返回，不隐式更改原有倍率。时间派生来源保留在结果 `preparations`，不要求时间线。
 
 ## 校验与验收
+
+### 爱丽丝核心周期附伤的条件结算
+
+`calculateStaticDamage(AliceCorePeriodicDamageInput)` 与
+`calculateStaticDamageFromCatalog(AliceCorePeriodicCatalogInput)` 以顶层
+`mechanism: "alice-core-periodic-damage"` 分流，返回独立的
+`AliceCorePeriodicDamageResult`；普通 overload 及其结果保持原义。
+`EffectEngine` 同步提供这两个 overload，包根导出对应类型与函数。
+
+本入口采用一次事件的**项目条件模型** `P = D × 0.025`。D 是调用方声明的原普通
+物理强击、未按显示值取整的已结算**实际伤害**，已含原事件适用的全部乘区、
+实际异常暴击结果和异化。只接受 `kind: assault`、`element: physical`，
+`isAnomalyCritical` 必须为 boolean，true 仅保留历史归因。本事件不再抽签或乘暴伤，
+也不读取当前 ATK/AP/CR/CD、防御、抗性、易伤、失衡或任何普通贡献。
+`settledDamage` 是封闭 `{ unit: "damage-points", value: number }`，值必须有限且非负，
+零值合法。概率、期望伤害、普通 `hit/damage/damageItems/inputs/declaredCriticalRate`
+等混入字段及未知机制均拒绝。极性强击、紊乱、异放、非物理原事件明确拒绝；
+这不表示它们在游戏中没有周期附伤。来源文本只直接证明比例、触发条件和间隔，
+不能证明本条件模型的读数层级及继承是游戏实测。
+
+`atSeconds`、`world`、`snapshots`、`event`、`originalAnomalies` 必填。
+event 有独立 `eventId`，携带 Alice 的 `actorId`、敌人 `targetId`、唯一
+`sourceBindingId`、`originalAnomalyEventId`、`originalAnomalySnapshotId` 与字面量
+`originalAnomalyActive: true`。周期事件不能复用原事件 ID；每条原事实以 eventId
+唯一标识，并携带 snapshotId、sourceActorId、targetId、kind、element、历史暴击标志
+及 D。同一 eventId 跨快照仍属重复；额外事实不参与求和，但必须通过结构及重复校验。
+
+当前 Alice 与目标必须存在且敌对，事件绑定须为 eligible 的 Alice 1401 agent、holder
+与 actor 相等，核心 1—7、影画 0—6 配置合法。目录 actorSources 必须与绑定一致。
+被引用快照不晚于本次时点，且保存同一 Alice、原施加者、同一敌人；历史 Alice 与
+施加者同队、目标敌对。施加者可为 Alice，当前可离场或变队；缺历史角色不得由当前
+世界补齐。快照见证历史身份和时点，**不声称其中保存或证明了调用方提供的 D**。
+sourceActorId 是原异常施加／最终触发者，不声称其独自提供全部属性；D 可以含普通
+异常的合法加权结果。本入口不构造积蓄、虚拟代理人或新的跨时点身份系统。
+
+具名 operation 的唯一数值来源是正式规则中的 literal/ratio `0.025`。规则只能是
+supplied、最大一层、holder、scope hit、恒真 when、空参数、无 uniqueness；配置
+固定覆盖真实培养域，禁止任何 modification 指向它。`hit` scope 在此只表示一次事件，
+结算器不造普通 HitContext。定义篡改即使未选也拒绝，普通 evaluateEffects 或普通
+静态入口不能应用该操作。目录 metadata 只登记机制、1401、optionId、effectId 和
+references，按 metadata → 唯一选项／变体 → 唯一规则及来源引用双向校验，不另存比例。
+现有蕾米埃尔 metadata 保留为判别 union 的原成员。
+
+具名请求唯一允许启用的选择是事件 Alice 绑定的周期选项／规则；其它 layers>0 的
+来源一律 `CONTEXT_MISMATCH`，含另一名 Alice、M1/M2/M4、旧紊乱和 M6。
+其它合法来源可显式为 0，但仍核对引用、绑定、配置和结构，不索取其输出输入或伤害项。
+重复 effect/option + binding 拒绝，0 不能掩盖重复。未选或本选项 0 返回 inactive，
+仍完整验证本事件和历史，不能用关闭掩盖缺事实、未来快照、不支持类别或非法值。
+
+结果 `nonCritical = expected = P`、`critical: null`、`criticalRate: 0`、
+`criticalSemantics: no-critical-settlement`；nonCritical 表示本事件没有再次暴击分支，
+D 本身仍可能已暴击，expected 是确定性值的别名。关闭时 P 与 effectivePeriodicRatio
+均为 0，originalSettledDamage 仍保留。provenance 保存完整周期事件、Alice holder／binding／
+effect、原事件事实及有效比例；启用只有一条真实比例 contribution，关闭为空。
+结果不是普通 EvaluationResult，不填伪造属性或 damage item。重复调用不修改输入、不累加，
+也不提供跨请求去重。0.95 秒只记来源；状态仍有效和本事件发生由调用方声明，不验周期编号、
+间隔、剩余时长、自动次数或总伤害，也不向普通动作追加事件。
+
+缺原事实为 `MISSING_FACT`，缺快照／历史角色为 `MISSING_SNAPSHOT`；错身份、队伍、
+未来快照或不支持类别为 `CONTEXT_MISMATCH`；结构、值域、单位、层数非法为
+`INVALID_INPUT`，重复身份为 `DUPLICATE_ID`。规则／metadata 形状使用
+`INVALID_DEFINITION`，未知引用沿既有 `MISSING_REFERENCE`，禁止修改使用
+`INVALID_MODIFICATION`。既有公共解析器可优先报告其更具体错误，均带 JSON pointer，
+不输出部分数值成功。完整公开调用示例见 `contract-examples.ts` 中
+`calculateDeclaredAliceCorePeriod`，来源与生成守卫见
+[修订 33](../data/zzz-hp-static-effects.md#修订-33爱丽丝核心周期附伤)。
 
 ### 两层校验
 

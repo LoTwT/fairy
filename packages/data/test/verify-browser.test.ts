@@ -1,3 +1,4 @@
+import { aliceCorePeriodicConsumerSource } from "./fixtures/alice-core-periodic-consumer.ts"
 import { veilConsumerSource } from "./fixtures/veil-consumer.ts"
 import {
   mkdirSync,
@@ -114,6 +115,8 @@ it("consumes the offline-installed package in real Vite development and producti
       join(consumerDirectory, "main.js"),
       `import * as api from "@randomplay/data"
 globalThis.fairy = api
+${aliceCorePeriodicConsumerSource}
+globalThis.fairyAliceCorePeriodic = async () => verifyAliceCorePeriodicConsumer(api, await import("@randomplay/core"))
 ${veilConsumerSource}
 globalThis.fairyYeVeil = async () => verifyVeilConsumer(api, (await import("@randomplay/core")).calculateStaticActionDamage)
 globalThis.fairyDirectAttributes = () => import("@randomplay/data/definitions/attributes/agents/1311.json")
@@ -998,6 +1001,26 @@ function defineScenarios(counts: {
             "definitions/attributes/drive-disc-affixes.json",
             "definitions/effects/static.json",
             "definitions/effects/static-catalog.json",
+          ],
+        },
+        {
+          name: "alice-core-periodic-declared-actual-damage",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyAliceCorePeriodic(),
+            )
+            expect(result.high).toBeCloseTo(308.64197250000007, 8)
+            expect(result.low).toBe(result.high)
+            expect(result).toMatchObject({
+              inactive: 0,
+              actions: 21,
+              ordinaryRejectsPeriodic: true,
+            })
+            expect(result.ordinaryDamage).toBeGreaterThan(0)
+          },
+          sources: [
+            "definitions/attributes/agents/1401.json",
+            "definitions/skills/agents/1401.json",
           ],
         },
         {

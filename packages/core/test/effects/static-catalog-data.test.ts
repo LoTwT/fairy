@@ -1202,17 +1202,22 @@ describe("fixed-source catalog conformance", () => {
         .toSorted(),
     )
   })
-  it("matches each converted record in its actual rank and hit context", () => {
-    for (const vector of oracle.cases) {
-      if (
+  const convertedRecordCases = oracle.cases.filter(
+    (vector) =>
+      !(
         potentialExplainedPointers.has(vector.pointer) ||
         attributeAnomalyScopeCorrectedPointers.has(vector.pointer) ||
         completeStateMigratedPointers.has(vector.pointer) ||
         qingmingPierceStackCorrectedPointers.has(vector.pointer) ||
         batch01StaleOraclePointers.has(vector.pointer) ||
         batch03CorrectedPointers.has(vector.pointer)
-      )
-        continue
+      ),
+  )
+  it.each(
+    convertedRecordCases.map((vector) => [vector.pointer, vector] as const),
+  )(
+    "matches converted record %s in its actual rank and hit context",
+    (_pointer, vector) => {
       const values = Object.fromEntries(
         Object.entries(vector.input).map(([key, index]) => [
           key,
@@ -1229,7 +1234,7 @@ describe("fixed-source catalog conformance", () => {
         result.ok,
         `${vector.pointer}: ${result.ok ? "" : JSON.stringify(result.issues)}`,
       ).toBe(true)
-      if (!result.ok) continue
+      if (!result.ok) return
       const contributions = [
         ...result.value.evaluation.contributions,
         ...(result.value.preparations ?? []).flatMap((p) => p.contributions),
@@ -1263,8 +1268,8 @@ describe("fixed-source catalog conformance", () => {
         vector.expected,
         vector.unit === "ratio" || vector.unit === "multiplier" ? 6 : 4,
       )
-    }
-  }, 120_000)
+    },
+  )
   it("registers the sharpen scope corrections and named differences", () => {
     for (const differenceId of [
       "claret-remnant-edge-self-target",
@@ -1930,7 +1935,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("32")
+    expect(catalog.revision).toBe("33")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -4746,11 +4751,12 @@ describe("velina cyclone catalog linkage", () => {
       // 一条代理人补充（单选项双规则：主伤害 + 影画 4 同事件增伤）；批次 15
       // 再增简与爱丽丝 M6 精通附伤两条补充（爱丽丝同选项另有必暴规则）；
       // 批次 16 再增格莉丝 M6 普通/强化特殊技原手雷组合两条倍率补充；
-      // 批次 17 再增叶瞬光帷幕易伤一条条件输入与失衡乘区替代补充。
-      records: 84,
-      integrated: 51,
-      rules: 55,
-      options: 46,
+      // 批次 17 再增叶瞬光帷幕易伤一条条件输入与失衡乘区替代补充；
+      // 批次 18 再增爱丽丝一次核心周期附伤的具名比例补充。
+      records: 85,
+      integrated: 52,
+      rules: 56,
+      options: 47,
       entities: 4,
       outOfScope: 33,
     })

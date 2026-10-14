@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "32",
+  "revision": "33",
   "effects": [
     {
       "kind": "contribution",
@@ -30004,6 +30004,177 @@
           "kind": "parameter",
           "unit": "multiplier",
           "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1401:nanoka:core-periodic-damage:mindscape:0",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1401"
+        },
+        "section": "剑心双虹（一次核心周期附伤）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1401/details.zh.json",
+            "pointer": "/passive/level/1401501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1401/details.en.json",
+            "pointer": "/passive/level/1401501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1401/details.zh.json",
+            "pointer": "/passive/level/1401502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1401/details.en.json",
+            "pointer": "/passive/level/1401502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1401/details.zh.json",
+            "pointer": "/passive/level/1401503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1401/details.en.json",
+            "pointer": "/passive/level/1401503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1401/details.zh.json",
+            "pointer": "/passive/level/1401504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1401/details.en.json",
+            "pointer": "/passive/level/1401504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1401/details.zh.json",
+            "pointer": "/passive/level/1401505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1401/details.en.json",
+            "pointer": "/passive/level/1401505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1401/details.zh.json",
+            "pointer": "/passive/level/1401506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1401/details.en.json",
+            "pointer": "/passive/level/1401506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1401/details.zh.json",
+            "pointer": "/passive/level/1401507/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1401/details.en.json",
+            "pointer": "/passive/level/1401507/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "mindscapeRank"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 0
+            }
+          },
+          {
+            "kind": "compare-number",
+            "unit": "count",
+            "operator": "gte",
+            "left": {
+              "kind": "configuration-number",
+              "unit": "count",
+              "field": "coreSkillLevel"
+            },
+            "right": {
+              "kind": "literal",
+              "unit": "count",
+              "value": 1
+            }
+          }
+        ]
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "alice-core-periodic-damage",
+        "ratio": {
+          "kind": "literal",
+          "unit": "ratio",
+          "value": 0.025
         }
       }
     },

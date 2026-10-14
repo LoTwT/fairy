@@ -6,6 +6,8 @@ import {
 import type { LuminizeAnomalyDamageLevelInput } from "../../formulas.ts"
 import { parseEffectRuleSet } from "../parse-effect-rule-set.ts"
 import type {
+  AliceCorePeriodicCatalogInput,
+  AliceCorePeriodicDamageResult,
   BindingId,
   Condition,
   ContributionRule,
@@ -24,6 +26,12 @@ import type {
   StaticEffectCatalog,
   StaticEffectSelection,
 } from "../types.ts"
+import {
+  ALICE_CORE_PERIODIC_MECHANISM,
+  calculateAliceCorePeriodicDamage,
+  isAliceCorePeriodicRule,
+  validateAliceCorePeriodicCatalog,
+} from "./alice-core-periodic.ts"
 import {
   expectArray,
   expectFiniteNumber,
@@ -533,6 +541,7 @@ export function validateStaticCatalog(
     const mp = `/catalog/mechanisms/${mi}`,
       mechanism = expectObject(mechanismValue, checks(mp), "catalog mechanism")
     if (!mechanism) continue
+    if (mechanism["mechanism"] === ALICE_CORE_PERIODIC_MECHANISM) continue
     rejectUnknownFields(
       mechanism,
       [
@@ -1473,6 +1482,12 @@ export function validateStaticCatalog(
       }
     }
   }
+  if (collector.isEmpty)
+    validateAliceCorePeriodicCatalog(
+      catalogValue as StaticEffectCatalog,
+      definitions,
+      collector,
+    )
   return collector.isEmpty
     ? { ok: true, value: catalogValue as StaticEffectCatalog }
     : failure(collector)
@@ -1575,6 +1590,20 @@ function prepareItem(
 }
 
 export function calculateStaticDamageFromCatalog(
+  input: AliceCorePeriodicCatalogInput,
+): Result<AliceCorePeriodicDamageResult>
+export function calculateStaticDamageFromCatalog(
+  input: StaticCatalogDamageInput,
+): Result<StaticDamageResult>
+export function calculateStaticDamageFromCatalog(
+  input: StaticCatalogDamageInput | AliceCorePeriodicCatalogInput,
+): Result<StaticDamageResult | AliceCorePeriodicDamageResult> {
+  if (input && typeof input === "object" && "mechanism" in input)
+    return calculateAliceCorePeriodicDamage(input, true)
+  return calculateOrdinaryStaticDamageFromCatalog(input)
+}
+
+function calculateOrdinaryStaticDamageFromCatalog(
   input: StaticCatalogDamageInput,
 ): Result<StaticDamageResult> {
   const collector = new IssueCollector()
@@ -2676,6 +2705,7 @@ export function calculateStaticDamageFromCatalog(
   const definitions = {
     ...parsed.value,
     effects: parsed.value.effects.map((rule): EffectRule => {
+      if (isAliceCorePeriodicRule(rule)) return rule
       if (
         rule.kind === "contribution" &&
         rule.operation.kind === "factor-contribution" &&

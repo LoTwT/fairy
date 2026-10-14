@@ -11,6 +11,8 @@ import {
 } from "../../formulas.ts"
 import type { LuminizeAnomalyDamageLevelInput } from "../../formulas.ts"
 import type {
+  AliceCorePeriodicDamageInput,
+  AliceCorePeriodicDamageResult,
   EffectInstance,
   EntityId,
   FactorChannel,
@@ -23,6 +25,7 @@ import type {
   StaticEffectSelection,
   Stat,
 } from "../types.ts"
+import { calculateAliceCorePeriodicDamage } from "./alice-core-periodic.ts"
 import {
   expectArray,
   expectBoolean,
@@ -291,6 +294,20 @@ function validateSelections(
 
 /** 每次调用建立独立静态状态；不推进事件、不推断默认 buff 或历史读取值。 */
 export function calculateStaticDamage(
+  input: AliceCorePeriodicDamageInput,
+): Result<AliceCorePeriodicDamageResult>
+export function calculateStaticDamage(
+  input: StaticDamageInput,
+): Result<StaticDamageResult>
+export function calculateStaticDamage(
+  input: StaticDamageInput | AliceCorePeriodicDamageInput,
+): Result<StaticDamageResult | AliceCorePeriodicDamageResult> {
+  if (input && typeof input === "object" && "mechanism" in input)
+    return calculateAliceCorePeriodicDamage(input, false)
+  return calculateOrdinaryStaticDamage(input)
+}
+
+function calculateOrdinaryStaticDamage(
   input: StaticDamageInput,
 ): Result<StaticDamageResult> {
   const evaluated = evaluateStaticDamage(input)

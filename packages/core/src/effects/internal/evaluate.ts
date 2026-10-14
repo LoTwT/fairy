@@ -1167,6 +1167,15 @@ function evaluateSingleLayer(
   address: ConsumptionAddress,
 ): EvaluatedLayer | null | undefined {
   const rule = layer.entry.rule
+  if (rule.operation.kind === "alice-core-periodic-damage") {
+    context.collector.report(
+      "CONTEXT_MISMATCH",
+      "",
+      "Alice periodic damage requires its named event settlement",
+      { effectId: rule.effectId, bindingId: layer.entry.bindingId },
+    )
+    return undefined
+  }
   if (!evaluateCondition(rule.when, context, layer)) {
     return null
   }
@@ -2098,6 +2107,22 @@ function evaluateEffectsInternal(
     )
     return failure(collector)
   }
+  for (const instance of stateInternal.instances) {
+    if (
+      preparedInternal.contributions.some(
+        (entry) =>
+          entry.rule.effectId === instance.effectId &&
+          entry.rule.operation.kind === "alice-core-periodic-damage",
+      )
+    )
+      collector.report(
+        "CONTEXT_MISMATCH",
+        "",
+        "Alice periodic damage requires its named event settlement",
+        { effectId: instance.effectId, bindingId: instance.bindingId },
+      )
+  }
+  if (!collector.isEmpty) return failure(collector)
   const inputObject = expectObject(
     input,
     { collector, structureCode: "INVALID_INPUT", pointer: "" },

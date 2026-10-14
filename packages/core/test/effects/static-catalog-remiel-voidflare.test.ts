@@ -1498,76 +1498,107 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
     expect(normalResult.ok).toBe(false)
   })
 
-  it("rejects the mechanism when the catalog does not declare it while normal calls stay compatible", () => {
-    const legacyCatalog: StaticEffectCatalog = { ...catalog }
-    delete (legacyCatalog as { mechanisms?: unknown }).mechanisms
-    const requested = resultFor(voidflareInput({ catalog: legacyCatalog }))
-    expect(requested.ok).toBe(false)
-    if (!requested.ok)
-      expect(
-        requested.issues.some((issue) =>
-          issue.message.includes(
-            "does not declare the remielle-special-voidflare mechanism",
+  it.each([false, true])(
+    "rejects the undeclared remielle mechanism while normal calls stay compatible, legacy=%s",
+    (legacy) => {
+      // 只删除被测蕾米机制；旧无机制目录另成完整定义/选项组，不留下孤立的新 Alice 规则。
+      const compatibleDefinitions = legacy
+        ? {
+            ...definitions,
+            effects: definitions.effects.filter(
+              (rule) =>
+                !(
+                  rule.kind === "contribution" &&
+                  rule.operation.kind === "alice-core-periodic-damage"
+                ),
+            ),
+          }
+        : definitions
+      const legacyCatalog: StaticEffectCatalog = {
+        ...catalog,
+        mechanisms: catalog.mechanisms!.filter(
+          (m) => m.mechanism !== "remielle-special-voidflare",
+        ),
+        options: legacy
+          ? catalog.options.filter(
+              (o) => o.optionId !== "nanoka:agents:alice:core-periodic-damage",
+            )
+          : catalog.options,
+      }
+      if (legacy) delete (legacyCatalog as { mechanisms?: unknown }).mechanisms
+      const requested = resultFor({
+        ...voidflareInput({ catalog: legacyCatalog }),
+        definitions: compatibleDefinitions,
+      })
+      expect(requested.ok).toBe(false)
+      if (!requested.ok)
+        expect(
+          requested.issues.some((issue) =>
+            issue.message.includes(
+              "does not declare the remielle-special-voidflare mechanism",
+            ),
           ),
+        ).toBe(true)
+      // 普通旧目录调用保持可用：蕾米触发、维琳娜作为普通异常来源的耀变。
+      const baseInput = voidflareInput({ mindscapeRank: 1 })
+      const normal = calculateStaticDamageFromCatalog({
+        ...baseInput,
+        definitions: compatibleDefinitions,
+        catalog: legacyCatalog,
+        bindings: baseInput.bindings.filter(
+          (binding) =>
+            binding.bindingId === REMIEL_BINDING ||
+            binding.bindingId === VELINA_BINDING,
         ),
-      ).toBe(true)
-    // 普通旧目录调用保持可用：蕾米触发、维琳娜作为普通异常来源的耀变。
-    const baseInput = voidflareInput({ mindscapeRank: 1 })
-    const normal = calculateStaticDamageFromCatalog({
-      ...baseInput,
-      catalog: legacyCatalog,
-      bindings: baseInput.bindings.filter(
-        (binding) =>
-          binding.bindingId === REMIEL_BINDING ||
-          binding.bindingId === VELINA_BINDING,
-      ),
-      selections: [
-        {
-          optionId: "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz",
-          bindingId: REMIEL_BINDING,
-          layers: 1,
-        },
-      ],
-      inputs: [],
-      world: {
-        ...baseInput.world,
-        entities: baseInput.world.entities.map((entity) =>
-          entity.kind === "actor" && entity.entityId === "entity:velina"
-            ? {
-                ...entity,
-                generalStats: {
-                  attack: general(2000),
-                  anomalyProficiency: general(120),
-                },
-                directStats: {
-                  criticalRate: { baseValue: 0.05, additions: [] },
-                  criticalDamage: { baseValue: 0.5, additions: [] },
-                  penetrationRatio: { baseValue: 0, additions: [] },
-                },
-              }
-            : entity,
-        ),
-      },
-      hit: {
-        ...baseInput.hit,
-        damageItems: [
+        selections: [
           {
-            mode: "direct",
-            role: "base",
-            itemId: "base",
-            stat: "attack",
-            statSource: { entityId: "entity:velina" },
-            damageMultiplier: 2,
+            optionId:
+              "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz",
+            bindingId: REMIEL_BINDING,
+            layers: 1,
           },
         ],
-      },
-      damage: {
-        ...baseInput.damage,
-        anomalySource: { entityId: "entity:velina", level: 60 },
-      },
-    } as unknown as StaticCatalogDamageInput)
-    expect(normal.ok, JSON.stringify(normal)).toBe(true)
-  })
+        inputs: [],
+        world: {
+          ...baseInput.world,
+          entities: baseInput.world.entities.map((entity) =>
+            entity.kind === "actor" && entity.entityId === "entity:velina"
+              ? {
+                  ...entity,
+                  generalStats: {
+                    attack: general(2000),
+                    anomalyProficiency: general(120),
+                  },
+                  directStats: {
+                    criticalRate: { baseValue: 0.05, additions: [] },
+                    criticalDamage: { baseValue: 0.5, additions: [] },
+                    penetrationRatio: { baseValue: 0, additions: [] },
+                  },
+                }
+              : entity,
+          ),
+        },
+        hit: {
+          ...baseInput.hit,
+          damageItems: [
+            {
+              mode: "direct",
+              role: "base",
+              itemId: "base",
+              stat: "attack",
+              statSource: { entityId: "entity:velina" },
+              damageMultiplier: 2,
+            },
+          ],
+        },
+        damage: {
+          ...baseInput.damage,
+          anomalySource: { entityId: "entity:velina", level: 60 },
+        },
+      } as unknown as StaticCatalogDamageInput)
+      expect(normal.ok, JSON.stringify(normal)).toBe(true)
+    },
+  )
 
   it("keeps ordinary damage-bonus selections out of the special base zone", () => {
     const unaffected = resultFor(

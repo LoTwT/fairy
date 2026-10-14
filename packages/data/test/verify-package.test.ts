@@ -1,3 +1,7 @@
+import {
+  aliceCorePeriodicConsumerSource,
+  aliceCorePeriodicConsumerTypes,
+} from "./fixtures/alice-core-periodic-consumer.ts"
 import { veilConsumerSource } from "./fixtures/veil-consumer.ts"
 import { execFileSync, spawnSync } from "node:child_process"
 import {
@@ -453,6 +457,8 @@ for (const [id, suffix, element, expected, mindscapeRank, optionId, selectedExpe
   assert.equal(api.resolveAgentAction({ ...resolution, requireIndividualHits: true }).ok, false)
   assert.equal(calculateStaticActionDamage({ ...request, requireIndividualHits: true }).ok, false)
 }
+${aliceCorePeriodicConsumerSource}
+await verifyAliceCorePeriodicConsumer(api, await import("@randomplay/core"))
 ${veilConsumerSource}
 await verifyVeilConsumer(api, calculateStaticActionDamage)
 // 维琳娜微域气旋：安装包根入口解析并计算具名直伤约定。期望值独立于实现：
@@ -1011,6 +1017,7 @@ console.log(JSON.stringify({ agents: api.agentNames, bangboos: api.bangbooNames,
         "@randomplay/shared",
       )
     const typeSource = `import { loadStaticCalculationData } from "@randomplay/data"
+${aliceCorePeriodicConsumerTypes}
 import type { StaticCalculationData as CoreCalculationData, StaticActionCalculationInput, StaticCatalogDamageInput, StaticCatalogDefenseInput, StaticCatalogLuminizeDamageBranch, StaticCatalogMechanism, RemielleSpecialVoidflareAnomalySource } from "@randomplay/core"
 const jointData: Promise<CoreCalculationData> = loadStaticCalculationData({ agents: ["Ben"], wEngines: [] })
 async function typedCalculation(input: Omit<StaticActionCalculationInput, "data">) {

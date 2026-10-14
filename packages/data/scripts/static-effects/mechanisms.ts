@@ -1,7 +1,7 @@
 import type {
   EffectId,
   EffectRule,
-  StaticCatalogMechanism,
+  RemielleStaticCatalogMechanism,
 } from "@randomplay/shared"
 import type { CoverageRecord, SourceRecord } from "./convert.ts"
 import { SOURCE_COMMIT, type SourceEffect } from "./source.ts"
@@ -22,7 +22,7 @@ export function buildRemielleSpecialVoidflareMechanism(options: {
   readonly coverage: readonly CoverageRecord[]
   readonly effects: readonly EffectRule[]
   readonly remielAgentEntityId: string
-}): StaticCatalogMechanism {
+}): RemielleStaticCatalogMechanism {
   const { records, coverage, effects, remielAgentEntityId } = options
   const rawByPointer = new Map(
     records.map((record) => [record.pointer, record]),
@@ -181,12 +181,12 @@ export function buildRemielleSpecialVoidflareMechanism(options: {
           "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
         pointer: "/agents/51/mindscapeBuffs/6/effectBlocks/0/effects/1",
       },
-    ] as unknown as StaticCatalogMechanism["references"],
+    ] as unknown as RemielleStaticCatalogMechanism["references"],
   }
 }
 
 export function remielleSpecialVoidflareMechanismSummary(
-  mechanism: StaticCatalogMechanism,
+  mechanism: RemielleStaticCatalogMechanism,
 ): {
   readonly selfAttackConverts: number
   readonly wEngineMasteryEffects: number
