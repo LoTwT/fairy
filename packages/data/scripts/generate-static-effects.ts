@@ -21,7 +21,7 @@ import {
   developerRevisionEntries,
   verifyDeveloperRevisionExport,
 } from "./static-effects/developer-revision.ts"
-import { SUPPLEMENTS } from "./static-effects/supplements.ts"
+import { SUPPLEMENTS, type Supplement } from "./static-effects/supplements.ts"
 import evidence from "./static-effects/rank-evidence.json" with { type: "json" }
 
 /** RFC 6901 Pointer 存在性检查；不要求目标为真值。 */
@@ -123,6 +123,19 @@ export async function verifyCompleteStateOptionEvidence(
   return verified
 }
 
+export async function verifySupplementEvidence(
+  publication: string,
+  supplements: readonly Supplement[] = SUPPLEMENTS,
+): Promise<readonly string[]> {
+  const verified: string[] = []
+  for (const supplement of supplements) {
+    const label = `supplement:${supplement.supplementId}`
+    await verifyEvidenceReferences(publication, label, supplement.evidence)
+    verified.push(label)
+  }
+  return verified
+}
+
 /**
  * 生成路径的来源证据验证：rank-evidence、来源语义与完整状态选项登记、
  * 补充来源。返回实际验证的登记标识，测试据此核对登记确实被消费。
@@ -180,14 +193,7 @@ export async function verifyStaticEffectsEvidence(
     verified.push(`semantics:${key}`)
   }
   verified.push(...(await verifyCompleteStateOptionEvidence(publication)))
-  for (const supplement of SUPPLEMENTS) {
-    await verifyEvidenceReferences(
-      publication,
-      `supplement:${supplement.supplementId}`,
-      supplement.evidence,
-    )
-    verified.push(`supplement:${supplement.supplementId}`)
-  }
+  verified.push(...(await verifySupplementEvidence(publication)))
   return verified
 }
 

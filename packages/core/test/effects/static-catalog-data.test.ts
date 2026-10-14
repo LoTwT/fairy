@@ -2040,7 +2040,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("37")
+    expect(catalog.revision).toBe("38")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -4860,10 +4860,10 @@ describe("velina cyclone catalog linkage", () => {
       // 批次 18 再增爱丽丝一次核心周期附伤的具名比例补充；
       // 批次 19 再增耀嘉音 M4 一次强攻队友快速支援附伤；
       // 批次 20 再增 Lucy 小猪继承和一次 M6 猪雨两个具名选项。
-      records: 88,
-      integrated: 55,
-      rules: 59,
-      options: 50,
+      records: 93,
+      integrated: 60,
+      rules: 64,
+      options: 55,
       entities: 4,
       outOfScope: 33,
     })

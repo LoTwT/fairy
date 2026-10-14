@@ -33,6 +33,7 @@ import {
   type ExpressionContext,
 } from "./expression.ts"
 import type { IssueCollector } from "./issues.ts"
+import { ROXY_M6_WIND_RESISTANCE_IGNORE } from "./roxy-m6-provider.ts"
 import {
   DIRECT_STATS,
   FACTOR_CHANNELS,
@@ -2359,6 +2360,35 @@ export function validateRuleSetStructure(
     }
     effects.push(entry as ModificationRule)
     pendingModifications.push(pending)
+  }
+
+  const roxyM6 = effects.find(
+    (rule) => rule.effectId === ROXY_M6_WIND_RESISTANCE_IGNORE,
+  )
+  if (roxyM6 !== undefined) {
+    const pointer = `/effects/${effectsArray.indexOf(roxyM6)}`
+    const reject = (field: string) =>
+      collector.report(
+        "INVALID_DEFINITION",
+        `${pointer}/${field}`,
+        "The reserved Roxy M6 identity requires an agent 1621 hit-scoped holder resistance-ignore contribution",
+        { effectId: roxyM6.effectId },
+      )
+    if (
+      roxyM6.source.identity.kind !== "agent" ||
+      roxyM6.source.identity.entityId !== "1621"
+    )
+      reject("source/identity")
+    if (roxyM6.kind !== "contribution") reject("kind")
+    else {
+      if (roxyM6.scope !== "hit") reject("scope")
+      if (roxyM6.beneficiary.kind !== "holder") reject("beneficiary")
+      if (
+        roxyM6.operation.kind !== "factor-contribution" ||
+        roxyM6.operation.channel !== "attacker-resistance-ignore"
+      )
+        reject("operation")
+    }
   }
 
   const periodic = effects.filter(

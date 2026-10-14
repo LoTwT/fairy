@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "37",
+  "revision": "38",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -45870,6 +45870,191 @@
       ]
     },
     {
+      "optionId": "nanoka:agents:1621:m1-hit-resistance-reduction",
+      "catalogEntityId": "nanoka:agents:1621",
+      "name": "影画1 · 敬请安息命中后的敌方减抗",
+      "conditionDescription": "声明[强化特殊技：敬请安息]已命中当前敌人且全属性减抗15%的状态仍有效，持有者及合法同队角色对该敌人的后续伤害受益，不要求后续命中仍为强化特殊技。持续50秒、重复触发刷新由调用方维护；更换敌人时须重新声明。与自身暴伤选项独立，0关闭、1开启。",
+      "target": "team",
+      "variants": [
+        {
+          "target": "team",
+          "configuration": {
+            "minimumMindscape": 1
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/talent/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/talent/1/desc"
+            }
+          ],
+          "effectIds": ["agent:1621:nanoka:m1-hit-resistance-reduction"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1621:m1-critical-damage",
+      "catalogEntityId": "nanoka:agents:1621",
+      "name": "影画1 · 自身暴击伤害",
+      "conditionDescription": "洛克茜自身普通暴击伤害提升40%。独立显式选择，不依赖[敬请安息]命中或敌方减抗开关，不给其他持有者增加暴伤；0关闭、1开启。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 1
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/talent/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/talent/1/desc"
+            }
+          ],
+          "effectIds": ["agent:1621:nanoka:m1-critical-damage"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1621:m2-stun-damage",
+      "catalogEntityId": "nanoka:agents:1621",
+      "name": "影画2 · 小心风寒命中后的失衡易伤",
+      "conditionDescription": "声明[强化特殊技：小心风寒]已命中当前敌人且失衡易伤提升30个百分点的状态仍有效，持有者及合法同队角色受益。进入普通失衡加数通道，基础1.5变为1.8；仅目标当前失衡时作用。状态持续至目标从失衡恢复由调用方维护，更换敌人须重新声明；0关闭、1开启。不含失衡值与流势。",
+      "target": "team",
+      "variants": [
+        {
+          "target": "team",
+          "configuration": {
+            "minimumMindscape": 2
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/talent/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/talent/2/desc"
+            }
+          ],
+          "effectIds": ["agent:1621:nanoka:m2-stun-damage"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1621:m4-ultimate-damage",
+      "catalogEntityId": "nanoka:agents:1621",
+      "name": "影画4 · 葬夜安魂曲伤害",
+      "conditionDescription": "仅洛克茜自身[终结技：葬夜安魂曲]（action:agent:1621:action:0013）的伤害提升20%，与已有增伤同区加算；须使用正式动作的精确技能目标。0关闭、1开启，不含能量回复或失衡值。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 4
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/talent/4/desc"
+            }
+          ],
+          "effectIds": ["agent:1621:nanoka:m4-ultimate-damage"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1621:m6-wind-resistance-ignore",
+      "catalogEntityId": "nanoka:agents:1621",
+      "name": "影画6 · 自身风属性抗性忽视",
+      "conditionDescription": "洛克茜自身风属性伤害无视目标15%风属性伤害抗性；0关闭、1开启，覆盖regular、anomaly、disorder、vortex及anomaly-settlement。命中actor与全部基础项实际属性提供者须为本绑定同一洛克茜；异常类另要求实际AP提供者同属本人。同实体历史快照保留原读数，其他实例提供者不受益。适用时混合本人和他人基础项须拆成独立请求，否则明确拒绝。不含风眼、余响、巨型风旋倍率与失衡值。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 6
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/talent/6/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/talent/6/desc"
+            }
+          ],
+          "effectIds": ["agent:1621:nanoka:m6-wind-resistance-ignore"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
       "optionId": "nanoka:agents:lucy:guard-boar-inheritance",
       "catalogEntityId": "agents:lucy",
       "name": "赤鬣亲卫队 · 小猪继承（条件模型）",
@@ -51567,6 +51752,14 @@
       "agentEntityId": "1581",
       "category": "ultimate",
       "name": "缭乱终幕",
+      "countsAsFollowUp": false
+    },
+    {
+      "targetId": "zzz-hp:skill:roxy-requiem-for-the-night-burial",
+      "upstreamId": null,
+      "agentEntityId": "1621",
+      "category": "ultimate",
+      "name": "终结技：葬夜安魂曲",
       "countsAsFollowUp": false
     },
     {

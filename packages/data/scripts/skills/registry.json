@@ -22603,7 +22603,7 @@
     "element": "wind",
     "damageKind": "regular",
     "upstreamSkillId": null,
-    "skillTargetIds": [],
+    "skillTargetIds": ["zzz-hp:skill:roxy-requiem-for-the-night-burial"],
     "issues": []
   },
   {

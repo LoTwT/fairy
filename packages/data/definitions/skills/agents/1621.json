@@ -653,7 +653,7 @@
       "rowName": "伤害倍率",
       "levelGroup": "chain",
       "skillCategory": "ultimate",
-      "skillTargetIds": [],
+      "skillTargetIds": ["zzz-hp:skill:roxy-requiem-for-the-night-burial"],
       "skillTags": [],
       "source": {
         "path": "agents/1621/details.zh.json",
