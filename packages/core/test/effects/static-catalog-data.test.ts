@@ -1202,17 +1202,22 @@ describe("fixed-source catalog conformance", () => {
         .toSorted(),
     )
   })
-  it("matches each converted record in its actual rank and hit context", () => {
-    for (const vector of oracle.cases) {
-      if (
+  const convertedRecordCases = oracle.cases.filter(
+    (vector) =>
+      !(
         potentialExplainedPointers.has(vector.pointer) ||
         attributeAnomalyScopeCorrectedPointers.has(vector.pointer) ||
         completeStateMigratedPointers.has(vector.pointer) ||
         qingmingPierceStackCorrectedPointers.has(vector.pointer) ||
         batch01StaleOraclePointers.has(vector.pointer) ||
         batch03CorrectedPointers.has(vector.pointer)
-      )
-        continue
+      ),
+  )
+  it.each(
+    convertedRecordCases.map((vector) => [vector.pointer, vector] as const),
+  )(
+    "matches converted record %s in its actual rank and hit context",
+    (_pointer, vector) => {
       const values = Object.fromEntries(
         Object.entries(vector.input).map(([key, index]) => [
           key,
@@ -1229,7 +1234,7 @@ describe("fixed-source catalog conformance", () => {
         result.ok,
         `${vector.pointer}: ${result.ok ? "" : JSON.stringify(result.issues)}`,
       ).toBe(true)
-      if (!result.ok) continue
+      if (!result.ok) return
       const contributions = [
         ...result.value.evaluation.contributions,
         ...(result.value.preparations ?? []).flatMap((p) => p.contributions),
@@ -1263,8 +1268,8 @@ describe("fixed-source catalog conformance", () => {
         vector.expected,
         vector.unit === "ratio" || vector.unit === "multiplier" ? 6 : 4,
       )
-    }
-  }, 120_000)
+    },
+  )
   it("registers the sharpen scope corrections and named differences", () => {
     for (const differenceId of [
       "claret-remnant-edge-self-target",
