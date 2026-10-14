@@ -18,6 +18,7 @@ import type {
 import { general, inputFor, literal, rule } from "./static-fixtures.ts"
 import { resolveAgentAction } from "../../../data/src/skills/resolve.ts"
 import type { AgentActions } from "../../../data/src/skills/types.ts"
+import { yanagiPolarityMigrations } from "../../../data/test/fixtures/yanagi-polarity-consumer.ts"
 const read = (path: string) =>
   JSON.parse(readFileSync(new URL(path, import.meta.url), "utf8"))
 const parsed = parseEffectRuleSet(
@@ -44,6 +45,10 @@ const coverage = read(
 ) as {
   records: {
     pointer: string
+    optionId: string
+    catalogEntityId: string
+    rankKind: string
+    rank: number
     status: string
     reason?: string
     explanation?: string
@@ -1190,6 +1195,15 @@ describe("fixed-source catalog conformance", () => {
             developerRevisionCorrectedPointers.has(r.pointer) ||
             attributeAnomalyScopeCorrectedPointers.has(r.pointer) ||
             completeStateMigratedPointers.has(r.pointer) ||
+            yanagiPolarityMigrations.some(
+              (migration) =>
+                r.catalogEntityId === "agents:yanagi" &&
+                r.rankKind === "mindscape" &&
+                r.rank === migration.rank &&
+                r.optionId ===
+                  `agents:yanagi:mindscape:${migration.rank}:${migration.blockId}:${migration.sourceEffectId}` &&
+                r.pointer === migration.pointer,
+            ) ||
             qingmingPierceStackCorrectedPointers.has(r.pointer) ||
             batch01CorrectedPointers.has(r.pointer) ||
             batch03CorrectedPointers.has(r.pointer) ||
@@ -1229,6 +1243,76 @@ describe("fixed-source catalog conformance", () => {
         definitions,
         catalog,
       } as unknown as StaticCatalogDamageInput
+      // 三个精确来源身份迁移为隔离断言；不加入通用 skip，不改 oracle 原件。
+      const polarityMigration = yanagiPolarityMigrations.find(
+        (migration) =>
+          input.selections.length === 1 &&
+          input.selections[0]!.optionId ===
+            `agents:yanagi:mindscape:${migration.rank}:${migration.blockId}:${migration.sourceEffectId}`,
+      )
+      if (polarityMigration) {
+        const migration = polarityMigration
+        const optionId = input.selections[0]!.optionId
+        const effectId = `agent:1221:zzz-hp:${migration.sourceEffectId}:${migration.blockId}:mindscape:${migration.rank}`
+        expect(vector.pointer).toBe(migration.pointer)
+        expect(vector.effectIds).toEqual([effectId])
+        expect(input.bindings[0]).toMatchObject({
+          kind: "agent",
+          sourceEntityId: "1221",
+          configuration: { mindscapeRank: migration.rank },
+        })
+        const option = catalog.options.find(
+          (entry) => entry.optionId === optionId,
+        )!
+        expect(option.catalogEntityId).toBe("agents:yanagi")
+        expect(option.variants).toHaveLength(1)
+        expect(option.variants[0]).toMatchObject({
+          status: "unsupported",
+          reason: "semantic-conflict",
+          effectIds: [],
+          configuration: { minimumMindscape: migration.rank },
+        })
+        expect(option.variants[0]!.references).toContainEqual({
+          sourceId: "zzz-hp",
+          version: oracle.sourceCommit,
+          locale: "zh",
+          resourcePath:
+            "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          pointer: migration.pointer,
+        })
+        expect(
+          definitions.effects.some((entry) => entry.effectId === effectId),
+        ).toBe(false)
+        expect(
+          coverage.records.find((entry) => entry.optionId === optionId),
+        ).toMatchObject({
+          catalogEntityId: "agents:yanagi",
+          rankKind: "mindscape",
+          rank: migration.rank,
+          pointer: migration.pointer,
+          status: "unsupported",
+          reason: "semantic-conflict",
+          effectIds: [],
+        })
+        for (const layers of [0, input.selections[0]!.layers]) {
+          const rejected = calculateStaticDamageFromCatalog({
+            ...input,
+            selections: [{ ...input.selections[0]!, layers }],
+          })
+          expect(rejected.ok).toBe(false)
+          if (!rejected.ok)
+            expect(
+              rejected.issues.some(
+                (issue) =>
+                  issue.code === "INVALID_INPUT" &&
+                  issue.pointer === "/selections/0" &&
+                  issue.message.includes("semantic-conflict") &&
+                  issue.message.includes(optionId),
+              ),
+            ).toBe(true)
+        }
+        return
+      }
       const result = calculateStaticDamageFromCatalog(input)
       expect(
         result.ok,
@@ -1935,7 +2019,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("35")
+    expect(catalog.revision).toBe("36")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,

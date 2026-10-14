@@ -33,6 +33,8 @@ import evidence from "./rank-evidence.json" with { type: "json" }
 import {
   COMPLETE_STATE_OPTIONS,
   SOURCE_SEMANTICS,
+  YANAGI_POLARITY_DIFFERENCE_ID,
+  YANAGI_POLARITY_EXPLANATION,
   YUZUHA_COMPLETE_STATE_OPTION_ID,
   YUZUHA_COMPLETE_STATE_DIFFERENCE_ID,
   type CompleteStateOptionRegistration,
@@ -1193,6 +1195,12 @@ export function collectSource(
           : category === "w-engines"
             ? functions.normalizeWengine(raw)
             : functions.normalizeDriveDisc(raw)
+      if (
+        category === "agents" &&
+        raw.id === "yanagi" &&
+        normalized.id !== raw.id
+      )
+        throw new Error("Polarity isolation normalized entity identity drift")
       const entries: {
         raw: SourcePack
         normalized: SourcePack
@@ -1300,6 +1308,13 @@ export function collectSource(
               `Duplicate source effect ${entry.pointer}: ${record.effect.id}`,
             )
           ids.add(record.effect.id)
+        }
+        verifyNormalizedPolarityLocations(
+          entry.normalized,
+          actual,
+          `${category}/${raw.id}/${entry.rankKind}/${entry.rank}`,
+        )
+        for (const record of collected) {
           records.push({
             category,
             entityId: raw.id,
@@ -1448,6 +1463,111 @@ function whenFor(
 /** 语义登记键：category/entityId/rankKind/rank/blockId/effectId 稳定组合。 */
 const semanticsKeyFor = (record: SourceRecord): string =>
   `${record.category}/${record.entityId}/${record.rankKind}/${record.rank}/${record.blockId}/${record.raw.id}`
+
+const polarityIsolationRegistrations = Object.entries(SOURCE_SEMANTICS).filter(
+  (
+    entry,
+  ): entry is [
+    string,
+    Extract<SourceSemantics, { kind: "isolated-polarity-disorder" }>,
+  ] => entry[1].kind === "isolated-polarity-disorder",
+)
+
+/** 在按 ID 折叠前核对实际消费记录；块的派生 effects 镜像不另计一次。 */
+function verifyNormalizedPolarityLocations(
+  pack: SourcePack,
+  actual: readonly SourceEffect[],
+  packIdentity: string,
+): void {
+  for (const [key, semantics] of polarityIsolationRegistrations) {
+    const id = semantics.expectedEncoding.id
+    const occurrences = actual.filter((effect) => effect.id === id)
+    if (!occurrences.length) continue
+    if (occurrences.length !== 1)
+      throw new Error(
+        `Polarity isolation duplicate normalized record (${key}) at ${packIdentity}`,
+      )
+    const locations = (pack.effectBlocks ?? []).flatMap((block) =>
+      block.effects
+        .filter((effect) => effect.id === id)
+        .map(() => `${packIdentity}/${block.id}/${id}`),
+    )
+    if (locations.length !== 1 || locations[0] !== key)
+      throw new Error(
+        `Polarity isolation normalized source identity moved (${key}) at ${packIdentity}`,
+      )
+  }
+}
+
+/** 三条隔离身份与共存块先于通用编译核验；局部无柳夹具不需要携带柳。 */
+function verifyYanagiPolarityIsolation(
+  records: readonly SourceRecord[],
+  entities: readonly StaticCatalogEntity[],
+): void {
+  const registrations = polarityIsolationRegistrations
+  const registeredKeys = new Set(registrations.map(([key]) => key))
+  const registeredIds = new Set(
+    registrations.map(([, entry]) => entry.expectedEncoding.id),
+  )
+  for (const record of records)
+    if (
+      registeredIds.has(record.raw.id) &&
+      !registeredKeys.has(semanticsKeyFor(record))
+    )
+      throw new Error(
+        `Polarity isolation source identity moved (${semanticsKeyFor(record)})`,
+      )
+  if (!entities.some((entity) => entity.catalogEntityId === "agents:yanagi"))
+    return
+  for (const [key, semantics] of registrations) {
+    const record = records.find(
+      (candidate) => semanticsKeyFor(candidate) === key,
+    )
+    if (!record)
+      throw new Error(
+        `Polarity isolation lost its registered source record (${key})`,
+      )
+    for (const [label, document, note] of [
+      ["raw", record.raw, record.blockNote],
+      ["normalized", record.normalized, record.normalizedBlockNote],
+    ] as const) {
+      if (!document)
+        throw new Error(`Polarity isolation lost ${label} record (${key})`)
+      verifySourceRecordShape(
+        document,
+        semantics.expectedEncoding,
+        YANAGI_POLARITY_DIFFERENCE_ID,
+        `${label} ${key}`,
+        true,
+      )
+      if (note !== semantics.expectedSourceBlockNote)
+        throw new Error(`Polarity isolation ${label} block note drift (${key})`)
+    }
+  }
+  for (const record of records) {
+    if (record.category !== "agents" || record.entityId !== "yanagi") continue
+    const key = semanticsKeyFor(record)
+    if (registeredKeys.has(key)) continue
+    // M6 同块独立增伤是共存正控；不能整块禁用。rank0 原有倍率不属于本次隔离。
+    const sibling =
+      key ===
+      "agents/yanagi/mindscape/6/blk-ms4qn0z7-6fc8g6/eff-ms4qn0z7-u05br2"
+    const conflictingStat = [record.raw, record.normalized].some(
+      (entry) =>
+        entry &&
+        ["disorderBaseMultFactor", "turbulenceBaseMultFactor"].includes(
+          entry.stat,
+        ),
+    )
+    if (
+      (!sibling && (record.rank === 2 || record.rank === 6)) ||
+      (record.rank > 0 && conflictingStat)
+    )
+      throw new Error(
+        `Polarity isolation found an unreviewed source encoding (${key}); re-review the clause before generating`,
+      )
+  }
+}
 
 /** 乘区纠错在字段映射与 unsupported 降级前核对两份编码及冻结块说明。 */
 function verifySourceStatCorrectionRecord(
@@ -1857,6 +1977,23 @@ function compile(
   })
   if (!identity)
     return unsupported("missing-identity", "当前 Fairy 没有已核实的来源实体 ID")
+  if (semantics?.kind === "isolated-polarity-disorder")
+    return {
+      variant: {
+        ...variant,
+        status: "unsupported",
+        reason: "semantic-conflict",
+        effectIds: [],
+        explanation: semantics.verification,
+        differences: [semantics.differenceId],
+        references: [
+          ...variant.references,
+          ...semantics.evidence.map((ref) =>
+            nanokaReference(ref.path, ref.pointer),
+          ),
+        ],
+      },
+    }
   // 具名登记的完整状态记录先做防漂移校验，早于任何通用 unsupported 降级：
   // 规范化删除或编码变义必须终止生成，不能被当作“已迁移”入口。
   if (semantics?.kind === "complete-state-elation")
@@ -3700,6 +3837,7 @@ export function convertSource(
     options: StaticCatalogOption[] = [],
     coverage: CoverageRecord[] = [],
     declaredSkillTargets: StaticEffectCatalog["skillTargets"][number][] = []
+  verifyYanagiPolarityIsolation(collected.records, collected.entities)
   // 缺失条款与共存记录先验证，再编译普通记录；未知 stat / unsupported
   // 不得抢先掩盖完整来源上下文的漂移。实体缺失仍由补充身份校验拒绝。
   for (const supplement of supplements) {
@@ -4579,7 +4717,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "35",
+    revision: "36",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -4692,6 +4830,17 @@ export function convertSource(
       }),
     ],
     differences: [
+      {
+        differenceId: YANAGI_POLARITY_DIFFERENCE_ID,
+        explanation: YANAGI_POLARITY_EXPLANATION,
+        references: collected.records
+          .filter(
+            (record) =>
+              SOURCE_SEMANTICS[semanticsKeyFor(record)]?.kind ===
+              "isolated-polarity-disorder",
+          )
+          .map((record) => reference(record.pointer)),
+      },
       ...Object.values(SOURCE_SEMANTICS)
         .filter((entry) => entry.kind === "source-stat-correction")
         .map((entry) => ({

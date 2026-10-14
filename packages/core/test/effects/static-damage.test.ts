@@ -445,6 +445,164 @@ describe("partial cultivation tables", () => {
 })
 
 describe("static facts, selection and dependency boundaries", () => {
+  it("distinguishes a missing selected effect from an existing ineligible rule", () => {
+    const effect = factor("damage-bonus", 0.2)
+    const input = inputFor([effect])
+    const unselected = ok(calculateStaticDamage({ ...input, selections: [] }))
+    const selected = ok(calculateStaticDamage(input))
+    expect(unselected.nonCritical).toBeGreaterThan(0)
+    expect(selected.nonCritical / unselected.nonCritical).toBeCloseTo(1.2, 12)
+
+    const missing = calculateStaticDamage({
+      ...input,
+      definitions: definitions([]),
+    })
+    expect(missing.ok).toBe(false)
+    if (!missing.ok)
+      expect(missing.issues).toContainEqual({
+        code: "MISSING_REFERENCE",
+        pointer: "/selections/0/effectId",
+        message: `Unknown selected effect "${effect.effectId}"`,
+        bindingId: "binding:static",
+        effectId: effect.effectId,
+      })
+
+    const unavailable = calculateStaticDamage({
+      ...input,
+      definitions: definitions([
+        { ...effect, config: { kind: "constant", value: false } },
+      ]),
+    })
+    issue(unavailable, "CONTEXT_MISMATCH", "/selections/0")
+  })
+  it.each([
+    "ineligible binding",
+    "unmatched source",
+    "another eligible binding",
+    "continuous contribution",
+    "instant rule",
+  ])("keeps context mismatch for an existing effect: %s", (scenario) => {
+    const effect = factor("damage-bonus", 0.2)
+    let input = inputFor([effect])
+    if (scenario === "ineligible binding")
+      input = {
+        ...input,
+        bindings: input.bindings.map((binding) => ({
+          ...binding,
+          eligible: false,
+        })),
+      }
+    if (scenario === "unmatched source")
+      input = {
+        ...input,
+        bindings: input.bindings.map((binding) => ({
+          ...binding,
+          sourceEntityId: "other-source",
+        })),
+      }
+    if (scenario === "another eligible binding")
+      input = {
+        ...input,
+        bindings: [
+          { ...input.bindings[0]!, eligible: false },
+          {
+            ...input.bindings[0]!,
+            bindingId: "binding:other",
+            holderId: "entity:enemy",
+          },
+        ],
+      }
+    if (scenario === "continuous contribution")
+      input = {
+        ...input,
+        definitions: definitions([
+          {
+            ...effect,
+            activation: { kind: "continuous" },
+          } as ContributionRule,
+        ]),
+      }
+    if (scenario === "instant rule")
+      input = {
+        ...input,
+        definitions: definitions([
+          {
+            kind: "instant",
+            effectId: effect.effectId,
+            source: effect.source,
+            config: effect.config,
+            parameters: {},
+            beneficiary: { kind: "holder" },
+            trigger: {
+              eventKinds: ["energy-spent"],
+              when: { kind: "constant", value: true },
+            },
+            operation: {
+              kind: "resource-generation",
+              resource: "energy",
+              amount: literal("energy-points", 1),
+            },
+          },
+        ]),
+      }
+    expect(
+      ok(calculateStaticDamage({ ...input, selections: [] })).nonCritical,
+    ).toBeGreaterThan(0)
+    const result = calculateStaticDamage(input)
+    expect(result.ok).toBe(false)
+    if (!result.ok)
+      expect(result.issues).toEqual([
+        expect.objectContaining({
+          code: "CONTEXT_MISMATCH",
+          pointer: "/selections/0",
+          effectId: effect.effectId,
+          bindingId: "binding:static",
+        }),
+      ])
+  })
+  it.each([0, -1, 1.5])(
+    "keeps invalid layer precedence over a missing effect: %s",
+    (layers) => {
+      const input = inputFor()
+      const result = calculateStaticDamage({
+        ...input,
+        selections: [
+          {
+            effectId: "environment:static:missing",
+            bindingId: "binding:static",
+            layers,
+          },
+        ],
+      })
+      issue(result, "INVALID_INPUT", "/selections/0/layers")
+      if (!result.ok)
+        expect(
+          result.issues.some((entry) => entry.code === "MISSING_REFERENCE"),
+        ).toBe(false)
+    },
+  )
+  it("validates definitions before classifying a missing selected effect", () => {
+    const input = inputFor()
+    const result = calculateStaticDamage({
+      ...input,
+      definitions: {
+        ...input.definitions,
+        schemaVersion: 2,
+      } as unknown as StaticDamageInput["definitions"],
+      selections: [
+        {
+          effectId: "environment:static:missing",
+          bindingId: "binding:static",
+          layers: 1,
+        },
+      ],
+    })
+    issue(result, "INVALID_DEFINITION", "/schemaVersion")
+    if (!result.ok)
+      expect(
+        result.issues.some((entry) => entry.code === "MISSING_REFERENCE"),
+      ).toBe(false)
+  })
   it("filters by element, damage kind, category, tag and target state", () => {
     const effect = {
       ...factor("damage-bonus", 0.3),

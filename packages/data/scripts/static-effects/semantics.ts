@@ -6,6 +6,7 @@ import type {
   SpecialSkillLevel,
   Unit,
 } from "@randomplay/shared"
+import type { SourceRecordShape } from "./supplements.ts"
 
 /**
  * 本轮新增的来源记录语义登记。只描述对固定来源记录的已核实解释及其证据，
@@ -69,6 +70,15 @@ export const YUZUHA_COMPLETE_STATE_DIFFERENCE_ID =
   "yuzuha-additional-ability-complete-state"
 
 export type SourceSemantics =
+  | {
+      /** 极性紊乱尚无完整结算；隔离三条误入普通紊乱/乱流的来源记录。 */
+      readonly kind: "isolated-polarity-disorder"
+      readonly expectedEncoding: SourceRecordShape
+      readonly expectedSourceBlockNote: string
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
   | {
       /** 固定记录的乘区与块原文及 Nanoka 一致描述矛盾；只覆盖登记身份。 */
       readonly kind: "source-stat-correction"
@@ -1956,7 +1966,91 @@ function yuzuhaPartialState(
   }
 }
 
+export const YANAGI_POLARITY_DIFFERENCE_ID =
+  "yanagi-polarity-disorder-isolation"
+export const YANAGI_POLARITY_EXPLANATION =
+  "柳影画 2 的极性紊乱比例提升与额外突刺、影画 6 的次数上限条款曾被误映射为普通紊乱或乱流倍率增益；完整极性紊乱（原紊乱比例与柳异常精通附加）尚未支持。三个旧选项保留身份与来源，但包括 0 层在内的显式选择均拒绝；请移除这些选择，低层调用也须移除对应旧 effectId，不存在可替换的新极性选项。影画 6 的独立 20% 特殊技增伤继续可用。"
+
+function yanagiPolarityIsolation(
+  rank: 2 | 6,
+  id: string,
+  stat: "disorderBaseMultFactor" | "turbulenceBaseMultFactor",
+  stacked: boolean,
+): SourceSemantics {
+  return {
+    kind: "isolated-polarity-disorder",
+    expectedEncoding: {
+      id,
+      origin: "",
+      scope: "skill",
+      applyTarget: "self",
+      applySituation: "global",
+      applyProfession: null,
+      teamProfession: null,
+      teamProfessionValues: null,
+      teamProfessionMinCount: null,
+      skillCategory: "special",
+      skillSubcategoryId: "all-special-ms0fcqv7",
+      skillTargets: [
+        { category: "special", subcategoryId: "all-special-ms0fcqv7" },
+      ],
+      elementFilter: "all",
+      kind: stacked ? "stacked" : "fixed",
+      stat,
+      value: stacked ? 0 : 5,
+      stackable: false,
+      maxStacks: stacked ? 2 : 1,
+      valuePerStack: stacked ? 15 : 0,
+      defaultStacks: stacked ? 2 : 1,
+      appliesToAnomaly: true,
+      enabledDefault: true,
+      note: "",
+    },
+    expectedSourceBlockNote:
+      rank === 2
+        ? "下落攻击命中处于属性异常状态下的敌人并触发[极性紊乱]效果时，对目标造成的伤害倍率提升至原本[紊乱]效果的20%，每额外发动一次突刺攻击，该伤害倍率额外提升15%，伤害倍率额外提升效果最多触发2次。"
+        : "在[强化特殊技]中发动突刺攻击后，[森罗万象]状态的持续时间提升至30秒，状态持续期间，[强化特殊技]造成的伤害提升20%；\n[卓越适应性]中，[极性紊乱]伤害倍率额外提升效果的触发次数上限提升至4次，前4次额外发动突刺攻击时所需的能量消耗减半。",
+    differenceId: YANAGI_POLARITY_DIFFERENCE_ID,
+    evidence: [
+      {
+        path: "agents/1221/details.zh.json",
+        pointer: `/talent/${rank}/desc`,
+        sha256:
+          "d4ea98a1be0229d2d8014659ec367bac45a0d37410ad11ec42b0b0f2e26fad02",
+      },
+      {
+        path: "agents/1221/details.en.json",
+        pointer: `/talent/${rank}/desc`,
+        sha256:
+          "7d919f7a6b5fadd419fcaf958bc1a4aad23448377f1d38d64c9b71ce84c85e61",
+      },
+    ],
+    verification: YANAGI_POLARITY_EXPLANATION,
+  }
+}
+
 export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
+  "agents/yanagi/mindscape/2/blk-ms4qhaez-8sfxa3/eff-ms4qhaez-6zbkbm":
+    yanagiPolarityIsolation(
+      2,
+      "eff-ms4qhaez-6zbkbm",
+      "disorderBaseMultFactor",
+      false,
+    ),
+  "agents/yanagi/mindscape/2/blk-ms4qhaez-8sfxa3/eff-ms4qkjzo-r424yz":
+    yanagiPolarityIsolation(
+      2,
+      "eff-ms4qkjzo-r424yz",
+      "turbulenceBaseMultFactor",
+      true,
+    ),
+  "agents/yanagi/mindscape/6/blk-ms4qn0z7-6fc8g6/eff-ms4qob0d-mk1bgo":
+    yanagiPolarityIsolation(
+      6,
+      "eff-ms4qob0d-mk1bgo",
+      "disorderBaseMultFactor",
+      true,
+    ),
   "w-engines/Blazing_Laurel/refinement/5/blk-legacy/legacy-team-dmgBonus": {
     kind: "source-stat-correction",
     correctedStat: "critDmg",

@@ -1,3 +1,4 @@
+import { yanagiPolarityConsumerSource } from "./fixtures/yanagi-polarity-consumer.ts"
 import {
   lucyGuardBoarConsumerSource,
   lucyGuardBoarConsumerTypes,
@@ -467,6 +468,8 @@ ${astraYaoM4ConsumerSource}
 await verifyAstraYaoM4Consumer(api, await import("@randomplay/core"))
 ${lucyGuardBoarConsumerSource}
 await verifyLucyGuardBoarConsumer(api, await import("@randomplay/core"))
+${yanagiPolarityConsumerSource}
+await verifyYanagiPolarityConsumer(api, await import("@randomplay/core"))
 ${veilConsumerSource}
 await verifyVeilConsumer(api, calculateStaticActionDamage)
 // 维琳娜微域气旋：安装包根入口解析并计算具名直伤约定。期望值独立于实现：

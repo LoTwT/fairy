@@ -1,4 +1,5 @@
 import { lucyGuardBoarConsumerSource } from "./fixtures/lucy-guard-boar-consumer.ts"
+import { yanagiPolarityConsumerSource } from "./fixtures/yanagi-polarity-consumer.ts"
 import { aliceCorePeriodicConsumerSource } from "./fixtures/alice-core-periodic-consumer.ts"
 import { veilConsumerSource } from "./fixtures/veil-consumer.ts"
 import {
@@ -120,6 +121,8 @@ ${aliceCorePeriodicConsumerSource}
 globalThis.fairyAliceCorePeriodic = async () => verifyAliceCorePeriodicConsumer(api, await import("@randomplay/core"))
 ${lucyGuardBoarConsumerSource}
 globalThis.fairyLucyGuardBoar = async () => verifyLucyGuardBoarConsumer(api, await import("@randomplay/core"))
+${yanagiPolarityConsumerSource}
+globalThis.fairyYanagiPolarity = async () => verifyYanagiPolarityConsumer(api, await import("@randomplay/core"))
 ${astraYaoM4ConsumerSource}
 globalThis.fairyAstraYaoM4 = async () => verifyAstraYaoM4Consumer(api, await import("@randomplay/core"))
 ${veilConsumerSource}
@@ -1007,6 +1010,20 @@ function defineScenarios(counts: {
             "definitions/effects/static.json",
             "definitions/effects/static-catalog.json",
           ],
+        },
+        {
+          name: "yanagi-polarity-legacy-isolation",
+          act: async (page) => {
+            const results = await page.evaluate(() =>
+              (globalThis as any).fairyYanagiPolarity(),
+            )
+            expect(results).toHaveLength(3)
+            for (const result of results)
+              expect(result).toMatchObject({
+                nonCritical: 4000,
+                rejectedLayers: [0, 1],
+              })
+          },
         },
         {
           name: "lucy-guard-boar-inheritance-and-one-m6-event",

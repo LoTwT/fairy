@@ -564,6 +564,19 @@ export function evaluateStaticDamage(
   const instances: EffectInstance[] = []
   for (const [index, selection] of selections.entries()) {
     const pointer = `/selections/${index}`
+    if (
+      !internal.ruleSet.effects.some(
+        (effect) => effect.effectId === selection.effectId,
+      )
+    ) {
+      collector.report(
+        "MISSING_REFERENCE",
+        `${pointer}/effectId`,
+        `Unknown selected effect "${selection.effectId}"`,
+        { bindingId: selection.bindingId, effectId: selection.effectId },
+      )
+      continue
+    }
     const entry = internal.contributions.find(
       (candidate) =>
         candidate.bindingId === selection.bindingId &&
