@@ -1,3 +1,4 @@
+import { hugoAttackConsumerSource } from "./fixtures/hugo-stun-teammates-consumer.ts"
 import { lucyGuardBoarConsumerSource } from "./fixtures/lucy-guard-boar-consumer.ts"
 import { yanagiPolarityConsumerSource } from "./fixtures/yanagi-polarity-consumer.ts"
 import { aliceCorePeriodicConsumerSource } from "./fixtures/alice-core-periodic-consumer.ts"
@@ -121,6 +122,8 @@ ${aliceCorePeriodicConsumerSource}
 globalThis.fairyAliceCorePeriodic = async () => verifyAliceCorePeriodicConsumer(api, await import("@randomplay/core"))
 ${lucyGuardBoarConsumerSource}
 globalThis.fairyLucyGuardBoar = async () => verifyLucyGuardBoarConsumer(api, await import("@randomplay/core"))
+${hugoAttackConsumerSource}
+globalThis.fairyHugoAttack = async () => verifyHugoAttackConsumer(api, await import("@randomplay/core"))
 ${yanagiPolarityConsumerSource}
 globalThis.fairyYanagiPolarity = async () => verifyYanagiPolarityConsumer(api, await import("@randomplay/core"))
 ${astraYaoM4ConsumerSource}
@@ -1010,6 +1013,19 @@ function defineScenarios(counts: {
             "definitions/effects/static.json",
             "definitions/effects/static-catalog.json",
           ],
+        },
+        {
+          name: "hugo-other-stun-teammate-count",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyHugoAttack(),
+            )
+            expect(result).toEqual({
+              nonCritical: 3800,
+              closed: 2000,
+              rejectedOldThree: true,
+            })
+          },
         },
         {
           name: "yanagi-polarity-legacy-isolation",

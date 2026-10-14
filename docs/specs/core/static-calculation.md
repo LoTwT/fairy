@@ -335,6 +335,9 @@ agent 来源绑定支持可选的 `potentialLevel`（整数域 0—6），含义
 
 ### 激活上下文与同队受益者选择
 
+雨果攻击选项的层数表示调用方声明的其他击破队友人数，七核心档、旧层数迁移及
+目录与低层输入的职责见[雨果人数语义](../data/zzz-hp-static-effects.md#修订-37雨果其他击破队友人数与七核心档)。
+
 目录与完整动作的每个 selection 都可携带 `trigger?: TriggerContext`，原样透传至
 低层 supplied 选择；不会按当前目标或时刻补造入场事件。`snapshots` 和 `atSeconds`
 仍由调用方提供，trigger 与同队受益者声明互相独立。叶瞬光帷幕选择要求入场敌人

@@ -249,7 +249,7 @@ function m6Input(
 
 describe("batch 08 M6 independent follow-ups", () => {
   it("registers the three targets, requirements, and rules under revision 23", () => {
-    expect(catalog.revision).toBe("36")
+    expect(catalog.revision).toBe("37")
     const expectedTargets: readonly (readonly [
       targetId: string,
       category: string,

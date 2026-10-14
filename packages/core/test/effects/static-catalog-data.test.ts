@@ -1209,6 +1209,12 @@ describe("fixed-source catalog conformance", () => {
             batch03CorrectedPointers.has(r.pointer) ||
             batch08CorrectedPointers.has(r.pointer) ||
             batch09CorrectedPointers.has(r.pointer) ||
+            // 雨果人数迁移转为 corrected；原 core7 一人样本继续执行全部数值断言。
+            (r.catalogEntityId === "agents:hugo" &&
+              r.rankKind === "mindscape" &&
+              r.rank === 0 &&
+              r.optionId ===
+                "agents:hugo:mindscape:0:blk-legacy:legacy-self-atk") ||
             r.pointer ===
               "/wengines/60/refinementBuffs/4/effectBlocks/0/effects/0",
         )
@@ -1243,6 +1249,21 @@ describe("fixed-source catalog conformance", () => {
         definitions,
         catalog,
       } as unknown as StaticCatalogDamageInput
+      if (
+        input.selections[0]?.optionId ===
+        "agents:hugo:mindscape:0:blk-legacy:legacy-self-atk"
+      ) {
+        expect(input.selections).toHaveLength(1)
+        expect(input.selections[0]!.layers).toBe(1)
+        expect(input.bindings[0]).toMatchObject({
+          kind: "agent",
+          sourceEntityId: "1291",
+          configuration: { mindscapeRank: 0, coreSkillLevel: 7 },
+        })
+        expect(vector.effectIds).toEqual([
+          "agent:1291:zzz-hp:legacy-self-atk:blk-legacy:mindscape:0",
+        ])
+      }
       // 三个精确来源身份迁移为隔离断言；不加入通用 skip，不改 oracle 原件。
       const polarityMigration = yanagiPolarityMigrations.find(
         (migration) =>
@@ -2019,7 +2040,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("36")
+    expect(catalog.revision).toBe("37")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,

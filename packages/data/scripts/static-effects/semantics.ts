@@ -69,7 +69,21 @@ export const YUZUHA_COMPLETE_STATE_OPTION_ID =
 export const YUZUHA_COMPLETE_STATE_DIFFERENCE_ID =
   "yuzuha-additional-ability-complete-state"
 
+export const HUGO_ATTACK_SOURCE_KEY =
+  "agents/hugo/mindscape/0/blk-legacy/legacy-self-atk"
+export const HUGO_ATTACK_COUNT_DIFFERENCE_ID = "hugo-other-stun-teammate-count"
+export const HUGO_ATTACK_COUNT_DESCRIPTION =
+  "调用方声明其他击破队友人数：0 关闭，1/2 人分别获得对应核心档的一倍/三倍固定攻击力；不自动计数，不要求失衡或暗渊回响。旧 3 层须迁移为新 2 人；核心 7 的旧 2 层 +600 改为二人 +900，一人仍 +300。"
+
 export type SourceSemantics =
+  | (Omit<CoreSkillLevelSemantics, "kind"> & {
+      readonly kind: "hugo-stun-teammate-count"
+      readonly expectedRaw: SourceRecordShape
+      readonly expectedNormalized: SourceRecordShape
+      readonly expectedSourceBlockNote: string
+      readonly layerCountInputName: string
+      readonly differenceId: string
+    })
   | {
       /** 极性紊乱尚无完整结算；隔离三条误入普通紊乱/乱流的来源记录。 */
       readonly kind: "isolated-polarity-disorder"
@@ -2030,6 +2044,165 @@ function yanagiPolarityIsolation(
 }
 
 export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
+  [HUGO_ATTACK_SOURCE_KEY]: {
+    kind: "hugo-stun-teammate-count",
+    baseEvidenceKey: "hugo:blk-legacy:mindscape:0:legacy-self-atk",
+    formula: {
+      kind: "amount",
+    },
+    expectedRaw: {
+      id: "legacy-self-atk",
+      origin: "",
+      scope: "general",
+      applyTarget: "self",
+      applySituation: "global",
+      applyProfession: null,
+      teamProfession: null,
+      teamProfessionValues: null,
+      teamProfessionMinCount: null,
+      skillSubcategoryId: null,
+      elementFilter: "all",
+      kind: "stacked",
+      stat: "atk",
+      value: 0,
+      stackable: false,
+      maxStacks: 3,
+      valuePerStack: 300,
+      defaultStacks: 3,
+      convert: {
+        from: "atk",
+        panelSource: "external",
+        ratioPercent: 0,
+        cap: null,
+        defaultBase: null,
+        initialBase: 0,
+      },
+      enabledDefault: true,
+      note: "",
+    },
+    expectedNormalized: {
+      id: "legacy-self-atk",
+      origin: "",
+      scope: "general",
+      applyTarget: "self",
+      applySituation: "global",
+      applyProfession: null,
+      teamProfession: null,
+      teamProfessionValues: null,
+      teamProfessionMinCount: null,
+      skillSubcategoryId: null,
+      elementFilter: "all",
+      kind: "stacked",
+      stat: "atk",
+      value: 0,
+      stackable: false,
+      maxStacks: 3,
+      valuePerStack: 300,
+      defaultStacks: 3,
+      convert: {
+        from: "atk",
+        panelSource: "external",
+        ratioPercent: 0,
+        cap: null,
+        defaultBase: null,
+        initialBase: 0,
+      },
+      enabledDefault: true,
+      note: "",
+    },
+    expectedSourceBlockNote:
+      "[连携技：命运戏法]命中敌人或雨果的攻击使敌人失衡时，雨果获得[暗渊回响]状态，持续6秒，重复触发时刷新持续时间，该状态下雨果的暴击率提升12%，暴击伤害提升25%；\n队伍中存在其他1/2名[击破]角色时，雨果的攻击力提升300/900点；\n[强化特殊技：魂狩·惩戒]或[终结技：渎神者]的终结一击命中敌人时，若敌人处于失衡状态，会对其触发[决算]效果，使得招式的终结一击伤害倍率提升1000%，此外[决算]效果会根据触发时敌人剩余的失衡时间，使得该招式伤害倍率进一步提升：敌人失衡时间小于等于5秒的部分，每剩余1秒，招式伤害倍率提升280%，5秒到15秒的部分，每剩余1秒，招式伤害倍率提升100%，总共最多可以提升3400%的招式伤害倍率；",
+    layerCountInputName: "hugo:other-stun-teammates",
+    differenceId: "hugo-other-stun-teammate-count",
+    evidence: [
+      {
+        path: "agents/1291/details.zh.json",
+        pointer: "/passive/level/1291501/desc/0",
+        sha256:
+          "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2",
+      },
+      {
+        path: "agents/1291/details.en.json",
+        pointer: "/passive/level/1291501/desc/0",
+        sha256:
+          "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b",
+      },
+      {
+        path: "agents/1291/details.zh.json",
+        pointer: "/passive/level/1291502/desc/0",
+        sha256:
+          "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2",
+      },
+      {
+        path: "agents/1291/details.en.json",
+        pointer: "/passive/level/1291502/desc/0",
+        sha256:
+          "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b",
+      },
+      {
+        path: "agents/1291/details.zh.json",
+        pointer: "/passive/level/1291503/desc/0",
+        sha256:
+          "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2",
+      },
+      {
+        path: "agents/1291/details.en.json",
+        pointer: "/passive/level/1291503/desc/0",
+        sha256:
+          "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b",
+      },
+      {
+        path: "agents/1291/details.zh.json",
+        pointer: "/passive/level/1291504/desc/0",
+        sha256:
+          "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2",
+      },
+      {
+        path: "agents/1291/details.en.json",
+        pointer: "/passive/level/1291504/desc/0",
+        sha256:
+          "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b",
+      },
+      {
+        path: "agents/1291/details.zh.json",
+        pointer: "/passive/level/1291505/desc/0",
+        sha256:
+          "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2",
+      },
+      {
+        path: "agents/1291/details.en.json",
+        pointer: "/passive/level/1291505/desc/0",
+        sha256:
+          "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b",
+      },
+      {
+        path: "agents/1291/details.zh.json",
+        pointer: "/passive/level/1291506/desc/0",
+        sha256:
+          "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2",
+      },
+      {
+        path: "agents/1291/details.en.json",
+        pointer: "/passive/level/1291506/desc/0",
+        sha256:
+          "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b",
+      },
+      {
+        path: "agents/1291/details.zh.json",
+        pointer: "/passive/level/1291507/desc/0",
+        sha256:
+          "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2",
+      },
+      {
+        path: "agents/1291/details.en.json",
+        pointer: "/passive/level/1291507/desc/0",
+        sha256:
+          "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b",
+      },
+    ],
+    verification:
+      "固定来源块说明与 Nanoka 中英文七档均明确一人/二人值；将旧倍率单位层数迁移为其他击破队友人数，二人仅贡献一次三倍固定 ATK，不改变同块其他条款。",
+  },
   "agents/yanagi/mindscape/2/blk-ms4qhaez-8sfxa3/eff-ms4qhaez-6zbkbm":
     yanagiPolarityIsolation(
       2,
