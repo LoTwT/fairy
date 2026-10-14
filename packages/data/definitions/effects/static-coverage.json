@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "35",
+  "revision": "36",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -17402,10 +17402,10 @@
       "rankKind": "mindscape",
       "stat": "disorderBaseMultFactor",
       "optionId": "agents:yanagi:mindscape:2:blk-ms4qhaez-8sfxa3:eff-ms4qhaez-6zbkbm",
-      "effectIds": [
-        "agent:1221:zzz-hp:eff-ms4qhaez-6zbkbm:blk-ms4qhaez-8sfxa3:mindscape:2"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "柳影画 2 的极性紊乱比例提升与额外突刺、影画 6 的次数上限条款曾被误映射为普通紊乱或乱流倍率增益；完整极性紊乱（原紊乱比例与柳异常精通附加）尚未支持。三个旧选项保留身份与来源，但包括 0 层在内的显式选择均拒绝；请移除这些选择，低层调用也须移除对应旧 effectId，不存在可替换的新极性选项。影画 6 的独立 20% 特殊技增伤继续可用。",
       "normalizationChanges": [],
       "rawValue": 5,
       "normalizedValue": 5
@@ -17417,10 +17417,10 @@
       "rankKind": "mindscape",
       "stat": "turbulenceBaseMultFactor",
       "optionId": "agents:yanagi:mindscape:2:blk-ms4qhaez-8sfxa3:eff-ms4qkjzo-r424yz",
-      "effectIds": [
-        "agent:1221:zzz-hp:eff-ms4qkjzo-r424yz:blk-ms4qhaez-8sfxa3:mindscape:2"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "柳影画 2 的极性紊乱比例提升与额外突刺、影画 6 的次数上限条款曾被误映射为普通紊乱或乱流倍率增益；完整极性紊乱（原紊乱比例与柳异常精通附加）尚未支持。三个旧选项保留身份与来源，但包括 0 层在内的显式选择均拒绝；请移除这些选择，低层调用也须移除对应旧 effectId，不存在可替换的新极性选项。影画 6 的独立 20% 特殊技增伤继续可用。",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -17462,10 +17462,10 @@
       "rankKind": "mindscape",
       "stat": "disorderBaseMultFactor",
       "optionId": "agents:yanagi:mindscape:6:blk-ms4qn0z7-6fc8g6:eff-ms4qob0d-mk1bgo",
-      "effectIds": [
-        "agent:1221:zzz-hp:eff-ms4qob0d-mk1bgo:blk-ms4qn0z7-6fc8g6:mindscape:6"
-      ],
-      "status": "converted",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "柳影画 2 的极性紊乱比例提升与额外突刺、影画 6 的次数上限条款曾被误映射为普通紊乱或乱流倍率增益；完整极性紊乱（原紊乱比例与柳异常精通附加）尚未支持。三个旧选项保留身份与来源，但包括 0 层在内的显式选择均拒绝；请移除这些选择，低层调用也须移除对应旧 effectId，不存在可替换的新极性选项。影画 6 的独立 20% 特殊技增伤继续可用。",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -31170,11 +31170,11 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 886,
+    "rules": 883,
     "options": 916,
-    "converted": 1134,
+    "converted": 1131,
     "corrected": 138,
-    "unsupported": 18,
+    "unsupported": 21,
     "supplements": {
       "records": 88,
       "rules": 59,

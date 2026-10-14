@@ -48,6 +48,12 @@ describe("static effects evidence path", () => {
   it("verifies the registered complete state option evidence through the generator entry", async () => {
     const verified = await verifyStaticEffectsEvidence(verifiedPublication)
     expect(verified).toContain(label)
+    for (const identity of [
+      "agents/yanagi/mindscape/2/blk-ms4qhaez-8sfxa3/eff-ms4qhaez-6zbkbm",
+      "agents/yanagi/mindscape/2/blk-ms4qhaez-8sfxa3/eff-ms4qkjzo-r424yz",
+      "agents/yanagi/mindscape/6/blk-ms4qn0z7-6fc8g6/eff-ms4qob0d-mk1bgo",
+    ])
+      expect(verified).toContain(`semantics:${identity}`)
     expect(verified).toContain(
       "semantics:w-engines/Blazing_Laurel/refinement/5/blk-legacy/legacy-team-dmgBonus",
     )

@@ -349,8 +349,8 @@ PR4 跳过此项实现，仅记录为已知限制。当前[卢西娅动作定义
 
 ### 已知限制：月城柳极性紊乱
 
-PR5 按 ZZZ-HP 已有实现范围处理；固定上游未实现完整极性紊乱，本次跳过动作适配，仅记录限制，
-不继续独立补证或自行补公式。当前[月城柳动作定义](../../../packages/data/definitions/skills/agents/1221.json)中，
+固定上游未实现完整极性紊乱，当前不提供该机制的动作适配。
+当前[月城柳动作定义](../../../packages/data/definitions/skills/agents/1221.json)中，
 以下两条仍为 `unavailable`，原因均为 `special-mechanic` 与 `unsupported-expression`：
 
 - `action:agent:1221:action:0018`：终结技：雷影天华的额外附加伤害倍率，等级类别为 `chain`。
@@ -360,13 +360,13 @@ PR5 按 ZZZ-HP 已有实现范围处理；固定上游未实现完整极性紊�
 下落攻击 `action:agent:1221:action:0023` 仍只计算已接入的攻击力倍率，不自动追加极性紊乱。
 两条附加行只描述柳异常精通对应的系数，不能当普通攻击力倍率、完整极性紊乱或零贡献使用。
 
-证据来自 Nanoka 3.1 的 `agents/1221/details.zh.json` 与 `details.en.json`，两种语言的 Pointer 一致：
+证据来自 Nanoka 3.2 的 `agents/1221/details.zh.json` 与 `details.en.json`，两种语言的 Pointer 一致：
 `/skill/chain/description/1/desc` 与 `/skill/special/description/1/desc` 分别说明终结落雷和强化特殊技下落
 命中已有属性异常的敌人时，造成原紊乱的 15% 加柳异常精通附加伤害，且不清除原异常。
 附加倍率行分别为 `/skill/chain/description/3/param/2` 的 `{CAL:5+AvatarSkillLevel(3)*2.25,100,2}%`，
 以及 `/skill/special/description/3/param/5` 的 `{CAL:5+AvatarSkillLevel(1)*2.25,100,2}%`，均没有技能参数 ID。
-中文文件 SHA-256 为 `fcdad70a359337a79ffeb884e5b17818e03a65f92796557f86511a339c4b4a09`，
-英文为 `8d76612586adf147ce31024e5ecf85e9599fe746392d37ea03710996e617c917`。
+中文文件 SHA-256 为 `d4ea98a1be0229d2d8014659ec367bac45a0d37410ad11ec42b0b0f2e26fad02`，
+英文为 `7d919f7a6b5fadd419fcaf958bc1a4aad23448377f1d38d64c9b71ce84c85e61`。
 
 固定 ZZZ-HP 技能来源 `0df40c5b` 与增益来源 `fac62407` 均未实现这份精通附加结算。
 资源 `zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json` 的
@@ -378,18 +378,22 @@ PR5 按 ZZZ-HP 已有实现范围处理；固定上游未实现完整极性紊�
 补查上游提交 [`0fcd8a1`](https://github.com/Nie7bai/ZZZ-HP/blob/0fcd8a1fb70cc9dbe5c3423f4015f85ca8faa5ba/zzz-hp/src/utils/damageCalc.ts#L832)
 仍未补齐该附加项；此补查不升级项目固定来源。
 
-另保留影画二的来源字段冲突：同一资源的 `/agents/28/mindscapeBuffs/2/effectBlocks/0/effects/1`
+影画二还存在来源字段冲突：同一资源的 `/agents/28/mindscapeBuffs/2/effectBlocks/0/effects/1`
 （`eff-ms4qkjzo-r424yz`）将每次额外突刺的 15 个百分点登记为 `turbulenceBaseMultFactor`（乱流）。
 Nanoka `/talent/2/desc` 明确指向强化特殊技的极性紊乱：比例变为 20%，额外突刺每次增加 15 个百分点，最多两次；
-`/talent/6/desc` 将该次数上限提升为四次。此冲突仅登记，既有增益映射与覆盖状态本次不修正，
-不能把已有倍率增益条目的接入视为完整极性紊乱已受支持。
+`/talent/6/desc` 将该次数上限提升为四次，不能当作独立再加一份。
+effects [修订 36](zzz-hp-static-effects.md#修订-36柳极性紊乱旧映射隔离)已隔离这条记录、
+同块的 5 个百分点记录与影画六的额外次数记录：保留原 optionId 和来源，标记
+`unsupported` / `semantic-conflict`，移除三条可执行规则。显式选择包括 0 层均拒绝，
+合法正层的低层旧 effectId 返回缺失引用；调用方须移除旧选择。把乱流字段简单改成紊乱仍会污染普通紊乱，
+不能替代完整极性公式。M6 独立 20% 特殊技增伤与其他既有条款继续按原义计算。
 
 后续重启须先有覆盖完整结算的可追溯上游实现和独立预期值，或另行决定补充机制资料与受控实测。
 届时须确认 CAL 格式单位与两类技能最终等级、原异常来源与快照、柳精通读取时点、两部分的目标与属性
 绑定、适用乘区、剩余时间、取整及影画层数。若开放，目标是一次返回原紊乱比例部分与精通附加部分，
 普通直伤仍由主动作独立计算；须明确动作与 effects 的贡献归属，避免重复计入，不能用任意最终伤害数字
 绕过来源绑定，也不自动模拟异常清除或战斗流程。上述是重启条件，尚不是公共计算契约。
-本次不改变动作状态、增益规则、生成制品、manifest 或覆盖统计。
+上述隔离保持动作状态与技能倍率；技能 manifest 仅联动实际静态目录摘要。
 
 ## 潜能等级与条件身份
 

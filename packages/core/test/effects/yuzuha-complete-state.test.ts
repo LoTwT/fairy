@@ -449,8 +449,10 @@ describe("Yuzuha additional ability complete state", () => {
         expect(
           lowLevel.issues.some(
             (issue) =>
-              issue.code === "CONTEXT_MISMATCH" &&
-              issue.pointer === "/selections/2",
+              issue.code === "MISSING_REFERENCE" &&
+              issue.pointer === "/selections/2/effectId" &&
+              issue.effectId === effectId &&
+              issue.bindingId === "binding:static",
           ),
         ).toBe(true)
     }

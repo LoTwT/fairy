@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "35",
+  "revision": "36",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -21124,7 +21124,7 @@
           "configuration": {
             "minimumMindscape": 2
           },
-          "status": "converted",
+          "status": "unsupported",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -21132,15 +21132,29 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/28/mindscapeBuffs/2/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1221/details.zh.json",
+              "pointer": "/talent/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1221/details.en.json",
+              "pointer": "/talent/2/desc"
             }
           ],
-          "effectIds": [
-            "agent:1221:zzz-hp:eff-ms4qhaez-6zbkbm:blk-ms4qhaez-8sfxa3:mindscape:2"
-          ],
+          "effectIds": [],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
-          "applicability": {}
+          "differences": ["yanagi-polarity-disorder-isolation"],
+          "applicability": {},
+          "reason": "semantic-conflict",
+          "explanation": "柳影画 2 的极性紊乱比例提升与额外突刺、影画 6 的次数上限条款曾被误映射为普通紊乱或乱流倍率增益；完整极性紊乱（原紊乱比例与柳异常精通附加）尚未支持。三个旧选项保留身份与来源，但包括 0 层在内的显式选择均拒绝；请移除这些选择，低层调用也须移除对应旧 effectId，不存在可替换的新极性选项。影画 6 的独立 20% 特殊技增伤继续可用。"
         }
       ]
     },
@@ -21155,7 +21169,7 @@
           "configuration": {
             "minimumMindscape": 2
           },
-          "status": "converted",
+          "status": "unsupported",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -21163,15 +21177,29 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/28/mindscapeBuffs/2/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1221/details.zh.json",
+              "pointer": "/talent/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1221/details.en.json",
+              "pointer": "/talent/2/desc"
             }
           ],
-          "effectIds": [
-            "agent:1221:zzz-hp:eff-ms4qkjzo-r424yz:blk-ms4qhaez-8sfxa3:mindscape:2"
-          ],
+          "effectIds": [],
           "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
-          "applicability": {}
+          "differences": ["yanagi-polarity-disorder-isolation"],
+          "applicability": {},
+          "reason": "semantic-conflict",
+          "explanation": "柳影画 2 的极性紊乱比例提升与额外突刺、影画 6 的次数上限条款曾被误映射为普通紊乱或乱流倍率增益；完整极性紊乱（原紊乱比例与柳异常精通附加）尚未支持。三个旧选项保留身份与来源，但包括 0 层在内的显式选择均拒绝；请移除这些选择，低层调用也须移除对应旧 effectId，不存在可替换的新极性选项。影画 6 的独立 20% 特殊技增伤继续可用。"
         }
       ]
     },
@@ -21248,7 +21276,7 @@
           "configuration": {
             "minimumMindscape": 6
           },
-          "status": "converted",
+          "status": "unsupported",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -21256,15 +21284,29 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/28/mindscapeBuffs/6/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1221/details.zh.json",
+              "pointer": "/talent/6/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1221/details.en.json",
+              "pointer": "/talent/6/desc"
             }
           ],
-          "effectIds": [
-            "agent:1221:zzz-hp:eff-ms4qob0d-mk1bgo:blk-ms4qn0z7-6fc8g6:mindscape:6"
-          ],
+          "effectIds": [],
           "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
-          "applicability": {}
+          "differences": ["yanagi-polarity-disorder-isolation"],
+          "applicability": {},
+          "reason": "semantic-conflict",
+          "explanation": "柳影画 2 的极性紊乱比例提升与额外突刺、影画 6 的次数上限条款曾被误映射为普通紊乱或乱流倍率增益；完整极性紊乱（原紊乱比例与柳异常精通附加）尚未支持。三个旧选项保留身份与来源，但包括 0 层在内的显式选择均拒绝；请移除这些选择，低层调用也须移除对应旧 effectId，不存在可替换的新极性选项。影画 6 的独立 20% 特殊技增伤继续可用。"
         }
       ]
     },
@@ -52184,6 +52226,33 @@
     }
   ],
   "differences": [
+    {
+      "differenceId": "yanagi-polarity-disorder-isolation",
+      "explanation": "柳影画 2 的极性紊乱比例提升与额外突刺、影画 6 的次数上限条款曾被误映射为普通紊乱或乱流倍率增益；完整极性紊乱（原紊乱比例与柳异常精通附加）尚未支持。三个旧选项保留身份与来源，但包括 0 层在内的显式选择均拒绝；请移除这些选择，低层调用也须移除对应旧 effectId，不存在可替换的新极性选项。影画 6 的独立 20% 特殊技增伤继续可用。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/28/mindscapeBuffs/2/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/28/mindscapeBuffs/2/effectBlocks/0/effects/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/28/mindscapeBuffs/6/effectBlocks/0/effects/1"
+        }
+      ]
+    },
     {
       "differenceId": "blazing-laurel-r5-wilt-critical-damage",
       "explanation": "固定来源 fac62407 的焰心桂冠 R5 萎靡记录误写 stat=dmgBonus，但所属块 note 与 Nanoka 3.2 中英文 /talents/5/desc 一致写明冰、火伤害的暴击伤害每层提升 2.4%，最多 20 层；五档原文均为暴伤，R1—4 已编码为 critDmg。仅该完整来源身份改用 critDmg 映射（criticalDamage direct 加数），保留 2.4%、20 层、团队与既有受益角色元素筛选、击破装备适配及公开 option/effect ID；历史 ID 中的 dmgBonus 保留作兼容身份，不再表示落点。来源 stat 与 Pointer 保留在覆盖报告，R5 标记 corrected，R1—4 的 1.5/1.72/1.95/2.17 数值不改。普通攻击只是施加萎靡的触发；有效状态与层数仍由调用方显式声明，30 秒、刷新及全队唯一不新增通用模拟。此为按一致描述纠错，未作游戏实测或混合元素命中契约扩展。",
