@@ -395,6 +395,7 @@ export type StaticDamageParameters = StaticDamageCommon &
   )
 
 export interface StaticDamageInput {
+  readonly mechanism?: never
   readonly definitions: RuleSet
   readonly bindings: readonly SourceBinding[]
   /** 未选择的 supplied 效果关闭；continuous 规则仍由配置条件控制。 */
@@ -405,6 +406,98 @@ export interface StaticDamageInput {
   readonly inputs?: readonly EffectNumericInput[]
   readonly snapshots?: readonly SavedSnapshot[]
   readonly atSeconds?: number
+}
+
+/** 调用方声明的原强击实际结果；snapshot 只见证历史身份与时点。 */
+export interface OriginalPhysicalAnomalyFact {
+  readonly eventId: EventId
+  readonly snapshotId: SnapshotId
+  readonly sourceActorId: EntityId
+  readonly targetId: EntityId
+  readonly kind: "assault"
+  readonly element: "physical"
+  readonly isAnomalyCritical: boolean
+  readonly settledDamage: {
+    readonly unit: "damage-points"
+    readonly value: number
+  }
+}
+
+export interface AliceCorePeriodicEvent {
+  readonly eventId: EventId
+  readonly actorId: EntityId
+  readonly targetId: EntityId
+  readonly sourceBindingId: BindingId
+  readonly originalAnomalyEventId: EventId
+  readonly originalAnomalySnapshotId: SnapshotId
+  readonly originalAnomalyActive: true
+}
+
+/** 一个已声明发生的周期事件，不接受普通命中、乘区或面板读数。 */
+export interface AliceCorePeriodicDamageInput {
+  readonly hit?: never
+  readonly damage?: never
+  readonly damageItems?: never
+  readonly inputs?: never
+  readonly declaredCriticalRate?: never
+  readonly attributeSources?: never
+  readonly mechanism: "alice-core-periodic-damage"
+  readonly definitions: RuleSet
+  readonly bindings: readonly SourceBinding[]
+  readonly selections: readonly {
+    readonly effectId: EffectId
+    readonly bindingId: BindingId
+    readonly layers: 0 | 1
+  }[]
+  readonly world: WorldObservation
+  readonly snapshots: readonly SavedSnapshot[]
+  readonly atSeconds: number
+  readonly event: AliceCorePeriodicEvent
+  readonly originalAnomalies: readonly OriginalPhysicalAnomalyFact[]
+}
+
+export interface AliceCorePeriodicCatalogInput extends Omit<
+  AliceCorePeriodicDamageInput,
+  "selections"
+> {
+  readonly catalog: StaticEffectCatalog
+  readonly actorSources: StaticCatalogDamageInput["actorSources"]
+  readonly selections: readonly {
+    readonly optionId: string
+    readonly bindingId: BindingId
+    readonly layers: 0 | 1
+  }[]
+}
+
+export interface AliceCorePeriodicDamageResult {
+  readonly mechanism: "alice-core-periodic-damage"
+  readonly status: "applied" | "inactive"
+  /** 本事件无再次暴击分支；原值本身可以已发生异常暴击。 */
+  readonly nonCritical: number
+  readonly critical: null
+  readonly criticalRate: 0
+  readonly criticalSemantics: "no-critical-settlement"
+  readonly expected: number
+  readonly factors: {
+    readonly originalSettledDamage: number
+    readonly effectivePeriodicRatio: number
+  }
+  readonly provenance: {
+    readonly event: AliceCorePeriodicEvent
+    readonly holderId: EntityId
+    readonly bindingId: BindingId
+    readonly effectId: EffectId
+    readonly originalAnomaly: OriginalPhysicalAnomalyFact
+    readonly effectivePeriodicRatio: number
+  }
+  readonly contributions: readonly {
+    readonly effectId: EffectId
+    readonly bindingId: BindingId
+    readonly holderId: EntityId
+    readonly eventId: EventId
+    readonly originalAnomalyEventId: EventId
+    readonly ratio: { readonly unit: "ratio"; readonly value: number }
+  }[]
 }
 
 /**
@@ -634,7 +727,13 @@ export interface TransitionResult {
 
 /** 公开纯函数接口；全部实现由包入口导出。 */
 export interface EffectEngine {
+  calculateStaticDamage(
+    input: AliceCorePeriodicDamageInput,
+  ): Result<AliceCorePeriodicDamageResult>
   calculateStaticDamage(input: StaticDamageInput): Result<StaticDamageResult>
+  calculateStaticDamageFromCatalog(
+    input: AliceCorePeriodicCatalogInput,
+  ): Result<AliceCorePeriodicDamageResult>
   calculateStaticDamageFromCatalog(
     input: StaticCatalogDamageInput,
   ): Result<StaticDamageResult>
@@ -771,6 +870,7 @@ export type StaticCatalogDamageParameters =
     : never
 
 export interface StaticCatalogDamageInput {
+  readonly mechanism?: never
   readonly definitions: RuleSet
   readonly catalog: StaticEffectCatalog
   readonly bindings: readonly SourceBinding[]

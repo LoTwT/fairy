@@ -3,6 +3,7 @@ import type {
   Condition,
   ContributionOperation,
   ContributionRule,
+  AliceCorePeriodicRule,
   CoreSkillLevel,
   PotentialLevel,
   DamageElement,
@@ -3783,9 +3784,10 @@ export function convertSource(
     ) {
       const rules = variants.map(
         (v) =>
-          effects.find(
-            (e) => e.effectId === v.effectIds[0],
-          ) as ContributionRule,
+          effects.find((e) => e.effectId === v.effectIds[0]) as Exclude<
+            ContributionRule,
+            AliceCorePeriodicRule
+          >,
       )
       const structure = (rule: ContributionRule) =>
         JSON.stringify({
@@ -4472,7 +4474,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "32",
+    revision: "33",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -4535,7 +4537,30 @@ export function convertSource(
     skillTargets: skillTargets.toSorted((a, b) =>
       a.targetId.localeCompare(b.targetId),
     ),
-    mechanisms: [remielleMechanism],
+    mechanisms: [
+      remielleMechanism,
+      ...effects.flatMap((rule) => {
+        if (
+          rule.kind !== "contribution" ||
+          rule.operation.kind !== "alice-core-periodic-damage"
+        )
+          return []
+        const option = options.find((o) =>
+          o.variants.some((v) => v.effectIds.includes(rule.effectId)),
+        )
+        if (!option)
+          throw new Error("Alice periodic rule is missing its catalog option")
+        return [
+          {
+            mechanism: "alice-core-periodic-damage" as const,
+            agentEntityId: "1401" as const,
+            optionId: option.optionId,
+            effectId: rule.effectId,
+            references: rule.source.references,
+          },
+        ]
+      }),
+    ],
     differences: [
       ...Object.values(SOURCE_SEMANTICS)
         .filter((entry) => entry.kind === "source-stat-correction")

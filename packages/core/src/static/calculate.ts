@@ -5,6 +5,7 @@ import {
   STAT_UNIT_MAP,
   resolveAgentSkillLevelFromBonuses,
 } from "@randomplay/shared"
+import { isAliceCorePeriodicRule } from "../effects/internal/alice-core-periodic.ts"
 import type {
   DamageElement,
   EntityId,
@@ -1023,7 +1024,9 @@ export function calculateStaticActionDamage(
     const definitions: RuleSet = {
       ...input.data.definitions,
       effects: input.data.definitions.effects.map((rule) =>
-        rule.kind === "contribution" && included.has(rule.effectId)
+        rule.kind === "contribution" &&
+        !isAliceCorePeriodicRule(rule) &&
+        included.has(rule.effectId)
           ? { ...rule, when: { kind: "constant", value: false } }
           : rule,
       ),

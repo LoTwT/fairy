@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "32",
+  "revision": "33",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -30251,6 +30251,16 @@
   ],
   "supplementalRecords": [
     {
+      "supplementId": "nanoka:agents:alice:core-periodic-damage",
+      "source": "nanoka-integrated@3.2 agents/1401 /passive/level/1401501—1401507/desc/0",
+      "kind": "option",
+      "optionId": "nanoka:agents:alice:core-periodic-damage",
+      "effectIds": ["agent:1401:nanoka:core-periodic-damage:mindscape:0"],
+      "supportedRanks": "核心 1—7；影画 0—6；层数 0—1",
+      "computationTarget": "one declared Alice core periodic event, using the original settled actual physical Assault damage",
+      "status": "integrated"
+    },
+    {
       "supplementId": "nanoka:agents:yeshunguang:veil-vulnerability",
       "source": "nanoka-integrated@3.2 agents/1431 /passive/level/1431501—1431507/desc/0 + /talent/4/desc",
       "kind": "option",
@@ -31128,17 +31138,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 882,
-    "options": 912,
+    "rules": 883,
+    "options": 913,
     "converted": 1134,
     "corrected": 138,
     "unsupported": 18,
     "supplements": {
-      "records": 84,
-      "rules": 55,
-      "options": 46,
+      "records": 85,
+      "rules": 56,
+      "options": 47,
       "entities": 4,
-      "integrated": 51,
+      "integrated": 52,
       "outOfScope": 33
     }
   },

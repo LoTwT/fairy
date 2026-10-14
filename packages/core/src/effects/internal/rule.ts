@@ -1,4 +1,5 @@
 import type {
+  Condition,
   AnyParameter,
   ContributionRule,
   EffectRule,
@@ -954,6 +955,7 @@ function validateContributionOperation(
       "hit-adjustment",
       "guaranteed-critical",
       "stun-damage-replacement",
+      "alice-core-periodic-damage",
     ],
     checks,
     "operation kind",
@@ -964,7 +966,8 @@ function validateContributionOperation(
   if (
     (kind === "hit-adjustment" ||
       kind === "guaranteed-critical" ||
-      kind === "stun-damage-replacement") &&
+      kind === "stun-damage-replacement" ||
+      kind === "alice-core-periodic-damage") &&
     scope !== "hit"
   ) {
     checks.collector.report(
@@ -976,6 +979,34 @@ function validateContributionOperation(
   }
   const hitScope = scope === "hit"
   switch (kind) {
+    case "alice-core-periodic-damage": {
+      rejectUnknownFields(object, ["kind", "ratio"], checks, kind)
+      const ratioChecks = { ...checks, pointer: `${pointer}/ratio` }
+      const ratio = expectObject(
+        object["ratio"],
+        ratioChecks,
+        "fixed periodic ratio",
+      )
+      if (ratio) {
+        rejectUnknownFields(
+          ratio,
+          ["kind", "unit", "value"],
+          ratioChecks,
+          "fixed periodic ratio",
+        )
+        if (
+          ratio["kind"] !== "literal" ||
+          ratio["unit"] !== "ratio" ||
+          ratio["value"] !== 0.025
+        )
+          collector.report(
+            "INVALID_DEFINITION",
+            ratioChecks.pointer,
+            "Alice's periodic ratio must be the fixed literal ratio 0.025",
+          )
+      }
+      return collector.isEmpty
+    }
     case "stun-damage-replacement": {
       rejectUnknownFields(
         object,
@@ -1299,6 +1330,58 @@ function validateContributionRule(
       "Stun damage replacement requires a supplied activation context",
     )
     return false
+  }
+  if (
+    (object["operation"] as { kind: string }).kind ===
+    "alice-core-periodic-damage"
+  ) {
+    const active = object["activation"] as Record<string, unknown>
+    const maximum = active["maximumLayers"] as
+      | Record<string, unknown>
+      | undefined
+    const beneficiary = object["beneficiary"] as Record<string, unknown>
+    const when = object["when"] as Record<string, unknown>
+    const source = object["source"] as {
+      identity: { kind: string; entityId: string }
+    }
+    const config = object["config"] as Condition<"configuration">
+    const requiredConfiguration =
+      config.kind === "all" &&
+      config.conditions.length === 2 &&
+      (["mindscapeRank", "coreSkillLevel"] as const).every((field) =>
+        config.conditions.some(
+          (condition) =>
+            condition.kind === "compare-number" &&
+            condition.unit === "count" &&
+            condition.operator === "gte" &&
+            condition.left.kind === "configuration-number" &&
+            condition.left.field === field &&
+            condition.right.kind === "literal" &&
+            condition.right.value === (field === "mindscapeRank" ? 0 : 1),
+        ),
+      )
+    if (
+      activation !== "supplied" ||
+      Object.keys(active).length !== 2 ||
+      maximum?.["kind"] !== "literal" ||
+      maximum["unit"] !== "count" ||
+      maximum["value"] !== 1 ||
+      beneficiary["kind"] !== "holder" ||
+      when["kind"] !== "constant" ||
+      when["value"] !== true ||
+      Object.keys(object["parameters"] as object).length !== 0 ||
+      object["uniqueness"] !== undefined ||
+      source.identity.kind !== "agent" ||
+      source.identity.entityId !== "1401" ||
+      !requiredConfiguration
+    ) {
+      checks.collector.report(
+        "INVALID_DEFINITION",
+        checks.pointer,
+        "Alice periodic damage requires the Alice agent source, one supplied layer, holder beneficiary, true condition, no parameters or uniqueness",
+      )
+      return false
+    }
   }
   if (object["uniqueness"] !== undefined) {
     if (
@@ -2119,6 +2202,29 @@ export function validateRuleSetStructure(
     pendingModifications.push(pending)
   }
 
+  const periodic = effects.filter(
+    (r) =>
+      r.kind === "contribution" &&
+      r.operation.kind === "alice-core-periodic-damage",
+  )
+  if (periodic.length > 1)
+    collector.report(
+      "DUPLICATE_ID",
+      "/effects",
+      "Only one Alice periodic ratio rule may be defined",
+    )
+  for (const [index, rule] of effects.entries())
+    if (
+      rule.kind === "modification" &&
+      rule.target.kind === "effect" &&
+      periodic.map((p) => p.effectId).includes(rule.target.effectId)
+    )
+      collector.report(
+        "INVALID_MODIFICATION",
+        `/effects/${index}/target`,
+        "The fixed Alice periodic source does not accept modifications",
+        { effectId: rule.effectId },
+      )
   const statesById = new Map<string, Record<string, unknown>>()
   for (const entry of statesArray) {
     const stateObject = entry as Record<string, unknown>

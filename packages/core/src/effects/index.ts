@@ -15,6 +15,14 @@ export type {
 } from "./types.ts"
 export type {
   Activation,
+  AliceCorePeriodicDamageInput,
+  AliceCorePeriodicCatalogInput,
+  AliceCorePeriodicDamageResult,
+  AliceCorePeriodicEvent,
+  AliceCorePeriodicRule,
+  AliceCorePeriodicCatalogMechanism,
+  RemielleStaticCatalogMechanism,
+  OriginalPhysicalAnomalyFact,
   AttributeSource,
   ActionId,
   ActionInstanceId,

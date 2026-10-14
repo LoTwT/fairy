@@ -497,6 +497,15 @@ export type ContributionOperation =
   | StatOperation
   | FactorOperation
   | {
+      /** 仅由爱丽丝具名单次结算消费；不进入普通命中或数值修改。 */
+      readonly kind: "alice-core-periodic-damage"
+      readonly ratio: {
+        readonly kind: "literal"
+        readonly unit: "ratio"
+        readonly value: 0.025
+      }
+    }
+  | {
       /** 声明的入场帷幕比例替代本命中的普通失衡乘区；不推算游戏换算。 */
       readonly kind: "stun-damage-replacement"
       /** 调用方已确定的入场比例，有限非负；85% 写 0.85。 */
@@ -607,44 +616,81 @@ interface RuleBase {
   readonly parameters: Readonly<Record<string, AnyParameter>>
 }
 
-export type ContributionRule = RuleBase & {
+export type ContributionRule =
+  | (RuleBase & {
+      readonly kind: "contribution"
+      readonly activation: Activation
+      readonly beneficiary: TargetSelector
+      readonly when: Condition<"contribution">
+      readonly uniqueness?: UniquenessPolicy
+      readonly phase?: never
+      readonly modifications?: never
+    } & (
+        | {
+            readonly scope: "entity"
+            readonly operation: Exclude<
+              ContributionOperation,
+              {
+                readonly kind:
+                  | "hit-adjustment"
+                  | "guaranteed-critical"
+                  | "stun-damage-replacement"
+                  | "alice-core-periodic-damage"
+              }
+            >
+          }
+        | {
+            readonly scope: "hit"
+            readonly operation: Exclude<
+              ContributionOperation,
+              {
+                readonly kind:
+                  | "stun-damage-replacement"
+                  | "alice-core-periodic-damage"
+              }
+            >
+          }
+        | {
+            readonly scope: "hit"
+            readonly operation: Extract<
+              ContributionOperation,
+              { readonly kind: "stun-damage-replacement" }
+            >
+            readonly uniqueness?: never
+            readonly activation: Extract<
+              Activation,
+              { readonly kind: "supplied" }
+            >
+          }
+      ))
+  | AliceCorePeriodicRule
+
+export type AliceCorePeriodicRule = RuleBase & {
   readonly kind: "contribution"
-  readonly activation: Activation
-  readonly beneficiary: TargetSelector
-  readonly when: Condition<"contribution">
-  readonly uniqueness?: UniquenessPolicy
+  readonly scope: "hit"
+  readonly operation: Extract<
+    ContributionOperation,
+    { readonly kind: "alice-core-periodic-damage" }
+  >
+  readonly activation: {
+    readonly kind: "supplied"
+    readonly maximumLayers: {
+      readonly kind: "literal"
+      readonly unit: "count"
+      readonly value: 1
+    }
+    readonly exclusiveGroup?: never
+    readonly trigger?: never
+    readonly lifetime?: never
+    readonly layering?: never
+  }
+  readonly beneficiary: { readonly kind: "holder" }
+  readonly when: { readonly kind: "constant"; readonly value: true }
+  readonly parameters: Readonly<Record<string, never>>
+  readonly uniqueness?: never
   readonly phase?: never
   readonly modifications?: never
-} & (
-    | {
-        readonly scope: "entity"
-        readonly operation: Exclude<
-          ContributionOperation,
-          {
-            readonly kind:
-              | "hit-adjustment"
-              | "guaranteed-critical"
-              | "stun-damage-replacement"
-          }
-        >
-      }
-    | {
-        readonly scope: "hit"
-        readonly operation: Exclude<
-          ContributionOperation,
-          { readonly kind: "stun-damage-replacement" }
-        >
-      }
-    | {
-        readonly scope: "hit"
-        readonly operation: Extract<
-          ContributionOperation,
-          { readonly kind: "stun-damage-replacement" }
-        >
-        readonly uniqueness?: never
-        readonly activation: Extract<Activation, { readonly kind: "supplied" }>
-      }
-  )
+}
 
 export type InstantOperation =
   | {
@@ -958,7 +1004,7 @@ export interface StaticCatalogOption {
  * 具名机制的受限读取元数据；由固定规范化来源生成，core 只按其中的稳定身份
  * 消费，不按展示名、字符串包含关系或硬编码数值猜来源。
  */
-export interface StaticCatalogMechanism {
+export interface RemielleStaticCatalogMechanism {
   readonly mechanism: "remielle-special-voidflare"
   /** 该机制绑定的 Fairy 代理人实体（蕾米埃尔）。 */
   readonly agentEntityId: string
@@ -982,6 +1028,18 @@ export interface StaticCatalogMechanism {
   readonly radianceResistanceIgnoreEffectIds: readonly EffectId[]
   readonly references: NonEmpty<SourceReference>
 }
+
+export interface AliceCorePeriodicCatalogMechanism {
+  readonly mechanism: "alice-core-periodic-damage"
+  readonly agentEntityId: "1401"
+  readonly optionId: string
+  readonly effectId: EffectId
+  readonly references: NonEmpty<SourceReference>
+}
+
+export type StaticCatalogMechanism =
+  | RemielleStaticCatalogMechanism
+  | AliceCorePeriodicCatalogMechanism
 
 export interface StaticEffectCatalog {
   readonly schemaVersion: 1

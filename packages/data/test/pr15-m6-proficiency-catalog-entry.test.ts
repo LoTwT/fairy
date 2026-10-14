@@ -183,7 +183,7 @@ describe("PR15 M6 AP additional damage through official data exports and catalog
       const i = await input(name)
       if (r !== undefined) i.hit.declaredCriticalRate = r
       const result = calculate(i)
-      expect(i.catalog.revision).toBe("32")
+      expect(i.catalog.revision).toBe("33")
       expect(result.factors.nonCritical.baseDamage).toBe(base)
       expect(result.nonCritical).toBe(base)
       expect(result.critical).toBe(critical)

@@ -8,6 +8,7 @@ import {
   supplyEffectState,
 } from "../../src/effects/index.ts"
 import type {
+  AliceCorePeriodicRule,
   ContributionRule,
   EffectNumericInput,
   FactorChannel,
@@ -43,7 +44,10 @@ function issue(
     ),
   ).toBe(true)
 }
-function factor(channel: FactorChannel, value: number): ContributionRule {
+function factor(
+  channel: FactorChannel,
+  value: number,
+): Exclude<ContributionRule, AliceCorePeriodicRule> {
   const unit =
     channel === "attacker-penetration-value"
       ? "defense-points"

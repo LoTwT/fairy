@@ -1,5 +1,6 @@
 import { calculateSpecialVoidflareDamageBonusMultiplier } from "../../formulas.ts"
 import type { LuminizeAnomalyDamageLevelInput } from "../../formulas.ts"
+import { isAliceCorePeriodicRule } from "./alice-core-periodic.ts"
 import type {
   Condition,
   EffectRule,
@@ -9,7 +10,7 @@ import type {
   SourceBinding,
   StaticCatalogDamageInput,
   StaticCatalogDamageItem,
-  StaticCatalogMechanism,
+  RemielleStaticCatalogMechanism,
   StaticDamageInput,
   StaticDamageResult,
   StaticEffectSelection,
@@ -41,14 +42,14 @@ export function remielleSpecialVoidflareRequested(
 /** 目录中声明的机制元数据；未声明时返回 undefined，由调用方明确拒绝。 */
 export function declaredRemielleSpecialVoidflareMechanism(
   catalog: StaticCatalogDamageInput["catalog"],
-): StaticCatalogMechanism | undefined {
+): RemielleStaticCatalogMechanism | undefined {
   return catalog.mechanisms?.find(
     (entry) => entry.mechanism === REMIELLE_SPECIAL_VOIDFLARE_MECHANISM,
   )
 }
 
 export interface RemielleSpecialVoidflareContext {
-  readonly mechanism: StaticCatalogMechanism
+  readonly mechanism: RemielleStaticCatalogMechanism
   readonly entityId: EntityId
   readonly level: number
   readonly strength: RemielleSpecialVoidflareAnomalySource["strength"]
@@ -415,7 +416,8 @@ export function assembleRemielleSpecialVoidflareReadings(options: {
           ...lowInput.definitions,
           effects: lowInput.definitions.effects.map((effect) =>
             exemptEffectIds.has(effect.effectId) &&
-            effect.kind === "contribution"
+            effect.kind === "contribution" &&
+            !isAliceCorePeriodicRule(effect)
               ? { ...effect, when: stripElementFilters(effect.when) }
               : effect,
           ),

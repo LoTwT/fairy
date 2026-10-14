@@ -5613,7 +5613,328 @@ const yeshunguangVeilVulnerability: Supplement = {
   },
 }
 
+/** 原实际伤害由调用方声明，来源文本仅直接证明比例、条件和间隔。 */
+const aliceCorePeriodicDamage: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:agents:alice:core-periodic-damage",
+  source:
+    "nanoka-integrated@3.2 agents/1401 /passive/level/1401501—1401507/desc/0",
+  catalogEntityId: "agents:alice",
+  optionId: "nanoka:agents:alice:core-periodic-damage",
+  supportedRanks: "核心 1—7；影画 0—6；层数 0—1",
+  computationTarget:
+    "one declared Alice core periodic event, using the original settled actual physical Assault damage",
+  clauseContextGuard: {
+    rankKind: "mindscape",
+    rank: 0,
+    stats: [],
+    anchorBlocks: [
+      {
+        blockId: "blk-legacy",
+        frozenName: "核心被动：剑心双虹",
+        frozenEnabledDefault: true,
+        frozenNote:
+          "队伍中任意角色对敌人施加物理异常状态后，在异常状态的持续期间，爱丽丝每0.95秒对其额外造成基于该物理异常伤害比例2.5%的伤害，并使物理异常状态下的敌人被触发[紊乱]效果时，每有1秒物理异常状态剩余时间，[紊乱]效果的伤害倍率提升18%，最多提升180.0%；",
+      },
+      {
+        blockId: "blk-ms4sp1go-wduvv6",
+        frozenName: "额外能力：寻奇猎幽",
+        frozenEnabledDefault: true,
+        frozenNote:
+          "队伍中存在另一名[异常]或[支援]角色时触发：\n若爱丽丝的异常掌控大于140点，每超过1点异常掌控会提升1.6点异常精通；",
+      },
+    ],
+    coexistingRecords: [
+      {
+        blockId: "blk-legacy",
+        raw: {
+          id: "legacy-self-disorderBaseMult",
+          origin: "",
+          scope: "disorder",
+          applyTarget: "team",
+          applySituation: "global",
+          applyProfession: null,
+          teamProfession: null,
+          teamProfessionValues: null,
+          teamProfessionMinCount: null,
+          skillSubcategoryId: null,
+          elementFilter: ["物理"],
+          kind: "stacked",
+          stat: "disorderBaseMult",
+          value: 0,
+          stackable: false,
+          maxStacks: 10,
+          valuePerStack: 18,
+          defaultStacks: 10,
+          enabledDefault: true,
+          note: "",
+        },
+        normalized: {
+          id: "legacy-self-disorderBaseMult",
+          origin: "",
+          scope: "disorder",
+          applyTarget: "team",
+          applySituation: "global",
+          applyProfession: null,
+          teamProfession: null,
+          teamProfessionValues: null,
+          teamProfessionMinCount: null,
+          skillSubcategoryId: null,
+          elementFilter: ["物理"],
+          kind: "stacked",
+          stat: "disorderBaseMult",
+          value: 0,
+          stackable: false,
+          maxStacks: 10,
+          valuePerStack: 18,
+          defaultStacks: 10,
+          enabledDefault: true,
+          note: "",
+        },
+      },
+      {
+        blockId: "blk-ms4sp1go-wduvv6",
+        raw: {
+          id: "eff-ms4sp1go-l0zxis",
+          origin: "",
+          scope: "general",
+          applyTarget: "self",
+          applySituation: "global",
+          applyProfession: null,
+          teamProfession: null,
+          teamProfessionValues: null,
+          teamProfessionMinCount: null,
+          skillSubcategoryId: null,
+          elementFilter: "all",
+          kind: "convert",
+          stat: "mastery",
+          value: 0,
+          stackable: false,
+          maxStacks: 1,
+          valuePerStack: 0,
+          defaultStacks: 1,
+          convert: {
+            from: "anomalyControl",
+            panelSource: "final",
+            ratioPercent: 160,
+            cap: null,
+            defaultBase: null,
+            initialBase: 140,
+          },
+          appliesToAnomaly: true,
+          enabledDefault: true,
+          note: "",
+        },
+        normalized: {
+          id: "eff-ms4sp1go-l0zxis",
+          origin: "",
+          scope: "general",
+          applyTarget: "self",
+          applySituation: "global",
+          applyProfession: null,
+          teamProfession: null,
+          teamProfessionValues: null,
+          teamProfessionMinCount: null,
+          skillSubcategoryId: null,
+          elementFilter: "all",
+          kind: "convert",
+          stat: "mastery",
+          value: 0,
+          stackable: false,
+          maxStacks: 1,
+          valuePerStack: 0,
+          defaultStacks: 1,
+          convert: {
+            from: "anomalyControl",
+            panelSource: "final",
+            ratioPercent: 160,
+            cap: null,
+            defaultBase: null,
+            initialBase: 140,
+          },
+          appliesToAnomaly: true,
+          enabledDefault: true,
+          note: "",
+        },
+      },
+    ],
+  },
+  evidence: [
+    {
+      path: "agents/1401/details.zh.json",
+      pointer: "/passive/level/1401501/desc/0",
+      sha256:
+        "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
+      rank: 1,
+    },
+    {
+      path: "agents/1401/details.en.json",
+      pointer: "/passive/level/1401501/desc/0",
+      sha256:
+        "08eddd31bd56875c8c757156c28cf00493ec08267c9eb73b27f8f85583a827c8",
+      rank: 1,
+    },
+    {
+      path: "agents/1401/details.zh.json",
+      pointer: "/passive/level/1401502/desc/0",
+      sha256:
+        "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
+      rank: 2,
+    },
+    {
+      path: "agents/1401/details.en.json",
+      pointer: "/passive/level/1401502/desc/0",
+      sha256:
+        "08eddd31bd56875c8c757156c28cf00493ec08267c9eb73b27f8f85583a827c8",
+      rank: 2,
+    },
+    {
+      path: "agents/1401/details.zh.json",
+      pointer: "/passive/level/1401503/desc/0",
+      sha256:
+        "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
+      rank: 3,
+    },
+    {
+      path: "agents/1401/details.en.json",
+      pointer: "/passive/level/1401503/desc/0",
+      sha256:
+        "08eddd31bd56875c8c757156c28cf00493ec08267c9eb73b27f8f85583a827c8",
+      rank: 3,
+    },
+    {
+      path: "agents/1401/details.zh.json",
+      pointer: "/passive/level/1401504/desc/0",
+      sha256:
+        "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
+      rank: 4,
+    },
+    {
+      path: "agents/1401/details.en.json",
+      pointer: "/passive/level/1401504/desc/0",
+      sha256:
+        "08eddd31bd56875c8c757156c28cf00493ec08267c9eb73b27f8f85583a827c8",
+      rank: 4,
+    },
+    {
+      path: "agents/1401/details.zh.json",
+      pointer: "/passive/level/1401505/desc/0",
+      sha256:
+        "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
+      rank: 5,
+    },
+    {
+      path: "agents/1401/details.en.json",
+      pointer: "/passive/level/1401505/desc/0",
+      sha256:
+        "08eddd31bd56875c8c757156c28cf00493ec08267c9eb73b27f8f85583a827c8",
+      rank: 5,
+    },
+    {
+      path: "agents/1401/details.zh.json",
+      pointer: "/passive/level/1401506/desc/0",
+      sha256:
+        "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
+      rank: 6,
+    },
+    {
+      path: "agents/1401/details.en.json",
+      pointer: "/passive/level/1401506/desc/0",
+      sha256:
+        "08eddd31bd56875c8c757156c28cf00493ec08267c9eb73b27f8f85583a827c8",
+      rank: 6,
+    },
+    {
+      path: "agents/1401/details.zh.json",
+      pointer: "/passive/level/1401507/desc/0",
+      sha256:
+        "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
+      rank: 7,
+    },
+    {
+      path: "agents/1401/details.en.json",
+      pointer: "/passive/level/1401507/desc/0",
+      sha256:
+        "08eddd31bd56875c8c757156c28cf00493ec08267c9eb73b27f8f85583a827c8",
+      rank: 7,
+    },
+  ],
+  verification:
+    "核心七档中英文本均给出原物理异常伤害的 2.5% 与 0.95 秒间隔；固定核心非空块与额外能力原样冻结，原紊乱倍率记录独立保留。项目采用显式条件模型：调用方声明一次周期事件及原普通物理强击的未显示取整、已结算实际伤害 D，D 已含原事件全部乘区、实际异常暴击结果与异化，本事件只计算 D×0.025。历史 snapshot 见证 Alice、原施加者与目标的时点和敌我归属，不存储或验证 D 的游戏读数。原施加者可为 Alice 或队友，不由当前面板重算、不再暴击、不再次应用乘区。文本不能证明该读数层级或继承是游戏实测；极性强击、紊乱、异放及非物理原事件明确拒绝，极性强击是否适用仍待证。未选/0 层仅在完整输入验证后返回 inactive；独立事件禁止其它启用来源，M1/M2/M4 若已作用原事件则包含在 D，M6 精通必暴附伤维持独立。只算调用方声明发生的一次事件，不验证 0.95 秒、状态剩余时间或总次数，不向普通动作追加。",
+  rule: {
+    effectId: "agent:1401:nanoka:core-periodic-damage:mindscape:0",
+    identity: {
+      kind: "agent",
+      entityId: "1401",
+    },
+    section: "剑心双虹（一次核心周期附伤）",
+    config: {
+      kind: "all",
+      conditions: [
+        {
+          kind: "compare-number",
+          unit: "count",
+          operator: "gte",
+          left: {
+            kind: "configuration-number",
+            unit: "count",
+            field: "mindscapeRank",
+          },
+          right: {
+            kind: "literal",
+            unit: "count",
+            value: 0,
+          },
+        },
+        {
+          kind: "compare-number",
+          unit: "count",
+          operator: "gte",
+          left: {
+            kind: "configuration-number",
+            unit: "count",
+            field: "coreSkillLevel",
+          },
+          right: {
+            kind: "literal",
+            unit: "count",
+            value: 1,
+          },
+        },
+      ],
+    },
+    parameters: {},
+    scope: "hit",
+    when: {
+      kind: "constant",
+      value: true,
+    },
+    operation: {
+      kind: "alice-core-periodic-damage",
+      ratio: {
+        kind: "literal",
+        unit: "ratio",
+        value: 0.025,
+      },
+    },
+    maximumLayers: 1,
+  },
+  variant: {
+    configuration: {
+      minimumMindscape: 0,
+      coreSkillLevels: [1, 2, 3, 4, 5, 6, 7],
+    },
+    inputs: [],
+    applicability: {},
+    conditionDescription:
+      "声明物理异常状态仍有效且本次事件已发生；原普通强击已结算实际伤害 D×2.5%，D 已含历史异常暴击与全部乘区，本次不再暴击或重算。仅具名 alice-core-periodic-damage 入口，严格独立 0/1 选择，关闭仍校验历史；极性强击待证并拒绝。0.95 秒仅记来源，不推演周期。此读数继承为项目条件模型。",
+    name: "剑心双虹 · 周期附伤（声明原实际伤害）",
+    target: "self",
+  },
+}
+
 export const SUPPLEMENTS: readonly Supplement[] = [
+  aliceCorePeriodicDamage,
   yeshunguangVeilVulnerability,
   graceMindscape6Grenades(false),
   graceMindscape6Grenades(true),
