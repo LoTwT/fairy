@@ -1,4 +1,108 @@
 {
+  "hugo:blk-legacy:mindscape:0:legacy-self-atk": {
+    "levels": [1, 2, 3, 4, 5, 6, 7],
+    "evidence": [
+      {
+        "rank": 1,
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/passive/level/1291501/desc/0",
+        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+      },
+      {
+        "rank": 1,
+        "path": "agents/1291/details.en.json",
+        "pointer": "/passive/level/1291501/desc/0",
+        "sha256": "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b"
+      },
+      {
+        "rank": 2,
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/passive/level/1291502/desc/0",
+        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+      },
+      {
+        "rank": 2,
+        "path": "agents/1291/details.en.json",
+        "pointer": "/passive/level/1291502/desc/0",
+        "sha256": "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b"
+      },
+      {
+        "rank": 3,
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/passive/level/1291503/desc/0",
+        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+      },
+      {
+        "rank": 3,
+        "path": "agents/1291/details.en.json",
+        "pointer": "/passive/level/1291503/desc/0",
+        "sha256": "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b"
+      },
+      {
+        "rank": 4,
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/passive/level/1291504/desc/0",
+        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+      },
+      {
+        "rank": 4,
+        "path": "agents/1291/details.en.json",
+        "pointer": "/passive/level/1291504/desc/0",
+        "sha256": "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b"
+      },
+      {
+        "rank": 5,
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/passive/level/1291505/desc/0",
+        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+      },
+      {
+        "rank": 5,
+        "path": "agents/1291/details.en.json",
+        "pointer": "/passive/level/1291505/desc/0",
+        "sha256": "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b"
+      },
+      {
+        "rank": 6,
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/passive/level/1291506/desc/0",
+        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+      },
+      {
+        "rank": 6,
+        "path": "agents/1291/details.en.json",
+        "pointer": "/passive/level/1291506/desc/0",
+        "sha256": "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b"
+      },
+      {
+        "rank": 7,
+        "path": "agents/1291/details.zh.json",
+        "pointer": "/passive/level/1291507/desc/0",
+        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+      },
+      {
+        "rank": 7,
+        "path": "agents/1291/details.en.json",
+        "pointer": "/passive/level/1291507/desc/0",
+        "sha256": "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b"
+      }
+    ],
+    "verification": "逐档独立核对 1291501—1291507 desc/0 中攻击条款：一名其他击破队友为 25/50/80/120/180/270/300，两名为 75/150/240/360/540/810/900；仅此 ATK 记录支持七档，不扩大同块双暴或决算覆盖。",
+    "parameters": {
+      "amount": {
+        "unit": "attack-points",
+        "values": {
+          "1": 25,
+          "2": 50,
+          "3": 80,
+          "4": 120,
+          "5": 180,
+          "6": 270,
+          "7": 300
+        }
+      }
+    }
+  },
   "nekomata:blk-legacy": {
     "levels": [7],
     "evidence": [

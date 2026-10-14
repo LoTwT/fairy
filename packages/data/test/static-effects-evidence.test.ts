@@ -49,6 +49,7 @@ describe("static effects evidence path", () => {
     const verified = await verifyStaticEffectsEvidence(verifiedPublication)
     expect(verified).toContain(label)
     for (const identity of [
+      "agents/hugo/mindscape/0/blk-legacy/legacy-self-atk",
       "agents/yanagi/mindscape/2/blk-ms4qhaez-8sfxa3/eff-ms4qhaez-6zbkbm",
       "agents/yanagi/mindscape/2/blk-ms4qhaez-8sfxa3/eff-ms4qkjzo-r424yz",
       "agents/yanagi/mindscape/6/blk-ms4qn0z7-6fc8g6/eff-ms4qob0d-mk1bgo",

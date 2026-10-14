@@ -1,3 +1,4 @@
+import { hugoAttackConsumerSource } from "./fixtures/hugo-stun-teammates-consumer.ts"
 import { yanagiPolarityConsumerSource } from "./fixtures/yanagi-polarity-consumer.ts"
 import {
   lucyGuardBoarConsumerSource,
@@ -468,6 +469,8 @@ ${astraYaoM4ConsumerSource}
 await verifyAstraYaoM4Consumer(api, await import("@randomplay/core"))
 ${lucyGuardBoarConsumerSource}
 await verifyLucyGuardBoarConsumer(api, await import("@randomplay/core"))
+${hugoAttackConsumerSource}
+assert.deepEqual(await verifyHugoAttackConsumer(api, await import("@randomplay/core")), {nonCritical:3800,closed:2000,rejectedOldThree:true})
 ${yanagiPolarityConsumerSource}
 await verifyYanagiPolarityConsumer(api, await import("@randomplay/core"))
 ${veilConsumerSource}

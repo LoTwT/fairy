@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "36",
+  "revision": "37",
   "effects": [
     {
       "kind": "contribution",
@@ -21280,6 +21280,97 @@
             "version": "3.2",
             "locale": "zh",
             "resourcePath": "agents/1291/details.zh.json",
+            "pointer": "/passive/level/1291501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1291/details.en.json",
+            "pointer": "/passive/level/1291501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1291/details.zh.json",
+            "pointer": "/passive/level/1291502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1291/details.en.json",
+            "pointer": "/passive/level/1291502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1291/details.zh.json",
+            "pointer": "/passive/level/1291503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1291/details.en.json",
+            "pointer": "/passive/level/1291503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1291/details.zh.json",
+            "pointer": "/passive/level/1291504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1291/details.en.json",
+            "pointer": "/passive/level/1291504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1291/details.zh.json",
+            "pointer": "/passive/level/1291505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1291/details.en.json",
+            "pointer": "/passive/level/1291505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1291/details.zh.json",
+            "pointer": "/passive/level/1291506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1291/details.en.json",
+            "pointer": "/passive/level/1291506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1291/details.zh.json",
+            "pointer": "/passive/level/1291507/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1291/details.en.json",
             "pointer": "/passive/level/1291507/desc/0"
           }
         ]
@@ -21301,9 +21392,18 @@
       },
       "parameters": {
         "amount": {
-          "kind": "constant",
+          "kind": "by-rank",
+          "rank": "coreSkillLevel",
           "unit": "attack-points",
-          "value": 300
+          "values": {
+            "1": 25,
+            "2": 50,
+            "3": 80,
+            "4": 120,
+            "5": 180,
+            "6": 270,
+            "7": 300
+          }
         }
       },
       "activation": {
@@ -21311,7 +21411,7 @@
         "maximumLayers": {
           "kind": "literal",
           "unit": "count",
-          "value": 3
+          "value": 1
         }
       },
       "scope": "entity",
@@ -21327,9 +21427,60 @@
         "stat": "attack",
         "stage": "final-fixed",
         "value": {
-          "kind": "parameter",
+          "kind": "multiply",
           "unit": "attack-points",
-          "name": "amount"
+          "value": {
+            "kind": "parameter",
+            "unit": "attack-points",
+            "name": "amount"
+          },
+          "coefficient": {
+            "kind": "convert",
+            "unit": "multiplier",
+            "rate": {
+              "kind": "literal",
+              "unit": "multiplier",
+              "value": 1
+            },
+            "input": {
+              "kind": "add",
+              "unit": "count",
+              "operands": [
+                {
+                  "kind": "input",
+                  "unit": "count",
+                  "name": "hugo:other-stun-teammates"
+                },
+                {
+                  "kind": "maximum",
+                  "unit": "count",
+                  "operands": [
+                    {
+                      "kind": "literal",
+                      "unit": "count",
+                      "value": 0
+                    },
+                    {
+                      "kind": "add",
+                      "unit": "count",
+                      "operands": [
+                        {
+                          "kind": "input",
+                          "unit": "count",
+                          "name": "hugo:other-stun-teammates"
+                        },
+                        {
+                          "kind": "literal",
+                          "unit": "count",
+                          "value": -1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
         }
       }
     },

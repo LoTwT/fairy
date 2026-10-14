@@ -32,6 +32,9 @@ import identities from "./identities.json" with { type: "json" }
 import evidence from "./rank-evidence.json" with { type: "json" }
 import {
   COMPLETE_STATE_OPTIONS,
+  HUGO_ATTACK_SOURCE_KEY,
+  HUGO_ATTACK_COUNT_DIFFERENCE_ID,
+  HUGO_ATTACK_COUNT_DESCRIPTION,
   SOURCE_SEMANTICS,
   YANAGI_POLARITY_DIFFERENCE_ID,
   YANAGI_POLARITY_EXPLANATION,
@@ -1176,7 +1179,7 @@ export function collectSource(
         throw new Error(`Unreviewed entity identity: ${key}`)
       const entityId = identityMap[key],
         identity: SourceIdentity | null = entityId ? { kind, entityId } : null
-      entities.push({
+      const catalogEntity: StaticCatalogEntity = {
         catalogEntityId: key,
         upstreamId: raw.id,
         name: raw.name,
@@ -1188,7 +1191,8 @@ export function collectSource(
             : "missing-identity",
         profession: raw.profession || null,
         element: raw.element ? (elementMap[raw.element] ?? null) : null,
-      })
+      }
+      entities.push(catalogEntity)
       const normalized =
         category === "agents"
           ? functions.normalizeAgent(raw)
@@ -1201,6 +1205,18 @@ export function collectSource(
         normalized.id !== raw.id
       )
         throw new Error("Polarity isolation normalized entity identity drift")
+      if (category === "agents" && raw.id === "hugo") {
+        if (normalized.id !== raw.id)
+          throw new Error(
+            "Hugo teammate count normalized entity identity drift",
+          )
+        verifyHugoAttackPack(raw.mindscapeBuffs?.[0], "raw", catalogEntity)
+        verifyHugoAttackPack(
+          normalized.mindscapeBuffs?.[0],
+          "normalized",
+          catalogEntity,
+        )
+      }
       const entries: {
         raw: SourcePack
         normalized: SourcePack
@@ -1257,6 +1273,16 @@ export function collectSource(
       }
       for (const entry of entries) {
         const actual = functions.collectEffectsFromPack(entry.normalized)
+        if (category === "agents" && raw.id === "hugo" && entry.rank === 0) {
+          const attackRecords = actual.filter(
+            (effect) => effect.id === "legacy-self-atk",
+          )
+          if (attackRecords.length !== 1)
+            throw new Error(
+              "Hugo teammate count expects one consumed normalized ATK record before folding",
+            )
+          verifyHugoAttackEncoding(attackRecords[0]!, "normalized")
+        }
         const collected: {
           effect: SourceEffect
           blockId: string
@@ -1463,6 +1489,70 @@ function whenFor(
 /** 语义登记键：category/entityId/rankKind/rank/blockId/effectId 稳定组合。 */
 const semanticsKeyFor = (record: SourceRecord): string =>
   `${record.category}/${record.entityId}/${record.rankKind}/${record.rank}/${record.blockId}/${record.raw.id}`
+
+const hugoAttackSemantics = SOURCE_SEMANTICS[HUGO_ATTACK_SOURCE_KEY] as Extract<
+  SourceSemantics,
+  { kind: "hugo-stun-teammate-count" }
+>
+
+function verifyHugoAttackEncoding(
+  effect: SourceEffect,
+  representation: "raw" | "normalized",
+): void {
+  verifySourceRecordShape(
+    effect,
+    representation === "raw"
+      ? hugoAttackSemantics.expectedRaw
+      : hugoAttackSemantics.expectedNormalized,
+    "Hugo teammate count",
+    `${representation} ${HUGO_ATTACK_SOURCE_KEY}`,
+    true,
+  )
+}
+
+/** 只验证 Hugo 核心 ATK；在 find/分组折叠前检查真实块，忽略非消费的 flat 镜像。 */
+function verifyHugoAttackPack(
+  pack: SourcePack | undefined,
+  representation: "raw" | "normalized",
+  holder: Pick<StaticCatalogEntity, "profession" | "element">,
+): void {
+  const occurrences = (pack?.effectBlocks ?? []).flatMap((block) =>
+    block.effects
+      .filter((effect) => effect.id === "legacy-self-atk")
+      .map((effect) => ({ block, effect })),
+  )
+  if (occurrences.length !== 1 || occurrences[0]!.block.id !== "blk-legacy")
+    throw new Error(
+      `Hugo teammate count lost or duplicated its ${representation} source identity (${HUGO_ATTACK_SOURCE_KEY})`,
+    )
+  const { block, effect } = occurrences[0]!
+  verifyHugoAttackEncoding(effect, representation)
+  if (block.note !== hugoAttackSemantics.expectedSourceBlockNote)
+    throw new Error(`Hugo teammate count ${representation} block note drift`)
+  // 同一核心块的 team/global ATK 也可能覆盖 holder；职业或元素筛选排除 holder 的条款保留。
+  if (
+    block.effects.some((candidate) => {
+      if (candidate === effect || candidate.stat !== "atk") return false
+      if (candidate.applyTarget === "self") return true
+      return (
+        candidate.applyTarget === "team" &&
+        candidate.applySituation === "global" &&
+        (!candidate.applyProfession ||
+          candidate.applyProfession === holder.profession) &&
+        (!Array.isArray(candidate.elementFilter) ||
+          (holder.element !== null &&
+            candidate.elementFilter.some(
+              (element) =>
+                elementMap[element] !== "lumiflux" &&
+                elementMap[element] === holder.element,
+            )))
+      )
+    })
+  )
+    throw new Error(
+      `Hugo teammate count ${representation} has an additional same-clause ATK encoding`,
+    )
+}
 
 const polarityIsolationRegistrations = Object.entries(SOURCE_SEMANTICS).filter(
   (
@@ -2224,8 +2314,14 @@ function compile(
     }
     expression = param(amountUnit, "amount")
   }
-  if (semantics?.kind === "core-skill-level") {
-    const resolved = resolveCoreRankParameters(semantics, amountUnit)
+  if (
+    semantics?.kind === "core-skill-level" ||
+    semantics?.kind === "hugo-stun-teammate-count"
+  ) {
+    const resolved = resolveCoreRankParameters(
+      { ...semantics, kind: "core-skill-level" },
+      amountUnit,
+    )
     if (resolved.levels.length === 0)
       return unsupported(
         "missing-rank-evidence",
@@ -2322,6 +2418,49 @@ function compile(
           ),
         ).values(),
       ],
+    }
+    if (semantics.kind === "hugo-stun-teammate-count") {
+      const count: NumericExpression<"count", "contribution"> = {
+        kind: "input",
+        unit: "count",
+        name: semantics.layerCountInputName,
+      }
+      expression = {
+        kind: "multiply",
+        unit: "attack-points",
+        value: param("attack-points", "amount"),
+        coefficient: {
+          kind: "convert",
+          unit: "multiplier",
+          rate: literal("multiplier", 1),
+          input: {
+            kind: "add",
+            unit: "count",
+            operands: [
+              count,
+              {
+                kind: "maximum",
+                unit: "count",
+                operands: [
+                  literal("count", 0),
+                  {
+                    kind: "add",
+                    unit: "count",
+                    operands: [count, literal("count", -1)],
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      }
+      variant = {
+        ...variant,
+        maximumLayers: 2,
+        layerCountInputName: semantics.layerCountInputName,
+        differences: [...variant.differences, semantics.differenceId],
+        references: [reference(record.pointer), ...resolved.references],
+      }
     }
   }
   if (semantics?.kind === "special-skill-level") {
@@ -3234,7 +3373,12 @@ function compile(
       parameters,
       activation: {
         kind: "supplied",
-        maximumLayers: literal("count", variant.maximumLayers),
+        maximumLayers: literal(
+          "count",
+          semantics?.kind === "hugo-stun-teammate-count"
+            ? 1
+            : variant.maximumLayers,
+        ),
       },
       scope:
         mapping.stat &&
@@ -4124,9 +4268,14 @@ export function convertSource(
     options.push({
       optionId,
       catalogEntityId: entity.catalogEntityId,
-      name: `${first.blockName} · ${displayStat}`,
+      name:
+        firstSemantics?.kind === "hugo-stun-teammate-count"
+          ? "终末裁决 · 其他击破队友人数（0/1/2）"
+          : `${first.blockName} · ${displayStat}`,
       conditionDescription:
-        sharedConditionDescription ??
+        (firstSemantics?.kind === "hugo-stun-teammate-count"
+          ? HUGO_ATTACK_COUNT_DESCRIPTION
+          : sharedConditionDescription) ??
         [first.blockNote, first.raw.note].filter(Boolean).join("\n"),
       ...(first.entityId === "remiel" && first.blockId === "blk-ms7td2gs-rk1vtd"
         ? { exclusiveGroup: "remiel:team-profession-attack-tier" }
@@ -4717,7 +4866,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "36",
+    revision: "37",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: [],
@@ -4830,6 +4979,20 @@ export function convertSource(
       }),
     ],
     differences: [
+      {
+        differenceId: HUGO_ATTACK_COUNT_DIFFERENCE_ID,
+        explanation: HUGO_ATTACK_COUNT_DESCRIPTION,
+        references: [
+          ...collected.records
+            .filter(
+              (record) => semanticsKeyFor(record) === HUGO_ATTACK_SOURCE_KEY,
+            )
+            .map((record) => reference(record.pointer)),
+          ...hugoAttackSemantics.evidence.map((ref) =>
+            nanokaReference(ref.path, ref.pointer),
+          ),
+        ],
+      },
       {
         differenceId: YANAGI_POLARITY_DIFFERENCE_ID,
         explanation: YANAGI_POLARITY_EXPLANATION,
