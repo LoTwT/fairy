@@ -1,3 +1,4 @@
+import { isLucyGuardBoarRule } from "../effects/internal/lucy-guard-boar-rules.ts"
 import {
   CALCULATION_CONTRACT_VERSION,
   CALCULATION_GAME_VERSION,
@@ -772,6 +773,9 @@ function battleSelections(
 
 /** 完整静态计算；全部数据由调用方提供，不装载文件、网络或 data 包。 */
 export function calculateStaticActionDamage(
+  input: import("../effects/types.ts").LucyGuardBoarCatalogInput,
+): Result<import("../effects/types.ts").LucyGuardBoarResult>
+export function calculateStaticActionDamage(
   input: import("../effects/types.ts").AstraYaoM4CatalogInput,
 ): Result<import("../effects/types.ts").AstraYaoM4DamageResult>
 export function calculateStaticActionDamage(
@@ -780,13 +784,17 @@ export function calculateStaticActionDamage(
 export function calculateStaticActionDamage(
   input:
     | StaticActionCalculationInput
-    | import("../effects/types.ts").AstraYaoM4CatalogInput,
+    | import("../effects/types.ts").AstraYaoM4CatalogInput
+    | import("../effects/types.ts").LucyGuardBoarCatalogInput,
 ): Result<
   | StaticActionCalculationResult
   | import("../effects/types.ts").AstraYaoM4DamageResult
+  | import("../effects/types.ts").LucyGuardBoarResult
 > {
   // 具名附伤直接转发显式世界与绑定，不从普通动作推导或生成事件。
   if (input && typeof input === "object" && "mechanism" in input) {
+    if (input.mechanism === "lucy-guard-boar")
+      return calculateStaticDamageFromCatalog(input)
     if (input.mechanism === "astra-yao-m4-quick-assist-damage")
       return calculateStaticDamageFromCatalog(input)
     return {
@@ -1059,6 +1067,7 @@ function calculateOrdinaryStaticActionDamage(
         rule.kind === "contribution" &&
         !isAliceCorePeriodicRule(rule) &&
         !isAstraYaoM4Rule(rule) &&
+        !isLucyGuardBoarRule(rule) &&
         included.has(rule.effectId)
           ? { ...rule, when: { kind: "constant", value: false } }
           : rule,

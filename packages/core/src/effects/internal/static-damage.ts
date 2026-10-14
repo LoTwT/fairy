@@ -1,3 +1,4 @@
+import { calculateLucyGuardBoar } from "./lucy-guard-boar.ts"
 import {
   anomalyDamageFormula,
   calculateDefenseLevelBase,
@@ -60,7 +61,7 @@ function validateNumberArray(value: unknown, checks: FieldChecks): void {
   }
 }
 
-function validateDamageFields(
+export function validateDamageFields(
   value: unknown,
   collector: IssueCollector,
 ): value is StaticDamageParameters {
@@ -294,6 +295,9 @@ function validateSelections(
 
 /** 每次调用建立独立静态状态；不推进事件、不推断默认 buff 或历史读取值。 */
 export function calculateStaticDamage(
+  input: import("../types.ts").LucyGuardBoarDamageInput,
+): Result<import("../types.ts").LucyGuardBoarResult>
+export function calculateStaticDamage(
   input: import("../types.ts").AstraYaoM4DamageInput,
 ): Result<import("../types.ts").AstraYaoM4DamageResult>
 export function calculateStaticDamage(
@@ -306,13 +310,17 @@ export function calculateStaticDamage(
   input:
     | StaticDamageInput
     | AliceCorePeriodicDamageInput
-    | import("../types.ts").AstraYaoM4DamageInput,
+    | import("../types.ts").AstraYaoM4DamageInput
+    | import("../types.ts").LucyGuardBoarDamageInput,
 ): Result<
   | StaticDamageResult
   | AliceCorePeriodicDamageResult
   | import("../types.ts").AstraYaoM4DamageResult
+  | import("../types.ts").LucyGuardBoarResult
 > {
   if (input && typeof input === "object" && "mechanism" in input) {
+    if (input.mechanism === "lucy-guard-boar")
+      return calculateLucyGuardBoar(input, false)
     if (input.mechanism === ASTRA_YAO_M4_MECHANISM)
       return calculateAstraYaoM4Damage(input, false)
     if (input.mechanism === "alice-core-periodic-damage")

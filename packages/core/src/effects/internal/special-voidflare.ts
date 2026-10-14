@@ -1,3 +1,4 @@
+import { isLucyGuardBoarRule } from "./lucy-guard-boar-rules.ts"
 import { calculateSpecialVoidflareDamageBonusMultiplier } from "../../formulas.ts"
 import type { LuminizeAnomalyDamageLevelInput } from "../../formulas.ts"
 import { isAliceCorePeriodicRule } from "./alice-core-periodic.ts"
@@ -418,7 +419,8 @@ export function assembleRemielleSpecialVoidflareReadings(options: {
             exemptEffectIds.has(effect.effectId) &&
             effect.kind === "contribution" &&
             !isAliceCorePeriodicRule(effect) &&
-            !isAstraYaoM4Rule(effect)
+            !isAstraYaoM4Rule(effect) &&
+            !isLucyGuardBoarRule(effect)
               ? { ...effect, when: stripElementFilters(effect.when) }
               : effect,
           ),

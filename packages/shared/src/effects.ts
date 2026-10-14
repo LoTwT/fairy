@@ -493,8 +493,35 @@ type FactorOperation = {
   }
 }[FactorChannel]
 
+/** 露西小猪具名条件模型的核心七档；不接受任意属性或公式载荷。 */
+export interface LucyGuardBoarCheerMultiplier {
+  readonly kind: "by-rank"
+  readonly rank: "coreSkillLevel"
+  readonly unit: "multiplier"
+  readonly values: {
+    readonly 1: 1.4
+    readonly 2: 1.5
+    readonly 3: 1.6
+    readonly 4: 1.7
+    readonly 5: 1.8
+    readonly 6: 1.9
+    readonly 7: 2
+  }
+}
+
 export type ContributionOperation =
   | StatOperation
+  | {
+      readonly kind: "lucy-guard-boar-inheritance"
+      readonly cheerMultiplier: LucyGuardBoarCheerMultiplier
+    }
+  | {
+      readonly kind: "lucy-guard-boar-m6-damage"
+      readonly multiplier: { readonly unit: "multiplier"; readonly value: 3 }
+      readonly element: "fire"
+      readonly damageKind: "regular"
+      readonly skillCategory: "uncategorized"
+    }
   | FactorOperation
   | {
       /** 耀嘉音 M4 具名跨角色附伤；固定一次 3×持有者 ATK。 */
@@ -642,6 +669,8 @@ export type ContributionRule =
                   | "stun-damage-replacement"
                   | "alice-core-periodic-damage"
                   | "astra-yao-m4-quick-assist-damage"
+                  | "lucy-guard-boar-inheritance"
+                  | "lucy-guard-boar-m6-damage"
               }
             >
           }
@@ -654,6 +683,8 @@ export type ContributionRule =
                   | "stun-damage-replacement"
                   | "alice-core-periodic-damage"
                   | "astra-yao-m4-quick-assist-damage"
+                  | "lucy-guard-boar-inheritance"
+                  | "lucy-guard-boar-m6-damage"
               }
             >
           }
@@ -672,6 +703,26 @@ export type ContributionRule =
       ))
   | AliceCorePeriodicRule
   | AstraYaoM4Rule
+  | LucyGuardBoarInheritanceRule
+  | LucyGuardBoarM6Rule
+
+export type LucyGuardBoarInheritanceRule = Omit<
+  AliceCorePeriodicRule,
+  "operation" | "scope"
+> & {
+  readonly scope: "entity"
+  readonly operation: Extract<
+    ContributionOperation,
+    { readonly kind: "lucy-guard-boar-inheritance" }
+  >
+}
+
+export type LucyGuardBoarM6Rule = Omit<AliceCorePeriodicRule, "operation"> & {
+  readonly operation: Extract<
+    ContributionOperation,
+    { readonly kind: "lucy-guard-boar-m6-damage" }
+  >
+}
 
 export type AstraYaoM4Rule = Omit<
   AliceCorePeriodicRule,
@@ -1060,6 +1111,7 @@ export type StaticCatalogMechanism =
   | RemielleStaticCatalogMechanism
   | AliceCorePeriodicCatalogMechanism
   | AstraYaoM4CatalogMechanism
+  | LucyGuardBoarCatalogMechanism
 
 export interface AstraYaoM4CatalogMechanism {
   readonly mechanism: "astra-yao-m4-quick-assist-damage"
@@ -1068,6 +1120,34 @@ export interface AstraYaoM4CatalogMechanism {
   readonly effectId: EffectId
   readonly itemId: "astrayao:m4-quick-assist-bonus-damage"
   readonly skillTargetId: "zzz-hp:skill:astrayao-m4-quick-assist-bonus-damage"
+  readonly references: NonEmpty<SourceReference>
+}
+
+/** 仅露西具名路径使用；旧代理人目录不增加通用阵营或召唤物契约。 */
+export interface LucyGuardBoarCatalogMechanism {
+  readonly mechanism: "lucy-guard-boar"
+  readonly agentEntityId: "1151"
+  readonly inheritance: {
+    readonly optionId: string
+    readonly effectId: EffectId
+  }
+  readonly m6: { readonly optionId: string; readonly effectId: EffectId }
+  readonly cheerFixed: {
+    readonly optionId: string
+    readonly effectId: EffectId
+  }
+  readonly cheerConversion: {
+    readonly optionId: string
+    readonly effectId: EffectId
+  }
+  readonly mindscape4: {
+    readonly optionId: string
+    readonly effectId: EffectId
+  }
+  readonly itemId: "lucy:m6-boar-rain"
+  readonly skillTargetId: "nanoka:lucy-m6-boar-rain"
+  readonly sameFactionAgentEntityIds: readonly string[]
+  readonly factionReferences: NonEmpty<SourceReference>
   readonly references: NonEmpty<SourceReference>
 }
 

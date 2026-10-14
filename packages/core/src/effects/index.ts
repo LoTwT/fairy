@@ -147,6 +147,18 @@ export type {
   RemielleSpecialVoidflareAnomalySource,
 } from "./types.ts"
 export type {
+  LucyGuardBoarCheerMultiplier,
+  LucyGuardBoarInheritanceRule,
+  LucyGuardBoarM6Rule,
+  LucyGuardBoarCatalogMechanism,
+  LucyGuardBoarOwnStats,
+  LucyGuardBoarTeamCondition,
+  LucyGuardBoarConditionalModel,
+  LucyGuardBoarM6Event,
+  LucyGuardBoarDamageInput,
+  LucyGuardBoarCatalogInput,
+  LucyGuardBoarDirectContribution,
+  LucyGuardBoarResult,
   AstraYaoM4Rule,
   AstraYaoM4CatalogMechanism,
   AstraYaoM4Event,

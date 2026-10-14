@@ -1,3 +1,4 @@
+import { lucyGuardBoarConsumerSource } from "./fixtures/lucy-guard-boar-consumer.ts"
 import { aliceCorePeriodicConsumerSource } from "./fixtures/alice-core-periodic-consumer.ts"
 import { veilConsumerSource } from "./fixtures/veil-consumer.ts"
 import {
@@ -117,6 +118,8 @@ it("consumes the offline-installed package in real Vite development and producti
 globalThis.fairy = api
 ${aliceCorePeriodicConsumerSource}
 globalThis.fairyAliceCorePeriodic = async () => verifyAliceCorePeriodicConsumer(api, await import("@randomplay/core"))
+${lucyGuardBoarConsumerSource}
+globalThis.fairyLucyGuardBoar = async () => verifyLucyGuardBoarConsumer(api, await import("@randomplay/core"))
 ${astraYaoM4ConsumerSource}
 globalThis.fairyAstraYaoM4 = async () => verifyAstraYaoM4Consumer(api, await import("@randomplay/core"))
 ${veilConsumerSource}
@@ -1004,6 +1007,23 @@ function defineScenarios(counts: {
             "definitions/effects/static.json",
             "definitions/effects/static-catalog.json",
           ],
+        },
+        {
+          name: "lucy-guard-boar-inheritance-and-one-m6-event",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyLucyGuardBoar(),
+            )
+            expect(result.expected).toBeCloseTo(9298.411222531886, 8)
+            expect(result.low).toBe(result.expected)
+            expect(result.high).toBe(result.expected)
+            expect(result.attack).toBeCloseTo(1704.9163, 9)
+            expect(result).toMatchObject({
+              inactive: 0,
+              boar: "entity:boar",
+              trigger: "entity:trigger",
+            })
+          },
         },
         {
           name: "astra-yao-m4-cross-actor-conditional-damage",

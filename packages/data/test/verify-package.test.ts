@@ -1,4 +1,8 @@
 import {
+  lucyGuardBoarConsumerSource,
+  lucyGuardBoarConsumerTypes,
+} from "./fixtures/lucy-guard-boar-consumer.ts"
+import {
   aliceCorePeriodicConsumerSource,
   aliceCorePeriodicConsumerTypes,
 } from "./fixtures/alice-core-periodic-consumer.ts"
@@ -461,6 +465,8 @@ ${aliceCorePeriodicConsumerSource}
 await verifyAliceCorePeriodicConsumer(api, await import("@randomplay/core"))
 ${astraYaoM4ConsumerSource}
 await verifyAstraYaoM4Consumer(api, await import("@randomplay/core"))
+${lucyGuardBoarConsumerSource}
+await verifyLucyGuardBoarConsumer(api, await import("@randomplay/core"))
 ${veilConsumerSource}
 await verifyVeilConsumer(api, calculateStaticActionDamage)
 // 维琳娜微域气旋：安装包根入口解析并计算具名直伤约定。期望值独立于实现：
@@ -1021,6 +1027,7 @@ console.log(JSON.stringify({ agents: api.agentNames, bangboos: api.bangbooNames,
     const typeSource = `import { loadStaticCalculationData } from "@randomplay/data"
 ${aliceCorePeriodicConsumerTypes}
 ${astraYaoM4ConsumerTypes}
+${lucyGuardBoarConsumerTypes}
 import type { StaticCalculationData as CoreCalculationData, StaticActionCalculationInput, StaticCatalogDamageInput, StaticCatalogDefenseInput, StaticCatalogLuminizeDamageBranch, StaticCatalogMechanism, RemielleSpecialVoidflareAnomalySource } from "@randomplay/core"
 const jointData: Promise<CoreCalculationData> = loadStaticCalculationData({ agents: ["Ben"], wEngines: [] })
 async function typedCalculation(input: Omit<StaticActionCalculationInput, "data">) {

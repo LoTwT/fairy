@@ -960,6 +960,8 @@ function validateContributionOperation(
       "stun-damage-replacement",
       "alice-core-periodic-damage",
       "astra-yao-m4-quick-assist-damage",
+      "lucy-guard-boar-inheritance",
+      "lucy-guard-boar-m6-damage",
     ],
     checks,
     "operation kind",
@@ -972,7 +974,8 @@ function validateContributionOperation(
       kind === "guaranteed-critical" ||
       kind === "stun-damage-replacement" ||
       kind === "alice-core-periodic-damage" ||
-      kind === "astra-yao-m4-quick-assist-damage") &&
+      kind === "astra-yao-m4-quick-assist-damage" ||
+      kind === "lucy-guard-boar-m6-damage") &&
     scope !== "hit"
   ) {
     checks.collector.report(
@@ -982,8 +985,119 @@ function validateContributionOperation(
     )
     return false
   }
+  if (kind === "lucy-guard-boar-inheritance" && scope !== "entity") {
+    collector.report(
+      "INVALID_DEFINITION",
+      pointer,
+      "Lucy inheritance requires entity scope",
+    )
+    return false
+  }
   const hitScope = scope === "hit"
   switch (kind) {
+    case "lucy-guard-boar-inheritance": {
+      rejectUnknownFields(object, ["kind", "cheerMultiplier"], checks, kind)
+      const multiplierChecks = {
+        ...checks,
+        pointer: `${pointer}/cheerMultiplier`,
+      }
+      const multiplier = expectObject(
+        object["cheerMultiplier"],
+        multiplierChecks,
+        "Lucy core multiplier",
+      )
+      if (multiplier) {
+        rejectUnknownFields(
+          multiplier,
+          ["kind", "rank", "unit", "values"],
+          multiplierChecks,
+          "Lucy core multiplier",
+        )
+        const valuesChecks = {
+          ...checks,
+          pointer: `${multiplierChecks.pointer}/values`,
+        }
+        const values = expectObject(
+          multiplier["values"],
+          valuesChecks,
+          "Lucy seven core ranks",
+        )
+        if (values) {
+          rejectUnknownFields(
+            values,
+            ["1", "2", "3", "4", "5", "6", "7"],
+            valuesChecks,
+            "Lucy seven core ranks",
+          )
+          for (const [rank, expected] of Object.entries({
+            1: 1.4,
+            2: 1.5,
+            3: 1.6,
+            4: 1.7,
+            5: 1.8,
+            6: 1.9,
+            7: 2,
+          }))
+            if (values[rank] !== expected)
+              collector.report(
+                "INVALID_DEFINITION",
+                `${valuesChecks.pointer}/${rank}`,
+                "Lucy requires the fixed core multiplier table",
+              )
+        }
+        if (
+          multiplier["kind"] !== "by-rank" ||
+          multiplier["rank"] !== "coreSkillLevel" ||
+          multiplier["unit"] !== "multiplier"
+        )
+          collector.report(
+            "INVALID_DEFINITION",
+            multiplierChecks.pointer,
+            "Lucy multiplier is indexed only by coreSkillLevel",
+          )
+      }
+      return collector.isEmpty
+    }
+    case "lucy-guard-boar-m6-damage": {
+      rejectUnknownFields(
+        object,
+        ["kind", "multiplier", "element", "damageKind", "skillCategory"],
+        checks,
+        kind,
+      )
+      const fixedChecks = { ...checks, pointer: `${pointer}/multiplier` }
+      const multiplier = expectObject(
+        object["multiplier"],
+        fixedChecks,
+        "Lucy fixed multiplier",
+      )
+      if (multiplier) {
+        rejectUnknownFields(
+          multiplier,
+          ["unit", "value"],
+          fixedChecks,
+          "Lucy fixed multiplier",
+        )
+        if (multiplier["unit"] !== "multiplier" || multiplier["value"] !== 3)
+          collector.report(
+            "INVALID_DEFINITION",
+            fixedChecks.pointer,
+            "Lucy M6 requires fixed multiplier 3",
+          )
+      }
+      for (const [field, expected] of Object.entries({
+        element: "fire",
+        damageKind: "regular",
+        skillCategory: "uncategorized",
+      }))
+        if (object[field] !== expected)
+          collector.report(
+            "INVALID_DEFINITION",
+            `${pointer}/${field}`,
+            "Lucy M6 has fixed fire/regular/uncategorized identity",
+          )
+      return collector.isEmpty
+    }
     case "astra-yao-m4-quick-assist-damage": {
       rejectUnknownFields(object, ["kind", "multiplier"], checks, kind)
       const fixedChecks = { ...checks, pointer: `${pointer}/multiplier` }
@@ -1364,11 +1478,21 @@ function validateContributionRule(
     (object["operation"] as { kind: string }).kind ===
       "alice-core-periodic-damage" ||
     (object["operation"] as { kind: string }).kind ===
-      "astra-yao-m4-quick-assist-damage"
+      "astra-yao-m4-quick-assist-damage" ||
+    (object["operation"] as { kind: string }).kind ===
+      "lucy-guard-boar-inheritance" ||
+    (object["operation"] as { kind: string }).kind ===
+      "lucy-guard-boar-m6-damage"
   ) {
     const astra =
       (object["operation"] as { kind: string }).kind ===
       "astra-yao-m4-quick-assist-damage"
+    const operationKind = (object["operation"] as { kind: string }).kind
+    const lucy =
+      operationKind === "lucy-guard-boar-inheritance" ||
+      operationKind === "lucy-guard-boar-m6-damage"
+    const minimumMindscape =
+      operationKind === "lucy-guard-boar-m6-damage" ? 6 : astra ? 4 : 0
     const active = object["activation"] as Record<string, unknown>
     const maximum = active["maximumLayers"] as
       | Record<string, unknown>
@@ -1392,7 +1516,7 @@ function validateContributionRule(
             condition.left.field === field &&
             condition.right.kind === "literal" &&
             condition.right.value ===
-              (field === "mindscapeRank" ? (astra ? 4 : 0) : 1),
+              (field === "mindscapeRank" ? minimumMindscape : 1),
         ),
       )
     if (
@@ -1407,7 +1531,7 @@ function validateContributionRule(
       Object.keys(object["parameters"] as object).length !== 0 ||
       object["uniqueness"] !== undefined ||
       source.identity.kind !== "agent" ||
-      source.identity.entityId !== (astra ? "1311" : "1401") ||
+      source.identity.entityId !== (lucy ? "1151" : astra ? "1311" : "1401") ||
       !requiredConfiguration
     ) {
       checks.collector.report(
@@ -2247,6 +2371,25 @@ export function validateRuleSetStructure(
       r.kind === "contribution" &&
       r.operation.kind === "astra-yao-m4-quick-assist-damage",
   )
+  const lucy = effects.filter(
+    (r) =>
+      r.kind === "contribution" &&
+      (r.operation.kind === "lucy-guard-boar-inheritance" ||
+        r.operation.kind === "lucy-guard-boar-m6-damage"),
+  )
+  for (const kind of [
+    "lucy-guard-boar-inheritance",
+    "lucy-guard-boar-m6-damage",
+  ])
+    if (
+      lucy.filter((r) => r.kind === "contribution" && r.operation.kind === kind)
+        .length > 1
+    )
+      collector.report(
+        "DUPLICATE_ID",
+        "/effects",
+        "Each Lucy named operation must be unique",
+      )
   if (astraM4.length > 1)
     collector.report(
       "DUPLICATE_ID",
@@ -2263,7 +2406,7 @@ export function validateRuleSetStructure(
     if (
       rule.kind === "modification" &&
       rule.target.kind === "effect" &&
-      [...periodic, ...astraM4]
+      [...periodic, ...astraM4, ...lucy]
         .map((p) => p.effectId)
         .includes(rule.target.effectId)
     )

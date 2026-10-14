@@ -1510,7 +1510,10 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
                 !(
                   rule.kind === "contribution" &&
                   (rule.operation.kind === "alice-core-periodic-damage" ||
-                    rule.operation.kind === "astra-yao-m4-quick-assist-damage")
+                    rule.operation.kind ===
+                      "astra-yao-m4-quick-assist-damage" ||
+                    rule.operation.kind === "lucy-guard-boar-inheritance" ||
+                    rule.operation.kind === "lucy-guard-boar-m6-damage")
                 ),
             ),
           }
@@ -1525,14 +1528,17 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
               (o) =>
                 o.optionId !== "nanoka:agents:alice:core-periodic-damage" &&
                 o.optionId !==
-                  "nanoka:agents:astrayao:m4-quick-assist-bonus-damage",
+                  "nanoka:agents:astrayao:m4-quick-assist-bonus-damage" &&
+                o.optionId !== "nanoka:agents:lucy:guard-boar-inheritance" &&
+                o.optionId !== "nanoka:agents:lucy:m6-boar-rain",
             )
           : catalog.options,
         skillTargets: legacy
           ? catalog.skillTargets.filter(
               (t) =>
                 t.targetId !==
-                "zzz-hp:skill:astrayao-m4-quick-assist-bonus-damage",
+                  "zzz-hp:skill:astrayao-m4-quick-assist-bonus-damage" &&
+                t.targetId !== "nanoka:lucy-m6-boar-rain",
             )
           : catalog.skillTargets,
       }
