@@ -1,5 +1,6 @@
 import { roxyCoreWindConsumerSource } from "./fixtures/roxy-core-wind-consumer.ts"
 import { windDriveDiscConsumerSource } from "./fixtures/drive-disc-wind-consumer.ts"
+import { claretInitialConversionConsumerSource } from "./fixtures/claret-initial-conversion-consumer.ts"
 import { roxyWindEyeConsumerSource } from "./fixtures/roxy-wind-eye-consumer.ts"
 import { hugoAttackConsumerSource } from "./fixtures/hugo-stun-teammates-consumer.ts"
 import { roxyMindscapeConsumerSource } from "./fixtures/roxy-mindscape-consumer.ts"
@@ -137,6 +138,8 @@ ${roxyCoreWindConsumerSource}
 globalThis.fairyRoxyCoreWind = async () => verifyRoxyCoreWindConsumer(api, await import("@randomplay/core"))
 ${windDriveDiscConsumerSource}
 globalThis.fairyWindDriveDisc = async () => verifyWindDriveDiscConsumer(api, await import("@randomplay/core"))
+${claretInitialConversionConsumerSource}
+globalThis.fairyClaretInitialConversion = async () => verifyClaretInitialConversionConsumer(api, await import("@randomplay/core"))
 ${roxyAdditionalConsumerSource}
 globalThis.fairyRoxyAdditional = async () => verifyRoxyAdditionalConsumer(api, await import("@randomplay/core"))
 ${yanagiPolarityConsumerSource}
@@ -1067,6 +1070,17 @@ function defineScenarios(counts: {
             expect(result.expected).toBeCloseTo(2525.46689791968, 8)
             expect(result.difference).toBeCloseTo(512.57700384, 8)
             expect(result.rejectedSlots).toEqual([1, 2, 3, 4, 6])
+          },
+        },
+        {
+          name: "claret-initial-conversion",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyClaretInitialConversion(),
+            )
+            expect(result.initial).toBeCloseTo(0.513, 12)
+            expect(result.hit).toBeCloseTo(0.813, 12)
+            expect(result.externalHit).toBeCloseTo(1.625, 12)
           },
         },
         {

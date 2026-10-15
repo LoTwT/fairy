@@ -55,7 +55,14 @@ const reference = JSON.parse(
   ),
 ) as {
   provenance: { repository: string; commit: string }
-  builds: Record<string, { panel: ReferencePanel; permanentConversion: number }>
+  builds: Record<
+    string,
+    {
+      panel: ReferencePanel
+      permanentConversion: number
+      initialCriticalRateConversion?: number
+    }
+  >
   cases: Record<
     string,
     {
@@ -80,7 +87,7 @@ async function inputFor(
     contractVersion: 2,
     gameVersion: "3.2",
     snapshotId:
-      "sha256:8b31f9d37ecf51c976038d6575cf0d6efd44d1155e239911efa38664af3a80e6",
+      "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f",
   })
   expect(data.catalog.source.commit).toBe(reference.provenance.commit)
   expect(data.catalog.source.repository).toBe(reference.provenance.repository)
@@ -427,6 +434,19 @@ describe("complete static configurations against an independent pinned ZZZ-HP re
             conversions[0]!.value.value,
             baseline.permanentConversion,
             "Ben permanent conversion",
+          )
+        }
+        if (baseline.initialCriticalRateConversion !== undefined) {
+          const conversions = panel.contributions.filter(
+            (c) =>
+              c.origin.effectId ===
+              "agent:1611:zzz-hp:eff-mtskqyss-1toefw:blk-mtrf598z-wr4jqt:mindscape:0",
+          )
+          expect(conversions).toHaveLength(1)
+          close(
+            conversions[0]!.value.value,
+            baseline.initialCriticalRateConversion,
+            "Claret permanent conversion",
           )
         }
       }

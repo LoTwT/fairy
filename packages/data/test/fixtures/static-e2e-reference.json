@@ -4,7 +4,7 @@
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
     "fairyBaseline": "7f53b1e23ed72cd72b7ddb1fcc54393af4c0a4f2",
     "gameVersion": "3.2",
-    "method": "Pinned upstream pure functions + independently reproduced direct-damage and sharpen chains; precise Nanoka inputs, explicit Ben supplement and existing Astra M2 correction. Not the upstream application.",
+    "method": "Pinned upstream pure functions + independently reproduced direct-damage and sharpen chains; precise Nanoka inputs, explicit Ben and Claret permanent-conversion supplements and existing Astra M2 correction. Not the upstream application.",
     "resources": [
       {
         "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -443,6 +443,10 @@
         "sha256": "0f0095be51b0b67133f0e583b34c79fa8cfb0e2eff520f6c1a56a7947e755d9e"
       },
       {
+        "path": "agents/1611/details.zh.json",
+        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+      },
+      {
         "path": "agents/1581/data.json",
         "sha256": "e44c965092149c70fce8b3771f0a55094143d5e7a9e7196ad1038613f90236e9"
       },
@@ -485,10 +489,6 @@
       {
         "path": "agents/1371/details.zh.json",
         "sha256": "70e3e1b3347c44e01167bd017d799b73d4a6fee751038484e62475f5e32bf1b3"
-      },
-      {
-        "path": "agents/1611/details.zh.json",
-        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
       },
       {
         "path": "agents/1581/details.zh.json",
@@ -753,7 +753,7 @@
           "anomalyProficiency": 79,
           "anomalyMastery": 80,
           "energyRegen": 0,
-          "criticalRate": 0.85,
+          "criticalRate": 1.3778,
           "criticalDamage": 1.508,
           "penetrationRatio": 0,
           "sharpCriticalDamage": 1.5
@@ -764,6 +764,7 @@
         }
       },
       "permanentConversion": 0,
+      "initialCriticalRateConversion": 0.5278,
       "affixCounts": {
         "hpFlat": 3,
         "hpPercent": 0,
@@ -798,7 +799,7 @@
         "mastery": 79,
         "anomalyControl": 80,
         "energyRegen": 0,
-        "critRate": 85,
+        "critRate": 137.78,
         "critDmg": 150.8,
         "penRate": 0,
         "dmgBonus": 30,
@@ -2357,14 +2358,14 @@
           "attack": 1287.4365400000002,
           "health": 8187.5949,
           "defense": 2103.1579,
-          "criticalRate": 1.15,
+          "criticalRate": 1.6778,
           "criticalDamage": 1.508,
           "sharpCriticalDamage": 1.75
         },
         "factors": {
           "damageBonus": 1.5,
-          "sharpCritical": 3.4718749999999994,
-          "expectedCritical": 3.4718749999999994,
+          "sharpCritical": 6.0119125,
+          "expectedCritical": 6.0119125,
           "defense": 0.459224985540775,
           "resistance": 1,
           "stunDamage": 1,
@@ -2374,34 +2375,34 @@
         "hits": [
           {
             "nonCritical": 71788.82537851935,
-            "critical": 249241.82811104684,
-            "expected": 249241.82811104684
+            "critical": 431588.13665343774,
+            "expected": 431588.13665343774
           }
         ],
         "totals": {
           "nonCritical": 71788.82537851935,
-          "critical": 249241.82811104684,
-          "expected": 249241.82811104684,
+          "critical": 431588.13665343774,
+          "expected": 431588.13665343774,
           "displayedNonCritical": null,
           "displayedCritical": null
         },
-        "upstreamStyleIntegerExpected": 249242
+        "upstreamStyleIntegerExpected": 431588
       },
       "upstreamAlignedTotals": {
         "nonCritical": 71788.82537851935,
-        "critical": 249241.82811104684,
-        "expected": 249241.82811104684,
+        "critical": 431588.13665343774,
+        "expected": 431588.13665343774,
         "displayedNonCritical": null,
         "displayedCritical": null
       },
       "upstreamRoundedTotals": {
         "nonCritical": 71788.8970595535,
-        "critical": 249242.07697863728,
-        "expected": 249242.07697863728,
+        "critical": 431588.567593543,
+        "expected": 431588.567593543,
         "displayedNonCritical": null,
         "displayedCritical": null
       },
-      "upstreamStyleIntegerExpected": 249242
+      "upstreamStyleIntegerExpected": 431589
     },
     "remiel-voidflare": {
       "reference": {
