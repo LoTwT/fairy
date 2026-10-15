@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "39",
+  "revision": "40",
   "effects": [
     {
       "kind": "contribution",
@@ -52720,6 +52720,125 @@
           "kind": "literal",
           "unit": "ratio",
           "value": 0.2
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1621:nanoka:m6-giant-windstorm",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1621"
+        },
+        "section": "影画6 · 巨型风旋倍率",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/talent/6/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/skill/special/description/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/skill/special/description/9/param/3"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/talent/6/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/skill/special/description/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/skill/special/description/9/param/3"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 6
+        }
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["wind"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillCategory",
+            "values": ["special"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:roxy-giant-windstorm"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "scale",
+        "itemIds": ["action:agent:1621:action:0024:base"],
+        "value": {
+          "kind": "literal",
+          "unit": "multiplier",
+          "value": 2.5
         }
       }
     },

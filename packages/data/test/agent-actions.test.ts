@@ -418,20 +418,24 @@ describe("agent action semantics", () => {
     )
   })
 
-  it("keeps unresolved classifications and special expressions unavailable", async () => {
+  it("opens the reviewed wind-eye convention while preserving unsupported expressions", async () => {
     const data = await agent("1621")
-    const unresolved = data.actions.find(
+    const windEye = data.actions.find(
       (a) => a.actionId === "action:agent:1621:action:0022",
     )!
-    expect(unresolved.damageCoefficient).not.toBeNull()
+    expect(windEye.damageCoefficient).not.toBeNull()
     expect(
       resolveAgentAction({
         agent: data,
-        actionId: unresolved.actionId,
+        actionId: windEye.actionId,
         mindscapeRank: 0,
-        levels: {},
+        levels: { special: { mode: "effective", value: 1 } },
       }),
-    ).toMatchObject({ ok: false, issues: [{ code: "unknown-category" }] })
+    ).toMatchObject({
+      ok: true,
+      skillCategory: "special",
+      sourceDamageMultiplier: 0.521,
+    })
     expect(() =>
       resolveAgentAction({
         agent: data,

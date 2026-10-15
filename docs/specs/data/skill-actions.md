@@ -136,6 +136,38 @@ Nanoka 的莱特 `/talent/1/desc` 与奥菲丝 `/passive/level/1301507/desc/0` �
 游戏中 M6 对它们无效的结论。原合计粒度及逐命中限制继续适用，不从增颗文本推定内部命中拆分，
 不修改失衡倍率或异常积蓄。
 
+### 具名约定：洛克茜风眼
+
+洛克茜（1621）的三个既有动作采用固定 ZZZ-HP
+`7a4f2776bf4a44cb108fcd7f5834f63606ade914` 的普通直伤计算约定：
+`direct / special + specialBasic / wind` 映射为项目 `regular / special / wind`，
+读取普通 ATK 与 CR/CD，穿透及敌方乘区沿用普通伤害公式。这一明确接受的项目约定
+替代先前因分类未确认而拒绝计算的边界，不声称 Nanoka 提供了公共枚举或完成了游戏实测。
+固定 effects/skills 生成来源不升级，原 `upstreamSkillId: null` 保留。
+
+| 动作末四位    | 参数 ID | 来源伤害行                           | 原始倍率（最终等级 L）  | 静态单位     |
+| ------------- | ------- | ------------------------------------ | ----------------------- | ------------ |
+| 0022 爆鸣     | 1621022 | /skill/special/description/9/param/0 | 0.521 + 0.048 × (L − 1) | 一次事件合计 |
+| 0023 微型风旋 | 1621019 | /skill/special/description/9/param/1 | 0.521 + 0.048 × (L − 1) | 1 秒合计     |
+| 0024 巨型风旋 | 1621020 | /skill/special/description/9/param/3 | 2.084 + 0.190 × (L − 1) | 1 秒合计     |
+
+完整 actionId 前缀为 `action:agent:1621:action:`，branchId 均为
+`agent:1621:branch:special-10`，培养组仍为 special。Nanoka 3.2 中英文
+`/skill/special/description/4/desc` 说明爆鸣造成一次伤害、两种风旋均持续1秒；
+对应失衡行2/4与伤害曲线独立保留。上游 seed 的 /skills/843、844、845 分别为巨型、
+微型、爆鸣，L12 的 baseMult/factor100 为4.174、1.049、1.049。
+完整原条款和参数见[来源夹具](../../../packages/data/test/fixtures/roxy-wind-eye-source.json)。
+
+三个动作均保留 `aggregate / repeat: 1`：不据此发明逐击次数或逐击取整，
+`requireIndividualHits` 仍拒绝。调用方选择一次事件或一个风旋的1秒合计，不自动累计9个风眼、
+30秒生命周期、余响每3秒或额外2次。合法训练/最终等级及M3/M5加级保持；M6最终 special 最低5。
+
+仅巨型动作绑定 `zzz-hp:skill:roxy-giant-windstorm`，
+原 `:base` 项可由独立的[M6倍率选项](zzz-hp-static-effects.md#修订-40洛克茜风眼与巨型风旋倍率)
+乘2.5。调用方传原始解析结果，不预乘M6；解析本身不因影画自动改写倍率。
+同类混合请求中微型、爆鸣及其他项保留原倍率。风抗忽视、额外能力与旧技能增益按各自条件
+独立选择；核心双暴、失衡结果、资源和自动事件均未由此开放。
+
 ### 具名约定：露西亲卫队小猪面板代算
 
 `action:agent:1151:action:0011`—`0014`（亲卫队小猪：抄家伙！的棒球棍、拳套、弹弓，

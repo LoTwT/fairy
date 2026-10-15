@@ -1,3 +1,4 @@
+import { roxyWindEyeConsumerSource } from "./fixtures/roxy-wind-eye-consumer.ts"
 import { hugoAttackConsumerSource } from "./fixtures/hugo-stun-teammates-consumer.ts"
 import { roxyMindscapeConsumerSource } from "./fixtures/roxy-mindscape-consumer.ts"
 import { roxyAdditionalConsumerSource } from "./fixtures/roxy-additional-consumer.ts"
@@ -412,8 +413,8 @@ assert.deepEqual(resolvedNicole.resolutionContext, { agentEntityId: "1031", mind
 assert.deepEqual(resolvedNicole.calculation.segments.map(segment => segment.repeat), [1, 3])
 const actionManifest = (await import("@randomplay/data/definitions/skills/manifest.json", { with: { type: "json" } })).default
 assert.equal(actionManifest.members.length, api.agentNames.length)
-assert.equal(actionManifest.coverage.damage, 1129)
-assert.equal(actionManifest.coverage.unavailable, 7)
+assert.equal(actionManifest.coverage.damage, 1132)
+assert.equal(actionManifest.coverage.unavailable, 4)
 assert.equal((await api.loadAgentLevel60Attributes("Astra Yao")).baseAttributes.attack.value, 640.7699)
 const discAffixes = await api.loadSDriveDiscMaxLevelAffixes()
 assert.deepEqual(discAffixes, (await import("@randomplay/data/definitions/attributes/drive-disc-affixes.json", { with: { type: "json" } })).default)
@@ -475,6 +476,8 @@ ${hugoAttackConsumerSource}
 assert.deepEqual(await verifyHugoAttackConsumer(api, await import("@randomplay/core")), {nonCritical:3800,closed:2000,rejectedOldThree:true})
 ${roxyMindscapeConsumerSource}
 assert.deepEqual(await verifyRoxyMindscapeConsumer(api, await import("@randomplay/core")), {ultimate:67146.975,combined:99761.22,nonWindIgnore:0,rejectedLowRank:true})
+${roxyWindEyeConsumerSource}
+assert.deepEqual(await verifyRoxyWindEyeConsumer(api, await import("@randomplay/core")), {multipliers:[1.049,1.049,4.174],mixedBase:12.533,giantScale:2.5,missingGiantRejected:true})
 ${roxyAdditionalConsumerSource}
 await verifyRoxyAdditionalConsumer(api, await import("@randomplay/core"))
 ${yanagiPolarityConsumerSource}

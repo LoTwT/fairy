@@ -846,7 +846,7 @@
     "agents/1581.json": "5bbd71c08977708c77ddd08d8aac7aef9635a0d371695e6f305594ec5de872bc",
     "agents/1591.json": "8e671e68d9600814812c2b044c398974af7407a6ba142d2a5cd73cf834084978",
     "agents/1611.json": "8914791496672f301b020717b70bab506af1dccf1e6d2308db51ca61502a1471",
-    "agents/1621.json": "fc687d94ba987014c9cf54063da9d470b00f254c9491cc1815a811f3ce65f003"
+    "agents/1621.json": "acd6cac887d0ae9a5c1f86c46a4757a46f77013a099ed7a1ec9751d55a8bc342"
   },
   "evidence": {
     "zzzHpCommit": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
@@ -883,15 +883,15 @@
       }
     ]
   },
-  "registrySha256": "66708638c95e9f36834578099404a576f5a1840696db98f3cbe1d7ccf0b42057",
-  "staticCatalogSha256": "9a51ecd8b283432675faa9b1d63d42d50ca927291cb768bd17c747b2a4c51a6e",
+  "registrySha256": "46503646abef2ea9f397cb948226096450dd732bb462ca568593335865c296b3",
+  "staticCatalogSha256": "1aae99d78344453a3e99584888a8c76022f6cb88ef822c123c13a2c64e7394ea",
   "coverage": {
     "agents": 60,
     "actions": 1308,
-    "damage": 1129,
+    "damage": 1132,
     "dazeOnly": 168,
     "luminize": 4,
-    "unavailable": 7,
+    "unavailable": 4,
     "individualHitActions": 1
   },
   "limitations": [

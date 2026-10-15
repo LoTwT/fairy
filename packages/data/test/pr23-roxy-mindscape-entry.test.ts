@@ -53,7 +53,7 @@ describe("Roxy real action identities and M4 consumption", () => {
       roxy.actions.actions.filter(
         (action) => action.calculation.kind === "damage",
       ),
-    ).toHaveLength(17)
+    ).toHaveLength(20)
     expect(
       roxy.actions.actions
         .filter((action) => action.calculation.kind === "daze-only")
@@ -67,36 +67,24 @@ describe("Roxy real action identities and M4 consumption", () => {
       roxy.actions.actions
         .filter((action) => action.calculation.kind === "unavailable")
         .map((action) => action.actionId),
-    ).toEqual(
-      ["0022", "0023", "0024"].map(
-        (suffix) => `action:agent:1621:action:${suffix}`,
-      ),
-    )
+    ).toEqual([])
   })
   it.each(roxy.actions.actions)(
     "resolves and classifies $actionId / $rowName",
     (action) => {
       expect(action.inputs).toEqual([])
       const resolved = resolve(action.actionId)
-      if (action.calculation.kind === "unavailable") {
-        expect(resolved).toEqual({
-          ok: false,
-          issues: [
-            {
-              code: "unknown-category",
-              message: "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。",
-            },
-          ],
-        })
-        return
-      }
       expect(resolved.ok, JSON.stringify(resolved)).toBe(true)
       if (!resolved.ok) throw new Error(JSON.stringify(resolved.issues))
       expect(resolved.actionId).toBe(action.actionId)
       expect(resolved.calculation.kind).toBe(action.calculation.kind)
       expect(resolved.skillCategory).toBe(action.skillCategory)
       expect(resolved.skillTargetIds).toEqual(
-        action.actionId === ultimateId ? [targetId] : [],
+        action.actionId === ultimateId
+          ? [targetId]
+          : action.actionId === "action:agent:1621:action:0024"
+            ? ["zzz-hp:skill:roxy-giant-windstorm"]
+            : [],
       )
       if (resolved.calculation.kind === "daze-only") {
         expect(resolved.dazeMultiplier).toBeGreaterThan(0)
