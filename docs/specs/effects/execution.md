@@ -706,3 +706,15 @@ TypeScript 可以拒绝不相容单位、属性阶段、部分身份混用、错
 第二阶段增加 `advanceEffects`，实现已定义的触发、激活阶段修改、时钟、叠层、冷却、稳定请求身份和事件顺序，再验收本节的事件与重入用例。完成这一阶段后才满足完整 `EffectEngine` 接口。游戏定义的自动时序适配须满足[实例页](examples.md#尚需补充的游戏证据)的证据要求。
 
 层数上限、受益对象与生效条件的专用修改字段尚无真实案例，未纳入当前 `ConfigurationChange`。后续加入前须提供具体条款、可区分不同解释的样例，并同步扩展类型、执行语义和验收；合成夹具本身不作为纳入能力的依据。当前定义中的这些字段仍可按其既有类型声明，未登记的修改字段应在校验时拒绝。
+
+### 目录受益职业排除
+
+`StaticCatalogApplicability.excludedBeneficiaryProfession` 是可选非空字符串，与
+`beneficiaryProfession` 及原有队伍、元素、人数和声明受益者筛选取交集。只有已知职业
+且不同于排除值的实体通过；profession为null时不猜测。纳入和排除值相同按
+INVALID_DEFINITION拒绝，指向excludedBeneficiaryProfession；未选及0层也需通过
+完整定义校验。省略时保持原行为，不新增职业枚举或字符串归一化。
+
+此字段只在目录受益者筛选处生效，高层沿用目录入口；裸supplied没有catalog职业事实，
+调用方必须自行验证资格。规则级uniqueness仍按既有实际消费输出执行，两者职责独立。
+洛克茜单状态风伤的数值与来源边界见[修订41](../data/zzz-hp-static-effects.md#修订-41洛克茜核心单状态风伤双暴)。

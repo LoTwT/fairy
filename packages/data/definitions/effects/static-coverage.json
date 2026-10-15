@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "40",
+  "revision": "41",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -30331,6 +30331,26 @@
       "status": "integrated"
     },
     {
+      "supplementId": "nanoka:agents:1621:core-wind-critical-damage",
+      "source": "nanoka-integrated@3.2 agents/1621 /passive/level/1621501—1621507/desc/0",
+      "kind": "option",
+      "optionId": "nanoka:agents:1621:core-wind-critical-damage",
+      "effectIds": ["agent:1621:nanoka:core-wind-critical-damage"],
+      "supportedRanks": "核心1—7；影画0—6；单有效状态0—1",
+      "computationTarget": "single-state wind hit critical damage with one effective source per consumed output",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:1621:core-wind-sharp-critical-damage",
+      "source": "nanoka-integrated@3.2 agents/1621 /passive/level/1621501—1621507/desc/0",
+      "kind": "option",
+      "optionId": "nanoka:agents:1621:core-wind-sharp-critical-damage",
+      "effectIds": ["agent:1621:nanoka:core-wind-sharp-critical-damage"],
+      "supportedRanks": "核心1—7；影画0—6；单有效状态0—1",
+      "computationTarget": "single-state wind hit critical damage with one effective source per consumed output",
+      "status": "integrated"
+    },
+    {
       "supplementId": "nanoka:agents:lucy:guard-boar-inheritance",
       "source": "nanoka-integrated@3.2 agents/1151 passive core1—7",
       "kind": "option",
@@ -31250,17 +31270,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 891,
-    "options": 924,
+    "rules": 893,
+    "options": 926,
     "converted": 1130,
     "corrected": 139,
     "unsupported": 21,
     "supplements": {
-      "records": 96,
-      "rules": 67,
-      "options": 58,
+      "records": 98,
+      "rules": 69,
+      "options": 60,
       "entities": 4,
-      "integrated": 63,
+      "integrated": 65,
       "outOfScope": 33
     }
   },

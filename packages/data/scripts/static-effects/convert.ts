@@ -35,6 +35,7 @@ import {
   verifyRoxyMindscapeRegistrations,
 } from "./roxy-mindscapes.ts"
 import { verifyRoxyAdditionalRegistrations } from "./roxy-additional.ts"
+import { verifyRoxyCoreWindRegistrations } from "./roxy-core-wind.ts"
 import {
   COMPLETE_STATE_OPTIONS,
   HUGO_ATTACK_SOURCE_KEY,
@@ -3988,6 +3989,7 @@ export function convertSource(
     declaredSkillTargets: StaticEffectCatalog["skillTargets"][number][] = []
   verifyRoxyMindscapeRegistrations(supplements)
   verifyRoxyAdditionalRegistrations(supplements)
+  verifyRoxyCoreWindRegistrations(supplements)
   verifyYanagiPolarityIsolation(collected.records, collected.entities)
   // 缺失条款与共存记录先验证，再编译普通记录；未知 stat / unsupported
   // 不得抢先掩盖完整来源上下文的漂移。实体缺失仍由补充身份校验拒绝。
@@ -4557,6 +4559,9 @@ export function convertSource(
         beneficiary: spec.beneficiary ?? { kind: "holder" },
         when: spec.when,
         operation: spec.operation,
+        ...(spec.uniqueness === undefined
+          ? {}
+          : { uniqueness: spec.uniqueness }),
       }) as ContributionRule
     // 同一选项的多条完整状态规则：全部规则共用同一变体、输入与层数上限；
     // 层数上限不一致即拒绝（0 层同时关闭、1 层同时生效，不提供半状态）。
@@ -4876,7 +4881,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "40",
+    revision: "41",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: effects.some(

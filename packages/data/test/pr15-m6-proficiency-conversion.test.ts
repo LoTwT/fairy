@@ -74,7 +74,7 @@ const byId = (values: readonly unknown[], key: string) =>
 describe("PR15 fixed M6 contexts and supplement compilation", () => {
   it("keeps Jane's actual CR/CD block and Alice's actual empty pack, adding three rules and two options", () => {
     const result = convert()
-    expect(result.definitions.revision).toBe("40")
+    expect(result.definitions.revision).toBe("41")
     expect(result.definitions.effects).toHaveLength(5)
     expect(result.catalog.options).toHaveLength(4)
     for (const [id, value] of [

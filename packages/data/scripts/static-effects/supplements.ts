@@ -1,6 +1,7 @@
 import { LUCY_GUARD_BOAR_SUPPLEMENTS } from "./lucy-guard-boar.ts"
 import { ROXY_MINDSCAPE_SUPPLEMENTS } from "./roxy-mindscapes.ts"
 import { ROXY_ADDITIONAL_SUPPLEMENTS } from "./roxy-additional.ts"
+import { ROXY_CORE_WIND_SUPPLEMENTS } from "./roxy-core-wind.ts"
 import type {
   AnyParameter,
   Condition,
@@ -16,6 +17,7 @@ import type {
   StaticCatalogEntity,
   StaticCatalogInputRequirement,
   StaticCatalogVariant,
+  UniquenessPolicy,
 } from "@randomplay/shared"
 
 /**
@@ -114,6 +116,8 @@ export interface SupplementRuleSpec {
   readonly when: Condition<"contribution">
   readonly operation: ContributionOperation
   readonly maximumLayers: number
+  /** 透传既有规则唯一性；省略时保留原加算语义。 */
+  readonly uniqueness?: UniquenessPolicy
   /**
    * 补充规则的受益者；缺省 holder。全队受益的条款（如残响Ⅰ型 EX 后
    * 全队冲击力）声明 team，与目录选项 target 同口径；受益者是持有者同队
@@ -6129,6 +6133,7 @@ const astraYaoMindscape4QuickAssistDamage: Supplement = {
 export const SUPPLEMENTS: readonly Supplement[] = [
   ...ROXY_MINDSCAPE_SUPPLEMENTS,
   ...ROXY_ADDITIONAL_SUPPLEMENTS,
+  ...ROXY_CORE_WIND_SUPPLEMENTS,
   ...LUCY_GUARD_BOAR_SUPPLEMENTS,
   astraYaoMindscape4QuickAssistDamage,
   aliceCorePeriodicDamage,

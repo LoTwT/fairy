@@ -2040,7 +2040,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("40")
+    expect(catalog.revision).toBe("41")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -4861,10 +4861,11 @@ describe("velina cyclone catalog linkage", () => {
       // 批次 19 再增耀嘉音 M4 一次强攻队友快速支援附伤；
       // 批次 20 再增 Lucy 小猪继承和一次 M6 猪雨两个具名选项。
       // 洛克茜额外能力再增两个独立条款，均为单规则单选项。
-      records: 96,
-      integrated: 63,
-      rules: 67,
-      options: 58,
+      // 核心单状态风伤再增普通暴伤、锐暴伤两个职业分支。
+      records: 98,
+      integrated: 65,
+      rules: 69,
+      options: 60,
       entities: 4,
       outOfScope: 33,
     })

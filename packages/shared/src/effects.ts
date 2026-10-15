@@ -932,6 +932,8 @@ export interface StaticCatalogInputRequirement {
 
 export interface StaticCatalogApplicability {
   readonly beneficiaryProfession?: string
+  /** 只允许已知且不同于此值的职业受益；与纳入职业和其他筛选取交集。 */
+  readonly excludedBeneficiaryProfession?: string
   readonly beneficiaryElements?: readonly DamageElement[]
   /** 当前同队的另一名 actor 任一职业匹配即满足资格；不筛选受益者职业。 */
   readonly otherTeammateProfessions?: readonly string[]
