@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "39",
+  "revision": "40",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -30301,6 +30301,16 @@
       "status": "integrated"
     },
     {
+      "supplementId": "nanoka:agents:1621:m6-giant-windstorm",
+      "source": "nanoka-integrated@3.2 agents/1621 /talent/6/desc + /skill/special/description/4/desc + /skill/special/description/9/param/3",
+      "kind": "option",
+      "optionId": "nanoka:agents:1621:m6-giant-windstorm",
+      "effectIds": ["agent:1621:nanoka:m6-giant-windstorm"],
+      "supportedRanks": "影画6；核心1—7；层数0—1",
+      "computationTarget": "original giant windstorm one-second damage multiplier",
+      "status": "integrated"
+    },
+    {
       "supplementId": "nanoka:agents:1621:additional-level-damage",
       "source": "nanoka-integrated@3.2 agents/1621 /passive/level/1621501—1621507/desc/1",
       "kind": "option",
@@ -31240,17 +31250,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 890,
-    "options": 923,
+    "rules": 891,
+    "options": 924,
     "converted": 1130,
     "corrected": 139,
     "unsupported": 21,
     "supplements": {
-      "records": 95,
-      "rules": 66,
-      "options": 57,
+      "records": 96,
+      "rules": 67,
+      "options": 58,
       "entities": 4,
-      "integrated": 62,
+      "integrated": 63,
       "outOfScope": 33
     }
   },

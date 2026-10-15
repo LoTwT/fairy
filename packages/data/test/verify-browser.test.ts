@@ -1,3 +1,4 @@
+import { roxyWindEyeConsumerSource } from "./fixtures/roxy-wind-eye-consumer.ts"
 import { hugoAttackConsumerSource } from "./fixtures/hugo-stun-teammates-consumer.ts"
 import { roxyMindscapeConsumerSource } from "./fixtures/roxy-mindscape-consumer.ts"
 import { roxyAdditionalConsumerSource } from "./fixtures/roxy-additional-consumer.ts"
@@ -128,6 +129,8 @@ ${hugoAttackConsumerSource}
 globalThis.fairyHugoAttack = async () => verifyHugoAttackConsumer(api, await import("@randomplay/core"))
 ${roxyMindscapeConsumerSource}
 globalThis.fairyRoxyMindscapes = async () => verifyRoxyMindscapeConsumer(api, await import("@randomplay/core"))
+${roxyWindEyeConsumerSource}
+globalThis.fairyRoxyWindEye = async () => verifyRoxyWindEyeConsumer(api, await import("@randomplay/core"))
 ${roxyAdditionalConsumerSource}
 globalThis.fairyRoxyAdditional = async () => verifyRoxyAdditionalConsumer(api, await import("@randomplay/core"))
 ${yanagiPolarityConsumerSource}
@@ -1031,6 +1034,20 @@ function defineScenarios(counts: {
               combined: 99761.22,
               nonWindIgnore: 0,
               rejectedLowRank: true,
+            })
+          },
+        },
+        {
+          name: "roxy-wind-eye-and-exact-giant-m6",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyRoxyWindEye(),
+            )
+            expect(result).toEqual({
+              multipliers: [1.049, 1.049, 4.174],
+              mixedBase: 12.533,
+              giantScale: 2.5,
+              missingGiantRejected: true,
             })
           },
         },

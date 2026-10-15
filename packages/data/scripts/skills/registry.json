@@ -22752,16 +22752,15 @@
     "rowKind": "damage",
     "dazeRowIndex": null,
     "sourceSignature": "e6eeba7918496739febf50f598fd4286f96f33480d797ef7da138ce3a9a852d5",
-    "skillCategory": null,
+    "skillCategory": "special",
     "element": "wind",
     "damageKind": "regular",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "unknown-category",
-        "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定ZZZ-HP 7a4f2776bf4a44cb108fcd7f5834f63606ade914的direct/special+specialBasic/wind计算约定：普通ATK、CR/CD，映射regular/special/wind；未经游戏实测，不升级固定技能来源。",
+      "一次爆鸣事件合计。aggregate/repeat1不提供逐击拆分或逐击取整，不自动累计风眼、余响或生命周期事件。"
     ]
   },
   {
@@ -22774,16 +22773,15 @@
     "rowKind": "damage",
     "dazeRowIndex": 2,
     "sourceSignature": "871c58623ccfcc9d29f2594a1370e62d3566129fc200b978493c8d27dfb5e7ae",
-    "skillCategory": null,
+    "skillCategory": "special",
     "element": "wind",
     "damageKind": "regular",
     "upstreamSkillId": null,
     "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "unknown-category",
-        "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
-      }
+    "issues": [],
+    "limitations": [
+      "采用固定ZZZ-HP 7a4f2776bf4a44cb108fcd7f5834f63606ade914的direct/special+specialBasic/wind计算约定：普通ATK、CR/CD，映射regular/special/wind；未经游戏实测，不升级固定技能来源。",
+      "风旋持续1秒，本动作按每秒倍率的一秒合计结算。aggregate/repeat1不提供逐击拆分或逐击取整，不自动累计风眼、余响或生命周期事件。"
     ]
   },
   {
@@ -22796,16 +22794,16 @@
     "rowKind": "damage",
     "dazeRowIndex": 4,
     "sourceSignature": "3b13b99085e7c7a09ad033ef52f325d5f78b50e6880ac082c28f292b73223c6c",
-    "skillCategory": null,
+    "skillCategory": "special",
     "element": "wind",
     "damageKind": "regular",
     "upstreamSkillId": null,
-    "skillTargetIds": [],
-    "issues": [
-      {
-        "code": "unknown-category",
-        "message": "该动作的伤害增益分类尚未核实；培养类别不代替伤害分类。"
-      }
+    "skillTargetIds": ["zzz-hp:skill:roxy-giant-windstorm"],
+    "issues": [],
+    "limitations": [
+      "采用固定ZZZ-HP 7a4f2776bf4a44cb108fcd7f5834f63606ade914的direct/special+specialBasic/wind计算约定：普通ATK、CR/CD，映射regular/special/wind；未经游戏实测，不升级固定技能来源。",
+      "风旋持续1秒，本动作按每秒倍率的一秒合计结算。aggregate/repeat1不提供逐击拆分或逐击取整，不自动累计风眼、余响或生命周期事件。",
+      "保留原始倍率；显式选择M6巨型风旋选项才对原base项乘2.5，不预乘或自动追加次数。"
     ]
   }
 ]

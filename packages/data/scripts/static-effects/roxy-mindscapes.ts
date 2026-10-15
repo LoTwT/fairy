@@ -110,7 +110,7 @@ const clauses: readonly {
     rank: 6,
     name: "影画6 · 自身风属性抗性忽视",
     description:
-      "洛克茜自身风属性伤害无视目标15%风属性伤害抗性；0关闭、1开启，覆盖regular、anomaly、disorder、vortex及anomaly-settlement。命中actor与全部基础项实际属性提供者须为本绑定同一洛克茜；异常类另要求实际AP提供者同属本人。同实体历史快照保留原读数，其他实例提供者不受益。适用时混合本人和他人基础项须拆成独立请求，否则明确拒绝。不含风眼、余响、巨型风旋倍率与失衡值。",
+      "洛克茜自身风属性伤害无视目标15%风属性伤害抗性；0关闭、1开启，覆盖regular、anomaly、disorder、vortex及anomaly-settlement。命中actor与全部基础项实际属性提供者须为本绑定同一洛克茜；异常类另要求实际AP提供者同属本人。同实体历史快照保留原读数，其他实例提供者不受益。适用时混合本人和他人基础项须拆成独立请求，否则明确拒绝。已解析风眼按上述自身风伤条件受益；本选项不自动生成风眼或余响事件，不提供巨型风旋倍率与失衡值。",
     when: {
       kind: "all",
       conditions: [
@@ -136,9 +136,110 @@ const clauses: readonly {
   },
 ]
 
+const giantWindstormTarget = "roxy-giant-windstorm"
+const giantWindstormItem = "action:agent:1621:action:0024:base"
+export const ROXY_GIANT_WINDSTORM_SUPPLEMENT: Supplement = {
+  kind: "option",
+  supplementId: "nanoka:agents:1621:m6-giant-windstorm",
+  optionId: "nanoka:agents:1621:m6-giant-windstorm",
+  catalogEntityId: "nanoka:agents:1621",
+  source:
+    "nanoka-integrated@3.2 agents/1621 /talent/6/desc + /skill/special/description/4/desc + /skill/special/description/9/param/3",
+  supportedRanks: "影画6；核心1—7；层数0—1",
+  computationTarget: "original giant windstorm one-second damage multiplier",
+  evidence: (
+    [
+      [
+        "zh",
+        "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e",
+      ],
+      [
+        "en",
+        "30a75cab3c664648ca8f9bbcfdce04bc5d92b5897b9187c17c6620c76c282b2a",
+      ],
+    ] as const
+  ).flatMap(([locale, sha256]) =>
+    [
+      "/talent/6/desc",
+      "/skill/special/description/4/desc",
+      "/skill/special/description/9/param/3",
+    ].map((pointer) => ({
+      path: `agents/1621/details.${locale}.json`,
+      pointer,
+      sha256,
+    })),
+  ),
+  verification:
+    "Nanoka 3.2 中英文确认巨型风旋持续1秒、倍率行为每秒倍率，M6伤害倍率提升至原本250%，按原倍率×2.5，不是+250%增伤。复用正式动作0024的原始base项，仅对持有者当前ATK的regular/special/wind伤害项生效；混合请求其他项不受倍率调整。三风眼动作的普通ATK/CR/CD及special分类采用固定上游7a4f2776bf4a44cb108fcd7f5834f63606ade914 /skills/843—845的direct/special+specialBasic/wind计算约定，未经游戏实测，不升级effects或skills固定来源。调用方提供原始倍率，不预乘M6；0关闭、1开启。独立于M6风抗忽视及额外能力，不自动生成余响每3秒与额外2次事件，不计算30秒生命周期、逐击取整或M6失衡提升。",
+  skillTarget: {
+    targetId: giantWindstormTarget,
+    agentEntityId: "1621",
+    category: "special",
+    name: "风眼·巨型风旋（1秒合计）",
+  },
+  rule: {
+    effectId: "agent:1621:nanoka:m6-giant-windstorm",
+    identity,
+    section: "影画6 · 巨型风旋倍率",
+    config: {
+      kind: "compare-number",
+      unit: "count",
+      operator: "gte",
+      left: {
+        kind: "configuration-number",
+        unit: "count",
+        field: "mindscapeRank",
+      },
+      right: { kind: "literal", unit: "count", value: 6 },
+    },
+    parameters: {},
+    scope: "hit",
+    when: {
+      kind: "all",
+      conditions: [
+        { kind: "one-of", fact: "hit.damageKind", values: ["regular"] },
+        { kind: "one-of", fact: "hit.element", values: ["wind"] },
+        { kind: "one-of", fact: "hit.skillCategory", values: ["special"] },
+        {
+          kind: "one-of",
+          fact: "hit.skillTag",
+          values: [`zzz-hp:skill:${giantWindstormTarget}`],
+        },
+      ],
+    },
+    operation: {
+      kind: "hit-adjustment",
+      field: "damageMultiplier",
+      operator: "scale",
+      itemIds: [giantWindstormItem],
+      value: { kind: "literal", unit: "multiplier", value: 2.5 },
+    },
+    maximumLayers: 1,
+    beneficiary: { kind: "holder" },
+  },
+  variant: {
+    configuration: { minimumMindscape: 6 },
+    inputs: [],
+    applicability: {},
+    damageItemRequirements: [
+      {
+        itemId: giantWindstormItem,
+        stat: "attack",
+        role: "base",
+        allowedModes: ["direct"],
+        source: "holder-current",
+      },
+    ],
+    conditionDescription:
+      "M6巨型风旋1秒合计原倍率×2.5，仅匹配正式动作0024的base项与巨型精确目标；使用持有者当前ATK与普通CR/CD。0关闭、1开启，与风抗忽视独立。传入未预乘M6的原倍率，最终special等级沿既有合法域（M6最低5）；不包含微型、爆鸣、自动余响次数或失衡。",
+    name: "影画6 · 巨型风旋倍率",
+    target: "self",
+  },
+}
+
 /** 固定来源没有 Roxy，复用 Nanoka 的真实补充实体；不创建旧来源记录。 */
-export const ROXY_MINDSCAPE_SUPPLEMENTS: readonly Supplement[] = clauses.map(
-  (clause) => ({
+export const ROXY_MINDSCAPE_SUPPLEMENTS: readonly Supplement[] = [
+  ...clauses.map<Supplement>((clause) => ({
     kind: "option",
     supplementId: `nanoka:agents:1621:${clause.slug}`,
     optionId: `nanoka:agents:1621:${clause.slug}`,
@@ -201,8 +302,9 @@ export const ROXY_MINDSCAPE_SUPPLEMENTS: readonly Supplement[] = clauses.map(
       name: clause.name,
       target: clause.team ? "team" : "self",
     },
-  }),
-)
+  })),
+  ROXY_GIANT_WINDSTORM_SUPPLEMENT,
+]
 
 /** 三类保留身份任一命中均核对完整登记；主规则与附加规则共用效果身份。 */
 export function verifyRoxyMindscapeRegistrations(

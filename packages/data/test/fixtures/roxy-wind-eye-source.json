@@ -1,0 +1,413 @@
+{
+  "sourceVersion": "3.2",
+  "sources": {
+    "zh": {
+      "resourcePath": "agents/1621/details.zh.json",
+      "sha256": "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e",
+      "bytes": 80457
+    },
+    "en": {
+      "resourcePath": "agents/1621/details.en.json",
+      "sha256": "30a75cab3c664648ca8f9bbcfdce04bc5d92b5897b9187c17c6620c76c282b2a",
+      "bytes": 85298
+    }
+  },
+  "locales": {
+    "zh": {
+      "description": {
+        "pointer": "/skill/special/description/4",
+        "value": {
+          "desc": "<color=#FFFFFF>[强化特殊技：敬请安息]</color>消耗<Term:1000039></Term>后生成，持续30秒后自动引爆；\n<Term:1000040></Term>最多同时存在9个，超出上限后最早生成的<color=#FFFFFF>[风眼]</color>会自动引爆；\n被<color=#FFFFFF>[特殊技：恕不远送]</color>命中时将其引爆，若同时命中数量不足3个，每个<color=#FFFFFF>[风眼]</color>位置上都会生成1阵微型风旋，追踪敌人并造成<color=#A6C5FD>风属性伤害</color>，持续1秒；\n若同时命中3个，则会生成1阵巨型风旋作为替代，造成<color=#A6C5FD>风属性伤害</color>，持续1秒。\n通过任意方式引爆时，<color=#FFFFFF>[风眼]</color>会发出爆鸣对周围敌人造成一次<color=#A6C5FD>风属性伤害</color>。",
+          "name": "风眼",
+          "potential": []
+        }
+      },
+      "parameters": {
+        "pointer": "/skill/special/description/9",
+        "value": {
+          "name": "风眼",
+          "param": [
+            {
+              "desc": "{Skill:1621022, Prop:1001}",
+              "name": "爆鸣伤害倍率",
+              "param": {
+                "1621022": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5210,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621019, Prop:1001}",
+              "name": "微型风旋每秒伤害倍率",
+              "param": {
+                "1621019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5210,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1770,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621019, Prop:1002}",
+              "name": "微型风旋每秒失衡倍率",
+              "param": {
+                "1621019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5210,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 90,
+                  "main": 1770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1770,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621020, Prop:1001}",
+              "name": "巨型风旋每秒伤害倍率",
+              "param": {
+                "1621020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 20840,
+                  "damagePercentageGrowth": 1900,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1900,
+                  "main": 20840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7060,
+                  "stunRatioGrowth": 330
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621020, Prop:1002}",
+              "name": "巨型风旋每秒失衡倍率",
+              "param": {
+                "1621020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 20840,
+                  "damagePercentageGrowth": 1900,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 330,
+                  "main": 7060,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7060,
+                  "stunRatioGrowth": 330
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      },
+      "mindscapes": {
+        "3": {
+          "pointer": "/talent/3/desc",
+          "value": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2"
+        },
+        "5": {
+          "pointer": "/talent/5/desc",
+          "value": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2"
+        },
+        "6": {
+          "pointer": "/talent/6/desc",
+          "value": "自身攻击造成的伤害无视目标15%<color=#A6C5FD>风属性伤害抗性</color>；<color=#ffffff>[特殊技：恕不远送]</color>引爆<color=#ffffff>[风眼]</color>生成巨型风旋时，主目标会被赋予<color=#ffffff>[余响]</color>效果，每间隔3秒在目标位置生成一次巨型风旋，共额外生成2次巨型风旋，重复触发时额外生成次数叠加且刷新<color=#ffffff>[余响]</color>的持续时间；巨型风旋造成的伤害倍率提升至原本的250%，造成的失衡提升20%。"
+        }
+      }
+    },
+    "en": {
+      "description": {
+        "pointer": "/skill/special/description/4",
+        "value": {
+          "desc": "Generated after <color=#FFFFFF>EX Special Attack: Kindly Rest in Peace</color> consumes <Term:1000039></Term>, and automatically detonates after 30s.\nUp to 9 <Term:1000040>Eyes of the Storm</Term> can exist at the same time. If this limit is exceeded, the earliest generated <color=#FFFFFF>Eye of the Storm</color> will automatically detonate.\nDetonates when hit by <color=#FFFFFF>Special Attack: Forgive Me for Not Seeing You Off</color>. If fewer than 3 are hit at the same time, 1 Miniature Windstorm is generated at the location of each <color=#FFFFFF>Eye of the Storm</color>, tracking enemies and dealing <color=#A6C5FD>Wind DMG</color> for 1s.\nIf 3 are hit at the same time, 1 Giant Windstorm is generated instead, dealing <color=#A6C5FD>Wind DMG</color> for 1s.\nWhen detonated by any means, an <color=#FFFFFF>Eye of the Storm</color> releases a blast, dealing 1 instance of <color=#A6C5FD>Wind DMG</color> to nearby enemies.",
+          "name": "Eye of the Storm",
+          "potential": []
+        }
+      },
+      "parameters": {
+        "pointer": "/skill/special/description/9",
+        "value": {
+          "name": "Eye of the Storm",
+          "param": [
+            {
+              "desc": "{Skill:1621022, Prop:1001}",
+              "name": "Detonation DMG Multiplier",
+              "param": {
+                "1621022": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5210,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 0,
+                  "stunRatioGrowth": 0
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621019, Prop:1001}",
+              "name": "Miniature Windstorm DMG Multiplier per Second",
+              "param": {
+                "1621019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5210,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 480,
+                  "main": 5210,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1770,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621019, Prop:1002}",
+              "name": "Miniature Windstorm Daze Multiplier per Second",
+              "param": {
+                "1621019": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 5210,
+                  "damagePercentageGrowth": 480,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 90,
+                  "main": 1770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 1770,
+                  "stunRatioGrowth": 90
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621020, Prop:1001}",
+              "name": "Giant Windstorm DMG Multiplier per Second",
+              "param": {
+                "1621020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 20840,
+                  "damagePercentageGrowth": 1900,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1900,
+                  "main": 20840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7060,
+                  "stunRatioGrowth": 330
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621020, Prop:1002}",
+              "name": "Giant Windstorm Daze Multiplier per Second",
+              "param": {
+                "1621020": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 20840,
+                  "damagePercentageGrowth": 1900,
+                  "etherPurify": 0,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 330,
+                  "main": 7060,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 7060,
+                  "stunRatioGrowth": 330
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      },
+      "mindscapes": {
+        "3": {
+          "pointer": "/talent/3/desc",
+          "value": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2"
+        },
+        "5": {
+          "pointer": "/talent/5/desc",
+          "value": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2"
+        },
+        "6": {
+          "pointer": "/talent/6/desc",
+          "value": "The DMG dealt by attacks ignores 15% of the target's <color=#A6C5FD>Wind RES</color>.\nWhen <color=#ffffff>Special Attack: Forgive Me for Not Seeing You Off</color> detonates <color=#ffffff>Eyes of the Storm</color> to generate a Giant Windstorm, the primary target is inflicted with <color=#ffffff>Afterecho</color>. A Giant Windstorm is generated at the target's location every 3s, for a total of 2 additional Giant Windstorms. Repeated triggers stack the number of additional Giant Windstorm instances generated and refresh the duration of <color=#ffffff>Afterecho</color>. The DMG dealt by the Giant Windstorm increases to 250% of its original value, and the Daze it inflicts increases by 20%."
+        }
+      }
+    }
+  },
+  "upstream": {
+    "commit": "7a4f2776bf4a44cb108fcd7f5834f63606ade914",
+    "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+    "sha256": "71107d7974b02726aaf0dee29f55136e4901ee12d209d68271dd39167b8c7fad",
+    "skills": [
+      {
+        "pointer": "/skills/843",
+        "record": {
+          "id": "sk-Roxy-nk-1621020-巨型风旋每秒",
+          "agentId": "Roxy",
+          "name": "风眼·巨型风旋每秒",
+          "source": "preset",
+          "damageType": "direct",
+          "skillTypes": ["special", "specialBasic"],
+          "buffAnchorId": null,
+          "baseMult": 417.4,
+          "baseMultFactor": 100,
+          "settlementMult": 0,
+          "multSource": "nanoka",
+          "damagePercentage": 20840,
+          "damagePercentageGrowth": 1900,
+          "element": "风",
+          "ownerGroupId": null,
+          "note": ""
+        }
+      },
+      {
+        "pointer": "/skills/844",
+        "record": {
+          "id": "sk-Roxy-nk-1621019-微型风旋每秒",
+          "agentId": "Roxy",
+          "name": "风眼·微型风旋每秒",
+          "source": "preset",
+          "damageType": "direct",
+          "skillTypes": ["special", "specialBasic"],
+          "buffAnchorId": null,
+          "baseMult": 104.9,
+          "baseMultFactor": 100,
+          "settlementMult": 0,
+          "multSource": "nanoka",
+          "damagePercentage": 5210,
+          "damagePercentageGrowth": 480,
+          "element": "风",
+          "ownerGroupId": null,
+          "note": ""
+        }
+      },
+      {
+        "pointer": "/skills/845",
+        "record": {
+          "id": "sk-Roxy-nk-1621022-爆鸣",
+          "agentId": "Roxy",
+          "name": "风眼·爆鸣",
+          "source": "preset",
+          "damageType": "direct",
+          "skillTypes": ["special", "specialBasic"],
+          "buffAnchorId": null,
+          "baseMult": 104.9,
+          "baseMultFactor": 100,
+          "settlementMult": 0,
+          "multSource": "nanoka",
+          "damagePercentage": 5210,
+          "damagePercentageGrowth": 480,
+          "element": "风",
+          "ownerGroupId": null,
+          "note": ""
+        }
+      }
+    ]
+  }
+}
