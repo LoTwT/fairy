@@ -1,5 +1,6 @@
 import { hugoAttackConsumerSource } from "./fixtures/hugo-stun-teammates-consumer.ts"
 import { roxyMindscapeConsumerSource } from "./fixtures/roxy-mindscape-consumer.ts"
+import { roxyAdditionalConsumerSource } from "./fixtures/roxy-additional-consumer.ts"
 import { yanagiPolarityConsumerSource } from "./fixtures/yanagi-polarity-consumer.ts"
 import {
   lucyGuardBoarConsumerSource,
@@ -474,6 +475,8 @@ ${hugoAttackConsumerSource}
 assert.deepEqual(await verifyHugoAttackConsumer(api, await import("@randomplay/core")), {nonCritical:3800,closed:2000,rejectedOldThree:true})
 ${roxyMindscapeConsumerSource}
 assert.deepEqual(await verifyRoxyMindscapeConsumer(api, await import("@randomplay/core")), {ultimate:67146.975,combined:99761.22,nonWindIgnore:0,rejectedLowRank:true})
+${roxyAdditionalConsumerSource}
+await verifyRoxyAdditionalConsumer(api, await import("@randomplay/core"))
 ${yanagiPolarityConsumerSource}
 await verifyYanagiPolarityConsumer(api, await import("@randomplay/core"))
 ${veilConsumerSource}

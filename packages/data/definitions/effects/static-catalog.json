@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "38",
+  "revision": "39",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -46050,6 +46050,249 @@
           "maximumLayers": 1,
           "inputs": [],
           "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1621:additional-level-damage",
+      "catalogEntityId": "nanoka:agents:1621",
+      "name": "额外能力 · 辉金心脏自身等级增伤",
+      "conditionDescription": "同队另一名强攻、命破或锋御角色任一满足时，洛克茜自身伤害增加(8+min(1.2×角色等级,72))/100。角色等级来自本绑定持有者的actorSources.level，须为真实当前等级的有限整数1—60，无默认值；不是核心或技能等级，也不取命中队友等级。多名合格队友只满足一次。独立0/1开关，不要求队伍攻击命中状态，不包含第三条8%直接伤害或核心团队双暴。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {},
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621501/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621502/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621503/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621504/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621505/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621506/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621507/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621501/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621502/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621503/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621504/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621505/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621506/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621507/desc/1"
+            }
+          ],
+          "effectIds": ["agent:1621:nanoka:additional-level-damage"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "holderLevelInputName": "roxy:additional:holder-level",
+          "applicability": {
+            "otherTeammateProfessions": ["强攻", "命破", "锋御"]
+          },
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1621:additional-hit-stun-damage",
+      "catalogEntityId": "nanoka:agents:1621",
+      "name": "额外能力 · 队伍攻击命中后的失衡易伤",
+      "conditionDescription": "同队另一名强攻、命破或锋御角色任一满足资格；声明队伍角色攻击已命中当前敌人且失衡易伤状态仍有效。持有者及合法同队角色均受益，不按受益者职业筛选；当前敌人失衡时普通失衡加数+0.30，与影画2的+0.30同区相加（基础1.5→1.8，两项有效时2.1）。独立0/1开关，不依赖自身等级增伤或角色等级输入，多名合格队友不倍增。命中、持续和失衡结束由调用方维护，更换目标必须重新声明；不含失衡时间延长、资源或风化/浸染直接伤害。",
+      "target": "team",
+      "variants": [
+        {
+          "target": "team",
+          "configuration": {},
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621501/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621502/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621503/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621504/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621505/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621506/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621507/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621501/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621502/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621503/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621504/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621505/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621506/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621507/desc/1"
+            }
+          ],
+          "effectIds": ["agent:1621:nanoka:additional-hit-stun-damage"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {
+            "otherTeammateProfessions": ["强攻", "命破", "锋御"]
+          },
           "differences": []
         }
       ]

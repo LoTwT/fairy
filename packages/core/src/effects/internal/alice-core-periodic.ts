@@ -1,3 +1,4 @@
+import { validateCatalogActorSourceFields } from "./catalog-actor-source.ts"
 import { parseEffectRuleSet } from "../parse-effect-rule-set.ts"
 import type {
   AliceCorePeriodicDamageResult,
@@ -412,12 +413,7 @@ export function calculateAliceCorePeriodicDamage(
       const p = `/actorSources/${index}`,
         source = expectObject(sourceValue, checks(p), "actor source")
       if (!source) continue
-      rejectUnknownFields(
-        source,
-        ["entityId", "agentEntityId"],
-        checks(p),
-        "actor source",
-      )
+      validateCatalogActorSourceFields(source, p, collector)
       identity(source.entityId, "entity", `${p}/entityId`)
       if (
         typeof source.agentEntityId !== "string" ||

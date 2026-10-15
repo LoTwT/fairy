@@ -15,12 +15,14 @@ import type {
   AliceCorePeriodicDamageResult,
   BindingId,
   Condition,
+  ContributionOperation,
   ContributionRule,
   EffectId,
   EffectRule,
   EntityId,
   FactorChannel,
   NonEmpty,
+  NumericExpression,
   Result,
   StaticCatalogDamageInput,
   StaticCatalogDamageItem,
@@ -30,6 +32,7 @@ import type {
   StaticDamageResult,
   StaticEffectCatalog,
   StaticEffectSelection,
+  Unit,
 } from "../types.ts"
 import {
   ALICE_CORE_PERIODIC_MECHANISM,
@@ -49,6 +52,7 @@ import {
 import { SKILL_CATEGORIES } from "./expression.ts"
 import { IssueCollector, failure } from "./issues.ts"
 import { validateNumericInputs } from "./numeric-input.ts"
+import { validateCatalogActorSourceFields } from "./catalog-actor-source.ts"
 import { validateSourceBindings } from "./rule.ts"
 import {
   assembleRemielleSpecialVoidflareReadings,
@@ -189,55 +193,61 @@ function isStatAdjustment(
   )
 }
 
-/** 表达式树里是否存在指定名称、指定单位的 input 读取。 */
+/** 仅沿数值表达式实际求值的子节点识别 input 读取。 */
 function expressionConsumesInput(
-  value: unknown,
+  expression: NumericExpression<Unit, "contribution">,
   name: string,
-  unit: string,
+  unit: Unit,
 ): boolean {
-  if (typeof value !== "object" || value === null) return false
-  const entry = value as {
-    readonly kind?: unknown
-    readonly name?: unknown
-    readonly unit?: unknown
-    readonly operands?: readonly unknown[]
-    readonly input?: unknown
-    readonly rate?: unknown
-    readonly value?: unknown
-    readonly coefficient?: unknown
-    readonly left?: unknown
-    readonly right?: unknown
-    readonly condition?: unknown
-    readonly conditions?: readonly unknown[]
-    readonly maximum?: unknown
-    readonly limit?: unknown
+  switch (expression.kind) {
+    case "input":
+      return expression.name === name && expression.unit === unit
+    case "literal":
+    case "parameter":
+    case "stat":
+    case "configuration-number":
+      return false
+    case "convert":
+      return (
+        expressionConsumesInput(expression.input, name, unit) ||
+        expressionConsumesInput(expression.rate, name, unit)
+      )
+    case "add":
+    case "minimum":
+    case "maximum":
+      return expression.operands.some((operand) =>
+        expressionConsumesInput(operand, name, unit),
+      )
+    case "multiply":
+      return (
+        expressionConsumesInput(expression.value, name, unit) ||
+        expressionConsumesInput(expression.coefficient, name, unit)
+      )
   }
-  if (entry.kind === "input" && entry.name === name && entry.unit === unit)
-    return true
-  for (const nested of [
-    entry.operands,
-    entry.input,
-    entry.rate,
-    entry.value,
-    entry.coefficient,
-    entry.left,
-    entry.right,
-    entry.condition,
-    entry.maximum,
-    entry.limit,
-  ])
-    if (Array.isArray(nested)) {
-      for (const item of nested)
-        if (expressionConsumesInput(item, name, unit)) return true
-    } else if (
-      nested !== undefined &&
-      expressionConsumesInput(nested, name, unit)
-    )
-      return true
-  if (Array.isArray(entry.conditions))
-    for (const condition of entry.conditions)
-      if (expressionConsumesInput(condition, name, unit)) return true
-  return false
+}
+
+function operationConsumesInput(
+  operation: ContributionOperation,
+  name: string,
+  unit: Unit,
+): boolean {
+  switch (operation.kind) {
+    case "stat-adjustment":
+    case "factor-contribution":
+    case "hit-adjustment":
+      return expressionConsumesInput(operation.value, name, unit)
+    case "stun-damage-replacement":
+      return (
+        expressionConsumesInput(operation.bonus, name, unit) ||
+        expressionConsumesInput(operation.maximumBonus, name, unit)
+      )
+    case "lucy-guard-boar-inheritance":
+    case "lucy-guard-boar-m6-damage":
+    case "astra-yao-m4-quick-assist-damage":
+    case "alice-core-periodic-damage":
+    case "guaranteed-critical":
+      return false
+  }
 }
 
 /** JSON 目录与 TypeScript 调用共享校验；不信任类型断言或未选中条目的引用。 */
@@ -822,6 +832,7 @@ export function validateStaticCatalog(
           "parameterMapping",
           "damageItemRequirements",
           "layerCountInputName",
+          "holderLevelInputName",
           "declaredTeammateBeneficiary",
           "squadUniqueEffect",
           "exclusiveDamageItem",
@@ -875,6 +886,16 @@ export function validateStaticCatalog(
       // （maximumLayers 1），防止把普通叠层选项静默改成单实例。详细校验在
       // effectIds 解析后进行（需要已解析的规则）。
       const layerCountInputName = variant["layerCountInputName"]
+      const holderLevelInputName = variant["holderLevelInputName"]
+      if (holderLevelInputName !== undefined)
+        expectNonEmptyString(
+          holderLevelInputName,
+          {
+            ...checks(`${vp}/holderLevelInputName`),
+            structureCode: "INVALID_DEFINITION",
+          },
+          `${String(option["optionId"])} holder level input name`,
+        )
       if (layerCountInputName !== undefined)
         expectNonEmptyString(
           layerCountInputName,
@@ -1104,9 +1125,12 @@ export function validateStaticCatalog(
             "Unknown difference",
           )
       }
-      if (typeof layerCountInputName === "string") {
-        const named = layerCountInputName
-        // 声明的层数输入必须由所引用的贡献真实消费（同 binding 的 count
+      for (const [field, named] of [
+        ["layerCountInputName", layerCountInputName],
+        ["holderLevelInputName", holderLevelInputName],
+      ] as const) {
+        if (typeof named !== "string") continue
+        // 声明的派生输入必须由所引用的贡献真实消费（同 binding 的 count
         // input），且该贡献是一次 supplied 完整状态；不允许靠名称猜测。
         // 该变体的 contribution 必须恰好一条（允许引用的 modification）：
         // 多引用普通叠层或第二条贡献会在展开时派生同键冲突，定义阶段即拒绝。
@@ -1132,12 +1156,15 @@ export function validateStaticCatalog(
           consumers.length !== 1 ||
           consumers[0]!.activation.kind !== "supplied" ||
           !literalOne(consumers[0]!.activation.maximumLayers) ||
-          !expressionConsumesInput(consumers[0]!.operation, named, "count")
+          !operationConsumesInput(consumers[0]!.operation, named, "count") ||
+          (field === "holderLevelInputName" && variant["maximumLayers"] !== 1)
         )
           collector.report(
             "INVALID_DEFINITION",
-            `${vp}/layerCountInputName`,
-            "The layer-count input must be consumed as a count input by exactly one supplied single-instance contribution (maximumLayers literal count 1) in this variant",
+            `${vp}/${field}`,
+            field === "layerCountInputName"
+              ? "The layer-count input must be consumed as a count input by exactly one supplied single-instance contribution (maximumLayers literal count 1) in this variant"
+              : `${String(option["optionId"])}: holderLevelInputName must be consumed as a count input by exactly one supplied single-instance contribution (maximumLayers literal count 1); the variant also requires maximumLayers 1`,
           )
       }
       const refs =
@@ -1218,6 +1245,16 @@ export function validateStaticCatalog(
           `${vp}/layerCountInputName`,
           "The layer-count input name must not be an external input requirement of the same variant",
         )
+      if (
+        typeof holderLevelInputName === "string" &&
+        (inputNames.has(holderLevelInputName) ||
+          holderLevelInputName === layerCountInputName)
+      )
+        collector.report(
+          "INVALID_DEFINITION",
+          `${vp}/holderLevelInputName`,
+          `${String(option["optionId"])}: holder level input must not also name an external requirement or the layer-count input`,
+        )
       const applies = expectObject(
         variant["applicability"],
         checks(`${vp}/applicability`),
@@ -1226,7 +1263,12 @@ export function validateStaticCatalog(
       if (applies) {
         rejectUnknownFields(
           applies,
-          ["beneficiaryProfession", "beneficiaryElements", "teamProfession"],
+          [
+            "beneficiaryProfession",
+            "beneficiaryElements",
+            "teamProfession",
+            "otherTeammateProfessions",
+          ],
           checks(`${vp}/applicability`),
           "applicability",
         )
@@ -1236,6 +1278,31 @@ export function validateStaticCatalog(
             checks(`${vp}/applicability/beneficiaryProfession`),
             "profession",
           )
+        if (applies["otherTeammateProfessions"] !== undefined) {
+          const pointer = `${vp}/applicability/otherTeammateProfessions`
+          const professions = expectArray(
+            applies["otherTeammateProfessions"],
+            checks(pointer),
+            "other teammate professions",
+          )
+          if (professions) {
+            if (
+              !professions.length ||
+              new Set(professions).size !== professions.length
+            )
+              collector.report(
+                "INVALID_INPUT",
+                pointer,
+                "Expected nonempty unique professions",
+              )
+            for (const [index, profession] of professions.entries())
+              expectNonEmptyString(
+                profession,
+                checks(`${pointer}/${index}`),
+                "profession",
+              )
+          }
+        }
         if (applies["beneficiaryElements"] !== undefined) {
           const elements =
             expectArray(
@@ -1774,16 +1841,15 @@ export function calculateOrdinaryStaticDamageFromCatalog(
       "At least one damage item is required",
     )
   const actors = new Map<EntityId, StaticEffectCatalog["entities"][number]>()
+  const actorLevels = new Map<
+    EntityId,
+    { index: number; level: number | undefined }
+  >()
   for (const [i, value] of actorSources.entries()) {
     const p = `/actorSources/${i}`,
       source = expectObject(value, checks(p), "actor source")
     if (!source) continue
-    rejectUnknownFields(
-      source,
-      ["entityId", "agentEntityId"],
-      checks(p),
-      "actor source",
-    )
+    const level = validateCatalogActorSourceFields(source, p, collector)
     const id = source["entityId"]
     const entity = catalog.entities.find(
       (e) =>
@@ -1807,6 +1873,7 @@ export function calculateOrdinaryStaticDamageFromCatalog(
       if (actors.has(id))
         collector.report("DUPLICATE_ID", p, "Duplicate actor source")
       actors.set(id, entity)
+      actorLevels.set(id, { index: i, level })
     }
   }
   // Every actor on a participating team needs identity facts; opponents need none.
@@ -1891,13 +1958,17 @@ export function calculateOrdinaryStaticDamageFromCatalog(
     message: string
   }[] = []
   /**
-   * 完整状态层数桥接派生的内部 count 输入：键为 (bindingId, name)，值是
-   * 该绑定上经目录严格校验的逻辑层数。外部 inputs 不能提供同一键，多个
-   * 选择产生同一键也不允许静默覆盖。
+   * 目录派生的绑定 count 输入，保留来源以区分角色等级与逻辑状态层数。
+   * 同一 holder 等级可幂等复用；异来源同键与手工覆盖必须明确拒绝。
    */
-  const derivedLayerInputs = new Map<
+  const derivedCountInputs = new Map<
     string,
-    { bindingId: string; name: string; value: number }
+    {
+      bindingId: string
+      name: string
+      value: number
+      source: "selection.layers" | "actorSources.level"
+    }
   >()
   const durationIds = new Set(
     parsed.value.effects
@@ -2083,6 +2154,38 @@ export function calculateOrdinaryStaticDamageFromCatalog(
       continue
     }
     if (layers === 0) continue
+    // 正层选择先履行等级输入契约，资格、when、受益者或绑定失效均不豁免。
+    if (variant.holderLevelInputName !== undefined) {
+      const name = variant.holderLevelInputName
+      const fact = actorLevels.get(binding.holderId)
+      if (fact?.level === undefined)
+        collector.report(
+          "MISSING_FACT",
+          fact === undefined
+            ? "/actorSources"
+            : `/actorSources/${fact.index}/level`,
+          `Missing current character level of holder ${binding.holderId}; ${explain}`,
+          { bindingId: binding.bindingId, effectId: variant.effectIds[0]! },
+        )
+      else {
+        const levelInputKey = JSON.stringify([binding.bindingId, name])
+        const previous = derivedCountInputs.get(levelInputKey)
+        if (previous !== undefined && previous.source !== "actorSources.level")
+          collector.report(
+            "CONTEXT_MISMATCH",
+            p,
+            `Input ${name} is derived from both holder level and ${previous.source}; ${explain}`,
+            { bindingId: binding.bindingId },
+          )
+        else
+          derivedCountInputs.set(levelInputKey, {
+            bindingId: binding.bindingId,
+            name,
+            value: fact.level,
+            source: "actorSources.level",
+          })
+      }
+    }
     // 声明式同队受益者：启用（layers > 0）的选择按变体声明校验。需要声明的
     // 变体缺声明、不需要声明的变体带声明、声明实体未观察/无身份/非同队/是
     // 持有者本人，都是输入错误；不用近似（如把命中角色当前场角色）兜底。
@@ -2392,6 +2495,16 @@ export function calculateOrdinaryStaticDamageFromCatalog(
       else squadUniqueSources.set(teamKey, binding.bindingId)
     }
     const gate = variant.applicability.teamProfession
+    const otherProfessions = variant.applicability.otherTeammateProfessions
+    const hasQualifyingTeammate =
+      otherProfessions === undefined ||
+      [...actors].some(
+        ([id, entity]) =>
+          id !== binding.holderId &&
+          world.actors.get(id)?.teamId === holderActor.teamId &&
+          entity.profession !== null &&
+          otherProfessions.includes(entity.profession),
+      )
     const count = gate
       ? [...actors].filter(
           ([id, e]) =>
@@ -2402,6 +2515,7 @@ export function calculateOrdinaryStaticDamageFromCatalog(
     const beneficiaries = [...actors].filter(
       ([id, e]) =>
         world.actors.get(id)?.teamId === holderActor.teamId &&
+        hasQualifyingTeammate &&
         ((variant.target ?? option.target) === "team" ||
           id === binding.holderId) &&
         (!gate || gate.counts.includes(count)) &&
@@ -2503,18 +2617,23 @@ export function calculateOrdinaryStaticDamageFromCatalog(
         })
       } else {
         const key = JSON.stringify([binding.bindingId, layerCountInputName])
-        if (derivedLayerInputs.has(key)) {
+        if (derivedCountInputs.has(key)) {
           collector.report(
-            "DUPLICATE_ID",
+            derivedCountInputs.get(key)!.source === "actorSources.level"
+              ? "CONTEXT_MISMATCH"
+              : "DUPLICATE_ID",
             p,
-            `Multiple selections derive the same layer-count input ${layerCountInputName}; ${explain}`,
+            derivedCountInputs.get(key)!.source === "actorSources.level"
+              ? `Input ${layerCountInputName} is derived from both holder level and selection.layers; ${explain}`
+              : `Multiple selections derive the same layer-count input ${layerCountInputName}; ${explain}`,
           )
           continue
         }
-        derivedLayerInputs.set(key, {
+        derivedCountInputs.set(key, {
           bindingId: binding.bindingId,
           name: layerCountInputName,
           value: layers,
+          source: "selection.layers",
         })
         expanded.push({
           effectId,
@@ -2833,30 +2952,36 @@ export function calculateOrdinaryStaticDamageFromCatalog(
     ...lowInput
   } = low as StaticDamageInput &
     Pick<StaticCatalogDamageInput, "catalog" | "actorSources">
-  // 完整状态层数桥接：派生 count 输入并入低层 inputs；外部 inputs 不能
-  // 提供同一 (bindingId, name)（即使数值相同也拒绝），层数的唯一来源是
-  // 目录里经严格校验的 selection.layers。
+  // 经目录验证的层数或 holder 等级派生为绑定 count 输入；外部 inputs
+  // 不能提供同一 (bindingId, name)，即使数值相同也拒绝。
   let bridgedInput = lowInput
-  if (derivedLayerInputs.size > 0) {
+  if (derivedCountInputs.size > 0) {
     const externalInputs = input.inputs ?? []
-    const externalKeys = new Set(
-      externalInputs.map((entry) =>
+    const externalIndices = new Map(
+      externalInputs.map((entry, index) => [
         JSON.stringify([entry.bindingId, entry.name]),
-      ),
+        index,
+      ]),
     )
-    for (const [key, derived] of derivedLayerInputs)
-      if (externalKeys.has(key))
+    for (const [key, derived] of derivedCountInputs) {
+      const externalIndex = externalIndices.get(key)
+      if (externalIndex !== undefined)
         collector.report(
-          "DUPLICATE_ID",
-          "/inputs",
-          `Input ${derived.name} of binding ${derived.bindingId} is derived from selection.layers and must not be provided externally`,
+          derived.source === "actorSources.level"
+            ? "CONTEXT_MISMATCH"
+            : "DUPLICATE_ID",
+          derived.source === "actorSources.level"
+            ? `/inputs/${externalIndex}`
+            : "/inputs",
+          `Input ${derived.name} of binding ${derived.bindingId} is derived from ${derived.source} and must not be provided externally`,
         )
+    }
     if (!collector.isEmpty) return failure(collector)
     bridgedInput = {
       ...lowInput,
       inputs: [
         ...externalInputs,
-        ...[...derivedLayerInputs.values()].map((derived) => ({
+        ...[...derivedCountInputs.values()].map((derived) => ({
           bindingId: derived.bindingId,
           name: derived.name,
           value: { unit: "count" as const, value: derived.value },

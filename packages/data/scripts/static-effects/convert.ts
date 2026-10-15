@@ -34,6 +34,7 @@ import {
   ROXY_ULTIMATE_ACTION,
   verifyRoxyMindscapeRegistrations,
 } from "./roxy-mindscapes.ts"
+import { verifyRoxyAdditionalRegistrations } from "./roxy-additional.ts"
 import {
   COMPLETE_STATE_OPTIONS,
   HUGO_ATTACK_SOURCE_KEY,
@@ -3986,6 +3987,7 @@ export function convertSource(
     coverage: CoverageRecord[] = [],
     declaredSkillTargets: StaticEffectCatalog["skillTargets"][number][] = []
   verifyRoxyMindscapeRegistrations(supplements)
+  verifyRoxyAdditionalRegistrations(supplements)
   verifyYanagiPolarityIsolation(collected.records, collected.entities)
   // 缺失条款与共存记录先验证，再编译普通记录；未知 stat / unsupported
   // 不得抢先掩盖完整来源上下文的漂移。实体缺失仍由补充身份校验拒绝。
@@ -4714,6 +4716,9 @@ export function convertSource(
             layerCountInputName: supplement.variant.layerCountInputName,
           }),
       inputs: supplement.variant.inputs,
+      ...(supplement.variant.holderLevelInputName === undefined
+        ? {}
+        : { holderLevelInputName: supplement.variant.holderLevelInputName }),
       applicability: supplement.variant.applicability,
       differences: [],
       // 声明式伤害项要求随补充透传：与固定来源 damage-item-targeting 的
@@ -4871,7 +4876,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "38",
+    revision: "39",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: effects.some(
