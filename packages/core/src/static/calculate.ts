@@ -1055,11 +1055,7 @@ function calculateOrdinaryStaticActionDamage(
         value: { kind: "daze-only", panels, limitations: action.limitations },
       }
     const included = new Set<EffectId>(
-      input.data.panelRules.twoPieceOptions.flatMap((o) =>
-        o.outputs
-          .filter((v) => v.kind !== "conditional-damage")
-          .map((v) => v.effectId),
-      ),
+      panelRules.effects.map((rule) => rule.effectId),
     )
     const definitions: RuleSet = {
       ...input.data.definitions,

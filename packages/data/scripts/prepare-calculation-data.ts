@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto"
 import { readFile, writeFile } from "node:fs/promises"
 import { join } from "node:path"
+import { claretPanelConversion } from "./claret-panel-conversion.ts"
 import {
   CALCULATION_CONTRACT_VERSION,
   CALCULATION_GAME_VERSION,
@@ -67,6 +68,16 @@ export async function prepareCalculationData(
     )
     const conversions: ContributionRule[] = []
     let deriveSheerForce = false
+    if (id === "1611")
+      conversions.push(
+        claretPanelConversion(
+          await readFile(join(directory, "integrated", reference.path)),
+          await read(`integrated/${members.members[id]!.files.data.path}`),
+          definitions,
+          catalog,
+          index.source.version,
+        ),
+      )
     if (
       id === "1511" &&
       rows.length === 7 &&

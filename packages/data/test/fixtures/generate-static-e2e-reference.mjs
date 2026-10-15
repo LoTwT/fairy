@@ -375,6 +375,25 @@ function buildReference(build) {
     // Upstream has no configurable Ben conversion; this is an explicit, sourced supplement.
     rounded.atk += rounded.def * rate
   }
+  let initialCriticalRateConversion
+  if (actor.agentEntityId === "1611") {
+    // 独立读取冻结游戏文本；上游装备纯函数未结算这条常驻转换。
+    const details = nanoka("agents/1611/details.zh.json")
+    const rows = Object.values(details.passive.level)
+    assert.equal(rows.length, 7)
+    const rates = rows.map((row) => {
+      const match = row.desc[0]
+        .replace(/<[^>]*>/gu, "")
+        .match(/克拉蕾每拥有1%的初始暴击伤害，初始暴击率提升([\d.]+)%/u)
+      assert(match, "Missing Claret initial critical conversion evidence")
+      return Number(match[1])
+    })
+    const rate = rates[0]
+    assert(Number.isFinite(rate) && rates.every((value) => value === rate))
+    initialCriticalRateConversion = (precise.critDmg * rate) / 100
+    precise.critRate += precise.critDmg * rate
+    rounded.critRate += rounded.critDmg * rate
+  }
   const sourceAgent = upstreamData.agents.find(
     (a) => a.id === build.upstreamAgentId,
   )
@@ -409,6 +428,7 @@ function buildReference(build) {
     rounded,
     exportedBasePanelResult,
     permanentConversion,
+    initialCriticalRateConversion,
     affixCounts: counts,
   }
 }
@@ -903,7 +923,7 @@ const fixture = {
     fairyBaseline,
     gameVersion: "3.2",
     method:
-      "Pinned upstream pure functions + independently reproduced direct-damage and sharpen chains; precise Nanoka inputs, explicit Ben supplement and existing Astra M2 correction. Not the upstream application.",
+      "Pinned upstream pure functions + independently reproduced direct-damage and sharpen chains; precise Nanoka inputs, explicit Ben and Claret permanent-conversion supplements and existing Astra M2 correction. Not the upstream application.",
     resources,
     extraction,
     nanokaSources: [...nanokaSources.values()],
@@ -914,6 +934,12 @@ const fixture = {
       {
         panel: result.panel,
         permanentConversion: result.permanentConversion,
+        ...(result.initialCriticalRateConversion === undefined
+          ? {}
+          : {
+              initialCriticalRateConversion:
+                result.initialCriticalRateConversion,
+            }),
         affixCounts: result.affixCounts,
         upstreamExportedPanel: Object.fromEntries(
           [...Object.values(panelKeys), "dmgBonus", "pen"].map((key) => [

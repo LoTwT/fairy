@@ -1634,6 +1634,44 @@ optionId或主/附加effectId任一保留身份都会触发完整形状守卫，
 60份角色动作、两份registry、来源版本、integrated及npm版本不变，技能manifest仅联动
 目录摘要。固定来源与代码计算验证不等于游戏实测。
 
+## 克拉蕾常驻暴伤转暴击率的面板归属
+
+Nanoka 3.2 冻结资料 `agents/1611/details.zh.json` 的
+`/passive/level/1611501/desc/0` 至 `/passive/level/1611507/desc/0` 均明确：
+`克拉蕾每拥有1%的初始暴击伤害，初始暴击率提升0.35%`。这条常驻转换与同段的条件暴击率
+15%、17.5%、20%、22.5%、25%、27.5%、30% 分开结算。文件 SHA-256 为
+`b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5`；已有
+`rank-evidence.json` 的 `claret:blk-mtrf598z-wr4jqt` 维护七档路径、摘要与固定转换的证据，
+记录级键 `claret:blk-mtrf598z-wr4jqt:mindscape:0:eff-mtrf598z-80y7hh` 单独维护有条件暴击率。
+
+`prepare:consumer` 通过 [claret-panel-conversion.ts](../../../packages/data/scripts/claret-panel-conversion.ts)
+核对七档原文、摘要、`data.json` 的核心等级元数据，以及正式规则与目录的来源、参数、条件、输入和支持档位。
+缺少规则、证据或目录项，以及上述结构漂移均拒绝准备，不静默省略转换。
+面板规则复用正式效果
+`agent:1611:zzz-hp:eff-mtskqyss-1toefw:blk-mtrf598z-wr4jqt:mindscape:0`
+的身份和参数，只把激活方式改为常驻，把显式暴伤读取替换为持有者的面板暴伤。
+直伤属性的 `current` 读取发生在独立面板求值中，此时只含装备、二件套和常驻规则；战斗普通暴伤不参与。
+
+高层 `calculateStaticActionDamage` 的兼容行为：
+
+- 装备模式自动结算一次；`out-of-combat.stats` 已包含转换，不再重算。返回的面板可直接用于手填往返。
+- 旧选项 `agents:claret:mindscape:0:blk-mtrf598z-wr4jqt:eff-mtskqyss-1toefw` 可保留。
+  正层选择仍要求同绑定的 `…:source` 输入：缺失为 `MISSING_FACT`，错误单位为 `UNIT_MISMATCH`，
+  未知绑定为 `MISSING_REFERENCE`，非有限数值、非法层数或重复项沿既有契约拒绝。
+  输入只保留兼容校验，数值不覆盖已结算面板，也不与面板数值做相等校验；新请求应省略该选项和输入。
+- 选项未选或为零层时不要求该来源输入，也不会关闭常驻转换。条件核心状态仍由独立选项声明，只影响当前请求的命中。
+- 去重以 `panelRules` 的效果身份为准；本、南宫玉、贯穿力与其他角色的条件转换保持原有边界。
+
+低层 `calculateStaticDamageFromCatalog` 继续使用原始 `static.json` / `static-catalog.json`：
+选中旧选项后读取显式来源并贡献一次，缺输入仍拒绝；它不自动组装初始面板，也不识别调用方是否已结算转换。
+这次修复不改低层目录制品、来源版本或共享结构版本；生成的面板规则变化会更新计算资料的 `snapshotId`。
+
+[高层回归](../../../packages/data/test/claret-initial-conversion.test.ts) 以合法配装证明：
+原始暴击率 0.73、初始暴伤 1.7，结算后初始暴击率 1.325；核心 7 状态命中为 1.625。
+修复前最小用例分别得到 0.73 和手填双算后的 2.22，修复后装备、旧选项与手填的面板及伤害一致。
+回归另覆盖核心 1 至 7、多持有者隔离、二件套暴伤、局内暴伤、来源诊断；
+[生成校验](../../../packages/data/test/claret-panel-conversion.test.ts) 覆盖来源与规则漂移。
+
 ## 正式制品与消费接口
 
 正式制品放在 `packages/data/definitions/effects/`：

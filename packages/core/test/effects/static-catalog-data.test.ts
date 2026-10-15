@@ -162,6 +162,47 @@ function agentInput(
   }
 }
 
+it("keeps Claret's low-level conversion explicit and consumes the declared source exactly once", () => {
+  const effectId =
+    "agent:1611:zzz-hp:eff-mtskqyss-1toefw:blk-mtrf598z-wr4jqt:mindscape:0"
+  const optionId =
+    "agents:claret:mindscape:0:blk-mtrf598z-wr4jqt:eff-mtskqyss-1toefw"
+  const base = agentInput("1611", [])
+  const baseline = calculateCatalogResult(base)
+  const input: StaticCatalogDamageInput = {
+    ...agentInput("1611", [optionId]),
+    inputs: [
+      {
+        bindingId: "binding:static",
+        name: `${effectId}:source`,
+        value: { unit: "ratio", value: 1.7 },
+      },
+    ],
+  }
+  const converted = calculateCatalogResult(input)
+  expect(
+    converted.evaluation.hit!.criticalRate -
+      baseline.evaluation.hit!.criticalRate,
+  ).toBeCloseTo(0.595, 12)
+  expect(
+    baseline.evaluation.contributions.filter(
+      (c) => c.origin.effectId === effectId,
+    ),
+  ).toHaveLength(0)
+  expect(
+    converted.evaluation.contributions.filter(
+      (c) => c.origin.effectId === effectId,
+    ),
+  ).toHaveLength(1)
+  const missing = calculateStaticDamageFromCatalog({ ...input, inputs: [] })
+  expect(missing.ok).toBe(false)
+  if (missing.ok)
+    throw new Error("Missing explicit conversion source was accepted")
+  expect(missing.issues.some((issue) => issue.code === "MISSING_FACT")).toBe(
+    true,
+  )
+})
+
 /** 固定来源夹具输入上补充潜能等级；夹具绑定保留其原有核心与影画档位。 */
 function withPotentialLevel(
   input: StaticCatalogDamageInput,

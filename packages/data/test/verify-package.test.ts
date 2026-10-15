@@ -1,5 +1,6 @@
 import { roxyCoreWindConsumerSource } from "./fixtures/roxy-core-wind-consumer.ts"
 import { windDriveDiscConsumerSource } from "./fixtures/drive-disc-wind-consumer.ts"
+import { claretInitialConversionConsumerSource } from "./fixtures/claret-initial-conversion-consumer.ts"
 import { roxyWindEyeConsumerSource } from "./fixtures/roxy-wind-eye-consumer.ts"
 import { hugoAttackConsumerSource } from "./fixtures/hugo-stun-teammates-consumer.ts"
 import { roxyMindscapeConsumerSource } from "./fixtures/roxy-mindscape-consumer.ts"
@@ -484,6 +485,8 @@ ${roxyCoreWindConsumerSource}
 await verifyRoxyCoreWindConsumer(api, await import("@randomplay/core"))
 ${windDriveDiscConsumerSource}
 await verifyWindDriveDiscConsumer(api, await import("@randomplay/core"))
+${claretInitialConversionConsumerSource}
+await verifyClaretInitialConversionConsumer(api, await import("@randomplay/core"))
 ${roxyAdditionalConsumerSource}
 await verifyRoxyAdditionalConsumer(api, await import("@randomplay/core"))
 ${yanagiPolarityConsumerSource}
