@@ -1,0 +1,185 @@
+{
+  "nanokaVersion": "3.2",
+  "entityId": "1621",
+  "languages": {
+    "zh": {
+      "rawResource": "character-1621-3.2-zh.json",
+      "rawSha256": "299637ab8aaafbe41003819f8e58f9248cbacf3537f7d5b55332e249ddc2e93c",
+      "resourcePath": "agents/1621/details.zh.json",
+      "integratedSha256": "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e",
+      "clauses": [
+        {
+          "coreSkillLevel": 1,
+          "pointer": "/passive/level/1621501/desc/0",
+          "name": "核心被动：热夜初拥",
+          "text": "每消耗25点能量，获得1点<Term:1000039></Term>，<color=#FFFFFF>[风能]</color>上限为3点；\n洛克茜的初始<color=#FFFFFF>能量自动回复</color>大于1.2时，超过部分每超过0.01，攻击力提升5点，最多提升<color=#2BAD00>480</color>点，冲击力提升0.4点，最多提升<color=#2BAD00>40</color>点；\n<color=#FFFFFF>[特殊技：恕不远送]</color>命中处于<color=#FFFFFF>[风化]</color>状态中的敌人后，会触发<Term:1000038></Term>，<color=#FFFFFF>[浸染]</color>状态被还原；\n队伍中任意队友触发<color=#FFFFFF>[浸染]</color>或<color=#FFFFFF>[净化]</color>效果时，洛克茜将根据<color=#FFFFFF>[浸染]</color>或<color=#FFFFFF>[净化]</color>的属性为全队角色提供增益效果：洛克茜每拥有1%暴击率，非<color=#FFFFFF>[锋御]</color>角色造成对应属性以及风属性伤害时，暴击伤害提升0.4%，最多提升<color=#2BAD00>22%</color>；<color=#FFFFFF>[锋御]</color>角色造成对应属性以及风属性伤害时，锐暴伤害提升0.2%，最多提升<color=#2BAD00>10%</color>；每个属性增益效果分别持续50秒，重复触发时刷新持续时间；\n对已经处于<color=#FFFFFF>[风化]</color>状态下的敌人再次施加<color=#FFFFFF>[风化]</color>时，根据被覆盖的<color=#FFFFFF>[风化]</color>状态下的<color=#FFFFFF>[浸染]</color>属性及风属性，全队角色同样可以获得该增益效果。",
+          "criticalDamageCap": 0.22,
+          "sharpCriticalDamageCap": 0.1
+        },
+        {
+          "coreSkillLevel": 2,
+          "pointer": "/passive/level/1621502/desc/0",
+          "name": "核心被动：热夜初拥",
+          "text": "每消耗25点能量，获得1点<Term:1000039></Term>，<color=#FFFFFF>[风能]</color>上限为3点；\n洛克茜的初始<color=#FFFFFF>能量自动回复</color>大于1.2时，超过部分每超过0.01，攻击力提升5点，最多提升<color=#2BAD00>560</color>点，冲击力提升0.4点，最多提升<color=#2BAD00>46</color>点；\n<color=#FFFFFF>[特殊技：恕不远送]</color>命中处于<color=#FFFFFF>[风化]</color>状态中的敌人后，会触发<Term:1000038></Term>，<color=#FFFFFF>[浸染]</color>状态被还原；\n队伍中任意队友触发<color=#FFFFFF>[浸染]</color>或<color=#FFFFFF>[净化]</color>效果时，洛克茜将根据<color=#FFFFFF>[浸染]</color>或<color=#FFFFFF>[净化]</color>的属性为全队角色提供增益效果：洛克茜每拥有1%暴击率，非<color=#FFFFFF>[锋御]</color>角色造成对应属性以及风属性伤害时，暴击伤害提升0.4%，最多提升<color=#2BAD00>25%</color>；<color=#FFFFFF>[锋御]</color>角色造成对应属性以及风属性伤害时，锐暴伤害提升0.2%，最多提升<color=#2BAD00>11.5%</color>；每个属性增益效果分别持续50秒，重复触发时刷新持续时间；\n对已经处于<color=#FFFFFF>[风化]</color>状态下的敌人再次施加<color=#FFFFFF>[风化]</color>时，根据被覆盖的<color=#FFFFFF>[风化]</color>状态下的<color=#FFFFFF>[浸染]</color>属性及风属性，全队角色同样可以获得该增益效果。",
+          "criticalDamageCap": 0.25,
+          "sharpCriticalDamageCap": 0.115
+        },
+        {
+          "coreSkillLevel": 3,
+          "pointer": "/passive/level/1621503/desc/0",
+          "name": "核心被动：热夜初拥",
+          "text": "每消耗25点能量，获得1点<Term:1000039></Term>，<color=#FFFFFF>[风能]</color>上限为3点；\n洛克茜的初始<color=#FFFFFF>能量自动回复</color>大于1.2时，超过部分每超过0.01，攻击力提升5点，最多提升<color=#2BAD00>640</color>点，冲击力提升0.4点，最多提升<color=#2BAD00>52</color>点；\n<color=#FFFFFF>[特殊技：恕不远送]</color>命中处于<color=#FFFFFF>[风化]</color>状态中的敌人后，会触发<Term:1000038></Term>，<color=#FFFFFF>[浸染]</color>状态被还原；\n队伍中任意队友触发<color=#FFFFFF>[浸染]</color>或<color=#FFFFFF>[净化]</color>效果时，洛克茜将根据<color=#FFFFFF>[浸染]</color>或<color=#FFFFFF>[净化]</color>的属性为全队角色提供增益效果：洛克茜每拥有1%暴击率，非<color=#FFFFFF>[锋御]</color>角色造成对应属性以及风属性伤害时，暴击伤害提升0.4%，最多提升<color=#2BAD00>28%</color>；<color=#FFFFFF>[锋御]</color>角色造成对应属性以及风属性伤害时，锐暴伤害提升0.2%，最多提升<color=#2BAD00>13%</color>；每个属性增益效果分别持续50秒，重复触发时刷新持续时间；\n对已经处于<color=#FFFFFF>[风化]</color>状态下的敌人再次施加<color=#FFFFFF>[风化]</color>时，根据被覆盖的<color=#FFFFFF>[风化]</color>状态下的<color=#FFFFFF>[浸染]</color>属性及风属性，全队角色同样可以获得该增益效果。",
+          "criticalDamageCap": 0.28,
+          "sharpCriticalDamageCap": 0.13
+        },
+        {
+          "coreSkillLevel": 4,
+          "pointer": "/passive/level/1621504/desc/0",
+          "name": "核心被动：热夜初拥",
+          "text": "每消耗25点能量，获得1点<Term:1000039></Term>，<color=#FFFFFF>[风能]</color>上限为3点；\n洛克茜的初始<color=#FFFFFF>能量自动回复</color>大于1.2时，超过部分每超过0.01，攻击力提升5点，最多提升<color=#2BAD00>720</color>点，冲击力提升0.4点，最多提升<color=#2BAD00>58</color>点；\n<color=#FFFFFF>[特殊技：恕不远送]</color>命中处于<color=#FFFFFF>[风化]</color>状态中的敌人后，会触发<Term:1000038></Term>，<color=#FFFFFF>[浸染]</color>状态被还原；\n队伍中任意队友触发<color=#FFFFFF>[浸染]</color>或<color=#FFFFFF>[净化]</color>效果时，洛克茜将根据<color=#FFFFFF>[浸染]</color>或<color=#FFFFFF>[净化]</color>的属性为全队角色提供增益效果：洛克茜每拥有1%暴击率，非<color=#FFFFFF>[锋御]</color>角色造成对应属性以及风属性伤害时，暴击伤害提升0.4%，最多提升<color=#2BAD00>31%</color>；<color=#FFFFFF>[锋御]</color>角色造成对应属性以及风属性伤害时，锐暴伤害提升0.2%，最多提升<color=#2BAD00>14.5%</color>；每个属性增益效果分别持续50秒，重复触发时刷新持续时间；\n对已经处于<color=#FFFFFF>[风化]</color>状态下的敌人再次施加<color=#FFFFFF>[风化]</color>时，根据被覆盖的<color=#FFFFFF>[风化]</color>状态下的<color=#FFFFFF>[浸染]</color>属性及风属性，全队角色同样可以获得该增益效果。",
+          "criticalDamageCap": 0.31,
+          "sharpCriticalDamageCap": 0.145
+        },
+        {
+          "coreSkillLevel": 5,
+          "pointer": "/passive/level/1621505/desc/0",
+          "name": "核心被动：热夜初拥",
+          "text": "每消耗25点能量，获得1点<Term:1000039></Term>，<color=#FFFFFF>[风能]</color>上限为3点；\n洛克茜的初始<color=#FFFFFF>能量自动回复</color>大于1.2时，超过部分每超过0.01，攻击力提升5点，最多提升<color=#2BAD00>800</color>点，冲击力提升0.4点，最多提升<color=#2BAD00>64</color>点；\n<color=#FFFFFF>[特殊技：恕不远送]</color>命中处于<color=#FFFFFF>[风化]</color>状态中的敌人后，会触发<Term:1000038></Term>，<color=#FFFFFF>[浸染]</color>状态被还原；\n队伍中任意队友触发<color=#FFFFFF>[浸染]</color>或<color=#FFFFFF>[净化]</color>效果时，洛克茜将根据<color=#FFFFFF>[浸染]</color>或<color=#FFFFFF>[净化]</color>的属性为全队角色提供增益效果：洛克茜每拥有1%暴击率，非<color=#FFFFFF>[锋御]</color>角色造成对应属性以及风属性伤害时，暴击伤害提升0.4%，最多提升<color=#2BAD00>34%</color>；<color=#FFFFFF>[锋御]</color>角色造成对应属性以及风属性伤害时，锐暴伤害提升0.2%，最多提升<color=#2BAD00>16%</color>；每个属性增益效果分别持续50秒，重复触发时刷新持续时间；\n对已经处于<color=#FFFFFF>[风化]</color>状态下的敌人再次施加<color=#FFFFFF>[风化]</color>时，根据被覆盖的<color=#FFFFFF>[风化]</color>状态下的<color=#FFFFFF>[浸染]</color>属性及风属性，全队角色同样可以获得该增益效果。",
+          "criticalDamageCap": 0.34,
+          "sharpCriticalDamageCap": 0.16
+        },
+        {
+          "coreSkillLevel": 6,
+          "pointer": "/passive/level/1621506/desc/0",
+          "name": "核心被动：热夜初拥",
+          "text": "每消耗25点能量，获得1点<Term:1000039></Term>，<color=#FFFFFF>[风能]</color>上限为3点；\n洛克茜的初始<color=#FFFFFF>能量自动回复</color>大于1.2时，超过部分每超过0.01，攻击力提升5点，最多提升<color=#2BAD00>880</color>点，冲击力提升0.4点，最多提升<color=#2BAD00>70</color>点；\n<color=#FFFFFF>[特殊技：恕不远送]</color>命中处于<color=#FFFFFF>[风化]</color>状态中的敌人后，会触发<Term:1000038></Term>，<color=#FFFFFF>[浸染]</color>状态被还原；\n队伍中任意队友触发<color=#FFFFFF>[浸染]</color>或<color=#FFFFFF>[净化]</color>效果时，洛克茜将根据<color=#FFFFFF>[浸染]</color>或<color=#FFFFFF>[净化]</color>的属性为全队角色提供增益效果：洛克茜每拥有1%暴击率，非<color=#FFFFFF>[锋御]</color>角色造成对应属性以及风属性伤害时，暴击伤害提升0.4%，最多提升<color=#2BAD00>37%</color>；<color=#FFFFFF>[锋御]</color>角色造成对应属性以及风属性伤害时，锐暴伤害提升0.2%，最多提升<color=#2BAD00>17.5%</color>；每个属性增益效果分别持续50秒，重复触发时刷新持续时间；\n对已经处于<color=#FFFFFF>[风化]</color>状态下的敌人再次施加<color=#FFFFFF>[风化]</color>时，根据被覆盖的<color=#FFFFFF>[风化]</color>状态下的<color=#FFFFFF>[浸染]</color>属性及风属性，全队角色同样可以获得该增益效果。",
+          "criticalDamageCap": 0.37,
+          "sharpCriticalDamageCap": 0.175
+        },
+        {
+          "coreSkillLevel": 7,
+          "pointer": "/passive/level/1621507/desc/0",
+          "name": "核心被动：热夜初拥",
+          "text": "每消耗25点能量，获得1点<Term:1000039></Term>，<color=#FFFFFF>[风能]</color>上限为3点；\n洛克茜的初始<color=#FFFFFF>能量自动回复</color>大于1.2时，超过部分每超过0.01，攻击力提升5点，最多提升<color=#2BAD00>960</color>点，冲击力提升0.4点，最多提升<color=#2BAD00>76.8</color>点；\n<color=#FFFFFF>[特殊技：恕不远送]</color>命中处于<color=#FFFFFF>[风化]</color>状态中的敌人后，会触发<Term:1000038></Term>，<color=#FFFFFF>[浸染]</color>状态被还原；\n队伍中任意队友触发<color=#FFFFFF>[浸染]</color>或<color=#FFFFFF>[净化]</color>效果时，洛克茜将根据<color=#FFFFFF>[浸染]</color>或<color=#FFFFFF>[净化]</color>的属性为全队角色提供增益效果：洛克茜每拥有1%暴击率，非<color=#FFFFFF>[锋御]</color>角色造成对应属性以及风属性伤害时，暴击伤害提升0.4%，最多提升<color=#2BAD00>40%</color>；<color=#FFFFFF>[锋御]</color>角色造成对应属性以及风属性伤害时，锐暴伤害提升0.2%，最多提升<color=#2BAD00>20%</color>；每个属性增益效果分别持续50秒，重复触发时刷新持续时间；\n对已经处于<color=#FFFFFF>[风化]</color>状态下的敌人再次施加<color=#FFFFFF>[风化]</color>时，根据被覆盖的<color=#FFFFFF>[风化]</color>状态下的<color=#FFFFFF>[浸染]</color>属性及风属性，全队角色同样可以获得该增益效果。",
+          "criticalDamageCap": 0.4,
+          "sharpCriticalDamageCap": 0.2
+        }
+      ]
+    },
+    "en": {
+      "rawResource": "character-1621-3.2-en.json",
+      "rawSha256": "0692d88153c3cad37fb4e34c5446820763b8628490aba54294dc031b3ddf1334",
+      "resourcePath": "agents/1621/details.en.json",
+      "integratedSha256": "30a75cab3c664648ca8f9bbcfdce04bc5d92b5897b9187c17c6620c76c282b2a",
+      "clauses": [
+        {
+          "coreSkillLevel": 1,
+          "pointer": "/passive/level/1621501/desc/0",
+          "name": "Core Passive: Warm Night's Embrace",
+          "text": "Gain 1 point of <Term:1000039></Term> for every 25 Energy consumed, up to a maximum of 3 <color=#FFFFFF>Wind Energy</color>.\nWhen Roxy's initial <color=#FFFFFF>Energy Regen</color> exceeds 1.2, for every 0.01 above this value, ATK increases by 5, up to a maximum increase of <color=#2BAD00>480</color>, and Impact increases by 0.4, up to a maximum increase of <color=#2BAD00>40</color>.\nAfter <color=#FFFFFF>Special Attack: Forgive Me for Not Seeing You Off</color> hits an enemy affected by <color=#FFFFFF>Windswept</color>, it triggers <Term:1000038></Term>, reverting <color=#FFFFFF>Contamination</color> back to its original state.\nWhen any squad member triggers <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color>, Roxy provides all squad members with a buff based on the attribute of the <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color> effect: for every 1% CRIT Rate Roxy has, when non-<color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their CRIT DMG increases by 0.4%, up to <color=#2BAD00>22%</color>. When <color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their Laceration DMG increases by 0.2%, up to <color=#2BAD00>10%</color>. Each attribute's buff lasts 50s, and repeated triggers reset the duration.\nWhen <color=#FFFFFF>Windswept</color> is applied again to an enemy already in the <color=#FFFFFF>Windswept</color> state, all squad members can also gain this buff based on the <color=#FFFFFF>Contamination</color> attribute of the overwritten <color=#FFFFFF>Windswept</color> state and Wind attribute.",
+          "criticalDamageCap": 0.22,
+          "sharpCriticalDamageCap": 0.1
+        },
+        {
+          "coreSkillLevel": 2,
+          "pointer": "/passive/level/1621502/desc/0",
+          "name": "Core Passive: Warm Night's Embrace",
+          "text": "Gain 1 point of <Term:1000039></Term> for every 25 Energy consumed, up to a maximum of 3 <color=#FFFFFF>Wind Energy</color>.\nWhen Roxy's initial <color=#FFFFFF>Energy Regen</color> exceeds 1.2, for every 0.01 above this value, ATK increases by 5, up to a maximum increase of <color=#2BAD00>560</color>, and Impact increases by 0.4, up to a maximum increase of <color=#2BAD00>46</color>.\nAfter <color=#FFFFFF>Special Attack: Forgive Me for Not Seeing You Off</color> hits an enemy affected by <color=#FFFFFF>Windswept</color>, it triggers <Term:1000038></Term>, reverting <color=#FFFFFF>Contamination</color> back to its original state.\nWhen any squad member triggers <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color>, Roxy provides all squad members with a buff based on the attribute of the <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color> effect: for every 1% CRIT Rate Roxy has, when non-<color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their CRIT DMG increases by 0.4%, up to <color=#2BAD00>25%</color>. When <color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their Laceration DMG increases by 0.2%, up to <color=#2BAD00>11.5%</color>. Each attribute's buff lasts 50s, and repeated triggers reset the duration.\nWhen <color=#FFFFFF>Windswept</color> is applied again to an enemy already in the <color=#FFFFFF>Windswept</color> state, all squad members can also gain this buff based on the <color=#FFFFFF>Contamination</color> attribute of the overwritten <color=#FFFFFF>Windswept</color> state and Wind attribute.",
+          "criticalDamageCap": 0.25,
+          "sharpCriticalDamageCap": 0.115
+        },
+        {
+          "coreSkillLevel": 3,
+          "pointer": "/passive/level/1621503/desc/0",
+          "name": "Core Passive: Warm Night's Embrace",
+          "text": "Gain 1 point of <Term:1000039></Term> for every 25 Energy consumed, up to a maximum of 3 <color=#FFFFFF>Wind Energy</color>.\nWhen Roxy's initial <color=#FFFFFF>Energy Regen</color> exceeds 1.2, for every 0.01 above this value, ATK increases by 5, up to a maximum increase of <color=#2BAD00>640</color>, and Impact increases by 0.4, up to a maximum increase of <color=#2BAD00>52</color>.\nAfter <color=#FFFFFF>Special Attack: Forgive Me for Not Seeing You Off</color> hits an enemy affected by <color=#FFFFFF>Windswept</color>, it triggers <Term:1000038></Term>, reverting <color=#FFFFFF>Contamination</color> back to its original state.\nWhen any squad member triggers <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color>, Roxy provides all squad members with a buff based on the attribute of the <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color> effect: for every 1% CRIT Rate Roxy has, when non-<color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their CRIT DMG increases by 0.4%, up to <color=#2BAD00>28%</color>. When <color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their Laceration DMG increases by 0.2%, up to <color=#2BAD00>13%</color>. Each attribute's buff lasts 50s, and repeated triggers reset the duration.\nWhen <color=#FFFFFF>Windswept</color> is applied again to an enemy already in the <color=#FFFFFF>Windswept</color> state, all squad members can also gain this buff based on the <color=#FFFFFF>Contamination</color> attribute of the overwritten <color=#FFFFFF>Windswept</color> state and Wind attribute.",
+          "criticalDamageCap": 0.28,
+          "sharpCriticalDamageCap": 0.13
+        },
+        {
+          "coreSkillLevel": 4,
+          "pointer": "/passive/level/1621504/desc/0",
+          "name": "Core Passive: Warm Night's Embrace",
+          "text": "Gain 1 point of <Term:1000039></Term> for every 25 Energy consumed, up to a maximum of 3 <color=#FFFFFF>Wind Energy</color>.\nWhen Roxy's initial <color=#FFFFFF>Energy Regen</color> exceeds 1.2, for every 0.01 above this value, ATK increases by 5, up to a maximum increase of <color=#2BAD00>720</color>, and Impact increases by 0.4, up to a maximum increase of <color=#2BAD00>58</color>.\nAfter <color=#FFFFFF>Special Attack: Forgive Me for Not Seeing You Off</color> hits an enemy affected by <color=#FFFFFF>Windswept</color>, it triggers <Term:1000038></Term>, reverting <color=#FFFFFF>Contamination</color> back to its original state.\nWhen any squad member triggers <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color>, Roxy provides all squad members with a buff based on the attribute of the <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color> effect: for every 1% CRIT Rate Roxy has, when non-<color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their CRIT DMG increases by 0.4%, up to <color=#2BAD00>31%</color>. When <color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their Laceration DMG increases by 0.2%, up to <color=#2BAD00>14.5%</color>. Each attribute's buff lasts 50s, and repeated triggers reset the duration.\nWhen <color=#FFFFFF>Windswept</color> is applied again to an enemy already in the <color=#FFFFFF>Windswept</color> state, all squad members can also gain this buff based on the <color=#FFFFFF>Contamination</color> attribute of the overwritten <color=#FFFFFF>Windswept</color> state and Wind attribute.",
+          "criticalDamageCap": 0.31,
+          "sharpCriticalDamageCap": 0.145
+        },
+        {
+          "coreSkillLevel": 5,
+          "pointer": "/passive/level/1621505/desc/0",
+          "name": "Core Passive: Warm Night's Embrace",
+          "text": "Gain 1 point of <Term:1000039></Term> for every 25 Energy consumed, up to a maximum of 3 <color=#FFFFFF>Wind Energy</color>.\nWhen Roxy's initial <color=#FFFFFF>Energy Regen</color> exceeds 1.2, for every 0.01 above this value, ATK increases by 5, up to a maximum increase of <color=#2BAD00>800</color>, and Impact increases by 0.4, up to a maximum increase of <color=#2BAD00>64</color>.\nAfter <color=#FFFFFF>Special Attack: Forgive Me for Not Seeing You Off</color> hits an enemy affected by <color=#FFFFFF>Windswept</color>, it triggers <Term:1000038></Term>, reverting <color=#FFFFFF>Contamination</color> back to its original state.\nWhen any squad member triggers <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color>, Roxy provides all squad members with a buff based on the attribute of the <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color> effect: for every 1% CRIT Rate Roxy has, when non-<color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their CRIT DMG increases by 0.4%, up to <color=#2BAD00>34%</color>. When <color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their Laceration DMG increases by 0.2%, up to <color=#2BAD00>16%</color>. Each attribute's buff lasts 50s, and repeated triggers reset the duration.\nWhen <color=#FFFFFF>Windswept</color> is applied again to an enemy already in the <color=#FFFFFF>Windswept</color> state, all squad members can also gain this buff based on the <color=#FFFFFF>Contamination</color> attribute of the overwritten <color=#FFFFFF>Windswept</color> state and Wind attribute.",
+          "criticalDamageCap": 0.34,
+          "sharpCriticalDamageCap": 0.16
+        },
+        {
+          "coreSkillLevel": 6,
+          "pointer": "/passive/level/1621506/desc/0",
+          "name": "Core Passive: Warm Night's Embrace",
+          "text": "Gain 1 point of <Term:1000039></Term> for every 25 Energy consumed, up to a maximum of 3 <color=#FFFFFF>Wind Energy</color>.\nWhen Roxy's initial <color=#FFFFFF>Energy Regen</color> exceeds 1.2, for every 0.01 above this value, ATK increases by 5, up to a maximum increase of <color=#2BAD00>880</color>, and Impact increases by 0.4, up to a maximum increase of <color=#2BAD00>70</color>.\nAfter <color=#FFFFFF>Special Attack: Forgive Me for Not Seeing You Off</color> hits an enemy affected by <color=#FFFFFF>Windswept</color>, it triggers <Term:1000038></Term>, reverting <color=#FFFFFF>Contamination</color> back to its original state.\nWhen any squad member triggers <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color>, Roxy provides all squad members with a buff based on the attribute of the <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color> effect: for every 1% CRIT Rate Roxy has, when non-<color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their CRIT DMG increases by 0.4%, up to <color=#2BAD00>37%</color>. When <color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their Laceration DMG increases by 0.2%, up to <color=#2BAD00>17.5%</color>. Each attribute's buff lasts 50s, and repeated triggers reset the duration.\nWhen <color=#FFFFFF>Windswept</color> is applied again to an enemy already in the <color=#FFFFFF>Windswept</color> state, all squad members can also gain this buff based on the <color=#FFFFFF>Contamination</color> attribute of the overwritten <color=#FFFFFF>Windswept</color> state and Wind attribute.",
+          "criticalDamageCap": 0.37,
+          "sharpCriticalDamageCap": 0.175
+        },
+        {
+          "coreSkillLevel": 7,
+          "pointer": "/passive/level/1621507/desc/0",
+          "name": "Core Passive: Warm Night's Embrace",
+          "text": "Gain 1 point of <Term:1000039></Term> for every 25 Energy consumed, up to a maximum of 3 <color=#FFFFFF>Wind Energy</color>.\nWhen Roxy's initial <color=#FFFFFF>Energy Regen</color> exceeds 1.2, for every 0.01 above this value, ATK increases by 5, up to a maximum increase of <color=#2BAD00>960</color>, and Impact increases by 0.4, up to a maximum increase of <color=#2BAD00>76.8</color>.\nAfter <color=#FFFFFF>Special Attack: Forgive Me for Not Seeing You Off</color> hits an enemy affected by <color=#FFFFFF>Windswept</color>, it triggers <Term:1000038></Term>, reverting <color=#FFFFFF>Contamination</color> back to its original state.\nWhen any squad member triggers <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color>, Roxy provides all squad members with a buff based on the attribute of the <color=#FFFFFF>Contamination</color> or <color=#FFFFFF>Cleanse</color> effect: for every 1% CRIT Rate Roxy has, when non-<color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their CRIT DMG increases by 0.4%, up to <color=#2BAD00>40%</color>. When <color=#FFFFFF>Armorer</color> characters deal DMG of the corresponding attribute or Wind DMG, their Laceration DMG increases by 0.2%, up to <color=#2BAD00>20%</color>. Each attribute's buff lasts 50s, and repeated triggers reset the duration.\nWhen <color=#FFFFFF>Windswept</color> is applied again to an enemy already in the <color=#FFFFFF>Windswept</color> state, all squad members can also gain this buff based on the <color=#FFFFFF>Contamination</color> attribute of the overwritten <color=#FFFFFF>Windswept</color> state and Wind attribute.",
+          "criticalDamageCap": 0.4,
+          "sharpCriticalDamageCap": 0.2
+        }
+      ]
+    }
+  },
+  "independentExpectations": [
+    {
+      "coreSkillLevel": 1,
+      "criticalDamageCoefficient": 0.4,
+      "criticalDamageCap": 0.22,
+      "sharpCriticalDamageCoefficient": 0.2,
+      "sharpCriticalDamageCap": 0.1
+    },
+    {
+      "coreSkillLevel": 2,
+      "criticalDamageCoefficient": 0.4,
+      "criticalDamageCap": 0.25,
+      "sharpCriticalDamageCoefficient": 0.2,
+      "sharpCriticalDamageCap": 0.115
+    },
+    {
+      "coreSkillLevel": 3,
+      "criticalDamageCoefficient": 0.4,
+      "criticalDamageCap": 0.28,
+      "sharpCriticalDamageCoefficient": 0.2,
+      "sharpCriticalDamageCap": 0.13
+    },
+    {
+      "coreSkillLevel": 4,
+      "criticalDamageCoefficient": 0.4,
+      "criticalDamageCap": 0.31,
+      "sharpCriticalDamageCoefficient": 0.2,
+      "sharpCriticalDamageCap": 0.145
+    },
+    {
+      "coreSkillLevel": 5,
+      "criticalDamageCoefficient": 0.4,
+      "criticalDamageCap": 0.34,
+      "sharpCriticalDamageCoefficient": 0.2,
+      "sharpCriticalDamageCap": 0.16
+    },
+    {
+      "coreSkillLevel": 6,
+      "criticalDamageCoefficient": 0.4,
+      "criticalDamageCap": 0.37,
+      "sharpCriticalDamageCoefficient": 0.2,
+      "sharpCriticalDamageCap": 0.175
+    },
+    {
+      "coreSkillLevel": 7,
+      "criticalDamageCoefficient": 0.4,
+      "criticalDamageCap": 0.4,
+      "sharpCriticalDamageCoefficient": 0.2,
+      "sharpCriticalDamageCap": 0.2
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "40",
+  "revision": "41",
   "effects": [
     {
       "kind": "contribution",
@@ -52105,6 +52105,408 @@
               ]
             }
           ]
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1621:nanoka:core-wind-critical-damage",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1621"
+        },
+        "section": "核心 · 单状态风伤普通暴伤",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621507/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621507/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "coefficient": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.4
+        },
+        "cap": {
+          "kind": "by-rank",
+          "rank": "coreSkillLevel",
+          "unit": "ratio",
+          "values": {
+            "1": 0.22,
+            "2": 0.25,
+            "3": 0.28,
+            "4": 0.31,
+            "5": 0.34,
+            "6": 0.37,
+            "7": 0.4
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "team"
+      },
+      "when": {
+        "kind": "one-of",
+        "fact": "hit.element",
+        "values": ["wind"]
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "criticalDamage",
+        "stage": "direct",
+        "value": {
+          "kind": "minimum",
+          "unit": "ratio",
+          "operands": [
+            {
+              "kind": "parameter",
+              "unit": "ratio",
+              "name": "cap"
+            },
+            {
+              "kind": "multiply",
+              "unit": "ratio",
+              "value": {
+                "kind": "maximum",
+                "unit": "ratio",
+                "operands": [
+                  {
+                    "kind": "literal",
+                    "unit": "ratio",
+                    "value": 0
+                  },
+                  {
+                    "kind": "input",
+                    "unit": "ratio",
+                    "name": "roxy:core:external-critical-rate"
+                  }
+                ]
+              },
+              "coefficient": {
+                "kind": "parameter",
+                "unit": "ratio",
+                "name": "coefficient"
+              }
+            }
+          ]
+        }
+      },
+      "uniqueness": {
+        "key": "nanoka:agents:1621:core-wind-critical-damage:single-source",
+        "scope": "team",
+        "select": {
+          "kind": "single-source-only"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1621:nanoka:core-wind-sharp-critical-damage",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1621"
+        },
+        "section": "核心 · 单状态风伤锐暴伤",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621507/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621501/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621502/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621503/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621504/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621505/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621506/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621507/desc/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {
+        "coefficient": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.2
+        },
+        "cap": {
+          "kind": "by-rank",
+          "rank": "coreSkillLevel",
+          "unit": "ratio",
+          "values": {
+            "1": 0.1,
+            "2": 0.115,
+            "3": 0.13,
+            "4": 0.145,
+            "5": 0.16,
+            "6": 0.175,
+            "7": 0.2
+          }
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "team"
+      },
+      "when": {
+        "kind": "one-of",
+        "fact": "hit.element",
+        "values": ["wind"]
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "sharpCriticalDamage",
+        "stage": "direct",
+        "value": {
+          "kind": "minimum",
+          "unit": "ratio",
+          "operands": [
+            {
+              "kind": "parameter",
+              "unit": "ratio",
+              "name": "cap"
+            },
+            {
+              "kind": "multiply",
+              "unit": "ratio",
+              "value": {
+                "kind": "maximum",
+                "unit": "ratio",
+                "operands": [
+                  {
+                    "kind": "literal",
+                    "unit": "ratio",
+                    "value": 0
+                  },
+                  {
+                    "kind": "input",
+                    "unit": "ratio",
+                    "name": "roxy:core:external-critical-rate"
+                  }
+                ]
+              },
+              "coefficient": {
+                "kind": "parameter",
+                "unit": "ratio",
+                "name": "coefficient"
+              }
+            }
+          ]
+        }
+      },
+      "uniqueness": {
+        "key": "nanoka:agents:1621:core-wind-sharp-critical-damage:single-source",
+        "scope": "team",
+        "select": {
+          "kind": "single-source-only"
         }
       }
     },

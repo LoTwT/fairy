@@ -1,3 +1,4 @@
+import { roxyCoreWindConsumerSource } from "./fixtures/roxy-core-wind-consumer.ts"
 import { roxyWindEyeConsumerSource } from "./fixtures/roxy-wind-eye-consumer.ts"
 import { hugoAttackConsumerSource } from "./fixtures/hugo-stun-teammates-consumer.ts"
 import { roxyMindscapeConsumerSource } from "./fixtures/roxy-mindscape-consumer.ts"
@@ -131,6 +132,8 @@ ${roxyMindscapeConsumerSource}
 globalThis.fairyRoxyMindscapes = async () => verifyRoxyMindscapeConsumer(api, await import("@randomplay/core"))
 ${roxyWindEyeConsumerSource}
 globalThis.fairyRoxyWindEye = async () => verifyRoxyWindEyeConsumer(api, await import("@randomplay/core"))
+${roxyCoreWindConsumerSource}
+globalThis.fairyRoxyCoreWind = async () => verifyRoxyCoreWindConsumer(api, await import("@randomplay/core"))
 ${roxyAdditionalConsumerSource}
 globalThis.fairyRoxyAdditional = async () => verifyRoxyAdditionalConsumer(api, await import("@randomplay/core"))
 ${yanagiPolarityConsumerSource}
@@ -1049,6 +1052,18 @@ function defineScenarios(counts: {
               giantScale: 2.5,
               missingGiantRejected: true,
             })
+          },
+        },
+        {
+          name: "roxy-core-single-state-wind-critical-damage",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyRoxyCoreWind(),
+            )
+            expect(result.normal).toBeCloseTo(2467.5, 9)
+            expect(result.sharp).toBeCloseTo(4319.7, 9)
+            expect(result.high).toBeCloseTo(5149.6725, 9)
+            expect(result.missingRejected).toBe(true)
           },
         },
         {

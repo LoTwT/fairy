@@ -1265,6 +1265,7 @@ export function validateStaticCatalog(
           applies,
           [
             "beneficiaryProfession",
+            "excludedBeneficiaryProfession",
             "beneficiaryElements",
             "teamProfession",
             "otherTeammateProfessions",
@@ -1278,6 +1279,22 @@ export function validateStaticCatalog(
             checks(`${vp}/applicability/beneficiaryProfession`),
             "profession",
           )
+        if (applies["excludedBeneficiaryProfession"] !== undefined) {
+          const excluded = expectNonEmptyString(
+            applies["excludedBeneficiaryProfession"],
+            checks(`${vp}/applicability/excludedBeneficiaryProfession`),
+            "excluded profession",
+          )
+          if (
+            excluded !== undefined &&
+            excluded === applies["beneficiaryProfession"]
+          )
+            collector.report(
+              "INVALID_DEFINITION",
+              `${vp}/applicability/excludedBeneficiaryProfession`,
+              "The included and excluded beneficiary professions must differ",
+            )
+        }
         if (applies["otherTeammateProfessions"] !== undefined) {
           const pointer = `${vp}/applicability/otherTeammateProfessions`
           const professions = expectArray(
@@ -2521,6 +2538,10 @@ export function calculateOrdinaryStaticDamageFromCatalog(
         (!gate || gate.counts.includes(count)) &&
         (!variant.applicability.beneficiaryProfession ||
           e.profession === variant.applicability.beneficiaryProfession) &&
+        (variant.applicability.excludedBeneficiaryProfession === undefined ||
+          (e.profession !== null &&
+            e.profession !==
+              variant.applicability.excludedBeneficiaryProfession)) &&
         (!variant.applicability.beneficiaryElements ||
           (preparesDuration &&
             variant.effectIds.every((effectId) => durationIds.has(effectId))) ||

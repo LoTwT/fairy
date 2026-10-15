@@ -1,3 +1,4 @@
+import { roxyCoreWindConsumerSource } from "./fixtures/roxy-core-wind-consumer.ts"
 import { roxyWindEyeConsumerSource } from "./fixtures/roxy-wind-eye-consumer.ts"
 import { hugoAttackConsumerSource } from "./fixtures/hugo-stun-teammates-consumer.ts"
 import { roxyMindscapeConsumerSource } from "./fixtures/roxy-mindscape-consumer.ts"
@@ -478,6 +479,8 @@ ${roxyMindscapeConsumerSource}
 assert.deepEqual(await verifyRoxyMindscapeConsumer(api, await import("@randomplay/core")), {ultimate:67146.975,combined:99761.22,nonWindIgnore:0,rejectedLowRank:true})
 ${roxyWindEyeConsumerSource}
 assert.deepEqual(await verifyRoxyWindEyeConsumer(api, await import("@randomplay/core")), {multipliers:[1.049,1.049,4.174],mixedBase:12.533,giantScale:2.5,missingGiantRejected:true})
+${roxyCoreWindConsumerSource}
+await verifyRoxyCoreWindConsumer(api, await import("@randomplay/core"))
 ${roxyAdditionalConsumerSource}
 await verifyRoxyAdditionalConsumer(api, await import("@randomplay/core"))
 ${yanagiPolarityConsumerSource}

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "40",
+  "revision": "41",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -46366,6 +46366,264 @@
           "inputs": [],
           "applicability": {
             "otherTeammateProfessions": ["强攻", "命破", "锋御"]
+          },
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1621:core-wind-critical-damage",
+      "catalogEntityId": "nanoka:agents:1621",
+      "name": "核心 · 单状态风伤普通暴伤",
+      "conditionDescription": "调用方声明洛克茜提供的一个真实有效属性增益状态；仅计算本次风属性命中。同队含本人，非锋御获得普通暴伤，锋御获得锐暴伤，按目录真实职业分流，不要求额外能力的另一名队友资格。0关闭、1开启，不代表属性层数；两个职业分支可同选并共用本绑定的局外暴击率ratio读数（0.5代表50%），无默认值，不读持有者战斗current CR或受益者CR。持续50秒、刷新和触发由调用方维护。当前实际消费的同一受益者/输出最多一个本分支有效来源，多来源包括同值或零值按既有UNIQUENESS_CONFLICT拒绝；非风、非适用职业分支、异队和关闭态隔离。这是单来源单状态条件模型，不是游戏全队唯一结论，不计算染色属性、多属性风伤叠加或事件时间线。",
+      "target": "team",
+      "variants": [
+        {
+          "target": "team",
+          "configuration": {
+            "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621501/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621502/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621503/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621504/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621505/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621506/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621507/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621501/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621502/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621503/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621504/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621505/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621506/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621507/desc/0"
+            }
+          ],
+          "effectIds": ["agent:1621:nanoka:core-wind-critical-damage"],
+          "maximumLayers": 1,
+          "inputs": [
+            {
+              "name": "roxy:core:external-critical-rate",
+              "unit": "ratio",
+              "description": "该绑定洛克茜的局外暴击率读数，0.5代表50%；调用方显式提供，无默认值，不读战斗current CR。"
+            }
+          ],
+          "applicability": {
+            "excludedBeneficiaryProfession": "锋御"
+          },
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1621:core-wind-sharp-critical-damage",
+      "catalogEntityId": "nanoka:agents:1621",
+      "name": "核心 · 单状态风伤锐暴伤",
+      "conditionDescription": "调用方声明洛克茜提供的一个真实有效属性增益状态；仅计算本次风属性命中。同队含本人，非锋御获得普通暴伤，锋御获得锐暴伤，按目录真实职业分流，不要求额外能力的另一名队友资格。0关闭、1开启，不代表属性层数；两个职业分支可同选并共用本绑定的局外暴击率ratio读数（0.5代表50%），无默认值，不读持有者战斗current CR或受益者CR。持续50秒、刷新和触发由调用方维护。当前实际消费的同一受益者/输出最多一个本分支有效来源，多来源包括同值或零值按既有UNIQUENESS_CONFLICT拒绝；非风、非适用职业分支、异队和关闭态隔离。这是单来源单状态条件模型，不是游戏全队唯一结论，不计算染色属性、多属性风伤叠加或事件时间线。",
+      "target": "team",
+      "variants": [
+        {
+          "target": "team",
+          "configuration": {
+            "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621501/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621502/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621503/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621504/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621505/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621506/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621507/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621501/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621502/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621503/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621504/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621505/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621506/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621507/desc/0"
+            }
+          ],
+          "effectIds": ["agent:1621:nanoka:core-wind-sharp-critical-damage"],
+          "maximumLayers": 1,
+          "inputs": [
+            {
+              "name": "roxy:core:external-critical-rate",
+              "unit": "ratio",
+              "description": "该绑定洛克茜的局外暴击率读数，0.5代表50%；调用方显式提供，无默认值，不读战斗current CR。"
+            }
+          ],
+          "applicability": {
+            "beneficiaryProfession": "锋御"
           },
           "differences": []
         }

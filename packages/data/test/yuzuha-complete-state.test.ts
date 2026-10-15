@@ -113,7 +113,7 @@ const convert = (data = source(), functions = normalization) =>
 describe("Yuzuha complete state source guards", () => {
   it("creates two complete contributions and two configuration scales while retiring all eight partial rules", () => {
     const result = convert()
-    expect(result.definitions.revision).toBe("40")
+    expect(result.definitions.revision).toBe("41")
     expect(
       result.definitions.effects.filter((rule) => rule.kind === "contribution"),
     ).toHaveLength(2)
