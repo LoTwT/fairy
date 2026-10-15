@@ -9,7 +9,7 @@ import {
 } from "../nanoka-integration/files.ts"
 import evidence from "./evidence.json" with { type: "json" }
 
-export const rulesVersion = "panel-attributes/1"
+export const rulesVersion = "panel-attributes/2"
 export const limitations = [
   "只提供 60 级满突破的培养前基础值；核心 1—7 独立选择，extraLevel 提升每行已累计。",
   "不含核心被动属性转化（如本的防御转攻击、命破角色的贯穿力转化）；完整面板适配另行实现，已结算面板不得再次添加。",

@@ -42,6 +42,21 @@ describe("panel attribute publication", () => {
   it("validates all members, ignores unrelated categories and detects consumed source changes", async () => {
     const { index, attributes } = await fixture()
     const manifest = await verifyPanelAttributes(attributes, index)
+    expect(manifest.rulesVersion).toBe("panel-attributes/2")
+    expect(manifest.sourceVersion).toBe("3.2")
+    expect(manifest.evidence.zzzHpCommit).toBe(
+      "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
+    )
+    const affixes = JSON.parse(
+      await readFile(join(attributes, "drive-disc-affixes.json"), "utf8"),
+    )
+    expect(affixes.mainStatsBySlot[5]).toContainEqual({
+      attribute: "damageBonus",
+      operation: "damage-bonus",
+      element: "wind",
+      unit: "ratio",
+      value: 0.3,
+    })
     expect(manifest.members.agents).toHaveLength(60)
     expect(manifest.members.wEngines).toHaveLength(100)
     index.entities.monsters.memberIds = []
@@ -75,7 +90,7 @@ describe("panel attribute publication", () => {
     )
     const manifestPath = join(attributes, "manifest.json")
     const manifest = JSON.parse(await readFile(manifestPath, "utf8"))
-    manifest.rulesVersion = "obsolete"
+    manifest.rulesVersion = "panel-attributes/1"
     await writeFile(manifestPath, JSON.stringify(manifest))
     await expect(verifyPanelAttributes(attributes, index)).rejects.toThrow(
       /rules version/,

@@ -3,7 +3,7 @@ import type {
   SDriveDiscMaxLevelAffixes,
 } from "../../src/attributes/types.ts"
 
-/** 固定版本的主、副词条数值；生成入口验证原始两份 TS 文件的摘要。 */
+/** 固定主、副词条；风伤的独立补充来源见 evidence.json，未升级旧 ZZZ-HP 来源。 */
 export function sDriveDiscMaxLevelAffixes(): SDriveDiscMaxLevelAffixes {
   const attack: PanelAttributeBonus = {
     attribute: "attack",
@@ -85,15 +85,15 @@ export function sDriveDiscMaxLevelAffixes(): SDriveDiscMaxLevelAffixes {
           unit: "ratio",
           value: 0.24,
         },
-        ...(["physical", "fire", "ice", "electric", "ether"] as const).map(
-          (element) => ({
-            attribute: "damageBonus" as const,
-            operation: "damage-bonus" as const,
-            element,
-            unit: "ratio" as const,
-            value: 0.3,
-          }),
-        ),
+        ...(
+          ["physical", "fire", "ice", "electric", "ether", "wind"] as const
+        ).map((element) => ({
+          attribute: "damageBonus" as const,
+          operation: "damage-bonus" as const,
+          element,
+          unit: "ratio" as const,
+          value: 0.3,
+        })),
       ],
       6: [
         attack,

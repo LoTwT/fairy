@@ -53,7 +53,8 @@ const coreB = agent?.coreAttributeBonuses[3]
 
 保留来源公式推导的小数，不提前取整；网页整数不自动成为计算步骤。本表不能证明游戏内部精度。
 截图或手动输入值直接采用，不反推隐藏精度。固定穿透 `penetrationValue` 与穿透率
-`penetrationRatio` 不混用；5 号位伤害加成保留物理、火、冰、电、以太五个独立选项。
+`penetrationRatio` 不混用；5 号位伤害加成保留物理、火、冰、电、以太、风六个独立选项。
+各项都是 `damage-bonus`、`ratio`、`0.3`；风伤仅允许 5 号位，复用现有 `wind` 伤害通道。
 
 ### 角色与核心
 
@@ -115,14 +116,37 @@ core 的配装路径计入角色基线、所选核心属性、音擎基础及高
 
 ## 固定证据、生成与发布
 
-角色与音擎使用持锁验证后的 Nanoka 快照；驱动盘来自 ZZZ-HP 固定提交
-`0df40c5bc38f8da7ed0f9eed6be87fb8155b8357`。公式查验 URL、文件 SHA-256 与用途固定在
+角色与音擎使用经过验证的 Nanoka 3.2 快照（受管理目录持锁，静态工作区按静态消费流程）；既有驱动盘词条来自 ZZZ-HP 固定提交
+`0df40c5bc38f8da7ed0f9eed6be87fb8155b8357`，风伤主词条采用下述独立补充证据。公式查验 URL、文件 SHA-256 与用途固定在
 [`evidence.json`](../../../packages/data/scripts/panel-attributes/evidence.json)，随 manifest 发布。
 Nanoka 前端仅作公式佐证，不升级来源版本；正常消费和构建不联网、不依赖 ZZZ-HP 仓库或 raw。
 独立的 93 个已匹配音擎显示攻击样本来自固定提交的 `wengines[].baseAtk`，测试样本保留原文件摘要，
 不使用本转换器生成期望值；其余 2 个音擎不冒充跨来源对比通过。
 
-manifest 记录 schema 1、规则 `panel-attributes/1`、来源版本、代理人/音擎成员、其 data/中英文详情摘要、
+### 风伤主词条的独立补充证据
+
+2026-10-15 核实 [ZenlessData 固定提交 `462563ec0f8ffc7493f6e2a46f64f8b34ea2d547`](https://git.mero.moe/dimbreath/ZenlessData/src/commit/462563ec0f8ffc7493f6e2a46f64f8b34ea2d547/FileCfg/)，
+并以 [Enka API 文档固定提交 `88fc20697fda924430943434c11e0c45eb39509f`](https://github.com/EnkaNetwork/API-docs/blob/88fc20697fda924430943434c11e0c45eb39509f/docs/zzz/api.md#formulas)
+交叉核对品质与强化公式。补充范围仅为风伤主词条，不升级 Nanoka 3.2、旧 ZZZ-HP 提交或其他实体资料。
+旧 ZZZ-HP 的 `dmgBonus: 30` 是通用增伤选项，不能据此声称它已提供独立风伤记录；目标
+ZZZ Calculator `d58e276973c3df944bc36fc81a783f3d17018708` 的 `windDmg: 30` 仅作对照，不作为独立来源。
+
+| 原始文件                                  | 核实记录与含义                                                                                                 |
+| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `EquipmentRarityTemplateTb.json`          | `CECLEKPMEJB=4` 为 S，`KPJDEHGMFPH=5` 为 5 号位；`BHMOPMMIKAK=405` 指向主词条池，`LGNKABDCGKC=15` 为强化上限。 |
+| `RandPropertyLibraryTemplateTb.json`      | `ELJCOOALAMO=405010` 属于池 `405`；属性 `IINHKLMBKBN=32303`，初值 `GAGPGKIOODG=750`。                          |
+| `EquipmentLevelTemplateTb.json`           | 品质 `4`、等级 `15` 的累计强化率 `DPKJPJNGJEK=30000`，除以 10000 为 3。                                        |
+| `PropertyTemplateTb.json`                 | 属性 `32303` 的名称是 `AddedDamageRatio_Wind`；`CADKKABBIFG=10000`，显示格式为百分比。                         |
+| `SmithyBasePropertyChooseTemplateTb.json` | 完整主词条定向选择表中，属性 `32303` 仅出现在槽位 `5`，记录编号 `510`。                                        |
+
+因此满强化风伤为 `750 × (1 + 30000/10000) / 10000 = 0.30`；Enka 的 S 级公式
+`初值 × (1 + 等级 × 0.2)` 得到相同结果。原始文件摘要由下载字节计算，ZenlessData 文件同时核对固定
+Git blob 身份；相关原始行及 JSON pointer 冻结在[独立证据夹具](../../../packages/data/test/fixtures/drive-disc-wind-evidence.json)，
+不由 Fairy 转换器生成期望值。正式 manifest 携带来源 URL、摘要与用途，普通测试离线读取冻结记录。
+
+### 生成与发布校验
+
+manifest 记录 schema 1、规则 `panel-attributes/2`、来源版本、代理人/音擎成员、其 data/中英文详情摘要、
 全部派生文件摘要、证据和限制。规则改变时递增规则版本并重建。已知差异以 manifest 的具名
 `discrepancies` 为准，包括冲击力 18% 的上游点数处理、耀嘉音异常掌控 93/92、显示取整、本的被动转化、
 聚宝箱等音擎的回能单位待核对。属性生成器不据此改写效果定义。
@@ -148,3 +172,9 @@ data 不新增运行时 core/effects 依赖。
 
 验收沿用 `pnpm check` 和 `pnpm --filter @randomplay/data verify:browser`；覆盖独立数值样本、错误拒绝、
 跨调用隔离、消费文件过期检测、构建期间来源/属性同时变化、离线安装、公开类型和开发/生产按需请求。
+风伤验收共享[公开入口场景](../../../packages/data/test/fixtures/drive-disc-wind-consumer.ts)：洛克茜快速支援「听凭差遣」
+最终 12 级，采用现有 Nanoka 3.2 已确认倍率 `100.8% + 11 × 9.2% = 202%`。固定攻击 `1057.2958`、
+目标防御 0、风抗 20%，5 号位生命切换为风伤时，非暴击伤害从 `1708.5900128` 增至 `2221.16701664`，
+差值 `512.57700384`；其他伤害通道不变，1—4、6 号位拒绝风伤，已结算面板路径不重复添加。
+该场景同时用于源码、Node 离线安装包与浏览器验收，不以目标库维琳娜的已知倍率差异判断风伤公式。
+数据管理维护统一遵循[同步流程](integration.md#数据管理状态的同步维护)，静态 worktree 不创建本机管理记录。

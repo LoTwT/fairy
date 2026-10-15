@@ -12,6 +12,8 @@ import type {
   StaticActorConfiguration,
 } from "../../core/src/static/types.ts"
 import type { StaticCalculationData } from "@randomplay/shared"
+import { loadStaticCalculationData } from "../src/index.ts"
+import { verifyWindDriveDiscConsumer } from "./fixtures/drive-disc-wind-consumer.ts"
 
 const json = async (path: string) =>
   JSON.parse(
@@ -127,6 +129,15 @@ function manual(
     },
   }
 }
+
+it("accepts wind only in slot 5, preserves other channels and verifies exact equipment-switch damage through the public loaders", async () => {
+  const result = await verifyWindDriveDiscConsumer(
+    { loadStaticCalculationData, resolveAgentAction },
+    { calculateStaticActionDamage },
+  )
+  expect(result.rejectedSlots).toEqual([1, 2, 3, 4, 6])
+  expect(result.difference).toBeCloseTo(512.57700384, 8)
+})
 
 describe("single-element aggregate action consumption", () => {
   const damageBonuses = {

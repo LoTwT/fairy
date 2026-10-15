@@ -1,4 +1,5 @@
 import { roxyCoreWindConsumerSource } from "./fixtures/roxy-core-wind-consumer.ts"
+import { windDriveDiscConsumerSource } from "./fixtures/drive-disc-wind-consumer.ts"
 import { roxyWindEyeConsumerSource } from "./fixtures/roxy-wind-eye-consumer.ts"
 import { hugoAttackConsumerSource } from "./fixtures/hugo-stun-teammates-consumer.ts"
 import { roxyMindscapeConsumerSource } from "./fixtures/roxy-mindscape-consumer.ts"
@@ -481,6 +482,8 @@ ${roxyWindEyeConsumerSource}
 assert.deepEqual(await verifyRoxyWindEyeConsumer(api, await import("@randomplay/core")), {multipliers:[1.049,1.049,4.174],mixedBase:12.533,giantScale:2.5,missingGiantRejected:true})
 ${roxyCoreWindConsumerSource}
 await verifyRoxyCoreWindConsumer(api, await import("@randomplay/core"))
+${windDriveDiscConsumerSource}
+await verifyWindDriveDiscConsumer(api, await import("@randomplay/core"))
 ${roxyAdditionalConsumerSource}
 await verifyRoxyAdditionalConsumer(api, await import("@randomplay/core"))
 ${yanagiPolarityConsumerSource}
@@ -1048,6 +1051,8 @@ ${astraYaoM4ConsumerTypes}
 ${lucyGuardBoarConsumerTypes}
 import type { StaticCalculationData as CoreCalculationData, StaticActionCalculationInput, StaticCatalogDamageInput, StaticCatalogDefenseInput, StaticCatalogLuminizeDamageBranch, StaticCatalogMechanism, RemielleSpecialVoidflareAnomalySource } from "@randomplay/core"
 const jointData: Promise<CoreCalculationData> = loadStaticCalculationData({ agents: ["Ben"], wEngines: [] })
+const windDiscElement: import("@randomplay/data").DriveDiscDamageElement = "wind"
+const windDiscMainStat: NonNullable<import("@randomplay/core").StaticDriveDisc["mainStat"]> = { attribute: "damageBonus", element: windDiscElement }
 async function typedCalculation(input: Omit<StaticActionCalculationInput, "data">) {
   const { calculateStaticActionDamage } = await import("@randomplay/core")
   return calculateStaticActionDamage({ ...input, data: await jointData })
