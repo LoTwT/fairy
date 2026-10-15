@@ -12,13 +12,14 @@
     "check": "pnpm check:quality && pnpm --recursive --if-present check",
     "check:quality": "pnpm check:packages && pnpm lint && pnpm format:check && pnpm check:spec-types",
     "prepare": "simple-git-hooks",
-    "check:packages": "node scripts/check-packages.ts"
+    "check:packages": "node --test scripts/check-packages.test.ts && node scripts/check-packages.ts"
   },
   "devDependencies": {
     "lint-staged": "^17.2.0",
     "oxfmt": "^0.60.0",
     "oxlint": "^1.75.0",
-    "simple-git-hooks": "^2.13.1"
+    "simple-git-hooks": "^2.13.1",
+    "typescript": "^6.0.3"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

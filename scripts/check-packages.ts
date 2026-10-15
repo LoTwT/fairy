@@ -1,6 +1,47 @@
 import { readFile, readdir } from "node:fs/promises"
 import { join } from "node:path"
 import { fileURLToPath } from "node:url"
+import ts from "typescript"
+
+function moduleSpecifiers(source: string, path: string): string[] {
+  const specifiers: string[] = []
+  const record = (expression: ts.Node | undefined) => {
+    while (
+      expression &&
+      (ts.isParenthesizedExpression(expression) ||
+        ts.isAsExpression(expression) ||
+        ts.isTypeAssertionExpression(expression) ||
+        ts.isSatisfiesExpression(expression) ||
+        ts.isNonNullExpression(expression))
+    )
+      expression = expression.expression
+    if (expression && ts.isStringLiteralLike(expression))
+      specifiers.push(expression.text)
+  }
+  const visit = (node: ts.Node): void => {
+    if (ts.isImportDeclaration(node) || ts.isExportDeclaration(node))
+      record(node.moduleSpecifier)
+    else if (
+      ts.isCallExpression(node) &&
+      node.expression.kind === ts.SyntaxKind.ImportKeyword
+    )
+      record(node.arguments[0])
+    else if (ts.isImportTypeNode(node) && ts.isLiteralTypeNode(node.argument))
+      record(node.argument.literal)
+    else if (ts.isExternalModuleReference(node)) record(node.expression)
+    ts.forEachChild(node, visit)
+  }
+  visit(
+    ts.createSourceFile(
+      path,
+      source,
+      ts.ScriptTarget.Latest,
+      false,
+      ts.ScriptKind.TS,
+    ),
+  )
+  return specifiers
+}
 
 const root = fileURLToPath(new URL("../", import.meta.url))
 const manifests = await Promise.all(
@@ -40,10 +81,7 @@ for (const name of ["core", "data", "shared"]) {
     if (!entry.isFile() || !entry.name.endsWith(".ts")) continue
     const path = join(entry.parentPath, entry.name)
     const source = await readFile(path, "utf8")
-    for (const match of source.matchAll(
-      /(?:\bfrom\s*|\bimport\s*\(\s*)["']([^"']+)["']/gu,
-    )) {
-      const target = match[1]!
+    for (const target of moduleSpecifiers(source, path)) {
       for (const other of ["core", "data"])
         if (
           other !== name &&

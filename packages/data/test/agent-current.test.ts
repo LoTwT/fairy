@@ -77,6 +77,42 @@ async function reportHeavySource(input: Awaited<ReturnType<typeof fixture>>) {
 }
 
 describe("current multi-entity dataset", () => {
+  it.each(["read", "recover"] as const)(
+    "rejects a hard-linked maintenance report without touching its external file: %s",
+    async (mode) => {
+      const input = await fixture()
+      await updateCurrentDataset(input)
+      const report = join(control(input), "maintenance.json")
+      const external = join(input.root, "external-maintenance.json")
+      await fs.rename(report, external)
+      await fs.link(external, report)
+      const original = await fs.readFile(external)
+      const before = await fs.stat(external, { bigint: true })
+      expect(before.nlink).toBe(2n)
+      expect((await fs.stat(report, { bigint: true })).ino).toBe(before.ino)
+      const read = vi.fn(async () => "unexpected read")
+      const operation =
+        mode === "read"
+          ? withCurrentDataset(input.targetDirectory, read, {
+              entities: input.entities,
+            })
+          : recoverCurrentDataset(input)
+      await expect(operation).rejects.toThrow(
+        /INVALID_STATE.*maintenance\.json.*不是独占普通文件/,
+      )
+      expect(read).not.toHaveBeenCalled()
+      expect(await fs.readFile(external)).toEqual(original)
+      expect(await fs.stat(external, { bigint: true })).toMatchObject({
+        ino: before.ino,
+        dev: before.dev,
+        nlink: before.nlink,
+        size: before.size,
+        mtimeNs: before.mtimeNs,
+      })
+      expect((await fs.stat(report, { bigint: true })).ino).toBe(before.ino)
+    },
+  )
+
   it.each(["generate", "update", "recover", "migrate", "read"] as const)(
     "rejects SQLite sidecars before opening the database and preserves the external hardlink: %s",
     async (mode) => {
