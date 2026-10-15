@@ -933,6 +933,8 @@ export interface StaticCatalogInputRequirement {
 export interface StaticCatalogApplicability {
   readonly beneficiaryProfession?: string
   readonly beneficiaryElements?: readonly DamageElement[]
+  /** 当前同队的另一名 actor 任一职业匹配即满足资格；不筛选受益者职业。 */
+  readonly otherTeammateProfessions?: readonly string[]
   readonly teamProfession?: {
     readonly profession: string
     readonly counts: readonly number[]
@@ -1012,6 +1014,13 @@ export interface StaticCatalogVariant {
    * (bindingId, name) 输入。省略该字段时目录沿用逐层展开行为。
    */
   readonly layerCountInputName?: string
+  /**
+   * 从本绑定 holder 的 actorSources.level 派生 count 输入。只允许一条
+   * supplied 贡献在 operation 中消费该名字，规则及变体最大层均为 1。
+   * 正层选择必须提供真实角色等级（有限整数 1—60），0 层不派生；
+   * 不得与外部 inputs 要求或 layerCountInputName 同名，禁止外部覆盖。
+   */
+  readonly holderLevelInputName?: string
   /**
    * 声明式同队受益者选择：该选项生效时，受益者是持有者同队的另一名实体，
    * 由每次选择以 `beneficiaryActorId` 显式声明（表达调用方声明的事实，例如

@@ -1097,6 +1097,10 @@ function calculateOrdinaryStaticActionDamage(
       actorSources: input.actors.map((a) => ({
         entityId: a.entityId,
         agentEntityId: a.agentEntityId,
+        // assembleComponents 已按角色身份验证该属性制品及其 60 级边界。
+        level: input.data.agents.find(
+          (record) => record.attributes.entityId === a.agentEntityId,
+        )!.attributes.level,
       })),
       ...(input.inputs ? { inputs: input.inputs } : {}),
       ...(input.snapshots ? { snapshots: input.snapshots } : {}),

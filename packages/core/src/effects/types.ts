@@ -1148,6 +1148,8 @@ export interface StaticCatalogDamageInput {
   readonly actorSources: readonly {
     readonly entityId: EntityId
     readonly agentEntityId: string
+    /** 该运行实体的当前角色等级；提供时必须是有限整数 1—60，无默认值。 */
+    readonly level?: number
   }[]
   readonly world: WorldObservation
   readonly hit: Omit<StaticHit, "damageItems" | "attributeSources"> & {

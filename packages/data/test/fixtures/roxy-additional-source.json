@@ -1,0 +1,236 @@
+{
+  "nanokaVersion": "3.2",
+  "upstreamCommit": "7a4f2776bf4a44cb108fcd7f5834f63606ade914",
+  "languages": {
+    "zh": {
+      "rawUrl": "https://static.nanoka.cc/zzz/3.2/zh/character/1621.json",
+      "rawSha256": "299637ab8aaafbe41003819f8e58f9248cbacf3537f7d5b55332e249ddc2e93c",
+      "rawBytes": 89634,
+      "resourcePath": "agents/1621/details.zh.json",
+      "integratedSha256": "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e",
+      "clauses": [
+        {
+          "coreSkillLevel": 1,
+          "pointer": "/passive/level/1621501/desc/1",
+          "name": "额外能力：辉金心脏",
+          "text": "队伍中存在<color=#FFFFFF>[强攻]</color>角色或<color=#FFFFFF>[命破]</color>角色或<color=#FFFFFF>[锋御]</color>角色时触发：\n洛克茜造成的伤害提升8%，该效果随角色等级提升，每级增加1.2%，最多提升80%；\n队伍中角色攻击命中敌人时，使其失衡易伤倍率提升30%，敌人进入失衡状态时，使其失衡时间延长2秒，失衡持续时间提升效果与同类效果不可叠加，失衡结束时移除该效果；\n敌人处于队伍中角色造成的<color=#FFFFFF>[风化]</color>状态下时，敌人受到的<color=#A6C5FD>风属性直接攻击伤害</color>和触发<color=#FFFFFF>[浸染]</color>属性的直接攻击伤害额外提升8%；\n进入战场时，自身回复40点能量，在勘域模式中此效果180秒内最多触发一次；\n全队角色施加的<color=#FFFFFF>[风化]</color>效果延长20秒；\n释放<color=#ffffff>[强化特殊技]</color>时，自身异常积蓄效率提升30%，持续50秒，重复触发时刷新持续时间。"
+        },
+        {
+          "coreSkillLevel": 2,
+          "pointer": "/passive/level/1621502/desc/1",
+          "name": "额外能力：辉金心脏",
+          "text": "队伍中存在<color=#FFFFFF>[强攻]</color>角色或<color=#FFFFFF>[命破]</color>角色或<color=#FFFFFF>[锋御]</color>角色时触发：\n洛克茜造成的伤害提升8%，该效果随角色等级提升，每级增加1.2%，最多提升80%；\n队伍中角色攻击命中敌人时，使其失衡易伤倍率提升30%，敌人进入失衡状态时，使其失衡时间延长2秒，失衡持续时间提升效果与同类效果不可叠加，失衡结束时移除该效果；\n敌人处于队伍中角色造成的<color=#FFFFFF>[风化]</color>状态下时，敌人受到的<color=#A6C5FD>风属性直接攻击伤害</color>和触发<color=#FFFFFF>[浸染]</color>属性的直接攻击伤害额外提升8%；\n进入战场时，自身回复40点能量，在勘域模式中此效果180秒内最多触发一次；\n全队角色施加的<color=#FFFFFF>[风化]</color>效果延长20秒；\n释放<color=#ffffff>[强化特殊技]</color>时，自身异常积蓄效率提升30%，持续50秒，重复触发时刷新持续时间。"
+        },
+        {
+          "coreSkillLevel": 3,
+          "pointer": "/passive/level/1621503/desc/1",
+          "name": "额外能力：辉金心脏",
+          "text": "队伍中存在<color=#FFFFFF>[强攻]</color>角色或<color=#FFFFFF>[命破]</color>角色或<color=#FFFFFF>[锋御]</color>角色时触发：\n洛克茜造成的伤害提升8%，该效果随角色等级提升，每级增加1.2%，最多提升80%；\n队伍中角色攻击命中敌人时，使其失衡易伤倍率提升30%，敌人进入失衡状态时，使其失衡时间延长2秒，失衡持续时间提升效果与同类效果不可叠加，失衡结束时移除该效果；\n敌人处于队伍中角色造成的<color=#FFFFFF>[风化]</color>状态下时，敌人受到的<color=#A6C5FD>风属性直接攻击伤害</color>和触发<color=#FFFFFF>[浸染]</color>属性的直接攻击伤害额外提升8%；\n进入战场时，自身回复40点能量，在勘域模式中此效果180秒内最多触发一次；\n全队角色施加的<color=#FFFFFF>[风化]</color>效果延长20秒；\n释放<color=#ffffff>[强化特殊技]</color>时，自身异常积蓄效率提升30%，持续50秒，重复触发时刷新持续时间。"
+        },
+        {
+          "coreSkillLevel": 4,
+          "pointer": "/passive/level/1621504/desc/1",
+          "name": "额外能力：辉金心脏",
+          "text": "队伍中存在<color=#FFFFFF>[强攻]</color>角色或<color=#FFFFFF>[命破]</color>角色或<color=#FFFFFF>[锋御]</color>角色时触发：\n洛克茜造成的伤害提升8%，该效果随角色等级提升，每级增加1.2%，最多提升80%；\n队伍中角色攻击命中敌人时，使其失衡易伤倍率提升30%，敌人进入失衡状态时，使其失衡时间延长2秒，失衡持续时间提升效果与同类效果不可叠加，失衡结束时移除该效果；\n敌人处于队伍中角色造成的<color=#FFFFFF>[风化]</color>状态下时，敌人受到的<color=#A6C5FD>风属性直接攻击伤害</color>和触发<color=#FFFFFF>[浸染]</color>属性的直接攻击伤害额外提升8%；\n进入战场时，自身回复40点能量，在勘域模式中此效果180秒内最多触发一次；\n全队角色施加的<color=#FFFFFF>[风化]</color>效果延长20秒；\n释放<color=#ffffff>[强化特殊技]</color>时，自身异常积蓄效率提升30%，持续50秒，重复触发时刷新持续时间。"
+        },
+        {
+          "coreSkillLevel": 5,
+          "pointer": "/passive/level/1621505/desc/1",
+          "name": "额外能力：辉金心脏",
+          "text": "队伍中存在<color=#FFFFFF>[强攻]</color>角色或<color=#FFFFFF>[命破]</color>角色或<color=#FFFFFF>[锋御]</color>角色时触发：\n洛克茜造成的伤害提升8%，该效果随角色等级提升，每级增加1.2%，最多提升80%；\n队伍中角色攻击命中敌人时，使其失衡易伤倍率提升30%，敌人进入失衡状态时，使其失衡时间延长2秒，失衡持续时间提升效果与同类效果不可叠加，失衡结束时移除该效果；\n敌人处于队伍中角色造成的<color=#FFFFFF>[风化]</color>状态下时，敌人受到的<color=#A6C5FD>风属性直接攻击伤害</color>和触发<color=#FFFFFF>[浸染]</color>属性的直接攻击伤害额外提升8%；\n进入战场时，自身回复40点能量，在勘域模式中此效果180秒内最多触发一次；\n全队角色施加的<color=#FFFFFF>[风化]</color>效果延长20秒；\n释放<color=#ffffff>[强化特殊技]</color>时，自身异常积蓄效率提升30%，持续50秒，重复触发时刷新持续时间。"
+        },
+        {
+          "coreSkillLevel": 6,
+          "pointer": "/passive/level/1621506/desc/1",
+          "name": "额外能力：辉金心脏",
+          "text": "队伍中存在<color=#FFFFFF>[强攻]</color>角色或<color=#FFFFFF>[命破]</color>角色或<color=#FFFFFF>[锋御]</color>角色时触发：\n洛克茜造成的伤害提升8%，该效果随角色等级提升，每级增加1.2%，最多提升80%；\n队伍中角色攻击命中敌人时，使其失衡易伤倍率提升30%，敌人进入失衡状态时，使其失衡时间延长2秒，失衡持续时间提升效果与同类效果不可叠加，失衡结束时移除该效果；\n敌人处于队伍中角色造成的<color=#FFFFFF>[风化]</color>状态下时，敌人受到的<color=#A6C5FD>风属性直接攻击伤害</color>和触发<color=#FFFFFF>[浸染]</color>属性的直接攻击伤害额外提升8%；\n进入战场时，自身回复40点能量，在勘域模式中此效果180秒内最多触发一次；\n全队角色施加的<color=#FFFFFF>[风化]</color>效果延长20秒；\n释放<color=#ffffff>[强化特殊技]</color>时，自身异常积蓄效率提升30%，持续50秒，重复触发时刷新持续时间。"
+        },
+        {
+          "coreSkillLevel": 7,
+          "pointer": "/passive/level/1621507/desc/1",
+          "name": "额外能力：辉金心脏",
+          "text": "队伍中存在<color=#FFFFFF>[强攻]</color>角色或<color=#FFFFFF>[命破]</color>角色或<color=#FFFFFF>[锋御]</color>角色时触发：\n洛克茜造成的伤害提升8%，该效果随角色等级提升，每级增加1.2%，最多提升80%；\n队伍中角色攻击命中敌人时，使其失衡易伤倍率提升30%，敌人进入失衡状态时，使其失衡时间延长2秒，失衡持续时间提升效果与同类效果不可叠加，失衡结束时移除该效果；\n敌人处于队伍中角色造成的<color=#FFFFFF>[风化]</color>状态下时，敌人受到的<color=#A6C5FD>风属性直接攻击伤害</color>和触发<color=#FFFFFF>[浸染]</color>属性的直接攻击伤害额外提升8%；\n进入战场时，自身回复40点能量，在勘域模式中此效果180秒内最多触发一次；\n全队角色施加的<color=#FFFFFF>[风化]</color>效果延长20秒；\n释放<color=#ffffff>[强化特殊技]</color>时，自身异常积蓄效率提升30%，持续50秒，重复触发时刷新持续时间。"
+        }
+      ]
+    },
+    "en": {
+      "rawUrl": "https://static.nanoka.cc/zzz/3.2/en/character/1621.json",
+      "rawSha256": "0692d88153c3cad37fb4e34c5446820763b8628490aba54294dc031b3ddf1334",
+      "rawBytes": 94265,
+      "resourcePath": "agents/1621/details.en.json",
+      "integratedSha256": "30a75cab3c664648ca8f9bbcfdce04bc5d92b5897b9187c17c6620c76c282b2a",
+      "clauses": [
+        {
+          "coreSkillLevel": 1,
+          "pointer": "/passive/level/1621501/desc/1",
+          "name": "Additional Ability: Porcelloy Heart",
+          "text": "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Rupture</color>, or <color=#FFFFFF>Armorer</color> character:\nRoxy's DMG increases by 8%. This effect increases with character level, increasing by 1.2% per level, up to 80%.\nWhen any squad member's attack hits an enemy, it increases their Stun DMG Multiplier by 30%. When an enemy becomes Stunned, its Stun duration is extended by 2s. This Stun duration increase does not stack with similar effects. The effect is removed once the Stun ends.\nWhile an enemy is in the <color=#FFFFFF>Windswept</color> state applied by a squad member, the <color=#A6C5FD>direct Wind DMG</color> they take and the direct DMG they take of the attribute that triggered <color=#FFFFFF>Contamination</color> are increased by 8%.\nUpon entering the battlefield, restores 40 Energy. In Investigation Zone Mode, this effect can trigger once every 180s.\n<color=#FFFFFF>Windswept</color> applied by all squad members lasts 20s longer.\nWhen using an <color=#ffffff>EX Special Attack</color>, Roxy's Anomaly Buildup Rate increases by 30% for 50s. Repeated triggers reset the duration."
+        },
+        {
+          "coreSkillLevel": 2,
+          "pointer": "/passive/level/1621502/desc/1",
+          "name": "Additional Ability: Porcelloy Heart",
+          "text": "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Rupture</color>, or <color=#FFFFFF>Armorer</color> character:\nRoxy's DMG increases by 8%. This effect increases with character level, increasing by 1.2% per level, up to 80%.\nWhen any squad member's attack hits an enemy, it increases their Stun DMG Multiplier by 30%. When an enemy becomes Stunned, its Stun duration is extended by 2s. This Stun duration increase does not stack with similar effects. The effect is removed once the Stun ends.\nWhile an enemy is in the <color=#FFFFFF>Windswept</color> state applied by a squad member, the <color=#A6C5FD>direct Wind DMG</color> they take and the direct DMG they take of the attribute that triggered <color=#FFFFFF>Contamination</color> are increased by 8%.\nUpon entering the battlefield, restores 40 Energy. In Investigation Zone Mode, this effect can trigger once every 180s.\n<color=#FFFFFF>Windswept</color> applied by all squad members lasts 20s longer.\nWhen using an <color=#ffffff>EX Special Attack</color>, Roxy's Anomaly Buildup Rate increases by 30% for 50s. Repeated triggers reset the duration."
+        },
+        {
+          "coreSkillLevel": 3,
+          "pointer": "/passive/level/1621503/desc/1",
+          "name": "Additional Ability: Porcelloy Heart",
+          "text": "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Rupture</color>, or <color=#FFFFFF>Armorer</color> character:\nRoxy's DMG increases by 8%. This effect increases with character level, increasing by 1.2% per level, up to 80%.\nWhen any squad member's attack hits an enemy, it increases their Stun DMG Multiplier by 30%. When an enemy becomes Stunned, its Stun duration is extended by 2s. This Stun duration increase does not stack with similar effects. The effect is removed once the Stun ends.\nWhile an enemy is in the <color=#FFFFFF>Windswept</color> state applied by a squad member, the <color=#A6C5FD>direct Wind DMG</color> they take and the direct DMG they take of the attribute that triggered <color=#FFFFFF>Contamination</color> are increased by 8%.\nUpon entering the battlefield, restores 40 Energy. In Investigation Zone Mode, this effect can trigger once every 180s.\n<color=#FFFFFF>Windswept</color> applied by all squad members lasts 20s longer.\nWhen using an <color=#ffffff>EX Special Attack</color>, Roxy's Anomaly Buildup Rate increases by 30% for 50s. Repeated triggers reset the duration."
+        },
+        {
+          "coreSkillLevel": 4,
+          "pointer": "/passive/level/1621504/desc/1",
+          "name": "Additional Ability: Porcelloy Heart",
+          "text": "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Rupture</color>, or <color=#FFFFFF>Armorer</color> character:\nRoxy's DMG increases by 8%. This effect increases with character level, increasing by 1.2% per level, up to 80%.\nWhen any squad member's attack hits an enemy, it increases their Stun DMG Multiplier by 30%. When an enemy becomes Stunned, its Stun duration is extended by 2s. This Stun duration increase does not stack with similar effects. The effect is removed once the Stun ends.\nWhile an enemy is in the <color=#FFFFFF>Windswept</color> state applied by a squad member, the <color=#A6C5FD>direct Wind DMG</color> they take and the direct DMG they take of the attribute that triggered <color=#FFFFFF>Contamination</color> are increased by 8%.\nUpon entering the battlefield, restores 40 Energy. In Investigation Zone Mode, this effect can trigger once every 180s.\n<color=#FFFFFF>Windswept</color> applied by all squad members lasts 20s longer.\nWhen using an <color=#ffffff>EX Special Attack</color>, Roxy's Anomaly Buildup Rate increases by 30% for 50s. Repeated triggers reset the duration."
+        },
+        {
+          "coreSkillLevel": 5,
+          "pointer": "/passive/level/1621505/desc/1",
+          "name": "Additional Ability: Porcelloy Heart",
+          "text": "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Rupture</color>, or <color=#FFFFFF>Armorer</color> character:\nRoxy's DMG increases by 8%. This effect increases with character level, increasing by 1.2% per level, up to 80%.\nWhen any squad member's attack hits an enemy, it increases their Stun DMG Multiplier by 30%. When an enemy becomes Stunned, its Stun duration is extended by 2s. This Stun duration increase does not stack with similar effects. The effect is removed once the Stun ends.\nWhile an enemy is in the <color=#FFFFFF>Windswept</color> state applied by a squad member, the <color=#A6C5FD>direct Wind DMG</color> they take and the direct DMG they take of the attribute that triggered <color=#FFFFFF>Contamination</color> are increased by 8%.\nUpon entering the battlefield, restores 40 Energy. In Investigation Zone Mode, this effect can trigger once every 180s.\n<color=#FFFFFF>Windswept</color> applied by all squad members lasts 20s longer.\nWhen using an <color=#ffffff>EX Special Attack</color>, Roxy's Anomaly Buildup Rate increases by 30% for 50s. Repeated triggers reset the duration."
+        },
+        {
+          "coreSkillLevel": 6,
+          "pointer": "/passive/level/1621506/desc/1",
+          "name": "Additional Ability: Porcelloy Heart",
+          "text": "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Rupture</color>, or <color=#FFFFFF>Armorer</color> character:\nRoxy's DMG increases by 8%. This effect increases with character level, increasing by 1.2% per level, up to 80%.\nWhen any squad member's attack hits an enemy, it increases their Stun DMG Multiplier by 30%. When an enemy becomes Stunned, its Stun duration is extended by 2s. This Stun duration increase does not stack with similar effects. The effect is removed once the Stun ends.\nWhile an enemy is in the <color=#FFFFFF>Windswept</color> state applied by a squad member, the <color=#A6C5FD>direct Wind DMG</color> they take and the direct DMG they take of the attribute that triggered <color=#FFFFFF>Contamination</color> are increased by 8%.\nUpon entering the battlefield, restores 40 Energy. In Investigation Zone Mode, this effect can trigger once every 180s.\n<color=#FFFFFF>Windswept</color> applied by all squad members lasts 20s longer.\nWhen using an <color=#ffffff>EX Special Attack</color>, Roxy's Anomaly Buildup Rate increases by 30% for 50s. Repeated triggers reset the duration."
+        },
+        {
+          "coreSkillLevel": 7,
+          "pointer": "/passive/level/1621507/desc/1",
+          "name": "Additional Ability: Porcelloy Heart",
+          "text": "When another character in your squad is an <color=#FFFFFF>Attack</color>, <color=#FFFFFF>Rupture</color>, or <color=#FFFFFF>Armorer</color> character:\nRoxy's DMG increases by 8%. This effect increases with character level, increasing by 1.2% per level, up to 80%.\nWhen any squad member's attack hits an enemy, it increases their Stun DMG Multiplier by 30%. When an enemy becomes Stunned, its Stun duration is extended by 2s. This Stun duration increase does not stack with similar effects. The effect is removed once the Stun ends.\nWhile an enemy is in the <color=#FFFFFF>Windswept</color> state applied by a squad member, the <color=#A6C5FD>direct Wind DMG</color> they take and the direct DMG they take of the attribute that triggered <color=#FFFFFF>Contamination</color> are increased by 8%.\nUpon entering the battlefield, restores 40 Energy. In Investigation Zone Mode, this effect can trigger once every 180s.\n<color=#FFFFFF>Windswept</color> applied by all squad members lasts 20s longer.\nWhen using an <color=#ffffff>EX Special Attack</color>, Roxy's Anomaly Buildup Rate increases by 30% for 50s. Repeated triggers reset the duration."
+        }
+      ]
+    }
+  },
+  "upstream": {
+    "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+    "sha256": "71107d7974b02726aaf0dee29f55136e4901ee12d209d68271dd39167b8c7fad",
+    "pointer": "/agents/33/mindscapeBuffs/0",
+    "block": {
+      "id": "blk-muppaptc-wl5q5a",
+      "name": "额外能力：辉金心脏",
+      "note": "队伍中存在[强攻]角色或[命破]角色或[锋御]角色时触发：\n洛克茜造成的伤害提升8%，该效果随角色等级提升，每级增加1.2%，最多提升80%；\n队伍中角色攻击命中敌人时，使其失衡易伤倍率提升30%，敌人进入失衡状态时，使其失衡时间延长2秒，失衡持续时间提升效果与同类效果不可叠加，失衡结束时移除该效果；\n敌人处于队伍中角色造成的[风化]状态下时，敌人受到的风属性直接攻击伤害和触发[浸染]属性的直接攻击伤害额外提升8%；",
+      "effects": [
+        {
+          "id": "eff-muppaptc-fn832t",
+          "origin": "",
+          "scope": "general",
+          "applyTarget": "self",
+          "applySituation": "global",
+          "applyProfession": null,
+          "teamProfession": null,
+          "teamProfessionValues": null,
+          "teamProfessionMinCount": null,
+          "skillSubcategoryId": null,
+          "elementFilter": "all",
+          "kind": "fixed",
+          "stat": "dmgBonus",
+          "value": 8,
+          "stackable": false,
+          "maxStacks": 1,
+          "valuePerStack": 0,
+          "defaultStacks": 1,
+          "enabledDefault": true,
+          "note": ""
+        },
+        {
+          "id": "eff-muppd7di-hf2fx8",
+          "origin": "",
+          "scope": "general",
+          "applyTarget": "self",
+          "applySituation": "global",
+          "applyProfession": null,
+          "teamProfession": null,
+          "teamProfessionValues": null,
+          "teamProfessionMinCount": null,
+          "skillSubcategoryId": null,
+          "elementFilter": "all",
+          "kind": "convert",
+          "stat": "dmgBonus",
+          "value": 0,
+          "stackable": false,
+          "maxStacks": 1,
+          "valuePerStack": 0,
+          "defaultStacks": 1,
+          "convert": {
+            "from": "level",
+            "panelSource": "external",
+            "ratioPercent": 120,
+            "cap": 72,
+            "defaultBase": null,
+            "initialBase": 0
+          },
+          "enabledDefault": true,
+          "note": ""
+        },
+        {
+          "id": "eff-muppdqhh-3qsii7",
+          "origin": "",
+          "scope": "general",
+          "applyTarget": "team",
+          "applySituation": "global",
+          "applyProfession": null,
+          "teamProfession": null,
+          "teamProfessionValues": null,
+          "teamProfessionMinCount": null,
+          "skillSubcategoryId": null,
+          "elementFilter": "all",
+          "kind": "fixed",
+          "stat": "staggerVulnerable",
+          "value": 30,
+          "stackable": false,
+          "maxStacks": 1,
+          "valuePerStack": 0,
+          "defaultStacks": 1,
+          "enabledDefault": true,
+          "note": ""
+        },
+        {
+          "id": "eff-muppe3ty-86s1uf",
+          "origin": "",
+          "scope": "general",
+          "applyTarget": "team",
+          "applySituation": "global",
+          "applyProfession": null,
+          "teamProfession": null,
+          "teamProfessionValues": null,
+          "teamProfessionMinCount": null,
+          "skillSubcategoryId": null,
+          "elementFilter": "all",
+          "kind": "fixed",
+          "stat": "special",
+          "value": 18,
+          "stackable": false,
+          "maxStacks": 1,
+          "valuePerStack": 0,
+          "defaultStacks": 1,
+          "enabledDefault": true,
+          "note": ""
+        }
+      ],
+      "enabledDefault": true
+    }
+  },
+  "independentExpectations": {
+    "qualificationProfessions": ["强攻", "命破", "锋御"],
+    "levelCases": [
+      {
+        "level": 1,
+        "bonus": 0.092
+      },
+      {
+        "level": 30,
+        "bonus": 0.44
+      },
+      {
+        "level": 60,
+        "bonus": 0.8
+      }
+    ],
+    "stunAddition": 0.3,
+    "m2PlusAdditionalStunMultiplier": 2.1
+  }
+}

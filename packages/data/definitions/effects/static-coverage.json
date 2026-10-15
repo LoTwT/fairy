@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "38",
+  "revision": "39",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -30301,6 +30301,26 @@
       "status": "integrated"
     },
     {
+      "supplementId": "nanoka:agents:1621:additional-level-damage",
+      "source": "nanoka-integrated@3.2 agents/1621 /passive/level/1621501—1621507/desc/1",
+      "kind": "option",
+      "optionId": "nanoka:agents:1621:additional-level-damage",
+      "effectIds": ["agent:1621:nanoka:additional-level-damage"],
+      "supportedRanks": "核心 1—7；影画 0—6；层数 0—1",
+      "computationTarget": "catalog option on the existing supplement agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:1621:additional-hit-stun-damage",
+      "source": "nanoka-integrated@3.2 agents/1621 /passive/level/1621501—1621507/desc/1",
+      "kind": "option",
+      "optionId": "nanoka:agents:1621:additional-hit-stun-damage",
+      "effectIds": ["agent:1621:nanoka:additional-hit-stun-damage"],
+      "supportedRanks": "核心 1—7；影画 0—6；层数 0—1",
+      "computationTarget": "catalog option on the existing supplement agent entity",
+      "status": "integrated"
+    },
+    {
       "supplementId": "nanoka:agents:lucy:guard-boar-inheritance",
       "source": "nanoka-integrated@3.2 agents/1151 passive core1—7",
       "kind": "option",
@@ -31220,17 +31240,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 888,
-    "options": 921,
+    "rules": 890,
+    "options": 923,
     "converted": 1130,
     "corrected": 139,
     "unsupported": 21,
     "supplements": {
-      "records": 93,
-      "rules": 64,
-      "options": 55,
+      "records": 95,
+      "rules": 66,
+      "options": 57,
       "entities": 4,
-      "integrated": 60,
+      "integrated": 62,
       "outOfScope": 33
     }
   },

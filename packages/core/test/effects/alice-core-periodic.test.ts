@@ -166,6 +166,19 @@ const originalActual =
   1.61 *
   1.29
 
+it("shares the catalog actor level domain without changing Alice's settled actual damage", () => {
+  const input = fixture()
+  const before = ok(calculateStaticDamageFromCatalog(input))
+  input.actorSources[0]!.level = 60
+  expect(ok(calculateStaticDamageFromCatalog(input))).toEqual(before)
+  input.actorSources[0]!.level = 1.5
+  issue(
+    calculateStaticDamageFromCatalog(input),
+    "INVALID_INPUT",
+    "/actorSources/0/level",
+  )
+})
+
 describe.each(["catalog", "low"] as const)(
   "Alice periodic %s entry",
   (entry) => {

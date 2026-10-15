@@ -1,5 +1,6 @@
 import { hugoAttackConsumerSource } from "./fixtures/hugo-stun-teammates-consumer.ts"
 import { roxyMindscapeConsumerSource } from "./fixtures/roxy-mindscape-consumer.ts"
+import { roxyAdditionalConsumerSource } from "./fixtures/roxy-additional-consumer.ts"
 import { lucyGuardBoarConsumerSource } from "./fixtures/lucy-guard-boar-consumer.ts"
 import { yanagiPolarityConsumerSource } from "./fixtures/yanagi-polarity-consumer.ts"
 import { aliceCorePeriodicConsumerSource } from "./fixtures/alice-core-periodic-consumer.ts"
@@ -127,6 +128,8 @@ ${hugoAttackConsumerSource}
 globalThis.fairyHugoAttack = async () => verifyHugoAttackConsumer(api, await import("@randomplay/core"))
 ${roxyMindscapeConsumerSource}
 globalThis.fairyRoxyMindscapes = async () => verifyRoxyMindscapeConsumer(api, await import("@randomplay/core"))
+${roxyAdditionalConsumerSource}
+globalThis.fairyRoxyAdditional = async () => verifyRoxyAdditionalConsumer(api, await import("@randomplay/core"))
 ${yanagiPolarityConsumerSource}
 globalThis.fairyYanagiPolarity = async () => verifyYanagiPolarityConsumer(api, await import("@randomplay/core"))
 ${astraYaoM4ConsumerSource}
@@ -1029,6 +1032,18 @@ function defineScenarios(counts: {
               nonWindIgnore: 0,
               rejectedLowRank: true,
             })
+          },
+        },
+        {
+          name: "roxy-additional-level-and-team-stun",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyRoxyAdditional(),
+            )
+            expect(result.own).toBeCloseTo(3780, 9)
+            expect(result.team).toBeCloseTo(4998, 9)
+            expect(result.high).toBeCloseTo(112806.918, 8)
+            expect(result.missingRejected).toBe(true)
           },
         },
         {
