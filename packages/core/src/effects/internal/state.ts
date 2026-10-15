@@ -33,9 +33,11 @@ import {
 import {
   validateSnapshots,
   validateWorldObservation,
+  stateObservationKey,
   type WorldIndex,
 } from "./world.ts"
 import { isEntityId, isPrefixedIdentity } from "./vocabulary.ts"
+import { encodeStableTuple } from "./identity.ts"
 
 /** 引擎内部状态；品牌之外的实施细节，不进入公开类型。 */
 export interface EffectStateInternal {
@@ -577,7 +579,7 @@ export function findStateObservation(
   bindingId: BindingId,
   ownerId: EntityId,
 ): WorldObservation["states"][number] | undefined {
-  return world.states.get(`${stateId} ${bindingId} ${ownerId}`)
+  return world.states.get(stateObservationKey(stateId, bindingId, ownerId))
 }
 
 /** 引擎自有副本：冻结状态之前先与调用方对象脱钩。 */
@@ -586,23 +588,38 @@ function cloneEngineOwned<T>(value: T): T {
 }
 
 /** 逻辑组键：实例身份 + 生命周期身份；状态两次进入属于不同组。 */
-export function lifecycleGroupKey(
-  lifetime: EffectInstance["lifetime"],
-): string {
-  if (lifetime.kind === "state-bound") {
-    return `state-bound ${lifetime.stateId} ${lifetime.stateOwnerId} ${lifetime.stateActivationId}`
-  }
-  return lifetime.kind
+type InstanceGroupIdentity = Pick<
+  EffectInstance,
+  "effectId" | "bindingId" | "stackKey"
+> & {
+  readonly beneficiaryIds: readonly EntityId[]
+  readonly lifetime:
+    | { readonly kind: "timed" | "supplied" }
+    | Extract<EffectInstance["lifetime"], { readonly kind: "state-bound" }>
 }
 
-export function instanceGroupKey(instance: EffectInstance): string {
-  return [
+function lifecycleGroupKey(
+  lifetime: InstanceGroupIdentity["lifetime"],
+): string {
+  if (lifetime.kind === "state-bound") {
+    return encodeStableTuple([
+      lifetime.kind,
+      lifetime.stateId,
+      lifetime.stateOwnerId,
+      lifetime.stateActivationId,
+    ])
+  }
+  return encodeStableTuple([lifetime.kind])
+}
+
+export function instanceGroupKey(instance: InstanceGroupIdentity): string {
+  return encodeStableTuple([
     instance.effectId,
     instance.bindingId,
-    ...instance.beneficiaryIds,
-    ...instance.stackKey,
+    encodeStableTuple(instance.beneficiaryIds.toSorted()),
+    encodeStableTuple(instance.stackKey),
     lifecycleGroupKey(instance.lifetime),
-  ].join(" ")
+  ])
 }
 
 /** 逻辑组层数上限检查：同一完整逻辑组的层总数不得超过声明上限。 */
@@ -740,7 +757,7 @@ function validateCooldowns(
       valid = false
       continue
     }
-    const key = `${groupId} ${partitionKey}`
+    const key = encodeStableTuple([groupId, partitionKey])
     if (seen.has(key)) {
       collector.report(
         "DUPLICATE_ID",
@@ -1255,7 +1272,7 @@ export function synchronizeSuppliedInstances(
       )
       continue
     }
-    const scopeKey = `${effectId} ${bindingId}`
+    const scopeKey = suppliedScopeKey(effectId, bindingId)
     if (replacedScopes.has(scopeKey)) {
       collector.report(
         "INVALID_INPUT",
@@ -1320,7 +1337,11 @@ export function synchronizeSuppliedInstances(
 
   // 保留集合 = 替换范围之外的旧实例；被替换范围内的 ID 允许由新实例复用（续期）。
   for (const instance of previousInternal.instances) {
-    if (replacedScopes.has(`${instance.effectId} ${instance.bindingId}`)) {
+    if (
+      replacedScopes.has(
+        suppliedScopeKey(instance.effectId, instance.bindingId),
+      )
+    ) {
       continue
     }
     context.retainedInstanceIds.add(instance.instanceId)
@@ -1331,56 +1352,62 @@ export function synchronizeSuppliedInstances(
   context.retainedInstances.push(
     ...previousInternal.instances.filter(
       (instance) =>
-        !replacedScopes.has(`${instance.effectId} ${instance.bindingId}`),
+        !replacedScopes.has(
+          suppliedScopeKey(instance.effectId, instance.bindingId),
+        ),
     ),
   )
 
   // 保留实例的约束：替换范围之外的实例原样保留；同范围复用 ID 的实例只允许续期。
-  for (const [scopeKey, instances] of replacedInstancesByScope) {
-    const [effectId, bindingId] = scopeKey.split(" ")
-    const previousScopeInstances = previousInternal.instances.filter(
-      (instance) =>
-        instance.effectId === effectId && instance.bindingId === bindingId,
-    )
-    const previousById = new Map(
-      previousScopeInstances.map((instance) => [instance.instanceId, instance]),
-    )
+  const previousById = new Map(
+    previousInternal.instances.map((instance) => [
+      instance.instanceId,
+      instance,
+    ]),
+  )
+  const previousLayers = new Map(
+    previousInternal.instances.flatMap((instance) =>
+      instance.layers.map(
+        (layer) =>
+          [layer.layerId, { instanceId: instance.instanceId, layer }] as const,
+      ),
+    ),
+  )
+  for (const instances of replacedInstancesByScope.values()) {
     for (const instance of instances) {
       const previousInstance = previousById.get(instance.instanceId)
-      if (previousInstance === undefined) {
-        continue
-      }
       if (
-        !arraysEqual(
-          previousInstance.beneficiaryIds,
-          instance.beneficiaryIds,
-        ) ||
-        !arraysEqual(previousInstance.stackKey, instance.stackKey) ||
-        !lifetimesEqual(previousInstance.lifetime, instance.lifetime)
+        previousInstance !== undefined &&
+        (previousInstance.effectId !== instance.effectId ||
+          previousInstance.bindingId !== instance.bindingId ||
+          !arraysEqual(
+            previousInstance.beneficiaryIds,
+            instance.beneficiaryIds,
+          ) ||
+          !arraysEqual(previousInstance.stackKey, instance.stackKey) ||
+          !lifetimesEqual(previousInstance.lifetime, instance.lifetime))
       ) {
         collector.report(
           "CONTEXT_MISMATCH",
           "",
-          `Retained instance "${instance.instanceId}" must keep its beneficiaries, stack key, and lifetime identity`,
+          `Retained instance "${instance.instanceId}" must keep its effect, binding, beneficiaries, stack key, and lifetime identity`,
         )
         continue
       }
-      const previousLayers = new Map(
-        previousInstance.layers.map((layer) => [layer.layerId, layer]),
-      )
       for (const layer of instance.layers) {
         const previousLayer = previousLayers.get(layer.layerId)
         if (previousLayer === undefined) {
           continue
         }
         if (
-          previousLayer.startedAt !== layer.startedAt ||
-          !triggersEqual(previousLayer.trigger, layer.trigger)
+          previousLayer.instanceId !== instance.instanceId ||
+          previousLayer.layer.startedAt !== layer.startedAt ||
+          !triggersEqual(previousLayer.layer.trigger, layer.trigger)
         ) {
           collector.report(
             "CONTEXT_MISMATCH",
             "",
-            `Retained layer "${layer.layerId}" must keep its start time and trigger context; re-activation requires a new layer ID`,
+            `Retained layer "${layer.layerId}" must keep its instance, start time and trigger context; re-activation requires a new layer ID`,
           )
         }
       }
@@ -1392,7 +1419,9 @@ export function synchronizeSuppliedInstances(
 
   const retainedInstances = previousInternal.instances.filter(
     (instance) =>
-      !replacedScopes.has(`${instance.effectId} ${instance.bindingId}`),
+      !replacedScopes.has(
+        suppliedScopeKey(instance.effectId, instance.bindingId),
+      ),
   )
   const nextInstances = [...retainedInstances]
   for (const instances of replacedInstancesByScope.values()) {
@@ -1421,6 +1450,10 @@ export function synchronizeSuppliedInstances(
     lastCursor: { eventId, atSeconds, sequence },
   }
   return { ok: true, value: freezeState(internal) }
+}
+
+function suppliedScopeKey(effectId: string, bindingId: string): string {
+  return JSON.stringify([effectId, bindingId])
 }
 
 function expectNonEmptyArrayField(value: unknown): unknown[] | undefined {

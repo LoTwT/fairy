@@ -31,6 +31,7 @@ import {
   type FieldChecks,
 } from "./checks.ts"
 import { SKILL_CATEGORIES } from "./expression.ts"
+import { encodeStableTuple } from "./identity.ts"
 
 export interface WorldIndex {
   readonly actors: ReadonlyMap<
@@ -46,7 +47,15 @@ export interface WorldIndex {
 }
 
 function distanceKey(first: string, second: string): string {
-  return first < second ? `${first}\u0000${second}` : `${second}\u0000${first}`
+  return encodeStableTuple(first < second ? [first, second] : [second, first])
+}
+
+export function stateObservationKey(
+  stateId: string,
+  bindingId: string,
+  ownerId: string,
+): string {
+  return encodeStableTuple([stateId, bindingId, ownerId])
 }
 
 export function validateWorldObservation(
@@ -271,7 +280,11 @@ export function validateWorldObservation(
       continue
     }
     const state = entry as WorldObservation["states"][number]
-    const key = `${state.stateId} ${state.bindingId} ${state.ownerId}`
+    const key = stateObservationKey(
+      state.stateId,
+      state.bindingId,
+      state.ownerId,
+    )
     if (stateIndex.has(key)) {
       collector.report(
         "DUPLICATE_ID",

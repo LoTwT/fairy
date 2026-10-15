@@ -23,6 +23,7 @@ import {
 import { IssueCollector, failure } from "./issues.ts"
 import { validatePendingModifications } from "./modification.ts"
 import { validateRuleSetStructure, validateSourceBindings } from "./rule.ts"
+import { encodeStableTuple } from "./identity.ts"
 
 /**
  * 配置阶段数值归约：任何非有限中间结果都按定义失败处理。
@@ -98,8 +99,18 @@ export function evaluateConfigurationExpression(
       }
       return parameter.value
     }
-    case "configuration-number":
-      return configuration[expression.field] ?? 0
+    case "configuration-number": {
+      const value = configuration[expression.field]
+      if (value === undefined) {
+        collector.report(
+          "MISSING_RANK",
+          "",
+          `Configuration field "${expression.field}" is required by this expression`,
+        )
+        return Number.NaN
+      }
+      return value
+    }
     case "add":
       return foldFiniteValues(
         expression.operands.map(evaluate),
@@ -711,7 +722,7 @@ function prepareEffectsWithSelection(
         )
         continue
       }
-      const key = `${folded.holderId}\u0000${folded.targetEffectId}`
+      const key = encodeStableTuple([folded.holderId, folded.targetEffectId])
       const fold = effectFolds.get(key) ?? {
         parameters: emptyParameterFold(),
         outputAdds: [],
@@ -782,7 +793,7 @@ function prepareEffectsWithSelection(
       if (!stateBound) {
         continue
       }
-      const key = `${folded.holderId}\u0000${folded.targetStateId}`
+      const key = encodeStableTuple([folded.holderId, folded.targetStateId])
       const fold = stateFolds.get(key) ?? emptyParameterFold()
       for (const operand of folded.operands) {
         if (operand.field !== "parameter") {
@@ -817,7 +828,7 @@ function prepareEffectsWithSelection(
     for (const active of rules) {
       if (active.rule.kind === "contribution") {
         const fold = effectFolds.get(
-          `${binding.holderId}\u0000${active.rule.effectId}`,
+          encodeStableTuple([binding.holderId, active.rule.effectId]),
         )
         const foldedParameters = new Map(active.parameters)
         if (fold !== undefined && fold.appliedIds.length > 0) {
@@ -1019,7 +1030,9 @@ function prepareEffectsWithSelection(
         `/states/${ownedRuleSet.states.indexOf(state)}/parameters`,
         { bindingId: binding.bindingId },
       )
-      const fold = stateFolds.get(`${binding.holderId}\u0000${state.stateId}`)
+      const fold = stateFolds.get(
+        encodeStableTuple([binding.holderId, state.stateId]),
+      )
       const parameters: Record<string, Quantity<Unit>> = {}
       for (const [name, quantity] of resolved) {
         if (fold === undefined) {
@@ -1060,7 +1073,15 @@ function prepareEffectsWithSelection(
     bindings: ownedBindings,
     contributions,
     instants,
-    modifications,
+    modifications: modifications.toSorted((left, right) => {
+      if (left.rule.effectId !== right.rule.effectId)
+        return left.rule.effectId < right.rule.effectId ? -1 : 1
+      return left.bindingId < right.bindingId
+        ? -1
+        : left.bindingId > right.bindingId
+          ? 1
+          : 0
+    }),
     stateParameters,
   }
   deepFreeze(internal)

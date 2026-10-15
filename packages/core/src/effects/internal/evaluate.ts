@@ -1,6 +1,7 @@
 import type {
   AttributeObservation,
   AttributeSource,
+  BindingId,
   Condition,
   DirectStat,
   EffectNumericInput,
@@ -45,6 +46,7 @@ import {
   validateHitContext,
   validateSnapshots,
   validateWorldObservation,
+  distanceKey,
   type WorldIndex,
 } from "./world.ts"
 import { calculateFinalStat, calculateInitialStat } from "../../formulas.ts"
@@ -56,6 +58,7 @@ import {
   isEntityId,
 } from "./vocabulary.ts"
 import { validateNumericInputs } from "./numeric-input.ts"
+import { compareIdentityTuples, encodeStableTuple } from "./identity.ts"
 import {
   ROXY_M6_WIND_RESISTANCE_IGNORE,
   resolveRoxyM6ProviderApplicability,
@@ -67,6 +70,20 @@ interface LayerCandidate {
   readonly layer: EffectInstance["layers"][number] | null
   readonly beneficiary: EntityId
   readonly trigger: TriggerContext | null
+}
+
+interface ExpressionOwner {
+  readonly effectId: EffectId
+  readonly bindingId: BindingId
+  readonly parameters: ReadonlyMap<string, Quantity<Unit>>
+}
+
+function layerExpressionOwner(layer: LayerCandidate): ExpressionOwner {
+  return {
+    effectId: layer.entry.rule.effectId,
+    bindingId: layer.entry.bindingId,
+    parameters: layer.entry.foldedParameters,
+  }
 }
 
 interface OutputAddress {
@@ -141,6 +158,11 @@ interface SharedCache {
   readonly snapshotWorlds: Map<string, WorldIndex>
 }
 
+interface DependencyNode {
+  readonly key: string
+  readonly description: string
+}
+
 export interface EvaluationContext {
   readonly prepared: PreparedEffectsInternal
   readonly state: EffectStateInternal
@@ -150,7 +172,7 @@ export interface EvaluationContext {
   readonly atSeconds: number
   readonly hit: HitContext | null
   readonly collector: IssueCollector
-  readonly stack: readonly string[]
+  readonly stack: readonly DependencyNode[]
   readonly inputs: readonly EffectNumericInput[]
 }
 
@@ -172,23 +194,43 @@ function statKey(
   stage: string,
   hitId: string | null,
 ): string {
-  return `stat ${entityId} ${stat} ${stage} ${hitId ?? "-"}`
+  return encodeStableTuple(["stat", entityId, stat, stage, hitId ?? ""])
 }
 
 function layerKey(layer: LayerCandidate): string {
-  return `layer ${layer.entry.rule.effectId} ${layer.entry.bindingId} ${
-    layer.instance?.instanceId ?? "continuous"
-  } ${layer.layer?.layerId ?? "-"} ${layer.beneficiary}`
+  return encodeStableTuple([
+    "layer",
+    layer.entry.rule.effectId,
+    layer.entry.bindingId,
+    layer.instance?.instanceId ?? "",
+    layer.layer?.layerId ?? "",
+    layer.beneficiary,
+  ])
 }
 
 function addressKey(address: ConsumptionAddress): string {
+  return encodeStableTuple(addressIdentity(address))
+}
+
+function addressIdentity(address: ConsumptionAddress): readonly string[] {
   if (address.kind === "stat") {
-    return `stat ${address.entityId} ${address.stat} ${address.stage} ${address.hitId ?? "-"}`
+    return [
+      "stat",
+      address.entityId,
+      address.stat,
+      address.stage,
+      address.hitId ?? "",
+    ]
   }
   if (address.kind === "factor") {
-    return `factor ${address.entityId} ${address.channel} ${address.hitId ?? "-"}`
+    return ["factor", address.entityId, address.channel, address.hitId ?? ""]
   }
-  return `hit ${address.hitId} ${address.field} ${address.itemId === undefined ? "all" : JSON.stringify(address.itemId)}`
+  return [
+    "hit",
+    address.hitId,
+    address.field,
+    address.itemId === undefined ? "all" : JSON.stringify(address.itemId),
+  ]
 }
 
 function resolveRole(
@@ -224,15 +266,14 @@ function evaluateExpression(
   expression: NumericExpression<Unit, "contribution">,
   context: EvaluationContext,
   layer: LayerCandidate,
-  parameters: ReadonlyMap<string, Quantity<Unit>> = layer.entry
-    .foldedParameters,
+  expressionOwner: ExpressionOwner = layerExpressionOwner(layer),
 ): number {
   switch (expression.kind) {
     case "literal":
       return expression.value
     case "parameter": {
       // parameter 只读取所属规则自己的参数视图，不隐式读取目标字段。
-      const parameter = parameters.get(expression.name)
+      const parameter = expressionOwner.parameters.get(expression.name)
       if (parameter === undefined) {
         context.collector.report(
           "MISSING_REFERENCE",
@@ -248,17 +289,17 @@ function evaluateExpression(
     case "input": {
       const value = context.inputs.find(
         (input) =>
-          input.bindingId === layer.entry.bindingId &&
+          input.bindingId === expressionOwner.bindingId &&
           input.name === expression.name,
       )?.value
       if (value === undefined || value.unit !== expression.unit) {
         context.collector.report(
           value === undefined ? "MISSING_FACT" : "UNIT_MISMATCH",
           "/inputs",
-          `Input "${expression.name}" of binding "${layer.entry.bindingId}" requires ${expression.unit}`,
+          `Input "${expression.name}" of binding "${expressionOwner.bindingId}" requires ${expression.unit}`,
           {
-            effectId: layer.entry.rule.effectId,
-            bindingId: layer.entry.bindingId,
+            effectId: expressionOwner.effectId,
+            bindingId: expressionOwner.bindingId,
           },
         )
         return Number.NaN
@@ -268,8 +309,8 @@ function evaluateExpression(
     case "convert":
       return foldNumericExpression(
         [
-          evaluateExpression(expression.input, context, layer, parameters),
-          evaluateExpression(expression.rate, context, layer, parameters),
+          evaluateExpression(expression.input, context, layer, expressionOwner),
+          evaluateExpression(expression.rate, context, layer, expressionOwner),
         ],
         1,
         (product, value) => product * value,
@@ -279,7 +320,7 @@ function evaluateExpression(
     case "add":
       return foldNumericExpression(
         expression.operands.map((operand) =>
-          evaluateExpression(operand, context, layer, parameters),
+          evaluateExpression(operand, context, layer, expressionOwner),
         ),
         0,
         (sum, operand) => sum + operand,
@@ -289,7 +330,7 @@ function evaluateExpression(
     case "minimum":
       return foldNumericExpression(
         expression.operands.map((operand) =>
-          evaluateExpression(operand, context, layer, parameters),
+          evaluateExpression(operand, context, layer, expressionOwner),
         ),
         Number.POSITIVE_INFINITY,
         (lowest, operand) => Math.min(lowest, operand),
@@ -299,7 +340,7 @@ function evaluateExpression(
     case "maximum":
       return foldNumericExpression(
         expression.operands.map((operand) =>
-          evaluateExpression(operand, context, layer, parameters),
+          evaluateExpression(operand, context, layer, expressionOwner),
         ),
         Number.NEGATIVE_INFINITY,
         (highest, operand) => Math.max(highest, operand),
@@ -309,12 +350,12 @@ function evaluateExpression(
     case "multiply":
       return foldNumericExpression(
         [
-          evaluateExpression(expression.value, context, layer, parameters),
+          evaluateExpression(expression.value, context, layer, expressionOwner),
           evaluateExpression(
             expression.coefficient,
             context,
             layer,
-            parameters,
+            expressionOwner,
           ),
         ],
         1,
@@ -500,9 +541,13 @@ function computeStatValue(
   if (context.shared.failedStats.has(key)) {
     return Number.NaN
   }
-  const cycleStart = context.stack.indexOf(key)
+  const node = {
+    key,
+    description: `stat ${JSON.stringify({ entityId, stat, stage, hitId })}`,
+  }
+  const cycleStart = context.stack.findIndex((entry) => entry.key === key)
   if (cycleStart >= 0) {
-    reportCycle(context, cycleStart, key)
+    reportCycle(context, cycleStart, node)
     context.shared.failedStats.add(key)
     return Number.NaN
   }
@@ -528,7 +573,7 @@ function computeStatValue(
   }
   const nested: EvaluationContext = {
     ...context,
-    stack: [...context.stack, key],
+    stack: [...context.stack, node],
   }
   const direct = DIRECT_STATS.has(stat as DirectStat)
   let value: number
@@ -716,9 +761,11 @@ function callStatHelper(
 function reportCycle(
   context: EvaluationContext,
   cycleStart: number,
-  key: string,
+  node: DependencyNode,
 ): void {
-  const path = [...context.stack.slice(cycleStart), key]
+  const path = [...context.stack.slice(cycleStart), node].map(
+    (entry) => entry.description,
+  )
   context.collector.report(
     "DEPENDENCY_CYCLE",
     "",
@@ -1078,10 +1125,20 @@ function evaluateLayers(
   const evaluated: EvaluatedLayer[] = []
   for (const layer of layers) {
     // 同一层在不同消费地址上是不同节点：命中局部地址与通用地址分别求值与缓存。
-    const key = `${layerKey(layer)} ${addressKey(address)}`
-    const cycleStart = context.stack.indexOf(key)
+    const key = encodeStableTuple([layerKey(layer), addressKey(address)])
+    const node = {
+      key,
+      description: `layer ${JSON.stringify({
+        effectId: layer.entry.rule.effectId,
+        bindingId: layer.entry.bindingId,
+        instanceId: layer.instance?.instanceId ?? null,
+        layerId: layer.layer?.layerId ?? null,
+        beneficiaryId: layer.beneficiary,
+      })} at ${JSON.stringify(address)}`,
+    }
+    const cycleStart = context.stack.findIndex((entry) => entry.key === key)
     if (cycleStart >= 0) {
-      reportCycle(context, cycleStart, key)
+      reportCycle(context, cycleStart, node)
       return undefined
     }
     if (context.shared.layers.has(key)) {
@@ -1095,7 +1152,7 @@ function evaluateLayers(
       layer,
       {
         ...context,
-        stack: [...context.stack, key],
+        stack: [...context.stack, node],
       },
       address,
     )
@@ -1228,25 +1285,23 @@ function evaluateSingleLayer(
       modification.rule.target.effectId === rule.effectId &&
       modification.holderId === layer.entry.holderId,
   )
-  // 修改规则继承目标层、受益者、触发事件与命中上下文，但 parameter 读取修改规则自己的参数表。
+  // 表达式读取修改来源的 input 与参数；目标层继续提供受益者、触发事件、命中作用域与依赖身份。
   const applicable: {
     readonly effectId: EffectId
     readonly operands: readonly ModificationOperand[]
   }[] = []
   for (const modification of modifications) {
+    const expressionOwner: ExpressionOwner = {
+      effectId: modification.rule.effectId,
+      bindingId: modification.bindingId,
+      parameters: modification.resolvedParameters,
+    }
     const modificationWhen = (
       modification.rule as {
         when: Condition<"contribution">
       }
     ).when
-    if (
-      !evaluateCondition(
-        modificationWhen,
-        context,
-        layer,
-        modification.resolvedParameters,
-      )
-    ) {
+    if (!evaluateCondition(modificationWhen, context, layer, expressionOwner)) {
       continue
     }
     const changeList = modification.rule.modifications as readonly {
@@ -1265,7 +1320,7 @@ function evaluateSingleLayer(
         change.change.value,
         context,
         layer,
-        modification.resolvedParameters,
+        expressionOwner,
       ),
     }))
     applicable.push({ effectId: modification.rule.effectId, operands })
@@ -1429,36 +1484,40 @@ function evaluateCondition(
   condition: Condition<"contribution">,
   context: EvaluationContext,
   layer: LayerCandidate,
-  parameters: ReadonlyMap<string, Quantity<Unit>> = layer.entry
-    .foldedParameters,
+  expressionOwner: ExpressionOwner = layerExpressionOwner(layer),
 ): boolean {
   switch (condition.kind) {
     case "constant":
       return condition.value
     case "all":
       for (const entry of condition.conditions) {
-        if (!evaluateCondition(entry, context, layer, parameters)) {
+        if (!evaluateCondition(entry, context, layer, expressionOwner)) {
           return false
         }
       }
       return true
     case "any":
       for (const entry of condition.conditions) {
-        if (evaluateCondition(entry, context, layer, parameters)) {
+        if (evaluateCondition(entry, context, layer, expressionOwner)) {
           return true
         }
       }
       return false
     case "not":
-      return !evaluateCondition(condition.condition, context, layer, parameters)
+      return !evaluateCondition(
+        condition.condition,
+        context,
+        layer,
+        expressionOwner,
+      )
     case "compare-number": {
       const left = requireFiniteValue(
-        evaluateExpression(condition.left, context, layer, parameters),
+        evaluateExpression(condition.left, context, layer, expressionOwner),
         context,
         "A compared operand",
       )
       const right = requireFiniteValue(
-        evaluateExpression(condition.right, context, layer, parameters),
+        evaluateExpression(condition.right, context, layer, expressionOwner),
         context,
         "A compared operand",
       )
@@ -1579,7 +1638,7 @@ function evaluateCondition(
         return false
       }
       const maximum = requireFiniteValue(
-        evaluateExpression(condition.maximum, context, layer, parameters),
+        evaluateExpression(condition.maximum, context, layer, expressionOwner),
         context,
         "A range condition maximum",
       )
@@ -1589,7 +1648,7 @@ function evaluateCondition(
       for (const candidate of candidates) {
         const first = entity < candidate ? entity : candidate
         const second = entity < candidate ? candidate : entity
-        const distance = world.distances.get(`${first}\u0000${second}`)
+        const distance = world.distances.get(distanceKey(first, second))
         if (distance === undefined) {
           context.collector.report(
             "MISSING_FACT",
@@ -1712,9 +1771,18 @@ function evaluateOneOf(
 }
 
 interface SourceCandidate {
-  readonly key: string
+  readonly identity: readonly string[]
   readonly list: readonly EvaluatedLayer[]
   readonly combined: number
+}
+
+function sourceIdentity(layer: EvaluatedLayer): readonly string[] {
+  return [
+    layer.candidate.entry.bindingId,
+    layer.candidate.entry.rule.effectId,
+    layer.candidate.beneficiary,
+    ...addressIdentity(layer.address),
+  ]
 }
 
 /** 唯一性选择使用的配置阶段优先级。 */
@@ -1728,16 +1796,16 @@ function selectUnique(
 ): EvaluatedLayer[] | undefined {
   const bySource = new Map<string, EvaluatedLayer[]>()
   for (const layer of layers) {
-    const key = `${layer.candidate.entry.bindingId}\u0000${layer.candidate.entry.rule.effectId}\u0000${layer.candidate.beneficiary}\u0000${addressKey(layer.address)}`
+    const key = encodeStableTuple(sourceIdentity(layer))
     const list = bySource.get(key) ?? []
     list.push(layer)
     bySource.set(key, list)
   }
-  const sourceCandidates: SourceCandidate[] = [...bySource.entries()]
-    .map(([key, list]) => {
+  const sourceCandidates: SourceCandidate[] = [...bySource.values()]
+    .map((list) => {
       const adding = list[0]!.operator === "add"
       return {
-        key,
+        identity: sourceIdentity(list[0]!),
         list,
         // 来源层归约同样逐步检查，不把溢出留到最终值再判断。
         combined:
@@ -1754,7 +1822,9 @@ function selectUnique(
               ),
       }
     })
-    .toSorted((left, right) => (left.key < right.key ? -1 : 1))
+    .toSorted((left, right) =>
+      compareIdentityTuples(left.identity, right.identity),
+    )
   if (sourceCandidates.some((candidate) => Number.isNaN(candidate.combined))) {
     return undefined
   }
@@ -1770,7 +1840,12 @@ function selectUnique(
       uniqueness.scope === "global"
         ? "global"
         : (holderTeam(candidate.list[0]!.candidate.entry, context) ?? "unknown")
-    const groupKey = `${uniqueness.key}\u0000${scopeIdentity}\u0000${candidate.list[0]!.candidate.beneficiary}\u0000${addressKey(candidate.list[0]!.address)}`
+    const groupKey = encodeStableTuple([
+      uniqueness.key,
+      scopeIdentity,
+      candidate.list[0]!.candidate.beneficiary,
+      addressKey(candidate.list[0]!.address),
+    ])
     const group = groups.get(groupKey) ?? []
     group.push(candidate)
     groups.set(groupKey, group)
@@ -1815,7 +1890,7 @@ function selectUnique(
         }
         if (candidate.combined === best.combined && candidate !== best) {
           tieSeen = true
-          if (candidate.key < best.key) {
+          if (compareIdentityTuples(candidate.identity, best.identity) < 0) {
             best = candidate
           }
         }
@@ -1834,7 +1909,8 @@ function selectUnique(
         const bestStart = latestStart(best.list)
         if (
           candidateStart > bestStart ||
-          (candidateStart === bestStart && candidate.key < best.key)
+          (candidateStart === bestStart &&
+            compareIdentityTuples(candidate.identity, best.identity) < 0)
         ) {
           best = candidate
         }
@@ -2992,19 +3068,24 @@ function collectResultContributions(
   return [...context.shared.consumed]
     .map((layer) => toResolvedContribution(layer))
     .toSorted((left, right) =>
-      contributionSortKey(left) < contributionSortKey(right) ? -1 : 1,
+      compareIdentityTuples(
+        contributionIdentity(left),
+        contributionIdentity(right),
+      ),
     )
 }
 
-function contributionSortKey(contribution: ResolvedContribution): string {
+function contributionIdentity(
+  contribution: ResolvedContribution,
+): readonly string[] {
   return [
-    addressKey(contribution.address as ConsumptionAddress),
+    ...addressIdentity(contribution.address as ConsumptionAddress),
     contribution.origin.effectId,
     contribution.origin.bindingId,
     contribution.origin.instanceId ?? "",
     contribution.origin.layerId ?? "",
     contribution.origin.beneficiaryId,
-  ].join(" ")
+  ]
 }
 
 function toResolvedContribution(layer: EvaluatedLayer): ResolvedContribution {

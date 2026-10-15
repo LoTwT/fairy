@@ -48,6 +48,7 @@ import {
   snapshotsEqual,
   type EffectStateInternal,
   freezeState,
+  instanceGroupKey,
 } from "./state.ts"
 import {
   validateHitContext,
@@ -68,11 +69,7 @@ import {
   isEntityId,
   isPrefixedIdentity,
 } from "./vocabulary.ts"
-
-/** 稳定元组编码：各字符串按 UTF-16 长度编码为 `长度:内容` 后连接。 */
-export function encodeStableTuple(parts: readonly string[]): string {
-  return parts.map((part) => `${part.length}:${part}`).join("")
-}
+import { encodeStableTuple } from "./identity.ts"
 
 interface TriggerRuntime {
   readonly prepared: PreparedEffectsInternal
@@ -1187,39 +1184,36 @@ function requestIdFor(
 }
 
 function timedGroupKey(
-  effectId: string,
-  bindingId: string,
-  beneficiaryIds: readonly string[],
+  effectId: EffectId,
+  bindingId: BindingId,
+  beneficiaryIds: readonly EntityId[],
   stackKey: readonly string[],
 ): string {
-  return [
+  return instanceGroupKey({
     effectId,
     bindingId,
-    ...[...beneficiaryIds].toSorted(),
-    ...stackKey,
-    "timed",
-  ].join(" ")
+    beneficiaryIds,
+    stackKey,
+    lifetime: { kind: "timed" },
+  })
 }
 
 function stateBoundGroupKey(
-  effectId: string,
-  bindingId: string,
-  beneficiaryIds: readonly string[],
+  effectId: EffectId,
+  bindingId: BindingId,
+  beneficiaryIds: readonly EntityId[],
   stackKey: readonly string[],
-  stateId: string,
-  stateOwnerId: string,
-  stateActivationId: string,
+  stateId: `state:${string}`,
+  stateOwnerId: EntityId,
+  stateActivationId: `state-activation:${string}`,
 ): string {
-  return [
+  return instanceGroupKey({
     effectId,
     bindingId,
-    ...[...beneficiaryIds].toSorted(),
-    ...stackKey,
-    "state-bound",
-    stateId,
-    stateOwnerId,
-    stateActivationId,
-  ].join(" ")
+    beneficiaryIds,
+    stackKey,
+    lifetime: { kind: "state-bound", stateId, stateOwnerId, stateActivationId },
+  })
 }
 
 /**
@@ -1799,7 +1793,8 @@ export function advanceEffects(
   const plans: CandidatePlan[] = []
   const cooldownAvailability = (key: string): number | undefined => {
     const existing = stateInternal.cooldowns.find(
-      (cooldown) => `${cooldown.groupId} ${cooldown.partitionKey}` === key,
+      (cooldown) =>
+        encodeStableTuple([cooldown.groupId, cooldown.partitionKey]) === key,
     )
     return existing?.availableAt
   }
@@ -1876,7 +1871,13 @@ export function advanceEffects(
     holderId: EntityId,
     cooldown: CooldownPolicy,
     parameters: ReadonlyMap<string, Quantity<Unit>>,
-  ): { readonly key: string; readonly blocked: boolean } | undefined => {
+  ):
+    | {
+        readonly key: string
+        readonly partitionKey: string
+        readonly blocked: boolean
+      }
+    | undefined => {
     const identity = partitionIdentity(
       cooldown.partition,
       bindingId,
@@ -1887,7 +1888,7 @@ export function advanceEffects(
       return undefined
     }
     const partitionKey = encodeStableTuple([cooldown.partition, identity])
-    const key = `${cooldown.groupId} ${partitionKey}`
+    const key = encodeStableTuple([cooldown.groupId, partitionKey])
     const seconds = evaluateTriggerExpression(
       cooldown.seconds,
       runtime,
@@ -1905,7 +1906,7 @@ export function advanceEffects(
     }
     const availableAt = cooldownAvailability(key)
     if (availableAt !== undefined && event.atSeconds < availableAt) {
-      return { key, blocked: true }
+      return { key, partitionKey, blocked: true }
     }
     const declared = cooldownDeclarations.get(key)
     if (declared !== undefined && declared !== seconds) {
@@ -1918,7 +1919,7 @@ export function advanceEffects(
       return undefined
     }
     cooldownDeclarations.set(key, seconds)
-    return { key, blocked: false }
+    return { key, partitionKey, blocked: false }
   }
   for (const entry of preparedInternal.contributions) {
     const activation = entry.rule.activation
@@ -1978,9 +1979,7 @@ export function advanceEffects(
         continue
       }
       cooldownGroupId = activation.trigger.cooldown.groupId
-      cooldownPartitionKey = registration.key.slice(
-        activation.trigger.cooldown.groupId.length + 1,
-      )
+      cooldownPartitionKey = registration.partitionKey
       cooldownSeconds = cooldownDeclarations.get(registration.key)
     }
     const groups: readonly { readonly beneficiaries: readonly EntityId[] }[] =
@@ -2051,7 +2050,8 @@ export function advanceEffects(
             if (!observation.active) {
               continue
             }
-            const stateActivationId = observation.activationId as string
+            const stateActivationId =
+              observation.activationId as `state-activation:${string}`
             const lifetimeKeyParts = [
               "state-bound",
               activation.lifetime.stateId,
@@ -2522,9 +2522,7 @@ export function advanceEffects(
         continue
       }
       cooldownGroupId = entry.rule.trigger.cooldown.groupId
-      cooldownPartitionKey = registration.key.slice(
-        entry.rule.trigger.cooldown.groupId.length + 1,
-      )
+      cooldownPartitionKey = registration.partitionKey
       cooldownSeconds = cooldownDeclarations.get(registration.key)
     }
     plans.push({
@@ -2648,7 +2646,7 @@ export function advanceEffects(
         return failure(collector)
       }
       cooldownUpdates.set(
-        `${plan.cooldownGroupId} ${plan.cooldownPartitionKey}`,
+        encodeStableTuple([plan.cooldownGroupId, plan.cooldownPartitionKey]),
         {
           groupId: plan.cooldownGroupId,
           partitionKey: plan.cooldownPartitionKey,
@@ -2692,7 +2690,7 @@ export function advanceEffects(
     ...stateInternal.cooldowns.filter(
       (cooldown) =>
         !updatedCooldownKeys.has(
-          `${cooldown.groupId} ${cooldown.partitionKey}`,
+          encodeStableTuple([cooldown.groupId, cooldown.partitionKey]),
         ),
     ),
     ...cooldownUpdates.values(),

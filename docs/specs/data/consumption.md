@@ -6,7 +6,8 @@
 
 本规范是 `@randomplay/data` 公开读取与分发的单一事实来源。字段、来源保真和受管理目录协议见
 [来源数据整合规范](integration.md)。本版快照为 Nanoka 3.2，60 个代理人、30 个驱动盘套装、100 个 WEngine、
-42 个邦布、293 个怪物、59 个 Shiyu 区域、44 个 Boss 试炼、3 个 Simul 模拟战、zh/en 两种详情语言；公开索引
+42 个邦布、306 个怪物、62 个 Shiyu 区域、47 个 Boss 试炼、3 个 Simul 模拟战、zh/en 两种详情语言。
+成员集合与数量以[发布源索引](../../../packages/data/integrated/index.json)的各类别 `memberIds` 为准；公开索引
 使用多实体 v3 外壳，类别（`agents`、`drive-discs`、`w-engines`、`bangboos`、`monsters`、`shiyu`、`boss`
 与 `simul`）与成员文件摘要来自完整验证后的同一发布副本。驱动盘、WEngine 与邦布已进入生产快照、JSON
 子路径导出及根入口的公开名称类型、名称 catalog 与读取 API；怪物、Shiyu、Boss 与 Simul 已进入生产快照、
@@ -207,12 +208,12 @@ export declare function loadAllSimul(
 - `loadMonsterData` 只加载该怪物 data；`loadMonsterDetails` 只加载该怪物指定语言 details；两者以来源 ID
   （规范十进制字符串）为身份，ID 精确匹配，不 trim、不转换 number、不解析科学计数法或补零；未登记 ID
   返回 undefined，非字符串以 TypeError 拒绝，locale 校验先于 ID 查找。`loadAllMonsters` 显式加载全部怪物
-  data 与指定语言 details，目前为 293 + 293 个文件，结果以 MonsterId 为 key，`data` 与 `details` 同样分开
+  data 与指定语言 details，每个索引成员各读取两个文件，结果以 MonsterId 为 key，`data` 与 `details` 同样分开
   保留。索引的成员表是 `entities["monsters"].members`。
 - `loadShiyuData`/`loadShiyuDetails`/`loadAllShiyu` 遵循与 Monster 相同的按 ID 读取契约；`loadAllShiyu`
-  目前为 59 + 59 个文件，结果以 ShiyuId 为 key。索引的成员表是 `entities["shiyu"].members`。
+  读取该类别每个索引成员的 data 与指定语言 details，结果以 ShiyuId 为 key。索引的成员表是 `entities["shiyu"].members`。
 - `loadBossData`/`loadBossDetails`/`loadAllBosses` 遵循与 Monster 相同的按 ID 读取契约；`loadAllBosses`
-  目前为 44 + 44 个文件，结果以 BossId 为 key。索引的成员表是 `entities["boss"].members`。
+  读取该类别每个索引成员的 data 与指定语言 details，结果以 BossId 为 key。索引的成员表是 `entities["boss"].members`。
 - `loadSimulData`/`loadSimulDetails`/`loadAllSimul` 遵循与 Monster 相同的按 ID 读取契约；`loadAllSimul`
   目前为 3 + 3 个文件，结果以 SimulId 为 key。索引的成员表是 `entities["simul"].members`。
 - 每次调用返回独立的 JSON 对象树，任意嵌套修改不污染后续调用、同时调用或其他调用方。
