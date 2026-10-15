@@ -1,4 +1,5 @@
 import { roxyCoreWindConsumerSource } from "./fixtures/roxy-core-wind-consumer.ts"
+import { windDriveDiscConsumerSource } from "./fixtures/drive-disc-wind-consumer.ts"
 import { roxyWindEyeConsumerSource } from "./fixtures/roxy-wind-eye-consumer.ts"
 import { hugoAttackConsumerSource } from "./fixtures/hugo-stun-teammates-consumer.ts"
 import { roxyMindscapeConsumerSource } from "./fixtures/roxy-mindscape-consumer.ts"
@@ -134,6 +135,8 @@ ${roxyWindEyeConsumerSource}
 globalThis.fairyRoxyWindEye = async () => verifyRoxyWindEyeConsumer(api, await import("@randomplay/core"))
 ${roxyCoreWindConsumerSource}
 globalThis.fairyRoxyCoreWind = async () => verifyRoxyCoreWindConsumer(api, await import("@randomplay/core"))
+${windDriveDiscConsumerSource}
+globalThis.fairyWindDriveDisc = async () => verifyWindDriveDiscConsumer(api, await import("@randomplay/core"))
 ${roxyAdditionalConsumerSource}
 globalThis.fairyRoxyAdditional = async () => verifyRoxyAdditionalConsumer(api, await import("@randomplay/core"))
 ${yanagiPolarityConsumerSource}
@@ -1052,6 +1055,18 @@ function defineScenarios(counts: {
               giantScale: 2.5,
               missingGiantRejected: true,
             })
+          },
+        },
+        {
+          name: "wind-drive-disc-main-stat",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyWindDriveDisc(),
+            )
+            expect(result.nonCritical).toBeCloseTo(2221.16701664, 8)
+            expect(result.expected).toBeCloseTo(2525.46689791968, 8)
+            expect(result.difference).toBeCloseTo(512.57700384, 8)
+            expect(result.rejectedSlots).toEqual([1, 2, 3, 4, 6])
           },
         },
         {

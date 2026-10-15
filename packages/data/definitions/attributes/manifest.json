@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "rulesVersion": "panel-attributes/1",
+  "rulesVersion": "panel-attributes/2",
   "sourceVersion": "3.2",
   "members": {
     "agents": [
@@ -2251,7 +2251,7 @@
     "w-engines/14159.json": "25cb05748f2d304d536e28e3e8c68bf64f4ff38b7244c70a50ce2ea7323bc771",
     "w-engines/14161.json": "c5e5c581357aed82a80d9bb045ee5fd1e2badd38ee946a655f4303e7b053360a",
     "w-engines/14162.json": "24e6b4da7546670fde391a73ed85117acefb98f3a7a27259029ecc0432ba2fe5",
-    "drive-disc-affixes.json": "d3a20a295deb65472fd4b7f3cc0efd6c1266007c3550bb7ce8ad58e934be7935"
+    "drive-disc-affixes.json": "52a6a8a788e42c58c20646fe7ee3eccd62063c14143d5e34ee90f63362d9b9ab"
   },
   "evidence": {
     "zzzHpCommit": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
@@ -2275,6 +2275,36 @@
         "resource": "https://zzz.nanoka.cc/_app/immutable/nodes/25.b82f1bbd.js",
         "sha256": "01d2aa77d4de7bd3f531d2fcd4c81dd0fc727c0c9a5f89c3f3e815286c86ff3b",
         "purpose": "2026-09-23 查验音擎：base * (10000 + level60.rate + stars5.starRate) / 10000；advanced * (10000 + stars5.randRate) / 10000，再按明确属性单位归一化。"
+      },
+      {
+        "resource": "https://git.mero.moe/dimbreath/ZenlessData/raw/commit/462563ec0f8ffc7493f6e2a46f64f8b34ea2d547/FileCfg/EquipmentRarityTemplateTb.json",
+        "sha256": "231b323dac1003744d7b0dc28a3b6b30e4f8a8eff9a54dc9922c3f2d66648374",
+        "purpose": "2026-10-15 独立补充核实；S 级（CECLEKPMEJB=4）5 号位（KPJDEHGMFPH=5）的词条池 BHMOPMMIKAK=405、满强化等级 LGNKABDCGKC=15。"
+      },
+      {
+        "resource": "https://git.mero.moe/dimbreath/ZenlessData/raw/commit/462563ec0f8ffc7493f6e2a46f64f8b34ea2d547/FileCfg/RandPropertyLibraryTemplateTb.json",
+        "sha256": "304933f995820e9b31279b73b9df514e2412e348717c5a53ac265346ac704b93",
+        "purpose": "2026-10-15 独立补充核实；词条 405010 属于主词条池 405，属性 IINHKLMBKBN=32303，初值 GAGPGKIOODG=750；仅用于补充风伤主词条。"
+      },
+      {
+        "resource": "https://git.mero.moe/dimbreath/ZenlessData/raw/commit/462563ec0f8ffc7493f6e2a46f64f8b34ea2d547/FileCfg/EquipmentLevelTemplateTb.json",
+        "sha256": "b56fb3df303ffac49e6cbaa672c6d14c7fe400d31c757f4b7893a1c72c07b94b",
+        "purpose": "2026-10-15 独立补充核实；S 级强化 15 的累计提升 DPKJPJNGJEK=30000（万分比），与 Enka 的 15 × 0.2 一致。"
+      },
+      {
+        "resource": "https://git.mero.moe/dimbreath/ZenlessData/raw/commit/462563ec0f8ffc7493f6e2a46f64f8b34ea2d547/FileCfg/PropertyTemplateTb.json",
+        "sha256": "0fbf186ef8989868be3941f88a9b14ba162b069a7dd2436d0dbc4039846794bf",
+        "purpose": "2026-10-15 独立补充核实；32303 的 HAKHHHCAENA=AddedDamageRatio_Wind，CADKKABBIFG=10000，比例显示 HAMEBLDAOGE={0:0.#%}；750 × (1 + 30000/10000) / 10000 = 0.30。"
+      },
+      {
+        "resource": "https://git.mero.moe/dimbreath/ZenlessData/raw/commit/462563ec0f8ffc7493f6e2a46f64f8b34ea2d547/FileCfg/SmithyBasePropertyChooseTemplateTb.json",
+        "sha256": "a958c76f21f95cb5cef94389ba023a96bdc4fd9ea8fa1612722c00372ec696f0",
+        "purpose": "2026-10-15 独立补充核实；完整主词条定向选择表中，风伤属性 CNCEKNHEHIP=32303 仅出现于 OGLKGACMBMC=5（NJCAHNHALCH=510），其余槽位没有此属性。"
+      },
+      {
+        "resource": "https://raw.githubusercontent.com/EnkaNetwork/API-docs/88fc20697fda924430943434c11e0c45eb39509f/docs/zzz/api.md",
+        "sha256": "3c6487b222eaa776a7e8e421f50f455fea77ec06538d5f0c5b353046bd15d3fb",
+        "purpose": "2026-10-15 独立口径佐证：Rarity 4 为 S，主词条 Result = PropertyValue × (1 + Level × RarityScale)，S 的 RarityScale=0.2；仅核实风伤补充项，不升级 Nanoka 或 ZZZ-HP 整体来源。"
       }
     ]
   },

@@ -28,7 +28,7 @@ export type PanelCoreSkillLevel = CoreSkillLevel
 export type DriveDiscSlot = 1 | 2 | 3 | 4 | 5 | 6
 export type DriveDiscDamageElement = Extract<
   DamageElement,
-  "physical" | "fire" | "ice" | "electric" | "ether"
+  "physical" | "fire" | "ice" | "electric" | "ether" | "wind"
 >
 type RatioAttribute =
   | "criticalRate"

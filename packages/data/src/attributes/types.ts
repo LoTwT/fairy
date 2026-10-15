@@ -13,7 +13,7 @@ export type {
 
 export interface PanelAttributeManifest {
   readonly schemaVersion: 1
-  readonly rulesVersion: "panel-attributes/1"
+  readonly rulesVersion: "panel-attributes/2"
   readonly sourceVersion: string
   readonly members: {
     readonly agents: readonly string[]

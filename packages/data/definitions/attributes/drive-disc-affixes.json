@@ -124,6 +124,13 @@
         "element": "ether",
         "unit": "ratio",
         "value": 0.3
+      },
+      {
+        "attribute": "damageBonus",
+        "operation": "damage-bonus",
+        "element": "wind",
+        "unit": "ratio",
+        "value": 0.3
       }
     ],
     "6": [

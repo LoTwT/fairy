@@ -1,0 +1,295 @@
+{
+  "EquipmentRarityTemplateTb.json": {
+    "resource": "https://git.mero.moe/dimbreath/ZenlessData/raw/commit/462563ec0f8ffc7493f6e2a46f64f8b34ea2d547/FileCfg/EquipmentRarityTemplateTb.json",
+    "sha256": "231b323dac1003744d7b0dc28a3b6b30e4f8a8eff9a54dc9922c3f2d66648374",
+    "records": [
+      {
+        "pointer": "/IAEFFFFLKNB/16",
+        "value": {
+          "CECLEKPMEJB": 4,
+          "KPJDEHGMFPH": 5,
+          "BHMOPMMIKAK": 405,
+          "MHKGIDMHPIJ": 3,
+          "LGNKABDCGKC": 15,
+          "EFIOGNOMKOE": [
+            {
+              "HJOEBMMFOMB": 103040,
+              "CPKDEBLNOMN": 1
+            },
+            {
+              "HJOEBMMFOMB": 302002,
+              "CPKDEBLNOMN": 1
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "RandPropertyLibraryTemplateTb.json": {
+    "resource": "https://git.mero.moe/dimbreath/ZenlessData/raw/commit/462563ec0f8ffc7493f6e2a46f64f8b34ea2d547/FileCfg/RandPropertyLibraryTemplateTb.json",
+    "sha256": "304933f995820e9b31279b73b9df514e2412e348717c5a53ac265346ac704b93",
+    "records": [
+      {
+        "pointer": "/IAEFFFFLKNB/68",
+        "value": {
+          "ELJCOOALAMO": 405010,
+          "PFOAJKNPCHL": 405,
+          "IINHKLMBKBN": 32303,
+          "GAGPGKIOODG": 750
+        }
+      }
+    ]
+  },
+  "EquipmentLevelTemplateTb.json": {
+    "resource": "https://git.mero.moe/dimbreath/ZenlessData/raw/commit/462563ec0f8ffc7493f6e2a46f64f8b34ea2d547/FileCfg/EquipmentLevelTemplateTb.json",
+    "sha256": "b56fb3df303ffac49e6cbaa672c6d14c7fe400d31c757f4b7893a1c72c07b94b",
+    "records": [
+      {
+        "pointer": "/IAEFFFFLKNB/38",
+        "value": {
+          "CECLEKPMEJB": 4,
+          "MPBONOJLLPF": 15,
+          "DPKJPJNGJEK": 30000,
+          "NNDHAMPNGCF": 0,
+          "MKLLDEHFGCN": 8000,
+          "CBEPDAJFMCN": []
+        }
+      }
+    ]
+  },
+  "PropertyTemplateTb.json": {
+    "resource": "https://git.mero.moe/dimbreath/ZenlessData/raw/commit/462563ec0f8ffc7493f6e2a46f64f8b34ea2d547/FileCfg/PropertyTemplateTb.json",
+    "sha256": "0fbf186ef8989868be3941f88a9b14ba162b069a7dd2436d0dbc4039846794bf",
+    "records": [
+      {
+        "pointer": "/IAEFFFFLKNB/236",
+        "value": {
+          "PFOAJKNPCHL": 32303,
+          "FIFDOHJAJPD": "",
+          "HAKHHHCAENA": "AddedDamageRatio_Wind",
+          "CADKKABBIFG": 10000,
+          "HAMEBLDAOGE": "{0:0.#%}",
+          "OPCKNMJEMCC": -10000,
+          "EALCPIOJFKG": 90000,
+          "CDNJNNMKLJP": 0,
+          "JGHFBBCBBBA": "AddedDamageRatio_Wind",
+          "COPICFEIIIL": 323,
+          "LLIGPEHKDDL": []
+        }
+      }
+    ]
+  },
+  "SmithyBasePropertyChooseTemplateTb.json": {
+    "resource": "https://git.mero.moe/dimbreath/ZenlessData/raw/commit/462563ec0f8ffc7493f6e2a46f64f8b34ea2d547/FileCfg/SmithyBasePropertyChooseTemplateTb.json",
+    "sha256": "a958c76f21f95cb5cef94389ba023a96bdc4fd9ea8fa1612722c00372ec696f0",
+    "records": [
+      {
+        "pointer": "/IAEFFFFLKNB/0",
+        "value": {
+          "NJCAHNHALCH": 100,
+          "OGLKGACMBMC": 1,
+          "CNCEKNHEHIP": 11103
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/1",
+        "value": {
+          "NJCAHNHALCH": 200,
+          "OGLKGACMBMC": 2,
+          "CNCEKNHEHIP": 12103
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/2",
+        "value": {
+          "NJCAHNHALCH": 300,
+          "OGLKGACMBMC": 3,
+          "CNCEKNHEHIP": 13103
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/3",
+        "value": {
+          "NJCAHNHALCH": 401,
+          "OGLKGACMBMC": 4,
+          "CNCEKNHEHIP": 12102
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/4",
+        "value": {
+          "NJCAHNHALCH": 402,
+          "OGLKGACMBMC": 4,
+          "CNCEKNHEHIP": 11102
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/5",
+        "value": {
+          "NJCAHNHALCH": 403,
+          "OGLKGACMBMC": 4,
+          "CNCEKNHEHIP": 13102
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/6",
+        "value": {
+          "NJCAHNHALCH": 404,
+          "OGLKGACMBMC": 4,
+          "CNCEKNHEHIP": 20103
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/7",
+        "value": {
+          "NJCAHNHALCH": 405,
+          "OGLKGACMBMC": 4,
+          "CNCEKNHEHIP": 21103
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/8",
+        "value": {
+          "NJCAHNHALCH": 406,
+          "OGLKGACMBMC": 4,
+          "CNCEKNHEHIP": 31203
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/9",
+        "value": {
+          "NJCAHNHALCH": 501,
+          "OGLKGACMBMC": 5,
+          "CNCEKNHEHIP": 12102
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/10",
+        "value": {
+          "NJCAHNHALCH": 502,
+          "OGLKGACMBMC": 5,
+          "CNCEKNHEHIP": 11102
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/11",
+        "value": {
+          "NJCAHNHALCH": 503,
+          "OGLKGACMBMC": 5,
+          "CNCEKNHEHIP": 13102
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/12",
+        "value": {
+          "NJCAHNHALCH": 504,
+          "OGLKGACMBMC": 5,
+          "CNCEKNHEHIP": 23103
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/13",
+        "value": {
+          "NJCAHNHALCH": 505,
+          "OGLKGACMBMC": 5,
+          "CNCEKNHEHIP": 31503
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/14",
+        "value": {
+          "NJCAHNHALCH": 506,
+          "OGLKGACMBMC": 5,
+          "CNCEKNHEHIP": 31603
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/15",
+        "value": {
+          "NJCAHNHALCH": 507,
+          "OGLKGACMBMC": 5,
+          "CNCEKNHEHIP": 31703
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/16",
+        "value": {
+          "NJCAHNHALCH": 508,
+          "OGLKGACMBMC": 5,
+          "CNCEKNHEHIP": 31803
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/17",
+        "value": {
+          "NJCAHNHALCH": 509,
+          "OGLKGACMBMC": 5,
+          "CNCEKNHEHIP": 31903
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/18",
+        "value": {
+          "NJCAHNHALCH": 510,
+          "OGLKGACMBMC": 5,
+          "CNCEKNHEHIP": 32303
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/19",
+        "value": {
+          "NJCAHNHALCH": 601,
+          "OGLKGACMBMC": 6,
+          "CNCEKNHEHIP": 12102
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/20",
+        "value": {
+          "NJCAHNHALCH": 602,
+          "OGLKGACMBMC": 6,
+          "CNCEKNHEHIP": 11102
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/21",
+        "value": {
+          "NJCAHNHALCH": 603,
+          "OGLKGACMBMC": 6,
+          "CNCEKNHEHIP": 13102
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/22",
+        "value": {
+          "NJCAHNHALCH": 604,
+          "OGLKGACMBMC": 6,
+          "CNCEKNHEHIP": 31402
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/23",
+        "value": {
+          "NJCAHNHALCH": 605,
+          "OGLKGACMBMC": 6,
+          "CNCEKNHEHIP": 12202
+        }
+      },
+      {
+        "pointer": "/IAEFFFFLKNB/24",
+        "value": {
+          "NJCAHNHALCH": 606,
+          "OGLKGACMBMC": 6,
+          "CNCEKNHEHIP": 30502
+        }
+      }
+    ]
+  },
+  "enka": {
+    "resource": "https://raw.githubusercontent.com/EnkaNetwork/API-docs/88fc20697fda924430943434c11e0c45eb39509f/docs/zzz/api.md",
+    "sha256": "3c6487b222eaa776a7e8e421f50f455fea77ec06538d5f0c5b353046bd15d3fb",
+    "rarityRow": "| 4 | S |",
+    "scaleRow": "| 4 | 0.2 |",
+    "formula": "Result = MainStat.PropertyValue + (MainStat.PropertyValue * Level * RarityScale)"
+  }
+}

@@ -11,6 +11,8 @@ import {
 } from "../scripts/panel-attributes/convert.ts"
 import { sDriveDiscMaxLevelAffixes } from "../scripts/panel-attributes/drive-discs.ts"
 import engineEvidence from "./fixtures/panel-attributes-evidence.json" with { type: "json" }
+import windEvidence from "./fixtures/drive-disc-wind-evidence.json" with { type: "json" }
+import panelEvidence from "../scripts/panel-attributes/evidence.json" with { type: "json" }
 
 // prepare:consumer 已经持锁验证并复制；测试只读稳定副本。
 async function source<T>(path: string): Promise<T> {
@@ -238,7 +240,7 @@ describe("normalized panel attributes", () => {
     const result = sDriveDiscMaxLevelAffixes()
     expect(
       Object.values(result.mainStatsBySlot).map((options) => options.length),
-    ).toEqual([1, 1, 1, 6, 9, 6])
+    ).toEqual([1, 1, 1, 6, 10, 6])
     expect(
       [1, 2, 3].map(
         (slot) => result.mainStatsBySlot[slot as 1 | 2 | 3][0].value,
@@ -274,6 +276,7 @@ describe("normalized panel attributes", () => {
       ["ice", 0.3],
       ["electric", 0.3],
       ["ether", 0.3],
+      ["wind", 0.3],
     ])
     expect(result.substatsPerRoll.map((b) => b.value)).toEqual([
       112, 0.03, 19, 0.03, 15, 0.048, 9, 0.024, 0.048, 9,
@@ -282,5 +285,57 @@ describe("normalized panel attributes", () => {
       result.substatsPerRoll.find((b) => b.attribute === "penetrationValue")
         ?.operation,
     ).toBe("initial-fixed")
+  })
+
+  it("matches the independently frozen wind main-stat records without upgrading the legacy source", () => {
+    expect(panelEvidence.zzzHpCommit).toBe(
+      "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
+    )
+    for (const reference of Object.values(windEvidence))
+      expect(panelEvidence.resources).toContainEqual(
+        expect.objectContaining({
+          resource: reference.resource,
+          sha256: reference.sha256,
+        }),
+      )
+    const rarity =
+      windEvidence["EquipmentRarityTemplateTb.json"].records[0]!.value
+    const affix =
+      windEvidence["RandPropertyLibraryTemplateTb.json"].records[0]!.value
+    const level =
+      windEvidence["EquipmentLevelTemplateTb.json"].records[0]!.value
+    const property = windEvidence["PropertyTemplateTb.json"].records[0]!.value
+    expect(rarity.CECLEKPMEJB).toBe(4)
+    expect(rarity.KPJDEHGMFPH).toBe(5)
+    expect(affix.PFOAJKNPCHL).toBe(rarity.BHMOPMMIKAK)
+    expect(affix.IINHKLMBKBN).toBe(property.PFOAJKNPCHL)
+    expect(property.HAKHHHCAENA).toBe("AddedDamageRatio_Wind")
+    expect(level.CECLEKPMEJB).toBe(rarity.CECLEKPMEJB)
+    expect(level.MPBONOJLLPF).toBe(rarity.LGNKABDCGKC)
+    const value =
+      (affix.GAGPGKIOODG * (1 + level.DPKJPJNGJEK / 10000)) /
+      property.CADKKABBIFG
+    expect(value).toBe(0.3)
+    const slots = windEvidence[
+      "SmithyBasePropertyChooseTemplateTb.json"
+    ].records
+      .filter((record) => record.value.CNCEKNHEHIP === property.PFOAJKNPCHL)
+      .map((record) => record.value.OGLKGACMBMC)
+    expect(slots).toEqual([5])
+    const wind = {
+      attribute: "damageBonus",
+      operation: "damage-bonus",
+      element: "wind",
+      unit: "ratio",
+      value,
+    }
+    const generated = sDriveDiscMaxLevelAffixes()
+    for (const [slot, options] of Object.entries(generated.mainStatsBySlot))
+      expect(
+        options.filter(
+          (option) =>
+            option.attribute === "damageBonus" && option.element === "wind",
+        ),
+      ).toEqual(Number(slot) === slots[0] ? [wind] : [])
   })
 })
