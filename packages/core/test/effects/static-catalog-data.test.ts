@@ -2073,7 +2073,7 @@ describe("fixed-source catalog conformance", () => {
     ).toBeCloseTo(4, 12)
   })
 
-  it("exposes the Remielle mindscape 1 phase-transition-flow state as one complete option", () => {
+  describe("Remielle mindscape 1 phase-transition-flow complete state", () => {
     const optionId =
       "agents:remiel:mindscape:1:phase-transition-flow:other-character-anomaly-damage"
     const differenceId = "remielle-mindscape1-complete-anomaly-state"
@@ -2090,102 +2090,108 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("44")
-    expect(
-      catalog.differences.some((d) => d.differenceId === differenceId),
-      differenceId,
-    ).toBe(true)
-    // 完整状态选项：单一 corrected 变体同时引用两条既有规则，无额外门槛或必需输入；
-    // M1—M6 合法、只应用一次，解锁不自动启用。
-    const option = catalog.options.find((o) => o.optionId === optionId)!
-    expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
-    expect(option.conditionDescription).toBe(
-      "蕾米埃尔处于[相变时流]状态下时，队伍中其他角色造成的属性异常伤害提升10%。",
-    )
-    expect(option.target).toBe("team")
-    expect(option.variants).toHaveLength(1)
-    const variant = option.variants[0]!
-    expect(variant.status).toBe("corrected")
-    expect(variant.configuration).toEqual({ minimumMindscape: 1 })
-    expect(variant.maximumLayers).toBe(1)
-    expect(variant.inputs).toEqual([])
-    expect(variant.applicability).toEqual({})
-    expect(variant.differences).toEqual([differenceId])
-    expect(variant.effectIds).toEqual([positiveEffectId, negativeEffectId])
-    // 两个旧选项保留为带迁移说明的语义冲突入口，不再独立贡献。
-    for (const migratedOptionId of [positiveOptionId, negativeOptionId]) {
-      const migratedVariant = catalog.options.find(
-        (o) => o.optionId === migratedOptionId,
-      )!.variants[0]!
-      expect(migratedVariant.status, migratedOptionId).toBe("unsupported")
-      expect(migratedVariant.reason, migratedOptionId).toBe("semantic-conflict")
-      expect(migratedVariant.effectIds, migratedOptionId).toEqual([])
-      expect(migratedVariant.explanation, migratedOptionId).toContain(optionId)
-    }
-    for (const pointer of [
-      "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/1",
-      "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/2",
-    ]) {
-      const record = coverage.records.find((r) => r.pointer === pointer)!
-      expect(record.status, pointer).toBe("unsupported")
-      expect(record.reason, pointer).toBe("semantic-conflict")
-      expect(record.effectIds, pointer).toEqual([])
-      expect(record.explanation, pointer).toContain(optionId)
-    }
-    // 两条既有规则保留：team +0.1 与 holder −0.1，只进入异常增伤通道的
-    // 普通异常、异放、乱流与耀变；紊乱继续使用独立 disorderDmgBonus。
-    const ruleOf = (effectId: string) =>
-      definitions.effects.find(
-        (entry): entry is ContributionRule =>
-          entry.kind === "contribution" && entry.effectId === effectId,
-      )!
-    const positiveRule = ruleOf(positiveEffectId)
-    const negativeRule = ruleOf(negativeEffectId)
-    expect(positiveRule.beneficiary).toEqual({ kind: "team" })
-    expect(negativeRule.beneficiary).toEqual({ kind: "holder" })
-    expect(positiveRule.operation).toMatchObject({
-      kind: "factor-contribution",
-      channel: "anomaly-damage-bonus",
-    })
-    expect(negativeRule.operation).toMatchObject({
-      kind: "factor-contribution",
-      channel: "anomaly-damage-bonus",
-    })
-    expect(positiveRule.parameters["amount"]).toMatchObject({
-      kind: "constant",
-      unit: "ratio",
-      value: 0.1,
-    })
-    expect(negativeRule.parameters["amount"]).toMatchObject({
-      kind: "constant",
-      unit: "ratio",
-      value: -0.1,
-    })
-    for (const [label, rule] of [
-      ["positive", positiveRule],
-      ["negative", negativeRule],
-    ] as const) {
-      const damageKinds: string[] = []
-      const visit = (condition: unknown): void => {
-        if (!condition || typeof condition !== "object") return
-        const entry = condition as {
-          kind?: string
-          fact?: string
-          values?: string[]
-          conditions?: unknown[]
-        }
-        if (entry.kind === "one-of" && entry.fact === "hit.damageKind")
-          damageKinds.push(...(entry.values ?? []))
-        for (const child of entry.conditions ?? []) visit(child)
+    it("exposes one complete option with the original rules and migration evidence", () => {
+      expect(catalog.revision).toBe("44")
+      expect(
+        catalog.differences.some((d) => d.differenceId === differenceId),
+        differenceId,
+      ).toBe(true)
+      // 完整状态选项：单一 corrected 变体同时引用两条既有规则，无额外门槛或必需输入；
+      // M1—M6 合法、只应用一次，解锁不自动启用。
+      const option = catalog.options.find((o) => o.optionId === optionId)!
+      expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
+      expect(option.conditionDescription).toBe(
+        "蕾米埃尔处于[相变时流]状态下时，队伍中其他角色造成的属性异常伤害提升10%。",
+      )
+      expect(option.target).toBe("team")
+      expect(option.variants).toHaveLength(1)
+      const variant = option.variants[0]!
+      expect(variant.status).toBe("corrected")
+      expect(variant.configuration).toEqual({ minimumMindscape: 1 })
+      expect(variant.maximumLayers).toBe(1)
+      expect(variant.inputs).toEqual([])
+      expect(variant.applicability).toEqual({})
+      expect(variant.differences).toEqual([differenceId])
+      expect(variant.effectIds).toEqual([positiveEffectId, negativeEffectId])
+      // 两个旧选项保留为带迁移说明的语义冲突入口，不再独立贡献。
+      for (const migratedOptionId of [positiveOptionId, negativeOptionId]) {
+        const migratedVariant = catalog.options.find(
+          (o) => o.optionId === migratedOptionId,
+        )!.variants[0]!
+        expect(migratedVariant.status, migratedOptionId).toBe("unsupported")
+        expect(migratedVariant.reason, migratedOptionId).toBe(
+          "semantic-conflict",
+        )
+        expect(migratedVariant.effectIds, migratedOptionId).toEqual([])
+        expect(migratedVariant.explanation, migratedOptionId).toContain(
+          optionId,
+        )
       }
-      visit(rule.when)
-      expect(damageKinds, label).toEqual([
-        "anomaly",
-        "anomaly-settlement",
-        "vortex",
-        "luminize",
-      ])
-    }
+      for (const pointer of [
+        "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/1",
+        "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/2",
+      ]) {
+        const record = coverage.records.find((r) => r.pointer === pointer)!
+        expect(record.status, pointer).toBe("unsupported")
+        expect(record.reason, pointer).toBe("semantic-conflict")
+        expect(record.effectIds, pointer).toEqual([])
+        expect(record.explanation, pointer).toContain(optionId)
+      }
+      // 两条既有规则保留：team +0.1 与 holder −0.1，只进入异常增伤通道的
+      // 普通异常、异放、乱流与耀变；紊乱继续使用独立 disorderDmgBonus。
+      const ruleOf = (effectId: string) =>
+        definitions.effects.find(
+          (entry): entry is ContributionRule =>
+            entry.kind === "contribution" && entry.effectId === effectId,
+        )!
+      const positiveRule = ruleOf(positiveEffectId)
+      const negativeRule = ruleOf(negativeEffectId)
+      expect(positiveRule.beneficiary).toEqual({ kind: "team" })
+      expect(negativeRule.beneficiary).toEqual({ kind: "holder" })
+      expect(positiveRule.operation).toMatchObject({
+        kind: "factor-contribution",
+        channel: "anomaly-damage-bonus",
+      })
+      expect(negativeRule.operation).toMatchObject({
+        kind: "factor-contribution",
+        channel: "anomaly-damage-bonus",
+      })
+      expect(positiveRule.parameters["amount"]).toMatchObject({
+        kind: "constant",
+        unit: "ratio",
+        value: 0.1,
+      })
+      expect(negativeRule.parameters["amount"]).toMatchObject({
+        kind: "constant",
+        unit: "ratio",
+        value: -0.1,
+      })
+      for (const [label, rule] of [
+        ["positive", positiveRule],
+        ["negative", negativeRule],
+      ] as const) {
+        const damageKinds: string[] = []
+        const visit = (condition: unknown): void => {
+          if (!condition || typeof condition !== "object") return
+          const entry = condition as {
+            kind?: string
+            fact?: string
+            values?: string[]
+            conditions?: unknown[]
+          }
+          if (entry.kind === "one-of" && entry.fact === "hit.damageKind")
+            damageKinds.push(...(entry.values ?? []))
+          for (const child of entry.conditions ?? []) visit(child)
+        }
+        visit(rule.when)
+        expect(damageKinds, label).toEqual([
+          "anomaly",
+          "anomaly-settlement",
+          "vortex",
+          "luminize",
+        ])
+      }
+    })
 
     type Choice =
       | "none"
@@ -2489,106 +2495,159 @@ describe("fixed-source catalog conformance", () => {
           entry.address.kind === "factor" &&
           entry.address.channel === "attacker-resistance-ignore",
       )
-    // 持有者自身触发：完整状态两项相加为净 0，与未选择一致。
-    const holderOff = calculateCatalogResult(
-      input({ choice: "none", trigger: "1581" }),
-    )
-    const holderOn = calculateCatalogResult(
-      input({ choice: "complete", trigger: "1581" }),
-    )
-    expect(holderOff.factors.nonCritical.anomalyDamageBonus).toBeCloseTo(1, 12)
-    expect(holderOn.factors.nonCritical.anomalyDamageBonus).toBeCloseTo(1, 12)
-    expect(
-      anomalyBonusContributions(holderOn).map((entry) => entry.value.value),
-    ).toEqual([0.1, -0.1])
-    expect(holderOn.expected).toBeCloseTo(holderOff.expected, 12)
-    // 队友触发：只有 team +10% 生效，自身 −10% 不作用于队友命中。
-    const teammateOff = calculateCatalogResult(
-      input({ choice: "none", trigger: "1261" }),
-    )
-    const teammateOn = calculateCatalogResult(
-      input({ choice: "complete", trigger: "1261" }),
-    )
-    expect(teammateOn.factors.nonCritical.anomalyDamageBonus).toBeCloseTo(
-      1.1,
-      12,
-    )
-    expect(
-      anomalyBonusContributions(teammateOn).map((entry) => entry.value.value),
-    ).toEqual([0.1])
-    expect(teammateOn.expected / teammateOff.expected).toBeCloseTo(1.1, 12)
-    // 同区已有 +0.3 时按加算：队友 1.3 → 1.4，持有者 1.3 保持 1.3。
-    expect(
-      calculateCatalogResult(
-        input({ choice: "none", trigger: "1261", existingBonus: 0.3 }),
-      ).factors.nonCritical.anomalyDamageBonus,
-    ).toBeCloseTo(1.3, 12)
-    expect(
-      calculateCatalogResult(
-        input({ choice: "complete", trigger: "1261", existingBonus: 0.3 }),
-      ).factors.nonCritical.anomalyDamageBonus,
-    ).toBeCloseTo(1.4, 12)
-    expect(
-      calculateCatalogResult(
-        input({ choice: "complete", trigger: "1581", existingBonus: 0.3 }),
-      ).factors.nonCritical.anomalyDamageBonus,
-    ).toBeCloseTo(1.3, 12)
-    // 合法 layers 0 表示关闭，不贡献；解锁不自动启用。
-    expect(
-      anomalyBonusContributions(
-        calculateCatalogResult(
-          input({ choice: "complete", trigger: "1261", layers: 0 }),
-        ),
-      ),
-    ).toHaveLength(0)
-    // M0 拒绝、M1—M6 合法且各档只应用一次。
-    const locked = calculateStaticDamageFromCatalog(
-      input({ choice: "complete", trigger: "1261", rank: 0 }),
-    )
-    expect(locked.ok).toBe(false)
-    if (!locked.ok)
+    it("cancels the team and holder amounts on the holder hit", () => {
+      // 持有者自身触发：完整状态两项相加为净 0，与未选择一致。
+      const holderOff = calculateCatalogResult(
+        input({ choice: "none", trigger: "1581" }),
+      )
+      const holderOn = calculateCatalogResult(
+        input({ choice: "complete", trigger: "1581" }),
+      )
+      expect(holderOff.factors.nonCritical.anomalyDamageBonus).toBeCloseTo(
+        1,
+        12,
+      )
+      expect(holderOn.factors.nonCritical.anomalyDamageBonus).toBeCloseTo(1, 12)
       expect(
-        locked.issues.some(
-          (issue) =>
-            issue.code === "CONTEXT_MISMATCH" &&
-            issue.pointer === "/selections/0",
-        ),
-        JSON.stringify(locked.issues),
-      ).toBe(true)
-    for (const rank of [1, 2, 3, 4, 5, 6] as const) {
-      const result = calculateCatalogResult(
-        input({ choice: "complete", trigger: "1261", rank }),
+        anomalyBonusContributions(holderOn).map((entry) => entry.value.value),
+      ).toEqual([0.1, -0.1])
+      expect(holderOn.expected).toBeCloseTo(holderOff.expected, 12)
+    })
+
+    it("keeps teammate triggering separate from current and historical strength", () => {
+      // 队友触发：只有 team +10% 生效，自身 −10% 不作用于队友命中。
+      const teammateOff = calculateCatalogResult(
+        input({ choice: "none", trigger: "1261" }),
+      )
+      const teammateOn = calculateCatalogResult(
+        input({ choice: "complete", trigger: "1261" }),
+      )
+      expect(teammateOn.factors.nonCritical.anomalyDamageBonus).toBeCloseTo(
+        1.1,
+        12,
       )
       expect(
-        anomalyBonusContributions(result),
-        `mindscape ${rank}`,
-      ).toHaveLength(1)
+        anomalyBonusContributions(teammateOn).map((entry) => entry.value.value),
+      ).toEqual([0.1])
+      expect(teammateOn.expected / teammateOff.expected).toBeCloseTo(1.1, 12)
+      // 历史强度来源与本次触发者分离：同一来源当前 50 / 历史 200 各自读取；
+      // 完整状态只随触发者身份变化（队友 55/220，持有者 50/200）。
+      const historicalTeammateOff = calculateCatalogResult(
+        input({ choice: "none", trigger: "1261", historical: true }),
+      )
+      const historicalTeammateOn = calculateCatalogResult(
+        input({ choice: "complete", trigger: "1261", historical: true }),
+      )
+      const historicalHolderOn = calculateCatalogResult(
+        input({ choice: "complete", trigger: "1581", historical: true }),
+      )
+      expect(historicalTeammateOn.factors.nonCritical.baseDamage).toBeCloseTo(
+        200,
+        12,
+      )
       expect(
-        result.factors.nonCritical.anomalyDamageBonus,
-        `mindscape ${rank}`,
+        historicalTeammateOn.expected / historicalTeammateOff.expected,
       ).toBeCloseTo(1.1, 12)
-    }
+      // 同一读取口径下历史强度 200 与当前 50 恰为 4 倍，其余乘区不变。
+      expect(historicalTeammateOn.expected / teammateOn.expected).toBeCloseTo(
+        4,
+        12,
+      )
+      expect(historicalHolderOn.expected).toBeCloseTo(
+        historicalTeammateOn.expected / 1.1,
+        12,
+      )
+    })
+
+    it("adds the state to the existing anomaly bonus without multiplying it", () => {
+      // 同区已有 +0.3 时按加算：队友 1.3 → 1.4，持有者 1.3 保持 1.3。
+      expect(
+        calculateCatalogResult(
+          input({ choice: "none", trigger: "1261", existingBonus: 0.3 }),
+        ).factors.nonCritical.anomalyDamageBonus,
+      ).toBeCloseTo(1.3, 12)
+      expect(
+        calculateCatalogResult(
+          input({ choice: "complete", trigger: "1261", existingBonus: 0.3 }),
+        ).factors.nonCritical.anomalyDamageBonus,
+      ).toBeCloseTo(1.4, 12)
+      expect(
+        calculateCatalogResult(
+          input({ choice: "complete", trigger: "1581", existingBonus: 0.3 }),
+        ).factors.nonCritical.anomalyDamageBonus,
+      ).toBeCloseTo(1.3, 12)
+    })
+
+    it("keeps zero layers disabled after unlock", () => {
+      // 合法 layers 0 表示关闭，不贡献；解锁不自动启用。
+      expect(
+        anomalyBonusContributions(
+          calculateCatalogResult(
+            input({ choice: "complete", trigger: "1261", layers: 0 }),
+          ),
+        ),
+      ).toHaveLength(0)
+    })
+
+    it("rejects the complete state before mindscape 1", () => {
+      // M0 拒绝、M1—M6 合法且各档只应用一次。
+      const locked = calculateStaticDamageFromCatalog(
+        input({ choice: "complete", trigger: "1261", rank: 0 }),
+      )
+      expect(locked.ok).toBe(false)
+      if (!locked.ok)
+        expect(
+          locked.issues.some(
+            (issue) =>
+              issue.code === "CONTEXT_MISMATCH" &&
+              issue.pointer === "/selections/0",
+          ),
+          JSON.stringify(locked.issues),
+        ).toBe(true)
+    })
+
+    it.each([1, 2, 3, 4, 5, 6] as const)(
+      "applies the complete state once at mindscape %i",
+      (rank) => {
+        const result = calculateCatalogResult(
+          input({ choice: "complete", trigger: "1261", rank }),
+        )
+        expect(
+          anomalyBonusContributions(result),
+          `mindscape ${rank}`,
+        ).toHaveLength(1)
+        expect(
+          result.factors.nonCritical.anomalyDamageBonus,
+          `mindscape ${rank}`,
+        ).toBeCloseTo(1.1, 12)
+      },
+    )
+
     // 核心与潜能档位不额外加门槛，也不重复应用。
-    for (const configuration of [
+    it.each([
       { coreSkillLevel: 1 as CoreSkillLevel, potentialLevel: 6 },
       { coreSkillLevel: 7 as CoreSkillLevel, potentialLevel: 0 },
-    ]) {
-      const result = calculateCatalogResult(
-        input({ choice: "complete", trigger: "1261", ...configuration }),
-      )
-      expect(
-        result.factors.nonCritical.anomalyDamageBonus,
-        JSON.stringify(configuration),
-      ).toBeCloseTo(1.1, 12)
-    }
+    ])(
+      "applies once at core $coreSkillLevel / potential $potentialLevel",
+      (configuration) => {
+        const result = calculateCatalogResult(
+          input({ choice: "complete", trigger: "1261", ...configuration }),
+        )
+        expect(
+          result.factors.nonCritical.anomalyDamageBonus,
+          JSON.stringify(configuration),
+        ).toBeCloseTo(1.1, 12)
+      },
+    )
+
     // 旧记录不再接受单选、两项齐选、与完整选项混选或 layers 0。
-    for (const params of [
+    it.each([
       { choice: "positive" as const },
       { choice: "negative" as const },
       { choice: "both-old" as const },
       { choice: "mixed" as const },
       { choice: "positive" as const, layers: 0 },
-    ]) {
+    ])("rejects retired state selection %j", (params) => {
       const result = calculateStaticDamageFromCatalog(
         input({ trigger: "1261", ...params }),
       )
@@ -2603,132 +2662,136 @@ describe("fixed-source catalog conformance", () => {
           ),
           JSON.stringify(result.issues),
         ).toBe(true)
-    }
-    // 重复选择完整选项沿用 DUPLICATE_ID。
-    const duplicate = calculateStaticDamageFromCatalog({
-      ...input({ choice: "complete", trigger: "1261" }),
-      selections: [
-        { optionId, bindingId: "binding:static", layers: 1 },
-        { optionId, bindingId: "binding:static", layers: 1 },
-      ],
     })
-    expect(duplicate.ok).toBe(false)
-    if (!duplicate.ok)
-      expect(
-        duplicate.issues.some((issue) => issue.code === "DUPLICATE_ID"),
-        JSON.stringify(duplicate.issues),
-      ).toBe(true)
-    // 历史强度来源与本次触发者分离：同一来源当前 50 / 历史 200 各自读取；
-    // 完整状态只随触发者身份变化（队友 55/220，持有者 50/200）。
-    const historicalTeammateOff = calculateCatalogResult(
-      input({ choice: "none", trigger: "1261", historical: true }),
-    )
-    const historicalTeammateOn = calculateCatalogResult(
-      input({ choice: "complete", trigger: "1261", historical: true }),
-    )
-    const historicalHolderOn = calculateCatalogResult(
-      input({ choice: "complete", trigger: "1581", historical: true }),
-    )
-    expect(historicalTeammateOn.factors.nonCritical.baseDamage).toBeCloseTo(
-      200,
-      12,
-    )
-    expect(
-      historicalTeammateOn.expected / historicalTeammateOff.expected,
-    ).toBeCloseTo(1.1, 12)
-    // 同一读取口径下历史强度 200 与当前 50 恰为 4 倍，其余乘区不变。
-    expect(historicalTeammateOn.expected / teammateOn.expected).toBeCloseTo(
-      4,
-      12,
-    )
-    expect(historicalHolderOn.expected).toBeCloseTo(
-      historicalTeammateOn.expected / 1.1,
-      12,
-    )
-    // 缺历史属性仍明确拒绝，不用当前值代替。
-    const missing = calculateStaticDamageFromCatalog(
-      input({
-        choice: "complete",
-        trigger: "1261",
-        missingHistoricalProficiency: true,
-      }),
-    )
-    expect(missing.ok).toBe(false)
-    if (!missing.ok)
-      expect(
-        missing.issues.some((issue) => issue.code === "MISSING_SNAPSHOT"),
-        JSON.stringify(missing.issues),
-      ).toBe(true)
+
+    it("rejects a duplicate complete-state selection", () => {
+      // 重复选择完整选项沿用 DUPLICATE_ID。
+      const duplicate = calculateStaticDamageFromCatalog({
+        ...input({ choice: "complete", trigger: "1261" }),
+        selections: [
+          { optionId, bindingId: "binding:static", layers: 1 },
+          { optionId, bindingId: "binding:static", layers: 1 },
+        ],
+      })
+      expect(duplicate.ok).toBe(false)
+      if (!duplicate.ok)
+        expect(
+          duplicate.issues.some((issue) => issue.code === "DUPLICATE_ID"),
+          JSON.stringify(duplicate.issues),
+        ).toBe(true)
+    })
+
+    it("rejects a missing historical proficiency without reading current values", () => {
+      // 缺历史属性仍明确拒绝，不用当前值代替。
+      const missing = calculateStaticDamageFromCatalog(
+        input({
+          choice: "complete",
+          trigger: "1261",
+          missingHistoricalProficiency: true,
+        }),
+      )
+      expect(missing.ok).toBe(false)
+      if (!missing.ok)
+        expect(
+          missing.issues.some((issue) => issue.code === "MISSING_SNAPSHOT"),
+          JSON.stringify(missing.issues),
+        ).toBe(true)
+    })
+
     // 四类适用：普通异常、异放、乱流由队友触发验证 +10%；耀变由持有者
     // 触发（目录中只有她的耀变精通换算映射），两项同时出现、净 0。
-    for (const kind of ["anomaly", "anomaly-settlement", "vortex"] as const) {
-      const result = calculateCatalogResult(
-        input({ choice: "complete", trigger: "1261", kind }),
-      )
-      expect(result.factors.nonCritical.anomalyDamageBonus, kind).toBeCloseTo(
-        1.1,
-        12,
-      )
-      expect(anomalyBonusContributions(result), kind).toHaveLength(1)
-    }
-    const luminizeOn = calculateCatalogResult(
-      input({ choice: "complete", trigger: "1581", kind: "luminize" }),
+    it.each(["anomaly", "anomaly-settlement", "vortex"] as const)(
+      "applies the teammate state to %s",
+      (kind) => {
+        const result = calculateCatalogResult(
+          input({ choice: "complete", trigger: "1261", kind }),
+        )
+        expect(result.factors.nonCritical.anomalyDamageBonus, kind).toBeCloseTo(
+          1.1,
+          12,
+        )
+        expect(anomalyBonusContributions(result), kind).toHaveLength(1)
+      },
     )
-    expect(
-      anomalyBonusContributions(luminizeOn).map((entry) => entry.value.value),
-      "luminize",
-    ).toEqual([0.1, -0.1])
-    // 队友触发耀变在本目录没有可用的精通换算映射（只有蕾米埃尔本人持有），
-    // 目录入口明确拒绝该输入，不把它当作零贡献，本状态选项也不放开该限制。
-    const teammateLuminize = calculateStaticDamageFromCatalog(
-      input({ choice: "complete", trigger: "1261", kind: "luminize" }),
-    )
-    expect(teammateLuminize.ok).toBe(false)
-    if (!teammateLuminize.ok)
+
+    it("keeps the holder luminize state separate from resistance ignore", () => {
+      const luminizeOn = calculateCatalogResult(
+        input({ choice: "complete", trigger: "1581", kind: "luminize" }),
+      )
       expect(
-        teammateLuminize.issues.some(
-          (issue) =>
-            issue.code === "INVALID_INPUT" &&
-            issue.message.includes("proficiency parameter mapping"),
-        ),
-        JSON.stringify(teammateLuminize.issues),
-      ).toBe(true)
-    // 负例：紊乱使用独立 disorderDmgBonus，三类直伤不受影响。
-    const disorder = calculateCatalogResult(
-      input({ choice: "complete", trigger: "1261", kind: "disorder" }),
-    )
-    expect(disorder.factors.nonCritical.anomalyDamageBonus).toBeCloseTo(1, 12)
-    expect(anomalyBonusContributions(disorder)).toHaveLength(0)
-    for (const kind of ["regular", "sheer", "sharpen"] as const) {
-      const result = calculateCatalogResult(
-        input({ choice: "complete", trigger: "1261", kind }),
+        anomalyBonusContributions(luminizeOn).map((entry) => entry.value.value),
+        "luminize",
+      ).toEqual([0.1, -0.1])
+      // 影画 1 的 50% 耀变专属抗穿是独立条款，不并入完整状态。
+      const resistanceIgnoreOnly = calculateCatalogResult(
+        input({
+          trigger: "1581",
+          kind: "luminize",
+          withResistanceIgnore: true,
+        }),
       )
-      expect(anomalyBonusContributions(result), kind).toHaveLength(0)
-    }
-    // 影画 1 的 50% 耀变专属抗穿是独立条款，不并入完整状态。
-    const resistanceIgnoreOnly = calculateCatalogResult(
-      input({ trigger: "1581", kind: "luminize", withResistanceIgnore: true }),
+      expect(resistanceIgnoreContributions(resistanceIgnoreOnly)).toHaveLength(
+        1,
+      )
+      expect(
+        resistanceIgnoreContributions(resistanceIgnoreOnly)[0]!.value.value,
+      ).toBeCloseTo(0.5, 12)
+      expect(anomalyBonusContributions(resistanceIgnoreOnly)).toHaveLength(0)
+      expect(anomalyBonusContributions(luminizeOn)).toHaveLength(2)
+      expect(resistanceIgnoreContributions(luminizeOn)).toHaveLength(0)
+      // 两个独立选项可同时选择：耀变专属抗穿贡献一次，完整状态两项照常出现。
+      const bothOptions = calculateCatalogResult(
+        input({
+          choice: "complete",
+          trigger: "1581",
+          kind: "luminize",
+          withResistanceIgnore: true,
+        }),
+      )
+      expect(resistanceIgnoreContributions(bothOptions)).toHaveLength(1)
+      expect(
+        anomalyBonusContributions(bothOptions).map(
+          (entry) => entry.value.value,
+        ),
+      ).toEqual([0.1, -0.1])
+    })
+
+    it("rejects teammate luminize without a proficiency mapping", () => {
+      // 队友触发耀变在本目录没有可用的精通换算映射（只有蕾米埃尔本人持有），
+      // 目录入口明确拒绝该输入，不把它当作零贡献，本状态选项也不放开该限制。
+      const teammateLuminize = calculateStaticDamageFromCatalog(
+        input({ choice: "complete", trigger: "1261", kind: "luminize" }),
+      )
+      expect(teammateLuminize.ok).toBe(false)
+      if (!teammateLuminize.ok)
+        expect(
+          teammateLuminize.issues.some(
+            (issue) =>
+              issue.code === "INVALID_INPUT" &&
+              issue.message.includes("proficiency parameter mapping"),
+          ),
+          JSON.stringify(teammateLuminize.issues),
+        ).toBe(true)
+    })
+
+    it("keeps disorder on its separate bonus channel", () => {
+      // 负例：紊乱使用独立 disorderDmgBonus，三类直伤不受影响。
+      const disorder = calculateCatalogResult(
+        input({ choice: "complete", trigger: "1261", kind: "disorder" }),
+      )
+      expect(disorder.factors.nonCritical.anomalyDamageBonus).toBeCloseTo(1, 12)
+      expect(anomalyBonusContributions(disorder)).toHaveLength(0)
+    })
+
+    it.each(["regular", "sheer", "sharpen"] as const)(
+      "does not contribute to %s direct damage",
+      (kind) => {
+        const result = calculateCatalogResult(
+          input({ choice: "complete", trigger: "1261", kind }),
+        )
+        expect(anomalyBonusContributions(result), kind).toHaveLength(0)
+      },
     )
-    expect(resistanceIgnoreContributions(resistanceIgnoreOnly)).toHaveLength(1)
-    expect(
-      resistanceIgnoreContributions(resistanceIgnoreOnly)[0]!.value.value,
-    ).toBeCloseTo(0.5, 12)
-    expect(anomalyBonusContributions(resistanceIgnoreOnly)).toHaveLength(0)
-    expect(anomalyBonusContributions(luminizeOn)).toHaveLength(2)
-    expect(resistanceIgnoreContributions(luminizeOn)).toHaveLength(0)
-    // 两个独立选项可同时选择：耀变专属抗穿贡献一次，完整状态两项照常出现。
-    const bothOptions = calculateCatalogResult(
-      input({
-        choice: "complete",
-        trigger: "1581",
-        kind: "luminize",
-        withResistanceIgnore: true,
-      }),
-    )
-    expect(resistanceIgnoreContributions(bothOptions)).toHaveLength(1)
-    expect(
-      anomalyBonusContributions(bothOptions).map((entry) => entry.value.value),
-    ).toEqual([0.1, -0.1])
   })
 
   it("registers the Angel in the Shell anomaly stat revision with stable identities", () => {
@@ -6005,73 +6068,70 @@ describe("same-block core evidence scoping and independent damage items", () => 
     },
   )
 
-  it.each(coreLevels)(
-    "evaluates Panyinhu core %i on both sides of both caps",
-    (core) => {
-      // 数学参考以百分数整数/千分数计算，独立于转换器表达式。
-      const ratePerThousand = [90, 105, 120, 135, 150, 165, 180][core - 1]!
-      const firstCap = [
-        4800,
-        48000 / 11,
-        4000,
-        48000 / 13,
-        24000 / 7,
-        3200,
-        3000,
-      ][core - 1]!
-      const secondCap = [6000, 36000 / 7, 4500, 4000, 3600, 36000 / 11, 3000][
-        core - 1
-      ]!
-      for (const attack of [
-        -100,
-        0,
-        firstCap - 1,
-        firstCap,
-        firstCap + 1,
-        (firstCap + secondCap) / 2,
-        secondCap - 1,
-        secondCap,
-        secondCap + 1,
-        10000,
-      ]) {
-        const positive = Math.max(0, attack)
-        const baseAmount = Math.min((positive * ratePerThousand) / 1000, 540)
-        const total = Math.min((positive * (ratePerThousand + 60)) / 1000, 720)
-        for (const [selected, expected] of [
-          [[], 0],
-          [[panBase], baseAmount],
-          [[panIncrement], total - baseAmount],
-          [[panBase, panIncrement], total],
-        ] as const) {
-          const input = panInput(core, attack, selected)
-          const result = calculateCatalogResult(input)
-          expect(
-            result.evaluation.hit!.damageItems[0]!.finalStat,
-            `core ${core}, A=${attack}`,
-          ).toBeCloseTo(500 + 24000 * 0.1 + 1000 * 0.3 + expected, 8)
-          expect(result.factors.nonCritical.baseDamage).toBeCloseTo(
-            500 + 24000 * 0.1 + 1000 * 0.3 + expected,
-            8,
-          )
-          if (selected.some((optionId) => optionId === panIncrement)) {
-            const increments = result.evaluation.contributions.filter(
-              (c) =>
-                c.origin.effectId === panIncrementEffect &&
-                c.origin.beneficiaryId === "entity:attacker",
-            )
-            expect(increments).toHaveLength(1)
-            expect(increments[0]!.value.value).toBeCloseTo(
-              total - baseAmount,
-              8,
-            )
-          }
-        }
-        const low = lowLevelResult(panInput(core, attack, [panIncrement]))
-        expect(contributionOf(low, panIncrementEffect)).toBeCloseTo(
-          total - baseAmount,
+  describe.each(coreLevels)("Panyinhu core %i caps", (core) => {
+    // 数学参考以百分数整数/千分数计算，独立于转换器表达式。
+    const ratePerThousand = [90, 105, 120, 135, 150, 165, 180][core - 1]!
+    const firstCap = [
+      4800,
+      48000 / 11,
+      4000,
+      48000 / 13,
+      24000 / 7,
+      3200,
+      3000,
+    ][core - 1]!
+    const secondCap = [6000, 36000 / 7, 4500, 4000, 3600, 36000 / 11, 3000][
+      core - 1
+    ]!
+    it.each([
+      ["negative attack", -100],
+      ["zero attack", 0],
+      ["below the first cap", firstCap - 1],
+      ["at the first cap", firstCap],
+      ["above the first cap", firstCap + 1],
+      ["between both caps", (firstCap + secondCap) / 2],
+      ["below the second cap", secondCap - 1],
+      ["at the second cap", secondCap],
+      ["above the second cap", secondCap + 1],
+      ["above both caps", 10000],
+    ] as const)("%s (attack %s)", (_boundary, attack) => {
+      const positive = Math.max(0, attack)
+      const baseAmount = Math.min((positive * ratePerThousand) / 1000, 540)
+      const total = Math.min((positive * (ratePerThousand + 60)) / 1000, 720)
+      for (const [selected, expected] of [
+        [[], 0],
+        [[panBase], baseAmount],
+        [[panIncrement], total - baseAmount],
+        [[panBase, panIncrement], total],
+      ] as const) {
+        const input = panInput(core, attack, selected)
+        const result = calculateCatalogResult(input)
+        expect(
+          result.evaluation.hit!.damageItems[0]!.finalStat,
+          `core ${core}, A=${attack}`,
+        ).toBeCloseTo(500 + 24000 * 0.1 + 1000 * 0.3 + expected, 8)
+        expect(result.factors.nonCritical.baseDamage).toBeCloseTo(
+          500 + 24000 * 0.1 + 1000 * 0.3 + expected,
           8,
         )
+        if (selected.some((optionId) => optionId === panIncrement)) {
+          const increments = result.evaluation.contributions.filter(
+            (c) =>
+              c.origin.effectId === panIncrementEffect &&
+              c.origin.beneficiaryId === "entity:attacker",
+          )
+          expect(increments).toHaveLength(1)
+          expect(increments[0]!.value.value).toBeCloseTo(total - baseAmount, 8)
+        }
       }
+      const low = lowLevelResult(panInput(core, attack, [panIncrement]))
+      expect(contributionOf(low, panIncrementEffect)).toBeCloseTo(
+        total - baseAmount,
+        8,
+      )
+    })
+
+    it("disables both selections at zero layers without requiring inputs", () => {
       const zero = panInput(core, 4800)
       expect(
         calculateCatalogResult({
@@ -6080,8 +6140,8 @@ describe("same-block core evidence scoping and independent damage items", () => 
           selections: zero.selections.map((s) => ({ ...s, layers: 0 })),
         }).factors.nonCritical.baseDamage,
       ).toBe(3200)
-    },
-  )
+    })
+  })
 
   it.each([
     [6, 3200, 192],
