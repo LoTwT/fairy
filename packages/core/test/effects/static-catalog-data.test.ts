@@ -1059,6 +1059,15 @@ describe("fixed-source catalog conformance", () => {
     // 克拉蕾核心被动状态暴击率按核心档位展开；核心 7 参考继续执行。
     "/agents/6/mindscapeBuffs/0/effectBlocks/0/effects/0",
   ])
+  /**
+   * 克拉蕾影画一的"伤害倍率提升至原本的 130%"按中英文原文从增伤区
+   * （skillDmgBonus +30）纠正为倍率乘区 base-multiplier-increase +0.3 后转为
+   * corrected；数值、作用范围与毁伤专项目标不变，仍按来源数值比对，通道断言
+   * 见本文件的具名用例。
+   */
+  const claretMultiplierEncodingCorrectedPointers = new Set([
+    "/agents/6/mindscapeBuffs/1/effectBlocks/0/effects/0",
+  ])
   /** 猩红渴望电属性限制修正的位置：上游 elementFilter=all，仍按来源数值比对。 */
   const elementScopeCorrectedPointers = new Set(
     Array.from({ length: 5 }, (_, rank) => rank).flatMap((rank) => [
@@ -1254,6 +1263,7 @@ describe("fixed-source catalog conformance", () => {
                 r.pointer === migration.pointer,
             ) ||
             qingmingPierceStackCorrectedPointers.has(r.pointer) ||
+            claretMultiplierEncodingCorrectedPointers.has(r.pointer) ||
             batch01CorrectedPointers.has(r.pointer) ||
             batch03CorrectedPointers.has(r.pointer) ||
             batch08CorrectedPointers.has(r.pointer) ||
@@ -1446,6 +1456,10 @@ describe("fixed-source catalog conformance", () => {
     )!
     expect(mindscape1.target).toBe("self")
     expect(mindscape1.variants[0]!.configuration.minimumMindscape).toBe(1)
+    expect(mindscape1.variants[0]!.status).toBe("corrected")
+    expect(mindscape1.variants[0]!.differences).toContain(
+      "claret-mindscape1-multiplier-encoding",
+    )
     for (const block of ["eff-mtsemp5m-q1jh4f", "eff-mtsenpok-prx4yj"])
       expect(
         catalog.options
@@ -1457,6 +1471,51 @@ describe("fixed-source catalog conformance", () => {
           ),
         block,
       ).toBe(true)
+  })
+
+  /**
+   * 修订 45：克拉蕾影画一的"触发[毁伤]造成的伤害倍率提升至原本的 130%"
+   * 由固定来源的 skillDmgBonus +30（增伤区）纠正为倍率乘区
+   * base-multiplier-increase +0.3。既有 25% 增伤只留在增伤区，开关该选项的
+   * 毁伤伤害比为 1.30；旧编码下同一比值为 1.55 / 1.25 = 1.24。
+   */
+  it("applies Claret's mindscape 1 as a base multiplier increase over the existing damage bonus", () => {
+    const effectId =
+      "agent:1611:zzz-hp:eff-mtse9xm8-q641yp:blk-mtrkovf7-dqmjh3:mindscape:1"
+    const base = referenceInput(
+      "/agents/6/mindscapeBuffs/1/effectBlocks/0/effects/0",
+    )
+    const withExistingBonus: StaticCatalogDamageInput = {
+      ...base,
+      damage: { ...base.damage, damageBonus: [0.25] },
+    }
+    const enabled = calculateCatalogResult(withExistingBonus)
+    const disabled = calculateCatalogResult({
+      ...withExistingBonus,
+      selections: [],
+    })
+    const contribution = enabled.evaluation.contributions.find(
+      (entry) => entry.origin.effectId === effectId,
+    )
+    expect(contribution?.address).toMatchObject({
+      kind: "factor",
+      channel: "base-multiplier-increase",
+      entityId: "entity:holder",
+    })
+    expect(contribution?.value.value).toBe(0.3)
+    expect(
+      disabled.evaluation.contributions.some(
+        (entry) => entry.origin.effectId === effectId,
+      ),
+    ).toBe(false)
+    // 反向断言：两种情况下增伤区都只含调用方提供的 25%。
+    expect(enabled.factors.nonCritical["damageBonus"]).toBeCloseTo(1.25, 12)
+    expect(disabled.factors.nonCritical["damageBonus"]).toBeCloseTo(1.25, 12)
+    expect(enabled.factors.nonCritical["baseDamage"]).toBeCloseTo(
+      disabled.factors.nonCritical["baseDamage"]! * 1.3,
+      9,
+    )
+    expect(enabled.expected / disabled.expected).toBeCloseTo(1.3, 12)
   })
 
   it("applies the scarlet sharpen bonus only to electric sharpen hits", () => {
@@ -2091,7 +2150,7 @@ describe("fixed-source catalog conformance", () => {
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
     it("exposes one complete option with the original rules and migration evidence", () => {
-      expect(catalog.revision).toBe("44")
+      expect(catalog.revision).toBe("45")
       expect(
         catalog.differences.some((d) => d.differenceId === differenceId),
         differenceId,

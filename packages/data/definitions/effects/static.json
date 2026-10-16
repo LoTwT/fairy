@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "44",
+  "revision": "45",
   "effects": [
     {
       "kind": "contribution",
@@ -51326,6 +51326,13 @@
             "locale": "zh",
             "resourcePath": "agents/1611/details.zh.json",
             "pointer": "/talent/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1611/details.en.json",
+            "pointer": "/talent/1/desc"
           }
         ]
       },
@@ -51372,6 +51379,11 @@
             "values": ["regular", "sheer", "sharpen"]
           },
           {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["regular", "sheer", "sharpen"]
+          },
+          {
             "kind": "any",
             "conditions": [
               {
@@ -51395,7 +51407,7 @@
       },
       "operation": {
         "kind": "factor-contribution",
-        "channel": "damage-bonus",
+        "channel": "base-multiplier-increase",
         "value": {
           "kind": "parameter",
           "unit": "ratio",

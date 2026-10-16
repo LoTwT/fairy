@@ -65,7 +65,7 @@
       "packageVersion": "0.2.1",
       "contractVersion": 2,
       "gameVersion": "3.2",
-      "snapshotId": "sha256:2e912b3ff60c50158f84d984d93d70d8653bae2df4a988f89d1be1d168a398dc"
+      "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
     },
     "fairyCalculationSources": {
       "packages/core/src/static/calculate.ts": "c1e6d073f7b8eb62241bf640da8d3e1a878aa8de9a703636c490f113a126441e",
@@ -80315,6 +80315,18 @@
         "artifactSha256": {}
       },
       "currentSnapshotId": "sha256:2e912b3ff60c50158f84d984d93d70d8653bae2df4a988f89d1be1d168a398dc"
+    },
+    {
+      "reason": "Revision 45 corrects Claret's mindscape 1 multiplier encoding from the source skillDmgBonus (+30% damage bonus) to base-multiplier-increase (+0.30). The comparison scenarios never select that option, so native upstream captures and all numeric results stay frozen; only the current consumption snapshot and the two changed Fairy artifact digests are refreshed.",
+      "implementationBase": "1f79d05b098145860160da1abcf507eddc0c9752",
+      "previous": {
+        "snapshotId": "sha256:2e912b3ff60c50158f84d984d93d70d8653bae2df4a988f89d1be1d168a398dc",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "d33f4897487e84454fb6d4ca55cfb8471906931356598b3abe0f61752a3d58eb",
+          "packages/data/definitions/effects/static-catalog.json": "c322d5e6104a478335e2a9df40337f05091640927dc4838390994c710b17e28e"
+        }
+      },
+      "currentSnapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
     }
   ]
 }

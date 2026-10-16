@@ -4922,7 +4922,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "44",
+    revision: "45",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: effects.some(
@@ -5278,14 +5278,6 @@ export function convertSource(
               r.catalogEntityId === "agents:claret" &&
               r.stat === "sharpenCritDmgBonus",
           )
-          .map((r) => reference(r.pointer)),
-      },
-      {
-        differenceId: "claret-mindscape1-multiplier-encoding",
-        explanation:
-          "克拉蕾影画一原文为[触发毁伤造成的伤害倍率提升至原本的 130%]，固定来源把该条记为毁伤目标（claret-special-mtsecz30）上的 skillDmgBonus +30，即通用增伤区加成而非倍率乘区。Fairy 遵循固定来源的增伤编码；与正式文本的倍率语义差异在此登记，不改写为倍率乘区。",
-        references: coverage
-          .filter((r) => r.catalogEntityId === "agents:claret" && r.rank === 1)
           .map((r) => reference(r.pointer)),
       },
       {
