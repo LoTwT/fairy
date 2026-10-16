@@ -1222,6 +1222,13 @@ describe("fixed-source catalog conformance", () => {
       /^\/wengines\/(23|27|33|41|48|58|61|74|75|86|95)\//.test(pointer),
     ),
   ])
+  // 原生参考保留旧舍入值；修订 42 在 data 的 aria-abloom-precision / conversion
+  // 回归中按独立原文重算，不再把这三条上游返回视为相等预期。
+  const ariaAbloomPrecisionPointers = new Set(
+    [1, 2, 5].map(
+      (index) => `/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/${index}`,
+    ),
+  )
   it("accounts for every converted source position with an independent reference result", () => {
     expect(oracle.sourceCommit).toBe(catalog.source.commit)
     expect(oracle.cases.map((c) => c.pointer).toSorted()).toEqual(
@@ -1229,6 +1236,7 @@ describe("fixed-source catalog conformance", () => {
         .filter(
           (r) =>
             r.status === "converted" ||
+            ariaAbloomPrecisionPointers.has(r.pointer) ||
             potentialExplainedPointers.has(r.pointer) ||
             coreRankExpandedPointers.has(r.pointer) ||
             elementScopeCorrectedPointers.has(r.pointer) ||
@@ -1266,6 +1274,7 @@ describe("fixed-source catalog conformance", () => {
   const convertedRecordCases = oracle.cases.filter(
     (vector) =>
       !(
+        ariaAbloomPrecisionPointers.has(vector.pointer) ||
         potentialExplainedPointers.has(vector.pointer) ||
         attributeAnomalyScopeCorrectedPointers.has(vector.pointer) ||
         completeStateMigratedPointers.has(vector.pointer) ||
@@ -2081,7 +2090,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("41")
+    expect(catalog.revision).toBe("42")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -4381,11 +4390,11 @@ describe("anomaly multipliers and hit scoping", () => {
     wind: "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36pcqr-9tpwhs",
   } as const
   it.each([
-    ["ether", 3.438],
-    ["electric", 3.576],
+    ["ether", (200 / 10) * 0.275 * 0.625],
+    ["electric", (200 / 10) * 0.143 * 1.25],
     ["fire", 3.57],
     ["ice", 3.6],
-    ["physical", 3.566],
+    ["physical", (200 / 10) * 0.025 * 7.13],
     ["wind", 3.5],
   ] as const)(
     "scales Aria's %s release from 200 initial anomaly control",

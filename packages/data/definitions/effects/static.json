@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "41",
+  "revision": "42",
   "effects": [
     {
       "kind": "contribution",
@@ -39211,6 +39211,20 @@
             "locale": "zh",
             "resourcePath": "agents/1501/details.zh.json",
             "pointer": "/passive/level/1501055/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1501/details.zh.json",
+            "pointer": "/passive/level/1501055/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1501/details.en.json",
+            "pointer": "/passive/level/1501055/desc/0"
           }
         ]
       },
@@ -39238,7 +39252,7 @@
         "rate": {
           "kind": "constant",
           "unit": "multiplier",
-          "value": 0.01719
+          "value": 0.0171875
         }
       },
       "activation": {
@@ -39337,6 +39351,20 @@
             "locale": "zh",
             "resourcePath": "agents/1501/details.zh.json",
             "pointer": "/passive/level/1501055/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1501/details.zh.json",
+            "pointer": "/passive/level/1501055/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1501/details.en.json",
+            "pointer": "/passive/level/1501055/desc/0"
           }
         ]
       },
@@ -39364,7 +39392,7 @@
         "rate": {
           "kind": "constant",
           "unit": "multiplier",
-          "value": 0.01788
+          "value": 0.017875
         }
       },
       "activation": {
@@ -39715,6 +39743,20 @@
             "locale": "zh",
             "resourcePath": "agents/1501/details.zh.json",
             "pointer": "/passive/level/1501055/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1501/details.zh.json",
+            "pointer": "/passive/level/1501055/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1501/details.en.json",
+            "pointer": "/passive/level/1501055/desc/0"
           }
         ]
       },
@@ -39742,7 +39784,7 @@
         "rate": {
           "kind": "constant",
           "unit": "multiplier",
-          "value": 0.017830000000000002
+          "value": 0.017825
         }
       },
       "activation": {

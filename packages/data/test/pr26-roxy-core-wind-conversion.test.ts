@@ -53,7 +53,7 @@ const independent = (entry: SupplementOption): SupplementOption => ({
 describe("Roxy core wind supplement source and identity guards", () => {
   it("adds exactly two independent branches without pretending fac62407 has Roxy", () => {
     const result = convert()
-    expect(result.definitions.revision).toBe("41")
+    expect(result.definitions.revision).toBe("42")
     expect(result.definitions.effects).toHaveLength(4)
     expect(result.catalog.options).toHaveLength(3)
     expect(result.catalog.entities).toHaveLength(1)

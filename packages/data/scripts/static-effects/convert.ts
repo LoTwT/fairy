@@ -1896,6 +1896,24 @@ function compile(
   const e = record.normalized ?? record.raw
   const semantics = SOURCE_SEMANTICS[semanticsKeyFor(record)]
   // 本组必须在字段映射和通用 unsupported 之前核验；降级不能掩盖源漂移。
+  if (semantics?.kind === "source-conversion-rate-correction") {
+    for (const [label, document, note] of [
+      ["raw", record.raw, record.blockNote],
+      ["normalized", record.normalized, record.normalizedBlockNote],
+    ] as const) {
+      if (!document || note !== semantics.expectedSourceBlockNote)
+        throw new Error(
+          `Conversion-rate correction ${label} record/note drift at ${record.pointer}`,
+        )
+      verifySourceRecordShape(
+        document,
+        semantics.expectedEncoding,
+        semantics.differenceId,
+        `${label} ${record.pointer}`,
+        true,
+      )
+    }
+  }
   if (semantics?.kind === "source-stat-correction")
     verifySourceStatCorrectionRecord(record, semantics)
   if (semantics?.kind === "complete-state-tanuki-wish")
@@ -2178,7 +2196,8 @@ function compile(
   }
   if (
     semantics?.kind === "source-value-correction" ||
-    semantics?.kind === "source-stat-correction"
+    semantics?.kind === "source-stat-correction" ||
+    semantics?.kind === "source-conversion-rate-correction"
   ) {
     variant = {
       ...variant,
@@ -2248,7 +2267,10 @@ function compile(
     parameters["rate"] = {
       kind: "constant",
       unit: "multiplier",
-      value: ((conversion.ratioPercent / 100) * mapping.scale) / from.scale,
+      value:
+        semantics?.kind === "source-conversion-rate-correction"
+          ? semantics.correctedRate
+          : ((conversion.ratioPercent / 100) * mapping.scale) / from.scale,
     }
     if (
       record.entityId === "astrayao" &&
@@ -4019,6 +4041,19 @@ export function convertSource(
   const semanticsKeyIndex = new Set(
     collected.records.map((record) => semanticsKeyFor(record)),
   )
+  for (const [key, semantics] of Object.entries(SOURCE_SEMANTICS)) {
+    if (semantics.kind !== "source-conversion-rate-correction") continue
+    const [category, entityId] = key.split("/")
+    if (
+      collected.entities.some(
+        (entry) => entry.catalogEntityId === `${category}:${entityId}`,
+      ) &&
+      !semanticsKeyIndex.has(key)
+    )
+      throw new Error(
+        `Conversion-rate correction lost its registered source record (${key})`,
+      )
+  }
   // 实体参与转换时，其已登记纠错记录必须存在；块/记录改名、删除或移到
   // 其他培养域/档位不能让纠错登记落空。完全不含该实体的局部夹具仍可用。
   for (const [key, semantics] of Object.entries(SOURCE_SEMANTICS)) {
@@ -4881,7 +4916,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "41",
+    revision: "42",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: effects.some(
@@ -5024,7 +5059,11 @@ export function convertSource(
           .map((record) => reference(record.pointer)),
       },
       ...Object.values(SOURCE_SEMANTICS)
-        .filter((entry) => entry.kind === "source-stat-correction")
+        .filter(
+          (entry) =>
+            entry.kind === "source-stat-correction" ||
+            entry.kind === "source-conversion-rate-correction",
+        )
         .map((entry) => ({
           differenceId: entry.differenceId,
           explanation: entry.verification,

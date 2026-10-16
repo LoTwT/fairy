@@ -170,6 +170,31 @@ const reference = JSON.parse(
   historicalSelf: FrozenRecord[]
   upstreamBoundaries: Boundary[]
   coverageGaps: string[]
+  fairyCorrections: {
+    preservedNativeSha256: string
+    previousComparison: {
+      common: number
+      differences: number
+      equalDamage: number
+      multiplierDifferences: number
+    }
+    records: {
+      id: string
+      initialAM: number
+      before: {
+        multiplier: number
+        nonCritical: number
+        critical: number
+        expected: number
+      }
+      after: {
+        multiplier: number
+        nonCritical: number
+        critical: number
+        expected: number
+      }
+    }[]
+  }[]
 }
 
 const json = <T>(value: T): T => JSON.parse(JSON.stringify(value)) as T
@@ -364,10 +389,6 @@ function explainedFairyReadings(record: FrozenRecord): Readings {
       ? 805.6952 - 805 + (713.76 - 713)
       : 788.4528 - 788 + (713.76 - 713)
   const sourceAttackDifference = scenario.source ? 0 : attackDifference
-  const multiplierRatio =
-    scenario.trigger === "aria" && scenario.event === "release"
-      ? 0.01719 / 0.0171875
-      : 1
   const defenseLevelBase = calculateDefenseLevelBase(
     scenario.source?.level ?? 60,
   )
@@ -384,14 +405,12 @@ function explainedFairyReadings(record: FrozenRecord): Readings {
       ? (u.equipmentMastery - Math.floor(u.equipmentMastery)) * 0.005
       : 0
   const damageRatio =
-    ((u.attack + sourceAttackDifference) / u.attack) *
-    multiplierRatio *
-    defenseRatio
+    ((u.attack + sourceAttackDifference) / u.attack) * defenseRatio
   return {
     ...u,
     equipmentAttack: u.equipmentAttack + attackDifference,
     attack: u.attack + sourceAttackDifference,
-    multiplier: u.multiplier * multiplierRatio,
+    multiplier: u.multiplier,
     defense: u.defense * defenseRatio,
     criticalRate: u.criticalRate + rateDifference,
     nonCritical: u.nonCritical * damageRatio,
@@ -432,6 +451,53 @@ function assertFairyLink(
 }
 
 describe("ZZZ Calculator explicit abloom / historical source comparison", () => {
+  it("preserves every historical native result and records the independently recomputed precision correction", () => {
+    const correction = reference.fairyCorrections[0]!
+    expect(
+      createHash("sha256")
+        .update(
+          JSON.stringify([
+            reference.upstream,
+            reference.records.map((record) => record.upstream),
+            reference.historicalSelf.map((record) => record.upstream),
+            reference.upstreamBoundaries,
+          ]),
+        )
+        .digest("hex"),
+    ).toBe(correction.preservedNativeSha256)
+    expect(correction.previousComparison).toEqual({
+      common: 538,
+      differences: 164,
+      equalDamage: 10,
+      multiplierDifferences: 16,
+    })
+    expect(correction.records).toHaveLength(17)
+    for (const row of correction.records) {
+      const record = recordFor(row.id)
+      const result = record.fairy.result.value
+      const multiplier =
+        (27.5 / 100 / 10) *
+        0.625 *
+        row.initialAM *
+        (record.scenario.stunned ? 1.5 : 1)
+      close(row.after.multiplier, multiplier)
+      close(
+        row.before.multiplier,
+        row.initialAM * 0.01719 * (record.scenario.stunned ? 1.5 : 1),
+      )
+      close(
+        result.evaluation.hit!.damageItems[0]!.damageMultiplier,
+        row.after.multiplier,
+      )
+      for (const field of ["nonCritical", "critical", "expected"] as const) {
+        close(
+          row.after[field],
+          (row.before[field] * ((27.5 / 100 / 10) * 0.625)) / 0.01719,
+        )
+        close(result[field]!, row.after[field])
+      }
+    }
+  })
   it("pins versions, semantic mappings, native provenance and a nonempty exact case inventory", () => {
     expect(reference.schemaVersion).toBe(1)
     expect(reference.upstream.repository).toBe("ZztIsolation/zzz_calculator")
@@ -563,7 +629,7 @@ describe("ZZZ Calculator explicit abloom / historical source comparison", () => 
     expect(
       rules.find((rule) => rule.effectId.includes("eff-ms36k7q1-vqttu0"))!
         .parameters["rate"]!.value,
-    ).toBe(0.01719)
+    ).toBe(0.0171875)
     expect(
       rules.find((rule) => rule.effectId.includes("eff-ms36xf73-q2nimy"))!
         .parameters["rate"]!.value,
@@ -651,19 +717,18 @@ describe("ZZZ Calculator explicit abloom / historical source comparison", () => 
       if (!isDifferent(explained.expected, native.expected)) equalDamage++
     }
     expect({ common, differences, equalDamage }).toEqual({
-      common: 538,
-      differences: 164,
-      equalDamage: 10,
+      common: 583,
+      differences: 119,
+      equalDamage: 19,
     })
     expect(byField).toEqual({
       equipmentAttack: 39,
       attack: 17,
-      multiplier: 16,
       defense: 2,
       criticalRate: 3,
-      nonCritical: 29,
-      critical: 29,
-      expected: 29,
+      nonCritical: 19,
+      critical: 19,
+      expected: 20,
     })
   })
 
