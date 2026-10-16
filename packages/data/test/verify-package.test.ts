@@ -1,3 +1,4 @@
+import { ariaAbloomConsumerSource } from "./fixtures/aria-abloom-consumer.ts"
 import { roxyCoreWindConsumerSource } from "./fixtures/roxy-core-wind-consumer.ts"
 import { windDriveDiscConsumerSource } from "./fixtures/drive-disc-wind-consumer.ts"
 import { claretInitialConversionConsumerSource } from "./fixtures/claret-initial-conversion-consumer.ts"
@@ -477,6 +478,8 @@ ${lucyGuardBoarConsumerSource}
 await verifyLucyGuardBoarConsumer(api, await import("@randomplay/core"))
 ${hugoAttackConsumerSource}
 assert.deepEqual(await verifyHugoAttackConsumer(api, await import("@randomplay/core")), {nonCritical:3800,closed:2000,rejectedOldThree:true})
+${ariaAbloomConsumerSource}
+await verifyAriaAbloomConsumer(api, await import("@randomplay/core"))
 ${roxyMindscapeConsumerSource}
 assert.deepEqual(await verifyRoxyMindscapeConsumer(api, await import("@randomplay/core")), {ultimate:67146.975,combined:99761.22,nonWindIgnore:0,rejectedLowRank:true})
 ${roxyWindEyeConsumerSource}

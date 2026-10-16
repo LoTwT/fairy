@@ -132,16 +132,16 @@
       "packageVersion": "0.2.1",
       "contractVersion": 2,
       "gameVersion": "3.2",
-      "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+      "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
     },
     "files": [
       {
         "file": "packages/data/definitions/effects/static.json",
-        "sha256": "c1dcfa24afd4302cc5f34049b34dbe99ab5d6d78f2ab15c1ade8d3de47670d4f"
+        "sha256": "2d9253de5254bdd9a261b631d73e99032e032cc503472d833016b3691927564d"
       },
       {
         "file": "packages/data/definitions/effects/static-catalog.json",
-        "sha256": "cd886a9e66cd760cebd3bf9da4f9c80072c66adb4f0e69db7b770f5a0b5131be"
+        "sha256": "635bd3ff5bc6fd3d5710ef885dd6cff0e47640126b3ec1e339b4355177fe04fa"
       },
       {
         "file": "packages/data/definitions/attributes/drive-disc-affixes.json",
@@ -1828,7 +1828,7 @@
               "minimumMindscape": 0,
               "coreSkillLevels": [7]
             },
-            "status": "converted",
+            "status": "corrected",
             "references": [
               {
                 "sourceId": "zzz-hp",
@@ -1843,6 +1843,20 @@
                 "locale": "zh",
                 "resourcePath": "agents/1501/details.zh.json",
                 "pointer": "/passive/level/1501055/desc/0"
+              },
+              {
+                "sourceId": "nanoka-integrated",
+                "version": "3.2",
+                "locale": "zh",
+                "resourcePath": "agents/1501/details.zh.json",
+                "pointer": "/passive/level/1501055/desc/0"
+              },
+              {
+                "sourceId": "nanoka-integrated",
+                "version": "3.2",
+                "locale": "en",
+                "resourcePath": "agents/1501/details.en.json",
+                "pointer": "/passive/level/1501055/desc/0"
               }
             ],
             "effectIds": [
@@ -1850,7 +1864,7 @@
             ],
             "maximumLayers": 1,
             "inputs": [],
-            "differences": [],
+            "differences": ["aria-abloom-ether-precision"],
             "applicability": {}
           }
         ]
@@ -2979,6 +2993,20 @@
               "locale": "zh",
               "resourcePath": "agents/1501/details.zh.json",
               "pointer": "/passive/level/1501055/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1501/details.zh.json",
+              "pointer": "/passive/level/1501055/desc/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1501/details.en.json",
+              "pointer": "/passive/level/1501055/desc/0"
             }
           ]
         },
@@ -3006,7 +3034,7 @@
           "rate": {
             "kind": "constant",
             "unit": "multiplier",
-            "value": 0.01719
+            "value": 0.0171875
           }
         },
         "activation": {
@@ -4109,7 +4137,7 @@
         "packageVersion": "0.2.1",
         "contractVersion": 2,
         "gameVersion": "3.2",
-        "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+        "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
       },
       "request": {
         "actors": [
@@ -4375,7 +4403,7 @@
         "packageVersion": "0.2.1",
         "contractVersion": 2,
         "gameVersion": "3.2",
-        "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+        "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
       },
       "request": {
         "actors": [
@@ -4647,7 +4675,7 @@
         "packageVersion": "0.2.1",
         "contractVersion": 2,
         "gameVersion": "3.2",
-        "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+        "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
       },
       "request": {
         "actors": [
@@ -4911,7 +4939,7 @@
         "packageVersion": "0.2.1",
         "contractVersion": 2,
         "gameVersion": "3.2",
-        "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+        "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
       },
       "request": {
         "actors": [
@@ -7063,7 +7091,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -9531,7 +9559,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -12055,7 +12083,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -14727,7 +14755,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -16434,7 +16462,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -18217,7 +18245,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -20014,7 +20042,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -22001,7 +22029,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -24615,7 +24643,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -27384,7 +27412,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -30030,7 +30058,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -32624,7 +32652,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -35218,7 +35246,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -37812,7 +37840,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -40406,7 +40434,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -43000,7 +43028,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -45870,7 +45898,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -48480,7 +48508,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:true",
         "request": {
@@ -51074,7 +51102,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -53632,7 +53660,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -53817,7 +53845,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.374397
+                    "value": 3.3739062500000006
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -53963,20 +53991,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.0615955,
+                    "damageMultiplier": 5.060859375000001,
                     "finalStat": 1577.2128
                   }
                 ]
               }
             },
-            "nonCritical": 30930.68403501492,
-            "critical": 30930.68403501492,
+            "nonCritical": 30926.18568073409,
+            "critical": 30926.18568073409,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 30930.68403501492,
+            "expected": 30926.18568073409,
             "factors": {
               "nonCritical": {
-                "baseDamage": 7983.2132110224,
+                "baseDamage": 7982.0521852500015,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.45449341728677733,
@@ -53989,7 +54017,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 7983.2132110224,
+                "baseDamage": 7982.0521852500015,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.45449341728677733,
@@ -56428,7 +56456,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -56717,7 +56745,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.374397
+                    "value": 3.3739062500000006
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -56863,20 +56891,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.0615955,
+                    "damageMultiplier": 5.060859375000001,
                     "finalStat": 1577.2128
                   }
                 ]
               }
             },
-            "nonCritical": 30930.68403501492,
-            "critical": 38663.35504376865,
+            "nonCritical": 30926.18568073409,
+            "critical": 38657.73210091761,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0.7315,
-            "expected": 36587.13287791827,
+            "expected": 36581.81188709833,
             "factors": {
               "nonCritical": {
-                "baseDamage": 7983.2132110224,
+                "baseDamage": 7982.0521852500015,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.45449341728677733,
@@ -56889,7 +56917,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 7983.2132110224,
+                "baseDamage": 7982.0521852500015,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.45449341728677733,
@@ -59064,7 +59092,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -59275,7 +59303,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.374397
+                    "value": 3.3739062500000006
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -59421,20 +59449,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.0615955,
+                    "damageMultiplier": 5.060859375000001,
                     "finalStat": 1577.2128
                   }
                 ]
               }
             },
-            "nonCritical": 34023.752438516414,
-            "critical": 34023.752438516414,
+            "nonCritical": 34018.8042488075,
+            "critical": 34018.8042488075,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 34023.752438516414,
+            "expected": 34018.8042488075,
             "factors": {
               "nonCritical": {
-                "baseDamage": 7983.2132110224,
+                "baseDamage": 7982.0521852500015,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.45449341728677733,
@@ -59447,7 +59475,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 7983.2132110224,
+                "baseDamage": 7982.0521852500015,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.45449341728677733,
@@ -61886,7 +61914,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -62201,7 +62229,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.374397
+                    "value": 3.3739062500000006
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -62347,20 +62375,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.0615955,
+                    "damageMultiplier": 5.060859375000001,
                     "finalStat": 1577.2128
                   }
                 ]
               }
             },
-            "nonCritical": 34023.752438516414,
-            "critical": 42529.69054814552,
+            "nonCritical": 34018.8042488075,
+            "critical": 42523.50531100937,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0.7315,
-            "expected": 40245.84616571011,
+            "expected": 40239.99307580817,
             "factors": {
               "nonCritical": {
-                "baseDamage": 7983.2132110224,
+                "baseDamage": 7982.0521852500015,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.45449341728677733,
@@ -62373,7 +62401,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 7983.2132110224,
+                "baseDamage": 7982.0521852500015,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.45449341728677733,
@@ -63881,7 +63909,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -65928,7 +65956,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -67771,7 +67799,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -69844,7 +69872,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -72686,7 +72714,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -72990,7 +73018,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.374397
+                    "value": 3.3739062500000006
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -73074,20 +73102,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.0615955,
+                    "damageMultiplier": 5.060859375000001,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 62313.097477116986,
-            "critical": 62313.097477116986,
+            "nonCritical": 62304.03507201561,
+            "critical": 62304.03507201561,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 62313.097477116986,
+            "expected": 62304.03507201561,
             "factors": {
               "nonCritical": {
-                "baseDamage": 10816.6295835,
+                "baseDamage": 10815.056484375002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -73100,7 +73128,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 10816.6295835,
+                "baseDamage": 10815.056484375002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -75845,7 +75873,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -76253,7 +76281,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.374397
+                    "value": 3.3739062500000006
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -76337,20 +76365,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.0615955,
+                    "damageMultiplier": 5.060859375000001,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 62313.097477116986,
-            "critical": 77891.37184639623,
+            "nonCritical": 62304.03507201561,
+            "critical": 77880.04384001951,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0.7315,
-            "expected": 73708.60517824476,
+            "expected": 73697.88548581046,
             "factors": {
               "nonCritical": {
-                "baseDamage": 10816.6295835,
+                "baseDamage": 10815.056484375002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -76363,7 +76391,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 10816.6295835,
+                "baseDamage": 10815.056484375002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -78844,7 +78872,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -79148,7 +79176,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.374397
+                    "value": 3.3739062500000006
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -79232,20 +79260,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.0615955,
+                    "damageMultiplier": 5.060859375000001,
                     "finalStat": 2873
                   }
                 ]
               }
             },
-            "nonCritical": 83774.22978556721,
-            "critical": 83774.22978556721,
+            "nonCritical": 83762.04621520865,
+            "critical": 83762.04621520865,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 83774.22978556721,
+            "expected": 83762.04621520865,
             "factors": {
               "nonCritical": {
-                "baseDamage": 14541.9638715,
+                "baseDamage": 14539.848984375001,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -79258,7 +79286,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 14541.9638715,
+                "baseDamage": 14539.848984375001,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -81739,7 +81767,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -82043,7 +82071,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.374397
+                    "value": 3.3739062500000006
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -82127,20 +82155,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.0615955,
+                    "damageMultiplier": 5.060859375000001,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 83409.69474209704,
-            "critical": 83409.69474209704,
+            "nonCritical": 83397.56418730617,
+            "critical": 83397.56418730617,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 83409.69474209704,
+            "expected": 83397.56418730617,
             "factors": {
               "nonCritical": {
-                "baseDamage": 10816.6295835,
+                "baseDamage": 10815.056484375002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 4.27,
                 "defense": 0.5450264619270873,
@@ -82153,7 +82181,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 10816.6295835,
+                "baseDamage": 10815.056484375002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 4.27,
                 "defense": 0.5450264619270873,
@@ -84634,7 +84662,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -84938,7 +84966,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.374397
+                    "value": 3.3739062500000006
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -85022,20 +85050,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.0615955,
+                    "damageMultiplier": 5.060859375000001,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 70629.78482002912,
-            "critical": 70629.78482002912,
+            "nonCritical": 70619.51289088136,
+            "critical": 70619.51289088136,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 70629.78482002912,
+            "expected": 70619.51289088136,
             "factors": {
               "nonCritical": {
-                "baseDamage": 10816.6295835,
+                "baseDamage": 10815.056484375002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.6177690290756028,
@@ -85048,7 +85076,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 10816.6295835,
+                "baseDamage": 10815.056484375002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.6177690290756028,
@@ -87529,7 +87557,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -87833,7 +87861,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.374397
+                    "value": 3.3739062500000006
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -87917,20 +87945,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.0615955,
+                    "damageMultiplier": 5.060859375000001,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 65270.125707780935,
-            "critical": 65270.125707780935,
+            "nonCritical": 65260.6332520352,
+            "critical": 65260.6332520352,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 65270.125707780935,
+            "expected": 65260.6332520352,
             "factors": {
               "nonCritical": {
-                "baseDamage": 10816.6295835,
+                "baseDamage": 10815.056484375002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5708903444755214,
@@ -87943,7 +87971,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 10816.6295835,
+                "baseDamage": 10815.056484375002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5708903444755214,
@@ -90424,7 +90452,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -90728,7 +90756,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.374397
+                    "value": 3.3739062500000006
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -90812,20 +90840,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.0615955,
+                    "damageMultiplier": 5.060859375000001,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 49367.964888467475,
-            "critical": 49367.964888467475,
+            "nonCritical": 49360.785137901985,
+            "critical": 49360.785137901985,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 49367.964888467475,
+            "expected": 49360.785137901985,
             "factors": {
               "nonCritical": {
-                "baseDamage": 10816.6295835,
+                "baseDamage": 10815.056484375002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.4717845729632375,
@@ -90838,7 +90866,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 10816.6295835,
+                "baseDamage": 10815.056484375002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.4717845729632375,
@@ -93319,7 +93347,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -93623,7 +93651,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.374397
+                    "value": 3.3739062500000006
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -93707,20 +93735,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.0615955,
+                    "damageMultiplier": 5.060859375000001,
                     "finalStat": 2831
                   }
                 ]
               }
             },
-            "nonCritical": 75609.90820559389,
-            "critical": 75609.90820559389,
+            "nonCritical": 75598.91200021205,
+            "critical": 75598.91200021205,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 75609.90820559389,
+            "expected": 75598.91200021205,
             "factors": {
               "nonCritical": {
-                "baseDamage": 14329.3768605,
+                "baseDamage": 14327.292890625002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 2.57,
                 "defense": 0.6196396101108953,
@@ -93733,7 +93761,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 14329.3768605,
+                "baseDamage": 14327.292890625002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 2.57,
                 "defense": 0.6196396101108953,
@@ -96490,7 +96518,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -96794,7 +96822,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.374397
+                    "value": 3.3739062500000006
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -96878,20 +96906,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.0615955,
+                    "damageMultiplier": 5.060859375000001,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 62313.097477116986,
-            "critical": 62313.097477116986,
+            "nonCritical": 62304.03507201561,
+            "critical": 62304.03507201561,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 62313.097477116986,
+            "expected": 62304.03507201561,
             "factors": {
               "nonCritical": {
-                "baseDamage": 10816.6295835,
+                "baseDamage": 10815.056484375002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -96904,7 +96932,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 10816.6295835,
+                "baseDamage": 10815.056484375002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -99401,7 +99429,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:true",
         "request": {
@@ -99705,7 +99733,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 4.153104000000001
+                    "value": 4.152500000000001
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -99789,20 +99817,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 6.229656000000001,
+                    "damageMultiplier": 6.228750000000002,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 76693.0430487594,
-            "critical": 76693.0430487594,
+            "nonCritical": 76681.88931940385,
+            "critical": 76681.88931940385,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 76693.0430487594,
+            "expected": 76681.88931940385,
             "factors": {
               "nonCritical": {
-                "baseDamage": 13312.774872000002,
+                "baseDamage": 13310.838750000003,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -99815,7 +99843,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 13312.774872000002,
+                "baseDamage": 13310.838750000003,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -102296,7 +102324,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -102600,7 +102628,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.374397
+                    "value": 3.3739062500000006
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -102663,20 +102691,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 3.374397,
+                    "damageMultiplier": 3.3739062500000006,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 27694.709989829775,
-            "critical": 27694.709989829775,
+            "nonCritical": 27690.68225422917,
+            "critical": 27690.68225422917,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 27694.709989829775,
+            "expected": 27690.68225422917,
             "factors": {
               "nonCritical": {
-                "baseDamage": 7211.086389,
+                "baseDamage": 7210.037656250001,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -102689,7 +102717,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 7211.086389,
+                "baseDamage": 7210.037656250001,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -105031,7 +105059,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -105226,7 +105254,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.374397
+                    "value": 3.3739062500000006
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -105414,20 +105442,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.0615955,
+                    "damageMultiplier": 5.060859375000001,
                     "finalStat": 1577.2128
                   }
                 ]
               }
             },
-            "nonCritical": 35590.21063912524,
-            "critical": 35590.21063912524,
+            "nonCritical": 35585.034634087555,
+            "critical": 35585.034634087555,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 35590.21063912524,
+            "expected": 35585.034634087555,
             "factors": {
               "nonCritical": {
-                "baseDamage": 7983.2132110224,
+                "baseDamage": 7982.0521852500015,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.5229601917959796,
@@ -105440,7 +105468,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 7983.2132110224,
+                "baseDamage": 7982.0521852500015,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.5229601917959796,
@@ -107888,7 +107916,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -110950,7 +110978,7 @@
           "packageVersion": "0.2.1",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+          "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -111217,7 +111245,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.374397
+                    "value": 3.3739062500000006
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -111301,20 +111329,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.0615955,
+                    "damageMultiplier": 5.060859375000001,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 49367.964888467475,
-            "critical": 49367.964888467475,
+            "nonCritical": 49360.785137901985,
+            "critical": 49360.785137901985,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 49367.964888467475,
+            "expected": 49360.785137901985,
             "factors": {
               "nonCritical": {
-                "baseDamage": 10816.6295835,
+                "baseDamage": 10815.056484375002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.4717845729632375,
@@ -111327,7 +111355,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 10816.6295835,
+                "baseDamage": 10815.056484375002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.4717845729632375,
@@ -138145,5 +138173,306 @@
     "Only Ether corruption explicit events, core F/7, M2 and signature R1 are migrated. No auto-trigger, rotation, other release elements, M6, or optimizer equivalence claim.",
     "External saved source readings are authored observations, not a claim of independently calculated Alice/Burnice equipment.",
     "Generic catalog statSource is explicit and need not equal anomalySource; validation follows the existing API, with trace assertions for the declared ownership."
+  ],
+  "fairyCorrections": [
+    {
+      "id": "aria-abloom-precision-revision-42",
+      "base": "598ebdfae35f05cc92bf273f516207edfca3d959",
+      "originalFixtureSha256": "2539cc19abe749da0ce7531f9b75abafb7d99320718000de5ccfd8a893cff087",
+      "previousDataVersion": {
+        "packageVersion": "0.2.1",
+        "contractVersion": 2,
+        "gameVersion": "3.2",
+        "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"
+      },
+      "formula": "27.5 / 100 / 10 * 0.625 * initialAM; stun ratio once; unchanged historical source/factors; M1 stays continuous",
+      "preservedNativeSha256": "ee2e733d3dbf0cd947960393fc43492b7cee6e616843538d28a66b71908c9348",
+      "previousComparison": {
+        "common": 538,
+        "differences": 164,
+        "equalDamage": 10,
+        "multiplierDifferences": 16
+      },
+      "records": [
+        {
+          "id": "aria-release-ordinary-0-exclusive-0",
+          "initialAM": 196.3,
+          "before": {
+            "multiplier": 5.0615955,
+            "nonCritical": 30930.68403501492,
+            "critical": 30930.68403501492,
+            "expected": 30930.68403501492
+          },
+          "after": {
+            "multiplier": 5.060859375000001,
+            "nonCritical": 30926.18568073409,
+            "critical": 30926.18568073409,
+            "expected": 30926.18568073409
+          }
+        },
+        {
+          "id": "aria-release-ordinary-0-exclusive-1",
+          "initialAM": 196.3,
+          "before": {
+            "multiplier": 5.0615955,
+            "nonCritical": 30930.68403501492,
+            "critical": 38663.35504376865,
+            "expected": 36587.13287791827
+          },
+          "after": {
+            "multiplier": 5.060859375000001,
+            "nonCritical": 30926.18568073409,
+            "critical": 38657.73210091761,
+            "expected": 36581.81188709833
+          }
+        },
+        {
+          "id": "aria-release-ordinary-1-exclusive-0",
+          "initialAM": 196.3,
+          "before": {
+            "multiplier": 5.0615955,
+            "nonCritical": 34023.752438516414,
+            "critical": 34023.752438516414,
+            "expected": 34023.752438516414
+          },
+          "after": {
+            "multiplier": 5.060859375000001,
+            "nonCritical": 34018.8042488075,
+            "critical": 34018.8042488075,
+            "expected": 34018.8042488075
+          }
+        },
+        {
+          "id": "aria-release-ordinary-1-exclusive-1",
+          "initialAM": 196.3,
+          "before": {
+            "multiplier": 5.0615955,
+            "nonCritical": 34023.752438516414,
+            "critical": 42529.69054814552,
+            "expected": 40245.84616571011
+          },
+          "after": {
+            "multiplier": 5.060859375000001,
+            "nonCritical": 34018.8042488075,
+            "critical": 42523.50531100937,
+            "expected": 40239.99307580817
+          }
+        },
+        {
+          "id": "aria-saved",
+          "initialAM": 196.3,
+          "before": {
+            "multiplier": 5.0615955,
+            "nonCritical": 62313.097477116986,
+            "critical": 62313.097477116986,
+            "expected": 62313.097477116986
+          },
+          "after": {
+            "multiplier": 5.060859375000001,
+            "nonCritical": 62304.03507201561,
+            "critical": 62304.03507201561,
+            "expected": 62304.03507201561
+          }
+        },
+        {
+          "id": "aria-saved-exclusive",
+          "initialAM": 196.3,
+          "before": {
+            "multiplier": 5.0615955,
+            "nonCritical": 62313.097477116986,
+            "critical": 77891.37184639623,
+            "expected": 73708.60517824476
+          },
+          "after": {
+            "multiplier": 5.060859375000001,
+            "nonCritical": 62304.03507201561,
+            "critical": 77880.04384001951,
+            "expected": 73697.88548581046
+          }
+        },
+        {
+          "id": "aria-saved-attack",
+          "initialAM": 196.3,
+          "before": {
+            "multiplier": 5.0615955,
+            "nonCritical": 83774.22978556721,
+            "critical": 83774.22978556721,
+            "expected": 83774.22978556721
+          },
+          "after": {
+            "multiplier": 5.060859375000001,
+            "nonCritical": 83762.04621520865,
+            "critical": 83762.04621520865,
+            "expected": 83762.04621520865
+          }
+        },
+        {
+          "id": "aria-saved-proficiency",
+          "initialAM": 196.3,
+          "before": {
+            "multiplier": 5.0615955,
+            "nonCritical": 83409.69474209704,
+            "critical": 83409.69474209704,
+            "expected": 83409.69474209704
+          },
+          "after": {
+            "multiplier": 5.060859375000001,
+            "nonCritical": 83397.56418730617,
+            "critical": 83397.56418730617,
+            "expected": 83397.56418730617
+          }
+        },
+        {
+          "id": "aria-saved-penetrationRatio",
+          "initialAM": 196.3,
+          "before": {
+            "multiplier": 5.0615955,
+            "nonCritical": 70629.78482002912,
+            "critical": 70629.78482002912,
+            "expected": 70629.78482002912
+          },
+          "after": {
+            "multiplier": 5.060859375000001,
+            "nonCritical": 70619.51289088136,
+            "critical": 70619.51289088136,
+            "expected": 70619.51289088136
+          }
+        },
+        {
+          "id": "aria-saved-penetrationValue",
+          "initialAM": 196.3,
+          "before": {
+            "multiplier": 5.0615955,
+            "nonCritical": 65270.125707780935,
+            "critical": 65270.125707780935,
+            "expected": 65270.125707780935
+          },
+          "after": {
+            "multiplier": 5.060859375000001,
+            "nonCritical": 65260.6332520352,
+            "critical": 65260.6332520352,
+            "expected": 65260.6332520352
+          }
+        },
+        {
+          "id": "aria-saved-level",
+          "initialAM": 196.3,
+          "before": {
+            "multiplier": 5.0615955,
+            "nonCritical": 49367.964888467475,
+            "critical": 49367.964888467475,
+            "expected": 49367.964888467475
+          },
+          "after": {
+            "multiplier": 5.060859375000001,
+            "nonCritical": 49360.785137901985,
+            "critical": 49360.785137901985,
+            "expected": 49360.785137901985
+          }
+        },
+        {
+          "id": "aria-saved-replaced-source",
+          "initialAM": 196.3,
+          "before": {
+            "multiplier": 5.0615955,
+            "nonCritical": 75609.90820559389,
+            "critical": 75609.90820559389,
+            "expected": 75609.90820559389
+          },
+          "after": {
+            "multiplier": 5.060859375000001,
+            "nonCritical": 75598.91200021205,
+            "critical": 75598.91200021205,
+            "expected": 75598.91200021205
+          }
+        },
+        {
+          "id": "aria-changed-current",
+          "initialAM": 196.3,
+          "before": {
+            "multiplier": 5.0615955,
+            "nonCritical": 62313.097477116986,
+            "critical": 62313.097477116986,
+            "expected": 62313.097477116986
+          },
+          "after": {
+            "multiplier": 5.060859375000001,
+            "nonCritical": 62304.03507201561,
+            "critical": 62304.03507201561,
+            "expected": 62304.03507201561
+          }
+        },
+        {
+          "id": "aria-changed-initial-mastery",
+          "initialAM": 241.60000000000002,
+          "before": {
+            "multiplier": 6.229656000000001,
+            "nonCritical": 76693.0430487594,
+            "critical": 76693.0430487594,
+            "expected": 76693.0430487594
+          },
+          "after": {
+            "multiplier": 6.228750000000002,
+            "nonCritical": 76681.88931940385,
+            "critical": 76681.88931940385,
+            "expected": 76681.88931940385
+          }
+        },
+        {
+          "id": "aria-not-stunned",
+          "initialAM": 196.3,
+          "before": {
+            "multiplier": 3.374397,
+            "nonCritical": 27694.709989829775,
+            "critical": 27694.709989829775,
+            "expected": 27694.709989829775
+          },
+          "after": {
+            "multiplier": 3.3739062500000006,
+            "nonCritical": 27690.68225422917,
+            "critical": 27690.68225422917,
+            "expected": 27690.68225422917
+          }
+        },
+        {
+          "id": "aria-release-defense",
+          "initialAM": 196.3,
+          "before": {
+            "multiplier": 5.0615955,
+            "nonCritical": 35590.21063912524,
+            "critical": 35590.21063912524,
+            "expected": 35590.21063912524
+          },
+          "after": {
+            "multiplier": 5.060859375000001,
+            "nonCritical": 35585.034634087555,
+            "critical": 35585.034634087555,
+            "expected": 35585.034634087555
+          }
+        },
+        {
+          "id": "aria-saved-self",
+          "initialAM": 196.3,
+          "before": {
+            "multiplier": 5.0615955,
+            "nonCritical": 49367.964888467475,
+            "critical": 49367.964888467475,
+            "expected": 49367.964888467475
+          },
+          "after": {
+            "multiplier": 5.060859375000001,
+            "nonCritical": 49360.785137901985,
+            "critical": 49360.785137901985,
+            "expected": 49360.785137901985
+          }
+        }
+      ],
+      "currentComparison": {
+        "common": 583,
+        "differences": 119,
+        "equalDamage": 19,
+        "multiplierDifferences": 0
+      }
+    }
   ]
 }

@@ -1,3 +1,4 @@
+import { ariaAbloomConsumerSource } from "./fixtures/aria-abloom-consumer.ts"
 import { roxyCoreWindConsumerSource } from "./fixtures/roxy-core-wind-consumer.ts"
 import { windDriveDiscConsumerSource } from "./fixtures/drive-disc-wind-consumer.ts"
 import { claretInitialConversionConsumerSource } from "./fixtures/claret-initial-conversion-consumer.ts"
@@ -130,6 +131,8 @@ ${lucyGuardBoarConsumerSource}
 globalThis.fairyLucyGuardBoar = async () => verifyLucyGuardBoarConsumer(api, await import("@randomplay/core"))
 ${hugoAttackConsumerSource}
 globalThis.fairyHugoAttack = async () => verifyHugoAttackConsumer(api, await import("@randomplay/core"))
+${ariaAbloomConsumerSource}
+globalThis.fairyAriaAbloom = async () => verifyAriaAbloomConsumer(api, await import("@randomplay/core"))
 ${roxyMindscapeConsumerSource}
 globalThis.fairyRoxyMindscapes = async () => verifyRoxyMindscapeConsumer(api, await import("@randomplay/core"))
 ${roxyWindEyeConsumerSource}
@@ -989,6 +992,19 @@ function defineScenarios(counts: {
             "definitions/effects/static.json",
             "definitions/effects/static-catalog.json",
           ],
+        },
+      ],
+    },
+    {
+      name: "aria-abloom-precision",
+      steps: [
+        {
+          name: "three-elements-and-continuous-m1",
+          act: async (page) => {
+            expect(
+              await page.evaluate(() => (globalThis as any).fairyAriaAbloom()),
+            ).toEqual({ correctedElements: 3, criticalRate: 0.7315 })
+          },
         },
       ],
     },

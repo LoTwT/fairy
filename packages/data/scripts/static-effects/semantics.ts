@@ -76,6 +76,16 @@ export const HUGO_ATTACK_COUNT_DESCRIPTION =
   "调用方声明其他击破队友人数：0 关闭，1/2 人分别获得对应核心档的一倍/三倍固定攻击力；不自动计数，不要求失衡或暗渊回响。旧 3 层须迁移为新 2 人；核心 7 的旧 2 层 +600 改为二人 +900，一人仍 +300。"
 
 export type SourceSemantics =
+  | {
+      /** 已展开的来源转化率发生舍入；以独立原文及单次异常基数恢复精度。 */
+      readonly kind: "source-conversion-rate-correction"
+      readonly expectedEncoding: SourceRecordShape
+      readonly expectedSourceBlockNote: string
+      readonly correctedRate: number
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
   | (Omit<CoreSkillLevelSemantics, "kind"> & {
       readonly kind: "hugo-stun-teammate-count"
       readonly expectedRaw: SourceRecordShape
@@ -2043,7 +2053,86 @@ function yanagiPolarityIsolation(
   }
 }
 
+const ariaAbloomSourceNote =
+  "爱芮的异常精通提升90点；\n爱芮的第三段[普通攻击：绝对音准]重击命中处于以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、冰属性异常状态、风属性异常状态的目标时，触发一次[异放]：额外结算一次属性异常伤害，相对于原属性异常伤害的比例为每10点初始异常掌控27.5%/14.3%/35.7%/2.5%/3.6%/1.4%；\n当目标处于失衡状态下时，该伤害比例额外提升50%。"
+
+const ariaAbloomPrecisionCorrections = Object.fromEntries(
+  (
+    [
+      ["ether", "以太", "eff-ms36k7q1-vqttu0", 171.9, 253, 27.5, 0.625],
+      ["electric", "电", "eff-ms36muwl-79wv54", 178.8, null, 14.3, 1.25],
+      ["physical", "物理", "eff-ms36oy6h-izqgcq", 178.3, null, 2.5, 7.13],
+    ] as const
+  ).map(
+    ([
+      element,
+      sourceElement,
+      id,
+      ratioPercent,
+      defaultBase,
+      percent,
+      base,
+    ]) => [
+      `agents/aria/mindscape/0/blk-ms36joa0-0vxxo8/${id}`,
+      {
+        kind: "source-conversion-rate-correction",
+        expectedEncoding: {
+          id,
+          origin: "",
+          scope: "general",
+          applyTarget: "self",
+          applySituation: "global",
+          applyProfession: null,
+          teamProfession: null,
+          teamProfessionValues: null,
+          teamProfessionMinCount: null,
+          skillSubcategoryId: null,
+          elementFilter: [sourceElement],
+          kind: "convert",
+          stat: "anomalyReleaseMult",
+          value: 0,
+          stackable: false,
+          maxStacks: 1,
+          valuePerStack: 0,
+          defaultStacks: 1,
+          convert: {
+            from: "anomalyControl",
+            panelSource: "external",
+            ratioPercent,
+            cap: null,
+            defaultBase,
+            initialBase: 0,
+          },
+          appliesToAnomaly: true,
+          enabledDefault: true,
+          note: "",
+        },
+        expectedSourceBlockNote: ariaAbloomSourceNote,
+        // Percent per ten mastery points × one original anomaly proc; no display rounding.
+        correctedRate: (percent * base) / 1000,
+        differenceId: `aria-abloom-${element}-precision`,
+        evidence: [
+          {
+            path: "agents/1501/details.zh.json",
+            pointer: "/passive/level/1501055/desc/0",
+            sha256:
+              "49b5cf61dc4a979025af0a7a31ef90ca39e7c46612098f6f694dbdf81202714f",
+          },
+          {
+            path: "agents/1501/details.en.json",
+            pointer: "/passive/level/1501055/desc/0",
+            sha256:
+              "17b4397e84e89b982e5beffaf060fa61ce4716b74eed6ea5b88e8e9cdbcceb36",
+          },
+        ],
+        verification: `Nanoka 3.2 中英核心 7（1501055/desc/0）与固定 ZZZ-HP 块原文同文：${sourceElement}异放每 10 点初始异常掌控结算原异常的 ${percent}%。原异常单次倍率 ${base}（原始攻略 3.1.2—3.1.5；持续异常不取整段总和），每点系数为 ${percent} / 100 / 10 × ${base} = ${(Number(percent) * Number(base)) / 1000}。固定来源 ratioPercent=${ratioPercent} 已舍入；只替换该完整身份的转化率，保留初始掌控、核心 7、元素与一次失衡 ×1.5 的独立规则，不修改 M1 连续表达式。原值和引用保留；raw/normalized 完整编码与块 note 漂移均拒绝生成。推导及六属性审查见静态效果规范修订 42。`,
+      } satisfies SourceSemantics,
+    ],
+  ),
+)
+
 export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
+  ...ariaAbloomPrecisionCorrections,
   [HUGO_ATTACK_SOURCE_KEY]: {
     kind: "hugo-stun-teammate-count",
     baseEvidenceKey: "hugo:blk-legacy:mindscape:0:legacy-self-atk",
