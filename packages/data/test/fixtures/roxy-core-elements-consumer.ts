@@ -16,56 +16,122 @@ async function makeRoxyCoreElementsFixture(api) {
   return {data,options,actor,request}
 }
 
-async function verifyRoxyCoreElementsConsumer(api,engine) {
-  const {request,actor}=await makeRoxyCoreElementsFixture(api)
+function makeRoxyCoreElementsConsumerScenarios(engine) {
   const require=(value,message)=>{if(!value)throw new Error("Roxy elemental core: "+message)}
   const close=(actual,expected)=>require(Math.abs(actual-expected)<1e-7,actual+" != "+expected)
   const run=input=>{const r=engine.calculateStaticActionDamage(input);require(r.ok&&r.value.kind==="damage",JSON.stringify(r));return r.value}
   const contributions=result=>result.segments[0].damage.evaluation.contributions.filter(c=>c.origin.effectId.includes(":core-element-"))
   const added=result=>contributions(result).reduce((sum,c)=>sum+c.value.value,0)
-  const electric=run(request());close(electric.totals.nonCritical,4789);close(electric.totals.expected,5627.075)
-  const unactivated=run(request("1011","0009",["fire"]));close(unactivated.totals.expected,5387.625);close(added(unactivated),0)
-  close(run(request("1011","0006",["electric"])).totals.expected,709.875)
-  close(run(request("1011","0006",["physical"])).totals.expected,741.425)
-  const wind=run(request("1621","0008",["electric","fire","ice"]));close(wind.totals.expected,1236.1);require(contributions(wind).length===1,"wind counted once")
-  const sharp=run(request("1611","0009"));close(sharp.totals.expected,2138.77);require(contributions(sharp).length===1&&contributions(sharp)[0].address.stat==="sharpCriticalDamage","Armorer uses sharp channel")
-  close(run(request("1091","0008",["ice"])).totals.expected,1487.55)
-  close(run(request("1041","0010",["fire"])).totals.expected,1306.6)
-  close(run(request("1191","0009",["ice"])).totals.expected,2346.475)
-  close(run(request("1031","0001",["ether"])).totals.expected,1494.6)
-  const ink=run(request("1371","0006",["ether"]));close(added(ink),.2)
-  close(added(run(request("1371","0006",["ice"]))),0)
+  const rejected=(input,code)=>{const r=engine.calculateStaticActionDamage(input);require(!r.ok&&r.issues.some(i=>i.code===code),"expected "+code+": "+JSON.stringify(r))}
+  const scenarios=[
+    {name:"Anby electric action with active electric buff",verify:({request})=>{
+      const electric=run(request());close(electric.totals.nonCritical,4789);close(electric.totals.expected,5627.075)
+      return {electric:electric.totals.expected}
+    }},
+    {name:"Anby electric action with inactive electric buff",verify:({request})=>{
+      const unactivated=run(request("1011","0009",["fire"]));close(unactivated.totals.expected,5387.625);close(added(unactivated),0)
+      return {unactivated:unactivated.totals.expected}
+    }},
+    {name:"Anby physical action requires physical buff",verify:({request})=>{
+      close(run(request("1011","0006",["electric"])).totals.expected,709.875)
+      close(run(request("1011","0006",["physical"])).totals.expected,741.425)
+      return {}
+    }},
+    {name:"Roxy wind action counts multiple active elements once",verify:({request})=>{
+      const wind=run(request("1621","0008",["electric","fire","ice"]));close(wind.totals.expected,1236.1);require(contributions(wind).length===1,"wind counted once")
+      return {wind:wind.totals.expected}
+    }},
+    {name:"Claret electric action uses Armorer sharp channel",verify:({request})=>{
+      const sharp=run(request("1611","0009"));close(sharp.totals.expected,2138.77);require(contributions(sharp).length===1&&contributions(sharp)[0].address.stat==="sharpCriticalDamage","Armorer uses sharp channel")
+      return {sharp:sharp.totals.expected}
+    }},
+    {name:"Miyabi frost action uses ice buff",verify:({request})=>{
+      close(run(request("1091","0008",["ice"])).totals.expected,1487.55)
+      return {}
+    }},
+    {name:"Soldier 11 fire action uses fire buff",verify:({request})=>{
+      close(run(request("1041","0010",["fire"])).totals.expected,1306.6)
+      return {}
+    }},
+    {name:"Ellen ice action uses ice buff",verify:({request})=>{
+      close(run(request("1191","0009",["ice"])).totals.expected,2346.475)
+      return {}
+    }},
+    {name:"Nicole ether action uses ether buff",verify:({request})=>{
+      close(run(request("1031","0001",["ether"])).totals.expected,1494.6)
+      return {}
+    }},
+    {name:"Yixuan auric-ink action requires ether buff",verify:({request})=>{
+      const ink=run(request("1371","0006",["ether"]));close(added(ink),.2)
+      close(added(run(request("1371","0006",["ice"]))),0)
+      return {}
+    }},
+  ]
   // 中英七档独立来源表；以下帽值不从生成器或目录读取。
   const normalCaps=[.22,.25,.28,.31,.34,.37,.4], sharpCaps=[.1,.115,.13,.145,.16,.175,.2]
   for(let rank=1;rank<=7;rank++) {
-    for(const [agentId,coefficient,caps] of [["1011",.4,normalCaps],["1611",.2,sharpCaps]]) {
-      for(const cr of [.25,2]) {
-        const r=run(request(agentId,"0009",["electric"],rank,cr))
-        const expected=Math.min(caps[rank-1],coefficient*cr)
-        close(added(r),expected)
-        close(r.totals.critical,r.totals.nonCritical*(1+.5+expected))
-        close(r.totals.expected,r.totals.nonCritical*(1+.25*(.5+expected)))
-      }
+    for(const [profession,agentId,coefficient,caps] of [["normal","1011",.4,normalCaps],["Armorer","1611",.2,sharpCaps]]) {
+      scenarios.push({name:profession+" core "+rank+" uncapped and capped source CR",verify:({request})=>{
+        for(const cr of [.25,2]) {
+          const r=run(request(agentId,"0009",["electric"],rank,cr))
+          const expected=Math.min(caps[rank-1],coefficient*cr)
+          close(added(r),expected)
+          close(r.totals.critical,r.totals.nonCritical*(1+.5+expected))
+          close(r.totals.expected,r.totals.nonCritical*(1+.25*(.5+expected)))
+        }
+        return {}
+      }})
     }
   }
-  const closed=request();closed.selections=closed.selections.map(s=>({...s,layers:0}));closed.inputs=[]
-  close(run(closed).totals.expected,5387.625)
-  const absent=request();absent.selections=[];absent.inputs=[];close(run(absent).totals.expected,5387.625)
-  const old=request();old.selections=old.selections.map(({activeBuffElements,...s})=>({...s,optionId:s.optionId.replace("core-element","core-wind")}));close(run(old).totals.expected,5387.625)
-  const rejected=(input,code)=>{const r=engine.calculateStaticActionDamage(input);require(!r.ok&&r.issues.some(i=>i.code===code),"expected "+code+": "+JSON.stringify(r))}
-  const missing=request();missing.selections=missing.selections.map(({activeBuffElements,...s})=>s);rejected(missing,"MISSING_FACT")
-  rejected(request("1011","0009",["wind"]),"INVALID_INPUT")
-  rejected(request("1011","0009",["electric","electric"]),"DUPLICATE_ID")
-  const mixed=request();mixed.selections.push({...old.selections[0]});rejected(mixed,"CONTEXT_MISMATCH")
-  const external=request();external.inputs.push({bindingId:"binding:entity:roxy:agent:1621",name:"roxy:core:active-buff:fire",value:{unit:"count",value:1}});rejected(external,"DUPLICATE_ID")
-  const equipped=request();const holder=actor("entity:roxy","1621");holder.panel={mode:"equipment"};holder.wEngine={entityId:"14162",refinement:1,eligible:true}
-  holder.driveDiscs=Object.fromEntries([1,2,3,4,5,6].map(slot=>[slot,{setEntityId:slot<=4?"31200":"31000",mainStat:slot===1?{attribute:"health"}:slot===2?{attribute:"attack"}:slot===3?{attribute:"defense"}:slot===4?{attribute:"criticalRate"}:slot===5?{attribute:"damageBonus",element:"wind"}:{attribute:"impact"},substats:slot===4?[]:[{attribute:"criticalRate",operation:"ratio-add",rolls:1}]}]))
-  equipped.actors=[holder,equipped.actors[1]]
-  const panel=run({...equipped,selections:[],inputs:[]}).panels.find(p=>p.entityId==="entity:roxy")
-  // 基础 .05 + 核心7 .144 + 主词条 .24 + 五次副词条 .12 + 啄木鸟二件套 .08。
-  close(panel.stats.criticalRate.value,.634)
-  equipped.inputs[0].value.value=panel.stats.criticalRate.value
-  const fromEquipment=run(equipped);close(added(fromEquipment),.2536);close(fromEquipment.totals.expected,5691.2476)
-  return {electric:electric.totals.expected,unactivated:unactivated.totals.expected,wind:wind.totals.expected,sharp:sharp.totals.expected,sourceCriticalRate:panel.stats.criticalRate.value,equipped:fromEquipment.totals.expected}
+  scenarios.push(
+    {name:"disabled and absent selections need no source CR",verify:({request})=>{
+      const closed=request();closed.selections=closed.selections.map(s=>({...s,layers:0}));closed.inputs=[]
+      close(run(closed).totals.expected,5387.625)
+      const absent=request();absent.selections=[];absent.inputs=[];close(run(absent).totals.expected,5387.625)
+      return {}
+    }},
+    {name:"legacy wind scope and mixed state rejection",verify:({request})=>{
+      const old=request();old.selections=old.selections.map(({activeBuffElements,...s})=>({...s,optionId:s.optionId.replace("core-element","core-wind")}));close(run(old).totals.expected,5387.625)
+      const mixed=request();mixed.selections.push({...old.selections[0]});rejected(mixed,"CONTEXT_MISMATCH")
+      return {}
+    }},
+    {name:"missing active elements are rejected",verify:({request})=>{
+      const missing=request();missing.selections=missing.selections.map(({activeBuffElements,...s})=>s);rejected(missing,"MISSING_FACT")
+      return {}
+    }},
+    {name:"wind as active buff element is rejected",verify:({request})=>{
+      rejected(request("1011","0009",["wind"]),"INVALID_INPUT")
+      return {}
+    }},
+    {name:"duplicate active elements are rejected",verify:({request})=>{
+      rejected(request("1011","0009",["electric","electric"]),"DUPLICATE_ID")
+      return {}
+    }},
+    {name:"external derived-state override is rejected",verify:({request})=>{
+      const external=request();external.inputs.push({bindingId:"binding:entity:roxy:agent:1621",name:"roxy:core:active-buff:fire",value:{unit:"count",value:1}});rejected(external,"DUPLICATE_ID")
+      return {}
+    }},
+    {name:"fully equipped Roxy supplies source CR",verify:({request,actor})=>{
+      const equipped=request();const holder=actor("entity:roxy","1621");holder.panel={mode:"equipment"};holder.wEngine={entityId:"14162",refinement:1,eligible:true}
+      holder.driveDiscs=Object.fromEntries([1,2,3,4,5,6].map(slot=>[slot,{setEntityId:slot<=4?"31200":"31000",mainStat:slot===1?{attribute:"health"}:slot===2?{attribute:"attack"}:slot===3?{attribute:"defense"}:slot===4?{attribute:"criticalRate"}:slot===5?{attribute:"damageBonus",element:"wind"}:{attribute:"impact"},substats:slot===4?[]:[{attribute:"criticalRate",operation:"ratio-add",rolls:1}]}]))
+      equipped.actors=[holder,equipped.actors[1]]
+      const panel=run({...equipped,selections:[],inputs:[]}).panels.find(p=>p.entityId==="entity:roxy")
+      // 基础 .05 + 核心7 .144 + 主词条 .24 + 五次副词条 .12 + 啄木鸟二件套 .08。
+      close(panel.stats.criticalRate.value,.634)
+      equipped.inputs[0].value.value=panel.stats.criticalRate.value
+      const fromEquipment=run(equipped);close(added(fromEquipment),.2536);close(fromEquipment.totals.expected,5691.2476)
+      return {sourceCriticalRate:panel.stats.criticalRate.value,equipped:fromEquipment.totals.expected}
+    }},
+  )
+  return scenarios
+}
+
+async function verifyRoxyCoreElementsConsumer(api,engine) {
+  const fixture=await makeRoxyCoreElementsFixture(api)
+  const summary={}
+  for(const scenario of makeRoxyCoreElementsConsumerScenarios(engine)) {
+    Object.assign(summary,scenario.verify(fixture))
+  }
+  return summary
 }
 `

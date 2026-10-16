@@ -18,6 +18,24 @@ const fixtureData = new Function(
 }>
 const fixture = () => fixtureData
 
+const consumerSummary = {
+  electric: 5627.075,
+  unactivated: 5387.625,
+  wind: 1236.1,
+  sharp: 2138.77,
+  sourceCriticalRate: 0.634,
+  equipped: 5691.2476,
+}
+const consumerScenarios = new Function(
+  "engine",
+  `${roxyCoreElementsConsumerSource}\nreturn makeRoxyCoreElementsConsumerScenarios(engine)`,
+)({ calculateStaticActionDamage }) as {
+  name: string
+  verify: (
+    fixture: Awaited<typeof fixtureData>,
+  ) => Partial<typeof consumerSummary>
+}[]
+
 function damage(input: StaticActionCalculationInput) {
   const result = calculateStaticActionDamage(input)
   expect(result.ok, JSON.stringify(result)).toBe(true)
@@ -37,23 +55,17 @@ function reject(input: StaticActionCalculationInput, code: string) {
 }
 
 describe("Roxy explicitly active elemental core buffs", () => {
-  it("shares real-action, rank, cap, profession and equipped-source acceptance with installed consumers", async () => {
-    const verify = new Function(
-      "api",
-      "engine",
-      `${roxyCoreElementsConsumerSource}\nreturn verifyRoxyCoreElementsConsumer(api,engine)`,
-    )
-    const result = await verify(api, { calculateStaticActionDamage })
-    for (const [key, expected] of Object.entries({
-      electric: 5627.075,
-      unactivated: 5387.625,
-      wind: 1236.1,
-      sharp: 2138.77,
-      sourceCriticalRate: 0.634,
-      equipped: 5691.2476,
-    }))
-      expect(result[key]).toBeCloseTo(expected, 8)
-  })
+  it.each(consumerScenarios)(
+    "shares consumer acceptance: $name",
+    async ({ verify }) => {
+      const result = verify(await fixture())
+      for (const [key, actual] of Object.entries(result))
+        expect(actual).toBeCloseTo(
+          consumerSummary[key as keyof typeof consumerSummary],
+          8,
+        )
+    },
+  )
   it("covers Anby's real electric fourth basic attack from the declared electric buff", async () => {
     const { request } = await fixture()
     const result = calculateStaticActionDamage(request())
@@ -117,31 +129,42 @@ describe("Roxy explicitly active elemental core buffs", () => {
     ).toBeCloseTo(5627.075, 8)
   })
 
-  it("uses the seven independently evidenced caps immediately below, at and above each source-CR threshold", async () => {
-    const { request } = await fixture()
-    for (const [agentId, coefficient, caps] of [
-      ["1011", 0.4, [0.22, 0.25, 0.28, 0.31, 0.34, 0.37, 0.4]],
-      ["1611", 0.2, [0.1, 0.115, 0.13, 0.145, 0.16, 0.175, 0.2]],
-    ] as const) {
-      for (const [i, cap] of caps.entries()) {
-        for (const cr of [
-          -0.5,
-          cap / coefficient - 1e-6,
-          cap / coefficient,
-          cap / coefficient + 1e-6,
-        ]) {
-          const value = damage(
-            request(agentId, "0009", ["electric"], i + 1, cr),
-          )
-          const bonus = Math.min(cap, coefficient * Math.max(0, cr))
-          expect(value.totals.expected).toBeCloseTo(
-            value.totals.nonCritical * (1 + 0.25 * (0.5 + bonus)),
-            8,
-          )
-        }
+  it.each(
+    (
+      [
+        ["normal", "1011", 0.4, [0.22, 0.25, 0.28, 0.31, 0.34, 0.37, 0.4]],
+        ["Armorer", "1611", 0.2, [0.1, 0.115, 0.13, 0.145, 0.16, 0.175, 0.2]],
+      ] as const
+    ).flatMap(([profession, agentId, coefficient, caps]) =>
+      caps.map((cap, i) => ({
+        profession,
+        agentId,
+        coefficient,
+        cap,
+        coreSkillLevel: i + 1,
+      })),
+    ),
+  )(
+    "$profession core $coreSkillLevel uses its independently evidenced cap below, at and above the source-CR threshold",
+    async ({ agentId, coefficient, cap, coreSkillLevel }) => {
+      const { request } = await fixture()
+      for (const cr of [
+        -0.5,
+        cap / coefficient - 1e-6,
+        cap / coefficient,
+        cap / coefficient + 1e-6,
+      ]) {
+        const value = damage(
+          request(agentId, "0009", ["electric"], coreSkillLevel, cr),
+        )
+        const bonus = Math.min(cap, coefficient * Math.max(0, cr))
+        expect(value.totals.expected, `source CR ${cr}`).toBeCloseTo(
+          value.totals.nonCritical * (1 + 0.25 * (0.5 + bonus)),
+          8,
+        )
       }
-    }
-  })
+    },
+  )
 
   it.each([
     [
