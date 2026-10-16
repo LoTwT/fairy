@@ -102,6 +102,22 @@ function unwrap<T>(result: Result<T>): T {
   if (!result.ok) throw new InputFailure(result.issues)
   return result.value
 }
+function unwrapActionCatalogDamage<T>(result: Result<T>): T {
+  if (!result.ok)
+    throw new InputFailure(
+      result.issues.map((issue) => ({
+        ...issue,
+        pointer:
+          issue.pointer === "/hit/directAttack"
+            ? "/directAttack"
+            : issue.pointer.replace(
+                /^\/targetWindswept(?=\/|$)/u,
+                "/target/windswept",
+              ),
+      })) as unknown as NonEmpty<Issue>,
+    )
+  return result.value
+}
 const components = (baseValue: number): Mutable<ComponentStatInput> => ({
   baseValue,
   initialPercentage: [],
@@ -827,6 +843,38 @@ function calculateOrdinaryStaticActionDamage(
       "",
       "Expected static calculation data, actors and selections",
     )
+    requireValue(
+      !("targetWindswept" in input),
+      "/targetWindswept",
+      "This entry accepts current Windswept state only at target.windswept",
+    )
+    requireValue(
+      input.luminize == null || !("targetWindswept" in input.luminize),
+      "/luminize/targetWindswept",
+      "This entry accepts current Windswept state only at target.windswept",
+    )
+    requireValue(
+      input.luminize?.hit === undefined ||
+        !("directAttack" in input.luminize.hit),
+      "/luminize/hit/directAttack",
+      "This entry accepts direct attack classification only on the action input",
+    )
+    requireValue(
+      input.directAttack === undefined ||
+        typeof input.directAttack === "boolean",
+      "/directAttack",
+      "Direct attack classification must be a boolean",
+    )
+    // 本入口添加目标身份；禁止通过对象展开覆盖为另一个目标。
+    if (input.target?.windswept !== undefined)
+      requireValue(
+        typeof input.target.windswept === "object" &&
+          input.target.windswept !== null &&
+          !Array.isArray(input.target.windswept) &&
+          !("targetId" in input.target.windswept),
+        "/target/windswept",
+        "Windswept uses the enclosing target identity",
+      )
     const version = input.data.version
     requireValue(
       version && version.packageVersion === CORE_PACKAGE_VERSION,
@@ -1052,11 +1100,18 @@ function calculateOrdinaryStaticActionDamage(
       settlePanel(input, a, bindings, panelRules),
     )
     const panels = settled.map((s) => s.result)
-    if (action.calculation.kind === "daze-only")
+    if (action.calculation.kind === "daze-only") {
+      requireValue(
+        input.target.windswept === undefined &&
+          input.directAttack === undefined,
+        "/target/windswept",
+        "Daze-only actions do not support windswept damage opt-in",
+      )
       return {
         ok: true,
         value: { kind: "daze-only", panels, limitations: action.limitations },
       }
+    }
     const included = new Set<EffectId>(
       panelRules.effects.map((rule) => rule.effectId),
     )
@@ -1088,6 +1143,14 @@ function calculateOrdinaryStaticActionDamage(
     }
     const panel = panels.find((p) => p.entityId === input.actorId)!
     const common = {
+      ...(input.target.windswept === undefined
+        ? {}
+        : {
+            targetWindswept: {
+              ...input.target.windswept,
+              targetId: input.target.entityId,
+            },
+          }),
       definitions,
       catalog: input.data.catalog,
       bindings,
@@ -1115,6 +1178,9 @@ function calculateOrdinaryStaticActionDamage(
       "Action category is unavailable",
     )
     const hit = {
+      ...(input.directAttack === undefined
+        ? {}
+        : { directAttack: input.directAttack }),
       actorId: input.actorId,
       targetId: input.target.entityId,
       actionId: action.actionId,
@@ -1160,7 +1226,7 @@ function calculateOrdinaryStaticActionDamage(
           "This entry only supports level 60 panels; other special Voidflare levels require the catalog entry",
         )
       }
-      const damage = unwrap(
+      const damage = unwrapActionCatalogDamage(
         calculateStaticDamageFromCatalog({
           ...common,
           ...input.luminize,
@@ -1261,7 +1327,7 @@ function calculateOrdinaryStaticActionDamage(
                 }
               : { ...commonDamage, kind: "sheer", sheerDamageBonus: [] }
         for (let repetition = 1; repetition <= segment.repeat; repetition++) {
-          const result = unwrap(
+          const result = unwrapActionCatalogDamage(
             calculateStaticDamageFromCatalog({
               ...common,
               hit: {

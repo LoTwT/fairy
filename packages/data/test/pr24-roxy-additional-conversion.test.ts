@@ -15,7 +15,11 @@ import type {
 } from "../scripts/static-effects/source.ts"
 import original from "./fixtures/roxy-additional-source.json" with { type: "json" }
 
-const slugs = ["additional-level-damage", "additional-hit-stun-damage"] as const
+const slugs = [
+  "additional-level-damage",
+  "additional-hit-stun-damage",
+  "additional-weathered-direct-damage",
+] as const
 const entries = slugs.map(
   (slug) =>
     SUPPLEMENTS.find(
@@ -56,10 +60,10 @@ const independent = (entry: SupplementOption): SupplementOption => ({
 })
 
 describe("Roxy additional ability frozen supplement registration", () => {
-  it("generates precisely two independent rules and options on the existing Nanoka entity", () => {
+  it("generates precisely three independent rules and options on the existing Nanoka entity", () => {
     const output = convert()
-    expect(output.definitions.revision).toBe("43")
-    expect(entries).toHaveLength(2)
+    expect(output.definitions.revision).toBe("44")
+    expect(entries).toHaveLength(3)
     expect(output.catalog.entities).toHaveLength(1)
     expect(output.catalog.entities[0]).toMatchObject({
       catalogEntityId: "nanoka:agents:1621",
@@ -67,8 +71,8 @@ describe("Roxy additional ability frozen supplement registration", () => {
       identity: { kind: "agent", entityId: "1621" },
       profession: "击破",
     })
-    expect(output.definitions.effects).toHaveLength(4) // 既有回能双规则加两个新条款。
-    expect(output.catalog.options).toHaveLength(3)
+    expect(output.definitions.effects).toHaveLength(5) // 既有回能双规则加三个独立条款。
+    expect(output.catalog.options).toHaveLength(4)
     for (const [index, entry] of entries.entries()) {
       const option = output.catalog.options.find(
         (candidate) => candidate.optionId === entry.optionId,
@@ -109,10 +113,24 @@ describe("Roxy additional ability frozen supplement registration", () => {
         beneficiary: { kind: index === 0 ? "holder" : "team" },
         operation: {
           kind: "factor-contribution",
-          channel: index === 0 ? "damage-bonus" : "stun-damage-adjustment",
+          channel:
+            index === 0
+              ? "damage-bonus"
+              : index === 1
+                ? "stun-damage-adjustment"
+                : "windswept-direct-damage-coefficient-increase",
         },
       })
     }
+    expect(
+      output.catalog.options.find((option) =>
+        option.optionId.endsWith(":additional-weathered-direct-damage"),
+      )!.variants[0].windsweptDirectDamage,
+    ).toEqual({
+      applicabilityInputName: "roxy:weathered-direct-damage:applicable",
+      applierTeam: "holder",
+      singleActiveSourceGroup: "roxy-additional-windswept",
+    })
     expect(output.catalog.skillTargets).toEqual([])
     expect(output.definitions.actions).toEqual([])
   })

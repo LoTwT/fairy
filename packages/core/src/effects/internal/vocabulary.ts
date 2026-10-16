@@ -48,6 +48,7 @@ export const FACTOR_CHANNEL_UNITS: FactorChannelUnitMap = {
   "anomaly-critical-damage": "ratio",
   "luminize-multiplier-addition": "multiplier",
   "luminize-multiplier-scale": "multiplier",
+  "windswept-direct-damage-coefficient-increase": "ratio",
   "refringe-coefficient-increase": "ratio",
   "base-multiplier-addition": "multiplier",
   "base-multiplier-increase": "ratio",

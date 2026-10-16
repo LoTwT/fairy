@@ -1,3 +1,7 @@
+import {
+  validateTargetWindswept,
+  validateWindsweptDirectAttack,
+} from "./windswept-direct-damage.ts"
 import { calculateLucyGuardBoar } from "./lucy-guard-boar.ts"
 import {
   anomalyDamageFormula,
@@ -9,6 +13,7 @@ import {
   regularDamageFormula,
   sharpenDamageFormula,
   sheerDamageFormula,
+  windsweptDirectDamageFactor,
 } from "../../formulas.ts"
 import type { LuminizeAnomalyDamageLevelInput } from "../../formulas.ts"
 import type {
@@ -350,6 +355,7 @@ export function calculateOrdinaryStaticDamage(
         input.damage,
         evaluated.value.hit,
         evaluated.value.evaluation,
+        { windsweptBaseCoefficient: evaluated.value.windsweptBaseCoefficient },
       ),
     }
   } catch (error) {
@@ -370,6 +376,7 @@ export function evaluateStaticDamage(
   readonly hit: HitContext
   readonly evaluation: StaticDamageResult["evaluation"]
   readonly replacedStunOutputs: readonly ReplacedStunOutput[]
+  readonly windsweptBaseCoefficient: number | undefined
 }> {
   const collector = new IssueCollector()
   const checks = {
@@ -391,6 +398,7 @@ export function evaluateStaticDamage(
       "inputs",
       "snapshots",
       "atSeconds",
+      "targetWindswept",
     ],
     checks,
     "static damage input",
@@ -465,6 +473,7 @@ export function evaluateStaticDamage(
         "element",
         "actionSnapshotId",
         "declaredCriticalRate",
+        "directAttack",
       ],
       { ...checks, pointer: "/hit" },
       "static hit",
@@ -486,7 +495,25 @@ export function evaluateStaticDamage(
     hitObject === undefined
   )
     return failure(collector)
-  const { declaredCriticalRate: _declared, ...hitContextSource } = hitObject
+  const windswept = validateTargetWindswept(
+    object["targetWindswept"],
+    hitObject["targetId"],
+    world,
+    collector,
+  )
+  const windsweptApplicable = validateWindsweptDirectAttack(
+    hitObject["directAttack"],
+    input.damage.kind,
+    hitObject["element"],
+    windswept,
+    collector,
+  )
+  if (!collector.isEmpty) return failure(collector)
+  const {
+    declaredCriticalRate: _declared,
+    directAttack: _directAttack,
+    ...hitContextSource
+  } = hitObject
   const hit = validateHitContext(
     {
       ...hitContextSource,
@@ -715,7 +742,15 @@ export function evaluateStaticDamage(
   if (!evaluated.ok) return evaluated
   return {
     ok: true,
-    value: { hit, evaluation: evaluated.value, replacedStunOutputs },
+    value: {
+      hit,
+      evaluation: evaluated.value,
+      replacedStunOutputs,
+      windsweptBaseCoefficient:
+        windsweptApplicable && windswept?.status === "active"
+          ? windswept.baseCoefficient.value
+          : undefined,
+    },
   }
 }
 
@@ -741,6 +776,7 @@ export function calculateDamageFromEvaluation(
      * 传入。缺省沿用 defense.attackerLevel 的普通数值语义。
      */
     readonly luminizeAnomalyDamageLevel?: LuminizeAnomalyDamageLevelInput
+    readonly windsweptBaseCoefficient?: number | undefined
   },
 ): StaticDamageResult {
   const applicableChannels = new Set<FactorChannel>()
@@ -966,6 +1002,28 @@ export function calculateDamageFromEvaluation(
       ])
       criticalSemantics = "critical-hit"
     }
+  }
+  if (options?.windsweptBaseCoefficient !== undefined) {
+    const multiplier = windsweptDirectDamageFactor.calculate({
+      baseCoefficient: options.windsweptBaseCoefficient,
+      coefficientIncreases: take(
+        "windswept-direct-damage-coefficient-increase",
+      ),
+    })
+    const scale = (result: typeof nonCritical): typeof nonCritical => {
+      const value = result.value * multiplier
+      if (!Number.isFinite(value))
+        throw new Error("Windswept scaled damage branch is not finite")
+      return {
+        value,
+        factorResults: {
+          ...result.factorResults,
+          windsweptDirectDamage: multiplier,
+        },
+      }
+    }
+    nonCritical = scale(nonCritical)
+    if (critical !== null) critical = scale(critical)
   }
   if (!Number.isFinite(rate)) throw new Error("Critical rate must be finite")
   const criticalRate = Math.min(1, Math.max(0, rate))

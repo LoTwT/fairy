@@ -118,7 +118,7 @@ describe("Roxy wind-eye independently frozen source and exact registration", () 
   })
   it("compiles one independent M6 option with exact target and original item", () => {
     const result = convert()
-    expect(result.definitions.revision).toBe("43")
+    expect(result.definitions.revision).toBe("44")
     expect(result.definitions.effects).toHaveLength(3)
     expect(result.catalog.options).toHaveLength(2)
     expect(result.coverage.records).toEqual([])

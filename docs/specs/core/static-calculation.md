@@ -448,3 +448,46 @@ current 精通读取仍保留以太条件。抗性沿用显式 baseline：调用
 普通异常/紊乱/异放/乱流仍不接受她作为 `anomalySource`，她提供给其他来源异常的已映射团队增益继续可用。锐化伤害按[锐化伤害公式](formulas/sharpen-damage.md)以最终防御缩放、锐暴区
 结算，其技能动作与增益接入见[技能倍率规范](../data/skill-actions.md)与[增益数据接入](../data/zzz-hp-static-effects.md)。
 十四个完整配装场景的验证边界见[端到端验收](../../plans/static-e2e-acceptance.md)，不推断全部角色、技能或未来资料版本均已验证。
+
+### 当前目标风化与直接攻击
+
+高层 `target.windswept` 表达当前目标唯一事实，目录／低层用 `targetWindswept` 并增加 `targetId`。
+它与 `selection.activeBuffElements` 的持久核心增益完全独立，不从其中推断当前风化或浸染颜色。
+
+```ts
+// 高层 target 内；目录／低层另给 targetId，必须等于 hit.targetId。
+const windswept = {
+  status: "active" as const,
+  applierActorId: "entity:teammate" as const,
+  contaminationElement: null, // 已知未浸染，不是缺字段
+  baseCoefficient: { unit: "ratio" as const, value: 0.1 },
+}
+// 明确没有当前风化：{ status: "absent" }
+```
+
+active 要求施加者是当前观察到的 actor（目录另要求真实代理人身份），目标与施加者敌对；基础系数必须显式
+有限非负且为 ratio，不能包含本请求规则提供的增量。零和非 10% 均合法；不能仅凭 0.18 猜测重复包含。
+浸染色仅接受 physical/fire/ice/electric/ether 或 null；缺少颜色、来源、基础读数或单位均明确报错。
+所有已提供的新字段即使 Roxy 选项为0层也校验，absent 不接受 active 专用字段。
+
+`directAttack?: boolean` 在高层声明所选原动作各段的分类，目录／低层位于 `hit.directAttack`。
+高层误用根级 `targetWindswept`、`luminize.targetWindswept` 或 `luminize.hit.directAttack` 明确报该字段的
+`INVALID_INPUT`，按字段存在性校验（含显式 `undefined`），不会静默忽略或覆盖。普通动作与耀变均只从 `target.windswept` 取得当前风化。
+active 风化下 regular/sheer/sharpen 每次命中都必须声明：缺失报 `MISSING_FACT /hit/directAttack`
+（高层 `/directAttack`）；false 不受本乘区；true 只覆盖风与当前浸染色，未浸染时仍覆盖风。
+特殊属性 frost/auric-ink/lumiflux 的 active 直接命中尚无本机制映射，明确拒绝，不借 C3 的继承映射猜测。
+已知 anomaly/disorder/vortex/anomaly-settlement/luminize 排除，若误声明 true 则 `CONTEXT_MISMATCH`。
+已知 absent 无需分类，但给定的分类仍须是布尔值。旧请求省略这些字段保持原行为。
+
+Roxy 选项 `nanoka:agents:1621:additional-weathered-direct-damage` 是独立 0/1 开关；正层即使职业不符或
+来源 ineligible，也须先提供当前状态事实。另一名同队强攻／命破／锋御满足资格、施加者与受益命中者属于
+持有者队伍且命中适用时才增加 0.08。关闭 Roxy 仍保留基础乘区；多个合格队友不倍增。
+同队同目标本次只接受一个实际有效 Roxy 来源，不猜时间覆盖或取最高；无效、异队、不适用元素、零层不占位。
+重复选择、来源／绑定冲突及外部覆盖派生输入都拒绝。
+
+直接攻击标签不能由 regular/direct 公式、`origin.kind: direct` 或 follow-up 标签证明。现有加农转子必须提供
+自己的独立伤害项及分类；主命中 true 加加农转子选项但缺其 item 仍报 `/selections/<i>` 的 `MISSING_REFERENCE`，
+不自动生成附伤。普通入口目前没有通用自动附伤循环；新派生命中不得通过对象展开继承父命中的 true 或已判定倍率。
+未知子命中分类须整次失败，不返回部分伤害，归因包括负责的 selection、effect/binding/item 与该子命中的分类指针。
+Lucy 小猪／M6、Astra M4 与 Alice 周期附伤具名入口尚未接入新状态／分类，显式携带则由精确字段校验拒绝；
+不通过主攻击声明替它们认证。纯公式边界、来源强度、独立乘区及验算见[风化直伤乘区](factors/windswept-direct-damage.md)。

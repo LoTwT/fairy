@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "43",
+  "revision": "44",
   "effects": [
     {
       "kind": "contribution",
@@ -52147,6 +52147,156 @@
               ]
             }
           ]
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1621:nanoka:additional-weathered-direct-damage",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1621"
+        },
+        "section": "额外能力 · 风化直接攻击伤害",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621501/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621502/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621503/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621504/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621505/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621506/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "zh",
+            "resourcePath": "agents/1621/details.zh.json",
+            "pointer": "/passive/level/1621507/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621501/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621502/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621503/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621504/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621505/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621506/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.2",
+            "locale": "en",
+            "resourcePath": "agents/1621/details.en.json",
+            "pointer": "/passive/level/1621507/desc/1"
+          }
+        ]
+      },
+      "config": {
+        "kind": "constant",
+        "value": true
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "team"
+      },
+      "when": {
+        "kind": "constant",
+        "value": true
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "windswept-direct-damage-coefficient-increase",
+        "value": {
+          "kind": "convert",
+          "unit": "ratio",
+          "input": {
+            "kind": "input",
+            "unit": "count",
+            "name": "roxy:weathered-direct-damage:applicable"
+          },
+          "rate": {
+            "kind": "literal",
+            "unit": "multiplier",
+            "value": 0.08
+          }
         }
       }
     },

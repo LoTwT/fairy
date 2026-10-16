@@ -1,3 +1,4 @@
+import { roxyWeatheredConsumerSource } from "./fixtures/roxy-weathered-direct-damage-consumer.ts"
 import { ariaAbloomConsumerSource } from "./fixtures/aria-abloom-consumer.ts"
 import { roxyCoreWindConsumerSource } from "./fixtures/roxy-core-wind-consumer.ts"
 import { roxyCoreElementsConsumerSource } from "./fixtures/roxy-core-elements-consumer.ts"
@@ -495,6 +496,8 @@ ${claretInitialConversionConsumerSource}
 await verifyClaretInitialConversionConsumer(api, await import("@randomplay/core"))
 ${roxyAdditionalConsumerSource}
 await verifyRoxyAdditionalConsumer(api, await import("@randomplay/core"))
+${roxyWeatheredConsumerSource}
+await verifyRoxyWeatheredConsumer(api, await import("@randomplay/core"))
 ${yanagiPolarityConsumerSource}
 await verifyYanagiPolarityConsumer(api, await import("@randomplay/core"))
 ${veilConsumerSource}

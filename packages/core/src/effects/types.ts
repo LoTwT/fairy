@@ -338,6 +338,8 @@ export type StaticHit = Pick<
    * 继承该暴击伤害或能暴击）。
    */
   readonly declaredCriticalRate?: number
+  /** 本次命中是否属于游戏直接攻击；regular/direct 公式分类不代替此事实。 */
+  readonly directAttack?: boolean
 }
 
 export type StaticDefenseInput = Omit<
@@ -395,7 +397,27 @@ export type StaticDamageParameters = StaticDamageCommon &
       })
   )
 
+/** 当前目标唯一风化事实；与角色仍有效的元素增益分开声明。 */
+export type StaticTargetWindsweptState =
+  | { readonly targetId: EntityId; readonly status: "absent" }
+  | {
+      readonly targetId: EntityId
+      readonly status: "active"
+      readonly applierActorId: EntityId
+      /** null 表示已知未浸染；缺字段不是 null。 */
+      readonly contaminationElement:
+        | "physical"
+        | "fire"
+        | "ice"
+        | "electric"
+        | "ether"
+        | null
+      /** 已解析的基础系数，不含本请求贡献的增量，无默认值。 */
+      readonly baseCoefficient: Quantity<"ratio">
+    }
+
 export interface StaticDamageInput {
+  readonly targetWindswept?: StaticTargetWindsweptState
   readonly mechanism?: never
   readonly definitions: RuleSet
   readonly bindings: readonly SourceBinding[]
@@ -591,25 +613,31 @@ export interface AstraYaoM4ConditionalModel {
 
 export interface AstraYaoM4DamageInput extends Omit<
   StaticDamageInput,
-  "mechanism" | "hit" | "damage" | "atSeconds"
+  "mechanism" | "hit" | "damage" | "atSeconds" | "targetWindswept"
 > {
   readonly mechanism: "astra-yao-m4-quick-assist-damage"
+  readonly targetWindswept?: never
   readonly event: AstraYaoM4Event
   readonly conditionalModel: AstraYaoM4ConditionalModel
   readonly atSeconds: number
   readonly damage: Extract<StaticDamageParameters, { readonly kind: "regular" }>
-  readonly hit: Omit<StaticHit, "attributeSources" | "declaredCriticalRate"> & {
+  readonly hit: Omit<
+    StaticHit,
+    "attributeSources" | "declaredCriticalRate" | "directAttack"
+  > & {
     readonly attributeSources?: never
     readonly declaredCriticalRate?: never
+    readonly directAttack?: never
     readonly skillCategory: "uncategorized"
   }
 }
 
 export interface AstraYaoM4CatalogInput extends Omit<
   StaticCatalogDamageInput,
-  "mechanism" | "hit" | "damage" | "atSeconds"
+  "mechanism" | "hit" | "damage" | "atSeconds" | "targetWindswept"
 > {
   readonly mechanism: "astra-yao-m4-quick-assist-damage"
+  readonly targetWindswept?: never
   readonly event: AstraYaoM4Event
   readonly conditionalModel: AstraYaoM4ConditionalModel
   readonly atSeconds: number
@@ -619,10 +647,11 @@ export interface AstraYaoM4CatalogInput extends Omit<
   >
   readonly hit: Omit<
     StaticCatalogDamageInput["hit"],
-    "attributeSources" | "declaredCriticalRate"
+    "attributeSources" | "declaredCriticalRate" | "directAttack"
   > & {
     readonly attributeSources?: never
     readonly declaredCriticalRate?: never
+    readonly directAttack?: never
     readonly skillCategory: "uncategorized"
   }
 }
@@ -1126,6 +1155,7 @@ export type StaticCatalogDamageParameters =
     : never
 
 export interface StaticCatalogDamageInput {
+  readonly targetWindswept?: StaticTargetWindsweptState
   readonly mechanism?: never
   readonly definitions: RuleSet
   readonly catalog: StaticEffectCatalog

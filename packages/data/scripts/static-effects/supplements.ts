@@ -193,6 +193,7 @@ export interface SupplementVariantSpec {
   /** 目录从绑定 holder 的真实角色等级派生 count 输入。 */
   readonly holderLevelInputName?: string
   readonly elementBuffInputs?: StaticCatalogVariant["elementBuffInputs"]
+  readonly windsweptDirectDamage?: StaticCatalogVariant["windsweptDirectDamage"]
   /**
    * 桥接选项的逻辑层数上限（编译为目录变体 maximumLayers）；仅可与
    * layerCountInputName 一起声明，二者必须同时提供。

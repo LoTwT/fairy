@@ -8,6 +8,7 @@ const clauses: readonly {
   name: string
   description: string
   team?: true
+  windswept?: true
   operation: ContributionOperation
 }[] = [
   {
@@ -52,6 +53,28 @@ const clauses: readonly {
       value: { kind: "literal", unit: "multiplier", value: 0.3 },
     },
   },
+  {
+    slug: "additional-weathered-direct-damage",
+    name: "额外能力 · 风化直接攻击伤害",
+    description:
+      "同队另一名强攻、命破或锋御满足资格时，当前目标处于本队施加的风化，风及当前浸染属性的直接攻击风化系数增加0.08。独立0/1开关；显式提供当前目标状态、施加者、浸染色（null为已知未浸染）、ratio基础系数及本次命中的directAttack。基础系数不含本次增量，无默认10%；关闭本选项仍保留基础风化乘区。同队仅声明一个实际有效的此类来源，不推断多洛克茜覆盖次序。",
+    team: true,
+    windswept: true,
+    operation: {
+      kind: "factor-contribution",
+      channel: "windswept-direct-damage-coefficient-increase",
+      value: {
+        kind: "convert",
+        unit: "ratio",
+        input: {
+          kind: "input",
+          unit: "count",
+          name: "roxy:weathered-direct-damage:applicable",
+        },
+        rate: { kind: "literal", unit: "multiplier", value: 0.08 },
+      },
+    },
+  },
 ]
 
 /** 固定 effects 没有 Roxy；只在既有真实 Nanoka 实体上补充独立条款。 */
@@ -76,7 +99,9 @@ export const ROXY_ADDITIONAL_SUPPLEMENTS: readonly SupplementOption[] =
             : "30a75cab3c664648ca8f9bbcfdce04bc5d92b5897b9187c17c6620c76c282b2a",
       })),
     ),
-    verification: `Nanoka 3.2 中英文七核心档 /passive/level/1621501—1621507/desc/1 全文一致确认资格与两个独立条款。中文“队伍中存在”与英文“another character”在洛克茜自身为击破时一致。${clause.description}ZZZ-HP 主仓固定7a4f2776bf4a44cb108fcd7f5834f63606ade914 /agents/33/mindscapeBuffs/0 的 blk-muppaptc-wl5q5a 中 eff-muppaptc-fn832t 固定8、eff-muppd7di-hf2fx8 等级转换上限72、eff-muppdqhh-3qsii7 失衡30仅作执行佐证；等级1/30/60实算9.2/44/80个百分点，与M2同时启用失衡加数60个百分点。同块eff-muppe3ty-86s1uf的special18与正文8%冲突排除，不升级legacy effects来源；未经游戏实测。目录验证角色身份/等级/职业事实后展开，直接低层supplied由调用方自行承担这些领域事实的验证。`,
+    verification: clause.windswept
+      ? `Nanoka 3.2中英七档desc/1第三条明确8%。第一手机制报告https://forum.gamer.com.tw/C.php?bsn=74860&snA=6498（阿冰wang730465；冻结HTML SHA256 17d5f46419a3fec9356a0a81624db1dab2dbc47a0c75bd1ae64f6588a939088e；提取文本663—668行）给出1+风化系数、与减易伤乘算、风及浸染属性直接攻击范围，并称洛克茜提升系数。结合两者推论本条+0.08进入独立系数加法；本轮没有游戏内实测。报告当前测得10%不推定所有来源通用，调用方显式声明基础系数。当前固定ZZZ-HP 0a6c2d872babf36c017db92981ef2fa659fc6c56同块eff-muppe3ty-86s1uf special18与目标源码da6a8c08bcc447c49da2bbb657891ded6dfa11d6的Roxy18只作实现对照，不复制泛special/忽略属性限制。网站/api/meta无部署SHA，不声称与源码相同。${clause.description}`
+      : `Nanoka 3.2 中英文七核心档 /passive/level/1621501—1621507/desc/1 全文一致确认资格与两个独立条款。中文“队伍中存在”与英文“another character”在洛克茜自身为击破时一致。${clause.description}ZZZ-HP 主仓固定7a4f2776bf4a44cb108fcd7f5834f63606ade914 /agents/33/mindscapeBuffs/0 的 blk-muppaptc-wl5q5a 中 eff-muppaptc-fn832t 固定8、eff-muppd7di-hf2fx8 等级转换上限72、eff-muppdqhh-3qsii7 失衡30仅作执行佐证；等级1/30/60实算9.2/44/80个百分点，与M2同时启用失衡加数60个百分点。同块eff-muppe3ty-86s1uf的special18与正文8%冲突排除，不升级legacy effects来源；未经游戏实测。目录验证角色身份/等级/职业事实后展开，直接低层supplied由调用方自行承担这些领域事实的验证。`,
     rule: {
       effectId: `agent:1621:nanoka:${clause.slug}`,
       identity: { kind: "agent", entityId: "1621" },
@@ -84,9 +109,10 @@ export const ROXY_ADDITIONAL_SUPPLEMENTS: readonly SupplementOption[] =
       config: { kind: "constant", value: true },
       parameters: {},
       scope: "hit",
-      when: clause.team
-        ? { kind: "one-of", fact: "hit.targetState", values: ["stunned"] }
-        : { kind: "constant", value: true },
+      when:
+        clause.team && !clause.windswept
+          ? { kind: "one-of", fact: "hit.targetState", values: ["stunned"] }
+          : { kind: "constant", value: true },
       operation: clause.operation,
       maximumLayers: 1,
       beneficiary: { kind: clause.team ? "team" : "holder" },
@@ -96,6 +122,15 @@ export const ROXY_ADDITIONAL_SUPPLEMENTS: readonly SupplementOption[] =
       inputs: [],
       applicability: { otherTeammateProfessions: ["强攻", "命破", "锋御"] },
       ...(clause.team ? {} : { holderLevelInputName: levelInput }),
+      ...(clause.windswept
+        ? {
+            windsweptDirectDamage: {
+              applicabilityInputName: "roxy:weathered-direct-damage:applicable",
+              applierTeam: "holder" as const,
+              singleActiveSourceGroup: "roxy-additional-windswept",
+            },
+          }
+        : {}),
       conditionDescription: clause.description,
       name: clause.name,
       target: clause.team ? "team" : "self",

@@ -1,3 +1,4 @@
+import { roxyWeatheredConsumerSource } from "./fixtures/roxy-weathered-direct-damage-consumer.ts"
 import { ariaAbloomConsumerSource } from "./fixtures/aria-abloom-consumer.ts"
 import { roxyCoreWindConsumerSource } from "./fixtures/roxy-core-wind-consumer.ts"
 import { roxyCoreElementsConsumerSource } from "./fixtures/roxy-core-elements-consumer.ts"
@@ -148,6 +149,8 @@ ${claretInitialConversionConsumerSource}
 globalThis.fairyClaretInitialConversion = async () => verifyClaretInitialConversionConsumer(api, await import("@randomplay/core"))
 ${roxyAdditionalConsumerSource}
 globalThis.fairyRoxyAdditional = async () => verifyRoxyAdditionalConsumer(api, await import("@randomplay/core"))
+${roxyWeatheredConsumerSource}
+globalThis.fairyRoxyWeathered = async () => verifyRoxyWeatheredConsumer(api, await import("@randomplay/core"))
 ${yanagiPolarityConsumerSource}
 globalThis.fairyYanagiPolarity = async () => verifyYanagiPolarityConsumer(api, await import("@randomplay/core"))
 ${astraYaoM4ConsumerSource}
@@ -1123,6 +1126,18 @@ function defineScenarios(counts: {
             expect(result.electric).toBeCloseTo(5627.075, 8)
             expect(result.unactivated).toBeCloseTo(5387.625, 8)
             expect(result.equipped).toBeCloseTo(5691.2476, 8)
+          },
+        },
+        {
+          name: "roxy-windswept-direct-damage",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyRoxyWeathered(),
+            )
+            expect(result.nonCritical).toBeCloseTo(2761.2, 8)
+            expect(result.cannon).toBeCloseTo(2655, 8)
+            expect(result.high).toBeCloseTo(52822.287, 8)
+            expect(result.unknownRejected).toBe(true)
           },
         },
         {

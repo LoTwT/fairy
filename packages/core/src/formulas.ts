@@ -320,3 +320,9 @@ export type {
   CalculateFinalStatParams,
   CalculateInitialStatParams,
 } from "./stat.ts"
+
+export {
+  WINDSWEPT_DIRECT_DAMAGE_FACTOR_ID,
+  windsweptDirectDamageFactor,
+} from "./factors/windswept-direct-damage.ts"
+export type { WindsweptDirectDamageFactorInput } from "./factors/windswept-direct-damage.ts"
