@@ -452,6 +452,7 @@ const developerRevisionReference = (
  */
 const levelValue = (base: number, growth: number, level: number): number =>
   Number((base + growth * level).toFixed(12))
+export { levelValue }
 const idPart = (value: string) => encodeURIComponent(value)
 export interface SourceRecord {
   category: "agents" | "w-engines" | "drive-discs"

@@ -1,6 +1,14 @@
 import assert from "node:assert/strict"
 import { spawnSync } from "node:child_process"
-import { cp, mkdir, mkdtemp, rm, symlink, writeFile } from "node:fs/promises"
+import {
+  cp,
+  mkdir,
+  mkdtemp,
+  readFile,
+  rm,
+  symlink,
+  writeFile,
+} from "node:fs/promises"
 import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { after, before, test } from "node:test"
@@ -92,4 +100,50 @@ test("allows local/shared imports, comments and text that only resembles an impo
   )
   assert.equal(result.status, 0, result.stderr)
   assert.match(result.stdout, /Package boundaries verified/)
+})
+
+test("rejects core and data using different release versions", async () => {
+  const manifestPath = join(root, "packages/data/package.json")
+  const original = await readFile(manifestPath, "utf8")
+  await writeFile(
+    manifestPath,
+    JSON.stringify({ ...JSON.parse(original), version: "0.0.1" }),
+  )
+  try {
+    const result = spawnSync(
+      process.execPath,
+      [join(root, "scripts/check-packages.ts")],
+      { encoding: "utf8" },
+    )
+    assert.equal(result.status, 1)
+    assert.match(
+      result.stderr,
+      /Error: core and data must use the same release version/,
+    )
+  } finally {
+    await writeFile(manifestPath, original)
+  }
+})
+
+test("rejects shared losing its private flag", async () => {
+  const manifestPath = join(root, "packages/shared/package.json")
+  const original = await readFile(manifestPath, "utf8")
+  await writeFile(
+    manifestPath,
+    JSON.stringify({ ...JSON.parse(original), private: false }),
+  )
+  try {
+    const result = spawnSync(
+      process.execPath,
+      [join(root, "scripts/check-packages.ts")],
+      { encoding: "utf8" },
+    )
+    assert.equal(result.status, 1)
+    assert.match(
+      result.stderr,
+      /Error: shared is private and must never be published/,
+    )
+  } finally {
+    await writeFile(manifestPath, original)
+  }
 })
