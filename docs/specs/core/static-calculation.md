@@ -370,6 +370,42 @@ agent 来源绑定支持可选的 `potentialLevel`（整数域 0—6），含义
 `target.baseStunDamageMultiplier` 沿用[失衡易伤区](factors/stun-damage.md)的当前状态基础乘数契约：
 通常未失衡传 `1`、失衡传 `1.5`；`isStunned` 不会把调用方传入的 `1.5` 自动改成 `1`。
 
+#### 洛克茜已有有效元素增益
+
+使用新核心选项时，在每个 selection 中显式声明 `activeBuffElements`。
+例如调用方已确认该来源的火、电增益仍有效，可提供：
+
+```ts
+const selections = [
+  {
+    holderId: "entity:roxy",
+    optionId: "nanoka:agents:1621:core-element-critical-damage",
+    layers: 1,
+    activeBuffElements: ["fire", "electric"],
+  },
+  {
+    holderId: "entity:roxy",
+    optionId: "nanoka:agents:1621:core-element-sharp-critical-damage",
+    layers: 1,
+    activeBuffElements: ["fire", "electric"],
+  },
+] as const
+const inputs = [
+  {
+    bindingId: staticSourceBindingId("entity:roxy", "agent", "1621"),
+    name: "roxy:core:external-critical-rate",
+    value: { unit: "ratio", value: 0.5 },
+  },
+] as const
+```
+
+两选项按命中者职业分别提供普通暴伤、锐暴伤，火、电及风命中只计一次本来源贡献。
+其他未激活元素不受益；关闭使用 `layers: 0` 或省略选择。
+该集合不是敌人当前浸染状态，也不让计算器推算触发或 50 秒时间线。
+旧 `core-wind-*` ID 仍只覆盖风，不接受新的正层元素声明；同来源同职业分支的新旧
+选项不能同时开启。来源、合法元素、特殊属性映射和完整示例见
+[修订 43](../data/zzz-hp-static-effects.md#修订-43洛克茜核心有效元素增益)。
+
 #### 蕾米埃尔自身特殊虚曜
 
 目录入口的 `anomalySource` 在 luminize 分支可改用具名机制

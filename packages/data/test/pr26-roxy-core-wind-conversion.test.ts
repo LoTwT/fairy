@@ -14,6 +14,7 @@ import type {
   SourceNormalization,
 } from "../scripts/static-effects/source.ts"
 import original from "./fixtures/roxy-core-wind-source.json" with { type: "json" }
+import { ROXY_CORE_ELEMENT_SUPPLEMENTS } from "../scripts/static-effects/roxy-core-wind.ts"
 
 const ids = ["core-wind-critical-damage", "core-wind-sharp-critical-damage"]
 const entries = ids.map(
@@ -51,9 +52,50 @@ const independent = (entry: SupplementOption): SupplementOption => ({
 })
 
 describe("Roxy core wind supplement source and identity guards", () => {
+  it("adds the two elemental state branches with unchanged caps and explicit elemental input ownership", () => {
+    const result = convert([
+      entity,
+      ...entries,
+      ...ROXY_CORE_ELEMENT_SUPPLEMENTS,
+    ])
+    expect(result.definitions.effects).toHaveLength(6)
+    expect(result.catalog.options).toHaveLength(5)
+    for (const [i, entry] of ROXY_CORE_ELEMENT_SUPPLEMENTS.entries()) {
+      expect(entry.rule.parameters).toEqual(entries[i]!.rule.parameters)
+      expect(entry.rule.operation).toEqual(entries[i]!.rule.operation)
+      expect(entry.rule.uniqueness).toEqual(entries[i]!.rule.uniqueness)
+      expect(entry.exclusiveGroup).toBe(entries[i]!.exclusiveGroup)
+      expect(entry.evidence).toHaveLength(18)
+      expect(entry.variant.elementBuffInputs?.map((e) => e.element)).toEqual([
+        "physical",
+        "fire",
+        "ice",
+        "electric",
+        "ether",
+      ])
+      for (const mutate of [
+        (e: any) => {
+          e.variant.elementBuffInputs.pop()
+        },
+        (e: any) => {
+          e.rule.when = { kind: "constant", value: true }
+        },
+        (e: any) => {
+          delete e.exclusiveGroup
+        },
+        (e: any) => {
+          e.evidence.pop()
+        },
+      ]) {
+        const drift = structuredClone(entry)
+        mutate(drift)
+        expect(() => convert([entity, drift])).toThrow(/Roxy core wind/)
+      }
+    }
+  })
   it("adds exactly two independent branches without pretending fac62407 has Roxy", () => {
     const result = convert()
-    expect(result.definitions.revision).toBe("42")
+    expect(result.definitions.revision).toBe("43")
     expect(result.definitions.effects).toHaveLength(4)
     expect(result.catalog.options).toHaveLength(3)
     expect(result.catalog.entities).toHaveLength(1)

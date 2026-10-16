@@ -1,5 +1,6 @@
 import { ariaAbloomConsumerSource } from "./fixtures/aria-abloom-consumer.ts"
 import { roxyCoreWindConsumerSource } from "./fixtures/roxy-core-wind-consumer.ts"
+import { roxyCoreElementsConsumerSource } from "./fixtures/roxy-core-elements-consumer.ts"
 import { windDriveDiscConsumerSource } from "./fixtures/drive-disc-wind-consumer.ts"
 import { claretInitialConversionConsumerSource } from "./fixtures/claret-initial-conversion-consumer.ts"
 import { roxyWindEyeConsumerSource } from "./fixtures/roxy-wind-eye-consumer.ts"
@@ -139,6 +140,8 @@ ${roxyWindEyeConsumerSource}
 globalThis.fairyRoxyWindEye = async () => verifyRoxyWindEyeConsumer(api, await import("@randomplay/core"))
 ${roxyCoreWindConsumerSource}
 globalThis.fairyRoxyCoreWind = async () => verifyRoxyCoreWindConsumer(api, await import("@randomplay/core"))
+${roxyCoreElementsConsumerSource}
+globalThis.fairyRoxyCoreElements = async () => verifyRoxyCoreElementsConsumer(api, await import("@randomplay/core"))
 ${windDriveDiscConsumerSource}
 globalThis.fairyWindDriveDisc = async () => verifyWindDriveDiscConsumer(api, await import("@randomplay/core"))
 ${claretInitialConversionConsumerSource}
@@ -1109,6 +1112,17 @@ function defineScenarios(counts: {
             expect(result.sharp).toBeCloseTo(4319.7, 9)
             expect(result.high).toBeCloseTo(5149.6725, 9)
             expect(result.missingRejected).toBe(true)
+          },
+        },
+        {
+          name: "roxy-core-active-element-buffs",
+          act: async (page) => {
+            const result = await page.evaluate(() =>
+              (globalThis as any).fairyRoxyCoreElements(),
+            )
+            expect(result.electric).toBeCloseTo(5627.075, 8)
+            expect(result.unactivated).toBeCloseTo(5387.625, 8)
+            expect(result.equipped).toBeCloseTo(5691.2476, 8)
           },
         },
         {

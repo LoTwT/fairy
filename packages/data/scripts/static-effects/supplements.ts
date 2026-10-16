@@ -1,7 +1,10 @@
 import { LUCY_GUARD_BOAR_SUPPLEMENTS } from "./lucy-guard-boar.ts"
 import { ROXY_MINDSCAPE_SUPPLEMENTS } from "./roxy-mindscapes.ts"
 import { ROXY_ADDITIONAL_SUPPLEMENTS } from "./roxy-additional.ts"
-import { ROXY_CORE_WIND_SUPPLEMENTS } from "./roxy-core-wind.ts"
+import {
+  ROXY_CORE_ELEMENT_SUPPLEMENTS,
+  ROXY_CORE_WIND_SUPPLEMENTS,
+} from "./roxy-core-wind.ts"
 import type {
   AnyParameter,
   Condition,
@@ -189,6 +192,7 @@ export interface SupplementVariantSpec {
   readonly layerCountInputName?: string
   /** 目录从绑定 holder 的真实角色等级派生 count 输入。 */
   readonly holderLevelInputName?: string
+  readonly elementBuffInputs?: StaticCatalogVariant["elementBuffInputs"]
   /**
    * 桥接选项的逻辑层数上限（编译为目录变体 maximumLayers）；仅可与
    * layerCountInputName 一起声明，二者必须同时提供。
@@ -6134,6 +6138,7 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   ...ROXY_MINDSCAPE_SUPPLEMENTS,
   ...ROXY_ADDITIONAL_SUPPLEMENTS,
   ...ROXY_CORE_WIND_SUPPLEMENTS,
+  ...ROXY_CORE_ELEMENT_SUPPLEMENTS,
   ...LUCY_GUARD_BOAR_SUPPLEMENTS,
   astraYaoMindscape4QuickAssistDamage,
   aliceCorePeriodicDamage,

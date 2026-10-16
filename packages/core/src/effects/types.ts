@@ -1144,6 +1144,8 @@ export interface StaticCatalogDamageInput {
      * 身份或位置引擎推断。未声明的变体不接受该字段。
      */
     readonly beneficiaryActorId?: EntityId
+    /** 有效元素增益集合；仅声明 elementBuffInputs 的选项接受，0 层无需提供。 */
+    readonly activeBuffElements?: readonly DamageElement[]
   }[]
   readonly actorSources: readonly {
     readonly entityId: EntityId

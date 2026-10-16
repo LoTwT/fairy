@@ -50,11 +50,11 @@
       "examples/ye_shunguang_panel.example.json": "76888787b94ac026ec2ddd6e4e441452e3d2f12e2bfec9cf3b1e77fa04471b86"
     },
     "fairySources": {
-      "packages/data/definitions/effects/static.json": "2d9253de5254bdd9a261b631d73e99032e032cc503472d833016b3691927564d",
-      "packages/data/definitions/effects/static-catalog.json": "635bd3ff5bc6fd3d5710ef885dd6cff0e47640126b3ec1e339b4355177fe04fa",
+      "packages/data/definitions/effects/static.json": "e12ca8aa8f1497052c42965465bdebc8409dfe4206ff00b91944fc47bf3ef11a",
+      "packages/data/definitions/effects/static-catalog.json": "6ab706d8cefbf16e9f0b21ac41746df3bbc5f5cf1a3326e58b2c5f638b9ad228",
       "packages/data/integrated/agents/1561/details.zh.json": "a2089f5f829ed8646e768deee3f9b1424b39df3ffc25ade1e8d8ebb99ecf6659",
       "packages/core/src/formulas/anomaly-damage.ts": "f4cf30476254e86e65a2c8e436817d31af1cb210bec979a5d11ce7898e3058f9",
-      "packages/core/src/effects/internal/static-catalog.ts": "d615b73acc5bf26f57ce7c0f2c1d7acde46b68f7d4ab752e176ba80a8d473b88",
+      "packages/core/src/effects/internal/static-catalog.ts": "14d4399e7a6a64536a7ccdaa8dacd9de863e9ca162ab671a0f825f79b478adac",
       "packages/core/src/effects/internal/static-damage.ts": "f196b37ed3f0dcd4b351b4082be4b7d39eed88dd65a26cb596ec667ba798c37a",
       "packages/core/src/factors/defense.ts": "fb52cf44803fbe027c4102203955449f3104f1d93f3d87b1d9f2f43005385757",
       "packages/core/src/factors/anomaly-damage-level.ts": "3fe794bf616d7ed3da92d2aac66aaf741014c82f46656f95c131c29a8a2313f4",
@@ -65,7 +65,7 @@
       "packageVersion": "0.2.1",
       "contractVersion": 2,
       "gameVersion": "3.2",
-      "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
+      "snapshotId": "sha256:45ff13996d8c9d86b87e286f2c3d96378c0981a7b6575078a18f705253c0b3d7"
     }
   },
   "inputLayer": "externally-declared-resolved-source-state",
