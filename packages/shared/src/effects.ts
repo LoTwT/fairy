@@ -473,6 +473,7 @@ export interface FactorChannelUnitMap {
   readonly "anomaly-critical-damage": "ratio"
   readonly "luminize-multiplier-addition": "multiplier"
   readonly "luminize-multiplier-scale": "multiplier"
+  readonly "windswept-direct-damage-coefficient-increase": "ratio"
   readonly "refringe-coefficient-increase": "ratio"
   readonly "base-multiplier-addition": "multiplier"
   readonly "base-multiplier-increase": "ratio"
@@ -1023,6 +1024,13 @@ export interface StaticCatalogVariant {
    * 不得与外部 inputs 要求或 layerCountInputName 同名，禁止外部覆盖。
    */
   readonly holderLevelInputName?: string
+  /** 当前目标风化与本次命中资格派生的 count 0/1；仅实际适用来源占组。 */
+  readonly windsweptDirectDamage?: {
+    readonly applicabilityInputName: string
+    readonly applierTeam: "holder"
+    /** 调用方声明单个有效来源；不推断多个来源的覆盖次序。 */
+    readonly singleActiveSourceGroup?: string
+  }
   /**
    * 调用方声明仍有效的元素增益集合；每项把元素映射到同绑定的 count 输入。
    * 正层 selection.activeBuffElements 必须非空、无重复且属于此清单，目录

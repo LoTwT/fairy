@@ -65,7 +65,7 @@
       "packageVersion": "0.2.1",
       "contractVersion": 2,
       "gameVersion": "3.2",
-      "snapshotId": "sha256:45ff13996d8c9d86b87e286f2c3d96378c0981a7b6575078a18f705253c0b3d7"
+      "snapshotId": "sha256:2e912b3ff60c50158f84d984d93d70d8653bae2df4a988f89d1be1d168a398dc"
     },
     "fairyCalculationSources": {
       "packages/core/src/static/calculate.ts": "c1e6d073f7b8eb62241bf640da8d3e1a878aa8de9a703636c490f113a126441e",
@@ -80305,5 +80305,16 @@
       "declaration": "const DEFAULT_DAMAGE_LEVEL_COEFFICIENT = 794",
       "value": 794
     }
-  }
+  },
+  "fairySnapshotRefreshes": [
+    {
+      "reason": "C4 revision 44 adds an opt-in windswept option; historical requests omit it, so numeric results remain unchanged. Only current consumption snapshot/digests/pointers are refreshed. Native upstream captures and C2 corrections remain frozen.",
+      "implementationBase": "476553e928c8c952e2ddf42541a9e19665481391",
+      "previous": {
+        "snapshotId": "sha256:45ff13996d8c9d86b87e286f2c3d96378c0981a7b6575078a18f705253c0b3d7",
+        "artifactSha256": {}
+      },
+      "currentSnapshotId": "sha256:2e912b3ff60c50158f84d984d93d70d8653bae2df4a988f89d1be1d168a398dc"
+    }
+  ]
 }

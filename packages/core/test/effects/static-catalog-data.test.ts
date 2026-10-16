@@ -2090,7 +2090,7 @@ describe("fixed-source catalog conformance", () => {
     const negativeEffectId =
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
-    expect(catalog.revision).toBe("43")
+    expect(catalog.revision).toBe("44")
     expect(
       catalog.differences.some((d) => d.differenceId === differenceId),
       differenceId,
@@ -4912,10 +4912,11 @@ describe("velina cyclone catalog linkage", () => {
       // 批次 20 再增 Lucy 小猪继承和一次 M6 猪雨两个具名选项。
       // 洛克茜额外能力再增两个独立条款，均为单规则单选项。
       // 核心单状态风伤再增普通暴伤、锐暴伤两个职业分支。
-      records: 100,
-      integrated: 67,
-      rules: 71,
-      options: 62,
+      // C4 额外能力第三条再增一个独立风化系数规则及选项。
+      records: 101,
+      integrated: 68,
+      rules: 72,
+      options: 63,
       entities: 4,
       outOfScope: 33,
     })

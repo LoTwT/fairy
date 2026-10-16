@@ -107,6 +107,7 @@ export type {
   StateInput,
   StateObservation,
   StaticDamageInput,
+  StaticTargetWindsweptState,
   StaticDamageParameters,
   StaticDamageResult,
   StaticDefenseInput,

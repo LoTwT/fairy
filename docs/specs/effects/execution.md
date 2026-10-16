@@ -744,3 +744,20 @@ INVALID_DEFINITION拒绝，指向excludedBeneficiaryProfession；未选及0层�
 不会默认开启全部元素。此能力不创建敌人状态、触发动作或时间线。
 洛克茜实例的元素范围、特殊属性映射与旧选项兼容边界见
 [修订 43](../data/zzz-hp-static-effects.md#修订-43洛克茜核心有效元素增益)。
+
+### 风化直接攻击系数
+
+`windswept-direct-damage-coefficient-increase: ratio` 是独立系数增量通道。
+静态层在当前目标风化且直接攻击属性适用时收集实际命中 actor 的贡献，交给
+[风化直伤 Factor](../core/factors/windswept-direct-damage.md)；未适用的贡献进入 `notApplicableContributions`。
+每个伤害条件分支单独缩放并检查有限性，之后才计算期望。原纯伤害公式不变，不把该通道映射到普通易伤。
+
+目录变体 `windsweptDirectDamage` 声明 `applicabilityInputName`、`applierTeam: "holder"` 及可选的
+`singleActiveSourceGroup`。它仅允许一条无额外 when 条件、hit scope、supplied 最大1层的该通道贡献，
+必须实际在 operation 消费 count 输入；变体同样最大1层。输入名不得与外部输入、层数、等级或元素增益输入冲突。
+目录按当前状态、命中适用性、施加者队伍和既有受益资格派生绑定 0/1，不接受外部同名输入（即使值相同／选择0层）。
+组内仅实际适用来源占位，重复有效来源按 `CONTEXT_MISMATCH` 拒绝。这是调用方的有效来源声明约束，
+不是已证明游戏“全队唯一”的 `squadUniqueEffect`，core 不按 Roxy 身份或效果 ID 特判。
+
+当前目标事实、三态分类及错误指针见[静态输入契约](../core/static-calculation.md#当前目标风化与直接攻击)。
+低层 supplied 调用绕过目录时，职业、来源归属和单来源声明仍由调用方负责；低层本身继续严格验证目标状态和命中分类。

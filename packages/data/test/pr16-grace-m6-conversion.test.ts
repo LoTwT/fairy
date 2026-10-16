@@ -183,7 +183,7 @@ describe("Grace M6 frozen note-only clause and precise scale compilation", () =>
     expect(supplements).toHaveLength(2)
     const result = convert()
     const before = convertSource(source(), functions, [], [])
-    expect(result.definitions.revision).toBe("43")
+    expect(result.definitions.revision).toBe("44")
     for (const rule of before.definitions.effects)
       expect(
         result.definitions.effects.find((e) => e.effectId === rule.effectId),

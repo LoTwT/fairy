@@ -543,3 +543,5 @@ export function defineFormula<FormulaInput extends object>(
 - [伤害显示总值](helpers/displayed-damage.md)
 - [失衡比例显示值](helpers/displayed-daze-percentage.md)
 - [虚拟代理人快照](helpers/virtual-agent-snapshot.md)
+
+风化直接攻击伤害的具名系数、来源强度与静态组合边界见[风化直伤乘区](factors/windswept-direct-damage.md)。

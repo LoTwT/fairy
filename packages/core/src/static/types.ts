@@ -21,6 +21,7 @@ import type {
   ResolvedContribution,
   StaticCatalogDamageInput,
   StaticDamageResult,
+  StaticTargetWindsweptState,
   WorldObservation,
 } from "../effects/types.ts"
 
@@ -76,12 +77,24 @@ export interface StaticActorConfiguration {
 
 export interface StaticActionCalculationInput {
   readonly mechanism?: never
+  readonly targetWindswept?: never
   readonly data: StaticCalculationData
   readonly actors: readonly StaticActorConfiguration[]
   readonly actorId: EntityId
+  /** 所选原动作各段的直接攻击分类；不用于派生附伤或耀变覆盖。 */
+  readonly directAttack?: boolean
   /** 调用方使用 data.resolveAgentAction 得到结果，并原样交给 core。 */
   readonly action: ResolvedAgentAction
   readonly target: {
+    readonly windswept?:
+      | Omit<
+          Extract<StaticTargetWindsweptState, { status: "absent" }>,
+          "targetId"
+        >
+      | Omit<
+          Extract<StaticTargetWindsweptState, { status: "active" }>,
+          "targetId"
+        >
     readonly entityId: EntityId
     readonly teamId: TeamId
     readonly baseDefense: number
@@ -121,11 +134,17 @@ export interface StaticActionCalculationInput {
    * `actionSnapshotId` 快照覆盖。
    */
   readonly luminize?: {
+    readonly targetWindswept?: never
     readonly hit: Pick<
       StaticCatalogDamageInput["hit"],
       "element" | "damageItems"
     > &
-      Partial<Omit<StaticCatalogDamageInput["hit"], "element" | "damageItems">>
+      Partial<
+        Omit<
+          StaticCatalogDamageInput["hit"],
+          "element" | "damageItems" | "directAttack"
+        >
+      > & { readonly directAttack?: never }
     readonly damage: StaticCatalogDamageInput["damage"]
   }
 }

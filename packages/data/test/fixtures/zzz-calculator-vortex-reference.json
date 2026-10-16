@@ -65,7 +65,7 @@
       "packageVersion": "0.2.1",
       "contractVersion": 2,
       "gameVersion": "3.2",
-      "snapshotId": "sha256:45ff13996d8c9d86b87e286f2c3d96378c0981a7b6575078a18f705253c0b3d7"
+      "snapshotId": "sha256:2e912b3ff60c50158f84d984d93d70d8653bae2df4a988f89d1be1d168a398dc"
     }
   },
   "inputLayer": "externally-declared-resolved-source-state",
@@ -107273,5 +107273,16 @@
     "Fractional duration and elapsed-time semantics differ; preserved as differences, not aligned by rounding.",
     "Flat penetration, level, settled damage bonus and settled refringe remain explicit historical facts; no automatic snapshot provenance for them is claimed.",
     "No weighted multi-contributor snapshot construction, automatic vortex triggering, anomaly lifecycle or nontrivial refringe in this PR."
+  ],
+  "fairySnapshotRefreshes": [
+    {
+      "reason": "C4 revision 44 adds an opt-in windswept option; historical requests omit it, so numeric results remain unchanged. Only current consumption snapshot/digests/pointers are refreshed. Native upstream captures and C2 corrections remain frozen.",
+      "implementationBase": "476553e928c8c952e2ddf42541a9e19665481391",
+      "previous": {
+        "snapshotId": "sha256:45ff13996d8c9d86b87e286f2c3d96378c0981a7b6575078a18f705253c0b3d7",
+        "artifactSha256": {}
+      },
+      "currentSnapshotId": "sha256:2e912b3ff60c50158f84d984d93d70d8653bae2df4a988f89d1be1d168a398dc"
+    }
   ]
 }

@@ -1,4 +1,8 @@
 import {
+  validateTargetWindswept,
+  validateWindsweptDirectAttack,
+} from "./windswept-direct-damage.ts"
+import {
   isLucyGuardBoarRule,
   validateLucyGuardBoarCatalog,
 } from "./lucy-guard-boar-rules.ts"
@@ -853,6 +857,7 @@ export function validateStaticCatalog(
           "layerCountInputName",
           "holderLevelInputName",
           "elementBuffInputs",
+          "windsweptDirectDamage",
           "declaredTeammateBeneficiary",
           "squadUniqueEffect",
           "exclusiveDamageItem",
@@ -1253,6 +1258,92 @@ export function validateStaticCatalog(
             `${vp}/inputs/${ii}/unit`,
             "Unknown input unit",
           )
+      }
+      if (variant["windsweptDirectDamage"] !== undefined) {
+        const wp = `${vp}/windsweptDirectDamage`
+        const wc = {
+          ...checks(wp),
+          structureCode: "INVALID_DEFINITION" as const,
+        }
+        const metadata = expectObject(
+          variant["windsweptDirectDamage"],
+          wc,
+          "windswept direct damage metadata",
+        )
+        if (metadata) {
+          rejectUnknownFields(
+            metadata,
+            [
+              "applicabilityInputName",
+              "applierTeam",
+              "singleActiveSourceGroup",
+            ],
+            wc,
+            "windswept direct damage metadata",
+          )
+          const name = expectNonEmptyString(
+            metadata["applicabilityInputName"],
+            { ...wc, pointer: `${wp}/applicabilityInputName` },
+            "windswept applicability input",
+          )
+          expectLiteral(
+            metadata["applierTeam"],
+            ["holder"],
+            { ...wc, pointer: `${wp}/applierTeam` },
+            "applier team",
+          )
+          if (metadata["singleActiveSourceGroup"] !== undefined)
+            expectNonEmptyString(
+              metadata["singleActiveSourceGroup"],
+              { ...wc, pointer: `${wp}/singleActiveSourceGroup` },
+              "single active source group",
+            )
+          const consumers = effectIds.flatMap((id) => {
+            const effect = effects.get(id as EffectId)
+            return effect?.kind === "contribution" ? [effect] : []
+          })
+          const consumer = consumers[0]
+          const maximum =
+            consumer?.activation.kind === "supplied"
+              ? consumer.activation.maximumLayers
+              : undefined
+          if (
+            consumers.length !== 1 ||
+            variant["maximumLayers"] !== 1 ||
+            maximum?.kind !== "literal" ||
+            maximum.unit !== "count" ||
+            maximum.value !== 1 ||
+            consumer?.operation.kind !== "factor-contribution" ||
+            consumer.operation.channel !==
+              "windswept-direct-damage-coefficient-increase" ||
+            consumer.scope !== "hit" ||
+            consumer.when.kind !== "constant" ||
+            consumer.when.value !== true ||
+            name === undefined ||
+            !operationConsumesInput(consumer.operation, name, "count")
+          )
+            collector.report(
+              "INVALID_DEFINITION",
+              wp,
+              "Windswept metadata requires exactly one unconditional hit-scoped supplied single-instance coefficient contribution consuming the count input",
+            )
+          if (
+            name !== undefined &&
+            (inputNames.has(name) ||
+              name === layerCountInputName ||
+              name === holderLevelInputName ||
+              (Array.isArray(variant["elementBuffInputs"]) &&
+                variant["elementBuffInputs"].some(
+                  (entry) =>
+                    isPlainObject(entry) && entry["inputName"] === name,
+                )))
+          )
+            collector.report(
+              "INVALID_DEFINITION",
+              `${wp}/applicabilityInputName`,
+              "Windswept applicability input conflicts with another input declaration",
+            )
+        }
       }
       if (variant["elementBuffInputs"] !== undefined) {
         const fieldPath = `${vp}/elementBuffInputs`
@@ -1856,6 +1947,7 @@ export function calculateOrdinaryStaticDamageFromCatalog(
       "inputs",
       "snapshots",
       "atSeconds",
+      "targetWindswept",
     ],
     checks(""),
     "catalog damage input",
@@ -1986,6 +2078,25 @@ export function calculateOrdinaryStaticDamageFromCatalog(
       actorLevels.set(id, { index: i, level })
     }
   }
+  const windswept = validateTargetWindswept(
+    object["targetWindswept"],
+    hit["targetId"],
+    world,
+    collector,
+  )
+  const windsweptApplicable = validateWindsweptDirectAttack(
+    hit["directAttack"],
+    damage["kind"],
+    hit["element"],
+    windswept,
+    collector,
+  )
+  if (windswept?.status === "active" && !actors.has(windswept.applierActorId))
+    collector.report(
+      "MISSING_FACT",
+      "/targetWindswept/applierActorId",
+      "The current windswept applier requires a catalog agent identity",
+    )
   // Every actor on a participating team needs identity facts; opponents need none.
   const seenBindings = new Set<string>()
   for (const [i, value] of bindings.entries()) {
@@ -2081,6 +2192,7 @@ export function calculateOrdinaryStaticDamageFromCatalog(
         | "selection.layers"
         | "actorSources.level"
         | "selection.activeBuffElements"
+        | "targetWindswept"
     }
   >()
   const durationIds = new Set(
@@ -2100,7 +2212,8 @@ export function calculateOrdinaryStaticDamageFromCatalog(
   const seenSelections = new Set<string>(),
     exclusive = new Set<string>(),
     equipment = new Set<string>(),
-    squadUniqueSources = new Map<string, string>()
+    squadUniqueSources = new Map<string, string>(),
+    windsweptSources = new Map<string, string>()
   // 声明最终暴击概率的有效归属：当前命中 actor 上合法启用（layers > 0、
   // eligible、职业适配、holder === actor）且要求项校验通过的独占选项。
   const declarationOwners: {
@@ -2272,6 +2385,29 @@ export function calculateOrdinaryStaticDamageFromCatalog(
         `Expected 0–${variant.maximumLayers} integral layers; ${explain}`,
       )
       continue
+    }
+    const windsweptMetadata = variant.windsweptDirectDamage
+    if (windsweptMetadata !== undefined) {
+      const externalIndex =
+        input.inputs?.findIndex(
+          (entry) =>
+            entry.bindingId === binding.bindingId &&
+            entry.name === windsweptMetadata.applicabilityInputName,
+        ) ?? -1
+      if (externalIndex >= 0)
+        collector.report(
+          "DUPLICATE_ID",
+          `/inputs/${externalIndex}`,
+          `Windswept applicability is derived from current facts, not supplied inputs; ${explain}`,
+          { bindingId: binding.bindingId },
+        )
+      if (layers > 0 && windswept === undefined)
+        collector.report(
+          "MISSING_FACT",
+          "/targetWindswept",
+          `Declare the current target windswept state (absent or active); ${explain}`,
+          { bindingId: binding.bindingId, effectId: variant.effectIds[0]! },
+        )
     }
     if (layers === 0) continue
     const activeBuffElements = selection["activeBuffElements"]
@@ -2750,6 +2886,50 @@ export function calculateOrdinaryStaticDamageFromCatalog(
         bindingId: binding.bindingId,
         itemId: declarationRequirement.itemId,
       })
+    }
+    if (windsweptMetadata !== undefined) {
+      const applies =
+        windsweptApplicable &&
+        windswept?.status === "active" &&
+        world.actors.get(windswept.applierActorId)?.teamId ===
+          holderActor.teamId &&
+        beneficiaries.some(
+          ([id]) =>
+            id === input.hit.actorId &&
+            (declaredBeneficiaryId === undefined ||
+              id === declaredBeneficiaryId),
+        )
+      const name = windsweptMetadata.applicabilityInputName
+      const key = JSON.stringify([binding.bindingId, name])
+      if (derivedCountInputs.has(key))
+        collector.report(
+          "CONTEXT_MISMATCH",
+          p,
+          `Multiple selections derive windswept input ${name}; ${explain}`,
+        )
+      else
+        derivedCountInputs.set(key, {
+          bindingId: binding.bindingId,
+          name,
+          value: applies ? 1 : 0,
+          source: "targetWindswept",
+        })
+      if (applies && windsweptMetadata.singleActiveSourceGroup !== undefined) {
+        const groupKey = JSON.stringify([
+          holderActor.teamId,
+          input.hit.targetId,
+          windsweptMetadata.singleActiveSourceGroup,
+        ])
+        const previous = windsweptSources.get(groupKey)
+        if (previous !== undefined)
+          collector.report(
+            "CONTEXT_MISMATCH",
+            p,
+            `Declare one effective windswept coefficient source; ${previous} conflicts with ${binding.bindingId}; ${explain}`,
+            { bindingId: binding.bindingId, effectId: variant.effectIds[0]! },
+          )
+        else windsweptSources.set(groupKey, binding.bindingId)
+      }
     }
     const beneficiaryCandidates: Condition<"contribution"> = {
       kind: "any",
@@ -3394,9 +3574,12 @@ export function calculateOrdinaryStaticDamageFromCatalog(
       preparedDamage,
       evaluated.value.hit,
       evaluation,
-      luminizeAnomalyDamageLevel === undefined
-        ? undefined
-        : { luminizeAnomalyDamageLevel },
+      {
+        ...(luminizeAnomalyDamageLevel === undefined
+          ? {}
+          : { luminizeAnomalyDamageLevel }),
+        windsweptBaseCoefficient: evaluated.value.windsweptBaseCoefficient,
+      },
     )
     return {
       ok: true,

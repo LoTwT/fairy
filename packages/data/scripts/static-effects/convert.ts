@@ -4759,6 +4759,9 @@ export function convertSource(
       ...(supplement.variant.holderLevelInputName === undefined
         ? {}
         : { holderLevelInputName: supplement.variant.holderLevelInputName }),
+      ...(supplement.variant.windsweptDirectDamage === undefined
+        ? {}
+        : { windsweptDirectDamage: supplement.variant.windsweptDirectDamage }),
       ...(supplement.variant.elementBuffInputs === undefined
         ? {}
         : { elementBuffInputs: supplement.variant.elementBuffInputs }),
@@ -4919,7 +4922,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "43",
+    revision: "44",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: effects.some(

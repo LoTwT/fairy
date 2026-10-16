@@ -1,4 +1,8 @@
-import { describe, expect, it } from "vitest"
+import {
+  makeWindsweptLuminizeRequest,
+  roxyWeatheredConsumerSource,
+} from "./fixtures/roxy-weathered-direct-damage-consumer.ts"
+import { describe, expect, expectTypeOf, it } from "vitest"
 import * as api from "../src/index.ts"
 import * as engine from "../../core/src/index.ts"
 import type { StaticActionCalculationInput } from "../../core/src/static/types.ts"
@@ -60,6 +64,83 @@ const request = (): StaticActionCalculationInput => ({
     { holderId: "entity:roxy", optionId: roxyAdditionalLevelOption, layers: 1 },
   ],
 })
+
+const luminizeRequest = await makeWindsweptLuminizeRequest(api)
+it("forbids structurally reused luminize payloads with low-level windswept state", () => {
+  type Payload = NonNullable<StaticActionCalculationInput["luminize"]>
+  type Fields = Omit<Payload, "targetWindswept">
+  expectTypeOf<
+    Fields & { targetWindswept: undefined }
+  >().not.toExtend<Payload>()
+  expectTypeOf<
+    Fields & { targetWindswept: { targetId: "entity:enemy"; status: "absent" } }
+  >().not.toExtend<Payload>()
+})
+describe.each(["ordinary", "luminize"] as const)(
+  "nested windswept routing: %s",
+  (route) => {
+    const inputForRoute = (): StaticActionCalculationInput =>
+      route === "luminize"
+        ? structuredClone(luminizeRequest)
+        : {
+            ...request(),
+            directAttack: true,
+            target: {
+              ...request().target,
+              windswept: {
+                status: "active",
+                applierActorId: "entity:roxy",
+                contaminationElement: null,
+                baseCoefficient: { unit: "ratio", value: 0.1 },
+              },
+            },
+          }
+    it("accepts the real action with target.windswept as the only state source", () => {
+      const input = inputForRoute()
+      expect(input.action.ok && input.action.calculation.kind).toBe(
+        route === "luminize" ? "luminize" : "damage",
+      )
+      const result = engine.calculateStaticActionDamage(input)
+      expect(result.ok, JSON.stringify(result)).toBe(true)
+      if (result.ok && result.value.kind === "damage")
+        expect(result.value.totals.nonCritical).toBeGreaterThan(0)
+    })
+    it.each([
+      ["undefined", undefined],
+      ["null", null],
+      ["absent", { targetId: "entity:enemy", status: "absent" }],
+      [
+        "invalid active",
+        {
+          targetId: "entity:wrong",
+          status: "active",
+          applierActorId: "entity:missing",
+          contaminationElement: null,
+          baseCoefficient: { unit: "ratio", value: -1 },
+        },
+      ],
+    ])(
+      "rejects nested low-level state %s by presence before action routing",
+      (_label, state) => {
+        const input = inputForRoute()
+        const result = engine.calculateStaticActionDamage({
+          ...input,
+          luminize: { ...input.luminize, targetWindswept: state },
+        } as unknown as StaticActionCalculationInput)
+        expect(result.ok, JSON.stringify(result)).toBe(false)
+        if (!result.ok)
+          expect(result.issues).toEqual(
+            expect.arrayContaining([
+              expect.objectContaining({
+                code: "INVALID_INPUT",
+                pointer: "/luminize/targetWindswept",
+              }),
+            ]),
+          )
+      },
+    )
+  },
+)
 
 describe("Roxy formal high-level data and shared installed-consumer behavior", () => {
   it("runs the same nonzero own, teammate, M2 and high-level cases used by Node and Vite", async () => {
@@ -140,3 +221,56 @@ describe("Roxy formal high-level data and shared installed-consumer behavior", (
     },
   )
 })
+
+it("shares C4 coefficient and independent-item acceptance with installed Node and Chromium", async () => {
+  const verify = new Function(
+    "api",
+    "engine",
+    `${roxyMindscapeConsumerSource}\n${roxyAdditionalConsumerSource}\n${roxyWeatheredConsumerSource}\nreturn verifyRoxyWeatheredConsumer(api, engine)`,
+  )
+  const result = await verify(api, engine)
+  expect(result).toEqual({
+    nonCritical: expect.closeTo(2761.2, 8),
+    cannon: expect.closeTo(2655, 8),
+    high: expect.closeTo(52822.287, 8),
+    unknownRejected: true,
+  })
+})
+
+it.each([
+  [
+    "low-level state on the high-level root",
+    "/targetWindswept",
+    (input: any): void => {
+      input.targetWindswept = {
+        targetId: "entity:enemy",
+        status: "active",
+        applierActorId: "entity:roxy",
+        contaminationElement: null,
+        baseCoefficient: { unit: "ratio", value: 0.1 },
+      }
+    },
+  ],
+  [
+    "nested classification on the luminize override",
+    "/luminize/hit/directAttack",
+    (input: any): void => {
+      input.directAttack = false
+      input.luminize = { hit: { directAttack: true } }
+    },
+  ],
+] as const)(
+  "rejects %s instead of silently discarding the new opt-in",
+  (_label, pointer, mutate) => {
+    const input = request()
+    mutate(input)
+    const result = engine.calculateStaticActionDamage(input)
+    expect(result.ok).toBe(false)
+    if (!result.ok)
+      expect(result.issues).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ code: "INVALID_INPUT", pointer }),
+        ]),
+      )
+  },
+)

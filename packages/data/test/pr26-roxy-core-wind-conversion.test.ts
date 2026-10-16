@@ -95,7 +95,7 @@ describe("Roxy core wind supplement source and identity guards", () => {
   })
   it("adds exactly two independent branches without pretending fac62407 has Roxy", () => {
     const result = convert()
-    expect(result.definitions.revision).toBe("43")
+    expect(result.definitions.revision).toBe("44")
     expect(result.definitions.effects).toHaveLength(4)
     expect(result.catalog.options).toHaveLength(3)
     expect(result.catalog.entities).toHaveLength(1)

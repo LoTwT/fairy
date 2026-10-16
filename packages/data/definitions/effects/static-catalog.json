@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "43",
+  "revision": "44",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -46406,6 +46406,132 @@
           "effectIds": ["agent:1621:nanoka:additional-hit-stun-damage"],
           "maximumLayers": 1,
           "inputs": [],
+          "applicability": {
+            "otherTeammateProfessions": ["强攻", "命破", "锋御"]
+          },
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1621:additional-weathered-direct-damage",
+      "catalogEntityId": "nanoka:agents:1621",
+      "name": "额外能力 · 风化直接攻击伤害",
+      "conditionDescription": "同队另一名强攻、命破或锋御满足资格时，当前目标处于本队施加的风化，风及当前浸染属性的直接攻击风化系数增加0.08。独立0/1开关；显式提供当前目标状态、施加者、浸染色（null为已知未浸染）、ratio基础系数及本次命中的directAttack。基础系数不含本次增量，无默认10%；关闭本选项仍保留基础风化乘区。同队仅声明一个实际有效的此类来源，不推断多洛克茜覆盖次序。",
+      "target": "team",
+      "variants": [
+        {
+          "target": "team",
+          "configuration": {},
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621501/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621502/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621503/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621504/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621505/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621506/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1621/details.zh.json",
+              "pointer": "/passive/level/1621507/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621501/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621502/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621503/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621504/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621505/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621506/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1621/details.en.json",
+              "pointer": "/passive/level/1621507/desc/1"
+            }
+          ],
+          "effectIds": ["agent:1621:nanoka:additional-weathered-direct-damage"],
+          "maximumLayers": 1,
+          "inputs": [],
+          "windsweptDirectDamage": {
+            "applicabilityInputName": "roxy:weathered-direct-damage:applicable",
+            "applierTeam": "holder",
+            "singleActiveSourceGroup": "roxy-additional-windswept"
+          },
           "applicability": {
             "otherTeammateProfessions": ["强攻", "命破", "锋御"]
           },

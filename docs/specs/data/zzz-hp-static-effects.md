@@ -1904,3 +1904,25 @@ effects 的新增通道、属性读取或组合归约只能服务已核实的来
 8. 执行根级 `pnpm check` 和 `pnpm --filter @randomplay/data verify:browser`；按变更范围完成必要数据管理验收。复用适用的已有结果，失败修复后只重跑受影响部分及最终必需门禁。
 
 语义或覆盖变化时同步维护本页与正式覆盖报告，原始盘点保留其历史基线。发布按[包边界与联动发布](../packages.md)执行；涉及 integrated 或其管理契约的变化时，按[数据管理状态同步流程](integration.md#数据管理状态的同步维护)完成受影响工作区维护。
+
+## 修订 44：洛克茜风化直接攻击伤害
+
+C4 增加额外能力第三条的独立选项 `nanoka:agents:1621:additional-weathered-direct-damage` 与效果
+`agent:1621:nanoka:additional-weathered-direct-damage`。正式 Nanoka 3.2 的中英七核心档原文给出8%；
+结合第一手机制报告作出 `+0.08` 系数加法推论，证据强度、固定摘要与原始指针集中维护于
+[风化直伤乘区](../core/factors/windswept-direct-damage.md)。本轮未游戏实测，不把网站18%或HP special18直接当通用倍率。
+修订39保留的两个独立选项不变；当时排除第三句表示尚未建模，不能继续解释为8%与18%必然数值冲突。
+
+数据层登记三职业 OR、team受益、最大1层、绑定输入 `roxy:weathered-direct-damage:applicable`、
+`singleActiveSourceGroup: "roxy-additional-windswept"`，并输出具名 ratio 系数增量通道。
+core 只解释机制元数据，不硬编码角色或0.08。状态与开关、来源校验、基础系数防重复合同、分类和范围遵循
+[静态组装契约](../core/static-calculation.md#当前目标风化与直接攻击)。C3持久元素增益与当前敌人状态互不代替。
+
+本修订三个 effects 制品由既有生成器成套生成；规则从895到896、选项928到929，新增的仅上述规则／选项。
+skills manifest 仅更新 staticCatalog 摘要，60份动作文件及全部 integrated 保持不变；冻结HP effects基线未升级。
+普通历史请求未声明新状态，结果不变；不改写目标库原始请求、返回和历史比较值。
+
+定向验收覆盖基础零／0.10／0.20、普通易伤独立乘算、regular/sheer/sharpen、未知分类拒绝、
+异常结算排除、同队施加者、三职业、单个有效来源、C3状态独立，以及真实加农转子的三个条件数值分支。
+同一公开消费夹具用于源码、两包离线消费与 Chromium Vite 开发／生产入口；游戏标签及多来源覆盖次序仍未裁定。
+C4 此时为实施／待协调者交付，不能据本节认定已合并。
