@@ -1012,6 +1012,27 @@ describe("ZZZ Calculator explicit abloom / historical source comparison", () => 
       )
       close(result.factors.nonCritical["anomalyDamageLevel"]!, 1.8305)
       expect(result.expected).not.toBe(event.finalDamage)
+
+      const changed = calculate({
+        ...input,
+        snapshots: input.snapshots!.map((snapshot) => ({
+          ...snapshot,
+          attributes: snapshot.attributes.map((entry) =>
+            entry.stat === "attack"
+              ? {
+                  ...entry,
+                  value: { ...entry.value, value: entry.value.value * 2 },
+                }
+              : entry,
+          ),
+        })),
+      })
+      close(
+        changed.evaluation.hit!.damageItems[0]!.finalStat,
+        scenario.source!.attack * 2,
+      )
+      close(changed.nonCritical, result.nonCritical * 2)
+      close(changed.expected, result.expected * 2)
     },
   )
 

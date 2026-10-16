@@ -495,12 +495,16 @@ export declare function calculateStandardVortexDamageMultiplier(
 风属性不属于这里的被消耗异常，也没有 `wind` 公开值。
 
 `sourceAnomalyDurationInSeconds` 是本次非风异常生效时的完整持续时间，单位为秒，并已包含实际适用的持续
-时间延长。风化与非风异常同时存在的顺序、经过时间和计时器不由 helper 推导。标准乱流在非风异常发生时
-同步结算，因此这里不是普通紊乱使用的“原异常剩余持续时间”。
+时间延长。本 helper 的标准模型限定为风化已存在、非风异常刚生效并同步结算乱流，此时剩余时间等于完整
+持续时间。上述 [HoYoLAB 来源](https://www.hoyolab.com/article/45484490)的倍率表使用剩余时间，也描述了
+先有非风异常、后施加风化的顺序；后一种情形不属于本 helper 的完整时长输入。经过时间、计时器及其归一化
+不由 helper 推导，不能把剩余秒数直接传入并视作同一契约，也不能用普通紊乱倍率替代乱流倍率。
 
 ### 计算规则
 
-设 `T = sourceAnomalyDurationInSeconds`。百分比常量转换为小数后，严格按实测表中的运算结构计算：
+设 `T = sourceAnomalyDurationInSeconds`，在上述同步结算前提下代入来源表的剩余时间项。百分比常量转换
+为小数后，按表中运算结构计算。原图没有取整符号，但未提供分数时长的控制实测；以下连续计算是当前契约，
+不据此声称已裁定游戏在分数 tick 上的行为。
 
 | `vortexDamageMultiplierProfile` | 标准乱流伤害倍率      |
 | ------------------------------- | --------------------- |
