@@ -27,6 +27,7 @@ import {
   type Supplement,
 } from "../scripts/static-effects/supplements.ts"
 import { blazingLaurelR5Block } from "./fixtures/blazing-laurel-source.ts"
+import { claretMindscape1Block } from "./fixtures/claret-mindscape1-source.ts"
 import { SOURCE_SEMANTICS } from "../scripts/static-effects/semantics.ts"
 import type {
   SourceData,
@@ -161,7 +162,7 @@ describe("static data conversion", () => {
       ],
     }
     const result = convertSource(source, functions, [], [])
-    expect(result.definitions.revision).toBe("44")
+    expect(result.definitions.revision).toBe("45")
     for (const option of result.catalog.options) {
       const variant = option.variants[0]!
       const sameBlock = option.optionId.endsWith("unverified-same-block")
@@ -454,7 +455,7 @@ const angelData = (): SourceData => ({
 describe("developer stat revision", () => {
   it("maps the four registered records through the anomaly bonus channel", () => {
     const result = convertSource(angelData(), functions, [], [])
-    expect(result.definitions.revision).toBe("44")
+    expect(result.definitions.revision).toBe("45")
     const option = result.catalog.options.find(
       (o) =>
         o.optionId ===
@@ -746,7 +747,7 @@ const remielData = (): SourceData => ({
 describe("remielle mindscape 2 attribute anomaly scope revision", () => {
   it("adds the [异常] profession and attribute anomaly damage scope from the reviewed text", () => {
     const result = convertSource(remielData(), functions, [], [])
-    expect(result.definitions.revision).toBe("44")
+    expect(result.definitions.revision).toBe("45")
     const option = result.catalog.options.find((o) =>
       o.optionId.includes("eff-ms7tlurw-vhelyf"),
     )!
@@ -896,7 +897,7 @@ describe("remielle mindscape 1 complete anomaly state", () => {
     "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
   it("merges the team and holder records into one corrected complete option", () => {
     const result = convertSource(remielMindscape1Data(), functions, [], [])
-    expect(result.definitions.revision).toBe("44")
+    expect(result.definitions.revision).toBe("45")
     const option = result.catalog.options.find((o) => o.optionId === optionId)!
     expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
     expect(option.conditionDescription).toBe(
@@ -1129,7 +1130,7 @@ const qingmingData = (): SourceData => ({
 describe("qingming birdcage pierce stack correction", () => {
   it("compiles the registered fixed encodings as per-layer contributions with a two-layer cap", () => {
     const result = convertSource(qingmingData(), functions, [], [])
-    expect(result.definitions.revision).toBe("44")
+    expect(result.definitions.revision).toBe("45")
     for (const [index, effectId] of qingmingPierceIds.entries()) {
       const option = result.catalog.options.find((o) =>
         o.optionId.includes(effectId),
@@ -3844,7 +3845,7 @@ describe("agent batch 06 impact and energy regen supplements", () => {
       integrated: 6,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("44")
+    expect(result.definitions.revision).toBe("45")
 
     const caesar = result.catalog.options.find(
       (o) => o.optionId === "nanoka:agents:caesar:stance-switch-impact",
@@ -4375,7 +4376,7 @@ describe("batch 07 Roxy and Crimson Moon Casket supplements", () => {
       integrated: 4,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("44")
+    expect(result.definitions.revision).toBe("45")
     const entities = result.catalog.entities.filter((e) =>
       ["nanoka:agents:1621", "nanoka:w-engines:14162"].includes(
         e.catalogEntityId,
@@ -4855,7 +4856,7 @@ describe("batch 08 M6 independent follow-up supplements", () => {
       integrated: 3,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("44")
+    expect(result.definitions.revision).toBe("45")
     const expected: readonly (readonly [
       optionId: string,
       effectId: string,
@@ -5728,7 +5729,7 @@ describe("batch 09 Nangongyu M6 vibrato-modified supplements", () => {
       [],
       batch09Supplements,
     )
-    expect(result.definitions.revision).toBe("44")
+    expect(result.definitions.revision).toBe("45")
     expect(result.coverage.summary.supplements).toMatchObject({
       records: 2,
       rules: 2,
@@ -7222,5 +7223,168 @@ describe("batch 10 unsupported clause declarations", () => {
         (batch10SupplementIds as readonly string[]).includes(option.optionId),
       ),
     ).toHaveLength(31)
+  })
+})
+
+/**
+ * 修订 45：克拉蕾影画一的"触发[毁伤]造成的伤害倍率提升至原本的 130%"
+ * 由固定来源的 skillDmgBonus +30（增伤区）纠正为倍率乘区
+ * base-multiplier-increase +0.3；数值、培养门槛、作用对象与毁伤专项目标不变。
+ */
+describe("claret mindscape 1 multiplier encoding correction", () => {
+  const optionId =
+    "agents:claret:mindscape:1:blk-mtrkovf7-dqmjh3:eff-mtse9xm8-q641yp"
+  const effectId =
+    "agent:1611:zzz-hp:eff-mtse9xm8-q641yp:blk-mtrkovf7-dqmjh3:mindscape:1"
+  const claretData = (block = claretMindscape1Block()): SourceData => ({
+    agents: [
+      {
+        id: "claret",
+        name: "克拉蕾",
+        profession: "锋御",
+        mindscapeBuffs: Array.from({ length: 7 }, (_, rank) =>
+          rank === 1 ? { effectBlocks: [block] } : {},
+        ),
+      },
+    ],
+    driveDiscs: [],
+    skillSubcategories: [],
+    followUpSkillRules: [],
+    wengines: [],
+  })
+
+  it("compiles the frozen record as a base multiplier increase while preserving its identity and scope", () => {
+    const input = claretData()
+    const before = structuredClone(input)
+    const result = convertSource(input, functions, [], [])
+    expect(input).toEqual(before)
+    expect(result.definitions.revision).toBe("45")
+    const rule = result.definitions.effects.find(
+      (entry): entry is ContributionRule =>
+        entry.kind === "contribution" && entry.effectId === effectId,
+    )!
+    expect(rule).toMatchObject({
+      scope: "hit",
+      beneficiary: { kind: "holder" },
+      parameters: { amount: { unit: "ratio", value: 0.3 } },
+      activation: { kind: "supplied", maximumLayers: { value: 1 } },
+      operation: {
+        kind: "factor-contribution",
+        channel: "base-multiplier-increase",
+      },
+    })
+    // 作用范围保持仅毁伤：直伤种类与[特殊技]大类下的具名毁伤目标同时要求，
+    // 不引入元素或其他命中条件。
+    expect(rule.when).toMatchObject({
+      kind: "all",
+      conditions: expect.arrayContaining([
+        {
+          kind: "one-of",
+          fact: "hit.damageKind",
+          values: ["regular", "sheer", "sharpen"],
+        },
+        {
+          kind: "any",
+          conditions: [
+            {
+              kind: "all",
+              conditions: [
+                {
+                  kind: "one-of",
+                  fact: "hit.skillTag",
+                  values: ["zzz-hp:category:special"],
+                },
+                {
+                  kind: "one-of",
+                  fact: "hit.skillTag",
+                  values: ["zzz-hp:skill:claret-special-mtsecz30"],
+                },
+              ],
+            },
+          ],
+        },
+      ]),
+    })
+    expect(JSON.stringify(rule.when)).not.toContain('"hit.element"')
+    expect(result.catalog.options).toMatchObject([
+      {
+        optionId,
+        name: "影画1 · directDmgMultFactor",
+        target: "self",
+        variants: [
+          {
+            status: "corrected",
+            configuration: { minimumMindscape: 1 },
+            effectIds: [effectId],
+            maximumLayers: 1,
+            differences: ["claret-mindscape1-multiplier-encoding"],
+          },
+        ],
+      },
+    ])
+    expect(result.catalog.options[0]!.conditionDescription).toBe(
+      "克拉蕾攻击命中敌人并造成锐暴时，残痕积蓄效率提升20%；克拉蕾触发[毁伤]造成的伤害倍率提升至原本的130%。",
+    )
+    expect(result.catalog.options[0]!.variants[0]!.references).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          sourceId: "zzz-hp",
+          // 合成夹具的实体下标是数组位置；块与效果身份与真实来源一致。
+          pointer: expect.stringContaining(
+            "/mindscapeBuffs/1/effectBlocks/0/effects/0",
+          ),
+        }),
+        expect.objectContaining({
+          locale: "zh",
+          resourcePath: "agents/1611/details.zh.json",
+          pointer: "/talent/1/desc",
+        }),
+        expect.objectContaining({
+          locale: "en",
+          resourcePath: "agents/1611/details.en.json",
+          pointer: "/talent/1/desc",
+        }),
+      ]),
+    )
+    expect(result.coverage.records).toMatchObject([
+      {
+        stat: "skillDmgBonus",
+        status: "corrected",
+        optionId,
+        effectIds: [effectId],
+        normalizationChanges: [],
+      },
+    ])
+    expect(result.coverage.summary).toMatchObject({
+      converted: 0,
+      corrected: 1,
+      unsupported: 0,
+    })
+  })
+
+  it("rejects a drifted encoding or block note instead of silently re-scoping", () => {
+    const driftedValue = claretData()
+    driftedValue.agents[0]!.mindscapeBuffs![1]!.effectBlocks![0]!.effects[0]!.value = 25
+    expect(() => convertSource(driftedValue, functions, [], [])).toThrow(
+      /field drift/,
+    )
+    const driftedStat = claretData()
+    driftedStat.agents[0]!.mindscapeBuffs![1]!.effectBlocks![0]!.effects[0]!.stat =
+      "dmgBonus"
+    expect(() => convertSource(driftedStat, functions, [], [])).toThrow(
+      /field drift/,
+    )
+    const driftedScope = claretData()
+    driftedScope.agents[0]!.mindscapeBuffs![1]!.effectBlocks![0]!.effects[0]!.skillSubcategoryId =
+      null
+    expect(() => convertSource(driftedScope, functions, [], [])).toThrow(
+      /field drift/,
+    )
+    const driftedNote = claretData()
+    driftedNote.agents[0]!.mindscapeBuffs![1]!.effectBlocks![0]!.note =
+      "克拉蕾触发[毁伤]造成的伤害倍率提升至原本的140%。"
+    expect(() => convertSource(driftedNote, functions, [], [])).toThrow(
+      /block note drift/,
+    )
   })
 })

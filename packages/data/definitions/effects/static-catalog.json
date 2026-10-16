@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "44",
+  "revision": "45",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -6955,7 +6955,7 @@
     {
       "optionId": "agents:claret:mindscape:1:blk-mtrkovf7-dqmjh3:eff-mtse9xm8-q641yp",
       "catalogEntityId": "agents:claret",
-      "name": "影画1 · skillDmgBonus",
+      "name": "影画1 · directDmgMultFactor",
       "conditionDescription": "克拉蕾攻击命中敌人并造成锐暴时，残痕积蓄效率提升20%；克拉蕾触发[毁伤]造成的伤害倍率提升至原本的130%。",
       "target": "self",
       "variants": [
@@ -6963,7 +6963,7 @@
           "configuration": {
             "minimumMindscape": 1
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -6977,6 +6977,13 @@
               "version": "3.2",
               "locale": "zh",
               "resourcePath": "agents/1611/details.zh.json",
+              "pointer": "/talent/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1611/details.en.json",
               "pointer": "/talent/1/desc"
             }
           ],
@@ -53846,6 +53853,26 @@
       ]
     },
     {
+      "differenceId": "claret-mindscape1-multiplier-encoding",
+      "explanation": "Nanoka 3.2 影画一（agents/1611/details.zh.json 与 details.en.json 的 /talent/1/desc）中英文同文：克拉蕾触发[毁伤]造成的伤害倍率提升至原本的 130%（The DMG Multiplier of Maim triggered by Claret increases to 130% of its original value.）。固定来源 fac62407 把该条款记为毁伤专项目标（claret-special-mtsecz30）上的 skillDmgBonus +30，即通用增伤区的加数，与该来源对同句式条款的编码口径不一致（伊芙琳核心被动记 directDmgMultFactor 25、耀嘉音影画 6 记 directDmgMultFactor 100，均进入倍率修正区）。Fairy 按中英文原文把该记录编译为既有倍率乘区 base-multiplier-increase +0.30（目录伤害项乘以 1 + 0.3 = 1.3）：数值、培养门槛、作用对象、直伤范围与毁伤专项目标全部保持，只把增伤加数改为倍率乘区。原始 stat、原值与固定源 Pointer 保留在覆盖报告。证据级别为按一致描述纠错，未经游戏实测；取得相反游戏证据时先登记来源再调整。",
+      "references": [
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "zh",
+          "resourcePath": "agents/1611/details.zh.json",
+          "pointer": "/talent/1/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.2",
+          "locale": "en",
+          "resourcePath": "agents/1611/details.en.json",
+          "pointer": "/talent/1/desc"
+        }
+      ]
+    },
+    {
       "differenceId": "remielle-special-voidflare-restricted-reads",
       "explanation": "本人耀变专用读取沿固定来源 remielSelfRadiancePanel/optimalAffixAlloc 的口径以具名机制元数据登记：受限攻击 = 局外攻击 + 蕾米自身角色来源的攻击转模（3 条档位记录）；受限精通 = 局外精通 + 自身装备且职业适配音擎的精通效果（13 个来源实体、去重后 31 条规则）+ 自身驱动盘四件套精通效果（5 条），二件套精通已在局外面板只计一次；异化与耀变倍率的精通转换、通用抗穿仍读完整当前面板（含队友效果），耀变专属抗穿只取自身来源。飞鸟星梦（14133）的以太白名单在自身基础精通专用读取中不排除流明（上游专用读取无 effectMatchesElement 过滤），普通 current 精通读取仍保留以太条件；该项单独列入元素豁免标记。旧 M6 两条锚点选项在新机制分支明确拒绝，strength 档位已表达四分之一与完整强度。",
       "references": [
@@ -55415,19 +55442,6 @@
           "locale": "zh",
           "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
           "pointer": "/agents/6/mindscapeBuffs/0/effectBlocks/1/effects/0"
-        }
-      ]
-    },
-    {
-      "differenceId": "claret-mindscape1-multiplier-encoding",
-      "explanation": "克拉蕾影画一原文为[触发毁伤造成的伤害倍率提升至原本的 130%]，固定来源把该条记为毁伤目标（claret-special-mtsecz30）上的 skillDmgBonus +30，即通用增伤区加成而非倍率乘区。Fairy 遵循固定来源的增伤编码；与正式文本的倍率语义差异在此登记，不改写为倍率乘区。",
-      "references": [
-        {
-          "sourceId": "zzz-hp",
-          "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-          "locale": "zh",
-          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-          "pointer": "/agents/6/mindscapeBuffs/1/effectBlocks/0/effects/0"
         }
       ]
     },

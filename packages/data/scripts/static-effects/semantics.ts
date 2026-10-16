@@ -104,9 +104,14 @@ export type SourceSemantics =
       readonly verification: string
     }
   | {
-      /** 固定记录的乘区与块原文及 Nanoka 一致描述矛盾；只覆盖登记身份。 */
+      /**
+       * 固定记录的乘区与块原文及 Nanoka 同文矛盾（焰心桂冠 R5 的萎靡被记为
+       * dmgBonus、克拉蕾影画一的"伤害倍率提升至原本的 130%"被记为
+       * skillDmgBonus）：按登记的修正字段查既有 FIELD_MAPPINGS 编译，
+       * 原始 stat 与数值保留在覆盖报告与固定源引用中；只覆盖登记身份。
+       */
       readonly kind: "source-stat-correction"
-      readonly correctedStat: "critDmg"
+      readonly correctedStat: "critDmg" | "directDmgMultFactor"
       readonly expectedProfession: string
       readonly expectedEncoding: Readonly<Record<string, unknown>>
       readonly expectedSourceBlockNote: string
@@ -318,10 +323,11 @@ export type SourceSemantics =
   | {
       /**
        * 记录按固定来源字段转换，但来源自身的字段与块说明文字存在具名差异
-       * （如克拉蕾[残锋]锐暴提升的 applyTarget=self 与说明"全队[锋御]"、
-       * 影画一"倍率提升至原本的130%"被记为 skillDmgBonus +30）：
+       * （如克拉蕾[残锋]锐暴提升的 applyTarget=self 与说明"全队[锋御]"）：
        * 转换遵循来源字段，不凭文字扩大受益范围或改写落点；差异记录在目录
        * differences，说明文字中的状态条件仍由调用方显式选择断言。
+       * 记录编码本身与文本矛盾（克拉蕾影画一的倍率条款）时改用
+       * source-stat-correction 按登记的修正字段编译，不属本类别。
        */
       readonly kind: "named-source-discrepancy"
       readonly differenceId: string
@@ -816,6 +822,8 @@ const allSpecialSkillLevels: readonly SpecialSkillLevel[] = [
 
 const claretDetailsSha =
   "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+const claretDetailsEnSha =
+  "3f2f53196525fdaaf74fc0deb14ad63d891158d4769c89d083d19a3f4eab70de"
 
 /** 克拉蕾核心被动 1—7 行全文；暴击率加成按核心档位逐行核对。 */
 const claretCorePassiveEvidence = (
@@ -840,6 +848,11 @@ const claretTalentEvidence = (rank: 1 | 2 | 4) => [
     path: "agents/1611/details.zh.json",
     pointer: `/talent/${rank}/desc`,
     sha256: claretDetailsSha,
+  },
+  {
+    path: "agents/1611/details.en.json",
+    pointer: `/talent/${rank}/desc`,
+    sha256: claretDetailsEnSha,
   },
 ]
 
@@ -2983,13 +2996,42 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     verification:
       "Nanoka 3.2 额外能力逐行确认：克拉蕾或队友触发[毁伤]时，全队[锋御]代理人进入[残锋]，[残锋]状态下锐暴伤害提升 25%、持续 40 秒。固定来源记录 applyTarget=self；Fairy 遵循来源字段仅对持有者生效，不凭说明文字无证据扩大为全队，选择该选项表示持有者处于[残锋]。全队语义留待取得适用范围证据后另行处理。",
   },
-  // 克拉蕾：影画一的"倍率提升至原本的130%"被固定来源记为 skillDmgBonus +30。
+  // 克拉蕾：影画一的"伤害倍率提升至原本的130%"被固定来源记为 skillDmgBonus
+  // +30；按中英文原文纠正为倍率乘区，数值与作用范围不变。
   "agents/claret/mindscape/1/blk-mtrkovf7-dqmjh3/eff-mtse9xm8-q641yp": {
-    kind: "named-source-discrepancy",
+    kind: "source-stat-correction",
+    correctedStat: "directDmgMultFactor",
+    expectedProfession: "锋御",
+    expectedEncoding: {
+      stat: "skillDmgBonus",
+      scope: "skill",
+      kind: "fixed",
+      value: 30,
+      stackable: false,
+      valuePerStack: 0,
+      maxStacks: 1,
+      applyTarget: "self",
+      applySituation: "global",
+      applyProfession: null,
+      teamProfession: null,
+      teamProfessionValues: null,
+      teamProfessionMinCount: null,
+      elementFilter: "all",
+      skillCategory: "special",
+      skillSubcategoryId: "claret-special-mtsecz30",
+      skillTargets: [
+        { category: "special", subcategoryId: "claret-special-mtsecz30" },
+      ],
+      appliesToAnomaly: null,
+      convert: null,
+      note: "",
+    },
+    expectedSourceBlockNote:
+      "克拉蕾攻击命中敌人并造成锐暴时，残痕积蓄效率提升20%；克拉蕾触发[毁伤]造成的伤害倍率提升至原本的130%。",
     differenceId: "claret-mindscape1-multiplier-encoding",
     evidence: claretTalentEvidence(1),
     verification:
-      "Nanoka 3.2 影画一确认：克拉蕾触发[毁伤]造成的伤害倍率提升至原本的 130%。固定来源把该条记为毁伤目标（claret-special-mtsecz30）上的 skillDmgBonus +30，即通用增伤区加成而非倍率乘区；Fairy 以固定来源为第一信任来源，按 +30% 增伤编码并登记差异，不改写为倍率乘区。",
+      "Nanoka 3.2 影画一（agents/1611/details.zh.json 与 details.en.json 的 /talent/1/desc）中英文同文：克拉蕾触发[毁伤]造成的伤害倍率提升至原本的 130%（The DMG Multiplier of Maim triggered by Claret increases to 130% of its original value.）。固定来源 fac62407 把该条款记为毁伤专项目标（claret-special-mtsecz30）上的 skillDmgBonus +30，即通用增伤区的加数，与该来源对同句式条款的编码口径不一致（伊芙琳核心被动记 directDmgMultFactor 25、耀嘉音影画 6 记 directDmgMultFactor 100，均进入倍率修正区）。Fairy 按中英文原文把该记录编译为既有倍率乘区 base-multiplier-increase +0.30（目录伤害项乘以 1 + 0.3 = 1.3）：数值、培养门槛、作用对象、直伤范围与毁伤专项目标全部保持，只把增伤加数改为倍率乘区。原始 stat、原值与固定源 Pointer 保留在覆盖报告。证据级别为按一致描述纠错，未经游戏实测；取得相反游戏证据时先登记来源再调整。",
   },
   "w-engines/Scarlet-Craving/refinement/1/blk-mtsemp5m-ywlze6/eff-mtsemp5m-q1jh4f":
     {
