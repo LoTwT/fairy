@@ -1602,7 +1602,7 @@ export type GuaranteedCriticalContract = [
   >,
 ]
 
-import { calculateStaticDamageFromCatalog } from "../../../packages/core/dist/index.mjs"
+import { calculateStaticDamageFromCatalog } from "../../../packages/core/src/effects/index.ts"
 import type {
   AliceCorePeriodicCatalogInput,
   AliceCorePeriodicDamageResult,

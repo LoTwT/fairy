@@ -168,10 +168,29 @@ function panelAttack(
   }
 }
 
+/** 读取限时规则在状态中的层（按开始时间排序），只保留时钟契约相关字段。 */
+function timedEffectLayers(
+  state: EffectState,
+): { readonly startedAt: number; readonly expiresAt: number | null }[] {
+  const internal = readStateInternal(state)!
+  const instance = internal.instances.find(
+    (entry) => entry.effectId === "environment:spec:timed-effect",
+  )
+  expect(instance).toBeDefined()
+  return instance!.layers
+    .map((layer) => ({
+      startedAt: layer.startedAt,
+      expiresAt: layer.expiresAt,
+    }))
+    .toSorted((left, right) => left.startedAt - right.startedAt)
+}
+
 /** 克隆合成规则集并定向调整限时规则的时长与时钟策略。 */
 function syntheticTimingVariant(options: {
   seconds?: number
   onRetrigger?: Record<string, unknown>
+  clock?: string
+  layering?: Record<string, unknown>
 }): ReturnType<typeof structuredClone> {
   const ruleSet = structuredClone(syntheticRuleSet) as unknown as {
     effects: Record<string, unknown>[]
@@ -193,6 +212,15 @@ function syntheticTimingVariant(options: {
   }
   if (options.onRetrigger !== undefined) {
     lifetime["onRetrigger"] = options.onRetrigger
+  }
+  if (options.clock !== undefined) {
+    lifetime["clock"] = options.clock
+  }
+  if (options.layering !== undefined) {
+    Object.assign(
+      activation["layering"] as Record<string, unknown>,
+      options.layering,
+    )
   }
   return ruleSet
 }
@@ -417,6 +445,116 @@ describe("advanceEffects lifecycle acceptance", () => {
         testCase.expiresAt,
       )
       expect(after.value, testCase.name).toBe(1000)
+    }
+  })
+
+  it("clips a newly created layer to the declared extend limit", () => {
+    // 新建层到期时间 = min(触发时刻 + 时长, 封顶值)：remaining 口径以触发
+    // 时刻为锚，since-first-activation 口径以组首次生效时间为锚，未声明
+    // 上限（none）不封顶。运行时强制 0 < 时长 <= 上限，因此 remaining 的
+    // 封顶值不可能低于基值，该用例锁定的是锚点不被误换；真正发生封顶的
+    // 是组锚点口径。add-layer 使重触发在已有组内新建层，与首触发的空组
+    // 新建层共用同一条 newLayerExpiry 路径。
+    const cases: readonly {
+      readonly name: string
+      readonly onRetrigger: Record<string, unknown>
+      readonly seconds: number
+      readonly firstExpiry: number
+      readonly retriggerAt: number
+      readonly newLayerExpiry: number
+    }[] = [
+      {
+        name: "remaining-cap",
+        onRetrigger: {
+          kind: "extend",
+          limit: {
+            kind: "remaining",
+            maximum: { kind: "literal", unit: "seconds", value: 25 },
+          },
+        },
+        seconds: 20,
+        // min(0 + 20, 0 + 25)
+        firstExpiry: 20,
+        retriggerAt: 10,
+        // min(10 + 20, 10 + 25)，不封顶；若误用组锚点 0 则被压到 25。
+        newLayerExpiry: 30,
+      },
+      {
+        name: "since-first-activation-cap",
+        onRetrigger: {
+          kind: "extend",
+          limit: {
+            kind: "since-first-activation",
+            maximum: { kind: "literal", unit: "seconds", value: 30 },
+          },
+        },
+        seconds: 20,
+        // min(0 + 20, 0 + 30)，上限暂不生效。
+        firstExpiry: 20,
+        retriggerAt: 15,
+        // min(15 + 20, 0 + 30) = 30；若按触发时刻封顶则为 45，等于不封顶。
+        newLayerExpiry: 30,
+      },
+      {
+        name: "no-limit",
+        onRetrigger: { kind: "extend", limit: { kind: "none" } },
+        seconds: 25,
+        firstExpiry: 25,
+        retriggerAt: 10,
+        newLayerExpiry: 35,
+      },
+    ]
+    for (const testCase of cases) {
+      const ruleSet = syntheticTimingVariant({
+        seconds: testCase.seconds,
+        onRetrigger: testCase.onRetrigger,
+        clock: "per-layer",
+        layering: {
+          maximum: { kind: "literal", unit: "count", value: 2 },
+          onRetrigger: "add-layer",
+        },
+      })
+      const prepared = prepareFrom(ruleSet, [syntheticBinding])
+      const supplied = supplyEffectState(prepared, {
+        sessionId: "session:spec-new-layer-cap",
+        atSeconds: 0,
+        instances: [],
+        snapshots: [],
+        cooldowns: [],
+        eventHistory: { processedIds: [], last: null },
+      })
+      expect(supplied.ok).toBe(true)
+      if (!supplied.ok) {
+        throw new Error("state supply must succeed")
+      }
+      const first = advanceEffects(
+        prepared,
+        supplied.value,
+        entryEvent(0, 0, `event:${testCase.name}-1`),
+      )
+      expect(first.ok).toBe(true)
+      if (!first.ok) {
+        throw new Error("first advance must succeed")
+      }
+      expect(timedEffectLayers(first.value.state), testCase.name).toEqual([
+        { startedAt: 0, expiresAt: testCase.firstExpiry },
+      ])
+      const second = advanceEffects(
+        prepared,
+        first.value.state,
+        entryEvent(testCase.retriggerAt, 0, `event:${testCase.name}-2`),
+      )
+      expect(second.ok).toBe(true)
+      if (!second.ok) {
+        throw new Error("second advance must succeed")
+      }
+      expect(
+        timedEffectLayers(second.value.state).at(-1),
+        testCase.name,
+      ).toEqual({
+        startedAt: testCase.retriggerAt,
+        expiresAt: testCase.newLayerExpiry,
+      })
     }
   })
 

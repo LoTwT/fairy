@@ -276,3 +276,27 @@ describe("parseEffectRuleSet does not depend on bindings", () => {
     expect(typeof binding).toBe("object")
   })
 })
+
+describe("parseEffectRuleSet reports issues in stable pointer order", () => {
+  it("sorts issues by pointer regardless of the traversal that discovered them", () => {
+    // 状态先于效果被校验（先登记 states，再逐条校验 effects），因此这三个
+    // 未知字段的发现顺序是 /states/0 → /effects/0 → /effects/2；返回的
+    // issues 必须按指针字典序重排为 /effects/0 → /effects/2 → /states/0。
+    const result = parseModifiedRuleSet((ruleSet) => {
+      ;(ruleSet.states[0]! as { unexpected?: string }).unexpected = "state"
+      ;(ruleSet.effects[0]! as { unexpected?: string }).unexpected = "effect-a"
+      ;(ruleSet.effects[2]! as { unexpected?: string }).unexpected = "effect-b"
+    })
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      const pointers = result.issues.map((issue) => issue.pointer)
+      expect(pointers).toEqual([
+        "/effects/0/unexpected",
+        "/effects/2/unexpected",
+        "/states/0/unexpected",
+      ])
+      expect(pointers).toEqual(pointers.toSorted())
+      expect(result.issues.length).toBeGreaterThanOrEqual(3)
+    }
+  })
+})

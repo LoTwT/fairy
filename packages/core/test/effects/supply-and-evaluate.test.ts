@@ -7,6 +7,7 @@ import {
 } from "../../src/effects/index.ts"
 import type {
   AttributeObservation,
+  EffectInstance,
   EffectState,
   EntityId,
   EvaluationInput,
@@ -23,7 +24,7 @@ import {
   syntheticRuleSet,
   syntheticWorld,
 } from "../../../../docs/specs/effects/contract-examples.ts"
-import { reorderObjectKeys } from "./fixtures.ts"
+import { reorderObjectKeys, syntheticSource } from "./fixtures.ts"
 
 function prepareSynthetic(): PreparedEffects {
   const parsed = parseEffectRuleSet(syntheticRuleSet)
@@ -414,6 +415,44 @@ describe("layer expiry filtering", () => {
   })
 })
 
+/** 同一绑定、同 exclusiveGroup 的两条 supplied 贡献规则。 */
+const exclusiveGroupRule = (effectId: string) => ({
+  kind: "contribution",
+  effectId,
+  source: syntheticSource,
+  config: { kind: "constant", value: true },
+  parameters: {},
+  activation: { kind: "supplied", exclusiveGroup: "spec-mutual-group" },
+  beneficiary: { kind: "holder" },
+  scope: "entity",
+  when: { kind: "constant", value: true },
+  operation: {
+    kind: "stat-adjustment",
+    stat: "attack",
+    stage: "final-fixed",
+    value: { kind: "literal", unit: "attack-points", value: 100 },
+  },
+})
+
+/** 上述规则的一层外部有效实例；规则不读取触发上下文，trigger 允许为空。 */
+const suppliedInstance = (suffix: string, effectId: string): EffectInstance =>
+  ({
+    instanceId: `instance:exclusive-${suffix}`,
+    effectId,
+    bindingId: syntheticBinding.bindingId,
+    beneficiaryIds: [syntheticBinding.holderId],
+    stackKey: [],
+    lifetime: { kind: "supplied" },
+    layers: [
+      {
+        layerId: `layer:exclusive-${suffix}`,
+        startedAt: 0,
+        expiresAt: 20,
+        trigger: null,
+      },
+    ],
+  }) as EffectInstance
+
 describe("state import validation", () => {
   const prepared = prepareAstra(2)
 
@@ -573,6 +612,64 @@ describe("state import validation", () => {
         result.issues.some((issue) => issue.pointer.includes("stackKey")),
       ).toBe(true)
     }
+  })
+
+  it("rejects two supplied rules of the same exclusive group under one binding", () => {
+    // supplied.exclusiveGroup 在同一绑定内只允许一条同组规则：两条不同
+    // effectId 的同组规则同时导入实例时报告冲突；同一规则的多份实例不受
+    // 限制，因为互斥约束的对象是规则而不是实例。
+    const parsed = parseEffectRuleSet({
+      schemaVersion: 1,
+      ruleSetId: "effects-exclusive-group-test",
+      revision: "1",
+      effects: [
+        exclusiveGroupRule("environment:spec:exclusive-first"),
+        exclusiveGroupRule("environment:spec:exclusive-second"),
+      ],
+      states: [],
+      actions: [],
+    })
+    expect(parsed.ok).toBe(true)
+    if (!parsed.ok) {
+      throw new Error("rule set must parse")
+    }
+    const exclusivePrepared = prepareEffects(parsed.value, [
+      syntheticBinding,
+    ] as never)
+    expect(exclusivePrepared.ok).toBe(true)
+    if (!exclusivePrepared.ok) {
+      throw new Error("prepare must succeed")
+    }
+    const conflicting: StateInput = {
+      sessionId: "session:spec-exclusive-group",
+      atSeconds: 0,
+      instances: [
+        suppliedInstance("first", "environment:spec:exclusive-first"),
+        suppliedInstance("second", "environment:spec:exclusive-second"),
+      ],
+      snapshots: [],
+      cooldowns: [],
+      eventHistory: { processedIds: [], last: null },
+    }
+    const result = supplyEffectState(exclusivePrepared.value, conflicting)
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      const conflict = result.issues.find(
+        (issue) => issue.code === "UNIQUENESS_CONFLICT",
+      )
+      expect(conflict).toBeDefined()
+      expect(conflict!.pointer).toBe("/instances")
+    }
+    const sameEffectTwice: StateInput = {
+      ...conflicting,
+      sessionId: "session:spec-exclusive-group-same-effect",
+      instances: [
+        suppliedInstance("first", "environment:spec:exclusive-first"),
+        suppliedInstance("first-copy", "environment:spec:exclusive-first"),
+      ],
+    }
+    const allowed = supplyEffectState(exclusivePrepared.value, sameEffectTwice)
+    expect(allowed.ok).toBe(true)
   })
 })
 
