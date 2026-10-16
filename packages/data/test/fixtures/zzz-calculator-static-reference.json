@@ -65,11 +65,11 @@
       "packageVersion": "0.2.1",
       "contractVersion": 2,
       "gameVersion": "3.2",
-      "snapshotId": "sha256:1b2116d32c55a620befb5976a4530697ca9af0b32d576795eb1f6ae2122cb6be"
+      "snapshotId": "sha256:45ff13996d8c9d86b87e286f2c3d96378c0981a7b6575078a18f705253c0b3d7"
     },
     "fairyCalculationSources": {
-      "packages/core/src/static/calculate.ts": "ee28496fbd1d7197023649fbf697daeebae12ea69b533e0ab1bca2fbaf7bb9dc",
-      "packages/data/.generated/calculation-data.ts": "257f89b91d30796026a03c772acebd44a86566d4c229b706390e01658e2069ca",
+      "packages/core/src/static/calculate.ts": "c1e6d073f7b8eb62241bf640da8d3e1a878aa8de9a703636c490f113a126441e",
+      "packages/data/.generated/calculation-data.ts": "0ffa64f21dae36ce5ebaaeda0519b1389de1ec3758f7d34a9c50b1e7d071a312",
       "packages/data/integrated/agents/1611/data.json": "2ef4f6dcb7283d61e2709634b38822ae79b358808220688487e888336b045255",
       "packages/data/integrated/agents/1611/details.zh.json": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5",
       "packages/data/scripts/claret-panel-conversion.ts": "9a2e0d70d0de8e3b9a46761cb18b6102dc48bcac60bcd2bce29c2981a4bd8d77",

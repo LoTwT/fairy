@@ -718,3 +718,29 @@ INVALID_DEFINITION拒绝，指向excludedBeneficiaryProfession；未选及0层�
 此字段只在目录受益者筛选处生效，高层沿用目录入口；裸supplied没有catalog职业事实，
 调用方必须自行验证资格。规则级uniqueness仍按既有实际消费输出执行，两者职责独立。
 洛克茜单状态风伤的数值与来源边界见[修订41](../data/zzz-hp-static-effects.md#修订-41洛克茜核心单状态风伤双暴)。
+
+### 目录有效元素增益集合
+
+`StaticCatalogVariant.elementBuffInputs` 声明有限的元素与绑定输入名映射。
+选项正层必须提供非空、无重复的 `selection.activeBuffElements`，每个元素均须在映射中。
+目录为所有登记项派生同绑定的 `count` 输入：集合内为 1，集合外为 0。
+这是调用方声明的有效增益状态，不是元素数量层数；未选和 0 层不要求该状态或局外读数。
+没有登记此能力的正层选项拒绝携带该字段。缺少集合返回 `MISSING_FACT`，
+空集合或不支持的元素返回 `INVALID_INPUT`，重复元素返回 `DUPLICATE_ID`。
+
+映射必须非空，元素及输入名分别唯一，且只服务一个 `supplied`、最大一层的贡献。
+每个输入须由该贡献的 `when` 与 `count 1` 比较消费，不能进入数值操作表达式，
+也不能与选项的外部输入、派生层数或持有者等级输入同名。定义不满足时返回
+`INVALID_DEFINITION`。这使元素集合只控制适用范围，不乘大数值贡献。
+
+同一绑定的多个选项可共享同名状态输入，但它们派生的值必须一致，否则返回
+`CONTEXT_MISMATCH`；不能按选项遍历顺序覆盖。外部 `inputs` 不得覆盖派生输入，
+同名时返回 `DUPLICATE_ID`。不同绑定独立维护状态，来源唯一性继续由贡献的既有
+`uniqueness` 契约判断。旧新状态模型的互斥使用既有 `exclusiveGroup`。
+
+高层 `calculateStaticActionDamage` 转发该集合，目录入口负责上述校验。
+裸 `calculateStaticDamage` 仍只消费绑定的数值输入；调用方须提供规则需要的
+0/1 状态读数并承担职业、来源和状态有效性。缺少实际求值所需读数时返回 `MISSING_FACT`，
+不会默认开启全部元素。此能力不创建敌人状态、触发动作或时间线。
+洛克茜实例的元素范围、特殊属性映射与旧选项兼容边界见
+[修订 43](../data/zzz-hp-static-effects.md#修订-43洛克茜核心有效元素增益)。

@@ -497,6 +497,7 @@ describe("one effective Roxy core source per consumed output", () => {
       )
       rule.effectId = "agent:1621:fixture:independent-cd"
       delete rule.uniqueness
+      delete rule.activation.exclusiveGroup
       rule.operation.value = { kind: "literal", unit: "ratio", value: 0.3 }
       request.definitions.effects.push(rule)
       const option = structuredClone(
@@ -505,6 +506,7 @@ describe("one effective Roxy core source per consumed output", () => {
         ),
       )
       option.optionId = "fixture:independent-cd"
+      delete option.exclusiveGroup
       option.variants[0].effectIds = [rule.effectId]
       request.catalog.options.push(option)
       request.selections.push({

@@ -246,7 +246,7 @@ function engineInput(
 
 describe("batch 12 w-engine additional damage", () => {
   it("registers the two independent targets, options, and rules under revision 27", () => {
-    expect(catalog.revision).toBe("42")
+    expect(catalog.revision).toBe("43")
     for (const engine of ENGINE_CASES) {
       const target = catalog.skillTargets.find(
         (t) => t.targetId === engine.targetId,

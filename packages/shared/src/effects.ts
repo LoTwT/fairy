@@ -1024,6 +1024,18 @@ export interface StaticCatalogVariant {
    */
   readonly holderLevelInputName?: string
   /**
+   * 调用方声明仍有效的元素增益集合；每项把元素映射到同绑定的 count 输入。
+   * 正层 selection.activeBuffElements 必须非空、无重复且属于此清单，目录
+   * 为全部登记项派生 0/1（不按元素个数叠层）。派生输入必须由唯一 supplied
+   * 单实例贡献的 when 消费；不得与外部、层数或等级输入同名。
+   * 同绑定多选项共享同名事实时值必须一致；禁止外部 inputs 覆盖。
+   * 该声明只表示增益仍有效，不表示敌人状态、触发动作或计时事实。
+   */
+  readonly elementBuffInputs?: readonly {
+    readonly element: DamageElement
+    readonly inputName: string
+  }[]
+  /**
    * 声明式同队受益者选择：该选项生效时，受益者是持有者同队的另一名实体，
    * 由每次选择以 `beneficiaryActorId` 显式声明（表达调用方声明的事实，例如
    * 持有者位于后场时的当前前场角色）。字段校验只作用于启用的选择：

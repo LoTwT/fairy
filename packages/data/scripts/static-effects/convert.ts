@@ -4759,6 +4759,9 @@ export function convertSource(
       ...(supplement.variant.holderLevelInputName === undefined
         ? {}
         : { holderLevelInputName: supplement.variant.holderLevelInputName }),
+      ...(supplement.variant.elementBuffInputs === undefined
+        ? {}
+        : { elementBuffInputs: supplement.variant.elementBuffInputs }),
       applicability: supplement.variant.applicability,
       differences: [],
       // 声明式伤害项要求随补充透传：与固定来源 damage-item-targeting 的
@@ -4916,7 +4919,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "42",
+    revision: "43",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: effects.some(

@@ -1,5 +1,6 @@
 import { ariaAbloomConsumerSource } from "./fixtures/aria-abloom-consumer.ts"
 import { roxyCoreWindConsumerSource } from "./fixtures/roxy-core-wind-consumer.ts"
+import { roxyCoreElementsConsumerSource } from "./fixtures/roxy-core-elements-consumer.ts"
 import { windDriveDiscConsumerSource } from "./fixtures/drive-disc-wind-consumer.ts"
 import { claretInitialConversionConsumerSource } from "./fixtures/claret-initial-conversion-consumer.ts"
 import { roxyWindEyeConsumerSource } from "./fixtures/roxy-wind-eye-consumer.ts"
@@ -486,6 +487,8 @@ ${roxyWindEyeConsumerSource}
 assert.deepEqual(await verifyRoxyWindEyeConsumer(api, await import("@randomplay/core")), {multipliers:[1.049,1.049,4.174],mixedBase:12.533,giantScale:2.5,missingGiantRejected:true})
 ${roxyCoreWindConsumerSource}
 await verifyRoxyCoreWindConsumer(api, await import("@randomplay/core"))
+${roxyCoreElementsConsumerSource}
+await verifyRoxyCoreElementsConsumer(api, await import("@randomplay/core"))
 ${windDriveDiscConsumerSource}
 await verifyWindDriveDiscConsumer(api, await import("@randomplay/core"))
 ${claretInitialConversionConsumerSource}

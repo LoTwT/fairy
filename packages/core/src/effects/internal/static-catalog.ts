@@ -250,6 +250,25 @@ function operationConsumesInput(
   }
 }
 
+function conditionConsumesElementFlag(
+  condition: Condition<"contribution">,
+  name: string,
+): boolean {
+  if (condition.kind === "all" || condition.kind === "any")
+    return condition.conditions.some((child) =>
+      conditionConsumesElementFlag(child, name),
+    )
+  return (
+    condition.kind === "compare-number" &&
+    condition.unit === "count" &&
+    condition.operator === "eq" &&
+    condition.left.kind === "input" &&
+    condition.left.name === name &&
+    condition.right.kind === "literal" &&
+    condition.right.value === 1
+  )
+}
+
 /** JSON 目录与 TypeScript 调用共享校验；不信任类型断言或未选中条目的引用。 */
 export function validateStaticCatalog(
   catalogValue: unknown,
@@ -833,6 +852,7 @@ export function validateStaticCatalog(
           "damageItemRequirements",
           "layerCountInputName",
           "holderLevelInputName",
+          "elementBuffInputs",
           "declaredTeammateBeneficiary",
           "squadUniqueEffect",
           "exclusiveDamageItem",
@@ -1233,6 +1253,79 @@ export function validateStaticCatalog(
             `${vp}/inputs/${ii}/unit`,
             "Unknown input unit",
           )
+      }
+      if (variant["elementBuffInputs"] !== undefined) {
+        const fieldPath = `${vp}/elementBuffInputs`
+        const entries = expectArray(
+          variant["elementBuffInputs"],
+          checks(fieldPath),
+          "element buff inputs",
+        )
+        const consumers = effectIds.flatMap((id) => {
+          const effect = effects.get(id as EffectId)
+          return effect?.kind === "contribution" ? [effect] : []
+        })
+        const consumer = consumers[0]
+        const maximum =
+          consumer?.activation.kind === "supplied"
+            ? consumer.activation.maximumLayers
+            : undefined
+        if (
+          !entries?.length ||
+          variant["maximumLayers"] !== 1 ||
+          consumers.length !== 1 ||
+          maximum?.kind !== "literal" ||
+          maximum.unit !== "count" ||
+          maximum.value !== 1
+        )
+          collector.report(
+            "INVALID_DEFINITION",
+            fieldPath,
+            "Element buff inputs require a nonempty mapping and exactly one supplied single-instance contribution (maximumLayers 1)",
+          )
+        const elements = new Set<string>(),
+          names = new Set<string>()
+        for (const [ei, rawEntry] of (entries ?? []).entries()) {
+          const ep = `${fieldPath}/${ei}`
+          const entry = expectObject(rawEntry, checks(ep), "element buff input")
+          if (!entry) continue
+          rejectUnknownFields(
+            entry,
+            ["element", "inputName"],
+            checks(ep),
+            "element buff input",
+          )
+          unique(entry["element"], `${ep}/element`, elements)
+          if (!DAMAGE_ELEMENTS.includes(entry["element"] as never))
+            collector.report(
+              "INVALID_DEFINITION",
+              `${ep}/element`,
+              "Unknown buff element",
+            )
+          unique(entry["inputName"], `${ep}/inputName`, names)
+          const name = entry["inputName"]
+          if (typeof name !== "string") continue
+          if (
+            inputNames.has(name) ||
+            name === layerCountInputName ||
+            name === holderLevelInputName
+          )
+            collector.report(
+              "INVALID_DEFINITION",
+              `${ep}/inputName`,
+              "Element buff input conflicts with another input declaration",
+            )
+          if (
+            !consumer ||
+            !conditionConsumesElementFlag(consumer.when, name) ||
+            operationConsumesInput(consumer.operation, name, "count")
+          )
+            collector.report(
+              "INVALID_DEFINITION",
+              `${ep}/inputName`,
+              "Element buff input must be compared with count 1 in the contribution condition",
+            )
+        }
       }
       // 派生层数名不得与外部输入要求同名：调用方不能手工提供同一
       // (bindingId, name)，若同时列为必填则该选项没有任何可满足的输入。
@@ -1984,7 +2077,10 @@ export function calculateOrdinaryStaticDamageFromCatalog(
       bindingId: string
       name: string
       value: number
-      source: "selection.layers" | "actorSources.level"
+      source:
+        | "selection.layers"
+        | "actorSources.level"
+        | "selection.activeBuffElements"
     }
   >()
   const durationIds = new Set(
@@ -2032,7 +2128,14 @@ export function calculateOrdinaryStaticDamageFromCatalog(
     if (!selection) continue
     rejectUnknownFields(
       selection,
-      ["optionId", "bindingId", "layers", "beneficiaryActorId", "trigger"],
+      [
+        "optionId",
+        "bindingId",
+        "layers",
+        "beneficiaryActorId",
+        "trigger",
+        "activeBuffElements",
+      ],
       checks(p),
       "option selection",
     )
@@ -2171,6 +2274,77 @@ export function calculateOrdinaryStaticDamageFromCatalog(
       continue
     }
     if (layers === 0) continue
+    const activeBuffElements = selection["activeBuffElements"]
+    const elementBuffInputs = variant.elementBuffInputs
+    if (activeBuffElements !== undefined || elementBuffInputs !== undefined) {
+      const ep = `${p}/activeBuffElements`
+      if (!elementBuffInputs)
+        collector.report(
+          "CONTEXT_MISMATCH",
+          ep,
+          `This option does not accept elemental buff states; ${explain}`,
+        )
+      else if (activeBuffElements === undefined)
+        collector.report(
+          "MISSING_FACT",
+          ep,
+          `Declare the active elemental buffs; ${explain}`,
+        )
+      else {
+        const elements = expectArray(
+          activeBuffElements,
+          checks(ep),
+          "active elemental buffs",
+        )
+        if (!elements?.length)
+          collector.report(
+            "INVALID_INPUT",
+            ep,
+            "Enabled elemental buffs require a nonempty set; use layers 0 to disable",
+          )
+        const seenElements = new Set<unknown>()
+        for (const [ei, element] of (elements ?? []).entries()) {
+          if (!elementBuffInputs.some((entry) => entry.element === element))
+            collector.report(
+              "INVALID_INPUT",
+              `${ep}/${ei}`,
+              `Unsupported buff element; ${explain}`,
+            )
+          if (seenElements.has(element))
+            collector.report(
+              "DUPLICATE_ID",
+              `${ep}/${ei}`,
+              "Declare each active buff element once",
+            )
+          seenElements.add(element)
+        }
+        for (const entry of elementBuffInputs) {
+          const elementInputKey = JSON.stringify([
+            binding.bindingId,
+            entry.inputName,
+          ])
+          const value = seenElements.has(entry.element) ? 1 : 0
+          const previous = derivedCountInputs.get(elementInputKey)
+          if (
+            previous &&
+            (previous.source !== "selection.activeBuffElements" ||
+              previous.value !== value)
+          )
+            collector.report(
+              "CONTEXT_MISMATCH",
+              ep,
+              `Conflicting declarations of bound input ${entry.inputName}; ${explain}`,
+            )
+          else
+            derivedCountInputs.set(elementInputKey, {
+              bindingId: binding.bindingId,
+              name: entry.inputName,
+              value,
+              source: "selection.activeBuffElements",
+            })
+        }
+      }
+    }
     // 正层选择先履行等级输入契约，资格、when、受益者或绑定失效均不豁免。
     if (variant.holderLevelInputName !== undefined) {
       const name = variant.holderLevelInputName

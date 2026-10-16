@@ -104,6 +104,8 @@ export interface StaticActionCalculationInput {
      * 也不引入位置状态。未声明该字段的选项不接受该字段。
      */
     readonly beneficiaryActorId?: EntityId
+    /** 原样交给目录校验的有效元素增益集合；不从动作或敌人状态推断。 */
+    readonly activeBuffElements?: readonly DamageElement[]
   }[]
   readonly inputs?: readonly EffectNumericInput[]
   readonly observedWorld?: Pick<WorldObservation, "states" | "distances">

@@ -724,6 +724,9 @@ function battleSelections(
       ...(selection.beneficiaryActorId === undefined
         ? {}
         : { beneficiaryActorId: selection.beneficiaryActorId }),
+      ...(selection.activeBuffElements === undefined
+        ? {}
+        : { activeBuffElements: selection.activeBuffElements }),
     })
   }
   for (const binding of bindings) {

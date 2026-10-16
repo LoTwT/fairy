@@ -1,5 +1,8 @@
 import { isDeepStrictEqual } from "node:util"
-import type { StaticCatalogApplicability } from "@randomplay/shared"
+import type {
+  DamageElement,
+  StaticCatalogApplicability,
+} from "@randomplay/shared"
 import type { Supplement, SupplementOption } from "./supplements.ts"
 
 const inputName = "roxy:core:external-critical-rate"
@@ -37,6 +40,7 @@ export const ROXY_CORE_WIND_SUPPLEMENTS: readonly SupplementOption[] =
     kind: "option",
     supplementId: `nanoka:agents:1621:${clause.slug}`,
     optionId: `nanoka:agents:1621:${clause.slug}`,
+    exclusiveGroup: `roxy:${clause.stat}:core-state-model`,
     catalogEntityId: "nanoka:agents:1621",
     source:
       "nanoka-integrated@3.2 agents/1621 /passive/level/1621501—1621507/desc/0",
@@ -137,6 +141,106 @@ export const ROXY_CORE_WIND_SUPPLEMENTS: readonly SupplementOption[] =
     },
   }))
 
+const elementStates: readonly {
+  element: DamageElement
+  hitElements: readonly [DamageElement, ...DamageElement[]]
+}[] = [
+  { element: "physical", hitElements: ["physical", "wind"] },
+  { element: "fire", hitElements: ["fire", "wind"] },
+  { element: "ice", hitElements: ["ice", "frost", "wind"] },
+  { element: "electric", hitElements: ["electric", "wind"] },
+  { element: "ether", hitElements: ["ether", "auric-ink", "wind"] },
+]
+const elementInputName = (element: DamageElement) =>
+  `roxy:core:active-buff:${element}`
+const elementDescription =
+  "调用方用activeBuffElements明确声明本来源仍有效的元素增益集合（physical/fire/ice/electric/ether），正层必须非空且无重复，0层关闭。每个元素状态分别由调用方维护50秒及刷新；不推算浸染、净化、风化覆盖或时间线，不代表敌人当前风化/浸染状态。按命中元素匹配已激活属性或风，冰包含烈霜，以太包含玄墨；不改实际攻击元素，不支持把wind/frost/auric-ink/lumiflux声明为独立浸染属性。多个属性取覆盖并集，同一命中只贡献一次；两职业分支共用本绑定的元素事实及局外CR，声明必须一致。非锋御普通CD、锋御锐暴伤，核心1—7与局外CR帽沿原文。同绑定同职业分支与旧core-wind选项互斥，不能双算；不同来源在实际消费同一输出时仍按single-source-only明确拒绝，不猜覆盖或最强来源。此选项不包括额外能力的8%直接伤害。"
+
+/** 复用旧分支数值和职业契约；状态集合只派生布尔事实，不成为层数。 */
+export const ROXY_CORE_ELEMENT_SUPPLEMENTS: readonly SupplementOption[] =
+  ROXY_CORE_WIND_SUPPLEMENTS.map((legacy, index) => {
+    const slug = index
+      ? "core-element-sharp-critical-damage"
+      : "core-element-critical-damage"
+    const name = index
+      ? "核心 · 有效元素增益锐暴伤"
+      : "核心 · 有效元素增益普通暴伤"
+    return {
+      ...legacy,
+      supplementId: `nanoka:agents:1621:${slug}`,
+      optionId: `nanoka:agents:1621:${slug}`,
+      supportedRanks: "核心1—7；影画0—6；0—1开关；显式有效元素集合",
+      computationTarget:
+        "critical damage on the union of explicitly active elemental buffs and wind",
+      evidence: [
+        ...legacy.evidence,
+        ...(
+          [
+            [
+              "1091",
+              "zh",
+              "45f70931c081d73d085eadea5a23d6c21cc314019090d0577a76a9b3f722973e",
+            ],
+            [
+              "1091",
+              "en",
+              "bad069eb3645dde14af355e4121faef405c296d938bb0d7a512eb9f3b9c39a35",
+            ],
+            [
+              "1371",
+              "zh",
+              "70e3e1b3347c44e01167bd017d799b73d4a6fee751038484e62475f5e32bf1b3",
+            ],
+            [
+              "1371",
+              "en",
+              "febb1ccad3f134e9bbe551abdf83772055ad66480e3619e2b022ba7fc94dc6d3",
+            ],
+          ] as const
+        ).map(([id, locale, sha256]) => ({
+          path: `agents/${id}/details.${locale}.json`,
+          pointer: "/specialElementType/desc",
+          sha256,
+        })),
+      ],
+      verification: `Nanoka 3.2 中英文七档核心desc/0确认对应属性及风属性、不同属性独立50秒刷新；公式沿旧风分支min(cap(core), coefficient×max(0,c))。当前ZZZ-HP 0a6c2d872babf36c017db92981ef2fa659fc6c56 /agents/33/mindscapeBuffs/0/effectBlocks/0 的note同文，但机器记录elementFilter=all，普通CD未排除锋御；当前zzz_calculator da6a8c08bcc447c49da2bbb657891ded6dfa11d6 /teammates/0/buffs/0及实际网站/api/meta的/combatBuffs/0仍省略元素条件，不照搬。烈霜/玄墨依Nanoka3.2中英specialElementType/desc与既有元素继承契约匹配冰/以太。${elementDescription}低层supplied需显式提供五个绑定count状态读数（1有效、0无效），不提供不会默认为全元素有效；职业事实继续由目录保证。未进行游戏实测。`,
+      rule: {
+        ...legacy.rule,
+        effectId: `agent:1621:nanoka:${slug}`,
+        section: name,
+        when: {
+          kind: "any",
+          conditions: elementStates.map(({ element, hitElements }) => ({
+            kind: "all",
+            conditions: [
+              { kind: "one-of", fact: "hit.element", values: hitElements },
+              {
+                kind: "compare-number",
+                unit: "count",
+                operator: "eq",
+                left: {
+                  kind: "input",
+                  unit: "count",
+                  name: elementInputName(element),
+                },
+                right: { kind: "literal", unit: "count", value: 1 },
+              },
+            ],
+          })),
+        },
+      },
+      variant: {
+        ...legacy.variant,
+        name,
+        conditionDescription: elementDescription,
+        elementBuffInputs: elementStates.map(({ element }) => ({
+          element,
+          inputName: elementInputName(element),
+        })),
+      },
+    }
+  })
+
 /** 任一保留 supplement/option/主附加 effect 身份都在折叠前检查完整登记。 */
 export function verifyRoxyCoreWindRegistrations(
   supplements: readonly Supplement[],
@@ -149,7 +253,10 @@ export function verifyRoxyCoreWindRegistrations(
             (rule) => rule.effectId,
           )
         : []
-    const matches = ROXY_CORE_WIND_SUPPLEMENTS.filter(
+    const matches = [
+      ...ROXY_CORE_WIND_SUPPLEMENTS,
+      ...ROXY_CORE_ELEMENT_SUPPLEMENTS,
+    ].filter(
       (expected) =>
         actual.supplementId === expected.supplementId ||
         ("optionId" in actual && actual.optionId === expected.optionId) ||
