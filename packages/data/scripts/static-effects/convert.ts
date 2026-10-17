@@ -36,6 +36,7 @@ import {
 } from "./roxy-mindscapes.ts"
 import { verifyRoxyAdditionalRegistrations } from "./roxy-additional.ts"
 import { verifyRoxyCoreWindRegistrations } from "./roxy-core-wind.ts"
+import { verifyYixuanThunderRegistrations } from "./yixuan-thunder.ts"
 import {
   COMPLETE_STATE_OPTIONS,
   HUGO_ATTACK_SOURCE_KEY,
@@ -4013,6 +4014,7 @@ export function convertSource(
   verifyRoxyMindscapeRegistrations(supplements)
   verifyRoxyAdditionalRegistrations(supplements)
   verifyRoxyCoreWindRegistrations(supplements)
+  verifyYixuanThunderRegistrations(supplements)
   verifyYanagiPolarityIsolation(collected.records, collected.entities)
   // 缺失条款与共存记录先验证，再编译普通记录；未知 stat / unsupported
   // 不得抢先掩盖完整来源上下文的漂移。实体缺失仍由补充身份校验拒绝。
@@ -4923,7 +4925,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "45",
+    revision: "46",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: effects.some(

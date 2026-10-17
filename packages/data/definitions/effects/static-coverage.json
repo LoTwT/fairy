@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "45",
+  "revision": "46",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -30341,6 +30341,38 @@
       "status": "integrated"
     },
     {
+      "supplementId": "nanoka:agents:yixuan:m2-talisman-suppression-break-damage",
+      "source": "nanoka-integrated@3.2 agents/1371 /talent/2/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:yixuan:m2-talisman-suppression-break-damage",
+      "effectIds": [
+        "agent:1371:nanoka:m2-talisman-suppression-break-damage:mindscape:2"
+      ],
+      "supportedRanks": "影画 2 及以上；层数 0—1",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:yixuan:m1-falling-thunder-damage",
+      "source": "nanoka-integrated@3.2 agents/1371 /talent/1/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:yixuan:m1-falling-thunder-damage",
+      "effectIds": ["agent:1371:nanoka:m1-falling-thunder-damage:mindscape:1"],
+      "supportedRanks": "影画 1 及以上；层数 0—1",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:yixuan:aa-falling-thunder-damage",
+      "source": "nanoka-integrated@3.2 agents/1371 /passive/level/1371501—1371507/desc/1",
+      "kind": "option",
+      "optionId": "nanoka:agents:yixuan:aa-falling-thunder-damage",
+      "effectIds": ["agent:1371:nanoka:aa-falling-thunder-damage:mindscape:0"],
+      "supportedRanks": "影画 0—6；核心 1—7；层数 0—1",
+      "computationTarget": "catalog option on the mapped agent entity",
+      "status": "integrated"
+    },
+    {
       "supplementId": "nanoka:agents:1621:core-wind-critical-damage",
       "source": "nanoka-integrated@3.2 agents/1621 /passive/level/1621501—1621507/desc/0",
       "kind": "option",
@@ -31300,17 +31332,17 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 896,
-    "options": 929,
+    "rules": 899,
+    "options": 932,
     "converted": 1126,
     "corrected": 143,
     "unsupported": 21,
     "supplements": {
-      "records": 101,
-      "rules": 72,
-      "options": 63,
+      "records": 104,
+      "rules": 75,
+      "options": 66,
       "entities": 4,
-      "integrated": 68,
+      "integrated": 71,
       "outOfScope": 33
     }
   },

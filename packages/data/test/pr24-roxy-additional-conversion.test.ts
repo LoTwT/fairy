@@ -62,7 +62,7 @@ const independent = (entry: SupplementOption): SupplementOption => ({
 describe("Roxy additional ability frozen supplement registration", () => {
   it("generates precisely three independent rules and options on the existing Nanoka entity", () => {
     const output = convert()
-    expect(output.definitions.revision).toBe("45")
+    expect(output.definitions.revision).toBe("46")
     expect(entries).toHaveLength(3)
     expect(output.catalog.entities).toHaveLength(1)
     expect(output.catalog.entities[0]).toMatchObject({

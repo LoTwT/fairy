@@ -2150,7 +2150,7 @@ describe("fixed-source catalog conformance", () => {
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
     it("exposes one complete option with the original rules and migration evidence", () => {
-      expect(catalog.revision).toBe("45")
+      expect(catalog.revision).toBe("46")
       expect(
         catalog.differences.some((d) => d.differenceId === differenceId),
         differenceId,
@@ -5035,10 +5035,12 @@ describe("velina cyclone catalog linkage", () => {
       // 洛克茜额外能力再增两个独立条款，均为单规则单选项。
       // 核心单状态风伤再增普通暴伤、锐暴伤两个职业分支。
       // C4 额外能力第三条再增一个独立风化系数规则及选项。
-      records: 101,
-      integrated: 68,
-      rules: 72,
-      options: 63,
+      // 批次 27 再增仪玄影画 2[符法千重-破]与影画 1、额外能力两道落雷
+      // 三条独立结算补充（单规则单选项，影画门槛/额外能力队伍资格）。
+      records: 104,
+      integrated: 71,
+      rules: 75,
+      options: 66,
       entities: 4,
       outOfScope: 33,
     })

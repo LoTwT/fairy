@@ -1,6 +1,7 @@
 import { LUCY_GUARD_BOAR_SUPPLEMENTS } from "./lucy-guard-boar.ts"
 import { ROXY_MINDSCAPE_SUPPLEMENTS } from "./roxy-mindscapes.ts"
 import { ROXY_ADDITIONAL_SUPPLEMENTS } from "./roxy-additional.ts"
+import { YIXUAN_THUNDER_SUPPLEMENTS } from "./yixuan-thunder.ts"
 import {
   ROXY_CORE_ELEMENT_SUPPLEMENTS,
   ROXY_CORE_WIND_SUPPLEMENTS,
@@ -6138,6 +6139,7 @@ const astraYaoMindscape4QuickAssistDamage: Supplement = {
 export const SUPPLEMENTS: readonly Supplement[] = [
   ...ROXY_MINDSCAPE_SUPPLEMENTS,
   ...ROXY_ADDITIONAL_SUPPLEMENTS,
+  ...YIXUAN_THUNDER_SUPPLEMENTS,
   ...ROXY_CORE_WIND_SUPPLEMENTS,
   ...ROXY_CORE_ELEMENT_SUPPLEMENTS,
   ...LUCY_GUARD_BOAR_SUPPLEMENTS,
