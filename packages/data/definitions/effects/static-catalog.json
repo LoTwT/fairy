@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "45",
+  "revision": "46",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -46547,6 +46547,240 @@
       ]
     },
     {
+      "optionId": "nanoka:agents:yixuan:m2-talisman-suppression-break-damage",
+      "catalogEntityId": "agents:yixuan",
+      "name": "影画2 · 强化特殊技：符法千重-破（独立结算）",
+      "conditionDescription": "影画 2 起：发动[强化特殊技：青溟震击-破]后点按特殊技键，消耗一层[聚墨]发动[强化特殊技：符法千重-破]，按仪玄当前贯穿力的 1200% 结算一次独立贯穿伤害（「最多」按满额取舍）。触发与[聚墨]层数由调用方声明并逐次结算：独立项以 special 分类结算（可同时声明 all-special 目标消费特殊技作用域增益），元素由调用方按实际结算声明；[聚墨]取得链、一层上限与按键时序不模拟。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 2
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1371/details.zh.json",
+              "pointer": "/talent/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1371/details.en.json",
+              "pointer": "/talent/2/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1371:nanoka:m2-talisman-suppression-break-damage:mindscape:2"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "yixuan:talisman-suppression-break-damage",
+              "stat": "sheerForce",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "special"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:yixuan:m1-falling-thunder-damage",
+      "catalogEntityId": "agents:yixuan",
+      "name": "影画1 · 清灵道心落雷（独立结算）",
+      "conditionDescription": "影画 1 起：队伍中任意角色命中敌人时，仪玄自动追加一道落雷，按仪玄当前贯穿力的 50% 结算一次独立贯穿伤害并额外回复 5 点闪能（资源不模拟）。触发由调用方声明并逐次结算：独立项以 uncategorized 分类锁定、元素由调用方按实际结算声明；6 秒内最多一次的触发间隔不模拟。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 1
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1371/details.zh.json",
+              "pointer": "/talent/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1371/details.en.json",
+              "pointer": "/talent/1/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1371:nanoka:m1-falling-thunder-damage:mindscape:1"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "yixuan:m1-falling-thunder-damage",
+              "stat": "sheerForce",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:yixuan:aa-falling-thunder-damage",
+      "catalogEntityId": "agents:yixuan",
+      "name": "额外能力：玄墨暗涌 · 落雷（独立结算）",
+      "conditionDescription": "额外能力：同队存在[击破]、[支援]或[防护]角色时（由目录按绑定队伍校验资格），仪玄被极限支援换下场时自动追加一道落雷，按仪玄当前贯穿力的 225% 结算一次独立贯穿伤害并额外回复 5 点闪能（资源不模拟）。触发由调用方声明并逐次结算：独立项以 uncategorized 分类锁定、元素由调用方按实际结算声明；极限支援检测与换人时序不模拟。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {},
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1371/details.zh.json",
+              "pointer": "/passive/level/1371501/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1371/details.zh.json",
+              "pointer": "/passive/level/1371502/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1371/details.zh.json",
+              "pointer": "/passive/level/1371503/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1371/details.zh.json",
+              "pointer": "/passive/level/1371504/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1371/details.zh.json",
+              "pointer": "/passive/level/1371505/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1371/details.zh.json",
+              "pointer": "/passive/level/1371506/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "zh",
+              "resourcePath": "agents/1371/details.zh.json",
+              "pointer": "/passive/level/1371507/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1371/details.en.json",
+              "pointer": "/passive/level/1371501/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1371/details.en.json",
+              "pointer": "/passive/level/1371502/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1371/details.en.json",
+              "pointer": "/passive/level/1371503/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1371/details.en.json",
+              "pointer": "/passive/level/1371504/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1371/details.en.json",
+              "pointer": "/passive/level/1371505/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1371/details.en.json",
+              "pointer": "/passive/level/1371506/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.2",
+              "locale": "en",
+              "resourcePath": "agents/1371/details.en.json",
+              "pointer": "/passive/level/1371507/desc/1"
+            }
+          ],
+          "effectIds": [
+            "agent:1371:nanoka:aa-falling-thunder-damage:mindscape:0"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {
+            "otherTeammateProfessions": ["击破", "支援", "防护"]
+          },
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "yixuan:aa-falling-thunder-damage",
+              "stat": "sheerForce",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "holder-current",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "optionId": "nanoka:agents:1621:core-wind-critical-damage",
       "catalogEntityId": "nanoka:agents:1621",
       "name": "核心 · 单状态风伤普通暴伤",
@@ -53059,6 +53293,14 @@
       "countsAsFollowUp": false
     },
     {
+      "targetId": "zzz-hp:skill:yixuan-aa-falling-thunder",
+      "upstreamId": null,
+      "agentEntityId": "1371",
+      "category": "uncategorized",
+      "name": "玄墨暗涌·落雷",
+      "countsAsFollowUp": false
+    },
+    {
       "targetId": "zzz-hp:skill:yixuan-basic-ms319ks9",
       "upstreamId": "yixuan-basic-ms319ks9",
       "agentEntityId": "1371",
@@ -53075,6 +53317,14 @@
       "countsAsFollowUp": false
     },
     {
+      "targetId": "zzz-hp:skill:yixuan-m1-falling-thunder",
+      "upstreamId": null,
+      "agentEntityId": "1371",
+      "category": "uncategorized",
+      "name": "清灵道心·落雷",
+      "countsAsFollowUp": false
+    },
+    {
       "targetId": "zzz-hp:skill:yixuan-special-ms31byco",
       "upstreamId": "yixuan-special-ms31byco",
       "agentEntityId": "1371",
@@ -53088,6 +53338,14 @@
       "agentEntityId": "1371",
       "category": "special",
       "name": "强化特殊技：墨烬影消",
+      "countsAsFollowUp": false
+    },
+    {
+      "targetId": "zzz-hp:skill:yixuan-talisman-suppression-break",
+      "upstreamId": null,
+      "agentEntityId": "1371",
+      "category": "special",
+      "name": "强化特殊技：符法千重-破",
       "countsAsFollowUp": false
     },
     {

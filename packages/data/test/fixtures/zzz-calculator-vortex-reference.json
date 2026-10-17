@@ -65,7 +65,7 @@
       "packageVersion": "0.3.0",
       "contractVersion": 2,
       "gameVersion": "3.2",
-      "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
+      "snapshotId": "sha256:754db1ed00046d2da9b9f893a48c607badbc9e5137169217a4bd3b1678f25540"
     }
   },
   "inputLayer": "externally-declared-resolved-source-state",
@@ -107295,6 +107295,18 @@
         }
       },
       "currentSnapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
+    },
+    {
+      "reason": "Revision 46 adds opt-in Yixuan mindscape 2 Talisman Suppression - Break and the mindscape 1 / additional ability falling thunder independent settlements; the comparison scenarios never select these options, so native upstream captures and all numeric results stay frozen. Only the current consumption snapshot and the two changed Fairy artifact digests are refreshed.",
+      "implementationBase": "67bc0ac8ead4a86899dcf3367691a8a5861dddc6",
+      "previous": {
+        "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "c76226ebc3ba5e886cfd84800aeb230450b3cd5bbcbb615ae6b1a054bb93e98b",
+          "packages/data/definitions/effects/static-catalog.json": "e4a24ee13829885ca0848f384bfdae69e53b478e811597a187eecd3e5c0dd5f4"
+        }
+      },
+      "currentSnapshotId": "sha256:754db1ed00046d2da9b9f893a48c607badbc9e5137169217a4bd3b1678f25540"
     }
   ]
 }
