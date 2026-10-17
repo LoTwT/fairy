@@ -1168,6 +1168,26 @@ EX 原式 `{Skill:1181006, Prop:1001}*2` 已包含两颗，不能再次乘 2；2
 
 缺少核心档位仅限制依赖该参数的选项/档位；同一实体其他已支持选项继续可用。部分支持不等于整个角色或全部影画已覆盖。
 
+### ID 语法与不透明性
+
+`optionId`、`effectId` 与 `catalogEntityId` 是三类语法不同的标识。`optionId` 与 `effectId` 对消费者不透明：不得按前缀解析、拆段比较或推断实体归属，选项的实体归属唯一权威是选项上的 `catalogEntityId` 字段。当前制品（revision 45）929 个选项中有 89 个的 `optionId` 不以其自身 `catalogEntityId` 为前缀：14 个来自实体 slug 的百分号编码差异（奥菲丝&「鬼火」10 个、折枝剑歌 3 个、喵运当头 1 个），75 个是挂在固定来源实体下的 `nanoka:` 前缀补充选项（如 `agents:lucy` 名下的 `nanoka:agents:lucy:guard-boar-inheritance` 与 `nanoka:agents:lucy:m6-boar-rain`）。按前缀过滤或拆段匹配会漏掉或错配这些选项。
+
+固定来源的选项与规则 ID 由[转换器](../../../packages/data/scripts/static-effects/convert.ts)生成，`idPart` 即 `encodeURIComponent`，表中 `<enc(…)>` 标记经其编码的段：
+
+| 标识              | 主体形式语法                                                                | 段含义与用途                                                                                                                                                                                               |
+| ----------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `optionId`        | `<类别>:<enc(slug)>:<rankKind>:<rank>:<enc(块ID)>:<enc(效果ID)>`            | 类别为 `agents` / `w-engines` / `drive-discs`；slug 是来源实体 ID；`rankKind:rank` 为 `mindscape:0—6`、`fixed:0` 或 `setPieces:2/4`。用于 `selections[].optionId` 与目录选项身份。                         |
+| `effectId`        | `<类别单数>:<Fairy身份>:zzz-hp:<enc(效果ID)>:<enc(块ID)>:<rankKind>:<rank>` | 类别单数为 `agent` / `w-engine` / `disc`；实体段是身份映射后的 Fairy 数字 ID（如 `1301`），与 `optionId` 的 slug 段不同源；效果段在前、块段在后，段序与 `optionId` 相反。用于变体 `effectIds` 与规则身份。 |
+| `catalogEntityId` | `<类别>:<来源slug>` 或 `nanoka:<类别>:<数字ID>`                             | 原始字符，不做百分号编码。用于选项、实体与覆盖报告的实体归属。                                                                                                                                             |
+
+既有形态在三处偏离主体语法。其一，音擎五档精炼经结构核对合并为 by-rank 参数表时，`optionId` 与 `effectId` 的精炼段退化为无档位数字的 `refinement`（当前 265 个选项、115 条规则，如 `w-engines:Promotion%20Stats:refinement:blk-mtwn69lr-xfb4n8:eff-mtwn69lr-2h2brm` 与 `w-engine:13017:zzz-hp:eff-mtwn69lr-2h2brm:blk-mtwn69lr-xfb4n8:refinement`）；其二，完整状态选项以手写条款 slug 收尾，段数不定（如 `agents:yuzuha:mindscape:0:tanuki-wish-complete-state`、`agents:remiel:mindscape:1:phase-transition-flow:other-character-anomaly-damage`）；其三，补充来源选项为 `nanoka:<类别>:<slug或数字ID>:<条款名>`，可再带 `potential` / `refinement` 培养段（如 `nanoka:agents:soldier11:potential:flame-prowess`），补充 `effectId` 把来源族段 `zzz-hp` 换成 `nanoka` 并接自由条款段（如 `agent:1621:nanoka:m1-critical-damage`）。这些偏离由生成器维护，不能用段数或段序假设解析。
+
+**百分号编码**：`optionId` 的 slug、块与效果段经 `idPart` 编码，`effectId` 的块与效果段同样编码；当前制品中实际被编码改变的只有 3 个来源 slug，全部出现在 `optionId` 的实体段——`orphie&magus` → `orphie%26magus`（奥菲丝&「鬼火」，10 个选项）、`SuitBranch&BladeSong` → `SuitBranch%26BladeSong`（折枝剑歌，3 个选项）、`Promotion Stats` → `Promotion%20Stats`（喵运当头，1 个选项）。`catalogEntityId`、覆盖报告与证据键（[语义登记](../../../packages/data/scripts/static-effects/semantics.ts) 的 `category/slug/...` 键与[档位证据](../../../packages/data/scripts/static-effects/rank-evidence.json) 的 `slug:block:...` 键）一律使用原始 slug。同一实体的三面实例：选项 `agents:orphie%26magus:mindscape:0:blk-legacy:eff-ms4hvpzg-frlpi8`、规则 `agent:1301:zzz-hp:eff-ms4hvpzg-frlpi8:blk-legacy:mindscape:0`、归属 `agents:orphie&magus`。
+
+**`catalogEntityId` 两种形态与补充挂靠**：`<类别>:<来源slug>` 是固定来源实体（`upstreamId` 即该 slug），当前 187 个（代理人 59、音擎 98、驱动盘 30）；`nanoka:` 开头是补充实体（`upstreamId` 为 null），当前 4 个（`nanoka:agents:1621`、`nanoka:w-engines:12014`、`nanoka:w-engines:13111`、`nanoka:w-engines:14162`）。`nanoka:` 前缀的 96 个补充选项中，21 个挂在补充实体自身名下，75 个挂在固定来源实体下；挂靠关系只由选项的 `catalogEntityId` 字段表达，`optionId` 前缀既不区分也不携带它。
+
+**不透明声明**：`optionId` 与 `effectId` 是稳定但不透明的标识。实体归属读选项的 `catalogEntityId`；类别、培养边界与可用档位读 `variants[].configuration`；显示名与条件读 `name` / `conditionDescription`。段序、编码、合并省略与补充形态都是生成器实现细节，随修订变化，不构成消费契约，消费者不得据其派生任何语义。
+
 ## 转换规则
 
 ### 读取路径与配置
