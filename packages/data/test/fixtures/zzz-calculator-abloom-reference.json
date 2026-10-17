@@ -129,7 +129,7 @@
   "fairy": {
     "base": "fe6b4e9180eade623740131422259df0ee542281",
     "dataVersion": {
-      "packageVersion": "0.2.1",
+      "packageVersion": "0.3.0",
       "contractVersion": 2,
       "gameVersion": "3.2",
       "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -4134,7 +4134,7 @@
     "vivian:false": {
       "entrypoint": "calculateStaticActionDamage",
       "dataVersion": {
-        "packageVersion": "0.2.1",
+        "packageVersion": "0.3.0",
         "contractVersion": 2,
         "gameVersion": "3.2",
         "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -4400,7 +4400,7 @@
     "vivian:true": {
       "entrypoint": "calculateStaticActionDamage",
       "dataVersion": {
-        "packageVersion": "0.2.1",
+        "packageVersion": "0.3.0",
         "contractVersion": 2,
         "gameVersion": "3.2",
         "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -4672,7 +4672,7 @@
     "aria:false": {
       "entrypoint": "calculateStaticActionDamage",
       "dataVersion": {
-        "packageVersion": "0.2.1",
+        "packageVersion": "0.3.0",
         "contractVersion": 2,
         "gameVersion": "3.2",
         "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -4936,7 +4936,7 @@
     "aria:true": {
       "entrypoint": "calculateStaticActionDamage",
       "dataVersion": {
-        "packageVersion": "0.2.1",
+        "packageVersion": "0.3.0",
         "contractVersion": 2,
         "gameVersion": "3.2",
         "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -7088,7 +7088,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -9556,7 +9556,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -12080,7 +12080,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -14752,7 +14752,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -16459,7 +16459,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -18242,7 +18242,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -20039,7 +20039,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -22026,7 +22026,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -24640,7 +24640,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -27409,7 +27409,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -30055,7 +30055,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -32649,7 +32649,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -35243,7 +35243,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -37837,7 +37837,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -40431,7 +40431,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -43025,7 +43025,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -45895,7 +45895,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -48505,7 +48505,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -51099,7 +51099,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -53657,7 +53657,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -56453,7 +56453,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -59089,7 +59089,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -61911,7 +61911,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -63906,7 +63906,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -65953,7 +65953,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -67796,7 +67796,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -69869,7 +69869,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -72711,7 +72711,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -75870,7 +75870,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -78869,7 +78869,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -81764,7 +81764,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -84659,7 +84659,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -87554,7 +87554,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -90449,7 +90449,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -93344,7 +93344,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -96515,7 +96515,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -99426,7 +99426,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -102321,7 +102321,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -105056,7 +105056,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -107913,7 +107913,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -110975,7 +110975,7 @@
       "fairy": {
         "entrypoint": "calculateStaticDamageFromCatalog",
         "dataVersion": {
-          "packageVersion": "0.2.1",
+          "packageVersion": "0.3.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
           "snapshotId": "sha256:3a842b434d5cb7568dc843873e1f23b58f2daf6820970620e2aeb316667c029d"
@@ -138180,7 +138180,7 @@
       "base": "598ebdfae35f05cc92bf273f516207edfca3d959",
       "originalFixtureSha256": "2539cc19abe749da0ce7531f9b75abafb7d99320718000de5ccfd8a893cff087",
       "previousDataVersion": {
-        "packageVersion": "0.2.1",
+        "packageVersion": "0.3.0",
         "contractVersion": 2,
         "gameVersion": "3.2",
         "snapshotId": "sha256:23dff13e6e2d5c2a62c6afc7fd0b97e8fd55d48ea405e4001e60c17890b1244f"

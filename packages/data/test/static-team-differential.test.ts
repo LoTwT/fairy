@@ -743,7 +743,7 @@ describe("fixed-panel team differential fixtures", () => {
     // 参考数值仍然有效：固定效果提交未变（下行断言），且本批 59 槽位不消费
     // revision 15 与 16 改动的规则（逐槽数值对照在后续用例中锁定）。
     expect(loaded.version).toEqual({
-      packageVersion: "0.2.1",
+      packageVersion: "0.3.0",
       contractVersion: 2,
       gameVersion: "3.2",
       snapshotId:

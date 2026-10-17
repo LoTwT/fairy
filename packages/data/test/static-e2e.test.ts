@@ -83,7 +83,7 @@ async function inputFor(
     wEngines: [...new Set(selected.map((b) => b.wEngineName))],
   })
   expect(data.version).toEqual({
-    packageVersion: "0.2.1",
+    packageVersion: "0.3.0",
     contractVersion: 2,
     gameVersion: "3.2",
     snapshotId:
