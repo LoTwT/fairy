@@ -513,12 +513,12 @@ describe("publication snapshot", () => {
     const relativePath = "agents/2/data.json"
     const maximumBytes =
       policy.fetchLimits.maximumBytesPerRun * outputExpansionLimit
-    const writeFile = fs.writeFile
+    const rename = fs.rename
     let injected = false
-    vi.spyOn(fs, "writeFile").mockImplementation(async (path, ...args) => {
-      await writeFile(path, ...args)
-      if (path === join(generated, "integrated/index.json")) {
-        await writeFile(
+    vi.spyOn(fs, "rename").mockImplementation(async (from, to, ...args) => {
+      await rename(from, to, ...args)
+      if (to === join(generated, "integrated/index.json")) {
+        await fs.writeFile(
           join(artifactDirectory, relativePath),
           " ".repeat(maximumBytes + 1),
         )
@@ -618,14 +618,14 @@ describe("publication snapshot", () => {
       dirname(artifactDirectory),
       `.${basename(artifactDirectory)}.fairy-state`,
     )
-    const writeFile = fs.writeFile
+    const rename = fs.rename
     let injected = false
-    vi.spyOn(fs, "writeFile").mockImplementation(async (path, ...args) => {
-      if (path === join(generated, "integrated/index.json")) {
+    vi.spyOn(fs, "rename").mockImplementation(async (from, to, ...args) => {
+      if (to === join(generated, "integrated/index.json")) {
         await fs.mkdir(control)
         injected = true
       }
-      return writeFile(path, ...args)
+      return rename(from, to, ...args)
     })
     await expect(
       preparePublication(artifactDirectory, generated),
@@ -644,22 +644,22 @@ describe("publication snapshot", () => {
         "integrated",
         changed === "entity bytes" ? "agents/2/data.json" : "index.json",
       )
-      const writeFile = fs.writeFile
+      const rename = fs.rename
       let injected = false
-      vi.spyOn(fs, "writeFile").mockImplementation(async (path, ...args) => {
-        if (path === target) {
-          const bytes = Buffer.from(args[0] as Uint8Array)
+      vi.spyOn(fs, "rename").mockImplementation(async (from, to, ...args) => {
+        if (to === target) {
+          const bytes = await fs.readFile(from)
           if (changed === "entity bytes")
-            args[0] = Buffer.concat([bytes, Buffer.from(" ")])
+            await fs.writeFile(from, Buffer.concat([bytes, Buffer.from(" ")]))
           else {
             const index = JSON.parse(bytes.toString())
             index.entities.agents.members["2"].sourceRecord.injected =
               "unverified change"
-            args[0] = JSON.stringify(index)
+            await fs.writeFile(from, JSON.stringify(index))
           }
           injected = true
         }
-        return writeFile(path, ...args)
+        return rename(from, to, ...args)
       })
       await expect(
         preparePublication(artifactDirectory, generated),

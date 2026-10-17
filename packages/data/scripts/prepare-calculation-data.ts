@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto"
-import { readFile, writeFile } from "node:fs/promises"
+import { readFile } from "node:fs/promises"
 import { join } from "node:path"
+import { writeFileAtomically } from "./atomic-write.ts"
 import { claretPanelConversion } from "./claret-panel-conversion.ts"
 import {
   CALCULATION_CONTRACT_VERSION,
@@ -352,7 +353,7 @@ export async function prepareCalculationData(
     gameVersion: index.source.version,
     snapshotId: `sha256:${hash.digest("hex")}`,
   }
-  await writeFile(
+  await writeFileAtomically(
     join(directory, "calculation-data.ts"),
     `// Generated from the verified publication snapshot.\nimport type { CalculationDataVersion, StaticPanelRules } from "@randomplay/shared"\nexport const calculationDataVersion: CalculationDataVersion = Object.freeze(${JSON.stringify(version)})\nexport const staticPanelRules: StaticPanelRules = ${JSON.stringify(panelRules)}\n`,
   )

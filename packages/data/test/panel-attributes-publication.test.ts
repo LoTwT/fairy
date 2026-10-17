@@ -124,13 +124,13 @@ describe("panel attribute publication", () => {
       } else {
         await rm(join(next, "effects/static-catalog.json"))
       }
-      const originalWriteFile = fs.writeFile
+      const originalRename = fs.rename
       let replaced = false
-      vi.spyOn(fs, "writeFile").mockImplementation(async (path, ...args) => {
-        await originalWriteFile(path, ...args)
-        if (path === join(frozen, "effects/static-catalog.json")) {
-          await fs.rename(source, join(root, "definitions-old"))
-          await fs.rename(next, source)
+      vi.spyOn(fs, "rename").mockImplementation(async (from, to, ...args) => {
+        await originalRename(from, to, ...args)
+        if (to === join(frozen, "effects/static-catalog.json")) {
+          await originalRename(source, join(root, "definitions-old"))
+          await originalRename(next, source)
           replaced = true
         }
       })
