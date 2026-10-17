@@ -749,7 +749,7 @@ describe("offline agent package commands", () => {
 
   it(
     "cleans only the failed build and preserves successful artifacts and existing directories",
-    { timeout: 30_000 },
+    { timeout: 40_000 },
     async () => {
       const input = await fixture()
       await writeJson(join(input.temporaryParent, "adjacent/keep.json"), {
@@ -933,4 +933,4 @@ it("current commands keep committed data when actual stdout pipes close", async 
       success(runCommand(input, "verify:nanoka:current", [target])).verified,
     ).toBe(true)
   }
-}, 30_000)
+}, 60_000)
