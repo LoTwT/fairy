@@ -1,10 +1,11 @@
-import { lstat, mkdir, readFile, writeFile } from "node:fs/promises"
+import { lstat, mkdir, readFile } from "node:fs/promises"
 import { basename, dirname, join, resolve } from "node:path"
 import type { ExportFileReference } from "../src/integration/agent-types.ts"
 import type {
   IntegratedSnapshotEntity,
   IntegratedSnapshotIndex,
 } from "../src/integration/snapshot-types.ts"
+import { writeFileAtomically } from "./atomic-write.ts"
 import { outputExpansionLimit } from "./nanoka-integration/artifact-files.ts"
 import { withCurrentDataset } from "./nanoka-integration/current.ts"
 import { directoryRoot, readBytes } from "./nanoka-integration/files.ts"
@@ -252,9 +253,9 @@ export async function preparePublication(
     const root = await directoryRoot(artifactDirectory)
     for (const path of publicationFiles(index)) {
       const bytes = await readBytes(root, path, maximumBytes)
-      const destination = join(snapshot, path)
-      await mkdir(dirname(destination), { recursive: true })
-      await writeFile(destination, bytes, { flag: "wx" })
+      await writeFileAtomically(join(snapshot, path), bytes, {
+        exclusive: true,
+      })
     }
     return verifyIntegratedSnapshot({
       artifactDirectory: snapshot,
@@ -270,10 +271,10 @@ export async function preparePublication(
     throw new Error(
       "Static publication source became managed during copying; retry under its lock",
     )
-  await writeFile(
+  await writeFileAtomically(
     join(outputDirectory, "catalog.ts"),
     await generateCatalog(snapshot, index),
-    { flag: "wx" },
+    { exclusive: true },
   )
   return index
 }
