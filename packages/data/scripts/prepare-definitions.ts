@@ -1,6 +1,7 @@
-import { mkdir, writeFile } from "node:fs/promises"
-import { dirname, join } from "node:path"
+import { mkdir } from "node:fs/promises"
+import { join } from "node:path"
 import type { IntegratedSnapshotIndex } from "../src/integration/snapshot-types.ts"
+import { writeFileAtomically } from "./atomic-write.ts"
 import { directoryRoot, readBytes } from "./nanoka-integration/files.ts"
 import {
   maximumAttributeBytes,
@@ -19,8 +20,9 @@ export async function prepareDefinitions(
   await mkdir(outputDirectory)
   for (const path of await regularFiles(source)) {
     const bytes = await readBytes(source, path, maximumAttributeBytes)
-    await mkdir(dirname(join(outputDirectory, path)), { recursive: true })
-    await writeFile(join(outputDirectory, path), bytes, { flag: "wx" })
+    await writeFileAtomically(join(outputDirectory, path), bytes, {
+      exclusive: true,
+    })
   }
   // 包含 effects 等非属性制品，拒绝捕获期间来源更替形成的跨版本副本。
   await verifyDefinitionsCopy(source, outputDirectory)
