@@ -31,6 +31,8 @@ JSON 子路径导出及根入口的公开 ID 类型、冻结 ID 列表与读取 
 `Astra Yao`（codeName 为 `Astra`），驱动盘 `31000` 为 `Woodpecker Electro`，WEngine `12001` 为
 `[Lunar] Pleniluna`（保留方括号与空格），邦布 `53001` 为 `Penguinboo`（codeName 拼写一致但属另一字段）、
 `53019` 为 `Bild N. Boolok`（保留空格与标点）。
+本地化（zh）名称不在 `agentNames` 等名称常量导出中，需按成员调用 `loadAgentDetails` 等对应类别的
+details 读取函数，从返回的当前语言 details 顶层 `name` 读取（如代理人 `1151` 的 zh 名称为「露西」）。
 名称、各类别内部英文名称到来源 ID 的映射、导入表及类型均由同一已验证发布副本生成；缺失、非字符串、空名称
 或类别内完全重名使构建失败并给出可定位文件，不覆盖、不修改来源。重名检查限定在各类别内；不同类别出现
 同名时各套 union 与映射仍按各类别成员独立生成。这些名称约束只适用于名称作为公开身份的类别；
