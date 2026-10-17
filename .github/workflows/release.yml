@@ -85,7 +85,7 @@ jobs:
             assert.equal(manifest.version, process.env.FAIRY_VERSION)
           }
           const document = readFileSync('docs/specs/core/static-calculation.md', 'utf8')
-          const examples = [...document.matchAll(/```ts\n([\s\S]*?)\n```/g)]
+          const examples = [...document.matchAll(/```ts canonical\n([\s\S]*?)\n```/g)]
           assert.equal(examples.length, 1, 'Expected one canonical complete example')
           writeFileSync(join(consumer, 'example.mts'), examples[0][1])
           const result = JSON.parse(execFileSync(process.execPath, ['example.mts'], { cwd: consumer, encoding: 'utf8' }))

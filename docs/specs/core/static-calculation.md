@@ -19,7 +19,7 @@
 当前时点明确开启核心减防、激素四件攻击增益和聚宝箱增伤；其余条件增益关闭。
 两件套由装备自动计入。副词条 `rolls` 包括初始档，以下每槽合计九档。
 
-```ts
+```ts canonical
 import { loadStaticCalculationData, resolveAgentAction } from "@randomplay/data"
 import { calculateStaticActionDamage } from "@randomplay/core"
 import type {
