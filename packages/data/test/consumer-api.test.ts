@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
 import type {
   AgentName,
+  AgentSourceId,
   BangbooName,
   DetailLocale,
   DriveDiscName,
@@ -8,6 +9,7 @@ import type {
   ShiyuId,
   BossId,
   WEngineName,
+  WEngineSourceId,
 } from "../src/index.ts"
 import { supportedLanguages } from "../src/nanoka-identity.ts"
 
@@ -802,13 +804,13 @@ describe("static calculation selection contract", () => {
     for (const selection of [
       null,
       undefined,
-      "Astra Yao",
+      "1311",
       {},
-      { agents: "Astra Yao" },
+      { agents: "1311" },
       { wEngines: [] },
       { agents: [1311], wEngines: [] },
       { agents: [], wEngines: [12001] },
-      { agents: ["Astra Yao"], wEngines: {} },
+      { agents: ["1311"], wEngines: {} },
     ])
       await expect(
         loadStaticCalculationData(selection as never),
@@ -817,12 +819,12 @@ describe("static calculation selection contract", () => {
       expect(loader).not.toHaveBeenCalled()
   })
 
-  it("lists every unknown name in one rejection without loading anything", async () => {
+  it("lists every unknown source ID in one rejection without loading anything", async () => {
     let rejection: unknown
     try {
       await loadStaticCalculationData({
-        agents: ["Astra Yao", "Ghost", "Astra Yao"] as AgentName[],
-        wEngines: ["[Lunar] Pleniluna", "Phantom"] as WEngineName[],
+        agents: ["1311", "9999", "8888", "1311"] as AgentSourceId[],
+        wEngines: ["12001", "Ghost Engine"] as WEngineSourceId[],
       })
     } catch (error) {
       rejection = error
@@ -830,8 +832,25 @@ describe("static calculation selection contract", () => {
     expect(rejection).toBeInstanceOf(UnknownCalculationEntitiesError)
     expect(rejection).toBeInstanceOf(Error)
     const unknown = rejection as UnknownCalculationEntitiesError
-    expect(unknown.agents).toEqual(["Ghost"])
-    expect(unknown.wEngines).toEqual(["Phantom"])
+    expect(unknown.agents).toEqual(["9999", "8888"])
+    expect(unknown.wEngines).toEqual(["Ghost Engine"])
+    for (const [, loader] of Object.entries(loaders))
+      expect(loader).not.toHaveBeenCalled()
+  })
+
+  it("treats an English name in the selection as an unknown source ID", async () => {
+    let rejection: unknown
+    try {
+      await loadStaticCalculationData({
+        agents: ["Astra Yao"] as never,
+        wEngines: [] as WEngineSourceId[],
+      })
+    } catch (error) {
+      rejection = error
+    }
+    expect(rejection).toBeInstanceOf(UnknownCalculationEntitiesError)
+    const unknown = rejection as UnknownCalculationEntitiesError
+    expect(unknown.agents).toEqual(["Astra Yao"])
     for (const [, loader] of Object.entries(loaders))
       expect(loader).not.toHaveBeenCalled()
   })
@@ -857,8 +876,8 @@ describe("static calculation selection contract", () => {
     loaders.staticDefinitions.mockResolvedValue({ ruleSetId: "static-effects" })
     loaders.staticCatalog.mockResolvedValue({ options: [] })
     const first = await loadStaticCalculationData({
-      agents: ["Astra Yao", "Astra Yao"],
-      wEngines: ["[Lunar] Pleniluna"],
+      agents: ["1311", "1311"],
+      wEngines: ["12001"],
     })
     expect(first.agents).toHaveLength(2)
     expect(first.wEngines).toHaveLength(1)
@@ -867,8 +886,8 @@ describe("static calculation selection contract", () => {
     expect(first.definitions).toEqual({ ruleSetId: "static-effects" })
     ;(first.agents[0]!.attributes as { entityId: string }).entityId = "mutated"
     const second = await loadStaticCalculationData({
-      agents: ["Astra Yao"],
-      wEngines: ["[Lunar] Pleniluna"],
+      agents: ["1311"],
+      wEngines: ["12001"],
     })
     expect(second.agents[0]!.attributes.entityId).toBe("1311")
     expect(loaders.agentAttributes).toHaveBeenCalledTimes(3)

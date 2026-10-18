@@ -32,7 +32,7 @@ const AA_ITEM = "yixuan:aa-falling-thunder-damage"
 let loaded: Awaited<ReturnType<typeof loadStaticCalculationData>> | undefined
 const data = async () => {
   loaded ??= await loadStaticCalculationData({
-    agents: ["Yixuan", "Anby"],
+    agents: ["1371", "1011"],
     wEngines: [],
   })
   return loaded

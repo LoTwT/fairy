@@ -14,7 +14,7 @@ import {
 } from "./fixtures/roxy-mindscape-consumer.ts"
 
 const loaded = await loadStaticCalculationData({
-  agents: ["Roxy", "Qingyi"],
+  agents: ["1621", "1251"],
   wEngines: [],
 })
 const roxy = loaded.agents.find((entry) => entry.actions.entityId === "1621")!

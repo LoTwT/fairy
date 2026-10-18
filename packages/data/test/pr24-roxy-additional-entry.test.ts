@@ -14,7 +14,7 @@ import {
 } from "./fixtures/roxy-additional-consumer.ts"
 
 const data = await api.loadStaticCalculationData({
-  agents: ["Roxy", "Anton"],
+  agents: ["1621", "1111"],
   wEngines: [],
 })
 const roxy = data.agents.find((record) => record.actions.entityId === "1621")!

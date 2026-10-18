@@ -1,7 +1,7 @@
 /** 同一真实动作夹具用于源码、离线安装和 Vite；不改写解析后的动作元素。 */
 export const roxyCoreElementsConsumerSource = String.raw`
 async function makeRoxyCoreElementsFixture(api) {
-  const data = await api.loadStaticCalculationData({agents:["Roxy","Anby","Claret","Miyabi","Yixuan","Ellen","Nicole","Soldier 11"],wEngines:["Crimson Moon Casket"]})
+  const data = await api.loadStaticCalculationData({agents:["1621","1011","1611","1091","1371","1191","1031","1041"],wEngines:["14162"]})
   const options = ["nanoka:agents:1621:core-element-critical-damage", "nanoka:agents:1621:core-element-sharp-critical-damage"]
   const actor = (id, agentId) => ({entityId:id,teamId:"team:players",agentEntityId:agentId,coreSkillLevel:7,mindscapeRank:0,wEngine:null,driveDiscs:{1:null,2:null,3:null,4:null,5:null,6:null},panel:{mode:"out-of-combat",stats:{health:{unit:"health-points",value:10000},attack:{unit:"attack-points",value:1000},defense:{unit:"defense-points",value:1700},sheerForce:{unit:"sheer-force-points",value:1000},criticalRate:{unit:"ratio",value:.25},criticalDamage:{unit:"ratio",value:.5},sharpCriticalDamage:{unit:"ratio",value:.5},penetrationRatio:{unit:"ratio",value:0}},penetrationValue:0,damageBonuses:{physical:0,fire:0,electric:0,wind:0,ice:0,ether:0,"auric-ink":0,frost:0}}})
   const request = (agentId="1011", ordinal="0009", elements=["electric"], coreSkillLevel=7, cr=.5) => {

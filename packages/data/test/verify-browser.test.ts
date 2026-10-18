@@ -349,7 +349,7 @@ globalThis.fairyRemielMindscape1CompleteState = async () => {
 }
 
 globalThis.fairyStaticInputs = async () => {
-  const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["Ben"], wEngines: [] }), import("@randomplay/core")])
+  const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["1121"], wEngines: [] }), import("@randomplay/core")])
   const agent = data.agents[0].actions
   const action = agent.actions.find(a => a.calculation.kind === "damage" && a.skillCategory && !a.inputs.length)
   const resolved = api.resolveAgentAction({ agent, actionId: action.actionId, mindscapeRank: 0, levels: Object.fromEntries(["basic", "dodge", "assist", "special", "chain"].map(group => [group, { mode: "trained", value: 12 }])) })
@@ -364,7 +364,7 @@ globalThis.fairyStaticInputs = async () => {
   return { attack: panel.stats.attack.value, totals: result.value.totals, manual: manual.value.totals, mismatchedRank }
 }
 globalThis.fairySingleElementActions = async () => {
-  const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["Burnice", "Grace"], wEngines: [] }), import("@randomplay/core")])
+  const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["1171", "1181"], wEngines: [] }), import("@randomplay/core")])
   return [["1171", "0001"], ["1181", "0007"]].map(([id, suffix]) => {
     const agent = data.agents.find(entry => entry.attributes.entityId === id).actions
     const action = agent.actions.find(entry => entry.actionId === "action:agent:" + id + ":action:" + suffix)
@@ -378,7 +378,7 @@ globalThis.fairySingleElementActions = async () => {
   })
 }
 globalThis.fairyGraceGrenades = async () => {
-  const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["Grace"], wEngines: [] }), import("@randomplay/core")])
+  const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["1181"], wEngines: [] }), import("@randomplay/core")])
   return [["0012", "special"], ["0013", "ex-special"]].map(([suffix, branch]) => {
     const action = api.resolveAgentAction({ agent: data.agents[0].actions, actionId: "action:agent:1181:action:" + suffix, mindscapeRank: 6, levels: { special: { mode: "effective", value: 12 } } })
     const actor = { entityId: "entity:grace", teamId: "team:players", agentEntityId: "1181", mindscapeRank: 6, coreSkillLevel: 7, potentialLevel: 6, wEngine: null, driveDiscs: { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null }, panel: { mode: "out-of-combat", stats: { attack: { unit: "attack-points", value: 1000 }, criticalRate: { unit: "ratio", value: 0 }, criticalDamage: { unit: "ratio", value: 0.5 }, penetrationRatio: { unit: "ratio", value: 0 } }, penetrationValue: 0, damageBonuses: { electric: 0.5 } } }
@@ -390,7 +390,7 @@ globalThis.fairyGraceGrenades = async () => {
   })
 }
 globalThis.fairyVelinaMicroDomain = async () => {
-  const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["Velina"], wEngines: ["Fusion Compiler"] }), import("@randomplay/core")])
+  const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["1561"], wEngines: ["14118"] }), import("@randomplay/core")])
   const actions = data.agents[0].actions
   const action = actions.actions.find(entry => entry.actionId === "action:agent:1561:action:0021")
   const resolution = { agent: actions, actionId: action.actionId, mindscapeRank: 0, levels: { special: { mode: "effective", value: 12 } } }
@@ -411,7 +411,7 @@ globalThis.fairyVelinaMicroDomain = async () => {
   }
 }
 globalThis.fairyAssistEntry = async () => {
-  const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["Zhao", "Ye Shunguang"], wEngines: [] }), import("@randomplay/core")])
+  const [data, core] = await Promise.all([api.loadStaticCalculationData({ agents: ["1341", "1431"], wEngines: [] }), import("@randomplay/core")])
   return [["1341", "ice", 13.612], ["1431", "physical", 8.008]].map(([id, element, multiplier]) => {
     const agent = data.agents.find(entry => entry.attributes.entityId === id).actions
     const action = agent.actions.find(entry => entry.actionId === "action:agent:" + id + ":action:0001")

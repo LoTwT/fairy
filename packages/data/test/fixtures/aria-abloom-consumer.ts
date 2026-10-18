@@ -200,7 +200,7 @@ export const ariaAbloomConsumerSource =
   makeAriaAbloomRequest.toString() +
   String.raw`
 async function verifyAriaAbloomConsumer(api, engine) {
-  const data = await api.loadStaticCalculationData({agents:["Aria","Alice"],wEngines:[]})
+  const data = await api.loadStaticCalculationData({agents:["1501","1401"],wEngines:[]})
   const close = (actual, expected) => { if (Math.abs(actual-expected)>1e-9*Math.max(1,Math.abs(expected))) throw new Error("Aria abloom: " + actual + " != " + expected) }
   // Nanoka core 7 percentages / 10 mastery points, times ONE original anomaly proc.
   for (const [element, percent, base] of [["ether",27.5,0.625],["electric",14.3,1.25],["physical",2.5,7.13]]) {

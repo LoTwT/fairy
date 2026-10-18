@@ -57,7 +57,7 @@ function makeRoxyAdditionalRequest(definitions, catalog, level = 60) {
 async function verifyRoxyAdditionalConsumer(api, engine) {
   const require = (condition, label) => { if (!condition) throw new Error("Roxy additional consumer: " + label) }
   const close = (value, expected, label) => require(Math.abs(value-expected)<1e-7,label+": "+value+" != "+expected)
-  const data = await api.loadStaticCalculationData({agents:["Roxy","Qingyi","Anton"],wEngines:[]})
+  const data = await api.loadStaticCalculationData({agents:["1621","1251","1111"],wEngines:[]})
   const base = makeRoxyAdditionalRequest(data.definitions,data.catalog)
   const levelId = "nanoka:agents:1621:additional-level-damage"
   const stunId = "nanoka:agents:1621:additional-hit-stun-damage"

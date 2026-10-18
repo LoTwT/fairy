@@ -25,7 +25,7 @@ const DIALYN_M6 = "nanoka:agents:dialyn:m6-aftertone-echo"
 let loaded: Awaited<ReturnType<typeof loadStaticCalculationData>> | undefined
 const data = async () => {
   loaded ??= await loadStaticCalculationData({
-    agents: ["Evelyn", "Soldier 0 - Anby", "Dialyn"],
+    agents: ["1321", "1381", "1481"],
     wEngines: [],
   })
   return loaded

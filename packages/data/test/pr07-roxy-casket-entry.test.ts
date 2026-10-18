@@ -45,8 +45,8 @@ const actor = (
 let loaded: Awaited<ReturnType<typeof loadStaticCalculationData>> | undefined
 const data = async () => {
   loaded ??= await loadStaticCalculationData({
-    agents: ["Roxy", "Qingyi"],
-    wEngines: ["Crimson Moon Casket"],
+    agents: ["1621", "1251"],
+    wEngines: ["14162"],
   })
   return loaded
 }

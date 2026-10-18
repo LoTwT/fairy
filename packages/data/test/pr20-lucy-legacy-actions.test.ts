@@ -4,7 +4,7 @@ import * as data from "../src/index.ts"
 import * as core from "../../core/src/index.ts"
 
 const loaded = await data.loadStaticCalculationData({
-  agents: ["Lucy"],
+  agents: ["1151"],
   wEngines: [],
 })
 const agent = loaded.agents[0]!.actions

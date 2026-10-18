@@ -145,7 +145,7 @@ export const astraYaoM4ConsumerSource =
   makeAstraYaoM4Request.toString() +
   String.raw`
 async function verifyAstraYaoM4Consumer(api, engine) {
-  const data = await api.loadStaticCalculationData({ agents: ["Astra Yao", "Nekomata"], wEngines: [] })
+  const data = await api.loadStaticCalculationData({ agents: ["1311", "1021"], wEngines: [] })
   const request = makeAstraYaoM4Request(data.definitions, data.catalog)
   const require = (condition, message) => { if (!condition) throw new Error("Astra Yao M4 consumer: " + message) }
   const result = (r) => { require(r.ok, JSON.stringify(r)); return r.value }

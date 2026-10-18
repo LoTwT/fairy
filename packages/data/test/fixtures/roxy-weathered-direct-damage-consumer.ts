@@ -134,13 +134,13 @@ export function makeWindsweptCannonRotorRequest(
 /** 用真实耀变动作检查高层风化事实的唯一输入位置，不伪造普通动作的路由。 */
 export async function makeWindsweptLuminizeRequest(api: {
   loadStaticCalculationData(selection: {
-    readonly agents: readonly ["Remielle"]
+    readonly agents: readonly ["1581"]
     readonly wEngines: readonly []
   }): Promise<StaticCalculationData>
   resolveAgentAction(input: ResolveAgentActionInput): ResolvedAgentAction
 }): Promise<StaticActionCalculationInput> {
   const data = await api.loadStaticCalculationData({
-    agents: ["Remielle"],
+    agents: ["1581"],
     wEngines: [],
   })
   const action = api.resolveAgentAction({
@@ -267,7 +267,7 @@ function makeRoxyWeatheredRequest(definitions, catalog) {
 async function verifyRoxyWeatheredConsumer(api, engine) {
   const require = (value, message) => { if (!value) throw new Error("Windswept consumer: " + message) }
   const close = (actual, expected) => require(Math.abs(actual - expected) < 1e-7, actual + " != " + expected)
-  const data = await api.loadStaticCalculationData({agents:["Roxy","Anton","Qingyi","Evelyn"],wEngines:["Cannon Rotor"]})
+  const data = await api.loadStaticCalculationData({agents:["1621","1111","1251","1321"],wEngines:["14001"]})
   const optionId = "nanoka:agents:1621:additional-weathered-direct-damage"
   const select = {optionId,bindingId:"binding:roxy",layers:1}
   const run = request => { const r=engine.calculateStaticDamageFromCatalog(request);require(r.ok,JSON.stringify(r));return r.value }

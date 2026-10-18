@@ -165,7 +165,7 @@ export const lucyGuardBoarConsumerSource =
   makeLucyGuardBoarRequest.toString() +
   String.raw`
 async function verifyLucyGuardBoarConsumer(api, engine) {
-  const data = await api.loadStaticCalculationData({ agents: ["Lucy", "Soldier 11"], wEngines: [] })
+  const data = await api.loadStaticCalculationData({ agents: ["1151", "1041"], wEngines: [] })
   const request = makeLucyGuardBoarRequest(data.definitions, data.catalog)
   const require = (ok, message) => { if (!ok) throw new Error("Lucy guard boar consumer: " + message) }
   const value = result => { require(result.ok, JSON.stringify(result)); return result.value }

@@ -151,7 +151,7 @@ export const yanagiPolarityConsumerSource =
   makeYanagiPolarityRequest.toString() +
   String.raw`
 async function verifyYanagiPolarityConsumer(api, engine) {
-  const data = await api.loadStaticCalculationData({ agents: ["Yanagi"], wEngines: [] })
+  const data = await api.loadStaticCalculationData({ agents: ["1221"], wEngines: [] })
   const require = (ok, message) => { if (!ok) throw new Error("Yanagi polarity consumer: " + message) }
   const results = []
   for (const migration of yanagiPolarityMigrations) {

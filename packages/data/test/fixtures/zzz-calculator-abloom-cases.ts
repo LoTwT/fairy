@@ -399,8 +399,8 @@ export function upstreamInputFor(
 }
 
 const loaded = loadStaticCalculationData({
-  agents: ["Vivian", "Aria", "Alice", "Burnice"],
-  wEngines: ["Flight of Fancy", "Angel in the Shell"],
+  agents: ["1331", "1501", "1401", "1171"],
+  wEngines: ["14133", "14150"],
 })
 const equipmentCache = new Map<string, ReturnType<typeof assembleEquipment>>()
 async function assembleEquipment(trigger: Trigger, masteryDisc: boolean) {

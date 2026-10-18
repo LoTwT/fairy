@@ -15,7 +15,7 @@ import type { MindscapeRank } from "@randomplay/shared"
 import { makeRoxyMindscapeRequest } from "./fixtures/roxy-mindscape-consumer.ts"
 
 const data = await loadStaticCalculationData({
-  agents: ["Roxy", "Billy"],
+  agents: ["1621", "1081"],
   wEngines: [],
 })
 const roxy = data.agents.find((a) => a.actions.entityId === "1621")!

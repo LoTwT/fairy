@@ -148,7 +148,7 @@ export const roxyMindscapeConsumerSource =
   makeRoxyMindscapeRequest.toString() +
   String.raw`
 async function verifyRoxyMindscapeConsumer(api, engine) {
-  const data = await api.loadStaticCalculationData({agents:["Roxy"],wEngines:[]})
+  const data = await api.loadStaticCalculationData({agents:["1621"],wEngines:[]})
   const require = (condition, label) => { if(!condition) throw new Error("Roxy mindscape consumer: " + label) }
   const close = (actual, expected, label) => require(Math.abs(actual-expected)<1e-7, label + ": " + actual + " != " + expected)
   const action = api.resolveAgentAction({agent:data.agents[0].actions,actionId:"action:agent:1621:action:0013",mindscapeRank:6,levels:{chain:{mode:"effective",value:12}}})

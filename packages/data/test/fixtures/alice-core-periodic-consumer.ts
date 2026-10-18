@@ -1,7 +1,7 @@
 /** 同一公开消费脚本在真实安装包 Node 和 Vite dev/prod 中执行。 */
 export const aliceCorePeriodicConsumerSource = String.raw`
 async function verifyAliceCorePeriodicConsumer(api, engine) {
-  const data = await api.loadStaticCalculationData({ agents: ["Alice"], wEngines: [] })
+  const data = await api.loadStaticCalculationData({ agents: ["1401"], wEngines: [] })
   const { definitions, catalog } = data
   const optionId = "nanoka:agents:alice:core-periodic-damage"
   const effectId = "agent:1401:nanoka:core-periodic-damage:mindscape:0"

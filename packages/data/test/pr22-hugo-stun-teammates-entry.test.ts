@@ -346,7 +346,7 @@ describe("Hugo declared other Stun teammate count", () => {
 
   it("applies the ATK count through a resolved real action at the high-level entry", async () => {
     const data = await loadStaticCalculationData({
-      agents: ["Hugo"],
+      agents: ["1291"],
       wEngines: [],
     })
     const actions = data.agents[0]!.actions

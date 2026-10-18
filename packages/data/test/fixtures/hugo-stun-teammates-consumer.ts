@@ -117,7 +117,7 @@ export const hugoAttackConsumerSource =
   makeHugoAttackRequest.toString() +
   String.raw`
 async function verifyHugoAttackConsumer(api, engine) {
-  const data = await api.loadStaticCalculationData({agents:["Hugo"],wEngines:[]})
+  const data = await api.loadStaticCalculationData({agents:["1291"],wEngines:[]})
   const request = makeHugoAttackRequest(data.definitions, data.catalog)
   const optionId = "agents:hugo:mindscape:0:blk-legacy:legacy-self-atk"
   const calculate = layers => engine.calculateStaticDamageFromCatalog({...request,selections:layers===undefined?[]:[{optionId,bindingId:"binding:hugo",layers}]})
