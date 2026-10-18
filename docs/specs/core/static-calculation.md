@@ -289,7 +289,9 @@ equipment 面板按 `initial-percentage` 重建。未选的四件套与其他战
 为缩放属性，锐暴伤害读取 `sharpCriticalDamage` 直伤属性（见[面板属性规范](../data/panel-attributes.md)
 与[技能倍率规范](../data/skill-actions.md)）。
 
-玄墨继承以太、烈霜继承冰的面板增伤与元素条件，关系及来源路径由 data 提供；动作仍保留玄墨/烈霜身份。
+玄墨继承以太、烈霜继承冰的面板增伤与元素条件由 data 判定：依据来源特殊属性数值编码
+（`specialElementType.id`：205 玄墨、202 烈霜；200 凛刃无面板继承），证据指针指向该编码字段；
+动作仍保留玄墨/烈霜身份。
 手填面板及目标抗性可以提供对应基础元素的值；显式提供特殊元素值时采用该值，不重复叠加基础元素值。
 
 `out-of-combat` 是唯一手填面板模式。stats 已含角色、核心、装备与常驻转换；penetrationValue 为已结算穿透值，

@@ -56,6 +56,42 @@ const sourceSkillCategories: Readonly<Record<string, string>> = {
   "assist-follow-up": "assist",
 }
 
+/**
+ * 收集对象树中全部数值叶子的 path=value 描述；数组按下标、对象按键名排序遍历。
+ * 字符串、布尔与 null 不进入投影——本地化文本允许跨语言不同，数值不允许。
+ */
+export function numericLeafPaths(
+  value: unknown,
+  path = "",
+  out: string[] = [],
+): string[] {
+  if (typeof value === "number") out.push(`${path}=${value}`)
+  else if (Array.isArray(value))
+    value.forEach((item, index) =>
+      numericLeafPaths(item, `${path}/${index}`, out),
+    )
+  else if (value !== null && typeof value === "object") {
+    const record = value as Record<string, unknown>
+    for (const key of Object.keys(record).sort())
+      numericLeafPaths(record[key], `${path}/${key}`, out)
+  }
+  return out
+}
+
+/**
+ * 比较两份同构详情的数值投影，返回不一致叶子的描述（两侧并集，路径=value）。
+ * 生成器只读 zh 数值，但输入契约同时钉住 en 摘要；本校验保证两种语言的数值
+ * 内容一致，使钉住 en 具备实际意义——不一致即拒绝生成。
+ */
+export function numericLeafParityDrift(zh: unknown, en: unknown): string[] {
+  const zhPaths = new Set(numericLeafPaths(zh))
+  const enPaths = new Set(numericLeafPaths(en))
+  return [
+    ...numericLeafPaths(zh).filter((entry) => !enPaths.has(entry)),
+    ...numericLeafPaths(en).filter((entry) => !zhPaths.has(entry)),
+  ].sort()
+}
+
 /** 只写新的候选目录；输入与现有正式制品的维护、安装分别进行。 */
 export async function generateAgentActions(
   sourceRoot: string,
@@ -150,6 +186,20 @@ export async function generateAgentActions(
           ),
         ).toString("utf8"),
       ) as AgentDetails
+      const enDetails = JSON.parse(
+        Buffer.from(
+          await readBytes(
+            snapshot,
+            `agents/${id}/details.en.json`,
+            maximumAttributeBytes,
+          ),
+        ).toString("utf8"),
+      ) as AgentDetails
+      const parityDrift = numericLeafParityDrift(details, enDetails)
+      if (parityDrift.length > 0)
+        throw new Error(
+          `agents/${id}: zh/en details numeric leaves differ at ${parityDrift.slice(0, 5).join("; ")}`,
+        )
       const agent = convertAgentActions(id, details, registry)
       agents.push(agent)
       await write(`agents/${id}.json`, agent)

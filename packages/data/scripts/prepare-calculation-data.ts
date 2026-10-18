@@ -41,27 +41,19 @@ export async function prepareCalculationData(
     const reference = members.members[id]!.files.details.zh!
     const details = (await read(`integrated/${reference.path}`)) as AgentDetails
     const special = details.specialElementType
-    if (
-      "name" in special &&
-      (special.name === "玄墨" || special.name === "烈霜")
-    ) {
-      const ink = special.name === "玄墨"
+    // 3.2 特殊属性 id 编码即判定身份：205 玄墨（auric-ink，基于 ether 结算）、
+    // 202 烈霜（frost，基于 ice 结算）；200 凛刃无面板元素继承。不匹配本地化文本。
+    if ("id" in special && (special.id === 205 || special.id === 202)) {
+      const ink = special.id === 205
       const sourceCode = ink ? "205" : "202"
-      const baseName = ink ? "以太" : "冰"
-      const description = special.desc.replace(/<[^>]*>/gu, "")
-      if (
-        !Object.hasOwn(details.elementType, sourceCode) ||
-        !description.includes(
-          `${special.name}属性会基于${baseName}属性结算伤害与增益效果`,
-        )
-      )
+      if (!Object.hasOwn(details.elementType, sourceCode))
         throw new Error(
-          `agents/${id}: special-element inheritance requires matching source evidence`,
+          `agents/${id}: special-element inheritance requires source element type ${sourceCode}`,
         )
       damageElementInheritance.push({
         element: ink ? "auric-ink" : "frost",
         baseElement: ink ? "ether" : "ice",
-        source: { path: reference.path, pointer: "/specialElementType/desc" },
+        source: { path: reference.path, pointer: "/specialElementType/id" },
       })
     }
     const rows = Object.entries(details.passive.level).toSorted(
