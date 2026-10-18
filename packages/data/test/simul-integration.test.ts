@@ -141,39 +141,36 @@ describe("单 Simul 纯整合 nanoka-simul-reference/1", () => {
     expect(input).toStrictEqual(before)
   })
 
-  it("boss_adjust 是完整共享块：负值原样保留，未知成员随块参与完整值比较", () => {
+  it("boss_adjust 是完整共享块：负值原样保留，未登记成员整合失败", () => {
     const input = simulInput()
-    // 未知成员两语言一致：随块提取到 data 并进入诊断。
-    change(input.details.zh, "boss_adjust.1001.note", "说明")
-    change(input.details.en, "boss_adjust.1001.note", "说明")
     const result = integrateSimul(input)
-    expect(result.data.bossAdjust["1001"]).toMatchObject({
+    expect(result.data.bossAdjust["1001"]).toStrictEqual({
       hp: 1200,
       atk: -5000,
       points: 1000,
-      note: "说明",
     })
-    expect(result.maintenance.diagnostics).toEqual([
-      {
-        entityId: "990001",
-        locale: "zh",
-        pointer: "/boss_adjust/1001/note",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "990001",
-        locale: "en",
-        pointer: "/boss_adjust/1001/note",
-        kind: "unknown-field",
-      },
-    ])
+    expect(result.maintenance.diagnostics).toEqual([])
     expectSimulRoundtrip(result, input)
-    // 未知成员跨语言不一致仍按共享冲突处理。
-    const conflict = simulInput()
-    change(conflict.details.en, "boss_adjust.1001.note", "different")
-    change(conflict.details.zh, "boss_adjust.1001.note", "说明")
-    expectFailure(conflict, "en", "/boss_adjust", "共享冲突")
-    // 已登记成员的冲突同样失败。
+    // 未登记成员不再随块保留：先在 schema 登记或确认来源结构。
+    const unknownMember = simulInput()
+    change(unknownMember.details.zh, "boss_adjust.1001.note", "说明")
+    change(unknownMember.details.en, "boss_adjust.1001.note", "说明")
+    expectFailure(
+      unknownMember,
+      "zh",
+      "/boss_adjust/1001/note",
+      "未知字段：未在登记表登记，不能进入发布制品",
+    )
+    // 单侧未登记成员同样失败，不进入共享比较。
+    const singleSide = simulInput()
+    change(singleSide.details.en, "boss_adjust.1001.note", "说明")
+    expectFailure(
+      singleSide,
+      "en",
+      "/boss_adjust/1001/note",
+      "未知字段：未在登记表登记，不能进入发布制品",
+    )
+    // 已登记成员的跨语言冲突失败。
     const memberConflict = simulInput()
     change(memberConflict.details.en, "boss_adjust.1001.atk", -4999)
     expectFailure(memberConflict, "en", "/boss_adjust", "共享冲突")
@@ -279,107 +276,49 @@ describe("单 Simul 纯整合 nanoka-simul-reference/1", () => {
     expectSimulRoundtrip(result, input)
   })
 
-  it("node、battle、layer 各层未知字段留在本语言并诊断；诊断顺序确定", () => {
-    const input = simulInput()
-    change(input.details.zh, "future_field", { nested: [1, 2] })
-    change(input.details.zh, "node.99001.future_node_field", 0)
-    change(
-      input.details.zh,
-      "node.99001.story_event.9900101.9900001.future_page_field",
-      0,
-    )
-    change(
-      input.details.zh,
-      "node.99001.story_event.9900101.9900001.choice.0.future_choice_field",
-      0,
-    )
-    change(input.details.zh, "node.99002.battle.9900201.future_battle_field", 0)
-    change(
-      input.details.zh,
-      "node.99002.battle.9900201.layer.future_layer_field",
-      0,
-    )
-    change(
-      input.details.zh,
-      "node.99002.battle.9900201.layer_room.70799001.future_room_field",
-      0,
-    )
-    change(
-      input.details.zh,
-      "node.99002.battle.9900201.selectable_buff.99010301.future_buff_field",
-      0,
-    )
-    change(input.details.zh, "record.1.future_record_entry_field", 0)
-    const result = integrateSimul(input)
-    expect(result.details.zh).toMatchObject({
-      future_field: { nested: [1, 2] },
-    })
-    expect(result.details.zh!.node["99001"]).toMatchObject({
-      future_node_field: 0,
-    })
-    expect(result.details.zh!.record["1"]).toMatchObject({
-      future_record_entry_field: 0,
-    })
-    expect(result.maintenance.diagnostics).toEqual([
-      {
-        entityId: "990001",
-        locale: "zh",
-        pointer: "/future_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "990001",
-        locale: "zh",
-        pointer: "/node/99001/future_node_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "990001",
-        locale: "zh",
-        pointer:
-          "/node/99001/story_event/9900101/9900001/choice/0/future_choice_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "990001",
-        locale: "zh",
-        pointer: "/node/99001/story_event/9900101/9900001/future_page_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "990001",
-        locale: "zh",
-        pointer: "/node/99002/battle/9900201/future_battle_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "990001",
-        locale: "zh",
-        pointer: "/node/99002/battle/9900201/layer/future_layer_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "990001",
-        locale: "zh",
-        pointer:
-          "/node/99002/battle/9900201/layer_room/70799001/future_room_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "990001",
-        locale: "zh",
-        pointer:
-          "/node/99002/battle/9900201/selectable_buff/99010301/future_buff_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "990001",
-        locale: "zh",
-        pointer: "/record/1/future_record_entry_field",
-        kind: "unknown-field",
-      },
-    ])
-    expectSimulRoundtrip(result, input)
+  it("node、battle、layer 各层未知字段整合失败并定位来源", () => {
+    const cases: Array<[path: string, pointer: string]> = [
+      ["future_field", "/future_field"],
+      ["node.99001.future_node_field", "/node/99001/future_node_field"],
+      [
+        "node.99001.story_event.9900101.9900001.future_page_field",
+        "/node/99001/story_event/9900101/9900001/future_page_field",
+      ],
+      [
+        "node.99001.story_event.9900101.9900001.choice.0.future_choice_field",
+        "/node/99001/story_event/9900101/9900001/choice/0/future_choice_field",
+      ],
+      [
+        "node.99002.battle.9900201.future_battle_field",
+        "/node/99002/battle/9900201/future_battle_field",
+      ],
+      [
+        "node.99002.battle.9900201.layer.future_layer_field",
+        "/node/99002/battle/9900201/layer/future_layer_field",
+      ],
+      [
+        "node.99002.battle.9900201.layer_room.70799001.future_room_field",
+        "/node/99002/battle/9900201/layer_room/70799001/future_room_field",
+      ],
+      [
+        "node.99002.battle.9900201.selectable_buff.99010301.future_buff_field",
+        "/node/99002/battle/9900201/selectable_buff/99010301/future_buff_field",
+      ],
+      [
+        "record.1.future_record_entry_field",
+        "/record/1/future_record_entry_field",
+      ],
+    ]
+    for (const [path, pointer] of cases) {
+      const caseInput = simulInput()
+      change(caseInput.details.zh, path, 0)
+      expectFailure(
+        caseInput,
+        "zh",
+        pointer,
+        "未知字段：未在登记表登记，不能进入发布制品",
+      )
+    }
   })
 
   it("对象成员排列不影响输出", () => {
@@ -393,10 +332,6 @@ describe("单 Simul 纯整合 nanoka-simul-reference/1", () => {
         en: reverseKeys(input.details.en),
       },
     }
-    change(input.details.zh, "z_field", 0)
-    change(reversed.details.zh, "z_field", 0)
-    change(input.details.zh, "a_field", 0)
-    change(reversed.details.zh, "a_field", 0)
     const expected = integrateSimul(input)
     const result = integrateSimul(reversed as IntegrateSimulInput)
     expect(result).toStrictEqual(expected)
@@ -768,34 +703,47 @@ describe("单 Simul 纯整合的空值与特例语义", () => {
   })
 
   it.each(["constructor", "__proto__", "toString"])(
-    "还原辅助函数不把特殊自有字段 %s 误判为登记改名",
-    (field) => {
+    "还原辅助函数不把特殊字典 key %s 误判为登记改名",
+    (key) => {
       const input = simulInput()
-      // node、battle、story 页与 encounter 各层都是本语言结构：特殊自有字段按普通数据保留，不改名、不改值。
+      // 字典 key 是数据不是字段：节点 key 与 encounter key 原样保留，不改名、不改值。
       // change 经 Object.defineProperty 写入自有属性，避开 __proto__ 的字面量语义。
-      change(input.details.zh, `node.99002.${field}`, { nested: [1] })
-      change(input.details.en, `node.99002.${field}`, { nested: [1] })
+      const node = structuredClone(input.details.zh.node["99002"]!)
+      change(input.details.zh, `node.${key}`, node)
+      change(
+        input.details.en,
+        `node.${key}`,
+        structuredClone(input.details.en.node["99002"]!),
+      )
+      const encounter = structuredClone(
+        input.details.zh.node["99002"]!.battle["9900201"]!.layer_room[
+          "70799001"
+        ]!.monster_list["11818"]!,
+      )
+      const englishEncounter = structuredClone(
+        input.details.en.node["99002"]!.battle["9900201"]!.layer_room[
+          "70799001"
+        ]!.monster_list["11818"]!,
+      )
       change(
         input.details.zh,
-        `node.99002.battle.9900201.layer_room.70799001.monster_list.11818.${field}`,
-        "encounter-value",
+        `node.99002.battle.9900201.layer_room.70799001.monster_list.${key}`,
+        encounter,
       )
       change(
         input.details.en,
-        `node.99002.battle.9900201.layer_room.70799001.monster_list.11818.${field}`,
-        "encounter-value",
+        `node.99002.battle.9900201.layer_room.70799001.monster_list.${key}`,
+        englishEncounter,
       )
       const result = integrateSimul(input)
-      expect(Object.hasOwn(result.details.zh!.node["99002"]!, field)).toBe(true)
-      expect(result.details.zh!.node["99002"]![field]).toEqual({ nested: [1] })
-      expect(
-        Object.hasOwn(
-          result.details.zh!.node["99002"]!.battle["9900201"]!.layerRoom[
-            "70799001"
-          ]!.monsterList["11818"]!,
-          field,
-        ),
-      ).toBe(true)
+      expect(Object.hasOwn(result.details.zh!.node, key)).toBe(true)
+      expect(result.details.zh!.node[key]!.name).toBe("STAGE 01")
+      const restoredRoom =
+        result.details.zh!.node["99002"]!.battle["9900201"]!.layerRoom[
+          "70799001"
+        ]!
+      expect(Object.hasOwn(restoredRoom.monsterList, key)).toBe(true)
+      expect(restoredRoom.monsterList[key]!.id).toBe(30024)
       // 还原辅助函数须按登记表命中与否改名，不读取登记表原型链。
       expectSimulRoundtrip(result, input)
     },
@@ -803,31 +751,28 @@ describe("单 Simul 纯整合的空值与特例语义", () => {
 })
 
 describe("Simul 还原辅助函数的路径边界", () => {
-  it("未知扩展内容原样保留：内部 camelCase/snake_case key 与数组内容不被改写；篡改必须失败", () => {
+  it("未登记顶层字段整合失败并定位来源", () => {
     const input = simulInput()
-    // 未知字段的整个值原样保留：内部字段名不做登记表推断，数组内容同样不改写；
-    // 同一对象内的 snake_case 与 camelCase key 同时保留。
     change(input.details.zh, "future_extension", {
       prevNode: 1,
       prev_node: 2,
       nested: [{ nextPage: [1], storyEvent: {} }],
     })
-    change(input.details.zh, "future_snake", { next_page: "kept" })
-    const result = integrateSimul(input)
-    expect(result.details.zh!.future_extension).toStrictEqual({
-      prevNode: 1,
-      prev_node: 2,
-      nested: [{ nextPage: [1], storyEvent: {} }],
-    })
-    expect(result.details.zh!.future_snake).toStrictEqual({
-      next_page: "kept",
-    })
-    expectSimulRoundtrip(result, input)
-    // 人为把未知字段内部的 snake_case key 篡改成 camelCase 后，还原校验必须失败：
-    // 不得把 nextPage 误还原成 next_page 掩盖损坏。
-    const corrupted = structuredClone(result)
-    corrupted.details.zh!.future_snake = { nextPage: "kept" }
-    expect(() => expectSimulRoundtrip(corrupted, input)).toThrow()
+    expectFailure(
+      input,
+      "zh",
+      "/future_extension",
+      "未知字段：未在登记表登记，不能进入发布制品",
+    )
+
+    const snakeCase = simulInput()
+    change(snakeCase.details.zh, "future_snake", { next_page: "kept" })
+    expectFailure(
+      snakeCase,
+      "zh",
+      "/future_snake",
+      "未知字段：未在登记表登记，不能进入发布制品",
+    )
   })
 
   it("字典 key 与登记字段名相同时原样保留，值仍按登记结构还原", () => {

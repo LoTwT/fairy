@@ -1,13 +1,14 @@
-import type { DetailLocale, SourceJson } from "./agent-types.ts"
+import type { DetailLocale } from "./agent-types.ts"
 
 /**
- * Simul 公开类型（规则 nanoka-simul-reference/2）。
+ * Simul 公开类型（规则 nanoka-simul-reference/3）。
  *
- * 不承诺未来来源版本结构不变；运行时保留未知成员，合成验收位于 test/simul-integration.test.ts。
+ * 不承诺未来来源版本结构不变；合成验收位于 test/simul-integration.test.ts。
  * 已登记结构字段只改为 camelCase，保留来源用词；每个声明字段有独立中文注释。
- * ID、字典 key、机器标签、文本和未知容器内部不做猜测性改名。
+ * ID、字典 key、机器标签与文本不做猜测性改名。
  * number 表示原始数值，不承诺单位、缩放或计算语义。
- * 未理解的来源值使用 SourceJson 保留，不能据此把内容当成计算输入。
+ * `bossAdjust` 是完整共享块：成员逐个登记，跨语言整块比较完整值。
+ * 未登记字段整合失败，不进入发布制品；登记成员在各层级均要求存在。
  */
 
 /** data.json：跨语言一致的公共资料。 */
@@ -21,11 +22,9 @@ export interface SimulData {
   /**
    * 来源 `boss_adjust` 完整共享块：调整 key → { hp, atk, points }。
    * 与 Boss 类别的同名配置分别保留；跨类别不比较、不去重、不建立加载依赖。
+   * 成员逐个登记，未登记成员整合失败。
    */
   bossAdjust: Record<string, SimulAdjustEntry>
-
-  /** 未登记的顶层来源字段；原 key、原值原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** `boss_adjust` 中一个难度调整条目。 */
@@ -38,9 +37,6 @@ export interface SimulAdjustEntry {
 
   /** 操作得分调整原值；未解释计分规则。 */
   points: number
-
-  /** 未登记的调整成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** details.{locale}.json：本语言的结局记录、剧情节点结构、身份副本与派生语言标识。 */
@@ -62,9 +58,6 @@ export interface SimulDetails {
    * 复杂图结构完整留在本语言详情，不做跨语言数组对齐或图重构。
    */
   node: Record<string, SimulNode>
-
-  /** 未登记的顶层来源字段；留在本语言原样保留，不提取到 data 或另一种语言。 */
-  [field: string]: SourceJson
 }
 
 /** `record` 中一个结局记录条目。 */
@@ -83,9 +76,6 @@ export interface SimulRecordEntry {
 
   /** 该结局图标资源标识；保留原始路径。 */
   icon: string
-
-  /** 未登记的记录成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** `node` 中一个剧情节点条目。 */
@@ -113,9 +103,6 @@ export interface SimulNode {
 
   /** 来源 `battle`。战斗字典：战斗 key → 战斗条目；空字典合法。 */
   battle: Record<string, SimulBattle>
-
-  /** 未登记的节点成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** `story_event` 中一个事件条目：页面 key → 页面条目。 */
@@ -158,9 +145,6 @@ export interface SimulStoryPage {
    * 不要求目标落在当前 record 字典中。
    */
   nextRecordUnlock: number[]
-
-  /** 未登记的页面成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** `choice` 中一个选项条目。 */
@@ -173,9 +157,6 @@ export interface SimulStoryChoice {
 
   /** 该选项当前语言说明原文；合法空字符串原样保留。 */
   desc: string
-
-  /** 未登记的选项成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** `battle` 中一个战斗条目。 */
@@ -209,9 +190,6 @@ export interface SimulBattle {
 
   /** 来源 `layer_room`。房间字典：房间 key → encounter 结构。 */
   layerRoom: Record<string, SimulRoom>
-
-  /** 未登记的战斗成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** `battle.layer` 关卡结构。 */
@@ -239,9 +217,6 @@ export interface SimulLayer {
 
   /** 来源 `layer_room`。房间字典；本地 3.1 观察为空字典。 */
   layerRoom: Record<string, SimulRoom>
-
-  /** 未登记的关卡成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** 增益条目的本语言文本；`layer_buff`、`selectable_buff` 与 `*_rank_score_layer_buff` 共用。 */
@@ -251,9 +226,6 @@ export interface SimulBuff {
 
   /** 该增益当前语言说明原文；保留富文本标记。 */
   desc: string
-
-  /** 未登记的增益成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** `layer_room` 中一个房间的 encounter 结构。 */
@@ -276,9 +248,6 @@ export interface SimulRoom {
 
   /** 来源 `waves_num`。波次数原值。 */
   wavesNum: number
-
-  /** 未登记的房间成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** `monster_list` 中一个怪物 encounter 条目。 */
@@ -297,7 +266,4 @@ export interface SimulEncounter {
 
   /** 来源 `stats`。关卡数值字典：属性编码 key → 数值（含浮点原值）；key 原样保留，不换算。 */
   stats: Record<string, number>
-
-  /** 未登记的 encounter 成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }

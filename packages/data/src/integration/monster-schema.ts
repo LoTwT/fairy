@@ -1,9 +1,9 @@
 /**
- * Monster 来源结构的登记表（规则 nanoka-monster-reference/1）。
+ * Monster 来源结构的登记表（规则 nanoka-monster-reference/2）。
  *
  * 详情与来源索引记录分别处理：详情字段在这里登记，按归属提取到 data.json 或留在各语言详情；
  * 索引记录不在这里登记，原记录仍作为 sourceRecord 完整保留，两个来源不互相回退。
- * 未登记字段不在这里登记：它们在整合结果中原样保留并作为维护诊断报告待登记。
+ * 未登记的详情字段整合失败，不进入发布制品；索引记录的未登记字段仍作为维护诊断报告待登记。
  * 只转换登记表明确列出的结构字段拼写；字典 key、实体与属性 ID、字符串内容及数组顺序不变。
  */
 
@@ -40,7 +40,7 @@ export const monsterSharedDetailFields: Readonly<
   group_id: { output: "groupId", kind: "number" },
 }
 
-/** 详情顶层完整共享块登记表；整块跨语言核对，未知成员随块保留。 */
+/** 详情顶层完整共享块登记表；整块跨语言核对，块内成员逐个登记。 */
 export const monsterSharedBlockFields: Readonly<Record<string, string>> = {
   /** 来源 `monster_info`。完整战斗单位字典：内部单位 key 即单位 ID，与顶层详情 ID 分属不同身份层次。 */
   monster_info: "monsterInfo",

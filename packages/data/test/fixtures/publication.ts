@@ -14,6 +14,7 @@ import {
   syntheticDriveDiscEnglishName,
 } from "./drive-disc-source.ts"
 import {
+  defaultRulesVersion as legacyV2RulesVersion,
   rewriteAsLegacyV2Artifact,
   syntheticDriveDiscIds,
   syntheticWEngineIds,
@@ -236,7 +237,8 @@ export async function managedLegacyV2Fixture(
       current: {
         indexSha256: sha256(await readFile(join(target, "index.json"))),
         policy: await loadSourcePolicy(),
-        rulesVersion: agents.rulesVersion,
+        // 记录的是磁盘上 v2 外壳自身的规则版本（v2 最后版本），不是当前登记表版本。
+        rulesVersion: legacyV2RulesVersion,
       },
     }),
   )

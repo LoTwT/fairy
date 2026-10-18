@@ -52,7 +52,7 @@ export interface IntegratedDriveDisc {
 }
 
 /**
- * 按规则 nanoka-drive-disc-reference/1 校验、复制和拆分单个驱动盘套装。无 I/O、默认值或语言回退。
+ * 按规则 nanoka-drive-disc-reference/2 校验、复制和拆分单个驱动盘套装。无 I/O、默认值或语言回退。
  * 来源校验失败抛出含来源位置的 DriveDiscIntegrationError，不返回部分整合结果。
  */
 export function integrateDriveDisc(
@@ -112,7 +112,7 @@ export function integrateDriveDisc(
     if (!isObject(source)) failDriveDisc(context, "详情必须是普通对象")
     if (Object.hasOwn(source, "locale"))
       failDriveDisc(at(context, "locale"), "辅助字段重名")
-    const record = validateDriveDiscDetail(source, context, diagnostics)
+    const record = validateDriveDiscDetail(source, context)
     if (
       !Number.isSafeInteger(record.id) ||
       String(record.id) !== input.entityId
@@ -150,7 +150,6 @@ export function integrateDriveDisc(
 function validateDriveDiscDetail(
   source: JsonObject,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   for (const key of Object.keys(driveDiscDetailFields).toSorted())
     if (!Object.hasOwn(source, key))
@@ -160,11 +159,11 @@ function validateDriveDiscDetail(
     const definition = Object.hasOwn(driveDiscDetailFields, key)
       ? driveDiscDetailFields[key]
       : undefined
-    if (definition === undefined) {
-      put(record, key, source[key])
-      diagnostics.push({ ...at(location, key), kind: "unknown-field" })
-      continue
-    }
+    if (definition === undefined)
+      failDriveDisc(
+        at(location, key),
+        "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+      )
     if (typeof source[key] !== definition.kind)
       failDriveDisc(at(location, key), `字段类型必须为 ${definition.kind}`)
     put(record, key, source[key])

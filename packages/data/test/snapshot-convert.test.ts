@@ -85,7 +85,10 @@ async function fixture() {
   const artifactDirectory = join(root, "source-artifact")
   await fs.rename(build.artifactDirectory, artifactDirectory)
   await fs.rm(build.buildDirectory, { recursive: true })
-  await rewriteAsLegacyV2Artifact(artifactDirectory)
+  // 迁移只接受与当前登记表同版本的 v2 外壳；合成外壳按当前版本改写。
+  await rewriteAsLegacyV2Artifact(artifactDirectory, {
+    rulesVersion: nanokaAgentsSnapshotEntity.rulesVersion,
+  })
   const index = JSON.parse(
     await fs.readFile(join(artifactDirectory, "index.json"), "utf8"),
   )
@@ -223,10 +226,11 @@ describe("v2 agent artifact conversion", () => {
       "格式版本错误",
     ],
     [
-      "other agent rules",
+      "superseded agent rules",
       async ({ source }) =>
         edit(join(source.artifactDirectory, "index.json"), (index) => {
-          index.rulesVersion = "nanoka-agent-reference/6"
+          // v2 生成链路删除前的最后规则版本：登记表前进后成为历史版本，迁移拒绝。
+          index.rulesVersion = "nanoka-agent-reference/5"
         }),
       "规则版本错误",
     ],

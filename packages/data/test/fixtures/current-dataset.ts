@@ -175,7 +175,11 @@ export async function staticArtifact(
   })
   await fs.rename(build.artifactDirectory, input.targetDirectory)
   await fs.rm(build.buildDirectory, { recursive: true })
-  if (shape === "v2") await rewriteAsLegacyV2Artifact(input.targetDirectory)
+  // 迁移只接受与当前登记表同版本的 v2 外壳；合成外壳按当前版本改写。
+  if (shape === "v2")
+    await rewriteAsLegacyV2Artifact(input.targetDirectory, {
+      rulesVersion: nanokaAgentsSnapshotEntity.rulesVersion,
+    })
   return input
 }
 
@@ -302,8 +306,11 @@ export function createCurrentDatasetHarness() {
       await fixture(options.production ? { production: true } : {}),
       "v2",
     )
-    const rulesVersion = options.rulesVersion ?? "nanoka-agent-reference/5"
-    if (rulesVersion !== "nanoka-agent-reference/5") {
+    // 迁移只支持与当前登记表同版本的 v2 外壳；默认按当前版本构造，
+    // 需要历史版本拒绝用例时显式传入旧版本。
+    const rulesVersion =
+      options.rulesVersion ?? nanokaAgentsSnapshotEntity.rulesVersion
+    if (rulesVersion !== nanokaAgentsSnapshotEntity.rulesVersion) {
       await editJson(join(input.targetDirectory, "index.json"), (index) => {
         index.rulesVersion = rulesVersion
       })
@@ -375,7 +382,7 @@ export function createCurrentDatasetHarness() {
       const timer = setTimeout(
         () =>
           reject(new Error(`checkpoint timeout: ${extra.pause}; ${stderr}`)),
-        10000,
+        30000,
       )
       process.once("message", (message) => {
         clearTimeout(timer)

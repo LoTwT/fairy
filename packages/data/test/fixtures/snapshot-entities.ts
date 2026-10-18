@@ -54,7 +54,18 @@ export const syntheticSnapshotEntity: IntegratedSnapshotEntityProducer = {
         `widgets/${memberId} 详情`,
       ),
       sourceRecord,
-      maintenance: { note: `widgets-${memberId}` },
+      // 与真实类别一致：索引记录的未登记顶层字段产生维护诊断（label/values 之外）。
+      maintenance: {
+        note: `widgets-${memberId}`,
+        diagnostics: Object.keys(record as Record<string, unknown>)
+          .filter((key) => key !== "label" && key !== "values")
+          .map((key) => ({
+            entityId: memberId,
+            locale: "index",
+            pointer: `/${key}`,
+            kind: "unknown-field",
+          })),
+      },
     }
   },
 }

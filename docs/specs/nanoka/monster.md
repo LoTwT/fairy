@@ -4,9 +4,9 @@
 
 - 上游实体：`monster`
 - 状态：已完成代表性结构调研，可由共享抓取器缓存；整合类别 `monsters` 已按规则
-  `nanoka-monster-reference/1` 接入生产快照
+  `nanoka-monster-reference/2` 接入生产快照
 - 抓取器仍不执行 Monsters 字段级语义验证；整合器按该规则独立校验已登记结构，字段归属、共享提取与
-  身份层次见[来源数据整合规范](../data/integration.md#monster-单实体实现规则-nanoka-monster-reference1)
+  身份层次见[来源数据整合规范](../data/integration.md#monster-单实体实现规则-nanoka-monster-reference2)
 
 ## 资源
 
@@ -51,7 +51,7 @@ packages/data/raw/nanoka/{version}/
 ## 整合
 
 整合类别登记名为 `monsters`，`data.json` 与 `details.{locale}.json` 的字段归属、共享提取与校验边界由
-[Monster 单实体实现规则](../data/integration.md#monster-单实体实现规则-nanoka-monster-reference1)统一定义。
+[Monster 单实体实现规则](../data/integration.md#monster-单实体实现规则-nanoka-monster-reference2)统一定义。
 成员集合由选定来源版本 `monster.json` 的顶层 key 决定，不扫描详情目录推断；本层不解释数值曲线、
 不换算属性编码、不建立单位与关卡引用的闭合校验。顶层详情 ID、`monsterId` 分组编号与 `monsterInfo`
 内部单位 ID 分属三个身份层次，只在各自登记的位置核对，不互相推导。

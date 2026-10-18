@@ -6,6 +6,7 @@ import type {
   BossAdjustEntry,
   BossData,
   BossDetails,
+  BossDetailsModesVariant,
   BossMode,
   BossZoneEncounter,
   BossZoneRoom,
@@ -76,17 +77,20 @@ export const minimalData: BossData = {
   bossAdjust: { "1001": adjust },
 }
 
-/** bossAdjust 未登记成员随块保留并参与完整值比较。 */
 export const dataWithAdjustUnknownMembers: BossData = {
   ...minimalData,
   bossAdjust: {
-    "1001": { ...adjust, future_member: "说明" },
+    "1001": {
+      ...adjust,
+      // @ts-expect-error bossAdjust 未登记成员在封闭类型上被拒绝。
+      future_member: "说明",
+    },
   },
 }
 
-/** 未登记的顶层来源字段仍是可保留的 JSON 值，不因类型声明被否定。 */
 export const dataWithUnknownFields: BossData = {
   ...minimalData,
+  // @ts-expect-error 未登记的顶层字段在封闭类型上被拒绝。
   future_container: { nested: [0, { empty: {}, nil: null, text: "" }] },
 }
 
@@ -106,31 +110,46 @@ export const detailsWithLegacyZone: BossDetails = {
   zone: { "9800101": stage },
 }
 
-/** zone 各层未登记成员原样保留。 */
-export const detailsWithUnknownMembers: BossDetails = {
-  ...detailsWithModes,
+export const modeWithUnknownMember: BossMode = {
+  ...mode,
+  // @ts-expect-error mode 未登记成员在封闭类型上被拒绝。
+  future_mode_member: 0,
+}
+
+export const stageWithUnknownMember: BossZoneStage = {
+  ...stage,
+  // @ts-expect-error 阶段未登记成员在封闭类型上被拒绝。
+  future_stage_member: 0,
+}
+
+export const roomWithUnknownMember: BossZoneRoom = {
+  ...room,
+  // @ts-expect-error 房间未登记成员在封闭类型上被拒绝。
+  future_room_member: "text",
+}
+
+export const encounterWithUnknownMember: BossZoneEncounter = {
+  ...encounter,
+  // @ts-expect-error encounter 未登记成员在封闭类型上被拒绝。
+  future_encounter_member: 0,
+}
+
+export const detailsWithTopUnknownField: BossDetailsModesVariant = {
+  id: 980001,
+  locale: "zh",
+  name: "试炼",
+  modes: [mode],
+  // @ts-expect-error 未登记的 details 顶层字段在封闭类型上被拒绝。
   untouched: { raw_key: [null, "", {}, [], 0] },
-  modes: [
-    {
-      ...mode,
-      future_mode_member: 0,
-      zone: {
-        "9800101": {
-          ...stage,
-          future_stage_member: 0,
-          layerRoom: {
-            "98001011": {
-              ...room,
-              future_room_member: "text",
-              monsterList: {
-                "11818": { ...encounter, future_encounter_member: 0 },
-              },
-            },
-          },
-        },
-      },
-    },
-  ],
+}
+
+export const detailsWithBothVariants: BossDetailsModesVariant = {
+  id: 980001,
+  locale: "zh",
+  name: "试炼",
+  modes: [mode],
+  // @ts-expect-error 判别成员同时存在不可构造：modes 变体不接受 zone。
+  zone: { "9800101": stage },
 }
 
 export const wrongStageNumType: BossZoneStage = {
@@ -235,9 +254,15 @@ export const fullInput: IntegrateBossInput = {
 export const checks: unknown[] = [
   dataWithAdjustUnknownMembers,
   dataWithUnknownFields,
+  dataWithAdjustUnknownMembers,
   detailsWithModes,
   detailsWithLegacyZone,
-  detailsWithUnknownMembers,
+  modeWithUnknownMember,
+  stageWithUnknownMember,
+  roomWithUnknownMember,
+  encounterWithUnknownMember,
+  detailsWithTopUnknownField,
+  detailsWithBothVariants,
   wrongStageNumType,
   missingSelectableBuff,
   missingModeZone,

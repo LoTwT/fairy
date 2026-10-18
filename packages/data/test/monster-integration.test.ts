@@ -289,123 +289,49 @@ describe("单怪物纯整合 nanoka-monster-reference/1", () => {
     expectMonsterRoundtrip(result, input)
   })
 
-  it("未知详情字段留在本语言并诊断；共享块未知成员随块保留且参与完整值比较", () => {
-    const input = monsterInput()
-    change(input.details.zh, "future_field", { nested: [1, 2] })
-    change(input.details.zh.monster_info, "960101", {
-      ...(input.details.zh.monster_info["960101"] as object),
-      future_unit_member: "说明",
-    })
-    change(input.details.en.monster_info, "960101", {
-      ...(input.details.en.monster_info["960101"] as object),
-      future_unit_member: "说明",
-    })
-    change(input.details.zh.monster_info, "960102", {
-      ...(input.details.zh.monster_info["960102"] as object),
-      curves: {
-        ...(input.details.zh.monster_info["960102"] as { curves: object })
-          .curves,
-        hp: {
-          ...(
-            input.details.zh.monster_info["960102"] as {
-              curves: Record<string, object>
-            }
-          ).curves["hp"]!,
-          note: "曲线说明",
-        },
-      },
-    })
-    change(input.details.en.monster_info, "960102", {
-      ...(input.details.en.monster_info["960102"] as object),
-      curves: {
-        ...(input.details.en.monster_info["960102"] as { curves: object })
-          .curves,
-        hp: {
-          ...(
-            input.details.en.monster_info["960102"] as {
-              curves: Record<string, object>
-            }
-          ).curves["hp"]!,
-          note: "曲线说明",
-        },
-      },
-    })
-    const result = integrateMonster(input)
-    expect(result.data.monsterInfo["960101"]).toMatchObject({
-      future_unit_member: "说明",
-    })
-    expect(result.data.monsterInfo["960102"]).toMatchObject({
-      curves: {
-        hp: { curve: expect.any(Array), ratio: 100, note: "曲线说明" },
-      },
-    })
-    expect(result.details.zh).toMatchObject({
-      future_field: { nested: [1, 2] },
-    })
-    expect(result.details.en).not.toHaveProperty("future_field")
-    expect(result.maintenance.diagnostics).toEqual([
-      {
-        entityId: "960001",
-        locale: "zh",
-        pointer: "/future_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "960001",
-        locale: "zh",
-        pointer: "/monster_info/960101/future_unit_member",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "960001",
-        locale: "zh",
-        pointer: "/monster_info/960102/curves/hp/note",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "960001",
-        locale: "en",
-        pointer: "/monster_info/960101/future_unit_member",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "960001",
-        locale: "en",
-        pointer: "/monster_info/960102/curves/hp/note",
-        kind: "unknown-field",
-      },
-    ])
-    expectMonsterRoundtrip(result, input)
-    // 共享块内部的未知成员跨语言不一致仍按公共冲突处理。
-    const unitConflict = monsterInput()
-    change(unitConflict.details.en.monster_info, "960101", {
-      ...(unitConflict.details.en.monster_info["960101"] as object),
-      future_unit_member: "different",
-    })
-    expectFailure(unitConflict, "en", "/monster_info", "共享冲突")
-    const curveConflict = monsterInput()
-    change(curveConflict.details.en.monster_info, "960102", {
-      ...(curveConflict.details.en.monster_info["960102"] as object),
-      curves: {
-        ...(
-          curveConflict.details.en.monster_info["960102"] as {
-            curves: object
-          }
-        ).curves,
-        hp: {
-          ...(
-            curveConflict.details.en.monster_info["960102"] as {
-              curves: Record<string, object>
-            }
-          ).curves["hp"]!,
-          ratio: 101,
-        },
-      },
-    })
-    expectFailure(curveConflict, "en", "/monster_info", "共享冲突")
+  it("未知详情字段与共享块未知成员整合失败并定位来源", () => {
+    const cases: Array<[path: string, pointer: string]> = [
+      ["future_field", "/future_field"],
+      [
+        "monster_info.960101.future_unit_member",
+        "/monster_info/960101/future_unit_member",
+      ],
+      [
+        "monster_info.960102.curves.hp.note",
+        "/monster_info/960102/curves/hp/note",
+      ],
+    ]
+    for (const [path, pointer] of cases) {
+      const caseInput = monsterInput()
+      change(caseInput.details.zh, path, { nested: [1, 2] })
+      expectFailure(
+        caseInput,
+        "zh",
+        pointer,
+        "未知字段：未在登记表登记，不能进入发布制品",
+      )
+    }
+    // 共享块未知成员两语言一致也不再随块保留：先在 schema 登记或确认来源结构。
+    const consistent = monsterInput()
+    change(
+      consistent.details.zh,
+      "monster_info.960101.future_unit_member",
+      "说明",
+    )
+    change(
+      consistent.details.en,
+      "monster_info.960101.future_unit_member",
+      "说明",
+    )
+    expectFailure(
+      consistent,
+      "zh",
+      "/monster_info/960101/future_unit_member",
+      "未知字段：未在登记表登记，不能进入发布制品",
+    )
   })
 
-  it("对象成员排列不影响输出，诊断顺序确定", () => {
+  it("对象成员排列不影响输出", () => {
     const input = monsterInput()
     const reversed = {
       entityId: input.entityId,
@@ -416,10 +342,6 @@ describe("单怪物纯整合 nanoka-monster-reference/1", () => {
         en: reverseKeys(input.details.en),
       },
     }
-    change(input.details.zh, "z_field", 0)
-    change(reversed.details.zh, "z_field", 0)
-    change(input.details.zh, "a_field", 0)
-    change(reversed.details.zh, "a_field", 0)
     const expected = integrateMonster(input)
     const result = integrateMonster(reversed as IntegrateMonsterInput)
     expect(result).toStrictEqual(expected)
@@ -763,40 +685,22 @@ describe("单怪物纯整合的空值与特例语义", () => {
   })
 
   it.each(["constructor", "__proto__", "toString"])(
-    "还原辅助函数不把特殊自有字段 %s 误判为登记改名",
-    (field) => {
+    "还原辅助函数不把特殊字典 key %s 误判为登记改名",
+    (key) => {
       const input = monsterInput()
-      // monster_info 是完整共享块：单位内未知成员两语言一致才随块提取到 data。
+      // 字典 key 是数据不是字段：曲线 key 与属性 key 原样保留，不改名、不改值。
       // change 经 Object.defineProperty 写入自有属性，避开 __proto__ 的字面量语义。
-      change(input.details.zh.monster_info as object, `960101.${field}`, {
-        nested: [1],
-      })
-      change(input.details.en.monster_info as object, `960101.${field}`, {
-        nested: [1],
-      })
-      // 曲线条目的未知成员同样随块保留；两语言值一致。
-      change(
-        input.details.zh.monster_info as object,
-        `960102.curves.hp.${field}`,
-        "curve-value",
-      )
-      change(
-        input.details.en.monster_info as object,
-        `960102.curves.hp.${field}`,
-        "curve-value",
-      )
+      const curve = input.details.zh.monster_info["960101"]!.curves["hp"]!
+      change(input.details.zh, `monster_info.960101.curves.${key}`, curve)
+      change(input.details.en, `monster_info.960101.curves.${key}`, curve)
+      change(input.details.zh, `monster_info.960101.stats.${key}`, 1)
+      change(input.details.en, `monster_info.960101.stats.${key}`, 1)
       const result = integrateMonster(input)
-      // 生产整合器按自有属性原样保留：不改名、不改值。
-      expect(Object.hasOwn(result.data.monsterInfo["960101"]!, field)).toBe(
-        true,
-      )
-      expect(result.data.monsterInfo["960101"]![field]).toEqual({ nested: [1] })
-      expect(
-        Object.hasOwn(result.data.monsterInfo["960102"]!.curves["hp"]!, field),
-      ).toBe(true)
-      expect(result.data.monsterInfo["960102"]!.curves["hp"]![field]).toBe(
-        "curve-value",
-      )
+      const unit = result.data.monsterInfo["960101"]!
+      expect(Object.hasOwn(unit.curves, key)).toBe(true)
+      expect(unit.curves[key]).toStrictEqual(curve)
+      expect(Object.hasOwn(unit.stats, key)).toBe(true)
+      expect(unit.stats[key]).toBe(1)
       // 还原辅助函数须按登记表命中与否改名，不读取登记表原型链。
       expectMonsterRoundtrip(result, input)
     },

@@ -702,7 +702,7 @@ describe("update report diff engine", () => {
       sourceVersion: "synthetic-1",
       inputs: [{ resource: "manifest.json", sha256: "c".repeat(64) }],
       entities: new Map([
-        ["agents", entity("agents", "nanoka-agent-reference/5")],
+        ["agents", entity("agents", "nanoka-agent-reference/6")],
         ["widgets", entity("widgets", "widget-reference/1")],
       ]),
     }
@@ -711,7 +711,7 @@ describe("update report diff engine", () => {
       sourceVersion: "synthetic-1",
       inputs: [{ resource: "manifest.json", sha256: "c".repeat(64) }],
       entities: new Map([
-        ["agents", entity("agents", "nanoka-agent-reference/5")],
+        ["agents", entity("agents", "nanoka-agent-reference/6")],
       ]),
     }
     const report = await compareSnapshotUpdate({
@@ -817,49 +817,49 @@ describe("current dataset update report", () => {
           {
             name: "agents",
             before: null,
-            after: "nanoka-agent-reference/5",
+            after: "nanoka-agent-reference/6",
             changed: false,
           },
           {
             name: "bangboos",
             before: null,
-            after: "nanoka-bangboo-reference/1",
+            after: "nanoka-bangboo-reference/2",
             changed: false,
           },
           {
             name: "boss",
             before: null,
-            after: "nanoka-boss-reference/2",
+            after: "nanoka-boss-reference/3",
             changed: false,
           },
           {
             name: "drive-discs",
             before: null,
-            after: "nanoka-drive-disc-reference/1",
+            after: "nanoka-drive-disc-reference/2",
             changed: false,
           },
           {
             name: "monsters",
             before: null,
-            after: "nanoka-monster-reference/1",
+            after: "nanoka-monster-reference/2",
             changed: false,
           },
           {
             name: "shiyu",
             before: null,
-            after: "nanoka-shiyu-reference/2",
+            after: "nanoka-shiyu-reference/3",
             changed: false,
           },
           {
             name: "simul",
             before: null,
-            after: "nanoka-simul-reference/2",
+            after: "nanoka-simul-reference/3",
             changed: false,
           },
           {
             name: "w-engines",
             before: null,
-            after: "nanoka-w-engine-reference/1",
+            after: "nanoka-w-engine-reference/2",
             changed: false,
           },
         ],
@@ -982,8 +982,8 @@ describe("current dataset update report", () => {
       categories: [
         {
           name: "agents",
-          before: "nanoka-agent-reference/5",
-          after: "nanoka-agent-reference/5",
+          before: "nanoka-agent-reference/6",
+          after: "nanoka-agent-reference/6",
           changed: false,
         },
         {
@@ -1268,8 +1268,8 @@ describe("current dataset update report", () => {
       categories: [
         {
           name: "agents",
-          before: "nanoka-agent-reference/5",
-          after: "nanoka-agent-reference/5",
+          before: "nanoka-agent-reference/6",
+          after: "nanoka-agent-reference/6",
           changed: false,
         },
         {
@@ -1475,7 +1475,8 @@ describe("current dataset update report", () => {
       join(input.rawRoot, input.version, "zh/character/2.json"),
       (value) => {
         value.name = "changed"
-        value.future_field = { inner: 1 }
+        // 已登记的可选本语言字段：新增数组与其元素产生两级新增指针。
+        value.partner_info.impressions = ["第一印象"]
       },
     )
     const result = await updateCurrentDataset(input)
@@ -1505,20 +1506,20 @@ describe("current dataset update report", () => {
         memberId: "2",
         changes: [
           {
-            pointer: "/future_field",
-            change: "added",
-            after: { kind: "object", size: 1 },
-          },
-          {
-            pointer: "/future_field/inner",
-            change: "added",
-            after: { kind: "number", value: 1 },
-          },
-          {
             pointer: "/name",
             change: "changed",
             before: { kind: "string", value: "示例" },
             after: { kind: "string", value: "changed" },
+          },
+          {
+            pointer: "/partnerInfo/impressions",
+            change: "added",
+            after: { kind: "array", length: 1 },
+          },
+          {
+            pointer: "/partnerInfo/impressions/0",
+            change: "added",
+            after: { kind: "string", value: "第一印象" },
           },
         ],
       },
@@ -1558,7 +1559,7 @@ describe("current dataset update report", () => {
     await editJson(
       join(input.rawRoot, input.version, "zh/character/2.json"),
       (value) => {
-        delete value.future_field
+        delete value.partner_info.impressions
       },
     )
     await updateCurrentDataset(input)
@@ -1569,14 +1570,14 @@ describe("current dataset update report", () => {
         memberId: "2",
         changes: [
           {
-            pointer: "/future_field",
+            pointer: "/partnerInfo/impressions",
             change: "removed",
-            before: { kind: "object", size: 1 },
+            before: { kind: "array", length: 1 },
           },
           {
-            pointer: "/future_field/inner",
+            pointer: "/partnerInfo/impressions/0",
             change: "removed",
-            before: { kind: "number", value: 1 },
+            before: { kind: "string", value: "第一印象" },
           },
         ],
       },
@@ -2082,6 +2083,7 @@ describe("current dataset update report", () => {
         indexSha256: digest(
           await fs.readFile(join(input.targetDirectory, "index.json")),
         ),
+        // v2 外壳的最后规则版本，与外壳 index.json 的 rulesVersion 一致。
         rulesVersion: "nanoka-agent-reference/5",
         policy: state.current.policy,
       },

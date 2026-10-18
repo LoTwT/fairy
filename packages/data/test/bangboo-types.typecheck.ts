@@ -5,7 +5,9 @@
 import type {
   BangbooData,
   BangbooDetails,
+  BangbooLevelExtraLocalization,
   BangbooLevelStageLocalization,
+  BangbooSkillProp,
   BangbooSkillPropParameter,
 } from "../src/integration/bangboo-types.ts"
 import type { BangbooFieldKind } from "../src/integration/bangboo-schema.ts"
@@ -37,21 +39,29 @@ export const minimalData: BangbooData = {
   level: {},
 }
 
-/** 未登记的顶层来源字段仍是可保留的 JSON 值，不因类型声明被否定。 */
 export const dataWithUnknownFields: BangbooData = {
   ...minimalData,
+  // @ts-expect-error 未登记的顶层字段在封闭类型上被拒绝。
   future_container: { nested: [0, { empty: {}, nil: null, text: "" }] },
 }
 
-/** 共享块与阶段内部的未登记成员同样原样保留。 */
 export const dataWithUnknownMembers: BangbooData = {
   ...minimalData,
-  stats: { ...minimalData.stats, future_stat: 1 },
+  stats: {
+    ...minimalData.stats,
+    // @ts-expect-error stats 未登记成员在封闭类型上被拒绝。
+    future_stat: 1,
+  },
   skillProp: {
     "9500101": {
       "elementAccumulationValue": 34600,
-      "note": "说明",
-      "1001": { main: 46200, growth: 4620, format: "%", future_member: 0 },
+      "1001": {
+        main: 46200,
+        growth: 4620,
+        format: "%",
+        // @ts-expect-error 参数表未登记成员在封闭类型上被拒绝。
+        future_member: 0,
+      },
     },
   },
   level: {
@@ -63,9 +73,22 @@ export const dataWithUnknownMembers: BangbooData = {
       levelMin: 0,
       materials: { "10": 15000 },
       extra: { "20101": { prop: 20101, value: 0 } },
+      // @ts-expect-error 阶段未登记成员在封闭类型上被拒绝。
       future_stage_member: "text",
     },
   },
+}
+
+export const skillPropWithUnknownEntryMember: BangbooSkillProp = {
+  elementAccumulationValue: 34600,
+  // @ts-expect-error skill_prop 条目未登记成员在封闭类型上被拒绝。
+  note: "说明",
+}
+
+export const skillPropWithNumericValueMember: BangbooSkillProp = {
+  "elementAccumulationValue": 34600,
+  // @ts-expect-error 数字属性 key 只接受参数表，不接受数值。
+  "1001": 46200,
 }
 
 export const minimalDetails: BangbooDetails = {
@@ -78,7 +101,7 @@ export const minimalDetails: BangbooDetails = {
   level: {},
 }
 
-/** details 的等级阶段：共有阶段只剩 extra 文本，独有阶段保留完整结构。 */
+/** details 的等级阶段：数值成员提取在 data，只剩各属性 key 的名称与显示格式。 */
 export const detailsWithSplitLevel: BangbooDetails = {
   ...minimalDetails,
   skill: {
@@ -99,32 +122,63 @@ export const detailsWithSplitLevel: BangbooDetails = {
       extra: { "20101": { name: "暴击率", format: "{0:0.#%}" } },
     },
     "3": {
-      hpMax: 376,
-      attack: 233,
-      defence: 75,
-      levelMax: 30,
-      levelMin: 20,
-      materials: { "10": 75000 },
-      extra: {
-        "21101": {
-          prop: 21101,
-          name: "暴击伤害",
-          format: "{0:0.#%}",
-          value: 2500,
+      extra: { "21101": { name: "暴击伤害", format: "{0:0.#%}" } },
+    },
+  },
+}
+
+export const localizedOnlyExtraEntry: BangbooLevelExtraLocalization = {
+  name: "暴击伤害",
+  format: "{0:0.#%}",
+  // @ts-expect-error 数值成员（prop/value）是 data 侧共享载荷，details 条目不接受。
+  prop: 21101,
+}
+
+export const detailsWithUnknownFields: BangbooDetails = {
+  ...minimalDetails,
+  // @ts-expect-error 未登记的 details 顶层字段在封闭类型上被拒绝。
+  untouched: { raw_key: [null, "", {}, [], 0] },
+}
+
+export const detailsWithUnknownSkillMembers: BangbooDetails = {
+  ...minimalDetails,
+  skill: {
+    a: {
+      // @ts-expect-error 技能类别未登记成员在封闭类型上被拒绝。
+      future_category_member: 0,
+      level: {},
+    },
+    c: { level: {} },
+  },
+}
+
+export const detailsWithUnknownSkillLevelMember: BangbooDetails = {
+  ...minimalDetails,
+  skill: {
+    a: {
+      level: {
+        "1": {
+          name: "",
+          desc: "",
+          property: [],
+          param: "",
+          // @ts-expect-error 技能等级条目未登记成员在封闭类型上被拒绝。
+          future_entry_member: 0,
         },
       },
     },
   },
 }
 
-export const detailsWithUnknownFields: BangbooDetails = {
+export const detailsWithStageNumericMember: BangbooDetails = {
   ...minimalDetails,
-  untouched: { raw_key: [null, "", {}, [], 0] },
-}
-
-/** 单语言独有阶段的可选成员只在存在时声明，不补默认值。 */
-export const stageWithoutOptionalMembers: BangbooLevelStageLocalization = {
-  extra: {},
+  level: {
+    "1": {
+      // @ts-expect-error 阶段数值成员提取在 data，details 阶段不接受。
+      hpMax: 376,
+      extra: {},
+    },
+  },
 }
 
 export const wrongStatsType: BangbooData = {
@@ -172,8 +226,13 @@ export const wrongLocale: BangbooDetails = {
   locale: "ja",
 }
 
-// @ts-expect-error details 的共有阶段不要求数值成员，但 extra 必须存在。
+// @ts-expect-error details 的等级阶段只剩 extra 文本，extra 必须存在。
 export const missingExtra: BangbooLevelStageLocalization = {}
+
+// @ts-expect-error extra 属性条目的必需成员 format 缺失。
+export const extraEntryMissingFormat: BangbooLevelExtraLocalization = {
+  name: "暴击率",
+}
 
 export const wrongPropertyType: BangbooDetails = {
   ...minimalDetails,
@@ -242,6 +301,16 @@ export const fullInput: IntegrateBangbooInput = {
 
 // 未使用变量仅用于类型检查；引用以避免 noUnusedLocals 报错。
 export const checks: unknown[] = [
+  dataWithUnknownFields,
+  dataWithUnknownMembers,
+  skillPropWithUnknownEntryMember,
+  skillPropWithNumericValueMember,
+  detailsWithSplitLevel,
+  localizedOnlyExtraEntry,
+  detailsWithUnknownFields,
+  detailsWithUnknownSkillMembers,
+  detailsWithUnknownSkillLevelMember,
+  detailsWithStageNumericMember,
   wrongStatsType,
   wrongIdType,
   missingRarity,
@@ -249,14 +318,10 @@ export const checks: unknown[] = [
   missingStageMember,
   wrongLocale,
   missingExtra,
+  extraEntryMissingFormat,
   wrongPropertyType,
   wrongParamType,
   wrongInputLocales,
-  dataWithUnknownFields,
-  dataWithUnknownMembers,
-  detailsWithSplitLevel,
-  detailsWithUnknownFields,
-  stageWithoutOptionalMembers,
 ]
 
 /** 诊断与字段种类的结构约束同样进入类型检查。 */

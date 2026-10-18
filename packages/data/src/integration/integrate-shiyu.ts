@@ -9,7 +9,10 @@ import {
   shiyuLocalizedDetailFields,
   shiyuRoomMembers,
   shiyuSharedDetailFields,
+  shiyuZoneEncounterSkeletonOutputs,
   shiyuZoneMembers,
+  shiyuZoneRoomSkeletonOutputs,
+  shiyuZoneStageSkeletonOutputs,
 } from "./shiyu-schema.ts"
 import type { ShiyuData, ShiyuDetails } from "./shiyu-types.ts"
 import {
@@ -56,7 +59,7 @@ export interface IntegratedShiyu {
 }
 
 /**
- * 按规则 nanoka-shiyu-reference/2 校验、复制和拆分单个 Shiyu 记录。无 I/O、默认值或语言回退。
+ * 按规则 nanoka-shiyu-reference/3 校验、复制和拆分单个 Shiyu 记录。无 I/O、默认值或语言回退。
  * 来源校验失败抛出含来源位置的 ShiyuIntegrationError，不返回部分整合结果。
  */
 export function integrateShiyu(input: IntegrateShiyuInput): IntegratedShiyu {
@@ -118,7 +121,7 @@ export function integrateShiyu(input: IntegrateShiyuInput): IntegratedShiyu {
     if (!isObject(source)) failShiyu(context, "详情必须是普通对象")
     if (Object.hasOwn(source, "locale"))
       failShiyu(at(context, "locale"), "辅助字段重名")
-    const record = validateShiyuDetail(source, context, diagnostics)
+    const record = validateShiyuDetail(source, context)
     if (
       !Number.isSafeInteger(record.id) ||
       String(record.id) !== input.entityId
@@ -147,23 +150,30 @@ export function integrateShiyu(input: IntegrateShiyuInput): IntegratedShiyu {
     shiyuConditionalSharedDetailFields,
   ).toSorted()) {
     const definition = shiyuConditionalSharedDetailFields[key]!
-    if (records.every((record) => Object.hasOwn(record, definition.output))) {
-      for (const index of records.keys())
-        if (
-          !equalJson(
-            records[index][definition.output],
-            records[0][definition.output],
-          )
+    const present = records.flatMap((record, index) =>
+      Object.hasOwn(record, definition.output) ? [index] : [],
+    )
+    if (present.length === 0) continue
+    if (present.length !== records.length)
+      failShiyu(
+        at({ ...location, locale: locales[present[0]] }, key),
+        `共享字段只在部分语言提供（${present.map((index) => locales[index]).join("、")}）；严格共享要求各语言同有或全缺，单语言独有内容应显式登记为本地化字段`,
+      )
+    for (const index of records.keys())
+      if (
+        !equalJson(
+          records[index][definition.output],
+          records[0][definition.output],
         )
-          failShiyu(
-            at({ ...location, locale: locales[index] }, key),
-            `共享冲突（与 ${locales[0]} 的完整值不同）`,
-          )
-      put(data, definition.output, records[0][definition.output])
-      for (const record of records) delete record[definition.output]
-    }
-    // 任一语言缺失时不提取：全部缺失不补值，单语言独有完整留在该语言 details。
+      )
+        failShiyu(
+          at({ ...location, locale: locales[index] }, key),
+          `共享冲突（与 ${locales[0]} 的完整值不同）`,
+        )
+    put(data, definition.output, records[0][definition.output])
+    for (const record of records) delete record[definition.output]
   }
+  put(data, "zone", splitShiyuZone(records, location, locales))
   const details: Partial<Record<DetailLocale, ShiyuDetails>> = {}
   records.forEach((record, index) => {
     put(record, "locale", locales[index])
@@ -181,7 +191,6 @@ export function integrateShiyu(input: IntegrateShiyuInput): IntegratedShiyu {
 function validateShiyuDetail(
   source: JsonObject,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   const requiredFields: Readonly<Record<string, { output: string }>> = {
     ...shiyuSharedDetailFields,
@@ -232,15 +241,13 @@ function validateShiyuDetail(
       continue
     }
     if (key === "zone") {
-      put(
-        record,
-        "zone",
-        validateZone(source[key], at(location, key), diagnostics),
-      )
+      put(record, "zone", validateZone(source[key], at(location, key)))
       continue
     }
-    put(record, key, source[key])
-    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+    failShiyu(
+      at(location, key),
+      "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+    )
   }
   return record
 }
@@ -280,7 +287,7 @@ function validateField(
   }
 }
 
-/** 登记成员对象的改名冲突与必需检查；未登记成员由调用方原样保留并报告待登记。 */
+/** 登记成员对象的改名冲突与必需检查；未登记成员由调用方整合失败。 */
 function assertRegisteredMembers(
   value: JsonObject,
   members: Readonly<Record<string, ShiyuObjectMember>>,
@@ -297,21 +304,20 @@ function assertRegisteredMembers(
   }
 }
 
-/** 按登记成员转换一个对象：已登记成员校验类型并转换拼写，未登记成员原样保留并诊断。 */
+/** 按登记成员转换一个对象：已登记成员校验类型并转换拼写，未登记成员整合失败。 */
 function transformRegisteredMembers(
   value: JsonObject,
   members: Readonly<Record<string, ShiyuObjectMember>>,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted()) {
     const member = Object.hasOwn(members, key) ? members[key] : undefined
-    if (member === undefined) {
-      put(record, key, value[key])
-      diagnostics.push({ ...at(location, key), kind: "unknown-field" })
-      continue
-    }
+    if (member === undefined)
+      failShiyu(
+        at(location, key),
+        "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+      )
     put(
       record,
       member.output,
@@ -322,22 +328,161 @@ function transformRegisteredMembers(
 }
 
 /**
- * 来源 `zone` 完整关卡结构的校验与拼写转换；阶段 key 即阶段身份，原样保留。
- * 整块留在本语言 details：名称、文本与 encounter 全部本地化，不做跨语言共享或关卡图拆分。
+ * `zone` 数值骨架拆分：三层字典（阶段 key、房间 key、encounter key）的 key 集合各语言
+ * 必须一致，只在部分语言提供即整合失败；数值骨架成员（登记表保证各语言必在场）完整值
+ * 必须一致，否则按共享冲突失败。骨架写入 data.zone 并从各语言 details 的 zone 删除；
+ * 文本成员（name、layer_buff、monster_icon、弱点、抗性、encounter 名称与图片）留在 details。
  */
-function validateZone(
-  value: SourceJson,
+function splitShiyuZone(
+  records: JsonObject[],
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
+  locales: readonly DetailLocale[],
 ): JsonObject {
+  const zonePointer = at(location, "zone")
+  // 指针沿用来源拼写：输出名反查登记表的来源 key。
+  const stageSourceName = new Map(
+    Object.entries(shiyuZoneMembers).map(([source, member]) => [
+      member.output,
+      source,
+    ]),
+  )
+  const roomSourceName = new Map(
+    Object.entries(shiyuRoomMembers).map(([source, member]) => [
+      member.output,
+      source,
+    ]),
+  )
+  const encounterSourceName = new Map(
+    Object.entries(shiyuEncounterMembers).map(([source, member]) => [
+      member.output,
+      source,
+    ]),
+  )
+  const zones = records.map((record) => record.zone as JsonObject)
+  const dataZone: JsonObject = {}
+  for (const stageKey of [
+    ...new Set(zones.flatMap((zone) => Object.keys(zone))),
+  ].toSorted()) {
+    const stagePresent = zones.flatMap((zone, index) =>
+      Object.hasOwn(zone, stageKey) ? [index] : [],
+    )
+    if (stagePresent.length !== zones.length)
+      failShiyu(
+        {
+          ...at(zonePointer, stageKey),
+          locale: locales[stagePresent[0]!],
+        },
+        `共享字典成员只在部分语言提供（${stagePresent.map((index) => locales[index]).join("、")}）；严格共享要求各语言同有或全缺，单语言独有内容应显式登记为本地化字段`,
+      )
+    const stages = zones.map((zone) => zone[stageKey] as JsonObject)
+    const dataStage: JsonObject = {}
+    const stagePointer = at(zonePointer, stageKey)
+    for (const member of shiyuZoneStageSkeletonOutputs) {
+      for (const index of stages.keys())
+        if (!equalJson(stages[index][member], stages[0][member]))
+          failShiyu(
+            {
+              ...at(stagePointer, stageSourceName.get(member) ?? member),
+              locale: locales[index],
+            },
+            `共享冲突（与 ${locales[0]} 的完整值不同）`,
+          )
+      put(dataStage, member, stages[0][member])
+      for (const stage of stages) delete stage[member]
+    }
+    const rooms = stages.map((stage) => stage.layerRoom as JsonObject)
+    const dataRooms: JsonObject = {}
+    const roomsPointer = at(stagePointer, "layer_room")
+    for (const roomKey of [
+      ...new Set(rooms.flatMap((room) => Object.keys(room))),
+    ].toSorted()) {
+      const roomPresent = rooms.flatMap((room, index) =>
+        Object.hasOwn(room, roomKey) ? [index] : [],
+      )
+      if (roomPresent.length !== rooms.length)
+        failShiyu(
+          {
+            ...at(roomsPointer, roomKey),
+            locale: locales[roomPresent[0]!],
+          },
+          `共享字典成员只在部分语言提供（${roomPresent.map((index) => locales[index]).join("、")}）；严格共享要求各语言同有或全缺，单语言独有内容应显式登记为本地化字段`,
+        )
+      const roomEntries = rooms.map((room) => room[roomKey] as JsonObject)
+      const dataRoom: JsonObject = {}
+      const roomPointer = at(roomsPointer, roomKey)
+      for (const member of shiyuZoneRoomSkeletonOutputs) {
+        for (const index of roomEntries.keys())
+          if (!equalJson(roomEntries[index][member], roomEntries[0][member]))
+            failShiyu(
+              {
+                ...at(roomPointer, roomSourceName.get(member) ?? member),
+                locale: locales[index],
+              },
+              `共享冲突（与 ${locales[0]} 的完整值不同）`,
+            )
+        put(dataRoom, member, roomEntries[0][member])
+        for (const roomEntry of roomEntries) delete roomEntry[member]
+      }
+      const encounterLists = roomEntries.map(
+        (roomEntry) => roomEntry.monsterList as JsonObject,
+      )
+      const dataEncounters: JsonObject = {}
+      const encountersPointer = at(roomPointer, "monster_list")
+      for (const encounterKey of [
+        ...new Set(encounterLists.flatMap((list) => Object.keys(list))),
+      ].toSorted()) {
+        const encounterPresent = encounterLists.flatMap((list, index) =>
+          Object.hasOwn(list, encounterKey) ? [index] : [],
+        )
+        if (encounterPresent.length !== encounterLists.length)
+          failShiyu(
+            {
+              ...at(encountersPointer, encounterKey),
+              locale: locales[encounterPresent[0]!],
+            },
+            `共享字典成员只在部分语言提供（${encounterPresent.map((index) => locales[index]).join("、")}）；严格共享要求各语言同有或全缺，单语言独有内容应显式登记为本地化字段`,
+          )
+        const encounters = encounterLists.map(
+          (list) => list[encounterKey] as JsonObject,
+        )
+        const dataEncounter: JsonObject = {}
+        const encounterPointer = at(encountersPointer, encounterKey)
+        for (const member of shiyuZoneEncounterSkeletonOutputs) {
+          for (const index of encounters.keys())
+            if (!equalJson(encounters[index][member], encounters[0][member]))
+              failShiyu(
+                {
+                  ...at(
+                    encounterPointer,
+                    encounterSourceName.get(member) ?? member,
+                  ),
+                  locale: locales[index],
+                },
+                `共享冲突（与 ${locales[0]} 的完整值不同）`,
+              )
+          put(dataEncounter, member, encounters[0][member])
+          for (const encounter of encounters) delete encounter[member]
+        }
+        put(dataEncounters, encounterKey, dataEncounter)
+      }
+      put(dataRoom, "monsterList", dataEncounters)
+      put(dataRooms, roomKey, dataRoom)
+    }
+    put(dataStage, "layerRoom", dataRooms)
+    put(dataZone, stageKey, dataStage)
+  }
+  return dataZone
+}
+
+/**
+ * 来源 `zone` 完整关卡结构的校验与拼写转换；阶段 key 即阶段身份，原样保留。
+ * 校验后的记录仍包含数值与文本两侧，由 `splitShiyuZone` 再做骨架/文本拆分。
+ */
+function validateZone(value: SourceJson, location: SourceLocation): JsonObject {
   if (!isObject(value)) failShiyu(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted())
-    put(
-      record,
-      key,
-      validateZoneStage(value[key], at(location, key), diagnostics),
-    )
+    put(record, key, validateZoneStage(value[key], at(location, key)))
   return record
 }
 
@@ -345,26 +490,17 @@ function validateZone(
 function validateZoneStage(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failShiyu(location, "字段类型必须为普通对象")
   assertRegisteredMembers(value, shiyuZoneMembers, location)
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted()) {
     if (key === "layer_buff") {
-      put(
-        record,
-        "layerBuff",
-        validateLayerBuff(value[key], at(location, key), diagnostics),
-      )
+      put(record, "layerBuff", validateLayerBuff(value[key], at(location, key)))
       continue
     }
     if (key === "layer_room") {
-      put(
-        record,
-        "layerRoom",
-        validateLayerRoom(value[key], at(location, key), diagnostics),
-      )
+      put(record, "layerRoom", validateLayerRoom(value[key], at(location, key)))
       continue
     }
     if (Object.hasOwn(shiyuZoneMembers, key)) {
@@ -376,8 +512,10 @@ function validateZoneStage(
       )
       continue
     }
-    put(record, key, value[key])
-    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+    failShiyu(
+      at(location, key),
+      "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+    )
   }
   return record
 }
@@ -386,7 +524,6 @@ function validateZoneStage(
 function validateLayerBuff(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failShiyu(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
@@ -401,7 +538,6 @@ function validateLayerBuff(
         value[key],
         shiyuBuffMembers,
         at(location, key),
-        diagnostics,
       ),
     )
   }
@@ -412,16 +548,11 @@ function validateLayerBuff(
 function validateLayerRoom(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failShiyu(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted())
-    put(
-      record,
-      key,
-      validateRoomEntry(value[key], at(location, key), diagnostics),
-    )
+    put(record, key, validateRoomEntry(value[key], at(location, key)))
   return record
 }
 
@@ -429,7 +560,6 @@ function validateLayerRoom(
 function validateRoomEntry(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failShiyu(location, "字段类型必须为普通对象")
   assertRegisteredMembers(value, shiyuRoomMembers, location)
@@ -439,7 +569,7 @@ function validateRoomEntry(
       put(
         record,
         "monsterList",
-        validateMonsterList(value[key], at(location, key), diagnostics),
+        validateMonsterList(value[key], at(location, key)),
       )
       continue
     }
@@ -468,8 +598,10 @@ function validateRoomEntry(
       )
       continue
     }
-    put(record, key, value[key])
-    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+    failShiyu(
+      at(location, key),
+      "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+    )
   }
   return record
 }
@@ -478,16 +610,11 @@ function validateRoomEntry(
 function validateMonsterList(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failShiyu(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted())
-    put(
-      record,
-      key,
-      validateEncounter(value[key], at(location, key), diagnostics),
-    )
+    put(record, key, validateEncounter(value[key], at(location, key)))
   return record
 }
 
@@ -495,7 +622,6 @@ function validateMonsterList(
 function validateEncounter(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failShiyu(location, "字段类型必须为普通对象")
   assertRegisteredMembers(value, shiyuEncounterMembers, location)
@@ -534,8 +660,10 @@ function validateEncounter(
       )
       continue
     }
-    put(record, key, value[key])
-    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+    failShiyu(
+      at(location, key),
+      "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+    )
   }
   return record
 }

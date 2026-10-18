@@ -1,15 +1,14 @@
-import type { DetailLocale, SourceJson } from "./agent-types.ts"
+import type { DetailLocale } from "./agent-types.ts"
 
 /**
- * Nanoka WEngine 整合资料的正式字段定义（规则 nanoka-w-engine-reference/1）。
+ * Nanoka WEngine 整合资料的正式字段定义（规则 nanoka-w-engine-reference/2）。
  *
  * 上游实体为 `weapon`，整合类别登记名为 `w-engines`；一条记录表示一个 WEngine。
  * 本层不解析 materials 字符串、不换算百分比、不解释成长公式或天赋计算效果，
  * 也不建立 definitions 或 core 映射。
- * number 表示原始数值，不承诺单位、缩放或计算语义；未知来源结构使用 SourceJson 保留。
- * 来源索引记录与各语言详情的未登记顶层字段原样保留，并进入整合结果的维护诊断。
- * 运行时原样保留未登记的顶层字段，索引签名让这些字段可以在类型层面读取，
- * 但读取到的不表示其业务语义已经确认。
+ * number 表示原始数值，不承诺单位、缩放或计算语义。
+ * 共享内容跨语言整块比较完整值；阶段条目与属性对象的成员逐个登记。
+ * 未登记字段整合失败，不进入发布制品；登记成员在对应结构上均要求存在。
  * 不承诺未来来源版本结构不变；合成验收位于 test/w-engine-integration.test.ts。
  */
 export interface WEngineData {
@@ -30,13 +29,15 @@ export interface WEngineData {
 
   /**
    * 来源 `level` 完整等级成长块：阶段 key → 阶段记录。
-   * 已登记阶段成员 `exp`、`rate`、`rate2` 只保留原值与拼写，不解释成长公式、单位或缩放。
+   * 阶段成员逐个登记：`exp`、`rate`、`rate2` 只保留原值与拼写，不解释成长公式、单位或缩放；
+   * 未登记成员整合失败。
    */
   level: Record<string, WEngineLevelStage>
 
   /**
    * 来源 `stars` 完整星级成长块：阶段 key → 阶段记录。
-   * 已登记阶段成员 `star_rate`、`rand_rate` 只改拼写为 starRate、randRate，数值原样保留。
+   * 阶段成员逐个登记：`star_rate`、`rand_rate` 只改拼写为 starRate、randRate，数值原样保留；
+   * 未登记成员整合失败。
    */
   stars: Record<string, WEngineStarsStage>
 
@@ -51,9 +52,6 @@ export interface WEngineData {
 
   /** 派生辅助字段：从 weapon_type 字典 key 提取的分类 ID；完整本地化字典留在各语言详情。 */
   classificationIds: WEngineClassificationIds
-
-  /** 未登记的顶层来源字段；原 key、原值原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** 来源 `level` 的阶段记录；`exp`、`rate`、`rate2` 均为原始数值。 */
@@ -66,9 +64,6 @@ export type WEngineLevelStage = {
 
   /** 来源 `rate2`。该阶段第二成长率原值；与 rate 分别保留，不合并解释。 */
   rate2: number
-
-  /** 未登记的阶段成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** 来源 `stars` 的阶段记录；`star_rate`、`rand_rate` 均为原始数值。 */
@@ -78,18 +73,12 @@ export type WEngineStarsStage = {
 
   /** 来源 `rand_rate`。该阶段随机成长原值；与 starRate 分别保留。 */
   randRate: number
-
-  /** 未登记的阶段成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** 属性对象提取到 data.json 的数值部分；`value` 是来源原值。 */
 export type WEnginePropertyValue = {
   /** 来源属性数值原值；不换算百分比、单位或最终面板值。 */
   value: number
-
-  /** 未登记的属性成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** details.{locale}.json：本语言的 WEngine 文本、身份副本与派生语言标识。 */
@@ -123,9 +112,6 @@ export interface WEngineDetails {
 
   /** 来源 talent 阶段 key → 当前语言名称与说明原文；不解析天赋计算效果。 */
   talents: Record<string, WEngineTalent>
-
-  /** 未登记的顶层来源字段；留在本语言原样保留，不提取到 data 或另一种语言。 */
-  [field: string]: SourceJson
 }
 
 /** 属性对象留在详情中的名称与显示格式；数值在 data 的同名属性对象。 */
@@ -138,9 +124,6 @@ export type WEnginePropertyText = {
 
   /** 来源数值显示模板，例如 {0:0.#%}；原样保留，不求值或据此推断缩放。 */
   format: string
-
-  /** 未登记的属性成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** 来源 talent 阶段记录；只保留名称与说明原文。 */
@@ -150,9 +133,6 @@ export type WEngineTalent = {
 
   /** 该阶段当前语言说明原文；保留富文本标记与显示模板，不求值。 */
   desc: string
-
-  /** 未登记的阶段成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** 从 weapon_type 字典 key 派生的分类 ID；规范十进制字符串，按数值升序。 */

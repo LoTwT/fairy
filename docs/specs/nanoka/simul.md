@@ -4,9 +4,9 @@
 
 - 上游实体：`simul`
 - 状态：已完成代表性结构调研，可由共享抓取器缓存；整合类别 `simul` 已按规则
-  `nanoka-simul-reference/2` 接入生产快照
+  `nanoka-simul-reference/3` 接入生产快照
 - 抓取器仍不执行 Simul 字段级语义验证；整合器按该规则独立校验已登记结构，字段归属、严格公共时间字段与
-  图结构边界见[来源数据整合规范](../data/integration.md#simul-单实体实现规则-nanoka-simul-reference1)
+  图结构边界见[来源数据整合规范](../data/integration.md#simul-单实体实现规则-nanoka-simul-reference3)
 
 ## 资源
 
@@ -62,7 +62,7 @@ packages/data/raw/nanoka/{version}/
 ## 整合
 
 整合类别登记名为 `simul`，`data.json` 与 `details.{locale}.json` 的字段归属、图结构边界与校验边界由
-[Simul 单实体实现规则](../data/integration.md#simul-单实体实现规则-nanoka-simul-reference1)统一定义。
+[Simul 单实体实现规则](../data/integration.md#simul-单实体实现规则-nanoka-simul-reference3)统一定义。
 成员集合由选定来源版本 `simul.json` 的顶层 key 决定，不扫描详情目录推断；本层不解释评级目标语义、
 不换算时间、不建立图连通性、解锁目标闭合或 Monster 引用闭合校验。`record` 与 `node` 完整留在各语言
 details，不拆分为跨语言公共结构，也不提前抽取与 Boss 的共享配置制品。

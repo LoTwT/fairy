@@ -1,5 +1,6 @@
 import * as fs from "node:fs/promises"
 import { dirname, join } from "node:path"
+import { nanokaAgentsSnapshotEntity } from "../scripts/nanoka-integration/snapshot-entities.ts"
 import { DatabaseSync } from "node:sqlite"
 import { afterEach, describe, expect, it, vi } from "vitest"
 import {
@@ -86,7 +87,7 @@ describe("migration to the multi-entity shell", () => {
     expect(state.phase).toBe("idle")
     expect(state.current.format).toBe(integratedSnapshotFormat)
     expect(state.current.entities).toEqual({
-      agents: { rulesVersion: "nanoka-agent-reference/5" },
+      agents: { rulesVersion: nanokaAgentsSnapshotEntity.rulesVersion },
     })
     expect((await clean(input)).index.entities.agents.memberIds).toEqual([
       "2",
@@ -245,7 +246,7 @@ describe("migration to the multi-entity shell", () => {
     )
     const descriptor = (indexSha256: string) => ({
       indexSha256,
-      rulesVersion: "nanoka-agent-reference/5",
+      rulesVersion: nanokaAgentsSnapshotEntity.rulesVersion,
       policy: input.policy,
     })
     await writeJson(join(control(input), "state.json"), {

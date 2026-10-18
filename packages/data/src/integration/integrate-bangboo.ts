@@ -59,7 +59,7 @@ export interface IntegratedBangboo {
 }
 
 /**
- * 按规则 nanoka-bangboo-reference/1 校验、复制和拆分单个邦布。无 I/O、默认值或语言回退。
+ * 按规则 nanoka-bangboo-reference/2 校验、复制和拆分单个邦布。无 I/O、默认值或语言回退。
  * 来源校验失败抛出含来源位置的 BangbooIntegrationError，不返回部分整合结果。
  */
 export function integrateBangboo(
@@ -123,7 +123,7 @@ export function integrateBangboo(
     if (!isObject(source)) failBangboo(context, "详情必须是普通对象")
     if (Object.hasOwn(source, "locale"))
       failBangboo(at(context, "locale"), "辅助字段重名")
-    const record = validateBangbooDetail(source, context, diagnostics)
+    const record = validateBangbooDetail(source, context)
     if (
       !Number.isSafeInteger(record.id) ||
       String(record.id) !== input.entityId
@@ -177,7 +177,6 @@ export function integrateBangboo(
 function validateBangbooDetail(
   source: JsonObject,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   const namedFields: Readonly<Record<string, { output: string }>> = {
     ...bangbooSharedDetailFields,
@@ -216,8 +215,8 @@ function validateBangbooDetail(
         record,
         output,
         key === "stats"
-          ? validateStats(source[key], at(location, key), diagnostics)
-          : validateSkillProp(source[key], at(location, key), diagnostics),
+          ? validateStats(source[key], at(location, key))
+          : validateSkillProp(source[key], at(location, key)),
       )
       continue
     }
@@ -231,23 +230,17 @@ function validateBangbooDetail(
       continue
     }
     if (key === "level") {
-      put(
-        record,
-        "level",
-        validateLevel(source[key], at(location, key), diagnostics),
-      )
+      put(record, "level", validateLevel(source[key], at(location, key)))
       continue
     }
     if (key === "skill") {
-      put(
-        record,
-        "skill",
-        validateSkill(source[key], at(location, key), diagnostics),
-      )
+      put(record, "skill", validateSkill(source[key], at(location, key)))
       continue
     }
-    put(record, key, source[key])
-    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+    failBangboo(
+      at(location, key),
+      "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+    )
   }
   return record
 }
@@ -283,7 +276,7 @@ function validateField(
   }
 }
 
-/** 登记成员对象的改名冲突与必需检查；未登记成员由调用方原样保留并报告待登记。 */
+/** 登记成员对象的改名冲突与必需检查；未登记成员由随后的成员转换整合失败。 */
 function assertRegisteredMembers(
   value: JsonObject,
   members: Readonly<Record<string, BangbooObjectMember>>,
@@ -301,21 +294,20 @@ function assertRegisteredMembers(
   }
 }
 
-/** 按登记成员转换一个对象：已登记成员校验类型并转换拼写，未登记成员原样保留并诊断。 */
+/** 按登记成员转换一个对象：已登记成员校验类型并转换拼写，未登记成员整合失败。 */
 function transformRegisteredMembers(
   value: JsonObject,
   members: Readonly<Record<string, BangbooObjectMember>>,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted()) {
     const member = Object.hasOwn(members, key) ? members[key] : undefined
-    if (member === undefined) {
-      put(record, key, value[key])
-      diagnostics.push({ ...at(location, key), kind: "unknown-field" })
-      continue
-    }
+    if (member === undefined)
+      failBangboo(
+        at(location, key),
+        "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+      )
     put(
       record,
       member.output,
@@ -325,36 +317,25 @@ function transformRegisteredMembers(
   return record
 }
 
-/** 来源 `stats` 完整共享块的校验与拼写转换；未知成员随块保留。 */
+/** 来源 `stats` 完整共享块的校验与拼写转换；成员逐个登记，未登记成员整合失败。 */
 function validateStats(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBangboo(location, "字段类型必须为普通对象")
   assertRegisteredMembers(value, bangbooStatsMembers, location)
-  return transformRegisteredMembers(
-    value,
-    bangbooStatsMembers,
-    location,
-    diagnostics,
-  )
+  return transformRegisteredMembers(value, bangbooStatsMembers, location)
 }
 
 /** 来源 `skill_prop` 完整共享块的校验；技能 ID key 原样保留。 */
 function validateSkillProp(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBangboo(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted())
-    put(
-      record,
-      key,
-      validateSkillPropEntry(value[key], at(location, key), diagnostics),
-    )
+    put(record, key, validateSkillPropEntry(value[key], at(location, key)))
   return record
 }
 
@@ -362,7 +343,6 @@ function validateSkillProp(
 function validateSkillPropEntry(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBangboo(location, "字段类型必须为普通对象")
   const { source, output } = bangbooSkillPropElementMember
@@ -384,21 +364,22 @@ function validateSkillPropEntry(
       put(
         record,
         key,
-        validateSkillPropParameter(value[key], at(location, key), diagnostics),
+        validateSkillPropParameter(value[key], at(location, key)),
       )
       continue
     }
-    put(record, key, value[key])
-    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+    failBangboo(
+      at(location, key),
+      "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+    )
   }
   return record
 }
 
-/** 技能参数表的校验与拼写转换；未登记成员原样保留并报告待登记。 */
+/** 技能参数表的校验与拼写转换；成员逐个登记，未登记成员整合失败。 */
 function validateSkillPropParameter(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBangboo(location, "字段类型必须为普通对象")
   assertRegisteredMembers(value, bangbooSkillPropParameterMembers, location)
@@ -406,7 +387,6 @@ function validateSkillPropParameter(
     value,
     bangbooSkillPropParameterMembers,
     location,
-    diagnostics,
   )
 }
 
@@ -414,24 +394,18 @@ function validateSkillPropParameter(
 function validateLevel(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBangboo(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted())
-    put(
-      record,
-      key,
-      validateLevelStage(value[key], at(location, key), diagnostics),
-    )
+    put(record, key, validateLevelStage(value[key], at(location, key)))
   return record
 }
 
-/** 单个等级阶段条目的校验与拼写转换；`extra` 必须存在，未知成员原样保留。 */
+/** 单个等级阶段条目的校验与拼写转换；`extra` 必须存在，未登记成员整合失败。 */
 function validateLevelStage(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBangboo(location, "字段类型必须为普通对象")
   assertRegisteredMembers(value, bangbooLevelStageMembers, location)
@@ -449,15 +423,13 @@ function validateLevelStage(
       continue
     }
     if (key === "extra") {
-      put(
-        record,
-        "extra",
-        validateLevelExtra(value[key], at(location, key), diagnostics),
-      )
+      put(record, "extra", validateLevelExtra(value[key], at(location, key)))
       continue
     }
-    put(record, key, value[key])
-    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+    failBangboo(
+      at(location, key),
+      "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+    )
   }
   return record
 }
@@ -466,49 +438,33 @@ function validateLevelStage(
 function validateLevelExtra(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBangboo(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted())
-    put(
-      record,
-      key,
-      validateLevelExtraEntry(value[key], at(location, key), diagnostics),
-    )
+    put(record, key, validateLevelExtraEntry(value[key], at(location, key)))
   return record
 }
 
-/** 单个 extra 属性条目的校验；成员名不改，未知成员原样保留并报告待登记。 */
+/** 单个 extra 属性条目的校验；成员名不改，未登记成员整合失败。 */
 function validateLevelExtraEntry(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBangboo(location, "字段类型必须为普通对象")
   assertRegisteredMembers(value, bangbooLevelExtraMembers, location)
-  return transformRegisteredMembers(
-    value,
-    bangbooLevelExtraMembers,
-    location,
-    diagnostics,
-  )
+  return transformRegisteredMembers(value, bangbooLevelExtraMembers, location)
 }
 
 /** 来源 `skill` 技能结构的校验；类别 key 原样保留，全部内容留在本语言。 */
 function validateSkill(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBangboo(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted())
-    put(
-      record,
-      key,
-      validateSkillCategory(value[key], at(location, key), diagnostics),
-    )
+    put(record, key, validateSkillCategory(value[key], at(location, key)))
   return record
 }
 
@@ -516,7 +472,6 @@ function validateSkill(
 function validateSkillCategory(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBangboo(location, "字段类型必须为普通对象")
   if (!Object.hasOwn(value, "level"))
@@ -527,16 +482,14 @@ function validateSkillCategory(
       put(
         record,
         "level",
-        validateSkillLevelDictionary(
-          value[key],
-          at(location, key),
-          diagnostics,
-        ),
+        validateSkillLevelDictionary(value[key], at(location, key)),
       )
       continue
     }
-    put(record, key, value[key])
-    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+    failBangboo(
+      at(location, key),
+      "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+    )
   }
   return record
 }
@@ -545,39 +498,28 @@ function validateSkillCategory(
 function validateSkillLevelDictionary(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBangboo(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted())
-    put(
-      record,
-      key,
-      validateSkillLevelEntry(value[key], at(location, key), diagnostics),
-    )
+    put(record, key, validateSkillLevelEntry(value[key], at(location, key)))
   return record
 }
 
-/** 单个技能等级条目的校验；成员名不改，未知成员原样保留并报告待登记。 */
+/** 单个技能等级条目的校验；成员名不改，未登记成员整合失败。 */
 function validateSkillLevelEntry(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBangboo(location, "字段类型必须为普通对象")
   assertRegisteredMembers(value, bangbooSkillLevelMembers, location)
-  return transformRegisteredMembers(
-    value,
-    bangbooSkillLevelMembers,
-    location,
-    diagnostics,
-  )
+  return transformRegisteredMembers(value, bangbooSkillLevelMembers, location)
 }
 
 /**
- * 等级成长块拆分：仅提取所有输入语言共有的阶段 key；共有阶段内再提取
- * 全部语言共有的 extra 属性 key 的 `prop`、`value`。单语言独有阶段或属性条目
- * 完整留在该语言；已登记公共值冲突时明确失败；拆分产生的空壳保留。
+ * 等级成长块拆分：阶段 key 与阶段 `extra` 的属性 key 集合都按各语言并集核对，
+ * 任一 key 只在部分语言出现即失败；共有阶段与共有属性提取已登记公共字段。
+ * 已登记公共值冲突时明确失败；拆分产生的空壳保留。
  */
 function splitBangbooLevel(
   records: JsonObject[],
@@ -586,15 +528,18 @@ function splitBangbooLevel(
 ): JsonObject {
   const dataLevel: JsonObject = {}
   const levelPointer = at(location, "level")
-  for (const stageKey of Object.keys(
-    records[0].level as JsonObject,
-  ).toSorted()) {
-    if (
-      !records.every((record) =>
-        Object.hasOwn(record.level as JsonObject, stageKey),
-      )
+  const stageKeys = new Set(
+    records.flatMap((record) => Object.keys(record.level as JsonObject)),
+  )
+  for (const stageKey of [...stageKeys].toSorted()) {
+    const stagePresent = records.flatMap((record, index) =>
+      Object.hasOwn(record.level as JsonObject, stageKey) ? [index] : [],
     )
-      continue
+    if (stagePresent.length !== records.length)
+      failBangboo(
+        at({ ...levelPointer, locale: locales[stagePresent[0]] }, stageKey),
+        `共享字典成员只在部分语言提供（${stagePresent.map((index) => locales[index]).join("、")}）；严格共享要求各语言同有或全缺，单语言独有内容应显式登记为本地化字段`,
+      )
     const stages = records.map(
       (record) => (record.level as JsonObject)[stageKey] as JsonObject,
     )
@@ -614,14 +559,28 @@ function splitBangbooLevel(
       for (const stage of stages) delete stage[member.output]
     }
     const dataExtra: JsonObject = {}
-    const firstExtra = stages[0].extra as JsonObject
-    for (const propKey of Object.keys(firstExtra).toSorted()) {
-      if (
-        !stages.every((stage) =>
-          Object.hasOwn(stage.extra as JsonObject, propKey),
-        )
+    for (const propKey of [
+      ...new Set(
+        stages.flatMap((stage) => Object.keys(stage.extra as JsonObject)),
+      ),
+    ].toSorted()) {
+      const propPresent = stages.flatMap((stage, index) =>
+        Object.hasOwn(stage.extra as JsonObject, propKey) ? [index] : [],
       )
-        continue
+      if (propPresent.length !== stages.length)
+        failBangboo(
+          at(
+            at(
+              at(
+                { ...levelPointer, locale: locales[propPresent[0]!] },
+                stageKey,
+              ),
+              "extra",
+            ),
+            propKey,
+          ),
+          `共享字典成员只在部分语言提供（${propPresent.map((index) => locales[index]).join("、")}）；严格共享要求各语言同有或全缺，单语言独有内容应显式登记为本地化字段`,
+        )
       const entries = stages.map(
         (stage) => (stage.extra as JsonObject)[propKey] as JsonObject,
       )

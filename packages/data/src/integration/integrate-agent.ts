@@ -122,12 +122,7 @@ export function integrateAgent(input: IntegrateAgentInput): IntegratedAgent {
       "classificationIds",
     ])
       if (Object.hasOwn(source, key)) fail(at(context, key), "辅助字段重名")
-    const record = transform(
-      source,
-      agentSchema,
-      context,
-      diagnostics,
-    ) as JsonObject
+    const record = transform(source, agentSchema, context) as JsonObject
     if (
       !Number.isSafeInteger(record.id) ||
       String(record.id) !== input.entityId
@@ -197,7 +192,6 @@ function transform(
   value: SourceJson,
   schema: Schema,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): SourceJson {
   if (schema.kind === "string" || schema.kind === "number") {
     if (typeof value !== schema.kind)
@@ -213,7 +207,7 @@ function transform(
   if (schema.kind === "array") {
     if (!Array.isArray(value)) fail(location, "字段类型必须为数组")
     return value.map((item, index) =>
-      transform(item, schema.item, at(location, String(index)), diagnostics),
+      transform(item, schema.item, at(location, String(index))),
     )
   }
   if (!isObject(value)) fail(location, "字段类型必须为普通对象")
@@ -222,11 +216,7 @@ function transform(
     for (const key of Object.keys(value).toSorted()) {
       if (schema.ids && !isSourceId(key))
         fail(at(location, key), "字典 key 必须为规范十进制 ID")
-      put(
-        result,
-        key,
-        transform(value[key], schema.item, at(location, key), diagnostics),
-      )
+      put(result, key, transform(value[key], schema.item, at(location, key)))
     }
     return result
   }
@@ -243,17 +233,13 @@ function transform(
       put(
         result,
         registeredName(key),
-        transform(
-          value[key],
-          schema.fields[key],
-          at(location, key),
-          diagnostics,
-        ),
+        transform(value[key], schema.fields[key], at(location, key)),
       )
-    else {
-      put(result, key, value[key])
-      diagnostics.push({ ...at(location, key), kind: "unknown-field" })
-    }
+    else
+      fail(
+        at(location, key),
+        `未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构`,
+      )
   }
   return result
 }
@@ -321,15 +307,22 @@ function split(
     throw new Error(`不支持的共享拆分结构：${schema.kind}`)
   const data: JsonObject = {}
   if (schema.kind === "dictionary") {
-    for (const key of Object.keys(records[0]).toSorted()) {
-      if (records.every((record) => Object.hasOwn(record, key))) {
-        const child = split(
-          schema.item,
-          records.map((record) => record[key] as JsonObject),
-          locations.map((location) => at(location, key)),
+    const keys = new Set(records.flatMap((record) => Object.keys(record)))
+    for (const key of [...keys].toSorted()) {
+      const present = records.flatMap((record, index) =>
+        Object.hasOwn(record, key) ? [index] : [],
+      )
+      if (present.length !== records.length)
+        fail(
+          at(locations[present[0]], key),
+          `共享字典成员只在部分语言提供（${present.map((index) => locations[index].locale).join("、")}）；严格共享要求各语言同有或全缺，单语言独有内容应显式登记为本地化字段`,
         )
-        if (child) put(data, key, child)
-      }
+      const child = split(
+        schema.item,
+        records.map((record) => record[key] as JsonObject),
+        locations.map((location) => at(location, key)),
+      )
+      if (child) put(data, key, child)
     }
   } else if (schema.kind === "object") {
     for (const sourceKey of Object.keys(schema.fields).toSorted()) {
@@ -339,6 +332,13 @@ function split(
       const present = records.flatMap((record, index) =>
         Object.hasOwn(record, key) ? [index] : [],
       )
+      if (present.length > 0 && present.length !== records.length)
+        fail(
+          at(locations[present[0]], sourceKey),
+          `共享结构字段只在部分语言提供（${present.map((index) => locations[index].locale).join("、")}）；严格共享要求各语言同有或全缺，单语言独有内容应显式登记为本地化字段`,
+        )
+      // 各语言全缺时直接跳过：不能带着 undefined 递归进容器拆分。
+      if (present.length === 0) continue
       if (field.shared) {
         for (const index of present.slice(1))
           if (!equalJson(records[present[0]][key], records[index][key]))
@@ -352,7 +352,7 @@ function split(
             delete record[key]
           })
         }
-      } else if (present.length === records.length) {
+      } else {
         const child = split(
           field,
           records.map((record) => record[key] as JsonObject),

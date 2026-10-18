@@ -147,7 +147,7 @@ export function verifyAgentSnapshotMemberFile(
 export const nanokaAgentsSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "agents",
   sourceEntity: "character",
-  rulesVersion: "nanoka-agent-reference/5",
+  rulesVersion: "nanoka-agent-reference/6",
   verifyMemberFile: verifyAgentSnapshotMemberFile,
   integrate({ memberId, sourceRecord, details, detailLocales }) {
     const result = integrateAgent({
@@ -197,7 +197,7 @@ export const nanokaDriveDiscsSnapshotEntity: IntegratedSnapshotEntityProducer =
   {
     name: "drive-discs",
     sourceEntity: "equipment",
-    rulesVersion: "nanoka-drive-disc-reference/1",
+    rulesVersion: "nanoka-drive-disc-reference/2",
     verifyMemberFile: verifyDriveDiscSnapshotMemberFile,
     integrate({ memberId, sourceRecord, details, detailLocales }) {
       const result = integrateDriveDisc({
@@ -246,7 +246,7 @@ export function verifyWEngineSnapshotMemberFile(
 export const nanokaWEnginesSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "w-engines",
   sourceEntity: "weapon",
-  rulesVersion: "nanoka-w-engine-reference/1",
+  rulesVersion: "nanoka-w-engine-reference/2",
   verifyMemberFile: verifyWEngineSnapshotMemberFile,
   integrate({ memberId, sourceRecord, details, detailLocales }) {
     const result = integrateWEngine({
@@ -295,7 +295,7 @@ export function verifyBangbooSnapshotMemberFile(
 export const nanokaBangboosSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "bangboos",
   sourceEntity: "bangboo",
-  rulesVersion: "nanoka-bangboo-reference/1",
+  rulesVersion: "nanoka-bangboo-reference/2",
   verifyMemberFile: verifyBangbooSnapshotMemberFile,
   integrate({ memberId, sourceRecord, details, detailLocales }) {
     const result = integrateBangboo({
@@ -344,7 +344,7 @@ export function verifyMonsterSnapshotMemberFile(
 export const nanokaMonstersSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "monsters",
   sourceEntity: "monster",
-  rulesVersion: "nanoka-monster-reference/1",
+  rulesVersion: "nanoka-monster-reference/2",
   verifyMemberFile: verifyMonsterSnapshotMemberFile,
   integrate({ memberId, sourceRecord, details, detailLocales }) {
     const result = integrateMonster({
@@ -393,7 +393,7 @@ export function verifyShiyuSnapshotMemberFile(
 export const nanokaShiyuSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "shiyu",
   sourceEntity: "shiyu",
-  rulesVersion: "nanoka-shiyu-reference/2",
+  rulesVersion: "nanoka-shiyu-reference/3",
   verifyMemberFile: verifyShiyuSnapshotMemberFile,
   integrate({ memberId, sourceRecord, details, detailLocales }) {
     const result = integrateShiyu({
@@ -442,7 +442,7 @@ export function verifyBossSnapshotMemberFile(
 export const nanokaBossSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "boss",
   sourceEntity: "boss",
-  rulesVersion: "nanoka-boss-reference/2",
+  rulesVersion: "nanoka-boss-reference/3",
   verifyMemberFile: verifyBossSnapshotMemberFile,
   integrate({ memberId, sourceRecord, details, detailLocales }) {
     const result = integrateBoss({
@@ -491,7 +491,7 @@ export function verifySimulSnapshotMemberFile(
 export const nanokaSimulSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "simul",
   sourceEntity: "simul",
-  rulesVersion: "nanoka-simul-reference/2",
+  rulesVersion: "nanoka-simul-reference/3",
   verifyMemberFile: verifySimulSnapshotMemberFile,
   integrate({ memberId, sourceRecord, details, detailLocales }) {
     const result = integrateSimul({

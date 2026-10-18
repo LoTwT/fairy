@@ -135,10 +135,10 @@ describe("publication snapshot", () => {
       '"source":{"id":"nanoka-zzz","version":"synthetic-publication"}',
     )
     expect(catalog).toContain(
-      '"agents":{"rulesVersion":"nanoka-agent-reference/5","detailLocales":["zh","en"],"memberIds":["2","10"]}',
+      '"agents":{"rulesVersion":"nanoka-agent-reference/6","detailLocales":["zh","en"],"memberIds":["2","10"]}',
     )
     expect(catalog).toContain(
-      '"simul":{"rulesVersion":"nanoka-simul-reference/2","detailLocales":["zh","en"],"memberIds":["990001","990002"]}',
+      '"simul":{"rulesVersion":"nanoka-simul-reference/3","detailLocales":["zh","en"],"memberIds":["990001","990002"]}',
     )
     expect(catalog).toContain(
       '[["Example Drive Disc 930001","930001"],["Example Drive Disc 930002","930002"]]',

@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest"
-import type { BossData } from "../src/integration/boss-types.ts"
+import type {
+  BossData,
+  BossDetails,
+  BossDetailsModesVariant,
+  BossDetailsZoneVariant,
+} from "../src/integration/boss-types.ts"
 import { integrateBoss } from "../src/integration/integrate-boss.ts"
 import type { IntegrateBossInput } from "../src/integration/integrate-boss.ts"
 import { BossIntegrationError } from "../src/integration/source-json.ts"
@@ -65,6 +70,16 @@ function expectFailure(
     if (reason) expect((error as Error).message).toContain(reason)
   }
 }
+/** 窄化辅助：详情联合按判别成员取当前变体，误用时立即失败。 */
+function modesVariant(details: BossDetails): BossDetailsModesVariant {
+  if (!("modes" in details)) throw new Error("expected modes variant")
+  return details
+}
+
+function zoneVariant(details: BossDetails): BossDetailsZoneVariant {
+  if (!("zone" in details)) throw new Error("expected zone variant")
+  return details
+}
 
 const expectedData = {
   id: 980001,
@@ -91,25 +106,29 @@ describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
     expect(zh.id).toBe(980001)
     expect(zh.locale).toBe("zh")
     expect(zh.name).toBe("试炼")
-    expect(zh.modes).toHaveLength(2)
-    expect(zh.modes![0]!.id).toBe(980001)
-    expect(zh.modes![0]!.zoneType).toBe(1001)
-    expect(zh.modes![0]!.zone["9800101"]!.name).toBe("示例首领·一阶")
-    expect(zh.modes![0]!.zone["9800101"]!.selectableBuff).toMatchObject({
+    expect(modesVariant(zh).modes).toHaveLength(2)
+    expect(modesVariant(zh).modes[0]!.id).toBe(980001)
+    expect(modesVariant(zh).modes[0]!.zoneType).toBe(1001)
+    expect(modesVariant(zh).modes[0]!.zone["9800101"]!.name).toBe(
+      "示例首领·一阶",
+    )
+    expect(
+      modesVariant(zh).modes[0]!.zone["9800101"]!.selectableBuff,
+    ).toMatchObject({
       "98010101": { title: "诛心" },
     })
-    expect(zh.modes![1]!.id).toBe(980002)
-    expect(zh.modes![1]!.zoneType).toBe(1002)
-    expect(zh.modes![1]!.zone["9800201"]!.name).toBe("示例首领·二阶")
-    expect(zh.zone).toBeUndefined()
-    const en = result.details.en!
-    expect(en.modes![0]!.zone["9800101"]!.name).toBe(
+    expect(modesVariant(zh).modes[1]!.id).toBe(980002)
+    expect(modesVariant(zh).modes[1]!.zoneType).toBe(1002)
+    expect(modesVariant(zh).modes[1]!.zone["9800201"]!.name).toBe(
+      "示例首领·二阶",
+    )
+    expect("zone" in zh).toBe(false)
+    const en = modesVariant(result.details.en!)
+    expect(en.modes[0]!.zone["9800101"]!.name).toBe(
       "Example Overlord · Phase I",
     )
     expect(
-      en.modes![0]!.zone["9800101"]!.layerRoom["98001011"]!.monsterList[
-        "11818"
-      ],
+      en.modes[0]!.zone["9800101"]!.layerRoom["98001011"]!.monsterList["11818"],
     ).toMatchObject({ id: 30024, name: "Example Overlord" })
     expect(result.details.zh).not.toHaveProperty("boss_adjust")
     expect(result.details.zh).not.toHaveProperty("zone_type")
@@ -130,11 +149,11 @@ describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
     ;[modes[0], modes[1]] = [modes[1]!, modes[0]!]
     ;[enModes[0], enModes[1]] = [enModes[1]!, enModes[0]!]
     const result = integrateBoss(input)
-    expect(result.details.zh!.modes![0]!.id).toBe(980002)
-    expect(result.details.zh!.modes![1]!.id).toBe(980001)
+    expect(modesVariant(result.details.zh!).modes[0]!.id).toBe(980002)
+    expect(modesVariant(result.details.zh!).modes[1]!.id).toBe(980001)
     expect(result.data.zoneType).toBe(1001)
     // 第二个 mode 的 zone_type 与顶层不同，分别保留，不要求相等。
-    expect(result.details.zh!.modes![0]!.zoneType).toBe(1002)
+    expect(modesVariant(result.details.zh!).modes[0]!.zoneType).toBe(1002)
     expectBossRoundtrip(result, input)
   })
 
@@ -143,13 +162,17 @@ describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
     const before = structuredClone(input)
     const result = integrateBoss(input)
     expect(result.data).toStrictEqual(expectedData)
-    expect(result.details.zh!.modes).toBeUndefined()
-    expect(Object.keys(result.details.zh!.zone!)).toEqual(["9800101"])
-    expect(result.details.zh!.zone!["9800101"]!.stageNum).toBe(1)
-    expect(result.details.zh!.zone!["9800101"]!.selectableBuff).toMatchObject({
+    expect("modes" in result.details.zh!).toBe(false)
+    expect(Object.keys(zoneVariant(result.details.zh!).zone!)).toEqual([
+      "9800101",
+    ])
+    expect(zoneVariant(result.details.zh!).zone["9800101"]!.stageNum).toBe(1)
+    expect(
+      zoneVariant(result.details.zh!).zone["9800101"]!.selectableBuff,
+    ).toMatchObject({
       "98010101": { title: "诛心" },
     })
-    expect(result.details.en!.zone!["9800101"]!.name).toBe(
+    expect(zoneVariant(result.details.en!).zone["9800101"]!.name).toBe(
       "Example Overlord · Phase I",
     )
     expect(result.maintenance).toEqual({ diagnostics: [] })
@@ -169,39 +192,27 @@ describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
     expectFailure(neither, "zh", "/modes", "结构冲突：modes 与 zone 同时缺失")
   })
 
-  it("boss_adjust 是完整共享块：负值原样保留，未知成员随块参与完整值比较", () => {
+  it("boss_adjust 是完整共享块：负值原样保留，未登记成员整合失败", () => {
     const input = bossInput()
-    // 未知成员两语言一致：随块提取到 data 并进入诊断。
-    change(input.details.zh, "boss_adjust.1001.note", "说明")
-    change(input.details.en, "boss_adjust.1001.note", "说明")
     const result = integrateBoss(input)
-    expect(result.data.bossAdjust["1001"]).toMatchObject({
+    expect(result.data.bossAdjust["1001"]).toStrictEqual({
       hp: 1200,
       atk: -5000,
       points: 1000,
-      note: "说明",
     })
-    expect(result.maintenance.diagnostics).toEqual([
-      {
-        entityId: "980001",
-        locale: "zh",
-        pointer: "/boss_adjust/1001/note",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "980001",
-        locale: "en",
-        pointer: "/boss_adjust/1001/note",
-        kind: "unknown-field",
-      },
-    ])
+    expect(result.maintenance.diagnostics).toEqual([])
     expectBossRoundtrip(result, input)
-    // 未知成员跨语言不一致仍按共享冲突处理。
-    const conflict = bossInput()
-    change(conflict.details.en, "boss_adjust.1001.note", "different")
-    change(conflict.details.zh, "boss_adjust.1001.note", "说明")
-    expectFailure(conflict, "en", "/boss_adjust", "共享冲突")
-    // 已登记成员的冲突同样失败。
+    // 未登记成员不再随块保留：先在 schema 登记或确认来源结构。
+    const unknownMember = bossInput()
+    change(unknownMember.details.zh, "boss_adjust.1001.note", "说明")
+    change(unknownMember.details.en, "boss_adjust.1001.note", "说明")
+    expectFailure(
+      unknownMember,
+      "zh",
+      "/boss_adjust/1001/note",
+      "未知字段：未在登记表登记，不能进入发布制品",
+    )
+    // 已登记成员的跨语言冲突失败。
     const memberConflict = bossInput()
     change(memberConflict.details.en, "boss_adjust.1001.atk", -4999)
     expectFailure(memberConflict, "en", "/boss_adjust", "共享冲突")
@@ -210,8 +221,8 @@ describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
   it("encounter 与弱点完整保留；monster_list 外层 key 不是 Monster ID", () => {
     const input = bossInput()
     const result = integrateBoss(input)
-    const room =
-      result.details.zh!.modes![0]!.zone["9800101"]!.layerRoom["98001011"]!
+    const room = modesVariant(result.details.zh!).modes[0]!.zone["9800101"]!
+      .layerRoom["98001011"]!
     expect(Object.keys(room.monsterList)).toEqual(["11818"])
     expect(room.monsterList["11818"]).toStrictEqual({
       id: 30024,
@@ -288,62 +299,33 @@ describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
     expectBossRoundtrip(result, input)
   })
 
-  it("zone 各层未知字段留在本语言并诊断；诊断顺序确定", () => {
-    const input = bossInput()
-    change(input.details.zh, "future_field", { nested: [1, 2] })
-    change(input.details.zh, "modes.0.zone.9800101.future_stage_field", 0)
-    change(input.details.zh, "modes.0.future_mode_field", 0)
-    change(
-      input.details.zh,
-      "modes.0.zone.9800101.layer_room.98001011.future_room_field",
-      0,
-    )
-    change(
-      input.details.zh,
-      "modes.0.zone.9800101.selectable_buff.98010101.future_buff_field",
-      0,
-    )
-    const result = integrateBoss(input)
-    expect(result.details.zh).toMatchObject({
-      future_field: { nested: [1, 2] },
-    })
-    expect(result.details.zh!.modes![0]).toMatchObject({
-      future_mode_field: 0,
-    })
-    expect(result.maintenance.diagnostics).toEqual([
-      {
-        entityId: "980001",
-        locale: "zh",
-        pointer: "/future_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "980001",
-        locale: "zh",
-        pointer: "/modes/0/future_mode_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "980001",
-        locale: "zh",
-        pointer: "/modes/0/zone/9800101/future_stage_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "980001",
-        locale: "zh",
-        pointer: "/modes/0/zone/9800101/layer_room/98001011/future_room_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "980001",
-        locale: "zh",
-        pointer:
-          "/modes/0/zone/9800101/selectable_buff/98010101/future_buff_field",
-        kind: "unknown-field",
-      },
-    ])
-    expectBossRoundtrip(result, input)
+  it("zone 各层未知字段整合失败并定位来源", () => {
+    const cases: Array<[path: string, pointer: string]> = [
+      ["future_field", "/future_field"],
+      ["modes.0.future_mode_field", "/modes/0/future_mode_field"],
+      [
+        "modes.0.zone.9800101.future_stage_field",
+        "/modes/0/zone/9800101/future_stage_field",
+      ],
+      [
+        "modes.0.zone.9800101.layer_room.98001011.future_room_field",
+        "/modes/0/zone/9800101/layer_room/98001011/future_room_field",
+      ],
+      [
+        "modes.0.zone.9800101.selectable_buff.98010101.future_buff_field",
+        "/modes/0/zone/9800101/selectable_buff/98010101/future_buff_field",
+      ],
+    ]
+    for (const [path, pointer] of cases) {
+      const caseInput = bossInput()
+      change(caseInput.details.zh, path, 0)
+      expectFailure(
+        caseInput,
+        "zh",
+        pointer,
+        "未知字段：未在登记表登记，不能进入发布制品",
+      )
+    }
   })
 
   it("对象成员排列不影响输出", () => {
@@ -357,10 +339,6 @@ describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
         en: reverseKeys(input.details.en),
       },
     }
-    change(input.details.zh, "z_field", 0)
-    change(reversed.details.zh, "z_field", 0)
-    change(input.details.zh, "a_field", 0)
-    change(reversed.details.zh, "a_field", 0)
     const expected = integrateBoss(input)
     const result = integrateBoss(reversed as IntegrateBossInput)
     expect(result).toStrictEqual(expected)
@@ -604,7 +582,7 @@ describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
     })
     expect(zhOnly.details).not.toHaveProperty("en")
     expect(zhOnly.data).toStrictEqual(expectedData)
-    expect(zhOnly.details.zh!.modes).toHaveLength(2)
+    expect(modesVariant(zhOnly.details.zh!).modes).toHaveLength(2)
     expectBossRoundtrip(zhOnly, {
       sourceRecord: input.sourceRecord,
       details: { zh: input.details.zh },
@@ -633,14 +611,16 @@ describe("单 Boss 纯整合的空值与特例语义", () => {
     change(input.details.en, "boss_adjust.1002.hp", 0)
     const result = integrateBoss(input)
     expect(
-      result.details.zh!.modes![0]!.zone["9800101"]!.layerBuff["98010110"]!
-        .title,
+      modesVariant(result.details.zh!).modes[0]!.zone["9800101"]!.layerBuff[
+        "98010110"
+      ]!.title,
     ).toBe("")
     expect(
-      result.details.zh!.modes![1]!.zone["9800201"]!.layerBuff,
+      modesVariant(result.details.zh!).modes[1]!.zone["9800201"]!.layerBuff,
     ).toStrictEqual({})
     expect(
-      result.details.zh!.modes![1]!.zone["9800201"]!.selectableBuff,
+      modesVariant(result.details.zh!).modes[1]!.zone["9800201"]!
+        .selectableBuff,
     ).toStrictEqual({})
     expect(result.data.bossAdjust["1002"]!.hp).toBe(0)
     expect(result.data.bossAdjust["1001"]!.atk).toBe(-5000)
@@ -648,33 +628,45 @@ describe("单 Boss 纯整合的空值与特例语义", () => {
   })
 
   it.each(["constructor", "__proto__", "toString"])(
-    "还原辅助函数不把特殊自有字段 %s 误判为登记改名",
-    (field) => {
+    "还原辅助函数不把特殊字典 key %s 误判为登记改名",
+    (key) => {
       const input = bossInput()
-      // modes 与 zone 各层都是本语言结构：特殊自有字段按普通数据保留，不改名、不改值。
+      // 字典 key 是数据不是字段：增益 key 与关卡数值 key 原样保留，不改名、不改值。
       // change 经 Object.defineProperty 写入自有属性，避开 __proto__ 的字面量语义。
-      change(input.details.zh, `modes.0.${field}`, { nested: [1] })
-      change(input.details.en, `modes.0.${field}`, { nested: [1] })
+      const buff =
+        input.details.zh.modes[0]!.zone["9800101"]!.layer_buff["98010110"]
+      change(input.details.zh, `modes.0.zone.9800101.layer_buff.${key}`, buff)
+      change(input.details.en, `modes.0.zone.9800101.layer_buff.${key}`, buff)
       change(
         input.details.zh,
-        `modes.0.zone.9800101.layer_room.98001011.monster_list.11818.${field}`,
-        "encounter-value",
+        `modes.0.zone.9800101.layer_room.98001011.monster_list.11818.stats.${key}`,
+        1,
       )
       change(
         input.details.en,
-        `modes.0.zone.9800101.layer_room.98001011.monster_list.11818.${field}`,
-        "encounter-value",
+        `modes.0.zone.9800101.layer_room.98001011.monster_list.11818.stats.${key}`,
+        1,
       )
       const result = integrateBoss(input)
-      expect(Object.hasOwn(result.details.zh!.modes![0]!, field)).toBe(true)
-      expect(result.details.zh!.modes![0]![field]).toEqual({ nested: [1] })
       expect(
         Object.hasOwn(
-          result.details.zh!.modes![0]!.zone["9800101"]!.layerRoom["98001011"]!
-            .monsterList["11818"]!,
-          field,
+          modesVariant(result.details.zh!).modes[0]!.zone["9800101"]!.layerBuff,
+          key,
         ),
       ).toBe(true)
+      expect(
+        Object.hasOwn(
+          modesVariant(result.details.zh!).modes[0]!.zone["9800101"]!.layerRoom[
+            "98001011"
+          ]!.monsterList["11818"]!.stats,
+          key,
+        ),
+      ).toBe(true)
+      expect(
+        modesVariant(result.details.zh!).modes[0]!.zone["9800101"]!.layerRoom[
+          "98001011"
+        ]!.monsterList["11818"]!.stats[key],
+      ).toBe(1)
       // 还原辅助函数须按登记表命中与否改名，不读取登记表原型链。
       expectBossRoundtrip(result, input)
     },
@@ -682,31 +674,28 @@ describe("单 Boss 纯整合的空值与特例语义", () => {
 })
 
 describe("Boss 还原辅助函数的路径边界", () => {
-  it("未知扩展内容原样保留：内部 camelCase/snake_case key 与数组内容不被改写；篡改必须失败", () => {
+  it("未登记顶层字段整合失败并定位来源", () => {
     const input = bossInput()
-    // 未知字段的整个值原样保留：内部字段名不做登记表推断，数组内容同样不改写；
-    // 同一对象内的 snake_case 与 camelCase key 同时保留。
     change(input.details.zh, "future_extension", {
       zoneType: "camel",
       zone_type: "snake",
       nested: [{ stageNum: 2, layerBuff: {} }],
     })
-    change(input.details.zh, "future_snake", { selectable_buff: "kept" })
-    const result = integrateBoss(input)
-    expect(result.details.zh!.future_extension).toStrictEqual({
-      zoneType: "camel",
-      zone_type: "snake",
-      nested: [{ stageNum: 2, layerBuff: {} }],
-    })
-    expect(result.details.zh!.future_snake).toStrictEqual({
-      selectable_buff: "kept",
-    })
-    expectBossRoundtrip(result, input)
-    // 人为把未知字段内部的 snake_case key 篡改成 camelCase 后，还原校验必须失败：
-    // 不得把 selectableBuff 误还原成 selectable_buff 掩盖损坏。
-    const corrupted = structuredClone(result)
-    corrupted.details.zh!.future_snake = { selectableBuff: "kept" }
-    expect(() => expectBossRoundtrip(corrupted, input)).toThrow()
+    expectFailure(
+      input,
+      "zh",
+      "/future_extension",
+      "未知字段：未在登记表登记，不能进入发布制品",
+    )
+
+    const snakeCase = bossInput()
+    change(snakeCase.details.zh, "future_snake", { selectable_buff: "kept" })
+    expectFailure(
+      snakeCase,
+      "zh",
+      "/future_snake",
+      "未知字段：未在登记表登记，不能进入发布制品",
+    )
   })
 
   it("字典 key 与登记字段名相同时原样保留，值仍按阶段结构还原", () => {
@@ -715,12 +704,13 @@ describe("Boss 还原辅助函数的路径边界", () => {
     // 阶段 key 恰好与登记字段同名：字典 key 原样保留，不按登记表改名。
     change(input.details.zh, "modes.0.zone.selectableBuff", stage)
     const result = integrateBoss(input)
-    expect(Object.keys(result.details.zh!.modes![0]!.zone)).toContain(
-      "selectableBuff",
-    )
-    expect(result.details.zh!.modes![0]!.zone["selectableBuff"]!.stageNum).toBe(
-      1,
-    )
+    expect(
+      Object.keys(modesVariant(result.details.zh!).modes[0]!.zone),
+    ).toContain("selectableBuff")
+    expect(
+      modesVariant(result.details.zh!).modes[0]!.zone["selectableBuff"]!
+        .stageNum,
+    ).toBe(1)
     expectBossRoundtrip(result, input)
   })
 })
