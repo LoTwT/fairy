@@ -209,7 +209,8 @@ core：计算
 - 各层 `potential` 与参数中的 `attackData` 均为 `number[]`，保留空数组、零值和顺序；同名数组的位置和用途
   分别解释，不能根据相同数值自动建立关联。
 - `strategy` 为 `string[] | SourceEmptyObject`；`specialElementType` 为完整 `name/title/desc/icon` 描述记录
-  或 `SourceEmptyObject`。该空对象类型使用 `Record<string, never>`，与缺失、`null`、数组分别处理。
+  （3.2 起可含 `id` 数值编码，如 200 凛刃、202 烈霜、205 玄墨）或 `SourceEmptyObject`。该空对象类型使用
+  `Record<string, never>`，与缺失、`null`、数组分别处理。
 - `potentialDetail` 为按自身 ID 保存的 `SourcePotentialDetail` 字典，保留内嵌数值 `id`、原文、`abilityList`
   及有序 `potentialMaterials`；材料元素仍是 `{ itemId, number }`，不改成数量字典。
 - `extraProperty` 的每个来源 key 对应 `SourceExtraProperty` 的 `target`、`value` 数值。当前出现的 `111`、
