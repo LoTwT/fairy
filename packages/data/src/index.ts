@@ -202,6 +202,7 @@ export type {
   IntegratedSnapshotEntity,
   IntegratedSnapshotIndex,
   IntegratedSnapshotInfo,
+  IntegratedSnapshotCategory,
   IntegratedSnapshotMember,
   IntegratedSnapshotSourceInput,
 } from "./integration/snapshot-types.ts"

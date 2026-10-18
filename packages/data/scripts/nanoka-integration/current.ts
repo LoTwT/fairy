@@ -17,11 +17,11 @@ import {
   resolve,
   sep,
 } from "node:path"
+import type { ExportFileReference } from "../../src/integration/agent-types.ts"
 import type {
-  ExportFileReference,
   HistoricalIntegratedIndex,
   IntegratedIndex,
-} from "../../src/integration/agent-types.ts"
+} from "./legacy-index-types.ts"
 import { integratedSnapshotFormat } from "../../src/integration/snapshot-types.ts"
 import type {
   HistoricalIntegratedSnapshotIndex,
@@ -603,6 +603,7 @@ function summarizeIndex(index: HistoricalIntegratedSnapshotIndex): {
   const files: ExportFileReference[] = []
   const memberCounts: Record<string, number> = {}
   for (const [name, entity] of Object.entries(index.entities)) {
+    if (!entity) invalid(`/entities/${name}: 类别缺失`)
     memberCounts[name] = entity.memberIds.length
     for (const memberId of entity.memberIds) {
       const member = entity.members[memberId]
@@ -651,6 +652,7 @@ function completeLanguageIndex(
   index: HistoricalIntegratedSnapshotIndex,
 ): IntegratedSnapshotIndex {
   for (const [name, entity] of Object.entries(index.entities)) {
+    if (!entity) invalid(`/entities/${name}: 类别缺失`)
     for (const locale of supportedLanguages)
       if (!entity.detailLocales.includes(locale))
         throw new NanokaCurrentError(

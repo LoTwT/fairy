@@ -1,9 +1,11 @@
 import type {
   DetailLocale,
   ExportFileReference,
-  IntegratedIndex,
-  HistoricalIntegratedIndex,
 } from "../../src/integration/agent-types.ts"
+import type {
+  HistoricalIntegratedIndex,
+  IntegratedIndex,
+} from "./legacy-index-types.ts"
 import { equalJson, sortedIds } from "../../src/integration/source-json.ts"
 import { serializeJson } from "../../src/integration/serialize-json.ts"
 import {

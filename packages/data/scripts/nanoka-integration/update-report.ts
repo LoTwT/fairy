@@ -1,7 +1,5 @@
-import type {
-  DetailLocale,
-  HistoricalIntegratedIndex,
-} from "../../src/integration/agent-types.ts"
+import type { DetailLocale } from "../../src/integration/agent-types.ts"
+import type { HistoricalIntegratedIndex } from "./legacy-index-types.ts"
 import type {
   HistoricalIntegratedSnapshotIndex,
   IntegratedSnapshotSourceInput,
