@@ -18,11 +18,11 @@ import type { UnknownFieldDiagnostic } from "../src/integration/source-json.ts"
 
 export const minimalData: DriveDiscData = { id: 930001, icon: "", icon2: "" }
 
-/** 未登记的顶层来源字段仍是可保留的 JSON 值，不因类型声明被否定。 */
 export const dataWithUnknownFields: DriveDiscData = {
   id: 930001,
   icon: "UI/Sprite/IconSuit/ExampleIcon.png",
   icon2: "UI/Sprite/IconSuit/ExampleIcon2.png",
+  // @ts-expect-error 未登记的顶层字段在封闭类型上被拒绝。
   future_container: { nested: [0, { empty: {}, nil: null, text: "" }] },
 }
 
@@ -42,6 +42,7 @@ export const detailsWithUnknownFields: DriveDiscDetails = {
   desc2: "CRIT Rate +8%.",
   desc4: "<color=#FFFFFF>EX Special Attack</color>",
   story: "Synthetic story.",
+  // @ts-expect-error 未登记的 details 顶层字段在封闭类型上被拒绝。
   untouched: { raw_key: [null, "", {}, [], 0] },
 }
 
@@ -107,7 +108,7 @@ export const unknownFieldDiagnostic: UnknownFieldDiagnostic = {
 
 export const functionUnknownField: DriveDiscDetails = {
   ...minimalDetails,
-  // @ts-expect-error 未知字段的值必须仍是可保留的 JSON 值。
+  // @ts-expect-error 未登记的 details 顶层字段在封闭类型上被拒绝，不接受函数值。
   untouched: () => {},
 }
 // @ts-expect-error 缺失 icon2 不能由未知字段补位。
@@ -137,7 +138,7 @@ export const functionField: DriveDiscData = {
   id: 930001,
   icon: "",
   icon2: "",
-  // @ts-expect-error 未知字段不能借索引签名接受函数值。
+  // @ts-expect-error 未登记的顶层字段在封闭类型上被拒绝，不接受函数值。
   future: () => {},
 }
 // @ts-expect-error 来源索引记录必须是 JSON 对象，不接受 undefined。

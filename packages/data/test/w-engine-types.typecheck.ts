@@ -5,6 +5,11 @@
 import type {
   WEngineData,
   WEngineDetails,
+  WEngineLevelStage,
+  WEnginePropertyValue,
+  WEnginePropertyText,
+  WEngineStarsStage,
+  WEngineTalent,
 } from "../src/integration/w-engine-types.ts"
 import type { WEngineFieldKind } from "../src/integration/w-engine-schema.ts"
 import type {
@@ -26,17 +31,46 @@ export const minimalData: WEngineData = {
   classificationIds: { weaponType: [] },
 }
 
-/** 未登记的顶层来源字段仍是可保留的 JSON 值，不因类型声明被否定。 */
 export const dataWithUnknownFields: WEngineData = {
   ...minimalData,
+  // @ts-expect-error 未登记的顶层字段在封闭类型上被拒绝。
   future_container: { nested: [0, { empty: {}, nil: null, text: "" }] },
 }
 
-/** 共享块内部的未登记阶段成员同样原样保留。 */
-export const dataWithUnknownStageFields: WEngineData = {
-  ...minimalData,
-  level: { "0": { exp: 0, rate: 0, rate2: 0, future_rate: 1 } },
-  stars: { "0": { starRate: 0, randRate: 0, future_rand: 1 } },
+export const levelStageWithUnknownMember: WEngineLevelStage = {
+  exp: 0,
+  rate: 0,
+  rate2: 0,
+  // @ts-expect-error 未登记的阶段成员在封闭类型上被拒绝。
+  future_rate: 1,
+}
+
+export const starsStageWithUnknownMember: WEngineStarsStage = {
+  starRate: 0,
+  randRate: 0,
+  // @ts-expect-error 未登记的阶段成员在封闭类型上被拒绝。
+  future_rand: 1,
+}
+
+export const propertyValueWithUnknownMember: WEnginePropertyValue = {
+  value: 0,
+  // @ts-expect-error 未登记的属性数值成员在封闭类型上被拒绝。
+  future_member: 1,
+}
+
+export const propertyTextWithUnknownMember: WEnginePropertyText = {
+  name: "",
+  name2: "",
+  format: "",
+  // @ts-expect-error 未登记的属性文本成员在封闭类型上被拒绝。
+  future_member: "",
+}
+
+export const talentWithUnknownMember: WEngineTalent = {
+  name: "",
+  desc: "",
+  // @ts-expect-error 未登记的阶段成员在封闭类型上被拒绝。
+  future_talent: "",
 }
 
 export const minimalDetails: WEngineDetails = {
@@ -57,6 +91,7 @@ export const detailsWithUnknownFields: WEngineDetails = {
   name: "Example W-Engine",
   weaponType: { "1": "Attack" },
   talents: { "1": { name: "Full Moon", desc: "Synthetic." } },
+  // @ts-expect-error 未登记的 details 顶层字段在封闭类型上被拒绝。
   untouched: { raw_key: [null, "", {}, [], 0] },
 }
 
@@ -68,8 +103,8 @@ export const integrated: IntegratedWEngine = {
     diagnostics: [
       {
         entityId: "940001",
-        locale: "zh",
-        pointer: "/untouched",
+        locale: "index",
+        pointer: "/future_field",
         kind: "unknown-field",
       },
     ],
@@ -103,14 +138,14 @@ export const fieldKinds: WEngineFieldKind[] = ["string", "number"]
 
 export const unknownFieldDiagnostic: UnknownFieldDiagnostic = {
   entityId: "940001",
-  locale: "zh",
-  pointer: "/untouched",
+  locale: "index",
+  pointer: "/future_field",
   kind: "unknown-field",
 }
 
 export const functionUnknownField: WEngineDetails = {
   ...minimalDetails,
-  // @ts-expect-error 未知字段的值必须仍是可保留的 JSON 值。
+  // @ts-expect-error 未登记的顶层字段在封闭类型上被拒绝。
   untouched: () => {},
 }
 // @ts-expect-error 缺失 materials 不能由未知字段补位。
@@ -187,3 +222,36 @@ export const wrongDiagnosticKind: UnknownFieldDiagnostic = {
 }
 // @ts-expect-error 字段种类只有字符串与数值。
 export const booleanFieldKind: WEngineFieldKind = "boolean"
+
+// 未使用变量仅用于类型检查；引用以避免 noUnusedLocals 报错。
+export const checks: unknown[] = [
+  dataWithUnknownFields,
+  levelStageWithUnknownMember,
+  starsStageWithUnknownMember,
+  propertyValueWithUnknownMember,
+  propertyTextWithUnknownMember,
+  talentWithUnknownMember,
+  detailsWithUnknownFields,
+  integrated,
+  fullInput,
+  subsetInput,
+  readDeclaredFields(minimalDetails),
+  readDeclaredData(minimalData),
+  fieldKinds,
+  unknownFieldDiagnostic,
+  functionUnknownField,
+  missingMaterials,
+  stringId,
+  numericCodeName,
+  snakeCaseStage,
+  stringRate,
+  stringPropertyValue,
+  missingTalents,
+  unsupportedLocale,
+  numericName,
+  numericClassification,
+  undefinedSourceRecord,
+  missingDiagnostics,
+  wrongDiagnosticKind,
+  booleanFieldKind,
+]

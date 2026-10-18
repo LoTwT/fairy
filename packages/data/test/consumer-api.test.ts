@@ -382,7 +382,6 @@ function mockMemberRecords() {
       id,
       icon: "icon.png",
       icon2: "icon2.png",
-      unknown: { tags: ["original"] },
     })
     zh.mockResolvedValue({
       id,
@@ -391,7 +390,6 @@ function mockMemberRecords() {
       desc2: "原文二件套",
       desc4: "原文四件套",
       story: "原文故事",
-      extra: { entries: ["原文"] },
     })
     en.mockResolvedValue({
       id,
@@ -400,7 +398,6 @@ function mockMemberRecords() {
       desc2: "original two-piece",
       desc4: "original four-piece",
       story: "original story",
-      extra: { entries: ["original"] },
     })
   }
   for (const [data, zh, en, id] of [
@@ -616,6 +613,19 @@ function mockMemberRecords() {
       priority: 3,
       beginTime: "2024-07-04 04:00:00",
       endTime: "2024-08-01 03:59:59",
+      zone: {
+        "6100101": {
+          stageNum: 1,
+          monsterLevel: 25,
+          child: [],
+          goalType: 1,
+          ssRankGoal: 300,
+          sRankGoal: 240,
+          aRankGoal: 180,
+          bRankGoal: 120,
+          layerRoom: {},
+        },
+      },
       unknown: { tags: ["original"] },
     })
     zh.mockResolvedValue({
@@ -623,19 +633,7 @@ function mockMemberRecords() {
       locale: "zh",
       name: "稳定节点",
       zone: {
-        "6100101": {
-          name: "稳定防线一",
-          stageNum: 1,
-          monsterLevel: 25,
-          layerBuff: {},
-          child: [],
-          layerRoom: {},
-          goalType: 1,
-          ssRankGoal: 300,
-          sRankGoal: 240,
-          aRankGoal: 180,
-          bRankGoal: 120,
-        },
+        "6100101": { name: "稳定防线一", layerBuff: {}, layerRoom: {} },
       },
       extra: { entries: ["原文"] },
     })
@@ -644,19 +642,7 @@ function mockMemberRecords() {
       locale: "en",
       name: "Stable Node",
       zone: {
-        "6100101": {
-          name: "Stable Frontline I",
-          stageNum: 1,
-          monsterLevel: 25,
-          layerBuff: {},
-          child: [],
-          layerRoom: {},
-          goalType: 1,
-          ssRankGoal: 300,
-          sRankGoal: 240,
-          aRankGoal: 180,
-          bRankGoal: 120,
-        },
+        "6100101": { name: "Stable Frontline I", layerBuff: {}, layerRoom: {} },
       },
       extra: { entries: ["original"] },
     })
@@ -719,7 +705,6 @@ function mockMemberRecords() {
       bossAdjust: {
         "1001": { hp: 1200, atk: -5000, points: 1000 },
       },
-      unknown: { tags: ["original"] },
     })
     const simulDetails = (locale: string, nodeName: string) => ({
       id,
@@ -736,7 +721,6 @@ function mockMemberRecords() {
           battle: {},
         },
       },
-      extra: { entries: locale === "zh" ? ["原文"] : ["original"] },
     })
     zh.mockResolvedValue(simulDetails("zh", "INTRO"))
     en.mockResolvedValue(simulDetails("en", "INTRO"))
@@ -1435,21 +1419,19 @@ describe("public readers", () => {
       loadDriveDiscData("Woodpecker Electro"),
       loadDriveDiscData("Woodpecker Electro"),
     ])
-    ;(one!.unknown as { tags: string[] }).tags.push("changed")
-    expect((two!.unknown as { tags: string[] }).tags).toEqual(["original"])
+    one!.icon = "changed"
+    expect(two!.icon).toBe("icon.png")
     const details = await loadDriveDiscDetails("Woodpecker Electro", "zh")
-    ;(details!.extra as any).entries.push("changed")
+    details!.story += "changed"
+    const reread = await loadDriveDiscDetails("Woodpecker Electro", "zh")
+    expect(reread!.story).toBe("原文故事")
     const all = await loadAllDriveDiscs("zh")
-    expect((all["Woodpecker Electro"].details.extra as any).entries).toEqual([
-      "原文",
-    ])
-    ;(all["Woodpecker Electro"].data.unknown as { tags: string[] }).tags.push(
-      "changed",
+    expect(all["Woodpecker Electro"].details.story).toBe("原文故事")
+    all["Woodpecker Electro"].data.icon = "changed"
+    all["Woodpecker Electro"].details.story += "changed"
+    expect((await loadDriveDiscData("Woodpecker Electro"))!.icon).toBe(
+      "icon.png",
     )
-    ;(all["Woodpecker Electro"].details.extra as any).entries.push("changed")
-    expect(
-      (await loadDriveDiscData("Woodpecker Electro"))!.unknown,
-    ).toMatchObject({ tags: ["original"] })
     expect((await loadAllDriveDiscs("zh"))["Woodpecker Electro"]).toEqual({
       data: two,
       details: await loadDriveDiscDetails("Woodpecker Electro", "zh"),
@@ -1461,22 +1443,19 @@ describe("public readers", () => {
       loadWEngineData("[Lunar] Pleniluna"),
       loadWEngineData("[Lunar] Pleniluna"),
     ])
-    ;(one!.unknown as { tags: string[] }).tags.push("changed")
-    expect((two!.unknown as { tags: string[] }).tags).toEqual(["original"])
     one!.level["0"].exp = 0
+    expect(two!.level["0"].exp).toBe(30)
     expect((await loadWEngineData("[Lunar] Pleniluna"))!.level["0"].exp).toBe(
       30,
     )
     const details = await loadWEngineDetails("[Lunar] Pleniluna", "zh")
-    ;(details!.extra as any).entries.push("changed")
+    details!.talents["1"]!.desc = "changed"
+    const reread = await loadWEngineDetails("[Lunar] Pleniluna", "zh")
+    expect(reread!.talents["1"]!.desc).toBe("原文天赋")
     const all = await loadAllWEngines("zh")
-    expect((all["[Lunar] Pleniluna"].details.extra as any).entries).toEqual([
-      "原文",
-    ])
-    ;(all["[Lunar] Pleniluna"].data.unknown as { tags: string[] }).tags.push(
-      "changed",
-    )
-    ;(all["[Lunar] Pleniluna"].details.extra as any).entries.push("changed")
+    expect(all["[Lunar] Pleniluna"].details.talents["1"]!.desc).toBe("原文天赋")
+    all["[Lunar] Pleniluna"].data.baseProperty.value = 0
+    all["[Lunar] Pleniluna"].details.talents["1"]!.desc = "changed"
     expect((await loadAllWEngines("zh"))["[Lunar] Pleniluna"]).toEqual({
       data: two,
       details: await loadWEngineDetails("[Lunar] Pleniluna", "zh"),
@@ -1488,16 +1467,20 @@ describe("public readers", () => {
       loadBangbooData("Penguinboo"),
       loadBangbooData("Penguinboo"),
     ])
-    ;(one!.unknown as { tags: string[] }).tags.push("changed")
-    expect((two!.unknown as { tags: string[] }).tags).toEqual(["original"])
+    one!.stats.attack = 1
+    expect(two!.stats.attack).toBe(50)
     one!.level["1"].hpMax = 1
     expect((await loadBangbooData("Penguinboo"))!.level["1"].hpMax).toBe(0)
     const details = await loadBangbooDetails("Penguinboo", "zh")
-    ;(details!.extra as any).entries.push("changed")
+    details!.level["1"].extra["20101"].name = "changed"
+    const reread = await loadBangbooDetails("Penguinboo", "zh")
+    expect(reread!.level["1"].extra["20101"].name).toBe("暴击率")
     const all = await loadAllBangboos("zh")
-    expect((all["Penguinboo"].details.extra as any).entries).toEqual(["原文"])
-    ;(all["Penguinboo"].data.unknown as { tags: string[] }).tags.push("changed")
-    ;(all["Penguinboo"].details.extra as any).entries.push("changed")
+    expect(all["Penguinboo"].details.level["1"].extra["20101"].name).toBe(
+      "暴击率",
+    )
+    all["Penguinboo"].data.stats.attack = 1
+    all["Penguinboo"].details.level["1"].extra["20101"].name = "changed"
     expect((await loadAllBangboos("zh"))["Penguinboo"]).toEqual({
       data: two,
       details: await loadBangbooDetails("Penguinboo", "zh"),
@@ -1509,18 +1492,19 @@ describe("public readers", () => {
       loadMonsterData("10000"),
       loadMonsterData("10000"),
     ])
-    ;(one!.unknown as { tags: string[] }).tags.push("changed")
-    expect((two!.unknown as { tags: string[] }).tags).toEqual(["original"])
     one!.monsterInfo["11096"]!.curves.hp!.curve.push(999)
+    expect(two!.monsterInfo["11096"]!.curves.hp!.curve).toEqual([100, 116, 136])
     expect(
       (await loadMonsterData("10000"))!.monsterInfo["11096"]!.curves.hp!.curve,
     ).toEqual([100, 116, 136])
     const details = await loadMonsterDetails("10000", "zh")
-    ;(details!.extra as any).entries.push("changed")
+    details!.cardQuote = "changed"
+    const reread = await loadMonsterDetails("10000", "zh")
+    expect(reread!.cardQuote).toBe("「原文引语。」")
     const all = await loadAllMonsters("zh")
-    expect((all["10000"].details.extra as any).entries).toEqual(["原文"])
-    ;(all["10000"].data.unknown as { tags: string[] }).tags.push("changed")
-    ;(all["10000"].details.extra as any).entries.push("changed")
+    expect(all["10000"].details.cardQuote).toBe("「原文引语。」")
+    all["10000"].data.elementAbnormal["10001"] = 0
+    all["10000"].details.cardQuote = "changed"
     expect((await loadAllMonsters("zh"))["10000"]).toEqual({
       data: two,
       details: await loadMonsterDetails("10000", "zh"),
@@ -1532,21 +1516,19 @@ describe("public readers", () => {
       loadShiyuData("61001"),
       loadShiyuData("61001"),
     ])
-    ;(one!.unknown as { tags: string[] }).tags.push("changed")
-    expect((two!.unknown as { tags: string[] }).tags).toEqual(["original"])
+    one!.zone["6100101"]!.child.push(999)
+    expect(two!.zone["6100101"]!.child).toEqual([])
     one!.beginTime = "modified"
     expect((await loadShiyuData("61001"))!.beginTime).toBe(
       "2024-07-04 04:00:00",
     )
     const details = await loadShiyuDetails("61001", "zh")
-    ;(
-      details!.zone["6100101"]!.layerBuff as unknown as Record<string, unknown>
-    ).future = 0
+    details!.zone["6100101"]!.layerBuff["future"] = { title: "", desc: "" }
     const reread = await loadShiyuDetails("61001", "zh")
     expect(reread!.zone["6100101"]?.layerBuff).toStrictEqual({})
     const all = await loadAllShiyu("zh")
-    expect(all["61001"].details.zone["6100101"]!.stageNum).toBe(1)
-    ;(all["61001"].data.unknown as { tags: string[] }).tags.push("changed")
+    expect(all["61001"].data.zone["6100101"]!.stageNum).toBe(1)
+    all["61001"].data.zone["6100101"]!.child.push(999)
     expect((await loadAllShiyu("zh"))["61001"]).toEqual({
       data: two,
       details: await loadShiyuDetails("61001", "zh"),
@@ -1558,17 +1540,20 @@ describe("public readers", () => {
       loadBossData("69001"),
       loadBossData("69001"),
     ])
-    ;(one!.unknown as { tags: string[] }).tags.push("changed")
-    expect((two!.unknown as { tags: string[] }).tags).toEqual(["original"])
     one!.bossAdjust["1001"]!.atk = 0
+    expect(two!.bossAdjust["1001"]!.atk).toBe(-5000)
     expect((await loadBossData("69001"))!.bossAdjust["1001"]!.atk).toBe(-5000)
     const details = await loadBossDetails("69001", "zh")
-    details!.modes![0]!.zone["6900101"]!.stageNum = -1
+    if (!("modes" in details!)) throw new Error("expected modes variant")
+    details.modes[0]!.zone["6900101"]!.stageNum = -1
     const reread = await loadBossDetails("69001", "zh")
-    expect(reread!.modes![0]!.zone["6900101"]!.stageNum).toBe(1)
+    if (!("modes" in reread!)) throw new Error("expected modes variant")
+    expect(reread.modes[0]!.zone["6900101"]!.stageNum).toBe(1)
     const all = await loadAllBosses("zh")
+    if (!("modes" in all["69001"].details))
+      throw new Error("expected modes variant")
     expect(all["69001"].details.modes).toHaveLength(1)
-    ;(all["69001"].data.unknown as { tags: string[] }).tags.push("changed")
+    all["69001"].data.bossAdjust["1001"]!.points = 0
     expect((await loadAllBosses("zh"))["69001"]).toEqual({
       data: two,
       details: await loadBossDetails("69001", "zh"),

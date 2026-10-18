@@ -52,7 +52,7 @@ const curveNames: Readonly<Record<string, string>> = {
   ratio: "ratio",
 }
 
-/** 还原对象成员名：命中登记表则换回来源拼写，未登记成员按原 key 原样保留。 */
+/** 还原对象成员名：命中登记表则换回来源拼写；封闭结构内只有登记成员。 */
 function restoreNames(
   value: Record<string, unknown>,
   names: Readonly<Record<string, string>>,

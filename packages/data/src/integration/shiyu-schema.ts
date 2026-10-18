@@ -1,9 +1,9 @@
 /**
- * Shiyu 来源结构的登记表（规则 nanoka-shiyu-reference/2）。
+ * Shiyu 来源结构的登记表（规则 nanoka-shiyu-reference/3）。
  *
  * 详情与来源索引记录分别处理：详情字段在这里登记，按归属提取到 data.json 或留在各语言详情；
  * 索引记录不在这里登记，原记录仍作为 sourceRecord 完整保留，两个来源不互相回退。
- * 未登记字段不在这里登记：它们在整合结果中原样保留并作为维护诊断报告待登记。
+ * 未登记的详情字段整合失败，不进入发布制品；索引记录的未登记字段仍作为维护诊断报告待登记。
  * 只转换登记表明确列出的结构字段拼写；字典 key、实体与属性 ID、字符串内容及数组顺序不变。
  */
 
@@ -34,8 +34,8 @@ export const shiyuSharedDetailFields: Readonly<
 
 /**
  * 详情顶层条件公共字段登记表；key 为来源 key。
- * 只在所有输入语言都提供且完整值一致时提取到 data；全部语言缺失时不生成字段；
- * 单语言独有时完整留在该语言 details；各语言都提供却值不同仍按共享冲突失败。
+ * 严格共享：只在所有输入语言都提供且完整值一致时提取到 data；全部语言缺失时不生成字段；
+ * 只在部分语言提供即整合失败，不存在单语言独有留在该语言 details 的情况。
  */
 export const shiyuConditionalSharedDetailFields: Readonly<
   Record<string, { output: string; kind: "string" }>
@@ -59,8 +59,10 @@ export const shiyuLocalizedDetailFields: Readonly<
 }
 
 /**
- * 来源 `zone` 阶段条目的登记成员；`zone` 本身完整留在各语言 details，不拆分为跨语言公共关卡图。
+ * 来源 `zone` 阶段条目的登记成员；登记成员在各阶段均要求存在，缺失即整合失败。
  * 阶段身份由 `zone` 的来源 key 决定，不能由 `stage_num` 或详情 ID 推导。
+ * 数值骨架成员（见 `shiyuZoneStageSkeletonOutputs`）提升到 data.zone 并从各语言 details 删除；
+ * 文本成员（name、layer_buff、layer_room 内的文本部分）留在各语言 details。
  */
 export const shiyuZoneMembers: Readonly<Record<string, ShiyuObjectMember>> = {
   /** 该阶段当前语言名称原文。 */
@@ -97,7 +99,7 @@ export const shiyuZoneMembers: Readonly<Record<string, ShiyuObjectMember>> = {
   b_rank_goal: { output: "bRankGoal", kind: "number" },
 }
 
-/** 来源 `layer_buff` 条目的登记成员；来源 key 与输出名相同。 */
+/** 来源 `layer_buff` 条目的登记成员；来源 key 与输出名相同，登记成员均要求存在。 */
 export const shiyuBuffMembers: Readonly<Record<string, ShiyuObjectMember>> = {
   /** 该增益当前语言标题原文。 */
   title: { output: "title", kind: "string" },
@@ -106,7 +108,10 @@ export const shiyuBuffMembers: Readonly<Record<string, ShiyuObjectMember>> = {
   desc: { output: "desc", kind: "string" },
 }
 
-/** 来源 `layer_room` 房间条目的登记成员；`monster_list`、`monster_weakness` 是字典结构另行校验。 */
+/**
+ * 来源 `layer_room` 房间条目的登记成员；登记成员均要求存在。
+ * `waves_num` 是数值骨架成员（提升 data.zone），其余文本成员留各语言 details。
+ */
 export const shiyuRoomMembers: Readonly<Record<string, ShiyuObjectMember>> = {
   /** 来源 `monster_icon`。房间怪物图标资源标识；合法空字符串原样保留。 */
   monster_icon: { output: "monsterIcon", kind: "string" },
@@ -124,7 +129,10 @@ export const shiyuRoomMembers: Readonly<Record<string, ShiyuObjectMember>> = {
   waves_num: { output: "wavesNum", kind: "number" },
 }
 
-/** 来源 `monster_list` encounter 条目的登记成员；来源 key 与输出名相同。 */
+/**
+ * 来源 `monster_list` encounter 条目的登记成员；登记成员均要求存在。
+ * `id`、`element`、`stats` 是数值骨架成员（提升 data.zone），`name`、`image` 留各语言 details。
+ */
 export const shiyuEncounterMembers: Readonly<
   Record<string, ShiyuObjectMember>
 > = {
@@ -143,6 +151,32 @@ export const shiyuEncounterMembers: Readonly<
   /** 来源 `stats`。关卡数值字典：属性编码 key → 数值（含浮点原值）；key 原样保留。 */
   stats: { output: "stats", kind: "object" },
 }
+
+/**
+ * `zone` 阶段条目的数值骨架成员输出名（校验转换后的拼写）：提升到 data.zone 对应阶段，
+ * 各语言完整值必须一致（部分语言提供或值不等即整合失败），并从各语言 details 的 zone 删除。
+ * 其余登记成员是文本（name、layer_buff、layer_room 内文本），留在各语言 details。
+ */
+export const shiyuZoneStageSkeletonOutputs: readonly string[] = [
+  "child",
+  "goalType",
+  "monsterLevel",
+  "stageNum",
+  "ssRankGoal",
+  "sRankGoal",
+  "aRankGoal",
+  "bRankGoal",
+]
+
+/** `layer_room` 房间条目的数值骨架成员输出名；语义同 `shiyuZoneStageSkeletonOutputs`。 */
+export const shiyuZoneRoomSkeletonOutputs: readonly string[] = ["wavesNum"]
+
+/** `monster_list` encounter 条目的数值骨架成员输出名；语义同 `shiyuZoneStageSkeletonOutputs`。 */
+export const shiyuZoneEncounterSkeletonOutputs: readonly string[] = [
+  "id",
+  "element",
+  "stats",
+]
 
 /**
  * 来源索引记录的已知顶层字段名；只用于把未知顶层字段识别为维护诊断。

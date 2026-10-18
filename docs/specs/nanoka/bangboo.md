@@ -4,9 +4,9 @@
 
 - 上游实体：`bangboo`
 - 状态：已完成代表性结构调研，可由共享抓取器缓存；整合类别 `bangboos` 已按规则
-  `nanoka-bangboo-reference/1` 接入生产快照
+  `nanoka-bangboo-reference/2` 接入生产快照
 - 抓取器仍不执行 Bangboos 字段级语义验证；整合器按该规则独立校验已登记结构，字段归属、共享提取与
-  等级阶段拆分见[来源数据整合规范](../data/integration.md#bangboo-单实体实现规则-nanoka-bangboo-reference1)
+  等级阶段拆分见[来源数据整合规范](../data/integration.md#bangboo-单实体实现规则-nanoka-bangboo-reference2)
 
 ## 资源
 
@@ -46,6 +46,6 @@ packages/data/raw/nanoka/{version}/
 
 整合类别登记名为 `bangboos`，`data.json` 与 `details.{locale}.json` 的字段归属、共享提取、等级阶段与
 `extra` 属性拆分及校验边界由
-[Bangboo 单实体实现规则](../data/integration.md#bangboo-单实体实现规则-nanoka-bangboo-reference1)统一定义。
+[Bangboo 单实体实现规则](../data/integration.md#bangboo-单实体实现规则-nanoka-bangboo-reference2)统一定义。
 成员集合由选定来源版本 `bangboo.json` 的顶层 key 决定，不扫描详情目录推断；本层不解析技能参数引用、
 不求值参数字符串、不换算百分比，也不解释成长结构。

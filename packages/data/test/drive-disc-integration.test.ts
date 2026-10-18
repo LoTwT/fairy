@@ -148,42 +148,18 @@ describe("单驱动盘纯整合 nanoka-drive-disc-reference/1", () => {
 
   it("对象 key 排列不影响整个结果与维护记录", () => {
     const input = driveDiscInput()
-    change(input.details.zh, "unknown_b", { z: 0, a: 1 })
-    change(input.details.zh, "unknown_a", [])
-    change(input.sourceRecord, "future", null)
     const result = integrateDriveDisc(input)
     const reordered = integrateDriveDisc(
       reverseKeys(input) as IntegrateDriveDiscInput,
     )
     expect(reordered).toStrictEqual(result)
     expect(JSON.stringify(reordered)).toBe(JSON.stringify(result))
-    expect(result.maintenance.diagnostics).toEqual([
-      {
-        entityId: "930001",
-        locale: "zh",
-        pointer: "/unknown_a",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "930001",
-        locale: "zh",
-        pointer: "/unknown_b",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "930001",
-        locale: "index",
-        pointer: "/future",
-        kind: "unknown-field",
-      },
-    ])
-    expectDriveDiscRoundtrip(result, input)
   })
 
-  it("保留未知嵌套字段、零空值与富文本，并报告待登记路径", () => {
-    const input = driveDiscInput()
-    for (const source of Object.values(input.details)) {
-      change(source, "untouched", {
+  it("未登记详情字段整合失败并定位来源", () => {
+    for (const locale of ["zh", "en"] as const) {
+      const input = driveDiscInput()
+      change(input.details[locale], "untouched", {
         snake_key: { attack_growth: 0 },
         zero: 0,
         empty: "",
@@ -192,20 +168,21 @@ describe("单驱动盘纯整合 nanoka-drive-disc-reference/1", () => {
         object: {},
         boolean: false,
       })
+      expectFailure(
+        input,
+        locale,
+        "/untouched",
+        "未知字段：未在登记表登记，不能进入发布制品",
+      )
     }
+  })
+
+  it("索引摘要未知字段完整保留并报告待登记路径", () => {
+    const input = driveDiscInput()
     change(input.sourceRecord, "future_field", [null, "", {}, [], 0])
     change(input.sourceRecord.zh, "extra", { nested: { deep: 0 } })
     change(input.sourceRecord.ja, "extra", "")
     const result = integrateDriveDisc(input)
-    expect(result.details.zh!.untouched).toStrictEqual({
-      snake_key: { attack_growth: 0 },
-      zero: 0,
-      empty: "",
-      nil: null,
-      array: [],
-      object: {},
-      boolean: false,
-    })
     expect(ownValue(result.sourceRecord, "future_field")).toStrictEqual([
       null,
       "",
@@ -218,18 +195,6 @@ describe("单驱动盘纯整合 nanoka-drive-disc-reference/1", () => {
     })
     expect(ownValue(result.sourceRecord.ja, "extra")).toBe("")
     expect(result.maintenance.diagnostics).toEqual([
-      {
-        entityId: "930001",
-        locale: "zh",
-        pointer: "/untouched",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "930001",
-        locale: "en",
-        pointer: "/untouched",
-        kind: "unknown-field",
-      },
       {
         entityId: "930001",
         locale: "index",
@@ -268,39 +233,54 @@ describe("单驱动盘纯整合 nanoka-drive-disc-reference/1", () => {
     expectDriveDiscRoundtrip(result, input)
   })
 
-  it("保留特殊自有 key 并生成 RFC 6901 转义 Pointer，不污染原型", () => {
-    const input = driveDiscInput()
-    change(input.details.zh, "__proto__", { polluted: true })
-    change(input.details.zh, "constructor", "raw")
-    change(input.details.zh, "a/b~c", 0)
-    const result = integrateDriveDisc(input)
-    expect(Object.getPrototypeOf(result.details.zh)).toBe(Object.prototype)
-    expect(ownValue(result.details.zh, "__proto__")).toStrictEqual({
+  it("详情特殊自有 key 未登记即失败；索引特殊自有 key 保留并生成 RFC 6901 转义 Pointer", () => {
+    for (const [key, value, pointer] of [
+      ["__proto__", { polluted: true }, "/__proto__"],
+      ["constructor", "raw", "/constructor"],
+      ["a/b~c", 0, "/a~1b~0c"],
+    ] as const) {
+      const input = driveDiscInput()
+      change(input.details.zh, key, value)
+      expectFailure(
+        input,
+        "zh",
+        pointer,
+        "未知字段：未在登记表登记，不能进入发布制品",
+      )
+    }
+
+    const indexInput = driveDiscInput()
+    change(indexInput.sourceRecord, "__proto__", { polluted: true })
+    change(indexInput.sourceRecord, "constructor", "raw")
+    change(indexInput.sourceRecord, "a/b~c", 0)
+    const result = integrateDriveDisc(indexInput)
+    expect(Object.getPrototypeOf(result.sourceRecord)).toBe(Object.prototype)
+    expect(ownValue(result.sourceRecord, "__proto__")).toStrictEqual({
       polluted: true,
     })
-    expect(ownValue(result.details.zh, "constructor")).toBe("raw")
-    expect(ownValue(result.details.zh, "a/b~c")).toBe(0)
+    expect(ownValue(result.sourceRecord, "constructor")).toBe("raw")
+    expect(ownValue(result.sourceRecord, "a/b~c")).toBe(0)
     expect(result.maintenance.diagnostics).toEqual([
       {
         entityId: "930001",
-        locale: "zh",
+        locale: "index",
         pointer: "/__proto__",
         kind: "unknown-field",
       },
       {
         entityId: "930001",
-        locale: "zh",
+        locale: "index",
         pointer: "/a~1b~0c",
         kind: "unknown-field",
       },
       {
         entityId: "930001",
-        locale: "zh",
+        locale: "index",
         pointer: "/constructor",
         kind: "unknown-field",
       },
     ])
-    expectDriveDiscRoundtrip(result, input)
+    expectDriveDiscRoundtrip(result, indexInput)
   })
 })
 

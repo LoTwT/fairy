@@ -193,7 +193,7 @@ export interface AgentData {
 
   /**
    * 来源 `live2_d` 动画资源名称原文，不是图片路径或完整 URL。
-   * 仅在各语言都提供同值时共享；均缺失时不补值，单语言独有时留在对应 details.live2D。
+   * 严格共享：各语言都提供且同值时提取，均缺失时不补值；只在部分语言提供即整合失败。
    * 资源名称中的拼写、前缀与空字符串原样保留，不套用 PNG → WebP 图片规则。
    */
   live2D?: string
@@ -547,9 +547,6 @@ export interface AgentDetails {
   /** 来源详情中的当前语言角色名称；区别于索引中的其他语言名称。 */
   name: string
 
-  /** 来源 `live2_d` 的单语言独有原值；各语言同有且相等时移入 data.live2D，本处缺失不补值。 */
-  live2D?: string
-
   /** 来源 `weapon_type`。来源 ID → 当前语言分类名称；样例 2 为“击破”，仅改变拼写，不改称 specialties。 */
   weaponType: Record<SourceId, string>
 
@@ -567,12 +564,6 @@ export interface AgentDetails {
 
   /** 来源 `partner_info`。本语言个人资料；共享资源提取后可剩空对象，缺失字段不补默认值。 */
   partnerInfo: {
-    /** 来源 `icon_path` 的单语言独有原值；双语同有且相等时在 data.partnerInfo.iconPath，本处缺失。 */
-    iconPath?: string
-
-    /** 来源 `role_icon` 的单语言独有原值；双语同有且相等时在 data.partnerInfo.roleIcon，本处缺失。 */
-    roleIcon?: string
-
     /** 来源生日显示文本；可缺失，中文如 02/20、英文如 FEB 20，不归一化为日期或补空字符串。 */
     birthday?: string
 
@@ -604,7 +595,7 @@ export interface AgentDetails {
     trustLv?: Record<string, string>
   }
 
-  /** 来源外观 ID → 本语言条目；共有 ID 的资源提取到 data.skin，单语言独有条目完整保留。 */
+  /** 来源外观 ID → 本语言文本条目；各语言 ID 集合一致，图片资源在 data.skin。 */
   skin: Record<
     SourceId,
     {
@@ -614,27 +605,15 @@ export interface AgentDetails {
       desc: string
       /** 来源 `obtain_desc`。3.2 新增的该外观当前语言获取方式说明；空字符串原样保留。 */
       obtainDesc: string
-      /** 仅本语言独有外观 ID 时保留的来源图片资源标识；共有 ID 的资源在 data.skin，不补默认值。 */
-      image?: string
     }
   >
 
-  /** 来源 `extra_level`。来源额外成长阶段 key → 本语言条目；共有阶段与属性 key 的公共数值提取到 data.extraLevel。 */
+  /** 来源 `extra_level`。来源额外成长阶段 key → 本语言文本条目；各语言 key 集合一致，公共数值在 data.extraLevel。 */
   extraLevel: Record<
     string,
     {
-      /** 来源 `max_level`。仅本语言独有阶段时保留的原始等级上限数值；不解释成长规则或补默认值。 */
-      maxLevel?: number
-      /** 来源属性 key → 本语言文案；单语言独有阶段或属性 key 的 prop/value 同时保留。 */
-      extra: Record<
-        SourceId,
-        PropertyText & {
-          /** 单语言独有阶段或属性 key 的来源属性编码；含义待确认，不映射为 core 枚举。 */
-          prop?: number
-          /** 单语言独有阶段或属性 key 的来源数值；保留零值，不换算单位或解释成长。 */
-          value?: number
-        }
-      >
+      /** 来源属性 key → 本语言文案；各语言阶段与属性 key 集合一致，prop/value 在 data.extraLevel。 */
+      extra: Record<SourceId, PropertyText>
     }
   >
 
@@ -644,8 +623,6 @@ export interface AgentDetails {
     {
       /** 本语言来源说明段数组；顺序只属于当前文件，不作为跨语言或跨版本稳定身份。 */
       description: SkillDescriptionSection[]
-      /** 仅本语言独有技能类别时保留的来源阶段 key → 材料 ID → 原始数量；key 不改名，不补默认值。 */
-      material?: Record<string, MaterialCounts>
     }
   >
 
@@ -657,29 +634,17 @@ export interface AgentDetails {
       name: string
       /** 该来源元数据条目的说明；完整保留空字符串及模板。 */
       desc: string
-      /** 来源 `element_type`。仅本语言独有元数据 ID 时保留的属性编码；不关联同号参数 ID。 */
-      elementType?: number
-      /** 来源 `hit_type`。仅本语言独有元数据 ID 时保留的来源类型编码；含义不外推为计算规则。 */
-      hitType?: number
-      /** 仅本语言独有元数据 ID 时保留的来源 potential 数值数组；含义待确认，保留零值、空数组与顺序。 */
-      potential?: number[]
     }
   >
 
   /** 来源 passive 的本语言原文与未解释资料；不从文本自动提取效果数值。 */
   passive: {
-    /** 来源 passive 条目 ID → 本语言资料；共有 ID 的身份与等级提取到 data，单语言独有条目完整保留。 */
+    /** 来源 passive 条目 ID → 本语言资料；各语言 ID 集合一致，身份与等级在 data.passive。 */
     level: Record<
       SourceId,
       {
         /** 该条目的来源名称数组；保留原顺序，不合成一个名称。 */
         name: string[]
-
-        /** 仅本语言独有 passive 条目时保留的来源内嵌身份数值；不代替外层条目 key。 */
-        id?: number
-
-        /** 仅本语言独有 passive 条目时保留的来源等级数值；不解释为效果等级或补默认值。 */
-        level?: number
 
         /** 该条目的来源说明数组；保留原顺序，不解析为效果模型。 */
         desc: string[]
@@ -699,8 +664,6 @@ export interface AgentDetails {
     {
       /** 该来源 talent 条目的当前语言名称。 */
       name: string
-      /** 仅本语言独有 talent 阶段 key 时保留的来源等级数值；不解释效果或补默认值。 */
-      level?: number
       /** 该条目的来源主要说明；样例含效果文本，但不解析为计算规则。 */
       desc: string
       /** 该条目的来源附加说明；与 desc 分开保留，不外推所有记录都属于同一种文案。 */

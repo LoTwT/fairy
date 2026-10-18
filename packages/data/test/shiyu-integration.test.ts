@@ -66,8 +66,39 @@ function expectFailure(
   }
 }
 
+/** 独立预期的夹具结构：校验转换后的 zone 完整形态（数值骨架 + 文本）。 */
+interface FixtureEncounter {
+  id: number
+  name: string
+  image: string
+  element: Record<string, number>
+  stats: Record<string, number>
+}
+
+interface FixtureRoom {
+  monsterIcon: string
+  monsterList: Record<string, FixtureEncounter>
+  monsterWeakness: Record<string, string>
+  monsterResistance: Record<string, string>
+  wavesNum: number
+}
+
+interface FixtureStage {
+  name: string
+  stageNum: number
+  monsterLevel: number
+  layerBuff: Record<string, { title: string; desc: string }>
+  child: number[]
+  layerRoom: Record<string, FixtureRoom>
+  goalType: number
+  ssRankGoal: number
+  sRankGoal: number
+  aRankGoal: number
+  bRankGoal: number
+}
+
 /** 独立预期：details 中的 zone 已按登记表转换拼写，值与来源一致。 */
-const expectedZone = {
+const expectedZone: Record<string, FixtureStage> = {
   "9700101": {
     name: "稳定防线一",
     stageNum: 1,
@@ -183,27 +214,90 @@ const expectedZone = {
   },
 }
 
+/** expectedZone 的数值骨架独立预期：整合后提升到 data.zone，各语言一致。 */
+const expectedZoneSkeleton = Object.fromEntries(
+  Object.entries(expectedZone).map(([stageKey, stage]) => [
+    stageKey,
+    {
+      stageNum: stage.stageNum,
+      monsterLevel: stage.monsterLevel,
+      child: stage.child,
+      goalType: stage.goalType,
+      ssRankGoal: stage.ssRankGoal,
+      sRankGoal: stage.sRankGoal,
+      aRankGoal: stage.aRankGoal,
+      bRankGoal: stage.bRankGoal,
+      layerRoom: Object.fromEntries(
+        Object.entries(stage.layerRoom).map(([roomKey, room]) => [
+          roomKey,
+          {
+            wavesNum: room.wavesNum,
+            monsterList: Object.fromEntries(
+              Object.entries(room.monsterList).map(([encounterKey, entry]) => [
+                encounterKey,
+                {
+                  id: entry.id,
+                  element: entry.element,
+                  stats: entry.stats,
+                },
+              ]),
+            ),
+          },
+        ]),
+      ),
+    },
+  ]),
+)
+
+/** expectedZone 的文本部分独立预期：整合后留在各语言 details.zone。 */
+const expectedZoneText = Object.fromEntries(
+  Object.entries(expectedZone).map(([stageKey, stage]) => [
+    stageKey,
+    {
+      name: stage.name,
+      layerBuff: stage.layerBuff,
+      layerRoom: Object.fromEntries(
+        Object.entries(stage.layerRoom).map(([roomKey, room]) => [
+          roomKey,
+          {
+            monsterIcon: room.monsterIcon,
+            monsterList: Object.fromEntries(
+              Object.entries(room.monsterList).map(([encounterKey, entry]) => [
+                encounterKey,
+                { name: entry.name, image: entry.image },
+              ]),
+            ),
+            monsterWeakness: room.monsterWeakness,
+            monsterResistance: room.monsterResistance,
+          },
+        ]),
+      ),
+    },
+  ]),
+)
+
 const expectedData = {
   id: 970001,
   priority: 3,
   beginTime: "2024-07-04 04:00:00",
   endTime: "2024-08-01 03:59:59",
+  zone: expectedZoneSkeleton,
 } satisfies ShiyuData
 
 describe("单 Shiyu 纯整合 nanoka-shiyu-reference/1", () => {
-  it("按独立预期拆分双语，保留索引，冻结输入仍可整合且不修改来源", () => {
+  it("按独立预期拆分双语：数值骨架进 data，文本留各语言 details", () => {
     const input = shiyuInput()
     const before = structuredClone(input)
     freeze(input)
     const result = integrateShiyu(input)
     expect(result.data).toStrictEqual(expectedData)
-    // zone 完整留在各语言：阶段 key、层级结构、encounter 全部保留，不拆分为公共关卡图。
-    expect(result.data).not.toHaveProperty("zone")
+    // zone 数值骨架提升到 data.zone：各语言一致，不留在 details。
+    expect(result.data.zone).toStrictEqual(expectedZoneSkeleton)
     expect(result.details.zh).toStrictEqual({
       id: 970001,
       locale: "zh",
       name: "示例节点",
-      zone: expectedZone,
+      zone: expectedZoneText,
     })
     const en = result.details.en!
     expect(en.id).toBe(970001)
@@ -217,13 +311,13 @@ describe("单 Shiyu 纯整合 nanoka-shiyu-reference/1", () => {
     expect(
       en.zone["9700101"]!.layerRoom["97001011"]!.monsterList,
     ).toMatchObject({
-      "11314": { id: 10019, name: "Assaulter" },
-      "11323": { id: 10018, name: "Poacher" },
+      "11314": { name: "Assaulter" },
+      "11323": { name: "Poacher" },
     })
     expect(
       en.zone["9700101"]!.layerRoom["97001011"]!.monsterWeakness,
     ).toStrictEqual({ "200": "Physical", "202": "Ice" })
-    expect(en.zone["9700102"]!.child).toEqual([97001021, 97001022])
+    expect(result.data.zone["9700102"]!.child).toEqual([97001021, 97001022])
     expect(result.details.zh).not.toHaveProperty("begin_time")
     expect(result.details.zh).not.toHaveProperty("priority")
     expect(result.maintenance).toEqual({ diagnostics: [] })
@@ -241,9 +335,10 @@ describe("单 Shiyu 纯整合 nanoka-shiyu-reference/1", () => {
     change(input.details.zh, "zone.9700102.stage_num", 1)
     change(input.details.en, "zone.9700102.stage_num", 1)
     const result = integrateShiyu(input)
+    expect(Object.keys(result.data.zone)).toEqual(["9700101", "9700102"])
+    expect(result.data.zone["9700101"]!.stageNum).toBe(1)
+    expect(result.data.zone["9700102"]!.stageNum).toBe(1)
     expect(Object.keys(result.details.zh!.zone)).toEqual(["9700101", "9700102"])
-    expect(result.details.zh!.zone["9700101"]!.stageNum).toBe(1)
-    expect(result.details.zh!.zone["9700102"]!.stageNum).toBe(1)
     expectShiyuRoundtrip(result, input)
   })
 
@@ -251,7 +346,11 @@ describe("单 Shiyu 纯整合 nanoka-shiyu-reference/1", () => {
     const input = shiyuPermanentInput()
     const before = structuredClone(input)
     const result = integrateShiyu(input)
-    expect(result.data).toStrictEqual({ id: 970001, priority: 3 })
+    expect(result.data).toStrictEqual({
+      id: 970001,
+      priority: 3,
+      zone: expectedZoneSkeleton,
+    })
     expect(result.data).not.toHaveProperty("beginTime")
     expect(result.data).not.toHaveProperty("endTime")
     expect(result.details.zh).not.toHaveProperty("beginTime")
@@ -261,23 +360,18 @@ describe("单 Shiyu 纯整合 nanoka-shiyu-reference/1", () => {
     expect(input).toStrictEqual(before)
   })
 
-  it("可选时间字段只在全部语言提供且一致时提取；单语言独有时留在该语言", () => {
+  it("条件公共字段部分语言提供即失败；全部提供且一致才提取", () => {
+    // 单语言独有时间字段：严格共享下不再留在该语言，直接整合失败。
     const zhOnly = shiyuInput()
     delete (zhOnly.details.en as unknown as Record<string, unknown>).begin_time
-    const zhOnlyResult = integrateShiyu(zhOnly)
-    expect(zhOnlyResult.data).not.toHaveProperty("beginTime")
-    expect(zhOnlyResult.data.endTime).toBe(expectedData.endTime)
-    expect(zhOnlyResult.details.zh!.beginTime).toBe(expectedData.beginTime)
-    expect(zhOnlyResult.details.en).not.toHaveProperty("beginTime")
-    expect(zhOnlyResult.details.en!.endTime).toBeUndefined()
-    expectShiyuRoundtrip(zhOnlyResult, zhOnly)
+    expectFailure(zhOnly, "zh", "/begin_time", "共享字段只在部分语言提供（zh）")
 
     // 全部语言都提供却值不同仍按共享冲突失败，不默选一门语言。
     const conflict = shiyuInput()
     change(conflict.details.en, "begin_time", "2024-07-04 04:00:01")
     expectFailure(conflict, "en", "/begin_time", "共享冲突")
 
-    // 时间保持原始字符串，不转换时间戳、不猜测时区。
+    // 全部语言提供且一致才提取；时间保持原始字符串，不转换时间戳、不猜测时区。
     const exact = integrateShiyu(shiyuInput())
     expect(exact.data.beginTime).toBe("2024-07-04 04:00:00")
     expect(exact.data.endTime).toBe("2024-08-01 03:59:59")
@@ -286,25 +380,20 @@ describe("单 Shiyu 纯整合 nanoka-shiyu-reference/1", () => {
   it("monster_list 外层 key 不是 Monster ID；引用身份来自条目自身的 id", () => {
     const input = shiyuInput()
     const result = integrateShiyu(input)
-    const room = result.details.zh!.zone["9700101"]!.layerRoom["97001011"]!
+    const room = result.data.zone["9700101"]!.layerRoom["97001011"]!
     expect(Object.keys(room.monsterList)).toEqual(["11314", "11323"])
     expect(room.monsterList["11314"]!.id).toBe(10019)
     expect(room.monsterList["11323"]!.id).toBe(10018)
     expectShiyuRoundtrip(result, input)
   })
 
-  it("encounter 的名称、图片、弱点和关卡数值全部保留，不能替换成纯外键", () => {
+  it("encounter 数值进骨架、文本留 details，不能替换成纯外键", () => {
     const input = shiyuInput()
     const result = integrateShiyu(input)
     const encounter =
-      result.details.zh!.zone["9700101"]!.layerRoom["97001011"]!.monsterList[
-        "11314"
-      ]!
+      result.data.zone["9700101"]!.layerRoom["97001011"]!.monsterList["11314"]!
     expect(encounter).toStrictEqual({
       id: 10019,
-      name: "袭击者",
-      image:
-        "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Example.png",
       element: { ice: 1, fire: 0, electric: 0, ether: 0, physical: 1, wind: 0 },
       stats: {
         hp: 18723.601000000002,
@@ -313,6 +402,15 @@ describe("单 Shiyu 纯整合 nanoka-shiyu-reference/1", () => {
         stun: 936,
         attribute_infliction: 0,
       },
+    })
+    expect(
+      result.details.zh!.zone["9700101"]!.layerRoom["97001011"]!.monsterList[
+        "11314"
+      ]!,
+    ).toStrictEqual({
+      name: "袭击者",
+      image:
+        "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Example.png",
     })
     expectShiyuRoundtrip(result, input)
   })
@@ -369,73 +467,32 @@ describe("单 Shiyu 纯整合 nanoka-shiyu-reference/1", () => {
     expectShiyuRoundtrip(result, input)
   })
 
-  it("zone 各层未知字段留在本语言并诊断；诊断顺序确定", () => {
-    const input = shiyuInput()
-    change(input.details.zh, "future_field", { nested: [1, 2] })
-    change(input.details.zh, "zone.9700102.future_stage_field", 0)
-    change(
-      input.details.zh,
-      "zone.9700102.layer_room.97002011.future_room_field",
-      0,
-    )
-    change(
-      input.details.zh,
-      "zone.9700102.layer_room.97002011.monster_list.11331.future_encounter_field",
-      0,
-    )
-    change(
-      input.details.en,
-      "zone.9700102.layer_room.97002011.monster_list.11331.future_encounter_field",
-      0,
-    )
-    const result = integrateShiyu(input)
-    expect(result.details.zh).toMatchObject({
-      future_field: { nested: [1, 2] },
-    })
-    expect(result.details.en).not.toHaveProperty("future_field")
-    expect(
-      result.details.zh!.zone["9700102"]!.layerRoom["97002011"]!.monsterList[
-        "11331"
+  it("zone 各层未知字段整合失败并定位来源", () => {
+    const cases: Array<[path: string, pointer: string]> = [
+      ["future_field", "/future_field"],
+      ["zone.9700102.future_stage_field", "/zone/9700102/future_stage_field"],
+      [
+        "zone.9700102.layer_room.97002011.future_room_field",
+        "/zone/9700102/layer_room/97002011/future_room_field",
       ],
-    ).toMatchObject({ future_encounter_field: 0 })
-    expect(result.maintenance.diagnostics).toEqual([
-      {
-        entityId: "970001",
-        locale: "zh",
-        pointer: "/future_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "970001",
-        locale: "zh",
-        pointer: "/zone/9700102/future_stage_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "970001",
-        locale: "zh",
-        pointer: "/zone/9700102/layer_room/97002011/future_room_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "970001",
-        locale: "zh",
-        pointer:
-          "/zone/9700102/layer_room/97002011/monster_list/11331/future_encounter_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "970001",
-        locale: "en",
-        pointer:
-          "/zone/9700102/layer_room/97002011/monster_list/11331/future_encounter_field",
-        kind: "unknown-field",
-      },
-    ])
-    expectShiyuRoundtrip(result, input)
+      [
+        "zone.9700102.layer_room.97002011.monster_list.11331.future_encounter_field",
+        "/zone/9700102/layer_room/97002011/monster_list/11331/future_encounter_field",
+      ],
+    ]
+    for (const [path, pointer] of cases) {
+      const caseInput = shiyuInput()
+      change(caseInput.details.zh, path, 0)
+      expectFailure(
+        caseInput,
+        "zh",
+        pointer,
+        "未知字段：未在登记表登记，不能进入发布制品",
+      )
+    }
   })
 
-  it("对象成员排列不影响输出，诊断顺序确定", () => {
+  it("对象成员排列不影响输出", () => {
     const input = shiyuInput()
     const reversed = {
       entityId: input.entityId,
@@ -446,10 +503,6 @@ describe("单 Shiyu 纯整合 nanoka-shiyu-reference/1", () => {
         en: reverseKeys(input.details.en),
       },
     }
-    change(input.details.zh, "z_field", 0)
-    change(reversed.details.zh, "z_field", 0)
-    change(input.details.zh, "a_field", 0)
-    change(reversed.details.zh, "a_field", 0)
     const expected = integrateShiyu(input)
     const result = integrateShiyu(reversed as IntegrateShiyuInput)
     expect(result).toStrictEqual(expected)
@@ -757,9 +810,9 @@ describe("单 Shiyu 纯整合 nanoka-shiyu-reference/1", () => {
       detailLocales: ["zh"],
     })
     expect(zhOnly.details).not.toHaveProperty("en")
-    // 单语言输入时时间字段视为该语言独有条件满足：提取到 data。
+    // 单语言输入时条件字段视为全部语言提供且一致：完整提取到 data。
     expect(zhOnly.data).toStrictEqual(expectedData)
-    expect(zhOnly.details.zh!.zone).toStrictEqual(expectedZone)
+    expect(zhOnly.details.zh!.zone).toStrictEqual(expectedZoneText)
     expectShiyuRoundtrip(zhOnly, {
       sourceRecord: input.sourceRecord,
       details: { zh: input.details.zh },
@@ -797,93 +850,146 @@ describe("单 Shiyu 纯整合的空值与特例语义", () => {
       result.details.zh!.zone["9700102"]!.layerRoom["97002011"]!
         .monsterWeakness,
     ).toStrictEqual({})
-    expect(result.details.zh!.zone["9700102"]!.child).toStrictEqual([])
-    expect(
-      result.details.zh!.zone["9700102"]!.layerRoom["97002011"]!.wavesNum,
-    ).toBe(0)
-    expect(result.details.zh!.zone["9700102"]!.goalType).toBe(0)
+    expect(result.data.zone["9700102"]!.child).toStrictEqual([])
+    expect(result.data.zone["9700102"]!.layerRoom["97002011"]!.wavesNum).toBe(0)
+    expect(result.data.zone["9700102"]!.goalType).toBe(0)
     expectShiyuRoundtrip(result, input)
   })
 
   it.each(["constructor", "__proto__", "toString"])(
-    "还原辅助函数不把特殊自有字段 %s 误判为登记改名",
-    (field) => {
+    "还原辅助函数不把特殊字典 key %s 误判为登记改名",
+    (key) => {
       const input = shiyuInput()
-      // zone 各层都是本语言结构：特殊自有字段按普通数据保留，不改名、不改值。
+      // 字典 key 是数据不是字段：增益 key 与关卡数值 key 原样保留，不改名、不改值。
       // change 经 Object.defineProperty 写入自有属性，避开 __proto__ 的字面量语义。
-      change(input.details.zh, `zone.9700101.${field}`, { nested: [1] })
-      change(input.details.en, `zone.9700101.${field}`, { nested: [1] })
+      const buff = input.details.zh.zone["9700101"].layer_buff["97001011"]
+      change(input.details.zh, `zone.9700101.layer_buff.${key}`, buff)
+      change(input.details.en, `zone.9700101.layer_buff.${key}`, buff)
       change(
         input.details.zh,
-        `zone.9700101.layer_room.97001011.monster_list.11314.${field}`,
-        "encounter-value",
+        `zone.9700101.layer_room.97001011.monster_list.11314.stats.${key}`,
+        1,
       )
       change(
         input.details.en,
-        `zone.9700101.layer_room.97001011.monster_list.11314.${field}`,
-        "encounter-value",
+        `zone.9700101.layer_room.97001011.monster_list.11314.stats.${key}`,
+        1,
       )
       const result = integrateShiyu(input)
-      expect(Object.hasOwn(result.details.zh!.zone["9700101"]!, field)).toBe(
-        true,
-      )
-      expect(result.details.zh!.zone["9700101"]![field]).toEqual({
-        nested: [1],
-      })
+      expect(
+        Object.hasOwn(result.details.zh!.zone["9700101"]!.layerBuff, key),
+      ).toBe(true)
       expect(
         Object.hasOwn(
-          result.details.zh!.zone["9700101"]!.layerRoom["97001011"]!
-            .monsterList["11314"]!,
-          field,
+          result.data.zone["9700101"]!.layerRoom["97001011"]!.monsterList[
+            "11314"
+          ]!.stats,
+          key,
         ),
       ).toBe(true)
       expect(
-        result.details.zh!.zone["9700101"]!.layerRoom["97001011"]!.monsterList[
+        result.data.zone["9700101"]!.layerRoom["97001011"]!.monsterList[
           "11314"
-        ]![field],
-      ).toBe("encounter-value")
+        ]!.stats[key],
+      ).toBe(1)
       // 还原辅助函数须按登记表命中与否改名，不读取登记表原型链。
       expectShiyuRoundtrip(result, input)
     },
   )
 })
 
-describe("Shiyu 还原辅助函数的路径边界", () => {
-  it("未知扩展内容原样保留：内部 camelCase/snake_case key 与数组内容不被改写；篡改必须失败", () => {
+describe("Shiyu zone 严格共享与还原边界", () => {
+  it("zone 层级跨语言结构不一致必须失败：key 集合与数值骨架各语言一致", () => {
+    // 阶段 key 只在一个语言出现。
+    const stageOnly = shiyuInput()
+    const stage = structuredClone(stageOnly.details.zh.zone["9700102"])
+    change(stageOnly.details.zh, "zone.9700103", stage)
+    expectFailure(
+      stageOnly,
+      "zh",
+      "/zone/9700103",
+      "共享字典成员只在部分语言提供（zh）",
+    )
+
+    // 房间 key 只在一个语言出现。
+    const roomOnly = shiyuInput()
+    const room = structuredClone(
+      roomOnly.details.zh.zone["9700101"].layer_room["97001011"],
+    )
+    change(roomOnly.details.zh, "zone.9700101.layer_room.97002012", room)
+    expectFailure(
+      roomOnly,
+      "zh",
+      "/zone/9700101/layer_room/97002012",
+      "共享字典成员只在部分语言提供（zh）",
+    )
+
+    // encounter key 只在一个语言出现。
+    const encounterOnly = shiyuInput()
+    const encounter = structuredClone(
+      encounterOnly.details.zh.zone["9700101"].layer_room["97001011"]
+        .monster_list["11314"],
+    )
+    change(
+      encounterOnly.details.zh,
+      "zone.9700101.layer_room.97001011.monster_list.11315",
+      encounter,
+    )
+    expectFailure(
+      encounterOnly,
+      "zh",
+      "/zone/9700101/layer_room/97001011/monster_list/11315",
+      "共享字典成员只在部分语言提供（zh）",
+    )
+
+    // 骨架数值跨语言不一致按共享冲突失败。
+    const numericConflict = shiyuInput()
+    change(numericConflict.details.en, "zone.9700101.stage_num", 2)
+    expectFailure(
+      numericConflict,
+      "en",
+      "/zone/9700101/stage_num",
+      "共享冲突（与 zh 的完整值不同）",
+    )
+
+    // encounter 数值跨语言不一致同样按共享冲突失败。
+    const encounterConflict = shiyuInput()
+    change(
+      encounterConflict.details.en,
+      "zone.9700101.layer_room.97001011.monster_list.11314.stats.hp",
+      1,
+    )
+    expectFailure(
+      encounterConflict,
+      "en",
+      "/zone/9700101/layer_room/97001011/monster_list/11314/stats",
+      "共享冲突（与 zh 的完整值不同）",
+    )
+  })
+
+  it("还原载荷重叠必须失败：骨架与文本不得相互掩盖冲突", () => {
     const input = shiyuInput()
-    // 未知字段的整个值原样保留：内部字段名不做登记表推断，数组内容同样不改写；
-    // 同一对象内的 snake_case 与 camelCase key 同时保留。
-    change(input.details.zh, "future_extension", {
-      layerBuff: "camel",
-      layer_buff: "snake",
-      nested: [{ nextPage: [1], stageNum: 2 }],
-    })
-    change(input.details.zh, "future_snake", { layer_buff: "kept" })
     const result = integrateShiyu(input)
-    expect(result.details.zh!.future_extension).toStrictEqual({
-      layerBuff: "camel",
-      layer_buff: "snake",
-      nested: [{ nextPage: [1], stageNum: 2 }],
-    })
-    expect(result.details.zh!.future_snake).toStrictEqual({
-      layer_buff: "kept",
-    })
-    expectShiyuRoundtrip(result, input)
-    // 人为把未知字段内部的 snake_case key 篡改成 camelCase 后，还原校验必须失败：
-    // 不得把 layerBuff 误还原成 layer_buff 掩盖损坏。
+    // 人为把骨架成员复制进 details 文本层后，还原合并必须检测重叠并失败。
     const corrupted = structuredClone(result)
-    corrupted.details.zh!.future_snake = { layerBuff: "kept" }
+    corrupted.details.zh!.zone["9700101"]!.name = structuredClone(
+      result.data.zone["9700101"]!.stageNum,
+    ) as never
     expect(() => expectShiyuRoundtrip(corrupted, input)).toThrow()
   })
 
-  it("字典 key 与登记字段名相同时原样保留，值仍按阶段结构还原", () => {
+  it("字典 key 与登记字段名相同时原样保留，值仍按阶段结构拆分", () => {
     const input = shiyuInput()
     const stage = structuredClone(input.details.zh.zone["9700101"])
+    const enStage = structuredClone(input.details.en.zone["9700101"])
     // 阶段 key 恰好与登记字段同名：字典 key 原样保留，不按登记表改名。
     change(input.details.zh, "zone.layerBuff", stage)
+    change(input.details.en, "zone.layerBuff", enStage)
     const result = integrateShiyu(input)
-    expect(Object.keys(result.details.zh!.zone!)).toContain("layerBuff")
-    expect(result.details.zh!.zone["layerBuff"]!.stageNum).toBe(1)
+    expect(Object.keys(result.data.zone)).toContain("layerBuff")
+    expect(result.data.zone["layerBuff"]!.stageNum).toBe(1)
+    expect(Object.keys(result.details.zh!.zone)).toContain("layerBuff")
+    expect(result.details.zh!.zone["layerBuff"]!.name).toBe("稳定防线一")
     expectShiyuRoundtrip(result, input)
   })
 })

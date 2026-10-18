@@ -60,7 +60,7 @@ export interface IntegratedWEngine {
 }
 
 /**
- * 按规则 nanoka-w-engine-reference/1 校验、复制和拆分单个 WEngine。无 I/O、默认值或语言回退。
+ * 按规则 nanoka-w-engine-reference/2 校验、复制和拆分单个 WEngine。无 I/O、默认值或语言回退。
  * 来源校验失败抛出含来源位置的 WEngineIntegrationError，不返回部分整合结果。
  */
 export function integrateWEngine(
@@ -125,7 +125,7 @@ export function integrateWEngine(
     for (const key of ["locale", "classificationIds"])
       if (Object.hasOwn(source, key))
         failWEngine(at(context, key), "辅助字段重名")
-    const record = validateWEngineDetail(source, context, diagnostics)
+    const record = validateWEngineDetail(source, context)
     if (
       !Number.isSafeInteger(record.id) ||
       String(record.id) !== input.entityId
@@ -209,7 +209,6 @@ export function integrateWEngine(
 function validateWEngineDetail(
   source: JsonObject,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   const registered = Object.keys(wEngineSharedDetailFields).concat(
     Object.keys(wEngineLocalizedDetailFields),
@@ -242,12 +241,7 @@ function validateWEngineDetail(
       put(
         record,
         definition.output,
-        validateSharedField(
-          source[key],
-          definition,
-          at(location, key),
-          diagnostics,
-        ),
+        validateSharedField(source[key], definition, at(location, key)),
       )
       continue
     }
@@ -256,12 +250,7 @@ function validateWEngineDetail(
       put(
         record,
         definition.output,
-        validateLocalizedField(
-          source[key],
-          definition,
-          at(location, key),
-          diagnostics,
-        ),
+        validateLocalizedField(source[key], definition, at(location, key)),
       )
       continue
     }
@@ -270,12 +259,14 @@ function validateWEngineDetail(
       put(
         record,
         property.output,
-        validateProperty(source[key], at(location, key), diagnostics),
+        validateProperty(source[key], at(location, key)),
       )
       continue
     }
-    put(record, key, source[key])
-    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+    failWEngine(
+      at(location, key),
+      "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+    )
   }
   return record
 }
@@ -285,15 +276,9 @@ function validateSharedField(
   value: SourceJson,
   definition: WEngineSharedDetailField,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): SourceJson {
   if (definition.shape === "stageDictionary")
-    return validateStageDictionary(
-      value,
-      definition.members,
-      location,
-      diagnostics,
-    )
+    return validateStageDictionary(value, definition.members, location)
   return validateField(value, definition.shape, location)
 }
 
@@ -302,17 +287,11 @@ function validateLocalizedField(
   value: SourceJson,
   definition: WEngineLocalizedDetailField,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): SourceJson {
   if (definition.shape === "idDictionary")
     return validateIdDictionary(value, location)
   if (definition.shape === "stageDictionary")
-    return validateStageDictionary(
-      value,
-      definition.members,
-      location,
-      diagnostics,
-    )
+    return validateStageDictionary(value, definition.members, location)
   return validateField(value, definition.shape, location)
 }
 
@@ -331,7 +310,6 @@ function validateStageDictionary(
   value: SourceJson,
   members: Readonly<Record<string, WEngineObjectMember>>,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failWEngine(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
@@ -339,22 +317,16 @@ function validateStageDictionary(
     put(
       record,
       key,
-      validateObjectMembers(
-        value[key],
-        members,
-        at(location, key),
-        diagnostics,
-      ),
+      validateObjectMembers(value[key], members, at(location, key)),
     )
   return record
 }
 
-/** 登记成员对象的校验与拼写转换；未登记成员原样保留并报告待登记。 */
+/** 登记成员对象的校验与拼写转换；未登记成员整合失败。 */
 function validateObjectMembers(
   value: SourceJson,
   members: Readonly<Record<string, WEngineObjectMember>>,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failWEngine(location, "字段类型必须为普通对象")
   for (const key of Object.keys(members).toSorted()) {
@@ -370,11 +342,11 @@ function validateObjectMembers(
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted()) {
     const member = Object.hasOwn(members, key) ? members[key] : undefined
-    if (member === undefined) {
-      put(record, key, value[key])
-      diagnostics.push({ ...at(location, key), kind: "unknown-field" })
-      continue
-    }
+    if (member === undefined)
+      failWEngine(
+        at(location, key),
+        "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+      )
     put(
       record,
       member.output,
@@ -399,11 +371,10 @@ function validateIdDictionary(
   return record
 }
 
-/** 属性对象的校验；`value` 数值与文本成员都必须提供，未知成员原样保留。 */
+/** 属性对象的校验；`value` 数值与文本成员都必须提供，未知成员整合失败。 */
 function validateProperty(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failWEngine(location, "字段类型必须为普通对象")
   for (const key of Object.keys(wEnginePropertyTextMembers).toSorted())
@@ -420,11 +391,11 @@ function validateProperty(
     const member = Object.hasOwn(wEnginePropertyTextMembers, key)
       ? wEnginePropertyTextMembers[key]
       : undefined
-    if (member === undefined) {
-      put(record, key, value[key])
-      diagnostics.push({ ...at(location, key), kind: "unknown-field" })
-      continue
-    }
+    if (member === undefined)
+      failWEngine(
+        at(location, key),
+        "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+      )
     put(
       record,
       member.output,

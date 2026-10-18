@@ -1399,9 +1399,12 @@ export async function migrateCurrentDataset(options: {
           entityFileCount: dataset.files.length,
         }
       }
+      const agentsEntity = registry.find((entity) => entity.name === "agents")
+      if (!agentsEntity) invalid("登记表缺少 agents 类别，无法验证 v2 外壳")
       const index = await verifyNanokaAgentArtifact({
         artifactDirectory: paths.target,
         policy,
+        rulesVersion: agentsEntity.rulesVersion,
       })
       baseline = {
         format: legacyIntegratedSnapshotFormat,

@@ -1,9 +1,9 @@
 /**
- * WEngine 来源结构的登记表（规则 nanoka-w-engine-reference/1）。
+ * WEngine 来源结构的登记表（规则 nanoka-w-engine-reference/2）。
  *
  * 详情与来源索引记录分别处理：详情字段在这里登记，按归属提取到 data.json 或留在各语言详情；
  * 索引记录不在这里登记，原记录仍作为 sourceRecord 完整保留，两个来源不互相回退。
- * 未登记字段不在这里登记：它们在整合结果中原样保留并作为维护诊断报告待登记。
+ * 未登记的详情字段整合失败，不进入发布制品；索引记录的未登记字段仍作为维护诊断报告待登记。
  * 只转换登记表明确列出的结构字段拼写；字典 key、实体与属性 ID、字符串内容及数组顺序不变。
  */
 
@@ -35,7 +35,7 @@ export type WEngineSharedDetailField =
       /** 阶段 key → 登记成员对象的字典。 */
       shape: "stageDictionary"
 
-      /** 阶段条目的登记成员；未列出的成员原样保留并报告待登记。 */
+      /** 阶段条目的登记成员；未列出的成员整合失败。 */
       members: Readonly<Record<string, WEngineObjectMember>>
     }
 
@@ -62,7 +62,7 @@ export type WEngineLocalizedDetailField =
       /** 阶段 key → 登记成员对象的字典。 */
       shape: "stageDictionary"
 
-      /** 阶段条目的登记成员；未列出的成员原样保留并报告待登记。 */
+      /** 阶段条目的登记成员；未列出的成员整合失败。 */
       members: Readonly<Record<string, WEngineObjectMember>>
     }
 

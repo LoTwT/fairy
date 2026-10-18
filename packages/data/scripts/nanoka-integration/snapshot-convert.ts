@@ -107,6 +107,7 @@ export async function convertNanokaAgentsArtifactToSnapshot(
     // 复用 v2 完整验证器：外壳、范围、语言、成员、身份、精确文件集合与全部字节摘要。
     index = await verifyNanokaAgentArtifact({
       artifactDirectory: source,
+      // 迁移只接受与当前登记表同版本的 v2 外壳；历史版本外壳需按当前规则从 raw 重新生成。
       policy,
       rulesVersion: agents.rulesVersion,
     })

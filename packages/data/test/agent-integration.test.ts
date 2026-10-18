@@ -186,59 +186,50 @@ describe("单代理人纯整合 v4", () => {
     expect(input).toStrictEqual(before)
   })
 
-  it("保留未知成员、原字典 key、零空值和完整共享块", () => {
+  it("未知成员在细节流各层整合失败；合法空值与共享块语义不变", () => {
     const input = agentInput()
+    // 已登记容器内的合法零空值不受影响；trust_lv 是字符串字典，key 是数据。
     for (const source of Object.values(input.details)) {
-      change(source, "untouched", {
-        snake_key: { attack_growth: 0 },
-        zero: 0,
-        empty: "",
-        nil: null,
-        array: [],
-        object: {},
-        boolean: false,
-      })
-      change(source, "stats.unknown_block", { raw_key: [null, "", {}, [], 0] })
-      change(source, "level.low_stage.unknown_member", null)
-      change(source, "skill_priority.0.unknown_field", [])
       change(source, "partner_info.trust_lv", {
         basic_attack: "",
-        constructor: "raw",
         __custom_key: "原文",
       })
-      change(source, "skill.basic_attack", { material: {}, description: [] })
-      change(source, "extra_level.stage_key.extra.prop_key.new_field", {
-        max_level: 0,
-      })
+      change(source, "stats.armor", 0)
+      change(source, "level.low_stage.level_min", 0)
     }
     const result = integrateAgent(input)
-    expect(result.data.stats).toHaveProperty("unknown_block", {
-      raw_key: [null, "", {}, [], 0],
-    })
-    expect(result.data.skill).toHaveProperty("basic_attack")
     expect(result.details.zh!.partnerInfo.trustLv).toStrictEqual({
       basic_attack: "",
-      constructor: "raw",
       __custom_key: "原文",
     })
-    expect(result.maintenance.diagnostics).toContainEqual({
-      entityId: "900001",
-      locale: "zh",
-      pointer: "/stats/unknown_block",
-      kind: "unknown-field",
-    })
-    expect(
-      result.maintenance.diagnostics.some((item) =>
-        item.pointer.includes("raw_key"),
-      ),
-    ).toBe(false)
+    expect(result.data.stats.armor).toBe(0)
+    expect(result.maintenance.diagnostics).toEqual([])
     expectRoundtrip(result, input)
+
+    // 未登记成员不再保留进制品：各层一律整合失败并定位来源。
+    const unknownCases: Array<[path: string, value: unknown]> = [
+      ["untouched", { zero: 0, nil: null }],
+      ["stats.unknown_block", { raw_key: [null, "", {}, [], 0] }],
+      ["level.low_stage.unknown_member", null],
+      ["skill_priority.0.unknown_field", []],
+      ["partner_info.unknown_field", { nested: [1] }],
+      ["extra_level.stage_key.extra.prop_key.new_field", { max_level: 0 }],
+    ]
+    for (const [path, value] of unknownCases) {
+      const caseInput = agentInput()
+      for (const source of Object.values(caseInput.details))
+        change(source, path, value)
+      expectFailure(
+        caseInput,
+        "zh",
+        `/${path.replaceAll(".", "/")}`,
+        "未知字段：未在登记表登记，不能进入发布制品",
+      )
+    }
   })
 
   it("对象 key 排列不影响整个结果与维护记录，来源数组顺序原样保留", () => {
     const input = agentInput()
-    change(input.details.zh, "unknown_b", { z: 0, a: 1 })
-    change(input.details.zh, "unknown_a", [])
     const result = integrateAgent(input)
     const reordered = integrateAgent(reverseKeys(input) as IntegrateAgentInput)
     expect(reordered).toStrictEqual(result)
@@ -248,23 +239,41 @@ describe("单代理人纯整合 v4", () => {
     expectRoundtrip(result, input)
   })
 
-  it("多 ID、重复用途、纯文本与单语言条目保持独立身份并逐语言生成完整行 Pointer", () => {
+  it("多 ID、重复用途与纯文本条目保持独立身份并逐语言生成完整行 Pointer", () => {
     const input = agentInput()
-    change(input.details.zh, "skill_list.3", {
+    // skill_list 是含共享成员的字典：新 key 必须各语言同有，单语言独有即失败。
+    const singleLocaleKey = agentInput()
+    change(singleLocaleKey.details.zh, "skill_list.3", {
       name: "仅元数据",
       desc: "",
       element_type: 999,
       hit_type: 0,
       potential: [0],
     })
+    expectFailure(
+      singleLocaleKey,
+      "zh",
+      "/skill_list/3",
+      "共享字典成员只在部分语言提供（zh）",
+    )
+    for (const source of Object.values(input.details))
+      change(source, "skill_list.3", {
+        name: "仅元数据",
+        desc: "",
+        element_type: 999,
+        hit_type: 0,
+        potential: [0],
+      })
     const result = integrateAgent(input)
-    expect(result.data.skillList).not.toHaveProperty("3")
-    expect(result.details.zh!.skillList["3"]).toEqual({
-      name: "仅元数据",
-      desc: "",
+    // 共享成员（element_type/hit_type/potential）提取到 data，文本（name/desc）留 details。
+    expect(result.data.skillList["3"]).toEqual({
       elementType: 999,
       hitType: 0,
       potential: [0],
+    })
+    expect(result.details.zh!.skillList["3"]).toEqual({
+      name: "仅元数据",
+      desc: "",
     })
     for (const locale of ["zh", "en"] as const) {
       const section = locale === "zh" ? 1 : 0
@@ -303,26 +312,18 @@ describe("单代理人纯整合 v4", () => {
       "skin",
       "only_skin",
       { image: "only", name: "", desc: "", obtain_desc: "" },
-      "skin",
     ],
-    [
-      "skill",
-      "only_group",
-      { material: { "1": { "1": 5 } }, description: [] },
-      "skill",
-    ],
+    ["skill", "only_group", { material: { "1": { "1": 5 } }, description: [] }],
     [
       "skill_list",
       "3",
       { name: "", desc: "", element_type: 0, hit_type: 0, potential: [] },
-      "skillList",
     ],
-    ["extra_level", "only_stage", { max_level: 9, extra: {} }, "extraLevel"],
+    ["extra_level", "only_stage", { max_level: 9, extra: {} }],
     [
       "extra_level.stage_key.extra",
       "only_prop",
       { prop: 9, value: 9, name: "", format: "" },
-      "extraLevel.stage_key.extra",
     ],
     [
       "passive.level",
@@ -335,25 +336,18 @@ describe("单代理人纯整合 v4", () => {
         extra_property: {},
         potential: [],
       },
-      "passive.level",
     ],
-    [
-      "talent",
-      "only_stage",
-      { level: 9, name: "", desc: "", desc2: "" },
-      "talent",
-    ],
-  ])(
-    "%s 的单语言独有 key %s 完整留在本语言",
-    (container, key, value, outputContainer) => {
-      const input = agentInput()
-      change(input.details.zh, `${container}.${key}`, value)
-      const result = integrateAgent(input)
-      expect(result.data).not.toHaveProperty(`${outputContainer}.${key}`)
-      expect(result.details.zh).toHaveProperty(`${outputContainer}.${key}`)
-      expectRoundtrip(result, input)
-    },
-  )
+    ["talent", "only_stage", { level: 9, name: "", desc: "", desc2: "" }],
+  ])("%s 的单语言独有 key %s 整合失败", (container, key, value) => {
+    const input = agentInput()
+    change(input.details.zh, `${container}.${key}`, value)
+    expectFailure(
+      input,
+      "zh",
+      `/${container.replaceAll(".", "/")}/${key}`,
+      "共享字典成员只在部分语言提供（zh）",
+    )
+  })
 
   it.each([
     "icon",
@@ -397,11 +391,25 @@ describe("单代理人纯整合 v4", () => {
     expect(() => integrateAgent(input)).toThrow("共享冲突")
   })
 
-  it("整块共享中的未知差异也冲突，codeName 特例不能豁免", () => {
+  it("共享块内未知成员整合失败；codeName 特例只产生差异记录不豁免结构校验", () => {
     const input = agentInput()
     input.details.en.code_name = "Different"
     change(input.details.zh, "stats.new_member", { untouched_key: null })
-    expectFailure(input, "en", "/stats", "共享冲突")
+    expectFailure(
+      input,
+      "zh",
+      "/stats/new_member",
+      "未知字段：未在登记表登记，不能进入发布制品",
+    )
+    // code_name 差异按第一语言取值并进入维护记录，不因特例豁免。
+    const codeNameInput = agentInput()
+    codeNameInput.details.en.code_name = "Different"
+    const result = integrateAgent(codeNameInput)
+    expect(result.data.codeName).toBe("Example")
+    expect(result.maintenance.codeNameDifferences).toHaveLength(1)
+    expect(result.details.zh).not.toHaveProperty("codeName")
+    expect(result.details.en).not.toHaveProperty("codeName")
+    expectRoundtrip(result, codeNameInput)
   })
 })
 
@@ -493,39 +501,49 @@ describe("v4 结构变体与可选资源", () => {
     ["live2_d", "live2D"],
     ["partner_info.icon_path", "partnerInfo.iconPath"],
     ["partner_info.role_icon", "partnerInfo.roleIcon"],
-  ])("%s 缺失、双侧同值、单侧空字符串及冲突", (sourcePath, outputPath) => {
-    const input = agentInput()
-    let result = integrateAgent(input)
-    expect(result.data).not.toHaveProperty(outputPath)
-    expect(result.details.zh).not.toHaveProperty(outputPath)
-    for (const locale of ["zh", "en"] as const)
-      change(input.details[locale], sourcePath, "")
-    result = integrateAgent(input)
-    expect(result.data).toHaveProperty(outputPath, "")
-    expectRoundtrip(result, input)
-    remove(input.details.en, sourcePath)
-    result = integrateAgent(input)
-    expect(result.data).not.toHaveProperty(outputPath)
-    expect(result.details.zh).toHaveProperty(outputPath, "")
-    expect(result.details.en).not.toHaveProperty(outputPath)
-    expectRoundtrip(result, input)
-    change(input.details.en, sourcePath, "different")
-    expectFailure(
-      input,
-      "en",
-      `/${sourcePath.replaceAll(".", "/")}`,
-      "共享冲突",
-    )
-    for (const value of [0, null, [], {}, false]) {
-      change(input.details.en, sourcePath, value)
+  ])(
+    "%s 各语言同有或全缺；双侧同值提取、单侧提供失败",
+    (sourcePath, outputPath) => {
+      const input = agentInput()
+      let result = integrateAgent(input)
+      expect(result.data).not.toHaveProperty(outputPath)
+      expect(result.details.zh).not.toHaveProperty(outputPath)
+      for (const locale of ["zh", "en"] as const)
+        change(input.details[locale], sourcePath, "")
+      result = integrateAgent(input)
+      expect(result.data).toHaveProperty(outputPath, "")
+      expectRoundtrip(result, input)
+      // 单侧提供（含空字符串）不再留在该语言 details：严格共享直接失败。
+      const singleSide = agentInput()
+      change(singleSide.details.zh, sourcePath, "")
       expectFailure(
-        input,
+        singleSide,
+        "zh",
+        `/${sourcePath.replaceAll(".", "/")}`,
+        "共享结构字段只在部分语言提供（zh）",
+      )
+      const conflict = agentInput()
+      for (const locale of ["zh", "en"] as const)
+        change(conflict.details[locale], sourcePath, "")
+      change(conflict.details.en, sourcePath, "different")
+      expectFailure(
+        conflict,
         "en",
         `/${sourcePath.replaceAll(".", "/")}`,
-        "string",
+        "共享冲突",
       )
-    }
-  })
+      for (const value of [0, null, [], {}, false]) {
+        const typeCase = agentInput()
+        change(typeCase.details.en, sourcePath, value)
+        expectFailure(
+          typeCase,
+          "en",
+          `/${sourcePath.replaceAll(".", "/")}`,
+          "string",
+        )
+      }
+    },
+  )
 
   it.each(agentResourceVariants)(
     "原资源结构变体 $id 参与整合校验",
@@ -750,30 +768,40 @@ describe("运行时结构、身份、冲突与特殊自有 key", () => {
     expectRoundtrip(result, input)
   })
 
-  it("单语言独有条目的已知字段可通过正式类型读取", () => {
+  it("共有条目的共享成员提取到 data，文本成员留在 details 且可经正式类型读取", () => {
     const input = agentInput()
-    for (const path of [
-      "skin.1",
-      "skill.g/~",
-      "skill_list.1",
-      "extra_level.stage_key",
-      "passive.level.1",
-      "talent.stage_key",
-    ])
-      remove(input.details.en, path)
     const result = integrateAgent(input)
     const details = result.details.zh!
-    expect(details.skin["1"].image).toBe("original_image")
-    expect(details.skill["g/~"].material).toEqual({ stage_key: { "1": 0 } })
-    expect(details.skillList["1"].elementType).toBe(203)
-    expect(details.skillList["1"].hitType).toBe(101)
-    expect(details.skillList["1"].potential).toEqual([])
-    expect(details.extraLevel.stage_key.maxLevel).toBe(0)
-    expect(details.extraLevel.stage_key.extra.prop_key.prop).toBe(0)
-    expect(details.extraLevel.stage_key.extra.prop_key.value).toBe(0)
-    expect(details.passive.level["1"].id).toBe(1)
-    expect(details.passive.level["1"].level).toBe(0)
-    expect(details.talent.stage_key.level).toBe(0)
+    // 共享成员不在 details：图片、材料、编码与数值全部进入 data。
+    expect(details.skin["1"]).toEqual({
+      name: "",
+      desc: "",
+      obtainDesc: "",
+    })
+    expect(details.skill["g/~"].description).toBeDefined()
+    expect(details.skillList["1"]).toEqual({ name: "独立元数据", desc: "" })
+    expect(details.extraLevel.stage_key.extra.prop_key).toEqual({
+      name: "",
+      format: "",
+    })
+    expect(details.passive.level["1"].name).toEqual([""])
+    expect(details.talent.stage_key).toEqual({
+      name: "",
+      desc: "",
+      desc2: "",
+    })
+    // 对应共享成员在 data 侧可读取。
+    expect(result.data.skin["1"].image).toBe("original_image")
+    expect(result.data.skill["g/~"].material).toEqual({
+      stage_key: { "1": 0 },
+    })
+    expect(result.data.skillList["1"].elementType).toBe(203)
+    expect(result.data.skillList["1"].hitType).toBe(101)
+    expect(result.data.skillList["1"].potential).toEqual([])
+    expect(result.data.extraLevel.stage_key.maxLevel).toBe(0)
+    expect(result.data.extraLevel.stage_key.extra.prop_key.prop).toBe(0)
+    expect(result.data.passive.level["1"].id).toBe(1)
+    expect(result.data.talent.stage_key.level).toBe(0)
     expectRoundtrip(result, input)
   })
 
@@ -1000,22 +1028,31 @@ describe("运行时结构、身份、冲突与特殊自有 key", () => {
           format: "",
         })
       }
-      change(
-        source,
-        "__proto__",
-        JSON.parse('{"polluted":true,"attack_growth":0}'),
-      )
-      change(source, "stats.__proto__", { untouched_key: null })
-      change(source, "constructor", null)
-      change(source, "toString", [])
     }
     change(input.sourceRecord, "__proto__", { retained: true })
     const result = integrateAgent(input)
-    expect(Object.hasOwn(result.details.zh!, "__proto__")).toBe(true)
-    expect(Object.hasOwn(result.data.stats, "__proto__")).toBe(true)
     expect(Object.hasOwn(result.sourceRecord, "__proto__")).toBe(true)
     expect(Object.getPrototypeOf(result.details.zh!)).toBe(Object.prototype)
     expect(Object.prototype).not.toHaveProperty("polluted")
+    // 顶层未知字段（含特殊自有 key）不再进入制品：整合失败。
+    for (const key of ["__proto__", "constructor", "toString"]) {
+      const caseInput = agentInput()
+      change(caseInput.details.zh, key, { polluted: true })
+      expectFailure(
+        caseInput,
+        "zh",
+        `/${key}`,
+        "未知字段：未在登记表登记，不能进入发布制品",
+      )
+    }
+    const statsUnknown = agentInput()
+    change(statsUnknown.details.zh, "stats.__proto__", { untouched_key: null })
+    expectFailure(
+      statsUnknown,
+      "zh",
+      "/stats/__proto__",
+      "未知字段：未在登记表登记，不能进入发布制品",
+    )
     const pointers = result.details.zh!.navigation.parameterRowsById["1"]
     expect(pointers).toEqual([
       "/skill/__proto__/description/0/param/0",
@@ -1036,21 +1073,24 @@ describe("运行时结构、身份、冲突与特殊自有 key", () => {
 
   it("空段落参数数组和空行内参数表不产生伪参数", () => {
     const input = agentInput()
-    change(input.details.zh, "skill.empty", {
-      material: {},
-      description: [
-        { name: "", potential: [] },
-        { name: "", potential: [], param: [] },
-        {
-          name: "",
-          potential: [],
-          param: [{ name: "", desc: "", potential: [], param: {} }],
-        },
-      ],
-    })
+    for (const source of Object.values(input.details))
+      change(source, "skill.empty", {
+        material: {},
+        description: [
+          { name: "", potential: [] },
+          { name: "", potential: [], param: [] },
+          {
+            name: "",
+            potential: [],
+            param: [{ name: "", desc: "", potential: [], param: {} }],
+          },
+        ],
+      })
     const result = integrateAgent(input)
     expect(result.details.zh!.navigation.parameterIdsByGroup.empty).toEqual([])
-    expect(result.data.skill).not.toHaveProperty("empty")
+    // 双语同有后共享材料提取到 data，文本留 details。
+    expect(result.data.skill.empty).toEqual({ material: {} })
+    expect(result.details.zh!.skill.empty.description).toHaveLength(3)
     expectRoundtrip(result, input)
   })
 })
@@ -1058,22 +1098,31 @@ describe("运行时结构、身份、冲突与特殊自有 key", () => {
 describe("补充 JSON 与潜能边界", () => {
   it("可接受有限小数、null 原型对象及重复引用的 JSON 值", () => {
     const input = agentInput()
+    // 有限小数进入已登记共享数值字段并保持原值。
+    for (const source of Object.values(input.details))
+      change(source, "stats.attack", 0.125)
+    const result = integrateAgent(input)
+    expect(result.data.stats.attack).toBe(0.125)
+    // null 原型对象与重复引用经 sourceRecord 边界保留（索引记录不做字段校验）。
     const sharedReference = { own_key: 0.125 }
     change(
-      input.details.zh,
-      "unknown",
+      input.sourceRecord,
+      "exotic",
       Object.assign(Object.create(null), {
         a: sharedReference,
         b: sharedReference,
       }),
     )
-    const result = integrateAgent(input)
-    expect(result.details.zh).toHaveProperty("unknown", {
+    const withExotic = integrateAgent(input)
+    expect({
+      ...(withExotic.sourceRecord.exotic as Record<string, unknown>),
+    }).toEqual({
       a: { own_key: 0.125 },
       b: { own_key: 0.125 },
     })
-    expectRoundtrip(result, {
+    expectRoundtrip(withExotic, {
       ...input,
+      sourceRecord: JSON.parse(JSON.stringify(input.sourceRecord)),
       details: JSON.parse(JSON.stringify(input.details)),
     })
   })
@@ -1178,14 +1227,22 @@ describe("补充 JSON 与潜能边界", () => {
       change(input.details.zh, `potential_detail.7.${key}`, null)
       expect(() => integrateAgent(input)).toThrow("改名冲突")
     }
-    change(input.details.zh, "potential_detail.7", structuredClone(raw))
-    change(input.details.zh, "potential_detail.7.unknown", { item_id: "keep" })
-    change(
-      input.details.zh,
-      "potential_detail.7.potential_materials.0.new_key",
-      [],
-    )
-    result = integrateAgent(input)
-    expectRoundtrip(result, input)
+    for (const [path, pointer] of [
+      ["potential_detail.7.unknown", "/potential_detail/7/unknown"],
+      [
+        "potential_detail.7.potential_materials.0.new_key",
+        "/potential_detail/7/potential_materials/0/new_key",
+      ],
+    ] as const) {
+      const caseInput = agentInput()
+      change(caseInput.details.zh, "potential_detail.7", structuredClone(raw))
+      change(caseInput.details.zh, path, [])
+      expectFailure(
+        caseInput,
+        "zh",
+        pointer,
+        "未知字段：未在登记表登记，不能进入发布制品",
+      )
+    }
   })
 })

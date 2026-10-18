@@ -3280,7 +3280,7 @@
           }
         }
       },
-      "rulesVersion": "nanoka-agent-reference/5"
+      "rulesVersion": "nanoka-agent-reference/6"
     },
     "bangboos": {
       "complete": true,
@@ -4849,7 +4849,7 @@
           }
         }
       },
-      "rulesVersion": "nanoka-bangboo-reference/1"
+      "rulesVersion": "nanoka-bangboo-reference/2"
     },
     "boss": {
       "complete": true,
@@ -6691,7 +6691,7 @@
           }
         }
       },
-      "rulesVersion": "nanoka-boss-reference/2"
+      "rulesVersion": "nanoka-boss-reference/3"
     },
     "drive-discs": {
       "complete": true,
@@ -8206,7 +8206,7 @@
           }
         }
       },
-      "rulesVersion": "nanoka-drive-disc-reference/1"
+      "rulesVersion": "nanoka-drive-disc-reference/2"
     },
     "monsters": {
       "complete": true,
@@ -20155,7 +20155,7 @@
           }
         }
       },
-      "rulesVersion": "nanoka-monster-reference/1"
+      "rulesVersion": "nanoka-monster-reference/2"
     },
     "shiyu": {
       "complete": true,
@@ -20731,16 +20731,16 @@
           "files": {
             "data": {
               "path": "shiyu/61001/data.json",
-              "sha256": "8307e649ed2c06f531301da26d20a345cc6968d3c215dbb20e143babb5f3a327"
+              "sha256": "825cacc2606dff9fa1f38d11c61b9e07c2b268be896f32e4d42a373309144726"
             },
             "details": {
               "en": {
                 "path": "shiyu/61001/details.en.json",
-                "sha256": "3618af7b5c88f2f4d55c2c6961371b140e3f2610c18e3d4154c2f963603caff5"
+                "sha256": "23109f7d29da7b7ac8a0fd130209cb0c81bc784c164fa5501e7b6c0e8b95fb12"
               },
               "zh": {
                 "path": "shiyu/61001/details.zh.json",
-                "sha256": "cffba05136e9ea501efa97ac328bf20b4989fc96b0ea5cd1bf816246f5bfd47b"
+                "sha256": "2e0ec4e9960729734595e68afce21056cf325920db708335f6cdf502452b58b8"
               }
             }
           },
@@ -20756,16 +20756,16 @@
           "files": {
             "data": {
               "path": "shiyu/61002/data.json",
-              "sha256": "f3292032de50c0c1bddab696bc90d3ba1db9dbd6bcda2fc023817c81aaea605a"
+              "sha256": "c46770da12638136f3f83d162e3a89d15a6d19b270a476cc73474eb5e61fafd3"
             },
             "details": {
               "en": {
                 "path": "shiyu/61002/details.en.json",
-                "sha256": "6405d2624997543ef50896d7f7bf6c84ffdb02be740a7f5b619343bd064a5fd3"
+                "sha256": "1c7305c55af5a485372a59cd910d2b9fdb1190d0263a508277b69c33ab7cbb9c"
               },
               "zh": {
                 "path": "shiyu/61002/details.zh.json",
-                "sha256": "bda59eca967fcdd0ed6706b407755d6148442cf38f7f7767cc8ccc4761353eed"
+                "sha256": "8de66cb57c6bfff1971df6ca16c0d1cd9c7e5148b1499a3ccffaffe945882993"
               }
             }
           },
@@ -20781,16 +20781,16 @@
           "files": {
             "data": {
               "path": "shiyu/61003/data.json",
-              "sha256": "640fe3cef7931c8d4a2d4925b94570941e3c34444993e1fe6346af4d5b440f69"
+              "sha256": "80d7ed8907fc43517c7df02198ac934ac9b800eb1d47ec754113d59517d6a7e3"
             },
             "details": {
               "en": {
                 "path": "shiyu/61003/details.en.json",
-                "sha256": "36cca360f244f18b4c80d876e871461688c6b20dd08ccce5a5157b2fbed19382"
+                "sha256": "e2dfb223e0bf568298c8f9e32f3564bd0d7112ece9eecef12c85436b36360e75"
               },
               "zh": {
                 "path": "shiyu/61003/details.zh.json",
-                "sha256": "8ab1ea371a348a8d95e21545a1fd96d854381511bd3a30c80d950b60b85beea2"
+                "sha256": "61db7240de762ab9bfec9975753266f5ac81284abb05fec93ef7008115227886"
               }
             }
           },
@@ -20810,16 +20810,16 @@
           "files": {
             "data": {
               "path": "shiyu/62001/data.json",
-              "sha256": "58a76d07cbd5cf0f56a9a3ea935c39a307edd00b7d0210735c01e894e8a3fcba"
+              "sha256": "7488d03931e45ae96624cb78a67e9444a3daa550d0e4cc9b6053f1365243a18b"
             },
             "details": {
               "en": {
                 "path": "shiyu/62001/details.en.json",
-                "sha256": "6c30620588ab4ee384bea8f2bdcf2f32569f90b4b66a71b5914419d4466d26c6"
+                "sha256": "f19f8ae1098b3d31007341650bc04ab2b9565cf81a17eb853f52aabf2a0949fa"
               },
               "zh": {
                 "path": "shiyu/62001/details.zh.json",
-                "sha256": "aab366870e10e30ee51e1ac3874ff06c66e75b986ccb119695015f301e3e86af"
+                "sha256": "30ab925d97252d41bbde790fe4be342f2a4262dc7f5a9f228adf4ec364ec39b9"
               }
             }
           },
@@ -20839,16 +20839,16 @@
           "files": {
             "data": {
               "path": "shiyu/62002/data.json",
-              "sha256": "46382372df1d69dbcd3c7d80d21dea6731070c87299511300384ba05c73c1b0e"
+              "sha256": "fcaaa1a98f94920b9d0ddbb67d4e66120620a84ea7e87d8b006cb9bef42c8888"
             },
             "details": {
               "en": {
                 "path": "shiyu/62002/details.en.json",
-                "sha256": "0fd50623e9bbae9f86e6c013889d20c61b87a947dd1dbc13e34a7dad592fac00"
+                "sha256": "51908e5b5ecd721a13eda950bf6ab5b813f9aac342527aaf830adbd5666d9f44"
               },
               "zh": {
                 "path": "shiyu/62002/details.zh.json",
-                "sha256": "402ee6489d4bd4743e8cbc9f797f110458f47b2666786fb524703a5a72784d2f"
+                "sha256": "a1707bea730d858691efb4fd76aa8fd79de799f7d50e896b440f3e2cc7092883"
               }
             }
           },
@@ -20868,16 +20868,16 @@
           "files": {
             "data": {
               "path": "shiyu/62003/data.json",
-              "sha256": "775e427ca8e2d2af3863f4a2fe5bd5a91f067f748cca18f9b56010d756b7ee18"
+              "sha256": "b9882c583f9aef283e460878a9e998f7a4dd373a1e8cfa8c0f545a967f6165aa"
             },
             "details": {
               "en": {
                 "path": "shiyu/62003/details.en.json",
-                "sha256": "fbc3c113e52ff6645cbb40a70ea3bf032bce044cc414d5ae8f00566843dd7295"
+                "sha256": "45db6cbe9f226798df7984316464206a80911aac284eda531f2edc899cf835f8"
               },
               "zh": {
                 "path": "shiyu/62003/details.zh.json",
-                "sha256": "b2f37eb04e5301e01a3732c48d894a73f55c28d105a4719cae97d945ce0d6ed0"
+                "sha256": "efcc0b46476459805260d8310ff606246887c28ca79e9c238c15c7eb7dfe53d2"
               }
             }
           },
@@ -20897,16 +20897,16 @@
           "files": {
             "data": {
               "path": "shiyu/62004/data.json",
-              "sha256": "7139225dd9d5558fc8316f3bcbcc26fa0f30286eafd2e93a44545fe100914b1c"
+              "sha256": "541da1e68e865b23389a53a64c1f0181d1c2c4b89dc7c3bab96e250ccb185f2c"
             },
             "details": {
               "en": {
                 "path": "shiyu/62004/details.en.json",
-                "sha256": "f1775e77924804fb46df2699c4e058c3e87f8794a44134077b3734ebb8bdf5c2"
+                "sha256": "15169fbf808941c3437b0225210639876a8ea709746eef41a9fb574eec3c578a"
               },
               "zh": {
                 "path": "shiyu/62004/details.zh.json",
-                "sha256": "3d776a1af4c6c927213cfe9c1793d56dc3c2db9a879e933b274f435d3791fc73"
+                "sha256": "5d8519e967f71cb1a974773c09826dce05e870eaafa976d732801579799a0f77"
               }
             }
           },
@@ -20926,16 +20926,16 @@
           "files": {
             "data": {
               "path": "shiyu/62005/data.json",
-              "sha256": "91479f62660dd18787dae15e10ac6ef6c38a2d5ed42fa3e4b80980ffe29e97e3"
+              "sha256": "927f367c4614a2fd092aff297f4045cb975c56c6858606961e2f8660448cf7ed"
             },
             "details": {
               "en": {
                 "path": "shiyu/62005/details.en.json",
-                "sha256": "267b988d1e1bf952e8c5b7c668ca56527cfc8c69dce8597bab0023217c2c81ed"
+                "sha256": "087e19df26158bc101dff8f94524ce983d9ded6d0181b04b9003d879554360db"
               },
               "zh": {
                 "path": "shiyu/62005/details.zh.json",
-                "sha256": "793157e2b0458c37a8ae034e1fe0d16c6a3b5a513b98790109ebc00fb379479c"
+                "sha256": "21b0ac5f2ae694bf44db4db727999ad3b23dbac3401fb16027cde5eddeebbc67"
               }
             }
           },
@@ -20955,16 +20955,16 @@
           "files": {
             "data": {
               "path": "shiyu/62006/data.json",
-              "sha256": "83ba3215b96f9f530401cc0dadb1068bb9b5c4c72bb7ded174187177037633ec"
+              "sha256": "95e43e1d6e562b50d22a7b7080517472293a07dfaa91d12fccd60f00200d146f"
             },
             "details": {
               "en": {
                 "path": "shiyu/62006/details.en.json",
-                "sha256": "58ee73d9fd2398fd2a2a183a10b16b98ac196543616774d1bdf4f1315e6f6765"
+                "sha256": "c4ba49516d426a508356b6689128315186c00eecf610fb1eae5e302ff7f7f542"
               },
               "zh": {
                 "path": "shiyu/62006/details.zh.json",
-                "sha256": "a1696f6bafecb9cf8894fa4c76127b0a43033417e0e637b9852691692faea213"
+                "sha256": "5a25de76e7b76942b6955ed5a63b3f24e34182204c7e46003d9c9403d862c9fb"
               }
             }
           },
@@ -20984,16 +20984,16 @@
           "files": {
             "data": {
               "path": "shiyu/62007/data.json",
-              "sha256": "d3c37813098abdc8d60939e3260fe0e39c622e0d0e38c58ab218e9aa1b9a1f9e"
+              "sha256": "1c09e0e62595d51c5bc7a386c5f33131c7b8efe0e3774d540fd336425dbc6ce9"
             },
             "details": {
               "en": {
                 "path": "shiyu/62007/details.en.json",
-                "sha256": "ed9e9bd6e3bbb46e1433085baede08a43757e60c5df567aa8005c8c5c2de7888"
+                "sha256": "aa42cde4cd98dfc95394eb37b3565af9d7e312eb8c112b8cb656390e401c2087"
               },
               "zh": {
                 "path": "shiyu/62007/details.zh.json",
-                "sha256": "42cd245e0bcb267c3f7a6d1413f0e9acd410c0c58035513979c3931fff1a1ebc"
+                "sha256": "af7a1821b58cf9907c2797076a454c23fdcabdc8bc1d13ed1b86bfe4747184ba"
               }
             }
           },
@@ -21013,16 +21013,16 @@
           "files": {
             "data": {
               "path": "shiyu/62008/data.json",
-              "sha256": "49462edffc986084d0f815b86a3adf793ab2772fe7c1e645cd946cdf687e387e"
+              "sha256": "cff9ec409b57cec2cd111917fdcdb32297b65e67394360a91af4628182248dd5"
             },
             "details": {
               "en": {
                 "path": "shiyu/62008/details.en.json",
-                "sha256": "2cd871fecf073c86c9fbfe6a091d8e615f8221ba42e2615505be4e5393f8097f"
+                "sha256": "e35b5c170c2547e454b8e3de747abefbfc0cacc6c593bffb5303a0ccafb521e5"
               },
               "zh": {
                 "path": "shiyu/62008/details.zh.json",
-                "sha256": "9b5814eb48a8f27c1e474992af026248717f9b97615a6ebc7b6c14e66e5822eb"
+                "sha256": "140691f3bdaac70f86e80290de29a49c3addb17c23e51b951358ea30ca8a137f"
               }
             }
           },
@@ -21042,16 +21042,16 @@
           "files": {
             "data": {
               "path": "shiyu/62009/data.json",
-              "sha256": "ba174058c7ecc5ca323e5d4a8c70e073c7aef67f6abdf9d656beb0afa790778f"
+              "sha256": "18436579c296b550c0d4927b4f356c46aa1b744d7def7972630a892d4f280fd6"
             },
             "details": {
               "en": {
                 "path": "shiyu/62009/details.en.json",
-                "sha256": "46d5155e57d5ce556867ffc048b21d87bb79f4ab317793f8452aa07866825753"
+                "sha256": "1682557dfa5a3d9d0fc73cb5485c8c4392e0c87ed8f43681fa797ce2deffad9d"
               },
               "zh": {
                 "path": "shiyu/62009/details.zh.json",
-                "sha256": "7bd5a025ee4219108edb1ead57d3c34bc1a6c551e6da54f0acaee6941707103d"
+                "sha256": "e6ce6feb2f7bc4d0b72eebe0c497068340e9eb5605c50c4a5b0a46c0a6087a51"
               }
             }
           },
@@ -21071,16 +21071,16 @@
           "files": {
             "data": {
               "path": "shiyu/62010/data.json",
-              "sha256": "601580a8a0e8f4cde61dd6509a272becacd520b3c14d5f81f287a5f21712346c"
+              "sha256": "b08c539f6f56b35dfde0a086ce1a9257f797291523bf214a1d0550e0c008edd9"
             },
             "details": {
               "en": {
                 "path": "shiyu/62010/details.en.json",
-                "sha256": "b877d588b57a285b5e629f580b63f82328c7c0cce4ec6df16d2737ee90848f1e"
+                "sha256": "4fa66d884f3c93dcadb961c492d22730b94cea3f6cfb292761b359373c73da60"
               },
               "zh": {
                 "path": "shiyu/62010/details.zh.json",
-                "sha256": "2241c273f2381adb14d9fa26700c3bce6ff21f19bf3534c55c4c465b89716e04"
+                "sha256": "6e97c523bc53a45f5e6749a1b9cc226f43d999c595500f4b85a7d27982343fa2"
               }
             }
           },
@@ -21100,16 +21100,16 @@
           "files": {
             "data": {
               "path": "shiyu/62011/data.json",
-              "sha256": "ecbbcfa167fc25ed874b189a5ccaa862909c10f9d4fd972b7302af3176fb2836"
+              "sha256": "48691db741cf322c52cce3b588d29e6cdf23b1e872fe65a8ec5166d98065b1f7"
             },
             "details": {
               "en": {
                 "path": "shiyu/62011/details.en.json",
-                "sha256": "031bae7dba5a094a639c347943b792cccb4bbc19272f1163183a5e22783dff4f"
+                "sha256": "1d23f9adc5e7af935dfdcaa570697a8f3c3589273abbef9c7698e50300d87fd4"
               },
               "zh": {
                 "path": "shiyu/62011/details.zh.json",
-                "sha256": "39f40ad66510cd352b325d0804e3a52e2b6ea24531fe77f5faf0e1c8a9deeca0"
+                "sha256": "dccf0c62518a13af196927b624860c83fac4df5609e831181a23d431712f2553"
               }
             }
           },
@@ -21129,16 +21129,16 @@
           "files": {
             "data": {
               "path": "shiyu/62012/data.json",
-              "sha256": "fb1626d668a1266fa825e06dfb5a9319d38f8878e0154d23d7eb83c5996c57fd"
+              "sha256": "b885befe18bb12c279b91411fd1cb70033bab0d88e22f6c874119f831778c2b6"
             },
             "details": {
               "en": {
                 "path": "shiyu/62012/details.en.json",
-                "sha256": "66802b1b59e00d2b36e0491d56c3e46c26d75a82ec0a4b74c58e7d9b30966ac6"
+                "sha256": "342163774a088b969a99bd19d4caef8da282df494696d21243f497e90e1f8601"
               },
               "zh": {
                 "path": "shiyu/62012/details.zh.json",
-                "sha256": "142a991eceb54a323d50d199cbf65006e37a5ba6e07e706ef55d91bb51a0e906"
+                "sha256": "0fa79f16ef16d16e84a0241812a9042fe88006dfe085656c56498126a144d96b"
               }
             }
           },
@@ -21158,16 +21158,16 @@
           "files": {
             "data": {
               "path": "shiyu/62013/data.json",
-              "sha256": "5bf97a54d2d627c6d0611a704e498253ecbf11274e2a62c9db8c2effef9d6eb4"
+              "sha256": "8a9b484b935688781a91f87fa0eb78f843a2327109a4b79898504cda3784dfe0"
             },
             "details": {
               "en": {
                 "path": "shiyu/62013/details.en.json",
-                "sha256": "f1430988155dd62249d2e321d44426f8a52722aca658771ffb4fbca485a7569b"
+                "sha256": "b36a30479fb5375cd149d72aeb4044414a9c59f3d6969ea35628c7bad8c336b8"
               },
               "zh": {
                 "path": "shiyu/62013/details.zh.json",
-                "sha256": "09710cf7d66ccc7cd47ba9f831edc32e8ad980525d81a4c4b4917b895bc47ea0"
+                "sha256": "b397fffceefeb55005bc39a57c897867890012da6ec953bd4fabcbc34cafc75a"
               }
             }
           },
@@ -21187,16 +21187,16 @@
           "files": {
             "data": {
               "path": "shiyu/62014/data.json",
-              "sha256": "ad47ce2a6bd77ec75637efdccfe47fb07cf710f64075ae6580188f9080e26538"
+              "sha256": "a5c4b124f26a567821ed45bca954f6b5be760e64bb94b4e27a250772a49a7b12"
             },
             "details": {
               "en": {
                 "path": "shiyu/62014/details.en.json",
-                "sha256": "8e03442cb8812e8a10bcc180f0a1e2a00006a57cfd4f6bb2c342c98035f4d3b0"
+                "sha256": "f0c2fe2e7ee121615f28c5916be514d3592fdafa769e437a5a7432c60aeaf2c2"
               },
               "zh": {
                 "path": "shiyu/62014/details.zh.json",
-                "sha256": "95c215ddd9015e6fca77e1825e8ec1d3a3730f4f5580d4a0475e107b054ea15a"
+                "sha256": "33e51ea9399890e0a19a1d1f5f4194aa1b56057368ec96395388b26996c884e4"
               }
             }
           },
@@ -21216,16 +21216,16 @@
           "files": {
             "data": {
               "path": "shiyu/62015/data.json",
-              "sha256": "30ec5030c37d2523a46d85413f5bb827b5430343994c711b3e8a90ad00594f5f"
+              "sha256": "5ed7216c491f46696d68ae40033873b7801baff771542576bf1ea58bd03da532"
             },
             "details": {
               "en": {
                 "path": "shiyu/62015/details.en.json",
-                "sha256": "a8d376462defcd5915e1365db3fa6e0582ff992d0cc7c8ae774cb0c401c08070"
+                "sha256": "0fe920b7f264e6409aa7d32459e277d772c2c38b6af0e1e2c38d0fbf73083c51"
               },
               "zh": {
                 "path": "shiyu/62015/details.zh.json",
-                "sha256": "629dfddc1a3241c76b564990302507ec709e9f6dc12e0a37517b3384e6e3ed37"
+                "sha256": "f612723f77f5bc0884c7e69d943528c2715831958b0bef693c99d30c8f146a60"
               }
             }
           },
@@ -21245,16 +21245,16 @@
           "files": {
             "data": {
               "path": "shiyu/62016/data.json",
-              "sha256": "08c67a49dc85538fe872157f76688c48aec99f3989beee055f9667378a934fc0"
+              "sha256": "222d07c5ee5c33e3700706097b2cfec0d8902d3758907846c1f8eed838442f58"
             },
             "details": {
               "en": {
                 "path": "shiyu/62016/details.en.json",
-                "sha256": "cf1ac966fe47397b5ec23591729428ea445f9e8931ab1fb43596b771081a0914"
+                "sha256": "159b83aecb57681af5c95509e4267771bb649d2930ca59bf85f1f0906ea73972"
               },
               "zh": {
                 "path": "shiyu/62016/details.zh.json",
-                "sha256": "04cdd649fc1bbb3e3557ad125b17f6dac9fd2327c1928f0186182ad086e24173"
+                "sha256": "f86e78434942ec2576afc380d8995143330005e9f1d6e5c2e48201cf5865e86c"
               }
             }
           },
@@ -21274,16 +21274,16 @@
           "files": {
             "data": {
               "path": "shiyu/62017/data.json",
-              "sha256": "f5465ca1204998c45bb1e3270e4df77c329f165c5f368f9b0f65f6d0104ca256"
+              "sha256": "992f624c1f9665c70b1b0df8dfb6ee71fd76b7c2f90681838ca23e945e366b52"
             },
             "details": {
               "en": {
                 "path": "shiyu/62017/details.en.json",
-                "sha256": "f75e2245ebfe44c6a4b56e35c928c3ce7172c88cdfc1714f056005a7ffba3667"
+                "sha256": "463faf022351638866db9ed51140704d0ee1f641a9988267fc1eac53fa7e38c3"
               },
               "zh": {
                 "path": "shiyu/62017/details.zh.json",
-                "sha256": "5b14d43079530fd27bd41ab7913a5d4707bbc2440a4d8395004de21210eda5c0"
+                "sha256": "bfe510c5973158cb15449afe9f2790815f85175b4a786e9c81113261c3112d18"
               }
             }
           },
@@ -21303,16 +21303,16 @@
           "files": {
             "data": {
               "path": "shiyu/62018/data.json",
-              "sha256": "43bfbef5bce56e9f5418cac58a35692ad314f5069649d6ae212f6225e94b12d2"
+              "sha256": "bac435be796ec993495e00a6119ce21aeac300a999e697f998e36d852c24215a"
             },
             "details": {
               "en": {
                 "path": "shiyu/62018/details.en.json",
-                "sha256": "d48a93f18b1e6d2538dcdc16805dad838573aae6bb1844dfa20187ae31bbcf71"
+                "sha256": "f62d05a406fffdb4d90f46442db70547dcdcf62d74b445cea2eea79dfe69872a"
               },
               "zh": {
                 "path": "shiyu/62018/details.zh.json",
-                "sha256": "9e7ce14e9ccfda0d608d85d33681ef43577e0966d6f31bbc2d649e33bfe7e79f"
+                "sha256": "c0afd34562575f2f02abf259f77e291b54db1eb6c8d73b307db07082909d3a31"
               }
             }
           },
@@ -21332,16 +21332,16 @@
           "files": {
             "data": {
               "path": "shiyu/62019/data.json",
-              "sha256": "3fc4ee185abe41a5bc0b2919a826d56af7cd4bf8d0ff50f6ff1ca7e8dbe3e081"
+              "sha256": "a5b1a30eecd6707c7cafbd667c11c15961571d4c8c2bbf1c40aa1a4c46317741"
             },
             "details": {
               "en": {
                 "path": "shiyu/62019/details.en.json",
-                "sha256": "1dcbbfb0bdb5d4d68e70cbbea81e807c2a23e7e546e1604c13548fd40e590937"
+                "sha256": "f70a1c97b87a0e142081cd010cddaa7184108557f48b6df911853d5438c842fc"
               },
               "zh": {
                 "path": "shiyu/62019/details.zh.json",
-                "sha256": "b7c72c676cac182e333d3e59c0c45b266f9893703ceea37981455aeca2032b22"
+                "sha256": "0e0e50b17c177c63db82f320f0c925fe91bdad57416c724e77688465225e37df"
               }
             }
           },
@@ -21361,16 +21361,16 @@
           "files": {
             "data": {
               "path": "shiyu/62020/data.json",
-              "sha256": "69d3a5c5420665667764f9104a1c84ff964243b9e745b1deab05bcf6036d6a72"
+              "sha256": "2a6b99aef258d157063e15187e365882c4111413d906141e2c619030e781a110"
             },
             "details": {
               "en": {
                 "path": "shiyu/62020/details.en.json",
-                "sha256": "f549a188e5bf58cc812831311966a036d49c3bab8ee507def8b85dcf5f2ac1bf"
+                "sha256": "cdb951aceab24406c85cf99d72f1ef4822e0ac80ce878b5ce4b975d62ae566b2"
               },
               "zh": {
                 "path": "shiyu/62020/details.zh.json",
-                "sha256": "3af842f496d20d011f4100fe3c69e2fdd8d6b1e36b95bf3bfba8be5a8b966acf"
+                "sha256": "179b3560b14435f997700b4e027daf008b8fa23afd39cb0d49df1706f9e5e8d8"
               }
             }
           },
@@ -21390,16 +21390,16 @@
           "files": {
             "data": {
               "path": "shiyu/62021/data.json",
-              "sha256": "110b0fbd0b688f2ea6836fb8b3b0e26d3183edf1ce42b8ba1310665158fa8348"
+              "sha256": "01c3ac21a9d57411f94cfbb32f818b0f8cad6177592e9f0e1beae3d16d3c7038"
             },
             "details": {
               "en": {
                 "path": "shiyu/62021/details.en.json",
-                "sha256": "1c9105c49aa7c8eb33e953fd2777b35428e11ef114b9fe1b97443a47ff5e85af"
+                "sha256": "caa8a8c3986578326ce29cb247bf38808728a2212ebbb2bb1a1107c4695e262a"
               },
               "zh": {
                 "path": "shiyu/62021/details.zh.json",
-                "sha256": "1deb218a62720e17b9399061104afc7c85fb3bca6c9f61f45b1f5ba41dc4b0c8"
+                "sha256": "1fb876d8118d2ec549e55d5017f6f14bf2cefe098fbb2c383ea5922b26692119"
               }
             }
           },
@@ -21419,16 +21419,16 @@
           "files": {
             "data": {
               "path": "shiyu/62022/data.json",
-              "sha256": "286bd7c121a3f9faa6bc21035cd2e7ce36b1c9906dbd31be648feaf63366f079"
+              "sha256": "d55c5cdf0b44840400485cc92856a398c3704b8c2f5a2b6983678d34bbd9dcfa"
             },
             "details": {
               "en": {
                 "path": "shiyu/62022/details.en.json",
-                "sha256": "63652b6902ee96e51b1ab035443f8bfa7135cea401944866b64a340c0c9f937e"
+                "sha256": "ff60407ad4f3167d080897e2f328a1cc4ebc5cf44180cb5c359ef6059fd0c9cb"
               },
               "zh": {
                 "path": "shiyu/62022/details.zh.json",
-                "sha256": "1733b03fed8c815fd862c42231625c76a377f2f9346950b7be85ac00cb699dbd"
+                "sha256": "d3f0e843260b4e92449402f503fb273786ae189810afbc5714727b2af5915965"
               }
             }
           },
@@ -21448,16 +21448,16 @@
           "files": {
             "data": {
               "path": "shiyu/62023/data.json",
-              "sha256": "2bd56a9734214a0f0dfba732c32135a4b54c04b0689389ac9936d93f5d4e0b40"
+              "sha256": "873471b1af86899d4bf71a0def6e8575c9ee9757d06a89a6385edd7dec94422c"
             },
             "details": {
               "en": {
                 "path": "shiyu/62023/details.en.json",
-                "sha256": "b3e4087c4e8ea1aef3a7f498f9f178452622d459156017c90ce045e18450778a"
+                "sha256": "6bc68fb3c84cb3f21a5d48894b4bc946db821fb3c44b96933fed0feca0c3e2ab"
               },
               "zh": {
                 "path": "shiyu/62023/details.zh.json",
-                "sha256": "c7e9881d2176c78e89055a4bbf95de038787d9d3a42bec2e9fc257272b9f8022"
+                "sha256": "a0fa469be01aef8e1ed4ff8a3df46f9b81dadb80bfacb6923d2b5d569e6010bf"
               }
             }
           },
@@ -21477,16 +21477,16 @@
           "files": {
             "data": {
               "path": "shiyu/62024/data.json",
-              "sha256": "00a56334c2b64be15972869cd6421886b654893ea15d1e3fd3b4642b425b8673"
+              "sha256": "c1beec7feb1f2850c616ae4c4dc777284596a742383af451ad42be2565512afc"
             },
             "details": {
               "en": {
                 "path": "shiyu/62024/details.en.json",
-                "sha256": "d54e95c8a8ef3af0f128c8b7f06f6ccdcf9bf7b751b1856b7ffef33c3addf6d2"
+                "sha256": "3e672a436a476c6397606c013beef91a2c888823caf48d7324c072a2a96d932b"
               },
               "zh": {
                 "path": "shiyu/62024/details.zh.json",
-                "sha256": "403e06c13a7600bd6f977c5b44be1516b867b554bb9f3370982e289f5736a944"
+                "sha256": "e8f5f964fddeb28b418811a390a7fc2e73d5b8d2713293a2999cff06b96f66e3"
               }
             }
           },
@@ -21506,16 +21506,16 @@
           "files": {
             "data": {
               "path": "shiyu/62025/data.json",
-              "sha256": "3ffd8b447d1059d413a03b864c9dd906cb9b785e5e39cc918309f04638cae200"
+              "sha256": "09f785db549203b13f628a1ea87f80dc9d6264f578aa09089fbb2a66c272e9bb"
             },
             "details": {
               "en": {
                 "path": "shiyu/62025/details.en.json",
-                "sha256": "03e69fcc77682299b0e6104f07ba95b9f32aea4b71d79d6376c2789ccb9ca934"
+                "sha256": "53555f0e95d00360ac00690caa2c9ea41047a62a86788ff6e9cf30a2e150b218"
               },
               "zh": {
                 "path": "shiyu/62025/details.zh.json",
-                "sha256": "4fcea9e4ac5cc6e9002acb1a7431cc078cefd0b1ef6273d61a102080636d06fb"
+                "sha256": "881d1e300fc06c20dfa5d30df02ea46a696500427ca8a5b5897e63d4f40998e8"
               }
             }
           },
@@ -21535,16 +21535,16 @@
           "files": {
             "data": {
               "path": "shiyu/62026/data.json",
-              "sha256": "1d985614376d3dc408807f00ff5e799afd05eae3871e4271329f5074697a60d7"
+              "sha256": "9bcc3bc0f50162175a663f03a0a6b10e4562979bc05a7137ebe910ae487f21ae"
             },
             "details": {
               "en": {
                 "path": "shiyu/62026/details.en.json",
-                "sha256": "d037d92f34a5b1bcd6bdc76f20f664918c3b1ba84ff0419f6ddc7d88eaaefdb3"
+                "sha256": "95b9672e4d3da3dc54a9ef81760863c32c5ca45143e09cb3f59661b6828e5ff9"
               },
               "zh": {
                 "path": "shiyu/62026/details.zh.json",
-                "sha256": "d6143b67de7150a2c79a537e709bc2d00f497b408f86981344665a8946b798bd"
+                "sha256": "f1c391efed7bc4f92880938176bb85e034cd865596b428697d57eb5228fed7e3"
               }
             }
           },
@@ -21564,16 +21564,16 @@
           "files": {
             "data": {
               "path": "shiyu/62027/data.json",
-              "sha256": "58ee741fc3329e1a95e0b4d77ce93d2de09b895afcfbda2a7424b73ece5b246a"
+              "sha256": "1b8cf7c260381d727e6b2af72f376834aaee33bca5f9678f10ca95ae517270fd"
             },
             "details": {
               "en": {
                 "path": "shiyu/62027/details.en.json",
-                "sha256": "105653f5ff1c60b0ebf9a273b64d26295050137664543ea9ba0a48baeca65501"
+                "sha256": "e081f83d8e989acf5566f6e4f6efde641432db25e3f716bbdfb0772fc70e6993"
               },
               "zh": {
                 "path": "shiyu/62027/details.zh.json",
-                "sha256": "d61e5001ee96c99fb2b72e54520054ec5834d95428cded91547c632c65b7ccd7"
+                "sha256": "b2060909daf2e9dd132bc998c347139ce8a32308ea7bc1d33d694b8853f3f5cc"
               }
             }
           },
@@ -21593,16 +21593,16 @@
           "files": {
             "data": {
               "path": "shiyu/62028/data.json",
-              "sha256": "4a27419c2749e1d1e164db99a1e6b3e3ccdba2d799d29a72d05ac7af7d590281"
+              "sha256": "e613eee7cbf566ed4ebcefc90a2a51f777eddce85e915366f2d5e6add8bbd133"
             },
             "details": {
               "en": {
                 "path": "shiyu/62028/details.en.json",
-                "sha256": "391beb6e47536d38cb4b88db5d08ac4c0bb969110b080870d1e1da7fb8cb1320"
+                "sha256": "8247a2e6f7b50a4632cad9bae0334818c80dfedcabcac9e29d549bb21fedec69"
               },
               "zh": {
                 "path": "shiyu/62028/details.zh.json",
-                "sha256": "b329131646e0334c27ff8653ee2a7901cdfd70a5c17ce3ded609fadbfd775b98"
+                "sha256": "121397350503ad4a65cfa54726b0522d6a2823b5297a30bc6c47aca97724554c"
               }
             }
           },
@@ -21622,16 +21622,16 @@
           "files": {
             "data": {
               "path": "shiyu/62029/data.json",
-              "sha256": "83def9e3475a4461bcdc7af6ee7879166fe32ae9be7d49f6d729b5b997194a14"
+              "sha256": "726d34a89a55509de4b6ae603f3f62c5ce0303a73196da2105393e257504f056"
             },
             "details": {
               "en": {
                 "path": "shiyu/62029/details.en.json",
-                "sha256": "870de41777d605ff29f1d70053fd4a4477016293f1fb4c35bbf749736272d2a7"
+                "sha256": "bea4df3a74eae747493d3a2da750a4a3c897441ba3fa821cba4f92241d3cb878"
               },
               "zh": {
                 "path": "shiyu/62029/details.zh.json",
-                "sha256": "5beb29d5122cc45e2c8f5f917437bf772e0fd15fe12b1d717c9e316ce75d3cac"
+                "sha256": "1bd4c146543797ce4f7f16f7362bdb2d7a098af3a1c7b3522eb104da98406c3b"
               }
             }
           },
@@ -21651,16 +21651,16 @@
           "files": {
             "data": {
               "path": "shiyu/62030/data.json",
-              "sha256": "778c3e9c0455335484fc60f062b029c2982dbfa6b3df4ae174753c74330ae750"
+              "sha256": "140a33a0cf33ce490e9178c8fd676d4f0d33d07e630d24c40dbc07a04335de43"
             },
             "details": {
               "en": {
                 "path": "shiyu/62030/details.en.json",
-                "sha256": "127de8360cd1df6304055b6985f96664d51d4964287bbaa6b41d8587f984fb40"
+                "sha256": "5a4edc46adb714168dd4da52f0195e4e644cc6210e16c24b08772817b365e1b8"
               },
               "zh": {
                 "path": "shiyu/62030/details.zh.json",
-                "sha256": "c30c5087068800c47ce00c26721a331f952e5065ceec3979a600f32f69ff2c72"
+                "sha256": "6c978093a8b3c6a5cdd204371b3d23f16531ee5b2b62faf7085fb4c6111ec9ee"
               }
             }
           },
@@ -21680,16 +21680,16 @@
           "files": {
             "data": {
               "path": "shiyu/62031/data.json",
-              "sha256": "c335c1a3571eb522d46d5bf7eb1baac53c4fefe40b9ab5d074fb96cb365a7fa7"
+              "sha256": "fada29176bf13a83ec9516f616c8265fbee97b0dd973ce3bae60a70ff19b7927"
             },
             "details": {
               "en": {
                 "path": "shiyu/62031/details.en.json",
-                "sha256": "ac88764061e73d65b720989b5b10a6fc1bd91519be43675ad8d98d52afe9b408"
+                "sha256": "023dcd4fac7ee5b5c7b9875113395e5d45ab9733581096591961e07c08971205"
               },
               "zh": {
                 "path": "shiyu/62031/details.zh.json",
-                "sha256": "c7173d0864d74ecc6091712b864f582c2fd53ca777760665d528aa0921786499"
+                "sha256": "da57257a87065e5e6efe9297ded5c0726211fb57358ac5e1553ea2f13913e76d"
               }
             }
           },
@@ -21709,16 +21709,16 @@
           "files": {
             "data": {
               "path": "shiyu/62032/data.json",
-              "sha256": "c7e0efc73991bd2a7a94510797c8a6cae5cbe9c458152d325fe5c88ac98ccff7"
+              "sha256": "17c3860c94a6ffc32cc00dd1a9b19c03f163376c0652200187b869b81ddfec23"
             },
             "details": {
               "en": {
                 "path": "shiyu/62032/details.en.json",
-                "sha256": "2956054ef541af9d10802eea8f0284b032697efbf1f4cca159d97454032e064d"
+                "sha256": "2218742bbc8961ab4553d0ace2f5896164c0333826f428328ad632db1c045cde"
               },
               "zh": {
                 "path": "shiyu/62032/details.zh.json",
-                "sha256": "af37e80788be7b68299108eca51cec6b5fe15af407e0fb22c7f6c699f7615b61"
+                "sha256": "800cdbab97c68aacfcd0adc3b2cfdbfa8070a2b302bce71710060eb846ee5658"
               }
             }
           },
@@ -21738,16 +21738,16 @@
           "files": {
             "data": {
               "path": "shiyu/62033/data.json",
-              "sha256": "8f52feb6ebc82886b69e4bbbf50e431a873390920355f12518b0e0cc70d60ab8"
+              "sha256": "c4876fc9316454b5e29edf9d43e53d1dd213e5fc9800a78e899e6f54a1b674c4"
             },
             "details": {
               "en": {
                 "path": "shiyu/62033/details.en.json",
-                "sha256": "496560483b2b616f367c9e6ad7acbf0132934b4d50fb274fba1b5dffc9b97acd"
+                "sha256": "2f6a5e97b7d694fea0c424c23f66e4ec75f4ac87da6e014b0fc68177d8a2a1eb"
               },
               "zh": {
                 "path": "shiyu/62033/details.zh.json",
-                "sha256": "ffbc931d27f01ecc23a3596277399c297b71d57d219fc42b16f82de4648c7733"
+                "sha256": "c1b66a5dacec86a1012fde973a355503294d44396b523583a002400e27e95f12"
               }
             }
           },
@@ -21767,16 +21767,16 @@
           "files": {
             "data": {
               "path": "shiyu/62034/data.json",
-              "sha256": "22d8f20151faa87f2e822d4b3b82cee3cc5b3a2466eaba37dbc083d843cbb406"
+              "sha256": "cb60188bf1ebb23aca66a9ca37ae151edf20b47bd21c605a0b15b0e1dddaaab7"
             },
             "details": {
               "en": {
                 "path": "shiyu/62034/details.en.json",
-                "sha256": "cf8e0ee44a1cff185f0513fb73a39b1ceee9b81c73f786581f598316765d1fa0"
+                "sha256": "79070af851ec23a714aa71a1942b71ea88289365bc4cab2ffa4aa3761e46d305"
               },
               "zh": {
                 "path": "shiyu/62034/details.zh.json",
-                "sha256": "6e8301951ba3532d3a27edcd3afb3c0c78c9b9233d822d773f9639d28092d5b8"
+                "sha256": "b9d5daef56c8ca455ee732ddde05fe6612b9a7e981b4ae5fa31ff732aeef5fe0"
               }
             }
           },
@@ -21796,16 +21796,16 @@
           "files": {
             "data": {
               "path": "shiyu/62035/data.json",
-              "sha256": "793da441824b9b7abb1432efab53a8c7bfbbad674ab4bab7fa9a2cd67e63914f"
+              "sha256": "27186b3e6647dd7d789a10dfc051096b12f7e860d9d60be0da7b3dc8b5da3b16"
             },
             "details": {
               "en": {
                 "path": "shiyu/62035/details.en.json",
-                "sha256": "1dc4c41d1a5624167ab7bbca301cb8ce884179c179cf9dadd9540d41504b7413"
+                "sha256": "85c193a9dcbdefcc9deba323952d6bf08500283e219f43a39911575f556587b4"
               },
               "zh": {
                 "path": "shiyu/62035/details.zh.json",
-                "sha256": "31dda48170303b5256694fe0ab20ca9a20337f4a9f602f9e413b5c164effbd1f"
+                "sha256": "7256907df016fef56c8a0f4f65971e7488a127c2ba7404104b7e537814506f88"
               }
             }
           },
@@ -21825,16 +21825,16 @@
           "files": {
             "data": {
               "path": "shiyu/62036/data.json",
-              "sha256": "da6a10daf5c1b47d6a9e5e817a2b76e8d7973d6e27c74577dd07ec5d488edef9"
+              "sha256": "cbf6667ddf232b9af0171302fe8d522c933063e87dc7fa11587fb76f95143e8e"
             },
             "details": {
               "en": {
                 "path": "shiyu/62036/details.en.json",
-                "sha256": "91fed3fc92d14fa99f910b7b8e79427a6b76d853ee403ebe554c57208f56bfba"
+                "sha256": "2f44b6055a9f56841d08ee312ae88328429c3ef87f4ff5f161dd0ae2c62ec2ba"
               },
               "zh": {
                 "path": "shiyu/62036/details.zh.json",
-                "sha256": "de5701dcb5fc1eb255aac66bb2c885763c787b0887451a4b75bc8f9de350d994"
+                "sha256": "0adc76829a6ea84d68573f91a80646c8295a80e078088f5610993ed7cad58f14"
               }
             }
           },
@@ -21854,16 +21854,16 @@
           "files": {
             "data": {
               "path": "shiyu/62037/data.json",
-              "sha256": "adefda41934ade01b76b44bb17883d31b22cdd12403cafeca72845fa1741b473"
+              "sha256": "76d5c825148f3815542978e4805c306d143429d9229bfe8408c3cf6c950343d0"
             },
             "details": {
               "en": {
                 "path": "shiyu/62037/details.en.json",
-                "sha256": "7622f2bc58e54b5449da0d8cc648e52f8768926ec8bb74d6d9c363559c612b3d"
+                "sha256": "77890d66b5632108319c5d8c54da2892f97dfe1119052e7ca509b27d3e54e6fe"
               },
               "zh": {
                 "path": "shiyu/62037/details.zh.json",
-                "sha256": "aab1bb0bf95f6f1b2d97d975a68e07e2cd0bdc7c0ca4f567b2477a1114e9a796"
+                "sha256": "d9c7f53d12f15def00331e82fd544cdef45814260b2c8d9cdb03d053d0c19971"
               }
             }
           },
@@ -21883,16 +21883,16 @@
           "files": {
             "data": {
               "path": "shiyu/62038/data.json",
-              "sha256": "a8864f92da1c54f824c89a7d07a0ac6b0bc546e2bc233693edda5aa675590e52"
+              "sha256": "917198c867584faabf20d775722865289cf9dea7ffe15814aa79edc7a6f04d98"
             },
             "details": {
               "en": {
                 "path": "shiyu/62038/details.en.json",
-                "sha256": "e894f7497c77e5865b85ecaa005dbbddac68d4614663a2c4127b0f9c62d5455f"
+                "sha256": "6bada027d5105ef96cc009cfa9c7dbbacc20629d6e38403f8f1327c4d0fa29f9"
               },
               "zh": {
                 "path": "shiyu/62038/details.zh.json",
-                "sha256": "3935b2f2f3c76691a47492e6b1b7ee2aa8d104117ede99db7f82181df2a02ad1"
+                "sha256": "c9628842591db4deed03ea98e98ec3a511977c57d8e0ae1c2a03a40058434dd9"
               }
             }
           },
@@ -21912,16 +21912,16 @@
           "files": {
             "data": {
               "path": "shiyu/62039/data.json",
-              "sha256": "adefbaa4a705e0652021352e66a7eb0469744c5b49571acd3fddb58d52ac5081"
+              "sha256": "a1f6ab9c1c66009ad246c62d2d14a5646dccca3563934b703150eefa07a7fb11"
             },
             "details": {
               "en": {
                 "path": "shiyu/62039/details.en.json",
-                "sha256": "f897c10d865cc10a0b0bba08baaa84b7aeb0c76b8257c6287c01f026471c9cd2"
+                "sha256": "9666fec8bde3729e8f69a93b06c2f32b829b6386017465d6f169c5decfd18082"
               },
               "zh": {
                 "path": "shiyu/62039/details.zh.json",
-                "sha256": "f2b7f05e35bf6d08057015bb8ae633a12f51807279e0d50c114654a7562ee4fe"
+                "sha256": "09b78a8c24c99e52682f8723d8a3d000e84615f6df6c07f3b4378a75cec17f87"
               }
             }
           },
@@ -21941,16 +21941,16 @@
           "files": {
             "data": {
               "path": "shiyu/62040/data.json",
-              "sha256": "5bd062d14fde3484de0d624baddab816fefccb410a43e72fa0150978e89b62c3"
+              "sha256": "a36d8b3fe199afb9e5b72ae828bb37f20786659b9dfb08aaa8da1ad11f14cdb2"
             },
             "details": {
               "en": {
                 "path": "shiyu/62040/details.en.json",
-                "sha256": "440f0816bb44e97778bd925241d1933a6bdd1c983d5e78824a3864efd5e273fa"
+                "sha256": "7a05a101f5fae18225eff7fee5a0f3e45c0f9c10c92e752fca8b89a007eee3a4"
               },
               "zh": {
                 "path": "shiyu/62040/details.zh.json",
-                "sha256": "2b5d0da1485f536c04bd6679d53cc3e4878f6d0b1207abad612665942282465a"
+                "sha256": "85444757e7bbbd758ffaf80cb5dddc27d112b18e35d8f9cea14c1af20f8c1ab1"
               }
             }
           },
@@ -21970,16 +21970,16 @@
           "files": {
             "data": {
               "path": "shiyu/62041/data.json",
-              "sha256": "f9a4d12042a989d59c541dcf5fa9ed214714ff37fd40d3a19f2a3d21019d8eca"
+              "sha256": "6270bb8892d41fc7b3cb9483ad4507bd45220214e6d30b271608ec6ba9157dd1"
             },
             "details": {
               "en": {
                 "path": "shiyu/62041/details.en.json",
-                "sha256": "8c7e00087c9dfe628135583f8645419028d462d93af47a619a875207dc0c30b0"
+                "sha256": "7fa7d5f4f6186bbafb74d6b246fd770aa2964b3ec37ab03d793b9c0fcc89c596"
               },
               "zh": {
                 "path": "shiyu/62041/details.zh.json",
-                "sha256": "5a389f5cb414ec74864885a9841b0c09f5663a246fbc11b2b8623fb61f08170b"
+                "sha256": "b5224d930c73c32f717cfd495f10ce724693bd0f378ac2876ab7c68878e0f0f8"
               }
             }
           },
@@ -21999,16 +21999,16 @@
           "files": {
             "data": {
               "path": "shiyu/62042/data.json",
-              "sha256": "0ac71c0c711f8c407ae53a1a80179b37dfdcd670cb1ef31aedea57197cae5cd4"
+              "sha256": "8a7198df33d77ca013604bcc34c5e9272d3fb0c2793f4735c07981caa611c2f8"
             },
             "details": {
               "en": {
                 "path": "shiyu/62042/details.en.json",
-                "sha256": "320f9222018433cd9351ba1c9a42ec46961f78f41147bcf8fff03ab8d5aa76bb"
+                "sha256": "aab2c03f40b227e8584b7098257b41ff736e7bec76727b7493ffb4d1d5415888"
               },
               "zh": {
                 "path": "shiyu/62042/details.zh.json",
-                "sha256": "c2be51b8b4155aaf0f5c35f7760b01b74eea9c54a106516406cd58f3b29fb542"
+                "sha256": "ad5b79dbbac3f162a69ad4002adba8d7c878f43ad4fd4613bbddc43471e07846"
               }
             }
           },
@@ -22028,16 +22028,16 @@
           "files": {
             "data": {
               "path": "shiyu/62043/data.json",
-              "sha256": "fda80896285b03690e5ad51e224512050632f320283a7d83d156638c32676b2f"
+              "sha256": "8069cfa59f772fa57a87b13c8d4e2546866f1ffa5ca143964c012c2c984fbd94"
             },
             "details": {
               "en": {
                 "path": "shiyu/62043/details.en.json",
-                "sha256": "1487a7a072a8eacd5a4a505e870264ae0efbf3a149c086a182ea69e611fe7aea"
+                "sha256": "5e3ff1369f3d1ec5c737ad7154005679aaa6c0e0edaa7652912604b839452180"
               },
               "zh": {
                 "path": "shiyu/62043/details.zh.json",
-                "sha256": "ed47a476ef2e1128051f0a153dd609bdc4cd229aae2e02335884d4372918eefd"
+                "sha256": "26306bd2e81e75257e567de70e5bd37c4396f3cbade6034902389195827ede34"
               }
             }
           },
@@ -22057,16 +22057,16 @@
           "files": {
             "data": {
               "path": "shiyu/62044/data.json",
-              "sha256": "bbc0657ebcdf990d240a9c35ac5a26e46d195a6baed5d22f588d3c8cbeee27b7"
+              "sha256": "b568206c4d40528514f3a5ce6fff83731b6cd68b6e230ad63ec82bcae17d6620"
             },
             "details": {
               "en": {
                 "path": "shiyu/62044/details.en.json",
-                "sha256": "4881ec58730b6b8a092f5befacc47bdea90462bf729f30d86f8df2ae9111ff37"
+                "sha256": "555d3905bae6b0eaf58f539cc7582d2587fbf901c027e0be19ab48524cf7d15e"
               },
               "zh": {
                 "path": "shiyu/62044/details.zh.json",
-                "sha256": "9724ce4c2c61e12253ad613ca04ad166a7b804ecbc0646d42dba3725a088b65e"
+                "sha256": "acb17598fc7077e233815e83af53a3e5d7e992cc1c363a08e46a94b3f88dc67c"
               }
             }
           },
@@ -22086,16 +22086,16 @@
           "files": {
             "data": {
               "path": "shiyu/62045/data.json",
-              "sha256": "d5ff012511679bc2add86edddb03c9b8711693996901b117e53beb0372ab10fa"
+              "sha256": "a3c9e755d8d1b6537d0bad72c951acfa3b9e04c7345bc8c9eee042722c53a132"
             },
             "details": {
               "en": {
                 "path": "shiyu/62045/details.en.json",
-                "sha256": "1f7271016ca8f19e21ff0fa6f41cca4c9ac728a30992f2b0e3ab377e828444f1"
+                "sha256": "0e1e48b8dba09c9a70a52cad0ddd3cc6ee83c0f42bbab0d45952e798fce912bf"
               },
               "zh": {
                 "path": "shiyu/62045/details.zh.json",
-                "sha256": "b7c7ef1b6a32338f910557a0ba3988c173fbc456d6a1667fad3c1be5d70283e2"
+                "sha256": "a39ca5d7bec969640711d37bd6a94ffc04680da0bf2f966f4aa1476935e1b397"
               }
             }
           },
@@ -22115,16 +22115,16 @@
           "files": {
             "data": {
               "path": "shiyu/62046/data.json",
-              "sha256": "5d9908b9e5fb7b4264685334a36911dade6a23b0903451b388a5aa6039051793"
+              "sha256": "22c5eb4ae2899454d12ff072737b34f0891f20139e5ce741af38e0326e0d6aa5"
             },
             "details": {
               "en": {
                 "path": "shiyu/62046/details.en.json",
-                "sha256": "202fb664e8103786eeb9a90cf1d03041d13fc25dd1097e88633b9d284f8cdf40"
+                "sha256": "51f1c615fd93538bfdda84e2f529687a2a840ddfdbc0f17432c4e69d87789cb2"
               },
               "zh": {
                 "path": "shiyu/62046/details.zh.json",
-                "sha256": "acd7b3b1284ebdb96bb3f5b11d5a10c7d77840700271b2070498885584cd5602"
+                "sha256": "ba1a30e0efc69c39e621bdf47b2ef765e7d565ed431a25f63939bc9a5dd22877"
               }
             }
           },
@@ -22144,16 +22144,16 @@
           "files": {
             "data": {
               "path": "shiyu/62047/data.json",
-              "sha256": "e9f0a389949e8f7ed9bc8a08c75c04daec30c27171c44b0a5817694faa746dd3"
+              "sha256": "d5ad741cfbf51229686f20f93677dbfd832fe115ee97e51bb5bb00ebf46fea35"
             },
             "details": {
               "en": {
                 "path": "shiyu/62047/details.en.json",
-                "sha256": "0cfec5862bb91a17294bafbd38e8f3a4dcaf6b6cb713f6838bab53ff1247f071"
+                "sha256": "78409ea8d660967c2b3ec196f7b057f3fb1ab8ee575162005b64a9268e82cf6a"
               },
               "zh": {
                 "path": "shiyu/62047/details.zh.json",
-                "sha256": "3f1333076e214e1e762d4d659979d7cf3de1315b68fdcf3c67553bc8ba0de0ba"
+                "sha256": "898c7cad6730a1a05f3042ea827030a9adecee2936ad43ac07f3195e6048e089"
               }
             }
           },
@@ -22173,16 +22173,16 @@
           "files": {
             "data": {
               "path": "shiyu/62048/data.json",
-              "sha256": "bd255012a1cb594a4ab8c9db2e427b3e7bed3a84fbe33ba0919663d126681605"
+              "sha256": "092af0431b53b0636c4880b304b3439e01666b184d5102ae379c881bcd7d3642"
             },
             "details": {
               "en": {
                 "path": "shiyu/62048/details.en.json",
-                "sha256": "8f768f29f56ce71ef6e149c977246b53831eec5f0b2712a0394062e3666fce48"
+                "sha256": "ed696cd3cb9dd8af857b37fb1463041cf69cd6f1ed56b8828daa06e29f3bc257"
               },
               "zh": {
                 "path": "shiyu/62048/details.zh.json",
-                "sha256": "f18da5d5e1c19dabe616f2cdc23f0804519064bcb4ea161e7f42819b1b8eb90f"
+                "sha256": "b0e083d252bf132baa808260dbdae0a17d36b8e31144a35f96b7ae8ecfa81736"
               }
             }
           },
@@ -22202,16 +22202,16 @@
           "files": {
             "data": {
               "path": "shiyu/62049/data.json",
-              "sha256": "f03b483c4e4a9c1510978957494359abe3b9af047bebd30704a43edf8d7e7528"
+              "sha256": "4ce059de05e6c7c244da7690bb26e73d84ab347bfaa26c2f9fa3ab29df0c680c"
             },
             "details": {
               "en": {
                 "path": "shiyu/62049/details.en.json",
-                "sha256": "77f0afb22ee235fa492ea51aa633273b71b9c430d495dcd1c549c5baf78fe594"
+                "sha256": "76a3f0cc47b127699a609632bb0a68c4918aabf7afe37f97ba8f7b96aa2f02f1"
               },
               "zh": {
                 "path": "shiyu/62049/details.zh.json",
-                "sha256": "05ddee4523c21ed3e3e0933884ddc5478a6fe945166494583df29a9ad75cc5ad"
+                "sha256": "6ab60ae59bfc6dd6d8f791a07e848c4f11b8c3f62a3396c99622fd2b11684364"
               }
             }
           },
@@ -22231,16 +22231,16 @@
           "files": {
             "data": {
               "path": "shiyu/62050/data.json",
-              "sha256": "66c15a5c49176480c0ca7bbd239279b7382f02cd95af36d796ead193d9b295e3"
+              "sha256": "5cc67e0eb793d5560c62a8665993b670104a02dbd4c1bd695ee84be775dc2ae3"
             },
             "details": {
               "en": {
                 "path": "shiyu/62050/details.en.json",
-                "sha256": "c912dd15a8e619fef87a050ed1304e89e6703fa471e53f77d4c46aa280fac636"
+                "sha256": "cff9dcb57ebc0e1deea610777feda0e5bfc7776cc666c092901ce03aaab7ab27"
               },
               "zh": {
                 "path": "shiyu/62050/details.zh.json",
-                "sha256": "ed5593fcb34da813d1a26b67a33bd10aee3e367568fdbb56eb21f5f877c64210"
+                "sha256": "8a3d6cb1cf2c609efd5232633fe5ffb9fda573e0a8c3d592627dadbf06b4ece3"
               }
             }
           },
@@ -22260,16 +22260,16 @@
           "files": {
             "data": {
               "path": "shiyu/62051/data.json",
-              "sha256": "9ca3ff77ce9f5c9abf47860c2018891e511df769c897c67ecf80e34dc346c311"
+              "sha256": "f64b33c9e8769863adbfe62109b0b708947e079e5f67575f874a257f10b87947"
             },
             "details": {
               "en": {
                 "path": "shiyu/62051/details.en.json",
-                "sha256": "b5c0f19a0151cb45119c2b1626a42d33a1c9d3ccbc0542a5c9e38df437a25aae"
+                "sha256": "a088dbbe5eafa354d405425bf389e14a29654e392a891afc4019ef19b43627a1"
               },
               "zh": {
                 "path": "shiyu/62051/details.zh.json",
-                "sha256": "1b1a69f1afa497fed25c1d799158f232e1432ad413876565a00d11e192af1c87"
+                "sha256": "2781cff4f8e8fa3c0c861b95c81135641b2d81eee16fc4aa5131760ec7475086"
               }
             }
           },
@@ -22289,16 +22289,16 @@
           "files": {
             "data": {
               "path": "shiyu/62052/data.json",
-              "sha256": "089506daf426a08a4cbab56c3d6acab23f0fbf77af234596c2d5771b2e91dfcb"
+              "sha256": "8d06a43408c9ac95d61698f490d5605086635cda092e3af195fe401381247030"
             },
             "details": {
               "en": {
                 "path": "shiyu/62052/details.en.json",
-                "sha256": "54a5bacc1a056c1cc31de6db00f583753159ceee86fc862b30e810b5ec97fab8"
+                "sha256": "a0788df4546dcdb65365538a1a569b141d1a9bafb21c4e0b4829bb2add2873e0"
               },
               "zh": {
                 "path": "shiyu/62052/details.zh.json",
-                "sha256": "086ba6c2228436f14cd7e8241acfccbb6c40bf71ae0c06fd3cb3a37eb1140b05"
+                "sha256": "b152190e1324419f71b9c6c61c15884b398ec674fc6aee154e7d58e66262cffd"
               }
             }
           },
@@ -22318,16 +22318,16 @@
           "files": {
             "data": {
               "path": "shiyu/62053/data.json",
-              "sha256": "f992a3bd0113413791deb095c72ccc0c9cd655e3bed1db3a261015409e7dda39"
+              "sha256": "f1f5999a472a90bb798c6d6f5fba335a9464ccf76d0d6b6703ab0f1e01a2a275"
             },
             "details": {
               "en": {
                 "path": "shiyu/62053/details.en.json",
-                "sha256": "a4bc2ad3e031ebd1adc02522c8c25ca5d3b765ebabf893b71f2e429643fe68d8"
+                "sha256": "09c9b2ee3d95613a20d94d9a8dc1b4438a1f6f7c25603c116de17ff7d5c6f9dc"
               },
               "zh": {
                 "path": "shiyu/62053/details.zh.json",
-                "sha256": "01aedbfc28bd8a72522f769dcb5761e73665cf77ecf40672bb43d972ed6a3474"
+                "sha256": "0cd61df7ea70e25e62baac0206bae7471609c9ae393db1ce02046dce9f15b789"
               }
             }
           },
@@ -22347,16 +22347,16 @@
           "files": {
             "data": {
               "path": "shiyu/62054/data.json",
-              "sha256": "4ceba2f5f08ae2b20d63aa75eafcdb1a14cf5b72bb56ed3b8ccde7e33005dfce"
+              "sha256": "cb4f3b0c57505028a06e678d5292a94665ec088e76d5426ec42fc3ffbb2b1359"
             },
             "details": {
               "en": {
                 "path": "shiyu/62054/details.en.json",
-                "sha256": "64a59c3c0bfd146ee1bf12f2e1970fa35d845a9b2428dc0d1fc18fb22343f168"
+                "sha256": "e2a91f71b942cdb45410fabbf111c224ec3578c0f63b7b6bfa810522ea6ae308"
               },
               "zh": {
                 "path": "shiyu/62054/details.zh.json",
-                "sha256": "a716796404870ece6ff1c427f87f670f194a6a308a52b80f20d83827f10fe3ea"
+                "sha256": "da5a0ef80e2fe9eef6f67b6aff0e4a1d0aa65e656d3162475f86ce6678e013a2"
               }
             }
           },
@@ -22376,16 +22376,16 @@
           "files": {
             "data": {
               "path": "shiyu/62055/data.json",
-              "sha256": "fa75b83060afe44a371352ae3321d10952dc513bdbd657312479bccc4e257544"
+              "sha256": "22905cc106f31cf5f657fa62b0e2930c90e719bc097234277e546594be153448"
             },
             "details": {
               "en": {
                 "path": "shiyu/62055/details.en.json",
-                "sha256": "f07b308e7000298a2767af047bb2abc55a977b766a7267db8bb8c81da34e3275"
+                "sha256": "d2ce1e7c8748c453db4d86171e4abe77559d2b6d039bcee36b6a6d6d240958df"
               },
               "zh": {
                 "path": "shiyu/62055/details.zh.json",
-                "sha256": "0abbd7d487693c0be0723e40465ce72eea0e8298bb374af9bc6b21264bf7ba75"
+                "sha256": "0b4b2d7802fe153115be32b188bd9ca585bc8cdd484642a54357cee597281b4e"
               }
             }
           },
@@ -22405,16 +22405,16 @@
           "files": {
             "data": {
               "path": "shiyu/62056/data.json",
-              "sha256": "8042624908bb9ce897c7f5234eb0e5b6617dc3582e478de7d3a46a150ebd7deb"
+              "sha256": "7b877c5a4a7e8926ee36f278d1ed9e9e7377679b2085df652e4e8df471097214"
             },
             "details": {
               "en": {
                 "path": "shiyu/62056/details.en.json",
-                "sha256": "1aa71bbf7bd92a947581018257d345574d53711a9c0f598afc6ff5d72c70d2fa"
+                "sha256": "31a5f21cc3bc045b9f6444148e5741e3e055fff06927030bec781a795b660d5b"
               },
               "zh": {
                 "path": "shiyu/62056/details.zh.json",
-                "sha256": "9e1749679421450b1a24cfea1be2f0bce4319539c50f0bb1491fb002ff40a391"
+                "sha256": "2383c3182281a6c6e9a693aa1c2ffae40e157e4329baea50c117f1ab3edb82e5"
               }
             }
           },
@@ -22434,16 +22434,16 @@
           "files": {
             "data": {
               "path": "shiyu/62057/data.json",
-              "sha256": "708dcd2c25624db57e2a93bff7cf67dd4b0af9ba9f77655fe518b3a14571be16"
+              "sha256": "0bcf666b2a9969e28d7e1bc0d64cb4cdf536047db8bcec2e8c1a99b8bfadc6b5"
             },
             "details": {
               "en": {
                 "path": "shiyu/62057/details.en.json",
-                "sha256": "681863b15be8f5ded8a55b497ee3d76b5e1163df30ad3bedc56f916acb6fa20b"
+                "sha256": "858117079ea89a2401c1843d4cd3c70222fe15e84be02cf2e393b55bab1f3337"
               },
               "zh": {
                 "path": "shiyu/62057/details.zh.json",
-                "sha256": "8efd0164a4cb7d65a92e4ebe13dd67f44b23b5ba3a115a909686790c8bb4cd5c"
+                "sha256": "cf3b7df3c86069ec84d9dad58fc8571c41db682a35e48f07378740e575192af6"
               }
             }
           },
@@ -22461,16 +22461,16 @@
           "files": {
             "data": {
               "path": "shiyu/62058/data.json",
-              "sha256": "6b687657d0a2cbc0f469596c88529d99430305569f94033e9fad92c3c17ff8ec"
+              "sha256": "2799dcbb61693159121cbca590c211ce66b572221a464ed0a452f89ec59f4846"
             },
             "details": {
               "en": {
                 "path": "shiyu/62058/details.en.json",
-                "sha256": "c714c8046561bc5533b8fbf2e5799fa63d49480262ef6a126816fe14aba9c53c"
+                "sha256": "6bd04c5e3163a6b74afe82425338e91e0897907c4ef8b56573579413a57ff795"
               },
               "zh": {
                 "path": "shiyu/62058/details.zh.json",
-                "sha256": "9d7d0e12fea833c64c8b872f28d029fc4a538543082b0d92536c9ec3c8ac0669"
+                "sha256": "e3bf98821616b79113c8e5d3f0a6d5f48f3f1e02a4993431b71108054329dca3"
               }
             }
           },
@@ -22488,16 +22488,16 @@
           "files": {
             "data": {
               "path": "shiyu/62059/data.json",
-              "sha256": "f686a7d15a1a2d53a7a8e48aed5e32dd0143eaa8890ab4497e3293f2b57a818e"
+              "sha256": "93a649bf2b8dee21006fa5f89ab60f508d02874a69142c6df8a516537a3377d7"
             },
             "details": {
               "en": {
                 "path": "shiyu/62059/details.en.json",
-                "sha256": "1aaa554bf13aea305132bde6ed84203efdc0fb27c39b46ce47bff2fce07bf242"
+                "sha256": "d0a9a44b8212ba4166429e7fea44ac497d591a1f308e31f5609868d4a83de404"
               },
               "zh": {
                 "path": "shiyu/62059/details.zh.json",
-                "sha256": "5e790b33c65445127b6facd4d084c9f67d9cb38bca68aa004f476b7274b71bbb"
+                "sha256": "8afbbe3ace6386552719facef16e89691e1b99a8fdc9f40b813c21d17ccf16d2"
               }
             }
           },
@@ -22512,7 +22512,7 @@
           }
         }
       },
-      "rulesVersion": "nanoka-shiyu-reference/2"
+      "rulesVersion": "nanoka-shiyu-reference/3"
     },
     "simul": {
       "complete": true,
@@ -22613,7 +22613,7 @@
           }
         }
       },
-      "rulesVersion": "nanoka-simul-reference/2"
+      "rulesVersion": "nanoka-simul-reference/3"
     },
     "w-engines": {
       "complete": true,
@@ -26528,7 +26528,7 @@
           }
         }
       },
-      "rulesVersion": "nanoka-w-engine-reference/1"
+      "rulesVersion": "nanoka-w-engine-reference/2"
     }
   },
   "format": "fairy-nanoka-integrated/v3",

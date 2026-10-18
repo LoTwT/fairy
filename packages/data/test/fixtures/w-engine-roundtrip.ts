@@ -8,7 +8,7 @@ function object(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === "object" && !Array.isArray(value)
 }
 
-/** 阶段字典的登记拼写还原：逐阶段还原成员名，未登记成员按原 key 原样保留。 */
+/** 阶段字典的登记拼写还原：逐阶段还原成员名；封闭结构内只有登记成员。 */
 function restoreStars(value: unknown): unknown {
   if (!object(value)) return value
   const result: Record<string, unknown> = {}

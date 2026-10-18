@@ -97,79 +97,81 @@ type LanguageExtraProperty = LanguageExtraLevel["extra"][string]
 type LanguagePassive = AgentDetails["passive"]["level"][string]
 type LanguageTalent = AgentDetails["talent"][string]
 
-/** 共有 key 提取后的语言条目与单语言独有完整条目都必须能由正式类型表达。 */
+/** 语言条目只承载文本：共享成员提取到 data 后不再出现在 details 条目类型上。 */
 export const languageSkinVariants: LanguageSkin[] = [
   { name: "", desc: "", obtainDesc: "" },
-  { name: "", desc: "", obtainDesc: "", image: "" },
 ]
-export const languageSkillVariants: LanguageSkill[] = [
-  { description: [] },
-  { description: [], material: { stage_key: { "1": 0 } } },
-]
+export const languageSkillVariants: LanguageSkill[] = [{ description: [] }]
 export const languageSkillMetadataVariants: LanguageSkillMetadata[] = [
   { name: "", desc: "" },
-  { name: "", desc: "", elementType: 203, hitType: 101, potential: [0] },
 ]
 export const languageExtraLevelVariants: LanguageExtraLevel[] = [
   { extra: { prop_key: { name: "", format: "" } } },
-  { extra: { prop_key: { name: "", format: "", prop: 0, value: 0 } } },
-  {
-    maxLevel: 0,
-    extra: { prop_key: { name: "", format: "", prop: 0, value: 0 } },
-  },
 ]
 export const languagePassiveVariants: LanguagePassive[] = [
   { name: [], desc: [], extraProperty: {}, potential: [] },
-  { id: 1, level: 0, name: [], desc: [], extraProperty: {}, potential: [] },
 ]
 export const languageTalentVariants: LanguageTalent[] = [
   { name: "", desc: "", desc2: "" },
-  { name: "", desc: "", desc2: "", level: 0 },
 ]
 
-// @ts-expect-error 可选图片资源不能显式写 undefined。
-export const undefinedSkinImage: Pick<LanguageSkin, "image"> = {
-  image: undefined,
+export const skinWithImage: LanguageSkin = {
+  name: "",
+  desc: "",
+  obtainDesc: "",
+  // @ts-expect-error 图片资源是 data.skin 的共享成员，details 条目不接受。
+  image: "",
 }
-// @ts-expect-error 可选材料字典不能显式写 undefined。
-export const undefinedSkillMaterial: Pick<LanguageSkill, "material"> = {
-  material: undefined,
+export const skillWithMaterial: LanguageSkill = {
+  description: [],
+  // @ts-expect-error 材料是 data.skill 的共享成员，details 条目不接受。
+  material: { stage_key: { "1": 0 } },
 }
-// @ts-expect-error 可选属性编码不能显式写 undefined。
-export const undefinedMetadataElement: Pick<
-  LanguageSkillMetadata,
-  "elementType"
-> = { elementType: undefined }
-// @ts-expect-error 可选命中类型不能显式写 undefined。
-export const undefinedMetadataHit: Pick<LanguageSkillMetadata, "hitType"> = {
-  hitType: undefined,
+export const metadataWithCodes: LanguageSkillMetadata = {
+  name: "",
+  desc: "",
+  // @ts-expect-error 属性编码是 data.skillList 的共享成员，details 条目不接受。
+  elementType: 203,
 }
-// @ts-expect-error 可选 potential 数组不能显式写 undefined。
-export const undefinedMetadataPotential: Pick<
-  LanguageSkillMetadata,
-  "potential"
-> = { potential: undefined }
-// @ts-expect-error 可选等级上限不能显式写 undefined。
-export const undefinedExtraMaxLevel: Pick<LanguageExtraLevel, "maxLevel"> = {
-  maxLevel: undefined,
+export const extraLevelWithMaxLevel: LanguageExtraLevel = {
+  // @ts-expect-error 等级上限是 data.extraLevel 的共享成员，details 条目不接受。
+  maxLevel: 0,
+  extra: {},
 }
-// @ts-expect-error 可选属性编码不能显式写 undefined。
-export const undefinedExtraProp: Pick<LanguageExtraProperty, "prop"> = {
-  prop: undefined,
+export const extraPropertyWithProp: LanguageExtraProperty = {
+  name: "",
+  format: "",
+  // @ts-expect-error 属性编码是 data.extraLevel 的共享成员，details 条目不接受。
+  prop: 0,
 }
-// @ts-expect-error 可选属性数值不能显式写 undefined。
-export const undefinedExtraValue: Pick<LanguageExtraProperty, "value"> = {
-  value: undefined,
+export const extraPropertyWithValue: LanguageExtraProperty = {
+  name: "",
+  format: "",
+  // @ts-expect-error 属性数值是 data.extraLevel 的共享成员，details 条目不接受。
+  value: 0,
 }
-// @ts-expect-error 可选内嵌身份不能显式写 undefined。
-export const undefinedPassiveId: Pick<LanguagePassive, "id"> = { id: undefined }
-// @ts-expect-error 可选 passive 等级不能显式写 undefined。
-export const undefinedPassiveLevel: Pick<LanguagePassive, "level"> = {
-  level: undefined,
+export const passiveWithIdentity: LanguagePassive = {
+  name: [],
+  desc: [],
+  extraProperty: {},
+  potential: [],
+  // @ts-expect-error 内嵌身份是 data.passive 的共享成员，details 条目不接受。
+  id: 1,
 }
-// @ts-expect-error 可选 talent 等级不能显式写 undefined。
-export const undefinedTalentLevel: Pick<LanguageTalent, "level"> = {
-  level: undefined,
+export const passiveWithLevel: LanguagePassive = {
+  name: [],
+  desc: [],
+  extraProperty: {},
+  potential: [],
+  // @ts-expect-error 等级是 data.passive 的共享成员，details 条目不接受。
+  level: 0,
+}
+export const talentWithLevel: LanguageTalent = {
+  name: "",
+  desc: "",
+  desc2: "",
+  // @ts-expect-error 等级是 data.talent 的共享成员，details 条目不接受。
+  level: 0,
 }
 
 /** 历史语言子集必须先检查引用；默认构建和严格验证继续保证配置的完整语言。 */

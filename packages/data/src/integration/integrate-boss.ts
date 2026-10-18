@@ -58,7 +58,7 @@ export interface IntegratedBoss {
 }
 
 /**
- * 按规则 nanoka-boss-reference/2 校验、复制和拆分单个 Boss 记录。无 I/O、默认值或语言回退。
+ * 按规则 nanoka-boss-reference/3 校验、复制和拆分单个 Boss 记录。无 I/O、默认值或语言回退。
  * 来源校验失败抛出含来源位置的 BossIntegrationError，不返回部分整合结果。
  */
 export function integrateBoss(input: IntegrateBossInput): IntegratedBoss {
@@ -119,7 +119,7 @@ export function integrateBoss(input: IntegrateBossInput): IntegratedBoss {
     if (!isObject(source)) failBoss(context, "详情必须是普通对象")
     if (Object.hasOwn(source, "locale"))
       failBoss(at(context, "locale"), "辅助字段重名")
-    const record = validateBossDetail(source, context, diagnostics)
+    const record = validateBossDetail(source, context)
     if (
       !Number.isSafeInteger(record.id) ||
       String(record.id) !== input.entityId
@@ -172,7 +172,6 @@ export function integrateBoss(input: IntegrateBossInput): IntegratedBoss {
 function validateBossDetail(
   source: JsonObject,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   const namedFields: Readonly<Record<string, { output: string }>> = {
     ...bossSharedDetailFields,
@@ -212,7 +211,7 @@ function validateBossDetail(
       put(
         record,
         bossSharedBlockFields[key]!,
-        validateBossAdjust(source[key], at(location, key), diagnostics),
+        validateBossAdjust(source[key], at(location, key)),
       )
       continue
     }
@@ -226,23 +225,17 @@ function validateBossDetail(
       continue
     }
     if (key === "modes") {
-      put(
-        record,
-        "modes",
-        validateModes(source[key], at(location, key), diagnostics),
-      )
+      put(record, "modes", validateModes(source[key], at(location, key)))
       continue
     }
     if (key === "zone") {
-      put(
-        record,
-        "zone",
-        validateZone(source[key], at(location, key), diagnostics),
-      )
+      put(record, "zone", validateZone(source[key], at(location, key)))
       continue
     }
-    put(record, key, source[key])
-    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+    failBoss(
+      at(location, key),
+      "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+    )
   }
   return record
 }
@@ -280,7 +273,7 @@ function validateField(
   }
 }
 
-/** 登记成员对象的改名冲突与必需检查；未登记成员由调用方原样保留并报告待登记。 */
+/** 登记成员对象的改名冲突与必需检查；未登记成员由调用方整合失败。 */
 function assertRegisteredMembers(
   value: JsonObject,
   members: Readonly<Record<string, BossObjectMember>>,
@@ -297,21 +290,20 @@ function assertRegisteredMembers(
   }
 }
 
-/** 按登记成员转换一个对象：已登记成员校验类型并转换拼写，未登记成员原样保留并诊断。 */
+/** 按登记成员转换一个对象：已登记成员校验类型并转换拼写，未登记成员整合失败。 */
 function transformRegisteredMembers(
   value: JsonObject,
   members: Readonly<Record<string, BossObjectMember>>,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted()) {
     const member = Object.hasOwn(members, key) ? members[key] : undefined
-    if (member === undefined) {
-      put(record, key, value[key])
-      diagnostics.push({ ...at(location, key), kind: "unknown-field" })
-      continue
-    }
+    if (member === undefined)
+      failBoss(
+        at(location, key),
+        "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+      )
     put(
       record,
       member.output,
@@ -323,12 +315,11 @@ function transformRegisteredMembers(
 
 /**
  * 来源 `boss_adjust` 完整共享块的校验与拼写转换；调整 key 原样保留。
- * hp/atk/points 保留原始数值（含负值）；未登记成员随块保留并参与完整值比较。
+ * hp/atk/points 保留原始数值（含负值）；成员逐个登记，未登记成员整合失败。
  */
 function validateBossAdjust(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBoss(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
@@ -343,7 +334,6 @@ function validateBossAdjust(
         value[key],
         bossAdjustMembers,
         at(location, key),
-        diagnostics,
       ),
     )
   }
@@ -354,20 +344,15 @@ function validateBossAdjust(
 function validateModes(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): SourceJson[] {
   if (!Array.isArray(value)) failBoss(location, "字段类型必须为 array")
   return value.map((mode, index) =>
-    validateMode(mode, at(location, String(index)), diagnostics),
+    validateMode(mode, at(location, String(index))),
   )
 }
 
 /** 单个 mode 条目的校验与拼写转换；mode ID 属于详情内部，不与顶层身份建立关系。 */
-function validateMode(
-  value: SourceJson,
-  location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
-): JsonObject {
+function validateMode(value: SourceJson, location: SourceLocation): JsonObject {
   if (!isObject(value)) failBoss(location, "字段类型必须为普通对象")
   assertRegisteredMembers(value, bossModeMembers, location)
   const record: JsonObject = {}
@@ -382,33 +367,23 @@ function validateMode(
       continue
     }
     if (key === "zone") {
-      put(
-        record,
-        "zone",
-        validateZone(value[key], at(location, key), diagnostics),
-      )
+      put(record, "zone", validateZone(value[key], at(location, key)))
       continue
     }
-    put(record, key, value[key])
-    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+    failBoss(
+      at(location, key),
+      "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+    )
   }
   return record
 }
 
 /** 旧结构顶层 `zone` 与 `modes[].zone` 的关卡字典校验；阶段 key 原样保留。 */
-function validateZone(
-  value: SourceJson,
-  location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
-): JsonObject {
+function validateZone(value: SourceJson, location: SourceLocation): JsonObject {
   if (!isObject(value)) failBoss(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted())
-    put(
-      record,
-      key,
-      validateZoneStage(value[key], at(location, key), diagnostics),
-    )
+    put(record, key, validateZoneStage(value[key], at(location, key)))
   return record
 }
 
@@ -416,7 +391,6 @@ function validateZone(
 function validateZoneStage(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBoss(location, "字段类型必须为普通对象")
   assertRegisteredMembers(value, bossZoneMembers, location)
@@ -426,7 +400,7 @@ function validateZoneStage(
       put(
         record,
         "layerBuff",
-        validateBuffDictionary(value[key], at(location, key), diagnostics),
+        validateBuffDictionary(value[key], at(location, key)),
       )
       continue
     }
@@ -434,16 +408,12 @@ function validateZoneStage(
       put(
         record,
         "selectableBuff",
-        validateBuffDictionary(value[key], at(location, key), diagnostics),
+        validateBuffDictionary(value[key], at(location, key)),
       )
       continue
     }
     if (key === "layer_room") {
-      put(
-        record,
-        "layerRoom",
-        validateLayerRoom(value[key], at(location, key), diagnostics),
-      )
+      put(record, "layerRoom", validateLayerRoom(value[key], at(location, key)))
       continue
     }
     if (Object.hasOwn(bossZoneMembers, key)) {
@@ -455,8 +425,10 @@ function validateZoneStage(
       )
       continue
     }
-    put(record, key, value[key])
-    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+    failBoss(
+      at(location, key),
+      "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+    )
   }
   return record
 }
@@ -465,7 +437,6 @@ function validateZoneStage(
 function validateBuffDictionary(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBoss(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
@@ -480,7 +451,6 @@ function validateBuffDictionary(
         value[key],
         bossBuffMembers,
         at(location, key),
-        diagnostics,
       ),
     )
   }
@@ -491,16 +461,11 @@ function validateBuffDictionary(
 function validateLayerRoom(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBoss(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted())
-    put(
-      record,
-      key,
-      validateRoomEntry(value[key], at(location, key), diagnostics),
-    )
+    put(record, key, validateRoomEntry(value[key], at(location, key)))
   return record
 }
 
@@ -508,7 +473,6 @@ function validateLayerRoom(
 function validateRoomEntry(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBoss(location, "字段类型必须为普通对象")
   assertRegisteredMembers(value, bossRoomMembers, location)
@@ -518,7 +482,7 @@ function validateRoomEntry(
       put(
         record,
         "monsterList",
-        validateMonsterList(value[key], at(location, key), diagnostics),
+        validateMonsterList(value[key], at(location, key)),
       )
       continue
     }
@@ -547,8 +511,10 @@ function validateRoomEntry(
       )
       continue
     }
-    put(record, key, value[key])
-    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+    failBoss(
+      at(location, key),
+      "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+    )
   }
   return record
 }
@@ -557,16 +523,11 @@ function validateRoomEntry(
 function validateMonsterList(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBoss(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted())
-    put(
-      record,
-      key,
-      validateEncounter(value[key], at(location, key), diagnostics),
-    )
+    put(record, key, validateEncounter(value[key], at(location, key)))
   return record
 }
 
@@ -574,7 +535,6 @@ function validateMonsterList(
 function validateEncounter(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failBoss(location, "字段类型必须为普通对象")
   assertRegisteredMembers(value, bossEncounterMembers, location)
@@ -613,8 +573,10 @@ function validateEncounter(
       )
       continue
     }
-    put(record, key, value[key])
-    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+    failBoss(
+      at(location, key),
+      "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+    )
   }
   return record
 }

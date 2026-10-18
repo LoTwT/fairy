@@ -161,7 +161,8 @@ export function bangbooSource(): BangbooSourceFixture {
 /**
  * 双语合成输入：公共字段两语言一致，本地化文本各自保留。
  * `code_name` 两语言故意不同：Bangboo 的 codeName 留在各语言 details，不要求跨语言相等。
- * 阶段 3 与属性 21101（阶段 1）为语言独有条目；技能文本完全本地化。
+ * 阶段 3 与属性 21101（阶段 1）为两语言共有条目：严格共享下数值提取到 data，
+ * 名称与格式按语言保留；技能文本完全本地化。
  */
 export function bangbooInput() {
   const zh = bangbooSource()
@@ -169,8 +170,7 @@ export function bangbooInput() {
   en.code_name = "Bangboo Example"
   en.name = "Exampleboo"
   en.desc = "A synthetic bangboo introduction.\nSecond paragraph."
-  // 属性 21101（阶段 1）改为仅 en 提供：zh 删除该条目，en 完整保留。
-  delete zh.level["1"].extra["21101"]
+  // 阶段与属性 key 集合两语言一致；extra 名称文本改为英文，数值保持一致。
   en.level = {
     "1": {
       ...en.level["1"],
@@ -178,6 +178,12 @@ export function bangbooInput() {
         "20101": {
           prop: 20101,
           name: "CRIT Rate",
+          format: "{0:0.#%}",
+          value: 0,
+        },
+        "21101": {
+          prop: 21101,
+          name: "CRIT DMG",
           format: "{0:0.#%}",
           value: 0,
         },
@@ -191,6 +197,22 @@ export function bangbooInput() {
           name: "CRIT Rate",
           format: "{0:0.#%}",
           value: 450,
+        },
+      },
+    },
+    "3": {
+      hp_max: 376,
+      attack: 233,
+      defence: 75,
+      level_max: 30,
+      level_min: 20,
+      materials: { "10": 75000 },
+      extra: {
+        "21101": {
+          prop: 21101,
+          name: "CRIT DMG",
+          format: "{0:0.#%}",
+          value: 2500,
         },
       },
     },
@@ -210,12 +232,6 @@ export function bangbooInput() {
         value: 2500,
       },
     },
-  }
-  en.level["1"].extra["21101"] = {
-    prop: 21101,
-    name: "CRIT DMG",
-    format: "{0:0.#%}",
-    value: 0,
   }
   en.skill = {
     a: {

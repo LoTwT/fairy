@@ -1,4 +1,5 @@
 import * as fs from "node:fs/promises"
+import { nanokaAgentsSnapshotEntity } from "../scripts/nanoka-integration/snapshot-entities.ts"
 import { join } from "node:path"
 import { DatabaseSync } from "node:sqlite"
 import { afterEach, describe, expect, it, vi } from "vitest"
@@ -56,18 +57,22 @@ afterEach(async () => {
   await harness.cleanup()
 })
 
-/** 放大来源记录与详情，用于报告与预算上限用例；返回超过上限的字节数。 */
+/**
+ * 放大维护报告：向 widgets 的来源索引记录注入大量短 key。raw 紧凑写入，每个未知
+ * key 在维护报告里成为一条缩进诊断（含包装开销），实测放大倍率远超
+ * outputExpansionLimit = 16；初代与更新两条路径都能在提交前触发超限拒绝。
+ */
 async function reportHeavySource(input: Awaited<ReturnType<typeof fixture>>) {
-  for (const locale of input.policy.languages)
-    await editJson(
-      join(input.rawRoot, input.version, locale, "character/2.json"),
-      (value) => {
-        const skill = value.skill["g/~"]
-        delete value.skill["g/~"]
-        value.skill[`longkey${"X".repeat(2000)}`] = skill
-        for (let i = 0; i < 1000; i++) skill.description[0][`future${i}`] = 0
-      },
-    )
+  const widgetIds = ["3", "7"]
+  await editJson(
+    join(input.rawRoot, input.version, "equipment.json"),
+    (value) => {
+      for (const id of widgetIds) {
+        const record = value[id] as Record<string, unknown>
+        for (let i = 0; i < 100_000; i++) record[i.toString(36)] = 0
+      }
+    },
+  )
   return (
     Object.values(await bytes(input.rawRoot)).reduce(
       (total, content) => total + content.length,
@@ -254,10 +259,13 @@ describe("current multi-entity dataset", () => {
         await clean(input)
       }
     },
+    120_000,
   )
 
   it("recovers a legacy committed oversized report after process termination", async () => {
     const input = await fixture()
+    // 先建立基线，使被中断的运行是更新：提交版报告携带放大的字段差异。
+    await updateCurrentDataset(input)
     const legacyBudget = await reportHeavySource(input)
     const writer = await child(input, { pause: "new-installed" })
     writer.process.kill("SIGKILL")
@@ -289,7 +297,7 @@ describe("current multi-entity dataset", () => {
     ).toBe(true)
     expect(await fingerprints(input.targetDirectory)).toEqual(before)
     await clean(input)
-  })
+  }, 120_000)
 
   it("creates a complete dataset, repeats without writes to current files, and preserves every inode and mtime", async () => {
     // 生产登记表的整库生命周期覆盖：八类别、48 个实体文件与真实 oxfmt 批次都按原语义验证。
@@ -548,7 +556,7 @@ describe("current multi-entity dataset", () => {
     // 旧快照只用于复验：新候选必须按当前代码规则重建，不能用改标记代替。
     expect((await updateCurrentDataset(input)).outcome).toBe("committed")
     expect((await clean(input)).index.entities.agents.rulesVersion).toBe(
-      "nanoka-agent-reference/5",
+      nanokaAgentsSnapshotEntity.rulesVersion,
     )
     expect((await clean(input)).bytes).toEqual(original)
   })

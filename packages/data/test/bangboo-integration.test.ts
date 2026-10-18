@@ -103,7 +103,10 @@ const expectedData = {
       levelMax: 10,
       levelMin: 0,
       materials: { "10": 15000, "102010": 4 },
-      extra: { "20101": { prop: 20101, value: 0 } },
+      extra: {
+        "20101": { prop: 20101, value: 0 },
+        "21101": { prop: 21101, value: 0 },
+      },
     },
     "2": {
       hpMax: 188,
@@ -113,6 +116,15 @@ const expectedData = {
       levelMin: 10,
       materials: {},
       extra: { "20101": { prop: 20101, value: 450 } },
+    },
+    "3": {
+      hpMax: 376,
+      attack: 233,
+      defence: 75,
+      levelMax: 30,
+      levelMin: 20,
+      materials: { "10": 75000 },
+      extra: { "21101": { prop: 21101, value: 2500 } },
     },
   },
 } satisfies BangbooData
@@ -163,26 +175,16 @@ describe("单邦布纯整合 nanoka-bangboo-reference/1", () => {
       },
       level: {
         "1": {
-          extra: { "20101": { name: "暴击率", format: "{0:0.#%}" } },
+          extra: {
+            "20101": { name: "暴击率", format: "{0:0.#%}" },
+            "21101": { name: "暴击伤害", format: "{0:0.#%}" },
+          },
         },
         "2": {
           extra: { "20101": { name: "暴击率", format: "{0:0.#%}" } },
         },
         "3": {
-          hpMax: 376,
-          attack: 233,
-          defence: 75,
-          levelMax: 30,
-          levelMin: 20,
-          materials: { "10": 75000 },
-          extra: {
-            "21101": {
-              prop: 21101,
-              name: "暴击伤害",
-              format: "{0:0.#%}",
-              value: 2500,
-            },
-          },
+          extra: { "21101": { name: "暴击伤害", format: "{0:0.#%}" } },
         },
       },
     })
@@ -227,16 +229,14 @@ describe("单邦布纯整合 nanoka-bangboo-reference/1", () => {
         "1": {
           extra: {
             "20101": { name: "CRIT Rate", format: "{0:0.#%}" },
-            "21101": {
-              prop: 21101,
-              name: "CRIT DMG",
-              format: "{0:0.#%}",
-              value: 0,
-            },
+            "21101": { name: "CRIT DMG", format: "{0:0.#%}" },
           },
         },
         "2": {
           extra: { "20101": { name: "CRIT Rate", format: "{0:0.#%}" } },
+        },
+        "3": {
+          extra: { "21101": { name: "CRIT DMG", format: "{0:0.#%}" } },
         },
       },
     })
@@ -340,93 +340,82 @@ describe("单邦布纯整合 nanoka-bangboo-reference/1", () => {
     expect(input).toStrictEqual(before)
   })
 
-  it("未知详情字段留在本语言并诊断；共享块未知成员随块保留且参与完整值比较", () => {
-    const input = bangbooInput()
-    change(input.details.zh, "future_field", { nested: [1, 2] })
-    change(input.details.zh.stats, "future_stat", 7)
-    change(input.details.en.stats, "future_stat", 7)
-    change(input.details.zh.skill_prop["9500101"], "note", "说明")
-    change(input.details.en.skill_prop["9500101"], "note", "说明")
-    const result = integrateBangboo(input)
-    expect(result.data.stats).toMatchObject({ future_stat: 7 })
-    expect(result.data.skillProp["9500101"]).toMatchObject({ note: "说明" })
-    expect(result.details.zh).toMatchObject({
-      future_field: { nested: [1, 2] },
-    })
-    expect(result.details.en).not.toHaveProperty("future_field")
-    expect(result.maintenance.diagnostics).toEqual([
-      {
-        entityId: "950001",
-        locale: "zh",
-        pointer: "/future_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "950001",
-        locale: "zh",
-        pointer: "/skill_prop/9500101/note",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "950001",
-        locale: "zh",
-        pointer: "/stats/future_stat",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "950001",
-        locale: "en",
-        pointer: "/skill_prop/9500101/note",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "950001",
-        locale: "en",
-        pointer: "/stats/future_stat",
-        kind: "unknown-field",
-      },
-    ])
-    expectBangbooRoundtrip(result, input)
-    // 共享块内部的未知成员跨语言不一致仍按公共冲突处理。
-    change(input.details.en.stats, "future_stat", 8)
-    expectFailure(input, "en", "/stats", "共享冲突")
-    const noteConflict = bangbooInput()
-    change(noteConflict.details.zh.skill_prop["9500101"], "note", "说明")
-    expectFailure(noteConflict, "en", "/skill_prop", "共享冲突")
+  it("未知字段在 details 各层整合失败并定位来源", () => {
+    const cases: Array<[path: string, pointer: string]> = [
+      ["future_field", "/future_field"],
+      ["stats.future_stat", "/stats/future_stat"],
+      ["skill_prop.9500101.note", "/skill_prop/9500101/note"],
+      [
+        "skill_prop.9500101.1001.future_member",
+        "/skill_prop/9500101/1001/future_member",
+      ],
+      ["level.1.future_stage_member", "/level/1/future_stage_member"],
+      [
+        "level.1.extra.20101.future_member",
+        "/level/1/extra/20101/future_member",
+      ],
+      ["skill.a.future_member", "/skill/a/future_member"],
+      ["skill.a.level.1.future_member", "/skill/a/level/1/future_member"],
+    ]
+    for (const [path, pointer] of cases) {
+      const input = bangbooInput()
+      change(input.details.zh, path, 0)
+      expectFailure(
+        input,
+        "zh",
+        pointer,
+        "未知字段：未在登记表登记，不能进入发布制品",
+      )
+    }
   })
 
-  it("语言独有阶段与属性条目完整留在该语言，共有条目才提取", () => {
-    const input = bangbooInput()
-    const result = integrateBangboo(input)
-    // 阶段 3 仅 zh 提供：整段留在 zh，data 与 en 不包含。
-    expect(result.data.level).not.toHaveProperty("3")
-    expect(result.details.en!.level).not.toHaveProperty("3")
-    expect(result.details.zh!.level["3"]).toStrictEqual({
-      hpMax: 376,
-      attack: 233,
-      defence: 75,
-      levelMax: 30,
-      levelMin: 20,
-      materials: { "10": 75000 },
-      extra: {
-        "21101": {
-          prop: 21101,
-          name: "暴击伤害",
-          format: "{0:0.#%}",
-          value: 2500,
-        },
-      },
-    })
-    // 属性 21101（阶段 1）仅 en 提供：整条留在 en，data 不包含。
-    expect(result.data.level["1"].extra).not.toHaveProperty("21101")
-    expect(result.details.zh!.level["1"].extra).not.toHaveProperty("21101")
-    expect(result.details.en!.level["1"].extra["21101"]).toStrictEqual({
-      prop: 21101,
-      name: "CRIT DMG",
-      format: "{0:0.#%}",
-      value: 0,
-    })
+  it("阶段与 extra 属性 key 只在部分语言提供即失败；共有条目才提取", () => {
+    // 阶段 key 只在 zh 提供：定位到首个提供该阶段的语言。
+    const stageOnlyZh = bangbooInput()
+    remove(stageOnlyZh.details.en, "level.3")
+    expectFailure(
+      stageOnlyZh,
+      "zh",
+      "/level/3",
+      "共享字典成员只在部分语言提供（zh）；严格共享要求各语言同有或全缺",
+    )
+
+    // 阶段 key 只在 en 提供：定位到 en。
+    const stageOnlyEn = bangbooInput()
+    change(
+      stageOnlyEn.details.en,
+      "level.4",
+      structuredClone(stageOnlyEn.details.zh.level["2"]),
+    )
+    expectFailure(
+      stageOnlyEn,
+      "en",
+      "/level/4",
+      "共享字典成员只在部分语言提供（en）；严格共享要求各语言同有或全缺",
+    )
+
+    // extra 属性 key 只在 zh 提供（en 缺失）：按来源路径定位。
+    const propOnlyZh = bangbooInput()
+    remove(propOnlyZh.details.en, "level.1.extra.21101")
+    expectFailure(
+      propOnlyZh,
+      "zh",
+      "/level/1/extra/21101",
+      "共享字典成员只在部分语言提供（zh）；严格共享要求各语言同有或全缺",
+    )
+
+    // extra 属性 key 只在 en 提供（zh 缺失）：并集核对不依赖首个语言。
+    const propOnlyEn = bangbooInput()
+    remove(propOnlyEn.details.zh, "level.1.extra.21101")
+    expectFailure(
+      propOnlyEn,
+      "en",
+      "/level/1/extra/21101",
+      "共享字典成员只在部分语言提供（en）；严格共享要求各语言同有或全缺",
+    )
+
     // 共有属性 20101 只提取 prop/value，名称与格式留在各语言。
+    const result = integrateBangboo(bangbooInput())
     expect(result.data.level["1"].extra["20101"]).toStrictEqual({
       prop: 20101,
       value: 0,
@@ -435,6 +424,11 @@ describe("单邦布纯整合 nanoka-bangboo-reference/1", () => {
       name: "暴击率",
       format: "{0:0.#%}",
     })
+    expect(result.details.en!.level["1"].extra["20101"]).toStrictEqual({
+      name: "CRIT Rate",
+      format: "{0:0.#%}",
+    })
+    expectBangbooRoundtrip(result, bangbooInput())
   })
 
   it("共有阶段无共有属性时保留拆分空壳，可独立还原", () => {
@@ -448,7 +442,7 @@ describe("单邦布纯整合 nanoka-bangboo-reference/1", () => {
     expectBangbooRoundtrip(result, input)
   })
 
-  it("对象成员排列不影响输出，诊断顺序确定", () => {
+  it("对象成员排列不影响输出", () => {
     const input = bangbooInput()
     const reversed = {
       entityId: input.entityId,
@@ -459,10 +453,6 @@ describe("单邦布纯整合 nanoka-bangboo-reference/1", () => {
         en: reverseKeys(input.details.en),
       },
     }
-    change(input.details.zh, "z_field", 0)
-    change(reversed.details.zh, "z_field", 0)
-    change(input.details.zh, "a_field", 0)
-    change(reversed.details.zh, "a_field", 0)
     const expected = integrateBangboo(input)
     const result = integrateBangboo(reversed as IntegrateBangbooInput)
     expect(result).toStrictEqual(expected)
@@ -482,6 +472,7 @@ describe("单邦布纯整合 nanoka-bangboo-reference/1", () => {
       ["level.1.extra.20101.prop", 20102, "/level/1/extra/20101/prop"],
       ["level.1.extra.20101.value", 1, "/level/1/extra/20101/value"],
       ["level.2.level_max", 21, "/level/2/level_max"],
+      ["level.3.hp_max", 377, "/level/3/hp_max"],
     ]
     for (const [path, value, pointer] of cases) {
       const input = bangbooInput()
@@ -696,9 +687,9 @@ describe("单邦布纯整合 nanoka-bangboo-reference/1", () => {
     expect(zhOnly.data.skillProp).toStrictEqual(expectedData.skillProp)
     // 单语言输入时所有阶段与属性条目都视为共有：数值提取到 data，
     // details 只保留各条目的名称与格式。
-    expect(zhOnly.data.level).toHaveProperty("3")
-    expect(zhOnly.data.level["1"].extra["20101"]).toStrictEqual({
-      prop: 20101,
+    expect(zhOnly.data.level).toStrictEqual(expectedData.level)
+    expect(zhOnly.data.level["1"].extra["21101"]).toStrictEqual({
+      prop: 21101,
       value: 0,
     })
     expect(zhOnly.details.zh!.level["3"].extra["21101"]).toStrictEqual({
@@ -760,24 +751,52 @@ describe("单邦布纯整合的空值与特例语义", () => {
   })
 
   it.each(["constructor", "__proto__", "toString"])(
-    "还原辅助函数不把特殊自有字段 %s 误判为登记改名",
-    (field) => {
+    "还原辅助函数不把特殊字典 key %s 误判为登记改名",
+    (key) => {
       const input = bangbooInput()
-      // stats 是完整共享块：未知成员两语言一致才随块提取到 data，不触发共享冲突。
+      // 字典 key 是数据不是字段：skill_prop 技能 key、level 阶段 key 与
+      // extra 属性 key 原样保留，不改名、不改值。
       // change 经 Object.defineProperty 写入自有属性，避开 __proto__ 的字面量语义。
-      change(input.details.zh.stats, field, { nested: [1] })
-      change(input.details.en.stats, field, { nested: [1] })
-      // level 阶段的未知成员不被共享提取，完整留在各语言 details；两语言值可以不同。
-      change(input.details.zh.level["1"], field, "zh-value")
-      change(input.details.en.level["1"], field, "en-value")
+      const skillEntry = structuredClone(input.details.zh.skill_prop["9500101"])
+      change(input.details.zh, `skill_prop.${key}`, skillEntry)
+      change(input.details.en, `skill_prop.${key}`, skillEntry)
+      const zhStage = structuredClone(input.details.zh.level["3"])
+      const enStage = structuredClone(input.details.en.level["3"])
+      change(input.details.zh, `level.${key}`, zhStage)
+      change(input.details.en, `level.${key}`, enStage)
+      const zhExtra = structuredClone(
+        input.details.zh.level["1"].extra["20101"],
+      )
+      const enExtra = structuredClone(
+        input.details.en.level["1"].extra["20101"],
+      )
+      change(input.details.zh, `level.1.extra.${key}`, zhExtra)
+      change(input.details.en, `level.1.extra.${key}`, enExtra)
       const result = integrateBangboo(input)
-      // 生产整合器按自有属性原样保留：不改名、不改值。
-      expect(Object.hasOwn(result.data.stats, field)).toBe(true)
-      expect(result.data.stats[field]).toEqual({ nested: [1] })
-      expect(Object.hasOwn(result.details.zh!.level["1"], field)).toBe(true)
-      expect(result.details.zh!.level["1"][field]).toBe("zh-value")
-      expect(Object.hasOwn(result.details.en!.level["1"], field)).toBe(true)
-      expect(result.details.en!.level["1"][field]).toBe("en-value")
+      // 技能 key 原样进入共享块，条目内容按登记结构还原。
+      expect(Object.hasOwn(result.data.skillProp, key)).toBe(true)
+      expect(result.data.skillProp[key]!.elementAccumulationValue).toBe(34600)
+      // 阶段 key 原样保留在两侧：数值提取到 data，文本留在本语言。
+      expect(Object.hasOwn(result.data.level, key)).toBe(true)
+      expect(result.data.level[key]!.hpMax).toBe(zhStage.hp_max)
+      expect(Object.hasOwn(result.details.zh!.level, key)).toBe(true)
+      expect(result.details.zh!.level[key]!.extra["21101"]).toStrictEqual({
+        name: "暴击伤害",
+        format: "{0:0.#%}",
+      })
+      // 属性 key 原样保留：prop/value 提取到 data，name/format 留在本语言。
+      expect(Object.hasOwn(result.data.level["1"]!.extra, key)).toBe(true)
+      expect(result.data.level["1"]!.extra[key]).toStrictEqual({
+        prop: zhExtra.prop,
+        value: zhExtra.value,
+      })
+      expect(Object.hasOwn(result.details.zh!.level["1"]!.extra, key)).toBe(
+        true,
+      )
+      expect(result.details.zh!.level["1"]!.extra[key]).toStrictEqual({
+        name: "暴击率",
+        format: "{0:0.#%}",
+      })
       // 还原辅助函数须按登记表命中与否改名，不读取登记表原型链。
       expectBangbooRoundtrip(result, input)
     },

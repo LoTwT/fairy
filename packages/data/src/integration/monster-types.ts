@@ -1,17 +1,16 @@
-import type { DetailLocale, SourceJson } from "./agent-types.ts"
+import type { DetailLocale } from "./agent-types.ts"
 
 /**
- * Nanoka Monster 整合资料的正式字段定义（规则 nanoka-monster-reference/1）。
+ * Nanoka Monster 整合资料的正式字段定义（规则 nanoka-monster-reference/2）。
  *
  * 上游实体为 `monster`，整合类别登记名为 `monsters`；一条记录表示一个怪物条目，
  * 其 `monsterInfo` 可包含多个内部战斗单位。本层不解释数值曲线、不换算属性编码、
  * 不建立单位与关卡引用的闭合校验，也不建立 definitions 或 core 映射。
- * number 表示原始数值，不承诺单位、缩放或计算语义；未知来源结构使用 SourceJson 保留。
+ * number 表示原始数值，不承诺单位、缩放或计算语义。
  * 顶层怪物 ID、`monsterId` 分组内编号与 `monsterInfo` 内部单位 ID 分属三个身份层次，
  * 只在各自登记的位置核对，不互相推导。
- * 来源索引记录与各语言详情的未登记顶层字段原样保留，并进入整合结果的维护诊断。
- * 运行时原样保留未登记的顶层字段，索引签名让这些字段可以在类型层面读取，
- * 但读取到的不表示其业务语义已经确认。
+ * `monsterInfo` 与 `elementAbnormal` 是完整共享块：跨语言整块比较完整值，单位与曲线成员逐个登记。
+ * 未登记字段整合失败，不进入发布制品；登记成员在对应结构上均要求存在。
  * 不承诺未来来源版本结构不变；合成验收位于 test/monster-integration.test.ts。
  */
 export interface MonsterData {
@@ -37,7 +36,7 @@ export interface MonsterData {
    * 来源 `monster_info` 完整共享块：内部单位 ID → 战斗单位记录。
    * 单位 key 必须等于该单位自身 `id` 的规范十进制形式；它与顶层详情 ID 是不同身份层次，
    * 不要求顶层 `monsterId` 出现在其中。空对象是合法原值（对应无战斗单位的条目）。
-   * 未登记成员随整块保留并参与完整值比较。
+   * 单位与曲线成员逐个登记，未登记成员整合失败；整块跨语言比较完整值。
    */
   monsterInfo: Record<string, MonsterInfoUnit>
 
@@ -46,9 +45,6 @@ export interface MonsterData {
    * key 原样保留，不映射为属性枚举，也不解释数值单位。
    */
   elementAbnormal: Record<string, number>
-
-  /** 未登记的顶层来源字段；原 key、原值原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /**
@@ -88,9 +84,6 @@ export interface MonsterInfoUnit {
    * → 曲线条目。曲线 key 原样保留，不推断曲线种类枚举。
    */
   curves: Record<string, MonsterGrowthCurve>
-
-  /** 未登记的单位成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** `curves` 中一条成长曲线：按等级排列的数值数组与比例。 */
@@ -100,9 +93,6 @@ export interface MonsterGrowthCurve {
 
   /** 来源 `ratio`。曲线比例原值；未换算单位。 */
   ratio: number
-
-  /** 未登记的曲线成员；原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /** details.{locale}.json：本语言的怪物文本、身份副本与派生语言标识。 */
@@ -133,7 +123,4 @@ export interface MonsterDetails {
 
   /** 来源 `card_skill_desc`。当前语言卡片技能说明原文。 */
   cardSkillDesc: string
-
-  /** 未登记的顶层来源字段；留在本语言原样保留，不提取到 data 或另一种语言。 */
-  [field: string]: SourceJson
 }

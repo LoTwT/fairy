@@ -253,10 +253,6 @@ describe("单 WEngine 纯整合 nanoka-w-engine-reference/1", () => {
 
   it("对象 key 排列不影响整个结果与维护记录", () => {
     const input = wEngineInput()
-    change(input.details.zh, "unknown_b", { z: 0, a: 1 })
-    change(input.details.zh, "unknown_a", [])
-    for (const locale of ["zh", "en"] as const)
-      change(input.details[locale].stars["0"], "unknown_stage", 0)
     change(input.sourceRecord, "future", null)
     const result = integrateWEngine(input)
     const reordered = integrateWEngine(
@@ -271,123 +267,29 @@ describe("单 WEngine 纯整合 nanoka-w-engine-reference/1", () => {
         pointer: "/future",
         kind: "unknown-field",
       },
-      {
-        entityId: "940001",
-        locale: "zh",
-        pointer: "/stars/0/unknown_stage",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "940001",
-        locale: "zh",
-        pointer: "/unknown_a",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "940001",
-        locale: "zh",
-        pointer: "/unknown_b",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "940001",
-        locale: "en",
-        pointer: "/stars/0/unknown_stage",
-        kind: "unknown-field",
-      },
     ])
     expectWEngineRoundtrip(result, input)
   })
 
-  it("保留未知嵌套字段、零空值与富文本，并报告待登记路径", () => {
-    const input = wEngineInput()
-    for (const source of Object.values(input.details)) {
-      change(source, "untouched", {
-        snake_key: { attack_growth: 0 },
-        zero: 0,
-        empty: "",
-        nil: null,
-        array: [3, 1, 2],
-        object: {},
-        boolean: false,
-      })
-      change(source.base_property, "extra_member", 0)
-      change(source.talents["1"], "extra_talent", "")
+  it("详情各层未知字段整合失败并定位来源", () => {
+    const cases: Array<[path: string, pointer: string]> = [
+      ["untouched", "/untouched"],
+      ["base_property.extra_member", "/base_property/extra_member"],
+      ["rand_property.extra_member", "/rand_property/extra_member"],
+      ["talents.1.extra_talent", "/talents/1/extra_talent"],
+      ["level.0.future_stage", "/level/0/future_stage"],
+      ["stars.1.future_stage", "/stars/1/future_stage"],
+    ]
+    for (const [path, pointer] of cases) {
+      const caseInput = wEngineInput()
+      change(caseInput.details.zh, path, { nested: [1, 2] })
+      expectFailure(
+        caseInput,
+        "zh",
+        pointer,
+        "未知字段：未在登记表登记，不能进入发布制品",
+      )
     }
-    change(input.sourceRecord, "future_field", [null, "", {}, [], 0])
-    const result = integrateWEngine(input)
-    expect(result.details.zh!.untouched).toStrictEqual({
-      snake_key: { attack_growth: 0 },
-      zero: 0,
-      empty: "",
-      nil: null,
-      array: [3, 1, 2],
-      object: {},
-      boolean: false,
-    })
-    expect(result.details.zh!.baseProperty).toStrictEqual({
-      name: "基础攻击力",
-      name2: "基础攻击力",
-      format: "{0:0.#}",
-      extra_member: 0,
-    })
-    expect(result.details.zh!.talents["1"]).toStrictEqual({
-      name: "满月",
-      desc: "<color=#FFFFFF>[普通攻击]</color>造成的伤害提升<color=#2BAD00>12%</color>。",
-      extra_talent: "",
-    })
-    expect(ownValue(result.sourceRecord, "future_field")).toStrictEqual([
-      null,
-      "",
-      {},
-      [],
-      0,
-    ])
-    expect(result.maintenance.diagnostics).toEqual([
-      {
-        entityId: "940001",
-        locale: "index",
-        pointer: "/future_field",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "940001",
-        locale: "zh",
-        pointer: "/base_property/extra_member",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "940001",
-        locale: "zh",
-        pointer: "/talents/1/extra_talent",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "940001",
-        locale: "zh",
-        pointer: "/untouched",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "940001",
-        locale: "en",
-        pointer: "/base_property/extra_member",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "940001",
-        locale: "en",
-        pointer: "/talents/1/extra_talent",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "940001",
-        locale: "en",
-        pointer: "/untouched",
-        kind: "unknown-field",
-      },
-    ])
-    expectWEngineRoundtrip(result, input)
   })
 
   it.each([
@@ -431,40 +333,50 @@ describe("单 WEngine 纯整合 nanoka-w-engine-reference/1", () => {
     expectWEngineRoundtrip(result, input)
   })
 
-  it("保留特殊自有 key 并生成 RFC 6901 转义 Pointer，不污染原型", () => {
-    const input = wEngineInput()
-    change(input.details.zh, "__proto__", { polluted: true })
-    change(input.details.zh, "constructor", "raw")
-    change(input.details.zh, "a/b~c", 0)
-    const result = integrateWEngine(input)
-    expect(Object.getPrototypeOf(result.details.zh)).toBe(Object.prototype)
-    expect(ownValue(result.details.zh, "__proto__")).toStrictEqual({
-      polluted: true,
-    })
-    expect(ownValue(result.details.zh, "constructor")).toBe("raw")
-    expect(ownValue(result.details.zh, "a/b~c")).toBe(0)
-    expect(result.maintenance.diagnostics).toEqual([
-      {
-        entityId: "940001",
-        locale: "zh",
-        pointer: "/__proto__",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "940001",
-        locale: "zh",
-        pointer: "/a~1b~0c",
-        kind: "unknown-field",
-      },
-      {
-        entityId: "940001",
-        locale: "zh",
-        pointer: "/constructor",
-        kind: "unknown-field",
-      },
-    ])
-    expectWEngineRoundtrip(result, input)
-  })
+  it.each([
+    ["__proto__", "/__proto__"],
+    ["constructor", "/constructor"],
+    ["a/b~c", "/a~1b~0c"],
+  ] as const)(
+    "详情特殊自有 key %s 的未知字段整合失败并转义 Pointer",
+    (key, pointer) => {
+      const input = wEngineInput()
+      // change 经 Object.defineProperty 写入自有属性，避开 __proto__ 的字面量语义。
+      change(input.details.zh, key, { nested: [1] })
+      expectFailure(
+        input,
+        "zh",
+        pointer,
+        "未知字段：未在登记表登记，不能进入发布制品",
+      )
+    },
+  )
+
+  it.each(["constructor", "__proto__", "toString"])(
+    "还原辅助函数不把特殊字典 key %s 误判为登记改名",
+    (key) => {
+      const input = wEngineInput()
+      // 字典 key 是数据不是字段：等级阶段 key 与天赋阶段 key 原样保留，不改名、不改值。
+      // change 经 Object.defineProperty 写入自有属性，避开 __proto__ 的字面量语义。
+      const stage = input.details.zh.level["1"]
+      change(input.details.zh, `level.${key}`, stage)
+      change(input.details.en, `level.${key}`, stage)
+      const talent = input.details.zh.talents["1"]
+      change(input.details.zh, `talents.${key}`, talent)
+      change(input.details.en, `talents.${key}`, talent)
+      const result = integrateWEngine(input)
+      expect(Object.hasOwn(result.data.level, key)).toBe(true)
+      expect(result.data.level[key]).toStrictEqual({
+        exp: 60,
+        rate: 1568,
+        rate2: 10000,
+      })
+      expect(Object.hasOwn(result.details.zh!.talents, key)).toBe(true)
+      expect(result.details.zh!.talents[key]).toStrictEqual(talent)
+      // 还原辅助函数须按登记表命中与否改名，不读取登记表原型链。
+      expectWEngineRoundtrip(result, input)
+    },
+  )
 })
 
 describe("WEngine 共享字段与分类派生", () => {

@@ -48,23 +48,23 @@ export const minimalData: MonsterData = {
   elementAbnormal: {},
 }
 
-/** 未登记的顶层来源字段仍是可保留的 JSON 值，不因类型声明被否定。 */
 export const dataWithUnknownFields: MonsterData = {
   ...minimalData,
+  // @ts-expect-error 未登记的顶层字段在封闭类型上被拒绝。
   future_container: { nested: [0, { empty: {}, nil: null, text: "" }] },
 }
 
-/** 共享块内部的未登记成员同样原样保留。 */
-export const dataWithUnknownMembers: MonsterData = {
-  ...minimalData,
-  monsterInfo: {
-    "960101": { ...unit, future_unit_member: "说明" },
-    "960102": {
-      ...unit,
-      id: 960102,
-      curves: { hp: { ...unit.curves.hp!, note: 0 } },
-    },
-  },
+export const unitWithUnknownMember: MonsterInfoUnit = {
+  ...unit,
+  // @ts-expect-error 未登记的单位成员在封闭类型上被拒绝。
+  future_unit_member: "说明",
+}
+
+export const curveWithUnknownMember: MonsterGrowthCurve = {
+  curve: [100, 116, 136],
+  ratio: 100,
+  // @ts-expect-error 未登记的曲线成员在封闭类型上被拒绝。
+  note: 0,
 }
 
 export const minimalDetails: MonsterDetails = {
@@ -80,6 +80,7 @@ export const minimalDetails: MonsterDetails = {
 
 export const detailsWithUnknownFields: MonsterDetails = {
   ...minimalDetails,
+  // @ts-expect-error 未登记的 details 顶层字段在封闭类型上被拒绝。
   untouched: { raw_key: [null, "", {}, [], 0] },
 }
 
@@ -158,8 +159,8 @@ export const integrated: IntegratedMonster = {
     diagnostics: [
       {
         entityId: "960001",
-        locale: "zh",
-        pointer: "/untouched",
+        locale: "index",
+        pointer: "/future_field",
         kind: "unknown-field",
       },
     ],
@@ -184,9 +185,12 @@ export const checks: unknown[] = [
   wrongLocale,
   wrongInputLocales,
   dataWithUnknownFields,
-  dataWithUnknownMembers,
+  unitWithUnknownMember,
+  curveWithUnknownMember,
   detailsWithUnknownFields,
   detailsWithPlaceholderName,
+  integrated,
+  fullInput,
 ]
 
 /** 诊断与字段种类的结构约束同样进入类型检查。 */

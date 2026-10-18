@@ -117,17 +117,20 @@ export const dataWithEmptyEndTime: SimulData = {
   endTime: "",
 }
 
-/** bossAdjust 未登记成员随块保留并参与完整值比较。 */
 export const dataWithAdjustUnknownMembers: SimulData = {
   ...minimalData,
   bossAdjust: {
-    "1001": { ...adjust, future_member: "说明" },
+    "1001": {
+      ...adjust,
+      // @ts-expect-error bossAdjust 未登记成员在封闭类型上被拒绝。
+      future_member: "说明",
+    },
   },
 }
 
-/** 未登记的顶层来源字段仍是可保留的 JSON 值，不因类型声明被否定。 */
 export const dataWithUnknownFields: SimulData = {
   ...minimalData,
+  // @ts-expect-error 未登记的顶层字段在封闭类型上被拒绝。
   future_container: { nested: [0, { empty: {}, nil: null, text: "" }] },
 }
 
@@ -145,41 +148,58 @@ export const detailsWithEmptyContainers: SimulDetails = {
   node: { "99003": { ...node, storyEvent: {}, battle: {} } },
 }
 
-/** 各层未登记成员原样保留。 */
-export const detailsWithUnknownMembers: SimulDetails = {
+export const detailsWithTopUnknownField: SimulDetails = {
   ...details,
+  // @ts-expect-error 未登记的 details 顶层字段在封闭类型上被拒绝。
   untouched: { raw_key: [null, "", {}, [], 0] },
-  node: {
-    ...details.node,
-    "99001": {
-      ...node,
-      future_node_member: 0,
-      battle: {},
-      storyEvent: {
-        "9900101": {
-          "9900001": {
-            ...page,
-            future_page_member: 0,
-            choice: [{ ...choice, future_choice_member: 0 }],
-          },
-        },
-      },
-    },
-    "99002": {
-      ...node,
-      battle: {
-        "9900201": {
-          ...battle,
-          future_battle_member: 0,
-          layer: { ...layer, future_layer_member: 0 },
-          layerRoom: {
-            "70799001": { ...room, future_room_member: "text" },
-          },
-        },
-      },
-    },
-  },
-  record: { "1": { ...recordEntry, future_record_member: 0 } },
+}
+
+export const recordWithUnknownMember: SimulRecordEntry = {
+  ...recordEntry,
+  // @ts-expect-error 记录未登记成员在封闭类型上被拒绝。
+  future_record_member: 0,
+}
+
+export const nodeWithUnknownMember: SimulNode = {
+  ...node,
+  // @ts-expect-error 节点未登记成员在封闭类型上被拒绝。
+  future_node_member: 0,
+}
+
+export const pageWithUnknownMember: SimulStoryPage = {
+  ...page,
+  // @ts-expect-error 页面未登记成员在封闭类型上被拒绝。
+  future_page_member: 0,
+}
+
+export const choiceWithUnknownMember: SimulStoryChoice = {
+  ...choice,
+  // @ts-expect-error 选项未登记成员在封闭类型上被拒绝。
+  future_choice_member: 0,
+}
+
+export const battleWithUnknownMember: SimulBattle = {
+  ...battle,
+  // @ts-expect-error 战斗未登记成员在封闭类型上被拒绝。
+  future_battle_member: 0,
+}
+
+export const layerWithUnknownMember: SimulLayer = {
+  ...layer,
+  // @ts-expect-error 关卡未登记成员在封闭类型上被拒绝。
+  future_layer_member: 0,
+}
+
+export const roomWithUnknownMember: SimulRoom = {
+  ...room,
+  // @ts-expect-error 房间未登记成员在封闭类型上被拒绝。
+  future_room_member: "text",
+}
+
+export const encounterWithUnknownMember: SimulEncounter = {
+  ...encounter,
+  // @ts-expect-error encounter 未登记成员在封闭类型上被拒绝。
+  future_encounter_member: 0,
 }
 
 export const wrongEndTimeType: SimulData = {
@@ -216,11 +236,11 @@ export const wrongLocale: SimulDetails = {
   locale: "ja",
 }
 
-// @ts-expect-error Simul 无顶层 name；未知成员虽可保留，但这里缺失的是必需成员 record。
 export const missingRecord: SimulDetails = {
   id: 990001,
   locale: "zh",
   node: {},
+  // @ts-expect-error Simul 无顶层 name：未登记字段被封闭类型拒绝，且缺失的是必需成员 record。
   name: "不存在的顶层名称",
 }
 
@@ -286,7 +306,15 @@ export const checks: unknown[] = [
   dataWithUnknownFields,
   details,
   detailsWithEmptyContainers,
-  detailsWithUnknownMembers,
+  detailsWithTopUnknownField,
+  recordWithUnknownMember,
+  nodeWithUnknownMember,
+  pageWithUnknownMember,
+  choiceWithUnknownMember,
+  battleWithUnknownMember,
+  layerWithUnknownMember,
+  roomWithUnknownMember,
+  encounterWithUnknownMember,
   wrongEndTimeType,
   wrongIdType,
   missingBossAdjust,

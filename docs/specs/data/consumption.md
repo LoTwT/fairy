@@ -263,10 +263,11 @@ export declare function loadAllSimulData(): Promise<Record<SimulId, SimulData>>
   `agents` 与 `wEngines` 字段一次列出全部未知来源 ID（保持选择原序与重复），不因第一个未知项短路；
   已登记文件缺失或解析失败同样使 Promise 拒绝，不返回部分结果。重复 ID 按出现次数重复读取，
   空选择返回空成员数组的完整结构。身份组装遵循[身份映射与持久化](#身份映射与持久化)。
-- 跨语言共享字段采用固定读取规则：`live2D`、`partnerInfo.iconPath`、`partnerInfo.roleIcon`、
-  `skill.*.material`、`extraLevel.*.maxLevel` 等按整合规范的"各语言同有且相等时入 data，单语言独有留
-  details"拆分。读取时先查 data 的同名字段，缺失再读当前语言 details 的同位置字段；两侧均缺失即来源
-  本身缺失，不补默认值。该规则覆盖历史数据集与未来单语言变体，不改变存储层的来源保真拆分。
+- 跨语言共享字段直接消费 `data`：严格共享下，登记为公共的字段（如 `live2D`、`partnerInfo.iconPath`、
+  `partnerInfo.roleIcon`、`skill.*.material`、`extraLevel.*.maxLevel`、Shiyu 的 `zone` 数值骨架）要么在
+  `data` 中完整存在，要么来源在全部语言缺失——不存在"部分语言提供"的制品状态，读取时没有也不需要
+  "先查 data、缺失再读 details 同位置"的回退。`details` 只承载本语言本地化文本；除登记的身份副本
+  （如 `details.id`）外，同一来源字段不会同时出现在两个文件中，字段缺失即来源本身缺失，不补默认值。
 
 ## 分发与按需加载
 

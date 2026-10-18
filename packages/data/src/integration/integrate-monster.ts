@@ -54,7 +54,7 @@ export interface IntegratedMonster {
 }
 
 /**
- * 按规则 nanoka-monster-reference/1 校验、复制和拆分单个怪物。无 I/O、默认值或语言回退。
+ * 按规则 nanoka-monster-reference/2 校验、复制和拆分单个怪物。无 I/O、默认值或语言回退。
  * 来源校验失败抛出含来源位置的 MonsterIntegrationError，不返回部分整合结果。
  */
 export function integrateMonster(
@@ -118,7 +118,7 @@ export function integrateMonster(
     if (!isObject(source)) failMonster(context, "详情必须是普通对象")
     if (Object.hasOwn(source, "locale"))
       failMonster(at(context, "locale"), "辅助字段重名")
-    const record = validateMonsterDetail(source, context, diagnostics)
+    const record = validateMonsterDetail(source, context)
     if (
       !Number.isSafeInteger(record.id) ||
       String(record.id) !== input.entityId
@@ -171,7 +171,6 @@ export function integrateMonster(
 function validateMonsterDetail(
   source: JsonObject,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   const namedFields: Readonly<Record<string, { output: string }>> = {
     ...monsterSharedDetailFields,
@@ -207,7 +206,7 @@ function validateMonsterDetail(
         record,
         output,
         key === "monster_info"
-          ? validateMonsterInfo(source[key], at(location, key), diagnostics)
+          ? validateMonsterInfo(source[key], at(location, key))
           : validateElementAbnormal(source[key], at(location, key)),
       )
       continue
@@ -221,8 +220,10 @@ function validateMonsterDetail(
       )
       continue
     }
-    put(record, key, source[key])
-    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+    failMonster(
+      at(location, key),
+      "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+    )
   }
   return record
 }
@@ -259,7 +260,7 @@ function validateField(
   }
 }
 
-/** 登记成员对象的改名冲突与必需检查；未登记成员由调用方原样保留并报告待登记。 */
+/** 登记成员对象的改名冲突与必需检查；未登记成员由调用方拒绝整合。 */
 function assertRegisteredMembers(
   value: JsonObject,
   members: Readonly<Record<string, MonsterObjectMember>>,
@@ -277,21 +278,20 @@ function assertRegisteredMembers(
   }
 }
 
-/** 按登记成员转换一个对象：已登记成员校验类型并转换拼写，未登记成员原样保留并诊断。 */
+/** 按登记成员转换一个对象：已登记成员校验类型并转换拼写，未登记成员整合失败。 */
 function transformRegisteredMembers(
   value: JsonObject,
   members: Readonly<Record<string, MonsterObjectMember>>,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted()) {
     const member = Object.hasOwn(members, key) ? members[key] : undefined
-    if (member === undefined) {
-      put(record, key, value[key])
-      diagnostics.push({ ...at(location, key), kind: "unknown-field" })
-      continue
-    }
+    if (member === undefined)
+      failMonster(
+        at(location, key),
+        "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+      )
     put(
       record,
       member.output,
@@ -309,14 +309,13 @@ function transformRegisteredMembers(
 function validateMonsterInfo(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failMonster(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted()) {
     if (!isSourceId(key))
       failMonster(at(location, key), "内部单位 key 不是规范十进制 ID")
-    const unit = validateMonsterUnit(value[key], at(location, key), diagnostics)
+    const unit = validateMonsterUnit(value[key], at(location, key))
     if (!Number.isSafeInteger(unit.id) || String(unit.id) !== key)
       failMonster(at(at(location, key), "id"), "内部单位 id 与其 key 不一致")
     put(record, key, unit)
@@ -328,7 +327,6 @@ function validateMonsterInfo(
 function validateMonsterUnit(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failMonster(location, "字段类型必须为普通对象")
   assertRegisteredMembers(value, monsterUnitMembers, location)
@@ -355,15 +353,13 @@ function validateMonsterUnit(
       continue
     }
     if (key === "curves") {
-      put(
-        record,
-        "curves",
-        validateCurves(value[key], at(location, key), diagnostics),
-      )
+      put(record, "curves", validateCurves(value[key], at(location, key)))
       continue
     }
-    put(record, key, value[key])
-    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+    failMonster(
+      at(location, key),
+      "未知字段：未在登记表登记，不能进入发布制品；先在 schema 登记或确认来源结构",
+    )
   }
   return record
 }
@@ -403,33 +399,22 @@ function validateStats(
 function validateCurves(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failMonster(location, "字段类型必须为普通对象")
   const record: JsonObject = {}
   for (const key of Object.keys(value).toSorted())
-    put(
-      record,
-      key,
-      validateCurveEntry(value[key], at(location, key), diagnostics),
-    )
+    put(record, key, validateCurveEntry(value[key], at(location, key)))
   return record
 }
 
-/** 单条成长曲线的校验与拼写转换；未登记成员原样保留并报告待登记。 */
+/** 单条成长曲线的校验与拼写转换；未登记成员整合失败。 */
 function validateCurveEntry(
   value: SourceJson,
   location: SourceLocation,
-  diagnostics: UnknownFieldDiagnostic[],
 ): JsonObject {
   if (!isObject(value)) failMonster(location, "字段类型必须为普通对象")
   assertRegisteredMembers(value, monsterCurveMembers, location)
-  return transformRegisteredMembers(
-    value,
-    monsterCurveMembers,
-    location,
-    diagnostics,
-  )
+  return transformRegisteredMembers(value, monsterCurveMembers, location)
 }
 
 /** 来源 `element_abnormal` 属性异常字典的校验；属性编码 key 原样保留。 */

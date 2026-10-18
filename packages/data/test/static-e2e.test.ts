@@ -94,7 +94,7 @@ async function inputFor(
     contractVersion: 2,
     gameVersion: "3.2",
     snapshotId:
-      "sha256:72f8efdb8aea0ca44f1d8b37b3d28d6c095887b8853e6ac8c1a13c6d880fcc71",
+      "sha256:6cf7f6a2da16cb770a4573e91608a60724ef0ce77d0bb1c363e231a7bcef9d9a",
   })
   expect(data.catalog.source.commit).toBe(reference.provenance.commit)
   expect(data.catalog.source.repository).toBe(reference.provenance.repository)

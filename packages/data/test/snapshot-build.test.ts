@@ -201,7 +201,7 @@ describe("multi-entity snapshot build", () => {
       "widgets",
     ])
     expect(build.index.entities.agents).toMatchObject({
-      rulesVersion: "nanoka-agent-reference/5",
+      rulesVersion: "nanoka-agent-reference/6",
       detailLocales: ["zh", "en"],
       complete: true,
       memberIds: ["2", "10"],
@@ -269,8 +269,14 @@ describe("multi-entity snapshot build", () => {
     }
     expect(build.inputBytes).toBe(inputBytes)
     expect(build.maintenance.widgets).toEqual([
-      { memberId: "9001", maintenance: { note: "widgets-9001" } },
-      { memberId: "9002", maintenance: { note: "widgets-9002" } },
+      {
+        memberId: "9001",
+        maintenance: { note: "widgets-9001", diagnostics: [] },
+      },
+      {
+        memberId: "9002",
+        maintenance: { note: "widgets-9002", diagnostics: [] },
+      },
     ])
     expect(
       build.maintenanceReportPath.startsWith(build.artifactDirectory),
@@ -1247,62 +1253,81 @@ describe("multi-entity snapshot build input-side coverage", () => {
   })
 
   it("preserves a large unregistered diagnostic set within the source byte budgets", async () => {
-    const options = await fixture()
+    const root = await fs.mkdtemp(join(tmpdir(), "fairy-snapshot-build-test-"))
+    temporaryDirectories.push(root)
+    const rawRoot = join(root, "raw", "nanoka")
+    const version = "synthetic-w-engine-diagnostics"
+    const temporaryParent = join(root, "output")
+    await fs.mkdir(temporaryParent)
+    await writeSyntheticRaw({
+      rawRoot,
+      version,
+      agentIds: [],
+      driveDiscIds: [],
+      weaponIds: ["940001"],
+    })
     const unknownKeys = Array.from(
       { length: 5_000 },
       (_, index) => `unregistered_${index}`,
     )
-    for (const locale of ["zh", "en"] as const) {
-      const path = join(options.versionRoot, locale, "character", "2.json")
-      await edit(path, (value) => {
-        for (const key of unknownKeys) value[key] = 0
-      })
-      expect((await fs.stat(path)).size).toBeLessThan(
-        options.policy.requestPolicy.maximumResponseBytes,
-      )
-    }
-    const build = await buildIntegratedSnapshot(options)
-    const maintenance = agentMemberMaintenance(build, "2")
-    expect(maintenance.diagnostics).toHaveLength(unknownKeys.length * 2)
-    const bytes = await allBytes(build.artifactDirectory)
-    for (const locale of ["zh", "en"] as const) {
-      // 诊断按配置语言与来源路径的确定性顺序排列。
-      expect(
-        maintenance.diagnostics
-          .filter(
-            (item) =>
-              item.locale === locale &&
-              item.pointer.startsWith("/unregistered_"),
-          )
-          .map((item) => item.pointer),
-      ).toEqual(unknownKeys.toSorted().map((key) => `/${key}`))
-      const details = JSON.parse(
-        bytes[`agents/2/details.${locale}.json`]!.toString(),
-      )
-      expect(
-        unknownKeys.every(
-          (key) => Object.hasOwn(details, key) && details[key] === 0,
-        ),
-      ).toBe(true)
-    }
-    // 未注入未登记字段的成员没有对应诊断；诊断只登记位置，不猜测原值。
-    expect(
-      agentMemberMaintenance(build, "10").diagnostics.filter((item) =>
-        item.pointer.startsWith("/unregistered_"),
-      ),
-    ).toEqual([])
-    expect(build.inputBytes).toBeLessThan(
-      options.policy.fetchLimits.maximumBytesPerRun,
+    // 详情未登记字段整合失败；维护诊断只保留来源索引记录（sourceRecord）一侧。
+    const indexRecordPath = join(rawRoot, version, "weapon.json")
+    await edit(indexRecordPath, (value) => {
+      const record = value["940001"] as Record<string, unknown>
+      for (const key of unknownKeys) record[key] = 0
+    })
+    const policy = await loadSourcePolicy()
+    expect((await fs.stat(indexRecordPath)).size).toBeLessThan(
+      policy.requestPolicy.maximumResponseBytes,
     )
-    expect(build.outputFileCount).toBe(expectedFiles.length)
+    const build = await buildIntegratedSnapshot({
+      rawRoot,
+      version,
+      temporaryParent,
+      entities: [nanokaWEnginesSnapshotEntity],
+    })
+    const member = build.maintenance["w-engines"]?.find(
+      (entry) => entry.memberId === "940001",
+    )
+    const diagnostics =
+      (
+        member?.maintenance as {
+          diagnostics: {
+            pointer: string
+            entityId: string
+            locale: string
+            kind: string
+          }[]
+        }
+      )?.diagnostics ?? []
+    expect(diagnostics).toHaveLength(unknownKeys.length)
+    // 诊断按来源路径的确定性顺序排列；索引记录原样保留全部未登记字段。
+    expect(diagnostics.map((item) => item.pointer)).toEqual(
+      unknownKeys.toSorted().map((key) => `/${key}`),
+    )
+    expect(diagnostics[0]).toMatchObject({
+      entityId: "940001",
+      locale: "index",
+      kind: "unknown-field",
+    })
+    const index = JSON.parse(
+      await fs.readFile(join(build.artifactDirectory, "index.json"), "utf8"),
+    )
+    const sourceRecord = index.entities["w-engines"]!.members["940001"]!
+      .sourceRecord as Record<string, unknown>
+    for (const key of unknownKeys)
+      expect(Object.hasOwn(sourceRecord, key)).toBe(true)
+    expect(build.inputBytes).toBeLessThan(policy.fetchLimits.maximumBytesPerRun)
+    // 1 个成员 × 3 个实体文件 + index.json。
+    expect(build.outputFileCount).toBe(4)
     expect(
       JSON.parse(await fs.readFile(build.maintenanceReportPath, "utf8")),
     ).toEqual({ categories: build.maintenance })
     await expect(
       verifyIntegratedSnapshot({
         artifactDirectory: build.artifactDirectory,
-        policy: options.policy,
-        entities: options.entities,
+        policy,
+        entities: [nanokaWEnginesSnapshotEntity],
       }),
     ).resolves.toMatchObject({ format: "fairy-nanoka-integrated/v3" })
   }, 30_000)
@@ -1393,15 +1418,6 @@ describe("multi-entity snapshot build input-side coverage", () => {
           })
       }
     })
-    for (const locale of ["zh", "en"] as const)
-      await edit(
-        join(options.versionRoot, locale, "character", "2.json"),
-        (value) => {
-          value.future_field = JSON.parse(
-            '{"__proto__":null,"some_key":[0,"",null]}',
-          )
-        },
-      )
     const build = await buildIntegratedSnapshot(options)
     const bytes = await allBytes(build.artifactDirectory)
     expect(Object.keys(bytes).toSorted()).toEqual(expectedFiles)
@@ -1419,14 +1435,10 @@ describe("multi-entity snapshot build input-side coverage", () => {
         JSON.parse(bytes[`agents/${memberId}/data.json`]!.toString()).codeName,
       ).toBe("中文原值")
     }
-    // 未登记字段的原值（含特殊自有 key 与数组顺序）保留在详情中。
-    const details = JSON.parse(bytes["agents/2/details.en.json"]!.toString())
-    expect(details).toMatchObject({
-      id: 2,
-      locale: "en",
-      future_field: { some_key: [0, "", null] },
-    })
-    expect(Object.hasOwn(details.future_field, "__proto__")).toBe(true)
+    // 详情不含未登记字段：封闭制品只保留登记结构。
+    expect(
+      JSON.parse(bytes["agents/2/details.en.json"]!.toString()),
+    ).not.toHaveProperty("future_field")
     expect(
       JSON.parse(bytes["agents/10/details.en.json"]!.toString()),
     ).not.toHaveProperty("future_field")
@@ -1435,20 +1447,7 @@ describe("multi-entity snapshot build input-side coverage", () => {
       {
         memberId: "2",
         maintenance: {
-          diagnostics: [
-            {
-              entityId: "2",
-              locale: "zh",
-              pointer: "/future_field",
-              kind: "unknown-field",
-            },
-            {
-              entityId: "2",
-              locale: "en",
-              pointer: "/future_field",
-              kind: "unknown-field",
-            },
-          ],
+          diagnostics: [],
           codeNameDifferences: [
             {
               entityId: "2",

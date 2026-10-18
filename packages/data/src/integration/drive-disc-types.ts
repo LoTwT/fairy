@@ -1,14 +1,13 @@
-import type { DetailLocale, SourceJson } from "./agent-types.ts"
+import type { DetailLocale } from "./agent-types.ts"
 
 /**
- * Nanoka 驱动盘整合资料的正式字段定义（规则 nanoka-drive-disc-reference/1）。
+ * Nanoka 驱动盘整合资料的正式字段定义（规则 nanoka-drive-disc-reference/2）。
  *
  * 上游实体为 `equipment`，整合类别登记名为 `drive-discs`；一条记录表示一个驱动盘套装。
  * 单件槽位、主副词条、强化面板、效果计算及 core 映射不属于本规则范围。
  * 已登记字段只保留来源用词：`desc2`、`desc4`、`icon2` 不解析效果、不推断新的业务含义。
- * number 表示原始数值，不承诺单位、缩放或计算语义；未知来源结构使用 SourceJson 保留。
- * 运行时原样保留未登记的顶层字段，索引签名让这些字段可以在类型层面读取，
- * 但读取到的不表示其业务语义已经确认。
+ * number 表示原始数值，不承诺单位、缩放或计算语义。
+ * 未登记字段整合失败，不进入发布制品；登记成员在对应结构上均要求存在。
  * 不承诺未来来源版本结构不变；合成验收位于 test/drive-disc-integration.test.ts。
  */
 export interface DriveDiscData {
@@ -20,16 +19,13 @@ export interface DriveDiscData {
 
   /** 来源 icon2 资源标识；具体用途尚未确认，不因与 icon 相等而省略或改名。 */
   icon2: string
-
-  /** 未登记的顶层来源字段；原 key、原值原样保留，不据此推断游戏语义。 */
-  [field: string]: SourceJson
 }
 
 /**
  * details.{locale}.json：本语言的套装文本、身份副本与派生语言标识。
  *
  * icon 与 icon2 是所有语言共有且一致的必需资源，提取到 data 后不在本文件重复；
- * 其余登记字段与未知字段全部留在对应语言，不因跨语言相等而自动共享。
+ * 其余登记字段留在对应语言，不因跨语言相等而自动共享。
  */
 export interface DriveDiscDetails {
   /** 复制自本语言来源详情的数值套装 ID；与 data.id、目录和索引成员核对。 */
@@ -49,7 +45,4 @@ export interface DriveDiscDetails {
 
   /** 来源 story 当前语言原文；保留完整段落、换行与富文本标记，不做摘要化。 */
   story: string
-
-  /** 未登记的顶层来源字段；留在本语言原样保留，不提取到 data 或另一种语言。 */
-  [field: string]: SourceJson
 }
