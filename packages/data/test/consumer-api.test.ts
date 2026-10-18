@@ -16,6 +16,8 @@ const loaders = vi.hoisted(() => ({
   agentActions: vi.fn(),
   wEngineAttributes: vi.fn(),
   discAffixes: vi.fn(),
+  staticDefinitions: vi.fn(),
+  staticCatalog: vi.fn(),
   data: vi.fn(),
   zh: vi.fn(),
   en: vi.fn(),
@@ -71,6 +73,8 @@ vi.mock("../.generated/catalog.ts", () => ({
   agentActionLoaders: { "1311": loaders.agentActions },
   wEngineAttributeLoaders: { "12001": loaders.wEngineAttributes },
   driveDiscAffixesLoader: loaders.discAffixes,
+  staticEffectDefinitionsLoader: loaders.staticDefinitions,
+  staticEffectCatalogLoader: loaders.staticCatalog,
   agentNames: Object.freeze(["Astra Yao", "Soldier 0 - Anby"]),
   agentSourceIds: Object.freeze({
     "Astra Yao": "1311",
@@ -122,6 +126,33 @@ vi.mock("../.generated/catalog.ts", () => ({
   bangbooSourceIds: Object.freeze({
     Penguinboo: "53001",
     Eous: "55098",
+  }),
+  agentNamesBySourceId: Object.freeze({
+    "1311": "Astra Yao",
+    "1381": "Soldier 0 - Anby",
+  }),
+  driveDiscNamesBySourceId: Object.freeze({
+    "31000": "Woodpecker Electro",
+    "31100": "Puffer Electro",
+  }),
+  wEngineNamesBySourceId: Object.freeze({
+    "12001": "[Lunar] Pleniluna",
+    "12004": "[Reverb] Mark I",
+  }),
+  bangbooNamesBySourceId: Object.freeze({
+    "53001": "Penguinboo",
+    "55098": "Eous",
+  }),
+  snapshotInfo: Object.freeze({
+    format: "fairy-nanoka-integrated/v3",
+    source: Object.freeze({ id: "nanoka-zzz", version: "3.2" }),
+    entities: Object.freeze({
+      agents: Object.freeze({
+        rulesVersion: "nanoka-agent-reference/5",
+        detailLocales: Object.freeze(["zh", "en"]),
+        memberIds: Object.freeze(["1311", "1381"]),
+      }),
+    }),
   }),
   bangbooLoaders: {
     "53001": {
@@ -191,42 +222,61 @@ vi.mock("../.generated/catalog.ts", () => ({
 }))
 import {
   agentNames,
+  agentSourceIds,
+  agentNamesBySourceId,
   bangbooNames,
+  bangbooSourceIds,
+  bangbooNamesBySourceId,
   driveDiscNames,
+  driveDiscSourceIds,
+  driveDiscNamesBySourceId,
   monsterIds,
   shiyuIds,
   bossIds,
   simulIds,
+  snapshotInfo,
   wEngineNames,
+  wEngineSourceIds,
+  wEngineNamesBySourceId,
   loadIndex,
   loadAgentData,
   loadAgentDetails,
   loadAllAgents,
+  loadAllAgentData,
   loadBangbooData,
   loadBangbooDetails,
   loadAllBangboos,
+  loadAllBangbooData,
   loadDriveDiscData,
   loadDriveDiscDetails,
   loadAllDriveDiscs,
+  loadAllDriveDiscData,
   loadMonsterData,
   loadMonsterDetails,
   loadAllMonsters,
+  loadAllMonsterData,
   loadShiyuData,
   loadShiyuDetails,
   loadAllShiyu,
+  loadAllShiyuData,
   loadBossData,
   loadBossDetails,
   loadAllBosses,
+  loadAllBossData,
   loadSimulData,
   loadSimulDetails,
   loadAllSimul,
+  loadAllSimulData,
   loadWEngineData,
   loadWEngineDetails,
   loadAllWEngines,
+  loadAllWEngineData,
   loadAgentLevel60Attributes,
   loadAgentActions,
   loadWEngineLevel60Attributes,
   loadSDriveDiscMaxLevelAffixes,
+  loadStaticCalculationData,
+  UnknownCalculationEntitiesError,
 } from "../src/index.ts"
 
 describe("panel attribute consumer isolation", () => {
@@ -703,6 +753,133 @@ beforeEach(() => {
   mockMemberRecords()
 })
 
+describe("identity maps and snapshot info", () => {
+  it("exposes frozen bidirectional identity maps covering the published members", () => {
+    expect(agentSourceIds["Astra Yao"]).toBe("1311")
+    expect(agentSourceIds["Soldier 0 - Anby"]).toBe("1381")
+    expect(driveDiscSourceIds["Woodpecker Electro"]).toBe("31000")
+    expect(wEngineSourceIds["[Reverb] Mark I"]).toBe("12004")
+    expect(bangbooSourceIds.Eous).toBe("55098")
+    expect(agentNamesBySourceId["1311"]).toBe("Astra Yao")
+    expect(agentNamesBySourceId["1381"]).toBe("Soldier 0 - Anby")
+    expect(driveDiscNamesBySourceId["31000"]).toBe("Woodpecker Electro")
+    expect(wEngineNamesBySourceId["12004"]).toBe("[Reverb] Mark I")
+    expect(bangbooNamesBySourceId["55098"]).toBe("Eous")
+    for (const map of [
+      agentSourceIds,
+      agentNamesBySourceId,
+      driveDiscSourceIds,
+      driveDiscNamesBySourceId,
+      wEngineSourceIds,
+      wEngineNamesBySourceId,
+      bangbooSourceIds,
+      bangbooNamesBySourceId,
+    ])
+      expect(Object.isFrozen(map)).toBe(true)
+    for (const [, loader] of Object.entries(loaders))
+      expect(loader).not.toHaveBeenCalled()
+  })
+
+  it("exports the snapshot info constant without loading any file", () => {
+    expect(snapshotInfo).toEqual({
+      format: "fairy-nanoka-integrated/v3",
+      source: { id: "nanoka-zzz", version: "3.2" },
+      entities: {
+        agents: {
+          rulesVersion: "nanoka-agent-reference/5",
+          detailLocales: ["zh", "en"],
+          memberIds: ["1311", "1381"],
+        },
+      },
+    })
+    for (const [, loader] of Object.entries(loaders))
+      expect(loader).not.toHaveBeenCalled()
+  })
+})
+
+describe("static calculation selection contract", () => {
+  it("rejects malformed selections with TypeError before any load", async () => {
+    for (const selection of [
+      null,
+      undefined,
+      "Astra Yao",
+      {},
+      { agents: "Astra Yao" },
+      { wEngines: [] },
+      { agents: [1311], wEngines: [] },
+      { agents: [], wEngines: [12001] },
+      { agents: ["Astra Yao"], wEngines: {} },
+    ])
+      await expect(
+        loadStaticCalculationData(selection as never),
+      ).rejects.toThrow(TypeError)
+    for (const [, loader] of Object.entries(loaders))
+      expect(loader).not.toHaveBeenCalled()
+  })
+
+  it("lists every unknown name in one rejection without loading anything", async () => {
+    let rejection: unknown
+    try {
+      await loadStaticCalculationData({
+        agents: ["Astra Yao", "Ghost", "Astra Yao"] as AgentName[],
+        wEngines: ["[Lunar] Pleniluna", "Phantom"] as WEngineName[],
+      })
+    } catch (error) {
+      rejection = error
+    }
+    expect(rejection).toBeInstanceOf(UnknownCalculationEntitiesError)
+    expect(rejection).toBeInstanceOf(Error)
+    const unknown = rejection as UnknownCalculationEntitiesError
+    expect(unknown.agents).toEqual(["Ghost"])
+    expect(unknown.wEngines).toEqual(["Phantom"])
+    for (const [, loader] of Object.entries(loaders))
+      expect(loader).not.toHaveBeenCalled()
+  })
+
+  it("returns the complete empty structure for an empty selection", async () => {
+    const empty = await loadStaticCalculationData({ agents: [], wEngines: [] })
+    expect(empty.agents).toEqual([])
+    expect(empty.wEngines).toEqual([])
+    for (const [key, loader] of Object.entries(loaders))
+      if (
+        key !== "staticDefinitions" &&
+        key !== "staticCatalog" &&
+        key !== "discAffixes"
+      )
+        expect(loader, key).not.toHaveBeenCalled()
+  })
+
+  it("reads the same-version bundle and isolates the returned tree", async () => {
+    loaders.agentAttributes.mockResolvedValue({ entityId: "1311" })
+    loaders.agentActions.mockResolvedValue({ entityId: "1311", actions: [] })
+    loaders.wEngineAttributes.mockResolvedValue({ entityId: "12001" })
+    loaders.discAffixes.mockResolvedValue({ mainStatsBySlot: {} })
+    loaders.staticDefinitions.mockResolvedValue({ ruleSetId: "static-effects" })
+    loaders.staticCatalog.mockResolvedValue({ options: [] })
+    const first = await loadStaticCalculationData({
+      agents: ["Astra Yao", "Astra Yao"],
+      wEngines: ["[Lunar] Pleniluna"],
+    })
+    expect(first.agents).toHaveLength(2)
+    expect(first.wEngines).toHaveLength(1)
+    expect(first.agents[0]!.attributes.entityId).toBe("1311")
+    expect(first.agents[0]!.actions.entityId).toBe("1311")
+    expect(first.definitions).toEqual({ ruleSetId: "static-effects" })
+    ;(first.agents[0]!.attributes as { entityId: string }).entityId = "mutated"
+    const second = await loadStaticCalculationData({
+      agents: ["Astra Yao"],
+      wEngines: ["[Lunar] Pleniluna"],
+    })
+    expect(second.agents[0]!.attributes.entityId).toBe("1311")
+    expect(loaders.agentAttributes).toHaveBeenCalledTimes(3)
+    expect(loaders.agentActions).toHaveBeenCalledTimes(3)
+    expect(loaders.wEngineAttributes).toHaveBeenCalledTimes(2)
+    expect(loaders.discAffixes).toHaveBeenCalledTimes(2)
+    expect(loaders.staticDefinitions).toHaveBeenCalledTimes(2)
+    expect(loaders.staticCatalog).toHaveBeenCalledTimes(2)
+  })
+})
+
 describe("public readers", () => {
   it("loads only the requested index/data/locale without prerequisites", async () => {
     expect(await loadAgentData("Astra Yao")).toMatchObject({ id: 1311 })
@@ -832,6 +1009,53 @@ describe("public readers", () => {
       if (key !== "simulData" && key !== "otherSimulEn")
         expect(loader).not.toHaveBeenCalled()
   })
+  it("loads all agent data without any details or index reads", async () => {
+    const all = await loadAllAgentData()
+    expect(Object.keys(all)).toEqual(["Astra Yao", "Soldier 0 - Anby"])
+    expect(all["Astra Yao"]).toMatchObject({ id: 1311 })
+    expect(all["Soldier 0 - Anby"]).toMatchObject({ id: 1381 })
+    ;(all["Astra Yao"]!.stats as { tags: string[] }).tags.push("mutated")
+    const again = await loadAllAgentData()
+    expect(again["Astra Yao"]!.stats.tags).toEqual(["original"])
+    for (const [key, loader] of Object.entries(loaders))
+      if (key !== "data" && key !== "otherData")
+        expect(loader, key).not.toHaveBeenCalled()
+  })
+  it.each([
+    [
+      loadAllDriveDiscData,
+      ["discData", "otherDiscData"],
+      ["Woodpecker Electro", "Puffer Electro"],
+    ],
+    [
+      loadAllWEngineData,
+      ["wEngineData", "otherWEngineData"],
+      ["[Lunar] Pleniluna", "[Reverb] Mark I"],
+    ],
+    [
+      loadAllBangbooData,
+      ["bangbooData", "otherBangbooData"],
+      ["Penguinboo", "Eous"],
+    ],
+    [
+      loadAllMonsterData,
+      ["monsterData", "otherMonsterData"],
+      ["10000", "10002"],
+    ],
+    [loadAllShiyuData, ["shiyuData", "otherShiyuData"], ["61001", "62001"]],
+    [loadAllBossData, ["bossData", "otherBossData"], ["69001", "69002"]],
+    [loadAllSimulData, ["simulData", "otherSimulData"], ["101", "102"]],
+  ] as const)(
+    "loads every category member data-only with keys %s",
+    async (loadAllData, loaderKeys, expectedKeys) => {
+      vi.clearAllMocks()
+      const all = await loadAllData()
+      expect(Object.keys(all)).toEqual([...expectedKeys])
+      for (const [key, loader] of Object.entries(loaders))
+        if (!(loaderKeys as readonly string[]).includes(key))
+          expect(loader, key).not.toHaveBeenCalled()
+    },
+  )
   it.each([
     "unknown",
     "1311",

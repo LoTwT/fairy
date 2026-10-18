@@ -101,7 +101,45 @@ describe("publication snapshot", () => {
       'export type BangbooName = "Exampleboo 950001" | "Exampleboo 950002"',
     )
     expect(catalog).toContain('export type MonsterId = "960001" | "960002"')
+    expect(catalog).toContain('export type AgentSourceId = "2" | "10"')
+    expect(catalog).toContain(
+      'export type DriveDiscSourceId = "930001" | "930002"',
+    )
+    expect(catalog).toContain(
+      'export type WEngineSourceId = "940001" | "940002"',
+    )
+    expect(catalog).toContain(
+      'export type BangbooSourceId = "950001" | "950002"',
+    )
+    expect(catalog).toContain(
+      "export const agentSourceIds: Readonly<Record<AgentName, AgentSourceId>>",
+    )
     expect(catalog).toContain('[["Astra Yao","2"],["Soldier 0 - Anby","10"]]')
+    expect(catalog).toContain(
+      "export const agentNamesBySourceId: Readonly<Record<AgentSourceId, AgentName>>",
+    )
+    expect(catalog).toContain('[["2","Astra Yao"],["10","Soldier 0 - Anby"]]')
+    expect(catalog).toContain(
+      '[["930001","Example Drive Disc 930001"],["930002","Example Drive Disc 930002"]]',
+    )
+    expect(catalog).toContain(
+      '[["940001","Example W-Engine 940001"],["940002","Example W-Engine 940002"]]',
+    )
+    expect(catalog).toContain(
+      '[["950001","Exampleboo 950001"],["950002","Exampleboo 950002"]]',
+    )
+    expect(catalog).toContain(
+      "export const snapshotInfo: IntegratedSnapshotInfo = deepFreeze(",
+    )
+    expect(catalog).toContain(
+      '"source":{"id":"nanoka-zzz","version":"synthetic-publication"}',
+    )
+    expect(catalog).toContain(
+      '"agents":{"rulesVersion":"nanoka-agent-reference/5","detailLocales":["zh","en"],"memberIds":["2","10"]}',
+    )
+    expect(catalog).toContain(
+      '"simul":{"rulesVersion":"nanoka-simul-reference/2","detailLocales":["zh","en"],"memberIds":["990001","990002"]}',
+    )
     expect(catalog).toContain(
       '[["Example Drive Disc 930001","930001"],["Example Drive Disc 930002","930002"]]',
     )

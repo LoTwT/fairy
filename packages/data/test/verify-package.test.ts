@@ -397,7 +397,31 @@ describe("packed package", () => {
 import assert from "node:assert/strict"
 import { readFileSync } from "node:fs"
 import * as api from "@randomplay/data"
-assert.deepEqual(Object.keys(api).sort(), ["agentNames", "bangbooNames", "bossIds", "simulIds", "driveDiscNames", "monsterIds", "shiyuIds", "wEngineNames", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllBangboos", "loadAllBosses", "loadAllSimul", "loadAllDriveDiscs", "loadAllMonsters", "loadAllShiyu", "loadAllWEngines", "loadBangbooData", "loadBangbooDetails", "loadBossData", "loadBossDetails", "loadSimulData", "loadSimulDetails", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex", "loadMonsterData", "loadMonsterDetails", "loadShiyuData", "loadShiyuDetails", "loadWEngineData", "loadWEngineDetails", "loadAgentLevel60Attributes", "loadWEngineLevel60Attributes", "loadSDriveDiscMaxLevelAffixes", "loadAgentActions", "resolveAgentAction", "resolveAgentSkillLevel", "calculationDataVersion", "loadStaticCalculationData"].sort())
+assert.deepEqual(Object.keys(api).sort(), ["agentNames", "agentNamesBySourceId", "agentSourceIds", "bangbooNames", "bangbooNamesBySourceId", "bangbooSourceIds", "bossIds", "simulIds", "driveDiscNames", "driveDiscNamesBySourceId", "driveDiscSourceIds", "monsterIds", "shiyuIds", "wEngineNames", "wEngineNamesBySourceId", "wEngineSourceIds", "snapshotInfo", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllAgentData", "loadAllBangboos", "loadAllBangbooData", "loadAllBosses", "loadAllBossData", "loadAllSimul", "loadAllSimulData", "loadAllDriveDiscs", "loadAllDriveDiscData", "loadAllMonsters", "loadAllMonsterData", "loadAllShiyu", "loadAllShiyuData", "loadAllWEngines", "loadAllWEngineData", "loadBangbooData", "loadBangbooDetails", "loadBossData", "loadBossDetails", "loadSimulData", "loadSimulDetails", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex", "loadMonsterData", "loadMonsterDetails", "loadShiyuData", "loadShiyuDetails", "loadWEngineData", "loadWEngineDetails", "loadAgentLevel60Attributes", "loadWEngineLevel60Attributes", "loadSDriveDiscMaxLevelAffixes", "loadAgentActions", "resolveAgentAction", "resolveAgentSkillLevel", "calculationDataVersion", "loadStaticCalculationData", "UnknownCalculationEntitiesError"].sort())
+const packedIndex = (await import("@randomplay/data/integrated/index.json", { with: { type: "json" } })).default
+assert.equal(api.snapshotInfo.format, packedIndex.format)
+assert.equal(api.snapshotInfo.source.id, packedIndex.source.id)
+assert.equal(api.snapshotInfo.source.version, packedIndex.source.version)
+assert.deepEqual(Object.keys(api.snapshotInfo.entities).sort(), Object.keys(packedIndex.entities).sort())
+for (const [name, entity] of Object.entries(packedIndex.entities)) {
+  assert.equal(api.snapshotInfo.entities[name].rulesVersion, entity.rulesVersion)
+  assert.deepEqual([...api.snapshotInfo.entities[name].detailLocales], entity.detailLocales)
+  assert.deepEqual([...api.snapshotInfo.entities[name].memberIds], entity.memberIds)
+}
+assert.ok(Object.isFrozen(api.snapshotInfo) && Object.isFrozen(api.snapshotInfo.entities) && Object.isFrozen(api.snapshotInfo.entities.agents.memberIds))
+for (const [names, sourceIds, namesBySourceId] of [[api.agentNames, api.agentSourceIds, api.agentNamesBySourceId], [api.driveDiscNames, api.driveDiscSourceIds, api.driveDiscNamesBySourceId], [api.wEngineNames, api.wEngineSourceIds, api.wEngineNamesBySourceId], [api.bangbooNames, api.bangbooSourceIds, api.bangbooNamesBySourceId]]) {
+  assert.equal(Object.keys(sourceIds).length, names.length)
+  for (const name of names) assert.equal(namesBySourceId[sourceIds[name]], name)
+  assert.ok(Object.isFrozen(sourceIds) && Object.isFrozen(namesBySourceId))
+}
+const allAgentData = await api.loadAllAgentData()
+assert.equal(Object.keys(allAgentData).length, api.agentNames.length)
+assert.equal(allAgentData.Nicole.id, 1031)
+let unknownError = null
+try { await api.loadStaticCalculationData({ agents: ["Nicole", "Nope"], wEngines: ["Ghost Engine"] }) } catch (error) { unknownError = error }
+assert.equal(unknownError.name, "UnknownCalculationEntitiesError")
+assert.deepEqual(unknownError.agents, ["Nope"])
+assert.deepEqual(unknownError.wEngines, ["Ghost Engine"])
 for (const [names, load, category] of [[api.agentNames, api.loadAgentLevel60Attributes, "agents"], [api.wEngineNames, api.loadWEngineLevel60Attributes, "w-engines"]]) {
   for (const name of names) {
     const attributes = await load(name)
@@ -1141,8 +1165,8 @@ import rawMonsterData from "@randomplay/data/integrated/monsters/10000/data.json
 import rawShiyuData from "@randomplay/data/integrated/shiyu/61001/data.json" with { type: "json" }
 import rawBossData from "@randomplay/data/integrated/boss/69001/data.json" with { type: "json" }
 import rawSimulData from "@randomplay/data/integrated/simul/101/data.json" with { type: "json" }
-import { agentNames, bangbooNames, bossIds, simulIds, driveDiscNames, monsterIds, shiyuIds, wEngineNames, loadIndex, loadAgentData, loadAgentDetails, loadAllAgents, loadBangbooData, loadBangbooDetails, loadAllBangboos, loadBossData, loadBossDetails, loadAllBosses, loadSimulData, loadSimulDetails, loadAllSimul, loadDriveDiscData, loadDriveDiscDetails, loadAllDriveDiscs, loadMonsterData, loadMonsterDetails, loadAllMonsters, loadShiyuData, loadShiyuDetails, loadAllShiyu, loadWEngineData, loadWEngineDetails, loadAllWEngines } from "@randomplay/data"
-import type { AgentName, AgentData, AgentDetails, IntegratedSnapshotIndex, LocalizedAgent, DetailLocale, BangbooName, BangbooData, BangbooDetails, LocalizedBangboo, BossId, BossData, BossDetails, LocalizedBoss, SimulId, SimulData, SimulDetails, LocalizedSimul, DriveDiscName, DriveDiscData, DriveDiscDetails, LocalizedDriveDisc, MonsterId, MonsterData, MonsterDetails, LocalizedMonster, ShiyuId, ShiyuData, ShiyuDetails, LocalizedShiyu, WEngineName, WEngineData, WEngineDetails, LocalizedWEngine } from "@randomplay/data"
+import { agentNames, agentNamesBySourceId, agentSourceIds, bangbooNames, bangbooNamesBySourceId, bangbooSourceIds, bossIds, simulIds, driveDiscNames, driveDiscNamesBySourceId, driveDiscSourceIds, monsterIds, shiyuIds, wEngineNames, wEngineNamesBySourceId, wEngineSourceIds, snapshotInfo, loadIndex, loadAgentData, loadAgentDetails, loadAllAgents, loadAllAgentData, loadBangbooData, loadBangbooDetails, loadAllBangboos, loadAllBangbooData, loadBossData, loadBossDetails, loadAllBosses, loadAllBossData, loadSimulData, loadSimulDetails, loadAllSimul, loadAllSimulData, loadDriveDiscData, loadDriveDiscDetails, loadAllDriveDiscs, loadAllDriveDiscData, loadMonsterData, loadMonsterDetails, loadAllMonsters, loadAllMonsterData, loadShiyuData, loadShiyuDetails, loadAllShiyu, loadAllShiyuData, loadWEngineData, loadWEngineDetails, loadAllWEngines, loadAllWEngineData } from "@randomplay/data"
+import type { AgentName, AgentSourceId, AgentData, AgentDetails, IntegratedSnapshotIndex, IntegratedSnapshotInfo, LocalizedAgent, DetailLocale, BangbooName, BangbooSourceId, BangbooData, BangbooDetails, LocalizedBangboo, BossId, BossData, BossDetails, LocalizedBoss, SimulId, SimulData, SimulDetails, LocalizedSimul, DriveDiscName, DriveDiscSourceId, DriveDiscData, DriveDiscDetails, LocalizedDriveDisc, MonsterId, MonsterData, MonsterDetails, LocalizedMonster, ShiyuId, ShiyuData, ShiyuDetails, LocalizedShiyu, WEngineName, WEngineSourceId, WEngineData, WEngineDetails, LocalizedWEngine } from "@randomplay/data"
 const numericSourceId: number = rawData.id
 const numericDriveDiscId: number = rawDriveDiscData.id
 const numericWEngineId: number = rawWEngineData.id
@@ -1200,6 +1224,32 @@ const allEngines: Promise<Record<WEngineName, LocalizedWEngine>> = loadAllWEngin
 const bangbooData: Promise<BangbooData | undefined> = loadBangbooData(bangbooName)
 const bangbooDetail: Promise<BangbooDetails | undefined> = loadBangbooDetails(spacedBangbooName, "zh")
 const allBangboos: Promise<Record<BangbooName, LocalizedBangboo>> = loadAllBangboos("en")
+const agentSourceId: AgentSourceId = "1311"
+const driveDiscSourceId: DriveDiscSourceId = "31000"
+const wEngineSourceId: WEngineSourceId = "12001"
+const bangbooSourceId: BangbooSourceId = "53001"
+const sourceIdByAgentName: AgentSourceId = agentSourceIds[name]
+const agentNameBySourceId: AgentName = agentNamesBySourceId["1311"]
+const driveDiscNameBySourceId: DriveDiscName = driveDiscNamesBySourceId["31000"]
+const wEngineNameBySourceId: WEngineName = wEngineNamesBySourceId["12001"]
+const bangbooNameBySourceId: BangbooName = bangbooNamesBySourceId["53001"]
+const snapshotInfoValue: IntegratedSnapshotInfo = snapshotInfo
+const allAgentDataOnly: Promise<Record<AgentName, AgentData>> = loadAllAgentData()
+const allDriveDiscDataOnly: Promise<Record<DriveDiscName, DriveDiscData>> = loadAllDriveDiscData()
+const allWEngineDataOnly: Promise<Record<WEngineName, WEngineData>> = loadAllWEngineData()
+const allBangbooDataOnly: Promise<Record<BangbooName, BangbooData>> = loadAllBangbooData()
+const allMonsterDataOnly: Promise<Record<MonsterId, MonsterData>> = loadAllMonsterData()
+const allShiyuDataOnly: Promise<Record<ShiyuId, ShiyuData>> = loadAllShiyuData()
+const allBossDataOnly: Promise<Record<BossId, BossData>> = loadAllBossData()
+const allSimulDataOnly: Promise<Record<SimulId, SimulData>> = loadAllSimulData()
+// @ts-expect-error exact agent source ID literal union; zero padding is not a canonical ID
+const wrongAgentSourceId: AgentSourceId = "01311"
+// @ts-expect-error source IDs are not agent names
+loadAgentData(agentSourceId)
+// @ts-expect-error reverse map keys stay exact source IDs
+const wrongNameById: AgentName = agentNamesBySourceId["131"]
+// @ts-expect-error frozen readonly identity map
+agentSourceIds[name] = agentSourceId
 function acceptsName(value: AgentName, locale: DetailLocale) { return loadAgentDetails(value, locale) }
 function acceptsDriveDiscName(value: DriveDiscName, locale: DetailLocale) { return loadDriveDiscDetails(value, locale) }
 function acceptsWEngineName(value: WEngineName, locale: DetailLocale) { return loadWEngineDetails(value, locale) }
@@ -1336,7 +1386,7 @@ bossIds[0] = bossId
 simulIds.push(simulId)
 // @ts-expect-error readonly simul ID element
 simulIds[0] = simulId
-void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, numericMonsterId, numericShiyuId, numericBossId, numericSimulId, names, discNames, engineNames, booNames, monsterIdentityList, shiyuIdentityList, bossIdentityList, simulIdentityList, index, data, detail, all, discData, discDetail, allDiscs, engineData, engineDetail, allEngines, bangbooData, bangbooDetail, allBangboos, monsterData, monsterDetail, allMonsters, shiyuData, shiyuDetail, allShiyu, bossData, bossDetail, allBosses, simulData, simulDetail, allSimul, acceptsName, acceptsDriveDiscName, acceptsWEngineName, acceptsBangbooName, acceptsMonsterId, acceptsShiyuId, acceptsBossId, acceptsSimulId, wrong, wrongDisc, wrongEngine, wrongBangboo, wrongMonsterId, wrongShiyuId, wrongBossId, wrongSimulId, genericAssistCategory, unknownSkillCategory]
+void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, numericMonsterId, numericShiyuId, numericBossId, numericSimulId, names, discNames, engineNames, booNames, monsterIdentityList, shiyuIdentityList, bossIdentityList, simulIdentityList, index, data, detail, all, discData, discDetail, allDiscs, engineData, engineDetail, allEngines, bangbooData, bangbooDetail, allBangboos, monsterData, monsterDetail, allMonsters, shiyuData, shiyuDetail, allShiyu, bossData, bossDetail, allBosses, simulData, simulDetail, allSimul, acceptsName, acceptsDriveDiscName, acceptsWEngineName, acceptsBangbooName, acceptsMonsterId, acceptsShiyuId, acceptsBossId, acceptsSimulId, wrong, wrongDisc, wrongEngine, wrongBangboo, wrongMonsterId, wrongShiyuId, wrongBossId, wrongSimulId, wrongAgentSourceId, wrongNameById, genericAssistCategory, unknownSkillCategory, agentSourceId, driveDiscSourceId, wEngineSourceId, bangbooSourceId, sourceIdByAgentName, agentNameBySourceId, driveDiscNameBySourceId, wEngineNameBySourceId, bangbooNameBySourceId, snapshotInfoValue, allAgentDataOnly, allDriveDiscDataOnly, allWEngineDataOnly, allBangbooDataOnly, allMonsterDataOnly, allShiyuDataOnly, allBossDataOnly, allSimulDataOnly]
 `
     const typeFile = join(consumerDirectory, "smoke.ts")
     writeFileSync(typeFile, typeSource)

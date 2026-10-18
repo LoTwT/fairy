@@ -38,6 +38,22 @@ export type {
 } from "./integration/simul-types.ts"
 import type { SimulData, SimulDetails } from "./integration/simul-types.ts"
 import type { IntegratedSnapshotIndex } from "./integration/snapshot-types.ts"
+import type { AgentActions } from "./skills/types.ts"
+import type {
+  AgentLevel60Attributes,
+  WEngineLevel60Attributes,
+  SDriveDiscMaxLevelAffixes,
+} from "./attributes/types.ts"
+import type {
+  AgentName,
+  DriveDiscName,
+  WEngineName,
+  BangbooName,
+  MonsterId,
+  ShiyuId,
+  BossId,
+  SimulId,
+} from "../.generated/catalog.ts"
 import {
   agentNames,
   agentSourceIds,
@@ -67,7 +83,7 @@ import {
   staticEffectDefinitionsLoader,
   staticEffectCatalogLoader,
 } from "../.generated/catalog.ts"
-import type { AgentActions } from "./skills/types.ts"
+
 export type {
   AgentActions,
   AgentAction,
@@ -91,24 +107,6 @@ export type {
 } from "./skills/types.ts"
 export { resolveAgentSkillLevel, resolveAgentAction } from "./skills/resolve.ts"
 
-/** 单个角色的动作目录；返回独立对象，根入口不读取技能 JSON。 */
-export async function loadAgentActions(
-  name: AgentName,
-): Promise<AgentActions | undefined> {
-  if (typeof name !== "string")
-    throw new TypeError("Agent name must be a string")
-  const id = Object.hasOwn(agentSourceIds, name)
-    ? agentSourceIds[name]
-    : undefined
-  return id === undefined
-    ? undefined
-    : structuredClone(await agentActionLoaders[id]!())
-}
-import type {
-  AgentLevel60Attributes,
-  WEngineLevel60Attributes,
-  SDriveDiscMaxLevelAffixes,
-} from "./attributes/types.ts"
 export type {
   AgentLevel60Attributes,
   WEngineLevel60Attributes,
@@ -122,49 +120,6 @@ export type {
   DriveDiscSlot,
   DriveDiscDamageElement,
 } from "./attributes/types.ts"
-
-/** 60 级满突破、独立核心培养表；不含配装、被动属性转化或战斗增益。 */
-export async function loadAgentLevel60Attributes(
-  name: AgentName,
-): Promise<AgentLevel60Attributes | undefined> {
-  if (typeof name !== "string")
-    throw new TypeError("Agent name must be a string")
-  const id = Object.hasOwn(agentSourceIds, name)
-    ? agentSourceIds[name]
-    : undefined
-  return id === undefined
-    ? undefined
-    : structuredClone(await agentAttributeLoaders[id]!())
-}
-
-/** 60 级满突破的音擎基础/高级属性；不含精炼效果。 */
-export async function loadWEngineLevel60Attributes(
-  name: WEngineName,
-): Promise<WEngineLevel60Attributes | undefined> {
-  if (typeof name !== "string")
-    throw new TypeError("WEngine name must be a string")
-  const id = Object.hasOwn(wEngineSourceIds, name)
-    ? wEngineSourceIds[name]
-    : undefined
-  return id === undefined
-    ? undefined
-    : structuredClone(await wEngineAttributeLoaders[id]!())
-}
-
-/** S 级满强化主词条与副词条每档值；每次读取返回独立对象树。 */
-export async function loadSDriveDiscMaxLevelAffixes(): Promise<SDriveDiscMaxLevelAffixes> {
-  return structuredClone(await driveDiscAffixesLoader())
-}
-import type {
-  AgentName,
-  DriveDiscName,
-  WEngineName,
-  BangbooName,
-  MonsterId,
-  ShiyuId,
-  BossId,
-  SimulId,
-} from "../.generated/catalog.ts"
 
 /** 正式字段类型：实体结构、文件引用、来源身份与多实体完整制品索引。 */
 export type {
@@ -241,14 +196,19 @@ export type {
 export type {
   IntegratedSnapshotEntity,
   IntegratedSnapshotIndex,
+  IntegratedSnapshotInfo,
   IntegratedSnapshotMember,
   IntegratedSnapshotSourceInput,
 } from "./integration/snapshot-types.ts"
 export type {
   AgentName,
+  AgentSourceId,
   DriveDiscName,
+  DriveDiscSourceId,
   WEngineName,
+  WEngineSourceId,
   BangbooName,
+  BangbooSourceId,
   MonsterId,
   ShiyuId,
   BossId,
@@ -263,121 +223,231 @@ export {
   shiyuIds,
   bossIds,
   simulIds,
+  agentSourceIds,
+  driveDiscSourceIds,
+  wEngineSourceIds,
+  bangbooSourceIds,
+  agentNamesBySourceId,
+  driveDiscNamesBySourceId,
+  wEngineNamesBySourceId,
+  bangbooNamesBySourceId,
+  snapshotInfo,
 } from "../.generated/catalog.ts"
 
-/** 指定语言的完整代理人资料；公共与本地化字段分别保留，不合并。 */
-export interface LocalizedAgent {
+/** 指定语言的完整实体资料；公共与本地化字段分别保留，不合并同名字段。 */
+export interface Localized<Data, Details> {
   /** 原有公共资料结构。 */
-  data: AgentData
+  data: Data
   /** 指定语言详情，locale 与调用参数一致。 */
-  details: AgentDetails
+  details: Details
 }
 
-/** 指定语言的完整驱动盘套装资料；公共与本地化字段分别保留，不合并。 */
-export interface LocalizedDriveDisc {
-  /** 原有公共资料结构。 */
-  data: DriveDiscData
-  /** 指定语言详情，locale 与调用参数一致。 */
-  details: DriveDiscDetails
+/** 指定语言的完整代理人资料。 */
+export type LocalizedAgent = Localized<AgentData, AgentDetails>
+
+/** 指定语言的完整驱动盘套装资料。 */
+export type LocalizedDriveDisc = Localized<DriveDiscData, DriveDiscDetails>
+
+/** 指定语言的完整 WEngine 资料。 */
+export type LocalizedWEngine = Localized<WEngineData, WEngineDetails>
+
+/** 指定语言的完整邦布资料。 */
+export type LocalizedBangboo = Localized<BangbooData, BangbooDetails>
+
+/** 指定语言的完整怪物资料。 */
+export type LocalizedMonster = Localized<MonsterData, MonsterDetails>
+
+/** 指定语言的完整 Shiyu 区域资料。 */
+export type LocalizedShiyu = Localized<ShiyuData, ShiyuDetails>
+
+/** 指定语言的完整 Boss 试炼资料。 */
+export type LocalizedBoss = Localized<BossData, BossDetails>
+
+/** 一个 Simul 模拟战的公共资料与指定语言详情。 */
+export type LocalizedSimul = Localized<SimulData, SimulDetails>
+
+/** 校验字符串身份参数；非字符串以 TypeError 拒绝，label 说明参数用途。 */
+function assertString(value: unknown, label: string): asserts value is string {
+  if (typeof value !== "string")
+    throw new TypeError(`${label} must be a string`)
 }
 
-/** 指定语言的完整 WEngine 资料；公共与本地化字段分别保留，不合并。 */
-export interface LocalizedWEngine {
-  /** 原有公共资料结构。 */
-  data: WEngineData
-  /** 指定语言详情，locale 与调用参数一致。 */
-  details: WEngineDetails
-}
-
-/** 指定语言的完整邦布资料；公共与本地化字段分别保留，不合并。 */
-export interface LocalizedBangboo {
-  /** 原有公共资料结构。 */
-  data: BangbooData
-  /** 指定语言详情，locale 与调用参数一致。 */
-  details: BangbooDetails
-}
-
-/** 指定语言的完整怪物资料；公共与本地化字段分别保留，不合并。 */
-export interface LocalizedMonster {
-  /** 原有公共资料结构。 */
-  data: MonsterData
-  /** 指定语言详情，locale 与调用参数一致。 */
-  details: MonsterDetails
-}
-
-/** 指定语言的完整 Shiyu 区域资料；公共与本地化字段分别保留，不合并。 */
-export interface LocalizedShiyu {
-  /** 原有公共资料结构。 */
-  data: ShiyuData
-  /** 指定语言详情，locale 与调用参数一致。 */
-  details: ShiyuDetails
-}
-
-/** 指定语言的完整 Boss 试炼资料；公共与本地化字段分别保留，不合并。 */
-export interface LocalizedBoss {
-  /** 原有公共资料结构。 */
-  data: BossData
-  /** 指定语言详情，locale 与调用参数一致。 */
-  details: BossDetails
-}
-
-/** 一个 Simul 模拟战的公共资料与指定语言详情；两个对象独立保留，不合并同名字段。 */
-export interface LocalizedSimul {
-  /** 原有公共资料结构。 */
-  data: SimulData
-  /** 指定语言详情，locale 与调用参数一致。 */
-  details: SimulDetails
-}
-
-function assertName(name: unknown): asserts name is string {
-  if (typeof name !== "string") throw new TypeError("name must be a string")
-}
-
-function assertMonsterId(id: unknown): asserts id is string {
-  if (typeof id !== "string") throw new TypeError("id must be a string")
-}
-
-function assertShiyuId(id: unknown): asserts id is string {
-  if (typeof id !== "string") throw new TypeError("id must be a string")
-}
-
-function assertBossId(id: unknown): asserts id is string {
-  if (typeof id !== "string") throw new TypeError("id must be a string")
-}
-
-function assertSimulId(id: unknown): asserts id is string {
-  if (typeof id !== "string") throw new TypeError("id must be a string")
-}
-
+/** 校验显式 zh/en 语言参数；不默认、不转换、不回退。 */
 function assertLocale(locale: unknown): asserts locale is DetailLocale {
   if (locale !== "zh" && locale !== "en")
     throw new TypeError("locale must be zh or en")
 }
 
-function agentSourceId(name: AgentName): string | undefined {
-  assertName(name)
-  return Object.hasOwn(agentSourceIds, name) ? agentSourceIds[name] : undefined
+/** 名称身份 → 来源 ID；非字符串以 TypeError 拒绝，未登记名称返回 undefined。 */
+function createNameSourceIdResolver<Name extends string>(
+  sourceIds: Readonly<Record<Name, string>>,
+): (name: Name) => string | undefined {
+  return (name) => {
+    assertString(name, "name")
+    return Object.hasOwn(sourceIds, name) ? sourceIds[name] : undefined
+  }
 }
 
-function driveDiscSourceId(name: DriveDiscName): string | undefined {
-  assertName(name)
-  return Object.hasOwn(driveDiscSourceIds, name)
-    ? driveDiscSourceIds[name]
-    : undefined
+/** 已登记 ID 身份的直通解析；非字符串以 TypeError 拒绝，未登记 ID 返回 undefined。 */
+function createRegisteredSourceIdResolver<Id extends string>(
+  loaders: Readonly<Record<string, unknown>>,
+): (id: Id) => string | undefined {
+  return (id) => {
+    assertString(id, "id")
+    return Object.hasOwn(loaders, id) ? id : undefined
+  }
 }
 
-function wEngineSourceId(name: WEngineName): string | undefined {
-  assertName(name)
-  return Object.hasOwn(wEngineSourceIds, name)
-    ? wEngineSourceIds[name]
-    : undefined
+/** 单个成员三个实体文件的显式懒加载器；data 与两种语言 details 相互独立。 */
+interface MemberFileLoaders<Data, Details> {
+  readonly data: () => Promise<Data>
+  readonly zh: () => Promise<Details>
+  readonly en: () => Promise<Details>
 }
 
-function bangbooSourceId(name: BangbooName): string | undefined {
-  assertName(name)
-  return Object.hasOwn(bangbooSourceIds, name)
-    ? bangbooSourceIds[name]
-    : undefined
+/** 一个类别按公开身份读取的内部实现；隔离、校验顺序与加载边界遵循公开函数契约。 */
+interface EntityReader<Identity extends string, Data, Details> {
+  loadData(identity: Identity): Promise<Data | undefined>
+  loadDetails(
+    identity: Identity,
+    locale: DetailLocale,
+  ): Promise<Details | undefined>
+  loadAll(
+    locale: DetailLocale,
+  ): Promise<Record<Identity, Localized<Data, Details>>>
+  loadAllData(): Promise<Record<Identity, Data>>
+}
+
+function createEntityReader<Identity extends string, Data, Details>(options: {
+  readonly identities: readonly Identity[]
+  readonly resolveSourceId: (identity: Identity) => string | undefined
+  readonly loaders: Readonly<Record<string, MemberFileLoaders<Data, Details>>>
+}): EntityReader<Identity, Data, Details> {
+  const memberLoaders = (
+    identity: Identity,
+  ): MemberFileLoaders<Data, Details> | undefined => {
+    const sourceId = options.resolveSourceId(identity)
+    return sourceId === undefined ? undefined : options.loaders[sourceId]
+  }
+  return {
+    async loadData(identity) {
+      const loaders = memberLoaders(identity)
+      return loaders === undefined
+        ? undefined
+        : structuredClone(await loaders.data())
+    },
+    async loadDetails(identity, locale) {
+      assertLocale(locale)
+      const loaders = memberLoaders(identity)
+      return loaders === undefined
+        ? undefined
+        : structuredClone(await loaders[locale]())
+    },
+    async loadAll(locale) {
+      assertLocale(locale)
+      return Object.fromEntries(
+        await Promise.all(
+          options.identities.map(async (identity) => {
+            const loaders = memberLoaders(identity)!
+            const [data, details] = await Promise.all([
+              loaders.data(),
+              loaders[locale](),
+            ])
+            return [identity, structuredClone({ data, details })] as const
+          }),
+        ),
+      ) as Record<Identity, Localized<Data, Details>>
+    },
+    async loadAllData() {
+      return Object.fromEntries(
+        await Promise.all(
+          options.identities.map(async (identity) => {
+            const loaders = memberLoaders(identity)!
+            return [identity, structuredClone(await loaders.data())] as const
+          }),
+        ),
+      ) as Record<Identity, Data>
+    },
+  }
+}
+
+const agentReader = createEntityReader({
+  identities: agentNames,
+  resolveSourceId: createNameSourceIdResolver(agentSourceIds),
+  loaders: agentLoaders,
+})
+const driveDiscReader = createEntityReader({
+  identities: driveDiscNames,
+  resolveSourceId: createNameSourceIdResolver(driveDiscSourceIds),
+  loaders: driveDiscLoaders,
+})
+const wEngineReader = createEntityReader({
+  identities: wEngineNames,
+  resolveSourceId: createNameSourceIdResolver(wEngineSourceIds),
+  loaders: wEngineLoaders,
+})
+const bangbooReader = createEntityReader({
+  identities: bangbooNames,
+  resolveSourceId: createNameSourceIdResolver(bangbooSourceIds),
+  loaders: bangbooLoaders,
+})
+const monsterReader = createEntityReader({
+  identities: monsterIds,
+  resolveSourceId: createRegisteredSourceIdResolver(monsterLoaders),
+  loaders: monsterLoaders,
+})
+const shiyuReader = createEntityReader({
+  identities: shiyuIds,
+  resolveSourceId: createRegisteredSourceIdResolver(shiyuLoaders),
+  loaders: shiyuLoaders,
+})
+const bossReader = createEntityReader({
+  identities: bossIds,
+  resolveSourceId: createRegisteredSourceIdResolver(bossLoaders),
+  loaders: bossLoaders,
+})
+const simulReader = createEntityReader({
+  identities: simulIds,
+  resolveSourceId: createRegisteredSourceIdResolver(simulLoaders),
+  loaders: simulLoaders,
+})
+
+const agentSourceId = createNameSourceIdResolver(agentSourceIds)
+const wEngineSourceId = createNameSourceIdResolver(wEngineSourceIds)
+
+/** 单个角色的动作目录；返回独立对象，根入口不读取技能 JSON。 */
+export async function loadAgentActions(
+  name: AgentName,
+): Promise<AgentActions | undefined> {
+  const id = agentSourceId(name)
+  return id === undefined
+    ? undefined
+    : structuredClone(await agentActionLoaders[id]!())
+}
+
+/** 60 级满突破、独立核心培养表；不含配装、被动属性转化或战斗增益。 */
+export async function loadAgentLevel60Attributes(
+  name: AgentName,
+): Promise<AgentLevel60Attributes | undefined> {
+  const id = agentSourceId(name)
+  return id === undefined
+    ? undefined
+    : structuredClone(await agentAttributeLoaders[id]!())
+}
+
+/** 60 级满突破的音擎基础/高级属性；不含精炼效果。 */
+export async function loadWEngineLevel60Attributes(
+  name: WEngineName,
+): Promise<WEngineLevel60Attributes | undefined> {
+  const id = wEngineSourceId(name)
+  return id === undefined
+    ? undefined
+    : structuredClone(await wEngineAttributeLoaders[id]!())
+}
+
+/** S 级满强化主词条与副词条每档值；每次读取返回独立对象树。 */
+export async function loadSDriveDiscMaxLevelAffixes(): Promise<SDriveDiscMaxLevelAffixes> {
+  return structuredClone(await driveDiscAffixesLoader())
 }
 
 /** 加载完整原样索引及来源记录，不加载实体；每次返回独立对象树。加载失败时拒绝 Promise。 */
@@ -389,10 +459,7 @@ export async function loadIndex(): Promise<IntegratedSnapshotIndex> {
 export async function loadAgentData(
   name: AgentName,
 ): Promise<AgentData | undefined> {
-  const id = agentSourceId(name)
-  return id === undefined
-    ? undefined
-    : structuredClone(await agentLoaders[id]!.data())
+  return agentReader.loadData(name)
 }
 
 /** 只读取指定成员显式 zh/en 详情，无语言回退；未知字符串返回 undefined，非法参数以 TypeError 拒绝。加载失败不吞错，每次返回独立对象树。 */
@@ -400,40 +467,28 @@ export async function loadAgentDetails(
   name: AgentName,
   locale: DetailLocale,
 ): Promise<AgentDetails | undefined> {
-  assertLocale(locale)
-  const id = agentSourceId(name)
-  return id === undefined
-    ? undefined
-    : structuredClone(await agentLoaders[id]![locale]())
+  return agentReader.loadDetails(name, locale)
 }
 
 /** 显式加载全部公共资料和指定语言详情，以英文名称为 key；任一必要文件失败则整体拒绝。每次返回独立对象树。 */
 export async function loadAllAgents(
   locale: DetailLocale,
 ): Promise<Record<AgentName, LocalizedAgent>> {
-  assertLocale(locale)
-  return Object.fromEntries(
-    await Promise.all(
-      agentNames.map(async (name) => {
-        const loaders = agentLoaders[agentSourceIds[name]]!
-        const [data, details] = await Promise.all([
-          loaders.data(),
-          loaders[locale](),
-        ])
-        return [name, structuredClone({ data, details })]
-      }),
-    ),
-  ) as Record<AgentName, LocalizedAgent>
+  return agentReader.loadAll(locale)
+}
+
+/** 显式加载全部代理人公共资料，不加载任何详情；任一必要文件失败则整体拒绝。不加载其他类别或索引，每次返回独立对象树。 */
+export async function loadAllAgentData(): Promise<
+  Record<AgentName, AgentData>
+> {
+  return agentReader.loadAllData()
 }
 
 /** 精确英文名称对应的驱动盘套装公共资料；未知字符串返回 undefined，非字符串以 TypeError 拒绝。不加载索引、详情或代理人，每次返回独立对象树。 */
 export async function loadDriveDiscData(
   name: DriveDiscName,
 ): Promise<DriveDiscData | undefined> {
-  const id = driveDiscSourceId(name)
-  return id === undefined
-    ? undefined
-    : structuredClone(await driveDiscLoaders[id]!.data())
+  return driveDiscReader.loadData(name)
 }
 
 /** 只读取指定驱动盘套装显式 zh/en 详情，无语言回退；未知字符串返回 undefined，非法参数以 TypeError 拒绝。加载失败不吞错，每次返回独立对象树。 */
@@ -441,40 +496,28 @@ export async function loadDriveDiscDetails(
   name: DriveDiscName,
   locale: DetailLocale,
 ): Promise<DriveDiscDetails | undefined> {
-  assertLocale(locale)
-  const id = driveDiscSourceId(name)
-  return id === undefined
-    ? undefined
-    : structuredClone(await driveDiscLoaders[id]![locale]())
+  return driveDiscReader.loadDetails(name, locale)
 }
 
 /** 显式加载全部驱动盘套装公共资料和指定语言详情，以英文名称为 key；任一必要文件失败则整体拒绝。不加载代理人或索引，每次返回独立对象树。 */
 export async function loadAllDriveDiscs(
   locale: DetailLocale,
 ): Promise<Record<DriveDiscName, LocalizedDriveDisc>> {
-  assertLocale(locale)
-  return Object.fromEntries(
-    await Promise.all(
-      driveDiscNames.map(async (name) => {
-        const loaders = driveDiscLoaders[driveDiscSourceIds[name]]!
-        const [data, details] = await Promise.all([
-          loaders.data(),
-          loaders[locale](),
-        ])
-        return [name, structuredClone({ data, details })]
-      }),
-    ),
-  ) as Record<DriveDiscName, LocalizedDriveDisc>
+  return driveDiscReader.loadAll(locale)
+}
+
+/** 显式加载全部驱动盘套装公共资料，不加载任何详情；任一必要文件失败则整体拒绝。不加载其他类别或索引，每次返回独立对象树。 */
+export async function loadAllDriveDiscData(): Promise<
+  Record<DriveDiscName, DriveDiscData>
+> {
+  return driveDiscReader.loadAllData()
 }
 
 /** 精确英文名称对应的 WEngine 公共资料；未知字符串返回 undefined，非字符串以 TypeError 拒绝。不加载索引、详情或其他类别，每次返回独立对象树。 */
 export async function loadWEngineData(
   name: WEngineName,
 ): Promise<WEngineData | undefined> {
-  const id = wEngineSourceId(name)
-  return id === undefined
-    ? undefined
-    : structuredClone(await wEngineLoaders[id]!.data())
+  return wEngineReader.loadData(name)
 }
 
 /** 只读取指定 WEngine 显式 zh/en 详情，无语言回退；未知字符串返回 undefined，非法参数以 TypeError 拒绝。加载失败不吞错，每次返回独立对象树。 */
@@ -482,40 +525,28 @@ export async function loadWEngineDetails(
   name: WEngineName,
   locale: DetailLocale,
 ): Promise<WEngineDetails | undefined> {
-  assertLocale(locale)
-  const id = wEngineSourceId(name)
-  return id === undefined
-    ? undefined
-    : structuredClone(await wEngineLoaders[id]![locale]())
+  return wEngineReader.loadDetails(name, locale)
 }
 
 /** 显式加载全部 WEngine 公共资料和指定语言详情，以英文名称为 key；任一必要文件失败则整体拒绝。不加载代理人、驱动盘或索引，每次返回独立对象树。 */
 export async function loadAllWEngines(
   locale: DetailLocale,
 ): Promise<Record<WEngineName, LocalizedWEngine>> {
-  assertLocale(locale)
-  return Object.fromEntries(
-    await Promise.all(
-      wEngineNames.map(async (name) => {
-        const loaders = wEngineLoaders[wEngineSourceIds[name]]!
-        const [data, details] = await Promise.all([
-          loaders.data(),
-          loaders[locale](),
-        ])
-        return [name, structuredClone({ data, details })]
-      }),
-    ),
-  ) as Record<WEngineName, LocalizedWEngine>
+  return wEngineReader.loadAll(locale)
+}
+
+/** 显式加载全部 WEngine 公共资料，不加载任何详情；任一必要文件失败则整体拒绝。不加载其他类别或索引，每次返回独立对象树。 */
+export async function loadAllWEngineData(): Promise<
+  Record<WEngineName, WEngineData>
+> {
+  return wEngineReader.loadAllData()
 }
 
 /** 精确英文名称对应的邦布公共资料；未知字符串返回 undefined，非字符串以 TypeError 拒绝。不加载索引、详情或其他类别，每次返回独立对象树。 */
 export async function loadBangbooData(
   name: BangbooName,
 ): Promise<BangbooData | undefined> {
-  const id = bangbooSourceId(name)
-  return id === undefined
-    ? undefined
-    : structuredClone(await bangbooLoaders[id]!.data())
+  return bangbooReader.loadData(name)
 }
 
 /** 只读取指定邦布显式 zh/en 详情，无语言回退；未知字符串返回 undefined，非法参数以 TypeError 拒绝。加载失败不吞错，每次返回独立对象树。 */
@@ -523,30 +554,21 @@ export async function loadBangbooDetails(
   name: BangbooName,
   locale: DetailLocale,
 ): Promise<BangbooDetails | undefined> {
-  assertLocale(locale)
-  const id = bangbooSourceId(name)
-  return id === undefined
-    ? undefined
-    : structuredClone(await bangbooLoaders[id]![locale]())
+  return bangbooReader.loadDetails(name, locale)
 }
 
 /** 显式加载全部邦布公共资料和指定语言详情，以英文名称为 key；任一必要文件失败则整体拒绝。不加载代理人、驱动盘、WEngine 或索引，每次返回独立对象树。 */
 export async function loadAllBangboos(
   locale: DetailLocale,
 ): Promise<Record<BangbooName, LocalizedBangboo>> {
-  assertLocale(locale)
-  return Object.fromEntries(
-    await Promise.all(
-      bangbooNames.map(async (name) => {
-        const loaders = bangbooLoaders[bangbooSourceIds[name]]!
-        const [data, details] = await Promise.all([
-          loaders.data(),
-          loaders[locale](),
-        ])
-        return [name, structuredClone({ data, details })]
-      }),
-    ),
-  ) as Record<BangbooName, LocalizedBangboo>
+  return bangbooReader.loadAll(locale)
+}
+
+/** 显式加载全部邦布公共资料，不加载任何详情；任一必要文件失败则整体拒绝。不加载其他类别或索引，每次返回独立对象树。 */
+export async function loadAllBangbooData(): Promise<
+  Record<BangbooName, BangbooData>
+> {
+  return bangbooReader.loadAllData()
 }
 
 /**
@@ -557,13 +579,7 @@ export async function loadAllBangboos(
 export async function loadMonsterData(
   id: MonsterId,
 ): Promise<MonsterData | undefined> {
-  assertMonsterId(id)
-  const loaders = Object.hasOwn(monsterLoaders, id)
-    ? monsterLoaders[id]
-    : undefined
-  return loaders === undefined
-    ? undefined
-    : structuredClone(await loaders.data())
+  return monsterReader.loadData(id)
 }
 
 /** 只读取指定怪物显式 zh/en 详情，无语言回退；未登记 ID 返回 undefined，非法参数以 TypeError 拒绝。加载失败不吞错，每次返回独立对象树。 */
@@ -571,33 +587,21 @@ export async function loadMonsterDetails(
   id: MonsterId,
   locale: DetailLocale,
 ): Promise<MonsterDetails | undefined> {
-  assertLocale(locale)
-  assertMonsterId(id)
-  const loaders = Object.hasOwn(monsterLoaders, id)
-    ? monsterLoaders[id]
-    : undefined
-  return loaders === undefined
-    ? undefined
-    : structuredClone(await loaders[locale]())
+  return monsterReader.loadDetails(id, locale)
 }
 
 /** 显式加载全部怪物公共资料和指定语言详情，以来源 ID 为 key；任一必要文件失败则整体拒绝。不加载其他类别或索引，每次返回独立对象树。 */
 export async function loadAllMonsters(
   locale: DetailLocale,
 ): Promise<Record<MonsterId, LocalizedMonster>> {
-  assertLocale(locale)
-  return Object.fromEntries(
-    await Promise.all(
-      monsterIds.map(async (id) => {
-        const loaders = monsterLoaders[id]!
-        const [data, details] = await Promise.all([
-          loaders.data(),
-          loaders[locale](),
-        ])
-        return [id, structuredClone({ data, details })]
-      }),
-    ),
-  ) as Record<MonsterId, LocalizedMonster>
+  return monsterReader.loadAll(locale)
+}
+
+/** 显式加载全部怪物公共资料，不加载任何详情；任一必要文件失败则整体拒绝。不加载其他类别或索引，每次返回独立对象树。 */
+export async function loadAllMonsterData(): Promise<
+  Record<MonsterId, MonsterData>
+> {
+  return monsterReader.loadAllData()
 }
 
 /**
@@ -608,11 +612,7 @@ export async function loadAllMonsters(
 export async function loadShiyuData(
   id: ShiyuId,
 ): Promise<ShiyuData | undefined> {
-  assertShiyuId(id)
-  const loaders = Object.hasOwn(shiyuLoaders, id) ? shiyuLoaders[id] : undefined
-  return loaders === undefined
-    ? undefined
-    : structuredClone(await loaders.data())
+  return shiyuReader.loadData(id)
 }
 
 /** 只读取指定 Shiyu 区域显式 zh/en 详情，无语言回退；未登记 ID 返回 undefined，非法参数以 TypeError 拒绝。加载失败不吞错，每次返回独立对象树。 */
@@ -620,31 +620,19 @@ export async function loadShiyuDetails(
   id: ShiyuId,
   locale: DetailLocale,
 ): Promise<ShiyuDetails | undefined> {
-  assertLocale(locale)
-  assertShiyuId(id)
-  const loaders = Object.hasOwn(shiyuLoaders, id) ? shiyuLoaders[id] : undefined
-  return loaders === undefined
-    ? undefined
-    : structuredClone(await loaders[locale]())
+  return shiyuReader.loadDetails(id, locale)
 }
 
 /** 显式加载全部 Shiyu 区域公共资料和指定语言详情，以来源 ID 为 key；任一必要文件失败则整体拒绝。不加载其他类别或索引，每次返回独立对象树。 */
 export async function loadAllShiyu(
   locale: DetailLocale,
 ): Promise<Record<ShiyuId, LocalizedShiyu>> {
-  assertLocale(locale)
-  return Object.fromEntries(
-    await Promise.all(
-      shiyuIds.map(async (id) => {
-        const loaders = shiyuLoaders[id]!
-        const [data, details] = await Promise.all([
-          loaders.data(),
-          loaders[locale](),
-        ])
-        return [id, structuredClone({ data, details })]
-      }),
-    ),
-  ) as Record<ShiyuId, LocalizedShiyu>
+  return shiyuReader.loadAll(locale)
+}
+
+/** 显式加载全部 Shiyu 区域公共资料，不加载任何详情；任一必要文件失败则整体拒绝。不加载其他类别或索引，每次返回独立对象树。 */
+export async function loadAllShiyuData(): Promise<Record<ShiyuId, ShiyuData>> {
+  return shiyuReader.loadAllData()
 }
 
 /**
@@ -653,11 +641,7 @@ export async function loadAllShiyu(
  * 不加载索引、详情或其他类别，每次返回独立对象树。
  */
 export async function loadBossData(id: BossId): Promise<BossData | undefined> {
-  assertBossId(id)
-  const loaders = Object.hasOwn(bossLoaders, id) ? bossLoaders[id] : undefined
-  return loaders === undefined
-    ? undefined
-    : structuredClone(await loaders.data())
+  return bossReader.loadData(id)
 }
 
 /** 只读取指定 Boss 试炼显式 zh/en 详情，无语言回退；未登记 ID 返回 undefined，非法参数以 TypeError 拒绝。加载失败不吞错，每次返回独立对象树。 */
@@ -665,31 +649,19 @@ export async function loadBossDetails(
   id: BossId,
   locale: DetailLocale,
 ): Promise<BossDetails | undefined> {
-  assertLocale(locale)
-  assertBossId(id)
-  const loaders = Object.hasOwn(bossLoaders, id) ? bossLoaders[id] : undefined
-  return loaders === undefined
-    ? undefined
-    : structuredClone(await loaders[locale]())
+  return bossReader.loadDetails(id, locale)
 }
 
 /** 显式加载全部 Boss 试炼公共资料和指定语言详情，以来源 ID 为 key；任一必要文件失败则整体拒绝。不加载其他类别或索引，每次返回独立对象树。 */
 export async function loadAllBosses(
   locale: DetailLocale,
 ): Promise<Record<BossId, LocalizedBoss>> {
-  assertLocale(locale)
-  return Object.fromEntries(
-    await Promise.all(
-      bossIds.map(async (id) => {
-        const loaders = bossLoaders[id]!
-        const [data, details] = await Promise.all([
-          loaders.data(),
-          loaders[locale](),
-        ])
-        return [id, structuredClone({ data, details })]
-      }),
-    ),
-  ) as Record<BossId, LocalizedBoss>
+  return bossReader.loadAll(locale)
+}
+
+/** 显式加载全部 Boss 试炼公共资料，不加载任何详情；任一必要文件失败则整体拒绝。不加载其他类别或索引，每次返回独立对象树。 */
+export async function loadAllBossData(): Promise<Record<BossId, BossData>> {
+  return bossReader.loadAllData()
 }
 
 /**
@@ -700,11 +672,7 @@ export async function loadAllBosses(
 export async function loadSimulData(
   id: SimulId,
 ): Promise<SimulData | undefined> {
-  assertSimulId(id)
-  const loaders = Object.hasOwn(simulLoaders, id) ? simulLoaders[id] : undefined
-  return loaders === undefined
-    ? undefined
-    : structuredClone(await loaders.data())
+  return simulReader.loadData(id)
 }
 
 /** 只读取指定 Simul 模拟战显式 zh/en 详情，无语言回退；未登记 ID 返回 undefined，非法参数以 TypeError 拒绝。加载失败不吞错，每次返回独立对象树。 */
@@ -712,31 +680,19 @@ export async function loadSimulDetails(
   id: SimulId,
   locale: DetailLocale,
 ): Promise<SimulDetails | undefined> {
-  assertLocale(locale)
-  assertSimulId(id)
-  const loaders = Object.hasOwn(simulLoaders, id) ? simulLoaders[id] : undefined
-  return loaders === undefined
-    ? undefined
-    : structuredClone(await loaders[locale]())
+  return simulReader.loadDetails(id, locale)
 }
 
 /** 显式加载全部 Simul 模拟战公共资料和指定语言详情，以来源 ID 为 key；任一必要文件失败则整体拒绝。不加载其他类别或索引，每次返回独立对象树。 */
 export async function loadAllSimul(
   locale: DetailLocale,
 ): Promise<Record<SimulId, LocalizedSimul>> {
-  assertLocale(locale)
-  return Object.fromEntries(
-    await Promise.all(
-      simulIds.map(async (id) => {
-        const loaders = simulLoaders[id]!
-        const [data, details] = await Promise.all([
-          loaders.data(),
-          loaders[locale](),
-        ])
-        return [id, structuredClone({ data, details })]
-      }),
-    ),
-  ) as Record<SimulId, LocalizedSimul>
+  return simulReader.loadAll(locale)
+}
+
+/** 显式加载全部 Simul 模拟战公共资料，不加载任何详情；任一必要文件失败则整体拒绝。不加载其他类别或索引，每次返回独立对象树。 */
+export async function loadAllSimulData(): Promise<Record<SimulId, SimulData>> {
+  return simulReader.loadAllData()
 }
 
 export { calculationDataVersion } from "../.generated/calculation-data.ts"
@@ -752,33 +708,78 @@ export type {
   AgentPanelRules,
 } from "@randomplay/shared"
 
-/** 按需读取一次静态计算所需的同版资料。core 只接收返回值，不调用本包。 */
+/** 选择包含未知实体时 loadStaticCalculationData 的拒绝原因；一次列出全部未知名称，不因第一个失败短路。 */
+export class UnknownCalculationEntitiesError extends Error {
+  /** 未登记的代理人名称；保持选择中的原序与重复。 */
+  readonly agents: readonly string[]
+  /** 未登记的 WEngine 名称；保持选择中的原序与重复。 */
+  readonly wEngines: readonly string[]
+
+  constructor(agents: readonly string[], wEngines: readonly string[]) {
+    super(
+      `Unknown calculation entities: agents [${agents.join(", ")}], w-engines [${wEngines.join(", ")}]`,
+    )
+    this.name = "UnknownCalculationEntitiesError"
+    this.agents = agents
+    this.wEngines = wEngines
+  }
+}
+
+function assertNameArray(
+  value: unknown,
+  label: string,
+): asserts value is readonly string[] {
+  if (!Array.isArray(value))
+    throw new TypeError(`${label} must be an array of entity names`)
+  for (const name of value)
+    if (typeof name !== "string")
+      throw new TypeError(`${label} must be an array of entity names`)
+}
+
+/**
+ * 按需读取一次静态计算所需的同版资料。core 只接收返回值，不调用本包。
+ * selection 必须是含 agents、wEngines 字符串数组的对象，否则以 TypeError 拒绝；
+ * 任一未知名称以 UnknownCalculationEntitiesError 一次性列出全部未知项后拒绝，
+ * 已登记文件缺失或解析失败同样拒绝，不转换为部分结果。
+ */
 export async function loadStaticCalculationData(selection: {
   readonly agents: readonly AgentName[]
   readonly wEngines: readonly WEngineName[]
 }): Promise<StaticCalculationData> {
+  if (typeof selection !== "object" || selection === null)
+    throw new TypeError(
+      "selection must be an object with agents and wEngines arrays",
+    )
+  assertNameArray(selection.agents, "agents")
+  assertNameArray(selection.wEngines, "wEngines")
+  const agentIdByName = agentSourceIds as Readonly<Record<string, string>>
+  const wEngineIdByName = wEngineSourceIds as Readonly<Record<string, string>>
+  const unknownAgents = selection.agents.filter(
+    (name) => !Object.hasOwn(agentIdByName, name),
+  )
+  const unknownWEngines = selection.wEngines.filter(
+    (name) => !Object.hasOwn(wEngineIdByName, name),
+  )
+  if (unknownAgents.length > 0 || unknownWEngines.length > 0)
+    throw new UnknownCalculationEntitiesError(unknownAgents, unknownWEngines)
   const [agents, wEngines, driveDiscAffixes, definitions, catalog] =
     await Promise.all([
       Promise.all(
         selection.agents.map(async (name) => {
+          const id = agentIdByName[name]!
           const [attributes, actions] = await Promise.all([
-            loadAgentLevel60Attributes(name),
-            loadAgentActions(name),
+            agentAttributeLoaders[id]!(),
+            agentActionLoaders[id]!(),
           ])
-          if (!attributes || !actions)
-            throw new Error(`Unknown calculation agent: ${name}`)
           return { attributes, actions }
         }),
       ),
       Promise.all(
-        selection.wEngines.map(async (name) => {
-          const attributes = await loadWEngineLevel60Attributes(name)
-          if (!attributes)
-            throw new Error(`Unknown calculation w-engine: ${name}`)
-          return attributes
-        }),
+        selection.wEngines.map((name) =>
+          wEngineAttributeLoaders[wEngineIdByName[name]!]!(),
+        ),
       ),
-      loadSDriveDiscMaxLevelAffixes(),
+      driveDiscAffixesLoader(),
       staticEffectDefinitionsLoader(),
       staticEffectCatalogLoader(),
     ])

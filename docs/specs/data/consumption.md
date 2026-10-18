@@ -17,12 +17,16 @@ JSON 子路径导出及根入口的公开 ID 类型、冻结 ID 列表与读取 
 
 ## 名称与类型
 
-根入口导出正式字段类型（包含其引用的索引、文件引用、材料计数与来源身份等结构）、`AgentName`、
-`LocalizedAgent`、`agentNames`、`DriveDiscName`、`LocalizedDriveDisc`、`driveDiscNames`、`WEngineName`、
-`LocalizedWEngine`、`wEngineNames`、`BangbooName`、`LocalizedBangboo`、`bangbooNames`、`MonsterId`、
-`LocalizedMonster`、`monsterIds`、`ShiyuId`、`LocalizedShiyu`、`shiyuIds`、`BossId`、`LocalizedBoss`、
-`bossIds`、`SimulId`、`LocalizedSimul`、`simulIds` 和二十五个读取函数。
-这些类型可供消费者引用，不改变来源 ID 的内部标识用途。`AgentName` 是本次发布所有
+根入口导出正式字段类型（包含其引用的索引、文件引用、材料计数与来源身份等结构）、八个类别的公开身份类型
+与冻结身份列表（`AgentName`、`agentNames`、`DriveDiscName`、`driveDiscNames`、`WEngineName`、`wEngineNames`、
+`BangbooName`、`bangbooNames`、`MonsterId`、`monsterIds`、`ShiyuId`、`shiyuIds`、`BossId`、`bossIds`、
+`SimulId`、`simulIds`）、四个名称身份类别的来源 ID 类型与名称/ID 双向冻结映射（见
+[身份映射与持久化](#身份映射与持久化)）、`Localized` 泛型与八个类别别名、`snapshotInfo` 快照信息常量、
+三十八个读取函数、两个纯解析函数（`resolveAgentSkillLevel`、`resolveAgentAction`）与
+`calculationDataVersion`。本节与[读取接口](#读取接口)共同构成根入口全部导出的唯一清单：技能动作读取
+与等级解析的语义见[技能动作规范](skill-actions.md)，标准化属性读取的语义见
+[60 级属性规范](panel-attributes.md)，静态计算资料读取与错误契约见[读取接口](#读取接口)；
+未在本节或读取接口登记的名称不属于根入口导出。这些类型可供消费者引用，不改变来源 ID 的内部标识用途。`AgentName` 是本次发布所有
 `integrated/agents/{来源ID}/details.en.json` 顶层 `name` 原值的精确字符串字面量 union；`DriveDiscName`
 同理取 `integrated/drive-discs/{来源ID}/details.en.json`，`WEngineName` 取
 `integrated/w-engines/{来源ID}/details.en.json`，`BangbooName` 取
@@ -57,9 +61,41 @@ ID 字面量、冻结列表与懒加载表
 不 trim、不转换 number、不解析科学计数法或补零，未登记字符串返回 undefined，非字符串参数以 TypeError
 拒绝。ID 类型不提供任意 string 重载，保留字面量补全。
 
+### 身份映射与持久化
+
+`AgentSourceId`、`DriveDiscSourceId`、`WEngineSourceId` 与 `BangbooSourceId` 是四个名称身份类别
+本次发布全部成员的来源索引顶层 ID（规范十进制字符串）精确字面量 union，取值与实体文件路径、索引成员
+key 及 End Game 类别的 ID 身份同一空间，由同一已验证发布副本对应类别的 `memberIds` 生成。
+`agentSourceIds: Readonly<Record<AgentName, AgentSourceId>>`、`driveDiscSourceIds`、`wEngineSourceIds`
+与 `bangbooSourceIds` 是名称 → 来源 ID 的冻结映射；`agentNamesBySourceId:
+Readonly<Record<AgentSourceId, AgentName>>`、`driveDiscNamesBySourceId`、`wEngineNamesBySourceId` 与
+`bangbooNamesBySourceId` 是互为反向的来源 ID → 名称冻结映射。两组映射覆盖本版全部成员、运行时冻结，
+调用方不能通过修改映射影响后续使用；查找精确匹配，不提供任意 string 重载。名称与 ID 的对应已经通过
+`data.id` 间接公开，映射只是把同一事实变成可直接引用的常量，不新增身份空间或读取路径；英文更名时
+正向与反向映射同步变化，属于须在发布说明记录的兼容性变化。
+
+持久化建议：跨版本保存配装、队伍或扫描结果时保存来源 ID 与快照版本（`snapshotInfo.source.version`），
+英文名称只作为本次发布的 API 键与显示文本，读取时用反向映射换回当前名称。core 静态计算输入中的
+`agentEntityId`、`wEngine.entityId` 与 `driveDiscs[n].setEntityId` 同样使用来源 ID，组装时应取自这些
+映射或读取结果的 `entityId` 字段，不手写数字。
+
 ## 读取接口
 
 ```ts
+export interface Localized<Data, Details> {
+  /** 原有公共资料结构。 */
+  data: Data
+  /** 指定语言详情，locale 与调用参数一致。 */
+  details: Details
+}
+export type LocalizedAgent = Localized<AgentData, AgentDetails>
+export type LocalizedDriveDisc = Localized<DriveDiscData, DriveDiscDetails>
+export type LocalizedWEngine = Localized<WEngineData, WEngineDetails>
+export type LocalizedBangboo = Localized<BangbooData, BangbooDetails>
+export type LocalizedMonster = Localized<MonsterData, MonsterDetails>
+export type LocalizedShiyu = Localized<ShiyuData, ShiyuDetails>
+export type LocalizedBoss = Localized<BossData, BossDetails>
+export type LocalizedSimul = Localized<SimulData, SimulDetails>
 export declare function loadIndex(): Promise<IntegratedSnapshotIndex>
 export declare function loadAgentData(
   name: AgentName,
@@ -68,15 +104,12 @@ export declare function loadAgentDetails(
   name: AgentName,
   locale: DetailLocale,
 ): Promise<AgentDetails | undefined>
-export interface LocalizedAgent {
-  /** 原有公共资料结构。 */
-  data: AgentData
-  /** 指定语言详情，locale 与调用参数一致。 */
-  details: AgentDetails
-}
 export declare function loadAllAgents(
   locale: DetailLocale,
 ): Promise<Record<AgentName, LocalizedAgent>>
+export declare function loadAllAgentData(): Promise<
+  Record<AgentName, AgentData>
+>
 export declare function loadDriveDiscData(
   name: DriveDiscName,
 ): Promise<DriveDiscData | undefined>
@@ -84,15 +117,12 @@ export declare function loadDriveDiscDetails(
   name: DriveDiscName,
   locale: DetailLocale,
 ): Promise<DriveDiscDetails | undefined>
-export interface LocalizedDriveDisc {
-  /** 原有公共资料结构。 */
-  data: DriveDiscData
-  /** 指定语言详情，locale 与调用参数一致。 */
-  details: DriveDiscDetails
-}
 export declare function loadAllDriveDiscs(
   locale: DetailLocale,
 ): Promise<Record<DriveDiscName, LocalizedDriveDisc>>
+export declare function loadAllDriveDiscData(): Promise<
+  Record<DriveDiscName, DriveDiscData>
+>
 export declare function loadWEngineData(
   name: WEngineName,
 ): Promise<WEngineData | undefined>
@@ -100,15 +130,12 @@ export declare function loadWEngineDetails(
   name: WEngineName,
   locale: DetailLocale,
 ): Promise<WEngineDetails | undefined>
-export interface LocalizedWEngine {
-  /** 原有公共资料结构。 */
-  data: WEngineData
-  /** 指定语言详情，locale 与调用参数一致。 */
-  details: WEngineDetails
-}
 export declare function loadAllWEngines(
   locale: DetailLocale,
 ): Promise<Record<WEngineName, LocalizedWEngine>>
+export declare function loadAllWEngineData(): Promise<
+  Record<WEngineName, WEngineData>
+>
 export declare function loadBangbooData(
   name: BangbooName,
 ): Promise<BangbooData | undefined>
@@ -116,15 +143,12 @@ export declare function loadBangbooDetails(
   name: BangbooName,
   locale: DetailLocale,
 ): Promise<BangbooDetails | undefined>
-export interface LocalizedBangboo {
-  /** 原有公共资料结构。 */
-  data: BangbooData
-  /** 指定语言详情，locale 与调用参数一致。 */
-  details: BangbooDetails
-}
 export declare function loadAllBangboos(
   locale: DetailLocale,
 ): Promise<Record<BangbooName, LocalizedBangboo>>
+export declare function loadAllBangbooData(): Promise<
+  Record<BangbooName, BangbooData>
+>
 export declare function loadMonsterData(
   id: MonsterId,
 ): Promise<MonsterData | undefined>
@@ -132,15 +156,12 @@ export declare function loadMonsterDetails(
   id: MonsterId,
   locale: DetailLocale,
 ): Promise<MonsterDetails | undefined>
-export interface LocalizedMonster {
-  /** 原有公共资料结构。 */
-  data: MonsterData
-  /** 指定语言详情，locale 与调用参数一致。 */
-  details: MonsterDetails
-}
 export declare function loadAllMonsters(
   locale: DetailLocale,
 ): Promise<Record<MonsterId, LocalizedMonster>>
+export declare function loadAllMonsterData(): Promise<
+  Record<MonsterId, MonsterData>
+>
 export declare function loadShiyuData(
   id: ShiyuId,
 ): Promise<ShiyuData | undefined>
@@ -148,29 +169,19 @@ export declare function loadShiyuDetails(
   id: ShiyuId,
   locale: DetailLocale,
 ): Promise<ShiyuDetails | undefined>
-export interface LocalizedShiyu {
-  /** 原有公共资料结构。 */
-  data: ShiyuData
-  /** 指定语言详情，locale 与调用参数一致。 */
-  details: ShiyuDetails
-}
 export declare function loadAllShiyu(
   locale: DetailLocale,
 ): Promise<Record<ShiyuId, LocalizedShiyu>>
+export declare function loadAllShiyuData(): Promise<Record<ShiyuId, ShiyuData>>
 export declare function loadBossData(id: BossId): Promise<BossData | undefined>
 export declare function loadBossDetails(
   id: BossId,
   locale: DetailLocale,
 ): Promise<BossDetails | undefined>
-export interface LocalizedBoss {
-  /** 原有公共资料结构。 */
-  data: BossData
-  /** 指定语言详情，locale 与调用参数一致。 */
-  details: BossDetails
-}
 export declare function loadAllBosses(
   locale: DetailLocale,
 ): Promise<Record<BossId, LocalizedBoss>>
+export declare function loadAllBossData(): Promise<Record<BossId, BossData>>
 export declare function loadSimulData(
   id: SimulId,
 ): Promise<SimulData | undefined>
@@ -178,25 +189,29 @@ export declare function loadSimulDetails(
   id: SimulId,
   locale: DetailLocale,
 ): Promise<SimulDetails | undefined>
-export interface LocalizedSimul {
-  /** 原有公共资料结构。 */
-  data: SimulData
-  /** 指定语言详情，locale 与调用参数一致。 */
-  details: SimulDetails
-}
 export declare function loadAllSimul(
   locale: DetailLocale,
 ): Promise<Record<SimulId, LocalizedSimul>>
+export declare function loadAllSimulData(): Promise<Record<SimulId, SimulData>>
 ```
 
 - `loadIndex` 只加载完整原样索引（v3 外壳），包含快照来源输入、全部已登记类别、各类别的规则版本与语言、
   成员文件引用与独立来源索引记录；不加载实体。根导出同时提供 `IntegratedSnapshotIndex`、
   `IntegratedSnapshotEntity`、`IntegratedSnapshotMember` 与 `IntegratedSnapshotSourceInput` 类型；
-  旧的 v2 索引外壳类型不再公开导出，公开读取只有一种索引形状。
+  旧的 v2 索引外壳类型不再公开导出，公开读取只有一种索引形状。`loadIndex` 定位为完整性与归档清单读取：
+  其体积主要来自逐成员的 SHA-256 文件摘要与完整 sourceRecord，公开 API 不在运行时重算摘要。
+- 根入口同时提供 `snapshotInfo: IntegratedSnapshotInfo` 冻结常量：来自同一已验证发布副本完整索引的轻量
+  信息，含 `format`、`source.id`、`source.version` 与各类别的 `rulesVersion`、`detailLocales`、`memberIds`，
+  不含 sourceRecord、文件引用或输入摘要，运行时深冻结，导入根入口即可同步访问。只想读取快照身份、
+  类别规则版本或成员清单时使用它，不必加载完整索引。
 - `loadAgentData` 只加载该成员 data；`loadAgentDetails` 只加载该成员指定语言 details。均无需先调用索引。
 - `loadAllAgents` 显式加载本版全部 data 与指定语言 details，目前为 60 + 60 个文件；结果以 AgentName 为 key。
   `data` 和 `details` 保持两个独立对象，不合并同名字段。索引的成员表是
   `entities.agents.members`，仍以来源数字字符串为 key。
+- `loadAllAgentData`、`loadAllDriveDiscData`、`loadAllWEngineData`、`loadAllBangbooData`、`loadAllMonsterData`、
+  `loadAllShiyuData`、`loadAllBossData` 与 `loadAllSimulData` 只显式加载对应类别全部成员的公共资料，
+  不加载任何语言的详情，也不加载索引或其他类别；结果以该类别公开身份为 key（名称类别按英文名称、
+  ID 类别按来源 ID），任一必要文件失败即整体拒绝，每次返回独立对象树。
 - `loadDriveDiscData` 只加载该套装 data；`loadDriveDiscDetails` 只加载该套装指定语言 details；
   `loadAllDriveDiscs` 显式加载全部驱动盘套装 data 与指定语言 details，目前为 30 + 30 个文件，结果以
   DriveDiscName 为 key，`data` 与 `details` 同样分开保留。索引的成员表是
@@ -230,6 +245,17 @@ export declare function loadAllSimul(
   邦布、怪物、Boss、Simul 文件或索引，Boss 不加载代理人、驱动盘、WEngine、邦布、怪物、Shiyu、Simul 文件
   或索引，Simul 不加载代理人、驱动盘、WEngine、邦布、怪物、Shiyu、Boss 文件或索引；各类别加载边界互不
   串读。End Game 类别中的 Monster 引用不触发 Monster 自动加载。
+- `loadStaticCalculationData(selection)` 按英文名称选择代理人与 WEngine，一次读取静态计算所需的同版资料
+  （属性、动作、音擎属性、驱动盘词条、静态效果定义、效果目录与面板适配规则），返回值由调用方整体传递与
+  缓存。selection 必须是含 `agents`、`wEngines` 两个字符串数组的对象：selection 不是对象、任一数组缺失
+  或元素不是字符串，都以 TypeError 拒绝；任一未登记名称以 `UnknownCalculationEntitiesError` 拒绝，其
+  `agents` 与 `wEngines` 字段一次列出全部未知名称（保持选择原序与重复），不因第一个未知项短路；
+  已登记文件缺失或解析失败同样使 Promise 拒绝，不返回部分结果。重复名称按出现次数重复读取，
+  空选择返回空成员数组的完整结构。身份组装遵循[身份映射与持久化](#身份映射与持久化)。
+- 跨语言共享字段采用固定读取规则：`live2D`、`partnerInfo.iconPath`、`partnerInfo.roleIcon`、
+  `skill.*.material`、`extraLevel.*.maxLevel` 等按整合规范的"各语言同有且相等时入 data，单语言独有留
+  details"拆分。读取时先查 data 的同名字段，缺失再读当前语言 details 的同位置字段；两侧均缺失即来源
+  本身缺失，不补默认值。该规则覆盖历史数据集与未来单语言变体，不改变存储层的来源保真拆分。
 
 ## 分发与按需加载
 
@@ -238,7 +264,7 @@ export declare function loadAllSimul(
 `/definitions/skills/agents/{来源ID}.json` 与 `/definitions/skills/manifest.json`，与其他 definitions 一起冻结发布。
 
 包保持 ESM，Node 范围沿用包清单，浏览器首版验收目标为 Vite 开发与生产消费。根入口导入不加载任何数据 JSON；
-允许加载小型名称元数据和显式动态导入表。Node 与 browser 条件入口由同一源码和副本生成；
+允许加载小型名称与 ID 元数据、名称/ID 冻结映射、`snapshotInfo` 常量和显式动态导入表。Node 与 browser 条件入口由同一源码和副本生成；
 Node 使用 JSON 导入属性，browser 入口交由 Vite 转换 JSON，默认开发预构建无需额外 exclude 配置。消费者无需配置路径表或运行生成器，无运行时服务、CDN 或 core 依赖。
 npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块或构建后的分块，全量读取需显式调用。
 
@@ -277,10 +303,10 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 
 这些路径映射到包内对应 `dist/` 的已验证发布副本：`/integrated/*` 来自受管理的发布副本，`/definitions/effects/*.json` 是 Git 跟踪的静态效果规则集，构建时逐文件字节复验后复制。`starter.json` 保留耀嘉音核心、耀嘉音 2 影与啄木鸟电音两件套三条规则，`automatic.json` 的范围由[首批自动规则接入](../effects/automatic-rules.md)维护；类型与执行契约由[统一效果规则模型](../effects/index.md)维护。导入根入口不加载任何数据或定义 JSON，效果定义同样只在显式导入该子路径时读取。JSON 原字节、字段、层级、文件名、摘要全部保留，
 索引成员引用为 `files.data` 与 `files.details.{locale}`。包内包含八个类别的完整数据；根入口的名称与 ID
-元数据及显式动态导入表引用全部已发布 JSON，但导入根入口仍不加载任何数据 JSON：浏览器只在调用对应函数时
+元数据、名称/ID 冻结映射、快照信息常量及显式动态导入表引用全部已发布 JSON，但导入根入口仍不加载任何数据 JSON：浏览器只在调用对应函数时
 请求该 JSON 模块或构建后的分块，全量读取需显式调用。包只包含 dist 与 npm 标准清单、README、LICENSE；
 不包含 raw、本机控制目录、抓取/恢复工具及内部维护材料。直接 JSON 导入遵循宿主模块缓存语义；
-返回对象隔离保证属于上述二十五个函数。
+返回对象隔离保证属于根入口导出的全部读取函数。
 
 ## 自动效果消费
 

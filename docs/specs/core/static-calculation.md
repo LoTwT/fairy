@@ -20,7 +20,11 @@
 两件套由装备自动计入。副词条 `rolls` 包括初始档，以下每槽合计九档。
 
 ```ts canonical
-import { loadStaticCalculationData, resolveAgentAction } from "@randomplay/data"
+import {
+  driveDiscSourceIds,
+  loadStaticCalculationData,
+  resolveAgentAction,
+} from "@randomplay/data"
 import { calculateStaticActionDamage } from "@randomplay/core"
 import type {
   StaticActionCalculationInput,
@@ -46,6 +50,8 @@ async function main() {
   const [agent] = data.agents
   const [wEngine] = data.wEngines
   if (!agent || !wEngine) throw new Error("缺少本次配装资料")
+  const hormonePunk = driveDiscSourceIds["Hormone Punk"]
+  const woodpeckerElectro = driveDiscSourceIds["Woodpecker Electro"]
 
   const attackPercentage = substat("attack", "initial-percentage", 3)
   const criticalRate = substat("criticalRate", "ratio-add", 3)
@@ -60,7 +66,7 @@ async function main() {
     panel: { mode: "equipment" },
     driveDiscs: {
       1: {
-        setEntityId: "31400",
+        setEntityId: hormonePunk,
         mainStat: { attribute: "health" },
         substats: [
           attackPercentage,
@@ -70,7 +76,7 @@ async function main() {
         ],
       },
       2: {
-        setEntityId: "31400",
+        setEntityId: hormonePunk,
         mainStat: { attribute: "attack" },
         substats: [
           attackPercentage,
@@ -80,7 +86,7 @@ async function main() {
         ],
       },
       3: {
-        setEntityId: "31400",
+        setEntityId: hormonePunk,
         mainStat: { attribute: "defense" },
         substats: [
           attackPercentage,
@@ -90,7 +96,7 @@ async function main() {
         ],
       },
       4: {
-        setEntityId: "31400",
+        setEntityId: hormonePunk,
         mainStat: { attribute: "criticalDamage" },
         substats: [
           attackPercentage,
@@ -100,7 +106,7 @@ async function main() {
         ],
       },
       5: {
-        setEntityId: "31000",
+        setEntityId: woodpeckerElectro,
         mainStat: { attribute: "damageBonus", element: "physical" },
         substats: [
           attackPercentage,
@@ -110,7 +116,7 @@ async function main() {
         ],
       },
       6: {
-        setEntityId: "31000",
+        setEntityId: woodpeckerElectro,
         mainStat: { attribute: "attack" },
         substats: [
           criticalRate,
@@ -225,7 +231,9 @@ void main().catch((error: unknown) => {
 `daze-only` 仅表明该动作不提供伤害，本接口不在这个分支计算最终失衡值。
 
 加载函数按英文名称选资料，`agentEntityId`、音擎及套装 ID 对应来源实体；`entityId`、`teamId`
-由应用分配，区分当前队伍中的持有者。可从动作目录读取 `actionId`，从 `data.catalog.options`
+由应用分配，区分当前队伍中的持有者。未随 selection 返回的来源 ID（如驱动盘套装）用 data 根入口的
+`driveDiscSourceIds` 等名称/ID 公开映射取得，持久化建议见
+[身份映射与持久化](../data/consumption.md#身份映射与持久化)。可从动作目录读取 `actionId`，从 `data.catalog.options`
 读取选项的 `optionId`、`name`、`conditionDescription` 和各 `variants` 的培养、层数、输入及支持限制。
 选择选项表示调用方确认条件当前成立，`holderId` 必须指向对应持有者。
 
