@@ -279,10 +279,10 @@ export async function snapshotLanguageTypes(
     historicalLanguages: true,
   })
   const historicalDetails =
-    historical.entities.agents.members["2"].files.details
+    historical.entities.agents!.members["2"].files.details
   // @ts-expect-error 历史集可能不含中文，不能直接访问固定语言的文件路径。
   const unsafeHistorical: string = historicalDetails.zh.path
-  const historicalLocales: string[] = historical.entities.agents.detailLocales
+  const historicalLocales: string[] = historical.entities.agents!.detailLocales
   const english = historicalDetails.en
   if (english) {
     const safePath: string = english.path
@@ -292,7 +292,7 @@ export async function snapshotLanguageTypes(
     artifactDirectory,
     historicalLanguages: dynamicHistorical,
   })
-  const dynamicDetails = dynamic.entities.agents.members["2"].files.details
+  const dynamicDetails = dynamic.entities.agents!.members["2"].files.details
   // @ts-expect-error 动态 boolean 可能启用历史语言验证，返回引用也可能缺失。
   const unsafeDynamic: string = dynamicDetails.zh.path
   const optionalOptions: {
@@ -300,7 +300,7 @@ export async function snapshotLanguageTypes(
     historicalLanguages?: boolean
   } = { artifactDirectory }
   const optional = await verifyIntegratedSnapshot(optionalOptions)
-  const optionalDetails = optional.entities.agents.members["2"].files.details
+  const optionalDetails = optional.entities.agents!.members["2"].files.details
   // @ts-expect-error 未收窄的可选 boolean 不保证完整语言引用。
   const unsafeOptional: string = optionalDetails.zh.path
   // @ts-expect-error 历史复验结果不能直接当作完整语言索引使用。

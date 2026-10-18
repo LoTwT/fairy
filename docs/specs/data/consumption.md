@@ -207,10 +207,13 @@ export declare function loadAllSimulData(): Promise<Record<SimulId, SimulData>>
   `IntegratedSnapshotEntity`、`IntegratedSnapshotMember` 与 `IntegratedSnapshotSourceInput` 类型；
   旧的 v2 索引外壳类型不再公开导出，公开读取只有一种索引形状。`loadIndex` 定位为完整性与归档清单读取：
   其体积主要来自逐成员的 SHA-256 文件摘要与完整 sourceRecord，公开 API 不在运行时重算摘要。
-- 根入口同时提供 `snapshotInfo: IntegratedSnapshotInfo` 冻结常量：来自同一已验证发布副本完整索引的轻量
+- 根入口同时提供 `IntegratedSnapshotCategory`（八个已接入类别名的字面量 union）与
+  `snapshotInfo: IntegratedSnapshotInfo` 冻结常量：常量来自同一已验证发布副本完整索引的轻量
   信息，含 `format`、`source.id`、`source.version` 与各类别的 `rulesVersion`、`detailLocales`、`memberIds`，
-  不含 sourceRecord、文件引用或输入摘要，运行时深冻结，导入根入口即可同步访问。只想读取快照身份、
-  类别规则版本或成员清单时使用它，不必加载完整索引。
+  `entities` 以 `Record<IntegratedSnapshotCategory, …>` 类型化——全部已接入类别都在场，类别属性访问
+  不需要存在性判断；不含 sourceRecord、文件引用或输入摘要，运行时深冻结，导入根入口即可同步访问。
+  只想读取快照身份、类别规则版本或成员清单时使用它，不必加载完整索引。`loadIndex` 返回的完整索引
+  保持开放类别 key（历史迁移与合成验收制品可为类别子集），按名称访问前应做存在性检查。
 - `loadAgentData` 只加载该成员 data；`loadAgentDetails` 只加载该成员指定语言 details。均无需先调用索引。
 - `loadAllAgents` 显式加载本版全部 data 与指定语言 details，目前为 60 + 60 个文件；结果以 AgentName 为 key。
   `data` 和 `details` 保持两个独立对象，不合并同名字段。索引的成员表是

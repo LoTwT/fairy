@@ -15,6 +15,20 @@ export const integratedSnapshotFormat = "fairy-nanoka-integrated/v3"
 /** 详情语言 → 详情文件引用；默认类型保证当前完整语言配置，历史类型允许缺失。 */
 type SnapshotDetailFiles = Partial<Record<DetailLocale, ExportFileReference>>
 
+/**
+ * 已接入类别名；与整合登记表的类别名集合一致，当前为八个类别。
+ * 新增类别属于索引形状的兼容性变化；历史复验的索引允许缺失部分类别。
+ */
+export type IntegratedSnapshotCategory =
+  | "agents"
+  | "drive-discs"
+  | "w-engines"
+  | "bangboos"
+  | "monsters"
+  | "shiyu"
+  | "boss"
+  | "simul"
+
 /** 来源输入资源及其原始字节摘要；resource 是来源相对资源名，不是可执行地址。 */
 export interface IntegratedSnapshotSourceInput {
   /** 来源相对资源名，如 zzz/3.1/character.json；不含主机或远程地址。 */
@@ -95,18 +109,32 @@ export interface IntegratedSnapshotIndex<
     inputs: IntegratedSnapshotSourceInput[]
   }
 
-  /** 已包含类别 → 该类别完整成员、规则、语言、来源输入与输出文件摘要；key 由已接入类别登记表定义。 */
+  /**
+   * 已包含类别 → 该类别完整成员、规则、语言、来源输入与输出文件摘要。
+   * 当前发布制品包含全部已接入类别（`IntegratedSnapshotCategory` 的八个值，发布前逐类校验），
+   * `snapshotInfo` 常量以完整类别集合类型化；历史迁移与合成验收制品可为类别子集，本类型保持开放。
+   */
   entities: Record<string, IntegratedSnapshotEntity<DetailFiles>>
 }
 
 /**
- * 历史复验得到的索引：详情语言引用可能缺失，访问前必须检查存在性。
+ * 历史复验得到的索引：详情语言引用与类别都可能缺失，访问前必须检查存在性。
  *
- * 严格验证与新建制品返回上文的完整语言类型；只有启用历史模式（含动态 boolean）的复验返回本类型。
+ * 严格验证与新建制品返回上文的完整类型；只有启用历史模式（含动态 boolean）的复验返回本类型。
  * JSON 字段与完整类型相同，两者只有类型层面的可选性差别。
  */
-export type HistoricalIntegratedSnapshotIndex =
-  IntegratedSnapshotIndex<SnapshotDetailFiles>
+export type HistoricalIntegratedSnapshotIndex = Omit<
+  IntegratedSnapshotIndex<SnapshotDetailFiles>,
+  "entities"
+> & {
+  entities: Partial<
+    Record<
+      IntegratedSnapshotCategory,
+      IntegratedSnapshotEntity<SnapshotDetailFiles>
+    >
+  > &
+    Record<string, IntegratedSnapshotEntity<SnapshotDetailFiles> | undefined>
+}
 
 /**
  * 轻量快照信息：来自完整 v3 索引的来源版本与各类别的规则版本、语言、成员清单。
@@ -126,10 +154,10 @@ export interface IntegratedSnapshotInfo {
     readonly version: string
   }
 
-  /** 已接入类别 → 规则版本、详情语言与成员 ID 清单；key 集合与完整索引的 entities 一致。 */
+  /** 已接入类别 → 规则版本、详情语言与成员 ID 清单；全部已接入类别都在场，与完整索引一致。 */
   readonly entities: Readonly<
     Record<
-      string,
+      IntegratedSnapshotCategory,
       {
         /** 该类别的整合规则版本；各类别独立演进。 */
         readonly rulesVersion: string

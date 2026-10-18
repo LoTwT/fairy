@@ -4,8 +4,8 @@ import { dirname, isAbsolute, join, relative, sep } from "node:path"
 import type {
   DetailLocale,
   ExportFileReference,
-  IntegratedIndex,
 } from "../../src/integration/agent-types.ts"
+import type { IntegratedIndex } from "./legacy-index-types.ts"
 import type {
   IntegratedSnapshotIndex,
   IntegratedSnapshotMember,

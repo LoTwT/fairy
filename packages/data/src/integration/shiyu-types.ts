@@ -49,7 +49,7 @@ export interface ShiyuDetails {
   locale: DetailLocale
 
   /**
-   * 来源 name 当前语言原文；类内大量重名（本地 3.1 的剧变节点类记录共 56 条同名），
+   * 来源 name 当前语言原文；类内大量重名（本地 3.2 的 62 条记录仅 4 个不同名称，58 条同名），
    * 不作为公开身份，也不做非空或类内唯一检查。
    */
   name: string

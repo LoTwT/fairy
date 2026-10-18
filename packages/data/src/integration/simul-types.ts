@@ -12,7 +12,7 @@ import type { DetailLocale, SourceJson } from "./agent-types.ts"
 
 /** data.json：跨语言一致的公共资料。 */
 export interface SimulData {
-  /** 复制自本语言来源详情的数值 Simul ID；与目录和索引成员核对。 */
+  /** 来源详情的数值 Simul ID；与目录 ID、索引成员和 details.id 核对一致。 */
   id: number
 
   /** 来源 `end_time`。结束时间原始字符串；空字符串是合法原值，不换算时间戳。 */
