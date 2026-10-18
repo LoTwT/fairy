@@ -9,7 +9,6 @@ import type {
   ResolvedAgentAction,
   StaticCalculationData,
 } from "@randomplay/shared"
-import type { AgentSourceId, WEngineSourceId } from "../../src/index.ts"
 
 export const roxyWeatheredOption =
   "nanoka:agents:1621:additional-weathered-direct-damage"
@@ -135,8 +134,8 @@ export function makeWindsweptCannonRotorRequest(
 /** 用真实耀变动作检查高层风化事实的唯一输入位置，不伪造普通动作的路由。 */
 export async function makeWindsweptLuminizeRequest(api: {
   loadStaticCalculationData(selection: {
-    readonly agents: readonly AgentSourceId[]
-    readonly wEngines: readonly WEngineSourceId[]
+    readonly agents: readonly ["1581"]
+    readonly wEngines: readonly []
   }): Promise<StaticCalculationData>
   resolveAgentAction(input: ResolveAgentActionInput): ResolvedAgentAction
 }): Promise<StaticActionCalculationInput> {
