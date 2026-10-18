@@ -27,7 +27,7 @@ const M6_TARGET = "zzz-hp:skill:nangongyu-vibrato-modified"
 let loaded: Awaited<ReturnType<typeof loadStaticCalculationData>> | undefined
 const data = async () => {
   loaded ??= await loadStaticCalculationData({
-    agents: ["Nangong Yu", "Burnice"],
+    agents: ["1511", "1171"],
     wEngines: [],
   })
   return loaded

@@ -418,10 +418,13 @@ const allAgentData = await api.loadAllAgentData()
 assert.equal(Object.keys(allAgentData).length, api.agentNames.length)
 assert.equal(allAgentData.Nicole.id, 1031)
 let unknownError = null
-try { await api.loadStaticCalculationData({ agents: ["Nicole", "Nope"], wEngines: ["Ghost Engine"] }) } catch (error) { unknownError = error }
+try { await api.loadStaticCalculationData({ agents: ["1031", "9999"], wEngines: ["99999"] }) } catch (error) { unknownError = error }
 assert.equal(unknownError.name, "UnknownCalculationEntitiesError")
-assert.deepEqual(unknownError.agents, ["Nope"])
-assert.deepEqual(unknownError.wEngines, ["Ghost Engine"])
+assert.deepEqual(unknownError.agents, ["9999"])
+assert.deepEqual(unknownError.wEngines, ["99999"])
+try { await api.loadStaticCalculationData({ agents: ["Nicole"], wEngines: [] }) } catch (error) { unknownError = error }
+assert.equal(unknownError.name, "UnknownCalculationEntitiesError")
+assert.deepEqual(unknownError.agents, ["Nicole"])
 for (const [names, load, category] of [[api.agentNames, api.loadAgentLevel60Attributes, "agents"], [api.wEngineNames, api.loadWEngineLevel60Attributes, "w-engines"]]) {
   for (const name of names) {
     const attributes = await load(name)
@@ -456,7 +459,7 @@ assert.equal(starterDefinitions.default.ruleSetId, "starter-effects")
 assert.equal(starterDefinitions.default.effects.length, 3)
 const automaticDefinitions = await import("@randomplay/data/definitions/effects/automatic.json", { with: { type: "json" } })
 const { parseEffectRuleSet, prepareEffects, supplyEffectState, advanceEffects, calculateStaticDamageFromCatalog, calculateStaticActionDamage, CORE_PACKAGE_VERSION } = await import("@randomplay/core")
-const calculationData = await (await import("@randomplay/data")).loadStaticCalculationData({ agents: ["Ben"], wEngines: [] })
+const calculationData = await (await import("@randomplay/data")).loadStaticCalculationData({ agents: [api.agentSourceIds.Ben], wEngines: [] })
 assert.equal(calculationData.version.packageVersion, CORE_PACKAGE_VERSION)
 assert.equal(calculationData.agents.length, 1)
 assert.equal(calculationData.agents[0].attributes.entityId, "1121")
@@ -467,7 +470,7 @@ const benCalculation = calculateStaticActionDamage({ data: calculationData, acto
 assert.equal(benCalculation.ok, true, JSON.stringify(benCalculation))
 assert.ok(Math.abs(benCalculation.value.panels[0].stats.attack.value - 1232.31468) < 1e-8)
 function value(result) { assert.equal(result.ok, true, JSON.stringify(result)); return result.value }
-const aggregateData = await api.loadStaticCalculationData({ agents: ["Burnice", "Grace", "Lighter", "Orphie & Magus", "Lucy"], wEngines: [] })
+const aggregateData = await api.loadStaticCalculationData({ agents: [api.agentSourceIds.Burnice, api.agentSourceIds.Grace, api.agentSourceIds.Lighter, api.agentSourceIds["Orphie & Magus"], api.agentSourceIds.Lucy], wEngines: [] })
 for (const [id, suffix, element, expected, mindscapeRank, optionId, selectedExpected] of [
   ["1151", "0011", "fire", 1674, 0, null, null],
   ["1171", "0001", "fire", 1521.9, 0, null, null],
@@ -529,7 +532,7 @@ await verifyVeilConsumer(api, calculateStaticActionDamage)
 // 维琳娜微域气旋：安装包根入口解析并计算具名直伤约定。期望值独立于实现：
 // 面板攻击 (797.574 + 75 + 684.02) × 1.6 + 316 = 2806.5504；暴击率 0.05 + 0.08、
 // 暴伤 0.5、穿透 0.24；1 级 32.5%、12 级 65.5%；防御 794/(794+1000×0.76)、风抗 0.2。
-const velinaData = await api.loadStaticCalculationData({ agents: ["Velina"], wEngines: ["Fusion Compiler"] })
+const velinaData = await api.loadStaticCalculationData({ agents: [api.agentSourceIds.Velina], wEngines: [api.wEngineSourceIds["Fusion Compiler"]] })
 const velinaActions = velinaData.agents[0].actions
 const velinaAction = velinaActions.actions.find(entry => entry.actionId === "action:agent:1561:action:0021")
 assert.equal(velinaAction.skillCategory, "uncategorized")
@@ -556,7 +559,7 @@ assert.equal(calculateStaticActionDamage({ ...velinaRequest, requireIndividualHi
 // 通用 assist 登场技：安装包根入口解析并计算具名直伤约定，期望值独立于实现：
 // 受控局外面板攻击 1000、辅助最终 12；防御与抗性恒等，倍率 13.612 / 8.008；
 // 选择真实混沌爵士四件套支援大类选项一次 0.2 后分别乘 1.2。
-const assistData = await api.loadStaticCalculationData({ agents: ["Zhao", "Ye Shunguang"], wEngines: [] })
+const assistData = await api.loadStaticCalculationData({ agents: [api.agentSourceIds.Zhao, api.agentSourceIds["Ye Shunguang"]], wEngines: [] })
 for (const [id, suffix, element, multiplier] of [["1341", "0001", "ice", 13.612], ["1431", "0001", "physical", 8.008]]) {
   const agent = assistData.agents.find(entry => entry.attributes.entityId === id).actions
   const action = agent.actions.find(entry => entry.actionId === "action:agent:" + id + ":action:" + suffix)
@@ -596,7 +599,7 @@ assert.ok(staticResult.expected > staticResult.nonCritical)
 const remielVoidflareMechanism = staticCatalog.mechanisms?.find((mechanism) => mechanism.mechanism === "remielle-special-voidflare")
 assert.ok(remielVoidflareMechanism, "the packed catalog declares the special Voidflare mechanism")
 assert.equal(remielVoidflareMechanism.agentEntityId, "1581")
-const remielVoidflareData = await (await import("@randomplay/data")).loadStaticCalculationData({ agents: ["Remielle"], wEngines: ["Ode of Resurrected Wings"] })
+const remielVoidflareData = await (await import("@randomplay/data")).loadStaticCalculationData({ agents: [api.agentSourceIds.Remielle], wEngines: [api.wEngineSourceIds["Ode of Resurrected Wings"]] })
 assert.ok(remielVoidflareData.catalog.mechanisms?.some((mechanism) => mechanism.mechanism === "remielle-special-voidflare"), "the data root entry exposes the mechanism metadata")
 const voidflareInput = {
   definitions: staticDefinitions,
@@ -1086,7 +1089,7 @@ ${aliceCorePeriodicConsumerTypes}
 ${astraYaoM4ConsumerTypes}
 ${lucyGuardBoarConsumerTypes}
 import type { StaticCalculationData as CoreCalculationData, StaticActionCalculationInput, StaticCatalogDamageInput, StaticCatalogDefenseInput, StaticCatalogLuminizeDamageBranch, StaticCatalogMechanism, RemielleSpecialVoidflareAnomalySource } from "@randomplay/core"
-const jointData: Promise<CoreCalculationData> = loadStaticCalculationData({ agents: ["Ben"], wEngines: [] })
+const jointData: Promise<CoreCalculationData> = loadStaticCalculationData({ agents: [agentSourceIds.Ben], wEngines: [] })
 const windDiscElement: import("@randomplay/data").DriveDiscDamageElement = "wind"
 const windDiscMainStat: NonNullable<import("@randomplay/core").StaticDriveDisc["mainStat"]> = { attribute: "damageBonus", element: windDiscElement }
 async function typedCalculation(input: Omit<StaticActionCalculationInput, "data">) {

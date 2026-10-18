@@ -38,6 +38,7 @@ export type {
 } from "./integration/simul-types.ts"
 import type { SimulData, SimulDetails } from "./integration/simul-types.ts"
 import type { IntegratedSnapshotIndex } from "./integration/snapshot-types.ts"
+import { supportedLanguages } from "./nanoka-identity.ts"
 import type { AgentActions } from "./skills/types.ts"
 import type {
   AgentLevel60Attributes,
@@ -46,8 +47,10 @@ import type {
 } from "./attributes/types.ts"
 import type {
   AgentName,
+  AgentSourceId,
   DriveDiscName,
   WEngineName,
+  WEngineSourceId,
   BangbooName,
   MonsterId,
   ShiyuId,
@@ -57,12 +60,14 @@ import type {
 import {
   agentNames,
   agentSourceIds,
+  agentNamesBySourceId,
   agentLoaders,
   driveDiscNames,
   driveDiscSourceIds,
   driveDiscLoaders,
   wEngineNames,
   wEngineSourceIds,
+  wEngineNamesBySourceId,
   wEngineLoaders,
   bangbooNames,
   bangbooSourceIds,
@@ -272,10 +277,10 @@ function assertString(value: unknown, label: string): asserts value is string {
     throw new TypeError(`${label} must be a string`)
 }
 
-/** 校验显式 zh/en 语言参数；不默认、不转换、不回退。 */
+/** 校验已支持的详情语言；不默认、不转换、不回退，语言集合由 supportedLanguages 推导。 */
 function assertLocale(locale: unknown): asserts locale is DetailLocale {
-  if (locale !== "zh" && locale !== "en")
-    throw new TypeError("locale must be zh or en")
+  if (!(supportedLanguages as readonly unknown[]).includes(locale))
+    throw new TypeError(`locale must be ${supportedLanguages.join(" or ")}`)
 }
 
 /** 名称身份 → 来源 ID；非字符串以 TypeError 拒绝，未登记名称返回 undefined。 */
@@ -708,11 +713,11 @@ export type {
   AgentPanelRules,
 } from "@randomplay/shared"
 
-/** 选择包含未知实体时 loadStaticCalculationData 的拒绝原因；一次列出全部未知名称，不因第一个失败短路。 */
+/** 选择包含未登记来源 ID 时 loadStaticCalculationData 的拒绝原因；一次列出全部未知 ID，不因第一个失败短路。 */
 export class UnknownCalculationEntitiesError extends Error {
-  /** 未登记的代理人名称；保持选择中的原序与重复。 */
+  /** 未登记的代理人来源 ID；保持选择中的原序与重复。 */
   readonly agents: readonly string[]
-  /** 未登记的 WEngine 名称；保持选择中的原序与重复。 */
+  /** 未登记的 WEngine 来源 ID；保持选择中的原序与重复。 */
   readonly wEngines: readonly string[]
 
   constructor(agents: readonly string[], wEngines: readonly string[]) {
@@ -725,48 +730,45 @@ export class UnknownCalculationEntitiesError extends Error {
   }
 }
 
-function assertNameArray(
+function assertSourceIdArray(
   value: unknown,
   label: string,
 ): asserts value is readonly string[] {
   if (!Array.isArray(value))
-    throw new TypeError(`${label} must be an array of entity names`)
-  for (const name of value)
-    if (typeof name !== "string")
-      throw new TypeError(`${label} must be an array of entity names`)
+    throw new TypeError(`${label} must be an array of source IDs`)
+  for (const id of value)
+    if (typeof id !== "string")
+      throw new TypeError(`${label} must be an array of source IDs`)
 }
 
 /**
  * 按需读取一次静态计算所需的同版资料。core 只接收返回值，不调用本包。
- * selection 必须是含 agents、wEngines 字符串数组的对象，否则以 TypeError 拒绝；
- * 任一未知名称以 UnknownCalculationEntitiesError 一次性列出全部未知项后拒绝，
+ * selection 必须是含 agents、wEngines 两个来源 ID 字符串数组的对象，否则以 TypeError 拒绝；
+ * 任一未登记 ID（含传入英文名称）以 UnknownCalculationEntitiesError 一次性列出全部未知项后拒绝，
  * 已登记文件缺失或解析失败同样拒绝，不转换为部分结果。
  */
 export async function loadStaticCalculationData(selection: {
-  readonly agents: readonly AgentName[]
-  readonly wEngines: readonly WEngineName[]
+  readonly agents: readonly AgentSourceId[]
+  readonly wEngines: readonly WEngineSourceId[]
 }): Promise<StaticCalculationData> {
   if (typeof selection !== "object" || selection === null)
     throw new TypeError(
       "selection must be an object with agents and wEngines arrays",
     )
-  assertNameArray(selection.agents, "agents")
-  assertNameArray(selection.wEngines, "wEngines")
-  const agentIdByName = agentSourceIds as Readonly<Record<string, string>>
-  const wEngineIdByName = wEngineSourceIds as Readonly<Record<string, string>>
+  assertSourceIdArray(selection.agents, "agents")
+  assertSourceIdArray(selection.wEngines, "wEngines")
   const unknownAgents = selection.agents.filter(
-    (name) => !Object.hasOwn(agentIdByName, name),
+    (id) => !Object.hasOwn(agentNamesBySourceId, id),
   )
   const unknownWEngines = selection.wEngines.filter(
-    (name) => !Object.hasOwn(wEngineIdByName, name),
+    (id) => !Object.hasOwn(wEngineNamesBySourceId, id),
   )
   if (unknownAgents.length > 0 || unknownWEngines.length > 0)
     throw new UnknownCalculationEntitiesError(unknownAgents, unknownWEngines)
   const [agents, wEngines, driveDiscAffixes, definitions, catalog] =
     await Promise.all([
       Promise.all(
-        selection.agents.map(async (name) => {
-          const id = agentIdByName[name]!
+        selection.agents.map(async (id) => {
           const [attributes, actions] = await Promise.all([
             agentAttributeLoaders[id]!(),
             agentActionLoaders[id]!(),
@@ -775,9 +777,7 @@ export async function loadStaticCalculationData(selection: {
         }),
       ),
       Promise.all(
-        selection.wEngines.map((name) =>
-          wEngineAttributeLoaders[wEngineIdByName[name]!]!(),
-        ),
+        selection.wEngines.map((id) => wEngineAttributeLoaders[id]!()),
       ),
       driveDiscAffixesLoader(),
       staticEffectDefinitionsLoader(),

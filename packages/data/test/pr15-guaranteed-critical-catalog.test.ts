@@ -51,8 +51,8 @@ let loaded: Awaited<ReturnType<typeof loadStaticCalculationData>> | undefined
 let definitions: RuleSet | undefined
 async function input(source: Source): Promise<Input> {
   loaded ??= await loadStaticCalculationData({
-    agents: ["Alice", "Caesar", "Jane"],
-    wEngines: ["Big Cylinder"],
+    agents: ["1401", "1071", "1261"],
+    wEngines: ["13112"],
   })
   if (!definitions) {
     const parsed = parseEffectRuleSet(loaded.definitions)

@@ -1,6 +1,11 @@
 import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
-import { loadStaticCalculationData, resolveAgentAction } from "../src/index.ts"
+import {
+  agentSourceIds,
+  loadStaticCalculationData,
+  resolveAgentAction,
+  wEngineSourceIds,
+} from "../src/index.ts"
 import {
   calculateStaticActionDamage,
   staticSourceBindingId,
@@ -79,8 +84,10 @@ async function inputFor(
   const selected = scenario.buildIds.map((id) => builds[id]!)
   const actor = selected[0]!.actor
   const data = await loadStaticCalculationData({
-    agents: selected.map((b) => b.agentName),
-    wEngines: [...new Set(selected.map((b) => b.wEngineName))],
+    agents: selected.map((b) => agentSourceIds[b.agentName]),
+    wEngines: [
+      ...new Set(selected.map((b) => wEngineSourceIds[b.wEngineName])),
+    ],
   })
   expect(data.version).toEqual({
     packageVersion: "0.3.0",
@@ -279,8 +286,8 @@ describe("complete static configurations against an independent pinned ZZZ-HP re
       const build = builds[scenario.buildIds[0]!]!
       const expected = reference.cases[scenarioId]!.reference
       const data = await loadStaticCalculationData({
-        agents: [build.agentName, agentName],
-        wEngines: [build.wEngineName],
+        agents: [agentSourceIds[build.agentName], agentSourceIds[agentName]],
+        wEngines: [wEngineSourceIds[build.wEngineName]],
       })
       const support: StaticActorConfiguration = {
         entityId: "entity:core-support",
@@ -984,8 +991,8 @@ describe("Velina Condensed Cyclone complete build", () => {
   it("calculates the micro-domain cyclone from the reviewed equipment with independent expectations", async () => {
     const build = builds.velina!
     const data = await loadStaticCalculationData({
-      agents: [build.agentName],
-      wEngines: [build.wEngineName],
+      agents: [agentSourceIds[build.agentName]],
+      wEngines: [wEngineSourceIds[build.wEngineName]],
     })
     const actions = data.agents.find(
       (entry) => entry.actions.entityId === build.actor.agentEntityId,
@@ -1107,8 +1114,8 @@ describe("generic assist entry-action complete builds", () => {
     "reproduces $agentName entry damage with the reviewed four-piece switch",
     async (row) => {
       const data = await loadStaticCalculationData({
-        agents: [row.agentName],
-        wEngines: [row.wEngineName],
+        agents: [agentSourceIds[row.agentName]],
+        wEngines: [wEngineSourceIds[row.wEngineName]],
       })
       const actor: StaticActorConfiguration = {
         entityId: "entity:actor",
@@ -1355,8 +1362,8 @@ describe("hand-filled user panel: Remielle basic-7 direct and Voidflare", () => 
   )
   it("reproduces the direct basic-7 hit from the hand-filled panel", async () => {
     const data = await loadStaticCalculationData({
-      agents: ["Remielle"],
-      wEngines: ["Ode of Resurrected Wings"],
+      agents: ["1581"],
+      wEngines: ["14158"],
     })
     const action = resolveAgentAction({
       agent: data.agents[0]!.actions,
@@ -1393,8 +1400,8 @@ describe("hand-filled user panel: Remielle basic-7 direct and Voidflare", () => 
 
   it("scales the Voidflare action multiplier by the current proficiency conversion", async () => {
     const data = await loadStaticCalculationData({
-      agents: ["Remielle"],
-      wEngines: ["Ode of Resurrected Wings"],
+      agents: ["1581"],
+      wEngines: ["14158"],
     })
     const action = resolveAgentAction({
       agent: data.agents[0]!.actions,
@@ -1502,8 +1509,8 @@ describe("hand-filled user panel: Remielle basic-7 direct and Voidflare", () => 
 
   it("applies the mindscape 2 ignore-defense to the Voidflare settlement only when selected", async () => {
     const data = await loadStaticCalculationData({
-      agents: ["Remielle"],
-      wEngines: ["Ode of Resurrected Wings"],
+      agents: ["1581"],
+      wEngines: ["14158"],
     })
     const action = resolveAgentAction({
       agent: data.agents[0]!.actions,
@@ -1662,8 +1669,8 @@ describe("hand-filled user panel: Remielle basic-7 direct and Voidflare", () => 
 
   it("keeps the hand-filled Voidflare value with the complete mindscape 1 state selected", async () => {
     const data = await loadStaticCalculationData({
-      agents: ["Remielle"],
-      wEngines: ["Ode of Resurrected Wings"],
+      agents: ["1581"],
+      wEngines: ["14158"],
     })
     const action = resolveAgentAction({
       agent: data.agents[0]!.actions,

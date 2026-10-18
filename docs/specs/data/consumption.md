@@ -77,7 +77,14 @@ Readonly<Record<AgentSourceId, AgentName>>`、`driveDiscNamesBySourceId`、`wEng
 持久化建议：跨版本保存配装、队伍或扫描结果时保存来源 ID 与快照版本（`snapshotInfo.source.version`），
 英文名称只作为本次发布的 API 键与显示文本，读取时用反向映射换回当前名称。core 静态计算输入中的
 `agentEntityId`、`wEngine.entityId` 与 `driveDiscs[n].setEntityId` 同样使用来源 ID，组装时应取自这些
-映射或读取结果的 `entityId` 字段，不手写数字。
+映射或读取结果的 `entityId` 字段，不手写数字。恢复持久化数据时成员可能已被删除：先用 `Object.hasOwn`
+查反向映射（如 `Object.hasOwn(agentNamesBySourceId, id)`），查不到的 ID 视为本版不可用，与
+`loadStaticCalculationData` 的 `UnknownCalculationEntitiesError` 走同一条处理路径；把失效 ID 经反向映射
+得到的 undefined 传给名称参数会以 TypeError 拒绝，不属于"未知身份"语义。
+
+身份划分原则：展示与浏览类读取以类别公开身份为键（名称类别用英文名称，ID 类别用来源 ID）；计算输入
+一律使用来源 ID。划分依据是值最终在哪里被消费——core 的 `StaticActorConfiguration` 全程以 `entityId`
+关联，名称在计算链中不出现——`loadStaticCalculationData` 的 selection 是计算入口，只接受来源 ID。
 
 ## 读取接口
 
@@ -245,12 +252,13 @@ export declare function loadAllSimulData(): Promise<Record<SimulId, SimulData>>
   邦布、怪物、Boss、Simul 文件或索引，Boss 不加载代理人、驱动盘、WEngine、邦布、怪物、Shiyu、Simul 文件
   或索引，Simul 不加载代理人、驱动盘、WEngine、邦布、怪物、Shiyu、Boss 文件或索引；各类别加载边界互不
   串读。End Game 类别中的 Monster 引用不触发 Monster 自动加载。
-- `loadStaticCalculationData(selection)` 按英文名称选择代理人与 WEngine，一次读取静态计算所需的同版资料
-  （属性、动作、音擎属性、驱动盘词条、静态效果定义、效果目录与面板适配规则），返回值由调用方整体传递与
-  缓存。selection 必须是含 `agents`、`wEngines` 两个字符串数组的对象：selection 不是对象、任一数组缺失
-  或元素不是字符串，都以 TypeError 拒绝；任一未登记名称以 `UnknownCalculationEntitiesError` 拒绝，其
-  `agents` 与 `wEngines` 字段一次列出全部未知名称（保持选择原序与重复），不因第一个未知项短路；
-  已登记文件缺失或解析失败同样使 Promise 拒绝，不返回部分结果。重复名称按出现次数重复读取，
+- `loadStaticCalculationData(selection)` 按来源 ID（`AgentSourceId`、`WEngineSourceId`）选择代理人与
+  WEngine，一次读取静态计算所需的同版资料（属性、动作、音擎属性、驱动盘词条、静态效果定义、效果目录
+  与面板适配规则），返回值由调用方整体传递与缓存。selection 必须是含 `agents`、`wEngines` 两个来源 ID
+  字符串数组的对象：selection 不是对象、任一数组缺失或元素不是字符串，都以 TypeError 拒绝；传英文名称
+  属于未登记 ID，同样落入未登记分支。任一未登记 ID 以 `UnknownCalculationEntitiesError` 拒绝，其
+  `agents` 与 `wEngines` 字段一次列出全部未知来源 ID（保持选择原序与重复），不因第一个未知项短路；
+  已登记文件缺失或解析失败同样使 Promise 拒绝，不返回部分结果。重复 ID 按出现次数重复读取，
   空选择返回空成员数组的完整结构。身份组装遵循[身份映射与持久化](#身份映射与持久化)。
 - 跨语言共享字段采用固定读取规则：`live2D`、`partnerInfo.iconPath`、`partnerInfo.roleIcon`、
   `skill.*.material`、`extraLevel.*.maxLevel` 等按整合规范的"各语言同有且相等时入 data，单语言独有留

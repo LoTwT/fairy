@@ -1,6 +1,10 @@
 import { readFileSync } from "node:fs"
 import { beforeAll, describe, expect, it } from "vitest"
-import { loadStaticCalculationData, resolveAgentAction } from "../src/index.ts"
+import {
+  agentSourceIds,
+  loadStaticCalculationData,
+  resolveAgentAction,
+} from "../src/index.ts"
 import {
   calculateStaticActionDamage,
   calculateStaticDamageFromCatalog,
@@ -170,14 +174,17 @@ const slotsById = new Map(
 const upstreamBySlot = new Map(
   upstreamReturns.returns.map((entry) => [entry.slotId, entry]),
 )
-const agentNames = Object.values(teamDifferentialAgentByKey).map(
-  (agent) => agent.agentName,
+const agentSourceIdList = Object.values(teamDifferentialAgentByKey).map(
+  (agent) => agentSourceIds[agent.agentName],
 )
 const PLAYER_TEAM_ID = "team:players" as const
 
 let loaded: Awaited<ReturnType<typeof loadStaticCalculationData>>
 beforeAll(async () => {
-  loaded = await loadStaticCalculationData({ agents: agentNames, wEngines: [] })
+  loaded = await loadStaticCalculationData({
+    agents: agentSourceIdList,
+    wEngines: [],
+  })
 })
 
 /** 只容忍浮点运算顺序；期望取整与上游整数投影一律严格相等。 */

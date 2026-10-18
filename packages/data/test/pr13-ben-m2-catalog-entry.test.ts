@@ -34,8 +34,8 @@ const TARGET_IDS = new Set([BEN_M2_TARGET, BIG_CYLINDER_TARGET])
 let loaded: Awaited<ReturnType<typeof loadStaticCalculationData>> | undefined
 const data = async () => {
   loaded ??= await loadStaticCalculationData({
-    agents: ["Ben"],
-    wEngines: ["Big Cylinder"],
+    agents: ["1121"],
+    wEngines: ["13112"],
   })
   return loaded
 }

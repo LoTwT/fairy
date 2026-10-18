@@ -42,7 +42,7 @@ const TARGET_IDS = new Set([FROSTBURN_TARGET])
 let loaded: Awaited<ReturnType<typeof loadStaticCalculationData>> | undefined
 const data = async () => {
   loaded ??= await loadStaticCalculationData({
-    agents: ["Miyabi"],
+    agents: ["1091"],
     wEngines: [],
   })
   return loaded

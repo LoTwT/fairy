@@ -100,7 +100,7 @@ function makeRoxyCoreWindRequest(definitions,catalog,armorer=false,externalCriti
 async function verifyRoxyCoreWindConsumer(api, engine) {
   const require = (value, message) => { if (!value) throw new Error("Roxy core wind: " + message) }
   const close = (actual, expected) => require(Math.abs(actual - expected) < 1e-7, actual + " != " + expected)
-  const data = await api.loadStaticCalculationData({agents:["Roxy","Claret"],wEngines:[]})
+  const data = await api.loadStaticCalculationData({agents:["1621","1611"],wEngines:[]})
   const regular = makeRoxyCoreWindRequest(data.definitions, data.catalog)
   const run = input => { const result = engine.calculateStaticDamageFromCatalog(input); require(result.ok, JSON.stringify(result)); return result.value }
   const normal = run(regular)

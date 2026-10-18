@@ -21,9 +21,11 @@
 
 ```ts canonical
 import {
+  agentSourceIds,
   driveDiscSourceIds,
   loadStaticCalculationData,
   resolveAgentAction,
+  wEngineSourceIds,
 } from "@randomplay/data"
 import { calculateStaticActionDamage } from "@randomplay/core"
 import type {
@@ -44,8 +46,8 @@ function substat(
 
 async function main() {
   const data = await loadStaticCalculationData({
-    agents: ["Nicole"],
-    wEngines: ["The Vault"],
+    agents: [agentSourceIds["Nicole"]],
+    wEngines: [wEngineSourceIds["The Vault"]],
   })
   const [agent] = data.agents
   const [wEngine] = data.wEngines
@@ -230,9 +232,10 @@ void main().catch((error: unknown) => {
 没有暴击结算时 `critical` 为 `null`；没有确认独立命中时，显示取整总值为 `null`。
 `daze-only` 仅表明该动作不提供伤害，本接口不在这个分支计算最终失衡值。
 
-加载函数按英文名称选资料，`agentEntityId`、音擎及套装 ID 对应来源实体；`entityId`、`teamId`
-由应用分配，区分当前队伍中的持有者。未随 selection 返回的来源 ID（如驱动盘套装）用 data 根入口的
-`driveDiscSourceIds` 等名称/ID 公开映射取得，持久化建议见
+加载函数按来源 ID 选资料：selection 只接受 `AgentSourceId` 等来源 ID，UI 装配时用 `agentSourceIds`
+等公开映射把英文名称换成 ID，持久化重算时直接传存档 ID。`agentEntityId`、音擎及套装 ID 对应来源实体；
+`entityId`、`teamId` 由应用分配，区分当前队伍中的持有者。未随 selection 返回的来源 ID（如驱动盘套装）用
+data 根入口的 `driveDiscSourceIds` 等名称/ID 公开映射取得，持久化与失效 ID 处理建议见
 [身份映射与持久化](../data/consumption.md#身份映射与持久化)。可从动作目录读取 `actionId`，从 `data.catalog.options`
 读取选项的 `optionId`、`name`、`conditionDescription` 和各 `variants` 的培养、层数、输入及支持限制。
 选择选项表示调用方确认条件当前成立，`holderId` 必须指向对应持有者。

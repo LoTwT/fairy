@@ -2,7 +2,7 @@
 // makeRoxyMindscapeRequest is supplied by the preceding mindscape consumer.
 export const roxyWindEyeConsumerSource = String.raw`
 async function verifyRoxyWindEyeConsumer(api, engine) {
-  const data = await api.loadStaticCalculationData({agents:["Roxy"],wEngines:[]})
+  const data = await api.loadStaticCalculationData({agents:["1621"],wEngines:[]})
   const require = (condition, label) => { if (!condition) throw new Error("Roxy wind eye: " + label) }
   const close = (actual, expected, label) => require(Math.abs(actual-expected)<1e-7, label + ": " + actual + " != " + expected)
   const optionId = "nanoka:agents:1621:m6-giant-windstorm"

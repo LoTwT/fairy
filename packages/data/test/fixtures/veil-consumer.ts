@@ -1,7 +1,7 @@
 /** 同一公开消费脚本分别在真实安装包 Node 和 Vite development/production 执行。 */
 export const veilConsumerSource = String.raw`
 async function verifyVeilConsumer(api, calculate) {
-  const data = await api.loadStaticCalculationData({ agents: ["Ye Shunguang", "Lycaon"], wEngines: [] })
+  const data = await api.loadStaticCalculationData({ agents: ["1431", "1141"], wEngines: [] })
   const agent = data.agents.find(a => a.attributes.entityId === "1431").actions
   const actor = (entityId, agentEntityId, mindscapeRank) => ({ entityId, teamId: "team:players", agentEntityId, mindscapeRank, coreSkillLevel: 7, wEngine: null, driveDiscs: { 1: null, 2: null, 3: null, 4: null, 5: null, 6: null }, panel: { mode: "out-of-combat", stats: { attack: { unit: "attack-points", value: 1000 }, criticalRate: { unit: "ratio", value: 0.25 }, criticalDamage: { unit: "ratio", value: 0.5 }, penetrationRatio: { unit: "ratio", value: 0 } }, penetrationValue: 0, damageBonuses: { physical: 0.3 } } })
   const trigger = { eventId: "event:veil", actorId: "entity:enemy", activationSnapshotId: "snapshot:veil" }

@@ -42,7 +42,7 @@ let loaded: Awaited<ReturnType<typeof loadStaticCalculationData>> | undefined
 let definitions: RuleSet | undefined
 async function data() {
   loaded ??= await loadStaticCalculationData({
-    agents: ["Ye Shunguang", "Lycaon", "Lighter"],
+    agents: ["1431", "1141", "1161"],
     wEngines: [],
   })
   definitions ??= ok(parseEffectRuleSet(loaded.definitions))

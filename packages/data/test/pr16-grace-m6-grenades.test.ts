@@ -40,7 +40,7 @@ let loaded: Awaited<ReturnType<typeof loadStaticCalculationData>> | undefined
 let parsed: RuleSet | undefined
 async function data() {
   loaded ??= await loadStaticCalculationData({
-    agents: ["Grace", "Anby"],
+    agents: ["1181", "1011"],
     wEngines: [],
   })
   if (!parsed) {

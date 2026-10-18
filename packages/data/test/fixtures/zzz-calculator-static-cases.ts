@@ -1,6 +1,8 @@
 import {
+  agentSourceIds,
   loadStaticCalculationData,
   resolveAgentAction,
+  wEngineSourceIds,
 } from "../../src/index.ts"
 import type { AgentName, WEngineName } from "../../src/index.ts"
 import {
@@ -391,8 +393,8 @@ export async function fairyInputFor(
   const damageActor = builds[scenario.actor].actor
   const action = actions[scenario.actor]
   const data = await loadStaticCalculationData({
-    agents: selected.map((build) => build.agentName),
-    wEngines: selected.map((build) => build.wEngineName),
+    agents: selected.map((build) => agentSourceIds[build.agentName]),
+    wEngines: selected.map((build) => wEngineSourceIds[build.wEngineName]),
   })
   const base: StaticActionCalculationInput = {
     data,

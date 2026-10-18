@@ -16,7 +16,7 @@ export async function verifyClaretInitialConversionConsumer(
       throw new Error(`Claret initial conversion: ${actual} != ${expected}`)
   }
   const data = await api.loadStaticCalculationData({
-    agents: ["Claret"],
+    agents: ["1611"],
     wEngines: [],
   })
   const holderId = "entity:claret"

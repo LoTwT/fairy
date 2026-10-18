@@ -21,7 +21,7 @@ export async function verifyWindDriveDiscConsumer(
     require(Math.abs(actual - expected) < 1e-8, `${actual} != ${expected}`)
   }
   const data = await api.loadStaticCalculationData({
-    agents: ["Roxy"],
+    agents: ["1621"],
     wEngines: [],
   })
   const action = api.resolveAgentAction({

@@ -25,8 +25,8 @@ const bindingId = staticSourceBindingId(holderId, "agent", "1611")
 
 async function fixture(): Promise<StaticActionCalculationInput> {
   const data = await loadStaticCalculationData({
-    agents: ["Claret"],
-    wEngines: ["Crimson Thirst"],
+    agents: ["1611"],
+    wEngines: ["14161"],
   })
   const discs = Object.fromEntries(
     ([1, 2, 3, 4, 5, 6] as const).map((slot) => [
@@ -315,8 +315,8 @@ describe("Claret permanent initial critical conversion", () => {
   it("isolates two Claret holders and an unrelated agent, including mixed panel modes", async () => {
     const input = withLegacySelection(await fixture())
     const data = await loadStaticCalculationData({
-      agents: ["Claret", "Ben"],
-      wEngines: ["Crimson Thirst"],
+      agents: ["1611", "1121"],
+      wEngines: ["14161"],
     })
     const emptyDiscs = {
       1: null,
