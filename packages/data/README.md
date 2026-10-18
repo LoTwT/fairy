@@ -23,48 +23,69 @@ Nanoka 是当前已登记的数据来源。在 Fairy 源码工作区内，可以
 ```ts
 import {
   agentNames,
+  agentNamesBySourceId,
+  agentSourceIds,
   bangbooNames,
+  bangbooNamesBySourceId,
+  bangbooSourceIds,
   driveDiscNames,
+  driveDiscNamesBySourceId,
+  driveDiscSourceIds,
   monsterIds,
   shiyuIds,
   bossIds,
   simulIds,
+  snapshotInfo,
   wEngineNames,
+  wEngineNamesBySourceId,
+  wEngineSourceIds,
   loadIndex,
   loadAgentData,
   loadAgentDetails,
   loadAllAgents,
+  loadAllAgentData,
   loadBangbooData,
   loadBangbooDetails,
   loadAllBangboos,
+  loadAllBangbooData,
   loadDriveDiscData,
   loadDriveDiscDetails,
   loadAllDriveDiscs,
+  loadAllDriveDiscData,
   loadMonsterData,
   loadMonsterDetails,
   loadAllMonsters,
+  loadAllMonsterData,
   loadShiyuData,
   loadShiyuDetails,
   loadAllShiyu,
+  loadAllShiyuData,
   loadBossData,
   loadBossDetails,
   loadAllBosses,
+  loadAllBossData,
   loadSimulData,
   loadSimulDetails,
   loadAllSimul,
+  loadAllSimulData,
   loadWEngineData,
   loadWEngineDetails,
   loadAllWEngines,
+  loadAllWEngineData,
 } from "@randomplay/data"
 import type {
   AgentName,
+  AgentSourceId,
   BangbooName,
+  BangbooSourceId,
   DriveDiscName,
+  DriveDiscSourceId,
   MonsterId,
   ShiyuId,
   BossId,
   SimulId,
   WEngineName,
+  WEngineSourceId,
 } from "@randomplay/data"
 
 const name: AgentName = "Astra Yao"
@@ -72,6 +93,10 @@ const data = await loadAgentData(name)
 const details = await loadAgentDetails(name, "zh")
 const index = await loadIndex() // 完整 v3 来源索引，不加载实体
 const all = await loadAllAgents("en") // 显式加载全部代理人公共资料和英文详情
+const allAgentData = await loadAllAgentData() // 只加载全部代理人公共资料，不加载详情
+const sourceId: AgentSourceId = agentSourceIds[name] // 名称 → 来源 ID；持久化保存 ID
+const nameById: AgentName = agentNamesBySourceId["1311"] // 来源 ID → 当前名称
+const info = snapshotInfo // 快照来源版本与各类别规则版本、成员清单的冻结常量
 const disc: DriveDiscName = "Woodpecker Electro"
 const discData = await loadDriveDiscData(disc)
 const discDetails = await loadDriveDiscDetails(disc, "zh")
@@ -102,10 +127,14 @@ const simulDetails = await loadSimulDetails(simul, "zh")
 const allSimul = await loadAllSimul("en") // 显式加载全部 Simul 模拟战公共资料和英文详情
 console.log(
   agentNames,
+  agentSourceIds,
+  agentNamesBySourceId,
+  snapshotInfo.source.version,
   data,
   details,
   index.entities.agents.members["1311"],
   all[name],
+  allAgentData[name],
   driveDiscNames,
   discData,
   discDetails,

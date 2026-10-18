@@ -111,6 +111,22 @@ export async function generateCatalog(
     `() => import(${json(`@randomplay/data/definitions/effects/${path}`)}${importAttributes ? ', { with: { type: "json" } }' : ""}).then(module => module.default as unknown as ${type})`
   const sourceIds = (names: string[], entity: IntegratedSnapshotEntity) =>
     `Object.freeze(Object.fromEntries(${json(names.map((name, i) => [name, entity.memberIds[i]]))}))`
+  const namesBySourceId = (names: string[], entity: IntegratedSnapshotEntity) =>
+    `Object.freeze(Object.fromEntries(${json(names.map((name, i) => [entity.memberIds[i], name]))}))`
+  const snapshotInfoValue = {
+    format: index.format,
+    source: { id: index.source.id, version: index.source.version },
+    entities: Object.fromEntries(
+      Object.entries(index.entities).map(([name, entity]) => [
+        name,
+        {
+          rulesVersion: entity.rulesVersion,
+          detailLocales: entity.detailLocales,
+          memberIds: entity.memberIds,
+        },
+      ]),
+    ),
+  }
   const loaderTable = (
     entity: IntegratedSnapshotEntity,
     data: string,
@@ -134,7 +150,7 @@ import type { MonsterData, MonsterDetails } from "../src/integration/monster-typ
 import type { ShiyuData, ShiyuDetails } from "../src/integration/shiyu-types.ts"
 import type { BossData, BossDetails } from "../src/integration/boss-types.ts"
 import type { SimulData, SimulDetails } from "../src/integration/simul-types.ts"
-import type { IntegratedSnapshotIndex } from "../src/integration/snapshot-types.ts"
+import type { IntegratedSnapshotIndex, IntegratedSnapshotInfo } from "../src/integration/snapshot-types.ts"
 import type { AgentLevel60Attributes, WEngineLevel60Attributes, SDriveDiscMaxLevelAffixes } from "../src/attributes/types.ts"
 import type { AgentActions } from "../src/skills/types.ts"
 import type { RuleSet, StaticEffectCatalog } from "@randomplay/shared"
@@ -166,6 +182,14 @@ export type BossId = ${bossIds.map((id) => json(id)).join(" | ")}
  * Simul 无顶层 name，公开身份是来源 ID 本身。
  */
 export type SimulId = ${simulIds.map((id) => json(id)).join(" | ")}
+/** 本次发布全部代理人的来源索引顶层 ID（规范十进制字符串），与目录、索引成员的身份一致。 */
+export type AgentSourceId = ${agents.memberIds.map((id) => json(id)).join(" | ")}
+/** 本次发布全部驱动盘套装的来源索引顶层 ID（规范十进制字符串）。 */
+export type DriveDiscSourceId = ${driveDiscs.memberIds.map((id) => json(id)).join(" | ")}
+/** 本次发布全部 WEngine 的来源索引顶层 ID（规范十进制字符串）。 */
+export type WEngineSourceId = ${wEngines.memberIds.map((id) => json(id)).join(" | ")}
+/** 本次发布全部邦布的来源索引顶层 ID（规范十进制字符串）。 */
+export type BangbooSourceId = ${bangboos.memberIds.map((id) => json(id)).join(" | ")}
 /** 按来源 ID 数值升序排列的完整代理人英文名称列表；运行时冻结。 */
 export const agentNames: readonly AgentName[] = Object.freeze(${json(agentNames)})
 /** 按来源 ID 数值升序排列的完整驱动盘英文名称列表；运行时冻结。 */
@@ -182,10 +206,27 @@ export const shiyuIds: readonly ShiyuId[] = Object.freeze(${json(shiyuIds)})
 export const bossIds: readonly BossId[] = Object.freeze(${json(bossIds)})
 /** 按来源 ID 数值升序排列的完整 Simul 来源 ID 列表；运行时冻结。 */
 export const simulIds: readonly SimulId[] = Object.freeze(${json(simulIds)})
-export const agentSourceIds: Readonly<Record<AgentName, string>> = ${sourceIds(agentNames, agents)} as Readonly<Record<AgentName, string>>
-export const driveDiscSourceIds: Readonly<Record<DriveDiscName, string>> = ${sourceIds(driveDiscNames, driveDiscs)} as Readonly<Record<DriveDiscName, string>>
-export const wEngineSourceIds: Readonly<Record<WEngineName, string>> = ${sourceIds(wEngineNames, wEngines)} as Readonly<Record<WEngineName, string>>
-export const bangbooSourceIds: Readonly<Record<BangbooName, string>> = ${sourceIds(bangbooNames, bangboos)} as Readonly<Record<BangbooName, string>>
+export const agentSourceIds: Readonly<Record<AgentName, AgentSourceId>> = ${sourceIds(agentNames, agents)} as Readonly<Record<AgentName, AgentSourceId>>
+export const driveDiscSourceIds: Readonly<Record<DriveDiscName, DriveDiscSourceId>> = ${sourceIds(driveDiscNames, driveDiscs)} as Readonly<Record<DriveDiscName, DriveDiscSourceId>>
+export const wEngineSourceIds: Readonly<Record<WEngineName, WEngineSourceId>> = ${sourceIds(wEngineNames, wEngines)} as Readonly<Record<WEngineName, WEngineSourceId>>
+export const bangbooSourceIds: Readonly<Record<BangbooName, BangbooSourceId>> = ${sourceIds(bangbooNames, bangboos)} as Readonly<Record<BangbooName, BangbooSourceId>>
+/** 代理人来源 ID → 英文名称；与 agentSourceIds 互为反向，运行时冻结。 */
+export const agentNamesBySourceId: Readonly<Record<AgentSourceId, AgentName>> = ${namesBySourceId(agentNames, agents)} as Readonly<Record<AgentSourceId, AgentName>>
+/** 驱动盘套装来源 ID → 英文名称；与 driveDiscSourceIds 互为反向，运行时冻结。 */
+export const driveDiscNamesBySourceId: Readonly<Record<DriveDiscSourceId, DriveDiscName>> = ${namesBySourceId(driveDiscNames, driveDiscs)} as Readonly<Record<DriveDiscSourceId, DriveDiscName>>
+/** WEngine 来源 ID → 英文名称；与 wEngineSourceIds 互为反向，运行时冻结。 */
+export const wEngineNamesBySourceId: Readonly<Record<WEngineSourceId, WEngineName>> = ${namesBySourceId(wEngineNames, wEngines)} as Readonly<Record<WEngineSourceId, WEngineName>>
+/** 邦布来源 ID → 英文名称；与 bangbooSourceIds 互为反向，运行时冻结。 */
+export const bangbooNamesBySourceId: Readonly<Record<BangbooSourceId, BangbooName>> = ${namesBySourceId(bangbooNames, bangboos)} as Readonly<Record<BangbooSourceId, BangbooName>>
+function deepFreeze<T>(value: T): T {
+  if (value !== null && typeof value === "object") {
+    for (const nested of Object.values(value as Record<string, unknown>)) deepFreeze(nested)
+    Object.freeze(value)
+  }
+  return value
+}
+/** 完整索引的轻量信息：来源版本与各类别的规则版本、语言、成员清单；运行时深冻结。 */
+export const snapshotInfo: IntegratedSnapshotInfo = deepFreeze(${json(snapshotInfoValue)})
 export const indexLoader = ${lazy("index.json", "IntegratedSnapshotIndex")}
 export const staticEffectDefinitionsLoader = ${lazyEffect("static.json", "RuleSet")}
 export const staticEffectCatalogLoader = ${lazyEffect("static-catalog.json", "StaticEffectCatalog")}

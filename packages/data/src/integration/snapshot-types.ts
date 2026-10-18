@@ -107,3 +107,39 @@ export interface IntegratedSnapshotIndex<
  */
 export type HistoricalIntegratedSnapshotIndex =
   IntegratedSnapshotIndex<SnapshotDetailFiles>
+
+/**
+ * 轻量快照信息：来自完整 v3 索引的来源版本与各类别的规则版本、语言、成员清单。
+ * 由根入口作为冻结常量导出，不含 sourceRecord、文件引用与输入摘要；
+ * 完整性核对与来源追溯仍使用 loadIndex 的完整索引。
+ */
+export interface IntegratedSnapshotInfo {
+  /** 文件外壳与类别分块契约版本；与完整索引同值。 */
+  readonly format: typeof integratedSnapshotFormat
+
+  /** 整个快照的来源身份与来源版本。 */
+  readonly source: {
+    /** 来源标识；本契约固定使用 nanoka-zzz。 */
+    readonly id: "nanoka-zzz"
+
+    /** 本次选定的原始来源版本；全部类别共用一个版本。 */
+    readonly version: string
+  }
+
+  /** 已接入类别 → 规则版本、详情语言与成员 ID 清单；key 集合与完整索引的 entities 一致。 */
+  readonly entities: Readonly<
+    Record<
+      string,
+      {
+        /** 该类别的整合规则版本；各类别独立演进。 */
+        readonly rulesVersion: string
+
+        /** 该类别实际取得完整详情的语言，按来源配置顺序。 */
+        readonly detailLocales: readonly DetailLocale[]
+
+        /** 该类别成员 ID，按数值升序、无重复，与完整索引 memberIds 一致。 */
+        readonly memberIds: readonly string[]
+      }
+    >
+  >
+}
