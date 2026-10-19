@@ -56,7 +56,7 @@ function monsterSourceUnit(id: number, code_name: string): MonsterSourceUnit {
   }
 }
 
-/** 满足规则 nanoka-monster-reference/1 必需结构的合成输入；不读取真实 raw，不使用生产登记表生成 fixture。 */
+/** 满足规则 nanoka-monster-reference/2 必需结构的合成输入；不读取真实 raw，不使用生产登记表生成 fixture。 */
 export function monsterSource(): MonsterSourceFixture {
   return {
     id: 960001,
