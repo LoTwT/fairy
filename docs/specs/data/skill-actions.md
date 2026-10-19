@@ -25,7 +25,8 @@ if (!result.ok) {
 }
 ```
 
-`loadAgentActions(AgentName)` 返回 `Promise<AgentActions | undefined>`。名称精确匹配英文详情顶层值，
+`loadAgentActions(AgentName)` 返回 `Promise<AgentActions | undefined>`。名称精确匹配发布名称
+（`AgentName` 为来源索引 en 名，见[数据消费契约](consumption.md)），
 未知字符串返回 `undefined`，非字符串拒绝为 `TypeError`，加载失败原样拒绝。每次返回深复制对象。
 根入口不读取 JSON；一次调用只加载一个角色的 `definitions/skills/agents/{id}.json`，不连带读取
 原始数据、其他角色、manifest 或效果目录。Node 与浏览器行为一致。

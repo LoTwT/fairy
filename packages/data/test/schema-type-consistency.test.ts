@@ -1040,6 +1040,8 @@ describe("Monster 登记表与封闭类型一致", () => {
 /**
  * 可选性封闭：本周期删除残留 optional 后必须全必需的类型，key 集合与必需 key
  * 集合相等——任何人把 optional 加回来都会在此处被编译期拒绝。
+ * 例外：BossData 的 liveTimeWindow（来源索引直播服时间窗，成对提供或成对缺失）
+ * 是当前唯一合法的 optional，其断言改为显式必需 key 集合，同样封闭。
  */
 type RequiredKeys<T> = keyof {
   [K in keyof T as {} extends Pick<T, K> ? never : K]: 0

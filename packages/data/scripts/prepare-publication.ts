@@ -104,7 +104,7 @@ async function agentIndexEnglishNames(
   return names
 }
 
-/** 从已验证副本的英文顶层 name 生成全部已登记实体的精确类型、冻结名称/映射及显式懒加载表。 */
+/** 从已验证副本生成全部已登记实体的精确类型、冻结名称/映射及显式懒加载表；agents 读来源索引 en 名，其余读英文详情顶层 name。 */
 export async function generateCatalog(
   snapshot: string,
   index: IntegratedSnapshotIndex,
