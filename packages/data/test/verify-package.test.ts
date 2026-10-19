@@ -1743,6 +1743,8 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
         expect(declarations).toContain(JSON.stringify("[Lunar] Pleniluna"))
         expect(declarations).toContain(JSON.stringify("Penguinboo"))
         expect(declarations).not.toContain(changedName)
+        // 兼容性观察：本地 3.2 的英文详情名与 data.names.en 恰好 60/60 一致；
+        // 这不是 AgentName 的来源契约（发布名称只来自来源索引 en 名）。
         expect(
           JSON.parse(
             runNode(

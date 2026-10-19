@@ -55,7 +55,7 @@ export const bossLocalizedDetailFields: Readonly<
   /** 来源 `id`。详情自身的数值 Boss ID；与实体 ID 核对，不参与共享提取。 */
   id: { output: "id", kind: "number" },
 
-  /** 来源 `name`。当前语言名称原文；本地 3.1 全部 44 条同名（试炼），不作为公开身份。 */
+  /** 来源 `name`。当前语言名称原文；本地 3.2 全部 47 条同名（中文「试炼」、英文 `Trial`），不作为公开身份。 */
   name: { output: "name", kind: "string" },
 }
 

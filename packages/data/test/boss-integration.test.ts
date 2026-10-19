@@ -266,6 +266,46 @@ describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
     expectBossRoundtrip(result, input)
   })
 
+  it("变体按语言独立校验：zh 用 modes、en 用 zone 时各自保留", () => {
+    const input = bossInput()
+    const legacy = bossLegacyZoneInput()
+    const mixed: IntegrateBossInput = {
+      ...input,
+      details: {
+        zh: input.details.zh,
+        en: legacy.details.en,
+      } as Record<string, unknown>,
+    }
+    const mixedDetails = mixed.details as Record<string, unknown>
+    const result = integrateBoss(mixed)
+    expect(modesVariant(result.details.zh!).modes).toHaveLength(2)
+    expect("zone" in result.details.zh!).toBe(false)
+    expect("modes" in result.details.en!).toBe(false)
+    expect(zoneVariant(result.details.en!).zone["9800101"]!.name).toBe(
+      "Example Overlord · Phase I",
+    )
+    expect(result.maintenance.diagnostics).toEqual([])
+    expectBossRoundtrip(result, {
+      sourceRecord: mixed.sourceRecord,
+      details: mixedDetails,
+    })
+  })
+
+  it("索引直播服时间窗与详情开放时间互不覆盖", () => {
+    const input = bossInput()
+    const record = input.sourceRecord as Record<string, unknown>
+    record.live_begin = "2025-01-01 04:00:00"
+    record.live_end = "2025-01-15 03:59:59"
+    const result = integrateBoss(input)
+    expect(result.data.liveTimeWindow).toStrictEqual({
+      beginTime: "2025-01-01 04:00:00",
+      endTime: "2025-01-15 03:59:59",
+    })
+    expect(result.data.beginTime).toBe("2024-07-04 04:00:00")
+    expect(result.data.endTime).toBe("2024-08-01 03:59:59")
+    expectBossRoundtrip(result, input)
+  })
+
   it("索引直播服时间窗成对保留或成对缺失，类型不符即失败", () => {
     const input = bossInput()
     const result = integrateBoss(input)

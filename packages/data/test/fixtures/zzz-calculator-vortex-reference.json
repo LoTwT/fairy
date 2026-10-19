@@ -107315,7 +107315,7 @@
         "snapshotId": "sha256:754db1ed00046d2da9b9f893a48c607badbc9e5137169217a4bd3b1678f25540",
         "artifactSha256": {
           "packages/data/definitions/effects/static.json": "a8aac21c0307af11934c1eaf84a5f14cccf390487b5ea6e9505307c8e4ec3305",
-          "packages/data/definitions/effects/static-catalog.json": "0958a918aebb418d67e67280b4ccbdc83f63a8362ee8d478bb9c5bd1739761dc"
+          "packages/data/definitions/effects/static-catalog.json": "2c75ada280abfd2269270a794a76a3558994bf882c5d6aae6180081b8d22fb12"
         }
       },
       "currentSnapshotId": "sha256:72f8efdb8aea0ca44f1d8b37b3d28d6c095887b8853e6ac8c1a13c6d880fcc71"
