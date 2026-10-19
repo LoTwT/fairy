@@ -855,11 +855,10 @@ revision44 导致当前消费快照标识从 `45ff1399…` 变为 `2e912b3f…`�
 - `implementationBase`：该次刷新登记的 Git 实施基点，是历史记录；测试不读取 Git 校验它。
 - `previous.snapshotId`：上一条刷新产生的消费快照 ID，也就是本次刷新前的 `calculationDataVersion.snapshotId`；
   相邻条目的 `previous.snapshotId` 必须等于前一条的 `currentSnapshotId`。
-- `previous.artifactSha256`：该次刷新**实施前**（`implementationBase` 提交时）的制品摘要。entry 0–4 均按
-  各自实施基点记录，因此 entry 3 虽然前序快照 `754db1ed…` 由 `67bc0ac8` 生成，摘要仍取 `a71b6316` 的
-  值；entry 5 的刷新与实现同属 `e63992e1`，记录刷新前父提交 `e430cfdd` 的值（`2c75ada2…`），而非该提交
-  改写后的 `0958a918…`。历史值只能追加新条目，不能就地改写；某条历史记录可以整体未记录摘要（空对象），
-  但不能只记录一部分或写错值。
+- `previous.artifactSha256`：该次刷新**前序快照状态**对应的制品摘要。entry 0–4 的实施基点即前序快照状态，
+  因此摘要取各自 `implementationBase` 提交时的值；entry 5 的刷新与实现同属 `e63992e1`，其前序快照状态是
+  父提交 `e430cfdd`，故记录 `2c75ada2…`，而非该提交改写后的 `0958a918…`。历史值只能追加新条目，不能就地
+  改写；某条历史记录可以整体未记录摘要（空对象），但不能只记录一部分或写错值。
 - `currentSnapshotId`：本次刷新后的消费快照 ID，最后一条必须等于夹具顶层的
   `fairy.dataVersion.snapshotId`（abloom）或 `provenance.fairyCalculationDataVersion.snapshotId`
   （static、vortex）。

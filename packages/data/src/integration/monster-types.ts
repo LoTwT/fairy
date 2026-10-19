@@ -64,7 +64,7 @@ export interface MonsterInfoUnit {
   /** 来源 `tag`。机器标签数组；保留原序与原文，不映射为业务枚举。 */
   tag: string[]
 
-  /** 来源 `type`。单位类型字符串（本地 3.1 观察为 Monster）；未建立枚举。 */
+  /** 来源 `type`。单位类型字符串（本地 3.2 观察为 Monster）；未建立枚举。 */
   type: string
 
   /**
@@ -80,7 +80,7 @@ export interface MonsterInfoUnit {
   stats: Record<string, number | boolean>
 
   /**
-   * 来源 `curves`。成长曲线字典：曲线 key（本地 3.1 观察为 hp、attack、defence、stun）
+   * 来源 `curves`。成长曲线字典：曲线 key（本地 3.2 观察为 hp、attack、defence、stun）
    * → 曲线条目。曲线 key 原样保留，不推断曲线种类枚举。
    */
   curves: Record<string, MonsterGrowthCurve>

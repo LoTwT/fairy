@@ -154,8 +154,14 @@ describe("ZZZ Calculator 快照刷新链", () => {
           [staticPath]: expected[0],
           [catalogPath]: expected[1],
         }
-        // 历史条目允许整体未记录摘要（空对象），但不能只记录一部分或写错值。
-        if (Object.keys(entry.previous.artifactSha256).length === 0) return
+        // 只有 static/vortex 的 entry 0 历史上整体未记录摘要；其余条目必须两项齐全且值正确，
+        // 不能以空对象规避核对。
+        if (
+          index === 0 &&
+          (name === "static" || name === "vortex") &&
+          Object.keys(entry.previous.artifactSha256).length === 0
+        )
+          return
         expect(
           entry.previous.artifactSha256,
           `${name} entry ${index}`,
