@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_NangongYu",
+  "names": {
+    "en": "Nangong Yu",
+    "ja": "南宮羽",
+    "ko": "남궁우",
+    "zh": "南宫羽"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle59.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0059.png",

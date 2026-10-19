@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Burnice",
+  "names": {
+    "en": "Burnice",
+    "ja": "バーニス",
+    "ko": "버니스",
+    "zh": "柏妮思"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle32.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0032.png",

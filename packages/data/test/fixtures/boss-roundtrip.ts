@@ -141,6 +141,19 @@ export function expectBossRoundtrip(
     expect(details.id).toBe(data.id)
     delete details.locale
     delete details.id
+    // data.liveTimeWindow 提升自来源索引的成对 live_begin/live_end；
+    // 按输入原值核对后移除，还原载荷只对应详情来源。
+    const sourceRecord = input.sourceRecord as Record<string, unknown>
+    if (
+      Object.hasOwn(sourceRecord, "live_begin") ||
+      Object.hasOwn(sourceRecord, "live_end")
+    )
+      expect(data.liveTimeWindow).toStrictEqual({
+        beginTime: sourceRecord.live_begin,
+        endTime: sourceRecord.live_end,
+      })
+    else expect(data.liveTimeWindow).toBeUndefined()
+    delete data.liveTimeWindow
     // data 提取的字段回到顶层；details 剩余内容（modes 或旧 zone 及未登记字段）按来源拼写合并。
     const restored = restoreShape(data, dataShape) as Record<string, unknown>
     const detailsRestored = restoreShape(details, detailsShape) as Record<

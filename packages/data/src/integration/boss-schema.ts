@@ -1,5 +1,5 @@
 /**
- * Boss 来源结构的登记表（规则 nanoka-boss-reference/3）。
+ * Boss 来源结构的登记表（规则 nanoka-boss-reference/4）。
  *
  * 详情与来源索引记录分别处理：详情字段在这里登记，按归属提取到 data.json 或留在各语言详情；
  * 索引记录不在这里登记，原记录仍作为 sourceRecord 完整保留，两个来源不互相回退。

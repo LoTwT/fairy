@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpineSPAnbi",
+  "names": {
+    "en": "Soldier 0 - Anby",
+    "ja": "0号・アンビー",
+    "ko": "0호·엔비",
+    "zh": "零号·安比"
+  },
   "partnerInfo": {
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0040.png"
   },

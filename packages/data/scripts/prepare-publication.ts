@@ -78,7 +78,33 @@ async function englishDetailNames(
   return names
 }
 
-/** 从已验证副本的英文顶层 name 生成全部已登记实体的精确类型、冻结名称/映射及显式懒加载表。 */
+/**
+ * 按成员 ID 升序读取代理人的来源索引 en 名称原值（data.json 的 names.en）。
+ * AgentName 以索引名称为稳定来源，与英文详情显示名解耦；缺失、空值或类内重名给出可定位文件。
+ */
+async function agentIndexEnglishNames(
+  snapshot: string,
+  entity: IntegratedSnapshotEntity,
+): Promise<string[]> {
+  const names: string[] = []
+  for (const id of entity.memberIds) {
+    const reference: ExportFileReference = entity.members[id].files.data
+    const { names: memberNames } = JSON.parse(
+      await readFile(join(snapshot, reference.path), "utf8"),
+    )
+    const name = memberNames?.en
+    if (typeof name !== "string" || name.length === 0)
+      throw new Error(`${reference.path}: names.en must be a non-empty string`)
+    if (names.includes(name))
+      throw new Error(
+        `${reference.path}: duplicate English index name ${JSON.stringify(name)}`,
+      )
+    names.push(name)
+  }
+  return names
+}
+
+/** 从已验证副本生成全部已登记实体的精确类型、冻结名称/映射及显式懒加载表；agents 读来源索引 en 名，其余读英文详情顶层 name。 */
 export async function generateCatalog(
   snapshot: string,
   index: IntegratedSnapshotIndex,
@@ -92,7 +118,7 @@ export async function generateCatalog(
   const shiyu = requirePublishedEntity(index, "shiyu")
   const boss = requirePublishedEntity(index, "boss")
   const simul = requirePublishedEntity(index, "simul")
-  const agentNames = await englishDetailNames(snapshot, agents)
+  const agentNames = await agentIndexEnglishNames(snapshot, agents)
   const driveDiscNames = await englishDetailNames(snapshot, driveDiscs)
   const wEngineNames = await englishDetailNames(snapshot, wEngines)
   const bangbooNames = await englishDetailNames(snapshot, bangboos)
@@ -154,7 +180,7 @@ import type { IntegratedSnapshotIndex, IntegratedSnapshotInfo } from "../src/int
 import type { AgentLevel60Attributes, WEngineLevel60Attributes, SDriveDiscMaxLevelAffixes } from "../src/attributes/types.ts"
 import type { AgentActions } from "../src/skills/types.ts"
 import type { RuleSet, StaticEffectCatalog } from "@randomplay/shared"
-/** 本次发布全部代理人的英文详情顶层 name 原值。 */
+/** 本次发布全部代理人的来源索引 en 名称原值（AgentData.names.en，稳定来源，与英文详情显示名解耦）。 */
 export type AgentName = ${agentNames.map((name) => json(name)).join(" | ")}
 /** 本次发布全部驱动盘套装的英文详情顶层 name 原值。 */
 export type DriveDiscName = ${driveDiscNames.map((name) => json(name)).join(" | ")}
@@ -190,7 +216,7 @@ export type DriveDiscSourceId = ${driveDiscs.memberIds.map((id) => json(id)).joi
 export type WEngineSourceId = ${wEngines.memberIds.map((id) => json(id)).join(" | ")}
 /** 本次发布全部邦布的来源索引顶层 ID（规范十进制字符串）。 */
 export type BangbooSourceId = ${bangboos.memberIds.map((id) => json(id)).join(" | ")}
-/** 按来源 ID 数值升序排列的完整代理人英文名称列表；运行时冻结。 */
+/** 按来源 ID 数值升序排列的完整代理人来源索引 en 名称列表；运行时冻结。 */
 export const agentNames: readonly AgentName[] = Object.freeze(${json(agentNames)})
 /** 按来源 ID 数值升序排列的完整驱动盘英文名称列表；运行时冻结。 */
 export const driveDiscNames: readonly DriveDiscName[] = Object.freeze(${json(driveDiscNames)})
@@ -210,7 +236,7 @@ export const agentSourceIds: Readonly<Record<AgentName, AgentSourceId>> = ${sour
 export const driveDiscSourceIds: Readonly<Record<DriveDiscName, DriveDiscSourceId>> = ${sourceIds(driveDiscNames, driveDiscs)} as Readonly<Record<DriveDiscName, DriveDiscSourceId>>
 export const wEngineSourceIds: Readonly<Record<WEngineName, WEngineSourceId>> = ${sourceIds(wEngineNames, wEngines)} as Readonly<Record<WEngineName, WEngineSourceId>>
 export const bangbooSourceIds: Readonly<Record<BangbooName, BangbooSourceId>> = ${sourceIds(bangbooNames, bangboos)} as Readonly<Record<BangbooName, BangbooSourceId>>
-/** 代理人来源 ID → 英文名称；与 agentSourceIds 互为反向，运行时冻结。 */
+/** 代理人来源 ID → 来源索引 en 名称；与 agentSourceIds 互为反向，运行时冻结。 */
 export const agentNamesBySourceId: Readonly<Record<AgentSourceId, AgentName>> = ${namesBySourceId(agentNames, agents)} as Readonly<Record<AgentSourceId, AgentName>>
 /** 驱动盘套装来源 ID → 英文名称；与 driveDiscSourceIds 互为反向，运行时冻结。 */
 export const driveDiscNamesBySourceId: Readonly<Record<DriveDiscSourceId, DriveDiscName>> = ${namesBySourceId(driveDiscNames, driveDiscs)} as Readonly<Record<DriveDiscSourceId, DriveDiscName>>

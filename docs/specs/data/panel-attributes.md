@@ -26,7 +26,8 @@ const coreB = agent?.coreAttributeBonuses[3]
 | `loadWEngineLevel60Attributes(WEngineName)` | `Promise<WEngineLevel60Attributes \| undefined>` | `level: 60`、`baseAttribute`、`advancedAttribute`                             |
 | `loadSDriveDiscMaxLevelAffixes()`           | `Promise<SDriveDiscMaxLevelAffixes>`             | `rarity: "S"`、`enhancement: "maximum"`、`mainStatsBySlot`、`substatsPerRoll` |
 
-名称精确匹配英文详情顶层原值，沿用 `AgentName` / `WEngineName`，不 trim、补别名或接收数值 ID。
+名称精确匹配发布名称（agents 的 `AgentName` 为来源索引 en 名，`WEngineName` 为英文详情顶层原值），沿用
+`AgentName` / `WEngineName`，不 trim、补别名或接收数值 ID。
 未登记字符串返回 `undefined`；非字符串以 `TypeError` 拒绝。加载失败原样拒绝。每次读取深复制对象树。
 根入口不读取 JSON；三个函数各自仅加载目标属性文件，不连带读取原始资料、索引、manifest 或其他实体。
 浏览器与 Node 公开行为相同，JSON 模块缓存不影响返回值隔离。

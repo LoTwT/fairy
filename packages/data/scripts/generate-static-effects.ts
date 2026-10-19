@@ -271,7 +271,7 @@ export async function generateStaticEffects(
     )
     if (
       createHash("sha256").update(index).digest("hex") !==
-      "d28090a215b3a82afbbd8cec442e4074cb976fe9fa94b36ee31bb5284c0d4597"
+      "455992fbf3f48fba6c93d13e722d68a1405b1379acd2d39c4e1aceec25bea81c"
     )
       throw new Error(
         "The identity/rank evidence belongs to a different Nanoka snapshot",

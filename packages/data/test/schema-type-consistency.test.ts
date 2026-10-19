@@ -43,7 +43,11 @@ import {
   shiyuZoneRoomSkeletonOutputs,
   shiyuZoneStageSkeletonOutputs,
 } from "../src/integration/shiyu-schema.ts"
-import type { AgentData, AgentDetails } from "../src/integration/agent-types.ts"
+import type {
+  AgentData,
+  AgentDetails,
+  AgentSourceNames,
+} from "../src/integration/agent-types.ts"
 import type {
   SimulAdjustEntry,
   SimulBattle,
@@ -158,6 +162,7 @@ describe("Boss 登记表与封闭类型一致", () => {
     "zoneType",
     "beginTime",
     "endTime",
+    "liveTimeWindow",
     "bossAdjust",
   ] as const satisfies readonly (keyof BossData)[]
   type _BossDataComplete = Expect<
@@ -250,9 +255,13 @@ describe("Boss 登记表与封闭类型一致", () => {
     expect(new Set(Object.values(bossSharedBlockFields))).toEqual(
       new Set(["bossAdjust"]),
     )
+    // liveTimeWindow 提升自来源索引的 live_begin/live_end，不在详情登记表内。
     expect(outputSet(bossSharedDetailFields)).toEqual(
       new Set(
-        bossDataKeys.filter((key) => key !== "id" && key !== "bossAdjust"),
+        bossDataKeys.filter(
+          (key) =>
+            key !== "id" && key !== "bossAdjust" && key !== "liveTimeWindow",
+        ),
       ),
     )
     expect(outputSet(bossLocalizedDetailFields)).toEqual(
@@ -396,6 +405,7 @@ describe("Agent 声明式登记表与封闭类型一致", () => {
     "live2D",
     "codeName",
     "rarity",
+    "names",
     "gender",
     "stats",
     "level",
@@ -414,6 +424,16 @@ describe("Agent 声明式登记表与封闭类型一致", () => {
   ] as const satisfies readonly (keyof AgentData)[]
   type _AgentDataComplete = Expect<
     Equal<keyof AgentData, (typeof agentDataKeys)[number]>
+  >
+
+  const agentSourceNamesKeys = [
+    "zh",
+    "en",
+    "ja",
+    "ko",
+  ] as const satisfies readonly (keyof AgentSourceNames)[]
+  type _AgentSourceNamesComplete = Expect<
+    Equal<keyof AgentSourceNames, (typeof agentSourceNamesKeys)[number]>
   >
 
   const agentDetailsKeys = [
@@ -476,12 +496,15 @@ describe("Agent 声明式登记表与封闭类型一致", () => {
   it("顶层登记输出全部落在封闭类型上：整块共享进 data，嵌套共享两侧同名，语言字段进 details", () => {
     const { wholeShared, nestedShared, local } = topLevelOutputs()
     // data 视图 = 整块共享 + 嵌套共享容器 + 特例派生（身份副本 id、codeName
-    // 首语言取值、classificationIds 派生导航）。
+    // 首语言取值、classificationIds 派生导航、names 来源索引四语名称提升）。
     expect(new Set([...wholeShared, ...nestedShared])).toEqual(
       new Set(
         agentDataKeys.filter(
           (key) =>
-            key !== "id" && key !== "codeName" && key !== "classificationIds",
+            key !== "id" &&
+            key !== "codeName" &&
+            key !== "classificationIds" &&
+            key !== "names",
         ),
       ),
     )
@@ -1017,6 +1040,8 @@ describe("Monster 登记表与封闭类型一致", () => {
 /**
  * 可选性封闭：本周期删除残留 optional 后必须全必需的类型，key 集合与必需 key
  * 集合相等——任何人把 optional 加回来都会在此处被编译期拒绝。
+ * 例外：BossData 的 liveTimeWindow（来源索引直播服时间窗，成对提供或成对缺失）
+ * 是当前唯一合法的 optional，其断言改为显式必需 key 集合，同样封闭。
  */
 type RequiredKeys<T> = keyof {
   [K in keyof T as {} extends Pick<T, K> ? never : K]: 0
@@ -1051,7 +1076,10 @@ describe("封闭类型不得重新引入可选成员", () => {
     Equal<keyof BangbooSkillLevelEntry, RequiredKeys<BangbooSkillLevelEntry>>
   >
   type _BossDataAllRequired = Expect<
-    Equal<keyof BossData, RequiredKeys<BossData>>
+    Equal<
+      RequiredKeys<BossData>,
+      "id" | "priority" | "zoneType" | "beginTime" | "endTime" | "bossAdjust"
+    >
   >
   type _BossDetailsModesVariantAllRequired = Expect<
     Equal<keyof BossDetailsModesVariant, RequiredKeys<BossDetailsModesVariant>>

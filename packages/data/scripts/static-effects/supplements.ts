@@ -2854,7 +2854,7 @@ const roxyInitialEnergyRegenConversion: Supplement = {
         {
           path: "agents/1621/data.json",
           sha256:
-            "8a0e467f6cfd8f9d612669a21726730461deddff10d2f5fea088e0ed2bc89aa1",
+            "887cd398e0b32b07ca2c7752e220af1802410889303440b2efe4410ff5fd7b57",
         },
       ],
     },

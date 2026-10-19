@@ -817,7 +817,7 @@ describe("current dataset update report", () => {
           {
             name: "agents",
             before: null,
-            after: "nanoka-agent-reference/6",
+            after: "nanoka-agent-reference/7",
             changed: false,
           },
           {
@@ -829,7 +829,7 @@ describe("current dataset update report", () => {
           {
             name: "boss",
             before: null,
-            after: "nanoka-boss-reference/3",
+            after: "nanoka-boss-reference/4",
             changed: false,
           },
           {
@@ -982,8 +982,8 @@ describe("current dataset update report", () => {
       categories: [
         {
           name: "agents",
-          before: "nanoka-agent-reference/6",
-          after: "nanoka-agent-reference/6",
+          before: "nanoka-agent-reference/7",
+          after: "nanoka-agent-reference/7",
           changed: false,
         },
         {
@@ -1268,8 +1268,8 @@ describe("current dataset update report", () => {
       categories: [
         {
           name: "agents",
-          before: "nanoka-agent-reference/6",
-          after: "nanoka-agent-reference/6",
+          before: "nanoka-agent-reference/7",
+          after: "nanoka-agent-reference/7",
           changed: false,
         },
         {

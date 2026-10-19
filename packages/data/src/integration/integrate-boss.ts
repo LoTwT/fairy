@@ -58,7 +58,7 @@ export interface IntegratedBoss {
 }
 
 /**
- * 按规则 nanoka-boss-reference/3 校验、复制和拆分单个 Boss 记录。无 I/O、默认值或语言回退。
+ * 按规则 nanoka-boss-reference/4 校验、复制和拆分单个 Boss 记录。无 I/O、默认值或语言回退。
  * 来源校验失败抛出含来源位置的 BossIntegrationError，不返回部分整合结果。
  */
 export function integrateBoss(input: IntegrateBossInput): IntegratedBoss {
@@ -101,6 +101,21 @@ export function integrateBoss(input: IntegrateBossInput): IntegratedBoss {
   for (const key of Object.keys(sourceRecord).toSorted())
     if (!bossIndexFields.includes(key))
       diagnostics.push({ ...at(indexLocation, key), kind: "unknown-field" })
+  // 索引直播服时间窗提升为 data.liveTimeWindow：两字段成对提供或成对缺失，缺失时不补造。
+  const hasLiveBegin = Object.hasOwn(sourceRecord, "live_begin")
+  const hasLiveEnd = Object.hasOwn(sourceRecord, "live_end")
+  if (hasLiveBegin !== hasLiveEnd)
+    failBoss(indexLocation, "live_begin 与 live_end 必须成对提供或成对缺失")
+  let liveTimeWindow: JsonObject | undefined
+  if (hasLiveBegin) {
+    const liveBegin = sourceRecord.live_begin
+    const liveEnd = sourceRecord.live_end
+    if (typeof liveBegin !== "string")
+      failBoss(at(indexLocation, "live_begin"), "字段类型必须为 string")
+    if (typeof liveEnd !== "string")
+      failBoss(at(indexLocation, "live_end"), "字段类型必须为 string")
+    liveTimeWindow = { beginTime: liveBegin, endTime: liveEnd }
+  }
   const sources = input.details
   if (!isObject(sources)) failBoss(location, "details 必须是语言记录对象")
   for (const key of Reflect.ownKeys(sources)) {
@@ -128,6 +143,7 @@ export function integrateBoss(input: IntegrateBossInput): IntegratedBoss {
     return record
   })
   const data: JsonObject = { id: records[0].id }
+  if (liveTimeWindow !== undefined) put(data, "liveTimeWindow", liveTimeWindow)
   for (const key of Object.keys(bossSharedDetailFields).toSorted()) {
     const definition = bossSharedDetailFields[key]!
     for (const index of records.keys())

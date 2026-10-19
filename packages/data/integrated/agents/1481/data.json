@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Liuyin",
+  "names": {
+    "en": "Dialyn",
+    "ja": "ダイアリン",
+    "ko": "다이아린",
+    "zh": "琉音"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle54.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0054.png",

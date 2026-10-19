@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Pyrois",
+  "names": {
+    "en": "Pyrois",
+    "ja": "ピュロイス",
+    "ko": "피로이스",
+    "zh": "佩洛伊斯"
+  },
   "partnerInfo": {
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0063.png"
   },

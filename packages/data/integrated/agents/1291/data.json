@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Hugo",
+  "names": {
+    "en": "Hugo",
+    "ja": "ヒューゴ",
+    "ko": "휴고",
+    "zh": "雨果"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle42.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0042.png",

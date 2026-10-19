@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpineAlice",
+  "names": {
+    "en": "Alice",
+    "ja": "アリス",
+    "ko": "앨리스",
+    "zh": "爱丽丝"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle46.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0046.png",

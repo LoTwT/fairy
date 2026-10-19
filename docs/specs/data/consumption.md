@@ -27,11 +27,13 @@ JSON 子路径导出及根入口的公开 ID 类型、冻结 ID 列表与读取 
 与等级解析的语义见[技能动作规范](skill-actions.md)，标准化属性读取的语义见
 [60 级属性规范](panel-attributes.md)，静态计算资料读取与错误契约见[读取接口](#读取接口)；
 未在本节或读取接口登记的名称不属于根入口导出。这些类型可供消费者引用，不改变来源 ID 的内部标识用途。`AgentName` 是本次发布所有
-`integrated/agents/{来源ID}/details.en.json` 顶层 `name` 原值的精确字符串字面量 union；`DriveDiscName`
-同理取 `integrated/drive-discs/{来源ID}/details.en.json`，`WEngineName` 取
+`integrated/agents/{来源ID}/data.json` 的 `names.en` 原值的精确字符串字面量 union——即来源索引
+`character.json` 成员的 `en` 名称，作为稳定来源与英文详情显示名解耦（本地 3.2 两者取值一致；
+上游改写详情翻译不再构成 `AgentName` 的类型变化）；`DriveDiscName` 取
+`integrated/drive-discs/{来源ID}/details.en.json` 顶层 `name`，`WEngineName` 取
 `integrated/w-engines/{来源ID}/details.en.json`，`BangbooName` 取
 `integrated/bangboos/{来源ID}/details.en.json`。固定取英文，保留大小写、空格及标点，不取
-`data.codeName`、索引摘要名或来源索引的 code/en。例如代理人 `1381` 为 `Soldier 0 - Anby`、`1311` 为
+`data.codeName`。例如代理人 `1381` 为 `Soldier 0 - Anby`、`1311` 为
 `Astra Yao`（codeName 为 `Astra`），驱动盘 `31000` 为 `Woodpecker Electro`，WEngine `12001` 为
 `[Lunar] Pleniluna`（保留方括号与空格），邦布 `53001` 为 `Penguinboo`（codeName 拼写一致但属另一字段）、
 `53019` 为 `Bild N. Boolok`（保留空格与标点）。

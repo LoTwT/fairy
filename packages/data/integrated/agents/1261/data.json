@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Jian",
+  "names": {
+    "en": "Jane",
+    "ja": "ジェーン",
+    "ko": "제인",
+    "zh": "简"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle24.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0024.png",

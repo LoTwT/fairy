@@ -87,6 +87,10 @@ const expectedData = {
   zoneType: 1001,
   beginTime: "2024-07-04 04:00:00",
   endTime: "2024-08-01 03:59:59",
+  liveTimeWindow: {
+    beginTime: "2024-07-04 04:00:00",
+    endTime: "2024-08-01 03:59:59",
+  },
   bossAdjust: {
     "1001": { hp: 1200, atk: -5000, points: 1000 },
     "1002": { hp: 1700, atk: -2500, points: 1200 },
@@ -260,6 +264,30 @@ describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
     expect(result.sourceRecord.zone_type).toBe(9999)
     expect(result.maintenance.diagnostics).toEqual([])
     expectBossRoundtrip(result, input)
+  })
+
+  it("索引直播服时间窗成对保留或成对缺失，类型不符即失败", () => {
+    const result = integrateBoss(bossInput())
+    expect(result.data.liveTimeWindow).toStrictEqual({
+      beginTime: "2024-07-04 04:00:00",
+      endTime: "2024-08-01 03:59:59",
+    })
+    const absent = bossInput()
+    remove(absent.sourceRecord, "live_begin")
+    remove(absent.sourceRecord, "live_end")
+    const absentResult = integrateBoss(absent)
+    expect(absentResult.data).not.toHaveProperty("liveTimeWindow")
+    expectBossRoundtrip(absentResult, absent)
+    for (const path of ["live_begin", "live_end"] as const) {
+      const half = bossInput()
+      remove(half.sourceRecord, path)
+      expectFailure(half, "index", "", "成对提供或成对缺失")
+      for (const value of [0, null, {}, [], true]) {
+        const typed = bossInput()
+        change(typed.sourceRecord, path, value)
+        expectFailure(typed, "index", `/${path}`, "字段类型必须为 string")
+      }
+    }
   })
 
   it("来源索引的未知顶层字段生成 index 诊断，已知字段不误报", () => {

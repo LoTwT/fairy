@@ -198,6 +198,12 @@
     27900, 34200, 36600, 39000, 41400, 43800, 46200, 48600, 51000, 53400, 55800,
     0
   ],
+  "names": {
+    "en": "Piper",
+    "ja": "パイパー",
+    "ko": "파이퍼",
+    "zh": "派派"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle28.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0028.png",

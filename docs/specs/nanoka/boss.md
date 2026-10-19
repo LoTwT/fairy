@@ -4,9 +4,9 @@
 
 - 上游实体：`boss`
 - 状态：已完成代表性结构调研，可由共享抓取器缓存；整合类别 `boss` 已按规则
-  `nanoka-boss-reference/3` 接入生产快照
+  `nanoka-boss-reference/4` 接入生产快照
 - 抓取器仍不执行 Boss 字段级语义验证；整合器按该规则独立校验已登记结构，字段归属、结构变体与
-  严格公共时间字段见[来源数据整合规范](../data/integration.md#boss-单实体实现规则-nanoka-boss-reference3)
+  严格公共时间字段见[来源数据整合规范](../data/integration.md#boss-单实体实现规则-nanoka-boss-reference4)
 
 ## 资源
 
@@ -60,7 +60,7 @@ packages/data/raw/nanoka/{version}/
 ## 整合
 
 整合类别登记名为 `boss`，`data.json` 与 `details.{locale}.json` 的字段归属、结构变体与校验边界由
-[Boss 单实体实现规则](../data/integration.md#boss-单实体实现规则-nanoka-boss-reference3)统一定义。
+[Boss 单实体实现规则](../data/integration.md#boss-单实体实现规则-nanoka-boss-reference4)统一定义。
 成员集合由选定来源版本 `boss.json` 的顶层 key 决定，不扫描详情目录推断；本层不解释评级目标语义、
 不换算时间、不建立 mode 唯一性或 Monster 引用闭合校验。`modes`（或旧结构 `zone`）完整留在各语言
 details，不拆分为跨语言公共关卡图，也不提前抽取与 Simul 的共享配置制品。

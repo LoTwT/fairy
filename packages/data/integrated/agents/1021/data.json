@@ -198,6 +198,12 @@
     27900, 34200, 36600, 39000, 41400, 43800, 46200, 48600, 51000, 53400, 55800,
     0
   ],
+  "names": {
+    "en": "Nekomata",
+    "ja": "猫又",
+    "ko": "네코마타",
+    "zh": "猫又"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle11.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0011.png",

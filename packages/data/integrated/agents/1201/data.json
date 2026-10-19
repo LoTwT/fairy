@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Qianyuyouzhen",
+  "names": {
+    "en": "Harumasa",
+    "ja": "浅羽悠真",
+    "ko": "하루마사",
+    "zh": "悠真"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle35.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0035.png",

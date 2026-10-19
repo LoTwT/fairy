@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UIspineTrigger",
+  "names": {
+    "en": "Trigger",
+    "ja": "「トリガー」",
+    "ko": "「트리거」",
+    "zh": "「扳机」"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle39.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0039.png",

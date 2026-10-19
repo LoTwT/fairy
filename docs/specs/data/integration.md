@@ -2,19 +2,19 @@
 
 ## 状态与目标
 
-**状态：整合规则严格化已实施完成：未知字段由细节流容忍改为整合失败、共享字段改为严格共享（同有或全缺）、全类别 rulesVersion 递增、shiyu `zone` 数值骨架提升到 `data`、boss `modes`/`zone` 判别联合与 `data`/`details` 类型封闭化均已落地；快照已重生成并通过字节级验收（仅 shiyu 与 index 变更）。注意 v2 显式迁移随之实际退役：真实 v2 外壳都停留在最后一个 v2 规则版本，与当前登记表版本不同，按 §7 的迁移契约一律拒绝，需按当前规则从 raw 重新生成；后续可单独评估是否删除迁移代码。此前已实现：单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令；固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取。正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
+**状态：sourceRecord 业务字段登记已实施完成：agents 索引四语名称提升为 `data.names`、boss 索引 `live_begin`/`live_end` 成对提升为 `data.liveTimeWindow`（缺失时不补造）、agents 补齐索引未知顶层字段维护诊断、发布目录 `AgentName` 改用来源索引 en 名称作为稳定来源（与英文详情显示名解耦，当前 3.2 数据两者取值一致）、agents 与 boss rulesVersion 递增；快照与三类派生制品（skills、attributes、static-effects）已重生成并通过字节级验收（仅 agents data、boss data、index 与钉值变更）。登记范围说明：boss 索引 `zone_type`/`sort` 与已提升的详情孪生字段（`zoneType`/`priority`）本地 3.2 全 47 条同值，按 schema 归属不重复提升、原值保留归档；驱动盘索引摘要四语描述的提升推迟到发布层瘦身周期（它是 v4 瘦身的前置之一）；`DriveDiscName`/`WEngineName`/`BangbooName` 仍读英文详情名，名称换源暂只覆盖 `AgentName`。此前一轮已完成：整合规则严格化——未知字段由细节流容忍改为整合失败、共享字段改为严格共享（同有或全缺）、全类别 rulesVersion 递增、shiyu `zone` 数值骨架提升到 `data`、boss `modes`/`zone` 判别联合与 `data`/`details` 类型封闭化；注意 v2 显式迁移随之实际退役：真实 v2 外壳都停留在最后一个 v2 规则版本，与当前登记表版本不同，按 §7 的迁移契约一律拒绝，需按当前规则从 raw 重新生成；后续可单独评估是否删除迁移代码。此前已实现：单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令；固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取。正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
 `data.json` 与 `details.{locale}.json` 为已确认的文件名，正式类型与测试使用同一命名。
-已接入生产类别：`agents`（规则 `nanoka-agent-reference/6`）、`drive-discs`（规则
+已接入生产类别：`agents`（规则 `nanoka-agent-reference/7`）、`drive-discs`（规则
 `nanoka-drive-disc-reference/2`）、`w-engines`（规则 `nanoka-w-engine-reference/2`）、`bangboos`（规则
 `nanoka-bangboo-reference/2`）、`monsters`（规则 `nanoka-monster-reference/2`）、`shiyu`（规则
-`nanoka-shiyu-reference/3`）、`boss`（规则 `nanoka-boss-reference/3`）与 `simul`（规则
+`nanoka-shiyu-reference/3`）、`boss`（规则 `nanoka-boss-reference/4`）与 `simul`（规则
 `nanoka-simul-reference/3`）。驱动盘单实体规则与实现状态见
 [驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference2)，WEngine 单实体规则与实现状态见
 [WEngine 单实体实现规则](#wengine-单实体实现规则-nanoka-w-engine-reference2)，Bangboo 单实体规则与实现状态见
 [Bangboo 单实体实现规则](#bangboo-单实体实现规则-nanoka-bangboo-reference2)，Monster 单实体规则与实现状态见
 [Monster 单实体实现规则](#monster-单实体实现规则-nanoka-monster-reference2)，Shiyu 单实体规则与实现状态见
 [Shiyu 单实体实现规则](#shiyu-单实体实现规则-nanoka-shiyu-reference3)，Boss 单实体规则与实现状态见
-[Boss 单实体实现规则](#boss-单实体实现规则-nanoka-boss-reference3)，Simul 单实体规则与实现状态见
+[Boss 单实体实现规则](#boss-单实体实现规则-nanoka-boss-reference4)，Simul 单实体规则与实现状态见
 [Simul 单实体实现规则](#simul-单实体实现规则-nanoka-simul-reference3)。
 
 整合层把分散的来源记录汇集为可查阅、导出和再次加工的完整资料，尽量保留游戏内原文、数值与展示上下文。
@@ -125,9 +125,10 @@ core：计算
 - 字段值不变，包括机器标签、文本、模板、资源路径、零空值和数组顺序；不改写字符串内部的下划线。
 - 未识别字段和未知容器的成员不进入制品：细节流任一层出现未登记字段即整合失败，须先在结构登记表登记
   或确认来源结构后再进入制品；确认其属于结构字段后再登记拼写转换。不能猜测未知对象是记录还是字典。
-- `index.agents[id].sourceRecord` 是独立来源索引记录，保留原始 key（含未登记字段，其业务字段登记属于
-  后续版本工作；agents 当前不产生 sourceRecord 诊断，`maintenance.diagnostics` 恒为空，其余类别仅对
-  索引记录的未登记顶层字段产生维护诊断）；索引自身的元信息使用 camelCase。
+- `index.agents[id].sourceRecord` 是独立来源索引记录，保留原始 key（含未登记字段）。索引业务字段按
+  类别登记：agents 的四语名称提升为 `data.names`，boss 的 `live_begin`/`live_end` 成对提升为
+  `data.liveTimeWindow`；已登记字段按登记语义校验（必需、类型、成对性），未登记顶层字段保留原值并
+  进入维护诊断，不递归推断未知容器。索引自身的元信息使用 camelCase。
 - 来源字段与已登记的驼峰目标名称发生冲突时必须失败，包括目标名已经被未知字段占用的情况；不能覆盖或合并值。
 
 每个显式声明的 TS 字段，包括嵌套字段，都应有独立 JSDoc。注释说明来源 key（发生改名时）、内容或身份空间、
@@ -701,9 +702,9 @@ v3 不沿用 v2 的 `stats`/`content` 名称，那是已废弃文件名的遗留
 调用方负责后续从来源配置取得完整语言列表，函数本身不读取配置或文件，也不填补未传入语言。
 
 返回 `{ data, details, sourceRecord, maintenance }`：`data` 和 `details[locale]` 分别是文件对应的顶层对象，
-`sourceRecord` 为独立索引副本；`maintenance` 记录其他语言的 `codeName` 差异（细节流的未知字段已改为
-整合失败，不再进入诊断；agents 当前也不诊断 sourceRecord 未知字段，`diagnostics` 恒为空，业务字段
-登记属于后续版本工作）。
+`sourceRecord` 为独立索引副本；`maintenance` 记录其他语言的 `codeName` 差异与索引未知顶层字段诊断
+（细节流的未知字段已改为整合失败，不再进入诊断；索引 `sourceRecord` 的未知顶层字段原值保留并进入
+`diagnostics`，已登记的索引四语名称提升见下）。
 失败抛出 `AgentIntegrationError`，携带实体、语言和来源 JSON Pointer，不返回部分结果。
 共享提取与改名路径集中在[结构登记表](../../../packages/data/src/integration/agent-schema.ts)，
 抓取器和整合器共用[来源身份策略](../../../packages/data/src/nanoka-identity.ts)。
@@ -716,6 +717,14 @@ schema 路径的维护错误，不冒充来源结构异常，也不依赖来源�
 该纯函数仅处理已解析 JSON，验证来源值、必需字段、可选结构、共享一致性、保真与对象结果确定性。
 文件读取、严格 UTF-8 解码、摘要、序列化和全量索引由下述独立模块负责，这些职责不加入 `integrateAgent`。
 单实体对象测试不代替文件流程验收。整合函数不承担计算语义和 core 输入适配；公开读取 API 见[数据消费契约](consumption.md)，完整计算链路见[静态计算规范](../core/static-calculation.md)。
+
+来源索引登记（`character.json` 成员记录，本地 3.2 全 60 条确认）：顶层已知字段登记为
+[索引字段表](../../../packages/data/src/integration/agent-schema.ts)（`camp`、`code`、`desc`、`element`、
+`elements`、`en`、`hit`、`hits`、`icon`、`ja`、`ko`、`potential`、`rank`、`skin`、`spelement`、`type`、
+`zh`），未登记顶层字段原值保留并进入维护诊断，未知容器不递归推断。四语名称（`zh`/`en`/`ja`/`ko`）
+提升为 `data.names`：四个语言全部必需且必须为字符串，原值逐字复制；索引名称与详情各语言的 `name`
+是两个独立来源，不要求相等也不互相回填。发布目录的 `AgentName` 以 `data.names.en` 为稳定来源，
+不再读英文详情显示名（本地 3.2 两者取值恰好一致，契约上与其解耦）。
 
 旧文档 example 已迁移并删除：
 
@@ -773,7 +782,8 @@ core 映射不属于本规则。
 5. 来源摘要必须提供字符串 `icon` 与 `zh`、`en` 语言对象的 `name`、`desc2`、`desc4`；`ja`、`ko` 存在时校验
    对应结构，缺失时不补造；摘要与详情的同名字段不要求相等。
 6. 未登记字段处理：详情未知字段整合失败；来源摘要（`sourceRecord`）的未知字段原值保留并进入维护诊断，
-   其业务字段登记属于后续版本。不因跨语言相等而自动共享。来源字段 `locale` 与派生 `locale` 重名时失败，不能覆盖。
+   已登记字段按登记语义校验（必需、类型），提升字段只含本节登记的业务字段。不因跨语言相等而自动共享。
+   来源字段 `locale` 与派生 `locale` 重名时失败，不能覆盖。
 7. 空字符串、零、`null`、空数组、空对象、数组顺序和富文本按来源保留；已登记字段仍须满足其明确类型。
    非 JSON 值、非法数值、访问器、Symbol key 与循环引用复用共享保真边界。
 8. 失败抛出 `DriveDiscIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。`name` 在本层按
@@ -1096,7 +1106,7 @@ Shiyu 名称在类内大量重名（本地 3.1 的剧变节点类中英文同名
    字符串保留；本规则不生成名称 catalog 或名称唯一性约束，公开读取按
    [消费契约](consumption.md)以来源 ID 为身份。
 
-### Boss 单实体实现规则 `nanoka-boss-reference/3`
+### Boss 单实体实现规则 `nanoka-boss-reference/4`
 
 来源说明见 [Nanoka Boss](../nanoka/boss.md)：上游实体 `boss`，整合类别登记名为 `boss`，
 类型与函数统一使用 `Boss` 命名。一条记录表示一个首领试炼条目；评级目标语义解释、时间换算、mode 唯一性、
@@ -1114,25 +1124,29 @@ Boss 名称在类内完全同名（本地 3.1 全部 44 条的中英文名称各
 
 字段归属（第一列为来源拼写，后两列为转换后的字段名）：
 
-| 来源字段         | `data.json`                          | `details.{locale}.json`                 |
-| ---------------- | ------------------------------------ | --------------------------------------- |
-| `id`             | 数值 Boss ID                         | 同值身份副本                            |
-| `priority`       | `priority` 严格公共字段              | 无重复载荷                              |
-| `zone_type`      | `zoneType` 严格公共字段              | 无重复载荷                              |
-| `begin_time`     | `beginTime` 严格公共字段，原始字符串 | 无重复载荷                              |
-| `end_time`       | `endTime` 严格公共字段，原始字符串   | 无重复载荷                              |
-| `boss_adjust`    | `bossAdjust` 完整共享块              | 无重复载荷                              |
-| `name`           | 无                                   | 当前语言原文                            |
-| `modes`          | 无；完整留在各语言                   | 当前结构变体的 mode 数组                |
-| `zone`（旧结构） | 无                                   | 历史结构变体的顶层关卡字典              |
-| 派生 `locale`    | 无                                   | 输入语言标识                            |
-| 索引中的实体记录 | 不覆盖到详情                         | 完整保存在 `sourceRecord`，不修改原 key |
+| 来源字段                        | `data.json`                          | `details.{locale}.json`                 |
+| ------------------------------- | ------------------------------------ | --------------------------------------- |
+| `id`                            | 数值 Boss ID                         | 同值身份副本                            |
+| `priority`                      | `priority` 严格公共字段              | 无重复载荷                              |
+| `zone_type`                     | `zoneType` 严格公共字段              | 无重复载荷                              |
+| `begin_time`                    | `beginTime` 严格公共字段，原始字符串 | 无重复载荷                              |
+| `end_time`                      | `endTime` 严格公共字段，原始字符串   | 无重复载荷                              |
+| `live_begin`/`live_end`（索引） | `liveTimeWindow` 成对提升，可选      | 无重复载荷                              |
+| `boss_adjust`                   | `bossAdjust` 完整共享块              | 无重复载荷                              |
+| `name`                          | 无                                   | 当前语言原文                            |
+| `modes`                         | 无；完整留在各语言                   | 当前结构变体的 mode 数组                |
+| `zone`（旧结构）                | 无                                   | 历史结构变体的顶层关卡字典              |
+| 派生 `locale`                   | 无                                   | 输入语言标识                            |
+| 索引中的实体记录                | 不覆盖到详情                         | 完整保存在 `sourceRecord`，不修改原 key |
 
 `bossAdjust` 是完整共享块：块内成员逐个登记，未登记成员整合失败，不再随块保留；已登记成员（含负值如
 本地 3.1 的 `atk` 负值、比例与 `points` 等）保留原始数值，不解释或换算。`priority`、`zoneType`、`beginTime`、
 `endTime` 是严格公共字段：每个语言都必须提供，跨语言完整值必须一致，冲突即失败；时间保持原始字符串，
-不转换时间戳、不猜测时区。索引记录中的 `begin`/`end`/`live_begin`/`live_end` 与 `zone_type` 是独立来源，
-完整保留在 `sourceRecord`，不与详情字段互相回退。
+不转换时间戳、不猜测时区。索引记录中的 `begin`/`end`/`zone_type`/`sort` 与详情侧同语义字段是独立来源
+（本地 3.2 索引 `zone_type`、`sort` 与详情 `zone_type`、`priority` 全 47 条同值，仍不合并），完整保留在
+`sourceRecord`，不与详情字段互相回退。索引 `live_begin`/`live_end` 是详情没有的直播服开放时间窗：成对
+提供或成对缺失（单侧提供即结构失败），提供时必须为字符串，成对提升为 `data.liveTimeWindow`
+（`beginTime`/`endTime` 原始字符串，缺失时不补造；本地 3.2 全 47 条中 44 条成对提供、3 条成对缺失）。
 
 详情结构存在两种已建模变体，表达为判别联合类型：当前 3.1 使用顶层 `modes` 数组（列表 + 各 mode 内的房间
 字典），历史版本（本地 3.0 缓存）使用顶层 `zone` 字典，阶段条目结构共用同一登记表（含 `selectable_buff`，
@@ -1335,11 +1349,11 @@ fairy-integrated-snapshot-<独占后缀>/
 ### 多实体完整制品的内部生成、验证与转换
 
 [类别登记表](../../../packages/data/scripts/nanoka-integration/snapshot-entities.ts)显式登记已接入类别；
-当前为 `agents`（来源实体 `character`，规则 `nanoka-agent-reference/6`）、`drive-discs`（来源实体
+当前为 `agents`（来源实体 `character`，规则 `nanoka-agent-reference/7`）、`drive-discs`（来源实体
 `equipment`，规则 `nanoka-drive-disc-reference/2`）、`w-engines`（来源实体 `weapon`，规则
 `nanoka-w-engine-reference/2`）、`bangboos`（来源实体 `bangboo`，规则 `nanoka-bangboo-reference/2`）、
 `monsters`（来源实体 `monster`，规则 `nanoka-monster-reference/2`）、`shiyu`（来源实体 `shiyu`，规则
-`nanoka-shiyu-reference/3`）、`boss`（来源实体 `boss`，规则 `nanoka-boss-reference/3`）与 `simul`
+`nanoka-shiyu-reference/3`）、`boss`（来源实体 `boss`，规则 `nanoka-boss-reference/4`）与 `simul`
 （来源实体 `simul`，规则 `nanoka-simul-reference/3`），
 代理人复用既有 `integrateAgent`、驱动盘复用既有
 `integrateDriveDisc`、WEngine 复用既有 `integrateWEngine`、邦布复用既有 `integrateBangboo`、

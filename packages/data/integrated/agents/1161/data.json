@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Lighter",
+  "names": {
+    "en": "Lighter",
+    "ja": "ライト",
+    "ko": "라이터",
+    "zh": "莱特"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle26.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0026.png",

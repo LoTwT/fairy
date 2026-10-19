@@ -198,6 +198,12 @@
     27900, 34200, 36600, 39000, 41400, 43800, 46200, 48600, 51000, 53400, 55800,
     0
   ],
+  "names": {
+    "en": "Pan Yinhu",
+    "ja": "潘引壺",
+    "ko": "반인호",
+    "zh": "潘引壶"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle45.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0045.png",

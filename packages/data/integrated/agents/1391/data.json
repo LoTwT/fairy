@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpineJufufu",
+  "names": {
+    "en": "Ju Fufu",
+    "ja": "橘福福",
+    "ko": "귤복복",
+    "zh": "橘福福"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle43.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0043.png",

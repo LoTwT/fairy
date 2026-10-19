@@ -1150,7 +1150,7 @@ const contexts: readonly ClauseContextGuardEntry[] = [
 /** 同阵营只属于此机制；来源是固定 integrated index 的精确 camp 指针。 */
 export const LUCY_GUARD_BOAR_FACTION = {
   path: "index.json",
-  sha256: "d28090a215b3a82afbbd8cec442e4074cb976fe9fa94b36ee31bb5284c0d4597",
+  sha256: "455992fbf3f48fba6c93d13e722d68a1405b1379acd2d39c4e1aceec25bea81c",
   agentEntityIds: ["1071", "1151", "1161", "1171", "1281", "1351"],
   pointers: [
     "/entities/agents/members/1071/sourceRecord/camp",

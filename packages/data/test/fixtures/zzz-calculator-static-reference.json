@@ -65,7 +65,7 @@
       "packageVersion": "0.3.0",
       "contractVersion": 2,
       "gameVersion": "3.2",
-      "snapshotId": "sha256:6cf7f6a2da16cb770a4573e91608a60724ef0ce77d0bb1c363e231a7bcef9d9a"
+      "snapshotId": "sha256:e423558334fb76962ebdfab3681b32da4c637d5de485984a8ae74459a1c2fb87"
     },
     "fairyCalculationSources": {
       "packages/core/src/static/calculate.ts": "c1e6d073f7b8eb62241bf640da8d3e1a878aa8de9a703636c490f113a126441e",
@@ -80347,10 +80347,10 @@
         "snapshotId": "sha256:754db1ed00046d2da9b9f893a48c607badbc9e5137169217a4bd3b1678f25540",
         "artifactSha256": {
           "packages/data/definitions/effects/static.json": "a8aac21c0307af11934c1eaf84a5f14cccf390487b5ea6e9505307c8e4ec3305",
-          "packages/data/definitions/effects/static-catalog.json": "2c75ada280abfd2269270a794a76a3558994bf882c5d6aae6180081b8d22fb12"
+          "packages/data/definitions/effects/static-catalog.json": "0958a918aebb418d67e67280b4ccbdc83f63a8362ee8d478bb9c5bd1739761dc"
         }
       },
-      "currentSnapshotId": "sha256:6cf7f6a2da16cb770a4573e91608a60724ef0ce77d0bb1c363e231a7bcef9d9a"
+      "currentSnapshotId": "sha256:e423558334fb76962ebdfab3681b32da4c637d5de485984a8ae74459a1c2fb87"
     }
   ]
 }

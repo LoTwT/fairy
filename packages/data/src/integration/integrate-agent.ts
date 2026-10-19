@@ -5,7 +5,12 @@ import type {
   DetailLocale,
   SourceJson,
 } from "./agent-types.ts"
-import { agentSchema, registeredName } from "./agent-schema.ts"
+import {
+  agentIndexFields,
+  agentIndexNameLocales,
+  agentSchema,
+  registeredName,
+} from "./agent-schema.ts"
 import type { Schema } from "./agent-schema.ts"
 import {
   at,
@@ -92,12 +97,9 @@ export function integrateAgent(input: IntegrateAgentInput): IntegratedAgent {
   )
     fail(at(location, "detailLocales"), "详情语言列表须非空、受支持且不重复")
   const locales = configuredLocales as DetailLocale[]
-  const sourceRecord = copyJson(input.sourceRecord, {
-    ...location,
-    locale: "index",
-  })
-  if (!isObject(sourceRecord))
-    fail({ ...location, locale: "index" }, "索引记录必须是普通对象")
+  const indexLocation: SourceLocation = { ...location, locale: "index" }
+  const sourceRecord = copyJson(input.sourceRecord, indexLocation)
+  if (!isObject(sourceRecord)) fail(indexLocation, "索引记录必须是普通对象")
   const sources = input.details
   if (!isObject(sources)) fail(location, "details 必须是语言记录对象")
   for (const key of Reflect.ownKeys(sources)) {
@@ -110,6 +112,20 @@ export function integrateAgent(input: IntegrateAgentInput): IntegratedAgent {
   }
   const diagnostics: UnknownFieldDiagnostic[] = []
   const codeNameDifferences: CodeNameDifference[] = []
+  // 只识别来源索引的未知顶层字段；登记不要求字段存在或类型相符，未知容器内部不递归推断。
+  for (const key of Object.keys(sourceRecord).toSorted())
+    if (!agentIndexFields.includes(key))
+      diagnostics.push({ ...at(indexLocation, key), kind: "unknown-field" })
+  // 索引四语名称提升为 data.names：全部语言必需且必须为字符串；原值逐字复制，不与详情名称对账。
+  const names: JsonObject = {}
+  for (const nameLocale of agentIndexNameLocales) {
+    if (!Object.hasOwn(sourceRecord, nameLocale))
+      fail(at(indexLocation, nameLocale), "缺失必需字段")
+    const value = sourceRecord[nameLocale]
+    if (typeof value !== "string")
+      fail(at(indexLocation, nameLocale), "字段类型必须为 string")
+    put(names, nameLocale, value)
+  }
   const records = locales.map((locale) => {
     const context: SourceLocation = { ...location, locale }
     if (!Object.hasOwn(sources, locale)) fail(context, "缺失详情")
@@ -172,6 +188,7 @@ export function integrateAgent(input: IntegrateAgentInput): IntegratedAgent {
   )!
   data.id = records[0].id
   data.codeName = codeName
+  data.names = names
   data.classificationIds = classificationIds
   const details: Partial<Record<DetailLocale, AgentDetails>> = {}
   records.forEach((record, index) => {

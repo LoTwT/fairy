@@ -183,7 +183,6 @@ export function agentInput() {
       en: "Independent",
       ja: "索引のみ",
       ko: "색인",
-      code_name: "Index identity",
     },
     details: { zh, en },
   }

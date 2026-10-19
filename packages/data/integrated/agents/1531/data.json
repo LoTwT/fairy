@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UIspineSPBilly",
+  "names": {
+    "en": "Starlight - Billy",
+    "ja": "スターライト･ビリー",
+    "ko": "스타라이트·빌리",
+    "zh": "星徽·比利"
+  },
   "partnerInfo": {
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0062.png"
   },

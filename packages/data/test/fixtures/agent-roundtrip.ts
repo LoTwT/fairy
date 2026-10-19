@@ -191,6 +191,15 @@ export function expectRoundtrip(
     delete details.navigation
     delete details.id
     delete data.classificationIds
+    // data.names 提升自来源索引的四语名称；按输入原值核对后移除，还原载荷只对应详情来源。
+    const sourceRecord = input.sourceRecord as Record<string, unknown>
+    expect(data.names).toStrictEqual({
+      zh: sourceRecord.zh,
+      en: sourceRecord.en,
+      ja: sourceRecord.ja,
+      ko: sourceRecord.ko,
+    })
+    delete data.names
     const restored = sourceNames(combine(data, details)) as Record<
       string,
       unknown

@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpineYanagi",
+  "names": {
+    "en": "Yanagi",
+    "ja": "月城柳",
+    "ko": "야나기",
+    "zh": "柳"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle31.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0031.png",

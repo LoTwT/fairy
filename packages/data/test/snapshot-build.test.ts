@@ -201,7 +201,7 @@ describe("multi-entity snapshot build", () => {
       "widgets",
     ])
     expect(build.index.entities.agents).toMatchObject({
-      rulesVersion: "nanoka-agent-reference/6",
+      rulesVersion: "nanoka-agent-reference/7",
       detailLocales: ["zh", "en"],
       complete: true,
       memberIds: ["2", "10"],
@@ -1430,7 +1430,6 @@ describe("multi-entity snapshot build input-side coverage", () => {
       const member = build.index.entities.agents!.members[memberId]!
       expect(Object.hasOwn(member.sourceRecord, "__proto__")).toBe(true)
       expect(Object.hasOwn(member.sourceRecord, "constructor")).toBe(true)
-      expect(member.sourceRecord.code_name).toBe("Index identity")
       expect(
         JSON.parse(bytes[`agents/${memberId}/data.json`]!.toString()).codeName,
       ).toBe("中文原值")
@@ -1443,11 +1442,25 @@ describe("multi-entity snapshot build input-side coverage", () => {
       JSON.parse(bytes["agents/10/details.en.json"]!.toString()),
     ).not.toHaveProperty("future_field")
     // codeName 差异与诊断按成员分组，只写入制品外的维护报告。
+    // 索引注入的 __proto__/constructor 是未知顶层字段：sourceRecord 原样保留并进入诊断。
     expect(build.maintenance.agents).toEqual([
       {
         memberId: "2",
         maintenance: {
-          diagnostics: [],
+          diagnostics: [
+            {
+              entityId: "2",
+              locale: "index",
+              pointer: "/__proto__",
+              kind: "unknown-field",
+            },
+            {
+              entityId: "2",
+              locale: "index",
+              pointer: "/constructor",
+              kind: "unknown-field",
+            },
+          ],
           codeNameDifferences: [
             {
               entityId: "2",
@@ -1463,7 +1476,20 @@ describe("multi-entity snapshot build input-side coverage", () => {
       {
         memberId: "10",
         maintenance: {
-          diagnostics: [],
+          diagnostics: [
+            {
+              entityId: "10",
+              locale: "index",
+              pointer: "/__proto__",
+              kind: "unknown-field",
+            },
+            {
+              entityId: "10",
+              locale: "index",
+              pointer: "/constructor",
+              kind: "unknown-field",
+            },
+          ],
           codeNameDifferences: [
             {
               entityId: "10",

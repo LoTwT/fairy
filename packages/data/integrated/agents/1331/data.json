@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Vivian",
+  "names": {
+    "en": "Vivian",
+    "ja": "ビビアン",
+    "ko": "비비안",
+    "zh": "薇薇安"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle41.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0041.png",

@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_nuomu",
+  "names": {
+    "en": "Norma",
+    "ja": "ノルムー",
+    "ko": "노르마",
+    "zh": "诺姆"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle65.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0065.png",

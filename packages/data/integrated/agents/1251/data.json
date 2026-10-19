@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Qingyi",
+  "names": {
+    "en": "Qingyi",
+    "ja": "青衣",
+    "ko": "청의",
+    "zh": "青衣"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle29.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0029.png",

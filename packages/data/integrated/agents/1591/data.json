@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Sigrid",
+  "names": {
+    "en": "Sigrid",
+    "ja": "シグリッド",
+    "ko": "시그리드",
+    "zh": "希格莉德"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle66.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0066.png",

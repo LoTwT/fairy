@@ -183,6 +183,24 @@ export interface SourceSkillPriority {
   potentialLevels: number[]
 }
 
+/**
+ * 来源索引记录的四语名称容器；四个语言 key 全部必需。
+ * 值为索引原值逐字复制，不与详情名称对账。
+ */
+export interface AgentSourceNames {
+  /** 来源索引 `zh` 名称原值。 */
+  zh: string
+
+  /** 来源索引 `en` 名称原值；发布目录以其作为 AgentName 的稳定来源。 */
+  en: string
+
+  /** 来源索引 `ja` 名称原值。 */
+  ja: string
+
+  /** 来源索引 `ko` 名称原值。 */
+  ko: string
+}
+
 /** data.json：除 codeName 取值特例外，均按实体、字段及明确 ID 核对相等的公共部分。 */
 export interface AgentData {
   /** 来源详情的数值实体 ID；与目录 ID、索引成员和 details.id 核对一致。 */
@@ -207,6 +225,13 @@ export interface AgentData {
 
   /** 来源稀有度编码；未转换为 S/A 等业务枚举。 */
   rarity: number
+
+  /**
+   * 来源索引记录的四语名称原值（zh/en/ja/ko）。
+   * 索引名称与详情各语言的 name 是两个独立来源，不要求相等，也不互相回填。
+   * 名称原样保留（含空白），不作为稳定实体 ID；发布目录以 en 项作为 AgentName 的稳定来源。
+   */
+  names: AgentSourceNames
 
   /** 来源性别数值编码；与 details.partnerInfo.gender 的显示文本分开保留。 */
   gender: number

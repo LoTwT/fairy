@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Yeshunguang",
+  "names": {
+    "en": "Ye Shunguang",
+    "ja": "葉瞬光",
+    "ko": "엽빛나",
+    "zh": "叶瞬光"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle55.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0055.png",

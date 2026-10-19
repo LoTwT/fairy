@@ -51,9 +51,11 @@ export async function publicationFixture(
   await write("manifest.json", {
     zzz: { live: version, latest: version, available: [version] },
   })
+  // 来源索引 en 名称按成员唯一且与英文详情 name 不同：
+  // AgentName 以索引名称为稳定来源，取错名称来源会在此被捕获。
   await write("character.json", {
-    "10": input.sourceRecord,
-    "2": input.sourceRecord,
+    "10": { ...input.sourceRecord, en: "Index Soldier 0 - Anby" },
+    "2": { ...input.sourceRecord, en: "Index Astra Yao" },
   })
   for (const [id, name] of [
     ["10", "Soldier 0 - Anby"],

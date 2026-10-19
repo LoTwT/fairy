@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Qianxialeimi",
+  "names": {
+    "en": "Sunna",
+    "ja": "千夏",
+    "ko": "수나",
+    "zh": "千夏"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle58.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0058.png",

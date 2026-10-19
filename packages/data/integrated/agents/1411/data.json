@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Youye",
+  "names": {
+    "en": "Yuzuha",
+    "ja": "浮波柚葉",
+    "ko": "유즈하",
+    "zh": "柚叶"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle47.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0047.png",

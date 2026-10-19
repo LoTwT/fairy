@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpineEllen",
+  "names": {
+    "en": "Ellen",
+    "ja": "エレン",
+    "ko": "엘렌",
+    "zh": "艾莲"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle21.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0021.png",

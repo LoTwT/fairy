@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpineLucia",
+  "names": {
+    "en": "Lucia",
+    "ja": "リュシア",
+    "ko": "루시아",
+    "zh": "卢西娅"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle50.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0050.png",

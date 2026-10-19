@@ -198,6 +198,12 @@
     27900, 34200, 36600, 39000, 41400, 43800, 46200, 48600, 51000, 53400, 55800,
     0
   ],
+  "names": {
+    "en": "Lycaon",
+    "ja": "ライカン",
+    "ko": "리카온",
+    "zh": "莱卡恩"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle18.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0018.png",
