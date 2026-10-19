@@ -82,7 +82,7 @@ async function fingerprints(root: string): Promise<string[]> {
 }
 
 describe("publication snapshot", () => {
-  it("generates exact names, mapping and literal imports from English top-level names in index order", async () => {
+  it("generates exact names, mapping and literal imports from source index names in index order", async () => {
     const { root, artifactDirectory, index, rawRoot } = await fixture()
     await fs.rm(rawRoot, { recursive: true })
     const generated = join(root, "generated")

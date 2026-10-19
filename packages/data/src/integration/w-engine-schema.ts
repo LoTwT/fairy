@@ -199,11 +199,12 @@ export const wEnginePropertyTextMembers: Readonly<
 }
 
 /**
- * 来源索引记录的已知顶层字段名；只用于把未知顶层字段识别为维护诊断。
+ * 来源索引记录的已知顶层字段名；用于识别未知顶层字段并校验名称。
  *
  * 字段集合依据来源说明与本地 3.2 `weapon.json` 的 100 条记录确认：索引是 W-Engine ID → 记录的对象，
- * 记录内嵌各语言名称与展示摘要。登记不要求这些字段存在、不校验其类型，也不改变 `sourceRecord` 的
- * 原 key 与原值；索引与详情是两个独立来源，同名字段不要求相等，也不互相回退。
+ * 记录内嵌各语言名称与展示摘要。名称经 `extractSourceIndexNames` 校验：`zh`/`en` 必填，
+ * `ja`/`ko` 可选且出现时必须为 string；其余字段不要求存在、不校验类型。登记不改变 `sourceRecord`
+ * 的原 key 与原值；索引与详情是两个独立来源，同名字段不要求相等，也不互相回退。
  * 未登记字段内部不递归推断字段身份。
  */
 export const wEngineIndexFields: readonly string[] = [

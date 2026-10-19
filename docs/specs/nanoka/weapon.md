@@ -22,7 +22,8 @@ GET https://static.nanoka.cc/zzz/{version}/{language}/weapon/{weaponId}.json
 - 索引是以 W-Engine ID 为 key 的普通对象。
 - 索引记录包含图标编码、稀有度、分类、基础攻击力、副属性显示名、英文说明与 `zh`/`en`/`ja`/`ko` 名称；
   这些字段与详情是两个独立来源，同名值不要求相等，也不互相回退。整合器登记这组已知顶层字段并对其余字段
-  生成维护诊断，不校验类型或必需性。
+  生成维护诊断；名称是例外：`zh`/`en` 必填、`ja`/`ko` 可选，出现时校验字符串，其余字段不要求存在或类型。
+  完整规则见[来源数据整合规范](../data/integration.md#wengine-单实体实现规则-nanoka-w-engine-reference3)。
 - 详情包含基础信息、等级成长、突破、天赋和材料等嵌套结构。
 - 部分成长数据使用以等级为 key 的对象。
 - 材料字段包含紧凑的上游字符串语法；其中的 Item/Material ID 不属于当前登记实体。
