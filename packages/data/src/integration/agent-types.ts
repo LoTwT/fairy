@@ -1,12 +1,13 @@
 import type { SupportedLanguage } from "../nanoka-identity.ts"
 
 /**
- * Nanoka 代理人整合资料的正式字段定义（规则 v5）。
+ * Nanoka 代理人整合资料的正式字段定义（规则 nanoka-agent-reference/7）。
  *
  * 以本地索引全部 60 个成员的双语结构为范围，由 @randomplay/data 根入口以类型导出。
- * 规则 v5 登记 3.2 新增的锐化暴伤与 EP 基础属性、备选配装、皮肤获取说明与特殊属性 ID 字段，
- * 并沿用 v3 的 codeName 取值特例。
- * 不承诺未来来源版本结构不变；运行时保留未知成员，合成验收位于 test/agent-integration.test.ts。
+ * 规则 /7 在索引侧登记四语名称（提升为 `data.names`）与未知顶层字段诊断，并沿用 /6 的严格共享、
+ * 封闭类型与 `codeName` 取值特例。
+ * 不承诺未来来源版本结构不变；细节流未登记字段整合失败，索引未登记字段保留原值并进入维护诊断，
+ * 合成验收位于 test/agent-integration.test.ts。
  * 已登记结构字段只改为 camelCase，保留来源用词；每个声明字段有独立中文注释。
  * ID、字典 key、机器标签、文本和未知容器内部不做猜测性改名。
  * number 表示原始数值，不承诺单位、缩放或计算语义。

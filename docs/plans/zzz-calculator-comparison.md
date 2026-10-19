@@ -849,3 +849,20 @@ C5 [#239](https://github.com/LoTwT/fairy/pull/239) 已合并。C4 本节仅记�
 revision44 导致当前消费快照标识从 `45ff1399…` 变为 `2e912b3f…`。相关现有测试只刷新消费版本、
 制品摘要和稳定身份对应的 JSON pointer，并在夹具 `fairySnapshotRefreshes` 保留前一消费标识及刷新原因；
 旧副本和逐指针差异另存 C4 交接证据。所有历史请求、原生返回、数值结果和 C2 的 previousDataVersion 保持原样。
+
+`fairySnapshotRefreshes` 每条记录一次消费快照刷新，字段语义固定如下：
+
+- `implementationBase`：该次刷新登记的 Git 实施基点，是历史记录；测试不读取 Git 校验它。
+- `previous.snapshotId`：上一条刷新产生的消费快照 ID，也就是本次刷新前的 `calculationDataVersion.snapshotId`；
+  相邻条目的 `previous.snapshotId` 必须等于前一条的 `currentSnapshotId`。
+- `previous.artifactSha256`：该次刷新**前序快照状态**对应的制品摘要。entry 0–4 的实施基点即前序快照状态，
+  因此摘要取各自 `implementationBase` 提交时的值；entry 5 的刷新与实现同属 `e63992e1`，其前序快照状态是
+  父提交 `e430cfdd`，故记录 `2c75ada2…`，而非该提交改写后的 `0958a918…`。历史值只能追加新条目，不能就地
+  改写；某条历史记录可以整体未记录摘要（空对象），但不能只记录一部分或写错值。
+- `currentSnapshotId`：本次刷新后的消费快照 ID，最后一条必须等于夹具顶层的
+  `fairy.dataVersion.snapshotId`（abloom）或 `provenance.fairyCalculationDataVersion.snapshotId`
+  （static、vortex）。
+
+三份夹具的刷新链必须逐条相同（比较 `implementationBase`、`previous.snapshotId` 与 `currentSnapshotId`），
+由 `test/zzz-calculator-snapshot-chain.test.ts` 在不调用 Git 的前提下钉住链式连续性、已记录摘要与顶层快照 ID。
+`artifactSha256` 的记录范围可以因文件而异：static 与 vortex 的 entry 0 历史上未记录摘要，保持空对象。

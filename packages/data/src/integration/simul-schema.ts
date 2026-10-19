@@ -212,7 +212,7 @@ export const simulLayerMembers: Readonly<Record<string, SimulObjectMember>> = {
   /** 来源 `layer_buff`。层级增益字典：增益 ID → 当前语言标题与说明。 */
   layer_buff: { output: "layerBuff", kind: "object" },
 
-  /** 来源 `layer_room`。房间字典；本地 3.1 观察为空字典，结构仍按登记校验。 */
+  /** 来源 `layer_room`。房间字典；本地 3.2 的 `layer` 内观察为空字典，结构仍按登记校验。 */
   layer_room: { output: "layerRoom", kind: "object" },
 }
 
@@ -276,7 +276,7 @@ export const simulAdjustMembers: Readonly<Record<string, SimulObjectMember>> = {
 }
 
 /**
- * 来源索引记录的已知顶层字段。依据来源说明与本地 3.1 `simul.json` 的 3 条记录，
+ * 来源索引记录的已知顶层字段。依据来源说明与本地 3.2 `simul.json` 的 3 条记录，
  * 已知字段仅有轮换结束时间 `end`（可为空字符串）。登记只用于识别未知字段：
  * 不要求这些字段存在、不校验其类型，`sourceRecord` 仍按原 key、原值完整保留。
  */

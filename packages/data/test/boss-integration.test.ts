@@ -266,11 +266,60 @@ describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
     expectBossRoundtrip(result, input)
   })
 
-  it("索引直播服时间窗成对保留或成对缺失，类型不符即失败", () => {
-    const result = integrateBoss(bossInput())
+  it("变体按语言独立校验：zh 用 modes、en 用 zone 时各自保留", () => {
+    const input = bossInput()
+    const legacy = bossLegacyZoneInput()
+    const mixed: IntegrateBossInput = {
+      ...input,
+      details: {
+        zh: input.details.zh,
+        en: legacy.details.en,
+      } as Record<string, unknown>,
+    }
+    const mixedDetails = mixed.details as Record<string, unknown>
+    const result = integrateBoss(mixed)
+    expect(modesVariant(result.details.zh!).modes).toHaveLength(2)
+    expect("zone" in result.details.zh!).toBe(false)
+    expect("modes" in result.details.en!).toBe(false)
+    expect(zoneVariant(result.details.en!).zone["9800101"]!.name).toBe(
+      "Example Overlord · Phase I",
+    )
+    expect(result.maintenance.diagnostics).toEqual([])
+    expectBossRoundtrip(result, {
+      sourceRecord: mixed.sourceRecord,
+      details: mixedDetails,
+    })
+  })
+
+  it("索引直播服时间窗与详情开放时间互不覆盖", () => {
+    const input = bossInput()
+    const record = input.sourceRecord as Record<string, unknown>
+    record.live_begin = "2025-01-01 04:00:00"
+    record.live_end = "2025-01-15 03:59:59"
+    const result = integrateBoss(input)
     expect(result.data.liveTimeWindow).toStrictEqual({
-      beginTime: "2024-07-04 04:00:00",
-      endTime: "2024-08-01 03:59:59",
+      beginTime: "2025-01-01 04:00:00",
+      endTime: "2025-01-15 03:59:59",
+    })
+    expect(result.data.beginTime).toBe("2024-07-04 04:00:00")
+    expect(result.data.endTime).toBe("2024-08-01 03:59:59")
+    expectBossRoundtrip(result, input)
+  })
+
+  it("索引直播服时间窗成对保留或成对缺失，类型不符即失败", () => {
+    const input = bossInput()
+    const result = integrateBoss(input)
+    // 单一输入形态：整合器只收到一个 sourceRecord 与一个 entityId，
+    // 不存在第二条记录可供拼接。这里再钉住身份与来源一致性，
+    // 保证提升值确实来自同一条记录的 live_begin/live_end。
+    const record = input.sourceRecord as Record<string, unknown>
+    expect(result.data.id).toBe(Number(input.entityId))
+    expect(result.details.zh!.id).toBe(result.data.id)
+    expect(result.details.en!.id).toBe(result.data.id)
+    expect(result.sourceRecord).toStrictEqual(record)
+    expect(result.data.liveTimeWindow).toStrictEqual({
+      beginTime: record.live_begin,
+      endTime: record.live_end,
     })
     const absent = bossInput()
     remove(absent.sourceRecord, "live_begin")
@@ -281,13 +330,28 @@ describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
     for (const path of ["live_begin", "live_end"] as const) {
       const half = bossInput()
       remove(half.sourceRecord, path)
-      expectFailure(half, "index", "", "成对提供或成对缺失")
+      expectFailure(
+        half,
+        "index",
+        "",
+        `已提供 ${path === "live_begin" ? "live_end" : "live_begin"}，缺失 ${path}`,
+      )
       for (const value of [0, null, {}, [], true]) {
         const typed = bossInput()
         change(typed.sourceRecord, path, value)
         expectFailure(typed, "index", `/${path}`, "字段类型必须为 string")
       }
     }
+  })
+
+  it("旧结构 zone 变体同样接受成对缺失的 live 窗", () => {
+    const input = bossLegacyZoneInput()
+    remove(input.sourceRecord, "live_begin")
+    remove(input.sourceRecord, "live_end")
+    const result = integrateBoss(input)
+    expect("modes" in result.details.zh!).toBe(false)
+    expect(result.data).not.toHaveProperty("liveTimeWindow")
+    expectBossRoundtrip(result, input)
   })
 
   it("来源索引的未知顶层字段生成 index 诊断，已知字段不误报", () => {

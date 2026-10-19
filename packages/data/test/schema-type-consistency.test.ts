@@ -1041,10 +1041,15 @@ describe("Monster 登记表与封闭类型一致", () => {
  * 可选性封闭：本周期删除残留 optional 后必须全必需的类型，key 集合与必需 key
  * 集合相等——任何人把 optional 加回来都会在此处被编译期拒绝。
  * 例外：BossData 的 liveTimeWindow（来源索引直播服时间窗，成对提供或成对缺失）
- * 是当前唯一合法的 optional，其断言改为显式必需 key 集合，同样封闭。
+ * 是当前唯一合法的 optional；用显式可选键集合断言封住，新增可选键同样会被拒绝。
  */
 type RequiredKeys<T> = keyof {
   [K in keyof T as {} extends Pick<T, K> ? never : K]: 0
+}
+
+/** 类型的可选自有 key 集合；与 RequiredKeys 互为补集。 */
+type OptionalKeys<T> = keyof {
+  [K in keyof T as {} extends Pick<T, K> ? K : never]: 0
 }
 
 describe("封闭类型不得重新引入可选成员", () => {
@@ -1080,6 +1085,10 @@ describe("封闭类型不得重新引入可选成员", () => {
       RequiredKeys<BossData>,
       "id" | "priority" | "zoneType" | "beginTime" | "endTime" | "bossAdjust"
     >
+  >
+  // 可选键同样封闭：当前只允许 liveTimeWindow，新增可选键会被编译期拒绝。
+  type _BossDataOptionalKeys = Expect<
+    Equal<OptionalKeys<BossData>, "liveTimeWindow">
   >
   type _BossDetailsModesVariantAllRequired = Expect<
     Equal<keyof BossDetailsModesVariant, RequiredKeys<BossDetailsModesVariant>>

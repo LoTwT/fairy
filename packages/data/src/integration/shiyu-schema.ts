@@ -54,7 +54,7 @@ export const shiyuLocalizedDetailFields: Readonly<
   /** 来源 `id`。详情自身的数值 Shiyu ID；与实体 ID 核对，不参与共享提取。 */
   id: { output: "id", kind: "number" },
 
-  /** 来源 `name`。当前语言名称原文；类内大量重名（本地 3.1 的剧变节点类记录），不作为公开身份。 */
+  /** 来源 `name`。当前语言名称原文；类内大量重名（本地 3.2 的剧变节点类记录），不作为公开身份。 */
   name: { output: "name", kind: "string" },
 }
 
@@ -181,9 +181,9 @@ export const shiyuZoneEncounterSkeletonOutputs: readonly string[] = [
 /**
  * 来源索引记录的已知顶层字段名；只用于把未知顶层字段识别为维护诊断。
  *
- * 字段集合依据来源说明与本地 3.1 `shiyu.json` 的 59 条记录确认：索引是 Shiyu ID → 记录的对象，
+ * 字段集合依据来源说明与本地 3.2 `shiyu.json` 的 62 条记录确认：索引是 Shiyu ID → 记录的对象，
  * 记录内嵌排序权重、各语言名称，轮换记录另有 `begin`/`end` 与 `live_begin`/`live_end` 时间字符串
- * （本地 3.1 为 57 条轮换与 2 条常驻）。登记不要求这些字段存在、不校验其类型，
+ * （本地 3.2 为 57 条带 `live_*`、3 条仅 `begin`/`end`、2 条常驻）。登记不要求这些字段存在、不校验其类型，
  * 也不改变 `sourceRecord` 的原 key 与原值；索引与详情是两个独立来源，同名字段不要求相等，
  * 也不互相回退。未登记字段内部不递归推断字段身份。
  */

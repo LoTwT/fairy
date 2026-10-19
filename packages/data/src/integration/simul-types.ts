@@ -215,7 +215,7 @@ export interface SimulLayer {
   /** 来源 `layer_buff`。层级增益字典。 */
   layerBuff: Record<string, SimulBuff>
 
-  /** 来源 `layer_room`。房间字典；本地 3.1 观察为空字典。 */
+  /** 来源 `layer_room`。房间字典；本地 3.2 观察为空字典。 */
   layerRoom: Record<string, SimulRoom>
 }
 

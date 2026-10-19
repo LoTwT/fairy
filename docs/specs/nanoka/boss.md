@@ -21,16 +21,17 @@ GET https://static.nanoka.cc/zzz/{version}/{language}/boss/{bossId}.json
 
 - 索引是以 Boss ID 为 key 的普通对象。
 - 索引记录包含排序权重（`sort`）与 `zh`/`en`/`ja`/`ko` 名称，以及轮换时间 `begin`/`end` 与
-  `live_begin`/`live_end`（本地 3.1 的 44 条全部为轮换记录）。这些字段与详情是两个独立来源，
-  同名值不要求相等，也不互相回退。整合器登记这组已知顶层字段并对其余字段生成维护诊断，
-  不校验类型或必需性。
+  `live_begin`/`live_end`（本地 3.2 的 47 条中 44 条为轮换记录、3 条成对缺失）。这些字段与详情是两个
+  独立来源，同名值不要求相等，也不互相回退。整合器登记这组已知顶层字段并对其余字段生成维护诊断：
+  `live_begin`/`live_end` 必须成对提供或成对缺失，提供时必须是字符串；其余索引字段不要求存在、
+  不校验类型。
 - 详情顶层包含名称、`priority`、`boss_adjust`、`zone_type`、`begin_time`/`end_time` 与 `modes`；
   历史 3.0 缓存使用顶层 `zone` 字典代替 `modes`，两者互斥，按实际字段识别。
-- 详情中英文名称在类内完全同名（本地 3.1 全部 44 条的名称各自相同）；名称不作为公开身份，
+- 详情中英文名称在类内完全同名（本地 3.2 全部 47 条的名称各自相同）；名称不作为公开身份，
   公开读取以来源 ID 为身份。
 - `modes` 是 mode 条目数组，顺序保持来源原样；mode 内的关卡结构与 Shiyu 的 `zone` 阶段同源、
   字段集相同（含 `selectable_buff`，无 `child` 与 `ss_rank_goal`），但按类别各自独立登记。
-- 顶层 `zone_type` 与 mode 的 `zone_type` 是两个独立字段（本地 3.1 有 3 条记录两者不同），不要求相等。
+- 顶层 `zone_type` 与 mode 的 `zone_type` 是两个独立字段（本地 3.2 有 6 条记录两者不同），不要求相等。
 - `boss_adjust` 是以数值 key 的字典，条目为 `{hp, atk, points}`；`atk` 可为负值，数值原样保留。
 - Monster 身份来自 `monster_list.*.id`，不是外层 entry key；encounter 的名称、图片、弱点与关卡数值
   全部保留，不能替换成纯外键。

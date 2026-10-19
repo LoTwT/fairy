@@ -90,7 +90,7 @@ export const monsterUnitMembers: Readonly<Record<string, MonsterObjectMember>> =
     /** 来源 `tag`。单位机器标签数组；保留原序与原文，不映射为业务枚举。 */
     tag: { output: "tag", kind: "stringArray" },
 
-    /** 来源 `type`。单位类型字符串（本地 3.1 观察为 Monster）；未建立枚举。 */
+    /** 来源 `type`。单位类型字符串（本地 3.2 观察为 Monster）；未建立枚举。 */
     type: { output: "type", kind: "string" },
   }
 
@@ -108,8 +108,8 @@ export const monsterCurveMembers: Readonly<
 /**
  * 来源索引记录的已知顶层字段名；只用于把未知顶层字段识别为维护诊断。
  *
- * 字段集合依据来源说明与本地 3.1 `monster.json` 的 293 条记录确认：索引是怪物 ID → 记录的对象，
- * 记录内嵌图标路径、机器标签（本地 3.1 全为 null）、稀有度、分组编码与各语言名称及简介。
+ * 字段集合依据来源说明与本地 3.2 `monster.json` 的 306 条记录确认：索引是怪物 ID → 记录的对象，
+ * 记录内嵌图标路径、机器标签（本地 3.2 全为 null）、稀有度、分组编码与各语言名称及简介。
  * 登记不要求这些字段存在、不校验其类型，也不改变 `sourceRecord` 的原 key 与原值；
  * 索引与详情是两个独立来源，同名字段不要求相等，也不互相回退。
  * 未登记字段内部不递归推断字段身份。
@@ -136,10 +136,10 @@ export const monsterIndexFields: readonly string[] = [
   /** 来源 `rarity`。索引内嵌的稀有度编码；与详情 `rarity` 分开保留。 */
   "rarity",
 
-  /** 来源 `tag`。索引内嵌的机器标签（本地 3.1 为 null）；未解释含义。 */
+  /** 来源 `tag`。索引内嵌的机器标签（本地 3.2 为 null）；未解释含义。 */
   "tag",
 
-  /** 来源 `tag2`。索引内嵌的第二机器标签（本地 3.1 为 null）；未解释含义。 */
+  /** 来源 `tag2`。索引内嵌的第二机器标签（本地 3.2 为 null）；未解释含义。 */
   "tag2",
 
   /** 来源 `zh`。索引内嵌的中文名称；不能冒充完整详情。 */
