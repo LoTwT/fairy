@@ -75,7 +75,7 @@ const expectedData = {
   },
 } satisfies SimulData
 
-describe("单 Simul 纯整合 nanoka-simul-reference/1", () => {
+describe("单 Simul 纯整合 nanoka-simul-reference/3", () => {
   it("按独立预期拆分双语，保留索引，冻结输入仍可整合且不修改来源", () => {
     const input = simulInput()
     const before = structuredClone(input)

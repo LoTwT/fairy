@@ -293,7 +293,7 @@ unavailable 35 → 10，技能清单摘要随之更新；洛克茜 3 条风眼�
 `computeRadianceMultZone` 实际计算的是 `max(0, radianceMult/100) × multFactorPercentToRatio(radianceMultFactor)`，
 即招式倍率乘以 `1 + 异常精通 × 0.002`。用户实测单次耀变伤害与按乘算口径的独立 Decimal 复算相符，
 此前基础倍率为 `1` 的对照不能区分新旧口径。乘算规则与两种口径的等价条件见
-[耀变倍率区](../../core/factors/luminize-multiplier.md#计算规则)，公式与调用边界不变。
+[耀变倍率区](../core/factors/luminize-multiplier.md#计算规则)，公式与调用边界不变。
 
 - **core 落点**：共同 `luminizeMultiplierFactor` 改为 `基础倍率 × (1 + 精通 × 换算率) × 各独立调整`，
   普通来源耀变、历史虚曜、完整特殊虚曜与 M6 quarter 共用同一落点；不新增最终伤害乘数、不做垂虹

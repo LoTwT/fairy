@@ -166,7 +166,7 @@ function simulSourceBattle(
   }
 }
 
-/** 满足规则 nanoka-simul-reference/1 必需结构的合成输入；不读取真实 raw，不使用生产登记表生成 fixture。 */
+/** 满足规则 nanoka-simul-reference/3 必需结构的合成输入；不读取真实 raw，不使用生产登记表生成 fixture。 */
 export function simulSource(): SimulSourceFixture {
   return {
     id: 990001,

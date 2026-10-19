@@ -284,7 +284,7 @@ const expectedData = {
   zone: expectedZoneSkeleton,
 } satisfies ShiyuData
 
-describe("单 Shiyu 纯整合 nanoka-shiyu-reference/1", () => {
+describe("单 Shiyu 纯整合 nanoka-shiyu-reference/3", () => {
   it("按独立预期拆分双语：数值骨架进 data，文本留各语言 details", () => {
     const input = shiyuInput()
     const before = structuredClone(input)

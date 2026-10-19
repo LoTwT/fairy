@@ -128,7 +128,7 @@ const expectedData = {
   elementAbnormal: { "10001": 600, "20001": 2250, "30005": 3000 },
 } satisfies MonsterData
 
-describe("单怪物纯整合 nanoka-monster-reference/1", () => {
+describe("单怪物纯整合 nanoka-monster-reference/2", () => {
   it("按独立预期拆分双语，保留索引，冻结输入仍可整合且不修改来源", () => {
     const input = monsterInput()
     const before = structuredClone(input)

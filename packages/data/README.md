@@ -238,7 +238,7 @@ Git 更新 JSON 后若与本机记录不一致，按[数据管理状态同步流
 pnpm --filter @randomplay/data verify:nanoka:current integrated
 # 不读取 raw 的独立恢复；按记录协议恢复，生成入口也会先恢复
 pnpm --filter @randomplay/data recover:nanoka:current integrated
-# 显式迁移：稳定 v2 数据集只改写索引外壳与管理记录
+# 显式迁移入口：只接受与当前规则版本及完整语言匹配的 v2 外壳；真实 v2 外壳会被拒绝
 pnpm --filter @randomplay/data migrate:nanoka:current integrated
 # 静态副本（v3 外壳）只读复验，不读取管理记录
 pnpm --filter @randomplay/data verify:nanoka:snapshot /absolute/copy/integrated
@@ -246,11 +246,18 @@ pnpm --filter @randomplay/data verify:nanoka:snapshot /absolute/copy/integrated
 
 当前目录的消费者必须在内部 `withCurrentDataset` 回调持锁期间读完所需字节；
 静态验证命令不能替代并发读取锁。`BUSY` 表示稍后重试，`RECOVERY_REQUIRED` 表示先恢复再读取，
-`MIGRATION_REQUIRED` 表示先显式迁移，`INCOMPLETE_LANGUAGES` 表示当前数据集只登记了部分语言、
-需要先按当前完整语言配置重新生成（历史语言子集仍可用于复验、恢复与迁移，但不能用于普通读取与当前验证）。
+`MIGRATION_REQUIRED` 表示当前目录是 v2 外壳；迁移入口只接受与当前规则版本及完整语言匹配的 v2 外壳，
+真实 v2 外壳需按当前规则从 raw 重新生成。`INCOMPLETE_LANGUAGES` 表示当前数据集只登记了部分语言、
+需要先按当前完整语言配置重新生成（历史语言子集仍可用于复验与恢复，但不能用于普通读取、当前验证或迁移）。
 只单独传入 `--help` 或 `-h` 时输出用法、退出 0，不访问输入；缺少、多余、空参数和未知选项在执行前拒绝。
 成功时脚本 stdout 输出一个 JSON 对象、退出 0；失败退出 1，stderr 输出转义且限长的错误，不打印堆栈。
 机器解析时加 `pnpm --silent`，避免 pnpm 执行信息混入 stdout。
+
+迁移入口与代码仍保留，并由合成 v2 数据集测试覆盖，但当前真实 v2 缓存不可达：转换器按当前登记表规则版本
+（现为 `nanoka-agent-reference/7`）与当前完整语言配置验证输入，而真实 v2 外壳停留在最后一个 v2 规则版本
+`nanoka-agent-reference/5`，规则版本不匹配时明确拒绝，不能靠迁移恢复可用状态。当前补救顺序是按当前规则从
+raw 重新生成：有稳定管理记录的 v2 数据集直接运行 `generate:integrated`；无管理记录的静态 v2 目录先保留现场
+并移走旧目录，再运行同一生成命令，初始化不会接管 v2 目录。
 
 生成、验证、恢复和迁移回执的完整字段见[当前数据集实现与命令](../../docs/specs/data/integration.md#当前数据集实现与命令)；
 逐条更新差异保存在制品外的维护报告中。
@@ -261,9 +268,9 @@ pnpm --filter @randomplay/data verify:nanoka:snapshot /absolute/copy/integrated
 `typecheck` / `test` 自动准备被 Git 忽略的 `.generated/`；`build` 使用另一份独占发布副本，
 仅支持单次构建。发布到 `dist/integrated/` 与 `dist/definitions/` 的 JSON 只删除字符串外的排版空白，
 归档 `integrated/` 与 `definitions/` 保持原字节；两侧摘要与字节数分别记录在 `dist/publication.json`
-与 `dist/definitions-publication.json`，消费快照标识仍由归档字节计算。真实工作区尚未完成显式迁移时，
-`build` / `typecheck` / `test` / `pack` 会因发布源仍是 v2 外壳
-而明确失败，这是有意的拒绝。生成目录、静态发布边界与 CI 浏览器验收见[消费契约](../../docs/specs/data/consumption.md)。
+与 `dist/definitions-publication.json`，消费快照标识仍由归档字节计算。真实工作区若仍停留在 v2 外壳，
+`build` / `typecheck` / `test` / `pack` 会明确失败，这是有意的拒绝；当前补救不是尝试显式迁移，而是按当前规则
+从 raw 重新生成。生成目录、静态发布边界与 CI 浏览器验收见[消费契约](../../docs/specs/data/consumption.md)。
 
 ## 约束
 
