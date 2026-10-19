@@ -2,7 +2,7 @@
 
 ## 状态与目标
 
-**状态：sourceRecord 业务字段登记已实施完成：agents 索引四语名称提升为 `data.names`、boss 索引 `live_begin`/`live_end` 成对提升为 `data.liveTimeWindow`（缺失时不补造）、agents 补齐索引未知顶层字段维护诊断、发布目录 `AgentName` 改用来源索引 en 名称作为稳定来源（与英文详情显示名解耦，当前 3.2 数据两者取值一致）、agents 与 boss rulesVersion 递增；快照与三类派生制品（skills、attributes、static-effects）已重生成并通过字节级验收（仅 agents data、boss data、index 与钉值变更）。登记范围说明：boss 索引 `zone_type`/`sort` 与已提升的详情孪生字段（`zoneType`/`priority`）本地 3.2 全 47 条同值，按 schema 归属不重复提升、原值保留归档；驱动盘索引摘要四语描述的提升推迟到发布层瘦身周期（它是 v4 瘦身的前置之一）；`DriveDiscName`/`WEngineName`/`BangbooName` 仍读英文详情名，名称换源暂只覆盖 `AgentName`。此前一轮已完成：整合规则严格化——未知字段由细节流容忍改为整合失败、共享字段改为严格共享（同有或全缺）、全类别 rulesVersion 递增、shiyu `zone` 数值骨架提升到 `data`、boss `modes`/`zone` 判别联合与 `data`/`details` 类型封闭化；注意 v2 显式迁移随之实际退役：真实 v2 外壳都停留在最后一个 v2 规则版本，与当前登记表版本不同，按 §7 的迁移契约一律拒绝，需按当前规则从 raw 重新生成；后续可单独评估是否删除迁移代码。此前已实现：单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令；固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取。正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
+**状态：发布层瘦身已实施完成：归档副本保持原字节与 pretty 排版，构建发布到 `dist/integrated` 时只删除 JSON 字符串之外的排版空白，并生成 `dist/publication.json` 记录归档摘要 → 发布摘要的字节级映射；索引 `files.*.sha256` 继续描述归档字节，`calculationDataVersion.snapshotId` 继续由归档输入计算；因此本次变更不递增 rulesVersion、不触发快照再生，也不改变公开数据值。`definitions/` 不属于该双链，仍按原字节复制。此前已完成：sourceRecord 业务字段登记——agents 索引四语名称提升为 `data.names`、boss 索引 `live_begin`/`live_end` 成对提升为 `data.liveTimeWindow`（缺失时不补造）、agents 补齐索引未知顶层字段维护诊断、发布目录 `AgentName` 改用来源索引 en 名称作为稳定来源（与英文详情显示名解耦，当前 3.2 数据两者取值一致）、agents 与 boss rulesVersion 递增；快照与三类派生制品（skills、attributes、static-effects）已重生成并通过字节级验收（仅 agents data、boss data、index 与钉值变更）。登记范围说明：boss 索引 `zone_type`/`sort` 与已提升的详情孪生字段（`zoneType`/`priority`）本地 3.2 全 47 条同值，按 schema 归属不重复提升、原值保留归档；驱动盘索引摘要四语描述的提升推迟到发布层瘦身周期之后（它是 v4 瘦身的前置之一）；`DriveDiscName`/`WEngineName`/`BangbooName` 仍读英文详情名，名称换源暂只覆盖 `AgentName`。此前一轮已完成：整合规则严格化——未知字段由细节流容忍改为整合失败、共享字段改为严格共享（同有或全缺）、全类别 rulesVersion 递增、shiyu `zone` 数值骨架提升到 `data`、boss `modes`/`zone` 判别联合与 `data`/`details` 类型封闭化；注意 v2 显式迁移随之实际退役：真实 v2 外壳都停留在最后一个 v2 规则版本，与当前登记表版本不同，按 §7 的迁移契约一律拒绝，需按当前规则从 raw 重新生成；后续可单独评估是否删除迁移代码。此前已实现：单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令；固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取。正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
 `data.json` 与 `details.{locale}.json` 为已确认的文件名，正式类型与测试使用同一命名。
 已接入生产类别：`agents`（规则 `nanoka-agent-reference/7`）、`drive-discs`（规则
 `nanoka-drive-disc-reference/2`）、`w-engines`（规则 `nanoka-w-engine-reference/2`）、`bangboos`（规则
@@ -324,7 +324,7 @@ Pointer 采用 [RFC 6901](https://www.rfc-editor.org/rfc/rfc6901.html) 的字符
 语言顺序记录详情；文件摘要均为小写十六进制 SHA-256。一个资源只登记一次，完整导出不带摘录 Pointer。
 
 输出 `path` 相对于 `integrated/`，必须等于第 2 节对应实体及语言的固定路径；不得使用绝对路径、
-`..` 或远程 URL。输出 `sha256` 针对实际文件字节。索引不记录自身摘要，避免循环；也不记录生成时间或主机路径。
+`..` 或远程 URL。输出 `sha256` 针对归档副本的实际文件字节；发布副本的摘要见 `dist/publication.json`。索引不记录自身摘要，避免循环；也不记录生成时间或主机路径。
 输入哈希和输出哈希用途不同，不能互相替代。
 
 索引原记录是独立的来源材料。阅读某语言时不能把其中混合语言的 `desc` 自动当作当前语言的详情或回退文本。
@@ -354,7 +354,7 @@ Pointer 采用 [RFC 6901](https://www.rfc-editor.org/rfc/rfc6901.html) 的字符
 | `entities.{name}.members`       | 成员 ID → `files.data`、`files.details.{locale}` 与独立 `sourceRecord`；key 原样保留 |
 
 成员文件沿用固定布局 `{类别}/{成员}/data.json` 与 `{类别}/{成员}/details.{locale}.json`，类别目录名即
-`entities` 的 key。`files.data` 与 `files.details.{locale}` 记录相对 `integrated/` 的路径与实际字节摘要；
+`entities` 的 key。`files.data` 与 `files.details.{locale}` 记录相对 `integrated/` 的路径与归档字节摘要；
 v3 不沿用 v2 的 `stats`/`content` 名称，那是已废弃文件名的遗留。类别目录与来源实体的对应关系由代码登记
 （例如类别 `agents` 对应上游 `character`），不在索引中重复记录。
 
@@ -1317,6 +1317,8 @@ fairy-integrated-snapshot-<独占后缀>/
 格式化失败与其他构建失败共用独占临时目录清理；更新入口沿用现有恢复机制，不发布未完成候选。
 独立验证器允许按第 8 节重新序列化实体文件并更新摘要，也允许索引自身重新排版；不强制副本采用构建器的排版。
 副本与原制品的 JSON 值相等需另行核对，验证器只检查副本内部一致性；传输压缩先解压再验证。
+发布副本的摘要来源由 `dist/publication.json` 提供：`verifyIntegratedSnapshot` 的 `publicationDigests` 选项
+按该清单核对实际字节，结构、身份与 JSON 值检查与归档副本完全相同；归档副本仍按索引登记摘要核对。
 独立调用验证器只证明制品自身一致，不认证 raw 来源真实性或重新证明完整抓取批次。
 
 成功返回本次独占根目录 `buildDirectory`、`artifactDirectory`、复验索引、计数和独立的 `maintenanceReportPath`；

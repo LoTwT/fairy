@@ -166,7 +166,7 @@ console.log(
 )
 ```
 
-Node ESM 也可直接读取原样 JSON：
+Node ESM 也可直接读取发布 JSON（字段、键顺序与值不变，排版已压缩）：
 
 ```js
 import data from "@randomplay/data/integrated/agents/1311/data.json" with { type: "json" }
@@ -259,7 +259,9 @@ pnpm --filter @randomplay/data verify:nanoka:snapshot /absolute/copy/integrated
 摘要证明制品内部字节一致性，不认证来源真实性或同一抓取批次。协议仅支持可信本机 macOS/Linux、同一文件系统及遵守锁的参与者；
 进程中断纳入测试，不承诺断电、内核崩溃、网络文件系统或 Windows；读取者需要控制目录写权限。
 `typecheck` / `test` 自动准备被 Git 忽略的 `.generated/`；`build` 使用另一份独占发布副本，
-仅支持单次构建。真实工作区尚未完成显式迁移时，`build` / `typecheck` / `test` / `pack` 会因发布源仍是 v2 外壳
+仅支持单次构建。发布到 `dist/integrated/` 的 JSON 只删除字符串外的排版空白，归档 `integrated/` 保持原字节；
+两侧摘要与字节数记录在 `dist/publication.json`，消费快照标识仍由归档字节计算。真实工作区尚未完成显式迁移时，
+`build` / `typecheck` / `test` / `pack` 会因发布源仍是 v2 外壳
 而明确失败，这是有意的拒绝。生成目录、静态发布边界与 CI 浏览器验收见[消费契约](../../docs/specs/data/consumption.md)。
 
 ## 约束
