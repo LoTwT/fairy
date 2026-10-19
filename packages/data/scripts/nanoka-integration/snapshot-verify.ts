@@ -24,7 +24,7 @@ import {
   requireValue,
   verifyFileSet,
 } from "./artifact-files.ts"
-import { directoryRoot, parseBytes, readBytes } from "./files.ts"
+import { directoryRoot, parseBytes, readBytes, sha256 } from "./files.ts"
 import {
   onboardedSnapshotEntities,
   validateSnapshotEntityContracts,
@@ -47,6 +47,14 @@ export interface VerifyIntegratedSnapshotOptions {
 
   /** 完整输入导出的预期索引；按 JSON 值核对，省略时仅校验制品自身的一致性。 */
   expectedIndex?: IntegratedSnapshotIndex
+
+  /**
+   * 发布副本的字节摘要来源；省略时按索引登记的归档摘要核对。
+   *
+   * 发布副本只删除 JSON 字符串外的排版空白，索引继续描述归档字节，因此发布副本
+   * 必须由独立清单提供实际字节摘要。结构、身份与 JSON 值检查完全相同。
+   */
+  publicationDigests?: (path: string) => string | undefined
 
   /**
    * 仅复验旧数据集时允许此前登记的支持语言子集；新候选必须提供完整当前配置。
@@ -135,6 +143,14 @@ export async function verifyIntegratedSnapshot(
     locale: "index",
     pointer: "",
   })
+  if (options.publicationDigests) {
+    const expected = options.publicationDigests("index.json")
+    requireValue(
+      typeof expected === "string" && sha256(bytes) === expected,
+      "index.json",
+      "发布副本摘要不一致",
+    )
+  }
   const parsed = object(value, "index.json")
   // 外壳版本先单独核对：v2 或未知外壳在这里明确报错，而不是被当成字段集合不符。
   requireValue(
@@ -308,6 +324,12 @@ export async function verifyIntegratedSnapshot(
       maximumSingleFileBytes,
       maximumTotalBytes - totalBytes,
     )
+    const publicationDigest = options.publicationDigests?.(check.expectedPath)
+    requireValue(
+      !options.publicationDigests || typeof publicationDigest === "string",
+      check.expectedPath,
+      "缺少发布摘要",
+    )
     const { value: fileValue, byteLength } = await readVerifiedArtifactFile(
       root,
       check.reference,
@@ -318,6 +340,7 @@ export async function verifyIntegratedSnapshot(
         pointer: "",
       },
       maximumBytes,
+      publicationDigest,
     )
     check.entity.verifyMemberFile(
       fileValue,

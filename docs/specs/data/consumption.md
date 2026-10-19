@@ -9,7 +9,8 @@
 42 个邦布、306 个怪物、62 个 Shiyu 区域、47 个 Boss 试炼、3 个 Simul 模拟战、zh/en 两种详情语言。
 成员集合与数量以[发布源索引](../../../packages/data/integrated/index.json)的各类别 `memberIds` 为准；公开索引
 使用多实体 v3 外壳，类别（`agents`、`drive-discs`、`w-engines`、`bangboos`、`monsters`、`shiyu`、`boss`
-与 `simul`）与成员文件摘要来自完整验证后的同一发布副本。驱动盘、WEngine 与邦布已进入生产快照、JSON
+与 `simul`）与成员文件摘要来自完整验证后的同一归档副本；发布副本的排版与字节摘要见
+[发布副本与摘要双链](#发布副本与摘要双链)。驱动盘、WEngine 与邦布已进入生产快照、JSON
 子路径导出及根入口的公开名称类型、名称 catalog 与读取 API；怪物、Shiyu、Boss 与 Simul 已进入生产快照、
 JSON 子路径导出及根入口的公开 ID 类型、冻结 ID 列表与读取 API。Monster、Shiyu、Boss、Simul 等 End Game
 类别名称在类内重名或缺失，公开身份统一使用来源索引顶层 ID 的规范十进制字符串，不套用英文名称唯一性，
@@ -39,13 +40,13 @@ JSON 子路径导出及根入口的公开 ID 类型、冻结 ID 列表与读取 
 `53019` 为 `Bild N. Boolok`（保留空格与标点）。
 本地化（zh）名称不在 `agentNames` 等名称常量导出中，需按成员调用 `loadAgentDetails` 等对应类别的
 details 读取函数，从返回的当前语言 details 顶层 `name` 读取（如代理人 `1151` 的 zh 名称为「露西」）。
-名称、各类别内部英文名称到来源 ID 的映射、导入表及类型均由同一已验证发布副本生成；缺失、非字符串、空名称
+名称、各类别内部英文名称到来源 ID 的映射、导入表及类型均由同一已验证快照生成；缺失、非字符串、空名称
 或类别内完全重名使构建失败并给出可定位文件，不覆盖、不修改来源。重名检查限定在各类别内；不同类别出现
 同名时各套 union 与映射仍按各类别成员独立生成。这些名称约束只适用于名称作为公开身份的类别；
 Monster、Shiyu、Boss 与 Simul 的名称是普通来源文本（Simul 无顶层名称），占位名称与类内重名不参与目录
 生成，也不触发该检查。发布源必须包含 `agents`、`drive-discs`、`w-engines`、`bangboos`、`monsters`、
 `shiyu`、`boss` 与 `simul` 八个类别及完整 zh/en 详情；`MonsterId`/`ShiyuId`/`BossId`/`SimulId` 字面量
-union、冻结 ID 列表与懒加载表由同一发布副本对应类别的 `memberIds` 生成。英文更名、
+union、冻结 ID 列表与懒加载表由同一已验证快照对应类别的 `memberIds` 生成。英文更名、
 成员删除属于公开取值的兼容性变化，须在该次变更的 Git 记录或发布说明中明确记录，不自动添加别名。
 来源数字字符串目录、索引 key、`SourceId` 和数值成员 `data.id` 保持原义。
 
@@ -59,7 +60,7 @@ union、冻结 ID 列表与懒加载表由同一发布副本对应类别的 `mem
 运行时冻结。`ShiyuId` 与 `shiyuIds` 同理取 `integrated/shiyu/{来源ID}` 成员，`BossId` 与 `bossIds` 同理取
 `integrated/boss/{来源ID}` 成员，`SimulId` 与 `simulIds` 同理取 `integrated/simul/{来源ID}` 成员。
 ID 字面量、冻结列表与懒加载表
-由同一已验证发布副本的 `entities.{类别}.memberIds` 生成；ID 精确匹配，
+由同一已验证快照的 `entities.{类别}.memberIds` 生成；ID 精确匹配，
 不 trim、不转换 number、不解析科学计数法或补零，未登记字符串返回 undefined，非字符串参数以 TypeError
 拒绝。ID 类型不提供任意 string 重载，保留字面量补全。
 
@@ -67,7 +68,7 @@ ID 字面量、冻结列表与懒加载表
 
 `AgentSourceId`、`DriveDiscSourceId`、`WEngineSourceId` 与 `BangbooSourceId` 是四个名称身份类别
 本次发布全部成员的来源索引顶层 ID（规范十进制字符串）精确字面量 union，取值与实体文件路径、索引成员
-key 及 End Game 类别的 ID 身份同一空间，由同一已验证发布副本对应类别的 `memberIds` 生成。
+key 及 End Game 类别的 ID 身份同一空间，由同一已验证快照对应类别的 `memberIds` 生成。
 `agentSourceIds: Readonly<Record<AgentName, AgentSourceId>>`、`driveDiscSourceIds`、`wEngineSourceIds`
 与 `bangbooSourceIds` 是名称 → 来源 ID 的冻结映射；`agentNamesBySourceId:
 Readonly<Record<AgentSourceId, AgentName>>`、`driveDiscNamesBySourceId`、`wEngineNamesBySourceId` 与
@@ -204,13 +205,14 @@ export declare function loadAllSimul(
 export declare function loadAllSimulData(): Promise<Record<SimulId, SimulData>>
 ```
 
-- `loadIndex` 只加载完整原样索引（v3 外壳），包含快照来源输入、全部已登记类别、各类别的规则版本与语言、
+- `loadIndex` 只加载完整索引（v3 外壳；发布排版已压缩，字段、键顺序与 JSON 值不变），包含快照来源输入、全部已登记类别、各类别的规则版本与语言、
   成员文件引用与独立来源索引记录；不加载实体。根导出同时提供 `IntegratedSnapshotIndex`、
   `IntegratedSnapshotEntity`、`IntegratedSnapshotMember` 与 `IntegratedSnapshotSourceInput` 类型；
   旧的 v2 索引外壳类型不再公开导出，公开读取只有一种索引形状。`loadIndex` 定位为完整性与归档清单读取：
-  其体积主要来自逐成员的 SHA-256 文件摘要与完整 sourceRecord，公开 API 不在运行时重算摘要。
+  其体积主要来自逐成员的 SHA-256 文件摘要与完整 sourceRecord；摘要描述归档字节，公开 API 不在运行时重算摘要，
+  发布字节的摘要见 `/publication.json`。
 - 根入口同时提供 `IntegratedSnapshotCategory`（八个已接入类别名的字面量 union）与
-  `snapshotInfo: IntegratedSnapshotInfo` 冻结常量：常量来自同一已验证发布副本完整索引的轻量
+  `snapshotInfo: IntegratedSnapshotInfo` 冻结常量：常量来自同一已验证快照完整索引的轻量
   信息，含 `format`、`source.id`、`source.version` 与各类别的 `rulesVersion`、`detailLocales`、`memberIds`，
   `entities` 以 `Record<IntegratedSnapshotCategory, …>` 类型化——全部已接入类别都在场，类别属性访问
   不需要存在性判断；不含 sourceRecord、文件引用或输入摘要，运行时深冻结，导入根入口即可同步访问。
@@ -290,6 +292,7 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 - `/definitions/effects/static-catalog.json`
 - `/definitions/effects/static-coverage.json`
 - `/integrated/index.json`
+- `/publication.json`
 - `/integrated/agents/{来源ID}/data.json`
 - `/integrated/agents/{来源ID}/details.zh.json`
 - `/integrated/agents/{来源ID}/details.en.json`
@@ -315,7 +318,7 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 - `/integrated/simul/{来源ID}/details.zh.json`
 - `/integrated/simul/{来源ID}/details.en.json`
 
-这些路径映射到包内对应 `dist/` 的已验证发布副本：`/integrated/*` 来自受管理的发布副本，`/definitions/effects/*.json` 是 Git 跟踪的静态效果规则集，构建时逐文件字节复验后复制。`starter.json` 保留耀嘉音核心、耀嘉音 2 影与啄木鸟电音两件套三条规则，`automatic.json` 的范围由[首批自动规则接入](../effects/automatic-rules.md)维护；类型与执行契约由[统一效果规则模型](../effects/index.md)维护。导入根入口不加载任何数据或定义 JSON，效果定义同样只在显式导入该子路径时读取。JSON 原字节、字段、层级、文件名、摘要全部保留，
+这些路径映射到包内对应 `dist/` 的已验证发布副本：`/integrated/*` 来自受管理归档副本生成的发布副本，`/definitions/effects/*.json` 是 Git 跟踪的静态效果规则集，构建时逐文件字节复验后复制。`starter.json` 保留耀嘉音核心、耀嘉音 2 影与啄木鸟电音两件套三条规则，`automatic.json` 的范围由[首批自动规则接入](../effects/automatic-rules.md)维护；类型与执行契约由[统一效果规则模型](../effects/index.md)维护。导入根入口不加载任何数据或定义 JSON，效果定义同样只在显式导入该子路径时读取。JSON 字段、层级、文件名与 JSON 值全部保留；`integrated` 的发布字节只删除字符串外的排版空白，归档字节摘要与发布字节摘要的映射见 `dist/publication.json`（[发布副本与摘要双链](#发布副本与摘要双链)），
 索引成员引用为 `files.data` 与 `files.details.{locale}`。包内包含八个类别的完整数据；根入口的名称与 ID
 元数据、名称/ID 冻结映射、快照信息常量及显式动态导入表引用全部已发布 JSON，但导入根入口仍不加载任何数据 JSON：浏览器只在调用对应函数时
 请求该 JSON 模块或构建后的分块，全量读取需显式调用。包只包含 dist 与 npm 标准清单、README、LICENSE；
@@ -345,13 +348,14 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 无需 raw 或本机管理状态。静态输入在复制期间不得并发初始化/修改，检测到新增控制目录即拒绝。
 受管理目录因已接入实体、整合规则、来源版本或 `integrated` 变化需要同步维护时，按整合规范的
 [数据管理状态的同步维护](integration.md#数据管理状态的同步维护)执行；发布路径本身不做隐式修复。
-发布的文件清单来自完整验证后的 v3 索引，覆盖全部已登记类别；类型、名称、映射与 JSON 来自同一已验证发布副本。
+发布的文件清单来自完整验证后的 v3 索引，覆盖全部已登记类别；类型、名称、映射与 JSON 来自同一已验证归档副本，
+发布副本只删除其 JSON 字符串之外的排版空白。
 受管理源仍是 v2 外壳时明确报 `MIGRATION_REQUIRED`，提示先运行 `migrate:nanoka:current`，不隐式转换、不改写数据；
 只登记部分历史语言的数据集在普通读取与当前验证时报 `INCOMPLETE_LANGUAGES`，提示按当前完整语言配置重新生成，
 发布要求完整语言配置。
 
 构建在独占临时副本完整验证后生成类型、名称与导入表，并只从该副本构建和复制到 dist；
-不会在生成类型后重新打包可变 integrated。打包前复验发布副本，解包验收再次核对实际文件集合、原字节和摘要。
+不会在生成类型后重新打包可变 integrated。打包前复验发布副本，解包验收再次核对实际文件集合、发布字节与摘要清单。
 全部 definitions 在同次构建准备阶段冻结；复制完成后复验来源与副本的完整文件集合和字节，捕获期间发生变化则拒绝，
 包括不属于属性 manifest 的 effects 制品。属性 manifest 另对照同次 integrated 核对成员与依赖文件摘要；
 后续只复制固定 definitions 并逐文件复验，不在构建结束重新读取可变定义。旧属性过期不阻止来源副本获取，
@@ -360,6 +364,33 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 公开 API 消费随 npm 版本固定的快照，不接受本地目录，不操作锁或恢复记录，运行时不重算原 JSON 的 SHA-256。
 这将维护时的字节完整性检查落实在发布边界；不把静态模块缓存当作受管理目录并发读取协议，也不认证来源真实性。
 普通 build/test/check/pack 不读取真实 raw、不抓取、不生成或格式化真实 integrated。
+
+### 发布副本与摘要双链
+
+归档副本（Git 跟踪的 `packages/data/integrated/`）保持原字节，索引中的 `files.*.sha256` 描述归档字节；
+消费快照标识 `calculationDataVersion.snapshotId` 由归档输入（索引、definitions manifests、静态效果与面板规则）
+计算，不随发布排版变化。发布副本（`dist/integrated/`）只删除
+JSON 字符串之外的排版空白，字符串内容、字段、键顺序与全部 JSON 值不变；因此发布字节与归档字节不同，
+但两者表达同一份数据。
+
+`dist/publication.json` 是两侧的字节级映射，外壳为 `fairy-publication-manifest/v1`
+（可通过 `@randomplay/data/publication.json` 显式导入，使用 JSON 导入属性时与其它 JSON 子路径一致）：
+
+- `archiveIndexSha256`：归档 `index.json` 的摘要，是本清单与归档快照的唯一绑定；
+- `files.{path}`：`archiveSha256`、`publicationSha256`、`archiveBytes`、`publicationBytes`；
+  覆盖 `index.json` 与全部成员文件的完整发布清单；
+- `source`：来源身份与版本，与发布索引一致。
+
+校验分两层：结构、成员范围、JSON 值与身份由完整验证器按发布字节复核；字节摘要由本清单核对。
+发布清单的归档侧摘要必须与索引登记一致，发布侧摘要必须与磁盘实际字节一致；任一侧不符即拒绝。
+`index.json` 自身不登记摘要，`archiveIndexSha256` 与 `files["index.json"].archiveSha256` 必须互相一致；
+传入归档目录时，验证器会逐文件读取归档字节并独立核对这两个值，而不采信清单自证。
+发布清单本身不记录自身摘要，其完整性由 npm tarball 的签名与完整性机制承担；这是清单作为根信任的边界。
+`snapshotId` 不随发布排版变化，也不因本清单改变；引用该标识的夹具与消费方无需刷新。
+
+`definitions/` 不属于本条双链：它是 Git 跟踪的静态制品，构建时逐文件按原字节复制。
+属性与技能 manifest 的 `inputs` 继续描述归档 integrated 字节，不能用于校验发布副本；
+这些 manifest 自身的 `artifacts` 摘要因 definitions 逐字节复制仍然适用于包内文件。
 
 内部属性和静态增益候选生成命令只接受不存在的输出目录。在创建任何父目录或临时目录前，先解析已有祖先的实际路径，
 拒绝输出位于 integrated 或其同级控制目录内；控制目录尚不存在时也同样保护。路径别名不能绕过此检查，

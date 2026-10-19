@@ -125,6 +125,9 @@ export interface VerifiedArtifactFile {
 /**
  * 核对单个输出文件引用与磁盘字节：字段集合、固定路径、摘要格式、读取预算、实际字节摘要与对象结构。
  * 解码与身份检查使用摘要核对过的同一批重新读取的字节；不读取 raw，也不比较原制品排版。
+ *
+ * `expectedDigest` 只用于发布副本：索引登记的摘要描述归档字节，发布副本的实际摘要由发布清单提供。
+ * 省略时按引用中的摘要核对。
  */
 export async function readVerifiedArtifactFile(
   root: string,
@@ -132,6 +135,7 @@ export async function readVerifiedArtifactFile(
   expectedPath: string,
   location: SourceLocation,
   maximumBytes: number,
+  expectedDigest?: string,
 ): Promise<VerifiedArtifactFile> {
   const entry = exactKeys(reference, ["path", "sha256"], expectedPath)
   requireValue(entry.path === expectedPath, expectedPath, "文件路径错误")
@@ -141,7 +145,11 @@ export async function readVerifiedArtifactFile(
     "SHA-256 格式错误",
   )
   const bytes = await readBytes(root, expectedPath, maximumBytes)
-  requireValue(sha256(bytes) === entry.sha256, expectedPath, "摘要不一致")
+  requireValue(
+    sha256(bytes) === (expectedDigest ?? entry.sha256),
+    expectedPath,
+    "摘要不一致",
+  )
   const value = object(parseBytes(bytes, expectedPath, location), expectedPath)
   return { value, byteLength: bytes.byteLength }
 }

@@ -458,7 +458,7 @@ export async function loadSDriveDiscMaxLevelAffixes(): Promise<SDriveDiscMaxLeve
   return structuredClone(await driveDiscAffixesLoader())
 }
 
-/** 加载完整原样索引及来源记录，不加载实体；每次返回独立对象树。加载失败时拒绝 Promise。 */
+/** 加载完整索引及来源记录（发布排版已压缩，值与键顺序不变），不加载实体；每次返回独立对象树。加载失败时拒绝 Promise。 */
 export async function loadIndex(): Promise<IntegratedSnapshotIndex> {
   return structuredClone(await indexLoader())
 }

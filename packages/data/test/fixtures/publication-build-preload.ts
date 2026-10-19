@@ -15,7 +15,7 @@ if (
 const packageDirectory = await fs.realpath(configuredPackageDirectory)
 
 const writeFile = fs.writeFile
-const cp = fs.cp
+const rename = fs.rename
 let injected = false
 
 if (intervention === "source-change") {
@@ -89,12 +89,17 @@ if (intervention === "source-change") {
     }
   }
 } else {
-  fs.cp = async (from, to, ...args) => {
-    await cp(from, to, ...args)
-    if (!injected && String(to) === join(packageDirectory, "dist/integrated")) {
+  // 发布副本逐文件原子写入：拦截安装到 dist 的第一个 rename，损坏已落盘字节。
+  fs.rename = async (from, to, ...args) => {
+    await rename(from, to, ...args)
+    if (
+      !injected &&
+      String(to) ===
+        join(packageDirectory, "dist/integrated/agents/1311/data.json")
+    ) {
       injected = true
-      // Damage only the installed bytes, after copying the verified private snapshot.
-      await fs.appendFile(join(String(to), "agents/1311/data.json"), " ")
+      // Damage only the installed bytes, after the verified publication copy is written.
+      await fs.appendFile(String(to), " ")
       await writeFile(tracePath, intervention)
     }
   }

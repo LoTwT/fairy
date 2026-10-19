@@ -29,6 +29,7 @@
     "./definitions/skills/agents/*.json": "./dist/definitions/skills/agents/*.json",
     "./definitions/skills/manifest.json": "./dist/definitions/skills/manifest.json",
     "./integrated/index.json": "./dist/integrated/index.json",
+    "./publication.json": "./dist/publication.json",
     "./integrated/agents/*/data.json": "./dist/integrated/agents/*/data.json",
     "./integrated/agents/*/details.zh.json": "./dist/integrated/agents/*/details.zh.json",
     "./integrated/agents/*/details.en.json": "./dist/integrated/agents/*/details.en.json",

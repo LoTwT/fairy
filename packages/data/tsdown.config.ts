@@ -13,6 +13,10 @@ import {
   prepareDefinitions,
   verifyDefinitionsCopy,
 } from "./scripts/prepare-definitions.ts"
+import {
+  verifyMinifiedPublication,
+  writeMinifiedPublication,
+} from "./scripts/publication-minify.ts"
 
 export default defineConfig(async (options) => {
   if (options.watch)
@@ -99,12 +103,29 @@ export default defineConfig(async (options) => {
     hooks: {
       "build:done": async () => {
         const snapshot = join(buildDirectory, ".generated/integrated")
-        await verifyIntegratedSnapshot({ artifactDirectory: snapshot })
-        await cp(snapshot, join(packageDirectory, "dist/integrated"), {
-          recursive: true,
+        const index = await verifyIntegratedSnapshot({
+          artifactDirectory: snapshot,
         })
+        // 归档副本保持原字节；dist 只发布删除字符串外排版空白的副本，
+        // 并以清单记录归档摘要 → 发布摘要的字节级映射。
+        const publication = await writeMinifiedPublication({
+          archiveDirectory: snapshot,
+          publicationDirectory: join(packageDirectory, "dist/integrated"),
+          manifestPath: join(packageDirectory, "dist/publication.json"),
+          index,
+        })
+        await verifyMinifiedPublication({
+          publicationDirectory: join(packageDirectory, "dist/integrated"),
+          manifestPath: join(packageDirectory, "dist/publication.json"),
+          index,
+          archiveDirectory: snapshot,
+        })
+        // 发布字节仍按完整验证器复核结构、身份与 JSON 值，摘要取自发布清单。
         await verifyIntegratedSnapshot({
           artifactDirectory: join(packageDirectory, "dist/integrated"),
+          expectedIndex: index,
+          publicationDigests: (path: string) =>
+            publication.files[path]?.publicationSha256,
         })
         await cp(
           join(buildDirectory, ".generated/definitions"),

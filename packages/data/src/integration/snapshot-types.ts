@@ -47,7 +47,7 @@ export interface IntegratedSnapshotMember<
 > {
   /** 该成员完成生成并通过验证的实体文件引用。 */
   files: {
-    /** 公共资料文件 data.json 的位置与实际字节摘要；path 相对于 integrated/。 */
+    /** 公共资料文件 data.json 的位置与归档字节摘要；path 相对于 integrated/。 */
     data: ExportFileReference
 
     /**

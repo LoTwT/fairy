@@ -36,6 +36,12 @@ import { pathToFileURL } from "node:url"
 import ts from "typescript"
 import { afterEach, describe, expect, it } from "vitest"
 import { verifyIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-verify.ts"
+import { sha256 } from "../scripts/nanoka-integration/files.ts"
+import {
+  archivedDigestOf,
+  minifyJsonBytes,
+  verifyMinifiedPublication,
+} from "../scripts/publication-minify.ts"
 import {
   attributeArtifactPaths,
   verifyPanelAttributes,
@@ -232,8 +238,20 @@ describe("packed package", () => {
       publishedEntry,
     )
     const snapshot = join(packedRoot, "dist/integrated")
+    const publicationManifestPath = join(packedRoot, "dist/publication.json")
+    const archiveIndex = await verifyIntegratedSnapshot({
+      artifactDirectory: join(cleanPackage, "integrated"),
+    })
+    const publicationManifest = await verifyMinifiedPublication({
+      publicationDirectory: snapshot,
+      manifestPath: publicationManifestPath,
+      index: archiveIndex,
+      archiveDirectory: join(cleanPackage, "integrated"),
+    })
     const index = await verifyIntegratedSnapshot({
       artifactDirectory: snapshot,
+      publicationDigests: (path) =>
+        publicationManifest.files[path]?.publicationSha256,
     })
     const jsonFiles = publicationFiles(index)
     const attributeFiles = [...attributeArtifactPaths(index), "manifest.json"]
@@ -308,6 +326,7 @@ describe("packed package", () => {
         "dist/index.mjs",
         "dist/index.browser.mjs",
         "dist/index.browser.d.mts",
+        "dist/publication.json",
         ...sharedTypes,
         ...sharedRuntime,
         "package.json",
@@ -330,12 +349,28 @@ describe("packed package", () => {
         path,
       )
     }
-    for (const path of jsonFiles)
+    // 归档副本保持原字节；发布副本必须恰好等于 JSON 值等价的空白压缩结果。
+    for (const path of jsonFiles) {
+      const archivedBytes = readFileSync(join(cleanPackage, "integrated", path))
+      const publishedBytes = readFileSync(join(snapshot, path))
       expectSameBytes(
-        readFileSync(join(snapshot, path)),
-        readFileSync(join(cleanPackage, "integrated", path)),
+        publishedBytes,
+        Buffer.from(minifyJsonBytes(archivedBytes)),
         path,
       )
+      expect(JSON.parse(publishedBytes.toString("utf8")), path).toEqual(
+        JSON.parse(archivedBytes.toString("utf8")),
+      )
+      expect(publicationManifest.files[path]?.archiveSha256, path).toBe(
+        archivedDigestOf(index, path, publicationManifest.archiveIndexSha256),
+      )
+      expect(publicationManifest.files[path]?.archiveBytes, path).toBe(
+        archivedBytes.byteLength,
+      )
+    }
+    expect(publicationManifest.archiveIndexSha256).toBe(
+      sha256(readFileSync(join(cleanPackage, "integrated/index.json"))),
+    )
     for (const path of attributeFiles)
       expectSameBytes(
         readFileSync(join(packedRoot, "dist/definitions/attributes", path)),
@@ -412,6 +447,11 @@ import { readFileSync } from "node:fs"
 import * as api from "@randomplay/data"
 assert.deepEqual(Object.keys(api).sort(), ["agentNames", "agentNamesBySourceId", "agentSourceIds", "bangbooNames", "bangbooNamesBySourceId", "bangbooSourceIds", "bossIds", "simulIds", "driveDiscNames", "driveDiscNamesBySourceId", "driveDiscSourceIds", "monsterIds", "shiyuIds", "wEngineNames", "wEngineNamesBySourceId", "wEngineSourceIds", "snapshotInfo", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllAgentData", "loadAllBangboos", "loadAllBangbooData", "loadAllBosses", "loadAllBossData", "loadAllSimul", "loadAllSimulData", "loadAllDriveDiscs", "loadAllDriveDiscData", "loadAllMonsters", "loadAllMonsterData", "loadAllShiyu", "loadAllShiyuData", "loadAllWEngines", "loadAllWEngineData", "loadBangbooData", "loadBangbooDetails", "loadBossData", "loadBossDetails", "loadSimulData", "loadSimulDetails", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex", "loadMonsterData", "loadMonsterDetails", "loadShiyuData", "loadShiyuDetails", "loadWEngineData", "loadWEngineDetails", "loadAgentLevel60Attributes", "loadWEngineLevel60Attributes", "loadSDriveDiscMaxLevelAffixes", "loadAgentActions", "resolveAgentAction", "resolveAgentSkillLevel", "calculationDataVersion", "loadStaticCalculationData", "UnknownCalculationEntitiesError"].sort())
 const packedIndex = (await import("@randomplay/data/integrated/index.json", { with: { type: "json" } })).default
+const packedPublication = (await import("@randomplay/data/publication.json", { with: { type: "json" } })).default
+assert.equal(packedPublication.format, "fairy-publication-manifest/v1")
+assert.equal(Object.keys(packedPublication.files).length, ${jsonFiles.length})
+assert.equal(packedPublication.files["index.json"].archiveSha256, packedPublication.archiveIndexSha256)
+assert.notEqual(packedPublication.files["index.json"].publicationSha256, packedPublication.files["index.json"].archiveSha256)
 assert.equal(api.snapshotInfo.format, packedIndex.format)
 assert.equal(api.snapshotInfo.source.id, packedIndex.source.id)
 assert.equal(api.snapshotInfo.source.version, packedIndex.source.version)
@@ -1710,6 +1750,11 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
             readFileSync(join(snapshot, path)),
             path,
           )
+        expectSameBytes(
+          readFileSync(join(cleanPackage, "dist/publication.json")),
+          readFileSync(publicationManifestPath),
+          "publication.json",
+        )
         for (const [category, paths] of [
           ["attributes", attributeFiles],
           ["skills", actionFiles],
@@ -1811,7 +1856,9 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
         ).toEqual(expectedSimulIds)
       } else {
         expect(build.status).toBe(1)
-        expect(build.stdout + build.stderr).toContain("摘要不一致")
+        expect(build.stdout + build.stderr).toMatch(
+          /摘要不一致|发布副本字节数与清单不一致/u,
+        )
       }
     }
     expect(
