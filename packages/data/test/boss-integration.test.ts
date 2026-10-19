@@ -97,7 +97,7 @@ const expectedData = {
   },
 } satisfies BossData
 
-describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
+describe("单 Boss 纯整合 nanoka-boss-reference/5", () => {
   it("按独立预期拆分双语，保留索引，冻结输入仍可整合且不修改来源", () => {
     const input = bossInput()
     const before = structuredClone(input)
@@ -216,10 +216,15 @@ describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
       "/boss_adjust/1001/note",
       "未知字段：未在登记表登记，不能进入发布制品",
     )
-    // 已登记成员的跨语言冲突失败。
+    // 已登记成员的跨语言数值冲突在共享提取前的骨架比较中失败。
     const memberConflict = bossInput()
     change(memberConflict.details.en, "boss_adjust.1001.atk", -4999)
-    expectFailure(memberConflict, "en", "/boss_adjust", "共享冲突")
+    expectFailure(
+      memberConflict,
+      "en",
+      "/boss_adjust/1001/atk",
+      "跨语言结构不一致",
+    )
   })
 
   it("encounter 与弱点完整保留；monster_list 外层 key 不是 Monster ID", () => {
@@ -266,7 +271,7 @@ describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
     expectBossRoundtrip(result, input)
   })
 
-  it("变体按语言独立校验：zh 用 modes、en 用 zone 时各自保留", () => {
+  it("跨语言结构骨架必须一致：zh 用 modes、en 用 zone 时拒绝", () => {
     const input = bossInput()
     const legacy = bossLegacyZoneInput()
     const mixed: IntegrateBossInput = {
@@ -276,19 +281,124 @@ describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
         en: legacy.details.en,
       } as Record<string, unknown>,
     }
-    const mixedDetails = mixed.details as Record<string, unknown>
-    const result = integrateBoss(mixed)
-    expect(modesVariant(result.details.zh!).modes).toHaveLength(2)
-    expect("zone" in result.details.zh!).toBe(false)
-    expect("modes" in result.details.en!).toBe(false)
-    expect(zoneVariant(result.details.en!).zone["9800101"]!.name).toBe(
-      "Example Overlord · Phase I",
+    expectFailure(mixed, "en", "/modes", "跨语言结构不一致")
+  })
+
+  it("同骨架但文本不同仍接受", () => {
+    const input = bossInput()
+    change(input.details.en, "modes.0.zone.9800101.name", "Arbitrary text")
+    change(
+      input.details.en,
+      "modes.0.zone.9800101.layer_room.98001011.monster_list.11818.image",
+      "UI/完全不同.png",
     )
+    change(
+      input.details.en,
+      "modes.0.zone.9800101.selectable_buff.98010101.desc",
+      "· Different description text.",
+    )
+    const result = integrateBoss(input)
+    expect(
+      modesVariant(result.details.en!).modes[0]!.zone["9800101"]!.name,
+    ).toBe("Arbitrary text")
     expect(result.maintenance.diagnostics).toEqual([])
-    expectBossRoundtrip(result, {
-      sourceRecord: mixed.sourceRecord,
-      details: mixedDetails,
-    })
+    expectBossRoundtrip(result, input)
+  })
+
+  it("跨语言骨架差异定位到语言与来源 Pointer", () => {
+    // mode 数量与顺序。
+    const count = bossInput()
+    count.details.en.modes.pop()
+    expectFailure(count, "en", "/modes", "跨语言结构不一致")
+
+    const order = bossInput()
+    ;[order.details.en.modes[0], order.details.en.modes[1]] = [
+      order.details.en.modes[1]!,
+      order.details.en.modes[0]!,
+    ]
+    expectFailure(order, "en", "/modes/0/id", "跨语言结构不一致")
+
+    // mode ID 与 mode zone_type 是内部数值，必须精确一致。
+    const id = bossInput()
+    change(id.details.en, "modes.1.id", 980003)
+    expectFailure(id, "en", "/modes/1/id", "跨语言结构不一致")
+
+    const zoneType = bossInput()
+    change(zoneType.details.en, "modes.1.zone_type", 1003)
+    expectFailure(zoneType, "en", "/modes/1/zone_type", "跨语言结构不一致")
+
+    // 关卡、房间、monster_list 与增益字典的 key 集合必须一致；错误定位到容器。
+    const stage = bossInput()
+    change(
+      stage.details.en,
+      "modes.0.zone.9800102",
+      structuredClone(stage.details.zh.modes[0]!.zone["9800101"]),
+    )
+    expectFailure(stage, "en", "/modes/0/zone", "对象 key 集合不同")
+
+    const room = bossInput()
+    change(
+      room.details.en,
+      "modes.0.zone.9800101.layer_room.98001012",
+      structuredClone(
+        room.details.zh.modes[0]!.zone["9800101"]!.layer_room["98001011"],
+      ),
+    )
+    expectFailure(
+      room,
+      "en",
+      "/modes/0/zone/9800101/layer_room",
+      "对象 key 集合不同",
+    )
+
+    const monster = bossInput()
+    change(
+      monster.details.en,
+      "modes.0.zone.9800101.layer_room.98001011.monster_list.11819",
+      structuredClone(
+        monster.details.zh.modes[0]!.zone["9800101"]!.layer_room["98001011"]!
+          .monster_list["11818"],
+      ),
+    )
+    expectFailure(
+      monster,
+      "en",
+      "/modes/0/zone/9800101/layer_room/98001011/monster_list",
+      "对象 key 集合不同",
+    )
+
+    for (const dictionary of ["layer_buff", "selectable_buff"] as const) {
+      const buff = bossInput()
+      const sourceKey = dictionary === "layer_buff" ? "98010110" : "98010101"
+      const extraBuff = structuredClone(
+        buff.details.zh.modes[0]!.zone["9800101"]![dictionary][sourceKey]!,
+      )
+      change(
+        buff.details.en,
+        `modes.0.zone.9800101.${dictionary}.98010199`,
+        extraBuff,
+      )
+      expectFailure(
+        buff,
+        "en",
+        `/modes/0/zone/9800101/${dictionary}`,
+        "对象 key 集合不同",
+      )
+    }
+
+    // encounter 的数值字段精确比较，包括浮点原值。
+    const encounterValue = bossInput()
+    change(
+      encounterValue.details.en,
+      "modes.0.zone.9800101.layer_room.98001011.monster_list.11818.stats.hp",
+      8737162.93,
+    )
+    expectFailure(
+      encounterValue,
+      "en",
+      "/modes/0/zone/9800101/layer_room/98001011/monster_list/11818/stats/hp",
+      "跨语言结构不一致",
+    )
   })
 
   it("索引直播服时间窗与详情开放时间互不覆盖", () => {
@@ -437,17 +547,20 @@ describe("单 Boss 纯整合 nanoka-boss-reference/1", () => {
   })
 
   it("已登记公共值冲突明确失败并定位来源", () => {
-    const cases: Array<[path: string, value: unknown, pointer: string]> = [
-      ["priority", 6, "/priority"],
-      ["zone_type", 1002, "/zone_type"],
-      ["begin_time", "2024-07-04 04:00:01", "/begin_time"],
-      ["end_time", "2024-08-01 04:00:00", "/end_time"],
-      ["boss_adjust.1002.hp", 1701, "/boss_adjust"],
+    // 数值公共字段先由跨语言骨架精确比较；字符串公共字段由骨架占位后进入共享冲突。
+    const cases: Array<
+      [path: string, value: unknown, pointer: string, reason: string]
+    > = [
+      ["priority", 6, "/priority", "跨语言结构不一致"],
+      ["zone_type", 1002, "/zone_type", "跨语言结构不一致"],
+      ["begin_time", "2024-07-04 04:00:01", "/begin_time", "共享冲突"],
+      ["end_time", "2024-08-01 04:00:00", "/end_time", "共享冲突"],
+      ["boss_adjust.1002.hp", 1701, "/boss_adjust/1002/hp", "跨语言结构不一致"],
     ]
-    for (const [path, value, pointer] of cases) {
+    for (const [path, value, pointer, reason] of cases) {
       const input = bossInput()
       change(input.details.en, path, value)
-      expectFailure(input, "en", pointer, "共享冲突")
+      expectFailure(input, "en", pointer, reason)
     }
   })
 
@@ -793,8 +906,13 @@ describe("Boss 还原辅助函数的路径边界", () => {
   it("字典 key 与登记字段名相同时原样保留，值仍按阶段结构还原", () => {
     const input = bossInput()
     const stage = structuredClone(input.details.zh.modes[0]!.zone["9800101"])
+    const englishStage = structuredClone(
+      input.details.en.modes[0]!.zone["9800101"],
+    )
     // 阶段 key 恰好与登记字段同名：字典 key 原样保留，不按登记表改名。
+    // 两种语言都追加同一 key，保持跨语言结构骨架一致。
     change(input.details.zh, "modes.0.zone.selectableBuff", stage)
+    change(input.details.en, "modes.0.zone.selectableBuff", englishStage)
     const result = integrateBoss(input)
     expect(
       Object.keys(modesVariant(result.details.zh!).modes[0]!.zone),

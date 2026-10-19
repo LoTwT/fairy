@@ -909,6 +909,14 @@ describe("multi-entity snapshot build", () => {
     ).toThrow("缺少成员文件身份检查")
     expect(() =>
       validateSnapshotEntityContracts([
+        {
+          ...syntheticSnapshotEntity,
+          verifyMemberSet: "invalid",
+        } as unknown as IntegratedSnapshotEntityContract,
+      ]),
+    ).toThrow("成员聚合检查无效")
+    expect(() =>
+      validateSnapshotEntityContracts([
         { ...syntheticSnapshotEntity, name: "Widgets" },
       ]),
     ).toThrow("类别登记名无效")

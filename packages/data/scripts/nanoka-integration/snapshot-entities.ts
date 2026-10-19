@@ -7,6 +7,7 @@ import { integrateBoss } from "../../src/integration/integrate-boss.ts"
 import { integrateShiyu } from "../../src/integration/integrate-shiyu.ts"
 import { integrateSimul } from "../../src/integration/integrate-simul.ts"
 import { integrateWEngine } from "../../src/integration/integrate-w-engine.ts"
+import { assertBossDetailSkeletons } from "../../src/integration/boss-schema.ts"
 import type { JsonObject } from "../../src/integration/source-json.ts"
 import type { EntityName } from "../nanoka/policy.ts"
 import { supportedEntityNames } from "../nanoka/policy.ts"
@@ -27,11 +28,40 @@ export interface IntegratedSnapshotMemberFileContext {
   locale?: DetailLocale
 }
 
+/** 一个已读取成员文件的路径与实际解析值。 */
+export interface IntegratedSnapshotMemberFile {
+  /** 文件在制品中的路径，相对 integrated/。 */
+  path: string
+
+  /** 摘要核对后的实际 JSON 值。 */
+  value: JsonObject
+}
+
+/** 一个成员的全部文件；聚合复验在全部成员文件读取后按成员调用。 */
+export interface IntegratedSnapshotMemberSet {
+  /** data.json 的路径与实际值。 */
+  data: IntegratedSnapshotMemberFile
+
+  /** 本次验证语言 → details 文件的路径与实际值；顺序与 detailLocales 一致。 */
+  details: Partial<Record<DetailLocale, IntegratedSnapshotMemberFile>>
+}
+
+/** 成员聚合复验上下文：成员 ID 与本次验证的完整语言顺序。 */
+export interface IntegratedSnapshotMemberSetContext {
+  /** 成员 ID；与索引 key、成员目录名一致。 */
+  memberId: string
+
+  /** 本次验证的语言及顺序；单语言时聚合检查可自行跳过跨语言比较。 */
+  detailLocales: readonly DetailLocale[]
+}
+
 /**
  * 已接入类别的静态契约：类别名、来源实体、规则版本与成员文件身份检查。
  *
  * 身份规则由每个类别明确实现，不统一假定所有实体都有同一种 id 字段；函数必填，
  * 避免漏登记后静默跳过身份检查。验证与旧快照复验只需要这一部分。
+ * 可选聚合检查在读完一个成员的全部文件后执行，用于跨语言等跨文件约束；
+ * 类别没有此类约束时省略，不能替代必填的单文件身份检查。
  */
 export interface IntegratedSnapshotEntityContract {
   /** 类别登记名；同时是制品目录名与索引 entities 的 key，如 agents。 */
@@ -47,6 +77,12 @@ export interface IntegratedSnapshotEntityContract {
   verifyMemberFile: (
     value: JsonObject,
     context: IntegratedSnapshotMemberFileContext,
+  ) => void
+
+  /** 成员聚合检查；全部成员文件读取并完成身份检查后调用，省略表示没有跨文件约束。 */
+  verifyMemberSet?: (
+    member: IntegratedSnapshotMemberSet,
+    context: IntegratedSnapshotMemberSetContext,
   ) => void
 }
 
@@ -113,6 +149,11 @@ export function validateSnapshotEntityContracts(
       throw new Error(`类别 ${entity.name}: 规则版本无效`)
     if (typeof entity.verifyMemberFile !== "function")
       throw new Error(`类别 ${entity.name}: 缺少成员文件身份检查`)
+    if (
+      entity.verifyMemberSet !== undefined &&
+      typeof entity.verifyMemberSet !== "function"
+    )
+      throw new Error(`类别 ${entity.name}: 成员聚合检查无效`)
   }
 }
 
@@ -438,12 +479,35 @@ export function verifyBossSnapshotMemberFile(
   )
 }
 
+/**
+ * Boss 成员聚合复验：复用整合期的跨语言结构骨架比较。
+ * 单文件身份检查只看 id/locale，不能发现手工或旧静态制品中的混合骨架；这里在读完一个成员的
+ * data 与全部详情后统一拒绝。错误沿用 BossIntegrationError 的语言与 JSON Pointer 定位。
+ */
+export function verifyBossSnapshotMemberSet(
+  member: IntegratedSnapshotMemberSet,
+  { memberId, detailLocales }: IntegratedSnapshotMemberSetContext,
+): void {
+  const details: Partial<Record<DetailLocale, JsonObject>> = {}
+  for (const locale of detailLocales) {
+    const file = member.details[locale]
+    requireValue(
+      file !== undefined,
+      member.data.path,
+      `缺少 ${locale} 详情文件`,
+    )
+    details[locale] = file.value
+  }
+  assertBossDetailSkeletons(memberId, detailLocales, details)
+}
+
 /** Boss 类别：复用既有单实体纯整合函数，来源实体与规则版本在此显式登记。 */
 export const nanokaBossSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "boss",
   sourceEntity: "boss",
-  rulesVersion: "nanoka-boss-reference/4",
+  rulesVersion: "nanoka-boss-reference/5",
   verifyMemberFile: verifyBossSnapshotMemberFile,
+  verifyMemberSet: verifyBossSnapshotMemberSet,
   integrate({ memberId, sourceRecord, details, detailLocales }) {
     const result = integrateBoss({
       entityId: memberId,

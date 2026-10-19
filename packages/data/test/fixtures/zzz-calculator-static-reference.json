@@ -65,7 +65,7 @@
       "packageVersion": "0.3.0",
       "contractVersion": 2,
       "gameVersion": "3.2",
-      "snapshotId": "sha256:03d35c11134debc997977fb3c077da49a0ea90a2462c5c91f13b01d0ccf52a80"
+      "snapshotId": "sha256:7bb28d858be347be6ef86a5ae7d5a1f1286f4048b1039e01a6f3ae39b47f0c09"
     },
     "fairyCalculationSources": {
       "packages/core/src/static/calculate.ts": "c1e6d073f7b8eb62241bf640da8d3e1a878aa8de9a703636c490f113a126441e",
@@ -80387,6 +80387,18 @@
         }
       },
       "currentSnapshotId": "sha256:03d35c11134debc997977fb3c077da49a0ea90a2462c5c91f13b01d0ccf52a80"
+    },
+    {
+      "reason": "Boss rules /5 require every detail locale of one Boss to share the same structure skeleton (variant, mode count/order, mode ids/zone types, stage/room/monster/buff key sets and encounter numerics) while localized strings may differ. Only the current consumption snapshot advances; static-effects artifacts, comparison inputs and all numeric results stay frozen.",
+      "implementationBase": "8a45993a8a9ff648880463461152936c74393385",
+      "previous": {
+        "snapshotId": "sha256:03d35c11134debc997977fb3c077da49a0ea90a2462c5c91f13b01d0ccf52a80",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "a8aac21c0307af11934c1eaf84a5f14cccf390487b5ea6e9505307c8e4ec3305",
+          "packages/data/definitions/effects/static-catalog.json": "216b53724babb594ab3344525388d69db6d2781a1c52afa72e28165e5a35eaf7"
+        }
+      },
+      "currentSnapshotId": "sha256:7bb28d858be347be6ef86a5ae7d5a1f1286f4048b1039e01a6f3ae39b47f0c09"
     }
   ]
 }

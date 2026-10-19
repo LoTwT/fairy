@@ -1,21 +1,22 @@
 import type { DetailLocale } from "./agent-types.ts"
 
 /**
- * Nanoka Boss 整合资料的正式字段定义（规则 nanoka-boss-reference/4）。
+ * Nanoka Boss 整合资料的正式字段定义（规则 nanoka-boss-reference/5）。
  *
  * 上游实体为 `boss`，整合类别登记名为 `boss`；一条记录表示一个首领试炼条目。
  * 本层不解释评级目标语义、不换算时间、不建立 mode 唯一性、parent/child 闭合、Monster 引用闭合或
  * Boss/Simul 共享配置一致性校验，也不建立 definitions 或 core 映射。
  * number 表示原始数值（含浮点与负值原值），不承诺单位、缩放或计算语义。
- * Boss 名称在类内完全同名（本地 3.2 全部 47 条的中文与英文名称各自相同），不作为公开身份，
+ * Boss 名称在类内同名（本地 3.2 观察中英文名称各自相同），不作为公开身份，
  * 公开读取以来源 ID 为身份。
- * 详情结构存在两种已建模变体：当前 3.2 使用顶层 `modes` 数组，历史版本使用顶层 `zone` 字典；
+ * 详情结构存在两种已建模变体：本地 3.2 观察使用顶层 `modes` 数组，历史版本使用顶层 `zone` 字典；
  * 判别联合在类型层面保证两种结构互斥（各自必需其判别成员，同时缺失或同时存在不可构造），
  * 按实际字段识别，不能只按版本字符串猜测。
  * `modes` 数组顺序保持来源原样，不排序、不去重、不按数组位置跨语言合并；
  * mode ID 属于详情内部，不生成独立实体目录或远端资源。
  * 顶层 `zoneType` 与 mode 的 `zoneType` 分别保留，不要求相等。
- * 变体按语言独立校验，不要求各语言选择同一变体（本地 3.2 全部 47 条中英文均为 `modes`）。
+ * 同一 Boss 的全部详情语言必须使用同一结构骨架：字符串内容可以不同，数字、布尔、null 与容器形状
+ * 必须一致；骨架比较在独立语言校验之后、共享字段提取之前执行，不代表按位置跨语言合并内容。
  * 索引记录另登记四语名称与 `live_begin`/`live_end`：后者成对提升为 `data.liveTimeWindow`，
  * 其余索引字段只用于未知字段诊断并完整保留在 `sourceRecord`。
  * `bossAdjust` 是完整共享块：成员逐个登记，跨语言整块比较完整值，负值、比例与 points 等保留原始数值。
@@ -92,7 +93,7 @@ export interface BossDetailsModesVariant {
   locale: DetailLocale
 
   /**
-   * 来源 name 当前语言原文；类内完全同名（本地 3.2 全部 47 条），不作为公开身份，
+   * 来源 name 当前语言原文；本地 3.2 观察中类内同名，不作为公开身份，
    * 也不做非空或类内唯一检查。
    */
   name: string
@@ -113,7 +114,7 @@ export interface BossDetailsZoneVariant {
   locale: DetailLocale
 
   /**
-   * 来源 name 当前语言原文；类内完全同名，不作为公开身份，
+   * 来源 name 当前语言原文；本地 3.2 观察中类内同名，不作为公开身份，
    * 也不做非空或类内唯一检查。
    */
   name: string

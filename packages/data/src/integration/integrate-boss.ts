@@ -2,6 +2,7 @@ import { supportedLanguages } from "../nanoka-identity.ts"
 import type { DetailLocale, SourceJson } from "./agent-types.ts"
 import type { BossFieldKind, BossObjectMember } from "./boss-schema.ts"
 import {
+  assertBossDetailSkeletons,
   bossAdjustMembers,
   bossBuffMembers,
   bossEncounterMembers,
@@ -58,7 +59,8 @@ export interface IntegratedBoss {
 }
 
 /**
- * 按规则 nanoka-boss-reference/4 校验、复制和拆分单个 Boss 记录。无 I/O、默认值或语言回退。
+ * 按规则 nanoka-boss-reference/5 校验、复制和拆分单个 Boss 记录。无 I/O、默认值或语言回退。
+ * 每个语言先独立校验；共享字段提取前比较全部已校验详情的结构骨架，字符串内容可以不同。
  * 来源校验失败抛出含来源位置的 BossIntegrationError，不返回部分整合结果。
  */
 export function integrateBoss(input: IntegrateBossInput): IntegratedBoss {
@@ -133,6 +135,7 @@ export function integrateBoss(input: IntegrateBossInput): IntegratedBoss {
     if (!locales.includes(key as DetailLocale))
       failBoss(at(location, key), "未配置的详情语言")
   }
+  const validatedSources: Partial<Record<DetailLocale, SourceJson>> = {}
   const records = locales.map((locale) => {
     const context: SourceLocation = { ...location, locale }
     if (!Object.hasOwn(sources, locale)) failBoss(context, "缺失详情")
@@ -146,8 +149,11 @@ export function integrateBoss(input: IntegrateBossInput): IntegratedBoss {
       String(record.id) !== input.entityId
     )
       failBoss(at(context, "id"), "详情身份与实体 ID 不一致")
+    validatedSources[locale] = source
     return record
   })
+  // 共享字段提取前比较全部已校验详情的结构骨架；字符串内容不同不影响，形状差异立即失败。
+  assertBossDetailSkeletons(input.entityId, locales, validatedSources)
   const data: JsonObject = { id: records[0].id }
   if (liveTimeWindow !== undefined) put(data, "liveTimeWindow", liveTimeWindow)
   for (const key of Object.keys(bossSharedDetailFields).toSorted()) {

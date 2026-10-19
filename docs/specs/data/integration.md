@@ -2,19 +2,19 @@
 
 ## 状态与目标
 
-**状态：0.4 数据名称提升与 definitions 发布瘦身已实施完成：drive-discs（规则 `/3`）把来源索引四语名称与 `desc2`/`desc4` 提升为 `data.names` / `data.descriptions`，WEngine 与 Bangboo（规则 `/3`）把索引四语名称提升为 `data.names`；zh/en 必填、ja/ko 可选，`details` 与 `sourceRecord` 保持独立来源。agents、drive-discs、w-engines、bangboos 的发布目录统一读取 `data.names.en`。integrated 归档保持原字节与 pretty 排版，发布到 `dist/integrated` 时只删除 JSON 字符串之外的排版空白，并以 `dist/publication.json` 记录归档摘要 → 发布摘要；`dist/definitions` 同样只删除字符串外空白，并以独立的 `dist/definitions-publication.json` 记录归档 → 发布摘要，definitions 归档与两份内部 manifest 的 `artifacts` 摘要继续描述归档字节。快照及 attributes、skills、static-effects 已按冻结的 3.2 raw 重新生成。此前已完成：sourceRecord 业务字段登记——agents 索引四语名称提升为 `data.names`、boss 索引 `live_begin`/`live_end` 成对提升为 `data.liveTimeWindow`（缺失时不补造）、agents 补齐索引未知顶层字段维护诊断、发布目录 `AgentName` 改用来源索引 en 名称作为稳定来源（与英文详情显示名解耦，当前 3.2 数据两者取值一致）、agents 与 boss rulesVersion 递增；快照与三类派生制品（skills、attributes、static-effects）已重生成并通过字节级验收（仅 agents data、boss data、index 与钉值变更）。登记范围说明：boss 索引 `zone_type`/`sort` 与已提升的详情孪生字段（`zoneType`/`priority`）本地 3.2 全 47 条同值，按 schema 归属不重复提升、原值保留归档；本次补齐驱动盘索引描述与其余名称类别的换源；`DriveDiscName`/`WEngineName`/`BangbooName` 现与 `AgentName` 一样读取来源索引 en 名称，与英文详情显示名解耦。此前一轮已完成：整合规则严格化——未知字段由细节流容忍改为整合失败、共享字段改为严格共享（同有或全缺）、全类别 rulesVersion 递增、shiyu `zone` 数值骨架提升到 `data`、boss `modes`/`zone` 判别联合与 `data`/`details` 类型封闭化；注意 v2 显式迁移随之实际退役：真实 v2 外壳都停留在最后一个 v2 规则版本，与当前登记表版本不同，按 §7 的迁移契约一律拒绝，需按当前规则从 raw 重新生成；后续可单独评估是否删除迁移代码。此前已实现：单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令；固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取。正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
+**状态：Boss 跨语言结构骨架统一已实施完成（规则 `/5`）：同一 Boss 的全部详情语言必须使用同一结构骨架，字符串内容可以不同；生成期的跨语言检查与静态制品的成员聚合复验复用同一比较。此前完成：0.4 数据名称提升与 definitions 发布瘦身：drive-discs（规则 `/3`）把来源索引四语名称与 `desc2`/`desc4` 提升为 `data.names` / `data.descriptions`，WEngine 与 Bangboo（规则 `/3`）把索引四语名称提升为 `data.names`；zh/en 必填、ja/ko 可选，`details` 与 `sourceRecord` 保持独立来源。agents、drive-discs、w-engines、bangboos 的发布目录统一读取 `data.names.en`。integrated 归档保持原字节与 pretty 排版，发布到 `dist/integrated` 时只删除 JSON 字符串之外的排版空白，并以 `dist/publication.json` 记录归档摘要 → 发布摘要；`dist/definitions` 同样只删除字符串外空白，并以独立的 `dist/definitions-publication.json` 记录归档 → 发布摘要，definitions 归档与两份内部 manifest 的 `artifacts` 摘要继续描述归档字节。快照及 attributes、skills、static-effects 已按冻结的 3.2 raw 重新生成。此前已完成：sourceRecord 业务字段登记——agents 索引四语名称提升为 `data.names`、boss 索引 `live_begin`/`live_end` 成对提升为 `data.liveTimeWindow`（缺失时不补造）、agents 补齐索引未知顶层字段维护诊断、发布目录 `AgentName` 改用来源索引 en 名称作为稳定来源（与英文详情显示名解耦，当前 3.2 数据两者取值一致）、agents 与 boss rulesVersion 递增；快照与三类派生制品（skills、attributes、static-effects）已重生成并通过字节级验收（仅 agents data、boss data、index 与钉值变更）。登记范围说明：boss 索引 `zone_type`/`sort` 与已提升的详情孪生字段（`zoneType`/`priority`）本地 3.2 全 47 条同值，按 schema 归属不重复提升、原值保留归档；本次补齐驱动盘索引描述与其余名称类别的换源；`DriveDiscName`/`WEngineName`/`BangbooName` 现与 `AgentName` 一样读取来源索引 en 名称，与英文详情显示名解耦。此前一轮已完成：整合规则严格化——未知字段由细节流容忍改为整合失败、共享字段改为严格共享（同有或全缺）、全类别 rulesVersion 递增、shiyu `zone` 数值骨架提升到 `data`、boss `modes`/`zone` 判别联合与 `data`/`details` 类型封闭化；注意 v2 显式迁移随之实际退役：真实 v2 外壳都停留在最后一个 v2 规则版本，与当前登记表版本不同，按 §7 的迁移契约一律拒绝，需按当前规则从 raw 重新生成；后续可单独评估是否删除迁移代码。此前已实现：单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令；固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取。正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
 `data.json` 与 `details.{locale}.json` 为已确认的文件名，正式类型与测试使用同一命名。
 已接入生产类别：`agents`（规则 `nanoka-agent-reference/7`）、`drive-discs`（规则
 `nanoka-drive-disc-reference/3`）、`w-engines`（规则 `nanoka-w-engine-reference/3`）、`bangboos`（规则
 `nanoka-bangboo-reference/3`）、`monsters`（规则 `nanoka-monster-reference/2`）、`shiyu`（规则
-`nanoka-shiyu-reference/3`）、`boss`（规则 `nanoka-boss-reference/4`）与 `simul`（规则
+`nanoka-shiyu-reference/3`）、`boss`（规则 `nanoka-boss-reference/5`）与 `simul`（规则
 `nanoka-simul-reference/3`）。驱动盘单实体规则与实现状态见
 [驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference3)，WEngine 单实体规则与实现状态见
 [WEngine 单实体实现规则](#wengine-单实体实现规则-nanoka-w-engine-reference3)，Bangboo 单实体规则与实现状态见
 [Bangboo 单实体实现规则](#bangboo-单实体实现规则-nanoka-bangboo-reference3)，Monster 单实体规则与实现状态见
 [Monster 单实体实现规则](#monster-单实体实现规则-nanoka-monster-reference2)，Shiyu 单实体规则与实现状态见
 [Shiyu 单实体实现规则](#shiyu-单实体实现规则-nanoka-shiyu-reference3)，Boss 单实体规则与实现状态见
-[Boss 单实体实现规则](#boss-单实体实现规则-nanoka-boss-reference4)，Simul 单实体规则与实现状态见
+[Boss 单实体实现规则](#boss-单实体实现规则-nanoka-boss-reference5)，Simul 单实体规则与实现状态见
 [Simul 单实体实现规则](#simul-单实体实现规则-nanoka-simul-reference3)。
 
 整合层把分散的来源记录汇集为可查阅、导出和再次加工的完整资料，尽量保留游戏内原文、数值与展示上下文。
@@ -1120,7 +1120,7 @@ Shiyu 名称在类内大量重名（本地 3.2 的剧变节点类中英文同名
    字符串保留；本规则不生成名称 catalog 或名称唯一性约束，公开读取按
    [消费契约](consumption.md)以来源 ID 为身份。
 
-### Boss 单实体实现规则 `nanoka-boss-reference/4`
+### Boss 单实体实现规则 `nanoka-boss-reference/5`
 
 来源说明见 [Nanoka Boss](../nanoka/boss.md)：上游实体 `boss`，整合类别登记名为 `boss`，
 类型与函数统一使用 `Boss` 命名。一条记录表示一个首领试炼条目；评级目标语义解释、时间换算、mode 唯一性、
@@ -1166,15 +1166,19 @@ Boss 名称在类内完全同名（本地 3.2 全部 47 条的中英文名称各
 字典），历史版本（本地 3.0 缓存）使用顶层 `zone` 字典，阶段条目结构共用同一登记表（含 `selectable_buff`，
 无 `child` 与 `ss_rank_goal`）。变体识别由登记字段组合决定——`modes` 在场即列表变体、`zone` 在场即历史
 字典变体——不能只按版本字符串猜测；两种结构互斥：同时缺失或同时存在都按结构冲突失败；本层不把 zone
-强行转换成 modes，也不丢弃原层级。判别联合的类型化随规则 `/4` 实施完成；变体按语言独立校验，不要求
-各语言选择同一变体（本地 3.2 全部 47 条的中英文均为 `modes`）。`modes` 数组顺序保持来源
-原样，不排序、不去重、不按数组位置跨语言合并；mode ID 属于详情内部，不生成独立实体目录或远端资源；
+强行转换成 modes，也不丢弃原层级。判别联合的类型化随规则 `/4` 实施完成。每个语言先按同一登记表独立
+校验；规则 `/5` 在共享字段提取前比较全部已校验详情的结构骨架：字符串值视为可不同的占位，数字、布尔与
+`null` 精确比较，对象按 key 集合递归比较（key 顺序无关），数组按长度和顺序递归比较，空对象与空数组
+保留形状。因此同一 Boss 的全部 `detailLocales` 必须选择同一顶层变体，并具有相同的 mode 数量与顺序、
+mode `id`/`zoneType`、阶段/房间/怪物/增益字典 key 集合与 encounter 数值；`name`、`desc`、图片与图标等
+字符串内容仍可按语言不同。单语言详情子集不触发跨语言检查。该骨架约束不是按数组位置跨语言合并内容：
+`modes` 数组顺序仍保持来源原样，不排序、不去重；mode ID 属于详情内部，不生成独立实体目录或远端资源；
 顶层 `zoneType` 与 mode 的 `zoneType` 分别保留，不要求相等（本地 3.2 有 6 条记录的 mode `zone_type` 与
 顶层不同：`690421`、`690431`、`690441`、`690451`、`690461`、`690471`）。mode/zone 内的关卡、buff、room 与 Monster encounter 完整留在各语言详情：encounter 的名称、
 图片、弱点与关卡数值（含浮点与负值原值）全部保留，不能替换成纯外键；`monster_list` 外层 key 不是
 Monster ID，引用身份来自条目自身的 `id`。Monster 引用与同版本 Monster 索引的核对属于真实验收报告，不在
-本层强制闭合，也不加入运行时跨类别读取。本规则不依赖尚未接入的 Simul，也不提前抽取跨 Boss/Simul 的
-共享数据制品。
+本层强制闭合，也不加入运行时跨类别读取。本规则不依赖 Simul 类别，也不提前抽取跨 Boss/Simul 的
+共享数据制品；两类别的同名配置分别保留。
 
 校验边界：
 
@@ -1199,9 +1203,12 @@ Monster ID，引用身份来自条目自身的 `id`。Monster 引用与同版本
    `sourceRecord` 的未知字段保留并进入维护诊断。
 7. 空字符串、零、负值、空数组、空字典、浮点数值、数组顺序与显示格式按来源保留；已登记字段仍须满足其
    明确类型。非 JSON 值、非法数值、访问器、Symbol key 与循环引用复用共享保真边界。
-8. 失败抛出 `BossIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。`name` 在本层按
-   字符串保留；本规则不生成名称 catalog 或名称唯一性约束，公开读取按
-   [消费契约](consumption.md)以来源 ID 为身份。旧结构变体使用合成 fixture 验证，不切换当前真实数据版本。
+8. 失败抛出 `BossIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。跨语言骨架差异
+   定位到被比较语言与差异 Pointer（数值成员指向叶节点，对象 key 集合差异指向对应容器），消息明确包含
+   “跨语言结构不一致”。静态制品复验在每个成员的全部文件读完后调用同一骨架比较，单文件 id/locale 合法
+   但详情变体混用的手工或旧制品同样被拒绝。`name` 在本层按字符串保留；本规则不生成名称 catalog 或
+   名称唯一性约束，公开读取按[消费契约](consumption.md)以来源 ID 为身份。旧结构变体使用合成 fixture
+   验证，不切换当前真实数据版本。
 
 ### Simul 单实体实现规则 `nanoka-simul-reference/3`
 
@@ -1372,15 +1379,17 @@ fairy-integrated-snapshot-<独占后缀>/
 `equipment`，规则 `nanoka-drive-disc-reference/3`）、`w-engines`（来源实体 `weapon`，规则
 `nanoka-w-engine-reference/3`）、`bangboos`（来源实体 `bangboo`，规则 `nanoka-bangboo-reference/3`）、
 `monsters`（来源实体 `monster`，规则 `nanoka-monster-reference/2`）、`shiyu`（来源实体 `shiyu`，规则
-`nanoka-shiyu-reference/3`）、`boss`（来源实体 `boss`，规则 `nanoka-boss-reference/4`）与 `simul`
+`nanoka-shiyu-reference/3`）、`boss`（来源实体 `boss`，规则 `nanoka-boss-reference/5`）与 `simul`
 （来源实体 `simul`，规则 `nanoka-simul-reference/3`），
 代理人复用既有 `integrateAgent`、驱动盘复用既有
 `integrateDriveDisc`、WEngine 复用既有 `integrateWEngine`、邦布复用既有 `integrateBangboo`、
 怪物复用既有 `integrateMonster`、Shiyu 复用既有 `integrateShiyu`、Boss 复用既有 `integrateBoss`、
 Simul 复用既有 `integrateSimul`，
-成员文件身份检查沿用第 7.1 节的代理人规则并按类别独立实现。登记校验要求类别名唯一且
-可作为目录名、来源实体不被重复使用、规则版本格式正确、成员文件身份检查必备；构建入口另外要求纯整合函数，
-验证与历史复验只要求静态契约。
+成员文件身份检查沿用第 7.1 节的代理人规则并按类别独立实现。类别还可登记可选的成员聚合检查，
+在验证器读完一个成员的全部文件并完成单文件身份检查后调用；Boss 用它复用跨语言骨架比较，
+避免单文件只核对 id/locale 时放过混合变体的静态制品。登记校验要求类别名唯一且
+可作为目录名、来源实体不被重复使用、规则版本格式正确、成员文件身份检查必备、可选的成员聚合检查
+若提供则必须为函数；构建入口另外要求纯整合函数，验证与历史复验只要求静态契约。
 [索引类型](../../../packages/data/src/integration/snapshot-types.ts)由包根入口导出，是公开读取的唯一索引类型；
 `IntegratedSnapshotIndex` 默认要求完整语言引用，`HistoricalIntegratedSnapshotIndex` 复用同一 JSON 结构并把引用表达为可能缺失，
 只用于历史复验。

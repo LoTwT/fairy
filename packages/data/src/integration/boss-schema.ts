@@ -1,11 +1,16 @@
+import type { DetailLocale, SourceJson } from "./agent-types.ts"
+import { at, BossIntegrationError, fail, isObject } from "./source-json.ts"
+import type { SourceLocation } from "./source-json.ts"
+
 /**
- * Boss 来源结构的登记表（规则 nanoka-boss-reference/4）。
+ * Boss 来源结构的登记表（规则 nanoka-boss-reference/5）。
  *
  * 详情与来源索引记录分别处理：详情字段在这里登记，按归属提取到 data.json 或留在各语言详情；
  * 索引记录只登记已知顶层字段（`bossIndexFields`）用于识别未知字段，并成对提升 `live_begin`/`live_end`；
  * 原记录仍作为 sourceRecord 完整保留，两个来源不互相回退。
  * 未登记的详情字段整合失败，不进入发布制品；索引记录的未登记字段仍作为维护诊断报告待登记。
  * 只转换登记表明确列出的结构字段拼写；字典 key、实体与属性 ID、字符串内容及数组顺序不变。
+ * 同一 Boss 的全部详情语言必须使用同一结构骨架；字符串内容可以不同，数字、布尔、null 与容器形状必须一致。
  */
 
 /** 已登记字段要求的 JSON 值种类；null 不冒充字符串、数值或普通对象。 */
@@ -55,7 +60,7 @@ export const bossLocalizedDetailFields: Readonly<
   /** 来源 `id`。详情自身的数值 Boss ID；与实体 ID 核对，不参与共享提取。 */
   id: { output: "id", kind: "number" },
 
-  /** 来源 `name`。当前语言名称原文；本地 3.2 全部 47 条同名（中文「试炼」、英文 `Trial`），不作为公开身份。 */
+  /** 来源 `name`。当前语言名称原文；本地 3.2 观察中文「试炼」、英文 `Trial`，类内同名，不作为公开身份。 */
   name: { output: "name", kind: "string" },
 }
 
@@ -166,11 +171,148 @@ export const bossAdjustMembers: Readonly<Record<string, BossObjectMember>> = {
 }
 
 /**
+ * 跨语言结构骨架比较：同一 Boss 的全部详情语言必须使用同一结构。
+ *
+ * 字符串值只比较类型、不比较内容，因此名称、说明与资源路径可以按语言不同；
+ * 数字、布尔与 null 精确比较；对象先比较 key 集合再递归比较共有成员，key 顺序无关；
+ * 数组比较长度与顺序；空对象与空数组作为形状保留。共享字段仍由整合层按原规则精确比较。
+ * 失败抛出携带被比较语言与来源 JSON Pointer 的 BossIntegrationError，错误前缀固定为跨语言结构不一致。
+ * 纯函数允许单语言子集；只有两个及以上语言时才执行比较。
+ */
+export function assertBossDetailSkeletons(
+  entityId: string,
+  detailLocales: readonly DetailLocale[],
+  details: Readonly<Partial<Record<DetailLocale, SourceJson>>>,
+): void {
+  const baselineLocale = detailLocales[0]
+  if (baselineLocale === undefined) return
+  const baseline = details[baselineLocale]
+  if (baseline === undefined)
+    fail(
+      { entityId, locale: baselineLocale, pointer: "" },
+      "缺失详情",
+      BossIntegrationError,
+    )
+  for (const locale of detailLocales.slice(1)) {
+    const candidate = details[locale]
+    if (candidate === undefined)
+      fail({ entityId, locale, pointer: "" }, "缺失详情", BossIntegrationError)
+    assertBossSkeletonValue(
+      baseline,
+      candidate,
+      { entityId, locale, pointer: "" },
+      baselineLocale,
+    )
+  }
+}
+
+/** 递归比较单个骨架值；location 指向被比较语言的当前节点。 */
+function assertBossSkeletonValue(
+  baseline: SourceJson,
+  candidate: SourceJson,
+  location: SourceLocation,
+  baselineLocale: DetailLocale,
+): void {
+  if (typeof baseline === "string" || typeof candidate === "string") {
+    if (typeof baseline !== "string" || typeof candidate !== "string")
+      fail(
+        location,
+        `跨语言结构不一致（与 ${baselineLocale} 相比）：类型不同，${describeSkeletonValue(candidate)} 与 ${describeSkeletonValue(baseline)}`,
+        BossIntegrationError,
+      )
+    return
+  }
+  if (baseline === null || candidate === null) {
+    if (baseline !== candidate)
+      fail(
+        location,
+        `跨语言结构不一致（与 ${baselineLocale} 相比）：null 分布不同`,
+        BossIntegrationError,
+      )
+    return
+  }
+  if (Array.isArray(baseline) || Array.isArray(candidate)) {
+    if (!Array.isArray(baseline) || !Array.isArray(candidate))
+      fail(
+        location,
+        `跨语言结构不一致（与 ${baselineLocale} 相比）：数组与对象或标量不能互相替代`,
+        BossIntegrationError,
+      )
+    if (baseline.length !== candidate.length)
+      fail(
+        location,
+        `跨语言结构不一致（与 ${baselineLocale} 相比）：数组长度不同（${baseline.length} 与 ${candidate.length}）`,
+        BossIntegrationError,
+      )
+    for (let index = 0; index < baseline.length; index++)
+      assertBossSkeletonValue(
+        baseline[index]!,
+        candidate[index]!,
+        at(location, String(index)),
+        baselineLocale,
+      )
+    return
+  }
+  if (isObject(baseline) || isObject(candidate)) {
+    if (!isObject(baseline) || !isObject(candidate))
+      fail(
+        location,
+        `跨语言结构不一致（与 ${baselineLocale} 相比）：对象与数组或标量不能互相替代`,
+        BossIntegrationError,
+      )
+    const baselineKeys = Object.keys(baseline).toSorted()
+    const candidateKeys = Object.keys(candidate).toSorted()
+    const missing = baselineKeys.filter((key) => !Object.hasOwn(candidate, key))
+    const extra = candidateKeys.filter((key) => !Object.hasOwn(baseline, key))
+    if (missing.length || extra.length) {
+      // 根节点用第一个差异成员定位；其余层级定位到 key 集合不同的容器，
+      // 避免因缺少或多出方向不同而产生不对称的 Pointer。
+      const differenceLocation =
+        location.pointer === ""
+          ? at(location, (missing[0] ?? extra[0])!)
+          : location
+      const parts = [
+        `跨语言结构不一致（与 ${baselineLocale} 相比）：对象 key 集合不同`,
+      ]
+      if (missing.length) parts.push(`缺少 ${missing.join("、")}`)
+      if (extra.length) parts.push(`多出 ${extra.join("、")}`)
+      fail(differenceLocation, parts.join("；"), BossIntegrationError)
+    }
+    const commonKeys = baselineKeys.filter((key) =>
+      Object.hasOwn(candidate, key),
+    )
+    for (const key of commonKeys)
+      assertBossSkeletonValue(
+        baseline[key]!,
+        candidate[key]!,
+        at(location, key),
+        baselineLocale,
+      )
+    return
+  }
+  if (typeof baseline !== typeof candidate || baseline !== candidate)
+    fail(
+      location,
+      `跨语言结构不一致（与 ${baselineLocale} 相比）：${describeSkeletonValue(candidate)} 与 ${describeSkeletonValue(baseline)} 不同`,
+      BossIntegrationError,
+    )
+}
+
+/** 骨架错误的简短类型描述；字符串统一视为可不同的占位值。 */
+function describeSkeletonValue(value: SourceJson): string {
+  if (value === null) return "null"
+  if (Array.isArray(value)) return "array"
+  if (typeof value === "object") return "object"
+  if (typeof value === "string") return "string"
+  return String(value)
+}
+
+/**
  * 来源索引记录的已知顶层字段名；用于识别未知顶层字段（维护诊断），并界定成对提升的 `live_*`。
  *
- * 字段集合依据来源说明与本地 3.2 `boss.json` 的 47 条记录确认：索引是 Boss ID → 记录的对象，
- * 记录内嵌排序权重、顶层区域类型编码、各语言名称与轮换时间字符串（47 条中 44 条为轮换记录，
- * 3 条无 `live_*`）。除 `live_begin`/`live_end` 成对提升到 `data.liveTimeWindow` 外，登记不要求其余
+ * 字段集合依据来源说明与本地 3.2 `boss.json` 观察确认：索引是 Boss ID → 记录的对象，
+ * 记录内嵌排序权重、顶层区域类型编码、各语言名称与轮换时间字符串；轮换记录可以没有 `live_*`。
+ * 除 `live_begin`/`live_end` 成对提升到 `data.liveTimeWindow` 外，登记不要求其余
  * 字段存在、不校验其类型，也不改变 `sourceRecord` 的原 key 与原值；
  * 索引与详情是两个独立来源，同名字段不要求相等，也不互相回退。未登记字段内部不递归推断字段身份。
  */
