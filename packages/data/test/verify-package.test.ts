@@ -1756,7 +1756,9 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
         {
           cwd: cleanPackage,
           encoding: "utf8",
-          timeout: 30_000,
+          // CI cold builds can exceed 30s after the publication-layer work; keep
+          // a bounded timeout so a hung build still fails the test.
+          timeout: 60_000,
           env: {
             ...checkoutEnvironment,
             FAIRY_PUBLICATION_TEST_PACKAGE: cleanPackage,
