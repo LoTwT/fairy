@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Butler",
+    "ja": "バトラー",
+    "ko": "버틀러",
+    "zh": "巴特勒"
+  },
   "rarity": 4,
   "skillProp": {
     "5400401": {

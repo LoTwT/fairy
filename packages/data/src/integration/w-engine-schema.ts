@@ -1,5 +1,5 @@
 /**
- * WEngine 来源结构的登记表（规则 nanoka-w-engine-reference/2）。
+ * WEngine 来源结构的登记表（规则 nanoka-w-engine-reference/3）。
  *
  * 详情与来源索引记录分别处理：详情字段在这里登记，按归属提取到 data.json 或留在各语言详情；
  * 索引记录不在这里登记，原记录仍作为 sourceRecord 完整保留，两个来源不互相回退。
@@ -213,16 +213,16 @@ export const wEngineIndexFields: readonly string[] = [
   /** 来源 `desc`。索引内嵌的说明文本；不当作某语言详情或回退文本。 */
   "desc",
 
-  /** 来源 `en`。索引内嵌的英文名称；不能冒充完整详情。 */
+  /** 来源 `en`。索引内嵌的英文名称；提升为 `data.names.en`，不能冒充完整详情。 */
   "en",
 
   /** 来源 `icon`。索引内嵌的图标编码（如 Weapon_B_Common_01）；与详情 icon 的资源路径分开保留。 */
   "icon",
 
-  /** 来源 `ja`。索引内嵌的日文名称；当前没有该语言的完整详情。 */
+  /** 来源 `ja`。索引内嵌的日文名称；存在时提升为 `data.names.ja`。 */
   "ja",
 
-  /** 来源 `ko`。索引内嵌的韩文名称；当前没有该语言的完整详情。 */
+  /** 来源 `ko`。索引内嵌的韩文名称；存在时提升为 `data.names.ko`。 */
   "ko",
 
   /** 来源 `rank`。稀有度编码（本地 3.2 为 2/3/4）；未映射为业务枚举。 */
@@ -234,6 +234,6 @@ export const wEngineIndexFields: readonly string[] = [
   /** 来源 `type`。分类 ID；与详情 weapon_type 的 key 空间一致，不映射为 core 枚举。 */
   "type",
 
-  /** 来源 `zh`。索引内嵌的中文名称；不能冒充完整详情。 */
+  /** 来源 `zh`。索引内嵌的中文名称；提升为 `data.names.zh`，不能冒充完整详情。 */
   "zh",
 ]

@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Booltergeist",
+    "ja": "ユウレイボンプ",
+    "ko": "유령부",
+    "zh": "幽浮布"
+  },
   "rarity": 3,
   "skillProp": {
     "5302101": {

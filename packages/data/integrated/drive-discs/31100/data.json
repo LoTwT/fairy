@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "PEN Ratio +8%",
+      "desc4": "<color=#FFFFFF>Ultimate</color> DMG increases by 20%. Launching an <color=#FFFFFF>Ultimate</color> increases the equipper's ATK by 15% for 12s."
+    },
+    "ja": {
+      "desc2": "貫通率+8%。",
+      "desc4": "<color=#FFFFFF>『終結スキル』</color>の与ダメージ+20%。<color=#FFFFFF>『終結スキル』</color>発動時、装備者の攻撃力+15%、継続時間12秒。"
+    },
+    "ko": {
+      "desc2": "관통률+8%",
+      "desc4": "<color=#FFFFFF>[궁극기]</color>로 주는 피해가 20% 증가한다. <color=#FFFFFF>[궁극기]</color> 시전 시 착용자의 공격력이 15% 증가한다. 지속 시간: 12초"
+    },
+    "zh": {
+      "desc2": "穿透率+8%。",
+      "desc4": "<color=#FFFFFF>[终结技]</color>造成的伤害提升20%；发动<color=#FFFFFF>[终结技]</color>时，装备者的攻击力提升15%，持续12秒。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitPufferElectro.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitPufferElectro.png",
-  "id": 31100
+  "id": 31100,
+  "names": {
+    "en": "Puffer Electro",
+    "ja": "パファー・エレクトロ",
+    "ko": "복어 일렉트로",
+    "zh": "河豚电音"
+  }
 }

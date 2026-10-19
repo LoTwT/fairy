@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Officer Cui",
+    "ja": "ツェイ巡査",
+    "ko": "최 순찰대원",
+    "zh": "阿崔巡查"
+  },
   "rarity": 4,
   "skillProp": {
     "5401201": {

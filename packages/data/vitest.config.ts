@@ -89,6 +89,9 @@ export default defineConfig({
         test: {
           name: "packaging",
           include: packagingTestFiles,
+          // 打包与浏览器验收都会独占构建 dist 并读取真实集成数据；
+          // 同进程内改为文件串行，避免并发构建互相覆盖发布输出。
+          fileParallelism: false,
         },
       },
     ],

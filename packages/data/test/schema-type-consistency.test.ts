@@ -689,6 +689,8 @@ describe("Simul 登记表与封闭类型一致", () => {
 describe("DriveDisc 登记表与封闭类型一致", () => {
   const driveDiscDataKeys = [
     "id",
+    "names",
+    "descriptions",
     "icon",
     "icon2",
   ] as const satisfies readonly (keyof DriveDiscData)[]
@@ -719,8 +721,13 @@ describe("DriveDisc 登记表与封闭类型一致", () => {
         .filter(([, field]) => !field.shared)
         .map(([key]) => key),
     )
+    // names/descriptions 提升自独立的来源索引记录，不属于详情共享提取。
     expect(shared).toEqual(
-      new Set(driveDiscDataKeys.filter((key) => key !== "id")),
+      new Set(
+        driveDiscDataKeys.filter(
+          (key) => key !== "id" && key !== "names" && key !== "descriptions",
+        ),
+      ),
     )
     expect(local).toEqual(
       new Set(driveDiscDetailsKeys.filter((key) => key !== "locale")),
@@ -731,6 +738,7 @@ describe("DriveDisc 登记表与封闭类型一致", () => {
 describe("Bangboo 登记表与封闭类型一致", () => {
   const bangbooDataKeys = [
     "id",
+    "names",
     "rarity",
     "icon",
     "stats",
@@ -847,6 +855,7 @@ describe("Bangboo 登记表与封闭类型一致", () => {
         bangbooDataKeys.filter(
           (key) =>
             key !== "id" &&
+            key !== "names" &&
             key !== "stats" &&
             key !== "skillProp" &&
             key !== "level",
@@ -869,6 +878,7 @@ describe("Bangboo 登记表与封闭类型一致", () => {
 describe("WEngine 登记表与封闭类型一致", () => {
   const wEngineDataKeys = [
     "id",
+    "names",
     "codeName",
     "rarity",
     "icon",
@@ -939,6 +949,7 @@ describe("WEngine 登记表与封闭类型一致", () => {
         wEngineDataKeys.filter(
           (key) =>
             key !== "id" &&
+            key !== "names" &&
             key !== "baseProperty" &&
             key !== "randProperty" &&
             key !== "classificationIds",

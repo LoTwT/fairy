@@ -1,4 +1,4 @@
-/** 满足规则 nanoka-drive-disc-reference/1 必需结构的合成输入；不读取真实 raw，不使用生产登记表生成 fixture。 */
+/** 满足规则 nanoka-drive-disc-reference/3 必需结构的合成输入；不读取真实 raw，不使用生产登记表生成 fixture。 */
 export function driveDiscSource() {
   return {
     id: 930001,
@@ -40,8 +40,15 @@ export function driveDiscInput() {
 }
 
 /**
- * 多成员合成输入的英文详情名称：按成员 ID 派生，类内唯一且与索引 `sourceRecord.en.name`
- * 及任何单成员 fixture 名称不同，用于捕获发布目录生成取错名称来源。
+ * 多成员合成输入的索引英文名称：按成员 ID 派生并在类内唯一，供发布目录的 DriveDiscName。
+ */
+export function syntheticDriveDiscIndexName(memberId: string): string {
+  return `Index Drive Disc ${memberId}`
+}
+
+/**
+ * 多成员合成输入的英文详情名称：按成员 ID 派生，类内唯一且与索引英文名称不同，
+ * 用于捕获发布目录取错名称来源（详情名不再参与 DriveDiscName 生成）。
  */
 export function syntheticDriveDiscEnglishName(memberId: string): string {
   return `Example Drive Disc ${memberId}`

@@ -72,6 +72,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Avocaboo",
+    "ja": "アボカドボンプ",
+    "ko": "아보카부",
+    "zh": "果核布"
+  },
   "rarity": 3,
   "skillProp": {
     "5300801": {

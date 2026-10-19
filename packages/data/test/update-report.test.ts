@@ -823,7 +823,7 @@ describe("current dataset update report", () => {
           {
             name: "bangboos",
             before: null,
-            after: "nanoka-bangboo-reference/2",
+            after: "nanoka-bangboo-reference/3",
             changed: false,
           },
           {
@@ -835,7 +835,7 @@ describe("current dataset update report", () => {
           {
             name: "drive-discs",
             before: null,
-            after: "nanoka-drive-disc-reference/2",
+            after: "nanoka-drive-disc-reference/3",
             changed: false,
           },
           {
@@ -859,7 +859,7 @@ describe("current dataset update report", () => {
           {
             name: "w-engines",
             before: null,
-            after: "nanoka-w-engine-reference/2",
+            after: "nanoka-w-engine-reference/3",
             changed: false,
           },
         ],

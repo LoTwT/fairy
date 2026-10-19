@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "<color=#98EFF0>Ice DMG</color> +10%",
+      "desc4": "Increase the DMG of <color=#FFFFFF>Basic Attack</color> and <color=#FFFFFF>Dash Attack</color> by 20%. When any squad member inflicts <color=#98EFF0>Freeze</color> or <color=#98EFF0>Shatter</color>, this effect increases by an additional 20% for 12s."
+    },
+    "ja": {
+      "desc2": "<color=#98EFF0>氷属性ダメージ</color>+10%。",
+      "desc4": "<color=#FFFFFF>『通常攻撃』</color>と<color=#FFFFFF>『ダッシュ攻撃』</color>の与ダメージ+20%。任意のメンバーが敵に<color=#98EFF0>[凍結]</color>効果を付与した時、または<color=#98EFF0>[砕氷]</color>効果を発動した時、この効果がさらに+20%、継続時間12秒。"
+    },
+    "ko": {
+      "desc2": "<color=#98EFF0>얼음 속성 피해</color>+10%",
+      "desc4": "<color=#FFFFFF>[일반 공격]</color> 및 <color=#FFFFFF>[대시 공격]</color>으로 주는 피해가 20% 증가하며, 파티 내 임의의 캐릭터가 적에게 <color=#98EFF0>[빙결]</color> 부여 혹은 <color=#98EFF0>[쇄빙]</color> 효과 발동 시, 해당 버프 효과가 추가로 20% 증가한다. 지속 시간: 12초"
+    },
+    "zh": {
+      "desc2": "<color=#98EFF0>冰属性伤害</color>+10%。",
+      "desc4": "<color=#FFFFFF>[普通攻击]</color>和<color=#FFFFFF>[冲刺攻击]</color>造成的伤害提升20%，队伍中任意角色对敌人施加<color=#98EFF0>[冻结]</color>或触发<color=#98EFF0>[碎冰]</color>效果时，该增益效果额外提升20%，持续12秒。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitPolarMetal.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitPolarMetal.png",
-  "id": 32500
+  "id": 32500,
+  "names": {
+    "en": "Polar Metal",
+    "ja": "極地のヘヴィメタル",
+    "ko": "극지 메탈",
+    "zh": "极地重金属"
+  }
 }

@@ -5,13 +5,22 @@ import { agentInput } from "./agent-source.ts"
 import {
   driveDiscInput,
   syntheticDriveDiscEnglishName,
+  syntheticDriveDiscIndexName,
 } from "./drive-disc-source.ts"
 import {
   syntheticEntityDetails,
   syntheticEntityRecord,
 } from "./snapshot-entities.ts"
-import { syntheticWEngineEnglishName, wEngineInput } from "./w-engine-source.ts"
-import { bangbooInput, syntheticBangbooEnglishName } from "./bangboo-source.ts"
+import {
+  syntheticWEngineEnglishName,
+  syntheticWEngineIndexName,
+  wEngineInput,
+} from "./w-engine-source.ts"
+import {
+  bangbooInput,
+  syntheticBangbooEnglishName,
+  syntheticBangbooIndexName,
+} from "./bangboo-source.ts"
 import { monsterInput } from "./monster-source.ts"
 import { shiyuInput } from "./shiyu-source.ts"
 import { bossInput } from "./boss-source.ts"
@@ -127,7 +136,18 @@ export async function writeSyntheticRaw(options: {
     const input = driveDiscInput()
     await writeJson(
       join(root, "equipment.json"),
-      Object.fromEntries(driveDiscIds.map((id) => [id, input.sourceRecord])),
+      Object.fromEntries(
+        driveDiscIds.map((id) => [
+          id,
+          {
+            ...input.sourceRecord,
+            en: {
+              ...input.sourceRecord.en,
+              name: syntheticDriveDiscIndexName(id),
+            },
+          },
+        ]),
+      ),
     )
     for (const id of driveDiscIds)
       for (const locale of input.detailLocales)
@@ -161,7 +181,12 @@ export async function writeSyntheticRaw(options: {
     const input = wEngineInput()
     await writeJson(
       join(root, "weapon.json"),
-      Object.fromEntries(weaponIds.map((id) => [id, input.sourceRecord])),
+      Object.fromEntries(
+        weaponIds.map((id) => [
+          id,
+          { ...input.sourceRecord, en: syntheticWEngineIndexName(id) },
+        ]),
+      ),
     )
     for (const id of weaponIds)
       for (const locale of input.detailLocales)
@@ -181,7 +206,12 @@ export async function writeSyntheticRaw(options: {
     const input = bangbooInput()
     await writeJson(
       join(root, "bangboo.json"),
-      Object.fromEntries(bangbooIds.map((id) => [id, input.sourceRecord])),
+      Object.fromEntries(
+        bangbooIds.map((id) => [
+          id,
+          { ...input.sourceRecord, en: syntheticBangbooIndexName(id) },
+        ]),
+      ),
     )
     for (const id of bangbooIds)
       for (const locale of input.detailLocales)

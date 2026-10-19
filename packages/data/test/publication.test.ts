@@ -92,13 +92,13 @@ describe("publication snapshot", () => {
       'export type AgentName = "Index Astra Yao" | "Index Soldier 0 - Anby"',
     )
     expect(catalog).toContain(
-      'export type DriveDiscName = "Example Drive Disc 930001" | "Example Drive Disc 930002"',
+      'export type DriveDiscName = "Index Drive Disc 930001" | "Index Drive Disc 930002"',
     )
     expect(catalog).toContain(
-      'export type WEngineName = "Example W-Engine 940001" | "Example W-Engine 940002"',
+      'export type WEngineName = "Index W-Engine 940001" | "Index W-Engine 940002"',
     )
     expect(catalog).toContain(
-      'export type BangbooName = "Exampleboo 950001" | "Exampleboo 950002"',
+      'export type BangbooName = "Index Bangboo 950001" | "Index Bangboo 950002"',
     )
     expect(catalog).toContain('export type MonsterId = "960001" | "960002"')
     expect(catalog).toContain('export type AgentSourceId = "2" | "10"')
@@ -124,13 +124,13 @@ describe("publication snapshot", () => {
       '[["2","Index Astra Yao"],["10","Index Soldier 0 - Anby"]]',
     )
     expect(catalog).toContain(
-      '[["930001","Example Drive Disc 930001"],["930002","Example Drive Disc 930002"]]',
+      '[["930001","Index Drive Disc 930001"],["930002","Index Drive Disc 930002"]]',
     )
     expect(catalog).toContain(
-      '[["940001","Example W-Engine 940001"],["940002","Example W-Engine 940002"]]',
+      '[["940001","Index W-Engine 940001"],["940002","Index W-Engine 940002"]]',
     )
     expect(catalog).toContain(
-      '[["950001","Exampleboo 950001"],["950002","Exampleboo 950002"]]',
+      '[["950001","Index Bangboo 950001"],["950002","Index Bangboo 950002"]]',
     )
     expect(catalog).toContain(
       "export const snapshotInfo: IntegratedSnapshotInfo = deepFreeze(",
@@ -145,25 +145,25 @@ describe("publication snapshot", () => {
       '"simul":{"rulesVersion":"nanoka-simul-reference/3","detailLocales":["zh","en"],"memberIds":["990001","990002"]}',
     )
     expect(catalog).toContain(
-      '[["Example Drive Disc 930001","930001"],["Example Drive Disc 930002","930002"]]',
+      '[["Index Drive Disc 930001","930001"],["Index Drive Disc 930002","930002"]]',
     )
     expect(catalog).toContain(
-      '[["Example W-Engine 940001","940001"],["Example W-Engine 940002","940002"]]',
+      '[["Index W-Engine 940001","940001"],["Index W-Engine 940002","940002"]]',
     )
     expect(catalog).toContain(
-      '[["Exampleboo 950001","950001"],["Exampleboo 950002","950002"]]',
+      '[["Index Bangboo 950001","950001"],["Index Bangboo 950002","950002"]]',
     )
     expect(catalog).toContain(
       'Object.freeze(["Index Astra Yao","Index Soldier 0 - Anby"])',
     )
     expect(catalog).toContain(
-      'Object.freeze(["Example Drive Disc 930001","Example Drive Disc 930002"])',
+      'Object.freeze(["Index Drive Disc 930001","Index Drive Disc 930002"])',
     )
     expect(catalog).toContain(
-      'Object.freeze(["Example W-Engine 940001","Example W-Engine 940002"])',
+      'Object.freeze(["Index W-Engine 940001","Index W-Engine 940002"])',
     )
     expect(catalog).toContain(
-      'Object.freeze(["Exampleboo 950001","Exampleboo 950002"])',
+      'Object.freeze(["Index Bangboo 950001","Index Bangboo 950002"])',
     )
     expect(catalog).toContain('Object.freeze(["960001","960002"])')
     expect(catalog).toContain('Object.freeze(["970001","970002"])')
@@ -295,19 +295,19 @@ describe("publication snapshot", () => {
     },
   )
 
-  it.each([undefined, "", null, 12, "Example Drive Disc 930002"])(
-    "rejects invalid or duplicate drive disc names: %s",
+  it.each([undefined, "", null, 12, "Index Drive Disc 930002"])(
+    "rejects invalid or duplicate drive disc index names: %s",
     async (name) => {
       const { root, artifactDirectory, index } = await fixture()
-      const path = "drive-discs/930001/details.en.json"
-      const details = JSON.parse(
+      const path = "drive-discs/930001/data.json"
+      const data = JSON.parse(
         await fs.readFile(join(artifactDirectory, path), "utf8"),
       )
-      if (name === undefined) delete details.name
-      else details.name = name
-      const bytes = JSON.stringify(details)
+      if (name === undefined) delete data.names.en
+      else data.names.en = name
+      const bytes = JSON.stringify(data)
       await fs.writeFile(join(artifactDirectory, path), bytes)
-      index.entities["drive-discs"].members["930001"].files.details.en.sha256 =
+      index.entities["drive-discs"].members["930001"].files.data.sha256 =
         sha256(Buffer.from(bytes))
       await fs.writeFile(
         join(artifactDirectory, "index.json"),
@@ -315,81 +315,76 @@ describe("publication snapshot", () => {
       )
       await expect(
         preparePublication(artifactDirectory, join(root, "generated")),
-      ).rejects.toThrow(/name/u)
+      ).rejects.toThrow(/names\.en|name/u)
     },
   )
 
-  it.each([undefined, "", null, 12, "Example W-Engine 940002"])(
-    "rejects invalid or duplicate WEngine names: %s",
+  it.each([undefined, "", null, 12, "Index W-Engine 940002"])(
+    "rejects invalid or duplicate WEngine index names: %s",
     async (name) => {
       const { root, artifactDirectory, index } = await fixture()
-      const path = "w-engines/940001/details.en.json"
-      const details = JSON.parse(
+      const path = "w-engines/940001/data.json"
+      const data = JSON.parse(
         await fs.readFile(join(artifactDirectory, path), "utf8"),
       )
-      if (name === undefined) delete details.name
-      else details.name = name
-      const bytes = JSON.stringify(details)
+      if (name === undefined) delete data.names.en
+      else data.names.en = name
+      const bytes = JSON.stringify(data)
       await fs.writeFile(join(artifactDirectory, path), bytes)
-      index.entities["w-engines"].members["940001"].files.details.en.sha256 =
-        sha256(Buffer.from(bytes))
+      index.entities["w-engines"].members["940001"].files.data.sha256 = sha256(
+        Buffer.from(bytes),
+      )
       await fs.writeFile(
         join(artifactDirectory, "index.json"),
         JSON.stringify(index),
       )
       await expect(
         preparePublication(artifactDirectory, join(root, "generated")),
-      ).rejects.toThrow(/name/u)
+      ).rejects.toThrow(/names\.en|name/u)
     },
   )
 
-  it.each([undefined, "", null, 12, "Exampleboo 950002"])(
-    "rejects invalid or duplicate bangboo names: %s",
+  it.each([undefined, "", null, 12, "Index Bangboo 950002"])(
+    "rejects invalid or duplicate bangboo index names: %s",
     async (name) => {
       const { root, artifactDirectory, index } = await fixture()
-      const path = "bangboos/950001/details.en.json"
-      const details = JSON.parse(
+      const path = "bangboos/950001/data.json"
+      const data = JSON.parse(
         await fs.readFile(join(artifactDirectory, path), "utf8"),
       )
-      if (name === undefined) delete details.name
-      else details.name = name
-      const bytes = JSON.stringify(details)
+      if (name === undefined) delete data.names.en
+      else data.names.en = name
+      const bytes = JSON.stringify(data)
       await fs.writeFile(join(artifactDirectory, path), bytes)
-      index.entities["bangboos"].members["950001"].files.details.en.sha256 =
-        sha256(Buffer.from(bytes))
+      index.entities["bangboos"].members["950001"].files.data.sha256 = sha256(
+        Buffer.from(bytes),
+      )
       await fs.writeFile(
         join(artifactDirectory, "index.json"),
         JSON.stringify(index),
       )
       await expect(
         preparePublication(artifactDirectory, join(root, "generated")),
-      ).rejects.toThrow(/name/u)
+      ).rejects.toThrow(/names\.en|name/u)
     },
   )
 
   it("keeps every mapping independent when categories share an English name", async () => {
     const { artifactDirectory, index } = await fixture()
     const shared = "Shared Name"
-    // AgentName 读来源索引 en（data.names.en），其余三类读英文详情 name。
-    const agentData = JSON.parse(
-      await fs.readFile(join(artifactDirectory, "agents/2/data.json"), "utf8"),
-    )
-    agentData.names.en = shared
-    await fs.writeFile(
-      join(artifactDirectory, "agents/2/data.json"),
-      JSON.stringify(agentData),
-    )
+    // 四个名称类别统一读来源索引 en（data.names.en）。
     for (const [path, id] of [
-      ["drive-discs/930001/details.en.json", "930001"],
-      ["w-engines/940001/details.en.json", "940001"],
-      ["bangboos/950001/details.en.json", "950001"],
+      ["agents/2/data.json", "2"],
+      ["drive-discs/930001/data.json", "930001"],
+      ["w-engines/940001/data.json", "940001"],
+      ["bangboos/950001/data.json", "950001"],
     ]) {
-      const details = JSON.parse(
+      const data = JSON.parse(
         await fs.readFile(join(artifactDirectory, path), "utf8"),
       )
-      details.name = shared
-      await fs.writeFile(join(artifactDirectory, path), JSON.stringify(details))
-      expect(details.id).toBe(Number(id))
+      data.names.en = shared
+      await fs.writeFile(join(artifactDirectory, path), JSON.stringify(data))
+      expect(data.id).toBe(Number(id))
     }
     const catalog = await generateCatalog(artifactDirectory, index)
     // 重名检查只在各类别内：跨类别同名不拒绝，各套 union 与映射仍按各类别成员独立生成。
@@ -397,25 +392,25 @@ describe("publication snapshot", () => {
       'export type AgentName = "Shared Name" | "Index Soldier 0 - Anby"',
     )
     expect(catalog).toContain(
-      'export type DriveDiscName = "Shared Name" | "Example Drive Disc 930002"',
+      'export type DriveDiscName = "Shared Name" | "Index Drive Disc 930002"',
     )
     expect(catalog).toContain(
-      'export type WEngineName = "Shared Name" | "Example W-Engine 940002"',
+      'export type WEngineName = "Shared Name" | "Index W-Engine 940002"',
     )
     expect(catalog).toContain(
-      'export type BangbooName = "Shared Name" | "Exampleboo 950002"',
+      'export type BangbooName = "Shared Name" | "Index Bangboo 950002"',
     )
     expect(catalog).toContain(
       '[["Shared Name","2"],["Index Soldier 0 - Anby","10"]]',
     )
     expect(catalog).toContain(
-      '[["Shared Name","930001"],["Example Drive Disc 930002","930002"]]',
+      '[["Shared Name","930001"],["Index Drive Disc 930002","930002"]]',
     )
     expect(catalog).toContain(
-      '[["Shared Name","940001"],["Example W-Engine 940002","940002"]]',
+      '[["Shared Name","940001"],["Index W-Engine 940002","940002"]]',
     )
     expect(catalog).toContain(
-      '[["Shared Name","950001"],["Exampleboo 950002","950002"]]',
+      '[["Shared Name","950001"],["Index Bangboo 950002","950002"]]',
     )
   })
 
@@ -498,37 +493,43 @@ describe("publication snapshot", () => {
 
   it("preserves whitespace, punctuation and special property names exactly", async () => {
     const { artifactDirectory, index } = await fixture()
-    // AgentName 读来源索引 en（data.names.en）；其余三类读英文详情 name。
-    for (const [id, name] of [
-      ["2", ' A\'s "Name"! '],
-      ["10", "__proto__"],
-    ]) {
-      const path = join(artifactDirectory, `agents/${id}/data.json`)
-      const data = JSON.parse(await fs.readFile(path, "utf8"))
-      data.names.en = name
-      await fs.writeFile(path, JSON.stringify(data))
-    }
-    for (const [id, name] of [
-      ["930001", ' D\'s "Disc"! '],
-      ["930002", "__proto__"],
-    ]) {
-      const path = join(artifactDirectory, `drive-discs/${id}/details.en.json`)
-      await fs.writeFile(path, JSON.stringify({ name }))
-    }
-    for (const [id, name] of [
-      ["940001", ' W\'s "Engine"! '],
-      ["940002", "__proto__"],
-    ]) {
-      const path = join(artifactDirectory, `w-engines/${id}/details.en.json`)
-      await fs.writeFile(path, JSON.stringify({ name }))
-    }
-    for (const [id, name] of [
-      ["950001", ' B\'s "Boo"! '],
-      ["950002", "__proto__"],
-    ]) {
-      const path = join(artifactDirectory, `bangboos/${id}/details.en.json`)
-      await fs.writeFile(path, JSON.stringify({ name }))
-    }
+    // 四个名称类别统一读来源索引 en（data.names.en）。
+    for (const [category, entries] of [
+      [
+        "agents",
+        [
+          ["2", ' A\'s "Name"! '],
+          ["10", "__proto__"],
+        ],
+      ],
+      [
+        "drive-discs",
+        [
+          ["930001", ' D\'s "Disc"! '],
+          ["930002", "__proto__"],
+        ],
+      ],
+      [
+        "w-engines",
+        [
+          ["940001", ' W\'s "Engine"! '],
+          ["940002", "__proto__"],
+        ],
+      ],
+      [
+        "bangboos",
+        [
+          ["950001", ' B\'s "Boo"! '],
+          ["950002", "__proto__"],
+        ],
+      ],
+    ] as const)
+      for (const [id, name] of entries) {
+        const path = join(artifactDirectory, `${category}/${id}/data.json`)
+        const data = JSON.parse(await fs.readFile(path, "utf8"))
+        data.names.en = name
+        await fs.writeFile(path, JSON.stringify(data))
+      }
     const catalog = await generateCatalog(artifactDirectory, index)
     expect(catalog).toContain(JSON.stringify(' A\'s "Name"! '))
     expect(catalog).toContain(JSON.stringify(' D\'s "Disc"! '))

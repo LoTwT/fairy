@@ -16,10 +16,26 @@ import type {
 } from "../src/integration/integrate-drive-disc.ts"
 import type { UnknownFieldDiagnostic } from "../src/integration/source-json.ts"
 
-export const minimalData: DriveDiscData = { id: 930001, icon: "", icon2: "" }
+export const minimalData: DriveDiscData = {
+  id: 930001,
+  names: { zh: "", en: "" },
+  descriptions: {
+    zh: { desc2: "", desc4: "" },
+    en: { desc2: "", desc4: "" },
+  },
+  icon: "",
+  icon2: "",
+}
 
 export const dataWithUnknownFields: DriveDiscData = {
   id: 930001,
+  names: { zh: "示例", en: "Example", ja: "サンプル", ko: "예시" },
+  descriptions: {
+    zh: { desc2: "", desc4: "" },
+    en: { desc2: "CRIT Rate +8%", desc4: "Synthetic" },
+    ja: { desc2: "", desc4: "" },
+    ko: { desc2: "", desc4: "" },
+  },
   icon: "UI/Sprite/IconSuit/ExampleIcon.png",
   icon2: "UI/Sprite/IconSuit/ExampleIcon2.png",
   // @ts-expect-error 未登记的顶层字段在封闭类型上被拒绝。
@@ -87,8 +103,15 @@ export function readDeclaredFields(details: DriveDiscDetails): string {
 
 export function readDeclaredData(
   data: DriveDiscData,
-): [number, string, string] {
-  return [data.id, data.icon, data.icon2]
+): [number, string, string, string, string, string] {
+  return [
+    data.id,
+    data.names.en,
+    data.descriptions.en.desc2,
+    data.descriptions.en.desc4,
+    data.icon,
+    data.icon2,
+  ]
 }
 
 export const fieldKinds: DriveDiscFieldKind[] = ["string", "number"]
@@ -112,9 +135,45 @@ export const functionUnknownField: DriveDiscDetails = {
   untouched: () => {},
 }
 // @ts-expect-error 缺失 icon2 不能由未知字段补位。
-export const missingIcon2: DriveDiscData = { id: 930001, icon: "" }
-// @ts-expect-error 身份是数值，不能用规范十进制字符串代替。
-export const stringId: DriveDiscData = { id: "930001", icon: "", icon2: "" }
+export const missingIcon2: DriveDiscData = {
+  id: 930001,
+  names: { zh: "", en: "" },
+  descriptions: {
+    zh: { desc2: "", desc4: "" },
+    en: { desc2: "", desc4: "" },
+  },
+  icon: "",
+}
+export const stringId: DriveDiscData = {
+  // @ts-expect-error 身份是数值，不能用规范十进制字符串代替。
+  id: "930001",
+  names: { zh: "", en: "" },
+  descriptions: {
+    zh: { desc2: "", desc4: "" },
+    en: { desc2: "", desc4: "" },
+  },
+  icon: "",
+  icon2: "",
+}
+export const missingEnglishIndexName: DriveDiscData = {
+  id: 930001,
+  // @ts-expect-error 索引名称 zh/en 必填。
+  names: { zh: "" },
+  descriptions: {
+    zh: { desc2: "", desc4: "" },
+    en: { desc2: "", desc4: "" },
+  },
+  icon: "",
+  icon2: "",
+}
+export const missingEnglishDescription: DriveDiscData = {
+  id: 930001,
+  names: { zh: "", en: "" },
+  // @ts-expect-error 描述的 zh/en 语言对象必填。
+  descriptions: { zh: { desc2: "", desc4: "" } },
+  icon: "",
+  icon2: "",
+}
 // @ts-expect-error 资源字段只接受字符串。
 export const numericIcon: Pick<DriveDiscData, "icon"> = { icon: 0 }
 // @ts-expect-error 缺失与 null 不能互换。
@@ -136,6 +195,11 @@ export const unsupportedLocale: DriveDiscDetails = {
 export const numericName: Pick<DriveDiscDetails, "name"> = { name: 0 }
 export const functionField: DriveDiscData = {
   id: 930001,
+  names: { zh: "", en: "" },
+  descriptions: {
+    zh: { desc2: "", desc4: "" },
+    en: { desc2: "", desc4: "" },
+  },
   icon: "",
   icon2: "",
   // @ts-expect-error 未登记的顶层字段在封闭类型上被拒绝，不接受函数值。

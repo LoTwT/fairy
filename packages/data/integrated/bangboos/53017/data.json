@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Knightboo",
+    "ja": "キシドウボンプ",
+    "ko": "기사부",
+    "zh": "骑士布"
+  },
   "rarity": 3,
   "skillProp": {
     "5301701": {

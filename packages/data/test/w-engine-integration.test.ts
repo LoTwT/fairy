@@ -70,6 +70,12 @@ function expectFailure(
 
 const expectedData = {
   id: 940001,
+  names: {
+    zh: "索引示例音擎",
+    en: "Index Example W-Engine",
+    ja: "サンプル",
+    ko: "예시",
+  },
   codeName: "Weapon_B_Common_Example",
   rarity: 2,
   icon: "Assets/NapResources/UI/Sprite/Example/Weapon_Example.png",
@@ -105,7 +111,7 @@ const requiredDetailFields = [
   "talents",
 ] as const
 
-describe("单 WEngine 纯整合 nanoka-w-engine-reference/1", () => {
+describe("单 WEngine 纯整合 nanoka-w-engine-reference/3", () => {
   it("按独立预期拆分双语，保留索引，冻结输入仍可整合且不修改来源", () => {
     const input = wEngineInput()
     const before = structuredClone(input)
@@ -168,6 +174,7 @@ describe("单 WEngine 纯整合 nanoka-w-engine-reference/1", () => {
     expect(result.details.en!.name).toBe("Example W-Engine")
     expect(ownValue(result.sourceRecord, "en")).toBe("changed index name")
     expect(ownValue(result.sourceRecord, "desc")).toBe("changed index desc")
+    expect(result.data.names.en).toBe("changed index name")
     expect(result.maintenance.diagnostics).toEqual([])
     expectWEngineRoundtrip(result, input)
   })
@@ -229,6 +236,29 @@ describe("单 WEngine 纯整合 nanoka-w-engine-reference/1", () => {
     expect(reordered.maintenance.diagnostics).toEqual(
       result.maintenance.diagnostics,
     )
+  })
+
+  it.each(["zh", "en"])("来源索引缺失 %s 名称即失败", (locale) => {
+    const input = wEngineInput()
+    remove(input.sourceRecord, locale)
+    expectFailure(input, "index", `/${locale}`, "缺失必需字段")
+  })
+
+  it.each(["ja", "ko"])("来源索引 %s 名称可选，缺失时不补造", (locale) => {
+    const input = wEngineInput()
+    remove(input.sourceRecord, locale)
+    const result = integrateWEngine(input)
+    expect(result.data.names).not.toHaveProperty(locale)
+    expect(result.sourceRecord).not.toHaveProperty(locale)
+    expectWEngineRoundtrip(result, input)
+  })
+
+  it.each(["ja", "ko"])("来源索引 %s 名称提供时必须为字符串", (locale) => {
+    for (const value of [0, null, [], {}]) {
+      const input = wEngineInput()
+      change(input.sourceRecord, locale, value)
+      expectFailure(input, "index", `/${locale}`, "字段类型必须为 string")
+    }
   })
 
   it("两次整合互不影响，结果对象树独立", () => {

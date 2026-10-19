@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "Impact +6%",
+      "desc4": "<color=#FFFFFF>Basic Attacks</color>, <color=#FFFFFF>Dash Attacks</color>, and <color=#FFFFFF>Dodge Counters</color> inflict 20% more Daze to the main target."
+    },
+    "ja": {
+      "desc2": "衝撃力+6%。",
+      "desc4": "<color=#FFFFFF>『通常攻撃』</color>、<color=#FFFFFF>『ダッシュ攻撃』</color>、<color=#FFFFFF>『回避反撃』</color>がメインターゲットに与えるブレイク値+20%。"
+    },
+    "ko": {
+      "desc2": "충격력+6%",
+      "desc4": "<color=#FFFFFF>[일반 공격]</color>, <color=#FFFFFF>[대시 공격]</color>, <color=#FFFFFF>[회피 반격]</color>이 주요 공격 타깃에게 주는 그로기 수치가 20% 증가한다."
+    },
+    "zh": {
+      "desc2": "冲击力+6%。",
+      "desc4": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[冲刺攻击]</color>、<color=#FFFFFF>[闪避反击]</color>对主要攻击目标造成的失衡值提升20%。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitShockstarDisco.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitShockstarDisco.png",
-  "id": 31200
+  "id": 31200,
+  "names": {
+    "en": "Shockstar Disco",
+    "ja": "ショックスター・ディスコ",
+    "ko": "쇼크스타 디스코",
+    "zh": "震星迪斯科"
+  }
 }

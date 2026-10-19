@@ -1,5 +1,5 @@
 /**
- * 驱动盘来源结构的登记表（规则 nanoka-drive-disc-reference/2）。
+ * 驱动盘来源结构的登记表（规则 nanoka-drive-disc-reference/3）。
  *
  * 详情与来源摘要分别登记：详情字段的输出名与来源 key 相同，不执行拼写改写；
  * 摘要只校验已登记字段，原记录仍作为 sourceRecord 完整保留，两个来源不互相回退。
@@ -67,21 +67,21 @@ export const driveDiscSummaryFields: DriveDiscSummaryFieldRegistry = {
   icon: "string",
 }
 
-/** 来源摘要登记的语言 key：必须存在，缺失即失败。 */
+/** 来源摘要登记的语言 key：必须存在，缺失即失败；提升为 `data.names` 与 `data.descriptions`。 */
 export const driveDiscSummaryRequiredLocales: readonly string[] = ["zh", "en"]
 
-/** 来源摘要登记的可选语言 key：存在时校验对应结构，缺失时不补造。 */
+/** 来源摘要登记的可选语言 key：存在时校验并提升，缺失时不补造。 */
 export const driveDiscSummaryOptionalLocales: readonly string[] = ["ja", "ko"]
 
-/** 来源摘要各语言对象已登记的文本字段；与详情的同名字段不要求相等。 */
+/** 来源摘要各语言对象已登记的文本字段；name 提升为 names，desc2/desc4 提升为 descriptions。 */
 export const driveDiscSummaryLanguageFields: DriveDiscSummaryLanguageFieldRegistry =
   {
-    /** 摘要中的当前语言套装名称；索引名称与详情名称是两个独立来源。 */
+    /** 摘要中的当前语言套装名称；提升到 `data.names`，与详情名称是两个独立来源。 */
     name: "string",
 
-    /** 摘要中的当前语言 desc2 原文；保留来源取值，不回填详情或另一种语言。 */
+    /** 摘要中的当前语言 desc2 原文；提升到 `data.descriptions`，不回填详情或另一种语言。 */
     desc2: "string",
 
-    /** 摘要中的当前语言 desc4 原文；与 desc2 分别保留，不合并解释。 */
+    /** 摘要中的当前语言 desc4 原文；提升到 `data.descriptions`，与 desc2 分别保留。 */
     desc4: "string",
   }

@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "Anomaly Mastery +8%.",
+      "desc4": "When any squad member uses an <color=#FFFFFF>EX Special Attack</color>, the equipper's Anomaly Proficiency increases by 45 for 8s. If the character using the <color=#FFFFFF>EX Special Attack</color> is not the equipper, the equipper's <color=#FE437E>Ether DMG</color> is increased by 25%."
+    },
+    "ja": {
+      "desc2": "異常掌握+8%",
+      "desc4": "任意のメンバーが<color=#FFFFFF>『強化特殊スキル』</color>を発動した時、装備者の異常マスタリー+45Pt、継続時間8秒。<color=#FFFFFF>『強化特殊スキル』</color>を発動したエージェントが装備者本人でない場合、装備者による<color=#FE437E>エーテル属性ダメージ</color>+25%。"
+    },
+    "ko": {
+      "desc2": "이상 장악력+8%",
+      "desc4": "파티 내 임의의 캐릭터가 <color=#FFFFFF>[강화 특수 스킬]</color> 시전 시, 착용자의 이상 마스터리가 45pt 증가한다. 지속 시간: 8초. 만약 <color=#FFFFFF>[강화 특수 스킬]</color>을 시전한 캐릭터가 착용자 본인이 아닐 경우, 착용자가 주는 <color=#FE437E>에테르 피해</color>가 25% 증가한다."
+    },
+    "zh": {
+      "desc2": "异常掌控+8%。",
+      "desc4": "队伍中任意角色发动<color=#FFFFFF>[强化特殊技]</color>时，装备者的异常精通提升45点，持续8秒；如果发动<color=#FFFFFF>[强化特殊技]</color>的角色不是装备者本人时，装备者造成的<color=#FE437E>以太伤害</color>提升25%。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitSavior.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitSavior.png",
-  "id": 33000
+  "id": 33000,
+  "names": {
+    "en": "Phaethon's Melody",
+    "ja": "「パエトーン」の歌",
+    "ko": "파에톤의 노래",
+    "zh": "法厄同之歌"
+  }
 }

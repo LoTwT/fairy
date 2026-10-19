@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Devilboo",
+    "ja": "アクマデボンプ",
+    "ko": "데빌부",
+    "zh": "恶魔布"
+  },
   "rarity": 3,
   "skillProp": {
     "5400301": {

@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "HP +10%",
+      "desc4": "When using <color=#FFFFFF>EX Special Attack</color>, <color=#FFFFFF>Chain Attack</color>, or <color=#FFFFFF>Ultimate</color>, CRIT Rate increases by 4%, stacking up to 3 times and lasting 15s. Repeated triggers reset the duration. When having 3 stacks of this effect, Sheer DMG increases by 10%."
+    },
+    "ja": {
+      "desc2": "HP+10%",
+      "desc4": "<color=#FFFFFF>『強化特殊スキル』</color>、<color=#FFFFFF>『連携スキル』</color>、<color=#FFFFFF>『終結スキル』</color>を発動時、会心率+4%。この効果は最大3重まで重ね掛け可能、継続時間15秒。重複して発動すると継続時間が更新される。重数が3重に達している場合、与える透徹ダメージ+10%。"
+    },
+    "ko": {
+      "desc2": "HP+10%",
+      "desc4": "<color=#FFFFFF>[강화 특수 스킬]</color>, <color=#FFFFFF>[콤보 스킬]</color>, <color=#FFFFFF>[궁극기]</color> 시전 시 치명타 확률이 4% 증가한다. 최대 중첩: 3스택, 지속 시간: 15초. 중복 발동 시 지속 시간이 갱신되며, 3스택 효과 보유 시 주는 관입 피해가 10% 증가한다."
+    },
+    "zh": {
+      "desc2": "生命值+10%",
+      "desc4": "发动<color=#FFFFFF>[强化特殊技]</color>、<color=#FFFFFF>[连携技]</color>、<color=#FFFFFF>[终结技]</color>时，暴击率提升4%，最多叠加3层，持续15秒，重复触发时刷新持续时间，拥有3层效果时，造成的贯穿伤害提升10%。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitYunkuiTales.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitYunkuiTales.png",
-  "id": 33100
+  "id": 33100,
+  "names": {
+    "en": "Yunkui Tales",
+    "ja": "雲嶽は我に似たり",
+    "ko": "운규 이야기",
+    "zh": "云岿如我"
+  }
 }

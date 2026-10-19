@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Robin",
+    "ja": "ロビン",
+    "ko": "로빈",
+    "zh": "罗宾"
+  },
   "rarity": 4,
   "skillProp": {
     "5401601": {

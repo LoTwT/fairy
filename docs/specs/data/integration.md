@@ -2,16 +2,16 @@
 
 ## 状态与目标
 
-**状态：发布层瘦身已实施完成：归档副本保持原字节与 pretty 排版，构建发布到 `dist/integrated` 时只删除 JSON 字符串之外的排版空白，并生成 `dist/publication.json` 记录归档摘要 → 发布摘要的字节级映射；索引 `files.*.sha256` 继续描述归档字节，`calculationDataVersion.snapshotId` 继续由归档输入计算；因此本次变更不递增 rulesVersion、不触发快照再生，也不改变公开数据值。`definitions/` 不属于该双链，仍按原字节复制。此前已完成：sourceRecord 业务字段登记——agents 索引四语名称提升为 `data.names`、boss 索引 `live_begin`/`live_end` 成对提升为 `data.liveTimeWindow`（缺失时不补造）、agents 补齐索引未知顶层字段维护诊断、发布目录 `AgentName` 改用来源索引 en 名称作为稳定来源（与英文详情显示名解耦，当前 3.2 数据两者取值一致）、agents 与 boss rulesVersion 递增；快照与三类派生制品（skills、attributes、static-effects）已重生成并通过字节级验收（仅 agents data、boss data、index 与钉值变更）。登记范围说明：boss 索引 `zone_type`/`sort` 与已提升的详情孪生字段（`zoneType`/`priority`）本地 3.2 全 47 条同值，按 schema 归属不重复提升、原值保留归档；驱动盘索引摘要四语描述的提升推迟到发布层瘦身周期之后（它是 v4 瘦身的前置之一）；`DriveDiscName`/`WEngineName`/`BangbooName` 仍读英文详情名，名称换源暂只覆盖 `AgentName`。此前一轮已完成：整合规则严格化——未知字段由细节流容忍改为整合失败、共享字段改为严格共享（同有或全缺）、全类别 rulesVersion 递增、shiyu `zone` 数值骨架提升到 `data`、boss `modes`/`zone` 判别联合与 `data`/`details` 类型封闭化；注意 v2 显式迁移随之实际退役：真实 v2 外壳都停留在最后一个 v2 规则版本，与当前登记表版本不同，按 §7 的迁移契约一律拒绝，需按当前规则从 raw 重新生成；后续可单独评估是否删除迁移代码。此前已实现：单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令；固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取。正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
+**状态：0.4 数据名称提升与 definitions 发布瘦身已实施完成：drive-discs（规则 `/3`）把来源索引四语名称与 `desc2`/`desc4` 提升为 `data.names` / `data.descriptions`，WEngine 与 Bangboo（规则 `/3`）把索引四语名称提升为 `data.names`；zh/en 必填、ja/ko 可选，`details` 与 `sourceRecord` 保持独立来源。agents、drive-discs、w-engines、bangboos 的发布目录统一读取 `data.names.en`。integrated 归档保持原字节与 pretty 排版，发布到 `dist/integrated` 时只删除 JSON 字符串之外的排版空白，并以 `dist/publication.json` 记录归档摘要 → 发布摘要；`dist/definitions` 同样只删除字符串外空白，并以独立的 `dist/definitions-publication.json` 记录归档 → 发布摘要，definitions 归档与两份内部 manifest 的 `artifacts` 摘要继续描述归档字节。快照及 attributes、skills、static-effects 已按冻结的 3.2 raw 重新生成。此前已完成：sourceRecord 业务字段登记——agents 索引四语名称提升为 `data.names`、boss 索引 `live_begin`/`live_end` 成对提升为 `data.liveTimeWindow`（缺失时不补造）、agents 补齐索引未知顶层字段维护诊断、发布目录 `AgentName` 改用来源索引 en 名称作为稳定来源（与英文详情显示名解耦，当前 3.2 数据两者取值一致）、agents 与 boss rulesVersion 递增；快照与三类派生制品（skills、attributes、static-effects）已重生成并通过字节级验收（仅 agents data、boss data、index 与钉值变更）。登记范围说明：boss 索引 `zone_type`/`sort` 与已提升的详情孪生字段（`zoneType`/`priority`）本地 3.2 全 47 条同值，按 schema 归属不重复提升、原值保留归档；本次补齐驱动盘索引描述与其余名称类别的换源；`DriveDiscName`/`WEngineName`/`BangbooName` 现与 `AgentName` 一样读取来源索引 en 名称，与英文详情显示名解耦。此前一轮已完成：整合规则严格化——未知字段由细节流容忍改为整合失败、共享字段改为严格共享（同有或全缺）、全类别 rulesVersion 递增、shiyu `zone` 数值骨架提升到 `data`、boss `modes`/`zone` 判别联合与 `data`/`details` 类型封闭化；注意 v2 显式迁移随之实际退役：真实 v2 外壳都停留在最后一个 v2 规则版本，与当前登记表版本不同，按 §7 的迁移契约一律拒绝，需按当前规则从 raw 重新生成；后续可单独评估是否删除迁移代码。此前已实现：单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令；固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取。正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
 `data.json` 与 `details.{locale}.json` 为已确认的文件名，正式类型与测试使用同一命名。
 已接入生产类别：`agents`（规则 `nanoka-agent-reference/7`）、`drive-discs`（规则
-`nanoka-drive-disc-reference/2`）、`w-engines`（规则 `nanoka-w-engine-reference/2`）、`bangboos`（规则
-`nanoka-bangboo-reference/2`）、`monsters`（规则 `nanoka-monster-reference/2`）、`shiyu`（规则
+`nanoka-drive-disc-reference/3`）、`w-engines`（规则 `nanoka-w-engine-reference/3`）、`bangboos`（规则
+`nanoka-bangboo-reference/3`）、`monsters`（规则 `nanoka-monster-reference/2`）、`shiyu`（规则
 `nanoka-shiyu-reference/3`）、`boss`（规则 `nanoka-boss-reference/4`）与 `simul`（规则
 `nanoka-simul-reference/3`）。驱动盘单实体规则与实现状态见
-[驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference2)，WEngine 单实体规则与实现状态见
-[WEngine 单实体实现规则](#wengine-单实体实现规则-nanoka-w-engine-reference2)，Bangboo 单实体规则与实现状态见
-[Bangboo 单实体实现规则](#bangboo-单实体实现规则-nanoka-bangboo-reference2)，Monster 单实体规则与实现状态见
+[驱动盘单实体实现规则](#驱动盘单实体实现规则-nanoka-drive-disc-reference3)，WEngine 单实体规则与实现状态见
+[WEngine 单实体实现规则](#wengine-单实体实现规则-nanoka-w-engine-reference3)，Bangboo 单实体规则与实现状态见
+[Bangboo 单实体实现规则](#bangboo-单实体实现规则-nanoka-bangboo-reference3)，Monster 单实体规则与实现状态见
 [Monster 单实体实现规则](#monster-单实体实现规则-nanoka-monster-reference2)，Shiyu 单实体规则与实现状态见
 [Shiyu 单实体实现规则](#shiyu-单实体实现规则-nanoka-shiyu-reference3)，Boss 单实体规则与实现状态见
 [Boss 单实体实现规则](#boss-单实体实现规则-nanoka-boss-reference4)，Simul 单实体规则与实现状态见
@@ -81,8 +81,7 @@ core：计算
 `raw` 继续按来源版本保存；`integrated` 维护一份当前数据，不设来源或 `{version}/` 子目录，来源信息保留在 `index.json`。`definitions` 维护经核对的
 计算语义制品：`definitions/effects/starter.json` 是首批正式效果规则集（耀嘉音核心攻击力转化、2 影核心强化与啄木鸟电音两件套暴击率），内容由
 [统一效果规则模型](../effects/index.md)的契约约束，保留来源定位与规则集身份/修订信息；随包以独立 JSON 子路径分发，不进入根入口，也不依赖
-`@randomplay/core`。`definitions` 是 Git 跟踪的静态制品，不属于受管理 `integrated` 协议，无控制目录、锁或本机记录；构建时逐文件字节复验后复制
-到 `dist/definitions/`。证据不足的条款（丽娜、玲珑妆匣等）保留为效果规范中明确标注的测试实例，不混入正式规则集。
+`@randomplay/core`。`definitions` 是 Git 跟踪的静态制品，不属于受管理 `integrated` 协议，无控制目录、锁或本机记录；构建时逐文件字节复验后冻结归档，再发布压缩副本并生成 `dist/definitions-publication.json` 摘要映射。证据不足的条款（丽娜、玲珑妆匣等）保留为效果规范中明确标注的测试实例，不混入正式规则集。
 
 实体目录是维护和读取的基本单位。使用方可以读取全部数据，也可以通过索引只取指定代理人的公共部分和指定
 语言；完整可获取不等于必须一次加载全库。`details` 本身是该语言的剩余来源内容，需结合 `data` 才能还原详情。
@@ -125,14 +124,15 @@ core：计算
 - 字段值不变，包括机器标签、文本、模板、资源路径、零空值和数组顺序；不改写字符串内部的下划线。
 - 未识别字段和未知容器的成员不进入制品：细节流任一层出现未登记字段即整合失败，须先在结构登记表登记
   或确认来源结构后再进入制品；确认其属于结构字段后再登记拼写转换。不能猜测未知对象是记录还是字典。
-- `index.agents[id].sourceRecord` 是独立来源索引记录，保留原始 key（含未登记字段）。索引业务字段按
-  类别登记：agents 的四语名称提升为 `data.names`，boss 的 `live_begin`/`live_end` 成对提升为
-  `data.liveTimeWindow`；已登记字段按登记语义校验（必需、类型、成对性），未登记顶层字段保留原值并
-  进入维护诊断，不递归推断未知容器。索引自身的元信息使用 camelCase。
+- 各成员的 `sourceRecord` 是独立来源索引记录，保留原始 key（含未登记字段）。索引业务字段按
+  类别登记：agents、drive-discs、w-engines、bangboos 的索引名称分别提升为 `data.names`
+  （drive-discs 另把各语言 `desc2`/`desc4` 提升为 `data.descriptions`）；boss 的
+  `live_begin`/`live_end` 成对提升为 `data.liveTimeWindow`。已登记字段按登记语义校验（必需、类型、
+  成对性），未登记顶层字段保留原值并进入维护诊断，不递归推断未知容器。索引自身的元信息使用 camelCase。
 - 来源字段与已登记的驼峰目标名称发生冲突时必须失败，包括目标名已经被未知字段占用的情况；不能覆盖或合并值。
-  索引记录提升的 `names` 与 `liveTimeWindow` 是新增输出名，不与任何来源 key 同名，因此不受该规则约束；
-  它们各自按索引登记语义校验（必需、类型、成对性），不与详情输出名冲突（详情 `name` 留在 details，
-  索引名称只进 `data.names`）。
+  索引记录提升的 `names`、`descriptions` 与 `liveTimeWindow` 是新增输出名，不与任何来源 key 同名，
+  因此不受该规则约束；它们各自按索引登记语义校验（必需、类型、成对性/可选性），不与详情输出名冲突
+  （详情 `name` 留在 details，索引名称只进 `data.names`）。
 
 每个显式声明的 TS 字段，包括嵌套字段，都应有独立 JSDoc。注释说明来源 key（发生改名时）、内容或身份空间、
 已知单位和缩放、缺失或空值的处理；尚未确认的用途、单位或编码含义要明确标记，不能把推测写成事实。
@@ -748,7 +748,7 @@ pnpm --filter @randomplay/data test
 pnpm --filter @randomplay/data verify:pack
 ```
 
-### 驱动盘单实体实现规则 `nanoka-drive-disc-reference/2`
+### 驱动盘单实体实现规则 `nanoka-drive-disc-reference/3`
 
 来源说明见 [Nanoka Drive Discs](../nanoka/equipment.md)：上游实体 `equipment`，整合类别登记名为 `drive-discs`，
 类型与函数统一使用 `DriveDisc` 命名。每条记录表示一个驱动盘套装；单件槽位、主副词条、强化面板、效果计算及
@@ -763,15 +763,18 @@ core 映射不属于本规则。
 
 字段归属：
 
-| 来源字段                          | `data.json`            | `details.{locale}.json` |
-| --------------------------------- | ---------------------- | ----------------------- |
-| `id`                              | 数值套装 ID            | 同值身份副本            |
-| `icon`、`icon2`                   | 原值，两个字段分别保存 | 无重复载荷              |
-| `name`、`desc2`、`desc4`、`story` | 无                     | 当前语言原文            |
-| 派生 `locale`                     | 无                     | 输入语言标识            |
+| 来源字段                                 | `data.json`                                                   | `details.{locale}.json` |
+| ---------------------------------------- | ------------------------------------------------------------- | ----------------------- |
+| `id`                                     | 数值套装 ID                                                   | 同值身份副本            |
+| 索引记录各语言的 `name`                  | `names.{locale}`；zh/en 必填，ja/ko 可选                      | 无重复载荷              |
+| 索引记录各语言的 `desc2`、`desc4`        | `descriptions.{locale}.{desc2,desc4}`；zh/en 必填，ja/ko 可选 | 无重复载荷              |
+| `icon`、`icon2`                          | 原值，两个字段分别保存                                        | 无重复载荷              |
+| 详情的 `name`、`desc2`、`desc4`、`story` | 无                                                            | 当前语言原文            |
+| 派生 `locale`                            | 无                                                            | 输入语言标识            |
 
 `desc2`、`desc4`、`icon2` 继续使用来源用词：不解析效果、不推断槽位对应关系或新的业务含义。索引摘要与语言详情
-是两个独立来源：摘要完整保存在 `sourceRecord`，不与详情去重，同名字段不要求相等，也不互相回退。
+是两个独立来源：摘要完整保存在 `sourceRecord`，名称与描述分别提升到 `data.names` / `data.descriptions`；
+详情字段继续留在各语言 `details`，同名字段不要求相等，也不互相回退。
 
 校验边界：
 
@@ -782,15 +785,17 @@ core 映射不属于本规则。
    不回退。纯函数允许显式语言子集；要求完整 `zh`、`en` 的职责留在快照构建层。
 4. `icon` 与 `icon2` 是必需的公共字符串：每个语言都必须提供，跨语言完整值必须一致，冲突即失败；即使
    两个字段取值相等也分别保留。
-5. 来源摘要必须提供字符串 `icon` 与 `zh`、`en` 语言对象的 `name`、`desc2`、`desc4`；`ja`、`ko` 存在时校验
-   对应结构，缺失时不补造；摘要与详情的同名字段不要求相等。
+5. 来源摘要必须提供字符串 `icon` 与 `zh`、`en` 语言对象的 `name`、`desc2`、`desc4`；它们分别提升为
+   `data.names.{zh,en}` 与 `data.descriptions.{zh,en}`。`ja`、`ko` 存在时同样校验并提升，缺失时不补造；
+   摘要与详情的同名字段不要求相等。
 6. 未登记字段处理：详情未知字段整合失败；来源摘要（`sourceRecord`）的未知字段原值保留并进入维护诊断，
    已登记字段按登记语义校验（必需、类型），提升字段只含本节登记的业务字段。不因跨语言相等而自动共享。
    来源字段 `locale` 与派生 `locale` 重名时失败，不能覆盖。
 7. 空字符串、零、`null`、空数组、空对象、数组顺序和富文本按来源保留；已登记字段仍须满足其明确类型。
    非 JSON 值、非法数值、访问器、Symbol key 与循环引用复用共享保真边界。
-8. 失败抛出 `DriveDiscIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。`name` 在本层按
-   字符串保留；公开英文名称的非空与类内唯一检查属于发布目录生成，不属于本规则。
+8. 失败抛出 `DriveDiscIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。详情 `name` 与
+   索引各语言名称都按字符串保留；公开 `DriveDiscName` 读取 `data.names.en`，其非空与类内唯一检查属于发布
+   目录生成，不属于本规则。
 
 实现状态：**纯整合已实现**，由[合成整合测试](../../../packages/data/test/drive-disc-integration.test.ts)、
 [独立测试侧还原](../../../packages/data/test/fixtures/drive-disc-roundtrip.ts)、
@@ -800,7 +805,7 @@ core 映射不属于本规则。
 驱动盘；成员文件身份检查在类别登记表中显式实现。公开的驱动盘类型、名称 catalog 与读取 API 已由包根入口
 按[消费契约](consumption.md)提供。
 
-### WEngine 单实体实现规则 `nanoka-w-engine-reference/2`
+### WEngine 单实体实现规则 `nanoka-w-engine-reference/3`
 
 来源说明见 [Nanoka W-Engines](../nanoka/weapon.md)：上游实体 `weapon`，整合类别登记名为 `w-engines`，
 类型与函数统一使用 `WEngine` 命名。每条记录表示一个 WEngine；材料字符串解析、百分比换算、成长公式解释、
@@ -818,6 +823,7 @@ core 映射不属于本规则。
 | 来源字段                         | `data.json`                                                                | `details.{locale}.json`                                     |
 | -------------------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------- |
 | `id`                             | 数值 WEngine ID                                                            | 同值身份副本                                                |
+| 索引记录各语言的名称             | `names.{locale}`；zh/en 必填，ja/ko 可选                                   | 无重复载荷                                                  |
 | `code_name`                      | `codeName`，严格公共字段                                                   | 无重复载荷                                                  |
 | `rarity`、`icon`                 | `rarity`、`icon` 原值                                                      | 无重复载荷                                                  |
 | `level`                          | `level` 完整成长块，阶段 `exp`、`rate`、`rate2` 原值                       | 无重复载荷                                                  |
@@ -851,15 +857,17 @@ core 映射不属于本规则。
 5. 来源字段与登记输出名冲突（如同时存在 `code_name` 与 `codeName`、`star_rate` 与 `starRate`）时失败，
    不覆盖、不合并；`locale`、`classificationIds` 与派生辅助字段重名时同样失败。
 6. 来源索引记录的已知顶层字段集中登记在结构登记表，依据来源说明与本地 3.2 `weapon.json` 的 100 条记录为
-   `atk`、`desc`、`en`、`icon`、`ja`、`ko`、`rank`、`sub`、`type`、`zh`。登记只用于识别未知字段：
-   不要求这些字段存在、不校验其类型，`sourceRecord` 仍按原 key、原值完整保留。未知顶层字段按来源 key 的
-   代码单元顺序生成 `locale: "index"` 的维护诊断，未知容器内部不递归推断字段身份；索引诊断先于语言诊断输出。
+   `atk`、`desc`、`en`、`icon`、`ja`、`ko`、`rank`、`sub`、`type`、`zh`。`zh`/`en` 名称必填并提升为
+   `data.names.zh` / `data.names.en`，`ja`/`ko` 存在时提升，缺失时不补造；其余字段只用于识别未知字段。
+   `sourceRecord` 仍按原 key、原值完整保留。未知顶层字段按来源 key 的代码单元顺序生成 `locale: "index"`
+   的维护诊断，未知容器内部不递归推断字段身份；索引诊断先于语言诊断输出。
 7. 未登记字段处理：详情未知字段整合失败；`level`、`stars`、`talents` 等共享块内部的未知阶段成员同样
    整合失败，不再随整块提取到 `data`；`sourceRecord` 的未知字段保留并进入维护诊断。
 8. 空字符串、零、`null`、空数组、空对象、数组顺序、材料字符串、数值尺度与显示格式按来源保留；
    已登记字段仍须满足其明确类型。非 JSON 值、非法数值、访问器、Symbol key 与循环引用复用共享保真边界。
-9. 失败抛出 `WEngineIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。`name` 在本层按
-   字符串保留；公开英文名称的非空与类内唯一检查属于发布目录生成，不属于本规则。
+9. 失败抛出 `WEngineIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。详情 `name` 与
+   索引各语言名称都按字符串保留；公开 `WEngineName` 读取 `data.names.en`，其非空与类内唯一检查属于发布
+   目录生成，不属于本规则。
 
 实现状态：**纯整合已实现**，由[合成整合测试](../../../packages/data/test/w-engine-integration.test.ts)、
 [独立测试侧还原](../../../packages/data/test/fixtures/w-engine-roundtrip.ts)、
@@ -870,7 +878,7 @@ core 映射不属于本规则。
 WEngine；成员文件身份检查在类别登记表中显式实现。公开的 WEngine 类型、名称 catalog 与读取 API 已由包根入口
 按[消费契约](consumption.md)提供。
 
-### Bangboo 单实体实现规则 `nanoka-bangboo-reference/2`
+### Bangboo 单实体实现规则 `nanoka-bangboo-reference/3`
 
 来源说明见 [Nanoka Bangboos](../nanoka/bangboo.md)：上游实体 `bangboo`，整合类别登记名为 `bangboos`，
 类型与函数统一使用 `Bangboo` 命名。每条记录表示一个邦布；计算语义、definitions/core 映射、材料解释、
@@ -886,18 +894,19 @@ WEngine；成员文件身份检查在类别登记表中显式实现。公开的 
 
 字段归属（第一列为来源拼写，后两列为转换后的字段名）：
 
-| 来源字段         | `data.json`                                                                                                           | `details.{locale}.json`                                        |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
-| `id`             | 数值邦布 ID                                                                                                           | 同值身份副本                                                   |
-| `rarity`、`icon` | `rarity`、`icon` 原值；合法空图标原样保留                                                                             | 无重复载荷                                                     |
-| `stats`          | 完整共享属性块，保留全部成员及原始数值                                                                                | 无重复载荷                                                     |
-| `skill_prop`     | `skillProp` 完整共享块，保留技能 ID、属性 ID、参数原值与格式                                                          | 无重复载荷                                                     |
-| `level`          | 共有阶段的 `hp_max`、`attack`、`defence`、`level_max`、`level_min`、`materials` 与共有 `extra` 属性的 `prop`、`value` | 对应阶段 `extra` 的 `name`、`format` 及未提取的本语言内容      |
-| `code_name`      | 无                                                                                                                    | `codeName` 当前语言原值                                        |
-| `name`、`desc`   | 无                                                                                                                    | 当前语言原文                                                   |
-| `skill`          | 无                                                                                                                    | 完整本地化结构（`level`、`name`、`desc`、`property`、`param`） |
-| 派生 `locale`    | 无                                                                                                                    | 输入语言标识                                                   |
-| 索引中的实体记录 | 不覆盖到详情                                                                                                          | 完整保存在 `sourceRecord`，不修改原 key                        |
+| 来源字段             | `data.json`                                                                                                           | `details.{locale}.json`                                        |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| `id`                 | 数值邦布 ID                                                                                                           | 同值身份副本                                                   |
+| 索引记录各语言的名称 | `names.{locale}`；zh/en 必填，ja/ko 可选                                                                              | 无重复载荷                                                     |
+| `rarity`、`icon`     | `rarity`、`icon` 原值；合法空图标原样保留                                                                             | 无重复载荷                                                     |
+| `stats`              | 完整共享属性块，保留全部成员及原始数值                                                                                | 无重复载荷                                                     |
+| `skill_prop`         | `skillProp` 完整共享块，保留技能 ID、属性 ID、参数原值与格式                                                          | 无重复载荷                                                     |
+| `level`              | 共有阶段的 `hp_max`、`attack`、`defence`、`level_max`、`level_min`、`materials` 与共有 `extra` 属性的 `prop`、`value` | 对应阶段 `extra` 的 `name`、`format` 及未提取的本语言内容      |
+| `code_name`          | 无                                                                                                                    | `codeName` 当前语言原值                                        |
+| `name`、`desc`       | 无                                                                                                                    | 当前语言原文                                                   |
+| `skill`              | 无                                                                                                                    | 完整本地化结构（`level`、`name`、`desc`、`property`、`param`） |
+| 派生 `locale`        | 无                                                                                                                    | 输入语言标识                                                   |
+| 索引中的实体记录     | 不覆盖到详情                                                                                                          | 完整保存在 `sourceRecord`，不修改原 key                        |
 
 `codeName` 始终留在对应语言 details：各语言拼写可以不同（本地 3.2 的 `54010` 为 `BiggestFan` 与
 `Biggest Fan`），不套用代理人按首个语言取值的特例，也不要求跨语言相等。
@@ -932,15 +941,17 @@ key 原样保留。技能 `param` 中的引用、分隔符、百分号及语言�
    `hp_max` 与 `hpMax`、`element_accumulation_value` 与 `elementAccumulationValue`）时失败，不覆盖、不合并；
    来源 `locale` 与派生辅助字段重名时同样失败。
 5. 来源索引记录的已知顶层字段集中登记在结构登记表，依据来源说明与本地 3.2 `bangboo.json` 的 42 条记录为
-   `icon`、`rank`、`codename`、`en`、`desc`、`ko`、`zh`、`ja`。登记只用于识别未知字段：不要求这些字段存在、
-   不校验其类型，`sourceRecord` 仍按原 key、原值完整保留。未知顶层字段按来源 key 的代码单元顺序生成
-   `locale: "index"` 的维护诊断，未知容器内部不递归推断字段身份；索引诊断先于语言诊断输出。
+   `icon`、`rank`、`codename`、`en`、`desc`、`ko`、`zh`、`ja`。`zh`/`en` 名称必填并提升为
+   `data.names.zh` / `data.names.en`，`ja`/`ko` 存在时提升，缺失时不补造；其余字段只用于识别未知字段。
+   `sourceRecord` 仍按原 key、原值完整保留。未知顶层字段按来源 key 的代码单元顺序生成 `locale: "index"`
+   的维护诊断，未知容器内部不递归推断字段身份；索引诊断先于语言诊断输出。
 6. 未登记字段处理：详情未知字段与 `stats`、`skillProp`、等级阶段及 `extra` 各层的未知成员均整合失败，
    不再随整块提取到 `data`；`sourceRecord` 的未知字段保留并进入维护诊断。
 7. 空字符串、零、`null`、空数组、空对象、数组顺序、数值尺度与显示格式按来源保留；已登记字段仍须满足其
    明确类型。非 JSON 值、非法数值、访问器、Symbol key 与循环引用复用共享保真边界。
-8. 失败抛出 `BangbooIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。`name` 在本层按
-   字符串保留；公开英文名称的非空与类内唯一检查属于发布目录生成，不属于本规则。
+8. 失败抛出 `BangbooIntegrationError`，携带实体 ID、语言或 `index` 以及来源 JSON Pointer。详情 `name` 与
+   索引各语言名称都按字符串保留；公开 `BangbooName` 读取 `data.names.en`，其非空与类内唯一检查属于发布
+   目录生成，不属于本规则。
 
 实现状态：**纯整合已实现**，由[合成整合测试](../../../packages/data/test/bangboo-integration.test.ts)、
 [独立测试侧还原](../../../packages/data/test/fixtures/bangboo-roundtrip.ts)、
@@ -1358,8 +1369,8 @@ fairy-integrated-snapshot-<独占后缀>/
 
 [类别登记表](../../../packages/data/scripts/nanoka-integration/snapshot-entities.ts)显式登记已接入类别；
 当前为 `agents`（来源实体 `character`，规则 `nanoka-agent-reference/7`）、`drive-discs`（来源实体
-`equipment`，规则 `nanoka-drive-disc-reference/2`）、`w-engines`（来源实体 `weapon`，规则
-`nanoka-w-engine-reference/2`）、`bangboos`（来源实体 `bangboo`，规则 `nanoka-bangboo-reference/2`）、
+`equipment`，规则 `nanoka-drive-disc-reference/3`）、`w-engines`（来源实体 `weapon`，规则
+`nanoka-w-engine-reference/3`）、`bangboos`（来源实体 `bangboo`，规则 `nanoka-bangboo-reference/3`）、
 `monsters`（来源实体 `monster`，规则 `nanoka-monster-reference/2`）、`shiyu`（来源实体 `shiyu`，规则
 `nanoka-shiyu-reference/3`）、`boss`（来源实体 `boss`，规则 `nanoka-boss-reference/4`）与 `simul`
 （来源实体 `simul`，规则 `nanoka-simul-reference/3`），

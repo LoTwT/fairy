@@ -9,10 +9,11 @@ import {
   preparePublication,
 } from "./scripts/prepare-publication.ts"
 import { verifyIntegratedSnapshot } from "./scripts/nanoka-integration/snapshot-verify.ts"
+import { prepareDefinitions } from "./scripts/prepare-definitions.ts"
 import {
-  prepareDefinitions,
-  verifyDefinitionsCopy,
-} from "./scripts/prepare-definitions.ts"
+  verifyDefinitionsPublication,
+  writeMinifiedDefinitionsPublication,
+} from "./scripts/definitions-publication.ts"
 import {
   verifyMinifiedPublication,
   writeMinifiedPublication,
@@ -127,15 +128,30 @@ export default defineConfig(async (options) => {
           publicationDigests: (path: string) =>
             publication.files[path]?.publicationSha256,
         })
-        await cp(
-          join(buildDirectory, ".generated/definitions"),
-          join(packageDirectory, "dist/definitions"),
-          { recursive: true },
+        // definitions 归档保持原字节；dist 只发布删除字符串外排版空白的副本，
+        // 并以独立清单记录归档摘要 → 发布摘要的字节级映射。
+        const definitionsDirectory = join(
+          buildDirectory,
+          ".generated/definitions",
         )
-        await verifyDefinitionsCopy(
-          join(buildDirectory, ".generated/definitions"),
-          join(packageDirectory, "dist/definitions"),
+        const publishedDefinitionsDirectory = join(
+          packageDirectory,
+          "dist/definitions",
         )
+        const definitionsManifestPath = join(
+          packageDirectory,
+          "dist/definitions-publication.json",
+        )
+        await writeMinifiedDefinitionsPublication({
+          archiveDirectory: definitionsDirectory,
+          publicationDirectory: publishedDefinitionsDirectory,
+          manifestPath: definitionsManifestPath,
+        })
+        await verifyDefinitionsPublication({
+          publicationDirectory: publishedDefinitionsDirectory,
+          manifestPath: definitionsManifestPath,
+          archiveDirectory: definitionsDirectory,
+        })
         await rm(buildDirectory, { recursive: true, force: true })
       },
     },

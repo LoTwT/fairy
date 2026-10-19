@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Boollseye",
+    "ja": "ズバットボンプ",
+    "ko": "과녁부",
+    "zh": "飞靶布"
+  },
   "rarity": 3,
   "skillProp": {
     "5300901": {

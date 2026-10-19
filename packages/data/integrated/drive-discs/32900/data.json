@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "The DMG of <color=#FFFFFF>Aftershocks</color> and <color=#FFFFFF>Dash Attacks</color> is increased by 15%.",
+      "desc4": "Upon hitting an enemy with an <color=#FFFFFF>Aftershock</color> or <color=#FFFFFF>Dash Attack</color>, if the DMG dealt aligns with the equipper's attribute, the equipper gains 1 stack of a buff effect, at most once per use of a skill. For each stack, the equipper's ATK increases by 4%, and CRIT Rate increases by 4%. The effect can stack up to 3 times and lasts for 15s. Repeated triggers reset the duration."
+    },
+    "ja": {
+      "desc2": "<color=#FFFFFF>『追加攻撃』</color>と<color=#FFFFFF>『ダッシュ攻撃』</color>の与ダメージ+15%。",
+      "desc4": "<color=#FFFFFF>『追加攻撃』</color>または<color=#FFFFFF>『ダッシュ攻撃』</color>が敵に命中した時、与えたダメージが装備者の属性と一致している場合、バフ効果を1重獲得する、1回のスキルにおいて1回のみ発動可能。バフ効果1重につき、装備者の攻撃力+4%、会心率+4%。最大3重まで重ね掛け可能、継続時間15秒、重複して発動すると継続時間が更新される。"
+    },
+    "ko": {
+      "desc2": "<color=#FFFFFF>[여진 공격]</color> 및 <color=#FFFFFF>[대시 공격]</color>으로 주는 피해가 15% 증가한다.",
+      "desc4": "<color=#FFFFFF>[여진 공격]</color> 혹은 <color=#FFFFFF>[대시 공격]</color>이 적에게 명중 시, 만약 주는 피해가 착용자의 속성과 일치하면 버프 효과를 1스택 획득한다. 동일한 공격 한 번에 최대 1회 발동한다. 보유한 버프 효과 1스택당 착용자의 공격력이 4% 증가하고, 치명타 확률이 4% 증가한다. 최대 중첩: 3스택, 지속 시간: 15초, 중복 발동 시 지속 시간이 갱신된다."
+    },
+    "zh": {
+      "desc2": "<color=#FFFFFF>[追加攻击]</color>和<color=#FFFFFF>[冲刺攻击]</color>造成的伤害提升15%。",
+      "desc4": "<color=#FFFFFF>[追加攻击]</color>或<color=#FFFFFF>[冲刺攻击]</color>命中敌人时，若造成的伤害与装备者的属性一致，则获得1层增益效果，同一招式内最多触发一次；每拥有1层增益效果，装备者的攻击力提升4%，暴击率提升4%，最多叠加3层，持续15秒，重复触发时刷新持续时间。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitShadow.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitShadow.png",
-  "id": 32900
+  "id": 32900,
+  "names": {
+    "en": "Shadow Harmony",
+    "ja": "シャドウハーモニー",
+    "ko": "그림자처럼 함께",
+    "zh": "如影相随"
+  }
 }

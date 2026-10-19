@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "<color=#F0D12B>Physical DMG</color> +10%",
+      "desc4": "Whenever a squad member inflicts <color=#F0D12B>Assault</color> on an enemy, the equipper deals 35% additional DMG to the target for 12s."
+    },
+    "ja": {
+      "desc2": "<color=#F0D12B>物理属性ダメージ</color>+10%。",
+      "desc4": "任意のメンバーが敵に<color=#F0D12B>[強撃]</color>効果を付与した時、装備者がターゲットに与えるダメージ+35%、継続時間12秒。"
+    },
+    "ko": {
+      "desc2": "<color=#F0D12B>물리 피해</color>+10%",
+      "desc4": "파티 내 임의의 캐릭터가 적에게 <color=#F0D12B>[강타]</color> 효과 부여 시 착용자가 타깃에게 주는 피해가 35% 증가한다. 지속 시간: 12초"
+    },
+    "zh": {
+      "desc2": "<color=#F0D12B>物理伤害</color>+10%。",
+      "desc4": "队伍中任意角色对敌人施加<color=#F0D12B>[强击]</color>效果时，装备者对目标造成的伤害提升35%，持续12秒。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitFangedMetal.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitFangedMetal.png",
-  "id": 32600
+  "id": 32600,
+  "names": {
+    "en": "Fanged Metal",
+    "ja": "獣牙のヘヴィメタル",
+    "ko": "송곳니 메탈",
+    "zh": "獠牙重金属"
+  }
 }

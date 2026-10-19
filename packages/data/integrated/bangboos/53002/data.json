@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Luckyboo",
+    "ja": "オマネキボンプ",
+    "ko": "럭키부",
+    "zh": "招财布"
+  },
   "rarity": 3,
   "skillProp": {
     "5300201": {

@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "<color=#A6C5FD>Wind DMG</color> +10%.",
+      "desc4": "When the equipper uses an <color=#FFFFFF>EX Special Attack</color>, their Anomaly Proficiency increases by 25, stacking up to 2 times, and lasting 40s; repeated triggers reset the duration. When the equipper triggers <color=#A6C5FD>Windswept</color>, their DMG increases by 18% for 40s. Repeated triggers reset the duration."
+    },
+    "ja": {
+      "desc2": "<color=#A6C5FD>風属性ダメージ</color>+10%。",
+      "desc4": "装備者が<color=#FFFFFF>『強化特殊スキル』</color>を発動した時、装備者の異常マスタリー+25Pt、最大2重まで重ね掛け可能、継続時間40秒、重複して発動すると継続時間が更新される。装備者が<color=#A6C5FD>「風化」</color>効果を発動させた時、装備者の与ダメージ+18%、継続時間40秒、重複して発動すると継続時間が更新される。"
+    },
+    "ko": {
+      "desc2": "<color=#A6C5FD>바람 속성 피해</color>+10%",
+      "desc4": "착용자가 <color=#FFFFFF>[강화 특수 스킬]</color> 시전 시, 착용자의 이상 마스터리가 25pt 증가한다. 최대 중첩: 2스택, 지속 시간: 40초, 중복 발동 시 지속 시간이 갱신된다. 착용자가 <color=#A6C5FD>[풍화]</color> 효과 발동 후, 착용자가 주는 피해가 18% 증가한다. 지속 시간: 40초, 중복 발동 시 지속 시간이 갱신된다."
+    },
+    "zh": {
+      "desc2": "<color=#A6C5FD>风属性伤害</color>+10%。",
+      "desc4": "装备者发动<color=#FFFFFF>[强化特殊技]</color>时，装备者异常精通提升25点，最多叠加2层，持续40秒，重复触发时刷新持续时间；装备者触发<color=#A6C5FD>[风化]</color>效果后，装备者造成的伤害提升18%，持续40秒，重复触发时刷新持续时间。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitWutheringSalon.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitWutheringSalon.png",
-  "id": 33900
+  "id": 33900,
+  "names": {
+    "en": "Wuthering Salon",
+    "ja": "風鳴りのサロン",
+    "ko": "울부짖는 살롱",
+    "zh": "呼啸沙龙"
+  }
 }
