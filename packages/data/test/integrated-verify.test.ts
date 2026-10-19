@@ -4,7 +4,10 @@ import { tmpdir } from "node:os"
 import { dirname, join } from "node:path"
 import { afterEach, describe, expect, it, vi } from "vitest"
 import type { IntegratedSnapshotEntityProducer } from "../scripts/nanoka-integration/snapshot-entities.ts"
-import { nanokaAgentsSnapshotEntity } from "../scripts/nanoka-integration/snapshot-entities.ts"
+import {
+  nanokaAgentsSnapshotEntity,
+  nanokaBossSnapshotEntity,
+} from "../scripts/nanoka-integration/snapshot-entities.ts"
 import { buildIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-build.ts"
 import { verifyIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-verify.ts"
 import { verifyNanokaAgentArtifact } from "../scripts/nanoka-integration/verify.ts"
@@ -106,6 +109,34 @@ async function fixture(options: { widgets?: boolean } = {}) {
       : [
           nanokaAgentsSnapshotEntity,
         ]) as readonly IntegratedSnapshotEntityProducer[],
+  }
+}
+
+/** Boss 专用合成输入：只写 boss 索引与详情，供聚合骨架复验用例使用。 */
+async function bossFixture(): Promise<Fixture> {
+  const root = await fs.mkdtemp(join(tmpdir(), "fairy-boss-verify-test-"))
+  temporaryDirectories.push(root)
+  const rawRoot = join(root, "raw", "nanoka")
+  const version = "synthetic-1"
+  const temporaryParent = join(root, "output")
+  await fs.mkdir(temporaryParent)
+  await writeSyntheticRaw({
+    rawRoot,
+    version,
+    bossIds: ["980001"],
+    driveDiscIds: [],
+    weaponIds: [],
+    bangbooIds: [],
+    monsterIds: [],
+    shiyuIds: [],
+    simulIds: [],
+  })
+  return {
+    rawRoot,
+    version,
+    temporaryParent,
+    policy: await loadSourcePolicy(),
+    entities: [nanokaBossSnapshotEntity],
   }
 }
 
@@ -454,6 +485,30 @@ describe("复验 v3 完整制品", () => {
     ).toMatchObject({
       entities: { agents: { rulesVersion: historicalRulesVersion } },
     })
+  })
+
+  it("拒绝手工改写为混合结构骨架的 Boss 静态制品", async () => {
+    const options = await bossFixture()
+    const build = await buildSnapshot(options)
+    const root = build.artifactDirectory
+    const detailPath = join(root, "boss/980001/details.en.json")
+    await edit(detailPath, (details) => {
+      // 单文件 id/locale 仍然合法；只有读完同一成员的两个详情后才能发现模式变体混用。
+      details.zone = details.modes[0].zone
+      delete details.modes
+    })
+    const detailDigest = digest(await fs.readFile(detailPath))
+    await edit(join(root, "index.json"), (index) => {
+      index.entities.boss.members["980001"].files.details.en.sha256 =
+        detailDigest
+    })
+    await expect(
+      verifyIntegratedSnapshot({
+        artifactDirectory: root,
+        policy: options.policy,
+        entities: options.entities,
+      }),
+    ).rejects.toThrow("跨语言结构不一致")
   })
 
   const snapshotDamages: [

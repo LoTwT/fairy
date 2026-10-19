@@ -696,6 +696,9 @@ function verificationContracts(
       sourceEntity: registered.sourceEntity,
       rulesVersion: context.rulesVersion,
       verifyMemberFile: registered.verifyMemberFile,
+      ...(registered.verifyMemberSet === undefined
+        ? {}
+        : { verifyMemberSet: registered.verifyMemberSet }),
     }
   })
 }

@@ -29,7 +29,10 @@ import {
   onboardedSnapshotEntities,
   validateSnapshotEntityContracts,
 } from "./snapshot-entities.ts"
-import type { IntegratedSnapshotEntityContract } from "./snapshot-entities.ts"
+import type {
+  IntegratedSnapshotEntityContract,
+  IntegratedSnapshotMemberFile,
+} from "./snapshot-entities.ts"
 
 /** 制品验证的输入；policy 与 entities 省略时使用工作区来源配置与当前已接入类别登记表。 */
 export interface VerifyIntegratedSnapshotOptions {
@@ -317,8 +320,18 @@ export async function verifyIntegratedSnapshot(
     "制品文件数超过上限",
   )
   // 第二阶段：数量预算通过后才读取实体文件，核对实际字节、摘要与身份。
+  // 只为登记了聚合检查的类别按成员保留已解析值；其余类别检查后即可释放，避免整库驻留内存。
   const files = ["index.json"]
   let totalBytes = bytes.byteLength
+  const memberSets = new Map<
+    string,
+    {
+      entity: IntegratedSnapshotEntityContract
+      memberId: string
+      data?: IntegratedSnapshotMemberFile
+      details: Partial<Record<DetailLocale, IntegratedSnapshotMemberFile>>
+    }
+  >()
   for (const check of memberFiles) {
     const maximumBytes = Math.min(
       maximumSingleFileBytes,
@@ -353,8 +366,43 @@ export async function verifyIntegratedSnapshot(
             locale: check.locale,
           },
     )
+    if (check.entity.verifyMemberSet !== undefined) {
+      const memberKey = `${check.entity.name}\u0000${check.memberId}`
+      let memberSet = memberSets.get(memberKey)
+      if (memberSet === undefined) {
+        memberSet = {
+          entity: check.entity,
+          memberId: check.memberId,
+          details: {},
+        }
+        memberSets.set(memberKey, memberSet)
+      }
+      if (check.file === "data")
+        memberSet.data = { path: check.expectedPath, value: fileValue }
+      else
+        memberSet.details[check.locale] = {
+          path: check.expectedPath,
+          value: fileValue,
+        }
+    }
     totalBytes += byteLength
     files.push(check.expectedPath)
+  }
+  // 单文件检查只看到局部；读完一个成员的全部文件后执行可选的跨文件聚合检查。
+  for (const memberSet of memberSets.values()) {
+    if (memberSet.entity.verifyMemberSet === undefined) continue
+    requireValue(
+      memberSet.data !== undefined,
+      `${memberSet.entity.name}/${memberSet.memberId}/data.json`,
+      "缺少 data 文件",
+    )
+    memberSet.entity.verifyMemberSet(
+      { data: memberSet.data, details: memberSet.details },
+      {
+        memberId: memberSet.memberId,
+        detailLocales: [...policy.languages],
+      },
+    )
   }
   await verifyFileSet(root, files)
   // 以上运行时检查覆盖完整索引外壳；sourceRecord 仅要求 JSON 对象，未知原 key 保留。

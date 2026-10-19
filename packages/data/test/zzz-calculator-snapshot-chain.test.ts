@@ -47,6 +47,7 @@ const expectedImplementationBases = [
   "e430cfddf315068b99c87441e294c9a54e724572",
   "e63992e104af667e7ad03216e0bc2d3ce64cddda",
   "1e3aed68f5d034b88f3f6ee4542e58bdc2475711",
+  "8a45993a8a9ff648880463461152936c74393385",
 ] as const
 
 const expectedPreviousSnapshotIds = [
@@ -57,6 +58,7 @@ const expectedPreviousSnapshotIds = [
   "sha256:72f8efdb8aea0ca44f1d8b37b3d28d6c095887b8853e6ac8c1a13c6d880fcc71",
   "sha256:6cf7f6a2da16cb770a4573e91608a60724ef0ce77d0bb1c363e231a7bcef9d9a",
   "sha256:e423558334fb76962ebdfab3681b32da4c637d5de485984a8ae74459a1c2fb87",
+  "sha256:03d35c11134debc997977fb3c077da49a0ea90a2462c5c91f13b01d0ccf52a80",
 ] as const
 
 const expectedCurrentSnapshotIds = [
@@ -67,6 +69,7 @@ const expectedCurrentSnapshotIds = [
   "sha256:6cf7f6a2da16cb770a4573e91608a60724ef0ce77d0bb1c363e231a7bcef9d9a",
   "sha256:e423558334fb76962ebdfab3681b32da4c637d5de485984a8ae74459a1c2fb87",
   "sha256:03d35c11134debc997977fb3c077da49a0ea90a2462c5c91f13b01d0ccf52a80",
+  "sha256:7bb28d858be347be6ef86a5ae7d5a1f1286f4048b1039e01a6f3ae39b47f0c09",
 ] as const
 
 /** 本次逐条核对过的 static-effects 制品摘要；entry 5 保留 PR-D 改写前的 catalog 值，entry 6 记录本次刷新前的字节。 */
@@ -99,13 +102,17 @@ const expectedArtifactSha256 = [
     "a8aac21c0307af11934c1eaf84a5f14cccf390487b5ea6e9505307c8e4ec3305",
     "0958a918aebb418d67e67280b4ccbdc83f63a8362ee8d478bb9c5bd1739761dc",
   ],
+  [
+    "a8aac21c0307af11934c1eaf84a5f14cccf390487b5ea6e9505307c8e4ec3305",
+    "216b53724babb594ab3344525388d69db6d2781a1c52afa72e28165e5a35eaf7",
+  ],
 ] as const
 
 describe("ZZZ Calculator 快照刷新链", () => {
-  it("三份夹具均为 7 条，相邻条目首尾相接，末条等于当前消费快照", () => {
+  it("三份夹具均为 8 条，相邻条目首尾相接，末条等于当前消费快照", () => {
     for (const [name, fixture] of Object.entries(fixtures)) {
       const entries = fixture.fairySnapshotRefreshes
-      expect(entries, name).toHaveLength(7)
+      expect(entries, name).toHaveLength(8)
       entries.forEach((entry, index) => {
         expect(entry.implementationBase, `${name} entry ${index}`).toBe(
           expectedImplementationBases[index],
