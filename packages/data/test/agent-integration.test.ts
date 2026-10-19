@@ -79,6 +79,12 @@ const expectedData = {
   codeName: "Example",
   icon: "raw_icon",
   rarity: 0,
+  names: {
+    zh: "独立索引",
+    en: "Independent",
+    ja: "索引のみ",
+    ko: "색인",
+  },
   gender: 0,
   classificationIds: {
     weaponType: ["2", "10"],
@@ -185,6 +191,59 @@ describe("单代理人纯整合 v4", () => {
     result.details.zh!.skill["g/~"].description[0].name = "modified"
     expect(input).toStrictEqual(before)
   })
+
+  it("来源索引的未知顶层字段生成 index 诊断，已知字段不误报", () => {
+    const input = agentInput()
+    change(input.sourceRecord, "rank", 3)
+    change(input.sourceRecord, "skin", { "1091": { name: "" } })
+    change(input.sourceRecord, "future_field", { nested: [1, 2] })
+    change(input.sourceRecord, "a/b~c", 0)
+    change(input.sourceRecord, "__proto__", { polluted: true })
+    change(input.sourceRecord, "constructor", "raw")
+    const result = integrateAgent(input)
+    expect(result.maintenance.diagnostics).toEqual([
+      {
+        entityId: "900001",
+        locale: "index",
+        pointer: "/__proto__",
+        kind: "unknown-field",
+      },
+      {
+        entityId: "900001",
+        locale: "index",
+        pointer: "/a~1b~0c",
+        kind: "unknown-field",
+      },
+      {
+        entityId: "900001",
+        locale: "index",
+        pointer: "/constructor",
+        kind: "unknown-field",
+      },
+      {
+        entityId: "900001",
+        locale: "index",
+        pointer: "/future_field",
+        kind: "unknown-field",
+      },
+    ])
+    expect(result.sourceRecord).toStrictEqual(input.sourceRecord)
+    expectRoundtrip(result, input)
+  })
+
+  it.each(["zh", "en", "ja", "ko"] as const)(
+    "索引名称 %s 缺失或类型错误即整合失败",
+    (nameLocale) => {
+      const missing = agentInput()
+      remove(missing.sourceRecord, nameLocale)
+      expectFailure(missing, "index", `/${nameLocale}`, "缺失必需字段")
+      for (const value of [0, null, {}, [], true]) {
+        const typed = agentInput()
+        change(typed.sourceRecord, nameLocale, value)
+        expectFailure(typed, "index", `/${nameLocale}`, "字段类型必须为 string")
+      }
+    },
+  )
 
   it("未知成员在细节流各层整合失败；合法空值与共享块语义不变", () => {
     const input = agentInput()

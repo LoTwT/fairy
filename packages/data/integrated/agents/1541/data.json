@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpinePromeia",
+  "names": {
+    "en": "Promeia",
+    "ja": "プロメイア",
+    "ko": "프로미아",
+    "zh": "普罗米娅"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle61.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0061.png",

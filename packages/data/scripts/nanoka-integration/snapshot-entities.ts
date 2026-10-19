@@ -147,7 +147,7 @@ export function verifyAgentSnapshotMemberFile(
 export const nanokaAgentsSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "agents",
   sourceEntity: "character",
-  rulesVersion: "nanoka-agent-reference/6",
+  rulesVersion: "nanoka-agent-reference/7",
   verifyMemberFile: verifyAgentSnapshotMemberFile,
   integrate({ memberId, sourceRecord, details, detailLocales }) {
     const result = integrateAgent({
@@ -442,7 +442,7 @@ export function verifyBossSnapshotMemberFile(
 export const nanokaBossSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "boss",
   sourceEntity: "boss",
-  rulesVersion: "nanoka-boss-reference/3",
+  rulesVersion: "nanoka-boss-reference/4",
   verifyMemberFile: verifyBossSnapshotMemberFile,
   integrate({ memberId, sourceRecord, details, detailLocales }) {
     const result = integrateBoss({

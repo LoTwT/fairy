@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpineYaoJiayin",
+  "names": {
+    "en": "Astra Yao",
+    "ja": "アストラ",
+    "ko": "아스트라",
+    "zh": "耀嘉音"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle36.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0036.png",

@@ -89,7 +89,7 @@ describe("publication snapshot", () => {
     await preparePublication(artifactDirectory, generated)
     const catalog = await fs.readFile(join(generated, "catalog.ts"), "utf8")
     expect(catalog).toContain(
-      'export type AgentName = "Astra Yao" | "Soldier 0 - Anby"',
+      'export type AgentName = "Index Astra Yao" | "Index Soldier 0 - Anby"',
     )
     expect(catalog).toContain(
       'export type DriveDiscName = "Example Drive Disc 930001" | "Example Drive Disc 930002"',
@@ -114,11 +114,15 @@ describe("publication snapshot", () => {
     expect(catalog).toContain(
       "export const agentSourceIds: Readonly<Record<AgentName, AgentSourceId>>",
     )
-    expect(catalog).toContain('[["Astra Yao","2"],["Soldier 0 - Anby","10"]]')
+    expect(catalog).toContain(
+      '[["Index Astra Yao","2"],["Index Soldier 0 - Anby","10"]]',
+    )
     expect(catalog).toContain(
       "export const agentNamesBySourceId: Readonly<Record<AgentSourceId, AgentName>>",
     )
-    expect(catalog).toContain('[["2","Astra Yao"],["10","Soldier 0 - Anby"]]')
+    expect(catalog).toContain(
+      '[["2","Index Astra Yao"],["10","Index Soldier 0 - Anby"]]',
+    )
     expect(catalog).toContain(
       '[["930001","Example Drive Disc 930001"],["930002","Example Drive Disc 930002"]]',
     )
@@ -135,7 +139,7 @@ describe("publication snapshot", () => {
       '"source":{"id":"nanoka-zzz","version":"synthetic-publication"}',
     )
     expect(catalog).toContain(
-      '"agents":{"rulesVersion":"nanoka-agent-reference/6","detailLocales":["zh","en"],"memberIds":["2","10"]}',
+      '"agents":{"rulesVersion":"nanoka-agent-reference/7","detailLocales":["zh","en"],"memberIds":["2","10"]}',
     )
     expect(catalog).toContain(
       '"simul":{"rulesVersion":"nanoka-simul-reference/3","detailLocales":["zh","en"],"memberIds":["990001","990002"]}',
@@ -149,7 +153,9 @@ describe("publication snapshot", () => {
     expect(catalog).toContain(
       '[["Exampleboo 950001","950001"],["Exampleboo 950002","950002"]]',
     )
-    expect(catalog).toContain('Object.freeze(["Astra Yao","Soldier 0 - Anby"])')
+    expect(catalog).toContain(
+      'Object.freeze(["Index Astra Yao","Index Soldier 0 - Anby"])',
+    )
     expect(catalog).toContain(
       'Object.freeze(["Example Drive Disc 930001","Example Drive Disc 930002"])',
     )
@@ -264,19 +270,19 @@ describe("publication snapshot", () => {
       ).toBeInstanceOf(Buffer)
   })
 
-  it.each([undefined, "", null, 12, "Soldier 0 - Anby"])(
-    "rejects invalid or duplicate names: %s",
+  it.each([undefined, "", null, 12, "Index Soldier 0 - Anby"])(
+    "rejects invalid or duplicate agent index names: %s",
     async (name) => {
       const { root, artifactDirectory, index } = await fixture()
-      const path = "agents/2/details.en.json"
-      const details = JSON.parse(
+      const path = "agents/2/data.json"
+      const data = JSON.parse(
         await fs.readFile(join(artifactDirectory, path), "utf8"),
       )
-      if (name === undefined) delete details.name
-      else details.name = name
-      const bytes = JSON.stringify(details)
+      if (name === undefined) delete data.names.en
+      else data.names.en = name
+      const bytes = JSON.stringify(data)
       await fs.writeFile(join(artifactDirectory, path), bytes)
-      index.entities.agents.members["2"].files.details.en.sha256 = sha256(
+      index.entities.agents.members["2"].files.data.sha256 = sha256(
         Buffer.from(bytes),
       )
       await fs.writeFile(
@@ -364,8 +370,16 @@ describe("publication snapshot", () => {
   it("keeps every mapping independent when categories share an English name", async () => {
     const { artifactDirectory, index } = await fixture()
     const shared = "Shared Name"
+    // AgentName 读来源索引 en（data.names.en），其余三类读英文详情 name。
+    const agentData = JSON.parse(
+      await fs.readFile(join(artifactDirectory, "agents/2/data.json"), "utf8"),
+    )
+    agentData.names.en = shared
+    await fs.writeFile(
+      join(artifactDirectory, "agents/2/data.json"),
+      JSON.stringify(agentData),
+    )
     for (const [path, id] of [
-      ["agents/2/details.en.json", "2"],
       ["drive-discs/930001/details.en.json", "930001"],
       ["w-engines/940001/details.en.json", "940001"],
       ["bangboos/950001/details.en.json", "950001"],
@@ -380,7 +394,7 @@ describe("publication snapshot", () => {
     const catalog = await generateCatalog(artifactDirectory, index)
     // 重名检查只在各类别内：跨类别同名不拒绝，各套 union 与映射仍按各类别成员独立生成。
     expect(catalog).toContain(
-      'export type AgentName = "Shared Name" | "Soldier 0 - Anby"',
+      'export type AgentName = "Shared Name" | "Index Soldier 0 - Anby"',
     )
     expect(catalog).toContain(
       'export type DriveDiscName = "Shared Name" | "Example Drive Disc 930002"',
@@ -391,7 +405,9 @@ describe("publication snapshot", () => {
     expect(catalog).toContain(
       'export type BangbooName = "Shared Name" | "Exampleboo 950002"',
     )
-    expect(catalog).toContain('[["Shared Name","2"],["Soldier 0 - Anby","10"]]')
+    expect(catalog).toContain(
+      '[["Shared Name","2"],["Index Soldier 0 - Anby","10"]]',
+    )
     expect(catalog).toContain(
       '[["Shared Name","930001"],["Example Drive Disc 930002","930002"]]',
     )
@@ -482,12 +498,15 @@ describe("publication snapshot", () => {
 
   it("preserves whitespace, punctuation and special property names exactly", async () => {
     const { artifactDirectory, index } = await fixture()
+    // AgentName 读来源索引 en（data.names.en）；其余三类读英文详情 name。
     for (const [id, name] of [
       ["2", ' A\'s "Name"! '],
       ["10", "__proto__"],
     ]) {
-      const path = join(artifactDirectory, `agents/${id}/details.en.json`)
-      await fs.writeFile(path, JSON.stringify({ name }))
+      const path = join(artifactDirectory, `agents/${id}/data.json`)
+      const data = JSON.parse(await fs.readFile(path, "utf8"))
+      data.names.en = name
+      await fs.writeFile(path, JSON.stringify(data))
     }
     for (const [id, name] of [
       ["930001", ' D\'s "Disc"! '],

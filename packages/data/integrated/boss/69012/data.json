@@ -794,6 +794,10 @@
   },
   "endTime": "2025-06-13 03:59:59",
   "id": 69012,
+  "liveTimeWindow": {
+    "beginTime": "2025-05-30 04:00:00",
+    "endTime": "2025-06-13 03:59:59"
+  },
   "priority": 9,
   "zoneType": 1001
 }

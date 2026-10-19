@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "Xixifu",
+  "names": {
+    "en": "Cissia",
+    "ja": "シーシィア",
+    "ko": "시시아",
+    "zh": "希希芙"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle60.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0060.png",

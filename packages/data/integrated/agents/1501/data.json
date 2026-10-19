@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpineAria",
+  "names": {
+    "en": "Aria",
+    "ja": "アリア",
+    "ko": "아리아",
+    "zh": "爱芮"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle57.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0057.png",

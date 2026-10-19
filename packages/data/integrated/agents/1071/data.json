@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpineCeasar",
+  "names": {
+    "en": "Caesar",
+    "ja": "シーザー",
+    "ko": "카이사르",
+    "zh": "凯撒"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle25.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0025.png",

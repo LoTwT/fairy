@@ -1,7 +1,7 @@
 import type { DetailLocale } from "./agent-types.ts"
 
 /**
- * Nanoka Boss 整合资料的正式字段定义（规则 nanoka-boss-reference/3）。
+ * Nanoka Boss 整合资料的正式字段定义（规则 nanoka-boss-reference/4）。
  *
  * 上游实体为 `boss`，整合类别登记名为 `boss`；一条记录表示一个首领试炼条目。
  * 本层不解释评级目标语义、不换算时间、不建立 mode 唯一性、parent/child 闭合、Monster 引用闭合或
@@ -42,11 +42,27 @@ export interface BossData {
   endTime: string
 
   /**
+   * 来源索引记录的 `live_begin`/`live_end` 直播服开放时间窗。
+   * 两个字段成对提供或成对缺失；缺失时不补造，原值逐字保留，不转换时间戳、不猜测时区。
+   * 与详情侧 `beginTime`/`endTime`（常规开放窗）是两个独立来源，不要求相等。
+   */
+  liveTimeWindow?: BossLiveTimeWindow
+
+  /**
    * 来源 `boss_adjust` 完整共享块：调整 key → 难度调整条目。
    * hp/atk/points 保留原始数值（含负值），未解释缩放或计分规则；
    * 成员逐个登记，未登记成员整合失败。
    */
   bossAdjust: Record<string, BossAdjustEntry>
+}
+
+/** 来源索引 `live_begin`/`live_end` 的成对时间窗原值。 */
+export interface BossLiveTimeWindow {
+  /** 来源索引 `live_begin` 原始字符串。 */
+  beginTime: string
+
+  /** 来源索引 `live_end` 原始字符串。 */
+  endTime: string
 }
 
 /** `boss_adjust` 中一个难度调整条目。 */

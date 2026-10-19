@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Xingjianya",
+  "names": {
+    "en": "Miyabi",
+    "ja": "星見雅",
+    "ko": "미야비",
+    "zh": "雅"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle13.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0013.png",

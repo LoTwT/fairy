@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpineZhuyuan",
+  "names": {
+    "en": "Zhu Yuan",
+    "ja": "朱鳶",
+    "ko": "주연",
+    "zh": "朱鸢"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle23.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0023.png",

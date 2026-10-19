@@ -220,6 +220,8 @@ export function bossLegacyZoneInput() {
       sort: 5,
       begin: "2024-07-04 04:00:00",
       end: "2024-08-01 03:59:59",
+      live_begin: "2024-07-04 04:00:00",
+      live_end: "2024-08-01 03:59:59",
       en: "Trial",
       zh: "试炼",
       zone_type: 1001,

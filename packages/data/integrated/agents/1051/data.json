@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Yidhari",
+  "names": {
+    "en": "Yidhari",
+    "ja": "イドリー",
+    "ko": "이드하리",
+    "zh": "伊德海莉"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle52.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0052.png",

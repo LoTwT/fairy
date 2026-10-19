@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpineEvelyn",
+  "names": {
+    "en": "Evelyn",
+    "ja": "イヴリン",
+    "ko": "이블린",
+    "zh": "伊芙琳"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle37.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0037.png",

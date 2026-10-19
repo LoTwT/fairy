@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Yixuan",
+  "names": {
+    "en": "Yixuan",
+    "ja": "儀玄",
+    "ko": "의현",
+    "zh": "仪玄"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle44.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0044.png",

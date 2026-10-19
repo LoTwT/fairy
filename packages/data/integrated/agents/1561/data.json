@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpineVelina",
+  "names": {
+    "en": "Velina",
+    "ja": "ヴェリナ",
+    "ko": "벨리나",
+    "zh": "维琳娜"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle64.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0064.png",

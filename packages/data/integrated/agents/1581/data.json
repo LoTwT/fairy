@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Remielle",
+  "names": {
+    "en": "Remielle",
+    "ja": "レミエール",
+    "ko": "레미엘",
+    "zh": "蕾米埃尔"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle67.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0067.png",

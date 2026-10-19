@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpine_Aofeisi",
+  "names": {
+    "en": "Orphie & Magus",
+    "ja": "オルペウス&「鬼火」",
+    "ko": "오피&「도깨비불」",
+    "zh": "奥菲丝&「鬼火」"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle49.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0049.png",

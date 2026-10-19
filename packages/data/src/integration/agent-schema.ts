@@ -95,6 +95,38 @@ export function registeredName(sourceName: string): string {
       )
 }
 
+/**
+ * 来源索引记录（character.json 成员）已登记的顶层业务字段全集。
+ * 只用于识别未知顶层字段并生成维护诊断；登记不要求字段存在或类型相符，
+ * 未知容器内部不递归推断，sourceRecord 的原 key 与原值全部保留。
+ * 字段集合依据来源说明与本地 3.2 character.json 的 60 条记录确认。
+ */
+export const agentIndexFields: readonly string[] = [
+  "camp",
+  "code",
+  "desc",
+  "element",
+  "elements",
+  "en",
+  "hit",
+  "hits",
+  "icon",
+  "ja",
+  "ko",
+  "potential",
+  "rank",
+  "skin",
+  "spelement",
+  "type",
+  "zh",
+]
+
+/**
+ * 来源索引记录中提升为 data.names 的名称语言 key：必须存在且为字符串，缺失即失败。
+ * 名称原值逐字复制进 `AgentSourceNames`，与详情各语言的 name 不要求相等。
+ */
+export const agentIndexNameLocales: readonly string[] = ["zh", "en", "ja", "ko"]
+
 /** 原始详情的完整结构与共享提取路径；数值合法性另外在 JSON 边界校验。 */
 export const agentSchema: Schema = object({
   id: number,

@@ -199,6 +199,12 @@
     0
   ],
   "live2D": "UISpineBanyue",
+  "names": {
+    "en": "Banyue",
+    "ja": "盤岳",
+    "ko": "반악",
+    "zh": "般岳"
+  },
   "partnerInfo": {
     "iconPath": "UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle53.png",
     "interKnotIcon": "UI/Sprite/A1DynamicLoad/InterKnot/UnPacker/IconInterknotAvatar/IconInterKnotRole0053.png",
