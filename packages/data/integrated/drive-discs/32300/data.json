@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "<color=#FE437E>Ether DMG</color> +10%",
+      "desc4": "The equipper's CRIT DMG increases by 20%. When any character in the squad triggers <color=#FE437E>Corruption</color> DMG, this effect further increases by 5.5% for 8s, stacking up to 6 times. Repeated triggers reset the duration."
+    },
+    "ja": {
+      "desc2": "<color=#FE437E>エーテル属性ダメージ</color>+10%。",
+      "desc4": "装備者の会心ダメージ+20%。任意のメンバーによって<color=#FE437E>[侵蝕]</color>ダメージが発生した時、この効果がさらに+5.5%、最大6重まで重ね掛け可能、継続時間8秒。重複して発動すると継続時間が更新される。"
+    },
+    "ko": {
+      "desc2": "<color=#FE437E>에테르 피해</color>+10%",
+      "desc4": "착용자의 치명타 피해가 20% 증가한다. 파티 내 임의의 캐릭터가 <color=#FE437E>[침식]</color> 피해 발동 시, 해당 버프 효과가 추가로 5.5% 증가한다. 최대 중첩: 6스택, 지속 시간: 8초, 중복 발동 시 지속 시간이 갱신된다."
+    },
+    "zh": {
+      "desc2": "<color=#FE437E>以太伤害</color>+10%。",
+      "desc4": "装备者的暴击伤害提升20%，队伍中任意角色触发<color=#FE437E>[侵蚀]</color>伤害时，该增益效果额外提升5.5%，最多叠加6层，持续8秒，重复触发时刷新持续时间。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitChaosMetal.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitChaosMetal.png",
-  "id": 32300
+  "id": 32300,
+  "names": {
+    "en": "Chaotic Metal",
+    "ja": "混沌のヘヴィメタル",
+    "ko": "카오스 메탈",
+    "zh": "混沌重金属"
+  }
 }

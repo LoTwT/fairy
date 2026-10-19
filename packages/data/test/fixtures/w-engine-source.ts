@@ -1,4 +1,4 @@
-/** 满足规则 nanoka-w-engine-reference/1 必需结构的合成输入；不读取真实 raw，不使用生产登记表生成 fixture。 */
+/** 满足规则 nanoka-w-engine-reference/3 必需结构的合成输入；不读取真实 raw，不使用生产登记表生成 fixture。 */
 export function wEngineSource() {
   return {
     id: 940001,
@@ -98,8 +98,15 @@ export function wEngineInput() {
 }
 
 /**
- * 多成员合成输入的英文详情名称：按成员 ID 派生，类内唯一且与索引 `sourceRecord.en`
- * 及任何单成员 fixture 名称不同，用于捕获发布目录生成取错名称来源。
+ * 多成员合成输入的索引英文名称：按成员 ID 派生并在类内唯一，供发布目录的 WEngineName。
+ */
+export function syntheticWEngineIndexName(memberId: string): string {
+  return `Index W-Engine ${memberId}`
+}
+
+/**
+ * 多成员合成输入的英文详情名称：按成员 ID 派生，类内唯一且与索引英文名称不同，
+ * 用于捕获发布目录取错名称来源（详情名不再参与 WEngineName 生成）。
  */
 export function syntheticWEngineEnglishName(memberId: string): string {
   return `Example W-Engine ${memberId}`

@@ -2,6 +2,12 @@
   "icon": "",
   "id": 55098,
   "level": {},
+  "names": {
+    "en": "Eous",
+    "ja": "イアス",
+    "ko": "이아스",
+    "zh": "伊埃斯"
+  },
   "rarity": 3,
   "skillProp": {},
   "stats": {

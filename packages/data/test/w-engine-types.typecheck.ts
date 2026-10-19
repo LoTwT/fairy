@@ -20,6 +20,7 @@ import type { UnknownFieldDiagnostic } from "../src/integration/source-json.ts"
 
 export const minimalData: WEngineData = {
   id: 940001,
+  names: { zh: "", en: "" },
   codeName: "Weapon_B_Common_Example",
   rarity: 2,
   icon: "",
@@ -151,6 +152,7 @@ export const functionUnknownField: WEngineDetails = {
 // @ts-expect-error 缺失 materials 不能由未知字段补位。
 export const missingMaterials: WEngineData = {
   id: 940001,
+  names: { zh: "", en: "" },
   codeName: "Weapon_B_Common_Example",
   rarity: 2,
   icon: "",
@@ -159,6 +161,11 @@ export const missingMaterials: WEngineData = {
   baseProperty: { value: 0 },
   randProperty: { value: 0 },
   classificationIds: { weaponType: [] },
+}
+export const missingEnglishIndexName: WEngineData = {
+  ...minimalData,
+  // @ts-expect-error 索引名称 zh/en 必填。
+  names: { zh: "" },
 }
 // @ts-expect-error 身份是数值，不能用规范十进制字符串代替。
 export const stringId: WEngineData = { ...minimalData, id: "940001" }
@@ -241,6 +248,7 @@ export const checks: unknown[] = [
   unknownFieldDiagnostic,
   functionUnknownField,
   missingMaterials,
+  missingEnglishIndexName,
   stringId,
   numericCodeName,
   snakeCaseStage,

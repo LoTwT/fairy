@@ -65,7 +65,7 @@
       "packageVersion": "0.3.0",
       "contractVersion": 2,
       "gameVersion": "3.2",
-      "snapshotId": "sha256:e423558334fb76962ebdfab3681b32da4c637d5de485984a8ae74459a1c2fb87"
+      "snapshotId": "sha256:03d35c11134debc997977fb3c077da49a0ea90a2462c5c91f13b01d0ccf52a80"
     }
   },
   "inputLayer": "externally-declared-resolved-source-state",
@@ -107343,6 +107343,18 @@
         }
       },
       "currentSnapshotId": "sha256:e423558334fb76962ebdfab3681b32da4c637d5de485984a8ae74459a1c2fb87"
+    },
+    {
+      "reason": "G1/G2 promote drive-disc names/descriptions and WEngine/Bangboo index names into data.names, so the three rules versions advance. The current consumption snapshot and static-catalog digest are refreshed; comparison inputs, fixtures and numeric results stay frozen.",
+      "implementationBase": "1e3aed68f5d034b88f3f6ee4542e58bdc2475711",
+      "previous": {
+        "snapshotId": "sha256:e423558334fb76962ebdfab3681b32da4c637d5de485984a8ae74459a1c2fb87",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "a8aac21c0307af11934c1eaf84a5f14cccf390487b5ea6e9505307c8e4ec3305",
+          "packages/data/definitions/effects/static-catalog.json": "0958a918aebb418d67e67280b4ccbdc83f63a8362ee8d478bb9c5bd1739761dc"
+        }
+      },
+      "currentSnapshotId": "sha256:03d35c11134debc997977fb3c077da49a0ea90a2462c5c91f13b01d0ccf52a80"
     }
   ]
 }

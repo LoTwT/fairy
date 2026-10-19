@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Paperboo",
+    "ja": "ハコイリボンプ",
+    "ko": "종이부",
+    "zh": "纸壳布"
+  },
   "rarity": 3,
   "skillProp": {
     "5300501": {

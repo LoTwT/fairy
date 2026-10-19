@@ -72,6 +72,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Exploreboo",
+    "ja": "タンケンボンプ",
+    "ko": "탐험부",
+    "zh": "寻宝布"
+  },
   "rarity": 3,
   "skillProp": {
     "5300301": {

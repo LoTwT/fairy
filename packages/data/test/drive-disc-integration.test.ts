@@ -73,6 +73,26 @@ function expectFailure(
 
 const expectedData = {
   id: 930001,
+  names: {
+    zh: "索引示例名称",
+    en: "Example Drive Disc",
+    ja: "サンプル例",
+    ko: "예시 샘플",
+  },
+  descriptions: {
+    zh: {
+      desc2: "暴击率+8%。",
+      desc4:
+        "<color=#FFFFFF>[强化特殊技]</color>命中时，攻击力提升9%，持续6秒。",
+    },
+    en: {
+      desc2: "CRIT Rate +8%.",
+      desc4:
+        "Landing a hit with an <color=#FFFFFF>EX Special Attack</color> increases ATK by 9%.",
+    },
+    ja: { desc2: "会心率+8%。", desc4: "合成された説明。" },
+    ko: { desc2: "치명타 확률+8%", desc4: "합성 설명." },
+  },
   icon: "UI/Sprite/IconSuit/ExampleIcon.png",
   icon2: "UI/Sprite/IconSuit/ExampleIcon2.png",
 } satisfies DriveDiscData
@@ -87,7 +107,7 @@ const requiredDetailFields = [
   "icon2",
 ] as const
 
-describe("单驱动盘纯整合 nanoka-drive-disc-reference/1", () => {
+describe("单驱动盘纯整合 nanoka-drive-disc-reference/3", () => {
   it("按独立预期拆分双语，保留索引，冻结输入仍可整合且不修改来源", () => {
     const input = driveDiscInput()
     const before = structuredClone(input)
@@ -106,6 +126,8 @@ describe("单驱动盘纯整合 nanoka-drive-disc-reference/1", () => {
     expect(result.details.zh).not.toHaveProperty("icon")
     expect(result.details.zh).not.toHaveProperty("icon2")
     expect(result.details.en!.name).toBe("Example Drive Disc")
+    expect(result.data.names).toStrictEqual(expectedData.names)
+    expect(result.data.descriptions).toStrictEqual(expectedData.descriptions)
     expect(result.maintenance).toEqual({ diagnostics: [] })
     expectDriveDiscRoundtrip(result, input)
     expect(input).toStrictEqual(before)
@@ -121,12 +143,14 @@ describe("单驱动盘纯整合 nanoka-drive-disc-reference/1", () => {
     change(input.sourceRecord.zh, "name", "索引名称")
     const result = integrateDriveDisc(input)
     expect(result.details.zh!.name).toBe("详情名称")
+    expect(result.data.names.zh).toBe("索引名称")
     expect(ownValue(result.sourceRecord.zh, "name")).toBe("索引名称")
     expect(ownValue(result.sourceRecord, "icon")).toBe(expectedData.icon)
     change(input.sourceRecord.zh, "desc2", "索引说明")
     change(input.sourceRecord, "icon", "UI/Sprite/IconSuit/IndexIcon.png")
     const second = integrateDriveDisc(input)
     expect(second.details.zh!.desc2).toBe("暴击率+8%。")
+    expect(second.data.descriptions.zh.desc2).toBe("索引说明")
     expect(second.data.icon).toBe(expectedData.icon)
     expect(second.sourceRecord).toStrictEqual(input.sourceRecord)
     expectDriveDiscRoundtrip(second, input)
@@ -304,8 +328,7 @@ describe("驱动盘共享资源与来源摘要", () => {
     change(input.details.en, "icon2", input.details.en.icon)
     result = integrateDriveDisc(input)
     expect(result.data).toStrictEqual({
-      id: 930001,
-      icon: expectedData.icon,
+      ...expectedData,
       icon2: expectedData.icon,
     })
     expect(result.details.zh).not.toHaveProperty("icon2")
@@ -319,7 +342,11 @@ describe("驱动盘共享资源与来源摘要", () => {
       change(input.details[locale], "icon2", "")
     }
     const result = integrateDriveDisc(input)
-    expect(result.data).toStrictEqual({ id: 930001, icon: "", icon2: "" })
+    expect(result.data).toStrictEqual({
+      ...expectedData,
+      icon: "",
+      icon2: "",
+    })
     expectDriveDiscRoundtrip(result, input)
   })
 
@@ -329,6 +356,14 @@ describe("驱动盘共享资源与来源摘要", () => {
     const result = integrateDriveDisc(input)
     expect(result.sourceRecord).not.toHaveProperty("ja")
     expect(result.sourceRecord).not.toHaveProperty("ko")
+    expect(result.data.names).toStrictEqual({
+      zh: "索引示例名称",
+      en: "Example Drive Disc",
+    })
+    expect(Object.keys(result.data.descriptions).toSorted()).toStrictEqual([
+      "en",
+      "zh",
+    ])
     expect(result.maintenance.diagnostics).toEqual([])
     expectDriveDiscRoundtrip(result, input)
   })
@@ -369,10 +404,17 @@ describe("驱动盘共享资源与来源摘要", () => {
 
   it("摘要与详情的同名字段不要求相等，也不触发共享冲突", () => {
     const input = driveDiscInput()
+    change(input.sourceRecord.zh, "name", "完全不同的索引名称")
     change(input.sourceRecord.zh, "desc2", "完全不同的索引说明")
     change(input.sourceRecord.en, "desc4", "A different index description.")
     const result = integrateDriveDisc(input)
+    expect(result.details.zh!.name).toBe("示例驱动盘")
     expect(result.details.zh!.desc2).toBe("暴击率+8%。")
+    expect(result.data.names.zh).toBe("完全不同的索引名称")
+    expect(result.data.descriptions.zh.desc2).toBe("完全不同的索引说明")
+    expect(result.data.descriptions.en.desc4).toBe(
+      "A different index description.",
+    )
     expect(ownValue(result.sourceRecord.zh, "desc2")).toBe("完全不同的索引说明")
     expect(result.maintenance.diagnostics).toEqual([])
     expectDriveDiscRoundtrip(result, input)

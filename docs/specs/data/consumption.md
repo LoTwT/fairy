@@ -30,10 +30,9 @@ JSON 子路径导出及根入口的公开 ID 类型、冻结 ID 列表与读取 
 未在本节或读取接口登记的名称不属于根入口导出。这些类型可供消费者引用，不改变来源 ID 的内部标识用途。`AgentName` 是本次发布所有
 `integrated/agents/{来源ID}/data.json` 的 `names.en` 原值的精确字符串字面量 union——即来源索引
 `character.json` 成员的 `en` 名称，作为稳定来源与英文详情显示名解耦（本地 3.2 两者取值一致；
-上游改写详情翻译不再构成 `AgentName` 的类型变化）；`DriveDiscName` 取
-`integrated/drive-discs/{来源ID}/details.en.json` 顶层 `name`，`WEngineName` 取
-`integrated/w-engines/{来源ID}/details.en.json`，`BangbooName` 取
-`integrated/bangboos/{来源ID}/details.en.json`。固定取英文，保留大小写、空格及标点，不取
+上游改写详情翻译不再构成 `AgentName` 的类型变化）。`DriveDiscName`、`WEngineName` 与 `BangbooName`
+自本版起同样读取各自 `data.json` 的 `names.en`（来源索引记录的 `en` 名称），不再读取
+`details.en.json` 顶层 `name`。固定取英文，保留大小写、空格及标点，不取
 `data.codeName`。例如代理人 `1381` 为 `Soldier 0 - Anby`、`1311` 为
 `Astra Yao`（codeName 为 `Astra`），驱动盘 `31000` 为 `Woodpecker Electro`，WEngine `12001` 为
 `[Lunar] Pleniluna`（保留方括号与空格），邦布 `53001` 为 `Penguinboo`（codeName 拼写一致但属另一字段）、
@@ -293,6 +292,7 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 - `/definitions/effects/static-coverage.json`
 - `/integrated/index.json`
 - `/publication.json`
+- `/definitions-publication.json`
 - `/integrated/agents/{来源ID}/data.json`
 - `/integrated/agents/{来源ID}/details.zh.json`
 - `/integrated/agents/{来源ID}/details.en.json`
@@ -318,7 +318,7 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 - `/integrated/simul/{来源ID}/details.zh.json`
 - `/integrated/simul/{来源ID}/details.en.json`
 
-这些路径映射到包内对应 `dist/` 的已验证发布副本：`/integrated/*` 来自受管理归档副本生成的发布副本，`/definitions/effects/*.json` 是 Git 跟踪的静态效果规则集，构建时逐文件字节复验后复制。`starter.json` 保留耀嘉音核心、耀嘉音 2 影与啄木鸟电音两件套三条规则，`automatic.json` 的范围由[首批自动规则接入](../effects/automatic-rules.md)维护；类型与执行契约由[统一效果规则模型](../effects/index.md)维护。导入根入口不加载任何数据或定义 JSON，效果定义同样只在显式导入该子路径时读取。JSON 字段、层级、文件名与 JSON 值全部保留；`integrated` 的发布字节只删除字符串外的排版空白，归档字节摘要与发布字节摘要的映射见 `dist/publication.json`（[发布副本与摘要双链](#发布副本与摘要双链)），
+这些路径映射到包内对应 `dist/` 的已验证发布副本：`/integrated/*` 来自受管理归档副本生成的发布副本，`/definitions/effects/*.json` 是 Git 跟踪的静态效果规则集，构建时逐文件字节复验后冻结归档，再发布压缩副本；`/definitions-publication.json` 记录 definitions 归档 → 发布的摘要映射。`starter.json` 保留耀嘉音核心、耀嘉音 2 影与啄木鸟电音两件套三条规则，`automatic.json` 的范围由[首批自动规则接入](../effects/automatic-rules.md)维护；类型与执行契约由[统一效果规则模型](../effects/index.md)维护。导入根入口不加载任何数据或定义 JSON，效果定义同样只在显式导入该子路径时读取。JSON 字段、层级、文件名与 JSON 值全部保留；`integrated` 的发布字节只删除字符串外的排版空白，归档字节摘要与发布字节摘要的映射见 `dist/publication.json`（[发布副本与摘要双链](#发布副本与摘要双链)），
 索引成员引用为 `files.data` 与 `files.details.{locale}`。包内包含八个类别的完整数据；根入口的名称与 ID
 元数据、名称/ID 冻结映射、快照信息常量及显式动态导入表引用全部已发布 JSON，但导入根入口仍不加载任何数据 JSON：浏览器只在调用对应函数时
 请求该 JSON 模块或构建后的分块，全量读取需显式调用。包只包含 dist 与 npm 标准清单、README、LICENSE；
@@ -356,9 +356,10 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 
 构建在独占临时副本完整验证后生成类型、名称与导入表，并只从该副本构建和复制到 dist；
 不会在生成类型后重新打包可变 integrated。打包前复验发布副本，解包验收再次核对实际文件集合、发布字节与摘要清单。
-全部 definitions 在同次构建准备阶段冻结；复制完成后复验来源与副本的完整文件集合和字节，捕获期间发生变化则拒绝，
+全部 definitions 在同次构建准备阶段冻结；冻结完成后复验来源与副本的完整文件集合和字节，捕获期间发生变化则拒绝，
 包括不属于属性 manifest 的 effects 制品。属性 manifest 另对照同次 integrated 核对成员与依赖文件摘要；
-后续只复制固定 definitions 并逐文件复验，不在构建结束重新读取可变定义。旧属性过期不阻止来源副本获取，
+后续只把固定 definitions 压缩发布到 `dist/definitions`，按归档逐文件核对 JSON 值与摘要并写出
+`definitions-publication.json`，不在构建结束重新读取可变定义。旧属性过期不阻止来源副本获取，
 仅在消费准备和发布边界拒绝；详见[属性生成与发布](panel-attributes.md#固定证据生成与发布)。
 技能 manifest 同时核对角色来源输入、固定语义 registry 和本次冻结的效果目标目录摘要；其过期处理遵循同一边界。
 公开 API 消费随 npm 版本固定的快照，不接受本地目录，不操作锁或恢复记录，运行时不重算原 JSON 的 SHA-256。
@@ -388,9 +389,13 @@ JSON 字符串之外的排版空白，字符串内容、字段、键顺序与全
 发布清单本身不记录自身摘要，其完整性由 npm tarball 的签名与完整性机制承担；这是清单作为根信任的边界。
 `snapshotId` 不随发布排版变化，也不因本清单改变；引用该标识的夹具与消费方无需刷新。
 
-`definitions/` 不属于本条双链：它是 Git 跟踪的静态制品，构建时逐文件按原字节复制。
-属性与技能 manifest 的 `inputs` 继续描述归档 integrated 字节，不能用于校验发布副本；
-这些 manifest 自身的 `artifacts` 摘要因 definitions 逐字节复制仍然适用于包内文件。
+`definitions/` 使用同一类但独立的外壳 `fairy-definitions-publication-manifest/v1`，位于包根
+`dist/definitions-publication.json`（子路径 `/definitions-publication.json`），不放进
+`dist/definitions/`，以免破坏该目录的精确成员校验。它逐文件记录 `archiveSha256`、
+`publicationSha256`、`archiveBytes` 与 `publicationBytes`；归档是 Git 跟踪的 definitions
+冻结副本，发布副本只删除 JSON 字符串外的排版空白。属性与技能 manifest 的 `inputs` 继续描述
+归档 integrated 字节，`artifacts` 继续描述 definitions 归档字节；校验发布副本时使用新清单的
+`publicationSha256`，不能把内部 manifest 的归档摘要当作包内文件摘要。
 
 内部属性和静态增益候选生成命令只接受不存在的输出目录。在创建任何父目录或临时目录前，先解析已有祖先的实际路径，
 拒绝输出位于 integrated 或其同级控制目录内；控制目录尚不存在时也同样保护。路径别名不能绕过此检查，

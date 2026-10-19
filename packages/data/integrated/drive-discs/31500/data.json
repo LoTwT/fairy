@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "DEF +16%",
+      "desc4": "Upon receiving an enemy attack and losing HP, the equipper takes 40% less DMG for 2.5s. This effect can trigger once every 15s."
+    },
+    "ja": {
+      "desc2": "防御力+16%。",
+      "desc4": "敵の攻撃を受け、かつHPが減少した時、装備者の被ダメージ-40%、継続時間2.5秒。15秒に1回のみ発動可能。"
+    },
+    "ko": {
+      "desc2": "방어력+16%",
+      "desc4": "적의 공격을 받아 HP가 줄어들 시 착용자가 받는 피해가 40% 감소한다. 지속 시간: 2.5초, 15초 동안 최대 1회 발동한다."
+    },
+    "zh": {
+      "desc2": "防御力+16%。",
+      "desc4": "受到敌方攻击并损失生命值时，装备者受到的伤害降低40%，持续2.5秒，15秒内最多触发一次。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitSoulRock.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitSoulRock.png",
-  "id": 31500
+  "id": 31500,
+  "names": {
+    "en": "Soul Rock",
+    "ja": "ソウル・ロック",
+    "ko": "소울 록",
+    "zh": "灵魂摇滚"
+  }
 }

@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Magnetiboo",
+    "ja": "クッツキボンプ",
+    "ko": "자석부",
+    "zh": "磁力布"
+  },
   "rarity": 3,
   "skillProp": {
     "5301101": {

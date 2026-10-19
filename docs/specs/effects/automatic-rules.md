@@ -27,7 +27,7 @@ Git 跟踪制品为 `packages/data/definitions/effects/automatic.json`：
 - `schemaVersion: 1`、`ruleSetId: "automatic-effects"`、初始 `revision: "1"`。
 - 首批包含 `w-engine:14131:energy-on-entry`；没有需要登记的状态或动作时，`states` 和 `actions` 为空数组。
 - 公开子路径 `@randomplay/data/definitions/effects/automatic.json` 映射到 `dist/definitions/effects/automatic.json`。
-- 沿用 definitions 的构建复制与逐字节验证机制。根入口仍不加载定义 JSON，data 与 core 没有相互的运行时依赖。
+- 沿用 definitions 的构建冻结、压缩发布与摘要清单机制。根入口仍不加载定义 JSON，data 与 core 没有相互的运行时依赖。
 - `automatic.json` 与 `starter.json` 保持不同规则集身份，首批效果 ID 不重叠。可分别消费；应用需要合并时显式构造自己的规则集身份和版本，再经过现有解析入口，不新增组合 API 或隐式全局注册表。
 
 规则定义、参数及来源引用以发布 JSON 为唯一事实来源。测试应加载真实制品，不另写一份同形规则作为正式规则验收输入。规范中的示例规则仍是表达能力示例，不自动成为发布内容。

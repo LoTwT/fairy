@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Miss Esme",
+    "ja": "ミス・エスメ",
+    "ko": "에스메 양",
+    "zh": "艾丝弥小姐"
+  },
   "rarity": 4,
   "skillProp": {
     "5401801": {

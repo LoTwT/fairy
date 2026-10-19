@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "CRIT Rate +8%",
+      "desc4": "Landing a critical hit on an enemy with a <color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge Counter</color>, or <color=#FFFFFF>EX Special Attack</color> increases the equipper's ATK by 9% for 6s. The buff duration for different skills are calculated separately."
+    },
+    "ja": {
+      "desc2": "会心率+8%。",
+      "desc4": "<color=#FFFFFF>『通常攻撃』</color>、<color=#FFFFFF>『回避反撃』</color>または<color=#FFFFFF>『強化特殊スキル』</color>が敵に命中し、なおかつ会心が出た時、それぞれ装備者にバフ効果を1重与える。バフ効果1重につき、装備者の攻撃力+9%、継続時間6秒。バフ効果の継続時間はスキルごとに計算される。"
+    },
+    "ko": {
+      "desc2": "치명타 확률+8%",
+      "desc4": "<color=#FFFFFF>[일반 공격]</color>, <color=#FFFFFF>[회피 반격]</color> 혹은 <color=#FFFFFF>[강화 특수 스킬]</color>이 적에게 명중하고 치명타 발동 시 착용자에게 각각 1스택의 버프 효과를 제공하며 버프 효과 스택당 착용자의 공격력이 9% 증가한다. 지속 시간: 6초, 각 스킬의 지속 시간은 따로 계산된다."
+    },
+    "zh": {
+      "desc2": "暴击率+8%。",
+      "desc4": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避反击]</color>或<color=#FFFFFF>[强化特殊技]</color>命中敌人并触发暴击时，分别为装备者提供1层增益效果，每层增益效果使装备者的攻击力提升9%，持续6秒，不同招式分别结算持续时间。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitWoodpeckerElectro.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitWoodpeckerElectro.png",
-  "id": 31000
+  "id": 31000,
+  "names": {
+    "en": "Woodpecker Electro",
+    "ja": "ウッドペッカー・エレクトロ",
+    "ko": "딱따구리 일렉트로",
+    "zh": "啄木鸟电音"
+  }
 }

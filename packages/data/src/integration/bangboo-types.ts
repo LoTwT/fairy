@@ -1,9 +1,11 @@
 import type { DetailLocale, MaterialCounts } from "./agent-types.ts"
+import type { SourceIndexNames } from "./source-json.ts"
 
 /**
- * Nanoka Bangboo 整合资料的正式字段定义（规则 nanoka-bangboo-reference/2）。
+ * Nanoka Bangboo 整合资料的正式字段定义（规则 nanoka-bangboo-reference/3）。
  *
  * 上游实体为 `bangboo`，整合类别登记名为 `bangboos`；一条记录表示一个邦布。
+ * 规则 /3 把来源索引记录中的四语名称提升为 `data.names`；索引与详情仍是独立来源。
  * 本层不解析技能参数引用、不换算百分比、不解释成长结构或技能效果，
  * 也不建立 definitions 或 core 映射。
  * number 表示原始数值，不承诺单位、缩放或计算语义。
@@ -15,6 +17,13 @@ import type { DetailLocale, MaterialCounts } from "./agent-types.ts"
 export interface BangbooData {
   /** 来源详情的数值邦布 ID；与目录 ID、索引成员和 details.id 核对一致。 */
   id: number
+
+  /**
+   * 来源索引记录的四语名称，按语言独立保存：zh/en 必填，ja/ko 可选。
+   * 索引名称与详情各语言的 name 是两个独立来源，不要求相等，也不互相回填。
+   * 发布目录的 BangbooName 以 `names.en` 为稳定来源。
+   */
+  names: SourceIndexNames
 
   /** 来源稀有度编码；未转换为 S/A 等业务枚举。 */
   rarity: number

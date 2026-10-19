@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Electroboo",
+    "ja": "ビリビリボンプ",
+    "ko": "찌릿부",
+    "zh": "电击布"
+  },
   "rarity": 3,
   "skillProp": {
     "5301001": {

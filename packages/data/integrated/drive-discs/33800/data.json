@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "<color=#98EFF0>Ice DMG</color> +10%.",
+      "desc4": "When the equipper triggers <color=#FFFFFF>Abloom</color>, their Anomaly Proficiency increases by 48 for 30s; repeated triggers reset the duration. When the equipper triggers a <color=#FFFFFF>Freeze</color> effect, their All-Attribute Anomaly DMG and <color=#FFFFFF>Disorder</color> DMG increase by 16% for 30s; repeated triggers reset the duration."
+    },
+    "ja": {
+      "desc2": "<color=#98EFF0>氷属性ダメージ</color>+10%。",
+      "desc4": "装備者が<color=#FFFFFF>「狂咲」</color>を発動させた時、装備者の異常マスタリー+48Pt、継続時間30秒、重複して発動すると継続時間が更新される。装備者が<color=#FFFFFF>「凍結」</color>効果を発動させた時、装備者が与える全属性状態異常ダメージと<color=#FFFFFF>「混沌」</color>ダメージ+16%、継続時間30秒、重複して発動すると継続時間が更新される。"
+    },
+    "ko": {
+      "desc2": "<color=#98EFF0>얼음 속성 피해</color>+10%",
+      "desc4": "착용자가 <color=#FFFFFF>[난개]</color> 발동 시, 착용자의 이상 마스터리가 48pt 증가한다. 지속 시간: 30초, 중복 발동 시 지속 시간이 갱신된다. 착용자가 <color=#FFFFFF>[빙결]</color> 효과 발동 시, 착용자가 주는 모든 속성 이상 피해, <color=#FFFFFF>[혼돈]</color> 피해가 16% 증가한다. 지속 시간: 30초, 중복 발동 시 지속 시간이 갱신된다."
+    },
+    "zh": {
+      "desc2": "<color=#98EFF0>冰属性伤害</color>+10%。",
+      "desc4": "装备者触发<color=#FFFFFF>[异放]</color>时，装备者异常精通提升48点，持续30秒；重复触发时刷新持续时间；装备者触发<color=#FFFFFF>[冻结]</color>效果时，装备者造成的所有属性异常伤害、<color=#FFFFFF>[紊乱]</color>伤害提升16%，持续30秒，重复触发时刷新持续时间。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitNotesFromtheChained.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitNotesFromtheChained.png",
-  "id": 33800
+  "id": 33800,
+  "names": {
+    "en": "Notes From the Chained",
+    "ja": "獄中の手記",
+    "ko": "수감자 수기",
+    "zh": "囚徒手记"
+  }
 }

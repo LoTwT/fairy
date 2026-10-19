@@ -99,11 +99,23 @@ function restoreStage(
   return stage
 }
 
+/** 独立测试侧期望：来源索引名称按语言提升，zh/en 必需，ja/ko 存在时保留。 */
+function indexNamesFromSourceRecord(sourceRecord: Record<string, unknown>) {
+  const names: Record<string, unknown> = {}
+  for (const locale of ["zh", "en", "ja", "ko"])
+    if (Object.hasOwn(sourceRecord, locale))
+      names[locale] = sourceRecord[locale]
+  return names
+}
+
 export function expectBangbooRoundtrip(
   result: IntegratedBangboo,
   input: { sourceRecord: unknown; details: Record<string, unknown> },
 ): void {
   expectJsonFidelity(result.sourceRecord, input.sourceRecord)
+  const expectedNames = indexNamesFromSourceRecord(
+    input.sourceRecord as Record<string, unknown>,
+  )
   for (const [locale, source] of Object.entries(input.details)) {
     const details = structuredClone(
       result.details[locale as "zh" | "en"],
@@ -114,6 +126,8 @@ export function expectBangbooRoundtrip(
     >
     expect(details.locale).toBe(locale)
     expect(details.id).toBe(data.id)
+    expect(data.names).toStrictEqual(expectedNames)
+    delete data.names
     delete details.locale
     delete details.id
     const restored: Record<string, unknown> = {

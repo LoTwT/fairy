@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Brawlerboo",
+    "ja": "カクトウボンプ",
+    "ko": "격투부",
+    "zh": "格斗布"
+  },
   "rarity": 3,
   "skillProp": {
     "5301501": {

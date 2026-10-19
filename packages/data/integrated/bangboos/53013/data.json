@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Baddieboo",
+    "ja": "カチコミボンプ",
+    "ko": "불량부",
+    "zh": "不良布"
+  },
   "rarity": 3,
   "skillProp": {
     "5301301": {

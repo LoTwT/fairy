@@ -52,7 +52,7 @@ export interface IntegratedDriveDisc {
 }
 
 /**
- * 按规则 nanoka-drive-disc-reference/2 校验、复制和拆分单个驱动盘套装。无 I/O、默认值或语言回退。
+ * 按规则 nanoka-drive-disc-reference/3 校验、复制和拆分单个驱动盘套装。无 I/O、默认值或语言回退。
  * 来源校验失败抛出含来源位置的 DriveDiscIntegrationError，不返回部分整合结果。
  */
 export function integrateDriveDisc(
@@ -120,8 +120,24 @@ export function integrateDriveDisc(
       failDriveDisc(at(context, "id"), "详情身份与实体 ID 不一致")
     return record
   })
-  validateDriveDiscSummary(sourceRecord, indexLocation, diagnostics)
+  const summaryLanguages = validateDriveDiscSummary(
+    sourceRecord,
+    indexLocation,
+    diagnostics,
+  )
+  // 来源索引名称与描述提升为 data.names / data.descriptions；两个来源保持独立，不按值相等合并。
+  const names: JsonObject = {}
+  const descriptions: JsonObject = {}
+  for (const [locale, language] of Object.entries(summaryLanguages)) {
+    put(names, locale, language.name)
+    const description: JsonObject = {}
+    put(description, "desc2", language.desc2)
+    put(description, "desc4", language.desc4)
+    put(descriptions, locale, description)
+  }
   const data: JsonObject = { id: records[0].id }
+  put(data, "names", names)
+  put(data, "descriptions", descriptions)
   for (const key of Object.keys(driveDiscDetailFields).toSorted()) {
     if (!driveDiscDetailFields[key].shared) continue
     for (const index of records.keys())
@@ -176,13 +192,14 @@ function validateDriveDiscSummary(
   record: JsonObject,
   location: SourceLocation,
   diagnostics: UnknownFieldDiagnostic[],
-): void {
+): Record<string, JsonObject> {
   for (const key of Object.keys(driveDiscSummaryFields).toSorted())
     if (!Object.hasOwn(record, key))
       failDriveDisc(at(location, key), "缺失必需字段")
   for (const locale of driveDiscSummaryRequiredLocales)
     if (!Object.hasOwn(record, locale))
       failDriveDisc(at(location, locale), "缺失必需字段")
+  const languages: Record<string, JsonObject> = {}
   for (const key of Object.keys(record).toSorted()) {
     if (Object.hasOwn(driveDiscSummaryFields, key)) {
       const kind = driveDiscSummaryFields[key]
@@ -194,7 +211,7 @@ function validateDriveDiscSummary(
       driveDiscSummaryRequiredLocales.includes(key) ||
       driveDiscSummaryOptionalLocales.includes(key)
     ) {
-      validateDriveDiscSummaryLanguage(
+      languages[key] = validateDriveDiscSummaryLanguage(
         record[key],
         at(location, key),
         diagnostics,
@@ -203,6 +220,7 @@ function validateDriveDiscSummary(
     }
     diagnostics.push({ ...at(location, key), kind: "unknown-field" })
   }
+  return languages
 }
 
 /** 摘要语言对象的已登记文本字段校验；可选语言只在存在时进入本检查。 */
@@ -210,7 +228,7 @@ function validateDriveDiscSummaryLanguage(
   value: SourceJson,
   location: SourceLocation,
   diagnostics: UnknownFieldDiagnostic[],
-): void {
+): JsonObject {
   if (!isObject(value)) failDriveDisc(location, "摘要语言记录必须是普通对象")
   for (const key of Object.keys(driveDiscSummaryLanguageFields).toSorted()) {
     if (!Object.hasOwn(value, key))
@@ -219,9 +237,15 @@ function validateDriveDiscSummaryLanguage(
     if (typeof value[key] !== kind)
       failDriveDisc(at(location, key), `字段类型必须为 ${kind}`)
   }
-  for (const key of Object.keys(value).toSorted())
-    if (!Object.hasOwn(driveDiscSummaryLanguageFields, key))
-      diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+  const record: JsonObject = {}
+  for (const key of Object.keys(value).toSorted()) {
+    if (Object.hasOwn(driveDiscSummaryLanguageFields, key)) {
+      put(record, key, value[key])
+      continue
+    }
+    diagnostics.push({ ...at(location, key), kind: "unknown-field" })
+  }
+  return record
 }
 
 /** 统一抛出驱动盘整合错误；共享 JSON 保真边界也沿用同一类型报告。 */

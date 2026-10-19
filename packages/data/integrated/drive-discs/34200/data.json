@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "DEF +16%",
+      "desc4": "The equipper's DMG increases by 15%. When the equipper's initial DEF is at least 1,000/1,800, CRIT Rate increases by 8/16%."
+    },
+    "ja": {
+      "desc2": "防御力+16%。",
+      "desc4": "装備者の与ダメージ+15%。装備者の開幕防御力が1000Pt/1800Pt以上の時、会心率+8%/16%。"
+    },
+    "ko": {
+      "desc2": "방어력+16%",
+      "desc4": "착용자가 주는 피해가 15% 증가한다. 착용자의 초기 방어력이 1000/1800pt 이상일 때, 치명타 확률이 8/16% 증가한다."
+    },
+    "zh": {
+      "desc2": "防御力+16%。",
+      "desc4": "装备者造成的伤害提升15%，装备者初始防御力大于等于1000/1800点时，暴击率提升8/16%"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitThornedRose.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitThornedRose.png",
-  "id": 34200
+  "id": 34200,
+  "names": {
+    "en": "Thorned Rose",
+    "ja": "棘まとう薔薇",
+    "ko": "가시 돋친 장미",
+    "zh": "荆棘玫瑰"
+  }
 }

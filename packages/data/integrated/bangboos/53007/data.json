@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Cryboo",
+    "ja": "ウルリンボンプ",
+    "ko": "울보부",
+    "zh": "泪眼布"
+  },
   "rarity": 3,
   "skillProp": {
     "5300701": {

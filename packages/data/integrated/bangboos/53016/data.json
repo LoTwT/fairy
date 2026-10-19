@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Excaliboo",
+    "ja": "セイケンボンプ",
+    "ko": "엑스칼리부",
+    "zh": "圣剑布"
+  },
   "rarity": 3,
   "skillProp": {
     "5301601": {

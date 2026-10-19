@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "ATK +10%",
+      "desc4": "Upon becoming the active character in combat, the equipper's ATK increases by 25% for 10s. This effect can trigger once every 20s."
+    },
+    "ja": {
+      "desc2": "攻撃力+10%。",
+      "desc4": "接敵状態かつ操作中のメンバーになった時、装備者の攻撃力+25%、継続時間10秒。20秒に1回のみ発動可能。"
+    },
+    "ko": {
+      "desc2": "공격력+10%",
+      "desc4": "교전 상태에서의 현재 조작 중인 캐릭터가 될 시, 착용자의 공격력이 25% 증가한다. 지속 시간: 10초, 20초 동안 최대 1회 발동한다."
+    },
+    "zh": {
+      "desc2": "攻击力+10%。",
+      "desc4": "成为接战状态下的当前操作角色时，装备者的攻击力提升25%，持续10秒，20秒内最多触发一次。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitHormonePunk.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitHormonePunk.png",
-  "id": 31400
+  "id": 31400,
+  "names": {
+    "en": "Hormone Punk",
+    "ja": "ホルモン・パンク",
+    "ko": "호르몬 펑크",
+    "zh": "激素朋克"
+  }
 }

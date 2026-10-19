@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "Increases <color=#FFFFFF>Basic Attack</color> DMG by 15%.",
+      "desc4": "Increases <color=#FFFFFF>Basic Attack</color> DMG by 20%. When equipped by an Attack character, using an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Ultimate</color> will further increase <color=#FFFFFF>Basic Attack</color> DMG by 20% for 25s. Repeated triggers reset the duration."
+    },
+    "ja": {
+      "desc2": "<color=#FFFFFF>『通常攻撃』</color>の与ダメージ+15%。",
+      "desc4": "<color=#FFFFFF>『通常攻撃』</color>の与ダメージ+20%。装備者が[強攻]メンバーの場合、<color=#FFFFFF>『強化特殊スキル』</color>または<color=#FFFFFF>『終結スキル』</color>を発動すると、<color=#FFFFFF>『通常攻撃』</color>の与ダメージが追加で+20%、継続時間25秒、重複して発動すると継続時間が更新される。"
+    },
+    "ko": {
+      "desc2": "<color=#FFFFFF>[일반 공격]</color>으로 주는 피해+15%",
+      "desc4": "<color=#FFFFFF>[일반 공격]</color>으로 주는 피해가 20% 증가하며, 착용자가 [강공] 캐릭터일 시 <color=#FFFFFF>[강화 특수 스킬]</color> 혹은 <color=#FFFFFF>[궁극기]</color>를 시전하면 <color=#FFFFFF>[일반 공격]</color>으로 주는 피해가 추가로 20% 증가한다. 지속 시간: 25초, 중복 발동 시 지속 시간이 갱신된다."
+    },
+    "zh": {
+      "desc2": "<color=#FFFFFF>[普通攻击]</color>造成的伤害提升15%。",
+      "desc4": "<color=#FFFFFF>[普通攻击]</color>造成的伤害提升20%，装备者为[强攻]角色时，发动<color=#FFFFFF>[强化特殊技]</color>或<color=#FFFFFF>[终结技]</color>会使<color=#FFFFFF>[普通攻击]</color>造成的伤害额外提升20%，持续25秒，重复触发时刷新持续时间。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitDawnsBloom.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitDawnsBloom.png",
-  "id": 33300
+  "id": 33300,
+  "names": {
+    "en": "Dawn's Bloom",
+    "ja": "暁に咲く花",
+    "ko": "여명의 꽃",
+    "zh": "拂晓生花"
+  }
 }

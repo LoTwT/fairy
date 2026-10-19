@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "<color=#FE437E>Ether DMG</color> +10%",
+      "desc4": "When the equipper's <color=#FFFFFF>Basic Attack</color> hits an enemy, their Anomaly Proficiency increases by 36, lasting 8s. Repeated triggers reset the duration. When any enemy on the field is Stunned, the equipper's DMG increases by 25% for 18s. Repeated triggers reset the duration."
+    },
+    "ja": {
+      "desc2": "<color=#FE437E>エーテル属性ダメージ</color>+10%。",
+      "desc4": "装備者の<color=#FFFFFF>『通常攻撃』</color>が敵に命中した時、自身の異常マスタリー+36Pt、継続時間8秒、重複して発動すると継続時間が更新される。フィールド上の敵がブレイク状態になった時、装備者の与ダメージ+25%、継続時間18秒、重複して発動すると継続時間が更新される。"
+    },
+    "ko": {
+      "desc2": "<color=#FE437E>에테르 피해</color>+10%",
+      "desc4": "착용자가 <color=#FFFFFF>[일반 공격]</color>으로 적 명중 시 자신의 이상 마스터리가 36pt 증가한다. 지속 시간: 8초, 중복 발동 시 지속 시간이 갱신된다. 전장 위 적이 그로기 상태에 진입할 시 착용자가 주는 피해가 25% 증가한다. 지속 시간: 18초, 중복 발동 시 지속 시간이 갱신된다."
+    },
+    "zh": {
+      "desc2": "<color=#FE437E>以太伤害</color>+10%。",
+      "desc4": "装备者发动<color=#FFFFFF>[普通攻击]</color>命中敌人时，自身异常精通提升36点，持续8秒，重复触发时刷新持续时间；当场上有敌人进入失衡状态时，装备者造成的伤害提升25%，持续18秒，重复触发时刷新持续时间。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitShiningAria.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitShiningAria.png",
-  "id": 33600
+  "id": 33600,
+  "names": {
+    "en": "Shining Aria",
+    "ja": "流光のアリア",
+    "ko": "빛의 아리아",
+    "zh": "流光咏叹"
+  }
 }

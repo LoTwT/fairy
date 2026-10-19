@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "CRIT DMG +16%",
+      "desc4": "When Anomaly Mastery exceeds or equals 115 points, the equipper's CRIT DMG increases by 30%. When any squad member applies <color=#98EFF0>Freeze</color> or triggers the <color=#98EFF0>Shatter</color> effect on an enemy, the equipper's CRIT Rate increases by 12%, lasting 15s."
+    },
+    "ja": {
+      "desc2": "会心ダメージ+16%。",
+      "desc4": "異常掌握が115Pt以上の時、装備者の会心ダメージ+30%。任意のメンバーが敵に<color=#98EFF0>[凍結]</color>効果を付与した時、または<color=#98EFF0>[砕氷]</color>効果を発動した時、装備者の会心率+12%、継続時間15秒。"
+    },
+    "ko": {
+      "desc2": "치명타 피해+16%",
+      "desc4": "이상 장악력이 115pt 이상일 시 착용자의 치명타 피해가 30% 증가한다. 파티 내 임의의 캐릭터가 적에게 <color=#98EFF0>[빙결]</color> 부여 혹은 <color=#98EFF0>[쇄빙]</color> 효과 발동 시 착용자의 치명타 확률이 12% 증가한다. 지속 시간: 15초"
+    },
+    "zh": {
+      "desc2": "暴击伤害+16%。",
+      "desc4": "异常掌控大于等于115点时，装备者的暴击伤害提升30%；队伍中任意角色对敌人施加<color=#98EFF0>[冻结]</color>或触发<color=#98EFF0>[碎冰]</color>效果时，装备者的暴击率提升12%，持续15秒。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitBranch&BladeSong.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitBranch&BladeSong.png",
-  "id": 32700
+  "id": 32700,
+  "names": {
+    "en": "Branch & Blade Song",
+    "ja": "折枝の刀歌",
+    "ko": "나뭇가지 검의 노래",
+    "zh": "折枝剑歌"
+  }
 }

@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Resonaboo",
+    "ja": "レゾナンボンプ",
+    "ko": "공명부",
+    "zh": "共鸣布"
+  },
   "rarity": 4,
   "skillProp": {
     "5400901": {

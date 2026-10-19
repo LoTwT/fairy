@@ -29,11 +29,30 @@ function combine(
   return result
 }
 
+/** 独立测试侧期望：索引名称与描述按语言提升，zh/en 必需，ja/ko 存在时保留。 */
+function indexTextsFromSourceRecord(sourceRecord: Record<string, unknown>) {
+  const names: Record<string, unknown> = {}
+  const descriptions: Record<string, unknown> = {}
+  for (const locale of ["zh", "en", "ja", "ko"]) {
+    if (!Object.hasOwn(sourceRecord, locale)) continue
+    const language = sourceRecord[locale] as Record<string, unknown>
+    names[locale] = language.name
+    descriptions[locale] = {
+      desc2: language.desc2,
+      desc4: language.desc4,
+    }
+  }
+  return { names, descriptions }
+}
+
 export function expectDriveDiscRoundtrip(
   result: IntegratedDriveDisc,
   input: { sourceRecord: unknown; details: Record<string, unknown> },
 ): void {
   expectJsonFidelity(result.sourceRecord, input.sourceRecord)
+  const expectedIndexTexts = indexTextsFromSourceRecord(
+    input.sourceRecord as Record<string, unknown>,
+  )
   for (const [locale, source] of Object.entries(input.details)) {
     const details = structuredClone(
       result.details[locale as "zh" | "en"],
@@ -44,6 +63,10 @@ export function expectDriveDiscRoundtrip(
     >
     expect(details.locale).toBe(locale)
     expect(details.id).toBe(data.id)
+    deepStrictEqual(data.names, expectedIndexTexts.names)
+    deepStrictEqual(data.descriptions, expectedIndexTexts.descriptions)
+    delete data.names
+    delete data.descriptions
     delete details.locale
     delete details.id
     deepStrictEqual(combine(data, details), source)

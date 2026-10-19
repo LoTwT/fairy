@@ -19,6 +19,7 @@ import type { UnknownFieldDiagnostic } from "../src/integration/source-json.ts"
 
 export const minimalData: BangbooData = {
   id: 950001,
+  names: { zh: "", en: "" },
   rarity: 3,
   icon: "",
   stats: {
@@ -190,9 +191,16 @@ export const wrongStatsType: BangbooData = {
 // @ts-expect-error id 必须为安全数值，不接受字符串。
 export const wrongIdType: BangbooData = { ...minimalData, id: "950001" }
 
+export const missingEnglishIndexName: BangbooData = {
+  ...minimalData,
+  // @ts-expect-error 索引名称 zh/en 必填。
+  names: { zh: "" },
+}
+
 // @ts-expect-error 缺失 rarity 不能由未知字段补位。
 export const missingRarity: BangbooData = {
   id: 950001,
+  names: { zh: "", en: "" },
   icon: "",
   stats: minimalData.stats,
   skillProp: {},
@@ -313,6 +321,7 @@ export const checks: unknown[] = [
   detailsWithStageNumericMember,
   wrongStatsType,
   wrongIdType,
+  missingEnglishIndexName,
   missingRarity,
   missingParameterMember,
   missingStageMember,

@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "<color=#2EB6FF>Electric DMG</color> +10%",
+      "desc4": "As long as an enemy in combat is <color=#2EB6FF>Shocked</color>, the equipper's ATK is increased by 28%."
+    },
+    "ja": {
+      "desc2": "<color=#2EB6FF>電気属性ダメージ</color>+10%。",
+      "desc4": "フィールド上に<color=#2EB6FF>[感電]</color>状態の敵がいる時、装備者の攻撃力+28%。"
+    },
+    "ko": {
+      "desc2": "<color=#2EB6FF>전기 속성 피해</color>+10%",
+      "desc4": "전장에 <color=#2EB6FF>[감전]</color> 상태의 적이 존재할 시 착용자의 공격력이 28% 증가한다."
+    },
+    "zh": {
+      "desc2": "<color=#2EB6FF>电属性伤害</color>+10%。",
+      "desc4": "当场上存在处于<color=#2EB6FF>[感电]</color>状态下的敌人时，装备者的攻击力提升28%。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitThunderMetal.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitThunderMetal.png",
-  "id": 32400
+  "id": 32400,
+  "names": {
+    "en": "Thunder Metal",
+    "ja": "霹靂のヘヴィメタル",
+    "ko": "썬더 메탈",
+    "zh": "雷暴重金属"
+  }
 }

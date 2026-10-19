@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Bagboo",
+    "ja": "フクロノボンプ",
+    "ko": "봉투부",
+    "zh": "纸袋布"
+  },
   "rarity": 3,
   "skillProp": {
     "5300601": {

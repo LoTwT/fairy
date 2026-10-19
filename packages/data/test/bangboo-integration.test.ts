@@ -68,6 +68,12 @@ function expectFailure(
 
 const expectedData = {
   id: 950001,
+  names: {
+    zh: "索引示例布",
+    en: "Index Exampleboo",
+    ja: "サンプルブ",
+    ko: "예시부",
+  },
   rarity: 3,
   icon: "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRoleExample.png",
   stats: {
@@ -129,7 +135,7 @@ const expectedData = {
   },
 } satisfies BangbooData
 
-describe("单邦布纯整合 nanoka-bangboo-reference/1", () => {
+describe("单邦布纯整合 nanoka-bangboo-reference/3", () => {
   it("按独立预期拆分双语，保留索引，冻结输入仍可整合且不修改来源", () => {
     const input = bangbooInput()
     const before = structuredClone(input)
@@ -273,6 +279,7 @@ describe("单邦布纯整合 nanoka-bangboo-reference/1", () => {
     expect(result.details.en!.codeName).toBe("Bangboo Example")
     expect(result.sourceRecord.en).toBe("changed index name")
     expect(result.sourceRecord.desc).toBe("changed index desc")
+    expect(result.data.names.en).toBe("changed index name")
     expect(result.maintenance.diagnostics).toEqual([])
     expectBangbooRoundtrip(result, input)
   })
@@ -312,6 +319,29 @@ describe("单邦布纯整合 nanoka-bangboo-reference/1", () => {
     ])
     expect(result.sourceRecord).toStrictEqual(input.sourceRecord)
     expectBangbooRoundtrip(result, input)
+  })
+
+  it.each(["zh", "en"])("来源索引缺失 %s 名称即失败", (locale) => {
+    const input = bangbooInput()
+    remove(input.sourceRecord, locale)
+    expectFailure(input, "index", `/${locale}`, "缺失必需字段")
+  })
+
+  it.each(["ja", "ko"])("来源索引 %s 名称可选，缺失时不补造", (locale) => {
+    const input = bangbooInput()
+    remove(input.sourceRecord, locale)
+    const result = integrateBangboo(input)
+    expect(result.data.names).not.toHaveProperty(locale)
+    expect(result.sourceRecord).not.toHaveProperty(locale)
+    expectBangbooRoundtrip(result, input)
+  })
+
+  it.each(["ja", "ko"])("来源索引 %s 名称提供时必须为字符串", (locale) => {
+    for (const value of [0, null, [], {}]) {
+      const input = bangbooInput()
+      change(input.sourceRecord, locale, value)
+      expectFailure(input, "index", `/${locale}`, "字段类型必须为 string")
+    }
   })
 
   it("合法空值完整保留：空图标、空等级、空技能等级与空技能参数块", () => {

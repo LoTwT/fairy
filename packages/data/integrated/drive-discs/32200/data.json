@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "<color=#FF5521>Fire DMG</color> +10%",
+      "desc4": "Upon hitting a <color=#FF5521>Burning</color> enemy, the equipper's CRIT Rate is increased by 28% for 8s."
+    },
+    "ja": {
+      "desc2": "<color=#FF5521>炎属性ダメージ</color>+10%。",
+      "desc4": "<color=#FF5521>[熱傷]</color>状態の敵に攻撃が命中した時、装備者の会心率+28%、継続時間8秒。"
+    },
+    "ko": {
+      "desc2": "<color=#FF5521>불 속성 피해</color>+10%",
+      "desc4": "공격이 <color=#FF5521>[연소]</color> 상태의 적에게 명중 시 착용자의 치명타 확률이 28% 증가한다. 지속 시간: 8초"
+    },
+    "zh": {
+      "desc2": "<color=#FF5521>火属性伤害</color>+10%。",
+      "desc4": "攻击命中处于<color=#FF5521>[灼烧]</color>状态下的敌人时，装备者的暴击率提升28%，持续8秒。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitInfernoMetal.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitInfernoMetal.png",
-  "id": 32200
+  "id": 32200,
+  "names": {
+    "en": "Inferno Metal",
+    "ja": "炎獄のヘヴィメタル",
+    "ko": "불지옥 메탈",
+    "zh": "炎狱重金属"
+  }
 }

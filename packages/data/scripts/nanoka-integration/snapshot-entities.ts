@@ -197,7 +197,7 @@ export const nanokaDriveDiscsSnapshotEntity: IntegratedSnapshotEntityProducer =
   {
     name: "drive-discs",
     sourceEntity: "equipment",
-    rulesVersion: "nanoka-drive-disc-reference/2",
+    rulesVersion: "nanoka-drive-disc-reference/3",
     verifyMemberFile: verifyDriveDiscSnapshotMemberFile,
     integrate({ memberId, sourceRecord, details, detailLocales }) {
       const result = integrateDriveDisc({
@@ -246,7 +246,7 @@ export function verifyWEngineSnapshotMemberFile(
 export const nanokaWEnginesSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "w-engines",
   sourceEntity: "weapon",
-  rulesVersion: "nanoka-w-engine-reference/2",
+  rulesVersion: "nanoka-w-engine-reference/3",
   verifyMemberFile: verifyWEngineSnapshotMemberFile,
   integrate({ memberId, sourceRecord, details, detailLocales }) {
     const result = integrateWEngine({
@@ -295,7 +295,7 @@ export function verifyBangbooSnapshotMemberFile(
 export const nanokaBangboosSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "bangboos",
   sourceEntity: "bangboo",
-  rulesVersion: "nanoka-bangboo-reference/2",
+  rulesVersion: "nanoka-bangboo-reference/3",
   verifyMemberFile: verifyBangbooSnapshotMemberFile,
   integrate({ memberId, sourceRecord, details, detailLocales }) {
     const result = integrateBangboo({

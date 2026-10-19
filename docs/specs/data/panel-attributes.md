@@ -168,7 +168,7 @@ pnpm --filter @randomplay/data generate:panel-attributes /absolute/pinned-source
 来源副本获取不校验旧属性，因此属性过期不会阻止重新生成。`prepare:consumer` 和 build 在另一步冻结全部
 definitions，并核对属性 manifest 与同次 integrated 的成员和实际消费文件摘要；无关怪物或关卡更新不使属性过期。
 缺文件、额外文件、规则过期、来源/制品摘要不符均拒绝。每次 build 独占 `.publication-*`，类型、catalog、
-integrated、definitions 与 manifest 都取自这次副本；构建结束不再复制可变 definitions。dist 再按字节复验。
+integrated、definitions 与 manifest 都取自这次副本；构建结束不再复制可变 definitions。dist 再按归档逐文件核对 JSON 值、归档摘要与发布摘要。
 data 不新增运行时 core/effects 依赖。
 
 验收沿用 `pnpm check` 和 `pnpm --filter @randomplay/data verify:browser`；覆盖独立数值样本、错误拒绝、

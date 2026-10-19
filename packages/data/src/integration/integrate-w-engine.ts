@@ -19,6 +19,7 @@ import {
   at,
   copyJson,
   equalJson,
+  extractSourceIndexNames,
   fail,
   isObject,
   isSourceId,
@@ -60,7 +61,7 @@ export interface IntegratedWEngine {
 }
 
 /**
- * 按规则 nanoka-w-engine-reference/2 校验、复制和拆分单个 WEngine。无 I/O、默认值或语言回退。
+ * 按规则 nanoka-w-engine-reference/3 校验、复制和拆分单个 WEngine。无 I/O、默认值或语言回退。
  * 来源校验失败抛出含来源位置的 WEngineIntegrationError，不返回部分整合结果。
  */
 export function integrateWEngine(
@@ -106,6 +107,12 @@ export function integrateWEngine(
   for (const key of Object.keys(sourceRecord).toSorted())
     if (!wEngineIndexFields.includes(key))
       diagnostics.push({ ...at(indexLocation, key), kind: "unknown-field" })
+  // 索引名称提升为 data.names：zh/en 必需，ja/ko 可选；原值逐字复制，不与详情名称对账。
+  const names = extractSourceIndexNames(
+    sourceRecord,
+    indexLocation,
+    WEngineIntegrationError,
+  )
   const sources = input.details
   if (!isObject(sources)) failWEngine(location, "details 必须是语言记录对象")
   for (const key of Reflect.ownKeys(sources)) {
@@ -134,6 +141,7 @@ export function integrateWEngine(
     return record
   })
   const data: JsonObject = { id: records[0].id }
+  put(data, "names", names as unknown as JsonObject)
   for (const key of Object.keys(wEngineSharedDetailFields).toSorted()) {
     const definition = wEngineSharedDetailFields[key]!
     for (const index of records.keys())

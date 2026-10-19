@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Overtimeboo",
+    "ja": "サビザンボンプ",
+    "ko": "야근부",
+    "zh": "加班布"
+  },
   "rarity": 3,
   "skillProp": {
     "5301401": {

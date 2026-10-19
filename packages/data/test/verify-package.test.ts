@@ -43,6 +43,11 @@ import {
   verifyMinifiedPublication,
 } from "../scripts/publication-minify.ts"
 import {
+  definitionsPublicationManifestFormat,
+  verifyDefinitionsPublication,
+  writeMinifiedDefinitionsPublication,
+} from "../scripts/definitions-publication.ts"
+import {
   attributeArtifactPaths,
   verifyPanelAttributes,
 } from "../scripts/panel-attributes/manifest.ts"
@@ -259,14 +264,37 @@ describe("packed package", () => {
       ...index.entities.agents.memberIds.map((id) => `agents/${id}.json`),
       "manifest.json",
     ]
+    // 属性与技能 manifest 的 artifacts/inputs 描述归档 integrated 与归档 definitions 字节；
+    // 因此对归档副本验证，发布副本的字节由 definitions-publication.json 单独绑定。
     await verifyAgentActions(
-      join(packedRoot, "dist/definitions/skills"),
-      index,
-      join(packedRoot, "dist/definitions/effects/static-catalog.json"),
+      join(cleanPackage, "definitions/skills"),
+      archiveIndex,
+      join(cleanPackage, "definitions/effects/static-catalog.json"),
     )
     await verifyPanelAttributes(
-      join(packedRoot, "dist/definitions/attributes"),
-      index,
+      join(cleanPackage, "definitions/attributes"),
+      archiveIndex,
+    )
+    const definitionsArchiveFiles = attributeFiles
+      .map((path) => `attributes/${path}`)
+      .concat(
+        actionFiles.map((path) => `skills/${path}`),
+        [
+          "effects/starter.json",
+          "effects/automatic.json",
+          "effects/static.json",
+          "effects/static-catalog.json",
+          "effects/static-coverage.json",
+        ],
+      )
+      .toSorted()
+    const definitionsManifest = await verifyDefinitionsPublication({
+      publicationDirectory: join(packedRoot, "dist/definitions"),
+      manifestPath: join(packedRoot, "dist/definitions-publication.json"),
+      archiveDirectory: join(cleanPackage, "definitions"),
+    })
+    expect(Object.keys(definitionsManifest.files).toSorted()).toEqual(
+      definitionsArchiveFiles,
     )
     // 文件清单覆盖全部已登记类别与成员：由验证后的索引逐类别推导，不使用固定文件总数。
     expect(Object.keys(index.entities).toSorted()).toEqual([
@@ -327,6 +355,7 @@ describe("packed package", () => {
         "dist/index.browser.mjs",
         "dist/index.browser.d.mts",
         "dist/publication.json",
+        "dist/definitions-publication.json",
         ...sharedTypes,
         ...sharedRuntime,
         "package.json",
@@ -345,7 +374,7 @@ describe("packed package", () => {
       const path = `definitions/effects/${name}.json`
       expectSameBytes(
         readFileSync(join(packedRoot, "dist", path)),
-        readFileSync(join(cleanPackage, path)),
+        Buffer.from(minifyJsonBytes(readFileSync(join(cleanPackage, path)))),
         path,
       )
     }
@@ -374,13 +403,21 @@ describe("packed package", () => {
     for (const path of attributeFiles)
       expectSameBytes(
         readFileSync(join(packedRoot, "dist/definitions/attributes", path)),
-        readFileSync(join(cleanPackage, "definitions/attributes", path)),
+        Buffer.from(
+          minifyJsonBytes(
+            readFileSync(join(cleanPackage, "definitions/attributes", path)),
+          ),
+        ),
         path,
       )
     for (const path of actionFiles)
       expectSameBytes(
         readFileSync(join(packedRoot, "dist/definitions/skills", path)),
-        readFileSync(join(cleanPackage, "definitions/skills", path)),
+        Buffer.from(
+          minifyJsonBytes(
+            readFileSync(join(cleanPackage, "definitions/skills", path)),
+          ),
+        ),
         path,
       )
     expect(
@@ -408,30 +445,27 @@ describe("packed package", () => {
     ).toEqual(expectedNames)
     const expectedDriveDiscNames = index.entities["drive-discs"].memberIds.map(
       (id) =>
-        JSON.parse(
-          readFileSync(
-            join(snapshot, `drive-discs/${id}/details.en.json`),
-            "utf8",
-          ),
-        ).name,
+        (
+          JSON.parse(
+            readFileSync(join(snapshot, `drive-discs/${id}/data.json`), "utf8"),
+          ) as { names: { en: string } }
+        ).names.en,
     )
     const expectedWEngineNames = index.entities["w-engines"].memberIds.map(
       (id) =>
-        JSON.parse(
-          readFileSync(
-            join(snapshot, `w-engines/${id}/details.en.json`),
-            "utf8",
-          ),
-        ).name,
+        (
+          JSON.parse(
+            readFileSync(join(snapshot, `w-engines/${id}/data.json`), "utf8"),
+          ) as { names: { en: string } }
+        ).names.en,
     )
     const expectedBangbooNames = index.entities["bangboos"].memberIds.map(
       (id) =>
-        JSON.parse(
-          readFileSync(
-            join(snapshot, `bangboos/${id}/details.en.json`),
-            "utf8",
-          ),
-        ).name,
+        (
+          JSON.parse(
+            readFileSync(join(snapshot, `bangboos/${id}/data.json`), "utf8"),
+          ) as { names: { en: string } }
+        ).names.en,
     )
     const expectedMonsterIds = index.entities["monsters"].memberIds
     const expectedShiyuIds = index.entities["shiyu"].memberIds
@@ -448,7 +482,11 @@ import * as api from "@randomplay/data"
 assert.deepEqual(Object.keys(api).sort(), ["agentNames", "agentNamesBySourceId", "agentSourceIds", "bangbooNames", "bangbooNamesBySourceId", "bangbooSourceIds", "bossIds", "simulIds", "driveDiscNames", "driveDiscNamesBySourceId", "driveDiscSourceIds", "monsterIds", "shiyuIds", "wEngineNames", "wEngineNamesBySourceId", "wEngineSourceIds", "snapshotInfo", "loadAgentData", "loadAgentDetails", "loadAllAgents", "loadAllAgentData", "loadAllBangboos", "loadAllBangbooData", "loadAllBosses", "loadAllBossData", "loadAllSimul", "loadAllSimulData", "loadAllDriveDiscs", "loadAllDriveDiscData", "loadAllMonsters", "loadAllMonsterData", "loadAllShiyu", "loadAllShiyuData", "loadAllWEngines", "loadAllWEngineData", "loadBangbooData", "loadBangbooDetails", "loadBossData", "loadBossDetails", "loadSimulData", "loadSimulDetails", "loadDriveDiscData", "loadDriveDiscDetails", "loadIndex", "loadMonsterData", "loadMonsterDetails", "loadShiyuData", "loadShiyuDetails", "loadWEngineData", "loadWEngineDetails", "loadAgentLevel60Attributes", "loadWEngineLevel60Attributes", "loadSDriveDiscMaxLevelAffixes", "loadAgentActions", "resolveAgentAction", "resolveAgentSkillLevel", "calculationDataVersion", "loadStaticCalculationData", "UnknownCalculationEntitiesError"].sort())
 const packedIndex = (await import("@randomplay/data/integrated/index.json", { with: { type: "json" } })).default
 const packedPublication = (await import("@randomplay/data/publication.json", { with: { type: "json" } })).default
+const packedDefinitionsPublication = (await import("@randomplay/data/definitions-publication.json", { with: { type: "json" } })).default
 assert.equal(packedPublication.format, "fairy-publication-manifest/v1")
+assert.equal(packedDefinitionsPublication.format, "fairy-definitions-publication-manifest/v1")
+assert.equal(Object.keys(packedDefinitionsPublication.files).length, ${definitionsArchiveFiles.length})
+assert.notEqual(packedDefinitionsPublication.files["effects/static.json"].publicationSha256, packedDefinitionsPublication.files["effects/static.json"].archiveSha256)
 assert.equal(Object.keys(packedPublication.files).length, ${jsonFiles.length})
 assert.equal(packedPublication.files["index.json"].archiveSha256, packedPublication.archiveIndexSha256)
 assert.notEqual(packedPublication.files["index.json"].publicationSha256, packedPublication.files["index.json"].archiveSha256)
@@ -915,7 +953,7 @@ for (const name of api.driveDiscNames) {
   const data = await api.loadDriveDiscData(name)
   const zh = await api.loadDriveDiscDetails(name, "zh")
   const en = await api.loadDriveDiscDetails(name, "en")
-  assert.equal(en.name, name)
+  assert.equal(data.names.en, name)
   assert.equal(zh.locale, "zh")
   assert.equal(en.locale, "en")
   assert.deepEqual(allDiscs[name], { data, details: zh })
@@ -944,7 +982,7 @@ for (const name of api.wEngineNames) {
   const data = await api.loadWEngineData(name)
   const zh = await api.loadWEngineDetails(name, "zh")
   const en = await api.loadWEngineDetails(name, "en")
-  assert.equal(en.name, name)
+  assert.equal(data.names.en, name)
   assert.equal(zh.locale, "zh")
   assert.equal(en.locale, "en")
   assert.deepEqual(allWEngines[name], { data, details: zh })
@@ -973,7 +1011,7 @@ for (const name of api.bangbooNames) {
   const data = await api.loadBangbooData(name)
   const zh = await api.loadBangbooDetails(name, "zh")
   const en = await api.loadBangbooDetails(name, "en")
-  assert.equal(en.name, name)
+  assert.equal(data.names.en, name)
   assert.equal(zh.locale, "zh")
   assert.equal(en.locale, "en")
   assert.deepEqual(allBangboos[name], { data, details: zh })
@@ -1718,7 +1756,9 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
         {
           cwd: cleanPackage,
           encoding: "utf8",
-          timeout: 30_000,
+          // CI cold builds can exceed 30s after the publication-layer work; keep
+          // a bounded timeout so a hung build still fails the test.
+          timeout: 60_000,
           env: {
             ...checkoutEnvironment,
             FAIRY_PUBLICATION_TEST_PACKAGE: cleanPackage,
@@ -1802,7 +1842,7 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
           JSON.parse(
             runNode(
               cleanPackage,
-              'import { driveDiscNames, loadDriveDiscDetails } from "./dist/index.mjs"; console.log(JSON.stringify(await Promise.all(driveDiscNames.map(async name => (await loadDriveDiscDetails(name, "en")).name))))',
+              'import { driveDiscNames, loadDriveDiscData } from "./dist/index.mjs"; console.log(JSON.stringify(await Promise.all(driveDiscNames.map(async name => (await loadDriveDiscData(name)).names.en))))',
             ),
           ),
         ).toEqual(expectedDriveDiscNames)
@@ -1810,7 +1850,7 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
           JSON.parse(
             runNode(
               cleanPackage,
-              'import { wEngineNames, loadWEngineDetails } from "./dist/index.mjs"; console.log(JSON.stringify(await Promise.all(wEngineNames.map(async name => (await loadWEngineDetails(name, "en")).name))))',
+              'import { wEngineNames, loadWEngineData } from "./dist/index.mjs"; console.log(JSON.stringify(await Promise.all(wEngineNames.map(async name => (await loadWEngineData(name)).names.en))))',
             ),
           ),
         ).toEqual(expectedWEngineNames)
@@ -1818,7 +1858,7 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
           JSON.parse(
             runNode(
               cleanPackage,
-              'import { bangbooNames, loadBangbooDetails } from "./dist/index.mjs"; console.log(JSON.stringify(await Promise.all(bangbooNames.map(async name => (await loadBangbooDetails(name, "en")).name))))',
+              'import { bangbooNames, loadBangbooData } from "./dist/index.mjs"; console.log(JSON.stringify(await Promise.all(bangbooNames.map(async name => (await loadBangbooData(name)).names.en))))',
             ),
           ),
         ).toEqual(expectedBangbooNames)
@@ -1877,6 +1917,92 @@ void [numericSourceId, numericDriveDiscId, numericWEngineId, numericBangbooId, n
       }),
     )
   }, 300_000)
+
+  it("rejects missing, extra and wrong-digest definitions publication files", async () => {
+    const root = mkdtempSync(
+      join(tmpdir(), "randomplay-definitions-publication-"),
+    )
+    temporaryDirectories.push(root)
+    const archive = join(root, "archive")
+    const publication = join(root, "publication")
+    const manifestPath = join(root, "definitions-publication.json")
+    mkdirSync(join(archive, "effects"), { recursive: true })
+    mkdirSync(join(archive, "attributes"), { recursive: true })
+    writeFileSync(
+      join(archive, "effects/static.json"),
+      '{\n  "schemaVersion": 1,\n  "effects": []\n}\n',
+    )
+    writeFileSync(
+      join(archive, "attributes/manifest.json"),
+      '{\n  "schemaVersion": 1,\n  "artifacts": {}\n}\n',
+    )
+    const manifest = await writeMinifiedDefinitionsPublication({
+      archiveDirectory: archive,
+      publicationDirectory: publication,
+      manifestPath,
+    })
+    expect(manifest.format).toBe(definitionsPublicationManifestFormat)
+    expect(readFileSync(join(publication, "effects/static.json"), "utf8")).toBe(
+      '{"schemaVersion":1,"effects":[]}',
+    )
+    await expect(
+      verifyDefinitionsPublication({
+        publicationDirectory: publication,
+        manifestPath,
+        archiveDirectory: archive,
+      }),
+    ).resolves.toEqual(manifest)
+
+    // 缺文件
+    rmSync(join(publication, "effects/static.json"))
+    await expect(
+      verifyDefinitionsPublication({
+        publicationDirectory: publication,
+        manifestPath,
+        archiveDirectory: archive,
+      }),
+    ).rejects.toThrow(/字段集合不一致|文件或目录缺失/u)
+    writeFileSync(
+      join(publication, "effects/static.json"),
+      minifyJsonBytes(readFileSync(join(archive, "effects/static.json"))),
+    )
+
+    // 额外文件
+    writeFileSync(join(publication, "effects/extra.json"), '"extra"\n')
+    await expect(
+      verifyDefinitionsPublication({
+        publicationDirectory: publication,
+        manifestPath,
+        archiveDirectory: archive,
+      }),
+    ).rejects.toThrow(/字段集合不一致|未登记/u)
+    rmSync(join(publication, "effects/extra.json"))
+
+    // 错误发布摘要
+    const wrongPublication = structuredClone(manifest)
+    wrongPublication.files["effects/static.json"]!.publicationSha256 =
+      "0".repeat(64)
+    writeFileSync(manifestPath, `${JSON.stringify(wrongPublication)}\n`)
+    await expect(
+      verifyDefinitionsPublication({
+        publicationDirectory: publication,
+        manifestPath,
+        archiveDirectory: archive,
+      }),
+    ).rejects.toThrow(/发布副本摘要与清单不一致/u)
+
+    // 错误归档摘要
+    const wrongArchive = structuredClone(manifest)
+    wrongArchive.files["effects/static.json"]!.archiveSha256 = "0".repeat(64)
+    writeFileSync(manifestPath, `${JSON.stringify(wrongArchive)}\n`)
+    await expect(
+      verifyDefinitionsPublication({
+        publicationDirectory: publication,
+        manifestPath,
+        archiveDirectory: archive,
+      }),
+    ).rejects.toThrow(/归档副本摘要与清单不一致/u)
+  })
 })
 import {
   astraYaoM4ConsumerSource,

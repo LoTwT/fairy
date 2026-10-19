@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "HP +10%",
+      "desc4": "When the equipper is a Defense character: When the equipper launches an <color=#FFFFFF>EX Special Attack</color> or any squad member triggers a <color=#FFFFFF>Defensive Assist</color> or <color=#FFFFFF>Evasive Assist</color>, all squad members' DMG increases by 6%, stacking up to 3 times, lasting 25s. Stacks decay one at a time, and duration refreshes when gained or decayed. Passive effects of the same name do not stack."
+    },
+    "ja": {
+      "desc2": "HP+10%",
+      "desc4": "[防護]メンバーが装備している場合、装備者が<color=#FFFFFF>『強化特殊スキル』</color>を発動、または任意のメンバーが<color=#FFFFFF>『パリィ支援』</color>、<color=#FFFFFF>『回避支援』</color>を発動した時、メンバー全員の与ダメージ+6%、最大3重まで重ね掛け可能、継続時間25秒。重数は1重ずつ減少し、獲得または減少時に継続時間が更新される。同じパッシブ効果は重ね掛け不可。"
+    },
+    "ko": {
+      "desc2": "HP+10%",
+      "desc4": "[방어] 캐릭터가 장착 시, 착용자가 <color=#FFFFFF>[강화 특수 스킬]</color>을 시전하거나 임의의 파티원이 <color=#FFFFFF>[패링 지원]</color>, <color=#FFFFFF>[회피 지원]</color> 시전 시, 파티 내 모든 캐릭터가 주는 피해가 6% 증가한다. 최대 중첩: 3스택, 지속 시간: 25초, 스택은 순차적으로 감소하고, 획득 혹은 감소 시 지속 시간이 갱신되며, 이름이 같은 패시브 효과끼리 중첩되지 않는다."
+    },
+    "zh": {
+      "desc2": "生命值+10%",
+      "desc4": "[防护]角色装备时：装备者发动<color=#FFFFFF>[强化特殊技]</color>或队伍中任意队友发动<color=#FFFFFF>[招架支援]</color>、<color=#FFFFFF>[回避支援]</color>时，全队角色造成伤害提升6%，最多叠加3层，持续25秒，层数逐层衰减，获得或者衰减时刷新持续时间，同名被动效果之间不可叠加。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitBunnyinWonderland.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitBunnyinWonderland.png",
-  "id": 33700
+  "id": 33700,
+  "names": {
+    "en": "Bunny in Wonderland",
+    "ja": "雪うさぎワンダーランド",
+    "ko": "이상한 나라의 눈토끼",
+    "zh": "雪兔梦游仙境 "
+  }
 }

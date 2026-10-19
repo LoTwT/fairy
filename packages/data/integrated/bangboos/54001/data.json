@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Sharkboo",
+    "ja": "ガブットボンプ",
+    "ko": "샤크부",
+    "zh": "鲨牙布"
+  },
   "rarity": 4,
   "skillProp": {
     "5400101": {

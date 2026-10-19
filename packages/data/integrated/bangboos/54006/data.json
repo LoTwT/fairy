@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Rocketboo",
+    "ja": "ハヤスギボンプ",
+    "ko": "날쌘부",
+    "zh": "飚速布"
+  },
   "rarity": 4,
   "skillProp": {
     "5400601": {

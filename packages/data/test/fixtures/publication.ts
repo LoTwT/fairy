@@ -12,6 +12,7 @@ import { agentInput } from "./agent-source.ts"
 import {
   driveDiscInput,
   syntheticDriveDiscEnglishName,
+  syntheticDriveDiscIndexName,
 } from "./drive-disc-source.ts"
 import {
   defaultRulesVersion as legacyV2RulesVersion,
@@ -24,8 +25,16 @@ import {
   syntheticBossIds,
   syntheticSimulIds,
 } from "./synthetic-dataset.ts"
-import { syntheticWEngineEnglishName, wEngineInput } from "./w-engine-source.ts"
-import { bangbooInput, syntheticBangbooEnglishName } from "./bangboo-source.ts"
+import {
+  syntheticWEngineEnglishName,
+  syntheticWEngineIndexName,
+  wEngineInput,
+} from "./w-engine-source.ts"
+import {
+  bangbooInput,
+  syntheticBangbooEnglishName,
+  syntheticBangbooIndexName,
+} from "./bangboo-source.ts"
 import { monsterInput } from "./monster-source.ts"
 import { shiyuInput } from "./shiyu-source.ts"
 import { bossInput } from "./boss-source.ts"
@@ -72,12 +81,21 @@ export async function publicationFixture(
   }
   if (driveDiscs) {
     // 默认登记表包含 drive-discs 类别：equipment 输入使用真实驱动盘结构的合成成员。
-    // 英文详情名称按成员唯一且与 sourceRecord.en.name 不同；发布目录生成依赖类内唯一。
+    // 索引英文名称与英文详情名称都按成员唯一且互不相同；DriveDiscName 取索引名称。
     const driveDisc = driveDiscInput()
     await write(
       "equipment.json",
       Object.fromEntries(
-        syntheticDriveDiscIds.map((id) => [id, driveDisc.sourceRecord]),
+        syntheticDriveDiscIds.map((id) => [
+          id,
+          {
+            ...driveDisc.sourceRecord,
+            en: {
+              ...driveDisc.sourceRecord.en,
+              name: syntheticDriveDiscIndexName(id),
+            },
+          },
+        ]),
       ),
     )
     for (const id of syntheticDriveDiscIds)
@@ -92,12 +110,18 @@ export async function publicationFixture(
         })
   }
   // 默认登记表包含 w-engines 类别：weapon 输入使用真实 WEngine 结构的合成成员；
-  // 英文详情名称按成员唯一且与 sourceRecord.en 不同，用于捕获发布目录取错名称来源。
+  // 索引英文名称与英文详情名称都按成员唯一且互不相同；WEngineName 取索引名称。
   const wEngine = wEngineInput()
   await write(
     "weapon.json",
     Object.fromEntries(
-      syntheticWEngineIds.map((id) => [id, wEngine.sourceRecord]),
+      syntheticWEngineIds.map((id) => [
+        id,
+        {
+          ...wEngine.sourceRecord,
+          en: syntheticWEngineIndexName(id),
+        },
+      ]),
     ),
   )
   for (const id of syntheticWEngineIds)
@@ -109,12 +133,18 @@ export async function publicationFixture(
           locale === "en" ? syntheticWEngineEnglishName(id) : `示例音擎 ${id}`,
       })
   // 默认登记表包含 bangboos 类别：bangboo 输入使用真实邦布结构的合成成员；
-  // 英文详情名称按成员唯一且与 sourceRecord.en 不同，用于捕获发布目录取错名称来源。
+  // 索引英文名称与英文详情名称都按成员唯一且互不相同；BangbooName 取索引名称。
   const bangboo = bangbooInput()
   await write(
     "bangboo.json",
     Object.fromEntries(
-      syntheticBangbooIds.map((id) => [id, bangboo.sourceRecord]),
+      syntheticBangbooIds.map((id) => [
+        id,
+        {
+          ...bangboo.sourceRecord,
+          en: syntheticBangbooIndexName(id),
+        },
+      ]),
     ),
   )
   for (const id of syntheticBangbooIds)

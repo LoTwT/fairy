@@ -1,5 +1,29 @@
 {
+  "descriptions": {
+    "en": {
+      "desc2": "<color=#F0D12B>Physical DMG</color> +10%",
+      "desc4": "When the equipper is within any <color=#FFFFFF>Ether Veil</color>, their CRIT Rate increases by 10%. After leaving the <color=#FFFFFF>Ether Veil</color>, this buff remains for 15s. If the equipper is an <color=#FFFFFF>Attack</color> character, activating an <color=#FFFFFF>Ether Veil</color> or extending an <color=#FFFFFF>Ether Veil</color>'s duration increases their CRIT Rate by 10% and ATK by 10% for 30s. Repeated triggers reset the duration."
+    },
+    "ja": {
+      "desc2": "<color=#F0D12B>物理属性ダメージ</color>+10%。",
+      "desc4": "装備者が任意の<color=#FFFFFF>「エーテルベール」</color>効果を受けている時、自身の会心率+10%。<color=#FFFFFF>「エーテルベール」</color>終了後でも、この効果は15秒継続する。装備者が<color=#FFFFFF>[強攻]</color>メンバーの場合、<color=#FFFFFF>「エーテルベール」</color>を展開、または<color=#FFFFFF>「エーテルベール」</color>の継続時間を延長した際、自身の会心率+10%、攻撃力+10%、継続時間30秒、重複して発動すると継続時間が更新される。"
+    },
+    "ko": {
+      "desc2": "<color=#F0D12B>물리 피해</color>+10%",
+      "desc4": "착용자가 임의의 <color=#FFFFFF>[에테르 장막]</color> 중에 있을 때 자신의 치명타 확률이 10% 증가하며, <color=#FFFFFF>[에테르 장막]</color>에서 벗어난 후에도 해당 버프는 유지된다. 지속 시간: 15초. 착용자가 <color=#FFFFFF>[강공]</color> 캐릭터일 경우, <color=#FFFFFF>[에테르 장막]</color>을 발동하거나 <color=#FFFFFF>[에테르 장막]</color>의 지속 시간 연장 시, 자신의 치명타 확률이 10% 증가하고 공격력이 10% 증가한다. 지속 시간: 30초, 중복 발동 시 지속 시간이 갱신된다."
+    },
+    "zh": {
+      "desc2": "<color=#F0D12B>物理伤害</color>+10%。",
+      "desc4": "装备者处于任意<color=#FFFFFF>[以太帷幕]</color>中时，自身暴击率提高10%，离开<color=#FFFFFF>[以太帷幕]</color>后，该增益效果仍然保留，持续15秒；装备者为<color=#FFFFFF>[强攻]</color>角色时，开启<color=#FFFFFF>[以太帷幕]</color>或延长<color=#FFFFFF>[以太帷幕]</color>的持续时间会使自身暴击率提升10%和攻击力提升10%，持续30秒，重复触发时刷新持续时间。"
+    }
+  },
   "icon": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitWhiteWaterBallad.png",
   "icon2": "UI/Sprite/A1DynamicLoad/IconSuit/UnPacker/SuitWhiteWaterBallad.png",
-  "id": 33500
+  "id": 33500,
+  "names": {
+    "en": "White Water Ballad",
+    "ja": "純白の行歌",
+    "ko": "물빛 노랫소리",
+    "zh": "沧浪行歌"
+  }
 }

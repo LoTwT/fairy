@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Bild N. Boolok",
+    "ja": "ブロックボンプ",
+    "ko": "블록부",
+    "zh": "乐玩布"
+  },
   "rarity": 3,
   "skillProp": {
     "5301901": {

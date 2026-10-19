@@ -18,6 +18,58 @@ export interface UnknownFieldDiagnostic extends SourceLocation {
   kind: "unknown-field"
 }
 
+/**
+ * 来源索引记录提升到 `data.names` 的名称容器。
+ * `zh`、`en` 必填，`ja`、`ko` 可选；可选语言缺失时不补造，出现时必须为字符串。
+ */
+export interface SourceIndexNames {
+  /** 来源索引 `zh` 名称原值。 */
+  zh: string
+
+  /** 来源索引 `en` 名称原值；发布目录以其作为名称类别的稳定来源。 */
+  en: string
+
+  /** 来源索引 `ja` 名称原值；索引记录提供时逐字复制。 */
+  ja?: string
+
+  /** 来源索引 `ko` 名称原值；索引记录提供时逐字复制。 */
+  ko?: string
+}
+
+/** `data.names` 中必填的语言 key。 */
+export const requiredSourceIndexNameLocales: readonly string[] = ["zh", "en"]
+
+/** `data.names` 中可选的语言 key；缺失时不生成，出现时校验字符串。 */
+export const optionalSourceIndexNameLocales: readonly string[] = ["ja", "ko"]
+
+/**
+ * 从来源索引记录提取 `data.names`：zh/en 必需，ja/ko 可选。
+ * 名称按来源原值逐字复制，不与详情名称对账；索引记录本身的 key 与值不变。
+ */
+export function extractSourceIndexNames(
+  record: JsonObject,
+  location: SourceLocation,
+  ErrorClass: SourceIntegrationErrorConstructor,
+): SourceIndexNames {
+  const names: JsonObject = {}
+  for (const locale of requiredSourceIndexNameLocales) {
+    if (!Object.hasOwn(record, locale))
+      fail(at(location, locale), "缺失必需字段", ErrorClass)
+    const value = record[locale]
+    if (typeof value !== "string")
+      fail(at(location, locale), "字段类型必须为 string", ErrorClass)
+    put(names, locale, value)
+  }
+  for (const locale of optionalSourceIndexNameLocales) {
+    if (!Object.hasOwn(record, locale)) continue
+    const value = record[locale]
+    if (typeof value !== "string")
+      fail(at(location, locale), "字段类型必须为 string", ErrorClass)
+    put(names, locale, value)
+  }
+  return names as unknown as SourceIndexNames
+}
+
 /** 构造携带来源位置错误的整合错误类型；各实体类别提供具名子类。 */
 export type SourceIntegrationErrorConstructor = new (
   location: SourceLocation,

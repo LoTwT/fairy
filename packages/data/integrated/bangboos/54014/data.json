@@ -126,6 +126,12 @@
       "materials": {}
     }
   },
+  "names": {
+    "en": "Agent Gulliver",
+    "ja": "ガリバー隊員",
+    "ko": "걸리버 요원",
+    "zh": "格列佛探员"
+  },
   "rarity": 4,
   "skillProp": {
     "5401401": {
