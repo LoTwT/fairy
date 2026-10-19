@@ -186,8 +186,8 @@ import simul from "@randomplay/data/integrated/simul/101/data.json" with { type:
 import simulZh from "@randomplay/data/integrated/simul/101/details.zh.json" with { type: "json" }
 ```
 
-名称取发布名称：代理人取来源索引 en 名（`integrated/agents/{id}/data.json` 的 `names.en`，稳定来源，
-与英文详情显示名解耦），驱动盘、WEngine 与邦布取英文详情顶层 `name` 原值；语言必须显式为 `zh` 或 `en`。
+名称取发布名称：代理人、驱动盘、WEngine 与邦布统一读取各自 `integrated/{类别}/{id}/data.json` 的 `names.en`
+（来源索引 en 名，稳定来源，与英文详情显示名解耦）；语言必须显式为 `zh` 或 `en`。
 读取函数每次返回独立对象，根入口不预载数据；代理人、驱动盘、WEngine 与邦布的名称类型、catalog 与读取函数
 遵循同一契约；怪物与 Shiyu 名称在类内大量重名，其公开身份是来源索引顶层 ID 的规范十进制字符串，
 `MonsterId`/`ShiyuId`、`monsterIds`/`shiyuIds` 与读取函数遵循同一契约。各类别按需加载互不串读。
