@@ -104,8 +104,14 @@ export function integrateBoss(input: IntegrateBossInput): IntegratedBoss {
   // 索引直播服时间窗提升为 data.liveTimeWindow：两字段成对提供或成对缺失，缺失时不补造。
   const hasLiveBegin = Object.hasOwn(sourceRecord, "live_begin")
   const hasLiveEnd = Object.hasOwn(sourceRecord, "live_end")
-  if (hasLiveBegin !== hasLiveEnd)
-    failBoss(indexLocation, "live_begin 与 live_end 必须成对提供或成对缺失")
+  if (hasLiveBegin !== hasLiveEnd) {
+    const present = hasLiveBegin ? "live_begin" : "live_end"
+    const missing = hasLiveBegin ? "live_end" : "live_begin"
+    failBoss(
+      indexLocation,
+      `live_begin 与 live_end 必须成对提供或成对缺失：已提供 ${present}，缺失 ${missing}`,
+    )
+  }
   let liveTimeWindow: JsonObject | undefined
   if (hasLiveBegin) {
     const liveBegin = sourceRecord.live_begin

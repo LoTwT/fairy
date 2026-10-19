@@ -1,8 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from "vitest"
 import type {
+  AgentData,
   AgentName,
   AgentSourceId,
+  AgentSourceNames,
   BangbooName,
+  BossData,
+  BossLiveTimeWindow,
   DetailLocale,
   DriveDiscName,
   MonsterId,
@@ -884,6 +888,24 @@ describe("static calculation selection contract", () => {
 })
 
 describe("public readers", () => {
+  it("exposes the source-index business field types from the package root", () => {
+    // 纯类型断言：根入口必须能导入新增公开类型，且字段形状与 data 契约一致。
+    const names: AgentSourceNames = {
+      zh: "安比",
+      en: "Anby",
+      ja: "アンビー",
+      ko: "엔비",
+    }
+    const live: BossLiveTimeWindow = {
+      beginTime: "2024-07-04 04:00:00",
+      endTime: "2024-08-01 03:59:59",
+    }
+    const agent: Pick<AgentData, "names"> = { names }
+    const boss: Pick<BossData, "liveTimeWindow"> = { liveTimeWindow: live }
+    expect(agent.names).toEqual(names)
+    expect(boss.liveTimeWindow).toEqual(live)
+  })
+
   it("loads only the requested index/data/locale without prerequisites", async () => {
     expect(await loadAgentData("Astra Yao")).toMatchObject({ id: 1311 })
     expect(loaders.index).not.toHaveBeenCalled()

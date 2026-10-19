@@ -15,6 +15,9 @@ import type { DetailLocale } from "./agent-types.ts"
  * `modes` 数组顺序保持来源原样，不排序、不去重、不按数组位置跨语言合并；
  * mode ID 属于详情内部，不生成独立实体目录或远端资源。
  * 顶层 `zoneType` 与 mode 的 `zoneType` 分别保留，不要求相等。
+ * 变体按语言独立校验，不要求各语言选择同一变体（本地 3.2 全部 47 条中英文均为 `modes`）。
+ * 索引记录另登记四语名称与 `live_begin`/`live_end`：后者成对提升为 `data.liveTimeWindow`，
+ * 其余索引字段只用于未知字段诊断并完整保留在 `sourceRecord`。
  * `bossAdjust` 是完整共享块：成员逐个登记，跨语言整块比较完整值，负值、比例与 points 等保留原始数值。
  * 未登记字段整合失败，不进入发布制品；登记成员在对应结构上均要求存在。
  * 不承诺未来来源版本结构不变；合成验收位于 test/boss-integration.test.ts。

@@ -130,6 +130,7 @@ export type {
 export type {
   AgentData,
   AgentDetails,
+  AgentSourceNames,
   DetailLocale,
   ExportFileReference,
   MaterialCounts,
@@ -192,6 +193,7 @@ export type {
   BossAdjustEntry,
   BossData,
   BossDetails,
+  BossLiveTimeWindow,
   BossMode,
   BossZoneBuff,
   BossZoneEncounter,

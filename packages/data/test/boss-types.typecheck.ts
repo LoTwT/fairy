@@ -7,6 +7,7 @@ import type {
   BossData,
   BossDetails,
   BossDetailsModesVariant,
+  BossLiveTimeWindow,
   BossMode,
   BossZoneEncounter,
   BossZoneRoom,
@@ -75,6 +76,21 @@ export const minimalData: BossData = {
   beginTime: "2024-07-04 04:00:00",
   endTime: "2024-08-01 03:59:59",
   bossAdjust: { "1001": adjust },
+}
+
+/** 索引 `live_begin`/`live_end` 成对提升；缺失时不补造，因此是可选的成对容器。 */
+export const dataWithLiveTimeWindow: BossData = {
+  ...minimalData,
+  liveTimeWindow: {
+    beginTime: "2024-07-04 04:00:00",
+    endTime: "2024-08-01 03:59:59",
+  },
+}
+
+export const liveTimeWindowWithoutEnd: BossLiveTimeWindow = {
+  beginTime: "2024-07-04 04:00:00",
+  // @ts-expect-error 成对提升的时间窗必须同时提供两端。
+  endTime: undefined,
 }
 
 export const dataWithAdjustUnknownMembers: BossData = {

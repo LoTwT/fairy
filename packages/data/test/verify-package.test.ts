@@ -352,12 +352,25 @@ describe("packed package", () => {
       JSON.parse(readFileSync(join(packedRoot, "package.json"), "utf8"))
         .dependencies ?? {},
     ).toEqual({})
-    const expectedNames = index.entities.agents.memberIds.map(
-      (id) =>
-        JSON.parse(
-          readFileSync(join(snapshot, `agents/${id}/details.en.json`), "utf8"),
-        ).name,
-    )
+    // AgentName 的事实来源是来源索引 en 名（data.names.en），不是英文详情显示名。
+    const expectedNames = index.entities.agents.memberIds.map((id) => {
+      const data = JSON.parse(
+        readFileSync(join(snapshot, `agents/${id}/data.json`), "utf8"),
+      ) as { names: { en: string } }
+      return data.names.en
+    })
+    // 兼容性断言：本地 3.2 索引名与详情名恰好一致；这不构成 AgentName 的来源契约。
+    expect(
+      index.entities.agents.memberIds.map(
+        (id) =>
+          JSON.parse(
+            readFileSync(
+              join(snapshot, `agents/${id}/details.en.json`),
+              "utf8",
+            ),
+          ).name,
+      ),
+    ).toEqual(expectedNames)
     const expectedDriveDiscNames = index.entities["drive-discs"].memberIds.map(
       (id) =>
         JSON.parse(
@@ -832,6 +845,8 @@ for (const name of api.agentNames) {
   const data = await api.loadAgentData(name)
   const zh = await api.loadAgentDetails(name, "zh")
   const en = await api.loadAgentDetails(name, "en")
+  // AgentName 的事实来源是 data.names.en；与英文详情名相等只是本地 3.2 的兼容性观察。
+  assert.equal(data.names.en, name)
   assert.equal(en.name, name)
   assert.equal(zh.locale, "zh")
   assert.equal(en.locale, "en")

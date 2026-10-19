@@ -11,6 +11,7 @@ import type {
 import type {
   AgentData,
   AgentDetails,
+  AgentSourceNames,
   SkillDescriptionSection,
   SkillParameterRow,
   SourceParameter,
@@ -49,6 +50,20 @@ export const arraySpecialElement: AgentDetails["specialElementType"] = []
 export const objectPotential: AgentData["potential"] = {}
 // @ts-expect-error potential 必须为数值数组。
 export const stringPotential: AgentData["potential"] = ["1"]
+/** 索引四语名称提升为 data.names；四个语言全部必需。 */
+export const sourceNames: AgentSourceNames = {
+  zh: "安比",
+  en: "Anby",
+  ja: "アンビー",
+  ko: "엔비",
+}
+export const missingSourceName: AgentSourceNames = {
+  zh: "安比",
+  en: "Anby",
+  ja: "アンビー",
+  // @ts-expect-error 四语名称全部必需，不能省略 ko。
+  ko: undefined,
+}
 // @ts-expect-error attackData 必须为数值数组。
 export const stringAttackData: SourceParameter["attackData"] = ["0"]
 // @ts-expect-error attackData 不能为 null。

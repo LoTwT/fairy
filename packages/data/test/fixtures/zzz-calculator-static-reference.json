@@ -80350,6 +80350,30 @@
           "packages/data/definitions/effects/static-catalog.json": "0958a918aebb418d67e67280b4ccbdc83f63a8362ee8d478bb9c5bd1739761dc"
         }
       },
+      "currentSnapshotId": "sha256:72f8efdb8aea0ca44f1d8b37b3d28d6c095887b8853e6ac8c1a13c6d880fcc71"
+    },
+    {
+      "reason": "Integration-rule strictification (PR-C) regenerates the snapshot with the same published values: unknown detail fields now fail, shared fields are strict, closed types replace open index signatures, and shiyu zone numerics move to data. Only the current consumption snapshot and the changed static-catalog digest are refreshed; static.json stays byte-identical.",
+      "implementationBase": "e430cfddf315068b99c87441e294c9a54e724572",
+      "previous": {
+        "snapshotId": "sha256:72f8efdb8aea0ca44f1d8b37b3d28d6c095887b8853e6ac8c1a13c6d880fcc71",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "a8aac21c0307af11934c1eaf84a5f14cccf390487b5ea6e9505307c8e4ec3305",
+          "packages/data/definitions/effects/static-catalog.json": "2c75ada280abfd2269270a794a76a3558994bf882c5d6aae6180081b8d22fb12"
+        }
+      },
+      "currentSnapshotId": "sha256:6cf7f6a2da16cb770a4573e91608a60724ef0ce77d0bb1c363e231a7bcef9d9a"
+    },
+    {
+      "reason": "sourceRecord business-field registration (PR-D) adds agent data.names and boss data.liveTimeWindow, so agents and boss rules versions advance. Only the current consumption snapshot and the changed static-catalog digest are refreshed; static.json stays byte-identical and no comparison result changes.",
+      "implementationBase": "e63992e104af667e7ad03216e0bc2d3ce64cddda",
+      "previous": {
+        "snapshotId": "sha256:6cf7f6a2da16cb770a4573e91608a60724ef0ce77d0bb1c363e231a7bcef9d9a",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "a8aac21c0307af11934c1eaf84a5f14cccf390487b5ea6e9505307c8e4ec3305",
+          "packages/data/definitions/effects/static-catalog.json": "2c75ada280abfd2269270a794a76a3558994bf882c5d6aae6180081b8d22fb12"
+        }
+      },
       "currentSnapshotId": "sha256:e423558334fb76962ebdfab3681b32da4c637d5de485984a8ae74459a1c2fb87"
     }
   ]
