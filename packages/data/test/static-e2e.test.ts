@@ -90,7 +90,7 @@ async function inputFor(
     ],
   })
   expect(data.version).toEqual({
-    packageVersion: "0.3.0",
+    packageVersion: "0.4.0",
     contractVersion: 2,
     gameVersion: "3.2",
     snapshotId:

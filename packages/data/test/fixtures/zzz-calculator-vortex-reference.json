@@ -62,7 +62,7 @@
       "docs/specs/core/factors/stun-damage.md": "180cc28eccb869d978663aaf58f0db3497500d1a4a0017eeae0c9503ac38729b"
     },
     "fairyCalculationDataVersion": {
-      "packageVersion": "0.3.0",
+      "packageVersion": "0.4.0",
       "contractVersion": 2,
       "gameVersion": "3.2",
       "snapshotId": "sha256:7bb28d858be347be6ef86a5ae7d5a1f1286f4048b1039e01a6f3ae39b47f0c09"
