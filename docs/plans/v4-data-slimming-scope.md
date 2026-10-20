@@ -1,8 +1,8 @@
 # v4 数据瘦身范围说明与实施记录
 
-- 状态：已实施并通过主会话 review；版本号与发布由后续 release 步骤处理
+- 状态：已实施并通过主会话 review；0.4.0 已于 2026-10-20 发布（tag `v0.4.0`，main `ec408758`）
 - 日期：2026-10-20
-- 分支：`feat/v4-publication-index`（基线 `main @ 335741a8`）
+- 分支：`feat/v4-publication-index`（基线 `main @ 335741a8`）；发布分支 `release/0.4.0`
 - 范围：公开 npm 发布索引的体积与来源记录边界
 - 非范围：计算规则、实体字段语义、详情文本去重、0.4.0 发版本身
 
@@ -14,7 +14,7 @@
 - npm `dist/integrated/index.json` 生成新的发布索引 `fairy-nanoka-integrated/v4`，成员不再包含 `sourceRecord`。
 - 归档外壳、`snapshotId`、数据管理状态和静态效果证据读取链路尽量保持不变。
 - v4 只改变 npm 发布索引的形状，不改变 Git 归档、实体文件、计算结果或来源事实。
-- 该变更并入尚未发布的 0.4.0；0.4.0 作为一次集中破坏性发布，不另发 0.5.0。
+- 该变更已并入 0.4.0；0.4.0 作为一次集中破坏性发布，不另发 0.5.0。
 
 如果目标只是减小 npm 包体，这个方案收益明确；如果目标是同时减小 Git 仓库或归档体积，则需要另行讨论，见第 4.3 节。
 
@@ -57,22 +57,23 @@
 
 | 项目                               | 基线 `335741a8` |       本分支 |                 变化 |
 | ---------------------------------- | --------------: | -----------: | -------------------: |
-| npm tarball                        |     2,744,034 B |  2,575,845 B | −168,189 B（−6.13%） |
+| npm tarball                        |     2,744,034 B |  2,575,851 B | −168,183 B（−6.13%） |
 | 解包字节                           |    23,739,820 B | 23,237,218 B |           −502,602 B |
 | `dist/integrated/index.json`       |       927,669 B |    422,048 B |           −505,621 B |
 | 发布索引 gzip（Node zlib level 9） |       307,355 B |    138,873 B |           −168,482 B |
 
 收益门槛（tarball 缩小 ≥ 5% 或 ≥ 120 KB）已满足。基线 tarball 由 `335741a8` 工作区打包测得；
-分支 tarball 由本分支 `pnpm pack` 测得，`verify:pack` 的冷检出打包结果一致。后续 release 步骤仍需按最终
-候选重新打包复核。
+0.4.0 发布候选已重新打包复核，最终 tarball 为 `2,575,851 B`，`verify:pack` 的冷检出结果一致。
 
 验证结果：`pnpm check`、`verify:pack`、`verify:browser`、`verify:nanoka:snapshot`、
 `verify:nanoka:current integrated` 与 `git diff --check` 均通过；`verify:nanoka:current` 的受管理状态为
 `idle`，归档 `indexSha256` 保持 `7f875c8f…`；`packages/data/integrated` 与 `packages/data/definitions`
 相对基线无 diff。
 
-### 0.4.0 发布说明草稿
+### 0.4.0 发布说明（已发布）
 
+- GitHub Release：<https://github.com/LoTwT/fairy/releases/tag/v0.4.0>
+- npm：`@randomplay/core@0.4.0` 与 `@randomplay/data@0.4.0` 均为 `latest`。
 - `@randomplay/data` 的 `loadIndex` 现在返回发布 v4 索引，成员不再包含 `sourceRecord`；需要来源记录的
   消费者应使用 Git 归档或后续独立 provenance 来源。
 - npm `dist/integrated/index.json` 为 `fairy-nanoka-integrated/v4`；Git 归档仍为 v3。
@@ -283,11 +284,11 @@ packages/data/dist/publication.json          v2，归档 → 发布映射
 4. 已完成：实现发布派生和归档/发布两侧验证，未改归档。
 5. 已完成：更新公开类型、catalog、消费文档、测试与打包/浏览器断言。
 6. 已完成：打包测量满足收益门槛（tarball −6.13%）。
-7. 待后续 release：并入 0.4.0，按发布说明记录 breaking change；本轮不提交、不推送、不建 PR。
+7. 已完成：0.4.0 于 2026-10-20 发布；PR [#264](https://github.com/LoTwT/fairy/pull/264) 与 release PR [#265](https://github.com/LoTwT/fairy/pull/265) 已合并，tag `v0.4.0` 指向 `ec408758`。
 
 ## 9. 风险与未决
 
-- 公开 `loadIndex` 破坏性变更已按 0.4.0 计划记录；迁移说明见 0.4.0 发布说明草稿。
+- 公开 `loadIndex` 破坏性变更已按 0.4.0 发布；迁移说明见 0.4.0 发布说明。
 - 发布索引和归档索引不再“只差排版”；v2 清单、派生字节核对与递归 `sourceRecord` 扫描共同防止手工裁剪
   或错误字段丢失。
 - `snapshotId` 继续由归档输入计算，发布 `format` 只描述公开外壳；两者语义已在消费契约中分开说明。
