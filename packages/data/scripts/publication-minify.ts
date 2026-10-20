@@ -1,17 +1,26 @@
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
 import type { IntegratedSnapshotIndex } from "../src/integration/snapshot-types.ts"
+import {
+  integratedSnapshotFormat,
+  publishedIntegratedSnapshotFormat,
+} from "../src/integration/snapshot-types.ts"
+import { isObject } from "../src/integration/source-json.ts"
 import { writeFileAtomically } from "./atomic-write.ts"
 import {
   outputExpansionLimit,
   verifyFileSet,
 } from "./nanoka-integration/artifact-files.ts"
 import { directoryRoot, readBytes, sha256 } from "./nanoka-integration/files.ts"
+import {
+  derivePublishedIndex,
+  derivePublishedIndexBytes,
+} from "./nanoka-integration/published-index.ts"
 import { loadSourcePolicy } from "./nanoka/policy.ts"
 import { publicationFiles } from "./prepare-publication.ts"
 
-/** 发布副本摘要清单的外壳版本；与归档索引分开演进。 */
-export const publicationManifestFormat = "fairy-publication-manifest/v1"
+/** 发布副本摘要清单的外壳版本；v2 明确记录归档索引 → 发布索引的派生关系。 */
+export const publicationManifestFormat = "fairy-publication-manifest/v2"
 
 /** 单个文件在归档副本与发布副本中的字节事实。 */
 export interface PublicationManifestFile {
@@ -28,13 +37,23 @@ export interface PublicationManifestFile {
   publicationBytes: number
 }
 
+/** 归档索引外壳 → 发布索引外壳的固定派生方向。 */
+export interface PublicationIndexDerivation {
+  /** Git 归档使用的外壳版本。 */
+  archiveFormat: typeof integratedSnapshotFormat
+
+  /** npm 发布索引使用的外壳版本。 */
+  publicationFormat: typeof publishedIntegratedSnapshotFormat
+}
+
 /**
  * 归档索引 → 发布副本的字节级映射。
  *
- * 索引内的摘要继续描述归档字节；发布副本只改变排版，因此需要独立清单说明
- * 同一 JSON 值在两侧的摘要与字节数。`archiveIndexSha256` 是归档索引的摘要，
+ * 索引内的摘要继续描述归档字节；发布副本的其他文件只改变排版，`index.json` 还按
+ * v3 → v4 规则移除成员的 `sourceRecord`。`archiveIndexSha256` 是归档索引的摘要，
  * 是本清单与归档快照之间的绑定；验证时传入归档目录会把该绑定锚定到真实字节。
- * 消费快照标识由归档输入计算，不随发布排版变化。
+ * `indexDerivation` 明确两种外壳，发布索引的摘要只登记在 `files["index.json"]`。
+ * 消费快照标识由归档输入计算，不随发布外壳或排版变化。
  */
 export interface PublicationManifest {
   format: typeof publicationManifestFormat
@@ -44,6 +63,9 @@ export interface PublicationManifest {
 
   /** 归档 `index.json` 的摘要。 */
   archiveIndexSha256: string
+
+  /** 归档索引 → 发布索引的固定派生关系。 */
+  indexDerivation: PublicationIndexDerivation
 
   /** 相对 `integrated/` 的路径 → 两侧字节事实；覆盖发布清单的全部文件。 */
   files: Record<string, PublicationManifestFile>
@@ -152,10 +174,11 @@ async function publicationByteLimit(): Promise<number> {
 }
 
 /**
- * 从已验证归档副本生成压缩发布副本，并写出归档 → 发布的摘要清单。
+ * 从已验证归档副本生成发布副本，并写出归档 → 发布的摘要清单。
  *
- * 归档副本保持原字节；发布副本只删除字符串外的排版空白。每个文件在写入前核对
- * 两侧 JSON 值一致与归档摘要，写入后按实际字节计算摘要。返回清单供调用方复核。
+ * 归档副本保持原字节；`index.json` 按 v3 → v4 规则派生为只含 `files` 的成员，
+ * 其余发布文件只删除字符串外的排版空白。每个文件在写入前核对归档摘要与派生结果，
+ * 写入后按实际字节计算摘要。返回清单供调用方复核。
  */
 export async function writeMinifiedPublication(options: {
   archiveDirectory: string
@@ -171,11 +194,23 @@ export async function writeMinifiedPublication(options: {
     maximumBytes,
   )
   const archiveIndexSha256 = sha256(archiveIndexBytes)
+  const expectedPublicationIndexBytes = Buffer.from(
+    JSON.stringify(derivePublishedIndex(options.index)),
+    "utf8",
+  )
   const files: Record<string, PublicationManifestFile> = {}
   for (const path of publicationFiles(options.index)) {
     const archiveBytes = await readBytes(archiveRoot, path, maximumBytes)
-    const publicationBytes = minifyJsonBytes(archiveBytes)
-    requireSameJsonValue(archiveBytes, publicationBytes, path)
+    const publicationBytes =
+      path === "index.json"
+        ? derivePublishedIndexBytes(archiveBytes)
+        : minifyJsonBytes(archiveBytes)
+    if (path === "index.json") {
+      if (!Buffer.from(publicationBytes).equals(expectedPublicationIndexBytes))
+        throw new Error(`${path}: 发布派生结果与归档索引不一致`)
+    } else {
+      requireSameJsonValue(archiveBytes, publicationBytes, path)
+    }
     const archiveSha256 = sha256(archiveBytes)
     if (
       archiveSha256 !==
@@ -201,6 +236,10 @@ export async function writeMinifiedPublication(options: {
       version: options.index.source.version,
     },
     archiveIndexSha256,
+    indexDerivation: {
+      archiveFormat: integratedSnapshotFormat,
+      publicationFormat: publishedIntegratedSnapshotFormat,
+    },
     files,
   }
   await writeFileAtomically(
@@ -220,12 +259,12 @@ function exactKeys(value: unknown, keys: string[], label: string) {
 }
 
 /**
- * 只读发布副本核对清单：结构、文件集、JSON 解析、归档摘要绑定与发布字节摘要。
+ * 只读发布副本核对清单：v2 结构、文件集、归档摘要绑定、发布字节摘要与索引派生值。
  *
+ * 发布 `index.json` 必须逐字节等于 `JSON.stringify(derivePublishedIndex(归档索引))`，
+ * 且递归扫描不得出现 `sourceRecord` 键；其余文件只允许删除字符串外的排版空白。
  * 不传 `archiveDirectory` 时只证明发布副本与清单自洽；传入时逐文件读取归档字节，
- * 把清单的归档摘要与字节数锚定到真实归档文件（`index.json` 也由同一循环覆盖）。
- * 该函数不比较归档与发布的 JSON 值：值等价由 `writeMinifiedPublication` 在写入前核对，
- * 打包验收再由 `verify:pack` 对真实字节做第二次比较。
+ * 把清单的归档摘要与字节数锚定到真实归档文件，并用归档 `index.json` 实际字节复核派生值。
  */
 export async function verifyMinifiedPublication(options: {
   publicationDirectory: string
@@ -248,7 +287,7 @@ export async function verifyMinifiedPublication(options: {
   }
   const manifest = exactKeys(
     parsed,
-    ["format", "source", "archiveIndexSha256", "files"],
+    ["format", "source", "archiveIndexSha256", "indexDerivation", "files"],
     options.manifestPath,
   )
   if (manifest.format !== publicationManifestFormat)
@@ -268,7 +307,21 @@ export async function verifyMinifiedPublication(options: {
     !/^[0-9a-f]{64}$/u.test(manifest.archiveIndexSha256)
   )
     throw new Error(`${options.manifestPath}: 归档索引摘要格式错误`)
+  const indexDerivation = exactKeys(
+    manifest.indexDerivation,
+    ["archiveFormat", "publicationFormat"],
+    `${options.manifestPath}/indexDerivation`,
+  )
+  if (
+    indexDerivation.archiveFormat !== integratedSnapshotFormat ||
+    indexDerivation.publicationFormat !== publishedIntegratedSnapshotFormat
+  )
+    throw new Error(`${options.manifestPath}: 索引派生格式错误`)
   const paths = publicationFiles(options.index)
+  const expectedPublicationIndexBytes = Buffer.from(
+    JSON.stringify(derivePublishedIndex(options.index)),
+    "utf8",
+  )
   const recordedFiles = exactKeys(
     manifest.files,
     paths,
@@ -311,18 +364,53 @@ export async function verifyMinifiedPublication(options: {
         )
       if (sha256(archiveBytes) !== entry.archiveSha256)
         throw new Error(`${options.manifestPath}: ${path} 的归档字节摘要不一致`)
+      if (
+        path === "index.json" &&
+        !Buffer.from(derivePublishedIndexBytes(archiveBytes)).equals(
+          expectedPublicationIndexBytes,
+        )
+      )
+        throw new Error(
+          `${options.manifestPath}: 归档字节派生结果与发布索引不一致`,
+        )
     }
     const bytes = await readBytes(root, path, maximumBytes)
     if (bytes.byteLength !== entry.publicationBytes)
       throw new Error(`${path}: 发布副本字节数与清单不一致`)
     if (sha256(bytes) !== entry.publicationSha256)
       throw new Error(`${path}: 摘要不一致`)
+    let publicationValue: unknown
     try {
-      JSON.parse(Buffer.from(bytes).toString("utf8"))
+      publicationValue = JSON.parse(Buffer.from(bytes).toString("utf8"))
     } catch (error) {
       throw new Error(`${path}: 发布副本不是合法 JSON`, { cause: error })
+    }
+    if (path === "index.json") {
+      if (!Buffer.from(bytes).equals(expectedPublicationIndexBytes))
+        throw new Error(`${path}: 发布索引与归档派生结果不一致`)
+      const pointer = sourceRecordPointer(publicationValue)
+      if (pointer !== undefined)
+        throw new Error(`${path}: 发布索引不得包含 sourceRecord（${pointer}）`)
     }
   }
   await verifyFileSet(root, paths)
   return manifest as unknown as PublicationManifest
+}
+
+/** 递归查找 `sourceRecord` 键，返回 JSON Pointer 风格位置；只检查对象成员，不做文本扫描。 */
+function sourceRecordPointer(value: unknown, path = ""): string | undefined {
+  if (Array.isArray(value)) {
+    for (const [index, nested] of value.entries()) {
+      const found = sourceRecordPointer(nested, `${path}/${index}`)
+      if (found !== undefined) return found
+    }
+    return undefined
+  }
+  if (!isObject(value)) return undefined
+  for (const [key, nested] of Object.entries(value)) {
+    if (key === "sourceRecord") return `${path}/${key}`
+    const found = sourceRecordPointer(nested, `${path}/${key}`)
+    if (found !== undefined) return found
+  }
+  return undefined
 }

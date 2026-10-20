@@ -9,7 +9,12 @@ import {
   nanokaBossSnapshotEntity,
 } from "../scripts/nanoka-integration/snapshot-entities.ts"
 import { buildIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-build.ts"
-import { verifyIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-verify.ts"
+import {
+  verifyIntegratedSnapshot,
+  verifyPublishedIntegratedSnapshot,
+} from "../scripts/nanoka-integration/snapshot-verify.ts"
+import { derivePublishedIndex } from "../scripts/nanoka-integration/published-index.ts"
+import { writeMinifiedPublication } from "../scripts/publication-minify.ts"
 import { verifyNanokaAgentArtifact } from "../scripts/nanoka-integration/verify.ts"
 import type {
   SourcePolicy,
@@ -619,6 +624,103 @@ describe("复验 v3 完整制品", () => {
         entities: [nanokaAgentsSnapshotEntity],
       }),
     ).rejects.toThrow("类别集合与本次期望的已接入类别不一致")
+  })
+})
+
+describe("验证发布 v4 索引", () => {
+  async function publicationFixture(options: Fixture) {
+    const build = await buildSnapshot(options)
+    const publicationDirectory = join(options.temporaryParent, "published")
+    await fs.mkdir(publicationDirectory)
+    const manifest = await writeMinifiedPublication({
+      archiveDirectory: build.artifactDirectory,
+      publicationDirectory,
+      manifestPath: join(options.temporaryParent, "publication.json"),
+      index: build.index,
+    })
+    return { ...build, publicationDirectory, manifest }
+  }
+
+  it("accepts a directory derived from the verified archive index", async () => {
+    const options = await fixture()
+    const { index, publicationDirectory, manifest } =
+      await publicationFixture(options)
+    const published = await verifyPublishedIntegratedSnapshot({
+      artifactDirectory: publicationDirectory,
+      expectedArchiveIndex: index,
+      publicationDigests: (path) => manifest.files[path]?.publicationSha256,
+      policy: options.policy,
+      entities: options.entities,
+    })
+    expect(published.format).toBe("fairy-nanoka-integrated/v4")
+    expect(published).toEqual(derivePublishedIndex(index))
+    const member = published.entities.agents!.members["2"]!
+    expect(Object.keys(member)).toEqual(["files"])
+  })
+
+  it("rejects a v3 archive directory", async () => {
+    const options = await fixture()
+    const build = await buildSnapshot(options)
+    const indexBytes = await fs.readFile(
+      join(build.artifactDirectory, "index.json"),
+    )
+    await expect(
+      verifyPublishedIntegratedSnapshot({
+        artifactDirectory: build.artifactDirectory,
+        expectedArchiveIndex: build.index,
+        publicationDigests: (path) =>
+          path === "index.json" ? digest(indexBytes) : undefined,
+        policy: options.policy,
+        entities: options.entities,
+      }),
+    ).rejects.toThrow("格式版本错误")
+  })
+
+  it("rejects an expected archive index that does not derive the published index", async () => {
+    const options = await fixture()
+    const { index, publicationDirectory, manifest } =
+      await publicationFixture(options)
+    const mismatched = structuredClone(index)
+    mismatched.source.version = "synthetic-other"
+    await expect(
+      verifyPublishedIntegratedSnapshot({
+        artifactDirectory: publicationDirectory,
+        expectedArchiveIndex: mismatched,
+        publicationDigests: (path) => manifest.files[path]?.publicationSha256,
+        policy: options.policy,
+        entities: options.entities,
+      }),
+    ).rejects.toThrow("与完整输入构建结果不一致")
+  })
+
+  it("rejects missing publication digests", async () => {
+    const options = await fixture()
+    const { index, publicationDirectory, manifest } =
+      await publicationFixture(options)
+    await expect(
+      verifyPublishedIntegratedSnapshot({
+        artifactDirectory: publicationDirectory,
+        expectedArchiveIndex: index,
+        publicationDigests: (path) =>
+          path === "index.json"
+            ? manifest.files[path]?.publicationSha256
+            : undefined,
+        policy: options.policy,
+        entities: options.entities,
+      }),
+    ).rejects.toThrow("缺少发布摘要")
+  })
+
+  it("keeps the archive verifier limited to v3", async () => {
+    const options = await fixture()
+    const { publicationDirectory } = await publicationFixture(options)
+    await expect(
+      verifyIntegratedSnapshot({
+        artifactDirectory: publicationDirectory,
+        policy: options.policy,
+        entities: options.entities,
+      }),
+    ).rejects.toThrow("格式版本错误")
   })
 })
 

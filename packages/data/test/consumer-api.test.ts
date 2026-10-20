@@ -150,7 +150,7 @@ vi.mock("../.generated/catalog.ts", () => ({
     "55098": "Eous",
   }),
   snapshotInfo: Object.freeze({
-    format: "fairy-nanoka-integrated/v3",
+    format: "fairy-nanoka-integrated/v4",
     source: Object.freeze({ id: "nanoka-zzz", version: "3.2" }),
     entities: Object.freeze({
       agents: Object.freeze({
@@ -734,10 +734,19 @@ function mockMemberRecords() {
 beforeEach(() => {
   vi.resetAllMocks()
   loaders.index.mockResolvedValue({
-    format: "fairy-nanoka-integrated/v3",
+    format: "fairy-nanoka-integrated/v4",
     source: { inputs: [{ resource: "untouched" }] },
     entities: {
-      agents: { members: { "1311": { sourceRecord: { code: "Astra" } } } },
+      agents: {
+        members: {
+          "1311": {
+            files: {
+              data: { path: "agents/1311/data.json", sha256: "0".repeat(64) },
+              details: {},
+            },
+          },
+        },
+      },
     },
   })
   mockMemberRecords()
@@ -772,7 +781,7 @@ describe("identity maps and snapshot info", () => {
 
   it("exports the snapshot info constant without loading any file", () => {
     expect(snapshotInfo).toEqual({
-      format: "fairy-nanoka-integrated/v3",
+      format: "fairy-nanoka-integrated/v4",
       source: { id: "nanoka-zzz", version: "3.2" },
       entities: {
         agents: {
@@ -918,8 +927,15 @@ describe("public readers", () => {
     expect(loaders.otherZh).not.toHaveBeenCalled()
     vi.clearAllMocks()
     expect(await loadIndex()).toMatchObject({
+      format: "fairy-nanoka-integrated/v4",
       entities: {
-        agents: { members: { "1311": { sourceRecord: { code: "Astra" } } } },
+        agents: {
+          members: {
+            "1311": {
+              files: { data: { path: "agents/1311/data.json" } },
+            },
+          },
+        },
       },
     })
     for (const [key, loader] of Object.entries(loaders))
@@ -1417,11 +1433,11 @@ describe("public readers", () => {
     expect(two!.stats.tags).toEqual(["original"])
     const index = await loadIndex()
     index.source.inputs[0].resource = "changed"
-    index.entities.agents.members["1311"].sourceRecord.code = "changed"
+    index.entities.agents.members["1311"].files.data.path = "changed"
     const reloaded = await loadIndex()
     expect(reloaded.source.inputs[0].resource).toBe("untouched")
-    expect(reloaded.entities.agents.members["1311"].sourceRecord.code).toBe(
-      "Astra",
+    expect(reloaded.entities.agents.members["1311"].files.data.path).toBe(
+      "agents/1311/data.json",
     )
     const details = await loadAgentDetails("Astra Yao", "zh")
     ;(details!.skill as any).entries.push("changed")

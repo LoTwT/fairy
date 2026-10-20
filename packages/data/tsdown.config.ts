@@ -8,7 +8,11 @@ import {
   generateCatalog,
   preparePublication,
 } from "./scripts/prepare-publication.ts"
-import { verifyIntegratedSnapshot } from "./scripts/nanoka-integration/snapshot-verify.ts"
+import { derivePublishedIndex } from "./scripts/nanoka-integration/published-index.ts"
+import {
+  verifyIntegratedSnapshot,
+  verifyPublishedIntegratedSnapshot,
+} from "./scripts/nanoka-integration/snapshot-verify.ts"
 import { prepareDefinitions } from "./scripts/prepare-definitions.ts"
 import {
   verifyDefinitionsPublication,
@@ -51,7 +55,7 @@ export default defineConfig(async (options) => {
       join(buildDirectory, ".generated/browser-catalog.ts"),
       await generateCatalog(
         join(buildDirectory, ".generated/integrated"),
-        index,
+        derivePublishedIndex(index),
         false,
       ),
     )
@@ -107,8 +111,8 @@ export default defineConfig(async (options) => {
         const index = await verifyIntegratedSnapshot({
           artifactDirectory: snapshot,
         })
-        // 归档副本保持原字节；dist 只发布删除字符串外排版空白的副本，
-        // 并以清单记录归档摘要 → 发布摘要的字节级映射。
+        // 归档副本保持 v3 原字节；dist 发布 v4 索引（成员去掉 sourceRecord）与
+        // 其余删除字符串外排版空白的副本，并以清单记录归档摘要 → 发布摘要的映射。
         const publication = await writeMinifiedPublication({
           archiveDirectory: snapshot,
           publicationDirectory: join(packageDirectory, "dist/integrated"),
@@ -121,10 +125,10 @@ export default defineConfig(async (options) => {
           index,
           archiveDirectory: snapshot,
         })
-        // 发布字节仍按完整验证器复核结构、身份与 JSON 值，摘要取自发布清单。
-        await verifyIntegratedSnapshot({
+        // 发布字节按发布验证器复核 v4 结构、身份、派生索引值与发布清单摘要。
+        await verifyPublishedIntegratedSnapshot({
           artifactDirectory: join(packageDirectory, "dist/integrated"),
-          expectedIndex: index,
+          expectedArchiveIndex: index,
           publicationDigests: (path: string) =>
             publication.files[path]?.publicationSha256,
         })

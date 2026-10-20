@@ -5,12 +5,21 @@ import type {
 } from "./agent-types.ts"
 
 /**
- * 多实体完整制品的根索引外壳版本。
+ * 多实体完整制品的归档根索引外壳版本。
  *
- * v3 以已接入类别分块承载各来源、规则、成员与文件摘要；v2 只描述单一代理人制品。
+ * v3 以已接入类别分块承载各来源、规则、成员、文件摘要与独立来源记录；v2 只描述单一代理人制品。
  * 只有完成并通过完整验证的制品才写入本格式，不保存锁、事务进度或本次差异报告。
+ * Git 归档与 npm 发布副本使用不同外壳：本版本描述归档字节，发布使用下方 v4。
  */
 export const integratedSnapshotFormat = "fairy-nanoka-integrated/v3"
+
+/**
+ * 多实体完整制品的公开发布根索引外壳版本。
+ *
+ * v4 与归档 v3 的类别、来源与文件摘要完全相同，只在每个成员上去掉 `sourceRecord`。
+ * npm `dist/integrated/index.json`、`loadIndex` 与类型生成使用本版本；Git 归档保持 v3。
+ */
+export const publishedIntegratedSnapshotFormat = "fairy-nanoka-integrated/v4"
 
 /** 详情语言 → 详情文件引用；默认类型保证当前完整语言配置，历史类型允许缺失。 */
 type SnapshotDetailFiles = Partial<Record<DetailLocale, ExportFileReference>>
@@ -118,6 +127,51 @@ export interface IntegratedSnapshotIndex<
 }
 
 /**
+ * 发布索引中的一个成员：只保留实体文件引用，不包含独立来源索引记录。
+ *
+ * `sourceRecord` 仍完整保存在 Git 归档 v3 索引中，供数据管理、更新报告与来源证据使用；
+ * npm 包只发布本类型描述的成员，公开读取不再暴露来源记录。
+ */
+export interface PublishedIntegratedSnapshotMember<
+  DetailFiles extends SnapshotDetailFiles = Record<
+    DetailLocale,
+    ExportFileReference
+  >,
+> {
+  /** 该成员完成生成并通过验证的实体文件引用。 */
+  files: IntegratedSnapshotMember<DetailFiles>["files"]
+}
+
+/** 发布索引中的一个已接入类别：字段与归档类别一致，成员只保留文件引用。 */
+export interface PublishedIntegratedSnapshotEntity<
+  DetailFiles extends SnapshotDetailFiles = Record<
+    DetailLocale,
+    ExportFileReference
+  >,
+> extends Omit<IntegratedSnapshotEntity<DetailFiles>, "members"> {
+  /** 成员 ID → 实体文件引用；不含 `sourceRecord`。 */
+  members: Record<string, PublishedIntegratedSnapshotMember<DetailFiles>>
+}
+
+/**
+ * npm 发布索引 v4：来源与类别块与归档 v3 一致，成员的 `sourceRecord` 被移除。
+ *
+ * 发布索引由归档索引按固定规则派生；`snapshotId` 仍按归档输入计算，不随发布外壳变化。
+ */
+export interface PublishedIntegratedSnapshotIndex<
+  DetailFiles extends SnapshotDetailFiles = Record<
+    DetailLocale,
+    ExportFileReference
+  >,
+> extends Omit<IntegratedSnapshotIndex<DetailFiles>, "format" | "entities"> {
+  /** 公开发布索引的外壳版本。 */
+  format: typeof publishedIntegratedSnapshotFormat
+
+  /** 已包含类别 → 该类别完整成员、规则、语言、来源输入与输出文件摘要。 */
+  entities: Record<string, PublishedIntegratedSnapshotEntity<DetailFiles>>
+}
+
+/**
  * 历史复验得到的索引：详情语言引用与类别都可能缺失，访问前必须检查存在性。
  *
  * 严格验证与新建制品返回上文的完整类型；只有启用历史模式（含动态 boolean）的复验返回本类型。
@@ -137,13 +191,13 @@ export type HistoricalIntegratedSnapshotIndex = Omit<
 }
 
 /**
- * 轻量快照信息：来自完整 v3 索引的来源版本与各类别的规则版本、语言、成员清单。
+ * 轻量快照信息：来自发布 v4 索引的来源版本与各类别的规则版本、语言、成员清单。
  * 由根入口作为冻结常量导出，不含 sourceRecord、文件引用与输入摘要；
- * 完整性核对与来源追溯仍使用 loadIndex 的完整索引。
+ * 完整性核对与文件引用读取使用 loadIndex 的发布索引，来源追溯使用 Git 归档。
  */
 export interface IntegratedSnapshotInfo {
-  /** 文件外壳与类别分块契约版本；与完整索引同值。 */
-  readonly format: typeof integratedSnapshotFormat
+  /** 发布索引的外壳版本；与 `loadIndex()` 返回值同值。 */
+  readonly format: typeof publishedIntegratedSnapshotFormat
 
   /** 整个快照的来源身份与来源版本。 */
   readonly source: {
