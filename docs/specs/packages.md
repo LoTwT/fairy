@@ -85,8 +85,8 @@ npm install --save-exact /absolute/path/randomplay-core-VERSION.tgz /absolute/pa
 
 ## 发布操作
 
-[发布工作流](../../.github/workflows/release.yml)在推送 `vX.Y.Z` 标签后，通过 GitHub Actions OIDC 发布两个包。
-标签必须指向已进入 `main` 的提交，当前流程只处理稳定版本并使用 `latest`。
+[发布工作流](../../.github/workflows/release.yml)在推送 `vX.Y.Z` 标签后，通过 GitHub Actions OIDC 发布两个包，
+并在 registry 复核后创建 GitHub Release。标签必须指向已进入 `main` 的提交，当前流程只处理稳定版本并使用 `latest`。
 已有 tarball、检查通过或版本号相同均不代表获得发布授权。
 
 1. 按前述规则确认具体目标版本和发布授权，再同步 core/data manifest；若调整仓库根版本或版本相关测试，保持其语义一致。
@@ -135,6 +135,10 @@ npm install --save-exact /absolute/path/randomplay-core-VERSION.tgz /absolute/pa
    已存在的同版制品只有摘要一致时才跳过；摘要冲突或 `latest` 比候选更新时停止，避免覆盖或回退。
    仅一个包成功时，先回查 registry 确认实际状态，再处理缺失制品；网络超时不等于发布失败，
    不能盲目重试、单独升版或将半批结果报告为完成。
+
+   registry 安装复核成功后，工作流使用 `GITHUB_TOKEN` 创建同标签的 GitHub Release：发布说明由 GitHub
+   自动生成，并在前面附上两个包的精确安装命令。同标签 Release 已存在时跳过，避免失败重跑重复创建；
+   若 npm 已成功但 Release 创建失败，不要重发 npm，重跑工作流或手动补建 Release 即可。
 
 6. 回查两个包的具体版本、dist-tag 和制品摘要，并与发布工作流记录的候选摘要核对：
 

@@ -6,7 +6,7 @@
 
 ### 规范
 
-- [包边界与联动发布](specs/packages.md)：core/data/shared 职责、安装与旧版升级、共享契约、同版发布步骤与版本号确认。
+- [包边界与联动发布](specs/packages.md)：core/data/shared 职责、安装与旧版升级、共享契约、同版发布、GitHub Release 与版本号确认。
 - [静态计算输入组装](specs/core/static-calculation.md)：完整运行示例、配装与局外面板、显式增益、结果与错误处理，以及输入和支持范围。
 
 - [Core 计算规范](specs/core/index.md)：`@randomplay/core` 的核心术语、公式与乘区公共契约及具体计算规范。
