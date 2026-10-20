@@ -242,6 +242,31 @@ describe("catalog static calculation", () => {
       issues: [{ code: "MISSING_FACT", pointer: "/hit/damageItems" }],
     })
   })
+  it("applies a disorder multiplier increase to the full prepared zone", () => {
+    const input = anomalyInput(
+      fixture([contribution("base-multiplier-increase", 0.5)]),
+      "disorder",
+    )
+    const item = {
+      mode: "standard-disorder",
+      role: "base",
+      itemId: "base",
+      stat: "attack",
+      statSource: { entityId: "entity:attacker" },
+      originalAnomalyAttribute: "ice",
+      baseDurationSeconds: 10,
+      elapsedSeconds: 1,
+    } as const
+    const result = calculateStaticDamageFromCatalog({
+      ...input,
+      hit: { ...input.hit, damageItems: [item] },
+    })
+    expect(result.ok).toBe(true)
+    if (result.ok)
+      expect(
+        result.value.evaluation.hit!.damageItems[0]!.damageMultiplier,
+      ).toBeCloseTo((4.5 + 9 * 0.075) * 1.5, 12)
+  })
   it("uses vortex source duration without subtracting disorder elapsed time", () => {
     const input = anomalyInput(
       fixture([contribution("anomaly-duration-addition", 3)]),

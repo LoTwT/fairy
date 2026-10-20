@@ -110,6 +110,27 @@ describe("static damage integrates existing core formulas", () => {
     expect(result.notApplicableContributions).toEqual([])
   })
 
+  it("clamps anomaly critical rate above one", () => {
+    const base = inputFor()
+    const damage = anomalyDamage("anomaly") as Extract<
+      StaticDamageParameters,
+      { kind: "anomaly" | "disorder" | "vortex" | "anomaly-settlement" }
+    >
+    const result = ok(
+      calculateStaticDamage({
+        ...base,
+        damage: {
+          ...damage,
+          anomalyCriticalRate: 1.2,
+          anomalyCriticalDamage: [0.5],
+        },
+      }),
+    )
+    expect(result.criticalRate).toBe(1)
+    expect(result.expected / result.nonCritical).toBeCloseTo(1.5, 12)
+    expect(result.critical! / result.nonCritical).toBeCloseTo(1.5, 12)
+  })
+
   it("maps defense, flat penetration, resistance, vulnerability and stun contributions", () => {
     const effects = [
       factor("damage-bonus", 0.2),

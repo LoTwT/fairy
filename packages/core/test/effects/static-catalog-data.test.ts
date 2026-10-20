@@ -80,6 +80,39 @@ function calculateCatalogResult(
   return result.value
 }
 
+/** 把目录输入切换为标准物理紊乱，保持显式 actor/来源并只声明一个基础项。 */
+function disorderInput(
+  input: StaticCatalogDamageInput,
+): StaticCatalogDamageInput {
+  return {
+    ...input,
+    damage: {
+      ...input.damage,
+      kind: "disorder",
+      anomalyDamageBonus: [],
+      anomalyCriticalDamage: [],
+      anomalyCriticalRate: 0,
+      refringe: { mode: "from-effects" },
+      anomalySource: { entityId: input.hit.actorId, level: 60 },
+    },
+    hit: {
+      ...input.hit,
+      damageItems: [
+        {
+          mode: "standard-disorder",
+          role: "base",
+          itemId: "base",
+          stat: "attack",
+          statSource: { entityId: input.hit.actorId },
+          originalAnomalyAttribute: "physical",
+          baseDurationSeconds: 10,
+          elapsedSeconds: 0,
+        },
+      ],
+    },
+  } as unknown as StaticCatalogDamageInput
+}
+
 /** 控制面板用例的异常强度提供者读数（攻击 1000、精通 100、穿透率 0）。 */
 const attributeAnomalySourceActor =
   (): StaticCatalogDamageInput["world"]["entities"][number] => ({
@@ -306,7 +339,9 @@ function actionWithDisc(
 
 describe("published conversion boundaries", () => {
   it.each([
+    [0, 1.5],
     [1000, 1.8],
+    [2000, 2.1],
     [3500, 2.55],
     [4000, 2.55],
   ])(
@@ -335,6 +370,67 @@ describe("published conversion boundaries", () => {
         },
       })
       expect(result.factors.critical?.critical).toBeCloseTo(factor!, 8)
+    },
+  )
+
+  it("reads Sunna M6 initial attack before veil's final attack", () => {
+    const input = agentInput(
+      "1491",
+      [
+        "agents:sunna:mindscape:6:blk-legacy:legacy-self-critDmg",
+        "agents:sunna:mindscape:0:blk-ms0ggsrh-ccpjgc:eff-ms0ggsrh-dimooe",
+      ],
+      6,
+    )
+    const result = calculateCatalogResult({
+      ...input,
+      world: {
+        ...input.world,
+        entities: input.world.entities.map((entity) =>
+          entity.kind === "actor" && entity.entityId === input.hit.actorId
+            ? {
+                ...entity,
+                generalStats: {
+                  ...entity.generalStats,
+                  attack: general(2000),
+                },
+              }
+            : entity,
+        ),
+      },
+    })
+    // Initial 2000 -> +0.6; a current-stage read would see 2050 -> +0.615.
+    expect(result.factors.critical?.critical).toBeCloseTo(2.1, 8)
+  })
+
+  it.each([
+    [0, 1050],
+    [3000, 1950],
+    [3500, 2100],
+    [4000, 2100],
+    [5000, 2100],
+  ])(
+    "converts Sunna core and veil attack %s into final attack",
+    (attack, expectedAttack) => {
+      const coreOption =
+        "agents:sunna:mindscape:0:blk-ms0gi1k3-crbdyc:eff-ms0gi1k3-qri3om"
+      const veilOption =
+        "agents:sunna:mindscape:0:blk-ms0ggsrh-ccpjgc:eff-ms0ggsrh-dimooe"
+      const coreEffect =
+        "agent:1491:zzz-hp:eff-ms0gi1k3-qri3om:blk-ms0gi1k3-crbdyc:mindscape:0"
+      const input = agentInput("1491", [coreOption, veilOption])
+      const result = calculateCatalogResult({
+        ...input,
+        inputs: [
+          {
+            bindingId: "binding:static",
+            name: `${coreEffect}:source`,
+            value: { unit: "attack-points", value: attack! },
+          },
+        ],
+      })
+      // agentInput 的固定伤害倍率为 2，因此从基础伤害反推最终攻击。
+      expect(result.factors.nonCritical.baseDamage! / 2).toBe(expectedAttack)
     },
   )
 
@@ -386,9 +482,15 @@ describe("published conversion boundaries", () => {
     "agents:cissia:mindscape:1:blk-legacy:legacy-team-reduceDefense",
     "agents:cissia:mindscape:1:blk-legacy:eff-ms4lkt33-igdjwu",
   ]
-  it.each([3.68, 4, 10])(
-    "caps Cissia's core plus M1 at energy regeneration %s",
-    (energyRegen) => {
+  it.each([
+    [1.3, 0.084],
+    [2.6, 0.224],
+    [3.68, 0.35],
+    [4, 0.35],
+    [10, 0.35],
+  ])(
+    "computes Cissia's core plus M1 defense reduction at energy regeneration %s",
+    (energyRegen, expectedReduction) => {
       const input = agentInput("1521", cissiaDefenseOptions, 1)
       const result = calculateCatalogResult({
         ...input,
@@ -400,7 +502,7 @@ describe("published conversion boundaries", () => {
               variant.inputs.map((requirement) => ({
                 bindingId: "binding:static" as const,
                 name: requirement.name,
-                value: { unit: requirement.unit, value: energyRegen },
+                value: { unit: requirement.unit, value: energyRegen! },
               })),
             ),
         ),
@@ -412,9 +514,90 @@ describe("published conversion boundaries", () => {
             contribution.address.channel === "target-defense-adjustment",
         )
         .reduce((total, contribution) => total - contribution.value.value, 0)
-      expect(reduction).toBeCloseTo(0.35, 6)
+      expect(reduction).toBeCloseTo(expectedReduction!, 6)
     },
   )
+
+  it.each([1, 3])(
+    "scales Yuzuha's M6 disorder base multiplier by %s layer(s)",
+    (layers) => {
+      const optionId =
+        "agents:yuzuha:mindscape:6:blk-ms44i672-jthu99:eff-ms44lb78-gaprro"
+      const effectId =
+        "agent:1411:zzz-hp:eff-ms44lb78-gaprro:blk-ms44i672-jthu99:mindscape:6"
+      const input = agentInput("1411", [optionId], 6)
+      const result = calculateCatalogResult({
+        ...disorderInput(input),
+        selections: [{ optionId, bindingId: "binding:static", layers }],
+      })
+      const contributions = result.evaluation.contributions.filter(
+        (entry) => entry.origin.effectId === effectId,
+      )
+      expect(contributions).toHaveLength(layers)
+      expect(
+        contributions.reduce((sum, entry) => sum + entry.value.value, 0),
+      ).toBeCloseTo(1.05 * layers, 12)
+      expect(
+        result.evaluation.hit!.damageItems[0]!.damageMultiplier,
+      ).toBeCloseTo(5.25 + 1.05 * layers, 12)
+    },
+  )
+
+  it("does not apply Yuzuha's M6 disorder multiplier to direct damage", () => {
+    const optionId =
+      "agents:yuzuha:mindscape:6:blk-ms44i672-jthu99:eff-ms44lb78-gaprro"
+    const effectId =
+      "agent:1411:zzz-hp:eff-ms44lb78-gaprro:blk-ms44i672-jthu99:mindscape:6"
+    const input = agentInput("1411", [optionId], 6)
+    const result = calculateCatalogResult({
+      ...input,
+      selections: [{ optionId, bindingId: "binding:static", layers: 3 }],
+    })
+    expect(
+      result.evaluation.contributions.filter(
+        (entry) => entry.origin.effectId === effectId,
+      ),
+    ).toHaveLength(0)
+  })
+
+  it.each([
+    ["electric", 1.18],
+    ["fire", 1],
+  ] as const)(
+    "applies Claret's M2 resistance ignore only to electric hits (%s)",
+    (element, expectedResistance) => {
+      const input = agentInput(
+        "1611",
+        ["agents:claret:mindscape:2:blk-mtrkrmdk-tyez3h:eff-mtrkrmdk-lvfngh"],
+        2,
+      )
+      const result = calculateCatalogResult({
+        ...input,
+        hit: { ...input.hit, element },
+      })
+      expect(result.factors.nonCritical.resistance).toBeCloseTo(
+        expectedResistance,
+        12,
+      )
+    },
+  )
+
+  it("extends Jane's disorder duration by five seconds", () => {
+    const optionId =
+      "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms349twx-mt84mz"
+    const withoutCore = calculateCatalogResult(
+      disorderInput(agentInput("1261", [], 0, 7)),
+    )
+    const withCore = calculateCatalogResult(
+      disorderInput(agentInput("1261", [optionId], 0, 7)),
+    )
+    expect(
+      withoutCore.evaluation.hit!.damageItems[0]!.damageMultiplier,
+    ).toBeCloseTo(5.25, 12)
+    expect(
+      withCore.evaluation.hit!.damageItems[0]!.damageMultiplier,
+    ).toBeCloseTo(5.625, 12)
+  })
 
   it.each([1, 6] as const)(
     "rejects Cissia's M1 defense enhancement at unverified core level %s",
@@ -7287,6 +7470,8 @@ describe("batch 01 wengine rule corrections", () => {
       skillCategory?: StaticCatalogDamageInput["hit"]["skillCategory"]
       skillTags?: string[]
       energyRegenBase?: number
+      /** 局内暴击率；用于读取局内转增伤规则。 */
+      criticalRate?: number
       teammate?: boolean
       /** 伤害项读取的属性；改为被调整的属性以消费对应贡献。 */
       damageStat?: "attack" | "defense" | "energyRegen"
@@ -7303,6 +7488,16 @@ describe("batch 01 wengine rule corrections", () => {
         : { energyRegen: general(overrides.energyRegenBase) }),
       ...(overrides.damageStat === "defense" ? { defense: general(1000) } : {}),
     }
+    const holderDirectStats =
+      overrides.criticalRate === undefined
+        ? attacker.directStats
+        : {
+            ...attacker.directStats,
+            criticalRate: {
+              baseValue: overrides.criticalRate,
+              additions: [],
+            },
+          }
     return {
       definitions,
       catalog,
@@ -7324,7 +7519,11 @@ describe("batch 01 wengine rule corrections", () => {
       world: {
         ...base.world,
         entities: [
-          { ...attacker, generalStats: holderStats },
+          {
+            ...attacker,
+            generalStats: holderStats,
+            directStats: holderDirectStats,
+          },
           { ...attacker, entityId: "entity:teammate" },
           base.world.entities[1]!,
         ],
@@ -7752,6 +7951,29 @@ describe("batch 01 wengine rule corrections", () => {
       values: { 1: 0.24, 2: 0.28, 3: 0.32, 4: 0.36, 5: 0.4 },
     })
   })
+
+  it.each([
+    [1.013, 0.0104],
+    [2, 0.4],
+  ])(
+    "applies the blood casket in-combat critical conversion at %s",
+    (criticalRate, expected) => {
+      const option = catalog.options.find((o) =>
+        o.optionId.endsWith(
+          "BloodCasket:refinement:blk-mtsg3tw6-5rsbpt:eff-mtsg3tw6-gydnli",
+        ),
+      )!
+      const effectId =
+        "w-engine:13021:zzz-hp:eff-mtsg3tw6-gydnli:blk-mtsg3tw6-5rsbpt:refinement"
+      const result = calculateCatalogResult(
+        wengineInput("13021", option.optionId, 1, 5, {
+          agent: "1611",
+          criticalRate,
+        }),
+      )
+      expect(contributionSum(result, effectId)).toBeCloseTo(expected, 12)
+    },
+  )
 
   it("registers the batch 01 named differences with the corrected variants", () => {
     for (const differenceId of [
