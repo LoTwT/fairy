@@ -30,6 +30,22 @@ import { build, createServer, preview } from "vite"
 import { expect, it } from "vitest"
 import { installPackedConsumer, listFiles } from "./fixtures/packed-consumer.ts"
 
+/** 递归拒绝 sourceRecord 键；只按 JSON 成员扫描，不依赖文本子串。 */
+function expectNoSourceRecordKey(value: unknown, label: string) {
+  const visit = (current: unknown, path: string) => {
+    if (Array.isArray(current)) {
+      current.forEach((item, index) => visit(item, `${path}/${index}`))
+      return
+    }
+    if (typeof current !== "object" || current === null) return
+    for (const [key, nested] of Object.entries(current)) {
+      expect(key, `${label}${path}/${key}`).not.toBe("sourceRecord")
+      visit(nested, `${path}/${key}`)
+    }
+  }
+  visit(value, "")
+}
+
 /** 单个浏览器请求的证据：阶段、状态、字节数与来源 JSON 模块。 */
 interface RequestEvidence {
   phase: string
@@ -62,6 +78,8 @@ it("consumes the offline-installed package in real Vite development and producti
     const integratedIndex = JSON.parse(
       readFileSync(join(packedRoot, "dist/integrated/index.json"), "utf8"),
     )
+    expect(integratedIndex.format).toBe("fairy-nanoka-integrated/v4")
+    expectNoSourceRecordKey(integratedIndex, "dist/integrated/index.json")
     const agentCount: number = integratedIndex.entities.agents.memberIds.length
     const driveDiscMemberIds: string[] =
       integratedIndex.entities["drive-discs"].memberIds

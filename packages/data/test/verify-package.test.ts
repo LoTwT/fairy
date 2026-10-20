@@ -35,11 +35,16 @@ import { basename, dirname, join } from "node:path"
 import { pathToFileURL } from "node:url"
 import ts from "typescript"
 import { afterEach, describe, expect, it } from "vitest"
-import { verifyIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-verify.ts"
+import {
+  verifyIntegratedSnapshot,
+  verifyPublishedIntegratedSnapshot,
+} from "../scripts/nanoka-integration/snapshot-verify.ts"
+import { derivePublishedIndex } from "../scripts/nanoka-integration/published-index.ts"
 import { sha256 } from "../scripts/nanoka-integration/files.ts"
 import {
   archivedDigestOf,
   minifyJsonBytes,
+  publicationManifestFormat,
   verifyMinifiedPublication,
 } from "../scripts/publication-minify.ts"
 import {
@@ -90,6 +95,22 @@ function expectSameBytes(actual: Buffer, expected: Buffer, label: string) {
   throw new Error(
     `${label}: 字节不一致（实际 ${actual.length} 字节，预期 ${expected.length} 字节，首个差异偏移 ${offset}）`,
   )
+}
+
+/** 递归拒绝 sourceRecord 键；只按 JSON 成员扫描，不依赖文本子串。 */
+function expectNoSourceRecordKey(value: unknown, label: string) {
+  const visit = (current: unknown, path: string) => {
+    if (Array.isArray(current)) {
+      current.forEach((item, index) => visit(item, `${path}/${index}`))
+      return
+    }
+    if (typeof current !== "object" || current === null) return
+    for (const [key, nested] of Object.entries(current)) {
+      expect(key, `${label}${path}/${key}`).not.toBe("sourceRecord")
+      visit(nested, `${path}/${key}`)
+    }
+  }
+  visit(value, "")
 }
 
 describe("packed package", () => {
@@ -253,15 +274,33 @@ describe("packed package", () => {
       index: archiveIndex,
       archiveDirectory: join(cleanPackage, "integrated"),
     })
-    const index = await verifyIntegratedSnapshot({
+    const index = await verifyPublishedIntegratedSnapshot({
       artifactDirectory: snapshot,
+      expectedArchiveIndex: archiveIndex,
       publicationDigests: (path) =>
         publicationManifest.files[path]?.publicationSha256,
     })
-    const jsonFiles = publicationFiles(index)
-    const attributeFiles = [...attributeArtifactPaths(index), "manifest.json"]
+    expect(publicationManifest.format).toBe(publicationManifestFormat)
+    expect(publicationManifest.indexDerivation).toEqual({
+      archiveFormat: "fairy-nanoka-integrated/v3",
+      publicationFormat: "fairy-nanoka-integrated/v4",
+    })
+    expect("publicationIndexSha256" in publicationManifest).toBe(false)
+    expect(index.format).toBe("fairy-nanoka-integrated/v4")
+    const publishedIndexJson = JSON.parse(
+      readFileSync(join(snapshot, "index.json"), "utf8"),
+    )
+    expectNoSourceRecordKey(publishedIndexJson, "dist/integrated/index.json")
+    expect(publishedIndexJson).toEqual(derivePublishedIndex(archiveIndex))
+    const jsonFiles = publicationFiles(archiveIndex)
+    const attributeFiles = [
+      ...attributeArtifactPaths(archiveIndex),
+      "manifest.json",
+    ]
     const actionFiles = [
-      ...index.entities.agents.memberIds.map((id) => `agents/${id}.json`),
+      ...archiveIndex.entities.agents.memberIds.map(
+        (id) => `agents/${id}.json`,
+      ),
       "manifest.json",
     ]
     // 属性与技能 manifest 的 artifacts/inputs 描述归档 integrated 与归档 definitions 字节；
@@ -378,20 +417,36 @@ describe("packed package", () => {
         path,
       )
     }
-    // 归档副本保持原字节；发布副本必须恰好等于 JSON 值等价的空白压缩结果。
+    // 归档副本保持原字节；index.json 按 v3 → v4 派生，其余文件只做空白压缩。
     for (const path of jsonFiles) {
       const archivedBytes = readFileSync(join(cleanPackage, "integrated", path))
       const publishedBytes = readFileSync(join(snapshot, path))
-      expectSameBytes(
-        publishedBytes,
-        Buffer.from(minifyJsonBytes(archivedBytes)),
-        path,
-      )
-      expect(JSON.parse(publishedBytes.toString("utf8")), path).toEqual(
-        JSON.parse(archivedBytes.toString("utf8")),
-      )
+      if (path === "index.json") {
+        expectSameBytes(
+          publishedBytes,
+          Buffer.from(JSON.stringify(derivePublishedIndex(archiveIndex))),
+          path,
+        )
+        expectNoSourceRecordKey(
+          JSON.parse(publishedBytes.toString("utf8")),
+          path,
+        )
+      } else {
+        expectSameBytes(
+          publishedBytes,
+          Buffer.from(minifyJsonBytes(archivedBytes)),
+          path,
+        )
+        expect(JSON.parse(publishedBytes.toString("utf8")), path).toEqual(
+          JSON.parse(archivedBytes.toString("utf8")),
+        )
+      }
       expect(publicationManifest.files[path]?.archiveSha256, path).toBe(
-        archivedDigestOf(index, path, publicationManifest.archiveIndexSha256),
+        archivedDigestOf(
+          archiveIndex,
+          path,
+          publicationManifest.archiveIndexSha256,
+        ),
       )
       expect(publicationManifest.files[path]?.archiveBytes, path).toBe(
         archivedBytes.byteLength,
@@ -483,7 +538,17 @@ assert.deepEqual(Object.keys(api).sort(), ["agentNames", "agentNamesBySourceId",
 const packedIndex = (await import("@randomplay/data/integrated/index.json", { with: { type: "json" } })).default
 const packedPublication = (await import("@randomplay/data/publication.json", { with: { type: "json" } })).default
 const packedDefinitionsPublication = (await import("@randomplay/data/definitions-publication.json", { with: { type: "json" } })).default
-assert.equal(packedPublication.format, "fairy-publication-manifest/v1")
+function sourceRecordKeys(value, path) {
+  path = path || ""
+  if (Array.isArray(value)) return value.flatMap((item, index) => sourceRecordKeys(item, path + "/" + index))
+  if (typeof value !== "object" || value === null) return []
+  return Object.entries(value).flatMap(([key, nested]) => key === "sourceRecord" ? [path + "/" + key] : sourceRecordKeys(nested, path + "/" + key))
+}
+assert.equal(packedIndex.format, "fairy-nanoka-integrated/v4")
+assert.deepEqual(sourceRecordKeys(packedIndex), [])
+assert.equal(packedPublication.format, "fairy-publication-manifest/v2")
+assert.deepEqual(packedPublication.indexDerivation, { archiveFormat: "fairy-nanoka-integrated/v3", publicationFormat: "fairy-nanoka-integrated/v4" })
+assert.equal("publicationIndexSha256" in packedPublication, false)
 assert.equal(packedDefinitionsPublication.format, "fairy-definitions-publication-manifest/v1")
 assert.equal(Object.keys(packedDefinitionsPublication.files).length, ${definitionsArchiveFiles.length})
 assert.notEqual(packedDefinitionsPublication.files["effects/static.json"].publicationSha256, packedDefinitionsPublication.files["effects/static.json"].archiveSha256)
@@ -1262,7 +1327,7 @@ import rawShiyuData from "@randomplay/data/integrated/shiyu/61001/data.json" wit
 import rawBossData from "@randomplay/data/integrated/boss/69001/data.json" with { type: "json" }
 import rawSimulData from "@randomplay/data/integrated/simul/101/data.json" with { type: "json" }
 import { agentNames, agentNamesBySourceId, agentSourceIds, bangbooNames, bangbooNamesBySourceId, bangbooSourceIds, bossIds, simulIds, driveDiscNames, driveDiscNamesBySourceId, driveDiscSourceIds, monsterIds, shiyuIds, wEngineNames, wEngineNamesBySourceId, wEngineSourceIds, snapshotInfo, loadIndex, loadAgentData, loadAgentDetails, loadAllAgents, loadAllAgentData, loadBangbooData, loadBangbooDetails, loadAllBangboos, loadAllBangbooData, loadBossData, loadBossDetails, loadAllBosses, loadAllBossData, loadSimulData, loadSimulDetails, loadAllSimul, loadAllSimulData, loadDriveDiscData, loadDriveDiscDetails, loadAllDriveDiscs, loadAllDriveDiscData, loadMonsterData, loadMonsterDetails, loadAllMonsters, loadAllMonsterData, loadShiyuData, loadShiyuDetails, loadAllShiyu, loadAllShiyuData, loadWEngineData, loadWEngineDetails, loadAllWEngines, loadAllWEngineData } from "@randomplay/data"
-import type { AgentName, AgentSourceId, AgentData, AgentDetails, IntegratedSnapshotIndex, IntegratedSnapshotInfo, LocalizedAgent, DetailLocale, BangbooName, BangbooSourceId, BangbooData, BangbooDetails, LocalizedBangboo, BossId, BossData, BossDetails, LocalizedBoss, SimulId, SimulData, SimulDetails, LocalizedSimul, DriveDiscName, DriveDiscSourceId, DriveDiscData, DriveDiscDetails, LocalizedDriveDisc, MonsterId, MonsterData, MonsterDetails, LocalizedMonster, ShiyuId, ShiyuData, ShiyuDetails, LocalizedShiyu, WEngineName, WEngineSourceId, WEngineData, WEngineDetails, LocalizedWEngine } from "@randomplay/data"
+import type { AgentName, AgentSourceId, AgentData, AgentDetails, PublishedIntegratedSnapshotIndex, IntegratedSnapshotInfo, LocalizedAgent, DetailLocale, BangbooName, BangbooSourceId, BangbooData, BangbooDetails, LocalizedBangboo, BossId, BossData, BossDetails, LocalizedBoss, SimulId, SimulData, SimulDetails, LocalizedSimul, DriveDiscName, DriveDiscSourceId, DriveDiscData, DriveDiscDetails, LocalizedDriveDisc, MonsterId, MonsterData, MonsterDetails, LocalizedMonster, ShiyuId, ShiyuData, ShiyuDetails, LocalizedShiyu, WEngineName, WEngineSourceId, WEngineData, WEngineDetails, LocalizedWEngine } from "@randomplay/data"
 const numericSourceId: number = rawData.id
 const numericDriveDiscId: number = rawDriveDiscData.id
 const numericWEngineId: number = rawWEngineData.id
@@ -1307,7 +1372,7 @@ const allBosses: Promise<Record<BossId, LocalizedBoss>> = loadAllBosses("en")
 const simulData: Promise<SimulData | undefined> = loadSimulData(simulId)
 const simulDetail: Promise<SimulDetails | undefined> = loadSimulDetails(adjacentSimulId, "zh")
 const allSimul: Promise<Record<SimulId, LocalizedSimul>> = loadAllSimul("en")
-const index: Promise<IntegratedSnapshotIndex> = loadIndex()
+const index: Promise<PublishedIntegratedSnapshotIndex> = loadIndex()
 const data: Promise<AgentData | undefined> = loadAgentData(name)
 const detail: Promise<AgentDetails | undefined> = loadAgentDetails(punctuated, "zh")
 const all: Promise<Record<AgentName, LocalizedAgent>> = loadAllAgents("en")
@@ -1330,6 +1395,11 @@ const driveDiscNameBySourceId: DriveDiscName = driveDiscNamesBySourceId["31000"]
 const wEngineNameBySourceId: WEngineName = wEngineNamesBySourceId["12001"]
 const bangbooNameBySourceId: BangbooName = bangbooNamesBySourceId["53001"]
 const snapshotInfoValue: IntegratedSnapshotInfo = snapshotInfo
+declare const publishedIndexValue: PublishedIntegratedSnapshotIndex
+const publishedMember = publishedIndexValue.entities.agents!.members["1311"]!
+const publishedDataPath: string = publishedMember.files.data.path
+// @ts-expect-error loadIndex 的发布成员不暴露 sourceRecord
+publishedMember.sourceRecord
 const allAgentDataOnly: Promise<Record<AgentName, AgentData>> = loadAllAgentData()
 const allDriveDiscDataOnly: Promise<Record<DriveDiscName, DriveDiscData>> = loadAllDriveDiscData()
 const allWEngineDataOnly: Promise<Record<WEngineName, WEngineData>> = loadAllWEngineData()

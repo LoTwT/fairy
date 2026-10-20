@@ -5,6 +5,9 @@ import { verifyIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot
 import type {
   HistoricalIntegratedSnapshotIndex,
   IntegratedSnapshotIndex,
+  PublishedIntegratedSnapshotEntity,
+  PublishedIntegratedSnapshotIndex,
+  PublishedIntegratedSnapshotMember,
 } from "../src/integration/snapshot-types.ts"
 
 /** 由包 tsc 真正检查的正反例；移除 exactOptionalPropertyTypes 会令对应 @ts-expect-error 失败。 */
@@ -334,5 +337,30 @@ export async function snapshotLanguageTypes(
     complete,
     historicalResult,
     historicalLocales,
+  ]
+}
+
+/** 公开发布索引类型：成员只有 files，归档索引不能当作发布索引使用。 */
+export function publishedSnapshotTypes(
+  published: PublishedIntegratedSnapshotIndex,
+  archive: IntegratedSnapshotIndex,
+) {
+  const format: "fairy-nanoka-integrated/v4" = published.format
+  const entity: PublishedIntegratedSnapshotEntity = published.entities.agents!
+  const member: PublishedIntegratedSnapshotMember = entity.members["2"]!
+  const dataPath: string = member.files.data.path
+  const detailPath: string = member.files.details.zh!.path
+  // @ts-expect-error 发布成员不包含 sourceRecord。
+  const unsafeSourceRecord = member.sourceRecord
+  // @ts-expect-error 归档 v3 索引不能赋给发布 v4 索引类型。
+  const wrongPublished: PublishedIntegratedSnapshotIndex = archive
+  return [
+    format,
+    entity,
+    member,
+    dataPath,
+    detailPath,
+    unsafeSourceRecord,
+    wrongPublished,
   ]
 }

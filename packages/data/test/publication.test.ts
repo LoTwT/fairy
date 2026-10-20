@@ -4,6 +4,7 @@ import { basename, dirname, join } from "node:path"
 import { afterEach, describe, expect, it, vi } from "vitest"
 import { nanokaAgentsSnapshotEntity } from "../scripts/nanoka-integration/snapshot-entities.ts"
 import { buildIntegratedSnapshot } from "../scripts/nanoka-integration/snapshot-build.ts"
+import { derivePublishedIndex } from "../scripts/nanoka-integration/published-index.ts"
 import {
   generateCatalog,
   preparePublication,
@@ -135,6 +136,10 @@ describe("publication snapshot", () => {
     expect(catalog).toContain(
       "export const snapshotInfo: IntegratedSnapshotInfo = deepFreeze(",
     )
+    expect(catalog).toContain('"format":"fairy-nanoka-integrated/v4"')
+    expect(catalog).toContain(
+      'import type { PublishedIntegratedSnapshotIndex, IntegratedSnapshotInfo } from "../src/integration/snapshot-types.ts"',
+    )
     expect(catalog).toContain(
       '"source":{"id":"nanoka-zzz","version":"synthetic-publication"}',
     )
@@ -214,9 +219,12 @@ describe("publication snapshot", () => {
       join(artifactDirectory, "bangboos/950001/details.en.json"),
       "invalid later source",
     )
-    expect(await generateCatalog(join(generated, "integrated"), index)).toBe(
-      catalog,
-    )
+    expect(
+      await generateCatalog(
+        join(generated, "integrated"),
+        derivePublishedIndex(index),
+      ),
+    ).toBe(catalog)
     expect(await fs.readdir(dirname(artifactDirectory))).not.toContain(
       ".integrated.fairy-state",
     )
@@ -386,7 +394,10 @@ describe("publication snapshot", () => {
       await fs.writeFile(join(artifactDirectory, path), JSON.stringify(data))
       expect(data.id).toBe(Number(id))
     }
-    const catalog = await generateCatalog(artifactDirectory, index)
+    const catalog = await generateCatalog(
+      artifactDirectory,
+      derivePublishedIndex(index),
+    )
     // 重名检查只在各类别内：跨类别同名不拒绝，各套 union 与映射仍按各类别成员独立生成。
     expect(catalog).toContain(
       'export type AgentName = "Shared Name" | "Index Soldier 0 - Anby"',
@@ -420,39 +431,39 @@ describe("publication snapshot", () => {
     const { artifactDirectory, index } = await publicationFixture(root, {
       driveDiscs: false,
     })
-    await expect(generateCatalog(artifactDirectory, index)).rejects.toThrow(
-      /no drive-discs category/u,
-    )
+    await expect(
+      generateCatalog(artifactDirectory, derivePublishedIndex(index)),
+    ).rejects.toThrow(/no drive-discs category/u)
     const { index: complete } = await fixture()
     const withoutWEngines = structuredClone(complete)
     delete (withoutWEngines.entities as Record<string, unknown>)["w-engines"]
     await expect(
-      generateCatalog(artifactDirectory, withoutWEngines),
+      generateCatalog(artifactDirectory, derivePublishedIndex(withoutWEngines)),
     ).rejects.toThrow(/no w-engines category/u)
     const withoutBangboos = structuredClone(complete)
     delete (withoutBangboos.entities as Record<string, unknown>)["bangboos"]
     await expect(
-      generateCatalog(artifactDirectory, withoutBangboos),
+      generateCatalog(artifactDirectory, derivePublishedIndex(withoutBangboos)),
     ).rejects.toThrow(/no bangboos category/u)
     const withoutMonsters = structuredClone(complete)
     delete (withoutMonsters.entities as Record<string, unknown>)["monsters"]
     await expect(
-      generateCatalog(artifactDirectory, withoutMonsters),
+      generateCatalog(artifactDirectory, derivePublishedIndex(withoutMonsters)),
     ).rejects.toThrow(/no monsters category/u)
     const withoutShiyu = structuredClone(complete)
     delete (withoutShiyu.entities as Record<string, unknown>)["shiyu"]
     await expect(
-      generateCatalog(artifactDirectory, withoutShiyu),
+      generateCatalog(artifactDirectory, derivePublishedIndex(withoutShiyu)),
     ).rejects.toThrow(/no shiyu category/u)
     const withoutBoss = structuredClone(complete)
     delete (withoutBoss.entities as Record<string, unknown>)["boss"]
     await expect(
-      generateCatalog(artifactDirectory, withoutBoss),
+      generateCatalog(artifactDirectory, derivePublishedIndex(withoutBoss)),
     ).rejects.toThrow(/no boss category/u)
     const withoutSimul = structuredClone(complete)
     delete (withoutSimul.entities as Record<string, unknown>)["simul"]
     await expect(
-      generateCatalog(artifactDirectory, withoutSimul),
+      generateCatalog(artifactDirectory, derivePublishedIndex(withoutSimul)),
     ).rejects.toThrow(/no simul category/u)
   })
 
@@ -483,7 +494,10 @@ describe("publication snapshot", () => {
       join(artifactDirectory, "index.json"),
       JSON.stringify(index),
     )
-    const catalog = await generateCatalog(artifactDirectory, index)
+    const catalog = await generateCatalog(
+      artifactDirectory,
+      derivePublishedIndex(index),
+    )
     expect(catalog).toContain('export type MonsterId = "960001" | "960002"')
     expect(catalog).toContain('Object.freeze(["960001","960002"])')
     expect(catalog).toContain('Object.freeze(["970001","970002"])')
@@ -530,7 +544,10 @@ describe("publication snapshot", () => {
         data.names.en = name
         await fs.writeFile(path, JSON.stringify(data))
       }
-    const catalog = await generateCatalog(artifactDirectory, index)
+    const catalog = await generateCatalog(
+      artifactDirectory,
+      derivePublishedIndex(index),
+    )
     expect(catalog).toContain(JSON.stringify(' A\'s "Name"! '))
     expect(catalog).toContain(JSON.stringify(' D\'s "Disc"! '))
     expect(catalog).toContain(JSON.stringify(' W\'s "Engine"! '))

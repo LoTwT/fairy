@@ -37,7 +37,7 @@ export type {
   SimulBattle,
 } from "./integration/simul-types.ts"
 import type { SimulData, SimulDetails } from "./integration/simul-types.ts"
-import type { IntegratedSnapshotIndex } from "./integration/snapshot-types.ts"
+import type { PublishedIntegratedSnapshotIndex } from "./integration/snapshot-types.ts"
 import { supportedLanguages } from "./nanoka-identity.ts"
 import type { AgentActions } from "./skills/types.ts"
 import type {
@@ -201,12 +201,12 @@ export type {
   BossZoneStage,
 } from "./integration/boss-types.ts"
 export type {
-  IntegratedSnapshotEntity,
-  IntegratedSnapshotIndex,
   IntegratedSnapshotInfo,
   IntegratedSnapshotCategory,
-  IntegratedSnapshotMember,
   IntegratedSnapshotSourceInput,
+  PublishedIntegratedSnapshotEntity,
+  PublishedIntegratedSnapshotIndex,
+  PublishedIntegratedSnapshotMember,
 } from "./integration/snapshot-types.ts"
 export type {
   AgentName,
@@ -458,8 +458,11 @@ export async function loadSDriveDiscMaxLevelAffixes(): Promise<SDriveDiscMaxLeve
   return structuredClone(await driveDiscAffixesLoader())
 }
 
-/** 加载完整索引及来源记录（发布排版已压缩，值与键顺序不变），不加载实体；每次返回独立对象树。加载失败时拒绝 Promise。 */
-export async function loadIndex(): Promise<IntegratedSnapshotIndex> {
+/**
+ * 加载发布 v4 索引（压缩排版，成员只含文件引用），不加载实体；每次返回独立对象树。
+ * 来源记录 `sourceRecord` 只保留在 Git 归档，不随 npm 包发布。加载失败时拒绝 Promise。
+ */
+export async function loadIndex(): Promise<PublishedIntegratedSnapshotIndex> {
   return structuredClone(await indexLoader())
 }
 

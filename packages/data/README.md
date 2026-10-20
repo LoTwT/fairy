@@ -14,7 +14,7 @@ Node 要求 `>=24.11.0`，使用 ESM；浏览器已验收 Vite 开发与生产�
 
 Nanoka 是当前已登记的数据来源。在 Fairy 源码工作区内，可以把已支持实体的原始 JSON 抓取到被 Git 忽略的本地缓存。缓存不是权威快照，也不进入 npm 包；独立整合器可以基于明确版本的完整本地输入构建并验证新制品。公开接口见[数据消费与 npm 导出契约](../../docs/specs/data/consumption.md)。
 
-[来源数据整合规范](../../docs/specs/data/integration.md)维护八类资料的字段、类型、规则版本与文件契约，以及当前 v3 数据集的增量更新、差异报告、互斥读取、恢复和迁移协议。npm 消费者读取随包发布的固定快照；来源维护命令仅在源码工作区使用。
+[来源数据整合规范](../../docs/specs/data/integration.md)维护八类资料的字段、类型、规则版本与文件契约，以及当前 v3 归档数据集的增量更新、v3 → v4 发布索引派生、差异报告、互斥读取、恢复和迁移协议。npm 消费者读取随包发布的固定快照；来源维护命令仅在源码工作区使用。
 
 效果定义也通过显式 JSON 子路径发布：`@randomplay/data/definitions/effects/starter.json` 与 `@randomplay/data/definitions/effects/automatic.json`。自动规则的范围、事件输入及基础回能请求的执行边界见[消费说明](../../docs/specs/data/consumption.md#自动效果消费)。根入口不自动加载定义。
 
@@ -91,7 +91,7 @@ import type {
 const name: AgentName = "Astra Yao"
 const data = await loadAgentData(name)
 const details = await loadAgentDetails(name, "zh")
-const index = await loadIndex() // 完整 v3 来源索引，不加载实体
+const index = await loadIndex() // 发布 v4 索引：成员只含文件引用，不含 sourceRecord
 const all = await loadAllAgents("en") // 显式加载全部代理人公共资料和英文详情
 const allAgentData = await loadAllAgentData() // 只加载全部代理人公共资料，不加载详情
 const sourceId: AgentSourceId = agentSourceIds[name] // 名称 → 来源 ID；持久化保存 ID
@@ -240,7 +240,7 @@ pnpm --filter @randomplay/data verify:nanoka:current integrated
 pnpm --filter @randomplay/data recover:nanoka:current integrated
 # 显式迁移入口：只接受与当前规则版本及完整语言匹配的 v2 外壳；真实 v2 外壳会被拒绝
 pnpm --filter @randomplay/data migrate:nanoka:current integrated
-# 静态副本（v3 外壳）只读复验，不读取管理记录
+# 归档静态副本（v3 外壳）只读复验，不读取管理记录
 pnpm --filter @randomplay/data verify:nanoka:snapshot /absolute/copy/integrated
 ```
 
@@ -266,9 +266,10 @@ raw 重新生成：有稳定管理记录的 v2 数据集直接运行 `generate:i
 摘要证明制品内部字节一致性，不认证来源真实性或同一抓取批次。协议仅支持可信本机 macOS/Linux、同一文件系统及遵守锁的参与者；
 进程中断纳入测试，不承诺断电、内核崩溃、网络文件系统或 Windows；读取者需要控制目录写权限。
 `typecheck` / `test` 自动准备被 Git 忽略的 `.generated/`；`build` 使用另一份独占发布副本，
-仅支持单次构建。发布到 `dist/integrated/` 与 `dist/definitions/` 的 JSON 只删除字符串外的排版空白，
-归档 `integrated/` 与 `definitions/` 保持原字节；两侧摘要与字节数分别记录在 `dist/publication.json`
-与 `dist/definitions-publication.json`，消费快照标识仍由归档字节计算。真实工作区若仍停留在 v2 外壳，
+仅支持单次构建。发布到 `dist/integrated/` 的 `index.json` 是由归档 v3 派生的 v4 索引（成员只含 `files`），
+其余 integrated 与 definitions JSON 只删除字符串外的排版空白；归档 `integrated/` 与 `definitions/`
+保持原字节。两侧摘要与 v3 → v4 派生关系见 v2 `dist/publication.json`，definitions 摘要见
+`dist/definitions-publication.json`，消费快照标识仍由归档字节计算。真实工作区若仍停留在 v2 外壳，
 `build` / `typecheck` / `test` / `pack` 会明确失败，这是有意的拒绝；当前补救不是尝试显式迁移，而是按当前规则
 从 raw 重新生成。生成目录、静态发布边界与 CI 浏览器验收见[消费契约](../../docs/specs/data/consumption.md)。
 

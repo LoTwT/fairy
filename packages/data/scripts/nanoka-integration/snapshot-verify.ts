@@ -1,10 +1,15 @@
 import type { DetailLocale } from "../../src/integration/agent-types.ts"
-import { integratedSnapshotFormat } from "../../src/integration/snapshot-types.ts"
+import {
+  integratedSnapshotFormat,
+  publishedIntegratedSnapshotFormat,
+} from "../../src/integration/snapshot-types.ts"
 import type {
   HistoricalIntegratedSnapshotIndex,
   IntegratedSnapshotIndex,
+  PublishedIntegratedSnapshotIndex,
 } from "../../src/integration/snapshot-types.ts"
 import { equalJson, sortedIds } from "../../src/integration/source-json.ts"
+import type { JsonObject } from "../../src/integration/source-json.ts"
 import { serializeJson } from "../../src/integration/serialize-json.ts"
 import {
   isValidEntityId,
@@ -25,6 +30,7 @@ import {
   verifyFileSet,
 } from "./artifact-files.ts"
 import { directoryRoot, parseBytes, readBytes, sha256 } from "./files.ts"
+import { derivePublishedIndex } from "./published-index.ts"
 import {
   onboardedSnapshotEntities,
   validateSnapshotEntityContracts,
@@ -48,22 +54,58 @@ export interface VerifyIntegratedSnapshotOptions {
    */
   entities?: readonly IntegratedSnapshotEntityContract[]
 
-  /** 完整输入导出的预期索引；按 JSON 值核对，省略时仅校验制品自身的一致性。 */
+  /** 完整输入导出的预期归档索引；按 JSON 值核对，省略时仅校验制品自身的一致性。 */
   expectedIndex?: IntegratedSnapshotIndex
-
-  /**
-   * 发布副本的字节摘要来源；省略时按索引登记的归档摘要核对。
-   *
-   * 发布副本只删除 JSON 字符串外的排版空白，索引继续描述归档字节，因此发布副本
-   * 必须由独立清单提供实际字节摘要。结构、身份与 JSON 值检查完全相同。
-   */
-  publicationDigests?: (path: string) => string | undefined
 
   /**
    * 仅复验旧数据集时允许此前登记的支持语言子集；新候选必须提供完整当前配置。
    * 复验旧集仍要求各类别的 detailLocales 与该配置一致。
    */
   historicalLanguages?: boolean
+}
+
+/** 发布索引验证的输入；发布成员只允许 `files`，格式固定为 v4。 */
+export interface VerifyPublishedIntegratedSnapshotOptions {
+  /** 指向发布副本 `dist/integrated/` 的本地目录。 */
+  artifactDirectory: string
+
+  /**
+   * 本次发布的已验证归档索引；发布索引必须等于由它派生的 v4 索引。
+   * 归档索引自身仍由 `verifyIntegratedSnapshot` 按归档字节验证。
+   */
+  expectedArchiveIndex: IntegratedSnapshotIndex
+
+  /**
+   * 发布副本每个文件的字节摘要来源；必须为清单覆盖的全部文件返回摘要。
+   * 索引内登记的摘要描述归档字节，发布副本的实际字节由发布清单独立绑定。
+   */
+  publicationDigests: (path: string) => string | undefined
+
+  /** 默认加载工作区来源策略；注入策略也必须通过同一校验。 */
+  policy?: SourcePolicy
+
+  /** 本次期望验证的类别契约；默认当前已接入登记表。 */
+  entities?: readonly IntegratedSnapshotEntityContract[]
+}
+
+/**
+ * 归档与发布共用的索引形状。
+ *
+ * 两种外壳只差外壳版本、成员字段集合与是否保留 `sourceRecord`；结构、来源输入、
+ * 成员范围、文件引用与两阶段字节预算检查完全相同，因此共用同一验证主体。
+ */
+interface VerifySnapshotShapeOptions {
+  artifactDirectory: string
+  policy?: SourcePolicy | undefined
+  entities?: readonly IntegratedSnapshotEntityContract[] | undefined
+  historicalLanguages?: boolean | undefined
+  expectedIndex?: unknown
+  publicationDigests?: ((path: string) => string | undefined) | undefined
+  format:
+    | typeof integratedSnapshotFormat
+    | typeof publishedIntegratedSnapshotFormat
+  memberKeys: readonly string[]
+  sourceRecord: boolean
 }
 
 /** 索引内一个成员文件的待读取项；第一阶段只收集，第二阶段才读取字节。 */
@@ -110,9 +152,10 @@ function verifySourceInputs(
 }
 
 /**
- * 验证多实体完整制品：根索引外壳、类别集合、成员范围、来源输入、精确文件集合与实际字节摘要。
+ * 验证归档多实体完整制品：v3 外壳、成员文件与 `sourceRecord`、来源输入、精确文件集合与实际字节摘要。
  * 先只依据索引完成结构与数量预算检查，再读取实体文件核对字节、摘要与身份；索引自身同时受单文件上限
  * 与整库累计输出预算约束。不读取 raw，不认证来源真实性；接受按实际字节重算摘要的重新序列化副本。
+ * 发布 v4 目录不属于本函数范围，会以外壳版本错误拒绝。
  */
 export function verifyIntegratedSnapshot(
   options: VerifyIntegratedSnapshotOptions & { historicalLanguages?: false },
@@ -124,6 +167,39 @@ export function verifyIntegratedSnapshot(
 export async function verifyIntegratedSnapshot(
   options: VerifyIntegratedSnapshotOptions,
 ): Promise<HistoricalIntegratedSnapshotIndex> {
+  return (await verifySnapshotShape({
+    ...options,
+    format: integratedSnapshotFormat,
+    memberKeys: ["files", "sourceRecord"],
+    sourceRecord: true,
+  })) as unknown as HistoricalIntegratedSnapshotIndex
+}
+
+/**
+ * 验证发布多实体完整制品：v4 外壳、只含 `files` 的成员、由已验证归档索引派生的索引值与发布字节摘要。
+ * `expectedArchiveIndex` 提供唯一允许的发布索引值；`publicationDigests` 必须覆盖索引与全部成员文件。
+ * 归档 v3 目录不属于本函数范围，会以外壳版本错误拒绝。
+ */
+export async function verifyPublishedIntegratedSnapshot(
+  options: VerifyPublishedIntegratedSnapshotOptions,
+): Promise<PublishedIntegratedSnapshotIndex> {
+  if (typeof options.publicationDigests !== "function")
+    throw new TypeError("publicationDigests must be a function")
+  return (await verifySnapshotShape({
+    artifactDirectory: options.artifactDirectory,
+    policy: options.policy,
+    entities: options.entities,
+    expectedIndex: derivePublishedIndex(options.expectedArchiveIndex),
+    publicationDigests: options.publicationDigests,
+    format: publishedIntegratedSnapshotFormat,
+    memberKeys: ["files"],
+    sourceRecord: false,
+  })) as unknown as PublishedIntegratedSnapshotIndex
+}
+
+async function verifySnapshotShape(
+  options: VerifySnapshotShapeOptions,
+): Promise<JsonObject> {
   const policy = validateSourcePolicy(
     options.policy ?? (await loadSourcePolicy()),
     { historicalLanguages: options.historicalLanguages ?? false },
@@ -155,12 +231,8 @@ export async function verifyIntegratedSnapshot(
     )
   }
   const parsed = object(value, "index.json")
-  // 外壳版本先单独核对：v2 或未知外壳在这里明确报错，而不是被当成字段集合不符。
-  requireValue(
-    parsed.format === integratedSnapshotFormat,
-    "/format",
-    "格式版本错误",
-  )
+  // 外壳版本先单独核对：另一种外壳或未知版本在这里明确报错，而不是被当成字段集合不符。
+  requireValue(parsed.format === options.format, "/format", "格式版本错误")
   const index = exactKeys(
     parsed,
     ["format", "source", "entities"],
@@ -268,10 +340,11 @@ export async function verifyIntegratedSnapshot(
       const memberPath = `${categoryPath}/members/${memberId}`
       const member = exactKeys(
         members[memberId],
-        ["files", "sourceRecord"],
+        [...options.memberKeys],
         memberPath,
       )
-      object(member.sourceRecord, `${memberPath}/sourceRecord`)
+      if (options.sourceRecord)
+        object(member.sourceRecord, `${memberPath}/sourceRecord`)
       const references = exactKeys(
         member.files,
         ["data", "details"],
@@ -405,6 +478,6 @@ export async function verifyIntegratedSnapshot(
     )
   }
   await verifyFileSet(root, files)
-  // 以上运行时检查覆盖完整索引外壳；sourceRecord 仅要求 JSON 对象，未知原 key 保留。
-  return index as unknown as HistoricalIntegratedSnapshotIndex
+  // 以上运行时检查覆盖完整索引外壳；归档模式的 sourceRecord 仅要求 JSON 对象并保留未知原 key。
+  return index
 }

@@ -2,13 +2,15 @@ import { lstat, mkdir, readFile } from "node:fs/promises"
 import { basename, dirname, join, resolve } from "node:path"
 import type { ExportFileReference } from "../src/integration/agent-types.ts"
 import type {
-  IntegratedSnapshotEntity,
   IntegratedSnapshotIndex,
+  PublishedIntegratedSnapshotEntity,
+  PublishedIntegratedSnapshotIndex,
 } from "../src/integration/snapshot-types.ts"
 import { writeFileAtomically } from "./atomic-write.ts"
 import { outputExpansionLimit } from "./nanoka-integration/artifact-files.ts"
 import { withCurrentDataset } from "./nanoka-integration/current.ts"
 import { directoryRoot, readBytes } from "./nanoka-integration/files.ts"
+import { derivePublishedIndex } from "./nanoka-integration/published-index.ts"
 import { verifyIntegratedSnapshot } from "./nanoka-integration/snapshot-verify.ts"
 import { loadSourcePolicy } from "./nanoka/policy.ts"
 
@@ -22,8 +24,10 @@ async function exists(path: string): Promise<boolean> {
   }
 }
 
-/** 发布清单只包含全部登记类别的完整成员文件；成员或语言引用缺失即失败。 */
-export function publicationFiles(index: IntegratedSnapshotIndex): string[] {
+/** 发布清单只包含全部登记类别的完整成员文件；归档与发布索引共用同一文件引用结构。 */
+export function publicationFiles(
+  index: IntegratedSnapshotIndex | PublishedIntegratedSnapshotIndex,
+): string[] {
   const files = ["index.json"]
   for (const [name, entity] of Object.entries(index.entities))
     for (const memberId of entity.memberIds) {
@@ -43,9 +47,9 @@ export function publicationFiles(index: IntegratedSnapshotIndex): string[] {
 
 /** 公开 API 当前覆盖的类别必须进入发布副本，且各类别的公开语言完整；缺失即拒绝发布。 */
 function requirePublishedEntity(
-  index: IntegratedSnapshotIndex,
+  index: PublishedIntegratedSnapshotIndex,
   name: string,
-): IntegratedSnapshotEntity {
+): PublishedIntegratedSnapshotEntity {
   const entity = index.entities[name]
   if (!entity) throw new Error(`The published snapshot has no ${name} category`)
   for (const locale of ["zh", "en"] as const)
@@ -63,7 +67,7 @@ function requirePublishedEntity(
  */
 async function sourceIndexEnglishNames(
   snapshot: string,
-  entity: IntegratedSnapshotEntity,
+  entity: PublishedIntegratedSnapshotEntity,
 ): Promise<string[]> {
   const names: string[] = []
   for (const id of entity.memberIds) {
@@ -86,7 +90,7 @@ async function sourceIndexEnglishNames(
 /** 从已验证副本生成全部已登记实体的精确类型、冻结名称/映射及显式懒加载表；四个名称类别统一读来源索引 en 名（data.names.en）。 */
 export async function generateCatalog(
   snapshot: string,
-  index: IntegratedSnapshotIndex,
+  index: PublishedIntegratedSnapshotIndex,
   importAttributes = true,
 ): Promise<string> {
   const agents = requirePublishedEntity(index, "agents")
@@ -114,9 +118,15 @@ export async function generateCatalog(
     `() => import(${json(`@randomplay/data/definitions/skills/agents/${id}.json`)}${importAttributes ? ', { with: { type: "json" } }' : ""}).then(module => module.default as unknown as AgentActions)`
   const lazyEffect = (path: string, type: string) =>
     `() => import(${json(`@randomplay/data/definitions/effects/${path}`)}${importAttributes ? ', { with: { type: "json" } }' : ""}).then(module => module.default as unknown as ${type})`
-  const sourceIds = (names: string[], entity: IntegratedSnapshotEntity) =>
+  const sourceIds = (
+    names: string[],
+    entity: PublishedIntegratedSnapshotEntity,
+  ) =>
     `Object.freeze(Object.fromEntries(${json(names.map((name, i) => [name, entity.memberIds[i]]))}))`
-  const namesBySourceId = (names: string[], entity: IntegratedSnapshotEntity) =>
+  const namesBySourceId = (
+    names: string[],
+    entity: PublishedIntegratedSnapshotEntity,
+  ) =>
     `Object.freeze(Object.fromEntries(${json(names.map((name, i) => [entity.memberIds[i], name]))}))`
   const snapshotInfoValue = {
     format: index.format,
@@ -133,7 +143,7 @@ export async function generateCatalog(
     ),
   }
   const loaderTable = (
-    entity: IntegratedSnapshotEntity,
+    entity: PublishedIntegratedSnapshotEntity,
     data: string,
     details: string,
   ) =>
@@ -155,7 +165,7 @@ import type { MonsterData, MonsterDetails } from "../src/integration/monster-typ
 import type { ShiyuData, ShiyuDetails } from "../src/integration/shiyu-types.ts"
 import type { BossData, BossDetails } from "../src/integration/boss-types.ts"
 import type { SimulData, SimulDetails } from "../src/integration/simul-types.ts"
-import type { IntegratedSnapshotIndex, IntegratedSnapshotInfo } from "../src/integration/snapshot-types.ts"
+import type { PublishedIntegratedSnapshotIndex, IntegratedSnapshotInfo } from "../src/integration/snapshot-types.ts"
 import type { AgentLevel60Attributes, WEngineLevel60Attributes, SDriveDiscMaxLevelAffixes } from "../src/attributes/types.ts"
 import type { AgentActions } from "../src/skills/types.ts"
 import type { RuleSet, StaticEffectCatalog } from "@randomplay/shared"
@@ -230,9 +240,9 @@ function deepFreeze<T>(value: T): T {
   }
   return value
 }
-/** 完整索引的轻量信息：来源版本与各类别的规则版本、语言、成员清单；运行时深冻结。 */
+/** 发布索引的轻量信息：来源版本与各类别的规则版本、语言、成员清单；运行时深冻结。 */
 export const snapshotInfo: IntegratedSnapshotInfo = deepFreeze(${json(snapshotInfoValue)})
-export const indexLoader = ${lazy("index.json", "IntegratedSnapshotIndex")}
+export const indexLoader = ${lazy("index.json", "PublishedIntegratedSnapshotIndex")}
 export const staticEffectDefinitionsLoader = ${lazyEffect("static.json", "RuleSet")}
 export const staticEffectCatalogLoader = ${lazyEffect("static-catalog.json", "StaticEffectCatalog")}
 export const agentAttributeLoaders: Record<string, () => Promise<AgentLevel60Attributes>> = {
@@ -274,7 +284,8 @@ ${loaderTable(simul, "SimulData", "SimulDetails")}
 
 /**
  * 创建独占发布输入目录。受管理源在既有租约内验证并读完字节；静态源无需管理记录或 raw。
- * 生成与后续打包只读此副本，绝不在释放租约后重新读取来源目录。
+ * 生成与后续打包只读此副本，绝不在释放租约后重新读取来源目录。副本保持归档 v3 字节；
+ * catalog 类型使用由该归档索引派生的发布 v4 形状。
  */
 export async function preparePublication(
   targetDirectory: string,
@@ -319,7 +330,7 @@ export async function preparePublication(
     )
   await writeFileAtomically(
     join(outputDirectory, "catalog.ts"),
-    await generateCatalog(snapshot, index),
+    await generateCatalog(snapshot, derivePublishedIndex(index)),
     { exclusive: true },
   )
   return index

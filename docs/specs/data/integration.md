@@ -2,7 +2,7 @@
 
 ## 状态与目标
 
-**状态：Boss 跨语言结构骨架统一已实施完成（规则 `/5`）：同一 Boss 的全部详情语言必须使用同一结构骨架，字符串内容可以不同；生成期的跨语言检查与静态制品的成员聚合复验复用同一比较。此前完成：0.4 数据名称提升与 definitions 发布瘦身：drive-discs（规则 `/3`）把来源索引四语名称与 `desc2`/`desc4` 提升为 `data.names` / `data.descriptions`，WEngine 与 Bangboo（规则 `/3`）把索引四语名称提升为 `data.names`；zh/en 必填、ja/ko 可选，`details` 与 `sourceRecord` 保持独立来源。agents、drive-discs、w-engines、bangboos 的发布目录统一读取 `data.names.en`。integrated 归档保持原字节与 pretty 排版，发布到 `dist/integrated` 时只删除 JSON 字符串之外的排版空白，并以 `dist/publication.json` 记录归档摘要 → 发布摘要；`dist/definitions` 同样只删除字符串外空白，并以独立的 `dist/definitions-publication.json` 记录归档 → 发布摘要，definitions 归档与两份内部 manifest 的 `artifacts` 摘要继续描述归档字节。快照及 attributes、skills、static-effects 已按冻结的 3.2 raw 重新生成。此前已完成：sourceRecord 业务字段登记——agents 索引四语名称提升为 `data.names`、boss 索引 `live_begin`/`live_end` 成对提升为 `data.liveTimeWindow`（缺失时不补造）、agents 补齐索引未知顶层字段维护诊断、发布目录 `AgentName` 改用来源索引 en 名称作为稳定来源（与英文详情显示名解耦，当前 3.2 数据两者取值一致）、agents 与 boss rulesVersion 递增；快照与三类派生制品（skills、attributes、static-effects）已重生成并通过字节级验收（仅 agents data、boss data、index 与钉值变更）。登记范围说明：boss 索引 `zone_type`/`sort` 与已提升的详情孪生字段（`zoneType`/`priority`）本地 3.2 全 47 条同值，按 schema 归属不重复提升、原值保留归档；本次补齐驱动盘索引描述与其余名称类别的换源；`DriveDiscName`/`WEngineName`/`BangbooName` 现与 `AgentName` 一样读取来源索引 en 名称，与英文详情显示名解耦。此前一轮已完成：整合规则严格化——未知字段由细节流容忍改为整合失败、共享字段改为严格共享（同有或全缺）、全类别 rulesVersion 递增、shiyu `zone` 数值骨架提升到 `data`、boss `modes`/`zone` 判别联合与 `data`/`details` 类型封闭化；注意 v2 显式迁移随之实际退役：真实 v2 外壳都停留在最后一个 v2 规则版本，与当前登记表版本不同，按 §7 的迁移契约一律拒绝，需按当前规则从 raw 重新生成；后续可单独评估是否删除迁移代码。此前已实现：单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令；固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取。正常生成、管理、发布与公开消费统一使用 v3 外壳，v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
+**状态：Boss 跨语言结构骨架统一已实施完成（规则 `/5`）：同一 Boss 的全部详情语言必须使用同一结构骨架，字符串内容可以不同；生成期的跨语言检查与静态制品的成员聚合复验复用同一比较。此前完成：0.4 数据名称提升与 definitions 发布瘦身：drive-discs（规则 `/3`）把来源索引四语名称与 `desc2`/`desc4` 提升为 `data.names` / `data.descriptions`，WEngine 与 Bangboo（规则 `/3`）把索引四语名称提升为 `data.names`；zh/en 必填、ja/ko 可选，`details` 与 `sourceRecord` 保持独立来源。agents、drive-discs、w-engines、bangboos 的发布目录统一读取 `data.names.en`。integrated 归档保持 v3 原字节与 pretty 排版；发布到 `dist/integrated` 时 `index.json` 派生为 v4（成员去掉 `sourceRecord`），其余文件只删除 JSON 字符串之外的排版空白，并以 v2 `dist/publication.json` 记录归档摘要、v3 → v4 派生关系与发布摘要；`dist/definitions` 同样只删除字符串外空白，并以独立的 `dist/definitions-publication.json` 记录归档 → 发布摘要，definitions 归档与两份内部 manifest 的 `artifacts` 摘要继续描述归档字节。快照及 attributes、skills、static-effects 已按冻结的 3.2 raw 重新生成。此前已完成：sourceRecord 业务字段登记——agents 索引四语名称提升为 `data.names`、boss 索引 `live_begin`/`live_end` 成对提升为 `data.liveTimeWindow`（缺失时不补造）、agents 补齐索引未知顶层字段维护诊断、发布目录 `AgentName` 改用来源索引 en 名称作为稳定来源（与英文详情显示名解耦，当前 3.2 数据两者取值一致）、agents 与 boss rulesVersion 递增；快照与三类派生制品（skills、attributes、static-effects）已重生成并通过字节级验收（仅 agents data、boss data、index 与钉值变更）。登记范围说明：boss 索引 `zone_type`/`sort` 与已提升的详情孪生字段（`zoneType`/`priority`）本地 3.2 全 47 条同值，按 schema 归属不重复提升、原值保留归档；本次补齐驱动盘索引描述与其余名称类别的换源；`DriveDiscName`/`WEngineName`/`BangbooName` 现与 `AgentName` 一样读取来源索引 en 名称，与英文详情显示名解耦。此前一轮已完成：整合规则严格化——未知字段由细节流容忍改为整合失败、共享字段改为严格共享（同有或全缺）、全类别 rulesVersion 递增、shiyu `zone` 数值骨架提升到 `data`、boss `modes`/`zone` 判别联合与 `data`/`details` 类型封闭化；注意 v2 显式迁移随之实际退役：真实 v2 外壳都停留在最后一个 v2 规则版本，与当前登记表版本不同，按 §7 的迁移契约一律拒绝，需按当前规则从 raw 重新生成；后续可单独评估是否删除迁移代码。此前已实现：单代理人纯整合、离线全量新制品构建、确定性字节与摘要、完整复验与统一 pnpm 命令；固定当前数据集的多实体 v3 增量写入、按类别的更新差异报告、事务恢复、显式迁移与互斥读取。归档生成与管理使用 v3 外壳，npm 发布与公开消费使用由归档派生的 v4 外壳；v2 外壳只保留识别、复验与显式迁移能力。公开读取与 npm 导出见[消费契约](consumption.md)。**
 `data.json` 与 `details.{locale}.json` 为已确认的文件名，正式类型与测试使用同一命名。
 已接入生产类别：`agents`（规则 `nanoka-agent-reference/7`）、`drive-discs`（规则
 `nanoka-drive-disc-reference/3`）、`w-engines`（规则 `nanoka-w-engine-reference/3`）、`bangboos`（规则
@@ -333,25 +333,27 @@ Pointer 采用 [RFC 6901](https://www.rfc-editor.org/rfc/rfc6901.html) 的字符
 字段；v6 实施整合规则严格化（未知字段整合失败与严格共享），文件外壳仍为 v2。已有旧规则产物必须按当前
 规则重新判定并生成受影响文件，不能只改索引中的版本标记来宣称已符合新规则。
 
-### 7.1 多实体根索引 v3（当前外壳）
+### 7.1 多实体归档根索引 v3 与发布索引 v4
 
 多实体外壳把单一代理人索引改为按已接入类别分块：根只描述整个快照的来源身份、来源版本与已包含类别，
-类别块分别描述成员范围、完整性、整合规则、详情语言、来源输入与输出文件摘要。正常生成、当前数据集管理、
-恢复、显式迁移、公开读取 API、类型生成与静态发布副本都使用本外壳；v2 外壳只保留识别、复验与迁移入口，真实 v2 外壳需按当前规则从 raw 重新生成。
+类别块分别描述成员范围、完整性、整合规则、详情语言、来源输入与输出文件摘要。Git 归档、正常生成、当前
+数据集管理、恢复与显式迁移使用 v3；npm 发布、公开读取 API 与类型生成使用由归档按固定规则派生的 v4。
+v4 保留 v3 的全部字段、值和键顺序，只把 `format` 改为 `fairy-nanoka-integrated/v4`，并移除每个成员的
+`sourceRecord`。v2 外壳只保留识别、复验与迁移入口，真实 v2 外壳需按当前规则从 raw 重新生成。
 
-| 字段                            | 类型与约束                                                                           |
-| ------------------------------- | ------------------------------------------------------------------------------------ |
-| `format`                        | 固定 `fairy-nanoka-integrated/v3`，约束文件外壳、类别分块与成员文件命名              |
-| `source.id`                     | 固定 `nanoka-zzz`                                                                    |
-| `source.version`                | 全部类别共用的明确来源版本；不跨版本补缺，也不添加产物版本目录                       |
-| `source.inputs`                 | 快照级来源输入，当前只有 `manifest.json`；每项为 `resource` 与原始字节 `sha256`      |
-| `entities`                      | 已包含类别 → 类别块；key 由已接入类别登记表定义，缺类别或多出未登记类别都失败        |
-| `entities.{name}.rulesVersion`  | 该类别的整合规则版本；各类别独立演进，不从其他类别或根索引推断                       |
-| `entities.{name}.detailLocales` | 该类别实际读取的完整详情语言，按来源配置顺序；首个语言决定该类别内的取值特例         |
-| `entities.{name}.complete`      | 固定 `true`：该类别成员集合等于来源版本索引的全部成员                                |
-| `entities.{name}.memberIds`     | 类别成员 ID，按数值升序、无重复，必须与 `members` 的 key 集合完全一致                |
-| `entities.{name}.inputs`        | 该类别来源资源，索引文件在前、成员与语言顺序在后；全制品一个资源只登记一次           |
-| `entities.{name}.members`       | 成员 ID → `files.data`、`files.details.{locale}` 与独立 `sourceRecord`；key 原样保留 |
+| 字段                            | 类型与约束                                                                                                         |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `format`                        | 归档固定 `fairy-nanoka-integrated/v3`，约束文件外壳、类别分块与成员文件命名；发布固定 `fairy-nanoka-integrated/v4` |
+| `source.id`                     | 固定 `nanoka-zzz`                                                                                                  |
+| `source.version`                | 全部类别共用的明确来源版本；不跨版本补缺，也不添加产物版本目录                                                     |
+| `source.inputs`                 | 快照级来源输入，当前只有 `manifest.json`；每项为 `resource` 与原始字节 `sha256`                                    |
+| `entities`                      | 已包含类别 → 类别块；key 由已接入类别登记表定义，缺类别或多出未登记类别都失败                                      |
+| `entities.{name}.rulesVersion`  | 该类别的整合规则版本；各类别独立演进，不从其他类别或根索引推断                                                     |
+| `entities.{name}.detailLocales` | 该类别实际读取的完整详情语言，按来源配置顺序；首个语言决定该类别内的取值特例                                       |
+| `entities.{name}.complete`      | 固定 `true`：该类别成员集合等于来源版本索引的全部成员                                                              |
+| `entities.{name}.memberIds`     | 类别成员 ID，按数值升序、无重复，必须与 `members` 的 key 集合完全一致                                              |
+| `entities.{name}.inputs`        | 该类别来源资源，索引文件在前、成员与语言顺序在后；全制品一个资源只登记一次                                         |
+| `entities.{name}.members`       | 成员 ID → `files.data`、`files.details.{locale}` 与独立 `sourceRecord`；key 原样保留                               |
 
 成员文件沿用固定布局 `{类别}/{成员}/data.json` 与 `{类别}/{成员}/details.{locale}.json`，类别目录名即
 `entities` 的 key。`files.data` 与 `files.details.{locale}` 记录相对 `integrated/` 的路径与归档字节摘要；
@@ -366,6 +368,12 @@ v3 不沿用 v2 的 `stats`/`content` 名称，那是已废弃文件名的遗留
 成员文件身份规则由各类别明确实现，缺少身份检查的登记被拒绝。代理人沿用 v2 规则：`data` 与全部
 `details` 的 `id` 都必须与成员 ID 一致，`data` 不含 `locale`，`details.locale` 与对应语言一致。
 `sourceRecord` 仍要求完整原值与原 key，未知容器不猜测。
+
+发布 v4 由归档 v3 按固定规则派生：根与类别字段、值和键顺序不变，只把 `format` 替换为
+`fairy-nanoka-integrated/v4`，并把每个成员收缩为 `{ files }`。派生器要求成员在归档中恰好具有
+`files` 与 `sourceRecord`；已是 v4、缺少 `sourceRecord`、多出成员字段、BOM 或非法 UTF-8 都拒绝。
+`snapshotId` 仍按归档输入计算，不因发布外壳变化。发布索引与 `dist/publication.json` 的验证边界见
+[消费契约](consumption.md#发布副本与摘要双链)。
 
 验证器核对索引与实际文件集合精确一致：拒绝遗漏、额外文件、额外空目录、非法路径、符号链接与非普通文件；
 摘要按同一批重新读取的实际字节核对，索引不记录自身摘要。传入完整输入导出的预期索引时按 JSON 值核对。
@@ -621,7 +629,7 @@ v2 缓存不可达，迁移会被明确拒绝，不能靠转换恢复可用状�
 将详情语言引用表达为可选，JSON 字段和输出不变。历史验证、恢复内部索引及持锁读取回调使用历史类型，
 调用方必须检查某语言引用存在后再使用。验证器省略 `historicalLanguages` 或显式传入 `false` 时返回完整类型；
 传入 `true`、动态 `boolean` 或未收窄的可选 `boolean` 时返回历史类型。新全量构建仍保留完整语言类型，
-规则版本的预期索引推断及显式覆盖优先级不变。多实体外壳沿用同一模式：`IntegratedSnapshotIndex` 默认要求完整语言引用，`HistoricalIntegratedSnapshotIndex`
+规则版本的预期索引推断及显式覆盖优先级不变。多实体归档外壳沿用同一模式：`IntegratedSnapshotIndex` 默认要求完整语言引用，`HistoricalIntegratedSnapshotIndex`
 复用同一 JSON 结构并把引用表达为可能缺失；严格验证与新建制品返回完整类型，启用历史模式（含动态 `boolean` 与
 未收窄的可选 `boolean`）的复验返回历史类型，调用方必须检查引用存在后再使用。当前数据集的普通读取在进入回调前
 确认完整语言配置，因此回调参数仍是完整语言类型。
@@ -1340,8 +1348,10 @@ fairy-integrated-snapshot-<独占后缀>/
 格式化失败与其他构建失败共用独占临时目录清理；更新入口沿用现有恢复机制，不发布未完成候选。
 独立验证器允许按第 8 节重新序列化实体文件并更新摘要，也允许索引自身重新排版；不强制副本采用构建器的排版。
 副本与原制品的 JSON 值相等需另行核对，验证器只检查副本内部一致性；传输压缩先解压再验证。
-发布副本的摘要来源由 `dist/publication.json` 提供：`verifyIntegratedSnapshot` 的 `publicationDigests` 选项
-按该清单核对实际字节，结构、身份与 JSON 值检查与归档副本完全相同；归档副本仍按索引登记摘要核对。
+归档副本仍由 `verifyIntegratedSnapshot` 按索引登记摘要核对，只接受 v3 与含 `sourceRecord` 的成员。
+发布副本由独立的 `verifyPublishedIntegratedSnapshot` 验证：格式必须为 v4、成员只允许 `files`，
+索引值必须等于由 `expectedArchiveIndex` 派生的结果，实际字节摘要由 `dist/publication.json` 的
+`publicationDigests` 提供。发布清单与归档目录同时传入时，再用真实归档字节复核派生结果。
 独立调用验证器只证明制品自身一致，不认证 raw 来源真实性或重新证明完整抓取批次。
 
 成功返回本次独占根目录 `buildDirectory`、`artifactDirectory`、复验索引、计数和独立的 `maintenanceReportPath`；
@@ -1395,9 +1405,10 @@ Simul 复用既有 `integrateSimul`，
 避免单文件只核对 id/locale 时放过混合变体的静态制品。登记校验要求类别名唯一且
 可作为目录名、来源实体不被重复使用、规则版本格式正确、成员文件身份检查必备、可选的成员聚合检查
 若提供则必须为函数；构建入口另外要求纯整合函数，验证与历史复验只要求静态契约。
-[索引类型](../../../packages/data/src/integration/snapshot-types.ts)由包根入口导出，是公开读取的唯一索引类型；
-`IntegratedSnapshotIndex` 默认要求完整语言引用，`HistoricalIntegratedSnapshotIndex` 复用同一 JSON 结构并把引用表达为可能缺失，
-只用于历史复验。
+[索引类型](../../../packages/data/src/integration/snapshot-types.ts)中，归档 `IntegratedSnapshotIndex` 默认要求
+完整语言引用，`HistoricalIntegratedSnapshotIndex` 复用同一 JSON 结构并把引用表达为可能缺失，二者只用于归档
+管理与历史复验。包根入口只公开 `PublishedIntegratedSnapshotIndex`、`PublishedIntegratedSnapshotEntity` 与
+`PublishedIntegratedSnapshotMember`；发布成员只含 `files`，`loadIndex` 不会返回 `sourceRecord`。
 
 [构建器](../../../packages/data/scripts/nanoka-integration/snapshot-build.ts) `buildIntegratedSnapshot` 接受
 `{ rawRoot, version, temporaryParent?, policy?, entities? }`，在独占临时目录按登记顺序处理全部类别：
