@@ -31,3 +31,4 @@
 - [ZZZ-HP 静态数据来源盘点](plans/zzz-hp-static-inventory.md)：固定来源的身份映射、未匹配项、读取语义及正式覆盖报告入口。
 - [ZZZ-HP 静态数据接入记录](plans/zzz-hp-static-data-prompt.md)：已完成接入的 Git 记录与维护入口。
 - [首批自动效果规则接入记录](plans/effects-pr6-prompt.md)：已完成接入的 Git 记录与维护入口。
+- [v4 数据瘦身范围说明与实施记录](plans/v4-data-slimming-scope.md)：v3 归档与 v4 发布索引的派生边界、实测体积、验证结果及 0.4.0 发布说明草稿。
