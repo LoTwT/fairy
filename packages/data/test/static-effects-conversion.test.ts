@@ -4754,8 +4754,9 @@ describe("batch 07 Roxy and Crimson Moon Casket supplements", () => {
     expect(() =>
       convertSource(batch07Data(), functions, [], idCollision),
     ).toThrowError(/collides with a fixed-source catalog entity/)
-    // 真实身份撞固定来源实体（上游未来出现同实体的守卫路径）：拒绝。
-    const identityCollision = batch07Supplements.map((supplement) =>
+    // 目录类别与 identity.kind 不一致（w-engine 补充挂 agent identity）：
+    // 拒绝，不能把音擎选项挂到代理人实体。
+    const crossCategory = batch07Supplements.map((supplement) =>
       supplement.kind === "entity" &&
       supplement.supplementId === "nanoka:w-engines:14162:crit-rate"
         ? entity({
@@ -4768,8 +4769,29 @@ describe("batch 07 Roxy and Crimson Moon Casket supplements", () => {
         : supplement,
     )
     expect(() =>
-      convertSource(batch07Data(), functions, [], identityCollision),
-    ).toThrowError(/repeats the identity agent\/1071/)
+      convertSource(batch07Data(), functions, [], crossCategory),
+    ).toThrowError(
+      /catalog category w-engines does not match identity kind agent/,
+    )
+    // 未登记迁移的 identity 撞车：恢复拒绝，不能静默挂到固定实体。
+    const unregisteredIdentity = batch07Supplements.map((supplement) =>
+      supplement.kind === "entity" &&
+      supplement.supplementId === "nanoka:w-engines:14162:crit-rate"
+        ? entity({
+            ...supplement,
+            entity: {
+              ...supplement.entity,
+              catalogEntityId: "nanoka:agents:unregistered",
+              identity: { kind: "agent", entityId: "1071" },
+            },
+          })
+        : supplement,
+    )
+    expect(() =>
+      convertSource(batch07Data(), functions, [], unregisteredIdentity),
+    ).toThrowError(
+      /repeats the identity agent\/1071 of a fixed-source entity without a registered migration/,
+    )
     // 两个补充实体互撞（同 catalog ID 或同身份）：拒绝。
     const duplicated = [
       ...batch07Supplements.filter(

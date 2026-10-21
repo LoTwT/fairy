@@ -1,6 +1,7 @@
 {
   "agents:severian": "1631",
   "agents:pheony": "1641",
+  "agents:Roxy": "1621",
   "agents:soldier11": "1041",
   "agents:alexandrina": "1211",
   "agents:yixuan": "1371",
@@ -61,6 +62,9 @@
   "agents:lucy": "1151",
   "agents:qingyi": "1251",
   "w-engines:Identity_Base": "12013",
+  "w-engines:Identity_Inflection": "12014",
+  "w-engines:Drill_Rig_Red-Axis": "13111",
+  "w-engines:Crimson_Moon_Casket": "14162",
   "w-engines:Lunar_Semiluna": "12016",
   "w-engines:Luna_Descrescent": "12002",
   "w-engines:Lunar_Noviluna": "12003",

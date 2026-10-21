@@ -64,6 +64,10 @@ import {
   type SourceRecordShape,
 } from "./supplements.ts"
 import {
+  FIXED_SOURCE_SUPPLEMENT_MIGRATIONS,
+  type FixedSourceSupplementMigration,
+} from "./fixed-source-migrations.ts"
+import {
   BUFF_RESOURCE,
   SOURCE_COMMIT,
   SOURCE_REPOSITORY,
@@ -504,6 +508,111 @@ export interface SourceRecord {
   normalized: SourceEffect | undefined
 }
 
+const sourceRecordKey = (record: SourceRecord): string =>
+  `${record.category}:${record.entityId}:${record.rankKind}:${record.rank}:${record.blockId}:${record.raw.id}`
+
+const sourceIdentityKey = (identity: SourceIdentity): string =>
+  `${identity.kind}:${identity.entityId}`
+
+const categoryForIdentityKind = (
+  kind: SourceIdentity["kind"],
+): SourceEntityCategory =>
+  kind === "agent"
+    ? "agents"
+    : kind === "w-engine"
+      ? "w-engines"
+      : "drive-discs"
+
+/** 补充实体 catalog ID 的类别段：`nanoka:<类别>:...` 或 `<类别>:...`。 */
+const supplementCatalogCategory = (
+  catalogEntityId: string,
+): SourceEntityCategory | undefined => {
+  const [first, second] = catalogEntityId.split(":")
+  const category = first === "nanoka" ? second : first
+  return category === "agents" ||
+    category === "w-engines" ||
+    category === "drive-discs"
+    ? category
+    : undefined
+}
+
+/**
+ * 固定源补出补充实体时的同条款迁移解析：只有补充登记实际参与本次转换、
+ * 固定源实体已存在且登记的全部记录都在场时，才把这些记录标记为迁移入口。
+ * 部分记录在场说明上游编码已漂移，直接拒绝而不是留下重叠贡献；固定源
+ * 完全缺少该条款时补充选项照常可执行。
+ */
+function resolveFixedSourceSupplementMigrations(
+  entities: readonly StaticCatalogEntity[],
+  records: readonly SourceRecord[],
+  supplements: readonly Supplement[],
+): ReadonlyMap<string, FixedSourceSupplementMigration> {
+  const presentSupplements = new Set(
+    supplements.map((supplement) => supplement.supplementId),
+  )
+  const entitiesByIdentity = new Map(
+    entities.flatMap((entity) =>
+      entity.identity === null
+        ? []
+        : [[sourceIdentityKey(entity.identity), entity] as const],
+    ),
+  )
+  const migrated = new Map<string, FixedSourceSupplementMigration>()
+  for (const migration of FIXED_SOURCE_SUPPLEMENT_MIGRATIONS) {
+    if (
+      !migration.supplementIds.every((supplementId) =>
+        presentSupplements.has(supplementId),
+      )
+    )
+      continue
+    const entity = entitiesByIdentity.get(sourceIdentityKey(migration.identity))
+    if (!entity) continue
+    const matched = migration.records.map((expected) => {
+      const candidates = records.filter(
+        (record) =>
+          `${record.category}:${record.entityId}` === entity.catalogEntityId &&
+          record.rankKind === expected.rankKind &&
+          record.rank === expected.rank &&
+          record.blockId === expected.blockId &&
+          record.raw.id === expected.raw.id,
+      )
+      if (candidates.length > 1)
+        throw new Error(
+          `Fixed-source supplement migration repeats ${String(expected.raw.id)} at ${entity.catalogEntityId} ${expected.rankKind}/${String(expected.rank)}/${expected.blockId}`,
+        )
+      return { expected, record: candidates[0] }
+    })
+    const present = matched.filter(
+      (
+        entry,
+      ): entry is {
+        expected: FixedSourceSupplementMigration["records"][number]
+        record: SourceRecord
+      } => entry.record !== undefined,
+    )
+    if (present.length === 0) continue
+    if (present.length !== matched.length)
+      throw new Error(
+        `Fixed-source supplement migration ${migration.optionIds.join(", ")} found ${String(present.length)}/${String(matched.length)} registered records at ${entity.catalogEntityId}; re-review the clause before generating`,
+      )
+    for (const { expected, record } of present) {
+      verifySourceRecordShape(
+        record.raw,
+        expected.raw,
+        migration.optionIds.join(", "),
+        record.pointer,
+      )
+      const key = sourceRecordKey(record)
+      if (migrated.has(key))
+        throw new Error(
+          `Fixed-source record ${key} is registered by more than one supplement migration`,
+        )
+      migrated.set(key, migration)
+    }
+  }
+  return migrated
+}
+
 /**
  * 正式编译使用的完整来源效果身份：实体身份、rankKind/rank、块与效果全部
  * 参与。局部块/效果 ID 只在实体内部唯一，不同实体可以合法复用；不得用
@@ -905,11 +1014,29 @@ function verifySourceRecordShape(
     throw new Error(
       `Supplement ${label} record field set drifted at ${context}; re-review the shared clause context before generating`,
     )
+  const normalizeValue = (value: unknown): string =>
+    value === undefined ? "<absent>" : JSON.stringify(value)
+  // 3.2.5 省略 scope：与显式 general 等价；带 skillTargets 时按 effective
+  // skill 作用域核对。冻结形状省略 scope 时也按同一有效语义解释，避免把
+  // 上游合法的省略误判为字段漂移。
+  const effectiveScope = (document: {
+    readonly scope?: string | readonly string[]
+    readonly skillTargets?: readonly unknown[]
+  }): string | readonly string[] | undefined =>
+    document.scope !== undefined
+      ? document.scope
+      : (document.skillTargets?.length ?? 0) > 0
+        ? "skill"
+        : "general"
   for (const field of SOURCE_RECORD_SHAPE_FIELDS) {
-    const normalizeValue = (value: unknown): string =>
-      value === undefined ? "<absent>" : JSON.stringify(value)
-    const actualValue = normalizeValue(actual[field as keyof SourceEffect])
-    const frozenValue = normalizeValue(frozen[field as keyof SourceRecordShape])
+    const actualValue =
+      field === "scope"
+        ? normalizeValue(effectiveScope(actual))
+        : normalizeValue(actual[field as keyof SourceEffect])
+    const frozenValue =
+      field === "scope"
+        ? normalizeValue(effectiveScope(frozen))
+        : normalizeValue(frozen[field as keyof SourceRecordShape])
     if (actualValue !== frozenValue)
       throw new Error(
         `Supplement ${label} field ${field} drifted to ${actualValue} (expected ${frozenValue}) at ${context}; re-review the shared clause context before generating`,
@@ -2059,6 +2186,7 @@ function compile(
   identity: SourceIdentity | null,
   effectId: EffectId,
   declaredSkillTargets: StaticEffectCatalog["skillTargets"][number][],
+  migratedSourceRecords: ReadonlyMap<string, FixedSourceSupplementMigration>,
 ): { rule?: ContributionRule; variant: StaticCatalogVariant } {
   const e = record.normalized ?? record.raw
   const semantics = SOURCE_SEMANTICS[semanticsKeyFor(record)]
@@ -2227,6 +2355,19 @@ function compile(
         : {}),
     },
   }
+  const fixedSourceMigration = migratedSourceRecords.get(
+    sourceRecordKey(record),
+  )
+  if (fixedSourceMigration)
+    return {
+      variant: {
+        ...variant,
+        status: "unsupported",
+        reason: "semantic-conflict",
+        explanation: `${fixedSourceMigration.explanation} 固定源记录 ${record.pointer} 不再单独生成贡献。`,
+        effectIds: [],
+      },
+    }
   if (proof)
     variant = {
       ...variant,
@@ -4297,6 +4438,11 @@ export function convertSource(
         `The settlement-target exclusion ${exclusion.differenceId} lost its registered source record (${key}); the dependent supplement ${exclusion.dependentSupplementIds.join(", ")} is present while the excluded normal-vibrato identity is missing — re-review the clause before generating`,
       )
   }
+  const migratedSourceRecords = resolveFixedSourceSupplementMigrations(
+    collected.entities,
+    collected.records,
+    supplements,
+  )
   const groups = new Map<string, SourceRecord[]>()
   for (const record of collected.records) {
     const pack =
@@ -4323,6 +4469,7 @@ export function convertSource(
         entity.identity,
         effectId,
         declaredSkillTargets,
+        migratedSourceRecords,
       )
       if (compiled.rule) effects.push(compiled.rule)
       variants.push({
@@ -4609,12 +4756,31 @@ export function convertSource(
   const supplementEntities: StaticCatalogEntity[] = []
   const supplementSkillTargets: StaticEffectCatalog["skillTargets"][number][] =
     []
-  // 补充实体索引与防重复守卫：先按全部实体类补充（独立实体补充，或
-  // unsupported 声明为反向缺项条款携带的实体）建立 catalog ID 索引，
-  // 不依赖登记数组顺序（后续 option 类补充可指向补充实体）；catalog ID
-  // 撞车、与固定来源实体或其他补充实体的身份撞车都拒绝生成——上游未来
-  // 出现同实体时要求重新 review，不能与补充实体静默并存。
+  // 补充实体索引与固定源迁移：先按全部实体类补充（独立实体补充，或
+  // unsupported 声明为反向缺项条款携带的实体）建立 catalog ID 索引，不依赖
+  // 登记数组顺序（后续 option 类补充可指向补充实体）。固定来源已补出同一
+  // identity 时不再创建 nanoka:* 重复实体：补充选项/规则改挂固定实体，
+  // optionId/effectId 与补充语义保持不变。只有显式列入迁移登记（含 records
+  // 为空的 12014 挂靠登记）的 identity 才允许这条路径；未登记撞车仍拒绝，
+  // 避免把任意补充实体静默挂到固定源并留下同条款重复贡献。固定源缺少该
+  // identity 时继续创建补充实体。固定源同 catalog ID、补充实体间重复身份、
+  // 目录类别与 identity.kind 不一致仍拒绝生成。
+  const fixedEntitiesByIdentity = new Map<string, StaticCatalogEntity>()
+  for (const entity of collected.entities)
+    if (entity.identity !== null) {
+      const key = sourceIdentityKey(entity.identity)
+      if (!fixedEntitiesByIdentity.has(key))
+        fixedEntitiesByIdentity.set(key, entity)
+    }
+  const registeredMigrationIdentities = new Set(
+    FIXED_SOURCE_SUPPLEMENT_MIGRATIONS.map((migration) =>
+      sourceIdentityKey(migration.identity),
+    ),
+  )
   const supplementEntitiesById = new Map<string, StaticCatalogEntity>()
+  const supplementCatalogEntityIds = new Map<string, string>()
+  const seenSupplementEntityCatalogIds = new Set<string>()
+  const seenSupplementEntityIdentities = new Set<string>()
   for (const supplement of supplements) {
     const entity =
       supplement.kind === "entity"
@@ -4623,6 +4789,9 @@ export function convertSource(
           ? supplement.entity
           : undefined
     if (!entity) continue
+    if (seenSupplementEntityCatalogIds.has(entity.catalogEntityId))
+      throw new Error(`Duplicate supplement entity: ${entity.catalogEntityId}`)
+    seenSupplementEntityCatalogIds.add(entity.catalogEntityId)
     if (
       collected.entities.some(
         (candidate) => candidate.catalogEntityId === entity.catalogEntityId,
@@ -4631,27 +4800,39 @@ export function convertSource(
       throw new Error(
         `Supplement entity ${entity.catalogEntityId} collides with a fixed-source catalog entity; re-review the clause instead of coexisting`,
       )
-    if (supplementEntitiesById.has(entity.catalogEntityId))
-      throw new Error(`Duplicate supplement entity: ${entity.catalogEntityId}`)
     const identity = entity.identity
-    if (
-      identity !== null &&
-      (collected.entities.some(
-        (candidate) =>
-          candidate.identity !== null &&
-          candidate.identity.kind === identity.kind &&
-          candidate.identity.entityId === identity.entityId,
-      ) ||
-        [...supplementEntitiesById.values()].some(
-          (candidate) =>
-            candidate.identity !== null &&
-            candidate.identity.kind === identity.kind &&
-            candidate.identity.entityId === identity.entityId,
-        ))
-    )
-      throw new Error(
-        `Supplement entity ${entity.catalogEntityId} repeats the identity ${identity.kind}/${identity.entityId} of another entity; re-review the clause instead of coexisting`,
+    if (identity !== null) {
+      const identityKey = sourceIdentityKey(identity)
+      if (seenSupplementEntityIdentities.has(identityKey))
+        throw new Error(
+          `Supplement entity ${entity.catalogEntityId} repeats the identity ${identity.kind}/${identity.entityId} of another supplement entity; re-review the clause instead of coexisting`,
+        )
+      seenSupplementEntityIdentities.add(identityKey)
+      const catalogCategory = supplementCatalogCategory(entity.catalogEntityId)
+      const identityCategory = categoryForIdentityKind(identity.kind)
+      if (catalogCategory !== identityCategory)
+        throw new Error(
+          `Supplement entity ${entity.catalogEntityId} catalog category ${String(catalogCategory)} does not match identity kind ${identity.kind}; re-review the entity and clause category before coexisting`,
+        )
+    }
+    const fixedEntity =
+      identity === null
+        ? undefined
+        : fixedEntitiesByIdentity.get(sourceIdentityKey(identity))
+    if (fixedEntity !== undefined) {
+      if (
+        identity === null ||
+        !registeredMigrationIdentities.has(sourceIdentityKey(identity))
       )
+        throw new Error(
+          `Supplement entity ${entity.catalogEntityId} repeats the identity ${identity?.kind ?? "unknown"}/${identity?.entityId ?? "unknown"} of a fixed-source entity without a registered migration; re-review the clause instead of coexisting`,
+        )
+      supplementCatalogEntityIds.set(
+        entity.catalogEntityId,
+        fixedEntity.catalogEntityId,
+      )
+      continue
+    }
     supplementEntitiesById.set(entity.catalogEntityId, entity)
     // 实体只登记目录元数据：unsupported 携带的实体不创建任何可执行规则。
     supplementEntities.push(entity)
@@ -4695,6 +4876,10 @@ export function convertSource(
       // 如实不可选的声明选项：登记 formula-out-of-scope 变体与越界去向，
       // 不创建规则；生成期核对实体映射、配置域与取值、选项身份，并按实体
       // 类型执行最窄守卫（驱动盘件数 note/冲突、音擎五档真实缺失状态）。
+      // 固定源已补出同一 identity 时，登记容器改挂固定实体，选项身份不变。
+      const resolvedCatalogEntityId =
+        supplementCatalogEntityIds.get(supplement.catalogEntityId) ??
+        supplement.catalogEntityId
       verifyUnsupportedOptionRegistration(
         data,
         functions,
@@ -4702,11 +4887,14 @@ export function convertSource(
         collected.entities,
         supplementEntitiesById,
         options,
-        supplement,
+        {
+          ...supplement,
+          catalogEntityId: resolvedCatalogEntityId,
+        },
       )
       options.push({
         optionId: supplement.optionId,
-        catalogEntityId: supplement.catalogEntityId,
+        catalogEntityId: resolvedCatalogEntityId,
         name: supplement.name,
         conditionDescription: supplement.conditionDescription,
         target: supplement.target,
@@ -4970,9 +5158,12 @@ export function convertSource(
         throw new Error(
           `Supplement ${supplement.supplementId} repeats the option id ${supplement.optionId}`,
         )
+      const resolvedCatalogEntityId =
+        supplementCatalogEntityIds.get(supplement.entity.catalogEntityId) ??
+        supplement.entity.catalogEntityId
       options.push({
         optionId: supplement.optionId,
-        catalogEntityId: supplement.entity.catalogEntityId,
+        catalogEntityId: resolvedCatalogEntityId,
         name: supplement.variant.name,
         conditionDescription: supplement.variant.conditionDescription,
         target: supplement.variant.target,
@@ -4982,15 +5173,18 @@ export function convertSource(
     }
     if (supplement.kind === "option") {
       // 补充选项可指向固定来源实体或补充实体（后者先建立索引，不依赖登记
-      // 顺序）；两类实体都必须真实存在。
+      // 顺序）；固定源已补出同一 identity 时解析到固定实体，两类实体都必须
+      // 真实存在。
+      const resolvedCatalogEntityId =
+        supplementCatalogEntityIds.get(supplement.catalogEntityId) ??
+        supplement.catalogEntityId
       const entity =
         collected.entities.find(
-          (candidate) =>
-            candidate.catalogEntityId === supplement.catalogEntityId,
-        ) ?? supplementEntitiesById.get(supplement.catalogEntityId)
+          (candidate) => candidate.catalogEntityId === resolvedCatalogEntityId,
+        ) ?? supplementEntitiesById.get(resolvedCatalogEntityId)
       if (!entity)
         throw new Error(
-          `Unknown supplement catalog entity: ${supplement.catalogEntityId}`,
+          `Unknown supplement catalog entity: ${resolvedCatalogEntityId}`,
         )
       if (options.some((o) => o.optionId === supplement.optionId))
         throw new Error(
@@ -5002,7 +5196,7 @@ export function convertSource(
         const conflict = collected.records.find(
           (record) =>
             `${record.category}:${record.entityId}` ===
-              supplement.catalogEntityId &&
+              resolvedCatalogEntityId &&
             supplement.conflictingSourceStats!.includes(record.raw.stat),
         )
         if (conflict)
@@ -5028,7 +5222,7 @@ export function convertSource(
         const conflict = collected.records.find(
           (record) =>
             `${record.category}:${record.entityId}` ===
-              supplement.catalogEntityId &&
+              resolvedCatalogEntityId &&
             (anchored(record.raw) || anchored(record.normalized)),
         )
         if (conflict)
@@ -5045,13 +5239,13 @@ export function convertSource(
       )
       if (supplement.variant.configuration.minimumSetPieces === 2)
         verifyDriveDiscSetPiecesSupplement(data, collected.entities, options, {
-          catalogEntityId: supplement.catalogEntityId,
+          catalogEntityId: resolvedCatalogEntityId,
           setPieces: 2,
           conditionDescription: supplement.variant.conditionDescription,
         })
       options.push({
         optionId: supplement.optionId,
-        catalogEntityId: supplement.catalogEntityId,
+        catalogEntityId: resolvedCatalogEntityId,
         name: supplement.variant.name,
         conditionDescription: supplement.variant.conditionDescription,
         // 互斥完整状态组与规则的 supplied exclusiveGroup 同组同值：
@@ -5074,6 +5268,38 @@ export function convertSource(
       computationTarget: supplement.computationTarget,
       status: "integrated",
     })
+  }
+  // 固定源迁移必须落在同一固定实体上，且稳定补充选项仍可执行；否则说明
+  // 实体解析或补充登记发生漂移，不能静默留下“固定记录已停用但补充缺失”
+  // 的零贡献状态。
+  for (const migration of new Set(migratedSourceRecords.values())) {
+    const entity = collected.entities.find(
+      (candidate) =>
+        candidate.identity !== null &&
+        sourceIdentityKey(candidate.identity) ===
+          sourceIdentityKey(migration.identity),
+    )
+    if (!entity)
+      throw new Error(
+        `Fixed-source supplement migration lost its fixed entity: ${migration.optionIds.join(", ")}`,
+      )
+    for (const optionId of migration.optionIds) {
+      const option = options.find(
+        (candidate) => candidate.optionId === optionId,
+      )
+      if (!option)
+        throw new Error(
+          `Fixed-source supplement migration lost the stable option ${optionId}`,
+        )
+      if (option.catalogEntityId !== entity.catalogEntityId)
+        throw new Error(
+          `Fixed-source supplement migration attached ${optionId} to ${option.catalogEntityId}, expected ${entity.catalogEntityId}`,
+        )
+      if (!option.variants.some((variant) => variant.status !== "unsupported"))
+        throw new Error(
+          `Fixed-source supplement migration left ${optionId} without an executable variant`,
+        )
+    }
   }
 
   const remielAgentEntityId = identityMap["agents:remiel"]
@@ -5716,12 +5942,23 @@ export function convertSource(
           ).length,
         },
       },
-      reverseGaps: [
-        "agents/1621",
-        "w-engines/12014",
-        "w-engines/13111",
-        "w-engines/14162",
-      ],
+      // 反向缺项由本次实际创建的补充实体派生：固定源补出同一 identity 后，
+      // 该实体不再创建，覆盖报告随之移除；不维护第二份手写名单。
+      reverseGaps: supplementEntities
+        .flatMap((entity) =>
+          entity.identity === null
+            ? []
+            : [
+                `${
+                  entity.identity.kind === "agent"
+                    ? "agents"
+                    : entity.identity.kind === "w-engine"
+                      ? "w-engines"
+                      : "drive-discs"
+                }/${entity.identity.entityId}`,
+              ],
+        )
+        .toSorted(),
       deferredMechanisms: [
         {
           catalogEntityId: "agents:remiel",

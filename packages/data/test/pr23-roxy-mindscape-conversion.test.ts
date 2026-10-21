@@ -221,16 +221,28 @@ describe("Roxy Nanoka fixed mindscape registration", () => {
       /Duplicate supplement entity/,
     )
   })
-  it("rejects the real new upstream Roxy entity as a changed source boundary", () => {
+  it("migrates the reviewed upstream Roxy entity to the fixed catalog entity", () => {
     expect(original.upstreamRoxyIdentity.id).toBe("Roxy")
     const realNewEntity = {
       ...original.upstreamRoxyIdentity,
       mindscapeBuffs: [],
     }
-    // 此处只验证真实新实体出现这一冲突，不冒充 fac 中的旧记录或成功正控。
-    expect(() =>
-      convert(undefined, { ...absentSource, agents: [realNewEntity] }),
-    ).toThrow(/Unreviewed entity identity: agents:Roxy/)
+    const result = convert(undefined, {
+      ...absentSource,
+      agents: [realNewEntity],
+    })
+    expect(result.catalog.entities).toHaveLength(1)
+    expect(result.catalog.entities[0]).toMatchObject({
+      catalogEntityId: "agents:Roxy",
+      upstreamId: "Roxy",
+      identity: { kind: "agent", entityId: "1621" },
+    })
+    for (const optionId of registrations.map((entry) => entry.optionId))
+      expect(
+        result.catalog.options.find((option) => option.optionId === optionId)
+          ?.catalogEntityId,
+      ).toBe("agents:Roxy")
+    expect(result.coverage.reverseGaps).not.toContain("agents/1621")
     expect(
       Object.values(original.upstreamBlocks).flatMap((blocks) =>
         blocks.flatMap((block) =>

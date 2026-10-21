@@ -1186,6 +1186,8 @@ EX 原式 `{Skill:1181006, Prop:1001}*2` 已包含两颗，不能再次乘 2；2
 
 **`catalogEntityId` 两种形态与补充挂靠**：`<类别>:<来源slug>` 是固定来源实体（`upstreamId` 即该 slug），当前 187 个（代理人 59、音擎 98、驱动盘 30）；`nanoka:` 开头是补充实体（`upstreamId` 为 null），当前 4 个（`nanoka:agents:1621`、`nanoka:w-engines:12014`、`nanoka:w-engines:13111`、`nanoka:w-engines:14162`）。`nanoka:` 前缀的 96 个补充选项中，21 个挂在补充实体自身名下，75 个挂在固定来源实体下；挂靠关系只由选项的 `catalogEntityId` 字段表达，`optionId` 前缀既不区分也不携带它。
 
+**补充实体到固定实体的迁移**：只有显式列入同条款迁移登记的 identity 才允许迁移。固定来源补出该 identity 时，生成器不再创建 `nanoka:*` 重复实体，而是把补充选项/规则挂到固定实体；`optionId`、`effectId`、参数、条件、受益者与证据引用保持不变，因此补充条款的已修正语义不因固定源出现同名记录而回退。`12014` 没有固定记录，登记为空记录挂靠，只允许实体与不可选越界选项迁移。未登记 identity 撞车恢复拒绝；补充实体目录类别（`agents` / `w-engines` / `drive-discs`）必须与 `identity.kind` 一致，类别不一致同样拒绝。固定来源同条款记录保留为 `unsupported` / `semantic-conflict` 迁移入口，不再生成可执行贡献，并在迁移说明中指向仍可选的稳定补充选项；登记记录按完整 raw 形状逐字段核对，`rankKind` / `rank` / 块 / 效果 ID 或任一字段漂移即拒绝生成。固定来源完全缺少该 identity 时继续创建补充实体，当前 fac62407 输出因此不变。`coverage.reverseGaps` 由本次实际创建的补充实体派生，固定源补出实体后自动移除对应项；3.2.5 省略 `scope` 的记录按 effective scope（省略等价 general，带 `skillTargets` 按 skill）核对，不要求上游补出 fac62407 的显式字段。
+
 **不透明声明**：`optionId` 与 `effectId` 是稳定但不透明的标识。实体归属读选项的 `catalogEntityId`；类别、培养边界与可用档位读 `variants[].configuration`；显示名与条件读 `name` / `conditionDescription`。段序、编码、合并省略与补充形态都是生成器实现细节，随修订变化，不构成消费契约，消费者不得据其派生任何语义。
 
 ## 转换规则
