@@ -1422,9 +1422,34 @@ function oneOf(
     ? ({ kind: "one-of", fact, values } as Condition<"contribution">)
     : { kind: "constant", value: false }
 }
+/** 上游 conditions.damageTypes 到 Fairy 伤害种类的唯一映射。 */
+const damageTypesToDamageKinds: Readonly<
+  Record<string, readonly DamageKind[]>
+> = {
+  normal: ["regular"],
+  pierce: ["sheer"],
+  sharpen: ["sharpen"],
+  anomaly: ["anomaly"],
+  anomalyRelease: ["anomaly-settlement"],
+  disorder: ["disorder"],
+  turbulence: ["vortex"],
+  radiance: ["luminize"],
+  mutation: [...anomaly],
+}
+const uniqueDamageKinds = (values: Iterable<DamageKind>): DamageKind[] => [
+  ...new Set(values),
+]
+/** 省略 scope 与显式 general 等价；数组形式只在所有项都是 general 时成立。 */
+const isGeneralScope = (scope: SourceEffect["scope"]): boolean =>
+  scope === undefined ||
+  scope === "general" ||
+  (Array.isArray(scope) &&
+    scope.length > 0 &&
+    scope.every((value) => value === "general"))
 function whenFor(
   e: SourceEffect,
   mapping: FieldMapping,
+  record?: SourceRecord,
 ): Condition<"contribution"> {
   const conditions: Condition<"contribution">[] = []
   if (mapping.damageKinds)
@@ -1440,19 +1465,78 @@ function whenFor(
     radiance: ["luminize"],
     mutation: [...anomaly],
   }
-  if (scopes[e.scope])
-    conditions.push(oneOf("hit.damageKind", scopes[e.scope]!))
-  else if (e.scope !== "general" && e.scope !== "skill")
-    throw new Error(`Unknown scope: ${e.scope}`)
-  else {
+  const sourceAt = record
+    ? `${semanticsKeyFor(record)} at ${record.pointer}`
+    : "an effect without a source record"
+  const scopeValues = Array.isArray(e.scope)
+    ? e.scope
+    : e.scope === undefined
+      ? ["general"]
+      : [e.scope]
+  if (scopeValues.length === 0) throw new Error(`Empty scope at ${sourceAt}`)
+  const givenDamageTypes = e.conditions?.damageTypes
+  if (givenDamageTypes !== undefined && !Array.isArray(givenDamageTypes))
+    throw new Error(`Invalid conditions.damageTypes at ${sourceAt}`)
+  const conditionDamageKinds = new Set<DamageKind>()
+  for (const damageType of givenDamageTypes ?? []) {
+    const mapped = damageTypesToDamageKinds[damageType]
+    if (!mapped)
+      throw new Error(`Unknown damage type: ${damageType} at ${sourceAt}`)
+    for (const kind of mapped) conditionDamageKinds.add(kind)
+  }
+  // 上游以空数组表示“全部伤害类型”，此时 conditions 仍优先于 scope。
+  const allDamageTypes =
+    givenDamageTypes !== undefined && conditionDamageKinds.size === 0
+  let generalScope = false
+  let skillScope = false
+  const scopeDamageKinds = new Set<DamageKind>()
+  for (const scope of scopeValues) {
+    const mapped = scopes[scope]
+    if (mapped) for (const kind of mapped) scopeDamageKinds.add(kind)
+    else if (scope === "general") generalScope = true
+    else if (scope === "skill") skillScope = true
+    else throw new Error(`Unknown scope: ${scope} at ${sourceAt}`)
+  }
+  const effectiveSkillScope = skillScope && !generalScope
+  // scope 与 conditions 同时表达伤害种类时必须一致；不把两者并成更宽的范围。
+  // general 已在 union 中覆盖其他 scope，此时条件由 conditions 单独决定。
+  if (
+    givenDamageTypes !== undefined &&
+    !allDamageTypes &&
+    scopeDamageKinds.size > 0 &&
+    !generalScope
+  ) {
+    const fromScope = uniqueDamageKinds(scopeDamageKinds)
+    const fromConditions = uniqueDamageKinds(conditionDamageKinds)
+    if (
+      fromScope.length !== fromConditions.length ||
+      fromScope.some((kind) => !conditionDamageKinds.has(kind))
+    )
+      throw new Error(
+        `Conflicting scope and conditions.damageTypes at ${sourceAt}: scope=${JSON.stringify(fromScope)}, conditions=${JSON.stringify(fromConditions)}`,
+      )
+  }
+  if (effectiveSkillScope && scopeDamageKinds.size > 0)
+    throw new Error(
+      `Mixed skill and damage-type scopes are not supported at ${sourceAt}`,
+    )
+  const damageKinds =
+    givenDamageTypes !== undefined
+      ? uniqueDamageKinds(conditionDamageKinds)
+      : generalScope
+        ? []
+        : uniqueDamageKinds(scopeDamageKinds)
+  if (damageKinds.length > 0)
+    conditions.push(oneOf("hit.damageKind", damageKinds))
+  if (generalScope || effectiveSkillScope) {
     if (
       e.appliesToAnomaly !== true &&
       (e.appliesToAnomaly === false ||
-        e.scope === "skill" ||
+        effectiveSkillScope ||
         e.stat === "skillDmgBonus")
     )
       conditions.push(oneOf("hit.damageKind", direct))
-    if (e.scope === "skill") {
+    if (effectiveSkillScope) {
       const targets = e.skillTargets ?? []
       conditions.push({
         kind: "any",
@@ -2705,13 +2789,14 @@ function compile(
             semantics.minimumPotential !== undefined
           ? semantics.minimumPotential
           : undefined
-  let when = whenFor(e, mapping)
+  let when = whenFor(e, mapping, record)
   if (semantics?.kind === "attribute-anomaly-beneficiary-scope") {
     // 来源记录未编码块 note 与 Nanoka 同文已明确的受益职业与伤害类别：
     // general 会放行全部伤害种类，且只有 applyProfession 非空才检查职业。
     // 记录出现任一与登记不符的编码时拒绝生成，不静默叠加或改写。
     if (
-      e.scope !== "general" ||
+      !isGeneralScope(e.scope) ||
+      e.conditions?.damageTypes !== undefined ||
       e.applyTarget !== "team" ||
       (e.applyProfession ?? "").trim() !== ""
     )
@@ -3371,7 +3456,7 @@ function compile(
     Array.isArray(e.elementFilter) &&
     e.elementFilter.includes("流明")
   ) {
-    when = whenFor({ ...e, elementFilter: "all" }, mapping)
+    when = whenFor({ ...e, elementFilter: "all" }, mapping, record)
     when = {
       kind: "all",
       conditions: [when, oneOf("hit.element", ["lumiflux"])],
@@ -3412,7 +3497,7 @@ function compile(
       },
       scope:
         mapping.stat &&
-        e.scope === "general" &&
+        isGeneralScope(e.scope) &&
         !JSON.stringify(when).includes("hit.")
           ? "entity"
           : "hit",
