@@ -39,7 +39,11 @@ import type {
 export interface SourceRecordShape {
   readonly id: string
   readonly origin?: string
-  readonly scope: string
+  /**
+   * 3.2.5 起上游可省略 scope（省略等价于 general；带 skillTargets 时按
+   * effective skill 作用域核对）。省略的冻结形状表示记录本身没有该字段。
+   */
+  readonly scope?: string | readonly string[]
   readonly applyTarget: "self" | "team"
   readonly applySituation?: string
   readonly applyProfession?: string | null

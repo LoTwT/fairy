@@ -4754,7 +4754,8 @@ describe("batch 07 Roxy and Crimson Moon Casket supplements", () => {
     expect(() =>
       convertSource(batch07Data(), functions, [], idCollision),
     ).toThrowError(/collides with a fixed-source catalog entity/)
-    // 真实身份撞固定来源实体（上游未来出现同实体的守卫路径）：拒绝。
+    // 补充实体身份与固定来源实体一致：按 identity 迁移到固定实体，不再
+    // 创建重复的 nanoka:* 实体，也不拒绝这条合法路径。
     const identityCollision = batch07Supplements.map((supplement) =>
       supplement.kind === "entity" &&
       supplement.supplementId === "nanoka:w-engines:14162:crit-rate"
@@ -4767,9 +4768,22 @@ describe("batch 07 Roxy and Crimson Moon Casket supplements", () => {
           })
         : supplement,
     )
-    expect(() =>
-      convertSource(batch07Data(), functions, [], identityCollision),
-    ).toThrowError(/repeats the identity agent\/1071/)
+    const resolved = convertSource(
+      batch07Data(),
+      functions,
+      [],
+      identityCollision,
+    )
+    expect(
+      resolved.catalog.entities.some(
+        (candidate) => candidate.catalogEntityId === "nanoka:w-engines:14162",
+      ),
+    ).toBe(false)
+    expect(
+      resolved.catalog.options.find(
+        (option) => option.optionId === "nanoka:w-engines:14162:crit-rate",
+      )?.catalogEntityId,
+    ).toBe("agents:caesar")
     // 两个补充实体互撞（同 catalog ID 或同身份）：拒绝。
     const duplicated = [
       ...batch07Supplements.filter(
