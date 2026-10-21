@@ -1023,11 +1023,11 @@ function defineScenarios(counts: {
       name: "aria-abloom-precision",
       steps: [
         {
-          name: "three-elements-and-continuous-m1",
+          name: "three-elements-and-integer-m1",
           act: async (page) => {
             expect(
               await page.evaluate(() => (globalThis as any).fairyAriaAbloom()),
-            ).toEqual({ correctedElements: 3, criticalRate: 0.7315 })
+            ).toEqual({ correctedElements: 3, criticalRate: 0.73 })
           },
         },
       ],

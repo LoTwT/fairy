@@ -59,6 +59,7 @@ import {
 } from "./vocabulary.ts"
 import { validateNumericInputs } from "./numeric-input.ts"
 import { compareIdentityTuples, encodeStableTuple } from "./identity.ts"
+import { normalizeStatReadValue } from "./stat-value.ts"
 import {
   ROXY_M6_WIND_RESISTANCE_IGNORE,
   resolveRoxyM6ProviderApplicability,
@@ -522,7 +523,7 @@ function readStatValue(
     )
     return Number.NaN
   }
-  return saved.value.value
+  return normalizeStatReadValue(expression.stat, saved.value.value)
 }
 
 /** 属性节点求值：通用节点与命中局部节点按 hitId 区分并共享缓存。 */
@@ -563,13 +564,15 @@ function computeStatValue(
   }
   if (stage === "base" && !DIRECT_STATS.has(stat as DirectStat)) {
     const value = actor.generalStats[stat as GeneralStat]?.baseValue
-    if (value === undefined)
+    if (value === undefined) {
       context.collector.report(
         "MISSING_FACT",
         "",
         `Base stat (${entityId}, ${stat}) is required`,
       )
-    return value ?? Number.NaN
+      return Number.NaN
+    }
+    return normalizeStatReadValue(stat, value)
   }
   const nested: EvaluationContext = {
     ...context,
@@ -733,8 +736,9 @@ function computeStatValue(
     context.shared.failedStats.add(key)
     return Number.NaN
   }
-  context.shared.statValues.set(key, value)
-  return value
+  const normalized = normalizeStatReadValue(stat, value)
+  context.shared.statValues.set(key, normalized)
+  return normalized
 }
 
 /**
@@ -2822,12 +2826,14 @@ function evaluateHitQuery(
         )
         return Number.NaN
       }
+      const value = normalizeStatReadValue(stat, saved.value.value)
       addAttribute({
         ...saved,
+        value: { ...saved.value, value },
         hitId: hit.hitId,
         snapshotId: source.snapshotId,
       } as EvaluationResult["attributes"][number])
-      return saved.value.value
+      return value
     }
     const hitId = entityId === hit.actorId ? hit.hitId : null
     const value = computeStatValue(entityId, stat, "current", hitId, context)

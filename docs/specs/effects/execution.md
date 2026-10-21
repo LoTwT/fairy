@@ -238,7 +238,7 @@
 
 贡献阶段的 `input` 表达式读取调用方显式传入的 `EvaluationInput.inputs`，按 `(bindingId, name)` 匹配并校验单位。重复键、未绑定来源、非有限值或未知字段均拒绝；实际读取的值缺失报 `MISSING_FACT`。手工值不回退到默认面板或当前属性，也不等同于历史快照。已有 `activation/action-start` 读取仍使用对应 `SavedSnapshot`。
 
-通用属性新增 `base` 读取阶段，只读取明确的 `GeneralStatInput.baseValue`，不消费任何百分比或固定贡献；初始/最终阶段继续按已有 helper 求值。它用于以基础回能、异常掌控为底数的来源增益，不能以最终面板替代。
+通用属性新增 `base` 读取阶段，只读取明确的 `GeneralStatInput.baseValue`，不消费任何百分比或固定贡献；初始/最终阶段继续按已有 helper 求值。它用于以基础回能、异常掌控为底数的来源增益，不能以最终面板替代。异常掌控是面板上的整数字段，读取层（`base`、`initial`、`current` 与快照）统一向下取整；这不是显示舍入，其他属性仍按有限数原值参与中间计算。
 
 角色观察可显式启用 `deriveSheerForce`：贯穿力节点在对应 initial/current 阶段的独立贡献上加上 `0.1 × health + 0.3 × attack`，同样参与依赖环与缺失属性诊断。默认关闭以兼容低层输入；目录入口自动开启，其贯穿力输入分解与历史最终值边界见批量接入规范。
 

@@ -32,6 +32,7 @@ import {
 } from "./checks.ts"
 import { SKILL_CATEGORIES } from "./expression.ts"
 import { encodeStableTuple } from "./identity.ts"
+import { normalizeStatReadValue } from "./stat-value.ts"
 
 export interface WorldIndex {
   readonly actors: ReadonlyMap<
@@ -1080,7 +1081,7 @@ export function snapshotAttribute(
       attribute.stat === stat &&
       attribute.stage === stage
     ) {
-      return attribute.value.value
+      return normalizeStatReadValue(stat, attribute.value.value)
     }
   }
   return undefined
