@@ -12,6 +12,7 @@ import { describe, expect, it } from "vitest"
 import type { ContributionRule } from "@randomplay/shared"
 import { generateStaticEffects } from "../scripts/generate-static-effects.ts"
 import {
+  collectSource,
   convertSource,
   resolveCoreRankParameters,
   type RankEvidence,
@@ -1570,6 +1571,156 @@ describe("promotion stats equipper defense correction", () => {
         [],
       ),
     ).toThrowError(/Beneficiary target correction expects applyTarget team/)
+  })
+})
+
+const duplicateWengineData = (ids: string[]): SourceData => ({
+  ...batch01Base,
+  wengines: ids.map((id) => ({
+    id,
+    name: id,
+    profession: "强攻",
+    ...refinementPacks((rank) => [
+      {
+        id: "blk-alias",
+        name: `精${rank}`,
+        note: "",
+        effects: [batch01FixedEffect("eff-alias", "critRate", 10 + rank)],
+      },
+    ]),
+  })),
+})
+
+describe("source entity aliases", () => {
+  it("maps the 3.2.5 entities to their Nanoka identities", () => {
+    const collected = collectSource(
+      {
+        ...batch01Base,
+        agents: [
+          { id: "severian", name: "希维安" },
+          { id: "pheony", name: "菲奥妮" },
+        ],
+        wengines: [
+          { id: "Incarcerating_Grip", name: "囚爪" },
+          { id: "Plume_of_Rebirth", name: "新生之羽" },
+          { id: "Candlelit_Scheme", name: "烛谋" },
+        ],
+      },
+      functions,
+    )
+    expect(
+      Object.fromEntries(
+        collected.entities.map((entity) => [
+          entity.catalogEntityId,
+          entity.identity,
+        ]),
+      ),
+    ).toMatchObject({
+      "agents:severian": { kind: "agent", entityId: "1631" },
+      "agents:pheony": { kind: "agent", entityId: "1641" },
+      "w-engines:Incarcerating_Grip": {
+        kind: "w-engine",
+        entityId: "14163",
+      },
+      "w-engines:Plume_of_Rebirth": { kind: "w-engine", entityId: "14164" },
+      "w-engines:Candlelit_Scheme": { kind: "w-engine", entityId: "13022" },
+    })
+  })
+
+  it.each([
+    ["Weapon_A_Common_08", "Weeping_Gemini", "13008"],
+    ["Weapon_S_1141", "The_Restrained", "14114"],
+  ])(
+    "compiles duplicate slugs %s/%s into one canonical entity and option set",
+    (canonical, alias, entityId) => {
+      const result = convertSource(
+        duplicateWengineData([alias, canonical]),
+        functions,
+        [],
+        [],
+      )
+      expect(result.catalog.entities).toEqual([
+        expect.objectContaining({
+          catalogEntityId: `w-engines:${canonical}`,
+          upstreamId: canonical,
+          identity: { kind: "w-engine", entityId },
+        }),
+      ])
+      const options = result.catalog.options.filter((option) =>
+        option.catalogEntityId.includes("w-engines:"),
+      )
+      expect(options.length).toBeGreaterThan(0)
+      expect(
+        options.every(
+          (option) =>
+            option.catalogEntityId === `w-engines:${canonical}` &&
+            option.optionId.startsWith(
+              `w-engines:${encodeURIComponent(canonical)}:`,
+            ),
+        ),
+      ).toBe(true)
+      expect(
+        options.some((option) =>
+          option.optionId.includes(encodeURIComponent(alias)),
+        ),
+      ).toBe(false)
+    },
+  )
+
+  it("keeps the canonical identity when upstream only retains the alias slug", () => {
+    const result = convertSource(
+      duplicateWengineData(["Weeping_Gemini"]),
+      functions,
+      [],
+      [],
+    )
+    expect(result.catalog.entities[0]).toMatchObject({
+      catalogEntityId: "w-engines:Weapon_A_Common_08",
+      upstreamId: "Weeping_Gemini",
+      identity: { kind: "w-engine", entityId: "13008" },
+    })
+    expect(
+      result.catalog.options.every((option) =>
+        option.optionId.startsWith("w-engines:Weapon_A_Common_08:"),
+      ),
+    ).toBe(true)
+  })
+
+  it("keeps the persisted Promotion Stats option id after the upstream rename", () => {
+    const source = promotionStatsData()
+    const result = convertSource(
+      {
+        ...source,
+        wengines: source.wengines.map((entity) => ({
+          ...entity,
+          id: "Promotion_Stats",
+        })),
+      },
+      functions,
+      [],
+      [],
+    )
+    expect(result.catalog.entities).toEqual([
+      expect.objectContaining({
+        catalogEntityId: "w-engines:Promotion Stats",
+        upstreamId: "Promotion_Stats",
+        identity: { kind: "w-engine", entityId: "13017" },
+      }),
+    ])
+    const option = result.catalog.options.find(
+      (candidate) => candidate.catalogEntityId === "w-engines:Promotion Stats",
+    )!
+    expect(option.optionId).toBe(
+      "w-engines:Promotion%20Stats:refinement:blk-mtwn69lr-xfb4n8:eff-mtwn69lr-2h2brm",
+    )
+    expect(
+      option.variants.every((variant) => variant.status === "corrected"),
+    ).toBe(true)
+    expect(
+      result.catalog.options.some((candidate) =>
+        candidate.optionId.includes("Promotion_Stats"),
+      ),
+    ).toBe(false)
   })
 })
 
