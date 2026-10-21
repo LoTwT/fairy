@@ -1439,6 +1439,8 @@ const damageTypesToDamageKinds: Readonly<
 const uniqueDamageKinds = (values: Iterable<DamageKind>): DamageKind[] => [
   ...new Set(values),
 ]
+const hasSkillTargets = (effect: Pick<SourceEffect, "skillTargets">): boolean =>
+  (effect.skillTargets?.length ?? 0) > 0
 /** 省略 scope 与显式 general 等价；数组形式只在所有项都是 general 时成立。 */
 const isGeneralScope = (scope: SourceEffect["scope"]): boolean =>
   scope === undefined ||
@@ -1497,7 +1499,14 @@ function whenFor(
     else if (scope === "skill") skillScope = true
     else throw new Error(`Unknown scope: ${scope} at ${sourceAt}`)
   }
-  const effectiveSkillScope = skillScope && !generalScope
+  const explicitGeneralScope = Array.isArray(e.scope)
+    ? e.scope.includes("general")
+    : e.scope === "general"
+  const effectiveSkillScope =
+    !explicitGeneralScope &&
+    (skillScope || (e.scope === undefined && hasSkillTargets(e)))
+  // 3.2.5 省略 scope 但仍保留 skillTargets：按 skill 处理，而不是 general。
+  const effectiveGeneralScope = generalScope && !effectiveSkillScope
   // scope 与 conditions 同时表达伤害种类时必须一致；不把两者并成更宽的范围。
   // general 已在 union 中覆盖其他 scope，此时条件由 conditions 单独决定。
   if (
@@ -1523,12 +1532,12 @@ function whenFor(
   const damageKinds =
     givenDamageTypes !== undefined
       ? uniqueDamageKinds(conditionDamageKinds)
-      : generalScope
+      : effectiveGeneralScope
         ? []
         : uniqueDamageKinds(scopeDamageKinds)
   if (damageKinds.length > 0)
     conditions.push(oneOf("hit.damageKind", damageKinds))
-  if (generalScope || effectiveSkillScope) {
+  if (effectiveGeneralScope || effectiveSkillScope) {
     if (
       e.appliesToAnomaly !== true &&
       (e.appliesToAnomaly === false ||
@@ -1802,6 +1811,11 @@ function verifyExcludeSkillTargetScopeRecord(
         subcategoryId: target.subcategoryId ?? null,
       }))
       .toSorted((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)))
+  // 3.2.5 省略 scope 但保留 skillTargets：守卫按实际生效的 skill 作用域比较。
+  const effectiveScope = (document: SourceEffect): SourceEffect["scope"] =>
+    document.scope === undefined && hasSkillTargets(document)
+      ? "skill"
+      : document.scope
   const expectedTuples = semantics.expectedSkillTargets
     .map((target) => ({
       category: target.category,
@@ -1819,11 +1833,11 @@ function verifyExcludeSkillTargetScopeRecord(
     if (
       document.stat !== semantics.expectedStat ||
       document.value !== semantics.expectedValue ||
-      document.scope !== semantics.expectedScope ||
+      effectiveScope(document) !== semantics.expectedScope ||
       JSON.stringify(targetTuples(document)) !== JSON.stringify(expectedTuples)
     )
       throw new Error(
-        `Named-skill scope correction expects ${semantics.expectedStat} ${String(semantics.expectedValue)} on ${semantics.expectedScope} ${JSON.stringify(semantics.expectedSkillTargets)} at ${record.pointer} (${label}), found ${document.stat} ${String(document.value)} on ${document.scope} ${JSON.stringify(document.skillTargets ?? [])}; re-review the clause instead of silently re-scoping`,
+        `Named-skill scope correction expects ${semantics.expectedStat} ${String(semantics.expectedValue)} on ${semantics.expectedScope} ${JSON.stringify(semantics.expectedSkillTargets)} at ${record.pointer} (${label}), found ${document.stat} ${String(document.value)} on ${String(effectiveScope(document))} ${JSON.stringify(document.skillTargets ?? [])}; re-review the clause instead of silently re-scoping`,
       )
   }
   for (const [label, note] of [

@@ -7396,6 +7396,8 @@ describe("3.2.5 conditions.damageTypes and optional scope", () => {
     },
   ) => {
     const source = data()
+    const base = effect("first", 10)
+    delete base.scope
     const { scope, ...rest } = effectOverride
     source.wengines[0]!.refinementBuffs = [
       {
@@ -7405,7 +7407,7 @@ describe("3.2.5 conditions.damageTypes and optional scope", () => {
             name: "Rank 1",
             effects: [
               {
-                ...effect("first", 10),
+                ...base,
                 ...rest,
                 ...(scope === undefined ? {} : { scope }),
               },
@@ -7514,6 +7516,91 @@ describe("3.2.5 conditions.damageTypes and optional scope", () => {
         { kind: "one-of", fact: "hit.damageKind", values: ["vortex"] },
       ],
     })
+  })
+
+  it("treats a missing scope without skillTargets as general", () => {
+    const rule = damageRule({ stat: "resPen", scope: undefined })
+    expect(rule.when).toEqual({ kind: "all", conditions: [] })
+  })
+
+  it("derives skill scope from skillTargets when scope is omitted", () => {
+    const rule = damageRule({
+      stat: "resPen",
+      scope: undefined,
+      skillTargets: [
+        { category: "chain", subcategoryId: null },
+        { category: "ultimate", subcategoryId: null },
+      ],
+    })
+    expect(rule.when).toEqual({
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.damageKind",
+          values: ["regular", "sheer", "sharpen"],
+        },
+        {
+          kind: "any",
+          conditions: [
+            {
+              kind: "all",
+              conditions: [
+                {
+                  kind: "one-of",
+                  fact: "hit.skillTag",
+                  values: ["zzz-hp:category:chain"],
+                },
+              ],
+            },
+            {
+              kind: "all",
+              conditions: [
+                {
+                  kind: "one-of",
+                  fact: "hit.skillTag",
+                  values: ["zzz-hp:category:ultimate"],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    })
+  })
+
+  it("keeps explicit general scope general even with skillTargets", () => {
+    const rule = damageRule({
+      stat: "resPen",
+      scope: "general",
+      skillTargets: [{ category: "chain", subcategoryId: null }],
+    })
+    expect(rule.when).toEqual({ kind: "all", conditions: [] })
+  })
+
+  it("accepts the 3.2.5 Evelyn record with omitted scope and skillTargets", () => {
+    const source = batch08Data()
+    const block = source.agents[0]!.mindscapeBuffs![0]!.effectBlocks![0]!
+    block.effects = block.effects.map((candidate) => {
+      if (
+        !["eff-ms4j94x5-3elaxq", "eff-ms4j9nhd-9ya68m"].includes(candidate.id)
+      )
+        return candidate
+      const withoutScope = { ...candidate }
+      delete withoutScope.scope
+      return withoutScope
+    })
+    const result = convertSource(source, functions, [], batch08Supplements)
+    for (const effectId of [
+      "agent:1321:zzz-hp:eff-ms4j94x5-3elaxq:blk-ms4j94x5-1mflp4:mindscape:0",
+      "agent:1321:zzz-hp:eff-ms4j9nhd-9ya68m:blk-ms4j94x5-1mflp4:mindscape:0",
+    ]) {
+      const rule = result.definitions.effects.find(
+        (candidate) => candidate.effectId === effectId,
+      ) as ContributionRule
+      expect(JSON.stringify(rule.when)).toContain("zzz-hp:category:chain")
+      expect(JSON.stringify(rule.when)).toContain("zzz-hp:category:ultimate")
+    }
   })
 
   it("treats empty conditions.damageTypes as all damage types", () => {
