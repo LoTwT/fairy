@@ -99,6 +99,27 @@ const anomalyDamage = (
     : { ...base, kind, anomalyCriticalRate: 0.4, anomalyCriticalDamage: [0.5] }
 }
 
+const subtypeCritical = {
+  "disorder": {
+    rateField: "disorderCriticalRate",
+    damageField: "disorderCriticalDamage",
+    rateChannel: "disorder-critical-rate",
+    damageChannel: "disorder-critical-damage",
+  },
+  "vortex": {
+    rateField: "vortexCriticalRate",
+    damageField: "vortexCriticalDamage",
+    rateChannel: "turbulence-critical-rate",
+    damageChannel: "turbulence-critical-damage",
+  },
+  "anomaly-settlement": {
+    rateField: "anomalySettlementCriticalRate",
+    damageField: "anomalySettlementCriticalDamage",
+    rateChannel: "anomaly-settlement-critical-rate",
+    damageChannel: "anomaly-settlement-critical-damage",
+  },
+} as const
+
 describe("static damage integrates existing core formulas", () => {
   it("returns final damage and factors with no implicit enemy defaults", () => {
     const result = ok(calculateStaticDamage(inputFor()))
@@ -344,6 +365,173 @@ describe("static damage integrates existing core formulas", () => {
       expect(result.expected).toBeCloseTo(base * 1.48, 10)
     },
   )
+
+  it.each([
+    ["disorder", subtypeCritical.disorder],
+    ["vortex", subtypeCritical.vortex],
+    ["anomaly-settlement", subtypeCritical["anomaly-settlement"]],
+  ] as const)(
+    "settles %s critical rate and damage from its own subtype fields",
+    (kind, fields) => {
+      const input = inputFor([
+        factor(fields.rateChannel, 0.1),
+        factor(fields.damageChannel, 0.2),
+        factor("anomaly-critical-rate", 0.7),
+        factor("anomaly-critical-damage", 0.9),
+      ])
+      const damage = {
+        ...anomalyDamage(kind),
+        anomalyCriticalRate: 0.01,
+        anomalyCriticalDamage: [0.01],
+        [fields.rateField]: 0.4,
+        [fields.damageField]: [0.5],
+      } as unknown as StaticDamageParameters
+      const result = ok(calculateStaticDamage({ ...input, damage }))
+      expect(result.criticalRate).toBeCloseTo(0.5, 12)
+      expect(result.critical! / result.nonCritical).toBeCloseTo(1.7, 12)
+      expect(result.notApplicableContributions).toHaveLength(2)
+      expect(
+        result.notApplicableContributions.map((entry) =>
+          entry.address.kind === "factor" ? entry.address.channel : null,
+        ),
+      ).toEqual(
+        expect.arrayContaining([
+          "anomaly-critical-rate",
+          "anomaly-critical-damage",
+        ]),
+      )
+    },
+  )
+
+  it("falls back to legacy anomaly critical fields and channels when subtype fields are absent", () => {
+    const input = inputFor([
+      factor("anomaly-critical-rate", 0.2),
+      factor("anomaly-critical-damage", 0.3),
+      factor("disorder-critical-rate", 0.9),
+      factor("disorder-critical-damage", 0.8),
+    ])
+    const result = ok(
+      calculateStaticDamage({ ...input, damage: anomalyDamage("disorder") }),
+    )
+    expect(result.criticalRate).toBeCloseTo(0.6, 12)
+    expect(result.critical! / result.nonCritical).toBeCloseTo(1.8, 12)
+    expect(result.notApplicableContributions).toHaveLength(2)
+    expect(
+      result.notApplicableContributions.map((entry) =>
+        entry.address.kind === "factor" ? entry.address.channel : null,
+      ),
+    ).toEqual(
+      expect.arrayContaining([
+        "disorder-critical-rate",
+        "disorder-critical-damage",
+      ]),
+    )
+  })
+
+  it("falls back per missing dimension when only one subtype critical field is present", () => {
+    const input = inputFor([
+      factor("anomaly-critical-rate", 0.2),
+      factor("anomaly-critical-damage", 0.3),
+      factor("disorder-critical-rate", 0.1),
+      factor("disorder-critical-damage", 0.8),
+    ])
+    const damage = {
+      ...anomalyDamage("disorder"),
+      disorderCriticalRate: 0.4,
+    } as StaticDamageParameters
+    const result = ok(calculateStaticDamage({ ...input, damage }))
+    expect(result.criticalRate).toBeCloseTo(0.5, 12)
+    expect(result.critical! / result.nonCritical).toBeCloseTo(1.8, 12)
+    expect(result.notApplicableContributions).toHaveLength(2)
+    expect(
+      result.notApplicableContributions.map((entry) =>
+        entry.address.kind === "factor" ? entry.address.channel : null,
+      ),
+    ).toEqual(
+      expect.arrayContaining([
+        "anomaly-critical-rate",
+        "disorder-critical-damage",
+      ]),
+    )
+  })
+
+  it("clamps negative subtype critical values like the legacy anomaly critical region", () => {
+    const input = inputFor()
+    const damage = {
+      ...anomalyDamage("disorder"),
+      disorderCriticalRate: -0.5,
+      disorderCriticalDamage: [-0.5],
+    } as StaticDamageParameters
+    const result = ok(calculateStaticDamage({ ...input, damage }))
+    expect(result.criticalRate).toBe(0)
+    expect(result.critical).toBeCloseTo(result.nonCritical, 12)
+    expect(result.expected).toBeCloseTo(result.nonCritical, 12)
+  })
+
+  it("rejects subtype critical fields that do not match the damage kind", () => {
+    const input = inputFor()
+    issue(
+      calculateStaticDamage({
+        ...input,
+        damage: {
+          ...anomalyDamage("anomaly"),
+          disorderCriticalRate: 0.1,
+        } as unknown as StaticDamageParameters,
+      }),
+      "INVALID_INPUT",
+      "/damage/disorderCriticalRate",
+    )
+  })
+
+  it("rejects unregistered subtype critical fields", () => {
+    const input = inputFor()
+    issue(
+      calculateStaticDamage({
+        ...input,
+        damage: {
+          ...anomalyDamage("vortex"),
+          turbulenceCriticalRate: 0.1,
+        } as unknown as StaticDamageParameters,
+      }),
+      "INVALID_INPUT",
+      "/damage/turbulenceCriticalRate",
+    )
+  })
+
+  it.each([
+    [
+      "rate NaN",
+      { disorderCriticalRate: Number.NaN },
+      "/damage/disorderCriticalRate",
+    ],
+    [
+      "damage member NaN",
+      { disorderCriticalDamage: [Number.NaN] },
+      "/damage/disorderCriticalDamage/0",
+    ],
+    [
+      "damage not an array",
+      { disorderCriticalDamage: 0.5 },
+      "/damage/disorderCriticalDamage",
+    ],
+  ] as const)(
+    "rejects invalid subtype critical input: %s",
+    (_name, patch, pointer) => {
+      const input = inputFor()
+      issue(
+        calculateStaticDamage({
+          ...input,
+          damage: {
+            ...anomalyDamage("disorder"),
+            ...patch,
+          } as unknown as StaticDamageParameters,
+        }),
+        "INVALID_INPUT",
+        pointer,
+      )
+    },
+  )
+
   it("maps luminize base addition, proficiency scaling and multiplier adjustments without a critical branch", () => {
     const input = inputFor([
       factor("luminize-multiplier-addition", 0.5),

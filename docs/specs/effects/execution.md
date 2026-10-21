@@ -267,38 +267,44 @@
 
 普通命中暴击率加数使用 `scope: hit` 下的 `stat-adjustment / criticalRate / direct`，输出为 `{ kind: stat, stat: criticalRate, stage: direct, entityId: hit.actorId, hitId }`，与该命中消费的通用暴击率贡献共同归约和去重；数值 +1 仍是加数，不代表来源必暴。`hit-adjustment` 处理倍率，输出地址为 `{ kind: hit, field: damageMultiplier, hitId }`，指定基础伤害项时另带 `itemId`。来源必暴使用下述独立的固定最终概率语义。
 
-| 输出                                 | core 或调用方输入                                                      | 数值方向                             |
-| ------------------------------------ | ---------------------------------------------------------------------- | ------------------------------------ |
-| 四类通用属性调整                     | `calculateInitialStat` / `calculateFinalStat` 对应数组                 | 有符号有限数，遵循 helper 校验       |
-| 直接暴击率、暴伤、穿透率、锐暴伤害   | 基础值加有效贡献                                                       | 有符号比例；本层不擅自实施概率裁剪   |
-| `damage-bonus`                       | `damageBonusFactor` 输入数组                                           | 有符号比例                           |
-| `daze-dealt-increase`                | `dazeDealtFactor.dazeDealtIncreases`                                   | 非负比例                             |
-| `daze-dealt-reduction`               | `dazeDealtFactor.dazeDealtReductions`                                  | 非负比例，由 core 执行减法           |
-| `target-resistance-reduction`        | `resistanceFactor.targetResistanceReductions`                          | 非负比例                             |
-| `attacker-resistance-ignore`         | `resistanceFactor.attackerResistanceIgnoreValues`                      | 非负比例                             |
-| `energy-generation-rate`             | `energyGenerationRateFactor` 输入数组                                  | 有符号比例                           |
-| `target-defense-adjustment`          | `calculateTargetEffectiveDefense.defensePercentageAdjustments`         | 有符号比例；减防为负数               |
-| `attacker-penetration-value`         | `calculateTargetEffectiveDefense.penetrationValues`                    | 防御点数，交由 core 归约             |
-| `damage-taken-increase/reduction`    | `damageTakenFactor` 对应数组                                           | 非负比例                             |
-| `stun-damage-adjustment`             | `stunDamageFactor.targetStunDamageMultiplierAdjustments`               | 有符号倍率加数                       |
-| `sheer-damage-bonus`                 | `sheerDamageBonusFactor` 输入数组                                      | 有符号比例                           |
-| `sharpen-damage-bonus`               | `sharpenDamageBonusFactor` 输入数组                                    | 有符号比例                           |
-| `anomaly-damage-bonus`               | `anomalyDamageBonusFactor` 输入数组                                    | 有符号比例                           |
-| `anomaly-critical-rate`              | 静态异常伤害的期望权重                                                 | 有符号比例，最终概率裁剪至 `[0, 1]`  |
-| `anomaly-critical-damage`            | `anomalyCriticalFactor.anomalyCriticalDamageContributions`             | 有符号比例                           |
-| `refringe-coefficient-increase`      | `calculateRefringeMultiplier.refringeCoefficientIncreases`             | 非负比例                             |
-| `luminize-multiplier-addition`       | `luminizeMultiplierFactor.baseLuminizeMultiplier` 的加数               | 有符号倍率加数                       |
-| `luminize-multiplier-scale`          | `luminizeMultiplierFactor.multiplicativeLuminizeMultiplierAdjustments` | 非负乘数，输出操作为 `scale`         |
-| `base-multiplier-addition`           | 目录基础伤害项倍率加数                                                 | 有符号倍率加数                       |
-| `base-multiplier-increase`           | 目录各伤害项乘以 `1 + Σincrease`                                       | 有符号比例，最终倍率须合法           |
-| `settlement-multiplier-addition`     | 目录 `role: settlement` 项倍率加数                                     | 有符号倍率加数；缺独立项即拒绝       |
-| `anomaly-duration-addition`          | 目录紊乱/乱流项的时间准备                                              | 秒数，加入一次，按原异常元素独立筛选 |
-| `luminize-multiplier-increase`       | 耀变倍率乘以 `1 + Σincrease`                                           | 有符号比例                           |
-| `luminize-special-addition/increase` | 已登记的耀变独立调整 `(1 + Σaddition) × (1 + Σincrease)`               | 有符号比例，不是通用特殊乘区         |
-| `luminize-proficiency-input`         | 目录唯一参数映射传给 core 的精通值                                     | 异常精通点数；由 core 唯一换算       |
-| 命中 `damageMultiplier / add, scale` | 每项按 `(原倍率 + Σadd) × Πscale` 归约后交给 `baseDamageFactor`        | 加数可带符号，乘数及归约后的倍率非负 |
-| `resource-generation`                | 能量公式 `baseEnergyGenerationValues` 的一次基础值                     | 非负能量点数，效率适用性另行确认     |
-| `action-request`                     | 外部动作执行方                                                         | 次数与动作身份；不提供猜测的伤害倍率 |
+| 输出                                 | core 或调用方输入                                                            | 数值方向                             |
+| ------------------------------------ | ---------------------------------------------------------------------------- | ------------------------------------ |
+| 四类通用属性调整                     | `calculateInitialStat` / `calculateFinalStat` 对应数组                       | 有符号有限数，遵循 helper 校验       |
+| 直接暴击率、暴伤、穿透率、锐暴伤害   | 基础值加有效贡献                                                             | 有符号比例；本层不擅自实施概率裁剪   |
+| `damage-bonus`                       | `damageBonusFactor` 输入数组                                                 | 有符号比例                           |
+| `daze-dealt-increase`                | `dazeDealtFactor.dazeDealtIncreases`                                         | 非负比例                             |
+| `daze-dealt-reduction`               | `dazeDealtFactor.dazeDealtReductions`                                        | 非负比例，由 core 执行减法           |
+| `target-resistance-reduction`        | `resistanceFactor.targetResistanceReductions`                                | 非负比例                             |
+| `attacker-resistance-ignore`         | `resistanceFactor.attackerResistanceIgnoreValues`                            | 非负比例                             |
+| `energy-generation-rate`             | `energyGenerationRateFactor` 输入数组                                        | 有符号比例                           |
+| `target-defense-adjustment`          | `calculateTargetEffectiveDefense.defensePercentageAdjustments`               | 有符号比例；减防为负数               |
+| `attacker-penetration-value`         | `calculateTargetEffectiveDefense.penetrationValues`                          | 防御点数，交由 core 归约             |
+| `damage-taken-increase/reduction`    | `damageTakenFactor` 对应数组                                                 | 非负比例                             |
+| `stun-damage-adjustment`             | `stunDamageFactor.targetStunDamageMultiplierAdjustments`                     | 有符号倍率加数                       |
+| `sheer-damage-bonus`                 | `sheerDamageBonusFactor` 输入数组                                            | 有符号比例                           |
+| `sharpen-damage-bonus`               | `sharpenDamageBonusFactor` 输入数组                                          | 有符号比例                           |
+| `anomaly-damage-bonus`               | `anomalyDamageBonusFactor` 输入数组                                          | 有符号比例                           |
+| `anomaly-critical-rate`              | 静态异常伤害的期望权重；也是各异常子类未提供独立暴击区时的回退通道           | 有符号比例，最终概率裁剪至 `[0, 1]`  |
+| `anomaly-critical-damage`            | `anomalyCriticalFactor.anomalyCriticalDamageContributions`；也是子类回退通道 | 有符号比例                           |
+| `disorder-critical-rate`             | 紊乱独立暴击率；缺省时逐项回退 `anomaly-critical-rate`                       | 有符号比例，最终概率裁剪至 `[0, 1]`  |
+| `disorder-critical-damage`           | 紊乱独立暴击伤害贡献；缺省时逐项回退 `anomaly-critical-damage`               | 有符号比例                           |
+| `turbulence-critical-rate`           | 乱流独立暴击率；缺省时逐项回退 `anomaly-critical-rate`                       | 有符号比例，最终概率裁剪至 `[0, 1]`  |
+| `turbulence-critical-damage`         | 乱流独立暴击伤害贡献；缺省时逐项回退 `anomaly-critical-damage`               | 有符号比例                           |
+| `anomaly-settlement-critical-rate`   | 异放独立暴击率；缺省时逐项回退 `anomaly-critical-rate`                       | 有符号比例，最终概率裁剪至 `[0, 1]`  |
+| `anomaly-settlement-critical-damage` | 异放独立暴击伤害贡献；缺省时逐项回退 `anomaly-critical-damage`               | 有符号比例                           |
+| `refringe-coefficient-increase`      | `calculateRefringeMultiplier.refringeCoefficientIncreases`                   | 非负比例                             |
+| `luminize-multiplier-addition`       | `luminizeMultiplierFactor.baseLuminizeMultiplier` 的加数                     | 有符号倍率加数                       |
+| `luminize-multiplier-scale`          | `luminizeMultiplierFactor.multiplicativeLuminizeMultiplierAdjustments`       | 非负乘数，输出操作为 `scale`         |
+| `base-multiplier-addition`           | 目录基础伤害项倍率加数                                                       | 有符号倍率加数                       |
+| `base-multiplier-increase`           | 目录各伤害项乘以 `1 + Σincrease`                                             | 有符号比例，最终倍率须合法           |
+| `settlement-multiplier-addition`     | 目录 `role: settlement` 项倍率加数                                           | 有符号倍率加数；缺独立项即拒绝       |
+| `anomaly-duration-addition`          | 目录紊乱/乱流项的时间准备                                                    | 秒数，加入一次，按原异常元素独立筛选 |
+| `luminize-multiplier-increase`       | 耀变倍率乘以 `1 + Σincrease`                                                 | 有符号比例                           |
+| `luminize-special-addition/increase` | 已登记的耀变独立调整 `(1 + Σaddition) × (1 + Σincrease)`                     | 有符号比例，不是通用特殊乘区         |
+| `luminize-proficiency-input`         | 目录唯一参数映射传给 core 的精通值                                           | 异常精通点数；由 core 唯一换算       |
+| 命中 `damageMultiplier / add, scale` | 每项按 `(原倍率 + Σadd) × Πscale` 归约后交给 `baseDamageFactor`              | 加数可带符号，乘数及归约后的倍率非负 |
+| `resource-generation`                | 能量公式 `baseEnergyGenerationValues` 的一次基础值                           | 非负能量点数，效率适用性另行确认     |
+| `action-request`                     | 外部动作执行方                                                               | 次数与动作身份；不提供猜测的伤害倍率 |
 
 各 Factor 的其他必需参数仍由调用方补齐；例如抗性区的目标抗性不由“降低抗性”贡献推导。低层查询只提供贡献和属性；静态入口另行计算暴击与期望。命中倍率修改省略 `itemIds` 时作用于全部基础伤害项，指定时只作用于对应项，不改变其他项；加算与乘算按上述顺序归约。存在分项规则时，全项和分项贡献统一到每个基础伤害项的消费地址上裁决唯一来源，输出携带 `itemId`；只有全项规则时保留全项输出。生效的分项修改引用命中中不存在的项时，返回 `MISSING_REFERENCE`。
 
