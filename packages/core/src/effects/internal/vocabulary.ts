@@ -52,6 +52,8 @@ export const FACTOR_CHANNEL_UNITS: FactorChannelUnitMap = {
   "turbulence-critical-damage": "ratio",
   "anomaly-settlement-critical-rate": "ratio",
   "anomaly-settlement-critical-damage": "ratio",
+  "luminize-critical-rate": "ratio",
+  "luminize-critical-damage": "ratio",
   "luminize-multiplier-addition": "multiplier",
   "luminize-multiplier-scale": "multiplier",
   "windswept-direct-damage-coefficient-increase": "ratio",

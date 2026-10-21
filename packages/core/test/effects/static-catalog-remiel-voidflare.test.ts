@@ -439,6 +439,39 @@ describe("calculateStaticDamageFromCatalog: remielle special Voidflare", () => {
     )
   })
 
+  it("keeps the mechanism branch without a critical settlement unless luminize critical inputs are explicit", () => {
+    const base = resultFor(voidflareInput({ mindscapeRank: 1 }))
+    expect(base.ok, JSON.stringify(base)).toBe(true)
+    if (!base.ok) return
+    expect(base.value.critical).toBeNull()
+    expect(base.value.criticalRate).toBe(0)
+    expect(base.value.criticalSemantics).toBe("no-critical-settlement")
+
+    const result = resultFor(
+      voidflareInput({
+        mindscapeRank: 1,
+        damage: {
+          luminizeCriticalRate: 0.25,
+          luminizeCriticalDamage: [0.5],
+        },
+      }),
+    )
+    expect(result.ok, JSON.stringify(result)).toBe(true)
+    if (!result.ok) return
+    closeTo(result.value.criticalRate, 0.25, "luminize critical rate")
+    closeTo(
+      result.value.critical! / result.value.nonCritical,
+      1.5,
+      "luminize critical multiplier",
+    )
+    closeTo(
+      result.value.expected / result.value.nonCritical,
+      1.125,
+      "luminize expected multiplier",
+    )
+    expect(result.value.criticalSemantics).toBe("critical-hit")
+  })
+
   it("applies the mindscape 2 attribute-anomaly ignore-defense only when explicitly selected", () => {
     const optionId =
       "agents:remiel:mindscape:2:blk-ms7tkhei-q0ipfu:eff-ms7tlurw-vhelyf"
