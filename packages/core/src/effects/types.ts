@@ -404,6 +404,12 @@ export type StaticDamageParameters = StaticDamageCommon &
     | (StaticAnomalyCommon & {
         readonly kind: "luminize"
         readonly luminizeMultiplier: import("../formulas.ts").LuminizeMultiplierFactorInput
+        /**
+         * 耀变独立暴击区。两项均可选；任一项或对应通道存在时才启用暴击
+         * 结算，不读取旧异常暴击字段，也不把它作为回退。
+         */
+        readonly luminizeCriticalRate?: number
+        readonly luminizeCriticalDamage?: readonly number[]
       })
   )
 
@@ -794,7 +800,10 @@ export type StaticDamageCriticalSemantics =
 export interface StaticDamageResult {
   readonly evaluation: EvaluationResult
   readonly nonCritical: number
-  /** 当前 core 的 luminize 公式没有暴击分支。 */
+  /**
+   * 条件暴击分支。耀变仅在显式提供 `luminizeCritical*` 字段或通道时为
+   * 数值，否则保持 `null`。
+   */
   readonly critical: number | null
   /** 命名 critical 分支的结算语义；critical 为 null 时为 "no-critical-settlement"。 */
   readonly criticalSemantics: StaticDamageCriticalSemantics

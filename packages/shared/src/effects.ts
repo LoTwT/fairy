@@ -477,6 +477,8 @@ export interface FactorChannelUnitMap {
   readonly "turbulence-critical-damage": "ratio"
   readonly "anomaly-settlement-critical-rate": "ratio"
   readonly "anomaly-settlement-critical-damage": "ratio"
+  readonly "luminize-critical-rate": "ratio"
+  readonly "luminize-critical-damage": "ratio"
   readonly "luminize-multiplier-addition": "multiplier"
   readonly "luminize-multiplier-scale": "multiplier"
   readonly "windswept-direct-damage-coefficient-increase": "ratio"

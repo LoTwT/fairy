@@ -292,6 +292,8 @@
 | `turbulence-critical-damage`         | 乱流独立暴击伤害贡献；缺省时逐项回退 `anomaly-critical-damage`               | 有符号比例                           |
 | `anomaly-settlement-critical-rate`   | 异放独立暴击率；缺省时逐项回退 `anomaly-critical-rate`                       | 有符号比例，最终概率裁剪至 `[0, 1]`  |
 | `anomaly-settlement-critical-damage` | 异放独立暴击伤害贡献；缺省时逐项回退 `anomaly-critical-damage`               | 有符号比例                           |
+| `luminize-critical-rate`             | 耀变独立暴击率；仅显式字段或本通道存在时启用暴击结算                         | 有符号比例，最终概率裁剪至 `[0, 1]`  |
+| `luminize-critical-damage`           | 耀变独立暴击伤害贡献；仅显式字段或本通道存在时启用暴击结算                   | 有符号比例，按 `[0, 2]` 裁剪         |
 | `refringe-coefficient-increase`      | `calculateRefringeMultiplier.refringeCoefficientIncreases`                   | 非负比例                             |
 | `luminize-multiplier-addition`       | `luminizeMultiplierFactor.baseLuminizeMultiplier` 的加数                     | 有符号倍率加数                       |
 | `luminize-multiplier-scale`          | `luminizeMultiplierFactor.multiplicativeLuminizeMultiplierAdjustments`       | 非负乘数，输出操作为 `scale`         |
@@ -364,7 +366,7 @@
 - `atSeconds` 省略为静态时点 0，快照省略为空；需要历史读取时仍须提供真实快照或规则声明的显式 `input`。触发角色来自可选 `selection.trigger`，静态入口不生成战斗历史。
 - 基线数据不能包含本次规则再次提供的贡献。敌人抗性、防御、失衡倍率等必须明确给出；无增益的数组显式写 `[]`。普通/贯穿伤害的暴伤、锐化伤害的锐暴伤害以及有防御区公式的穿透率、异常公式的异常精通由本次命中求值读取。低层命中原有的暴击率读取保持兼容：未声明最终暴击概率且没有[活动来源必暴](#来源保证必暴)的静态命中仍须提供该属性；声明概率或来源必暴替代普通概率读取后，是否仍需普通暴击率只取决于其他真实依赖（普通暴击伤害的条件分支事实要求始终保持）。
 - `regular` 使用普通伤害，`sheer` 使用贯穿伤害；`anomaly/disorder/vortex/anomaly-settlement` 使用当前 core 异常伤害公式，基础倍率由调用方先按对应机制确认；`luminize` 使用耀光公式。异常/耀光的 `damageBonus` 可以是尚未结算的贡献数组，也可以是 `{ settledMultiplier }`。后者保留给定快照或特殊固定乘区，不再叠加当前 `damage-bonus`，相关贡献列为本次不适用。跨角色虚拟快照可先由 core 的 `calculateVirtualAgentSnapshot` 构造，再明确提供本次使用的属性与已结算增伤。
-- 普通及异常暴击率只在计算期望时裁剪至 `[0, 1]`，暴伤裁剪仍由各 core 公式负责。耀光没有暴击分支，返回 `critical: null`。计算过程不做显示舍入。
+- 普通、异常及耀变暴击率只在计算期望时裁剪至 `[0, 1]`，暴伤裁剪仍由各 core 公式负责（异常与耀变暴伤为 `[0, 2]`）。耀变仅在显式提供 `luminizeCriticalRate` / `luminizeCriticalDamage` 字段或对应 `luminize-critical-*` 通道时结算暴击分支，`critical` 的 factor 结果额外包含 `luminizeCritical`；未提供时保持 `critical: null`、`criticalRate: 0`、`criticalSemantics: "no-critical-settlement"`，且不回退旧异常暴击字段或 `anomaly-critical-*` 通道。计算过程不做显示舍入。
 - 已登记但不适用于该伤害公式的贡献进入 `notApplicableContributions`，例如能量生成或贯穿伤害中的减防；未登记通道在规则校验时直接拒绝。原始基线非法或 core 计算失败返回 `INVALID_INPUT`，不输出半组伤害结果。
 
 每项可通过 `statSource` 指定属性来源，其他乘区属性通过 `hit.attributeSources` 指定。来源没有 snapshotId 时读取该实体的当前属性；指定 snapshotId 时只读取已保存的 current 属性项，缺失报 `MISSING_SNAPSHOT`。结果属性携带 snapshotId 区分同一实体的历史和当前值；不能以当前世界兜底。
