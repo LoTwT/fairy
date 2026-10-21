@@ -4525,7 +4525,7 @@
                 },
                 "anomalyMastery": {
                   "unit": "anomaly-mastery-points",
-                  "value": 187.20000000000002
+                  "value": 187
                 },
                 "energyRegen": {
                   "unit": "energy-per-second",
@@ -4790,7 +4790,7 @@
                 },
                 "anomalyMastery": {
                   "unit": "anomaly-mastery-points",
-                  "value": 196.3
+                  "value": 196
                 },
                 "energyRegen": {
                   "unit": "energy-per-second",
@@ -5060,7 +5060,7 @@
                 },
                 "anomalyMastery": {
                   "unit": "anomaly-mastery-points",
-                  "value": 241.60000000000002
+                  "value": 241
                 },
                 "energyRegen": {
                   "unit": "energy-per-second",
@@ -48577,7 +48577,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 187.20000000000002,
+                    "settledInitialValue": 187,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -53739,7 +53739,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -53845,7 +53845,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.3739062500000006
+                    "value": 3.3687500000000004
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -53991,20 +53991,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.060859375000001,
+                    "damageMultiplier": 5.0531250000000005,
                     "finalStat": 1577.2128
                   }
                 ]
               }
             },
-            "nonCritical": 30926.18568073409,
-            "critical": 30926.18568073409,
+            "nonCritical": 30878.92202457403,
+            "critical": 30878.92202457403,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 30926.18568073409,
+            "expected": 30878.92202457403,
             "factors": {
               "nonCritical": {
-                "baseDamage": 7982.0521852500015,
+                "baseDamage": 7969.853430000001,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.45449341728677733,
@@ -54017,7 +54017,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 7982.0521852500015,
+                "baseDamage": 7969.853430000001,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.45449341728677733,
@@ -56555,7 +56555,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -56682,7 +56682,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "ratio",
-                    "value": 0.9815
+                    "value": 0.98
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36xf73-q2nimy:blk-legacy:mindscape:1",
@@ -56745,7 +56745,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.3739062500000006
+                    "value": 3.3687500000000004
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -56891,20 +56891,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.060859375000001,
+                    "damageMultiplier": 5.0531250000000005,
                     "finalStat": 1577.2128
                   }
                 ]
               }
             },
-            "nonCritical": 30926.18568073409,
-            "critical": 38657.73210091761,
+            "nonCritical": 30878.92202457403,
+            "critical": 38598.65253071753,
             "criticalSemantics": "critical-hit",
-            "criticalRate": 0.7315,
-            "expected": 36581.81188709833,
+            "criticalRate": 0.73,
+            "expected": 36514.325294058784,
             "factors": {
               "nonCritical": {
-                "baseDamage": 7982.0521852500015,
+                "baseDamage": 7969.853430000001,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.45449341728677733,
@@ -56917,7 +56917,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 7982.0521852500015,
+                "baseDamage": 7969.853430000001,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.45449341728677733,
@@ -59176,7 +59176,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -59303,7 +59303,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.3739062500000006
+                    "value": 3.3687500000000004
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -59449,20 +59449,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.060859375000001,
+                    "damageMultiplier": 5.0531250000000005,
                     "finalStat": 1577.2128
                   }
                 ]
               }
             },
-            "nonCritical": 34018.8042488075,
-            "critical": 34018.8042488075,
+            "nonCritical": 33966.814227031435,
+            "critical": 33966.814227031435,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 34018.8042488075,
+            "expected": 33966.814227031435,
             "factors": {
               "nonCritical": {
-                "baseDamage": 7982.0521852500015,
+                "baseDamage": 7969.853430000001,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.45449341728677733,
@@ -59475,7 +59475,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 7982.0521852500015,
+                "baseDamage": 7969.853430000001,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.45449341728677733,
@@ -62018,7 +62018,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -62145,7 +62145,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "ratio",
-                    "value": 0.9815
+                    "value": 0.98
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36xf73-q2nimy:blk-legacy:mindscape:1",
@@ -62229,7 +62229,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.3739062500000006
+                    "value": 3.3687500000000004
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -62375,20 +62375,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.060859375000001,
+                    "damageMultiplier": 5.0531250000000005,
                     "finalStat": 1577.2128
                   }
                 ]
               }
             },
-            "nonCritical": 34018.8042488075,
-            "critical": 42523.50531100937,
+            "nonCritical": 33966.814227031435,
+            "critical": 42458.51778378929,
             "criticalSemantics": "critical-hit",
-            "criticalRate": 0.7315,
-            "expected": 40239.99307580817,
+            "criticalRate": 0.73,
+            "expected": 40165.75782346467,
             "factors": {
               "nonCritical": {
-                "baseDamage": 7982.0521852500015,
+                "baseDamage": 7969.853430000001,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.45449341728677733,
@@ -62401,7 +62401,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 7982.0521852500015,
+                "baseDamage": 7969.853430000001,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.45449341728677733,
@@ -63988,7 +63988,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -66055,7 +66055,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -67883,7 +67883,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -69976,7 +69976,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -72793,7 +72793,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -73018,7 +73018,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.3739062500000006
+                    "value": 3.3687500000000004
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -73102,20 +73102,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.060859375000001,
+                    "damageMultiplier": 5.0531250000000005,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 62304.03507201561,
-            "critical": 62304.03507201561,
+            "nonCritical": 62208.81749421834,
+            "critical": 62208.81749421834,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 62304.03507201561,
+            "expected": 62208.81749421834,
             "factors": {
               "nonCritical": {
-                "baseDamage": 10815.056484375002,
+                "baseDamage": 10798.528125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -73128,7 +73128,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 10815.056484375002,
+                "baseDamage": 10798.528125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -75972,7 +75972,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -76218,7 +76218,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "ratio",
-                    "value": 0.9815
+                    "value": 0.98
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36xf73-q2nimy:blk-legacy:mindscape:1",
@@ -76281,7 +76281,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.3739062500000006
+                    "value": 3.3687500000000004
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -76365,20 +76365,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.060859375000001,
+                    "damageMultiplier": 5.0531250000000005,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 62304.03507201561,
-            "critical": 77880.04384001951,
+            "nonCritical": 62208.81749421834,
+            "critical": 77761.02186777293,
             "criticalSemantics": "critical-hit",
-            "criticalRate": 0.7315,
-            "expected": 73697.88548581046,
+            "criticalRate": 0.73,
+            "expected": 73561.92668691318,
             "factors": {
               "nonCritical": {
-                "baseDamage": 10815.056484375002,
+                "baseDamage": 10798.528125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -76391,7 +76391,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 10815.056484375002,
+                "baseDamage": 10798.528125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -78951,7 +78951,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -79176,7 +79176,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.3739062500000006
+                    "value": 3.3687500000000004
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -79260,20 +79260,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.060859375000001,
+                    "damageMultiplier": 5.0531250000000005,
                     "finalStat": 2873
                   }
                 ]
               }
             },
-            "nonCritical": 83762.04621520865,
-            "critical": 83762.04621520865,
+            "nonCritical": 83634.03493724347,
+            "critical": 83634.03493724347,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 83762.04621520865,
+            "expected": 83634.03493724347,
             "factors": {
               "nonCritical": {
-                "baseDamage": 14539.848984375001,
+                "baseDamage": 14517.628125000001,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -79286,7 +79286,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 14539.848984375001,
+                "baseDamage": 14517.628125000001,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -81846,7 +81846,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -82071,7 +82071,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.3739062500000006
+                    "value": 3.3687500000000004
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -82155,20 +82155,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.060859375000001,
+                    "damageMultiplier": 5.0531250000000005,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 83397.56418730617,
-            "critical": 83397.56418730617,
+            "nonCritical": 83270.109937402,
+            "critical": 83270.109937402,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 83397.56418730617,
+            "expected": 83270.109937402,
             "factors": {
               "nonCritical": {
-                "baseDamage": 10815.056484375002,
+                "baseDamage": 10798.528125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 4.27,
                 "defense": 0.5450264619270873,
@@ -82181,7 +82181,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 10815.056484375002,
+                "baseDamage": 10798.528125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 4.27,
                 "defense": 0.5450264619270873,
@@ -84741,7 +84741,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -84966,7 +84966,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.3739062500000006
+                    "value": 3.3687500000000004
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -85050,20 +85050,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.060859375000001,
+                    "damageMultiplier": 5.0531250000000005,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 70619.51289088136,
-            "critical": 70619.51289088136,
+            "nonCritical": 70511.58699242357,
+            "critical": 70511.58699242357,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 70619.51289088136,
+            "expected": 70511.58699242357,
             "factors": {
               "nonCritical": {
-                "baseDamage": 10815.056484375002,
+                "baseDamage": 10798.528125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.6177690290756028,
@@ -85076,7 +85076,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 10815.056484375002,
+                "baseDamage": 10798.528125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.6177690290756028,
@@ -87636,7 +87636,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -87861,7 +87861,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.3739062500000006
+                    "value": 3.3687500000000004
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -87945,20 +87945,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.060859375000001,
+                    "damageMultiplier": 5.0531250000000005,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 65260.6332520352,
-            "critical": 65260.6332520352,
+            "nonCritical": 65160.89718491542,
+            "critical": 65160.89718491542,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 65260.6332520352,
+            "expected": 65160.89718491542,
             "factors": {
               "nonCritical": {
-                "baseDamage": 10815.056484375002,
+                "baseDamage": 10798.528125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5708903444755214,
@@ -87971,7 +87971,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 10815.056484375002,
+                "baseDamage": 10798.528125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5708903444755214,
@@ -90531,7 +90531,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -90756,7 +90756,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.3739062500000006
+                    "value": 3.3687500000000004
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -90840,20 +90840,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.060859375000001,
+                    "damageMultiplier": 5.0531250000000005,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 49360.785137901985,
-            "critical": 49360.785137901985,
+            "nonCritical": 49285.34838017721,
+            "critical": 49285.34838017721,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 49360.785137901985,
+            "expected": 49285.34838017721,
             "factors": {
               "nonCritical": {
-                "baseDamage": 10815.056484375002,
+                "baseDamage": 10798.528125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.4717845729632375,
@@ -90866,7 +90866,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 10815.056484375002,
+                "baseDamage": 10798.528125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.4717845729632375,
@@ -93426,7 +93426,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -93651,7 +93651,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.3739062500000006
+                    "value": 3.3687500000000004
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -93735,20 +93735,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.060859375000001,
+                    "damageMultiplier": 5.0531250000000005,
                     "finalStat": 2831
                   }
                 ]
               }
             },
-            "nonCritical": 75598.91200021205,
-            "critical": 75598.91200021205,
+            "nonCritical": 75483.37622028304,
+            "critical": 75483.37622028304,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 75598.91200021205,
+            "expected": 75483.37622028304,
             "factors": {
               "nonCritical": {
-                "baseDamage": 14327.292890625002,
+                "baseDamage": 14305.396875000002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 2.57,
                 "defense": 0.6196396101108953,
@@ -93761,7 +93761,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 14327.292890625002,
+                "baseDamage": 14305.396875000002,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 2.57,
                 "defense": 0.6196396101108953,
@@ -96597,7 +96597,7 @@
                     "finalFixed": [107]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [211]
                   }
@@ -96822,7 +96822,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.3739062500000006
+                    "value": 3.3687500000000004
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -96906,20 +96906,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.060859375000001,
+                    "damageMultiplier": 5.0531250000000005,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 62304.03507201561,
-            "critical": 62304.03507201561,
+            "nonCritical": 62208.81749421834,
+            "critical": 62208.81749421834,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 62304.03507201561,
+            "expected": 62208.81749421834,
             "factors": {
               "nonCritical": {
-                "baseDamage": 10815.056484375002,
+                "baseDamage": 10798.528125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -96932,7 +96932,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 10815.056484375002,
+                "baseDamage": 10798.528125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -99508,7 +99508,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 241.60000000000002,
+                    "settledInitialValue": 241,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -99733,7 +99733,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 4.152500000000001
+                    "value": 4.1421875
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -99817,20 +99817,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 6.228750000000002,
+                    "damageMultiplier": 6.2132812500000005,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 76681.88931940385,
-            "critical": 76681.88931940385,
+            "nonCritical": 76491.45416380929,
+            "critical": 76491.45416380929,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 76681.88931940385,
+            "expected": 76491.45416380929,
             "factors": {
               "nonCritical": {
-                "baseDamage": 13310.838750000003,
+                "baseDamage": 13277.78203125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -99843,7 +99843,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 13310.838750000003,
+                "baseDamage": 13277.78203125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -102403,7 +102403,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -102628,7 +102628,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.3739062500000006
+                    "value": 3.3687500000000004
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -102691,20 +102691,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 3.3739062500000006,
+                    "damageMultiplier": 3.3687500000000004,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 27690.68225422917,
-            "critical": 27690.68225422917,
+            "nonCritical": 27648.36333076371,
+            "critical": 27648.36333076371,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 27690.68225422917,
+            "expected": 27648.36333076371,
             "factors": {
               "nonCritical": {
-                "baseDamage": 7210.037656250001,
+                "baseDamage": 7199.018750000001,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -102717,7 +102717,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 7210.037656250001,
+                "baseDamage": 7199.018750000001,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.5450264619270873,
@@ -105148,7 +105148,7 @@
                     "finalFixed": [0]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [0]
                   }
@@ -105254,7 +105254,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.3739062500000006
+                    "value": 3.3687500000000004
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -105442,20 +105442,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.060859375000001,
+                    "damageMultiplier": 5.0531250000000005,
                     "finalStat": 1577.2128
                   }
                 ]
               }
             },
-            "nonCritical": 35585.034634087555,
-            "critical": 35585.034634087555,
+            "nonCritical": 35530.6509846213,
+            "critical": 35530.6509846213,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 35585.034634087555,
+            "expected": 35530.6509846213,
             "factors": {
               "nonCritical": {
-                "baseDamage": 7982.0521852500015,
+                "baseDamage": 7969.853430000001,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.5229601917959796,
@@ -105468,7 +105468,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 7982.0521852500015,
+                "baseDamage": 7969.853430000001,
                 "damageBonus": 1.2,
                 "anomalyProficiency": 2.96,
                 "defense": 0.5229601917959796,
@@ -111052,7 +111052,7 @@
                     "finalFixed": [107]
                   },
                   "anomalyMastery": {
-                    "settledInitialValue": 196.3,
+                    "settledInitialValue": 196,
                     "finalPercentage": [],
                     "finalFixed": [211]
                   }
@@ -111245,7 +111245,7 @@
                   "operator": "add",
                   "value": {
                     "unit": "multiplier",
-                    "value": 3.3739062500000006
+                    "value": 3.3687500000000004
                   },
                   "origin": {
                     "effectId": "agent:1501:zzz-hp:eff-ms36k7q1-vqttu0:blk-ms36joa0-0vxxo8:mindscape:0",
@@ -111329,20 +111329,20 @@
                 "damageItems": [
                   {
                     "itemId": "abloom:original-strength",
-                    "damageMultiplier": 5.060859375000001,
+                    "damageMultiplier": 5.0531250000000005,
                     "finalStat": 2137
                   }
                 ]
               }
             },
-            "nonCritical": 49360.785137901985,
-            "critical": 49360.785137901985,
+            "nonCritical": 49285.34838017721,
+            "critical": 49285.34838017721,
             "criticalSemantics": "critical-hit",
             "criticalRate": 0,
-            "expected": 49360.785137901985,
+            "expected": 49285.34838017721,
             "factors": {
               "nonCritical": {
-                "baseDamage": 10815.056484375002,
+                "baseDamage": 10798.528125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.4717845729632375,
@@ -111355,7 +111355,7 @@
                 "refringe": 1
               },
               "critical": {
-                "baseDamage": 10815.056484375002,
+                "baseDamage": 10798.528125,
                 "damageBonus": 1.18,
                 "anomalyProficiency": 3.19,
                 "defense": 0.4717845729632375,
@@ -138204,10 +138204,10 @@
             "expected": 30930.68403501492
           },
           "after": {
-            "multiplier": 5.060859375000001,
-            "nonCritical": 30926.18568073409,
-            "critical": 30926.18568073409,
-            "expected": 30926.18568073409
+            "multiplier": 5.0531250000000005,
+            "nonCritical": 30878.92202457403,
+            "critical": 30878.92202457403,
+            "expected": 30878.92202457403
           }
         },
         {
@@ -138220,10 +138220,10 @@
             "expected": 36587.13287791827
           },
           "after": {
-            "multiplier": 5.060859375000001,
-            "nonCritical": 30926.18568073409,
-            "critical": 38657.73210091761,
-            "expected": 36581.81188709833
+            "multiplier": 5.0531250000000005,
+            "nonCritical": 30878.92202457403,
+            "critical": 38598.65253071753,
+            "expected": 36514.325294058784
           }
         },
         {
@@ -138236,10 +138236,10 @@
             "expected": 34023.752438516414
           },
           "after": {
-            "multiplier": 5.060859375000001,
-            "nonCritical": 34018.8042488075,
-            "critical": 34018.8042488075,
-            "expected": 34018.8042488075
+            "multiplier": 5.0531250000000005,
+            "nonCritical": 33966.814227031435,
+            "critical": 33966.814227031435,
+            "expected": 33966.814227031435
           }
         },
         {
@@ -138252,10 +138252,10 @@
             "expected": 40245.84616571011
           },
           "after": {
-            "multiplier": 5.060859375000001,
-            "nonCritical": 34018.8042488075,
-            "critical": 42523.50531100937,
-            "expected": 40239.99307580817
+            "multiplier": 5.0531250000000005,
+            "nonCritical": 33966.814227031435,
+            "critical": 42458.51778378929,
+            "expected": 40165.75782346467
           }
         },
         {
@@ -138268,10 +138268,10 @@
             "expected": 62313.097477116986
           },
           "after": {
-            "multiplier": 5.060859375000001,
-            "nonCritical": 62304.03507201561,
-            "critical": 62304.03507201561,
-            "expected": 62304.03507201561
+            "multiplier": 5.0531250000000005,
+            "nonCritical": 62208.81749421834,
+            "critical": 62208.81749421834,
+            "expected": 62208.81749421834
           }
         },
         {
@@ -138284,10 +138284,10 @@
             "expected": 73708.60517824476
           },
           "after": {
-            "multiplier": 5.060859375000001,
-            "nonCritical": 62304.03507201561,
-            "critical": 77880.04384001951,
-            "expected": 73697.88548581046
+            "multiplier": 5.0531250000000005,
+            "nonCritical": 62208.81749421834,
+            "critical": 77761.02186777293,
+            "expected": 73561.92668691318
           }
         },
         {
@@ -138300,10 +138300,10 @@
             "expected": 83774.22978556721
           },
           "after": {
-            "multiplier": 5.060859375000001,
-            "nonCritical": 83762.04621520865,
-            "critical": 83762.04621520865,
-            "expected": 83762.04621520865
+            "multiplier": 5.0531250000000005,
+            "nonCritical": 83634.03493724347,
+            "critical": 83634.03493724347,
+            "expected": 83634.03493724347
           }
         },
         {
@@ -138316,10 +138316,10 @@
             "expected": 83409.69474209704
           },
           "after": {
-            "multiplier": 5.060859375000001,
-            "nonCritical": 83397.56418730617,
-            "critical": 83397.56418730617,
-            "expected": 83397.56418730617
+            "multiplier": 5.0531250000000005,
+            "nonCritical": 83270.109937402,
+            "critical": 83270.109937402,
+            "expected": 83270.109937402
           }
         },
         {
@@ -138332,10 +138332,10 @@
             "expected": 70629.78482002912
           },
           "after": {
-            "multiplier": 5.060859375000001,
-            "nonCritical": 70619.51289088136,
-            "critical": 70619.51289088136,
-            "expected": 70619.51289088136
+            "multiplier": 5.0531250000000005,
+            "nonCritical": 70511.58699242357,
+            "critical": 70511.58699242357,
+            "expected": 70511.58699242357
           }
         },
         {
@@ -138348,10 +138348,10 @@
             "expected": 65270.125707780935
           },
           "after": {
-            "multiplier": 5.060859375000001,
-            "nonCritical": 65260.6332520352,
-            "critical": 65260.6332520352,
-            "expected": 65260.6332520352
+            "multiplier": 5.0531250000000005,
+            "nonCritical": 65160.89718491542,
+            "critical": 65160.89718491542,
+            "expected": 65160.89718491542
           }
         },
         {
@@ -138364,10 +138364,10 @@
             "expected": 49367.964888467475
           },
           "after": {
-            "multiplier": 5.060859375000001,
-            "nonCritical": 49360.785137901985,
-            "critical": 49360.785137901985,
-            "expected": 49360.785137901985
+            "multiplier": 5.0531250000000005,
+            "nonCritical": 49285.34838017721,
+            "critical": 49285.34838017721,
+            "expected": 49285.34838017721
           }
         },
         {
@@ -138380,10 +138380,10 @@
             "expected": 75609.90820559389
           },
           "after": {
-            "multiplier": 5.060859375000001,
-            "nonCritical": 75598.91200021205,
-            "critical": 75598.91200021205,
-            "expected": 75598.91200021205
+            "multiplier": 5.0531250000000005,
+            "nonCritical": 75483.37622028304,
+            "critical": 75483.37622028304,
+            "expected": 75483.37622028304
           }
         },
         {
@@ -138396,10 +138396,10 @@
             "expected": 62313.097477116986
           },
           "after": {
-            "multiplier": 5.060859375000001,
-            "nonCritical": 62304.03507201561,
-            "critical": 62304.03507201561,
-            "expected": 62304.03507201561
+            "multiplier": 5.0531250000000005,
+            "nonCritical": 62208.81749421834,
+            "critical": 62208.81749421834,
+            "expected": 62208.81749421834
           }
         },
         {
@@ -138412,10 +138412,10 @@
             "expected": 76693.0430487594
           },
           "after": {
-            "multiplier": 6.228750000000002,
-            "nonCritical": 76681.88931940385,
-            "critical": 76681.88931940385,
-            "expected": 76681.88931940385
+            "multiplier": 6.2132812500000005,
+            "nonCritical": 76491.45416380929,
+            "critical": 76491.45416380929,
+            "expected": 76491.45416380929
           }
         },
         {
@@ -138428,10 +138428,10 @@
             "expected": 27694.709989829775
           },
           "after": {
-            "multiplier": 3.3739062500000006,
-            "nonCritical": 27690.68225422917,
-            "critical": 27690.68225422917,
-            "expected": 27690.68225422917
+            "multiplier": 3.3687500000000004,
+            "nonCritical": 27648.36333076371,
+            "critical": 27648.36333076371,
+            "expected": 27648.36333076371
           }
         },
         {
@@ -138444,10 +138444,10 @@
             "expected": 35590.21063912524
           },
           "after": {
-            "multiplier": 5.060859375000001,
-            "nonCritical": 35585.034634087555,
-            "critical": 35585.034634087555,
-            "expected": 35585.034634087555
+            "multiplier": 5.0531250000000005,
+            "nonCritical": 35530.6509846213,
+            "critical": 35530.6509846213,
+            "expected": 35530.6509846213
           }
         },
         {
@@ -138460,10 +138460,10 @@
             "expected": 49367.964888467475
           },
           "after": {
-            "multiplier": 5.060859375000001,
-            "nonCritical": 49360.785137901985,
-            "critical": 49360.785137901985,
-            "expected": 49360.785137901985
+            "multiplier": 5.0531250000000005,
+            "nonCritical": 49285.34838017721,
+            "critical": 49285.34838017721,
+            "expected": 49285.34838017721
           }
         }
       ],

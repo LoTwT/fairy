@@ -398,19 +398,23 @@ function explainedFairyReadings(record: FrozenRecord): Readings {
     defenseLevelBase /
     (defenseLevelBase + effectiveDefense) /
     (levelCoefficient / (levelCoefficient + effectiveDefense))
-  const rateDifference =
-    scenario.trigger === "aria" &&
-    scenario.event === "release" &&
-    scenario.releaseBonus
-      ? (u.equipmentMastery - Math.floor(u.equipmentMastery)) * 0.005
-      : 0
+  const flooredEquipmentMastery = Math.floor(u.equipmentMastery)
+  // 3.2.5 起异常掌控在读取层取整，原先由小数掌控产生的暴击率差消失。
+  const rateDifference = 0
+  const masteryRatio =
+    scenario.trigger === "aria" && scenario.event === "release"
+      ? flooredEquipmentMastery / u.equipmentMastery
+      : 1
   const damageRatio =
-    ((u.attack + sourceAttackDifference) / u.attack) * defenseRatio
+    ((u.attack + sourceAttackDifference) / u.attack) *
+    defenseRatio *
+    masteryRatio
   return {
     ...u,
     equipmentAttack: u.equipmentAttack + attackDifference,
+    equipmentMastery: flooredEquipmentMastery,
     attack: u.attack + sourceAttackDifference,
-    multiplier: u.multiplier,
+    multiplier: u.multiplier * masteryRatio,
     defense: u.defense * defenseRatio,
     criticalRate: u.criticalRate + rateDifference,
     nonCritical: u.nonCritical * damageRatio,
@@ -475,10 +479,11 @@ describe("ZZZ Calculator explicit abloom / historical source comparison", () => 
     for (const row of correction.records) {
       const record = recordFor(row.id)
       const result = record.fairy.result.value
+      const flooredInitialAM = Math.floor(row.initialAM)
       const multiplier =
         (27.5 / 100 / 10) *
         0.625 *
-        row.initialAM *
+        flooredInitialAM *
         (record.scenario.stunned ? 1.5 : 1)
       close(row.after.multiplier, multiplier)
       close(
@@ -489,13 +494,23 @@ describe("ZZZ Calculator explicit abloom / historical source comparison", () => 
         result.evaluation.hit!.damageItems[0]!.damageMultiplier,
         row.after.multiplier,
       )
-      for (const field of ["nonCritical", "critical", "expected"] as const) {
+      for (const field of ["nonCritical", "critical"] as const) {
         close(
           row.after[field],
-          (row.before[field] * ((27.5 / 100 / 10) * 0.625)) / 0.01719,
+          (row.before[field] *
+            ((27.5 / 100 / 10) * 0.625) *
+            (flooredInitialAM / row.initialAM)) /
+            0.01719,
         )
         close(result[field]!, row.after[field])
       }
+      // expected 同时受暴击率变化影响；读取取整后的掌控后不能沿用非暴击倍率直接缩放。
+      const criticalDamage = result.factors.critical!.anomalyCritical - 1
+      close(
+        row.after.expected,
+        row.after.nonCritical * (1 + result.criticalRate * criticalDamage),
+      )
+      close(result.expected, row.after.expected)
     }
   })
   it("pins versions, semantic mappings, native provenance and a nonempty exact case inventory", () => {
@@ -717,18 +732,19 @@ describe("ZZZ Calculator explicit abloom / historical source comparison", () => 
       if (!isDifferent(explained.expected, native.expected)) equalDamage++
     }
     expect({ common, differences, equalDamage }).toEqual({
-      common: 583,
-      differences: 119,
-      equalDamage: 19,
+      common: 520,
+      differences: 182,
+      equalDamage: 10,
     })
     expect(byField).toEqual({
       equipmentAttack: 39,
       attack: 17,
       defense: 2,
-      criticalRate: 3,
-      nonCritical: 19,
-      critical: 19,
-      expected: 20,
+      equipmentMastery: 21,
+      multiplier: 16,
+      nonCritical: 29,
+      critical: 29,
+      expected: 29,
     })
   })
 
@@ -812,7 +828,7 @@ describe("ZZZ Calculator explicit abloom / historical source comparison", () => 
                 exclusive.result,
                 "ariaCritConversion",
               )[0]!.value.value,
-              196.3 * 0.005,
+              196 * 0.005,
             )
             close(
               contributionValues(
@@ -822,7 +838,7 @@ describe("ZZZ Calculator explicit abloom / historical source comparison", () => 
               )[0]!.value.value,
               -0.5,
             )
-            close(exclusive.result.criticalRate, 0.7315)
+            close(exclusive.result.criticalRate, 0.73)
             close(
               exclusive.result.critical! / exclusive.result.nonCritical,
               1.25,
@@ -914,7 +930,7 @@ describe("ZZZ Calculator explicit abloom / historical source comparison", () => 
       )
       close(
         changedInitial.expected / baseline.expected,
-        trigger === "aria" ? 241.6 / 196.3 : 1,
+        trigger === "aria" ? 241 / 196 : 1,
       )
       const normal = await get("not-stunned")
       close(normal.factors.nonCritical["stunDamage"]!, 1)

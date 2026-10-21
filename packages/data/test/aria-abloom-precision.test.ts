@@ -38,8 +38,9 @@ describe("Aria core-7 exact per-mastery Abloom", () => {
         const result = calculateStaticDamageFromCatalog(input)
         expect(result.ok, JSON.stringify(result)).toBe(true)
         if (!result.ok) throw new Error(JSON.stringify(result.issues))
+        const flooredMastery = Math.floor(196.3)
         const multiplier =
-          (percent / 100 / 10) * base * 196.3 * (stunned ? 1.5 : 1)
+          (percent / 100 / 10) * base * flooredMastery * (stunned ? 1.5 : 1)
         expect(
           result.value.evaluation.hit!.damageItems[0]!.damageMultiplier,
         ).toBeCloseTo(multiplier, 12)
@@ -58,7 +59,7 @@ describe("Aria core-7 exact per-mastery Abloom", () => {
   it("retains continuous initial AM, M1-only crit and the probability cap", () => {
     for (const [mastery, expected] of [
       [100, 0.25],
-      [196.3, 0.7315],
+      [196.3, 0.73],
       [250, 1],
       [400, 1],
     ]) {
