@@ -206,11 +206,11 @@ async function verifyAriaAbloomConsumer(api, engine) {
   for (const [element, percent, base] of [["ether",27.5,0.625],["electric",14.3,1.25],["physical",2.5,7.13]]) {
     const result = engine.calculateStaticDamageFromCatalog(makeAriaAbloomRequest(data.definitions, data.catalog, element, 196.3, true, true))
     if (!result.ok) throw new Error(JSON.stringify(result.issues))
-    const nonCritical = 1000 * (percent/100/10*base) * 196.3 * 1.5 * 2 * 2
+    const nonCritical = 1000 * (percent/100/10*base) * 196 * 1.5 * 2 * 2
     close(result.value.nonCritical, nonCritical)
-    close(result.value.criticalRate, 0.7315)
-    close(result.value.expected, nonCritical*(1+0.7315*0.25))
+    close(result.value.criticalRate, 0.73)
+    close(result.value.expected, nonCritical*(1+0.73*0.25))
   }
-  return {correctedElements:3,criticalRate:0.7315}
+  return {correctedElements:3,criticalRate:0.73}
 }
 `

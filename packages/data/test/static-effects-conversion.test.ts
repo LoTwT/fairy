@@ -7539,3 +7539,273 @@ describe("claret mindscape 1 multiplier encoding correction", () => {
     )
   })
 })
+
+describe("3.2.5 conditions.damageTypes and optional scope", () => {
+  const damageRule = (
+    effectOverride: Partial<Omit<SourceEffect, "scope">> & {
+      scope?: string | string[] | undefined
+    },
+  ) => {
+    const source = data()
+    const base = effect("first", 10)
+    delete base.scope
+    const { scope, ...rest } = effectOverride
+    source.wengines[0]!.refinementBuffs = [
+      {
+        effectBlocks: [
+          {
+            id: "block",
+            name: "Rank 1",
+            effects: [
+              {
+                ...base,
+                ...rest,
+                ...(scope === undefined ? {} : { scope }),
+              },
+            ],
+          },
+        ],
+      },
+    ]
+    const result = convertSource(source, functions, [], [])
+    return result.definitions.effects.find(
+      (rule): rule is ContributionRule => rule.kind === "contribution",
+    )!
+  }
+
+  it("maps conditions.damageTypes onto the hit damage-kind condition", () => {
+    const rule = damageRule({
+      stat: "resPen",
+      scope: undefined,
+      conditions: {
+        damageTypes: [
+          "anomalyRelease",
+          "radiance",
+          "turbulence",
+          "disorder",
+          "anomaly",
+        ],
+      },
+    })
+    expect(rule.when).toEqual({
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.damageKind",
+          values: [
+            "anomaly-settlement",
+            "luminize",
+            "vortex",
+            "disorder",
+            "anomaly",
+          ],
+        },
+      ],
+    })
+  })
+
+  it("maps direct damage types and mutation onto their damage kinds", () => {
+    const rule = damageRule({
+      stat: "resPen",
+      scope: undefined,
+      conditions: {
+        damageTypes: ["normal", "pierce", "sharpen", "mutation"],
+      },
+    })
+    expect(rule.when).toEqual({
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.damageKind",
+          values: [
+            "regular",
+            "sheer",
+            "sharpen",
+            "anomaly",
+            "disorder",
+            "vortex",
+            "anomaly-settlement",
+            "luminize",
+          ],
+        },
+      ],
+    })
+  })
+
+  it("unions multiple scopes", () => {
+    const rule = damageRule({
+      stat: "resPen",
+      scope: ["anomaly", "disorder"],
+    })
+    expect(rule.when).toEqual({
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.damageKind",
+          values: ["anomaly", "disorder"],
+        },
+      ],
+    })
+  })
+
+  it("treats a missing scope as general and keeps the conditions scope", () => {
+    const rule = damageRule({
+      stat: "resPen",
+      scope: undefined,
+      groupId: "upstream-group",
+      conditions: {
+        damageTypes: ["turbulence"],
+        note: "ignored upstream field",
+      },
+    })
+    expect(rule.when).toEqual({
+      kind: "all",
+      conditions: [
+        { kind: "one-of", fact: "hit.damageKind", values: ["vortex"] },
+      ],
+    })
+  })
+
+  it("treats a missing scope without skillTargets as general", () => {
+    const rule = damageRule({ stat: "resPen", scope: undefined })
+    expect(rule.when).toEqual({ kind: "all", conditions: [] })
+  })
+
+  it("derives skill scope from skillTargets when scope is omitted", () => {
+    const rule = damageRule({
+      stat: "resPen",
+      scope: undefined,
+      skillTargets: [
+        { category: "chain", subcategoryId: null },
+        { category: "ultimate", subcategoryId: null },
+      ],
+    })
+    expect(rule.when).toEqual({
+      kind: "all",
+      conditions: [
+        {
+          kind: "one-of",
+          fact: "hit.damageKind",
+          values: ["regular", "sheer", "sharpen"],
+        },
+        {
+          kind: "any",
+          conditions: [
+            {
+              kind: "all",
+              conditions: [
+                {
+                  kind: "one-of",
+                  fact: "hit.skillTag",
+                  values: ["zzz-hp:category:chain"],
+                },
+              ],
+            },
+            {
+              kind: "all",
+              conditions: [
+                {
+                  kind: "one-of",
+                  fact: "hit.skillTag",
+                  values: ["zzz-hp:category:ultimate"],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    })
+  })
+
+  it("keeps explicit general scope general even with skillTargets", () => {
+    const rule = damageRule({
+      stat: "resPen",
+      scope: "general",
+      skillTargets: [{ category: "chain", subcategoryId: null }],
+    })
+    expect(rule.when).toEqual({ kind: "all", conditions: [] })
+  })
+
+  it("accepts the 3.2.5 Evelyn record with omitted scope and skillTargets", () => {
+    const source = batch08Data()
+    const block = source.agents[0]!.mindscapeBuffs![0]!.effectBlocks![0]!
+    block.effects = block.effects.map((candidate) => {
+      if (
+        !["eff-ms4j94x5-3elaxq", "eff-ms4j9nhd-9ya68m"].includes(candidate.id)
+      )
+        return candidate
+      const withoutScope = { ...candidate }
+      delete withoutScope.scope
+      return withoutScope
+    })
+    const result = convertSource(source, functions, [], batch08Supplements)
+    for (const effectId of [
+      "agent:1321:zzz-hp:eff-ms4j94x5-3elaxq:blk-ms4j94x5-1mflp4:mindscape:0",
+      "agent:1321:zzz-hp:eff-ms4j9nhd-9ya68m:blk-ms4j94x5-1mflp4:mindscape:0",
+    ]) {
+      const rule = result.definitions.effects.find(
+        (candidate) => candidate.effectId === effectId,
+      ) as ContributionRule
+      expect(JSON.stringify(rule.when)).toContain("zzz-hp:category:chain")
+      expect(JSON.stringify(rule.when)).toContain("zzz-hp:category:ultimate")
+    }
+  })
+
+  it("treats empty conditions.damageTypes as all damage types", () => {
+    const rule = damageRule({
+      stat: "resPen",
+      scope: undefined,
+      conditions: { damageTypes: [] },
+    })
+    expect(rule.when).toEqual({ kind: "all", conditions: [] })
+  })
+
+  it("lets empty conditions.damageTypes override a legacy scope", () => {
+    const rule = damageRule({
+      stat: "resPen",
+      scope: "anomaly",
+      conditions: { damageTypes: [] },
+    })
+    expect(rule.when).toEqual({ kind: "all", conditions: [] })
+  })
+
+  it("rejects a scope that conflicts with conditions.damageTypes", () => {
+    expect(() =>
+      damageRule({
+        stat: "resPen",
+        scope: "anomaly",
+        conditions: { damageTypes: ["disorder"] },
+      }),
+    ).toThrow(
+      /Conflicting scope and conditions\.damageTypes at w-engines\/Identity_Base\/refinement\/1\/block\/first/,
+    )
+  })
+
+  it("rejects unknown damage types with the source identity", () => {
+    expect(() =>
+      damageRule({
+        stat: "resPen",
+        scope: undefined,
+        conditions: { damageTypes: ["void"] },
+      }),
+    ).toThrow(
+      /Unknown damage type: void at w-engines\/Identity_Base\/refinement\/1\/block\/first/,
+    )
+  })
+
+  it("keeps fixed-source string scopes and general stat scope unchanged", () => {
+    const anomalyRule = damageRule({ stat: "resPen", scope: "anomaly" })
+    expect(anomalyRule.when).toEqual({
+      kind: "all",
+      conditions: [
+        { kind: "one-of", fact: "hit.damageKind", values: ["anomaly"] },
+      ],
+    })
+    const generalRule = damageRule({ stat: "critRate", scope: "general" })
+    expect(generalRule.scope).toBe("entity")
+    expect(generalRule.when).toEqual({ kind: "all", conditions: [] })
+  })
+})

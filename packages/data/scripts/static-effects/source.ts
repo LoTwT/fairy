@@ -12,7 +12,12 @@ export const BUFF_RESOURCE =
 export interface SourceEffect {
   id: string
   origin?: string
-  scope: string
+  /** 3.2.5 起可省略，省略等价于 general；上游也允许一个效果覆盖多个作用域。 */
+  scope?: string | string[]
+  /** 上游把作用域拆到 conditions；只消费 damageTypes，其余字段保留不解释。 */
+  conditions?: { damageTypes?: string[]; [key: string]: unknown }
+  /** 上游分组标识；当前转换不消费，仅作为兼容字段接受。 */
+  groupId?: string
   applyTarget: "self" | "team"
   applySituation?: string
   applyProfession?: string | null
