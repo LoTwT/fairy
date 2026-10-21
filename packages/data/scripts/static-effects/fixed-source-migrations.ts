@@ -161,6 +161,10 @@ const redAxisIdentity: SourceIdentity = {
   kind: "w-engine",
   entityId: "13111",
 }
+const identityInflectionIdentity: SourceIdentity = {
+  kind: "w-engine",
+  entityId: "12014",
+}
 
 export const FIXED_SOURCE_SUPPLEMENT_MIGRATIONS: readonly FixedSourceSupplementMigration[] =
   [
@@ -486,5 +490,13 @@ export const FIXED_SOURCE_SUPPLEMENT_MIGRATIONS: readonly FixedSourceSupplementM
       explanation:
         "固定源把冲刺攻击登记为 dodge/all-dodge-ms0dnpmr，并把该条款编译为 skillDmgBonus。Fairy 保留稳定选项 nanoka:w-engines:13111:refinement:red-axis：普通攻击与冲刺攻击（dash）、电属性、regular 直伤、按精炼 1—5 的 50/57.5/65/72.5/80% 均按修正后的补充语义执行；五档固定源记录都不再单独贡献。",
       records: redAxisRecords,
+    },
+    {
+      identity: identityInflectionIdentity,
+      supplementIds: ["nanoka:w-engines:12014:attacker-damage-reduction"],
+      optionIds: ["nanoka:w-engines:12014:attacker-damage-reduction"],
+      explanation:
+        "「恒等式」-变格 12014 在固定源没有机器记录；本登记只允许补充实体与不可选越界选项挂到固定实体，不声称固定源已编码「致眩」条款，也不创建任何可执行贡献。",
+      records: [],
     },
   ]

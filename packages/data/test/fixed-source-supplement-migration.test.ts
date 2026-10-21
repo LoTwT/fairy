@@ -137,6 +137,13 @@ describe("fixed-source supplement entity migration", () => {
       expect(fixedEntityIds.has(fixedOption.catalogEntityId)).toBe(true)
     }
 
+    // 12014 没有固定记录，空记录登记只负责把补充实体与不可选选项挂到
+    // 固定实体。
+    expect(
+      fixedByOptionId.get("nanoka:w-engines:12014:attacker-damage-reduction")
+        ?.catalogEntityId,
+    ).toBe("w-engines:Identity_Inflection")
+
     // 规则逐条深比较：effectId、参数、条件、受益者、唯一性与证据引用不变。
     expect(supplementRules(result)).toEqual(supplementRules(fallback))
     expect(supplementRules(result).length).toBeGreaterThan(0)

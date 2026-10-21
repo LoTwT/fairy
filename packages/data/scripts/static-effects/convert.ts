@@ -514,6 +514,28 @@ const sourceRecordKey = (record: SourceRecord): string =>
 const sourceIdentityKey = (identity: SourceIdentity): string =>
   `${identity.kind}:${identity.entityId}`
 
+const categoryForIdentityKind = (
+  kind: SourceIdentity["kind"],
+): SourceEntityCategory =>
+  kind === "agent"
+    ? "agents"
+    : kind === "w-engine"
+      ? "w-engines"
+      : "drive-discs"
+
+/** 补充实体 catalog ID 的类别段：`nanoka:<类别>:...` 或 `<类别>:...`。 */
+const supplementCatalogCategory = (
+  catalogEntityId: string,
+): SourceEntityCategory | undefined => {
+  const [first, second] = catalogEntityId.split(":")
+  const category = first === "nanoka" ? second : first
+  return category === "agents" ||
+    category === "w-engines" ||
+    category === "drive-discs"
+    ? category
+    : undefined
+}
+
 /**
  * 固定源补出补充实体时的同条款迁移解析：只有补充登记实际参与本次转换、
  * 固定源实体已存在且登记的全部记录都在场时，才把这些记录标记为迁移入口。
@@ -4738,8 +4760,11 @@ export function convertSource(
   // unsupported 声明为反向缺项条款携带的实体）建立 catalog ID 索引，不依赖
   // 登记数组顺序（后续 option 类补充可指向补充实体）。固定来源已补出同一
   // identity 时不再创建 nanoka:* 重复实体：补充选项/规则改挂固定实体，
-  // optionId/effectId 与补充语义保持不变；只有固定源缺少该 identity 时才
-  // 继续创建补充实体。固定源同 catalog ID、补充实体间重复身份仍拒绝生成。
+  // optionId/effectId 与补充语义保持不变。只有显式列入迁移登记（含 records
+  // 为空的 12014 挂靠登记）的 identity 才允许这条路径；未登记撞车仍拒绝，
+  // 避免把任意补充实体静默挂到固定源并留下同条款重复贡献。固定源缺少该
+  // identity 时继续创建补充实体。固定源同 catalog ID、补充实体间重复身份、
+  // 目录类别与 identity.kind 不一致仍拒绝生成。
   const fixedEntitiesByIdentity = new Map<string, StaticCatalogEntity>()
   for (const entity of collected.entities)
     if (entity.identity !== null) {
@@ -4747,6 +4772,11 @@ export function convertSource(
       if (!fixedEntitiesByIdentity.has(key))
         fixedEntitiesByIdentity.set(key, entity)
     }
+  const registeredMigrationIdentities = new Set(
+    FIXED_SOURCE_SUPPLEMENT_MIGRATIONS.map((migration) =>
+      sourceIdentityKey(migration.identity),
+    ),
+  )
   const supplementEntitiesById = new Map<string, StaticCatalogEntity>()
   const supplementCatalogEntityIds = new Map<string, string>()
   const seenSupplementEntityCatalogIds = new Set<string>()
@@ -4778,12 +4808,25 @@ export function convertSource(
           `Supplement entity ${entity.catalogEntityId} repeats the identity ${identity.kind}/${identity.entityId} of another supplement entity; re-review the clause instead of coexisting`,
         )
       seenSupplementEntityIdentities.add(identityKey)
+      const catalogCategory = supplementCatalogCategory(entity.catalogEntityId)
+      const identityCategory = categoryForIdentityKind(identity.kind)
+      if (catalogCategory !== identityCategory)
+        throw new Error(
+          `Supplement entity ${entity.catalogEntityId} catalog category ${String(catalogCategory)} does not match identity kind ${identity.kind}; re-review the entity and clause category before coexisting`,
+        )
     }
     const fixedEntity =
       identity === null
         ? undefined
         : fixedEntitiesByIdentity.get(sourceIdentityKey(identity))
     if (fixedEntity !== undefined) {
+      if (
+        identity === null ||
+        !registeredMigrationIdentities.has(sourceIdentityKey(identity))
+      )
+        throw new Error(
+          `Supplement entity ${entity.catalogEntityId} repeats the identity ${identity?.kind ?? "unknown"}/${identity?.entityId ?? "unknown"} of a fixed-source entity without a registered migration; re-review the clause instead of coexisting`,
+        )
       supplementCatalogEntityIds.set(
         entity.catalogEntityId,
         fixedEntity.catalogEntityId,
