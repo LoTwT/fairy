@@ -568,6 +568,198 @@ describe("static damage integrates existing core formulas", () => {
       result.notApplicableContributions.map((entry) => entry.origin.effectId),
     ).toEqual(["environment:static:damage-bonus"])
   })
+
+  it("settles explicit luminize critical inputs into non-critical, critical and expected", () => {
+    const damage = anomalyDamage("luminize")
+    if (damage.kind !== "luminize") throw new Error("luminize")
+    const result = ok(
+      calculateStaticDamage({
+        ...inputFor(),
+        damage: {
+          ...damage,
+          luminizeCriticalRate: 0.25,
+          luminizeCriticalDamage: [0.5],
+        },
+      }),
+    )
+    expect(result.criticalRate).toBe(0.25)
+    expect(result.critical! / result.nonCritical).toBeCloseTo(1.5, 12)
+    expect(result.expected / result.nonCritical).toBeCloseTo(1.125, 12)
+    expect(result.criticalSemantics).toBe("critical-hit")
+    expect(result.factors.critical?.["luminizeCritical"]).toBe(1.5)
+    expect(result.factors.nonCritical["luminizeCritical"]).toBeUndefined()
+  })
+
+  it.each([
+    [1.2, 1],
+    [-0.5, 0],
+  ])(
+    "clamps the luminize critical rate %s to %s",
+    (luminizeCriticalRate, expectedRate) => {
+      const damage = anomalyDamage("luminize")
+      if (damage.kind !== "luminize") throw new Error("luminize")
+      const result = ok(
+        calculateStaticDamage({
+          ...inputFor(),
+          damage: {
+            ...damage,
+            luminizeCriticalRate,
+            luminizeCriticalDamage: [0.5],
+          },
+        }),
+      )
+      expect(result.criticalRate).toBe(expectedRate)
+      expect(result.critical! / result.nonCritical).toBeCloseTo(1.5, 12)
+      expect(result.expected / result.nonCritical).toBeCloseTo(
+        1 + expectedRate * 0.5,
+        12,
+      )
+    },
+  )
+
+  it.each([
+    [10, 3],
+    [-1, 1],
+  ])(
+    "clamps the luminize critical damage contribution %s to multiplier %s",
+    (contribution, multiplier) => {
+      const damage = anomalyDamage("luminize")
+      if (damage.kind !== "luminize") throw new Error("luminize")
+      const result = ok(
+        calculateStaticDamage({
+          ...inputFor(),
+          damage: {
+            ...damage,
+            luminizeCriticalRate: 1,
+            luminizeCriticalDamage: [contribution],
+          },
+        }),
+      )
+      expect(result.critical! / result.nonCritical).toBeCloseTo(multiplier, 12)
+    },
+  )
+
+  it("enables luminize critical settlement from channels without legacy fallback", () => {
+    const input = inputFor([
+      factor("luminize-critical-rate", 0.2),
+      factor("luminize-critical-damage", 0.3),
+      factor("anomaly-critical-rate", 0.7),
+      factor("anomaly-critical-damage", 0.9),
+    ])
+    const result = ok(
+      calculateStaticDamage({ ...input, damage: anomalyDamage("luminize") }),
+    )
+    expect(result.criticalRate).toBeCloseTo(0.2, 12)
+    expect(result.critical! / result.nonCritical).toBeCloseTo(1.3, 12)
+    expect(result.expected / result.nonCritical).toBeCloseTo(1.06, 12)
+    expect(
+      result.notApplicableContributions.map((entry) =>
+        entry.address.kind === "factor" ? entry.address.channel : null,
+      ),
+    ).toEqual(
+      expect.arrayContaining([
+        "anomaly-critical-rate",
+        "anomaly-critical-damage",
+      ]),
+    )
+  })
+
+  it("does not fall back to legacy anomaly critical fields or channels for luminize", () => {
+    const input = inputFor([
+      factor("anomaly-critical-rate", 0.7),
+      factor("anomaly-critical-damage", 0.9),
+    ])
+    const result = ok(
+      calculateStaticDamage({ ...input, damage: anomalyDamage("luminize") }),
+    )
+    expect(result.critical).toBeNull()
+    expect(result.criticalRate).toBe(0)
+    expect(result.criticalSemantics).toBe("no-critical-settlement")
+    expect(result.expected).toBe(result.nonCritical)
+    expect(result.factors.critical).toBeNull()
+    expect(
+      result.notApplicableContributions.map((entry) =>
+        entry.address.kind === "factor" ? entry.address.channel : null,
+      ),
+    ).toEqual(
+      expect.arrayContaining([
+        "anomaly-critical-rate",
+        "anomaly-critical-damage",
+      ]),
+    )
+  })
+
+  it("enables luminize critical settlement when only one explicit field is present", () => {
+    const base = anomalyDamage("luminize")
+    if (base.kind !== "luminize") throw new Error("luminize")
+    const rateOnly = ok(
+      calculateStaticDamage({
+        ...inputFor(),
+        damage: { ...base, luminizeCriticalRate: 0.25 },
+      }),
+    )
+    expect(rateOnly.criticalRate).toBe(0.25)
+    expect(rateOnly.critical).toBeCloseTo(rateOnly.nonCritical, 12)
+
+    const damageOnly = ok(
+      calculateStaticDamage({
+        ...inputFor(),
+        damage: { ...base, luminizeCriticalDamage: [0.5] },
+      }),
+    )
+    expect(damageOnly.criticalRate).toBe(0)
+    expect(damageOnly.critical! / damageOnly.nonCritical).toBeCloseTo(1.5, 12)
+    expect(damageOnly.expected).toBe(damageOnly.nonCritical)
+  })
+
+  it.each([
+    [
+      "rate NaN",
+      { luminizeCriticalRate: Number.NaN },
+      "/damage/luminizeCriticalRate",
+    ],
+    [
+      "rate Infinity",
+      { luminizeCriticalRate: Number.POSITIVE_INFINITY },
+      "/damage/luminizeCriticalRate",
+    ],
+    [
+      "damage member NaN",
+      { luminizeCriticalDamage: [Number.NaN] },
+      "/damage/luminizeCriticalDamage/0",
+    ],
+    [
+      "damage not an array",
+      { luminizeCriticalDamage: 0.5 },
+      "/damage/luminizeCriticalDamage",
+    ],
+    [
+      "mismatched subtype field",
+      { disorderCriticalRate: 0.1 },
+      "/damage/disorderCriticalRate",
+    ],
+    [
+      "legacy anomaly critical field",
+      { anomalyCriticalRate: 0.1 },
+      "/damage/anomalyCriticalRate",
+    ],
+  ] as const)(
+    "rejects invalid luminize critical input: %s",
+    (_name, patch, pointer) => {
+      const input = inputFor()
+      issue(
+        calculateStaticDamage({
+          ...input,
+          damage: {
+            ...anomalyDamage("luminize"),
+            ...patch,
+          } as unknown as StaticDamageParameters,
+        }),
+        "INVALID_INPUT",
+        pointer,
+      )
+    },
+  )
 })
 
 describe("partial cultivation tables", () => {

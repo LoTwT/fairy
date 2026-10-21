@@ -4,6 +4,7 @@ import {
 } from "./windswept-direct-damage.ts"
 import { calculateLucyGuardBoar } from "./lucy-guard-boar.ts"
 import {
+  anomalyCriticalFactor,
   anomalyDamageFormula,
   calculateDefenseLevelBase,
   calculateRefringeMultiplier,
@@ -104,8 +105,12 @@ export function validateDamageFields(
   let subtypeCriticalDamageField: string | undefined
   if (kind !== "regular" && kind !== "sheer" && kind !== "sharpen") {
     fields.push("anomalyDamageBonus", "refringe")
-    if (kind === "luminize") fields.push("luminizeMultiplier")
-    else {
+    if (kind === "luminize") {
+      fields.push("luminizeMultiplier")
+      // 耀变独立暴击字段；缺省时不启用暴击结算，也不回退旧异常暴击区。
+      subtypeCriticalRateField = "luminizeCriticalRate"
+      subtypeCriticalDamageField = "luminizeCriticalDamage"
+    } else {
       fields.push("anomalyCriticalRate", "anomalyCriticalDamage")
       if (kind === "disorder") {
         subtypeCriticalRateField = "disorderCriticalRate"
@@ -1086,9 +1091,50 @@ export function calculateDamageFromEvaluation(
           ],
         },
       })
-      critical = null
-      rate = 0
-      criticalSemantics = "no-critical-settlement"
+      // 耀变暴击只由显式字段或本命中适用的耀变通道启用；旧异常暴击区
+      // 不参与耀变回退。未启用时保持原有 no-critical-settlement 结果。
+      const hasApplicableLuminizeCriticalChannel = (
+        channel: FactorChannel,
+      ): boolean =>
+        evaluation.contributions.some(
+          (entry) =>
+            entry.address.kind === "factor" &&
+            entry.address.channel === channel &&
+            entry.address.entityId === hit.actorId,
+        )
+      const hasLuminizeCriticalInput =
+        damage.luminizeCriticalRate !== undefined ||
+        damage.luminizeCriticalDamage !== undefined ||
+        hasApplicableLuminizeCriticalChannel("luminize-critical-rate") ||
+        hasApplicableLuminizeCriticalChannel("luminize-critical-damage")
+      if (!hasLuminizeCriticalInput) {
+        critical = null
+        rate = 0
+        criticalSemantics = "no-critical-settlement"
+      } else {
+        const luminizeCritical = anomalyCriticalFactor.calculate({
+          isAnomalyCritical: true,
+          anomalyCriticalDamageContributions: [
+            ...(damage.luminizeCriticalDamage ?? []),
+            ...take("luminize-critical-damage"),
+          ],
+        })
+        const criticalValue = nonCritical.value * luminizeCritical
+        if (!Number.isFinite(criticalValue))
+          throw new Error("Luminize critical damage is not finite")
+        critical = {
+          value: criticalValue,
+          factorResults: {
+            ...nonCritical.factorResults,
+            luminizeCritical,
+          },
+        }
+        rate = finiteSum([
+          damage.luminizeCriticalRate ?? 0,
+          ...take("luminize-critical-rate"),
+        ])
+        criticalSemantics = "critical-hit"
+      }
     } else {
       const anomalyCriticalSelection = selectAnomalyCritical(damage)
       const anomalyCritical = {
