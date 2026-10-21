@@ -388,8 +388,18 @@ export type StaticDamageParameters = StaticDamageCommon &
       }
     | (StaticAnomalyCommon & {
         readonly kind: "anomaly" | "disorder" | "vortex" | "anomaly-settlement"
+        /** 旧异常暴击区；子类未提供对应字段时作为回退基线。 */
         readonly anomalyCriticalRate: number
         readonly anomalyCriticalDamage: readonly number[]
+        /** 紊乱独立暴击区；缺省回退旧异常暴击区。 */
+        readonly disorderCriticalRate?: number
+        readonly disorderCriticalDamage?: readonly number[]
+        /** 乱流独立暴击区；缺省回退旧异常暴击区。 */
+        readonly vortexCriticalRate?: number
+        readonly vortexCriticalDamage?: readonly number[]
+        /** 异放独立暴击区；缺省回退旧异常暴击区。 */
+        readonly anomalySettlementCriticalRate?: number
+        readonly anomalySettlementCriticalDamage?: readonly number[]
       })
     | (StaticAnomalyCommon & {
         readonly kind: "luminize"

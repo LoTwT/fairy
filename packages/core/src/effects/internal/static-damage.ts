@@ -99,12 +99,33 @@ export function validateDamageFields(
   if (kind === "sheer") fields.push("sheerDamageBonus")
   else fields.push("defense")
   if (kind === "sharpen") fields.push("sharpenDamageBonus")
+  // 子类暴击字段可选；仅允许当前伤害种类对应的子类字段，避免静默忽略错配字段。
+  let subtypeCriticalRateField: string | undefined
+  let subtypeCriticalDamageField: string | undefined
   if (kind !== "regular" && kind !== "sheer" && kind !== "sharpen") {
     fields.push("anomalyDamageBonus", "refringe")
     if (kind === "luminize") fields.push("luminizeMultiplier")
-    else fields.push("anomalyCriticalRate", "anomalyCriticalDamage")
+    else {
+      fields.push("anomalyCriticalRate", "anomalyCriticalDamage")
+      if (kind === "disorder") {
+        subtypeCriticalRateField = "disorderCriticalRate"
+        subtypeCriticalDamageField = "disorderCriticalDamage"
+      } else if (kind === "vortex") {
+        subtypeCriticalRateField = "vortexCriticalRate"
+        subtypeCriticalDamageField = "vortexCriticalDamage"
+      } else if (kind === "anomaly-settlement") {
+        subtypeCriticalRateField = "anomalySettlementCriticalRate"
+        subtypeCriticalDamageField = "anomalySettlementCriticalDamage"
+      }
+    }
   }
-  rejectUnknownFields(object, fields, checks, "static damage parameters")
+  const optionalFields =
+    subtypeCriticalRateField === undefined ||
+    subtypeCriticalDamageField === undefined
+      ? []
+      : [subtypeCriticalRateField, subtypeCriticalDamageField]
+  const allowedFields = [...fields, ...optionalFields]
+  rejectUnknownFields(object, allowedFields, checks, "static damage parameters")
   if (Array.isArray(object["damageBonus"])) {
     validateNumberArray(object["damageBonus"], {
       ...checks,
@@ -164,6 +185,23 @@ export function validateDamageFields(
       object["anomalyCriticalRate"],
       { ...checks, pointer: "/damage/anomalyCriticalRate" },
       "anomaly critical rate",
+    )
+  if (
+    subtypeCriticalDamageField !== undefined &&
+    object[subtypeCriticalDamageField] !== undefined
+  )
+    validateNumberArray(object[subtypeCriticalDamageField], {
+      ...checks,
+      pointer: `/damage/${subtypeCriticalDamageField}`,
+    })
+  if (
+    subtypeCriticalRateField !== undefined &&
+    object[subtypeCriticalRateField] !== undefined
+  )
+    expectFiniteNumber(
+      object[subtypeCriticalRateField],
+      { ...checks, pointer: `/damage/${subtypeCriticalRateField}` },
+      "subtype critical rate",
     )
   const nestedFields: Readonly<
     Record<
@@ -766,6 +804,77 @@ function finiteSum(values: readonly number[]): number {
   return sum
 }
 
+type AnomalyCriticalDamageParameters = Extract<
+  StaticDamageParameters,
+  {
+    readonly kind: "anomaly" | "disorder" | "vortex" | "anomaly-settlement"
+  }
+>
+
+interface AnomalyCriticalSelection {
+  readonly rate: number
+  readonly rateChannel: FactorChannel
+  readonly damage: readonly number[]
+  readonly damageChannel: FactorChannel
+}
+
+/** 子类字段缺失时逐项回退旧异常暴击区；存在时只消费该子类通道。 */
+function selectAnomalyCritical(
+  damage: AnomalyCriticalDamageParameters,
+): AnomalyCriticalSelection {
+  switch (damage.kind) {
+    case "disorder":
+      return {
+        rate: damage.disorderCriticalRate ?? damage.anomalyCriticalRate,
+        rateChannel:
+          damage.disorderCriticalRate === undefined
+            ? "anomaly-critical-rate"
+            : "disorder-critical-rate",
+        damage: damage.disorderCriticalDamage ?? damage.anomalyCriticalDamage,
+        damageChannel:
+          damage.disorderCriticalDamage === undefined
+            ? "anomaly-critical-damage"
+            : "disorder-critical-damage",
+      }
+    case "vortex":
+      return {
+        rate: damage.vortexCriticalRate ?? damage.anomalyCriticalRate,
+        rateChannel:
+          damage.vortexCriticalRate === undefined
+            ? "anomaly-critical-rate"
+            : "turbulence-critical-rate",
+        damage: damage.vortexCriticalDamage ?? damage.anomalyCriticalDamage,
+        damageChannel:
+          damage.vortexCriticalDamage === undefined
+            ? "anomaly-critical-damage"
+            : "turbulence-critical-damage",
+      }
+    case "anomaly-settlement":
+      return {
+        rate:
+          damage.anomalySettlementCriticalRate ?? damage.anomalyCriticalRate,
+        rateChannel:
+          damage.anomalySettlementCriticalRate === undefined
+            ? "anomaly-critical-rate"
+            : "anomaly-settlement-critical-rate",
+        damage:
+          damage.anomalySettlementCriticalDamage ??
+          damage.anomalyCriticalDamage,
+        damageChannel:
+          damage.anomalySettlementCriticalDamage === undefined
+            ? "anomaly-critical-damage"
+            : "anomaly-settlement-critical-damage",
+      }
+    case "anomaly":
+      return {
+        rate: damage.anomalyCriticalRate,
+        rateChannel: "anomaly-critical-rate",
+        damage: damage.anomalyCriticalDamage,
+        damageChannel: "anomaly-critical-damage",
+      }
+  }
+}
+
 export function calculateDamageFromEvaluation(
   damage: StaticDamageParameters,
   hit: HitContext,
@@ -981,11 +1090,12 @@ export function calculateDamageFromEvaluation(
       rate = 0
       criticalSemantics = "no-critical-settlement"
     } else {
+      const anomalyCriticalSelection = selectAnomalyCritical(damage)
       const anomalyCritical = {
         isAnomalyCritical: false,
         anomalyCriticalDamageContributions: [
-          ...damage.anomalyCriticalDamage,
-          ...take("anomaly-critical-damage"),
+          ...anomalyCriticalSelection.damage,
+          ...take(anomalyCriticalSelection.damageChannel),
         ],
       }
       nonCritical = anomalyDamageFormula.calculate({
@@ -997,8 +1107,8 @@ export function calculateDamageFromEvaluation(
         anomalyCritical: { ...anomalyCritical, isAnomalyCritical: true },
       })
       rate = finiteSum([
-        damage.anomalyCriticalRate,
-        ...take("anomaly-critical-rate"),
+        anomalyCriticalSelection.rate,
+        ...take(anomalyCriticalSelection.rateChannel),
       ])
       criticalSemantics = "critical-hit"
     }
