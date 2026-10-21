@@ -75,6 +75,38 @@ import {
 } from "./source.ts"
 
 const identityMap: Readonly<Record<string, string | null>> = identities
+
+export type SourceEntityCategory = "agents" | "w-engines" | "drive-discs"
+export type SourceEntityKey = `${SourceEntityCategory}:${string}`
+
+/**
+ * 上游重复或改名 slug 到 Fairy 稳定 slug 的唯一别名表。
+ *
+ * 3.2.5 起 ZZZ-HP 同时保留同一实体的新旧 slug（Weeping_Gemini /
+ * Weapon_A_Common_08、The_Restrained / Weapon_S_1141），并把
+ * Promotion Stats 改名为 Promotion_Stats。catalogEntityId 与 optionId
+ * 的实体段必须沿用消费者已持久化的稳定 slug，因此这里只登记
+ * alias → canonical；canonical 自身不进入别名表。
+ */
+export const SOURCE_ENTITY_ALIASES: Readonly<
+  Partial<Record<SourceEntityKey, SourceEntityKey>>
+> = {
+  "w-engines:Weeping_Gemini": "w-engines:Weapon_A_Common_08",
+  "w-engines:The_Restrained": "w-engines:Weapon_S_1141",
+  "w-engines:Promotion_Stats": "w-engines:Promotion Stats",
+}
+
+/**
+ * 把上游实体 key 解析为 Fairy 稳定 canonical key。未登记别名的 slug
+ * 原样返回；所有实体身份与选项身份都只经由这一处解析。
+ */
+export function canonicalSourceEntityKey(
+  category: SourceEntityCategory,
+  sourceId: string,
+): SourceEntityKey {
+  const key: SourceEntityKey = `${category}:${sourceId}`
+  return SOURCE_ENTITY_ALIASES[key] ?? key
+}
 /** 独立目标覆盖表：subcategoryId → 实际增益分类（来自 SOURCE_SEMANTICS）。 */
 const independentTargetCategories: ReadonlyMap<string, SkillCategory> = new Map(
   Object.values(SOURCE_SEMANTICS)
@@ -457,7 +489,10 @@ export { levelValue }
 const idPart = (value: string) => encodeURIComponent(value)
 export interface SourceRecord {
   category: "agents" | "w-engines" | "drive-discs"
+  /** Fairy 稳定 slug：实体身份、语义登记与 optionId 的实体段。 */
   entityId: string
+  /** 实际命中的上游 slug；别名实体可能不同于稳定 slug。 */
+  sourceEntityId: string
   rank: number
   rankKind: "mindscape" | "refinement" | "fixed" | "setPieces"
   pointer: string
@@ -679,7 +714,7 @@ function verifySingleClauseContextGuard(
   const contextRecords = records.filter(
     (record) =>
       record.category === "agents" &&
-      record.entityId === entity.upstreamId &&
+      record.sourceEntityId === entity.upstreamId &&
       record.rankKind === "mindscape" &&
       record.rank === context.rank,
   )
@@ -934,7 +969,7 @@ function verifyWengineRefinementContextGuard(
       const matches = records.filter(
         (record) =>
           record.category === "w-engines" &&
-          record.entityId === entity.upstreamId &&
+          record.sourceEntityId === entity.upstreamId &&
           record.rankKind === "refinement" &&
           record.rank === index + 1 &&
           record.raw.id === expected.effectId,
@@ -969,7 +1004,7 @@ function verifyWengineRefinementContextGuard(
   const conflict = records.find(
     (record) =>
       record.category === "w-engines" &&
-      record.entityId === entity.upstreamId &&
+      record.sourceEntityId === entity.upstreamId &&
       record.rankKind === "refinement" &&
       (guard.stats.includes(record.raw.stat) ||
         (record.normalized !== undefined &&
@@ -1147,7 +1182,7 @@ function verifyUnsupportedOptionRegistration(
     const conflict = records.find(
       (record) =>
         record.category === "w-engines" &&
-        record.entityId === entity.upstreamId &&
+        record.sourceEntityId === entity.upstreamId &&
         record.rankKind === "refinement",
     )
     if (conflict)
@@ -1178,6 +1213,15 @@ export function collectSource(
     ["drive-discs", "driveDiscs", "drive-disc"],
   ] as const) {
     const seen = new Set<string>()
+    const canonicalSourceIds = new Set(
+      data[sourceKey]
+        .map((candidate) => candidate.id)
+        .filter(
+          (sourceId) =>
+            canonicalSourceEntityKey(category, sourceId) ===
+            `${category}:${sourceId}`,
+        ),
+    )
     for (const [ei, raw] of data[sourceKey].entries()) {
       if (seen.has(raw.id))
         throw new Error(`Duplicate source entity: ${category}/${raw.id}`)
@@ -1185,10 +1229,32 @@ export function collectSource(
       const key = `${category}:${raw.id}`
       if (!(key in identityMap))
         throw new Error(`Unreviewed entity identity: ${key}`)
-      const entityId = identityMap[key],
+      const canonicalKey = canonicalSourceEntityKey(category, raw.id)
+      if (!canonicalKey.startsWith(`${category}:`))
+        throw new Error(
+          `Source entity alias crosses categories: ${key} -> ${canonicalKey}`,
+        )
+      if (!(canonicalKey in identityMap))
+        throw new Error(
+          `Unreviewed canonical entity identity: ${key} -> ${canonicalKey}`,
+        )
+      if (identityMap[canonicalKey] !== identityMap[key])
+        throw new Error(
+          `Source entity alias identity drift: ${key} -> ${canonicalKey}`,
+        )
+      const canonicalEntityId = canonicalKey.slice(category.length + 1)
+      // 上游同时保留 canonical 与 alias 时只编译 canonical 一份，避免同一
+      // Nanoka 实体重复生成实体和选项；上游只剩 alias 时仍使用 canonical
+      // slug 生成稳定身份。
+      if (
+        canonicalEntityId !== raw.id &&
+        canonicalSourceIds.has(canonicalEntityId)
+      )
+        continue
+      const entityId = identityMap[canonicalKey],
         identity: SourceIdentity | null = entityId ? { kind, entityId } : null
       const catalogEntity: StaticCatalogEntity = {
-        catalogEntityId: key,
+        catalogEntityId: canonicalKey,
         upstreamId: raw.id,
         name: raw.name,
         identity,
@@ -1329,7 +1395,7 @@ export function collectSource(
         }
         packs.push({
           pointer: entry.pointer,
-          catalogEntityId: key,
+          catalogEntityId: canonicalKey,
           rank: entry.rank,
           rankKind: entry.rankKind,
           count: collected.length,
@@ -1351,7 +1417,8 @@ export function collectSource(
         for (const record of collected) {
           records.push({
             category,
-            entityId: raw.id,
+            entityId: canonicalEntityId,
+            sourceEntityId: raw.id,
             rank: entry.rank,
             rankKind: entry.rankKind,
             ...record,
