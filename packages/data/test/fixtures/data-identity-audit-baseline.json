@@ -1,0 +1,972 @@
+{
+  "schemaVersion": 1,
+  "problems": [
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:Roxy/额外能力：辉金心脏 · dmgBonus",
+      "details": {
+        "catalogEntityId": "agents:Roxy",
+        "name": "额外能力：辉金心脏 · dmgBonus",
+        "optionIds": [
+          "agents:Roxy:mindscape:0:blk-muppaptc-wl5q5a:eff-muppaptc-fn832t",
+          "agents:Roxy:mindscape:0:blk-muppaptc-wl5q5a:eff-muppd7di-hf2fx8"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:alexandrina/影画1 · penRate",
+      "details": {
+        "catalogEntityId": "agents:alexandrina",
+        "name": "影画1 · penRate",
+        "optionIds": [
+          "agents:alexandrina:mindscape:1:blk-legacy:eff-ms47glda-9u54ip",
+          "agents:alexandrina:mindscape:1:blk-legacy:legacy-team-penRate"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:alexandrina/核心被动：迷你毁灭拍档 · penRate",
+      "details": {
+        "catalogEntityId": "agents:alexandrina",
+        "name": "核心被动：迷你毁灭拍档 · penRate",
+        "optionIds": [
+          "agents:alexandrina:mindscape:0:blk-ms46w5pz-zdpplb:eff-ms46w5pz-93ry6b",
+          "agents:alexandrina:mindscape:0:blk-ms46w5pz-zdpplb:eff-ms46xqjt-g3gxeb"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:anton/核心被动：兄弟齐心！ · skillDmgBonus",
+      "details": {
+        "catalogEntityId": "agents:anton",
+        "name": "核心被动：兄弟齐心！ · skillDmgBonus",
+        "optionIds": [
+          "agents:anton:mindscape:0:blk-legacy:eff-ms4ewpnb-3tfl3u",
+          "agents:anton:mindscape:0:blk-legacy:legacy-self-skillDmgBonus"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:aria/影画1 · anomalyReleaseCritRate",
+      "details": {
+        "catalogEntityId": "agents:aria",
+        "name": "影画1 · anomalyReleaseCritRate",
+        "optionIds": [
+          "agents:aria:mindscape:1:blk-legacy:eff-ms36xf73-q2nimy",
+          "agents:aria:mindscape:1:blk-legacy:eff-ms36z5gn-gdbybu",
+          "agents:aria:mindscape:1:blk-legacy:legacy-self-anomalyReleaseCritRate"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:aria/影画2 · reduceDefense",
+      "details": {
+        "catalogEntityId": "agents:aria",
+        "name": "影画2 · reduceDefense",
+        "optionIds": [
+          "agents:aria:mindscape:2:blk-legacy:eff-ms371amr-rg003c",
+          "agents:aria:mindscape:2:blk-legacy:legacy-self-reduceDefense"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:aria/核心被动：控场核心 · anomalyReleaseMult",
+      "details": {
+        "catalogEntityId": "agents:aria",
+        "name": "核心被动：控场核心 · anomalyReleaseMult",
+        "optionIds": [
+          "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36k7q1-vqttu0",
+          "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36muwl-79wv54",
+          "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36nek6-psc6pl",
+          "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36o0uv-yslwma",
+          "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36oy6h-izqgcq",
+          "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36pcqr-9tpwhs"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:astrayao/影画2 · atk",
+      "details": {
+        "catalogEntityId": "agents:astrayao",
+        "name": "影画2 · atk",
+        "optionIds": [
+          "agents:astrayao:mindscape:2:blk-legacy:eff-muhxkum2-5x20c1",
+          "agents:astrayao:mindscape:2:blk-legacy:legacy-team-atk"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:burnice/强化特殊技：灼热抛接法 · anomalyReleaseMult",
+      "details": {
+        "catalogEntityId": "agents:burnice",
+        "name": "强化特殊技：灼热抛接法 · anomalyReleaseMult",
+        "optionIds": [
+          "agents:burnice:mindscape:0:blk-legacy:eff-ms4ndcu6-7xjc3p",
+          "agents:burnice:mindscape:0:blk-legacy:legacy-self-anomalyReleaseMult"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:burnice/影画6 · resPen",
+      "details": {
+        "catalogEntityId": "agents:burnice",
+        "name": "影画6 · resPen",
+        "optionIds": [
+          "agents:burnice:mindscape:6:blk-legacy:eff-ms4nz9bh-p9r2ch",
+          "agents:burnice:mindscape:6:blk-legacy:eff-ms4o1am3-3r32pa"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:caesar/影画6 · critRate",
+      "details": {
+        "catalogEntityId": "agents:caesar",
+        "name": "影画6 · critRate",
+        "optionIds": [
+          "agents:caesar:mindscape:6:blk-legacy:eff-ms20pgqx-2xebxp",
+          "agents:caesar:mindscape:6:blk-legacy:legacy-self-critRate"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:cissia/影画1 · reduceDefense",
+      "details": {
+        "catalogEntityId": "agents:cissia",
+        "name": "影画1 · reduceDefense",
+        "optionIds": [
+          "agents:cissia:mindscape:1:blk-legacy:eff-ms4lkt33-igdjwu",
+          "agents:cissia:mindscape:1:blk-legacy:legacy-team-reduceDefense"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:cissia/影画1 · resPen",
+      "details": {
+        "catalogEntityId": "agents:cissia",
+        "name": "影画1 · resPen",
+        "optionIds": [
+          "agents:cissia:mindscape:1:blk-legacy:eff-muhxytb9-dqatvv",
+          "agents:cissia:mindscape:1:blk-legacy:eff-muhxz5bp-xz0z4z"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:cissia/核心被动：致命私酿 · reduceDefense",
+      "details": {
+        "catalogEntityId": "agents:cissia",
+        "name": "核心被动：致命私酿 · reduceDefense",
+        "optionIds": [
+          "agents:cissia:mindscape:0:blk-ms4l86mv-s5y0rv:eff-ms4l86mv-xyl5lp",
+          "agents:cissia:mindscape:0:blk-ms4l86mv-s5y0rv:eff-ms4lam8x-a2cpjw"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:cissia/额外能力：毒素发酵 · critDmg",
+      "details": {
+        "catalogEntityId": "agents:cissia",
+        "name": "额外能力：毒素发酵 · critDmg",
+        "optionIds": [
+          "agents:cissia:mindscape:0:blk-ms4lgth6-v31h36:eff-ms4lgth6-ol9dap",
+          "agents:cissia:mindscape:0:blk-ms4lgth6-v31h36:eff-ms4lh72h-qsjtc2"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:claret/核心被动：苍白血宴 · critRate",
+      "details": {
+        "catalogEntityId": "agents:claret",
+        "name": "核心被动：苍白血宴 · critRate",
+        "optionIds": [
+          "agents:claret:mindscape:0:blk-mtrf598z-wr4jqt:eff-mtrf598z-80y7hh",
+          "agents:claret:mindscape:0:blk-mtrf598z-wr4jqt:eff-mtskqyss-1toefw"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:grace/脉冲 · anomalyReleaseMult",
+      "details": {
+        "catalogEntityId": "agents:grace",
+        "name": "脉冲 · anomalyReleaseMult",
+        "optionIds": [
+          "agents:grace:mindscape:0:blk-legacy:eff-ms4o4p7x-8p5v35",
+          "agents:grace:mindscape:0:blk-legacy:eff-ms4o6v31-ilt6xn"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:hugo/核心被动：终末裁决 · atk",
+      "details": {
+        "catalogEntityId": "agents:hugo",
+        "name": "核心被动：终末裁决 · atk",
+        "optionIds": [
+          "agents:hugo:mindscape:0:blk-legacy:eff-mv3i5kzj-9tpr5c",
+          "agents:hugo:mindscape:0:blk-legacy:eff-mv3i68sv-97l5hb"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:hugo/核心被动：终末裁决 · settlementDmgMult",
+      "details": {
+        "catalogEntityId": "agents:hugo",
+        "name": "核心被动：终末裁决 · settlementDmgMult",
+        "optionIds": [
+          "agents:hugo:mindscape:0:blk-legacy:eff-ms4hn7kg-sa5uie",
+          "agents:hugo:mindscape:0:blk-legacy:eff-ms4iqocd-9knop2",
+          "agents:hugo:mindscape:0:blk-legacy:eff-ms4irr6z-588yvn"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:hugo/额外能力：终焉序曲 · skillDmgBonus",
+      "details": {
+        "catalogEntityId": "agents:hugo",
+        "name": "额外能力：终焉序曲 · skillDmgBonus",
+        "optionIds": [
+          "agents:hugo:mindscape:0:blk-ms4itkj9-otsdv0:eff-ms4itkj9-dm9l27",
+          "agents:hugo:mindscape:0:blk-ms4itkj9-otsdv0:eff-ms4iued7-6qrxka",
+          "agents:hugo:mindscape:0:blk-ms4itkj9-otsdv0:eff-ms4iv3c1-2k8a52"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:jane/核心被动：洞察 · anomalyCritRate",
+      "details": {
+        "catalogEntityId": "agents:jane",
+        "name": "核心被动：洞察 · anomalyCritRate",
+        "optionIds": [
+          "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34bcgu-8f1m63",
+          "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34ci0p-usidux"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:jane/潜能觉醒：致命舞步 · anomalyCritDmg",
+      "details": {
+        "catalogEntityId": "agents:jane",
+        "name": "潜能觉醒：致命舞步 · anomalyCritDmg",
+        "optionIds": [
+          "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-ms34gorp-xrbl8x",
+          "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-ms34hzuh-214aho"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:jufufu/核心被动：虎虎生威 · critDmg",
+      "details": {
+        "catalogEntityId": "agents:jufufu",
+        "name": "核心被动：虎虎生威 · critDmg",
+        "optionIds": [
+          "agents:jufufu:mindscape:0:blk-legacy:eff-ms4bvw63-5q1zql",
+          "agents:jufufu:mindscape:0:blk-legacy:legacy-team-critDmg"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:jufufu/核心被动：虎虎生威 · skillDmgBonus",
+      "details": {
+        "catalogEntityId": "agents:jufufu",
+        "name": "核心被动：虎虎生威 · skillDmgBonus",
+        "optionIds": [
+          "agents:jufufu:mindscape:0:blk-legacy:eff-ms4bx9kz-lkgb3l",
+          "agents:jufufu:mindscape:0:blk-legacy:eff-ms4bxljq-jo23px"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:koleda/锐暴伤害提升12%或爆伤提升35% · critDmg",
+      "details": {
+        "catalogEntityId": "agents:koleda",
+        "name": "锐暴伤害提升12%或爆伤提升35% · critDmg",
+        "optionIds": [
+          "agents:koleda:mindscape:0:blk-mttp1p1j-9ermke:eff-mttrnusu-h58op3",
+          "agents:koleda:mindscape:0:blk-mttp1p1j-9ermke:eff-mttrobl0-dc0cuk"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:lighter/影画2 · dmgBonus",
+      "details": {
+        "catalogEntityId": "agents:lighter",
+        "name": "影画2 · dmgBonus",
+        "optionIds": [
+          "agents:lighter:mindscape:2:blk-legacy:eff-ms4b0whf-x6n1xw",
+          "agents:lighter:mindscape:2:blk-legacy:eff-ms4b2g6y-2q6n1w"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:lighter/效果块 1 · directDmgMult",
+      "details": {
+        "catalogEntityId": "agents:lighter",
+        "name": "效果块 1 · directDmgMult",
+        "optionIds": [
+          "agents:lighter:mindscape:6:blk-ms4b3uc2-5gulzo:eff-ms4b3uc2-oeaiao",
+          "agents:lighter:mindscape:6:blk-ms4b3uc2-5gulzo:eff-ms4b4td7-wexvvf"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:lighter/额外能力：斗志昂扬 · dmgBonus",
+      "details": {
+        "catalogEntityId": "agents:lighter",
+        "name": "额外能力：斗志昂扬 · dmgBonus",
+        "optionIds": [
+          "agents:lighter:mindscape:0:blk-ms4aoho0-grnxav:eff-ms4aoho0-q3wbdv",
+          "agents:lighter:mindscape:0:blk-ms4aoho0-grnxav:eff-ms4atnfh-29yr0r"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:lucia/合唱 · pierce",
+      "details": {
+        "catalogEntityId": "agents:lucia",
+        "name": "合唱 · pierce",
+        "optionIds": [
+          "agents:lucia:mindscape:0:blk-legacy:eff-ms46goq2-wtmb9a",
+          "agents:lucia:mindscape:0:blk-legacy:eff-ms46h2gh-mbmhuc"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:lucy/强化特殊技·加油！ · atk",
+      "details": {
+        "catalogEntityId": "agents:lucy",
+        "name": "强化特殊技·加油！ · atk",
+        "optionIds": [
+          "agents:lucy:mindscape:0:blk-legacy:eff-ms384fjz-fgct7r",
+          "agents:lucy:mindscape:0:blk-legacy:legacy-team-atk"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:nangongyu/核心被动：天才偶像 · anomalyReleaseMult",
+      "details": {
+        "catalogEntityId": "agents:nangongyu",
+        "name": "核心被动：天才偶像 · anomalyReleaseMult",
+        "optionIds": [
+          "agents:nangongyu:mindscape:0:blk-ms4cegmd-bwnttd:eff-ms4cey14-kzw7xx",
+          "agents:nangongyu:mindscape:0:blk-ms4cegmd-bwnttd:eff-ms4clm2r-e6xquw"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:nekomata/潜能觉醒：夜行习性 · critDmg",
+      "details": {
+        "catalogEntityId": "agents:nekomata",
+        "name": "潜能觉醒：夜行习性 · critDmg",
+        "optionIds": [
+          "agents:nekomata:mindscape:0:blk-ms4f5yzr-3tuoc1:eff-ms4f5yzr-pivfr6",
+          "agents:nekomata:mindscape:0:blk-ms4f5yzr-3tuoc1:eff-ms4f845b-c51ysw"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:norma/额外能力：集群优势 · atk",
+      "details": {
+        "catalogEntityId": "agents:norma",
+        "name": "额外能力：集群优势 · atk",
+        "optionIds": [
+          "agents:norma:mindscape:0:blk-ms49bk7t-2it4hj:eff-ms49clux-gshiec",
+          "agents:norma:mindscape:0:blk-ms49bk7t-2it4hj:eff-ms49d3nj-n7lrtw"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:orphie&magus/核心被动：衔风驭火 · atk",
+      "details": {
+        "catalogEntityId": "agents:orphie&magus",
+        "name": "核心被动：衔风驭火 · atk",
+        "optionIds": [
+          "agents:orphie%26magus:mindscape:0:blk-legacy:eff-ms4hwaiu-jl4j7l",
+          "agents:orphie%26magus:mindscape:0:blk-legacy:eff-ms4hwl0k-dqevpc"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:pheony/核心被动 · anomalyCritDmg",
+      "details": {
+        "catalogEntityId": "agents:pheony",
+        "name": "核心被动 · anomalyCritDmg",
+        "optionIds": [
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-2",
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-4"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:pheony/核心被动 · anomalyCritRate",
+      "details": {
+        "catalogEntityId": "agents:pheony",
+        "name": "核心被动 · anomalyCritRate",
+        "optionIds": [
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-1",
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-3"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:pheony/核心被动 · anomalyReleaseCritDmg",
+      "details": {
+        "catalogEntityId": "agents:pheony",
+        "name": "核心被动 · anomalyReleaseCritDmg",
+        "optionIds": [
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-10",
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-6",
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-9"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:pheony/核心被动 · anomalyReleaseCritRate",
+      "details": {
+        "catalogEntityId": "agents:pheony",
+        "name": "核心被动 · anomalyReleaseCritRate",
+        "optionIds": [
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-13",
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-16"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:pheony/核心被动 · radianceCritDmg",
+      "details": {
+        "catalogEntityId": "agents:pheony",
+        "name": "核心被动 · radianceCritDmg",
+        "optionIds": [
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-12",
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-8"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:pheony/核心被动 · radianceCritRate",
+      "details": {
+        "catalogEntityId": "agents:pheony",
+        "name": "核心被动 · radianceCritRate",
+        "optionIds": [
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-15",
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-18"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:pheony/核心被动 · turbulenceCritDmg",
+      "details": {
+        "catalogEntityId": "agents:pheony",
+        "name": "核心被动 · turbulenceCritDmg",
+        "optionIds": [
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-11",
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-7"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:pheony/核心被动 · turbulenceCritRate",
+      "details": {
+        "catalogEntityId": "agents:pheony",
+        "name": "核心被动 · turbulenceCritRate",
+        "optionIds": [
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-14",
+          "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-17"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:piper/影画2 · skillDmgBonus",
+      "details": {
+        "catalogEntityId": "agents:piper",
+        "name": "影画2 · skillDmgBonus",
+        "optionIds": [
+          "agents:piper:mindscape:2:blk-legacy:eff-ms4mq9bw-0naipi",
+          "agents:piper:mindscape:2:blk-legacy:legacy-self-skillDmgBonus"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:promeia/影画6 · resPen",
+      "details": {
+        "catalogEntityId": "agents:promeia",
+        "name": "影画6 · resPen",
+        "optionIds": [
+          "agents:promeia:mindscape:6:blk-legacy:eff-ms4t872e-rsnirk",
+          "agents:promeia:mindscape:6:blk-legacy:eff-ms4t8s4d-dkj6s9"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:pulchra/影画6 · skillDmgBonus",
+      "details": {
+        "catalogEntityId": "agents:pulchra",
+        "name": "影画6 · skillDmgBonus",
+        "optionIds": [
+          "agents:pulchra:mindscape:6:blk-legacy:eff-ms485jjx-zkbap8",
+          "agents:pulchra:mindscape:6:blk-legacy:legacy-self-skillDmgBonus"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:remiel/影画1 · anomalyDmgBonus",
+      "details": {
+        "catalogEntityId": "agents:remiel",
+        "name": "影画1 · anomalyDmgBonus",
+        "optionIds": [
+          "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjecu-l3ocgm",
+          "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:remiel/额外能力：芳菲之邀 · atk",
+      "details": {
+        "catalogEntityId": "agents:remiel",
+        "name": "额外能力：芳菲之邀 · atk",
+        "optionIds": [
+          "agents:remiel:mindscape:0:blk-ms7td2gs-rk1vtd:eff-ms7td2gs-4vbpdh",
+          "agents:remiel:mindscape:0:blk-ms7td2gs-rk1vtd:eff-ms7tgbsu-obb50g",
+          "agents:remiel:mindscape:0:blk-ms7td2gs-rk1vtd:eff-ms7tgtyi-fug1mx"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:s0anby/核心被动：电位差 · critDmg",
+      "details": {
+        "catalogEntityId": "agents:s0anby",
+        "name": "核心被动：电位差 · critDmg",
+        "optionIds": [
+          "agents:s0anby:mindscape:0:blk-legacy:eff-ms4jeajl-rbup96",
+          "agents:s0anby:mindscape:0:blk-legacy:eff-ms4jp2fs-cmvkjd"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:s0anby/潜能觉醒：电脉冲 · skillDmgBonus",
+      "details": {
+        "catalogEntityId": "agents:s0anby",
+        "name": "潜能觉醒：电脉冲 · skillDmgBonus",
+        "optionIds": [
+          "agents:s0anby:mindscape:0:blk-ms4jrci5-unykui:eff-ms4jrci5-nxk6sq",
+          "agents:s0anby:mindscape:0:blk-ms4jrci5-unykui:eff-ms4jtmex-gz9fiw"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:soldier11/额外能力：燎原 · dmgBonus",
+      "details": {
+        "catalogEntityId": "agents:soldier11",
+        "name": "额外能力：燎原 · dmgBonus",
+        "optionIds": [
+          "agents:soldier11:mindscape:0:blk-ms0etqtb-lx74vp:eff-ms0etqtb-isxj1o",
+          "agents:soldier11:mindscape:0:blk-ms0etqtb-lx74vp:eff-ms0euhcc-auiadr"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:velina/影画1 · resPen",
+      "details": {
+        "catalogEntityId": "agents:velina",
+        "name": "影画1 · resPen",
+        "optionIds": [
+          "agents:velina:mindscape:1:blk-legacy:eff-ms4tugas-su2nrt",
+          "agents:velina:mindscape:1:blk-legacy:legacy-self-resPen",
+          "agents:velina:mindscape:1:blk-legacy:legacy-team-resPen"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:velina/核心被动：风华盈袖 · anomalyReleaseMult",
+      "details": {
+        "catalogEntityId": "agents:velina",
+        "name": "核心被动：风华盈袖 · anomalyReleaseMult",
+        "optionIds": [
+          "agents:velina:mindscape:0:blk-legacy:eff-ms4tphp6-6zyuxs",
+          "agents:velina:mindscape:0:blk-legacy:legacy-team-anomalyReleaseMult"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:vivian/核心被动：命运悲歌 · anomalyReleaseMult",
+      "details": {
+        "catalogEntityId": "agents:vivian",
+        "name": "核心被动：命运悲歌 · anomalyReleaseMult",
+        "optionIds": [
+          "agents:vivian:mindscape:0:blk-ms4qu5nj-ntz0qy:eff-ms4qu5nj-q9gcnu",
+          "agents:vivian:mindscape:0:blk-ms4qu5nj-ntz0qy:eff-ms4r96cm-87m9wb",
+          "agents:vivian:mindscape:0:blk-ms4qu5nj-ntz0qy:eff-ms4ra566-g1q1kj",
+          "agents:vivian:mindscape:0:blk-ms4qu5nj-ntz0qy:eff-ms4rc4nm-4o4gn1"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:xigelide/额外能力：天际联军 · atk",
+      "details": {
+        "catalogEntityId": "agents:xigelide",
+        "name": "额外能力：天际联军 · atk",
+        "optionIds": [
+          "agents:xigelide:mindscape:0:blk-ms4mk6kt-n62g7i:eff-ms4mk6kt-12ti8n",
+          "agents:xigelide:mindscape:0:blk-ms4mk6kt-n62g7i:eff-ms4mkizw-3bhgvr"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:zhao/影画2 · inCombatAtkPercent",
+      "details": {
+        "catalogEntityId": "agents:zhao",
+        "name": "影画2 · inCombatAtkPercent",
+        "optionIds": [
+          "agents:zhao:mindscape:2:blk-legacy:legacy-self-inCombatAtkPercent",
+          "agents:zhao:mindscape:2:blk-legacy:legacy-team-inCombatAtkPercent"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:zhao/额外能力：凝聚力 · dmgBonus",
+      "details": {
+        "catalogEntityId": "agents:zhao",
+        "name": "额外能力：凝聚力 · dmgBonus",
+        "optionIds": [
+          "agents:zhao:mindscape:0:blk-ms20xuk2-ki4w63:eff-ms20xuk2-2ul832",
+          "agents:zhao:mindscape:0:blk-ms20xuk2-ki4w63:eff-ms20z2gd-3aokv2"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:zhuyuan/核心被动：特种弹药 · skillDmgBonus",
+      "details": {
+        "catalogEntityId": "agents:zhuyuan",
+        "name": "核心被动：特种弹药 · skillDmgBonus",
+        "optionIds": [
+          "agents:zhuyuan:mindscape:0:blk-legacy:eff-ms4heeas-wgpl8g",
+          "agents:zhuyuan:mindscape:0:blk-legacy:legacy-self-skillDmgBonus"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/drive-discs:SuitChaosMetal/4件套 · critDmg",
+      "details": {
+        "catalogEntityId": "drive-discs:SuitChaosMetal",
+        "name": "4件套 · critDmg",
+        "optionIds": [
+          "drive-discs:SuitChaosMetal:setPieces:4:blk-legacy:eff-ms0ff1r9-oej0eo",
+          "drive-discs:SuitChaosMetal:setPieces:4:blk-legacy:legacy-self-critDmg"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/drive-discs:SuitShadow/2件套 · skillDmgBonus",
+      "details": {
+        "catalogEntityId": "drive-discs:SuitShadow",
+        "name": "2件套 · skillDmgBonus",
+        "optionIds": [
+          "drive-discs:SuitShadow:setPieces:2:blk-ms0codb9-lx4iit:eff-ms0dofiv-t59ar0",
+          "drive-discs:SuitShadow:setPieces:2:blk-ms0codb9-lx4iit:legacy-self-skillDmgBonus"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/drive-discs:SuitThornedRose/4件套 · critRate",
+      "details": {
+        "catalogEntityId": "drive-discs:SuitThornedRose",
+        "name": "4件套 · critRate",
+        "optionIds": [
+          "drive-discs:SuitThornedRose:setPieces:4:blk-ms8fiqcq-qme961:eff-ms8fjkgx-e6jux0",
+          "drive-discs:SuitThornedRose:setPieces:4:blk-ms8fiqcq-qme961:eff-ms8fjv92-zydv2t"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/drive-discs:chaos-jazz/4件套 · dmgBonus",
+      "details": {
+        "catalogEntityId": "drive-discs:chaos-jazz",
+        "name": "4件套 · dmgBonus",
+        "optionIds": [
+          "drive-discs:chaos-jazz:setPieces:4:blk-legacy:eff-ms0fb5ol-8nlda3",
+          "drive-discs:chaos-jazz:setPieces:4:blk-legacy:legacy-self-dmgBonus"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/drive-discs:chaos-jazz/4件套 · skillDmgBonus",
+      "details": {
+        "catalogEntityId": "drive-discs:chaos-jazz",
+        "name": "4件套 · skillDmgBonus",
+        "optionIds": [
+          "drive-discs:chaos-jazz:setPieces:4:blk-legacy:eff-ms0fbqh9-y74dup",
+          "drive-discs:chaos-jazz:setPieces:4:blk-legacy:eff-ms0fd373-nsyrwm"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/drive-discs:polar/4件套 · skillDmgBonus",
+      "details": {
+        "catalogEntityId": "drive-discs:polar",
+        "name": "4件套 · skillDmgBonus",
+        "optionIds": [
+          "drive-discs:polar:setPieces:4:blk-legacy:eff-ms0dlqqw-cbhz0e",
+          "drive-discs:polar:setPieces:4:blk-legacy:legacy-self-skillDmgBonus"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/w-engines:Crimson_Moon_Casket/精1 · dmgBonus",
+      "details": {
+        "catalogEntityId": "w-engines:Crimson_Moon_Casket",
+        "name": "精1 · dmgBonus",
+        "optionIds": [
+          "w-engines:Crimson_Moon_Casket:refinement:blk-muppptil-ym0iis:eff-muppqbyi-yhg7mq",
+          "w-engines:Crimson_Moon_Casket:refinement:blk-muppptil-ym0iis:eff-mv3gyasf-xhg50h"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/w-engines:Joyau_Dore/精1 · mastery",
+      "details": {
+        "catalogEntityId": "w-engines:Joyau_Dore",
+        "name": "精1 · mastery",
+        "optionIds": [
+          "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-mastery",
+          "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-team-mastery"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/w-engines:Neon_Fantasies/精1 · mastery",
+      "details": {
+        "catalogEntityId": "w-engines:Neon_Fantasies",
+        "name": "精1 · mastery",
+        "optionIds": [
+          "w-engines:Neon_Fantasies:refinement:blk-legacy:eff-ms1n6gcl-lpgkvp",
+          "w-engines:Neon_Fantasies:refinement:blk-legacy:legacy-self-mastery"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/w-engines:Severed_Innocence/精1 · critDmg",
+      "details": {
+        "catalogEntityId": "w-engines:Severed_Innocence",
+        "name": "精1 · critDmg",
+        "optionIds": [
+          "w-engines:Severed_Innocence:refinement:blk-legacy:eff-ms1j72ne-2boh04",
+          "w-engines:Severed_Innocence:refinement:blk-legacy:legacy-self-critDmg"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/w-engines:Severed_Innocence/精5 · dmgBonus",
+      "details": {
+        "catalogEntityId": "w-engines:Severed_Innocence",
+        "name": "精5 · dmgBonus",
+        "optionIds": [
+          "w-engines:Severed_Innocence:refinement:blk-legacy:eff-ms1jat6h-byqfpb",
+          "w-engines:Severed_Innocence:refinement:blk-legacy:eff-ms1jazc5-uzk2hz"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/w-engines:Steel_Cushion/精1 · dmgBonus",
+      "details": {
+        "catalogEntityId": "w-engines:Steel_Cushion",
+        "name": "精1 · dmgBonus",
+        "optionIds": [
+          "w-engines:Steel_Cushion:refinement:blk-legacy:eff-ms1jj5ze-3btjv0",
+          "w-engines:Steel_Cushion:refinement:blk-legacy:legacy-self-dmgBonus"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/w-engines:Weeping_Cradle/精1 · dmgBonus",
+      "details": {
+        "catalogEntityId": "w-engines:Weeping_Cradle",
+        "name": "精1 · dmgBonus",
+        "optionIds": [
+          "w-engines:Weeping_Cradle:refinement:blk-legacy:eff-ms1pf9g0-dp26ep",
+          "w-engines:Weeping_Cradle:refinement:blk-legacy:legacy-self-dmgBonus"
+        ]
+      }
+    },
+    {
+      "check": "identity-mapping-extra",
+      "id": "identity-mapping-extra/w-engines:Promotion_Stats",
+      "details": {
+        "catalogEntityId": "w-engines:Promotion_Stats"
+      }
+    },
+    {
+      "check": "identity-mapping-extra",
+      "id": "identity-mapping-extra/w-engines:The_Restrained",
+      "details": {
+        "catalogEntityId": "w-engines:The_Restrained"
+      }
+    },
+    {
+      "check": "identity-mapping-extra",
+      "id": "identity-mapping-extra/w-engines:Weeping_Gemini",
+      "details": {
+        "catalogEntityId": "w-engines:Weeping_Gemini"
+      }
+    },
+    {
+      "check": "unreferenced-difference",
+      "id": "unreferenced-difference/angel-in-the-shell-anomaly-stat-revision",
+      "details": {
+        "differenceId": "angel-in-the-shell-anomaly-stat-revision"
+      }
+    },
+    {
+      "check": "unreferenced-difference",
+      "id": "unreferenced-difference/myriad-eclipse-r4-critical-damage",
+      "details": {
+        "differenceId": "myriad-eclipse-r4-critical-damage"
+      }
+    },
+    {
+      "check": "unreferenced-difference",
+      "id": "unreferenced-difference/pheony-abrasion-first-hit-critical-assumption",
+      "details": {
+        "differenceId": "pheony-abrasion-first-hit-critical-assumption"
+      }
+    },
+    {
+      "check": "unreferenced-difference",
+      "id": "unreferenced-difference/potential-branch-scope",
+      "details": {
+        "differenceId": "potential-branch-scope"
+      }
+    },
+    {
+      "check": "unreferenced-difference",
+      "id": "unreferenced-difference/potential-partial-option-migration",
+      "details": {
+        "differenceId": "potential-partial-option-migration"
+      }
+    },
+    {
+      "check": "unreferenced-difference",
+      "id": "unreferenced-difference/promotion-stats-equipper-defense",
+      "details": {
+        "differenceId": "promotion-stats-equipper-defense"
+      }
+    },
+    {
+      "check": "unreferenced-difference",
+      "id": "unreferenced-difference/qingming-birdcage-pierce-stack-layers",
+      "details": {
+        "differenceId": "qingming-birdcage-pierce-stack-layers"
+      }
+    },
+    {
+      "check": "unreferenced-difference",
+      "id": "unreferenced-difference/remielle-special-voidflare-restricted-reads",
+      "details": {
+        "differenceId": "remielle-special-voidflare-restricted-reads"
+      }
+    },
+    {
+      "check": "unreferenced-difference",
+      "id": "unreferenced-difference/scarlet-craving-explicit-element",
+      "details": {
+        "differenceId": "scarlet-craving-explicit-element"
+      }
+    },
+    {
+      "check": "unreferenced-difference",
+      "id": "unreferenced-difference/the-vault-r1-team-damage-bonus",
+      "details": {
+        "differenceId": "the-vault-r1-team-damage-bonus"
+      }
+    },
+    {
+      "check": "unreferenced-rule",
+      "id": "unreferenced-rule/agent:1161:zzz-hp:complete-state-elation-scale:eff-ms4b0whf-x6n1xw",
+      "details": {
+        "effectId": "agent:1161:zzz-hp:complete-state-elation-scale:eff-ms4b0whf-x6n1xw",
+        "kind": "modification"
+      }
+    },
+    {
+      "check": "unreferenced-rule",
+      "id": "unreferenced-rule/agent:1411:zzz-hp:tanuki-wish-complete-state:anomalyDmgBonus:mindscape-1-scale",
+      "details": {
+        "effectId": "agent:1411:zzz-hp:tanuki-wish-complete-state:anomalyDmgBonus:mindscape-1-scale",
+        "kind": "modification"
+      }
+    },
+    {
+      "check": "unreferenced-rule",
+      "id": "unreferenced-rule/agent:1411:zzz-hp:tanuki-wish-complete-state:disorderDmgBonus:mindscape-1-scale",
+      "details": {
+        "effectId": "agent:1411:zzz-hp:tanuki-wish-complete-state:disorderDmgBonus:mindscape-1-scale",
+        "kind": "modification"
+      }
+    }
+  ]
+}
