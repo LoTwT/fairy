@@ -65,7 +65,7 @@
       "packageVersion": "0.4.0",
       "contractVersion": 2,
       "gameVersion": "3.2",
-      "snapshotId": "sha256:7bb28d858be347be6ef86a5ae7d5a1f1286f4048b1039e01a6f3ae39b47f0c09"
+      "snapshotId": "sha256:5217cca17a930b923e837ae24527e61f7248223c2411ebf749e3fe6f90077000"
     },
     "fairyCalculationSources": {
       "packages/core/src/static/calculate.ts": "c1e6d073f7b8eb62241bf640da8d3e1a878aa8de9a703636c490f113a126441e",
@@ -80399,6 +80399,18 @@
         }
       },
       "currentSnapshotId": "sha256:7bb28d858be347be6ef86a5ae7d5a1f1286f4048b1039e01a6f3ae39b47f0c09"
+    },
+    {
+      "reason": "Revision 47 adds the opt-in Pheony abrasion core / mindscape 1 / mindscape 2 complete-state options and the independent mindscape 6 entry from the frozen 3.2.5 supplemental source. The comparison scenarios never select these options, so native upstream captures and all numeric results stay frozen; only the current consumption snapshot and the two changed Fairy artifact digests are refreshed.",
+      "implementationBase": "b1d32c5e4bf5d0f2f2866a24e599ae32f810b992",
+      "previous": {
+        "snapshotId": "sha256:7bb28d858be347be6ef86a5ae7d5a1f1286f4048b1039e01a6f3ae39b47f0c09",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "a8aac21c0307af11934c1eaf84a5f14cccf390487b5ea6e9505307c8e4ec3305",
+          "packages/data/definitions/effects/static-catalog.json": "216b53724babb594ab3344525388d69db6d2781a1c52afa72e28165e5a35eaf7"
+        }
+      },
+      "currentSnapshotId": "sha256:5217cca17a930b923e837ae24527e61f7248223c2411ebf749e3fe6f90077000"
     }
   ]
 }

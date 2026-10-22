@@ -11,7 +11,17 @@ import {
   resolveCandidateOutputDirectory,
 } from "./candidate-output.ts"
 import { convertSource } from "./static-effects/convert.ts"
-import { loadSource } from "./static-effects/source.ts"
+import {
+  D4_325_SOURCE,
+  assertD4OverlayBase,
+  d4BasePanels,
+  d4EntityData,
+  d4PlumeOptionLabels,
+  d4SkillInventory,
+} from "./static-effects/d4-325.ts"
+import { mergeSupplementalSource } from "./static-effects/d4-merge.ts"
+import { D4_PHEONY_UNSUPPORTED_SUPPLEMENTS } from "./static-effects/d4-pheony.ts"
+import { SOURCE_COMMIT, loadSource } from "./static-effects/source.ts"
 import {
   COMPLETE_STATE_OPTIONS,
   SOURCE_SEMANTICS,
@@ -50,6 +60,7 @@ export function jsonPointerExists(document: unknown, pointer: string): boolean {
 
 interface EvidenceReference {
   readonly rank?: number
+  readonly source?: "integrated" | "data-package"
   readonly path: string
   readonly pointer: string
   readonly sha256: string
@@ -65,11 +76,16 @@ async function verifyEvidenceReferences(
   label: string,
   references: readonly EvidenceReference[],
   requirePassiveRanks = false,
+  dataPackageRoot = fileURLToPath(new URL("..", import.meta.url)),
 ): Promise<void> {
   for (const ref of references) {
-    const bytes = await readFile(
-      join(publication, "verified", "integrated", ref.path),
-    )
+    // D4 的 3.2.5 补充来源层使用已提交的冻结夹具；其余证据仍属于
+    // integrated 发布副本。两条路径都按整文件摘要与 Pointer 核对。
+    const root =
+      ref.source === "data-package"
+        ? dataPackageRoot
+        : join(publication, "verified", "integrated")
+    const bytes = await readFile(join(root, ref.path))
     if (createHash("sha256").update(bytes).digest("hex") !== ref.sha256)
       throw new Error(`Evidence file changed: ${label} ${ref.path}`)
     const document = JSON.parse(bytes.toString("utf8"))
@@ -185,6 +201,7 @@ export async function verifyStaticEffectsEvidence(
   // 由 verifyDeveloperRevisionEvidence 单独核对，不走 Nanoka 路径。
   for (const [key, semantics] of Object.entries(SOURCE_SEMANTICS)) {
     if (semantics.kind === "developer-revised-stat") continue
+    if (semantics.evidence === undefined) continue
     await verifyEvidenceReferences(
       publication,
       `semantics:${key}`,
@@ -279,7 +296,57 @@ export async function generateStaticEffects(
     // 来源证据（rank-evidence、来源语义与完整状态选项登记、补充来源）由同一
     // 入口逐条验证，标识可用于定位具体登记。
     await verifyStaticEffectsEvidence(publication)
+    const supplementalBytes = await readFile(
+      join(
+        fileURLToPath(new URL("..", import.meta.url)),
+        D4_325_SOURCE.extractPath,
+      ),
+    )
+    if (
+      createHash("sha256").update(supplementalBytes).digest("hex") !==
+      D4_325_SOURCE.extractSha256
+    )
+      throw new Error(
+        `D4 supplemental source extract changed: ${D4_325_SOURCE.extractPath}`,
+      )
+    await verifySupplementEvidence(publication, [
+      ...SUPPLEMENTS,
+      ...D4_PHEONY_UNSUPPORTED_SUPPLEMENTS,
+    ])
     const result = convertSource(source.data, source.functions, source.files)
+    assertD4OverlayBase(
+      SOURCE_COMMIT,
+      result.catalog.entities.map((entity) => entity.catalogEntityId),
+    )
+    const enabledEntities = ["pheony"] as const
+    const supplemental = convertSource(
+      d4EntityData(enabledEntities),
+      source.functions,
+      source.files,
+      D4_PHEONY_UNSUPPORTED_SUPPLEMENTS,
+      COMPLETE_STATE_OPTIONS,
+      { supplemental: true },
+    )
+    if (
+      supplemental.coverage.summary.entities !== 1 ||
+      supplemental.coverage.summary.packs !== 7 ||
+      supplemental.coverage.summary.rawEffects !== 26 ||
+      supplemental.coverage.summary.rules !== 20 ||
+      supplemental.catalog.options.length !== 36
+    )
+      throw new Error("D4 supplemental source denominator changed")
+    const merged = mergeSupplementalSource(
+      result,
+      supplemental,
+      D4_325_SOURCE,
+      {
+        skills: d4SkillInventory(enabledEntities),
+        basePanels: d4BasePanels(enabledEntities),
+        gaps: [],
+        optionLabels: d4PlumeOptionLabels(supplemental.catalog.options),
+      },
+      "47",
+    )
     for (const entity of result.catalog.entities) {
       if (!entity.supplementProvenance) continue
       for (const resource of entity.supplementProvenance.resources) {
@@ -326,18 +393,18 @@ export async function generateStaticEffects(
       result.coverage.summary.packs !== 1061
     )
       throw new Error("Fixed-source coverage denominator changed")
-    const parsed = parseEffectRuleSet(result.definitions)
+    const parsed = parseEffectRuleSet(merged.definitions)
     if (!parsed.ok) throw new Error(JSON.stringify(parsed.issues))
     // 完整生成命令预先构建 core；仅导入转换工具或拒绝坏输入时不加载计算运行时。
     const { validateStaticCatalog } =
       await import("../../core/src/effects/internal/static-catalog.ts")
-    const catalog = validateStaticCatalog(result.catalog, parsed.value)
+    const catalog = validateStaticCatalog(merged.catalog, parsed.value)
     if (!catalog.ok) throw new Error(JSON.stringify(catalog.issues))
     candidate = await mkdtemp(join(dirname(output), ".fairy-static-candidate-"))
     const artifacts = {
-      "static.json": result.definitions,
-      "static-catalog.json": result.catalog,
-      "static-coverage.json": result.coverage,
+      "static.json": merged.definitions,
+      "static-catalog.json": merged.catalog,
+      "static-coverage.json": merged.coverage,
     }
     for (const [file, value] of Object.entries(artifacts))
       await writeFile(
@@ -346,7 +413,7 @@ export async function generateStaticEffects(
       )
     await formatGeneratedJson(candidate, Object.keys(artifacts))
     await installCandidateOutputDirectory(candidate, output)
-    return result.coverage.summary
+    return merged.coverage.summary
   } finally {
     await rm(publication, { recursive: true, force: true })
     if (candidate) await rm(candidate, { recursive: true, force: true })

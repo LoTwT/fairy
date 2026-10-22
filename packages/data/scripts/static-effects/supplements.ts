@@ -103,6 +103,14 @@ export const SOURCE_RECORD_SHAPE_FIELDS: readonly string[] = Object.freeze([
 ])
 
 export interface SupplementEvidenceReference {
+  /** 证据根；省略时沿用 integrated 发布副本。 */
+  readonly source?: "integrated" | "data-package"
+  /** 来源身份；省略时沿用 Nanoka integrated。 */
+  readonly sourceId?: "zzz-hp" | "nanoka-integrated" | "nanoka-raw"
+  /** 来源版本；省略时沿用 Nanoka integrated 3.2。 */
+  readonly version?: string
+  /** 引用语言；省略时按文件名推断。 */
+  readonly locale?: "zh" | "en"
   readonly path: string
   readonly pointer: string
   readonly sha256: string

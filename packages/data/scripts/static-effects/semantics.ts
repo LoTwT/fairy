@@ -18,7 +18,12 @@ import type { SourceRecordShape } from "./supplements.ts"
  */
 
 export interface SemanticsEvidenceReference {
-  /** 相对 integrated 发布副本的冻结资源路径。 */
+  /**
+   * 证据根：integrated 表示相对发布副本的冻结资源路径；data-package 表示
+   * 相对 packages/data 的已提交冻结夹具（3.2.5 补充来源层使用）。
+   */
+  readonly source?: "integrated" | "data-package"
+  /** 相对证据根的冻结资源路径。 */
   readonly path: string
   readonly pointer: string
   readonly sha256: string
@@ -76,6 +81,53 @@ export const HUGO_ATTACK_COUNT_DESCRIPTION =
   "调用方声明其他击破队友人数：0 关闭，1/2 人分别获得对应核心档的一倍/三倍固定攻击力；不自动计数，不要求失衡或暗渊回响。旧 3 层须迁移为新 2 人；核心 7 的旧 2 层 +600 改为二人 +900，一人仍 +300。"
 
 export type SourceSemantics =
+  | {
+      /**
+       * 已审计但当前不执行的来源条款：转换器不生成贡献，只保留带原因的
+       * unsupported 迁移入口。用于 D4 的额外能力同队条件、M2 灼烧时长
+       * 上游挂错、M4 40% 暴伤待 D4-1b 接管等明确缺口；不得用零值或近似
+       * 通道冒充已支持。
+       */
+      readonly kind: "declared-unsupported"
+      readonly reason:
+        | "semantic-conflict"
+        | "formula-out-of-scope"
+        | "missing-parameter"
+      readonly explanation: string
+      readonly expectedEncoding?: Readonly<Record<string, unknown>>
+      readonly expectedSourceBlockNote?: string
+      readonly differenceId?: string
+      readonly evidence?: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
+       * 3.2.5 补充来源的核心块记录是固定值（85 精通、30/25 暴击等），
+       * 不依赖核心等级参数；登记后转换器不再要求 rank-evidence 的核心档位
+       * 证据，避免把固定值误判为 missing-rank-evidence。
+       */
+      readonly kind: "supplemental-flat-source"
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
+       * 3.2.5 补充来源把异放暴击率/暴伤记为 anomalyReleaseCritRate/Dmg；
+       * C1 的独立子类通道要求异放走 anomaly-settlement-critical-*。该登记
+       * 只覆盖菲欧妮的已核对记录，不改变 fac62407 既有爱芮记录的映射。
+       */
+      readonly kind: "settlement-critical-channel"
+      readonly correctedStat:
+        | "anomalySettlementCritRate"
+        | "anomalySettlementCritDmg"
+      readonly expectedRawStat:
+        | "anomalyReleaseCritRate"
+        | "anomalyReleaseCritDmg"
+      readonly expectedValue: number
+      readonly explanation: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
   | {
       /** 已展开的来源转化率发生舍入；以独立原文及单次异常基数恢复精度。 */
       readonly kind: "source-conversion-rate-correction"
@@ -682,21 +734,21 @@ export interface CompleteStateSourceRecord {
   readonly expectation: {
     readonly stat: string
     readonly value: number
-    readonly scope: string
+    readonly scope: string | undefined
     readonly applyTarget: "self" | "team"
     readonly applySituation: string
     readonly applyProfession: null
     readonly teamProfession: null
     readonly teamProfessionValues: null
-    readonly elementFilter: "all"
-    readonly kind: "fixed"
+    readonly elementFilter: "all" | readonly string[]
+    readonly kind: "fixed" | "convert"
     readonly stackable: false
     readonly maxStacks: number
     readonly valuePerStack: number
     readonly defaultStacks: number
     readonly appliesToAnomaly: boolean
     readonly enabledDefault: boolean
-    readonly note: ""
+    readonly note: string
   }
 }
 
@@ -706,7 +758,25 @@ export interface CompleteStateOptionRegistration {
   readonly name: string
   readonly conditionDescription: string
   readonly target: "self" | "team"
-  readonly minimumMindscape: MindscapeRank
+  /**
+   * 同一完整状态的累计档位选项互斥组；同一绑定只能选其中一个，
+   * 避免“M0 + M1”重复叠加核心记录。
+   */
+  readonly exclusiveGroup?: string
+  /**
+   * 历史形态：影画级完整状态的单一门槛。新登记优先使用 configuration，
+   * 以便表达精炼级完整状态或“M0 起可选、记录各自按影画门槛生效”。
+   */
+  readonly minimumMindscape?: MindscapeRank
+  /**
+   * 完整状态选项自身的目录配置门槛；省略时回退 minimumMindscape。记录级
+   * 规则仍保留各自 rank 配置（如 M1/M2 只在对应影画起贡献），本字段只
+   * 决定该选项何时可被选择。
+   */
+  readonly configuration?: {
+    readonly minimumMindscape?: MindscapeRank
+    readonly refinements?: readonly (1 | 2 | 3 | 4 | 5)[]
+  }
   readonly differenceId: string
   /** 迁移入口的说明正文：该状态的记录必须一起生效及文本依据。 */
   readonly migrationExplanation: string
@@ -2144,6 +2214,45 @@ const ariaAbloomPrecisionCorrections = Object.fromEntries(
   ),
 )
 
+/** 菲欧妮核心块的 3.2.5 stat 映射（完整状态登记与规则编译共用）。 */
+const pheonyCoreStat = (effectId: string): string => {
+  switch (effectId) {
+    case "eff-1":
+    case "eff-3":
+      return "anomalyCritRate"
+    case "eff-2":
+      return "anomalyCritDmg"
+    case "eff-6":
+      return "anomalyReleaseCritDmg"
+    case "eff-7":
+      return "turbulenceCritDmg"
+    case "eff-8":
+      return "radianceCritDmg"
+    case "eff-13":
+    case "eff-16":
+      return "anomalyReleaseCritRate"
+    case "eff-14":
+    case "eff-17":
+      return "turbulenceCritRate"
+    case "eff-15":
+    case "eff-18":
+      return "radianceCritRate"
+    default:
+      throw new Error(`Unexpected Pheony core effect ${effectId}`)
+  }
+}
+
+/**
+ * D4 的 3.2.5 补充来源证据根：已提交的冻结实体夹具，路径相对
+ * packages/data；生成时按整文件摘要与 Pointer 核对。
+ */
+const d4Evidence = (pointer: string): SemanticsEvidenceReference => ({
+  source: "data-package",
+  path: "scripts/static-effects/evidence/zzz-hp-325-entities.json",
+  pointer,
+  sha256: "5826e29d7527e8013299c8cc9cee8a4d2725d3a522719893b3c7b123f611edca",
+})
+
 export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
   ...ariaAbloomPrecisionCorrections,
   [HUGO_ATTACK_SOURCE_KEY]: {
@@ -3354,7 +3463,267 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     verification:
       "固定源 /agents/22/mindscapeBuffs/0/effectBlocks/1（额外能力：同沐霜雪）的 resPen 记录把「[普通攻击：霜月]将无视目标30%冰属性伤害抗性」编为 basic+霜月（miyabi-basic-ms4mtpk5）目标上的 elementFilter=[冰]。星见雅的烈霜按冰属性结算伤害与增益（agents/1091 /specialElementType/desc 中英文同文），真实霜月动作（0011—0013）的命中枚举是 frost：该 30% 冰抗忽视在霜月 frost 命中上零贡献（批次 14 红测复现）。Fairy 按本登记只扩命中元素：保留 ice 并显式加入 frost，basic+霜月精确目标、数值、通道与稳定 ID 全部保持，不泄漏给霜灼·破独立事件（uncategorized 目标不匹配本条件）。同块的霜月 +60% 增伤记录（eff-ms4msho4-rjt6sj）没有元素过滤，不在登记内。防漂移：raw 与 normalized 两份记录编码（含完整 skillTargets 元组与 elementFilter）与所属块冻结完整 note 逐字核对，先于通用 unsupported 降级拒绝；未来偏移的记录不再静默纠正，也不以局部 ID 子串定位。证据级别为同文结算分支映射与正式动作目录枚举，未经游戏实测。",
   },
+  // —— D4：菲欧妮异放暴击记录改走 anomaly-settlement 独立通道 ——
+  ...Object.fromEntries(
+    [
+      "eff-0",
+      "eff-1",
+      "eff-2",
+      "eff-3",
+      "eff-7",
+      "eff-8",
+      "eff-14",
+      "eff-15",
+      "eff-17",
+      "eff-18",
+    ].map((effectId) => [
+      `agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/${effectId}`,
+      {
+        kind: "supplemental-flat-source" as const,
+        evidence: [
+          d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note"),
+        ],
+        verification:
+          "ZZZ-HP 2628b32 菲欧妮 rank0 核心块记录是固定值，不依赖核心等级参数；D4 按固定值编译，不伪造核心档位证据。",
+      },
+    ]),
+  ),
+  "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-6": {
+    kind: "settlement-critical-channel",
+    correctedStat: "anomalySettlementCritDmg",
+    expectedRawStat: "anomalyReleaseCritDmg",
+    expectedValue: 25,
+    explanation:
+      "3.2.5 记录 anomalyReleaseCritDmg 25 是[灼蚀]下异放暴伤；C1 的独立异放通道为 anomaly-settlement-critical-damage，D4 按该通道编译，使核心25%与M4额外40%同通道相加，而不是回退到通用异常暴伤。",
+    evidence: [d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note")],
+    verification:
+      "ZZZ-HP 2628b32 菲欧妮 rank0 块 note 与记录逐条核对；本登记只覆盖该记录，fac62407 既有爱芮 anomalyRelease* 记录保持原映射。",
+  },
+  "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-13": {
+    kind: "settlement-critical-channel",
+    correctedStat: "anomalySettlementCritRate",
+    expectedRawStat: "anomalyReleaseCritRate",
+    expectedValue: 30,
+    explanation:
+      "3.2.5 记录 anomalyReleaseCritRate 30 是[灼蚀]下异放暴击率；D4 按 anomaly-settlement-critical-rate 独立通道编译。",
+    evidence: [d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note")],
+    verification:
+      "ZZZ-HP 2628b32 菲欧妮 rank0 块 note 与记录逐条核对；本登记只覆盖该记录。",
+  },
+  "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-16": {
+    kind: "settlement-critical-channel",
+    correctedStat: "anomalySettlementCritRate",
+    expectedRawStat: "anomalyReleaseCritRate",
+    expectedValue: 0,
+    explanation:
+      "3.2.5 的异常掌控→异放暴击率转化记录同样走 anomaly-settlement-critical-rate；基础155、每点0.7%、封顶70，与核心普通异常转化分别登记。",
+    evidence: [d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note")],
+    verification:
+      "ZZZ-HP 2628b32 菲欧妮 rank0 块 note 与记录逐条核对；转化参数保持来源原值。",
+  },
+  "agents/pheony/mindscape/1/blk-mindscapeBuffs-1-1/eff-19": {
+    kind: "settlement-critical-channel",
+    correctedStat: "anomalySettlementCritDmg",
+    expectedRawStat: "anomalyReleaseCritDmg",
+    expectedValue: 25,
+    explanation:
+      "影画1的异放暴伤+25同样走 anomaly-settlement-critical-damage 独立通道，与核心25、M4额外40同通道相加。",
+    evidence: [d4Evidence("/agents/0/mindscapeBuffs/1/effectBlocks/0/note")],
+    verification:
+      "ZZZ-HP 2628b32 菲欧妮 rank1 块 note 与记录逐条核对；本登记只覆盖该记录。",
+  },
+  // —— D4：菲欧妮额外能力 15% 暴伤四条与 M4 40% 暴伤暂不执行 ——
+  "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-4": {
+    kind: "declared-unsupported",
+    reason: "semantic-conflict",
+    explanation:
+      "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team anomalyCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
+    expectedEncoding: {
+      stat: "anomalyCritDmg",
+      value: 15,
+      applyTarget: "team",
+      elementFilter: "all",
+      kind: "fixed",
+    },
+    evidence: [d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note")],
+    verification:
+      "ZZZ-HP 2628b32 菲欧妮 rank0 块 note 的额外能力分句明确要求其他[异常]角色或同阵营角色；当前没有 C6 的同队条件事实，D4-1a 只登记该缺口，不生成无条件贡献。",
+  },
+  "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-10": {
+    kind: "declared-unsupported",
+    reason: "semantic-conflict",
+    explanation:
+      "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team anomalyReleaseCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
+    expectedEncoding: {
+      stat: "anomalyReleaseCritDmg",
+      value: 15,
+      applyTarget: "team",
+      elementFilter: "all",
+      kind: "fixed",
+    },
+    evidence: [d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note")],
+    verification:
+      "同 eff-4 的额外能力同队条件缺口；异放暴伤记录在 C6 前不生成贡献。",
+  },
+  "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-11": {
+    kind: "declared-unsupported",
+    reason: "semantic-conflict",
+    explanation:
+      "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team turbulenceCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
+    expectedEncoding: {
+      stat: "turbulenceCritDmg",
+      value: 15,
+      applyTarget: "team",
+      elementFilter: "all",
+      kind: "fixed",
+    },
+    evidence: [d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note")],
+    verification:
+      "同 eff-4 的额外能力同队条件缺口；乱流暴伤记录在 C6 前不生成贡献。",
+  },
+  "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-12": {
+    kind: "declared-unsupported",
+    reason: "semantic-conflict",
+    explanation:
+      "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team radianceCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
+    expectedEncoding: {
+      stat: "radianceCritDmg",
+      value: 15,
+      applyTarget: "team",
+      elementFilter: "all",
+      kind: "fixed",
+    },
+    evidence: [d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note")],
+    verification:
+      "同 eff-4 的额外能力同队条件缺口；耀变暴伤记录在 C6 前不生成贡献。",
+  },
+  "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-9": {
+    kind: "declared-unsupported",
+    reason: "semantic-conflict",
+    explanation:
+      "M4 的“该次[异放]效果触发暴击时，其暴击伤害额外提升40%”只属于 M4 触发的异放结算；固定记录是自身常驻 anomalyReleaseCritDmg +40。D4-1a 暂不把它当常驻异放暴伤执行，D4-1b 将按 anomaly-settlement-critical-damage 通道绑定到 M4 600% 结算选项。",
+    expectedEncoding: {
+      stat: "anomalyReleaseCritDmg",
+      value: 40,
+      applyTarget: "self",
+      elementFilter: "all",
+      kind: "fixed",
+    },
+    evidence: [d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note")],
+    verification:
+      "ZZZ-HP 2628b32 菲欧妮 rank0 块 note 的 M4 分句；常驻异放暴伤会错误作用于所有异放，D4-1a 只登记缺口。",
+  },
+  "agents/pheony/mindscape/2/blk-mindscapeBuffs-2-1/eff-mvdz21so-s2au9j": {
+    kind: "declared-unsupported",
+    reason: "semantic-conflict",
+    explanation:
+      "M2 的“[灼烧]持续时间提升2秒”被固定来源挂在 turbulence 的 anomalyDuration 上；正文明确是火属性灼烧持续时间，不是乱流。D4 不采信该编码，也不改写成其他持续通道。",
+    expectedEncoding: {
+      stat: "anomalyDuration",
+      value: 2,
+      applyTarget: "team",
+      elementFilter: ["火"],
+      kind: "fixed",
+      conditions: { damageTypes: ["turbulence"] },
+    },
+    evidence: [d4Evidence("/agents/0/mindscapeBuffs/2/effectBlocks/0/note")],
+    verification:
+      "ZZZ-HP 2628b32 菲欧妮 rank2 块 note 与记录对照：note 是[灼烧]持续时间 +2 秒，记录 conditions.damageTypes 却是 turbulence；该编码不采信，保持 unsupported，等待来源修正。",
+  },
 }
+
+/** 菲欧妮影画记录的 stat：核心块与影画 1 的暴击/暴伤四通道。 */
+const pheonyAbrasionStat = (rank: 0 | 1 | 2, effectId: string): string => {
+  if (rank === 0) return pheonyCoreStat(effectId)
+  if (rank === 2) return "dmgBonus"
+  switch (effectId) {
+    case "eff-5":
+      return "anomalyCritDmg"
+    case "eff-19":
+      return "anomalyReleaseCritDmg"
+    case "eff-20":
+      return "turbulenceCritDmg"
+    case "eff-21":
+      return "radianceCritDmg"
+    default:
+      throw new Error(`Unexpected Pheony M1 effect ${effectId}`)
+  }
+}
+
+const pheonyAbrasionValue = (rank: 0 | 1 | 2, effectId: string): number => {
+  if (rank === 2) return 30
+  if (rank === 0 && ["eff-3", "eff-16", "eff-17", "eff-18"].includes(effectId))
+    return 0
+  return ["eff-1", "eff-13", "eff-14", "eff-15"].includes(effectId) ? 30 : 25
+}
+
+/** 菲欧妮[灼蚀]三组记录的完整状态期望；记录级影画门槛由规则配置承担。 */
+const pheonyAbrasionRecord = (
+  rank: 0 | 1 | 2,
+  effectId: string,
+): CompleteStateSourceRecord => ({
+  rankKind: "mindscape",
+  rank,
+  blockId:
+    rank === 0
+      ? "blk-mindscapeBuffs-0-1"
+      : rank === 1
+        ? "blk-mindscapeBuffs-1-1"
+        : "blk-mindscapeBuffs-2-1",
+  effectId,
+  blockNoteIncludes:
+    rank === 0
+      ? "队伍中任意角色对敌人造成属性异常伤害时，会使其陷入[灼蚀]状态"
+      : rank === 1
+        ? "[灼蚀]状态下的敌人受到属性异常伤害的暴击伤害额外提升25%"
+        : "菲欧妮对[灼蚀]状态下的敌人造成的伤害提升30%",
+  expectation: {
+    stat: pheonyAbrasionStat(rank, effectId),
+    value: pheonyAbrasionValue(rank, effectId),
+    scope: undefined,
+    applyTarget: rank === 2 ? "self" : "team",
+    applySituation: "global",
+    applyProfession: null,
+    teamProfession: null,
+    teamProfessionValues: null,
+    elementFilter: "all",
+    kind:
+      rank === 0 && ["eff-3", "eff-16", "eff-17", "eff-18"].includes(effectId)
+        ? "convert"
+        : "fixed",
+    stackable: false,
+    maxStacks: 1,
+    valuePerStack: 0,
+    defaultStacks: 1,
+    appliesToAnomaly: true,
+    enabledDefault: true,
+    note:
+      rank === 0 && ["eff-3", "eff-16", "eff-17", "eff-18"].includes(effectId)
+        ? "转模：读取属性=异常掌控 折算比例=0.7"
+        : rank === 2
+          ? ""
+          : "目标默认：条件为敌人状态、未限定施放者",
+  },
+})
+
+const pheonyAbrasionCoreRecords = [
+  "eff-1",
+  "eff-2",
+  "eff-3",
+  "eff-6",
+  "eff-7",
+  "eff-8",
+  "eff-13",
+  "eff-14",
+  "eff-15",
+  "eff-16",
+  "eff-17",
+  "eff-18",
+].map((effectId) => pheonyAbrasionRecord(0, effectId))
+const pheonyAbrasionM1Records = ["eff-5", "eff-19", "eff-20", "eff-21"].map(
+  (effectId) => pheonyAbrasionRecord(1, effectId),
+)
+const pheonyAbrasionM2Records = [pheonyAbrasionRecord(2, "eff-6")]
 
 /**
  * 蕾米埃尔影画 1 的完整状态登记：块 note 与 Nanoka 天赋 1 同文的后一个条款
@@ -3435,5 +3804,67 @@ export const COMPLETE_STATE_OPTIONS: readonly CompleteStateOptionRegistration[] 
       evidence: remielleMindscape1Evidence,
       verification:
         "块 note 与 Nanoka 天赋 1（agents/1581/details.zh.json 的 /talent/1/desc）同文确认后一条款：“蕾米埃尔处于[相变时流]状态下时，队伍中其他角色造成的属性异常伤害提升10%”。固定来源把它编码为同一块的两条记录：team anomalyDmgBonus +10 与自身 anomalyDmgBonus −10，后者把持有者自身排除，两条必须同时生效才表示“其他角色”。上游允许逐 effect 独立开关（固定版 BuffEffectPickerModal.vue 的 isEnabled/setEnabled/toggleEffect 按 effect、toggleCard 批量；panelBuffCalc.ts 的 buildDefaultBuffSelection 默认全开并按 team/self 槽位分别选择；resolvePackMods 对自身取 self+team、他人只取 team），因此固定来源不会强制成对激活，单选旧 +10% 记录会给持有者自身也多算 10%。Fairy 按本登记只提供完整状态选项并保留旧选项为迁移入口。",
+    },
+    {
+      optionId: "agents:pheony:mindscape:0:abrasion-core-state",
+      catalogEntityId: "agents:pheony",
+      name: "灼蚀 · 完整状态（M0）",
+      conditionDescription:
+        "敌人处于[灼蚀]状态时，队伍中任意角色对其造成的属性异常伤害获得：异常/异放/乱流/耀变暴击率30%、暴击伤害25%，以及初始异常掌控超过155点后每点0.7%的暴击率（255点封顶+70%）。M0 档只包含核心12条记录；M1/M2 档为累计选项，必须整档选择，不能与 M0 档叠加。敌人是否处于[灼蚀]由调用方选中本选项声明，20秒持续与刷新不模拟。",
+      target: "team",
+      configuration: { minimumMindscape: 0 },
+      exclusiveGroup: "pheony:abrasion-complete-state",
+      differenceId: "pheony-abrasion-complete-state",
+      migrationExplanation:
+        "[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。",
+      records: pheonyAbrasionCoreRecords,
+      evidence: [d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note")],
+      verification:
+        "ZZZ-HP 2628b32 菲欧妮 rank0 块 note 与12条记录逐条核对：核心四通道暴击率30%/暴伤25%与异常掌控155→255转模。M0 档只引用核心记录；M1/M2 档为累计选项并在同一 exclusiveGroup 内互斥。",
+    },
+    {
+      optionId: "agents:pheony:mindscape:1:abrasion-mindscape-1-state",
+      catalogEntityId: "agents:pheony",
+      name: "灼蚀 · 完整状态（M1）",
+      conditionDescription:
+        "M1 累计档：包含核心12条与影画1的4条暴伤记录；影画1起[灼蚀]敌人受到属性异常伤害的暴击伤害在核心25%基础上再+25%（异常/异放/乱流/耀变四通道）。本档必须整档选择，不能与 M0 档叠加。",
+      target: "team",
+      configuration: { minimumMindscape: 1 },
+      exclusiveGroup: "pheony:abrasion-complete-state",
+      differenceId: "pheony-abrasion-complete-state",
+      migrationExplanation:
+        "影画1四通道暴伤与核心属于同一[灼蚀]状态；M1 档累计包含核心12条，避免未选核心的半状态。目录拒绝跨影画 effectIds 的单选项，因此使用互斥累计档。",
+      records: [...pheonyAbrasionCoreRecords, ...pheonyAbrasionM1Records],
+      evidence: [
+        d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note"),
+        d4Evidence("/agents/0/mindscapeBuffs/1/effectBlocks/0/note"),
+      ],
+      verification:
+        "ZZZ-HP 2628b32 菲欧妮 rank1 块 note 与4条记录逐条核对：影画1起四通道暴伤+25%。M1 档引用核心12+影画1 4共16条记录，并与 M0/M2 档互斥；单独选择旧影画1单项被拒绝。",
+    },
+    {
+      optionId: "agents:pheony:mindscape:2:abrasion-mindscape-2-state",
+      catalogEntityId: "agents:pheony",
+      name: "灼蚀 · 完整状态（M2）",
+      conditionDescription:
+        "M2 累计档：包含核心12条、影画1的4条暴伤记录与影画2的1条自身增伤；影画2起菲欧妮对[灼蚀]状态下的敌人造成的伤害+30%，受益者为本人。本档必须整档选择，不能与 M0/M1 档叠加。",
+      target: "team",
+      configuration: { minimumMindscape: 2 },
+      exclusiveGroup: "pheony:abrasion-complete-state",
+      differenceId: "pheony-abrasion-complete-state",
+      migrationExplanation:
+        "影画2自身增伤与核心/M1属于同一[灼蚀]状态；M2 档累计包含核心与M1记录，避免半状态。目录拒绝跨影画 effectIds 的单选项，因此使用互斥累计档。",
+      records: [
+        ...pheonyAbrasionCoreRecords,
+        ...pheonyAbrasionM1Records,
+        ...pheonyAbrasionM2Records,
+      ],
+      evidence: [
+        d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note"),
+        d4Evidence("/agents/0/mindscapeBuffs/1/effectBlocks/0/note"),
+        d4Evidence("/agents/0/mindscapeBuffs/2/effectBlocks/0/note"),
+      ],
+      verification:
+        "ZZZ-HP 2628b32 菲欧妮 rank2 块 note 与记录核对：菲欧妮对[灼蚀]敌人造成伤害+30%，受益者为本人。M2 档引用核心12+影画1 4+影画2 1共17条记录，并与 M0/M1 档互斥；同句的[灼烧]持续时间+2秒因上游挂在 turbulence 上标 unsupported，不并入本选项。",
     },
   ]
