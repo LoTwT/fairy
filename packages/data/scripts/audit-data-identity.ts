@@ -14,7 +14,7 @@ const baselinePath = fileURLToPath(
   ),
 )
 
-type Identities = Readonly<Record<string, string>>
+type Identities = Readonly<Record<string, string | null>>
 
 interface CatalogEntity {
   readonly catalogEntityId: string
@@ -71,6 +71,9 @@ export interface AuditInputs {
 export type AuditCheck =
   | "identity-mapping-missing"
   | "identity-mapping-extra"
+  | "identity-entity-id-missing"
+  | "identity-value-mismatch"
+  | "identity-duplicate"
   | "unreferenced-difference"
   | "duplicate-option-name"
   | "unreferenced-rule"
@@ -208,19 +211,59 @@ export function collectAuditProblems(inputs: AuditInputs): AuditProblem[] {
     inputs.catalog.entities.map((entity) => entity.catalogEntityId),
   )
 
+  const catalogEntityIdsByNanokaId = new Map<string, string[]>()
   for (const entity of inputs.catalog.entities) {
-    if (
-      entity.status === "placeholder" ||
-      entity.identity?.entityId === undefined
-    )
+    if (entity.status === "placeholder") continue
+    const nanokaEntityId = entity.identity?.entityId
+    if (nanokaEntityId === undefined) {
+      if (entity.status === "mapped")
+        problems.push({
+          check: "identity-entity-id-missing",
+          id: `identity-entity-id-missing/${entity.catalogEntityId}`,
+          details: {
+            catalogEntityId: entity.catalogEntityId,
+            status: entity.status,
+          },
+        })
       continue
-    if (!Object.hasOwn(inputs.identities, entity.catalogEntityId))
+    }
+    const entitiesForNanokaId =
+      catalogEntityIdsByNanokaId.get(nanokaEntityId) ?? []
+    entitiesForNanokaId.push(entity.catalogEntityId)
+    catalogEntityIdsByNanokaId.set(nanokaEntityId, entitiesForNanokaId)
+    if (!Object.hasOwn(inputs.identities, entity.catalogEntityId)) {
       problems.push({
         check: "identity-mapping-missing",
         id: `identity-mapping-missing/${entity.catalogEntityId}`,
         details: { catalogEntityId: entity.catalogEntityId },
       })
+      continue
+    }
+    const identity = inputs.identities[entity.catalogEntityId]
+    if (identity !== nanokaEntityId)
+      problems.push({
+        check: "identity-value-mismatch",
+        id: `identity-value-mismatch/${entity.catalogEntityId}`,
+        details: {
+          catalogEntityId: entity.catalogEntityId,
+          expected: nanokaEntityId,
+          actual: identity,
+        },
+      })
   }
+  for (const [
+    nanokaEntityId,
+    entitiesForNanokaId,
+  ] of catalogEntityIdsByNanokaId)
+    if (entitiesForNanokaId.length > 1)
+      problems.push({
+        check: "identity-duplicate",
+        id: `identity-duplicate/${nanokaEntityId}`,
+        details: {
+          nanokaEntityId,
+          catalogEntityIds: entitiesForNanokaId.toSorted(),
+        },
+      })
   for (const identityKey of Object.keys(inputs.identities).toSorted())
     if (!catalogEntityIds.has(identityKey))
       problems.push({
@@ -313,6 +356,9 @@ function countProblems(
   const counts: Record<AuditCheck, number> = {
     "identity-mapping-missing": 0,
     "identity-mapping-extra": 0,
+    "identity-entity-id-missing": 0,
+    "identity-value-mismatch": 0,
+    "identity-duplicate": 0,
     "unreferenced-difference": 0,
     "duplicate-option-name": 0,
     "unreferenced-rule": 0,
