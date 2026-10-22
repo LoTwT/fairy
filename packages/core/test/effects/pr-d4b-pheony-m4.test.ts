@@ -210,7 +210,8 @@ const contribution = (result: StaticDamageResult, id: string) =>
     .filter((entry) => entry.origin.effectId === id)
     .reduce((sum, entry) => sum + entry.value.value, 0)
 
-describe("D4 Pheony M4 six-element anomaly settlement", () => {
+// D5-2 移除 D4 覆盖层；对应固定源实体动作/缺口在 D6 重建后恢复。
+describe.skip("D4 Pheony M4 six-element anomaly settlement", () => {
   it.each(cases)(
     "settles $element at the normalized 600% multiplier",
     ({ element, multiplier }) => {

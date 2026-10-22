@@ -131,17 +131,17 @@
     "dataVersion": {
       "packageVersion": "0.4.0",
       "contractVersion": 2,
-      "gameVersion": "3.2",
-      "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+      "gameVersion": "3.3",
+      "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
     },
     "files": [
       {
         "file": "packages/data/definitions/effects/static.json",
-        "sha256": "146b782addcc6a99a698de6cecd3ef4d310aaa0a81f4b44c68594fe3b01d19ee"
+        "sha256": "3a30bd0e5e5bc8fc2087163da1fc5e857cbca71ccc1bf2bf8c3b2777193ce823"
       },
       {
         "file": "packages/data/definitions/effects/static-catalog.json",
-        "sha256": "ed47e1a2cc16432b88c8d0d67083a4a4a5f0280bf5a4cdd008d071bce3a50038"
+        "sha256": "c8455d57b00a0329da50841e4d1a0bcc7e35bc28fd2b4319520dba01ab1c670c"
       },
       {
         "file": "packages/data/definitions/attributes/drive-disc-affixes.json",
@@ -1539,36 +1539,78 @@
       "file": "packages/data/definitions/effects/static-catalog.json",
       "pointer": "/options/404",
       "value": {
-        "optionId": "agents:vivian:mindscape:0:blk-ms4qu5nj-ntz0qy:eff-ms4qu5nj-q9gcnu",
-        "catalogEntityId": "agents:vivian",
-        "name": "核心被动：命运悲歌 · anomalyReleaseMult",
-        "conditionDescription": "[普通攻击：落羽生花]命中处于以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、冰属性异常状态、风属性异常状态的目标时，触发一次[异放]：额外结算一次属性异常伤害，相对于原属性异常伤害的比例为每10点异常精通6.15%/3.2%/8%/0.75%/1.08%/0.32%；",
+        "optionId": "agents:soldier11:mindscape:0:blk-ms0etqtb-lx74vp:eff-ms0euhcc-auiadr",
+        "catalogEntityId": "agents:soldier11",
+        "name": "额外能力：燎原 · dmgBonus",
+        "conditionDescription": "队伍中存在与自身属性或阵营相同的角色时触发：\n「11号」造成的火属性伤害提升10%，攻击处于失衡状态下的敌人时，该增益效果额外提升22.5%。",
         "target": "self",
         "variants": [
           {
             "configuration": {
               "minimumMindscape": 0,
-              "coreSkillLevels": [7]
+              "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
             },
             "status": "converted",
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/1/effects/0"
+                "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/1/effects/1"
               },
               {
                 "sourceId": "nanoka-integrated",
-                "version": "3.2",
+                "version": "3.3.12+19634983",
                 "locale": "zh",
-                "resourcePath": "agents/1331/details.zh.json",
-                "pointer": "/passive/level/1331507/desc/0"
+                "resourcePath": "agents/1041/details.zh.json",
+                "pointer": "/passive/level/1041501/desc/1"
+              },
+              {
+                "sourceId": "nanoka-integrated",
+                "version": "3.3.12+19634983",
+                "locale": "zh",
+                "resourcePath": "agents/1041/details.zh.json",
+                "pointer": "/passive/level/1041502/desc/1"
+              },
+              {
+                "sourceId": "nanoka-integrated",
+                "version": "3.3.12+19634983",
+                "locale": "zh",
+                "resourcePath": "agents/1041/details.zh.json",
+                "pointer": "/passive/level/1041503/desc/1"
+              },
+              {
+                "sourceId": "nanoka-integrated",
+                "version": "3.3.12+19634983",
+                "locale": "zh",
+                "resourcePath": "agents/1041/details.zh.json",
+                "pointer": "/passive/level/1041504/desc/1"
+              },
+              {
+                "sourceId": "nanoka-integrated",
+                "version": "3.3.12+19634983",
+                "locale": "zh",
+                "resourcePath": "agents/1041/details.zh.json",
+                "pointer": "/passive/level/1041505/desc/1"
+              },
+              {
+                "sourceId": "nanoka-integrated",
+                "version": "3.3.12+19634983",
+                "locale": "zh",
+                "resourcePath": "agents/1041/details.zh.json",
+                "pointer": "/passive/level/1041506/desc/1"
+              },
+              {
+                "sourceId": "nanoka-integrated",
+                "version": "3.3.12+19634983",
+                "locale": "zh",
+                "resourcePath": "agents/1041/details.zh.json",
+                "pointer": "/passive/level/1041507/desc/1"
               }
             ],
             "effectIds": [
-              "agent:1331:zzz-hp:eff-ms4qu5nj-q9gcnu:blk-ms4qu5nj-ntz0qy:mindscape:0"
+              "agent:1041:zzz-hp:eff-ms0euhcc-auiadr:blk-ms0etqtb-lx74vp:mindscape:0"
             ],
             "maximumLayers": 1,
             "inputs": [],
@@ -1583,66 +1625,36 @@
       "file": "packages/data/definitions/effects/static-catalog.json",
       "pointer": "/options/402",
       "value": {
-        "optionId": "agents:vivian:mindscape:0:blk-legacy:legacy-team-anomalyDmgBonus",
-        "catalogEntityId": "agents:vivian",
-        "name": "额外能力：预言之泪 · anomalyDmgBonus",
-        "conditionDescription": "队伍中存在其他[异常]角色或与自身属性相同的角色时触发：\n全队角色造成的[侵蚀]伤害和[侵蚀]状态被结算的[紊乱]伤害提升12%。",
-        "target": "team",
-        "variants": [
-          {
-            "configuration": {
-              "minimumMindscape": 0
-            },
-            "status": "converted",
-            "references": [
-              {
-                "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-                "locale": "zh",
-                "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/0"
-              }
-            ],
-            "effectIds": [
-              "agent:1331:zzz-hp:legacy-team-anomalyDmgBonus:blk-legacy:mindscape:0"
-            ],
-            "maximumLayers": 1,
-            "inputs": [],
-            "differences": [],
-            "applicability": {
-              "beneficiaryElements": ["ether"]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "system": "fairy",
-      "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/410",
-      "value": {
-        "optionId": "agents:vivian:mindscape:2:blk-legacy:legacy-self-anomalyReleaseMultFactor",
-        "catalogEntityId": "agents:vivian",
-        "name": "影画2 · anomalyReleaseMultFactor",
-        "conditionDescription": "[异放]从精通中获得的收益提升至原本的130%，且无视目标15%全属性伤害抗性。",
+        "optionId": "agents:soldier11:mindscape:0:blk-legacy:legacy-self-skillDmgBonus",
+        "catalogEntityId": "agents:soldier11",
+        "name": "核心被动：热浪 · skillDmgBonus",
+        "conditionDescription": "「11号」在[普通攻击]或[冲刺攻击]中触发[火力镇压]时，招式造成的伤害提升70%。",
         "target": "self",
         "variants": [
           {
             "configuration": {
-              "minimumMindscape": 2
+              "minimumMindscape": 0,
+              "coreSkillLevels": [7]
             },
             "status": "converted",
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/agents/52/mindscapeBuffs/2/effectBlocks/0/effects/0"
+                "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/0"
+              },
+              {
+                "sourceId": "nanoka-integrated",
+                "version": "3.3.12+19634983",
+                "locale": "zh",
+                "resourcePath": "agents/1041/details.zh.json",
+                "pointer": "/passive/level/1041507/desc/0"
               }
             ],
             "effectIds": [
-              "agent:1331:zzz-hp:legacy-self-anomalyReleaseMultFactor:blk-legacy:mindscape:2"
+              "agent:1041:zzz-hp:legacy-self-skillDmgBonus:blk-legacy:mindscape:0"
             ],
             "maximumLayers": 1,
             "inputs": [],
@@ -1655,30 +1667,68 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/411",
+      "pointer": "/options/410",
       "value": {
-        "optionId": "agents:vivian:mindscape:2:blk-legacy:legacy-team-resPen",
-        "catalogEntityId": "agents:vivian",
-        "name": "影画2 · resPen",
-        "conditionDescription": "[异放]从精通中获得的收益提升至原本的130%，且无视目标15%全属性伤害抗性。",
-        "target": "self",
+        "optionId": "agents:soukaku:mindscape:4:blk-legacy:legacy-team-resPen",
+        "catalogEntityId": "agents:soukaku",
+        "name": "影画4 · resPen",
+        "conditionDescription": "[展旗]攻击命中敌人时，目标的冰属性伤害抗性降低10%，持续8秒。",
+        "target": "team",
         "variants": [
           {
             "configuration": {
-              "minimumMindscape": 2
+              "minimumMindscape": 4
             },
             "status": "converted",
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/agents/52/mindscapeBuffs/2/effectBlocks/0/effects/1"
+                "pointer": "/agents/49/mindscapeBuffs/4/effectBlocks/0/effects/0"
               }
             ],
             "effectIds": [
-              "agent:1331:zzz-hp:legacy-team-resPen:blk-legacy:mindscape:2"
+              "agent:1131:zzz-hp:legacy-team-resPen:blk-legacy:mindscape:4"
+            ],
+            "maximumLayers": 1,
+            "inputs": [],
+            "differences": [],
+            "applicability": {
+              "beneficiaryElements": ["ice"]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "system": "fairy",
+      "file": "packages/data/definitions/effects/static-catalog.json",
+      "pointer": "/options/411",
+      "value": {
+        "optionId": "agents:soukaku:mindscape:6:blk-legacy:legacy-self-skillDmgBonus",
+        "catalogEntityId": "agents:soukaku",
+        "name": "影画6 · skillDmgBonus",
+        "conditionDescription": "[霜染刃旗]状态下，强化[普通攻击]和强化[冲刺攻击]的可发动次数提升至12次，且招式造成的伤害提升45%。",
+        "target": "self",
+        "variants": [
+          {
+            "configuration": {
+              "minimumMindscape": 6
+            },
+            "status": "converted",
+            "references": [
+              {
+                "sourceId": "zzz-hp",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "locale": "zh",
+                "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+                "pointer": "/agents/49/mindscapeBuffs/6/effectBlocks/0/effects/0"
+              }
+            ],
+            "effectIds": [
+              "agent:1131:zzz-hp:legacy-self-skillDmgBonus:blk-legacy:mindscape:6"
             ],
             "maximumLayers": 1,
             "inputs": [],
@@ -1693,78 +1743,12 @@
       "file": "packages/data/definitions/effects/static-catalog.json",
       "pointer": "/options/616",
       "value": {
-        "optionId": "w-engines:Flight_of_Fancy:refinement:blk-legacy:legacy-self-mastery",
-        "catalogEntityId": "w-engines:Flight_of_Fancy",
-        "name": "精1 · mastery",
-        "conditionDescription": "装备者造成以太伤害时，自身异常精通提升20点，持续5秒，最多叠加6层，0.5秒内最多触发一次，重复触发时刷新持续时间。",
+        "optionId": "w-engines:Bunny_Band:refinement:blk-legacy:eff-ms1qjmkp-iwe49k",
+        "catalogEntityId": "w-engines:Bunny_Band",
+        "name": "精4 · inCombatAtkPercent",
+        "conditionDescription": "生命值上限提升11.6%；拥有护盾时，装备者的攻击力提升14.5%。",
         "target": "self",
         "variants": [
-          {
-            "configuration": {
-              "refinements": [1]
-            },
-            "status": "converted",
-            "references": [
-              {
-                "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-                "locale": "zh",
-                "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/wengines/94/refinementBuffs/0/effectBlocks/0/effects/0"
-              }
-            ],
-            "effectIds": [
-              "w-engine:14133:zzz-hp:legacy-self-mastery:blk-legacy:refinement"
-            ],
-            "maximumLayers": 6,
-            "inputs": [],
-            "differences": [],
-            "applicability": {}
-          },
-          {
-            "configuration": {
-              "refinements": [2]
-            },
-            "status": "converted",
-            "references": [
-              {
-                "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-                "locale": "zh",
-                "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/wengines/94/refinementBuffs/1/effectBlocks/0/effects/0"
-              }
-            ],
-            "effectIds": [
-              "w-engine:14133:zzz-hp:legacy-self-mastery:blk-legacy:refinement"
-            ],
-            "maximumLayers": 6,
-            "inputs": [],
-            "differences": [],
-            "applicability": {}
-          },
-          {
-            "configuration": {
-              "refinements": [3]
-            },
-            "status": "converted",
-            "references": [
-              {
-                "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-                "locale": "zh",
-                "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/wengines/94/refinementBuffs/2/effectBlocks/0/effects/0"
-              }
-            ],
-            "effectIds": [
-              "w-engine:14133:zzz-hp:legacy-self-mastery:blk-legacy:refinement"
-            ],
-            "maximumLayers": 6,
-            "inputs": [],
-            "differences": [],
-            "applicability": {}
-          },
           {
             "configuration": {
               "refinements": [4]
@@ -1773,38 +1757,16 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/wengines/94/refinementBuffs/3/effectBlocks/0/effects/0"
+                "pointer": "/wengines/20/refinementBuffs/3/effectBlocks/0/effects/1"
               }
             ],
             "effectIds": [
-              "w-engine:14133:zzz-hp:legacy-self-mastery:blk-legacy:refinement"
+              "w-engine:13010:zzz-hp:eff-ms1qjmkp-iwe49k:blk-legacy:refinement:4"
             ],
-            "maximumLayers": 6,
-            "inputs": [],
-            "differences": [],
-            "applicability": {}
-          },
-          {
-            "configuration": {
-              "refinements": [5]
-            },
-            "status": "converted",
-            "references": [
-              {
-                "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-                "locale": "zh",
-                "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/wengines/94/refinementBuffs/4/effectBlocks/0/effects/0"
-              }
-            ],
-            "effectIds": [
-              "w-engine:14133:zzz-hp:legacy-self-mastery:blk-legacy:refinement"
-            ],
-            "maximumLayers": 6,
+            "maximumLayers": 1,
             "inputs": [],
             "differences": [],
             "applicability": {}
@@ -1832,28 +1794,28 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/1"
+                "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/1"
               },
               {
                 "sourceId": "nanoka-integrated",
-                "version": "3.2",
+                "version": "3.3.12+19634983",
                 "locale": "zh",
                 "resourcePath": "agents/1501/details.zh.json",
                 "pointer": "/passive/level/1501055/desc/0"
               },
               {
                 "sourceId": "nanoka-integrated",
-                "version": "3.2",
+                "version": "3.3.12+19634983",
                 "locale": "zh",
                 "resourcePath": "agents/1501/details.zh.json",
                 "pointer": "/passive/level/1501055/desc/0"
               },
               {
                 "sourceId": "nanoka-integrated",
-                "version": "3.2",
+                "version": "3.3.12+19634983",
                 "locale": "en",
                 "resourcePath": "agents/1501/details.en.json",
                 "pointer": "/passive/level/1501055/desc/0"
@@ -1890,14 +1852,14 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/0"
+                "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/0"
               },
               {
                 "sourceId": "nanoka-integrated",
-                "version": "3.2",
+                "version": "3.3.12+19634983",
                 "locale": "zh",
                 "resourcePath": "agents/1501/details.zh.json",
                 "pointer": "/passive/level/1501055/desc/0"
@@ -1934,14 +1896,14 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/7"
+                "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/7"
               },
               {
                 "sourceId": "nanoka-integrated",
-                "version": "3.2",
+                "version": "3.3.12+19634983",
                 "locale": "zh",
                 "resourcePath": "agents/1501/details.zh.json",
                 "pointer": "/passive/level/1501055/desc/0"
@@ -1977,10 +1939,10 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/agents/38/mindscapeBuffs/1/effectBlocks/0/effects/2"
+                "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/2"
               }
             ],
             "effectIds": [
@@ -2013,10 +1975,10 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/agents/38/mindscapeBuffs/1/effectBlocks/0/effects/3"
+                "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/3"
               }
             ],
             "effectIds": [
@@ -2049,10 +2011,10 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/agents/38/mindscapeBuffs/1/effectBlocks/0/effects/0"
+                "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/0"
               }
             ],
             "effectIds": [
@@ -2085,10 +2047,10 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/agents/38/mindscapeBuffs/1/effectBlocks/0/effects/1"
+                "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/1"
               }
             ],
             "effectIds": [
@@ -2121,10 +2083,10 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0"
+                "pointer": "/agents/39/mindscapeBuffs/2/effectBlocks/0/effects/0"
               }
             ],
             "effectIds": [
@@ -2157,10 +2119,10 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/1"
+                "pointer": "/agents/39/mindscapeBuffs/2/effectBlocks/0/effects/1"
               }
             ],
             "effectIds": [
@@ -2179,116 +2141,28 @@
       "file": "packages/data/definitions/effects/static-catalog.json",
       "pointer": "/options/567",
       "value": {
-        "optionId": "w-engines:Angel_In_The_Shell:refinement:blk-legacy:legacy-self-mastery",
-        "catalogEntityId": "w-engines:Angel_In_The_Shell",
-        "name": "精1 · mastery",
-        "conditionDescription": "装备者的异常精通提升90点；以太属性的装备者进入前场或发动[特殊技]、[强化特殊技]时获得增益效果：对处于属性异常状态下的敌人造成的伤害提升20%，触发的所有属性异常伤害和[紊乱]伤害提升10%，效果持续15秒，重复触发时刷新持续时间，换回后场时该效果移除。",
+        "optionId": "drive-discs:SuitSavior:setPieces:4:blk-legacy:legacy-self-dmgBonus",
+        "catalogEntityId": "drive-discs:SuitSavior",
+        "name": "4件套 · dmgBonus",
+        "conditionDescription": "队伍中任意角色发动[强化特殊技]时，装备者的异常精通提升45点，持续8秒；如果发动[强化特殊技]的角色不是装备者本人时，装备者造成的以太伤害提升25%。",
         "target": "self",
         "variants": [
           {
             "configuration": {
-              "refinements": [1]
+              "minimumSetPieces": 4
             },
             "status": "converted",
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/wengines/30/refinementBuffs/0/effectBlocks/0/effects/1"
+                "pointer": "/driveDiscs/15/fourPieceBuffs/effectBlocks/0/effects/1"
               }
             ],
             "effectIds": [
-              "w-engine:14150:zzz-hp:legacy-self-mastery:blk-legacy:refinement"
-            ],
-            "maximumLayers": 1,
-            "inputs": [],
-            "differences": [],
-            "applicability": {}
-          },
-          {
-            "configuration": {
-              "refinements": [2]
-            },
-            "status": "converted",
-            "references": [
-              {
-                "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-                "locale": "zh",
-                "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/wengines/30/refinementBuffs/1/effectBlocks/0/effects/1"
-              }
-            ],
-            "effectIds": [
-              "w-engine:14150:zzz-hp:legacy-self-mastery:blk-legacy:refinement"
-            ],
-            "maximumLayers": 1,
-            "inputs": [],
-            "differences": [],
-            "applicability": {}
-          },
-          {
-            "configuration": {
-              "refinements": [3]
-            },
-            "status": "converted",
-            "references": [
-              {
-                "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-                "locale": "zh",
-                "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/wengines/30/refinementBuffs/2/effectBlocks/0/effects/1"
-              }
-            ],
-            "effectIds": [
-              "w-engine:14150:zzz-hp:legacy-self-mastery:blk-legacy:refinement"
-            ],
-            "maximumLayers": 1,
-            "inputs": [],
-            "differences": [],
-            "applicability": {}
-          },
-          {
-            "configuration": {
-              "refinements": [4]
-            },
-            "status": "converted",
-            "references": [
-              {
-                "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-                "locale": "zh",
-                "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/wengines/30/refinementBuffs/3/effectBlocks/0/effects/1"
-              }
-            ],
-            "effectIds": [
-              "w-engine:14150:zzz-hp:legacy-self-mastery:blk-legacy:refinement"
-            ],
-            "maximumLayers": 1,
-            "inputs": [],
-            "differences": [],
-            "applicability": {}
-          },
-          {
-            "configuration": {
-              "refinements": [5]
-            },
-            "status": "converted",
-            "references": [
-              {
-                "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-                "locale": "zh",
-                "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/wengines/30/refinementBuffs/4/effectBlocks/0/effects/1"
-              }
-            ],
-            "effectIds": [
-              "w-engine:14150:zzz-hp:legacy-self-mastery:blk-legacy:refinement"
+              "disc:33000:zzz-hp:legacy-self-dmgBonus:blk-legacy:setPieces:4"
             ],
             "maximumLayers": 1,
             "inputs": [],
@@ -2303,116 +2177,28 @@
       "file": "packages/data/definitions/effects/static-catalog.json",
       "pointer": "/options/566",
       "value": {
-        "optionId": "w-engines:Angel_In_The_Shell:refinement:blk-legacy:legacy-self-dmgBonus",
-        "catalogEntityId": "w-engines:Angel_In_The_Shell",
-        "name": "精1 · dmgBonus",
-        "conditionDescription": "装备者的异常精通提升90点；以太属性的装备者进入前场或发动[特殊技]、[强化特殊技]时获得增益效果：对处于属性异常状态下的敌人造成的伤害提升20%，触发的所有属性异常伤害和[紊乱]伤害提升10%，效果持续15秒，重复触发时刷新持续时间，换回后场时该效果移除。",
+        "optionId": "drive-discs:SuitSavior:setPieces:2:blk-ms0f3yyh-s1e5iy:eff-ms0f3yyh-c28cgy",
+        "catalogEntityId": "drive-discs:SuitSavior",
+        "name": "2件套 · anomalyControlPercent",
+        "conditionDescription": "异常掌控+8%。",
         "target": "self",
         "variants": [
           {
             "configuration": {
-              "refinements": [1]
+              "minimumSetPieces": 2
             },
             "status": "converted",
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/wengines/30/refinementBuffs/0/effectBlocks/0/effects/0"
+                "pointer": "/driveDiscs/15/twoPieceEffectBlocks/0/effects/0"
               }
             ],
             "effectIds": [
-              "w-engine:14150:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement"
-            ],
-            "maximumLayers": 1,
-            "inputs": [],
-            "differences": [],
-            "applicability": {}
-          },
-          {
-            "configuration": {
-              "refinements": [2]
-            },
-            "status": "converted",
-            "references": [
-              {
-                "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-                "locale": "zh",
-                "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/wengines/30/refinementBuffs/1/effectBlocks/0/effects/0"
-              }
-            ],
-            "effectIds": [
-              "w-engine:14150:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement"
-            ],
-            "maximumLayers": 1,
-            "inputs": [],
-            "differences": [],
-            "applicability": {}
-          },
-          {
-            "configuration": {
-              "refinements": [3]
-            },
-            "status": "converted",
-            "references": [
-              {
-                "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-                "locale": "zh",
-                "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/wengines/30/refinementBuffs/2/effectBlocks/0/effects/0"
-              }
-            ],
-            "effectIds": [
-              "w-engine:14150:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement"
-            ],
-            "maximumLayers": 1,
-            "inputs": [],
-            "differences": [],
-            "applicability": {}
-          },
-          {
-            "configuration": {
-              "refinements": [4]
-            },
-            "status": "converted",
-            "references": [
-              {
-                "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-                "locale": "zh",
-                "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/wengines/30/refinementBuffs/3/effectBlocks/0/effects/0"
-              }
-            ],
-            "effectIds": [
-              "w-engine:14150:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement"
-            ],
-            "maximumLayers": 1,
-            "inputs": [],
-            "differences": [],
-            "applicability": {}
-          },
-          {
-            "configuration": {
-              "refinements": [5]
-            },
-            "status": "converted",
-            "references": [
-              {
-                "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-                "locale": "zh",
-                "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/wengines/30/refinementBuffs/4/effectBlocks/0/effects/0"
-              }
-            ],
-            "effectIds": [
-              "w-engine:14150:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement"
+              "disc:33000:zzz-hp:eff-ms0f3yyh-c28cgy:blk-ms0f3yyh-s1e5iy:setPieces:2"
             ],
             "maximumLayers": 1,
             "inputs": [],
@@ -2427,28 +2213,28 @@
       "file": "packages/data/definitions/effects/static-catalog.json",
       "pointer": "/options/564",
       "value": {
-        "optionId": "w-engines:Angel_In_The_Shell:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
-        "catalogEntityId": "w-engines:Angel_In_The_Shell",
-        "name": "精1 · anomalyDmgBonus",
-        "conditionDescription": "装备者的异常精通提升90点；以太属性的装备者进入前场或发动[特殊技]、[强化特殊技]时获得增益效果：对处于属性异常状态下的敌人造成的伤害提升20%，触发的所有属性异常伤害和[紊乱]伤害提升10%，效果持续15秒，重复触发时刷新持续时间，换回后场时该效果移除。",
+        "optionId": "drive-discs:SuitPufferElectro:setPieces:4:blk-legacy:legacy-self-inCombatAtkPercent",
+        "catalogEntityId": "drive-discs:SuitPufferElectro",
+        "name": "4件套 · inCombatAtkPercent",
+        "conditionDescription": "[终结技]造成的伤害提升20%；发动[终结技]时，装备者的攻击力提升15%，持续12秒。",
         "target": "self",
         "variants": [
           {
             "configuration": {
-              "refinements": [1]
+              "minimumSetPieces": 4
             },
             "status": "converted",
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-                "pointer": "/wengines/30/refinementBuffs/0/effectBlocks/0/effects/2"
+                "pointer": "/driveDiscs/14/fourPieceBuffs/effectBlocks/0/effects/0"
               }
             ],
             "effectIds": [
-              "w-engine:14150:zzz-hp:legacy-self-anomalyDmgBonus:blk-legacy:refinement:1"
+              "disc:31100:zzz-hp:legacy-self-inCombatAtkPercent:blk-legacy:setPieces:4"
             ],
             "maximumLayers": 1,
             "inputs": [],
@@ -2464,27 +2250,20 @@
       "pointer": "/effects/232",
       "value": {
         "kind": "contribution",
-        "effectId": "agent:1331:zzz-hp:eff-ms4qu5nj-q9gcnu:blk-ms4qu5nj-ntz0qy:mindscape:0",
+        "effectId": "agent:1321:zzz-hp:legacy-self-reduceDefense:blk-legacy:mindscape:1",
         "source": {
           "identity": {
             "kind": "agent",
-            "entityId": "1331"
+            "entityId": "1321"
           },
-          "section": "核心被动：命运悲歌",
+          "section": "影画1",
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/1/effects/0"
-            },
-            {
-              "sourceId": "nanoka-integrated",
-              "version": "3.2",
-              "locale": "zh",
-              "resourcePath": "agents/1331/details.zh.json",
-              "pointer": "/passive/level/1331507/desc/0"
+              "pointer": "/agents/4/mindscapeBuffs/1/effectBlocks/0/effects/0"
             }
           ]
         },
@@ -2500,19 +2279,95 @@
           "right": {
             "kind": "literal",
             "unit": "count",
-            "value": 0
+            "value": 1
           }
         },
         "parameters": {
-          "threshold": {
+          "amount": {
             "kind": "constant",
-            "unit": "anomaly-proficiency-points",
-            "value": 0
+            "unit": "ratio",
+            "value": 0.12
+          }
+        },
+        "activation": {
+          "kind": "supplied",
+          "maximumLayers": {
+            "kind": "literal",
+            "unit": "count",
+            "value": 1
+          }
+        },
+        "scope": "hit",
+        "beneficiary": {
+          "kind": "holder"
+        },
+        "when": {
+          "kind": "all",
+          "conditions": []
+        },
+        "operation": {
+          "kind": "factor-contribution",
+          "channel": "target-defense-adjustment",
+          "value": {
+            "kind": "multiply",
+            "unit": "ratio",
+            "value": {
+              "kind": "parameter",
+              "unit": "ratio",
+              "name": "amount"
+            },
+            "coefficient": {
+              "kind": "literal",
+              "unit": "multiplier",
+              "value": -1
+            }
+          }
+        }
+      }
+    },
+    {
+      "system": "fairy",
+      "file": "packages/data/definitions/effects/static.json",
+      "pointer": "/effects/241",
+      "value": {
+        "kind": "contribution",
+        "effectId": "agent:1331:zzz-hp:legacy-self-critRate:blk-legacy:mindscape:4",
+        "source": {
+          "identity": {
+            "kind": "agent",
+            "entityId": "1331"
           },
-          "rate": {
+          "section": "影画4",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/agents/54/mindscapeBuffs/4/effectBlocks/0/effects/0"
+            }
+          ]
+        },
+        "config": {
+          "kind": "compare-number",
+          "unit": "count",
+          "operator": "gte",
+          "left": {
+            "kind": "configuration-number",
+            "unit": "count",
+            "field": "mindscapeRank"
+          },
+          "right": {
+            "kind": "literal",
+            "unit": "count",
+            "value": 4
+          }
+        },
+        "parameters": {
+          "amount": {
             "kind": "constant",
-            "unit": "multiplier",
-            "value": 0.0038437500000000004
+            "unit": "ratio",
+            "value": 1
           }
         },
         "activation": {
@@ -2533,11 +2388,26 @@
             {
               "kind": "one-of",
               "fact": "hit.damageKind",
-              "values": ["anomaly-settlement"]
+              "values": ["regular", "sheer", "sharpen"]
             },
             {
               "kind": "any",
               "conditions": [
+                {
+                  "kind": "all",
+                  "conditions": [
+                    {
+                      "kind": "one-of",
+                      "fact": "hit.skillTag",
+                      "values": ["zzz-hp:category:basic"]
+                    },
+                    {
+                      "kind": "one-of",
+                      "fact": "hit.skillTag",
+                      "values": ["zzz-hp:skill:vivian-basic-ms4rzqxt"]
+                    }
+                  ]
+                },
                 {
                   "kind": "all",
                   "conditions": [
@@ -2554,57 +2424,17 @@
                   ]
                 }
               ]
-            },
-            {
-              "kind": "one-of",
-              "fact": "hit.element",
-              "values": ["ether"]
             }
           ]
         },
         "operation": {
-          "kind": "factor-contribution",
-          "channel": "base-multiplier-addition",
+          "kind": "stat-adjustment",
+          "stat": "criticalRate",
+          "stage": "direct",
           "value": {
-            "kind": "convert",
-            "unit": "multiplier",
-            "input": {
-              "kind": "maximum",
-              "unit": "anomaly-proficiency-points",
-              "operands": [
-                {
-                  "kind": "literal",
-                  "unit": "anomaly-proficiency-points",
-                  "value": 0
-                },
-                {
-                  "kind": "add",
-                  "unit": "anomaly-proficiency-points",
-                  "operands": [
-                    {
-                      "kind": "stat",
-                      "unit": "anomaly-proficiency-points",
-                      "entity": {
-                        "role": "holder"
-                      },
-                      "stat": "anomalyProficiency",
-                      "stage": "current",
-                      "at": "evaluation"
-                    },
-                    {
-                      "kind": "parameter",
-                      "unit": "anomaly-proficiency-points",
-                      "name": "threshold"
-                    }
-                  ]
-                }
-              ]
-            },
-            "rate": {
-              "kind": "parameter",
-              "unit": "multiplier",
-              "name": "rate"
-            }
+            "kind": "parameter",
+            "unit": "ratio",
+            "name": "amount"
           }
         }
       }
@@ -2612,23 +2442,23 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static.json",
-      "pointer": "/effects/241",
+      "pointer": "/effects/238",
       "value": {
         "kind": "contribution",
-        "effectId": "agent:1331:zzz-hp:legacy-team-anomalyDmgBonus:blk-legacy:mindscape:0",
+        "effectId": "agent:1331:zzz-hp:eff-ms4s2kt2-c46621:blk-legacy:mindscape:6",
         "source": {
           "identity": {
             "kind": "agent",
             "entityId": "1331"
           },
-          "section": "额外能力：预言之泪",
+          "section": "影画6",
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/0"
+              "pointer": "/agents/54/mindscapeBuffs/6/effectBlocks/0/effects/1"
             }
           ]
         },
@@ -2644,14 +2474,92 @@
           "right": {
             "kind": "literal",
             "unit": "count",
-            "value": 0
+            "value": 6
           }
         },
         "parameters": {
           "amount": {
             "kind": "constant",
             "unit": "ratio",
-            "value": 0.12
+            "value": 0.4
+          }
+        },
+        "activation": {
+          "kind": "supplied",
+          "maximumLayers": {
+            "kind": "literal",
+            "unit": "count",
+            "value": 1
+          }
+        },
+        "scope": "hit",
+        "beneficiary": {
+          "kind": "holder"
+        },
+        "when": {
+          "kind": "all",
+          "conditions": [
+            {
+              "kind": "one-of",
+              "fact": "hit.element",
+              "values": ["ether"]
+            }
+          ]
+        },
+        "operation": {
+          "kind": "factor-contribution",
+          "channel": "damage-bonus",
+          "value": {
+            "kind": "parameter",
+            "unit": "ratio",
+            "name": "amount"
+          }
+        }
+      }
+    },
+    {
+      "system": "fairy",
+      "file": "packages/data/definitions/effects/static.json",
+      "pointer": "/effects/245",
+      "value": {
+        "kind": "contribution",
+        "effectId": "agent:1331:zzz-hp:legacy-team-disorderDmgBonus:blk-legacy:mindscape:1",
+        "source": {
+          "identity": {
+            "kind": "agent",
+            "entityId": "1331"
+          },
+          "section": "影画2",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/agents/54/mindscapeBuffs/1/effectBlocks/0/effects/1"
+            }
+          ]
+        },
+        "config": {
+          "kind": "compare-number",
+          "unit": "count",
+          "operator": "gte",
+          "left": {
+            "kind": "configuration-number",
+            "unit": "count",
+            "field": "mindscapeRank"
+          },
+          "right": {
+            "kind": "literal",
+            "unit": "count",
+            "value": 1
+          }
+        },
+        "parameters": {
+          "amount": {
+            "kind": "constant",
+            "unit": "ratio",
+            "value": 0.16
           }
         },
         "activation": {
@@ -2672,7 +2580,7 @@
             {
               "kind": "one-of",
               "fact": "hit.damageKind",
-              "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
+              "values": ["disorder"]
             }
           ]
         },
@@ -2690,246 +2598,53 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static.json",
-      "pointer": "/effects/238",
-      "value": {
-        "kind": "contribution",
-        "effectId": "agent:1331:zzz-hp:legacy-self-anomalyReleaseMultFactor:blk-legacy:mindscape:2",
-        "source": {
-          "identity": {
-            "kind": "agent",
-            "entityId": "1331"
-          },
-          "section": "影画2",
-          "references": [
-            {
-              "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-              "locale": "zh",
-              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/agents/52/mindscapeBuffs/2/effectBlocks/0/effects/0"
-            }
-          ]
-        },
-        "config": {
-          "kind": "compare-number",
-          "unit": "count",
-          "operator": "gte",
-          "left": {
-            "kind": "configuration-number",
-            "unit": "count",
-            "field": "mindscapeRank"
-          },
-          "right": {
-            "kind": "literal",
-            "unit": "count",
-            "value": 2
-          }
-        },
-        "parameters": {
-          "amount": {
-            "kind": "constant",
-            "unit": "ratio",
-            "value": 0.3
-          }
-        },
-        "activation": {
-          "kind": "supplied",
-          "maximumLayers": {
-            "kind": "literal",
-            "unit": "count",
-            "value": 1
-          }
-        },
-        "scope": "hit",
-        "beneficiary": {
-          "kind": "holder"
-        },
-        "when": {
-          "kind": "all",
-          "conditions": [
-            {
-              "kind": "one-of",
-              "fact": "hit.damageKind",
-              "values": ["anomaly-settlement"]
-            },
-            {
-              "kind": "any",
-              "conditions": [
-                {
-                  "kind": "all",
-                  "conditions": [
-                    {
-                      "kind": "one-of",
-                      "fact": "hit.skillTag",
-                      "values": ["zzz-hp:category:basic"]
-                    },
-                    {
-                      "kind": "one-of",
-                      "fact": "hit.skillTag",
-                      "values": ["zzz-hp:skill:vivian-basic-ms4qvvl9"]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        "operation": {
-          "kind": "factor-contribution",
-          "channel": "base-multiplier-increase",
-          "value": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
-        }
-      }
-    },
-    {
-      "system": "fairy",
-      "file": "packages/data/definitions/effects/static.json",
-      "pointer": "/effects/245",
-      "value": {
-        "kind": "contribution",
-        "effectId": "agent:1331:zzz-hp:legacy-team-resPen:blk-legacy:mindscape:2",
-        "source": {
-          "identity": {
-            "kind": "agent",
-            "entityId": "1331"
-          },
-          "section": "影画2",
-          "references": [
-            {
-              "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-              "locale": "zh",
-              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/agents/52/mindscapeBuffs/2/effectBlocks/0/effects/1"
-            }
-          ]
-        },
-        "config": {
-          "kind": "compare-number",
-          "unit": "count",
-          "operator": "gte",
-          "left": {
-            "kind": "configuration-number",
-            "unit": "count",
-            "field": "mindscapeRank"
-          },
-          "right": {
-            "kind": "literal",
-            "unit": "count",
-            "value": 2
-          }
-        },
-        "parameters": {
-          "amount": {
-            "kind": "constant",
-            "unit": "ratio",
-            "value": 0.15
-          }
-        },
-        "activation": {
-          "kind": "supplied",
-          "maximumLayers": {
-            "kind": "literal",
-            "unit": "count",
-            "value": 1
-          }
-        },
-        "scope": "hit",
-        "beneficiary": {
-          "kind": "holder"
-        },
-        "when": {
-          "kind": "all",
-          "conditions": [
-            {
-              "kind": "one-of",
-              "fact": "hit.damageKind",
-              "values": ["anomaly-settlement"]
-            }
-          ]
-        },
-        "operation": {
-          "kind": "factor-contribution",
-          "channel": "attacker-resistance-ignore",
-          "value": {
-            "kind": "parameter",
-            "unit": "ratio",
-            "name": "amount"
-          }
-        }
-      }
-    },
-    {
-      "system": "fairy",
-      "file": "packages/data/definitions/effects/static.json",
       "pointer": "/effects/756",
       "value": {
         "kind": "contribution",
-        "effectId": "w-engine:14133:zzz-hp:legacy-self-mastery:blk-legacy:refinement",
+        "effectId": "w-engine:14121:zzz-hp:eff-ms1zwut7-09s4nv:blk-legacy:refinement:3",
         "source": {
           "identity": {
             "kind": "w-engine",
-            "entityId": "14133"
+            "entityId": "14121"
           },
-          "section": "精1",
+          "section": "精3",
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/wengines/94/refinementBuffs/0/effectBlocks/0/effects/0"
+              "pointer": "/wengines/29/refinementBuffs/2/effectBlocks/0/effects/2"
             },
             {
-              "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
               "locale": "zh",
-              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/wengines/94/refinementBuffs/1/effectBlocks/0/effects/0"
-            },
-            {
-              "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-              "locale": "zh",
-              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/wengines/94/refinementBuffs/2/effectBlocks/0/effects/0"
-            },
-            {
-              "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-              "locale": "zh",
-              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/wengines/94/refinementBuffs/3/effectBlocks/0/effects/0"
-            },
-            {
-              "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-              "locale": "zh",
-              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/wengines/94/refinementBuffs/4/effectBlocks/0/effects/0"
+              "resourcePath": "w-engines/14121/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ]
         },
         "config": {
-          "kind": "constant",
-          "value": true
+          "kind": "compare-number",
+          "unit": "count",
+          "operator": "eq",
+          "left": {
+            "kind": "configuration-number",
+            "unit": "count",
+            "field": "refinement"
+          },
+          "right": {
+            "kind": "literal",
+            "unit": "count",
+            "value": 3
+          }
         },
         "parameters": {
           "amount": {
-            "kind": "by-rank",
-            "rank": "refinement",
-            "unit": "anomaly-proficiency-points",
-            "values": {
-              "1": 20,
-              "2": 23,
-              "3": 26,
-              "4": 29,
-              "5": 32
-            }
+            "kind": "constant",
+            "unit": "energy-per-second",
+            "value": 0.9
           }
         },
         "activation": {
@@ -2937,30 +2652,24 @@
           "maximumLayers": {
             "kind": "literal",
             "unit": "count",
-            "value": 6
+            "value": 1
           }
         },
-        "scope": "hit",
+        "scope": "entity",
         "beneficiary": {
           "kind": "holder"
         },
         "when": {
           "kind": "all",
-          "conditions": [
-            {
-              "kind": "one-of",
-              "fact": "hit.element",
-              "values": ["ether"]
-            }
-          ]
+          "conditions": []
         },
         "operation": {
           "kind": "stat-adjustment",
-          "stat": "anomalyProficiency",
+          "stat": "energyRegen",
           "stage": "final-fixed",
           "value": {
             "kind": "parameter",
-            "unit": "anomaly-proficiency-points",
+            "unit": "energy-per-second",
             "name": "amount"
           }
         }
@@ -2982,28 +2691,28 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/1"
+              "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/1"
             },
             {
               "sourceId": "nanoka-integrated",
-              "version": "3.2",
+              "version": "3.3.12+19634983",
               "locale": "zh",
               "resourcePath": "agents/1501/details.zh.json",
               "pointer": "/passive/level/1501055/desc/0"
             },
             {
               "sourceId": "nanoka-integrated",
-              "version": "3.2",
+              "version": "3.3.12+19634983",
               "locale": "zh",
               "resourcePath": "agents/1501/details.zh.json",
               "pointer": "/passive/level/1501055/desc/0"
             },
             {
               "sourceId": "nanoka-integrated",
-              "version": "3.2",
+              "version": "3.3.12+19634983",
               "locale": "en",
               "resourcePath": "agents/1501/details.en.json",
               "pointer": "/passive/level/1501055/desc/0"
@@ -3127,14 +2836,14 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/0"
+              "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/0"
             },
             {
               "sourceId": "nanoka-integrated",
-              "version": "3.2",
+              "version": "3.3.12+19634983",
               "locale": "zh",
               "resourcePath": "agents/1501/details.zh.json",
               "pointer": "/passive/level/1501055/desc/0"
@@ -3207,14 +2916,14 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/7"
+              "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/7"
             },
             {
               "sourceId": "nanoka-integrated",
-              "version": "3.2",
+              "version": "3.3.12+19634983",
               "locale": "zh",
               "resourcePath": "agents/1501/details.zh.json",
               "pointer": "/passive/level/1501055/desc/0"
@@ -3297,10 +3006,10 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/agents/38/mindscapeBuffs/1/effectBlocks/0/effects/2"
+              "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/2"
             }
           ]
         },
@@ -3416,10 +3125,10 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/agents/38/mindscapeBuffs/1/effectBlocks/0/effects/3"
+              "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/3"
             }
           ]
         },
@@ -3494,10 +3203,10 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/agents/38/mindscapeBuffs/1/effectBlocks/0/effects/0"
+              "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/0"
             }
           ]
         },
@@ -3572,10 +3281,10 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/agents/38/mindscapeBuffs/1/effectBlocks/0/effects/1"
+              "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/1"
             }
           ]
         },
@@ -3650,10 +3359,10 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0"
+              "pointer": "/agents/39/mindscapeBuffs/2/effectBlocks/0/effects/0"
             }
           ]
         },
@@ -3737,10 +3446,10 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/1"
+              "pointer": "/agents/39/mindscapeBuffs/2/effectBlocks/0/effects/1"
             }
           ]
         },
@@ -3814,48 +3523,41 @@
       "pointer": "/effects/834",
       "value": {
         "kind": "contribution",
-        "effectId": "w-engine:14150:zzz-hp:legacy-self-mastery:blk-legacy:refinement",
+        "effectId": "w-engine:14145:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement",
         "source": {
           "identity": {
             "kind": "w-engine",
-            "entityId": "14150"
+            "entityId": "14145"
           },
-          "section": "精1",
+          "section": "精2",
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/wengines/30/refinementBuffs/0/effectBlocks/0/effects/1"
+              "pointer": "/wengines/94/refinementBuffs/1/effectBlocks/0/effects/0"
             },
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/wengines/30/refinementBuffs/1/effectBlocks/0/effects/1"
+              "pointer": "/wengines/94/refinementBuffs/2/effectBlocks/0/effects/0"
             },
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/wengines/30/refinementBuffs/2/effectBlocks/0/effects/1"
+              "pointer": "/wengines/94/refinementBuffs/3/effectBlocks/0/effects/0"
             },
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/wengines/30/refinementBuffs/3/effectBlocks/0/effects/1"
-            },
-            {
-              "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-              "locale": "zh",
-              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/wengines/30/refinementBuffs/4/effectBlocks/0/effects/1"
+              "pointer": "/wengines/94/refinementBuffs/4/effectBlocks/0/effects/0"
             }
           ]
         },
@@ -3867,14 +3569,92 @@
           "amount": {
             "kind": "by-rank",
             "rank": "refinement",
-            "unit": "anomaly-proficiency-points",
+            "unit": "ratio",
             "values": {
-              "1": 90,
-              "2": 103,
-              "3": 117,
-              "4": 130,
-              "5": 144
+              "2": 0.28800000000000003,
+              "3": 0.325,
+              "4": 0.363,
+              "5": 0.4
             }
+          }
+        },
+        "activation": {
+          "kind": "supplied",
+          "maximumLayers": {
+            "kind": "literal",
+            "unit": "count",
+            "value": 1
+          }
+        },
+        "scope": "hit",
+        "beneficiary": {
+          "kind": "team"
+        },
+        "when": {
+          "kind": "all",
+          "conditions": []
+        },
+        "operation": {
+          "kind": "factor-contribution",
+          "channel": "damage-bonus",
+          "value": {
+            "kind": "parameter",
+            "unit": "ratio",
+            "name": "amount"
+          }
+        }
+      }
+    },
+    {
+      "system": "fairy",
+      "file": "packages/data/definitions/effects/static.json",
+      "pointer": "/effects/833",
+      "value": {
+        "kind": "contribution",
+        "effectId": "w-engine:14145:zzz-hp:eff-ms1zyw66-9cnhly:blk-legacy:refinement:5",
+        "source": {
+          "identity": {
+            "kind": "w-engine",
+            "entityId": "14145"
+          },
+          "section": "精5",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/wengines/94/refinementBuffs/4/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "w-engines/14145/details.zh.json",
+              "pointer": "/talents/5/desc"
+            }
+          ]
+        },
+        "config": {
+          "kind": "compare-number",
+          "unit": "count",
+          "operator": "eq",
+          "left": {
+            "kind": "configuration-number",
+            "unit": "count",
+            "field": "refinement"
+          },
+          "right": {
+            "kind": "literal",
+            "unit": "count",
+            "value": 5
+          }
+        },
+        "parameters": {
+          "amount": {
+            "kind": "constant",
+            "unit": "energy-per-second",
+            "value": 0.64
           }
         },
         "activation": {
@@ -3895,107 +3675,11 @@
         },
         "operation": {
           "kind": "stat-adjustment",
-          "stat": "anomalyProficiency",
+          "stat": "energyRegen",
           "stage": "final-fixed",
           "value": {
             "kind": "parameter",
-            "unit": "anomaly-proficiency-points",
-            "name": "amount"
-          }
-        }
-      }
-    },
-    {
-      "system": "fairy",
-      "file": "packages/data/definitions/effects/static.json",
-      "pointer": "/effects/833",
-      "value": {
-        "kind": "contribution",
-        "effectId": "w-engine:14150:zzz-hp:legacy-self-dmgBonus:blk-legacy:refinement",
-        "source": {
-          "identity": {
-            "kind": "w-engine",
-            "entityId": "14150"
-          },
-          "section": "精1",
-          "references": [
-            {
-              "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-              "locale": "zh",
-              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/wengines/30/refinementBuffs/0/effectBlocks/0/effects/0"
-            },
-            {
-              "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-              "locale": "zh",
-              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/wengines/30/refinementBuffs/1/effectBlocks/0/effects/0"
-            },
-            {
-              "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-              "locale": "zh",
-              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/wengines/30/refinementBuffs/2/effectBlocks/0/effects/0"
-            },
-            {
-              "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-              "locale": "zh",
-              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/wengines/30/refinementBuffs/3/effectBlocks/0/effects/0"
-            },
-            {
-              "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
-              "locale": "zh",
-              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/wengines/30/refinementBuffs/4/effectBlocks/0/effects/0"
-            }
-          ]
-        },
-        "config": {
-          "kind": "constant",
-          "value": true
-        },
-        "parameters": {
-          "amount": {
-            "kind": "by-rank",
-            "rank": "refinement",
-            "unit": "ratio",
-            "values": {
-              "1": 0.2,
-              "2": 0.23,
-              "3": 0.26,
-              "4": 0.29,
-              "5": 0.32
-            }
-          }
-        },
-        "activation": {
-          "kind": "supplied",
-          "maximumLayers": {
-            "kind": "literal",
-            "unit": "count",
-            "value": 1
-          }
-        },
-        "scope": "hit",
-        "beneficiary": {
-          "kind": "holder"
-        },
-        "when": {
-          "kind": "all",
-          "conditions": []
-        },
-        "operation": {
-          "kind": "factor-contribution",
-          "channel": "damage-bonus",
-          "value": {
-            "kind": "parameter",
-            "unit": "ratio",
+            "unit": "energy-per-second",
             "name": "amount"
           }
         }
@@ -4007,20 +3691,27 @@
       "pointer": "/effects/831",
       "value": {
         "kind": "contribution",
-        "effectId": "w-engine:14150:zzz-hp:legacy-self-anomalyDmgBonus:blk-legacy:refinement:1",
+        "effectId": "w-engine:14145:zzz-hp:eff-ms1zye58-m5xsoq:blk-legacy:refinement:3",
         "source": {
           "identity": {
             "kind": "w-engine",
-            "entityId": "14150"
+            "entityId": "14145"
           },
-          "section": "精1",
+          "section": "精3",
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "fac62407f3d3995f8200a66be0038f292b1455fa",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-              "pointer": "/wengines/30/refinementBuffs/0/effectBlocks/0/effects/2"
+              "pointer": "/wengines/94/refinementBuffs/2/effectBlocks/0/effects/2"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "w-engines/14145/details.zh.json",
+              "pointer": "/talents/3/desc"
             }
           ]
         },
@@ -4036,14 +3727,14 @@
           "right": {
             "kind": "literal",
             "unit": "count",
-            "value": 1
+            "value": 3
           }
         },
         "parameters": {
           "amount": {
             "kind": "constant",
-            "unit": "ratio",
-            "value": 0.1
+            "unit": "energy-per-second",
+            "value": 0.52
           }
         },
         "activation": {
@@ -4054,26 +3745,21 @@
             "value": 1
           }
         },
-        "scope": "hit",
+        "scope": "entity",
         "beneficiary": {
           "kind": "holder"
         },
         "when": {
           "kind": "all",
-          "conditions": [
-            {
-              "kind": "one-of",
-              "fact": "hit.damageKind",
-              "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
-            }
-          ]
+          "conditions": []
         },
         "operation": {
-          "kind": "factor-contribution",
-          "channel": "anomaly-damage-bonus",
+          "kind": "stat-adjustment",
+          "stat": "energyRegen",
+          "stage": "final-fixed",
           "value": {
             "kind": "parameter",
-            "unit": "ratio",
+            "unit": "energy-per-second",
             "name": "amount"
           }
         }
@@ -4136,8 +3822,8 @@
       "dataVersion": {
         "packageVersion": "0.4.0",
         "contractVersion": 2,
-        "gameVersion": "3.2",
-        "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+        "gameVersion": "3.3",
+        "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
       },
       "request": {
         "actors": [
@@ -4402,8 +4088,8 @@
       "dataVersion": {
         "packageVersion": "0.4.0",
         "contractVersion": 2,
-        "gameVersion": "3.2",
-        "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+        "gameVersion": "3.3",
+        "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
       },
       "request": {
         "actors": [
@@ -4674,8 +4360,8 @@
       "dataVersion": {
         "packageVersion": "0.4.0",
         "contractVersion": 2,
-        "gameVersion": "3.2",
-        "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+        "gameVersion": "3.3",
+        "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
       },
       "request": {
         "actors": [
@@ -4938,8 +4624,8 @@
       "dataVersion": {
         "packageVersion": "0.4.0",
         "contractVersion": 2,
-        "gameVersion": "3.2",
-        "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+        "gameVersion": "3.3",
+        "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
       },
       "request": {
         "actors": [
@@ -7090,8 +6776,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -9558,8 +9244,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -12082,8 +11768,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -14754,8 +14440,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -16461,8 +16147,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -18244,8 +17930,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -20041,8 +19727,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -22028,8 +21714,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -24642,8 +24328,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -27411,8 +27097,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -30057,8 +29743,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -32651,8 +32337,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -35245,8 +34931,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -37839,8 +37525,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -40433,8 +40119,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -43027,8 +42713,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -45897,8 +45583,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -48507,8 +48193,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:true",
         "request": {
@@ -51101,8 +50787,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -53659,8 +53345,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -56455,8 +56141,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -59091,8 +58777,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -61913,8 +61599,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -63908,8 +63594,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -65955,8 +65641,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -67798,8 +67484,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -69871,8 +69557,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -72713,8 +72399,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -75872,8 +75558,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -78871,8 +78557,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -81766,8 +81452,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -84661,8 +84347,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -87556,8 +87242,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -90451,8 +90137,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -93346,8 +93032,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -96517,8 +96203,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -99428,8 +99114,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:true",
         "request": {
@@ -102323,8 +102009,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -105058,8 +104744,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -107915,8 +107601,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -110977,8 +110663,8 @@
         "dataVersion": {
           "packageVersion": "0.4.0",
           "contractVersion": 2,
-          "gameVersion": "3.2",
-          "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+          "gameVersion": "3.3",
+          "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -138618,7 +138304,7 @@
           "packages/data/definitions/effects/static-catalog.json": "b0f7831d1e02118f6445b5e9e091e309733464c467ff63a7f0df22f0f95323df"
         }
       },
-      "currentSnapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+      "currentSnapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
     }
   ]
 }

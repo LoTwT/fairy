@@ -277,7 +277,7 @@ function benInput(overrides: BenInputOverrides = {}): StaticCatalogDamageInput {
 
 describe("batch 13 Ben mindscape 2 block counter additional damage", () => {
   it("registers the independent target, option, and rule under revision 28 beside the preserved fixed-source options", () => {
-    expect(catalog.revision).toBe("50")
+    expect(catalog.revision).toBe("51")
     const target = catalog.skillTargets.find(
       (t) => t.targetId === BEN_M2_TARGET,
     )!
@@ -311,7 +311,7 @@ describe("batch 13 Ben mindscape 2 block counter additional damage", () => {
     expect(variant.references).toEqual([
       {
         sourceId: "nanoka-integrated",
-        version: "3.2",
+        version: "3.3.12+19634983",
         locale: "zh",
         resourcePath: "agents/1121/details.zh.json",
         pointer: "/talent/2/desc",

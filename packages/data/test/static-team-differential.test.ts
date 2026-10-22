@@ -752,9 +752,9 @@ describe("fixed-panel team differential fixtures", () => {
     expect(loaded.version).toEqual({
       packageVersion: "0.4.0",
       contractVersion: 2,
-      gameVersion: "3.2",
+      gameVersion: "3.3",
       snapshotId:
-        "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60",
+        "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce",
     })
     expect(loaded.catalog.source.commit).toBe(
       reference.provenance.effectSource.commit,

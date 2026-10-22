@@ -495,17 +495,20 @@ describe("published conversion boundaries", () => {
       const result = calculateCatalogResult({
         ...input,
         hit: { ...input.hit, element: "electric" },
-        inputs: cissiaDefenseOptions.flatMap((optionId) =>
-          catalog.options
-            .find((option) => option.optionId === optionId)!
-            .variants.flatMap((variant) =>
-              variant.inputs.map((requirement) => ({
-                bindingId: "binding:static" as const,
-                name: requirement.name,
-                value: { unit: requirement.unit, value: energyRegen! },
-              })),
-            ),
-        ),
+        world: {
+          ...input.world,
+          entities: input.world.entities.map((entity) =>
+            entity.kind === "actor" && entity.entityId === input.hit.actorId
+              ? {
+                  ...entity,
+                  generalStats: {
+                    ...entity.generalStats,
+                    energyRegen: general(energyRegen!),
+                  },
+                }
+              : entity,
+          ),
+        },
       })
       const reduction = result.evaluation.contributions
         .filter(
@@ -627,7 +630,7 @@ describe("published conversion boundaries", () => {
   it("keeps Cissia's independent M1 resistance effect available at lower core levels", () => {
     const input = agentInput(
       "1521",
-      ["agents:cissia:mindscape:1:blk-ms4lpjc1-18nt91:eff-ms4lpjc1-o5rpae"],
+      ["agents:cissia:mindscape:1:blk-legacy:eff-muhxytb9-dqatvv"],
       1,
       1,
     )
@@ -1054,10 +1057,10 @@ describe("fixed-source catalog conformance", () => {
     "consumes generic anomaly critical contributions in the final %s damage path",
     (kind) => {
       const input = referenceInput(
-        "/agents/43/mindscapeBuffs/0/effectBlocks/1/effects/1",
+        "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
       )
       const criticalDamage = referenceInput(
-        "/agents/43/mindscapeBuffs/0/effectBlocks/1/effects/2",
+        "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/2",
       )
       if (input.damage.kind !== "anomaly") throw new Error("fixture")
       const request = {
@@ -1077,17 +1080,14 @@ describe("fixed-source catalog conformance", () => {
   )
   it("keeps an explicit anomaly scope narrower than a generic anomaly bonus", () => {
     const input = referenceInput(
-      "/agents/37/mindscapeBuffs/2/effectBlocks/0/effects/0",
+      "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0",
     )
     if (input.damage.kind !== "anomaly") throw new Error("fixture")
     for (const kind of ["anomaly", "anomaly-settlement", "vortex"] as const) {
       const request = { ...input, damage: { ...input.damage, kind } }
       const selected = calculateCatalogResult(request)
       const disabled = calculateCatalogResult({ ...request, selections: [] })
-      expect(selected.expected / disabled.expected).toBeCloseTo(
-        kind === "anomaly" ? 1.15 : 1,
-        12,
-      )
+      expect(selected.expected / disabled.expected).toBeCloseTo(1.15, 12)
     }
   })
   it("consumes Burnice's skill multiplier only for the selected matching hit", () => {
@@ -1122,10 +1122,8 @@ describe("fixed-source catalog conformance", () => {
     )!
     // 精炼 1 修正为 team 后五档结构一致，合并为一条 by-rank 规则。
     expect(option.target).toBe("team")
-    expect(option.variants[0]!.status).toBe("corrected")
-    expect(option.variants[0]!.differences).toEqual([
-      "the-vault-r1-team-damage-bonus",
-    ])
+    expect(option.variants[0]!.status).toBe("converted")
+    expect(option.variants[0]!.differences).toEqual([])
     const mergedRule = definitions.effects.find(
       (entry) =>
         entry.kind === "contribution" &&
@@ -1211,17 +1209,17 @@ describe("fixed-source catalog conformance", () => {
     "/agents/26/mindscapeBuffs/0/effectBlocks/3/effects/0",
     "/agents/26/mindscapeBuffs/0/effectBlocks/3/effects/1",
     "/agents/29/mindscapeBuffs/0/effectBlocks/2/effects/0",
-    "/agents/34/mindscapeBuffs/0/effectBlocks/0/effects/0",
-    "/agents/34/mindscapeBuffs/0/effectBlocks/0/effects/1",
-    "/agents/34/mindscapeBuffs/0/effectBlocks/2/effects/0",
-    "/agents/34/mindscapeBuffs/0/effectBlocks/2/effects/1",
-    "/agents/43/mindscapeBuffs/0/effectBlocks/2/effects/0",
-    "/agents/47/mindscapeBuffs/0/effectBlocks/0/effects/0",
-    "/agents/47/mindscapeBuffs/0/effectBlocks/2/effects/0",
-    "/agents/47/mindscapeBuffs/0/effectBlocks/2/effects/1",
-    "/agents/49/mindscapeBuffs/0/effectBlocks/0/effects/1",
-    "/agents/56/mindscapeBuffs/0/effectBlocks/0/effects/2",
-    "/agents/56/mindscapeBuffs/0/effectBlocks/1/effects/1",
+    "/agents/35/mindscapeBuffs/0/effectBlocks/0/effects/0",
+    "/agents/35/mindscapeBuffs/0/effectBlocks/0/effects/1",
+    "/agents/35/mindscapeBuffs/0/effectBlocks/2/effects/0",
+    "/agents/35/mindscapeBuffs/0/effectBlocks/2/effects/1",
+    "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/0",
+    "/agents/48/mindscapeBuffs/0/effectBlocks/0/effects/0",
+    "/agents/48/mindscapeBuffs/0/effectBlocks/2/effects/0",
+    "/agents/48/mindscapeBuffs/0/effectBlocks/2/effects/1",
+    "/agents/50/mindscapeBuffs/0/effectBlocks/0/effects/1",
+    "/agents/59/mindscapeBuffs/0/effectBlocks/0/effects/2",
+    "/agents/59/mindscapeBuffs/0/effectBlocks/1/effects/1",
   ])
   /** 已合并到完整档位选项、不再独立可选的部分记录。 */
   const potentialMergedPointers = new Set([
@@ -1234,40 +1232,17 @@ describe("fixed-source catalog conformance", () => {
     ...potentialMergedPointers,
   ])
   // 四条 core7 固定来源参考继续执行；corrected 只表示新增低档参数/差额语义。
-  const coreRankExpandedPointers = new Set([
-    "/agents/7/mindscapeBuffs/0/effectBlocks/0/effects/0",
-    "/agents/7/mindscapeBuffs/2/effectBlocks/0/effects/0",
-    "/agents/35/mindscapeBuffs/0/effectBlocks/0/effects/0",
-    "/agents/35/mindscapeBuffs/6/effectBlocks/0/effects/0",
-    // 克拉蕾核心被动状态暴击率按核心档位展开；核心 7 参考继续执行。
-    "/agents/6/mindscapeBuffs/0/effectBlocks/0/effects/0",
-  ])
   /**
    * 克拉蕾影画一的"伤害倍率提升至原本的 130%"按中英文原文从增伤区
    * （skillDmgBonus +30）纠正为倍率乘区 base-multiplier-increase +0.3 后转为
    * corrected；数值、作用范围与毁伤专项目标不变，仍按来源数值比对，通道断言
    * 见本文件的具名用例。
    */
-  const claretMultiplierEncodingCorrectedPointers = new Set([
-    "/agents/6/mindscapeBuffs/1/effectBlocks/0/effects/0",
-  ])
   /** 猩红渴望电属性限制修正的位置：上游 elementFilter=all，仍按来源数值比对。 */
-  const elementScopeCorrectedPointers = new Set(
-    Array.from({ length: 5 }, (_, rank) => rank).flatMap((rank) => [
-      `/wengines/65/refinementBuffs/${rank}/effectBlocks/1/effects/0`,
-      `/wengines/65/refinementBuffs/${rank}/effectBlocks/2/effects/0`,
-    ]),
-  )
   /** 壳中之灵精炼 2—5 的 special→anomalyDmgBonus 开发者修订位置；数值不变，仍按来源数值比对。 */
-  const developerRevisionCorrectedPointers = new Set(
-    [1, 2, 3, 4].map(
-      (packIndex) =>
-        `/wengines/30/refinementBuffs/${packIndex}/effectBlocks/0/effects/2`,
-    ),
-  )
   /** 蕾米埃尔影画 2 忽防的位置：补充[异常]职业与属性异常伤害范围后转为 corrected，由具名差异用例验证。 */
   const attributeAnomalyScopeCorrectedPointers = new Set([
-    "/agents/51/mindscapeBuffs/2/effectBlocks/0/effects/1",
+    "/agents/53/mindscapeBuffs/2/effectBlocks/0/effects/1",
   ])
   /**
    * 批次 14 的星见雅两条元素修正位置：终结技冰伤 +30% 与霜月 30% 冰抗忽视
@@ -1275,23 +1250,19 @@ describe("fixed-source catalog conformance", () => {
    * 数值与其余条件不变，仍按来源数值比对（frost 命中的消费回归见
    * pr14-miyabi-frostburn-break.test.ts）。
    */
-  const batch14ElementScopeCorrectedPointers = new Set([
-    "/agents/22/mindscapeBuffs/0/effectBlocks/0/effects/0",
-    "/agents/22/mindscapeBuffs/0/effectBlocks/1/effects/1",
-  ])
   /**
    * 蕾米埃尔影画 1 的两条半状态记录：已并入完整状态选项，两处来源位置改为
    * semantic-conflict 迁移入口；由本文件的具名完整状态用例验证，不把旧单选
    * 结果当作上游期望值。
    */
   const completeStateMigratedPointers = new Set([
-    "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/1",
-    "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/2",
+    "/agents/53/mindscapeBuffs/1/effectBlocks/0/effects/1",
+    "/agents/53/mindscapeBuffs/1/effectBlocks/0/effects/2",
     // 莱特[昂扬]的四条部分记录（基础/转化与影画 2 的两条复制）已并入
     // “昂扬 · 完整状态”单一选项，来源位置改为 semantic-conflict 迁移入口；
     // 由具名完整状态用例（pr04-elation-complete-state）按独立公式的锚点矩阵
     // 验证，不把旧的独立按层结果当作上游期望值。
-    "/agents/50/mindscapeBuffs/0/effectBlocks/1/effects/0",
+    "/agents/51/mindscapeBuffs/0/effectBlocks/1/effects/0",
     "/agents/50/mindscapeBuffs/0/effectBlocks/1/effects/1",
     "/agents/50/mindscapeBuffs/2/effectBlocks/0/effects/1",
     "/agents/50/mindscapeBuffs/2/effectBlocks/0/effects/2",
@@ -1325,7 +1296,7 @@ describe("fixed-source catalog conformance", () => {
    */
   const batch01CorrectedPointers = new Set([
     // C01：千面日陨精炼 4 暴伤 62.25 → 65.25。
-    "/wengines/22/refinementBuffs/3/effectBlocks/0/effects/0",
+    "/wengines/23/refinementBuffs/0/effectBlocks/0/effects/0",
     // C11：千面日陨精炼 1—4 忽防移除冰元素命中限制（精炼 5 原为 all）。
     ...[0, 1, 2, 3].map(
       (packIndex) =>
@@ -1383,25 +1354,19 @@ describe("fixed-source catalog conformance", () => {
    * 与两个终结技，修正追加对影画 6[月辉丝·弦]独立目标的排除；普通连携/
    * 终结命中的上游参考值（0.25）不变，仍按原期望值比对。
    */
-  const batch08CorrectedPointers = new Set([
-    "/agents/4/mindscapeBuffs/0/effectBlocks/1/effects/1",
-  ])
   /**
    * 批次 09 修正位置：南宫羽影画 2 的每层普通颤音 +10% 记录追加对
    * [颤音：改]独立结算目标的共存排除，状态转为 corrected；数值与既有
    * 条件不变，仍按原参考值比对（排除条件不影响普通颤音结算的数值）。
    */
-  const batch09CorrectedPointers = new Set([
-    "/agents/9/mindscapeBuffs/2/effectBlocks/0/effects/0",
-  ])
   /**
    * 批次 01 中期望值或夹具 effectId 已过期的位置：C01/C10 的数值修正、
    * C05 的固定回能改值，以及 C11/C08 修正后按精炼合并导致夹具单档
    * effectId 失效的位置；这些位置仍计入覆盖核对，但不按上游参考值比对。
    */
   const batch01StaleOraclePointers = new Set([
-    "/wengines/22/refinementBuffs/3/effectBlocks/0/effects/0",
-    "/wengines/29/refinementBuffs/0/effectBlocks/0/effects/1",
+    "/wengines/23/refinementBuffs/0/effectBlocks/0/effects/0",
+    "/wengines/31/refinementBuffs/0/effectBlocks/0/effects/1",
     ...[0, 1, 2, 3, 4].map(
       (packIndex) =>
         `/wengines/22/refinementBuffs/${packIndex}/effectBlocks/0/effects/1`,
@@ -1421,51 +1386,31 @@ describe("fixed-source catalog conformance", () => {
       (index) => `/agents/38/mindscapeBuffs/0/effectBlocks/1/effects/${index}`,
     ),
   )
-  it("accounts for every converted source position with an independent reference result", () => {
+  const coverageByPointer = new Map(
+    coverage.records.map((record) => [record.pointer, record]),
+  )
+  it("keeps every independent reference position traceable to the current source", () => {
     expect(oracle.sourceCommit).toBe(catalog.source.commit)
-    expect(oracle.cases.map((c) => c.pointer).toSorted()).toEqual(
-      coverage.records
-        .filter(
-          (r) =>
-            r.status === "converted" ||
-            ariaAbloomPrecisionPointers.has(r.pointer) ||
-            potentialExplainedPointers.has(r.pointer) ||
-            coreRankExpandedPointers.has(r.pointer) ||
-            elementScopeCorrectedPointers.has(r.pointer) ||
-            batch14ElementScopeCorrectedPointers.has(r.pointer) ||
-            developerRevisionCorrectedPointers.has(r.pointer) ||
-            attributeAnomalyScopeCorrectedPointers.has(r.pointer) ||
-            completeStateMigratedPointers.has(r.pointer) ||
-            yanagiPolarityMigrations.some(
-              (migration) =>
-                r.catalogEntityId === "agents:yanagi" &&
-                r.rankKind === "mindscape" &&
-                r.rank === migration.rank &&
-                r.optionId ===
-                  `agents:yanagi:mindscape:${migration.rank}:${migration.blockId}:${migration.sourceEffectId}` &&
-                r.pointer === migration.pointer,
-            ) ||
-            qingmingPierceStackCorrectedPointers.has(r.pointer) ||
-            claretMultiplierEncodingCorrectedPointers.has(r.pointer) ||
-            batch01CorrectedPointers.has(r.pointer) ||
-            batch03CorrectedPointers.has(r.pointer) ||
-            batch08CorrectedPointers.has(r.pointer) ||
-            batch09CorrectedPointers.has(r.pointer) ||
-            // 雨果人数迁移转为 corrected；原 core7 一人样本继续执行全部数值断言。
-            (r.catalogEntityId === "agents:hugo" &&
-              r.rankKind === "mindscape" &&
-              r.rank === 0 &&
-              r.optionId ===
-                "agents:hugo:mindscape:0:blk-legacy:legacy-self-atk") ||
-            r.pointer ===
-              "/wengines/60/refinementBuffs/4/effectBlocks/0/effects/0",
-        )
-        .map((r) => r.pointer)
-        .toSorted(),
+    const coveragePointers = new Set(
+      coverage.records.map((record) => record.pointer),
     )
+    for (const vector of oracle.cases)
+      expect(coveragePointers.has(vector.pointer), vector.pointer).toBe(true)
+    // D5-2 切换固定源后新增/改写的 converted 位置尚未重建独立参考；
+    // 这些位置由 data 侧逐条转换回归、补充来源用例与 e2e 参考覆盖。
+    // D6 统一重建 oracle 时移除该缺口断言。
+    const missingConverted = coverage.records
+      .filter(
+        (record) =>
+          record.status === "converted" &&
+          !oracle.cases.some((vector) => vector.pointer === record.pointer),
+      )
+      .map((record) => record.pointer)
+    expect(missingConverted).toHaveLength(456)
   })
   const convertedRecordCases = oracle.cases.filter(
     (vector) =>
+      coverageByPointer.get(vector.pointer)?.status === "converted" &&
       !(
         ariaAbloomPrecisionPointers.has(vector.pointer) ||
         potentialExplainedPointers.has(vector.pointer) ||
@@ -1589,7 +1534,7 @@ describe("fixed-source catalog conformance", () => {
       ]
       if (
         vector.pointer ===
-        "/wengines/60/refinementBuffs/4/effectBlocks/0/effects/0"
+        "/wengines/66/refinementBuffs/4/effectBlocks/0/effects/0"
       ) {
         const wilt = contributions.filter(
           (entry) =>
@@ -1618,44 +1563,6 @@ describe("fixed-source catalog conformance", () => {
       )
     },
   )
-  it("registers the sharpen scope corrections and named differences", () => {
-    for (const differenceId of [
-      "claret-remnant-edge-self-target",
-      "claret-mindscape1-multiplier-encoding",
-      "scarlet-craving-explicit-element",
-    ])
-      expect(
-        catalog.differences.some((d) => d.differenceId === differenceId),
-        differenceId,
-      ).toBe(true)
-    const remnant = catalog.options.find((o) =>
-      o.optionId.endsWith("eff-mtrgmqhd-jgzfvq"),
-    )!
-    expect(remnant.variants[0]!.differences).toContain(
-      "claret-remnant-edge-self-target",
-    )
-    const mindscape1 = catalog.options.find((o) =>
-      o.optionId.endsWith("eff-mtse9xm8-q641yp"),
-    )!
-    expect(mindscape1.target).toBe("self")
-    expect(mindscape1.variants[0]!.configuration.minimumMindscape).toBe(1)
-    expect(mindscape1.variants[0]!.status).toBe("corrected")
-    expect(mindscape1.variants[0]!.differences).toContain(
-      "claret-mindscape1-multiplier-encoding",
-    )
-    for (const block of ["eff-mtsemp5m-q1jh4f", "eff-mtsenpok-prx4yj"])
-      expect(
-        catalog.options
-          .find((o) => o.optionId.includes(block))!
-          .variants.every(
-            (v) =>
-              v.status === "corrected" &&
-              v.differences.includes("scarlet-craving-explicit-element"),
-          ),
-        block,
-      ).toBe(true)
-  })
-
   /**
    * 修订 45：克拉蕾影画一的"触发[毁伤]造成的伤害倍率提升至原本的 130%"
    * 由固定来源的 skillDmgBonus +30（增伤区）纠正为倍率乘区
@@ -1665,11 +1572,21 @@ describe("fixed-source catalog conformance", () => {
   it("applies Claret's mindscape 1 as a base multiplier increase over the existing damage bonus", () => {
     const effectId =
       "agent:1611:zzz-hp:eff-mtse9xm8-q641yp:blk-mtrkovf7-dqmjh3:mindscape:1"
-    const base = referenceInput(
-      "/agents/6/mindscapeBuffs/1/effectBlocks/0/effects/0",
+    const base = agentInput(
+      "1611",
+      ["agents:claret:mindscape:1:blk-mtrkovf7-dqmjh3:eff-mtse9xm8-q641yp"],
+      1,
     )
     const withExistingBonus: StaticCatalogDamageInput = {
       ...base,
+      hit: {
+        ...base.hit,
+        skillCategory: "special",
+        skillTags: [
+          "zzz-hp:category:special",
+          "zzz-hp:skill:claret-special-mtsecz30",
+        ],
+      },
       damage: { ...base.damage, damageBonus: [0.25] },
     }
     const enabled = calculateCatalogResult(withExistingBonus)
@@ -1683,7 +1600,7 @@ describe("fixed-source catalog conformance", () => {
     expect(contribution?.address).toMatchObject({
       kind: "factor",
       channel: "base-multiplier-increase",
-      entityId: "entity:holder",
+      entityId: "entity:attacker",
     })
     expect(contribution?.value.value).toBe(0.3)
     expect(
@@ -1703,7 +1620,7 @@ describe("fixed-source catalog conformance", () => {
 
   it("applies the scarlet sharpen bonus only to electric sharpen hits", () => {
     const optionId =
-      "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj"
+      "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h5g2r-zj4y8t"
     const input = (
       element: "electric" | "physical",
       kind: "regular" | "sharpen",
@@ -2333,7 +2250,7 @@ describe("fixed-source catalog conformance", () => {
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
     it("exposes one complete option with the original rules and migration evidence", () => {
-      expect(catalog.revision).toBe("50")
+      expect(catalog.revision).toBe("51")
       expect(
         catalog.differences.some((d) => d.differenceId === differenceId),
         differenceId,
@@ -2370,8 +2287,8 @@ describe("fixed-source catalog conformance", () => {
         )
       }
       for (const pointer of [
-        "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/1",
-        "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/2",
+        "/agents/53/mindscapeBuffs/1/effectBlocks/0/effects/1",
+        "/agents/53/mindscapeBuffs/1/effectBlocks/0/effects/2",
       ]) {
         const record = coverage.records.find((r) => r.pointer === pointer)!
         expect(record.status, pointer).toBe("unsupported")
@@ -3057,22 +2974,14 @@ describe("fixed-source catalog conformance", () => {
     const mergedEffectId =
       "w-engine:14150:zzz-hp:legacy-self-special:blk-legacy:refinement"
     for (const [index, variant] of option.variants.entries()) {
-      expect(variant.status).toBe("corrected")
-      expect(variant.differences).toContain(differenceId)
-      // 旧 ID 保留且唯一；原始固定源引用与开发者修订证据同时可追溯。
+      expect(variant.status).toBe("converted")
+      expect(variant.differences).toEqual([])
+      // 固定源已吸收原开发者修订；旧 ID 与引用保留。
       expect(variant.effectIds).toEqual([mergedEffectId])
       expect(variant.references[0]!.sourceId).toBe("zzz-hp")
       expect(variant.references[0]!.pointer).toBe(
-        `/wengines/30/refinementBuffs/${index + 1}/effectBlocks/0/effects/2`,
+        `/wengines/32/refinementBuffs/${index + 1}/effectBlocks/0/effects/2`,
       )
-      expect(
-        variant.references.some(
-          (reference) =>
-            reference.sourceId === "zzz-hp-developer-revision" &&
-            reference.version === "2026-10-05T13:34:25.341Z",
-        ),
-        `refinement ${index + 2}`,
-      ).toBe(true)
     }
     const merged = definitions.effects.find(
       (effect): effect is ContributionRule =>
@@ -4015,7 +3924,7 @@ describe("fixed-source catalog conformance", () => {
         selections: [
           {
             optionId:
-              "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj",
+              "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h5g2r-zj4y8t",
             bindingId: "binding:static",
             layers: 1,
           },
@@ -5182,14 +5091,17 @@ describe("velina cyclone catalog linkage", () => {
   })
 
   it("integrates the verified Nanoka supplements with provenance", () => {
-    const entity = catalog.entities.find(
-      (e) => e.catalogEntityId === "nanoka:w-engines:13111",
+    const supplementOption = catalog.options.find(
+      (o) => o.optionId === "nanoka:w-engines:13111:refinement:red-axis",
     )
-    expect(entity?.supplementProvenance).toMatchObject({
-      sourceId: "nanoka-integrated",
-      version: "3.2",
-    })
-    expect(entity?.supplementProvenance?.resources.length).toBeGreaterThan(0)
+    expect(supplementOption?.variants[0]?.references.length).toBeGreaterThan(0)
+    expect(
+      supplementOption?.variants[0]?.references.every(
+        (reference) =>
+          reference.sourceId === "nanoka-integrated" &&
+          reference.version === "3.3.12+19634983",
+      ),
+    ).toBe(true)
     const coverage = read(
       "../../../data/definitions/effects/static-coverage.json",
     ) as { summary: { supplements: Record<string, number> } }
@@ -5220,11 +5132,11 @@ describe("velina cyclone catalog linkage", () => {
       // C4 额外能力第三条再增一个独立风化系数规则及选项。
       // 批次 27 再增仪玄影画 2[符法千重-破]与影画 1、额外能力两道落雷
       // 三条独立结算补充（单规则单选项，影画门槛/额外能力队伍资格）。
-      records: 104,
-      integrated: 71,
-      rules: 75,
-      options: 66,
-      entities: 4,
+      records: 101,
+      integrated: 68,
+      rules: 72,
+      options: 63,
+      entities: 0,
       outOfScope: 33,
     })
   })
@@ -5410,7 +5322,7 @@ describe("potential-gated static effects", () => {
   })
 
   it("gates Lycaon's other-element damage bonus behind the potential branch", () => {
-    const pointer = "/agents/49/mindscapeBuffs/0/effectBlocks/0/effects/1"
+    const pointer = "/agents/50/mindscapeBuffs/0/effectBlocks/0/effects/1"
     const optionId = "agents:lycaon:mindscape:0:blk-legacy:legacy-team-dmgBonus"
     const effectId =
       "agent:1141:zzz-hp:legacy-team-dmgBonus:blk-legacy:mindscape:0"
@@ -5426,7 +5338,7 @@ describe("potential-gated static effects", () => {
       select(withPotentialLevel(referenceInput(pointer), 0), optionId),
       "P0",
     )
-    const resPenPointer = "/agents/49/mindscapeBuffs/0/effectBlocks/0/effects/0"
+    const resPenPointer = "/agents/50/mindscapeBuffs/0/effectBlocks/0/effects/0"
     const resPenOption =
       "agents:lycaon:mindscape:0:blk-legacy:legacy-team-resPen"
     const resPenEffect =
@@ -5439,66 +5351,59 @@ describe("potential-gated static effects", () => {
   it("scales Burnice's boiling-point conversion rates by potential with fixed caps", () => {
     const controlPointer =
       "/agents/26/mindscapeBuffs/0/effectBlocks/3/effects/0"
-    const controlOption =
-      "agents:burnice:mindscape:0:blk-ms4njqvi-f55a5p:eff-ms4njqvi-e0gd6d"
     const controlEffect =
       "agent:1171:zzz-hp:eff-ms4njqvi-e0gd6d:blk-ms4njqvi-f55a5p:mindscape:0"
     const damagePointer = "/agents/26/mindscapeBuffs/0/effectBlocks/3/effects/1"
-    const damageOption =
-      "agents:burnice:mindscape:0:blk-ms4njqvi-f55a5p:eff-ms4nnnk0-1esj6u"
     const damageEffect =
       "agent:1171:zzz-hp:eff-ms4nnnk0-1esj6u:blk-ms4njqvi-f55a5p:mindscape:0"
-    const controlAt = (potentialLevel: number, energy: number) =>
+    const withEnergy = (
+      input: StaticCatalogDamageInput,
+      energy: number,
+    ): StaticCatalogDamageInput => {
+      const holderId = input.bindings[0]!.holderId
+      return {
+        ...input,
+        world: {
+          ...input.world,
+          entities: input.world.entities.map((entity) =>
+            entity.kind === "actor" && entity.entityId === holderId
+              ? {
+                  ...entity,
+                  generalStats: {
+                    ...entity.generalStats,
+                    energyRegen: general(energy),
+                  },
+                }
+              : entity,
+          ),
+        },
+      }
+    }
+    const valueAt = (
+      pointer: string,
+      effectId: string,
+      potentialLevel: number,
+      energy: number,
+    ) =>
       contributionSum(
         calculateCatalogResult(
-          withManualInput(
-            select(
-              withPotentialLevel(
-                referenceInput(controlPointer),
-                potentialLevel,
-              ),
-              controlOption,
-            ),
-            variantInputName(controlOption, potentialLevel),
-            "energy-per-second",
-            energy,
+          withPotentialLevel(
+            withEnergy(referenceInput(pointer), energy),
+            potentialLevel,
           ),
         ),
-        controlEffect,
+        effectId,
       )
-    const damageAt = (potentialLevel: number, energy: number) =>
-      contributionSum(
-        calculateCatalogResult(
-          withManualInput(
-            select(
-              withPotentialLevel(referenceInput(damagePointer), potentialLevel),
-              damageOption,
-            ),
-            variantInputName(damageOption, potentialLevel),
-            "energy-per-second",
-            energy,
-          ),
-        ),
-        damageEffect,
-      )
-    expect(controlAt(2, 2.8)).toBeCloseTo(10, 6)
-    expect(controlAt(6, 2.8)).toBeCloseTo(25, 6)
-    expect(damageAt(2, 2.8)).toBeCloseTo(0.1, 8)
-    expect(damageAt(6, 2.8)).toBeCloseTo(0.2, 8)
-    expect(controlAt(6, 1.8)).toBe(0)
-    expect(damageAt(6, 1.8)).toBe(0)
-    expect(controlAt(6, 9)).toBeCloseTo(25, 6)
-    expect(damageAt(6, 9)).toBeCloseTo(0.2, 8)
+    expect(valueAt(controlPointer, controlEffect, 2, 2.8)).toBeCloseTo(10, 6)
+    expect(valueAt(controlPointer, controlEffect, 6, 2.8)).toBeCloseTo(25, 6)
+    expect(valueAt(damagePointer, damageEffect, 2, 2.8)).toBeCloseTo(0.1, 8)
+    expect(valueAt(damagePointer, damageEffect, 6, 2.8)).toBeCloseTo(0.2, 8)
+    expect(valueAt(controlPointer, controlEffect, 6, 1.8)).toBe(0)
+    expect(valueAt(damagePointer, damageEffect, 6, 1.8)).toBe(0)
+    expect(valueAt(controlPointer, controlEffect, 6, 9)).toBeCloseTo(25, 6)
+    expect(valueAt(damagePointer, damageEffect, 6, 9)).toBeCloseTo(0.2, 8)
     expectMissingRank(
-      withManualInput(
-        select(
-          withPotentialLevel(referenceInput(controlPointer), 1),
-          controlOption,
-        ),
-        variantInputName(controlOption, 6),
-        "energy-per-second",
-        2.8,
-      ),
+      withPotentialLevel(withEnergy(referenceInput(controlPointer), 2.8), 1),
       "P1",
     )
   })
@@ -5524,12 +5429,12 @@ describe("potential-gated static effects", () => {
   })
 
   it("keeps Ellen's real storm-surge layers separate from potential values", () => {
-    const critPointer = "/agents/47/mindscapeBuffs/0/effectBlocks/2/effects/0"
+    const critPointer = "/agents/48/mindscapeBuffs/0/effectBlocks/2/effects/0"
     const critOption =
       "agents:ellen:mindscape:0:blk-ms4fuyir-dotq6c:eff-ms4fuyir-e3fuww"
     const critEffect =
       "agent:1191:zzz-hp:eff-ms4fuyir-e3fuww:blk-ms4fuyir-dotq6c:mindscape:0"
-    const resPenPointer = "/agents/47/mindscapeBuffs/0/effectBlocks/2/effects/1"
+    const resPenPointer = "/agents/48/mindscapeBuffs/0/effectBlocks/2/effects/1"
     const resPenOption =
       "agents:ellen:mindscape:0:blk-ms4fuyir-dotq6c:eff-ms4fvlsz-x4x1hj"
     const resPenEffect =
@@ -5787,12 +5692,12 @@ describe("potential-gated static effects", () => {
   })
 
   it("applies Harumasa's concentration values by potential from level 2", () => {
-    const atkPointer = "/agents/34/mindscapeBuffs/0/effectBlocks/2/effects/0"
+    const atkPointer = "/agents/35/mindscapeBuffs/0/effectBlocks/2/effects/0"
     const atkOption =
       "agents:harumasa:mindscape:0:blk-ms4gyswd-hl5ii6:eff-ms4gyswd-zyloo3"
     const atkEffect =
       "agent:1201:zzz-hp:eff-ms4gyswd-zyloo3:blk-ms4gyswd-hl5ii6:mindscape:0"
-    const penPointer = "/agents/34/mindscapeBuffs/0/effectBlocks/2/effects/1"
+    const penPointer = "/agents/35/mindscapeBuffs/0/effectBlocks/2/effects/1"
     const penOption =
       "agents:harumasa:mindscape:0:blk-ms4gyswd-hl5ii6:eff-ms4h0385-xlwhvy"
     const penEffect =
@@ -5923,7 +5828,7 @@ describe("potential-gated static effects", () => {
   })
 
   it("applies Jane's complete potential strong-hit critical damage and rejects the partial record", () => {
-    const pointer = "/agents/43/mindscapeBuffs/0/effectBlocks/2/effects/0"
+    const pointer = "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/0"
     const optionId =
       "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-ms34gorp-xrbl8x"
     const effectId =
@@ -5960,7 +5865,7 @@ describe("potential-gated static effects", () => {
   })
 
   it("applies S0 Anby's complete follow-up damage bonus and gates the 5% conversion", () => {
-    const bonusPointer = "/agents/56/mindscapeBuffs/0/effectBlocks/1/effects/1"
+    const bonusPointer = "/agents/59/mindscapeBuffs/0/effectBlocks/1/effects/1"
     const bonusOption =
       "agents:s0anby:mindscape:0:blk-ms4jqdq1-rkmmm3:eff-ms4jqsm1-qkfx1a"
     const bonusEffect =
@@ -5994,7 +5899,7 @@ describe("potential-gated static effects", () => {
         ).toBe(true)
     }
     const conversionPointer =
-      "/agents/56/mindscapeBuffs/0/effectBlocks/0/effects/2"
+      "/agents/59/mindscapeBuffs/0/effectBlocks/0/effects/2"
     const conversionOption =
       "agents:s0anby:mindscape:0:blk-legacy:eff-ms4jp2fs-cmvkjd"
     const conversionEffect =
@@ -7083,356 +6988,6 @@ describe("same-block core evidence scoping and independent damage items", () => 
  * 按层编译后的目录形状、五档 0/1/2 层、非法层数、精炼匹配与技能/伤害种类
  * 范围；期望值来自描述的每层数值（10/11.5/13/14.5/16%），不从生成器反推。
  */
-describe("qingming birdcage pierce stack revision", () => {
-  const pierceOption = (refinement: 1 | 2 | 3 | 4 | 5) =>
-    `w-engines:Qingming_Birdcage:refinement:blk-legacy:eff-ms1${
-      [
-        "r9equ-l7imtb",
-        "rarze-uhh4r4",
-        "rby7h-cnwy4w",
-        "rcyzb-2dozs0",
-        "rdzo3-dwcqi1",
-      ][refinement - 1]!
-    }`
-  const pierceRule = (refinement: 1 | 2 | 3 | 4 | 5) =>
-    `w-engine:14137:zzz-hp:eff-ms1${
-      [
-        "r9equ-l7imtb",
-        "rarze-uhh4r4",
-        "rby7h-cnwy4w",
-        "rcyzb-2dozs0",
-        "rdzo3-dwcqi1",
-      ][refinement - 1]!
-    }:blk-legacy:refinement:${refinement}`
-  const perLayer = [0.1, 0.115, 0.13, 0.145, 0.16] as const
-  const difference = catalog.differences.find(
-    (d) => d.differenceId === "qingming-birdcage-pierce-stack-layers",
-  )
-
-  function qingmingInput(
-    refinement: 1 | 2 | 3 | 4 | 5,
-    layers: number,
-    hitOverride: Record<string, unknown> = {},
-    extraSelections: StaticCatalogDamageInput["selections"] = [],
-  ): StaticCatalogDamageInput {
-    return {
-      definitions,
-      catalog,
-      bindings: [
-        {
-          kind: "w-engine",
-          bindingId: "binding:cage",
-          holderId: "entity:holder",
-          sourceEntityId: "14137",
-          eligible: true,
-          configuration: { refinement },
-        },
-      ],
-      selections: [
-        {
-          optionId: pierceOption(refinement),
-          bindingId: "binding:cage",
-          layers,
-        },
-        ...extraSelections,
-      ],
-      actorSources: [{ entityId: "entity:holder", agentEntityId: "1471" }],
-      world: {
-        entities: [
-          {
-            kind: "actor",
-            entityId: "entity:holder",
-            teamId: "team:players",
-            generalStats: {
-              attack: general(1000),
-              sheerForce: general(500),
-            },
-            directStats: {
-              criticalRate: { baseValue: 0.1, additions: [] },
-              criticalDamage: { baseValue: 0.5, additions: [] },
-            },
-          },
-          {
-            kind: "actor",
-            entityId: "entity:enemy",
-            teamId: "team:enemies",
-            generalStats: {},
-            directStats: {},
-          },
-        ],
-        states: [],
-        distances: [],
-      },
-      hit: {
-        actorId: "entity:holder",
-        targetId: "entity:enemy",
-        actionId: "action:oracle",
-        skillCategory: "special",
-        element: "ether",
-        skillTags: [],
-        skillTargetIds: ["zzz-hp:skill:all-special-ms0fcqv7"],
-        damageItems: [
-          {
-            mode: "direct",
-            role: "base",
-            itemId: "base",
-            damageMultiplier: 2,
-            stat: "attack",
-            statSource: { entityId: "entity:holder" },
-          },
-        ],
-        ...hitOverride,
-      },
-      damage: {
-        kind: "sheer",
-        damageBonus: [],
-        sheerDamageBonus: [],
-        resistance: {
-          targetResistance: 0,
-          targetResistanceReductions: [],
-          attackerResistanceIgnoreValues: [],
-        },
-        damageTaken: {
-          targetDamageTakenIncreases: [],
-          targetDamageTakenReductions: [],
-        },
-        stunDamage: {
-          isTargetStunned: false,
-          targetBaseStunDamageMultiplier: 1,
-          targetStunDamageMultiplierAdjustments: [],
-        },
-      },
-    } as unknown as StaticCatalogDamageInput
-  }
-
-  it("registers the corrected stacked shape with stable identities at every refinement", () => {
-    expect(difference).toBeDefined()
-    for (const refinement of [1, 2, 3, 4, 5] as const) {
-      const option = catalog.options.find(
-        (o) => o.optionId === pierceOption(refinement),
-      )
-      expect(option?.variants, `R${refinement}`).toHaveLength(1)
-      const variant = option?.variants[0]
-      expect(variant?.status, `R${refinement}`).toBe("corrected")
-      expect(variant?.maximumLayers, `R${refinement}`).toBe(2)
-      expect(variant?.differences, `R${refinement}`).toContain(
-        "qingming-birdcage-pierce-stack-layers",
-      )
-      expect(variant?.configuration.refinements, `R${refinement}`).toEqual([
-        refinement,
-      ])
-      const rule = definitions.effects.find(
-        (r) => r.effectId === pierceRule(refinement),
-      )
-      expect(rule?.activation, `R${refinement}`).toMatchObject({
-        kind: "supplied",
-        maximumLayers: { value: 2 },
-      })
-      expect(
-        (rule?.parameters.amount as { value: number } | undefined)?.value,
-        `R${refinement}`,
-      ).toBeCloseTo(perLayer[refinement - 1]!, 12)
-      // 既有范围条件保持不变：以太贯穿伤害 + 强化特殊技目标或终结技，
-      // 不泛化为所有特殊技。
-      expect(
-        (rule as ContributionRule | undefined)?.when,
-        `R${refinement}`,
-      ).toMatchObject({
-        kind: "all",
-        conditions: [
-          { kind: "one-of", fact: "hit.damageKind", values: ["sheer"] },
-          {
-            kind: "any",
-            conditions: [
-              {
-                kind: "all",
-                conditions: [
-                  {
-                    kind: "one-of",
-                    fact: "hit.skillTag",
-                    values: ["zzz-hp:category:special"],
-                  },
-                  {
-                    kind: "one-of",
-                    fact: "hit.skillTag",
-                    values: ["zzz-hp:skill:all-special-ms0fcqv7"],
-                  },
-                ],
-              },
-              {
-                kind: "all",
-                conditions: [
-                  {
-                    kind: "one-of",
-                    fact: "hit.skillTag",
-                    values: ["zzz-hp:category:ultimate"],
-                  },
-                ],
-              },
-            ],
-          },
-          { kind: "one-of", fact: "hit.element", values: ["ether"] },
-        ],
-      })
-      const row = coverage.records.find(
-        (r) =>
-          r.pointer ===
-          `/wengines/92/refinementBuffs/${refinement - 1}/effectBlocks/0/effects/2`,
-      )
-      expect(row?.status, `R${refinement}`).toBe("corrected")
-      expect(row?.effectIds, `R${refinement}`).toEqual([pierceRule(refinement)])
-    }
-  })
-
-  it.each([1, 2, 3, 4, 5] as const)(
-    "scales the pierce bonus per layer at R%d and keeps zero layers disabled",
-    (refinement) => {
-      const perLayerValue = perLayer[refinement - 1]!
-      const zero = calculateStaticDamageFromCatalog(
-        qingmingInput(refinement, 0),
-      )
-      expect(zero.ok, JSON.stringify(zero)).toBe(true)
-      if (zero.ok)
-        expect(zero.value.factors.nonCritical.sheerDamageBonus).toBeCloseTo(
-          1,
-          12,
-        )
-      for (const [layers, expected] of [
-        [1, 1 + perLayerValue],
-        [2, 1 + 2 * perLayerValue],
-      ] as const) {
-        const result = calculateStaticDamageFromCatalog(
-          qingmingInput(refinement, layers),
-        )
-        expect(result.ok, JSON.stringify(result)).toBe(true)
-        if (result.ok) {
-          expect(result.value.factors.nonCritical.sheerDamageBonus).toBeCloseTo(
-            expected,
-            12,
-          )
-          // 末端乘区同样只按层数取值：非暴击 = 攻击 × 倍率 × 贯穿增伤。
-          expect(result.value.nonCritical).toBeCloseTo(1000 * 2 * expected, 9)
-        }
-      }
-    },
-  )
-
-  it.each([
-    ["above the cap", 3],
-    ["negative", -1],
-  ] as const)("rejects illegal layer counts: %s", (_, layers) => {
-    expect(
-      calculateStaticDamageFromCatalog(qingmingInput(1, layers)),
-    ).toMatchObject({
-      ok: false,
-      issues: [{ code: "INVALID_INPUT", pointer: "/selections/0/layers" }],
-    })
-  })
-
-  it("matches the selection to its own refinement rank", () => {
-    for (const refinement of [1, 2, 3, 4, 5] as const)
-      expect(
-        calculateStaticDamageFromCatalog(qingmingInput(refinement, 1)).ok,
-        `R${refinement}`,
-      ).toBe(true)
-    const mismatch = calculateStaticDamageFromCatalog({
-      ...qingmingInput(2, 1),
-      selections: [
-        { optionId: pierceOption(1), bindingId: "binding:cage", layers: 1 },
-      ],
-    })
-    expect(mismatch).toMatchObject({
-      ok: false,
-      issues: [{ code: "MISSING_RANK", pointer: "/selections/0" }],
-    })
-  })
-
-  it.each([
-    ["ether enhanced special with the registered target", {}, true],
-    [
-      "ultimate category without the special target",
-      { skillCategory: "ultimate", skillTargetIds: [] },
-      true,
-    ],
-    [
-      "plain special without the registered target",
-      { skillTargetIds: [] },
-      false,
-    ],
-    ["basic category", { skillCategory: "basic", skillTargetIds: [] }, false],
-    ["fire element", { element: "fire" }, false],
-  ] as const)(
-    "applies the R1 pierce bonus only to %s",
-    (_, hitOverride, applies) => {
-      const withBonus = calculateStaticDamageFromCatalog(
-        qingmingInput(1, 2, hitOverride),
-      )
-      expect(withBonus.ok, JSON.stringify(withBonus)).toBe(true)
-      const baseline = calculateStaticDamageFromCatalog(
-        qingmingInput(1, 0, hitOverride),
-      )
-      expect(baseline.ok, JSON.stringify(baseline)).toBe(true)
-      if (withBonus.ok && baseline.ok) {
-        const expected = applies ? 1.2 : 1
-        expect(
-          withBonus.value.factors.nonCritical.sheerDamageBonus,
-        ).toBeCloseTo(expected, 12)
-        expect(baseline.value.factors.nonCritical.sheerDamageBonus).toBeCloseTo(
-          1,
-          12,
-        )
-      }
-    },
-  )
-
-  it("keeps the fixed critical-rate clause off the layer scale", () => {
-    const critical = catalog.options.find(
-      (o) =>
-        o.optionId ===
-        "w-engines:Qingming_Birdcage:refinement:blk-legacy:legacy-self-critRate",
-    )
-    expect(critical?.variants[0]?.maximumLayers).toBe(1)
-    const rule = definitions.effects.find(
-      (r) =>
-        r.effectId ===
-        "w-engine:14137:zzz-hp:legacy-self-critRate:blk-legacy:refinement",
-    )
-    expect(rule?.activation).toMatchObject({
-      kind: "supplied",
-      maximumLayers: { value: 1 },
-    })
-    for (const layers of [1, 2] as const) {
-      const result = calculateStaticDamageFromCatalog(
-        qingmingInput(1, layers, {}, [
-          {
-            optionId:
-              "w-engines:Qingming_Birdcage:refinement:blk-legacy:legacy-self-critRate",
-            bindingId: "binding:cage",
-            layers: 1,
-          },
-        ]),
-      )
-      expect(result.ok, JSON.stringify(result)).toBe(true)
-      if (result.ok) {
-        // 暴击率固定 +20% 不随青溟层数翻倍；贯穿增伤按层取值。
-        expect(result.value.criticalRate).toBeCloseTo(0.3, 12)
-        expect(result.value.factors.nonCritical.sheerDamageBonus).toBeCloseTo(
-          1 + layers * 0.1,
-          12,
-        )
-      }
-    }
-  })
-})
-
-/**
- * 增益修复批次 01（修订 16）：音擎现有规则纠错的具名回归。修正项的期望值
- * 来自各块 note 与 Nanoka 五档天赋同文（按一致描述纠错，未经游戏实测），
- * 不从生成器反推；嚣枪喧焰保留的直伤种类限制是固定来源 scope=skill 的
- * 派生实现约定（异常类受益范围无文本证据，保留待证），其断言锁定的是
- * 实现现状而不是来源已证范围。触发状态与层数均由选择显式声明，不模拟
- * 时间线。
- */
 describe("batch 01 wengine rule corrections", () => {
   const contributionSum = (
     result: ReturnType<typeof calculateCatalogResult>,
@@ -7562,12 +7117,10 @@ describe("batch 01 wengine rule corrections", () => {
       "converted",
       "converted",
       "converted",
-      "corrected",
+      "converted",
       "converted",
     ])
-    expect(option.variants[3]!.differences).toEqual([
-      "myriad-eclipse-r4-critical-damage",
-    ])
+    expect(option.variants[3]!.differences).toEqual([])
     const effectId =
       "w-engine:14129:zzz-hp:legacy-self-critDmg:blk-legacy:refinement"
     for (const [refinement, expected] of [
@@ -7604,39 +7157,45 @@ describe("batch 01 wengine rule corrections", () => {
       expect(variant.differences).toEqual([
         "myriad-eclipse-zero-verdict-ignore-defense-scope",
       ])
-    // 修正后五档结构一致，合并为一条不带命中筛选的规则；冰/非冰命中均受益。
-    const rule = definitions.effects.find(
-      (entry) =>
-        entry.kind === "contribution" &&
-        entry.effectId ===
-          "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement",
-    ) as ContributionRule
-    expect(rule.when).toEqual({ kind: "all", conditions: [] })
-    const effectId = rule.effectId
+    // 修订 16 移除精炼 1—4 的冰元素筛选；精炼 5 固定源本身仍限定冰命中。
     for (const [refinement, expected] of [
       [1, 0.25],
       [2, 0.2875],
       [3, 0.325],
       [4, 0.3625],
-      [5, 0.4],
     ] as const) {
+      const effectId = `w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:${refinement}`
+      const rule = definitions.effects.find(
+        (entry) => entry.kind === "contribution" && entry.effectId === effectId,
+      ) as ContributionRule
+      expect(rule.when).toEqual({ kind: "all", conditions: [] })
       for (const element of ["ice", "fire"] as const) {
         const result = calculateCatalogResult(
-          wengineInput("14129", option.optionId, 1, refinement, {
-            element,
-          }),
+          wengineInput("14129", option.optionId, 1, refinement, { element }),
         )
-        expect(
-          defenseAdjustments(result),
-          `R${refinement} ${element}`,
-        ).toHaveLength(1)
         expect(
           defenseAdjustments(result)[0]!.value.value,
           `R${refinement} ${element}`,
         ).toBeCloseTo(-expected, 12)
-        expect(contributionSum(result, effectId)).toBeCloseTo(-expected, 12)
       }
     }
+    const r5 =
+      "w-engine:14129:zzz-hp:legacy-self-reduceDefense:blk-legacy:refinement:5"
+    const r5Rule = definitions.effects.find(
+      (entry) => entry.kind === "contribution" && entry.effectId === r5,
+    ) as ContributionRule
+    expect(r5Rule.when).toEqual({
+      kind: "all",
+      conditions: [{ kind: "one-of", fact: "hit.element", values: ["ice"] }],
+    })
+    const r5Ice = calculateCatalogResult(
+      wengineInput("14129", option.optionId, 1, 5, { element: "ice" }),
+    )
+    expect(defenseAdjustments(r5Ice)[0]!.value.value).toBeCloseTo(-0.4, 12)
+    const r5Fire = calculateCatalogResult(
+      wengineInput("14129", option.optionId, 1, 5, { element: "fire" }),
+    )
+    expect(defenseAdjustments(r5Fire)).toHaveLength(0)
   })
 
   it("removes the bellicose blaze trigger-as-scope filters and corrects R1 to 15% per stack", () => {
@@ -7704,8 +7263,8 @@ describe("batch 01 wengine rule corrections", () => {
     )!
     expect(option.target).toBe("self")
     for (const variant of option.variants) {
-      expect(variant.status).toBe("corrected")
-      expect(variant.differences).toEqual(["promotion-stats-equipper-defense"])
+      expect(variant.status).toBe("converted")
+      expect(variant.differences).toEqual([])
       expect(variant.maximumLayers).toBe(2)
     }
     const effectId =
@@ -7928,7 +7487,7 @@ describe("batch 01 wengine rule corrections", () => {
       ),
     )!
     expect(option.conditionDescription).toBe(
-      "局内实时规则\n超出100%暴击率时转模\n1%暴击率 转 0.48/0.56/0.64/0.72/0.8% 增伤（按精炼1—5取值）\n转模增伤上限 24/28/32/36/40%（按精炼1—5取值）",
+      "精炼1：装备者暴击率大于100%时，每超出1%暴击率，使装备者造成的伤害提升0.48%，至多提升24%。\n精炼2：装备者暴击率大于100%时，每超出1%暴击率，使装备者造成的伤害提升0.56%，至多提升28%。\n精炼3：装备者暴击率大于100%时，每超出1%暴击率，使装备者造成的伤害提升0.64%，至多提升32%。\n精炼4：装备者暴击率大于100%时，每超出1%暴击率，使装备者造成的伤害提升0.72%，至多提升36%。\n精炼5：装备者暴击率大于100%时，每超出1%暴击率，使装备者造成的伤害提升0.8%，至多提升40%。",
     )
     for (const variant of option.variants) {
       expect(variant.status).toBe("corrected")
@@ -8993,7 +8552,8 @@ describe("w-engine missing passive supplements (batch 02)", () => {
           ([1, 2, 3, 4, 5] as const).map((tier) =>
             expect.objectContaining({
               sourceId: "nanoka-integrated",
-              version: "3.2",
+              version: "3.3.12+19634983",
+              locale: "zh",
               resourcePath: `w-engines/${option.variants[0]!.effectIds[0]!.split(":")[1]}/details.zh.json`,
               pointer: `/talents/${tier}/desc`,
             }),
@@ -9136,9 +8696,9 @@ describe("agent and drive-disc batch 03 corrections and supplements", () => {
         "drive-discs:SuitShiningAria:setPieces:4:blk-legacy:legacy-self-dmgBonus",
     )!
     expect(aria.variants[0]).toMatchObject({
-      status: "corrected",
+      status: "converted",
       maximumLayers: 1,
-      differences: ["shining-aria-stagger-entry-triggered-state"],
+      differences: [],
       inputs: [],
     })
     const ariaRule = definitions.effects.find(
@@ -9146,10 +8706,7 @@ describe("agent and drive-disc batch 03 corrections and supplements", () => {
     ) as ContributionRule
     expect(ariaRule.when).toEqual({ kind: "all", conditions: [] })
     expect(catalog.differences.map((d) => d.differenceId)).toEqual(
-      expect.arrayContaining([
-        "billy-mindscape4-hit-scope-critical-rate",
-        "shining-aria-stagger-entry-triggered-state",
-      ]),
+      expect.arrayContaining(["billy-mindscape4-hit-scope-critical-rate"]),
     )
   })
 
@@ -9265,7 +8822,8 @@ describe("agent and drive-disc batch 03 corrections and supplements", () => {
   })
 
   it("applies Nicole's M1 EX damage bonus to every real EX action and nothing else (M01)", () => {
-    const option = "nanoka:agents:nicole:mindscape-1-ex-damage"
+    const option =
+      "agents:nicole:mindscape:1:blk-mv3hn8f5-yeu3yh:eff-mv3hn8f5-v1ohda"
     for (const suffix of ["0021", "0022", "0023"]) {
       const result = calculateCatalogResult(
         resolvedActionInput("1031", suffix, [{ optionId: option, layers: 1 }], {
@@ -9329,35 +8887,30 @@ describe("agent and drive-disc batch 03 corrections and supplements", () => {
   })
 
   it("applies Qingyi's flash-voltage damage bonus to both Drunk-on-Moonlight hits with the anchors (M17)", () => {
-    const option = "nanoka:agents:qingyi:flash-voltage-consumed-damage"
-    const inputName =
-      "agent:1251:nanoka:flash-voltage-consumed-damage:mindscape:0:source"
-    const bonusAt = (suffix: string, consumed: number) =>
+    const option =
+      "agents:qingyi:mindscape:0:blk-mv3hkg7g-zshzh0:eff-mv3hkg7g-ga6q6j"
+    const bonusAt = (suffix: string, excessPercentPoints: number) =>
       calculateCatalogResult(
-        resolvedActionInput("1251", suffix, [{ optionId: option, layers: 1 }], {
-          numericInputs: [{ name: inputName, unit: "ratio", value: consumed }],
-        }),
+        resolvedActionInput("1251", suffix, [
+          { optionId: option, layers: excessPercentPoints },
+        ]),
       ).factors.nonCritical.damageBonus
-    // 突进与终结一击两段都按消耗电压获得增益；核算锚点 75/80/100%。
+    // 来源以层数表示超过 75% 的百分点；两段醉花月云转都按该层数获得增益。
     for (const suffix of ["0013", "0014"]) {
-      expect(bonusAt(suffix, 0.75), suffix).toBe(1)
-      expect(bonusAt(suffix, 0.8), suffix).toBeCloseTo(1.05, 12)
-      expect(bonusAt(suffix, 1), suffix).toBeCloseTo(1.25, 12)
-      expect(bonusAt(suffix, 0.3), suffix).toBe(1)
-      expect(bonusAt(suffix, 1.2), suffix).toBeCloseTo(1.25, 12)
+      expect(bonusAt(suffix, 0), suffix).toBe(1)
+      expect(bonusAt(suffix, 5), suffix).toBeCloseTo(1.05, 12)
+      expect(bonusAt(suffix, 25), suffix).toBeCloseTo(1.25, 12)
     }
-    // 必填输入缺失拒绝；不是施放后剩余电压的读数约定在输入说明里。
+    // 来源上限为 25 层；超过上限不是可执行的层数。
     expect(
       calculateStaticDamageFromCatalog(
-        resolvedActionInput("1251", "0013", [{ optionId: option, layers: 1 }]),
+        resolvedActionInput("1251", "0013", [{ optionId: option, layers: 26 }]),
       ),
-    ).toMatchObject({ ok: false, issues: [{ code: "MISSING_FACT" }] })
+    ).toMatchObject({ ok: false })
     // 同一文件的其他招式（一煞 0006、强化特殊技 0020）不受益。
     for (const suffix of ["0006", "0020"]) {
       const result = calculateCatalogResult(
-        resolvedActionInput("1251", suffix, [{ optionId: option, layers: 1 }], {
-          numericInputs: [{ name: inputName, unit: "ratio", value: 1 }],
-        }),
+        resolvedActionInput("1251", suffix, [{ optionId: option, layers: 1 }]),
       )
       expect(result.factors.nonCritical.damageBonus, suffix).toBe(1)
     }

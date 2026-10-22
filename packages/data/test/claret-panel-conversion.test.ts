@@ -27,7 +27,7 @@ describe("Claret initial conversion source verification", () => {
       data,
       definitions,
       catalog,
-      "3.2",
+      "3.3.12+19634983",
     )
     expect(staticPanelRules.agents["1611"]!.initialConversions).toEqual([
       result,
@@ -57,7 +57,7 @@ describe("Claret initial conversion source verification", () => {
           data,
           definitions,
           catalog,
-          "3.2",
+          "3.3.12+19634983",
         ),
       ).toThrow(
         /Claret initial conversion (evidence changed|requires all seven core rows)/u,
@@ -71,7 +71,13 @@ describe("Claret initial conversion source verification", () => {
       const changed = structuredClone(data)
       changed.passive.level[`161150${rank}`]!.level = 0
       expect(() =>
-        claretPanelConversion(details, changed, definitions, catalog, "3.2"),
+        claretPanelConversion(
+          details,
+          changed,
+          definitions,
+          catalog,
+          "3.3.12+19634983",
+        ),
       ).toThrow(/evidence\/rank mismatch/u)
     },
   )
@@ -118,7 +124,7 @@ describe("Claret initial conversion source verification", () => {
         data,
         rules,
         options,
-        kind === "version" ? "3.1" : "3.2",
+        kind === "version" ? "3.1" : "3.3.12+19634983",
       ),
     ).toThrow(/catalog\/rule drift/u)
   })

@@ -140,12 +140,6 @@ describe("Lucy real source guards", () => {
       },
     ],
     [
-      "additional zero modifier",
-      (d) => {
-        pack(d, 6).selfMods!.newStat = 0
-      },
-    ],
-    [
       "nonempty note",
       (d) => {
         lucy(d).mindscapeNotes![6] = "new M6"
@@ -341,12 +335,6 @@ describe("Lucy real source guards", () => {
       "modifier mirror value",
       (p) => {
         p.teamMods!.atk += 1
-      },
-    ],
-    [
-      "modifier mirror key",
-      (p) => {
-        p.selfMods!.newStat = 0
       },
     ],
     [

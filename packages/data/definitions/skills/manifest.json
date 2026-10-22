@@ -912,7 +912,7 @@
     ]
   },
   "registrySha256": "47366e8ef3dc79d1a407a5f393dd8830bef5d9961f07d2256f9b02f69ddd55a4",
-  "staticCatalogSha256": "ed47e1a2cc16432b88c8d0d67083a4a4a5f0280bf5a4cdd008d071bce3a50038",
+  "staticCatalogSha256": "c8455d57b00a0329da50841e4d1a0bcc7e35bc28fd2b4319520dba01ab1c670c",
   "coverage": {
     "agents": 62,
     "actions": 1308,

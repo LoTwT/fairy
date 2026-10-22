@@ -89,7 +89,7 @@ describe("Roxy Nanoka fixed mindscape registration", () => {
       expect(option.variants[0]!.references).toEqual(
         ["zh", "en"].map((locale) => ({
           sourceId: "nanoka-integrated",
-          version: "3.2",
+          version: "3.3.12+19634983",
           locale,
           resourcePath: `agents/1621/details.${locale}.json`,
           pointer: `/talent/${rank}/desc`,
@@ -173,7 +173,7 @@ describe("Roxy Nanoka fixed mindscape registration", () => {
     [
       "version",
       (s: any) => {
-        s.source = s.source.replace("3.2", "3.3")
+        s.source = s.source.replace("3.3.12+19634983", "3.2")
       },
     ],
     [

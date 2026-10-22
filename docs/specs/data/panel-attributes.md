@@ -128,7 +128,7 @@ Nanoka 前端仅作公式佐证，不升级来源版本；正常消费和构建�
 
 2026-10-15 核实 [ZenlessData 固定提交 `462563ec0f8ffc7493f6e2a46f64f8b34ea2d547`](https://git.mero.moe/dimbreath/ZenlessData/src/commit/462563ec0f8ffc7493f6e2a46f64f8b34ea2d547/FileCfg/)，
 并以 [Enka API 文档固定提交 `88fc20697fda924430943434c11e0c45eb39509f`](https://github.com/EnkaNetwork/API-docs/blob/88fc20697fda924430943434c11e0c45eb39509f/docs/zzz/api.md#formulas)
-交叉核对品质与强化公式。补充范围仅为风伤主词条；本轮 D5-1 已把 Nanoka 升级到 3.3.12+19634983，ZZZ-HP 固定提交仍为旧来源，待 D5-2 切换。
+交叉核对品质与强化公式。补充范围仅为风伤主词条；本轮 D5-1 已把 Nanoka 升级到 3.3.12+19634983；D5-2 已把 ZZZ-HP 固定提交切换到 2628b32，静态 effects 与计算数据同步到 3.3 基线。
 旧 ZZZ-HP 的 `dmgBonus: 30` 是通用增伤选项，不能据此声称它已提供独立风伤记录；目标
 ZZZ Calculator `d58e276973c3df944bc36fc81a783f3d17018708` 的 `windDmg: 30` 仅作对照，不作为独立来源。
 

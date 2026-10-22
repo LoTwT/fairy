@@ -5,7 +5,6 @@ import { roxyCoreElementsConsumerSource } from "./fixtures/roxy-core-elements-co
 import { windDriveDiscConsumerSource } from "./fixtures/drive-disc-wind-consumer.ts"
 import { claretInitialConversionConsumerSource } from "./fixtures/claret-initial-conversion-consumer.ts"
 import { roxyWindEyeConsumerSource } from "./fixtures/roxy-wind-eye-consumer.ts"
-import { hugoAttackConsumerSource } from "./fixtures/hugo-stun-teammates-consumer.ts"
 import { roxyMindscapeConsumerSource } from "./fixtures/roxy-mindscape-consumer.ts"
 import { roxyAdditionalConsumerSource } from "./fixtures/roxy-additional-consumer.ts"
 import { yanagiPolarityConsumerSource } from "./fixtures/yanagi-polarity-consumer.ts"
@@ -661,8 +660,6 @@ ${astraYaoM4ConsumerSource}
 await verifyAstraYaoM4Consumer(api, await import("@randomplay/core"))
 ${lucyGuardBoarConsumerSource}
 await verifyLucyGuardBoarConsumer(api, await import("@randomplay/core"))
-${hugoAttackConsumerSource}
-assert.deepEqual(await verifyHugoAttackConsumer(api, await import("@randomplay/core")), {nonCritical:3800,closed:2000,rejectedOldThree:true})
 ${ariaAbloomConsumerSource}
 await verifyAriaAbloomConsumer(api, await import("@randomplay/core"))
 ${roxyMindscapeConsumerSource}
@@ -742,7 +739,7 @@ for (const [id, suffix, element, multiplier] of [["1341", "0001", "ice", 13.612]
 const staticDefinitions = (await import("@randomplay/data/definitions/effects/static.json", { with: { type: "json" } })).default
 const staticCatalog = (await import("@randomplay/data/definitions/effects/static-catalog.json", { with: { type: "json" } })).default
 const staticCoverage = (await import("@randomplay/data/definitions/effects/static-coverage.json", { with: { type: "json" } })).default
-assert.equal(staticCoverage.summary.rawEffects, 1290)
+assert.equal(staticCoverage.summary.rawEffects, 1360)
 const staticResult = value(calculateStaticDamageFromCatalog({ ...${readFileSync(new URL("./fixtures/static-catalog-consumer.json", import.meta.url), "utf8")}, definitions: staticDefinitions, catalog: staticCatalog }))
 assert.ok(Math.abs(staticResult.criticalRate - 0.13) < 1e-12)
 assert.ok(staticResult.expected > staticResult.nonCritical)

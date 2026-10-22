@@ -39,7 +39,7 @@ const yixuanMindscape2TalismanSuppressionBreak: SupplementOption = {
   supplementId: "nanoka:agents:yixuan:m2-talisman-suppression-break-damage",
   optionId: "nanoka:agents:yixuan:m2-talisman-suppression-break-damage",
   catalogEntityId: "agents:yixuan",
-  source: "nanoka-integrated@3.2 agents/1371 /talent/2/desc",
+  source: "nanoka-integrated@3.3.12+19634983 agents/1371 /talent/2/desc",
   supportedRanks: "影画 2 及以上；层数 0—1",
   computationTarget: "catalog option on the mapped agent entity",
   // 条款上下文：影画 2 的真实块（blk-legacy，note 为空串、resPen 15 记录为
@@ -139,7 +139,7 @@ const yixuanMindscape1FallingThunder: SupplementOption = {
   supplementId: "nanoka:agents:yixuan:m1-falling-thunder-damage",
   optionId: "nanoka:agents:yixuan:m1-falling-thunder-damage",
   catalogEntityId: "agents:yixuan",
-  source: "nanoka-integrated@3.2 agents/1371 /talent/1/desc",
+  source: "nanoka-integrated@3.3.12+19634983 agents/1371 /talent/1/desc",
   supportedRanks: "影画 1 及以上；层数 0—1",
   computationTarget: "catalog option on the mapped agent entity",
   // 条款上下文：影画 1 的真实块（blk-legacy，note 只冻结入场暴击率句，
@@ -238,7 +238,7 @@ const yixuanAdditionalAbilityFallingThunder: SupplementOption = {
   optionId: "nanoka:agents:yixuan:aa-falling-thunder-damage",
   catalogEntityId: "agents:yixuan",
   source:
-    "nanoka-integrated@3.2 agents/1371 /passive/level/1371501—1371507/desc/1",
+    "nanoka-integrated@3.3.12+19634983 agents/1371 /passive/level/1371501—1371507/desc/1",
   supportedRanks: "影画 0—6；核心 1—7；层数 0—1",
   computationTarget: "catalog option on the mapped agent entity",
   // 条款上下文：核心被动 rank 0 的额外能力真实块（blk-ms31ao0d-1vjlok，

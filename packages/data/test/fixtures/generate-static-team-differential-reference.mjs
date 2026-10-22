@@ -35,28 +35,28 @@ assert(
 )
 
 // ── 固定来源 ──────────────────────────────────────────────────────────────
-const effectSourceCommit = "fac62407f3d3995f8200a66be0038f292b1455fa"
+const effectSourceCommit = "2628b32cece086e371bafa05518a9a12650d9f74"
 const skillSourceCommit = "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357"
 // 本轮再生时的 Fairy 基线：#201 合并后的 main；数值与来源事实与首版一致。
 const fairyBaseline = "c77e549a6c503e257f554126203380295814fc40"
 const snapshotId =
-  "sha256:e946d6b30b9747a3daeaac034fc14a4dc127c7e550ab63f0c54b1e1d4bf693c4"
+  "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
 const buffResource = "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json"
 const digests = {
   [`${buffResource}@${effectSourceCommit}`]:
-    "57c4aacca5455aa20f75f21967e294d8506ec1970a06e9c808557bdb3a91e20f",
+    "c9bc4cfdb0cf3117c56885e1afa4afd3ac9dc81aa0282119f0c64a27f19e5b01",
   [`${buffResource}@${skillSourceCommit}`]:
     "34b8dbeef2f710fd27379502d248f850da5a8c19dc6a0a7568ef51fb4c4fe19c",
   "zzz-hp/src/utils/panelBuffCalc.ts":
-    "43ec23eafa28b8d0748636ab9885e1497fab8cd11e458268acd746c9adc40c09",
+    "33bd26840c7e0646377efaf5127da05d4672cfdc8a2052648a602d4cabb0645d",
   "zzz-hp/src/utils/buffEffect.ts":
-    "88c850fc2dce5017905a624357b169b41b5586a1f5d76218e48a61baff7c9909",
+    "b344c82c6015ac31f72197e8ee968cfc9bf60be5e85403b455008f8dbfa763bf",
   "zzz-hp/src/utils/damageCalc.ts":
-    "2ef2e81cd11af03a3f9a5df82622c238ae3b6f9596346eee97136b7a2b427a71",
+    "763c7447cf6ab208c48f5412516de430b1e2ba1669e90bf37ecb83526bc0629d",
   "zzz-hp/src/utils/calculatorUi.ts":
-    "e61bf67fab73920889338997d77d12190b45d29cfd5cb49703802a0953fb1cfe",
+    "b15afac0893cfc6edd3f7d153812e710619cdc74329cc11dc9d76981a418cf40",
   "zzz-hp/src/utils/skillTalentLevels.ts":
-    "0391667fba8f39c868ab6bc8aa3609c2b72313e0ae00bd273ccb220de06faa6d",
+    "f52244106f7a95cf621e375b5c654d71019d8a86eb80c55727561983ab4c71f4",
   "zzz-hp/src/utils/calcNumberFormat.ts":
     "1e8b3a819df03de2911f210988501f3d8ae47d7abf05c2d9558a7e6c7478c03a",
   "zzz-hp/src/utils/remielUtils.ts":

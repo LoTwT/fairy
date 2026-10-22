@@ -6,7 +6,7 @@ import ts from "typescript"
 import manifest from "./source-manifest.json" with { type: "json" }
 
 export const SOURCE_REPOSITORY = "LoTwT/ZZZ-HP"
-export const SOURCE_COMMIT = "fac62407f3d3995f8200a66be0038f292b1455fa"
+export const SOURCE_COMMIT = "2628b32cece086e371bafa05518a9a12650d9f74"
 export const BUFF_RESOURCE =
   "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json"
 export interface SourceEffect {
@@ -196,6 +196,7 @@ export async function loadSource(root: string): Promise<{
     "utils/skillTalentLevels",
     "utils/calcNumberFormat",
     "utils/multFactorPercent",
+    "utils/buffDamageTypes",
     "utils/remielUtils",
     "utils/buffEffect",
     "utils/calculatorUi",
@@ -218,10 +219,21 @@ export async function loadSource(root: string): Promise<{
     ],
     { ...buff, ...ui, ...defaults },
   )
-  const panel = evaluate("zzz-hp/src/utils/panelBuffCalc.ts", [
-    "withRefinementAnomalyFlags",
-    "applyAnomalyFlagsToPack",
-  ])
+  const panel = evaluate(
+    "zzz-hp/src/utils/panelBuffCalc.ts",
+    [
+      "refinementIdentityKey",
+      "withRefinementAnomalyFlags",
+      "applyAnomalyFlagsToPack",
+    ],
+    {
+      damageTypesOf: (
+        modules["@/utils/buffDamageTypes"] as {
+          damageTypesOf: (effect: unknown) => string[]
+        }
+      ).damageTypesOf,
+    },
+  )
   const data = JSON.parse(sources.get(BUFF_RESOURCE)!) as SourceData
   const merged = (
     store["mergeMissingDefaultAgents"] as (

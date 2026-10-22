@@ -17,7 +17,7 @@ export const ROXY_ULTIMATE_ACTION = {
     references: [
       {
         sourceId: "nanoka-integrated",
-        version: "3.2",
+        version: "3.3.12+19634983",
         locale: "zh",
         resourcePath: "agents/1621/details.zh.json",
         pointer: "/skill/chain/description/3/param/0",
@@ -144,7 +144,7 @@ export const ROXY_GIANT_WINDSTORM_SUPPLEMENT: Supplement = {
   optionId: "nanoka:agents:1621:m6-giant-windstorm",
   catalogEntityId: "nanoka:agents:1621",
   source:
-    "nanoka-integrated@3.2 agents/1621 /talent/6/desc + /skill/special/description/4/desc + /skill/special/description/9/param/3",
+    "nanoka-integrated@3.3.12+19634983 agents/1621 /talent/6/desc + /skill/special/description/4/desc + /skill/special/description/9/param/3",
   supportedRanks: "影画6；核心1—7；层数0—1",
   computationTarget: "original giant windstorm one-second damage multiplier",
   evidence: (
@@ -244,7 +244,7 @@ export const ROXY_MINDSCAPE_SUPPLEMENTS: readonly Supplement[] = [
     supplementId: `nanoka:agents:1621:${clause.slug}`,
     optionId: `nanoka:agents:1621:${clause.slug}`,
     catalogEntityId: "nanoka:agents:1621",
-    source: `nanoka-integrated@3.2 agents/1621 /talent/${clause.rank}/desc`,
+    source: `nanoka-integrated@3.3.12+19634983 agents/1621 /talent/${clause.rank}/desc`,
     supportedRanks: `影画 ${clause.rank} 及以上；核心 1—7`,
     computationTarget: "catalog option on the existing supplement agent entity",
     evidence: [

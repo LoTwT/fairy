@@ -1210,7 +1210,7 @@ export const LUCY_GUARD_BOAR_SUPPLEMENTS: readonly Supplement[] = [
   {
     kind: "option",
     supplementId: identities.inheritance.optionId,
-    source: "nanoka-integrated@3.2 agents/1151 passive core1—7",
+    source: "nanoka-integrated@3.3.12+19634983 agents/1151 passive core1—7",
     catalogEntityId: "agents:lucy",
     optionId: identities.inheritance.optionId,
     supportedRanks: "核心1—7；影画0—6；层数0—1",
@@ -1452,7 +1452,7 @@ export const LUCY_GUARD_BOAR_SUPPLEMENTS: readonly Supplement[] = [
   {
     kind: "option",
     supplementId: identities.m6.optionId,
-    source: "nanoka-integrated@3.2 agents/1151 /talent/6/desc",
+    source: "nanoka-integrated@3.3.12+19634983 agents/1151 /talent/6/desc",
     catalogEntityId: "agents:lucy",
     optionId: identities.m6.optionId,
     supportedRanks: "影画6；核心1—7；层数0—1",
@@ -1551,7 +1551,7 @@ export function buildLucyGuardBoarMechanism(
       sameFactionAgentEntityIds: LUCY_GUARD_BOAR_FACTION.agentEntityIds,
       factionReferences: LUCY_GUARD_BOAR_FACTION.pointers.map((pointer) => ({
         sourceId: "nanoka-integrated",
-        version: "3.2",
+        version: "3.3.12+19634983",
         locale: "en",
         resourcePath: "index.json",
         pointer,

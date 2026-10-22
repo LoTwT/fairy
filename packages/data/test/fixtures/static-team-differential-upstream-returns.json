@@ -1,6 +1,6 @@
 {
   "provenance": {
-    "engine": "ZZZ-HP 固定来源独立计算链；计算与增益 fac62407f3d3995f8200a66be0038f292b1455fa，技能 0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
+    "engine": "ZZZ-HP 固定来源独立计算链；计算与增益 2628b32cece086e371bafa05518a9a12650d9f74，技能 0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
     "adapter": "父会话修正版独立适配器：DamageEnemyInput.level 填代理人 60（原临时脚本误填敌人 70，被钳制所以数值未变），敌人 70 单独记录",
     "adapterSha256": "7e6d8fff5c9f821848d9ece1bf3f38cdd1ded028168e9b918249f3ea2f7fff17",
     "reviewedResultsSha256": "3084bf3181eba814cffc39d8e1c5910f45516eb81020e18db2f43a890d736975",

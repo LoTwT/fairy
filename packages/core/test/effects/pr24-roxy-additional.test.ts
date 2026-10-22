@@ -264,7 +264,7 @@ describe("Roxy actual squad qualification and per-holder level facts", () => {
       input.actorSources[2].agentEntityId = "1251"
     if (mode === "holder alone")
       input.catalog.entities.find(
-        (entry: any) => entry.catalogEntityId === "nanoka:agents:1621",
+        (entry: any) => entry.catalogEntityId === "agents:Roxy",
       ).profession = "强攻"
     if (mode === "other team" || mode === "enemy")
       input.world.entities[4].teamId =

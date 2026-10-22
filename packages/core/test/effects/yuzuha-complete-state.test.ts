@@ -31,12 +31,8 @@ const resistanceOptionId =
 const partialIdentities = [
   [0, "blk-ms38y9v7-07td4j", "eff-ms38y9v7-2ded3l"],
   [0, "blk-ms38y9v7-07td4j", "eff-ms3969fx-lmmkyw"],
-  [0, "blk-ms38y9v7-07td4j", "eff-ms396xt1-3qbf2a"],
-  [0, "blk-ms38y9v7-07td4j", "eff-ms39auzc-mtr7ac"],
   [1, "blk-legacy", "eff-ms44bnmi-zp616x"],
   [1, "blk-legacy", "eff-ms44dh8h-xb20mu"],
-  [1, "blk-legacy", "eff-ms44eue1-n53aou"],
-  [1, "blk-legacy", "eff-ms44fa80-f595zx"],
 ] as const
 const completeVariant = () =>
   catalog.options.find((option) => option.optionId === completeOptionId)!
@@ -141,13 +137,11 @@ function request({
     inputs:
       am === undefined
         ? []
-        : [
-            {
-              bindingId: "binding:static" as const,
-              name: completeVariant().inputs[0]!.name,
-              value: { unit: "anomaly-mastery-points", value: am },
-            },
-          ],
+        : completeVariant().inputs.map((input) => ({
+            bindingId: "binding:static" as const,
+            name: input.name,
+            value: { unit: "anomaly-mastery-points" as const, value: am },
+          })),
     world: {
       ...base.world,
       entities: [
@@ -260,7 +254,7 @@ describe("Yuzuha additional ability complete state", () => {
       }
   })
 
-  it("keeps the complete-state metadata: base AM, core 7 bonus and one required input without preset", () => {
+  it("keeps the complete-state metadata: base AM, core 7 bonus and two panel-specific inputs without preset", () => {
     const attributes = read(
       "../../../data/definitions/attributes/agents/1411.json",
     )
@@ -275,8 +269,13 @@ describe("Yuzuha additional ability complete state", () => {
     ])
     expect(completeVariant().maximumLayers).toBe(1)
     expect(completeVariant().layerCountInputName).toBeUndefined()
-    expect(completeVariant().inputs).toHaveLength(1)
-    expect(completeVariant().inputs[0]!.preset).toBeUndefined()
+    expect(completeVariant().inputs).toHaveLength(2)
+    expect(completeVariant().inputs.map((input) => input.name)).toEqual([
+      "yuzuha:tanuki-wish:anomaly-mastery-final",
+      "yuzuha:tanuki-wish:anomaly-mastery-external",
+    ])
+    for (const input of completeVariant().inputs)
+      expect(input.preset).toBeUndefined()
   })
 
   it.each([
@@ -460,7 +459,7 @@ describe("Yuzuha additional ability complete state", () => {
 
   it("isolates different noncapped inputs and M1 modifications by binding", () => {
     const first = request({ am: 124 })
-    const secondId = "binding:second"
+    const secondId = "binding:second" as const
     const combined: StaticCatalogDamageInput = {
       ...first,
       bindings: [
@@ -484,11 +483,11 @@ describe("Yuzuha additional ability complete state", () => {
       ],
       inputs: [
         ...first.inputs!,
-        {
-          ...first.inputs![0]!,
+        ...first.inputs!.map((input) => ({
+          ...input,
           bindingId: secondId,
-          value: { unit: "anomaly-mastery-points", value: 150 },
-        },
+          value: { unit: "anomaly-mastery-points" as const, value: 150 },
+        })),
       ],
     }
     expect(bonus(evaluate(combined))).toBeCloseTo(0.048 + 0.13, 12)

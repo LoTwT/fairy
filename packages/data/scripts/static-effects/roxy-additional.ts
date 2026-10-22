@@ -85,7 +85,7 @@ export const ROXY_ADDITIONAL_SUPPLEMENTS: readonly SupplementOption[] =
     optionId: `nanoka:agents:1621:${clause.slug}`,
     catalogEntityId: "nanoka:agents:1621",
     source:
-      "nanoka-integrated@3.2 agents/1621 /passive/level/1621501—1621507/desc/1",
+      "nanoka-integrated@3.3.12+19634983 agents/1621 /passive/level/1621501—1621507/desc/1",
     supportedRanks: "核心 1—7；影画 0—6；层数 0—1",
     computationTarget: "catalog option on the existing supplement agent entity",
     evidence: (["zh", "en"] as const).flatMap((locale) =>

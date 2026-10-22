@@ -39,9 +39,6 @@ import { verifyRoxyCoreWindRegistrations } from "./roxy-core-wind.ts"
 import { verifyYixuanThunderRegistrations } from "./yixuan-thunder.ts"
 import {
   COMPLETE_STATE_OPTIONS,
-  HUGO_ATTACK_SOURCE_KEY,
-  HUGO_ATTACK_COUNT_DIFFERENCE_ID,
-  HUGO_ATTACK_COUNT_DESCRIPTION,
   SOURCE_SEMANTICS,
   YANAGI_POLARITY_DIFFERENCE_ID,
   YANAGI_POLARITY_EXPLANATION,
@@ -472,7 +469,7 @@ const reference = (pointer: string): SourceReference => ({
 })
 const nanokaReference = (path: string, pointer: string): SourceReference => ({
   sourceId: "nanoka-integrated",
-  version: "3.2",
+  version: "3.3.12+19634983",
   locale: path.endsWith("/details.en.json") ? "en" : "zh",
   resourcePath: path,
   pointer: pointer as `/${string}`,
@@ -482,7 +479,7 @@ const supplementReference = (
   ref: SupplementEvidenceReference,
 ): SourceReference => ({
   sourceId: ref.sourceId ?? "nanoka-integrated",
-  version: ref.version ?? "3.2",
+  version: ref.version ?? "3.3.12+19634983",
   locale: ref.locale ?? (ref.path.endsWith("/details.en.json") ? "en" : "zh"),
   resourcePath: ref.path,
   pointer: ref.pointer as `/${string}`,
@@ -798,9 +795,13 @@ function verifySingleClauseContextGuard(
         expected: Readonly<Record<string, number>>,
       ) =>
         actual !== undefined &&
-        Object.keys(actual).length === Object.keys(expected).length &&
         Object.entries(expected).every(
           ([key, value]) => Object.hasOwn(actual, key) && actual[key] === value,
+        ) &&
+        // 3.2.5 的归一化会补出完整的零值 stat 表；新增的零值不改变贡献，
+        // 但任何新增的非零 modifier 仍触发重新核对。
+        Object.entries(actual).every(
+          ([key, value]) => Object.hasOwn(expected, key) || value === 0,
         )
       if (
         !pack ||
@@ -839,8 +840,13 @@ function verifySingleClauseContextGuard(
         [pack.selfMods, pack.teamMods].some(
           (mods) =>
             !mods ||
-            !sameKeys(mods, context.emptyPackModifierKeys!) ||
-            Object.values(mods).some((value) => value !== 0),
+            context.emptyPackModifierKeys!.some(
+              (key) => !Object.hasOwn(mods, key) || mods[key] !== 0,
+            ) ||
+            Object.entries(mods).some(
+              ([key, value]) =>
+                !context.emptyPackModifierKeys!.includes(key) && value !== 0,
+            ),
         )
       )
         throw new Error(
@@ -1024,12 +1030,41 @@ function verifySingleClauseContextGuard(
 function effectiveSourceScope(document: {
   readonly scope?: string | readonly string[]
   readonly skillTargets?: readonly unknown[]
+  readonly conditions?: { readonly damageTypes?: readonly string[] }
 }): string | readonly string[] | undefined {
-  return document.scope !== undefined
-    ? document.scope
-    : (document.skillTargets?.length ?? 0) > 0
-      ? "skill"
-      : "general"
+  const damageTypes = document.conditions?.damageTypes
+  if (damageTypes !== undefined && damageTypes.length > 0)
+    return damageTypes.length === 1
+      ? damageTypes[0]
+      : [...damageTypes].toSorted()
+  if (document.scope === undefined)
+    return (document.skillTargets?.length ?? 0) > 0 ? "skill" : "general"
+  return Array.isArray(document.scope)
+    ? [...document.scope].toSorted()
+    : document.scope
+}
+
+/** 形状核对时的来源字段值；scope 统一按 conditions/省略/skillTargets 的有效语义比较。 */
+function sourceShapeFieldValue(
+  document: Record<string, unknown>,
+  field: string,
+): unknown {
+  return field === "scope"
+    ? effectiveSourceScope(
+        document as {
+          scope?: string | readonly string[]
+          skillTargets?: readonly unknown[]
+          conditions?: { readonly damageTypes?: readonly string[] }
+        },
+      )
+    : (document[field] ?? null)
+}
+
+/** 冻结形状的期望值；scope 同样按有效语义归一。 */
+function expectedShapeFieldValue(expected: unknown, field: string): unknown {
+  return field === "scope"
+    ? effectiveSourceScope({ scope: expected as string | readonly string[] })
+    : expected
 }
 
 function verifySourceRecordShape(
@@ -1047,11 +1082,17 @@ function verifySourceRecordShape(
       Object.keys(actual)
         .filter(
           (field) =>
-            actual[field as keyof SourceEffect] !== undefined ||
-            !SOURCE_RECORD_SHAPE_FIELDS.includes(field),
+            field !== "scope" &&
+            (actual[field as keyof SourceEffect] !== undefined ||
+              !SOURCE_RECORD_SHAPE_FIELDS.includes(field)),
         )
         .toSorted(),
-    ) !== JSON.stringify(Object.keys(frozen).toSorted())
+    ) !==
+      JSON.stringify(
+        Object.keys(frozen)
+          .filter((field) => field !== "scope")
+          .toSorted(),
+      )
   )
     throw new Error(
       `Supplement ${label} record field set drifted at ${context}; re-review the shared clause context before generating`,
@@ -1436,18 +1477,6 @@ export function collectSource(
         normalized.id !== raw.id
       )
         throw new Error("Polarity isolation normalized entity identity drift")
-      if (category === "agents" && raw.id === "hugo") {
-        if (normalized.id !== raw.id)
-          throw new Error(
-            "Hugo teammate count normalized entity identity drift",
-          )
-        verifyHugoAttackPack(raw.mindscapeBuffs?.[0], "raw", catalogEntity)
-        verifyHugoAttackPack(
-          normalized.mindscapeBuffs?.[0],
-          "normalized",
-          catalogEntity,
-        )
-      }
       const entries: {
         raw: SourcePack
         normalized: SourcePack
@@ -1504,16 +1533,6 @@ export function collectSource(
       }
       for (const entry of entries) {
         const actual = functions.collectEffectsFromPack(entry.normalized)
-        if (category === "agents" && raw.id === "hugo" && entry.rank === 0) {
-          const attackRecords = actual.filter(
-            (effect) => effect.id === "legacy-self-atk",
-          )
-          if (attackRecords.length !== 1)
-            throw new Error(
-              "Hugo teammate count expects one consumed normalized ATK record before folding",
-            )
-          verifyHugoAttackEncoding(attackRecords[0]!, "normalized")
-        }
         const collected: {
           effect: SourceEffect
           blockId: string
@@ -1820,70 +1839,6 @@ function whenFor(
 const semanticsKeyFor = (record: SourceRecord): string =>
   `${record.category}/${record.entityId}/${record.rankKind}/${record.rank}/${record.blockId}/${record.raw.id}`
 
-const hugoAttackSemantics = SOURCE_SEMANTICS[HUGO_ATTACK_SOURCE_KEY] as Extract<
-  SourceSemantics,
-  { kind: "hugo-stun-teammate-count" }
->
-
-function verifyHugoAttackEncoding(
-  effect: SourceEffect,
-  representation: "raw" | "normalized",
-): void {
-  verifySourceRecordShape(
-    effect,
-    representation === "raw"
-      ? hugoAttackSemantics.expectedRaw
-      : hugoAttackSemantics.expectedNormalized,
-    "Hugo teammate count",
-    `${representation} ${HUGO_ATTACK_SOURCE_KEY}`,
-    true,
-  )
-}
-
-/** 只验证 Hugo 核心 ATK；在 find/分组折叠前检查真实块，忽略非消费的 flat 镜像。 */
-function verifyHugoAttackPack(
-  pack: SourcePack | undefined,
-  representation: "raw" | "normalized",
-  holder: Pick<StaticCatalogEntity, "profession" | "element">,
-): void {
-  const occurrences = (pack?.effectBlocks ?? []).flatMap((block) =>
-    block.effects
-      .filter((effect) => effect.id === "legacy-self-atk")
-      .map((effect) => ({ block, effect })),
-  )
-  if (occurrences.length !== 1 || occurrences[0]!.block.id !== "blk-legacy")
-    throw new Error(
-      `Hugo teammate count lost or duplicated its ${representation} source identity (${HUGO_ATTACK_SOURCE_KEY})`,
-    )
-  const { block, effect } = occurrences[0]!
-  verifyHugoAttackEncoding(effect, representation)
-  if (block.note !== hugoAttackSemantics.expectedSourceBlockNote)
-    throw new Error(`Hugo teammate count ${representation} block note drift`)
-  // 同一核心块的 team/global ATK 也可能覆盖 holder；职业或元素筛选排除 holder 的条款保留。
-  if (
-    block.effects.some((candidate) => {
-      if (candidate === effect || candidate.stat !== "atk") return false
-      if (candidate.applyTarget === "self") return true
-      return (
-        candidate.applyTarget === "team" &&
-        candidate.applySituation === "global" &&
-        (!candidate.applyProfession ||
-          candidate.applyProfession === holder.profession) &&
-        (!Array.isArray(candidate.elementFilter) ||
-          (holder.element !== null &&
-            candidate.elementFilter.some(
-              (element) =>
-                elementMap[element] !== "lumiflux" &&
-                elementMap[element] === holder.element,
-            )))
-      )
-    })
-  )
-    throw new Error(
-      `Hugo teammate count ${representation} has an additional same-clause ATK encoding`,
-    )
-}
-
 const polarityIsolationRegistrations = Object.entries(SOURCE_SEMANTICS).filter(
   (
     entry,
@@ -2004,8 +1959,12 @@ function verifySourceStatCorrectionRecord(
       )
     for (const [field, expected] of Object.entries(semantics.expectedEncoding))
       if (
-        JSON.stringify(document[field as keyof SourceEffect] ?? null) !==
-        JSON.stringify(expected)
+        JSON.stringify(
+          sourceShapeFieldValue(
+            document as unknown as Record<string, unknown>,
+            field,
+          ),
+        ) !== JSON.stringify(expectedShapeFieldValue(expected, field))
       )
         throw new Error(
           `Source-stat correction ${semantics.differenceId} ${label} field drift at ${record.pointer}: ${field}`,
@@ -2101,8 +2060,12 @@ function verifySettlementElementScopeRecord(
       )
     for (const [field, expected] of Object.entries(semantics.expectedEncoding))
       if (
-        JSON.stringify(document[field as keyof SourceEffect] ?? null) !==
-        JSON.stringify(expected)
+        JSON.stringify(
+          sourceShapeFieldValue(
+            document as unknown as Record<string, unknown>,
+            field,
+          ),
+        ) !== JSON.stringify(expectedShapeFieldValue(expected, field))
       )
         throw new Error(
           `Settlement element scope correction ${semantics.differenceId} ${label} field drift at ${record.pointer}: ${field}`,
@@ -2143,10 +2106,14 @@ function verifySettlementExclusionRecord(
         `Settlement-target exclusion ${semantics.differenceId} lost the ${label} record at ${record.pointer}; the registered encoding must survive normalization before the coexistence correction can apply`,
       )
     for (const [field, value] of Object.entries(semantics.expectedEncoding)) {
-      const actual = document[field as keyof SourceEffect]
-      if (JSON.stringify(actual ?? null) !== JSON.stringify(value))
+      const actual = sourceShapeFieldValue(
+        document as unknown as Record<string, unknown>,
+        field,
+      )
+      const wanted = expectedShapeFieldValue(value, field)
+      if (JSON.stringify(actual) !== JSON.stringify(wanted))
         throw new Error(
-          `Settlement-target exclusion ${semantics.differenceId} ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(actual ?? null)}, expected ${JSON.stringify(value)}; re-review the clause instead of silently re-scoping`,
+          `Settlement-target exclusion ${semantics.differenceId} ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(actual)}, expected ${JSON.stringify(wanted)}; re-review the clause instead of silently re-scoping`,
         )
     }
   }
@@ -2195,10 +2162,11 @@ function verifyRegisteredCompleteStateRecord(
     }
     delete flattened.convert
     for (const [field, value] of Object.entries(semantics.expectedEncoding)) {
-      const actual = flattened[field]
-      if (JSON.stringify(actual ?? null) !== JSON.stringify(value))
+      const actual = sourceShapeFieldValue(flattened, field)
+      const wanted = expectedShapeFieldValue(value, field)
+      if (JSON.stringify(actual) !== JSON.stringify(wanted))
         throw new Error(
-          `Complete-state ${mechanism} correction ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(actual ?? null)}`,
+          `Complete-state ${mechanism} correction ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(actual)}`,
         )
     }
   }
@@ -2430,7 +2398,7 @@ function compile(
           (p) =>
             ({
               sourceId: "nanoka-integrated",
-              version: "3.2",
+              version: "3.3.12+19634983",
               locale: "zh",
               resourcePath: p.path,
               pointer: p.pointer,
@@ -3420,8 +3388,15 @@ function compile(
           `Hit-scope direct-stat correction lost the ${label} record at ${record.pointer}`,
         )
       for (const [field, value] of Object.entries(semantics.expectedEncoding)) {
-        const actual = document[field as keyof SourceEffect]
-        if (JSON.stringify(actual) !== JSON.stringify(value))
+        const actual =
+          field === "scope"
+            ? effectiveSourceScope(document)
+            : document[field as keyof SourceEffect]
+        const expected =
+          field === "scope" && typeof value === "string"
+            ? effectiveSourceScope({ scope: value })
+            : value
+        if (JSON.stringify(actual) !== JSON.stringify(expected))
           throw new Error(
             `Hit-scope direct-stat correction ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(actual)}`,
           )
@@ -4085,8 +4060,13 @@ function buildYuzuhaCompleteStateOption(
       throw new Error(
         `Complete-state tanuki-wish lost its core rank evidence: ${semanticsKeyFor(record)}`,
       )
-  const inputName = "yuzuha:tanuki-wish:anomaly-mastery"
-  const value: NumericExpression<"ratio", "contribution"> = {
+  const inputNames = {
+    anomalyDmgBonus: "yuzuha:tanuki-wish:anomaly-mastery-final",
+    disorderDmgBonus: "yuzuha:tanuki-wish:anomaly-mastery-external",
+  } as const
+  const makeValue = (
+    inputName: string,
+  ): NumericExpression<"ratio", "contribution"> => ({
     kind: "minimum",
     unit: "ratio",
     operands: [
@@ -4116,7 +4096,7 @@ function buildYuzuhaCompleteStateOption(
         },
       },
     ],
-  }
+  })
   const branchEffectIds = {
     anomalyDmgBonus:
       "agent:1411:zzz-hp:tanuki-wish-complete-state:anomalyDmgBonus",
@@ -4144,7 +4124,7 @@ function buildYuzuhaCompleteStateOption(
         operation: {
           kind: "factor-contribution",
           channel: "anomaly-damage-bonus",
-          value,
+          value: makeValue(inputNames[stat]),
         },
       },
       {
@@ -4182,7 +4162,7 @@ function buildYuzuhaCompleteStateOption(
       name: "狸之愿 · 额外能力完整状态",
       target: "team",
       conditionDescription:
-        "队伍中存在其他[异常]角色或与柚叶同阵营的角色，且受益角色拥有[狸之愿]时，按柚叶显式异常掌控 AM 使其属性异常与紊乱伤害提升 min(20%, max(0, AM−100)×0.2%)；影画1起对同一增益乘1.3。[狸之愿]由对应强化特殊技/终结技命中施加，持续40秒、重复触发刷新；编队资格与本次有效状态由调用方声明，不自动推断持续时间。读取阶段仍待证，保留手工读数；异常积蓄效率不在本输出范围。",
+        "队伍中存在其他[异常]角色或与柚叶同阵营的角色，且受益角色拥有[狸之愿]时，按来源分支分别读取异常掌控：属性异常使用 final 读数、紊乱使用 external 读数，使其伤害提升 min(20%, max(0, AM−100)×0.2%)；影画1起对同一增益乘1.3。[狸之愿]由对应强化特殊技/终结技命中施加，持续40秒、重复触发刷新；编队资格与本次有效状态由调用方声明，不自动推断持续时间。异常积蓄效率不在本输出范围。",
       variants: [
         {
           configuration: {
@@ -4198,10 +4178,16 @@ function buildYuzuhaCompleteStateOption(
           maximumLayers: 1,
           inputs: [
             {
-              name: inputName,
+              name: inputNames.anomalyDmgBonus,
               unit: "anomaly-mastery-points",
               description:
-                "柚叶异常掌控（显式手工读数，必填且无默认值；读取阶段待证）",
+                "柚叶属性异常分支的 final 异常掌控（显式读数，必填且无默认值）",
+            },
+            {
+              name: inputNames.disorderDmgBonus,
+              unit: "anomaly-mastery-points",
+              description:
+                "柚叶紊乱分支的 external 异常掌控（显式读数，必填且无默认值）",
             },
           ],
           applicability: {},
@@ -4787,14 +4773,9 @@ export function convertSource(
     options.push({
       optionId,
       catalogEntityId: entity.catalogEntityId,
-      name:
-        firstSemantics?.kind === "hugo-stun-teammate-count"
-          ? "终末裁决 · 其他击破队友人数（0/1/2）"
-          : `${first.blockName} · ${displayStat}`,
+      name: `${first.blockName} · ${displayStat}`,
       conditionDescription:
-        (firstSemantics?.kind === "hugo-stun-teammate-count"
-          ? HUGO_ATTACK_COUNT_DESCRIPTION
-          : sharedConditionDescription) ??
+        sharedConditionDescription ??
         [first.blockNote, first.raw.note].filter(Boolean).join("\n"),
       ...(first.entityId === "remiel" && first.blockId === "blk-ms7td2gs-rk1vtd"
         ? { exclusiveGroup: "remiel:team-profession-attack-tier" }
@@ -4833,8 +4814,8 @@ export function convertSource(
       (c) =>
         c.catalogEntityId === "agents:astrayao" &&
         c.rank === 2 &&
-        ["legacy-team-atk", "eff-ms38lmcz-qennwz"].some((id) =>
-          c.effectIds.some((effectId) => effectId.includes(id)),
+        ["legacy-team-atk", "eff-ms38lmcz-qennwz", "eff-muhxkum2-5x20c1"].some(
+          (id) => c.effectIds.some((effectId) => effectId.includes(id)),
         ),
     )
     const ids = new Set(m2.flatMap((c) => c.effectIds))
@@ -5476,7 +5457,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "46",
+    revision: "51",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: effects.some(
@@ -5593,20 +5574,6 @@ export function convertSource(
       }),
     ],
     differences: [
-      {
-        differenceId: HUGO_ATTACK_COUNT_DIFFERENCE_ID,
-        explanation: HUGO_ATTACK_COUNT_DESCRIPTION,
-        references: [
-          ...collected.records
-            .filter(
-              (record) => semanticsKeyFor(record) === HUGO_ATTACK_SOURCE_KEY,
-            )
-            .map((record) => reference(record.pointer)),
-          ...hugoAttackSemantics.evidence.map((ref) =>
-            nanokaReference(ref.path, ref.pointer),
-          ),
-        ],
-      },
       {
         differenceId: YANAGI_POLARITY_DIFFERENCE_ID,
         explanation: YANAGI_POLARITY_EXPLANATION,
@@ -5857,6 +5824,20 @@ export function convertSource(
         ),
       },
       {
+        differenceId: "remielle-mindscape4-luminize-scope",
+        explanation:
+          "蕾米埃尔影画 4 的固定来源记录在 2628b32 中省略 scope，但仍携带 skillCategory/skillTargets=basic；Fairy 对省略 scope 且带 skillTargets 的兼容规则因此派生出普通攻击命中筛选，而 Nanoka 天赋 4（agents/1581/details.zh.json 的 /talent/4/desc）只写“触发[耀变]效果时，伤害倍率额外提升12%”。本修正只移除该 skillTargets 派生的受益筛选，保留 luminize 伤害种类、影画 4 配置门槛与 +12% 数值，状态记为 corrected；来源目标类别或元素筛选漂移即拒绝生成。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes(
+                "remielle-mindscape4-luminize-scope",
+              ),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
         differenceId: "remielle-mindscape1-complete-anomaly-state",
         explanation:
           "蕾米埃尔影画 1 的块 note 与 Nanoka 天赋 1（agents/1581/details.zh.json 的 /talent/1/desc）同文的后一条款为“蕾米埃尔处于[相变时流]状态下时，队伍中其他角色造成的属性异常伤害提升10%”。固定来源 fac62407 把该状态拆成同一块（/agents/51/mindscapeBuffs/1/effectBlocks/0）的两条记录：effects/1 为 team anomalyDmgBonus +10、effects/2 为自身 anomalyDmgBonus −10，后者把持有者自身排除。固定版上游允许逐 effect 独立切换——BuffEffectPickerModal.vue 的 isEnabled/setEnabled/toggleEffect 按 effect 开关、toggleCard 批量切换；panelBuffCalc.ts 的 buildDefaultBuffSelection 默认全部开启并按 team 共享、self 槽位分别选择；resolvePackMods 对自身取 self+team、他人只取 team（两个文件摘要登记在来源清单），因此上游不会强制两条成对激活。单选 +10% 会让持有者自身也多算 10%（半状态），只选 −10% 也不是该状态。Fairy 的完整状态选择契约因此提供一个完整选项 agents:remiel:mindscape:1:phase-transition-flow:other-character-anomaly-damage：单一 corrected 变体同时引用两条既有规则（effectId 与规则数值不变，team +0.1 与 holder −0.1 在既有异常增伤乘区一次求和），minimumMindscape 1、maximumLayers 1、无必需输入与额外职业/潜能门槛；M0 拒绝、M1—M6 合法且只应用一次，不选或合法 layers 0 表示关闭，解锁不自动启用。两个旧 optionId 保留为 semantic-conflict 迁移入口，不再接受单选、两项齐选或与完整选项混选；来源位置仍在覆盖报告中保留去向并说明不是功能退步。10% 只作用于普通异常、异放、乱流与耀变（anomalyDmgBonus 既有映射边界），紊乱继续使用独立 disorderDmgBonus，普通直伤（regular/sheer/sharpen）不受影响；影画 1 的 50% 耀变专属抗穿（radianceResPen）是独立条款，规则与选项保持独立，不并入本完整状态。",
@@ -5998,20 +5979,6 @@ export function convertSource(
             .filter((variant) =>
               variant.differences.includes(
                 "billy-mindscape4-hit-scope-critical-rate",
-              ),
-            )
-            .flatMap((variant) => variant.references),
-        ),
-      },
-      {
-        differenceId: "shining-aria-stagger-entry-triggered-state",
-        explanation:
-          "流光咏叹（33600）四件套后一条款「当场上有敌人进入失衡状态时，装备者造成的伤害提升25%，持续18秒，重复触发时刷新持续时间」（块 note 与 Nanoka /desc4 同文）在固定来源 fac62407 中被编码为 applySituation: stagger，固定版 effectMatchesContext 据此要求目标当前处于失衡。进入失衡只是触发事实：该增益是持续 18 秒的状态，期间目标是否失衡不影响受益。Fairy 移除派生的 hit.targetState 条件，状态是否仍有效由调用方显式选择 supplied 实例声明——当前目标未失衡但声明状态有效仍 +25%，当前目标处于失衡但未声明状态不自动获得；触发、18 秒持续与刷新不模拟时间线。四件门槛、自身受益与独立的普攻命中 +36 异常精通/8 秒条款保持独立开关，数值与稳定 ID 不变。",
-        references: options.flatMap((option) =>
-          option.variants
-            .filter((variant) =>
-              variant.differences.includes(
-                "shining-aria-stagger-entry-triggered-state",
               ),
             )
             .flatMap((variant) => variant.references),

@@ -173,7 +173,7 @@ describe("batch 12 w-engine additional damage through the published data package
     )
     if (!definitions.ok) throw new Error(JSON.stringify(definitions.issues))
     const catalog = calculationData.catalog as StaticEffectCatalog
-    expect(catalog.revision).toBe("50")
+    expect(catalog.revision).toBe("51")
     for (const optionId of [BIG_CYLINDER, CANNON_ROTOR])
       expect(
         catalog.options.some((o) => o.optionId === optionId),
