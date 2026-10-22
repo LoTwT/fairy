@@ -525,7 +525,8 @@ const redAxisIdentity: SourceIdentity = { kind: "w-engine", entityId: "13111" }
 const nekomataOrdinaryDmgBonus: Supplement = {
   kind: "option-variant",
   supplementId: "nanoka:nekomata:ordinary-dmg-bonus",
-  source: "nanoka-integrated@3.2 agents/1021 /passive/level/1021507/desc/0",
+  source:
+    "nanoka-integrated@3.3.12+19634983 agents/1021 /passive/level/1021507/desc/0",
   optionId: "agents:nekomata:mindscape:0:blk-legacy:legacy-self-dmgBonus",
   supportedRanks: "core 7；潜能 0",
   computationTarget: "catalog option variant",
@@ -593,7 +594,8 @@ const nekomataOrdinaryDmgBonus: Supplement = {
 const nekomataOrdinaryShow: Supplement = {
   kind: "option-variant",
   supplementId: "nanoka:nekomata:ordinary-show",
-  source: "nanoka-integrated@3.2 agents/1021 /passive/level/1021507/desc/1",
+  source:
+    "nanoka-integrated@3.3.12+19634983 agents/1021 /passive/level/1021507/desc/1",
   optionId:
     "agents:nekomata:mindscape:0:blk-ms4f4rbb-id7p58:eff-ms4f4rbb-y2jon7",
   supportedRanks: "core 7；潜能 0；层数 1—2",
@@ -676,7 +678,7 @@ const nekomataOrdinaryShow: Supplement = {
 const redAxis: Supplement = {
   kind: "entity",
   supplementId: "nanoka:w-engines:13111",
-  source: "nanoka-integrated@3.2 w-engines/13111 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/13111 /talents/1—5/desc",
   optionId: "nanoka:w-engines:13111:refinement:red-axis",
   supportedRanks: "refinement 1—5",
   computationTarget: "catalog entity + option",
@@ -693,7 +695,7 @@ const redAxis: Supplement = {
     element: "electric",
     supplementProvenance: {
       sourceId: "nanoka-integrated",
-      version: "3.2",
+      version: "3.3.12+19634983",
       resources: [
         {
           path: "w-engines/13111/details.zh.json",
@@ -773,7 +775,7 @@ const redAxis: Supplement = {
 const identityInflectionAttackerDamageReduction: Supplement = {
   kind: "unsupported-option",
   supplementId: "nanoka:w-engines:12014:attacker-damage-reduction",
-  source: "nanoka-integrated@3.2 w-engines/12014 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/12014 /talents/1—5/desc",
   catalogEntityId: "nanoka:w-engines:12014",
   optionId: "nanoka:w-engines:12014:attacker-damage-reduction",
   name: "「恒等式」-变格 · attackerDamageReduction",
@@ -797,7 +799,7 @@ const identityInflectionAttackerDamageReduction: Supplement = {
     element: null,
     supplementProvenance: {
       sourceId: "nanoka-integrated",
-      version: "3.2",
+      version: "3.3.12+19634983",
       resources: [
         {
           path: "w-engines/12014/details.zh.json",
@@ -853,7 +855,7 @@ const shockstarDiscoEvidence = [
 const shockstarDiscoTwoPieceImpact: Supplement = {
   kind: "option",
   supplementId: "nanoka:drive-discs:31200:two-piece-impact-percent",
-  source: "nanoka-integrated@3.2 drive-discs/31200 /desc2",
+  source: "nanoka-integrated@3.3.12+19634983 drive-discs/31200 /desc2",
   catalogEntityId: "drive-discs:SuitShockstarDisco",
   optionId: "nanoka:drive-discs:31200:two-piece-impact-percent",
   supportedRanks: "2 件起",
@@ -889,57 +891,6 @@ const shockstarDiscoTwoPieceImpact: Supplement = {
   },
 }
 
-const soulRockEvidence = [
-  {
-    path: "drive-discs/31500/details.zh.json",
-    pointer: "/desc2",
-    sha256: "bdf81529b0dad0bb91f0a7b6b14484af3b9b31ead6841103c177563aed101c0c",
-  },
-] as const
-
-/**
- * 灵魂摇滚（31500）二件套：防御力 +16%。固定来源的二件套机器记录完全缺失
- * （无块、无 effects、mods 全零）；按 integrated 描述补真实属性规则。
- */
-const soulRockTwoPieceDefense: Supplement = {
-  kind: "option",
-  supplementId: "nanoka:drive-discs:31500:two-piece-defense-percent",
-  source: "nanoka-integrated@3.2 drive-discs/31500 /desc2",
-  catalogEntityId: "drive-discs:SuitSoulRock",
-  optionId: "nanoka:drive-discs:31500:two-piece-defense-percent",
-  supportedRanks: "2 件起",
-  computationTarget: "catalog option on the mapped drive-disc entity",
-  evidence: soulRockEvidence,
-  verification:
-    "Nanoka drive-discs/31500 /desc2 原文“防御力+16%。”；固定来源 fac62407 没有任何二件套机器记录（twoPieceEffectBlocks 为 null、twoPieceEffects 为空、twoPieceMods 全零）。同文的“防御力+16%。”条款在荆棘玫瑰（34200）由来源编码为 externalDefPercent 并转换为 defense 的 initial-percentage，本补充沿用同一口径在既有 drive-discs:SuitSoulRock 实体登记二件套选项；2 件起按实际件数自动选中、同一套只生效一次。已结算局外面板输入已含该贡献，静态入口不再重复叠加；该防御进入面板后可被防御缩放类规则读取。",
-  rule: {
-    effectId: "disc:31500:nanoka:two-piece-defense-percent:setPieces:2",
-    identity: { kind: "drive-disc", entityId: "31500" },
-    section: "2件套",
-    config: driveDiscTwoPieceConfig(2),
-    parameters: {
-      amount: { kind: "constant", unit: "ratio", value: 0.16 },
-    },
-    scope: "entity",
-    when: { kind: "constant", value: true },
-    operation: {
-      kind: "stat-adjustment",
-      stat: "defense",
-      stage: "initial-percentage",
-      value: { kind: "parameter", unit: "ratio", name: "amount" },
-    },
-    maximumLayers: 1,
-  },
-  variant: {
-    configuration: { minimumSetPieces: 2 },
-    inputs: [],
-    applicability: {},
-    conditionDescription: "防御力+16%。",
-    name: "2件套 · externalDefPercent",
-    target: "self",
-  },
-}
-
 const protoPunkEvidence = [
   {
     path: "drive-discs/31900/details.zh.json",
@@ -956,7 +907,7 @@ const protoPunkEvidence = [
 const protoPunkTwoPieceShieldBoundary: Supplement = {
   kind: "unsupported-option",
   supplementId: "nanoka:drive-discs:31900:two-piece-shield-value",
-  source: "nanoka-integrated@3.2 drive-discs/31900 /desc2",
+  source: "nanoka-integrated@3.3.12+19634983 drive-discs/31900 /desc2",
   catalogEntityId: "drive-discs:SuitProtoPunk",
   optionId: "nanoka:drive-discs:31900:two-piece-shield-value",
   name: "2件套 · shieldValue",
@@ -990,7 +941,7 @@ const kingOfTheSummitEvidence = [
 const kingOfTheSummitTwoPieceDazeBoundary: Supplement = {
   kind: "unsupported-option",
   supplementId: "nanoka:drive-discs:33200:two-piece-daze-value",
-  source: "nanoka-integrated@3.2 drive-discs/33200 /desc2",
+  source: "nanoka-integrated@3.3.12+19634983 drive-discs/33200 /desc2",
   catalogEntityId: "drive-discs:SuitKingoftheSummit",
   optionId: "nanoka:drive-discs:33200:two-piece-daze-value",
   name: "2件套 · dazeValue",
@@ -1171,7 +1122,7 @@ const impactSourceStats = [
 const identityBaseDefenseOnHit: Supplement = {
   kind: "option",
   ...wengineSupplement("12013", "defense-on-hit"),
-  source: "nanoka-integrated@3.2 w-engines/12013 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/12013 /talents/1—5/desc",
   catalogEntityId: "w-engines:Identity_Base",
   supportedRanks: "refinement 1—5",
   computationTarget: "catalog option on the mapped w-engine entity",
@@ -1216,7 +1167,7 @@ const identityBaseDefenseOnHit: Supplement = {
 const restrainerBasicAttackDamageStacks: Supplement = {
   kind: "option",
   ...wengineSupplement("14114", "basic-attack-damage-stacks"),
-  source: "nanoka-integrated@3.2 w-engines/14114 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/14114 /talents/1—5/desc",
   catalogEntityId: "w-engines:Weapon_S_1141",
   supportedRanks: "refinement 1—5；层数 0—5",
   computationTarget: "catalog option on the mapped w-engine entity",
@@ -1281,7 +1232,7 @@ const restrainerBasicAttackDamageStacks: Supplement = {
 const reverbMarkITeamImpactAfterEx: Supplement = {
   kind: "option",
   ...wengineSupplement("12004", "team-impact-after-ex"),
-  source: "nanoka-integrated@3.2 w-engines/12004 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/12004 /talents/1—5/desc",
   catalogEntityId: "w-engines:Reverb_Mark_I",
   supportedRanks: "refinement 1—5",
   computationTarget: "catalog option on the mapped w-engine entity",
@@ -1319,7 +1270,7 @@ const reverbMarkITeamImpactAfterEx: Supplement = {
 const vortexHatchetImpactAsActive: Supplement = {
   kind: "option",
   ...wengineSupplement("12009", "impact-as-active-character"),
-  source: "nanoka-integrated@3.2 w-engines/12009 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/12009 /talents/1—5/desc",
   catalogEntityId: "w-engines:Vortex_Hatchet",
   supportedRanks: "refinement 1—5",
   computationTarget: "catalog option on the mapped w-engine entity",
@@ -1359,7 +1310,7 @@ const vortexHatchetImpactAsActive: Supplement = {
 const steamOvenImpactPerRetainedLayer: Supplement = {
   kind: "option",
   ...wengineSupplement("13005", "impact-per-retained-layer"),
-  source: "nanoka-integrated@3.2 w-engines/13005 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/13005 /talents/1—5/desc",
   catalogEntityId: "w-engines:Steam_Oven",
   supportedRanks: "refinement 1—5；层数 0—8",
   computationTarget: "catalog option on the mapped w-engine entity",
@@ -1398,7 +1349,7 @@ const steamOvenImpactPerRetainedLayer: Supplement = {
 const originalTransmorpherImpactOnHit: Supplement = {
   kind: "option",
   ...wengineSupplement("13007", "impact-on-hit"),
-  source: "nanoka-integrated@3.2 w-engines/13007 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/13007 /talents/1—5/desc",
   catalogEntityId: "w-engines:Original_Transmorpher",
   supportedRanks: "refinement 1—5",
   computationTarget: "catalog option on the mapped w-engine entity",
@@ -1437,7 +1388,7 @@ const originalTransmorpherImpactOnHit: Supplement = {
 const hellfireGearsImpactPerStack: Supplement = {
   kind: "option",
   ...wengineSupplement("14110", "impact-per-stack-after-ex"),
-  source: "nanoka-integrated@3.2 w-engines/14110 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/14110 /talents/1—5/desc",
   catalogEntityId: "w-engines:Hellfire_Gears",
   supportedRanks: "refinement 1—5；层数 0—2",
   computationTarget: "catalog option on the mapped w-engine entity",
@@ -1476,7 +1427,7 @@ const hellfireGearsImpactPerStack: Supplement = {
 const blazingLaurelImpactAfterAssist: Supplement = {
   kind: "option",
   ...wengineSupplement("14116", "impact-after-assist"),
-  source: "nanoka-integrated@3.2 w-engines/14116 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/14116 /talents/1—5/desc",
   catalogEntityId: "w-engines:Blazing_Laurel",
   supportedRanks: "refinement 1—5",
   computationTarget: "catalog option on the mapped w-engine entity",
@@ -1518,7 +1469,7 @@ const blazingLaurelImpactAfterAssist: Supplement = {
 const iceJadeTeapotImpactPerTeaLayer: Supplement = {
   kind: "option",
   ...wengineSupplement("14125", "impact-per-tea-layer"),
-  source: "nanoka-integrated@3.2 w-engines/14125 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/14125 /talents/1—5/desc",
   catalogEntityId: "w-engines:Ice-Jade_Teapot",
   supportedRanks: "refinement 1—5；层数 0—30",
   computationTarget: "catalog option on the mapped w-engine entity",
@@ -1585,7 +1536,8 @@ const spectralGazeSoulChainTiers: readonly Supplement[] =
     (tier): Supplement => ({
       kind: "option",
       ...wengineSupplement("14136", `soul-chain-${tier.tier}-layer`),
-      source: "nanoka-integrated@3.2 w-engines/14136 /talents/1—5/desc",
+      source:
+        "nanoka-integrated@3.3.12+19634983 w-engines/14136 /talents/1—5/desc",
       catalogEntityId: "w-engines:Spectral_Gaze",
       supportedRanks: `refinement 1—5；有效[魂锁] ${tier.tier} 层完整档位（0/1）`,
       computationTarget: "catalog option on the mapped w-engine entity",
@@ -1630,7 +1582,7 @@ const spectralGazeSoulChainTiers: readonly Supplement[] =
 const headLackeyFixedImpactPoints: Supplement = {
   kind: "option",
   ...wengineSupplement("14157", "fixed-impact-points"),
-  source: "nanoka-integrated@3.2 w-engines/14157 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/14157 /talents/1—5/desc",
   catalogEntityId: "w-engines:Head_Lackey",
   supportedRanks: "refinement 1—5",
   computationTarget: "catalog option on the mapped w-engine entity",
@@ -1723,7 +1675,7 @@ const soldier11FlameProwess: Supplement = {
   kind: "option",
   supplementId: "nanoka:soldier11:flame-prowess",
   source:
-    "nanoka-integrated@3.2 agents/1041 /potentialDetail/104101—104105/desc",
+    "nanoka-integrated@3.3.12+19634983 agents/1041 /potentialDetail/104101—104105/desc",
   catalogEntityId: "agents:soldier11",
   optionId: "nanoka:agents:soldier11:potential:flame-prowess",
   supportedRanks: "潜能 2—6",
@@ -1770,7 +1722,7 @@ const lycaonIceHunt: Supplement = {
   kind: "option",
   supplementId: "nanoka:lycaon:ice-hunt-impact",
   source:
-    "nanoka-integrated@3.2 agents/1141 /potentialDetail/114101—114105/desc",
+    "nanoka-integrated@3.3.12+19634983 agents/1141 /potentialDetail/114101—114105/desc",
   catalogEntityId: "agents:lycaon",
   optionId: "nanoka:agents:lycaon:potential:ice-hunt-impact",
   supportedRanks: "潜能 2—6",
@@ -1831,7 +1783,7 @@ const alexandrinaPerfectService: Supplement = {
   kind: "option",
   supplementId: "nanoka:alexandrina:perfect-service-pierce",
   source:
-    "nanoka-integrated@3.2 agents/1211 /potentialDetail/121101—121105/desc",
+    "nanoka-integrated@3.3.12+19634983 agents/1211 /potentialDetail/121101—121105/desc",
   catalogEntityId: "agents:alexandrina",
   optionId: "nanoka:agents:alexandrina:potential:perfect-service-pierce",
   supportedRanks: "潜能 2—6",
@@ -1877,7 +1829,8 @@ const alexandrinaPerfectService: Supplement = {
 const ellenOrdinaryBladeDance: Supplement = {
   kind: "option-variant",
   supplementId: "nanoka:ellen:ordinary-blade-dance",
-  source: "nanoka-integrated@3.2 agents/1191 /passive/level/1191507/desc/0",
+  source:
+    "nanoka-integrated@3.3.12+19634983 agents/1191 /passive/level/1191507/desc/0",
   optionId: "agents:ellen:mindscape:0:blk-legacy:legacy-self-critDmg",
   supportedRanks: "core 7；潜能 0",
   computationTarget: "catalog option variant",
@@ -1957,7 +1910,8 @@ const ellenOrdinaryBladeDance: Supplement = {
 const harumasaOrdinaryCritRate: Supplement = {
   kind: "option-variant",
   supplementId: "nanoka:harumasa:ordinary-crit-rate",
-  source: "nanoka-integrated@3.2 agents/1201 /passive/level/1201507/desc/0",
+  source:
+    "nanoka-integrated@3.3.12+19634983 agents/1201 /passive/level/1201507/desc/0",
   optionId: "agents:harumasa:mindscape:0:blk-legacy:legacy-self-critRate",
   supportedRanks: "core 7；潜能 0",
   computationTarget: "catalog option variant",
@@ -2032,7 +1986,8 @@ const harumasaOrdinaryCritRate: Supplement = {
 const harumasaOrdinaryCritDmg: Supplement = {
   kind: "option-variant",
   supplementId: "nanoka:harumasa:ordinary-crit-dmg",
-  source: "nanoka-integrated@3.2 agents/1201 /passive/level/1201507/desc/0",
+  source:
+    "nanoka-integrated@3.3.12+19634983 agents/1201 /passive/level/1201507/desc/0",
   optionId: "agents:harumasa:mindscape:0:blk-legacy:eff-ms4gx7ds-ijkzuy",
   supportedRanks: "core 7；潜能 0；层数 1—6",
   computationTarget: "catalog option variant",
@@ -2104,204 +2059,7 @@ const harumasaOrdinaryCritDmg: Supplement = {
 }
 
 /**
- * 妮可（M01，批次 03）：影画 1 的[强化特殊技]伤害提升。固定来源 mindscape 1
- * 没有任何机器记录；受益范围是妮可本人的强化特殊技直伤（蓄力、炮击、能量场
- * 三个真实动作均携带 all-special-ms0fcqv7 目标），普通特殊技与其他招式不受益。
- * 同句的异常积蓄提升与能量场持续时间延长不在伤害计算范围，覆盖登记留待批次 10。
- */
-const nicoleMindscape1ExDamage: Supplement = {
-  kind: "option",
-  supplementId: "nanoka:nicole:mindscape-1-ex-damage",
-  source: "nanoka-integrated@3.2 agents/1031 /talent/1/desc",
-  catalogEntityId: "agents:nicole",
-  optionId: "nanoka:agents:nicole:mindscape-1-ex-damage",
-  supportedRanks: "影画 1 及以上",
-  computationTarget: "catalog option on the mapped agent entity",
-  conflictingSourceRecords: {
-    stats: ["skillDmgBonus", "dmgBonus"],
-    skillTargetCategories: ["special"],
-  },
-  evidence: [
-    {
-      path: "agents/1031/details.zh.json",
-      pointer: "/talent/1/desc",
-      sha256:
-        "a35b72056c57ba7eba71300e2e51691190c052362c4cc55e8bccfb9787cdab71",
-    },
-  ],
-  verification:
-    "Nanoka 影画 1（agents/1031/details.zh.json 的 /talent/1/desc）确认：[强化特殊技]造成的伤害和累积的属性异常积蓄值提升 16%；发动时每多蓄力 0.1 秒，能量场持续时间提升 0.15 秒。固定 ZZZ-HP 来源的 mindscape 1 没有任何机器记录，按补充来源在既有 agents:nicole 实体新增选项，只接入伤害部分（+16%）：受益范围是妮可本人的强化特殊技直伤——目录按强化特殊技目标（all-special-ms0fcqv7，与固定来源既有强化特殊技记录同一锚点）与直伤种类匹配，真实动作映射中属于该 EX 的蓄力（action:0021）、炮击（action:0022）、能量场（action:0023）命中均获得同一加成，普通特殊技（action:0020，无该目标）、其他招式与队友不受益。异常积蓄提升与能量场持续时间延长不属于当前伤害计算的最终输出，不在本选项表达，覆盖登记留待批次 10；M0 不解锁，选择本选项即断言影画 1 及以上。",
-  rule: {
-    effectId: "agent:1031:nanoka:mindscape-1-ex-damage:mindscape:1",
-    identity: { kind: "agent", entityId: "1031" },
-    section: "影画1",
-    config: {
-      kind: "compare-number",
-      unit: "count",
-      operator: "gte",
-      left: {
-        kind: "configuration-number",
-        unit: "count",
-        field: "mindscapeRank",
-      },
-      right: literal("count", 1),
-    },
-    parameters: {
-      amount: { kind: "constant", unit: "ratio", value: 0.16 },
-    },
-    scope: "hit",
-    when: {
-      kind: "all",
-      conditions: [
-        {
-          kind: "one-of",
-          fact: "hit.damageKind",
-          values: [...directKinds, "sharpen"],
-        },
-        {
-          kind: "all",
-          conditions: [
-            {
-              kind: "one-of",
-              fact: "hit.skillTag",
-              values: ["zzz-hp:category:special"],
-            },
-            {
-              kind: "one-of",
-              fact: "hit.skillTag",
-              values: ["zzz-hp:skill:all-special-ms0fcqv7"],
-            },
-          ],
-        },
-      ],
-    },
-    operation: {
-      kind: "factor-contribution",
-      channel: "damage-bonus",
-      value: { kind: "parameter", unit: "ratio", name: "amount" },
-    },
-    maximumLayers: 1,
-  },
-  variant: {
-    configuration: { minimumMindscape: 1 },
-    inputs: [],
-    applicability: {},
-    conditionDescription:
-      "[强化特殊技]造成的伤害提升16%（影画1及以上）；作用于妮可本人的强化特殊技直伤（蓄力、炮击、能量场），普通特殊技、其他招式与队友不受益。同句的异常积蓄提升与能量场持续时间延长不在伤害计算范围。",
-    name: "影画1 · dmgBonus",
-    target: "self",
-  },
-}
 
-/**
- * 青衣（M17，批次 03）：[普通攻击：醉花月云转]消耗[闪络电压]中超过 75% 部分
- * 的每 1% 使本次招式伤害 +1%。数值由调用方显式输入本次实际消耗的电压比例
- * （0—1），不是施放后的剩余电压；75% → 0、80% → +5%、100% → +25%。
- */
-const qingyiFlashVoltageConsumedDamage: Supplement = {
-  kind: "option",
-  supplementId: "nanoka:qingyi:flash-voltage-consumed-damage",
-  source: "nanoka-integrated@3.2 agents/1251 /skill/basic/description/2/desc",
-  catalogEntityId: "agents:qingyi",
-  optionId: "nanoka:agents:qingyi:flash-voltage-consumed-damage",
-  supportedRanks: "无培养门槛；消耗电压 0—100%（比例 0—1）",
-  computationTarget: "catalog option on the mapped agent entity",
-  conflictingSourceRecords: {
-    stats: ["skillDmgBonus", "dmgBonus"],
-    skillTargetSubcategoryIds: ["qingyi-basic-ms4bcr00"],
-  },
-  evidence: [
-    {
-      path: "agents/1251/details.zh.json",
-      pointer: "/skill/basic/description/2/desc",
-      sha256:
-        "b2af0043044397a3c9b6351852856db96bc2d24645f2ac0b3f9fc48254a6c1fb",
-    },
-  ],
-  verification:
-    "Nanoka 普通攻击描述（agents/1251/details.zh.json 的 /skill/basic/description/2/desc，闪络）确认：发动[普通攻击：醉花月云转]时，青衣会消耗所有[闪络电压]并退出[闪络]状态，所消耗的[闪络电压]中超过 75% 的部分，每 1% 使本次招式造成的伤害/失衡值额外提升 1%/0.5%。固定 ZZZ-HP 来源没有任何机器记录覆盖该条款（同技能的影画 6 暴伤记录编码的是另一条款），按补充来源在既有 agents:qingyi 实体新增选项，只接入伤害部分：max(0, 消耗电压 − 75%) × 1%，上限 +25%（电压至多 100%），锚点为 75% → 0、80% → +5%、100% → +25%。受益范围是携带醉花月云转目标（qingyi-basic-ms4bcr00）的直伤命中——真实动作映射中突进（action:0013）与终结一击（action:0014）都带该目标，一煞、醉花云、强化特殊技与队友不受益。消耗量由调用方显式输入本次招式实际消耗的电压比例（0—1，不是施放后剩余电压，越界读数按表达式钳制），不模拟积攒、消耗与闪络状态进出；失衡值 +0.5%/1% 不做最终输出，覆盖登记留待批次 10。",
-  rule: {
-    effectId: "agent:1251:nanoka:flash-voltage-consumed-damage:mindscape:0",
-    identity: { kind: "agent", entityId: "1251" },
-    section: "普通攻击：醉花月云转（闪络电压消耗）",
-    config: { kind: "constant", value: true },
-    parameters: {
-      threshold: { kind: "constant", unit: "ratio", value: -0.75 },
-      rate: { kind: "constant", unit: "multiplier", value: 1 },
-      cap: { kind: "constant", unit: "ratio", value: 0.25 },
-    },
-    scope: "hit",
-    when: {
-      kind: "all",
-      conditions: [
-        {
-          kind: "one-of",
-          fact: "hit.damageKind",
-          values: [...directKinds, "sharpen"],
-        },
-        {
-          kind: "one-of",
-          fact: "hit.skillTag",
-          values: ["zzz-hp:skill:qingyi-basic-ms4bcr00"],
-        },
-      ],
-    },
-    operation: {
-      kind: "factor-contribution",
-      channel: "damage-bonus",
-      value: {
-        kind: "minimum",
-        unit: "ratio",
-        operands: [
-          {
-            kind: "convert",
-            unit: "ratio",
-            input: {
-              kind: "maximum",
-              unit: "ratio",
-              operands: [
-                literal("ratio", 0),
-                {
-                  kind: "add",
-                  unit: "ratio",
-                  operands: [
-                    {
-                      kind: "input",
-                      unit: "ratio",
-                      name: "agent:1251:nanoka:flash-voltage-consumed-damage:mindscape:0:source",
-                    },
-                    { kind: "parameter", unit: "ratio", name: "threshold" },
-                  ],
-                },
-              ],
-            },
-            rate: { kind: "parameter", unit: "multiplier", name: "rate" },
-          },
-          { kind: "parameter", unit: "ratio", name: "cap" },
-        ],
-      },
-    },
-    maximumLayers: 1,
-  },
-  variant: {
-    configuration: {},
-    inputs: [
-      {
-        name: "agent:1251:nanoka:flash-voltage-consumed-damage:mindscape:0:source",
-        unit: "ratio",
-        description:
-          "manual ratio，本次[普通攻击：醉花月云转]实际消耗的[闪络电压]比例（0—1）；是本次招式消耗的所有电压，不是施放后剩余电压。超过 75% 的部分每 1% 使本次招式伤害 +1%（75% → 0、80% → +5%、100% → +25%），越界读数按表达式钳制，不使用默认值，不模拟积攒/消耗",
-      },
-    ],
-    applicability: {},
-    conditionDescription:
-      "本次[普通攻击：醉花月云转]消耗的[闪络电压]中超过 75% 的部分，每 1% 使本次招式造成的伤害提升 1%（失衡值 +0.5% 不在伤害计算范围）。选择本选项并输入本次消耗比例；受益范围是突进与终结一击两段醉花月云转直伤。",
-    name: "闪络电压消耗 · dmgBonus",
-    target: "self",
-  },
-}
-
-/**
  * 珂蕾妲（M18，批次 03）：潜能分支的强化普攻第二段按消耗[熔炉升温]层数提升。
  * 每消耗一层 +10% 伤害（最多 2 层），只作用于第二段强化普攻（含协同版本）；
  * 层数为本次强化普攻实际消耗的有效层数，全队 +35%（40 秒）是独立既有选项。
@@ -2309,7 +2067,8 @@ const qingyiFlashVoltageConsumedDamage: Supplement = {
 const koledaEnhancedBasicSecondPerLayer: Supplement = {
   kind: "option",
   supplementId: "nanoka:koleda:enhanced-basic-second-per-layer",
-  source: "nanoka-integrated@3.2 agents/1101 /skill/basic/description/1/desc",
+  source:
+    "nanoka-integrated@3.3.12+19634983 agents/1101 /skill/basic/description/1/desc",
   catalogEntityId: "agents:koleda",
   optionId: "nanoka:agents:koleda:enhanced-basic-second-per-layer",
   supportedRanks: "潜能 1—6；消耗层数 0—2",
@@ -2383,7 +2142,8 @@ const koledaEnhancedBasicSecondPerLayer: Supplement = {
 const caesarStanceSwitchImpact: Supplement = {
   kind: "option",
   supplementId: "nanoka:agents:caesar:stance-switch-impact",
-  source: "nanoka-integrated@3.2 agents/1071 /skill/special/description/4/desc",
+  source:
+    "nanoka-integrated@3.3.12+19634983 agents/1071 /skill/special/description/4/desc",
   catalogEntityId: "agents:caesar",
   optionId: "nanoka:agents:caesar:stance-switch-impact",
   supportedRanks: "特殊技最终等级 1—16",
@@ -2459,7 +2219,7 @@ const lighterMoraleBurstImpact: Supplement = {
   kind: "option",
   supplementId: "nanoka:agents:lighter:morale-burst-impact",
   source:
-    "nanoka-integrated@3.2 agents/1161 /passive/level/1161501—1161507/desc/0",
+    "nanoka-integrated@3.3.12+19634983 agents/1161 /passive/level/1161501—1161507/desc/0",
   catalogEntityId: "agents:lighter",
   optionId: "nanoka:agents:lighter:morale-burst-impact",
   supportedRanks: "核心 1—7；层数 0—10",
@@ -2519,7 +2279,7 @@ const jufufuTigersRoarImpact: Supplement = {
   kind: "option",
   supplementId: "nanoka:agents:jufufu:tigers-roar-impact",
   source:
-    "nanoka-integrated@3.2 agents/1391 /passive/level/1391501—1391507/desc/0",
+    "nanoka-integrated@3.3.12+19634983 agents/1391 /passive/level/1391501—1391507/desc/0",
   catalogEntityId: "agents:jufufu",
   optionId: "nanoka:agents:jufufu:tigers-roar-impact",
   supportedRanks: "核心 1—7",
@@ -2584,7 +2344,7 @@ const dialynInitialCritRateImpact: Supplement = {
   kind: "option",
   supplementId: "nanoka:agents:dialyn:initial-crit-rate-impact",
   source:
-    "nanoka-integrated@3.2 agents/1481 /passive/level/1481049—1481055/desc/0",
+    "nanoka-integrated@3.3.12+19634983 agents/1481 /passive/level/1481049—1481055/desc/0",
   catalogEntityId: "agents:dialyn",
   optionId: "nanoka:agents:dialyn:initial-crit-rate-impact",
   supportedRanks: "核心 1—7",
@@ -2694,7 +2454,7 @@ const dialynInitialCritRateImpact: Supplement = {
 const lighterMindscape4FrontlineEnergyRegen: Supplement = {
   kind: "option",
   supplementId: "nanoka:agents:lighter:mindscape-4-frontline-energy-regen",
-  source: "nanoka-integrated@3.2 agents/1161 /talent/4/desc",
+  source: "nanoka-integrated@3.3.12+19634983 agents/1161 /talent/4/desc",
   catalogEntityId: "agents:lighter",
   optionId: "nanoka:agents:lighter:mindscape-4-frontline-energy-regen",
   supportedRanks: "影画 4 及以上",
@@ -2770,7 +2530,7 @@ const alexandrinaMindscape4DeployedDollsEnergyRegen: Supplement = {
   kind: "option",
   supplementId:
     "nanoka:agents:alexandrina:mindscape-4-deployed-dolls-energy-regen",
-  source: "nanoka-integrated@3.2 agents/1211 /talent/4/desc",
+  source: "nanoka-integrated@3.3.12+19634983 agents/1211 /talent/4/desc",
   catalogEntityId: "agents:alexandrina",
   optionId: "nanoka:agents:alexandrina:mindscape-4-deployed-dolls-energy-regen",
   supportedRanks: "影画 4 及以上",
@@ -2835,7 +2595,7 @@ const roxyInitialEnergyRegenConversion: Supplement = {
   kind: "entity",
   supplementId: "nanoka:agents:1621:initial-energy-regen-conversion",
   source:
-    "nanoka-integrated@3.2 agents/1621 /passive/level/1621501—1621507/desc/0",
+    "nanoka-integrated@3.3.12+19634983 agents/1621 /passive/level/1621501—1621507/desc/0",
   optionId: "nanoka:agents:1621:initial-energy-regen-conversion",
   supportedRanks: "核心 1—7",
   computationTarget: "catalog entity + complete-state option (two rules)",
@@ -2856,7 +2616,7 @@ const roxyInitialEnergyRegenConversion: Supplement = {
     element: "wind",
     supplementProvenance: {
       sourceId: "nanoka-integrated",
-      version: "3.2",
+      version: "3.3.12+19634983",
       resources: [
         {
           path: "agents/1621/details.zh.json",
@@ -3008,7 +2768,7 @@ const roxyInitialEnergyRegenConversion: Supplement = {
 const crimsonMoonCasketCritRate: Supplement = {
   kind: "entity",
   supplementId: "nanoka:w-engines:14162:crit-rate",
-  source: "nanoka-integrated@3.2 w-engines/14162 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/14162 /talents/1—5/desc",
   optionId: "nanoka:w-engines:14162:crit-rate",
   supportedRanks: "精炼 1—5",
   computationTarget: "catalog entity + option",
@@ -3028,7 +2788,7 @@ const crimsonMoonCasketCritRate: Supplement = {
     element: null,
     supplementProvenance: {
       sourceId: "nanoka-integrated",
-      version: "3.2",
+      version: "3.3.12+19634983",
       resources: [
         {
           path: "w-engines/14162/details.zh.json",
@@ -3086,7 +2846,7 @@ const crimsonMoonCasketCritRate: Supplement = {
 const crimsonMoonCasketWindResIgnore: Supplement = {
   kind: "option",
   supplementId: "nanoka:w-engines:14162:wind-resistance-ignore",
-  source: "nanoka-integrated@3.2 w-engines/14162 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/14162 /talents/1—5/desc",
   catalogEntityId: "nanoka:w-engines:14162",
   optionId: "nanoka:w-engines:14162:wind-resistance-ignore",
   supportedRanks: "精炼 1—5",
@@ -3149,7 +2909,7 @@ const crimsonMoonCasketWindResIgnore: Supplement = {
 const crimsonMoonCasketSquadDamageBonus: Supplement = {
   kind: "option",
   supplementId: "nanoka:w-engines:14162:squad-damage-bonus",
-  source: "nanoka-integrated@3.2 w-engines/14162 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/14162 /talents/1—5/desc",
   catalogEntityId: "nanoka:w-engines:14162",
   optionId: "nanoka:w-engines:14162:squad-damage-bonus",
   supportedRanks: "精炼 1—5",
@@ -3221,7 +2981,7 @@ const evelynPassiveNamedSkillMultiplierEvidence = (
 const evelynMindscape6LunaluxGarroteFollowUp: Supplement = {
   kind: "option",
   supplementId: "nanoka:agents:evelyn:m6-lunalux-garrote-follow-up",
-  source: "nanoka-integrated@3.2 agents/1321 /talent/6/desc",
+  source: "nanoka-integrated@3.3.12+19634983 agents/1321 /talent/6/desc",
   catalogEntityId: "agents:evelyn",
   optionId: "nanoka:agents:evelyn:m6-lunalux-garrote-follow-up",
   supportedRanks: "影画 6 及以上；层数 0—1",
@@ -3319,7 +3079,7 @@ const evelynMindscape6LunaluxGarroteFollowUp: Supplement = {
 const s0anbyMindscape6ElectromagneticVortex: Supplement = {
   kind: "option",
   supplementId: "nanoka:agents:s0anby:m6-electromagnetic-vortex",
-  source: "nanoka-integrated@3.2 agents/1381 /talent/6/desc",
+  source: "nanoka-integrated@3.3.12+19634983 agents/1381 /talent/6/desc",
   catalogEntityId: "agents:s0anby",
   optionId: "nanoka:agents:s0anby:m6-electromagnetic-vortex",
   supportedRanks: "影画 6 及以上；层数 0—1",
@@ -3410,7 +3170,7 @@ const s0anbyMindscape6ElectromagneticVortex: Supplement = {
 const dialynMindscape6AftertoneEcho: Supplement = {
   kind: "option",
   supplementId: "nanoka:agents:dialyn:m6-aftertone-echo",
-  source: "nanoka-integrated@3.2 agents/1481 /talent/6/desc",
+  source: "nanoka-integrated@3.3.12+19634983 agents/1481 /talent/6/desc",
   catalogEntityId: "agents:dialyn",
   optionId: "nanoka:agents:dialyn:m6-aftertone-echo",
   supportedRanks: "影画 6 及以上；层数 0—1",
@@ -3522,7 +3282,7 @@ const nangongyuMindscape6VibratoModified = (
 ): Supplement => ({
   kind: "option",
   supplementId: `nanoka:agents:nangongyu:m6-vibrato-modified-${group}`,
-  source: "nanoka-integrated@3.2 agents/1511 /talent/6/desc",
+  source: "nanoka-integrated@3.3.12+19634983 agents/1511 /talent/6/desc",
   catalogEntityId: "agents:nangongyu",
   optionId: `nanoka:agents:nangongyu:m6-vibrato-modified-${group}`,
   supportedRanks: "影画 6 及以上；层数 0—4（0 关闭，有效层 1—4）",
@@ -3677,7 +3437,7 @@ const pr10DriveDiscBoundaries: readonly Supplement[] = [
   {
     kind: "unsupported-option",
     supplementId: "nanoka:drive-discs:31200:four-piece-daze-value",
-    source: "nanoka-integrated@3.2 drive-discs/31200 /desc4",
+    source: "nanoka-integrated@3.3.12+19634983 drive-discs/31200 /desc4",
     catalogEntityId: "drive-discs:SuitShockstarDisco",
     optionId: "nanoka:drive-discs:31200:four-piece-daze-value",
     name: "4件套 · dazeValue",
@@ -3706,7 +3466,7 @@ const pr10DriveDiscBoundaries: readonly Supplement[] = [
     kind: "unsupported-option",
     supplementId:
       "nanoka:drive-discs:31300:four-piece-anomaly-buildup-resistance",
-    source: "nanoka-integrated@3.2 drive-discs/31300 /desc4",
+    source: "nanoka-integrated@3.3.12+19634983 drive-discs/31300 /desc4",
     catalogEntityId: "drive-discs:SuitFreedomBlues",
     optionId: "nanoka:drive-discs:31300:four-piece-anomaly-buildup-resistance",
     name: "4件套 · anomalyBuildupResistance",
@@ -3736,7 +3496,7 @@ const pr10DriveDiscBoundaries: readonly Supplement[] = [
   {
     kind: "unsupported-option",
     supplementId: "nanoka:drive-discs:31500:four-piece-damage-taken-reduction",
-    source: "nanoka-integrated@3.2 drive-discs/31500 /desc4",
+    source: "nanoka-integrated@3.3.12+19634983 drive-discs/31500 /desc4",
     catalogEntityId: "drive-discs:SuitSoulRock",
     optionId: "nanoka:drive-discs:31500:four-piece-damage-taken-reduction",
     name: "4件套 · damageTakenReduction",
@@ -3913,7 +3673,7 @@ const pr10WEngineBoundaries: readonly Supplement[] =
     (spec): Supplement => ({
       kind: "unsupported-option",
       supplementId: `nanoka:w-engines:${spec.entityId}:${spec.slug}`,
-      source: `nanoka-integrated@3.2 w-engines/${spec.entityId} /talents/1—5/desc`,
+      source: `nanoka-integrated@3.3.12+19634983 w-engines/${spec.entityId} /talents/1—5/desc`,
       catalogEntityId: `w-engines:${spec.catalogName}`,
       optionId: `nanoka:w-engines:${spec.entityId}:${spec.slug}`,
       name: spec.name,
@@ -3942,7 +3702,8 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
   {
     kind: "unsupported-option",
     supplementId: "nanoka:w-engines:14114:basic-attack-daze",
-    source: "nanoka-integrated@3.2 w-engines/14114 /talents/1—5/desc",
+    source:
+      "nanoka-integrated@3.3.12+19634983 w-engines/14114 /talents/1—5/desc",
     catalogEntityId: "w-engines:Weapon_S_1141",
     optionId: "nanoka:w-engines:14114:basic-attack-daze",
     name: "束缚枷锁 · dazeValue",
@@ -3968,7 +3729,7 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
     kind: "unsupported-option",
     supplementId:
       "nanoka:agents:nicole:mindscape-1-anomaly-buildup-and-field-duration",
-    source: "nanoka-integrated@3.2 agents/1031 /talent/1/desc",
+    source: "nanoka-integrated@3.3.12+19634983 agents/1031 /talent/1/desc",
     catalogEntityId: "agents:nicole",
     optionId:
       "nanoka:agents:nicole:mindscape-1-anomaly-buildup-and-field-duration",
@@ -3977,12 +3738,6 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
       "累积的属性异常积蓄值提升16%；发动时每多蓄力0.1秒，能量场持续时间提升0.15秒（影画 1 及以上）。",
     target: "self",
     configuration: { minimumMindscape: 1 },
-    clauseContextGuard: {
-      rankKind: "mindscape",
-      rank: 1,
-      stats: [],
-      expectsEmptyPack: true,
-    },
     reason: "formula-out-of-scope",
     explanation:
       "影画 1 同一句的越界部分：[强化特殊技]累积的属性异常积蓄值提升16%，以及每多蓄力0.1秒使能量场持续时间提升0.15秒。同句的伤害 +16% 已有可执行选项（nanoka:agents:nicole:mindscape-1-ex-damage），本选项不重复也不替换它；异常积蓄量与能量场持续时间不是当前公开静态伤害计算的输出，不能折算成异常精通、增伤或任何伤害乘区。选择影画 1 及以上时静态计算正常进行，显式选择本选项会得到本错误。",
@@ -3997,12 +3752,13 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
       },
     ],
     verification:
-      "Nanoka 影画 1 原文核实（agents/1031/details.zh.json 的 /talent/1/desc，英文同文为 The DMG and the Anomaly Buildup inflicted … increases by 16% … the duration of the energy field … increases by 0.15s）：固定来源的 mindscape rank 1 是真实空 pack（无块、无 effects、无记录），登记这一真实缺失现状；同排位出现任何新编码即拒绝生成并要求重新核对。只登记积蓄与持续时间部分，不重复既有伤害选项。",
+      "Nanoka 影画 1 原文核实（agents/1031/details.zh.json 的 /talent/1/desc，英文同文为 The DMG and the Anomaly Buildup inflicted … increases by 16% … the duration of the energy field … increases by 0.15s）：固定来源 3.2.5 已补出伤害 +16% 的机器记录，本选项只登记同句的异常积蓄与能量场持续时间部分，不重复既有伤害记录；这两项不是当前公开静态伤害计算的输出。",
   },
   {
     kind: "unsupported-option",
     supplementId: "nanoka:agents:qingyi:flash-voltage-daze",
-    source: "nanoka-integrated@3.2 agents/1251 /skill/basic/description/2/desc",
+    source:
+      "nanoka-integrated@3.3.12+19634983 agents/1251 /skill/basic/description/2/desc",
     catalogEntityId: "agents:qingyi",
     optionId: "nanoka:agents:qingyi:flash-voltage-daze",
     name: "闪络电压消耗 · dazeValue",
@@ -4029,7 +3785,8 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
   {
     kind: "unsupported-option",
     supplementId: "nanoka:agents:koleda:enhanced-basic-second-daze",
-    source: "nanoka-integrated@3.2 agents/1101 /skill/basic/description/1/desc",
+    source:
+      "nanoka-integrated@3.3.12+19634983 agents/1101 /skill/basic/description/1/desc",
     catalogEntityId: "agents:koleda",
     optionId: "nanoka:agents:koleda:enhanced-basic-second-daze",
     name: "强化普攻二段 · dazeValue",
@@ -4056,7 +3813,7 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
   {
     kind: "unsupported-option",
     supplementId: "nanoka:agents:lighter:mindscape-4-morale-burst-energy",
-    source: "nanoka-integrated@3.2 agents/1161 /talent/4/desc",
+    source: "nanoka-integrated@3.3.12+19634983 agents/1161 /talent/4/desc",
     catalogEntityId: "agents:lighter",
     optionId: "nanoka:agents:lighter:mindscape-4-morale-burst-energy",
     name: "影画4 · instantEnergy",
@@ -4089,7 +3846,8 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
   {
     kind: "unsupported-option",
     supplementId: "nanoka:w-engines:14162:daze-value",
-    source: "nanoka-integrated@3.2 w-engines/14162 /talents/1—5/desc",
+    source:
+      "nanoka-integrated@3.3.12+19634983 w-engines/14162 /talents/1—5/desc",
     catalogEntityId: "nanoka:w-engines:14162",
     optionId: "nanoka:w-engines:14162:daze-value",
     name: "永夜辗眠 · dazeValue",
@@ -4113,7 +3871,7 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
   {
     kind: "unsupported-option",
     supplementId: "nanoka:agents:nangongyu:m6-vibrato-daze",
-    source: "nanoka-integrated@3.2 agents/1511 /talent/6/desc",
+    source: "nanoka-integrated@3.3.12+19634983 agents/1511 /talent/6/desc",
     catalogEntityId: "agents:nangongyu",
     optionId: "nanoka:agents:nangongyu:m6-vibrato-daze",
     name: "影画6 · dazeValue",
@@ -4151,7 +3909,7 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
     kind: "unsupported-option",
     supplementId: "nanoka:agents:1621:wind-energy-acquisition",
     source:
-      "nanoka-integrated@3.2 agents/1621 /passive/level/1621501—1621507/desc/0",
+      "nanoka-integrated@3.3.12+19634983 agents/1621 /passive/level/1621501—1621507/desc/0",
     catalogEntityId: "nanoka:agents:1621",
     optionId: "nanoka:agents:1621:wind-energy-acquisition",
     name: "核心被动 · windEnergy",
@@ -4178,7 +3936,7 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
     supplementId:
       "nanoka:agents:yuzuha:extra-ability-anomaly-buildup-efficiency",
     source:
-      "nanoka-integrated@3.2 agents/1411 /passive/level/1411049—1411055/desc/1",
+      "nanoka-integrated@3.3.12+19634983 agents/1411 /passive/level/1411049—1411055/desc/1",
     catalogEntityId: "agents:yuzuha",
     optionId: "nanoka:agents:yuzuha:extra-ability-anomaly-buildup-efficiency",
     name: "额外能力：人多乐趣大 · anomalyBuildupEfficiency",
@@ -4216,7 +3974,7 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
   {
     kind: "unsupported-option",
     supplementId: "nanoka:agents:yuzuha:mindscape-1-entry-energy",
-    source: "nanoka-integrated@3.2 agents/1411 /talent/1/desc",
+    source: "nanoka-integrated@3.3.12+19634983 agents/1411 /talent/1/desc",
     catalogEntityId: "agents:yuzuha",
     optionId: "nanoka:agents:yuzuha:mindscape-1-entry-energy",
     name: "影画1 · instantEnergy",
@@ -4265,7 +4023,8 @@ const pr10ReviewFixClauses: readonly Supplement[] = [
   {
     kind: "unsupported-option",
     supplementId: "nanoka:w-engines:13127:ex-and-assist-anomaly-buildup",
-    source: "nanoka-integrated@3.2 w-engines/13127 /talents/1—5/desc",
+    source:
+      "nanoka-integrated@3.3.12+19634983 w-engines/13127 /talents/1—5/desc",
     catalogEntityId: "w-engines:Peacekeeper_Specialized",
     optionId: "nanoka:w-engines:13127:ex-and-assist-anomaly-buildup",
     name: "标准格挡术 · anomalyBuildup",
@@ -4289,7 +4048,8 @@ const pr10ReviewFixClauses: readonly Supplement[] = [
   {
     kind: "unsupported-option",
     supplementId: "nanoka:w-engines:14148:ex-physical-daze-stacks",
-    source: "nanoka-integrated@3.2 w-engines/14148 /talents/1—5/desc",
+    source:
+      "nanoka-integrated@3.3.12+19634983 w-engines/14148 /talents/1—5/desc",
     catalogEntityId: "w-engines:Yesterday_Calls",
     optionId: "nanoka:w-engines:14148:ex-physical-daze-stacks",
     name: "7×24 · dazeStacks",
@@ -4314,7 +4074,7 @@ const pr10ReviewFixClauses: readonly Supplement[] = [
     kind: "unsupported-option",
     supplementId: "nanoka:agents:lighter:morale-acquisition",
     source:
-      "nanoka-integrated@3.2 agents/1161 /passive/level/1161501—1161507/desc/0",
+      "nanoka-integrated@3.3.12+19634983 agents/1161 /passive/level/1161501—1161507/desc/0",
     catalogEntityId: "agents:lighter",
     optionId: "nanoka:agents:lighter:morale-acquisition",
     name: "核心被动 · moraleAcquisition",
@@ -4339,7 +4099,7 @@ const pr10ReviewFixClauses: readonly Supplement[] = [
     kind: "unsupported-option",
     supplementId: "nanoka:agents:lighter:collapse-stun-duration",
     source:
-      "nanoka-integrated@3.2 agents/1161 /passive/level/1161501—1161507/desc/0",
+      "nanoka-integrated@3.3.12+19634983 agents/1161 /passive/level/1161501—1161507/desc/0",
     catalogEntityId: "agents:lighter",
     optionId: "nanoka:agents:lighter:collapse-stun-duration",
     name: "核心被动 · collapseStunDuration",
@@ -4364,7 +4124,7 @@ const pr10ReviewFixClauses: readonly Supplement[] = [
     kind: "unsupported-option",
     supplementId: "nanoka:agents:dialyn:positive-reviews-and-complaints",
     source:
-      "nanoka-integrated@3.2 agents/1481 /passive/level/1481049—1481055/desc/0",
+      "nanoka-integrated@3.3.12+19634983 agents/1481 /passive/level/1481049—1481055/desc/0",
     catalogEntityId: "agents:dialyn",
     optionId: "nanoka:agents:dialyn:positive-reviews-and-complaints",
     name: "核心被动 · positiveReviewsAndComplaints",
@@ -4389,7 +4149,7 @@ const pr10ReviewFixClauses: readonly Supplement[] = [
     kind: "unsupported-option",
     supplementId: "nanoka:agents:dialyn:malicious-complaint-stun-duration",
     source:
-      "nanoka-integrated@3.2 agents/1481 /passive/level/1481049—1481055/desc/0",
+      "nanoka-integrated@3.3.12+19634983 agents/1481 /passive/level/1481049—1481055/desc/0",
     catalogEntityId: "agents:dialyn",
     optionId: "nanoka:agents:dialyn:malicious-complaint-stun-duration",
     name: "核心被动 · maliciousComplaintStunDuration",
@@ -4426,7 +4186,7 @@ const pr10ReviewFixClauses: readonly Supplement[] = [
     kind: "unsupported-option",
     supplementId: "nanoka:agents:nangongyu:core-buildup-and-daze",
     source:
-      "nanoka-integrated@3.2 agents/1511 /passive/level/1511049—1511055/desc/0",
+      "nanoka-integrated@3.3.12+19634983 agents/1511 /passive/level/1511049—1511055/desc/0",
     catalogEntityId: "agents:nangongyu",
     optionId: "nanoka:agents:nangongyu:core-buildup-and-daze",
     name: "核心被动 · coreBuildupAndDaze",
@@ -4463,7 +4223,7 @@ const pr10ReviewFixClauses: readonly Supplement[] = [
     kind: "unsupported-option",
     supplementId: "nanoka:agents:nangongyu:downbeat-acquisition",
     source:
-      "nanoka-integrated@3.2 agents/1511 /passive/level/1511049—1511055/desc/0",
+      "nanoka-integrated@3.3.12+19634983 agents/1511 /passive/level/1511049—1511055/desc/0",
     catalogEntityId: "agents:nangongyu",
     optionId: "nanoka:agents:nangongyu:downbeat-acquisition",
     name: "核心被动 · downbeatAcquisition",
@@ -4524,7 +4284,7 @@ const cannonRotorRefinementNotes = [
 const bigCylinderRetaliationDefenseDamage: Supplement = {
   kind: "option",
   ...wengineSupplement("13112", "retaliation-defense-damage"),
-  source: "nanoka-integrated@3.2 w-engines/13112 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/13112 /talents/1—5/desc",
   catalogEntityId: "w-engines:Big_Cylinder",
   supportedRanks: "refinement 1—5；层数 0—1",
   computationTarget:
@@ -4668,7 +4428,7 @@ const bigCylinderRetaliationDefenseDamage: Supplement = {
 const cannonRotorCriticalHitBonusDamage: Supplement = {
   kind: "option",
   ...wengineSupplement("14001", "critical-hit-bonus-damage"),
-  source: "nanoka-integrated@3.2 w-engines/14001 /talents/1—5/desc",
+  source: "nanoka-integrated@3.3.12+19634983 w-engines/14001 /talents/1—5/desc",
   catalogEntityId: "w-engines:Cannon_Rotor",
   supportedRanks: "refinement 1—5；层数 0—1",
   computationTarget: "catalog option on the mapped w-engine entity",
@@ -4805,7 +4565,7 @@ const cannonRotorCriticalHitBonusDamage: Supplement = {
 const benBiggerMindscape2BlockCounterDefenseDamage: Supplement = {
   kind: "option",
   supplementId: "nanoka:agents:benbigger:m2-block-counter-defense-damage",
-  source: "nanoka-integrated@3.2 agents/1121 /talent/2/desc",
+  source: "nanoka-integrated@3.3.12+19634983 agents/1121 /talent/2/desc",
   catalogEntityId: "agents:benbigger",
   optionId: "nanoka:agents:benbigger:m2-block-counter-defense-damage",
   supportedRanks: "影画 2—6；层数 0—1",
@@ -4909,7 +4669,7 @@ const miyabiFrostburnBreakDamage: Supplement = {
   kind: "option",
   supplementId: "nanoka:agents:miyabi:frostburn-break-damage",
   source:
-    "nanoka-integrated@3.2 agents/1091 /passive/level/1091501—1091507/desc/0 + /talent/4/desc",
+    "nanoka-integrated@3.3.12+19634983 agents/1091 /passive/level/1091501—1091507/desc/0 + /talent/4/desc",
   catalogEntityId: "agents:miyabi",
   optionId: "nanoka:agents:miyabi:frostburn-break-damage",
   supportedRanks: "核心 1—7；影画 0—6",
@@ -5110,7 +4870,7 @@ const janeMindscape6CoexistingRecords = [
 const janeMindscape6ProficiencyDamage: Supplement = {
   kind: "option",
   supplementId: "nanoka:agents:jane:m6-proficiency-damage",
-  source: "nanoka-integrated@3.2 agents/1261 /talent/6/desc",
+  source: "nanoka-integrated@3.3.12+19634983 agents/1261 /talent/6/desc",
   catalogEntityId: "agents:jane",
   optionId: "nanoka:agents:jane:m6-proficiency-damage",
   supportedRanks: "影画 6；层数 0—1",
@@ -5207,7 +4967,7 @@ const janeMindscape6ProficiencyDamage: Supplement = {
 const aliceMindscape6ProficiencyDamage: Supplement = {
   kind: "option",
   supplementId: "nanoka:agents:alice:m6-proficiency-damage",
-  source: "nanoka-integrated@3.2 agents/1401 /talent/6/desc",
+  source: "nanoka-integrated@3.3.12+19634983 agents/1401 /talent/6/desc",
   catalogEntityId: "agents:alice",
   optionId: "nanoka:agents:alice:m6-proficiency-damage",
   supportedRanks: "影画 6；层数 0—1",
@@ -5329,7 +5089,7 @@ const graceMindscape6Grenades = (enhanced: boolean): Supplement => {
     kind: "option",
     supplementId: `nanoka:agents:grace:m6-${suffix}-grenades`,
     source:
-      "nanoka-integrated@3.2 agents/1181 /talent/6/desc + /skill/special/description",
+      "nanoka-integrated@3.3.12+19634983 agents/1181 /talent/6/desc + /skill/special/description",
     catalogEntityId: "agents:grace",
     optionId: `nanoka:agents:grace:m6-${suffix}-grenades`,
     supportedRanks: "影画 6；潜能 0—6；层数 0—1",
@@ -5444,7 +5204,7 @@ const yeshunguangVeilVulnerability: Supplement = {
   kind: "option",
   supplementId: "nanoka:agents:yeshunguang:veil-vulnerability",
   source:
-    "nanoka-integrated@3.2 agents/1431 /passive/level/1431501—1431507/desc/0 + /talent/4/desc",
+    "nanoka-integrated@3.3.12+19634983 agents/1431 /passive/level/1431501—1431507/desc/0 + /talent/4/desc",
   catalogEntityId: "agents:yeshunguang",
   optionId: "nanoka:agents:yeshunguang:veil-vulnerability",
   supportedRanks: "核心 1—7；影画 0—6；层数 0—1",
@@ -5658,7 +5418,7 @@ const aliceCorePeriodicDamage: Supplement = {
   kind: "option",
   supplementId: "nanoka:agents:alice:core-periodic-damage",
   source:
-    "nanoka-integrated@3.2 agents/1401 /passive/level/1401501—1401507/desc/0",
+    "nanoka-integrated@3.3.12+19634983 agents/1401 /passive/level/1401501—1401507/desc/0",
   catalogEntityId: "agents:alice",
   optionId: "nanoka:agents:alice:core-periodic-damage",
   supportedRanks: "核心 1—7；影画 0—6；层数 0—1",
@@ -5976,7 +5736,7 @@ const aliceCorePeriodicDamage: Supplement = {
 const astraYaoMindscape4QuickAssistDamage: Supplement = {
   kind: "option",
   supplementId: "nanoka:agents:astrayao:m4-quick-assist-bonus-damage",
-  source: "nanoka-integrated@3.2 agents/1311 /talent/4/desc",
+  source: "nanoka-integrated@3.3.12+19634983 agents/1311 /talent/4/desc",
   catalogEntityId: "agents:astrayao",
   optionId: "nanoka:agents:astrayao:m4-quick-assist-bonus-damage",
   supportedRanks: "影画 4—6；核心 1—7；层数 0—1",
@@ -6174,7 +5934,6 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   harumasaOrdinaryCritRate,
   harumasaOrdinaryCritDmg,
   shockstarDiscoTwoPieceImpact,
-  soulRockTwoPieceDefense,
   protoPunkTwoPieceShieldBoundary,
   kingOfTheSummitTwoPieceDazeBoundary,
   identityBaseDefenseOnHit,
@@ -6188,8 +5947,6 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   iceJadeTeapotImpactPerTeaLayer,
   ...spectralGazeSoulChainTiers,
   headLackeyFixedImpactPoints,
-  nicoleMindscape1ExDamage,
-  qingyiFlashVoltageConsumedDamage,
   koledaEnhancedBasicSecondPerLayer,
   caesarStanceSwitchImpact,
   lighterMoraleBurstImpact,

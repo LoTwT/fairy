@@ -293,7 +293,7 @@ describe("PR10 unsupported clause declarations in the published catalog", () => 
       ],
       [
         "nanoka:w-engines:14162:daze-value",
-        "nanoka:w-engines:14162",
+        "w-engines:Crimson_Moon_Casket",
         { refinements: [1, 2, 3, 4, 5] },
       ],
       [
@@ -303,7 +303,7 @@ describe("PR10 unsupported clause declarations in the published catalog", () => 
       ],
       [
         "nanoka:agents:1621:wind-energy-acquisition",
-        "nanoka:agents:1621",
+        "agents:Roxy",
         { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
       ],
       // 柚叶同一额外能力句的积蓄效率与影画 1 同一条目的瞬时能量（既有
@@ -322,7 +322,7 @@ describe("PR10 unsupported clause declarations in the published catalog", () => 
       // 单份不可选声明（随声明携带真实元数据的补充实体）。
       [
         "nanoka:w-engines:12014:attacker-damage-reduction",
-        "nanoka:w-engines:12014",
+        "w-engines:Identity_Inflection",
         { refinements: [1, 2, 3, 4, 5] },
       ],
       // 前批已修/已补提供者同一被动段的确定缺口。
@@ -389,7 +389,7 @@ describe("PR10 unsupported clause declarations in the published catalog", () => 
       for (const reference of variant.references)
         expect(reference, optionId).toMatchObject({
           sourceId: "nanoka-integrated",
-          version: "3.2",
+          version: "3.3.12+19634983",
         })
     }
     // 既有两条二件套越界声明身份、条款与配置逐字保留，不重复。
@@ -606,17 +606,17 @@ describe("PR10 unsupported clause declarations in the published catalog", () => 
     // 12014 目录实体真实元数据（补充实体：名称/职业/溯源）。
     const entity = catalog.entities.find(
       (candidate: { catalogEntityId: string }) =>
-        candidate.catalogEntityId === "nanoka:w-engines:12014",
+        candidate.catalogEntityId === "w-engines:Identity_Inflection",
     )
     expect(entity).toMatchObject({
-      upstreamId: null,
+      upstreamId: "Identity_Inflection",
       name: "「恒等式」-变格",
       identity: { kind: "w-engine", entityId: "12014" },
       status: "mapped",
       profession: "防护",
       element: null,
     })
-    expect(entity.supplementProvenance.resources.length).toBeGreaterThan(0)
+    expect(entity.supplementProvenance).toBeUndefined()
   })
 
   it.each([
@@ -722,9 +722,9 @@ describe("PR10 unsupported clause declarations in the published catalog", () => 
     const yuzuha = await fixture({ mindscapeRank: 1, wEngineOwner: "1411" })
     const completeOptionId =
       "agents:yuzuha:mindscape:0:tanuki-wish-complete-state"
-    const completeInput = yuzuha.data.catalog.options.find(
+    const completeInputs = yuzuha.data.catalog.options.find(
       (option) => option.optionId === completeOptionId,
-    )!.variants[0]!.inputs[0]!
+    )!.variants[0]!.inputs
     const complete = calculateStaticActionDamage({
       ...yuzuha,
       selections: [
@@ -734,24 +734,20 @@ describe("PR10 unsupported clause declarations in the published catalog", () => 
           layers: 1,
         },
       ],
-      inputs: [
-        {
-          bindingId: staticSourceBindingId(yuzuha.actorId, "agent", "1411"),
-          name: completeInput.name,
-          value: { unit: "anomaly-mastery-points", value: 200 },
-        },
-      ],
+      inputs: completeInputs.map((input) => ({
+        bindingId: staticSourceBindingId(yuzuha.actorId, "agent", "1411"),
+        name: input.name,
+        value: { unit: "anomaly-mastery-points" as const, value: 200 },
+      })),
     })
     expect(complete.ok, JSON.stringify(complete)).toBe(true)
     const withEntryEnergy = calculateStaticActionDamage({
       ...yuzuha,
-      inputs: [
-        {
-          bindingId: staticSourceBindingId(yuzuha.actorId, "agent", "1411"),
-          name: completeInput.name,
-          value: { unit: "anomaly-mastery-points", value: 200 },
-        },
-      ],
+      inputs: completeInputs.map((input) => ({
+        bindingId: staticSourceBindingId(yuzuha.actorId, "agent", "1411"),
+        name: input.name,
+        value: { unit: "anomaly-mastery-points" as const, value: 200 },
+      })),
       selections: [
         {
           holderId: yuzuha.actorId,

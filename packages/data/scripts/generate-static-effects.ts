@@ -11,30 +11,12 @@ import {
   resolveCandidateOutputDirectory,
 } from "./candidate-output.ts"
 import { convertSource } from "./static-effects/convert.ts"
-import {
-  D4_325_SOURCE,
-  assertD4OverlayBase,
-  d4BasePanels,
-  d4EntityData,
-  d4PlumeOptionLabels,
-  d4SkillInventory,
-} from "./static-effects/d4-325.ts"
-import { mergeSupplementalSource } from "./static-effects/d4-merge.ts"
-import {
-  D4_PHEONY_M4_SUPPLEMENTS,
-  D4_PHEONY_UNSUPPORTED_SUPPLEMENTS,
-} from "./static-effects/d4-pheony.ts"
-import { D4_SEVERIAN_GRIP_SUPPLEMENTS } from "./static-effects/d4-severian.ts"
-import { SOURCE_COMMIT, loadSource } from "./static-effects/source.ts"
+import { loadSource } from "./static-effects/source.ts"
 import {
   COMPLETE_STATE_OPTIONS,
   SOURCE_SEMANTICS,
   type CompleteStateOptionRegistration,
 } from "./static-effects/semantics.ts"
-import {
-  developerRevisionEntries,
-  verifyDeveloperRevisionExport,
-} from "./static-effects/developer-revision.ts"
 import { SUPPLEMENTS, type Supplement } from "./static-effects/supplements.ts"
 import evidence from "./static-effects/rank-evidence.json" with { type: "json" }
 
@@ -201,10 +183,7 @@ export async function verifyStaticEffectsEvidence(
     )
     verified.push(`rank-evidence:${key}`)
   }
-  // developer-revised-stat 的证据是冻结开发者导出，不属于 integrated，
-  // 由 verifyDeveloperRevisionEvidence 单独核对，不走 Nanoka 路径。
   for (const [key, semantics] of Object.entries(SOURCE_SEMANTICS)) {
-    if (semantics.kind === "developer-revised-stat") continue
     if (semantics.evidence === undefined) continue
     await verifyEvidenceReferences(
       publication,
@@ -216,52 +195,6 @@ export async function verifyStaticEffectsEvidence(
   verified.push(...(await verifyCompleteStateOptionEvidence(publication)))
   verified.push(...(await verifySupplementEvidence(publication)))
   return verified
-}
-
-/**
- * 冻结的开发者修订导出先按整文件摘要与 exportedAt 核对，再执行纯结构的
- * 按 ID 定位、指针身份与逐字段差异核对（仅登记差异）；raw 缺失、摘要不符
- * 或出现未登记差异都拒绝生成。普通构建与测试不读取该本机文件。
- */
-async function verifyDeveloperRevisionEvidence(
-  dataPackageRoot: string,
-  fixedWengines: readonly unknown[],
-): Promise<void> {
-  const entries = developerRevisionEntries(SOURCE_SEMANTICS)
-  if (!entries.length) return
-  const files = new Map<string, { sha256: string; exportedAt: string }>()
-  for (const semantics of Object.values(SOURCE_SEMANTICS)) {
-    if (semantics.kind !== "developer-revised-stat") continue
-    for (const reference of semantics.evidence) {
-      const known = files.get(reference.path)
-      if (!known)
-        files.set(reference.path, {
-          sha256: reference.sha256,
-          exportedAt: reference.exportedAt,
-        })
-      else if (
-        known.sha256 !== reference.sha256 ||
-        known.exportedAt !== reference.exportedAt
-      )
-        throw new Error(
-          `Inconsistent developer revision evidence registration: ${reference.path}`,
-        )
-    }
-  }
-  if (files.size !== 1)
-    throw new Error(
-      "Multiple developer revision export files are not supported yet",
-    )
-  const [path, expectation] = [...files.entries()][0]!
-  const bytes = await readFile(join(dataPackageRoot, path))
-  if (createHash("sha256").update(bytes).digest("hex") !== expectation.sha256)
-    throw new Error(`Developer revision file changed: ${path}`)
-  const document: unknown = JSON.parse(bytes.toString("utf8"))
-  if (
-    (document as { exportedAt?: unknown }).exportedAt !== expectation.exportedAt
-  )
-    throw new Error(`Developer revision exportedAt mismatch: ${path}`)
-  verifyDeveloperRevisionExport(fixedWengines, document, entries)
 }
 
 export async function generateStaticEffects(
@@ -276,10 +209,6 @@ export async function generateStaticEffects(
     integratedDirectory,
   )
   const source = await loadSource(resolve(sourceRoot))
-  await verifyDeveloperRevisionEvidence(
-    fileURLToPath(new URL("..", import.meta.url)),
-    source.data.wengines,
-  )
   await mkdir(dirname(output), { recursive: true })
   const publication = await mkdtemp(
     join(dirname(output), ".fairy-static-source-"),
@@ -300,82 +229,7 @@ export async function generateStaticEffects(
     // 来源证据（rank-evidence、来源语义与完整状态选项登记、补充来源）由同一
     // 入口逐条验证，标识可用于定位具体登记。
     await verifyStaticEffectsEvidence(publication)
-    const supplementalBytes = await readFile(
-      join(
-        fileURLToPath(new URL("..", import.meta.url)),
-        D4_325_SOURCE.extractPath,
-      ),
-    )
-    if (
-      createHash("sha256").update(supplementalBytes).digest("hex") !==
-      D4_325_SOURCE.extractSha256
-    )
-      throw new Error(
-        `D4 supplemental source extract changed: ${D4_325_SOURCE.extractPath}`,
-      )
-    await verifySupplementEvidence(publication, [
-      ...SUPPLEMENTS,
-      ...D4_PHEONY_UNSUPPORTED_SUPPLEMENTS,
-      ...D4_PHEONY_M4_SUPPLEMENTS,
-      ...D4_SEVERIAN_GRIP_SUPPLEMENTS,
-    ])
     const result = convertSource(source.data, source.functions, source.files)
-    assertD4OverlayBase(
-      SOURCE_COMMIT,
-      result.catalog.entities.map((entity) => entity.catalogEntityId),
-    )
-    const enabledEntities = [
-      "pheony",
-      "Plume_of_Rebirth",
-      "severian",
-      "Incarcerating_Grip",
-    ] as const
-    const supplemental = convertSource(
-      d4EntityData(enabledEntities),
-      source.functions,
-      source.files,
-      [
-        ...D4_PHEONY_UNSUPPORTED_SUPPLEMENTS,
-        ...D4_PHEONY_M4_SUPPLEMENTS,
-        ...D4_SEVERIAN_GRIP_SUPPLEMENTS,
-      ],
-      COMPLETE_STATE_OPTIONS,
-      { supplemental: true },
-    )
-    if (
-      supplemental.coverage.summary.entities !== 4 ||
-      supplemental.coverage.summary.packs !== 26 ||
-      supplemental.coverage.summary.rawEffects !== 36 ||
-      supplemental.coverage.summary.rules !== 42 ||
-      supplemental.catalog.options.length !== 54
-    )
-      throw new Error("D4 supplemental source denominator changed")
-    const merged = mergeSupplementalSource(
-      result,
-      supplemental,
-      D4_325_SOURCE,
-      {
-        skills: d4SkillInventory(enabledEntities),
-        basePanels: d4BasePanels(enabledEntities),
-        gaps: [],
-        optionLabels: d4PlumeOptionLabels(supplemental.catalog.options),
-      },
-      "50",
-    )
-    for (const entity of result.catalog.entities) {
-      if (!entity.supplementProvenance) continue
-      for (const resource of entity.supplementProvenance.resources) {
-        const bytes = await readFile(
-          join(publication, "verified", "integrated", resource.path),
-        )
-        if (
-          createHash("sha256").update(bytes).digest("hex") !== resource.sha256
-        )
-          throw new Error(
-            `Supplement provenance changed: ${entity.catalogEntityId} ${resource.path}`,
-          )
-      }
-    }
     for (const entity of result.catalog.entities)
       if (entity.identity) {
         const category =
@@ -403,23 +257,25 @@ export async function generateStaticEffects(
           )
       }
     if (
-      result.coverage.summary.rawEffects !== 1290 ||
-      result.coverage.summary.entities !== 187 ||
-      result.coverage.summary.packs !== 1061
+      result.coverage.summary.rawEffects !== 1360 ||
+      result.coverage.summary.entities !== 196 ||
+      result.coverage.summary.packs !== 1118
     )
-      throw new Error("Fixed-source coverage denominator changed")
-    const parsed = parseEffectRuleSet(merged.definitions)
+      throw new Error(
+        `Fixed-source coverage denominator changed: ${result.coverage.summary.entities}/${result.coverage.summary.packs}/${result.coverage.summary.rawEffects}`,
+      )
+    const parsed = parseEffectRuleSet(result.definitions)
     if (!parsed.ok) throw new Error(JSON.stringify(parsed.issues))
     // 完整生成命令预先构建 core；仅导入转换工具或拒绝坏输入时不加载计算运行时。
     const { validateStaticCatalog } =
       await import("../../core/src/effects/internal/static-catalog.ts")
-    const catalog = validateStaticCatalog(merged.catalog, parsed.value)
+    const catalog = validateStaticCatalog(result.catalog, parsed.value)
     if (!catalog.ok) throw new Error(JSON.stringify(catalog.issues))
     candidate = await mkdtemp(join(dirname(output), ".fairy-static-candidate-"))
     const artifacts = {
-      "static.json": merged.definitions,
-      "static-catalog.json": merged.catalog,
-      "static-coverage.json": merged.coverage,
+      "static.json": result.definitions,
+      "static-catalog.json": result.catalog,
+      "static-coverage.json": result.coverage,
     }
     for (const [file, value] of Object.entries(artifacts))
       await writeFile(
@@ -428,7 +284,7 @@ export async function generateStaticEffects(
       )
     await formatGeneratedJson(candidate, Object.keys(artifacts))
     await installCandidateOutputDirectory(candidate, output)
-    return merged.coverage.summary
+    return result.coverage.summary
   } finally {
     await rm(publication, { recursive: true, force: true })
     if (candidate) await rm(candidate, { recursive: true, force: true })

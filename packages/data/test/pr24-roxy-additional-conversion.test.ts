@@ -62,7 +62,7 @@ const independent = (entry: SupplementOption): SupplementOption => ({
 describe("Roxy additional ability frozen supplement registration", () => {
   it("generates precisely three independent rules and options on the existing Nanoka entity", () => {
     const output = convert()
-    expect(output.definitions.revision).toBe("46")
+    expect(output.definitions.revision).toBe("51")
     expect(entries).toHaveLength(3)
     expect(output.catalog.entities).toHaveLength(1)
     expect(output.catalog.entities[0]).toMatchObject({
@@ -94,7 +94,7 @@ describe("Roxy additional ability frozen supplement registration", () => {
         (["zh", "en"] as const).flatMap((locale) =>
           original.languages[locale].clauses.map((clause) => ({
             sourceId: "nanoka-integrated",
-            version: original.nanokaVersion,
+            version: "3.3.12+19634983",
             locale,
             resourcePath: original.languages[locale].resourcePath,
             pointer: clause.pointer,
@@ -187,7 +187,7 @@ describe("Roxy additional ability frozen supplement registration", () => {
     [
       "version",
       (entry) => {
-        entry.source = entry.source.replace("3.2", "3.3")
+        entry.source = entry.source.replace("3.3.12+19634983", "3.2")
       },
     ],
     [

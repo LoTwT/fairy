@@ -936,25 +936,6 @@ const scarletCravingEvidence = (refinement: 1 | 2 | 3 | 4 | 5) => [
 ]
 
 /** 壳中之灵开发者修订导出：精炼 2—5 的异常伤害提升被固定来源记为 special。 */
-const angelRevisionFile =
-  "raw/zzz-hp/developer-revisions/zzz-hp-wengines-picked-1-2026-10-05.json"
-const angelRevisionSha256 =
-  "37bd836a70ec91e095133dc7de70599f6aa0bce073f090f3f5fc00da7d70345c"
-const angelRevisionExportedAt = "2026-10-05T13:34:25.341Z"
-const angelRevisionEvidence = (
-  refinement: 2 | 3 | 4 | 5,
-): readonly DeveloperRevisionEvidence[] => [
-  {
-    path: angelRevisionFile,
-    sha256: angelRevisionSha256,
-    exportedAt: angelRevisionExportedAt,
-    pointer: `/wengines/0/refinementBuffs/${refinement - 1}/effectBlocks/0/effects/2`,
-  },
-]
-const angelRevisionVerification = (refinement: 2 | 3 | 4 | 5): string => {
-  const value = { 2: "11.5", 3: "13", 4: "14.5", 5: "16" }[refinement]!
-  return `ZZZ-HP 开发者修订导出（exportedAt ${angelRevisionExportedAt}，整文件 SHA-256 ${angelRevisionSha256}，本机冻结于 ${angelRevisionFile}）按 ID 定位壳中之灵（wengines/0）后确认：精炼 ${refinement} 的 legacy-self-special 记录实为 anomalyDmgBonus（数值 ${value}%），effectBlocks 与 effects 两个表示同步改名，selfMods 数值从 special 迁至 anomalyDmgBonus。生成时逐字段核对导出与固定源仅存在该四条记录的登记差异。修订数据若交由上游 withRefinementAnomalyFlags 处理，会按 stat/kind/scope/target 从精炼 1 继承 appliesToAnomaly=true；Fairy 仍规范化固定旧源、不改写规范化记录（normalizationChanges 为空、stat 保持 special、记录不含该字段），修正后规则的 when 条件由修订字段映射与既有 whenFor 逻辑得到，与精炼 1 既有异常增伤规则一致（附件本身未写该字段，不冒充附件原始内容）。该修订导出不属于固定提交，不表示 ZZZ-HP 仓库已合入或发布。`
-}
 
 /**
  * 蕾米埃尔影画 2：块 note 与 Nanoka 天赋同文限定受益职业与伤害类别。
@@ -973,6 +954,13 @@ const remielleMindscape1Evidence: readonly SemanticsEvidenceReference[] = [
   {
     path: "agents/1581/details.zh.json",
     pointer: "/talent/1/desc",
+    sha256: remielleDetailsSha,
+  },
+]
+const remielleMindscape4Evidence: readonly SemanticsEvidenceReference[] = [
+  {
+    path: "agents/1581/details.zh.json",
+    pointer: "/talent/4/desc",
     sha256: remielleDetailsSha,
   },
 ]
@@ -1074,49 +1062,6 @@ const lycaonPotentialBranchEvidence = [
  * 青溟笼舍（14137）：五档天赋 desc 与固定来源同一块的 note 逐字一致（去除
  * 富文本标记后），把贯穿增伤条款写在“每层[青溟同行]、最多 2 层”之下。
  */
-const qingmingBirdcageDetailsSha =
-  "34536f66858958cb71eb3d061a37d2d50aa74acb8d44911383e1fe8f161af8d4"
-const qingmingBirdcageEvidence: readonly SemanticsEvidenceReference[] = [
-  {
-    path: "w-engines/14137/details.zh.json",
-    pointer: "/talents/1/desc",
-    sha256: qingmingBirdcageDetailsSha,
-  },
-  {
-    path: "w-engines/14137/details.zh.json",
-    pointer: "/talents/2/desc",
-    sha256: qingmingBirdcageDetailsSha,
-  },
-  {
-    path: "w-engines/14137/details.zh.json",
-    pointer: "/talents/3/desc",
-    sha256: qingmingBirdcageDetailsSha,
-  },
-  {
-    path: "w-engines/14137/details.zh.json",
-    pointer: "/talents/4/desc",
-    sha256: qingmingBirdcageDetailsSha,
-  },
-  {
-    path: "w-engines/14137/details.zh.json",
-    pointer: "/talents/5/desc",
-    sha256: qingmingBirdcageDetailsSha,
-  },
-]
-const qingmingPerRefinementPierceBonus: Readonly<Record<number, string>> = {
-  1: "10%",
-  2: "11.5%",
-  3: "13%",
-  4: "14.5%",
-  5: "16%",
-}
-const qingmingBirdcageVerification = (refinement: number): string =>
-  `块 note 与 Nanoka 五档天赋同文（固定源 /wengines/92/refinementBuffs/${refinement - 1}/effectBlocks/0/note，Nanoka w-engines/14137 /talents/${refinement}/desc）：“每层[青溟同行]效果使装备者造成的以太伤害提升…%，[终结技]或[强化特殊技]造成的以太贯穿伤害提升${qingmingPerRefinementPierceBonus[refinement]}”，且全句声明最多叠加 2 层。同一块的以太增伤记录（kind=stacked、每层 8—12.8%、maxStacks=2）与此一致，而贯穿增伤记录被固定来源编码为 kind=fixed、value=${qingmingPerRefinementPierceBonus[refinement].replace("%", "")}、stackable=false、maxStacks=1、valuePerStack=0：resolveEffectBaseValue 对 fixed 非 stackable 直接返回 value，层数不参与取值，两层配置只会贡献单层值。Fairy 按本登记把该贡献改为按层编译：每层值取来源 value（即描述的单层百分比），选项与规则激活层数上限为 2，调用方按真实层数显式选择，0 层表示关闭；“进入接战直接获得 2 层”与 15 秒刷新不模拟，不把任何时点自动视为满层。effectId、optionId、精炼匹配、持有者、以太元素、贯穿伤害种类与[终结技]或[强化特殊技]（all-special-ms0fcqv7 为强化特殊技，不是任意特殊技）等既有条件保持不变；同块的固定暴击率条款不按层翻倍。证据级别为“按一致描述纠错”，未经游戏实测；若后续取得相反的游戏行为证据，应先登记来源再调整。`
-
-// —— 增益修复批次 01：音擎现有规则纠错（C01/C05/C07/C08/C10/C11/T01）——
-// 证据依据：ZZZ-HP 开发者反馈 2026-10-10 与 Fairy 结合 Nanoka 文本复核清单
-// （F2/F5/F15）及固定来源各块 note；一律为“按一致描述纠错”，未经游戏实测。
-
 /** 音擎天赋证据：按精炼档读取 integrated /talents/{rank}/desc。 */
 const wengineTalentEvidence = (
   nanokaId: string,
@@ -1138,12 +1083,6 @@ const myriadEclipseIgnoreDefensePercent: Readonly<
 > = { 1: "25", 2: "28.75", 3: "32.5", 4: "36.25", 5: "40" }
 
 /** 喵运当头（13017）：五档防御 8/9/10/11/12%，常驻与强化特殊技触发各一段。 */
-const promotionStatsSha =
-  "7232bf1bd3ec685545e44250e88602c024e5e5c8d26c3e959e05aa002093c3e1"
-const promotionStatsDefensePercent: Readonly<
-  Record<1 | 2 | 3 | 4 | 5, number>
-> = { 1: 8, 2: 9, 3: 10, 4: 11, 5: 12 }
-
 /** 聚宝箱（13103）：精炼 1 增伤 15% 受益对象为“所有单位”，固定来源记 self。 */
 const theVaultSha =
   "bf2b958f4e77151cb7d84641ca65a0caed5b4eabfd376b23f6180838e341a156"
@@ -1158,12 +1097,18 @@ const bellicoseBlazePerStackPercent: Readonly<
 /** 血髓秘匣（13021）：五档换算 0.48/0.56/0.64/0.72/0.8%、上限 24—40%。 */
 const bloodCasketSha =
   "eef5da868448dbd66f2dce088bfe57d47116487e798d06008c8dfd91bf36da26"
-/** 血髓秘匣五档共用的块 note 原文（数值只描述精炼 1）。 */
-const bloodCasketSharedBlockNote =
-  "局内实时规则\n超出100%暴击率时转模\n1%暴击率 转 0.48% 增伤\n转模增伤上限24%"
-/** 血髓秘匣覆盖后的精炼感知说明。 */
-const bloodCasketRefinementDescription =
-  "局内实时规则\n超出100%暴击率时转模\n1%暴击率 转 0.48/0.56/0.64/0.72/0.8% 增伤（按精炼1—5取值）\n转模增伤上限 24/28/32/36/40%（按精炼1—5取值）"
+/** 血髓秘匣五档块 note 原文；3.2.5 固定源已逐档写出对应数值与上限。 */
+const bloodCasketBlockNotes: Readonly<Record<1 | 2 | 3 | 4 | 5, string>> = {
+  1: "装备者暴击率大于100%时，每超出1%暴击率，使装备者造成的伤害提升0.48%，至多提升24%。",
+  2: "装备者暴击率大于100%时，每超出1%暴击率，使装备者造成的伤害提升0.56%，至多提升28%。",
+  3: "装备者暴击率大于100%时，每超出1%暴击率，使装备者造成的伤害提升0.64%，至多提升32%。",
+  4: "装备者暴击率大于100%时，每超出1%暴击率，使装备者造成的伤害提升0.72%，至多提升36%。",
+  5: "装备者暴击率大于100%时，每超出1%暴击率，使装备者造成的伤害提升0.8%，至多提升40%。",
+}
+/** 血髓秘匣覆盖后的精炼感知说明；来源已逐档写出，仅合并给共享选项。 */
+const bloodCasketRefinementDescription = Object.entries(bloodCasketBlockNotes)
+  .map(([rank, note]) => `精炼${rank}：${note}`)
+  .join("\n")
 
 const formatFlatPoints = (sourceValue: number): string =>
   String(sourceValue / 100)
@@ -1634,18 +1579,11 @@ const flatEnergyRegenVerification = (
   return `块 note 与 Nanoka 同文（固定源 /wengines/*/refinementBuffs/${record.rank - 1}/effectBlocks/0/note，Nanoka w-engines/${engine.nanokaId} 的 /talents/${record.rank}/desc）均写明「${engine.notePrefix}${flat}点/秒」，是固定回能点数，不是基础回能百分比。固定来源却把该条款编入 energyRegen 百分比字段（value=${record.value}，经 basePercentage 读取为 基础回能 × ${flat}；基础回能 1.2 点/秒时实际增加 ${flatWithBase} 点/秒）。Fairy 按本登记把${engine.name}精炼 ${record.rank}编译为固定回能加数：+${flat} 点/秒（energy-per-second，value × 0.01），不随基础回能缩放；触发条件仍由调用方显式选择声明，持续时间与同名被动限制不模拟。真正的百分比回能记录（摇摆爵士、月光安可二件套 +20%）不在登记内，energyRegen 的百分比语义保持不变。来源 stat、编码或数值漂移即拒绝生成，不静默套用到其他 energyRegen 记录。`
 }
 
-const promotionStatsVerification = (refinement: 1 | 2 | 3 | 4 | 5): string => {
-  const percent = promotionStatsDefensePercent[refinement]!
-  return `块 note 与 Nanoka 同文（固定源 /wengines/28/refinementBuffs/${refinement - 1}/effectBlocks/0/note，Nanoka w-engines/13017 的 /talents/${refinement}/desc）：「防御力提升${percent}%；释放[强化特殊技]时，防御力额外提升${percent}%，持续40秒，重复触发时刷新持续时间」——防御提升只作用于装备者。固定来源却把五档记为 applyTarget=team，上游 resolvePackMods 会让队友也获得该防御。Fairy 按本登记修正受益对象为装备者（规则 beneficiary=holder、选项 target=self）；常驻与强化特殊技触发两段保持分别生效：沿用来源 stacked 编码（每层 ${percent}%、最多 2 层），调用方以层数显式声明——1 层表示仅常驻部分生效，2 层表示常驻与强化特殊技触发的额外部分（40 秒内）同时生效，0 层表示整条关闭；40 秒持续与重复触发刷新不模拟。effectId、optionId、精炼匹配与数值保持不变；applyTarget 或数值漂移即拒绝生成。`
-}
-
-const theVaultTeamDamageBonusVerification = `块 note 与 Nanoka 同文（固定源 /wengines/75/refinementBuffs/0/effectBlocks/0/note，Nanoka w-engines/13103 的 /talents/1/desc）：「[强化特殊技]、[连携技]或[终结技]造成以太伤害时，所有单位对目标造成的伤害提升15%」——受益对象是所有单位（全队）。固定来源的精炼 1 记录却为 applyTarget=self，与同块回能记录（装备者）混同，队友无法受益；精炼 2—5 已是 team。Fairy 按本登记只修正精炼 1 为 team；修正后五档结构一致，按精炼合并为一条 by-rank 规则（0.15/0.175/0.2/0.22/0.24），触发与 2 秒持续仍由调用方显式选择声明。数值保持来源原值；applyTarget 或数值漂移即拒绝生成。`
-
 const bellicoseBlazeVerification = (refinement: 1 | 2 | 3 | 4 | 5): string => {
   const perStack = bellicoseBlazePerStackPercent[refinement]!
   const valuePart =
     refinement === 1
-      ? "固定来源两处误编：(1) 每层忽防记为 valuePerStack=16，与同块 note 及 Nanoka 的 15% 矛盾，Fairy 修正为 0.15；(2) "
+      ? "固定来源早期曾把精炼 1 每层忽防记为 16，现固定源已修正为 15，与块 note 及 Nanoka 一致；仍需修正的误编是 "
       : "固定来源误编："
   return `块 note 与 Nanoka 同文（固定源 /wengines/29/refinementBuffs/${refinement - 1}/effectBlocks/0/note，Nanoka w-engines/14130 的 /talents/${refinement}/desc）：「装备者发动[追加攻击]造成火属性伤害时，装备者的攻击对敌人造成的伤害无视${perStack}%防御力，持续8秒，3秒内最多获得1层，最多叠加2层」。文本证明的只是火属性追加攻击命中为取得状态的触发条件。${valuePart}以 scope=skill 的 follow_up 技能目标与 elementFilter=[火] 把该触发条件当成受益筛选，非火属性或非追加攻击的命中被排除。Fairy 按本登记移除元素与追加攻击分类的受益筛选，保留固定来源 scope=skill 派生的直伤种类（regular/sheer/sharpen）限制与 2 层上限——中文「装备者的攻击」与英文「their attacks」均未界定异常类伤害是否受益，项目伤害分类契约亦不足以核定，异常受益范围保留待证，不以文本为已证结论。触发事实、8 秒持续、3 秒取层间隔与层数由调用方显式选择/层数声明，不模拟时间线。编码或数值漂移即拒绝生成。`
 }
@@ -1674,7 +1612,7 @@ const bloodCasketDescriptionVerification = (
     4: "36",
     5: "40",
   }
-  return `固定源 /wengines/76/refinementBuffs/${refinement - 1}/effectBlocks/0/note 与其余四档同文，均写「1%暴击率 转 0.48% 增伤 / 转模增伤上限24%」，只描述精炼 1；Nanoka w-engines/13021 的 /talents/${refinement}/desc 明确精炼 ${refinement} 为每超出 1% 暴击率提升 ${rate[refinement]!}% 增伤、上限 ${cap[refinement]!}%。Fairy 的来源数值（convert 的 ratioPercent 与 cap 按精炼 48/56/64/72/80 与 24/28/32/36/40）本身正确，本登记只把选项共享说明覆盖为按精炼列值的文本，数值、规则与稳定 ID 不变。块 note 漂移（与登记原文不符）即拒绝生成。`
+  return `固定源 /wengines/76/refinementBuffs/${refinement - 1}/effectBlocks/0/note 已按精炼写出「每超出 1% 暴击率提升 ${rate[refinement]!}% 增伤、上限 ${cap[refinement]!}%」，与 Nanoka w-engines/13021 的 /talents/${refinement}/desc 同文。Fairy 的来源数值（convert 的 ratioPercent 与 cap 按精炼 48/56/64/72/80 与 24/28/32/36/40）本身正确；本登记只把五档来源 note 合并为共享选项的说明，数值、规则与稳定 ID 不变。块 note 漂移（与登记原文不符）即拒绝生成。`
 }
 
 /**
@@ -1703,19 +1641,7 @@ export const wengineCorrectionRegistrations = (): Record<
         verification: flatEnergyRegenVerification(engine, record),
       }
   // C01：千面日陨精炼 4 暴伤 62.25 → 65.25（块 note 与 Nanoka 五档同文）。
-  registrations[
-    "w-engines/Myriad_Eclipse/refinement/4/blk-legacy/legacy-self-critDmg"
-  ] = {
-    kind: "source-value-correction",
-    expectedSourceValue: 62.25,
-    correctedValue: 65.25,
-    differenceId: "myriad-eclipse-r4-critical-damage",
-    evidence: ([1, 2, 3, 4, 5] as const).map(
-      (rank) => wengineTalentEvidence("14129", myriadEclipseSha, rank)[0]!,
-    ),
-    verification:
-      "固定源 /wengines/22/refinementBuffs/3/effectBlocks/0 的块 note 写明「暴击伤害提升65.25%」，Nanoka w-engines/14129 的 /talents/1—5/desc 五档为 45/51.75/58.5/65.25/72%：精炼 1—3、5 的记录数值与文本一致，精炼 4 的记录数值 62.25 与自身块 note 及 Nanoka 同文矛盾。Fairy 按本登记把精炼 4 的暴伤修为 0.6525，其余四档保持来源原值；常驻暴伤条款与[零度处刑宣言]触发的忽防状态（另一条记录）互不影响，effectId 与 optionId 不变。原始数值漂移（≠62.25）即拒绝生成，防止来源升级时静默套用旧修正。证据级别为块 note 与 Nanoka 同文纠错，未经游戏实测。",
-  }
+
   // C11：千面日陨精炼 1—4 的忽防不应限定冰元素命中；精炼 5 原为 all，无需登记。
   for (const refinement of [1, 2, 3, 4] as const)
     registrations[
@@ -1730,31 +1656,6 @@ export const wengineCorrectionRegistrations = (): Record<
       evidence: wengineTalentEvidence("14129", myriadEclipseSha, refinement),
       verification: myriadEclipseIgnoreDefenseVerification(refinement),
     }
-  // C07：喵运当头五档防御只给装备者（team → self）。
-  for (const refinement of [1, 2, 3, 4, 5] as const)
-    registrations[
-      `w-engines/Promotion Stats/refinement/${refinement}/blk-mtwn69lr-xfb4n8/eff-mtwn69lr-2h2brm`
-    ] = {
-      kind: "beneficiary-target-correction",
-      expectedApplyTarget: "team",
-      correctedOptionTarget: "self",
-      expectedSourceValue: promotionStatsDefensePercent[refinement]!,
-      differenceId: "promotion-stats-equipper-defense",
-      evidence: wengineTalentEvidence("13017", promotionStatsSha, refinement),
-      verification: promotionStatsVerification(refinement),
-    }
-  // C08：聚宝箱精炼 1 的增伤受益对象 self → team（“所有单位”）。
-  registrations[
-    "w-engines/The_Vault/refinement/1/blk-legacy/legacy-self-dmgBonus"
-  ] = {
-    kind: "beneficiary-target-correction",
-    expectedApplyTarget: "self",
-    correctedOptionTarget: "team",
-    expectedSourceValue: 15,
-    differenceId: "the-vault-r1-team-damage-bonus",
-    evidence: wengineTalentEvidence("13103", theVaultSha, 1),
-    verification: theVaultTeamDamageBonusVerification,
-  }
   // C10：嚣枪喧焰五档——移除火元素/追加攻击受益限制；精炼 1 每层 16 → 15。
   for (const refinement of [1, 2, 3, 4, 5] as const)
     registrations[
@@ -1765,14 +1666,6 @@ export const wengineCorrectionRegistrations = (): Record<
       removeSkillTargetConditions: true,
       expectedElementFilter: ["火"],
       expectedSkillTargetCategories: ["follow_up"],
-      ...(refinement === 1
-        ? {
-            valueCorrection: {
-              expectedSourceValue: 16,
-              correctedValue: 15,
-            },
-          }
-        : {}),
       differenceId: "bellicose-blaze-trigger-scope-ignore-defense",
       evidence: wengineTalentEvidence("14130", bellicoseBlazeSha, refinement),
       verification: bellicoseBlazeVerification(refinement),
@@ -1784,7 +1677,7 @@ export const wengineCorrectionRegistrations = (): Record<
     ] = {
       kind: "refinement-value-description",
       conditionDescription: bloodCasketRefinementDescription,
-      expectedBlockNote: bloodCasketSharedBlockNote,
+      expectedBlockNote: bloodCasketBlockNotes[refinement],
       differenceId: "blood-casket-refinement-aware-description",
       evidence: wengineTalentEvidence("13021", bloodCasketSha, refinement),
       verification: bloodCasketDescriptionVerification(refinement),
@@ -2051,10 +1944,14 @@ function yuzuhaPartialState(
       note: "",
       convertPresent: conversion,
       convertFrom: conversion ? "anomalyControl" : null,
-      convertPanelSource: conversion ? "manual" : null,
+      convertPanelSource: conversion
+        ? stat === "anomalyDmgBonus" || rank === 1
+          ? "final"
+          : "external"
+        : null,
       convertRatioPercent: conversion ? (rank === 0 ? 20 : 6) : null,
-      convertCap: conversion ? (rank === 0 ? 40 : 12) : null,
-      convertInitialBase: conversion ? 0 : null,
+      convertCap: conversion ? (rank === 0 ? 20 : 6) : null,
+      convertInitialBase: conversion ? 100 : null,
       convertDefaultBase: conversion ? 201 : null,
     },
     expectedBlockNoteIncludes:
@@ -2069,7 +1966,7 @@ function yuzuhaPartialState(
         : ["[额外能力]中属性异常伤害和[紊乱]伤害增益效果提升至原本的130%"],
     evidence: yuzuhaAdditionalAbilityEvidence,
     verification:
-      "固定来源四条基础记录与四条 M1 记录被拆成独立正转化和负数抵消选项；配对高掌控时已有 20%/26% 上限正确，但 AM88 产生 -2.4%/-3.12%，且单选半状态不完整。块 note 与 Nanoka 3.2 全七档额外能力、M1 天赋同文：base=min(0.20,max(0,AM-100)*0.002)，M1—M6 对同一状态输出乘 1.3 一次。八条旧贡献全部退出，新完整状态统一启用异常与紊乱分支。AM 保留 manual 显式必填读数，无默认值；读取阶段 Q02 待证，不自动读取 current/final/external。编队资格、狸之愿有效状态和40秒持续/刷新由调用方声明；不扩展异常积蓄或瞬时能量输出，非整点游戏精度未实测。",
+      "固定来源四条基础记录与四条 M1 记录被拆成独立正转化和负数抵消选项；配对高掌控时已有 20%/26% 上限正确，但 AM88 产生 -2.4%/-3.12%，且单选半状态不完整。块 note 与 Nanoka 3.2 全七档额外能力、M1 天赋同文：base=min(0.20,max(0,AM-100)*0.002)，M1—M6 对同一状态输出乘 1.3 一次。八条旧贡献全部退出，新完整状态统一启用异常与紊乱分支。来源 3.2.5 已把异常分支改为 final、紊乱分支改为 external，初始基础 100、每点 0.2%、上限 20%；Fairy 按分支分别提供 final/external 异常掌控显式读数，无默认值，不自动读取面板。编队资格、狸之愿有效状态和40秒持续/刷新由调用方声明；不扩展异常积蓄或瞬时能量输出，非整点游戏精度未实测。",
   }
 }
 
@@ -2255,165 +2152,7 @@ const d4Evidence = (pointer: string): SemanticsEvidenceReference => ({
 
 export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
   ...ariaAbloomPrecisionCorrections,
-  [HUGO_ATTACK_SOURCE_KEY]: {
-    kind: "hugo-stun-teammate-count",
-    baseEvidenceKey: "hugo:blk-legacy:mindscape:0:legacy-self-atk",
-    formula: {
-      kind: "amount",
-    },
-    expectedRaw: {
-      id: "legacy-self-atk",
-      origin: "",
-      scope: "general",
-      applyTarget: "self",
-      applySituation: "global",
-      applyProfession: null,
-      teamProfession: null,
-      teamProfessionValues: null,
-      teamProfessionMinCount: null,
-      skillSubcategoryId: null,
-      elementFilter: "all",
-      kind: "stacked",
-      stat: "atk",
-      value: 0,
-      stackable: false,
-      maxStacks: 3,
-      valuePerStack: 300,
-      defaultStacks: 3,
-      convert: {
-        from: "atk",
-        panelSource: "external",
-        ratioPercent: 0,
-        cap: null,
-        defaultBase: null,
-        initialBase: 0,
-      },
-      enabledDefault: true,
-      note: "",
-    },
-    expectedNormalized: {
-      id: "legacy-self-atk",
-      origin: "",
-      scope: "general",
-      applyTarget: "self",
-      applySituation: "global",
-      applyProfession: null,
-      teamProfession: null,
-      teamProfessionValues: null,
-      teamProfessionMinCount: null,
-      skillSubcategoryId: null,
-      elementFilter: "all",
-      kind: "stacked",
-      stat: "atk",
-      value: 0,
-      stackable: false,
-      maxStacks: 3,
-      valuePerStack: 300,
-      defaultStacks: 3,
-      convert: {
-        from: "atk",
-        panelSource: "external",
-        ratioPercent: 0,
-        cap: null,
-        defaultBase: null,
-        initialBase: 0,
-      },
-      enabledDefault: true,
-      note: "",
-    },
-    expectedSourceBlockNote:
-      "[连携技：命运戏法]命中敌人或雨果的攻击使敌人失衡时，雨果获得[暗渊回响]状态，持续6秒，重复触发时刷新持续时间，该状态下雨果的暴击率提升12%，暴击伤害提升25%；\n队伍中存在其他1/2名[击破]角色时，雨果的攻击力提升300/900点；\n[强化特殊技：魂狩·惩戒]或[终结技：渎神者]的终结一击命中敌人时，若敌人处于失衡状态，会对其触发[决算]效果，使得招式的终结一击伤害倍率提升1000%，此外[决算]效果会根据触发时敌人剩余的失衡时间，使得该招式伤害倍率进一步提升：敌人失衡时间小于等于5秒的部分，每剩余1秒，招式伤害倍率提升280%，5秒到15秒的部分，每剩余1秒，招式伤害倍率提升100%，总共最多可以提升3400%的招式伤害倍率；",
-    layerCountInputName: "hugo:other-stun-teammates",
-    differenceId: "hugo-other-stun-teammate-count",
-    evidence: [
-      {
-        path: "agents/1291/details.zh.json",
-        pointer: "/passive/level/1291501/desc/0",
-        sha256:
-          "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6",
-      },
-      {
-        path: "agents/1291/details.en.json",
-        pointer: "/passive/level/1291501/desc/0",
-        sha256:
-          "86bdc9f93f67dc92ba5b5d8eb4314c1816837e6b56814e614fed1a09b23b78ad",
-      },
-      {
-        path: "agents/1291/details.zh.json",
-        pointer: "/passive/level/1291502/desc/0",
-        sha256:
-          "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6",
-      },
-      {
-        path: "agents/1291/details.en.json",
-        pointer: "/passive/level/1291502/desc/0",
-        sha256:
-          "86bdc9f93f67dc92ba5b5d8eb4314c1816837e6b56814e614fed1a09b23b78ad",
-      },
-      {
-        path: "agents/1291/details.zh.json",
-        pointer: "/passive/level/1291503/desc/0",
-        sha256:
-          "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6",
-      },
-      {
-        path: "agents/1291/details.en.json",
-        pointer: "/passive/level/1291503/desc/0",
-        sha256:
-          "86bdc9f93f67dc92ba5b5d8eb4314c1816837e6b56814e614fed1a09b23b78ad",
-      },
-      {
-        path: "agents/1291/details.zh.json",
-        pointer: "/passive/level/1291504/desc/0",
-        sha256:
-          "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6",
-      },
-      {
-        path: "agents/1291/details.en.json",
-        pointer: "/passive/level/1291504/desc/0",
-        sha256:
-          "86bdc9f93f67dc92ba5b5d8eb4314c1816837e6b56814e614fed1a09b23b78ad",
-      },
-      {
-        path: "agents/1291/details.zh.json",
-        pointer: "/passive/level/1291505/desc/0",
-        sha256:
-          "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6",
-      },
-      {
-        path: "agents/1291/details.en.json",
-        pointer: "/passive/level/1291505/desc/0",
-        sha256:
-          "86bdc9f93f67dc92ba5b5d8eb4314c1816837e6b56814e614fed1a09b23b78ad",
-      },
-      {
-        path: "agents/1291/details.zh.json",
-        pointer: "/passive/level/1291506/desc/0",
-        sha256:
-          "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6",
-      },
-      {
-        path: "agents/1291/details.en.json",
-        pointer: "/passive/level/1291506/desc/0",
-        sha256:
-          "86bdc9f93f67dc92ba5b5d8eb4314c1816837e6b56814e614fed1a09b23b78ad",
-      },
-      {
-        path: "agents/1291/details.zh.json",
-        pointer: "/passive/level/1291507/desc/0",
-        sha256:
-          "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6",
-      },
-      {
-        path: "agents/1291/details.en.json",
-        pointer: "/passive/level/1291507/desc/0",
-        sha256:
-          "86bdc9f93f67dc92ba5b5d8eb4314c1816837e6b56814e614fed1a09b23b78ad",
-      },
-    ],
-    verification:
-      "固定来源块说明与 Nanoka 中英文七档均明确一人/二人值；将旧倍率单位层数迁移为其他击破队友人数，二人仅贡献一次三倍固定 ATK，不改变同块其他条款。",
-  },
+
   "agents/yanagi/mindscape/2/blk-ms4qhaez-8sfxa3/eff-ms4qhaez-6zbkbm":
     yanagiPolarityIsolation(
       2,
@@ -2485,18 +2224,10 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     yuzuhaPartialState(0, "anomalyDmgBonus", true),
   "agents/yuzuha/mindscape/0/blk-ms38y9v7-07td4j/eff-ms3969fx-lmmkyw":
     yuzuhaPartialState(0, "disorderDmgBonus", true, null),
-  "agents/yuzuha/mindscape/0/blk-ms38y9v7-07td4j/eff-ms396xt1-3qbf2a":
-    yuzuhaPartialState(0, "anomalyDmgBonus", false),
-  "agents/yuzuha/mindscape/0/blk-ms38y9v7-07td4j/eff-ms39auzc-mtr7ac":
-    yuzuhaPartialState(0, "disorderDmgBonus", false),
   "agents/yuzuha/mindscape/1/blk-legacy/eff-ms44bnmi-zp616x":
     yuzuhaPartialState(1, "anomalyDmgBonus", true),
   "agents/yuzuha/mindscape/1/blk-legacy/eff-ms44dh8h-xb20mu":
     yuzuhaPartialState(1, "disorderDmgBonus", true),
-  "agents/yuzuha/mindscape/1/blk-legacy/eff-ms44eue1-n53aou":
-    yuzuhaPartialState(1, "anomalyDmgBonus", false),
-  "agents/yuzuha/mindscape/1/blk-legacy/eff-ms44fa80-f595zx":
-    yuzuhaPartialState(1, "disorderDmgBonus", false),
 
   "agents/caesar/mindscape/0/blk-legacy/legacy-team-atk": {
     kind: "core-skill-level",
@@ -3232,44 +2963,23 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
       verification:
         "Nanoka 3.2 精炼 5 原文确认：发动[强化特殊技]或触发[毁伤]时，造成的电属性锐化伤害提升（数值见来源记录），持续 40 秒。固定来源 elementFilter=all 未编码电属性限制；Fairy 补显式电元素条件，锐化增伤通道本身只在锐化伤害命中适用，触发条件由调用方显式选择断言。",
     },
-  "w-engines/Angel_In_The_Shell/refinement/2/blk-legacy/legacy-self-special": {
-    kind: "developer-revised-stat",
-    originalStat: "special",
-    revisedStat: "anomalyDmgBonus",
-    revisedValue: 11.5,
-    differenceId: "angel-in-the-shell-anomaly-stat-revision",
-    evidence: angelRevisionEvidence(2),
-    verification: angelRevisionVerification(2),
-  },
-  "w-engines/Angel_In_The_Shell/refinement/3/blk-legacy/legacy-self-special": {
-    kind: "developer-revised-stat",
-    originalStat: "special",
-    revisedStat: "anomalyDmgBonus",
-    revisedValue: 13,
-    differenceId: "angel-in-the-shell-anomaly-stat-revision",
-    evidence: angelRevisionEvidence(3),
-    verification: angelRevisionVerification(3),
-  },
-  "w-engines/Angel_In_The_Shell/refinement/4/blk-legacy/legacy-self-special": {
-    kind: "developer-revised-stat",
-    originalStat: "special",
-    revisedStat: "anomalyDmgBonus",
-    revisedValue: 14.5,
-    differenceId: "angel-in-the-shell-anomaly-stat-revision",
-    evidence: angelRevisionEvidence(4),
-    verification: angelRevisionVerification(4),
-  },
-  "w-engines/Angel_In_The_Shell/refinement/5/blk-legacy/legacy-self-special": {
-    kind: "developer-revised-stat",
-    originalStat: "special",
-    revisedStat: "anomalyDmgBonus",
-    revisedValue: 16,
-    differenceId: "angel-in-the-shell-anomaly-stat-revision",
-    evidence: angelRevisionEvidence(5),
-    verification: angelRevisionVerification(5),
-  },
   // 蕾米埃尔影画 2 的[异常]角色忽防：来源记录 scope general、applyProfession
   // 为空、appliesToAnomaly true，只表示允许异常而非限定职业或伤害类别。
+  // 3.3.12 来源省略 scope 但保留 skillTargets，固定转换会把影画 4 的
+  // “触发[耀变]时伤害倍率额外提升 12%”误收窄为普通攻击命中。Nanoka
+  // 天赋 4 原文只限定[耀变]效果，不限定招式类别；按触发条件纠错移除
+  // skillTargets 派生的技能标签条件，保留 luminize 伤害种类。
+  "agents/remiel/mindscape/4/blk-ms7tnn2n-4zw15u/eff-ms7tnn2n-mz69ez": {
+    kind: "trigger-conditions-not-benefit-scope",
+    removeElementCondition: false,
+    removeSkillTargetConditions: true,
+    expectedElementFilter: "all",
+    expectedSkillTargetCategories: ["basic"],
+    differenceId: "remielle-mindscape4-luminize-scope",
+    evidence: remielleMindscape4Evidence,
+    verification:
+      "Nanoka 3.3.12 天赋 4（agents/1581/details.zh.json 的 /talent/4/desc）确认：“蕾米埃尔触发[耀变]效果时，伤害倍率额外提升12%”。固定来源 2628b32 的同一效果省略 scope，但仍携带 skillCategory/skillTargets=basic；Fairy 的省略 scope 兼容规则据此派生普通攻击标签，导致耀变命中被错误排除。本登记只移除这个由 skillTargets 派生的受益筛选，保留 luminize 伤害种类与影画 4 配置门槛；来源目标类别或元素筛选漂移即拒绝生成。",
+  },
   "agents/remiel/mindscape/2/blk-ms7tkhei-q0ipfu/eff-ms7tlurw-vhelyf": {
     kind: "attribute-anomaly-beneficiary-scope",
     profession: "异常",
@@ -3287,46 +2997,6 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
   },
   // 青溟笼舍（14137）精炼 1—5 的以太贯穿增伤：块 note 与 Nanoka 同文把该条款
   // 写在“每层[青溟同行]”之下（最多 2 层），固定来源却把它编码为固定单次。
-  "w-engines/Qingming_Birdcage/refinement/1/blk-legacy/eff-ms1r9equ-l7imtb": {
-    kind: "stacked-mechanism-correction",
-    maximumLayers: 2,
-    expectedSourceValue: 10,
-    differenceId: "qingming-birdcage-pierce-stack-layers",
-    evidence: qingmingBirdcageEvidence,
-    verification: qingmingBirdcageVerification(1),
-  },
-  "w-engines/Qingming_Birdcage/refinement/2/blk-legacy/eff-ms1rarze-uhh4r4": {
-    kind: "stacked-mechanism-correction",
-    maximumLayers: 2,
-    expectedSourceValue: 11.5,
-    differenceId: "qingming-birdcage-pierce-stack-layers",
-    evidence: qingmingBirdcageEvidence,
-    verification: qingmingBirdcageVerification(2),
-  },
-  "w-engines/Qingming_Birdcage/refinement/3/blk-legacy/eff-ms1rby7h-cnwy4w": {
-    kind: "stacked-mechanism-correction",
-    maximumLayers: 2,
-    expectedSourceValue: 13,
-    differenceId: "qingming-birdcage-pierce-stack-layers",
-    evidence: qingmingBirdcageEvidence,
-    verification: qingmingBirdcageVerification(3),
-  },
-  "w-engines/Qingming_Birdcage/refinement/4/blk-legacy/eff-ms1rcyzb-2dozs0": {
-    kind: "stacked-mechanism-correction",
-    maximumLayers: 2,
-    expectedSourceValue: 14.5,
-    differenceId: "qingming-birdcage-pierce-stack-layers",
-    evidence: qingmingBirdcageEvidence,
-    verification: qingmingBirdcageVerification(4),
-  },
-  "w-engines/Qingming_Birdcage/refinement/5/blk-legacy/eff-ms1rdzo3-dwcqi1": {
-    kind: "stacked-mechanism-correction",
-    maximumLayers: 2,
-    expectedSourceValue: 16,
-    differenceId: "qingming-birdcage-pierce-stack-layers",
-    evidence: qingmingBirdcageEvidence,
-    verification: qingmingBirdcageVerification(5),
-  },
   // 增益修复批次 01 的具名登记（C01/C05/C07/C08/C10/C11/T01）。
   ...wengineCorrectionRegistrations(),
   // 增益修复批次 03 的具名登记（C02 比利影画 4、C13 流光咏叹四件套）。
@@ -3368,23 +3038,7 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     verification:
       "块 note 与 Nanoka 影画 4（agents/1081/details.zh.json 的 /talent/4/desc）同文：[强化特殊技]命中敌人时，招式的暴击率随自身与目标距离提升、距离越近越显著、最高 32%。固定来源把该条款编码为 stacked skillDmgBonus（32 层 × 1%、defaultStacks 32），既不是伤害加成、也不能用层数表达连续距离。修正为 hit 作用域 criticalRate direct：数值由调用方显式输入（比例 0—0.32，表达式钳制），激活层数上限 1，废除来源层数编码；旧层数用法（如 layers 32）按目录层数上限拒绝并由具名差异说明迁移。受益范围保持来源编码的强化特殊技目标（all-special-ms0fcqv7）与直伤种类，仅比利本人命中获得，普通特殊技、普攻与其他角色不受益，不改全局面板暴击率。",
   },
-  "drive-discs/SuitShiningAria/setPieces/4/blk-legacy/legacy-self-dmgBonus": {
-    kind: "triggered-state-not-benefit-condition",
-    expectedApplySituation: "stagger",
-    expectedStat: "dmgBonus",
-    expectedValue: 25,
-    differenceId: "shining-aria-stagger-entry-triggered-state",
-    evidence: [
-      {
-        path: "drive-discs/33600/details.zh.json",
-        pointer: "/desc4",
-        sha256:
-          "6bf0a0e55dadadd48925a629b0df5d14d6c2256e915ffcaca9d46550ad3a4a47",
-      },
-    ],
-    verification:
-      "块 note 与 Nanoka 四件套描述（drive-discs/33600/details.zh.json 的 /desc4）同文：装备者发动[普通攻击]命中敌人时异常精通 +36（8 秒，独立条款不变）；当场上有敌人进入失衡状态时，装备者造成的伤害提升 25%，持续 18 秒，重复触发刷新。固定来源把后一条款编码为 applySituation: stagger，固定版 effectMatchesContext 据此要求目标当前处于失衡——而“进入失衡”只是触发事实，增益持续 18 秒、期间目标是否失衡不影响受益。修正为移除派生的 hit.targetState 条件：18 秒状态是否仍有效由调用方显式选择 supplied 实例声明，当前失衡但未声明状态不自动获得，声明有效但目标已退出失衡仍照常 +25%；触发、持续与刷新不模拟时间线。四件门槛、自身受益与独立的 +36 异常精通条款保持不变，两种持续状态不绑成同一开关。",
-  },
+
   // 莱特（1161）[昂扬]：基础记录改写为一条完整状态贡献（含冲击力转化与
   // 总上限），影画 2 的 120% 由配置修改直接作用于同一条贡献；被取代的
   // 三条记录只保留迁移入口，不再生成可执行贡献。

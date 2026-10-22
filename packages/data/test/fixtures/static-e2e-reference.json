@@ -1,18 +1,18 @@
 {
   "provenance": {
     "repository": "LoTwT/ZZZ-HP",
-    "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
-    "fairyBaseline": "7f53b1e23ed72cd72b7ddb1fcc54393af4c0a4f2",
-    "gameVersion": "3.2",
+    "commit": "2628b32cece086e371bafa05518a9a12650d9f74",
+    "fairyBaseline": "bae8aaa278632e731440e29d22fe38067c8fb99b",
+    "gameVersion": "3.3",
     "method": "Pinned upstream pure functions + independently reproduced direct-damage and sharpen chains; precise Nanoka inputs, explicit Ben and Claret permanent-conversion supplements and existing Astra M2 correction. Not the upstream application.",
     "resources": [
       {
         "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-        "sha256": "57c4aacca5455aa20f75f21967e294d8506ec1970a06e9c808557bdb3a91e20f"
+        "sha256": "c9bc4cfdb0cf3117c56885e1afa4afd3ac9dc81aa0282119f0c64a27f19e5b01"
       },
       {
         "path": "zzz-hp/src/utils/calculatorUi.ts",
-        "sha256": "e61bf67fab73920889338997d77d12190b45d29cfd5cb49703802a0953fb1cfe"
+        "sha256": "b15afac0893cfc6edd3f7d153812e710619cdc74329cc11dc9d76981a418cf40"
       },
       {
         "path": "zzz-hp/src/utils/affixDriveDiscConfig.ts",
@@ -20,7 +20,7 @@
       },
       {
         "path": "zzz-hp/src/utils/affixPanelCalc.ts",
-        "sha256": "ba97ae9c7bf8020085829080dc749168c99102a9f215d8c22ce6d13cdaa3c0d2"
+        "sha256": "633bbb59703252a5ccd26931b0d1c01fbbd75b83ee998f84dc401394a0ca233a"
       },
       {
         "path": "zzz-hp/src/utils/multFactorPercent.ts",
@@ -32,11 +32,11 @@
       },
       {
         "path": "zzz-hp/src/utils/panelBuffCalc.ts",
-        "sha256": "43ec23eafa28b8d0748636ab9885e1497fab8cd11e458268acd746c9adc40c09"
+        "sha256": "33bd26840c7e0646377efaf5127da05d4672cfdc8a2052648a602d4cabb0645d"
       },
       {
         "path": "zzz-hp/src/utils/skillTalentLevels.ts",
-        "sha256": "0391667fba8f39c868ab6bc8aa3609c2b72313e0ae00bd273ccb220de06faa6d"
+        "sha256": "f52244106f7a95cf621e375b5c654d71019d8a86eb80c55727561983ab4c71f4"
       },
       {
         "path": "zzz-hp/src/utils/calcNumberFormat.ts",
@@ -44,7 +44,7 @@
       },
       {
         "path": "zzz-hp/src/utils/buffEffect.ts",
-        "sha256": "88c850fc2dce5017905a624357b169b41b5586a1f5d76218e48a61baff7c9909"
+        "sha256": "b344c82c6015ac31f72197e8ee968cfc9bf60be5e85403b455008f8dbfa763bf"
       },
       {
         "path": "zzz-hp/src/utils/enemyResistance.ts",
@@ -52,14 +52,14 @@
       },
       {
         "path": "zzz-hp/src/utils/damageCalc.ts",
-        "sha256": "2ef2e81cd11af03a3f9a5df82622c238ae3b6f9596346eee97136b7a2b427a71"
+        "sha256": "763c7447cf6ab208c48f5412516de430b1e2ba1669e90bf37ecb83526bc0629d"
       }
     ],
     "extraction": [
       {
         "file": "calculatorUi.ts",
         "name": "BUFF_STAT_FIELDS",
-        "sha256": "71e86a9ad09e1d897c45cea591937bae48f47dd6f5b178287eafe2c9ddd5f5f5"
+        "sha256": "9df293a68ef164ab586dea5d6acc9ce7c68115afec88e2c95c965e508663a683"
       },
       {
         "file": "calculatorUi.ts",
@@ -79,7 +79,7 @@
       {
         "file": "calculatorUi.ts",
         "name": "createEmptyBuffStatModifiers",
-        "sha256": "fa2c4d62f03496be8152f5253916c1cad74ea50afd81431deeb14569d1a60bb1"
+        "sha256": "cc3314bbe08495ce2ef22e5e4d626a130f3ca8c081a5540922281610e9428826"
       },
       {
         "file": "calculatorUi.ts",
@@ -94,7 +94,7 @@
       {
         "file": "calculatorUi.ts",
         "name": "mergeBuffStatModifiers",
-        "sha256": "998a2040a281e178b808aa5ed08c0a1fa14c5fe8f29024f5b3a99d5b97faec12"
+        "sha256": "11d504a3a2e4eae4c47e7d31497ce5a3619aa9f4384d181c3e42dd51663bd605"
       },
       {
         "file": "calculatorUi.ts",
@@ -164,12 +164,12 @@
       {
         "file": "affixPanelCalc.ts",
         "name": "roundPanelValue",
-        "sha256": "37a2b3e031c7829e8b5afc0c928494e3b0bf4f30b21825a7e6a00f57355be18f"
+        "sha256": "d6ca4ac1a8c5b883c4f66756907984b7fd02852751734acd57aaecbe95e61c10"
       },
       {
         "file": "affixPanelCalc.ts",
         "name": "readTwoPieceExternalPercents",
-        "sha256": "f9e716ed165ad3db4b6f0306e89baabc984761eaee18345b8f56b59a08088885"
+        "sha256": "c09aa4900213bbed572221b087732edc97f0d2c1963c145483c8f06bad904f48"
       },
       {
         "file": "affixPanelCalc.ts",
@@ -184,12 +184,12 @@
       {
         "file": "affixPanelCalc.ts",
         "name": "buildAffixExternalFixedParts",
-        "sha256": "04e9b1931d6a450325cbe82092581f8181716daab1747bda6e87895e3b690b2f"
+        "sha256": "7440d896088f4c926ee819d3f92c0500c48ecf2136ad567d216a92f9ce39335a"
       },
       {
         "file": "affixPanelCalc.ts",
         "name": "applyAffixCountsToFixedParts",
-        "sha256": "5947c6f6df826974712b6d2076df92d3f5b7f3167db4ff33a24e0bcce09e01c3"
+        "sha256": "4f4fb3c4a126b14eac646ea66f26e9f2b918cf5686e0e2fa65e37e0516f1aef0"
       },
       {
         "file": "affixPanelCalc.ts",
@@ -274,7 +274,7 @@
       {
         "file": "panelBuffCalc.ts",
         "name": "applyBuffModsToPanel",
-        "sha256": "8c6cce69151093b709949952fcdb562a6bc990fc81845dc15ac65a437e53e6bf"
+        "sha256": "c7185a931f486e3db429d71071263a3b7907afb0ad3e250f2149af37e1087f3a"
       },
       {
         "file": "panelBuffCalc.ts",
@@ -380,11 +380,11 @@
     "nanokaSources": [
       {
         "path": "agents/1031/data.json",
-        "sha256": "cbb5ab0368d150f95a9b37971cbea0244129ff916bcc41e799a19b8906f013b0"
+        "sha256": "29acdbc308a414b324f9268d482875bae1dccc38be976b637d3eb33e9fe5aca1"
       },
       {
         "path": "w-engines/13103/data.json",
-        "sha256": "fdcd122b23441b4ecf28b520e5830ec3e58b61cc1fa4cf2397a15eaa5d396be3"
+        "sha256": "a73c6fe11f7c4a415bf469c664483cef9eea85d4de412ad7c1947e44a728d080"
       },
       {
         "path": "w-engines/13103/details.zh.json",
@@ -392,11 +392,11 @@
       },
       {
         "path": "agents/1311/data.json",
-        "sha256": "ab64e523de5a16dd49506896f5ae08e24f7568c1c6f0f7ba9a61f9295d130fb6"
+        "sha256": "7cfc65b257927e2f51915d3b27087d163027d63cfe2350711d45aba5d1462148"
       },
       {
         "path": "w-engines/14131/data.json",
-        "sha256": "74b0fa2de9577d49f38dccbbb88d5d2f33ba2760f1385b178f48a3ce51fcb184"
+        "sha256": "909dbb117ce2830bd0704643f5be1e3033a64e0af0104c10376fa67396e0529b"
       },
       {
         "path": "w-engines/14131/details.zh.json",
@@ -404,11 +404,11 @@
       },
       {
         "path": "agents/1121/data.json",
-        "sha256": "4394fae7374cf4ae65b4ab43ccfe79a7b06c99549bfab7cfbd72ae74b6be1108"
+        "sha256": "ddd76870f7914823dd73cb6e5a16e9d1ae5f4283f5481854b5055aa229d7b819"
       },
       {
         "path": "w-engines/13112/data.json",
-        "sha256": "02b75fdf95964b9b6bdd85281415c23b98dd3778fcb27b363b76ef6b49582043"
+        "sha256": "8e979fcbb1c9200a95ae43040c0e3b80f82958cf18bb68e9ccc0e2bb32fb61f1"
       },
       {
         "path": "w-engines/13112/details.zh.json",
@@ -420,11 +420,11 @@
       },
       {
         "path": "agents/1371/data.json",
-        "sha256": "31a23621a02d06b0b43840aa07c791ba5d1cd25f79fea0767ec3ccaa145edc02"
+        "sha256": "16ade7056b6d6cda024383c42aeae1357be02e34ae9426ee82a739d979984ee5"
       },
       {
         "path": "w-engines/14137/data.json",
-        "sha256": "b0c05586d8de701a8635c502b3ab15ee751623d9b4caf18c237169e352104238"
+        "sha256": "0dbb63c6d04d93e4e7535c1d301c2140c66466cc9c267921b74029246d4332f7"
       },
       {
         "path": "w-engines/14137/details.zh.json",
@@ -432,11 +432,11 @@
       },
       {
         "path": "agents/1611/data.json",
-        "sha256": "2ef4f6dcb7283d61e2709634b38822ae79b358808220688487e888336b045255"
+        "sha256": "e60bb84684c0b3406c027ebed9a19c8f75fb50f096e46abed6579c1a7eb73e66"
       },
       {
         "path": "w-engines/14161/data.json",
-        "sha256": "3ee2e58f1fee16c9f4785bccc475b4c70758c8daddab919e02638e83fde4e649"
+        "sha256": "be0f9c99f66acff249678e27eca85d0a315a2c57d62b836d314176f6c7652ce6"
       },
       {
         "path": "w-engines/14161/details.zh.json",
@@ -448,11 +448,11 @@
       },
       {
         "path": "agents/1581/data.json",
-        "sha256": "e44c965092149c70fce8b3771f0a55094143d5e7a9e7196ad1038613f90236e9"
+        "sha256": "da23e4a114dd05324ab29802cdfc360d1b30665eac84e1ced912e60fdc18d6f2"
       },
       {
         "path": "w-engines/14158/data.json",
-        "sha256": "102046e351af0a7f86fd59438f483651999a0e00922dc97e50807187f4423b43"
+        "sha256": "435ee7470f151c753696049a27a29a6fd94fdfdccb6f835f8e11cfa71a37f15c"
       },
       {
         "path": "w-engines/14158/details.zh.json",
@@ -460,11 +460,11 @@
       },
       {
         "path": "agents/1261/data.json",
-        "sha256": "85fc60dc9d30625914fdb6420ec10ba2d4db0371a23139bdf87ad22b4318a71a"
+        "sha256": "a360a11ed8a753b4888f63af2333aea547bd4aad0ad480327d52593ad6045897"
       },
       {
         "path": "w-engines/14156/data.json",
-        "sha256": "83eabf582923d103b79e38ef4c44cc89af376628ea1546cb83db20825c898c05"
+        "sha256": "8310bb293847324c72f315fbf473c6ece4e33e71f7934f44f96e2c5e9f017152"
       },
       {
         "path": "w-engines/14156/details.zh.json",
@@ -472,11 +472,11 @@
       },
       {
         "path": "agents/1561/data.json",
-        "sha256": "6b1a2ef93d6f0b0b02d6a63aedc78ff3913fbd874f7a976f393475629b063487"
+        "sha256": "8be73eb7d55b2e51436ee32ee6e335c270de586ca814486e8dd03f184b872353"
       },
       {
         "path": "w-engines/14118/data.json",
-        "sha256": "fa56f4e6c29d774baa3de429eee30cc55ffadfd2ca1057fca97ed0dbb0285c3b"
+        "sha256": "01f40693af4c765942bc4bebdeeb8f91109114257f5912e8d98165fcf5b70c30"
       },
       {
         "path": "w-engines/14118/details.zh.json",
@@ -1373,7 +1373,7 @@
           {
             "optionId": "w-engines:The_Vault:refinement:blk-legacy:legacy-self-dmgBonus",
             "holderId": "entity:nicole",
-            "pointer": "/wengines/75/refinementBuffs/2/effectBlocks/0/effects/0",
+            "pointer": "/wengines/83/refinementBuffs/2/effectBlocks/0/effects/0",
             "stat": "dmgBonus",
             "sourceValue": 20
           }
@@ -1490,35 +1490,35 @@
           {
             "optionId": "w-engines:The_Vault:refinement:blk-legacy:legacy-self-dmgBonus",
             "holderId": "entity:nicole",
-            "pointer": "/wengines/75/refinementBuffs/2/effectBlocks/0/effects/0",
+            "pointer": "/wengines/83/refinementBuffs/2/effectBlocks/0/effects/0",
             "stat": "dmgBonus",
             "sourceValue": 20
           },
           {
             "optionId": "agents:astrayao:mindscape:0:blk-ms38hwcr-q7y9sx:eff-ms38hwcr-m9hn4v",
             "holderId": "entity:astra",
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "pointer": "/agents/46/mindscapeBuffs/0/effectBlocks/1/effects/0",
             "stat": "atk",
             "sourceValue": 1200
           },
           {
             "optionId": "agents:astrayao:mindscape:0:blk-legacy:legacy-team-dmgBonus",
             "holderId": "entity:astra",
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "pointer": "/agents/46/mindscapeBuffs/0/effectBlocks/0/effects/0",
             "stat": "dmgBonus",
             "sourceValue": 20
           },
           {
             "optionId": "agents:astrayao:mindscape:0:blk-legacy:legacy-team-critDmg",
             "holderId": "entity:astra",
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/1",
+            "pointer": "/agents/46/mindscapeBuffs/0/effectBlocks/0/effects/1",
             "stat": "critDmg",
             "sourceValue": 25
           },
           {
             "optionId": "w-engines:Elegant_Vanity:refinement:blk-legacy:legacy-team-dmgBonus",
             "holderId": "entity:astra",
-            "pointer": "/wengines/67/refinementBuffs/2/effectBlocks/0/effects/0",
+            "pointer": "/wengines/73/refinementBuffs/2/effectBlocks/0/effects/0",
             "stat": "dmgBonus",
             "sourceValue": 13
           }
@@ -1635,35 +1635,35 @@
           {
             "optionId": "w-engines:The_Vault:refinement:blk-legacy:legacy-self-dmgBonus",
             "holderId": "entity:nicole",
-            "pointer": "/wengines/75/refinementBuffs/2/effectBlocks/0/effects/0",
+            "pointer": "/wengines/83/refinementBuffs/2/effectBlocks/0/effects/0",
             "stat": "dmgBonus",
             "sourceValue": 20
           },
           {
             "optionId": "agents:astrayao:mindscape:0:blk-ms38hwcr-q7y9sx:eff-ms38hwcr-m9hn4v",
             "holderId": "entity:astra",
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "pointer": "/agents/46/mindscapeBuffs/0/effectBlocks/1/effects/0",
             "stat": "atk",
             "sourceValue": 1200
           },
           {
             "optionId": "agents:astrayao:mindscape:0:blk-legacy:legacy-team-dmgBonus",
             "holderId": "entity:astra",
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "pointer": "/agents/46/mindscapeBuffs/0/effectBlocks/0/effects/0",
             "stat": "dmgBonus",
             "sourceValue": 20
           },
           {
             "optionId": "agents:astrayao:mindscape:0:blk-legacy:legacy-team-critDmg",
             "holderId": "entity:astra",
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/1",
+            "pointer": "/agents/46/mindscapeBuffs/0/effectBlocks/0/effects/1",
             "stat": "critDmg",
             "sourceValue": 25
           },
           {
             "optionId": "w-engines:Elegant_Vanity:refinement:blk-legacy:legacy-team-dmgBonus",
             "holderId": "entity:astra",
-            "pointer": "/wengines/67/refinementBuffs/2/effectBlocks/0/effects/0",
+            "pointer": "/wengines/73/refinementBuffs/2/effectBlocks/0/effects/0",
             "stat": "dmgBonus",
             "sourceValue": 26
           }
@@ -1780,35 +1780,35 @@
           {
             "optionId": "w-engines:The_Vault:refinement:blk-legacy:legacy-self-dmgBonus",
             "holderId": "entity:nicole",
-            "pointer": "/wengines/75/refinementBuffs/2/effectBlocks/0/effects/0",
+            "pointer": "/wengines/83/refinementBuffs/2/effectBlocks/0/effects/0",
             "stat": "dmgBonus",
             "sourceValue": 20
           },
           {
             "optionId": "agents:astrayao:mindscape:0:blk-ms38hwcr-q7y9sx:eff-ms38hwcr-m9hn4v",
             "holderId": "entity:astra",
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "pointer": "/agents/46/mindscapeBuffs/0/effectBlocks/1/effects/0",
             "stat": "atk",
             "sourceValue": 1600
           },
           {
             "optionId": "agents:astrayao:mindscape:0:blk-legacy:legacy-team-dmgBonus",
             "holderId": "entity:astra",
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "pointer": "/agents/46/mindscapeBuffs/0/effectBlocks/0/effects/0",
             "stat": "dmgBonus",
             "sourceValue": 20
           },
           {
             "optionId": "agents:astrayao:mindscape:0:blk-legacy:legacy-team-critDmg",
             "holderId": "entity:astra",
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/1",
+            "pointer": "/agents/46/mindscapeBuffs/0/effectBlocks/0/effects/1",
             "stat": "critDmg",
             "sourceValue": 25
           },
           {
             "optionId": "w-engines:Elegant_Vanity:refinement:blk-legacy:legacy-team-dmgBonus",
             "holderId": "entity:astra",
-            "pointer": "/wengines/67/refinementBuffs/2/effectBlocks/0/effects/0",
+            "pointer": "/wengines/73/refinementBuffs/2/effectBlocks/0/effects/0",
             "stat": "dmgBonus",
             "sourceValue": 26
           }
@@ -1860,21 +1860,20 @@
         "upstreamStyleIntegerExpected": 23762
       },
       "upstreamAlignedTotals": {
-        "nonCritical": 11952.601048807366,
-        "critical": 32965.27369261072,
-        "expected": 23761.723074624853,
-        "displayedNonCritical": 11955,
-        "displayedCritical": 32967
+        "nonCritical": 14787.656938208733,
+        "critical": 40784.357835579685,
+        "expected": 29397.802842531208,
+        "displayedNonCritical": 14789,
+        "displayedCritical": 40785
       },
       "upstreamRoundedTotals": {
-        "nonCritical": 11952.595629716161,
-        "critical": 32965.25874675717,
-        "expected": 23761.712301493215,
-        "displayedNonCritical": 11955,
-        "displayedCritical": 32967
+        "nonCritical": 14787.651519117528,
+        "critical": 40784.34288972615,
+        "expected": 29397.79206939957,
+        "displayedNonCritical": 14789,
+        "displayedCritical": 40785
       },
-      "upstreamStyleIntegerExpected": 23762,
-      "upstreamAttackConversion": 1600
+      "upstreamStyleIntegerExpected": 29398
     },
     "ben-core-b": {
       "reference": {
@@ -2069,21 +2068,21 @@
           {
             "optionId": "w-engines:Qingming_Birdcage:refinement:blk-legacy:legacy-self-critRate",
             "holderId": "entity:yixuan",
-            "pointer": "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/0",
+            "pointer": "/wengines/100/refinementBuffs/0/effectBlocks/0/effects/0",
             "stat": "critRate",
             "sourceValue": 20
           },
           {
             "optionId": "w-engines:Qingming_Birdcage:refinement:blk-legacy:eff-ms1r8tz7-juw8rc",
             "holderId": "entity:yixuan",
-            "pointer": "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/1",
+            "pointer": "/wengines/100/refinementBuffs/0/effectBlocks/0/effects/1",
             "stat": "dmgBonus",
             "sourceValue": 16
           },
           {
             "optionId": "w-engines:Qingming_Birdcage:refinement:blk-legacy:eff-ms1r9equ-l7imtb",
             "holderId": "entity:yixuan",
-            "pointer": "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/2",
+            "pointer": "/wengines/100/refinementBuffs/0/effectBlocks/0/effects/2",
             "stat": "pierceDmgBonus",
             "sourceValue": 10
           },
@@ -2188,21 +2187,21 @@
           {
             "optionId": "w-engines:Qingming_Birdcage:refinement:blk-legacy:legacy-self-critRate",
             "holderId": "entity:yixuan",
-            "pointer": "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/0",
+            "pointer": "/wengines/100/refinementBuffs/0/effectBlocks/0/effects/0",
             "stat": "critRate",
             "sourceValue": 20
           },
           {
             "optionId": "w-engines:Qingming_Birdcage:refinement:blk-legacy:eff-ms1r8tz7-juw8rc",
             "holderId": "entity:yixuan",
-            "pointer": "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/1",
+            "pointer": "/wengines/100/refinementBuffs/0/effectBlocks/0/effects/1",
             "stat": "dmgBonus",
             "sourceValue": 16
           },
           {
             "optionId": "w-engines:Qingming_Birdcage:refinement:blk-legacy:eff-ms1r9equ-l7imtb",
             "holderId": "entity:yixuan",
-            "pointer": "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/2",
+            "pointer": "/wengines/100/refinementBuffs/0/effectBlocks/0/effects/2",
             "stat": "pierceDmgBonus",
             "sourceValue": 10
           },
@@ -2223,28 +2222,28 @@
           {
             "optionId": "agents:astrayao:mindscape:0:blk-ms38hwcr-q7y9sx:eff-ms38hwcr-m9hn4v",
             "holderId": "entity:astra",
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "pointer": "/agents/46/mindscapeBuffs/0/effectBlocks/1/effects/0",
             "stat": "atk",
             "sourceValue": 1200
           },
           {
             "optionId": "agents:astrayao:mindscape:0:blk-legacy:legacy-team-dmgBonus",
             "holderId": "entity:astra",
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "pointer": "/agents/46/mindscapeBuffs/0/effectBlocks/0/effects/0",
             "stat": "dmgBonus",
             "sourceValue": 20
           },
           {
             "optionId": "agents:astrayao:mindscape:0:blk-legacy:legacy-team-critDmg",
             "holderId": "entity:astra",
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/1",
+            "pointer": "/agents/46/mindscapeBuffs/0/effectBlocks/0/effects/1",
             "stat": "critDmg",
             "sourceValue": 25
           },
           {
             "optionId": "w-engines:Elegant_Vanity:refinement:blk-legacy:legacy-team-dmgBonus",
             "holderId": "entity:astra",
-            "pointer": "/wengines/67/refinementBuffs/2/effectBlocks/0/effects/0",
+            "pointer": "/wengines/73/refinementBuffs/2/effectBlocks/0/effects/0",
             "stat": "dmgBonus",
             "sourceValue": 26
           }
@@ -2347,9 +2346,9 @@
             "sourceValue": 20
           },
           {
-            "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj",
+            "optionId": "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h5g2r-zj4y8t",
             "holderId": "entity:claret",
-            "pointer": "/wengines/65/refinementBuffs/0/effectBlocks/2/effects/0",
+            "pointer": "/wengines/71/refinementBuffs/0/effectBlocks/0/effects/2",
             "stat": "sharpenDmgBonus",
             "sourceValue": 10
           }
@@ -2430,49 +2429,49 @@
           {
             "optionId": "agents:remiel:mindscape:0:blk-legacy:eff-ms7t5hb1-fqvxkz",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/0/effectBlocks/0/effects/0",
             "stat": "mutationCoeff",
             "sourceValue": 9.36
           },
           {
             "optionId": "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/1",
+            "pointer": "/agents/53/mindscapeBuffs/0/effectBlocks/0/effects/1",
             "stat": "radianceMultFactor",
             "sourceValue": 0.936
           },
           {
             "optionId": "agents:remiel:mindscape:0:blk-ms7tc2w4-mzvc69:eff-ms7tc2w3-mzcr6z",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/0/effectBlocks/1/effects/0",
             "stat": "mutationCoeff",
             "sourceValue": 10
           },
           {
             "optionId": "agents:remiel:mindscape:0:blk-ms7td2gs-rk1vtd:eff-ms7td2gs-4vbpdh",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/2/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/0/effectBlocks/2/effects/0",
             "stat": "atk",
             "sourceValue": 1354.8986783999999
           },
           {
             "optionId": "agents:remiel:mindscape:1:blk-legacy:eff-ms7tin2y-0pja8e",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/1/effectBlocks/0/effects/0",
             "stat": "radianceResPen",
             "sourceValue": 50
           },
           {
             "optionId": "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8fa1dg-tcuhq7",
             "holderId": "entity:remiel",
-            "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/0",
+            "pointer": "/wengines/79/refinementBuffs/0/effectBlocks/0/effects/0",
             "stat": "mastery",
             "sourceValue": 96
           },
           {
             "optionId": "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8faem4-ob6m8b",
             "holderId": "entity:remiel",
-            "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/1",
+            "pointer": "/wengines/79/refinementBuffs/0/effectBlocks/0/effects/1",
             "stat": "anomalyDmgBonus",
             "sourceValue": 20
           },
@@ -2570,56 +2569,56 @@
           {
             "optionId": "agents:remiel:mindscape:0:blk-legacy:eff-ms7t5hb1-fqvxkz",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/0/effectBlocks/0/effects/0",
             "stat": "mutationCoeff",
             "sourceValue": 9.36
           },
           {
             "optionId": "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/1",
+            "pointer": "/agents/53/mindscapeBuffs/0/effectBlocks/0/effects/1",
             "stat": "radianceMultFactor",
             "sourceValue": 0.936
           },
           {
             "optionId": "agents:remiel:mindscape:0:blk-ms7tc2w4-mzvc69:eff-ms7tc2w3-mzcr6z",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/0/effectBlocks/1/effects/0",
             "stat": "mutationCoeff",
             "sourceValue": 10
           },
           {
             "optionId": "agents:remiel:mindscape:0:blk-ms7td2gs-rk1vtd:eff-ms7td2gs-4vbpdh",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/2/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/0/effectBlocks/2/effects/0",
             "stat": "atk",
             "sourceValue": 1354.8986783999999
           },
           {
             "optionId": "agents:remiel:mindscape:1:blk-legacy:eff-ms7tin2y-0pja8e",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/1/effectBlocks/0/effects/0",
             "stat": "radianceResPen",
             "sourceValue": 50
           },
           {
             "optionId": "agents:remiel:mindscape:4:blk-ms7tnn2n-4zw15u:eff-ms7tnn2n-mz69ez",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/4/effectBlocks/0/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/4/effectBlocks/0/effects/0",
             "stat": "specialMult",
             "sourceValue": 12
           },
           {
             "optionId": "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8fa1dg-tcuhq7",
             "holderId": "entity:remiel",
-            "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/0",
+            "pointer": "/wengines/79/refinementBuffs/0/effectBlocks/0/effects/0",
             "stat": "mastery",
             "sourceValue": 96
           },
           {
             "optionId": "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8faem4-ob6m8b",
             "holderId": "entity:remiel",
-            "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/1",
+            "pointer": "/wengines/79/refinementBuffs/0/effectBlocks/0/effects/1",
             "stat": "anomalyDmgBonus",
             "sourceValue": 20
           },
@@ -2717,56 +2716,56 @@
           {
             "optionId": "agents:remiel:mindscape:0:blk-legacy:eff-ms7t5hb1-fqvxkz",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/0/effectBlocks/0/effects/0",
             "stat": "mutationCoeff",
             "sourceValue": 9.36
           },
           {
             "optionId": "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/1",
+            "pointer": "/agents/53/mindscapeBuffs/0/effectBlocks/0/effects/1",
             "stat": "radianceMultFactor",
             "sourceValue": 0.936
           },
           {
             "optionId": "agents:remiel:mindscape:0:blk-ms7tc2w4-mzvc69:eff-ms7tc2w3-mzcr6z",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/0/effectBlocks/1/effects/0",
             "stat": "mutationCoeff",
             "sourceValue": 10
           },
           {
             "optionId": "agents:remiel:mindscape:0:blk-ms7td2gs-rk1vtd:eff-ms7td2gs-4vbpdh",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/2/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/0/effectBlocks/2/effects/0",
             "stat": "atk",
             "sourceValue": 1354.8986783999999
           },
           {
             "optionId": "agents:remiel:mindscape:1:blk-legacy:eff-ms7tin2y-0pja8e",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/1/effectBlocks/0/effects/0",
             "stat": "radianceResPen",
             "sourceValue": 50
           },
           {
             "optionId": "agents:remiel:mindscape:4:blk-ms7tnn2n-4zw15u:eff-ms7tnn2n-mz69ez",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/4/effectBlocks/0/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/4/effectBlocks/0/effects/0",
             "stat": "specialMult",
             "sourceValue": 12
           },
           {
             "optionId": "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8fa1dg-tcuhq7",
             "holderId": "entity:remiel",
-            "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/0",
+            "pointer": "/wengines/79/refinementBuffs/0/effectBlocks/0/effects/0",
             "stat": "mastery",
             "sourceValue": 96
           },
           {
             "optionId": "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8faem4-ob6m8b",
             "holderId": "entity:remiel",
-            "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/1",
+            "pointer": "/wengines/79/refinementBuffs/0/effectBlocks/0/effects/1",
             "stat": "anomalyDmgBonus",
             "sourceValue": 20
           },
@@ -2864,49 +2863,49 @@
           {
             "optionId": "agents:remiel:mindscape:0:blk-legacy:eff-ms7t5hb1-fqvxkz",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/0/effectBlocks/0/effects/0",
             "stat": "mutationCoeff",
             "sourceValue": 9.36
           },
           {
             "optionId": "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/1",
+            "pointer": "/agents/53/mindscapeBuffs/0/effectBlocks/0/effects/1",
             "stat": "radianceMultFactor",
             "sourceValue": 0.936
           },
           {
             "optionId": "agents:remiel:mindscape:0:blk-ms7tc2w4-mzvc69:eff-ms7tc2w3-mzcr6z",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/0/effectBlocks/1/effects/0",
             "stat": "mutationCoeff",
             "sourceValue": 10
           },
           {
             "optionId": "agents:remiel:mindscape:0:blk-ms7td2gs-rk1vtd:eff-ms7td2gs-4vbpdh",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/0/effectBlocks/2/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/0/effectBlocks/2/effects/0",
             "stat": "atk",
             "sourceValue": 1354.8986783999999
           },
           {
             "optionId": "agents:remiel:mindscape:1:blk-legacy:eff-ms7tin2y-0pja8e",
             "holderId": "entity:remiel",
-            "pointer": "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/0",
+            "pointer": "/agents/53/mindscapeBuffs/1/effectBlocks/0/effects/0",
             "stat": "radianceResPen",
             "sourceValue": 50
           },
           {
             "optionId": "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8fa1dg-tcuhq7",
             "holderId": "entity:remiel",
-            "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/0",
+            "pointer": "/wengines/79/refinementBuffs/0/effectBlocks/0/effects/0",
             "stat": "mastery",
             "sourceValue": 96
           },
           {
             "optionId": "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8faem4-ob6m8b",
             "holderId": "entity:remiel",
-            "pointer": "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/1",
+            "pointer": "/wengines/79/refinementBuffs/0/effectBlocks/0/effects/1",
             "stat": "anomalyDmgBonus",
             "sourceValue": 20
           },

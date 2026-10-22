@@ -635,7 +635,7 @@ export function validateLucyGuardBoarCatalog(
   const expectedFactionReferences = factionMembers
     .map((id) => ({
       sourceId: "nanoka-integrated",
-      version: "3.2",
+      version: "3.3.12+19634983",
       locale: "en",
       resourcePath: "index.json",
       pointer: "/entities/agents/members/" + id + "/sourceRecord/camp",

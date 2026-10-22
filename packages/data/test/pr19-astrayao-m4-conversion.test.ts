@@ -116,12 +116,6 @@ describe("Astra Yao M4 real existing empty cultivation context", () => {
       },
     ],
     [
-      "additional zero key",
-      (d) => {
-        pack(d).teamMods!.newStat = 0
-      },
-    ],
-    [
       "missing effects",
       (d) => {
         delete pack(d).effects

@@ -23,14 +23,10 @@ function source(): SourceData {
     [
       ["eff-ms38y9v7-2ded3l", "anomalyDmgBonus", 0, true, true],
       ["eff-ms3969fx-lmmkyw", "disorderDmgBonus", 0, true, false],
-      ["eff-ms396xt1-3qbf2a", "anomalyDmgBonus", -20, false, true],
-      ["eff-ms39auzc-mtr7ac", "disorderDmgBonus", -20, false, true],
     ],
     [
       ["eff-ms44bnmi-zp616x", "anomalyDmgBonus", 0, true, true],
       ["eff-ms44dh8h-xb20mu", "disorderDmgBonus", 0, true, true],
-      ["eff-ms44eue1-n53aou", "anomalyDmgBonus", -6, false, true],
-      ["eff-ms44fa80-f595zx", "disorderDmgBonus", -6, false, true],
     ],
   ]
   return {
@@ -70,11 +66,14 @@ function source(): SourceData {
                   ? {
                       convert: {
                         from: "anomalyControl",
-                        panelSource: "manual",
+                        panelSource:
+                          stat === "anomalyDmgBonus" || rank === 1
+                            ? "final"
+                            : "external",
                         ratioPercent: rank === 0 ? 20 : 6,
-                        cap: rank === 0 ? 40 : 12,
+                        cap: rank === 0 ? 20 : 6,
                         defaultBase: 201,
-                        initialBase: 0,
+                        initialBase: 100,
                       },
                     }
                   : {}),
@@ -111,9 +110,9 @@ const convert = (data = source(), functions = normalization) =>
   convertSource(data, functions, [], [])
 
 describe("Yuzuha complete state source guards", () => {
-  it("creates two complete contributions and two configuration scales while retiring all eight partial rules", () => {
+  it("creates two complete contributions and two configuration scales while retiring all four partial rules", () => {
     const result = convert()
-    expect(result.definitions.revision).toBe("46")
+    expect(result.definitions.revision).toBe("51")
     expect(
       result.definitions.effects.filter((rule) => rule.kind === "contribution"),
     ).toHaveLength(2)
@@ -130,8 +129,8 @@ describe("Yuzuha complete state source guards", () => {
       configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
     })
     expect(result.coverage.summary).toMatchObject({
-      rawEffects: 8,
-      unsupported: 8,
+      rawEffects: 4,
+      unsupported: 4,
     })
     for (const record of result.coverage.records) {
       expect(record).toMatchObject({
@@ -186,11 +185,11 @@ describe("Yuzuha complete state source guards", () => {
   })
 
   it("rejects any missing record, including an empty registered group, and duplicate identities", () => {
-    for (const index of [0, 1, 2, 3, 4, 5, 6, 7]) {
+    for (const index of [0, 1, 2, 3]) {
       const data = source()
       data.agents[0]!.mindscapeBuffs![
-        Math.floor(index / 4)
-      ]!.effectBlocks![0]!.effects.splice(index % 4, 1)
+        Math.floor(index / 2)
+      ]!.effectBlocks![0]!.effects.splice(index % 2, 1)
       expect(() => convert(data)).toThrow(
         /Complete-state tanuki-wish.*source record/,
       )
@@ -342,12 +341,19 @@ describe("Yuzuha complete state source guards", () => {
         (effect) => {
           if (effect.convert)
             Object.assign(effect.convert, {
-              [key]: typeof effect.convert[key] === "number" ? 999 : "final",
+              [key]:
+                key === "panelSource"
+                  ? effect.convert.panelSource === "final"
+                    ? "external"
+                    : "final"
+                  : typeof effect.convert[key] === "number"
+                    ? 999
+                    : "final",
             })
           else effect.convert = { from: "anomalyControl", ratioPercent: 20 }
         },
       ])
-    for (let index = 0; index < 8; index++)
+    for (let index = 0; index < 4; index++)
       for (const [name, mutate] of changes) {
         const raw = source()
         mutate(records(raw)[index]!)

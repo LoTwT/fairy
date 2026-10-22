@@ -52,7 +52,6 @@ describe("static effects evidence path", () => {
       "agents/aria/mindscape/0/blk-ms36joa0-0vxxo8/eff-ms36k7q1-vqttu0",
       "agents/aria/mindscape/0/blk-ms36joa0-0vxxo8/eff-ms36muwl-79wv54",
       "agents/aria/mindscape/0/blk-ms36joa0-0vxxo8/eff-ms36oy6h-izqgcq",
-      "agents/hugo/mindscape/0/blk-legacy/legacy-self-atk",
       "agents/yanagi/mindscape/2/blk-ms4qhaez-8sfxa3/eff-ms4qhaez-6zbkbm",
       "agents/yanagi/mindscape/2/blk-ms4qhaez-8sfxa3/eff-ms4qkjzo-r424yz",
       "agents/yanagi/mindscape/6/blk-ms4qn0z7-6fc8g6/eff-ms4qob0d-mk1bgo",

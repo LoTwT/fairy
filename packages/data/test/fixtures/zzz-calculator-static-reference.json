@@ -64,8 +64,8 @@
     "fairyCalculationDataVersion": {
       "packageVersion": "0.4.0",
       "contractVersion": 2,
-      "gameVersion": "3.2",
-      "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+      "gameVersion": "3.3",
+      "snapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
     },
     "fairyCalculationSources": {
       "packages/core/src/static/calculate.ts": "c1e6d073f7b8eb62241bf640da8d3e1a878aa8de9a703636c490f113a126441e",
@@ -145,9 +145,9 @@
       "claretConversion": "agents:claret:mindscape:0:blk-mtrf598z-wr4jqt:eff-mtskqyss-1toefw",
       "claretState": "agents:claret:mindscape:0:blk-mtrf598z-wr4jqt:eff-mtrf598z-80y7hh",
       "claretM4": "agents:claret:mindscape:4:blk-mtseebl3-k0eoh9:eff-mtseebl3-6j53ci",
-      "crimsonCritical": "w-engines:Scarlet-Craving:refinement:blk-mtsekp31-ybbcgj:eff-mtsekp31-f1g9l2",
-      "crimsonDamage": "w-engines:Scarlet-Craving:refinement:blk-mtsemp5m-ywlze6:eff-mtsemp5m-q1jh4f",
-      "crimsonSharp": "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj",
+      "crimsonCritical": "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h4q1t-4jb1zr",
+      "crimsonDamage": "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h4zop-e2ecfr",
+      "crimsonSharp": "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h5g2r-zj4y8t",
       "remielleSpecial": "agents:remiel:mindscape:0:blk-ms8eep1j-jv0aut:eff-ms8eep1j-ljr5on",
       "remielleAttack": "agents:remiel:mindscape:0:blk-ms7td2gs-rk1vtd:eff-ms7tgbsu-obb50g",
       "roxyCore": "nanoka:agents:1621:core-wind-critical-damage",
@@ -37446,17 +37446,17 @@
           },
           {
             "holderId": "entity:claret",
-            "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsekp31-ybbcgj:eff-mtsekp31-f1g9l2",
+            "optionId": "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h4q1t-4jb1zr",
             "layers": 1
           },
           {
             "holderId": "entity:claret",
-            "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsemp5m-ywlze6:eff-mtsemp5m-q1jh4f",
+            "optionId": "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h4zop-e2ecfr",
             "layers": 1
           },
           {
             "holderId": "entity:claret",
-            "optionId": "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj",
+            "optionId": "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h5g2r-zj4y8t",
             "layers": 1
           }
         ],
@@ -37507,7 +37507,7 @@
               "value": 0.17500000000000002
             },
             "origin": {
-              "effectId": "w-engine:14161:zzz-hp:eff-mtsemp5m-q1jh4f:blk-mtsemp5m-ywlze6:refinement",
+              "effectId": "w-engine:14161:zzz-hp:eff-mv3h4zop-e2ecfr:blk-mv3h4q1t-3m3v1q:refinement",
               "bindingId": "binding:entity:claret:w-engine:14161",
               "instanceId": "instance:static:3",
               "layerId": "layer:static:3:0",
@@ -37528,7 +37528,7 @@
               "value": 0.115
             },
             "origin": {
-              "effectId": "w-engine:14161:zzz-hp:eff-mtsenpok-prx4yj:blk-mtsenpok-3njiz7:refinement",
+              "effectId": "w-engine:14161:zzz-hp:eff-mv3h5g2r-zj4y8t:blk-mv3h4q1t-3m3v1q:refinement",
               "bindingId": "binding:entity:claret:w-engine:14161",
               "instanceId": "instance:static:4",
               "layerId": "layer:static:4:0",
@@ -37572,7 +37572,7 @@
               "value": 0.275
             },
             "origin": {
-              "effectId": "w-engine:14161:zzz-hp:eff-mtsekp31-f1g9l2:blk-mtsekp31-ybbcgj:refinement",
+              "effectId": "w-engine:14161:zzz-hp:eff-mv3h4q1t-4jb1zr:blk-mv3h4q1t-3m3v1q:refinement",
               "bindingId": "binding:entity:claret:w-engine:14161",
               "instanceId": "instance:static:2",
               "layerId": "layer:static:2:0",
@@ -80446,7 +80446,7 @@
           "packages/data/definitions/effects/static-catalog.json": "b0f7831d1e02118f6445b5e9e091e309733464c467ff63a7f0df22f0f95323df"
         }
       },
-      "currentSnapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
+      "currentSnapshotId": "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
     }
   ]
 }

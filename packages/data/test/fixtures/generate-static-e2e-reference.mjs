@@ -15,26 +15,26 @@ assert(
   repository && output,
   "Provide the upstream Git repository and a NEW output file",
 )
-const commit = "fac62407f3d3995f8200a66be0038f292b1455fa"
-const fairyBaseline = "7f53b1e23ed72cd72b7ddb1fcc54393af4c0a4f2"
+const commit = "2628b32cece086e371bafa05518a9a12650d9f74"
+const fairyBaseline = "bae8aaa278632e731440e29d22fe38067c8fb99b"
 const buffResource = "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json"
 const digests = {
   [buffResource]:
-    "57c4aacca5455aa20f75f21967e294d8506ec1970a06e9c808557bdb3a91e20f",
+    "c9bc4cfdb0cf3117c56885e1afa4afd3ac9dc81aa0282119f0c64a27f19e5b01",
   "damageCalc.ts":
-    "2ef2e81cd11af03a3f9a5df82622c238ae3b6f9596346eee97136b7a2b427a71",
+    "763c7447cf6ab208c48f5412516de430b1e2ba1669e90bf37ecb83526bc0629d",
   "affixPanelCalc.ts":
-    "ba97ae9c7bf8020085829080dc749168c99102a9f215d8c22ce6d13cdaa3c0d2",
+    "633bbb59703252a5ccd26931b0d1c01fbbd75b83ee998f84dc401394a0ca233a",
   "affixDriveDiscConfig.ts":
     "909f4dfb8b1169943832571d0d06f378932705ad0ea91e14074dc8cbf4fca764",
   "panelBuffCalc.ts":
-    "43ec23eafa28b8d0748636ab9885e1497fab8cd11e458268acd746c9adc40c09",
+    "33bd26840c7e0646377efaf5127da05d4672cfdc8a2052648a602d4cabb0645d",
   "buffEffect.ts":
-    "88c850fc2dce5017905a624357b169b41b5586a1f5d76218e48a61baff7c9909",
+    "b344c82c6015ac31f72197e8ee968cfc9bf60be5e85403b455008f8dbfa763bf",
   "skillTalentLevels.ts":
-    "0391667fba8f39c868ab6bc8aa3609c2b72313e0ae00bd273ccb220de06faa6d",
+    "f52244106f7a95cf621e375b5c654d71019d8a86eb80c55727561983ab4c71f4",
   "calculatorUi.ts":
-    "e61bf67fab73920889338997d77d12190b45d29cfd5cb49703802a0953fb1cfe",
+    "b15afac0893cfc6edd3f7d153812e710619cdc74329cc11dc9d76981a418cf40",
   "enemyResistance.ts":
     "5b0e943c77cf991cd66e38b22349b869173b486a476a88f397b62075112ce43c",
   "multFactorPercent.ts":
@@ -587,8 +587,9 @@ function evaluateScenario(scenario, corrected, roundedPanel) {
       if (builds[astraBuild].actor.mindscapeRank >= 2) {
         if (corrected) value = Math.min(1600, conversionBase * 0.54)
         else
-          for (const extra of upstreamData.agents[45].mindscapeBuffs[2]
-            .effectBlocks[0].effects)
+          for (const extra of upstreamData.agents.find(
+            (agent) => agent.id === "astrayao",
+          ).mindscapeBuffs[2].effectBlocks[0].effects)
             value += upstream.resolveConvertValue(extra, {}, conversionBase)
       }
     } else value = upstream.resolveEffectBaseValue(effect, selection.layers)
@@ -907,13 +908,6 @@ for (const scenario of scenarios) {
     upstreamAlignedTotals: upstreamAligned.totals,
     upstreamRoundedTotals: upstreamRounded.totals,
     upstreamStyleIntegerExpected: upstreamRounded.upstreamStyleIntegerExpected,
-    ...(scenario.id === "nicole-astra-m2"
-      ? {
-          upstreamAttackConversion: upstreamAligned.contributions.find(
-            (c) => c.stat === "atk",
-          ).sourceValue,
-        }
-      : {}),
   }
 }
 const fixture = {
@@ -921,7 +915,7 @@ const fixture = {
     repository: "LoTwT/ZZZ-HP",
     commit,
     fairyBaseline,
-    gameVersion: "3.2",
+    gameVersion: "3.3",
     method:
       "Pinned upstream pure functions + independently reproduced direct-damage and sharpen chains; precise Nanoka inputs, explicit Ben and Claret permanent-conversion supplements and existing Astra M2 correction. Not the upstream application.",
     resources,

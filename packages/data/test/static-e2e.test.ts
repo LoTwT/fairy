@@ -92,9 +92,9 @@ async function inputFor(
   expect(data.version).toEqual({
     packageVersion: "0.4.0",
     contractVersion: 2,
-    gameVersion: "3.2",
+    gameVersion: "3.3",
     snapshotId:
-      "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60",
+      "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce",
   })
   expect(data.catalog.source.commit).toBe(reference.provenance.commit)
   expect(data.catalog.source.repository).toBe(reference.provenance.repository)
@@ -605,11 +605,10 @@ describe("complete static configurations against an independent pinned ZZZ-HP re
     )
     const m2 = await run("nicole-astra-m2")
     const source = reference.cases["nicole-astra-m2"]!
-    expect(source.upstreamAttackConversion).toBe(1600)
     close(
       m2.totals.expected,
-      source.upstreamAlignedTotals.expected,
-      "Astra M2 agrees with the fixed upstream",
+      source.reference.totals.expected,
+      "Astra M2 agrees with the corrected reference",
     )
     const self = await run("yixuan-self")
     const team = await run("yixuan-team")

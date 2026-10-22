@@ -1314,7 +1314,7 @@ describe("M4 coexists with the actual Astra catalog", () => {
       expect(ok(run(request)).expected).toBeCloseTo(expected, 8)
       for (const alias of [
         "agents:astrayao:mindscape:2:blk-legacy:legacy-team-atk",
-        "agents:astrayao:mindscape:2:blk-legacy:eff-ms38lmcz-qennwz",
+        "agents:astrayao:mindscape:2:blk-legacy:eff-muhxkum2-5x20c1",
       ]) {
         const selected = structuredClone(request)
         select(selected, alias)

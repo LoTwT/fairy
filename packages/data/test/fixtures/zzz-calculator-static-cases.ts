@@ -263,11 +263,11 @@ export const options = {
     "agents:claret:mindscape:0:blk-mtrf598z-wr4jqt:eff-mtrf598z-80y7hh",
   claretM4: "agents:claret:mindscape:4:blk-mtseebl3-k0eoh9:eff-mtseebl3-6j53ci",
   crimsonCritical:
-    "w-engines:Scarlet-Craving:refinement:blk-mtsekp31-ybbcgj:eff-mtsekp31-f1g9l2",
+    "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h4q1t-4jb1zr",
   crimsonDamage:
-    "w-engines:Scarlet-Craving:refinement:blk-mtsemp5m-ywlze6:eff-mtsemp5m-q1jh4f",
+    "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h4zop-e2ecfr",
   crimsonSharp:
-    "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj",
+    "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h5g2r-zj4y8t",
   remielleSpecial:
     "agents:remiel:mindscape:0:blk-ms8eep1j-jv0aut:eff-ms8eep1j-ljr5on",
   remielleAttack:

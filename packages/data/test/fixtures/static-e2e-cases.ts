@@ -419,29 +419,29 @@ export const effects = {
   vault: {
     holderId: "entity:nicole",
     optionId: "w-engines:The_Vault:refinement:blk-legacy:legacy-self-dmgBonus",
-    pointer: "/wengines/75/refinementBuffs/2/effectBlocks/0/effects/0",
+    pointer: "/wengines/83/refinementBuffs/2/effectBlocks/0/effects/0",
   },
   astraAttack: {
     holderId: "entity:astra",
     optionId:
       "agents:astrayao:mindscape:0:blk-ms38hwcr-q7y9sx:eff-ms38hwcr-m9hn4v",
-    pointer: "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
+    pointer: "/agents/46/mindscapeBuffs/0/effectBlocks/1/effects/0",
   },
   astraDamage: {
     holderId: "entity:astra",
     optionId: "agents:astrayao:mindscape:0:blk-legacy:legacy-team-dmgBonus",
-    pointer: "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/0",
+    pointer: "/agents/46/mindscapeBuffs/0/effectBlocks/0/effects/0",
   },
   astraCritical: {
     holderId: "entity:astra",
     optionId: "agents:astrayao:mindscape:0:blk-legacy:legacy-team-critDmg",
-    pointer: "/agents/45/mindscapeBuffs/0/effectBlocks/0/effects/1",
+    pointer: "/agents/46/mindscapeBuffs/0/effectBlocks/0/effects/1",
   },
   vanity: {
     holderId: "entity:astra",
     optionId:
       "w-engines:Elegant_Vanity:refinement:blk-legacy:legacy-team-dmgBonus",
-    pointer: "/wengines/67/refinementBuffs/2/effectBlocks/0/effects/0",
+    pointer: "/wengines/73/refinementBuffs/2/effectBlocks/0/effects/0",
   },
   benHormone: {
     holderId: "entity:ben",
@@ -458,19 +458,19 @@ export const effects = {
     holderId: "entity:yixuan",
     optionId:
       "w-engines:Qingming_Birdcage:refinement:blk-legacy:legacy-self-critRate",
-    pointer: "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/0",
+    pointer: "/wengines/100/refinementBuffs/0/effectBlocks/0/effects/0",
   },
   cageDamage: {
     holderId: "entity:yixuan",
     optionId:
       "w-engines:Qingming_Birdcage:refinement:blk-legacy:eff-ms1r8tz7-juw8rc",
-    pointer: "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/1",
+    pointer: "/wengines/100/refinementBuffs/0/effectBlocks/0/effects/1",
   },
   cageSheer: {
     holderId: "entity:yixuan",
     optionId:
       "w-engines:Qingming_Birdcage:refinement:blk-legacy:eff-ms1r9equ-l7imtb",
-    pointer: "/wengines/92/refinementBuffs/0/effectBlocks/0/effects/2",
+    pointer: "/wengines/100/refinementBuffs/0/effectBlocks/0/effects/2",
   },
   yunkuiCritical: {
     holderId: "entity:yixuan",
@@ -505,53 +505,53 @@ export const effects = {
   crimsonSharpen: {
     holderId: "entity:claret",
     optionId:
-      "w-engines:Scarlet-Craving:refinement:blk-mtsenpok-3njiz7:eff-mtsenpok-prx4yj",
-    pointer: "/wengines/65/refinementBuffs/0/effectBlocks/2/effects/0",
+      "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h5g2r-zj4y8t",
+    pointer: "/wengines/71/refinementBuffs/0/effectBlocks/0/effects/2",
   },
   remielMutationConvert: {
     holderId: "entity:remiel",
     optionId: "agents:remiel:mindscape:0:blk-legacy:eff-ms7t5hb1-fqvxkz",
-    pointer: "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/0",
+    pointer: "/agents/53/mindscapeBuffs/0/effectBlocks/0/effects/0",
   },
   remielLuminizeConvert: {
     holderId: "entity:remiel",
     optionId: "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz",
-    pointer: "/agents/51/mindscapeBuffs/0/effectBlocks/0/effects/1",
+    pointer: "/agents/53/mindscapeBuffs/0/effectBlocks/0/effects/1",
   },
   remielMutationTeam: {
     holderId: "entity:remiel",
     optionId:
       "agents:remiel:mindscape:0:blk-ms7tc2w4-mzvc69:eff-ms7tc2w3-mzcr6z",
-    pointer: "/agents/51/mindscapeBuffs/0/effectBlocks/1/effects/0",
+    pointer: "/agents/53/mindscapeBuffs/0/effectBlocks/1/effects/0",
   },
   remielAttackConvert: {
     holderId: "entity:remiel",
     optionId:
       "agents:remiel:mindscape:0:blk-ms7td2gs-rk1vtd:eff-ms7td2gs-4vbpdh",
-    pointer: "/agents/51/mindscapeBuffs/0/effectBlocks/2/effects/0",
+    pointer: "/agents/53/mindscapeBuffs/0/effectBlocks/2/effects/0",
   },
   remielMindscapeOne: {
     holderId: "entity:remiel",
     optionId: "agents:remiel:mindscape:1:blk-legacy:eff-ms7tin2y-0pja8e",
-    pointer: "/agents/51/mindscapeBuffs/1/effectBlocks/0/effects/0",
+    pointer: "/agents/53/mindscapeBuffs/1/effectBlocks/0/effects/0",
   },
   remielMindscapeFour: {
     holderId: "entity:remiel",
     optionId:
       "agents:remiel:mindscape:4:blk-ms7tnn2n-4zw15u:eff-ms7tnn2n-mz69ez",
-    pointer: "/agents/51/mindscapeBuffs/4/effectBlocks/0/effects/0",
+    pointer: "/agents/53/mindscapeBuffs/4/effectBlocks/0/effects/0",
   },
   odeMastery: {
     holderId: "entity:remiel",
     optionId:
       "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8fa1dg-tcuhq7",
-    pointer: "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/0",
+    pointer: "/wengines/79/refinementBuffs/0/effectBlocks/0/effects/0",
   },
   odeAnomalyBonus: {
     holderId: "entity:remiel",
     optionId:
       "w-engines:Ode_Of_Resurrected_Wings:refinement:blk-ms8fa1dg-ysnes9:eff-ms8faem4-ob6m8b",
-    pointer: "/wengines/72/refinementBuffs/0/effectBlocks/0/effects/1",
+    pointer: "/wengines/79/refinementBuffs/0/effectBlocks/0/effects/1",
   },
   featheredMastery: {
     holderId: "entity:remiel",

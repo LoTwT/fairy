@@ -43,7 +43,7 @@ export const ROXY_CORE_WIND_SUPPLEMENTS: readonly SupplementOption[] =
     exclusiveGroup: `roxy:${clause.stat}:core-state-model`,
     catalogEntityId: "nanoka:agents:1621",
     source:
-      "nanoka-integrated@3.2 agents/1621 /passive/level/1621501—1621507/desc/0",
+      "nanoka-integrated@3.3.12+19634983 agents/1621 /passive/level/1621501—1621507/desc/0",
     supportedRanks: "核心1—7；影画0—6；单有效状态0—1",
     computationTarget:
       "single-state wind hit critical damage with one effective source per consumed output",
