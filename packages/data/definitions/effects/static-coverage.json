@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "46",
+  "revision": "47",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -31332,8 +31332,8 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 899,
-    "options": 932,
+    "rules": 919,
+    "options": 968,
     "converted": 1126,
     "corrected": 143,
     "unsupported": 21,
@@ -31344,6 +31344,13 @@
       "entities": 4,
       "integrated": 71,
       "outOfScope": 33
+    },
+    "supplementalSource": {
+      "entities": 1,
+      "packs": 7,
+      "rawEffects": 26,
+      "rules": 20,
+      "options": 36
     }
   },
   "reverseGaps": [
@@ -31559,6 +31566,42 @@
       "scale": 0.01,
       "damageKinds": ["anomaly-settlement"]
     },
+    "anomalySettlementCritRate": {
+      "channel": "anomaly-settlement-critical-rate",
+      "unit": "ratio",
+      "scale": 0.01,
+      "damageKinds": ["anomaly-settlement"]
+    },
+    "anomalySettlementCritDmg": {
+      "channel": "anomaly-settlement-critical-damage",
+      "unit": "ratio",
+      "scale": 0.01,
+      "damageKinds": ["anomaly-settlement"]
+    },
+    "turbulenceCritRate": {
+      "channel": "turbulence-critical-rate",
+      "unit": "ratio",
+      "scale": 0.01,
+      "damageKinds": ["vortex"]
+    },
+    "turbulenceCritDmg": {
+      "channel": "turbulence-critical-damage",
+      "unit": "ratio",
+      "scale": 0.01,
+      "damageKinds": ["vortex"]
+    },
+    "radianceCritRate": {
+      "channel": "luminize-critical-rate",
+      "unit": "ratio",
+      "scale": 0.01,
+      "damageKinds": ["luminize"]
+    },
+    "radianceCritDmg": {
+      "channel": "luminize-critical-damage",
+      "unit": "ratio",
+      "scale": 0.01,
+      "damageKinds": ["luminize"]
+    },
     "directDmgMult": {
       "channel": "base-multiplier-addition",
       "unit": "multiplier",
@@ -31677,6 +31720,730 @@
       "unit": "ratio",
       "scale": 0.01,
       "damageKinds": ["sharpen"]
+    }
+  },
+  "supplementalSource": {
+    "source": {
+      "repository": "LoTwT/ZZZ-HP",
+      "commit": "2628b32cece086e371bafa05518a9a12650d9f74",
+      "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+      "sha256": "c9bc4cfdb0cf3117c56885e1afa4afd3ac9dc81aa0282119f0c64a27f19e5b01",
+      "extractPath": "scripts/static-effects/evidence/zzz-hp-325-entities.json",
+      "extractSha256": "5826e29d7527e8013299c8cc9cee8a4d2725d3a522719893b3c7b123f611edca"
+    },
+    "summary": {
+      "entities": 1,
+      "packs": 7,
+      "emptyPacks": 3,
+      "rawEffects": 26,
+      "rules": 20,
+      "options": 36,
+      "converted": 3,
+      "corrected": 0,
+      "unsupported": 23,
+      "supplements": {
+        "records": 7,
+        "rules": 0,
+        "options": 0,
+        "entities": 0,
+        "integrated": 0,
+        "outOfScope": 7
+      }
+    },
+    "entities": [
+      {
+        "catalogEntityId": "agents:pheony",
+        "upstreamId": "pheony",
+        "name": "菲欧妮",
+        "identity": {
+          "kind": "agent",
+          "entityId": "1641"
+        },
+        "status": "mapped",
+        "profession": "异常",
+        "element": "fire",
+        "supplementProvenance": {
+          "sourceId": "zzz-hp",
+          "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+          "resources": [
+            {
+              "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "sha256": "c9bc4cfdb0cf3117c56885e1afa4afd3ac9dc81aa0282119f0c64a27f19e5b01"
+            }
+          ]
+        }
+      }
+    ],
+    "packs": [
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "count": 18,
+        "status": "has-effect-record"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/1",
+        "catalogEntityId": "agents:pheony",
+        "rank": 1,
+        "rankKind": "mindscape",
+        "count": 4,
+        "status": "has-effect-record"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/2",
+        "catalogEntityId": "agents:pheony",
+        "rank": 2,
+        "rankKind": "mindscape",
+        "count": 2,
+        "status": "has-effect-record"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/3",
+        "catalogEntityId": "agents:pheony",
+        "rank": 3,
+        "rankKind": "mindscape",
+        "count": 0,
+        "status": "no-effect-record"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/4",
+        "catalogEntityId": "agents:pheony",
+        "rank": 4,
+        "rankKind": "mindscape",
+        "count": 0,
+        "status": "no-effect-record"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/5",
+        "catalogEntityId": "agents:pheony",
+        "rank": 5,
+        "rankKind": "mindscape",
+        "count": 0,
+        "status": "no-effect-record"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/6",
+        "catalogEntityId": "agents:pheony",
+        "rank": 6,
+        "rankKind": "mindscape",
+        "count": 2,
+        "status": "has-effect-record"
+      }
+    ],
+    "records": [
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/0",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "mastery",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-0",
+        "effectIds": [
+          "agent:1641:zzz-hp:eff-0:blk-mindscapeBuffs-0-1:mindscape:0"
+        ],
+        "status": "converted",
+        "normalizationChanges": ["skillTargets", "scope"],
+        "rawValue": 85,
+        "normalizedValue": 85
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/1",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "anomalyCritRate",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-1",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "scope"],
+        "rawValue": 30,
+        "normalizedValue": 30,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/0/effectBlocks/0/effects/1。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/9",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "anomalyReleaseCritDmg",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-10",
+        "effectIds": [],
+        "status": "unsupported",
+        "reason": "semantic-conflict",
+        "explanation": "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team anomalyReleaseCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
+        "normalizationChanges": ["skillTargets", "scope"],
+        "rawValue": 15,
+        "normalizedValue": 15
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/10",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "turbulenceCritDmg",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-11",
+        "effectIds": [],
+        "status": "unsupported",
+        "reason": "semantic-conflict",
+        "explanation": "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team turbulenceCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
+        "normalizationChanges": ["skillTargets", "stat", "scope"],
+        "rawValue": 15,
+        "normalizedValue": 15
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/11",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "radianceCritDmg",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-12",
+        "effectIds": [],
+        "status": "unsupported",
+        "reason": "semantic-conflict",
+        "explanation": "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team radianceCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
+        "normalizationChanges": ["skillTargets", "stat", "scope"],
+        "rawValue": 15,
+        "normalizedValue": 15
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/12",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "anomalyReleaseCritRate",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-13",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "scope"],
+        "rawValue": 30,
+        "normalizedValue": 30,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/0/effectBlocks/0/effects/12。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/13",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "turbulenceCritRate",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-14",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "stat", "scope"],
+        "rawValue": 30,
+        "normalizedValue": 30,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/0/effectBlocks/0/effects/13。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/14",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "radianceCritRate",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-15",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "stat", "scope"],
+        "rawValue": 30,
+        "normalizedValue": 30,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/0/effectBlocks/0/effects/14。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/15",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "anomalyReleaseCritRate",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-16",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "scope"],
+        "rawValue": 0,
+        "normalizedValue": 0,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/0/effectBlocks/0/effects/15。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/16",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "turbulenceCritRate",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-17",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "stat", "scope"],
+        "rawValue": 0,
+        "normalizedValue": 0,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/0/effectBlocks/0/effects/16。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/17",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "radianceCritRate",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-18",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "stat", "scope"],
+        "rawValue": 0,
+        "normalizedValue": 0,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/0/effectBlocks/0/effects/17。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/2",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "anomalyCritDmg",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-2",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "scope"],
+        "rawValue": 25,
+        "normalizedValue": 25,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/0/effectBlocks/0/effects/2。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/3",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "anomalyCritRate",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-3",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "scope"],
+        "rawValue": 0,
+        "normalizedValue": 0,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/0/effectBlocks/0/effects/3。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/4",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "anomalyCritDmg",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-4",
+        "effectIds": [],
+        "status": "unsupported",
+        "reason": "semantic-conflict",
+        "explanation": "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team anomalyCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
+        "normalizationChanges": ["skillTargets", "scope"],
+        "rawValue": 15,
+        "normalizedValue": 15
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/6",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "anomalyReleaseCritDmg",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-6",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "scope"],
+        "rawValue": 25,
+        "normalizedValue": 25,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/0/effectBlocks/0/effects/6。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/7",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "turbulenceCritDmg",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-7",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "stat", "scope"],
+        "rawValue": 25,
+        "normalizedValue": 25,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/0/effectBlocks/0/effects/7。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/8",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "radianceCritDmg",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-8",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "stat", "scope"],
+        "rawValue": 25,
+        "normalizedValue": 25,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/0/effectBlocks/0/effects/8。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/5",
+        "catalogEntityId": "agents:pheony",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "stat": "anomalyReleaseCritDmg",
+        "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-9",
+        "effectIds": [],
+        "status": "unsupported",
+        "reason": "semantic-conflict",
+        "explanation": "M4 的“该次[异放]效果触发暴击时，其暴击伤害额外提升40%”只属于 M4 触发的异放结算；固定记录是自身常驻 anomalyReleaseCritDmg +40。D4-1a 暂不把它当常驻异放暴伤执行，D4-1b 将按 anomaly-settlement-critical-damage 通道绑定到 M4 600% 结算选项。",
+        "normalizationChanges": ["skillTargets", "scope"],
+        "rawValue": 40,
+        "normalizedValue": 40
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/1/effectBlocks/0/effects/1",
+        "catalogEntityId": "agents:pheony",
+        "rank": 1,
+        "rankKind": "mindscape",
+        "stat": "anomalyReleaseCritDmg",
+        "optionId": "agents:pheony:mindscape:1:blk-mindscapeBuffs-1-1:eff-19",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "scope"],
+        "rawValue": 25,
+        "normalizedValue": 25,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:1:abrasion-mindscape-1-state（行为修正 pheony-abrasion-complete-state）：影画1四通道暴伤与核心属于同一[灼蚀]状态；M1 档累计包含核心12条，避免未选核心的半状态。目录拒绝跨影画 effectIds 的单选项，因此使用互斥累计档。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/1/effectBlocks/0/effects/1。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/1/effectBlocks/0/effects/2",
+        "catalogEntityId": "agents:pheony",
+        "rank": 1,
+        "rankKind": "mindscape",
+        "stat": "turbulenceCritDmg",
+        "optionId": "agents:pheony:mindscape:1:blk-mindscapeBuffs-1-1:eff-20",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "stat", "scope"],
+        "rawValue": 25,
+        "normalizedValue": 25,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:1:abrasion-mindscape-1-state（行为修正 pheony-abrasion-complete-state）：影画1四通道暴伤与核心属于同一[灼蚀]状态；M1 档累计包含核心12条，避免未选核心的半状态。目录拒绝跨影画 effectIds 的单选项，因此使用互斥累计档。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/1/effectBlocks/0/effects/2。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/1/effectBlocks/0/effects/3",
+        "catalogEntityId": "agents:pheony",
+        "rank": 1,
+        "rankKind": "mindscape",
+        "stat": "radianceCritDmg",
+        "optionId": "agents:pheony:mindscape:1:blk-mindscapeBuffs-1-1:eff-21",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "stat", "scope"],
+        "rawValue": 25,
+        "normalizedValue": 25,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:1:abrasion-mindscape-1-state（行为修正 pheony-abrasion-complete-state）：影画1四通道暴伤与核心属于同一[灼蚀]状态；M1 档累计包含核心12条，避免未选核心的半状态。目录拒绝跨影画 effectIds 的单选项，因此使用互斥累计档。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/1/effectBlocks/0/effects/3。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/1/effectBlocks/0/effects/0",
+        "catalogEntityId": "agents:pheony",
+        "rank": 1,
+        "rankKind": "mindscape",
+        "stat": "anomalyCritDmg",
+        "optionId": "agents:pheony:mindscape:1:blk-mindscapeBuffs-1-1:eff-5",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "scope"],
+        "rawValue": 25,
+        "normalizedValue": 25,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:1:abrasion-mindscape-1-state（行为修正 pheony-abrasion-complete-state）：影画1四通道暴伤与核心属于同一[灼蚀]状态；M1 档累计包含核心12条，避免未选核心的半状态。目录拒绝跨影画 effectIds 的单选项，因此使用互斥累计档。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/1/effectBlocks/0/effects/0。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/2/effectBlocks/0/effects/0",
+        "catalogEntityId": "agents:pheony",
+        "rank": 2,
+        "rankKind": "mindscape",
+        "stat": "dmgBonus",
+        "optionId": "agents:pheony:mindscape:2:blk-mindscapeBuffs-2-1:eff-6",
+        "effectIds": [],
+        "status": "unsupported",
+        "normalizationChanges": ["skillTargets", "scope"],
+        "rawValue": 30,
+        "normalizedValue": 30,
+        "reason": "semantic-conflict",
+        "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:2:abrasion-mindscape-2-state（行为修正 pheony-abrasion-complete-state）：影画2自身增伤与核心/M1属于同一[灼蚀]状态；M2 档累计包含核心与M1记录，避免半状态。目录拒绝跨影画 effectIds 的单选项，因此使用互斥累计档。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/0/mindscapeBuffs/2/effectBlocks/0/effects/0。"
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/2/effectBlocks/0/effects/1",
+        "catalogEntityId": "agents:pheony",
+        "rank": 2,
+        "rankKind": "mindscape",
+        "stat": "anomalyDuration",
+        "optionId": "agents:pheony:mindscape:2:blk-mindscapeBuffs-2-1:eff-mvdz21so-s2au9j",
+        "effectIds": [],
+        "status": "unsupported",
+        "reason": "semantic-conflict",
+        "explanation": "M2 的“[灼烧]持续时间提升2秒”被固定来源挂在 turbulence 的 anomalyDuration 上；正文明确是火属性灼烧持续时间，不是乱流。D4 不采信该编码，也不改写成其他持续通道。",
+        "normalizationChanges": ["conditions", "scope"],
+        "rawValue": 2,
+        "normalizedValue": 2
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/6/effectBlocks/0/effects/0",
+        "catalogEntityId": "agents:pheony",
+        "rank": 6,
+        "rankKind": "mindscape",
+        "stat": "resPen",
+        "optionId": "agents:pheony:mindscape:6:blk-mindscapeBuffs-6-1:eff-7",
+        "effectIds": [
+          "agent:1641:zzz-hp:eff-7:blk-mindscapeBuffs-6-1:mindscape:6"
+        ],
+        "status": "converted",
+        "normalizationChanges": ["skillTargets", "scope"],
+        "rawValue": 15,
+        "normalizedValue": 15
+      },
+      {
+        "pointer": "/agents/0/mindscapeBuffs/6/effectBlocks/0/effects/1",
+        "catalogEntityId": "agents:pheony",
+        "rank": 6,
+        "rankKind": "mindscape",
+        "stat": "reduceDefense",
+        "optionId": "agents:pheony:mindscape:6:blk-mindscapeBuffs-6-1:eff-8",
+        "effectIds": [
+          "agent:1641:zzz-hp:eff-8:blk-mindscapeBuffs-6-1:mindscape:6"
+        ],
+        "status": "converted",
+        "normalizationChanges": ["skillTargets", "conditions", "scope"],
+        "rawValue": 40,
+        "normalizedValue": 40
+      }
+    ],
+    "skills": [
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641005-异放倍率",
+        "name": "普通攻击：焚罪",
+        "damageType": "anomalyRelease",
+        "skillTypes": [],
+        "element": "火",
+        "baseMult": 445
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641019-异放倍率",
+        "name": "烬火追魂",
+        "damageType": "anomalyRelease",
+        "skillTypes": [],
+        "element": "火",
+        "baseMult": 597
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641010-main",
+        "name": "冲刺攻击：倾身",
+        "damageType": "direct",
+        "skillTypes": ["dodge", "dash"],
+        "element": "火",
+        "baseMult": 208.5
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641009-main",
+        "name": "强化特殊技：坠阳",
+        "damageType": "direct",
+        "skillTypes": ["special", "specialEnhanced"],
+        "element": "火",
+        "baseMult": 1246.7
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641023-main",
+        "name": "强化特殊技：燎斩",
+        "damageType": "direct",
+        "skillTypes": ["special", "specialEnhanced"],
+        "element": "火",
+        "baseMult": 761.1
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641008-main",
+        "name": "强化特殊技：眩焰",
+        "damageType": "direct",
+        "skillTypes": ["special", "specialEnhanced"],
+        "element": "火",
+        "baseMult": 915.2
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641014-main",
+        "name": "快速支援：急救",
+        "damageType": "direct",
+        "skillTypes": ["assist"],
+        "element": "火",
+        "baseMult": 191.1
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641018-main",
+        "name": "支援突击：再生疗法",
+        "damageType": "direct",
+        "skillTypes": ["assist"],
+        "element": "火",
+        "baseMult": 853.3
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641005-main",
+        "name": "普通攻击：焚罪",
+        "damageType": "direct",
+        "skillTypes": ["basic"],
+        "element": "火",
+        "baseMult": 1095.1
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641006-main",
+        "name": "普通攻击：熔毁",
+        "damageType": "direct",
+        "skillTypes": ["basic"],
+        "element": "火",
+        "baseMult": 356.3
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641001-一段",
+        "name": "普通攻击：裁生·一段",
+        "damageType": "direct",
+        "skillTypes": ["basic"],
+        "element": "火",
+        "baseMult": 32.1
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641003-三段",
+        "name": "普通攻击：裁生·三段",
+        "damageType": "direct",
+        "skillTypes": ["basic"],
+        "element": "火",
+        "baseMult": 356.3
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641002-二段",
+        "name": "普通攻击：裁生·二段",
+        "damageType": "direct",
+        "skillTypes": ["basic"],
+        "element": "火",
+        "baseMult": 135.9
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641004-四段",
+        "name": "普通攻击：裁生·四段",
+        "damageType": "direct",
+        "skillTypes": ["basic"],
+        "element": "火",
+        "baseMult": 778.6
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641019-main",
+        "name": "烬火追魂",
+        "damageType": "direct",
+        "skillTypes": ["chain"],
+        "element": "火",
+        "baseMult": 191.2
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641007-main",
+        "name": "特殊技：掠火",
+        "damageType": "direct",
+        "skillTypes": ["special", "specialBasic"],
+        "element": "火",
+        "baseMult": 91.8
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641013-main",
+        "name": "终结技：万死重明",
+        "damageType": "direct",
+        "skillTypes": ["ultimate"],
+        "element": "火",
+        "baseMult": 3627.8
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641012-main",
+        "name": "连携技：绝处逢生",
+        "damageType": "direct",
+        "skillTypes": ["chain"],
+        "element": "火",
+        "baseMult": 1766
+      },
+      {
+        "agentId": "pheony",
+        "skillId": "sk-pheony-nk-1641011-main",
+        "name": "闪避反击：业火两渡",
+        "damageType": "direct",
+        "skillTypes": ["dodge", "dodgeCounter"],
+        "element": "火",
+        "baseMult": 593.2
+      }
+    ],
+    "basePanels": [
+      {
+        "catalogEntityId": "agents:pheony",
+        "identity": "agent/1641",
+        "values": {
+          "hp": 7673,
+          "atk": 872,
+          "def": 612,
+          "critRate": 5,
+          "critDmg": 50,
+          "sharpenCritDmgBonus": 0,
+          "mastery": 118,
+          "anomalyControl": 152,
+          "energyRegen": 0,
+          "penRate": 0,
+          "dmgBonus": 0,
+          "pen": 0,
+          "anomalyCritRate": 0,
+          "anomalyCritDmg": 0,
+          "anomalyDmgBonus": 0,
+          "turbulenceCritRate": 0,
+          "turbulenceCritDmg": 0,
+          "radianceCritRate": 0,
+          "radianceCritDmg": 0,
+          "disorderCritRate": 0,
+          "disorderCritDmg": 0,
+          "directDmgMult": 100,
+          "anomalyMult": 50,
+          "disorderBaseMult": 450,
+          "anomalyDuration": 10,
+          "disorderCompMult": 50,
+          "turbulenceBaseMult": 900,
+          "turbulenceCompMult": 50,
+          "disorderDmgBonus": 0,
+          "turbulenceDmgBonus": 0,
+          "radianceMult": 0,
+          "radianceDmgBonus": 0,
+          "radianceResPen": 0,
+          "specialMult": 100,
+          "mutationCoeff": 0
+        }
+      }
+    ],
+    "gaps": [],
+    "consumptionBoundary": {
+      "status": "catalog-only-until-d5",
+      "explanation": "D4 supplemental entities are in the static catalog but are not part of the Nanoka integrated dataset; consumers must gate end-to-end entity selection until the D5 rebaseline and must not treat supplementProvenance as integrated provenance."
     }
   }
 }

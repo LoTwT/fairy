@@ -59,6 +59,7 @@ import {
   SOURCE_RECORD_SHAPE_FIELDS,
   type ClauseContextGuardEntry,
   type Supplement,
+  type SupplementEvidenceReference,
   type SupplementRuleSpec,
   type SupplementVariantSpec,
   type SourceRecordShape,
@@ -376,6 +377,23 @@ export const FIELD_MAPPINGS: Readonly<Record<string, FieldMapping>> = {
   anomalyReleaseCritDmg: factor("anomaly-critical-damage", "ratio", [
     "anomaly-settlement",
   ]),
+  // 3.2.5 补充来源的独立异常子类通道：异放走 anomaly-settlement 专用通道，
+  // 乱流/耀变分别走 turbulence/luminize 通道；固定源 fac62407 不含这些
+  // stat，映射只服务 D4 的补充实体层（D5 rebaseline 后由正式映射接管）。
+  anomalySettlementCritRate: factor(
+    "anomaly-settlement-critical-rate",
+    "ratio",
+    ["anomaly-settlement"],
+  ),
+  anomalySettlementCritDmg: factor(
+    "anomaly-settlement-critical-damage",
+    "ratio",
+    ["anomaly-settlement"],
+  ),
+  turbulenceCritRate: factor("turbulence-critical-rate", "ratio", ["vortex"]),
+  turbulenceCritDmg: factor("turbulence-critical-damage", "ratio", ["vortex"]),
+  radianceCritRate: factor("luminize-critical-rate", "ratio", ["luminize"]),
+  radianceCritDmg: factor("luminize-critical-damage", "ratio", ["luminize"]),
   directDmgMult: factor("base-multiplier-addition", "multiplier", direct),
   directDmgMultFactor: factor("base-multiplier-increase", "ratio", direct),
   settlementDmgMult: factor(
@@ -458,6 +476,16 @@ const nanokaReference = (path: string, pointer: string): SourceReference => ({
   locale: path.endsWith("/details.en.json") ? "en" : "zh",
   resourcePath: path,
   pointer: pointer as `/${string}`,
+})
+/** 补充证据可显式声明来源版本与语言；省略时保持既有 Nanoka 3.2 口径。 */
+const supplementReference = (
+  ref: SupplementEvidenceReference,
+): SourceReference => ({
+  sourceId: ref.sourceId ?? "nanoka-integrated",
+  version: ref.version ?? "3.2",
+  locale: ref.locale ?? (ref.path.endsWith("/details.en.json") ? "en" : "zh"),
+  resourcePath: ref.path,
+  pointer: ref.pointer as `/${string}`,
 })
 /**
  * 莱特影画 2 的 120% 强化证据（完整状态的比例修改需要独立引用）；
@@ -990,6 +1018,20 @@ function verifySingleClauseContextGuard(
  * 比较）。任一字段漂移（含上游补出登记中缺省的字段）即拒绝并指明字段与
  * 两边的值；不做空白宽松归一，也不用通用深比较。
  */
+// 3.2.5 省略 scope：与显式 general 等价；带 skillTargets 时按 effective
+// skill 作用域核对。冻结形状省略 scope 时也按同一有效语义解释，避免把
+// 上游合法的省略误判为字段漂移。
+function effectiveSourceScope(document: {
+  readonly scope?: string | readonly string[]
+  readonly skillTargets?: readonly unknown[]
+}): string | readonly string[] | undefined {
+  return document.scope !== undefined
+    ? document.scope
+    : (document.skillTargets?.length ?? 0) > 0
+      ? "skill"
+      : "general"
+}
+
 function verifySourceRecordShape(
   actual: SourceEffect,
   frozen: SourceRecordShape,
@@ -1016,26 +1058,14 @@ function verifySourceRecordShape(
     )
   const normalizeValue = (value: unknown): string =>
     value === undefined ? "<absent>" : JSON.stringify(value)
-  // 3.2.5 省略 scope：与显式 general 等价；带 skillTargets 时按 effective
-  // skill 作用域核对。冻结形状省略 scope 时也按同一有效语义解释，避免把
-  // 上游合法的省略误判为字段漂移。
-  const effectiveScope = (document: {
-    readonly scope?: string | readonly string[]
-    readonly skillTargets?: readonly unknown[]
-  }): string | readonly string[] | undefined =>
-    document.scope !== undefined
-      ? document.scope
-      : (document.skillTargets?.length ?? 0) > 0
-        ? "skill"
-        : "general"
   for (const field of SOURCE_RECORD_SHAPE_FIELDS) {
     const actualValue =
       field === "scope"
-        ? normalizeValue(effectiveScope(actual))
+        ? normalizeValue(effectiveSourceScope(actual))
         : normalizeValue(actual[field as keyof SourceEffect])
     const frozenValue =
       field === "scope"
-        ? normalizeValue(effectiveScope(frozen))
+        ? normalizeValue(effectiveSourceScope(frozen))
         : normalizeValue(frozen[field as keyof SourceRecordShape])
     if (actualValue !== frozenValue)
       throw new Error(
@@ -1646,6 +1676,7 @@ function whenFor(
   e: SourceEffect,
   mapping: FieldMapping,
   record?: SourceRecord,
+  supplemental = false,
 ): Condition<"contribution"> {
   const conditions: Condition<"contribution">[] = []
   if (mapping.damageKinds)
@@ -1670,7 +1701,11 @@ function whenFor(
       ? ["general"]
       : [e.scope]
   if (scopeValues.length === 0) throw new Error(`Empty scope at ${sourceAt}`)
-  const givenDamageTypes = e.conditions?.damageTypes
+  // 3.2.5 的条件可能被 fac62407 加载规范化丢弃；raw 是来源真值，
+  // normalized 缺失时回退到 raw，避免把限定伤害种类放宽为全部。
+  const givenDamageTypes = (
+    e.conditions ?? (supplemental ? record?.raw.conditions : undefined)
+  )?.damageTypes
   if (givenDamageTypes !== undefined && !Array.isArray(givenDamageTypes))
     throw new Error(`Invalid conditions.damageTypes at ${sourceAt}`)
   const conditionDamageKinds = new Set<DamageKind>()
@@ -2187,6 +2222,7 @@ function compile(
   effectId: EffectId,
   declaredSkillTargets: StaticEffectCatalog["skillTargets"][number][],
   migratedSourceRecords: ReadonlyMap<string, FixedSourceSupplementMigration>,
+  supplemental = false,
 ): { rule?: ContributionRule; variant: StaticCatalogVariant } {
   const e = record.normalized ?? record.raw
   const semantics = SOURCE_SEMANTICS[semanticsKeyFor(record)]
@@ -2242,12 +2278,27 @@ function compile(
         `Developer revision value mismatch at ${record.pointer}: ${record.raw.value} ≠ ${semantics.revisedValue}`,
       )
   }
+  // 3.2.5 引入的 turbulence/radiance 暴击通道在 fac62407 的加载规范化中
+  // 仍按未知 stat 降级为 dmgBonus；D4 补充层按未改写的 raw stat 编译，
+  // 只对这四个登记通道生效，不改变固定源其他记录的归一语义。
+  const supplementalSubtypeStats = new Set([
+    "turbulenceCritRate",
+    "turbulenceCritDmg",
+    "radianceCritRate",
+    "radianceCritDmg",
+  ])
   const effectiveStat =
     semantics?.kind === "developer-revised-stat"
       ? semantics.revisedStat
       : semantics?.kind === "source-stat-correction"
         ? semantics.correctedStat
-        : e.stat
+        : semantics?.kind === "settlement-critical-channel"
+          ? semantics.correctedStat
+          : supplemental &&
+              supplementalSubtypeStats.has(record.raw.stat) &&
+              e.stat !== record.raw.stat
+            ? record.raw.stat
+            : e.stat
   // C05 固定回能：登记过的 energyRegen 记录按固定点数/秒编译；编码或数值
   // 与登记不符即拒绝生成，不静默套用到其他 energyRegen 记录。
   if (semantics?.kind === "flat-energy-regen") {
@@ -2310,6 +2361,8 @@ function compile(
   // 其语义（显式状态选择、特殊技等级表达式）改由 SOURCE_SEMANTICS 登记。
   const coreDependent =
     record.category === "agents" &&
+    semantics?.kind !== "supplemental-flat-source" &&
+    semantics?.kind !== "settlement-critical-channel" &&
     (enhancesCissiaCore ||
       (record.rank === 0 && record.blockName.includes("核心被动")))
   const requirements: StaticCatalogVariant["inputs"][number][] = []
@@ -2397,6 +2450,45 @@ function compile(
       explanation,
     },
   })
+  if (semantics?.kind === "settlement-critical-channel") {
+    if (
+      record.raw.stat !== semantics.expectedRawStat ||
+      record.raw.value !== semantics.expectedValue
+    )
+      throw new Error(
+        `Settlement critical channel registration expects ${semantics.expectedRawStat}=${String(semantics.expectedValue)} at ${record.pointer}`,
+      )
+  }
+  if (semantics?.kind === "declared-unsupported") {
+    if (
+      semantics.expectedEncoding !== undefined ||
+      semantics.expectedSourceBlockNote !== undefined
+    ) {
+      // 只核对 raw：fac62407 的加载规范化会把 3.2.5 的 turbulence/radiance
+      // 暴击通道降级为 dmgBonus、并丢弃未识别的 conditions；该条款不执行，
+      // 以原始记录为准，normalized 漂移不改变“缺口”结论。
+      if (
+        semantics.expectedSourceBlockNote !== undefined &&
+        record.blockNote !== semantics.expectedSourceBlockNote
+      )
+        throw new Error(
+          `Declared unsupported clause block note drift at ${record.pointer}`,
+        )
+      if (semantics.expectedEncoding !== undefined)
+        for (const [field, expected] of Object.entries(
+          semantics.expectedEncoding,
+        )) {
+          const actual = (record.raw as unknown as Record<string, unknown>)[
+            field
+          ]
+          if (JSON.stringify(actual) !== JSON.stringify(expected))
+            throw new Error(
+              `Declared unsupported clause raw field drift at ${record.pointer}: ${field}=${JSON.stringify(actual)}`,
+            )
+        }
+    }
+    return unsupported(semantics.reason, semantics.explanation)
+  }
   if (!identity)
     return unsupported("missing-identity", "当前 Fairy 没有已核实的来源实体 ID")
   if (semantics?.kind === "isolated-polarity-disorder")
@@ -3011,7 +3103,7 @@ function compile(
             semantics.minimumPotential !== undefined
           ? semantics.minimumPotential
           : undefined
-  let when = whenFor(e, mapping, record)
+  let when = whenFor(e, mapping, record, supplemental)
   if (semantics?.kind === "attribute-anomaly-beneficiary-scope") {
     // 来源记录未编码块 note 与 Nanoka 同文已明确的受益职业与伤害类别：
     // general 会放行全部伤害种类，且只有 applyProfession 非空才检查职业。
@@ -3678,7 +3770,12 @@ function compile(
     Array.isArray(e.elementFilter) &&
     e.elementFilter.includes("流明")
   ) {
-    when = whenFor({ ...e, elementFilter: "all" }, mapping, record)
+    when = whenFor(
+      { ...e, elementFilter: "all" },
+      mapping,
+      record,
+      supplemental,
+    )
     when = {
       kind: "all",
       conditions: [when, oneOf("hit.element", ["lumiflux"])],
@@ -3748,6 +3845,12 @@ function applyCompleteStateOptions(
   coverage: CoverageRecord[],
 ): StaticCatalogOption[] {
   const added: StaticCatalogOption[] = []
+  // 累计完整状态档位可共享核心记录：首次登记时把来源选项迁移为不可选，
+  // 后续档位复用已迁移规则的 effectIds/references，不重复改写同一选项。
+  const migratedRecordVariants = new Map<
+    string,
+    { effectIds: readonly EffectId[]; references: readonly SourceReference[] }
+  >()
   for (const registration of registrations) {
     const identity = (
       record: SourceRecord,
@@ -3793,17 +3896,61 @@ function applyCompleteStateOptions(
               `Complete state option ${registration.optionId} lost the ${label} record at ${record.pointer}`,
             )
           const actual = document[field as keyof SourceEffect]
-          if (JSON.stringify(actual) !== JSON.stringify(value))
+          // 3.2.5 记录可省略 scope（省略等价 general）；raw 省略与
+          // normalized 补出的 general 是同一有效作用域，不算漂移。
+          // 3.2.5 的 turbulence/radiance 暴击通道在 fac62407 归一化中
+          // 被降级为 dmgBonus；按 raw stat 登记时允许这一对已知改写。
+          const supplementalSubtypeStat =
+            field === "stat" &&
+            [
+              "turbulenceCritRate",
+              "turbulenceCritDmg",
+              "radianceCritRate",
+              "radianceCritDmg",
+            ].includes(String(value)) &&
+            actual === "dmgBonus"
+          const actualKey =
+            field === "scope"
+              ? JSON.stringify(actual ?? "general")
+              : supplementalSubtypeStat
+                ? JSON.stringify(value)
+                : JSON.stringify(actual)
+          const expectedKey =
+            field === "scope"
+              ? JSON.stringify(value ?? "general")
+              : JSON.stringify(value)
+          if (actualKey !== expectedKey)
             throw new Error(
               `Complete state option ${registration.optionId} ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(actual)}`,
             )
         }
-      const optionId = `${registration.catalogEntityId}:${entry.rankKind}:${entry.rank}:${idPart(entry.blockId)}:${idPart(entry.effectId)}`
+      const recordKey = `${registration.catalogEntityId}:${entry.rankKind}:${entry.rank}:${entry.blockId}:${entry.effectId}`
+      const alreadyMigrated = migratedRecordVariants.get(recordKey)
+      if (alreadyMigrated) {
+        effectIds.push(...alreadyMigrated.effectIds)
+        references.push(...alreadyMigrated.references)
+        continue
+      }
+      // 精炼级选项的公开身份不带档位（...:refinement:block:effect），
+      // 五档共用同一 optionId 的不同 variants；影画级仍带 rank 段。
+      const optionId =
+        entry.rankKind === "refinement"
+          ? `${registration.catalogEntityId}:refinement:${idPart(entry.blockId)}:${idPart(entry.effectId)}`
+          : `${registration.catalogEntityId}:${entry.rankKind}:${entry.rank}:${idPart(entry.blockId)}:${idPart(entry.effectId)}`
       const option = options.find(
         (candidate) => candidate.optionId === optionId,
       )
       const variant =
-        option?.variants.length === 1 ? option.variants[0] : undefined
+        entry.rankKind === "refinement"
+          ? option?.variants.find(
+              (candidate) =>
+                candidate.effectIds.length === 1 &&
+                JSON.stringify(candidate.configuration.refinements) ===
+                  JSON.stringify([entry.rank]),
+            )
+          : option?.variants.length === 1
+            ? option.variants[0]
+            : undefined
       if (
         !option ||
         !variant ||
@@ -3815,6 +3962,10 @@ function applyCompleteStateOptions(
         )
       effectIds.push(...variant.effectIds)
       references.push(...variant.references)
+      migratedRecordVariants.set(recordKey, {
+        effectIds: variant.effectIds,
+        references: variant.references,
+      })
       migrated.push({ record, option, variant })
     }
     if (new Set(effectIds).size !== effectIds.length)
@@ -3827,9 +3978,14 @@ function applyCompleteStateOptions(
       name: registration.name,
       conditionDescription: registration.conditionDescription,
       target: registration.target,
+      ...(registration.exclusiveGroup
+        ? { exclusiveGroup: registration.exclusiveGroup }
+        : {}),
       variants: [
         {
-          configuration: { minimumMindscape: registration.minimumMindscape },
+          configuration: registration.configuration ?? {
+            minimumMindscape: registration.minimumMindscape ?? 0,
+          },
           status: "corrected",
           references: references as unknown as NonEmpty<SourceReference>,
           effectIds,
@@ -4312,6 +4468,8 @@ export function convertSource(
   functions: SourceNormalization,
   files: StaticEffectCatalog["source"]["files"],
   supplements: readonly Supplement[] = SUPPLEMENTS,
+  completeStateOptions: readonly CompleteStateOptionRegistration[] = COMPLETE_STATE_OPTIONS,
+  conversionOptions: { readonly supplemental?: boolean } = {},
 ) {
   const collected = collectSource(data, functions),
     effects: EffectRule[] = [],
@@ -4470,6 +4628,7 @@ export function convertSource(
         effectId,
         declaredSkillTargets,
         migratedSourceRecords,
+        conversionOptions.supplemental === true,
       )
       if (compiled.rule) effects.push(compiled.rule)
       variants.push({
@@ -4657,7 +4816,7 @@ export function convertSource(
     options.push(...elationCompleteStateOptions)
   options.push(
     ...applyCompleteStateOptions(
-      COMPLETE_STATE_OPTIONS,
+      completeStateOptions,
       collected.records,
       options,
       coverage,
@@ -4904,8 +5063,8 @@ export function convertSource(
             status: "unsupported",
             reason: supplement.reason,
             explanation: supplement.explanation,
-            references: supplement.evidence.map((ref) =>
-              nanokaReference(ref.path, ref.pointer),
+            references: supplement.evidence.map(
+              supplementReference,
             ) as unknown as NonEmpty<SourceReference>,
             effectIds: [],
             maximumLayers: 1,
@@ -4934,8 +5093,8 @@ export function convertSource(
         source: {
           identity: spec.identity,
           section: spec.section,
-          references: supplement.evidence.map((ref) =>
-            nanokaReference(ref.path, ref.pointer),
+          references: supplement.evidence.map(
+            supplementReference,
           ) as unknown as NonEmpty<SourceReference>,
         },
         config: spec.config,
@@ -5099,8 +5258,8 @@ export function convertSource(
         : { target: supplement.variant.target }),
       configuration: supplement.variant.configuration,
       status: "converted",
-      references: supplement.evidence.map((ref) =>
-        nanokaReference(ref.path, ref.pointer),
+      references: supplement.evidence.map(
+        supplementReference,
       ) as unknown as NonEmpty<SourceReference>,
       effectIds: supplementRules.map((rule) => rule.effectId),
       // 桥接选项的逻辑层数上限；普通补充保持变体层数 = 规则实例层数。
@@ -5881,6 +6040,18 @@ export function convertSource(
             )
             .flatMap((variant) => variant.references),
         ),
+      },
+      {
+        differenceId: "pheony-abrasion-complete-state",
+        explanation:
+          "菲欧妮（1641）的[灼蚀]是同一个敌人状态：任意角色造成属性异常伤害时进入20秒、重复刷新；状态下敌人受到属性异常伤害获得异常/异放/乱流/耀变暴击率30%、暴击伤害25%，以及初始异常掌控超过155点后每点0.7%的暴击率（255点封顶+70%）；影画1再使四类暴击伤害+25%，影画2使菲欧妮对[灼蚀]敌人的伤害+30%。固定 3.2.5 记录把同一状态拆成多条可独立开关的记录；目录拒绝把 M1/M2 的 effectId 放进 M0 单选项，因此 Fairy 提供 M0/M1/M2 三个互斥累计档（12/16/17 条记录），每档自带核心记录，记录级影画门槛仍按 M0/M1/M2 生效，旧单项保留为 semantic-conflict 迁移入口。首击是否享受暴击没有来源明文：本选项由调用方声明敌人当前处于[灼蚀]，选中即把该次异常伤害视为处于灼蚀；不声称来源证明首击结算时点或暴击资格。",
+        references: [],
+      },
+      {
+        differenceId: "pheony-abrasion-first-hit-critical-assumption",
+        explanation:
+          "来源只写“队伍中任意角色对敌人造成属性异常伤害时，会使其陷入[灼蚀]”，没有明文说明施加[灼蚀]的那一次属性异常伤害是否已经享受暴击。Fairy 把[灼蚀]完整状态作为调用方声明的当前敌人状态：调用方选中该选项即声明本次结算的敌人已处于[灼蚀]；不自动推断首次施加的同次伤害是否暴击，也不把该假设写成游戏实测结论。",
+        references: [],
       },
       {
         differenceId: "miyabi-frost-settlement-element-scope",
