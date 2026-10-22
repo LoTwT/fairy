@@ -163,7 +163,7 @@ D5-1 已把 Nanoka integrated 升级到 `3.3.12+19634983`；D5-2 已把 ZZZ-HP �
 
 ## 对比与验收记录
 
-D5-2 切换固定源后，core 的[独立参考夹具](../../../packages/core/test/effects/fixtures/zzz-hp-static-catalog.json)保留 1,232 条可追溯位置，其中 1,127 条 converted 位置按原固定上游函数逐条比对；各项仍具名的修正或迁移位置不套用旧数值，由[目录验收](../../../packages/core/test/effects/static-catalog-data.test.ts)中对应的具名差异用例分别验证。456 个新增或改写的 converted 位置尚未重建独立参考，暂由 data 侧逐条转换回归、补充来源用例与 e2e 参考覆盖，D6 统一重建 oracle。D4 覆盖层移除后，菲欧妮/赛维里安/禁罪囚笼的旧覆盖层用例以 `describe.skip` 保留，待 D6 固定源动作与缺口数据重建后恢复。当前 converted/corrected/unsupported 的实际计数、各批次的排除位置清单与权威去向以[静态增益数据接入的实际覆盖与使用限制](../data/zzz-hp-static-effects.md#实际覆盖与使用限制)和[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)为单一事实来源，不在本页重复维护。期望值来自固定上游的规范化、上下文筛选与数值求值函数，未运行上游整应用。下述小型代表夹具继续验证转换阈值和培养边界。
+D6-2 已把 core 的[独立参考夹具](../../../packages/core/test/effects/fixtures/zzz-hp-static-catalog.json)补齐到 1,688 条 case，覆盖全部 1,167 个 converted 来源位置；D6-2 新增位置按固定源 `fixed`/`stacked` 原值、目录通道单位与条件上下文独立生成，既有位置继续按固定上游函数逐条比对。各项仍具名的修正或迁移位置不套用旧数值，由[目录验收](../../../packages/core/test/effects/static-catalog-data.test.ts)中对应的具名差异用例分别验证。D4 覆盖层移除后，菲欧妮/赛维里安/禁罪囚笼的旧覆盖层用例以 `describe.skip` 保留，待 overlay 选项契约重建后恢复。当前 converted/corrected/unsupported 的实际计数、各批次的排除位置清单与权威去向以[静态增益数据接入的实际覆盖与使用限制](../data/zzz-hp-static-effects.md#实际覆盖与使用限制)和[正式覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)为单一事实来源，不在本页重复维护。期望值来自固定上游的规范化、上下文筛选与数值求值函数，未运行上游整应用。下述小型代表夹具继续验证转换阈值和培养边界。
 
 固定版本对比夹具位于 [zzz-hp-static.json](../../../packages/core/test/effects/fixtures/zzz-hp-static.json)，记录原始效果、JSON Pointer、输入和上游输出。上游输出通过 TypeScript AST 提取未修改的 `resolveConvertValue` / `resolveEffectBaseValue`，连同原始 `roundCalc`、技能键判断依赖离线执行得到；夹具记录求值文件的 SHA-256。
 
