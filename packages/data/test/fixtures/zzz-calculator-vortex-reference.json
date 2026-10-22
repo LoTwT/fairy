@@ -65,7 +65,7 @@
       "packageVersion": "0.4.0",
       "contractVersion": 2,
       "gameVersion": "3.2",
-      "snapshotId": "sha256:511cfb19b1e9c9ba87bb9a6537038dd6130649a4d8c0595a8cce5d6bcf1b181c"
+      "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
     }
   },
   "inputLayer": "externally-declared-resolved-source-state",
@@ -107414,7 +107414,7 @@
           "packages/data/definitions/effects/static-catalog.json": "b0f7831d1e02118f6445b5e9e091e309733464c467ff63a7f0df22f0f95323df"
         }
       },
-      "currentSnapshotId": "sha256:511cfb19b1e9c9ba87bb9a6537038dd6130649a4d8c0595a8cce5d6bcf1b181c"
+      "currentSnapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
     }
   ]
 }
