@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "47",
+  "revision": "48",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -31332,8 +31332,8 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 919,
-    "options": 968,
+    "rules": 931,
+    "options": 974,
     "converted": 1126,
     "corrected": 143,
     "unsupported": 21,
@@ -31349,8 +31349,8 @@
       "entities": 1,
       "packs": 7,
       "rawEffects": 26,
-      "rules": 20,
-      "options": 36
+      "rules": 32,
+      "options": 42
     }
   },
   "reverseGaps": [
@@ -31736,17 +31736,17 @@
       "packs": 7,
       "emptyPacks": 3,
       "rawEffects": 26,
-      "rules": 20,
-      "options": 36,
+      "rules": 32,
+      "options": 42,
       "converted": 3,
       "corrected": 0,
       "unsupported": 23,
       "supplements": {
-        "records": 7,
-        "rules": 0,
-        "options": 0,
+        "records": 13,
+        "rules": 12,
+        "options": 6,
         "entities": 0,
-        "integrated": 0,
+        "integrated": 6,
         "outOfScope": 7
       }
     },

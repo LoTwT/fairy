@@ -1,0 +1,40 @@
+{
+  "source": {
+    "repository": "Nanoka",
+    "version": "3.3.12+19634983",
+    "resources": [
+      {
+        "path": "zh/character/1641.json",
+        "sha256": "85d8bc3a889ce8d24646f12d698af4be877c4240b23a80fe87e6dbce6a2502ba"
+      },
+      {
+        "path": "en/character/1641.json",
+        "sha256": "fc4d429ec79c08827624a8cf5371802d48068e94ffc40986ac5f99269f46e5b8"
+      }
+    ]
+  },
+  "zh": {
+    "character": {
+      "1641": {
+        "talent": {
+          "4": {
+            "name": "生命尽头与冷酷仙境",
+            "desc": "<color=#FFFFFF>[烬火追魂]</color>以及<color=#FFFFFF>[普通攻击：焚罪]</color>终结一击命中处于异常状态的敌人时，\n额外触发一次<color=#FFFFFF>[异放]</color>效果，固定结算600%倍率的对应属性的属性异常伤害。"
+          }
+        }
+      }
+    }
+  },
+  "en": {
+    "character": {
+      "1641": {
+        "talent": {
+          "4": {
+            "name": "Life's End and the Heartless Wonderland",
+            "desc": "When the Finishing Move of <color=#FFFFFF>Soul-Searching Blaze</color> or <color=#FFFFFF>Basic Attack: Purifying Flame</color> hits an enemy affected by an Anomaly, it triggers 1 additional instance of <color=#FFFFFF>Abloom</color>, resolving the corresponding Attribute Anomaly at a fixed 600% multiplier."
+          }
+        }
+      }
+    }
+  }
+}
