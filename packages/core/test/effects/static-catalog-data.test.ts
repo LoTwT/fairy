@@ -1396,9 +1396,7 @@ describe("fixed-source catalog conformance", () => {
     )
     for (const vector of oracle.cases)
       expect(coveragePointers.has(vector.pointer), vector.pointer).toBe(true)
-    // D5-2 切换固定源后新增/改写的 converted 位置尚未重建独立参考；
-    // 这些位置由 data 侧逐条转换回归、补充来源用例与 e2e 参考覆盖。
-    // D6 统一重建 oracle 时移除该缺口断言。
+    // D6-2 已补齐全部 converted 位置；保留缺口断言防止后续来源切换静默丢样本。
     const missingConverted = coverage.records
       .filter(
         (record) =>
@@ -1406,7 +1404,7 @@ describe("fixed-source catalog conformance", () => {
           !oracle.cases.some((vector) => vector.pointer === record.pointer),
       )
       .map((record) => record.pointer)
-    expect(missingConverted).toHaveLength(456)
+    expect(missingConverted).toHaveLength(0)
   })
   const convertedRecordCases = oracle.cases.filter(
     (vector) =>
