@@ -1,8 +1,9 @@
 import { createHash } from "node:crypto"
-import { lstatSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
+import { readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { join, relative, sep } from "node:path"
 import { fileURLToPath } from "node:url"
 import { describe, expect, it } from "vitest"
+import { calculationDataVersion } from "../.generated/calculation-data.ts"
 
 const dataRoot = fileURLToPath(new URL("..", import.meta.url))
 const baselinePath = fileURLToPath(
@@ -31,7 +32,7 @@ function listFiles(directory: string): string[] {
       files.push(...listFiles(path))
       continue
     }
-    if (!entry.isFile() || !lstatSync(path).isFile())
+    if (!entry.isFile())
       throw new Error(`artifact is not a regular file: ${path}`)
     files.push(path)
   }
@@ -53,6 +54,11 @@ function digestStrings(values: readonly string[]): string {
 
 function readJson(path: string): unknown {
   return JSON.parse(readFileSync(path, "utf8"))
+}
+
+/** 顶层键集合固定排序，便于发现新增/删除的契约字段。 */
+function topLevelKeys(value: object): string[] {
+  return Object.keys(value).toSorted()
 }
 
 interface BaselineIndex {
@@ -100,6 +106,7 @@ function buildIntegratedBaseline() {
   return {
     indexSha256: sha256File(join(root, "index.json")),
     sourceVersion: index.source.version,
+    topLevelKeys: topLevelKeys(index),
     fileCount: files.length,
     categories,
   }
@@ -108,6 +115,8 @@ function buildIntegratedBaseline() {
 function buildAttributesBaseline() {
   const root = join(dataRoot, "definitions/attributes")
   const manifest = readJson(join(root, "manifest.json")) as {
+    readonly sourceVersion: string
+    readonly rulesVersion: string
     readonly inputs: readonly unknown[]
     readonly artifacts: Readonly<Record<string, string>>
     readonly evidence: { readonly resources: readonly unknown[] }
@@ -119,6 +128,9 @@ function buildAttributesBaseline() {
   const artifactFiles = files.filter((file) => file !== manifestPath)
   return {
     manifestSha256: sha256File(manifestPath),
+    sourceVersion: manifest.sourceVersion,
+    rulesVersion: manifest.rulesVersion,
+    topLevelKeys: topLevelKeys(manifest),
     counts: {
       inputs: manifest.inputs.length,
       artifacts: Object.keys(manifest.artifacts).length,
@@ -134,6 +146,8 @@ function buildAttributesBaseline() {
 function buildSkillsBaseline() {
   const root = join(dataRoot, "definitions/skills")
   const manifest = readJson(join(root, "manifest.json")) as {
+    readonly sourceVersion: string
+    readonly rulesVersion: string
     readonly members: readonly string[]
     readonly coverage: { readonly actions: number }
   }
@@ -142,6 +156,9 @@ function buildSkillsBaseline() {
   const artifactFiles = files.filter((file) => file !== manifestPath)
   return {
     manifestSha256: sha256File(manifestPath),
+    sourceVersion: manifest.sourceVersion,
+    rulesVersion: manifest.rulesVersion,
+    topLevelKeys: topLevelKeys(manifest),
     memberCount: manifest.members.length,
     actionCount: manifest.coverage.actions,
     fileCount: files.length,
@@ -153,43 +170,77 @@ function buildEffectsBaseline() {
   const root = join(dataRoot, "definitions/effects")
   const definitions = readJson(join(root, "static.json")) as {
     readonly ruleSetId: string
-    readonly revision: number
+    readonly revision: string
     readonly effects: readonly unknown[]
+    readonly states: readonly unknown[]
+    readonly actions: readonly unknown[]
   }
   const catalog = readJson(join(root, "static-catalog.json")) as {
     readonly ruleSetId: string
-    readonly revision: number
+    readonly revision: string
+    readonly source: {
+      readonly repository: string
+      readonly commit: string
+    }
     readonly entities: readonly unknown[]
     readonly options: readonly { readonly variants: readonly unknown[] }[]
+    readonly skillTargets: readonly unknown[]
+    readonly mechanisms: readonly unknown[]
+    readonly differences: readonly unknown[]
   }
   const coverage = readJson(join(root, "static-coverage.json")) as {
     readonly ruleSetId: string
-    readonly revision: number
+    readonly revision: string
+    readonly source: {
+      readonly repository: string
+      readonly commit: string
+    }
     readonly records: readonly unknown[]
+    readonly packs: readonly unknown[]
+    readonly supplementalRecords: readonly unknown[]
   }
+  if (
+    catalog.source.repository !== coverage.source.repository ||
+    catalog.source.commit !== coverage.source.commit
+  )
+    throw new Error(
+      `static effects source mismatch: catalog ${catalog.source.repository}@${catalog.source.commit}, coverage ${coverage.source.repository}@${coverage.source.commit}`,
+    )
   return {
+    sourceRepository: catalog.source.repository,
+    sourceCommit: catalog.source.commit,
     static: {
       sha256: sha256File(join(root, "static.json")),
       ruleSetId: definitions.ruleSetId,
       revision: definitions.revision,
+      topLevelKeys: topLevelKeys(definitions),
       ruleCount: definitions.effects.length,
+      stateCount: definitions.states.length,
+      actionCount: definitions.actions.length,
     },
     staticCatalog: {
       sha256: sha256File(join(root, "static-catalog.json")),
       ruleSetId: catalog.ruleSetId,
       revision: catalog.revision,
+      topLevelKeys: topLevelKeys(catalog),
       optionCount: catalog.options.length,
       variantCount: catalog.options.reduce(
         (count, option) => count + option.variants.length,
         0,
       ),
       entityCount: catalog.entities.length,
+      skillTargetCount: catalog.skillTargets.length,
+      mechanismCount: catalog.mechanisms.length,
+      differenceCount: catalog.differences.length,
     },
     staticCoverage: {
       sha256: sha256File(join(root, "static-coverage.json")),
       ruleSetId: coverage.ruleSetId,
       revision: coverage.revision,
+      topLevelKeys: topLevelKeys(coverage),
       recordCount: coverage.records.length,
+      packCount: coverage.packs.length,
+      supplementalRecordCount: coverage.supplementalRecords.length,
     },
   }
 }
@@ -197,6 +248,7 @@ function buildEffectsBaseline() {
 function buildBaseline() {
   return {
     schemaVersion: 1,
+    snapshotId: calculationDataVersion.snapshotId,
     integrated: buildIntegratedBaseline(),
     attributes: buildAttributesBaseline(),
     skills: buildSkillsBaseline(),
