@@ -1727,7 +1727,7 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，后台辅助",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，<IconMap:Icon_AvatarClass_Defense>后台防护辅助",
     "为全队角色提供护盾与抗打断能力",
     "为站场队友提供攻击加成"
   ],

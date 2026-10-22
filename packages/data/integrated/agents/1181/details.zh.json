@@ -1440,8 +1440,8 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Thunder>电属性，异常输出",
-    "大招后可高效触发[异放]伤害",
+    "<IconMap:Icon_GeneralBuff_Thunder>电属性，<IconMap:Icon_AvatarClass_Anomaly>异常输出",
+    "大招后可高效触发<Term:3000002></Term>伤害",
     "可在一定范围内聚集敌人"
   ],
   "talent": {

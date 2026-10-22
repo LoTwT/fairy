@@ -1586,9 +1586,9 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Thunder>电属性，异常站场输出",
-    "切换架势获得战斗增益",
-    "触发[极性紊乱]造成额外伤害"
+    "<IconMap:Icon_GeneralBuff_Thunder>电属性，<IconMap:Icon_AvatarClass_Anomaly>异常站场输出",
+    "切换<Term:3000028></Term>获得战斗增益",
+    "触发<Term:3000008></Term>造成额外伤害"
   ],
   "talent": {
     "1": {

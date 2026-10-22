@@ -1,0 +1,425 @@
+{
+  "id": 620621,
+  "locale": "en",
+  "name": "Critical Node",
+  "zone": {
+    "6206201": {
+      "layerBuff": {
+        "62001621": {
+          "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' <color=#A6C5FD>Wind DMG</color> increases by 30% and CRIT DMG increases by 40%.\n· After an Agent uses <color=#FFFFFF>EX Special Attack</color>, attacks ignore 20% of the enemy's <color=#A6C5FD>Wind RES</color> on hit for 15s; repeated triggers reset the duration.",
+          "title": "Rending Gale"
+        }
+      },
+      "layerRoom": {
+        "62062011": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11253": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_LightJaeger.png",
+              "name": "Light Jaeger"
+            },
+            "11274": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster-MeleeJaeger.png",
+              "name": "Rookie Jaeger"
+            },
+            "11443": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_LightfootRover.png",
+              "name": "Lightfoot Rover"
+            },
+            "11454": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyStriker.png",
+              "name": "Heavy Striker"
+            }
+          },
+          "monsterResistance": {
+            "205": "Ether"
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          }
+        },
+        "62062012": {
+          "monsterIcon": "",
+          "monsterList": {
+            "31482": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Arbiter.png",
+              "name": "Lahmu"
+            },
+            "31491": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Predator.png",
+              "name": "Mushussu"
+            },
+            "31583": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Minion.png",
+              "name": "Kulullu"
+            },
+            "31744": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Halberdier.png",
+              "name": "Airspace Patrol Spearguard"
+            },
+            "31752": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_RoscaSolider.png",
+              "name": "Airspace Patrol Shieldguard"
+            },
+            "31762": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Greatsworder.png",
+              "name": "Airspace Patrol Vanguard"
+            }
+          },
+          "monsterResistance": {},
+          "monsterWeakness": {
+            "201": "Fire",
+            "204": "Wind"
+          }
+        }
+      },
+      "name": "Critical Node: First Frontier"
+    },
+    "6206202": {
+      "layerBuff": {
+        "62001621": {
+          "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' <color=#A6C5FD>Wind DMG</color> increases by 30% and CRIT DMG increases by 40%.\n· After an Agent uses <color=#FFFFFF>EX Special Attack</color>, attacks ignore 20% of the enemy's <color=#A6C5FD>Wind RES</color> on hit for 15s; repeated triggers reset the duration.",
+          "title": "Rending Gale"
+        }
+      },
+      "layerRoom": {
+        "62062021": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11482": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ViciousStrikerPro.png",
+              "name": "Vicious Striker"
+            },
+            "11492": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_GreedyRangerPro.png",
+              "name": "Greedy Ranger"
+            },
+            "11512": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_WickedWraithPro.png",
+              "name": "Wicked Wraith"
+            },
+            "11522": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_RuthlessFiendPro.png",
+              "name": "Ruthless Fiend"
+            }
+          },
+          "monsterResistance": {
+            "203": "Electric"
+          },
+          "monsterWeakness": {
+            "201": "Fire"
+          }
+        },
+        "62062022": {
+          "monsterIcon": "",
+          "monsterList": {
+            "31551": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_BangbooBattleMecha.png",
+              "name": "City Guardboo"
+            },
+            "31554": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_CorruptedBattleMecha.png",
+              "name": "Metamorphosed - City Guardboo"
+            },
+            "31622": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_BangbooPatrolMecha.png",
+              "name": "Airspace Patrolboo"
+            },
+            "31624": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_CorruptedPatrolMecha.png",
+              "name": "Metamorphosed - Airspace Patrolboo"
+            },
+            "31652": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_EyeEngine.png",
+              "name": "Metamorphosed - Beholder Engine"
+            }
+          },
+          "monsterResistance": {
+            "200": "Physical"
+          },
+          "monsterWeakness": {
+            "204": "Wind",
+            "205": "Ether"
+          }
+        }
+      },
+      "name": "Critical Node: Second Frontier"
+    },
+    "6206203": {
+      "layerBuff": {
+        "62001621": {
+          "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' <color=#A6C5FD>Wind DMG</color> increases by 30% and CRIT DMG increases by 40%.\n· After an Agent uses <color=#FFFFFF>EX Special Attack</color>, attacks ignore 20% of the enemy's <color=#A6C5FD>Wind RES</color> on hit for 15s; repeated triggers reset the duration.",
+          "title": "Rending Gale"
+        }
+      },
+      "layerRoom": {
+        "62062031": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11312": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugAssaulterPro.png",
+              "name": "Ambusher"
+            },
+            "11322": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugPoacherPro.png",
+              "name": "Rustler"
+            },
+            "11603": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Mors.png",
+              "name": "Doppelganger - Mors"
+            },
+            "11613": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Bellum.png",
+              "name": "Doppelganger - Bellum"
+            },
+            "11623": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Pulchra.png",
+              "name": "Doppelganger - Pulchra"
+            }
+          },
+          "monsterResistance": {
+            "202": "Ice"
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          }
+        },
+        "62062032": {
+          "monsterIcon": "",
+          "monsterList": {
+            "31481": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Arbiter.png",
+              "name": "Lahmu"
+            },
+            "31552": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_BangbooBattleMecha.png",
+              "name": "City Guardboo"
+            },
+            "31642": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_MoltTarasqueMixer.png",
+              "name": "Metamorphosed - Tarasque Mixer"
+            },
+            "31744": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Halberdier.png",
+              "name": "Airspace Patrol Spearguard"
+            },
+            "31752": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_RoscaSolider.png",
+              "name": "Airspace Patrol Shieldguard"
+            }
+          },
+          "monsterResistance": {},
+          "monsterWeakness": {
+            "203": "Electric",
+            "204": "Wind"
+          }
+        }
+      },
+      "name": "Critical Node: Third Frontier"
+    },
+    "6206204": {
+      "layerBuff": {
+        "62001621": {
+          "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' <color=#A6C5FD>Wind DMG</color> increases by 30% and CRIT DMG increases by 40%.\n· After an Agent uses <color=#FFFFFF>EX Special Attack</color>, attacks ignore 20% of the enemy's <color=#A6C5FD>Wind RES</color> on hit for 15s; repeated triggers reset the duration.",
+          "title": "Rending Gale"
+        }
+      },
+      "layerRoom": {
+        "62062041": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Hayyot.png",
+          "monsterList": {
+            "31192": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Hayyot.png",
+              "name": "Haytor"
+            }
+          },
+          "monsterResistance": {
+            "203": "Electric"
+          },
+          "monsterWeakness": {
+            "201": "Fire",
+            "202": "Ice"
+          }
+        },
+        "62062042": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Sentinel.png",
+          "monsterList": {
+            "31531": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Sentinel.png",
+              "name": "Airspace Sentinel"
+            },
+            "31553": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_CorruptedBattleMecha.png",
+              "name": "Metamorphosed - City Guardboo"
+            }
+          },
+          "monsterResistance": {
+            "205": "Ether"
+          },
+          "monsterWeakness": {
+            "202": "Ice",
+            "204": "Wind"
+          }
+        }
+      },
+      "name": "Critical Node: Fourth Frontier"
+    },
+    "6206205": {
+      "layerBuff": {
+        "62001621": {
+          "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' <color=#A6C5FD>Wind DMG</color> increases by 30% and CRIT DMG increases by 40%.\n· After an Agent uses <color=#FFFFFF>EX Special Attack</color>, attacks ignore 20% of the enemy's <color=#A6C5FD>Wind RES</color> on hit for 15s; repeated triggers reset the duration.",
+          "title": "Rending Gale"
+        },
+        "62001622": {
+          "desc": "· <color=#FFFFFF>Armorer</color> specialty Agents' DEF increases by 15%, and Sharp DMG increases by 15%.\n· When an Agent's attack hits an enemy, it ignores 10% of the enemy's <color=#FF5521>Fire RES</color> and <color=#2EB6FF>Electric RES</color>.",
+          "title": "Thunderfire Starburn"
+        },
+        "62001623": {
+          "desc": "· Agents' Anomaly Proficiency increases by 30. After Stunning an enemy, their Stun recovery rate decreases by 10% for 15s; repeated triggers refresh the duration.\n· While in <color=#FFFFFF>Ether Veil</color>, Agent ATK increases by 15%, and attacks ignore 20% of the enemy's <color=#FE437E>Ether RES</color>.",
+          "title": "Spirit Realm Wallbreaker"
+        }
+      },
+      "layerRoom": {},
+      "name": ""
+    },
+    "62062051": {
+      "layerBuff": {
+        "62001001": {
+          "desc": "· In this stage, dealing DMG to enemies earns you <color=#FFAF2C>DMG Score</color>. Defeating a single <color=#FFFFFF>normal/elite enemy</color> will grant you an instance of <color=#FFAF2C>Elimination Score</color>.\n· In this stage, scores earned at different times will receive additional <color=#FFAF2C>multiplier bonuses</color>. The earlier in the challenge, the higher the multiplier. The <color=#FFAF2C>total score cap (including bonus) is 50,000</color>.",
+          "title": ""
+        },
+        "62001002": {
+          "desc": "",
+          "title": ""
+        },
+        "62001621": {
+          "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' <color=#A6C5FD>Wind DMG</color> increases by 30% and CRIT DMG increases by 40%.\n· After an Agent uses <color=#FFFFFF>EX Special Attack</color>, attacks ignore 20% of the enemy's <color=#A6C5FD>Wind RES</color> on hit for 15s; repeated triggers reset the duration.",
+          "title": "Rending Gale"
+        }
+      },
+      "layerRoom": {
+        "62062051": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_HACMecha.png",
+          "monsterList": {
+            "31552": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_BangbooBattleMecha.png",
+              "name": "City Guardboo"
+            },
+            "31612": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Sapper.png",
+              "name": "Special Anti-Riotboo"
+            },
+            "31622": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_BangbooPatrolMecha.png",
+              "name": "Airspace Patrolboo"
+            },
+            "31721": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_HACMecha.png",
+              "name": "Conqueror"
+            }
+          },
+          "monsterResistance": {
+            "200": "Physical"
+          },
+          "monsterWeakness": {
+            "203": "Electric",
+            "204": "Wind"
+          }
+        }
+      },
+      "name": "Room 1"
+    },
+    "62062052": {
+      "layerBuff": {
+        "62001001": {
+          "desc": "· In this stage, dealing DMG to enemies earns you <color=#FFAF2C>DMG Score</color>. Defeating a single <color=#FFFFFF>normal/elite enemy</color> will grant you an instance of <color=#FFAF2C>Elimination Score</color>.\n· In this stage, scores earned at different times will receive additional <color=#FFAF2C>multiplier bonuses</color>. The earlier in the challenge, the higher the multiplier. The <color=#FFAF2C>total score cap (including bonus) is 50,000</color>.",
+          "title": ""
+        },
+        "62001002": {
+          "desc": "",
+          "title": ""
+        },
+        "62001622": {
+          "desc": "· <color=#FFFFFF>Armorer</color> specialty Agents' DEF increases by 15%, and Sharp DMG increases by 15%.\n· When an Agent's attack hits an enemy, it ignores 10% of the enemy's <color=#FF5521>Fire RES</color> and <color=#2EB6FF>Electric RES</color>.",
+          "title": "Thunderfire Starburn"
+        }
+      },
+      "layerRoom": {
+        "62062052": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MiasmaTerrorBird.png",
+          "monsterList": {
+            "11623": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Pulchra.png",
+              "name": "Doppelganger - Pulchra"
+            },
+            "31262": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_MiasmaTerrorBird.png",
+              "name": "Miasmic - Terror Raptor"
+            },
+            "31462": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_InnerKnightSlime.png",
+              "name": "Doppelganger - Starlight - Billy"
+            },
+            "31481": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Arbiter.png",
+              "name": "Lahmu"
+            }
+          },
+          "monsterResistance": {
+            "205": "Ether"
+          },
+          "monsterWeakness": {
+            "201": "Fire",
+            "203": "Electric"
+          }
+        }
+      },
+      "name": "Room 2"
+    },
+    "62062053": {
+      "layerBuff": {
+        "62001001": {
+          "desc": "· In this stage, dealing DMG to enemies earns you <color=#FFAF2C>DMG Score</color>. Defeating a single <color=#FFFFFF>normal/elite enemy</color> will grant you an instance of <color=#FFAF2C>Elimination Score</color>.\n· In this stage, scores earned at different times will receive additional <color=#FFAF2C>multiplier bonuses</color>. The earlier in the challenge, the higher the multiplier. The <color=#FFAF2C>total score cap (including bonus) is 50,000</color>.",
+          "title": ""
+        },
+        "62001002": {
+          "desc": "",
+          "title": ""
+        },
+        "62001623": {
+          "desc": "· Agents' Anomaly Proficiency increases by 30. After Stunning an enemy, their Stun recovery rate decreases by 10% for 15s; repeated triggers refresh the duration.\n· While in <color=#FFFFFF>Ether Veil</color>, Agent ATK increases by 15%, and attacks ignore 20% of the enemy's <color=#FE437E>Ether RES</color>.",
+          "title": "Spirit Realm Wallbreaker"
+        }
+      },
+      "layerRoom": {
+        "62062053": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MiasmaThracian.png",
+          "monsterList": {
+            "11732": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_GiantEnergy.png",
+              "name": "Ionized - Farbauti"
+            },
+            "11752": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_DurahanEnergy.png",
+              "name": "Ionized - Dullahan"
+            },
+            "31102": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_MiasmaThracian.png",
+              "name": "Miasmic - Thracian"
+            }
+          },
+          "monsterResistance": {
+            "203": "Electric"
+          },
+          "monsterWeakness": {
+            "204": "Wind",
+            "205": "Ether"
+          }
+        }
+      },
+      "name": "Room 3"
+    }
+  }
+}

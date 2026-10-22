@@ -1990,9 +1990,9 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，站场输出",
-    "提升物理异常积蓄效率",
-    "[强击]伤害概率暴击"
+    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，<IconMap:Icon_AvatarClass_Anomaly>异常站场输出",
+    "拥有较高物理属性<Term:3000005></Term>累积效率",
+    "<Term:3000006></Term>有概率触发暴击并额外提升暴伤"
   ],
   "talent": {
     "1": {

@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "...",
+  "cardSkillDesc": "Upon entering combat, Integrated - Infernal Revenant will have a Molten Crystal Barrier. When an Agent triggers a Defensive Assist or Dodge Counter, or applies an Ice Attribute Anomaly to the Boss, Integrated - Infernal Revenant's Molten Crystal Barrier will be reduced. When the Molten Crystal Barrier is fully depleted, it will immediately enter a Stunned state.\nDuring combat, pressing the Special Attack button will put the current Agent into the Subzero Barrier state for 0.5 seconds. While Subzero Barrier is active, if the Agent receives a red-light attack from the Boss, that attack will be Negated and the Boss's Molten Crystal Barrier will be reduced. If the Boss is currently under the Burn Attribute Anomaly, the Agent will additionally deal DMG to it based on its Max HP.\nWhen Integrated - Infernal Revenant is Stunned, pressing the Special Attack button will inflict the Snapfreeze effect on the Boss, dealing DMG based on its Max HP. After the Agent triggers an Attribute Anomaly, the Special Attack button's cooldown will be additionally refreshed.",
+  "desc": "...",
+  "groupDesc": "Ether Mutants",
+  "id": 40015,
+  "locale": "en",
+  "name": "Integrated - Infernal Revenant"
+}

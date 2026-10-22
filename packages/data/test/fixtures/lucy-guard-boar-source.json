@@ -2616,11 +2616,11 @@
   "nanokaFiles": [
     {
       "resourcePath": "agents/1151/details.zh.json",
-      "sha256": "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b"
+      "sha256": "0619c5c2c868e7481ed8267ba65ddcd6477f8e7e17e1499db8bd0a169ac84129"
     },
     {
       "resourcePath": "agents/1151/details.en.json",
-      "sha256": "e4aad90e921dbf12188ac1d738765bc51924847aa969263c609937ea149bbcf9"
+      "sha256": "36c5203ebf95288e87efc95c4e968ad6ed35c939226204ead18754da3a046ca3"
     }
   ],
   "reorderCompanion": {

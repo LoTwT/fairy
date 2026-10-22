@@ -1457,7 +1457,12 @@
     }
   },
   "specialElementType": {},
-  "strategy": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Ice>Ice, <IconMap:Icon_AvatarClass_Attack>on-field Attack dealer",
+    "Alternate between <Term:1000029>Unbridled Spear</Term> and <Term:3000017>Converging Spear</Term> to deal damage",
+    "Provides CRIT Rate and ATK bonus for herself"
+  ],
   "talent": {
     "1": {
       "desc": "Upon activating the 3rd stage of <color=#FFFFFF>Basic Attack: Converging Spear</color>, enters the <color=#FFFFFF>Aerial Patrol Spear</color> and gains 1 additional activation of <color=#FFFFFF>Basic Attack: Converging Spear</color>. When activations exceed the stored <color=#FFFFFF>Basic Attack: Converging Spear</color>'s activation limit, the next <color=#FFFFFF>Basic Attack: Converging Spear</color>'s final hit deals an additional <color=#FFFFFF>100%</color> of ATK as <color=#98EFF0>Ice DMG</color>. Sigrid's <color=#FFFFFF>ATK</color> increases by <color=#FFFFFF>25%</color>.",

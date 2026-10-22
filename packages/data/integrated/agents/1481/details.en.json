@@ -1646,7 +1646,7 @@
   "specialElementType": {},
   "strategy": [
     "07",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, quick-swap Stun triggerer",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, <IconMap:Icon_AvatarClass_Stun> <Term:3000012></Term> Stun",
     "Increases enemy Stun DMG Multiplier",
     "Can upgrade Chain Attack to Ultimate"
   ],

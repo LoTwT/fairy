@@ -1,8 +1,8 @@
 {
   "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
-  "cardQuote": "CardQuote_10044",
+  "cardQuote": "",
   "cardSkillDesc": "During combat, Special Offensive: Grenadier Jaeger provides heavy ranged fire support.",
-  "desc": "",
+  "desc": "The \"Special Offensive\" unit is a covert combat force secretly deployed by High Ambitions Corp. Modeled after the Defense Force's special operations units in terms of structure, training systems, and combat gear, they're tasked with carrying out high-risk, classified missions that conventional armed forces can't touch.",
   "groupDesc": "Rebel Soldiers",
   "id": 10044,
   "locale": "en",

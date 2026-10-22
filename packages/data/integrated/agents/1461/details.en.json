@@ -1472,9 +1472,9 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Thunder>Electric, on-field DMG dealer",
-    "Attack squadmates can help restore her core resources",
-    "Grants various buffs to an Attack squadmate"
+    "<IconMap:Icon_GeneralBuff_Thunder>Electric, <IconMap:Icon_AvatarClass_Attack> Attack on-field DMG dealer",
+    "Dual Attack team",
+    "Provide buffs to and receive buffs from Attack teammates"
   ],
   "talent": {
     "1": {

@@ -1990,7 +1990,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Fire>火属性，烧血站场输出",
+    "<IconMap:Icon_GeneralBuff_Fire>火属性，<IconMap:Icon_AvatarClass_Rupture>命破站场输出",
     "消耗生命值换取火属性伤害"
   ],
   "talent": {

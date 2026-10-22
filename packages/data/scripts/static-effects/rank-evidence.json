@@ -6,85 +6,85 @@
         "rank": 1,
         "path": "agents/1291/details.zh.json",
         "pointer": "/passive/level/1291501/desc/0",
-        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+        "sha256": "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6"
       },
       {
         "rank": 1,
         "path": "agents/1291/details.en.json",
         "pointer": "/passive/level/1291501/desc/0",
-        "sha256": "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b"
+        "sha256": "86bdc9f93f67dc92ba5b5d8eb4314c1816837e6b56814e614fed1a09b23b78ad"
       },
       {
         "rank": 2,
         "path": "agents/1291/details.zh.json",
         "pointer": "/passive/level/1291502/desc/0",
-        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+        "sha256": "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6"
       },
       {
         "rank": 2,
         "path": "agents/1291/details.en.json",
         "pointer": "/passive/level/1291502/desc/0",
-        "sha256": "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b"
+        "sha256": "86bdc9f93f67dc92ba5b5d8eb4314c1816837e6b56814e614fed1a09b23b78ad"
       },
       {
         "rank": 3,
         "path": "agents/1291/details.zh.json",
         "pointer": "/passive/level/1291503/desc/0",
-        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+        "sha256": "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6"
       },
       {
         "rank": 3,
         "path": "agents/1291/details.en.json",
         "pointer": "/passive/level/1291503/desc/0",
-        "sha256": "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b"
+        "sha256": "86bdc9f93f67dc92ba5b5d8eb4314c1816837e6b56814e614fed1a09b23b78ad"
       },
       {
         "rank": 4,
         "path": "agents/1291/details.zh.json",
         "pointer": "/passive/level/1291504/desc/0",
-        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+        "sha256": "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6"
       },
       {
         "rank": 4,
         "path": "agents/1291/details.en.json",
         "pointer": "/passive/level/1291504/desc/0",
-        "sha256": "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b"
+        "sha256": "86bdc9f93f67dc92ba5b5d8eb4314c1816837e6b56814e614fed1a09b23b78ad"
       },
       {
         "rank": 5,
         "path": "agents/1291/details.zh.json",
         "pointer": "/passive/level/1291505/desc/0",
-        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+        "sha256": "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6"
       },
       {
         "rank": 5,
         "path": "agents/1291/details.en.json",
         "pointer": "/passive/level/1291505/desc/0",
-        "sha256": "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b"
+        "sha256": "86bdc9f93f67dc92ba5b5d8eb4314c1816837e6b56814e614fed1a09b23b78ad"
       },
       {
         "rank": 6,
         "path": "agents/1291/details.zh.json",
         "pointer": "/passive/level/1291506/desc/0",
-        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+        "sha256": "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6"
       },
       {
         "rank": 6,
         "path": "agents/1291/details.en.json",
         "pointer": "/passive/level/1291506/desc/0",
-        "sha256": "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b"
+        "sha256": "86bdc9f93f67dc92ba5b5d8eb4314c1816837e6b56814e614fed1a09b23b78ad"
       },
       {
         "rank": 7,
         "path": "agents/1291/details.zh.json",
         "pointer": "/passive/level/1291507/desc/0",
-        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+        "sha256": "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6"
       },
       {
         "rank": 7,
         "path": "agents/1291/details.en.json",
         "pointer": "/passive/level/1291507/desc/0",
-        "sha256": "5f4cfdae68fb25632e6defcfce2269bcdbcfc69158651f5b18b7aa1af7509e9b"
+        "sha256": "86bdc9f93f67dc92ba5b5d8eb4314c1816837e6b56814e614fed1a09b23b78ad"
       }
     ],
     "verification": "逐档独立核对 1291501—1291507 desc/0 中攻击条款：一名其他击破队友为 25/50/80/120/180/270/300，两名为 75/150/240/360/540/810/900；仅此 ATK 记录支持七档，不扩大同块双暴或决算覆盖。",
@@ -110,7 +110,7 @@
         "rank": 7,
         "path": "agents/1021/details.zh.json",
         "pointer": "/passive/level/1021514/desc/0",
-        "sha256": "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07"
+        "sha256": "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86"
       }
     ],
     "verification": "核心被动第 7 级（1021514，潜能分支）说明与来源块全文一致：闪反/快速支援命中后伤害提升 60%、持续 40 秒；攻击命中触发[超凶爪印]，造成一次等同于自身 30% 攻击力的物理伤害。潜能分支节点 potential 为 102100—102105，普通分支（potential [0]）由补充变体单独登记；块级证据只核实 60% 增伤（数值随核心等级 30%—60% 变化），爪印记录另行按记录级证据登记"
@@ -122,43 +122,43 @@
         "rank": 1,
         "path": "agents/1021/details.zh.json",
         "pointer": "/passive/level/1021508/desc/0",
-        "sha256": "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07"
+        "sha256": "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86"
       },
       {
         "rank": 2,
         "path": "agents/1021/details.zh.json",
         "pointer": "/passive/level/1021509/desc/0",
-        "sha256": "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07"
+        "sha256": "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86"
       },
       {
         "rank": 3,
         "path": "agents/1021/details.zh.json",
         "pointer": "/passive/level/1021510/desc/0",
-        "sha256": "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07"
+        "sha256": "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86"
       },
       {
         "rank": 4,
         "path": "agents/1021/details.zh.json",
         "pointer": "/passive/level/1021511/desc/0",
-        "sha256": "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07"
+        "sha256": "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86"
       },
       {
         "rank": 5,
         "path": "agents/1021/details.zh.json",
         "pointer": "/passive/level/1021512/desc/0",
-        "sha256": "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07"
+        "sha256": "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86"
       },
       {
         "rank": 6,
         "path": "agents/1021/details.zh.json",
         "pointer": "/passive/level/1021513/desc/0",
-        "sha256": "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07"
+        "sha256": "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86"
       },
       {
         "rank": 7,
         "path": "agents/1021/details.zh.json",
         "pointer": "/passive/level/1021514/desc/0",
-        "sha256": "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07"
+        "sha256": "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86"
       }
     ],
     "verification": "潜能分支 1—7 行（1021508—1021514）逐行核对：处于[肉球突袭]状态时攻击命中触发[超凶爪印]，造成一次等同于自身 30% 攻击力的物理伤害，数值不随核心等级变化；本记录级键只覆盖 eff-ms4f47p3-p1s9yz（爪印），不放宽同块 60% 增伤只核实核心 7 的限制"
@@ -170,7 +170,7 @@
         "rank": 7,
         "path": "agents/1551/details.zh.json",
         "pointer": "/passive/level/1551507/desc/0",
-        "sha256": "b2915a1c094de9a5c88661c213080ad88498c1748e9a9fe71461729bcfe60856"
+        "sha256": "57f9c0ea9c04f6a09787e6f41ac77133b4cafaf26a380a1c6cd735ef3cbcd4d3"
       }
     ],
     "verification": "核心被动第 7 级说明与来源块全文一致：上分支阳炎使终结技对失衡目标暴伤提升 40%、下分支耀斑通用增伤 40%、左分支浸染下额外造成 900% 攻击力伤害、右分支失衡触发额外造成 2250% 攻击力伤害；四个分支增益分开登记，附加倍率进入声明的独立伤害项"
@@ -182,7 +182,7 @@
         "rank": 7,
         "path": "agents/1401/details.zh.json",
         "pointer": "/passive/level/1401507/desc/0",
-        "sha256": "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d"
+        "sha256": "2fa6f4711a3138251c777d4b2b402ea414f03ee38c988ae92e588f26d8ecf41b"
       }
     ],
     "verification": "核心被动第 7 级说明与来源块全文一致：物理异常状态下的敌人被触发[紊乱]效果时，每有 1 秒物理异常状态剩余时间，[紊乱]效果的伤害倍率提升 18%、最多提升 180%；保留固定来源确认的显式 0—10 层口径，不模拟经过时间"
@@ -194,7 +194,7 @@
         "rank": 7,
         "path": "agents/1501/details.zh.json",
         "pointer": "/passive/level/1501055/desc/0",
-        "sha256": "49b5cf61dc4a979025af0a7a31ef90ca39e7c46612098f6f694dbdf81202714f"
+        "sha256": "387d5054814f0f441f6341e5228299127c7c320f7bebb9620e0b9c32c7fe7e78"
       }
     ],
     "verification": "核心被动第 7 级（1501055）说明与来源块全文一致：异常精通提升 90 点；六个元素来源按每 10 点初始异常掌控的固定比例异放，目标失衡时比例额外提升 50%；精通增量与初始掌控读取分别登记"
@@ -206,7 +206,7 @@
         "rank": 7,
         "path": "agents/1511/details.zh.json",
         "pointer": "/passive/level/1511055/desc/0",
-        "sha256": "623a202f3d6b33c5c32d2ef6958595d02f0649cd76e57679858108b753a262b8"
+        "sha256": "0e93e4b483a5aa8faef8e3345cf849de56bb3e8c717554e661c4bd1aed120fdb"
       }
     ],
     "verification": "核心被动第 7 级（1511055）说明与来源块全文一致：异常精通提升 120 点；非物理五元素来源基础倍率 450%、物理 449%，颤音每层额外提升 25%、最多 4 层，同一乘区增量相加；持有颤音并从失衡状态恢复时同样结算"
@@ -218,7 +218,7 @@
         "rank": 7,
         "path": "agents/1561/details.zh.json",
         "pointer": "/passive/level/1561507/desc/0",
-        "sha256": "a2089f5f829ed8646e768deee3f9b1424b39df3ffc25ade1e8d8ebb99ecf6659"
+        "sha256": "f2da8dfc1357ffb98dcb775d0febbe0df55828d4c61e38701df39040766a3b6f"
       }
     ],
     "verification": "核心被动第 7 级说明与来源块全文一致：初始回能超过 1.2 的部分每 0.01 提升伤害 0.21%（最多 35%）与异常掌控 0.5 点（最多 84 点）；微域/广域气旋爆炸命中风属性异常目标时固定结算 145%/255% 倍率的风属性异放伤害"
@@ -230,7 +230,7 @@
         "rank": 7,
         "path": "agents/1561/details.zh.json",
         "pointer": "/passive/level/1561507/desc/0",
-        "sha256": "a2089f5f829ed8646e768deee3f9b1424b39df3ffc25ade1e8d8ebb99ecf6659"
+        "sha256": "f2da8dfc1357ffb98dcb775d0febbe0df55828d4c61e38701df39040766a3b6f"
       }
     ],
     "verification": "核心被动第 7 级说明与来源块全文一致：维琳娜触发[乱流]时的乱流倍率提升 150%，进入 1.5 的乱流倍率加数，不按名称解释为全局乘数或再次乘风属性基础倍率"
@@ -242,7 +242,7 @@
         "rank": 7,
         "path": "agents/1301/details.zh.json",
         "pointer": "/passive/level/1301507/desc/0",
-        "sha256": "b4e16ee6f071ca8b0c2de2e5ac97c221852b5f032310e54c893406aab905e9db"
+        "sha256": "78b8116311a2510e19507b3cca0aac7e98514deaa8dd677de16627726c211599"
       }
     ],
     "verification": "核心被动第 7 级说明与来源块全文一致：自身暴击率 25%、追加攻击伤害 85%，[准星聚焦]提供 280 点固定攻击与按初始回能超出的线性提升，初始提升与额外提升合计不超过 700 点；团队准星聚焦条目与自身暴击、追加攻击条目分开登记"
@@ -254,7 +254,7 @@
         "rank": 7,
         "path": "agents/1531/details.zh.json",
         "pointer": "/passive/level/1531055/desc/0",
-        "sha256": "9ed1c481827bc66754f552cebde2625f9f1d4de9173a5d4ddd06083657cdf716"
+        "sha256": "590249e15469f119cc48f40b6f9fcdd61e76e86958dc4fe66ad6ab4873011581"
       }
     ],
     "verification": "核心被动第 7 级（1531055）说明与来源块全文一致：接战状态下每次发动[特殊技：动力压制]时自身暴击伤害提升 90%、持续 45 秒；只登记动力压制后的有效暴伤状态，不模拟生命消耗"
@@ -266,7 +266,7 @@
         "rank": 7,
         "path": "agents/1491/details.zh.json",
         "pointer": "/passive/level/1491055/desc/0",
-        "sha256": "c14f950c6231e6574e14685adbec4d9ebe1317f834c231505698a460d80fdae2"
+        "sha256": "9acb6550d9cd2565835ccd7599970028e106059b18b0636caff59ce3280712cd"
       }
     ],
     "verification": "核心被动第 7 级（1491055）说明与来源块全文一致：处于[天使协律]状态下的角色攻击力提升千夏 30% 初始攻击力、最高不超过 1050 点；初始攻击达到 3500 点时增益达到最大"
@@ -278,7 +278,7 @@
         "rank": 7,
         "path": "agents/1591/details.zh.json",
         "pointer": "/passive/level/1591507/desc/0",
-        "sha256": "b0f4d514d4e7c8345705d38abc41017eaa9b6d6c33b5168e829a730266464c5c"
+        "sha256": "a617c3006ecec7f3e004ab956fbfa48f6de9e2017af9d395c43f3c89387cf67a"
       }
     ],
     "verification": "核心被动第 7 级说明与来源块全文一致：激活或刷新[巡空枪势]时暴击率提升 66%；处于该状态攻击命中失衡目标时失衡易伤倍率提升 20%，20% 只作用本人对失衡目标的伤害"
@@ -290,7 +290,7 @@
         "rank": 7,
         "path": "agents/1341/details.zh.json",
         "pointer": "/passive/level/1341507/desc/0",
-        "sha256": "8bc8e850c8420d4a8dfdf6663c1a3e1b3abe2b54c52a9344b4fe7e474444e2b7"
+        "sha256": "ef75e043931e974585caeaffc7e0c752cbfa78dcf43ba9c544e7b1fd97f2df0f"
       }
     ],
     "verification": "核心被动第 7 级说明与来源块全文一致：每 1000 点初始最大生命值提高 1.4% 暴击率；[以太帷幕·涌泉]生效期间全队最大生命值提升 5%，开启时全队攻击力提升 1000 点；初始生命读取、团队生命与团队攻击三项独立"
@@ -302,7 +302,7 @@
         "rank": 7,
         "path": "agents/1041/details.zh.json",
         "pointer": "/passive/level/1041507/desc/0",
-        "sha256": "2e6e2beaf2858e974944ff415a0a640a15c0c5f446c60020b90ba59292eeb405"
+        "sha256": "3e791d6606081aa5beb13e92ddd53af296d6defbd6703c997ea3059eac594b96"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -314,43 +314,43 @@
         "rank": 1,
         "path": "agents/1041/details.zh.json",
         "pointer": "/passive/level/1041501/desc/1",
-        "sha256": "2e6e2beaf2858e974944ff415a0a640a15c0c5f446c60020b90ba59292eeb405"
+        "sha256": "3e791d6606081aa5beb13e92ddd53af296d6defbd6703c997ea3059eac594b96"
       },
       {
         "rank": 2,
         "path": "agents/1041/details.zh.json",
         "pointer": "/passive/level/1041502/desc/1",
-        "sha256": "2e6e2beaf2858e974944ff415a0a640a15c0c5f446c60020b90ba59292eeb405"
+        "sha256": "3e791d6606081aa5beb13e92ddd53af296d6defbd6703c997ea3059eac594b96"
       },
       {
         "rank": 3,
         "path": "agents/1041/details.zh.json",
         "pointer": "/passive/level/1041503/desc/1",
-        "sha256": "2e6e2beaf2858e974944ff415a0a640a15c0c5f446c60020b90ba59292eeb405"
+        "sha256": "3e791d6606081aa5beb13e92ddd53af296d6defbd6703c997ea3059eac594b96"
       },
       {
         "rank": 4,
         "path": "agents/1041/details.zh.json",
         "pointer": "/passive/level/1041504/desc/1",
-        "sha256": "2e6e2beaf2858e974944ff415a0a640a15c0c5f446c60020b90ba59292eeb405"
+        "sha256": "3e791d6606081aa5beb13e92ddd53af296d6defbd6703c997ea3059eac594b96"
       },
       {
         "rank": 5,
         "path": "agents/1041/details.zh.json",
         "pointer": "/passive/level/1041505/desc/1",
-        "sha256": "2e6e2beaf2858e974944ff415a0a640a15c0c5f446c60020b90ba59292eeb405"
+        "sha256": "3e791d6606081aa5beb13e92ddd53af296d6defbd6703c997ea3059eac594b96"
       },
       {
         "rank": 6,
         "path": "agents/1041/details.zh.json",
         "pointer": "/passive/level/1041506/desc/1",
-        "sha256": "2e6e2beaf2858e974944ff415a0a640a15c0c5f446c60020b90ba59292eeb405"
+        "sha256": "3e791d6606081aa5beb13e92ddd53af296d6defbd6703c997ea3059eac594b96"
       },
       {
         "rank": 7,
         "path": "agents/1041/details.zh.json",
         "pointer": "/passive/level/1041507/desc/1",
-        "sha256": "2e6e2beaf2858e974944ff415a0a640a15c0c5f446c60020b90ba59292eeb405"
+        "sha256": "3e791d6606081aa5beb13e92ddd53af296d6defbd6703c997ea3059eac594b96"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -362,7 +362,7 @@
         "rank": 7,
         "path": "agents/1211/details.zh.json",
         "pointer": "/passive/level/1211507/desc/0",
-        "sha256": "ff04332f6e00a8e4ef654a1da8bfffbb577d90219c26b9f37cb1f4f69c0b9615"
+        "sha256": "f804d9d945014cbc4548f8355b1523f234b33be98ce5fc72e4c4b59b471f8063"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -374,43 +374,43 @@
         "rank": 1,
         "path": "agents/1211/details.zh.json",
         "pointer": "/passive/level/1211501/desc/1",
-        "sha256": "ff04332f6e00a8e4ef654a1da8bfffbb577d90219c26b9f37cb1f4f69c0b9615"
+        "sha256": "f804d9d945014cbc4548f8355b1523f234b33be98ce5fc72e4c4b59b471f8063"
       },
       {
         "rank": 2,
         "path": "agents/1211/details.zh.json",
         "pointer": "/passive/level/1211502/desc/1",
-        "sha256": "ff04332f6e00a8e4ef654a1da8bfffbb577d90219c26b9f37cb1f4f69c0b9615"
+        "sha256": "f804d9d945014cbc4548f8355b1523f234b33be98ce5fc72e4c4b59b471f8063"
       },
       {
         "rank": 3,
         "path": "agents/1211/details.zh.json",
         "pointer": "/passive/level/1211503/desc/1",
-        "sha256": "ff04332f6e00a8e4ef654a1da8bfffbb577d90219c26b9f37cb1f4f69c0b9615"
+        "sha256": "f804d9d945014cbc4548f8355b1523f234b33be98ce5fc72e4c4b59b471f8063"
       },
       {
         "rank": 4,
         "path": "agents/1211/details.zh.json",
         "pointer": "/passive/level/1211504/desc/1",
-        "sha256": "ff04332f6e00a8e4ef654a1da8bfffbb577d90219c26b9f37cb1f4f69c0b9615"
+        "sha256": "f804d9d945014cbc4548f8355b1523f234b33be98ce5fc72e4c4b59b471f8063"
       },
       {
         "rank": 5,
         "path": "agents/1211/details.zh.json",
         "pointer": "/passive/level/1211505/desc/1",
-        "sha256": "ff04332f6e00a8e4ef654a1da8bfffbb577d90219c26b9f37cb1f4f69c0b9615"
+        "sha256": "f804d9d945014cbc4548f8355b1523f234b33be98ce5fc72e4c4b59b471f8063"
       },
       {
         "rank": 6,
         "path": "agents/1211/details.zh.json",
         "pointer": "/passive/level/1211506/desc/1",
-        "sha256": "ff04332f6e00a8e4ef654a1da8bfffbb577d90219c26b9f37cb1f4f69c0b9615"
+        "sha256": "f804d9d945014cbc4548f8355b1523f234b33be98ce5fc72e4c4b59b471f8063"
       },
       {
         "rank": 7,
         "path": "agents/1211/details.zh.json",
         "pointer": "/passive/level/1211507/desc/1",
-        "sha256": "ff04332f6e00a8e4ef654a1da8bfffbb577d90219c26b9f37cb1f4f69c0b9615"
+        "sha256": "f804d9d945014cbc4548f8355b1523f234b33be98ce5fc72e4c4b59b471f8063"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -422,7 +422,7 @@
         "rank": 7,
         "path": "agents/1371/details.zh.json",
         "pointer": "/passive/level/1371507/desc/0",
-        "sha256": "70e3e1b3347c44e01167bd017d799b73d4a6fee751038484e62475f5e32bf1b3"
+        "sha256": "bcf0924fe9fbdc799e4118e5590aef75e2b9bd1d0b0e0cf964179bfabcd77a01"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -434,7 +434,7 @@
         "rank": 7,
         "path": "agents/1051/details.zh.json",
         "pointer": "/passive/level/1051507/desc/0",
-        "sha256": "c66515c806a49ed5557e851bf6581014b5763dd3a2bfe585b8864530d37a01da"
+        "sha256": "42b194749809f03e863103a065547c201b102f42b15a82a8aaccda568efa709a"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -446,43 +446,43 @@
         "rank": 1,
         "path": "agents/1051/details.zh.json",
         "pointer": "/passive/level/1051501/desc/1",
-        "sha256": "c66515c806a49ed5557e851bf6581014b5763dd3a2bfe585b8864530d37a01da"
+        "sha256": "42b194749809f03e863103a065547c201b102f42b15a82a8aaccda568efa709a"
       },
       {
         "rank": 2,
         "path": "agents/1051/details.zh.json",
         "pointer": "/passive/level/1051502/desc/1",
-        "sha256": "c66515c806a49ed5557e851bf6581014b5763dd3a2bfe585b8864530d37a01da"
+        "sha256": "42b194749809f03e863103a065547c201b102f42b15a82a8aaccda568efa709a"
       },
       {
         "rank": 3,
         "path": "agents/1051/details.zh.json",
         "pointer": "/passive/level/1051503/desc/1",
-        "sha256": "c66515c806a49ed5557e851bf6581014b5763dd3a2bfe585b8864530d37a01da"
+        "sha256": "42b194749809f03e863103a065547c201b102f42b15a82a8aaccda568efa709a"
       },
       {
         "rank": 4,
         "path": "agents/1051/details.zh.json",
         "pointer": "/passive/level/1051504/desc/1",
-        "sha256": "c66515c806a49ed5557e851bf6581014b5763dd3a2bfe585b8864530d37a01da"
+        "sha256": "42b194749809f03e863103a065547c201b102f42b15a82a8aaccda568efa709a"
       },
       {
         "rank": 5,
         "path": "agents/1051/details.zh.json",
         "pointer": "/passive/level/1051505/desc/1",
-        "sha256": "c66515c806a49ed5557e851bf6581014b5763dd3a2bfe585b8864530d37a01da"
+        "sha256": "42b194749809f03e863103a065547c201b102f42b15a82a8aaccda568efa709a"
       },
       {
         "rank": 6,
         "path": "agents/1051/details.zh.json",
         "pointer": "/passive/level/1051506/desc/1",
-        "sha256": "c66515c806a49ed5557e851bf6581014b5763dd3a2bfe585b8864530d37a01da"
+        "sha256": "42b194749809f03e863103a065547c201b102f42b15a82a8aaccda568efa709a"
       },
       {
         "rank": 7,
         "path": "agents/1051/details.zh.json",
         "pointer": "/passive/level/1051507/desc/1",
-        "sha256": "c66515c806a49ed5557e851bf6581014b5763dd3a2bfe585b8864530d37a01da"
+        "sha256": "42b194749809f03e863103a065547c201b102f42b15a82a8aaccda568efa709a"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -494,7 +494,7 @@
         "rank": 7,
         "path": "agents/1321/details.zh.json",
         "pointer": "/passive/level/1321507/desc/0",
-        "sha256": "ec99d046c695ada6f090a4da5a38bfe5951552996ead6a85ce7f5385727c8783"
+        "sha256": "354cc0d37fb54146154670fcf729f8c0ab66495602d730b00241b093cc78365b"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -506,43 +506,43 @@
         "rank": 1,
         "path": "agents/1321/details.zh.json",
         "pointer": "/passive/level/1321501/desc/1",
-        "sha256": "ec99d046c695ada6f090a4da5a38bfe5951552996ead6a85ce7f5385727c8783"
+        "sha256": "354cc0d37fb54146154670fcf729f8c0ab66495602d730b00241b093cc78365b"
       },
       {
         "rank": 2,
         "path": "agents/1321/details.zh.json",
         "pointer": "/passive/level/1321502/desc/1",
-        "sha256": "ec99d046c695ada6f090a4da5a38bfe5951552996ead6a85ce7f5385727c8783"
+        "sha256": "354cc0d37fb54146154670fcf729f8c0ab66495602d730b00241b093cc78365b"
       },
       {
         "rank": 3,
         "path": "agents/1321/details.zh.json",
         "pointer": "/passive/level/1321503/desc/1",
-        "sha256": "ec99d046c695ada6f090a4da5a38bfe5951552996ead6a85ce7f5385727c8783"
+        "sha256": "354cc0d37fb54146154670fcf729f8c0ab66495602d730b00241b093cc78365b"
       },
       {
         "rank": 4,
         "path": "agents/1321/details.zh.json",
         "pointer": "/passive/level/1321504/desc/1",
-        "sha256": "ec99d046c695ada6f090a4da5a38bfe5951552996ead6a85ce7f5385727c8783"
+        "sha256": "354cc0d37fb54146154670fcf729f8c0ab66495602d730b00241b093cc78365b"
       },
       {
         "rank": 5,
         "path": "agents/1321/details.zh.json",
         "pointer": "/passive/level/1321505/desc/1",
-        "sha256": "ec99d046c695ada6f090a4da5a38bfe5951552996ead6a85ce7f5385727c8783"
+        "sha256": "354cc0d37fb54146154670fcf729f8c0ab66495602d730b00241b093cc78365b"
       },
       {
         "rank": 6,
         "path": "agents/1321/details.zh.json",
         "pointer": "/passive/level/1321506/desc/1",
-        "sha256": "ec99d046c695ada6f090a4da5a38bfe5951552996ead6a85ce7f5385727c8783"
+        "sha256": "354cc0d37fb54146154670fcf729f8c0ab66495602d730b00241b093cc78365b"
       },
       {
         "rank": 7,
         "path": "agents/1321/details.zh.json",
         "pointer": "/passive/level/1321507/desc/1",
-        "sha256": "ec99d046c695ada6f090a4da5a38bfe5951552996ead6a85ce7f5385727c8783"
+        "sha256": "354cc0d37fb54146154670fcf729f8c0ab66495602d730b00241b093cc78365b"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -554,43 +554,43 @@
         "rank": 1,
         "path": "agents/1551/details.zh.json",
         "pointer": "/passive/level/1551501/desc/1",
-        "sha256": "b2915a1c094de9a5c88661c213080ad88498c1748e9a9fe71461729bcfe60856"
+        "sha256": "57f9c0ea9c04f6a09787e6f41ac77133b4cafaf26a380a1c6cd735ef3cbcd4d3"
       },
       {
         "rank": 2,
         "path": "agents/1551/details.zh.json",
         "pointer": "/passive/level/1551502/desc/1",
-        "sha256": "b2915a1c094de9a5c88661c213080ad88498c1748e9a9fe71461729bcfe60856"
+        "sha256": "57f9c0ea9c04f6a09787e6f41ac77133b4cafaf26a380a1c6cd735ef3cbcd4d3"
       },
       {
         "rank": 3,
         "path": "agents/1551/details.zh.json",
         "pointer": "/passive/level/1551503/desc/1",
-        "sha256": "b2915a1c094de9a5c88661c213080ad88498c1748e9a9fe71461729bcfe60856"
+        "sha256": "57f9c0ea9c04f6a09787e6f41ac77133b4cafaf26a380a1c6cd735ef3cbcd4d3"
       },
       {
         "rank": 4,
         "path": "agents/1551/details.zh.json",
         "pointer": "/passive/level/1551504/desc/1",
-        "sha256": "b2915a1c094de9a5c88661c213080ad88498c1748e9a9fe71461729bcfe60856"
+        "sha256": "57f9c0ea9c04f6a09787e6f41ac77133b4cafaf26a380a1c6cd735ef3cbcd4d3"
       },
       {
         "rank": 5,
         "path": "agents/1551/details.zh.json",
         "pointer": "/passive/level/1551505/desc/1",
-        "sha256": "b2915a1c094de9a5c88661c213080ad88498c1748e9a9fe71461729bcfe60856"
+        "sha256": "57f9c0ea9c04f6a09787e6f41ac77133b4cafaf26a380a1c6cd735ef3cbcd4d3"
       },
       {
         "rank": 6,
         "path": "agents/1551/details.zh.json",
         "pointer": "/passive/level/1551506/desc/1",
-        "sha256": "b2915a1c094de9a5c88661c213080ad88498c1748e9a9fe71461729bcfe60856"
+        "sha256": "57f9c0ea9c04f6a09787e6f41ac77133b4cafaf26a380a1c6cd735ef3cbcd4d3"
       },
       {
         "rank": 7,
         "path": "agents/1551/details.zh.json",
         "pointer": "/passive/level/1551507/desc/1",
-        "sha256": "b2915a1c094de9a5c88661c213080ad88498c1748e9a9fe71461729bcfe60856"
+        "sha256": "57f9c0ea9c04f6a09787e6f41ac77133b4cafaf26a380a1c6cd735ef3cbcd4d3"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -602,7 +602,7 @@
         "rank": 7,
         "path": "agents/1071/details.zh.json",
         "pointer": "/passive/level/1071507/desc/0",
-        "sha256": "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294"
+        "sha256": "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致；该块级证据只核对其 rank 0 记录，影画记录的核心依赖按记录级键单独登记"
@@ -613,7 +613,7 @@
       {
         "path": "agents/1071/details.zh.json",
         "pointer": "/talent/2/desc",
-        "sha256": "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294"
+        "sha256": "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace"
       }
     ],
     "verification": "天赋 2 明确提升至原本 150%，独立选项只提供额外 50%；逐档基础参数和证据由 semantics 引用 caesar:blk-legacy:mindscape:0:legacy-team-atk",
@@ -631,43 +631,43 @@
         "rank": 1,
         "path": "agents/1071/details.zh.json",
         "pointer": "/passive/level/1071501/desc/1",
-        "sha256": "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294"
+        "sha256": "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace"
       },
       {
         "rank": 2,
         "path": "agents/1071/details.zh.json",
         "pointer": "/passive/level/1071502/desc/1",
-        "sha256": "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294"
+        "sha256": "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace"
       },
       {
         "rank": 3,
         "path": "agents/1071/details.zh.json",
         "pointer": "/passive/level/1071503/desc/1",
-        "sha256": "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294"
+        "sha256": "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace"
       },
       {
         "rank": 4,
         "path": "agents/1071/details.zh.json",
         "pointer": "/passive/level/1071504/desc/1",
-        "sha256": "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294"
+        "sha256": "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace"
       },
       {
         "rank": 5,
         "path": "agents/1071/details.zh.json",
         "pointer": "/passive/level/1071505/desc/1",
-        "sha256": "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294"
+        "sha256": "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace"
       },
       {
         "rank": 6,
         "path": "agents/1071/details.zh.json",
         "pointer": "/passive/level/1071506/desc/1",
-        "sha256": "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294"
+        "sha256": "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace"
       },
       {
         "rank": 7,
         "path": "agents/1071/details.zh.json",
         "pointer": "/passive/level/1071507/desc/1",
-        "sha256": "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294"
+        "sha256": "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -679,43 +679,43 @@
         "rank": 1,
         "path": "agents/1451/details.zh.json",
         "pointer": "/passive/level/1451501/desc/1",
-        "sha256": "7f004d332642bca094a8c036dc76f625e18003d8c2ea253a2cdbfce95be2cad5"
+        "sha256": "0c4e1a4b9b7af5ef5dec535bd0a37ff6bd03789c494f456da821c513ed03fa5a"
       },
       {
         "rank": 2,
         "path": "agents/1451/details.zh.json",
         "pointer": "/passive/level/1451502/desc/1",
-        "sha256": "7f004d332642bca094a8c036dc76f625e18003d8c2ea253a2cdbfce95be2cad5"
+        "sha256": "0c4e1a4b9b7af5ef5dec535bd0a37ff6bd03789c494f456da821c513ed03fa5a"
       },
       {
         "rank": 3,
         "path": "agents/1451/details.zh.json",
         "pointer": "/passive/level/1451503/desc/1",
-        "sha256": "7f004d332642bca094a8c036dc76f625e18003d8c2ea253a2cdbfce95be2cad5"
+        "sha256": "0c4e1a4b9b7af5ef5dec535bd0a37ff6bd03789c494f456da821c513ed03fa5a"
       },
       {
         "rank": 4,
         "path": "agents/1451/details.zh.json",
         "pointer": "/passive/level/1451504/desc/1",
-        "sha256": "7f004d332642bca094a8c036dc76f625e18003d8c2ea253a2cdbfce95be2cad5"
+        "sha256": "0c4e1a4b9b7af5ef5dec535bd0a37ff6bd03789c494f456da821c513ed03fa5a"
       },
       {
         "rank": 5,
         "path": "agents/1451/details.zh.json",
         "pointer": "/passive/level/1451505/desc/1",
-        "sha256": "7f004d332642bca094a8c036dc76f625e18003d8c2ea253a2cdbfce95be2cad5"
+        "sha256": "0c4e1a4b9b7af5ef5dec535bd0a37ff6bd03789c494f456da821c513ed03fa5a"
       },
       {
         "rank": 6,
         "path": "agents/1451/details.zh.json",
         "pointer": "/passive/level/1451506/desc/1",
-        "sha256": "7f004d332642bca094a8c036dc76f625e18003d8c2ea253a2cdbfce95be2cad5"
+        "sha256": "0c4e1a4b9b7af5ef5dec535bd0a37ff6bd03789c494f456da821c513ed03fa5a"
       },
       {
         "rank": 7,
         "path": "agents/1451/details.zh.json",
         "pointer": "/passive/level/1451507/desc/1",
-        "sha256": "7f004d332642bca094a8c036dc76f625e18003d8c2ea253a2cdbfce95be2cad5"
+        "sha256": "0c4e1a4b9b7af5ef5dec535bd0a37ff6bd03789c494f456da821c513ed03fa5a"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -727,7 +727,7 @@
         "rank": 7,
         "path": "agents/1061/details.zh.json",
         "pointer": "/passive/level/1061507/desc/0",
-        "sha256": "74429c2042cc96578a08217a2c183d97b6daee51264b6b5700f6ed99d56e4eac"
+        "sha256": "3f276962449fd19c424f8ac27936129b34f5aa3befc8514ad069c36ff227750e"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -739,43 +739,43 @@
         "rank": 1,
         "path": "agents/1061/details.zh.json",
         "pointer": "/passive/level/1061501/desc/1",
-        "sha256": "74429c2042cc96578a08217a2c183d97b6daee51264b6b5700f6ed99d56e4eac"
+        "sha256": "3f276962449fd19c424f8ac27936129b34f5aa3befc8514ad069c36ff227750e"
       },
       {
         "rank": 2,
         "path": "agents/1061/details.zh.json",
         "pointer": "/passive/level/1061502/desc/1",
-        "sha256": "74429c2042cc96578a08217a2c183d97b6daee51264b6b5700f6ed99d56e4eac"
+        "sha256": "3f276962449fd19c424f8ac27936129b34f5aa3befc8514ad069c36ff227750e"
       },
       {
         "rank": 3,
         "path": "agents/1061/details.zh.json",
         "pointer": "/passive/level/1061503/desc/1",
-        "sha256": "74429c2042cc96578a08217a2c183d97b6daee51264b6b5700f6ed99d56e4eac"
+        "sha256": "3f276962449fd19c424f8ac27936129b34f5aa3befc8514ad069c36ff227750e"
       },
       {
         "rank": 4,
         "path": "agents/1061/details.zh.json",
         "pointer": "/passive/level/1061504/desc/1",
-        "sha256": "74429c2042cc96578a08217a2c183d97b6daee51264b6b5700f6ed99d56e4eac"
+        "sha256": "3f276962449fd19c424f8ac27936129b34f5aa3befc8514ad069c36ff227750e"
       },
       {
         "rank": 5,
         "path": "agents/1061/details.zh.json",
         "pointer": "/passive/level/1061505/desc/1",
-        "sha256": "74429c2042cc96578a08217a2c183d97b6daee51264b6b5700f6ed99d56e4eac"
+        "sha256": "3f276962449fd19c424f8ac27936129b34f5aa3befc8514ad069c36ff227750e"
       },
       {
         "rank": 6,
         "path": "agents/1061/details.zh.json",
         "pointer": "/passive/level/1061506/desc/1",
-        "sha256": "74429c2042cc96578a08217a2c183d97b6daee51264b6b5700f6ed99d56e4eac"
+        "sha256": "3f276962449fd19c424f8ac27936129b34f5aa3befc8514ad069c36ff227750e"
       },
       {
         "rank": 7,
         "path": "agents/1061/details.zh.json",
         "pointer": "/passive/level/1061507/desc/1",
-        "sha256": "74429c2042cc96578a08217a2c183d97b6daee51264b6b5700f6ed99d56e4eac"
+        "sha256": "3f276962449fd19c424f8ac27936129b34f5aa3befc8514ad069c36ff227750e"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -787,7 +787,7 @@
         "rank": 7,
         "path": "agents/1431/details.zh.json",
         "pointer": "/passive/level/1431507/desc/0",
-        "sha256": "8eeb89663329e6c021692386def9f86e19e01da5560b3b2e4b3720649cd77cad"
+        "sha256": "235ffeff58ecb2fb0e0542f71e0cd79a69eee8ac7500aabac976f2a78b742db4"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -799,43 +799,43 @@
         "rank": 1,
         "path": "agents/1301/details.zh.json",
         "pointer": "/passive/level/1301501/desc/1",
-        "sha256": "b4e16ee6f071ca8b0c2de2e5ac97c221852b5f032310e54c893406aab905e9db"
+        "sha256": "78b8116311a2510e19507b3cca0aac7e98514deaa8dd677de16627726c211599"
       },
       {
         "rank": 2,
         "path": "agents/1301/details.zh.json",
         "pointer": "/passive/level/1301502/desc/1",
-        "sha256": "b4e16ee6f071ca8b0c2de2e5ac97c221852b5f032310e54c893406aab905e9db"
+        "sha256": "78b8116311a2510e19507b3cca0aac7e98514deaa8dd677de16627726c211599"
       },
       {
         "rank": 3,
         "path": "agents/1301/details.zh.json",
         "pointer": "/passive/level/1301503/desc/1",
-        "sha256": "b4e16ee6f071ca8b0c2de2e5ac97c221852b5f032310e54c893406aab905e9db"
+        "sha256": "78b8116311a2510e19507b3cca0aac7e98514deaa8dd677de16627726c211599"
       },
       {
         "rank": 4,
         "path": "agents/1301/details.zh.json",
         "pointer": "/passive/level/1301504/desc/1",
-        "sha256": "b4e16ee6f071ca8b0c2de2e5ac97c221852b5f032310e54c893406aab905e9db"
+        "sha256": "78b8116311a2510e19507b3cca0aac7e98514deaa8dd677de16627726c211599"
       },
       {
         "rank": 5,
         "path": "agents/1301/details.zh.json",
         "pointer": "/passive/level/1301505/desc/1",
-        "sha256": "b4e16ee6f071ca8b0c2de2e5ac97c221852b5f032310e54c893406aab905e9db"
+        "sha256": "78b8116311a2510e19507b3cca0aac7e98514deaa8dd677de16627726c211599"
       },
       {
         "rank": 6,
         "path": "agents/1301/details.zh.json",
         "pointer": "/passive/level/1301506/desc/1",
-        "sha256": "b4e16ee6f071ca8b0c2de2e5ac97c221852b5f032310e54c893406aab905e9db"
+        "sha256": "78b8116311a2510e19507b3cca0aac7e98514deaa8dd677de16627726c211599"
       },
       {
         "rank": 7,
         "path": "agents/1301/details.zh.json",
         "pointer": "/passive/level/1301507/desc/1",
-        "sha256": "b4e16ee6f071ca8b0c2de2e5ac97c221852b5f032310e54c893406aab905e9db"
+        "sha256": "78b8116311a2510e19507b3cca0aac7e98514deaa8dd677de16627726c211599"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -847,7 +847,7 @@
         "rank": 7,
         "path": "agents/1031/details.zh.json",
         "pointer": "/passive/level/1031507/desc/0",
-        "sha256": "f648a8ff0d98f18d9348c7b10c79d234bf4d52d8d6ac0d92e596822a9016aaf8"
+        "sha256": "a35b72056c57ba7eba71300e2e51691190c052362c4cc55e8bccfb9787cdab71"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -859,43 +859,43 @@
         "rank": 1,
         "path": "agents/1031/details.zh.json",
         "pointer": "/passive/level/1031501/desc/1",
-        "sha256": "f648a8ff0d98f18d9348c7b10c79d234bf4d52d8d6ac0d92e596822a9016aaf8"
+        "sha256": "a35b72056c57ba7eba71300e2e51691190c052362c4cc55e8bccfb9787cdab71"
       },
       {
         "rank": 2,
         "path": "agents/1031/details.zh.json",
         "pointer": "/passive/level/1031502/desc/1",
-        "sha256": "f648a8ff0d98f18d9348c7b10c79d234bf4d52d8d6ac0d92e596822a9016aaf8"
+        "sha256": "a35b72056c57ba7eba71300e2e51691190c052362c4cc55e8bccfb9787cdab71"
       },
       {
         "rank": 3,
         "path": "agents/1031/details.zh.json",
         "pointer": "/passive/level/1031503/desc/1",
-        "sha256": "f648a8ff0d98f18d9348c7b10c79d234bf4d52d8d6ac0d92e596822a9016aaf8"
+        "sha256": "a35b72056c57ba7eba71300e2e51691190c052362c4cc55e8bccfb9787cdab71"
       },
       {
         "rank": 4,
         "path": "agents/1031/details.zh.json",
         "pointer": "/passive/level/1031504/desc/1",
-        "sha256": "f648a8ff0d98f18d9348c7b10c79d234bf4d52d8d6ac0d92e596822a9016aaf8"
+        "sha256": "a35b72056c57ba7eba71300e2e51691190c052362c4cc55e8bccfb9787cdab71"
       },
       {
         "rank": 5,
         "path": "agents/1031/details.zh.json",
         "pointer": "/passive/level/1031505/desc/1",
-        "sha256": "f648a8ff0d98f18d9348c7b10c79d234bf4d52d8d6ac0d92e596822a9016aaf8"
+        "sha256": "a35b72056c57ba7eba71300e2e51691190c052362c4cc55e8bccfb9787cdab71"
       },
       {
         "rank": 6,
         "path": "agents/1031/details.zh.json",
         "pointer": "/passive/level/1031506/desc/1",
-        "sha256": "f648a8ff0d98f18d9348c7b10c79d234bf4d52d8d6ac0d92e596822a9016aaf8"
+        "sha256": "a35b72056c57ba7eba71300e2e51691190c052362c4cc55e8bccfb9787cdab71"
       },
       {
         "rank": 7,
         "path": "agents/1031/details.zh.json",
         "pointer": "/passive/level/1031507/desc/1",
-        "sha256": "f648a8ff0d98f18d9348c7b10c79d234bf4d52d8d6ac0d92e596822a9016aaf8"
+        "sha256": "a35b72056c57ba7eba71300e2e51691190c052362c4cc55e8bccfb9787cdab71"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -907,7 +907,7 @@
         "rank": 7,
         "path": "agents/1111/details.zh.json",
         "pointer": "/passive/level/1111507/desc/0",
-        "sha256": "f745b857f63d057f5d0154cd23daac8da947d6cd6c88cc810eae402f906a062e"
+        "sha256": "4764cf82634f2426dbb6ef3ee06a7f2a4703a004022c5894f1a77cf18c4edcbf"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -919,13 +919,13 @@
         "rank": 7,
         "path": "agents/1521/details.zh.json",
         "pointer": "/passive/level/1521055/desc/0",
-        "sha256": "371c0ce1f9c6e363825357ed2c57fcdbddbbf3587e13e8dd61697d41954e8dac"
+        "sha256": "930fffd8420934fa0825005c79fdbd315933828c7a4fe5d5cb38a4da1acff4e6"
       },
       {
         "rank": 7,
         "path": "agents/1521/details.zh.json",
         "pointer": "/talent/1/desc",
-        "sha256": "371c0ce1f9c6e363825357ed2c57fcdbddbbf3587e13e8dd61697d41954e8dac"
+        "sha256": "930fffd8420934fa0825005c79fdbd315933828c7a4fe5d5cb38a4da1acff4e6"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与核心等级 7 说明一致；1 影将该核心效果提升至原本的 140%，其两项防御强化继承相同核心等级限制，独立抗性效果不继承。"
@@ -937,43 +937,43 @@
         "rank": 1,
         "path": "agents/1521/details.zh.json",
         "pointer": "/passive/level/1521049/desc/1",
-        "sha256": "371c0ce1f9c6e363825357ed2c57fcdbddbbf3587e13e8dd61697d41954e8dac"
+        "sha256": "930fffd8420934fa0825005c79fdbd315933828c7a4fe5d5cb38a4da1acff4e6"
       },
       {
         "rank": 2,
         "path": "agents/1521/details.zh.json",
         "pointer": "/passive/level/1521050/desc/1",
-        "sha256": "371c0ce1f9c6e363825357ed2c57fcdbddbbf3587e13e8dd61697d41954e8dac"
+        "sha256": "930fffd8420934fa0825005c79fdbd315933828c7a4fe5d5cb38a4da1acff4e6"
       },
       {
         "rank": 3,
         "path": "agents/1521/details.zh.json",
         "pointer": "/passive/level/1521051/desc/1",
-        "sha256": "371c0ce1f9c6e363825357ed2c57fcdbddbbf3587e13e8dd61697d41954e8dac"
+        "sha256": "930fffd8420934fa0825005c79fdbd315933828c7a4fe5d5cb38a4da1acff4e6"
       },
       {
         "rank": 4,
         "path": "agents/1521/details.zh.json",
         "pointer": "/passive/level/1521052/desc/1",
-        "sha256": "371c0ce1f9c6e363825357ed2c57fcdbddbbf3587e13e8dd61697d41954e8dac"
+        "sha256": "930fffd8420934fa0825005c79fdbd315933828c7a4fe5d5cb38a4da1acff4e6"
       },
       {
         "rank": 5,
         "path": "agents/1521/details.zh.json",
         "pointer": "/passive/level/1521053/desc/1",
-        "sha256": "371c0ce1f9c6e363825357ed2c57fcdbddbbf3587e13e8dd61697d41954e8dac"
+        "sha256": "930fffd8420934fa0825005c79fdbd315933828c7a4fe5d5cb38a4da1acff4e6"
       },
       {
         "rank": 6,
         "path": "agents/1521/details.zh.json",
         "pointer": "/passive/level/1521054/desc/1",
-        "sha256": "371c0ce1f9c6e363825357ed2c57fcdbddbbf3587e13e8dd61697d41954e8dac"
+        "sha256": "930fffd8420934fa0825005c79fdbd315933828c7a4fe5d5cb38a4da1acff4e6"
       },
       {
         "rank": 7,
         "path": "agents/1521/details.zh.json",
         "pointer": "/passive/level/1521055/desc/1",
-        "sha256": "371c0ce1f9c6e363825357ed2c57fcdbddbbf3587e13e8dd61697d41954e8dac"
+        "sha256": "930fffd8420934fa0825005c79fdbd315933828c7a4fe5d5cb38a4da1acff4e6"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -985,43 +985,43 @@
         "rank": 1,
         "path": "agents/1591/details.zh.json",
         "pointer": "/passive/level/1591501/desc/1",
-        "sha256": "b0f4d514d4e7c8345705d38abc41017eaa9b6d6c33b5168e829a730266464c5c"
+        "sha256": "a617c3006ecec7f3e004ab956fbfa48f6de9e2017af9d395c43f3c89387cf67a"
       },
       {
         "rank": 2,
         "path": "agents/1591/details.zh.json",
         "pointer": "/passive/level/1591502/desc/1",
-        "sha256": "b0f4d514d4e7c8345705d38abc41017eaa9b6d6c33b5168e829a730266464c5c"
+        "sha256": "a617c3006ecec7f3e004ab956fbfa48f6de9e2017af9d395c43f3c89387cf67a"
       },
       {
         "rank": 3,
         "path": "agents/1591/details.zh.json",
         "pointer": "/passive/level/1591503/desc/1",
-        "sha256": "b0f4d514d4e7c8345705d38abc41017eaa9b6d6c33b5168e829a730266464c5c"
+        "sha256": "a617c3006ecec7f3e004ab956fbfa48f6de9e2017af9d395c43f3c89387cf67a"
       },
       {
         "rank": 4,
         "path": "agents/1591/details.zh.json",
         "pointer": "/passive/level/1591504/desc/1",
-        "sha256": "b0f4d514d4e7c8345705d38abc41017eaa9b6d6c33b5168e829a730266464c5c"
+        "sha256": "a617c3006ecec7f3e004ab956fbfa48f6de9e2017af9d395c43f3c89387cf67a"
       },
       {
         "rank": 5,
         "path": "agents/1591/details.zh.json",
         "pointer": "/passive/level/1591505/desc/1",
-        "sha256": "b0f4d514d4e7c8345705d38abc41017eaa9b6d6c33b5168e829a730266464c5c"
+        "sha256": "a617c3006ecec7f3e004ab956fbfa48f6de9e2017af9d395c43f3c89387cf67a"
       },
       {
         "rank": 6,
         "path": "agents/1591/details.zh.json",
         "pointer": "/passive/level/1591506/desc/1",
-        "sha256": "b0f4d514d4e7c8345705d38abc41017eaa9b6d6c33b5168e829a730266464c5c"
+        "sha256": "a617c3006ecec7f3e004ab956fbfa48f6de9e2017af9d395c43f3c89387cf67a"
       },
       {
         "rank": 7,
         "path": "agents/1591/details.zh.json",
         "pointer": "/passive/level/1591507/desc/1",
-        "sha256": "b0f4d514d4e7c8345705d38abc41017eaa9b6d6c33b5168e829a730266464c5c"
+        "sha256": "a617c3006ecec7f3e004ab956fbfa48f6de9e2017af9d395c43f3c89387cf67a"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1033,7 +1033,7 @@
         "rank": 7,
         "path": "agents/1461/details.zh.json",
         "pointer": "/passive/level/1461507/desc/0",
-        "sha256": "e75d14f9aae7c433ef28357bf9f4f9d9e42a09fd9e3b0e00cca1c833cca858a9"
+        "sha256": "9daa7e586a1bcbfa6b9b194522e06b96dc3b377bfcabb7a10def4bb46c05beb8"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1045,7 +1045,7 @@
         "rank": 7,
         "path": "agents/1361/details.zh.json",
         "pointer": "/passive/level/1361507/desc/0",
-        "sha256": "adf9a849c54cbd7c7ae0b5fe615f2aa3b9f2b2c7d17531331904219326930a0e"
+        "sha256": "d0eeeeade83a737d7824059db9f5a1bd51ad857779ffd2a408485dbca1e2c882"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1057,43 +1057,43 @@
         "rank": 1,
         "path": "agents/1531/details.zh.json",
         "pointer": "/passive/level/1531049/desc/1",
-        "sha256": "9ed1c481827bc66754f552cebde2625f9f1d4de9173a5d4ddd06083657cdf716"
+        "sha256": "590249e15469f119cc48f40b6f9fcdd61e76e86958dc4fe66ad6ab4873011581"
       },
       {
         "rank": 2,
         "path": "agents/1531/details.zh.json",
         "pointer": "/passive/level/1531050/desc/1",
-        "sha256": "9ed1c481827bc66754f552cebde2625f9f1d4de9173a5d4ddd06083657cdf716"
+        "sha256": "590249e15469f119cc48f40b6f9fcdd61e76e86958dc4fe66ad6ab4873011581"
       },
       {
         "rank": 3,
         "path": "agents/1531/details.zh.json",
         "pointer": "/passive/level/1531051/desc/1",
-        "sha256": "9ed1c481827bc66754f552cebde2625f9f1d4de9173a5d4ddd06083657cdf716"
+        "sha256": "590249e15469f119cc48f40b6f9fcdd61e76e86958dc4fe66ad6ab4873011581"
       },
       {
         "rank": 4,
         "path": "agents/1531/details.zh.json",
         "pointer": "/passive/level/1531052/desc/1",
-        "sha256": "9ed1c481827bc66754f552cebde2625f9f1d4de9173a5d4ddd06083657cdf716"
+        "sha256": "590249e15469f119cc48f40b6f9fcdd61e76e86958dc4fe66ad6ab4873011581"
       },
       {
         "rank": 5,
         "path": "agents/1531/details.zh.json",
         "pointer": "/passive/level/1531053/desc/1",
-        "sha256": "9ed1c481827bc66754f552cebde2625f9f1d4de9173a5d4ddd06083657cdf716"
+        "sha256": "590249e15469f119cc48f40b6f9fcdd61e76e86958dc4fe66ad6ab4873011581"
       },
       {
         "rank": 6,
         "path": "agents/1531/details.zh.json",
         "pointer": "/passive/level/1531054/desc/1",
-        "sha256": "9ed1c481827bc66754f552cebde2625f9f1d4de9173a5d4ddd06083657cdf716"
+        "sha256": "590249e15469f119cc48f40b6f9fcdd61e76e86958dc4fe66ad6ab4873011581"
       },
       {
         "rank": 7,
         "path": "agents/1531/details.zh.json",
         "pointer": "/passive/level/1531055/desc/1",
-        "sha256": "9ed1c481827bc66754f552cebde2625f9f1d4de9173a5d4ddd06083657cdf716"
+        "sha256": "590249e15469f119cc48f40b6f9fcdd61e76e86958dc4fe66ad6ab4873011581"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1105,43 +1105,43 @@
         "rank": 1,
         "path": "agents/1091/details.zh.json",
         "pointer": "/passive/level/1091501/desc/1",
-        "sha256": "45f70931c081d73d085eadea5a23d6c21cc314019090d0577a76a9b3f722973e"
+        "sha256": "5f00f24d508f8916dbfc94993a7ff4dffda09d0fafddb30259f64cee791aa841"
       },
       {
         "rank": 2,
         "path": "agents/1091/details.zh.json",
         "pointer": "/passive/level/1091502/desc/1",
-        "sha256": "45f70931c081d73d085eadea5a23d6c21cc314019090d0577a76a9b3f722973e"
+        "sha256": "5f00f24d508f8916dbfc94993a7ff4dffda09d0fafddb30259f64cee791aa841"
       },
       {
         "rank": 3,
         "path": "agents/1091/details.zh.json",
         "pointer": "/passive/level/1091503/desc/1",
-        "sha256": "45f70931c081d73d085eadea5a23d6c21cc314019090d0577a76a9b3f722973e"
+        "sha256": "5f00f24d508f8916dbfc94993a7ff4dffda09d0fafddb30259f64cee791aa841"
       },
       {
         "rank": 4,
         "path": "agents/1091/details.zh.json",
         "pointer": "/passive/level/1091504/desc/1",
-        "sha256": "45f70931c081d73d085eadea5a23d6c21cc314019090d0577a76a9b3f722973e"
+        "sha256": "5f00f24d508f8916dbfc94993a7ff4dffda09d0fafddb30259f64cee791aa841"
       },
       {
         "rank": 5,
         "path": "agents/1091/details.zh.json",
         "pointer": "/passive/level/1091505/desc/1",
-        "sha256": "45f70931c081d73d085eadea5a23d6c21cc314019090d0577a76a9b3f722973e"
+        "sha256": "5f00f24d508f8916dbfc94993a7ff4dffda09d0fafddb30259f64cee791aa841"
       },
       {
         "rank": 6,
         "path": "agents/1091/details.zh.json",
         "pointer": "/passive/level/1091506/desc/1",
-        "sha256": "45f70931c081d73d085eadea5a23d6c21cc314019090d0577a76a9b3f722973e"
+        "sha256": "5f00f24d508f8916dbfc94993a7ff4dffda09d0fafddb30259f64cee791aa841"
       },
       {
         "rank": 7,
         "path": "agents/1091/details.zh.json",
         "pointer": "/passive/level/1091507/desc/1",
-        "sha256": "45f70931c081d73d085eadea5a23d6c21cc314019090d0577a76a9b3f722973e"
+        "sha256": "5f00f24d508f8916dbfc94993a7ff4dffda09d0fafddb30259f64cee791aa841"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1153,43 +1153,43 @@
         "rank": 1,
         "path": "agents/1121/details.zh.json",
         "pointer": "/passive/level/1121501/desc/1",
-        "sha256": "7b29944c5851ca9da2b53fb909af7db7f34875043c4f44138b05cd9cdb41e741"
+        "sha256": "893191112983049b0dbd0ae2edb0f63ba16c5e74d1ebdc42448ebaf943197ea2"
       },
       {
         "rank": 2,
         "path": "agents/1121/details.zh.json",
         "pointer": "/passive/level/1121502/desc/1",
-        "sha256": "7b29944c5851ca9da2b53fb909af7db7f34875043c4f44138b05cd9cdb41e741"
+        "sha256": "893191112983049b0dbd0ae2edb0f63ba16c5e74d1ebdc42448ebaf943197ea2"
       },
       {
         "rank": 3,
         "path": "agents/1121/details.zh.json",
         "pointer": "/passive/level/1121503/desc/1",
-        "sha256": "7b29944c5851ca9da2b53fb909af7db7f34875043c4f44138b05cd9cdb41e741"
+        "sha256": "893191112983049b0dbd0ae2edb0f63ba16c5e74d1ebdc42448ebaf943197ea2"
       },
       {
         "rank": 4,
         "path": "agents/1121/details.zh.json",
         "pointer": "/passive/level/1121504/desc/1",
-        "sha256": "7b29944c5851ca9da2b53fb909af7db7f34875043c4f44138b05cd9cdb41e741"
+        "sha256": "893191112983049b0dbd0ae2edb0f63ba16c5e74d1ebdc42448ebaf943197ea2"
       },
       {
         "rank": 5,
         "path": "agents/1121/details.zh.json",
         "pointer": "/passive/level/1121505/desc/1",
-        "sha256": "7b29944c5851ca9da2b53fb909af7db7f34875043c4f44138b05cd9cdb41e741"
+        "sha256": "893191112983049b0dbd0ae2edb0f63ba16c5e74d1ebdc42448ebaf943197ea2"
       },
       {
         "rank": 6,
         "path": "agents/1121/details.zh.json",
         "pointer": "/passive/level/1121506/desc/1",
-        "sha256": "7b29944c5851ca9da2b53fb909af7db7f34875043c4f44138b05cd9cdb41e741"
+        "sha256": "893191112983049b0dbd0ae2edb0f63ba16c5e74d1ebdc42448ebaf943197ea2"
       },
       {
         "rank": 7,
         "path": "agents/1121/details.zh.json",
         "pointer": "/passive/level/1121507/desc/1",
-        "sha256": "7b29944c5851ca9da2b53fb909af7db7f34875043c4f44138b05cd9cdb41e741"
+        "sha256": "893191112983049b0dbd0ae2edb0f63ba16c5e74d1ebdc42448ebaf943197ea2"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1201,7 +1201,7 @@
         "rank": 7,
         "path": "agents/1241/details.zh.json",
         "pointer": "/passive/level/1241507/desc/0",
-        "sha256": "fa06208d922a46dde4d9ecc7c93d3d723e8ed687e182445180c534c47cdf8ed9"
+        "sha256": "91063e9698d4786c3af4267096b0b7109097daa86be53821ee27d77cc9c1da96"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1213,43 +1213,43 @@
         "rank": 1,
         "path": "agents/1241/details.zh.json",
         "pointer": "/passive/level/1241501/desc/1",
-        "sha256": "fa06208d922a46dde4d9ecc7c93d3d723e8ed687e182445180c534c47cdf8ed9"
+        "sha256": "91063e9698d4786c3af4267096b0b7109097daa86be53821ee27d77cc9c1da96"
       },
       {
         "rank": 2,
         "path": "agents/1241/details.zh.json",
         "pointer": "/passive/level/1241502/desc/1",
-        "sha256": "fa06208d922a46dde4d9ecc7c93d3d723e8ed687e182445180c534c47cdf8ed9"
+        "sha256": "91063e9698d4786c3af4267096b0b7109097daa86be53821ee27d77cc9c1da96"
       },
       {
         "rank": 3,
         "path": "agents/1241/details.zh.json",
         "pointer": "/passive/level/1241503/desc/1",
-        "sha256": "fa06208d922a46dde4d9ecc7c93d3d723e8ed687e182445180c534c47cdf8ed9"
+        "sha256": "91063e9698d4786c3af4267096b0b7109097daa86be53821ee27d77cc9c1da96"
       },
       {
         "rank": 4,
         "path": "agents/1241/details.zh.json",
         "pointer": "/passive/level/1241504/desc/1",
-        "sha256": "fa06208d922a46dde4d9ecc7c93d3d723e8ed687e182445180c534c47cdf8ed9"
+        "sha256": "91063e9698d4786c3af4267096b0b7109097daa86be53821ee27d77cc9c1da96"
       },
       {
         "rank": 5,
         "path": "agents/1241/details.zh.json",
         "pointer": "/passive/level/1241505/desc/1",
-        "sha256": "fa06208d922a46dde4d9ecc7c93d3d723e8ed687e182445180c534c47cdf8ed9"
+        "sha256": "91063e9698d4786c3af4267096b0b7109097daa86be53821ee27d77cc9c1da96"
       },
       {
         "rank": 6,
         "path": "agents/1241/details.zh.json",
         "pointer": "/passive/level/1241506/desc/1",
-        "sha256": "fa06208d922a46dde4d9ecc7c93d3d723e8ed687e182445180c534c47cdf8ed9"
+        "sha256": "91063e9698d4786c3af4267096b0b7109097daa86be53821ee27d77cc9c1da96"
       },
       {
         "rank": 7,
         "path": "agents/1241/details.zh.json",
         "pointer": "/passive/level/1241507/desc/1",
-        "sha256": "fa06208d922a46dde4d9ecc7c93d3d723e8ed687e182445180c534c47cdf8ed9"
+        "sha256": "91063e9698d4786c3af4267096b0b7109097daa86be53821ee27d77cc9c1da96"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1261,7 +1261,7 @@
         "rank": 7,
         "path": "agents/1171/details.zh.json",
         "pointer": "/passive/level/1171507/desc/0",
-        "sha256": "453f3284a6c8bcd52a4d2a99986d21beef4b695291d427fc43f4cad946902a18"
+        "sha256": "0768458e49d889444b7d83faab9586a9f5e6b1fa64638916b408b09b158fadb8"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1273,43 +1273,43 @@
         "rank": 1,
         "path": "agents/1171/details.zh.json",
         "pointer": "/passive/level/1171501/desc/1",
-        "sha256": "453f3284a6c8bcd52a4d2a99986d21beef4b695291d427fc43f4cad946902a18"
+        "sha256": "0768458e49d889444b7d83faab9586a9f5e6b1fa64638916b408b09b158fadb8"
       },
       {
         "rank": 2,
         "path": "agents/1171/details.zh.json",
         "pointer": "/passive/level/1171502/desc/1",
-        "sha256": "453f3284a6c8bcd52a4d2a99986d21beef4b695291d427fc43f4cad946902a18"
+        "sha256": "0768458e49d889444b7d83faab9586a9f5e6b1fa64638916b408b09b158fadb8"
       },
       {
         "rank": 3,
         "path": "agents/1171/details.zh.json",
         "pointer": "/passive/level/1171503/desc/1",
-        "sha256": "453f3284a6c8bcd52a4d2a99986d21beef4b695291d427fc43f4cad946902a18"
+        "sha256": "0768458e49d889444b7d83faab9586a9f5e6b1fa64638916b408b09b158fadb8"
       },
       {
         "rank": 4,
         "path": "agents/1171/details.zh.json",
         "pointer": "/passive/level/1171504/desc/1",
-        "sha256": "453f3284a6c8bcd52a4d2a99986d21beef4b695291d427fc43f4cad946902a18"
+        "sha256": "0768458e49d889444b7d83faab9586a9f5e6b1fa64638916b408b09b158fadb8"
       },
       {
         "rank": 5,
         "path": "agents/1171/details.zh.json",
         "pointer": "/passive/level/1171505/desc/1",
-        "sha256": "453f3284a6c8bcd52a4d2a99986d21beef4b695291d427fc43f4cad946902a18"
+        "sha256": "0768458e49d889444b7d83faab9586a9f5e6b1fa64638916b408b09b158fadb8"
       },
       {
         "rank": 6,
         "path": "agents/1171/details.zh.json",
         "pointer": "/passive/level/1171506/desc/1",
-        "sha256": "453f3284a6c8bcd52a4d2a99986d21beef4b695291d427fc43f4cad946902a18"
+        "sha256": "0768458e49d889444b7d83faab9586a9f5e6b1fa64638916b408b09b158fadb8"
       },
       {
         "rank": 7,
         "path": "agents/1171/details.zh.json",
         "pointer": "/passive/level/1171507/desc/1",
-        "sha256": "453f3284a6c8bcd52a4d2a99986d21beef4b695291d427fc43f4cad946902a18"
+        "sha256": "0768458e49d889444b7d83faab9586a9f5e6b1fa64638916b408b09b158fadb8"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1321,7 +1321,7 @@
         "rank": 7,
         "path": "agents/1411/details.zh.json",
         "pointer": "/passive/level/1411055/desc/0",
-        "sha256": "3c58a01094de2dc0c6298d8989a8b00f02f30afe36320524a01742ff7f99d560"
+        "sha256": "4922346ce3919844ad167b0e52e2ee4e3999d7a487429d549a27fe058e661920"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1333,43 +1333,43 @@
         "rank": 1,
         "path": "agents/1411/details.zh.json",
         "pointer": "/passive/level/1411049/desc/1",
-        "sha256": "3c58a01094de2dc0c6298d8989a8b00f02f30afe36320524a01742ff7f99d560"
+        "sha256": "4922346ce3919844ad167b0e52e2ee4e3999d7a487429d549a27fe058e661920"
       },
       {
         "rank": 2,
         "path": "agents/1411/details.zh.json",
         "pointer": "/passive/level/1411050/desc/1",
-        "sha256": "3c58a01094de2dc0c6298d8989a8b00f02f30afe36320524a01742ff7f99d560"
+        "sha256": "4922346ce3919844ad167b0e52e2ee4e3999d7a487429d549a27fe058e661920"
       },
       {
         "rank": 3,
         "path": "agents/1411/details.zh.json",
         "pointer": "/passive/level/1411051/desc/1",
-        "sha256": "3c58a01094de2dc0c6298d8989a8b00f02f30afe36320524a01742ff7f99d560"
+        "sha256": "4922346ce3919844ad167b0e52e2ee4e3999d7a487429d549a27fe058e661920"
       },
       {
         "rank": 4,
         "path": "agents/1411/details.zh.json",
         "pointer": "/passive/level/1411052/desc/1",
-        "sha256": "3c58a01094de2dc0c6298d8989a8b00f02f30afe36320524a01742ff7f99d560"
+        "sha256": "4922346ce3919844ad167b0e52e2ee4e3999d7a487429d549a27fe058e661920"
       },
       {
         "rank": 5,
         "path": "agents/1411/details.zh.json",
         "pointer": "/passive/level/1411053/desc/1",
-        "sha256": "3c58a01094de2dc0c6298d8989a8b00f02f30afe36320524a01742ff7f99d560"
+        "sha256": "4922346ce3919844ad167b0e52e2ee4e3999d7a487429d549a27fe058e661920"
       },
       {
         "rank": 6,
         "path": "agents/1411/details.zh.json",
         "pointer": "/passive/level/1411054/desc/1",
-        "sha256": "3c58a01094de2dc0c6298d8989a8b00f02f30afe36320524a01742ff7f99d560"
+        "sha256": "4922346ce3919844ad167b0e52e2ee4e3999d7a487429d549a27fe058e661920"
       },
       {
         "rank": 7,
         "path": "agents/1411/details.zh.json",
         "pointer": "/passive/level/1411055/desc/1",
-        "sha256": "3c58a01094de2dc0c6298d8989a8b00f02f30afe36320524a01742ff7f99d560"
+        "sha256": "4922346ce3919844ad167b0e52e2ee4e3999d7a487429d549a27fe058e661920"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1381,7 +1381,7 @@
         "rank": 7,
         "path": "agents/1221/details.zh.json",
         "pointer": "/passive/level/1221507/desc/0",
-        "sha256": "d4ea98a1be0229d2d8014659ec367bac45a0d37410ad11ec42b0b0f2e26fad02"
+        "sha256": "e7416b61f843bb5591298608c4a02e34d252f809d370e05a250b3b15e80a8734"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1393,43 +1393,43 @@
         "rank": 1,
         "path": "agents/1181/details.zh.json",
         "pointer": "/passive/level/1181508/desc/1",
-        "sha256": "39982521b198f62299a1cb4092dc1a3802c6b62748d04bcfda8f0f24b5afbdcf"
+        "sha256": "0752c155856afbbe7212ecb80b1f5a38b4a5fdfff3eeb8ccf0d48c770d2ff9d7"
       },
       {
         "rank": 2,
         "path": "agents/1181/details.zh.json",
         "pointer": "/passive/level/1181509/desc/1",
-        "sha256": "39982521b198f62299a1cb4092dc1a3802c6b62748d04bcfda8f0f24b5afbdcf"
+        "sha256": "0752c155856afbbe7212ecb80b1f5a38b4a5fdfff3eeb8ccf0d48c770d2ff9d7"
       },
       {
         "rank": 3,
         "path": "agents/1181/details.zh.json",
         "pointer": "/passive/level/1181510/desc/1",
-        "sha256": "39982521b198f62299a1cb4092dc1a3802c6b62748d04bcfda8f0f24b5afbdcf"
+        "sha256": "0752c155856afbbe7212ecb80b1f5a38b4a5fdfff3eeb8ccf0d48c770d2ff9d7"
       },
       {
         "rank": 4,
         "path": "agents/1181/details.zh.json",
         "pointer": "/passive/level/1181511/desc/1",
-        "sha256": "39982521b198f62299a1cb4092dc1a3802c6b62748d04bcfda8f0f24b5afbdcf"
+        "sha256": "0752c155856afbbe7212ecb80b1f5a38b4a5fdfff3eeb8ccf0d48c770d2ff9d7"
       },
       {
         "rank": 5,
         "path": "agents/1181/details.zh.json",
         "pointer": "/passive/level/1181512/desc/1",
-        "sha256": "39982521b198f62299a1cb4092dc1a3802c6b62748d04bcfda8f0f24b5afbdcf"
+        "sha256": "0752c155856afbbe7212ecb80b1f5a38b4a5fdfff3eeb8ccf0d48c770d2ff9d7"
       },
       {
         "rank": 6,
         "path": "agents/1181/details.zh.json",
         "pointer": "/passive/level/1181513/desc/1",
-        "sha256": "39982521b198f62299a1cb4092dc1a3802c6b62748d04bcfda8f0f24b5afbdcf"
+        "sha256": "0752c155856afbbe7212ecb80b1f5a38b4a5fdfff3eeb8ccf0d48c770d2ff9d7"
       },
       {
         "rank": 7,
         "path": "agents/1181/details.zh.json",
         "pointer": "/passive/level/1181514/desc/1",
-        "sha256": "39982521b198f62299a1cb4092dc1a3802c6b62748d04bcfda8f0f24b5afbdcf"
+        "sha256": "0752c155856afbbe7212ecb80b1f5a38b4a5fdfff3eeb8ccf0d48c770d2ff9d7"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1441,7 +1441,7 @@
         "rank": 7,
         "path": "agents/1391/details.zh.json",
         "pointer": "/passive/level/1391507/desc/0",
-        "sha256": "cfb0b4b580900d4c3e6c668c63e89b5f61d69e577db361b19bca86d063b36ae6"
+        "sha256": "913bb24102cf3e1b5362d25c183e235df8a96a2bed084379acb92ecc7e4282e6"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1453,7 +1453,7 @@
         "rank": 7,
         "path": "agents/1081/details.zh.json",
         "pointer": "/passive/level/1081507/desc/0",
-        "sha256": "db23f77d15c7779bee2b415c95d9d5db147c8009cae3710599a27d44a0ba1041"
+        "sha256": "57f7f4ce660541b55483f4decb5235df904df7498a62c2fe64de56fe9c62f7bc"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1465,43 +1465,43 @@
         "rank": 1,
         "path": "agents/1081/details.zh.json",
         "pointer": "/passive/level/1081501/desc/1",
-        "sha256": "db23f77d15c7779bee2b415c95d9d5db147c8009cae3710599a27d44a0ba1041"
+        "sha256": "57f7f4ce660541b55483f4decb5235df904df7498a62c2fe64de56fe9c62f7bc"
       },
       {
         "rank": 2,
         "path": "agents/1081/details.zh.json",
         "pointer": "/passive/level/1081502/desc/1",
-        "sha256": "db23f77d15c7779bee2b415c95d9d5db147c8009cae3710599a27d44a0ba1041"
+        "sha256": "57f7f4ce660541b55483f4decb5235df904df7498a62c2fe64de56fe9c62f7bc"
       },
       {
         "rank": 3,
         "path": "agents/1081/details.zh.json",
         "pointer": "/passive/level/1081503/desc/1",
-        "sha256": "db23f77d15c7779bee2b415c95d9d5db147c8009cae3710599a27d44a0ba1041"
+        "sha256": "57f7f4ce660541b55483f4decb5235df904df7498a62c2fe64de56fe9c62f7bc"
       },
       {
         "rank": 4,
         "path": "agents/1081/details.zh.json",
         "pointer": "/passive/level/1081504/desc/1",
-        "sha256": "db23f77d15c7779bee2b415c95d9d5db147c8009cae3710599a27d44a0ba1041"
+        "sha256": "57f7f4ce660541b55483f4decb5235df904df7498a62c2fe64de56fe9c62f7bc"
       },
       {
         "rank": 5,
         "path": "agents/1081/details.zh.json",
         "pointer": "/passive/level/1081505/desc/1",
-        "sha256": "db23f77d15c7779bee2b415c95d9d5db147c8009cae3710599a27d44a0ba1041"
+        "sha256": "57f7f4ce660541b55483f4decb5235df904df7498a62c2fe64de56fe9c62f7bc"
       },
       {
         "rank": 6,
         "path": "agents/1081/details.zh.json",
         "pointer": "/passive/level/1081506/desc/1",
-        "sha256": "db23f77d15c7779bee2b415c95d9d5db147c8009cae3710599a27d44a0ba1041"
+        "sha256": "57f7f4ce660541b55483f4decb5235df904df7498a62c2fe64de56fe9c62f7bc"
       },
       {
         "rank": 7,
         "path": "agents/1081/details.zh.json",
         "pointer": "/passive/level/1081507/desc/1",
-        "sha256": "db23f77d15c7779bee2b415c95d9d5db147c8009cae3710599a27d44a0ba1041"
+        "sha256": "57f7f4ce660541b55483f4decb5235df904df7498a62c2fe64de56fe9c62f7bc"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1513,43 +1513,43 @@
         "rank": 1,
         "path": "agents/1351/details.zh.json",
         "pointer": "/passive/level/1351501/desc/1",
-        "sha256": "235e80c934494724d7741226d0a400bbb44b73fa3caafe5fd8618bbd57108801"
+        "sha256": "32a7f5b65544a9b8640bfc722379118221063b1b0b447b89510c0f22dae61389"
       },
       {
         "rank": 2,
         "path": "agents/1351/details.zh.json",
         "pointer": "/passive/level/1351502/desc/1",
-        "sha256": "235e80c934494724d7741226d0a400bbb44b73fa3caafe5fd8618bbd57108801"
+        "sha256": "32a7f5b65544a9b8640bfc722379118221063b1b0b447b89510c0f22dae61389"
       },
       {
         "rank": 3,
         "path": "agents/1351/details.zh.json",
         "pointer": "/passive/level/1351503/desc/1",
-        "sha256": "235e80c934494724d7741226d0a400bbb44b73fa3caafe5fd8618bbd57108801"
+        "sha256": "32a7f5b65544a9b8640bfc722379118221063b1b0b447b89510c0f22dae61389"
       },
       {
         "rank": 4,
         "path": "agents/1351/details.zh.json",
         "pointer": "/passive/level/1351504/desc/1",
-        "sha256": "235e80c934494724d7741226d0a400bbb44b73fa3caafe5fd8618bbd57108801"
+        "sha256": "32a7f5b65544a9b8640bfc722379118221063b1b0b447b89510c0f22dae61389"
       },
       {
         "rank": 5,
         "path": "agents/1351/details.zh.json",
         "pointer": "/passive/level/1351505/desc/1",
-        "sha256": "235e80c934494724d7741226d0a400bbb44b73fa3caafe5fd8618bbd57108801"
+        "sha256": "32a7f5b65544a9b8640bfc722379118221063b1b0b447b89510c0f22dae61389"
       },
       {
         "rank": 6,
         "path": "agents/1351/details.zh.json",
         "pointer": "/passive/level/1351506/desc/1",
-        "sha256": "235e80c934494724d7741226d0a400bbb44b73fa3caafe5fd8618bbd57108801"
+        "sha256": "32a7f5b65544a9b8640bfc722379118221063b1b0b447b89510c0f22dae61389"
       },
       {
         "rank": 7,
         "path": "agents/1351/details.zh.json",
         "pointer": "/passive/level/1351507/desc/1",
-        "sha256": "235e80c934494724d7741226d0a400bbb44b73fa3caafe5fd8618bbd57108801"
+        "sha256": "32a7f5b65544a9b8640bfc722379118221063b1b0b447b89510c0f22dae61389"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1561,85 +1561,85 @@
         "rank": 1,
         "path": "agents/1201/details.zh.json",
         "pointer": "/passive/level/1201501/desc/1",
-        "sha256": "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db"
+        "sha256": "619512443bf20df5b3efd3e50a8ae3919774825ee1c247519ef0de04f5416ab7"
       },
       {
         "rank": 2,
         "path": "agents/1201/details.zh.json",
         "pointer": "/passive/level/1201502/desc/1",
-        "sha256": "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db"
+        "sha256": "619512443bf20df5b3efd3e50a8ae3919774825ee1c247519ef0de04f5416ab7"
       },
       {
         "rank": 3,
         "path": "agents/1201/details.zh.json",
         "pointer": "/passive/level/1201503/desc/1",
-        "sha256": "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db"
+        "sha256": "619512443bf20df5b3efd3e50a8ae3919774825ee1c247519ef0de04f5416ab7"
       },
       {
         "rank": 4,
         "path": "agents/1201/details.zh.json",
         "pointer": "/passive/level/1201504/desc/1",
-        "sha256": "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db"
+        "sha256": "619512443bf20df5b3efd3e50a8ae3919774825ee1c247519ef0de04f5416ab7"
       },
       {
         "rank": 5,
         "path": "agents/1201/details.zh.json",
         "pointer": "/passive/level/1201505/desc/1",
-        "sha256": "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db"
+        "sha256": "619512443bf20df5b3efd3e50a8ae3919774825ee1c247519ef0de04f5416ab7"
       },
       {
         "rank": 6,
         "path": "agents/1201/details.zh.json",
         "pointer": "/passive/level/1201506/desc/1",
-        "sha256": "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db"
+        "sha256": "619512443bf20df5b3efd3e50a8ae3919774825ee1c247519ef0de04f5416ab7"
       },
       {
         "rank": 7,
         "path": "agents/1201/details.zh.json",
         "pointer": "/passive/level/1201507/desc/1",
-        "sha256": "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db"
+        "sha256": "619512443bf20df5b3efd3e50a8ae3919774825ee1c247519ef0de04f5416ab7"
       },
       {
         "rank": 1,
         "path": "agents/1201/details.zh.json",
         "pointer": "/passive/level/1201508/desc/1",
-        "sha256": "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db"
+        "sha256": "619512443bf20df5b3efd3e50a8ae3919774825ee1c247519ef0de04f5416ab7"
       },
       {
         "rank": 2,
         "path": "agents/1201/details.zh.json",
         "pointer": "/passive/level/1201509/desc/1",
-        "sha256": "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db"
+        "sha256": "619512443bf20df5b3efd3e50a8ae3919774825ee1c247519ef0de04f5416ab7"
       },
       {
         "rank": 3,
         "path": "agents/1201/details.zh.json",
         "pointer": "/passive/level/1201510/desc/1",
-        "sha256": "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db"
+        "sha256": "619512443bf20df5b3efd3e50a8ae3919774825ee1c247519ef0de04f5416ab7"
       },
       {
         "rank": 4,
         "path": "agents/1201/details.zh.json",
         "pointer": "/passive/level/1201511/desc/1",
-        "sha256": "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db"
+        "sha256": "619512443bf20df5b3efd3e50a8ae3919774825ee1c247519ef0de04f5416ab7"
       },
       {
         "rank": 5,
         "path": "agents/1201/details.zh.json",
         "pointer": "/passive/level/1201512/desc/1",
-        "sha256": "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db"
+        "sha256": "619512443bf20df5b3efd3e50a8ae3919774825ee1c247519ef0de04f5416ab7"
       },
       {
         "rank": 6,
         "path": "agents/1201/details.zh.json",
         "pointer": "/passive/level/1201513/desc/1",
-        "sha256": "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db"
+        "sha256": "619512443bf20df5b3efd3e50a8ae3919774825ee1c247519ef0de04f5416ab7"
       },
       {
         "rank": 7,
         "path": "agents/1201/details.zh.json",
         "pointer": "/passive/level/1201514/desc/1",
-        "sha256": "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db"
+        "sha256": "619512443bf20df5b3efd3e50a8ae3919774825ee1c247519ef0de04f5416ab7"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1651,7 +1651,7 @@
         "rank": 7,
         "path": "agents/1421/details.zh.json",
         "pointer": "/passive/level/1421507/desc/0",
-        "sha256": "3a3819e3b79ce8be14f07076dc84078ba2d5c8a485448d1c0b005fdd900718e3"
+        "sha256": "8661ec9cb77030e255acb4843ab57f2176b75821bde3b145cae03b5ee4b4d77b"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致；该块级证据只核对其 rank 0 记录，影画记录的核心依赖按记录级键单独登记"
@@ -1662,7 +1662,7 @@
       {
         "path": "agents/1421/details.zh.json",
         "pointer": "/talent/6/desc",
-        "sha256": "3a3819e3b79ce8be14f07076dc84078ba2d5c8a485448d1c0b005fdd900718e3"
+        "sha256": "8661ec9cb77030e255acb4843ab57f2176b75821bde3b145cae03b5ee4b4d77b"
       }
     ],
     "verification": "天赋 6 明确转换率额外增加 6 个百分点、总上限 720；独立增量为强化封顶值减基础封顶值，两项同读显式初始攻击；逐档基础参数和证据由 semantics 引用 panyinhu:blk-legacy:mindscape:0:legacy-team-pierce",
@@ -1684,43 +1684,43 @@
         "rank": 1,
         "path": "agents/1421/details.zh.json",
         "pointer": "/passive/level/1421501/desc/1",
-        "sha256": "3a3819e3b79ce8be14f07076dc84078ba2d5c8a485448d1c0b005fdd900718e3"
+        "sha256": "8661ec9cb77030e255acb4843ab57f2176b75821bde3b145cae03b5ee4b4d77b"
       },
       {
         "rank": 2,
         "path": "agents/1421/details.zh.json",
         "pointer": "/passive/level/1421502/desc/1",
-        "sha256": "3a3819e3b79ce8be14f07076dc84078ba2d5c8a485448d1c0b005fdd900718e3"
+        "sha256": "8661ec9cb77030e255acb4843ab57f2176b75821bde3b145cae03b5ee4b4d77b"
       },
       {
         "rank": 3,
         "path": "agents/1421/details.zh.json",
         "pointer": "/passive/level/1421503/desc/1",
-        "sha256": "3a3819e3b79ce8be14f07076dc84078ba2d5c8a485448d1c0b005fdd900718e3"
+        "sha256": "8661ec9cb77030e255acb4843ab57f2176b75821bde3b145cae03b5ee4b4d77b"
       },
       {
         "rank": 4,
         "path": "agents/1421/details.zh.json",
         "pointer": "/passive/level/1421504/desc/1",
-        "sha256": "3a3819e3b79ce8be14f07076dc84078ba2d5c8a485448d1c0b005fdd900718e3"
+        "sha256": "8661ec9cb77030e255acb4843ab57f2176b75821bde3b145cae03b5ee4b4d77b"
       },
       {
         "rank": 5,
         "path": "agents/1421/details.zh.json",
         "pointer": "/passive/level/1421505/desc/1",
-        "sha256": "3a3819e3b79ce8be14f07076dc84078ba2d5c8a485448d1c0b005fdd900718e3"
+        "sha256": "8661ec9cb77030e255acb4843ab57f2176b75821bde3b145cae03b5ee4b4d77b"
       },
       {
         "rank": 6,
         "path": "agents/1421/details.zh.json",
         "pointer": "/passive/level/1421506/desc/1",
-        "sha256": "3a3819e3b79ce8be14f07076dc84078ba2d5c8a485448d1c0b005fdd900718e3"
+        "sha256": "8661ec9cb77030e255acb4843ab57f2176b75821bde3b145cae03b5ee4b4d77b"
       },
       {
         "rank": 7,
         "path": "agents/1421/details.zh.json",
         "pointer": "/passive/level/1421507/desc/1",
-        "sha256": "3a3819e3b79ce8be14f07076dc84078ba2d5c8a485448d1c0b005fdd900718e3"
+        "sha256": "8661ec9cb77030e255acb4843ab57f2176b75821bde3b145cae03b5ee4b4d77b"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1732,43 +1732,43 @@
         "rank": 1,
         "path": "agents/1341/details.zh.json",
         "pointer": "/passive/level/1341501/desc/1",
-        "sha256": "8bc8e850c8420d4a8dfdf6663c1a3e1b3abe2b54c52a9344b4fe7e474444e2b7"
+        "sha256": "ef75e043931e974585caeaffc7e0c752cbfa78dcf43ba9c544e7b1fd97f2df0f"
       },
       {
         "rank": 2,
         "path": "agents/1341/details.zh.json",
         "pointer": "/passive/level/1341502/desc/1",
-        "sha256": "8bc8e850c8420d4a8dfdf6663c1a3e1b3abe2b54c52a9344b4fe7e474444e2b7"
+        "sha256": "ef75e043931e974585caeaffc7e0c752cbfa78dcf43ba9c544e7b1fd97f2df0f"
       },
       {
         "rank": 3,
         "path": "agents/1341/details.zh.json",
         "pointer": "/passive/level/1341503/desc/1",
-        "sha256": "8bc8e850c8420d4a8dfdf6663c1a3e1b3abe2b54c52a9344b4fe7e474444e2b7"
+        "sha256": "ef75e043931e974585caeaffc7e0c752cbfa78dcf43ba9c544e7b1fd97f2df0f"
       },
       {
         "rank": 4,
         "path": "agents/1341/details.zh.json",
         "pointer": "/passive/level/1341504/desc/1",
-        "sha256": "8bc8e850c8420d4a8dfdf6663c1a3e1b3abe2b54c52a9344b4fe7e474444e2b7"
+        "sha256": "ef75e043931e974585caeaffc7e0c752cbfa78dcf43ba9c544e7b1fd97f2df0f"
       },
       {
         "rank": 5,
         "path": "agents/1341/details.zh.json",
         "pointer": "/passive/level/1341505/desc/1",
-        "sha256": "8bc8e850c8420d4a8dfdf6663c1a3e1b3abe2b54c52a9344b4fe7e474444e2b7"
+        "sha256": "ef75e043931e974585caeaffc7e0c752cbfa78dcf43ba9c544e7b1fd97f2df0f"
       },
       {
         "rank": 6,
         "path": "agents/1341/details.zh.json",
         "pointer": "/passive/level/1341506/desc/1",
-        "sha256": "8bc8e850c8420d4a8dfdf6663c1a3e1b3abe2b54c52a9344b4fe7e474444e2b7"
+        "sha256": "ef75e043931e974585caeaffc7e0c752cbfa78dcf43ba9c544e7b1fd97f2df0f"
       },
       {
         "rank": 7,
         "path": "agents/1341/details.zh.json",
         "pointer": "/passive/level/1341507/desc/1",
-        "sha256": "8bc8e850c8420d4a8dfdf6663c1a3e1b3abe2b54c52a9344b4fe7e474444e2b7"
+        "sha256": "ef75e043931e974585caeaffc7e0c752cbfa78dcf43ba9c544e7b1fd97f2df0f"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1780,43 +1780,43 @@
         "rank": 1,
         "path": "agents/1501/details.zh.json",
         "pointer": "/passive/level/1501049/desc/1",
-        "sha256": "49b5cf61dc4a979025af0a7a31ef90ca39e7c46612098f6f694dbdf81202714f"
+        "sha256": "387d5054814f0f441f6341e5228299127c7c320f7bebb9620e0b9c32c7fe7e78"
       },
       {
         "rank": 2,
         "path": "agents/1501/details.zh.json",
         "pointer": "/passive/level/1501050/desc/1",
-        "sha256": "49b5cf61dc4a979025af0a7a31ef90ca39e7c46612098f6f694dbdf81202714f"
+        "sha256": "387d5054814f0f441f6341e5228299127c7c320f7bebb9620e0b9c32c7fe7e78"
       },
       {
         "rank": 3,
         "path": "agents/1501/details.zh.json",
         "pointer": "/passive/level/1501051/desc/1",
-        "sha256": "49b5cf61dc4a979025af0a7a31ef90ca39e7c46612098f6f694dbdf81202714f"
+        "sha256": "387d5054814f0f441f6341e5228299127c7c320f7bebb9620e0b9c32c7fe7e78"
       },
       {
         "rank": 4,
         "path": "agents/1501/details.zh.json",
         "pointer": "/passive/level/1501052/desc/1",
-        "sha256": "49b5cf61dc4a979025af0a7a31ef90ca39e7c46612098f6f694dbdf81202714f"
+        "sha256": "387d5054814f0f441f6341e5228299127c7c320f7bebb9620e0b9c32c7fe7e78"
       },
       {
         "rank": 5,
         "path": "agents/1501/details.zh.json",
         "pointer": "/passive/level/1501053/desc/1",
-        "sha256": "49b5cf61dc4a979025af0a7a31ef90ca39e7c46612098f6f694dbdf81202714f"
+        "sha256": "387d5054814f0f441f6341e5228299127c7c320f7bebb9620e0b9c32c7fe7e78"
       },
       {
         "rank": 6,
         "path": "agents/1501/details.zh.json",
         "pointer": "/passive/level/1501054/desc/1",
-        "sha256": "49b5cf61dc4a979025af0a7a31ef90ca39e7c46612098f6f694dbdf81202714f"
+        "sha256": "387d5054814f0f441f6341e5228299127c7c320f7bebb9620e0b9c32c7fe7e78"
       },
       {
         "rank": 7,
         "path": "agents/1501/details.zh.json",
         "pointer": "/passive/level/1501055/desc/1",
-        "sha256": "49b5cf61dc4a979025af0a7a31ef90ca39e7c46612098f6f694dbdf81202714f"
+        "sha256": "387d5054814f0f441f6341e5228299127c7c320f7bebb9620e0b9c32c7fe7e78"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1828,43 +1828,43 @@
         "rank": 1,
         "path": "agents/1021/details.zh.json",
         "pointer": "/passive/level/1021508/desc/1",
-        "sha256": "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07"
+        "sha256": "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86"
       },
       {
         "rank": 2,
         "path": "agents/1021/details.zh.json",
         "pointer": "/passive/level/1021509/desc/1",
-        "sha256": "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07"
+        "sha256": "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86"
       },
       {
         "rank": 3,
         "path": "agents/1021/details.zh.json",
         "pointer": "/passive/level/1021510/desc/1",
-        "sha256": "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07"
+        "sha256": "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86"
       },
       {
         "rank": 4,
         "path": "agents/1021/details.zh.json",
         "pointer": "/passive/level/1021511/desc/1",
-        "sha256": "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07"
+        "sha256": "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86"
       },
       {
         "rank": 5,
         "path": "agents/1021/details.zh.json",
         "pointer": "/passive/level/1021512/desc/1",
-        "sha256": "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07"
+        "sha256": "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86"
       },
       {
         "rank": 6,
         "path": "agents/1021/details.zh.json",
         "pointer": "/passive/level/1021513/desc/1",
-        "sha256": "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07"
+        "sha256": "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86"
       },
       {
         "rank": 7,
         "path": "agents/1021/details.zh.json",
         "pointer": "/passive/level/1021514/desc/1",
-        "sha256": "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07"
+        "sha256": "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1876,43 +1876,43 @@
         "rank": 1,
         "path": "agents/1101/details.zh.json",
         "pointer": "/passive/level/1101501/desc/1",
-        "sha256": "4234d05a53ae34e4558929d46d222aab7435b094ab8877f312ca5b19403839e7"
+        "sha256": "e71933bac0c8185696795aaa9ddd45194e6b5116e1d415a54fb232c32433703b"
       },
       {
         "rank": 2,
         "path": "agents/1101/details.zh.json",
         "pointer": "/passive/level/1101502/desc/1",
-        "sha256": "4234d05a53ae34e4558929d46d222aab7435b094ab8877f312ca5b19403839e7"
+        "sha256": "e71933bac0c8185696795aaa9ddd45194e6b5116e1d415a54fb232c32433703b"
       },
       {
         "rank": 3,
         "path": "agents/1101/details.zh.json",
         "pointer": "/passive/level/1101503/desc/1",
-        "sha256": "4234d05a53ae34e4558929d46d222aab7435b094ab8877f312ca5b19403839e7"
+        "sha256": "e71933bac0c8185696795aaa9ddd45194e6b5116e1d415a54fb232c32433703b"
       },
       {
         "rank": 4,
         "path": "agents/1101/details.zh.json",
         "pointer": "/passive/level/1101504/desc/1",
-        "sha256": "4234d05a53ae34e4558929d46d222aab7435b094ab8877f312ca5b19403839e7"
+        "sha256": "e71933bac0c8185696795aaa9ddd45194e6b5116e1d415a54fb232c32433703b"
       },
       {
         "rank": 5,
         "path": "agents/1101/details.zh.json",
         "pointer": "/passive/level/1101505/desc/1",
-        "sha256": "4234d05a53ae34e4558929d46d222aab7435b094ab8877f312ca5b19403839e7"
+        "sha256": "e71933bac0c8185696795aaa9ddd45194e6b5116e1d415a54fb232c32433703b"
       },
       {
         "rank": 6,
         "path": "agents/1101/details.zh.json",
         "pointer": "/passive/level/1101506/desc/1",
-        "sha256": "4234d05a53ae34e4558929d46d222aab7435b094ab8877f312ca5b19403839e7"
+        "sha256": "e71933bac0c8185696795aaa9ddd45194e6b5116e1d415a54fb232c32433703b"
       },
       {
         "rank": 7,
         "path": "agents/1101/details.zh.json",
         "pointer": "/passive/level/1101507/desc/1",
-        "sha256": "4234d05a53ae34e4558929d46d222aab7435b094ab8877f312ca5b19403839e7"
+        "sha256": "e71933bac0c8185696795aaa9ddd45194e6b5116e1d415a54fb232c32433703b"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1924,7 +1924,7 @@
         "rank": 7,
         "path": "agents/1481/details.zh.json",
         "pointer": "/passive/level/1481055/desc/0",
-        "sha256": "c335486522cb3958f1430551fb07616364cd01f13cbe988c7bde6d21a41ca3ed"
+        "sha256": "6c9f098bacd710f1bdbf5d090725b50684f996ff030ef355b8711a7ffc12bc8a"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1936,7 +1936,7 @@
         "rank": 7,
         "path": "agents/1441/details.zh.json",
         "pointer": "/passive/level/1441507/desc/0",
-        "sha256": "06c543022a27a51496de5751397cfb05236a28e6b0edd22a3b6f210b9aef6644"
+        "sha256": "f3dae1093d9b81e888c1d86ce2344a86c6169919607f597fe521371f69fb4c15"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1948,7 +1948,7 @@
         "rank": 7,
         "path": "agents/1261/details.zh.json",
         "pointer": "/passive/level/1261507/desc/0",
-        "sha256": "b69786037562711fda0389dc86940257a5df4504e100940781ce91a0311fa9ef"
+        "sha256": "9961f4a46fe6c388901117810885964a5f38268462d24fa7e6c17a5c9865ae11"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -1960,43 +1960,43 @@
         "rank": 1,
         "path": "agents/1561/details.zh.json",
         "pointer": "/passive/level/1561501/desc/1",
-        "sha256": "a2089f5f829ed8646e768deee3f9b1424b39df3ffc25ade1e8d8ebb99ecf6659"
+        "sha256": "f2da8dfc1357ffb98dcb775d0febbe0df55828d4c61e38701df39040766a3b6f"
       },
       {
         "rank": 2,
         "path": "agents/1561/details.zh.json",
         "pointer": "/passive/level/1561502/desc/1",
-        "sha256": "a2089f5f829ed8646e768deee3f9b1424b39df3ffc25ade1e8d8ebb99ecf6659"
+        "sha256": "f2da8dfc1357ffb98dcb775d0febbe0df55828d4c61e38701df39040766a3b6f"
       },
       {
         "rank": 3,
         "path": "agents/1561/details.zh.json",
         "pointer": "/passive/level/1561503/desc/1",
-        "sha256": "a2089f5f829ed8646e768deee3f9b1424b39df3ffc25ade1e8d8ebb99ecf6659"
+        "sha256": "f2da8dfc1357ffb98dcb775d0febbe0df55828d4c61e38701df39040766a3b6f"
       },
       {
         "rank": 4,
         "path": "agents/1561/details.zh.json",
         "pointer": "/passive/level/1561504/desc/1",
-        "sha256": "a2089f5f829ed8646e768deee3f9b1424b39df3ffc25ade1e8d8ebb99ecf6659"
+        "sha256": "f2da8dfc1357ffb98dcb775d0febbe0df55828d4c61e38701df39040766a3b6f"
       },
       {
         "rank": 5,
         "path": "agents/1561/details.zh.json",
         "pointer": "/passive/level/1561505/desc/1",
-        "sha256": "a2089f5f829ed8646e768deee3f9b1424b39df3ffc25ade1e8d8ebb99ecf6659"
+        "sha256": "f2da8dfc1357ffb98dcb775d0febbe0df55828d4c61e38701df39040766a3b6f"
       },
       {
         "rank": 6,
         "path": "agents/1561/details.zh.json",
         "pointer": "/passive/level/1561506/desc/1",
-        "sha256": "a2089f5f829ed8646e768deee3f9b1424b39df3ffc25ade1e8d8ebb99ecf6659"
+        "sha256": "f2da8dfc1357ffb98dcb775d0febbe0df55828d4c61e38701df39040766a3b6f"
       },
       {
         "rank": 7,
         "path": "agents/1561/details.zh.json",
         "pointer": "/passive/level/1561507/desc/1",
-        "sha256": "a2089f5f829ed8646e768deee3f9b1424b39df3ffc25ade1e8d8ebb99ecf6659"
+        "sha256": "f2da8dfc1357ffb98dcb775d0febbe0df55828d4c61e38701df39040766a3b6f"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2008,7 +2008,7 @@
         "rank": 7,
         "path": "agents/1311/details.zh.json",
         "pointer": "/passive/level/1311507/desc/0",
-        "sha256": "3cd6bd1f7deb82e82b306d166d411226ff13a8978bbca1f4aec056838790bd47"
+        "sha256": "5545b193fa4326abdfe1e3b253c7db3318e0f3b2699e0e99a06a9622ea691179"
       }
     ],
     "verification": "沿用 starter 已验证的七档 ratio 表与 cap；ZZZ-HP 为第 7 档来源值"
@@ -2020,7 +2020,7 @@
         "rank": 7,
         "path": "agents/1471/details.zh.json",
         "pointer": "/passive/level/1471055/desc/0",
-        "sha256": "89ccab5353ef1a8800dc57adc91f0f0c5cb8577bad4f8d55f6c54b8be5150cdd"
+        "sha256": "45017193d6cf3490eb65c64fe7c15a20a42ac9ae0e3605e20b9d85ed42240fd7"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2032,43 +2032,43 @@
         "rank": 1,
         "path": "agents/1471/details.zh.json",
         "pointer": "/passive/level/1471049/desc/1",
-        "sha256": "89ccab5353ef1a8800dc57adc91f0f0c5cb8577bad4f8d55f6c54b8be5150cdd"
+        "sha256": "45017193d6cf3490eb65c64fe7c15a20a42ac9ae0e3605e20b9d85ed42240fd7"
       },
       {
         "rank": 2,
         "path": "agents/1471/details.zh.json",
         "pointer": "/passive/level/1471050/desc/1",
-        "sha256": "89ccab5353ef1a8800dc57adc91f0f0c5cb8577bad4f8d55f6c54b8be5150cdd"
+        "sha256": "45017193d6cf3490eb65c64fe7c15a20a42ac9ae0e3605e20b9d85ed42240fd7"
       },
       {
         "rank": 3,
         "path": "agents/1471/details.zh.json",
         "pointer": "/passive/level/1471051/desc/1",
-        "sha256": "89ccab5353ef1a8800dc57adc91f0f0c5cb8577bad4f8d55f6c54b8be5150cdd"
+        "sha256": "45017193d6cf3490eb65c64fe7c15a20a42ac9ae0e3605e20b9d85ed42240fd7"
       },
       {
         "rank": 4,
         "path": "agents/1471/details.zh.json",
         "pointer": "/passive/level/1471052/desc/1",
-        "sha256": "89ccab5353ef1a8800dc57adc91f0f0c5cb8577bad4f8d55f6c54b8be5150cdd"
+        "sha256": "45017193d6cf3490eb65c64fe7c15a20a42ac9ae0e3605e20b9d85ed42240fd7"
       },
       {
         "rank": 5,
         "path": "agents/1471/details.zh.json",
         "pointer": "/passive/level/1471053/desc/1",
-        "sha256": "89ccab5353ef1a8800dc57adc91f0f0c5cb8577bad4f8d55f6c54b8be5150cdd"
+        "sha256": "45017193d6cf3490eb65c64fe7c15a20a42ac9ae0e3605e20b9d85ed42240fd7"
       },
       {
         "rank": 6,
         "path": "agents/1471/details.zh.json",
         "pointer": "/passive/level/1471054/desc/1",
-        "sha256": "89ccab5353ef1a8800dc57adc91f0f0c5cb8577bad4f8d55f6c54b8be5150cdd"
+        "sha256": "45017193d6cf3490eb65c64fe7c15a20a42ac9ae0e3605e20b9d85ed42240fd7"
       },
       {
         "rank": 7,
         "path": "agents/1471/details.zh.json",
         "pointer": "/passive/level/1471055/desc/1",
-        "sha256": "89ccab5353ef1a8800dc57adc91f0f0c5cb8577bad4f8d55f6c54b8be5150cdd"
+        "sha256": "45017193d6cf3490eb65c64fe7c15a20a42ac9ae0e3605e20b9d85ed42240fd7"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2080,7 +2080,7 @@
         "rank": 7,
         "path": "agents/1191/details.zh.json",
         "pointer": "/passive/level/1191514/desc/0",
-        "sha256": "af6dfd6b8e63a6e2b460b63dc03bc7376d50e872bb8e26493364f5393176e222"
+        "sha256": "ab0abe81b6375696597e65a9d29e6d1ff52db31eae9cedf7739c8403e8a7416e"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2092,43 +2092,43 @@
         "rank": 1,
         "path": "agents/1191/details.zh.json",
         "pointer": "/passive/level/1191508/desc/1",
-        "sha256": "af6dfd6b8e63a6e2b460b63dc03bc7376d50e872bb8e26493364f5393176e222"
+        "sha256": "ab0abe81b6375696597e65a9d29e6d1ff52db31eae9cedf7739c8403e8a7416e"
       },
       {
         "rank": 2,
         "path": "agents/1191/details.zh.json",
         "pointer": "/passive/level/1191509/desc/1",
-        "sha256": "af6dfd6b8e63a6e2b460b63dc03bc7376d50e872bb8e26493364f5393176e222"
+        "sha256": "ab0abe81b6375696597e65a9d29e6d1ff52db31eae9cedf7739c8403e8a7416e"
       },
       {
         "rank": 3,
         "path": "agents/1191/details.zh.json",
         "pointer": "/passive/level/1191510/desc/1",
-        "sha256": "af6dfd6b8e63a6e2b460b63dc03bc7376d50e872bb8e26493364f5393176e222"
+        "sha256": "ab0abe81b6375696597e65a9d29e6d1ff52db31eae9cedf7739c8403e8a7416e"
       },
       {
         "rank": 4,
         "path": "agents/1191/details.zh.json",
         "pointer": "/passive/level/1191511/desc/1",
-        "sha256": "af6dfd6b8e63a6e2b460b63dc03bc7376d50e872bb8e26493364f5393176e222"
+        "sha256": "ab0abe81b6375696597e65a9d29e6d1ff52db31eae9cedf7739c8403e8a7416e"
       },
       {
         "rank": 5,
         "path": "agents/1191/details.zh.json",
         "pointer": "/passive/level/1191512/desc/1",
-        "sha256": "af6dfd6b8e63a6e2b460b63dc03bc7376d50e872bb8e26493364f5393176e222"
+        "sha256": "ab0abe81b6375696597e65a9d29e6d1ff52db31eae9cedf7739c8403e8a7416e"
       },
       {
         "rank": 6,
         "path": "agents/1191/details.zh.json",
         "pointer": "/passive/level/1191513/desc/1",
-        "sha256": "af6dfd6b8e63a6e2b460b63dc03bc7376d50e872bb8e26493364f5393176e222"
+        "sha256": "ab0abe81b6375696597e65a9d29e6d1ff52db31eae9cedf7739c8403e8a7416e"
       },
       {
         "rank": 7,
         "path": "agents/1191/details.zh.json",
         "pointer": "/passive/level/1191514/desc/1",
-        "sha256": "af6dfd6b8e63a6e2b460b63dc03bc7376d50e872bb8e26493364f5393176e222"
+        "sha256": "ab0abe81b6375696597e65a9d29e6d1ff52db31eae9cedf7739c8403e8a7416e"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2140,7 +2140,7 @@
         "rank": 7,
         "path": "agents/1131/details.zh.json",
         "pointer": "/passive/level/1131507/desc/0",
-        "sha256": "a92b3ce0781071b78f299f4576a4be99d26be053d015c6b42f724d084a5f0437"
+        "sha256": "cc2a8c5ee0cf6560e0b6f8f747b83cc2460d04821f320d171fe0488ffbf897e9"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2152,43 +2152,43 @@
         "rank": 1,
         "path": "agents/1131/details.zh.json",
         "pointer": "/passive/level/1131501/desc/1",
-        "sha256": "a92b3ce0781071b78f299f4576a4be99d26be053d015c6b42f724d084a5f0437"
+        "sha256": "cc2a8c5ee0cf6560e0b6f8f747b83cc2460d04821f320d171fe0488ffbf897e9"
       },
       {
         "rank": 2,
         "path": "agents/1131/details.zh.json",
         "pointer": "/passive/level/1131502/desc/1",
-        "sha256": "a92b3ce0781071b78f299f4576a4be99d26be053d015c6b42f724d084a5f0437"
+        "sha256": "cc2a8c5ee0cf6560e0b6f8f747b83cc2460d04821f320d171fe0488ffbf897e9"
       },
       {
         "rank": 3,
         "path": "agents/1131/details.zh.json",
         "pointer": "/passive/level/1131503/desc/1",
-        "sha256": "a92b3ce0781071b78f299f4576a4be99d26be053d015c6b42f724d084a5f0437"
+        "sha256": "cc2a8c5ee0cf6560e0b6f8f747b83cc2460d04821f320d171fe0488ffbf897e9"
       },
       {
         "rank": 4,
         "path": "agents/1131/details.zh.json",
         "pointer": "/passive/level/1131504/desc/1",
-        "sha256": "a92b3ce0781071b78f299f4576a4be99d26be053d015c6b42f724d084a5f0437"
+        "sha256": "cc2a8c5ee0cf6560e0b6f8f747b83cc2460d04821f320d171fe0488ffbf897e9"
       },
       {
         "rank": 5,
         "path": "agents/1131/details.zh.json",
         "pointer": "/passive/level/1131505/desc/1",
-        "sha256": "a92b3ce0781071b78f299f4576a4be99d26be053d015c6b42f724d084a5f0437"
+        "sha256": "cc2a8c5ee0cf6560e0b6f8f747b83cc2460d04821f320d171fe0488ffbf897e9"
       },
       {
         "rank": 6,
         "path": "agents/1131/details.zh.json",
         "pointer": "/passive/level/1131506/desc/1",
-        "sha256": "a92b3ce0781071b78f299f4576a4be99d26be053d015c6b42f724d084a5f0437"
+        "sha256": "cc2a8c5ee0cf6560e0b6f8f747b83cc2460d04821f320d171fe0488ffbf897e9"
       },
       {
         "rank": 7,
         "path": "agents/1131/details.zh.json",
         "pointer": "/passive/level/1131507/desc/1",
-        "sha256": "a92b3ce0781071b78f299f4576a4be99d26be053d015c6b42f724d084a5f0437"
+        "sha256": "cc2a8c5ee0cf6560e0b6f8f747b83cc2460d04821f320d171fe0488ffbf897e9"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2200,43 +2200,43 @@
         "rank": 1,
         "path": "agents/1141/details.zh.json",
         "pointer": "/passive/level/1141508/desc/0",
-        "sha256": "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1"
+        "sha256": "f4dd5b0862a14f429d924975851f3d0a9e33bfe3a591d2899809e8926485d54b"
       },
       {
         "rank": 2,
         "path": "agents/1141/details.zh.json",
         "pointer": "/passive/level/1141509/desc/0",
-        "sha256": "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1"
+        "sha256": "f4dd5b0862a14f429d924975851f3d0a9e33bfe3a591d2899809e8926485d54b"
       },
       {
         "rank": 3,
         "path": "agents/1141/details.zh.json",
         "pointer": "/passive/level/1141510/desc/0",
-        "sha256": "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1"
+        "sha256": "f4dd5b0862a14f429d924975851f3d0a9e33bfe3a591d2899809e8926485d54b"
       },
       {
         "rank": 4,
         "path": "agents/1141/details.zh.json",
         "pointer": "/passive/level/1141511/desc/0",
-        "sha256": "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1"
+        "sha256": "f4dd5b0862a14f429d924975851f3d0a9e33bfe3a591d2899809e8926485d54b"
       },
       {
         "rank": 5,
         "path": "agents/1141/details.zh.json",
         "pointer": "/passive/level/1141512/desc/0",
-        "sha256": "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1"
+        "sha256": "f4dd5b0862a14f429d924975851f3d0a9e33bfe3a591d2899809e8926485d54b"
       },
       {
         "rank": 6,
         "path": "agents/1141/details.zh.json",
         "pointer": "/passive/level/1141513/desc/0",
-        "sha256": "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1"
+        "sha256": "f4dd5b0862a14f429d924975851f3d0a9e33bfe3a591d2899809e8926485d54b"
       },
       {
         "rank": 7,
         "path": "agents/1141/details.zh.json",
         "pointer": "/passive/level/1141514/desc/0",
-        "sha256": "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1"
+        "sha256": "f4dd5b0862a14f429d924975851f3d0a9e33bfe3a591d2899809e8926485d54b"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2248,43 +2248,43 @@
         "rank": 1,
         "path": "agents/1141/details.zh.json",
         "pointer": "/passive/level/1141508/desc/1",
-        "sha256": "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1"
+        "sha256": "f4dd5b0862a14f429d924975851f3d0a9e33bfe3a591d2899809e8926485d54b"
       },
       {
         "rank": 2,
         "path": "agents/1141/details.zh.json",
         "pointer": "/passive/level/1141509/desc/1",
-        "sha256": "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1"
+        "sha256": "f4dd5b0862a14f429d924975851f3d0a9e33bfe3a591d2899809e8926485d54b"
       },
       {
         "rank": 3,
         "path": "agents/1141/details.zh.json",
         "pointer": "/passive/level/1141510/desc/1",
-        "sha256": "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1"
+        "sha256": "f4dd5b0862a14f429d924975851f3d0a9e33bfe3a591d2899809e8926485d54b"
       },
       {
         "rank": 4,
         "path": "agents/1141/details.zh.json",
         "pointer": "/passive/level/1141511/desc/1",
-        "sha256": "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1"
+        "sha256": "f4dd5b0862a14f429d924975851f3d0a9e33bfe3a591d2899809e8926485d54b"
       },
       {
         "rank": 5,
         "path": "agents/1141/details.zh.json",
         "pointer": "/passive/level/1141512/desc/1",
-        "sha256": "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1"
+        "sha256": "f4dd5b0862a14f429d924975851f3d0a9e33bfe3a591d2899809e8926485d54b"
       },
       {
         "rank": 6,
         "path": "agents/1141/details.zh.json",
         "pointer": "/passive/level/1141513/desc/1",
-        "sha256": "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1"
+        "sha256": "f4dd5b0862a14f429d924975851f3d0a9e33bfe3a591d2899809e8926485d54b"
       },
       {
         "rank": 7,
         "path": "agents/1141/details.zh.json",
         "pointer": "/passive/level/1141514/desc/1",
-        "sha256": "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1"
+        "sha256": "f4dd5b0862a14f429d924975851f3d0a9e33bfe3a591d2899809e8926485d54b"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2296,43 +2296,43 @@
         "rank": 1,
         "path": "agents/1161/details.zh.json",
         "pointer": "/passive/level/1161501/desc/0",
-        "sha256": "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5"
+        "sha256": "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3"
       },
       {
         "rank": 2,
         "path": "agents/1161/details.zh.json",
         "pointer": "/passive/level/1161502/desc/0",
-        "sha256": "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5"
+        "sha256": "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3"
       },
       {
         "rank": 3,
         "path": "agents/1161/details.zh.json",
         "pointer": "/passive/level/1161503/desc/0",
-        "sha256": "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5"
+        "sha256": "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3"
       },
       {
         "rank": 4,
         "path": "agents/1161/details.zh.json",
         "pointer": "/passive/level/1161504/desc/0",
-        "sha256": "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5"
+        "sha256": "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3"
       },
       {
         "rank": 5,
         "path": "agents/1161/details.zh.json",
         "pointer": "/passive/level/1161505/desc/0",
-        "sha256": "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5"
+        "sha256": "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3"
       },
       {
         "rank": 6,
         "path": "agents/1161/details.zh.json",
         "pointer": "/passive/level/1161506/desc/0",
-        "sha256": "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5"
+        "sha256": "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3"
       },
       {
         "rank": 7,
         "path": "agents/1161/details.zh.json",
         "pointer": "/passive/level/1161507/desc/0",
-        "sha256": "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5"
+        "sha256": "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2344,43 +2344,43 @@
         "rank": 1,
         "path": "agents/1161/details.zh.json",
         "pointer": "/passive/level/1161501/desc/1",
-        "sha256": "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5"
+        "sha256": "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3"
       },
       {
         "rank": 2,
         "path": "agents/1161/details.zh.json",
         "pointer": "/passive/level/1161502/desc/1",
-        "sha256": "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5"
+        "sha256": "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3"
       },
       {
         "rank": 3,
         "path": "agents/1161/details.zh.json",
         "pointer": "/passive/level/1161503/desc/1",
-        "sha256": "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5"
+        "sha256": "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3"
       },
       {
         "rank": 4,
         "path": "agents/1161/details.zh.json",
         "pointer": "/passive/level/1161504/desc/1",
-        "sha256": "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5"
+        "sha256": "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3"
       },
       {
         "rank": 5,
         "path": "agents/1161/details.zh.json",
         "pointer": "/passive/level/1161505/desc/1",
-        "sha256": "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5"
+        "sha256": "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3"
       },
       {
         "rank": 6,
         "path": "agents/1161/details.zh.json",
         "pointer": "/passive/level/1161506/desc/1",
-        "sha256": "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5"
+        "sha256": "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3"
       },
       {
         "rank": 7,
         "path": "agents/1161/details.zh.json",
         "pointer": "/passive/level/1161507/desc/1",
-        "sha256": "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5"
+        "sha256": "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2392,43 +2392,43 @@
         "rank": 1,
         "path": "agents/1581/details.zh.json",
         "pointer": "/passive/level/1581501/desc/0",
-        "sha256": "a6559f099b14b2adc35950138eb0af8336be7d9a1a4d57b800dda41dab9a18f6"
+        "sha256": "cb1cfa8134bd4e3fa0e496b9f95594ae1d599cc787ac0151d65817767198c2c6"
       },
       {
         "rank": 2,
         "path": "agents/1581/details.zh.json",
         "pointer": "/passive/level/1581502/desc/0",
-        "sha256": "a6559f099b14b2adc35950138eb0af8336be7d9a1a4d57b800dda41dab9a18f6"
+        "sha256": "cb1cfa8134bd4e3fa0e496b9f95594ae1d599cc787ac0151d65817767198c2c6"
       },
       {
         "rank": 3,
         "path": "agents/1581/details.zh.json",
         "pointer": "/passive/level/1581503/desc/0",
-        "sha256": "a6559f099b14b2adc35950138eb0af8336be7d9a1a4d57b800dda41dab9a18f6"
+        "sha256": "cb1cfa8134bd4e3fa0e496b9f95594ae1d599cc787ac0151d65817767198c2c6"
       },
       {
         "rank": 4,
         "path": "agents/1581/details.zh.json",
         "pointer": "/passive/level/1581504/desc/0",
-        "sha256": "a6559f099b14b2adc35950138eb0af8336be7d9a1a4d57b800dda41dab9a18f6"
+        "sha256": "cb1cfa8134bd4e3fa0e496b9f95594ae1d599cc787ac0151d65817767198c2c6"
       },
       {
         "rank": 5,
         "path": "agents/1581/details.zh.json",
         "pointer": "/passive/level/1581505/desc/0",
-        "sha256": "a6559f099b14b2adc35950138eb0af8336be7d9a1a4d57b800dda41dab9a18f6"
+        "sha256": "cb1cfa8134bd4e3fa0e496b9f95594ae1d599cc787ac0151d65817767198c2c6"
       },
       {
         "rank": 6,
         "path": "agents/1581/details.zh.json",
         "pointer": "/passive/level/1581506/desc/0",
-        "sha256": "a6559f099b14b2adc35950138eb0af8336be7d9a1a4d57b800dda41dab9a18f6"
+        "sha256": "cb1cfa8134bd4e3fa0e496b9f95594ae1d599cc787ac0151d65817767198c2c6"
       },
       {
         "rank": 7,
         "path": "agents/1581/details.zh.json",
         "pointer": "/passive/level/1581507/desc/0",
-        "sha256": "a6559f099b14b2adc35950138eb0af8336be7d9a1a4d57b800dda41dab9a18f6"
+        "sha256": "cb1cfa8134bd4e3fa0e496b9f95594ae1d599cc787ac0151d65817767198c2c6"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2440,7 +2440,7 @@
         "rank": 7,
         "path": "agents/1331/details.zh.json",
         "pointer": "/passive/level/1331507/desc/0",
-        "sha256": "3c14f80cdf53feab18bbd1bffe32351f94765c458c2f114f1c78c74e09266cf2"
+        "sha256": "77b0fe60b82de02636b055772a227dd9a78f45256a25c149a9704fcf02592cbf"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2452,7 +2452,7 @@
         "rank": 7,
         "path": "agents/1571/details.zh.json",
         "pointer": "/passive/level/1571507/desc/0",
-        "sha256": "e172086fbd6a107adceb5f504117969b89db38487191e765b0472e00c597f41a"
+        "sha256": "a46c0b6f033ca2eb3aad606f6e9d43bce4ba0d9a94eb090cd9da6ae78be53137"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2464,7 +2464,7 @@
         "rank": 7,
         "path": "agents/1271/details.zh.json",
         "pointer": "/passive/level/1271507/desc/0",
-        "sha256": "72fede91add5030302cdb737423add982bf05c4302cd0429baf76d1bb6de93d1"
+        "sha256": "6abe6c3b13ef4a7619aaa54c73f38618b748a18050049211b8c57f30ea24d413"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2476,7 +2476,7 @@
         "rank": 7,
         "path": "agents/1291/details.zh.json",
         "pointer": "/passive/level/1291507/desc/0",
-        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+        "sha256": "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2488,43 +2488,43 @@
         "rank": 1,
         "path": "agents/1291/details.zh.json",
         "pointer": "/passive/level/1291501/desc/1",
-        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+        "sha256": "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6"
       },
       {
         "rank": 2,
         "path": "agents/1291/details.zh.json",
         "pointer": "/passive/level/1291502/desc/1",
-        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+        "sha256": "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6"
       },
       {
         "rank": 3,
         "path": "agents/1291/details.zh.json",
         "pointer": "/passive/level/1291503/desc/1",
-        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+        "sha256": "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6"
       },
       {
         "rank": 4,
         "path": "agents/1291/details.zh.json",
         "pointer": "/passive/level/1291504/desc/1",
-        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+        "sha256": "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6"
       },
       {
         "rank": 5,
         "path": "agents/1291/details.zh.json",
         "pointer": "/passive/level/1291505/desc/1",
-        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+        "sha256": "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6"
       },
       {
         "rank": 6,
         "path": "agents/1291/details.zh.json",
         "pointer": "/passive/level/1291506/desc/1",
-        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+        "sha256": "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6"
       },
       {
         "rank": 7,
         "path": "agents/1291/details.zh.json",
         "pointer": "/passive/level/1291507/desc/1",
-        "sha256": "0f1f469c4d39ca949b24cc580279cd4c693667ff46ec0fc9e4b9c0bad1aed1b2"
+        "sha256": "c10043e66f687a292c29aa850d44c008786de20351851cf725c446df2dc751d6"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2536,7 +2536,7 @@
         "rank": 7,
         "path": "agents/1381/details.zh.json",
         "pointer": "/passive/level/1381514/desc/0",
-        "sha256": "600ca2500fb32c4bace09c67b196265e6f33fc276fa43f868f999ca4b416fe61"
+        "sha256": "c7cfcbd532b51197fa00c1790fb20fa2657c7dead2ecb153c8d7530be054b3f1"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2548,43 +2548,43 @@
         "rank": 1,
         "path": "agents/1381/details.zh.json",
         "pointer": "/passive/level/1381508/desc/1",
-        "sha256": "600ca2500fb32c4bace09c67b196265e6f33fc276fa43f868f999ca4b416fe61"
+        "sha256": "c7cfcbd532b51197fa00c1790fb20fa2657c7dead2ecb153c8d7530be054b3f1"
       },
       {
         "rank": 2,
         "path": "agents/1381/details.zh.json",
         "pointer": "/passive/level/1381509/desc/1",
-        "sha256": "600ca2500fb32c4bace09c67b196265e6f33fc276fa43f868f999ca4b416fe61"
+        "sha256": "c7cfcbd532b51197fa00c1790fb20fa2657c7dead2ecb153c8d7530be054b3f1"
       },
       {
         "rank": 3,
         "path": "agents/1381/details.zh.json",
         "pointer": "/passive/level/1381510/desc/1",
-        "sha256": "600ca2500fb32c4bace09c67b196265e6f33fc276fa43f868f999ca4b416fe61"
+        "sha256": "c7cfcbd532b51197fa00c1790fb20fa2657c7dead2ecb153c8d7530be054b3f1"
       },
       {
         "rank": 4,
         "path": "agents/1381/details.zh.json",
         "pointer": "/passive/level/1381511/desc/1",
-        "sha256": "600ca2500fb32c4bace09c67b196265e6f33fc276fa43f868f999ca4b416fe61"
+        "sha256": "c7cfcbd532b51197fa00c1790fb20fa2657c7dead2ecb153c8d7530be054b3f1"
       },
       {
         "rank": 5,
         "path": "agents/1381/details.zh.json",
         "pointer": "/passive/level/1381512/desc/1",
-        "sha256": "600ca2500fb32c4bace09c67b196265e6f33fc276fa43f868f999ca4b416fe61"
+        "sha256": "c7cfcbd532b51197fa00c1790fb20fa2657c7dead2ecb153c8d7530be054b3f1"
       },
       {
         "rank": 6,
         "path": "agents/1381/details.zh.json",
         "pointer": "/passive/level/1381513/desc/1",
-        "sha256": "600ca2500fb32c4bace09c67b196265e6f33fc276fa43f868f999ca4b416fe61"
+        "sha256": "c7cfcbd532b51197fa00c1790fb20fa2657c7dead2ecb153c8d7530be054b3f1"
       },
       {
         "rank": 7,
         "path": "agents/1381/details.zh.json",
         "pointer": "/passive/level/1381514/desc/1",
-        "sha256": "600ca2500fb32c4bace09c67b196265e6f33fc276fa43f868f999ca4b416fe61"
+        "sha256": "c7cfcbd532b51197fa00c1790fb20fa2657c7dead2ecb153c8d7530be054b3f1"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2596,7 +2596,7 @@
         "rank": 7,
         "path": "agents/1251/details.zh.json",
         "pointer": "/passive/level/1251507/desc/0",
-        "sha256": "d5344fa4979038c19f4120a2e9466aba07ed69be20ec2e948c367db4a59b16ef"
+        "sha256": "b2af0043044397a3c9b6351852856db96bc2d24645f2ac0b3f9fc48254a6c1fb"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2608,43 +2608,43 @@
         "rank": 1,
         "path": "agents/1251/details.zh.json",
         "pointer": "/passive/level/1251501/desc/1",
-        "sha256": "d5344fa4979038c19f4120a2e9466aba07ed69be20ec2e948c367db4a59b16ef"
+        "sha256": "b2af0043044397a3c9b6351852856db96bc2d24645f2ac0b3f9fc48254a6c1fb"
       },
       {
         "rank": 2,
         "path": "agents/1251/details.zh.json",
         "pointer": "/passive/level/1251502/desc/1",
-        "sha256": "d5344fa4979038c19f4120a2e9466aba07ed69be20ec2e948c367db4a59b16ef"
+        "sha256": "b2af0043044397a3c9b6351852856db96bc2d24645f2ac0b3f9fc48254a6c1fb"
       },
       {
         "rank": 3,
         "path": "agents/1251/details.zh.json",
         "pointer": "/passive/level/1251503/desc/1",
-        "sha256": "d5344fa4979038c19f4120a2e9466aba07ed69be20ec2e948c367db4a59b16ef"
+        "sha256": "b2af0043044397a3c9b6351852856db96bc2d24645f2ac0b3f9fc48254a6c1fb"
       },
       {
         "rank": 4,
         "path": "agents/1251/details.zh.json",
         "pointer": "/passive/level/1251504/desc/1",
-        "sha256": "d5344fa4979038c19f4120a2e9466aba07ed69be20ec2e948c367db4a59b16ef"
+        "sha256": "b2af0043044397a3c9b6351852856db96bc2d24645f2ac0b3f9fc48254a6c1fb"
       },
       {
         "rank": 5,
         "path": "agents/1251/details.zh.json",
         "pointer": "/passive/level/1251505/desc/1",
-        "sha256": "d5344fa4979038c19f4120a2e9466aba07ed69be20ec2e948c367db4a59b16ef"
+        "sha256": "b2af0043044397a3c9b6351852856db96bc2d24645f2ac0b3f9fc48254a6c1fb"
       },
       {
         "rank": 6,
         "path": "agents/1251/details.zh.json",
         "pointer": "/passive/level/1251506/desc/1",
-        "sha256": "d5344fa4979038c19f4120a2e9466aba07ed69be20ec2e948c367db4a59b16ef"
+        "sha256": "b2af0043044397a3c9b6351852856db96bc2d24645f2ac0b3f9fc48254a6c1fb"
       },
       {
         "rank": 7,
         "path": "agents/1251/details.zh.json",
         "pointer": "/passive/level/1251507/desc/1",
-        "sha256": "d5344fa4979038c19f4120a2e9466aba07ed69be20ec2e948c367db4a59b16ef"
+        "sha256": "b2af0043044397a3c9b6351852856db96bc2d24645f2ac0b3f9fc48254a6c1fb"
       }
     ],
     "verification": "来源块全文（仅去除标记与空白）与对应等级说明一致"
@@ -2656,7 +2656,7 @@
         "rank": 7,
         "path": "agents/1581/details.zh.json",
         "pointer": "/passive/level/1581507/desc/0",
-        "sha256": "a6559f099b14b2adc35950138eb0af8336be7d9a1a4d57b800dda41dab9a18f6"
+        "sha256": "cb1cfa8134bd4e3fa0e496b9f95594ae1d599cc787ac0151d65817767198c2c6"
       }
     ],
     "verification": "逐句核对对应的第 7 级数值；来源摘录省略无关段落，不外推其他档位"
@@ -2668,7 +2668,7 @@
         "rank": 7,
         "path": "agents/1581/details.zh.json",
         "pointer": "/passive/level/1581507/desc/1",
-        "sha256": "a6559f099b14b2adc35950138eb0af8336be7d9a1a4d57b800dda41dab9a18f6"
+        "sha256": "cb1cfa8134bd4e3fa0e496b9f95594ae1d599cc787ac0151d65817767198c2c6"
       }
     ],
     "verification": "逐句核对对应的第 7 级数值；来源摘录省略无关段落，不外推其他档位"
@@ -2680,7 +2680,7 @@
         "rank": 7,
         "path": "agents/1451/details.zh.json",
         "pointer": "/passive/level/1451507/desc/0",
-        "sha256": "7f004d332642bca094a8c036dc76f625e18003d8c2ea253a2cdbfce95be2cad5"
+        "sha256": "0c4e1a4b9b7af5ef5dec535bd0a37ff6bd03789c494f456da821c513ed03fa5a"
       }
     ],
     "verification": "逐句核对对应的第 7 级数值；来源摘录省略无关段落，不外推其他档位"
@@ -2692,7 +2692,7 @@
         "rank": 7,
         "path": "agents/1201/details.zh.json",
         "pointer": "/passive/level/1201507/desc/0",
-        "sha256": "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db"
+        "sha256": "619512443bf20df5b3efd3e50a8ae3919774825ee1c247519ef0de04f5416ab7"
       }
     ],
     "verification": "逐句核对对应的第 7 级数值；来源摘录省略无关段落，不外推其他档位"
@@ -2704,7 +2704,7 @@
         "rank": 7,
         "path": "agents/1541/details.zh.json",
         "pointer": "/passive/level/1541507/desc/0",
-        "sha256": "3b001d93002f9e8c31fafbc0ef4d11bfd8eb2d6ee84cdad428ff13a68854dbee"
+        "sha256": "95b9fe158971a0009ea371170ef0ef4fcfeeffa8487b76b7124178355a91d2cd"
       }
     ],
     "verification": "逐句核对对应的第 7 级数值；来源摘录省略无关段落，不外推其他档位"
@@ -2716,7 +2716,7 @@
         "rank": 7,
         "path": "agents/1541/details.zh.json",
         "pointer": "/passive/level/1541507/desc/1",
-        "sha256": "3b001d93002f9e8c31fafbc0ef4d11bfd8eb2d6ee84cdad428ff13a68854dbee"
+        "sha256": "95b9fe158971a0009ea371170ef0ef4fcfeeffa8487b76b7124178355a91d2cd"
       }
     ],
     "verification": "逐句核对对应的第 7 级数值；来源摘录省略无关段落，不外推其他档位"
@@ -2728,43 +2728,43 @@
         "rank": 1,
         "path": "agents/1071/details.zh.json",
         "pointer": "/passive/level/1071501/desc/0",
-        "sha256": "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294"
+        "sha256": "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace"
       },
       {
         "rank": 2,
         "path": "agents/1071/details.zh.json",
         "pointer": "/passive/level/1071502/desc/0",
-        "sha256": "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294"
+        "sha256": "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace"
       },
       {
         "rank": 3,
         "path": "agents/1071/details.zh.json",
         "pointer": "/passive/level/1071503/desc/0",
-        "sha256": "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294"
+        "sha256": "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace"
       },
       {
         "rank": 4,
         "path": "agents/1071/details.zh.json",
         "pointer": "/passive/level/1071504/desc/0",
-        "sha256": "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294"
+        "sha256": "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace"
       },
       {
         "rank": 5,
         "path": "agents/1071/details.zh.json",
         "pointer": "/passive/level/1071505/desc/0",
-        "sha256": "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294"
+        "sha256": "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace"
       },
       {
         "rank": 6,
         "path": "agents/1071/details.zh.json",
         "pointer": "/passive/level/1071506/desc/0",
-        "sha256": "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294"
+        "sha256": "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace"
       },
       {
         "rank": 7,
         "path": "agents/1071/details.zh.json",
         "pointer": "/passive/level/1071507/desc/0",
-        "sha256": "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294"
+        "sha256": "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace"
       }
     ],
     "parameters": {
@@ -2790,43 +2790,43 @@
         "rank": 1,
         "path": "agents/1421/details.zh.json",
         "pointer": "/passive/level/1421501/desc/0",
-        "sha256": "3a3819e3b79ce8be14f07076dc84078ba2d5c8a485448d1c0b005fdd900718e3"
+        "sha256": "8661ec9cb77030e255acb4843ab57f2176b75821bde3b145cae03b5ee4b4d77b"
       },
       {
         "rank": 2,
         "path": "agents/1421/details.zh.json",
         "pointer": "/passive/level/1421502/desc/0",
-        "sha256": "3a3819e3b79ce8be14f07076dc84078ba2d5c8a485448d1c0b005fdd900718e3"
+        "sha256": "8661ec9cb77030e255acb4843ab57f2176b75821bde3b145cae03b5ee4b4d77b"
       },
       {
         "rank": 3,
         "path": "agents/1421/details.zh.json",
         "pointer": "/passive/level/1421503/desc/0",
-        "sha256": "3a3819e3b79ce8be14f07076dc84078ba2d5c8a485448d1c0b005fdd900718e3"
+        "sha256": "8661ec9cb77030e255acb4843ab57f2176b75821bde3b145cae03b5ee4b4d77b"
       },
       {
         "rank": 4,
         "path": "agents/1421/details.zh.json",
         "pointer": "/passive/level/1421504/desc/0",
-        "sha256": "3a3819e3b79ce8be14f07076dc84078ba2d5c8a485448d1c0b005fdd900718e3"
+        "sha256": "8661ec9cb77030e255acb4843ab57f2176b75821bde3b145cae03b5ee4b4d77b"
       },
       {
         "rank": 5,
         "path": "agents/1421/details.zh.json",
         "pointer": "/passive/level/1421505/desc/0",
-        "sha256": "3a3819e3b79ce8be14f07076dc84078ba2d5c8a485448d1c0b005fdd900718e3"
+        "sha256": "8661ec9cb77030e255acb4843ab57f2176b75821bde3b145cae03b5ee4b4d77b"
       },
       {
         "rank": 6,
         "path": "agents/1421/details.zh.json",
         "pointer": "/passive/level/1421506/desc/0",
-        "sha256": "3a3819e3b79ce8be14f07076dc84078ba2d5c8a485448d1c0b005fdd900718e3"
+        "sha256": "8661ec9cb77030e255acb4843ab57f2176b75821bde3b145cae03b5ee4b4d77b"
       },
       {
         "rank": 7,
         "path": "agents/1421/details.zh.json",
         "pointer": "/passive/level/1421507/desc/0",
-        "sha256": "3a3819e3b79ce8be14f07076dc84078ba2d5c8a485448d1c0b005fdd900718e3"
+        "sha256": "8661ec9cb77030e255acb4843ab57f2176b75821bde3b145cae03b5ee4b4d77b"
       }
     ],
     "parameters": {
@@ -2864,43 +2864,43 @@
         "path": "agents/1611/details.zh.json",
         "pointer": "/passive/level/1611501/desc/0",
         "rank": 1,
-        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+        "sha256": "470030f71d009a3dd3d4c9ab66aa4d33c0361e5b00038ef4d0a96ba38762a61e"
       },
       {
         "path": "agents/1611/details.zh.json",
         "pointer": "/passive/level/1611502/desc/0",
         "rank": 2,
-        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+        "sha256": "470030f71d009a3dd3d4c9ab66aa4d33c0361e5b00038ef4d0a96ba38762a61e"
       },
       {
         "path": "agents/1611/details.zh.json",
         "pointer": "/passive/level/1611503/desc/0",
         "rank": 3,
-        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+        "sha256": "470030f71d009a3dd3d4c9ab66aa4d33c0361e5b00038ef4d0a96ba38762a61e"
       },
       {
         "path": "agents/1611/details.zh.json",
         "pointer": "/passive/level/1611504/desc/0",
         "rank": 4,
-        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+        "sha256": "470030f71d009a3dd3d4c9ab66aa4d33c0361e5b00038ef4d0a96ba38762a61e"
       },
       {
         "path": "agents/1611/details.zh.json",
         "pointer": "/passive/level/1611505/desc/0",
         "rank": 5,
-        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+        "sha256": "470030f71d009a3dd3d4c9ab66aa4d33c0361e5b00038ef4d0a96ba38762a61e"
       },
       {
         "path": "agents/1611/details.zh.json",
         "pointer": "/passive/level/1611506/desc/0",
         "rank": 6,
-        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+        "sha256": "470030f71d009a3dd3d4c9ab66aa4d33c0361e5b00038ef4d0a96ba38762a61e"
       },
       {
         "path": "agents/1611/details.zh.json",
         "pointer": "/passive/level/1611507/desc/0",
         "rank": 7,
-        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+        "sha256": "470030f71d009a3dd3d4c9ab66aa4d33c0361e5b00038ef4d0a96ba38762a61e"
       }
     ],
     "verification": "Nanoka 3.2 核心被动 1611501—1611507 逐行确认：处于[猩红铭刻]或发动[连携技]、[终结技]、[反制支援]、[支援突击]期间暴击率提升 15/17.5/20/22.5/25/27.5/30%；每行 data.json level 元数据与 rank 一致。固定来源只记录核心 7 的 30。",
@@ -2926,43 +2926,43 @@
         "path": "agents/1611/details.zh.json",
         "pointer": "/passive/level/1611501/desc/0",
         "rank": 1,
-        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+        "sha256": "470030f71d009a3dd3d4c9ab66aa4d33c0361e5b00038ef4d0a96ba38762a61e"
       },
       {
         "path": "agents/1611/details.zh.json",
         "pointer": "/passive/level/1611502/desc/0",
         "rank": 2,
-        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+        "sha256": "470030f71d009a3dd3d4c9ab66aa4d33c0361e5b00038ef4d0a96ba38762a61e"
       },
       {
         "path": "agents/1611/details.zh.json",
         "pointer": "/passive/level/1611503/desc/0",
         "rank": 3,
-        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+        "sha256": "470030f71d009a3dd3d4c9ab66aa4d33c0361e5b00038ef4d0a96ba38762a61e"
       },
       {
         "path": "agents/1611/details.zh.json",
         "pointer": "/passive/level/1611504/desc/0",
         "rank": 4,
-        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+        "sha256": "470030f71d009a3dd3d4c9ab66aa4d33c0361e5b00038ef4d0a96ba38762a61e"
       },
       {
         "path": "agents/1611/details.zh.json",
         "pointer": "/passive/level/1611505/desc/0",
         "rank": 5,
-        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+        "sha256": "470030f71d009a3dd3d4c9ab66aa4d33c0361e5b00038ef4d0a96ba38762a61e"
       },
       {
         "path": "agents/1611/details.zh.json",
         "pointer": "/passive/level/1611506/desc/0",
         "rank": 6,
-        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+        "sha256": "470030f71d009a3dd3d4c9ab66aa4d33c0361e5b00038ef4d0a96ba38762a61e"
       },
       {
         "path": "agents/1611/details.zh.json",
         "pointer": "/passive/level/1611507/desc/0",
         "rank": 7,
-        "sha256": "b1c682a050cd8cb1c9566a9cf4d5ae95409a6184db688474b20bd5b7c6d924d5"
+        "sha256": "470030f71d009a3dd3d4c9ab66aa4d33c0361e5b00038ef4d0a96ba38762a61e"
       }
     ],
     "verification": "同块核心被动各档行确认：血华誓·锻星/伏钺招式期间极限闪避后的 15% 伤害提升与每 1% 初始暴击伤害转 0.35% 初始暴击率在核心 1—7 恒定；暴击率加成本身按记录级键 claret:blk-mtrf598z-wr4jqt:mindscape:0:eff-mtrf598z-80y7hh 逐档取值。"

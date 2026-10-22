@@ -1521,9 +1521,9 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, on-field DMG dealer",
-    "Bike mode continuously consumes HP to gain bonus DMG",
-    "Packs various ways to restore HP"
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, <IconMap:Icon_AvatarClass_Rupture> Rupture on-field DMG dealer",
+    "Launching a Special Attack increases own CRIT DMG",
+    "<Term:3000030>Summon motorbike</Term> to deal massive Physical DMG"
   ],
   "talent": {
     "1": {

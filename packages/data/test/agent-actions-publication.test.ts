@@ -45,7 +45,7 @@ describe("action publication contract", () => {
     const { index, actions, catalog } = await fixture()
     const manifest = await verifyAgentActions(actions, index, catalog)
     expect(manifest.coverage).toEqual({
-      agents: 60,
+      agents: 62,
       actions: 1308,
       damage: 1132,
       dazeOnly: 168,

@@ -1,0 +1,300 @@
+{
+  "id": 690491,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 690492,
+      "zone": {
+        "69049201": {
+          "aRankGoal": 20000,
+          "bRankGoal": 10000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013304": {
+              "desc": "·Each time you successfully neutralize the boss's attacks and trigger the boss's special stagger, it grants <color=#FFAF2C>1,000 Performance Points</color>. During the <Term:2000003>Control Skill</Term>, each successful counter against the Boss's attacks grants <color=#FFAF2C>500 Performance Points</color>. Performing a <color=#FFAF2C>Shutdown</color> on the Boss's <color=#FFAF2C>Control Skill</color> grants <color=#FFAF2C>2,000 Performance Points</color>. During the <Term:2000003></Term>, when triggering <color=#FFAF2C>Shutdown</color> via <color=#FFAF2C><Term:2000006></Term></color>, obtain the remaining Performance Points available from the current <color=#FFAF2C>Control Skill</color>. Maximum obtainable Performance Points: 5,000.",
+              "title": ""
+            },
+            "69014904": {
+              "desc": "· After Shutdown against a Boss enemy's Control Skill, <color=#FFAF2C>Daze</color> dealt by the whole squad's Agents increases by 15%, <color=#FFAF2C>DEF</color> increases by 30%, and when their attacks hit enemies, <color=#FFAF2C>CRIT DMG</color> increases by 75%, and <color=#FFFFFF>Attribute Anomaly DMG</color> increases by 15%.\n· While the Boss is Stunned, <color=#FFAF2C>Sharp DMG</color> dealt by the whole squad's Agents increases by 60%, <color=#A6C5FD>Wind</color> and <color=#98EFF0>Ice</color> CRIT DMG dealt increases by 80% and ignores 40% of the Boss's DEF.",
+              "title": "TBD"
+            },
+            "69014905": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690492011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ClonedBlackWolf.png",
+              "monsterList": {
+                "11803": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40003,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_ClonedBlackWolf.png",
+                  "name": "Rewritten - Sanguine Sweeper",
+                  "stats": {
+                    "attack": 2967.1515151515155,
+                    "attribute_infliction": 10,
+                    "defence": 476.40000000000003,
+                    "hp": 52569962.279999994,
+                    "stun": 17876.45
+                  }
+                }
+              },
+              "monsterResistance": {
+                "200": "Physical"
+              },
+              "monsterWeakness": {
+                "201": "Fire",
+                "204": "Wind"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Rewritten - Sanguine Sweeper",
+          "sRankGoal": 30000,
+          "selectableBuff": {
+            "69014901": {
+              "desc": "· <color=#FFFFFF>Anomaly</color> specialty Agents' ATK <color=#2BAD00>increases by 10%</color>, and <color=#FF5521>Fire Anomaly Buildup Rate</color> <color=#2BAD00>increases by 10%</color>.\n· When an Agent deals <color=#FFFFFF>Attribute Anomaly</color> DMG and triggers a CRIT, the whole squad's Anomaly Proficiency <color=#2BAD00>increases by 30</color> and Attribute Anomaly DMG <color=#2BAD00>increases by 10%</color> for 15s; repeated triggers reset the duration.",
+              "title": "Blazing Radiance"
+            },
+            "69014902": {
+              "desc": "· Agents' <color=#A6C5FD>Wind DMG</color> <color=#2BAD00>increases by 40%</color>, and Wind <color=#2BAD00>CRIT DMG increases by 40%</color>.\n· <color=#FFFFFF>Attack</color> specialty Agents' ATK <color=#2BAD00>increases by 25%</color>, and <color=#FFFFFF>Basic Attack</color> DMG <color=#2BAD00>increases by 40%</color>.",
+              "title": "Storm Tribulation"
+            },
+            "69014903": {
+              "desc": "· Agents' <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases by 30%</color>, Sharp DMG <color=#2BAD00>increases by 10%</color>.\n· <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Armorer</color> specialty Agents' PEN Ratio <color=#2BAD00>increases by 20%</color>, and DMG dealt by <color=#FFFFFF>Special Attack</color> and <color=#FFFFFF>EX Special Attack</color> <color=#2BAD00>increases by 30%</color>.",
+              "title": "Corroding Edge"
+            }
+          },
+          "stageNum": 1
+        }
+      },
+      "zoneType": 1002
+    },
+    {
+      "id": 690491,
+      "zone": {
+        "69049101": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013003": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Anomaly><color=#FFAF2C>Anomaly</color> specialty.",
+              "title": ""
+            },
+            "69014805": {
+              "desc": "· When a Boss enemy is attacked, the attack's Anomaly Buildup Rate <color=#2BAD00>increases by 10%</color>.\n· Each time a Boss enemy enters an <color=#FFFFFF>Attribute Anomaly</color> state, it gains 1 stack of <color=#FFFFFF>Afterglow Mark</color>. When it reaches <color=#2BAD00>3 stacks</color>, all Afterglow Marks are consumed, and the Boss enters the <color=#FFFFFF>Wax Wings</color> state for <color=#2BAD00>30 seconds</color>.\n· While in the <color=#FFFFFF>Wax Wings</color> state, the Boss takes <color=#2BAD00>30% increased Attribute Anomaly DMG</color> and accumulates an additional <color=#2BAD00>5% Daze</color> when entering an <color=#FFFFFF>Attribute Anomaly</color> state, but no longer gains <color=#FFFFFF>Afterglow Marks</color>.\n· When the Boss is Stunned, it immediately enters the <color=#FFFFFF>Wax Wings</color> state. If it is already in the Wax Wings state, the duration is reset.",
+              "title": ""
+            },
+            "69014806": {
+              "desc": "· Each successful <Term:2000004>Chain Parry</Term> against an enemy attack grants an additional <color=#FFAF2C>1,000 Performance Points</color>;\n· After an enemy deploys a $$$Spatial Barrier$$$, each successful stomp on a golden area that triggers a Defensive Assist grants an additional <color=#FFAF2C>1,500 Performance Points</color>; up to 5,000 Performance Points can be earned this way.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690491011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_HollowVenger.png",
+              "monsterList": {
+                "31734": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": -1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40012,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_HollowVenger.png",
+                  "name": "僭越者",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 30270529.44,
+                    "stun": 20430.9
+                  }
+                }
+              },
+              "monsterResistance": {
+                "202": "Ice"
+              },
+              "monsterWeakness": {
+                "201": "Fire"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "僭越者",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69014901": {
+              "desc": "· <color=#FFFFFF>Anomaly</color> specialty Agents' ATK <color=#2BAD00>increases by 10%</color>, and <color=#FF5521>Fire Anomaly Buildup Rate</color> <color=#2BAD00>increases by 10%</color>.\n· When an Agent deals <color=#FFFFFF>Attribute Anomaly</color> DMG and triggers a CRIT, the whole squad's Anomaly Proficiency <color=#2BAD00>increases by 30</color> and Attribute Anomaly DMG <color=#2BAD00>increases by 10%</color> for 15s; repeated triggers reset the duration.",
+              "title": "Blazing Radiance"
+            },
+            "69014902": {
+              "desc": "· Agents' <color=#A6C5FD>Wind DMG</color> <color=#2BAD00>increases by 40%</color>, and Wind <color=#2BAD00>CRIT DMG increases by 40%</color>.\n· <color=#FFFFFF>Attack</color> specialty Agents' ATK <color=#2BAD00>increases by 25%</color>, and <color=#FFFFFF>Basic Attack</color> DMG <color=#2BAD00>increases by 40%</color>.",
+              "title": "Storm Tribulation"
+            },
+            "69014903": {
+              "desc": "· Agents' <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases by 30%</color>, Sharp DMG <color=#2BAD00>increases by 10%</color>.\n· <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Armorer</color> specialty Agents' PEN Ratio <color=#2BAD00>increases by 20%</color>, and DMG dealt by <color=#FFFFFF>Special Attack</color> and <color=#FFFFFF>EX Special Attack</color> <color=#2BAD00>increases by 30%</color>.",
+              "title": "Corroding Edge"
+            }
+          },
+          "stageNum": 1
+        },
+        "69049102": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69014411": {
+              "desc": "· Successfully triggering <color=#FFAF2C>Shutdown</color> grants <color=#FFAF2C>2000 Performance Points</color>; <color=#FFAF2C>each flint shattered</color> grants <color=#FFAF2C>1000 Performance Points, up to a maximum of 5000 Performance Points</color>.",
+              "title": ""
+            },
+            "69014412": {
+              "desc": "· After Infernal Revenant enters the Infernal state, the Attribute Anomaly DMG it takes is reduced by 30%. Every <color=#2BAD00>flintstone</color> shattered gives <color=#FFFFFF>20</color> Energy to the whole team. Every time <Term:2000004></Term> is triggered, the Boss gains 1 stack of <color=#FFFFFF>Overheat</color>; triggering <color=#FFAF2C>Defensive Assist</color> or <color=#FFAF2C>Perfect Dodge</color> 2 times in total applies 1 stack of <color=#FFFFFF>Overheat</color> on the Boss, and each stack of <color=#FFFFFF>Overheat</color> increases CRIT DMG of the whole squad by <color=#FFAF2C>25%</color>, stacking up to 3 times and lasting 20s. Triggering <color=#FFAF2C>Defensive Assist</color> or retriggering <color=#FFFFFF>Overheat</color> resets the duration.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690491021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_SymbioticEtherealSinner.png",
+              "monsterList": {
+                "31635": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 1,
+                    "physical": -1,
+                    "wind": 1
+                  },
+                  "id": 30052,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_SymbioticEtherealSinner.png",
+                  "name": "Infernal Revenant",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 22538010.330000002,
+                    "stun": 20430.9
+                  }
+                }
+              },
+              "monsterResistance": {
+                "200": "Physical"
+              },
+              "monsterWeakness": {
+                "202": "Ice",
+                "204": "Wind"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Infernal Revenant",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69014901": {
+              "desc": "· <color=#FFFFFF>Anomaly</color> specialty Agents' ATK <color=#2BAD00>increases by 10%</color>, and <color=#FF5521>Fire Anomaly Buildup Rate</color> <color=#2BAD00>increases by 10%</color>.\n· When an Agent deals <color=#FFFFFF>Attribute Anomaly</color> DMG and triggers a CRIT, the whole squad's Anomaly Proficiency <color=#2BAD00>increases by 30</color> and Attribute Anomaly DMG <color=#2BAD00>increases by 10%</color> for 15s; repeated triggers reset the duration.",
+              "title": "Blazing Radiance"
+            },
+            "69014902": {
+              "desc": "· Agents' <color=#A6C5FD>Wind DMG</color> <color=#2BAD00>increases by 40%</color>, and Wind <color=#2BAD00>CRIT DMG increases by 40%</color>.\n· <color=#FFFFFF>Attack</color> specialty Agents' ATK <color=#2BAD00>increases by 25%</color>, and <color=#FFFFFF>Basic Attack</color> DMG <color=#2BAD00>increases by 40%</color>.",
+              "title": "Storm Tribulation"
+            },
+            "69014903": {
+              "desc": "· Agents' <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases by 30%</color>, Sharp DMG <color=#2BAD00>increases by 10%</color>.\n· <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Armorer</color> specialty Agents' PEN Ratio <color=#2BAD00>increases by 20%</color>, and DMG dealt by <color=#FFFFFF>Special Attack</color> and <color=#FFFFFF>EX Special Attack</color> <color=#2BAD00>increases by 30%</color>.",
+              "title": "Corroding Edge"
+            }
+          },
+          "stageNum": 2
+        },
+        "69049103": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010205": {
+              "desc": "· Agents inflict <color=#FFFFFF>Overwhelmed</color> when <color=#FFAF2C>landing a Defensive Assist hit</color> against a Boss enemy, and 3 stacks of <color=#FFFFFF>Overwhelmed</color> when accumulating 3 <color=#FFFFFF>Defensive Assist</color> hits and triggering Impaired. Each stack of <color=#FFFFFF>Overwhelmed</color> increases Daze by <color=#FFAF2C>15%</color>, and <color=#FFFFFF>Chain Attack</color> and <color=#FFFFFF>Ultimate</color> DMG taken while Stunned by <color=#FFAF2C>10%</color>. The enemy will fix the impaired parts and reset the impairment level while charging, and will reset its <color=#FFFFFF>Overwhelmed</color> stacks after recovering from Stun.",
+              "title": ""
+            },
+            "69010308": {
+              "desc": "· <color=#FFFFFF>Assist Points</color> are not consumed for this battle.",
+              "title": ""
+            },
+            "69014906": {
+              "desc": "· Successfully <color=#FFAF2C>triggering a Perfect Assist</color> grants <color=#FFAF2C>300 Performance Points</color>.\n· Successfully <color=#FFAF2C>causing Impaired</color> grants <color=#FFAF2C>900 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690491031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_TyphonDestroyer.png",
+              "monsterList": {
+                "11891": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 0,
+                    "fire": -1,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 1
+                  },
+                  "id": 300082,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_TyphonDestroyer.png",
+                  "name": "Autonomous Assault Unit - Typhon Destroyer",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 24608045.7,
+                    "stun": 14327.95
+                  }
+                }
+              },
+              "monsterResistance": {},
+              "monsterWeakness": {
+                "203": "Electric",
+                "204": "Wind"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Autonomous Assault Unit - Typhon Destroyer",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69014901": {
+              "desc": "· <color=#FFFFFF>Anomaly</color> specialty Agents' ATK <color=#2BAD00>increases by 10%</color>, and <color=#FF5521>Fire Anomaly Buildup Rate</color> <color=#2BAD00>increases by 10%</color>.\n· When an Agent deals <color=#FFFFFF>Attribute Anomaly</color> DMG and triggers a CRIT, the whole squad's Anomaly Proficiency <color=#2BAD00>increases by 30</color> and Attribute Anomaly DMG <color=#2BAD00>increases by 10%</color> for 15s; repeated triggers reset the duration.",
+              "title": "Blazing Radiance"
+            },
+            "69014902": {
+              "desc": "· Agents' <color=#A6C5FD>Wind DMG</color> <color=#2BAD00>increases by 40%</color>, and Wind <color=#2BAD00>CRIT DMG increases by 40%</color>.\n· <color=#FFFFFF>Attack</color> specialty Agents' ATK <color=#2BAD00>increases by 25%</color>, and <color=#FFFFFF>Basic Attack</color> DMG <color=#2BAD00>increases by 40%</color>.",
+              "title": "Storm Tribulation"
+            },
+            "69014903": {
+              "desc": "· Agents' <color=#2EB6FF>Electric DMG</color> <color=#2BAD00>increases by 30%</color>, Sharp DMG <color=#2BAD00>increases by 10%</color>.\n· <color=#FFFFFF>Attack</color> or <color=#FFFFFF>Armorer</color> specialty Agents' PEN Ratio <color=#2BAD00>increases by 20%</color>, and DMG dealt by <color=#FFFFFF>Special Attack</color> and <color=#FFFFFF>EX Special Attack</color> <color=#2BAD00>increases by 30%</color>.",
+              "title": "Corroding Edge"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

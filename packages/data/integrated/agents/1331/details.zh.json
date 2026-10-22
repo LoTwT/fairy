@@ -1384,10 +1384,10 @@
   },
   "specialElementType": {},
   "strategy": [
-    "04",
-    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>以太属性，异常后台输出",
-    "触发[异放]造成额外异常伤害",
-    "后台攻击并快速累积异常积蓄值"
+    "03",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>以太属性，<IconMap:Icon_AvatarClass_Anomaly>异常后台输出",
+    "触发<Term:3000002></Term>造成额外异常伤害",
+    "后台攻击并快速累积<Term:3000005></Term>"
   ],
   "talent": {
     "1": {

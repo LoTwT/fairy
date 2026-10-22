@@ -1799,8 +1799,8 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Fire>火属性，异常后台输出",
-    "快速累积火属性异常积蓄值",
+    "<IconMap:Icon_GeneralBuff_Fire>火属性，<IconMap:Icon_AvatarClass_Anomaly>异常后台输出",
+    "快速累积火属性<Term:3000005></Term>",
     "在后台持续提供伤害"
   ],
   "talent": {

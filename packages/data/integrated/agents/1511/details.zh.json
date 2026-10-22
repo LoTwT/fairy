@@ -1395,9 +1395,9 @@
   "specialElementType": {},
   "strategy": [
     "07",
-    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>以太属性，速切击破",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>以太属性，<IconMap:Icon_AvatarClass_Stun><Term:3000012></Term>击破",
     "提高失衡持续时间和失衡易伤倍率",
-    "可触发[异放]和[极性紊乱]"
+    "可触发<Term:3000002></Term>和<Term:3000008></Term>"
   ],
   "talent": {
     "1": {

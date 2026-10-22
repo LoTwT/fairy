@@ -1990,9 +1990,9 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, on-field DMG dealer",
-    "Increases Physical Anomaly Buildup Rate",
-    "Assault DMG has a chance to CRIT"
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, <IconMap:Icon_AvatarClass_Anomaly> Anomaly on-field DMG dealer",
+    "Effectively accumulates Physical <Term:3000005></Term>",
+    "Chance to CRIT with <Term:3000006></Term> and additionally increases CRIT DMG"
   ],
   "talent": {
     "1": {

@@ -105,7 +105,7 @@ function bossSourceZoneStage(name: string): BossSourceZoneStage {
   }
 }
 
-/** 满足规则 nanoka-boss-reference/5 必需结构的合成输入；不读取真实 raw，不使用生产登记表生成 fixture。 */
+/** 满足规则 nanoka-boss-reference/6 必需结构的合成输入；不读取真实 raw，不使用生产登记表生成 fixture。 */
 export function bossSource(): BossSourceFixture {
   return {
     id: 980001,

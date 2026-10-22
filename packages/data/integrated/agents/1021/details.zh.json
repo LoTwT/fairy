@@ -1547,9 +1547,9 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，站场输出",
-    "通过闪避反击提升自身伤害",
-    "灵活穿梭机动性高"
+    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，<IconMap:Icon_AvatarClass_Attack>强攻站场输出",
+    "通过闪避反击攻击大范围敌人",
+    "擅长灵活穿梭、快速输出"
   ],
   "talent": {
     "1": {

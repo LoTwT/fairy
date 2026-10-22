@@ -54,8 +54,8 @@ export const ROXY_CORE_WIND_SUPPLEMENTS: readonly SupplementOption[] =
         pointer: `/passive/level/${1621501 + i}/desc/0`,
         sha256:
           locale === "zh"
-            ? "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e"
-            : "30a75cab3c664648ca8f9bbcfdce04bc5d92b5897b9187c17c6620c76c282b2a",
+            ? "4b4f267a85665ace084d57c47d7202d5687009a98f2c0873b0c89e8124b329e3"
+            : "7f1f2e152f9a3b9f23e94e04067af5608b372d74a04762b8686ddd3fa1767887",
       })),
     ),
     verification: `Nanoka 3.2 中英七档完整核心段确认非锋御普通CD每1% CR增加0.4%，上限22/25/28/31/34/37/40%；锋御锐暴伤每1% CR增加0.2%，上限10/11.5/13/14.5/16/17.5/20%。同队含本人，对应属性及风属性受益，本补充只接一个有效状态的风支路。固定主仓7a4f2776bf4a44cb108fcd7f5834f63606ade914 /agents/33/mindscapeBuffs/0 中 eff-mupozzur-l99yxv 和 eff-muppa3a3-cb9a32 的 external critRate→critDmg/sharpenCritDmgBonus、40%/20%及 resolveConvertValue 连续阈值/帽作为局外读数执行佐证；不移植其all元素或普通CD未排除锋御。采用min(cap(core), coefficient×max(0,c))，有限负数归零，c>1不按概率裁剪；不升级固定来源。${description}不保证暴击、不改CR、伤害种类或倍率；命中属性来源及快照继续按既有规则。裸supplied调用方负责职业/局外读数/状态事实，规则级唯一性仍在实际消费输出时执行。代码与固定来源核验不等于游戏实测。`,
@@ -179,22 +179,22 @@ export const ROXY_CORE_ELEMENT_SUPPLEMENTS: readonly SupplementOption[] =
             [
               "1091",
               "zh",
-              "45f70931c081d73d085eadea5a23d6c21cc314019090d0577a76a9b3f722973e",
+              "5f00f24d508f8916dbfc94993a7ff4dffda09d0fafddb30259f64cee791aa841",
             ],
             [
               "1091",
               "en",
-              "bad069eb3645dde14af355e4121faef405c296d938bb0d7a512eb9f3b9c39a35",
+              "aa51b473f18c002f70fb7b68cdefd7425cd11b3255e86b62fca228674f9fb26e",
             ],
             [
               "1371",
               "zh",
-              "70e3e1b3347c44e01167bd017d799b73d4a6fee751038484e62475f5e32bf1b3",
+              "bcf0924fe9fbdc799e4118e5590aef75e2b9bd1d0b0e0cf964179bfabcd77a01",
             ],
             [
               "1371",
               "en",
-              "febb1ccad3f134e9bbe551abdf83772055ad66480e3619e2b022ba7fc94dc6d3",
+              "f10dab754c5901446ddc404de6edd5c96e416911d0bc618fbde76acd32fd0c8e",
             ],
           ] as const
         ).map(([id, locale, sha256]) => ({

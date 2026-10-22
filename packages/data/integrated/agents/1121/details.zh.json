@@ -1369,7 +1369,7 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_Fire>火属性，防护辅助",
+    "<IconMap:Icon_GeneralBuff_Fire>火属性，<IconMap:Icon_AvatarClass_Defense>防护辅助",
     "为全队角色提供护盾防御反击"
   ],
   "talent": {

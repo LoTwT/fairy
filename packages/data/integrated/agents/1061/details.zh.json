@@ -1542,7 +1542,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，失衡窗口期输出",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，失衡窗口期<IconMap:Icon_AvatarClass_Attack>强攻输出",
     "命中失衡敌人提高自身伤害"
   ],
   "talent": {

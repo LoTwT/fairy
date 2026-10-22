@@ -185,8 +185,8 @@
       "1621015": ["/skill/assist/description/6/param/1"],
       "1621016": ["/skill/assist/description/6/param/2"],
       "1621017": [
-        "/skill/assist/description/4/param/2",
-        "/skill/assist/description/7/param/0"
+        "/skill/assist/description/7/param/0",
+        "/skill/assist/description/7/param/1"
       ],
       "1621018": [
         "/skill/assist/description/4/param/0",
@@ -378,32 +378,6 @@
                 }
               },
               "potential": []
-            },
-            {
-              "desc": "{Skill:1621017, Prop:1002}",
-              "name": "失衡倍率",
-              "param": {
-                "1621017": {
-                  "attackData": [],
-                  "attributeInfliction": 44367,
-                  "damagePercentage": 61160,
-                  "damagePercentageGrowth": 5560,
-                  "etherPurify": 25664,
-                  "feverRecovery": 1440725,
-                  "feverRecoveryGrowth": 0,
-                  "format": "%",
-                  "growth": 2090,
-                  "main": 45870,
-                  "rpRecovery": 0,
-                  "rpRecoveryGrowth": 0,
-                  "spConsume": 0,
-                  "spRecovery": 0,
-                  "spRecoveryGrowth": 0,
-                  "stunRatio": 45870,
-                  "stunRatioGrowth": 2090
-                }
-              },
-              "potential": []
             }
           ],
           "potential": []
@@ -568,6 +542,32 @@
                   "format": "%",
                   "growth": 5560,
                   "main": 61160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 45870,
+                  "stunRatioGrowth": 2090
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1621017, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1621017": {
+                  "attackData": [],
+                  "attributeInfliction": 44367,
+                  "damagePercentage": 61160,
+                  "damagePercentageGrowth": 5560,
+                  "etherPurify": 25664,
+                  "feverRecovery": 1440725,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2090,
+                  "main": 45870,
                   "rpRecovery": 0,
                   "rpRecoveryGrowth": 0,
                   "spConsume": 0,
@@ -1625,7 +1625,12 @@
     }
   },
   "specialElementType": {},
-  "strategy": {},
+  "strategy": [
+    "07",
+    "<IconMap:Icon_GeneralBuff_Wind>风属性，<IconMap:Icon_AvatarClass_Stun>击破",
+    "提升全队造成的暴击伤害或<Term:3000015></Term>",
+    "可通过<Term:3000010></Term>额外提升全队造成的伤害"
+  ],
   "talent": {
     "1": {
       "desc": "<color=#ffffff>[强化特殊技：敬请安息]</color>命中时，使敌方全属性伤害抗性降低15%，持续50秒，重复触发时刷新持续时间；自身暴击伤害提升40%。",

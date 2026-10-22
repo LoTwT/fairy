@@ -1689,8 +1689,8 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>以太属性，命破体系辅助",
-    "开启[以太帷幕]提升生命值上限",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>以太属性，命破体系<IconMap:Icon_AvatarClass_Support>支援辅助",
+    "开启<Term:3000001></Term>提升生命值上限",
     "提供贯穿力与暴击伤害加成"
   ],
   "talent": {

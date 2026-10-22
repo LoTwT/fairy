@@ -1719,7 +1719,12 @@
     }
   },
   "specialElementType": {},
-  "strategy": {},
+  "strategy": [
+    "07",
+    "<IconMap:Icon_GeneralBuff_Fire>火属性，<IconMap:Icon_AvatarClass_Stun>后台击破",
+    "快速累积失衡值并提高失衡易伤倍率",
+    "可额外触发队友[连携技]"
+  ],
   "talent": {
     "1": {
       "desc": "<color=#FFFFFF>[强化特殊技：火力实验]</color>中[嗯呢炮塔]展开导弹舱的持续时间增加至12秒；任意招式中的[破甲弹头]或[高爆弹头]命中敌人时，使敌人的全属性伤害抗性降低15%，持续15秒，重复触发时刷新持续时间。",

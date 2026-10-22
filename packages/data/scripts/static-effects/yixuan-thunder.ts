@@ -11,9 +11,9 @@ import type { Supplement, SupplementOption } from "./supplements.ts"
 
 const identity = { kind: "agent", entityId: "1371" } as const
 const yixuanZh =
-  "70e3e1b3347c44e01167bd017d799b73d4a6fee751038484e62475f5e32bf1b3"
+  "bcf0924fe9fbdc799e4118e5590aef75e2b9bd1d0b0e0cf964179bfabcd77a01"
 const yixuanEn =
-  "febb1ccad3f134e9bbe551abdf83772055ad66480e3619e2b022ba7fc94dc6d3"
+  "f10dab754c5901446ddc404de6edd5c96e416911d0bc618fbde76acd32fd0c8e"
 /** 直接倍率 stat 家族：影画/额外能力位置出现任何该家族机器记录即拒绝。 */
 const directMultiplierStats = ["directDmgMult", "directDmgMultFactor"] as const
 

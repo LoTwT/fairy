@@ -160,11 +160,12 @@ export async function generateAgentActions(
     )
     const snapshot = await directoryRoot(join(temporary, "source/integrated"))
     const sourceContract = actionSourceContract(index)
-    if (
-      JSON.stringify([...new Set(registry.map((entry) => entry.entityId))]) !==
-      JSON.stringify(sourceContract.members)
-    )
-      throw new Error("Action registry membership changed")
+    const registryEntityIds = new Set(registry.map((entry) => entry.entityId))
+    for (const entityId of registryEntityIds)
+      if (!sourceContract.members.includes(entityId))
+        throw new Error(
+          `Action registry entity is missing from integrated members: ${entityId}`,
+        )
     const candidate = join(temporary, "candidate")
     await mkdir(candidate)
     const write = async (path: string, value: unknown) => {

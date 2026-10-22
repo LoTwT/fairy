@@ -1667,10 +1667,10 @@
   },
   "strategy": [
     "01",
-    "Consumes Fallen Frost to unleash charged slashes",
-    "<IconMap:Icon_GeneralBuff_Frost>Frost, on-field DMG dealer",
-    "Can trigger Disorder with all Attribute Anomaly effects",
-    "Can convert CRIT Rate into Anomaly Buildup Rate"
+    "Consume <Term:3000022></Term> to launch <Term:3000023></Term>",
+    "<IconMap:Icon_GeneralBuff_Frost>Frost, <IconMap:Icon_AvatarClass_Anomaly> Anomaly on-field DMG dealer",
+    "Trigger <Term:3000003></Term> with any squad member and restore <Term:3000022></Term>",
+    "Can convert CRIT Rate to <Term:3000005></Term> Efficiency"
   ],
   "talent": {
     "1": {

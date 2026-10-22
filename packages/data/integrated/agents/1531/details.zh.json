@@ -1500,9 +1500,9 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，站场输出",
-    "摩托形态持续消耗生命获得伤害加成",
-    "拥有多种回复生命手段"
+    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，<IconMap:Icon_AvatarClass_Rupture>命破站场输出",
+    "发动[特殊技]提升自身暴击伤害",
+    "<Term:3000030></Term>造成大量物理伤害"
   ],
   "talent": {
     "1": {

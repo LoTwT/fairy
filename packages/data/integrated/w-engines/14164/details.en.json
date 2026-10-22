@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "...",
+  "desc2": "Equip to increase Anomaly Agents' combat capabilities",
+  "desc3": "...",
+  "id": 14164,
+  "locale": "en",
+  "name": "Plume of Rebirth",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "Anomaly Mastery",
+    "name2": "Anomaly Mastery"
+  },
+  "talents": {
+    "1": {
+      "desc": "The equipper's Anomaly Proficiency increases by <color=#2BAD00>90</color>. When Anomaly DMG dealt by any squad member to an enemy triggers a critical hit, the equipper's <color=#FF5521>Fire DMG</color> increases by <color=#2BAD00>40%</color> for 20s. Repeated triggers reset the duration.",
+      "name": "Hatching Day"
+    },
+    "2": {
+      "desc": "The equipper's Anomaly Proficiency increases by <color=#2BAD00>99</color>. When Anomaly DMG dealt by any squad member to an enemy triggers a critical hit, the equipper's <color=#FF5521>Fire DMG</color> increases by <color=#2BAD00>44%</color> for 20s. Repeated triggers reset the duration.",
+      "name": "Hatching Day"
+    },
+    "3": {
+      "desc": "The equipper's Anomaly Proficiency increases by <color=#2BAD00>108</color>. When Anomaly DMG dealt by any squad member to an enemy triggers a critical hit, the equipper's <color=#FF5521>Fire DMG</color> increases by <color=#2BAD00>48%</color> for 20s. Repeated triggers reset the duration.",
+      "name": "Hatching Day"
+    },
+    "4": {
+      "desc": "The equipper's Anomaly Proficiency increases by <color=#2BAD00>117</color>. When Anomaly DMG dealt by any squad member to an enemy triggers a critical hit, the equipper's <color=#FF5521>Fire DMG</color> increases by <color=#2BAD00>52%</color> for 20s. Repeated triggers reset the duration.",
+      "name": "Hatching Day"
+    },
+    "5": {
+      "desc": "The equipper's Anomaly Proficiency increases by <color=#2BAD00>126</color>. When Anomaly DMG dealt by any squad member to an enemy triggers a critical hit, the equipper's <color=#FF5521>Fire DMG</color> increases by <color=#2BAD00>56%</color> for 20s. Repeated triggers reset the duration.",
+      "name": "Hatching Day"
+    }
+  },
+  "weaponType": {
+    "3": "Anomaly"
+  }
+}

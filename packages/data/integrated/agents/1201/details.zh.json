@@ -1958,9 +1958,9 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Thunder>电属性，速切输出",
-    "远近双形态切换",
-    "高频冲刺斩击"
+    "<IconMap:Icon_GeneralBuff_Thunder>电属性，<IconMap:Icon_AvatarClass_Attack>强攻<Term:3000012></Term>输出",
+    "<Term:3000031></Term>切换",
+    "高频<Term:3000032></Term>"
   ],
   "talent": {
     "1": {

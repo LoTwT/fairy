@@ -1683,9 +1683,9 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, off-field support",
-    "All-around boosts to Anomaly team rotation and DMG",
-    "Increases squadmates' Anomaly Buildup Rate"
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, Anomaly-based <IconMap:Icon_AvatarClass_Support> off-field Support",
+    "All-around boosts to Anomaly team <Term:3000014></Term> and DMG",
+    "Boost teammates' <Term:3000005></Term> accumulation efficiency"
   ],
   "talent": {
     "1": {

@@ -1613,7 +1613,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>以太属性，速切输出",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>以太属性，<IconMap:Icon_AvatarClass_Attack>强攻<Term:3000012></Term>输出",
     "失衡期间集中爆发",
     "压制模式霰弹连射"
   ],

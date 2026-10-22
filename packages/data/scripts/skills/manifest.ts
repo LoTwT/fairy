@@ -25,6 +25,7 @@ export const limitations = [
   "没有自动施加减防、影画伤害增益、核心属性转化或装备效果；沿用现有静态效果与后续面板适配。",
   "失衡倍率独立于伤害倍率；耀变基础倍率独立于攻击力直伤，实际结算复用现有 core/effects 公式。",
   "动作可用性与命中身份可由潜能等级与调用方显式额外能力事实决定；未提供、未解锁或事实非法时拒绝，不插值、不复用最高档。",
+  "1631、1641 的动作目录尚未登记，当前只发布空动作清单；待后续批次补齐。",
 ] as const
 
 export function actionSourceContract(index: IntegratedSnapshotIndex) {

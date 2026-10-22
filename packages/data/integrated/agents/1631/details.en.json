@@ -1,0 +1,1572 @@
+{
+  "camp": {
+    "7": "New Eridu Public Security"
+  },
+  "elementType": {
+    "204": "Wind"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "Base ATK"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "CRIT DMG"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "CRIT Rate"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "CRIT DMG"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "PEN Ratio"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "ATK"
+    }
+  },
+  "hitType": {
+    "101": "Slash"
+  },
+  "id": 1631,
+  "locale": "en",
+  "name": "Severian",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": [
+        "1631014",
+        "1631015",
+        "1631016",
+        "1631017",
+        "1631018",
+        "1631019"
+      ],
+      "basic": [
+        "1631001",
+        "1631002",
+        "1631003",
+        "1631004",
+        "1631005",
+        "1631006",
+        "1631020"
+      ],
+      "chain": ["1631012", "1631013"],
+      "dodge": ["1631010", "1631011"],
+      "special": ["1631007", "1631008", "1631009"]
+    },
+    "parameterRowsById": {
+      "1631001": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1631002": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/6"
+      ],
+      "1631003": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/7"
+      ],
+      "1631004": [
+        "/skill/basic/description/3/param/3",
+        "/skill/basic/description/3/param/8"
+      ],
+      "1631005": [
+        "/skill/basic/description/4/param/0",
+        "/skill/basic/description/4/param/1"
+      ],
+      "1631006": [
+        "/skill/basic/description/5/param/0",
+        "/skill/basic/description/5/param/1"
+      ],
+      "1631007": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1631008": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1631009": [
+        "/skill/special/description/3/param/3",
+        "/skill/special/description/3/param/4"
+      ],
+      "1631010": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1631011": [
+        "/skill/dodge/description/5/param/0",
+        "/skill/dodge/description/5/param/1"
+      ],
+      "1631012": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1631013": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1631014": [
+        "/skill/assist/description/4/param/0",
+        "/skill/assist/description/4/param/1"
+      ],
+      "1631015": ["/skill/assist/description/5/param/0"],
+      "1631016": ["/skill/assist/description/5/param/1"],
+      "1631017": ["/skill/assist/description/5/param/2"],
+      "1631018": [
+        "/skill/assist/description/6/param/0",
+        "/skill/assist/description/6/param/1"
+      ],
+      "1631019": [
+        "/skill/assist/description/7/param/0",
+        "/skill/assist/description/7/param/1"
+      ],
+      "1631020": [
+        "/skill/basic/description/3/param/4",
+        "/skill/basic/description/3/param/9"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "...",
+    "fullName": "...",
+    "gender": "Male",
+    "impressionF": "...",
+    "impressionM": "...",
+    "impressions": ["...", "...", "..."],
+    "profileDesc": "...",
+    "stature": "...",
+    "trustLv": {
+      "1": "...",
+      "2": "",
+      "3": "...",
+      "4": ""
+    },
+    "unlockCondition": [
+      "Obtain Agent",
+      "...",
+      "Complete the \"Anby's Problem\" commission"
+    ]
+  },
+  "passive": {
+    "level": {
+      "1631501": {
+        "desc": [
+          "Severian's CRIT DMG increases by <color=#2BAD00>30%</color>, and his DMG increases by <color=#2BAD00>12.5%</color>. If there is another Wind character in the squad, his DMG increases by an additional <color=#2BAD00>15%</color>.\nWhen Severian uses <color=#FFFFFF>Basic Attack: Swift Edge</color> just before being hit by an enemy attack, he can dodge the attack. If he dodges it with any of the first three hits of his Basic Attack, he automatically launches <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>. If he dodges it with the 4th hit, that Basic Attack's DMG Multiplier and Daze Multiplier are increased to match <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nWhen Severian enters the battlefield, he gains 2 stacks of <Term:1000042></Term>. This effect can trigger once every 180s in Investigation Zone mode.\nWhen Severian has <color=#FFFFFF>Shadowflash</color> and is not invulnerable, if he is hit by a non-Control Skill enemy attack that he fails to actively dodge or parry, he consumes 1 stack of <color=#FFFFFF>Shadowflash</color> to automatically dodge the attack and launch <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nSuccessfully dodging an enemy attack with <color=#FFFFFF>Basic Attack: Swift Edge</color>, automatically dodging an enemy attack with <color=#FFFFFF>Shadowflash</color>, or directly dodging an enemy attack all count as a <color=#FFFFFF>Perfect Dodge</color>.\n<color=#FFFFFF>Shadowflash</color> can stack up to 2 times. If Severian gains <color=#FFFFFF>Shadowflash</color> while already possessing maximum stacks, he gains 1 stack of <Term:1000043></Term> instead, and the next <color=#FFFFFF>Basic Attack: Swift Edge</color> is enhanced to <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nEach time Severian performs a Perfect Dodge, he gains 1 stack of <color=#FFFFFF>Windborne</color>. While Severian has <color=#FFFFFF>Windborne</color> and is in combat, press <IconMap:Icon_Switch> to switch him from off-field to on-field and launch an <color=#FFFFFF>Entry Skill</color>.\nSeverian gains <Term:1000041></Term> by hitting enemies with certain skills or triggering a Perfect Dodge. <color=#FFFFFF>Flow</color> is capped at 150 points.\nWhen <color=#FFFFFF>Flow</color> reaches 100 points, hold <IconMap:Icon_Normal> to consume 100 <color=#FFFFFF>Flow</color> and launch <color=#FFFFFF>Basic Attack: Azure Wind's Shadowhunt</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Support</color> or <color=#FFFFFF>Stun</color> character, or shares the same faction:\nFor every 1% CRIT Rate Severian has, his ATK increases by 8.5, up to 100% CRIT Rate."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Endless Breeze",
+          "Additional Ability: Optimal Setup"
+        ],
+        "potential": []
+      },
+      "1631502": {
+        "desc": [
+          "Severian's CRIT DMG increases by <color=#2BAD00>35%</color>, and his DMG increases by <color=#2BAD00>14.6%</color>. If there is another Wind character in the squad, his DMG increases by an additional <color=#2BAD00>17.5%</color>.\nWhen Severian uses <color=#FFFFFF>Basic Attack: Swift Edge</color> just before being hit by an enemy attack, he can dodge the attack. If he dodges it with any of the first three hits of his Basic Attack, he automatically launches <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>. If he dodges it with the 4th hit, that Basic Attack's DMG Multiplier and Daze Multiplier are increased to match <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nWhen Severian enters the battlefield, he gains 2 stacks of <Term:1000042></Term>. This effect can trigger once every 180s in Investigation Zone mode.\nWhen Severian has <color=#FFFFFF>Shadowflash</color> and is not invulnerable, if he is hit by a non-Control Skill enemy attack that he fails to actively dodge or parry, he consumes 1 stack of <color=#FFFFFF>Shadowflash</color> to automatically dodge the attack and launch <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nSuccessfully dodging an enemy attack with <color=#FFFFFF>Basic Attack: Swift Edge</color>, automatically dodging an enemy attack with <color=#FFFFFF>Shadowflash</color>, or directly dodging an enemy attack all count as a <color=#FFFFFF>Perfect Dodge</color>.\n<color=#FFFFFF>Shadowflash</color> can stack up to 2 times. If Severian gains <color=#FFFFFF>Shadowflash</color> while already possessing maximum stacks, he gains 1 stack of <Term:1000043></Term> instead, and the next <color=#FFFFFF>Basic Attack: Swift Edge</color> is enhanced to <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nEach time Severian performs a Perfect Dodge, he gains 1 stack of <color=#FFFFFF>Windborne</color>. While Severian has <color=#FFFFFF>Windborne</color> and is in combat, press <IconMap:Icon_Switch> to switch him from off-field to on-field and launch an <color=#FFFFFF>Entry Skill</color>.\nSeverian gains <Term:1000041></Term> by hitting enemies with certain skills or triggering a Perfect Dodge. <color=#FFFFFF>Flow</color> is capped at 150 points.\nWhen <color=#FFFFFF>Flow</color> reaches 100 points, hold <IconMap:Icon_Normal> to consume 100 <color=#FFFFFF>Flow</color> and launch <color=#FFFFFF>Basic Attack: Azure Wind's Shadowhunt</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Support</color> or <color=#FFFFFF>Stun</color> character, or shares the same faction:\nFor every 1% CRIT Rate Severian has, his ATK increases by 8.5, up to 100% CRIT Rate."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Endless Breeze",
+          "Additional Ability: Optimal Setup"
+        ],
+        "potential": []
+      },
+      "1631503": {
+        "desc": [
+          "Severian's CRIT DMG increases by <color=#2BAD00>40%</color>, and his DMG increases by <color=#2BAD00>16.7%</color>. If there is another Wind character in the squad, his DMG increases by an additional <color=#2BAD00>20%</color>.\nWhen Severian uses <color=#FFFFFF>Basic Attack: Swift Edge</color> just before being hit by an enemy attack, he can dodge the attack. If he dodges it with any of the first three hits of his Basic Attack, he automatically launches <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>. If he dodges it with the 4th hit, that Basic Attack's DMG Multiplier and Daze Multiplier are increased to match <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nWhen Severian enters the battlefield, he gains 2 stacks of <Term:1000042></Term>. This effect can trigger once every 180s in Investigation Zone mode.\nWhen Severian has <color=#FFFFFF>Shadowflash</color> and is not invulnerable, if he is hit by a non-Control Skill enemy attack that he fails to actively dodge or parry, he consumes 1 stack of <color=#FFFFFF>Shadowflash</color> to automatically dodge the attack and launch <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nSuccessfully dodging an enemy attack with <color=#FFFFFF>Basic Attack: Swift Edge</color>, automatically dodging an enemy attack with <color=#FFFFFF>Shadowflash</color>, or directly dodging an enemy attack all count as a <color=#FFFFFF>Perfect Dodge</color>.\n<color=#FFFFFF>Shadowflash</color> can stack up to 2 times. If Severian gains <color=#FFFFFF>Shadowflash</color> while already possessing maximum stacks, he gains 1 stack of <Term:1000043></Term> instead, and the next <color=#FFFFFF>Basic Attack: Swift Edge</color> is enhanced to <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nEach time Severian performs a Perfect Dodge, he gains 1 stack of <color=#FFFFFF>Windborne</color>. While Severian has <color=#FFFFFF>Windborne</color> and is in combat, press <IconMap:Icon_Switch> to switch him from off-field to on-field and launch an <color=#FFFFFF>Entry Skill</color>.\nSeverian gains <Term:1000041></Term> by hitting enemies with certain skills or triggering a Perfect Dodge. <color=#FFFFFF>Flow</color> is capped at 150 points.\nWhen <color=#FFFFFF>Flow</color> reaches 100 points, hold <IconMap:Icon_Normal> to consume 100 <color=#FFFFFF>Flow</color> and launch <color=#FFFFFF>Basic Attack: Azure Wind's Shadowhunt</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Support</color> or <color=#FFFFFF>Stun</color> character, or shares the same faction:\nFor every 1% CRIT Rate Severian has, his ATK increases by 8.5, up to 100% CRIT Rate."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Endless Breeze",
+          "Additional Ability: Optimal Setup"
+        ],
+        "potential": []
+      },
+      "1631504": {
+        "desc": [
+          "Severian's CRIT DMG increases by <color=#2BAD00>45%</color>, and his DMG increases by <color=#2BAD00>18.8%</color>. If there is another Wind character in the squad, his DMG increases by an additional <color=#2BAD00>22.5%</color>.\nWhen Severian uses <color=#FFFFFF>Basic Attack: Swift Edge</color> just before being hit by an enemy attack, he can dodge the attack. If he dodges it with any of the first three hits of his Basic Attack, he automatically launches <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>. If he dodges it with the 4th hit, that Basic Attack's DMG Multiplier and Daze Multiplier are increased to match <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nWhen Severian enters the battlefield, he gains 2 stacks of <Term:1000042></Term>. This effect can trigger once every 180s in Investigation Zone mode.\nWhen Severian has <color=#FFFFFF>Shadowflash</color> and is not invulnerable, if he is hit by a non-Control Skill enemy attack that he fails to actively dodge or parry, he consumes 1 stack of <color=#FFFFFF>Shadowflash</color> to automatically dodge the attack and launch <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nSuccessfully dodging an enemy attack with <color=#FFFFFF>Basic Attack: Swift Edge</color>, automatically dodging an enemy attack with <color=#FFFFFF>Shadowflash</color>, or directly dodging an enemy attack all count as a <color=#FFFFFF>Perfect Dodge</color>.\n<color=#FFFFFF>Shadowflash</color> can stack up to 2 times. If Severian gains <color=#FFFFFF>Shadowflash</color> while already possessing maximum stacks, he gains 1 stack of <Term:1000043></Term> instead, and the next <color=#FFFFFF>Basic Attack: Swift Edge</color> is enhanced to <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nEach time Severian performs a Perfect Dodge, he gains 1 stack of <color=#FFFFFF>Windborne</color>. While Severian has <color=#FFFFFF>Windborne</color> and is in combat, press <IconMap:Icon_Switch> to switch him from off-field to on-field and launch an <color=#FFFFFF>Entry Skill</color>.\nSeverian gains <Term:1000041></Term> by hitting enemies with certain skills or triggering a Perfect Dodge. <color=#FFFFFF>Flow</color> is capped at 150 points.\nWhen <color=#FFFFFF>Flow</color> reaches 100 points, hold <IconMap:Icon_Normal> to consume 100 <color=#FFFFFF>Flow</color> and launch <color=#FFFFFF>Basic Attack: Azure Wind's Shadowhunt</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Support</color> or <color=#FFFFFF>Stun</color> character, or shares the same faction:\nFor every 1% CRIT Rate Severian has, his ATK increases by 8.5, up to 100% CRIT Rate."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Endless Breeze",
+          "Additional Ability: Optimal Setup"
+        ],
+        "potential": []
+      },
+      "1631505": {
+        "desc": [
+          "Severian's CRIT DMG increases by <color=#2BAD00>50%</color>, and his DMG increases by <color=#2BAD00>20.8%</color>. If there is another Wind character in the squad, his DMG increases by an additional <color=#2BAD00>25%</color>.\nWhen Severian uses <color=#FFFFFF>Basic Attack: Swift Edge</color> just before being hit by an enemy attack, he can dodge the attack. If he dodges it with any of the first three hits of his Basic Attack, he automatically launches <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>. If he dodges it with the 4th hit, that Basic Attack's DMG Multiplier and Daze Multiplier are increased to match <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nWhen Severian enters the battlefield, he gains 2 stacks of <Term:1000042></Term>. This effect can trigger once every 180s in Investigation Zone mode.\nWhen Severian has <color=#FFFFFF>Shadowflash</color> and is not invulnerable, if he is hit by a non-Control Skill enemy attack that he fails to actively dodge or parry, he consumes 1 stack of <color=#FFFFFF>Shadowflash</color> to automatically dodge the attack and launch <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nSuccessfully dodging an enemy attack with <color=#FFFFFF>Basic Attack: Swift Edge</color>, automatically dodging an enemy attack with <color=#FFFFFF>Shadowflash</color>, or directly dodging an enemy attack all count as a <color=#FFFFFF>Perfect Dodge</color>.\n<color=#FFFFFF>Shadowflash</color> can stack up to 2 times. If Severian gains <color=#FFFFFF>Shadowflash</color> while already possessing maximum stacks, he gains 1 stack of <Term:1000043></Term> instead, and the next <color=#FFFFFF>Basic Attack: Swift Edge</color> is enhanced to <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nEach time Severian performs a Perfect Dodge, he gains 1 stack of <color=#FFFFFF>Windborne</color>. While Severian has <color=#FFFFFF>Windborne</color> and is in combat, press <IconMap:Icon_Switch> to switch him from off-field to on-field and launch an <color=#FFFFFF>Entry Skill</color>.\nSeverian gains <Term:1000041></Term> by hitting enemies with certain skills or triggering a Perfect Dodge. <color=#FFFFFF>Flow</color> is capped at 150 points.\nWhen <color=#FFFFFF>Flow</color> reaches 100 points, hold <IconMap:Icon_Normal> to consume 100 <color=#FFFFFF>Flow</color> and launch <color=#FFFFFF>Basic Attack: Azure Wind's Shadowhunt</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Support</color> or <color=#FFFFFF>Stun</color> character, or shares the same faction:\nFor every 1% CRIT Rate Severian has, his ATK increases by 8.5, up to 100% CRIT Rate."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Endless Breeze",
+          "Additional Ability: Optimal Setup"
+        ],
+        "potential": []
+      },
+      "1631506": {
+        "desc": [
+          "Severian's CRIT DMG increases by <color=#2BAD00>55%</color>, and his DMG increases by <color=#2BAD00>22.9%</color>. If there is another Wind character in the squad, his DMG increases by an additional <color=#2BAD00>27.5%</color>.\nWhen Severian uses <color=#FFFFFF>Basic Attack: Swift Edge</color> just before being hit by an enemy attack, he can dodge the attack. If he dodges it with any of the first three hits of his Basic Attack, he automatically launches <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>. If he dodges it with the 4th hit, that Basic Attack's DMG Multiplier and Daze Multiplier are increased to match <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nWhen Severian enters the battlefield, he gains 2 stacks of <Term:1000042></Term>. This effect can trigger once every 180s in Investigation Zone mode.\nWhen Severian has <color=#FFFFFF>Shadowflash</color> and is not invulnerable, if he is hit by a non-Control Skill enemy attack that he fails to actively dodge or parry, he consumes 1 stack of <color=#FFFFFF>Shadowflash</color> to automatically dodge the attack and launch <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nSuccessfully dodging an enemy attack with <color=#FFFFFF>Basic Attack: Swift Edge</color>, automatically dodging an enemy attack with <color=#FFFFFF>Shadowflash</color>, or directly dodging an enemy attack all count as a <color=#FFFFFF>Perfect Dodge</color>.\n<color=#FFFFFF>Shadowflash</color> can stack up to 2 times. If Severian gains <color=#FFFFFF>Shadowflash</color> while already possessing maximum stacks, he gains 1 stack of <Term:1000043></Term> instead, and the next <color=#FFFFFF>Basic Attack: Swift Edge</color> is enhanced to <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nEach time Severian performs a Perfect Dodge, he gains 1 stack of <color=#FFFFFF>Windborne</color>. While Severian has <color=#FFFFFF>Windborne</color> and is in combat, press <IconMap:Icon_Switch> to switch him from off-field to on-field and launch an <color=#FFFFFF>Entry Skill</color>.\nSeverian gains <Term:1000041></Term> by hitting enemies with certain skills or triggering a Perfect Dodge. <color=#FFFFFF>Flow</color> is capped at 150 points.\nWhen <color=#FFFFFF>Flow</color> reaches 100 points, hold <IconMap:Icon_Normal> to consume 100 <color=#FFFFFF>Flow</color> and launch <color=#FFFFFF>Basic Attack: Azure Wind's Shadowhunt</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Support</color> or <color=#FFFFFF>Stun</color> character, or shares the same faction:\nFor every 1% CRIT Rate Severian has, his ATK increases by 8.5, up to 100% CRIT Rate."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Endless Breeze",
+          "Additional Ability: Optimal Setup"
+        ],
+        "potential": []
+      },
+      "1631507": {
+        "desc": [
+          "Severian's CRIT DMG increases by <color=#2BAD00>60%</color>, and his DMG increases by <color=#2BAD00>25%</color>. If there is another Wind character in the squad, his DMG increases by an additional <color=#2BAD00>30%</color>.\nWhen Severian uses <color=#FFFFFF>Basic Attack: Swift Edge</color> just before being hit by an enemy attack, he can dodge the attack. If he dodges it with any of the first three hits of his Basic Attack, he automatically launches <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>. If he dodges it with the 4th hit, that Basic Attack's DMG Multiplier and Daze Multiplier are increased to match <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nWhen Severian enters the battlefield, he gains 2 stacks of <Term:1000042></Term>. This effect can trigger once every 180s in Investigation Zone mode.\nWhen Severian has <color=#FFFFFF>Shadowflash</color> and is not invulnerable, if he is hit by a non-Control Skill enemy attack that he fails to actively dodge or parry, he consumes 1 stack of <color=#FFFFFF>Shadowflash</color> to automatically dodge the attack and launch <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nSuccessfully dodging an enemy attack with <color=#FFFFFF>Basic Attack: Swift Edge</color>, automatically dodging an enemy attack with <color=#FFFFFF>Shadowflash</color>, or directly dodging an enemy attack all count as a <color=#FFFFFF>Perfect Dodge</color>.\n<color=#FFFFFF>Shadowflash</color> can stack up to 2 times. If Severian gains <color=#FFFFFF>Shadowflash</color> while already possessing maximum stacks, he gains 1 stack of <Term:1000043></Term> instead, and the next <color=#FFFFFF>Basic Attack: Swift Edge</color> is enhanced to <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>.\nEach time Severian performs a Perfect Dodge, he gains 1 stack of <color=#FFFFFF>Windborne</color>. While Severian has <color=#FFFFFF>Windborne</color> and is in combat, press <IconMap:Icon_Switch> to switch him from off-field to on-field and launch an <color=#FFFFFF>Entry Skill</color>.\nSeverian gains <Term:1000041></Term> by hitting enemies with certain skills or triggering a Perfect Dodge. <color=#FFFFFF>Flow</color> is capped at 150 points.\nWhen <color=#FFFFFF>Flow</color> reaches 100 points, hold <IconMap:Icon_Normal> to consume 100 <color=#FFFFFF>Flow</color> and launch <color=#FFFFFF>Basic Attack: Azure Wind's Shadowhunt</color>.",
+          "When another character in your squad is a <color=#FFFFFF>Support</color> or <color=#FFFFFF>Stun</color> character, or shares the same faction:\nFor every 1% CRIT Rate Severian has, his ATK increases by 8.5, up to 100% CRIT Rate."
+        ],
+        "extraProperty": {},
+        "name": [
+          "Core Passive: Endless Breeze",
+          "Additional Ability: Optimal Setup"
+        ],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "When the active character is launched, press <IconMap:Icon_Switch> to activate:\nDash forward quickly, unleashing claw strikes and slashes at enemies ahead, dealing <color=#A6C5FD>Wind DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Quick Assist: Field Orders",
+          "potential": []
+        },
+        {
+          "desc": "When the on-field character is about to be attacked, press <IconMap:Icon_Switch> to activate:\nParries the enemy's attack, dealing massive Daze.\nCharacter is invulnerable while using this skill.",
+          "name": "Defensive Assist: Provocation Prohibited",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> after a <color=#FFFFFF>Defensive Assist</color> to activate:\nUnleash slashes, claw strikes, and cannon fire against enemies in sequence, dealing <color=#A6C5FD>Wind DMG</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Assist Follow-Up: Fight Force with Force",
+          "potential": []
+        },
+        {
+          "desc": "When Severian has <Term:1000043></Term> and is in combat, press <IconMap:Icon_Switch> to switch him into battle and activate:\nUnleashes a powerful slash against enemies ahead, dealing <color=#A6C5FD>Wind DMG</color>.\nActivating this skill is considered activating a <color=#FFFFFF>Quick Assist</color>.\nThis skill is not counted as a heavy attack.\nCharacter is invulnerable while using this skill.",
+          "name": "Entry Skill: Clear Out",
+          "potential": []
+        },
+        {
+          "name": "Quick Assist: Field Orders",
+          "param": [
+            {
+              "desc": "{Skill:1631014, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1631014": {
+                  "attackData": [],
+                  "attributeInfliction": 4584,
+                  "damagePercentage": 6420,
+                  "damagePercentageGrowth": 590,
+                  "etherPurify": 4585,
+                  "feverRecovery": 126225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 590,
+                  "main": 6420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16510,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5050,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631014, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1631014": {
+                  "attackData": [],
+                  "attributeInfliction": 4584,
+                  "damagePercentage": 6420,
+                  "damagePercentageGrowth": 590,
+                  "etherPurify": 4585,
+                  "feverRecovery": 126225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 5050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16510,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5050,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Defensive Assist: Provocation Prohibited",
+          "param": [
+            {
+              "desc": "{Skill:1631015, Prop:1002}",
+              "name": "Light Defensive Daze Multiplier",
+              "param": {
+                "1631015": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631016, Prop:1002}",
+              "name": "Heavy Defensive Daze Multiplier",
+              "param": {
+                "1631016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631017, Prop:1002}",
+              "name": "Chain Defensive Daze Multiplier",
+              "param": {
+                "1631017": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Assist Follow-Up: Fight Force with Force",
+          "param": [
+            {
+              "desc": "{Skill:1631018, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1631018": {
+                  "attackData": [],
+                  "attributeInfliction": 24122,
+                  "damagePercentage": 36470,
+                  "damagePercentageGrowth": 3320,
+                  "etherPurify": 10667,
+                  "feverRecovery": 821975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3320,
+                  "main": 36470,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24430,
+                  "stunRatioGrowth": 1120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631018, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1631018": {
+                  "attackData": [],
+                  "attributeInfliction": 24122,
+                  "damagePercentage": 36470,
+                  "damagePercentageGrowth": 3320,
+                  "etherPurify": 10667,
+                  "feverRecovery": 821975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1120,
+                  "main": 24430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24430,
+                  "stunRatioGrowth": 1120
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Entry Skill: Clear Out",
+          "param": [
+            {
+              "desc": "{Skill:1631019, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1631019": {
+                  "attackData": [],
+                  "attributeInfliction": 11003,
+                  "damagePercentage": 15410,
+                  "damagePercentageGrowth": 1410,
+                  "etherPurify": 11004,
+                  "feverRecovery": 302775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1410,
+                  "main": 15410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6060,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631019, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1631019": {
+                  "attackData": [],
+                  "attributeInfliction": 11003,
+                  "damagePercentage": 15410,
+                  "damagePercentageGrowth": 1410,
+                  "etherPurify": 11004,
+                  "feverRecovery": 302775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 6060,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6060,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Normal> to activate:\nLaunches up to 4 attacks forward, dealing <color=#A6C5FD>Wind DMG</color>.\nWhen the 4th attack hits an enemy, it accumulates 20 <Term:1000041></Term>.\nThe 4th attack can dodge enemy attacks upon the moment of activation. Upon successfully dodging an enemy attack, this Basic Attack's DMG Multiplier and Daze Multiplier are increased to those of <color=#FFFFFF>Basic Attack: Raging Whirlwind</color>, and an additional 15 <color=#FFFFFF>Flow</color> is accumulated.\nCharacter is invulnerable during the 4th attack.\nWhen Severian uses a <color=#FFFFFF>Dash Attack</color>, <color=#FFFFFF>Dodge Counter</color>, or <color=#FFFFFF>Dodge: Spontaneity</color> during a <color=#FFFFFF>Basic Attack</color> combo, it does not interrupt the <color=#FFFFFF>Basic Attack</color> combo sequence.",
+          "name": "Basic Attack: Swift Edge",
+          "potential": []
+        },
+        {
+          "desc": "Automatically activates when Severian is attacked at the moment he launches the first three attacks of his Basic Attack, or when he has <color=#FFFFFF>Shadowflash</color> and is hit by a non-Control Skill enemy attack while not invulnerable:\nDash forward, dealing massive <color=#A6C5FD>Wind DMG</color> to enemies in an area ahead.\nUpon activating this skill, accumulates 15 <Term:1000041></Term>. Upon hitting an enemy, an additional 20 <color=#FFFFFF>Flow</color> is accumulated.\nHold <IconMap:Icon_Normal> while activating this skill to Quick Launch <color=#FFFFFF>Basic Attack: Azure Wind's Shadowhunt</color>. When the final hit of <color=#FFFFFF>Basic Attack: Azure Wind's Shadowhunt</color> is unleashed, it accumulates 20 <color=#FFFFFF>Flow</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Basic Attack: Raging Whirlwind",
+          "potential": []
+        },
+        {
+          "desc": "With enough <Term:1000041></Term>, consume 100 <color=#FFFFFF>Flow</color> and hold <IconMap:Icon_Normal> to activate:\nDodge backward and charge up, then continuously dart around the field while unleashing slashes, dealing massive <color=#A6C5FD>Wind DMG</color> to enemies in an area in front.\nThe backward dodge can dodge enemy attacks. Successfully dodging an enemy attack triggers <color=#FFFFFF>Vital View</color> and accumulates 15 <color=#FFFFFF>Flow</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "Basic Attack: Azure Wind's Shadowhunt",
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Swift Edge",
+          "param": [
+            {
+              "desc": "{Skill:1631001, Prop:1001}",
+              "name": "1st-Hit DMG Multiplier",
+              "param": {
+                "1631001": {
+                  "attackData": [],
+                  "attributeInfliction": 3266,
+                  "damagePercentage": 6540,
+                  "damagePercentageGrowth": 600,
+                  "etherPurify": 3267,
+                  "feverRecovery": 109175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 600,
+                  "main": 6540,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11770,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2680,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631002, Prop:1001}",
+              "name": "2nd-Hit DMG Multiplier",
+              "param": {
+                "1631002": {
+                  "attackData": [],
+                  "attributeInfliction": 5663,
+                  "damagePercentage": 10660,
+                  "damagePercentageGrowth": 970,
+                  "etherPurify": 5664,
+                  "feverRecovery": 167475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 970,
+                  "main": 10660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4960,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631003, Prop:1001}",
+              "name": "3rd-Hit DMG Multiplier",
+              "param": {
+                "1631003": {
+                  "attackData": [],
+                  "attributeInfliction": 9813,
+                  "damagePercentage": 17800,
+                  "damagePercentageGrowth": 1620,
+                  "etherPurify": 9814,
+                  "feverRecovery": 267850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1620,
+                  "main": 17800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 35330,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8900,
+                  "stunRatioGrowth": 410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631004, Prop:1001}",
+              "name": "4th-Hit DMG Multiplier",
+              "param": {
+                "1631004": {
+                  "attackData": [],
+                  "attributeInfliction": 13752,
+                  "damagePercentage": 24160,
+                  "damagePercentageGrowth": 2200,
+                  "etherPurify": 13753,
+                  "feverRecovery": 349800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2200,
+                  "main": 24160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 49510,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12840,
+                  "stunRatioGrowth": 590
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631020, Prop:1001}",
+              "name": "4th Attack Successful Perfect Dodge DMG Multiplier",
+              "param": {
+                "1631020": {
+                  "attackData": [],
+                  "attributeInfliction": 12169,
+                  "damagePercentage": 33820,
+                  "damagePercentageGrowth": 3080,
+                  "etherPurify": 12170,
+                  "feverRecovery": 334675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3080,
+                  "main": 33820,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13390,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631001, Prop:1002}",
+              "name": "1st-Hit Daze Multiplier",
+              "param": {
+                "1631001": {
+                  "attackData": [],
+                  "attributeInfliction": 3266,
+                  "damagePercentage": 6540,
+                  "damagePercentageGrowth": 600,
+                  "etherPurify": 3267,
+                  "feverRecovery": 109175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 130,
+                  "main": 2680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11770,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2680,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631002, Prop:1002}",
+              "name": "2nd-Hit Daze Multiplier",
+              "param": {
+                "1631002": {
+                  "attackData": [],
+                  "attributeInfliction": 5663,
+                  "damagePercentage": 10660,
+                  "damagePercentageGrowth": 970,
+                  "etherPurify": 5664,
+                  "feverRecovery": 167475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 4960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4960,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631003, Prop:1002}",
+              "name": "3rd-Hit Daze Multiplier",
+              "param": {
+                "1631003": {
+                  "attackData": [],
+                  "attributeInfliction": 9813,
+                  "damagePercentage": 17800,
+                  "damagePercentageGrowth": 1620,
+                  "etherPurify": 9814,
+                  "feverRecovery": 267850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 410,
+                  "main": 8900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 35330,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8900,
+                  "stunRatioGrowth": 410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631004, Prop:1002}",
+              "name": "4th-Hit Daze Multiplier",
+              "param": {
+                "1631004": {
+                  "attackData": [],
+                  "attributeInfliction": 13752,
+                  "damagePercentage": 24160,
+                  "damagePercentageGrowth": 2200,
+                  "etherPurify": 13753,
+                  "feverRecovery": 349800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 590,
+                  "main": 12840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 49510,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12840,
+                  "stunRatioGrowth": 590
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631020, Prop:1002}",
+              "name": "4th Attack Successful Perfect Dodge Daze Multiplier",
+              "param": {
+                "1631020": {
+                  "attackData": [],
+                  "attributeInfliction": 12169,
+                  "damagePercentage": 33820,
+                  "damagePercentageGrowth": 3080,
+                  "etherPurify": 12170,
+                  "feverRecovery": 334675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 610,
+                  "main": 13390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13390,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Raging Whirlwind",
+          "param": [
+            {
+              "desc": "{Skill:1631005, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1631005": {
+                  "attackData": [],
+                  "attributeInfliction": 12169,
+                  "damagePercentage": 33820,
+                  "damagePercentageGrowth": 3080,
+                  "etherPurify": 12170,
+                  "feverRecovery": 334675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3080,
+                  "main": 33820,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13390,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631005, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1631005": {
+                  "attackData": [],
+                  "attributeInfliction": 12169,
+                  "damagePercentage": 33820,
+                  "damagePercentageGrowth": 3080,
+                  "etherPurify": 12170,
+                  "feverRecovery": 334675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 610,
+                  "main": 13390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13390,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Basic Attack: Azure Wind's Shadowhunt",
+          "param": [
+            {
+              "desc": "{Skill:1631006, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1631006": {
+                  "attackData": [],
+                  "attributeInfliction": 28330,
+                  "damagePercentage": 202770,
+                  "damagePercentageGrowth": 18440,
+                  "etherPurify": 28331,
+                  "feverRecovery": 779350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 18440,
+                  "main": 202770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 51000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31170,
+                  "stunRatioGrowth": 1420
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631006, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1631006": {
+                  "attackData": [],
+                  "attributeInfliction": 28330,
+                  "damagePercentage": 202770,
+                  "damagePercentageGrowth": 18440,
+                  "etherPurify": 28331,
+                  "feverRecovery": 779350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1420,
+                  "main": 31170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 51000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31170,
+                  "stunRatioGrowth": 1420
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "When a <color=#FFFFFF>Chain Attack</color> is triggered, select the character to activate:\nPerform a series of attacks forward, dealing massive <color=#A6C5FD>Wind DMG</color>.\nAfter using this skill, accumulate 35 <Term:1000041></Term>.\nCharacter is invulnerable while using this skill.",
+          "name": "Chain Attack: Coldblade Reap",
+          "potential": []
+        },
+        {
+          "desc": "When Decibel Rating is at <color=#FFFFFF>Maximum</color>, press <IconMap:Icon_UltimateReady> to activate:\nUnleash multiple rapid slashes in succession, dealing massive <color=#A6C5FD>Wind DMG</color>.\nAccumulate 100 <Term:1000041></Term> after using this skill.\nCharacter is invulnerable while using this skill.",
+          "name": "Ultimate: Annihilating Windstorm",
+          "potential": []
+        },
+        {
+          "name": "Chain Attack: Coldblade Reap",
+          "param": [
+            {
+              "desc": "{Skill:1631012, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1631012": {
+                  "attackData": [],
+                  "attributeInfliction": 42286,
+                  "damagePercentage": 87140,
+                  "damagePercentageGrowth": 7930,
+                  "etherPurify": 22337,
+                  "feverRecovery": 2443100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7930,
+                  "main": 87140,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24580,
+                  "stunRatioGrowth": 1120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631012, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1631012": {
+                  "attackData": [],
+                  "attributeInfliction": 42286,
+                  "damagePercentage": 87140,
+                  "damagePercentageGrowth": 7930,
+                  "etherPurify": 22337,
+                  "feverRecovery": 2443100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1120,
+                  "main": 24580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24580,
+                  "stunRatioGrowth": 1120
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Ultimate: Annihilating Windstorm",
+          "param": [
+            {
+              "desc": "{Skill:1631013, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1631013": {
+                  "attackData": [],
+                  "attributeInfliction": 31666,
+                  "damagePercentage": 267640,
+                  "damagePercentageGrowth": 24340,
+                  "etherPurify": 81667,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 24340,
+                  "main": 267640,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34840,
+                  "stunRatioGrowth": 1590
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631013, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1631013": {
+                  "attackData": [],
+                  "attributeInfliction": 31666,
+                  "damagePercentage": 267640,
+                  "damagePercentageGrowth": 24340,
+                  "etherPurify": 81667,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1590,
+                  "main": 34840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34840,
+                  "stunRatioGrowth": 1590
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Evade> to activate:\nA quick dash dodge.\nWhen <color=#FFFFFF>Dodge: Windshift</color> triggers a <color=#FFFFFF>Perfect Dodge</color>, it accumulates 15 <Term:1000041></Term>. This effect can trigger once every 0.5s.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge: Windshift",
+          "potential": []
+        },
+        {
+          "desc": "Press <IconMap:Icon_Normal> during a dodge to activate:\nAttack forward, dealing <color=#A6C5FD>Wind DMG</color>.",
+          "name": "Dash Attack: Sheer Assault",
+          "potential": []
+        },
+        {
+          "desc": "When <color=#FFFFFF>Dodge: Windshift</color> triggers a <color=#FFFFFF>Perfect Dodge</color>, press <IconMap:Icon_Normal> to activate:\nLaunch a quick slash forward, dealing <color=#A6C5FD>Wind DMG</color>.\nIf switched off-field immediately after triggering a <color=#FFFFFF>Perfect Dodge</color> with <color=#FFFFFF>Dodge: Windshift</color>, this skill activates automatically.\nCharacter is invulnerable while using this skill.",
+          "name": "Dodge Counter: Fatal End",
+          "potential": []
+        },
+        {
+          "desc": "After dodging backward, hold <IconMap:Icon_Evade> to activate:\nProvoke the enemy.",
+          "name": "Dodge: Spontaneity",
+          "potential": []
+        },
+        {
+          "name": "Dash Attack: Sheer Assault",
+          "param": [
+            {
+              "desc": "{Skill:1631010, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1631010": {
+                  "attackData": [],
+                  "attributeInfliction": 3834,
+                  "damagePercentage": 10740,
+                  "damagePercentageGrowth": 980,
+                  "etherPurify": 3835,
+                  "feverRecovery": 105600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 980,
+                  "main": 10740,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4220,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631010, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1631010": {
+                  "attackData": [],
+                  "attributeInfliction": 3834,
+                  "damagePercentage": 10740,
+                  "damagePercentageGrowth": 980,
+                  "etherPurify": 3835,
+                  "feverRecovery": 105600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 200,
+                  "main": 4220,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4220,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "Dodge Counter: Fatal End",
+          "param": [
+            {
+              "desc": "{Skill:1631011, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1631011": {
+                  "attackData": [],
+                  "attributeInfliction": 9169,
+                  "damagePercentage": 30690,
+                  "damagePercentageGrowth": 2790,
+                  "etherPurify": 24170,
+                  "feverRecovery": 252175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2790,
+                  "main": 30690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33020,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21090,
+                  "stunRatioGrowth": 960
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631011, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1631011": {
+                  "attackData": [],
+                  "attributeInfliction": 9169,
+                  "damagePercentage": 30690,
+                  "damagePercentageGrowth": 2790,
+                  "etherPurify": 24170,
+                  "feverRecovery": 252175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 960,
+                  "main": 21090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33020,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21090,
+                  "stunRatioGrowth": 960
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "Press <IconMap:Icon_Special> to activate:\nUnleash slashes and stabs forward, dealing <color=#A6C5FD>Wind DMG</color>.",
+          "name": "Special Attack: Gale Rend",
+          "potential": []
+        },
+        {
+          "desc": "With enough Energy, press <IconMap:Icon_SpecialReady> to activate:\nUnleash a combination of slashes, claw strikes, and cannon fire forward, dealing massive <color=#A6C5FD>Wind DMG</color> and gaining 1 stack of <Term:1000042></Term>.\nHold <IconMap:Icon_SpecialReady> to continuously consume Energy before the cannon attack, and repeatedly launch wind blades that deal <color=#A6C5FD>Wind DMG</color> to enemies.\nWhen reaching the maximum Energy consumed, gain an additional stack of <color=#FFFFFF>Shadowflash</color>.\nCharacter is invulnerable while using this skill.",
+          "name": "EX Special Attack: Swiftwind Rupture",
+          "potential": []
+        },
+        {
+          "name": "Special Attack: Gale Rend",
+          "param": [
+            {
+              "desc": "{Skill:1631007, Prop:1001}",
+              "name": "DMG Multiplier",
+              "param": {
+                "1631007": {
+                  "attackData": [],
+                  "attributeInfliction": 4166,
+                  "damagePercentage": 5840,
+                  "damagePercentageGrowth": 540,
+                  "etherPurify": 4167,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 540,
+                  "main": 5840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4590,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631007, Prop:1002}",
+              "name": "Daze Multiplier",
+              "param": {
+                "1631007": {
+                  "attackData": [],
+                  "attributeInfliction": 4166,
+                  "damagePercentage": 5840,
+                  "damagePercentageGrowth": 540,
+                  "etherPurify": 4167,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4590,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4590,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "EX Special Attack: Swiftwind Rupture",
+          "param": [
+            {
+              "desc": "{Skill:1631008, Prop:1001}",
+              "name": "Combo Skill DMG Multiplier",
+              "param": {
+                "1631008": {
+                  "attackData": [],
+                  "attributeInfliction": 36998,
+                  "damagePercentage": 56600,
+                  "damagePercentageGrowth": 5150,
+                  "etherPurify": 13004,
+                  "feverRecovery": 1300475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5150,
+                  "main": 56600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 36930,
+                  "stunRatioGrowth": 1680
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631008, Prop:1002}",
+              "name": "Combo Skill Daze Multiplier",
+              "param": {
+                "1631008": {
+                  "attackData": [],
+                  "attributeInfliction": 36998,
+                  "damagePercentage": 56600,
+                  "damagePercentageGrowth": 5150,
+                  "etherPurify": 13004,
+                  "feverRecovery": 1300475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1680,
+                  "main": 36930,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 36930,
+                  "stunRatioGrowth": 1680
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40",
+              "name": "Combo Skill Energy Cost",
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631009, Prop:1001}",
+              "name": "Wind Blade Max DMG Multiplier",
+              "param": {
+                "1631009": {
+                  "attackData": [],
+                  "attributeInfliction": 26194,
+                  "damagePercentage": 40920,
+                  "damagePercentageGrowth": 3720,
+                  "etherPurify": 5000,
+                  "feverRecovery": 970200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3720,
+                  "main": 40920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25490,
+                  "stunRatioGrowth": 1160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631009, Prop:1002}",
+              "name": "Wind Blade Max Daze Multiplier",
+              "param": {
+                "1631009": {
+                  "attackData": [],
+                  "attributeInfliction": 26194,
+                  "damagePercentage": 40920,
+                  "damagePercentageGrowth": 3720,
+                  "etherPurify": 5000,
+                  "feverRecovery": 970200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1160,
+                  "main": 25490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25490,
+                  "stunRatioGrowth": 1160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40",
+              "name": "Wind Blade Max Energy Cost",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1631001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "Basic Attack: Swift Edge"
+    },
+    "1631002": {
+      "desc": "<IconMap:Icon_Normal> (When attacked at the moment any of the first 3 Basic Attack hits are performed) (automatically triggers when attacked with Shadowflash)",
+      "name": "Basic Attack: Raging Whirlwind"
+    },
+    "1631003": {
+      "desc": "<IconMap:Icon_Normal> (Hold when Flow reaches 100)",
+      "name": "Basic Attack: Azure Wind's Shadowhunt"
+    },
+    "1631004": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "Special Attack: Gale Rend"
+    },
+    "1631005": {
+      "desc": "<IconMap:Icon_SpecialReady> (Press or Hold)",
+      "name": "EX Special Attack: Swiftwind Rupture"
+    },
+    "1631006": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "Dash Attack: Sheer Assault"
+    },
+    "1631007": {
+      "desc": "<IconMap:Icon_Evade> (Perfect) ; <IconMap:Icon_Normal> (Automatically triggers when switched off-field at the moment of a Perfect Dodge)",
+      "name": "Dodge Counter: Fatal End"
+    },
+    "1631008": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Evade> (Hold after a dodge)",
+      "name": "Dodge: Spontaneity"
+    },
+    "1631009": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "Chain Attack: Coldblade Reap"
+    },
+    "1631010": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "Ultimate: Annihilating Windstorm"
+    },
+    "1631011": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Quick Assist)",
+      "name": "Quick Assist: Field Orders"
+    },
+    "1631012": {
+      "desc": "<IconMap:Icon_Switch> (When Triggering Defensive Assist)",
+      "name": "Defensive Assist: Provocation Prohibited"
+    },
+    "1631013": {
+      "desc": "<IconMap:Icon_Normal> (After Defensive Assist)",
+      "name": "Assist Follow-Up: Fight Force with Force"
+    },
+    "1631014": {
+      "desc": "<IconMap:Icon_Switch> (Switch characters while the Windborne effect is active)",
+      "name": "Entry Skill: Clear Out"
+    }
+  },
+  "skin": {
+    "3116310": {
+      "desc": "...",
+      "name": "...",
+      "obtainDesc": ""
+    },
+    "3116311": {
+      "desc": "...",
+      "name": "...",
+      "obtainDesc": ""
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Wind>Wind, <IconMap:Icon_AvatarClass_Attack> Attack on-field DMG dealer",
+    "Launches [Enhanced Basic Attacks] to deal massive DMG",
+    "Automatically dodges enemy attacks and counters"
+  ],
+  "talent": {
+    "1": {
+      "desc": "When Severian uses a <color=#FFFFFF>Chain Attack</color>, the accumulated <color=#FFFFFF>Flow</color> increases to 50.\nWhen Severian switches in through <color=#FFFFFF>Entry Skill: Clear Out</color>, the skill is replaced with a <color=#FFFFFF>Chain Attack</color>. The entry type is not changed, and it is treated as a non-heavy attack. This effect can trigger once every 60s.\nEach time Severian uses <color=#FFFFFF>Basic Attack: Azure Wind's Shadowhunt</color>, he gains 1 stack of <color=#FFFFFF>Windborne</color>.\nWhen Severian's attacks hit a target, they ignore 15% of the target's Wind RES.",
+      "desc2": "...",
+      "name": "Double Espresso"
+    },
+    "2": {
+      "desc": "When Severian enters the battlefield, he recovers 150 <color=#FFFFFF>Flow</color>. In Investigation Zone mode, this effect can trigger once every 180s.\nWhen Severian triggers a <color=#FFFFFF>Perfect Dodge</color> or uses <color=#FFFFFF>Basic Attack: Azure Wind's Shadowhunt</color>, his PEN Ratio increases by 20% for 25s.",
+      "desc2": "...",
+      "name": "Reins of Reason"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "...",
+      "name": "The Last Light"
+    },
+    "4": {
+      "desc": "When Severian enters combat or switches on-field, his ATK increases by 10% for 30s. Repeated triggers reset the duration.\nWhen Severian uses <color=#FFFFFF>Basic Attack: Raging Whirlwind</color> or <color=#FFFFFF>Basic Attack: Azure Wind's Shadowhunt</color>, his Decibel Generation Rate increases by 10% for 15s.",
+      "desc2": "...",
+      "name": "Between Light and Shadow"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>Basic Attack</color>, <color=#FFFFFF>Dodge</color>, <color=#FFFFFF>Assist</color>, <color=#FFFFFF>Special Attack</color>, and <color=#FFFFFF>Chain Attack</color> Lv. +2",
+      "desc2": "...",
+      "name": "A Heart Above 0°C"
+    },
+    "6": {
+      "desc": "Severian's max <color=#FFFFFF>Flow</color> increases to 180, and the <color=#FFFFFF>Flow</color> gained when entering the battlefield increases to 180.\nThe additional DMG Multiplier of the final hit of <color=#FFFFFF>Basic Attack: Azure Wind's Shadowhunt</color> is increased by a fixed 350%.\nUpon using the final hit of <color=#FFFFFF>Basic Attack: Azure Wind's Shadowhunt</color>, Severian gains <color=#FFFFFF>Windrise</color>: Accumulates 5 <color=#FFFFFF>Flow</color>/s for 5s. Repeated triggers reset the duration.",
+      "desc2": "...",
+      "name": "Beneath a Little Star"
+    }
+  },
+  "weaponType": {
+    "1": "Attack"
+  }
+}

@@ -1570,7 +1570,7 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>以太属性，后台辅助",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>以太属性，<IconMap:Icon_AvatarClass_Support>后台支援辅助",
     "提高入场代理人的攻击力",
     "将[快速支援]升级为[连携技]"
   ],

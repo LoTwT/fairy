@@ -1485,9 +1485,9 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_Thunder>电属性，后台支援",
-    "为队伍提供穿透率加成",
-    "延长[感电]效果持续时间"
+    "<IconMap:Icon_GeneralBuff_Thunder>电属性，<IconMap:Icon_AvatarClass_Support>后台支援辅助",
+    "提升队伍穿透率、攻击力、防御力",
+    "指派邦布协同攻击造成伤害"
   ],
   "talent": {
     "1": {

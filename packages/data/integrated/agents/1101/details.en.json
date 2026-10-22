@@ -1856,9 +1856,9 @@
   "specialElementType": {},
   "strategy": [
     "07",
-    "<IconMap:Icon_GeneralBuff_Fire>Fire, Stun support",
+    "<IconMap:Icon_GeneralBuff_Fire>Fire, <IconMap:Icon_AvatarClass_Stun> Stun",
     "Rapidly builds up Daze on enemies",
-    "Unleashes Coordinated Attacks with Ben and boosts skill DMG"
+    "Increases teammate CRIT Rate or CRIT DMG"
   ],
   "talent": {
     "1": {

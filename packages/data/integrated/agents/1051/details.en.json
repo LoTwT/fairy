@@ -1809,9 +1809,9 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Ice>Ice, HP-consuming on-field DMG dealer",
+    "<IconMap:Icon_GeneralBuff_Ice>Ice, <IconMap:Icon_AvatarClass_Rupture> Rupture on-field DMG dealer",
     "Consumes HP to boost DMG dealt",
-    "Boosts skill DMG through skill collisions"
+    "Accelerate charge via Block Counter"
   ],
   "talent": {
     "1": {

@@ -1911,8 +1911,8 @@
   },
   "strategy": [
     "02",
-    "双终结技机制带来爆发输出",
-    "<IconMap:Icon_GeneralBuff_AuricInk>玄墨属性，站场输出",
+    "<Term:3000026></Term>带来爆发输出",
+    "<IconMap:Icon_GeneralBuff_AuricInk>玄墨属性，<IconMap:Icon_AvatarClass_Rupture>命破站场输出",
     "无视防御造成大量贯穿伤害",
     "[强化特殊技]集格挡与攻击于一体"
   ],

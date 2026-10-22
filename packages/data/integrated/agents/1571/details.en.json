@@ -1740,7 +1740,12 @@
     }
   },
   "specialElementType": {},
-  "strategy": {},
+  "strategy": [
+    "07",
+    "<IconMap:Icon_GeneralBuff_Fire>Fire, <IconMap:Icon_AvatarClass_Stun>off-field Stun",
+    "Rapidly builds up Daze and increases Stun DMG Multiplier",
+    "Additionally triggers teammate's Chain Attack"
+  ],
   "talent": {
     "1": {
       "desc": "The duration of the En-Nah Turret's missile bay deployed by <color=#FFFFFF>EX Special Attack: Explosive Experiment</color> increases to 12s. When an Armor-Piercing Warhead or High-Explosive Warhead from any skill hits an enemy, the target's All-Attribute RES is reduced by 15% for 15s. Repeated triggers reset the duration.",

@@ -1150,7 +1150,7 @@ const contexts: readonly ClauseContextGuardEntry[] = [
 /** 同阵营只属于此机制；来源是固定 integrated index 的精确 camp 指针。 */
 export const LUCY_GUARD_BOAR_FACTION = {
   path: "index.json",
-  sha256: "7f875c8f8039e582c92666eebdc9f19c85a78b3a7eb4ac583ac2fb97f29f2fa7",
+  sha256: "d68ad1d80b203b9633f2cd6d176e4051c15c52f2ea3c0d71a2d2310c8b1a1b6d",
   agentEntityIds: ["1071", "1151", "1161", "1171", "1281", "1351"],
   pointers: [
     "/entities/agents/members/1071/sourceRecord/camp",
@@ -1222,196 +1222,196 @@ export const LUCY_GUARD_BOAR_SUPPLEMENTS: readonly Supplement[] = [
         path: "agents/1151/details.zh.json",
         pointer: "/passive/level/1151501/desc/0",
         sha256:
-          "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b",
+          "0619c5c2c868e7481ed8267ba65ddcd6477f8e7e17e1499db8bd0a169ac84129",
         rank: 1,
       },
       {
         path: "agents/1151/details.zh.json",
         pointer: "/passive/level/1151501/desc/1",
         sha256:
-          "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b",
+          "0619c5c2c868e7481ed8267ba65ddcd6477f8e7e17e1499db8bd0a169ac84129",
         rank: 1,
       },
       {
         path: "agents/1151/details.zh.json",
         pointer: "/passive/level/1151502/desc/0",
         sha256:
-          "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b",
+          "0619c5c2c868e7481ed8267ba65ddcd6477f8e7e17e1499db8bd0a169ac84129",
         rank: 2,
       },
       {
         path: "agents/1151/details.zh.json",
         pointer: "/passive/level/1151502/desc/1",
         sha256:
-          "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b",
+          "0619c5c2c868e7481ed8267ba65ddcd6477f8e7e17e1499db8bd0a169ac84129",
         rank: 2,
       },
       {
         path: "agents/1151/details.zh.json",
         pointer: "/passive/level/1151503/desc/0",
         sha256:
-          "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b",
+          "0619c5c2c868e7481ed8267ba65ddcd6477f8e7e17e1499db8bd0a169ac84129",
         rank: 3,
       },
       {
         path: "agents/1151/details.zh.json",
         pointer: "/passive/level/1151503/desc/1",
         sha256:
-          "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b",
+          "0619c5c2c868e7481ed8267ba65ddcd6477f8e7e17e1499db8bd0a169ac84129",
         rank: 3,
       },
       {
         path: "agents/1151/details.zh.json",
         pointer: "/passive/level/1151504/desc/0",
         sha256:
-          "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b",
+          "0619c5c2c868e7481ed8267ba65ddcd6477f8e7e17e1499db8bd0a169ac84129",
         rank: 4,
       },
       {
         path: "agents/1151/details.zh.json",
         pointer: "/passive/level/1151504/desc/1",
         sha256:
-          "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b",
+          "0619c5c2c868e7481ed8267ba65ddcd6477f8e7e17e1499db8bd0a169ac84129",
         rank: 4,
       },
       {
         path: "agents/1151/details.zh.json",
         pointer: "/passive/level/1151505/desc/0",
         sha256:
-          "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b",
+          "0619c5c2c868e7481ed8267ba65ddcd6477f8e7e17e1499db8bd0a169ac84129",
         rank: 5,
       },
       {
         path: "agents/1151/details.zh.json",
         pointer: "/passive/level/1151505/desc/1",
         sha256:
-          "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b",
+          "0619c5c2c868e7481ed8267ba65ddcd6477f8e7e17e1499db8bd0a169ac84129",
         rank: 5,
       },
       {
         path: "agents/1151/details.zh.json",
         pointer: "/passive/level/1151506/desc/0",
         sha256:
-          "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b",
+          "0619c5c2c868e7481ed8267ba65ddcd6477f8e7e17e1499db8bd0a169ac84129",
         rank: 6,
       },
       {
         path: "agents/1151/details.zh.json",
         pointer: "/passive/level/1151506/desc/1",
         sha256:
-          "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b",
+          "0619c5c2c868e7481ed8267ba65ddcd6477f8e7e17e1499db8bd0a169ac84129",
         rank: 6,
       },
       {
         path: "agents/1151/details.zh.json",
         pointer: "/passive/level/1151507/desc/0",
         sha256:
-          "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b",
+          "0619c5c2c868e7481ed8267ba65ddcd6477f8e7e17e1499db8bd0a169ac84129",
         rank: 7,
       },
       {
         path: "agents/1151/details.zh.json",
         pointer: "/passive/level/1151507/desc/1",
         sha256:
-          "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b",
+          "0619c5c2c868e7481ed8267ba65ddcd6477f8e7e17e1499db8bd0a169ac84129",
         rank: 7,
       },
       {
         path: "agents/1151/details.en.json",
         pointer: "/passive/level/1151501/desc/0",
         sha256:
-          "e4aad90e921dbf12188ac1d738765bc51924847aa969263c609937ea149bbcf9",
+          "36c5203ebf95288e87efc95c4e968ad6ed35c939226204ead18754da3a046ca3",
         rank: 1,
       },
       {
         path: "agents/1151/details.en.json",
         pointer: "/passive/level/1151501/desc/1",
         sha256:
-          "e4aad90e921dbf12188ac1d738765bc51924847aa969263c609937ea149bbcf9",
+          "36c5203ebf95288e87efc95c4e968ad6ed35c939226204ead18754da3a046ca3",
         rank: 1,
       },
       {
         path: "agents/1151/details.en.json",
         pointer: "/passive/level/1151502/desc/0",
         sha256:
-          "e4aad90e921dbf12188ac1d738765bc51924847aa969263c609937ea149bbcf9",
+          "36c5203ebf95288e87efc95c4e968ad6ed35c939226204ead18754da3a046ca3",
         rank: 2,
       },
       {
         path: "agents/1151/details.en.json",
         pointer: "/passive/level/1151502/desc/1",
         sha256:
-          "e4aad90e921dbf12188ac1d738765bc51924847aa969263c609937ea149bbcf9",
+          "36c5203ebf95288e87efc95c4e968ad6ed35c939226204ead18754da3a046ca3",
         rank: 2,
       },
       {
         path: "agents/1151/details.en.json",
         pointer: "/passive/level/1151503/desc/0",
         sha256:
-          "e4aad90e921dbf12188ac1d738765bc51924847aa969263c609937ea149bbcf9",
+          "36c5203ebf95288e87efc95c4e968ad6ed35c939226204ead18754da3a046ca3",
         rank: 3,
       },
       {
         path: "agents/1151/details.en.json",
         pointer: "/passive/level/1151503/desc/1",
         sha256:
-          "e4aad90e921dbf12188ac1d738765bc51924847aa969263c609937ea149bbcf9",
+          "36c5203ebf95288e87efc95c4e968ad6ed35c939226204ead18754da3a046ca3",
         rank: 3,
       },
       {
         path: "agents/1151/details.en.json",
         pointer: "/passive/level/1151504/desc/0",
         sha256:
-          "e4aad90e921dbf12188ac1d738765bc51924847aa969263c609937ea149bbcf9",
+          "36c5203ebf95288e87efc95c4e968ad6ed35c939226204ead18754da3a046ca3",
         rank: 4,
       },
       {
         path: "agents/1151/details.en.json",
         pointer: "/passive/level/1151504/desc/1",
         sha256:
-          "e4aad90e921dbf12188ac1d738765bc51924847aa969263c609937ea149bbcf9",
+          "36c5203ebf95288e87efc95c4e968ad6ed35c939226204ead18754da3a046ca3",
         rank: 4,
       },
       {
         path: "agents/1151/details.en.json",
         pointer: "/passive/level/1151505/desc/0",
         sha256:
-          "e4aad90e921dbf12188ac1d738765bc51924847aa969263c609937ea149bbcf9",
+          "36c5203ebf95288e87efc95c4e968ad6ed35c939226204ead18754da3a046ca3",
         rank: 5,
       },
       {
         path: "agents/1151/details.en.json",
         pointer: "/passive/level/1151505/desc/1",
         sha256:
-          "e4aad90e921dbf12188ac1d738765bc51924847aa969263c609937ea149bbcf9",
+          "36c5203ebf95288e87efc95c4e968ad6ed35c939226204ead18754da3a046ca3",
         rank: 5,
       },
       {
         path: "agents/1151/details.en.json",
         pointer: "/passive/level/1151506/desc/0",
         sha256:
-          "e4aad90e921dbf12188ac1d738765bc51924847aa969263c609937ea149bbcf9",
+          "36c5203ebf95288e87efc95c4e968ad6ed35c939226204ead18754da3a046ca3",
         rank: 6,
       },
       {
         path: "agents/1151/details.en.json",
         pointer: "/passive/level/1151506/desc/1",
         sha256:
-          "e4aad90e921dbf12188ac1d738765bc51924847aa969263c609937ea149bbcf9",
+          "36c5203ebf95288e87efc95c4e968ad6ed35c939226204ead18754da3a046ca3",
         rank: 6,
       },
       {
         path: "agents/1151/details.en.json",
         pointer: "/passive/level/1151507/desc/0",
         sha256:
-          "e4aad90e921dbf12188ac1d738765bc51924847aa969263c609937ea149bbcf9",
+          "36c5203ebf95288e87efc95c4e968ad6ed35c939226204ead18754da3a046ca3",
         rank: 7,
       },
       {
         path: "agents/1151/details.en.json",
         pointer: "/passive/level/1151507/desc/1",
         sha256:
-          "e4aad90e921dbf12188ac1d738765bc51924847aa969263c609937ea149bbcf9",
+          "36c5203ebf95288e87efc95c4e968ad6ed35c939226204ead18754da3a046ca3",
         rank: 7,
       },
     ],
@@ -1470,13 +1470,13 @@ export const LUCY_GUARD_BOAR_SUPPLEMENTS: readonly Supplement[] = [
         path: "agents/1151/details.zh.json",
         pointer: "/talent/6/desc",
         sha256:
-          "17ab67b8ec8413851f54a7a8823c643b72cf0a9c06546fa0720b3add2a7b1e9b",
+          "0619c5c2c868e7481ed8267ba65ddcd6477f8e7e17e1499db8bd0a169ac84129",
       },
       {
         path: "agents/1151/details.en.json",
         pointer: "/talent/6/desc",
         sha256:
-          "e4aad90e921dbf12188ac1d738765bc51924847aa969263c609937ea149bbcf9",
+          "36c5203ebf95288e87efc95c4e968ad6ed35c939226204ead18754da3a046ca3",
       },
     ],
     verification:

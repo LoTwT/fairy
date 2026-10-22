@@ -1626,7 +1626,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Fire>Fire, on-field DMG dealer",
+    "<IconMap:Icon_GeneralBuff_Fire>Fire, <IconMap:Icon_AvatarClass_Attack> Attack on-field DMG dealer",
     "Packs both speed and explosive power",
     "Can trigger Chain Attack without inflicting Daze"
   ],

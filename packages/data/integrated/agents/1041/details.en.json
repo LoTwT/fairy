@@ -1841,7 +1841,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Fire>Fire, on-field DMG dealer",
+    "<IconMap:Icon_GeneralBuff_Fire>Fire, <IconMap:Icon_AvatarClass_Attack> Attack on-field DMG dealer",
     "Burst DMG during Stun",
     "Charged Block Counter"
   ],

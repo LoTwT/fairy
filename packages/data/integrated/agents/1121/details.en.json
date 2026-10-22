@@ -1390,7 +1390,7 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_Fire>Fire, defense support",
+    "<IconMap:Icon_GeneralBuff_Fire>Fire, <IconMap:Icon_AvatarClass_Defense> Defense support",
     "Grants shield Retaliation to all squad members"
   ],
   "talent": {

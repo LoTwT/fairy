@@ -1226,8 +1226,8 @@
   "specialElementType": {},
   "strategy": [
     "07",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, off-field DMG support",
-    "Entering Hunter's Gait boosts Daze efficiency"
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, <IconMap:Icon_AvatarClass_Stun> Stun off-field DMG buffer",
+    "Entering <Term:3000027></Term> boosts Daze efficiency"
   ],
   "talent": {
     "1": {

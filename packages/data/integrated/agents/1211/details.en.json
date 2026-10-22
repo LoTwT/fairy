@@ -1506,9 +1506,9 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_Thunder>Electric, off-field Support",
-    "Provides PEN Ratio boosts for the squad",
-    "Extends Shock duration"
+    "<IconMap:Icon_GeneralBuff_Thunder>Electric, <IconMap:Icon_AvatarClass_Support> off-field Support",
+    "Increases teammate PEN Ratio, ATK, DEF",
+    "Sends Bangboo out for Coordinated Attacks"
   ],
   "talent": {
     "1": {

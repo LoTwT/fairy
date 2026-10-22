@@ -2189,7 +2189,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Fire>Fire, on-field DMG dealer",
+    "<IconMap:Icon_GeneralBuff_Fire>Fire, <IconMap:Icon_AvatarClass_Rupture> Rupture on-field DMG dealer",
     "Diverse combos",
     "Increases Sheer Force, CRIT DMG, and Fire DMG for himself"
   ],

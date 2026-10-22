@@ -1545,7 +1545,12 @@
     }
   },
   "specialElementType": {},
-  "strategy": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Wind>Wind, <IconMap:Icon_AvatarClass_Anomaly> Anomaly off-field dealer",
+    "Triggers Anomaly <Term:3000004>Vortex</Term>",
+    "Cyclone <Term:3000009>gathers enemies</Term> and reduces enemy RES"
+  ],
   "talent": {
     "1": {
       "desc": "<color=#FFFFFF>Sweeping Cyclone</color> from <color=#FFFFFF>Additional Ability: Tea Party Etiquette</color> deals an additional 20% Daze. When Velina triggers <color=#FFFFFF>Vortex</color>, she ignores 20% of the target's <color=#FFFFFF>All-Attribute RES</color>. When squad members deal <color=#A6C5FD>Windswept</color> DMG, 20% of the target's <color=#A6C5FD>Wind RES</color> is ignored.",

@@ -1995,7 +1995,12 @@
     }
   },
   "specialElementType": {},
-  "strategy": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Thunder>Electric, <IconMap:Icon_AvatarClass_Armorer>on-field Armorer dealer",
+    "Can enter <Term:1000036>Crimson Inscription</Term> state and use numerous alternate skills",
+    "Can deal massive <Term:3000015>Laceration DMG</Term>"
+  ],
   "talent": {
     "1": {
       "desc": "When Claret's attacks hit enemies and trigger Laceration, Gash Buildup Rate increases by 20%. The DMG Multiplier of Maim triggered by Claret increases to 130% of its original value.",

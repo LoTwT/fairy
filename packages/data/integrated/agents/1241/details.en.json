@@ -1634,7 +1634,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>Ether, quick-swap DMG dealer",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>Ether, <IconMap:Icon_AvatarClass_Attack>Attack <Term:3000012></Term> DMG dealer",
     "Burst DMG during Stun",
     "Suppressive Mode and Shotshell Rapid Fire"
   ],

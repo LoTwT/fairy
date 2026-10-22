@@ -43,7 +43,7 @@ describe("panel attribute publication", () => {
     const { index, attributes } = await fixture()
     const manifest = await verifyPanelAttributes(attributes, index)
     expect(manifest.rulesVersion).toBe("panel-attributes/2")
-    expect(manifest.sourceVersion).toBe("3.2")
+    expect(manifest.sourceVersion).toBe("3.3.12+19634983")
     expect(manifest.evidence.zzzHpCommit).toBe(
       "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
     )
@@ -57,8 +57,8 @@ describe("panel attribute publication", () => {
       unit: "ratio",
       value: 0.3,
     })
-    expect(manifest.members.agents).toHaveLength(60)
-    expect(manifest.members.wEngines).toHaveLength(100)
+    expect(manifest.members.agents).toHaveLength(62)
+    expect(manifest.members.wEngines).toHaveLength(103)
     index.entities.monsters.memberIds = []
     await verifyPanelAttributes(attributes, index)
     index.entities.agents.members["1311"].files.data.sha256 = "0".repeat(64)

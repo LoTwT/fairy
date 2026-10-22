@@ -55,14 +55,14 @@ const independent = (): SupplementOption => ({
 
 describe("Roxy wind-eye independently frozen source and exact registration", () => {
   it.each(["zh", "en"] as const)(
-    "retains complete %s clauses and all parameter rows from fixed 3.2",
+    "retains complete %s clauses and all parameter rows from fixed 3.3.12",
     async (locale) => {
       const ref = original.sources[locale]
       const bytes = await readFile(
         new URL(`../integrated/${ref.resourcePath}`, import.meta.url),
       )
       const details = JSON.parse(bytes.toString())
-      expect(original.sourceVersion).toBe("3.2")
+      expect(original.sourceVersion).toBe("3.3.12+19634983")
       expect(bytes.length).toBe(ref.bytes)
       expect(createHash("sha256").update(bytes).digest("hex")).toBe(ref.sha256)
       expect(original.locales[locale].description.value).toEqual(

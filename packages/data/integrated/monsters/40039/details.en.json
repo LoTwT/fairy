@@ -1,0 +1,10 @@
+{
+  "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
+  "cardQuote": "—On a typical late-night overtime shift, an enraged HSO officer violently bangs on Haytor's frame while shouting",
+  "cardSkillDesc": "\"Integrated Haytor\" will be Enhanced, receiving an all-around Power boost. During combat, \"Integrated Haytor\" alternates between two Enhanced forms: <color=#FFAF2C>[Frenzy]</color> and <color=#FFAF2C>[Phantom]</color>. When <color=#FFAF2C>[Daze]</color> accumulates to a certain threshold, \"Integrated Haytor\" will summon <color=#FFAF2C>[Doppelgangers]</color>, during which [Daze] cannot be accumulated. Defeating the [Doppelgangers] increases its [Daze] and greatly increases its <color=#FFAF2C>[Daze Vulnerability]</color>; if not all [Doppelgangers] are eliminated, \"Integrated Haytor\" will [absorb] the remaining [Doppelgangers] and resume its offensive.",
+  "desc": "High-Risk simulation units mapped from real combat data. Through deep reconstruction and overfitting of prototype combat logic, some units have achieved Breakthrough beyond standard performance thresholds, presenting an extremely high combat threat level.",
+  "groupDesc": "Corrupted",
+  "id": 40039,
+  "locale": "en",
+  "name": "Integrated · Haytor"
+}

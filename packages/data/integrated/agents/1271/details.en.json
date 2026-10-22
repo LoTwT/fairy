@@ -1344,7 +1344,7 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_Thunder>Electric, Anomaly-based support",
+    "<IconMap:Icon_GeneralBuff_Thunder> Electric, Anomaly-based <IconMap:Icon_AvatarClass_Defense> Defense support",
     "Grants shields and Anomaly Proficiency to the whole squad"
   ],
   "talent": {

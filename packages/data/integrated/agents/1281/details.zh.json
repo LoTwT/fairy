@@ -1428,8 +1428,8 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，站场输出",
-    "快速累积物理异常积蓄值"
+    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，<IconMap:Icon_AvatarClass_Anomaly>异常站场输出",
+    "快速累积物理属性<Term:3000005></Term>"
   ],
   "talent": {
     "1": {

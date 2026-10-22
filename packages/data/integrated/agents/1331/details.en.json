@@ -1405,10 +1405,10 @@
   },
   "specialElementType": {},
   "strategy": [
-    "04",
-    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>Ether, off-field Anomaly DMG dealer",
-    "Triggering Abloom deals bonus Anomaly DMG",
-    "Attacks off-field and rapidly accumulates Anomaly Buildup"
+    "03",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>Ether, <IconMap:Icon_AvatarClass_Anomaly>Anomaly off-field DMG dealer",
+    "Triggering <Term:3000002></Term> deals bonus Anomaly DMG",
+    "Attack off-field and rapidly accumulate <Term:3000005></Term>"
   ],
   "talent": {
     "1": {

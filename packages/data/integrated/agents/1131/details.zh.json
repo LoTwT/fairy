@@ -1716,7 +1716,7 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_Ice>冰属性，泛用型速切辅助",
+    "<IconMap:Icon_GeneralBuff_Ice>冰属性，<Term:3000013></Term><IconMap:Icon_AvatarClass_Support>支援<Term:3000012></Term>辅助",
     "提供全队角色攻击增益"
   ],
   "talent": {

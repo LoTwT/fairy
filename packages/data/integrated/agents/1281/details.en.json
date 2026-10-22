@@ -1449,8 +1449,8 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, on-field DMG dealer",
-    "Rapidly inflicts Physical Anomaly Buildup"
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, <IconMap:Icon_AvatarClass_Anomaly> Anomaly on-field DMG dealer",
+    "Rapidly inflicts Physical <Term:3000005></Term>"
   ],
   "talent": {
     "1": {

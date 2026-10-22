@@ -1253,7 +1253,7 @@
   "specialElementType": {},
   "strategy": [
     "07",
-    "<IconMap:Icon_GeneralBuff_Thunder>Electric, Stun support",
+    "<IconMap:Icon_GeneralBuff_Thunder>Electric, <IconMap:Icon_AvatarClass_Stun> Stun",
     "Consistently Stuns enemies and accumulates Daze"
   ],
   "talent": {

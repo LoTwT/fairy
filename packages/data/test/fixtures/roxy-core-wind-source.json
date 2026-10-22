@@ -6,7 +6,7 @@
       "rawResource": "character-1621-3.2-zh.json",
       "rawSha256": "299637ab8aaafbe41003819f8e58f9248cbacf3537f7d5b55332e249ddc2e93c",
       "resourcePath": "agents/1621/details.zh.json",
-      "integratedSha256": "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e",
+      "integratedSha256": "4b4f267a85665ace084d57c47d7202d5687009a98f2c0873b0c89e8124b329e3",
       "clauses": [
         {
           "coreSkillLevel": 1,
@@ -70,7 +70,7 @@
       "rawResource": "character-1621-3.2-en.json",
       "rawSha256": "0692d88153c3cad37fb4e34c5446820763b8628490aba54294dc031b3ddf1334",
       "resourcePath": "agents/1621/details.en.json",
-      "integratedSha256": "30a75cab3c664648ca8f9bbcfdce04bc5d92b5897b9187c17c6620c76c282b2a",
+      "integratedSha256": "7f1f2e152f9a3b9f23e94e04067af5608b372d74a04762b8686ddd3fa1767887",
       "clauses": [
         {
           "coreSkillLevel": 1,

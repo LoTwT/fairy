@@ -1820,7 +1820,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Fire>火属性，站场输出",
+    "<IconMap:Icon_GeneralBuff_Fire>火属性，<IconMap:Icon_AvatarClass_Attack>强攻站场输出",
     "失衡期间集中爆发",
     "蓄力格挡反击"
   ],
