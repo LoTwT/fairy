@@ -52,7 +52,7 @@
     "fairySources": {
       "packages/data/definitions/effects/static.json": "e12ca8aa8f1497052c42965465bdebc8409dfe4206ff00b91944fc47bf3ef11a",
       "packages/data/definitions/effects/static-catalog.json": "6ab706d8cefbf16e9f0b21ac41746df3bbc5f5cf1a3326e58b2c5f638b9ad228",
-      "packages/data/integrated/agents/1561/details.zh.json": "a2089f5f829ed8646e768deee3f9b1424b39df3ffc25ade1e8d8ebb99ecf6659",
+      "packages/data/integrated/agents/1561/details.zh.json": "f2da8dfc1357ffb98dcb775d0febbe0df55828d4c61e38701df39040766a3b6f",
       "packages/core/src/formulas/anomaly-damage.ts": "f4cf30476254e86e65a2c8e436817d31af1cb210bec979a5d11ce7898e3058f9",
       "packages/core/src/effects/internal/static-catalog.ts": "14d4399e7a6a64536a7ccdaa8dacd9de863e9ca162ab671a0f825f79b478adac",
       "packages/core/src/effects/internal/static-damage.ts": "f196b37ed3f0dcd4b351b4082be4b7d39eed88dd65a26cb596ec667ba798c37a",
@@ -65,7 +65,7 @@
       "packageVersion": "0.4.0",
       "contractVersion": 2,
       "gameVersion": "3.2",
-      "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
+      "snapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
     }
   },
   "inputLayer": "externally-declared-resolved-source-state",
@@ -107414,7 +107414,7 @@
           "packages/data/definitions/effects/static-catalog.json": "b0f7831d1e02118f6445b5e9e091e309733464c467ff63a7f0df22f0f95323df"
         }
       },
-      "currentSnapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
+      "currentSnapshotId": "sha256:4ae1136fb6cee9dd08353b4cdfcb8ba4a9869fd62248728b6ebc961b52c78f60"
     }
   ]
 }

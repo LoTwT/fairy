@@ -1,0 +1,302 @@
+{
+  "id": 690481,
+  "locale": "en",
+  "modes": [
+    {
+      "id": 690482,
+      "zone": {
+        "69048201": {
+          "aRankGoal": 20000,
+          "bRankGoal": 10000,
+          "goalType": 2,
+          "layerBuff": {
+            "69014406": {
+              "desc": "· Successfully <color=#FFAF2C>inflicting Impaired</color> grants <color=#FFAF2C>1000 Performance Points</color>; successfully <color=#FFAF2C>countering <Term:2000003></Term></color> grants <color=#FFAF2C>500 Performance Points</color> each time; <color=#FFAF2C>preventing an enemy's Corruptive Barrier from completing its charge</color> and rendering them Impaired grants <color=#FFAF2C>1,500 Performance Points</color>.  During the <Term:2000003></Term>, when triggering <color=#FFAF2C>Shutdown</color> via <color=#FFAF2C><Term:2000006></Term></color>, obtain the remaining Performance Points available from the current <color=#FFAF2C>Control Skill</color>. Maximum obtainable Performance Points: 5,000.",
+              "title": "69014406_Title"
+            },
+            "69014804": {
+              "desc": "· When an Agent inflicts an Attribute Anomaly on an enemy, the target enemy gains 1 stack of Blight Mark of the corresponding attribute. When an enemy's Gash is removed upon Maim DMG settlement, they gain 2 stacks of non-Attribute Blight Marks, lasting 10s. Blight Marks can stack up to 3 times, and reapplying a Blight Mark of the same Attribute resets its duration.\n· For each Blight Mark an enemy has, <color=#FFAF2C>Anomaly DMG they take is increased by 15%</color>, <color=#FFAF2C>DMG from <Term:2000001></Term> is increased by 15%</color>, and <color=#FFAF2C>Sharp DMG is increased by 35%</color>.\n· When Impaired or Shutdown is inflicted on an enemy, <color=#FFAF2C>the whole squad's Anomaly Proficiency increases by 50</color> for 15s. Repeated triggers reset the duration.",
+              "title": "TBD"
+            },
+            "69014807": {
+              "desc": "",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690482011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_HoloGirReborn.png",
+              "monsterList": {
+                "31678": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40014,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_GirReborn_HC.png",
+                  "name": "Integrated - Stagnant Aberrant",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 37228874.26499999,
+                    "stun": 23276.75
+                  }
+                }
+              },
+              "monsterResistance": {},
+              "monsterWeakness": {
+                "201": "Fire"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Integrated - Girtablullu - Stagnant Aberrant",
+          "sRankGoal": 30000,
+          "selectableBuff": {
+            "69014801": {
+              "desc": "· If there are 2/3 <color=#FFFFFF>Anomaly</color> specialty Agents in your squad, the whole squad's Anomaly Proficiency <color=#2BAD00>increases by 20/50</color> respectively.\n· When an <color=#FFFFFF>Anomaly</color> specialty Agent deals <color=#FFFFFF>Attribute Anomaly</color> DMG and triggers a CRIT, Attribute Anomaly DMG dealt by the whole squad <color=#2BAD00>increases by 20%</color>, and <color=#FF5521>Fire</color> Attribute Anomaly DMG <color=#2BAD00>increases by 10%</color> for 15s; repeated triggers reset the duration.",
+              "title": "Blazing Descent"
+            },
+            "69014802": {
+              "desc": "· <color=#FFFFFF>Stun</color> specialty Agents' Daze <color=#2BAD00>increases by 20%</color>, and Energy generation efficiency <color=#2BAD00>increases by 20%</color>.\n· After the Agent uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Special Attack</color>, Sharp DMG <color=#2BAD00>increases by 30%</color>, and attacks that hit enemies ignore <color=#2BAD00>20%</color> of their <color=#2EB6FF>Electric RES</color> and <color=#FE437E>Ether RES</color> for 15s; repeated triggers reset the duration.",
+              "title": "Radiant Sky"
+            },
+            "69014803": {
+              "desc": "· <color=#FFFFFF>Stun</color> specialty Agents' Daze <color=#2BAD00>increases by 15%</color>. Upon hitting a Stunned enemy, their Stun recovery Speed <color=#2BAD00>reduces by 10%</color> for 15s; repeated triggers reset the duration.\n· Attribute Anomaly DMG dealt by Agents <color=#2BAD00>increases by 15%</color>. Against Stunned enemies, Attribute Anomaly DMG dealt additionally <color=#2BAD00>increases by 25%</color>.",
+              "title": "Perfect Rhythm"
+            }
+          },
+          "stageNum": 1
+        }
+      },
+      "zoneType": 1002
+    },
+    {
+      "id": 690481,
+      "zone": {
+        "69048101": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013003": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Anomaly><color=#FFAF2C>Anomaly</color> specialty.",
+              "title": ""
+            },
+            "69014805": {
+              "desc": "· When a Boss enemy is attacked, the attack's Anomaly Buildup Rate <color=#2BAD00>increases by 10%</color>.\n· Each time a Boss enemy enters an <color=#FFFFFF>Attribute Anomaly</color> state, it gains 1 stack of <color=#FFFFFF>Afterglow Mark</color>. When it reaches <color=#2BAD00>3 stacks</color>, all Afterglow Marks are consumed, and the Boss enters the <color=#FFFFFF>Wax Wings</color> state for <color=#2BAD00>30 seconds</color>.\n· While in the <color=#FFFFFF>Wax Wings</color> state, the Boss takes <color=#2BAD00>30% increased Attribute Anomaly DMG</color> and accumulates an additional <color=#2BAD00>5% Daze</color> when entering an <color=#FFFFFF>Attribute Anomaly</color> state, but no longer gains <color=#FFFFFF>Afterglow Marks</color>.\n· When the Boss is Stunned, it immediately enters the <color=#FFFFFF>Wax Wings</color> state. If it is already in the Wax Wings state, the duration is reset.",
+              "title": ""
+            },
+            "69014806": {
+              "desc": "· Each successful <Term:2000004>Chain Parry</Term> against an enemy attack grants an additional <color=#FFAF2C>1,000 Performance Points</color>;\n· After an enemy deploys a $$$Spatial Barrier$$$, each successful stomp on a golden area that triggers a Defensive Assist grants an additional <color=#FFAF2C>1,500 Performance Points</color>; up to 5,000 Performance Points can be earned this way.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690481011": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_HollowVenger.png",
+              "monsterList": {
+                "31734": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 0,
+                    "fire": 1,
+                    "ice": -1,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 40012,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_HollowVenger.png",
+                  "name": "僭越者",
+                  "stats": {
+                    "attack": 3286.6909090909094,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 30270529.44,
+                    "stun": 20430.9
+                  }
+                }
+              },
+              "monsterResistance": {
+                "202": "Ice"
+              },
+              "monsterWeakness": {
+                "201": "Fire"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "僭越者",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69014801": {
+              "desc": "· If there are 2/3 <color=#FFFFFF>Anomaly</color> specialty Agents in your squad, the whole squad's Anomaly Proficiency <color=#2BAD00>increases by 20/50</color> respectively.\n· When an <color=#FFFFFF>Anomaly</color> specialty Agent deals <color=#FFFFFF>Attribute Anomaly</color> DMG and triggers a CRIT, Attribute Anomaly DMG dealt by the whole squad <color=#2BAD00>increases by 20%</color>, and <color=#FF5521>Fire</color> Attribute Anomaly DMG <color=#2BAD00>increases by 10%</color> for 15s; repeated triggers reset the duration.",
+              "title": "Blazing Descent"
+            },
+            "69014802": {
+              "desc": "· <color=#FFFFFF>Stun</color> specialty Agents' Daze <color=#2BAD00>increases by 20%</color>, and Energy generation efficiency <color=#2BAD00>increases by 20%</color>.\n· After the Agent uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Special Attack</color>, Sharp DMG <color=#2BAD00>increases by 30%</color>, and attacks that hit enemies ignore <color=#2BAD00>20%</color> of their <color=#2EB6FF>Electric RES</color> and <color=#FE437E>Ether RES</color> for 15s; repeated triggers reset the duration.",
+              "title": "Radiant Sky"
+            },
+            "69014803": {
+              "desc": "· <color=#FFFFFF>Stun</color> specialty Agents' Daze <color=#2BAD00>increases by 15%</color>. Upon hitting a Stunned enemy, their Stun recovery Speed <color=#2BAD00>reduces by 10%</color> for 15s; repeated triggers reset the duration.\n· Attribute Anomaly DMG dealt by Agents <color=#2BAD00>increases by 15%</color>. Against Stunned enemies, Attribute Anomaly DMG dealt additionally <color=#2BAD00>increases by 25%</color>.",
+              "title": "Perfect Rhythm"
+            }
+          },
+          "stageNum": 1
+        },
+        "69048102": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69010305": {
+              "desc": "· When dealing sufficient DMG to the boss enemy's legs, Impaired will be triggered. <color=#FFAF2C>Upon successfully breaking the boss enemy's legs</color>, the Agent restores <color=#FFAF2C>1,000 Decibels</color>, and the boss gains 1 stack of <color=#FFFFFF>Disintegration</color> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <color=#FFFFFF>Disintegration</color> the target has, CRIT DMG is <color=#FFAF2C>increased by 25%</color>.",
+              "title": ""
+            },
+            "69010306": {
+              "desc": "",
+              "title": ""
+            },
+            "69010307": {
+              "desc": "· Successfully <color=#FFAF2C>impairing an enemy</color> grants <color=#FFAF2C>800 Performance Points</color>. A maximum of 5,000 Performance Points can be obtained.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690481021": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ComplexCorrupted.png",
+              "monsterList": {
+                "11414": {
+                  "element": {
+                    "electric": 1,
+                    "ether": 1,
+                    "fire": 0,
+                    "ice": 0,
+                    "physical": 0,
+                    "wind": 0
+                  },
+                  "id": 30009,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_ComplexCorrupted.png",
+                  "name": "Unknown Corruption Complex",
+                  "stats": {
+                    "attack": 2738.909090909091,
+                    "attribute_infliction": 10,
+                    "defence": 952.8000000000001,
+                    "hp": 26639351.279999997,
+                    "stun": 16894.15
+                  }
+                }
+              },
+              "monsterResistance": {},
+              "monsterWeakness": {
+                "203": "Electric",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Unknown Corruption Complex",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69014801": {
+              "desc": "· If there are 2/3 <color=#FFFFFF>Anomaly</color> specialty Agents in your squad, the whole squad's Anomaly Proficiency <color=#2BAD00>increases by 20/50</color> respectively.\n· When an <color=#FFFFFF>Anomaly</color> specialty Agent deals <color=#FFFFFF>Attribute Anomaly</color> DMG and triggers a CRIT, Attribute Anomaly DMG dealt by the whole squad <color=#2BAD00>increases by 20%</color>, and <color=#FF5521>Fire</color> Attribute Anomaly DMG <color=#2BAD00>increases by 10%</color> for 15s; repeated triggers reset the duration.",
+              "title": "Blazing Descent"
+            },
+            "69014802": {
+              "desc": "· <color=#FFFFFF>Stun</color> specialty Agents' Daze <color=#2BAD00>increases by 20%</color>, and Energy generation efficiency <color=#2BAD00>increases by 20%</color>.\n· After the Agent uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Special Attack</color>, Sharp DMG <color=#2BAD00>increases by 30%</color>, and attacks that hit enemies ignore <color=#2BAD00>20%</color> of their <color=#2EB6FF>Electric RES</color> and <color=#FE437E>Ether RES</color> for 15s; repeated triggers reset the duration.",
+              "title": "Radiant Sky"
+            },
+            "69014803": {
+              "desc": "· <color=#FFFFFF>Stun</color> specialty Agents' Daze <color=#2BAD00>increases by 15%</color>. Upon hitting a Stunned enemy, their Stun recovery Speed <color=#2BAD00>reduces by 10%</color> for 15s; repeated triggers reset the duration.\n· Attribute Anomaly DMG dealt by Agents <color=#2BAD00>increases by 15%</color>. Against Stunned enemies, Attribute Anomaly DMG dealt additionally <color=#2BAD00>increases by 25%</color>.",
+              "title": "Perfect Rhythm"
+            }
+          },
+          "stageNum": 2
+        },
+        "69048103": {
+          "aRankGoal": 14000,
+          "bRankGoal": 6000,
+          "goalType": 2,
+          "layerBuff": {
+            "69013003": {
+              "desc": "· Suitable for Agents with <IconMap:Icon_AvatarClass_Anomaly><color=#FFAF2C>Anomaly</color> specialty.",
+              "title": ""
+            },
+            "69013103": {
+              "desc": "· Agent Anomaly Buildup Rate <color=#FFAF2C>increases by 15%</color>, Anomaly DMG dealt to Discordant Solo <color=#FFAF2C>increases by 30%</color>, when Agents are in Ether Veil during combat, Discordant Solo's Stun DMG Multiplier <color=#FFAF2C>increases by 30%</color>.",
+              "title": ""
+            },
+            "69013104": {
+              "desc": "During a <color=#FFAF2C>Control Skill</color>, every successful counter of a Boss attack grants <color=#FFAF2C>350 Performance Points</color>. A <color=#FFAF2C>Shutdown</color> of the Boss's <color=#FFAF2C>Control Skill</color> or counter of the final strike of certain skills inflicts on the Boss the <color=#FFAF2C>Impaired</color> effect and grants <color=#FFAF2C>750 Performance Points</color>. During the <Term:2000003></Term>, when triggering <color=#FFAF2C>Shutdown</color> via <color=#FFAF2C><Term:2000006></Term></color>, obtain the remaining Performance Points available from the current <color=#FFAF2C>Control Skill</color>. Maximum obtainable Performance Points: 5,000.",
+              "title": ""
+            }
+          },
+          "layerRoom": {
+            "690481031": {
+              "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Vesper.png",
+              "monsterList": {
+                "31451": {
+                  "element": {
+                    "electric": 0,
+                    "ether": 1,
+                    "fire": -1,
+                    "ice": -1,
+                    "physical": 0,
+                    "wind": 1
+                  },
+                  "id": 40001,
+                  "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv04/Monster_Vesper.png",
+                  "name": "Discordant Solo - Vesper",
+                  "stats": {
+                    "attack": 2967.1515151515155,
+                    "attribute_infliction": 10,
+                    "defence": 476.40000000000003,
+                    "hp": 39406941.449999996,
+                    "stun": 19977.350000000002
+                  }
+                }
+              },
+              "monsterResistance": {
+                "201": "Fire",
+                "202": "Ice"
+              },
+              "monsterWeakness": {
+                "204": "Wind",
+                "205": "Ether"
+              },
+              "wavesNum": 1
+            }
+          },
+          "monsterLevel": 70,
+          "name": "Discordant Solo - Vesper",
+          "sRankGoal": 20000,
+          "selectableBuff": {
+            "69014801": {
+              "desc": "· If there are 2/3 <color=#FFFFFF>Anomaly</color> specialty Agents in your squad, the whole squad's Anomaly Proficiency <color=#2BAD00>increases by 20/50</color> respectively.\n· When an <color=#FFFFFF>Anomaly</color> specialty Agent deals <color=#FFFFFF>Attribute Anomaly</color> DMG and triggers a CRIT, Attribute Anomaly DMG dealt by the whole squad <color=#2BAD00>increases by 20%</color>, and <color=#FF5521>Fire</color> Attribute Anomaly DMG <color=#2BAD00>increases by 10%</color> for 15s; repeated triggers reset the duration.",
+              "title": "Blazing Descent"
+            },
+            "69014802": {
+              "desc": "· <color=#FFFFFF>Stun</color> specialty Agents' Daze <color=#2BAD00>increases by 20%</color>, and Energy generation efficiency <color=#2BAD00>increases by 20%</color>.\n· After the Agent uses an <color=#FFFFFF>EX Special Attack</color> or <color=#FFFFFF>Special Attack</color>, Sharp DMG <color=#2BAD00>increases by 30%</color>, and attacks that hit enemies ignore <color=#2BAD00>20%</color> of their <color=#2EB6FF>Electric RES</color> and <color=#FE437E>Ether RES</color> for 15s; repeated triggers reset the duration.",
+              "title": "Radiant Sky"
+            },
+            "69014803": {
+              "desc": "· <color=#FFFFFF>Stun</color> specialty Agents' Daze <color=#2BAD00>increases by 15%</color>. Upon hitting a Stunned enemy, their Stun recovery Speed <color=#2BAD00>reduces by 10%</color> for 15s; repeated triggers reset the duration.\n· Attribute Anomaly DMG dealt by Agents <color=#2BAD00>increases by 15%</color>. Against Stunned enemies, Attribute Anomaly DMG dealt additionally <color=#2BAD00>increases by 25%</color>.",
+              "title": "Perfect Rhythm"
+            }
+          },
+          "stageNum": 3
+        }
+      },
+      "zoneType": 1001
+    }
+  ],
+  "name": "Trial"
+}

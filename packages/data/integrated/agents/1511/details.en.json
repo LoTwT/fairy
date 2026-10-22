@@ -1416,9 +1416,9 @@
   "specialElementType": {},
   "strategy": [
     "07",
-    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>Ether, quick-swap Stun",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>Ether, <IconMap:Icon_AvatarClass_Stun> <Term:3000012></Term> Stun",
     "Increases Stun duration and Stun DMG Multiplier",
-    "Can trigger Abloom and Polarity Disorder"
+    "Can trigger <Term:3000002></Term> and <Term:3000008></Term>"
   ],
   "talent": {
     "1": {

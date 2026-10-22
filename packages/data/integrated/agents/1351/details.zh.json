@@ -1205,8 +1205,8 @@
   "specialElementType": {},
   "strategy": [
     "07",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，后台增伤辅助",
-    "进入猎步状态提升失衡效率"
+    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，<IconMap:Icon_AvatarClass_Stun>后台增伤击破",
+    "进入<Term:3000027></Term>状态提升失衡效率"
   ],
   "talent": {
     "1": {

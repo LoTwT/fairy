@@ -2087,7 +2087,7 @@
   "specialElementType": {},
   "strategy": [
     "07",
-    "<IconMap:Icon_GeneralBuff_Ice>冰属性，击破辅助",
+    "<IconMap:Icon_GeneralBuff_Ice>冰属性，<IconMap:Icon_AvatarClass_Stun>击破",
     "可快速提升敌人的失衡值",
     "可降低敌人的冰属性抗性"
   ],

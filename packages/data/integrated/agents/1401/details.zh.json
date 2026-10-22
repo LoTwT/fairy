@@ -1544,9 +1544,9 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，站场输出",
-    "无视异常积蓄直接结算[强击]",
-    "可实现高频[紊乱]出伤"
+    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，<IconMap:Icon_AvatarClass_Anomaly>异常站场输出",
+    "无视<Term:3000005></Term>直接结算<Term:3000006></Term>",
+    "可实现高频<Term:3000003></Term>出伤"
   ],
   "talent": {
     "1": {

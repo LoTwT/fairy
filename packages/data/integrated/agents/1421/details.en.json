@@ -1373,7 +1373,7 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, Rupture-based support",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, Rupture-based <IconMap:Icon_AvatarClass_Defense> Defense support",
     "Provides Sheer Force to squadmates"
   ],
   "talent": {

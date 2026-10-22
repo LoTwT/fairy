@@ -23,7 +23,13 @@ export async function prepareCalculationData(
   index: IntegratedSnapshotIndex,
   packageVersion: string,
 ): Promise<void> {
-  if (index.source.version !== CALCULATION_GAME_VERSION)
+  // D5-1 先升级 Nanoka integrated；静态 effects 仍在 D5-2 切换到 3.3.12。
+  // 过渡期只放开这一新快照，calculation-data 仍标记当前静态契约的 3.2。
+  const supportedIntegratedVersions = new Set([
+    CALCULATION_GAME_VERSION,
+    "3.3.12+19634983",
+  ])
+  if (!supportedIntegratedVersions.has(index.source.version))
     throw new Error(
       `Unsupported calculation game version: ${index.source.version}`,
     )
@@ -68,7 +74,8 @@ export async function prepareCalculationData(
           await read(`integrated/${members.members[id]!.files.data.path}`),
           definitions,
           catalog,
-          index.source.version,
+          // 静态 effects 尚未切换；过渡期引用仍按 3.2 登记，D5-2 再更新。
+          CALCULATION_GAME_VERSION,
         ),
       )
     if (
@@ -342,7 +349,8 @@ export async function prepareCalculationData(
   const version = {
     packageVersion,
     contractVersion: CALCULATION_CONTRACT_VERSION,
-    gameVersion: index.source.version,
+    // 静态 effects 仍为 3.2；D5-1 过渡期将计算结果标记为同一契约版本。
+    gameVersion: CALCULATION_GAME_VERSION,
     snapshotId: `sha256:${hash.digest("hex")}`,
   }
   await writeFileAtomically(

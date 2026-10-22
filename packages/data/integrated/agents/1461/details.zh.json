@@ -1451,9 +1451,9 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Thunder>电属性，站场输出",
-    "强攻队友可帮助回复自身核心资源",
-    "为一位强攻队友提供多种增益"
+    "<IconMap:Icon_GeneralBuff_Thunder>电属性，<IconMap:Icon_AvatarClass_Attack>强攻站场输出",
+    "双[强攻]配队",
+    "与[强攻]队友互相提供增益"
   ],
   "talent": {
     "1": {

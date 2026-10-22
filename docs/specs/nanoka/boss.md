@@ -4,9 +4,9 @@
 
 - 上游实体：`boss`
 - 状态：已完成代表性结构调研，可由共享抓取器缓存；整合类别 `boss` 已按规则
-  `nanoka-boss-reference/5` 接入生产快照
+  `nanoka-boss-reference/6` 接入生产快照
 - 抓取器仍不执行 Boss 字段级语义验证；整合器按该规则独立校验已登记结构，字段归属、结构变体与
-  严格公共时间字段见[来源数据整合规范](../data/integration.md#boss-单实体实现规则-nanoka-boss-reference5)
+  条件公共时间字段见[来源数据整合规范](../data/integration.md#boss-单实体实现规则-nanoka-boss-reference6)
 
 ## 资源
 
@@ -21,17 +21,17 @@ GET https://static.nanoka.cc/zzz/{version}/{language}/boss/{bossId}.json
 
 - 索引是以 Boss ID 为 key 的普通对象。
 - 索引记录包含排序权重（`sort`）与 `zh`/`en`/`ja`/`ko` 名称，以及轮换时间 `begin`/`end` 与
-  `live_begin`/`live_end`（本地 3.2 的 47 条中 44 条为轮换记录、3 条成对缺失）。这些字段与详情是两个
+  `live_begin`/`live_end`（本地 3.3.12 共 50 条，常驻记录可以成对缺失）。这些字段与详情是两个
   独立来源，同名值不要求相等，也不互相回退。整合器登记这组已知顶层字段并对其余字段生成维护诊断：
   `live_begin`/`live_end` 必须成对提供或成对缺失，提供时必须是字符串；其余索引字段不要求存在、
   不校验类型。
-- 详情顶层包含名称、`priority`、`boss_adjust`、`zone_type`、`begin_time`/`end_time` 与 `modes`；
+- 详情顶层包含名称、`priority`、`boss_adjust`、`zone_type`、可选的 `begin_time`/`end_time` 与 `modes`；
   历史 3.0 缓存使用顶层 `zone` 字典代替 `modes`，两者互斥，按实际字段识别。
 - 同一 Boss 的全部详情语言必须使用同一结构骨架：顶层变体、mode 数量与顺序、mode `id`/`zoneType`、
   阶段/房间/怪物/增益字典 key 集合与 encounter 数值一致；名称、说明与图片/图标路径等文本可以不同。
   该约束只比较形状，不按位置合并或提取 mode 内容。历史 raw 3.0/3.1 因缺少 3.2 新增的
   `monster_resistance` 等必需成员，不能在当前规则下直接整合；`zone` 变体由合成用例覆盖。
-- 详情中英文名称在类内同名（本地 3.2 观察中名称各自相同）；名称不作为公开身份，
+- 详情中英文名称在类内同名（本地 3.3.12 观察中名称各自相同）；名称不作为公开身份，
   公开读取以来源 ID 为身份。
 - `modes` 是 mode 条目数组，顺序保持来源原样；mode 内的关卡结构与 Shiyu 的 `zone` 阶段同源、
   字段集相同（含 `selectable_buff`，无 `child` 与 `ss_rank_goal`），但按类别各自独立登记。
@@ -65,7 +65,7 @@ packages/data/raw/nanoka/{version}/
 ## 整合
 
 整合类别登记名为 `boss`，`data.json` 与 `details.{locale}.json` 的字段归属、结构变体与校验边界由
-[Boss 单实体实现规则](../data/integration.md#boss-单实体实现规则-nanoka-boss-reference5)统一定义。
+[Boss 单实体实现规则](../data/integration.md#boss-单实体实现规则-nanoka-boss-reference6)统一定义。
 成员集合由选定来源版本 `boss.json` 的顶层 key 决定，不扫描详情目录推断；本层不解释评级目标语义、
 不换算时间、不建立 mode 唯一性或 Monster 引用闭合校验。`modes`（或旧结构 `zone`）完整留在各语言
 details，不拆分为跨语言公共关卡图；各语言只比较结构骨架，文本内容仍各自保留，也不提前抽取与 Simul

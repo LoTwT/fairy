@@ -1344,7 +1344,7 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_Thunder>电属性，异常体系辅助",
+    "<IconMap:Icon_GeneralBuff_Thunder>电属性，异常体系<IconMap:Icon_AvatarClass_Defense>防护辅助",
     "为队友提供护盾与异常精通"
   ],
   "talent": {

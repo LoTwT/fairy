@@ -2206,8 +2206,8 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>以太属性，泛用型支援",
-    "聚怪减防增益"
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>以太属性，<Term:3000013></Term><IconMap:Icon_AvatarClass_Support>支援",
+    "<Term:3000009></Term>减防增益"
   ],
   "talent": {
     "1": {

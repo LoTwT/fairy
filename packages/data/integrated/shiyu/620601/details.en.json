@@ -1,0 +1,429 @@
+{
+  "id": 620601,
+  "locale": "en",
+  "name": "Critical Node",
+  "zone": {
+    "6206001": {
+      "layerBuff": {
+        "62001601": {
+          "desc": "· <color=#FFFFFF>Anomaly</color> specialty Agents' <color=#FF5521>Fire DMG</color> is increased by 20%.\n· When an Agent deals <color=#FFFFFF>Attribute Anomaly</color> DMG and triggers a CRIT, the squad recovers 20 Energy, and Attribute Anomaly DMG increases by 30% for 20s. This effect can trigger once every 20s.",
+          "title": "Blazing Rhythm"
+        }
+      },
+      "layerRoom": {
+        "62060011": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11253": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_LightJaeger.png",
+              "name": "Light Jaeger"
+            },
+            "11274": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster-MeleeJaeger.png",
+              "name": "Rookie Jaeger"
+            },
+            "11443": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_LightfootRover.png",
+              "name": "Lightfoot Rover"
+            },
+            "11454": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyStriker.png",
+              "name": "Heavy Striker"
+            }
+          },
+          "monsterResistance": {
+            "205": "Ether"
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          }
+        },
+        "62060012": {
+          "monsterIcon": "",
+          "monsterList": {
+            "31553": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_CorruptedBattleMecha.png",
+              "name": "Metamorphosed - City Guardboo"
+            },
+            "31583": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Minion.png",
+              "name": "Kulullu"
+            },
+            "31641": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_MoltTarasqueMixer.png",
+              "name": "Metamorphosed - Tarasque Mixer"
+            },
+            "31744": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Halberdier.png",
+              "name": "Airspace Patrol Spearguard"
+            },
+            "31752": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_RoscaSolider.png",
+              "name": "Airspace Patrol Shieldguard"
+            },
+            "31762": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Greatsworder.png",
+              "name": "Airspace Patrol Vanguard"
+            }
+          },
+          "monsterResistance": {
+            "200": "Physical"
+          },
+          "monsterWeakness": {
+            "204": "Wind",
+            "205": "Ether"
+          }
+        }
+      },
+      "name": "Critical Node: First Frontier"
+    },
+    "6206002": {
+      "layerBuff": {
+        "62001601": {
+          "desc": "· <color=#FFFFFF>Anomaly</color> specialty Agents' <color=#FF5521>Fire DMG</color> is increased by 20%.\n· When an Agent deals <color=#FFFFFF>Attribute Anomaly</color> DMG and triggers a CRIT, the squad recovers 20 Energy, and Attribute Anomaly DMG increases by 30% for 20s. This effect can trigger once every 20s.",
+          "title": "Blazing Rhythm"
+        }
+      },
+      "layerRoom": {
+        "62060021": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11058": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Guardian.png",
+              "name": "Guardian"
+            },
+            "11164": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_StrikeJaeger.png",
+              "name": "Strike Jaeger"
+            },
+            "11254": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_LightJaeger.png",
+              "name": "Light Jaeger"
+            },
+            "11454": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyStriker.png",
+              "name": "Heavy Striker"
+            }
+          },
+          "monsterResistance": {
+            "205": "Ether"
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          }
+        },
+        "62060022": {
+          "monsterIcon": "",
+          "monsterList": {
+            "31492": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Predator.png",
+              "name": "Mushussu"
+            },
+            "31551": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_BangbooBattleMecha.png",
+              "name": "City Guardboo"
+            },
+            "31652": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_EyeEngine.png",
+              "name": "Metamorphosed - Beholder Engine"
+            },
+            "31752": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_RoscaSolider.png",
+              "name": "Airspace Patrol Shieldguard"
+            },
+            "31762": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Greatsworder.png",
+              "name": "Airspace Patrol Vanguard"
+            }
+          },
+          "monsterResistance": {},
+          "monsterWeakness": {
+            "201": "Fire",
+            "204": "Wind"
+          }
+        }
+      },
+      "name": "Critical Node: Second Frontier"
+    },
+    "6206003": {
+      "layerBuff": {
+        "62001601": {
+          "desc": "· <color=#FFFFFF>Anomaly</color> specialty Agents' <color=#FF5521>Fire DMG</color> is increased by 20%.\n· When an Agent deals <color=#FFFFFF>Attribute Anomaly</color> DMG and triggers a CRIT, the squad recovers 20 Energy, and Attribute Anomaly DMG increases by 30% for 20s. This effect can trigger once every 20s.",
+          "title": "Blazing Rhythm"
+        }
+      },
+      "layerRoom": {
+        "62060031": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11312": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugAssaulterPro.png",
+              "name": "Ambusher"
+            },
+            "11322": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugPoacherPro.png",
+              "name": "Rustler"
+            },
+            "11603": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Mors.png",
+              "name": "Doppelganger - Mors"
+            },
+            "11613": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Bellum.png",
+              "name": "Doppelganger - Bellum"
+            },
+            "11623": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Pulchra.png",
+              "name": "Doppelganger - Pulchra"
+            }
+          },
+          "monsterResistance": {
+            "202": "Ice"
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          }
+        },
+        "62060032": {
+          "monsterIcon": "",
+          "monsterList": {
+            "31482": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Arbiter.png",
+              "name": "Lahmu"
+            },
+            "31552": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_BangbooBattleMecha.png",
+              "name": "City Guardboo"
+            },
+            "31553": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_CorruptedBattleMecha.png",
+              "name": "Metamorphosed - City Guardboo"
+            },
+            "31744": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Halberdier.png",
+              "name": "Airspace Patrol Spearguard"
+            },
+            "31752": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_RoscaSolider.png",
+              "name": "Airspace Patrol Shieldguard"
+            }
+          },
+          "monsterResistance": {},
+          "monsterWeakness": {
+            "203": "Electric",
+            "204": "Wind"
+          }
+        }
+      },
+      "name": "Critical Node: Third Frontier"
+    },
+    "6206004": {
+      "layerBuff": {
+        "62001601": {
+          "desc": "· <color=#FFFFFF>Anomaly</color> specialty Agents' <color=#FF5521>Fire DMG</color> is increased by 20%.\n· When an Agent deals <color=#FFFFFF>Attribute Anomaly</color> DMG and triggers a CRIT, the squad recovers 20 Energy, and Attribute Anomaly DMG increases by 30% for 20s. This effect can trigger once every 20s.",
+          "title": "Blazing Rhythm"
+        }
+      },
+      "layerRoom": {
+        "62060041": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ThugBulkyEnforcerBoss.png",
+          "monsterList": {
+            "11352": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcerPro.png",
+              "name": "Wanted Enforcer"
+            },
+            "11353": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcerBoss.png",
+              "name": "Troublemaker - Wanted Enforcer"
+            },
+            "11362": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyAbuserPro.png",
+              "name": "Wanted Intimidator"
+            }
+          },
+          "monsterResistance": {
+            "202": "Ice"
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          }
+        },
+        "62060042": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_WingedAvarus.png",
+          "monsterList": {
+            "31013": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_WingedAvarus.png",
+              "name": "Metamorphosed - Avarus"
+            },
+            "31492": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Predator.png",
+              "name": "Mushussu"
+            }
+          },
+          "monsterResistance": {
+            "201": "Fire"
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "204": "Wind"
+          }
+        }
+      },
+      "name": "Critical Node: Fourth Frontier"
+    },
+    "6206005": {
+      "layerBuff": {
+        "62001601": {
+          "desc": "· <color=#FFFFFF>Anomaly</color> specialty Agents' <color=#FF5521>Fire DMG</color> is increased by 20%.\n· When an Agent deals <color=#FFFFFF>Attribute Anomaly</color> DMG and triggers a CRIT, the squad recovers 20 Energy, and Attribute Anomaly DMG increases by 30% for 20s. This effect can trigger once every 20s.",
+          "title": "Blazing Rhythm"
+        },
+        "62001602": {
+          "desc": "· Agents' Sharp DMG increases by 20%, and DEF increases by 20%.\n· When an Agent defeats an Elite enemy, Agents with the <color=#FFFFFF>Stun</color> specialty restore 30 Energy, and the whole squad restores 500 Decibels.",
+          "title": "Rending Bladeguard"
+        },
+        "62001603": {
+          "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' <color=#FE437E>Ether DMG</color> and <color=#98EFF0>Ice DMG</color> 20%, and CRIT DMG increases by 40%.\n· When an Agent Stuns an enemy, their Stun recovery rate decreases by 15% for 15s; repeated triggers refresh the duration.",
+          "title": "Condensed Frostburst"
+        }
+      },
+      "layerRoom": {},
+      "name": ""
+    },
+    "62060051": {
+      "layerBuff": {
+        "62001001": {
+          "desc": "· In this stage, dealing DMG to enemies earns you <color=#FFAF2C>DMG Score</color>. Defeating a single <color=#FFFFFF>normal/elite enemy</color> will grant you an instance of <color=#FFAF2C>Elimination Score</color>.\n· In this stage, scores earned at different times will receive additional <color=#FFAF2C>multiplier bonuses</color>. The earlier in the challenge, the higher the multiplier. The <color=#FFAF2C>total score cap (including bonus) is 50,000</color>.",
+          "title": ""
+        },
+        "62001002": {
+          "desc": "",
+          "title": ""
+        },
+        "62001601": {
+          "desc": "· <color=#FFFFFF>Anomaly</color> specialty Agents' <color=#FF5521>Fire DMG</color> is increased by 20%.\n· When an Agent deals <color=#FFFFFF>Attribute Anomaly</color> DMG and triggers a CRIT, the squad recovers 20 Energy, and Attribute Anomaly DMG increases by 30% for 20s. This effect can trigger once every 20s.",
+          "title": "Blazing Rhythm"
+        }
+      },
+      "layerRoom": {
+        "62060051": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Avarus.png",
+          "monsterList": {
+            "11502": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_FrenziedManiacPro.png",
+              "name": "Frenzied Maniac"
+            },
+            "11512": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_WickedWraithPro.png",
+              "name": "Wicked Wraith"
+            },
+            "31012": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Avarus.png",
+              "name": "Miasma Ravager - Avarus"
+            }
+          },
+          "monsterResistance": {
+            "202": "Ice"
+          },
+          "monsterWeakness": {
+            "201": "Fire",
+            "205": "Ether"
+          }
+        }
+      },
+      "name": "Room 1"
+    },
+    "62060052": {
+      "layerBuff": {
+        "62001001": {
+          "desc": "· In this stage, dealing DMG to enemies earns you <color=#FFAF2C>DMG Score</color>. Defeating a single <color=#FFFFFF>normal/elite enemy</color> will grant you an instance of <color=#FFAF2C>Elimination Score</color>.\n· In this stage, scores earned at different times will receive additional <color=#FFAF2C>multiplier bonuses</color>. The earlier in the challenge, the higher the multiplier. The <color=#FFAF2C>total score cap (including bonus) is 50,000</color>.",
+          "title": ""
+        },
+        "62001002": {
+          "desc": "",
+          "title": ""
+        },
+        "62001602": {
+          "desc": "· Agents' Sharp DMG increases by 20%, and DEF increases by 20%.\n· When an Agent defeats an Elite enemy, Agents with the <color=#FFFFFF>Stun</color> specialty restore 30 Energy, and the whole squad restores 500 Decibels.",
+          "title": "Rending Bladeguard"
+        }
+      },
+      "layerRoom": {
+        "62060052": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_BlackMazingerGoldenBomb.png",
+          "monsterList": {
+            "11052": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_GuardianPro.png",
+              "name": "Guardian MK II"
+            },
+            "11262": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyFirepowerPro.png",
+              "name": "Assault Gunner"
+            },
+            "31361": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_BlackMazingerGoldenBomb.png",
+              "name": "Lockspring"
+            }
+          },
+          "monsterResistance": {
+            "205": "Ether"
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "203": "Electric"
+          }
+        }
+      },
+      "name": "Room 2"
+    },
+    "62060053": {
+      "layerBuff": {
+        "62001001": {
+          "desc": "· In this stage, dealing DMG to enemies earns you <color=#FFAF2C>DMG Score</color>. Defeating a single <color=#FFFFFF>normal/elite enemy</color> will grant you an instance of <color=#FFAF2C>Elimination Score</color>.\n· In this stage, scores earned at different times will receive additional <color=#FFAF2C>multiplier bonuses</color>. The earlier in the challenge, the higher the multiplier. The <color=#FFAF2C>total score cap (including bonus) is 50,000</color>.",
+          "title": ""
+        },
+        "62001002": {
+          "desc": "",
+          "title": ""
+        },
+        "62001603": {
+          "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' <color=#FE437E>Ether DMG</color> and <color=#98EFF0>Ice DMG</color> 20%, and CRIT DMG increases by 40%.\n· When an Agent Stuns an enemy, their Stun recovery rate decreases by 15% for 15s; repeated triggers refresh the duration.",
+          "title": "Condensed Frostburst"
+        }
+      },
+      "layerRoom": {
+        "62060053": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MiasmaNoranoSlime.png",
+          "monsterList": {
+            "31072": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Huskron.png",
+              "name": "Huskron"
+            },
+            "31182": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_MiasmaSpawn.png",
+              "name": "Miasma Spawn"
+            },
+            "31294": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_MiasmaNoranoSlime.png",
+              "name": "Miasmic Komano Manato"
+            },
+            "31382": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Gloomaron.png",
+              "name": "Miasmic - Huskron"
+            }
+          },
+          "monsterResistance": {
+            "200": "Physical"
+          },
+          "monsterWeakness": {
+            "202": "Ice"
+          }
+        }
+      },
+      "name": "Room 3"
+    }
+  }
+}

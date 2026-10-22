@@ -1591,7 +1591,7 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>Ether, off-field support",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>Ether, <IconMap:Icon_AvatarClass_Support> off-field Support",
     "Increases the ATK of on-field Agents",
     "Upgrades Quick Assist to Chain Attack"
   ],

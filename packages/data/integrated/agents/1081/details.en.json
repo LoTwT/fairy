@@ -1369,7 +1369,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, on-field DMG dealer",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, <IconMap:Icon_AvatarClass_Attack> Attack on-field DMG dealer",
     "Balances single-target and AoE DMG"
   ],
   "talent": {

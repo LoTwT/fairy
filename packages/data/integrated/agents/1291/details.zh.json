@@ -1745,8 +1745,8 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Ice>冰属性，速切输出",
-    "触发[决算]对失衡敌人造成额外伤害",
+    "<IconMap:Icon_GeneralBuff_Ice>冰属性，<IconMap:Icon_AvatarClass_Attack>强攻<Term:3000012></Term>输出",
+    "触发<Term:3000024></Term>对失衡敌人造成额外伤害",
     "高频失衡爆发"
   ],
   "talent": {

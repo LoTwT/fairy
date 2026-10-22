@@ -1548,8 +1548,8 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Ice>冰属性，站场输出",
-    "提供全队角色异放伤害增益",
+    "<IconMap:Icon_GeneralBuff_Ice>冰属性，<IconMap:Icon_AvatarClass_Anomaly>异常站场输出",
+    "提供全队角色<Term:3000002></Term>伤害增益",
     "对其他属性异常敌人造成多次[异放]伤害"
   ],
   "talent": {

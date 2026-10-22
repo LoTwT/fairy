@@ -151,11 +151,11 @@ export const ROXY_GIANT_WINDSTORM_SUPPLEMENT: Supplement = {
     [
       [
         "zh",
-        "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e",
+        "4b4f267a85665ace084d57c47d7202d5687009a98f2c0873b0c89e8124b329e3",
       ],
       [
         "en",
-        "30a75cab3c664648ca8f9bbcfdce04bc5d92b5897b9187c17c6620c76c282b2a",
+        "7f1f2e152f9a3b9f23e94e04067af5608b372d74a04762b8686ddd3fa1767887",
       ],
     ] as const
   ).flatMap(([locale, sha256]) =>
@@ -252,13 +252,13 @@ export const ROXY_MINDSCAPE_SUPPLEMENTS: readonly Supplement[] = [
         path: "agents/1621/details.zh.json",
         pointer: `/talent/${clause.rank}/desc`,
         sha256:
-          "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e",
+          "4b4f267a85665ace084d57c47d7202d5687009a98f2c0873b0c89e8124b329e3",
       },
       {
         path: "agents/1621/details.en.json",
         pointer: `/talent/${clause.rank}/desc`,
         sha256:
-          "30a75cab3c664648ca8f9bbcfdce04bc5d92b5897b9187c17c6620c76c282b2a",
+          "7f1f2e152f9a3b9f23e94e04067af5608b372d74a04762b8686ddd3fa1767887",
       },
     ],
     verification: `Nanoka 3.2 中英文 /talent/${clause.rank}/desc 核对。${clause.description}固定 effects fac62407 没有 Roxy 实体，登记使用 Nanoka 真实补充身份。ZZZ-HP 主仓固定 7a4f2776bf4a44cb108fcd7f5834f63606ade914 /agents/33 的对应独立记录仅作执行语义佐证，不升级来源；M6 在 direct/anomaly/disorder/turbulence/anomalyRelease 的 wind 求值为15、fire为0。此为工具模型核查，未经游戏实测。`,

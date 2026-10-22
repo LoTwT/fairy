@@ -1635,7 +1635,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Fire>Fire, off-field follow-up attack triggerer",
+    "<IconMap:Icon_GeneralBuff_Fire>Fire, <IconMap:Icon_AvatarClass_Attack> Attack off-field Aftershocker",
     "Fully automated off-field DMG output",
     "Provides ATK boost for all squad members"
   ],

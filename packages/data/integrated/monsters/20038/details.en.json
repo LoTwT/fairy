@@ -1,8 +1,8 @@
 {
   "cardObtain": "[Unidentified] Defeat this monster in Hollow Zero 1 time to obtain its data",
-  "cardQuote": "CardQuote_20038",
+  "cardQuote": "",
   "cardSkillDesc": "During combat, Special Offensive: Heavy Striker deploys a shield. While shielded, it will only accumulate Fire and Electric Anomaly Buildup. Inflict Burn, Shock, or Stun it to break the shield.",
-  "desc": "",
+  "desc": "The \"Special Offensive\" unit is a covert combat force secretly deployed by High Ambitions Corp. Modeled after the Defense Force's special operations units in terms of structure, training systems, and combat gear, they're tasked with carrying out high-risk, classified missions that conventional armed forces can't touch.",
   "groupDesc": "Rebel Soldiers",
   "id": 20038,
   "locale": "en",

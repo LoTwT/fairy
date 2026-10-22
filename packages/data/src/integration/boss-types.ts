@@ -1,7 +1,7 @@
 import type { DetailLocale } from "./agent-types.ts"
 
 /**
- * Nanoka Boss 整合资料的正式字段定义（规则 nanoka-boss-reference/5）。
+ * Nanoka Boss 整合资料的正式字段定义（规则 nanoka-boss-reference/6）。
  *
  * 上游实体为 `boss`，整合类别登记名为 `boss`；一条记录表示一个首领试炼条目。
  * 本层不解释评级目标语义、不换算时间、不建立 mode 唯一性、parent/child 闭合、Monster 引用闭合或
@@ -38,12 +38,13 @@ export interface BossData {
 
   /**
    * 来源 `begin_time`。开放开始时间原始字符串（如 `2024-07-04 04:00:00`）；
-   * 不转换时间戳、不猜测时区；严格公共字段。
+   * 不转换时间戳、不猜测时区；条件公共字段，全部语言同有且完整值一致时生成。
+   * 3.3.12 起常驻试炼可以没有该字段，因此本字段可选；缺失时不补造。
    */
-  beginTime: string
+  beginTime?: string
 
-  /** 来源 `end_time`。开放结束时间原始字符串；严格公共字段。 */
-  endTime: string
+  /** 来源 `end_time`。开放结束时间原始字符串；条件公共字段，提取条件与 `beginTime` 相同。 */
+  endTime?: string
 
   /**
    * 来源索引记录的 `live_begin`/`live_end` 直播服开放时间窗。

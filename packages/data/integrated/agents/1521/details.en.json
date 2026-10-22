@@ -1420,7 +1420,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Thunder>Electric, quick-swap/on-field DMG dealer",
+    "<IconMap:Icon_GeneralBuff_Thunder>Electric, <IconMap:Icon_AvatarClass_Attack> Attack<Term:3000012></Term>/on-field DMG dealer",
     "Provides buffs to boost CRIT DMG and ignore a portion of enemy DEF",
     "Deals sustained DMG off-field and inflicts additional Daze"
   ],

@@ -2217,9 +2217,9 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Ice>冰属性，站场输出",
-    "积攒[急冻充能]进行爆发输出",
-    "灵活游走战场"
+    "<IconMap:Icon_GeneralBuff_Ice>冰属性，<IconMap:Icon_AvatarClass_Attack>强攻站场输出",
+    "积攒<Term:3000025></Term>进行爆发输出",
+    "通过<Term:3000034></Term>灵活游走战场"
   ],
   "talent": {
     "1": {

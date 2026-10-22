@@ -95,8 +95,8 @@ export const ROXY_ADDITIONAL_SUPPLEMENTS: readonly SupplementOption[] =
         pointer: `/passive/level/${1621501 + index}/desc/1`,
         sha256:
           locale === "zh"
-            ? "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e"
-            : "30a75cab3c664648ca8f9bbcfdce04bc5d92b5897b9187c17c6620c76c282b2a",
+            ? "4b4f267a85665ace084d57c47d7202d5687009a98f2c0873b0c89e8124b329e3"
+            : "7f1f2e152f9a3b9f23e94e04067af5608b372d74a04762b8686ddd3fa1767887",
       })),
     ),
     verification: clause.windswept

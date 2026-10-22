@@ -5,6 +5,7 @@ import {
   assertBossDetailSkeletons,
   bossAdjustMembers,
   bossBuffMembers,
+  bossConditionalSharedDetailFields,
   bossEncounterMembers,
   bossIndexFields,
   bossLocalizedDetailFields,
@@ -59,7 +60,7 @@ export interface IntegratedBoss {
 }
 
 /**
- * 按规则 nanoka-boss-reference/5 校验、复制和拆分单个 Boss 记录。无 I/O、默认值或语言回退。
+ * 按规则 nanoka-boss-reference/6 校验、复制和拆分单个 Boss 记录。无 I/O、默认值或语言回退。
  * 每个语言先独立校验；共享字段提取前比较全部已校验详情的结构骨架，字符串内容可以不同。
  * 来源校验失败抛出含来源位置的 BossIntegrationError，不返回部分整合结果。
  */
@@ -172,6 +173,31 @@ export function integrateBoss(input: IntegrateBossInput): IntegratedBoss {
     put(data, definition.output, records[0][definition.output])
     for (const record of records) delete record[definition.output]
   }
+  for (const key of Object.keys(bossConditionalSharedDetailFields).toSorted()) {
+    const definition = bossConditionalSharedDetailFields[key]!
+    const present = records.flatMap((record, index) =>
+      Object.hasOwn(record, definition.output) ? [index] : [],
+    )
+    if (present.length === 0) continue
+    if (present.length !== records.length)
+      failBoss(
+        at({ ...location, locale: locales[present[0]] }, key),
+        `共享字段只在部分语言提供（${present.map((index) => locales[index]).join("、")}）；严格共享要求各语言同有或全缺，单语言独有内容应显式登记为本地化字段`,
+      )
+    for (const index of records.keys())
+      if (
+        !equalJson(
+          records[index][definition.output],
+          records[0][definition.output],
+        )
+      )
+        failBoss(
+          at({ ...location, locale: locales[index] }, key),
+          `共享冲突（与 ${locales[0]} 的完整值不同）`,
+        )
+    put(data, definition.output, records[0][definition.output])
+    for (const record of records) delete record[definition.output]
+  }
   for (const key of Object.keys(bossSharedBlockFields).toSorted()) {
     const output = bossSharedBlockFields[key]!
     for (const index of records.keys())
@@ -201,7 +227,7 @@ function validateBossDetail(
   source: JsonObject,
   location: SourceLocation,
 ): JsonObject {
-  const namedFields: Readonly<Record<string, { output: string }>> = {
+  const requiredFields: Readonly<Record<string, { output: string }>> = {
     ...bossSharedDetailFields,
     ...Object.fromEntries(
       Object.entries(bossSharedBlockFields).map(([key, output]) => [
@@ -211,12 +237,17 @@ function validateBossDetail(
     ),
     ...bossLocalizedDetailFields,
   }
+  const namedFields: Readonly<Record<string, { output: string }>> = {
+    ...requiredFields,
+    ...bossConditionalSharedDetailFields,
+  }
   for (const key of Object.keys(namedFields).toSorted()) {
     const output = namedFields[key]!.output
     if (key !== output && Object.hasOwn(source, output))
       failBoss(at(location, output), `改名冲突：${key} → ${output}`)
-    if (!Object.hasOwn(source, key)) failBoss(at(location, key), "缺失必需字段")
   }
+  for (const key of Object.keys(requiredFields).toSorted())
+    if (!Object.hasOwn(source, key)) failBoss(at(location, key), "缺失必需字段")
   // 结构变体按实际字段识别：modes 与 zone 互斥，同时缺失或同时存在都按结构冲突失败。
   const hasModes = Object.hasOwn(source, "modes")
   const hasZone = Object.hasOwn(source, "zone")
@@ -228,6 +259,15 @@ function validateBossDetail(
   for (const key of Object.keys(source).toSorted()) {
     if (Object.hasOwn(bossSharedDetailFields, key)) {
       const definition = bossSharedDetailFields[key]!
+      put(
+        record,
+        definition.output,
+        validateField(source[key], definition.kind, at(location, key)),
+      )
+      continue
+    }
+    if (Object.hasOwn(bossConditionalSharedDetailFields, key)) {
+      const definition = bossConditionalSharedDetailFields[key]!
       put(
         record,
         definition.output,

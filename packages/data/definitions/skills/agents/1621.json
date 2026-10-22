@@ -85,8 +85,8 @@
     },
     {
       "actionId": "action:agent:1621:action:0002",
-      "branchId": "agent:1621:branch:assist-5",
-      "name": "支援技：还要加班？",
+      "branchId": "agent:1621:branch:assist-8",
+      "name": "支援突击：午夜守则",
       "rowName": "失衡倍率",
       "levelGroup": "assist",
       "skillCategory": "assist-follow-up",
@@ -94,15 +94,15 @@
       "skillTags": [],
       "source": {
         "path": "agents/1621/details.zh.json",
-        "pointer": "/skill/assist/description/4/param/2"
+        "pointer": "/skill/assist/description/7/param/1"
       },
       "descriptionSources": [
         {
           "path": "agents/1621/details.zh.json",
-          "pointer": "/skill/assist/description/0/desc"
+          "pointer": "/skill/assist/description/3/desc"
         }
       ],
-      "description": "发动[招架支援]后，再次点按  发动：\n洛克茜留在前场，对前方敌人发动打击，造成风属性伤害；\n招式发动时视为发动[普通攻击]；\n招式发动期间拥有无敌效果。",
+      "description": "发动[招架支援]后，点按  发动：\n向前方进行打击，造成风属性伤害。\n招式发动期间拥有无敌效果。",
       "parameterIds": ["1621017"],
       "sourceExpression": "{Skill:1621017, Prop:1002}",
       "damageCoefficient": null,

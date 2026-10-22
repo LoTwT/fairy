@@ -11,7 +11,7 @@
           "goalType": 2,
           "layerBuff": {
             "69014203": {
-              "desc": "· When an Agent's attack hits a Boss, the Boss gains 1 point of Dissonance. The same Agent can apply at most 1 point of Dissonance every 1s.\n· When a Boss accumulates 10 points of Dissonance, all Dissonance points are immediately removed and the Boss enters the Dissonant state. While in the Dissonant state, enemies take <color=#2BAD00>40% bonus Attribute Anomaly DMG</color> for 10s. Re-entering the Dissonant state resets the duration.\n· When an Agent successfully inflicts an Attribute Anomaly on a Boss, all Agents on the squad gain the Transmutation effect: <color=#2BAD00>DMG dealt increases by 15%</color> and Anomaly Proficiency <color=#2BAD00>increases by 20 points</color>. The Transmutation effect lasts 10s, and repeated triggers reset the duration.",
+              "desc": "· When an Agent's attack hits a Boss, the Boss gains 1 point of Dissonance. The same Agent can apply at most 1 point of Dissonance every 1s.\n· When a Boss accumulates 10 points of Dissonance, all Dissonance points are immediately removed and the Boss enters the Dissonant state. While in the Dissonant state, enemies take <color=#2BAD00>40% bonus Attribute Anomaly DMG</color> for 10s. Re-entering the Dissonant state resets the duration.\n· When an Agent successfully inflicts an Attribute Anomaly on a Boss, all Agents on the squad's <color=#2BAD00>DMG dealt increases by 15%</color> and Anomaly Proficiency <color=#2BAD00>increases by 20 points</color>. This effect lasts 10s, and repeated triggers reset the duration.",
               "title": ""
             },
             "69014204": {

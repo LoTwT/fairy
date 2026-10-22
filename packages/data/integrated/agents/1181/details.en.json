@@ -1482,8 +1482,8 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Thunder>Electric, Anomaly DMG dealer",
-    "Triggers Abloom DMG efficiently after Ultimate",
+    "<IconMap:Icon_GeneralBuff_Thunder>Electric, <IconMap:Icon_AvatarClass_Anomaly> Anomaly DMG dealer",
+    "Triggers <Term:3000002></Term> DMG efficiently after Ultimate",
     "Pulls enemies together within a certain range"
   ],
   "talent": {

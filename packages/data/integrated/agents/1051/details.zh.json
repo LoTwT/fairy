@@ -1788,9 +1788,9 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Ice>冰属性，烧血站场输出",
+    "<IconMap:Icon_GeneralBuff_Ice>冰属性，<IconMap:Icon_AvatarClass_Rupture>命破站场输出",
     "消耗生命值提升自身伤害",
-    "通过招式相撞提升技能伤害"
+    "通过格挡反击加速蓄力"
   ],
   "talent": {
     "1": {

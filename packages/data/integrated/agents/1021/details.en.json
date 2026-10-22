@@ -1547,9 +1547,9 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, on-field DMG dealer",
-    "Boosts DMG dealt with Dodge Counter",
-    "Nimble with high mobility"
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, <IconMap:Icon_AvatarClass_Attack> Attack on-field DMG dealer",
+    "Use Dodge Counters to attack enemies in a large area",
+    "Adept at dashing around and dealing quick DMG"
   ],
   "talent": {
     "1": {

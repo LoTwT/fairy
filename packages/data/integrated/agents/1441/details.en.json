@@ -2011,7 +2011,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Fire>Fire, HP-consuming on-field DMG dealer",
+    "<IconMap:Icon_GeneralBuff_Fire>Fire, <IconMap:Icon_AvatarClass_Rupture> Rupture on-field DMG dealer",
     "Consumes HP to deal Fire DMG"
   ],
   "talent": {

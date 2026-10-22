@@ -1563,7 +1563,7 @@
   "specialElementType": {},
   "strategy": [
     "07",
-    "<IconMap:Icon_GeneralBuff_Thunder>Electric, off-field Stun triggerer",
+    "<IconMap:Icon_GeneralBuff_Thunder>Electric, <IconMap:Icon_AvatarClass_Stun>off-field Stun",
     "Increases Stun DMG Multiplier",
     "High-Frequency synergy-based follow-up attacks"
   ],

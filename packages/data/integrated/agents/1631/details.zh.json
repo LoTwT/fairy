@@ -1,0 +1,1547 @@
+{
+  "camp": {
+    "7": "新艾利都治安局"
+  },
+  "elementType": {
+    "204": "风属性"
+  },
+  "extraLevel": {
+    "1": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "2": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "3": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "4": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "5": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    },
+    "6": {
+      "extra": {
+        "12101": {
+          "format": "{0:0.#}",
+          "name": "基础攻击力"
+        },
+        "21101": {
+          "format": "{0:0.#%}",
+          "name": "暴击伤害"
+        }
+      }
+    }
+  },
+  "fairyRecommend": {
+    "part4": {
+      "format": "{0:0.#%}",
+      "name": "暴击率"
+    },
+    "part5": {
+      "format": "{0:0.#%}",
+      "name": "暴击伤害"
+    },
+    "part6": {
+      "format": "{0:0.#%}",
+      "name": "穿透率"
+    },
+    "partSub": {
+      "format": "{0:0.#%}",
+      "name": "攻击力"
+    }
+  },
+  "hitType": {
+    "101": "斩击"
+  },
+  "id": 1631,
+  "locale": "zh",
+  "name": "赛维里安",
+  "navigation": {
+    "parameterIdsByGroup": {
+      "assist": [
+        "1631014",
+        "1631015",
+        "1631016",
+        "1631017",
+        "1631018",
+        "1631019"
+      ],
+      "basic": [
+        "1631001",
+        "1631002",
+        "1631003",
+        "1631004",
+        "1631005",
+        "1631006",
+        "1631020"
+      ],
+      "chain": ["1631012", "1631013"],
+      "dodge": ["1631010", "1631011"],
+      "special": ["1631007", "1631008", "1631009"]
+    },
+    "parameterRowsById": {
+      "1631001": [
+        "/skill/basic/description/3/param/0",
+        "/skill/basic/description/3/param/5"
+      ],
+      "1631002": [
+        "/skill/basic/description/3/param/1",
+        "/skill/basic/description/3/param/6"
+      ],
+      "1631003": [
+        "/skill/basic/description/3/param/2",
+        "/skill/basic/description/3/param/7"
+      ],
+      "1631004": [
+        "/skill/basic/description/3/param/3",
+        "/skill/basic/description/3/param/8"
+      ],
+      "1631005": [
+        "/skill/basic/description/4/param/0",
+        "/skill/basic/description/4/param/1"
+      ],
+      "1631006": [
+        "/skill/basic/description/5/param/0",
+        "/skill/basic/description/5/param/1"
+      ],
+      "1631007": [
+        "/skill/special/description/2/param/0",
+        "/skill/special/description/2/param/1"
+      ],
+      "1631008": [
+        "/skill/special/description/3/param/0",
+        "/skill/special/description/3/param/1"
+      ],
+      "1631009": [
+        "/skill/special/description/3/param/3",
+        "/skill/special/description/3/param/4"
+      ],
+      "1631010": [
+        "/skill/dodge/description/4/param/0",
+        "/skill/dodge/description/4/param/1"
+      ],
+      "1631011": [
+        "/skill/dodge/description/5/param/0",
+        "/skill/dodge/description/5/param/1"
+      ],
+      "1631012": [
+        "/skill/chain/description/2/param/0",
+        "/skill/chain/description/2/param/1"
+      ],
+      "1631013": [
+        "/skill/chain/description/3/param/0",
+        "/skill/chain/description/3/param/1"
+      ],
+      "1631014": [
+        "/skill/assist/description/4/param/0",
+        "/skill/assist/description/4/param/1"
+      ],
+      "1631015": ["/skill/assist/description/5/param/0"],
+      "1631016": ["/skill/assist/description/5/param/1"],
+      "1631017": ["/skill/assist/description/5/param/2"],
+      "1631018": [
+        "/skill/assist/description/6/param/0",
+        "/skill/assist/description/6/param/1"
+      ],
+      "1631019": [
+        "/skill/assist/description/7/param/0",
+        "/skill/assist/description/7/param/1"
+      ],
+      "1631020": [
+        "/skill/basic/description/3/param/4",
+        "/skill/basic/description/3/param/9"
+      ]
+    }
+  },
+  "partnerInfo": {
+    "birthday": "...",
+    "fullName": "...",
+    "gender": "男",
+    "impressionF": "...",
+    "impressionM": "...",
+    "impressions": ["...", "...", "..."],
+    "profileDesc": "...",
+    "stature": "...",
+    "trustLv": {
+      "1": "...",
+      "2": "",
+      "3": "...",
+      "4": ""
+    },
+    "unlockCondition": ["获得代理人", "...", "完成委托「安比的困扰」"]
+  },
+  "passive": {
+    "level": {
+      "1631501": {
+        "desc": [
+          "赛维里安的暴击伤害提升<color=#2BAD00>30%</color>，造成的伤害提升<color=#2BAD00>12.5%</color>，若队伍中存在其他风属性角色则伤害额外提升<color=#2BAD00>15%</color>；\n赛维里安在即将受到敌人攻击的瞬间发动<color=#FFFFFF>[普通攻击：疾锋]</color>时，可以闪避本次攻击，若通过前三段普攻闪避了本次攻击则自动发动<color=#FFFFFF>[普通攻击：烈旋]</color>，若是第四段普攻则提升本次普攻的伤害倍率和失衡倍率至与<color=#FFFFFF>[普通攻击：烈旋]</color>一致；\n赛维里安进入战场时可获得两层<Term:1000042></Term>，在勘域模式中此效果180秒内最多触发一次；\n赛维里安拥有<color=#FFFFFF>[烁影]</color>且不具有无敌效果时，若受到敌人非控制技攻击且未能主动闪避或招架此次攻击，赛维里安会消耗一层<color=#FFFFFF>[烁影]</color>自动闪避本次攻击并发动<color=#FFFFFF>[普通攻击：烈旋]</color>；\n赛维里安通过发动<color=#FFFFFF>[普通攻击：疾锋]</color>成功闪避敌人攻击，触发<color=#FFFFFF>[烁影]</color>自动闪避敌人攻击和直接闪避敌人攻击都视为<color=#FFFFFF>[极限闪避]</color>；\n<color=#FFFFFF>[烁影]</color>最多获取两层，若满层时再获取<color=#FFFFFF>[烁影]</color>，将获得一层<Term:1000043></Term>效果且下次的<color=#FFFFFF>[普通攻击：疾锋]</color>会被提升为<color=#FFFFFF>[普通攻击：烈旋]</color>；\n赛维里安每次极限闪避都能获得一层<color=#FFFFFF>[凭风]</color>效果，当赛维里安拥有<color=#FFFFFF>[凭风]</color>效果且处于接战状态下点按 <IconMap:Icon_Switch> 从后场切换至前场发动<color=#FFFFFF>[登场技]</color>；\n赛维里安通过固定招式命中敌人或触发极限闪避时，会获得<Term:1000041></Term>，<color=#FFFFFF>[流息]</color>上限为150点；\n当<color=#FFFFFF>[流息]</color>达到100点时，长按 <IconMap:Icon_Normal> 可以消耗100点<color=#FFFFFF>[流息]</color>发动<color=#FFFFFF>[普通攻击：苍风影猎]</color>。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>、<color=#FFFFFF>[击破]</color>或与自身阵营相同的角色时触发：\n赛维里安每拥有1%暴击率，会使自身的攻击力提升8.5点，最多计入100%暴击率。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：风回无终", "额外能力：最优编配"],
+        "potential": []
+      },
+      "1631502": {
+        "desc": [
+          "赛维里安的暴击伤害提升<color=#2BAD00>35%</color>，造成的伤害提升<color=#2BAD00>14.6%</color>，若队伍中存在其他风属性角色则伤害额外提升<color=#2BAD00>17.5%</color>；\n赛维里安在即将受到敌人攻击的瞬间发动<color=#FFFFFF>[普通攻击：疾锋]</color>时，可以闪避本次攻击，若通过前三段普攻闪避了本次攻击则自动发动<color=#FFFFFF>[普通攻击：烈旋]</color>，若是第四段普攻则提升本次普攻的伤害倍率和失衡倍率至与<color=#FFFFFF>[普通攻击：烈旋]</color>一致；\n赛维里安进入战场时可获得两层<Term:1000042></Term>，在勘域模式中此效果180秒内最多触发一次；\n赛维里安拥有<color=#FFFFFF>[烁影]</color>且不具有无敌效果时，若受到敌人非控制技攻击且未能主动闪避或招架此次攻击，赛维里安会消耗一层<color=#FFFFFF>[烁影]</color>自动闪避本次攻击并发动<color=#FFFFFF>[普通攻击：烈旋]</color>；\n赛维里安通过发动<color=#FFFFFF>[普通攻击：疾锋]</color>成功闪避敌人攻击，触发<color=#FFFFFF>[烁影]</color>自动闪避敌人攻击和直接闪避敌人攻击都视为<color=#FFFFFF>[极限闪避]</color>；\n<color=#FFFFFF>[烁影]</color>最多获取两层，若满层时再获取<color=#FFFFFF>[烁影]</color>，将获得一层<Term:1000043></Term>效果且下次的<color=#FFFFFF>[普通攻击：疾锋]</color>会被提升为<color=#FFFFFF>[普通攻击：烈旋]</color>；\n赛维里安每次极限闪避都能获得一层<color=#FFFFFF>[凭风]</color>效果，当赛维里安拥有<color=#FFFFFF>[凭风]</color>效果且处于接战状态下点按 <IconMap:Icon_Switch> 从后场切换至前场发动<color=#FFFFFF>[登场技]</color>；\n赛维里安通过固定招式命中敌人或触发极限闪避时，会获得<Term:1000041></Term>，<color=#FFFFFF>[流息]</color>上限为150点；\n当<color=#FFFFFF>[流息]</color>达到100点时，长按 <IconMap:Icon_Normal> 可以消耗100点<color=#FFFFFF>[流息]</color>发动<color=#FFFFFF>[普通攻击：苍风影猎]</color>。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>、<color=#FFFFFF>[击破]</color>或与自身阵营相同的角色时触发：\n赛维里安每拥有1%暴击率，会使自身的攻击力提升8.5点，最多计入100%暴击率。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：风回无终", "额外能力：最优编配"],
+        "potential": []
+      },
+      "1631503": {
+        "desc": [
+          "赛维里安的暴击伤害提升<color=#2BAD00>40%</color>，造成的伤害提升<color=#2BAD00>16.7%</color>，若队伍中存在其他风属性角色则伤害额外提升<color=#2BAD00>20%</color>；\n赛维里安在即将受到敌人攻击的瞬间发动<color=#FFFFFF>[普通攻击：疾锋]</color>时，可以闪避本次攻击，若通过前三段普攻闪避了本次攻击则自动发动<color=#FFFFFF>[普通攻击：烈旋]</color>，若是第四段普攻则提升本次普攻的伤害倍率和失衡倍率至与<color=#FFFFFF>[普通攻击：烈旋]</color>一致；\n赛维里安进入战场时可获得两层<Term:1000042></Term>，在勘域模式中此效果180秒内最多触发一次；\n赛维里安拥有<color=#FFFFFF>[烁影]</color>且不具有无敌效果时，若受到敌人非控制技攻击且未能主动闪避或招架此次攻击，赛维里安会消耗一层<color=#FFFFFF>[烁影]</color>自动闪避本次攻击并发动<color=#FFFFFF>[普通攻击：烈旋]</color>；\n赛维里安通过发动<color=#FFFFFF>[普通攻击：疾锋]</color>成功闪避敌人攻击，触发<color=#FFFFFF>[烁影]</color>自动闪避敌人攻击和直接闪避敌人攻击都视为<color=#FFFFFF>[极限闪避]</color>；\n<color=#FFFFFF>[烁影]</color>最多获取两层，若满层时再获取<color=#FFFFFF>[烁影]</color>，将获得一层<Term:1000043></Term>效果且下次的<color=#FFFFFF>[普通攻击：疾锋]</color>会被提升为<color=#FFFFFF>[普通攻击：烈旋]</color>；\n赛维里安每次极限闪避都能获得一层<color=#FFFFFF>[凭风]</color>效果，当赛维里安拥有<color=#FFFFFF>[凭风]</color>效果且处于接战状态下点按 <IconMap:Icon_Switch> 从后场切换至前场发动<color=#FFFFFF>[登场技]</color>；\n赛维里安通过固定招式命中敌人或触发极限闪避时，会获得<Term:1000041></Term>，<color=#FFFFFF>[流息]</color>上限为150点；\n当<color=#FFFFFF>[流息]</color>达到100点时，长按 <IconMap:Icon_Normal> 可以消耗100点<color=#FFFFFF>[流息]</color>发动<color=#FFFFFF>[普通攻击：苍风影猎]</color>。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>、<color=#FFFFFF>[击破]</color>或与自身阵营相同的角色时触发：\n赛维里安每拥有1%暴击率，会使自身的攻击力提升8.5点，最多计入100%暴击率。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：风回无终", "额外能力：最优编配"],
+        "potential": []
+      },
+      "1631504": {
+        "desc": [
+          "赛维里安的暴击伤害提升<color=#2BAD00>45%</color>，造成的伤害提升<color=#2BAD00>18.8%</color>，若队伍中存在其他风属性角色则伤害额外提升<color=#2BAD00>22.5%</color>；\n赛维里安在即将受到敌人攻击的瞬间发动<color=#FFFFFF>[普通攻击：疾锋]</color>时，可以闪避本次攻击，若通过前三段普攻闪避了本次攻击则自动发动<color=#FFFFFF>[普通攻击：烈旋]</color>，若是第四段普攻则提升本次普攻的伤害倍率和失衡倍率至与<color=#FFFFFF>[普通攻击：烈旋]</color>一致；\n赛维里安进入战场时可获得两层<Term:1000042></Term>，在勘域模式中此效果180秒内最多触发一次；\n赛维里安拥有<color=#FFFFFF>[烁影]</color>且不具有无敌效果时，若受到敌人非控制技攻击且未能主动闪避或招架此次攻击，赛维里安会消耗一层<color=#FFFFFF>[烁影]</color>自动闪避本次攻击并发动<color=#FFFFFF>[普通攻击：烈旋]</color>；\n赛维里安通过发动<color=#FFFFFF>[普通攻击：疾锋]</color>成功闪避敌人攻击，触发<color=#FFFFFF>[烁影]</color>自动闪避敌人攻击和直接闪避敌人攻击都视为<color=#FFFFFF>[极限闪避]</color>；\n<color=#FFFFFF>[烁影]</color>最多获取两层，若满层时再获取<color=#FFFFFF>[烁影]</color>，将获得一层<Term:1000043></Term>效果且下次的<color=#FFFFFF>[普通攻击：疾锋]</color>会被提升为<color=#FFFFFF>[普通攻击：烈旋]</color>；\n赛维里安每次极限闪避都能获得一层<color=#FFFFFF>[凭风]</color>效果，当赛维里安拥有<color=#FFFFFF>[凭风]</color>效果且处于接战状态下点按 <IconMap:Icon_Switch> 从后场切换至前场发动<color=#FFFFFF>[登场技]</color>；\n赛维里安通过固定招式命中敌人或触发极限闪避时，会获得<Term:1000041></Term>，<color=#FFFFFF>[流息]</color>上限为150点；\n当<color=#FFFFFF>[流息]</color>达到100点时，长按 <IconMap:Icon_Normal> 可以消耗100点<color=#FFFFFF>[流息]</color>发动<color=#FFFFFF>[普通攻击：苍风影猎]</color>。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>、<color=#FFFFFF>[击破]</color>或与自身阵营相同的角色时触发：\n赛维里安每拥有1%暴击率，会使自身的攻击力提升8.5点，最多计入100%暴击率。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：风回无终", "额外能力：最优编配"],
+        "potential": []
+      },
+      "1631505": {
+        "desc": [
+          "赛维里安的暴击伤害提升<color=#2BAD00>50%</color>，造成的伤害提升<color=#2BAD00>20.8%</color>，若队伍中存在其他风属性角色则伤害额外提升<color=#2BAD00>25%</color>；\n赛维里安在即将受到敌人攻击的瞬间发动<color=#FFFFFF>[普通攻击：疾锋]</color>时，可以闪避本次攻击，若通过前三段普攻闪避了本次攻击则自动发动<color=#FFFFFF>[普通攻击：烈旋]</color>，若是第四段普攻则提升本次普攻的伤害倍率和失衡倍率至与<color=#FFFFFF>[普通攻击：烈旋]</color>一致；\n赛维里安进入战场时可获得两层<Term:1000042></Term>，在勘域模式中此效果180秒内最多触发一次；\n赛维里安拥有<color=#FFFFFF>[烁影]</color>且不具有无敌效果时，若受到敌人非控制技攻击且未能主动闪避或招架此次攻击，赛维里安会消耗一层<color=#FFFFFF>[烁影]</color>自动闪避本次攻击并发动<color=#FFFFFF>[普通攻击：烈旋]</color>；\n赛维里安通过发动<color=#FFFFFF>[普通攻击：疾锋]</color>成功闪避敌人攻击，触发<color=#FFFFFF>[烁影]</color>自动闪避敌人攻击和直接闪避敌人攻击都视为<color=#FFFFFF>[极限闪避]</color>；\n<color=#FFFFFF>[烁影]</color>最多获取两层，若满层时再获取<color=#FFFFFF>[烁影]</color>，将获得一层<Term:1000043></Term>效果且下次的<color=#FFFFFF>[普通攻击：疾锋]</color>会被提升为<color=#FFFFFF>[普通攻击：烈旋]</color>；\n赛维里安每次极限闪避都能获得一层<color=#FFFFFF>[凭风]</color>效果，当赛维里安拥有<color=#FFFFFF>[凭风]</color>效果且处于接战状态下点按 <IconMap:Icon_Switch> 从后场切换至前场发动<color=#FFFFFF>[登场技]</color>；\n赛维里安通过固定招式命中敌人或触发极限闪避时，会获得<Term:1000041></Term>，<color=#FFFFFF>[流息]</color>上限为150点；\n当<color=#FFFFFF>[流息]</color>达到100点时，长按 <IconMap:Icon_Normal> 可以消耗100点<color=#FFFFFF>[流息]</color>发动<color=#FFFFFF>[普通攻击：苍风影猎]</color>。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>、<color=#FFFFFF>[击破]</color>或与自身阵营相同的角色时触发：\n赛维里安每拥有1%暴击率，会使自身的攻击力提升8.5点，最多计入100%暴击率。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：风回无终", "额外能力：最优编配"],
+        "potential": []
+      },
+      "1631506": {
+        "desc": [
+          "赛维里安的暴击伤害提升<color=#2BAD00>55%</color>，造成的伤害提升<color=#2BAD00>22.9%</color>，若队伍中存在其他风属性角色则伤害额外提升<color=#2BAD00>27.5%</color>；\n赛维里安在即将受到敌人攻击的瞬间发动<color=#FFFFFF>[普通攻击：疾锋]</color>时，可以闪避本次攻击，若通过前三段普攻闪避了本次攻击则自动发动<color=#FFFFFF>[普通攻击：烈旋]</color>，若是第四段普攻则提升本次普攻的伤害倍率和失衡倍率至与<color=#FFFFFF>[普通攻击：烈旋]</color>一致；\n赛维里安进入战场时可获得两层<Term:1000042></Term>，在勘域模式中此效果180秒内最多触发一次；\n赛维里安拥有<color=#FFFFFF>[烁影]</color>且不具有无敌效果时，若受到敌人非控制技攻击且未能主动闪避或招架此次攻击，赛维里安会消耗一层<color=#FFFFFF>[烁影]</color>自动闪避本次攻击并发动<color=#FFFFFF>[普通攻击：烈旋]</color>；\n赛维里安通过发动<color=#FFFFFF>[普通攻击：疾锋]</color>成功闪避敌人攻击，触发<color=#FFFFFF>[烁影]</color>自动闪避敌人攻击和直接闪避敌人攻击都视为<color=#FFFFFF>[极限闪避]</color>；\n<color=#FFFFFF>[烁影]</color>最多获取两层，若满层时再获取<color=#FFFFFF>[烁影]</color>，将获得一层<Term:1000043></Term>效果且下次的<color=#FFFFFF>[普通攻击：疾锋]</color>会被提升为<color=#FFFFFF>[普通攻击：烈旋]</color>；\n赛维里安每次极限闪避都能获得一层<color=#FFFFFF>[凭风]</color>效果，当赛维里安拥有<color=#FFFFFF>[凭风]</color>效果且处于接战状态下点按 <IconMap:Icon_Switch> 从后场切换至前场发动<color=#FFFFFF>[登场技]</color>；\n赛维里安通过固定招式命中敌人或触发极限闪避时，会获得<Term:1000041></Term>，<color=#FFFFFF>[流息]</color>上限为150点；\n当<color=#FFFFFF>[流息]</color>达到100点时，长按 <IconMap:Icon_Normal> 可以消耗100点<color=#FFFFFF>[流息]</color>发动<color=#FFFFFF>[普通攻击：苍风影猎]</color>。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>、<color=#FFFFFF>[击破]</color>或与自身阵营相同的角色时触发：\n赛维里安每拥有1%暴击率，会使自身的攻击力提升8.5点，最多计入100%暴击率。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：风回无终", "额外能力：最优编配"],
+        "potential": []
+      },
+      "1631507": {
+        "desc": [
+          "赛维里安的暴击伤害提升<color=#2BAD00>60%</color>，造成的伤害提升<color=#2BAD00>25%</color>，若队伍中存在其他风属性角色则伤害额外提升<color=#2BAD00>30%</color>；\n赛维里安在即将受到敌人攻击的瞬间发动<color=#FFFFFF>[普通攻击：疾锋]</color>时，可以闪避本次攻击，若通过前三段普攻闪避了本次攻击则自动发动<color=#FFFFFF>[普通攻击：烈旋]</color>，若是第四段普攻则提升本次普攻的伤害倍率和失衡倍率至与<color=#FFFFFF>[普通攻击：烈旋]</color>一致；\n赛维里安进入战场时可获得两层<Term:1000042></Term>，在勘域模式中此效果180秒内最多触发一次；\n赛维里安拥有<color=#FFFFFF>[烁影]</color>且不具有无敌效果时，若受到敌人非控制技攻击且未能主动闪避或招架此次攻击，赛维里安会消耗一层<color=#FFFFFF>[烁影]</color>自动闪避本次攻击并发动<color=#FFFFFF>[普通攻击：烈旋]</color>；\n赛维里安通过发动<color=#FFFFFF>[普通攻击：疾锋]</color>成功闪避敌人攻击，触发<color=#FFFFFF>[烁影]</color>自动闪避敌人攻击和直接闪避敌人攻击都视为<color=#FFFFFF>[极限闪避]</color>；\n<color=#FFFFFF>[烁影]</color>最多获取两层，若满层时再获取<color=#FFFFFF>[烁影]</color>，将获得一层<Term:1000043></Term>效果且下次的<color=#FFFFFF>[普通攻击：疾锋]</color>会被提升为<color=#FFFFFF>[普通攻击：烈旋]</color>；\n赛维里安每次极限闪避都能获得一层<color=#FFFFFF>[凭风]</color>效果，当赛维里安拥有<color=#FFFFFF>[凭风]</color>效果且处于接战状态下点按 <IconMap:Icon_Switch> 从后场切换至前场发动<color=#FFFFFF>[登场技]</color>；\n赛维里安通过固定招式命中敌人或触发极限闪避时，会获得<Term:1000041></Term>，<color=#FFFFFF>[流息]</color>上限为150点；\n当<color=#FFFFFF>[流息]</color>达到100点时，长按 <IconMap:Icon_Normal> 可以消耗100点<color=#FFFFFF>[流息]</color>发动<color=#FFFFFF>[普通攻击：苍风影猎]</color>。",
+          "队伍中存在<color=#FFFFFF>[支援]</color>、<color=#FFFFFF>[击破]</color>或与自身阵营相同的角色时触发：\n赛维里安每拥有1%暴击率，会使自身的攻击力提升8.5点，最多计入100%暴击率。"
+        ],
+        "extraProperty": {},
+        "name": ["核心被动：风回无终", "额外能力：最优编配"],
+        "potential": []
+      }
+    }
+  },
+  "potentialDetail": {},
+  "skill": {
+    "assist": {
+      "description": [
+        {
+          "desc": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n快速突进，对前方敌人发动爪击和斩击，造成<color=#A6C5FD>风属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "快速支援：火线调令",
+          "potential": []
+        },
+        {
+          "desc": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+          "name": "招架支援：寻衅禁止",
+          "potential": []
+        },
+        {
+          "desc": "发动<color=#FFFFFF>[招架支援]</color>后，点按 <IconMap:Icon_Normal> 发动：\n依次对敌人发动斩击，爪击和炮击，造成<color=#A6C5FD>风属性伤害</color>；\n招式发动期间拥有无敌效果。",
+          "name": "支援突击：以戈止戈",
+          "potential": []
+        },
+        {
+          "desc": "当赛维里安拥有<Term:1000043></Term>效果且处于接战状态下点按 <IconMap:Icon_Switch> 从后场切换至前场发动：\n对前方敌人发动大力斩击，造成<color=#A6C5FD>风属性伤害</color>；\n招式发动时视为发动<color=#FFFFFF>[快速支援]</color>；\n招式视为非重击；\n招式发动期间拥有无敌效果。",
+          "name": "登场技：清场时刻",
+          "potential": []
+        },
+        {
+          "name": "快速支援：火线调令",
+          "param": [
+            {
+              "desc": "{Skill:1631014, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1631014": {
+                  "attackData": [],
+                  "attributeInfliction": 4584,
+                  "damagePercentage": 6420,
+                  "damagePercentageGrowth": 590,
+                  "etherPurify": 4585,
+                  "feverRecovery": 126225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 590,
+                  "main": 6420,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16510,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5050,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631014, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1631014": {
+                  "attackData": [],
+                  "attributeInfliction": 4584,
+                  "damagePercentage": 6420,
+                  "damagePercentageGrowth": 590,
+                  "etherPurify": 4585,
+                  "feverRecovery": 126225,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 5050,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 16510,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 5050,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "招架支援：寻衅禁止",
+          "param": [
+            {
+              "desc": "{Skill:1631015, Prop:1002}",
+              "name": "轻招架失衡倍率",
+              "param": {
+                "1631015": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 36664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1240,
+                  "main": 27130,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 27130,
+                  "stunRatioGrowth": 1240
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631016, Prop:1002}",
+              "name": "重招架失衡倍率",
+              "param": {
+                "1631016": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 41664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1560,
+                  "main": 34280,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34280,
+                  "stunRatioGrowth": 1560
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631017, Prop:1002}",
+              "name": "连续招架失衡倍率",
+              "param": {
+                "1631017": {
+                  "attackData": [],
+                  "attributeInfliction": 0,
+                  "damagePercentage": 0,
+                  "damagePercentageGrowth": 0,
+                  "etherPurify": 11664,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 760,
+                  "main": 16680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 16680,
+                  "stunRatioGrowth": 760
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "支援突击：以戈止戈",
+          "param": [
+            {
+              "desc": "{Skill:1631018, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1631018": {
+                  "attackData": [],
+                  "attributeInfliction": 24122,
+                  "damagePercentage": 36470,
+                  "damagePercentageGrowth": 3320,
+                  "etherPurify": 10667,
+                  "feverRecovery": 821975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3320,
+                  "main": 36470,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24430,
+                  "stunRatioGrowth": 1120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631018, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1631018": {
+                  "attackData": [],
+                  "attributeInfliction": 24122,
+                  "damagePercentage": 36470,
+                  "damagePercentageGrowth": 3320,
+                  "etherPurify": 10667,
+                  "feverRecovery": 821975,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1120,
+                  "main": 24430,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24430,
+                  "stunRatioGrowth": 1120
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "登场技：清场时刻",
+          "param": [
+            {
+              "desc": "{Skill:1631019, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1631019": {
+                  "attackData": [],
+                  "attributeInfliction": 11003,
+                  "damagePercentage": 15410,
+                  "damagePercentageGrowth": 1410,
+                  "etherPurify": 11004,
+                  "feverRecovery": 302775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1410,
+                  "main": 15410,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6060,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631019, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1631019": {
+                  "attackData": [],
+                  "attributeInfliction": 11003,
+                  "damagePercentage": 15410,
+                  "damagePercentageGrowth": 1410,
+                  "etherPurify": 11004,
+                  "feverRecovery": 302775,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 280,
+                  "main": 6060,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 39620,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 6060,
+                  "stunRatioGrowth": 280
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "basic": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Normal> 发动：\n向前方进行至多四段攻击，造成<color=#A6C5FD>风属性伤害</color>；\n第四段攻击命中敌人后，累积20点<Term:1000041></Term>；\n第四段攻击发动瞬间具备闪避判定，如果成功闪避敌人攻击，本次普攻的伤害倍率和失衡倍率提升至与<color=#FFFFFF>[普通攻击：烈旋]</color>一致，并额外累积15点<color=#FFFFFF>[流息]</color>；\n第四段攻击发动期间拥有无敌效果；\n赛维里安在<color=#FFFFFF>[普通攻击]</color>期间发动<color=#FFFFFF>[冲刺攻击]</color>、<color=#FFFFFF>[闪避反击]</color>和<color=#FFFFFF>[闪避：写意]</color>时，不会打断<color=#FFFFFF>[普通攻击]</color>的连击段数。",
+          "name": "普通攻击：疾锋",
+          "potential": []
+        },
+        {
+          "desc": "前三段普通攻击发动的瞬间受到敌人攻击或自身存在<color=#FFFFFF>[烁影]</color>效果且不拥有无敌效果时受到敌人非控制技攻击会自动发动：\n向前方进行突进，对前方范围的敌人造成大量<color=#A6C5FD>风属性伤害</color>；\n招式发动时累积15点<Term:1000041></Term>，命中敌人后额外累积20点<color=#FFFFFF>[流息]</color>；\n招式发动时保持长按 <IconMap:Icon_Normal>，可以快速发动<color=#FFFFFF>[普通攻击：苍风影猎]</color>且<color=#FFFFFF>[普通攻击：苍风影猎]</color>的最后一击释放时会累积20点<color=#FFFFFF>[流息]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "普通攻击：烈旋",
+          "potential": []
+        },
+        {
+          "desc": "<Term:1000041></Term>足够时，消耗100点<color=#FFFFFF>[流息]</color>，长按 <IconMap:Icon_Normal> 发动：\n先向后闪避并蓄势，随后在站场中不断穿梭并不断发动斩击，对前方范围的敌人造成大量<color=#A6C5FD>风属性伤害</color>；\n向后闪避期间，具备闪避判定，如果成功闪避敌人攻击，会触发<color=#FFFFFF>[极限视域]</color>，并累积15点<color=#FFFFFF>[流息]</color>；\n招式发动期间拥有无敌效果。",
+          "name": "普通攻击：苍风影猎",
+          "potential": []
+        },
+        {
+          "name": "普通攻击：疾锋",
+          "param": [
+            {
+              "desc": "{Skill:1631001, Prop:1001}",
+              "name": "一段伤害倍率",
+              "param": {
+                "1631001": {
+                  "attackData": [],
+                  "attributeInfliction": 3266,
+                  "damagePercentage": 6540,
+                  "damagePercentageGrowth": 600,
+                  "etherPurify": 3267,
+                  "feverRecovery": 109175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 600,
+                  "main": 6540,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11770,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2680,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631002, Prop:1001}",
+              "name": "二段伤害倍率",
+              "param": {
+                "1631002": {
+                  "attackData": [],
+                  "attributeInfliction": 5663,
+                  "damagePercentage": 10660,
+                  "damagePercentageGrowth": 970,
+                  "etherPurify": 5664,
+                  "feverRecovery": 167475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 970,
+                  "main": 10660,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4960,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631003, Prop:1001}",
+              "name": "三段伤害倍率",
+              "param": {
+                "1631003": {
+                  "attackData": [],
+                  "attributeInfliction": 9813,
+                  "damagePercentage": 17800,
+                  "damagePercentageGrowth": 1620,
+                  "etherPurify": 9814,
+                  "feverRecovery": 267850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1620,
+                  "main": 17800,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 35330,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8900,
+                  "stunRatioGrowth": 410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631004, Prop:1001}",
+              "name": "四段伤害倍率",
+              "param": {
+                "1631004": {
+                  "attackData": [],
+                  "attributeInfliction": 13752,
+                  "damagePercentage": 24160,
+                  "damagePercentageGrowth": 2200,
+                  "etherPurify": 13753,
+                  "feverRecovery": 349800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2200,
+                  "main": 24160,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 49510,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12840,
+                  "stunRatioGrowth": 590
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631020, Prop:1001}",
+              "name": "四段极限闪避成功时伤害倍率",
+              "param": {
+                "1631020": {
+                  "attackData": [],
+                  "attributeInfliction": 12169,
+                  "damagePercentage": 33820,
+                  "damagePercentageGrowth": 3080,
+                  "etherPurify": 12170,
+                  "feverRecovery": 334675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3080,
+                  "main": 33820,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13390,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631001, Prop:1002}",
+              "name": "一段失衡倍率",
+              "param": {
+                "1631001": {
+                  "attackData": [],
+                  "attributeInfliction": 3266,
+                  "damagePercentage": 6540,
+                  "damagePercentageGrowth": 600,
+                  "etherPurify": 3267,
+                  "feverRecovery": 109175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 130,
+                  "main": 2680,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 11770,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 2680,
+                  "stunRatioGrowth": 130
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631002, Prop:1002}",
+              "name": "二段失衡倍率",
+              "param": {
+                "1631002": {
+                  "attackData": [],
+                  "attributeInfliction": 5663,
+                  "damagePercentage": 10660,
+                  "damagePercentageGrowth": 970,
+                  "etherPurify": 5664,
+                  "feverRecovery": 167475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 230,
+                  "main": 4960,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 20400,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4960,
+                  "stunRatioGrowth": 230
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631003, Prop:1002}",
+              "name": "三段失衡倍率",
+              "param": {
+                "1631003": {
+                  "attackData": [],
+                  "attributeInfliction": 9813,
+                  "damagePercentage": 17800,
+                  "damagePercentageGrowth": 1620,
+                  "etherPurify": 9814,
+                  "feverRecovery": 267850,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 410,
+                  "main": 8900,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 35330,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 8900,
+                  "stunRatioGrowth": 410
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631004, Prop:1002}",
+              "name": "四段失衡倍率",
+              "param": {
+                "1631004": {
+                  "attackData": [],
+                  "attributeInfliction": 13752,
+                  "damagePercentage": 24160,
+                  "damagePercentageGrowth": 2200,
+                  "etherPurify": 13753,
+                  "feverRecovery": 349800,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 590,
+                  "main": 12840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 49510,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 12840,
+                  "stunRatioGrowth": 590
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631020, Prop:1002}",
+              "name": "四段极限闪避成功时失衡倍率",
+              "param": {
+                "1631020": {
+                  "attackData": [],
+                  "attributeInfliction": 12169,
+                  "damagePercentage": 33820,
+                  "damagePercentageGrowth": 3080,
+                  "etherPurify": 12170,
+                  "feverRecovery": 334675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 610,
+                  "main": 13390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13390,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：烈旋",
+          "param": [
+            {
+              "desc": "{Skill:1631005, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1631005": {
+                  "attackData": [],
+                  "attributeInfliction": 12169,
+                  "damagePercentage": 33820,
+                  "damagePercentageGrowth": 3080,
+                  "etherPurify": 12170,
+                  "feverRecovery": 334675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3080,
+                  "main": 33820,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13390,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631005, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1631005": {
+                  "attackData": [],
+                  "attributeInfliction": 12169,
+                  "damagePercentage": 33820,
+                  "damagePercentageGrowth": 3080,
+                  "etherPurify": 12170,
+                  "feverRecovery": 334675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 610,
+                  "main": 13390,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 43820,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 13390,
+                  "stunRatioGrowth": 610
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "普通攻击：苍风影猎",
+          "param": [
+            {
+              "desc": "{Skill:1631006, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1631006": {
+                  "attackData": [],
+                  "attributeInfliction": 28330,
+                  "damagePercentage": 202770,
+                  "damagePercentageGrowth": 18440,
+                  "etherPurify": 28331,
+                  "feverRecovery": 779350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 18440,
+                  "main": 202770,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 51000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31170,
+                  "stunRatioGrowth": 1420
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631006, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1631006": {
+                  "attackData": [],
+                  "attributeInfliction": 28330,
+                  "damagePercentage": 202770,
+                  "damagePercentageGrowth": 18440,
+                  "etherPurify": 28331,
+                  "feverRecovery": 779350,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1420,
+                  "main": 31170,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 51000,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 31170,
+                  "stunRatioGrowth": 1420
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "chain": {
+      "description": [
+        {
+          "desc": "触发<color=#FFFFFF>[连携技]</color>时，选择对应角色发动：\n向前方发动多段攻击，造成大量<color=#A6C5FD>风属性伤害</color>；\n招式发动后，累积35点<Term:1000041></Term>；\n招式发动期间拥有无敌效果。",
+          "name": "连携技：冽刃收割",
+          "potential": []
+        },
+        {
+          "desc": "喧响等级达到<color=#FFFFFF>[极]</color>时，点按 <IconMap:Icon_UltimateReady> 发动：\n连续发动多次快速斩击，造成大量<color=#A6C5FD>风属性伤害</color>；\n招式发动后，累积100点<Term:1000041></Term>；\n招式发动期间拥有无敌效果。",
+          "name": "终结技：戮灭的风灾",
+          "potential": []
+        },
+        {
+          "name": "连携技：冽刃收割",
+          "param": [
+            {
+              "desc": "{Skill:1631012, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1631012": {
+                  "attackData": [],
+                  "attributeInfliction": 42286,
+                  "damagePercentage": 87140,
+                  "damagePercentageGrowth": 7930,
+                  "etherPurify": 22337,
+                  "feverRecovery": 2443100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 7930,
+                  "main": 87140,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24580,
+                  "stunRatioGrowth": 1120
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631012, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1631012": {
+                  "attackData": [],
+                  "attributeInfliction": 42286,
+                  "damagePercentage": 87140,
+                  "damagePercentageGrowth": 7930,
+                  "etherPurify": 22337,
+                  "feverRecovery": 2443100,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1120,
+                  "main": 24580,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 24580,
+                  "stunRatioGrowth": 1120
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "终结技：戮灭的风灾",
+          "param": [
+            {
+              "desc": "{Skill:1631013, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1631013": {
+                  "attackData": [],
+                  "attributeInfliction": 31666,
+                  "damagePercentage": 267640,
+                  "damagePercentageGrowth": 24340,
+                  "etherPurify": 81667,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 24340,
+                  "main": 267640,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34840,
+                  "stunRatioGrowth": 1590
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631013, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1631013": {
+                  "attackData": [],
+                  "attributeInfliction": 31666,
+                  "damagePercentage": 267640,
+                  "damagePercentageGrowth": 24340,
+                  "etherPurify": 81667,
+                  "feverRecovery": 0,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1590,
+                  "main": 34840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 34840,
+                  "stunRatioGrowth": 1590
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "dodge": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Evade> 发动：\n快速的冲刺闪避；\n通过<color=#FFFFFF>[闪避：飘折]</color>触发<color=#FFFFFF>[极限闪避]</color>时，累积15点<Term:1000041></Term>，此效果0.5秒内最多触发一次；\n招式发动期间拥有无敌效果。",
+          "name": "闪避：飘折",
+          "potential": []
+        },
+        {
+          "desc": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n向前方进行攻击，造成<color=#A6C5FD>风属性伤害</color>。",
+          "name": "冲刺攻击：凛袭",
+          "potential": []
+        },
+        {
+          "desc": "通过<color=#FFFFFF>[闪避：飘折]</color>触发<color=#FFFFFF>[极限闪避]</color>时，点按 <IconMap:Icon_Normal> 发动：\n向前方发动快速斩击，造成<color=#A6C5FD>风属性伤害</color>；\n若通过<color=#FFFFFF>[闪避：飘折]</color>触发<color=#FFFFFF>[极限闪避]</color>瞬间切入后台，会自动发动本招式；\n招式发动期间拥有无敌效果。",
+          "name": "闪避反击：梢杀",
+          "potential": []
+        },
+        {
+          "desc": "后闪后，持续长按<IconMap:Icon_Evade> 发动：\n向敌人发起挑衅。",
+          "name": "闪避：写意",
+          "potential": []
+        },
+        {
+          "name": "冲刺攻击：凛袭",
+          "param": [
+            {
+              "desc": "{Skill:1631010, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1631010": {
+                  "attackData": [],
+                  "attributeInfliction": 3834,
+                  "damagePercentage": 10740,
+                  "damagePercentageGrowth": 980,
+                  "etherPurify": 3835,
+                  "feverRecovery": 105600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 980,
+                  "main": 10740,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4220,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631010, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1631010": {
+                  "attackData": [],
+                  "attributeInfliction": 3834,
+                  "damagePercentage": 10740,
+                  "damagePercentageGrowth": 980,
+                  "etherPurify": 3835,
+                  "feverRecovery": 105600,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 200,
+                  "main": 4220,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 13810,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4220,
+                  "stunRatioGrowth": 200
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "闪避反击：梢杀",
+          "param": [
+            {
+              "desc": "{Skill:1631011, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1631011": {
+                  "attackData": [],
+                  "attributeInfliction": 9169,
+                  "damagePercentage": 30690,
+                  "damagePercentageGrowth": 2790,
+                  "etherPurify": 24170,
+                  "feverRecovery": 252175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 2790,
+                  "main": 30690,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33020,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21090,
+                  "stunRatioGrowth": 960
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631011, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1631011": {
+                  "attackData": [],
+                  "attributeInfliction": 9169,
+                  "damagePercentage": 30690,
+                  "damagePercentageGrowth": 2790,
+                  "etherPurify": 24170,
+                  "feverRecovery": 252175,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 960,
+                  "main": 21090,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 33020,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 21090,
+                  "stunRatioGrowth": 960
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    },
+    "special": {
+      "description": [
+        {
+          "desc": "点按 <IconMap:Icon_Special> 发动：\n向前方发动斩击和刺击，造成<color=#A6C5FD>风属性伤害</color>。",
+          "name": "特殊技：瞬风斩破",
+          "potential": []
+        },
+        {
+          "desc": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n向前发动斩击、爪击和炮击的组合技，对敌人造成大量<color=#A6C5FD>风属性伤害</color>，并获得一层<Term:1000042></Term>；\n长按 <IconMap:Icon_SpecialReady> 可以在炮击前持续消耗能量不断发动风刃对敌人造成<color=#A6C5FD>风属性伤害</color>；\n能量消耗达最大时，额外获得一层<color=#FFFFFF>[烁影]</color>;\n招式发动期间拥有无敌效果。",
+          "name": "强化特殊技：瞬风裂毁",
+          "potential": []
+        },
+        {
+          "name": "特殊技：瞬风斩破",
+          "param": [
+            {
+              "desc": "{Skill:1631007, Prop:1001}",
+              "name": "伤害倍率",
+              "param": {
+                "1631007": {
+                  "attackData": [],
+                  "attributeInfliction": 4166,
+                  "damagePercentage": 5840,
+                  "damagePercentageGrowth": 540,
+                  "etherPurify": 4167,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 540,
+                  "main": 5840,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4590,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631007, Prop:1002}",
+              "name": "失衡倍率",
+              "param": {
+                "1631007": {
+                  "attackData": [],
+                  "attributeInfliction": 4166,
+                  "damagePercentage": 5840,
+                  "damagePercentageGrowth": 540,
+                  "etherPurify": 4167,
+                  "feverRecovery": 114675,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 210,
+                  "main": 4590,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 4590,
+                  "stunRatioGrowth": 210
+                }
+              },
+              "potential": []
+            }
+          ],
+          "potential": []
+        },
+        {
+          "name": "强化特殊技：瞬风裂毁",
+          "param": [
+            {
+              "desc": "{Skill:1631008, Prop:1001}",
+              "name": "组合技伤害倍率",
+              "param": {
+                "1631008": {
+                  "attackData": [],
+                  "attributeInfliction": 36998,
+                  "damagePercentage": 56600,
+                  "damagePercentageGrowth": 5150,
+                  "etherPurify": 13004,
+                  "feverRecovery": 1300475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 5150,
+                  "main": 56600,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 36930,
+                  "stunRatioGrowth": 1680
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631008, Prop:1002}",
+              "name": "组合技失衡倍率",
+              "param": {
+                "1631008": {
+                  "attackData": [],
+                  "attributeInfliction": 36998,
+                  "damagePercentage": 56600,
+                  "damagePercentageGrowth": 5150,
+                  "etherPurify": 13004,
+                  "feverRecovery": 1300475,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1680,
+                  "main": 36930,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 36930,
+                  "stunRatioGrowth": 1680
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40点",
+              "name": "组合技能量消耗",
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631009, Prop:1001}",
+              "name": "风刃最大伤害倍率",
+              "param": {
+                "1631009": {
+                  "attackData": [],
+                  "attributeInfliction": 26194,
+                  "damagePercentage": 40920,
+                  "damagePercentageGrowth": 3720,
+                  "etherPurify": 5000,
+                  "feverRecovery": 970200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 3720,
+                  "main": 40920,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25490,
+                  "stunRatioGrowth": 1160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "{Skill:1631009, Prop:1002}",
+              "name": "风刃最大失衡倍率",
+              "param": {
+                "1631009": {
+                  "attackData": [],
+                  "attributeInfliction": 26194,
+                  "damagePercentage": 40920,
+                  "damagePercentageGrowth": 3720,
+                  "etherPurify": 5000,
+                  "feverRecovery": 970200,
+                  "feverRecoveryGrowth": 0,
+                  "format": "%",
+                  "growth": 1160,
+                  "main": 25490,
+                  "rpRecovery": 0,
+                  "rpRecoveryGrowth": 0,
+                  "spConsume": 0,
+                  "spRecovery": 0,
+                  "spRecoveryGrowth": 0,
+                  "stunRatio": 25490,
+                  "stunRatioGrowth": 1160
+                }
+              },
+              "potential": []
+            },
+            {
+              "desc": "40点",
+              "name": "风刃最大能量消耗",
+              "potential": []
+            }
+          ],
+          "potential": []
+        }
+      ]
+    }
+  },
+  "skillList": {
+    "1631001": {
+      "desc": "<IconMap:Icon_Normal>",
+      "name": "普通攻击：疾锋"
+    },
+    "1631002": {
+      "desc": "<IconMap:Icon_Normal>（前三段普攻释放瞬间受到敌人攻击）（存在烁影时受敌人攻击自动发动）",
+      "name": "普通攻击：烈旋"
+    },
+    "1631003": {
+      "desc": "<IconMap:Icon_Normal>（流息达100点时长按）",
+      "name": "普通攻击：苍风影猎"
+    },
+    "1631004": {
+      "desc": "<IconMap:Icon_Special>",
+      "name": "特殊技：瞬风斩破"
+    },
+    "1631005": {
+      "desc": "<IconMap:Icon_SpecialReady>（点按或长按）",
+      "name": "强化特殊技：瞬风裂毁"
+    },
+    "1631006": {
+      "desc": "<IconMap:Icon_Evade> ; <IconMap:Icon_Normal>",
+      "name": "冲刺攻击：凛袭"
+    },
+    "1631007": {
+      "desc": "<IconMap:Icon_Evade>（极限） ; <IconMap:Icon_Normal>（极限闪避瞬间切换至后台可自动发动）",
+      "name": "闪避反击：梢杀"
+    },
+    "1631008": {
+      "desc": "<IconMap:Icon_Evade> ；<IconMap:Icon_Evade> （闪避后长按）",
+      "name": "闪避：写意"
+    },
+    "1631009": {
+      "desc": "<IconMap:Icon_QTE>",
+      "name": "连携技：冽刃收割"
+    },
+    "1631010": {
+      "desc": "<IconMap:Icon_UltimateReady>",
+      "name": "终结技：戮灭的风灾"
+    },
+    "1631011": {
+      "desc": "<IconMap:Icon_Switch>（触发快速支援时）",
+      "name": "快速支援：火线调令"
+    },
+    "1631012": {
+      "desc": "<IconMap:Icon_Switch>（触发招架支援时）",
+      "name": "招架支援：寻衅禁止"
+    },
+    "1631013": {
+      "desc": "<IconMap:Icon_Normal>（发动招架支援后）",
+      "name": "支援突击：以戈止戈"
+    },
+    "1631014": {
+      "desc": "<IconMap:Icon_Switch> （存在凭风效果时换人）",
+      "name": "登场技：清场时刻"
+    }
+  },
+  "skin": {
+    "3116310": {
+      "desc": "...",
+      "name": "...",
+      "obtainDesc": ""
+    },
+    "3116311": {
+      "desc": "...",
+      "name": "...",
+      "obtainDesc": ""
+    }
+  },
+  "specialElementType": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Wind>风属性，<IconMap:Icon_AvatarClass_Attack>强攻站场输出",
+    "发动[强化普攻]造成高额伤害",
+    "可自动闪避敌人攻击并反击"
+  ],
+  "talent": {
+    "1": {
+      "desc": "赛维里安释放<color=#FFFFFF>[连携技]</color>累积的<color=#FFFFFF>[流息]</color>值提升至50点；\n赛维里安通过<color=#FFFFFF>[登场技：清场时刻]</color>入场时，会将招式替换为<color=#FFFFFF>[连携技]</color>，该招式入场类型不会被改变，且视为非重击，此效果60秒最多生效一次；\n赛维里安每次释放<color=#FFFFFF>[普通攻击：苍风影猎]</color>会获得1层<color=#FFFFFF>[凭风]</color>效果；\n赛维里安的攻击命中目标时无视目标15%的风属性抗性。",
+      "desc2": "...",
+      "name": "双份浓缩"
+    },
+    "2": {
+      "desc": "赛维里安进入战场时回复150点<color=#FFFFFF>[流息]</color>，在勘域模式中此效果180秒内最多触发一次；\n赛维里安触发<color=#FFFFFF>[极限闪避]</color>时或释放<color=#FFFFFF>[普通攻击：苍风影猎]</color>时，使自身穿透率提升20%，持续25秒。",
+      "desc2": "...",
+      "name": "理性的缰绳"
+    },
+    "3": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "...",
+      "name": "最后一盏灯"
+    },
+    "4": {
+      "desc": "赛维里安进入战斗或换入前场时使自身攻击力提升10%，持续30秒，重复触发时刷新持续时间；\n赛维里安释放<color=#FFFFFF>[普通攻击：烈旋]</color>或释放<color=#FFFFFF>[普通攻击：苍风影猎]</color>时，提升自身10%喧响值获取效率，持续15秒。",
+      "desc2": "...",
+      "name": "光与影的界限"
+    },
+    "5": {
+      "desc": "<color=#FFFFFF>[普通攻击]</color>、<color=#FFFFFF>[闪避]</color>、<color=#FFFFFF>[支援技]</color>、<color=#FFFFFF>[特殊技]</color>、<color=#FFFFFF>[连携技]</color> 技能等级+2",
+      "desc2": "...",
+      "name": "非零度的心"
+    },
+    "6": {
+      "desc": "赛维里安的<color=#FFFFFF>[流息]</color>上限提升至180，进入战场时回复的流息提升至180点；\n<color=#FFFFFF>[普通攻击：苍风影猎]</color>最后一击额外伤害倍率固定提升350%；\n<color=#FFFFFF>[普通攻击：苍风影猎]</color>最后一击释放时获得<color=#FFFFFF>[风起]</color>效果：每秒积累5点<color=#FFFFFF>[流息]</color>，持续5秒，重复触发时刷新持续时间。",
+      "desc2": "...",
+      "name": "在一颗小星星下"
+    }
+  },
+  "weaponType": {
+    "1": "强攻"
+  }
+}

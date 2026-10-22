@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base ATK",
+    "name2": "Base ATK"
+  },
+  "desc": "...",
+  "desc2": "Equip to increase Attack Agents' combat capabilities",
+  "desc3": "...",
+  "id": 14163,
+  "locale": "en",
+  "name": "Incarcerating Grip",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "CRIT Rate",
+    "name2": "CRIT Rate"
+  },
+  "talents": {
+    "1": {
+      "desc": "The equipper's CRIT Rate increases by <color=#2BAD00>20%</color>. When the equipper's <color=#FFFFFF>Basic Attack</color> hits an enemy, their ATK increases by <color=#2BAD00>10%</color>, and their DMG ignores <color=#2BAD00>15%</color> of the target's <color=#A6C5FD>Wind RES</color> for 16s.",
+      "name": "Evil Caught in Hand"
+    },
+    "2": {
+      "desc": "The equipper's CRIT Rate increases by <color=#2BAD00>23%</color>. When the equipper's <color=#FFFFFF>Basic Attack</color> hits an enemy, their ATK increases by <color=#2BAD00>11.5%</color>, and their DMG ignores <color=#2BAD00>17.3%</color> of the target's <color=#A6C5FD>Wind RES</color> for 16s.",
+      "name": "Evil Caught in Hand"
+    },
+    "3": {
+      "desc": "The equipper's CRIT Rate increases by <color=#2BAD00>26%</color>. When the equipper's <color=#FFFFFF>Basic Attack</color> hits an enemy, their ATK increases by <color=#2BAD00>13%</color>, and their DMG ignores <color=#2BAD00>19.5%</color> of the target's <color=#A6C5FD>Wind RES</color> for 16s.",
+      "name": "Evil Caught in Hand"
+    },
+    "4": {
+      "desc": "The equipper's CRIT Rate increases by <color=#2BAD00>29%</color>. When the equipper's <color=#FFFFFF>Basic Attack</color> hits an enemy, their ATK increases by <color=#2BAD00>14.5%</color>, and their DMG ignores <color=#2BAD00>21.8%</color> of the target's <color=#A6C5FD>Wind RES</color> for 16s.",
+      "name": "Evil Caught in Hand"
+    },
+    "5": {
+      "desc": "The equipper's CRIT Rate increases by <color=#2BAD00>32%</color>. When the equipper's <color=#FFFFFF>Basic Attack</color> hits an enemy, their ATK increases by <color=#2BAD00>16%</color>, and their DMG ignores <color=#2BAD00>24%</color> of the target's <color=#A6C5FD>Wind RES</color> for 16s.",
+      "name": "Evil Caught in Hand"
+    }
+  },
+  "weaponType": {
+    "1": "Attack"
+  }
+}

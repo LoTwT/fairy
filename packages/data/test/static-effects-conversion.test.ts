@@ -6383,7 +6383,7 @@ describe("batch 09 Nangongyu M6 vibrato-modified supplements", () => {
         path: "agents/1511/details.zh.json",
         pointer: "/talent/6/desc",
         sha256:
-          "623a202f3d6b33c5c32d2ef6958595d02f0649cd76e57679858108b753a262b8",
+          "0e93e4b483a5aa8faef8e3345cf849de56bb3e8c717554e661c4bd1aed120fdb",
       })
     }
   })

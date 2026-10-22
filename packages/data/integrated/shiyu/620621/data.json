@@ -1,0 +1,932 @@
+{
+  "beginTime": "2026-09-03 04:00:00",
+  "endTime": "2026-11-11 03:59:59",
+  "id": 620621,
+  "priority": 1,
+  "zone": {
+    "6206201": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerRoom": {
+        "62062011": {
+          "monsterList": {
+            "11253": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10006,
+              "stats": {
+                "attack": 1718,
+                "attribute_infliction": 0,
+                "defence": 473.6,
+                "hp": 206881.8675,
+                "stun": 1068
+              }
+            },
+            "11274": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 10007,
+              "stats": {
+                "attack": 1718,
+                "attribute_infliction": 0,
+                "defence": 473.6,
+                "hp": 252937.4925,
+                "stun": 1602
+              }
+            },
+            "11443": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20008,
+              "stats": {
+                "attack": 2056.3939393939395,
+                "attribute_infliction": 0,
+                "defence": 639.36,
+                "hp": 1307427.0825,
+                "stun": 6233.56
+              }
+            },
+            "11454": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20007,
+              "stats": {
+                "attack": 2394.787878787879,
+                "attribute_infliction": 0,
+                "defence": 639.36,
+                "hp": 1550048.115,
+                "stun": 5936.3
+              }
+            }
+          },
+          "wavesNum": 3
+        },
+        "62062012": {
+          "monsterList": {
+            "31482": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": -1,
+                "wind": 0
+              },
+              "id": 20033,
+              "stats": {
+                "attack": 3149.666666666667,
+                "attribute_infliction": 0,
+                "defence": 532.8,
+                "hp": 2573035.6574999997,
+                "stun": 10605.24
+              }
+            },
+            "31491": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 20034,
+              "stats": {
+                "attack": 2759.2121212121215,
+                "attribute_infliction": 0,
+                "defence": 532.8,
+                "hp": 2484056.19,
+                "stun": 9350.34
+              }
+            },
+            "31583": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10036,
+              "stats": {
+                "attack": 1874.1818181818182,
+                "attribute_infliction": 0,
+                "defence": 426.24,
+                "hp": 375629.6775,
+                "stun": 1441.8
+              }
+            },
+            "31744": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10042,
+              "stats": {
+                "attack": 2056.3939393939395,
+                "attribute_infliction": 0,
+                "defence": 509.12,
+                "hp": 431449.095,
+                "stun": 1762.2
+              }
+            },
+            "31752": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10043,
+              "stats": {
+                "attack": 2056.3939393939395,
+                "attribute_infliction": 0,
+                "defence": 544.64,
+                "hp": 480636.5025,
+                "stun": 2403
+              }
+            },
+            "31762": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10041,
+              "stats": {
+                "attack": 2056.3939393939395,
+                "attribute_infliction": 0,
+                "defence": 509.12,
+                "hp": 480636.5025,
+                "stun": 2403
+              }
+            }
+          },
+          "wavesNum": 4
+        }
+      },
+      "monsterLevel": 50,
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 1
+    },
+    "6206202": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerRoom": {
+        "62062021": {
+          "monsterList": {
+            "11482": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100271,
+              "stats": {
+                "attack": 1494,
+                "attribute_infliction": 0,
+                "defence": 551.1999999999999,
+                "hp": 376438.84249999997,
+                "stun": 1728
+              }
+            },
+            "11492": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 100281,
+              "stats": {
+                "attack": 1826,
+                "attribute_infliction": 0,
+                "defence": 551.1999999999999,
+                "hp": 376438.84249999997,
+                "stun": 1728
+              }
+            },
+            "11512": {
+              "element": {
+                "electric": -1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200131,
+              "stats": {
+                "attack": 2794.3333333333335,
+                "attribute_infliction": 0,
+                "defence": 689,
+                "hp": 2491679.6799999997,
+                "stun": 7626.24
+              }
+            },
+            "11522": {
+              "element": {
+                "electric": -1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200141,
+              "stats": {
+                "attack": 2628.3333333333335,
+                "attribute_infliction": 0,
+                "defence": 620.1,
+                "hp": 2395170.96,
+                "stun": 9125.76
+              }
+            }
+          },
+          "wavesNum": 4
+        },
+        "62062022": {
+          "monsterList": {
+            "31551": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 20019,
+              "stats": {
+                "attack": 3209.3333333333335,
+                "attribute_infliction": 0,
+                "defence": 744.12,
+                "hp": 3696941.9899999998,
+                "stun": 10085.76
+              }
+            },
+            "31554": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": -1,
+                "wind": 1
+              },
+              "id": 20036,
+              "stats": {
+                "attack": 3679.666666666667,
+                "attribute_infliction": 0,
+                "defence": 744.12,
+                "hp": 3829367.3074999996,
+                "stun": 11439.359999999999
+              }
+            },
+            "31622": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10024,
+              "stats": {
+                "attack": 1798.3333333333335,
+                "attribute_infliction": 0,
+                "defence": 592.54,
+                "hp": 715316.0525,
+                "stun": 2592
+              }
+            },
+            "31624": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10038,
+              "stats": {
+                "attack": 1798.3333333333335,
+                "attribute_infliction": 0,
+                "defence": 592.54,
+                "hp": 715316.0525,
+                "stun": 2592
+              }
+            },
+            "31652": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 1,
+                "wind": 1
+              },
+              "id": 10037,
+              "stats": {
+                "attack": 1798.3333333333335,
+                "attribute_infliction": 0,
+                "defence": 592.54,
+                "hp": 715316.0525,
+                "stun": 2592
+              }
+            }
+          },
+          "wavesNum": 4
+        }
+      },
+      "monsterLevel": 55,
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 2
+    },
+    "6206203": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerRoom": {
+        "62062031": {
+          "monsterList": {
+            "11312": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 100191,
+              "stats": {
+                "attack": 1847.0454545454545,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 559043.037,
+                "stun": 1854
+              }
+            },
+            "11322": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 100181,
+              "stats": {
+                "attack": 1583.181818181818,
+                "attribute_infliction": 0,
+                "defence": 635.2,
+                "hp": 559043.037,
+                "stun": 1854
+              }
+            },
+            "11603": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200231,
+              "stats": {
+                "attack": 2785.2272727272725,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 4161267.1799999997,
+                "stun": 12273.48
+              }
+            },
+            "11613": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200251,
+              "stats": {
+                "attack": 3400.9090909090905,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 4456464.705,
+                "stun": 14720.76
+              }
+            },
+            "11623": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200241,
+              "stats": {
+                "attack": 3400.9090909090905,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 4161267.1799999997,
+                "stun": 12273.48
+              }
+            }
+          },
+          "wavesNum": 3
+        },
+        "62062032": {
+          "monsterList": {
+            "31481": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": -1,
+                "wind": 0
+              },
+              "id": 20033,
+              "stats": {
+                "attack": 3107.7272727272725,
+                "attribute_infliction": 0,
+                "defence": 714.6,
+                "hp": 5490266.796,
+                "stun": 10821.18
+              }
+            },
+            "31552": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 20019,
+              "stats": {
+                "attack": 3899.3181818181815,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 5686929.4229999995,
+                "stun": 12273.48
+              }
+            },
+            "31642": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 20035,
+              "stats": {
+                "attack": 3547.5,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 7030587.123000001,
+                "stun": 12273.48
+              }
+            },
+            "31744": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10042,
+              "stats": {
+                "attack": 2316.1363636363635,
+                "attribute_infliction": 0,
+                "defence": 682.84,
+                "hp": 953589.798,
+                "stun": 2039.4
+              }
+            },
+            "31752": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10043,
+              "stats": {
+                "attack": 2316.1363636363635,
+                "attribute_infliction": 0,
+                "defence": 730.48,
+                "hp": 1062303.921,
+                "stun": 2781
+              }
+            }
+          },
+          "wavesNum": 3
+        }
+      },
+      "monsterLevel": 60,
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 3
+    },
+    "6206204": {
+      "aRankGoal": 420,
+      "bRankGoal": 600,
+      "child": [],
+      "goalType": 0,
+      "layerRoom": {
+        "62062041": {
+          "monsterList": {
+            "31192": {
+              "element": {
+                "electric": -1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 30039,
+              "stats": {
+                "attack": 4457.454545454545,
+                "attribute_infliction": 0,
+                "defence": 1588,
+                "hp": 15916155,
+                "stun": 15243.800000000001
+              }
+            }
+          },
+          "wavesNum": 1
+        },
+        "62062042": {
+          "monsterList": {
+            "31531": {
+              "element": {
+                "electric": 0,
+                "ether": -1,
+                "fire": 0,
+                "ice": 1,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 30048,
+              "stats": {
+                "attack": 4024.090909090909,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 22413319.2,
+                "stun": 19771.4
+              }
+            },
+            "31553": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": -1,
+                "wind": 1
+              },
+              "id": 20036,
+              "stats": {
+                "attack": 3590.7272727272725,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 5969380.284,
+                "stun": 11556.6
+              }
+            }
+          },
+          "wavesNum": 2
+        }
+      },
+      "monsterLevel": 65,
+      "sRankGoal": 300,
+      "ssRankGoal": 0,
+      "stageNum": 4
+    },
+    "6206205": {
+      "aRankGoal": 1270001022,
+      "bRankGoal": 1270001021,
+      "child": [62062051, 62062052, 62062053],
+      "goalType": 3,
+      "layerRoom": {},
+      "monsterLevel": 0,
+      "sRankGoal": 1270001023,
+      "ssRankGoal": 0,
+      "stageNum": 5
+    },
+    "62062051": {
+      "aRankGoal": 16000,
+      "bRankGoal": 8000,
+      "child": [],
+      "goalType": 2,
+      "layerRoom": {
+        "62062051": {
+          "monsterList": {
+            "31552": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 20019,
+              "stats": {
+                "attack": 3252.454545454546,
+                "attribute_infliction": 0,
+                "defence": 857.5200000000001,
+                "hp": 8657794.125,
+                "stun": 14001.300000000001
+              }
+            },
+            "31612": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10035,
+              "stats": {
+                "attack": 1931.909090909091,
+                "attribute_infliction": 0,
+                "defence": 682.84,
+                "hp": 1617253.875,
+                "stun": 3172.5
+              }
+            },
+            "31622": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 10024,
+              "stats": {
+                "attack": 1589.5454545454547,
+                "attribute_infliction": 0,
+                "defence": 682.84,
+                "hp": 1617253.875,
+                "stun": 3172.5
+              }
+            },
+            "31721": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 0,
+                "physical": -1,
+                "wind": 1
+              },
+              "id": 30055,
+              "stats": {
+                "attack": 2469.909090909091,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 47050644.87,
+                "stun": 17585.05
+              }
+            }
+          },
+          "wavesNum": 3
+        }
+      },
+      "monsterLevel": 70,
+      "sRankGoal": 25000,
+      "ssRankGoal": 0,
+      "stageNum": 5
+    },
+    "62062052": {
+      "aRankGoal": 16000,
+      "bRankGoal": 8000,
+      "child": [],
+      "goalType": 2,
+      "layerRoom": {
+        "62062052": {
+          "monsterList": {
+            "11623": {
+              "element": {
+                "electric": 0,
+                "ether": 0,
+                "fire": 1,
+                "ice": -1,
+                "physical": 1,
+                "wind": 0
+              },
+              "id": 200241,
+              "stats": {
+                "attack": 2836.727272727273,
+                "attribute_infliction": 0,
+                "defence": 794,
+                "hp": 7348742.1,
+                "stun": 14001.300000000001
+              }
+            },
+            "31262": {
+              "element": {
+                "electric": 1,
+                "ether": -1,
+                "fire": 1,
+                "ice": 0,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 30036,
+              "stats": {
+                "attack": 3521.454545454546,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 44977634.1,
+                "stun": 14327.95
+              }
+            },
+            "31462": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 1,
+                "ice": 0,
+                "physical": -1,
+                "wind": 0
+              },
+              "id": 30051,
+              "stats": {
+                "attack": 3521.454545454546,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 59088468.599999994,
+                "stun": 19540.25
+              }
+            },
+            "31481": {
+              "element": {
+                "electric": 1,
+                "ether": 0,
+                "fire": 0,
+                "ice": 1,
+                "physical": -1,
+                "wind": 0
+              },
+              "id": 20033,
+              "stats": {
+                "attack": 2592.1818181818185,
+                "attribute_infliction": 0,
+                "defence": 714.6,
+                "hp": 9695737.62,
+                "stun": 12344.550000000001
+              }
+            }
+          },
+          "wavesNum": 2
+        }
+      },
+      "monsterLevel": 70,
+      "sRankGoal": 25000,
+      "ssRankGoal": 0,
+      "stageNum": 5
+    },
+    "62062053": {
+      "aRankGoal": 16000,
+      "bRankGoal": 8000,
+      "child": [],
+      "goalType": 2,
+      "layerRoom": {
+        "62062053": {
+          "monsterList": {
+            "11732": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": -1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 200004,
+              "stats": {
+                "attack": 2592.1818181818185,
+                "attribute_infliction": 0,
+                "defence": 714.6,
+                "hp": 6281664.4799999995,
+                "stun": 11169.550000000001
+              }
+            },
+            "11752": {
+              "element": {
+                "electric": 0,
+                "ether": 1,
+                "fire": 0,
+                "ice": -1,
+                "physical": 0,
+                "wind": 0
+              },
+              "id": 300004,
+              "stats": {
+                "attack": 2714.4545454545455,
+                "attribute_infliction": 0,
+                "defence": 921.0400000000001,
+                "hp": 5285773.304999999,
+                "stun": 9334.2
+              }
+            },
+            "31102": {
+              "element": {
+                "electric": -1,
+                "ether": 1,
+                "fire": 0,
+                "ice": 0,
+                "physical": 0,
+                "wind": 1
+              },
+              "id": 930178,
+              "stats": {
+                "attack": 3521.454545454546,
+                "attribute_infliction": 0,
+                "defence": 952.8000000000001,
+                "hp": 50670566.099999994,
+                "stun": 14327.95
+              }
+            }
+          },
+          "wavesNum": 2
+        }
+      },
+      "monsterLevel": 70,
+      "sRankGoal": 25000,
+      "ssRankGoal": 0,
+      "stageNum": 5
+    }
+  }
+}

@@ -829,7 +829,7 @@ describe("current dataset update report", () => {
           {
             name: "boss",
             before: null,
-            after: "nanoka-boss-reference/5",
+            after: "nanoka-boss-reference/6",
             changed: false,
           },
           {

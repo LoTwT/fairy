@@ -2259,9 +2259,9 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Ice>Ice, on-field DMG dealer",
-    "Stacks Flash Freeze Charges to deal burst DMG",
-    "Moves around the battlefield flexibly"
+    "<IconMap:Icon_GeneralBuff_Ice>Ice, <IconMap:Icon_AvatarClass_Attack> Attack on-field DMG dealer",
+    "Accumulate <Term:3000025></Term> then do burst DMG",
+    "Moves around the battlefield flexibly with <Term:3000034></Term>"
   ],
   "talent": {
     "1": {

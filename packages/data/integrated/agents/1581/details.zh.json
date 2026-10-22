@@ -1602,7 +1602,13 @@
     }
   },
   "specialElementType": {},
-  "strategy": {},
+  "strategy": [
+    "01",
+    "爆发输出并可提供高额增伤",
+    "<IconMap:Icon_GeneralBuff_Lumiflux>流明属性，<IconMap:Icon_AvatarClass_Anomaly>异常<Term:3000012></Term>输出",
+    "流明属性<Term:1000031></Term>提升队伍异常伤害",
+    "通过<Term:1000034></Term>造成爆发异常伤害"
+  ],
   "talent": {
     "1": {
       "desc": "进入战场时，蕾米埃尔获得3个特殊<Term:1000033></Term>，在勘域模式中此效果180秒内最多触发一次；蕾米埃尔触发<Term:1000034></Term>效果造成伤害时，无视目标50%的全属性伤害抗性；发动<color=#FFFFFF>[支援技：花羽轮舞]</color>时，获得200点喧响值，18秒内最多触发1次此效果；蕾米埃尔处于<Term:1000035></Term>状态下时，队伍中其他角色造成的属性异常伤害提升10%。",

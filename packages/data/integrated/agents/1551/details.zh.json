@@ -1570,7 +1570,12 @@
     }
   },
   "specialElementType": {},
-  "strategy": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>以太属性，<IconMap:Icon_AvatarClass_Attack>强攻站场输出",
+    "拥有四种效果不同的[终结技]",
+    "连续发动[强化普攻]造成大量伤害"
+  ],
   "talent": {
     "1": {
       "desc": "进入战场时，佩洛伊斯获得1000点<color=#FFFFFF>[喧响值]</color>，在勘域模式中此效果180秒内最多触发一次，暴击率提升8%。",

@@ -53,8 +53,15 @@ export function convertAgentActions(
 ): AgentActions {
   const path = `agents/${entityId}/details.zh.json`
   const entries = registry.filter((entry) => entry.entityId === entityId)
+  // 新角色可在 integrated 中先进入资料与属性层，动作目录由后续批次补齐。
+  // 空动作清单是显式缺口，不伪造招式、不静默省略成员。
   if (!entries.length)
-    throw new Error(`Missing action registry member: ${entityId}`)
+    return {
+      schemaVersion: 1,
+      entityId,
+      skillLevelBonuses: [],
+      actions: [],
+    }
   const skillLevelBonuses = [3, 5].map((rank) => {
     const description = details.talent[String(rank)]?.desc
     const expected =

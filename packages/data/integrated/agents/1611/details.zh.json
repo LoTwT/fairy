@@ -1974,7 +1974,12 @@
     }
   },
   "specialElementType": {},
-  "strategy": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Thunder>电属性，<IconMap:Icon_AvatarClass_Armorer>锋御站场输出",
+    "可进入<Term:1000036></Term>状态并派生多段招式",
+    "可造成大量<Term:3000015></Term>"
+  ],
   "talent": {
     "1": {
       "desc": "克拉蕾攻击命中敌人并造成锐暴时，残痕积蓄效率提升20%；克拉蕾触发[毁伤]造成的伤害倍率提升至原本的130%。",

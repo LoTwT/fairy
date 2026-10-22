@@ -1487,9 +1487,9 @@
   "specialElementType": {},
   "strategy": [
     "07",
-    "<IconMap:Icon_GeneralBuff_Fire>火属性，后台击破",
+    "<IconMap:Icon_GeneralBuff_Fire>火属性，<IconMap:Icon_AvatarClass_Stun>后台击破",
     "提升全队角色暴伤与喧响值上限",
-    "为强攻&命破代理人额外回复喧响值"
+    "为[强攻]/[命破]代理人额外回复喧响值"
   ],
   "talent": {
     "1": {

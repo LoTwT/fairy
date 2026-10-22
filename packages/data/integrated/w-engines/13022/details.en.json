@@ -1,0 +1,43 @@
+{
+  "baseProperty": {
+    "format": "{0:0.#}",
+    "name": "Base DEF",
+    "name2": "Base DEF"
+  },
+  "desc": "...",
+  "desc2": "Equip to increase Armorer Agents' combat capabilities",
+  "desc3": "...",
+  "id": 13022,
+  "locale": "en",
+  "name": "Candlelit Scheme",
+  "randProperty": {
+    "format": "{0:0.#%}",
+    "name": "DEF",
+    "name2": "Percent DEF"
+  },
+  "talents": {
+    "1": {
+      "desc": "When using an <color=#FFFFFF>EX Special Attack</color>, the equipper's CRIT Rate is increased by <color=#2BAD00>8%</color> for 40s. The equipper deals <color=#2BAD00>15%</color> more DMG to enemies whose current HP is below 50% of their Max HP.",
+      "name": "Moment of Fright"
+    },
+    "2": {
+      "desc": "When using an <color=#FFFFFF>EX Special Attack</color>, the equipper's CRIT Rate is increased by <color=#2BAD00>9.2%</color> for 40s. The equipper deals <color=#2BAD00>17.3%</color> more DMG to enemies whose current HP is below 50% of their Max HP.",
+      "name": "Moment of Fright"
+    },
+    "3": {
+      "desc": "When using an <color=#FFFFFF>EX Special Attack</color>, the equipper's CRIT Rate is increased by <color=#2BAD00>10.4%</color> for 40s. The equipper deals <color=#2BAD00>19.5%</color> more DMG to enemies whose current HP is below 50% of their Max HP.",
+      "name": "Moment of Fright"
+    },
+    "4": {
+      "desc": "When using an <color=#FFFFFF>EX Special Attack</color>, the equipper's CRIT Rate is increased by <color=#2BAD00>11.6%</color> for 40s. The equipper deals <color=#2BAD00>21.8%</color> more DMG to enemies whose current HP is below 50% of their Max HP.",
+      "name": "Moment of Fright"
+    },
+    "5": {
+      "desc": "When using an <color=#FFFFFF>EX Special Attack</color>, the equipper's CRIT Rate is increased by <color=#2BAD00>12.8%</color> for 40s. The equipper deals <color=#2BAD00>24%</color> more DMG to enemies whose current HP is below 50% of their Max HP.",
+      "name": "Moment of Fright"
+    }
+  },
+  "weaponType": {
+    "7": "Armorer"
+  }
+}

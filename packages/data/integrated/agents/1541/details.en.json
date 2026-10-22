@@ -1569,8 +1569,8 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Ice>Ice, on-field DMG dealer",
-    "Provides Abloom DMG boosts to all squad members",
+    "<IconMap:Icon_GeneralBuff_Ice>Ice, <IconMap:Icon_AvatarClass_Anomaly> Anomaly on-field DMG dealer",
+    "Provides <Term:3000002></Term> DMG boosts to all squad members",
     "Deals Abloom DMG multiple times to enemies afflicted with other Attribute Anomalies"
   ],
   "talent": {

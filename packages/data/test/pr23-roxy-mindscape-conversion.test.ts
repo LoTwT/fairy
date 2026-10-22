@@ -338,7 +338,7 @@ describe("Roxy Nanoka fixed mindscape registration", () => {
         )
         .digest("hex")
       expect(realHash).toBe(
-        "30a75cab3c664648ca8f9bbcfdce04bc5d92b5897b9187c17c6620c76c282b2a",
+        "7f1f2e152f9a3b9f23e94e04067af5608b372d74a04762b8686ddd3fa1767887",
       )
     } finally {
       await rm(publication, { recursive: true, force: true })

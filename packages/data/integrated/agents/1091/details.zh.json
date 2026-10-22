@@ -1646,10 +1646,10 @@
   },
   "strategy": [
     "01",
-    "消耗[落霜]能量进行蓄力拔刀斩",
-    "<IconMap:Icon_GeneralBuff_Frost>烈霜属性，站场输出",
-    "可与所有属性异常效果触发[紊乱]",
-    "可将暴击率转化为异常积蓄效率"
+    "消耗<Term:3000022></Term>能量发动<Term:3000023></Term>",
+    "<IconMap:Icon_GeneralBuff_Frost>烈霜属性，<IconMap:Icon_AvatarClass_Anomaly>异常站场输出",
+    "全队触发<Term:3000003></Term>效果回复<Term:3000022></Term>",
+    "可将暴击率转化为<Term:3000005></Term>累积效率"
   ],
   "talent": {
     "1": {

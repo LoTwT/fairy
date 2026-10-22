@@ -1474,8 +1474,8 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，速切辅助",
-    "开启[以太帷幕]提升失衡易伤倍率",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，<IconMap:Icon_AvatarClass_Support><Term:3000012></Term>支援辅助",
+    "开启<Term:3000001></Term>提升失衡易伤倍率",
     "提供[强攻]/[异常]代理人额外伤害倍率"
   ],
   "talent": {

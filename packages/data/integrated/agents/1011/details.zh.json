@@ -1229,7 +1229,7 @@
   "specialElementType": {},
   "strategy": [
     "07",
-    "<IconMap:Icon_GeneralBuff_Thunder>电属性，击破辅助",
+    "<IconMap:Icon_GeneralBuff_Thunder>电属性，<IconMap:Icon_AvatarClass_Stun>击破",
     "稳定击破为敌人累积失衡值"
   ],
   "talent": {

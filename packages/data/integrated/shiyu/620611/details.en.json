@@ -1,0 +1,414 @@
+{
+  "id": 620611,
+  "locale": "en",
+  "name": "Critical Node",
+  "zone": {
+    "6206101": {
+      "layerBuff": {
+        "62001611": {
+          "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' ATK increases by 35%, and <color=#A6C5FD>Wind DMG</color> increases by 20%.\n· When an Agent's <color=#FFFFFF>Ultimate</color> hits an enemy, the enemy's <color=#A6C5FD>Wind RES</color> reduces by 15% for 30s; repeated triggers reset the duration.",
+          "title": "Tempest Flames"
+        }
+      },
+      "layerRoom": {
+        "62061011": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11482": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ViciousStrikerPro.png",
+              "name": "Vicious Striker"
+            },
+            "11492": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_GreedyRangerPro.png",
+              "name": "Greedy Ranger"
+            },
+            "11501": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_FrenziedManiacPro.png",
+              "name": "Frenzied Maniac"
+            },
+            "11511": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_WickedWraithPro.png",
+              "name": "Wicked Wraith"
+            }
+          },
+          "monsterResistance": {
+            "203": "Electric"
+          },
+          "monsterWeakness": {
+            "201": "Fire"
+          }
+        },
+        "62061012": {
+          "monsterIcon": "",
+          "monsterList": {
+            "31553": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_CorruptedBattleMecha.png",
+              "name": "Metamorphosed - City Guardboo"
+            },
+            "31583": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Minion.png",
+              "name": "Kulullu"
+            },
+            "31641": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_MoltTarasqueMixer.png",
+              "name": "Metamorphosed - Tarasque Mixer"
+            },
+            "31744": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Halberdier.png",
+              "name": "Airspace Patrol Spearguard"
+            },
+            "31752": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_RoscaSolider.png",
+              "name": "Airspace Patrol Shieldguard"
+            },
+            "31762": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Greatsworder.png",
+              "name": "Airspace Patrol Vanguard"
+            }
+          },
+          "monsterResistance": {
+            "200": "Physical"
+          },
+          "monsterWeakness": {
+            "204": "Wind",
+            "205": "Ether"
+          }
+        }
+      },
+      "name": "Critical Node: First Frontier"
+    },
+    "6206102": {
+      "layerBuff": {
+        "62001611": {
+          "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' ATK increases by 35%, and <color=#A6C5FD>Wind DMG</color> increases by 20%.\n· When an Agent's <color=#FFFFFF>Ultimate</color> hits an enemy, the enemy's <color=#A6C5FD>Wind RES</color> reduces by 15% for 30s; repeated triggers reset the duration.",
+          "title": "Tempest Flames"
+        }
+      },
+      "layerRoom": {
+        "62061021": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11482": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ViciousStrikerPro.png",
+              "name": "Vicious Striker"
+            },
+            "11492": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_GreedyRangerPro.png",
+              "name": "Greedy Ranger"
+            },
+            "11512": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_WickedWraithPro.png",
+              "name": "Wicked Wraith"
+            },
+            "11522": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_RuthlessFiendPro.png",
+              "name": "Ruthless Fiend"
+            }
+          },
+          "monsterResistance": {
+            "203": "Electric"
+          },
+          "monsterWeakness": {
+            "201": "Fire"
+          }
+        },
+        "62061022": {
+          "monsterIcon": "",
+          "monsterList": {
+            "31551": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_BangbooBattleMecha.png",
+              "name": "City Guardboo"
+            },
+            "31554": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_CorruptedBattleMecha.png",
+              "name": "Metamorphosed - City Guardboo"
+            },
+            "31622": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_BangbooPatrolMecha.png",
+              "name": "Airspace Patrolboo"
+            },
+            "31624": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_CorruptedPatrolMecha.png",
+              "name": "Metamorphosed - Airspace Patrolboo"
+            },
+            "31652": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_EyeEngine.png",
+              "name": "Metamorphosed - Beholder Engine"
+            }
+          },
+          "monsterResistance": {
+            "200": "Physical"
+          },
+          "monsterWeakness": {
+            "204": "Wind",
+            "205": "Ether"
+          }
+        }
+      },
+      "name": "Critical Node: Second Frontier"
+    },
+    "6206103": {
+      "layerBuff": {
+        "62001611": {
+          "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' ATK increases by 35%, and <color=#A6C5FD>Wind DMG</color> increases by 20%.\n· When an Agent's <color=#FFFFFF>Ultimate</color> hits an enemy, the enemy's <color=#A6C5FD>Wind RES</color> reduces by 15% for 30s; repeated triggers reset the duration.",
+          "title": "Tempest Flames"
+        }
+      },
+      "layerRoom": {
+        "62061031": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11332": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugPyromaniacPro.png",
+              "name": "Arsonist"
+            },
+            "11342": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugRaiderPro.png",
+              "name": "Looter"
+            },
+            "11352": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcerPro.png",
+              "name": "Wanted Enforcer"
+            },
+            "31322": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_MiasmaWickedWraith.png",
+              "name": "Miasmic - Wicked Wraith"
+            }
+          },
+          "monsterResistance": {
+            "203": "Electric"
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          }
+        },
+        "62061032": {
+          "monsterIcon": "",
+          "monsterList": {
+            "31482": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Arbiter.png",
+              "name": "Lahmu"
+            },
+            "31552": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_BangbooBattleMecha.png",
+              "name": "City Guardboo"
+            },
+            "31553": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_CorruptedBattleMecha.png",
+              "name": "Metamorphosed - City Guardboo"
+            },
+            "31744": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Halberdier.png",
+              "name": "Airspace Patrol Spearguard"
+            },
+            "31752": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_RoscaSolider.png",
+              "name": "Airspace Patrol Shieldguard"
+            }
+          },
+          "monsterResistance": {},
+          "monsterWeakness": {
+            "203": "Electric",
+            "204": "Wind"
+          }
+        }
+      },
+      "name": "Critical Node: Third Frontier"
+    },
+    "6206104": {
+      "layerBuff": {
+        "62001611": {
+          "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' ATK increases by 35%, and <color=#A6C5FD>Wind DMG</color> increases by 20%.\n· When an Agent's <color=#FFFFFF>Ultimate</color> hits an enemy, the enemy's <color=#A6C5FD>Wind RES</color> reduces by 15% for 30s; repeated triggers reset the duration.",
+          "title": "Tempest Flames"
+        }
+      },
+      "layerRoom": {
+        "62061041": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MiasmaTerrorBird.png",
+          "monsterList": {
+            "31262": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_MiasmaTerrorBird.png",
+              "name": "Miasmic - Terror Raptor"
+            }
+          },
+          "monsterResistance": {
+            "205": "Ether"
+          },
+          "monsterWeakness": {
+            "201": "Fire",
+            "203": "Electric"
+          }
+        },
+        "62061042": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_WingedChelonethid.png",
+          "monsterList": {
+            "31551": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_BangbooBattleMecha.png",
+              "name": "City Guardboo"
+            },
+            "31571": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_WingedChelonethid.png",
+              "name": "Metamorphosed - Scorpse"
+            }
+          },
+          "monsterResistance": {
+            "202": "Ice"
+          },
+          "monsterWeakness": {
+            "203": "Electric",
+            "204": "Wind"
+          }
+        }
+      },
+      "name": "Critical Node: Fourth Frontier"
+    },
+    "6206105": {
+      "layerBuff": {
+        "62001611": {
+          "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' ATK increases by 35%, and <color=#A6C5FD>Wind DMG</color> increases by 20%.\n· When an Agent's <color=#FFFFFF>Ultimate</color> hits an enemy, the enemy's <color=#A6C5FD>Wind RES</color> reduces by 15% for 30s; repeated triggers reset the duration.",
+          "title": "Tempest Flames"
+        },
+        "62001612": {
+          "desc": "· Agents with the <color=#FFFFFF>Anomaly</color> specialty that deal <color=#FFFFFF>Attribute Anomaly</color> DMG and trigger a CRIT increase the whole squad's ATK by 10% and Attribute Anomaly DMG by 20% for 15s; repeated triggers reset the duration.\n· When an Agent inflicts an enemy with <color=#FF5521>Fire Anomaly</color>, the target's <color=#FF5521>Fire RES</color> is reduced by 10% for 15s; repeated triggers reset the duration.",
+          "title": "Blazing Nightfire"
+        },
+        "62001613": {
+          "desc": "· Agents' Sheer DMG increases by 35%.\n· After a <color=#FFFFFF>Rupture</color> specialty Agent uses their <color=#FFFFFF>Ultimate</color>, their <color=#FF5521>Fire DMG</color> and <color=#98EFF0>Ice DMG</color> increases by 50% for 15s; repeated triggers reset the duration.",
+          "title": "Glacial Realmshatter"
+        }
+      },
+      "layerRoom": {},
+      "name": ""
+    },
+    "62061051": {
+      "layerBuff": {
+        "62001001": {
+          "desc": "· In this stage, dealing DMG to enemies earns you <color=#FFAF2C>DMG Score</color>. Defeating a single <color=#FFFFFF>normal/elite enemy</color> will grant you an instance of <color=#FFAF2C>Elimination Score</color>.\n· In this stage, scores earned at different times will receive additional <color=#FFAF2C>multiplier bonuses</color>. The earlier in the challenge, the higher the multiplier. The <color=#FFAF2C>total score cap (including bonus) is 50,000</color>.",
+          "title": ""
+        },
+        "62001002": {
+          "desc": "",
+          "title": ""
+        },
+        "62001611": {
+          "desc": "· <color=#FFFFFF>Attack</color> specialty Agents' ATK increases by 35%, and <color=#A6C5FD>Wind DMG</color> increases by 20%.\n· When an Agent's <color=#FFFFFF>Ultimate</color> hits an enemy, the enemy's <color=#A6C5FD>Wind RES</color> reduces by 15% for 30s; repeated triggers reset the duration.",
+          "title": "Tempest Flames"
+        }
+      },
+      "layerRoom": {
+        "62061051": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Sentinel.png",
+          "monsterList": {
+            "31303": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_MiasmaFrenziedManiac.png",
+              "name": "Miasmic - Frenzied Maniac"
+            },
+            "31313": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_MiasmaTrinox.png",
+              "name": "Miasmic - Trinox"
+            },
+            "31531": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Sentinel.png",
+              "name": "Airspace Sentinel"
+            }
+          },
+          "monsterResistance": {
+            "205": "Ether"
+          },
+          "monsterWeakness": {
+            "202": "Ice",
+            "204": "Wind"
+          }
+        }
+      },
+      "name": "Room 1"
+    },
+    "62061052": {
+      "layerBuff": {
+        "62001001": {
+          "desc": "· In this stage, dealing DMG to enemies earns you <color=#FFAF2C>DMG Score</color>. Defeating a single <color=#FFFFFF>normal/elite enemy</color> will grant you an instance of <color=#FFAF2C>Elimination Score</color>.\n· In this stage, scores earned at different times will receive additional <color=#FFAF2C>multiplier bonuses</color>. The earlier in the challenge, the higher the multiplier. The <color=#FFAF2C>total score cap (including bonus) is 50,000</color>.",
+          "title": ""
+        },
+        "62001002": {
+          "desc": "",
+          "title": ""
+        },
+        "62001612": {
+          "desc": "· Agents with the <color=#FFFFFF>Anomaly</color> specialty that deal <color=#FFFFFF>Attribute Anomaly</color> DMG and trigger a CRIT increase the whole squad's ATK by 10% and Attribute Anomaly DMG by 20% for 15s; repeated triggers reset the duration.\n· When an Agent inflicts an enemy with <color=#FF5521>Fire Anomaly</color>, the target's <color=#FF5521>Fire RES</color> is reduced by 10% for 15s; repeated triggers reset the duration.",
+          "title": "Blazing Nightfire"
+        }
+      },
+      "layerRoom": {
+        "62061052": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MiasmaIsoldeSlime.png",
+          "monsterList": {
+            "31214": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_MiasmaIsoldeSlime.png",
+              "name": "Miasmic - Doppelganger - The Defector"
+            },
+            "31491": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Predator.png",
+              "name": "Mushussu"
+            }
+          },
+          "monsterResistance": {
+            "205": "Ether"
+          },
+          "monsterWeakness": {
+            "200": "Physical",
+            "201": "Fire"
+          }
+        }
+      },
+      "name": "Room 2"
+    },
+    "62061053": {
+      "layerBuff": {
+        "62001001": {
+          "desc": "· In this stage, dealing DMG to enemies earns you <color=#FFAF2C>DMG Score</color>. Defeating a single <color=#FFFFFF>normal/elite enemy</color> will grant you an instance of <color=#FFAF2C>Elimination Score</color>.\n· In this stage, scores earned at different times will receive additional <color=#FFAF2C>multiplier bonuses</color>. The earlier in the challenge, the higher the multiplier. The <color=#FFAF2C>total score cap (including bonus) is 50,000</color>.",
+          "title": ""
+        },
+        "62001002": {
+          "desc": "",
+          "title": ""
+        },
+        "62001613": {
+          "desc": "· Agents' Sheer DMG increases by 35%.\n· After a <color=#FFFFFF>Rupture</color> specialty Agent uses their <color=#FFFFFF>Ultimate</color>, their <color=#FF5521>Fire DMG</color> and <color=#98EFF0>Ice DMG</color> increases by 50% for 15s; repeated triggers reset the duration.",
+          "title": "Glacial Realmshatter"
+        }
+      },
+      "layerRoom": {
+        "62061053": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Hayyot.png",
+          "monsterList": {
+            "11482": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ViciousStrikerPro.png",
+              "name": "Vicious Striker"
+            },
+            "11492": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_GreedyRangerPro.png",
+              "name": "Greedy Ranger"
+            },
+            "11522": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_RuthlessFiendPro.png",
+              "name": "Ruthless Fiend"
+            },
+            "31192": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Hayyot.png",
+              "name": "Haytor"
+            }
+          },
+          "monsterResistance": {
+            "203": "Electric"
+          },
+          "monsterWeakness": {
+            "201": "Fire",
+            "202": "Ice"
+          }
+        }
+      },
+      "name": "Room 3"
+    }
+  }
+}

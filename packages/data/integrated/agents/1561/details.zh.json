@@ -1524,7 +1524,12 @@
     }
   },
   "specialElementType": {},
-  "strategy": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_Wind>风属性，<IconMap:Icon_AvatarClass_Anomaly>异常后台输出",
+    "触发异常效果<Term:3000004></Term>",
+    "气旋<Term:3000009></Term>并降低敌人抗性"
+  ],
   "talent": {
     "1": {
       "desc": "<color=#FFFFFF>[额外能力：茶会礼仪]</color>中，<color=#FFFFFF>[广域气旋]</color>造成的失衡值额外提升20%；维琳娜触发<color=#FFFFFF>[乱流]</color>时无视目标20%<color=#FFFFFF>全属性伤害抗性</color>；全队造成<color=#A6C5FD>[风化]</color>伤害时，无视目标20%<color=#A6C5FD>风属性伤害抗性</color>。",

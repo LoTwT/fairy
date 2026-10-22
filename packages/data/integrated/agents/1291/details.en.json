@@ -1766,8 +1766,8 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Ice>Ice, quick-swap DMG dealer",
-    "Triggering Totalize deals bonus DMG to Stunned enemies",
+    "<IconMap:Icon_GeneralBuff_Ice>Ice, <IconMap:Icon_AvatarClass_Attack> Attack <Term:3000012></Term> DMG dealer",
+    "Triggering <Term:3000024></Term> deals bonus DMG to Stunned enemies",
     "High-Frequency Stun burst"
   ],
   "talent": {

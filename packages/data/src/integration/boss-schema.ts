@@ -3,7 +3,7 @@ import { at, BossIntegrationError, fail, isObject } from "./source-json.ts"
 import type { SourceLocation } from "./source-json.ts"
 
 /**
- * Boss 来源结构的登记表（规则 nanoka-boss-reference/5）。
+ * Boss 来源结构的登记表（规则 nanoka-boss-reference/6）。
  *
  * 详情与来源索引记录分别处理：详情字段在这里登记，按归属提取到 data.json 或留在各语言详情；
  * 索引记录只登记已知顶层字段（`bossIndexFields`）用于识别未知字段，并成对提升 `live_begin`/`live_end`；
@@ -11,6 +11,7 @@ import type { SourceLocation } from "./source-json.ts"
  * 未登记的详情字段整合失败，不进入发布制品；索引记录的未登记字段仍作为维护诊断报告待登记。
  * 只转换登记表明确列出的结构字段拼写；字典 key、实体与属性 ID、字符串内容及数组顺序不变。
  * 同一 Boss 的全部详情语言必须使用同一结构骨架；字符串内容可以不同，数字、布尔、null 与容器形状必须一致。
+ * 3.3.12 起常驻试炼可以没有 `begin_time`/`end_time`；两者按条件公共字段处理，同有且一致才提升。
  */
 
 /** 已登记字段要求的 JSON 值种类；null 不冒充字符串、数值或普通对象。 */
@@ -39,7 +40,16 @@ export const bossSharedDetailFields: Readonly<
 
   /** 来源 `zone_type`。顶层区域类型编码；与 mode 的 `zone_type` 分别保留，不要求相等。 */
   zone_type: { output: "zoneType", kind: "number" },
+}
 
+/**
+ * 详情顶层条件公共字段登记表；key 为来源 key。
+ * 严格共享：只在所有输入语言都提供且完整值一致时提取到 data；全部语言缺失时不生成字段；
+ * 只在部分语言提供即整合失败。3.3.12 起常驻试炼可以没有开放时间窗。
+ */
+export const bossConditionalSharedDetailFields: Readonly<
+  Record<string, { output: string; kind: "string" }>
+> = {
   /** 来源 `begin_time`。开放开始时间原始字符串；不转换时间戳、不猜测时区。 */
   begin_time: { output: "beginTime", kind: "string" },
 
@@ -198,12 +208,25 @@ export function assertBossDetailSkeletons(
     if (candidate === undefined)
       fail({ entityId, locale, pointer: "" }, "缺失详情", BossIntegrationError)
     assertBossSkeletonValue(
-      baseline,
-      candidate,
+      withoutConditionalTopLevelFields(baseline),
+      withoutConditionalTopLevelFields(candidate),
       { entityId, locale, pointer: "" },
       baselineLocale,
     )
   }
+}
+
+/**
+ * 条件公共字段（begin_time/end_time）允许全部缺失，不能因单个语言缺少而触发
+ * 跨语言骨架的 key 集合差异；其同有/全缺与值一致性由共享字段提取阶段检查。
+ * 只剔除详情顶层成员，不改变嵌套结构。
+ */
+function withoutConditionalTopLevelFields(value: SourceJson): SourceJson {
+  if (!isObject(value)) return value
+  const shape = { ...value }
+  for (const key of Object.keys(bossConditionalSharedDetailFields))
+    delete shape[key]
+  return shape
 }
 
 /** 递归比较单个骨架值；location 指向被比较语言的当前节点。 */

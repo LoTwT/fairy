@@ -1932,8 +1932,8 @@
   },
   "strategy": [
     "02",
-    "Dual Ultimate mechanic brings burst DMG",
-    "<IconMap:Icon_GeneralBuff_AuricInk>Auric Ink, on-field DMG dealer",
+    "<Term:3000026></Term> for burst DPS",
+    "<IconMap:Icon_GeneralBuff_AuricInk>Auric Ink, <IconMap:Icon_AvatarClass_Rupture> Rupture on-field DMG dealer",
     "Ignores defense and deals massive Sheer DMG",
     "EX Special Attack combines blocking and attacking"
   ],

@@ -1,0 +1,429 @@
+{
+  "id": 620601,
+  "locale": "zh",
+  "name": "剧变节点",
+  "zone": {
+    "6206001": {
+      "layerBuff": {
+        "62001601": {
+          "desc": "· <color=#FFFFFF>[异常]</color>特性代理人的<color=#FF5521>火属性伤害</color>提升20%。\n· 代理人造成<color=#FFFFFF>属性异常</color>伤害并触发暴击后，全队恢复20点能量，属性异常伤害提升30%，持续20秒，此效果每20秒可触发一次。",
+          "title": "焚韵燃竭"
+        }
+      },
+      "layerRoom": {
+        "62060011": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11253": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_LightJaeger.png",
+              "name": "轻装猎兵"
+            },
+            "11274": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster-MeleeJaeger.png",
+              "name": "新晋猎兵"
+            },
+            "11443": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_LightfootRover.png",
+              "name": "「捷足巡游者」"
+            },
+            "11454": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyStriker.png",
+              "name": "「重装侵袭者」"
+            }
+          },
+          "monsterResistance": {
+            "205": "以太"
+          },
+          "monsterWeakness": {
+            "200": "物理",
+            "201": "火属性"
+          }
+        },
+        "62060012": {
+          "monsterIcon": "",
+          "monsterList": {
+            "31553": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_CorruptedBattleMecha.png",
+              "name": "蜕生·城防戍卫布"
+            },
+            "31583": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Minion.png",
+              "name": "库鲁鲁"
+            },
+            "31641": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_MoltTarasqueMixer.png",
+              "name": "蜕生·泰拉斯奎祸车"
+            },
+            "31744": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Halberdier.png",
+              "name": "空巡枪骑"
+            },
+            "31752": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_RoscaSolider.png",
+              "name": "空巡近卫"
+            },
+            "31762": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Greatsworder.png",
+              "name": "空巡先锋"
+            }
+          },
+          "monsterResistance": {
+            "200": "物理"
+          },
+          "monsterWeakness": {
+            "204": "风属性",
+            "205": "以太"
+          }
+        }
+      },
+      "name": "剧变节点第一防线"
+    },
+    "6206002": {
+      "layerBuff": {
+        "62001601": {
+          "desc": "· <color=#FFFFFF>[异常]</color>特性代理人的<color=#FF5521>火属性伤害</color>提升20%。\n· 代理人造成<color=#FFFFFF>属性异常</color>伤害并触发暴击后，全队恢复20点能量，属性异常伤害提升30%，持续20秒，此效果每20秒可触发一次。",
+          "title": "焚韵燃竭"
+        }
+      },
+      "layerRoom": {
+        "62060021": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11058": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Guardian.png",
+              "name": "「卫士」"
+            },
+            "11164": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_StrikeJaeger.png",
+              "name": "掠袭猎兵"
+            },
+            "11254": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_LightJaeger.png",
+              "name": "轻装猎兵"
+            },
+            "11454": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyStriker.png",
+              "name": "「重装侵袭者」"
+            }
+          },
+          "monsterResistance": {
+            "205": "以太"
+          },
+          "monsterWeakness": {
+            "200": "物理",
+            "201": "火属性"
+          }
+        },
+        "62060022": {
+          "monsterIcon": "",
+          "monsterList": {
+            "31492": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Predator.png",
+              "name": "怒蛇"
+            },
+            "31551": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_BangbooBattleMecha.png",
+              "name": "城防戍卫布"
+            },
+            "31652": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_EyeEngine.png",
+              "name": "蜕生·眼魔引擎"
+            },
+            "31752": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_RoscaSolider.png",
+              "name": "空巡近卫"
+            },
+            "31762": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Greatsworder.png",
+              "name": "空巡先锋"
+            }
+          },
+          "monsterResistance": {},
+          "monsterWeakness": {
+            "201": "火属性",
+            "204": "风属性"
+          }
+        }
+      },
+      "name": "剧变节点第二防线"
+    },
+    "6206003": {
+      "layerBuff": {
+        "62001601": {
+          "desc": "· <color=#FFFFFF>[异常]</color>特性代理人的<color=#FF5521>火属性伤害</color>提升20%。\n· 代理人造成<color=#FFFFFF>属性异常</color>伤害并触发暴击后，全队恢复20点能量，属性异常伤害提升30%，持续20秒，此效果每20秒可触发一次。",
+          "title": "焚韵燃竭"
+        }
+      },
+      "layerRoom": {
+        "62060031": {
+          "monsterIcon": "",
+          "monsterList": {
+            "11312": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugAssaulterPro.png",
+              "name": "偷袭者"
+            },
+            "11322": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_ThugPoacherPro.png",
+              "name": "盗猎客"
+            },
+            "11603": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Mors.png",
+              "name": "多佩冈亚·莫尔斯"
+            },
+            "11613": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Bellum.png",
+              "name": "多佩冈亚·巴罗姆"
+            },
+            "11623": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Doppelganger_Pulchra.png",
+              "name": "多佩冈亚·波可娜"
+            }
+          },
+          "monsterResistance": {
+            "202": "冰属性"
+          },
+          "monsterWeakness": {
+            "200": "物理",
+            "201": "火属性"
+          }
+        },
+        "62060032": {
+          "monsterIcon": "",
+          "monsterList": {
+            "31482": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Arbiter.png",
+              "name": "拉赫穆"
+            },
+            "31552": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_BangbooBattleMecha.png",
+              "name": "城防戍卫布"
+            },
+            "31553": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_CorruptedBattleMecha.png",
+              "name": "蜕生·城防戍卫布"
+            },
+            "31744": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Halberdier.png",
+              "name": "空巡枪骑"
+            },
+            "31752": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_RoscaSolider.png",
+              "name": "空巡近卫"
+            }
+          },
+          "monsterResistance": {},
+          "monsterWeakness": {
+            "203": "电属性",
+            "204": "风属性"
+          }
+        }
+      },
+      "name": "剧变节点第三防线"
+    },
+    "6206004": {
+      "layerBuff": {
+        "62001601": {
+          "desc": "· <color=#FFFFFF>[异常]</color>特性代理人的<color=#FF5521>火属性伤害</color>提升20%。\n· 代理人造成<color=#FFFFFF>属性异常</color>伤害并触发暴击后，全队恢复20点能量，属性异常伤害提升30%，持续20秒，此效果每20秒可触发一次。",
+          "title": "焚韵燃竭"
+        }
+      },
+      "layerRoom": {
+        "62060041": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_ThugBulkyEnforcerBoss.png",
+          "monsterList": {
+            "11352": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcerPro.png",
+              "name": "通缉打手"
+            },
+            "11353": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyEnforcerBoss.png",
+              "name": "祸首·通缉打手"
+            },
+            "11362": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_ThugBulkyAbuserPro.png",
+              "name": "通缉虐待狂"
+            }
+          },
+          "monsterResistance": {
+            "202": "冰属性"
+          },
+          "monsterWeakness": {
+            "200": "物理",
+            "201": "火属性"
+          }
+        },
+        "62060042": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_WingedAvarus.png",
+          "monsterList": {
+            "31013": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_WingedAvarus.png",
+              "name": "蜕生·阿瓦鲁斯"
+            },
+            "31492": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Predator.png",
+              "name": "怒蛇"
+            }
+          },
+          "monsterResistance": {
+            "201": "火属性"
+          },
+          "monsterWeakness": {
+            "200": "物理",
+            "204": "风属性"
+          }
+        }
+      },
+      "name": "剧变节点第四防线"
+    },
+    "6206005": {
+      "layerBuff": {
+        "62001601": {
+          "desc": "· <color=#FFFFFF>[异常]</color>特性代理人的<color=#FF5521>火属性伤害</color>提升20%。\n· 代理人造成<color=#FFFFFF>属性异常</color>伤害并触发暴击后，全队恢复20点能量，属性异常伤害提升30%，持续20秒，此效果每20秒可触发一次。",
+          "title": "焚韵燃竭"
+        },
+        "62001602": {
+          "desc": "· 代理人的锐化伤害提升20%，防御力提升20%。\n· 代理人击败精英敌人后，<color=#FFFFFF>[击破]</color>特性的代理人恢复30点能量，全队恢复500点喧响值。",
+          "title": "刃铠裂宸"
+        },
+        "62001603": {
+          "desc": "· <color=#FFFFFF>[强攻]</color>特性的代理人的<color=#FE437E>以太伤害</color>和<color=#98EFF0>冰属性伤害</color>提升20%，暴击伤害提升40%。\n· 代理人使敌人进入失衡状态后，其失衡恢复速度降低15%，持续15秒，重复触发时刷新持续时间。",
+          "title": "凝能霜爆"
+        }
+      },
+      "layerRoom": {},
+      "name": ""
+    },
+    "62060051": {
+      "layerBuff": {
+        "62001001": {
+          "desc": "· 本关内，对敌人造成伤害可获得<color=#FFAF2C>伤害得分</color>，击败单个<color=#FFFFFF>普通/精英敌人</color>时将一次性获得<color=#FFAF2C>击败得分</color>。\n· 本关内，不同时间段获得的分数将额外享受<color=#FFAF2C>倍率加成</color>，时间越靠前，加成系数越高，加成后<color=#FFAF2C>总得分上限为50000分</color>。",
+          "title": ""
+        },
+        "62001002": {
+          "desc": "",
+          "title": ""
+        },
+        "62001601": {
+          "desc": "· <color=#FFFFFF>[异常]</color>特性代理人的<color=#FF5521>火属性伤害</color>提升20%。\n· 代理人造成<color=#FFFFFF>属性异常</color>伤害并触发暴击后，全队恢复20点能量，属性异常伤害提升30%，持续20秒，此效果每20秒可触发一次。",
+          "title": "焚韵燃竭"
+        }
+      },
+      "layerRoom": {
+        "62060051": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_Avarus.png",
+          "monsterList": {
+            "11502": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_FrenziedManiacPro.png",
+              "name": "狂乱暴徒"
+            },
+            "11512": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_WickedWraithPro.png",
+              "name": "盛怒恶霸"
+            },
+            "31012": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_Avarus.png",
+              "name": "秽息蚀者·阿瓦鲁斯"
+            }
+          },
+          "monsterResistance": {
+            "202": "冰属性"
+          },
+          "monsterWeakness": {
+            "201": "火属性",
+            "205": "以太"
+          }
+        }
+      },
+      "name": "房间一"
+    },
+    "62060052": {
+      "layerBuff": {
+        "62001001": {
+          "desc": "· 本关内，对敌人造成伤害可获得<color=#FFAF2C>伤害得分</color>，击败单个<color=#FFFFFF>普通/精英敌人</color>时将一次性获得<color=#FFAF2C>击败得分</color>。\n· 本关内，不同时间段获得的分数将额外享受<color=#FFAF2C>倍率加成</color>，时间越靠前，加成系数越高，加成后<color=#FFAF2C>总得分上限为50000分</color>。",
+          "title": ""
+        },
+        "62001002": {
+          "desc": "",
+          "title": ""
+        },
+        "62001602": {
+          "desc": "· 代理人的锐化伤害提升20%，防御力提升20%。\n· 代理人击败精英敌人后，<color=#FFFFFF>[击破]</color>特性的代理人恢复30点能量，全队恢复500点喧响值。",
+          "title": "刃铠裂宸"
+        }
+      },
+      "layerRoom": {
+        "62060052": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_BlackMazingerGoldenBomb.png",
+          "monsterList": {
+            "11052": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_GuardianPro.png",
+              "name": "「卫士Ⅱ型」"
+            },
+            "11262": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_HeavyFirepowerPro.png",
+              "name": "突击炮手"
+            },
+            "31361": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_BlackMazingerGoldenBomb.png",
+              "name": "缄枢"
+            }
+          },
+          "monsterResistance": {
+            "205": "以太"
+          },
+          "monsterWeakness": {
+            "200": "物理",
+            "203": "电属性"
+          }
+        }
+      },
+      "name": "房间二"
+    },
+    "62060053": {
+      "layerBuff": {
+        "62001001": {
+          "desc": "· 本关内，对敌人造成伤害可获得<color=#FFAF2C>伤害得分</color>，击败单个<color=#FFFFFF>普通/精英敌人</color>时将一次性获得<color=#FFAF2C>击败得分</color>。\n· 本关内，不同时间段获得的分数将额外享受<color=#FFAF2C>倍率加成</color>，时间越靠前，加成系数越高，加成后<color=#FFAF2C>总得分上限为50000分</color>。",
+          "title": ""
+        },
+        "62001002": {
+          "desc": "",
+          "title": ""
+        },
+        "62001603": {
+          "desc": "· <color=#FFFFFF>[强攻]</color>特性的代理人的<color=#FE437E>以太伤害</color>和<color=#98EFF0>冰属性伤害</color>提升20%，暴击伤害提升40%。\n· 代理人使敌人进入失衡状态后，其失衡恢复速度降低15%，持续15秒，重复触发时刷新持续时间。",
+          "title": "凝能霜爆"
+        }
+      },
+      "layerRoom": {
+        "62060053": {
+          "monsterIcon": "Assets/NapResources/UI/Sprite/A1DynamicLoad/IconBossGeneral/UnPacker/IconMonster_MiasmaNoranoSlime.png",
+          "monsterList": {
+            "31072": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_Huskron.png",
+              "name": "赫斯克龙"
+            },
+            "31182": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv01/Monster_MiasmaSpawn.png",
+              "name": "秽息原牲"
+            },
+            "31294": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv03/Monster_MiasmaNoranoSlime.png",
+              "name": "秽蚀·狛野真斗"
+            },
+            "31382": {
+              "image": "UI/Sprite/A1DynamicLoad/BossCard/UnPacker/BossCardLv02/Monster_Gloomaron.png",
+              "name": "秽蚀·赫斯克龙"
+            }
+          },
+          "monsterResistance": {
+            "200": "物理"
+          },
+          "monsterWeakness": {
+            "202": "冰属性"
+          }
+        }
+      },
+      "name": "房间三"
+    }
+  }
+}

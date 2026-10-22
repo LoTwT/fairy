@@ -1623,7 +1623,13 @@
     }
   },
   "specialElementType": {},
-  "strategy": {},
+  "strategy": [
+    "01",
+    "Burst damage and major damage boost",
+    "<IconMap:Icon_GeneralBuff_Lumiflux>Lumiflux, <IconMap:Icon_AvatarClass_Anomaly>Anomaly <Term:3000012>quick-swap</Term> dealer",
+    "Lumiflux <Term:1000031>Refringe</Term> boosts team Anomaly DMG",
+    "Deals burst Anomaly DMG through <Term:1000034>Luminize</Term>"
+  ],
   "talent": {
     "1": {
       "desc": "Upon entering the battlefield, Remielle gains 3 special <Term:1000033></Term>s. In Investigation Zone mode, this effect can trigger once every 180s. When Remielle triggers <Term:1000034></Term> to deal DMG, she ignores 50% of the target's All-Attribute RES. When using <color=#FFFFFF>Assist: Flower & Feather Dance</color>, she gains 200 Decibels. This effect can trigger once every 18s. While Remielle is in the <Term:1000035></Term> state, other squad members' Attribute Anomaly DMG increases by 10%.",

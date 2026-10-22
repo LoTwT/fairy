@@ -1737,7 +1737,7 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_Ice>Ice, versatile quick-swap support",
+    "<IconMap:Icon_GeneralBuff_Ice>Ice, <Term:3000013></Term> <IconMap:Icon_AvatarClass_Support> Support, <Term:3000012></Term> support",
     "Provides attack boosts to all squad members"
   ],
   "talent": {

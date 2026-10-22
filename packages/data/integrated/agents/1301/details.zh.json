@@ -1614,7 +1614,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Fire>火属性，后台追击",
+    "<IconMap:Icon_GeneralBuff_Fire>火属性，<IconMap:Icon_AvatarClass_Attack>强攻后台追击",
     "全自动后台输出",
     "提供全队角色攻击力加成"
   ],

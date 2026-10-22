@@ -496,7 +496,7 @@ const nekomataOrdinaryEvidence = [
   {
     path: "agents/1021/details.zh.json",
     pointer: "/passive/level/1021507/desc/0",
-    sha256: "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07",
+    sha256: "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86",
   },
 ] as const
 
@@ -504,7 +504,7 @@ const nekomataShowEvidence = [
   {
     path: "agents/1021/details.zh.json",
     pointer: "/passive/level/1021507/desc/1",
-    sha256: "68cfb9254d991cd3d59a0e7ec38c3f8f15ed8030a910cacd9627e7726074cb07",
+    sha256: "b381da617455bd8f5a1b40ed976e2fca25fdfe3b4b481d8208f5b7fe3a4afa86",
   },
 ] as const
 
@@ -1690,31 +1690,31 @@ const potentialEvidence = (
 
 const soldier11PotentialEvidence = potentialEvidence(
   "1041",
-  "2e6e2beaf2858e974944ff415a0a640a15c0c5f446c60020b90ba59292eeb405",
+  "3e791d6606081aa5beb13e92ddd53af296d6defbd6703c997ea3059eac594b96",
   104100,
 )
 const lycaonPotentialEvidence = potentialEvidence(
   "1141",
-  "86b72b728c26ebdf79acb4663aef806e10a7c0ad86632eb60d2d8254a18bf3d1",
+  "f4dd5b0862a14f429d924975851f3d0a9e33bfe3a591d2899809e8926485d54b",
   114100,
 )
 const alexandrinaPotentialEvidence = potentialEvidence(
   "1211",
-  "ff04332f6e00a8e4ef654a1da8bfffbb577d90219c26b9f37cb1f4f69c0b9615",
+  "f804d9d945014cbc4548f8355b1523f234b33be98ce5fc72e4c4b59b471f8063",
   121100,
 )
 const ellenOrdinaryEvidence = [
   {
     path: "agents/1191/details.zh.json",
     pointer: "/passive/level/1191507/desc/0",
-    sha256: "af6dfd6b8e63a6e2b460b63dc03bc7376d50e872bb8e26493364f5393176e222",
+    sha256: "ab0abe81b6375696597e65a9d29e6d1ff52db31eae9cedf7739c8403e8a7416e",
   },
 ] as const
 const harumasaOrdinaryEvidence = [
   {
     path: "agents/1201/details.zh.json",
     pointer: "/passive/level/1201507/desc/0",
-    sha256: "cc189bbe54821dcca7139a529ca283220154aa92fbc84e912eab01fb1bb1b8db",
+    sha256: "619512443bf20df5b3efd3e50a8ae3919774825ee1c247519ef0de04f5416ab7",
   },
 ] as const
 
@@ -2126,7 +2126,7 @@ const nicoleMindscape1ExDamage: Supplement = {
       path: "agents/1031/details.zh.json",
       pointer: "/talent/1/desc",
       sha256:
-        "f648a8ff0d98f18d9348c7b10c79d234bf4d52d8d6ac0d92e596822a9016aaf8",
+        "a35b72056c57ba7eba71300e2e51691190c052362c4cc55e8bccfb9787cdab71",
     },
   ],
   verification:
@@ -2215,7 +2215,7 @@ const qingyiFlashVoltageConsumedDamage: Supplement = {
       path: "agents/1251/details.zh.json",
       pointer: "/skill/basic/description/2/desc",
       sha256:
-        "d5344fa4979038c19f4120a2e9466aba07ed69be20ec2e948c367db4a59b16ef",
+        "b2af0043044397a3c9b6351852856db96bc2d24645f2ac0b3f9fc48254a6c1fb",
     },
   ],
   verification:
@@ -2329,7 +2329,7 @@ const koledaEnhancedBasicSecondPerLayer: Supplement = {
       path: "agents/1101/details.zh.json",
       pointer: "/skill/basic/description/1/desc",
       sha256:
-        "4234d05a53ae34e4558929d46d222aab7435b094ab8877f312ca5b19403839e7",
+        "e71933bac0c8185696795aaa9ddd45194e6b5116e1d415a54fb232c32433703b",
     },
   ],
   verification:
@@ -2401,13 +2401,13 @@ const caesarStanceSwitchImpact: Supplement = {
       path: "agents/1071/details.zh.json",
       pointer: "/skill/special/description/4/desc",
       sha256:
-        "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294",
+        "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace",
     },
     {
       path: "agents/1071/details.zh.json",
       pointer: "/skill/special/description/5/param/0/desc",
       sha256:
-        "e1cdf548442fdce60f0af409e8901deeefd01ddd846e24ace0883db966509294",
+        "ccecaf34f1fce4bb547a329af7285c7dde51e45a7c2933bc7bee87da50684ace",
     },
   ],
   verification:
@@ -2481,7 +2481,7 @@ const lighterMoraleBurstImpact: Supplement = {
   },
   evidence: agentPassiveEvidence(
     "1161",
-    "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5",
+    "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3",
     1161501,
   ),
   verification:
@@ -2540,7 +2540,7 @@ const jufufuTigersRoarImpact: Supplement = {
   },
   evidence: agentPassiveEvidence(
     "1391",
-    "cfb0b4b580900d4c3e6c668c63e89b5f61d69e577db361b19bca86d063b36ae6",
+    "913bb24102cf3e1b5362d25c183e235df8a96a2bed084379acb92ecc7e4282e6",
     1391501,
   ),
   verification:
@@ -2606,7 +2606,7 @@ const dialynInitialCritRateImpact: Supplement = {
   },
   evidence: agentPassiveEvidence(
     "1481",
-    "c335486522cb3958f1430551fb07616364cd01f13cbe988c7bde6d21a41ca3ed",
+    "6c9f098bacd710f1bdbf5d090725b50684f996ff030ef355b8711a7ffc12bc8a",
     1481049,
   ),
   verification:
@@ -2712,7 +2712,7 @@ const lighterMindscape4FrontlineEnergyRegen: Supplement = {
       path: "agents/1161/details.zh.json",
       pointer: "/talent/4/desc",
       sha256:
-        "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5",
+        "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3",
     },
   ],
   verification:
@@ -2788,7 +2788,7 @@ const alexandrinaMindscape4DeployedDollsEnergyRegen: Supplement = {
       path: "agents/1211/details.zh.json",
       pointer: "/talent/4/desc",
       sha256:
-        "ff04332f6e00a8e4ef654a1da8bfffbb577d90219c26b9f37cb1f4f69c0b9615",
+        "f804d9d945014cbc4548f8355b1523f234b33be98ce5fc72e4c4b59b471f8063",
     },
   ],
   verification:
@@ -2841,7 +2841,7 @@ const roxyInitialEnergyRegenConversion: Supplement = {
   computationTarget: "catalog entity + complete-state option (two rules)",
   evidence: agentPassiveEvidence(
     "1621",
-    "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e",
+    "4b4f267a85665ace084d57c47d7202d5687009a98f2c0873b0c89e8124b329e3",
     1621501,
   ),
   verification:
@@ -2861,7 +2861,7 @@ const roxyInitialEnergyRegenConversion: Supplement = {
         {
           path: "agents/1621/details.zh.json",
           sha256:
-            "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e",
+            "4b4f267a85665ace084d57c47d7202d5687009a98f2c0873b0c89e8124b329e3",
         },
         {
           path: "agents/1621/data.json",
@@ -3207,7 +3207,7 @@ const evelynPassiveNamedSkillMultiplierEvidence = (
 ).map((rank) => ({
   path: "agents/1321/details.zh.json",
   pointer: `/passive/level/${1321501 + rank - 1}/desc/1`,
-  sha256: "ec99d046c695ada6f090a4da5a38bfe5951552996ead6a85ce7f5385727c8783",
+  sha256: "354cc0d37fb54146154670fcf729f8c0ab66495602d730b00241b093cc78365b",
   rank,
 }))
 
@@ -3252,7 +3252,7 @@ const evelynMindscape6LunaluxGarroteFollowUp: Supplement = {
       path: "agents/1321/details.zh.json",
       pointer: "/talent/6/desc",
       sha256:
-        "ec99d046c695ada6f090a4da5a38bfe5951552996ead6a85ce7f5385727c8783",
+        "354cc0d37fb54146154670fcf729f8c0ab66495602d730b00241b093cc78365b",
     },
     ...evelynPassiveNamedSkillMultiplierEvidence,
   ],
@@ -3343,7 +3343,7 @@ const s0anbyMindscape6ElectromagneticVortex: Supplement = {
       path: "agents/1381/details.zh.json",
       pointer: "/talent/6/desc",
       sha256:
-        "600ca2500fb32c4bace09c67b196265e6f33fc276fa43f868f999ca4b416fe61",
+        "c7cfcbd532b51197fa00c1790fb20fa2657c7dead2ecb153c8d7530be054b3f1",
     },
   ],
   verification:
@@ -3437,7 +3437,7 @@ const dialynMindscape6AftertoneEcho: Supplement = {
       path: "agents/1481/details.zh.json",
       pointer: "/talent/6/desc",
       sha256:
-        "c335486522cb3958f1430551fb07616364cd01f13cbe988c7bde6d21a41ca3ed",
+        "6c9f098bacd710f1bdbf5d090725b50684f996ff030ef355b8711a7ffc12bc8a",
     },
   ],
   verification:
@@ -3560,7 +3560,7 @@ const nangongyuMindscape6VibratoModified = (
       path: "agents/1511/details.zh.json",
       pointer: "/talent/6/desc",
       sha256:
-        "623a202f3d6b33c5c32d2ef6958595d02f0649cd76e57679858108b753a262b8",
+        "0e93e4b483a5aa8faef8e3345cf849de56bb3e8c717554e661c4bd1aed120fdb",
     },
   ],
   verification:
@@ -3993,7 +3993,7 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
         path: "agents/1031/details.zh.json",
         pointer: "/talent/1/desc",
         sha256:
-          "f648a8ff0d98f18d9348c7b10c79d234bf4d52d8d6ac0d92e596822a9016aaf8",
+          "a35b72056c57ba7eba71300e2e51691190c052362c4cc55e8bccfb9787cdab71",
       },
     ],
     verification:
@@ -4020,7 +4020,7 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
         path: "agents/1251/details.zh.json",
         pointer: "/skill/basic/description/2/desc",
         sha256:
-          "d5344fa4979038c19f4120a2e9466aba07ed69be20ec2e948c367db4a59b16ef",
+          "b2af0043044397a3c9b6351852856db96bc2d24645f2ac0b3f9fc48254a6c1fb",
       },
     ],
     verification:
@@ -4047,7 +4047,7 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
         path: "agents/1101/details.zh.json",
         pointer: "/skill/basic/description/1/desc",
         sha256:
-          "4234d05a53ae34e4558929d46d222aab7435b094ab8877f312ca5b19403839e7",
+          "e71933bac0c8185696795aaa9ddd45194e6b5116e1d415a54fb232c32433703b",
       },
     ],
     verification:
@@ -4080,7 +4080,7 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
         path: "agents/1161/details.zh.json",
         pointer: "/talent/4/desc",
         sha256:
-          "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5",
+          "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3",
       },
     ],
     verification:
@@ -4141,7 +4141,7 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
         path: "agents/1511/details.zh.json",
         pointer: "/talent/6/desc",
         sha256:
-          "623a202f3d6b33c5c32d2ef6958595d02f0649cd76e57679858108b753a262b8",
+          "0e93e4b483a5aa8faef8e3345cf849de56bb3e8c717554e661c4bd1aed120fdb",
       },
     ],
     verification:
@@ -4167,7 +4167,7 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
       "declared unavailable option on the supplement agent entity",
     evidence: agentPassiveEvidence(
       "1621",
-      "c2389b7393c05632b298733831b079f8d19dc74f7af54f121f93e9c54134b30e",
+      "4b4f267a85665ace084d57c47d7202d5687009a98f2c0873b0c89e8124b329e3",
       1621501,
     ),
     verification:
@@ -4207,7 +4207,7 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
       path: "agents/1411/details.zh.json",
       pointer: `/passive/level/${1411049 + rank - 1}/desc/1`,
       sha256:
-        "3c58a01094de2dc0c6298d8989a8b00f02f30afe36320524a01742ff7f99d560",
+        "4922346ce3919844ad167b0e52e2ee4e3999d7a487429d549a27fe058e661920",
       rank,
     })),
     verification:
@@ -4246,7 +4246,7 @@ const pr10ProviderBoundaries: readonly Supplement[] = [
         path: "agents/1411/details.zh.json",
         pointer: "/talent/1/desc",
         sha256:
-          "3c58a01094de2dc0c6298d8989a8b00f02f30afe36320524a01742ff7f99d560",
+          "4922346ce3919844ad167b0e52e2ee4e3999d7a487429d549a27fe058e661920",
       },
     ],
     verification:
@@ -4329,7 +4329,7 @@ const pr10ReviewFixClauses: readonly Supplement[] = [
     computationTarget: "declared unavailable option on the mapped agent entity",
     evidence: agentPassiveEvidence(
       "1161",
-      "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5",
+      "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3",
       1161501,
     ),
     verification:
@@ -4354,7 +4354,7 @@ const pr10ReviewFixClauses: readonly Supplement[] = [
     computationTarget: "declared unavailable option on the mapped agent entity",
     evidence: agentPassiveEvidence(
       "1161",
-      "5905a577cc078f91031b3f14b5dff21bdba95952e2e74215d4cc3e22798fc3c5",
+      "ba3315dad6950ade70e58d26d388c7faa189844a6fe6c7e11903e7dff18bf9c3",
       1161501,
     ),
     verification:
@@ -4379,7 +4379,7 @@ const pr10ReviewFixClauses: readonly Supplement[] = [
     computationTarget: "declared unavailable option on the mapped agent entity",
     evidence: agentPassiveEvidence(
       "1481",
-      "c335486522cb3958f1430551fb07616364cd01f13cbe988c7bde6d21a41ca3ed",
+      "6c9f098bacd710f1bdbf5d090725b50684f996ff030ef355b8711a7ffc12bc8a",
       1481049,
     ),
     verification:
@@ -4404,7 +4404,7 @@ const pr10ReviewFixClauses: readonly Supplement[] = [
     computationTarget: "declared unavailable option on the mapped agent entity",
     evidence: agentPassiveEvidence(
       "1481",
-      "c335486522cb3958f1430551fb07616364cd01f13cbe988c7bde6d21a41ca3ed",
+      "6c9f098bacd710f1bdbf5d090725b50684f996ff030ef355b8711a7ffc12bc8a",
       1481049,
     ),
     verification:
@@ -4441,7 +4441,7 @@ const pr10ReviewFixClauses: readonly Supplement[] = [
     computationTarget: "declared unavailable option on the mapped agent entity",
     evidence: agentPassiveEvidence(
       "1511",
-      "623a202f3d6b33c5c32d2ef6958595d02f0649cd76e57679858108b753a262b8",
+      "0e93e4b483a5aa8faef8e3345cf849de56bb3e8c717554e661c4bd1aed120fdb",
       1511049,
     ),
     verification:
@@ -4478,7 +4478,7 @@ const pr10ReviewFixClauses: readonly Supplement[] = [
     computationTarget: "declared unavailable option on the mapped agent entity",
     evidence: agentPassiveEvidence(
       "1511",
-      "623a202f3d6b33c5c32d2ef6958595d02f0649cd76e57679858108b753a262b8",
+      "0e93e4b483a5aa8faef8e3345cf849de56bb3e8c717554e661c4bd1aed120fdb",
       1511049,
     ),
     verification:
@@ -4832,7 +4832,7 @@ const benBiggerMindscape2BlockCounterDefenseDamage: Supplement = {
       path: "agents/1121/details.zh.json",
       pointer: "/talent/2/desc",
       sha256:
-        "7b29944c5851ca9da2b53fb909af7db7f34875043c4f44138b05cd9cdb41e741",
+        "893191112983049b0dbd0ae2edb0f63ba16c5e74d1ebdc42448ebaf943197ea2",
     },
   ],
   verification:
@@ -4958,7 +4958,7 @@ const miyabiFrostburnBreakDamage: Supplement = {
     // 核心被动七行：倍率逐档核对（data.json level 元数据 1—7 逐行映射）。
     ...agentPassiveEvidence(
       "1091",
-      "45f70931c081d73d085eadea5a23d6c21cc314019090d0577a76a9b3f722973e",
+      "5f00f24d508f8916dbfc94993a7ff4dffda09d0fafddb30259f64cee791aa841",
       1091501,
     ),
     // 影画 4[皲裂]：中英文同文核对（+30% 与 250 喧响值）。
@@ -4966,13 +4966,13 @@ const miyabiFrostburnBreakDamage: Supplement = {
       path: "agents/1091/details.zh.json",
       pointer: "/talent/4/desc",
       sha256:
-        "45f70931c081d73d085eadea5a23d6c21cc314019090d0577a76a9b3f722973e",
+        "5f00f24d508f8916dbfc94993a7ff4dffda09d0fafddb30259f64cee791aa841",
     },
     {
       path: "agents/1091/details.en.json",
       pointer: "/talent/4/desc",
       sha256:
-        "bad069eb3645dde14af355e4121faef405c296d938bb0d7a512eb9f3b9c39a35",
+        "aa51b473f18c002f70fb7b68cdefd7425cd11b3255e86b62fca228674f9fb26e",
     },
   ],
   verification:
@@ -5141,13 +5141,13 @@ const janeMindscape6ProficiencyDamage: Supplement = {
       path: "agents/1261/details.zh.json",
       pointer: "/talent/6/desc",
       sha256:
-        "b69786037562711fda0389dc86940257a5df4504e100940781ce91a0311fa9ef",
+        "9961f4a46fe6c388901117810885964a5f38268462d24fa7e6c17a5c9865ae11",
     },
     {
       path: "agents/1261/details.en.json",
       pointer: "/talent/6/desc",
       sha256:
-        "766e9864c4051ce8206a3e82e6b3f2124434063ac79f9a04557c99f2933ac689",
+        "f463218618d5a9bc5abffa440146ff262d343c027e2a469066c63d7bb0dc024c",
     },
   ],
   verification:
@@ -5229,13 +5229,13 @@ const aliceMindscape6ProficiencyDamage: Supplement = {
       path: "agents/1401/details.zh.json",
       pointer: "/talent/6/desc",
       sha256:
-        "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
+        "2fa6f4711a3138251c777d4b2b402ea414f03ee38c988ae92e588f26d8ecf41b",
     },
     {
       path: "agents/1401/details.en.json",
       pointer: "/talent/6/desc",
       sha256:
-        "08eddd31bd56875c8c757156c28cf00493ec08267c9eb73b27f8f85583a827c8",
+        "14bd2589be83c8bf80a9de3c8dcf467ce9bab78b630240c56ca6db7bdaff1091",
     },
   ],
   verification:
@@ -5359,11 +5359,11 @@ const graceMindscape6Grenades = (enhanced: boolean): Supplement => {
       [
         [
           "zh",
-          "39982521b198f62299a1cb4092dc1a3802c6b62748d04bcfda8f0f24b5afbdcf",
+          "0752c155856afbbe7212ecb80b1f5a38b4a5fdfff3eeb8ccf0d48c770d2ff9d7",
         ],
         [
           "en",
-          "297e4569d52b871555ade0eb95920f40fd9aa5d9e3946404dd5903bcb4315a1a",
+          "ddb6e608d413216ab2d6bcb681dedca27ca38447bdf17a1d1bfa3183110f6ad1",
         ],
       ] as const
     ).flatMap(([language, sha256]) =>
@@ -5583,11 +5583,11 @@ const yeshunguangVeilVulnerability: Supplement = {
     [
       [
         "zh",
-        "8eeb89663329e6c021692386def9f86e19e01da5560b3b2e4b3720649cd77cad",
+        "235ffeff58ecb2fb0e0542f71e0cd79a69eee8ac7500aabac976f2a78b742db4",
       ],
       [
         "en",
-        "f97dddc1f6ba8661ba3f4564e1aec42afb1b20eb93d957d62fa805e1d5d6f630",
+        "2264b9a276a8054f5c14405dd41af11b36a247005e32a71904f2533b22448ccd",
       ],
     ] as const
   ).flatMap(([language, sha256]) => [
@@ -5804,98 +5804,98 @@ const aliceCorePeriodicDamage: Supplement = {
       path: "agents/1401/details.zh.json",
       pointer: "/passive/level/1401501/desc/0",
       sha256:
-        "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
+        "2fa6f4711a3138251c777d4b2b402ea414f03ee38c988ae92e588f26d8ecf41b",
       rank: 1,
     },
     {
       path: "agents/1401/details.en.json",
       pointer: "/passive/level/1401501/desc/0",
       sha256:
-        "08eddd31bd56875c8c757156c28cf00493ec08267c9eb73b27f8f85583a827c8",
+        "14bd2589be83c8bf80a9de3c8dcf467ce9bab78b630240c56ca6db7bdaff1091",
       rank: 1,
     },
     {
       path: "agents/1401/details.zh.json",
       pointer: "/passive/level/1401502/desc/0",
       sha256:
-        "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
+        "2fa6f4711a3138251c777d4b2b402ea414f03ee38c988ae92e588f26d8ecf41b",
       rank: 2,
     },
     {
       path: "agents/1401/details.en.json",
       pointer: "/passive/level/1401502/desc/0",
       sha256:
-        "08eddd31bd56875c8c757156c28cf00493ec08267c9eb73b27f8f85583a827c8",
+        "14bd2589be83c8bf80a9de3c8dcf467ce9bab78b630240c56ca6db7bdaff1091",
       rank: 2,
     },
     {
       path: "agents/1401/details.zh.json",
       pointer: "/passive/level/1401503/desc/0",
       sha256:
-        "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
+        "2fa6f4711a3138251c777d4b2b402ea414f03ee38c988ae92e588f26d8ecf41b",
       rank: 3,
     },
     {
       path: "agents/1401/details.en.json",
       pointer: "/passive/level/1401503/desc/0",
       sha256:
-        "08eddd31bd56875c8c757156c28cf00493ec08267c9eb73b27f8f85583a827c8",
+        "14bd2589be83c8bf80a9de3c8dcf467ce9bab78b630240c56ca6db7bdaff1091",
       rank: 3,
     },
     {
       path: "agents/1401/details.zh.json",
       pointer: "/passive/level/1401504/desc/0",
       sha256:
-        "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
+        "2fa6f4711a3138251c777d4b2b402ea414f03ee38c988ae92e588f26d8ecf41b",
       rank: 4,
     },
     {
       path: "agents/1401/details.en.json",
       pointer: "/passive/level/1401504/desc/0",
       sha256:
-        "08eddd31bd56875c8c757156c28cf00493ec08267c9eb73b27f8f85583a827c8",
+        "14bd2589be83c8bf80a9de3c8dcf467ce9bab78b630240c56ca6db7bdaff1091",
       rank: 4,
     },
     {
       path: "agents/1401/details.zh.json",
       pointer: "/passive/level/1401505/desc/0",
       sha256:
-        "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
+        "2fa6f4711a3138251c777d4b2b402ea414f03ee38c988ae92e588f26d8ecf41b",
       rank: 5,
     },
     {
       path: "agents/1401/details.en.json",
       pointer: "/passive/level/1401505/desc/0",
       sha256:
-        "08eddd31bd56875c8c757156c28cf00493ec08267c9eb73b27f8f85583a827c8",
+        "14bd2589be83c8bf80a9de3c8dcf467ce9bab78b630240c56ca6db7bdaff1091",
       rank: 5,
     },
     {
       path: "agents/1401/details.zh.json",
       pointer: "/passive/level/1401506/desc/0",
       sha256:
-        "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
+        "2fa6f4711a3138251c777d4b2b402ea414f03ee38c988ae92e588f26d8ecf41b",
       rank: 6,
     },
     {
       path: "agents/1401/details.en.json",
       pointer: "/passive/level/1401506/desc/0",
       sha256:
-        "08eddd31bd56875c8c757156c28cf00493ec08267c9eb73b27f8f85583a827c8",
+        "14bd2589be83c8bf80a9de3c8dcf467ce9bab78b630240c56ca6db7bdaff1091",
       rank: 6,
     },
     {
       path: "agents/1401/details.zh.json",
       pointer: "/passive/level/1401507/desc/0",
       sha256:
-        "8468dbbd3d1ce6eff4fa743f96e369038ae959ec16f0aad980e500407139c42d",
+        "2fa6f4711a3138251c777d4b2b402ea414f03ee38c988ae92e588f26d8ecf41b",
       rank: 7,
     },
     {
       path: "agents/1401/details.en.json",
       pointer: "/passive/level/1401507/desc/0",
       sha256:
-        "08eddd31bd56875c8c757156c28cf00493ec08267c9eb73b27f8f85583a827c8",
+        "14bd2589be83c8bf80a9de3c8dcf467ce9bab78b630240c56ca6db7bdaff1091",
       rank: 7,
     },
   ],
@@ -6068,14 +6068,14 @@ const astraYaoMindscape4QuickAssistDamage: Supplement = {
       path: "agents/1311/details.zh.json",
       pointer: "/talent/4/desc",
       sha256:
-        "3cd6bd1f7deb82e82b306d166d411226ff13a8978bbca1f4aec056838790bd47",
+        "5545b193fa4326abdfe1e3b253c7db3318e0f3b2699e0e99a06a9622ea691179",
       rank: 4,
     },
     {
       path: "agents/1311/details.en.json",
       pointer: "/talent/4/desc",
       sha256:
-        "06e2a6eb0756fcea545b01af7bd46019ab43adefe61e37031f559c713a1843c8",
+        "68aa7a1a29b0923a8d83f479e600d48fc9a5439013e38913ae34937511c1b102",
       rank: 4,
     },
   ],

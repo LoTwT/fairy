@@ -1746,8 +1746,8 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>以太属性，站场输出",
-    "蓄力攻击可触发[异放]",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>以太属性，<IconMap:Icon_AvatarClass_Anomaly>异常站场输出",
+    "蓄力攻击可触发<Term:3000002></Term>",
     "失衡后[异放]效果额外提升"
   ],
   "talent": {

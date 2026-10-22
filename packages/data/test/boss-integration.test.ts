@@ -97,7 +97,7 @@ const expectedData = {
   },
 } satisfies BossData
 
-describe("单 Boss 纯整合 nanoka-boss-reference/5", () => {
+describe("单 Boss 纯整合 nanoka-boss-reference/6", () => {
   it("按独立预期拆分双语，保留索引，冻结输入仍可整合且不修改来源", () => {
     const input = bossInput()
     const before = structuredClone(input)
@@ -401,6 +401,32 @@ describe("单 Boss 纯整合 nanoka-boss-reference/5", () => {
     )
   })
 
+  it("详情开放时间窗可按语言全缺，全部缺失时不生成字段", () => {
+    const input = bossInput()
+    for (const locale of ["zh", "en"] as const)
+      for (const key of ["begin_time", "end_time"] as const)
+        remove(input.details[locale], key)
+    const result = integrateBoss(input)
+    expect(result.data).not.toHaveProperty("beginTime")
+    expect(result.data).not.toHaveProperty("endTime")
+    expectBossRoundtrip(result, input)
+  })
+
+  it("详情开放时间窗只在部分语言提供或跨语言不同即拒绝", () => {
+    const partial = bossInput()
+    remove(partial.details.en, "begin_time")
+    expectFailure(
+      partial,
+      "zh",
+      "/begin_time",
+      "共享字段只在部分语言提供（zh）",
+    )
+
+    const conflict = bossInput()
+    change(conflict.details.en, "end_time", "2024-08-01 04:00:00")
+    expectFailure(conflict, "en", "/end_time", "共享冲突")
+  })
+
   it("索引直播服时间窗与详情开放时间互不覆盖", () => {
     const input = bossInput()
     const record = input.sourceRecord as Record<string, unknown>
@@ -578,8 +604,6 @@ describe("单 Boss 纯整合 nanoka-boss-reference/5", () => {
       ["priority", "/priority"],
       ["zone_type", "/zone_type"],
       ["boss_adjust", "/boss_adjust"],
-      ["begin_time", "/begin_time"],
-      ["end_time", "/end_time"],
       ["modes.0.id", "/modes/0/id"],
       ["modes.0.zone_type", "/modes/0/zone_type"],
       ["modes.0.zone", "/modes/0/zone"],

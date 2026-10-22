@@ -1565,9 +1565,9 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, on-field DMG dealer",
-    "Ignores Anomaly Buildup and triggers Assault directly",
-    "Can trigger Disorder frequently to deal damage"
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, <IconMap:Icon_AvatarClass_Anomaly> Anomaly on-field DMG dealer",
+    "Ignore <Term:3000005></Term> and calculate <Term:3000006></Term> immediately",
+    "Can trigger high-frequency <Term:3000003></Term> DMG output"
   ],
   "talent": {
     "1": {

@@ -1542,7 +1542,7 @@
   "specialElementType": {},
   "strategy": [
     "07",
-    "<IconMap:Icon_GeneralBuff_Thunder>电属性，后台击破",
+    "<IconMap:Icon_GeneralBuff_Thunder>电属性，<IconMap:Icon_AvatarClass_Stun>后台击破",
     "提升失衡易伤倍率",
     "高频协同追击"
   ],

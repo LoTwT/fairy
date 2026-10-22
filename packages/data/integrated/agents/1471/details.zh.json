@@ -2168,7 +2168,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Fire>火属性，站场输出",
+    "<IconMap:Icon_GeneralBuff_Fire>火属性，<IconMap:Icon_AvatarClass_Rupture>命破站场输出",
     "多种连招组合",
     "可提升自身贯穿力、暴伤与火伤"
   ],

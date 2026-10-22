@@ -1466,8 +1466,8 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_Ice>冰属性，泛用型速切辅助",
-    "可稳定开启[以太帷幕]",
+    "<IconMap:Icon_GeneralBuff_Ice>冰属性，<Term:3000013></Term><IconMap:Icon_AvatarClass_Defense><Term:3000012></Term>防护辅助",
+    "可稳定开启<Term:3000001></Term>",
     "提高全队角色攻击力"
   ],
   "talent": {

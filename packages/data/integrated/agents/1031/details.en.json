@@ -2230,8 +2230,8 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>Ether, versatile support",
-    "Gathers enemies and reduces their DEF"
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>Ether, <Term:3000013></Term> <IconMap:Icon_AvatarClass_Support> Support",
+    "<Term:3000009>Gathers enemies</Term> and reduces their DEF"
   ],
   "talent": {
     "1": {

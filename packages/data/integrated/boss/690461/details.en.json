@@ -92,7 +92,7 @@
               "title": ""
             },
             "69014506": {
-              "desc": "· Attribute Anomaly DMG taken by Kusarikku is <color=#FFAF2C>reduced by 40%</color>.\n· When an Agent successfully uses a Defensive Assist against Kusarikku's <Term:2000005></Term>, applies 1 stack of Exposed to Kusarikku. When Kusarikku becomes Stunned, applies 2 stacks of Exposed. Each stack of Exposed increases the <color=#FFAF2C>Laceration DMG Kusarikku receives by 10%</color>. Exposed can stack up to 4 times and lasts <color=#FFAF2C>30</color>s. Repeated triggers reset the duration.",
+              "desc": "· Attribute Anomaly DMG taken by Kusarikku is <color=#FFAF2C>reduced by 40%</color>.\n· When an Agent successfully uses a Defensive Assist against Kusarikku's <Term:2000005></Term>, applies 1 stack of Exposed to Kusarikku. When Kusarikku becomes Stunned, applies 2 stacks of Exposed. Each stack of Exposed increases the <color=#FFAF2C>Laceration DMG Kusarikku receives by 20%</color>. Exposed can stack up to 4 times and lasts <color=#FFAF2C>30</color>s. Repeated triggers reset the duration.",
               "title": ""
             },
             "69014507": {

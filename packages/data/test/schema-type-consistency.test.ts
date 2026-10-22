@@ -12,6 +12,7 @@ import type {
 import {
   bossAdjustMembers,
   bossBuffMembers,
+  bossConditionalSharedDetailFields,
   bossEncounterMembers,
   bossLocalizedDetailFields,
   bossModeMembers,
@@ -255,14 +256,12 @@ describe("Boss 登记表与封闭类型一致", () => {
     expect(new Set(Object.values(bossSharedBlockFields))).toEqual(
       new Set(["bossAdjust"]),
     )
-    // liveTimeWindow 提升自来源索引的 live_begin/live_end，不在详情登记表内。
+    // liveTimeWindow 提升自来源索引；beginTime/endTime 是条件公共字段。
     expect(outputSet(bossSharedDetailFields)).toEqual(
-      new Set(
-        bossDataKeys.filter(
-          (key) =>
-            key !== "id" && key !== "bossAdjust" && key !== "liveTimeWindow",
-        ),
-      ),
+      new Set(["priority", "zoneType"]),
+    )
+    expect(outputSet(bossConditionalSharedDetailFields)).toEqual(
+      new Set(["beginTime", "endTime"]),
     )
     expect(outputSet(bossLocalizedDetailFields)).toEqual(
       new Set(
@@ -1092,14 +1091,11 @@ describe("封闭类型不得重新引入可选成员", () => {
     Equal<keyof BangbooSkillLevelEntry, RequiredKeys<BangbooSkillLevelEntry>>
   >
   type _BossDataAllRequired = Expect<
-    Equal<
-      RequiredKeys<BossData>,
-      "id" | "priority" | "zoneType" | "beginTime" | "endTime" | "bossAdjust"
-    >
+    Equal<RequiredKeys<BossData>, "id" | "priority" | "zoneType" | "bossAdjust">
   >
-  // 可选键同样封闭：当前只允许 liveTimeWindow，新增可选键会被编译期拒绝。
+  // 可选键同样封闭：3.3.12 起开放时间窗与索引 liveTimeWindow 均可缺失。
   type _BossDataOptionalKeys = Expect<
-    Equal<OptionalKeys<BossData>, "liveTimeWindow">
+    Equal<OptionalKeys<BossData>, "beginTime" | "endTime" | "liveTimeWindow">
   >
   type _BossDetailsModesVariantAllRequired = Expect<
     Equal<keyof BossDetailsModesVariant, RequiredKeys<BossDetailsModesVariant>>

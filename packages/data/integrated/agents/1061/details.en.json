@@ -1563,7 +1563,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, DMG dealer against Stunned enemies",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, <IconMap:Icon_AvatarClass_Attack>Attack DMG dealer against Stunned enemies",
     "Increases DMG dealt when hitting Stunned enemies"
   ],
   "talent": {

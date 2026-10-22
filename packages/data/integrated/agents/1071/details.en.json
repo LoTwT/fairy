@@ -1748,7 +1748,7 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, off-field support",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>Physical, <IconMap:Icon_AvatarClass_Defense>Defense off-field support",
     "Grants shields and Anti-Interrupt to all squad members",
     "Provides attack boosts to on-field squadmates"
   ],

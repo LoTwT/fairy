@@ -1,7 +1,7 @@
 # 技能倍率、动作目录与等级选择
 
-`@randomplay/data` 提供 Nanoka 3.2 全部 60 名角色的独立动作目录、伤害与失衡成长曲线、
-影画技能等级提升和纯解析函数。完整面板组装、装备及常驻转化由 core 的[静态计算入口](../core/static-calculation.md)提供。
+`@randomplay/data` 提供 Nanoka 3.3.12+19634983 全部 62 名角色的独立动作目录、伤害与失衡成长曲线、
+影画技能等级提升和纯解析函数。1631、1641 的动作目录尚未登记，当前只发布空动作清单，待 D6 补齐。完整面板组装、装备及常驻转化由 core 的[静态计算入口](../core/static-calculation.md)提供。
 共同类型由 [shared 动作契约](../../../packages/shared/src/skills.ts)维护；data 的 [`src/skills/types.ts`](../../../packages/data/src/skills/types.ts) 重导出这些类型并维护来源清单。
 
 ## 公开读取与解析

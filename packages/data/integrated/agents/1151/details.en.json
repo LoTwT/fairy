@@ -1628,7 +1628,7 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_Fire>Fire, versatile support",
+    "<IconMap:Icon_GeneralBuff_Fire> Fire, <Term:3000013></Term> <IconMap:Icon_AvatarClass_Support> Support",
     "Summon Guard Boars to fight alongside you"
   ],
   "talent": {

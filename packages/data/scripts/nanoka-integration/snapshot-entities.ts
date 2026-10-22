@@ -505,7 +505,7 @@ export function verifyBossSnapshotMemberSet(
 export const nanokaBossSnapshotEntity: IntegratedSnapshotEntityProducer = {
   name: "boss",
   sourceEntity: "boss",
-  rulesVersion: "nanoka-boss-reference/5",
+  rulesVersion: "nanoka-boss-reference/6",
   verifyMemberFile: verifyBossSnapshotMemberFile,
   verifyMemberSet: verifyBossSnapshotMemberSet,
   integrate({ memberId, sourceRecord, details, detailLocales }) {

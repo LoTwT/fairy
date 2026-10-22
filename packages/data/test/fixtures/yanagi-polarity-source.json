@@ -5748,7 +5748,7 @@
   "nanoka": {
     "zh": {
       "path": "agents/1221/details.zh.json",
-      "sha256": "d4ea98a1be0229d2d8014659ec367bac45a0d37410ad11ec42b0b0f2e26fad02",
+      "sha256": "e7416b61f843bb5591298608c4a02e34d252f809d370e05a250b3b15e80a8734",
       "talent": {
         "2": {
           "desc": "<color=#FFFFFF>[强化特殊技]</color>中，快速突刺累积的<color=#2EB6FF>电属性异常积蓄值</color>提升20%；快速突刺命中敌人时，保持长按「特殊攻击」按键，可以额外消耗10点能量，再次发动突刺攻击，能量不足或停止长按后将自动衔接下落攻击；下落攻击命中处于属性异常状态下的敌人并触发<color=#FFFFFF>[极性紊乱]</color>效果时，对目标造成的伤害倍率提升至原本<color=#FFFFFF>[紊乱]</color>效果的20%，每额外发动一次突刺攻击，该伤害倍率额外提升15%，伤害倍率额外提升效果最多触发2次。",
@@ -5764,7 +5764,7 @@
     },
     "en": {
       "path": "agents/1221/details.en.json",
-      "sha256": "7d919f7a6b5fadd419fcaf958bc1a4aad23448377f1d38d64c9b71ce84c85e61",
+      "sha256": "7af184e0af52905667273934865073d3e6a0ce0a685cdb34ae97ed60501da3be",
       "talent": {
         "2": {
           "desc": "During her <color=#FFFFFF>EX Special Attack</color>, the rapid thrust's <color=#2EB6FF>Electric Anomaly Buildup</color> increases by 20%. Holding down the Special Attack button after a rapid thrust hits an enemy will consume 10 additional Energy to launch another thrust. If Energy is insufficient or the button is released, the attack automatically follows up with the downward attack. When the downward attack hits an enemy suffering an Anomaly and triggers <color=#FFFFFF>Polarity Disorder</color>, the DMG multiplier increases to 20% of the original <color=#FFFFFF>Disorder</color> effect. Each additional thrust increases this multiplier by 15%, up to a maximum of 2 extra thrusts.",

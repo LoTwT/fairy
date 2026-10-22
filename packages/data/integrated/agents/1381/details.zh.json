@@ -1742,7 +1742,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Thunder>电属性，站场输出",
+    "<IconMap:Icon_GeneralBuff_Thunder>电属性，<IconMap:Icon_AvatarClass_Attack>强攻站场输出",
     "发动[追加攻击]造成额外伤害",
     "兼具爆发与持续输出能力"
   ],

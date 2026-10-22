@@ -5,8 +5,8 @@
 类型、数值语义、来源与生成边界统一见[60 级属性规范](panel-attributes.md)，下文原始资料接口保持来源语义。
 
 本规范是 `@randomplay/data` 公开读取与分发的单一事实来源。字段、来源保真和受管理目录协议见
-[来源数据整合规范](integration.md)。本版快照为 Nanoka 3.2，60 个代理人、30 个驱动盘套装、100 个 WEngine、
-42 个邦布、306 个怪物、62 个 Shiyu 区域、47 个 Boss 试炼、3 个 Simul 模拟战、zh/en 两种详情语言。
+[来源数据整合规范](integration.md)。本版快照为 Nanoka 3.3.12+19634983，62 个代理人、30 个驱动盘套装、103 个 WEngine、
+42 个邦布、314 个怪物、65 个 Shiyu 区域、50 个 Boss 试炼、3 个 Simul 模拟战、zh/en 两种详情语言。
 成员集合与数量以[归档源索引](../../../packages/data/integrated/index.json)的各类别 `memberIds` 为准；Git 归档
 使用多实体 v3 外壳并保留成员的 `sourceRecord`，npm 发布与 `loadIndex` 使用由其派生的 v4 外壳，成员只保留
 `files`。类别（`agents`、`drive-discs`、`w-engines`、`bangboos`、`monsters`、`shiyu`、`boss` 与 `simul`）
@@ -235,7 +235,7 @@ export declare function loadAllSimulData(): Promise<Record<SimulId, SimulData>>
   DriveDiscName 为 key，`data` 与 `details` 同样分开保留。索引的成员表是
   `entities["drive-discs"].members`。
 - `loadWEngineData` 只加载该 WEngine data；`loadWEngineDetails` 只加载该 WEngine 指定语言 details；
-  `loadAllWEngines` 显式加载全部 WEngine data 与指定语言 details，目前为 100 + 100 个文件，结果以
+  `loadAllWEngines` 显式加载全部 WEngine data 与指定语言 details，目前为 103 + 103 个文件，结果以
   WEngineName 为 key，`data` 与 `details` 同样分开保留。索引的成员表是 `entities["w-engines"].members`。
 - `loadBangbooData` 只加载该邦布 data；`loadBangbooDetails` 只加载该邦布指定语言 details；
   `loadAllBangboos` 显式加载全部邦布 data 与指定语言 details，目前为 42 + 42 个文件，结果以

@@ -1591,7 +1591,12 @@
     }
   },
   "specialElementType": {},
-  "strategy": {},
+  "strategy": [
+    "03",
+    "<IconMap:Icon_GeneralBuff_DungeonBuffEther>Ether, <IconMap:Icon_AvatarClass_Attack>Attack on-field dealer",
+    "4 Ultimates, each with a different effect",
+    "Chains enhanced Basic Attacks consecutively to deal massive DMG"
+  ],
   "talent": {
     "1": {
       "desc": "Upon entering the battlefield, Pyrois gains 1,000 <color=#FFFFFF>Decibels</color>. This effect can trigger once every 180s in Investigation Zone mode. CRIT Rate increases by 8%.",

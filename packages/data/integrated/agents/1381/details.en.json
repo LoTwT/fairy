@@ -1784,7 +1784,7 @@
   "specialElementType": {},
   "strategy": [
     "03",
-    "<IconMap:Icon_GeneralBuff_Thunder>Electric, on-field DMG dealer",
+    "<IconMap:Icon_GeneralBuff_Thunder>Electric, <IconMap:Icon_AvatarClass_Attack> Attack on-field DMG dealer",
     "Triggers Aftershock to deal bonus DMG",
     "Packs both burst DMG and sustained DMG"
   ],

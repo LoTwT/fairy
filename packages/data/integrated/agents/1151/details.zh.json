@@ -1607,7 +1607,7 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_Fire>火属性，泛用型支援",
+    "<IconMap:Icon_GeneralBuff_Fire>火属性，<Term:3000013></Term><IconMap:Icon_AvatarClass_Support>支援辅助",
     "召唤亲卫队小猪共同作战"
   ],
   "talent": {

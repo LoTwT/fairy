@@ -2534,10 +2534,10 @@
   },
   "strategy": [
     "01",
-    "双形态战斗，操作策略性强",
-    "<IconMap:Icon_GeneralBuff_HonedEdge>凛刃属性，站场输出",
-    "积攒[青溟剑势]进入强化形态",
-    "开启帷幕获得专属易伤效果"
+    "<Term:3000021></Term>战斗，操作策略性强",
+    "<IconMap:Icon_GeneralBuff_HonedEdge>凛刃属性，<IconMap:Icon_AvatarClass_Attack>强攻站场输出",
+    "积攒<Term:3000018></Term>进入<Term:3000019></Term>形态",
+    "开启<Term:3000001></Term>获得专属易伤效果"
   ],
   "talent": {
     "1": {

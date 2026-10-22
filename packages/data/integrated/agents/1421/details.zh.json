@@ -1352,7 +1352,7 @@
   "specialElementType": {},
   "strategy": [
     "04",
-    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，命破体系辅助",
+    "<IconMap:Icon_GeneralBuff_PhysDmg>物理属性，命破体系<IconMap:Icon_AvatarClass_Defense>防护辅助",
     "为队友提供贯穿力"
   ],
   "talent": {
