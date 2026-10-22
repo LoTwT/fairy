@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "49",
+  "revision": "50",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -2441,6 +2441,50 @@
       "status": "mapped",
       "profession": "异常",
       "element": "fire",
+      "supplementProvenance": {
+        "sourceId": "zzz-hp",
+        "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+        "resources": [
+          {
+            "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "sha256": "c9bc4cfdb0cf3117c56885e1afa4afd3ac9dc81aa0282119f0c64a27f19e5b01"
+          }
+        ]
+      }
+    },
+    {
+      "catalogEntityId": "agents:severian",
+      "upstreamId": "severian",
+      "name": "赛维里安",
+      "identity": {
+        "kind": "agent",
+        "entityId": "1631"
+      },
+      "status": "mapped",
+      "profession": "强攻",
+      "element": "wind",
+      "supplementProvenance": {
+        "sourceId": "zzz-hp",
+        "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+        "resources": [
+          {
+            "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "sha256": "c9bc4cfdb0cf3117c56885e1afa4afd3ac9dc81aa0282119f0c64a27f19e5b01"
+          }
+        ]
+      }
+    },
+    {
+      "catalogEntityId": "w-engines:Incarcerating_Grip",
+      "upstreamId": "Incarcerating_Grip",
+      "name": "禁罪囚笼",
+      "identity": {
+        "kind": "w-engine",
+        "entityId": "14163"
+      },
+      "status": "mapped",
+      "profession": "强攻",
+      "element": null,
       "supplementProvenance": {
         "sourceId": "zzz-hp",
         "version": "2628b32cece086e371bafa05518a9a12650d9f74",
@@ -54502,6 +54546,94 @@
               "requiredSkillCategory": "uncategorized"
             }
           ]
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1631:unregistered-buffs",
+      "catalogEntityId": "agents:severian",
+      "name": "赛维里安 · 未登记增益",
+      "conditionDescription": "3.2.5 冻结摘录只有赛维里安的身份、17 条技能与基础面板；七个影画位置与固定增益块均为空，没有可执行的效果记录。",
+      "target": "self",
+      "variants": [
+        {
+          "configuration": {},
+          "status": "unsupported",
+          "reason": "formula-out-of-scope",
+          "explanation": "D4-3 只登记赛维里安（1631）的目录身份、17 条技能与基础面板；2628b32 没有他的影画/固定增益机器记录，不能从名称或空块推断倍率、暴击或属性。显式选择本选项会得到本条具名拒绝；D5 rebaseline 后再按新来源核对。",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "scripts/static-effects/evidence/zzz-hp-325-entities.json",
+              "pointer": "/agents/1"
+            }
+          ],
+          "effectIds": [],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:w-engines:14163:passive",
+      "catalogEntityId": "w-engines:Incarcerating_Grip",
+      "name": "禁罪囚笼 · 被动",
+      "conditionDescription": "装备者暴击率提升 20/23/26/29/32%；装备者[普通攻击]命中敌人时，攻击力提升 10/11.5/13/14.5/16%，本次伤害无视目标 15/17.3/19.5/21.8/24% 风属性伤害抗性，持续 16 秒（按精炼 1—5）。",
+      "target": "self",
+      "variants": [
+        {
+          "configuration": {
+            "refinements": [1, 2, 3, 4, 5]
+          },
+          "status": "unsupported",
+          "reason": "formula-out-of-scope",
+          "explanation": "3.2.5 五个精炼块只有完整 note，effects 为空；暴击率、条件攻击力与风抗无视都没有机器记录。D4-3 不按描述自造触发窗口或把 16 秒状态当作常驻，显式选择本选项会得到本条具名拒绝。基础面板中的 externalDefPercent 32 也留待 D5 映射，不在本批折算成防御或增伤。",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "scripts/static-effects/evidence/zzz-hp-325-entities.json",
+              "pointer": "/wengines/1/refinementBuffs/0/effectBlocks/0/note"
+            },
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "scripts/static-effects/evidence/zzz-hp-325-entities.json",
+              "pointer": "/wengines/1/refinementBuffs/1/effectBlocks/0/note"
+            },
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "scripts/static-effects/evidence/zzz-hp-325-entities.json",
+              "pointer": "/wengines/1/refinementBuffs/2/effectBlocks/0/note"
+            },
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "scripts/static-effects/evidence/zzz-hp-325-entities.json",
+              "pointer": "/wengines/1/refinementBuffs/3/effectBlocks/0/note"
+            },
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "scripts/static-effects/evidence/zzz-hp-325-entities.json",
+              "pointer": "/wengines/1/refinementBuffs/4/effectBlocks/0/note"
+            }
+          ],
+          "effectIds": [],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": []
         }
       ]
     }

@@ -24,6 +24,7 @@ import {
   D4_PHEONY_M4_SUPPLEMENTS,
   D4_PHEONY_UNSUPPORTED_SUPPLEMENTS,
 } from "./static-effects/d4-pheony.ts"
+import { D4_SEVERIAN_GRIP_SUPPLEMENTS } from "./static-effects/d4-severian.ts"
 import { SOURCE_COMMIT, loadSource } from "./static-effects/source.ts"
 import {
   COMPLETE_STATE_OPTIONS,
@@ -315,27 +316,38 @@ export async function generateStaticEffects(
     await verifySupplementEvidence(publication, [
       ...SUPPLEMENTS,
       ...D4_PHEONY_UNSUPPORTED_SUPPLEMENTS,
+      ...D4_PHEONY_M4_SUPPLEMENTS,
+      ...D4_SEVERIAN_GRIP_SUPPLEMENTS,
     ])
     const result = convertSource(source.data, source.functions, source.files)
     assertD4OverlayBase(
       SOURCE_COMMIT,
       result.catalog.entities.map((entity) => entity.catalogEntityId),
     )
-    const enabledEntities = ["pheony", "Plume_of_Rebirth"] as const
+    const enabledEntities = [
+      "pheony",
+      "Plume_of_Rebirth",
+      "severian",
+      "Incarcerating_Grip",
+    ] as const
     const supplemental = convertSource(
       d4EntityData(enabledEntities),
       source.functions,
       source.files,
-      [...D4_PHEONY_UNSUPPORTED_SUPPLEMENTS, ...D4_PHEONY_M4_SUPPLEMENTS],
+      [
+        ...D4_PHEONY_UNSUPPORTED_SUPPLEMENTS,
+        ...D4_PHEONY_M4_SUPPLEMENTS,
+        ...D4_SEVERIAN_GRIP_SUPPLEMENTS,
+      ],
       COMPLETE_STATE_OPTIONS,
       { supplemental: true },
     )
     if (
-      supplemental.coverage.summary.entities !== 2 ||
-      supplemental.coverage.summary.packs !== 13 ||
+      supplemental.coverage.summary.entities !== 4 ||
+      supplemental.coverage.summary.packs !== 26 ||
       supplemental.coverage.summary.rawEffects !== 36 ||
       supplemental.coverage.summary.rules !== 42 ||
-      supplemental.catalog.options.length !== 52
+      supplemental.catalog.options.length !== 54
     )
       throw new Error("D4 supplemental source denominator changed")
     const merged = mergeSupplementalSource(
@@ -348,7 +360,7 @@ export async function generateStaticEffects(
         gaps: [],
         optionLabels: d4PlumeOptionLabels(supplemental.catalog.options),
       },
-      "49",
+      "50",
     )
     for (const entity of result.catalog.entities) {
       if (!entity.supplementProvenance) continue

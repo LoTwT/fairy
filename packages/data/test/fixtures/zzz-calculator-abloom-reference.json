@@ -132,16 +132,16 @@
       "packageVersion": "0.4.0",
       "contractVersion": 2,
       "gameVersion": "3.2",
-      "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+      "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
     },
     "files": [
       {
         "file": "packages/data/definitions/effects/static.json",
-        "sha256": "4ac26c773f9d9371c579e0c9f5cd271800454d7cae46b424d5390771941ee97b"
+        "sha256": "146b782addcc6a99a698de6cecd3ef4d310aaa0a81f4b44c68594fe3b01d19ee"
       },
       {
         "file": "packages/data/definitions/effects/static-catalog.json",
-        "sha256": "b0f7831d1e02118f6445b5e9e091e309733464c467ff63a7f0df22f0f95323df"
+        "sha256": "ed47e1a2cc16432b88c8d0d67083a4a4a5f0280bf5a4cdd008d071bce3a50038"
       },
       {
         "file": "packages/data/definitions/attributes/drive-disc-affixes.json",
@@ -4137,7 +4137,7 @@
         "packageVersion": "0.4.0",
         "contractVersion": 2,
         "gameVersion": "3.2",
-        "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+        "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
       },
       "request": {
         "actors": [
@@ -4403,7 +4403,7 @@
         "packageVersion": "0.4.0",
         "contractVersion": 2,
         "gameVersion": "3.2",
-        "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+        "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
       },
       "request": {
         "actors": [
@@ -4675,7 +4675,7 @@
         "packageVersion": "0.4.0",
         "contractVersion": 2,
         "gameVersion": "3.2",
-        "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+        "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
       },
       "request": {
         "actors": [
@@ -4939,7 +4939,7 @@
         "packageVersion": "0.4.0",
         "contractVersion": 2,
         "gameVersion": "3.2",
-        "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+        "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
       },
       "request": {
         "actors": [
@@ -7091,7 +7091,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -9559,7 +9559,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -12083,7 +12083,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -14755,7 +14755,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -16462,7 +16462,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -18245,7 +18245,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -20042,7 +20042,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -22029,7 +22029,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -24643,7 +24643,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -27412,7 +27412,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -30058,7 +30058,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -32652,7 +32652,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -35246,7 +35246,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -37840,7 +37840,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -40434,7 +40434,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -43028,7 +43028,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -45898,7 +45898,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -48508,7 +48508,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:true",
         "request": {
@@ -51102,7 +51102,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -53660,7 +53660,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -56456,7 +56456,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -59092,7 +59092,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -61914,7 +61914,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -63909,7 +63909,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -65956,7 +65956,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -67799,7 +67799,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -69872,7 +69872,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -72714,7 +72714,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -75873,7 +75873,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -78872,7 +78872,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -81767,7 +81767,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -84662,7 +84662,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -87557,7 +87557,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -90452,7 +90452,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -93347,7 +93347,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -96518,7 +96518,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -99429,7 +99429,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:true",
         "request": {
@@ -102324,7 +102324,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -105059,7 +105059,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -107916,7 +107916,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -110978,7 +110978,7 @@
           "packageVersion": "0.4.0",
           "contractVersion": 2,
           "gameVersion": "3.2",
-          "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+          "snapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -138607,6 +138607,18 @@
         }
       },
       "currentSnapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
+    },
+    {
+      "reason": "Revision 50 registers Severian and Incarcerating Grip from the frozen 3.2.5 supplemental source as catalog entities with explicit formula-out-of-scope gaps; the 17 Severian skills and both base panels are inventory only. The comparison scenarios never select these gaps, so native upstream captures and all numeric results stay frozen; only the current consumption snapshot and the two changed Fairy artifact digests are refreshed.",
+      "implementationBase": "37d980f2",
+      "previous": {
+        "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "4ac26c773f9d9371c579e0c9f5cd271800454d7cae46b424d5390771941ee97b",
+          "packages/data/definitions/effects/static-catalog.json": "b0f7831d1e02118f6445b5e9e091e309733464c467ff63a7f0df22f0f95323df"
+        }
+      },
+      "currentSnapshotId": "sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d"
     }
   ]
 }

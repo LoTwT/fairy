@@ -178,7 +178,7 @@ describe("batch 13 Ben M2 block counter additional damage through the published 
     expect(definitions.ok, JSON.stringify(definitions)).toBe(true)
     if (!definitions.ok) throw new Error(JSON.stringify(definitions.issues))
     const catalog = calculationData.catalog as StaticEffectCatalog
-    expect(catalog.revision).toBe("49")
+    expect(catalog.revision).toBe("50")
     expect(catalog.skillTargets.some((t) => t.targetId === BEN_M2_TARGET)).toBe(
       true,
     )

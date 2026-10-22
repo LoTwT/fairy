@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "49",
+  "revision": "50",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -31333,7 +31333,7 @@
     "emptyPacks": 366,
     "rawEffects": 1290,
     "rules": 941,
-    "options": 984,
+    "options": 986,
     "converted": 1126,
     "corrected": 143,
     "unsupported": 21,
@@ -31346,11 +31346,11 @@
       "outOfScope": 33
     },
     "supplementalSource": {
-      "entities": 2,
-      "packs": 13,
+      "entities": 4,
+      "packs": 26,
       "rawEffects": 36,
       "rules": 42,
-      "options": 52
+      "options": 54
     }
   },
   "reverseGaps": [
@@ -31732,22 +31732,22 @@
       "extractSha256": "5826e29d7527e8013299c8cc9cee8a4d2725d3a522719893b3c7b123f611edca"
     },
     "summary": {
-      "entities": 2,
-      "packs": 13,
-      "emptyPacks": 4,
+      "entities": 4,
+      "packs": 26,
+      "emptyPacks": 17,
       "rawEffects": 36,
       "rules": 42,
-      "options": 52,
+      "options": 54,
       "converted": 13,
       "corrected": 0,
       "unsupported": 23,
       "supplements": {
-        "records": 13,
+        "records": 15,
         "rules": 12,
         "options": 6,
         "entities": 0,
         "integrated": 6,
-        "outOfScope": 7
+        "outOfScope": 9
       }
     },
     "entities": [
@@ -31762,6 +31762,50 @@
         "status": "mapped",
         "profession": "异常",
         "element": "fire",
+        "supplementProvenance": {
+          "sourceId": "zzz-hp",
+          "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+          "resources": [
+            {
+              "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "sha256": "c9bc4cfdb0cf3117c56885e1afa4afd3ac9dc81aa0282119f0c64a27f19e5b01"
+            }
+          ]
+        }
+      },
+      {
+        "catalogEntityId": "agents:severian",
+        "upstreamId": "severian",
+        "name": "赛维里安",
+        "identity": {
+          "kind": "agent",
+          "entityId": "1631"
+        },
+        "status": "mapped",
+        "profession": "强攻",
+        "element": "wind",
+        "supplementProvenance": {
+          "sourceId": "zzz-hp",
+          "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+          "resources": [
+            {
+              "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "sha256": "c9bc4cfdb0cf3117c56885e1afa4afd3ac9dc81aa0282119f0c64a27f19e5b01"
+            }
+          ]
+        }
+      },
+      {
+        "catalogEntityId": "w-engines:Incarcerating_Grip",
+        "upstreamId": "Incarcerating_Grip",
+        "name": "禁罪囚笼",
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14163"
+        },
+        "status": "mapped",
+        "profession": "强攻",
+        "element": null,
         "supplementProvenance": {
           "sourceId": "zzz-hp",
           "version": "2628b32cece086e371bafa05518a9a12650d9f74",
@@ -31854,6 +31898,62 @@
         "status": "has-effect-record"
       },
       {
+        "pointer": "/agents/1/mindscapeBuffs/0",
+        "catalogEntityId": "agents:severian",
+        "rank": 0,
+        "rankKind": "mindscape",
+        "count": 0,
+        "status": "no-effect-record"
+      },
+      {
+        "pointer": "/agents/1/mindscapeBuffs/1",
+        "catalogEntityId": "agents:severian",
+        "rank": 1,
+        "rankKind": "mindscape",
+        "count": 0,
+        "status": "no-effect-record"
+      },
+      {
+        "pointer": "/agents/1/mindscapeBuffs/2",
+        "catalogEntityId": "agents:severian",
+        "rank": 2,
+        "rankKind": "mindscape",
+        "count": 0,
+        "status": "no-effect-record"
+      },
+      {
+        "pointer": "/agents/1/mindscapeBuffs/3",
+        "catalogEntityId": "agents:severian",
+        "rank": 3,
+        "rankKind": "mindscape",
+        "count": 0,
+        "status": "no-effect-record"
+      },
+      {
+        "pointer": "/agents/1/mindscapeBuffs/4",
+        "catalogEntityId": "agents:severian",
+        "rank": 4,
+        "rankKind": "mindscape",
+        "count": 0,
+        "status": "no-effect-record"
+      },
+      {
+        "pointer": "/agents/1/mindscapeBuffs/5",
+        "catalogEntityId": "agents:severian",
+        "rank": 5,
+        "rankKind": "mindscape",
+        "count": 0,
+        "status": "no-effect-record"
+      },
+      {
+        "pointer": "/agents/1/mindscapeBuffs/6",
+        "catalogEntityId": "agents:severian",
+        "rank": 6,
+        "rankKind": "mindscape",
+        "count": 0,
+        "status": "no-effect-record"
+      },
+      {
         "pointer": "/wengines/0/fixedBuffs",
         "catalogEntityId": "w-engines:Plume_of_Rebirth",
         "rank": 0,
@@ -31900,6 +32000,54 @@
         "rankKind": "refinement",
         "count": 2,
         "status": "has-effect-record"
+      },
+      {
+        "pointer": "/wengines/1/fixedBuffs",
+        "catalogEntityId": "w-engines:Incarcerating_Grip",
+        "rank": 0,
+        "rankKind": "fixed",
+        "count": 0,
+        "status": "no-effect-record"
+      },
+      {
+        "pointer": "/wengines/1/refinementBuffs/0",
+        "catalogEntityId": "w-engines:Incarcerating_Grip",
+        "rank": 1,
+        "rankKind": "refinement",
+        "count": 0,
+        "status": "no-effect-record"
+      },
+      {
+        "pointer": "/wengines/1/refinementBuffs/1",
+        "catalogEntityId": "w-engines:Incarcerating_Grip",
+        "rank": 2,
+        "rankKind": "refinement",
+        "count": 0,
+        "status": "no-effect-record"
+      },
+      {
+        "pointer": "/wengines/1/refinementBuffs/2",
+        "catalogEntityId": "w-engines:Incarcerating_Grip",
+        "rank": 3,
+        "rankKind": "refinement",
+        "count": 0,
+        "status": "no-effect-record"
+      },
+      {
+        "pointer": "/wengines/1/refinementBuffs/3",
+        "catalogEntityId": "w-engines:Incarcerating_Grip",
+        "rank": 4,
+        "rankKind": "refinement",
+        "count": 0,
+        "status": "no-effect-record"
+      },
+      {
+        "pointer": "/wengines/1/refinementBuffs/4",
+        "catalogEntityId": "w-engines:Incarcerating_Grip",
+        "rank": 5,
+        "rankKind": "refinement",
+        "count": 0,
+        "status": "no-effect-record"
       }
     ],
     "records": [
@@ -32615,6 +32763,159 @@
         "skillTypes": ["dodge", "dodgeCounter"],
         "element": "火",
         "baseMult": 593.2
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631010-main",
+        "name": "冲刺攻击：凛袭",
+        "damageType": "direct",
+        "skillTypes": ["dodge", "dash"],
+        "element": "风",
+        "baseMult": 215.2
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631008-组合技",
+        "name": "强化特殊技：瞬风裂毁·组合技",
+        "damageType": "direct",
+        "skillTypes": ["special", "specialEnhanced"],
+        "element": "风",
+        "baseMult": 1132.5
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631009-风刃最大",
+        "name": "强化特殊技：瞬风裂毁·风刃最大",
+        "damageType": "direct",
+        "skillTypes": ["special", "specialEnhanced"],
+        "element": "风",
+        "baseMult": 818.4
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631014-main",
+        "name": "快速支援：火线调令",
+        "damageType": "direct",
+        "skillTypes": ["assist"],
+        "element": "风",
+        "baseMult": 129.1
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631018-main",
+        "name": "支援突击：以戈止戈",
+        "damageType": "direct",
+        "skillTypes": ["assist"],
+        "element": "风",
+        "baseMult": 729.9
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631005-main",
+        "name": "普通攻击：烈旋",
+        "damageType": "direct",
+        "skillTypes": ["basic"],
+        "element": "风",
+        "baseMult": 677
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631001-一段",
+        "name": "普通攻击：疾锋·一段",
+        "damageType": "direct",
+        "skillTypes": ["basic"],
+        "element": "风",
+        "baseMult": 131.4
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631003-三段",
+        "name": "普通攻击：疾锋·三段",
+        "damageType": "direct",
+        "skillTypes": ["basic"],
+        "element": "风",
+        "baseMult": 356.2
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631002-二段",
+        "name": "普通攻击：疾锋·二段",
+        "damageType": "direct",
+        "skillTypes": ["basic"],
+        "element": "风",
+        "baseMult": 213.3
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631004-四段",
+        "name": "普通攻击：疾锋·四段",
+        "damageType": "direct",
+        "skillTypes": ["basic"],
+        "element": "风",
+        "baseMult": 483.6
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631020-四段极限闪避成功时",
+        "name": "普通攻击：疾锋·四段极限闪避成功时",
+        "damageType": "direct",
+        "skillTypes": ["basic"],
+        "element": "风",
+        "baseMult": 677
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631006-main",
+        "name": "普通攻击：苍风影猎",
+        "damageType": "direct",
+        "skillTypes": ["basic"],
+        "element": "风",
+        "baseMult": 4056.1
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631007-main",
+        "name": "特殊技：瞬风斩破",
+        "damageType": "direct",
+        "skillTypes": ["special", "specialBasic"],
+        "element": "风",
+        "baseMult": 117.8
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631019-main",
+        "name": "登场技：清场时刻",
+        "damageType": "direct",
+        "skillTypes": ["assist"],
+        "element": "风",
+        "baseMult": 309.2
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631013-main",
+        "name": "终结技：戮灭的风灾",
+        "damageType": "direct",
+        "skillTypes": ["ultimate"],
+        "element": "风",
+        "baseMult": 5353.8
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631012-main",
+        "name": "连携技：冽刃收割",
+        "damageType": "direct",
+        "skillTypes": ["chain"],
+        "element": "风",
+        "baseMult": 1743.7
+      },
+      {
+        "agentId": "severian",
+        "skillId": "sk-severian-nk-1631011-main",
+        "name": "闪避反击：梢杀",
+        "damageType": "direct",
+        "skillTypes": ["dodge", "dodgeCounter"],
+        "element": "风",
+        "baseMult": 613.8
       }
     ],
     "basePanels": [
@@ -32660,6 +32961,47 @@
         }
       },
       {
+        "catalogEntityId": "agents:severian",
+        "identity": "agent/1631",
+        "values": {
+          "hp": 7826,
+          "atk": 933,
+          "def": 606,
+          "critRate": 5,
+          "critDmg": 78.8,
+          "sharpenCritDmgBonus": 0,
+          "mastery": 90,
+          "anomalyControl": 91,
+          "energyRegen": 0,
+          "penRate": 0,
+          "dmgBonus": 0,
+          "pen": 0,
+          "anomalyCritRate": 0,
+          "anomalyCritDmg": 0,
+          "anomalyDmgBonus": 0,
+          "turbulenceCritRate": 0,
+          "turbulenceCritDmg": 0,
+          "radianceCritRate": 0,
+          "radianceCritDmg": 0,
+          "disorderCritRate": 0,
+          "disorderCritDmg": 0,
+          "directDmgMult": 100,
+          "anomalyMult": 1250,
+          "disorderBaseMult": 0,
+          "anomalyDuration": 30,
+          "disorderCompMult": 0,
+          "turbulenceBaseMult": 0,
+          "turbulenceCompMult": 0,
+          "disorderDmgBonus": 0,
+          "turbulenceDmgBonus": 0,
+          "radianceMult": 0,
+          "radianceDmgBonus": 0,
+          "radianceResPen": 0,
+          "specialMult": 100,
+          "mutationCoeff": 0
+        }
+      },
+      {
         "catalogEntityId": "w-engines:Plume_of_Rebirth",
         "identity": "w-engine/14164",
         "values": {
@@ -32674,6 +33016,25 @@
             "externalAtkPercent": 0,
             "externalHpPercent": 0,
             "externalDefPercent": 0,
+            "penRate": 0
+          }
+        }
+      },
+      {
+        "catalogEntityId": "w-engines:Incarcerating_Grip",
+        "identity": "w-engine/14163",
+        "values": {
+          "baseAtk": 713,
+          "baseDef": 0,
+          "advancedStats": {
+            "critRate": 24,
+            "critDmg": 0,
+            "anomalyControlPercent": 0,
+            "energyRegen": 0,
+            "mastery": 0,
+            "externalAtkPercent": 0,
+            "externalHpPercent": 0,
+            "externalDefPercent": 32,
             "penRate": 0
           }
         }
