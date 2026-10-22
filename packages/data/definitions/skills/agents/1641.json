@@ -1,6 +1,1170 @@
 {
   "schemaVersion": 1,
   "entityId": "1641",
-  "skillLevelBonuses": [],
-  "actions": []
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1641:action:0001",
+      "branchId": "agent:1641:branch:assist-3",
+      "name": "快速支援：急救",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/assist/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n向前方突进并发动快速斩击，造成火属性伤害；\n招式发动期间拥有无敌效果，点按  可衔接第三段[普通攻击]。",
+      "parameterIds": ["1641014"],
+      "sourceExpression": "{Skill:1641014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.954,
+        "growth": 0.087
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.807,
+        "growth": 0.037
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0001:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.954,
+                  "growth": 0.087
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0002",
+      "branchId": "agent:1641:branch:assist-4",
+      "name": "招架支援：久病成医",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1641015"],
+      "sourceExpression": "{Skill:1641015, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0003",
+      "branchId": "agent:1641:branch:assist-4",
+      "name": "招架支援：久病成医",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1641016"],
+      "sourceExpression": "{Skill:1641016, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0004",
+      "branchId": "agent:1641:branch:assist-4",
+      "name": "招架支援：久病成医",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1641017"],
+      "sourceExpression": "{Skill:1641017, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0005",
+      "branchId": "agent:1641:branch:assist-5",
+      "name": "支援突击：再生疗法",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n向敌人掷出武器，随后收回武器发动斩击，造成火属性伤害；\n招式发动期间拥有无敌效果，点按  可衔接第三段[普通攻击]。",
+      "parameterIds": ["1641018"],
+      "sourceExpression": "{Skill:1641018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 4.265,
+        "growth": 0.388
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.133,
+        "growth": 0.143
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0005:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 4.265,
+                  "growth": 0.388
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0006",
+      "branchId": "agent:1641:branch:basic-3",
+      "name": "普通攻击：裁生",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段攻击，造成火属性伤害；\n第三段以及第四段[普通攻击]视为。",
+      "parameterIds": ["1641001"],
+      "sourceExpression": "{Skill:1641001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.156,
+        "growth": 0.015
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.132,
+        "growth": 0.006
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0006:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.156,
+                  "growth": 0.015
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0007",
+      "branchId": "agent:1641:branch:basic-3",
+      "name": "普通攻击：裁生",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段攻击，造成火属性伤害；\n第三段以及第四段[普通攻击]视为。",
+      "parameterIds": ["1641002"],
+      "sourceExpression": "{Skill:1641002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.677,
+        "growth": 0.062
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.455,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0007:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.677,
+                  "growth": 0.062
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0008",
+      "branchId": "agent:1641:branch:basic-3",
+      "name": "普通攻击：裁生",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段攻击，造成火属性伤害；\n第三段以及第四段[普通攻击]视为。",
+      "parameterIds": ["1641003"],
+      "sourceExpression": "{Skill:1641003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.781,
+        "growth": 0.162
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.975,
+        "growth": 0.045
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0008:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.781,
+                  "growth": 0.162
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0009",
+      "branchId": "agent:1641:branch:basic-3",
+      "name": "普通攻击：裁生",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段攻击，造成火属性伤害；\n第三段以及第四段[普通攻击]视为。",
+      "parameterIds": ["1641004"],
+      "sourceExpression": "{Skill:1641004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.892,
+        "growth": 0.354
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.086,
+        "growth": 0.095
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0009:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.892,
+                  "growth": 0.354
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0010",
+      "branchId": "agent:1641:branch:basic-4",
+      "name": "普通攻击：焚罪",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "足够时，消耗90点[燔焰]，长按  发动：\n菲欧妮掷出武器，对前方范围的敌人造成大量火属性伤害；\n终结一击命中处于冰属性异常状态、以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、风属性异常状态的敌人时，触发1次[异放]效果，结算{CAL:225+20*(AvatarSkillLevel(0)-1),1,2}%倍率的对应属性的属性异常伤害；\n该次[异放]效果触发暴击时，其暴击伤害额外提升40%；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1641005"],
+      "sourceExpression": "{Skill:1641005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 5.473,
+        "growth": 0.498
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.75,
+        "growth": 0.125
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0010:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 5.473,
+                  "growth": 0.498
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "本动作只计算所选招式的直接伤害；同段[异放]倍率是独立结算事件，当前不并入本动作，也不模拟异常状态、异放暴击加成、生命值回复或生命周期。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0011",
+      "branchId": "agent:1641:branch:basic-5",
+      "name": "普通攻击：熔毁",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "发动[特殊技：掠火]没有触发完美格挡效果时，点按  发动：\n向前突击，造成火属性伤害；\n视为；\n招式发动期间，点按  可衔接第三段[普通攻击]。",
+      "parameterIds": ["1641006"],
+      "sourceExpression": "{Skill:1641006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.781,
+        "growth": 0.162
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.963,
+        "growth": 0.044
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0011:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.781,
+                  "growth": 0.162
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0012",
+      "branchId": "agent:1641:branch:chain-3",
+      "name": "连携技：绝处逢生",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n向前方发动多段攻击，造成火属性伤害；\n视为；\n招式发动期间拥有无敌效果，点按  可衔接第三段[普通攻击]。",
+      "parameterIds": ["1641012"],
+      "sourceExpression": "{Skill:1641012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 8.827,
+        "growth": 0.803
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.641,
+        "growth": 0.121
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0012:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 8.827,
+                  "growth": 0.803
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0013",
+      "branchId": "agent:1641:branch:chain-4",
+      "name": "终结技：万死重明",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/chain/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n飞上高空后俯冲向敌人，消耗自身的所有生命值，引发爆炸，造成大量火属性伤害，进入[生竭]状态，并触发下一个角色的[快速支援]；\n视为；\n[生竭]状态下无法主动进攻；\n招式发动后一段时间自动释放[烬火追魂]，也可点按  快速发动[烬火追魂]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1641013"],
+      "sourceExpression": "{Skill:1641013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 18.139,
+        "growth": 1.649
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 1.829,
+        "growth": 0.084
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0013:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 18.139,
+                  "growth": 1.649
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0014",
+      "branchId": "agent:1641:branch:chain-5",
+      "name": "烬火追魂",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/chain/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/chain/description/2/desc"
+        }
+      ],
+      "description": "当菲欧妮处于[生竭]状态时，下一次普通换入、快速支援、招架支援换入前场时发动：\n周身环绕火焰，对周围敌人造成火属性伤害，视为[终结技]伤害，并退出[生竭]状态，回复[终结技：万死重明]消耗的所有生命值，并额外回复自身10%生命值上限的生命值；\n终结一击命中处于冰属性异常状态、以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、风属性异常状态的敌人时，触发1次[异放]效果，结算{CAL:300+27*(AvatarSkillLevel(3)-1),1,2}%倍率的对应属性的属性异常伤害；\n该次[异放]效果触发暴击时，其暴击伤害额外提升40%；\n当处于[生竭]状态的菲欧妮通过[连携技：绝处逢生]、[终结技：万死重明]入场时，也会触发上述生命值回复与[异放]效果；\n招式发动期间拥有无敌效果，点按  可衔接第三段[普通攻击]。",
+      "parameterIds": ["1641019"],
+      "sourceExpression": "{Skill:1641019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 0.955,
+        "growth": 0.087
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 0.096,
+        "growth": 0.005
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0014:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 0.955,
+                  "growth": 0.087
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "本动作只计算所选招式的直接伤害；同段[异放]倍率是独立结算事件，当前不并入本动作，也不模拟异常状态、异放暴击加成、生命值回复或生命周期。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0015",
+      "branchId": "agent:1641:branch:dodge-3",
+      "name": "冲刺攻击：倾身",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/dodge/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行突进斩击，造成火属性伤害。",
+      "parameterIds": ["1641010"],
+      "sourceExpression": "{Skill:1641010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.04,
+        "growth": 0.095
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.44,
+        "growth": 0.02
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0015:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.04,
+                  "growth": 0.095
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0016",
+      "branchId": "agent:1641:branch:dodge-4",
+      "name": "闪避反击：业火两渡",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "触发[极限闪避]时，点按  发动：\n向前方突进并发动快速斩击，造成火属性伤害；\n招式发动期间拥有无敌效果，点按  可衔接第三段[普通攻击]。",
+      "parameterIds": ["1641011"],
+      "sourceExpression": "{Skill:1641011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.962,
+        "growth": 0.27
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.182,
+        "growth": 0.1
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0016:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 2.962,
+                  "growth": 0.27
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0017",
+      "branchId": "agent:1641:branch:special-4",
+      "name": "特殊技：掠火",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/special/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n后撤过后，快速向前方发动上挑攻击，造成火属性伤害；\n后撤期间，受到的伤害降低40%；\n上挑攻击开始瞬间受到攻击以及命中出现红色闪光或黄色闪光的敌人时，可触发完美格挡效果，免疫该次伤害，点按  可直接发动第三段[普通攻击]；\n招式发动期间抗打断等级提升。",
+      "parameterIds": ["1641007"],
+      "sourceExpression": "{Skill:1641007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.456,
+        "growth": 0.042
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.386,
+        "growth": 0.018
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0017:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.456,
+                  "growth": 0.042
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0018",
+      "branchId": "agent:1641:branch:special-5",
+      "name": "强化特殊技：燎斩",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/special/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "拥有效果时，消耗1点[升变]，点按  发动：\n后撤过后，快速向前方进行强力上挑斩击，造成大量火属性伤害；\n后撤过程中按住  可持续蓄力；\n蓄力期间，松开  时发动强力上挑斩击，造成大量火属性伤害；\n衔接在后可以跳过后撤进入上挑攻击；\n后撤以及蓄力期间，受到的伤害降低40%；\n上挑斩击开始瞬间受到攻击以及命中出现红色闪光或黄色闪光的敌人时，可触发完美格挡效果；\n视为[燃烧攻击]；\n招式发动期间拥有无敌效果，点按  可衔接第三段[普通攻击]。",
+      "parameterIds": ["1641023"],
+      "sourceExpression": "{Skill:1641023, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 3.805,
+        "growth": 0.346
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.564,
+        "growth": 0.117
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0018:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 3.805,
+                  "growth": 0.346
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0019",
+      "branchId": "agent:1641:branch:special-6",
+      "name": "强化特殊技：眩焰",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/special/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/special/description/2/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n快速转动身体，对敌人造成大量火属性伤害；\n转动开始瞬间受到攻击以及命中出现红色闪光或黄色闪光的敌人时，可触发完美格挡效果；\n视为;\n招式发动期间拥有无敌效果，点按  可衔接第三段[普通攻击]。",
+      "parameterIds": ["1641008"],
+      "sourceExpression": "{Skill:1641008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 4.576,
+        "growth": 0.416
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 3.119,
+        "growth": 0.142
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0019:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 4.576,
+                  "growth": 0.416
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0020",
+      "branchId": "agent:1641:branch:special-7",
+      "name": "强化特殊技：坠阳",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/special/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/special/description/3/desc"
+        }
+      ],
+      "description": "[强化特殊技：眩焰]发动后，能量足够时，点按或长按  发动：\n升空后掷出武器，对敌人造成大量火属性伤害；\n招式发动时可获得1点[升变]，最多拥有1点[升变]；\n升空开始瞬间受到攻击以及命中出现红色闪光或黄色闪光的敌人时，可触发完美格挡效果；\n视为;\n招式发动期间拥有无敌效果，点按  可衔接第三段[普通攻击]。",
+      "parameterIds": ["1641009"],
+      "sourceExpression": "{Skill:1641009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 6.23,
+        "growth": 0.567
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 4.105,
+        "growth": 0.187
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1641:action:0020:total",
+            "damageKind": "regular",
+            "element": "fire",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1641:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 6.23,
+                  "growth": 0.567
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    }
+  ]
 }

@@ -40,7 +40,7 @@ const skillSourceCommit = "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357"
 // 本轮再生时的 Fairy 基线：#201 合并后的 main；数值与来源事实与首版一致。
 const fairyBaseline = "c77e549a6c503e257f554126203380295814fc40"
 const snapshotId =
-  "sha256:ebf8c620b32fc1b8170f805e20d68d9380e5c2477a32ac34389d7d7323ee14ce"
+  "sha256:02398d0fc76b4eed4bd7aaccd1370f8c161b5331266a0442c1f54ee67668f03c"
 const buffResource = "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json"
 const digests = {
   [`${buffResource}@${effectSourceCommit}`]:
