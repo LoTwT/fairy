@@ -354,7 +354,7 @@ describe("catalog profession exclusion definition and intersection", () => {
   it("does not treat unknown profession as known non-Armorer", () => {
     const request = fresh()
     request.catalog.entities.find(
-      (row: any) => row.catalogEntityId === "nanoka:agents:1621",
+      (row: any) => row.catalogEntityId === "agents:Roxy",
     ).profession = null
     expect(own(calculate(request))).toHaveLength(0)
   })

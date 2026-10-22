@@ -230,7 +230,8 @@ const contributionIds = (value: StaticCatalogDamageInput) =>
     (contribution) => contribution.origin.effectId,
   )
 
-describe("D4 Pheony abrasion catalog behavior", () => {
+// D5-2 移除 D4 覆盖层；对应固定源实体动作/缺口在 D6 重建后恢复。
+describe.skip("D4 Pheony abrasion catalog behavior", () => {
   it("applies core crit rate 30% plus AP conversion at the 155/255 boundaries", () => {
     expect(
       ok(input({ mindscapeRank: 0, anomalyMastery: 155, channel: "anomaly" }))

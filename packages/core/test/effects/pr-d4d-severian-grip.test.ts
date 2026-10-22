@@ -79,7 +79,8 @@ function request(options: {
   }
 }
 
-describe("D4 Severian and Incarcerating Grip catalog gaps", () => {
+// D5-2 移除 D4 覆盖层；对应固定源实体动作/缺口在 D6 重建后恢复。
+describe.skip("D4 Severian and Incarcerating Grip catalog gaps", () => {
   it("keeps both supplemental entities in the catalog", () => {
     for (const [entityId, kind] of [
       ["agents:severian", "agent"],
