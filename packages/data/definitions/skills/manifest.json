@@ -873,8 +873,8 @@
     "agents/1591.json": "8e671e68d9600814812c2b044c398974af7407a6ba142d2a5cd73cf834084978",
     "agents/1611.json": "8914791496672f301b020717b70bab506af1dccf1e6d2308db51ca61502a1471",
     "agents/1621.json": "95dac5716c042c8e519fbec7fb38db14daca4e2d19eea96afeb2500c6daf9c80",
-    "agents/1631.json": "4b8d584541d6127eae55ccd92dc1b206efa93d8611684e36eaec7e19ae524e0a",
-    "agents/1641.json": "0350827482af3b25eeb049c0ccfd9c36e7c15110be9e8cfe2aa9a65fc4232155"
+    "agents/1631.json": "2bcb6fa321d3c793def7d6f5460bc06149ae458683e80899149a455080a8c81b",
+    "agents/1641.json": "350c560fcacd90a2ee5af4ce546f1ece24ea01d35ae6c51028e1812c82baf000"
   },
   "evidence": {
     "zzzHpCommit": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
@@ -911,13 +911,13 @@
       }
     ]
   },
-  "registrySha256": "47366e8ef3dc79d1a407a5f393dd8830bef5d9961f07d2256f9b02f69ddd55a4",
+  "registrySha256": "2900a1c9e38bf0c566194b0cbf3580a5ec96f13f8f41a27951ecb8027325c083",
   "staticCatalogSha256": "c8455d57b00a0329da50841e4d1a0bcc7e35bc28fd2b4319520dba01ab1c670c",
   "coverage": {
     "agents": 62,
-    "actions": 1308,
-    "damage": 1132,
-    "dazeOnly": 168,
+    "actions": 1348,
+    "damage": 1166,
+    "dazeOnly": 174,
     "luminize": 4,
     "unavailable": 4,
     "individualHitActions": 1

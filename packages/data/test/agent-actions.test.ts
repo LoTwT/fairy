@@ -554,9 +554,9 @@ describe("agent action semantics", () => {
       ).toEqual([])
   })
 
-  it("rebuilds all 60 catalogs without dropped source rows and rejects semantic or level-bonus drift", async () => {
+  it("rebuilds all 62 catalogs without dropped source rows and rejects semantic or level-bonus drift", async () => {
     const ids = [...new Set(registry.map((entry) => entry.entityId))]
-    expect(ids).toHaveLength(60)
+    expect(ids).toHaveLength(62)
     for (const id of ids)
       expect(convertAgentActions(id, await details(id), registry)).toEqual(
         await agent(id),
@@ -1452,5 +1452,94 @@ describe("Lucy guard-pig panel proxy convention", () => {
     }
     // 球棍、拳套、弹弓属于同一说明分支；回旋挥击独立分支。
     expect(branches.size).toBe(2)
+  })
+})
+
+describe("D6 1631/1641 action catalogs", () => {
+  it("publishes each direct row and keeps the three parry daze rows explicit", async () => {
+    for (const [id, element] of [
+      ["1631", "wind"],
+      ["1641", "fire"],
+    ] as const) {
+      const data = await agent(id)
+      expect(data.actions, id).toHaveLength(20)
+      expect(
+        data.actions.filter(
+          (action) => action.calculation.kind === "daze-only",
+        ),
+        id,
+      ).toHaveLength(3)
+      expect(
+        data.actions.every(
+          (action) =>
+            action.calculation.kind === "daze-only" ||
+            (action.calculation.kind === "damage" &&
+              action.calculation.segments[0]!.element === element),
+        ),
+        id,
+      ).toBe(true)
+    }
+    const severianEntry = (await agent("1631")).actions.find(
+      (action) => action.actionId === "action:agent:1631:action:0006",
+    )!
+    expect(severianEntry.skillCategory).toBe("assist")
+    expect(
+      severianEntry.limitations?.some((entry) =>
+        entry.startsWith("采用具名的通用 assist 登场技直伤约定"),
+      ),
+    ).toBe(true)
+    for (const actionId of [
+      "action:agent:1641:action:0010",
+      "action:agent:1641:action:0014",
+    ]) {
+      const action = (await agent("1641")).actions.find(
+        (entry) => entry.actionId === actionId,
+      )!
+      expect(
+        action.limitations?.some((entry) => entry.includes("同段[异放]")),
+        actionId,
+      ).toBe(true)
+    }
+  })
+
+  it("resolves representative 12-level direct rows from the frozen Nanoka source", async () => {
+    const severian = await agent("1631")
+    for (const [actionId, group, expected] of [
+      ["action:agent:1631:action:0006", "assist", 3.092],
+      ["action:agent:1631:action:0020", "special", 8.184],
+    ] as const) {
+      const resolved = resolveAgentAction({
+        agent: severian,
+        actionId,
+        mindscapeRank: 0,
+        levels: { [group]: { mode: "effective", value: 12 } },
+      })
+      expect(resolved.ok, actionId).toBe(true)
+      if (!resolved.ok || resolved.calculation.kind !== "damage")
+        throw new Error("fixture")
+      expect(resolved.sourceDamageMultiplier, actionId).toBeCloseTo(
+        expected,
+        12,
+      )
+    }
+    const pheony = await agent("1641")
+    for (const [actionId, group, expected] of [
+      ["action:agent:1641:action:0010", "basic", 10.951],
+      ["action:agent:1641:action:0014", "chain", 1.912],
+    ] as const) {
+      const resolved = resolveAgentAction({
+        agent: pheony,
+        actionId,
+        mindscapeRank: 0,
+        levels: { [group]: { mode: "effective", value: 12 } },
+      })
+      expect(resolved.ok, actionId).toBe(true)
+      if (!resolved.ok || resolved.calculation.kind !== "damage")
+        throw new Error("fixture")
+      expect(resolved.sourceDamageMultiplier, actionId).toBeCloseTo(
+        expected,
+        12,
+      )
+    }
   })
 })

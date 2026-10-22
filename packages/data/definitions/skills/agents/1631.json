@@ -1,6 +1,1169 @@
 {
   "schemaVersion": 1,
   "entityId": "1631",
-  "skillLevelBonuses": [],
-  "actions": []
+  "skillLevelBonuses": [
+    {
+      "minimumMindscapeRank": 3,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/talent/3/desc"
+      }
+    },
+    {
+      "minimumMindscapeRank": 5,
+      "bonus": 2,
+      "groups": ["basic", "dodge", "assist", "special", "chain"],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/talent/5/desc"
+      }
+    }
+  ],
+  "actions": [
+    {
+      "actionId": "action:agent:1631:action:0001",
+      "branchId": "agent:1631:branch:assist-4",
+      "name": "快速支援：火线调令",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "quick-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/assist/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/assist/description/0/desc"
+        }
+      ],
+      "description": "当前操作中的角色被击飞时，点按  发动：\n快速突进，对前方敌人发动爪击和斩击，造成风属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1631014"],
+      "sourceExpression": "{Skill:1631014, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.642,
+        "growth": 0.059
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.505,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0001:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0001:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 0.642,
+                  "growth": 0.059
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0002",
+      "branchId": "agent:1631:branch:assist-5",
+      "name": "招架支援：寻衅禁止",
+      "rowName": "轻招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1631015"],
+      "sourceExpression": "{Skill:1631015, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.713,
+        "growth": 0.124
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0003",
+      "branchId": "agent:1631:branch:assist-5",
+      "name": "招架支援：寻衅禁止",
+      "rowName": "重招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1631016"],
+      "sourceExpression": "{Skill:1631016, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.428,
+        "growth": 0.156
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0004",
+      "branchId": "agent:1631:branch:assist-5",
+      "name": "招架支援：寻衅禁止",
+      "rowName": "连续招架失衡倍率",
+      "levelGroup": "assist",
+      "skillCategory": "defensive-assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/assist/description/5/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/assist/description/1/desc"
+        }
+      ],
+      "description": "前场角色即将被攻击时，点按  发动：\n招架敌人的攻击，累积大量失衡值；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1631017"],
+      "sourceExpression": "{Skill:1631017, Prop:1002}",
+      "damageCoefficient": null,
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.668,
+        "growth": 0.076
+      },
+      "calculation": {
+        "kind": "daze-only"
+      },
+      "inputs": [],
+      "limitations": [],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0005",
+      "branchId": "agent:1631:branch:assist-6",
+      "name": "支援突击：以戈止戈",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist-follow-up",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/assist/description/6/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/assist/description/2/desc"
+        }
+      ],
+      "description": "发动[招架支援]后，点按  发动：\n依次对敌人发动斩击，爪击和炮击，造成风属性伤害；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1631018"],
+      "sourceExpression": "{Skill:1631018, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 3.647,
+        "growth": 0.332
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 2.443,
+        "growth": 0.112
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0005:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0005:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 3.647,
+                  "growth": 0.332
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0006",
+      "branchId": "agent:1631:branch:assist-7",
+      "name": "登场技：清场时刻",
+      "rowName": "伤害倍率",
+      "levelGroup": "assist",
+      "skillCategory": "assist",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/assist/description/7/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/assist/description/3/desc"
+        }
+      ],
+      "description": "当赛维里安拥有效果且处于接战状态下点按  从后场切换至前场发动：\n对前方敌人发动大力斩击，造成风属性伤害；\n招式发动时视为发动[快速支援]；\n招式视为非重击；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1631019"],
+      "sourceExpression": "{Skill:1631019, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "assist",
+        "base": 1.541,
+        "growth": 0.141
+      },
+      "dazeCoefficient": {
+        "levelGroup": "assist",
+        "base": 0.606,
+        "growth": 0.028
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0006:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0006:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "assist",
+                  "base": 1.541,
+                  "growth": 0.141
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "采用具名的通用 assist 登场技直伤约定：本动作按 generic assist 只计算所选招式的直接攻击力伤害。来源『发动时视为发动[快速支援]』只登记触发身份，不获得 quick-assist 等具体支援子类身份，也不自动触发[快速支援]、消耗[流息]、开启[烁影]或衔接后续招式与生命周期事件。",
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0007",
+      "branchId": "agent:1631:branch:basic-3",
+      "name": "普通攻击：疾锋",
+      "rowName": "一段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段攻击，造成风属性伤害；\n第四段攻击命中敌人后，累积20点；\n第四段攻击发动瞬间具备闪避判定，如果成功闪避敌人攻击，本次普攻的伤害倍率和失衡倍率提升至与[普通攻击：烈旋]一致，并额外累积15点[流息]；\n第四段攻击发动期间拥有无敌效果；\n赛维里安在[普通攻击]期间发动[冲刺攻击]、[闪避反击]和[闪避：写意]时，不会打断[普通攻击]的连击段数。",
+      "parameterIds": ["1631001"],
+      "sourceExpression": "{Skill:1631001, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.654,
+        "growth": 0.06
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.268,
+        "growth": 0.013
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0007:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0007:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 0.654,
+                  "growth": 0.06
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0008",
+      "branchId": "agent:1631:branch:basic-3",
+      "name": "普通攻击：疾锋",
+      "rowName": "二段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/1"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段攻击，造成风属性伤害；\n第四段攻击命中敌人后，累积20点；\n第四段攻击发动瞬间具备闪避判定，如果成功闪避敌人攻击，本次普攻的伤害倍率和失衡倍率提升至与[普通攻击：烈旋]一致，并额外累积15点[流息]；\n第四段攻击发动期间拥有无敌效果；\n赛维里安在[普通攻击]期间发动[冲刺攻击]、[闪避反击]和[闪避：写意]时，不会打断[普通攻击]的连击段数。",
+      "parameterIds": ["1631002"],
+      "sourceExpression": "{Skill:1631002, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.066,
+        "growth": 0.097
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.496,
+        "growth": 0.023
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0008:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0008:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.066,
+                  "growth": 0.097
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0009",
+      "branchId": "agent:1631:branch:basic-3",
+      "name": "普通攻击：疾锋",
+      "rowName": "三段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/2"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段攻击，造成风属性伤害；\n第四段攻击命中敌人后，累积20点；\n第四段攻击发动瞬间具备闪避判定，如果成功闪避敌人攻击，本次普攻的伤害倍率和失衡倍率提升至与[普通攻击：烈旋]一致，并额外累积15点[流息]；\n第四段攻击发动期间拥有无敌效果；\n赛维里安在[普通攻击]期间发动[冲刺攻击]、[闪避反击]和[闪避：写意]时，不会打断[普通攻击]的连击段数。",
+      "parameterIds": ["1631003"],
+      "sourceExpression": "{Skill:1631003, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.78,
+        "growth": 0.162
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 0.89,
+        "growth": 0.041
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0009:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0009:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 1.78,
+                  "growth": 0.162
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0010",
+      "branchId": "agent:1631:branch:basic-3",
+      "name": "普通攻击：疾锋",
+      "rowName": "四段伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段攻击，造成风属性伤害；\n第四段攻击命中敌人后，累积20点；\n第四段攻击发动瞬间具备闪避判定，如果成功闪避敌人攻击，本次普攻的伤害倍率和失衡倍率提升至与[普通攻击：烈旋]一致，并额外累积15点[流息]；\n第四段攻击发动期间拥有无敌效果；\n赛维里安在[普通攻击]期间发动[冲刺攻击]、[闪避反击]和[闪避：写意]时，不会打断[普通攻击]的连击段数。",
+      "parameterIds": ["1631004"],
+      "sourceExpression": "{Skill:1631004, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.416,
+        "growth": 0.22
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.284,
+        "growth": 0.059
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0010:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0010:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 2.416,
+                  "growth": 0.22
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0011",
+      "branchId": "agent:1631:branch:basic-3",
+      "name": "普通攻击：疾锋",
+      "rowName": "四段极限闪避成功时伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/basic/description/3/param/4"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/basic/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方进行至多四段攻击，造成风属性伤害；\n第四段攻击命中敌人后，累积20点；\n第四段攻击发动瞬间具备闪避判定，如果成功闪避敌人攻击，本次普攻的伤害倍率和失衡倍率提升至与[普通攻击：烈旋]一致，并额外累积15点[流息]；\n第四段攻击发动期间拥有无敌效果；\n赛维里安在[普通攻击]期间发动[冲刺攻击]、[闪避反击]和[闪避：写意]时，不会打断[普通攻击]的连击段数。",
+      "parameterIds": ["1631020"],
+      "sourceExpression": "{Skill:1631020, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.382,
+        "growth": 0.308
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.339,
+        "growth": 0.061
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0011:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0011:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.382,
+                  "growth": 0.308
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0012",
+      "branchId": "agent:1631:branch:basic-4",
+      "name": "普通攻击：烈旋",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/basic/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "前三段普通攻击发动的瞬间受到敌人攻击或自身存在[烁影]效果且不拥有无敌效果时受到敌人非控制技攻击会自动发动：\n向前方进行突进，对前方范围的敌人造成大量风属性伤害；\n招式发动时累积15点，命中敌人后额外累积20点[流息]；\n招式发动时保持长按 ，可以快速发动[普通攻击：苍风影猎]且[普通攻击：苍风影猎]的最后一击释放时会累积20点[流息]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1631005"],
+      "sourceExpression": "{Skill:1631005, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.382,
+        "growth": 0.308
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 1.339,
+        "growth": 0.061
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0012:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0012:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 3.382,
+                  "growth": 0.308
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0013",
+      "branchId": "agent:1631:branch:basic-5",
+      "name": "普通攻击：苍风影猎",
+      "rowName": "伤害倍率",
+      "levelGroup": "basic",
+      "skillCategory": "basic",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/basic/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/basic/description/2/desc"
+        }
+      ],
+      "description": "足够时，消耗100点[流息]，长按  发动：\n先向后闪避并蓄势，随后在站场中不断穿梭并不断发动斩击，对前方范围的敌人造成大量风属性伤害；\n向后闪避期间，具备闪避判定，如果成功闪避敌人攻击，会触发[极限视域]，并累积15点[流息]；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1631006"],
+      "sourceExpression": "{Skill:1631006, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 20.277,
+        "growth": 1.844
+      },
+      "dazeCoefficient": {
+        "levelGroup": "basic",
+        "base": 3.117,
+        "growth": 0.142
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0013:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0013:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "basic",
+                  "base": 20.277,
+                  "growth": 1.844
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0014",
+      "branchId": "agent:1631:branch:chain-2",
+      "name": "连携技：冽刃收割",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "chain",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/chain/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/chain/description/0/desc"
+        }
+      ],
+      "description": "触发[连携技]时，选择对应角色发动：\n向前方发动多段攻击，造成大量风属性伤害；\n招式发动后，累积35点；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1631012"],
+      "sourceExpression": "{Skill:1631012, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 8.714,
+        "growth": 0.793
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 2.458,
+        "growth": 0.112
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0014:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0014:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 8.714,
+                  "growth": 0.793
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0015",
+      "branchId": "agent:1631:branch:chain-3",
+      "name": "终结技：戮灭的风灾",
+      "rowName": "伤害倍率",
+      "levelGroup": "chain",
+      "skillCategory": "ultimate",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/chain/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/chain/description/1/desc"
+        }
+      ],
+      "description": "喧响等级达到[极]时，点按  发动：\n连续发动多次快速斩击，造成大量风属性伤害；\n招式发动后，累积100点；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1631013"],
+      "sourceExpression": "{Skill:1631013, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 26.764,
+        "growth": 2.434
+      },
+      "dazeCoefficient": {
+        "levelGroup": "chain",
+        "base": 3.484,
+        "growth": 0.159
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0015:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0015:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "chain",
+                  "base": 26.764,
+                  "growth": 2.434
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0016",
+      "branchId": "agent:1631:branch:dodge-4",
+      "name": "冲刺攻击：凛袭",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dash",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/dodge/description/4/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/dodge/description/1/desc"
+        }
+      ],
+      "description": "闪避时，点按  发动：\n向前方进行攻击，造成风属性伤害。",
+      "parameterIds": ["1631010"],
+      "sourceExpression": "{Skill:1631010, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 1.074,
+        "growth": 0.098
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 0.422,
+        "growth": 0.02
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0016:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0016:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 1.074,
+                  "growth": 0.098
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0017",
+      "branchId": "agent:1631:branch:dodge-5",
+      "name": "闪避反击：梢杀",
+      "rowName": "伤害倍率",
+      "levelGroup": "dodge",
+      "skillCategory": "dodge-counter",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/dodge/description/5/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/dodge/description/2/desc"
+        }
+      ],
+      "description": "通过[闪避：飘折]触发[极限闪避]时，点按  发动：\n向前方发动快速斩击，造成风属性伤害；\n若通过[闪避：飘折]触发[极限闪避]瞬间切入后台，会自动发动本招式；\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1631011"],
+      "sourceExpression": "{Skill:1631011, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "dodge",
+        "base": 3.069,
+        "growth": 0.279
+      },
+      "dazeCoefficient": {
+        "levelGroup": "dodge",
+        "base": 2.109,
+        "growth": 0.096
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0017:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0017:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "dodge",
+                  "base": 3.069,
+                  "growth": 0.279
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0018",
+      "branchId": "agent:1631:branch:special-2",
+      "name": "特殊技：瞬风斩破",
+      "rowName": "伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/special/description/2/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/special/description/0/desc"
+        }
+      ],
+      "description": "点按  发动：\n向前方发动斩击和刺击，造成风属性伤害。",
+      "parameterIds": ["1631007"],
+      "sourceExpression": "{Skill:1631007, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 0.584,
+        "growth": 0.054
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 0.459,
+        "growth": 0.021
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0018:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0018:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 0.584,
+                  "growth": 0.054
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0019",
+      "branchId": "agent:1631:branch:special-3",
+      "name": "强化特殊技：瞬风裂毁",
+      "rowName": "组合技伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/special/description/3/param/0"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向前发动斩击、爪击和炮击的组合技，对敌人造成大量风属性伤害，并获得一层；\n长按  可以在炮击前持续消耗能量不断发动风刃对敌人造成风属性伤害；\n能量消耗达最大时，额外获得一层[烁影];\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1631008"],
+      "sourceExpression": "{Skill:1631008, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 5.66,
+        "growth": 0.515
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 3.693,
+        "growth": 0.168
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0019:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0019:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 5.66,
+                  "growth": 0.515
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1631:action:0020",
+      "branchId": "agent:1631:branch:special-3",
+      "name": "强化特殊技：瞬风裂毁",
+      "rowName": "风刃最大伤害倍率",
+      "levelGroup": "special",
+      "skillCategory": "enhanced-special",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1631/details.zh.json",
+        "pointer": "/skill/special/description/3/param/3"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1631/details.zh.json",
+          "pointer": "/skill/special/description/1/desc"
+        }
+      ],
+      "description": "能量足够时，点按  发动：\n向前发动斩击、爪击和炮击的组合技，对敌人造成大量风属性伤害，并获得一层；\n长按  可以在炮击前持续消耗能量不断发动风刃对敌人造成风属性伤害；\n能量消耗达最大时，额外获得一层[烁影];\n招式发动期间拥有无敌效果。",
+      "parameterIds": ["1631009"],
+      "sourceExpression": "{Skill:1631009, Prop:1001}",
+      "damageCoefficient": {
+        "levelGroup": "special",
+        "base": 4.092,
+        "growth": 0.372
+      },
+      "dazeCoefficient": {
+        "levelGroup": "special",
+        "base": 2.549,
+        "growth": 0.116
+      },
+      "calculation": {
+        "kind": "damage",
+        "segments": [
+          {
+            "segmentId": "action:agent:1631:action:0020:total",
+            "damageKind": "regular",
+            "element": "wind",
+            "granularity": "aggregate",
+            "repeat": 1,
+            "items": [
+              {
+                "itemId": "action:agent:1631:action:0020:base",
+                "stat": "attack",
+                "coefficient": {
+                  "levelGroup": "special",
+                  "base": 4.092,
+                  "growth": 0.372
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "inputs": [],
+      "limitations": [
+        "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
+      ],
+      "upstreamSkillId": null
+    }
+  ]
 }
