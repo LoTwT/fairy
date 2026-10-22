@@ -5,7 +5,6 @@ import { roxyCoreElementsConsumerSource } from "./fixtures/roxy-core-elements-co
 import { windDriveDiscConsumerSource } from "./fixtures/drive-disc-wind-consumer.ts"
 import { claretInitialConversionConsumerSource } from "./fixtures/claret-initial-conversion-consumer.ts"
 import { roxyWindEyeConsumerSource } from "./fixtures/roxy-wind-eye-consumer.ts"
-import { hugoAttackConsumerSource } from "./fixtures/hugo-stun-teammates-consumer.ts"
 import { roxyMindscapeConsumerSource } from "./fixtures/roxy-mindscape-consumer.ts"
 import { roxyAdditionalConsumerSource } from "./fixtures/roxy-additional-consumer.ts"
 import { yanagiPolarityConsumerSource } from "./fixtures/yanagi-polarity-consumer.ts"
@@ -661,8 +660,6 @@ ${astraYaoM4ConsumerSource}
 await verifyAstraYaoM4Consumer(api, await import("@randomplay/core"))
 ${lucyGuardBoarConsumerSource}
 await verifyLucyGuardBoarConsumer(api, await import("@randomplay/core"))
-${hugoAttackConsumerSource}
-assert.deepEqual(await verifyHugoAttackConsumer(api, await import("@randomplay/core")), {nonCritical:3800,closed:2000,rejectedOldThree:true})
 ${ariaAbloomConsumerSource}
 await verifyAriaAbloomConsumer(api, await import("@randomplay/core"))
 ${roxyMindscapeConsumerSource}

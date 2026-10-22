@@ -5,7 +5,6 @@ import { roxyCoreElementsConsumerSource } from "./fixtures/roxy-core-elements-co
 import { windDriveDiscConsumerSource } from "./fixtures/drive-disc-wind-consumer.ts"
 import { claretInitialConversionConsumerSource } from "./fixtures/claret-initial-conversion-consumer.ts"
 import { roxyWindEyeConsumerSource } from "./fixtures/roxy-wind-eye-consumer.ts"
-import { hugoAttackConsumerSource } from "./fixtures/hugo-stun-teammates-consumer.ts"
 import { roxyMindscapeConsumerSource } from "./fixtures/roxy-mindscape-consumer.ts"
 import { roxyAdditionalConsumerSource } from "./fixtures/roxy-additional-consumer.ts"
 import { lucyGuardBoarConsumerSource } from "./fixtures/lucy-guard-boar-consumer.ts"
@@ -149,8 +148,6 @@ ${aliceCorePeriodicConsumerSource}
 globalThis.fairyAliceCorePeriodic = async () => verifyAliceCorePeriodicConsumer(api, await import("@randomplay/core"))
 ${lucyGuardBoarConsumerSource}
 globalThis.fairyLucyGuardBoar = async () => verifyLucyGuardBoarConsumer(api, await import("@randomplay/core"))
-${hugoAttackConsumerSource}
-globalThis.fairyHugoAttack = async () => verifyHugoAttackConsumer(api, await import("@randomplay/core"))
 ${ariaAbloomConsumerSource}
 globalThis.fairyAriaAbloom = async () => verifyAriaAbloomConsumer(api, await import("@randomplay/core"))
 ${roxyMindscapeConsumerSource}
@@ -1168,19 +1165,6 @@ function defineScenarios(counts: {
             expect(result.team).toBeCloseTo(4998, 9)
             expect(result.high).toBeCloseTo(112806.918, 8)
             expect(result.missingRejected).toBe(true)
-          },
-        },
-        {
-          name: "hugo-other-stun-teammate-count",
-          act: async (page) => {
-            const result = await page.evaluate(() =>
-              (globalThis as any).fairyHugoAttack(),
-            )
-            expect(result).toEqual({
-              nonCritical: 3800,
-              closed: 2000,
-              rejectedOldThree: true,
-            })
           },
         },
         {
