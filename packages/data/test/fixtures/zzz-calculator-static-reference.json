@@ -65,7 +65,7 @@
       "packageVersion": "0.4.0",
       "contractVersion": 2,
       "gameVersion": "3.2",
-      "snapshotId": "sha256:14d1e42b5f8b64f0fbb1e218c97edb64dbb7e5d7429e948999153bcfefd322cc"
+      "snapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
     },
     "fairyCalculationSources": {
       "packages/core/src/static/calculate.ts": "c1e6d073f7b8eb62241bf640da8d3e1a878aa8de9a703636c490f113a126441e",
@@ -80423,6 +80423,18 @@
         }
       },
       "currentSnapshotId": "sha256:14d1e42b5f8b64f0fbb1e218c97edb64dbb7e5d7429e948999153bcfefd322cc"
+    },
+    {
+      "reason": "Revision 49 enables the Plume of Rebirth (14164) refinement records from the frozen 3.2.5 supplemental source: five mastery options and five conditional fire-damage options with consumer labels. The comparison scenarios never select these options, so native upstream captures and all numeric results stay frozen; only the current consumption snapshot and the two changed Fairy artifact digests are refreshed.",
+      "implementationBase": "e550d2f1",
+      "previous": {
+        "snapshotId": "sha256:14d1e42b5f8b64f0fbb1e218c97edb64dbb7e5d7429e948999153bcfefd322cc",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "b258a6296583e2121782e6ceaa2cd83e73c8fa183f48574635e26bf95a9a5d86",
+          "packages/data/definitions/effects/static-catalog.json": "838f73960714aa54cd7174ed6f2f0aa00d95c798595d8d1b2c9d4a2c0e692424"
+        }
+      },
+      "currentSnapshotId": "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9"
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "48",
+  "revision": "49",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -31332,8 +31332,8 @@
     "packs": 1061,
     "emptyPacks": 366,
     "rawEffects": 1290,
-    "rules": 931,
-    "options": 974,
+    "rules": 941,
+    "options": 984,
     "converted": 1126,
     "corrected": 143,
     "unsupported": 21,
@@ -31346,11 +31346,11 @@
       "outOfScope": 33
     },
     "supplementalSource": {
-      "entities": 1,
-      "packs": 7,
-      "rawEffects": 26,
-      "rules": 32,
-      "options": 42
+      "entities": 2,
+      "packs": 13,
+      "rawEffects": 36,
+      "rules": 42,
+      "options": 52
     }
   },
   "reverseGaps": [
@@ -31732,13 +31732,13 @@
       "extractSha256": "5826e29d7527e8013299c8cc9cee8a4d2725d3a522719893b3c7b123f611edca"
     },
     "summary": {
-      "entities": 1,
-      "packs": 7,
-      "emptyPacks": 3,
-      "rawEffects": 26,
-      "rules": 32,
-      "options": 42,
-      "converted": 3,
+      "entities": 2,
+      "packs": 13,
+      "emptyPacks": 4,
+      "rawEffects": 36,
+      "rules": 42,
+      "options": 52,
+      "converted": 13,
       "corrected": 0,
       "unsupported": 23,
       "supplements": {
@@ -31762,6 +31762,28 @@
         "status": "mapped",
         "profession": "异常",
         "element": "fire",
+        "supplementProvenance": {
+          "sourceId": "zzz-hp",
+          "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+          "resources": [
+            {
+              "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "sha256": "c9bc4cfdb0cf3117c56885e1afa4afd3ac9dc81aa0282119f0c64a27f19e5b01"
+            }
+          ]
+        }
+      },
+      {
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "upstreamId": "Plume_of_Rebirth",
+        "name": "涅槃初翎",
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14164"
+        },
+        "status": "mapped",
+        "profession": "异常",
+        "element": null,
         "supplementProvenance": {
           "sourceId": "zzz-hp",
           "version": "2628b32cece086e371bafa05518a9a12650d9f74",
@@ -31828,6 +31850,54 @@
         "catalogEntityId": "agents:pheony",
         "rank": 6,
         "rankKind": "mindscape",
+        "count": 2,
+        "status": "has-effect-record"
+      },
+      {
+        "pointer": "/wengines/0/fixedBuffs",
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "rank": 0,
+        "rankKind": "fixed",
+        "count": 0,
+        "status": "no-effect-record"
+      },
+      {
+        "pointer": "/wengines/0/refinementBuffs/0",
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "rank": 1,
+        "rankKind": "refinement",
+        "count": 2,
+        "status": "has-effect-record"
+      },
+      {
+        "pointer": "/wengines/0/refinementBuffs/1",
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "rank": 2,
+        "rankKind": "refinement",
+        "count": 2,
+        "status": "has-effect-record"
+      },
+      {
+        "pointer": "/wengines/0/refinementBuffs/2",
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "rank": 3,
+        "rankKind": "refinement",
+        "count": 2,
+        "status": "has-effect-record"
+      },
+      {
+        "pointer": "/wengines/0/refinementBuffs/3",
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "rank": 4,
+        "rankKind": "refinement",
+        "count": 2,
+        "status": "has-effect-record"
+      },
+      {
+        "pointer": "/wengines/0/refinementBuffs/4",
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "rank": 5,
+        "rankKind": "refinement",
         "count": 2,
         "status": "has-effect-record"
       }
@@ -32222,6 +32292,156 @@
         "normalizationChanges": ["skillTargets", "conditions", "scope"],
         "rawValue": 40,
         "normalizedValue": 40
+      },
+      {
+        "pointer": "/wengines/0/refinementBuffs/4/effectBlocks/0/effects/0",
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "rank": 5,
+        "rankKind": "refinement",
+        "stat": "mastery",
+        "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-354bc7ff-7c7d44:eff-8",
+        "effectIds": [
+          "w-engine:14164:zzz-hp:eff-8:blk-354bc7ff-7c7d44:refinement:5"
+        ],
+        "status": "converted",
+        "normalizationChanges": ["scope"],
+        "rawValue": 126,
+        "normalizedValue": 126
+      },
+      {
+        "pointer": "/wengines/0/refinementBuffs/4/effectBlocks/0/effects/1",
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "rank": 5,
+        "rankKind": "refinement",
+        "stat": "dmgBonus",
+        "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-354bc7ff-7c7d44:eff-9",
+        "effectIds": [
+          "w-engine:14164:zzz-hp:eff-9:blk-354bc7ff-7c7d44:refinement:5"
+        ],
+        "status": "converted",
+        "normalizationChanges": ["scope"],
+        "rawValue": 56,
+        "normalizedValue": 56
+      },
+      {
+        "pointer": "/wengines/0/refinementBuffs/0/effectBlocks/0/effects/0",
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "rank": 1,
+        "rankKind": "refinement",
+        "stat": "mastery",
+        "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-6600a889-781c01:eff-0",
+        "effectIds": [
+          "w-engine:14164:zzz-hp:eff-0:blk-6600a889-781c01:refinement:1"
+        ],
+        "status": "converted",
+        "normalizationChanges": ["scope"],
+        "rawValue": 90,
+        "normalizedValue": 90
+      },
+      {
+        "pointer": "/wengines/0/refinementBuffs/0/effectBlocks/0/effects/1",
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "rank": 1,
+        "rankKind": "refinement",
+        "stat": "dmgBonus",
+        "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-6600a889-781c01:eff-1",
+        "effectIds": [
+          "w-engine:14164:zzz-hp:eff-1:blk-6600a889-781c01:refinement:1"
+        ],
+        "status": "converted",
+        "normalizationChanges": ["scope"],
+        "rawValue": 40,
+        "normalizedValue": 40
+      },
+      {
+        "pointer": "/wengines/0/refinementBuffs/1/effectBlocks/0/effects/0",
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "rank": 2,
+        "rankKind": "refinement",
+        "stat": "mastery",
+        "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-69602102-280151:eff-2",
+        "effectIds": [
+          "w-engine:14164:zzz-hp:eff-2:blk-69602102-280151:refinement:2"
+        ],
+        "status": "converted",
+        "normalizationChanges": ["scope"],
+        "rawValue": 99,
+        "normalizedValue": 99
+      },
+      {
+        "pointer": "/wengines/0/refinementBuffs/1/effectBlocks/0/effects/1",
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "rank": 2,
+        "rankKind": "refinement",
+        "stat": "dmgBonus",
+        "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-69602102-280151:eff-3",
+        "effectIds": [
+          "w-engine:14164:zzz-hp:eff-3:blk-69602102-280151:refinement:2"
+        ],
+        "status": "converted",
+        "normalizationChanges": ["scope"],
+        "rawValue": 44,
+        "normalizedValue": 44
+      },
+      {
+        "pointer": "/wengines/0/refinementBuffs/2/effectBlocks/0/effects/0",
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "rank": 3,
+        "rankKind": "refinement",
+        "stat": "mastery",
+        "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-be4aea89-3368b0:eff-4",
+        "effectIds": [
+          "w-engine:14164:zzz-hp:eff-4:blk-be4aea89-3368b0:refinement:3"
+        ],
+        "status": "converted",
+        "normalizationChanges": ["scope"],
+        "rawValue": 108,
+        "normalizedValue": 108
+      },
+      {
+        "pointer": "/wengines/0/refinementBuffs/2/effectBlocks/0/effects/1",
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "rank": 3,
+        "rankKind": "refinement",
+        "stat": "dmgBonus",
+        "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-be4aea89-3368b0:eff-5",
+        "effectIds": [
+          "w-engine:14164:zzz-hp:eff-5:blk-be4aea89-3368b0:refinement:3"
+        ],
+        "status": "converted",
+        "normalizationChanges": ["scope"],
+        "rawValue": 48,
+        "normalizedValue": 48
+      },
+      {
+        "pointer": "/wengines/0/refinementBuffs/3/effectBlocks/0/effects/0",
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "rank": 4,
+        "rankKind": "refinement",
+        "stat": "mastery",
+        "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-cc7a7995-9285fe:eff-6",
+        "effectIds": [
+          "w-engine:14164:zzz-hp:eff-6:blk-cc7a7995-9285fe:refinement:4"
+        ],
+        "status": "converted",
+        "normalizationChanges": ["scope"],
+        "rawValue": 117,
+        "normalizedValue": 117
+      },
+      {
+        "pointer": "/wengines/0/refinementBuffs/3/effectBlocks/0/effects/1",
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "rank": 4,
+        "rankKind": "refinement",
+        "stat": "dmgBonus",
+        "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-cc7a7995-9285fe:eff-7",
+        "effectIds": [
+          "w-engine:14164:zzz-hp:eff-7:blk-cc7a7995-9285fe:refinement:4"
+        ],
+        "status": "converted",
+        "normalizationChanges": ["scope"],
+        "rawValue": 52,
+        "normalizedValue": 52
       }
     ],
     "skills": [
@@ -32437,6 +32657,25 @@
           "radianceResPen": 0,
           "specialMult": 100,
           "mutationCoeff": 0
+        }
+      },
+      {
+        "catalogEntityId": "w-engines:Plume_of_Rebirth",
+        "identity": "w-engine/14164",
+        "values": {
+          "baseAtk": 713,
+          "baseDef": 0,
+          "advancedStats": {
+            "critRate": 0,
+            "critDmg": 0,
+            "anomalyControlPercent": 30,
+            "energyRegen": 0,
+            "mastery": 0,
+            "externalAtkPercent": 0,
+            "externalHpPercent": 0,
+            "externalDefPercent": 0,
+            "penRate": 0
+          }
         }
       }
     ],

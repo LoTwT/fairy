@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "48",
+  "revision": "49",
   "effects": [
     {
       "kind": "contribution",
@@ -87730,6 +87730,711 @@
             "unit": "multiplier",
             "value": -1
           }
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14164:zzz-hp:eff-0:blk-6600a889-781c01:refinement:1",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14164"
+        },
+        "section": "精1",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/wengines/0/refinementBuffs/0/effectBlocks/0/effects/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "eq",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "refinement"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "anomaly-proficiency-points",
+          "value": 90
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": []
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "anomalyProficiency",
+        "stage": "final-fixed",
+        "value": {
+          "kind": "parameter",
+          "unit": "anomaly-proficiency-points",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14164:zzz-hp:eff-1:blk-6600a889-781c01:refinement:1",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14164"
+        },
+        "section": "精1",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/wengines/0/refinementBuffs/0/effectBlocks/0/effects/1"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "eq",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "refinement"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.4
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["fire"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "damage-bonus",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14164:zzz-hp:eff-2:blk-69602102-280151:refinement:2",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14164"
+        },
+        "section": "精2",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/wengines/0/refinementBuffs/1/effectBlocks/0/effects/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "eq",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "refinement"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 2
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "anomaly-proficiency-points",
+          "value": 99
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": []
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "anomalyProficiency",
+        "stage": "final-fixed",
+        "value": {
+          "kind": "parameter",
+          "unit": "anomaly-proficiency-points",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14164:zzz-hp:eff-3:blk-69602102-280151:refinement:2",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14164"
+        },
+        "section": "精2",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/wengines/0/refinementBuffs/1/effectBlocks/0/effects/1"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "eq",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "refinement"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 2
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.44
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["fire"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "damage-bonus",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14164:zzz-hp:eff-4:blk-be4aea89-3368b0:refinement:3",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14164"
+        },
+        "section": "精3",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/wengines/0/refinementBuffs/2/effectBlocks/0/effects/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "eq",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "refinement"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 3
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "anomaly-proficiency-points",
+          "value": 108
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": []
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "anomalyProficiency",
+        "stage": "final-fixed",
+        "value": {
+          "kind": "parameter",
+          "unit": "anomaly-proficiency-points",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14164:zzz-hp:eff-5:blk-be4aea89-3368b0:refinement:3",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14164"
+        },
+        "section": "精3",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/wengines/0/refinementBuffs/2/effectBlocks/0/effects/1"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "eq",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "refinement"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 3
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.48
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["fire"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "damage-bonus",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14164:zzz-hp:eff-6:blk-cc7a7995-9285fe:refinement:4",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14164"
+        },
+        "section": "精4",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/wengines/0/refinementBuffs/3/effectBlocks/0/effects/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "eq",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "refinement"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "anomaly-proficiency-points",
+          "value": 117
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": []
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "anomalyProficiency",
+        "stage": "final-fixed",
+        "value": {
+          "kind": "parameter",
+          "unit": "anomaly-proficiency-points",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14164:zzz-hp:eff-7:blk-cc7a7995-9285fe:refinement:4",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14164"
+        },
+        "section": "精4",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/wengines/0/refinementBuffs/3/effectBlocks/0/effects/1"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "eq",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "refinement"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.52
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["fire"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "damage-bonus",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14164:zzz-hp:eff-8:blk-354bc7ff-7c7d44:refinement:5",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14164"
+        },
+        "section": "精5",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/wengines/0/refinementBuffs/4/effectBlocks/0/effects/0"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "eq",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "refinement"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 5
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "anomaly-proficiency-points",
+          "value": 126
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "entity",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": []
+      },
+      "operation": {
+        "kind": "stat-adjustment",
+        "stat": "anomalyProficiency",
+        "stage": "final-fixed",
+        "value": {
+          "kind": "parameter",
+          "unit": "anomaly-proficiency-points",
+          "name": "amount"
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "w-engine:14164:zzz-hp:eff-9:blk-354bc7ff-7c7d44:refinement:5",
+      "source": {
+        "identity": {
+          "kind": "w-engine",
+          "entityId": "14164"
+        },
+        "section": "精5",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/wengines/0/refinementBuffs/4/effectBlocks/0/effects/1"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "eq",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "refinement"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 5
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "ratio",
+          "value": 0.56
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["fire"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "damage-bonus",
+        "value": {
+          "kind": "parameter",
+          "unit": "ratio",
+          "name": "amount"
         }
       }
     }

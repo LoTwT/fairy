@@ -50,6 +50,7 @@ const expectedImplementationBases = [
   "8a45993a8a9ff648880463461152936c74393385",
   "b1d32c5e4bf5d0f2f2866a24e599ae32f810b992",
   "fd79a5a5afb6b171c9d387d35f540d6f85d6408a",
+  "e550d2f1",
 ] as const
 
 const expectedPreviousSnapshotIds = [
@@ -63,6 +64,7 @@ const expectedPreviousSnapshotIds = [
   "sha256:03d35c11134debc997977fb3c077da49a0ea90a2462c5c91f13b01d0ccf52a80",
   "sha256:7bb28d858be347be6ef86a5ae7d5a1f1286f4048b1039e01a6f3ae39b47f0c09",
   "sha256:5217cca17a930b923e837ae24527e61f7248223c2411ebf749e3fe6f90077000",
+  "sha256:14d1e42b5f8b64f0fbb1e218c97edb64dbb7e5d7429e948999153bcfefd322cc",
 ] as const
 
 const expectedCurrentSnapshotIds = [
@@ -76,6 +78,7 @@ const expectedCurrentSnapshotIds = [
   "sha256:7bb28d858be347be6ef86a5ae7d5a1f1286f4048b1039e01a6f3ae39b47f0c09",
   "sha256:5217cca17a930b923e837ae24527e61f7248223c2411ebf749e3fe6f90077000",
   "sha256:14d1e42b5f8b64f0fbb1e218c97edb64dbb7e5d7429e948999153bcfefd322cc",
+  "sha256:b1f5824aaade8f014536b359af14e86239dc49cc85cf52d1e7e0d8b8c2fb65e9",
 ] as const
 
 /** 本次逐条核对过的 static-effects 制品摘要；entry 5 保留 PR-D 改写前的 catalog 值，entry 6 记录本次刷新前的字节。 */
@@ -120,13 +123,17 @@ const expectedArtifactSha256 = [
     "ded653e4cef2476fe734f600a3a32e84ab67fe06eac27d162e53d4e509f16a5c",
     "642bfef9034f86d92ea616e03d38cfc659c88a1f0021deaefbd481111eac7312",
   ],
+  [
+    "b258a6296583e2121782e6ceaa2cd83e73c8fa183f48574635e26bf95a9a5d86",
+    "838f73960714aa54cd7174ed6f2f0aa00d95c798595d8d1b2c9d4a2c0e692424",
+  ],
 ] as const
 
 describe("ZZZ Calculator 快照刷新链", () => {
-  it("三份夹具均为 10 条，相邻条目首尾相接，末条等于当前消费快照", () => {
+  it("三份夹具均为 11 条，相邻条目首尾相接，末条等于当前消费快照", () => {
     for (const [name, fixture] of Object.entries(fixtures)) {
       const entries = fixture.fairySnapshotRefreshes
-      expect(entries, name).toHaveLength(10)
+      expect(entries, name).toHaveLength(11)
       entries.forEach((entry, index) => {
         expect(entry.implementationBase, `${name} entry ${index}`).toBe(
           expectedImplementationBases[index],

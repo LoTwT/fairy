@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "48",
+  "revision": "49",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -2441,6 +2441,28 @@
       "status": "mapped",
       "profession": "异常",
       "element": "fire",
+      "supplementProvenance": {
+        "sourceId": "zzz-hp",
+        "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+        "resources": [
+          {
+            "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "sha256": "c9bc4cfdb0cf3117c56885e1afa4afd3ac9dc81aa0282119f0c64a27f19e5b01"
+          }
+        ]
+      }
+    },
+    {
+      "catalogEntityId": "w-engines:Plume_of_Rebirth",
+      "upstreamId": "Plume_of_Rebirth",
+      "name": "涅槃初翎",
+      "identity": {
+        "kind": "w-engine",
+        "entityId": "14164"
+      },
+      "status": "mapped",
+      "profession": "异常",
+      "element": null,
       "supplementProvenance": {
         "sourceId": "zzz-hp",
         "version": "2628b32cece086e371bafa05518a9a12650d9f74",
@@ -53224,6 +53246,316 @@
           ],
           "effectIds": [
             "agent:1641:zzz-hp:eff-8:blk-mindscapeBuffs-6-1:mindscape:6"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "differences": [],
+          "applicability": {}
+        }
+      ]
+    },
+    {
+      "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-354bc7ff-7c7d44:eff-8",
+      "catalogEntityId": "w-engines:Plume_of_Rebirth",
+      "name": "精5 · 异常精通",
+      "conditionDescription": "原文：装备者的异常精通提升126点；队伍中任意角色对敌人造成的属性异常伤害产生暴击时，装备者造成的火属性伤害提升56%，持续20秒，重复触发刷新持续时间。\n[关键字] 属性=异常精通 元素=无 动作=提升 数值=126 单位=点 目标=自身 条件=无 作用域=无 层数=无 时长=无 对象=无\n[关键字] 属性=增伤 元素=火 动作=提升 数值=56 单位=% 目标=自身 条件=无法提取 作用域=无 层数=无 时长=20 秒 对象=无",
+      "target": "self",
+      "variants": [
+        {
+          "configuration": {
+            "refinements": [5]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/wengines/0/refinementBuffs/4/effectBlocks/0/effects/0"
+            }
+          ],
+          "effectIds": [
+            "w-engine:14164:zzz-hp:eff-8:blk-354bc7ff-7c7d44:refinement:5"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "differences": [],
+          "applicability": {}
+        }
+      ]
+    },
+    {
+      "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-354bc7ff-7c7d44:eff-9",
+      "catalogEntityId": "w-engines:Plume_of_Rebirth",
+      "name": "精5 · 火属性增伤（选中即声明触发）",
+      "conditionDescription": "选中即声明触发已生效；原文：装备者的异常精通提升126点；队伍中任意角色对敌人造成的属性异常伤害产生暴击时，装备者造成的火属性伤害提升56%，持续20秒，重复触发刷新持续时间。\n[关键字] 属性=异常精通 元素=无 动作=提升 数值=126 单位=点 目标=自身 条件=无 作用域=无 层数=无 时长=无 对象=无\n[关键字] 属性=增伤 元素=火 动作=提升 数值=56 单位=% 目标=自身 条件=无法提取 作用域=无 层数=无 时长=20 秒 对象=无\n时长：20 秒",
+      "target": "self",
+      "variants": [
+        {
+          "configuration": {
+            "refinements": [5]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/wengines/0/refinementBuffs/4/effectBlocks/0/effects/1"
+            }
+          ],
+          "effectIds": [
+            "w-engine:14164:zzz-hp:eff-9:blk-354bc7ff-7c7d44:refinement:5"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "differences": [],
+          "applicability": {}
+        }
+      ]
+    },
+    {
+      "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-6600a889-781c01:eff-0",
+      "catalogEntityId": "w-engines:Plume_of_Rebirth",
+      "name": "精1 · 异常精通",
+      "conditionDescription": "原文：装备者的异常精通提升90点；队伍中任意角色对敌人造成的属性异常伤害产生暴击时，装备者造成的火属性伤害提升40%，持续20秒，重复触发刷新持续时间。\n[关键字] 属性=异常精通 元素=无 动作=提升 数值=90 单位=点 目标=自身 条件=无 作用域=无 层数=无 时长=无 对象=无\n[关键字] 属性=增伤 元素=火 动作=提升 数值=40 单位=% 目标=自身 条件=无法提取 作用域=无 层数=无 时长=20 秒 对象=无",
+      "target": "self",
+      "variants": [
+        {
+          "configuration": {
+            "refinements": [1]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/wengines/0/refinementBuffs/0/effectBlocks/0/effects/0"
+            }
+          ],
+          "effectIds": [
+            "w-engine:14164:zzz-hp:eff-0:blk-6600a889-781c01:refinement:1"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "differences": [],
+          "applicability": {}
+        }
+      ]
+    },
+    {
+      "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-6600a889-781c01:eff-1",
+      "catalogEntityId": "w-engines:Plume_of_Rebirth",
+      "name": "精1 · 火属性增伤（选中即声明触发）",
+      "conditionDescription": "选中即声明触发已生效；原文：装备者的异常精通提升90点；队伍中任意角色对敌人造成的属性异常伤害产生暴击时，装备者造成的火属性伤害提升40%，持续20秒，重复触发刷新持续时间。\n[关键字] 属性=异常精通 元素=无 动作=提升 数值=90 单位=点 目标=自身 条件=无 作用域=无 层数=无 时长=无 对象=无\n[关键字] 属性=增伤 元素=火 动作=提升 数值=40 单位=% 目标=自身 条件=无法提取 作用域=无 层数=无 时长=20 秒 对象=无\n时长：20 秒",
+      "target": "self",
+      "variants": [
+        {
+          "configuration": {
+            "refinements": [1]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/wengines/0/refinementBuffs/0/effectBlocks/0/effects/1"
+            }
+          ],
+          "effectIds": [
+            "w-engine:14164:zzz-hp:eff-1:blk-6600a889-781c01:refinement:1"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "differences": [],
+          "applicability": {}
+        }
+      ]
+    },
+    {
+      "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-69602102-280151:eff-2",
+      "catalogEntityId": "w-engines:Plume_of_Rebirth",
+      "name": "精2 · 异常精通",
+      "conditionDescription": "原文：装备者的异常精通提升99点；队伍中任意角色对敌人造成的属性异常伤害产生暴击时，装备者造成的火属性伤害提升44%，持续20秒，重复触发刷新持续时间。\n[关键字] 属性=异常精通 元素=无 动作=提升 数值=99 单位=点 目标=自身 条件=无 作用域=无 层数=无 时长=无 对象=无\n[关键字] 属性=增伤 元素=火 动作=提升 数值=44 单位=% 目标=自身 条件=无法提取 作用域=无 层数=无 时长=20 秒 对象=无",
+      "target": "self",
+      "variants": [
+        {
+          "configuration": {
+            "refinements": [2]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/wengines/0/refinementBuffs/1/effectBlocks/0/effects/0"
+            }
+          ],
+          "effectIds": [
+            "w-engine:14164:zzz-hp:eff-2:blk-69602102-280151:refinement:2"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "differences": [],
+          "applicability": {}
+        }
+      ]
+    },
+    {
+      "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-69602102-280151:eff-3",
+      "catalogEntityId": "w-engines:Plume_of_Rebirth",
+      "name": "精2 · 火属性增伤（选中即声明触发）",
+      "conditionDescription": "选中即声明触发已生效；原文：装备者的异常精通提升99点；队伍中任意角色对敌人造成的属性异常伤害产生暴击时，装备者造成的火属性伤害提升44%，持续20秒，重复触发刷新持续时间。\n[关键字] 属性=异常精通 元素=无 动作=提升 数值=99 单位=点 目标=自身 条件=无 作用域=无 层数=无 时长=无 对象=无\n[关键字] 属性=增伤 元素=火 动作=提升 数值=44 单位=% 目标=自身 条件=无法提取 作用域=无 层数=无 时长=20 秒 对象=无\n时长：20 秒",
+      "target": "self",
+      "variants": [
+        {
+          "configuration": {
+            "refinements": [2]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/wengines/0/refinementBuffs/1/effectBlocks/0/effects/1"
+            }
+          ],
+          "effectIds": [
+            "w-engine:14164:zzz-hp:eff-3:blk-69602102-280151:refinement:2"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "differences": [],
+          "applicability": {}
+        }
+      ]
+    },
+    {
+      "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-be4aea89-3368b0:eff-4",
+      "catalogEntityId": "w-engines:Plume_of_Rebirth",
+      "name": "精3 · 异常精通",
+      "conditionDescription": "原文：装备者的异常精通提升108点；队伍中任意角色对敌人造成的属性异常伤害产生暴击时，装备者造成的火属性伤害提升48%，持续20秒，重复触发刷新持续时间。\n[关键字] 属性=异常精通 元素=无 动作=提升 数值=108 单位=点 目标=自身 条件=无 作用域=无 层数=无 时长=无 对象=无\n[关键字] 属性=增伤 元素=火 动作=提升 数值=48 单位=% 目标=自身 条件=无法提取 作用域=无 层数=无 时长=20 秒 对象=无",
+      "target": "self",
+      "variants": [
+        {
+          "configuration": {
+            "refinements": [3]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/wengines/0/refinementBuffs/2/effectBlocks/0/effects/0"
+            }
+          ],
+          "effectIds": [
+            "w-engine:14164:zzz-hp:eff-4:blk-be4aea89-3368b0:refinement:3"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "differences": [],
+          "applicability": {}
+        }
+      ]
+    },
+    {
+      "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-be4aea89-3368b0:eff-5",
+      "catalogEntityId": "w-engines:Plume_of_Rebirth",
+      "name": "精3 · 火属性增伤（选中即声明触发）",
+      "conditionDescription": "选中即声明触发已生效；原文：装备者的异常精通提升108点；队伍中任意角色对敌人造成的属性异常伤害产生暴击时，装备者造成的火属性伤害提升48%，持续20秒，重复触发刷新持续时间。\n[关键字] 属性=异常精通 元素=无 动作=提升 数值=108 单位=点 目标=自身 条件=无 作用域=无 层数=无 时长=无 对象=无\n[关键字] 属性=增伤 元素=火 动作=提升 数值=48 单位=% 目标=自身 条件=无法提取 作用域=无 层数=无 时长=20 秒 对象=无\n时长：20 秒",
+      "target": "self",
+      "variants": [
+        {
+          "configuration": {
+            "refinements": [3]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/wengines/0/refinementBuffs/2/effectBlocks/0/effects/1"
+            }
+          ],
+          "effectIds": [
+            "w-engine:14164:zzz-hp:eff-5:blk-be4aea89-3368b0:refinement:3"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "differences": [],
+          "applicability": {}
+        }
+      ]
+    },
+    {
+      "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-cc7a7995-9285fe:eff-6",
+      "catalogEntityId": "w-engines:Plume_of_Rebirth",
+      "name": "精4 · 异常精通",
+      "conditionDescription": "原文：装备者的异常精通提升117点；队伍中任意角色对敌人造成的属性异常伤害产生暴击时，装备者造成的火属性伤害提升52%，持续20秒，重复触发刷新持续时间。\n[关键字] 属性=异常精通 元素=无 动作=提升 数值=117 单位=点 目标=自身 条件=无 作用域=无 层数=无 时长=无 对象=无\n[关键字] 属性=增伤 元素=火 动作=提升 数值=52 单位=% 目标=自身 条件=无法提取 作用域=无 层数=无 时长=20 秒 对象=无",
+      "target": "self",
+      "variants": [
+        {
+          "configuration": {
+            "refinements": [4]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/wengines/0/refinementBuffs/3/effectBlocks/0/effects/0"
+            }
+          ],
+          "effectIds": [
+            "w-engine:14164:zzz-hp:eff-6:blk-cc7a7995-9285fe:refinement:4"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "differences": [],
+          "applicability": {}
+        }
+      ]
+    },
+    {
+      "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-cc7a7995-9285fe:eff-7",
+      "catalogEntityId": "w-engines:Plume_of_Rebirth",
+      "name": "精4 · 火属性增伤（选中即声明触发）",
+      "conditionDescription": "选中即声明触发已生效；原文：装备者的异常精通提升117点；队伍中任意角色对敌人造成的属性异常伤害产生暴击时，装备者造成的火属性伤害提升52%，持续20秒，重复触发刷新持续时间。\n[关键字] 属性=异常精通 元素=无 动作=提升 数值=117 单位=点 目标=自身 条件=无 作用域=无 层数=无 时长=无 对象=无\n[关键字] 属性=增伤 元素=火 动作=提升 数值=52 单位=% 目标=自身 条件=无法提取 作用域=无 层数=无 时长=20 秒 对象=无\n时长：20 秒",
+      "target": "self",
+      "variants": [
+        {
+          "configuration": {
+            "refinements": [4]
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "zzz-hp",
+              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "locale": "zh",
+              "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+              "pointer": "/wengines/0/refinementBuffs/3/effectBlocks/0/effects/1"
+            }
+          ],
+          "effectIds": [
+            "w-engine:14164:zzz-hp:eff-7:blk-cc7a7995-9285fe:refinement:4"
           ],
           "maximumLayers": 1,
           "inputs": [],
