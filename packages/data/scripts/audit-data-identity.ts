@@ -227,10 +227,10 @@ export function collectAuditProblems(inputs: AuditInputs): AuditProblem[] {
         })
       continue
     }
-    const catalogEntityIds =
+    const entitiesForNanokaId =
       catalogEntityIdsByNanokaId.get(nanokaEntityId) ?? []
-    catalogEntityIds.push(entity.catalogEntityId)
-    catalogEntityIdsByNanokaId.set(nanokaEntityId, catalogEntityIds)
+    entitiesForNanokaId.push(entity.catalogEntityId)
+    catalogEntityIdsByNanokaId.set(nanokaEntityId, entitiesForNanokaId)
     if (!Object.hasOwn(inputs.identities, entity.catalogEntityId)) {
       problems.push({
         check: "identity-mapping-missing",
@@ -251,14 +251,17 @@ export function collectAuditProblems(inputs: AuditInputs): AuditProblem[] {
         },
       })
   }
-  for (const [nanokaEntityId, catalogEntityIds] of catalogEntityIdsByNanokaId)
-    if (catalogEntityIds.length > 1)
+  for (const [
+    nanokaEntityId,
+    entitiesForNanokaId,
+  ] of catalogEntityIdsByNanokaId)
+    if (entitiesForNanokaId.length > 1)
       problems.push({
         check: "identity-duplicate",
         id: `identity-duplicate/${nanokaEntityId}`,
         details: {
           nanokaEntityId,
-          catalogEntityIds: catalogEntityIds.toSorted(),
+          catalogEntityIds: entitiesForNanokaId.toSorted(),
         },
       })
   for (const identityKey of Object.keys(inputs.identities).toSorted())
