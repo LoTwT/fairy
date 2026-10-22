@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "integrated": {
+    "indexSha256": "d68ad1d80b203b9633f2cd6d176e4051c15c52f2ea3c0d71a2d2310c8b1a1b6d",
+    "sourceVersion": "3.3.12+19634983",
+    "fileCount": 2008,
+    "categories": {
+      "agents": {
+        "rulesVersion": "nanoka-agent-reference/7",
+        "memberCount": 62,
+        "memberIdSetSha256": "70374f29612e3a90e3ff52d8a5cb0570cb7bc8b8f3776d8e037901e3c4498043",
+        "fileCount": 186,
+        "memberFileSetSha256": "b530899521b5ed2eb88e392754ef9218fe8d1a70b5ed45a60b0fc5aa6018e5a4"
+      },
+      "bangboos": {
+        "rulesVersion": "nanoka-bangboo-reference/3",
+        "memberCount": 42,
+        "memberIdSetSha256": "33100650e04d157996b0ddec2540cf252a1040456a9b990fecf35424d70ed204",
+        "fileCount": 126,
+        "memberFileSetSha256": "1d5083f7129aa3ac86115b17d3cfba9b01c2653c53753a574fdf436621c4fa45"
+      },
+      "boss": {
+        "rulesVersion": "nanoka-boss-reference/6",
+        "memberCount": 50,
+        "memberIdSetSha256": "7274736833828c8f65c8dd6d90d7adef2cd32de08f87494a5a516139f7cc10b0",
+        "fileCount": 150,
+        "memberFileSetSha256": "cfb103bf223bbde0b6f51166c6563e06587c1bfcbb96a2b5ee6ef4db307d97d9"
+      },
+      "drive-discs": {
+        "rulesVersion": "nanoka-drive-disc-reference/3",
+        "memberCount": 30,
+        "memberIdSetSha256": "5e9d4759dc5da424df0437d035d8669a05d3001c45d8aaab317664feae9dc8f6",
+        "fileCount": 90,
+        "memberFileSetSha256": "da073b80fda1f9dd00e716e4a581a7660c31779be9f5c540220749fea75d23f5"
+      },
+      "monsters": {
+        "rulesVersion": "nanoka-monster-reference/2",
+        "memberCount": 314,
+        "memberIdSetSha256": "10a2ac409bf028d517d1bf660de127203061676dec99c39c2a112dfd5151b176",
+        "fileCount": 942,
+        "memberFileSetSha256": "b07d1bfb39b8cd6282ef7144f863ff9fc431b27ac4808dbab4196526f0675f5b"
+      },
+      "shiyu": {
+        "rulesVersion": "nanoka-shiyu-reference/3",
+        "memberCount": 65,
+        "memberIdSetSha256": "782cb0ff2513f3fe6826cbf6dcf11fb488f8796abd0db6d684035062a5a81f92",
+        "fileCount": 195,
+        "memberFileSetSha256": "0c46c66aa924c434edac874599fd26271bcb2ab3c31ee25ddefe27be43504036"
+      },
+      "simul": {
+        "rulesVersion": "nanoka-simul-reference/3",
+        "memberCount": 3,
+        "memberIdSetSha256": "e0b01f2dbbc840e007b8d2b5e42f6662b2cb5f51e2117a914dcdceeede352482",
+        "fileCount": 9,
+        "memberFileSetSha256": "4d8af9dbaa56704e83c90cfb31892c96d1efc7dd7eeeee731efa102ed8204178"
+      },
+      "w-engines": {
+        "rulesVersion": "nanoka-w-engine-reference/3",
+        "memberCount": 103,
+        "memberIdSetSha256": "c5fd92918761cb774785e72809dde21f5cdea0445363eb31f52d5f36ccc56eef",
+        "fileCount": 309,
+        "memberFileSetSha256": "ef9fa104a3330503df224d53797a01aa7d485c728d7fc658bdcd09c4476eb2ba"
+      }
+    }
+  },
+  "attributes": {
+    "manifestSha256": "b08ef30b71bb1c03babb0de9c76d68df783a572e72bd513cef5a04fe8874f212",
+    "counts": {
+      "inputs": 495,
+      "artifacts": 166,
+      "evidenceResources": 10,
+      "limitations": 5,
+      "discrepancies": 5
+    },
+    "fileCount": 167,
+    "artifactFileSetSha256": "b7bb787fbdb4c18a2b6031274408312eaa56b2a53688c68d928c793d41ab148c"
+  },
+  "skills": {
+    "manifestSha256": "8650c22aa8c0f643c4cbbf84149ea7ca881a6762984b33a4c724facb03f5b42d",
+    "memberCount": 62,
+    "actionCount": 1348,
+    "fileCount": 63,
+    "artifactFileSetSha256": "ccc4cb2c0f3f4e7c800f76d64ebf6fc555d65cc1ccea0cf1264f81a16c4a71ab"
+  },
+  "effects": {
+    "static": {
+      "sha256": "3a30bd0e5e5bc8fc2087163da1fc5e857cbca71ccc1bf2bf8c3b2777193ce823",
+      "ruleSetId": "zzz-hp-static-effects",
+      "revision": "51",
+      "ruleCount": 931
+    },
+    "staticCatalog": {
+      "sha256": "c8455d57b00a0329da50841e4d1a0bcc7e35bc28fd2b4319520dba01ab1c670c",
+      "ruleSetId": "zzz-hp-static-effects",
+      "revision": "51",
+      "optionCount": 986,
+      "variantCount": 1467,
+      "entityCount": 196
+    },
+    "staticCoverage": {
+      "sha256": "6cb0457f6a3456a23b82439d064f092825949a8fa71be0500aea025cd6ce2c5b",
+      "ruleSetId": "zzz-hp-static-effects",
+      "revision": "51",
+      "recordCount": 1360
+    }
+  }
+}
