@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "47",
+  "revision": "48",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "fac62407f3d3995f8200a66be0038f292b1455fa",
@@ -53866,6 +53866,312 @@
           "differences": []
         }
       ]
+    },
+    {
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-physical",
+      "catalogEntityId": "agents:pheony",
+      "name": "影画4 · 异放结算（物理）",
+      "conditionDescription": "影画4：[烬火追魂]或[普通攻击：焚罪]终结一击命中处于异常状态的敌人时，额外触发一次[异放]，固定结算600%倍率的物理属性异常伤害（本项目的归一基础倍率 42.78 = 600% × 物理原异常系数）。本选项只覆盖物理原异常；调用方声明本次触发与命中元素，命中携带独立目标并以 anomaly-settlement 结算，伤害项倍率从0开始由规则一次赋值，statSource 与 damage.anomalySource 一致；该次异放暴击时额外暴伤+40%。具体招式、异常积蓄与状态机不模拟。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 4
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-raw",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "scripts/static-effects/evidence/nanoka-3312-pheony-m4.json",
+              "pointer": "/zh/character/1641/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-raw",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "scripts/static-effects/evidence/nanoka-3312-pheony-m4.json",
+              "pointer": "/en/character/1641/talent/4/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1641:nanoka:m4-anomaly-settlement-physical:mindscape:4",
+            "agent:1641:nanoka:m4-anomaly-settlement-physical:mindscape:4-crit-damage"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "pheony:m4-anomaly-settlement",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "anomaly-source",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-fire",
+      "catalogEntityId": "agents:pheony",
+      "name": "影画4 · 异放结算（火）",
+      "conditionDescription": "影画4：[烬火追魂]或[普通攻击：焚罪]终结一击命中处于异常状态的敌人时，额外触发一次[异放]，固定结算600%倍率的火属性异常伤害（本项目的归一基础倍率 3 = 600% × 火原异常系数）。本选项只覆盖火原异常；调用方声明本次触发与命中元素，命中携带独立目标并以 anomaly-settlement 结算，伤害项倍率从0开始由规则一次赋值，statSource 与 damage.anomalySource 一致；该次异放暴击时额外暴伤+40%。具体招式、异常积蓄与状态机不模拟。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 4
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-raw",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "scripts/static-effects/evidence/nanoka-3312-pheony-m4.json",
+              "pointer": "/zh/character/1641/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-raw",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "scripts/static-effects/evidence/nanoka-3312-pheony-m4.json",
+              "pointer": "/en/character/1641/talent/4/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1641:nanoka:m4-anomaly-settlement-fire:mindscape:4",
+            "agent:1641:nanoka:m4-anomaly-settlement-fire:mindscape:4-crit-damage"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "pheony:m4-anomaly-settlement",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "anomaly-source",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-ice",
+      "catalogEntityId": "agents:pheony",
+      "name": "影画4 · 异放结算（冰）",
+      "conditionDescription": "影画4：[烬火追魂]或[普通攻击：焚罪]终结一击命中处于异常状态的敌人时，额外触发一次[异放]，固定结算600%倍率的冰属性异常伤害（本项目的归一基础倍率 30 = 600% × 冰原异常系数）。本选项只覆盖冰原异常；调用方声明本次触发与命中元素，命中携带独立目标并以 anomaly-settlement 结算，伤害项倍率从0开始由规则一次赋值，statSource 与 damage.anomalySource 一致；该次异放暴击时额外暴伤+40%。具体招式、异常积蓄与状态机不模拟。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 4
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-raw",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "scripts/static-effects/evidence/nanoka-3312-pheony-m4.json",
+              "pointer": "/zh/character/1641/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-raw",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "scripts/static-effects/evidence/nanoka-3312-pheony-m4.json",
+              "pointer": "/en/character/1641/talent/4/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1641:nanoka:m4-anomaly-settlement-ice:mindscape:4",
+            "agent:1641:nanoka:m4-anomaly-settlement-ice:mindscape:4-crit-damage"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "pheony:m4-anomaly-settlement",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "anomaly-source",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-electric",
+      "catalogEntityId": "agents:pheony",
+      "name": "影画4 · 异放结算（电）",
+      "conditionDescription": "影画4：[烬火追魂]或[普通攻击：焚罪]终结一击命中处于异常状态的敌人时，额外触发一次[异放]，固定结算600%倍率的电属性异常伤害（本项目的归一基础倍率 7.5 = 600% × 电原异常系数）。本选项只覆盖电原异常；调用方声明本次触发与命中元素，命中携带独立目标并以 anomaly-settlement 结算，伤害项倍率从0开始由规则一次赋值，statSource 与 damage.anomalySource 一致；该次异放暴击时额外暴伤+40%。具体招式、异常积蓄与状态机不模拟。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 4
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-raw",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "scripts/static-effects/evidence/nanoka-3312-pheony-m4.json",
+              "pointer": "/zh/character/1641/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-raw",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "scripts/static-effects/evidence/nanoka-3312-pheony-m4.json",
+              "pointer": "/en/character/1641/talent/4/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1641:nanoka:m4-anomaly-settlement-electric:mindscape:4",
+            "agent:1641:nanoka:m4-anomaly-settlement-electric:mindscape:4-crit-damage"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "pheony:m4-anomaly-settlement",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "anomaly-source",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-ether",
+      "catalogEntityId": "agents:pheony",
+      "name": "影画4 · 异放结算（以太）",
+      "conditionDescription": "影画4：[烬火追魂]或[普通攻击：焚罪]终结一击命中处于异常状态的敌人时，额外触发一次[异放]，固定结算600%倍率的以太属性异常伤害（本项目的归一基础倍率 3.75 = 600% × 以太原异常系数）。本选项只覆盖以太原异常；调用方声明本次触发与命中元素，命中携带独立目标并以 anomaly-settlement 结算，伤害项倍率从0开始由规则一次赋值，statSource 与 damage.anomalySource 一致；该次异放暴击时额外暴伤+40%。具体招式、异常积蓄与状态机不模拟。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 4
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-raw",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "scripts/static-effects/evidence/nanoka-3312-pheony-m4.json",
+              "pointer": "/zh/character/1641/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-raw",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "scripts/static-effects/evidence/nanoka-3312-pheony-m4.json",
+              "pointer": "/en/character/1641/talent/4/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1641:nanoka:m4-anomaly-settlement-ether:mindscape:4",
+            "agent:1641:nanoka:m4-anomaly-settlement-ether:mindscape:4-crit-damage"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "pheony:m4-anomaly-settlement",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "anomaly-source",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-wind",
+      "catalogEntityId": "agents:pheony",
+      "name": "影画4 · 异放结算（风）",
+      "conditionDescription": "影画4：[烬火追魂]或[普通攻击：焚罪]终结一击命中处于异常状态的敌人时，额外触发一次[异放]，固定结算600%倍率的风属性异常伤害（本项目的归一基础倍率 75 = 600% × 风原异常系数）。本选项只覆盖风原异常；调用方声明本次触发与命中元素，命中携带独立目标并以 anomaly-settlement 结算，伤害项倍率从0开始由规则一次赋值，statSource 与 damage.anomalySource 一致；该次异放暴击时额外暴伤+40%。具体招式、异常积蓄与状态机不模拟。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 4
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-raw",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "scripts/static-effects/evidence/nanoka-3312-pheony-m4.json",
+              "pointer": "/zh/character/1641/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-raw",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "scripts/static-effects/evidence/nanoka-3312-pheony-m4.json",
+              "pointer": "/en/character/1641/talent/4/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1641:nanoka:m4-anomaly-settlement-wind:mindscape:4",
+            "agent:1641:nanoka:m4-anomaly-settlement-wind:mindscape:4-crit-damage"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "damageItemRequirements": [
+            {
+              "itemId": "pheony:m4-anomaly-settlement",
+              "stat": "attack",
+              "role": "base",
+              "allowedModes": ["direct"],
+              "source": "anomaly-source",
+              "requiredDirectMultiplier": 0,
+              "requiredSkillCategory": "uncategorized"
+            }
+          ]
+        }
+      ]
     }
   ],
   "skillTargets": [
@@ -54843,6 +55149,14 @@
       "agentEntityId": "1241",
       "category": "dodge",
       "name": "冲刺攻击：火力压制·强化霰弹",
+      "countsAsFollowUp": false
+    },
+    {
+      "targetId": "zzz-hp:skill:pheony-m4-anomaly-settlement",
+      "upstreamId": null,
+      "agentEntityId": "1641",
+      "category": "uncategorized",
+      "name": "影画4异放结算",
       "countsAsFollowUp": false
     }
   ],

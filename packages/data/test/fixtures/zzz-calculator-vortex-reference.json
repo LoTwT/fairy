@@ -65,7 +65,7 @@
       "packageVersion": "0.4.0",
       "contractVersion": 2,
       "gameVersion": "3.2",
-      "snapshotId": "sha256:5217cca17a930b923e837ae24527e61f7248223c2411ebf749e3fe6f90077000"
+      "snapshotId": "sha256:14d1e42b5f8b64f0fbb1e218c97edb64dbb7e5d7429e948999153bcfefd322cc"
     }
   },
   "inputLayer": "externally-declared-resolved-source-state",
@@ -107379,6 +107379,18 @@
         }
       },
       "currentSnapshotId": "sha256:5217cca17a930b923e837ae24527e61f7248223c2411ebf749e3fe6f90077000"
+    },
+    {
+      "reason": "Revision 48 adds the opt-in Pheony mindscape 4 six-element anomaly-settlement options and the independent 40% anomaly-settlement crit damage from the frozen Nanoka 3.3.12+19634983 talent text. The comparison scenarios never select these options, so native upstream captures and all numeric results stay frozen; only the current consumption snapshot and the two changed Fairy artifact digests are refreshed.",
+      "implementationBase": "fd79a5a5afb6b171c9d387d35f540d6f85d6408a",
+      "previous": {
+        "snapshotId": "sha256:5217cca17a930b923e837ae24527e61f7248223c2411ebf749e3fe6f90077000",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "ded653e4cef2476fe734f600a3a32e84ab67fe06eac27d162e53d4e509f16a5c",
+          "packages/data/definitions/effects/static-catalog.json": "642bfef9034f86d92ea616e03d38cfc659c88a1f0021deaefbd481111eac7312"
+        }
+      },
+      "currentSnapshotId": "sha256:14d1e42b5f8b64f0fbb1e218c97edb64dbb7e5d7429e948999153bcfefd322cc"
     }
   ]
 }

@@ -20,7 +20,10 @@ import {
   d4SkillInventory,
 } from "./static-effects/d4-325.ts"
 import { mergeSupplementalSource } from "./static-effects/d4-merge.ts"
-import { D4_PHEONY_UNSUPPORTED_SUPPLEMENTS } from "./static-effects/d4-pheony.ts"
+import {
+  D4_PHEONY_M4_SUPPLEMENTS,
+  D4_PHEONY_UNSUPPORTED_SUPPLEMENTS,
+} from "./static-effects/d4-pheony.ts"
 import { SOURCE_COMMIT, loadSource } from "./static-effects/source.ts"
 import {
   COMPLETE_STATE_OPTIONS,
@@ -323,7 +326,7 @@ export async function generateStaticEffects(
       d4EntityData(enabledEntities),
       source.functions,
       source.files,
-      D4_PHEONY_UNSUPPORTED_SUPPLEMENTS,
+      [...D4_PHEONY_UNSUPPORTED_SUPPLEMENTS, ...D4_PHEONY_M4_SUPPLEMENTS],
       COMPLETE_STATE_OPTIONS,
       { supplemental: true },
     )
@@ -331,8 +334,8 @@ export async function generateStaticEffects(
       supplemental.coverage.summary.entities !== 1 ||
       supplemental.coverage.summary.packs !== 7 ||
       supplemental.coverage.summary.rawEffects !== 26 ||
-      supplemental.coverage.summary.rules !== 20 ||
-      supplemental.catalog.options.length !== 36
+      supplemental.coverage.summary.rules !== 32 ||
+      supplemental.catalog.options.length !== 42
     )
       throw new Error("D4 supplemental source denominator changed")
     const merged = mergeSupplementalSource(
@@ -345,7 +348,7 @@ export async function generateStaticEffects(
         gaps: [],
         optionLabels: d4PlumeOptionLabels(supplemental.catalog.options),
       },
-      "47",
+      "48",
     )
     for (const entity of result.catalog.entities) {
       if (!entity.supplementProvenance) continue
