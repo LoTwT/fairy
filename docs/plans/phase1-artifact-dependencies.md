@@ -17,8 +17,10 @@ pnpm --filter @randomplay/data verify:artifact-dependencies [--json]
   读取 P1-1 已校验的 manifest/静态制品、计算实际文件摘要、运行 CLI 与错误处理。
 - [`packages/data/scripts/data-product/dependencies.ts`](../../packages/data/scripts/data-product/dependencies.ts)：
   纯函数依赖检查、稳定排序、违规列表与人类可读摘要。
+- [`packages/data/scripts/data-product/cli.ts`](../../packages/data/scripts/data-product/cli.ts)：
+  与 explain CLI 共用的 realpath 入口判断，避免符号链接调用时静默退出。
 - [`packages/data/test/artifact-dependencies.test.ts`](../../packages/data/test/artifact-dependencies.test.ts)：
-  合成 fixture、正式数据、CLI smoke 与只读性测试。
+  合成 fixture、正式数据、CLI smoke、符号链接入口与只读性测试。
 
 `--json` 输出 `schemaVersion: 1`、`ok`、`summary`、`nodes`、`edges` 与 `violations`。
 默认输出只打印一行结果与全部违规，不展开节点与边。存在违规时退出码为 1；P1-1 读取失败时
@@ -71,6 +73,8 @@ manifest 重复声明时只保留一个节点，相同违规按完整元组去�
   `inputs[]` 从“数量”扩展为 `{ path, sha256 }` 数组，避免依赖检查复制字段与摘要格式校验。
 - 制品存在性、静态三制品身份一致性与 catalog/coverage 来源一致性仍由 P1-1 负责；依赖检查只补
   实际摘要比对。读取器失败即审计失败，不降级为依赖违规。
+- 来源清单比较逐条遍历 catalog/coverage 的 `source.files`，不使用按 path 折叠的 Map，
+  重复声明不会被静默吞掉。
 - 生成器、`prepare-calculation-data` 与候选安装流程未修改；本入口不进入生成链。
 - 不新增运行时依赖、不从 `packages/data/src/index.ts` 导出、不修改 `package.json` exports。
 
@@ -84,6 +88,7 @@ manifest 重复声明时只保留一个节点，相同违规按完整元组去�
 | 删除 `DependencyFileDigest`，改用两个 `Record<string, string>`     | 无法区分“未声明”和“文件不可读”，且 loader 与纯函数之间需要额外约定 key。保留显式文件摘要记录。                                   |
 | 删除 `formatArtifactDependencyReport()`，在 CLI 内联输出           | 违规定位格式需要独立测试，CLI 还会混入展示逻辑。保留纯格式化函数。                                                               |
 | 删除 `artifactDependencyPaths` 常量，内联路径字符串                | 纯函数、CLI 与测试会重复硬编码同一组节点身份，容易漂移。保留单一常量。                                                           |
+| 在新 CLI 中复制 explain 的 realpath 入口判断                       | 两处会独立维护同一符号链接缺陷；抽到 `data-product/cli.ts` 由 P1-2 与 P1-4 共用，并新增符号链接测试。                            |
 | 把 P1-1 读取器错误包装为依赖违规                                   | 会把 schema/身份校验失败与“声明与文件不一致”混为一类，违背 P1-3 的边界。保留 `LOAD_FAILED` 分类。                                |
 | 在人类输出中列出全部节点/边                                        | 正式数据有 730 个节点、915 条边；只输出总数与违规，详细图保留在 `--json`。                                                       |
 
@@ -91,10 +96,10 @@ manifest 重复声明时只保留一个节点，相同违规按完整元组去�
 
 | 命令                                                                                                                         | 实际结果                                                                                             |
 | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `pnpm --filter @randomplay/data exec vitest run test/artifact-dependencies.test.ts test/data-product.test.ts --project unit` | 43 个测试通过。                                                                                      |
+| `pnpm --filter @randomplay/data exec vitest run test/artifact-dependencies.test.ts test/data-product.test.ts --project unit` | 45 个测试通过。                                                                                      |
 | `pnpm --filter @randomplay/data verify:artifact-dependencies`                                                                | 通过；730 个节点、915 条边、0 个违规。                                                               |
 | `pnpm --filter @randomplay/data verify:artifact-dependencies --json`                                                         | 连续两次输出逐字节一致；解析后 `ok=true`、0 个违规。                                                 |
-| `pnpm --filter @randomplay/data check:source`                                                                                | 通过；105 个测试文件、4,663 个测试通过。                                                             |
+| `pnpm --filter @randomplay/data check:source`                                                                                | 通过；105 个测试文件、4,665 个测试通过。                                                             |
 | `pnpm check:quality`                                                                                                         | 通过；oxlint 0 errors、127 条仓库既有 warnings，oxfmt 与 spec 类型检查通过。                         |
 | `git diff --stat` / `git status --short`                                                                                     | 仅 `docs/`、`scripts/`、测试与 `package.json` 脚本入口；`integrated`、`definitions`、`dist` 无变化。 |
 

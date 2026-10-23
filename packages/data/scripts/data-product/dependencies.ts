@@ -8,12 +8,15 @@ import type {
  * 依赖检查的节点使用相对 `packages/data` 的稳定路径，便于与文档、
  * manifest 声明和实际文件直接对照。
  */
+const definitionsPrefix = "definitions/"
+const staticCatalogArtifactPath = "effects/static-catalog.json"
+
 export const artifactDependencyPaths = {
   integratedIndex: "integrated/index.json",
   panelAttributesManifest: "definitions/attributes/manifest.json",
   agentActionsManifest: "definitions/skills/manifest.json",
-  staticCatalog: "definitions/effects/static-catalog.json",
-  staticCoverage: "definitions/effects/static-coverage.json",
+  staticCatalog: `${definitionsPrefix}${staticCatalogArtifactPath}`,
+  staticCoverage: `${definitionsPrefix}effects/static-coverage.json`,
   skillsRegistry: "scripts/skills/registry.json",
   sourceManifest: "scripts/static-effects/source-manifest.json",
 } as const
@@ -123,7 +126,7 @@ function integratedInputNodeId(path: string): string {
 }
 
 function definitionNodeId(path: string): string {
-  return `definitions/${path}`
+  return `${definitionsPrefix}${path}`
 }
 
 function formatLocation(violation: DependencyViolation): string {
@@ -314,7 +317,7 @@ export function verifyArtifactDependencies(
     inputs.agentActions.extensions.staticCatalogSha256
   const actualStaticCatalogSha256 =
     inputs.staticEffects.manifest.artifacts.find(
-      (artifact) => artifact.path === "effects/static-catalog.json",
+      (artifact) => artifact.path === staticCatalogArtifactPath,
     )?.sha256
   if (actualStaticCatalogSha256 !== declaredStaticCatalogSha256)
     addViolation({
@@ -341,9 +344,7 @@ export function verifyArtifactDependencies(
       actual: actualRegistrySha256,
     })
 
-  const sourceFiles = digestMap(
-    inputs.staticEffects.manifest.extensions.sourceFiles,
-  )
+  const sourceFiles = inputs.staticEffects.manifest.extensions.sourceFiles
   if (inputs.sourceManifestFiles === undefined) {
     addViolation({
       code: "source-manifest-missing",
@@ -353,37 +354,36 @@ export function verifyArtifactDependencies(
     })
   } else {
     const sourceManifestFiles = digestMap(inputs.sourceManifestFiles)
-    const paths = new Set([
-      ...sourceFiles.keys(),
-      ...sourceManifestFiles.keys(),
-    ])
-    for (const path of [...paths].toSorted(compareText)) {
-      const declared = sourceFiles.get(path)
-      const sourceDigest = sourceManifestFiles.get(path)
-      if (declared === undefined)
-        addViolation({
-          code: "source-file-missing",
-          node: artifactDependencyPaths.staticCatalog,
-          path,
-          expected: sourceDigest ?? missing,
-          actual: missing,
-        })
-      else if (sourceDigest === undefined)
+    const declaredSourcePaths = new Set<string>()
+    for (const file of sourceFiles) {
+      declaredSourcePaths.add(file.path)
+      const sourceDigest = sourceManifestFiles.get(file.path)
+      if (sourceDigest === undefined)
         addViolation({
           code: "source-file-extra",
           node: artifactDependencyPaths.staticCatalog,
-          path,
+          path: file.path,
           expected: missing,
-          actual: declared,
+          actual: file.sha256,
         })
-      else if (declared !== sourceDigest)
+      else if (file.sha256 !== sourceDigest)
         addViolation({
           code: "source-file-sha256-mismatch",
           node: artifactDependencyPaths.staticCatalog,
-          path,
+          path: file.path,
           expected: sourceDigest,
-          actual: declared,
+          actual: file.sha256,
         })
+    }
+    for (const [path, sourceDigest] of sourceManifestFiles) {
+      if (declaredSourcePaths.has(path)) continue
+      addViolation({
+        code: "source-file-missing",
+        node: artifactDependencyPaths.staticCatalog,
+        path,
+        expected: sourceDigest ?? missing,
+        actual: missing,
+      })
     }
   }
 

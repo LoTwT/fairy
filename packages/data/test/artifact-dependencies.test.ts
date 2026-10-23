@@ -4,11 +4,14 @@ import {
   mkdtempSync,
   readFileSync,
   rmSync,
+  symlinkSync,
   writeFileSync,
 } from "node:fs"
 import { tmpdir } from "node:os"
 import { dirname, join } from "node:path"
+import { fileURLToPath, pathToFileURL } from "node:url"
 import { afterEach, describe, expect, it } from "vitest"
+import { isMainModuleEntry } from "../scripts/data-product/cli.ts"
 import {
   artifactDependencyPaths,
   formatArtifactDependencyReport,
@@ -623,11 +626,40 @@ describe("verify:artifact-dependencies CLI", () => {
     expect(parsed.error.message).toContain("static-catalog.json")
   })
 
+  it("reports argument errors separately from load failures", () => {
+    const result = runCli(["--bogus", "--json"])
+    expect(result.code).toBe(1)
+    expect(result.stdout).toBe("")
+    const parsed = JSON.parse(result.stderr) as {
+      readonly error: { readonly code: string; readonly message: string }
+    }
+    expect(parsed.error.code).toBe("INVALID_ARGUMENT")
+    expect(parsed.error.message).toContain("--bogus")
+  })
+
   it("prints help without reading data", () => {
     const result = runCli(["--help"])
     expect(result.code).toBe(0)
     expect(result.stdout).toContain("verify:artifact-dependencies")
   })
+
+  it.skipIf(process.platform === "win32")(
+    "detects the CLI entry through a symlink",
+    () => {
+      const cliPath = fileURLToPath(
+        new URL("../scripts/verify-artifact-dependencies.ts", import.meta.url),
+      )
+      const root = mkdtempSync(join(tmpdir(), "fairy-artifact-deps-entry-"))
+      fixtureRoots.push(root)
+      const link = join(root, "verify-link.ts")
+      symlinkSync(cliPath, link)
+      const moduleUrl = pathToFileURL(cliPath).href
+      expect(isMainModuleEntry(link, moduleUrl)).toBe(true)
+      expect(isMainModuleEntry(cliPath, moduleUrl)).toBe(true)
+      expect(isMainModuleEntry(undefined, moduleUrl)).toBe(false)
+      expect(isMainModuleEntry(join(root, "missing.ts"), moduleUrl)).toBe(false)
+    },
+  )
 })
 
 describe("artifact dependency pure verifier", () => {

@@ -1,6 +1,5 @@
-import { realpathSync } from "node:fs"
-import { fileURLToPath } from "node:url"
 import { loadAgentActionIndex } from "./data-product/agent-actions.ts"
+import { isMainModuleEntry } from "./data-product/cli.ts"
 import {
   explainDataIdentity,
   ExplainError,
@@ -167,19 +166,6 @@ export function runExplainCli(
     return 0
   } catch (error) {
     return reportError(error, parsed.json, io)
-  }
-}
-
-/** 用 realpath 比较入口，避免通过符号链接调用时静默不执行。 */
-export function isMainModuleEntry(
-  entry: string | undefined,
-  moduleUrl: string,
-): boolean {
-  if (entry === undefined) return false
-  try {
-    return realpathSync(entry) === realpathSync(fileURLToPath(moduleUrl))
-  } catch {
-    return false
   }
 }
 

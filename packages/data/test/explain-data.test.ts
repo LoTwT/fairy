@@ -17,9 +17,10 @@ import {
   supportedInputForms,
   type ExplainResult,
 } from "../scripts/data-product/explain.ts"
+import { isMainModuleEntry } from "../scripts/data-product/cli.ts"
 import { loadStaticEffectsProduct } from "../scripts/data-product/manifests.ts"
 import { queryStaticCoverage } from "../scripts/data-product/static-coverage.ts"
-import { isMainModuleEntry, runExplainCli } from "../scripts/explain-data.ts"
+import { runExplainCli } from "../scripts/explain-data.ts"
 
 // 真实 ID 与数值取自 static effects revision 51；数据修订后按稳定身份更新。
 const effectId =

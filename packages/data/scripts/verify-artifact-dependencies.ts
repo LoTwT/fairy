@@ -9,6 +9,7 @@ import {
   type ArtifactDependencyReport,
   type DependencyFileDigest,
 } from "./data-product/dependencies.ts"
+import { isMainModuleEntry } from "./data-product/cli.ts"
 import {
   expectField,
   expectRecord,
@@ -170,6 +171,7 @@ function reportError(
   error: unknown,
   json: boolean,
   io: VerifyArtifactDependenciesCliIo,
+  code = "LOAD_FAILED",
 ): number {
   const message = error instanceof Error ? error.message : String(error)
   if (json)
@@ -179,7 +181,7 @@ function reportError(
           schemaVersion: 1,
           ok: false,
           type: "error",
-          error: { code: "LOAD_FAILED", message },
+          error: { code, message },
         },
         null,
         2,
@@ -203,7 +205,7 @@ export function runVerifyArtifactDependenciesCli(
   try {
     parsed = parseArguments(args)
   } catch (error) {
-    return reportError(error, args.includes("--json"), io)
+    return reportError(error, args.includes("--json"), io, "INVALID_ARGUMENT")
   }
 
   if (parsed.help) {
@@ -226,5 +228,5 @@ export function runVerifyArtifactDependenciesCli(
   }
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url))
+if (isMainModuleEntry(process.argv[1], import.meta.url))
   process.exitCode = runVerifyArtifactDependenciesCli(process.argv.slice(2))
