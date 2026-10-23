@@ -1,6 +1,6 @@
 # Phase 1 P1-1：内部数据产品 manifest 读取器与覆盖查询
 
-状态：已实现并合并（PR #291），且已通过独立验收。本记录同时包含 follow-up 修订：覆盖计数使用显式 `unit` / `count`，静态效果读取器校验 catalog 与 coverage 的 source 一致。范围仅 P1-1；P1-2 CLI 与 P1-3 生成/构建期校验收敛已分别由 [P1-2 实施记录](phase1-explain-cli.md) 和 [P1-3 实施记录](phase1-validation-boundary.md) 接续实现，P1-4 依赖图未开始。
+状态：已实现并合并（PR #291），且已通过独立验收。本记录同时包含 follow-up 修订：覆盖计数使用显式 `unit` / `count`，静态效果读取器校验 catalog 与 coverage 的 source 一致。范围仅 P1-1；P1-2 CLI、P1-3 生成/构建期校验收敛与 P1-4 制品依赖检查已分别由 [P1-2 实施记录](phase1-explain-cli.md)、[P1-3 实施记录](phase1-validation-boundary.md) 和 [P1-4 实施记录](phase1-artifact-dependencies.md) 接续实现。
 
 ## 范围与位置
 

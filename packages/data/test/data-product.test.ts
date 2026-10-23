@@ -319,9 +319,11 @@ describe("data product manifests", () => {
     expect(manifest.extensions.members.wEngines).toHaveLength(
       baselineMemberCount("w-engines"),
     )
-    expect(manifest.extensions.inputs).toBe(
+    expect(manifest.extensions.inputs).toHaveLength(
       structureBaseline.attributes.counts.inputs,
     )
+    expect(manifest.extensions.inputs[0]?.path).toBe("agents/1011/data.json")
+    expect(manifest.extensions.inputs[0]?.sha256).toMatch(/^[0-9a-f]{64}$/u)
     expect(manifest.extensions.evidence.zzzHpCommit).toBe(
       "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
     )
