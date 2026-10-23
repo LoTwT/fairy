@@ -13,6 +13,16 @@ import {
 import { convertSource } from "./static-effects/convert.ts"
 import { loadSource } from "./static-effects/source.ts"
 import {
+  compareStaticArtifacts,
+  formatDifference,
+} from "./static-effects/authoring/canonical.ts"
+import {
+  compileAuthoringRecords,
+  type StaticArtifacts,
+} from "./static-effects/authoring/compile.ts"
+import { CORRECTED_AUTHORING_RECORDS } from "./static-effects/authoring/records.ts"
+import type { EffectAuthoringRecord } from "./static-effects/authoring/types.ts"
+import {
   COMPLETE_STATE_OPTIONS,
   SOURCE_SEMANTICS,
   type CompleteStateOptionRegistration,
@@ -197,12 +207,50 @@ export async function verifyStaticEffectsEvidence(
   return verified
 }
 
+export type StaticEffectsAuthoringMode = "authoring" | "converter-fallback"
+
+export interface StaticEffectsGenerationOptions {
+  /**
+   * 默认使用正式 authoring 记录；`converter-fallback` 只用于显式回滚，
+   * authoring 编译或等价校验失败时不会自动退回该模式。
+   */
+  readonly authoring?: StaticEffectsAuthoringMode
+  /** 测试注入点；生产调用省略并使用正式 corrected 记录。 */
+  readonly authoringRecords?: readonly EffectAuthoringRecord[]
+}
+
+export function applyStaticEffectsAuthoring(
+  converterArtifacts: StaticArtifacts,
+  options: StaticEffectsGenerationOptions = {},
+): StaticArtifacts {
+  const authoringMode = options.authoring ?? "authoring"
+  if (authoringMode !== "authoring" && authoringMode !== "converter-fallback")
+    throw new Error(`Unknown authoring mode: ${String(authoringMode)}`)
+  if (authoringMode === "converter-fallback") return converterArtifacts
+  const compilation = compileAuthoringRecords(
+    options.authoringRecords ?? CORRECTED_AUTHORING_RECORDS,
+    converterArtifacts,
+  )
+  const comparison = compareStaticArtifacts(
+    converterArtifacts,
+    compilation.artifacts,
+  )
+  if (!comparison.equivalent)
+    throw new Error(
+      `Authoring artifacts are not semantically equivalent to the converter baseline:\n${comparison.differences
+        .map(formatDifference)
+        .join("\n")}`,
+    )
+  return compilation.artifacts
+}
+
 export async function generateStaticEffects(
   sourceRoot: string,
   outputDirectory: string,
   integratedDirectory = fileURLToPath(
     new URL("../integrated", import.meta.url),
   ),
+  options: StaticEffectsGenerationOptions = {},
 ): Promise<ReturnType<typeof convertSource>["coverage"]["summary"]> {
   const output = await resolveCandidateOutputDirectory(
     outputDirectory,
@@ -264,25 +312,31 @@ export async function generateStaticEffects(
       throw new Error(
         `Fixed-source coverage denominator changed: ${result.coverage.summary.entities}/${result.coverage.summary.packs}/${result.coverage.summary.rawEffects}`,
       )
-    const parsed = parseEffectRuleSet(result.definitions)
+    const converterArtifacts: StaticArtifacts = {
+      definitions: result.definitions,
+      catalog: result.catalog,
+      coverage: result.coverage,
+    }
+    const artifacts = applyStaticEffectsAuthoring(converterArtifacts, options)
+    const parsed = parseEffectRuleSet(artifacts.definitions)
     if (!parsed.ok) throw new Error(JSON.stringify(parsed.issues))
     // 完整生成命令预先构建 core；仅导入转换工具或拒绝坏输入时不加载计算运行时。
     const { validateStaticCatalog } =
       await import("../../core/src/effects/internal/static-catalog.ts")
-    const catalog = validateStaticCatalog(result.catalog, parsed.value)
+    const catalog = validateStaticCatalog(artifacts.catalog, parsed.value)
     if (!catalog.ok) throw new Error(JSON.stringify(catalog.issues))
     candidate = await mkdtemp(join(dirname(output), ".fairy-static-candidate-"))
-    const artifacts = {
-      "static.json": result.definitions,
-      "static-catalog.json": result.catalog,
-      "static-coverage.json": result.coverage,
+    const artifactsByFile = {
+      "static.json": artifacts.definitions,
+      "static-catalog.json": artifacts.catalog,
+      "static-coverage.json": artifacts.coverage,
     }
-    for (const [file, value] of Object.entries(artifacts))
+    for (const [file, value] of Object.entries(artifactsByFile))
       await writeFile(
         join(candidate, file),
         `${JSON.stringify(value, null, 2)}\n`,
       )
-    await formatGeneratedJson(candidate, Object.keys(artifacts))
+    await formatGeneratedJson(candidate, Object.keys(artifactsByFile))
     await installCandidateOutputDirectory(candidate, output)
     return result.coverage.summary
   } finally {
@@ -290,14 +344,43 @@ export async function generateStaticEffects(
     if (candidate) await rm(candidate, { recursive: true, force: true })
   }
 }
+export function resolveAuthoringMode(
+  value: string | undefined,
+): StaticEffectsAuthoringMode {
+  if (value === undefined || value === "authoring") return "authoring"
+  if (value === "converter-fallback") return "converter-fallback"
+  throw new Error(
+    `Unknown authoring mode "${value}"; expected "authoring" or "converter-fallback"`,
+  )
+}
+
 if (
   process.argv[1] &&
   resolve(process.argv[1]) === fileURLToPath(import.meta.url)
 ) {
-  const [, , source, output] = process.argv
-  if (!source || !output)
+  const positional: string[] = []
+  let fallback = false
+  for (const argument of process.argv.slice(2)) {
+    if (argument === "--fallback-converter") fallback = true
+    else if (argument.startsWith("-"))
+      throw new Error(`Unknown option: ${argument}`)
+    else positional.push(argument)
+  }
+  const [source, output] = positional
+  if (!source || !output || positional.length !== 2)
     throw new Error(
-      "Usage: generate:static-effects <sourceRoot> <newOutputDirectory>",
+      "Usage: generate:static-effects [--fallback-converter] <sourceRoot> <newOutputDirectory>",
     )
-  console.log(JSON.stringify(await generateStaticEffects(source, output)))
+  const authoring = fallback
+    ? "converter-fallback"
+    : resolveAuthoringMode(process.env.FAIRY_STATIC_EFFECTS_AUTHORING)
+  if (authoring === "converter-fallback")
+    console.warn(
+      "Static effects authoring is disabled: using the converter-only fallback.",
+    )
+  console.log(
+    JSON.stringify(
+      await generateStaticEffects(source, output, undefined, { authoring }),
+    ),
+  )
 }

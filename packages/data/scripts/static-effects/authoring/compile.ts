@@ -43,16 +43,18 @@ export interface StaticCoverageRecord {
   readonly explanation?: string
   readonly normalizationChanges: readonly string[]
   readonly rawValue: number
-  readonly normalizedValue: number
+  /** 未归一化的位置可以没有数值；作者层只替换有明确数值的选中位置。 */
+  readonly normalizedValue: number | null
 }
 
 export interface StaticCoverageSupplementalRecord {
   readonly supplementId: string
   readonly source: string
   readonly kind: string
-  readonly optionId: string
-  readonly effectIds: readonly string[]
-  readonly supportedRanks: string
+  /** 补充记录沿用 converter 的可选形态；编译器只保留基线条目，不重建。 */
+  readonly optionId?: string
+  readonly effectIds?: readonly string[]
+  readonly supportedRanks?: string
   readonly computationTarget: string
   readonly status: string
 }
@@ -330,16 +332,33 @@ export function compileAuthoringArtifacts(
   }
 }
 
-export function compileAuthoringPilot(
-  input: CompileAuthoringPilotInput,
-): CompileAuthoringPilotResult {
-  const validated = validateAuthoringRecords(input.records)
+function requireValidAuthoringRecords(
+  records: readonly EffectAuthoringRecord[],
+): readonly EffectAuthoringRecord[] {
+  const validated = validateAuthoringRecords(records)
   if (!validated.ok)
     throw new Error(
       `Authoring records are invalid:\n${validated.issues
         .map((issue) => `${issue.path}: ${issue.message}`)
         .join("\n")}`,
     )
+  return validated.records
+}
+
+export function compileAuthoringRecords(
+  records: readonly EffectAuthoringRecord[],
+  baseline: StaticArtifacts,
+): AuthoringCompilation {
+  return compileAuthoringArtifacts(
+    requireValidAuthoringRecords(records),
+    baseline,
+  )
+}
+
+export function compileAuthoringPilot(
+  input: CompileAuthoringPilotInput,
+): CompileAuthoringPilotResult {
+  const records = requireValidAuthoringRecords(input.records)
   assertSafeOutput(input.outputDirectory)
   if (
     comparisonPath(input.outputDirectory) ===
@@ -347,12 +366,12 @@ export function compileAuthoringPilot(
   )
     throw new Error("Authoring output must differ from the baseline directory")
   const baseline = readStaticArtifacts(input.baselineDirectory)
-  const compilation = compileAuthoringArtifacts(validated.records, baseline)
+  const compilation = compileAuthoringArtifacts(records, baseline)
   writeStaticArtifacts(input.outputDirectory, compilation.artifacts)
   return {
     ...compilation,
     outputDirectory: resolve(input.outputDirectory),
-    recordCount: validated.records.length,
+    recordCount: records.length,
     coverageRecordCount: compilation.coverageKeys.length,
   }
 }
@@ -785,8 +804,8 @@ function compileVariant(
     effectIds,
     maximumLayers: variant.maximumLayers,
     inputs: variant.inputs,
-    applicability: variant.applicability,
     differences,
+    applicability: variant.applicability,
     ...independent,
   } as StaticCatalogVariant
 }
