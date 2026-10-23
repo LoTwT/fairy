@@ -6,9 +6,10 @@ import type { AgentActionManifest, AgentActions } from "../src/skills/types.ts"
 import { directoryRoot, readBytes, sha256 } from "./nanoka-integration/files.ts"
 import { formatGeneratedJson } from "./nanoka-integration/format.ts"
 import {
-  installCandidateOutputDirectory,
+  installCandidateAfterValidation,
   resolveCandidateOutputDirectory,
 } from "./candidate-output.ts"
+import { loadAgentActionsCandidateManifest } from "./data-product/manifests.ts"
 import { maximumAttributeBytes } from "./panel-attributes/manifest.ts"
 import { preparePublication } from "./prepare-publication.ts"
 import { convertAgentActions } from "./skills/convert.ts"
@@ -268,8 +269,12 @@ export async function generateAgentActions(
     }
     await write("manifest.json", manifest)
     await formatGeneratedJson(candidate, ["manifest.json"])
-    await verifyAgentActions(candidate, index, staticCatalogFile)
-    await installCandidateOutputDirectory(candidate, output)
+    // 先按数据产品 manifest 的权威结构校验候选，再核对生成器输入与摘要契约；
+    // 任一步失败都不会进入安装步骤、替换正式目录。
+    await installCandidateAfterValidation(candidate, output, async () => {
+      loadAgentActionsCandidateManifest(candidate)
+      await verifyAgentActions(candidate, index, staticCatalogFile)
+    })
     return manifest.coverage
   } finally {
     await rm(temporary, { recursive: true, force: true })

@@ -77,6 +77,16 @@ export async function resolveCandidateOutputDirectory(
   return output
 }
 
+/** 校验通过后才尝试独占安装；校验失败不触碰正式输出目录。 */
+export async function installCandidateAfterValidation(
+  candidateDirectory: string,
+  outputDirectory: string,
+  validate: () => void | Promise<void>,
+): Promise<void> {
+  await validate()
+  await installCandidateOutputDirectory(candidateDirectory, outputDirectory)
+}
+
 /** 独占创建目标后搬入候选内容；未取得目标的调用不能替换或清理其他任务的输出。 */
 export async function installCandidateOutputDirectory(
   candidateDirectory: string,

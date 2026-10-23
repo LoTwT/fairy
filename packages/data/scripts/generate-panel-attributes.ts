@@ -11,9 +11,10 @@ import { directoryRoot, readBytes, sha256 } from "./nanoka-integration/files.ts"
 import { formatGeneratedJson } from "./nanoka-integration/format.ts"
 import { preparePublication } from "./prepare-publication.ts"
 import {
-  installCandidateOutputDirectory,
+  installCandidateAfterValidation,
   resolveCandidateOutputDirectory,
 } from "./candidate-output.ts"
+import { loadPanelAttributesCandidateManifest } from "./data-product/manifests.ts"
 import {
   convertAgentAttributes,
   convertWEngineAttributes,
@@ -119,8 +120,12 @@ export async function generatePanelAttributes(
     }
     await write("manifest.json", manifest)
     await formatGeneratedJson(candidate, ["manifest.json"])
-    await verifyPanelAttributes(candidate, index)
-    await installCandidateOutputDirectory(candidate, output)
+    // 先按数据产品 manifest 的权威结构校验候选，再核对生成器输入与摘要契约；
+    // 任一步失败都不会进入安装步骤、替换正式目录。
+    await installCandidateAfterValidation(candidate, output, async () => {
+      loadPanelAttributesCandidateManifest(candidate)
+      await verifyPanelAttributes(candidate, index)
+    })
     return {
       agents: manifest.members.agents.length,
       wEngines: manifest.members.wEngines.length,
