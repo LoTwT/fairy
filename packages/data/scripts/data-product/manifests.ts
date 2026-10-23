@@ -1,5 +1,5 @@
 import { statSync } from "node:fs"
-import { join } from "node:path"
+import { basename, dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 import {
   assertKnownKeys,
@@ -335,8 +335,9 @@ function countStatuses(
 
 function parsePanelAttributesManifest(
   definitionsDirectory: string,
+  productDirectory = "attributes",
 ): PanelAttributesManifest {
-  const label = "attributes/manifest.json"
+  const label = `${productDirectory}/manifest.json`
   const manifest = expectRecord(
     readJsonFile(join(definitionsDirectory, label), label).value,
     label,
@@ -405,7 +406,7 @@ function parsePanelAttributesManifest(
     },
     artifacts: parseManifestArtifacts(
       expectField(manifest, "artifacts", label),
-      "attributes",
+      productDirectory,
       definitionsDirectory,
       label,
     ),
@@ -434,8 +435,9 @@ function parsePanelAttributesManifest(
 
 function parseAgentActionsManifest(
   definitionsDirectory: string,
+  productDirectory = "skills",
 ): AgentActionsManifest {
-  const label = "skills/manifest.json"
+  const label = `${productDirectory}/manifest.json`
   const manifest = expectRecord(
     readJsonFile(join(definitionsDirectory, label), label).value,
     label,
@@ -547,7 +549,7 @@ function parseAgentActionsManifest(
     },
     artifacts: parseManifestArtifacts(
       expectField(manifest, "artifacts", label),
-      "skills",
+      productDirectory,
       definitionsDirectory,
       label,
     ),
@@ -1026,4 +1028,26 @@ export function loadAgentActionsManifest(
   definitionsDirectory = defaultDefinitionsDirectory,
 ): AgentActionsManifest {
   return parseAgentActionsManifest(definitionsDirectory)
+}
+
+/**
+ * 生成器候选目录本身就是产品目录（manifest.json 位于根）；复用同一结构
+ * 与制品校验，不另建候选专用 schema。
+ */
+export function loadPanelAttributesCandidateManifest(
+  candidateDirectory: string,
+): PanelAttributesManifest {
+  return parsePanelAttributesManifest(
+    dirname(candidateDirectory),
+    basename(candidateDirectory),
+  )
+}
+
+export function loadAgentActionsCandidateManifest(
+  candidateDirectory: string,
+): AgentActionsManifest {
+  return parseAgentActionsManifest(
+    dirname(candidateDirectory),
+    basename(candidateDirectory),
+  )
 }

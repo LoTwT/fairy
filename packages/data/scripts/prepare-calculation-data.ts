@@ -1,8 +1,14 @@
 import { createHash } from "node:crypto"
 import { readFile } from "node:fs/promises"
 import { join } from "node:path"
+import { validateStaticCatalog } from "../../core/src/effects/internal/static-catalog.ts"
+import { parseEffectRuleSet } from "../../core/src/effects/parse-effect-rule-set.ts"
 import { writeFileAtomically } from "./atomic-write.ts"
 import { claretPanelConversion } from "./claret-panel-conversion.ts"
+import {
+  loadAgentActionsManifest,
+  loadPanelAttributesManifest,
+} from "./data-product/manifests.ts"
 import {
   CALCULATION_CONTRACT_VERSION,
   CALCULATION_GAME_VERSION,
@@ -16,6 +22,53 @@ import type {
 } from "@randomplay/shared"
 import type { AgentDetails } from "../src/integration/agent-types.ts"
 import type { IntegratedSnapshotIndex } from "../src/integration/snapshot-types.ts"
+
+function validationError(
+  file: string,
+  issues: readonly {
+    readonly code: string
+    readonly pointer: string
+    readonly message: string
+  }[],
+): Error {
+  const shown = issues
+    .slice(0, 5)
+    .map(
+      (issue) => `${issue.code} at ${issue.pointer || "/"}: ${issue.message}`,
+    )
+  const omitted = issues.length - shown.length
+  return new Error(
+    `${file}: ${shown.join("; ")}${omitted > 0 ? `; ${omitted} more issue(s)` : ""}`,
+  )
+}
+
+function parseCalculationRuleSet(file: string, value: unknown): RuleSet {
+  const parsed = parseEffectRuleSet(value)
+  if (!parsed.ok) throw validationError(file, parsed.issues)
+  return parsed.value
+}
+
+function validateCalculationCatalog(
+  file: string,
+  value: unknown,
+  definitions: RuleSet,
+): StaticEffectCatalog {
+  const validated = validateStaticCatalog(value, definitions)
+  if (!validated.ok) throw validationError(file, validated.issues)
+  return validated.value
+}
+
+/** 属性与技能 manifest 的结构以 P1-1 读取器为权威；构建期复验同次快照。 */
+function verifyDefinitionManifests(directory: string): void {
+  const definitionsDirectory = join(directory, "definitions")
+  try {
+    loadPanelAttributesManifest(definitionsDirectory)
+    loadAgentActionsManifest(definitionsDirectory)
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error)
+    throw new Error(`definitions/${message}`, { cause: error })
+  }
+}
 
 /** 只读取同次冻结副本；新增未核实的 extraProperty 形态必须显式接入。 */
 export async function prepareCalculationData(
@@ -35,10 +88,16 @@ export async function prepareCalculationData(
     )
   const read = async (path: string) =>
     JSON.parse(await readFile(join(directory, path), "utf8"))
-  const definitions = (await read("definitions/effects/static.json")) as RuleSet
-  const catalog = (await read(
+  const definitions = parseCalculationRuleSet(
+    "definitions/effects/static.json",
+    await read("definitions/effects/static.json"),
+  )
+  const catalog = validateCalculationCatalog(
     "definitions/effects/static-catalog.json",
-  )) as StaticEffectCatalog
+    await read("definitions/effects/static-catalog.json"),
+    definitions,
+  )
+  verifyDefinitionManifests(directory)
   const agents: Record<string, StaticPanelRules["agents"][string]> = {}
   const damageElementInheritance: StaticPanelRules["damageElementInheritance"][number][] =
     []

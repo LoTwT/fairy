@@ -1,6 +1,6 @@
 # Phase 1 P1-2：`data explain` 只读 CLI
 
-状态：已实现。范围仅 P1-2；P1-3 生成/构建期校验与 P1-4 依赖图未开始。本记录不改变
+状态：已实现。范围仅 P1-2；P1-3 生成/构建期校验已由 [P1-3 实施记录](phase1-validation-boundary.md) 接续实现，P1-4 依赖图未开始。本记录不改变
 `integrated`、`definitions`、`dist`、生成器、shared、core 或 `snapshotId`。
 
 ## 范围与入口
