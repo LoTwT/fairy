@@ -1,6 +1,6 @@
 # Phase 1 P1-1：内部数据产品 manifest 读取器与覆盖查询
 
-状态：已实现并通过本机验证，待 PR 独立验收。范围仅 P1-1；P1-2 CLI、P1-3 生成/构建期校验与 P1-4 依赖图未开始。
+状态：已实现并合并（PR #291），且已通过独立验收。本记录同时包含 follow-up 修订：覆盖计数使用显式 `unit` / `count`，静态效果读取器校验 catalog 与 coverage 的 source 一致。范围仅 P1-1；P1-2 CLI、P1-3 生成/构建期校验与 P1-4 依赖图未开始。
 
 ## 范围与位置
 
@@ -25,10 +25,12 @@
 | `artifacts`     | 制品路径、sha256 与字节数；`sha256Origin` 区分 manifest 声明与读取器计算 |
 | `limitations`   | 产品限制；`origin` 区分 manifest 内容与读取器派生限制                    |
 | `discrepancies` | 具名差异；领域字段保留在 `details`                                       |
-| `coverage`      | 记录数、状态计数、补充记录数与补充状态计数                               |
+| `coverage`      | 计量单位 `unit`、计数 `count`、状态计数、补充计数与补充状态计数          |
 | `extensions`    | 产品特有字段，不因统一而删除语义                                         |
 
-`coverage.records` 按产品取现有权威计数：属性 manifest 为 62 名角色 + 103 个音擎；技能 manifest 为 1,348 条动作；静态覆盖为 1,360 条 `records`。静态补充记录为 101 条，状态为 `integrated` 68 条、`out-of-scope` 33 条。属性与技能的 `artifacts` 复用 manifest 已声明的 sha256，字节数按 definitions 文件读取；静态效果没有现行 manifest，三个制品的 sha256 与字节数由实际文件计算。
+`coverage.unit` 明确 `coverage.count` 与 `coverage.statusCounts` 的计量单位：`panel-attributes` 为 `members`，取 62 名角色 + 103 个音擎 = 165 个成员；`agent-actions` 为 `actions`，取 1,348 条动作；`static-effects` 为 `coverage-records`，取 1,360 条 `records`。静态补充记录由 `coverage.supplementalCount` 表示，共 101 条，`supplementalStatusCounts` 为 `integrated` 68 条、`out-of-scope` 33 条。属性与技能的 `artifacts` 复用 manifest 已声明的 sha256，字节数按 definitions 文件读取；静态效果没有现行 manifest，三个制品的 sha256 与字节数由实际文件计算。
+
+静态效果读取器在 `StaticCatalog` 中保留 `source`（`repository`、`commit`、`files`），并要求它与 `StaticCoverage.source` 的 repository、commit、files（路径、sha256 与顺序）完全一致；任何一项不同都会抛出错误。`manifest.source` 与 `extensions.sourceFiles` 均使用校验后的 source。
 
 ## 覆盖查询
 
@@ -50,29 +52,32 @@
 - 顶层或已建模对象出现未知字段；
 - manifest 声明的制品文件缺失；
 - 三个静态制品之间的 `schemaVersion`、`ruleSetId` 或 `revision` 不一致；
+- `static-catalog.json.source` 与 `static-coverage.json.source` 的 `repository`、`commit` 或 `files` 不一致；
 - 变体引用未登记的 `differenceId`，以及重复的 `differenceId` / `optionId`。
 
 变体的其余领域字段（例如条件、引用与配置）不由本模块解释，保留给正式类型与生成器维护；coverage 查询只消费 `effectIds` 与 `differences`。
 
 ## 消融实验
 
-| 尝试删减                                          | 结果与处理                                                                                                                      |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| 删除目录入口 barrel（`index.ts`）                 | 测试与读取均通过；消费方可直接导入两个明确模块，因此保留删除，减少无消费者的转接层。                                            |
-| 删除 `queryStaticCoverage` 的结果包装，仅返回数组 | 会丢失按 `differenceId` 查询时的文本关联与 pointer 限制说明，无法满足“明确记录为 limitation”，保留 `{ matches, limitations }`。 |
-| 删除 `StaticEffectsProduct` 包装                  | manifest 与查询所需的 catalog/coverage 将分散返回，调用方需重复约定三者来自同一次读取；保留该包装。                             |
-| 删除 `sha256Origin`                               | 会把 manifest 声明摘要与实际文件计算摘要混为同一语义，保留。                                                                    |
-| 删除按产品读取函数，只保留聚合读取                | 无法对单个产品做聚焦读取与错误分支测试，且每次都要读取全部产物；保留三个读取入口。                                              |
-| 删除 `json.ts`，把校验工具分别内联                | 两个模块会复制字段路径与错误约定，增加漂移风险；保留共享工具。                                                                  |
+| 尝试删减                                             | 结果与处理                                                                                                                                                       |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 删除目录入口 barrel（`index.ts`）                    | 测试与读取均通过；消费方可直接导入两个明确模块，因此保留删除，减少无消费者的转接层。                                                                             |
+| 删除 `queryStaticCoverage` 的结果包装，仅返回数组    | 会丢失按 `differenceId` 查询时的文本关联与 pointer 限制说明，无法满足“明确记录为 limitation”，保留 `{ matches, limitations }`。                                  |
+| 删除 `StaticEffectsProduct` 包装                     | manifest 与查询所需的 catalog/coverage 将分散返回，调用方需重复约定三者来自同一次读取；保留该包装。                                                              |
+| 删除 `sha256Origin`                                  | 会把 manifest 声明摘要与实际文件计算摘要混为同一语义，保留。                                                                                                     |
+| 删除按产品读取函数，只保留聚合读取                   | 无法对单个产品做聚焦读取与错误分支测试，且每次都要读取全部产物；保留三个读取入口。                                                                               |
+| 删除 `json.ts`，把校验工具分别内联                   | 两个模块会复制字段路径与错误约定，增加漂移风险；保留共享工具。                                                                                                   |
+| 用 `coverage.unit` / `coverage.count` 替换 `records` | 一个 `unit` 字符串加一个计数即可消除三义；若继续使用 `records`，`data explain` 等消费方必须结合 `product` 才能解释单位。不增加按产品分叉的包装层，保留当前形状。 |
+| 只比较 repository/commit，不比较 source files        | files 及 sha256 是来源证据的一部分；只比较前两者时，catalog 与 coverage 仍可能引用不同的上游文件集合。保留完整比较。                                             |
 
 ## 验证
 
-| 命令                                                                                      | 实际结果                                                                                                                               |
-| ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `pnpm check:quality`                                                                      | 通过；oxlint 0 errors（仓库既有 127 warnings，新增文件单独检查 0 warnings），格式与 spec 类型检查通过。                                |
-| `pnpm --filter @randomplay/data check:source`                                             | 通过；102 个测试文件、4,606 个测试通过。                                                                                               |
-| `pnpm --filter @randomplay/core check:source`                                             | 通过；98 个测试文件通过、3 个跳过；5,684 个测试通过、24 个跳过。未修改 core，作为回归验证执行。                                        |
-| `pnpm --filter @randomplay/data exec vitest run test/data-product.test.ts --project unit` | 20 个新增测试全部通过。                                                                                                                |
-| `git diff --stat` / `git status --short`                                                  | 仅新增 `scripts/data-product/`、`test/data-product.test.ts` 与本实施记录，并更新文档索引；`integrated`、`definitions`、`dist` 无变化。 |
+| 命令                                                                                      | 实际结果                                                                                                                                 |
+| ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `pnpm check:quality`                                                                      | 通过；oxlint 0 errors（仓库既有 127 warnings），格式与 spec 类型检查通过。                                                               |
+| `pnpm --filter @randomplay/data check:source`                                             | 通过；102 个测试文件、4,609 个测试通过。                                                                                                 |
+| `pnpm --filter @randomplay/data exec vitest run test/data-product.test.ts --project unit` | 23 个测试全部通过。                                                                                                                      |
+| `pnpm --filter @randomplay/core check:source`                                             | PR #291 合并前通过；98 个测试文件通过、3 个跳过；5,684 个测试通过、24 个跳过。本次 follow-up 未修改 core，未重复执行。                   |
+| `git diff --stat` / `git status --short`                                                  | 仅修改 `scripts/data-product/` 两个模块、`test/data-product.test.ts`、本实施记录与文档索引；`integrated`、`definitions`、`dist` 无变化。 |
 
-新增测试覆盖真实 manifest 的产品、版本与关键计数，四类查询过滤，未知过滤返回空，文本关联差异的 limitation，输入不变性，以及真实数据未覆盖的 `effectIds` 关联与补充记录缺少 `effectIds` 分支（小型合成 fixture）。本 PR 不涉及数据快照、来源版本或整合规则修改，因此没有需要同步的本机数据管理状态；静态 worktree 不创建管理记录。
+新增测试覆盖真实 manifest 的产品、版本与关键计数，四类查询过滤，未知过滤返回空，文本关联差异的 limitation，输入不变性，catalog/coverage 的 source repository、commit、files 不一致负例，以及真实数据未覆盖的 `effectIds` 关联与补充记录缺少 `effectIds` 分支（小型合成 fixture）。本 PR 不涉及数据快照、来源版本或整合规则修改，因此没有需要同步的本机数据管理状态；静态 worktree 不创建管理记录。

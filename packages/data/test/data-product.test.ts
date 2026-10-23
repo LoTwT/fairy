@@ -1,6 +1,13 @@
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs"
+import {
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs"
 import { tmpdir } from "node:os"
 import { dirname, join } from "node:path"
+import { fileURLToPath } from "node:url"
 import { afterEach, describe, expect, it } from "vitest"
 import {
   loadAgentActionsManifest,
@@ -12,6 +19,56 @@ import {
   queryStaticCoverage,
   type StaticCoverageStatus,
 } from "../scripts/data-product/static-coverage.ts"
+
+interface StructureBaseline {
+  readonly integrated: {
+    readonly categories: Readonly<
+      Record<string, { readonly memberCount: number }>
+    >
+  }
+  readonly attributes: {
+    readonly counts: {
+      readonly inputs: number
+      readonly artifacts: number
+      readonly limitations: number
+      readonly discrepancies: number
+    }
+  }
+  readonly skills: {
+    readonly memberCount: number
+    readonly actionCount: number
+  }
+  readonly effects: {
+    readonly sourceRepository: string
+    readonly sourceCommit: string
+    readonly staticCatalog: {
+      readonly entityCount: number
+      readonly optionCount: number
+      readonly differenceCount: number
+      readonly mechanismCount: number
+    }
+    readonly staticCoverage: {
+      readonly recordCount: number
+      readonly supplementalRecordCount: number
+    }
+  }
+}
+
+const structureBaseline = JSON.parse(
+  readFileSync(
+    fileURLToPath(
+      new URL("./fixtures/data-structure-baseline.json", import.meta.url),
+    ),
+    "utf8",
+  ),
+) as StructureBaseline
+
+function baselineMemberCount(category: string): number {
+  const entry = structureBaseline.integrated.categories[category]
+  if (entry === undefined)
+    throw new Error(`data structure baseline is missing category "${category}"`)
+  return entry.memberCount
+}
 
 const fixtureRoots: string[] = []
 
@@ -89,7 +146,11 @@ function fixtureFiles(): Record<string, unknown> {
       entities: [],
       mechanisms: [],
       skillTargets: [],
-      source: { repository: "test/source", commit: "test-commit", files: [] },
+      source: {
+        repository: "test/source",
+        commit: "test-commit",
+        files: [{ path: "source.json", sha256: "c".repeat(64) }],
+      },
       differences: [
         { differenceId: "diff-a", explanation: "差异 A", references: [] },
         { differenceId: "diff-text", explanation: "仅说明", references: [] },
@@ -230,21 +291,37 @@ describe("data product manifests", () => {
     expect(manifest.schemaVersion).toBe(1)
     expect(manifest.rulesVersion.label).toBe("panel-attributes/2")
     expect(manifest.source.version).toBe("3.3.12+19634983")
-    expect(manifest.coverage.records).toBe(165)
+    expect(manifest.coverage.unit).toBe("members")
+    expect(manifest.coverage.count).toBe(
+      baselineMemberCount("agents") + baselineMemberCount("w-engines"),
+    )
     expect(manifest.coverage.statusCounts).toEqual({})
-    expect(manifest.coverage.supplementalRecords).toBe(0)
-    expect(manifest.artifacts).toHaveLength(166)
+    expect(manifest.coverage.supplementalCount).toBe(0)
+    expect(manifest.coverage.supplementalStatusCounts).toEqual({})
+    expect(manifest.artifacts).toHaveLength(
+      structureBaseline.attributes.counts.artifacts,
+    )
     expect(manifest.artifacts[0]).toMatchObject({
       path: "attributes/agents/1011.json",
       sha256Origin: "manifest",
     })
     expect(manifest.artifacts[0]?.bytes).toBeGreaterThan(0)
-    expect(manifest.limitations).toHaveLength(5)
-    expect(manifest.discrepancies).toHaveLength(5)
+    expect(manifest.limitations).toHaveLength(
+      structureBaseline.attributes.counts.limitations,
+    )
+    expect(manifest.discrepancies).toHaveLength(
+      structureBaseline.attributes.counts.discrepancies,
+    )
     expect(manifest.discrepancies[0]?.id).toBe("disc-impact-percent")
-    expect(manifest.extensions.members.agents).toHaveLength(62)
-    expect(manifest.extensions.members.wEngines).toHaveLength(103)
-    expect(manifest.extensions.inputs).toBe(495)
+    expect(manifest.extensions.members.agents).toHaveLength(
+      baselineMemberCount("agents"),
+    )
+    expect(manifest.extensions.members.wEngines).toHaveLength(
+      baselineMemberCount("w-engines"),
+    )
+    expect(manifest.extensions.inputs).toBe(
+      structureBaseline.attributes.counts.inputs,
+    )
     expect(manifest.extensions.evidence.zzzHpCommit).toBe(
       "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
     )
@@ -255,18 +332,24 @@ describe("data product manifests", () => {
     expect(manifest.product).toBe("agent-actions")
     expect(manifest.rulesVersion.label).toBe("agent-actions/2")
     expect(manifest.source.version).toBe("3.3.12+19634983")
-    expect(manifest.coverage.records).toBe(1348)
+    expect(manifest.coverage.unit).toBe("actions")
+    expect(manifest.coverage.count).toBe(structureBaseline.skills.actionCount)
     expect(manifest.coverage.statusCounts).toEqual({
       damage: 1166,
       dazeOnly: 174,
       luminize: 4,
       unavailable: 4,
     })
-    expect(manifest.coverage.supplementalRecords).toBe(0)
-    expect(manifest.artifacts).toHaveLength(62)
+    expect(manifest.coverage.supplementalCount).toBe(0)
+    expect(manifest.coverage.supplementalStatusCounts).toEqual({})
+    expect(manifest.artifacts).toHaveLength(
+      structureBaseline.skills.memberCount,
+    )
     expect(manifest.limitations).toHaveLength(9)
     expect(manifest.discrepancies).toHaveLength(167)
-    expect(manifest.extensions.members).toHaveLength(62)
+    expect(manifest.extensions.members).toHaveLength(
+      structureBaseline.skills.memberCount,
+    )
     expect(manifest.extensions.coverage.individualHitActions).toBe(1)
   })
 
@@ -281,8 +364,8 @@ describe("data product manifests", () => {
       revision: "51",
     })
     expect(manifest.source).toEqual({
-      repository: "LoTwT/ZZZ-HP",
-      commit: "2628b32cece086e371bafa05518a9a12650d9f74",
+      repository: structureBaseline.effects.sourceRepository,
+      commit: structureBaseline.effects.sourceCommit,
     })
     expect(manifest.artifacts.map((artifact) => artifact.path)).toEqual([
       "effects/static.json",
@@ -294,18 +377,25 @@ describe("data product manifests", () => {
       expect(artifact.sha256).toMatch(/^[0-9a-f]{64}$/u)
       expect(artifact.bytes).toBeGreaterThan(0)
     }
-    expect(manifest.coverage.records).toBe(1360)
+    expect(manifest.coverage.unit).toBe("coverage-records")
+    expect(manifest.coverage.count).toBe(
+      structureBaseline.effects.staticCoverage.recordCount,
+    )
     expect(manifest.coverage.statusCounts).toEqual({
       converted: 1167,
       corrected: 116,
       unsupported: 77,
     })
-    expect(manifest.coverage.supplementalRecords).toBe(101)
+    expect(manifest.coverage.supplementalCount).toBe(
+      structureBaseline.effects.staticCoverage.supplementalRecordCount,
+    )
     expect(manifest.coverage.supplementalStatusCounts).toEqual({
       "integrated": 68,
       "out-of-scope": 33,
     })
-    expect(manifest.discrepancies).toHaveLength(41)
+    expect(manifest.discrepancies).toHaveLength(
+      structureBaseline.effects.staticCatalog.differenceCount,
+    )
     expect(manifest.limitations).toHaveLength(5)
     expect(
       manifest.limitations.some(
@@ -321,15 +411,24 @@ describe("data product manifests", () => {
           limitation.text.includes("promotion-stats-equipper-defense"),
       ),
     ).toBe(true)
-    expect(manifest.extensions.sourceFiles).toHaveLength(19)
+    expect(manifest.extensions.sourceFiles).toEqual(
+      effectsProduct.coverage.source.files,
+    )
+    expect(effectsProduct.catalog.source).toEqual(
+      effectsProduct.coverage.source,
+    )
     expect(manifest.extensions.catalog).toEqual({
-      entities: 196,
-      options: 986,
-      differences: 41,
-      mechanisms: 4,
+      entities: structureBaseline.effects.staticCatalog.entityCount,
+      options: structureBaseline.effects.staticCatalog.optionCount,
+      differences: structureBaseline.effects.staticCatalog.differenceCount,
+      mechanisms: structureBaseline.effects.staticCatalog.mechanismCount,
     })
-    expect(manifest.extensions.coverage.rawEffects).toBe(1360)
-    expect(manifest.extensions.coverage.supplements.records).toBe(101)
+    expect(manifest.extensions.coverage.rawEffects).toBe(
+      manifest.coverage.count,
+    )
+    expect(manifest.extensions.coverage.supplements.records).toBe(
+      manifest.coverage.supplementalCount,
+    )
   })
 
   it("reports a missing required manifest field", () => {
@@ -394,6 +493,42 @@ describe("data product manifests", () => {
     const root = writeFixture(files)
     expect(() => loadStaticEffectsProduct(root)).toThrow(
       "static effects products disagree on revision",
+    )
+  })
+
+  it("reports static products with different source repositories", () => {
+    const files = fixtureFiles()
+    const catalog = files["effects/static-catalog.json"] as {
+      source: { repository: string }
+    }
+    catalog.source.repository = "other/repository"
+    const root = writeFixture(files)
+    expect(() => loadStaticEffectsProduct(root)).toThrow(
+      "static effects products disagree on source.repository",
+    )
+  })
+
+  it("reports static products with different source commits", () => {
+    const files = fixtureFiles()
+    const catalog = files["effects/static-catalog.json"] as {
+      source: { commit: string }
+    }
+    catalog.source.commit = "other-commit"
+    const root = writeFixture(files)
+    expect(() => loadStaticEffectsProduct(root)).toThrow(
+      "static effects products disagree on source.commit",
+    )
+  })
+
+  it("reports static products with different source file digests", () => {
+    const files = fixtureFiles()
+    const catalog = files["effects/static-catalog.json"] as {
+      source: { files: { path: string; sha256: string }[] }
+    }
+    catalog.source.files[0]!.sha256 = "d".repeat(64)
+    const root = writeFixture(files)
+    expect(() => loadStaticEffectsProduct(root)).toThrow(
+      "static effects products disagree on source.files",
     )
   })
 })

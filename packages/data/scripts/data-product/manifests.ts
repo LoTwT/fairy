@@ -19,6 +19,7 @@ import {
   type StaticCatalog,
   type StaticCoverage,
   type StaticCoverageSummary,
+  type StaticSource,
   type StaticSourceFile,
 } from "./static-coverage.ts"
 
@@ -47,14 +48,19 @@ export interface DataProductSource {
   readonly commit?: string
 }
 
+/** 三个产品的覆盖计数单位不同，调用方必须按 unit 解释 count 与 statusCounts。 */
+export type DataProductCoverageUnit = "members" | "actions" | "coverage-records"
+
 /**
- * 产品级覆盖摘要。static-effects 取 coverage 的逐条记录；
- * panel-attributes 取属性成员记录；agent-actions 取动作覆盖计数。
+ * 产品级覆盖摘要。`unit` 表示 `count` 的计量单位：
+ * panel-attributes 为属性成员数，agent-actions 为动作数，
+ * static-effects 为 static-coverage 的逐条 records 数。
  */
 export interface DataProductCoverageSummary {
-  readonly records: number
+  readonly unit: DataProductCoverageUnit
+  readonly count: number
   readonly statusCounts: Readonly<Record<string, number>>
-  readonly supplementalRecords: number
+  readonly supplementalCount: number
   readonly supplementalStatusCounts: Readonly<Record<string, number>>
 }
 
@@ -348,9 +354,10 @@ function parsePanelAttributesManifest(
     limitations,
     discrepancies,
     coverage: {
-      records: agents.length + wEngines.length,
+      unit: "members",
+      count: agents.length + wEngines.length,
       statusCounts: {},
-      supplementalRecords: 0,
+      supplementalCount: 0,
       supplementalStatusCounts: {},
     },
     extensions: {
@@ -489,14 +496,15 @@ function parseAgentActionsManifest(
     limitations,
     discrepancies,
     coverage: {
-      records: coverageCounts.actions,
+      unit: "actions",
+      count: coverageCounts.actions,
       statusCounts: {
         damage: coverageCounts.damage,
         dazeOnly: coverageCounts.dazeOnly,
         luminize: coverageCounts.luminize,
         unavailable: coverageCounts.unavailable,
       },
-      supplementalRecords: 0,
+      supplementalCount: 0,
       supplementalStatusCounts: {},
     },
     extensions: {
@@ -535,6 +543,40 @@ function expectSharedStaticField(
   throw new Error(
     `static effects products disagree on ${field}: static.json=${String(staticValue)}, static-catalog.json=${String(catalogValue)}, static-coverage.json=${String(coverageValue)}`,
   )
+}
+
+function sameSourceFiles(
+  left: readonly StaticSourceFile[],
+  right: readonly StaticSourceFile[],
+): boolean {
+  return (
+    left.length === right.length &&
+    left.every(
+      (file, index) =>
+        file.path === right[index]?.path &&
+        file.sha256 === right[index]?.sha256,
+    )
+  )
+}
+
+/** 校验 catalog 与 coverage 描述同一来源，并返回可直接用于 manifest 的来源。 */
+function expectMatchingStaticSource(
+  catalogSource: StaticSource,
+  coverageSource: StaticSource,
+): StaticSource {
+  if (catalogSource.repository !== coverageSource.repository)
+    throw new Error(
+      `static effects products disagree on source.repository: static-catalog.json=${catalogSource.repository}, static-coverage.json=${coverageSource.repository}`,
+    )
+  if (catalogSource.commit !== coverageSource.commit)
+    throw new Error(
+      `static effects products disagree on source.commit: static-catalog.json=${catalogSource.commit}, static-coverage.json=${coverageSource.commit}`,
+    )
+  if (!sameSourceFiles(catalogSource.files, coverageSource.files))
+    throw new Error(
+      `static effects products disagree on source.files: static-catalog.json lists ${catalogSource.files.length} file(s), static-coverage.json lists ${coverageSource.files.length} file(s)`,
+    )
+  return coverageSource
 }
 
 /** 读取三个静态效果制品，并构造统一 manifest 与可查询的目录/覆盖数据。 */
@@ -605,6 +647,7 @@ export function loadStaticEffectsProduct(
     catalog.revision,
     coverage.revision,
   )
+  const source = expectMatchingStaticSource(catalog.source, coverage.source)
 
   const limitations: DataProductLimitation[] = coverage.deferredMechanisms.map(
     (mechanism) => ({
@@ -649,8 +692,8 @@ export function loadStaticEffectsProduct(
         revision,
       },
       source: {
-        repository: coverage.source.repository,
-        commit: coverage.source.commit,
+        repository: source.repository,
+        commit: source.commit,
       },
       artifacts: [
         {
@@ -679,13 +722,14 @@ export function loadStaticEffectsProduct(
         details: { references: difference.references },
       })),
       coverage: {
-        records: coverage.records.length,
+        unit: "coverage-records",
+        count: coverage.records.length,
         statusCounts: countStatuses(coverage.records),
-        supplementalRecords: coverage.supplementalRecords.length,
+        supplementalCount: coverage.supplementalRecords.length,
         supplementalStatusCounts: countStatuses(coverage.supplementalRecords),
       },
       extensions: {
-        sourceFiles: coverage.source.files,
+        sourceFiles: source.files,
         catalog: {
           entities: catalog.entityCount,
           options: catalog.options.length,

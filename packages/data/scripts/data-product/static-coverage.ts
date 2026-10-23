@@ -25,7 +25,7 @@ export interface StaticSourceFile {
   readonly sha256: string
 }
 
-export interface StaticCoverageSource {
+export interface StaticSource {
   readonly repository: string
   readonly commit: string
   readonly files: readonly StaticSourceFile[]
@@ -89,7 +89,7 @@ export interface StaticCoverage {
   readonly schemaVersion: number
   readonly ruleSetId: string
   readonly revision: string
-  readonly source: StaticCoverageSource
+  readonly source: StaticSource
   readonly summary: StaticCoverageSummary
   readonly records: readonly StaticCoverageRecord[]
   readonly supplementalRecords: readonly StaticCoverageSupplementalRecord[]
@@ -117,6 +117,7 @@ export interface StaticCatalog {
   readonly schemaVersion: number
   readonly ruleSetId: string
   readonly revision: string
+  readonly source: StaticSource
   readonly entityCount: number
   readonly mechanismCount: number
   readonly differences: readonly StaticCatalogDifference[]
@@ -252,6 +253,25 @@ function parseSourceFiles(
       ),
     }
   })
+}
+
+function parseStaticSource(value: unknown, label: string): StaticSource {
+  const source = expectRecord(value, label)
+  assertKnownKeys(source, ["repository", "commit", "files"], label)
+  return {
+    repository: expectString(
+      expectField(source, "repository", label),
+      `${label}.repository`,
+    ),
+    commit: expectString(
+      expectField(source, "commit", label),
+      `${label}.commit`,
+    ),
+    files: parseSourceFiles(
+      expectField(source, "files", label),
+      `${label}.files`,
+    ),
+  }
 }
 
 function parseCoverageSummary(
@@ -453,11 +473,6 @@ export function parseStaticCoverage(
     `${label}.reverseGaps`,
   )
   const sourceLabel = `${label}.source`
-  const source = expectRecord(
-    expectField(coverage, "source", label),
-    sourceLabel,
-  )
-  assertKnownKeys(source, ["repository", "commit", "files"], sourceLabel)
   return {
     schemaVersion: expectInteger(
       expectField(coverage, "schemaVersion", label),
@@ -471,20 +486,10 @@ export function parseStaticCoverage(
       expectField(coverage, "revision", label),
       `${label}.revision`,
     ),
-    source: {
-      repository: expectString(
-        expectField(source, "repository", sourceLabel),
-        `${sourceLabel}.repository`,
-      ),
-      commit: expectString(
-        expectField(source, "commit", sourceLabel),
-        `${sourceLabel}.commit`,
-      ),
-      files: parseSourceFiles(
-        expectField(source, "files", sourceLabel),
-        `${sourceLabel}.files`,
-      ),
-    },
+    source: parseStaticSource(
+      expectField(coverage, "source", label),
+      sourceLabel,
+    ),
     summary: parseCoverageSummary(
       expectField(coverage, "summary", label),
       `${label}.summary`,
@@ -593,7 +598,10 @@ export function parseStaticCatalog(
 ): StaticCatalog {
   const catalog = expectRecord(value, label)
   assertKnownKeys(catalog, staticCatalogKeys, label)
-  expectRecord(expectField(catalog, "source", label), `${label}.source`)
+  const source = parseStaticSource(
+    expectField(catalog, "source", label),
+    `${label}.source`,
+  )
   expectArray(
     expectField(catalog, "skillTargets", label),
     `${label}.skillTargets`,
@@ -655,6 +663,7 @@ export function parseStaticCatalog(
       expectField(catalog, "revision", label),
       `${label}.revision`,
     ),
+    source,
     entityCount: expectArray(
       expectField(catalog, "entities", label),
       `${label}.entities`,
