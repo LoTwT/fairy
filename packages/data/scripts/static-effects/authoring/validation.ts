@@ -1179,22 +1179,20 @@ function validateSupplementalRecord(
     `${path}/kind`,
     collector,
   )
-  if (Object.hasOwn(record, "optionId")) {
-    const optionId = nonEmptyStringAt(
-      record["optionId"],
+  const optionId = nonEmptyStringAt(
+    record["optionId"],
+    `${path}/optionId`,
+    collector,
+  )
+  if (
+    optionId !== undefined &&
+    owningOptionId !== undefined &&
+    optionId !== owningOptionId
+  )
+    collector.add(
       `${path}/optionId`,
-      collector,
+      "must equal the owning record's ids.optionId",
     )
-    if (
-      optionId !== undefined &&
-      owningOptionId !== undefined &&
-      optionId !== owningOptionId
-    )
-      collector.add(
-        `${path}/optionId`,
-        "must equal the owning record's ids.optionId",
-      )
-  }
   if (Object.hasOwn(record, "effectIds")) {
     const effectIds = arrayAt(
       record["effectIds"],

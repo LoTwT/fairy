@@ -124,14 +124,15 @@ export type AuthoringSupplementalStatus =
   (typeof AUTHORING_SUPPLEMENTAL_STATUSES)[number]
 
 /**
- * 补充来源覆盖记录的作者形状。字段与正式 static-coverage.json 的
- * supplementalRecords 对齐；编译只按 supplementId 原位替换基线条目。
+ * 补充来源覆盖记录的作者形状。字段与正式 static-coverage.json 中
+ * 非 boundary 记录对齐：作者层不表达 boundary，因此 optionId 与
+ * supportedRanks 都是必填项；编译只按 supplementId 原位替换基线条目。
  */
 export interface AuthoringSupplementalRecord {
   readonly supplementId: string
   readonly source: string
   readonly kind: AuthoringSupplementalKind
-  readonly optionId?: string
+  readonly optionId: string
   readonly effectIds?: readonly string[]
   readonly supportedRanks: string
   readonly computationTarget: string

@@ -272,6 +272,23 @@ describe("authoring supplemental records", () => {
     })
   })
 
+  it("reports a path error for a missing supplemental optionId", () => {
+    const { optionId: _omitted, ...incomplete } = MIYABI_SUPPLEMENT
+    const records = attachSupplements(cloneRecords(), "miyabi-frostburn-main", [
+      incomplete as unknown as AuthoringSupplementalRecord,
+    ])
+    const recordIndex = records.findIndex(
+      (record) => record.key === "miyabi-frostburn-main",
+    )
+    const result = validateAuthoringRecords(records)
+    expect(result.ok).toBe(false)
+    if (result.ok) return
+    expect(result.issues).toContainEqual({
+      path: `[${recordIndex}]/supplementalRecords[0]/optionId`,
+      message: "expected a string",
+    })
+  })
+
   it("refuses baseline supplemental fields the authoring layer cannot express", () => {
     const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
     const withReason = baseline.coverage.supplementalRecords.find(
@@ -284,6 +301,7 @@ describe("authoring supplemental records", () => {
           supplementId: withReason.supplementId,
           source: "authoring source",
           kind: "unsupported-option",
+          optionId: "authoring:option",
           supportedRanks: "作者声明",
           computationTarget: "authoring target",
           status: "out-of-scope",
