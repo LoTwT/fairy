@@ -503,6 +503,38 @@ describe("artifact dependency violations", () => {
     })
   })
 
+  it("compares duplicate declared source paths instead of collapsing them", () => {
+    const fixture = createFixture()
+    const duplicateSource = {
+      repository: "test/source",
+      commit: "test-commit",
+      files: [
+        { path: "source.json", sha256: "c".repeat(64) },
+        { path: "source.json", sha256: "d".repeat(64) },
+      ],
+    }
+    const catalog = readJson<Record<string, unknown>>(fixture.staticCatalogPath)
+    catalog.source = duplicateSource
+    const catalogText = JSON.stringify(catalog)
+    writeFileSync(fixture.staticCatalogPath, catalogText)
+    const coverage = readJson<Record<string, unknown>>(
+      fixture.staticCoveragePath,
+    )
+    coverage.source = duplicateSource
+    writeFileSync(fixture.staticCoveragePath, JSON.stringify(coverage))
+    const skills = readJson<Record<string, unknown>>(fixture.skillsManifestPath)
+    skills.staticCatalogSha256 = sha256(catalogText)
+    writeFileSync(fixture.skillsManifestPath, JSON.stringify(skills))
+
+    const report = reportFor(fixture)
+    expect(report.violations).toHaveLength(1)
+    expect(violationOf(report, "source-file-sha256-mismatch")).toMatchObject({
+      path: "source.json",
+      expected: "c".repeat(64),
+      actual: "d".repeat(64),
+    })
+  })
+
   it("reports a missing source manifest", () => {
     const fixture = createFixture()
     rmSync(fixture.sourceManifestPath)

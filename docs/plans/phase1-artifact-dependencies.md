@@ -96,16 +96,16 @@ manifest 重复声明时只保留一个节点，相同违规按完整元组去�
 
 | 命令                                                                                                                         | 实际结果                                                                                             |
 | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `pnpm --filter @randomplay/data exec vitest run test/artifact-dependencies.test.ts test/data-product.test.ts --project unit` | 45 个测试通过。                                                                                      |
+| `pnpm --filter @randomplay/data exec vitest run test/artifact-dependencies.test.ts test/data-product.test.ts --project unit` | 46 个测试通过。                                                                                      |
 | `pnpm --filter @randomplay/data verify:artifact-dependencies`                                                                | 通过；730 个节点、915 条边、0 个违规。                                                               |
 | `pnpm --filter @randomplay/data verify:artifact-dependencies --json`                                                         | 连续两次输出逐字节一致；解析后 `ok=true`、0 个违规。                                                 |
-| `pnpm --filter @randomplay/data check:source`                                                                                | 通过；105 个测试文件、4,665 个测试通过。                                                             |
+| `pnpm --filter @randomplay/data check:source`                                                                                | 通过；105 个测试文件、4,666 个测试通过。                                                             |
 | `pnpm check:quality`                                                                                                         | 通过；oxlint 0 errors、127 条仓库既有 warnings，oxfmt 与 spec 类型检查通过。                         |
 | `git diff --stat` / `git status --short`                                                                                     | 仅 `docs/`、`scripts/`、测试与 `package.json` 脚本入口；`integrated`、`definitions`、`dist` 无变化。 |
 
 合成 fixture 覆盖 input 摘要不匹配、artifact 摘要不匹配、`staticCatalogSha256` 不匹配、
 `registrySha256` 不匹配、`sourceVersion` 不匹配、来源清单文件集合/摘要不匹配、缺失输入、
-缺失注册表、缺失来源清单、静态 revision 不一致、制品缺失与只读性；纯函数另有“只消费传入
+缺失注册表、缺失来源清单、重复 source path、静态 revision 不一致、制品缺失与只读性；纯函数另有“只消费传入
 摘要”的测试，正式数据另有稳定排序与 CLI `--json` smoke 测试。
 
 ## 边界与后续
