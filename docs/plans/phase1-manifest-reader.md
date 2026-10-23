@@ -75,9 +75,9 @@
 | 命令                                                                                      | 实际结果                                                                                                                                 |
 | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | `pnpm check:quality`                                                                      | 通过；oxlint 0 errors（仓库既有 127 warnings），格式与 spec 类型检查通过。                                                               |
-| `pnpm --filter @randomplay/data check:source`                                             | 通过；102 个测试文件、4,609 个测试通过。                                                                                                 |
-| `pnpm --filter @randomplay/data exec vitest run test/data-product.test.ts --project unit` | 23 个测试全部通过。                                                                                                                      |
+| `pnpm --filter @randomplay/data check:source`                                             | 通过；102 个测试文件、4,610 个测试通过。                                                                                                 |
+| `pnpm --filter @randomplay/data exec vitest run test/data-product.test.ts --project unit` | 24 个测试全部通过。                                                                                                                      |
 | `pnpm --filter @randomplay/core check:source`                                             | PR #291 合并前通过；98 个测试文件通过、3 个跳过；5,684 个测试通过、24 个跳过。本次 follow-up 未修改 core，未重复执行。                   |
 | `git diff --stat` / `git status --short`                                                  | 仅修改 `scripts/data-product/` 两个模块、`test/data-product.test.ts`、本实施记录与文档索引；`integrated`、`definitions`、`dist` 无变化。 |
 
-新增测试覆盖真实 manifest 的产品、版本与关键计数，四类查询过滤，未知过滤返回空，文本关联差异的 limitation，输入不变性，catalog/coverage 的 source repository、commit、files 不一致负例，以及真实数据未覆盖的 `effectIds` 关联与补充记录缺少 `effectIds` 分支（小型合成 fixture）。本 PR 不涉及数据快照、来源版本或整合规则修改，因此没有需要同步的本机数据管理状态；静态 worktree 不创建管理记录。
+新增测试覆盖真实 manifest 的产品、版本与关键计数，四类查询过滤，未知过滤返回空，文本关联差异的 limitation，输入不变性，catalog/coverage 的 source repository、commit、files 集合与摘要不一致负例，以及真实数据未覆盖的 `effectIds` 关联与补充记录缺少 `effectIds` 分支（小型合成 fixture）。本 PR 不涉及数据快照、来源版本或整合规则修改，因此没有需要同步的本机数据管理状态；静态 worktree 不创建管理记录。

@@ -528,7 +528,19 @@ describe("data product manifests", () => {
     catalog.source.files[0]!.sha256 = "d".repeat(64)
     const root = writeFixture(files)
     expect(() => loadStaticEffectsProduct(root)).toThrow(
-      "static effects products disagree on source.files",
+      'static effects products disagree on source.files: sha256 disagrees for "source.json"',
+    )
+  })
+
+  it("reports static products with different source file sets", () => {
+    const files = fixtureFiles()
+    const catalog = files["effects/static-catalog.json"] as {
+      source: { files: { path: string; sha256: string }[] }
+    }
+    catalog.source.files.push({ path: "extra.json", sha256: "e".repeat(64) })
+    const root = writeFixture(files)
+    expect(() => loadStaticEffectsProduct(root)).toThrow(
+      'static effects products disagree on source.files: static-catalog.json additionally lists "extra.json" at index 1',
     )
   })
 })

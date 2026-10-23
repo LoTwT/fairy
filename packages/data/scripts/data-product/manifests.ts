@@ -545,18 +545,26 @@ function expectSharedStaticField(
   )
 }
 
-function sameSourceFiles(
-  left: readonly StaticSourceFile[],
-  right: readonly StaticSourceFile[],
-): boolean {
-  return (
-    left.length === right.length &&
-    left.every(
-      (file, index) =>
-        file.path === right[index]?.path &&
-        file.sha256 === right[index]?.sha256,
-    )
-  )
+function firstSourceFileDifference(
+  catalogFiles: readonly StaticSourceFile[],
+  coverageFiles: readonly StaticSourceFile[],
+): string | undefined {
+  const length = Math.max(catalogFiles.length, coverageFiles.length)
+  for (let index = 0; index < length; index += 1) {
+    const catalogFile = catalogFiles[index]
+    const coverageFile = coverageFiles[index]
+    if (catalogFile === undefined) {
+      if (coverageFile === undefined) return undefined
+      return `static-coverage.json additionally lists "${coverageFile.path}" at index ${index}`
+    }
+    if (coverageFile === undefined)
+      return `static-catalog.json additionally lists "${catalogFile.path}" at index ${index}`
+    if (catalogFile.path !== coverageFile.path)
+      return `file at index ${index} is "${catalogFile.path}" in static-catalog.json but "${coverageFile.path}" in static-coverage.json`
+    if (catalogFile.sha256 !== coverageFile.sha256)
+      return `sha256 disagrees for "${catalogFile.path}"`
+  }
+  return undefined
 }
 
 /** 校验 catalog 与 coverage 描述同一来源，并返回可直接用于 manifest 的来源。 */
@@ -572,9 +580,13 @@ function expectMatchingStaticSource(
     throw new Error(
       `static effects products disagree on source.commit: static-catalog.json=${catalogSource.commit}, static-coverage.json=${coverageSource.commit}`,
     )
-  if (!sameSourceFiles(catalogSource.files, coverageSource.files))
+  const fileDifference = firstSourceFileDifference(
+    catalogSource.files,
+    coverageSource.files,
+  )
+  if (fileDifference !== undefined)
     throw new Error(
-      `static effects products disagree on source.files: static-catalog.json lists ${catalogSource.files.length} file(s), static-coverage.json lists ${coverageSource.files.length} file(s)`,
+      `static effects products disagree on source.files: ${fileDifference}`,
     )
   return coverageSource
 }
