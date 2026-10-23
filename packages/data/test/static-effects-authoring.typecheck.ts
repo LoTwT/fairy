@@ -1,4 +1,5 @@
 import type {
+  AuthoringSupplementalRecord,
   EffectAuthoringRecord,
   EffectAuthoringRuleRecord,
 } from "../scripts/static-effects/authoring/types.ts"
@@ -41,6 +42,49 @@ export const badCoverageStatus: EffectAuthoringRecord = {
   // @ts-expect-error coverage status is a closed union
   coverage: { ...base.coverage, status: "skipped" },
 }
+
+const supplemental: AuthoringSupplementalRecord = {
+  supplementId: "authoring:supplement",
+  source: "authoring source",
+  kind: "option",
+  optionId: base.ids.optionId,
+  effectIds: [base.ids.effectId],
+  supportedRanks: "核心 1—7",
+  computationTarget: "authoring target",
+  status: "integrated",
+}
+
+export const badSupplementalKind: EffectAuthoringRecord = {
+  ...base,
+  supplementalRecords: [
+    {
+      ...supplemental,
+      // @ts-expect-error supplemental kind is a closed union
+      kind: "boundary",
+    },
+  ],
+}
+
+export const badSupplementalStatus: EffectAuthoringRecord = {
+  ...base,
+  supplementalRecords: [
+    {
+      ...supplemental,
+      // @ts-expect-error supplemental status uses the formal closed union
+      status: "converted",
+    },
+  ],
+}
+
+// @ts-expect-error computationTarget is required
+const incompleteSupplemental: AuthoringSupplementalRecord = {
+  supplementId: "authoring:incomplete",
+  source: "authoring source",
+  kind: "option",
+  supportedRanks: "核心 1—7",
+  status: "integrated",
+}
+void incompleteSupplemental
 
 export const missingKey: EffectAuthoringRecord = {
   ...base,

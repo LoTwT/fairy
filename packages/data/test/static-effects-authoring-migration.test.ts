@@ -162,6 +162,7 @@ describe("static effects authoring migration records", () => {
     expect(compilation.ruleIds).toHaveLength(19)
     expect(compilation.optionIds).toHaveLength(17)
     expect(compilation.coverageKeys).toHaveLength(15)
+    expect(compilation.supplementalRecordIds).toEqual([])
     expect(compilation.skillTargetIds).toHaveLength(2)
 
     const groups = new Map<string, EffectAuthoringRuleRecord[]>()
@@ -563,7 +564,7 @@ describe("static effects authoring migration records", () => {
     })
     expect(result.recordCount).toBe(19)
     expect(result.summary).toBe(
-      "rules: 19, options: 17, coverage positions: 15, skill targets: 2",
+      "rules: 19, options: 17, coverage positions: 15, skill targets: 2, supplemental records: 0",
     )
     expect(result.equivalent).toBe(true)
     expect(result.differences).toEqual([])
