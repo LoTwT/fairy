@@ -26,6 +26,7 @@
 ### 实施与验收记录
 
 - [D6 缺口审计与收尾决定](plans/d6-gap-audit.md)：oracle 补齐后的 unsupported/corrected/out-of-scope 分类、D4 skip 决定与后续触发条件。
+- [Phase 1 P1-1 内部 manifest 读取器](plans/phase1-manifest-reader.md)：属性/技能/静态效果统一视图、结构化 coverage 查询、限制与消融实验记录。
 - [静态计算端到端对照验收](plans/static-e2e-acceptance.md)：九个完整配装场景、固定上游独立参考、差异说明和追加案例格式。
 - [上游测试用例迁移复核](plans/upstream-test-backport.md)：2026-10-20 从 ZZZ-HP 与 ZZZ Calculator 迁移的回归用例、上游可复现性限制及未裁定的跨实现差异。
 - [ZZZ Calculator 对照验收](plans/zzz-calculator-comparison.md)：固定双方版本的公式、数据与上游测试对照，包含迁移到 Fairy 的离线样本、已确认差异及后续 PR 拆分。
