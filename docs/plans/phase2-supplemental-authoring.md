@@ -1,28 +1,28 @@
 # Phase 2 P2-4a：补充记录作者层
 
-状态：已实现并通过定向等价验收。为 static effects 作者层增加 `supplementalRecords` 的强类型表达、运行时校验、按 `supplementId` 的原位替换与针对性测试；本 PR 不迁移任何正式补充记录，三份正式 effects 制品、`snapshotId`、公开 exports 与 core/shared 运行时均未修改。
+状态：P2-4a 主体已合并（#299，7d54366c）；本 follow-up 将 `optionId` / `supportedRanks` 收紧为必填。补充记录作者层已实现并通过定向等价验收：为 static effects 作者层提供 `supplementalRecords` 的强类型表达、运行时校验、按 `supplementId` 的原位替换与针对性测试；不迁移任何正式补充记录，三份正式 effects 制品、`snapshotId`、公开 exports 与 core/shared 运行时均未修改。
 
 ## 范围
 
 - 作者记录新增可选的 `supplementalRecords`，声明该记录所属选项的补充来源覆盖。
-- 补充记录沿用正式 `static-coverage.json` 的字段形状：`supplementId`、`source`、`kind`、`optionId?`、`effectIds?`、`supportedRanks`、`computationTarget`、`status`。
+- 作者层补充记录沿用正式 `static-coverage.json` 中非 `boundary` 记录的字段形状：`supplementId`、`source`、`kind`、`optionId`（必填）、`effectIds?`、`supportedRanks`（必填）、`computationTarget`、`status`。
 - `kind` 与 `status` 是封闭联合：`option` / `option-variant` / `entity` / `unsupported-option`，`integrated` / `out-of-scope`。
 - 编译只按 `supplementId` 原位替换基线条目，不新增、不删除、不重排；替换计数进入编译摘要。
 - 不迁移数据：`MIGRATED_AUTHORING_RECORDS` 仍为 19 条，且没有任何一条声明补充记录；`authoring:verify` 的补充替换计数为 0。
 
 ## 类型与校验
 
-[`types.ts`](../../../packages/data/scripts/static-effects/authoring/types.ts) 新增 `AuthoringSupplementalRecord`，`AuthoringRecordBase` 增加可选 `supplementalRecords`。补充记录挂在声明它的作者记录上，因此归属关系与 `optionId` 一致性都由该记录决定。
+[`types.ts`](../../../packages/data/scripts/static-effects/authoring/types.ts) 新增 `AuthoringSupplementalRecord`，`AuthoringRecordBase` 增加可选 `supplementalRecords`。补充记录挂在声明它的作者记录上，因此归属关系与 `optionId` 一致性都由该记录决定；作者层不表达 `boundary`，其形状要求 `optionId` 与 `supportedRanks` 必填。`compile.ts` 的本地读取类型仍允许这两个字段缺省，因为正式 coverage 可能包含没有它们的 `boundary` 记录。
 
 [`validation.ts`](../../../packages/data/scripts/static-effects/authoring/validation.ts) 增加：
 
-- 必填字段的逐项类型校验：`supplementId`、`source`、`supportedRanks`、`computationTarget` 必须是非空字符串；`kind`、`status` 必须在封闭词表内。
+- 必填字段的逐项类型校验：`supplementId`、`source`、`optionId`、`supportedRanks`、`computationTarget` 必须是非空字符串；`kind`、`status` 必须在封闭词表内。
 - `supplementId` 在整批作者输入中全局唯一；重复项报告到 `[记录下标]/supplementalRecords[下标]/supplementId`。
-- 声明了 `optionId` 时必须等于所属记录的 `ids.optionId`，否则报告到 `/supplementalRecords[下标]/optionId`。
+- `optionId` 无条件必填，并且必须等于所属记录的 `ids.optionId`，否则报告到 `/supplementalRecords[下标]/optionId`；缺少该字段时报告同一路径的 `expected a string`。
 - `effectIds` 可选；声明时逐项要求非空字符串。是否存在于编译结果或基线属于编译期检查，因为结构校验没有基线上下文。
 - 缺失字段由既有字段路径校验负责，例如缺少 `computationTarget` 报 `[记录下标]/supplementalRecords[0]/computationTarget: expected a string`。
 
-[`static-effects-authoring.typecheck.ts`](../../../packages/data/test/static-effects-authoring.typecheck.ts) 增加未知 `kind`、未知 `status` 与缺少 `computationTarget` 的类型反例。
+[`static-effects-authoring.typecheck.ts`](../../../packages/data/test/static-effects-authoring.typecheck.ts) 增加未知 `kind`、未知 `status`、缺少 `computationTarget` 与缺少 `optionId` 的类型反例，并断言作者形状可赋值给正式补充记录类型。
 
 ## 编译
 
@@ -39,7 +39,7 @@
 
 ## 测试
 
-新增 [`static-effects-authoring-supplemental.test.ts`](../../../packages/data/test/static-effects-authoring-supplemental.test.ts)，11 个用例：
+新增 [`static-effects-authoring-supplemental.test.ts`](../../../packages/data/test/static-effects-authoring-supplemental.test.ts)，12 个用例：
 
 | 用例                         | 断言                                                                               |
 | ---------------------------- | ---------------------------------------------------------------------------------- |
@@ -52,6 +52,7 @@
 | 未知 `kind` / `status`       | 运行时校验分别报告 `kind` / `status` 路径                                          |
 | `effectId` 不存在            | 编译抛出未知 effect ID                                                             |
 | 缺字段                       | 运行时校验报告准确的 `computationTarget` 路径                                      |
+| 缺 `optionId`                | 运行时校验报告 `/supplementalRecords[0]/optionId` 与 `expected a string`           |
 | 基线含 `reason`              | 编译拒绝作者层无法表达的字段                                                       |
 
 ## 消融实验
@@ -66,10 +67,11 @@
 
 ## 限制
 
-- 本 PR 只提供能力，不迁移数据：正式 `supplementalRecords` 仍由 converter 生成，101 条全部保持原样；作者记录没有声明任何补充记录。
+- 本 follow-up 只提供能力，不迁移数据：正式 `supplementalRecords` 仍由 converter 生成，101 条全部保持原样；作者记录没有声明任何补充记录。
 - 作者层不能表达 `reason`；含该字段的基线条目当前不能被替换。未知字段、未知 ID 与重复 ID 都会失败，不会新增或删除条目。
 - 补充记录的 `effectIds` 只校验存在性，不校验其是否属于同一选项或是否与规则状态一致；这些约束继续由正式转换器与后续迁移 PR 负责。
-- `optionId` 可选是为了沿用正式形状；声明时必须是所属记录的选项。
+- 作者层 `optionId` 必填，并且必须等于所属记录的 `ids.optionId`；`supportedRanks` 同样必填。
+- 作者层不表达 `boundary`；`compile.ts` 的正式 coverage 读取类型允许 `boundary` 记录缺省 `optionId`/`supportedRanks`，不因此放宽作者记录。
 - 未修改 `definitions`、`integrated`、`dist`、`snapshotId`、公开 exports、core/shared 运行时或生成链行为。
 
 ## 验证
@@ -77,14 +79,14 @@
 | 命令                                                                                              | 实际结果                                                                                                                          |
 | ------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `pnpm --filter @randomplay/data authoring:verify`                                                 | 19 条记录；19 rules、17 options、15 coverage positions、2 skill targets、补充替换 0；语义 PASS（0 differences）；三制品字节一致。 |
-| `pnpm --filter @randomplay/data exec vitest run static-effects-authoring*.test.ts --project unit` | 42 个测试通过（18 试点 + 13 迁移 + 11 补充记录）。                                                                                |
+| `pnpm --filter @randomplay/data exec vitest run static-effects-authoring*.test.ts --project unit` | 43 个测试通过（18 试点 + 13 迁移 + 12 补充记录）。                                                                                |
 | `pnpm --filter @randomplay/data typecheck`                                                        | 通过。                                                                                                                            |
 | `pnpm check:quality`                                                                              | 通过；oxlint 0 errors（既有 127 warnings），格式与 spec 类型检查通过。                                                            |
-| `pnpm --filter @randomplay/data check:source`                                                     | 通过；108 个测试文件、4,708 个测试通过。                                                                                          |
+| `pnpm --filter @randomplay/data check:source`                                                     | 通过；108 个测试文件、4,709 个测试通过。                                                                                          |
 | `pnpm --filter @randomplay/core check:source`                                                     | 通过；98 个测试文件通过、3 个跳过；5,684 个测试通过、24 个跳过。                                                                  |
 | `pnpm --filter @randomplay/data verify:pack`                                                      | 通过；2 个打包测试通过。                                                                                                          |
 
-数据管理：worktree 没有 `packages/data/.integrated.fairy-state`，属于静态工作区；本 PR 不涉及快照、来源版本或整合规则修改，正式制品不变，因此不写管理记录。主工作区 `/Users/caoyujie/codes/fairy` 未被修改，其 `indexSha256` 与 worktree 的 `integrated/index.json` 一致。
+数据管理：worktree 没有 `packages/data/.integrated.fairy-state`，属于静态工作区；本 follow-up 不涉及快照、来源版本或整合规则修改，正式制品不变，因此不写管理记录。主工作区 `/Users/caoyujie/codes/fairy` 保持 `phase: idle`，`state.json.current.indexSha256` 与实际 `integrated/index.json` 一致（`d68ad1d8…`），`verify:nanoka:current integrated` 返回 `verified: true`；未改写管理记录。
 
 ## 后续
 

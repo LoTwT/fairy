@@ -52,7 +52,10 @@ export interface StaticCoverageSupplementalRecord {
   readonly supplementId: string
   readonly source: string
   readonly kind: string
-  /** 补充记录沿用 converter 的可选形态；编译器只保留基线条目，不重建。 */
+  /**
+   * 读取正式 coverage 的类型：boundary 记录可能没有 optionId/supportedRanks。
+   * 作者层不表达 boundary，`AuthoringSupplementalRecord` 才要求两者必填。
+   */
   readonly optionId?: string
   readonly effectIds?: readonly string[]
   readonly supportedRanks?: string
@@ -368,10 +371,7 @@ function collectAuthoringSupplementalRecords(
           `Duplicate authoring supplement ID: ${supplement.supplementId}`,
         )
       supplementIds.add(supplement.supplementId)
-      if (
-        supplement.optionId !== undefined &&
-        supplement.optionId !== record.ids.optionId
-      )
+      if (supplement.optionId !== record.ids.optionId)
         throw new Error(
           `Supplement ${supplement.supplementId} declares option ${supplement.optionId} but belongs to authoring record ${record.key} (${record.ids.optionId})`,
         )

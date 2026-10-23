@@ -3,6 +3,7 @@ import type {
   EffectAuthoringRecord,
   EffectAuthoringRuleRecord,
 } from "../scripts/static-effects/authoring/types.ts"
+import type { StaticCoverageSupplementalRecord } from "../scripts/data-product/static-coverage.ts"
 import { PILOT_AUTHORING_RECORDS } from "../scripts/static-effects/authoring/pilot-records.ts"
 
 const base = PILOT_AUTHORING_RECORDS[0] as EffectAuthoringRuleRecord
@@ -54,6 +55,10 @@ const supplemental: AuthoringSupplementalRecord = {
   status: "integrated",
 }
 
+/** 作者形状必须可赋值给正式补充记录类型。 */
+const formalSupplemental: StaticCoverageSupplementalRecord = supplemental
+void formalSupplemental
+
 export const badSupplementalKind: EffectAuthoringRecord = {
   ...base,
   supplementalRecords: [
@@ -81,10 +86,22 @@ const incompleteSupplemental: AuthoringSupplementalRecord = {
   supplementId: "authoring:incomplete",
   source: "authoring source",
   kind: "option",
+  optionId: base.ids.optionId,
   supportedRanks: "核心 1—7",
   status: "integrated",
 }
 void incompleteSupplemental
+
+// @ts-expect-error optionId is required by the authoring supplemental shape
+const missingSupplementalOptionId: AuthoringSupplementalRecord = {
+  supplementId: "authoring:missing-option",
+  source: "authoring source",
+  kind: "option",
+  supportedRanks: "核心 1—7",
+  computationTarget: "authoring target",
+  status: "integrated",
+}
+void missingSupplementalOptionId
 
 export const missingKey: EffectAuthoringRecord = {
   ...base,
