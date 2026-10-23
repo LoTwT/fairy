@@ -1,7 +1,11 @@
 import type { NonEmpty, SourceReference } from "@randomplay/shared"
 import { BUFF_RESOURCE, SOURCE_COMMIT } from "../source.ts"
 import { fixedSourceIds, stableIds } from "./ids.ts"
-import type { AuthoringOption, EffectAuthoringRecord } from "./types.ts"
+import type {
+  AuthoringOption,
+  AuthoringSupplementalRecord,
+  EffectAuthoringRecord,
+} from "./types.ts"
 
 /** 正式迁移记录的一次性转录；生成路径不读取选中基线条目。 */
 const NANOKA_VERSION = "3.3.12+19634983"
@@ -356,6 +360,26 @@ const MIYABI_FROSTBURN_OPTION = {
     },
   ],
 } satisfies AuthoringOption
+
+/**
+ * 霜灼·破补充来源记录的正式基线值一次性转录。该记录同时覆盖核心被动
+ * 独立结算与影画 4 增伤，因此只挂在 `miyabi-frostburn-main` 上，
+ * `miyabi-frostburn-m4` 不重复声明同一 `supplementId`。
+ */
+const MIYABI_FROSTBURN_SUPPLEMENT = {
+  supplementId: "nanoka:agents:miyabi:frostburn-break-damage",
+  source:
+    "nanoka-integrated@3.3.12+19634983 agents/1091 /passive/level/1091501—1091507/desc/0 + /talent/4/desc",
+  kind: "option",
+  optionId: "nanoka:agents:miyabi:frostburn-break-damage",
+  effectIds: [
+    "agent:1091:nanoka:frostburn-break-damage:mindscape:0",
+    "agent:1091:nanoka:m4-rupture-frostburn-break-bonus:mindscape:4",
+  ],
+  supportedRanks: "核心 1—7；影画 0—6",
+  computationTarget: "catalog option on the mapped agent entity",
+  status: "integrated",
+} satisfies AuthoringSupplementalRecord
 
 const NEKOMATA_CLAW_MARK_MECHANISM = {
   kind: "independent-settlement",
@@ -1800,6 +1824,7 @@ export const MIGRATED_AUTHORING_RECORDS: readonly EffectAuthoringRecord[] = [
       differenceIds: [],
       positions: [],
     },
+    supplementalRecords: [MIYABI_FROSTBURN_SUPPLEMENT],
     option: MIYABI_FROSTBURN_OPTION,
     mechanism: MIYABI_FROSTBURN_MECHANISM,
   },

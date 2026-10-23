@@ -162,7 +162,9 @@ describe("static effects authoring migration records", () => {
     expect(compilation.ruleIds).toHaveLength(19)
     expect(compilation.optionIds).toHaveLength(17)
     expect(compilation.coverageKeys).toHaveLength(15)
-    expect(compilation.supplementalRecordIds).toEqual([])
+    expect(compilation.supplementalRecordIds).toEqual([
+      "nanoka:agents:miyabi:frostburn-break-damage",
+    ])
     expect(compilation.skillTargetIds).toHaveLength(2)
 
     const groups = new Map<string, EffectAuthoringRuleRecord[]>()
@@ -464,6 +466,13 @@ describe("static effects authoring migration records", () => {
         ),
       ),
     )
+    const selectedSupplementIds = new Set(
+      MIGRATED_AUTHORING_RECORDS.flatMap((record) =>
+        (record.supplementalRecords ?? []).map(
+          (supplement) => supplement.supplementId,
+        ),
+      ),
+    )
 
     for (const rule of baseline.definitions.effects) {
       if (selectedEffectIds.has(rule.effectId)) continue
@@ -497,8 +506,14 @@ describe("static effects authoring migration records", () => {
     expect(compilation.artifacts.coverage.records).toHaveLength(
       baseline.coverage.records.length,
     )
-    expect(compilation.artifacts.coverage.supplementalRecords).toEqual(
-      baseline.coverage.supplementalRecords,
+    expect(
+      compilation.artifacts.coverage.supplementalRecords.filter(
+        (record) => !selectedSupplementIds.has(record.supplementId),
+      ),
+    ).toEqual(
+      baseline.coverage.supplementalRecords.filter(
+        (record) => !selectedSupplementIds.has(record.supplementId),
+      ),
     )
     expect(compareStaticArtifacts(baseline, compilation.artifacts)).toEqual({
       equivalent: true,
@@ -564,7 +579,7 @@ describe("static effects authoring migration records", () => {
     })
     expect(result.recordCount).toBe(19)
     expect(result.summary).toBe(
-      "rules: 19, options: 17, coverage positions: 15, skill targets: 2, supplemental records: 0",
+      "rules: 19, options: 17, coverage positions: 15, skill targets: 2, supplemental records: 1",
     )
     expect(result.equivalent).toBe(true)
     expect(result.differences).toEqual([])
