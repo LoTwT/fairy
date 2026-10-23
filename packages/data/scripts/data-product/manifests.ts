@@ -38,6 +38,12 @@ export interface DataProductArtifact {
   readonly sha256Origin: "manifest" | "computed"
 }
 
+/** manifest 声明的 integrated 输入；摘要由依赖检查与实际文件比对。 */
+export interface DataProductInput {
+  readonly path: string
+  readonly sha256: string
+}
+
 export interface DataProductRulesVersion {
   readonly label: string
   readonly ruleSetId?: string
@@ -104,7 +110,7 @@ export interface PanelAttributesExtensions {
     readonly agents: readonly string[]
     readonly wEngines: readonly string[]
   }
-  readonly inputs: number
+  readonly inputs: readonly DataProductInput[]
   readonly evidence: DataProductEvidenceSummary
 }
 
@@ -120,7 +126,7 @@ export interface AgentActionsCoverageCounts {
 
 export interface AgentActionsExtensions {
   readonly members: readonly string[]
-  readonly inputs: number
+  readonly inputs: readonly DataProductInput[]
   readonly registrySha256: string
   readonly staticCatalogSha256: string
   readonly coverage: AgentActionsCoverageCounts
@@ -324,6 +330,27 @@ function parseManifestArtifacts(
   })
 }
 
+function parseManifestInputs(
+  value: unknown,
+  label: string,
+): readonly DataProductInput[] {
+  return expectArray(value, label).map((entry, index) => {
+    const itemLabel = `${label}[${index}]`
+    const input = expectRecord(entry, itemLabel)
+    assertKnownKeys(input, ["path", "sha256"], itemLabel)
+    return {
+      path: expectString(
+        expectField(input, "path", itemLabel),
+        `${itemLabel}.path`,
+      ),
+      sha256: expectSha256(
+        expectField(input, "sha256", itemLabel),
+        `${itemLabel}.sha256`,
+      ),
+    }
+  })
+}
+
 function countStatuses(
   records: readonly { readonly status: string }[],
 ): Readonly<Record<string, number>> {
@@ -421,10 +448,10 @@ function parsePanelAttributesManifest(
     },
     extensions: {
       members: { agents, wEngines },
-      inputs: expectArray(
+      inputs: parseManifestInputs(
         expectField(manifest, "inputs", label),
         `${label}.inputs`,
-      ).length,
+      ),
       evidence: parseEvidence(
         expectField(manifest, "evidence", label),
         `${label}.evidence`,
@@ -572,10 +599,10 @@ function parseAgentActionsManifest(
         expectField(manifest, "members", label),
         `${label}.members`,
       ),
-      inputs: expectArray(
+      inputs: parseManifestInputs(
         expectField(manifest, "inputs", label),
         `${label}.inputs`,
-      ).length,
+      ),
       registrySha256: expectSha256(
         expectField(manifest, "registrySha256", label),
         `${label}.registrySha256`,

@@ -88,6 +88,7 @@
     "generate:panel-attributes": "node --disable-warning=ExperimentalWarning scripts/generate-panel-attributes.ts",
     "generate:agent-actions": "node --disable-warning=ExperimentalWarning scripts/generate-agent-actions.ts",
     "audit:data-identity": "node scripts/audit-data-identity.ts",
+    "verify:artifact-dependencies": "node --disable-warning=ExperimentalWarning scripts/verify-artifact-dependencies.ts",
     "explain": "node --disable-warning=ExperimentalWarning scripts/explain-data.ts"
   },
   "devDependencies": {

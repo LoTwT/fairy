@@ -1,6 +1,6 @@
 # Phase 1 P1-3：生成期与构建期校验边界
 
-状态：已实现。范围仅 P1-3；P1-4 依赖图未开始。本记录不改变 `integrated`、`definitions`、`dist`、
+状态：已实现。范围仅 P1-3；P1-4 制品依赖检查已由 [P1-4 实施记录](phase1-artifact-dependencies.md) 接续实现。本记录不改变 `integrated`、`definitions`、`dist`、
 `snapshotId`、公开 exports、shared/core 运行时或生成数据内容。
 
 ## 范围与结果
@@ -76,4 +76,4 @@ ZZZ-HP `0df40c5` 与 `2628b32` 提交，产物与当前正式 definitions 一致
 - 不追改 `convert.ts` 内为构造中间对象使用的 `as unknown as`。
 - 当前正式数据通过新校验，无需修改数据；本 worktree 没有控制目录，属于静态工作区，不创建本机管理记录。
   本次变更不触及数据快照或管理契约，主工作区既有管理状态无需重写。
-- P1-4 依赖图未开始。
+- P1-4 制品依赖检查已由 [P1-4 实施记录](phase1-artifact-dependencies.md) 接续实现。
