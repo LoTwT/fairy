@@ -105,6 +105,39 @@ export interface AuthoringCoverage {
   readonly positions: readonly AuthoringCoveragePosition[]
 }
 
+export const AUTHORING_SUPPLEMENTAL_KINDS = [
+  "option",
+  "option-variant",
+  "entity",
+  "unsupported-option",
+] as const
+
+export type AuthoringSupplementalKind =
+  (typeof AUTHORING_SUPPLEMENTAL_KINDS)[number]
+
+export const AUTHORING_SUPPLEMENTAL_STATUSES = [
+  "integrated",
+  "out-of-scope",
+] as const
+
+export type AuthoringSupplementalStatus =
+  (typeof AUTHORING_SUPPLEMENTAL_STATUSES)[number]
+
+/**
+ * 补充来源覆盖记录的作者形状。字段与正式 static-coverage.json 的
+ * supplementalRecords 对齐；编译只按 supplementId 原位替换基线条目。
+ */
+export interface AuthoringSupplementalRecord {
+  readonly supplementId: string
+  readonly source: string
+  readonly kind: AuthoringSupplementalKind
+  readonly optionId?: string
+  readonly effectIds?: readonly string[]
+  readonly supportedRanks: string
+  readonly computationTarget: string
+  readonly status: AuthoringSupplementalStatus
+}
+
 export interface AuthoringEntity {
   readonly sourceId: "zzz-hp" | "nanoka-integrated"
   readonly catalogEntityId: string
@@ -170,6 +203,11 @@ interface AuthoringRecordBase {
   readonly ids: AuthoringIds
   readonly coverage: AuthoringCoverage
   readonly option: AuthoringOption
+  /**
+   * 该记录所属选项的补充来源覆盖记录。未声明时基线补充记录保持原样；
+   * 声明后按 supplementId 原位替换，声明的 optionId 必须等于 ids.optionId。
+   */
+  readonly supplementalRecords?: readonly AuthoringSupplementalRecord[]
 }
 
 interface AuthoringRuleFieldsBase {

@@ -33,6 +33,7 @@
 - [Phase 2 P2-1 作者层试点](plans/phase2-authoring-pilot.md)：12 条代表记录、封闭作者类型、只替换选中条目的三制品编译器、语义等价 harness、负例、消融实验与 P2-2 前置条件。
 - [Phase 2 P2-2 小批量 corrected 正式迁移](plans/phase2-corrected-migration.md)：8 条 corrected 记录的正式 authoring 输入、生成链覆盖、语义/字节验收、fallback 与数据管理状态。
 - [Phase 2 P2-3 authoring 覆盖扩展](plans/phase2-authoring-coverage.md)：正式记录扩展到 19 条、complete-state/independent-settlement 与新增 corrected、键序对齐、语义/字节验收与剩余未迁移项。
+- [Phase 2 P2-4a 补充记录作者层](plans/phase2-supplemental-authoring.md)：`supplementalRecords` 的封闭作者形状、运行时校验、按 `supplementId` 原位替换、针对性等价测试与“能力具备但不迁移数据”的边界。
 - [静态计算端到端对照验收](plans/static-e2e-acceptance.md)：九个完整配装场景、固定上游独立参考、差异说明和追加案例格式。
 - [上游测试用例迁移复核](plans/upstream-test-backport.md)：2026-10-20 从 ZZZ-HP 与 ZZZ Calculator 迁移的回归用例、上游可复现性限制及未裁定的跨实现差异。
 - [ZZZ Calculator 对照验收](plans/zzz-calculator-comparison.md)：固定双方版本的公式、数据与上游测试对照，包含迁移到 Fairy 的离线样本、已确认差异及后续 PR 拆分。

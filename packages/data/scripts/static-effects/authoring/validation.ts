@@ -8,6 +8,8 @@ import {
   AUTHORING_COVERAGE_STATUSES,
   AUTHORING_FACTOR_CHANNELS,
   AUTHORING_MECHANISM_KINDS,
+  AUTHORING_SUPPLEMENTAL_KINDS,
+  AUTHORING_SUPPLEMENTAL_STATUSES,
   type AuthoringFactorChannel,
   type EffectAuthoringRecord,
 } from "./types.ts"
@@ -169,6 +171,17 @@ function stringAt(
     return undefined
   }
   return value
+}
+
+function nonEmptyStringAt(
+  value: unknown,
+  path: string,
+  collector: Collector,
+): string | undefined {
+  const text = stringAt(value, path, collector)
+  if (text !== undefined && text.length === 0)
+    collector.add(path, "expected a non-empty string")
+  return text
 }
 
 function numberAt(
@@ -1150,6 +1163,65 @@ function validateCoverage(
   }
 }
 
+function validateSupplementalRecord(
+  value: unknown,
+  path: string,
+  owningOptionId: string | undefined,
+  collector: Collector,
+): void {
+  const record = objectAt(value, path, collector)
+  if (!record) return
+  nonEmptyStringAt(record["supplementId"], `${path}/supplementId`, collector)
+  nonEmptyStringAt(record["source"], `${path}/source`, collector)
+  enumAt(
+    record["kind"],
+    AUTHORING_SUPPLEMENTAL_KINDS,
+    `${path}/kind`,
+    collector,
+  )
+  if (Object.hasOwn(record, "optionId")) {
+    const optionId = nonEmptyStringAt(
+      record["optionId"],
+      `${path}/optionId`,
+      collector,
+    )
+    if (
+      optionId !== undefined &&
+      owningOptionId !== undefined &&
+      optionId !== owningOptionId
+    )
+      collector.add(
+        `${path}/optionId`,
+        "must equal the owning record's ids.optionId",
+      )
+  }
+  if (Object.hasOwn(record, "effectIds")) {
+    const effectIds = arrayAt(
+      record["effectIds"],
+      `${path}/effectIds`,
+      collector,
+    )
+    for (const [index, effectId] of (effectIds ?? []).entries())
+      nonEmptyStringAt(effectId, `${path}/effectIds[${index}]`, collector)
+  }
+  nonEmptyStringAt(
+    record["supportedRanks"],
+    `${path}/supportedRanks`,
+    collector,
+  )
+  nonEmptyStringAt(
+    record["computationTarget"],
+    `${path}/computationTarget`,
+    collector,
+  )
+  enumAt(
+    record["status"],
+    AUTHORING_SUPPLEMENTAL_STATUSES,
+    `${path}/status`,
+    collector,
+  )
+}
+
 function validateRecord(
   value: unknown,
   path: string,
@@ -1216,6 +1288,23 @@ function validateRecord(
       collector.add(
         `${path}/ids/effectId`,
         `expected an effect ID starting with "${identityKind}:"`,
+      )
+  }
+
+  if (Object.hasOwn(record, "supplementalRecords")) {
+    const supplements = arrayAt(
+      record["supplementalRecords"],
+      `${path}/supplementalRecords`,
+      collector,
+    )
+    const owningOptionId =
+      ids && typeof ids["optionId"] === "string" ? ids["optionId"] : undefined
+    for (const [index, supplement] of (supplements ?? []).entries())
+      validateSupplementalRecord(
+        supplement,
+        `${path}/supplementalRecords[${index}]`,
+        owningOptionId,
+        collector,
       )
   }
 
@@ -1374,6 +1463,7 @@ export function validateAuthoringRecords(
     return { ok: false, issues: collector.issues }
   }
   const keys = new Set<string>()
+  const supplementIds = new Set<string>()
   for (const [index, record] of value.entries()) {
     validateRecord(record, `[${index}]`, collector)
     if (isObject(record) && typeof record["key"] === "string") {
@@ -1383,6 +1473,24 @@ export function validateAuthoringRecords(
           `duplicate authoring key "${record["key"]}"`,
         )
       keys.add(record["key"])
+    }
+    if (isObject(record) && Array.isArray(record["supplementalRecords"])) {
+      for (const [supplementIndex, supplement] of record[
+        "supplementalRecords"
+      ].entries()) {
+        if (
+          !isObject(supplement) ||
+          typeof supplement["supplementId"] !== "string"
+        )
+          continue
+        const supplementId = supplement["supplementId"]
+        if (supplementIds.has(supplementId))
+          collector.add(
+            `[${index}]/supplementalRecords[${supplementIndex}]/supplementId`,
+            `duplicate supplement ID "${supplementId}"`,
+          )
+        supplementIds.add(supplementId)
+      }
     }
   }
   if (collector.issues.length > 0)

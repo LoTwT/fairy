@@ -17,6 +17,7 @@ import type {
 } from "@randomplay/shared"
 import { stableStringify } from "./canonical.ts"
 import type {
+  AuthoringSupplementalRecord,
   EffectAuthoringRecord,
   EffectAuthoringRuleRecord,
   EffectAuthoringUnsupportedRecord,
@@ -57,6 +58,7 @@ export interface StaticCoverageSupplementalRecord {
   readonly supportedRanks?: string
   readonly computationTarget: string
   readonly status: string
+  readonly reason?: string
 }
 
 export interface StaticCoverageDocument {
@@ -85,6 +87,7 @@ export interface AuthoringCompilation {
   readonly ruleIds: readonly string[]
   readonly optionIds: readonly string[]
   readonly coverageKeys: readonly string[]
+  readonly supplementalRecordIds: readonly string[]
   readonly skillTargetIds: readonly string[]
 }
 
@@ -282,6 +285,7 @@ export function compileAuthoringArtifacts(
   }
 
   const groups = groupByOption(records)
+  const supplementalRecords = collectAuthoringSupplementalRecords(records)
   assertSelectedEntriesExpressible(groups, records, baseline)
   const compiledRules = new Map<string, EffectRule>()
   const compiledOptions = new Map<string, StaticCatalogOption>()
@@ -308,6 +312,11 @@ export function compileAuthoringArtifacts(
     coverageKeys.add(key)
   }
   assertCoverageCompleteness(groups, baseline.coverage, compiledCoverage)
+  assertSupplementalEffectIds(
+    supplementalRecords,
+    baseline,
+    new Set(compiledRules.keys()),
+  )
 
   const definitions = replaceRules(baseline.definitions, compiledRules)
   const catalog = replaceCatalog(
@@ -315,7 +324,10 @@ export function compileAuthoringArtifacts(
     compiledOptions,
     compiledTargets,
   )
-  const coverage = replaceCoverage(baseline.coverage, compiledCoverage)
+  const coverage = replaceSupplementalRecords(
+    replaceCoverage(baseline.coverage, compiledCoverage),
+    supplementalRecords.map((entry) => entry.supplement),
+  )
   assertCountsUnchanged(baseline, {
     definitions,
     catalog,
@@ -328,8 +340,61 @@ export function compileAuthoringArtifacts(
     coverageKeys: compiledCoverage.map(
       (record) => `${record.pointer}|${record.catalogEntityId}`,
     ),
+    supplementalRecordIds: supplementalRecords.map(
+      (entry) => entry.supplement.supplementId,
+    ),
     skillTargetIds: [...compiledTargets.keys()],
   }
+}
+
+interface CollectedSupplementalRecord {
+  readonly recordKey: string
+  readonly supplement: AuthoringSupplementalRecord
+}
+
+/**
+ * 收集记录声明的补充来源记录。补充记录属于记录所在选项，因此声明的
+ * optionId 必须与记录一致；supplementId 在整批作者输入中唯一。
+ */
+function collectAuthoringSupplementalRecords(
+  records: readonly EffectAuthoringRecord[],
+): readonly CollectedSupplementalRecord[] {
+  const collected: CollectedSupplementalRecord[] = []
+  const supplementIds = new Set<string>()
+  for (const record of records)
+    for (const supplement of record.supplementalRecords ?? []) {
+      if (supplementIds.has(supplement.supplementId))
+        throw new Error(
+          `Duplicate authoring supplement ID: ${supplement.supplementId}`,
+        )
+      supplementIds.add(supplement.supplementId)
+      if (
+        supplement.optionId !== undefined &&
+        supplement.optionId !== record.ids.optionId
+      )
+        throw new Error(
+          `Supplement ${supplement.supplementId} declares option ${supplement.optionId} but belongs to authoring record ${record.key} (${record.ids.optionId})`,
+        )
+      collected.push({ recordKey: record.key, supplement })
+    }
+  return collected
+}
+
+/** effectIds 必须指向本次编译生成的规则或基线已有规则。 */
+function assertSupplementalEffectIds(
+  supplements: readonly CollectedSupplementalRecord[],
+  baseline: StaticArtifacts,
+  compiledRuleIds: ReadonlySet<string>,
+): void {
+  const baselineRuleIds = new Set<string>(
+    baseline.definitions.effects.map((rule) => rule.effectId),
+  )
+  for (const { recordKey, supplement } of supplements)
+    for (const effectId of supplement.effectIds ?? [])
+      if (!compiledRuleIds.has(effectId) && !baselineRuleIds.has(effectId))
+        throw new Error(
+          `Supplement ${supplement.supplementId} of authoring record ${recordKey} references unknown effect ID ${effectId}`,
+        )
 }
 
 function requireValidAuthoringRecords(
@@ -1008,6 +1073,55 @@ function replaceCoverage(
   return { ...baseline, records }
 }
 
+const EXPRESSIBLE_SUPPLEMENTAL_RECORD_FIELDS = new Set([
+  "supplementId",
+  "source",
+  "kind",
+  "optionId",
+  "effectIds",
+  "supportedRanks",
+  "computationTarget",
+  "status",
+])
+
+/**
+ * 按 supplementId 原位替换补充来源覆盖记录。保留基线数组顺序与保留
+ * 条目的键序；未知 ID、重复 ID 与作者层无法表达的基线条目字段都明确
+ * 失败，而不是静默丢弃或新增条目。
+ */
+export function replaceSupplementalRecords(
+  baseline: StaticCoverageDocument,
+  compiled: readonly StaticCoverageSupplementalRecord[],
+): StaticCoverageDocument {
+  const compiledById = new Map<string, StaticCoverageSupplementalRecord>()
+  for (const record of compiled) {
+    if (compiledById.has(record.supplementId))
+      throw new Error(
+        `Duplicate authoring supplement ID: ${record.supplementId}`,
+      )
+    compiledById.set(record.supplementId, record)
+  }
+  if (compiledById.size === 0) return baseline
+  const seen = new Set<string>()
+  const supplementalRecords = baseline.supplementalRecords.map((record) => {
+    const replacement = compiledById.get(record.supplementId)
+    if (!replacement) return record
+    for (const field of Object.keys(record))
+      if (!EXPRESSIBLE_SUPPLEMENTAL_RECORD_FIELDS.has(field))
+        throw new Error(
+          `Authoring layer cannot express baseline supplemental record ${record.supplementId} field ${field}`,
+        )
+    seen.add(record.supplementId)
+    return withBaselineKeyOrder(replacement, record)
+  })
+  for (const supplementId of compiledById.keys())
+    if (!seen.has(supplementId))
+      throw new Error(
+        `Authoring supplement ${supplementId} is not present in the baseline`,
+      )
+  return { ...baseline, supplementalRecords }
+}
+
 function assertCountsUnchanged(
   baseline: StaticArtifacts,
   compiled: StaticArtifacts,
@@ -1054,6 +1168,7 @@ export function summarizeCompilation(
     `options: ${compilation.optionIds.length}`,
     `coverage positions: ${compilation.coverageKeys.length}`,
     `skill targets: ${compilation.skillTargetIds.length}`,
+    `supplemental records: ${compilation.supplementalRecordIds.length}`,
   ].join(", ")
 }
 
