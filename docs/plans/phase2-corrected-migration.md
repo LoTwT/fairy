@@ -100,3 +100,5 @@ Byte comparison: PASS
 - 没有新增 `supplementalRecords` 编译、`triggered` / `continuous` / `instant` / `modification`、层数桥接、holder 等级桥接、声明受益者、全队唯一或元素增益输入。
 - 语义等价门槛保护的是“selected 记录编译结果与 converter baseline 一致”；未选中条目由编译器原位保留，测试另行逐条比较。
 - 本 PR 不开始 Phase 3，不修改 core 运行时、公开 exports 或 `integrated`。
+
+后续状态：P2-3 已将正式 authoring 记录扩展到 19 条，并接入 complete-state、independent-settlement 与新增 corrected，见 [Phase 2 P2-3：authoring 覆盖扩展](phase2-authoring-coverage.md)。本页的验收数据保持 P2-2 当时状态，不回写历史结果。
