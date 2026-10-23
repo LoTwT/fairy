@@ -19,7 +19,10 @@ export interface FixedSourceIdInput {
   readonly blockId: string
   readonly sourceEffectId: string
   readonly rankKind: AuthoringRankKind
-  /** 影画/驱动盘件数档位；精炼合并与固定位置省略。 */
+  /**
+   * 影画/驱动盘件数/固定位置档位。精炼只支持正式制品中合并后的
+   * `refinement` 形态；单档 `refinement:N` 不在试点内，传入 rank 会被拒绝。
+   */
   readonly rank?: number
 }
 
@@ -34,9 +37,13 @@ const SINGULAR: Readonly<Record<AuthoringEntityCategory, string>> = {
  * `convert.ts` 的同一实现，避免作者层出现第二套编码规则。
  */
 export function fixedSourceIds(input: FixedSourceIdInput): AuthoringIds {
+  if (input.rankKind === "refinement" && input.rank !== undefined)
+    throw new Error(
+      `Per-rank refinement IDs are not supported by the pilot; use the merged refinement form (${input.entitySlug}/${input.sourceEffectId})`,
+    )
   const rankPart =
-    input.rankKind === "refinement" || input.rankKind === "fixed"
-      ? input.rankKind
+    input.rankKind === "refinement"
+      ? "refinement"
       : `${input.rankKind}:${requireRank(input)}`
   const optionId = `${input.category}:${idPart(input.entitySlug)}:${rankPart}:${idPart(input.blockId)}:${idPart(input.sourceEffectId)}`
   const effectId =

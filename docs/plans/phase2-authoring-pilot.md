@@ -127,6 +127,21 @@ Semantic comparison: PASS (0 differences)
 
 确定性：连续两次编译到不同临时目录，三个输出文件的 SHA-256 完全一致。
 
+## Review follow-up
+
+独立内容审查发现并已修复以下问题：
+
+| 问题                                                                    | 处理                                                                                                         |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| 少写一条 `coverage.positions` 时，基线行会原样保留，harness 仍报告 PASS | 编译器按选中 `optionId` 校验基线 coverage 行集合与编译行集合完全一致；新增“清溟少写一个精炼位置”负例。       |
+| 输出路径可能通过大小写或 symlink 绕过 `definitions` 保护                | 用最近已存在祖先的 `realpath` 加平台大小写归一比较；新增 symlink 与 darwin 大小写变体负例。                  |
+| 基线条目含作者层未建模字段时会被 `as` 静默丢弃                          | 替换前检查选中 option/variant/rule 的字段集合；未建模字段明确拒绝。新增 `layerCountInputName` 负例。         |
+| `entity` scope 可搭配 `hit-adjustment` 或 `hit.*` 事实，写出无效规则集  | 类型层关联 scope/operation；运行时增加 scope/operation 与 hit 事实校验；新增类型与运行时负例。               |
+| fixed / refinement ID 语法不完整                                        | `fixed` 固定构造 `fixed:<rank>`；单档 `refinement:<rank>` 明确拒绝，只支持正式合并形态；新增表驱动 ID 测试。 |
+| `maximumDifferences: 0` 会把有差异的制品误判为等价                      | 差异上限至少为 1；新增边界测试。                                                                             |
+| 重复身份被语义视图折叠                                                  | 读取三制品时断言 effects/options/skillTargets/differences/entities/coverage 身份唯一。                       |
+| `itemIds` 元素未校验、locale 排序不稳定                                 | 逐项校验 `itemIds` 字符串；canonical 排序改为与 locale/ICU 无关的字节序比较。                                |
+
 ## 消融实验
 
 | 尝试删减                                                       | 结果与处理                                                                                                                                                                                                  |
@@ -143,7 +158,7 @@ Semantic comparison: PASS (0 differences)
 ## 限制
 
 - **coverage 范围**：P2-1 只编译固定来源 `records`。补充来源 `supplementalRecords` 保持基线原样；星见雅霜灼·破等 supplement 规则已经验证 rule/option 投影，但其补充记录本身没有在本次编译中重建。P2-2 若迁移 supplement 密集的记录，必须先补 `supplementalRecords` 的编译与等价覆盖。
-- **activation / rule 类型**：只支持 `supplied` contribution；不支持 `triggered`、`continuous`、`instant`、`modification`、状态定义、层数桥接、holder 等级桥接、元素增益输入、声明受益者、全队唯一等机制。
+- **activation / rule 类型**：只支持 `supplied` contribution；不支持 `triggered`、`continuous`、`instant`、`modification`、状态定义、层数桥接、holder 等级桥接、元素增益输入、声明受益者、全队唯一等机制。选中基线条目若出现这些未建模字段，编译器会明确拒绝而不是静默丢弃。
 - **variant 状态**：试点选中选项的所有 variant 共享同一 coverage 状态；没有覆盖同一选项内 converted/corrected 混合的多 variant 情况。
 - **条件与 operation 子集**：只开放试点实际使用的 5 种条件与 4 个 factor channel；新增机制必须按同一流程补类型、校验、编译器和测试。
 - **选项元数据来源**：`pilot-options.ts` 是当前基线的一次性转录，不是运行时读取。后续基线修订若改变显示名/引用，需要作者记录同步更新，再由 harness 报告差异。
@@ -166,10 +181,10 @@ Semantic comparison: PASS (0 differences)
 | 命令                                                                                                  | 实际结果                                                                                                                                    |
 | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `pnpm --filter @randomplay/data typecheck`                                                            | 通过；`prepare:consumer` 后 `tsc --noEmit` 无错误。                                                                                         |
-| `pnpm --filter @randomplay/data exec vitest run test/static-effects-authoring.test.ts --project unit` | 10 个测试通过；覆盖类型/运行时校验、编译等价、负例、临时目录保护与确定性。                                                                  |
+| `pnpm --filter @randomplay/data exec vitest run test/static-effects-authoring.test.ts --project unit` | 18 个测试通过；覆盖类型/运行时校验、编译等价、coverage 完整性、未建模字段拒绝、路径保护、负例与确定性。                                     |
 | `pnpm --filter @randomplay/data authoring:pilot`                                                      | 12 条记录；9 规则、10 选项、12 coverage 位置、2 技能目标；语义比较 PASS（0 differences）。                                                  |
 | `pnpm check:quality`                                                                                  | 通过；oxlint 0 errors（仓库既有 127 warnings），oxfmt 与 spec 类型检查通过，core 构建通过。                                                 |
-| `pnpm --filter @randomplay/data check:source`                                                         | 通过；106 个测试文件、4,676 个测试通过。                                                                                                    |
+| `pnpm --filter @randomplay/data check:source`                                                         | 通过；106 个测试文件、4,684 个测试通过。                                                                                                    |
 | `git status --short` / `git diff --stat`                                                              | 仅 `packages/data/package.json`、`convert.ts` 的 `idPart` 导出，以及新增 authoring 脚本与测试；`integrated`、`definitions`、`dist` 无变化。 |
 
 本次 worktree 没有 integrated 控制目录，属于静态工作区；没有创建本机管理记录，也没有修改主工作区的数据管理状态。本 PR 不涉及数据快照、来源版本或整合规则修改，因此无需按[来源数据整合规范](../specs/data/integration.md#数据管理状态的同步维护)重写管理状态。

@@ -27,6 +27,13 @@ function canonicalText(value: unknown): string {
   return JSON.stringify(value)
 }
 
+/** 与 locale/ICU 无关的稳定字节序比较。 */
+function compareCanonicalText(left: unknown, right: unknown): number {
+  const a = canonicalText(left)
+  const b = canonicalText(right)
+  return a < b ? -1 : a > b ? 1 : 0
+}
+
 function isObject(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === "object" && !Array.isArray(value)
 }
@@ -41,9 +48,7 @@ export function canonicalize(value: unknown, path = ""): unknown {
       canonicalize(entry, `${path}[${index}]`),
     )
     if (preservesArrayOrder(path)) return items
-    return items.toSorted((left, right) =>
-      canonicalText(left).localeCompare(canonicalText(right)),
-    )
+    return items.toSorted(compareCanonicalText)
   }
   if (!isObject(value)) return value
   if (
@@ -145,7 +150,8 @@ export function compareStaticArtifacts(
   },
   options: SemanticComparisonOptions = {},
 ): SemanticComparison {
-  const maximum = options.maximumDifferences ?? 100
+  // 上限只控制输出条数，不能把 0 解释为“没有差异”。
+  const maximum = Math.max(1, options.maximumDifferences ?? 100)
   const differences: SemanticDifference[] = []
   diffValues(
     semanticView(baseline),

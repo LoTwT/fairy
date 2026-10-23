@@ -499,6 +499,21 @@ function isContributionFact(fact: string): boolean {
   return CONTRIBUTION_FACTS.has(fact)
 }
 
+/** entity scope 不能读取命中作用域事实；用于避免写出无效的规则集。 */
+function containsHitFact(value: unknown): boolean {
+  if (Array.isArray(value)) return value.some(containsHitFact)
+  if (!isObject(value)) return false
+  if (typeof value["fact"] === "string" && value["fact"].startsWith("hit."))
+    return true
+  const entity = value["entity"]
+  if (
+    isObject(entity) &&
+    (entity["role"] === "hitActor" || entity["role"] === "hitTarget")
+  )
+    return true
+  return Object.values(value).some(containsHitFact)
+}
+
 function validateFactValue(
   fact: string,
   value: string,
@@ -687,8 +702,15 @@ function validateOperation(
       `${path}/operator`,
       collector,
     )
-    if (Object.hasOwn(operation, "itemIds"))
-      nonEmptyArrayAt(operation["itemIds"], `${path}/itemIds`, collector)
+    if (Object.hasOwn(operation, "itemIds")) {
+      const itemIds = nonEmptyArrayAt(
+        operation["itemIds"],
+        `${path}/itemIds`,
+        collector,
+      )
+      for (const [index, itemId] of (itemIds ?? []).entries())
+        stringAt(itemId, `${path}/itemIds[${index}]`, collector)
+    }
     validateExpression(
       operation["value"],
       `${path}/value`,
@@ -1314,6 +1336,20 @@ function validateRecord(
   if (Object.hasOwn(record, "operation"))
     validateOperation(record["operation"], `${path}/operation`, collector)
   else collector.add(`${path}/operation`, "required for a rule record")
+  const scope = record["scope"]
+  const operation = record["operation"]
+  if (
+    scope === "entity" &&
+    isObject(operation) &&
+    operation["kind"] === "hit-adjustment"
+  )
+    collector.add(`${path}/operation/kind`, "hit-adjustment requires hit scope")
+  if (
+    scope === "entity" &&
+    Object.hasOwn(record, "when") &&
+    containsHitFact(record["when"])
+  )
+    collector.add(`${path}/when`, "entity scope cannot read hit facts")
   if (Object.hasOwn(record, "parameters")) {
     const parameters = objectAt(
       record["parameters"],

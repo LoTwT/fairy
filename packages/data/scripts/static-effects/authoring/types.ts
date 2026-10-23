@@ -172,17 +172,30 @@ interface AuthoringRecordBase {
   readonly option: AuthoringOption
 }
 
-interface AuthoringRuleFields {
+interface AuthoringRuleFieldsBase {
   readonly section: string
   readonly references: NonEmpty<SourceReference>
   readonly config: AuthoringCondition<"configuration">
   readonly activation: AuthoringActivation
   readonly beneficiary: TargetSelector
-  readonly scope: "entity" | "hit"
   readonly when: AuthoringCondition<"contribution">
-  readonly operation: AuthoringOperation
   readonly parameters: Readonly<Record<string, AnyParameter>>
 }
+
+type AuthoringRuleFields = AuthoringRuleFieldsBase &
+  (
+    | {
+        readonly scope: "entity"
+        readonly operation: Exclude<
+          AuthoringOperation,
+          { readonly kind: "hit-adjustment" }
+        >
+      }
+    | {
+        readonly scope: "hit"
+        readonly operation: AuthoringOperation
+      }
+  )
 
 export type EffectAuthoringRuleRecord = AuthoringRecordBase &
   AuthoringRuleFields & {

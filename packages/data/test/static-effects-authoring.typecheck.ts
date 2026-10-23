@@ -5,6 +5,12 @@ import type {
 import { PILOT_AUTHORING_RECORDS } from "../scripts/static-effects/authoring/pilot-records.ts"
 
 const base = PILOT_AUTHORING_RECORDS[0] as EffectAuthoringRuleRecord
+const nekomata = PILOT_AUTHORING_RECORDS.find(
+  (record) => record.key === "nekomata-claw-mark",
+) as EffectAuthoringRuleRecord
+
+// @ts-expect-error entity scope cannot use hit-adjustment
+export const badScope: EffectAuthoringRecord = { ...nekomata, scope: "entity" }
 
 export const badOperation: EffectAuthoringRecord = {
   ...base,

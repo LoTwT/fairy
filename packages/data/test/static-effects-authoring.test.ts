@@ -1,16 +1,24 @@
 import { createHash } from "node:crypto"
-import { existsSync, mkdtempSync, readFileSync, rmSync } from "node:fs"
+import {
+  existsSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  symlinkSync,
+} from "node:fs"
 import { tmpdir } from "node:os"
-import { join } from "node:path"
+import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 import { afterAll, describe, expect, it } from "vitest"
 import { parseEffectRuleSet } from "../../core/src/effects/index.ts"
 import { compareStaticArtifacts } from "../scripts/static-effects/authoring/canonical.ts"
 import {
+  compileAuthoringArtifacts,
   compileAuthoringPilot,
   readStaticArtifacts,
   unsupportedRecordCount,
 } from "../scripts/static-effects/authoring/compile.ts"
+import { fixedSourceIds } from "../scripts/static-effects/authoring/ids.ts"
 import { PILOT_AUTHORING_RECORDS } from "../scripts/static-effects/authoring/pilot-records.ts"
 import type {
   EffectAuthoringRecord,
@@ -122,6 +130,91 @@ describe("authoring pilot records", () => {
   })
 })
 
+describe("authoring ID construction", () => {
+  it("builds mindscape, merged refinement, and fixed IDs", () => {
+    expect(
+      fixedSourceIds({
+        category: "agents",
+        entitySlug: "anby",
+        fairyEntityId: "1011",
+        blockId: "blk",
+        sourceEffectId: "eff",
+        rankKind: "mindscape",
+        rank: 2,
+      }),
+    ).toEqual({
+      optionId: "agents:anby:mindscape:2:blk:eff",
+      effectId: "agent:1011:zzz-hp:eff:blk:mindscape:2",
+    })
+
+    expect(
+      fixedSourceIds({
+        category: "w-engines",
+        entitySlug: "Qingming_Birdcage",
+        fairyEntityId: "14137",
+        blockId: "blk-legacy",
+        sourceEffectId: "legacy-self-critRate",
+        rankKind: "refinement",
+      }),
+    ).toEqual({
+      optionId:
+        "w-engines:Qingming_Birdcage:refinement:blk-legacy:legacy-self-critRate",
+      effectId:
+        "w-engine:14137:zzz-hp:legacy-self-critRate:blk-legacy:refinement",
+    })
+
+    expect(
+      fixedSourceIds({
+        category: "w-engines",
+        entitySlug: "Sol_Exuvia",
+        fairyEntityId: "14155",
+        blockId: "blk-legacy",
+        sourceEffectId: "legacy-self-critRate",
+        rankKind: "fixed",
+        rank: 0,
+      }),
+    ).toEqual({
+      optionId: "w-engines:Sol_Exuvia:fixed:0:blk-legacy:legacy-self-critRate",
+      effectId: "w-engine:14155:zzz-hp:legacy-self-critRate:blk-legacy:fixed:0",
+    })
+  })
+
+  it("rejects unsupported per-rank refinement and fixed IDs without a rank", () => {
+    expect(() =>
+      fixedSourceIds({
+        category: "w-engines",
+        entitySlug: "Qingming_Birdcage",
+        fairyEntityId: "14137",
+        blockId: "blk-legacy",
+        sourceEffectId: "legacy-self-critRate",
+        rankKind: "refinement",
+        rank: 1,
+      }),
+    ).toThrow(/Per-rank refinement/u)
+    expect(() =>
+      fixedSourceIds({
+        category: "w-engines",
+        entitySlug: "Sol_Exuvia",
+        fairyEntityId: "14155",
+        blockId: "blk-legacy",
+        sourceEffectId: "legacy-self-critRate",
+        rankKind: "fixed",
+      }),
+    ).toThrow(/requires an integer rank/u)
+    expect(() =>
+      fixedSourceIds({
+        category: "w-engines",
+        entitySlug: "Sol_Exuvia",
+        fairyEntityId: "14155",
+        blockId: "blk-legacy",
+        sourceEffectId: "legacy-self-critRate",
+        rankKind: "fixed",
+        rank: 1.5,
+      }),
+    ).toThrow(/requires an integer rank/u)
+  })
+})
+
 describe("authoring compiler and semantic harness", () => {
   it("compiles selected entries to a temp directory and matches all three artifacts", () => {
     const outputDirectory = temporaryDirectory("fairy-authoring-pass-")
@@ -171,6 +264,140 @@ describe("authoring compiler and semantic harness", () => {
       selectedCoverage.filter((record) => record.status === "unsupported"),
     ).toHaveLength(3)
   })
+
+  it("rejects a record that omits one of its baseline coverage positions", () => {
+    const records = cloneRecords()
+    const index = records.findIndex(
+      (record) => record.key === "qingming-crit-rate",
+    )
+    const record = records[index]
+    if (!record) throw new Error("Missing Qingming pilot record")
+    records[index] = {
+      ...record,
+      coverage: {
+        ...record.coverage,
+        positions: record.coverage.positions.slice(0, 4),
+      },
+    }
+    expect(() =>
+      compileAuthoringPilot({
+        records,
+        baselineDirectory: BASELINE_DIRECTORY,
+        outputDirectory: temporaryDirectory(
+          "fairy-authoring-missing-position-",
+        ),
+      }),
+    ).toThrow(/missing coverage position/u)
+  })
+
+  it("rejects baseline entries with fields the authoring layer cannot express", () => {
+    const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
+    const catalog = structuredClone(baseline.catalog) as unknown as {
+      options: Array<{
+        optionId: string
+        variants: Array<Record<string, unknown>>
+      }>
+    }
+    const anby = catalog.options.find(
+      (option) =>
+        option.optionId ===
+        "agents:anby:mindscape:2:blk-ms47xm3l-3pumvj:eff-ms47xm3l-nf7ga7",
+    )
+    const [variant] = anby?.variants ?? []
+    if (!anby || !variant) throw new Error("Missing Anby baseline option")
+    anby.variants[0] = { ...variant, layerCountInputName: "test:layers" }
+    expect(() =>
+      compileAuthoringArtifacts(PILOT_AUTHORING_RECORDS, {
+        ...baseline,
+        catalog: catalog as unknown as typeof baseline.catalog,
+      }),
+    ).toThrow(/layerCountInputName/u)
+  })
+
+  it("rejects entity scope with hit operations or hit facts", () => {
+    const records = cloneRecords()
+    const nekomata = records.find(
+      (record) => record.key === "nekomata-claw-mark",
+    )
+    if (!nekomata) throw new Error("Missing Nekomata pilot record")
+    const rule = ruleRecord(nekomata)
+
+    const badOperation = validateAuthoringRecords([
+      { ...rule, scope: "entity" },
+    ])
+    expect(badOperation.ok).toBe(false)
+    if (!badOperation.ok)
+      expect(
+        badOperation.issues.some((issue) =>
+          issue.path.endsWith("/operation/kind"),
+        ),
+      ).toBe(true)
+
+    const badFact = validateAuthoringRecords([
+      {
+        ...rule,
+        scope: "entity",
+        operation: {
+          kind: "factor-contribution",
+          channel: "damage-bonus",
+          value: { kind: "parameter", unit: "ratio", name: "amount" },
+        },
+      },
+    ])
+    expect(badFact.ok).toBe(false)
+    if (!badFact.ok)
+      expect(badFact.issues.some((issue) => issue.path.endsWith("/when"))).toBe(
+        true,
+      )
+  })
+
+  it("does not report equivalence when the difference cap is zero", () => {
+    const comparison = compareStaticArtifacts(
+      { definitions: { value: 1 }, catalog: {}, coverage: {} },
+      { definitions: { value: 2 }, catalog: {}, coverage: {} },
+      { maximumDifferences: 0 },
+    )
+    expect(comparison.equivalent).toBe(false)
+    expect(comparison.differences).toHaveLength(1)
+  })
+
+  it.skipIf(process.platform === "win32")(
+    "refuses output paths that resolve through a symlink into definitions",
+    () => {
+      const linkParent = temporaryDirectory("fairy-authoring-symlink-")
+      const link = join(linkParent, "definitions-link")
+      symlinkSync(BASELINE_DIRECTORY, link, "dir")
+      const forbidden = join(link, "authoring-pilot-should-not-write")
+      expect(() =>
+        compileAuthoringPilot({
+          records: PILOT_AUTHORING_RECORDS,
+          baselineDirectory: BASELINE_DIRECTORY,
+          outputDirectory: forbidden,
+        }),
+      ).toThrow(/must not write into a managed/u)
+      expect(existsSync(forbidden)).toBe(false)
+    },
+  )
+
+  it.skipIf(process.platform !== "darwin")(
+    "refuses case-variant paths that resolve to definitions on APFS",
+    () => {
+      const forbidden = join(
+        dirname(dirname(BASELINE_DIRECTORY)),
+        "Definitions",
+        "effects",
+        "authoring-pilot-should-not-write",
+      )
+      expect(() =>
+        compileAuthoringPilot({
+          records: PILOT_AUTHORING_RECORDS,
+          baselineDirectory: BASELINE_DIRECTORY,
+          outputDirectory: forbidden,
+        }),
+      ).toThrow(/must not write into a managed/u)
+      expect(existsSync(forbidden)).toBe(false)
+    },
+  )
 
   it("reports a semantic difference when one authoring value is corrupted", () => {
     const records = cloneRecords()

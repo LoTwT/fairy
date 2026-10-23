@@ -1,5 +1,11 @@
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs"
-import { join, resolve, sep } from "node:path"
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  realpathSync,
+  writeFileSync,
+} from "node:fs"
+import { basename, dirname, join, resolve, sep } from "node:path"
 import { fileURLToPath } from "node:url"
 import type {
   ContributionRule,
@@ -109,16 +115,56 @@ export function readStaticArtifacts(directory: string): StaticArtifacts {
     throw new Error(`${ARTIFACT_FILES[0]}: "effects" must be an array`)
   if (!Array.isArray(catalog["options"]))
     throw new Error(`${ARTIFACT_FILES[1]}: "options" must be an array`)
+  for (const field of ["entities", "skillTargets", "differences"] as const)
+    if (!Array.isArray(catalog[field]))
+      throw new Error(`${ARTIFACT_FILES[1]}: "${field}" must be an array`)
   if (!Array.isArray(coverage["records"]))
     throw new Error(`${ARTIFACT_FILES[2]}: "records" must be an array`)
   if (!Array.isArray(coverage["supplementalRecords"]))
     throw new Error(
       `${ARTIFACT_FILES[2]}: "supplementalRecords" must be an array`,
     )
+  assertUnique(definitions["effects"], "effectId", "effects")
+  assertUnique(catalog["entities"], "catalogEntityId", "catalog entities")
+  assertUnique(catalog["options"], "optionId", "catalog options")
+  assertUnique(catalog["skillTargets"], "targetId", "catalog skill targets")
+  assertUnique(catalog["differences"], "differenceId", "catalog differences")
+  assertUnique(
+    coverage["records"],
+    (entry) =>
+      `${String(entry["pointer"])}|${String(entry["catalogEntityId"])}`,
+    "coverage records",
+  )
+  assertUnique(
+    coverage["supplementalRecords"],
+    "supplementId",
+    "coverage supplemental records",
+  )
   return {
     definitions: definitions as unknown as RuleSet,
     catalog: catalog as unknown as StaticEffectCatalog,
     coverage: coverage as unknown as StaticCoverageDocument,
+  }
+}
+
+function assertUnique(
+  value: unknown,
+  fieldOrKey: string | ((entry: Record<string, unknown>) => string),
+  label: string,
+): void {
+  if (!Array.isArray(value)) throw new Error(`${label}: expected an array`)
+  const key =
+    typeof fieldOrKey === "string"
+      ? (entry: Record<string, unknown>) => String(entry[fieldOrKey])
+      : fieldOrKey
+  const seen = new Set<string>()
+  for (const entry of value) {
+    if (entry === null || typeof entry !== "object" || Array.isArray(entry))
+      throw new Error(`${label}: expected objects`)
+    const identity = key(entry as Record<string, unknown>)
+    if (seen.has(identity))
+      throw new Error(`${label}: duplicate identity ${identity}`)
+    seen.add(identity)
   }
 }
 
@@ -149,17 +195,53 @@ function requireObject(
     throw new Error(`${label}: expected a JSON object`)
 }
 
+function isCaseInsensitivePlatform(): boolean {
+  return process.platform === "darwin" || process.platform === "win32"
+}
+
+/**
+ * 解析最近的已存在祖先，再用 realpath 还原大小写与符号链接；
+ * 不存在的尾段按调用方给出的路径保留。用于阻止通过大小写或
+ * symlink 绕过受管目录保护。
+ */
+function canonicalPath(path: string): string {
+  let current = resolve(path)
+  const suffix: string[] = []
+  while (!existsSync(current)) {
+    const parent = dirname(current)
+    if (parent === current) break
+    suffix.unshift(basename(current))
+    current = parent
+  }
+  let real = current
+  try {
+    real = realpathSync.native(current)
+  } catch {
+    // 祖先不可读时保留 resolve 结果；后续写入仍会失败。
+  }
+  return resolve(real, ...suffix)
+}
+
+function comparisonPath(path: string): string {
+  const canonical = canonicalPath(path)
+  return isCaseInsensitivePlatform() ? canonical.toLowerCase() : canonical
+}
+
+function sameOrInside(path: string, directory: string): boolean {
+  return path === directory || path.startsWith(`${directory}${sep}`)
+}
+
 function assertSafeOutput(outputDirectory: string): void {
-  const output = resolve(outputDirectory)
+  const output = comparisonPath(outputDirectory)
   const forbidden = [
-    resolve(fileURLToPath(new URL("../../../definitions", import.meta.url))),
-    resolve(fileURLToPath(new URL("../../../integrated", import.meta.url))),
-    resolve(fileURLToPath(new URL("../../../dist", import.meta.url))),
+    fileURLToPath(new URL("../../../definitions", import.meta.url)),
+    fileURLToPath(new URL("../../../integrated", import.meta.url)),
+    fileURLToPath(new URL("../../../dist", import.meta.url)),
   ]
   for (const directory of forbidden) {
-    if (output === directory || output.startsWith(`${directory}${sep}`))
+    if (sameOrInside(output, comparisonPath(directory)))
       throw new Error(
-        `Authoring output must not write into a managed definitions/integrated/dist directory: ${output}`,
+        `Authoring output must not write into a managed definitions/integrated/dist directory: ${outputDirectory}`,
       )
   }
 }
@@ -198,6 +280,7 @@ export function compileAuthoringArtifacts(
   }
 
   const groups = groupByOption(records)
+  assertSelectedEntriesExpressible(groups, records, baseline)
   const compiledRules = new Map<string, EffectRule>()
   const compiledOptions = new Map<string, StaticCatalogOption>()
   const compiledCoverage: StaticCoverageRecord[] = []
@@ -222,6 +305,7 @@ export function compileAuthoringArtifacts(
       throw new Error(`Duplicate compiled coverage position: ${key}`)
     coverageKeys.add(key)
   }
+  assertCoverageCompleteness(groups, baseline.coverage, compiledCoverage)
 
   const definitions = replaceRules(baseline.definitions, compiledRules)
   const catalog = replaceCatalog(
@@ -257,7 +341,10 @@ export function compileAuthoringPilot(
         .join("\n")}`,
     )
   assertSafeOutput(input.outputDirectory)
-  if (resolve(input.outputDirectory) === resolve(input.baselineDirectory))
+  if (
+    comparisonPath(input.outputDirectory) ===
+    comparisonPath(input.baselineDirectory)
+  )
     throw new Error("Authoring output must differ from the baseline directory")
   const baseline = readStaticArtifacts(input.baselineDirectory)
   const compilation = compileAuthoringArtifacts(validated.records, baseline)
@@ -305,6 +392,159 @@ function groupByOption(
       { optionId, records: groupRecords },
     ]),
   )
+}
+
+const EXPRESSIBLE_OPTION_FIELDS = new Set([
+  "optionId",
+  "catalogEntityId",
+  "name",
+  "conditionDescription",
+  "target",
+  "exclusiveGroup",
+  "variants",
+])
+
+const EXPRESSIBLE_VARIANT_FIELDS = new Set([
+  "target",
+  "configuration",
+  "status",
+  "reason",
+  "explanation",
+  "references",
+  "effectIds",
+  "maximumLayers",
+  "inputs",
+  "applicability",
+  "differences",
+  "damageItemRequirements",
+  "exclusiveDamageItem",
+])
+
+const EXPRESSIBLE_RULE_FIELDS = new Set([
+  "kind",
+  "effectId",
+  "source",
+  "config",
+  "parameters",
+  "activation",
+  "scope",
+  "beneficiary",
+  "when",
+  "operation",
+])
+
+/**
+ * 只允许替换作者层能够完整表达的基线条目。否则 `as` 断言会静默
+ * 丢弃 `layerCountInputName`、`uniqueness` 等尚未建模的字段。
+ */
+function assertSelectedEntriesExpressible(
+  groups: ReadonlyMap<string, OptionGroup>,
+  records: readonly EffectAuthoringRecord[],
+  baseline: StaticArtifacts,
+): void {
+  const baselineOptions = new Map(
+    baseline.catalog.options.map((option) => [option.optionId, option]),
+  )
+  for (const [optionId, group] of groups) {
+    const option = baselineOptions.get(optionId)
+    if (!option)
+      throw new Error(
+        `Selected option ${optionId} is not present in the baseline`,
+      )
+    const mechanismKind = group.records[0]?.mechanism.kind
+    for (const field of Object.keys(option))
+      if (!EXPRESSIBLE_OPTION_FIELDS.has(field))
+        throw new Error(
+          `Authoring layer cannot express baseline option ${optionId} field ${field}`,
+        )
+    for (const variant of option.variants) {
+      for (const field of Object.keys(variant)) {
+        if (!EXPRESSIBLE_VARIANT_FIELDS.has(field))
+          throw new Error(
+            `Authoring layer cannot express baseline option ${optionId} variant field ${field}`,
+          )
+        if (
+          (field === "damageItemRequirements" ||
+            field === "exclusiveDamageItem") &&
+          mechanismKind !== "independent-settlement"
+        )
+          throw new Error(
+            `Authoring layer only models ${field} for independent-settlement options (${optionId})`,
+          )
+      }
+    }
+  }
+
+  const baselineRules = new Map(
+    baseline.definitions.effects.map((rule) => [rule.effectId, rule]),
+  )
+  for (const record of records) {
+    if (!isRuleRecord(record)) continue
+    const rule = baselineRules.get(record.ids.effectId)
+    if (!rule)
+      throw new Error(
+        `Selected rule ${record.ids.effectId} is not present in the baseline`,
+      )
+    if (rule.kind !== "contribution")
+      throw new Error(
+        `Authoring layer only compiles contribution rules (${record.ids.effectId})`,
+      )
+    for (const field of Object.keys(rule))
+      if (!EXPRESSIBLE_RULE_FIELDS.has(field))
+        throw new Error(
+          `Authoring layer cannot express baseline rule ${record.ids.effectId} field ${field}`,
+        )
+  }
+}
+
+function assertCoverageCompleteness(
+  groups: ReadonlyMap<string, OptionGroup>,
+  baseline: StaticCoverageDocument,
+  compiled: readonly StaticCoverageRecord[],
+): void {
+  const selected = new Set(groups.keys())
+  const expected = new Map<string, Set<string>>()
+  for (const record of baseline.records) {
+    if (!selected.has(record.optionId)) continue
+    addCoverageKey(
+      expected,
+      record.optionId,
+      `${record.pointer}|${record.catalogEntityId}`,
+    )
+  }
+  const actual = new Map<string, Set<string>>()
+  for (const record of compiled) {
+    if (!selected.has(record.optionId)) continue
+    addCoverageKey(
+      actual,
+      record.optionId,
+      `${record.pointer}|${record.catalogEntityId}`,
+    )
+  }
+  for (const optionId of selected) {
+    const want = expected.get(optionId) ?? new Set<string>()
+    const got = actual.get(optionId) ?? new Set<string>()
+    for (const key of want)
+      if (!got.has(key))
+        throw new Error(
+          `Selected option ${optionId} is missing coverage position ${key}`,
+        )
+    for (const key of got)
+      if (!want.has(key))
+        throw new Error(
+          `Selected option ${optionId} declares coverage position ${key} that is not in the baseline`,
+        )
+  }
+}
+
+function addCoverageKey(
+  map: Map<string, Set<string>>,
+  optionId: string,
+  key: string,
+): void {
+  const existing = map.get(optionId)
+  if (existing) existing.add(key)
+  else map.set(optionId, new Set([key]))
 }
 
 function compileOptionGroup(
