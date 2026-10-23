@@ -111,7 +111,7 @@ authoring 模式与显式 `converter-fallback` 生成的三个候选制品均与
 ## 限制与剩余项
 
 - 只迁移 19 条记录。剩余 102 条 corrected、1,166 条 converted 与 77 条 unsupported coverage 记录仍走 converter；本 PR 不声称 correction 已全部作者化。
-- 独立结算的霜灼·破选项仍由基线提供 `supplementalRecords`；本批不重建补充记录，只验证其原样保留。后续 [P2-4a](phase2-supplemental-authoring.md) 已补齐作者形状、校验与按 `supplementId` 原位替换能力，但本批与 P2-4a 都不迁移补充记录，基线 101 条仍保持原样。
+- 独立结算的霜灼·破选项仍由基线提供 `supplementalRecords`；本批不重建补充记录，只验证其原样保留。后续 [P2-4a](phase2-supplemental-authoring.md) 已补齐作者形状、校验与按 `supplementId` 原位替换能力；[P2-4b-lite](phase2-miyabi-supplement-migration.md) 已迁移该选项的 1 条真实补充记录，其余 100 条仍由 converter 生成。
 - 语义等价门槛保护的是“selected 记录编译结果与 converter baseline 一致”；未选中条目由编译器原位保留，测试另行逐条比较。
 - 没有新增 `triggered` / `continuous` / `instant` / `modification`、层数桥接、holder 等级桥接、声明受益者、全队唯一或元素增益输入。
 - 本 PR 不开始 Phase 3/4，不修改 core 运行时、公开 exports 或 `integrated`。

@@ -157,7 +157,7 @@ Semantic comparison: PASS (0 differences)
 
 ## 限制
 
-- **coverage 范围**：P2-1 只编译固定来源 `records`。补充来源 `supplementalRecords` 保持基线原样；星见雅霜灼·破等 supplement 规则已经验证 rule/option 投影，但其补充记录本身没有在本次编译中重建。P2-2 若迁移 supplement 密集的记录，必须先补 `supplementalRecords` 的编译与等价覆盖。后续 [P2-4a](phase2-supplemental-authoring.md) 已补齐作者形状、校验与按 `supplementId` 原位替换能力；该 PR 仍不迁移补充记录，基线 101 条保持原样。
+- **coverage 范围**：P2-1 只编译固定来源 `records`。补充来源 `supplementalRecords` 保持基线原样；星见雅霜灼·破等 supplement 规则已经验证 rule/option 投影，但其补充记录本身没有在本次编译中重建。P2-2 若迁移 supplement 密集的记录，必须先补 `supplementalRecords` 的编译与等价覆盖。后续 [P2-4a](phase2-supplemental-authoring.md) 已补齐作者形状、校验与按 `supplementId` 原位替换能力；[P2-4b-lite](phase2-miyabi-supplement-migration.md) 已迁移星见雅霜灼·破 1 条真实补充记录，其余 100 条仍保持基线原样。
 - **activation / rule 类型**：只支持 `supplied` contribution；不支持 `triggered`、`continuous`、`instant`、`modification`、状态定义、层数桥接、holder 等级桥接、元素增益输入、声明受益者、全队唯一等机制。选中基线条目若出现这些未建模字段，编译器会明确拒绝而不是静默丢弃。
 - **variant 状态**：试点选中选项的所有 variant 共享同一 coverage 状态；没有覆盖同一选项内 converted/corrected 混合的多 variant 情况。
 - **条件与 operation 子集**：只开放试点实际使用的 5 种条件与 4 个 factor channel；新增机制必须按同一流程补类型、校验、编译器和测试。

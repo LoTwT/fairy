@@ -1,6 +1,6 @@
 # Phase 2 P2-4a：补充记录作者层
 
-状态：P2-4a 主体已合并（#299，7d54366c）；本 follow-up 将 `optionId` / `supportedRanks` 收紧为必填。补充记录作者层已实现并通过定向等价验收：为 static effects 作者层提供 `supplementalRecords` 的强类型表达、运行时校验、按 `supplementId` 的原位替换与针对性测试；不迁移任何正式补充记录，三份正式 effects 制品、`snapshotId`、公开 exports 与 core/shared 运行时均未修改。
+状态：P2-4a 主体已合并（#299，7d54366c），`optionId` / `supportedRanks` 必填 follow-up 已合并（#300，9a53591b）。补充记录作者层已实现并通过定向等价验收：为 static effects 作者层提供 `supplementalRecords` 的强类型表达、运行时校验、按 `supplementId` 的原位替换与针对性测试。P2-4a 本身不迁移正式补充记录；后续 [P2-4b-lite](phase2-miyabi-supplement-migration.md) 已迁移 `nanoka:agents:miyabi:frostburn-break-damage` 一条，三份正式 effects 制品、`snapshotId`、公开 exports 与 core/shared 运行时仍逐字节未变。
 
 ## 范围
 
@@ -8,7 +8,7 @@
 - 作者层补充记录沿用正式 `static-coverage.json` 中非 `boundary` 记录的字段形状：`supplementId`、`source`、`kind`、`optionId`（必填）、`effectIds?`、`supportedRanks`（必填）、`computationTarget`、`status`。
 - `kind` 与 `status` 是封闭联合：`option` / `option-variant` / `entity` / `unsupported-option`，`integrated` / `out-of-scope`。
 - 编译只按 `supplementId` 原位替换基线条目，不新增、不删除、不重排；替换计数进入编译摘要。
-- 不迁移数据：`MIGRATED_AUTHORING_RECORDS` 仍为 19 条，且没有任何一条声明补充记录；`authoring:verify` 的补充替换计数为 0。
+- P2-4a 本身不迁移数据：`MIGRATED_AUTHORING_RECORDS` 保持 19 条且当时没有任何一条声明补充记录，`authoring:verify` 的补充替换计数为 0；后续 [P2-4b-lite](phase2-miyabi-supplement-migration.md) 才在 `miyabi-frostburn-main` 上迁移 1 条真实记录。
 
 ## 类型与校验
 
@@ -35,25 +35,25 @@
 
 `compileAuthoringArtifacts` 在分组编译前收集补充记录：重复 ID 与 `optionId` 归属不一致都会抛错。规则编译完成后检查补充记录的 `effectIds` 必须存在于本次编译生成的规则或基线规则中。替换后再通过既有数量门禁，补充记录数保持 101。
 
-`AuthoringCompilation.supplementalRecordIds` 暴露替换的 ID；`summarizeCompilation` 输出 `supplemental records: N` 计数，`authoring:verify` 因此显示 0。
+`AuthoringCompilation.supplementalRecordIds` 暴露替换的 ID；`summarizeCompilation` 输出 `supplemental records: N` 计数。P2-4a 当时显示 0；[P2-4b-lite](phase2-miyabi-supplement-migration.md) 迁移 1 条后为 1。
 
 ## 测试
 
-新增 [`static-effects-authoring-supplemental.test.ts`](../../../packages/data/test/static-effects-authoring-supplemental.test.ts)，12 个用例：
+新增 [`static-effects-authoring-supplemental.test.ts`](../../../packages/data/test/static-effects-authoring-supplemental.test.ts)，12 个用例（[P2-4b-lite](phase2-miyabi-supplement-migration.md) 新增真实记录用例后为 13 个）：
 
-| 用例                         | 断言                                                                               |
-| ---------------------------- | ---------------------------------------------------------------------------------- |
-| 真实 Miyabi 补充记录原位替换 | 作者常量与基线真实形状一致；替换后仍在原下标、数量 101、其余条目不变、键序沿用基线 |
-| 候选值来自作者而非基线       | 把基线条目改成哨兵值后编译，候选逐字段等于作者值；语义比较在对应字段报告差异       |
-| 未声明时不变                 | `supplementalRecordIds` 为空，`supplementalRecords` 与基线逐语义相同，摘要计数为 0 |
-| 未知 `supplementId`          | 编译抛出“不在基线中”                                                               |
-| 重复 `supplementId`          | 编译抛出重复 ID；运行时校验报告 `supplementId` 路径                                |
-| `optionId` 与所属记录不一致  | 运行时校验报告 `optionId` 路径；编译同样拒绝                                       |
-| 未知 `kind` / `status`       | 运行时校验分别报告 `kind` / `status` 路径                                          |
-| `effectId` 不存在            | 编译抛出未知 effect ID                                                             |
-| 缺字段                       | 运行时校验报告准确的 `computationTarget` 路径                                      |
-| 缺 `optionId`                | 运行时校验报告 `/supplementalRecords[0]/optionId` 与 `expected a string`           |
-| 基线含 `reason`              | 编译拒绝作者层无法表达的字段                                                       |
+| 用例                         | 断言                                                                                                         |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------ |
+| 真实 Miyabi 补充记录原位替换 | 作者常量与基线真实形状一致；替换后仍在原下标、数量 101、其余条目不变、键序沿用基线                           |
+| 候选值来自作者而非基线       | 把基线条目改成哨兵值后编译，候选逐字段等于作者值；语义比较在对应字段报告差异                                 |
+| 未声明时不变                 | 从克隆记录移除声明后编译：`supplementalRecordIds` 为空，`supplementalRecords` 与基线逐语义相同，摘要计数为 0 |
+| 未知 `supplementId`          | 编译抛出“不在基线中”                                                                                         |
+| 重复 `supplementId`          | 编译抛出重复 ID；运行时校验报告 `supplementId` 路径                                                          |
+| `optionId` 与所属记录不一致  | 运行时校验报告 `optionId` 路径；编译同样拒绝                                                                 |
+| 未知 `kind` / `status`       | 运行时校验分别报告 `kind` / `status` 路径                                                                    |
+| `effectId` 不存在            | 编译抛出未知 effect ID                                                                                       |
+| 缺字段                       | 运行时校验报告准确的 `computationTarget` 路径                                                                |
+| 缺 `optionId`                | 运行时校验报告 `/supplementalRecords[0]/optionId` 与 `expected a string`                                     |
+| 基线含 `reason`              | 编译拒绝作者层无法表达的字段                                                                                 |
 
 ## 消融实验
 
@@ -67,7 +67,7 @@
 
 ## 限制
 
-- 本 follow-up 只提供能力，不迁移数据：正式 `supplementalRecords` 仍由 converter 生成，101 条全部保持原样；作者记录没有声明任何补充记录。
+- P2-4a 只提供能力，不迁移数据：P2-4a 当时正式 `supplementalRecords` 由 converter 生成，101 条全部保持原样，作者记录没有声明任何补充记录。[P2-4b-lite](phase2-miyabi-supplement-migration.md) 已迁移其中 1 条；其余 100 条仍由 converter 生成。
 - 作者层不能表达 `reason`；含该字段的基线条目当前不能被替换。未知字段、未知 ID 与重复 ID 都会失败，不会新增或删除条目。
 - 补充记录的 `effectIds` 只校验存在性，不校验其是否属于同一选项或是否与规则状态一致；这些约束继续由正式转换器与后续迁移 PR 负责。
 - 作者层 `optionId` 必填，并且必须等于所属记录的 `ids.optionId`；`supportedRanks` 同样必填。
@@ -86,8 +86,10 @@
 | `pnpm --filter @randomplay/core check:source`                                                     | 通过；98 个测试文件通过、3 个跳过；5,684 个测试通过、24 个跳过。                                                                  |
 | `pnpm --filter @randomplay/data verify:pack`                                                      | 通过；2 个打包测试通过。                                                                                                          |
 
+上表为 P2-4a 当时的结果；P2-4b-lite 迁移 1 条后的最新计数与命令结果见[迁移计划](phase2-miyabi-supplement-migration.md#验证结果)。
+
 数据管理：worktree 没有 `packages/data/.integrated.fairy-state`，属于静态工作区；本 follow-up 不涉及快照、来源版本或整合规则修改，正式制品不变，因此不写管理记录。主工作区 `/Users/caoyujie/codes/fairy` 保持 `phase: idle`，`state.json.current.indexSha256` 与实际 `integrated/index.json` 一致（`d68ad1d8…`），`verify:nanoka:current integrated` 返回 `verified: true`；未改写管理记录。
 
 ## 后续
 
-P2-4b 若迁移补充记录，可在 `MIGRATED_AUTHORING_RECORDS` 的对应记录上声明 `supplementalRecords`，用同一 `authoring:verify` 门禁检查语义与字节；届时需要同步更新本文件与 P2-3 的剩余限制。
+P2-4b-lite 已按本条路径迁移 `nanoka:agents:miyabi:frostburn-break-damage`，见[迁移计划](phase2-miyabi-supplement-migration.md)；扩大补充记录覆盖、表达 `reason` / `boundary` 与迁移剩余 67 条 integrated 记录仍留待后续批次。

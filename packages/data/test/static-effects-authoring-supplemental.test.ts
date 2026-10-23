@@ -46,6 +46,14 @@ function cloneRecords(): EffectAuthoringRecord[] {
   return structuredClone(MIGRATED_AUTHORING_RECORDS) as EffectAuthoringRecord[]
 }
 
+function cloneRecordsWithoutSupplements(): EffectAuthoringRecord[] {
+  return cloneRecords().map((record) => {
+    const { supplementalRecords: _supplementalRecords, ...withoutSupplements } =
+      record
+    return withoutSupplements
+  })
+}
+
 function attachSupplements(
   records: EffectAuthoringRecord[],
   recordKey: string,
@@ -67,6 +75,28 @@ function supplementalIndex(coverage: StaticCoverageDocument): number {
 }
 
 describe("authoring supplemental records", () => {
+  it("declares exactly one real supplemental record matching the baseline", () => {
+    expect(MIGRATED_AUTHORING_RECORDS).toHaveLength(19)
+    const declared = MIGRATED_AUTHORING_RECORDS.flatMap((record) =>
+      (record.supplementalRecords ?? []).map((supplement) => ({
+        recordKey: record.key,
+        supplement,
+      })),
+    )
+    expect(declared).toHaveLength(1)
+    expect(declared[0]?.recordKey).toBe("miyabi-frostburn-main")
+
+    const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
+    const baselineRecord = baseline.coverage.supplementalRecords.find(
+      (record) => record.supplementId === MIYABI_SUPPLEMENT_ID,
+    )
+    expect(baselineRecord).toBeDefined()
+    expect(declared[0]?.supplement).toEqual(baselineRecord)
+    expect(Object.keys(declared[0]?.supplement ?? {})).toEqual(
+      Object.keys(baselineRecord ?? {}),
+    )
+  })
+
   it("replaces the real Miyabi supplemental record in place", () => {
     const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
     const index = supplementalIndex(baseline.coverage)
@@ -153,7 +183,7 @@ describe("authoring supplemental records", () => {
   it("leaves supplemental records untouched when none are declared", () => {
     const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
     const compilation = compileAuthoringRecords(
-      MIGRATED_AUTHORING_RECORDS,
+      cloneRecordsWithoutSupplements(),
       baseline,
     )
     expect(compilation.supplementalRecordIds).toEqual([])
