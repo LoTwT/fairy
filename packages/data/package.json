@@ -87,7 +87,8 @@
     "generate:static-effects": "pnpm --filter @randomplay/core build && node scripts/generate-static-effects.ts",
     "generate:panel-attributes": "node --disable-warning=ExperimentalWarning scripts/generate-panel-attributes.ts",
     "generate:agent-actions": "node --disable-warning=ExperimentalWarning scripts/generate-agent-actions.ts",
-    "audit:data-identity": "node scripts/audit-data-identity.ts"
+    "audit:data-identity": "node scripts/audit-data-identity.ts",
+    "explain": "node --disable-warning=ExperimentalWarning scripts/explain-data.ts"
   },
   "devDependencies": {
     "@randomplay/shared": "workspace:*",
