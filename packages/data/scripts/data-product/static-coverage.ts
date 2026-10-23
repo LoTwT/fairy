@@ -751,6 +751,11 @@ export function queryStaticCoverage(
   const limitations: string[] = []
   let differenceLink: DifferenceLink | undefined
 
+  if (filter.pointer !== undefined)
+    limitations.push(
+      "supplementalRecords 不携带结构化 pointer；pointer 过滤只应用于 records。",
+    )
+
   if (filter.differenceId !== undefined) {
     differenceLink = buildDifferenceLink(input.catalog, filter.differenceId)
     if (differenceLink === undefined) {
@@ -765,11 +770,6 @@ export function queryStaticCoverage(
       return { matches: [], limitations }
     }
   }
-
-  if (filter.pointer !== undefined)
-    limitations.push(
-      "supplementalRecords 不携带结构化 pointer；pointer 过滤只应用于 records。",
-    )
 
   const optionEntities = new Map(
     input.catalog.options.map((option) => [

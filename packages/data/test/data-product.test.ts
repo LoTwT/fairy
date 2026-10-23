@@ -138,12 +138,12 @@ function fixtureFiles(): Record<string, unknown> {
         corrected: 0,
         unsupported: 1,
         supplements: {
-          records: 1,
+          records: 2,
           rules: 1,
           options: 1,
           entities: 0,
           integrated: 1,
-          outOfScope: 0,
+          outOfScope: 1,
         },
       },
       records: [
@@ -197,6 +197,16 @@ function fixtureFiles(): Record<string, unknown> {
           optionId: "test:option",
           effectIds: ["test:effect"],
           status: "integrated",
+          supportedRanks: "1",
+          computationTarget: "test target",
+        },
+        {
+          supplementId: "supplement:no-effect-ids",
+          source: "nanoka:test",
+          kind: "unsupported-option",
+          optionId: "test:option",
+          status: "out-of-scope",
+          reason: "test-out-of-scope",
           supportedRanks: "1",
           computationTarget: "test target",
         },
@@ -444,6 +454,14 @@ describe("static coverage query", () => {
         (match) => match.group === "supplementalRecords",
       ),
     ).toBe(true)
+
+    const outOfScope = matchesFor({ status: "out-of-scope" })
+    expect(outOfScope.matches).toHaveLength(33)
+    for (const match of outOfScope.matches) {
+      if (match.group !== "supplementalRecords")
+        throw new Error("expected supplemental record")
+      expect(match.effectIds).toBeUndefined()
+    }
   })
 
   it("filters by differenceId through structured variant references", () => {
@@ -499,6 +517,17 @@ describe("static coverage query", () => {
     expect(result.limitations[0]).not.toContain("未登记")
   })
 
+  it("keeps every applicable limitation when filters combine", () => {
+    const result = matchesFor({
+      differenceId: "promotion-stats-equipper-defense",
+      pointer: "/not/registered",
+    })
+    expect(result.matches).toEqual([])
+    expect(result.limitations).toHaveLength(2)
+    expect(result.limitations[0]).toContain("pointer")
+    expect(result.limitations[1]).toContain("结构化引用")
+  })
+
   it("does not modify the loaded catalog or coverage", () => {
     const coverageBefore = structuredClone(product.coverage)
     const catalogBefore = structuredClone(product.catalog)
@@ -531,6 +560,25 @@ describe("static coverage query", () => {
         pointer: "/test/0",
       }),
     )
+  })
+
+  it("matches a supplemental record without effectIds through its option", () => {
+    const root = writeFixture(fixtureFiles())
+    const synthetic = loadStaticEffectsProduct(root)
+    const result = queryStaticCoverage(synthetic, { differenceId: "diff-a" })
+    const supplement = result.matches.find(
+      (match) =>
+        match.group === "supplementalRecords" &&
+        match.supplementId === "supplement:no-effect-ids",
+    )
+    expect(supplement).toMatchObject({
+      group: "supplementalRecords",
+      optionId: "test:option",
+      status: "out-of-scope",
+    })
+    if (supplement?.group !== "supplementalRecords")
+      throw new Error("expected supplemental record")
+    expect(supplement.effectIds).toBeUndefined()
   })
 
   it("keeps the synthetic pointer and text-only semantics", () => {

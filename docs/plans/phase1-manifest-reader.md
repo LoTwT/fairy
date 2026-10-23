@@ -70,9 +70,9 @@
 | 命令                                                                                      | 实际结果                                                                                                                               |
 | ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | `pnpm check:quality`                                                                      | 通过；oxlint 0 errors（仓库既有 127 warnings，新增文件单独检查 0 warnings），格式与 spec 类型检查通过。                                |
-| `pnpm --filter @randomplay/data check:source`                                             | 通过；102 个测试文件、4,604 个测试通过。                                                                                               |
+| `pnpm --filter @randomplay/data check:source`                                             | 通过；102 个测试文件、4,606 个测试通过。                                                                                               |
 | `pnpm --filter @randomplay/core check:source`                                             | 通过；98 个测试文件通过、3 个跳过；5,684 个测试通过、24 个跳过。未修改 core，作为回归验证执行。                                        |
-| `pnpm --filter @randomplay/data exec vitest run test/data-product.test.ts --project unit` | 18 个新增测试全部通过。                                                                                                                |
+| `pnpm --filter @randomplay/data exec vitest run test/data-product.test.ts --project unit` | 20 个新增测试全部通过。                                                                                                                |
 | `git diff --stat` / `git status --short`                                                  | 仅新增 `scripts/data-product/`、`test/data-product.test.ts` 与本实施记录，并更新文档索引；`integrated`、`definitions`、`dist` 无变化。 |
 
-新增测试覆盖真实 manifest 的产品、版本与关键计数，四类查询过滤，未知过滤返回空，文本关联差异的 limitation，输入不变性，以及真实数据未覆盖的 `effectIds` 关联分支（小型合成 fixture）。本 PR 不涉及数据快照、来源版本或整合规则修改，因此没有需要同步的本机数据管理状态；静态 worktree 不创建管理记录。
+新增测试覆盖真实 manifest 的产品、版本与关键计数，四类查询过滤，未知过滤返回空，文本关联差异的 limitation，输入不变性，以及真实数据未覆盖的 `effectIds` 关联与补充记录缺少 `effectIds` 分支（小型合成 fixture）。本 PR 不涉及数据快照、来源版本或整合规则修改，因此没有需要同步的本机数据管理状态；静态 worktree 不创建管理记录。
