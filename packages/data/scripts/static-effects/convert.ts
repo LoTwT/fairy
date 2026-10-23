@@ -515,7 +515,8 @@ const developerRevisionReference = (
 const levelValue = (base: number, growth: number, level: number): number =>
   Number((base + growth * level).toFixed(12))
 export { levelValue }
-const idPart = (value: string) => encodeURIComponent(value)
+/** 稳定 ID 的百分号编码；作者层编译器复用这一唯一实现。 */
+export const idPart = (value: string) => encodeURIComponent(value)
 export interface SourceRecord {
   category: "agents" | "w-engines" | "drive-discs"
   /** Fairy 稳定 slug：实体身份、语义登记与 optionId 的实体段。 */

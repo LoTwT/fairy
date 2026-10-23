@@ -30,6 +30,7 @@
 - [Phase 1 P1-2 `data explain` 只读 CLI](plans/phase1-explain-cli.md)：effectId/optionId/actionId/pointer 四类输入追溯、稳定 JSON、未知输入退出码、复用 P1-1 的最小扩展与消融实验记录。
 - [Phase 1 P1-3 生成期与构建期校验边界](plans/phase1-validation-boundary.md)：静态规则/目录与属性/技能 manifest 的结构校验、候选校验与安装顺序，以及消融与验证记录。
 - [Phase 1 P1-4 制品依赖图检查](plans/phase1-artifact-dependencies.md)：manifest、integrated 输入、definitions 制品、静态来源与注册表的只读依赖图、违规分类与验证结果。
+- [Phase 2 P2-1 作者层试点](plans/phase2-authoring-pilot.md)：12 条代表记录、封闭作者类型、只替换选中条目的三制品编译器、语义等价 harness、负例、消融实验与 P2-2 前置条件。
 - [静态计算端到端对照验收](plans/static-e2e-acceptance.md)：九个完整配装场景、固定上游独立参考、差异说明和追加案例格式。
 - [上游测试用例迁移复核](plans/upstream-test-backport.md)：2026-10-20 从 ZZZ-HP 与 ZZZ Calculator 迁移的回归用例、上游可复现性限制及未裁定的跨实现差异。
 - [ZZZ Calculator 对照验收](plans/zzz-calculator-comparison.md)：固定双方版本的公式、数据与上游测试对照，包含迁移到 Fairy 的离线样本、已确认差异及后续 PR 拆分。
