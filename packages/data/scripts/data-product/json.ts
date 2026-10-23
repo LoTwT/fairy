@@ -71,12 +71,37 @@ export function expectNumber(value: unknown, label: string): number {
   return value
 }
 
+export function expectBoolean(value: unknown, label: string): boolean {
+  if (typeof value !== "boolean")
+    throw new Error(`${label}: expected a boolean`)
+  return value
+}
+
+export function nullableString(
+  record: Readonly<Record<string, unknown>>,
+  key: string,
+  label: string,
+): string | null {
+  const value = expectField(record, key, label)
+  if (value === null) return null
+  return expectString(value, `${label}.${key}`)
+}
+
 export function expectStringArray(
   value: unknown,
   label: string,
 ): readonly string[] {
   return expectArray(value, label).map((entry, index) =>
     expectString(entry, `${label}[${index}]`),
+  )
+}
+
+export function expectIntegerArray(
+  value: unknown,
+  label: string,
+): readonly number[] {
+  return expectArray(value, label).map((entry, index) =>
+    expectInteger(entry, `${label}[${index}]`),
   )
 }
 

@@ -16,11 +16,13 @@ import {
   collectUnstructuredDifferenceIds,
   parseStaticCatalog,
   parseStaticCoverage,
+  parseStaticSourceReferences,
   type StaticCatalog,
   type StaticCoverage,
   type StaticCoverageSummary,
   type StaticSource,
   type StaticSourceFile,
+  type StaticSourceReference,
 } from "./static-coverage.ts"
 
 export type DataProductId =
@@ -159,13 +161,69 @@ export interface DataProductManifests {
   readonly staticEffects: StaticEffectsManifest
 }
 
+export interface StaticRuleIdentity {
+  readonly kind: string
+  readonly entityId: string
+}
+
+export interface StaticRuleSource {
+  readonly identity: StaticRuleIdentity
+  readonly section: string
+  readonly references: readonly StaticSourceReference[]
+}
+
+export interface StaticContributionRule {
+  readonly kind: "contribution"
+  readonly effectId: string
+  readonly source: StaticRuleSource
+  readonly operationKind: string
+  readonly scope: string
+  readonly activationKind: string
+  readonly beneficiaryKind: string
+  readonly parameterNames: readonly string[]
+}
+
+export type StaticModificationTarget =
+  | {
+      readonly kind: "effect"
+      readonly effectId: string
+    }
+  | {
+      readonly kind: "state"
+      readonly stateId: string
+    }
+
+export interface StaticInstantRule {
+  readonly kind: "instant"
+  readonly effectId: string
+  readonly source: StaticRuleSource
+  readonly triggerEventKinds: readonly string[]
+  readonly beneficiaryKind: string
+  readonly operationKind: string
+}
+
+export interface StaticModificationRule {
+  readonly kind: "modification"
+  readonly effectId: string
+  readonly source: StaticRuleSource
+  readonly phase: string
+  readonly target: StaticModificationTarget
+  readonly modifications: readonly Readonly<Record<string, unknown>>[]
+}
+
+export type StaticRule =
+  | StaticContributionRule
+  | StaticInstantRule
+  | StaticModificationRule
+
 export interface StaticEffectsProduct {
   readonly manifest: StaticEffectsManifest
+  readonly rules: readonly StaticRule[]
   readonly catalog: StaticCatalog
   readonly coverage: StaticCoverage
 }
 
-const defaultDefinitionsDirectory = fileURLToPath(
+export const defaultDefinitionsDirectory = fileURLToPath(
   new URL("../../definitions/", import.meta.url),
 )
 
@@ -591,6 +649,195 @@ function expectMatchingStaticSource(
   return coverageSource
 }
 
+function parseStaticRuleSource(
+  value: unknown,
+  label: string,
+): StaticRuleSource {
+  const source = expectRecord(value, label)
+  assertKnownKeys(source, ["identity", "references", "section"], label)
+  const identity = expectRecord(
+    expectField(source, "identity", label),
+    `${label}.identity`,
+  )
+  assertKnownKeys(identity, ["entityId", "kind"], `${label}.identity`)
+  return {
+    identity: {
+      kind: expectString(
+        expectField(identity, "kind", `${label}.identity`),
+        `${label}.identity.kind`,
+      ),
+      entityId: expectString(
+        expectField(identity, "entityId", `${label}.identity`),
+        `${label}.identity.entityId`,
+      ),
+    },
+    section: expectString(
+      expectField(source, "section", label),
+      `${label}.section`,
+    ),
+    references: parseStaticSourceReferences(
+      expectField(source, "references", label),
+      `${label}.references`,
+    ),
+  }
+}
+
+function parseStaticRule(value: unknown, label: string): StaticRule {
+  const rule = expectRecord(value, label)
+  const kind = expectString(expectField(rule, "kind", label), `${label}.kind`)
+  const effectId = expectString(
+    expectField(rule, "effectId", label),
+    `${label}.effectId`,
+  )
+  const source = parseStaticRuleSource(
+    expectField(rule, "source", label),
+    `${label}.source`,
+  )
+
+  if (kind === "contribution") {
+    const operation = expectRecord(
+      expectField(rule, "operation", label),
+      `${label}.operation`,
+    )
+    const activation = expectRecord(
+      expectField(rule, "activation", label),
+      `${label}.activation`,
+    )
+    const beneficiary = expectRecord(
+      expectField(rule, "beneficiary", label),
+      `${label}.beneficiary`,
+    )
+    const parameters = expectRecord(
+      expectField(rule, "parameters", label),
+      `${label}.parameters`,
+    )
+    return {
+      kind,
+      effectId,
+      source,
+      operationKind: expectString(
+        expectField(operation, "kind", `${label}.operation`),
+        `${label}.operation.kind`,
+      ),
+      scope: expectString(expectField(rule, "scope", label), `${label}.scope`),
+      activationKind: expectString(
+        expectField(activation, "kind", `${label}.activation`),
+        `${label}.activation.kind`,
+      ),
+      beneficiaryKind: expectString(
+        expectField(beneficiary, "kind", `${label}.beneficiary`),
+        `${label}.beneficiary.kind`,
+      ),
+      parameterNames: Object.keys(parameters).toSorted(),
+    }
+  }
+
+  if (kind === "instant") {
+    const trigger = expectRecord(
+      expectField(rule, "trigger", label),
+      `${label}.trigger`,
+    )
+    const beneficiary = expectRecord(
+      expectField(rule, "beneficiary", label),
+      `${label}.beneficiary`,
+    )
+    const operation = expectRecord(
+      expectField(rule, "operation", label),
+      `${label}.operation`,
+    )
+    return {
+      kind,
+      effectId,
+      source,
+      triggerEventKinds: expectStringArray(
+        expectField(trigger, "eventKinds", `${label}.trigger`),
+        `${label}.trigger.eventKinds`,
+      ),
+      beneficiaryKind: expectString(
+        expectField(beneficiary, "kind", `${label}.beneficiary`),
+        `${label}.beneficiary.kind`,
+      ),
+      operationKind: expectString(
+        expectField(operation, "kind", `${label}.operation`),
+        `${label}.operation.kind`,
+      ),
+    }
+  }
+
+  if (kind === "modification") {
+    const target = expectRecord(
+      expectField(rule, "target", label),
+      `${label}.target`,
+    )
+    const targetKind = expectString(
+      expectField(target, "kind", `${label}.target`),
+      `${label}.target.kind`,
+    )
+    const modifications = expectArray(
+      expectField(rule, "modifications", label),
+      `${label}.modifications`,
+    ).map((entry, index) =>
+      expectRecord(entry, `${label}.modifications[${index}]`),
+    )
+    if (modifications.length === 0)
+      throw new Error(`${label}.modifications: expected a non-empty array`)
+    const common = {
+      kind,
+      effectId,
+      source,
+      phase: expectString(expectField(rule, "phase", label), `${label}.phase`),
+      modifications,
+    } as const
+    if (targetKind === "effect")
+      return {
+        ...common,
+        target: {
+          kind: "effect",
+          effectId: expectString(
+            expectField(target, "effectId", `${label}.target`),
+            `${label}.target.effectId`,
+          ),
+        },
+      }
+    if (targetKind === "state")
+      return {
+        ...common,
+        target: {
+          kind: "state",
+          stateId: expectString(
+            expectField(target, "stateId", `${label}.target`),
+            `${label}.target.stateId`,
+          ),
+        },
+      }
+    throw new Error(
+      `${label}.target.kind: expected "effect" or "state", received "${targetKind}"`,
+    )
+  }
+
+  throw new Error(
+    `${label}.kind: expected "contribution", "instant", or "modification", received "${kind}"`,
+  )
+}
+
+function parseStaticRules(
+  value: unknown,
+  label: string,
+): readonly StaticRule[] {
+  const ruleSet = expectRecord(value, label)
+  const rules = expectArray(
+    expectField(ruleSet, "effects", label),
+    `${label}.effects`,
+  ).map((entry, index) => parseStaticRule(entry, `${label}.effects[${index}]`))
+  const effectIds = new Set<string>()
+  for (const rule of rules) {
+    if (effectIds.has(rule.effectId))
+      throw new Error(`${label}.effects: duplicate effectId "${rule.effectId}"`)
+    effectIds.add(rule.effectId)
+  }
+  return rules
+}
+
 /** 读取三个静态效果制品，并构造统一 manifest 与可查询的目录/覆盖数据。 */
 export function loadStaticEffectsProduct(
   definitionsDirectory = defaultDefinitionsDirectory,
@@ -639,6 +886,7 @@ export function loadStaticEffectsProduct(
     `${staticLabel}.states`,
   )
 
+  const rules = parseStaticRules(staticFile.value, staticLabel)
   const catalog = parseStaticCatalog(catalogFile.value, catalogLabel)
   const coverage = parseStaticCoverage(coverageFile.value, coverageLabel)
   expectSharedStaticField(
@@ -751,6 +999,7 @@ export function loadStaticEffectsProduct(
         coverage: coverage.summary,
       },
     },
+    rules,
     catalog,
     coverage,
   }

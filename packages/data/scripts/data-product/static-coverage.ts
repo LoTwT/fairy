@@ -1,6 +1,7 @@
 import {
   assertKnownKeys,
   expectArray,
+  expectBoolean,
   expectField,
   expectInteger,
   expectNumber,
@@ -8,6 +9,7 @@ import {
   expectSha256,
   expectString,
   expectStringArray,
+  nullableString,
   optionalString,
 } from "./json.ts"
 
@@ -29,6 +31,24 @@ export interface StaticSource {
   readonly repository: string
   readonly commit: string
   readonly files: readonly StaticSourceFile[]
+}
+
+/** 规则、目录变体与具名差异共用的来源引用。 */
+export interface StaticSourceReference {
+  readonly sourceId: string
+  readonly version: string
+  readonly locale?: string
+  readonly resourcePath: string
+  readonly pointer: string
+}
+
+export interface StaticSkillTarget {
+  readonly targetId: string
+  readonly upstreamId: string | null
+  readonly agentEntityId: string | null
+  readonly category: string
+  readonly name: string
+  readonly countsAsFollowUp: boolean
 }
 
 export interface StaticCoverageSummary {
@@ -96,21 +116,44 @@ export interface StaticCoverage {
   readonly deferredMechanisms: readonly StaticCoverageDeferredMechanism[]
 }
 
+export interface StaticCatalogInput {
+  readonly name: string
+  readonly unit: string
+  readonly description: string
+  readonly preset?: number
+}
+
+/**
+ * explain 需要展示的变体字段。status、configuration、references 与
+ * inputs 只做形状读取，具体领域语义仍由正式类型与生成器维护。
+ */
 export interface StaticCatalogVariant {
+  readonly target?: string
+  readonly configuration?: Readonly<Record<string, unknown>>
+  readonly status?: string
+  readonly references?: readonly StaticSourceReference[]
   readonly effectIds: readonly string[]
+  readonly maximumLayers?: number
+  readonly inputs?: readonly StaticCatalogInput[]
   readonly differences: readonly string[]
+  readonly reason?: string
+  readonly explanation?: string
 }
 
 export interface StaticCatalogOption {
   readonly optionId: string
   readonly catalogEntityId: string
+  readonly name: string
+  readonly conditionDescription: string
+  readonly target: string
+  readonly exclusiveGroup?: string
   readonly variants: readonly StaticCatalogVariant[]
 }
 
 export interface StaticCatalogDifference {
   readonly differenceId: string
   readonly explanation: string
-  readonly references: readonly unknown[]
+  readonly references: readonly StaticSourceReference[]
 }
 
 export interface StaticCatalog {
@@ -122,6 +165,7 @@ export interface StaticCatalog {
   readonly mechanismCount: number
   readonly differences: readonly StaticCatalogDifference[]
   readonly options: readonly StaticCatalogOption[]
+  readonly skillTargets: readonly StaticSkillTarget[]
 }
 
 const staticCoverageKeys = [
@@ -272,6 +316,37 @@ function parseStaticSource(value: unknown, label: string): StaticSource {
       `${label}.files`,
     ),
   }
+}
+
+/** 解析规则、变体与具名差异共用的来源引用数组。 */
+export function parseStaticSourceReferences(
+  value: unknown,
+  label: string,
+): readonly StaticSourceReference[] {
+  return expectArray(value, label).map((entry, index) => {
+    const itemLabel = `${label}[${index}]`
+    const reference = expectRecord(entry, itemLabel)
+    const locale = optionalString(reference, "locale", itemLabel)
+    return {
+      sourceId: expectString(
+        expectField(reference, "sourceId", itemLabel),
+        `${itemLabel}.sourceId`,
+      ),
+      version: expectString(
+        expectField(reference, "version", itemLabel),
+        `${itemLabel}.version`,
+      ),
+      ...(locale === undefined ? {} : { locale }),
+      resourcePath: expectString(
+        expectField(reference, "resourcePath", itemLabel),
+        `${itemLabel}.resourcePath`,
+      ),
+      pointer: expectString(
+        expectField(reference, "pointer", itemLabel),
+        `${itemLabel}.pointer`,
+      ),
+    }
+  })
 }
 
 function parseCoverageSummary(
@@ -531,14 +606,72 @@ export function parseStaticCoverage(
   }
 }
 
+function parseCatalogInput(value: unknown, label: string): StaticCatalogInput {
+  const input = expectRecord(value, label)
+  const preset = Object.hasOwn(input, "preset")
+    ? expectNumber(input.preset, `${label}.preset`)
+    : undefined
+  return {
+    name: expectString(expectField(input, "name", label), `${label}.name`),
+    unit: expectString(expectField(input, "unit", label), `${label}.unit`),
+    description: expectString(
+      expectField(input, "description", label),
+      `${label}.description`,
+    ),
+    ...(preset === undefined ? {} : { preset }),
+  }
+}
+
+function parseCatalogVariant(
+  value: unknown,
+  label: string,
+): StaticCatalogVariant {
+  const variant = expectRecord(value, label)
+  const target = optionalString(variant, "target", label)
+  const configuration = Object.hasOwn(variant, "configuration")
+    ? expectRecord(variant.configuration, `${label}.configuration`)
+    : undefined
+  const status = optionalString(variant, "status", label)
+  const references = Object.hasOwn(variant, "references")
+    ? parseStaticSourceReferences(variant.references, `${label}.references`)
+    : undefined
+  const maximumLayers = Object.hasOwn(variant, "maximumLayers")
+    ? expectInteger(variant.maximumLayers, `${label}.maximumLayers`)
+    : undefined
+  const inputs = Object.hasOwn(variant, "inputs")
+    ? expectArray(variant.inputs, `${label}.inputs`).map((entry, index) =>
+        parseCatalogInput(entry, `${label}.inputs[${index}]`),
+      )
+    : undefined
+  const reason = optionalString(variant, "reason", label)
+  const explanation = optionalString(variant, "explanation", label)
+  return {
+    ...(target === undefined ? {} : { target }),
+    ...(configuration === undefined ? {} : { configuration }),
+    ...(status === undefined ? {} : { status }),
+    ...(references === undefined ? {} : { references }),
+    effectIds: expectStringArray(
+      expectField(variant, "effectIds", label),
+      `${label}.effectIds`,
+    ),
+    ...(maximumLayers === undefined ? {} : { maximumLayers }),
+    ...(inputs === undefined ? {} : { inputs }),
+    differences: expectStringArray(
+      expectField(variant, "differences", label),
+      `${label}.differences`,
+    ),
+    ...(reason === undefined ? {} : { reason }),
+    ...(explanation === undefined ? {} : { explanation }),
+  }
+}
+
 function parseCatalogOption(
   value: unknown,
   label: string,
 ): StaticCatalogOption {
   const option = expectRecord(value, label)
   assertKnownKeys(option, staticCatalogOptionKeys, label)
-  if (Object.hasOwn(option, "exclusiveGroup"))
-    expectString(option.exclusiveGroup, `${label}.exclusiveGroup`)
+  const exclusiveGroup = optionalString(option, "exclusiveGroup", label)
   return {
     optionId: expectString(
       expectField(option, "optionId", label),
@@ -548,24 +681,58 @@ function parseCatalogOption(
       expectField(option, "catalogEntityId", label),
       `${label}.catalogEntityId`,
     ),
+    name: expectString(expectField(option, "name", label), `${label}.name`),
+    conditionDescription: expectString(
+      expectField(option, "conditionDescription", label),
+      `${label}.conditionDescription`,
+    ),
+    target: expectString(
+      expectField(option, "target", label),
+      `${label}.target`,
+    ),
+    ...(exclusiveGroup === undefined ? {} : { exclusiveGroup }),
     variants: expectArray(
       expectField(option, "variants", label),
       `${label}.variants`,
-    ).map((entry, index) => {
-      const variantLabel = `${label}.variants[${index}]`
-      // 只解释 coverage 关联需要的字段；其余变体语义由正式类型与生成器维护。
-      const variant = expectRecord(entry, variantLabel)
-      return {
-        effectIds: expectStringArray(
-          expectField(variant, "effectIds", variantLabel),
-          `${variantLabel}.effectIds`,
-        ),
-        differences: expectStringArray(
-          expectField(variant, "differences", variantLabel),
-          `${variantLabel}.differences`,
-        ),
-      }
-    }),
+    ).map((entry, index) =>
+      parseCatalogVariant(entry, `${label}.variants[${index}]`),
+    ),
+  }
+}
+
+function parseStaticSkillTarget(
+  value: unknown,
+  label: string,
+): StaticSkillTarget {
+  const target = expectRecord(value, label)
+  assertKnownKeys(
+    target,
+    [
+      "agentEntityId",
+      "category",
+      "countsAsFollowUp",
+      "name",
+      "targetId",
+      "upstreamId",
+    ],
+    label,
+  )
+  return {
+    targetId: expectString(
+      expectField(target, "targetId", label),
+      `${label}.targetId`,
+    ),
+    upstreamId: nullableString(target, "upstreamId", label),
+    agentEntityId: nullableString(target, "agentEntityId", label),
+    category: expectString(
+      expectField(target, "category", label),
+      `${label}.category`,
+    ),
+    name: expectString(expectField(target, "name", label), `${label}.name`),
+    countsAsFollowUp: expectBoolean(
+      expectField(target, "countsAsFollowUp", label),
+      `${label}.countsAsFollowUp`,
+    ),
   }
 }
 
@@ -584,7 +751,7 @@ function parseCatalogDifference(
       expectField(difference, "explanation", label),
       `${label}.explanation`,
     ),
-    references: expectArray(
+    references: parseStaticSourceReferences(
       expectField(difference, "references", label),
       `${label}.references`,
     ),
@@ -602,9 +769,11 @@ export function parseStaticCatalog(
     expectField(catalog, "source", label),
     `${label}.source`,
   )
-  expectArray(
+  const skillTargets = expectArray(
     expectField(catalog, "skillTargets", label),
     `${label}.skillTargets`,
+  ).map((entry, index) =>
+    parseStaticSkillTarget(entry, `${label}.skillTargets[${index}]`),
   )
   const differences = expectArray(
     expectField(catalog, "differences", label),
@@ -674,6 +843,7 @@ export function parseStaticCatalog(
     ).length,
     differences,
     options,
+    skillTargets,
   }
 }
 
@@ -703,6 +873,8 @@ export interface StaticCoverageFilter {
   readonly pointer?: string
   readonly status?: StaticCoverageStatus
   readonly differenceId?: string
+  readonly optionId?: string
+  readonly effectId?: string
 }
 
 export type StaticCoverageMatch =
@@ -749,9 +921,10 @@ function matchesDifferenceLink(
 }
 
 /**
- * 按 catalogEntityId、pointer、status 或 differenceId 过滤正式覆盖记录。
- * differenceId 只使用变体 differences[] → optionId/effectIds 的结构化关联；
- * 说明文本不参与匹配。输入对象不会被修改。
+ * 按 catalogEntityId、pointer、status、differenceId、optionId 或 effectId
+ * 过滤正式覆盖记录。differenceId 只使用变体 differences[] →
+ * optionId/effectIds 的结构化关联；说明文本不参与匹配。条件之间按 AND
+ * 组合，输入对象不会被修改。
  */
 export function queryStaticCoverage(
   input: StaticCoverageQueryInput,
@@ -792,6 +965,13 @@ export function queryStaticCoverage(
     if (filter.status !== undefined && record.status !== filter.status) continue
     if (filter.pointer !== undefined && record.pointer !== filter.pointer)
       continue
+    if (filter.optionId !== undefined && record.optionId !== filter.optionId)
+      continue
+    if (
+      filter.effectId !== undefined &&
+      !record.effectIds.includes(filter.effectId)
+    )
+      continue
     if (
       filter.catalogEntityId !== undefined &&
       record.catalogEntityId !== filter.catalogEntityId
@@ -813,6 +993,13 @@ export function queryStaticCoverage(
     // supplementalRecords 没有 pointer；带 pointer 过滤时不参与匹配。
     if (filter.pointer !== undefined) continue
     if (filter.status !== undefined && record.status !== filter.status) continue
+    if (filter.optionId !== undefined && record.optionId !== filter.optionId)
+      continue
+    if (
+      filter.effectId !== undefined &&
+      !(record.effectIds ?? []).includes(filter.effectId)
+    )
+      continue
     const catalogEntityId = optionEntities.get(record.optionId)
     if (
       filter.catalogEntityId !== undefined &&
