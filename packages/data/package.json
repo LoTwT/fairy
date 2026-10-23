@@ -86,6 +86,7 @@
     "verify:browser": "vitest run --project packaging test/verify-browser.test.ts",
     "generate:static-effects": "pnpm --filter @randomplay/core build && node scripts/generate-static-effects.ts",
     "authoring:pilot": "node --disable-warning=ExperimentalWarning scripts/static-effects/authoring/run-pilot.ts",
+    "authoring:verify": "node --disable-warning=ExperimentalWarning scripts/static-effects/authoring/run-migration.ts",
     "generate:panel-attributes": "node --disable-warning=ExperimentalWarning scripts/generate-panel-attributes.ts",
     "generate:agent-actions": "node --disable-warning=ExperimentalWarning scripts/generate-agent-actions.ts",
     "audit:data-identity": "node scripts/audit-data-identity.ts",
