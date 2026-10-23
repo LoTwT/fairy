@@ -12,7 +12,7 @@ import {
   summarizeCompilation,
   writeStaticArtifacts,
 } from "./compile.ts"
-import { CORRECTED_AUTHORING_RECORDS } from "./records.ts"
+import { MIGRATED_AUTHORING_RECORDS } from "./records.ts"
 
 const DEFAULT_BASELINE = fileURLToPath(
   new URL("../../../definitions/effects", import.meta.url),
@@ -45,7 +45,7 @@ function sha256(path: string): string {
 }
 
 /**
- * 正式 corrected 记录的验收入口：编译到输出目录，格式化后同时比较
+ * 正式迁移记录的验收入口：编译到输出目录，格式化后同时比较
  * 三制品语义与字节。默认输出到系统临时目录；写入仍受
  * `writeStaticArtifacts` 的受管 definitions/integrated/dist 保护。
  */
@@ -66,7 +66,7 @@ export async function verifyFormalAuthoring(
   try {
     const baseline = readStaticArtifacts(baselineDirectory)
     const compilation = compileAuthoringRecords(
-      CORRECTED_AUTHORING_RECORDS,
+      MIGRATED_AUTHORING_RECORDS,
       baseline,
     )
     writeStaticArtifacts(outputDirectory, compilation.artifacts)
@@ -81,7 +81,7 @@ export async function verifyFormalAuthoring(
     return {
       baselineDirectory,
       outputDirectory,
-      recordCount: CORRECTED_AUTHORING_RECORDS.length,
+      recordCount: MIGRATED_AUTHORING_RECORDS.length,
       summary: summarizeCompilation(compilation),
       equivalent: comparison.equivalent,
       differences: comparison.differences.map(formatDifference),
@@ -100,7 +100,7 @@ async function main(args: readonly string[]): Promise<number> {
     ...(baselineDirectory === undefined ? {} : { baselineDirectory }),
     ...(outputDirectory === undefined ? {} : { outputDirectory }),
   })
-  console.log(`Corrected authoring migration: ${result.recordCount} records`)
+  console.log(`Migrated authoring records: ${result.recordCount} records`)
   console.log(`Compiled: ${result.summary}`)
   console.log(`Baseline: ${result.baselineDirectory}`)
   console.log(`Output:   ${result.outputDirectory}`)

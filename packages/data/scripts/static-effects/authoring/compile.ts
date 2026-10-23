@@ -894,6 +894,39 @@ function compileCoverageRecord(
   }
 }
 
+/**
+ * 用基线条目的键序写出替换对象。键序是序列化细节，不承载作者语义：
+ * 作者值仍来自记录，这里只让候选与正式制品的字段次序一致，字节比较
+ * 才继续是有效门禁。候选缺少或新增的键由语法校验与语义比较负责。
+ */
+function withBaselineKeyOrder<T extends object>(value: T, template: object): T {
+  const ordered: Record<string, unknown> = {}
+  const record = value as Record<string, unknown>
+  for (const key of Object.keys(template))
+    if (Object.hasOwn(record, key)) ordered[key] = record[key]
+  for (const key of Object.keys(record))
+    if (!Object.hasOwn(ordered, key)) ordered[key] = record[key]
+  return ordered as T
+}
+
+function alignOptionSerialization(
+  compiled: StaticCatalogOption,
+  baseline: StaticCatalogOption,
+): StaticCatalogOption {
+  const variants = compiled.variants.map((variant, index) => {
+    const template = baseline.variants[index]
+    return template === undefined
+      ? variant
+      : withBaselineKeyOrder(variant, template)
+  })
+  const [first, ...rest] = variants
+  if (!first) throw new Error(`Option ${baseline.optionId} has no variants`)
+  return withBaselineKeyOrder(
+    { ...compiled, variants: [first, ...rest] },
+    baseline,
+  )
+}
+
 function replaceRules(
   baseline: RuleSet,
   compiled: ReadonlyMap<string, EffectRule>,
@@ -903,7 +936,7 @@ function replaceRules(
     const replacement = compiled.get(rule.effectId)
     if (!replacement) return rule
     seen.add(rule.effectId)
-    return replacement
+    return withBaselineKeyOrder(replacement, rule)
   })
   for (const effectId of compiled.keys())
     if (!seen.has(effectId))
@@ -926,7 +959,7 @@ function replaceCatalog(
     const replacement = compiledOptions.get(option.optionId)
     if (!replacement) return option
     seenOptions.add(option.optionId)
-    return replacement
+    return alignOptionSerialization(replacement, option)
   })
   for (const optionId of compiledOptions.keys())
     if (!seenOptions.has(optionId))
@@ -965,7 +998,7 @@ function replaceCoverage(
     const replacement = compiledByKey.get(key)
     if (!replacement) return record
     seen.add(key)
-    return replacement
+    return withBaselineKeyOrder(replacement, record)
   })
   for (const key of compiledByKey.keys())
     if (!seen.has(key))

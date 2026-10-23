@@ -20,7 +20,7 @@ import {
   compileAuthoringRecords,
   type StaticArtifacts,
 } from "./static-effects/authoring/compile.ts"
-import { CORRECTED_AUTHORING_RECORDS } from "./static-effects/authoring/records.ts"
+import { MIGRATED_AUTHORING_RECORDS } from "./static-effects/authoring/records.ts"
 import type { EffectAuthoringRecord } from "./static-effects/authoring/types.ts"
 import {
   COMPLETE_STATE_OPTIONS,
@@ -215,7 +215,7 @@ export interface StaticEffectsGenerationOptions {
    * authoring 编译或等价校验失败时不会自动退回该模式。
    */
   readonly authoring?: StaticEffectsAuthoringMode
-  /** 测试注入点；生产调用省略并使用正式 corrected 记录。 */
+  /** 测试注入点；生产调用省略并使用正式迁移记录。 */
   readonly authoringRecords?: readonly EffectAuthoringRecord[]
 }
 
@@ -228,7 +228,7 @@ export function applyStaticEffectsAuthoring(
     throw new Error(`Unknown authoring mode: ${String(authoringMode)}`)
   if (authoringMode === "converter-fallback") return converterArtifacts
   const compilation = compileAuthoringRecords(
-    options.authoringRecords ?? CORRECTED_AUTHORING_RECORDS,
+    options.authoringRecords ?? MIGRATED_AUTHORING_RECORDS,
     converterArtifacts,
   )
   const comparison = compareStaticArtifacts(
