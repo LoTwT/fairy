@@ -625,7 +625,7 @@ export function loadStaticEffectsProduct(
     {
       origin: "reader",
       scope: "static-coverage.pointer",
-      text: "supplementalRecords 不携带结构化 pointer；pointer 过滤只应用于 records，补充记录仍可按 optionId、解析后的 catalogEntityId 与 status 查询。",
+      text: "supplementalRecords 不携带结构化 pointer；pointer 过滤只应用于 records；补充记录仍可由 optionId 关联目录，并按解析出的 catalogEntityId 与 status 查询。",
     },
     {
       origin: "reader",

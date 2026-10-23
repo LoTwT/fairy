@@ -39,7 +39,7 @@
 - 在静态效果 manifest 的 `limitations` 中以 `origin: "reader"` 记录完整 ID 列表；
 - 在按该 `differenceId` 查询时返回空结果，并说明“只有 catalog 说明、没有结构化引用”。
 
-补充记录不带结构化 `pointer`，因此 `pointer` 过滤只匹配 `records`；补充记录仍可按 `optionId`、由目录选项解析出的 `catalogEntityId` 与 `status` 查询。`records` 使用 `converted` / `corrected` / `unsupported`，`supplementalRecords` 使用 `integrated` / `out-of-scope`，两套状态词表均受支持。
+补充记录不带结构化 `pointer`，因此 `pointer` 过滤只匹配 `records`；补充记录仍可由 `optionId` 关联目录，并按解析出的 `catalogEntityId` 与 `status` 查询。`records` 使用 `converted` / `corrected` / `unsupported`，`supplementalRecords` 使用 `integrated` / `out-of-scope`，两套状态词表均受支持。
 
 ## 读取与错误处理
 
