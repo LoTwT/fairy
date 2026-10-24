@@ -376,7 +376,7 @@
 - 取值必须是有限数且 `0 ≤ r ≤ 1`（NaN/±Infinity/负数/>1/非数值报 `INVALID_INPUT`，指向 `/hit/declaredCriticalRate`，不静默钳制非法声明）；仅支持 `regular` 且恰好一个伤害项的结算，该项实际缩放属性须解析为当前命中角色的当前属性（`item.statSource` → `hit.attributeSources[item.stat]` → 缺省命中角色；借另一实体或保存快照拒绝）；与 `hit.attributeSources.criticalRate` 并存是两种概率来源，按 `CONTEXT_MISMATCH` 拒绝。伤害种类只在可安全判定（受支持字符串）时参与该适用范围检查；damage 形状非法（缺失、null 等）保持 `/damage` 的结构化失败返回，不因声明分支读取伤害种类而抛异常或追加声明错误。
 - 与**本命中实际生效**的命中作用域 `criticalRate/direct` 调整互斥（按冲突 `CONTEXT_MISMATCH` 拒绝并指明 effectId/bindingId）：判断只看该消费地址上是否存在适用的 hit 作用域层——复用与普通读取相同的激活/有效层、受益者与 when 语义（关闭的层、其他受益者/绑定或条件不成立的层不构成冲突，输出字面 0 的适用层同样冲突），但不为该判定求值被替换的 CR 输出、贡献阶段输出修改或按值唯一性选择；实体作用域候选在收集前即排除，其输出依赖缺失不产生缺事实错误。实体作用域的普通暴击率增益不参与形成最终概率、不因存在而报冲突，也不被伪报为概率消费。其他表达式真实依赖普通暴击率时（如暴击率转增伤的转换），仍按原有世界属性/贡献依赖读取并如实记账，声明不覆盖这些 stat-read。
 - r=0/1 表示调用方声明的单次非暴击/暴击结果，中间值是调用方自己的概率假设，不是引擎抽签；结果 `criticalRate` 返回实际采用的声明值，`nonCritical`/`critical` 始终是两个条件分支——`critical` 继续采用当前普通暴击伤害及本命中合法暴伤贡献，这是调用方选择的 regular 条件计算模型，不证明游戏附伤能暴击或继承该暴击伤害；r=0 时 `critical` 是未采用的反事实分支值，r=1 时 `nonCritical` 同理。为输出条件分支，普通暴击伤害的必要事实要求保持（r=0 不伪造 critical 分支）。
-- 目录 `StaticCatalogDamageItemRequirement.requiredCriticalRateDeclaration: true` 的要求项（必须位于 `exclusiveDamageItem` 变体的唯一要求项，role base、仅 direct、holder-current）使启用该选项的结算强制声明：缺声明报 `MISSING_FACT`；声明归属当前命中 actor 的唯一有效启用绑定——目录最终受益集合（含声明受益者交集，队伍职业人数、受益职业/元素筛选后的结果）不含当前 actor 的选择不授权也不强制，0 层关闭、ineligible、职业不适配或其他持有者的选择同样不授权（误带字段按 `INVALID_INPUT` 拒绝，有效但错持有者按 `CONTEXT_MISMATCH` 拒绝）。目录受益筛选决定字段归属授权；规则 `when` 仍只决定贡献，缺精确目标等 when 不成立时独立项按既有契约保持零贡献，不反向求值任意 when 来授权字段。
+- 目录 `StaticCatalogDamageItemRequirement.requiredCriticalRateDeclaration: true` 的要求项（必须位于 `independent-settlement` 机制声明 `isolateDamageItems: true` 的唯一要求项，role base、仅 direct、holder-current）使启用该选项的结算强制声明：缺声明报 `MISSING_FACT`；声明归属当前命中 actor 的唯一有效启用绑定——目录最终受益集合（含声明受益者交集，队伍职业人数、受益职业/元素筛选后的结果）不含当前 actor 的选择不授权也不强制，0 层关闭、ineligible、职业不适配或其他持有者的选择同样不授权（误带字段按 `INVALID_INPUT` 拒绝，有效但错持有者按 `CONTEXT_MISMATCH` 拒绝）。目录受益筛选决定字段归属授权；规则 `when` 仍只决定贡献，缺精确目标等 when 不成立时独立项按既有契约保持零贡献，不反向求值任意 when 来授权字段。
 
 低层异化接受原 helper 参数或 `{ settledMultiplier }`。已结算分支直接复用倍率，不再次叠加异化通道。目录 `from-effects` 则将完整系数加数求和后加 1，仅计算一次；目录 `settled` 不再读取被跳过转化的当前属性或输入。
 
@@ -729,7 +729,7 @@ INVALID_DEFINITION拒绝，指向excludedBeneficiaryProfession；未选及0层�
 
 ### 目录有效元素增益集合
 
-`StaticCatalogVariant.elementBuffInputs` 声明有限的元素与绑定输入名映射。
+`StaticCatalogVariant.mechanism` 的 `element-buff-inputs` arm 以 `inputs` 声明有限的元素与绑定输入名映射。
 选项正层必须提供非空、无重复的 `selection.activeBuffElements`，每个元素均须在映射中。
 目录为所有登记项派生同绑定的 `count` 输入：集合内为 1，集合外为 0。
 这是调用方声明的有效增益状态，不是元素数量层数；未选和 0 层不要求该状态或局外读数。
@@ -760,12 +760,12 @@ INVALID_DEFINITION拒绝，指向excludedBeneficiaryProfession；未选及0层�
 [风化直伤 Factor](../core/factors/windswept-direct-damage.md)；未适用的贡献进入 `notApplicableContributions`。
 每个伤害条件分支单独缩放并检查有限性，之后才计算期望。原纯伤害公式不变，不把该通道映射到普通易伤。
 
-目录变体 `windsweptDirectDamage` 声明 `applicabilityInputName`、`applierTeam: "holder"` 及可选的
+目录变体 `windswept-direct` 机制在 `metadata` 中声明 `applicabilityInputName`、`applierTeam: "holder"` 及可选的
 `singleActiveSourceGroup`。它仅允许一条无额外 when 条件、hit scope、supplied 最大1层的该通道贡献，
 必须实际在 operation 消费 count 输入；变体同样最大1层。输入名不得与外部输入、层数、等级或元素增益输入冲突。
 目录按当前状态、命中适用性、施加者队伍和既有受益资格派生绑定 0/1，不接受外部同名输入（即使值相同／选择0层）。
 组内仅实际适用来源占位，重复有效来源按 `CONTEXT_MISMATCH` 拒绝。这是调用方的有效来源声明约束，
-不是已证明游戏“全队唯一”的 `squadUniqueEffect`，core 不按 Roxy 身份或效果 ID 特判。
+不是已证明游戏“全队唯一”的 `squad-unique` 机制，core 不按 Roxy 身份或效果 ID 特判。
 
 当前目标事实、三态分类及错误指针见[静态输入契约](../core/static-calculation.md#当前目标风化与直接攻击)。
 低层 supplied 调用绕过目录时，职业、来源归属和单来源声明仍由调用方负责；低层本身继续严格验证目标状态和命中分类。

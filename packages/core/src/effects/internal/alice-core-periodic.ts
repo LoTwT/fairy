@@ -130,12 +130,7 @@ export function validateAliceCorePeriodicCatalog(
     canonical([...(variant.configuration.coreSkillLevels ?? [])].toSorted()) !==
       canonical([1, 2, 3, 4, 5, 6, 7]) ||
     Object.keys(variant.configuration).length !== 2 ||
-    variant.damageItemRequirements !== undefined ||
-    variant.parameterMapping !== undefined ||
-    variant.exclusiveDamageItem !== undefined ||
-    variant.layerCountInputName !== undefined ||
-    variant.declaredTeammateBeneficiary !== undefined ||
-    variant.squadUniqueEffect !== undefined
+    variant.mechanism !== undefined
   ) {
     collector.report(
       "INVALID_DEFINITION",

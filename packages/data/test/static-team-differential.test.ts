@@ -750,11 +750,11 @@ describe("fixed-panel team differential fixtures", () => {
     // 参考数值仍然有效：固定效果提交未变（下行断言），且本批 59 槽位不消费
     // revision 15 与 16 改动的规则（逐槽数值对照在后续用例中锁定）。
     expect(loaded.version).toEqual({
-      packageVersion: "0.4.0",
-      contractVersion: 2,
+      packageVersion: "0.5.0",
+      contractVersion: 3,
       gameVersion: "3.3",
       snapshotId:
-        "sha256:02398d0fc76b4eed4bd7aaccd1370f8c161b5331266a0442c1f54ee67668f03c",
+        "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0",
     })
     expect(loaded.catalog.source.commit).toBe(
       reference.provenance.effectSource.commit,
@@ -771,7 +771,10 @@ describe("fixed-panel team differential fixtures", () => {
         option.optionId ===
         "agents:remiel:mindscape:0:blk-legacy:eff-ms7tarv6-tfz2kz",
     )!
-    expect(radiance.variants[0]!.parameterMapping?.rate).toBe(
+    const mechanism = radiance.variants[0]!.mechanism
+    if (mechanism?.kind !== "luminize-proficiency-mapping")
+      throw new Error("test fixture: remiel is not a luminize mapping")
+    expect(mechanism.mapping.rate).toBe(
       Number(
         reference.cases["T1-0/remiel-radiance"]!.identity.luminize!
           .proficiencyConversionRate,

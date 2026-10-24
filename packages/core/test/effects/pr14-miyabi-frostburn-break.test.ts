@@ -299,7 +299,7 @@ function frostburnInput(
 
 describe("batch 14 Miyabi frostburn break and mindscape 4 rupture", () => {
   it("registers the independent target, option, and both rules under revision 29 beside the preserved fixed-source options", () => {
-    expect(catalog.revision).toBe("51")
+    expect(catalog.revision).toBe("52")
     const target = catalog.skillTargets.find(
       (t) => t.targetId === FROSTBURN_TARGET,
     )!
@@ -319,19 +319,22 @@ describe("batch 14 Miyabi frostburn break and mindscape 4 rupture", () => {
     })
     expect(variant.maximumLayers).toBe(1)
     expect(variant.effectIds).toEqual([FROSTBURN_DAMAGE, FROSTBURN_M4])
-    expect(variant.exclusiveDamageItem).toBe(true)
-    expect(variant.damageItemRequirements).toEqual([
-      {
-        itemId: FROSTBURN_ITEM,
-        stat: "attack",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-        requiredDirectMultiplier: 0,
-        requiredSkillCategory: "uncategorized",
-        requiredCriticalRateDeclaration: true,
-      },
-    ])
+    expect(variant.mechanism).toEqual({
+      kind: "independent-settlement",
+      isolateDamageItems: true,
+      damageItemRequirements: [
+        {
+          itemId: FROSTBURN_ITEM,
+          stat: "attack",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: "uncategorized",
+          requiredCriticalRateDeclaration: true,
+        },
+      ],
+    })
     // 主规则：按核心档位取倍率；条件 = regular + 独立目标 + 烈霜元素。
     const damageRule = definitions.effects.find(
       (e) => e.kind === "contribution" && e.effectId === FROSTBURN_DAMAGE,

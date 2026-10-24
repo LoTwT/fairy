@@ -2248,7 +2248,7 @@ describe("fixed-source catalog conformance", () => {
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
     it("exposes one complete option with the original rules and migration evidence", () => {
-      expect(catalog.revision).toBe("51")
+      expect(catalog.revision).toBe("52")
       expect(
         catalog.differences.some((d) => d.differenceId === differenceId),
         differenceId,
@@ -4069,7 +4069,9 @@ describe("fixed-source catalog conformance", () => {
   })
   it("consumes the actual luminize mapping once and preserves both explicit-lumiflux M6 corrections", () => {
     const mapping = catalog.options.find((o) =>
-      o.variants.some((v) => v.parameterMapping),
+      o.variants.some(
+        (v) => v.mechanism?.kind === "luminize-proficiency-mapping",
+      ),
     )!
     const m6 = catalog.options.filter((o) =>
       o.variants.some((v) =>
@@ -6615,7 +6617,10 @@ describe("same-block core evidence scoping and independent damage items", () => 
     ]
     for (const [optionId, itemId] of expected) {
       const option = catalog.options.find((o) => o.optionId === optionId)!
-      const requirement = option.variants[0]!.damageItemRequirements!.find(
+      const variant = option.variants[0]!
+      if (variant.mechanism?.kind !== "independent-settlement")
+        throw new Error(`test fixture: ${optionId} is not a settlement`)
+      const requirement = variant.mechanism.damageItemRequirements.find(
         (r) => r.itemId === itemId,
       )!
       expect(requirement.requiredDirectMultiplier, optionId).toBe(0)

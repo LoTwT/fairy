@@ -268,7 +268,7 @@ describe("Yuzuha additional ability complete state", () => {
       1, 2, 3, 4, 5, 6, 7,
     ])
     expect(completeVariant().maximumLayers).toBe(1)
-    expect(completeVariant().layerCountInputName).toBeUndefined()
+    expect(completeVariant().mechanism).toBeUndefined()
     expect(completeVariant().inputs).toHaveLength(2)
     expect(completeVariant().inputs.map((input) => input.name)).toEqual([
       "yuzuha:tanuki-wish:anomaly-mastery-final",

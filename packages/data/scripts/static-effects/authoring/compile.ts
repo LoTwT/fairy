@@ -500,8 +500,7 @@ const EXPRESSIBLE_VARIANT_FIELDS = new Set([
   "inputs",
   "applicability",
   "differences",
-  "damageItemRequirements",
-  "exclusiveDamageItem",
+  "mechanism",
 ])
 
 const EXPRESSIBLE_RULE_FIELDS = new Set([
@@ -519,7 +518,8 @@ const EXPRESSIBLE_RULE_FIELDS = new Set([
 
 /**
  * 只允许替换作者层能够完整表达的基线条目。否则 `as` 断言会静默
- * 丢弃 `layerCountInputName`、`uniqueness` 等尚未建模的字段。
+ * 丢弃未建模的变体机制 arm、`uniqueness` 等字段；当前只建模
+ * `independent-settlement` 变体机制。
  */
 function assertSelectedEntriesExpressible(
   groups: ReadonlyMap<string, OptionGroup>,
@@ -547,13 +547,9 @@ function assertSelectedEntriesExpressible(
           throw new Error(
             `Authoring layer cannot express baseline option ${optionId} variant field ${field}`,
           )
-        if (
-          (field === "damageItemRequirements" ||
-            field === "exclusiveDamageItem") &&
-          mechanismKind !== "independent-settlement"
-        )
+        if (field === "mechanism" && mechanismKind !== "independent-settlement")
           throw new Error(
-            `Authoring layer only models ${field} for independent-settlement options (${optionId})`,
+            `Authoring layer only models the independent-settlement variant mechanism (${optionId})`,
           )
       }
     }
@@ -894,10 +890,7 @@ function singleCoverageField(
 
 function independentSettlementFields(
   group: OptionGroup,
-): Pick<
-  StaticCatalogVariant,
-  "damageItemRequirements" | "exclusiveDamageItem"
-> {
+): Pick<StaticCatalogVariant, "mechanism"> {
   const [first] = group.records
   if (!first || first.mechanism.kind !== "independent-settlement")
     throw new Error(`Option ${group.optionId} is not an independent settlement`)
@@ -926,10 +919,13 @@ function independentSettlementFields(
       )
   }
   return {
-    damageItemRequirements: [mechanism.damageItem],
-    ...(mechanism.exclusiveDamageItem === true
-      ? { exclusiveDamageItem: true as const }
-      : {}),
+    mechanism: {
+      kind: "independent-settlement",
+      damageItemRequirements: [mechanism.damageItem],
+      ...(mechanism.exclusiveDamageItem === true
+        ? { isolateDamageItems: true as const }
+        : {}),
+    },
   }
 }
 

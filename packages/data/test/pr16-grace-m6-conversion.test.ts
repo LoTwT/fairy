@@ -183,7 +183,7 @@ describe("Grace M6 frozen note-only clause and precise scale compilation", () =>
     expect(supplements).toHaveLength(2)
     const result = convert()
     const before = convertSource(source(), functions, [], [])
-    expect(result.definitions.revision).toBe("51")
+    expect(result.definitions.revision).toBe("52")
     for (const rule of before.definitions.effects)
       expect(
         result.definitions.effects.find((e) => e.effectId === rule.effectId),
@@ -214,9 +214,12 @@ describe("Grace M6 frozen note-only clause and precise scale compilation", () =>
           itemIds: [`action:agent:1181:action:${action}:base`],
         },
       })
-      const requirement = result.catalog.options.find(
+      const mechanism = result.catalog.options.find(
         (o) => o.optionId === `nanoka:agents:grace:m6-${suffix}-grenades`,
-      )!.variants[0]!.damageItemRequirements![0]!
+      )!.variants[0]!.mechanism
+      if (mechanism?.kind !== "independent-settlement")
+        throw new Error(`test fixture: ${suffix} is not a settlement`)
+      const requirement = mechanism.damageItemRequirements[0]!
       expect(requirement).toEqual({
         itemId: `action:agent:1181:action:${action}:base`,
         stat: "attack",

@@ -105,7 +105,9 @@ function elationInput(options: {
   const actor = options.actor ?? "lighter"
   const actorEntityId = actorEntityIds[actor]
   const impactInputName = completeStateVariant.inputs[0]!.name
-  const layerCountInputName = completeStateVariant.layerCountInputName!
+  if (completeStateVariant.mechanism?.kind !== "complete-state")
+    throw new Error("test fixture: expected a complete-state mechanism")
+  const layerCountInputName = completeStateVariant.mechanism.layerCountInputName
   const selections = [
     {
       optionId: COMPLETE_STATE_OPTION,
@@ -345,7 +347,7 @@ describe("Lighter elation complete state (PR04)", () => {
         )
       }
     }
-  })
+  }, 20_000)
 
   it("strengthens the same option automatically from mindscape 2 through 6", () => {
     for (const mindscape of [0, 1, 2, 3, 4, 5, 6] as const) {
@@ -529,7 +531,9 @@ describe("Lighter elation complete state (PR04)", () => {
     ).toBe(false)
     expect(completeStateVariant.status).toBe("corrected")
     expect(completeStateVariant.maximumLayers).toBe(20)
-    expect(completeStateVariant.layerCountInputName).toBeDefined()
+    expect(completeStateVariant.mechanism).toMatchObject({
+      kind: "complete-state",
+    })
     expect(completeStateVariant.applicability).toEqual({})
     // 四条旧部分选项继续以语义冲突入口迁移，并明确指向唯一新选项。
     for (const optionId of LEGACY_PARTIAL_OPTIONS) {

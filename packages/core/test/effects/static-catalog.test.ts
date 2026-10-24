@@ -39,7 +39,7 @@ function fixture(
     },
   ]
   const catalog: StaticEffectCatalog = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     ruleSetId: definitions.ruleSetId,
     revision: definitions.revision,
     source: { repository: "test", commit: "1", files: [] },
@@ -1322,10 +1322,13 @@ describe("catalog static calculation", () => {
         reason: malformed,
       }),
       changeVariant(input, {
-        parameterMapping: {
-          kind: "luminize-proficiency",
-          source: malformed,
-          rate: 0.002,
+        mechanism: {
+          kind: "luminize-proficiency-mapping",
+          mapping: {
+            kind: "luminize-proficiency",
+            source: malformed,
+            rate: 0.002,
+          },
         },
       }),
       ...(["disorder", "vortex"] as const).map((kind) => ({
@@ -1489,7 +1492,10 @@ describe("catalog static calculation", () => {
     }
     const withItem = (skillCategory: string, category = requirement) => ({
       ...changeVariant(input, {
-        damageItemRequirements: [category],
+        mechanism: {
+          kind: "independent-settlement",
+          damageItemRequirements: [category],
+        },
       }),
       hit: {
         ...input.hit,
@@ -1530,7 +1536,7 @@ describe("catalog static calculation", () => {
           (issue) =>
             issue.code === "INVALID_INPUT" &&
             issue.pointer ===
-              "/catalog/options/0/variants/0/damageItemRequirements/0/requiredSkillCategory",
+              "/catalog/options/0/variants/0/mechanism/damageItemRequirements/0/requiredSkillCategory",
         ),
       ).toBe(true)
   })

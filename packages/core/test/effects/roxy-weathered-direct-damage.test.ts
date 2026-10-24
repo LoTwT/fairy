@@ -538,9 +538,9 @@ describe("metadata-driven catalog boundaries", () => {
       },
     ],
     [
-      "C3 state collision",
+      "legacy sibling field inside the arm",
       (v: any): void => {
-        v.elementBuffInputs = [
+        v.mechanism.elementBuffInputs = [
           { element: "fire", inputName: roxyWeatheredInput },
         ]
       },
@@ -548,7 +548,7 @@ describe("metadata-driven catalog boundaries", () => {
     [
       "applier team",
       (v: any): void => {
-        v.windsweptDirectDamage.applierTeam = "any"
+        v.mechanism.metadata.applierTeam = "any"
       },
     ],
   ] as const)("rejects %s", (_label, mutate) => {
@@ -567,8 +567,7 @@ describe("metadata-driven catalog boundaries", () => {
       expect(
         result.issues.some(
           (i) =>
-            i.code === "INVALID_DEFINITION" &&
-            i.pointer.includes("/windsweptDirectDamage"),
+            i.code === "INVALID_DEFINITION" && i.pointer.includes("/mechanism"),
         ),
       ).toBe(true)
   })

@@ -211,8 +211,8 @@ describe("fixed-source supplement entity migration", () => {
       result.catalog.options.find(
         (option) =>
           option.optionId === "nanoka:w-engines:14162:squad-damage-bonus",
-      )!.variants[0]!.squadUniqueEffect,
-    ).toBe(true)
+      )!.variants[0]!.mechanism,
+    ).toEqual({ kind: "squad-unique" })
 
     const crimsonCrit = rules.get(
       "w-engine:14162:nanoka:crit-rate",

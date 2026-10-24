@@ -158,7 +158,7 @@ describe("static data conversion", () => {
       ],
     }
     const result = convertSource(source, functions, [], [])
-    expect(result.definitions.revision).toBe("51")
+    expect(result.definitions.revision).toBe("52")
     for (const option of result.catalog.options) {
       const variant = option.variants[0]!
       const sameBlock = option.optionId.endsWith("unverified-same-block")
@@ -414,7 +414,7 @@ const remielData = (): SourceData => ({
 describe("remielle mindscape 2 attribute anomaly scope revision", () => {
   it("adds the [异常] profession and attribute anomaly damage scope from the reviewed text", () => {
     const result = convertSource(remielData(), functions, [], [])
-    expect(result.definitions.revision).toBe("51")
+    expect(result.definitions.revision).toBe("52")
     const option = result.catalog.options.find((o) =>
       o.optionId.includes("eff-ms7tlurw-vhelyf"),
     )!
@@ -564,7 +564,7 @@ describe("remielle mindscape 1 complete anomaly state", () => {
     "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
   it("merges the team and holder records into one corrected complete option", () => {
     const result = convertSource(remielMindscape1Data(), functions, [], [])
-    expect(result.definitions.revision).toBe("51")
+    expect(result.definitions.revision).toBe("52")
     const option = result.catalog.options.find((o) => o.optionId === optionId)!
     expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
     expect(option.conditionDescription).toBe(
@@ -2432,7 +2432,10 @@ describe("lighter elation complete state", () => {
     expect(variant.effectIds).toEqual([completeStateEffectId])
     expect(variant.maximumLayers).toBe(20)
     expect(variant.applicability).toEqual({})
-    expect(variant.layerCountInputName).toContain(":layers")
+    expect(variant.mechanism).toMatchObject({
+      kind: "complete-state",
+      layerCountInputName: expect.stringContaining(":layers"),
+    })
     expect(variant.inputs.map((entry) => entry.name)).toEqual([
       expect.stringContaining(":source"),
     ])
@@ -2970,7 +2973,7 @@ describe("agent batch 06 impact and energy regen supplements", () => {
       integrated: 6,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("51")
+    expect(result.definitions.revision).toBe("52")
 
     const caesar = result.catalog.options.find(
       (o) => o.optionId === "nanoka:agents:caesar:stance-switch-impact",
@@ -3076,7 +3079,7 @@ describe("agent batch 06 impact and energy regen supplements", () => {
     expect(frontline.variants[0]).toMatchObject({
       maximumLayers: 1,
       configuration: { minimumMindscape: 4 },
-      declaredTeammateBeneficiary: true,
+      mechanism: { kind: "declared-teammate-beneficiary" },
     })
     const frontlineRule = result.definitions.effects.find(
       (r) =>
@@ -3501,7 +3504,7 @@ describe("batch 07 Roxy and Crimson Moon Casket supplements", () => {
       integrated: 4,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("51")
+    expect(result.definitions.revision).toBe("52")
     const entities = result.catalog.entities.filter((e) =>
       ["nanoka:agents:1621", "nanoka:w-engines:14162"].includes(
         e.catalogEntityId,
@@ -3645,7 +3648,7 @@ describe("batch 07 Roxy and Crimson Moon Casket supplements", () => {
     expect(resPen.variants[0]).toMatchObject({
       configuration: { refinements: [1, 2, 3, 4, 5] },
     })
-    expect(resPen.variants[0].squadUniqueEffect).toBeUndefined()
+    expect(resPen.variants[0].mechanism).toBeUndefined()
     const resPenRule = result.definitions.effects.find(
       (r) => r.effectId === "w-engine:14162:nanoka:wind-resistance-ignore",
     ) as ContributionRule
@@ -3669,7 +3672,7 @@ describe("batch 07 Roxy and Crimson Moon Casket supplements", () => {
     expect(team.target).toBe("team")
     expect(team.variants[0]).toMatchObject({
       configuration: { refinements: [1, 2, 3, 4, 5] },
-      squadUniqueEffect: true,
+      mechanism: { kind: "squad-unique" },
     })
     const teamRule = result.definitions.effects.find(
       (r) => r.effectId === "w-engine:14162:nanoka:squad-damage-bonus",
@@ -4003,7 +4006,7 @@ describe("batch 08 M6 independent follow-up supplements", () => {
       integrated: 3,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("51")
+    expect(result.definitions.revision).toBe("52")
     const expected: readonly (readonly [
       optionId: string,
       effectId: string,
@@ -4072,17 +4075,20 @@ describe("batch 08 M6 independent follow-up supplements", () => {
         inputs: [],
         effectIds: [effectId],
       })
-      expect(variant.damageItemRequirements, optionId).toEqual([
-        {
-          itemId,
-          stat: "attack",
-          role: "base",
-          allowedModes: ["direct"],
-          source: "holder-current",
-          requiredDirectMultiplier: 0,
-          requiredSkillCategory: requiredCategory,
-        },
-      ])
+      expect(variant.mechanism, optionId).toEqual({
+        kind: "independent-settlement",
+        damageItemRequirements: [
+          {
+            itemId,
+            stat: "attack",
+            role: "base",
+            allowedModes: ["direct"],
+            source: "holder-current",
+            requiredDirectMultiplier: 0,
+            requiredSkillCategory: requiredCategory,
+          },
+        ],
+      })
       const target = result.catalog.skillTargets.find(
         (t) => t.targetId === targetId,
       )!
@@ -4426,12 +4432,23 @@ describe("batch 08 M6 independent follow-up supplements", () => {
               ...supplement,
               variant: {
                 ...supplement.variant,
-                damageItemRequirements: [
-                  {
-                    ...supplement.variant.damageItemRequirements![0]!,
-                    itemId: "s0anby:unknown-item",
-                  },
-                ],
+                mechanism: {
+                  ...(supplement.variant.mechanism as Extract<
+                    NonNullable<typeof supplement.variant.mechanism>,
+                    { kind: "independent-settlement" }
+                  >),
+                  damageItemRequirements: [
+                    {
+                      ...(
+                        supplement.variant.mechanism as Extract<
+                          NonNullable<typeof supplement.variant.mechanism>,
+                          { kind: "independent-settlement" }
+                        >
+                      ).damageItemRequirements[0]!,
+                      itemId: "s0anby:unknown-item",
+                    },
+                  ],
+                },
               },
             }
           : supplement,
@@ -4641,8 +4658,7 @@ describe("batch 08 M6 independent follow-up supplements", () => {
     ).toThrowError(/adjusts undeclared damage item s0anby:unrelated-event/)
     // 缺失 requirements：消费端无从发现独立项，预填倍率失去零值校验。
     const withoutRequirements = vortexOnly((supplement) => {
-      const { damageItemRequirements: _omitted, ...variant } =
-        supplement.variant
+      const { mechanism: _omitted, ...variant } = supplement.variant
       return { ...supplement, variant }
     })
     expect(() =>
@@ -4651,7 +4667,16 @@ describe("batch 08 M6 independent follow-up supplements", () => {
     // 空数组同样拒绝。
     const emptyRequirements = vortexOnly((supplement) => ({
       ...supplement,
-      variant: { ...supplement.variant, damageItemRequirements: [] },
+      variant: {
+        ...supplement.variant,
+        mechanism: {
+          ...(supplement.variant.mechanism as Extract<
+            NonNullable<typeof supplement.variant.mechanism>,
+            { kind: "independent-settlement" }
+          >),
+          damageItemRequirements: [] as never,
+        },
+      },
     }))
     expect(() =>
       convertSource(batch08Data(), functions, [], emptyRequirements),
@@ -4681,8 +4706,7 @@ describe("batch 08 M6 independent follow-up supplements", () => {
       return rest as VortexOption["rule"]["operation"]
     }
     const bothOmitted = vortexOnly((supplement) => {
-      const { damageItemRequirements: _omitted, ...variant } =
-        supplement.variant
+      const { mechanism: _omitted, ...variant } = supplement.variant
       return {
         ...supplement,
         rule: {
@@ -4876,7 +4900,7 @@ describe("batch 09 Nangongyu M6 vibrato-modified supplements", () => {
       [],
       batch09Supplements,
     )
-    expect(result.definitions.revision).toBe("51")
+    expect(result.definitions.revision).toBe("52")
     expect(result.coverage.summary.supplements).toMatchObject({
       records: 2,
       rules: 2,
@@ -4911,12 +4935,18 @@ describe("batch 09 Nangongyu M6 vibrato-modified supplements", () => {
       expect(variant, group).toMatchObject({
         status: "converted",
         maximumLayers: 4,
-        layerCountInputName: layerInput,
         configuration: { minimumMindscape: 6 },
         inputs: [],
         effectIds: [effectId],
+        mechanism: {
+          kind: "independent-settlement",
+          completeState: { layerCountInputName: layerInput },
+        },
       })
-      expect(variant.damageItemRequirements, group).toEqual([
+      const mechanism = variant.mechanism
+      if (mechanism?.kind !== "independent-settlement")
+        throw new Error(`test fixture: ${group} is not a settlement`)
+      expect(mechanism.damageItemRequirements).toEqual([
         {
           itemId: "nangongyu:vibrato-modified",
           stat: "attack",
@@ -5376,13 +5406,19 @@ describe("batch 09 Nangongyu M6 vibrato-modified supplements", () => {
       )
     // 只声明逻辑层数上限、不声明桥接名：拒绝。
     const nameless = nonphysicalOnly((supplement) => {
-      const { layerCountInputName: _omitted, ...variant } = supplement.variant
-      return { ...supplement, variant }
+      const mechanism = supplement.variant.mechanism
+      if (mechanism?.kind !== "independent-settlement")
+        throw new Error("test fixture: expected a settlement")
+      const { completeState: _omitted, ...rest } = mechanism
+      return {
+        ...supplement,
+        variant: { ...supplement.variant, mechanism: rest },
+      }
     })
     expect(() =>
       convertSource(batch09Data(), functions, [], nameless),
     ).toThrowError(
-      /must declare layerCountInputName and layerCountMaximumLayers together/,
+      /must declare a complete-state mechanism and layerCountMaximumLayers together/,
     )
     // 只声明桥接名、不声明逻辑层数上限：拒绝。
     const boundless = nonphysicalOnly((supplement) => {
@@ -5393,7 +5429,7 @@ describe("batch 09 Nangongyu M6 vibrato-modified supplements", () => {
     expect(() =>
       convertSource(batch09Data(), functions, [], boundless),
     ).toThrowError(
-      /must declare layerCountInputName and layerCountMaximumLayers together/,
+      /must declare a complete-state mechanism and layerCountMaximumLayers together/,
     )
     // 桥接选项叠加 additionalRules：目录只允许一条消费 count 的贡献，拒绝。
     const withAdditional = nonphysicalOnly((supplement) => ({
@@ -6404,7 +6440,7 @@ describe("claret mindscape 1 multiplier encoding correction", () => {
     const before = structuredClone(input)
     const result = convertSource(input, functions, [], [])
     expect(input).toEqual(before)
-    expect(result.definitions.revision).toBe("51")
+    expect(result.definitions.revision).toBe("52")
     const rule = result.definitions.effects.find(
       (entry): entry is ContributionRule =>
         entry.kind === "contribution" && entry.effectId === effectId,

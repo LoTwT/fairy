@@ -208,10 +208,12 @@ function boundaryFixture(options: BoundaryOptions = {}): {
     inputs: options.variantInputs ?? [],
     applicability: {},
     differences: [],
-    ...(layerCountInputName === null ? {} : { layerCountInputName }),
+    ...(layerCountInputName === null
+      ? {}
+      : { mechanism: { kind: "complete-state", layerCountInputName } }),
   })
   const catalog = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     ruleSetId: definitions.ruleSetId,
     revision: definitions.revision,
     source: { repository: "test", commit: "1", files: [] },
@@ -346,7 +348,7 @@ describe("PR04 layer-count bridge definition boundaries", () => {
     expect(issues).toEqual([
       expect.objectContaining({
         code: "INVALID_DEFINITION",
-        pointer: expect.stringContaining("/layerCountInputName"),
+        pointer: expect.stringContaining("/mechanism"),
       }),
     ])
   })
@@ -356,7 +358,7 @@ describe("PR04 layer-count bridge definition boundaries", () => {
     expect(issues).toEqual([
       expect.objectContaining({
         code: "INVALID_DEFINITION",
-        pointer: expect.stringContaining("/layerCountInputName"),
+        pointer: expect.stringContaining("/mechanism"),
       }),
     ])
   })
@@ -370,7 +372,7 @@ describe("PR04 layer-count bridge definition boundaries", () => {
     expect(wrongUnit.issues).toEqual([
       expect.objectContaining({
         code: "INVALID_DEFINITION",
-        pointer: expect.stringContaining("/layerCountInputName"),
+        pointer: expect.stringContaining("/mechanism"),
       }),
     ])
   })
@@ -382,7 +384,7 @@ describe("PR04 layer-count bridge definition boundaries", () => {
     expect(unconsumed.issues).toEqual([
       expect.objectContaining({
         code: "INVALID_DEFINITION",
-        pointer: expect.stringContaining("/layerCountInputName"),
+        pointer: expect.stringContaining("/mechanism"),
       }),
     ])
   })
@@ -394,7 +396,7 @@ describe("PR04 layer-count bridge definition boundaries", () => {
     })
     expect(issues).toEqual([])
     const variant = catalog.options[0]!.variants[0]!
-    expect(Object.hasOwn(variant, "layerCountInputName")).toBe(false)
+    expect(Object.hasOwn(variant, "mechanism")).toBe(false)
     // 未声明桥接的普通叠层仍按 selection.layers 逐层展开：5 层 × 1% = 5%。
     expect(
       damageBonusOf(

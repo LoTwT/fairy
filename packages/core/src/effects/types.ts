@@ -1187,13 +1187,13 @@ export interface StaticCatalogDamageInput {
     /** 0 明确关闭该选项；仍校验选项、来源、档位和层数身份。 */
     readonly layers: number
     /**
-     * 声明式同队受益者：仅当所选变体声明 declaredTeammateBeneficiary 且
+     * 声明式同队受益者：仅当所选变体声明 `declared-teammate-beneficiary` 机制且
      * layers > 0 时必须提供；必须是持有者同队的另一名有身份实体。表达
      * 调用方声明的前后场事实（如持有者后场时的当前前场角色），不由命中
      * 身份或位置引擎推断。未声明的变体不接受该字段。
      */
     readonly beneficiaryActorId?: EntityId
-    /** 有效元素增益集合；仅声明 elementBuffInputs 的选项接受，0 层无需提供。 */
+    /** 有效元素增益集合；仅声明 `element-buff-inputs` 机制的选项接受，0 层无需提供。 */
     readonly activeBuffElements?: readonly DamageElement[]
   }[]
   readonly actorSources: readonly {

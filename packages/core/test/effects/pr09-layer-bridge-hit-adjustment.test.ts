@@ -96,7 +96,7 @@ const definitions: RuleSet = {
 }
 
 const catalog = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   ruleSetId: definitions.ruleSetId,
   revision: definitions.revision,
   source: { repository: "test", commit: "1", files: [] },
@@ -125,7 +125,10 @@ const catalog = {
           references: reference,
           effectIds: [rule.effectId],
           maximumLayers: 4,
-          layerCountInputName: LAYER_COUNT_INPUT_NAME,
+          mechanism: {
+            kind: "complete-state",
+            layerCountInputName: LAYER_COUNT_INPUT_NAME,
+          },
           inputs: [],
           applicability: {},
           differences: [],

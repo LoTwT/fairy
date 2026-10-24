@@ -165,6 +165,13 @@ export const ROXY_CORE_ELEMENT_SUPPLEMENTS: readonly SupplementOption[] =
     const name = index
       ? "核心 · 有效元素增益锐暴伤"
       : "核心 · 有效元素增益普通暴伤"
+    const elementBuffInputs = elementStates.map(({ element }) => ({
+      element,
+      inputName: elementInputName(element),
+    }))
+    const [firstElementBuffInput, ...restElementBuffInputs] = elementBuffInputs
+    if (!firstElementBuffInput)
+      throw new Error("Roxy element buff inputs must not be empty")
     return {
       ...legacy,
       supplementId: `nanoka:agents:1621:${slug}`,
@@ -233,10 +240,10 @@ export const ROXY_CORE_ELEMENT_SUPPLEMENTS: readonly SupplementOption[] =
         ...legacy.variant,
         name,
         conditionDescription: elementDescription,
-        elementBuffInputs: elementStates.map(({ element }) => ({
-          element,
-          inputName: elementInputName(element),
-        })),
+        mechanism: {
+          kind: "element-buff-inputs",
+          inputs: [firstElementBuffInput, ...restElementBuffInputs],
+        },
       },
     }
   })

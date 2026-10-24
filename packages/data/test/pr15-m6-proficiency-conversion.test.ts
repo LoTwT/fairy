@@ -74,7 +74,7 @@ const byId = (values: readonly unknown[], key: string) =>
 describe("PR15 fixed M6 contexts and supplement compilation", () => {
   it("keeps Jane's actual CR/CD block and Alice's actual empty pack, adding three rules and two options", () => {
     const result = convert()
-    expect(result.definitions.revision).toBe("51")
+    expect(result.definitions.revision).toBe("52")
     expect(result.definitions.effects).toHaveLength(5)
     expect(result.catalog.options).toHaveLength(4)
     for (const [id, value] of [
@@ -102,20 +102,25 @@ describe("PR15 fixed M6 contexts and supplement compilation", () => {
       expect(option.variants[0]).toMatchObject({
         configuration: { minimumMindscape: 6 },
         maximumLayers: 1,
-        exclusiveDamageItem: true,
-        damageItemRequirements: [
-          {
-            itemId: `${name}:m6-proficiency-damage`,
-            stat: "anomalyProficiency",
-            source: "holder-current",
-            requiredDirectMultiplier: 0,
-            requiredSkillCategory: "uncategorized",
-          },
-        ],
+        mechanism: {
+          kind: "independent-settlement",
+          isolateDamageItems: true,
+          damageItemRequirements: [
+            {
+              itemId: `${name}:m6-proficiency-damage`,
+              stat: "anomalyProficiency",
+              source: "holder-current",
+              requiredDirectMultiplier: 0,
+              requiredSkillCategory: "uncategorized",
+            },
+          ],
+        },
       })
+      const mechanism = option.variants[0]!.mechanism
+      if (mechanism?.kind !== "independent-settlement")
+        throw new Error(`test fixture: ${name} is not a settlement`)
       expect(
-        option.variants[0]!.damageItemRequirements![0]!
-          .requiredCriticalRateDeclaration,
+        mechanism.damageItemRequirements[0]!.requiredCriticalRateDeclaration,
       ).toBe(name === "jane" ? true : undefined)
       expect(
         result.definitions.effects.filter((e) =>

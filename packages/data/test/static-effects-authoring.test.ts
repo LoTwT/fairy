@@ -314,6 +314,36 @@ describe("authoring compiler and semantic harness", () => {
     ).toThrow(/layerCountInputName/u)
   })
 
+  it("rejects an unmodeled variant mechanism arm on a non-settlement option", () => {
+    const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
+    const catalog = structuredClone(baseline.catalog) as unknown as {
+      options: Array<{
+        optionId: string
+        variants: Array<Record<string, unknown>>
+      }>
+    }
+    const anby = catalog.options.find(
+      (option) =>
+        option.optionId ===
+        "agents:anby:mindscape:2:blk-ms47xm3l-3pumvj:eff-ms47xm3l-nf7ga7",
+    )
+    const [variant] = anby?.variants ?? []
+    if (!anby || !variant) throw new Error("Missing Anby baseline option")
+    anby.variants[0] = {
+      ...variant,
+      mechanism: {
+        kind: "complete-state",
+        layerCountInputName: "test:layers",
+      },
+    }
+    expect(() =>
+      compileAuthoringArtifacts(PILOT_AUTHORING_RECORDS, {
+        ...baseline,
+        catalog: catalog as unknown as typeof baseline.catalog,
+      }),
+    ).toThrow(/only models the independent-settlement variant mechanism/u)
+  })
+
   it("rejects entity scope with hit operations or hit facts", () => {
     const records = cloneRecords()
     const nekomata = records.find(

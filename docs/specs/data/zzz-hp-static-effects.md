@@ -1,4 +1,4 @@
-**当前状态（静态 effects 修订 51；技能目录 D6-1/修订 52）**：固定 ZZZ-HP 来源已切换到 `2628b32`，Nanoka 参考版本为 `3.3.12+19634983`，计算数据 `gameVersion` 为 3.3。以下静态效果计数读取自 `static.json`、`static-catalog.json` 与 `static-coverage.json` 的实际制品：正式覆盖报告包含 196 个实体（195 个来源实体 + 1 个占位实体 `w-engines:none`）、1,118 个 pack（397 个空 pack）、1,360 条原始效果，生成 931 条规则与 986 个选择项。覆盖状态按两个粒度分别记录：coverage 记录为 1,167 条 converted、116 条 corrected、77 条 unsupported（共 1,360 条）；catalog 变体为 1,235 条 converted、122 条 corrected、110 条 unsupported（共 1,467 个）。两组口径不同：catalog 变体包含 101 个仅引用补充来源的变体与 6 个合并的完整状态变体，因此总数与 coverage 记录不同。补充来源共 101 条（68 条已整合、33 条越界登记），生成 72 条规则与 63 个选择项。D4 补充生成层与四个实体转换文件已移除，菲欧妮/赛维里安等改由固定来源记录直接转换；D4 冻结证据仅保留为仍在使用来源修正的溯源材料，不进入发布制品。修订 52（D6-1）补齐赛维里安（1631）与菲欧妮（1641）各 20 条动作，技能覆盖为 62 名成员、1,348 条动作；以下历史段落保留当时状态供追溯。
+**当前状态（静态 effects 修订 52；技能目录 D6-1/技能修订 52）**：固定 ZZZ-HP 来源已切换到 `2628b32`，Nanoka 参考版本为 `3.3.12+19634983`，计算数据 `gameVersion` 为 3.3。以下静态效果计数读取自 `static.json`、`static-catalog.json` 与 `static-coverage.json` 的实际制品：正式覆盖报告包含 196 个实体（195 个来源实体 + 1 个占位实体 `w-engines:none`）、1,118 个 pack（397 个空 pack）、1,360 条原始效果，生成 931 条规则与 986 个选择项。覆盖状态按两个粒度分别记录：coverage 记录为 1,167 条 converted、116 条 corrected、77 条 unsupported（共 1,360 条）；catalog 变体为 1,235 条 converted、122 条 corrected、110 条 unsupported（共 1,467 个）。两组口径不同：catalog 变体包含 101 个仅引用补充来源的变体与 6 个合并的完整状态变体，因此总数与 coverage 记录不同。补充来源共 101 条（68 条已整合、33 条越界登记），生成 72 条规则与 63 个选择项。D4 补充生成层与四个实体转换文件已移除，菲欧妮/赛维里安等改由固定来源记录直接转换；D4 冻结证据仅保留为仍在使用来源修正的溯源材料，不进入发布制品。技能修订 52（D6-1）补齐赛维里安（1631）与菲欧妮（1641）各 20 条动作，技能覆盖为 62 名成员、1,348 条动作；以下历史段落保留当时状态供追溯。
 
 # ZZZ-HP 静态增益数据接入
 
@@ -1854,7 +1854,7 @@ Nanoka 3.2 冻结资料 `agents/1611/details.zh.json` 的
 
 通过同名的 `@randomplay/data/definitions/effects/*.json` 显式子路径发布。根入口仍不加载定义 JSON，不增加运行时 core/effects 依赖；构建与解包继续逐文件字节复验。旧 starter / automatic 制品继续独立使用，新静态制品是完整消费单位；消费示例不得把它与重复定义同一机制的旧规则集直接拼接。
 
-目录的逻辑结构固定为 `schemaVersion: 1`、`ruleSetId`、`revision`、`source`、`entities`、`options`、`skillTargets`、`differences`。`source` 记录固定提交及资源摘要；实体保留 Fairy 身份或明确的未匹配状态、上游身份及本次适用性所需资料。选项使用稳定 `optionId`，记录来源引用、作用对象、培养条件、开关/层数/互斥关系、必需输入、可用性及其 `effectIds`；耀变精通换算等由 core 求值的部分使用明确登记的参数映射，并按同样规则追踪来源、培养选值与唯一性，不开放任意字段路径写入。缺失档位或未支持原因保留在相应选项上。共享规则与目录的正式类型维护在 [shared 效果契约](../../../packages/shared/src/effects.ts)，由 core 重导出；引擎输入输出由 [core 类型](../../../packages/core/src/effects/types.ts)维护，不在文档或 data 中复制定义。
+目录的逻辑结构固定为 `schemaVersion: 2`、`ruleSetId`、`revision`、`source`、`entities`、`options`、`skillTargets`、`mechanisms`、`differences`；变体机制只存在于判别联合 `variant.mechanism`，不再接受并列 optional 字段。`source` 记录固定提交及资源摘要；实体保留 Fairy 身份或明确的未匹配状态、上游身份及本次适用性所需资料。选项使用稳定 `optionId`，记录来源引用、作用对象、培养条件、开关/层数/互斥关系、必需输入、可用性及其 `effectIds`；耀变精通换算等由 core 求值的部分使用明确登记的参数映射，并按同样规则追踪来源、培养选值与唯一性，不开放任意字段路径写入。缺失档位或未支持原因保留在相应选项上。共享规则与目录的正式类型维护在 [shared 效果契约](../../../packages/shared/src/effects.ts)，由 core 重导出；引擎输入输出由 [core 类型](../../../packages/core/src/effects/types.ts)维护，不在文档或 data 中复制定义。
 
 core 提供目录消费入口 `calculateStaticDamageFromCatalog`，组合目录校验、选项准备和 `calculateStaticDamage`：
 
@@ -2289,7 +2289,44 @@ Nanoka integrated 3.2。
 - **边界**：证据为 3.2.5 冻结摘录，未经游戏实测；D4-3 只交付身份/清单/缺口。
   四个 D4 PR 至此全部交付；合并、清理与 D5 等待用户明确授权。
 
-## 修订 52：1631/1641 动作目录补齐（D6-1）
+## 修订 52：目录变体机制判别联合（批次 33）
+
+规则集 revision 递增为 `52`。本修订把目录变体的 9 个并列 optional 机制字段收敛为
+单个判别联合 `variant.mechanism`（`StaticCatalogVariantMechanism`），是公开类型与
+`static-catalog.json` 的原子破坏性变更，不保留旧字段兼容读取。规则语义、数值、
+effectId、optionId、来源引用与 `integrated` 归档不变。
+
+- **范围**：只改目录变体机制；规则层 `activation` / `triggered` / `continuous` /
+  `instant` / `modification`、目录根部 `mechanisms`、`option.exclusiveGroup` 与
+  `activation.exclusiveGroup` 均不动。`damageItemRequirements` 仍为数组，
+  `status` / `reason` / `explanation` 继续与机制分离。
+- **迁移**：30 个机制变体全部迁移为 `mechanism`；arm 分布为
+  `independent-settlement` 22（其中 7 个 `isolateDamageItems`、2 个南宫羽
+  `completeState`）、`element-buff-inputs` 2、`complete-state` 1、
+  `holder-level` 1、`windswept-direct` 1、
+  `declared-teammate-beneficiary` 1、`squad-unique` 1、
+  `luminize-proficiency-mapping` 1。旧 9 字段在目录中为 0。
+- **生成与作者层**：`convert.ts`、`supplements.ts` 与全部补充/语义登记只产出联合；
+  authoring 的 `EXPRESSIBLE_VARIANT_FIELDS` 只接受 `mechanism`，当前 19 条记录中
+  只有猫又爪印与星见雅霜灼·破的 `independent-settlement` 需要该 arm；其余无法表达
+  的 10 个机制变体均不在当前 19 条记录内，完整覆盖后置到 P4-1。
+- **版本**：`StaticEffectCatalog.schemaVersion` 1 → 2；
+  `CALCULATION_CONTRACT_VERSION` 2 → 3；根包、`@randomplay/core` 与
+  `@randomplay/data` 0.4.0 → 0.5.0；`@randomplay/shared` 保持私有 `0.0.0`。
+  `static.json` 与 `static-coverage.json` 的 `schemaVersion` 仍为 1。
+- **制品**：`static.json`
+  `94466666e043a2b1ae8f803b4cbb9bc815c958e2113d57f13f81686411771922`（931 条规则，
+  仅 revision 51 → 52），`static-catalog.json`
+  `58bc6f51fbf3ca999da80df7d953cbbd282bf92ecc2a3e61362567b2a5ed3e14`，
+  `static-coverage.json`
+  `978b5e99b58a2b6be218c555d14b2db5b52359c24caaf469540d5c286d341e54`；技能清单
+  只更新 `staticCatalogSha256`，计算快照为
+  `sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0`。
+- **边界**：`integrated` 与 `publication.json` 未改；`definitions-publication.json`
+  与 data-product manifest 摘要随制品重生成。旧字段不提供双读窗口；旧 core 拒绝
+  新目录，新 core 拒绝旧目录，因此 two packages 必须同版使用。
+
+## 技能修订 52：1631/1641 动作目录补齐（D6-1）
 
 赛维里安（1631）与菲欧妮（1641）的动作目录从冻结 Nanoka `3.3.12+19634983`
 的 `agents/1631/details.zh.json`、`agents/1641/details.zh.json` 补齐，各 20 条。

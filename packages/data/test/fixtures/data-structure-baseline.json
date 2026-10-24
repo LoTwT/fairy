@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "snapshotId": "sha256:02398d0fc76b4eed4bd7aaccd1370f8c161b5331266a0442c1f54ee67668f03c",
+  "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0",
   "integrated": {
     "indexSha256": "d68ad1d80b203b9633f2cd6d176e4051c15c52f2ea3c0d71a2d2310c8b1a1b6d",
     "sourceVersion": "3.3.12+19634983",
@@ -91,7 +91,7 @@
     "artifactFileSetSha256": "b7bb787fbdb4c18a2b6031274408312eaa56b2a53688c68d928c793d41ab148c"
   },
   "skills": {
-    "manifestSha256": "8650c22aa8c0f643c4cbbf84149ea7ca881a6762984b33a4c724facb03f5b42d",
+    "manifestSha256": "b059afc2ae5f86d0442dd607d4fa5496f94527ee2b1e25385fca7941d772060b",
     "sourceVersion": "3.3.12+19634983",
     "rulesVersion": "agent-actions/2",
     "topLevelKeys": [
@@ -117,9 +117,9 @@
     "sourceRepository": "LoTwT/ZZZ-HP",
     "sourceCommit": "2628b32cece086e371bafa05518a9a12650d9f74",
     "static": {
-      "sha256": "3a30bd0e5e5bc8fc2087163da1fc5e857cbca71ccc1bf2bf8c3b2777193ce823",
+      "sha256": "94466666e043a2b1ae8f803b4cbb9bc815c958e2113d57f13f81686411771922",
       "ruleSetId": "zzz-hp-static-effects",
-      "revision": "51",
+      "revision": "52",
       "topLevelKeys": [
         "actions",
         "effects",
@@ -133,9 +133,9 @@
       "actionCount": 1
     },
     "staticCatalog": {
-      "sha256": "c8455d57b00a0329da50841e4d1a0bcc7e35bc28fd2b4319520dba01ab1c670c",
+      "sha256": "58bc6f51fbf3ca999da80df7d953cbbd282bf92ecc2a3e61362567b2a5ed3e14",
       "ruleSetId": "zzz-hp-static-effects",
-      "revision": "51",
+      "revision": "52",
       "topLevelKeys": [
         "differences",
         "entities",
@@ -155,9 +155,9 @@
       "differenceCount": 41
     },
     "staticCoverage": {
-      "sha256": "6cb0457f6a3456a23b82439d064f092825949a8fa71be0500aea025cd6ce2c5b",
+      "sha256": "978b5e99b58a2b6be218c555d14b2db5b52359c24caaf469540d5c286d341e54",
       "ruleSetId": "zzz-hp-static-effects",
-      "revision": "51",
+      "revision": "52",
       "topLevelKeys": [
         "deferredMechanisms",
         "entities",

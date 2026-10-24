@@ -43,7 +43,7 @@ function fixture(): Mutable<StaticCatalogDamageInput> {
     },
   }))
   const catalog = {
-    schemaVersion: 1 as const,
+    schemaVersion: 2 as const,
     ruleSetId: base.definitions.ruleSetId,
     revision: base.definitions.revision,
     source: { repository: "test", commit: "1", files: [] },

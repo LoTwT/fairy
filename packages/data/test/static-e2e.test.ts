@@ -90,11 +90,11 @@ async function inputFor(
     ],
   })
   expect(data.version).toEqual({
-    packageVersion: "0.4.0",
-    contractVersion: 2,
+    packageVersion: "0.5.0",
+    contractVersion: 3,
     gameVersion: "3.3",
     snapshotId:
-      "sha256:02398d0fc76b4eed4bd7aaccd1370f8c161b5331266a0442c1f54ee67668f03c",
+      "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0",
   })
   expect(data.catalog.source.commit).toBe(reference.provenance.commit)
   expect(data.catalog.source.repository).toBe(reference.provenance.repository)

@@ -482,13 +482,19 @@ describe("holder level bridge definition and derivation boundaries", () => {
     [
       "empty name",
       (input) => {
-        variant(input).holderLevelInputName = ""
+        variant(input).mechanism = {
+          kind: "holder-level",
+          holderLevelInputName: "",
+        }
       },
     ],
     [
       "no consumed input",
       (input) => {
-        variant(input).holderLevelInputName = "unused"
+        variant(input).mechanism = {
+          kind: "holder-level",
+          holderLevelInputName: "unused",
+        }
       },
     ],
     [
@@ -564,12 +570,6 @@ describe("holder level bridge definition and derivation boundaries", () => {
         })
       },
     ],
-    [
-      "layer name conflict",
-      (input) => {
-        variant(input).layerCountInputName = levelInput
-      },
-    ],
   ]
   it.each(
     mutations.flatMap(([name, mutate]) =>
@@ -580,10 +580,15 @@ describe("holder level bridge definition and derivation boundaries", () => {
     mutate(input)
     input.selections =
       layers === undefined ? [] : [selection(levelOption, layers)]
+    rejected(input, "INVALID_DEFINITION", variantPointer(input, "mechanism"))
+  })
+  it("rejects the removed sibling mechanism fields instead of reading them", () => {
+    const input = fresh()
+    variant(input).layerCountInputName = levelInput
     rejected(
       input,
-      "INVALID_DEFINITION",
-      variantPointer(input, "holderLevelInputName"),
+      "INVALID_INPUT",
+      variantPointer(input, "layerCountInputName"),
     )
   })
   it.each([[], ["强攻", "强攻"], [""]].map((professions) => ({ professions })))(
@@ -608,8 +613,10 @@ describe("holder level bridge definition and derivation boundaries", () => {
     nextRule.effectId = "agent:1621:fixture:second-bridge"
     option.variants[0].effectIds = [nextRule.effectId]
     if (kind === "layers") {
-      delete option.variants[0].holderLevelInputName
-      option.variants[0].layerCountInputName = levelInput
+      option.variants[0].mechanism = {
+        kind: "complete-state",
+        layerCountInputName: levelInput,
+      }
     }
     input.definitions.effects.push(nextRule)
     input.catalog.options.push(option)
@@ -738,7 +745,7 @@ describe("holder level operation consumption follows executed numeric fields", (
     expect(calculate(input).nonCritical).toBeCloseTo(2700, 9)
     input.selections = [selection(levelOption)]
     expect(calculate(input).nonCritical).toBeCloseTo(3888, 9)
-    delete variant(input).holderLevelInputName
+    delete variant(input).mechanism
     rule(input).operation.value = literal("ratio", 0.2)
     requireParsed(input)
     expect(calculate(input).nonCritical).toBeCloseTo(3240, 9)
@@ -791,11 +798,7 @@ describe("holder level operation consumption follows executed numeric fields", (
       )
       selectState(input, layers)
       requireParsed(input)
-      rejected(
-        input,
-        "INVALID_DEFINITION",
-        variantPointer(input, "holderLevelInputName"),
-      )
+      rejected(input, "INVALID_DEFINITION", variantPointer(input, "mechanism"))
     },
   )
 
@@ -806,11 +809,7 @@ describe("holder level operation consumption follows executed numeric fields", (
       rule(input).operation.value = literal("ratio", 0.2)
       selectState(input, layers)
       requireParsed(input)
-      rejected(
-        input,
-        "INVALID_DEFINITION",
-        variantPointer(input, "holderLevelInputName"),
-      )
+      rejected(input, "INVALID_DEFINITION", variantPointer(input, "mechanism"))
     },
   )
 
@@ -875,7 +874,7 @@ describe("holder level operation consumption follows executed numeric fields", (
     "executes the explicit count30 %s positive control",
     (field) => {
       const input = replacement(field, null)
-      delete variant(input).holderLevelInputName
+      delete variant(input).mechanism
       variant(input).inputs = [
         {
           name: levelInput,
@@ -1040,8 +1039,10 @@ describe("holder level operation consumption follows executed numeric fields", (
   )
   it("retains the existing complete-state layer bridge without requiring holder level", () => {
     const input = request(null)
-    delete variant(input).holderLevelInputName
-    variant(input).layerCountInputName = levelInput
+    variant(input).mechanism = {
+      kind: "complete-state",
+      layerCountInputName: levelInput,
+    }
     variant(input).maximumLayers = 30
     rule(input).operation.value = nested("ratio")
     input.selections = [selection(levelOption, 30)]

@@ -162,12 +162,11 @@ export function validateAstraYaoM4Catalog(
         minimumMindscape: 4,
         coreSkillLevels: [1, 2, 3, 4, 5, 6, 7],
       }) ||
-    canonical(variant.damageItemRequirements) !== canonical([requiredItem]) ||
-    variant.exclusiveDamageItem !== true ||
-    variant.parameterMapping !== undefined ||
-    variant.layerCountInputName !== undefined ||
-    variant.declaredTeammateBeneficiary !== undefined ||
-    variant.squadUniqueEffect !== undefined ||
+    variant.mechanism?.kind !== "independent-settlement" ||
+    canonical(variant.mechanism.damageItemRequirements) !==
+      canonical([requiredItem]) ||
+    variant.mechanism.isolateDamageItems !== true ||
+    variant.mechanism.completeState !== undefined ||
     targets.length !== 1 ||
     targets[0]?.agentEntityId !== "1311" ||
     targets[0]?.category !== "uncategorized" ||

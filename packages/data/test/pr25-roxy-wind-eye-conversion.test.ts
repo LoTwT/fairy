@@ -118,7 +118,7 @@ describe("Roxy wind-eye independently frozen source and exact registration", () 
   })
   it("compiles one independent M6 option with exact target and original item", () => {
     const result = convert()
-    expect(result.definitions.revision).toBe("51")
+    expect(result.definitions.revision).toBe("52")
     expect(result.definitions.effects).toHaveLength(3)
     expect(result.catalog.options).toHaveLength(2)
     expect(result.coverage.records).toEqual([])
@@ -142,15 +142,18 @@ describe("Roxy wind-eye independently frozen source and exact registration", () 
       configuration: { minimumMindscape: 6 },
       maximumLayers: 1,
       inputs: [],
-      damageItemRequirements: [
-        {
-          itemId: "action:agent:1621:action:0024:base",
-          stat: "attack",
-          role: "base",
-          allowedModes: ["direct"],
-          source: "holder-current",
-        },
-      ],
+      mechanism: {
+        kind: "independent-settlement",
+        damageItemRequirements: [
+          {
+            itemId: "action:agent:1621:action:0024:base",
+            stat: "attack",
+            role: "base",
+            allowedModes: ["direct"],
+            source: "holder-current",
+          },
+        ],
+      },
     })
     expect(result.catalog.skillTargets).toEqual([
       {
@@ -227,13 +230,13 @@ describe("Roxy wind-eye independently frozen source and exact registration", () 
     [
       "damage requirement",
       (s: any) => {
-        s.variant.damageItemRequirements = []
+        s.variant.mechanism.damageItemRequirements = []
       },
     ],
     [
       "provider",
       (s: any) => {
-        delete s.variant.damageItemRequirements[0].source
+        delete s.variant.mechanism.damageItemRequirements[0].source
       },
     ],
     [

@@ -62,7 +62,7 @@ const independent = (entry: SupplementOption): SupplementOption => ({
 describe("Roxy additional ability frozen supplement registration", () => {
   it("generates precisely three independent rules and options on the existing Nanoka entity", () => {
     const output = convert()
-    expect(output.definitions.revision).toBe("51")
+    expect(output.definitions.revision).toBe("52")
     expect(entries).toHaveLength(3)
     expect(output.catalog.entities).toHaveLength(1)
     expect(output.catalog.entities[0]).toMatchObject({
@@ -87,8 +87,23 @@ describe("Roxy additional ability frozen supplement registration", () => {
             original.independentExpectations.qualificationProfessions,
         },
       })
-      expect(option.variants[0].holderLevelInputName).toBe(
-        index === 0 ? "roxy:additional:holder-level" : undefined,
+      expect(option.variants[0].mechanism).toEqual(
+        index === 0
+          ? {
+              kind: "holder-level",
+              holderLevelInputName: "roxy:additional:holder-level",
+            }
+          : index === 2
+            ? {
+                kind: "windswept-direct",
+                metadata: {
+                  applicabilityInputName:
+                    "roxy:weathered-direct-damage:applicable",
+                  applierTeam: "holder",
+                  singleActiveSourceGroup: "roxy-additional-windswept",
+                },
+              }
+            : undefined,
       )
       expect(option.variants[0].references).toEqual(
         (["zh", "en"] as const).flatMap((locale) =>
@@ -125,11 +140,14 @@ describe("Roxy additional ability frozen supplement registration", () => {
     expect(
       output.catalog.options.find((option) =>
         option.optionId.endsWith(":additional-weathered-direct-damage"),
-      )!.variants[0].windsweptDirectDamage,
+      )!.variants[0].mechanism,
     ).toEqual({
-      applicabilityInputName: "roxy:weathered-direct-damage:applicable",
-      applierTeam: "holder",
-      singleActiveSourceGroup: "roxy-additional-windswept",
+      kind: "windswept-direct",
+      metadata: {
+        applicabilityInputName: "roxy:weathered-direct-damage:applicable",
+        applierTeam: "holder",
+        singleActiveSourceGroup: "roxy-additional-windswept",
+      },
     })
     expect(output.catalog.skillTargets).toEqual([])
     expect(output.definitions.actions).toEqual([])

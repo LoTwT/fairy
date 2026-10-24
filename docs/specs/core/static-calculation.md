@@ -369,7 +369,7 @@ agent 来源绑定支持可选的 `potentialLevel`（整数域 0—6），含义
 条件计算与尚未验证的换算见[帷幕登记](../data/zzz-hp-static-effects.md#修订-32叶瞬光帷幕易伤)，
 结果在 `segments[].damage.evaluation.contributions` 中以具名 `replace` 来源报告。
 
-选项选择支持可选的 `beneficiaryActorId`，只作用于声明 `declaredTeammateBeneficiary` 的目录选项
+选项选择支持可选的 `beneficiaryActorId`，只作用于声明 `declared-teammate-beneficiary` 机制的目录选项
 （如莱特影画 4 的“仅当前前场角色”条款）：受益者是持有者同队的另一名实体，由调用方以该字段显式声明
 前后场事实。完整静态入口原样透传该字段给目录消费层校验（观察、身份、同队、非本人与选项适用性），
 不从本次动作的角色自动补全前场，也不引入位置状态；声明实体落在选项的职业/元素/队伍人数筛选之外时

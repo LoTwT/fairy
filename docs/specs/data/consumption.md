@@ -270,7 +270,8 @@ export declare function loadAllSimulData(): Promise<Record<SimulId, SimulData>>
   属于未登记 ID，同样落入未登记分支。任一未登记 ID 以 `UnknownCalculationEntitiesError` 拒绝，其
   `agents` 与 `wEngines` 字段一次列出全部未知来源 ID（保持选择原序与重复），不因第一个未知项短路；
   已登记文件缺失或解析失败同样使 Promise 拒绝，不返回部分结果。重复 ID 按出现次数重复读取，
-  空选择返回空成员数组的完整结构。身份组装遵循[身份映射与持久化](#身份映射与持久化)。
+  空选择返回空成员数组的完整结构。返回值携带的 `contractVersion` 当前为 `3`（目录变体机制判别
+  联合），必须与同版 `@randomplay/core` 一起使用。身份组装遵循[身份映射与持久化](#身份映射与持久化)。
 - 跨语言共享字段直接消费 `data`：严格共享下，登记为公共的字段（如 `live2D`、`partnerInfo.iconPath`、
   `partnerInfo.roleIcon`、`skill.*.material`、`extraLevel.*.maxLevel`、Shiyu 的 `zone` 数值骨架）要么在
   `data` 中完整存在，要么来源在全部语言缺失——不存在"部分语言提供"的制品状态，读取时没有也不需要
@@ -334,7 +335,7 @@ npm 安装包含完整数据；浏览器只在调用时请求对应 JSON 模块�
 
 应用显式导入 `@randomplay/data/definitions/effects/automatic.json`（Node 使用 `with { type: "json" }`，Vite 直接导入 JSON），将导入结果交给 `@randomplay/core` 的 `parseEffectRuleSet`。依次调用 `prepareEffects` 绑定适用装备及精炼档位、`supplyEffectState` 建立会话，再用 `advanceEffects` 按真实事件推进。每一步都检查 `Result.ok`，缺少实体或队伍事实的错误不能解释为未触发。data 与 core 之间没有运行时包依赖。
 
-静态目录消费使用 `static.json`、`static-catalog.json` 与 core 的 `calculateStaticDamageFromCatalog`；逐条支持状态与缺失原因在 `static-coverage.json`。三个显式子路径与其它 definitions 一样，发布时只删除 JSON 字符串之外的排版空白；归档字节 → 发布字节的映射见 `dist/definitions-publication.json`。根入口不导入它们。新静态规则集是独立消费单位，不与 starter / automatic 的重复机制直接拼接。完整输入和覆盖边界见[静态数据接入规范](zzz-hp-static-effects.md)。Node 打包消费及 Vite 开发/生产消费均验证目录计算和根入口冷启动边界。
+静态目录消费使用 `static.json`、`static-catalog.json` 与 core 的 `calculateStaticDamageFromCatalog`；逐条支持状态与缺失原因在 `static-coverage.json`。`static-catalog.json` 当前为 `schemaVersion: 2`：变体机制只存在于判别联合 `variant.mechanism`，不再接受旧的并列 optional 字段；消费方应与 `@randomplay/core` 同版使用。三个显式子路径与其它 definitions 一样，发布时只删除 JSON 字符串之外的排版空白；归档字节 → 发布字节的映射见 `dist/definitions-publication.json`。根入口不导入它们。新静态规则集是独立消费单位，不与 starter / automatic 的重复机制直接拼接。完整输入和覆盖边界见[静态数据接入规范](zzz-hp-static-effects.md)。Node 打包消费及 Vite 开发/生产消费均验证目录计算和根入口冷启动边界。
 
 当前 `entry` 仅代表快速支援、连携技、招架支援、回避支援四种真实入场。普通切人不在其中；调用方不得把其他动作标成任意一个合法 `EntryAction`。`entry-followup` 表示关联追加动作，不是第二次入场。事件的来源映射由应用依据真实动作完成，本包不提供未经核实的原始动作 ID 映射。
 

@@ -62,10 +62,10 @@
       "docs/specs/core/factors/stun-damage.md": "180cc28eccb869d978663aaf58f0db3497500d1a4a0017eeae0c9503ac38729b"
     },
     "fairyCalculationDataVersion": {
-      "packageVersion": "0.4.0",
-      "contractVersion": 2,
+      "packageVersion": "0.5.0",
+      "contractVersion": 3,
       "gameVersion": "3.3",
-      "snapshotId": "sha256:02398d0fc76b4eed4bd7aaccd1370f8c161b5331266a0442c1f54ee67668f03c"
+      "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
     }
   },
   "inputLayer": "externally-declared-resolved-source-state",
@@ -107415,6 +107415,18 @@
         }
       },
       "currentSnapshotId": "sha256:02398d0fc76b4eed4bd7aaccd1370f8c161b5331266a0442c1f54ee67668f03c"
+    },
+    {
+      "reason": "Revision 52 replaces the nine catalog-variant mechanism fields with the StaticCatalogVariantMechanism discriminated union. Rules, numeric results and the integrated archive stay frozen; the catalog schema version, package/contract versions, current snapshot and catalog bytes advance together.",
+      "implementationBase": "d8a8f202",
+      "previous": {
+        "snapshotId": "sha256:02398d0fc76b4eed4bd7aaccd1370f8c161b5331266a0442c1f54ee67668f03c",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "3a30bd0e5e5bc8fc2087163da1fc5e857cbca71ccc1bf2bf8c3b2777193ce823",
+          "packages/data/definitions/effects/static-catalog.json": "c8455d57b00a0329da50841e4d1a0bcc7e35bc28fd2b4319520dba01ab1c670c"
+        }
+      },
+      "currentSnapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
     }
   ]
 }

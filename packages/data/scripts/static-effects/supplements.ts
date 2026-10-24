@@ -17,10 +17,10 @@ import type {
   SkillCategory,
   SourceIdentity,
   SpecialSkillLevel,
-  StaticCatalogDamageItemRequirement,
   StaticCatalogEntity,
   StaticCatalogInputRequirement,
   StaticCatalogVariant,
+  StaticCatalogVariantMechanism,
   UniquenessPolicy,
 } from "@randomplay/shared"
 
@@ -164,52 +164,18 @@ export interface SupplementVariantSpec {
   readonly inputs: readonly StaticCatalogInputRequirement[]
   readonly applicability: StaticCatalogVariant["applicability"]
   /**
-   * 声明式伤害项要求：与固定来源 damage-item-targeting 语义共用同一
-   * StaticCatalogDamageItemRequirement 契约。选中该选项时，命中必须包含
-   * 满足身份与元数据的伤害项；由规则的 itemIds 精确绑定，消费端据此发现
-   * 需要提供的独立项。仅 hit-adjustment 的补充选项需要登记。
+   * 目录变体机制：与共享 `StaticCatalogVariantMechanism` 使用同一判别联合，
+   * convert 原样透传并只补目录变体层数上限。补充登记不得用旧 9 个并列
+   * optional 字段表达机制；每个 arm 只携带自己的字段。
    */
-  readonly damageItemRequirements?: readonly StaticCatalogDamageItemRequirement[]
+  readonly mechanism?: StaticCatalogVariantMechanism
   readonly conditionDescription: string
   readonly name: string
   readonly target: "self" | "team"
   /**
-   * 声明式同队受益者：受益者是持有者同队的另一名实体，由每次选择以
-   * beneficiaryActorId 显式声明（如莱特位于后场时的当前前场角色）。目录
-   * 消费端校验声明实体并只把该实体纳入受益集合；不引入时间线或位置引擎。
-   */
-  readonly declaredTeammateBeneficiary?: true
-  /**
-   * 全队唯一效果声明（透传到目录变体）：该选项表示的效果全队唯一，目录
-   * 选择阶段按（持有者队伍， optionId）跨绑定强制单一启用来源；同队第二
-   * 个启用选择被拒绝，要求调用方声明单一有效来源。用于“伤害提升效果
-   * 全队唯一”这类条款，见 StaticCatalogVariant.squadUniqueEffect。
-   */
-  readonly squadUniqueEffect?: true
-  /**
-   * 独占伤害项声明（透传到目录变体的 exclusiveDamageItem）：启用该选项时，
-   * 命中的伤害项必须恰好是本变体 damageItemRequirements 声明的唯一项；
-   * 混合请求被目录明确拒绝，不静默丢弃多余项。用于自带命中级机制（如
-   * 必定暴击）会把同一请求全部伤害项卷入的选项；声明时必须恰好登记一个
-   * 伤害项要求（convert 生成期同样校验）。
-   */
-  readonly exclusiveDamageItem?: true
-  /**
-   * 完整状态层数桥接（透传到目录变体的 layerCountInputName）：声明后
-   * selection.layers 表示逻辑状态层数（0 关闭、严格安全整数
-   * 0..layerCountMaximumLayers），目录按绑定派生 count 输入，实际展开固定
-   * 单实例；规则必须是 maximumLayers 为 1 的单条 supplied 贡献，且其值
-   * 表达式真实消费该 count 输入（目录定义校验强制，不靠名称猜测）。不
-   * 声明时保持补充的普通逐层展开语义。
-   */
-  readonly layerCountInputName?: string
-  /** 目录从绑定 holder 的真实角色等级派生 count 输入。 */
-  readonly holderLevelInputName?: string
-  readonly elementBuffInputs?: StaticCatalogVariant["elementBuffInputs"]
-  readonly windsweptDirectDamage?: StaticCatalogVariant["windsweptDirectDamage"]
-  /**
    * 桥接选项的逻辑层数上限（编译为目录变体 maximumLayers）；仅可与
-   * layerCountInputName 一起声明，二者必须同时提供。
+   * `mechanism` 的层数桥接 arm（`complete-state` 或
+   * `independent-settlement.completeState`）一起声明，二者必须同时提供。
    */
   readonly layerCountMaximumLayers?: number
 }
@@ -2513,7 +2479,7 @@ const lighterMindscape4FrontlineEnergyRegen: Supplement = {
     configuration: { minimumMindscape: 4 },
     inputs: [],
     applicability: {},
-    declaredTeammateBeneficiary: true,
+    mechanism: { kind: "declared-teammate-beneficiary" },
     conditionDescription:
       "莱特位于后场时，仅当前前场角色的能量自动回复效率提升 10%（受益者基础回能 × 10%；基础回能 1.2/5.0 下分别 +0.12/+0.5 点/秒）；选择本选项即断言莱特位于后场，并须以 beneficiaryActorId 显式声明当前前场角色（持有者同队的另一名实体），后场队友与莱特本人不受益。同句的后场回复 4 点能量（18 秒冷却）是独立瞬时机制，不在本选项内。",
     name: "影画4 · energyRegen（前场角色）",
@@ -2947,7 +2913,7 @@ const crimsonMoonCasketSquadDamageBonus: Supplement = {
     configuration: { refinements: [1, 2, 3, 4, 5] },
     inputs: [],
     applicability: {},
-    squadUniqueEffect: true,
+    mechanism: { kind: "squad-unique" },
     conditionDescription:
       "装备者发动[强化特殊技]造成风属性伤害时，全队其他角色造成的伤害提升 20/23/26/29/32%（按精炼 1—5），持续 50 秒，重复触发刷新持续时间；触发事实由调用方启用本选项断言，50 秒与刷新不模拟。受益者是持有者同队其他角色（本人与异队不受益），增伤不按元素或技能筛选受益者的伤害。伤害提升效果全队唯一：同一队伍最多一个启用来源，须声明单一有效来源（只在一名持有者的绑定上启用）；失衡值提升条款不在本选项。与暴击率、风抗忽视相互独立。",
     name: "绯月银棺 · teamDmgBonus",
@@ -3052,17 +3018,20 @@ const evelynMindscape6LunaluxGarroteFollowUp: Supplement = {
     configuration: { minimumMindscape: 6 },
     inputs: [],
     applicability: {},
-    damageItemRequirements: [
-      {
-        itemId: "evelyn:lunalux-garrote",
-        stat: "attack",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-        requiredDirectMultiplier: 0,
-        requiredSkillCategory: "chain",
-      },
-    ],
+    mechanism: {
+      kind: "independent-settlement",
+      damageItemRequirements: [
+        {
+          itemId: "evelyn:lunalux-garrote",
+          stat: "attack",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: "chain",
+        },
+      ],
+    },
     conditionDescription:
       "影画 6：连携/终结取得[弦影绝锋]后，[普通攻击]、[冲刺攻击]、[特殊技]或[强化特殊技]命中主要攻击目标时，额外释放一段[月辉丝·弦]，对范围内敌人造成等同于伊芙琳 375% 攻击力的火属性伤害（该伤害被视为[连携技]伤害）。本次追击由调用方声明触发并显式结算：命中须携带独立目标并以连携分类结算，16 次上限、20 秒持续与刷新不模拟。",
     name: "影画6 · 月辉丝·弦（独立追击）",
@@ -3142,17 +3111,20 @@ const s0anbyMindscape6ElectromagneticVortex: Supplement = {
     configuration: { minimumMindscape: 6 },
     inputs: [],
     applicability: {},
-    damageItemRequirements: [
-      {
-        itemId: "s0anby:electromagnetic-vortex",
-        stat: "attack",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-        requiredDirectMultiplier: 0,
-        requiredSkillCategory: "follow-up",
-      },
-    ],
+    mechanism: {
+      kind: "independent-settlement",
+      damageItemRequirements: [
+        {
+          itemId: "s0anby:electromagnetic-vortex",
+          stat: "attack",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: "follow-up",
+        },
+      ],
+    },
     conditionDescription:
       "影画 6：触发 6 次[白雷]的额外伤害时引发电磁涡流，对目标及其周围的敌人造成零号·安比 1000% 攻击力的电属性伤害（该伤害被视为[追加攻击]伤害）。本次涡流由调用方声明触发并显式结算一次：命中须携带独立目标并以追加攻击分类结算（自动计入追加攻击增益），六次计数不自动累计，1000% 不乘 6，也不计作白雷本身。",
     name: "影画6 · 电磁涡流（独立追击）",
@@ -3236,17 +3208,20 @@ const dialynMindscape6AftertoneEcho: Supplement = {
     configuration: { minimumMindscape: 6 },
     inputs: [],
     applicability: {},
-    damageItemRequirements: [
-      {
-        itemId: "dialyn:aftertone-echo",
-        stat: "attack",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-        requiredDirectMultiplier: 0,
-        requiredSkillCategory: "enhanced-special",
-      },
-    ],
+    mechanism: {
+      kind: "independent-settlement",
+      damageItemRequirements: [
+        {
+          itemId: "dialyn:aftertone-echo",
+          stat: "attack",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: "enhanced-special",
+        },
+      ],
+    },
     conditionDescription:
       "影画 6：经[核心被动]使队友以终结技入场取得[余音]后，该队友攻击命中敌人时，琉音对敌人造成额外一次等同于琉音 480% 攻击力的物理属性伤害（该伤害被视为[强化特殊技]伤害）。本次伤害由调用方声明触发并显式结算：hit.actorId 与伤害项均按琉音结算（队友只是触发者），命中须携带独立目标并以强化特殊技分类结算；1 秒冷却、12 次上限、刷新与唯一持有人不模拟。",
     name: "影画6 · 余音（独立追击）",
@@ -3393,27 +3368,32 @@ const nangongyuMindscape6VibratoModified = (
   },
   variant: {
     configuration: { minimumMindscape: 6 },
-    layerCountInputName: nangongyuMindscape6LayerInput(group),
     layerCountMaximumLayers: 4,
     inputs: [],
     applicability: {},
-    damageItemRequirements: [
-      {
-        itemId: "nangongyu:vibrato-modified",
-        stat: "attack",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "anomaly-source",
-        requiredDirectMultiplier: 0,
-        // round1 修复 R01：独立结算分类契约。目标元数据的 uncategorized
-        // 只负责标签展开；这里显式声明 requiredSkillCategory 复用既有
-        // 最终有效分类守卫——原始分类、保留分类标签、合法目标展开的分类
-        // 与追加攻击标签都参与比较，借用普通/连携/追加攻击分类或混入其他
-        // 真实目标的命中按 CONTEXT_MISMATCH 拒绝，独立异放不吃按技能分类
-        // 筛选的增益。
-        requiredSkillCategory: "uncategorized",
+    mechanism: {
+      kind: "independent-settlement",
+      damageItemRequirements: [
+        {
+          itemId: "nangongyu:vibrato-modified",
+          stat: "attack",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "anomaly-source",
+          requiredDirectMultiplier: 0,
+          // round1 修复 R01：独立结算分类契约。目标元数据的 uncategorized
+          // 只负责标签展开；这里显式声明 requiredSkillCategory 复用既有
+          // 最终有效分类守卫——原始分类、保留分类标签、合法目标展开的分类
+          // 与追加攻击标签都参与比较，借用普通/连携/追加攻击分类或混入其他
+          // 真实目标的命中按 CONTEXT_MISMATCH 拒绝，独立异放不吃按技能分类
+          // 筛选的增益。
+          requiredSkillCategory: "uncategorized",
+        },
+      ],
+      completeState: {
+        layerCountInputName: nangongyuMindscape6LayerInput(group),
       },
-    ],
+    },
     conditionDescription:
       group === "nonphysical"
         ? "影画 6：敌人不处于失衡时按所列事件累计[颤音：改]（最多 4 层），进入失衡时全部清除；清除时若存在原属性异常，南宫羽结算一次[异放]伤害，基础比例 = 原异常系数 × M6 比例（以太/电/火/冰/风归一为 5），每层再 +25%。本选项覆盖五种非物理原异常，按本次结算声明的命中元素匹配（物理走同组的物理选项）。调用方声明本次清除事件与有效层数（selection.layers：0 关闭、严格整数 1—4）：命中以 uncategorized 分类携带独立目标、以 damage.kind=anomaly-settlement 结算，伤害项倍率从 0 开始由规则一次赋值，statSource 与 damage.anomalySource 一致（复用原异常虚拟来源与快照）；携带其他技能分类/分类标签/其他真实目标按冲突拒绝。"
@@ -4395,21 +4375,24 @@ const bigCylinderRetaliationDefenseDamage: Supplement = {
     configuration: { refinements: [1, 2, 3, 4, 5] },
     inputs: [],
     applicability: {},
-    damageItemRequirements: [
-      {
-        itemId: "big-cylinder:retaliation",
-        stat: "defense",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-        requiredDirectMultiplier: 0,
-        requiredSkillCategory: "uncategorized",
-      },
-    ],
-    // 独占伤害项：来源保证本具名项最终必暴，core 也验证唯一 regular/direct 项；
-    // 启用时命中只能携带本选项声明的唯一独立项；
-    // 混合请求按 CONTEXT_MISMATCH 拒绝（目录入口能力，选择阶段强制）。
-    exclusiveDamageItem: true,
+    mechanism: {
+      kind: "independent-settlement",
+      damageItemRequirements: [
+        {
+          itemId: "big-cylinder:retaliation",
+          stat: "defense",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: "uncategorized",
+        },
+      ],
+      // 独占伤害项：来源保证本具名项最终必暴，core 也验证唯一 regular/direct 项；
+      // 启用时命中只能携带本选项声明的唯一独立项；
+      // 混合请求按 CONTEXT_MISMATCH 拒绝（目录入口能力，选择阶段强制）。
+      isolateDamageItems: true,
+    },
     conditionDescription:
       "受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者 600/690/780/870/960% 防御力的伤害（按精炼 1—5），该额外伤害由来源保证最终暴击概率为 1，不接受显式 criticalRate 来源或 declaredCriticalRate，普通暴伤保留既有来源契约；7.5 秒内最多触发一次。本次附伤由调用方声明触发并显式结算：命中须只携带本独立项（独占结算，混合其他伤害项会被拒绝）、以 uncategorized 分类结算、读取装备者当前防御力（元素由调用方按实际结算声明，来源未标注）；7.5 秒冷却与触发检测不模拟。首句承伤降低不属于本选项。",
     name: "万斤顶 · 受击附伤（独立结算）",
@@ -4528,24 +4511,27 @@ const cannonRotorCriticalHitBonusDamage: Supplement = {
     configuration: { refinements: [1, 2, 3, 4, 5] },
     inputs: [],
     applicability: {},
-    // 独占结算：声明最终暴击概率与被结算的独立项一一对应，不留多项共享
-    // 一个声明概率的歧义（目录入口在选择阶段强制）。
-    exclusiveDamageItem: true,
-    damageItemRequirements: [
-      {
-        itemId: "cannon-rotor:bonus-damage",
-        stat: "attack",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-        requiredDirectMultiplier: 0,
-        requiredSkillCategory: "uncategorized",
-        // 最终暴击概率必须由调用方显式声明（hit.declaredCriticalRate），
-        // 无默认值：不默许读取装备者面板普通暴击率充当该次独立命中的
-        // 概率（来源未证明附伤的暴击能力）。
-        requiredCriticalRateDeclaration: true,
-      },
-    ],
+    mechanism: {
+      kind: "independent-settlement",
+      // 独占结算：声明最终暴击概率与被结算的独立项一一对应，不留多项共享
+      // 一个声明概率的歧义（目录入口在选择阶段强制）。
+      isolateDamageItems: true,
+      damageItemRequirements: [
+        {
+          itemId: "cannon-rotor:bonus-damage",
+          stat: "attack",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: "uncategorized",
+          // 最终暴击概率必须由调用方显式声明（hit.declaredCriticalRate），
+          // 无默认值：不默许读取装备者面板普通暴击率充当该次独立命中的
+          // 概率（来源未证明附伤的暴击能力）。
+          requiredCriticalRateDeclaration: true,
+        },
+      ],
+    },
     conditionDescription:
       "攻击命中敌人并触发暴击时，额外造成 200% 攻击力的伤害（五档同值），8/7.5/7/6.5/6 秒内最多触发一次。本次附伤由调用方声明触发攻击暴击并显式结算：命中须只携带本独立项（独占结算，混合其他伤害项会被拒绝）、以 uncategorized 分类结算、读取装备者当前攻击力，并显式声明本次独立附伤采用的最终暴击概率（hit.declaredCriticalRate，无默认值；元素同样由调用方按实际结算声明，来源未标注）。结果的暴击分支沿用装备者当前普通暴击伤害，是本接口的条件计算模型，不证明游戏附伤能暴击或继承该暴击伤害。触发间隔与暴击检测不模拟。同音擎的常驻攻击力选项独立共存。",
     name: "口径超规 · 暴击附伤（独立结算）",
@@ -4630,24 +4616,27 @@ const benBiggerMindscape2BlockCounterDefenseDamage: Supplement = {
     configuration: { minimumMindscape: 2 },
     inputs: [],
     applicability: {},
-    // 独占结算：声明最终暴击概率与被结算的独立项一一对应，不留多项共享
-    // 一个声明概率的歧义（目录入口在选择阶段强制）。
-    exclusiveDamageItem: true,
-    damageItemRequirements: [
-      {
-        itemId: "benbigger:block-counter-bonus-damage",
-        stat: "defense",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-        requiredDirectMultiplier: 0,
-        requiredSkillCategory: "uncategorized",
-        // 最终暴击概率必须由调用方显式声明（hit.declaredCriticalRate），
-        // 无默认值：不默许读本面板普通暴击率充当该次独立命中的概率
-        // （来源未证明附伤的暴击能力）。
-        requiredCriticalRateDeclaration: true,
-      },
-    ],
+    mechanism: {
+      kind: "independent-settlement",
+      // 独占结算：声明最终暴击概率与被结算的独立项一一对应，不留多项共享
+      // 一个声明概率的歧义（目录入口在选择阶段强制）。
+      isolateDamageItems: true,
+      damageItemRequirements: [
+        {
+          itemId: "benbigger:block-counter-bonus-damage",
+          stat: "defense",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: "uncategorized",
+          // 最终暴击概率必须由调用方显式声明（hit.declaredCriticalRate），
+          // 无默认值：不默许读本面板普通暴击率充当该次独立命中的概率
+          // （来源未证明附伤的暴击能力）。
+          requiredCriticalRateDeclaration: true,
+        },
+      ],
+    },
     conditionDescription:
       "影画 2：在[特殊技]或[强化特殊技]中，成功触发格挡反击时，额外造成本 300% 防御力的伤害。本次附伤由调用方声明触发并显式结算：命中须只携带本独立项（独占结算，混合其他伤害项会被拒绝）、以 uncategorized 分类结算、读取本当前防御力，并显式声明本次独立附伤采用的最终暴击概率（hit.declaredCriticalRate，无默认值；元素同样由调用方按实际结算声明，来源未标注）。结果的暴击分支沿用普通暴击伤害来源及本命中合法暴伤贡献（未显式指定来源时读本当前普通暴击伤害），是本接口的条件计算模型，不证明游戏附伤能暴击或继承该暴击伤害。格挡成功检测、时间窗、追击次数、盾值与冷却不模拟；[特殊技]/[强化特殊技]的主动攻击、追加攻击与格挡追击段不经本选项结算。",
     name: "以守为攻 · 格挡反击附伤（独立结算）",
@@ -4812,24 +4801,27 @@ const miyabiFrostburnBreakDamage: Supplement = {
     configuration: { coreSkillLevels: [1, 2, 3, 4, 5, 6, 7] },
     inputs: [],
     applicability: {},
-    // 独占结算：声明最终暴击概率与被结算的独立项一一对应，不留多项共享
-    // 一个声明概率的歧义（目录入口在选择阶段强制）。
-    exclusiveDamageItem: true,
-    damageItemRequirements: [
-      {
-        itemId: "miyabi:frostburn-break-damage",
-        stat: "attack",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-        requiredDirectMultiplier: 0,
-        requiredSkillCategory: "uncategorized",
-        // 最终暴击概率必须由调用方显式声明（hit.declaredCriticalRate），
-        // 无默认值：不默许读取星见雅面板普通暴击率充当该次独立命中的
-        // 概率（来源未证明霜灼·破的暴击能力）。
-        requiredCriticalRateDeclaration: true,
-      },
-    ],
+    mechanism: {
+      kind: "independent-settlement",
+      // 独占结算：声明最终暴击概率与被结算的独立项一一对应，不留多项共享
+      // 一个声明概率的歧义（目录入口在选择阶段强制）。
+      isolateDamageItems: true,
+      damageItemRequirements: [
+        {
+          itemId: "miyabi:frostburn-break-damage",
+          stat: "attack",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: "uncategorized",
+          // 最终暴击概率必须由调用方显式声明（hit.declaredCriticalRate），
+          // 无默认值：不默许读取星见雅面板普通暴击率充当该次独立命中的
+          // 概率（来源未证明霜灼·破的暴击能力）。
+          requiredCriticalRateDeclaration: true,
+        },
+      ],
+    },
     conditionDescription:
       "核心被动[寒炎]：对附着[冰焰]的敌人施加[霜寒]效果时，消除[冰焰]并触发[霜灼·破]，对目标造成星见雅攻击力缩放的烈霜伤害（按核心 1—7 为 750/875/1000/1125/1250/1375/1500%）。触发已发生由调用方选中本选项并提供独立项断言：命中须只携带本独立项（独占结算，混合其他伤害项会被拒绝）、以 uncategorized 分类结算、读取星见雅当前攻击力，并显式声明本次独立命中的最终暴击概率（hit.declaredCriticalRate，无默认值；烈霜命中按 frost 结算，规则限定 hit.element=frost，非烈霜命中零贡献）。结果的暴击分支沿用普通暴击伤害来源及本命中合法暴伤贡献（未显式指定来源时读星见雅当前普通暴击伤害），是本接口的条件计算模型，不证明游戏内该伤害能暴击或继承该暴击伤害。影画 4 起[皲裂]自动对同一事件伤害 +30%（影画 0—3 不生效，不要求另行选择）；同句的 250 点喧响值不模拟。异常积蓄、冰焰/霜寒/霜灼状态机、落霜取得、10 秒触发间隔与[霜灼]状态不模拟；霜月/风花等普通动作不经本选项结算。",
     name: "寒炎 · 霜灼·破（独立结算）",
@@ -4944,19 +4936,22 @@ const janeMindscape6ProficiencyDamage: Supplement = {
     configuration: { minimumMindscape: 6 },
     inputs: [],
     applicability: {},
-    exclusiveDamageItem: true,
-    damageItemRequirements: [
-      {
-        itemId: "jane:m6-proficiency-damage",
-        stat: "anomalyProficiency",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-        requiredDirectMultiplier: 0,
-        requiredSkillCategory: "uncategorized",
-        requiredCriticalRateDeclaration: true,
-      },
-    ],
+    mechanism: {
+      kind: "independent-settlement",
+      isolateDamageItems: true,
+      damageItemRequirements: [
+        {
+          itemId: "jane:m6-proficiency-damage",
+          stat: "anomalyProficiency",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: "uncategorized",
+          requiredCriticalRateDeclaration: true,
+        },
+      ],
+    },
     conditionDescription:
       "队伍角色施加的该次强击暴击后，声明简触发一次物理附伤（自身当前异常精通 ×16）。独占 uncategorized 独立项、零初始倍率；调用方必须显式声明新附伤最终暴击概率 hit.declaredCriticalRate，触发强击已暴击不代替此声明。普通暴伤沿既有来源与命中贡献，这是条件计算，不证明附伤的游戏暴击能力或暴伤继承。狂热 CR/CD 选项独立选择，不自动加入。",
     name: "「肮脏」技巧 · 精通附伤（独立结算）",
@@ -5060,18 +5055,21 @@ const aliceMindscape6ProficiencyDamage: Supplement = {
     configuration: { minimumMindscape: 6 },
     inputs: [],
     applicability: {},
-    exclusiveDamageItem: true,
-    damageItemRequirements: [
-      {
-        itemId: "alice:m6-proficiency-damage",
-        stat: "anomalyProficiency",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-        requiredDirectMultiplier: 0,
-        requiredSkillCategory: "uncategorized",
-      },
-    ],
+    mechanism: {
+      kind: "independent-settlement",
+      isolateDamageItems: true,
+      damageItemRequirements: [
+        {
+          itemId: "alice:m6-proficiency-damage",
+          stat: "anomalyProficiency",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: "uncategorized",
+        },
+      ],
+    },
     conditionDescription:
       "决胜状态内队伍角色命中后，声明爱丽丝触发一次物理必暴附伤（自身当前异常精通 ×33）。独占 uncategorized 独立项、零初始倍率；来源保证本次附伤最终暴击概率为 1，不接受显式 criticalRate 来源或 declaredCriticalRate。普通暴伤沿既有来源契约；30 秒状态、1 秒间隔、最多 6 次及刷新由调用方管理，本次不自动乘 6。核心周期附伤不属于本选项。",
     name: "心中的百里香 · 精通必暴附伤（独立结算）",
@@ -5183,15 +5181,18 @@ const graceMindscape6Grenades = (enhanced: boolean): Supplement => {
       configuration: { minimumMindscape: 6 },
       inputs: [],
       applicability: {},
-      damageItemRequirements: [
-        {
-          itemId: `${actionId}:base`,
-          stat: "attack",
-          role: "base",
-          allowedModes: ["direct"],
-          source: "holder-current",
-        },
-      ],
+      mechanism: {
+        kind: "independent-settlement",
+        damageItemRequirements: [
+          {
+            itemId: `${actionId}:base`,
+            stat: "attack",
+            role: "base",
+            allowedModes: ["direct"],
+            source: "holder-current",
+          },
+        ],
+      },
       conditionDescription: `本次已消耗全部电能发动${name}，所有原组合手雷命中且各次乘区相同：${enhanced ? "原两颗变三颗，每颗×2，原合计×3" : "原一颗变两颗，每颗×2，原合计×4"}。使用原动作倍率，不重复手动强化；不包含涡流、电磁场、循环或脉冲/异放的未证M6修正。`,
       name: `影画6 · 起爆扳机（${name}）`,
       target: "self",
@@ -5893,18 +5894,21 @@ const astraYaoMindscape4QuickAssistDamage: Supplement = {
     name: "后颈的碎发 · 强攻队友快速支援附伤（显式条件模型）",
     conditionDescription:
       "只由具名 astra-yao-m4-quick-assist-damage 事件结算一次 3×耀嘉音当前 ATK；队友为实际命中者。regular/uncategorized、元素、声明概率与 CD/穿透来源是条件模型，不是游戏实测结论。未选/0 层仍验证完整依赖，不向普通动作自动追加。",
-    exclusiveDamageItem: true,
-    damageItemRequirements: [
-      {
-        itemId: "astrayao:m4-quick-assist-bonus-damage",
-        stat: "attack",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-        requiredDirectMultiplier: 0,
-        requiredSkillCategory: "uncategorized",
-      },
-    ],
+    mechanism: {
+      kind: "independent-settlement",
+      isolateDamageItems: true,
+      damageItemRequirements: [
+        {
+          itemId: "astrayao:m4-quick-assist-bonus-damage",
+          stat: "attack",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: "uncategorized",
+        },
+      ],
+    },
   },
 }
 

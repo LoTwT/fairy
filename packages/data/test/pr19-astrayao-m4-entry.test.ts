@@ -922,12 +922,21 @@ describe("Astra Yao M4 explicit cross-actor model", () => {
         (r) => change(option(r), "target", "self"),
         (r) => change(option(r), "variants.0.target", "self"),
         (r) =>
-          change(option(r), "variants.0.damageItemRequirements", undefined),
-        (r) => change(option(r), "variants.0.exclusiveDamageItem", undefined),
+          change(
+            option(r),
+            "variants.0.mechanism.damageItemRequirements",
+            undefined,
+          ),
         (r) =>
           change(
             option(r),
-            "variants.0.damageItemRequirements.0.requiredCriticalRateDeclaration",
+            "variants.0.mechanism.isolateDamageItems",
+            undefined,
+          ),
+        (r) =>
+          change(
+            option(r),
+            "variants.0.mechanism.damageItemRequirements.0.requiredCriticalRateDeclaration",
             true,
           ),
         (r) => change(mechanism(r), "itemId", "other"),

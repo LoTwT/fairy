@@ -1037,22 +1037,27 @@ describe("batch 06 declared teammate beneficiary catalog boundary", () => {
       ).toBe(true)
   })
 
-  it("rejects a non-literal declared teammate beneficiary value", () => {
+  it("rejects a declared teammate beneficiary arm with an unrelated field", () => {
     const mutated = mutatedCatalog((clone) => {
       const option = clone.options.find(
         (o) =>
           o.optionId ===
           "nanoka:agents:lighter:mindscape-4-frontline-energy-regen",
       )!
-      ;(
-        option.variants[0] as { declaredTeammateBeneficiary?: unknown }
-      ).declaredTeammateBeneficiary = "yes"
+      ;(option.variants[0] as { mechanism?: unknown }).mechanism = {
+        kind: "declared-teammate-beneficiary",
+        declaredTeammateBeneficiary: true,
+      }
     })
     const validated = validateStaticCatalog(mutated, definitions)
     expect(validated.ok).toBe(false)
     if (!validated.ok)
       expect(
-        validated.issues.some((issue) => issue.code === "INVALID_INPUT"),
+        validated.issues.some(
+          (issue) =>
+            issue.code === "INVALID_DEFINITION" &&
+            issue.pointer.endsWith("/mechanism/declaredTeammateBeneficiary"),
+        ),
       ).toBe(true)
   })
 })
