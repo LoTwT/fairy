@@ -35,7 +35,7 @@
    `mechanism: StaticCatalogVariantMechanism`。新类型是判别联合，每个 arm 只接受自己的字段。
 2. 旧字段不再读取，也不存在双形状兼容窗口。`static-catalog.json` 中旧 9 字段的出现次数为 0。
 3. `CALCULATION_CONTRACT_VERSION` 由 `2` 升至 `3`；不支持的契约版本会被 core 拒绝。
-4. `static-catalog.json` 的 `schemaVersion` 由 `1` 升至 `2`，core 按制品逐项校验版本。
+4. `static-catalog.json` 的 `schemaVersion` 由 `1` 升至 `2`，core 校验目录 `schemaVersion`；data-product 读取器分别断言 rules=1、catalog=2、coverage=1。
 5. 消费方必须与同版 core/data 一起使用。混用 0.5.0 与 0.4.x 的 data/core 会因契约或制品版本不一致而失败。
 
 正式形状、命名理由与不变量见 [P4-2 计划第 2 节](phase4-catalog-mechanism-union.md#2-正式形状)。
@@ -121,7 +121,7 @@
 - 33 条 out-of-scope 补充记录带 `reason`，仍不可作者化。
 - 10 个机制变体不在当前 19 条作者记录内；本批只支持 `independent-settlement` 的最小 authoring。
 - P4-1（其余机制 arm 的作者层覆盖）与 P4-3（目录根部 `mechanisms` envelope）后置。
-- Phase 3 的规则层机制收敛继续后置，直到出现真实数据需求。
+- 规则层 `activation` / `triggered` / `continuous` / `instant` / `modification` 收敛（P4-5）不做；Phase 3 公共 manifest 外壳继续暂缓。
 
 以上限制沿用 [P4-2 计划第 4 节](phase4-catalog-mechanism-union.md#4-生成与作者层)、
 [第 9 节](phase4-catalog-mechanism-union.md#9-后置事项)与 [P2-4b-lite 记录](phase2-miyabi-supplement-migration.md)。
