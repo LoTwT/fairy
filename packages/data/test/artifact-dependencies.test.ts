@@ -127,7 +127,7 @@ function createFixture(): DependencyFixture {
     actions: [],
   })
   const catalogText = JSON.stringify({
-    schemaVersion: 1,
+    schemaVersion: 2,
     ruleSetId: "test-effects",
     revision: "1",
     source: staticSource(),

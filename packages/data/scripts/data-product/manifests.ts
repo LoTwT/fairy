@@ -867,6 +867,17 @@ function parseStaticRules(
   return rules
 }
 
+function expectStaticArtifactSchemaVersion(
+  label: string,
+  actual: number,
+  expected: number,
+): void {
+  if (actual === expected) return
+  throw new Error(
+    `${label}: schemaVersion expected ${expected}, received ${actual}`,
+  )
+}
+
 /** 读取三个静态效果制品，并构造统一 manifest 与可查询的目录/覆盖数据。 */
 export function loadStaticEffectsProduct(
   definitionsDirectory = defaultDefinitionsDirectory,
@@ -919,7 +930,11 @@ export function loadStaticEffectsProduct(
   const catalog = parseStaticCatalog(catalogFile.value, catalogLabel)
   const coverage = parseStaticCoverage(coverageFile.value, coverageLabel)
   // 三个 effects 制品的外壳版本各自演进：规则集与覆盖报告保持 1，目录在
-  // P4-2 因变体机制判别联合升到 2。共享身份仍由 ruleSetId/revision 强制。
+  // P4-2 因变体机制判别联合升到 2。这里逐制品断言，不恢复“三制品同版本”
+  // 假设；共享身份仍由 ruleSetId/revision 强制。
+  expectStaticArtifactSchemaVersion(staticLabel, schemaVersion, 1)
+  expectStaticArtifactSchemaVersion(catalogLabel, catalog.schemaVersion, 2)
+  expectStaticArtifactSchemaVersion(coverageLabel, coverage.schemaVersion, 1)
   expectSharedStaticField(
     "ruleSetId",
     ruleSetId,

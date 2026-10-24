@@ -1312,6 +1312,162 @@ describe("catalog static calculation", () => {
       })
     },
   )
+  it("reports variant mechanism field errors at their leaf pointers", () => {
+    const independentRequirement = {
+      itemId: "independent",
+      stat: "attack",
+      role: "base",
+      allowedModes: ["direct"],
+      source: "holder-current",
+      requiredDirectMultiplier: 0,
+    } as const
+    const cases = [
+      [
+        "complete-state bridge input name",
+        {
+          kind: "independent-settlement",
+          damageItemRequirements: [independentRequirement],
+          completeState: { layerCountInputName: "" },
+        },
+        "/catalog/options/0/variants/0/mechanism/completeState/layerCountInputName",
+        "INVALID_DEFINITION",
+      ],
+      [
+        "complete-state arm input name",
+        { kind: "complete-state", layerCountInputName: "" },
+        "/catalog/options/0/variants/0/mechanism/layerCountInputName",
+        "INVALID_DEFINITION",
+      ],
+      [
+        "holder-level arm input name",
+        { kind: "holder-level", holderLevelInputName: "" },
+        "/catalog/options/0/variants/0/mechanism/holderLevelInputName",
+        "INVALID_DEFINITION",
+      ],
+      [
+        "windswept applicability input name",
+        {
+          kind: "windswept-direct",
+          metadata: { applicabilityInputName: "", applierTeam: "holder" },
+        },
+        "/catalog/options/0/variants/0/mechanism/metadata/applicabilityInputName",
+        "INVALID_DEFINITION",
+      ],
+      [
+        "windswept applier team",
+        {
+          kind: "windswept-direct",
+          metadata: { applicabilityInputName: "input", applierTeam: "team" },
+        },
+        "/catalog/options/0/variants/0/mechanism/metadata/applierTeam",
+        "INVALID_DEFINITION",
+      ],
+      [
+        "windswept single source group",
+        {
+          kind: "windswept-direct",
+          metadata: {
+            applicabilityInputName: "input",
+            applierTeam: "holder",
+            singleActiveSourceGroup: 1,
+          },
+        },
+        "/catalog/options/0/variants/0/mechanism/metadata/singleActiveSourceGroup",
+        "INVALID_DEFINITION",
+      ],
+      [
+        "element buff element",
+        {
+          kind: "element-buff-inputs",
+          inputs: [{ element: "unknown", inputName: "input" }],
+        },
+        "/catalog/options/0/variants/0/mechanism/inputs/0/element",
+        "INVALID_DEFINITION",
+      ],
+      [
+        "element buff input name",
+        {
+          kind: "element-buff-inputs",
+          inputs: [{ element: "physical", inputName: "" }],
+        },
+        "/catalog/options/0/variants/0/mechanism/inputs/0/inputName",
+        "INVALID_DEFINITION",
+      ],
+      [
+        "parameter mapping kind",
+        {
+          kind: "luminize-proficiency-mapping",
+          mapping: { kind: "unknown", source: "holder-current", rate: 1 },
+        },
+        "/catalog/options/0/variants/0/mechanism/mapping/kind",
+        "INVALID_INPUT",
+      ],
+      [
+        "parameter mapping source",
+        {
+          kind: "luminize-proficiency-mapping",
+          mapping: {
+            kind: "luminize-proficiency",
+            source: "unknown",
+            rate: 1,
+          },
+        },
+        "/catalog/options/0/variants/0/mechanism/mapping/source",
+        "INVALID_INPUT",
+      ],
+      [
+        "parameter mapping rate",
+        {
+          kind: "luminize-proficiency-mapping",
+          mapping: {
+            kind: "luminize-proficiency",
+            source: "holder-current",
+            rate: "1",
+          },
+        },
+        "/catalog/options/0/variants/0/mechanism/mapping/rate",
+        "INVALID_INPUT",
+      ],
+      [
+        "parameter mapping input name",
+        {
+          kind: "luminize-proficiency-mapping",
+          mapping: {
+            kind: "luminize-proficiency",
+            source: "holder-current",
+            rate: 1,
+            inputName: "",
+          },
+        },
+        "/catalog/options/0/variants/0/mechanism/mapping/inputName",
+        "INVALID_INPUT",
+      ],
+    ] as const
+    for (const [label, mechanism, expectedPointer, expectedCode] of cases) {
+      const input = fixture([contribution("base-multiplier-increase", 0.2)])
+      const result = calculateStaticDamageFromCatalog(
+        changeVariant(input, {
+          mechanism: mechanism as unknown as NonNullable<
+            StaticCatalogVariant["mechanism"]
+          >,
+        }),
+      )
+      expect(result.ok, label).toBe(false)
+      if (!result.ok)
+        expect(
+          result.issues,
+          `${label}: ${JSON.stringify(result.issues)}`,
+        ).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              code: expectedCode,
+              pointer: expectedPointer,
+            }),
+          ]),
+        )
+    }
+  })
+
   it("rejects malformed conditional catalog and preparation enums without coercing them", () => {
     const input = fixture([contribution("base-multiplier-increase", 0.2)])
     const malformed = JSON.parse('{"toString":null}')

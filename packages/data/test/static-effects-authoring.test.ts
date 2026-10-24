@@ -55,6 +55,30 @@ function cloneRecords(): EffectAuthoringRecord[] {
   return structuredClone(PILOT_AUTHORING_RECORDS) as EffectAuthoringRecord[]
 }
 
+function baselineCatalogWithVariant(
+  optionId: string,
+  change: (variant: Record<string, unknown>) => Record<string, unknown>,
+) {
+  const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
+  const catalog = structuredClone(baseline.catalog) as unknown as {
+    options: Array<{
+      optionId: string
+      variants: Array<Record<string, unknown>>
+    }>
+  }
+  const option = catalog.options.find(
+    (candidate) => candidate.optionId === optionId,
+  )
+  const [variant] = option?.variants ?? []
+  if (!option || !variant)
+    throw new Error(`Missing baseline option ${optionId}`)
+  option.variants[0] = change(variant)
+  return {
+    ...baseline,
+    catalog: catalog as unknown as typeof baseline.catalog,
+  }
+}
+
 function ruleRecord(record: EffectAuthoringRecord): EffectAuthoringRuleRecord {
   if (record.mechanism.kind === "unsupported")
     throw new Error(`Expected a rule record: ${record.key}`)
@@ -342,6 +366,36 @@ describe("authoring compiler and semantic harness", () => {
         catalog: catalog as unknown as typeof baseline.catalog,
       }),
     ).toThrow(/only models the independent-settlement variant mechanism/u)
+  })
+
+  it("rejects an independent-settlement baseline variant with another arm", () => {
+    const baseline = baselineCatalogWithVariant(
+      "agents:nekomata:mindscape:0:blk-legacy:eff-ms4f47p3-p1s9yz",
+      (variant) => ({
+        ...variant,
+        mechanism: {
+          kind: "complete-state",
+          layerCountInputName: "test:layers",
+        },
+      }),
+    )
+    expect(() =>
+      compileAuthoringArtifacts(PILOT_AUTHORING_RECORDS, baseline),
+    ).toThrow(/declares complete-state mechanism/u)
+  })
+
+  it("rejects an independent-settlement baseline variant without a mechanism", () => {
+    const baseline = baselineCatalogWithVariant(
+      "agents:nekomata:mindscape:0:blk-legacy:eff-ms4f47p3-p1s9yz",
+      (variant) => {
+        const withoutMechanism = { ...variant }
+        delete withoutMechanism["mechanism"]
+        return withoutMechanism
+      },
+    )
+    expect(() =>
+      compileAuthoringArtifacts(PILOT_AUTHORING_RECORDS, baseline),
+    ).toThrow(/must declare an independent-settlement mechanism/u)
   })
 
   it("rejects entity scope with hit operations or hit facts", () => {

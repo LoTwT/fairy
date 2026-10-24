@@ -547,7 +547,7 @@ function parseCompleteStateBridge(
   )
   const name = expectNonEmptyString(
     bridge["layerCountInputName"],
-    checks,
+    { ...checks, pointer: `${pointer}/layerCountInputName` },
     "layer count input name",
   )
   return name === undefined ? undefined : { layerCountInputName: name }
@@ -577,17 +577,21 @@ function parseWindsweptMetadata(
   )
   const applicabilityInputName = expectNonEmptyString(
     metadata["applicabilityInputName"],
-    checks,
+    { ...checks, pointer: `${pointer}/applicabilityInputName` },
     "windswept applicability input",
   )
   const applierTeam = metadata["applierTeam"]
   if (applierTeam !== "holder")
-    collector.report("INVALID_DEFINITION", pointer, "Unknown applier team")
+    collector.report(
+      "INVALID_DEFINITION",
+      `${pointer}/applierTeam`,
+      "Unknown applier team",
+    )
   const singleActiveSourceGroup = metadata["singleActiveSourceGroup"]
   if (singleActiveSourceGroup !== undefined)
     expectNonEmptyString(
       singleActiveSourceGroup,
-      checks,
+      { ...checks, pointer: `${pointer}/singleActiveSourceGroup` },
       "single active source group",
     )
   if (applicabilityInputName === undefined || applierTeam !== "holder")
@@ -622,37 +626,46 @@ function parseElementBuffInputs(
       pointer,
       "Element buff inputs require a nonempty mapping",
     )
-  for (const rawEntry of entries) {
-    const entry = expectObject(rawEntry, checks, "element buff input")
+  for (const [index, rawEntry] of entries.entries()) {
+    const entryPointer = `${pointer}/${String(index)}`
+    const entry = expectObject(
+      rawEntry,
+      { ...checks, pointer: entryPointer },
+      "element buff input",
+    )
     if (!entry) continue
     rejectUnknownFields(
       entry,
       ["element", "inputName"],
-      checks,
+      { ...checks, pointer: entryPointer },
       "element buff input",
     )
     const element = entry["element"]
     if (!isDamageElement(element)) {
-      collector.report("INVALID_DEFINITION", pointer, "Unknown buff element")
+      collector.report(
+        "INVALID_DEFINITION",
+        `${entryPointer}/element`,
+        "Unknown buff element",
+      )
       continue
     }
     if (elements.has(element))
       collector.report(
         "DUPLICATE_ID",
-        pointer,
+        `${entryPointer}/element`,
         "Element buff entries must use unique elements",
       )
     elements.add(element)
     const inputName = expectNonEmptyString(
       entry["inputName"],
-      checks,
+      { ...checks, pointer: `${entryPointer}/inputName` },
       "element buff input name",
     )
     if (inputName === undefined) continue
     if (names.has(inputName))
       collector.report(
         "DUPLICATE_ID",
-        pointer,
+        `${entryPointer}/inputName`,
         "Element buff entries must use unique input names",
       )
     names.add(inputName)
@@ -677,19 +690,31 @@ function parseParameterMapping(
     "parameter mapping",
   )
   if (mapping["kind"] !== "luminize-proficiency")
-    collector.report("INVALID_INPUT", pointer, "Unknown core parameter mapping")
+    collector.report(
+      "INVALID_INPUT",
+      `${pointer}/kind`,
+      "Unknown core parameter mapping",
+    )
   const source = mapping["source"]
   if (
     source !== "holder-current" &&
     source !== "holder-initial" &&
     source !== "input"
   )
-    collector.report("INVALID_INPUT", pointer, "Unknown parameter source")
-  const rate = expectFiniteNumber(mapping["rate"], checks, "conversion rate")
+    collector.report(
+      "INVALID_INPUT",
+      `${pointer}/source`,
+      "Unknown parameter source",
+    )
+  const rate = expectFiniteNumber(
+    mapping["rate"],
+    { ...checks, pointer: `${pointer}/rate` },
+    "conversion rate",
+  )
   if (rate !== undefined && rate < 0)
     collector.report(
       "INVALID_INPUT",
-      pointer,
+      `${pointer}/rate`,
       "Conversion rate cannot be negative",
     )
   const inputName =
@@ -697,7 +722,7 @@ function parseParameterMapping(
       ? undefined
       : expectNonEmptyString(
           mapping["inputName"],
-          checks,
+          { ...checks, pointer: `${pointer}/inputName` },
           "parameter mapping input name",
         )
   if (
@@ -750,7 +775,7 @@ function parseVariantMechanism(
       )
       const layerCountInputName = expectNonEmptyString(
         mechanism["layerCountInputName"],
-        checks,
+        { ...checks, pointer: `${pointer}/layerCountInputName` },
         "layer count input name",
       )
       return layerCountInputName === undefined
@@ -766,7 +791,7 @@ function parseVariantMechanism(
       )
       const holderLevelInputName = expectNonEmptyString(
         mechanism["holderLevelInputName"],
-        checks,
+        { ...checks, pointer: `${pointer}/holderLevelInputName` },
         "holder level input name",
       )
       return holderLevelInputName === undefined

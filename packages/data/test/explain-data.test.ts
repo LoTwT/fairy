@@ -207,7 +207,7 @@ function syntheticDefinitions(
       states: [],
     },
     "effects/static-catalog.json": {
-      schemaVersion: 1,
+      schemaVersion: 2,
       ruleSetId: "test-effects",
       revision: "1",
       source,

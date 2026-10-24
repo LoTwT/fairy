@@ -541,16 +541,28 @@ function assertSelectedEntriesExpressible(
         throw new Error(
           `Authoring layer cannot express baseline option ${optionId} field ${field}`,
         )
-    for (const variant of option.variants) {
-      for (const field of Object.keys(variant)) {
+    for (const [variantIndex, variant] of option.variants.entries()) {
+      for (const field of Object.keys(variant))
         if (!EXPRESSIBLE_VARIANT_FIELDS.has(field))
           throw new Error(
             `Authoring layer cannot express baseline option ${optionId} variant field ${field}`,
           )
-        if (field === "mechanism" && mechanismKind !== "independent-settlement")
+      const baselineMechanismKind = variant.mechanism?.kind
+      // 作者记录决定编译时写入哪个 arm；基线变体的 arm 必须一致，
+      // 否则 compileVariant 会按 authoring 的 kind 静默替换 arm。
+      if (mechanismKind === "independent-settlement") {
+        if (baselineMechanismKind === undefined)
           throw new Error(
-            `Authoring layer only models the independent-settlement variant mechanism (${optionId})`,
+            `Baseline variant ${variantIndex} of option ${optionId} must declare an independent-settlement mechanism to match its authoring records`,
           )
+        if (baselineMechanismKind !== "independent-settlement")
+          throw new Error(
+            `Baseline variant ${variantIndex} of option ${optionId} declares ${baselineMechanismKind} mechanism, but its authoring records only express independent-settlement`,
+          )
+      } else if (baselineMechanismKind !== undefined) {
+        throw new Error(
+          `Authoring layer only models the independent-settlement variant mechanism; baseline option ${optionId} variant ${variantIndex} declares ${baselineMechanismKind}`,
+        )
       }
     }
   }

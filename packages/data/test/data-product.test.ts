@@ -140,7 +140,7 @@ function fixtureFiles(): Record<string, unknown> {
       states: [],
     },
     "effects/static-catalog.json": {
-      schemaVersion: 1,
+      schemaVersion: 2,
       ruleSetId: "test-effects",
       revision: "1",
       entities: [],
@@ -486,6 +486,23 @@ describe("data product manifests", () => {
       "static-catalog.json.options: variants reference unregistered differenceId(s): missing-diff",
     )
   })
+
+  it.each([
+    ["effects/static.json", 2, 1],
+    ["effects/static-catalog.json", 1, 2],
+    ["effects/static-catalog.json", 3, 2],
+    ["effects/static-coverage.json", 2, 1],
+  ] as const)(
+    "rejects %s with schemaVersion %i",
+    (artifactPath, received, expected) => {
+      const files = fixtureFiles()
+      ;(files[artifactPath] as Record<string, unknown>).schemaVersion = received
+      const root = writeFixture(files)
+      expect(() => loadStaticEffectsProduct(root)).toThrow(
+        `${artifactPath}: schemaVersion expected ${expected}, received ${received}`,
+      )
+    },
+  )
 
   it("reports static products with different revisions", () => {
     const files = fixtureFiles()

@@ -575,12 +575,19 @@ describe("holder level bridge definition and derivation boundaries", () => {
     mutations.flatMap(([name, mutate]) =>
       [undefined, 0, 1].map((layers) => [name, layers, mutate] as const),
     ),
-  )("rejects %s at selection %s", (_name, layers, mutate) => {
+  )("rejects %s at selection %s", (name, layers, mutate) => {
     const input = fresh()
     mutate(input)
     input.selections =
       layers === undefined ? [] : [selection(levelOption, layers)]
-    rejected(input, "INVALID_DEFINITION", variantPointer(input, "mechanism"))
+    rejected(
+      input,
+      "INVALID_DEFINITION",
+      variantPointer(
+        input,
+        name === "empty name" ? "mechanism/holderLevelInputName" : "mechanism",
+      ),
+    )
   })
   it("rejects the removed sibling mechanism fields instead of reading them", () => {
     const input = fresh()
