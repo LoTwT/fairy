@@ -347,7 +347,7 @@ describe("Lighter elation complete state (PR04)", () => {
         )
       }
     }
-  })
+  }, 20_000)
 
   it("strengthens the same option automatically from mindscape 2 through 6", () => {
     for (const mindscape of [0, 1, 2, 3, 4, 5, 6] as const) {

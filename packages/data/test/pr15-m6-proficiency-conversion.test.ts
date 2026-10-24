@@ -102,16 +102,19 @@ describe("PR15 fixed M6 contexts and supplement compilation", () => {
       expect(option.variants[0]).toMatchObject({
         configuration: { minimumMindscape: 6 },
         maximumLayers: 1,
-        exclusiveDamageItem: true,
-        damageItemRequirements: [
-          {
-            itemId: `${name}:m6-proficiency-damage`,
-            stat: "anomalyProficiency",
-            source: "holder-current",
-            requiredDirectMultiplier: 0,
-            requiredSkillCategory: "uncategorized",
-          },
-        ],
+        mechanism: {
+          kind: "independent-settlement",
+          isolateDamageItems: true,
+          damageItemRequirements: [
+            {
+              itemId: `${name}:m6-proficiency-damage`,
+              stat: "anomalyProficiency",
+              source: "holder-current",
+              requiredDirectMultiplier: 0,
+              requiredSkillCategory: "uncategorized",
+            },
+          ],
+        },
       })
       const mechanism = option.variants[0]!.mechanism
       if (mechanism?.kind !== "independent-settlement")

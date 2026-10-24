@@ -3079,7 +3079,7 @@ describe("agent batch 06 impact and energy regen supplements", () => {
     expect(frontline.variants[0]).toMatchObject({
       maximumLayers: 1,
       configuration: { minimumMindscape: 4 },
-      declaredTeammateBeneficiary: true,
+      mechanism: { kind: "declared-teammate-beneficiary" },
     })
     const frontlineRule = result.definitions.effects.find(
       (r) =>

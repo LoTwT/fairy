@@ -142,15 +142,18 @@ describe("Roxy wind-eye independently frozen source and exact registration", () 
       configuration: { minimumMindscape: 6 },
       maximumLayers: 1,
       inputs: [],
-      damageItemRequirements: [
-        {
-          itemId: "action:agent:1621:action:0024:base",
-          stat: "attack",
-          role: "base",
-          allowedModes: ["direct"],
-          source: "holder-current",
-        },
-      ],
+      mechanism: {
+        kind: "independent-settlement",
+        damageItemRequirements: [
+          {
+            itemId: "action:agent:1621:action:0024:base",
+            stat: "attack",
+            role: "base",
+            allowedModes: ["direct"],
+            source: "holder-current",
+          },
+        ],
+      },
     })
     expect(result.catalog.skillTargets).toEqual([
       {
