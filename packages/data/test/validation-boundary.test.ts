@@ -103,7 +103,7 @@ function minimalDefinitions(): Record<string, Record<string, unknown>> {
       states: [],
     },
     "definitions/effects/static-catalog.json": {
-      schemaVersion: 1,
+      schemaVersion: 2,
       ruleSetId: "test-effects",
       revision: "1",
       entities: [],
@@ -146,7 +146,7 @@ describe("calculation data validation boundary", () => {
     await mkdir(join(root, "integrated"))
     await writeFile(join(root, "integrated/index.json"), "{}")
 
-    await prepareCalculationData(root, minimalIndex(), "0.4.0")
+    await prepareCalculationData(root, minimalIndex(), "0.5.0")
 
     const generated = await readFile(join(root, "calculation-data.ts"), "utf8")
     expect(generated).toContain('"snapshotId":"sha256:')
@@ -161,7 +161,7 @@ describe("calculation data validation boundary", () => {
     const root = writeFixture(files)
 
     await expect(
-      prepareCalculationData(root, minimalIndex(), "0.4.0"),
+      prepareCalculationData(root, minimalIndex(), "0.5.0"),
     ).rejects.toThrow(
       "definitions/effects/static.json: INVALID_DEFINITION at /schemaVersion: schemaVersion must be 1",
     )
@@ -179,7 +179,7 @@ describe("calculation data validation boundary", () => {
     const root = writeFixture(files)
 
     await expect(
-      prepareCalculationData(root, minimalIndex(), "0.4.0"),
+      prepareCalculationData(root, minimalIndex(), "0.5.0"),
     ).rejects.toThrow(
       "definitions/effects/static-catalog.json: CONTEXT_MISMATCH at /catalog: Catalog schema, ruleSetId and revision must match the definitions",
     )
@@ -194,7 +194,7 @@ describe("calculation data validation boundary", () => {
     const root = writeFixture(files)
 
     await expect(
-      prepareCalculationData(root, minimalIndex(), "0.4.0"),
+      prepareCalculationData(root, minimalIndex(), "0.5.0"),
     ).rejects.toThrow(
       'definitions/attributes/manifest.json: missing required field "rulesVersion"',
     )
@@ -209,7 +209,7 @@ describe("calculation data validation boundary", () => {
     const root = writeFixture(files)
 
     await expect(
-      prepareCalculationData(root, minimalIndex(), "0.4.0"),
+      prepareCalculationData(root, minimalIndex(), "0.5.0"),
     ).rejects.toThrow(
       'definitions/skills/manifest.json: unknown field(s) "unexpected"',
     )
