@@ -13,7 +13,7 @@ import type {
 } from "./effects.ts"
 
 /** 结构、单位和静态输入语义的版本，与 npm 发布号及来源提交分别维护。 */
-export const CALCULATION_CONTRACT_VERSION = 2
+export const CALCULATION_CONTRACT_VERSION = 3
 export const CALCULATION_GAME_VERSION = "3.3"
 
 export interface CalculationDataVersion {

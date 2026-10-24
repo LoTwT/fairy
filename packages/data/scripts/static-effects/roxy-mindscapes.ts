@@ -221,15 +221,18 @@ export const ROXY_GIANT_WINDSTORM_SUPPLEMENT: Supplement = {
     configuration: { minimumMindscape: 6 },
     inputs: [],
     applicability: {},
-    damageItemRequirements: [
-      {
-        itemId: giantWindstormItem,
-        stat: "attack",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-      },
-    ],
+    mechanism: {
+      kind: "independent-settlement",
+      damageItemRequirements: [
+        {
+          itemId: giantWindstormItem,
+          stat: "attack",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+        },
+      ],
+    },
     conditionDescription:
       "M6巨型风旋1秒合计原倍率×2.5，仅匹配正式动作0024的base项与巨型精确目标；使用持有者当前ATK与普通CR/CD。0关闭、1开启，与风抗忽视独立。传入未预乘M6的原倍率，最终special等级沿既有合法域（M6最低5）；不包含微型、爆鸣、自动余响次数或失衡。",
     name: "影画6 · 巨型风旋倍率",

@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "51",
+  "revision": "52",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "2628b32cece086e371bafa05518a9a12650d9f74",
@@ -3013,16 +3013,19 @@
           "applicability": {
             "beneficiaryElements": ["physical"]
           },
-          "damageItemRequirements": [
-            {
-              "itemId": "zzz-hp:alice:disorder-base:physical",
-              "stat": "attack",
-              "role": "base",
-              "allowedModes": ["standard-disorder"],
-              "source": "anomaly-source",
-              "originalAnomalyAttribute": "physical"
-            }
-          ]
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "zzz-hp:alice:disorder-base:physical",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["standard-disorder"],
+                "source": "anomaly-source",
+                "originalAnomalyAttribute": "physical"
+              }
+            ]
+          }
         }
       ]
     },
@@ -13394,17 +13397,20 @@
           "inputs": [],
           "differences": ["potential-branch-gate", "independent-hit-contract"],
           "applicability": {},
-          "damageItemRequirements": [
-            {
-              "itemId": "nekomata:claw-mark",
-              "stat": "attack",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current",
-              "requiredDirectMultiplier": 0,
-              "requiredSkillCategory": "uncategorized"
-            }
-          ]
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "nekomata:claw-mark",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized"
+              }
+            ]
+          }
         }
       ]
     },
@@ -16685,16 +16691,19 @@
           "inputs": [],
           "differences": [],
           "applicability": {},
-          "damageItemRequirements": [
-            {
-              "itemId": "pyrois:ult-left-extra",
-              "stat": "attack",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current",
-              "requiredDirectMultiplier": 0
-            }
-          ]
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "pyrois:ult-left-extra",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current",
+                "requiredDirectMultiplier": 0
+              }
+            ]
+          }
         }
       ]
     },
@@ -16741,16 +16750,19 @@
           "inputs": [],
           "differences": [],
           "applicability": {},
-          "damageItemRequirements": [
-            {
-              "itemId": "pyrois:ult-right-settlement",
-              "stat": "attack",
-              "role": "settlement",
-              "allowedModes": ["direct"],
-              "source": "holder-current",
-              "requiredDirectMultiplier": 0
-            }
-          ]
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "pyrois:ult-right-settlement",
+                "stat": "attack",
+                "role": "settlement",
+                "allowedModes": ["direct"],
+                "source": "holder-current",
+                "requiredDirectMultiplier": 0
+              }
+            ]
+          }
         }
       ]
     },
@@ -17324,10 +17336,13 @@
           "inputs": [],
           "differences": ["luminize-conversion-owner"],
           "applicability": {},
-          "parameterMapping": {
-            "kind": "luminize-proficiency",
-            "rate": 0.002,
-            "source": "holder-current"
+          "mechanism": {
+            "kind": "luminize-proficiency-mapping",
+            "mapping": {
+              "kind": "luminize-proficiency",
+              "rate": 0.002,
+              "source": "holder-current"
+            }
           }
         }
       ]
@@ -47063,7 +47078,10 @@
             "agent:1161:zzz-hp:eff-ms4aoho0-q3wbdv:blk-ms4aoho0-grnxav:mindscape:0"
           ],
           "maximumLayers": 20,
-          "layerCountInputName": "agent:1161:zzz-hp:eff-ms4aoho0-q3wbdv:blk-ms4aoho0-grnxav:mindscape:0:layers",
+          "mechanism": {
+            "kind": "complete-state",
+            "layerCountInputName": "agent:1161:zzz-hp:eff-ms4aoho0-q3wbdv:blk-ms4aoho0-grnxav:mindscape:0:layers"
+          },
           "inputs": [
             {
               "name": "agent:1161:zzz-hp:eff-ms4atnfh-29yr0r:blk-ms4aoho0-grnxav:mindscape:0:source",
@@ -47794,15 +47812,18 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "action:agent:1621:action:0024:base",
-              "stat": "attack",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current"
-            }
-          ]
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "action:agent:1621:action:0024:base",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current"
+              }
+            ]
+          }
         }
       ]
     },
@@ -47920,11 +47941,14 @@
           "effectIds": ["agent:1621:nanoka:additional-level-damage"],
           "maximumLayers": 1,
           "inputs": [],
-          "holderLevelInputName": "roxy:additional:holder-level",
           "applicability": {
             "otherTeammateProfessions": ["强攻", "命破", "锋御"]
           },
-          "differences": []
+          "differences": [],
+          "mechanism": {
+            "kind": "holder-level",
+            "holderLevelInputName": "roxy:additional:holder-level"
+          }
         }
       ]
     },
@@ -48163,15 +48187,18 @@
           "effectIds": ["agent:1621:nanoka:additional-weathered-direct-damage"],
           "maximumLayers": 1,
           "inputs": [],
-          "windsweptDirectDamage": {
-            "applicabilityInputName": "roxy:weathered-direct-damage:applicable",
-            "applierTeam": "holder",
-            "singleActiveSourceGroup": "roxy-additional-windswept"
-          },
           "applicability": {
             "otherTeammateProfessions": ["强攻", "命破", "锋御"]
           },
-          "differences": []
+          "differences": [],
+          "mechanism": {
+            "kind": "windswept-direct",
+            "metadata": {
+              "applicabilityInputName": "roxy:weathered-direct-damage:applicable",
+              "applierTeam": "holder",
+              "singleActiveSourceGroup": "roxy-additional-windswept"
+            }
+          }
         }
       ]
     },
@@ -48211,17 +48238,20 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "yixuan:talisman-suppression-break-damage",
-              "stat": "sheerForce",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current",
-              "requiredDirectMultiplier": 0,
-              "requiredSkillCategory": "special"
-            }
-          ]
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "yixuan:talisman-suppression-break-damage",
+                "stat": "sheerForce",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "special"
+              }
+            ]
+          }
         }
       ]
     },
@@ -48261,17 +48291,20 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "yixuan:m1-falling-thunder-damage",
-              "stat": "sheerForce",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current",
-              "requiredDirectMultiplier": 0,
-              "requiredSkillCategory": "uncategorized"
-            }
-          ]
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "yixuan:m1-falling-thunder-damage",
+                "stat": "sheerForce",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized"
+              }
+            ]
+          }
         }
       ]
     },
@@ -48395,17 +48428,20 @@
             "otherTeammateProfessions": ["击破", "支援", "防护"]
           },
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "yixuan:aa-falling-thunder-damage",
-              "stat": "sheerForce",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current",
-              "requiredDirectMultiplier": 0,
-              "requiredSkillCategory": "uncategorized"
-            }
-          ]
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "yixuan:aa-falling-thunder-damage",
+                "stat": "sheerForce",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized"
+              }
+            ]
+          }
         }
       ]
     },
@@ -48820,32 +48856,35 @@
               "description": "该绑定洛克茜的局外暴击率读数，0.5代表50%；调用方显式提供，无默认值，不读战斗current CR。"
             }
           ],
-          "elementBuffInputs": [
-            {
-              "element": "physical",
-              "inputName": "roxy:core:active-buff:physical"
-            },
-            {
-              "element": "fire",
-              "inputName": "roxy:core:active-buff:fire"
-            },
-            {
-              "element": "ice",
-              "inputName": "roxy:core:active-buff:ice"
-            },
-            {
-              "element": "electric",
-              "inputName": "roxy:core:active-buff:electric"
-            },
-            {
-              "element": "ether",
-              "inputName": "roxy:core:active-buff:ether"
-            }
-          ],
           "applicability": {
             "excludedBeneficiaryProfession": "锋御"
           },
-          "differences": []
+          "differences": [],
+          "mechanism": {
+            "kind": "element-buff-inputs",
+            "inputs": [
+              {
+                "element": "physical",
+                "inputName": "roxy:core:active-buff:physical"
+              },
+              {
+                "element": "fire",
+                "inputName": "roxy:core:active-buff:fire"
+              },
+              {
+                "element": "ice",
+                "inputName": "roxy:core:active-buff:ice"
+              },
+              {
+                "element": "electric",
+                "inputName": "roxy:core:active-buff:electric"
+              },
+              {
+                "element": "ether",
+                "inputName": "roxy:core:active-buff:ether"
+              }
+            ]
+          }
         }
       ]
     },
@@ -49000,32 +49039,35 @@
               "description": "该绑定洛克茜的局外暴击率读数，0.5代表50%；调用方显式提供，无默认值，不读战斗current CR。"
             }
           ],
-          "elementBuffInputs": [
-            {
-              "element": "physical",
-              "inputName": "roxy:core:active-buff:physical"
-            },
-            {
-              "element": "fire",
-              "inputName": "roxy:core:active-buff:fire"
-            },
-            {
-              "element": "ice",
-              "inputName": "roxy:core:active-buff:ice"
-            },
-            {
-              "element": "electric",
-              "inputName": "roxy:core:active-buff:electric"
-            },
-            {
-              "element": "ether",
-              "inputName": "roxy:core:active-buff:ether"
-            }
-          ],
           "applicability": {
             "beneficiaryProfession": "锋御"
           },
-          "differences": []
+          "differences": [],
+          "mechanism": {
+            "kind": "element-buff-inputs",
+            "inputs": [
+              {
+                "element": "physical",
+                "inputName": "roxy:core:active-buff:physical"
+              },
+              {
+                "element": "fire",
+                "inputName": "roxy:core:active-buff:fire"
+              },
+              {
+                "element": "ice",
+                "inputName": "roxy:core:active-buff:ice"
+              },
+              {
+                "element": "electric",
+                "inputName": "roxy:core:active-buff:electric"
+              },
+              {
+                "element": "ether",
+                "inputName": "roxy:core:active-buff:ether"
+              }
+            ]
+          }
         }
       ]
     },
@@ -49324,18 +49366,21 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "astrayao:m4-quick-assist-bonus-damage",
-              "stat": "attack",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current",
-              "requiredDirectMultiplier": 0,
-              "requiredSkillCategory": "uncategorized"
-            }
-          ],
-          "exclusiveDamageItem": true
+          "mechanism": {
+            "kind": "independent-settlement",
+            "isolateDamageItems": true,
+            "damageItemRequirements": [
+              {
+                "itemId": "astrayao:m4-quick-assist-bonus-damage",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized"
+              }
+            ]
+          }
         }
       ]
     },
@@ -49734,15 +49779,18 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "action:agent:1181:action:0012:base",
-              "stat": "attack",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current"
-            }
-          ]
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "action:agent:1181:action:0012:base",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current"
+              }
+            ]
+          }
         }
       ]
     },
@@ -49878,15 +49926,18 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "action:agent:1181:action:0013:base",
-              "stat": "attack",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current"
-            }
-          ]
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "action:agent:1181:action:0013:base",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current"
+              }
+            ]
+          }
         }
       ]
     },
@@ -49968,17 +50019,20 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "evelyn:lunalux-garrote",
-              "stat": "attack",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current",
-              "requiredDirectMultiplier": 0,
-              "requiredSkillCategory": "chain"
-            }
-          ]
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "evelyn:lunalux-garrote",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "chain"
+              }
+            ]
+          }
         }
       ]
     },
@@ -50011,17 +50065,20 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "s0anby:electromagnetic-vortex",
-              "stat": "attack",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current",
-              "requiredDirectMultiplier": 0,
-              "requiredSkillCategory": "follow-up"
-            }
-          ]
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "s0anby:electromagnetic-vortex",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "follow-up"
+              }
+            ]
+          }
         }
       ]
     },
@@ -50052,17 +50109,20 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "dialyn:aftertone-echo",
-              "stat": "attack",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current",
-              "requiredDirectMultiplier": 0,
-              "requiredSkillCategory": "enhanced-special"
-            }
-          ]
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "dialyn:aftertone-echo",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "enhanced-special"
+              }
+            ]
+          }
         }
       ]
     },
@@ -51532,7 +51592,9 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "declaredTeammateBeneficiary": true
+          "mechanism": {
+            "kind": "declared-teammate-beneficiary"
+          }
         }
       ]
     },
@@ -51820,7 +51882,9 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "squadUniqueEffect": true
+          "mechanism": {
+            "kind": "squad-unique"
+          }
         }
       ]
     },
@@ -51850,21 +51914,26 @@
             "agent:1511:nanoka:m6-vibrato-modified-nonphysical:mindscape:6"
           ],
           "maximumLayers": 4,
-          "layerCountInputName": "nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical:layers",
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "nangongyu:vibrato-modified",
-              "stat": "attack",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "anomaly-source",
-              "requiredDirectMultiplier": 0,
-              "requiredSkillCategory": "uncategorized"
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "nangongyu:vibrato-modified",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "anomaly-source",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized"
+              }
+            ],
+            "completeState": {
+              "layerCountInputName": "nanoka:agents:nangongyu:m6-vibrato-modified-nonphysical:layers"
             }
-          ]
+          }
         }
       ]
     },
@@ -51894,21 +51963,26 @@
             "agent:1511:nanoka:m6-vibrato-modified-physical:mindscape:6"
           ],
           "maximumLayers": 4,
-          "layerCountInputName": "nanoka:agents:nangongyu:m6-vibrato-modified-physical:layers",
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "nangongyu:vibrato-modified",
-              "stat": "attack",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "anomaly-source",
-              "requiredDirectMultiplier": 0,
-              "requiredSkillCategory": "uncategorized"
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "nangongyu:vibrato-modified",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "anomaly-source",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized"
+              }
+            ],
+            "completeState": {
+              "layerCountInputName": "nanoka:agents:nangongyu:m6-vibrato-modified-physical:layers"
             }
-          ]
+          }
         }
       ]
     },
@@ -53598,18 +53672,21 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "big-cylinder:retaliation",
-              "stat": "defense",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current",
-              "requiredDirectMultiplier": 0,
-              "requiredSkillCategory": "uncategorized"
-            }
-          ],
-          "exclusiveDamageItem": true
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "big-cylinder:retaliation",
+                "stat": "defense",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized"
+              }
+            ],
+            "isolateDamageItems": true
+          }
         }
       ]
     },
@@ -53668,19 +53745,22 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "cannon-rotor:bonus-damage",
-              "stat": "attack",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current",
-              "requiredDirectMultiplier": 0,
-              "requiredSkillCategory": "uncategorized",
-              "requiredCriticalRateDeclaration": true
-            }
-          ],
-          "exclusiveDamageItem": true
+          "mechanism": {
+            "kind": "independent-settlement",
+            "isolateDamageItems": true,
+            "damageItemRequirements": [
+              {
+                "itemId": "cannon-rotor:bonus-damage",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized",
+                "requiredCriticalRateDeclaration": true
+              }
+            ]
+          }
         }
       ]
     },
@@ -53713,19 +53793,22 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "benbigger:block-counter-bonus-damage",
-              "stat": "defense",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current",
-              "requiredDirectMultiplier": 0,
-              "requiredSkillCategory": "uncategorized",
-              "requiredCriticalRateDeclaration": true
-            }
-          ],
-          "exclusiveDamageItem": true
+          "mechanism": {
+            "kind": "independent-settlement",
+            "isolateDamageItems": true,
+            "damageItemRequirements": [
+              {
+                "itemId": "benbigger:block-counter-bonus-damage",
+                "stat": "defense",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized",
+                "requiredCriticalRateDeclaration": true
+              }
+            ]
+          }
         }
       ]
     },
@@ -53815,19 +53898,22 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "miyabi:frostburn-break-damage",
-              "stat": "attack",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current",
-              "requiredDirectMultiplier": 0,
-              "requiredSkillCategory": "uncategorized",
-              "requiredCriticalRateDeclaration": true
-            }
-          ],
-          "exclusiveDamageItem": true
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "miyabi:frostburn-break-damage",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized",
+                "requiredCriticalRateDeclaration": true
+              }
+            ],
+            "isolateDamageItems": true
+          }
         }
       ]
     },
@@ -53865,19 +53951,22 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "jane:m6-proficiency-damage",
-              "stat": "anomalyProficiency",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current",
-              "requiredDirectMultiplier": 0,
-              "requiredSkillCategory": "uncategorized",
-              "requiredCriticalRateDeclaration": true
-            }
-          ],
-          "exclusiveDamageItem": true
+          "mechanism": {
+            "kind": "independent-settlement",
+            "isolateDamageItems": true,
+            "damageItemRequirements": [
+              {
+                "itemId": "jane:m6-proficiency-damage",
+                "stat": "anomalyProficiency",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized",
+                "requiredCriticalRateDeclaration": true
+              }
+            ]
+          }
         }
       ]
     },
@@ -53918,18 +54007,21 @@
           "inputs": [],
           "applicability": {},
           "differences": [],
-          "damageItemRequirements": [
-            {
-              "itemId": "alice:m6-proficiency-damage",
-              "stat": "anomalyProficiency",
-              "role": "base",
-              "allowedModes": ["direct"],
-              "source": "holder-current",
-              "requiredDirectMultiplier": 0,
-              "requiredSkillCategory": "uncategorized"
-            }
-          ],
-          "exclusiveDamageItem": true
+          "mechanism": {
+            "kind": "independent-settlement",
+            "isolateDamageItems": true,
+            "damageItemRequirements": [
+              {
+                "itemId": "alice:m6-proficiency-damage",
+                "stat": "anomalyProficiency",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "holder-current",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized"
+              }
+            ]
+          }
         }
       ]
     }

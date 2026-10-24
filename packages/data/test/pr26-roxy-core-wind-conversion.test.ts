@@ -66,16 +66,14 @@ describe("Roxy core wind supplement source and identity guards", () => {
       expect(entry.rule.uniqueness).toEqual(entries[i]!.rule.uniqueness)
       expect(entry.exclusiveGroup).toBe(entries[i]!.exclusiveGroup)
       expect(entry.evidence).toHaveLength(18)
-      expect(entry.variant.elementBuffInputs?.map((e) => e.element)).toEqual([
-        "physical",
-        "fire",
-        "ice",
-        "electric",
-        "ether",
-      ])
+      expect(
+        entry.variant.mechanism?.kind === "element-buff-inputs"
+          ? entry.variant.mechanism.inputs.map((e) => e.element)
+          : undefined,
+      ).toEqual(["physical", "fire", "ice", "electric", "ether"])
       for (const mutate of [
         (e: any) => {
-          e.variant.elementBuffInputs.pop()
+          e.variant.mechanism.inputs.pop()
         },
         (e: any) => {
           e.rule.when = { kind: "constant", value: true }
@@ -95,7 +93,7 @@ describe("Roxy core wind supplement source and identity guards", () => {
   })
   it("adds exactly two independent branches without pretending fac62407 has Roxy", () => {
     const result = convert()
-    expect(result.definitions.revision).toBe("51")
+    expect(result.definitions.revision).toBe("52")
     expect(result.definitions.effects).toHaveLength(4)
     expect(result.catalog.options).toHaveLength(3)
     expect(result.catalog.entities).toHaveLength(1)
@@ -114,7 +112,7 @@ describe("Roxy core wind supplement source and identity guards", () => {
         maximumLayers: 1,
         inputs: [{ name: "roxy:core:external-critical-rate", unit: "ratio" }],
       })
-      expect(variant.squadUniqueEffect).toBeUndefined()
+      expect(variant.mechanism).toBeUndefined()
       expect(entry.evidence).toHaveLength(14)
       expect(entry.evidence.map((r) => r.pointer)).toEqual(
         ["zh", "en"].flatMap(() =>

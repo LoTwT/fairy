@@ -1192,18 +1192,23 @@ describe("batch 07 squad-unique catalog boundary", () => {
     expect(validated.ok, JSON.stringify(validated)).toBe(true)
   })
 
-  it("rejects a non-literal squad-unique value", () => {
+  it("rejects a squad-unique arm with an unrelated field", () => {
     const mutated = mutatedCatalog((clone) => {
       const option = clone.options.find((o) => o.optionId === CMC_TEAM_OPTION)!
-      ;(
-        option.variants[0] as { squadUniqueEffect?: unknown }
-      ).squadUniqueEffect = "yes"
+      ;(option.variants[0] as { mechanism?: unknown }).mechanism = {
+        kind: "squad-unique",
+        squadUniqueEffect: true,
+      }
     })
     const validated = validateStaticCatalog(mutated, definitions)
     expect(validated.ok).toBe(false)
     if (!validated.ok)
       expect(
-        validated.issues.some((issue) => issue.code === "INVALID_INPUT"),
+        validated.issues.some(
+          (issue) =>
+            issue.code === "INVALID_DEFINITION" &&
+            issue.pointer.endsWith("/mechanism/squadUniqueEffect"),
+        ),
       ).toBe(true)
   })
 })

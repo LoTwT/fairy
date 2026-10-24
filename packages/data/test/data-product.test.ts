@@ -361,9 +361,9 @@ describe("data product manifests", () => {
     expect(manifest.product).toBe("static-effects")
     expect(manifest.schemaVersion).toBe(1)
     expect(manifest.rulesVersion).toEqual({
-      label: "zzz-hp-static-effects/51",
+      label: "zzz-hp-static-effects/52",
       ruleSetId: "zzz-hp-static-effects",
-      revision: "51",
+      revision: "52",
     })
     expect(manifest.source).toEqual({
       repository: structureBaseline.effects.sourceRepository,

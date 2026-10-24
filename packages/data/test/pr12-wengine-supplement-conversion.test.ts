@@ -181,7 +181,7 @@ const DIRECT_DAMAGE_EFFECT = (stat: string, value: number): SourceEffect => ({
 describe("batch 12 w-engine additional damage supplements", () => {
   it("registers both options, targets, and rules beside the preserved fixed-source clause", () => {
     const result = convert(pr12WengineData())
-    expect(result.definitions.revision).toBe("51")
+    expect(result.definitions.revision).toBe("52")
     // 加农转子的常驻 ATK 记录照常转换为既有选项（公开 ID 保持）。
     expect(
       result.catalog.options.some(
@@ -239,21 +239,24 @@ describe("batch 12 w-engine additional damage supplements", () => {
       expect(variant.effectIds).toEqual([...expected.effectIds])
       // 两选项均独占结算；加农转子的唯一要求项另声明最终暴击概率
       // （无默认、替换语义）。
-      expect(variant.exclusiveDamageItem).toBe(true)
-      expect(variant.damageItemRequirements).toEqual([
-        {
-          itemId: expected.item,
-          stat: expected.stat,
-          role: "base",
-          allowedModes: ["direct"],
-          source: "holder-current",
-          requiredDirectMultiplier: 0,
-          requiredSkillCategory: "uncategorized",
-          ...(optionId.includes("14001")
-            ? { requiredCriticalRateDeclaration: true }
-            : {}),
-        },
-      ])
+      expect(variant.mechanism).toEqual({
+        kind: "independent-settlement",
+        isolateDamageItems: true,
+        damageItemRequirements: [
+          {
+            itemId: expected.item,
+            stat: expected.stat,
+            role: "base",
+            allowedModes: ["direct"],
+            source: "holder-current",
+            requiredDirectMultiplier: 0,
+            requiredSkillCategory: "uncategorized",
+            ...(optionId.includes("14001")
+              ? { requiredCriticalRateDeclaration: true }
+              : {}),
+          },
+        ],
+      })
       expect(variant.references.map((r) => r.pointer)).toEqual(
         ([1, 2, 3, 4, 5] as const).map(
           (tier) => `/talents/${String(tier)}/desc`,
@@ -620,7 +623,10 @@ describe("batch 12 w-engine additional damage supplements", () => {
         { variant: SupplementVariantSpec }
       >
     ).variant
-    const [rotorRequirement] = rotorVariant.damageItemRequirements ?? []
+    const rotorRequirement =
+      rotorVariant.mechanism?.kind === "independent-settlement"
+        ? rotorVariant.mechanism.damageItemRequirements[0]
+        : undefined
     if (rotorRequirement === undefined) {
       throw new Error("rotor variant must declare a damage item requirement")
     }
@@ -647,39 +653,59 @@ describe("batch 12 w-engine additional damage supplements", () => {
     expect(() =>
       convert(
         pr12WengineData(),
-        mutated(({ exclusiveDamageItem: _exclusive, ...variant }) => variant),
+        mutated((variant) => {
+          if (variant.mechanism?.kind !== "independent-settlement")
+            return variant
+          const { isolateDamageItems: _isolateDamageItems, ...mechanism } =
+            variant.mechanism
+          return { ...variant, mechanism }
+        }),
       ),
     ).toThrowError(
-      /requires a declared critical rate but its variant does not declare exclusiveDamageItem/,
+      /requires a declared critical rate but its variant does not declare isolateDamageItems/,
     )
     // 有声明要求但要求项不满足形状（settlement 角色）。
     expect(() =>
       convert(
         pr12WengineData(),
-        mutated((variant) => ({
-          ...variant,
-          damageItemRequirements: [
-            {
-              ...rotorRequirement,
-              role: "settlement",
+        mutated((variant) => {
+          if (variant.mechanism?.kind !== "independent-settlement")
+            return variant
+          return {
+            ...variant,
+            mechanism: {
+              ...variant.mechanism,
+              damageItemRequirements: [
+                {
+                  ...rotorRequirement,
+                  role: "settlement",
+                },
+              ],
             },
-          ],
-        })),
+          }
+        }),
       ),
     ).toThrowError(/requires a declared critical rate but uses role settlement/)
     // 有声明要求但允许非 direct 模式。
     expect(() =>
       convert(
         pr12WengineData(),
-        mutated((variant) => ({
-          ...variant,
-          damageItemRequirements: [
-            {
-              ...rotorRequirement,
-              allowedModes: ["direct", "standard-disorder"],
+        mutated((variant) => {
+          if (variant.mechanism?.kind !== "independent-settlement")
+            return variant
+          return {
+            ...variant,
+            mechanism: {
+              ...variant.mechanism,
+              damageItemRequirements: [
+                {
+                  ...rotorRequirement,
+                  allowedModes: ["direct", "standard-disorder"],
+                },
+              ],
             },
-          ],
-        })),
+          }
+        }),
       ),
     ).toThrowError(
       /requires a declared critical rate but allows non-direct preparation modes/,
@@ -688,15 +714,22 @@ describe("batch 12 w-engine additional damage supplements", () => {
     expect(() =>
       convert(
         pr12WengineData(),
-        mutated((variant) => ({
-          ...variant,
-          damageItemRequirements: [
-            {
-              ...rotorRequirement,
-              source: "anomaly-source",
+        mutated((variant) => {
+          if (variant.mechanism?.kind !== "independent-settlement")
+            return variant
+          return {
+            ...variant,
+            mechanism: {
+              ...variant.mechanism,
+              damageItemRequirements: [
+                {
+                  ...rotorRequirement,
+                  source: "anomaly-source",
+                },
+              ],
             },
-          ],
-        })),
+          }
+        }),
       ),
     ).toThrowError(
       /requires a declared critical rate but uses source anomaly-source/,

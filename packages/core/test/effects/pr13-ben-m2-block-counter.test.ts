@@ -277,7 +277,7 @@ function benInput(overrides: BenInputOverrides = {}): StaticCatalogDamageInput {
 
 describe("batch 13 Ben mindscape 2 block counter additional damage", () => {
   it("registers the independent target, option, and rule under revision 28 beside the preserved fixed-source options", () => {
-    expect(catalog.revision).toBe("51")
+    expect(catalog.revision).toBe("52")
     const target = catalog.skillTargets.find(
       (t) => t.targetId === BEN_M2_TARGET,
     )!
@@ -295,19 +295,22 @@ describe("batch 13 Ben mindscape 2 block counter additional damage", () => {
     expect(variant.configuration).toEqual({ minimumMindscape: 2 })
     expect(variant.maximumLayers).toBe(1)
     expect(variant.effectIds).toEqual([BEN_M2_DAMAGE])
-    expect(variant.exclusiveDamageItem).toBe(true)
-    expect(variant.damageItemRequirements).toEqual([
-      {
-        itemId: BEN_M2_ITEM,
-        stat: "defense",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-        requiredDirectMultiplier: 0,
-        requiredSkillCategory: "uncategorized",
-        requiredCriticalRateDeclaration: true,
-      },
-    ])
+    expect(variant.mechanism).toEqual({
+      kind: "independent-settlement",
+      isolateDamageItems: true,
+      damageItemRequirements: [
+        {
+          itemId: BEN_M2_ITEM,
+          stat: "defense",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: "uncategorized",
+          requiredCriticalRateDeclaration: true,
+        },
+      ],
+    })
     expect(variant.references).toEqual([
       {
         sourceId: "nanoka-integrated",

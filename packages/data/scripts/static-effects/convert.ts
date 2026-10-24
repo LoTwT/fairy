@@ -2696,10 +2696,13 @@ function compile(
         ...variant,
         status: "corrected",
         differences: ["luminize-conversion-owner"],
-        parameterMapping: {
-          kind: "luminize-proficiency",
-          rate: 0.002,
-          source: "holder-current",
+        mechanism: {
+          kind: "luminize-proficiency-mapping",
+          mapping: {
+            kind: "luminize-proficiency",
+            rate: 0.002,
+            source: "holder-current",
+          },
         },
       }
     }
@@ -2854,7 +2857,10 @@ function compile(
       variant = {
         ...variant,
         maximumLayers: 2,
-        layerCountInputName: semantics.layerCountInputName,
+        mechanism: {
+          kind: "complete-state",
+          layerCountInputName: semantics.layerCountInputName,
+        },
         differences: [...variant.differences, semantics.differenceId],
         references: [reference(record.pointer), ...resolved.references],
       }
@@ -3057,7 +3063,7 @@ function compile(
         channel: mapping.channel,
         value: expression,
       }
-  if (variant.parameterMapping)
+  if (variant.mechanism?.kind === "luminize-proficiency-mapping")
     operation = {
       kind: "factor-contribution",
       channel: "luminize-proficiency-input",
@@ -3674,28 +3680,33 @@ function compile(
             },
             differences: [...variant.differences, "potential-branch-gate"],
           }),
-      damageItemRequirements: [
-        {
-          itemId: requirement.itemId,
-          stat: requirement.stat,
-          role: requirement.role,
-          allowedModes: [...requirement.allowedModes],
-          source: requirement.source,
-          ...(requirement.originalAnomalyAttribute === undefined
-            ? {}
-            : {
-                originalAnomalyAttribute: requirement.originalAnomalyAttribute,
-              }),
-          ...(requirement.requiredDirectMultiplier === undefined
-            ? {}
-            : {
-                requiredDirectMultiplier: requirement.requiredDirectMultiplier,
-              }),
-          ...(requirement.requiredSkillCategory === undefined
-            ? {}
-            : { requiredSkillCategory: requirement.requiredSkillCategory }),
-        },
-      ],
+      mechanism: {
+        kind: "independent-settlement",
+        damageItemRequirements: [
+          {
+            itemId: requirement.itemId,
+            stat: requirement.stat,
+            role: requirement.role,
+            allowedModes: [...requirement.allowedModes],
+            source: requirement.source,
+            ...(requirement.originalAnomalyAttribute === undefined
+              ? {}
+              : {
+                  originalAnomalyAttribute:
+                    requirement.originalAnomalyAttribute,
+                }),
+            ...(requirement.requiredDirectMultiplier === undefined
+              ? {}
+              : {
+                  requiredDirectMultiplier:
+                    requirement.requiredDirectMultiplier,
+                }),
+            ...(requirement.requiredSkillCategory === undefined
+              ? {}
+              : { requiredSkillCategory: requirement.requiredSkillCategory }),
+          },
+        ],
+      },
       references: [
         ...variant.references,
         ...semantics.evidence.map((ref) =>
@@ -4352,7 +4363,7 @@ function buildElationCompleteStateOptions(
     references: baseRule.source.references,
     effectIds: [baseRule.effectId],
     maximumLayers: baseSemantics.maximumLayers,
-    layerCountInputName,
+    mechanism: { kind: "complete-state", layerCountInputName },
     inputs: [
       {
         name: impactInputName,
@@ -5107,22 +5118,37 @@ export function convertSource(
       throw new Error(
         `Supplement ${supplement.supplementId} mixes layer maxima across its complete-state rules`,
       )
-    // 完整状态层数桥接（批次 09 起）：声明 layerCountInputName 的选项把
-    // selection.layers 解释为逻辑状态层数（0 关闭、严格整数
-    // 0..layerCountMaximumLayers），目录派生绑定作用域 count 输入，实际展开
-    // 固定单实例。桥接只允许一条 maximumLayers=1 的 supplied 贡献（目录
-    // 定义校验强制其值表达式真实消费该 count 输入）；逻辑层数上限与规则
-    // 实例层数上限因此解耦，不声明桥接的补充保持变体层数 = 规则层数。
+    // 完整状态层数桥接（批次 09 起）：`complete-state` arm（或
+    // `independent-settlement.completeState`）把 selection.layers 解释为逻辑
+    // 状态层数（0 关闭、严格整数 0..layerCountMaximumLayers），目录派生绑定
+    // 作用域 count 输入，实际展开固定单实例。桥接只允许一条 maximumLayers=1
+    // 的 supplied 贡献（目录定义校验强制其值表达式真实消费该 count 输入）；
+    // 逻辑层数上限与规则实例层数上限因此解耦，不声明桥接的补充保持变体
+    // 层数 = 规则层数。
+    const supplementMechanism = supplement.variant.mechanism
+    const completeStateInputName =
+      supplementMechanism?.kind === "complete-state"
+        ? supplementMechanism.layerCountInputName
+        : supplementMechanism?.kind === "independent-settlement"
+          ? supplementMechanism.completeState?.layerCountInputName
+          : undefined
+    const declaredRequirements =
+      supplementMechanism?.kind === "independent-settlement"
+        ? supplementMechanism.damageItemRequirements
+        : []
+    const isolateDamageItems =
+      supplementMechanism?.kind === "independent-settlement" &&
+      supplementMechanism.isolateDamageItems === true
     if (
-      supplement.variant.layerCountInputName !== undefined ||
+      completeStateInputName !== undefined ||
       supplement.variant.layerCountMaximumLayers !== undefined
     ) {
       if (
-        supplement.variant.layerCountInputName === undefined ||
+        completeStateInputName === undefined ||
         supplement.variant.layerCountMaximumLayers === undefined
       )
         throw new Error(
-          `Supplement ${supplement.supplementId} must declare layerCountInputName and layerCountMaximumLayers together`,
+          `Supplement ${supplement.supplementId} must declare a complete-state mechanism and layerCountMaximumLayers together`,
         )
       if (
         !Number.isSafeInteger(supplement.variant.layerCountMaximumLayers) ||
@@ -5173,7 +5199,6 @@ export function convertSource(
         ),
       ),
     ]
-    const declaredRequirements = supplement.variant.damageItemRequirements ?? []
     if (adjustedItemIds.length && !declaredRequirements.length)
       throw new Error(
         `Supplement ${supplement.supplementId} binds hit-adjustment damage items ${JSON.stringify(adjustedItemIds)} without declared damageItemRequirements; the catalog cannot discover the independent items — declare one requirement per itemId`,
@@ -5195,26 +5220,21 @@ export function convertSource(
     }
     // 独占伤害项声明：必须恰好对应一个伤害项要求——启用时命中的伤害项被
     // 锁定为该唯一项；多要求或零要求都不能构成“唯一项”的声明形状。
-    if (
-      supplement.variant.exclusiveDamageItem === true &&
-      (supplement.variant.damageItemRequirements ?? []).length !== 1
-    )
+    if (isolateDamageItems && declaredRequirements.length !== 1)
       throw new Error(
-        `Supplement ${supplement.supplementId} declares exclusiveDamageItem with ${(supplement.variant.damageItemRequirements ?? []).length} damage item requirements; the sole-damage-item contract requires exactly one`,
+        `Supplement ${supplement.supplementId} declares isolateDamageItems with ${declaredRequirements.length} damage item requirements; the sole-damage-item contract requires exactly one`,
       )
     // 声明最终暴击概率的要求项：必须位于独占变体的唯一要求项上，且该
     // 要求项是 base 角色、仅 direct 模式、holder-current——与目录定义
     // 阶段的同一形状约束一致，登记侧提前拒绝。
-    for (const [index, requirement] of (
-      supplement.variant.damageItemRequirements ?? []
-    ).entries())
+    for (const [index, requirement] of declaredRequirements.entries())
       if (requirement.requiredCriticalRateDeclaration === true) {
         const shape = `${supplement.supplementId} requirement ${String(index)} (${requirement.itemId})`
-        if (supplement.variant.exclusiveDamageItem !== true)
+        if (!isolateDamageItems)
           throw new Error(
-            `Supplement ${shape} requires a declared critical rate but its variant does not declare exclusiveDamageItem`,
+            `Supplement ${shape} requires a declared critical rate but its variant does not declare isolateDamageItems`,
           )
-        if ((supplement.variant.damageItemRequirements ?? []).length !== 1)
+        if (declaredRequirements.length !== 1)
           throw new Error(
             `Supplement ${shape} requires a declared critical rate but is not the single damage item requirement`,
           )
@@ -5248,45 +5268,14 @@ export function convertSource(
       maximumLayers:
         supplement.variant.layerCountMaximumLayers ??
         supplement.rule.maximumLayers,
-      ...(supplement.variant.layerCountInputName === undefined
-        ? {}
-        : {
-            layerCountInputName: supplement.variant.layerCountInputName,
-          }),
       inputs: supplement.variant.inputs,
-      ...(supplement.variant.holderLevelInputName === undefined
-        ? {}
-        : { holderLevelInputName: supplement.variant.holderLevelInputName }),
-      ...(supplement.variant.windsweptDirectDamage === undefined
-        ? {}
-        : { windsweptDirectDamage: supplement.variant.windsweptDirectDamage }),
-      ...(supplement.variant.elementBuffInputs === undefined
-        ? {}
-        : { elementBuffInputs: supplement.variant.elementBuffInputs }),
       applicability: supplement.variant.applicability,
       differences: [],
-      // 声明式伤害项要求随补充透传：与固定来源 damage-item-targeting 的
-      // damageItemRequirements 同一契约，目录入口据此发现并校验独立项。
-      ...(supplement.variant.damageItemRequirements === undefined
+      // 目录机制随补充原样透传：与固定来源共用同一判别联合，目录入口据此
+      // 发现独立项、层数桥接、受益者、全队唯一与元素/等级/风化输入。
+      ...(supplementMechanism === undefined
         ? {}
-        : {
-            damageItemRequirements: supplement.variant.damageItemRequirements,
-          }),
-      // 声明式同队受益者随补充透传；目录消费端据此要求每次启用选择携带
-      // beneficiaryActorId 并把受益集合收敛为该实体。
-      ...(supplement.variant.declaredTeammateBeneficiary === undefined
-        ? {}
-        : { declaredTeammateBeneficiary: true as const }),
-      // 全队唯一效果声明随补充透传；目录选择阶段按（持有者队伍， optionId）
-      // 跨绑定强制单一启用来源。
-      ...(supplement.variant.squadUniqueEffect === undefined
-        ? {}
-        : { squadUniqueEffect: true as const }),
-      // 独占伤害项声明随补充透传；目录选择阶段把启用请求的伤害项锁定为
-      // 声明的唯一项。生成期校验：声明必须恰好对应一个伤害项要求。
-      ...(supplement.variant.exclusiveDamageItem === undefined
-        ? {}
-        : { exclusiveDamageItem: true as const }),
+        : { mechanism: supplementMechanism }),
     }
     for (const rule of supplementRules) effects.push(rule)
     supplementalRules += supplementRules.length
@@ -5458,7 +5447,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "51",
+    revision: "52",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: effects.some(
@@ -5514,7 +5503,7 @@ export function convertSource(
     skillTargets.push(target)
   }
   const catalog: StaticEffectCatalog = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     ruleSetId: definitions.ruleSetId,
     revision: definitions.revision,
     source: { repository: SOURCE_REPOSITORY, commit: SOURCE_COMMIT, files },

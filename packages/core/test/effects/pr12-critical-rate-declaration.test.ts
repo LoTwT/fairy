@@ -1460,7 +1460,10 @@ describe("Catalog declaration authorization of the declared critical rate", () =
       const unflaggedVariant = unflaggedCatalog.options.find(
         (option) => option.optionId === CANNON_ROTOR,
       )!.variants[0]!
-      const unflaggedRequirement = unflaggedVariant.damageItemRequirements?.[0]
+      if (unflaggedVariant.mechanism?.kind !== "independent-settlement")
+        throw new Error("test fixture: expected an independent settlement")
+      const unflaggedRequirement =
+        unflaggedVariant.mechanism.damageItemRequirements[0]
       if (unflaggedRequirement !== undefined)
         delete (
           unflaggedRequirement as unknown as {
@@ -1603,10 +1606,11 @@ describe("Catalog definition boundaries of the declaration requirement", () => {
       "non-literal flag",
       (clone) => {
         const option = clone.options.find((o) => o.optionId === CANNON_ROTOR)!
+        const mechanism = option.variants[0]!.mechanism as {
+          damageItemRequirements: readonly unknown[]
+        }
         ;(
-          (
-            option.variants[0]!.damageItemRequirements as readonly unknown[]
-          )[0] as unknown as {
+          mechanism.damageItemRequirements[0] as unknown as {
             requiredCriticalRateDeclaration?: unknown
           }
         ).requiredCriticalRateDeclaration = "yes"
@@ -1618,8 +1622,8 @@ describe("Catalog definition boundaries of the declaration requirement", () => {
       "without exclusivity",
       (clone) => {
         const option = clone.options.find((o) => o.optionId === CANNON_ROTOR)!
-        delete (option.variants[0] as { exclusiveDamageItem?: true })
-          .exclusiveDamageItem
+        delete (option.variants[0]!.mechanism as { isolateDamageItems?: true })
+          .isolateDamageItems
       },
       "INVALID_DEFINITION",
     )
@@ -1628,12 +1632,12 @@ describe("Catalog definition boundaries of the declaration requirement", () => {
       "two requirements",
       (clone) => {
         const option = clone.options.find((o) => o.optionId === CANNON_ROTOR)!
-        const variant = option.variants[0] as unknown as {
+        const mechanism = option.variants[0]!.mechanism as unknown as {
           damageItemRequirements?: unknown[]
         }
-        variant.damageItemRequirements = [
-          ...variant.damageItemRequirements!,
-          { ...variant.damageItemRequirements![0]!, itemId: "rotor:other" },
+        mechanism.damageItemRequirements = [
+          ...mechanism.damageItemRequirements!,
+          { ...mechanism.damageItemRequirements![0]!, itemId: "rotor:other" },
         ]
       },
       "INVALID_DEFINITION",
@@ -1645,8 +1649,10 @@ describe("Catalog definition boundaries of the declaration requirement", () => {
         const option = clone.options.find((o) => o.optionId === CANNON_ROTOR)!
         ;(
           (
-            option.variants[0]!.damageItemRequirements as readonly unknown[]
-          )[0] as unknown as {
+            option.variants[0]!.mechanism as {
+              damageItemRequirements: readonly unknown[]
+            }
+          ).damageItemRequirements[0] as unknown as {
             role?: string
           }
         ).role = "settlement"
@@ -1660,8 +1666,10 @@ describe("Catalog definition boundaries of the declaration requirement", () => {
         const option = clone.options.find((o) => o.optionId === CANNON_ROTOR)!
         ;(
           (
-            option.variants[0]!.damageItemRequirements as readonly unknown[]
-          )[0] as unknown as {
+            option.variants[0]!.mechanism as {
+              damageItemRequirements: readonly unknown[]
+            }
+          ).damageItemRequirements[0] as unknown as {
             allowedModes?: string[]
           }
         ).allowedModes = ["direct", "standard-disorder"]
@@ -1675,8 +1683,10 @@ describe("Catalog definition boundaries of the declaration requirement", () => {
         const option = clone.options.find((o) => o.optionId === CANNON_ROTOR)!
         ;(
           (
-            option.variants[0]!.damageItemRequirements as readonly unknown[]
-          )[0] as unknown as {
+            option.variants[0]!.mechanism as {
+              damageItemRequirements: readonly unknown[]
+            }
+          ).damageItemRequirements[0] as unknown as {
             source?: string
           }
         ).source = "anomaly-source"

@@ -249,7 +249,7 @@ function m6Input(
 
 describe("batch 08 M6 independent follow-ups", () => {
   it("registers the three targets, requirements, and rules under revision 23", () => {
-    expect(catalog.revision).toBe("51")
+    expect(catalog.revision).toBe("52")
     const expectedTargets: readonly (readonly [
       targetId: string,
       category: string,
@@ -274,17 +274,20 @@ describe("batch 08 M6 independent follow-ups", () => {
       expect(variant.status, m6.label).toBe("converted")
       expect(variant.configuration, m6.label).toEqual({ minimumMindscape: 6 })
       expect(variant.maximumLayers, m6.label).toBe(1)
-      expect(variant.damageItemRequirements, m6.label).toEqual([
-        {
-          itemId: m6.itemId,
-          stat: "attack",
-          role: "base",
-          allowedModes: ["direct"],
-          source: "holder-current",
-          requiredDirectMultiplier: 0,
-          requiredSkillCategory: m6.skillCategory,
-        },
-      ])
+      expect(variant.mechanism, m6.label).toEqual({
+        kind: "independent-settlement",
+        damageItemRequirements: [
+          {
+            itemId: m6.itemId,
+            stat: "attack",
+            role: "base",
+            allowedModes: ["direct"],
+            source: "holder-current",
+            requiredDirectMultiplier: 0,
+            requiredSkillCategory: m6.skillCategory,
+          },
+        ],
+      })
       const rule = definitions.effects.find((e) => e.effectId === m6.effectId)!
       expect(rule.kind, m6.label).toBe("contribution")
       if (rule.kind !== "contribution") throw new Error("unreachable")

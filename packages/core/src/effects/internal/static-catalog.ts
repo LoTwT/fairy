@@ -21,6 +21,7 @@ import type {
   Condition,
   ContributionOperation,
   ContributionRule,
+  DamageElement,
   EffectId,
   EffectRule,
   EntityId,
@@ -30,7 +31,12 @@ import type {
   Result,
   StaticCatalogDamageInput,
   StaticCatalogDamageItem,
+  StaticCatalogDamageItemRequirement,
+  StaticCatalogElementBuffInput,
+  StaticCatalogParameterMapping,
   StaticCatalogVariant,
+  StaticCatalogVariantMechanism,
+  StaticCatalogWindsweptDirectDamage,
   StaticDamageInput,
   StaticDamageParameters,
   StaticDamageResult,
@@ -96,7 +102,8 @@ function discardedStunInputOwners(
       Object.values(value).some(reads)
     )
   }
-  if (variant.parameterMapping !== undefined) return undefined
+  if (variant.mechanism?.kind === "luminize-proficiency-mapping")
+    return undefined
   const owners = new Set<string>()
   for (const id of variant.effectIds) {
     const rule = rules.find((entry) => entry.effectId === id)
@@ -273,6 +280,615 @@ function conditionConsumesElementFlag(
   )
 }
 
+const VARIANT_MECHANISM_KINDS = [
+  "complete-state",
+  "holder-level",
+  "independent-settlement",
+  "declared-teammate-beneficiary",
+  "squad-unique",
+  "windswept-direct",
+  "element-buff-inputs",
+  "luminize-proficiency-mapping",
+] as const
+
+const ORIGINAL_ANOMALY_ATTRIBUTES = [
+  "fire",
+  "electric",
+  "ether",
+  "ice",
+  "physical",
+  "auric-ink",
+  "frost",
+] as const
+
+const DAMAGE_PREPARATION_MODES = [
+  "direct",
+  "standard-disorder",
+  "standard-vortex",
+] as const
+
+type DamageItemRequirementStat = StaticCatalogDamageItemRequirement["stat"]
+type DamageItemRequirementRole = StaticCatalogDamageItemRequirement["role"]
+type DamageItemRequirementMode =
+  StaticCatalogDamageItemRequirement["allowedModes"][number]
+type DamageItemRequirementSource = NonNullable<
+  StaticCatalogDamageItemRequirement["source"]
+>
+type DamageItemRequirementSkillCategory = NonNullable<
+  StaticCatalogDamageItemRequirement["requiredSkillCategory"]
+>
+type DamageItemRequirementAnomalyAttribute = NonNullable<
+  StaticCatalogDamageItemRequirement["originalAnomalyAttribute"]
+>
+
+function isDamageItemRequirementStat(
+  value: unknown,
+): value is DamageItemRequirementStat {
+  return typeof value === "string" && GENERAL_STATS.has(value as never)
+}
+
+function isDamageItemRequirementRole(
+  value: unknown,
+): value is DamageItemRequirementRole {
+  return value === "base" || value === "settlement"
+}
+
+function isDamagePreparationMode(
+  value: unknown,
+): value is DamageItemRequirementMode {
+  return DAMAGE_PREPARATION_MODES.some((mode) => mode === value)
+}
+
+function isDamageItemRequirementSource(
+  value: unknown,
+): value is DamageItemRequirementSource {
+  return value === "holder-current" || value === "anomaly-source"
+}
+
+function isDamageItemRequirementSkillCategory(
+  value: unknown,
+): value is DamageItemRequirementSkillCategory {
+  return SKILL_CATEGORIES.some((category) => category === value)
+}
+
+function isDamageItemRequirementAnomalyAttribute(
+  value: unknown,
+): value is DamageItemRequirementAnomalyAttribute {
+  return ORIGINAL_ANOMALY_ATTRIBUTES.some((attribute) => attribute === value)
+}
+
+function isDamageElement(value: unknown): value is DamageElement {
+  return DAMAGE_ELEMENTS.some((element) => element === value)
+}
+
+/**
+ * 解析并校验单个伤害项要求。字段级形状错误沿用 INVALID_INPUT；返回值只包含
+ * 已确认的字段，调用方不再按裸索引读取。
+ */
+function parseDamageItemRequirement(
+  value: unknown,
+  pointer: string,
+  collector: IssueCollector,
+): StaticCatalogDamageItemRequirement | undefined {
+  const checks = { collector, pointer, structureCode: "INVALID_INPUT" as const }
+  const requirement = expectObject(value, checks, "damage item requirement")
+  if (!requirement) return undefined
+  rejectUnknownFields(
+    requirement,
+    [
+      "itemId",
+      "stat",
+      "role",
+      "allowedModes",
+      "source",
+      "requiredDirectMultiplier",
+      "requiredSkillCategory",
+      "requiredCriticalRateDeclaration",
+      "originalAnomalyAttribute",
+    ],
+    checks,
+    "damage item requirement",
+  )
+  let valid = true
+  const itemId = expectNonEmptyString(
+    requirement["itemId"],
+    { ...checks, pointer: `${pointer}/itemId` },
+    "damage item identity",
+  )
+  if (itemId === undefined) valid = false
+  const stat = requirement["stat"]
+  if (!isDamageItemRequirementStat(stat)) {
+    collector.report(
+      "INVALID_INPUT",
+      `${pointer}/stat`,
+      "Expected a general stat",
+    )
+    valid = false
+  }
+  const role = requirement["role"]
+  if (!isDamageItemRequirementRole(role)) {
+    collector.report(
+      "INVALID_INPUT",
+      `${pointer}/role`,
+      "Expected a damage item role",
+    )
+    valid = false
+  }
+  const allowedModes: DamageItemRequirementMode[] = []
+  const modes =
+    expectArray(
+      requirement["allowedModes"],
+      { ...checks, pointer: `${pointer}/allowedModes` },
+      "allowed modes",
+    ) ?? []
+  for (const mode of modes) {
+    if (!isDamagePreparationMode(mode)) {
+      collector.report(
+        "INVALID_INPUT",
+        `${pointer}/allowedModes`,
+        "Expected a nonempty damage preparation mode list",
+      )
+      valid = false
+      continue
+    }
+    allowedModes.push(mode)
+  }
+  if (!modes.length) {
+    collector.report(
+      "INVALID_INPUT",
+      `${pointer}/allowedModes`,
+      "Expected a nonempty damage preparation mode list",
+    )
+    valid = false
+  }
+  const source = requirement["source"]
+  if (source !== undefined && !isDamageItemRequirementSource(source)) {
+    collector.report(
+      "INVALID_INPUT",
+      `${pointer}/source`,
+      "Unknown damage item source restriction",
+    )
+    valid = false
+  }
+  const requiredDirectMultiplier = requirement["requiredDirectMultiplier"]
+  if (
+    requiredDirectMultiplier !== undefined &&
+    requiredDirectMultiplier !== 0
+  ) {
+    collector.report(
+      "INVALID_INPUT",
+      `${pointer}/requiredDirectMultiplier`,
+      "Direct requirements must demand a zero initial multiplier",
+    )
+    valid = false
+  }
+  const requiredSkillCategory = requirement["requiredSkillCategory"]
+  if (
+    requiredSkillCategory !== undefined &&
+    !isDamageItemRequirementSkillCategory(requiredSkillCategory)
+  ) {
+    collector.report(
+      "INVALID_INPUT",
+      `${pointer}/requiredSkillCategory`,
+      "Unknown required skill category",
+    )
+    valid = false
+  }
+  const requiredCriticalRateDeclaration =
+    requirement["requiredCriticalRateDeclaration"]
+  if (
+    requiredCriticalRateDeclaration !== undefined &&
+    requiredCriticalRateDeclaration !== true
+  ) {
+    collector.report(
+      "INVALID_INPUT",
+      `${pointer}/requiredCriticalRateDeclaration`,
+      "Expected the literal true",
+    )
+    valid = false
+  }
+  const originalAnomalyAttribute = requirement["originalAnomalyAttribute"]
+  if (
+    originalAnomalyAttribute !== undefined &&
+    !isDamageItemRequirementAnomalyAttribute(originalAnomalyAttribute)
+  ) {
+    collector.report(
+      "INVALID_INPUT",
+      `${pointer}/originalAnomalyAttribute`,
+      "Unknown original anomaly attribute",
+    )
+    valid = false
+  }
+  if (
+    !valid ||
+    itemId === undefined ||
+    !isDamageItemRequirementStat(stat) ||
+    !isDamageItemRequirementRole(role)
+  )
+    return undefined
+  return {
+    itemId,
+    stat,
+    role,
+    allowedModes,
+    ...(isDamageItemRequirementSource(source) ? { source } : {}),
+    ...(requiredDirectMultiplier === 0
+      ? { requiredDirectMultiplier: 0 as const }
+      : {}),
+    ...(isDamageItemRequirementSkillCategory(requiredSkillCategory)
+      ? { requiredSkillCategory }
+      : {}),
+    ...(requiredCriticalRateDeclaration === true
+      ? { requiredCriticalRateDeclaration: true as const }
+      : {}),
+    ...(isDamageItemRequirementAnomalyAttribute(originalAnomalyAttribute)
+      ? { originalAnomalyAttribute }
+      : {}),
+  }
+}
+
+function parseCompleteStateBridge(
+  value: unknown,
+  pointer: string,
+  collector: IssueCollector,
+): { readonly layerCountInputName: string } | undefined {
+  const checks = {
+    collector,
+    pointer,
+    structureCode: "INVALID_DEFINITION" as const,
+  }
+  const bridge = expectObject(value, checks, "complete-state bridge")
+  if (!bridge) return undefined
+  rejectUnknownFields(
+    bridge,
+    ["layerCountInputName"],
+    checks,
+    "complete-state bridge",
+  )
+  const name = expectNonEmptyString(
+    bridge["layerCountInputName"],
+    checks,
+    "layer count input name",
+  )
+  return name === undefined ? undefined : { layerCountInputName: name }
+}
+
+function parseWindsweptMetadata(
+  value: unknown,
+  pointer: string,
+  collector: IssueCollector,
+): StaticCatalogWindsweptDirectDamage | undefined {
+  const checks = {
+    collector,
+    pointer,
+    structureCode: "INVALID_DEFINITION" as const,
+  }
+  const metadata = expectObject(
+    value,
+    checks,
+    "windswept direct damage metadata",
+  )
+  if (!metadata) return undefined
+  rejectUnknownFields(
+    metadata,
+    ["applicabilityInputName", "applierTeam", "singleActiveSourceGroup"],
+    checks,
+    "windswept direct damage metadata",
+  )
+  const applicabilityInputName = expectNonEmptyString(
+    metadata["applicabilityInputName"],
+    checks,
+    "windswept applicability input",
+  )
+  const applierTeam = metadata["applierTeam"]
+  if (applierTeam !== "holder")
+    collector.report("INVALID_DEFINITION", pointer, "Unknown applier team")
+  const singleActiveSourceGroup = metadata["singleActiveSourceGroup"]
+  if (singleActiveSourceGroup !== undefined)
+    expectNonEmptyString(
+      singleActiveSourceGroup,
+      checks,
+      "single active source group",
+    )
+  if (applicabilityInputName === undefined || applierTeam !== "holder")
+    return undefined
+  return {
+    applicabilityInputName,
+    applierTeam: "holder",
+    ...(typeof singleActiveSourceGroup === "string" &&
+    singleActiveSourceGroup.trim().length > 0
+      ? { singleActiveSourceGroup }
+      : {}),
+  }
+}
+
+function parseElementBuffInputs(
+  value: unknown,
+  pointer: string,
+  collector: IssueCollector,
+): NonEmpty<StaticCatalogElementBuffInput> | undefined {
+  const checks = {
+    collector,
+    pointer,
+    structureCode: "INVALID_DEFINITION" as const,
+  }
+  const entries = expectArray(value, checks, "element buff inputs") ?? []
+  const inputs: StaticCatalogElementBuffInput[] = []
+  const elements = new Set<unknown>()
+  const names = new Set<unknown>()
+  if (!entries.length)
+    collector.report(
+      "INVALID_DEFINITION",
+      pointer,
+      "Element buff inputs require a nonempty mapping",
+    )
+  for (const rawEntry of entries) {
+    const entry = expectObject(rawEntry, checks, "element buff input")
+    if (!entry) continue
+    rejectUnknownFields(
+      entry,
+      ["element", "inputName"],
+      checks,
+      "element buff input",
+    )
+    const element = entry["element"]
+    if (!isDamageElement(element)) {
+      collector.report("INVALID_DEFINITION", pointer, "Unknown buff element")
+      continue
+    }
+    if (elements.has(element))
+      collector.report(
+        "DUPLICATE_ID",
+        pointer,
+        "Element buff entries must use unique elements",
+      )
+    elements.add(element)
+    const inputName = expectNonEmptyString(
+      entry["inputName"],
+      checks,
+      "element buff input name",
+    )
+    if (inputName === undefined) continue
+    if (names.has(inputName))
+      collector.report(
+        "DUPLICATE_ID",
+        pointer,
+        "Element buff entries must use unique input names",
+      )
+    names.add(inputName)
+    inputs.push({ element, inputName })
+  }
+  const [first, ...rest] = inputs
+  return first === undefined ? undefined : [first, ...rest]
+}
+
+function parseParameterMapping(
+  value: unknown,
+  pointer: string,
+  collector: IssueCollector,
+): StaticCatalogParameterMapping | undefined {
+  const checks = { collector, pointer, structureCode: "INVALID_INPUT" as const }
+  const mapping = expectObject(value, checks, "parameter mapping")
+  if (!mapping) return undefined
+  rejectUnknownFields(
+    mapping,
+    ["kind", "rate", "source", "inputName"],
+    checks,
+    "parameter mapping",
+  )
+  if (mapping["kind"] !== "luminize-proficiency")
+    collector.report("INVALID_INPUT", pointer, "Unknown core parameter mapping")
+  const source = mapping["source"]
+  if (
+    source !== "holder-current" &&
+    source !== "holder-initial" &&
+    source !== "input"
+  )
+    collector.report("INVALID_INPUT", pointer, "Unknown parameter source")
+  const rate = expectFiniteNumber(mapping["rate"], checks, "conversion rate")
+  if (rate !== undefined && rate < 0)
+    collector.report(
+      "INVALID_INPUT",
+      pointer,
+      "Conversion rate cannot be negative",
+    )
+  const inputName =
+    mapping["inputName"] === undefined
+      ? undefined
+      : expectNonEmptyString(
+          mapping["inputName"],
+          checks,
+          "parameter mapping input name",
+        )
+  if (
+    mapping["kind"] !== "luminize-proficiency" ||
+    (source !== "holder-current" &&
+      source !== "holder-initial" &&
+      source !== "input") ||
+    rate === undefined
+  )
+    return undefined
+  return {
+    kind: "luminize-proficiency",
+    rate,
+    source,
+    ...(inputName === undefined ? {} : { inputName }),
+  }
+}
+
+/**
+ * 解析变体机制判别联合：每个 arm 只接受自己的字段，未知 arm 明确拒绝，
+ * 不按旧字段是否存在推断机制。
+ */
+function parseVariantMechanism(
+  value: unknown,
+  pointer: string,
+  collector: IssueCollector,
+): StaticCatalogVariantMechanism | undefined {
+  const checks = {
+    collector,
+    pointer,
+    structureCode: "INVALID_DEFINITION" as const,
+  }
+  const mechanism = expectObject(value, checks, "variant mechanism")
+  if (!mechanism) return undefined
+  const kind = mechanism["kind"]
+  if (
+    typeof kind !== "string" ||
+    !VARIANT_MECHANISM_KINDS.some((known) => known === kind)
+  ) {
+    collector.report("INVALID_DEFINITION", pointer, "Unknown variant mechanism")
+    return undefined
+  }
+  switch (kind) {
+    case "complete-state": {
+      rejectUnknownFields(
+        mechanism,
+        ["kind", "layerCountInputName"],
+        checks,
+        "complete-state mechanism",
+      )
+      const layerCountInputName = expectNonEmptyString(
+        mechanism["layerCountInputName"],
+        checks,
+        "layer count input name",
+      )
+      return layerCountInputName === undefined
+        ? undefined
+        : { kind, layerCountInputName }
+    }
+    case "holder-level": {
+      rejectUnknownFields(
+        mechanism,
+        ["kind", "holderLevelInputName"],
+        checks,
+        "holder-level mechanism",
+      )
+      const holderLevelInputName = expectNonEmptyString(
+        mechanism["holderLevelInputName"],
+        checks,
+        "holder level input name",
+      )
+      return holderLevelInputName === undefined
+        ? undefined
+        : { kind, holderLevelInputName }
+    }
+    case "independent-settlement": {
+      rejectUnknownFields(
+        mechanism,
+        [
+          "kind",
+          "damageItemRequirements",
+          "isolateDamageItems",
+          "completeState",
+        ],
+        checks,
+        "independent-settlement mechanism",
+      )
+      const requirementsPointer = `${pointer}/damageItemRequirements`
+      const rawRequirements =
+        expectArray(
+          mechanism["damageItemRequirements"],
+          { ...checks, pointer: requirementsPointer },
+          "damage item requirements",
+        ) ?? []
+      if (!rawRequirements.length)
+        collector.report(
+          "INVALID_DEFINITION",
+          requirementsPointer,
+          "Independent settlement requires at least one damage item requirement",
+        )
+      const requirements: StaticCatalogDamageItemRequirement[] = []
+      for (const [index, rawRequirement] of rawRequirements.entries()) {
+        const requirement = parseDamageItemRequirement(
+          rawRequirement,
+          `${requirementsPointer}/${String(index)}`,
+          collector,
+        )
+        if (requirement !== undefined) requirements.push(requirement)
+      }
+      const isolateDamageItems = mechanism["isolateDamageItems"]
+      if (isolateDamageItems !== undefined && isolateDamageItems !== true)
+        collector.report(
+          "INVALID_INPUT",
+          `${pointer}/isolateDamageItems`,
+          "Expected the literal true",
+        )
+      const completeState =
+        mechanism["completeState"] === undefined
+          ? undefined
+          : parseCompleteStateBridge(
+              mechanism["completeState"],
+              `${pointer}/completeState`,
+              collector,
+            )
+      const [first, ...rest] = requirements
+      if (
+        first === undefined ||
+        requirements.length !== rawRequirements.length ||
+        (completeState === undefined &&
+          mechanism["completeState"] !== undefined)
+      )
+        return undefined
+      return {
+        kind,
+        damageItemRequirements: [first, ...rest],
+        ...(isolateDamageItems === true
+          ? { isolateDamageItems: true as const }
+          : {}),
+        ...(completeState === undefined ? {} : { completeState }),
+      }
+    }
+    case "declared-teammate-beneficiary":
+    case "squad-unique": {
+      rejectUnknownFields(mechanism, ["kind"], checks, `${kind} mechanism`)
+      return { kind }
+    }
+    case "windswept-direct": {
+      rejectUnknownFields(
+        mechanism,
+        ["kind", "metadata"],
+        checks,
+        "windswept-direct mechanism",
+      )
+      const metadata = parseWindsweptMetadata(
+        mechanism["metadata"],
+        `${pointer}/metadata`,
+        collector,
+      )
+      return metadata === undefined ? undefined : { kind, metadata }
+    }
+    case "element-buff-inputs": {
+      rejectUnknownFields(
+        mechanism,
+        ["kind", "inputs"],
+        checks,
+        "element-buff-inputs mechanism",
+      )
+      const inputs = parseElementBuffInputs(
+        mechanism["inputs"],
+        `${pointer}/inputs`,
+        collector,
+      )
+      return inputs === undefined ? undefined : { kind, inputs }
+    }
+    case "luminize-proficiency-mapping": {
+      rejectUnknownFields(
+        mechanism,
+        ["kind", "mapping"],
+        checks,
+        "luminize-proficiency-mapping mechanism",
+      )
+      const mapping = parseParameterMapping(
+        mechanism["mapping"],
+        `${pointer}/mapping`,
+        collector,
+      )
+      return mapping === undefined ? undefined : { kind, mapping }
+    }
+  }
+}
+
 /** JSON 目录与 TypeScript 调用共享校验；不信任类型断言或未选中条目的引用。 */
 export function validateStaticCatalog(
   catalogValue: unknown,
@@ -307,7 +923,7 @@ export function validateStaticCatalog(
     "static catalog",
   )
   if (
-    catalog["schemaVersion"] !== 1 ||
+    catalog["schemaVersion"] !== 2 ||
     catalog["ruleSetId"] !== definitions.ruleSetId ||
     catalog["revision"] !== definitions.revision
   )
@@ -852,15 +1468,7 @@ export function validateStaticCatalog(
           "inputs",
           "applicability",
           "differences",
-          "parameterMapping",
-          "damageItemRequirements",
-          "layerCountInputName",
-          "holderLevelInputName",
-          "elementBuffInputs",
-          "windsweptDirectDamage",
-          "declaredTeammateBeneficiary",
-          "squadUniqueEffect",
-          "exclusiveDamageItem",
+          "mechanism",
         ],
         checks(vp),
         "variant",
@@ -906,132 +1514,111 @@ export function validateStaticCatalog(
           `${vp}/maximumLayers`,
           "Layer maximum must be a positive safe integer",
         )
-      // 完整状态层数桥接：声明的 count 输入名必须非空，且必须真实对应
-      // 所引用贡献里消费的 count 输入；该贡献必须是一次 supplied 完整状态
-      // （maximumLayers 1），防止把普通叠层选项静默改成单实例。详细校验在
-      // effectIds 解析后进行（需要已解析的规则）。
-      const layerCountInputName = variant["layerCountInputName"]
-      const holderLevelInputName = variant["holderLevelInputName"]
-      if (holderLevelInputName !== undefined)
-        expectNonEmptyString(
-          holderLevelInputName,
-          {
-            ...checks(`${vp}/holderLevelInputName`),
-            structureCode: "INVALID_DEFINITION",
-          },
-          `${String(option["optionId"])} holder level input name`,
-        )
-      if (layerCountInputName !== undefined)
-        expectNonEmptyString(
-          layerCountInputName,
-          checks(`${vp}/layerCountInputName`),
-          "layer count input name",
-        )
-      // 声明式同队受益者：字段只接受字面量 true；受益者不是持有者，选项的
-      // 有效 target 必须是 team，避免把“同队另一名实体”静默折算成 self。
-      if (variant["declaredTeammateBeneficiary"] !== undefined) {
-        if (variant["declaredTeammateBeneficiary"] !== true)
-          collector.report(
-            "INVALID_INPUT",
-            `${vp}/declaredTeammateBeneficiary`,
-            "Expected the literal true",
-          )
-        if ((variant["target"] ?? option["target"]) !== "team")
-          collector.report(
-            "INVALID_DEFINITION",
-            `${vp}/declaredTeammateBeneficiary`,
-            "A declared teammate beneficiary requires the team option target",
-          )
-      }
-      // 全队唯一效果声明：字段只接受字面量 true；跨绑定的整队唯一在选择
-      // 阶段强制（见选择循环），这里只拒绝非法声明形状。
+      // 变体机制：先解析判别联合，再按 arm 读取字段。旧 9 个并列 optional
+      // 字段不再接受；一个变体最多一个 mechanism，未知 arm 明确拒绝。
+      const mechanism =
+        variant["mechanism"] === undefined
+          ? undefined
+          : parseVariantMechanism(
+              variant["mechanism"],
+              `${vp}/mechanism`,
+              collector,
+            )
+      const layerCountInputName =
+        mechanism?.kind === "complete-state"
+          ? mechanism.layerCountInputName
+          : mechanism?.kind === "independent-settlement"
+            ? mechanism.completeState?.layerCountInputName
+            : undefined
+      const holderLevelInputName =
+        mechanism?.kind === "holder-level"
+          ? mechanism.holderLevelInputName
+          : undefined
+      const declaredTeammateBeneficiary =
+        mechanism?.kind === "declared-teammate-beneficiary"
+      const windsweptMetadata =
+        mechanism?.kind === "windswept-direct" ? mechanism.metadata : undefined
+      const elementBuffInputs =
+        mechanism?.kind === "element-buff-inputs" ? mechanism.inputs : undefined
+      const damageItemRequirements =
+        mechanism?.kind === "independent-settlement"
+          ? mechanism.damageItemRequirements
+          : undefined
+      const exclusiveDamageItem =
+        mechanism?.kind === "independent-settlement" &&
+        mechanism.isolateDamageItems === true
+      const parameterMapping =
+        mechanism?.kind === "luminize-proficiency-mapping"
+          ? mechanism.mapping
+          : undefined
+      // 完整状态层数桥接：声明的 count 输入名必须真实对应所引用贡献里消费
+      // 的 count 输入；该贡献必须是一次 supplied 完整状态（maximumLayers 1），
+      // 防止把普通叠层选项静默改成单实例。详细校验在 effectIds 解析后进行。
+      // 声明式同队受益者：受益者不是持有者，选项的有效 target 必须是 team，
+      // 避免把“同队另一名实体”静默折算成 self。
       if (
-        variant["squadUniqueEffect"] !== undefined &&
-        variant["squadUniqueEffect"] !== true
+        declaredTeammateBeneficiary &&
+        (variant["target"] ?? option["target"]) !== "team"
       )
         collector.report(
-          "INVALID_INPUT",
-          `${vp}/squadUniqueEffect`,
-          "Expected the literal true",
+          "INVALID_DEFINITION",
+          `${vp}/mechanism`,
+          "A declared teammate beneficiary requires the team option target",
         )
-      // 独占伤害项声明：只接受字面量 true，且变体必须恰好登记一个伤害项
-      // 要求——启用时命中的伤害项被锁定为该唯一项（选择循环强制），不把
-      // 该声明扩展成通用的多项组合校验。
-      if (variant["exclusiveDamageItem"] !== undefined) {
-        if (variant["exclusiveDamageItem"] !== true)
-          collector.report(
-            "INVALID_INPUT",
-            `${vp}/exclusiveDamageItem`,
-            "Expected the literal true",
-          )
-        const exclusiveRequirements = expectArray(
-          variant["damageItemRequirements"],
-          checks(`${vp}/damageItemRequirements`),
-          "damage item requirements",
+      // 独占伤害项声明要求恰好一个伤害项：启用时命中的伤害项被锁定为该
+      // 唯一项（选择循环强制），不把该声明扩展成通用的多项组合校验。
+      if (
+        exclusiveDamageItem &&
+        damageItemRequirements !== undefined &&
+        damageItemRequirements.length !== 1
+      )
+        collector.report(
+          "INVALID_DEFINITION",
+          `${vp}/mechanism/isolateDamageItems`,
+          "An exclusive damage item declaration requires exactly one damage item requirement",
         )
-        if (exclusiveRequirements?.length !== 1)
-          collector.report(
-            "INVALID_DEFINITION",
-            `${vp}/exclusiveDamageItem`,
-            "An exclusive damage item declaration requires exactly one damage item requirement",
-          )
-      }
       // 声明最终暴击概率的要求项：必须位于独占变体的唯一要求项上，且该
       // 要求项是 base 角色、仅 direct 模式、holder-current——概率声明与
       // 被结算的独立项一一对应，不允许多项命中级覆盖的模糊定义。
-      if (variant["damageItemRequirements"] !== undefined) {
-        const requirementList = expectArray(
-          variant["damageItemRequirements"],
-          checks(`${vp}/damageItemRequirements`),
-          "damage item requirements",
-        )
-        if (requirementList !== undefined)
-          for (const [ri, requirementValue] of requirementList.entries()) {
-            const requirement = expectObject(
-              requirementValue,
-              checks(`${vp}/damageItemRequirements/${ri}`),
-              "damage item requirement",
+      if (damageItemRequirements !== undefined)
+        for (const [ri, requirement] of damageItemRequirements.entries()) {
+          if (requirement.requiredCriticalRateDeclaration === undefined)
+            continue
+          const declarationPointer = `${vp}/mechanism/damageItemRequirements/${ri}/requiredCriticalRateDeclaration`
+          if (!exclusiveDamageItem)
+            collector.report(
+              "INVALID_DEFINITION",
+              declarationPointer,
+              "A required critical rate declaration must sit on an exclusive damage item variant",
             )
-            if (requirement?.["requiredCriticalRateDeclaration"] === undefined)
-              continue
-            const declarationPointer = `${vp}/damageItemRequirements/${ri}/requiredCriticalRateDeclaration`
-            if (variant["exclusiveDamageItem"] !== true)
-              collector.report(
-                "INVALID_DEFINITION",
-                declarationPointer,
-                "A required critical rate declaration must sit on an exclusive damage item variant",
-              )
-            if (requirementList.length !== 1)
-              collector.report(
-                "INVALID_DEFINITION",
-                declarationPointer,
-                "A required critical rate declaration must sit on the single damage item requirement of its variant",
-              )
-            if (requirement["role"] !== "base")
-              collector.report(
-                "INVALID_DEFINITION",
-                declarationPointer,
-                "A required critical rate declaration requires the base damage item role",
-              )
-            const modes = requirement["allowedModes"]
-            if (
-              !Array.isArray(modes) ||
-              modes.length !== 1 ||
-              modes[0] !== "direct"
+          if (damageItemRequirements.length !== 1)
+            collector.report(
+              "INVALID_DEFINITION",
+              declarationPointer,
+              "A required critical rate declaration must sit on the single damage item requirement of its variant",
             )
-              collector.report(
-                "INVALID_DEFINITION",
-                declarationPointer,
-                "A required critical rate declaration requires the direct damage preparation mode only",
-              )
-            if (requirement["source"] !== "holder-current")
-              collector.report(
-                "INVALID_DEFINITION",
-                declarationPointer,
-                "A required critical rate declaration requires the holder-current damage item source",
-              )
-          }
-      }
+          if (requirement.role !== "base")
+            collector.report(
+              "INVALID_DEFINITION",
+              declarationPointer,
+              "A required critical rate declaration requires the base damage item role",
+            )
+          if (
+            requirement.allowedModes.length !== 1 ||
+            requirement.allowedModes[0] !== "direct"
+          )
+            collector.report(
+              "INVALID_DEFINITION",
+              declarationPointer,
+              "A required critical rate declaration requires the direct damage preparation mode only",
+            )
+          if (requirement.source !== "holder-current")
+            collector.report(
+              "INVALID_DEFINITION",
+              declarationPointer,
+              "A required critical rate declaration requires the holder-current damage item source",
+            )
+        }
       const config = expectObject(
         variant["configuration"],
         checks(`${vp}/configuration`),
@@ -1186,7 +1773,7 @@ export function validateStaticCatalog(
         )
           collector.report(
             "INVALID_DEFINITION",
-            `${vp}/${field}`,
+            `${vp}/mechanism`,
             field === "layerCountInputName"
               ? "The layer-count input must be consumed as a count input by exactly one supplied single-instance contribution (maximumLayers literal count 1) in this variant"
               : `${String(option["optionId"])}: holderLevelInputName must be consumed as a count input by exactly one supplied single-instance contribution (maximumLayers literal count 1); the variant also requires maximumLayers 1`,
@@ -1259,99 +1846,9 @@ export function validateStaticCatalog(
             "Unknown input unit",
           )
       }
-      if (variant["windsweptDirectDamage"] !== undefined) {
-        const wp = `${vp}/windsweptDirectDamage`
-        const wc = {
-          ...checks(wp),
-          structureCode: "INVALID_DEFINITION" as const,
-        }
-        const metadata = expectObject(
-          variant["windsweptDirectDamage"],
-          wc,
-          "windswept direct damage metadata",
-        )
-        if (metadata) {
-          rejectUnknownFields(
-            metadata,
-            [
-              "applicabilityInputName",
-              "applierTeam",
-              "singleActiveSourceGroup",
-            ],
-            wc,
-            "windswept direct damage metadata",
-          )
-          const name = expectNonEmptyString(
-            metadata["applicabilityInputName"],
-            { ...wc, pointer: `${wp}/applicabilityInputName` },
-            "windswept applicability input",
-          )
-          expectLiteral(
-            metadata["applierTeam"],
-            ["holder"],
-            { ...wc, pointer: `${wp}/applierTeam` },
-            "applier team",
-          )
-          if (metadata["singleActiveSourceGroup"] !== undefined)
-            expectNonEmptyString(
-              metadata["singleActiveSourceGroup"],
-              { ...wc, pointer: `${wp}/singleActiveSourceGroup` },
-              "single active source group",
-            )
-          const consumers = effectIds.flatMap((id) => {
-            const effect = effects.get(id as EffectId)
-            return effect?.kind === "contribution" ? [effect] : []
-          })
-          const consumer = consumers[0]
-          const maximum =
-            consumer?.activation.kind === "supplied"
-              ? consumer.activation.maximumLayers
-              : undefined
-          if (
-            consumers.length !== 1 ||
-            variant["maximumLayers"] !== 1 ||
-            maximum?.kind !== "literal" ||
-            maximum.unit !== "count" ||
-            maximum.value !== 1 ||
-            consumer?.operation.kind !== "factor-contribution" ||
-            consumer.operation.channel !==
-              "windswept-direct-damage-coefficient-increase" ||
-            consumer.scope !== "hit" ||
-            consumer.when.kind !== "constant" ||
-            consumer.when.value !== true ||
-            name === undefined ||
-            !operationConsumesInput(consumer.operation, name, "count")
-          )
-            collector.report(
-              "INVALID_DEFINITION",
-              wp,
-              "Windswept metadata requires exactly one unconditional hit-scoped supplied single-instance coefficient contribution consuming the count input",
-            )
-          if (
-            name !== undefined &&
-            (inputNames.has(name) ||
-              name === layerCountInputName ||
-              name === holderLevelInputName ||
-              (Array.isArray(variant["elementBuffInputs"]) &&
-                variant["elementBuffInputs"].some(
-                  (entry) =>
-                    isPlainObject(entry) && entry["inputName"] === name,
-                )))
-          )
-            collector.report(
-              "INVALID_DEFINITION",
-              `${wp}/applicabilityInputName`,
-              "Windswept applicability input conflicts with another input declaration",
-            )
-        }
-      }
-      if (variant["elementBuffInputs"] !== undefined) {
-        const fieldPath = `${vp}/elementBuffInputs`
-        const entries = expectArray(
-          variant["elementBuffInputs"],
-          checks(fieldPath),
-          "element buff inputs",
-        )
+      if (windsweptMetadata !== undefined) {
+        const wp = `${vp}/mechanism/metadata`
+        const name = windsweptMetadata.applicabilityInputName
         const consumers = effectIds.flatMap((id) => {
           const effect = effects.get(id as EffectId)
           return effect?.kind === "contribution" ? [effect] : []
@@ -1362,7 +1859,48 @@ export function validateStaticCatalog(
             ? consumer.activation.maximumLayers
             : undefined
         if (
-          !entries?.length ||
+          consumers.length !== 1 ||
+          variant["maximumLayers"] !== 1 ||
+          maximum?.kind !== "literal" ||
+          maximum.unit !== "count" ||
+          maximum.value !== 1 ||
+          consumer?.operation.kind !== "factor-contribution" ||
+          consumer.operation.channel !==
+            "windswept-direct-damage-coefficient-increase" ||
+          consumer.scope !== "hit" ||
+          consumer.when.kind !== "constant" ||
+          consumer.when.value !== true ||
+          !operationConsumesInput(consumer.operation, name, "count")
+        )
+          collector.report(
+            "INVALID_DEFINITION",
+            wp,
+            "Windswept metadata requires exactly one unconditional hit-scoped supplied single-instance coefficient contribution consuming the count input",
+          )
+        if (
+          inputNames.has(name) ||
+          name === layerCountInputName ||
+          name === holderLevelInputName ||
+          elementBuffInputs?.some((entry) => entry.inputName === name)
+        )
+          collector.report(
+            "INVALID_DEFINITION",
+            wp,
+            "Windswept applicability input conflicts with another input declaration",
+          )
+      }
+      if (elementBuffInputs !== undefined) {
+        const fieldPath = `${vp}/mechanism/inputs`
+        const consumers = effectIds.flatMap((id) => {
+          const effect = effects.get(id as EffectId)
+          return effect?.kind === "contribution" ? [effect] : []
+        })
+        const consumer = consumers[0]
+        const maximum =
+          consumer?.activation.kind === "supplied"
+            ? consumer.activation.maximumLayers
+            : undefined
+        if (
           variant["maximumLayers"] !== 1 ||
           consumers.length !== 1 ||
           maximum?.kind !== "literal" ||
@@ -1374,28 +1912,8 @@ export function validateStaticCatalog(
             fieldPath,
             "Element buff inputs require a nonempty mapping and exactly one supplied single-instance contribution (maximumLayers 1)",
           )
-        const elements = new Set<string>(),
-          names = new Set<string>()
-        for (const [ei, rawEntry] of (entries ?? []).entries()) {
-          const ep = `${fieldPath}/${ei}`
-          const entry = expectObject(rawEntry, checks(ep), "element buff input")
-          if (!entry) continue
-          rejectUnknownFields(
-            entry,
-            ["element", "inputName"],
-            checks(ep),
-            "element buff input",
-          )
-          unique(entry["element"], `${ep}/element`, elements)
-          if (!DAMAGE_ELEMENTS.includes(entry["element"] as never))
-            collector.report(
-              "INVALID_DEFINITION",
-              `${ep}/element`,
-              "Unknown buff element",
-            )
-          unique(entry["inputName"], `${ep}/inputName`, names)
-          const name = entry["inputName"]
-          if (typeof name !== "string") continue
+        for (const [ei, entry] of elementBuffInputs.entries()) {
+          const name = entry.inputName
           if (
             inputNames.has(name) ||
             name === layerCountInputName ||
@@ -1403,7 +1921,7 @@ export function validateStaticCatalog(
           )
             collector.report(
               "INVALID_DEFINITION",
-              `${ep}/inputName`,
+              `${fieldPath}/${ei}/inputName`,
               "Element buff input conflicts with another input declaration",
             )
           if (
@@ -1413,7 +1931,7 @@ export function validateStaticCatalog(
           )
             collector.report(
               "INVALID_DEFINITION",
-              `${ep}/inputName`,
+              `${fieldPath}/${ei}/inputName`,
               "Element buff input must be compared with count 1 in the contribution condition",
             )
         }
@@ -1421,22 +1939,22 @@ export function validateStaticCatalog(
       // 派生层数名不得与外部输入要求同名：调用方不能手工提供同一
       // (bindingId, name)，若同时列为必填则该选项没有任何可满足的输入。
       if (
-        typeof layerCountInputName === "string" &&
+        layerCountInputName !== undefined &&
         inputNames.has(layerCountInputName)
       )
         collector.report(
           "INVALID_DEFINITION",
-          `${vp}/layerCountInputName`,
+          `${vp}/mechanism`,
           "The layer-count input name must not be an external input requirement of the same variant",
         )
       if (
-        typeof holderLevelInputName === "string" &&
+        holderLevelInputName !== undefined &&
         (inputNames.has(holderLevelInputName) ||
           holderLevelInputName === layerCountInputName)
       )
         collector.report(
           "INVALID_DEFINITION",
-          `${vp}/holderLevelInputName`,
+          `${vp}/mechanism`,
           `${String(option["optionId"])}: holder level input must not also name an external requirement or the layer-count input`,
         )
       const applies = expectObject(
@@ -1553,209 +2071,45 @@ export function validateStaticCatalog(
           }
         }
       }
-      const requirementList = variant["damageItemRequirements"]
-      if (requirementList !== undefined) {
-        const requirements =
-          expectArray(
-            requirementList,
-            checks(`${vp}/damageItemRequirements`),
-            "damage item requirements",
-          ) ?? []
-        for (const [ri, value] of requirements.entries()) {
-          const rp = `${vp}/damageItemRequirements/${ri}`
-          const requirement = expectObject(
-            value,
-            checks(rp),
-            "damage item requirement",
+      if (parameterMapping !== undefined) {
+        const mapping = parameterMapping
+        const mapped = effectIds
+          .map((id) => effects.get(id as EffectId))
+          .filter(
+            (rule) =>
+              rule?.kind === "contribution" &&
+              rule.operation.kind === "factor-contribution" &&
+              rule.operation.channel === "luminize-proficiency-input",
           )
-          if (!requirement) continue
-          rejectUnknownFields(
-            requirement,
-            [
-              "itemId",
-              "stat",
-              "role",
-              "allowedModes",
-              "source",
-              "requiredDirectMultiplier",
-              "requiredSkillCategory",
-              "requiredCriticalRateDeclaration",
-              "originalAnomalyAttribute",
-            ],
-            checks(rp),
-            "damage item requirement",
+        if (mapped.length !== 1)
+          collector.report(
+            "MISSING_REFERENCE",
+            `${vp}/mechanism/mapping`,
+            "A luminize mapping requires exactly one proficiency contribution",
           )
-          expectNonEmptyString(
-            requirement["itemId"],
-            checks(`${rp}/itemId`),
-            "damage item identity",
-          )
-          if (!GENERAL_STATS.has(requirement["stat"] as never))
+        else {
+          const rule = mapped[0] as ContributionRule
+          const expression =
+            rule.operation.kind === "factor-contribution"
+              ? rule.operation.value
+              : undefined
+          const matchesSource =
+            mapping.source === "input"
+              ? expression?.kind === "input" &&
+                expression.name === mapping.inputName &&
+                inputNames.has(expression.name)
+              : expression?.kind === "stat" &&
+                expression.stat === "anomalyProficiency" &&
+                expression.entity.role === "holder" &&
+                expression.at === "evaluation" &&
+                expression.stage ===
+                  (mapping.source === "holder-current" ? "current" : "initial")
+          if (!matchesSource)
             collector.report(
-              "INVALID_INPUT",
-              `${rp}/stat`,
-              "Expected a general stat",
+              "CONTEXT_MISMATCH",
+              `${vp}/mechanism/mapping`,
+              "Mapping source must match its proficiency expression",
             )
-          expectLiteral(
-            requirement["role"],
-            ["base", "settlement"],
-            checks(`${rp}/role`),
-            "damage item role",
-          )
-          const modes =
-            expectArray(
-              requirement["allowedModes"],
-              checks(`${rp}/allowedModes`),
-              "allowed modes",
-            ) ?? []
-          if (
-            !modes.length ||
-            modes.some(
-              (mode) =>
-                mode !== "direct" &&
-                mode !== "standard-disorder" &&
-                mode !== "standard-vortex",
-            )
-          )
-            collector.report(
-              "INVALID_INPUT",
-              `${rp}/allowedModes`,
-              "Expected a nonempty damage preparation mode list",
-            )
-          if (
-            requirement["source"] !== undefined &&
-            requirement["source"] !== "holder-current" &&
-            requirement["source"] !== "anomaly-source"
-          )
-            collector.report(
-              "INVALID_INPUT",
-              `${rp}/source`,
-              "Unknown damage item source restriction",
-            )
-          if (
-            requirement["requiredDirectMultiplier"] !== undefined &&
-            requirement["requiredDirectMultiplier"] !== 0
-          )
-            collector.report(
-              "INVALID_INPUT",
-              `${rp}/requiredDirectMultiplier`,
-              "Direct requirements must demand a zero initial multiplier",
-            )
-          if (
-            requirement["requiredSkillCategory"] !== undefined &&
-            !SKILL_CATEGORIES.includes(
-              requirement["requiredSkillCategory"] as never,
-            )
-          )
-            collector.report(
-              "INVALID_INPUT",
-              `${rp}/requiredSkillCategory`,
-              "Unknown required skill category",
-            )
-          if (
-            requirement["requiredCriticalRateDeclaration"] !== undefined &&
-            requirement["requiredCriticalRateDeclaration"] !== true
-          )
-            collector.report(
-              "INVALID_INPUT",
-              `${rp}/requiredCriticalRateDeclaration`,
-              "Expected the literal true",
-            )
-          if (
-            requirement["originalAnomalyAttribute"] !== undefined &&
-            ![
-              "fire",
-              "electric",
-              "ether",
-              "ice",
-              "physical",
-              "auric-ink",
-              "frost",
-            ].includes(requirement["originalAnomalyAttribute"] as string)
-          )
-            collector.report(
-              "INVALID_INPUT",
-              `${rp}/originalAnomalyAttribute`,
-              "Unknown original anomaly attribute",
-            )
-        }
-      }
-      if (variant["parameterMapping"] !== undefined) {
-        const mapping = expectObject(
-          variant["parameterMapping"],
-          checks(`${vp}/parameterMapping`),
-          "parameter mapping",
-        )
-        if (mapping) {
-          rejectUnknownFields(
-            mapping,
-            ["kind", "rate", "source", "inputName"],
-            checks(`${vp}/parameterMapping`),
-            "parameter mapping",
-          )
-          if (mapping["kind"] !== "luminize-proficiency")
-            collector.report(
-              "INVALID_INPUT",
-              `${vp}/parameterMapping`,
-              "Unknown core parameter mapping",
-            )
-          expectLiteral(
-            mapping["source"],
-            ["holder-current", "holder-initial", "input"],
-            checks(`${vp}/parameterMapping/source`),
-            "parameter source",
-          )
-          const rate = expectFiniteNumber(
-            mapping["rate"],
-            checks(`${vp}/parameterMapping/rate`),
-            "conversion rate",
-          )
-          if (rate !== undefined && rate < 0)
-            collector.report(
-              "INVALID_INPUT",
-              `${vp}/parameterMapping/rate`,
-              "Conversion rate cannot be negative",
-            )
-          const mapped = effectIds
-            .map((id) => effects.get(id as EffectId))
-            .filter(
-              (rule) =>
-                rule?.kind === "contribution" &&
-                rule.operation.kind === "factor-contribution" &&
-                rule.operation.channel === "luminize-proficiency-input",
-            )
-          if (mapped.length !== 1)
-            collector.report(
-              "MISSING_REFERENCE",
-              `${vp}/parameterMapping`,
-              "A luminize mapping requires exactly one proficiency contribution",
-            )
-          else {
-            const rule = mapped[0] as ContributionRule
-            const expression =
-              rule.operation.kind === "factor-contribution"
-                ? rule.operation.value
-                : undefined
-            const matchesSource =
-              mapping["source"] === "input"
-                ? expression?.kind === "input" &&
-                  expression.name === mapping["inputName"] &&
-                  inputNames.has(expression.name)
-                : expression?.kind === "stat" &&
-                  expression.stat === "anomalyProficiency" &&
-                  expression.entity.role === "holder" &&
-                  expression.at === "evaluation" &&
-                  expression.stage ===
-                    (mapping["source"] === "holder-current"
-                      ? "current"
-                      : "initial")
-            if (!matchesSource)
-              collector.report(
-                "CONTEXT_MISMATCH",
-                `${vp}/parameterMapping`,
-                "Mapping source must match its proficiency expression",
-              )
-          }
         }
       }
     }
@@ -2208,7 +2562,11 @@ export function calculateOrdinaryStaticDamageFromCatalog(
   const preparesDuration =
     input.damage.kind === "disorder" || input.damage.kind === "vortex"
   const guards = new Map<EffectId, Condition<"contribution">[]>()
-  const mappings: { variant: StaticCatalogVariant; bindingId: string }[] = []
+  const mappings: {
+    variant: StaticCatalogVariant
+    bindingId: string
+    mapping: StaticCatalogParameterMapping
+  }[] = []
   const seenSelections = new Set<string>(),
     exclusive = new Set<string>(),
     equipment = new Set<string>(),
@@ -2318,6 +2676,35 @@ export function calculateOrdinaryStaticDamageFromCatalog(
     }
     const variant = variants[0]!,
       configuration = variant.configuration
+    const mechanism = variant.mechanism
+    const windsweptMetadata =
+      mechanism?.kind === "windswept-direct" ? mechanism.metadata : undefined
+    const elementBuffInputs =
+      mechanism?.kind === "element-buff-inputs" ? mechanism.inputs : undefined
+    const holderLevelInputName =
+      mechanism?.kind === "holder-level"
+        ? mechanism.holderLevelInputName
+        : undefined
+    const declaredTeammateBeneficiary =
+      mechanism?.kind === "declared-teammate-beneficiary"
+    const damageItemRequirements =
+      mechanism?.kind === "independent-settlement"
+        ? mechanism.damageItemRequirements
+        : undefined
+    const exclusiveDamageItem =
+      mechanism?.kind === "independent-settlement" &&
+      mechanism.isolateDamageItems === true
+    const squadUniqueEffect = mechanism?.kind === "squad-unique"
+    const layerCountInputName =
+      mechanism?.kind === "complete-state"
+        ? mechanism.layerCountInputName
+        : mechanism?.kind === "independent-settlement"
+          ? mechanism.completeState?.layerCountInputName
+          : undefined
+    const parameterMapping =
+      mechanism?.kind === "luminize-proficiency-mapping"
+        ? mechanism.mapping
+        : undefined
     const explain = `${option.optionId}; source ${variant.references.map((r) => r.pointer).join(", ")}`
     if (variant.status === "unsupported") {
       collector.report(
@@ -2386,7 +2773,6 @@ export function calculateOrdinaryStaticDamageFromCatalog(
       )
       continue
     }
-    const windsweptMetadata = variant.windsweptDirectDamage
     if (windsweptMetadata !== undefined) {
       const externalIndex =
         input.inputs?.findIndex(
@@ -2411,7 +2797,6 @@ export function calculateOrdinaryStaticDamageFromCatalog(
     }
     if (layers === 0) continue
     const activeBuffElements = selection["activeBuffElements"]
-    const elementBuffInputs = variant.elementBuffInputs
     if (activeBuffElements !== undefined || elementBuffInputs !== undefined) {
       const ep = `${p}/activeBuffElements`
       if (!elementBuffInputs)
@@ -2482,8 +2867,8 @@ export function calculateOrdinaryStaticDamageFromCatalog(
       }
     }
     // 正层选择先履行等级输入契约，资格、when、受益者或绑定失效均不豁免。
-    if (variant.holderLevelInputName !== undefined) {
-      const name = variant.holderLevelInputName
+    if (holderLevelInputName !== undefined) {
+      const name = holderLevelInputName
       const fact = actorLevels.get(binding.holderId)
       if (fact?.level === undefined)
         collector.report(
@@ -2516,8 +2901,6 @@ export function calculateOrdinaryStaticDamageFromCatalog(
     // 声明式同队受益者：启用（layers > 0）的选择按变体声明校验。需要声明的
     // 变体缺声明、不需要声明的变体带声明、声明实体未观察/无身份/非同队/是
     // 持有者本人，都是输入错误；不用近似（如把命中角色当前场角色）兜底。
-    const declaredTeammateBeneficiary =
-      variant.declaredTeammateBeneficiary === true
     const beneficiaryActorId = selection["beneficiaryActorId"]
     if (beneficiaryActorId !== undefined || declaredTeammateBeneficiary) {
       if (!declaredTeammateBeneficiary)
@@ -2644,28 +3027,17 @@ export function calculateOrdinaryStaticDamageFromCatalog(
     // （也不强制声明）；误带字段且无授权来源按非法输入拒绝，有效但错
     // 持有者按上下文冲突拒绝。错持有者的拒绝在生效校验内先行；owner
     // 登记复用下方算出的最终受益集合，延后到该集合之后执行。
-    const declarationRequirement = variant.damageItemRequirements?.find(
-      (requirement) =>
-        (requirement as { requiredCriticalRateDeclaration?: true })
-          .requiredCriticalRateDeclaration === true,
+    const declarationRequirement = damageItemRequirements?.find(
+      (requirement) => requirement.requiredCriticalRateDeclaration === true,
     )
     // 伤害项要求：仅对实际生效（层数大于 0）的选中选项校验；缺项报 MISSING_REFERENCE。
-    if (variant.damageItemRequirements !== undefined && layers > 0) {
+    if (damageItemRequirements !== undefined && layers > 0) {
       const disorderAttributeSource = (
         damage as {
           anomalySource?: { entityId?: unknown; snapshotId?: unknown }
         }
       ).anomalySource
-      for (const requirement of variant.damageItemRequirements as readonly {
-        readonly itemId: string
-        readonly stat: string
-        readonly role: string
-        readonly allowedModes: readonly string[]
-        readonly source?: "holder-current" | "anomaly-source"
-        readonly requiredDirectMultiplier?: number
-        readonly requiredSkillCategory?: string
-        readonly originalAnomalyAttribute?: string
-      }[]) {
+      for (const requirement of damageItemRequirements) {
         const item = items.find((entry) => entry?.itemId === requirement.itemId)
         if (item === undefined) {
           collector.report(
@@ -2771,11 +3143,9 @@ export function calculateOrdinaryStaticDamageFromCatalog(
       // 独占伤害项：启用该变体时，命中的伤害项必须恰好是其声明的唯一项。
       // 该变体自带命中级机制（如必定暴击），会把同一请求的全部伤害项卷入；
       // 混合请求明确拒绝，不静默丢弃多余项。0 层关闭不进入本分支。
-      if (variant.exclusiveDamageItem === true) {
+      if (exclusiveDamageItem) {
         const declaredItemIds = new Set(
-          variant.damageItemRequirements.map(
-            (requirement) => requirement.itemId,
-          ),
+          damageItemRequirements.map((requirement) => requirement.itemId),
         )
         for (const item of items) {
           const itemId = (item as { itemId?: unknown }).itemId
@@ -2811,7 +3181,7 @@ export function calculateOrdinaryStaticDamageFromCatalog(
     // 不适配等既有零贡献绑定已在上方跳过，不占用队伍名额；0 层关闭同样
     // 不占用。键为（持有者队伍， optionId）：同队两名持有者（不同绑定）
     // 冲突，异队各持有互不冲突。
-    if (variant.squadUniqueEffect === true) {
+    if (squadUniqueEffect) {
       const teamKey = JSON.stringify([holderActor.teamId, option.optionId])
       if (squadUniqueSources.has(teamKey))
         collector.report(
@@ -2864,7 +3234,7 @@ export function calculateOrdinaryStaticDamageFromCatalog(
     // 也不与全队候选并列，防止未被声明的队友同时受益。观察、身份、同队
     // 与非持有者的输入错误校验在启用选择阶段先行执行。
     const declaredBeneficiaryId =
-      variant.declaredTeammateBeneficiary === true &&
+      declaredTeammateBeneficiary &&
       typeof selection["beneficiaryActorId"] === "string"
         ? (selection["beneficiaryActorId"] as EntityId)
         : undefined
@@ -2976,7 +3346,6 @@ export function calculateOrdinaryStaticDamageFromCatalog(
       // 完整状态层数桥接：声明 layerCountInputName 的选项把 selection.layers
       // 作为逻辑状态层数派生为绑定作用域内的 count 输入，实际展开固定
       // layers 1（一次完整状态）；未声明的选项保持逐层展开行为。
-      const layerCountInputName = variant.layerCountInputName
       if (layerCountInputName === undefined) {
         expanded.push({
           effectId,
@@ -3045,8 +3414,12 @@ export function calculateOrdinaryStaticDamageFromCatalog(
       )
       guards.set(effectId, list)
     }
-    if (variant.parameterMapping)
-      mappings.push({ variant, bindingId: binding.bindingId })
+    if (parameterMapping)
+      mappings.push({
+        variant,
+        bindingId: binding.bindingId,
+        mapping: parameterMapping,
+      })
   }
   // 声明最终暴击概率的请求级裁决：一个声明最多归属一个有效要求项；
   // 缺声明只对真正具备归属的启用项报告，误带字段且无归属来源拒绝。
@@ -3532,7 +3905,7 @@ export function calculateOrdinaryStaticDamageFromCatalog(
         throw new Error(
           "Luminize requires exactly one applicable proficiency parameter mapping",
         )
-      const mapping = applicableMappings[0]!.variant.parameterMapping!
+      const mapping = applicableMappings[0]!.mapping
       preparedDamage = {
         ...preparedDamage,
         luminizeMultiplier: {

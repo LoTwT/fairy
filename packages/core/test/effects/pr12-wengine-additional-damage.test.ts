@@ -246,7 +246,7 @@ function engineInput(
 
 describe("batch 12 w-engine additional damage", () => {
   it("registers the two independent targets, options, and rules under revision 27", () => {
-    expect(catalog.revision).toBe("51")
+    expect(catalog.revision).toBe("52")
     for (const engine of ENGINE_CASES) {
       const target = catalog.skillTargets.find(
         (t) => t.targetId === engine.targetId,
@@ -270,9 +270,10 @@ describe("batch 12 w-engine additional damage", () => {
       expect(variant.inputs).toEqual([])
       // 比格气缸独占（命中级必暴卷入全部伤害项）；加农转子独占且唯一要求
       // 项声明最终暴击概率（无默认、替换语义）。
-      if (engine.optionId === BIG_CYLINDER) {
-        expect(variant.exclusiveDamageItem).toBe(true)
-        expect(variant.damageItemRequirements).toEqual([
+      expect(variant.mechanism).toEqual({
+        kind: "independent-settlement",
+        isolateDamageItems: true,
+        damageItemRequirements: [
           {
             itemId: engine.itemId,
             stat: engine.stat,
@@ -281,23 +282,12 @@ describe("batch 12 w-engine additional damage", () => {
             source: "holder-current",
             requiredDirectMultiplier: 0,
             requiredSkillCategory: "uncategorized",
+            ...(engine.optionId === BIG_CYLINDER
+              ? {}
+              : { requiredCriticalRateDeclaration: true }),
           },
-        ])
-      } else {
-        expect(variant.exclusiveDamageItem).toBe(true)
-        expect(variant.damageItemRequirements).toEqual([
-          {
-            itemId: engine.itemId,
-            stat: engine.stat,
-            role: "base",
-            allowedModes: ["direct"],
-            source: "holder-current",
-            requiredDirectMultiplier: 0,
-            requiredSkillCategory: "uncategorized",
-            requiredCriticalRateDeclaration: true,
-          },
-        ])
-      }
+        ],
+      })
       expect(variant.references.map((r) => r.pointer)).toEqual(
         ([1, 2, 3, 4, 5] as const).map(
           (tier) => `/talents/${String(tier)}/desc`,
@@ -1273,8 +1263,8 @@ describe("batch 12 w-engine additional damage", () => {
     const nonLiteral = mutatedCatalog((clone) => {
       const option = clone.options.find((o) => o.optionId === BIG_CYLINDER)!
       ;(
-        option.variants[0] as { exclusiveDamageItem?: unknown }
-      ).exclusiveDamageItem = "yes"
+        option.variants[0]!.mechanism as { isolateDamageItems?: unknown }
+      ).isolateDamageItems = "yes"
     })
     const nonLiteralResult = validateStaticCatalog(nonLiteral, definitions)
     expect(nonLiteralResult.ok).toBe(false)
@@ -1283,14 +1273,14 @@ describe("batch 12 w-engine additional damage", () => {
         nonLiteralResult.issues.some(
           (issue) =>
             issue.code === "INVALID_INPUT" &&
-            issue.pointer.endsWith("/exclusiveDamageItem"),
+            issue.pointer.endsWith("/mechanism/isolateDamageItems"),
         ),
       ).toBe(true)
     // 声明独占但移除伤害项要求（零要求）。
     const noRequirements = mutatedCatalog((clone) => {
       const option = clone.options.find((o) => o.optionId === BIG_CYLINDER)!
       ;(
-        option.variants[0] as { damageItemRequirements?: unknown }
+        option.variants[0]!.mechanism as { damageItemRequirements?: unknown }
       ).damageItemRequirements = []
     })
     const noRequirementsResult = validateStaticCatalog(
@@ -1303,21 +1293,21 @@ describe("batch 12 w-engine additional damage", () => {
         noRequirementsResult.issues.some(
           (issue) =>
             issue.code === "INVALID_DEFINITION" &&
-            issue.pointer.endsWith("/exclusiveDamageItem"),
+            issue.pointer.endsWith("/mechanism/damageItemRequirements"),
         ),
       ).toBe(true)
     // 声明独占但登记两个伤害项要求。
     const twoRequirements = mutatedCatalog((clone) => {
       const option = clone.options.find((o) => o.optionId === BIG_CYLINDER)!
-      const variant = option.variants[0] as {
+      const mechanism = option.variants[0]!.mechanism as {
         damageItemRequirements?: readonly unknown[]
       }
       ;(
-        variant as { damageItemRequirements?: unknown[] }
+        mechanism as { damageItemRequirements?: unknown[] }
       ).damageItemRequirements = [
-        ...variant.damageItemRequirements!,
+        ...mechanism.damageItemRequirements!,
         {
-          ...variant.damageItemRequirements![0]!,
+          ...mechanism.damageItemRequirements![0]!,
           itemId: "big-cylinder:other",
         },
       ]
@@ -1332,7 +1322,7 @@ describe("batch 12 w-engine additional damage", () => {
         twoRequirementsResult.issues.some(
           (issue) =>
             issue.code === "INVALID_DEFINITION" &&
-            issue.pointer.endsWith("/exclusiveDamageItem"),
+            issue.pointer.endsWith("/mechanism/isolateDamageItems"),
         ),
       ).toBe(true)
   })

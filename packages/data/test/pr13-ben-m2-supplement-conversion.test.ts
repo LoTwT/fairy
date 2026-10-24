@@ -143,7 +143,7 @@ const FUTURE_ENCODING_LEGACY: SourceEffect = {
 describe("batch 13 Ben M2 block counter supplement conversion", () => {
   it("registers the option, target, and rule beside the preserved fixed-source clauses", () => {
     const result = convert(pr13BenData())
-    expect(result.definitions.revision).toBe("51")
+    expect(result.definitions.revision).toBe("52")
     // 影画 0/4 的既有条款照常转换（公开 ID 与 effectId 保持）。
     for (const [optionId, effectId, record] of [
       [
@@ -196,19 +196,22 @@ describe("batch 13 Ben M2 block counter supplement conversion", () => {
     expect(variant.effectIds).toEqual([
       "agent:1121:nanoka:m2-block-counter-defense-damage:mindscape:2",
     ])
-    expect(variant.exclusiveDamageItem).toBe(true)
-    expect(variant.damageItemRequirements).toEqual([
-      {
-        itemId: "benbigger:block-counter-bonus-damage",
-        stat: "defense",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-        requiredDirectMultiplier: 0,
-        requiredSkillCategory: "uncategorized",
-        requiredCriticalRateDeclaration: true,
-      },
-    ])
+    expect(variant.mechanism).toEqual({
+      kind: "independent-settlement",
+      isolateDamageItems: true,
+      damageItemRequirements: [
+        {
+          itemId: "benbigger:block-counter-bonus-damage",
+          stat: "defense",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: "uncategorized",
+          requiredCriticalRateDeclaration: true,
+        },
+      ],
+    })
     expect(variant.references.map((r) => r.pointer)).toEqual(["/talent/2/desc"])
     // 规则：3× 本防御力，目标标签 + regular 直伤，不按元素筛选。
     const damageRule = result.definitions.effects.find(
@@ -508,7 +511,10 @@ describe("batch 13 Ben M2 block counter supplement conversion", () => {
     const variant = (
       benSupplement as Extract<Supplement, { variant: SupplementVariantSpec }>
     ).variant
-    const [requirement] = variant.damageItemRequirements ?? []
+    const requirement =
+      variant.mechanism?.kind === "independent-settlement"
+        ? variant.mechanism.damageItemRequirements[0]
+        : undefined
     if (requirement === undefined)
       throw new Error("ben variant must declare a damage item requirement")
     const mutated = (
@@ -534,31 +540,54 @@ describe("batch 13 Ben M2 block counter supplement conversion", () => {
     expect(() =>
       convert(
         pr13BenData(),
-        mutated(({ exclusiveDamageItem: _exclusive, ...variant }) => variant),
+        mutated((variant) => {
+          if (variant.mechanism?.kind !== "independent-settlement")
+            return variant
+          const { isolateDamageItems: _isolateDamageItems, ...mechanism } =
+            variant.mechanism
+          return { ...variant, mechanism }
+        }),
       ),
     ).toThrowError(
-      /requires a declared critical rate but its variant does not declare exclusiveDamageItem/,
+      /requires a declared critical rate but its variant does not declare isolateDamageItems/,
     )
     // 有声明要求但要求项不满足形状（settlement 角色 / 非 direct 模式 /
     // 非 holder-current 来源）。
     expect(() =>
       convert(
         pr13BenData(),
-        mutated((variant) => ({
-          ...variant,
-          damageItemRequirements: [{ ...requirement, role: "settlement" }],
-        })),
+        mutated((variant) => {
+          if (variant.mechanism?.kind !== "independent-settlement")
+            return variant
+          return {
+            ...variant,
+            mechanism: {
+              ...variant.mechanism,
+              damageItemRequirements: [{ ...requirement, role: "settlement" }],
+            },
+          }
+        }),
       ),
     ).toThrowError(/requires a declared critical rate but uses role settlement/)
     expect(() =>
       convert(
         pr13BenData(),
-        mutated((variant) => ({
-          ...variant,
-          damageItemRequirements: [
-            { ...requirement, allowedModes: ["direct", "standard-disorder"] },
-          ],
-        })),
+        mutated((variant) => {
+          if (variant.mechanism?.kind !== "independent-settlement")
+            return variant
+          return {
+            ...variant,
+            mechanism: {
+              ...variant.mechanism,
+              damageItemRequirements: [
+                {
+                  ...requirement,
+                  allowedModes: ["direct", "standard-disorder"],
+                },
+              ],
+            },
+          }
+        }),
       ),
     ).toThrowError(
       /requires a declared critical rate but allows non-direct preparation modes/,
@@ -566,12 +595,19 @@ describe("batch 13 Ben M2 block counter supplement conversion", () => {
     expect(() =>
       convert(
         pr13BenData(),
-        mutated((variant) => ({
-          ...variant,
-          damageItemRequirements: [
-            { ...requirement, source: "anomaly-source" },
-          ],
-        })),
+        mutated((variant) => {
+          if (variant.mechanism?.kind !== "independent-settlement")
+            return variant
+          return {
+            ...variant,
+            mechanism: {
+              ...variant.mechanism,
+              damageItemRequirements: [
+                { ...requirement, source: "anomaly-source" },
+              ],
+            },
+          }
+        }),
       ),
     ).toThrowError(
       /requires a declared critical rate but uses source anomaly-source/,

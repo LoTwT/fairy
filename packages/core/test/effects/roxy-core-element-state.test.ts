@@ -99,38 +99,38 @@ describe("element buff state bridge and supplied-rule boundary", () => {
     [
       "empty mapping",
       (v: any) => {
-        v.elementBuffInputs = []
+        v.mechanism.inputs = []
       },
     ],
     [
       "unknown element",
       (v: any) => {
-        v.elementBuffInputs[0].element = "invalid"
+        v.mechanism.inputs[0].element = "invalid"
       },
     ],
     [
       "duplicate element",
       (v: any) => {
-        v.elementBuffInputs[1].element = v.elementBuffInputs[0].element
+        v.mechanism.inputs[1].element = v.mechanism.inputs[0].element
       },
     ],
     [
       "duplicate input",
       (v: any) => {
-        v.elementBuffInputs[1].inputName = v.elementBuffInputs[0].inputName
+        v.mechanism.inputs[1].inputName = v.mechanism.inputs[0].inputName
       },
     ],
     [
       "unused input",
       (v: any) => {
-        v.elementBuffInputs[0].inputName = "not-consumed"
+        v.mechanism.inputs[0].inputName = "not-consumed"
       },
     ],
     [
       "external input collision",
       (v: any) => {
         v.inputs.push({
-          name: v.elementBuffInputs[0].inputName,
+          name: v.mechanism.inputs[0].inputName,
           unit: "count",
           description: "collision",
         })

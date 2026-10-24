@@ -63,7 +63,7 @@ const emptyDefinitions = (ruleSetId: string): RuleSet => ({
 })
 
 const emptyCatalog = (ruleSetId: string): StaticEffectCatalog => ({
-  schemaVersion: 1,
+  schemaVersion: 2,
   ruleSetId,
   revision: "1",
   source: { repository: "fairy", commit: "synthetic", files: [] },
@@ -595,18 +595,21 @@ function astraYaoM4Input(): AstraYaoM4CatalogInput {
               inputs: [],
               applicability: {},
               differences: [],
-              damageItemRequirements: [
-                {
-                  itemId: M4_ITEM_ID,
-                  stat: "attack",
-                  role: "base",
-                  allowedModes: ["direct"],
-                  source: "holder-current",
-                  requiredDirectMultiplier: 0,
-                  requiredSkillCategory: "uncategorized",
-                },
-              ],
-              exclusiveDamageItem: true,
+              mechanism: {
+                kind: "independent-settlement",
+                isolateDamageItems: true,
+                damageItemRequirements: [
+                  {
+                    itemId: M4_ITEM_ID,
+                    stat: "attack",
+                    role: "base",
+                    allowedModes: ["direct"],
+                    source: "holder-current",
+                    requiredDirectMultiplier: 0,
+                    requiredSkillCategory: "uncategorized",
+                  },
+                ],
+              },
             },
           ],
         },

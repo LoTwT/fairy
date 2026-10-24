@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "51",
+  "revision": "52",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "2628b32cece086e371bafa05518a9a12650d9f74",

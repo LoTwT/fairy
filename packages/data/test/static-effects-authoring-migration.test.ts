@@ -297,10 +297,13 @@ describe("static effects authoring migration records", () => {
         (candidate) => candidate.optionId === entry.optionId,
       )
       expect(option?.variants[0]?.status).toBe("converted")
-      expect(option?.variants[0]?.damageItemRequirements).toEqual([
+      const mechanism = option?.variants[0]?.mechanism
+      if (mechanism?.kind !== "independent-settlement")
+        throw new Error(`test fixture: ${entry.optionId} is not a settlement`)
+      expect(mechanism.damageItemRequirements).toEqual([
         expect.objectContaining({ itemId: entry.itemId }),
       ])
-      expect(option?.variants[0]?.exclusiveDamageItem).toBe(
+      expect(mechanism.isolateDamageItems).toBe(
         entry.exclusive ? true : undefined,
       )
       expect(

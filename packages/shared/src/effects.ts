@@ -989,6 +989,98 @@ export interface StaticCatalogDamageItemRequirement {
   readonly originalAnomalyAttribute?: DamageElement
 }
 
+/**
+ * 风化直接伤害的目录读取元数据：当前目标风化与本次命中资格派生 count 0/1。
+ * 只由 `windswept-direct` 机制携带，仅实际适用来源占组。
+ */
+export interface StaticCatalogWindsweptDirectDamage {
+  readonly applicabilityInputName: string
+  readonly applierTeam: "holder"
+  /** 调用方声明单个有效来源；不推断多个来源的覆盖次序。 */
+  readonly singleActiveSourceGroup?: string
+}
+
+/**
+ * 元素增益输入映射：元素到同一绑定 count 输入名的一一对应。
+ * 只由 `element-buff-inputs` 机制携带。
+ */
+export interface StaticCatalogElementBuffInput {
+  readonly element: DamageElement
+  readonly inputName: string
+}
+
+/**
+ * 已登记的 core 耀变精通换算参数映射；只允许已有换算，不开放任意参数路径。
+ * 只由 `luminize-proficiency-mapping` 机制携带。
+ */
+export interface StaticCatalogParameterMapping {
+  readonly kind: "luminize-proficiency"
+  readonly rate: number
+  readonly source: "holder-current" | "holder-initial" | "input"
+  readonly inputName?: string
+}
+
+/**
+ * 目录变体的机制判别联合。每个 arm 只携带自己的字段：
+ *
+ * - `complete-state`：把 `selection.layers` 解释为逻辑状态层数，派生成
+ *   绑定作用域内的 count 输入，实际展开固定为一次完整状态（`layers: 1`）。
+ *   该名字必须是所引用贡献中真实消费的 count 输入名，且不能与外部 inputs
+ *   要求同名；声明者要求真实消费该输入的 contribution 恰好一条
+ *   （`supplied`、`maximumLayers` 字面量 count 1，按解析字段比较），允许
+ *   引用相关 modification。调用方不能再手工提供同一 (bindingId, name) 输入。
+ * - `holder-level`：从本绑定 holder 的 `actorSources.level` 派生 count 输入。
+ *   只允许一条 supplied 贡献在 operation 中消费该名字，规则及变体最大层
+ *   均为 1；正层选择必须提供真实角色等级（有限整数 1—60），0 层不派生。
+ * - `independent-settlement`：声明式伤害项要求；选中该选项时，命中必须
+ *   包含满足身份与元数据的伤害项，由关联规则的 itemIds 精确绑定，消费端
+ *   据此发现需要提供的独立项。`isolateDamageItems` 启用时命中必须恰好是
+ *   声明的唯一项。`completeState` 允许独立结算同时使用层数桥接。
+ * - `declared-teammate-beneficiary`：受益者是持有者同队的另一名实体，由
+ *   每次启用选择以 `beneficiaryActorId` 显式声明；不引入时间线或位置引擎。
+ * - `squad-unique`：该效果在同一队伍中最多一个有效来源实例；目录选择
+ *   阶段按（持有者队伍, optionId）跨绑定强制，不猜最高值或时间覆盖。
+ * - `windswept-direct`：当前目标风化与命中资格派生的 count 0/1。
+ * - `element-buff-inputs`：调用方声明的有效元素增益集合映射为 0/1 输入。
+ * - `luminize-proficiency-mapping`：已登记的耀变精通换算。
+ *
+ * 不变量：一个变体最多一个 `mechanism`；arm 内部不得出现其他 arm 的字段；
+ * 同一变体的派生输入名互不重名。
+ */
+export type StaticCatalogVariantMechanism =
+  | { readonly kind: "complete-state"; readonly layerCountInputName: string }
+  | { readonly kind: "holder-level"; readonly holderLevelInputName: string }
+  | {
+      readonly kind: "independent-settlement"
+      readonly damageItemRequirements: NonEmpty<StaticCatalogDamageItemRequirement>
+      /**
+       * 独占伤害项声明：启用（layers > 0）该变体时，命中的伤害项必须恰好是
+       * 本变体声明的唯一伤害项——每个声明项在场，且不得携带任何其他伤害项；
+       * 混合请求按 CONTEXT_MISMATCH 明确拒绝，不静默丢弃多余项。用于自带
+       * 命中级机制（如比格气缸受击附伤的必定暴击）会把同一请求的全部伤害项
+       * 卷入的选项；0 层关闭不施加独占。只接受字面量 true，且要求恰好一个
+       * 伤害项要求。这是目录入口的选择校验能力，不是通用逐伤害项结算模型；
+       * 低层入口绕过目录时不强制该元数据。
+       */
+      readonly isolateDamageItems?: true
+      /** 独立结算与完整状态层数桥接的组合；桥接语义同 `complete-state`。 */
+      readonly completeState?: { readonly layerCountInputName: string }
+    }
+  | { readonly kind: "declared-teammate-beneficiary" }
+  | { readonly kind: "squad-unique" }
+  | {
+      readonly kind: "windswept-direct"
+      readonly metadata: StaticCatalogWindsweptDirectDamage
+    }
+  | {
+      readonly kind: "element-buff-inputs"
+      readonly inputs: NonEmpty<StaticCatalogElementBuffInput>
+    }
+  | {
+      readonly kind: "luminize-proficiency-mapping"
+      readonly mapping: StaticCatalogParameterMapping
+    }
+
 export interface StaticCatalogVariant {
   /** 同一选项不同精炼档改变对象时覆盖 option.target。 */
   readonly target?: "self" | "team"
@@ -1003,10 +1095,14 @@ export interface StaticCatalogVariant {
     readonly potentialLevels?: readonly PotentialLevel[]
   }
   /**
-   * 声明式伤害项要求：选中该选项时，命中必须包含满足身份与元数据的伤害项；
-   * 由关联规则的 itemIds 精确绑定，消费端据此发现需要提供的独立项。
+   * 目录变体机制：一个变体最多声明一个机制，省略即普通静态贡献。
+   *
+   * 判别联合让每个机制只携带自己的字段，取代此前 9 个并列 optional 字段
+   * 的“按字段存在性推断机制”契约。arm 之间互斥；`independent-settlement`
+   * 可再携带完整状态层数桥接。`option.exclusiveGroup`（目录选择互斥）与
+   * `activation.exclusiveGroup`（规则层互斥）不是变体机制，继续保留在原处。
    */
-  readonly damageItemRequirements?: readonly StaticCatalogDamageItemRequirement[]
+  readonly mechanism?: StaticCatalogVariantMechanism
   readonly status: "converted" | "corrected" | "unsupported"
   readonly reason?: StaticCatalogUnavailableReason
   readonly explanation?: string
@@ -1014,88 +1110,8 @@ export interface StaticCatalogVariant {
   readonly effectIds: readonly EffectId[]
   readonly maximumLayers: number
   readonly inputs: readonly StaticCatalogInputRequirement[]
-  /**
-   * 完整状态层数桥接：声明后该选项的 `selection.layers` 表示逻辑状态层数
-   * （严格整数 0..maximumLayers，0 层关闭），目录把它派生为绑定作用域内的
-   * count 输入（单位 count）供给实际展开的 supplied selection，展开本身固定
-   * `layers: 1`（一次完整状态）。该名字必须是所引用贡献中真实消费的 count
-   * 输入名，且不能与外部 inputs 要求同名；声明的变体在定义阶段要求真实消费
-   * 该输入的 contribution 恰好一条（`supplied`、`maximumLayers` 字面量 count
-   * 1，按解析字段比较），允许引用相关 modification。调用方不能再手工提供同一
-   * (bindingId, name) 输入。省略该字段时目录沿用逐层展开行为。
-   */
-  readonly layerCountInputName?: string
-  /**
-   * 从本绑定 holder 的 actorSources.level 派生 count 输入。只允许一条
-   * supplied 贡献在 operation 中消费该名字，规则及变体最大层均为 1。
-   * 正层选择必须提供真实角色等级（有限整数 1—60），0 层不派生；
-   * 不得与外部 inputs 要求或 layerCountInputName 同名，禁止外部覆盖。
-   */
-  readonly holderLevelInputName?: string
-  /** 当前目标风化与本次命中资格派生的 count 0/1；仅实际适用来源占组。 */
-  readonly windsweptDirectDamage?: {
-    readonly applicabilityInputName: string
-    readonly applierTeam: "holder"
-    /** 调用方声明单个有效来源；不推断多个来源的覆盖次序。 */
-    readonly singleActiveSourceGroup?: string
-  }
-  /**
-   * 调用方声明仍有效的元素增益集合；每项把元素映射到同绑定的 count 输入。
-   * 正层 selection.activeBuffElements 必须非空、无重复且属于此清单，目录
-   * 为全部登记项派生 0/1（不按元素个数叠层）。派生输入必须由唯一 supplied
-   * 单实例贡献的 when 消费；不得与外部、层数或等级输入同名。
-   * 同绑定多选项共享同名事实时值必须一致；禁止外部 inputs 覆盖。
-   * 该声明只表示增益仍有效，不表示敌人状态、触发动作或计时事实。
-   */
-  readonly elementBuffInputs?: readonly {
-    readonly element: DamageElement
-    readonly inputName: string
-  }[]
-  /**
-   * 声明式同队受益者选择：该选项生效时，受益者是持有者同队的另一名实体，
-   * 由每次选择以 `beneficiaryActorId` 显式声明（表达调用方声明的事实，例如
-   * 持有者位于后场时的当前前场角色）。字段校验只作用于启用的选择：
-   * 声明该字段的变体要求选项 target 为 team，且每个启用（layers > 0）的
-   * 选择必须携带声明，并由目录入口校验声明实体存在、有身份、与持有者
-   * 同队且不是持有者；受益集合收敛为声明实体与同队/职业/元素/人数筛选
-   * 后合法受益集合的交集，声明实体落在筛选之外时保持既有的零贡献契约。
-   * 0 层关闭沿既有关闭语义：不贡献、不需要声明。不引入时间线或队伍位置
-   * 引擎，也不从命中身份推断前后场。
-   */
-  readonly declaredTeammateBeneficiary?: true
-  /**
-   * 独占伤害项声明：启用（layers > 0）该变体时，命中的伤害项必须恰好是
-   * 本变体 damageItemRequirements 声明的唯一伤害项——每个声明项在场，
-   * 且不得携带任何其他伤害项；混合请求按 CONTEXT_MISMATCH 明确拒绝，
-   * 不静默丢弃多余项。用于自带命中级机制（如比格气缸受击附伤的必定
-   * 暴击）会把同一请求的全部伤害项卷入的选项，把结算范围锁定为其声明
-   * 的独立项；0 层关闭不施加独占，未声明的选项沿用目录公开的多项请求
-   * 契约。只接受字面量 true；声明时变体必须恰好登记一个伤害项要求。
-   * 这是目录入口的选择校验能力，不是通用逐伤害项结算模型；低层入口
-   * 绕过目录时不强制该元数据。
-   */
-  readonly exclusiveDamageItem?: true
-  /**
-   * 全队唯一效果声明：该变体表示的效果（如绯月银棺的“伤害提升效果全队
-   * 唯一”）在同一队伍中最多存在一个有效来源实例。目录选择阶段按
-   * （持有者队伍， optionId）跨绑定强制：同队第二个启用（layers > 0）的
-   * 选择返回 CONTEXT_MISMATCH，要求调用方声明单一有效来源（只在一名
-   * 有效持有者的绑定上启用），不猜 highest-value 或时间覆盖，也不模拟
-   * 时间线；0 层关闭沿既有关闭语义，不占用队伍名额，职业不适配等既有
-   * 零贡献绑定同样不占用。字段只接受字面量 true。引擎层不新增约束：规则
-   * 级 uniqueness 按 beneficiary 分组，两名持有者互相受益时受益集合不
-   * 重叠，不能表达跨来源整队唯一，不得宣称已由数值引擎强制。
-   */
-  readonly squadUniqueEffect?: true
   readonly applicability: StaticCatalogApplicability
   readonly differences: readonly string[]
-  /** 只登记已有 core 耀变精通换算；不开放任意参数路径。 */
-  readonly parameterMapping?: {
-    readonly kind: "luminize-proficiency"
-    readonly rate: number
-    readonly source: "holder-current" | "holder-initial" | "input"
-    readonly inputName?: string
-  }
 }
 
 export interface StaticCatalogOption {
@@ -1191,7 +1207,8 @@ export interface LucyGuardBoarCatalogMechanism {
 }
 
 export interface StaticEffectCatalog {
-  readonly schemaVersion: 1
+  /** 目录形状版本；2 起变体机制使用 `StaticCatalogVariantMechanism`。 */
+  readonly schemaVersion: 2
   readonly ruleSetId: string
   readonly revision: string
   readonly source: {

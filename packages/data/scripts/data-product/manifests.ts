@@ -621,7 +621,7 @@ function parseAgentActionsManifest(
 }
 
 function expectSharedStaticField(
-  field: "schemaVersion" | "ruleSetId" | "revision",
+  field: "ruleSetId" | "revision",
   staticValue: number | string,
   catalogValue: number | string,
   coverageValue: number | string,
@@ -918,12 +918,8 @@ export function loadStaticEffectsProduct(
   const rules = parseStaticRules(staticFile.value, staticLabel)
   const catalog = parseStaticCatalog(catalogFile.value, catalogLabel)
   const coverage = parseStaticCoverage(coverageFile.value, coverageLabel)
-  expectSharedStaticField(
-    "schemaVersion",
-    schemaVersion,
-    catalog.schemaVersion,
-    coverage.schemaVersion,
-  )
+  // 三个 effects 制品的外壳版本各自演进：规则集与覆盖报告保持 1，目录在
+  // P4-2 因变体机制判别联合升到 2。共享身份仍由 ruleSetId/revision 强制。
   expectSharedStaticField(
     "ruleSetId",
     ruleSetId,

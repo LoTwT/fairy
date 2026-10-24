@@ -600,12 +600,7 @@ export function validateLucyGuardBoarCatalog(
             ? [{ name: LUCY_CONVERSION_INPUT, unit: "attack-points" }]
             : [],
         ) ||
-      variant.damageItemRequirements !== undefined ||
-      variant.exclusiveDamageItem !== undefined ||
-      variant.parameterMapping !== undefined ||
-      variant.layerCountInputName !== undefined ||
-      variant.declaredTeammateBeneficiary !== undefined ||
-      variant.squadUniqueEffect !== undefined ||
+      variant.mechanism !== undefined ||
       canonical(variant.references.map(canonical).toSorted()) !==
         canonical(rule.source.references.map(canonical).toSorted())
     )

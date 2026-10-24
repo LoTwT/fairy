@@ -121,16 +121,26 @@ export const ROXY_ADDITIONAL_SUPPLEMENTS: readonly SupplementOption[] =
       configuration: {},
       inputs: [],
       applicability: { otherTeammateProfessions: ["强攻", "命破", "锋御"] },
-      ...(clause.team ? {} : { holderLevelInputName: levelInput }),
-      ...(clause.windswept
-        ? {
-            windsweptDirectDamage: {
-              applicabilityInputName: "roxy:weathered-direct-damage:applicable",
-              applierTeam: "holder" as const,
-              singleActiveSourceGroup: "roxy-additional-windswept",
+      ...(clause.team
+        ? clause.windswept
+          ? {
+              mechanism: {
+                kind: "windswept-direct" as const,
+                metadata: {
+                  applicabilityInputName:
+                    "roxy:weathered-direct-damage:applicable",
+                  applierTeam: "holder" as const,
+                  singleActiveSourceGroup: "roxy-additional-windswept",
+                },
+              },
+            }
+          : {}
+        : {
+            mechanism: {
+              kind: "holder-level" as const,
+              holderLevelInputName: levelInput,
             },
-          }
-        : {}),
+          }),
       conditionDescription: clause.description,
       name: clause.name,
       target: clause.team ? "team" : "self",

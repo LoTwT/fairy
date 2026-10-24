@@ -112,17 +112,20 @@ const yixuanMindscape2TalismanSuppressionBreak: SupplementOption = {
     configuration: { minimumMindscape: 2 },
     inputs: [],
     applicability: {},
-    damageItemRequirements: [
-      {
-        itemId: "yixuan:talisman-suppression-break-damage",
-        stat: "sheerForce",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-        requiredDirectMultiplier: 0,
-        requiredSkillCategory: "special",
-      },
-    ],
+    mechanism: {
+      kind: "independent-settlement",
+      damageItemRequirements: [
+        {
+          itemId: "yixuan:talisman-suppression-break-damage",
+          stat: "sheerForce",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: "special",
+        },
+      ],
+    },
     conditionDescription:
       "影画 2 起：发动[强化特殊技：青溟震击-破]后点按特殊技键，消耗一层[聚墨]发动[强化特殊技：符法千重-破]，按仪玄当前贯穿力的 1200% 结算一次独立贯穿伤害（「最多」按满额取舍）。触发与[聚墨]层数由调用方声明并逐次结算：独立项以 special 分类结算（可同时声明 all-special 目标消费特殊技作用域增益），元素由调用方按实际结算声明；[聚墨]取得链、一层上限与按键时序不模拟。",
     name: "影画2 · 强化特殊技：符法千重-破（独立结算）",
@@ -213,17 +216,20 @@ const yixuanMindscape1FallingThunder: SupplementOption = {
     configuration: { minimumMindscape: 1 },
     inputs: [],
     applicability: {},
-    damageItemRequirements: [
-      {
-        itemId: "yixuan:m1-falling-thunder-damage",
-        stat: "sheerForce",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-        requiredDirectMultiplier: 0,
-        requiredSkillCategory: "uncategorized",
-      },
-    ],
+    mechanism: {
+      kind: "independent-settlement",
+      damageItemRequirements: [
+        {
+          itemId: "yixuan:m1-falling-thunder-damage",
+          stat: "sheerForce",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: "uncategorized",
+        },
+      ],
+    },
     conditionDescription:
       "影画 1 起：队伍中任意角色命中敌人时，仪玄自动追加一道落雷，按仪玄当前贯穿力的 50% 结算一次独立贯穿伤害并额外回复 5 点闪能（资源不模拟）。触发由调用方声明并逐次结算：独立项以 uncategorized 分类锁定、元素由调用方按实际结算声明；6 秒内最多一次的触发间隔不模拟。",
     name: "影画1 · 清灵道心落雷（独立结算）",
@@ -309,17 +315,20 @@ const yixuanAdditionalAbilityFallingThunder: SupplementOption = {
     configuration: {},
     inputs: [],
     applicability: { otherTeammateProfessions: ["击破", "支援", "防护"] },
-    damageItemRequirements: [
-      {
-        itemId: "yixuan:aa-falling-thunder-damage",
-        stat: "sheerForce",
-        role: "base",
-        allowedModes: ["direct"],
-        source: "holder-current",
-        requiredDirectMultiplier: 0,
-        requiredSkillCategory: "uncategorized",
-      },
-    ],
+    mechanism: {
+      kind: "independent-settlement",
+      damageItemRequirements: [
+        {
+          itemId: "yixuan:aa-falling-thunder-damage",
+          stat: "sheerForce",
+          role: "base",
+          allowedModes: ["direct"],
+          source: "holder-current",
+          requiredDirectMultiplier: 0,
+          requiredSkillCategory: "uncategorized",
+        },
+      ],
+    },
     conditionDescription:
       "额外能力：同队存在[击破]、[支援]或[防护]角色时（由目录按绑定队伍校验资格），仪玄被极限支援换下场时自动追加一道落雷，按仪玄当前贯穿力的 225% 结算一次独立贯穿伤害并额外回复 5 点闪能（资源不模拟）。触发由调用方声明并逐次结算：独立项以 uncategorized 分类锁定、元素由调用方按实际结算声明；极限支援检测与换人时序不模拟。",
     name: "额外能力：玄墨暗涌 · 落雷（独立结算）",

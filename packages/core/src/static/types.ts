@@ -110,7 +110,7 @@ export interface StaticActionCalculationInput {
     /** 调用方提供的激活事件与历史快照引用，原样透传；不由当前命中补造。 */
     readonly trigger?: import("../effects/types.ts").TriggerContext
     /**
-     * 声明式同队受益者：仅当所选选项声明 declaredTeammateBeneficiary 且
+     * 声明式同队受益者：仅当所选选项声明 `declared-teammate-beneficiary` 机制且
      * layers > 0 时必须提供（0 层关闭沿既有关闭语义，无需声明）；必须是
      * 持有者同队的另一名有身份实体。本入口原样透传给目录消费层校验
      * （观察、身份、同队、非本人与选项适用性），不从动作角色自动补全，

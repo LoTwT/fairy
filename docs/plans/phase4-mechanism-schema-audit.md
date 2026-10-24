@@ -1,6 +1,6 @@
 # Phase 4 P4-0：机制 schema 盘点与收敛设计
 
-- 状态：盘点完成；建议做**目录变体机制判别联合**的窄收敛，不做跨制品全局统一。
+- 状态：盘点完成。**已定案并实施**：目录变体机制判别联合的窄收敛；不做跨制品全局统一。P4-2 实施记录见[目录变体机制判别联合](phase4-catalog-mechanism-union.md)。
 - 基线：`origin/main @ 0d94faddc420cd85cea93f7755a54d723eaca1da`；分支 `docs/phase4-mechanism-schema-audit`。
 - 语料：静态效果 revision `51`，`ruleSetId` `zzz-hp-static-effects`，固定源 `2628b32`。
 - 范围：本 PR 只新增本文与索引入口；不改 `shared`/`core`/`data` 生产代码、类型、制品或公开导出。
@@ -306,24 +306,25 @@ interface StaticCatalogVariant {
 
 ### 5.2 建议的 PR 序列
 
-| 步骤 | 主题                              | 输入                                                                     | 输出                                                                                     | 主要风险                                | 回滚边界                           | 建议               |
-| ---- | --------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | --------------------------------------- | ---------------------------------- | ------------------ |
-| P4-0 | 本盘点                            | 当前代码/制品                                                            | 本文档 + 索引入口                                                                        | 无                                      | 仅 docs                            | 现在               |
-| P4-1 | authoring 机制覆盖                | `authoring/types.ts`、`compile.ts`、当前 19 条记录                       | 作者层可表达 30 个机制变体；具名机制元数据保持基线；等价 harness 仍 0 diff；不改正式制品 | canonical 视图、未建模字段拒绝          | 纯 scripts/tests，回滚无制品影响   | **先做**           |
-| P4-2 | 目录变体 `mechanism` 联合（原子） | shared、core `static-catalog.ts`、convert/supplements、三个 effects 制品 | 30 个变体迁移；删除 9 个旧字段；`schemaVersion` 2、`revision` 52、`snapshotId` 更新      | 公开契约、golden、snapshot 链           | 整个 PR（含制品）一起回滚          | **做**             |
-| P4-3 | 目录根部 `mechanisms` envelope    | 4 个具名机制、core 四个 validator、converter                             | 统一 `binding` 与引用闭合；payload 保持具名                                              | 具名机制、data-product `mechanismCount` | 只影响 `mechanisms` 块，可独立回滚 | 后做/条件做        |
-| P4-4 | 文档与发布                        | 规范、修订记录、消费文档、release notes                                  | revision 52 记录、contractVersion 说明、0.5.0 发布说明                                   | 文档漂移、计数过期                      | docs/release only                  | 与 P4-2 同批或紧随 |
-| P4-5 | activation/instant/triggered 收敛 | 规则类型、evaluator                                                      | 不实施                                                                                   | 无数据验证                              | 不做                               | **不做**           |
+| 步骤 | 主题                              | 输入                                                                     | 输出                                                                                     | 主要风险                                | 回滚边界                           | 建议                          |
+| ---- | --------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | --------------------------------------- | ---------------------------------- | ----------------------------- |
+| P4-0 | 本盘点                            | 当前代码/制品                                                            | 本文档 + 索引入口                                                                        | 无                                      | 仅 docs                            | 现在                          |
+| P4-1 | authoring 机制覆盖（完整）        | `authoring/types.ts`、`compile.ts`、当前 19 条记录                       | 作者层可表达 30 个机制变体；具名机制元数据保持基线；等价 harness 仍 0 diff；不改正式制品 | canonical 视图、未建模字段拒绝          | 纯 scripts/tests，回滚无制品影响   | **后置**（P4-2 已含最小支持） |
+| P4-2 | 目录变体 `mechanism` 联合（原子） | shared、core `static-catalog.ts`、convert/supplements、三个 effects 制品 | 30 个变体迁移；删除 9 个旧字段；`schemaVersion` 2、`revision` 52、`snapshotId` 更新      | 公开契约、golden、snapshot 链           | 整个 PR（含制品）一起回滚          | **已完成**                    |
+| P4-3 | 目录根部 `mechanisms` envelope    | 4 个具名机制、core 四个 validator、converter                             | 统一 `binding` 与引用闭合；payload 保持具名                                              | 具名机制、data-product `mechanismCount` | 只影响 `mechanisms` 块，可独立回滚 | 后做/条件做                   |
+| P4-4 | 文档与发布                        | 规范、修订记录、消费文档、release notes                                  | revision 52 记录、contractVersion 说明、0.5.0 发布说明                                   | 文档漂移、计数过期                      | docs/release only                  | 与 P4-2 同批或紧随            |
+| P4-5 | activation/instant/triggered 收敛 | 规则类型、evaluator                                                      | 不实施                                                                                   | 无数据验证                              | 不做                               | **不做**                      |
 
-如果用户接受临时双形状窗口，P4-2 可再拆为
-“settlement family（22 个变体）→ selection/input family（8 个变体）”，
-但必须在同一 release 内完成，且最终状态不保留旧字段。
+临时双形状窗口未获采用；P4-2 以单个原子 PR 完成。若未来重新评估兼容窗口，
+必须同时给出删除截止点，且最终状态不得保留旧字段。
 
 ### 5.3 先做 / 后做 / 不做
 
-- **先做**：P4-1。它不影响正式制品，能先证明 authoring 可以覆盖全部机制，
-  并暴露 canonical 比较、补充记录与 mechanism 投影的真实缺口。
-- **做**：P4-2。当前唯一同时满足“有真实数据、重复校验、authoring 断层”的收敛点。
+- **已做**：P4-2。当前唯一同时满足“有真实数据、重复校验、authoring 断层”的收敛点；
+  同批包含 `independent-settlement` 的最小 authoring 支持，当前 19 条记录中只有
+  猫又爪印与星见雅霜灼·破的 2 个选项需要它。
+- **后置**：P4-1 完整覆盖。为全部 30 个机制变体补齐 authoring 能力留待后续；
+  当前无法表达的 10 个机制变体均不在当前 19 条记录内，因此不阻塞 P4-2。
 - **后做/条件做**：P4-3。只有出现第 5 个具名机制、第二个 `mechanisms` 消费者，
   或需要跨机制统一查询时再做。
 - **不做**：P4-5；把 `activation.exclusiveGroup`、`option.exclusiveGroup`、
@@ -338,31 +339,34 @@ interface StaticCatalogVariant {
    三个 effects 制品共享 revision，必须同批重生成。任何手写 JSON 都会绕过生成器守卫。
 2. **公开契约**：`StaticCatalogVariant` 是 `@randomplay/core` 的公开类型，且 `static-catalog.json`
    是 `@randomplay/data` 的公开子路径；破坏性变更必须与两个包同版发布。
-3. **测试矩阵**：现有 1,866 条 `static-catalog` 用例覆盖真实制品与合成变体，但没有覆盖
-   “多个机制 arm 组合”的负例；需要为每个 arm 增加类型反例与运行时负例。
+3. **测试矩阵**：现有 `static-catalog` 用例覆盖真实制品与合成变体；P4-2 已把
+   合成变体迁移到 `mechanism`，并为旧字段、未知 arm、arm 内混入其他字段、
+   多 arm 组合与独占/桥接不变量增加运行时负例。
 4. **序列化/性能**：嵌套对象只影响 30 个变体，体积变化可忽略；校验循环次数不变。
    主要成本是 `snapshotId`、golden 与摘要 fixture 的全量刷新，不是运行时性能。
-5. **authoring 安全网**：P4-2 先于 P4-1 时，所有选中机制变体的作者记录会被
-   `EXPRESSIBLE_VARIANT_FIELDS` 拒绝；这是安全失败，但会阻塞迁移，因此建议 P4-1 先行。
+5. **authoring 安全网**：P4-2 已包含 `independent-settlement` 的最小作者支持；
+   当前 19 条记录中只有猫又爪印与星见雅霜灼·破的 2 个选项使用该 arm，其余无法
+   表达的 10 个机制变体均不在当前记录内。因此 P4-1 可安全后置，完整覆盖不阻塞
+   本批；未建模 arm 继续由 `EXPRESSIBLE_VARIANT_FIELDS` 明确拒绝。
 6. **双事实来源**：`supplements.ts` 镜像共享类型；若只改 shared 不改 supplements，
    生成器会产出半新半旧形状。需要用 `satisfies` 或类型级测试钉住镜像。
 7. **根部 envelope**：`mechanismCount` 被 data-product 与结构基线读取；把数组改成对象
    或改变成员形状会影响 P1-1，应在 P4-3 单独验收。
 
-### 6.2 需要用户拍板的开放问题
+### 6.2 已定案问题
 
-1. **迁移方式**：接受一个原子 PR，还是授权临时双形状窗口并按 family 拆分？
-2. **`contractVersion`**：按推荐升到 3、发 `0.5.0`，还是只升 catalog `schemaVersion`、
-   保留 2 并把 catalog 视为数据外壳？
-3. **根部 `mechanisms`**：现在就做统一 envelope，还是等第 5 个具名机制/第二个消费者出现？
-4. **未来机制**：Phase 4 是否已计划 `triggered` / `instant` / `continuous` 数据？
-   如果是，是否现在就在联合里预留 arm；如果不是，明确不预留。
-5. **`damageItemRequirements`**：22 个变体都只有 1 项；是否收窄为单对象？
-   建议保留数组，以免阻断未来的多项独立结算。
-6. **机制命名**：是否采用 `mechanism`（变体级）与现有 `mechanisms`（目录级）的单复数命名？
-7. **authoring 归属**：`mechanisms.ts`、`lucy-guard-boar.ts`、`convert.ts` 中的具名机制
-   是否迁入 authoring，还是继续由生成器内部维护？
-8. **`status/reason`**：是否继续与 `mechanism` 分离？建议分离，避免把证据状态误当机制类型。
+1. **迁移方式**：采用一个原子 PR，不设临时双形状窗口。已实施。
+2. **`contractVersion`**：升到 3、发 `0.5.0`；catalog `schemaVersion` 升到 2。已实施。
+3. **根部 `mechanisms`**：继续后置到 P4-3，等第 5 个具名机制或第二个消费者出现。未动。
+4. **未来机制**：联合不预留没有数据的 `triggered` / `instant` / `continuous` arm；
+   规则层继续不改。
+5. **`damageItemRequirements`**：保留数组（`NonEmpty`），不因当前 22 个变体都只有
+   1 项而收窄成单对象。
+6. **机制命名**：采用变体级单数 `mechanism` 与目录级复数 `mechanisms`；具体 arm
+   命名与理由见[实施记录](phase4-catalog-mechanism-union.md#2-正式形状)。
+7. **authoring 归属**：具名机制继续由生成器内部维护；P4-2 只补
+   `independent-settlement` 最小支持，完整 P4-1 后置。
+8. **`status/reason`**：继续与 `mechanism` 分离，不用证据状态替代机制 kind。
 
 ## 7. 证据
 

@@ -159,6 +159,28 @@ evaluateEffects：状态 + 世界观察 + 查询 → 贡献与计算输入
 
 计时公式、事件顺序、快照绑定、来源选择及错误行为都由[执行契约](execution.md)规定。尚未证实的游戏机制只保留在[实例页的证据缺口](examples.md#尚需补充的游戏证据)，不在代码里偷偷选默认答案。
 
+## 目录变体机制
+
+静态目录的 `StaticCatalogVariant` 用单个可选 `mechanism` 表达选择/结算机制；
+省略即普通静态贡献。`schemaVersion: 2` 起该字段是判别联合
+`StaticCatalogVariantMechanism`，旧 9 个并列 optional 字段不再存在：
+
+| arm                             | payload                                                                   | 语义                                                           |
+| ------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| `complete-state`                | `layerCountInputName`                                                     | `selection.layers` 派生为 count 输入，实际展开固定一次完整状态 |
+| `holder-level`                  | `holderLevelInputName`                                                    | 从持有者当前等级派生 count 输入，规则与变体均为 1 层           |
+| `independent-settlement`        | `damageItemRequirements`、可选 `isolateDamageItems`、可选 `completeState` | 声明独立结算项；独占时命中必须恰好是唯一项                     |
+| `declared-teammate-beneficiary` | 无                                                                        | 每次启用选择以 `beneficiaryActorId` 声明同队另一名实体         |
+| `squad-unique`                  | 无                                                                        | 同队同 `optionId` 最多一个启用来源                             |
+| `windswept-direct`              | `metadata`                                                                | 当前目标风化与命中资格派生 0/1 输入                            |
+| `element-buff-inputs`           | `inputs`                                                                  | 有效元素增益集合映射为 0/1 输入，元素与输入名唯一              |
+| `luminize-proficiency-mapping`  | `mapping`                                                                 | 已登记的耀变精通换算                                           |
+
+一个变体最多一个 `mechanism`；arm 只接受自己的字段，联合内部不得出现旧字段。
+派生输入名在同一变体内互不重名，外部 `inputs` 不得覆盖。`status`、`reason` 与
+`explanation` 只描述覆盖状态，不进入机制联合；`option.exclusiveGroup` 与
+`activation.exclusiveGroup` 分别表示目录选择互斥与规则层互斥，也不是变体机制。
+
 ## 类型与实施验收边界
 
 包内正式类型已经覆盖规则、条件、表达式、单位、修改、配置绑定、状态/事件/快照、输出、错误及五个接口；合法实例与类型反例可独立编译，且由 `parseEffectRuleSet` 在运行时复验。跨字段、目标引用、实际上下文和数值依赖由运行时校验承担，TypeScript 通过不等于游戏机制已经验证。
