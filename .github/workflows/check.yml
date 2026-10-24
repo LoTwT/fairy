@@ -38,6 +38,10 @@ jobs:
         run: pnpm check:quality
       - name: Check source, types, and regular tests in every package
         run: pnpm --recursive --if-present check:source
+      - name: Verify formal authoring equivalence
+        run: pnpm --filter @randomplay/data authoring:verify
+      - name: Verify artifact dependency graph
+        run: pnpm --filter @randomplay/data verify:artifact-dependencies
 
   source-node-24:
     name: Source / Node 24
@@ -58,6 +62,10 @@ jobs:
         run: pnpm check:quality
       - name: Check source, types, and regular tests in every package
         run: pnpm --recursive --if-present check:source
+      - name: Verify formal authoring equivalence
+        run: pnpm --filter @randomplay/data authoring:verify
+      - name: Verify artifact dependency graph
+        run: pnpm --filter @randomplay/data verify:artifact-dependencies
 
   # The package lane starts from a cold checkout and never reuses the source lane's build
   # output; within one workspace the build, packing, and prepare steps stay serial.
