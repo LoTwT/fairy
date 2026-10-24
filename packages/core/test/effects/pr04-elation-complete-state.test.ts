@@ -335,8 +335,12 @@ function actionDamageItems(
 }
 
 describe("Lighter elation complete state (PR04)", () => {
-  it("matches the seven brief anchors at M0/M1 and M2 on the single option", () => {
-    for (const mindscape of [0, 1, 2] as const) {
+  // 每次 evaluate 都重新解析完整规则集并校验目录。此前 21 次调用的单个用例在
+  // Node 24.11.0 的 CI 首次运行超过 5s 默认预算（run 40063023042）；按影画拆分
+  // 降低单用例耗时，全部断言保持不变。
+  it.each([0, 1, 2] as const)(
+    "matches the seven brief anchors at mindscape %s",
+    (mindscape) => {
       for (const [impact, layers] of anchors) {
         const actual = damageBonus(
           evaluate(elationInput({ mindscape, layers, impact })),
@@ -346,11 +350,12 @@ describe("Lighter elation complete state (PR04)", () => {
           12,
         )
       }
-    }
-  }, 20_000)
+    },
+  )
 
-  it("strengthens the same option automatically from mindscape 2 through 6", () => {
-    for (const mindscape of [0, 1, 2, 3, 4, 5, 6] as const) {
+  it.each([0, 1, 2, 3, 4, 5, 6] as const)(
+    "strengthens the same option automatically at mindscape %s",
+    (mindscape) => {
       for (const [impact, layers] of [
         [200, 5],
         [270, 20],
@@ -363,20 +368,22 @@ describe("Lighter elation complete state (PR04)", () => {
           12,
         )
       }
-    }
-    // 满层满冲击：M0/M1 封顶 75%，M2 起 90%（只强化一次）。
-    for (const mindscape of [0, 1] as const)
-      expect(
-        damageBonus(
-          evaluate(elationInput({ mindscape, layers: 20, impact: 270 })),
-        ),
-      ).toBeCloseTo(0.75, 12)
-    for (const mindscape of [2, 3, 6] as const)
-      expect(
-        damageBonus(
-          evaluate(elationInput({ mindscape, layers: 20, impact: 270 })),
-        ),
-      ).toBeCloseTo(0.9, 12)
+    },
+  )
+
+  // 满层满冲击：M0/M1 封顶 75%，M2 起 90%（只强化一次）。
+  it.each([
+    [0, 0.75],
+    [1, 0.75],
+    [2, 0.9],
+    [3, 0.9],
+    [6, 0.9],
+  ] as const)("caps the complete state at mindscape %s", (mindscape, cap) => {
+    expect(
+      damageBonus(
+        evaluate(elationInput({ mindscape, layers: 20, impact: 270 })),
+      ),
+    ).toBeCloseTo(cap, 12)
   })
 
   it("closes the state at zero layers without requiring impact", () => {
