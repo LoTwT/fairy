@@ -398,6 +398,22 @@ describe("authoring compiler and semantic harness", () => {
     ).toThrow(/must declare an independent-settlement mechanism/u)
   })
 
+  it("rejects baseline mechanism fields the authoring record cannot express", () => {
+    const baseline = baselineCatalogWithVariant(
+      "agents:nekomata:mindscape:0:blk-legacy:eff-ms4f47p3-p1s9yz",
+      (variant) => ({
+        ...variant,
+        mechanism: {
+          ...(variant["mechanism"] as Readonly<Record<string, unknown>>),
+          completeState: { layerCountInputName: "test:layers" },
+        },
+      }),
+    )
+    expect(() =>
+      compileAuthoringArtifacts(PILOT_AUTHORING_RECORDS, baseline),
+    ).toThrow(/mechanism cannot be expressed/u)
+  })
+
   it("rejects entity scope with hit operations or hit facts", () => {
     const records = cloneRecords()
     const nekomata = records.find(

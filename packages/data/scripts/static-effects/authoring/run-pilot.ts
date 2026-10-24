@@ -1,4 +1,4 @@
-import { mkdtempSync } from "node:fs"
+import { mkdtempSync, rmSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -18,6 +18,7 @@ const DEFAULT_BASELINE = fileURLToPath(
 
 export interface PilotRunResult {
   readonly outputDirectory: string
+  readonly outputRetained: boolean
   readonly baselineDirectory: string
   readonly recordCount: number
   readonly unsupportedCount: number
@@ -35,26 +36,32 @@ export function runAuthoringPilot(
   const baselineDirectory = resolve(
     options.baselineDirectory ?? DEFAULT_BASELINE,
   )
+  const createdOutput = options.outputDirectory === undefined
   const outputDirectory = resolve(
     options.outputDirectory ??
       mkdtempSync(join(tmpdir(), "fairy-authoring-pilot-")),
   )
-  const compilation = compileAuthoringPilot({
-    records: PILOT_AUTHORING_RECORDS,
-    baselineDirectory,
-    outputDirectory,
-  })
-  const baseline = readStaticArtifacts(baselineDirectory)
-  const candidate = readStaticArtifacts(outputDirectory)
-  const comparison = compareStaticArtifacts(baseline, candidate)
-  return {
-    outputDirectory,
-    baselineDirectory,
-    recordCount: compilation.recordCount,
-    unsupportedCount: unsupportedRecordCount(PILOT_AUTHORING_RECORDS),
-    summary: summarizeCompilation(compilation),
-    equivalent: comparison.equivalent,
-    differences: comparison.differences.map(formatDifference),
+  try {
+    const compilation = compileAuthoringPilot({
+      records: PILOT_AUTHORING_RECORDS,
+      baselineDirectory,
+      outputDirectory,
+    })
+    const baseline = readStaticArtifacts(baselineDirectory)
+    const candidate = readStaticArtifacts(outputDirectory)
+    const comparison = compareStaticArtifacts(baseline, candidate)
+    return {
+      outputDirectory,
+      outputRetained: !createdOutput,
+      baselineDirectory,
+      recordCount: compilation.recordCount,
+      unsupportedCount: unsupportedRecordCount(PILOT_AUTHORING_RECORDS),
+      summary: summarizeCompilation(compilation),
+      equivalent: comparison.equivalent,
+      differences: comparison.differences.map(formatDifference),
+    }
+  } finally {
+    if (createdOutput) rmSync(outputDirectory, { recursive: true, force: true })
   }
 }
 
@@ -69,7 +76,9 @@ function main(args: readonly string[]): number {
   )
   console.log(`Compiled: ${result.summary}`)
   console.log(`Baseline: ${result.baselineDirectory}`)
-  console.log(`Output:   ${result.outputDirectory}`)
+  console.log(
+    `Output:   ${result.outputDirectory}${result.outputRetained ? "" : " (removed after verification)"}`,
+  )
   if (!result.equivalent) {
     console.log(
       `Semantic comparison: FAIL (${result.differences.length} differences)`,

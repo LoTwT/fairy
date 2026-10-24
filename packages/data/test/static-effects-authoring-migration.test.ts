@@ -573,13 +573,10 @@ describe("static effects authoring migration records", () => {
     expect(compiledOption?.name).not.toBe("baseline mutation must not leak")
   })
 
-  it("formats byte-identical artifacts for the migrated records", async () => {
-    const result = await verifyFormalAuthoring({
-      outputDirectory: join(
-        temporaryDirectory("fairy-authoring-migration-"),
-        "output",
-      ),
-    })
+  it("formats byte-identical artifacts and removes the auto-created output", async () => {
+    const result = await verifyFormalAuthoring()
+    expect(result.outputRetained).toBe(false)
+    expect(existsSync(result.outputDirectory)).toBe(false)
     expect(result.recordCount).toBe(19)
     expect(result.summary).toBe(
       "rules: 19, options: 17, coverage positions: 15, skill targets: 2, supplemental records: 1",

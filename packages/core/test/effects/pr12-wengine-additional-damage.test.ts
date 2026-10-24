@@ -1272,7 +1272,7 @@ describe("batch 12 w-engine additional damage", () => {
       expect(
         nonLiteralResult.issues.some(
           (issue) =>
-            issue.code === "INVALID_INPUT" &&
+            issue.code === "INVALID_DEFINITION" &&
             issue.pointer.endsWith("/mechanism/isolateDamageItems"),
         ),
       ).toBe(true)

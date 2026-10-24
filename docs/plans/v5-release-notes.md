@@ -33,7 +33,8 @@
 
 1. `StaticCatalogVariant` 的 9 个并列 optional 机制字段被移除，改为单一可选
    `mechanism: StaticCatalogVariantMechanism`。新类型是判别联合，每个 arm 只接受自己的字段。
-2. 旧字段不再读取，也不存在双形状兼容窗口。`static-catalog.json` 中旧 9 字段的出现次数为 0。
+2. 旧字段不再读取，也不存在双形状兼容窗口。`static-catalog.json` 中变体顶层的旧 9 字段出现次数为 0；
+   `independent-settlement` 的 `damageItemRequirements` 等 arm 内部字段名仍沿用。
 3. `CALCULATION_CONTRACT_VERSION` 由 `2` 升至 `3`；不支持的契约版本会被 core 拒绝。
 4. `static-catalog.json` 的 `schemaVersion` 由 `1` 升至 `2`，core 校验目录 `schemaVersion`；data-product 读取器分别断言 rules=1、catalog=2、coverage=1。
 5. 消费方必须与同版 core/data 一起使用。混用 0.5.0 与 0.4.x 的 data/core 会因契约或制品版本不一致而失败。
@@ -95,13 +96,16 @@
 | 入口                                                                                  | 结果                                                                                   |
 | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `pnpm --filter @randomplay/data authoring:verify`                                     | 19 records、1 supplement、0 differences、三制品字节一致                                |
-| `pnpm --filter @randomplay/data check:source`                                         | 通过（108 files、4,717 tests）                                                         |
+| `pnpm --filter @randomplay/data check:source`                                         | 通过（108 files、4,719 tests）                                                         |
 | `pnpm --filter @randomplay/core build && pnpm --filter @randomplay/core check:source` | 通过（98 files、5,696 passed、24 skipped）                                             |
 | `pnpm --filter @randomplay/data verify:pack`                                          | 通过（2 tests）                                                                        |
 | `pnpm --filter @randomplay/core verify:pack`                                          | 通过（1 test）                                                                         |
 | `pnpm check:quality`                                                                  | 通过                                                                                   |
 | CI                                                                                    | #303、#304、#305、#306 各 6/6 项检查通过                                               |
 | 数据管理状态                                                                          | `phase: idle`；`indexSha256` `d68ad1d8…` 与 `packages/data/integrated/index.json` 一致 |
+
+> 2026-10-24 P0/P1 硬化后复验：data 108 files / 4,719 tests；core 98 files / 5,696 passed + 24 skipped；
+> `authoring:verify` 字节一致、`check:quality` 通过。
 
 相关 PR：
 

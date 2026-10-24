@@ -140,17 +140,17 @@ export type StaticCatalogVariantMechanism =
 
 ## 6. 验证
 
-| 入口                                                              | 结果                                                                                                  |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
-| `pnpm --filter @randomplay/data authoring:verify`                 | 19 records、0 differences、字节一致                                                                   |
-| `pnpm --filter @randomplay/data typecheck`                        | 通过                                                                                                  |
-| `pnpm --filter @randomplay/data check:source`                     | 通过                                                                                                  |
-| `pnpm --filter @randomplay/core check:source`                     | 通过                                                                                                  |
-| `pnpm check:quality`                                              | 通过                                                                                                  |
-| `pnpm --filter @randomplay/data verify:pack`                      | 通过                                                                                                  |
-| `pnpm --filter @randomplay/core verify:pack`                      | 通过                                                                                                  |
-| `pnpm --filter @randomplay/data verify:nanoka:current integrated` | `phase: idle`，`indexSha256` 与实际索引一致                                                           |
-| 静态核对                                                          | 旧 9 字段 0；`mechanism` 恰好 30 个变体；catalog `schemaVersion` 2、revision 52；`static.json` 931 条 |
+| 入口                                                              | 结果                                                                                                          |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `pnpm --filter @randomplay/data authoring:verify`                 | 19 records、0 differences、字节一致                                                                           |
+| `pnpm --filter @randomplay/data typecheck`                        | 通过                                                                                                          |
+| `pnpm --filter @randomplay/data check:source`                     | 通过                                                                                                          |
+| `pnpm --filter @randomplay/core check:source`                     | 通过                                                                                                          |
+| `pnpm check:quality`                                              | 通过                                                                                                          |
+| `pnpm --filter @randomplay/data verify:pack`                      | 通过                                                                                                          |
+| `pnpm --filter @randomplay/core verify:pack`                      | 通过                                                                                                          |
+| `pnpm --filter @randomplay/data verify:nanoka:current integrated` | `phase: idle`，`indexSha256` 与实际索引一致                                                                   |
+| 静态核对                                                          | 变体顶层旧 9 字段 0；`mechanism` 恰好 30 个变体；catalog `schemaVersion` 2、revision 52；`static.json` 931 条 |
 
 ## 7. 制品事实
 

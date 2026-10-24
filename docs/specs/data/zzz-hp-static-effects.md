@@ -2305,7 +2305,17 @@ effectId、optionId、来源引用与 `integrated` 归档不变。
   `completeState`）、`element-buff-inputs` 2、`complete-state` 1、
   `holder-level` 1、`windswept-direct` 1、
   `declared-teammate-beneficiary` 1、`squad-unique` 1、
-  `luminize-proficiency-mapping` 1。旧 9 字段在目录中为 0。
+  `luminize-proficiency-mapping` 1。变体顶层旧 9 字段为 0；arm 内部仍沿用
+  `damageItemRequirements` 等字段名。
+- **旧字段索引**：`damageItemRequirements` → `independent-settlement`；
+  `exclusiveDamageItem` → `independent-settlement.isolateDamageItems`；
+  `layerCountInputName` → `complete-state` 或
+  `independent-settlement.completeState`；`holderLevelInputName` → `holder-level`；
+  `windsweptDirectDamage` → `windswept-direct`；`elementBuffInputs` →
+  `element-buff-inputs`；`declaredTeammateBeneficiary` →
+  `declared-teammate-beneficiary`；`squadUniqueEffect` → `squad-unique`；
+  `parameterMapping` → `luminize-proficiency-mapping`。完整映射与规则见
+  [P4-2 计划第 3 节](../../plans/phase4-catalog-mechanism-union.md#3-迁移映射)。
 - **生成与作者层**：`convert.ts`、`supplements.ts` 与全部补充/语义登记只产出联合；
   authoring 的 `EXPRESSIBLE_VARIANT_FIELDS` 只接受 `mechanism`，当前 19 条记录中
   只有猫又爪印与星见雅霜灼·破的 `independent-settlement` 需要该 arm；其余无法表达

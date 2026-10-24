@@ -22,7 +22,7 @@ import { loadStaticEffectsProduct } from "../scripts/data-product/manifests.ts"
 import { queryStaticCoverage } from "../scripts/data-product/static-coverage.ts"
 import { runExplainCli } from "../scripts/explain-data.ts"
 
-// 真实 ID 与数值取自 static effects revision 51；数据修订后按稳定身份更新。
+// 真实 ID 与数值取自 static effects revision 52；数据修订后按稳定身份更新。
 const effectId =
   "agent:1211:zzz-hp:eff-ms46w5pz-93ry6b:blk-ms46w5pz-zdpplb:mindscape:0"
 const multiOptionEffectId = "agent:1311:zzz-hp:mindscape-2:attack-conversion"
@@ -35,6 +35,7 @@ const actionWithoutTargetsId = "action:agent:1011:action:0001"
 const pointer = "/agents/1/mindscapeBuffs/0/effectBlocks/0/effects/0"
 const supplementalEffectId = "agent:1621:nanoka:m1-hit-resistance-reduction"
 const supplementalOptionId = "nanoka:agents:1621:m1-hit-resistance-reduction"
+const mechanismOptionId = "nanoka:agents:1621:m6-giant-windstorm"
 
 const product = loadStaticEffectsProduct()
 const sources = {
@@ -517,6 +518,19 @@ describe("data explain option", () => {
         { optionId },
       ).matches,
     ).toHaveLength(1)
+  })
+
+  it("includes the variant mechanism kind and payload", () => {
+    const result = expectResultType(
+      explainDataIdentity(mechanismOptionId, sources),
+      "option",
+    )
+    const mechanism = result.option.variants[0]?.mechanism
+    expect(mechanism).toMatchObject({ kind: "independent-settlement" })
+    expect(Array.isArray(mechanism?.["damageItemRequirements"])).toBe(true)
+    expect(formatExplainText(result)).toContain(
+      '机制：{"kind":"independent-settlement"',
+    )
   })
 
   it("explains an unsupported option with no effectIds", () => {
