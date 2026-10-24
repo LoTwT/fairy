@@ -1323,6 +1323,12 @@ describe("catalog static calculation", () => {
     } as const
     const cases = [
       [
+        "unknown mechanism arm",
+        { kind: "unknown" },
+        "/catalog/options/0/variants/0/mechanism/kind",
+        "INVALID_DEFINITION",
+      ],
+      [
         "complete-state bridge input name",
         {
           kind: "independent-settlement",

@@ -7,9 +7,9 @@ import { findAgentAction } from "./agent-actions.ts"
 import type { StaticEffectsProduct, StaticRule } from "./manifests.ts"
 import type {
   StaticCatalog,
-  StaticCatalogInput,
-  StaticCatalogOption,
-  StaticCatalogVariant,
+  DataProductCatalogInput,
+  DataProductCatalogOption,
+  DataProductCatalogVariant,
   StaticCoverageMatch,
   StaticCoverageRecord,
   StaticCoverageSupplementalRecord,
@@ -160,6 +160,7 @@ export interface ExplainOptionVariant {
   readonly target: string | null
   readonly configuration: Readonly<Record<string, unknown>> | null
   readonly maximumLayers: number | null
+  readonly mechanism: Readonly<Record<string, unknown>> | null
   readonly effectIds: readonly string[]
   readonly references: readonly ExplainSourceReference[]
   readonly inputs: readonly ExplainOptionInput[]
@@ -315,7 +316,7 @@ function normalizeReference(
   }
 }
 
-function normalizeInput(input: StaticCatalogInput): ExplainOptionInput {
+function normalizeInput(input: DataProductCatalogInput): ExplainOptionInput {
   return {
     name: input.name,
     unit: input.unit,
@@ -398,7 +399,7 @@ function rulesForEffectIds(
 
 function normalizeVariant(
   index: number,
-  variant: StaticCatalogVariant,
+  variant: DataProductCatalogVariant,
   catalog: StaticCatalog,
 ): ExplainOptionVariant {
   return {
@@ -407,6 +408,8 @@ function normalizeVariant(
     target: variant.target ?? null,
     configuration: variant.configuration ?? null,
     maximumLayers: variant.maximumLayers ?? null,
+    mechanism:
+      variant.mechanism === undefined ? null : { ...variant.mechanism },
     effectIds: [...variant.effectIds],
     references: (variant.references ?? []).map(normalizeReference),
     inputs: (variant.inputs ?? []).map(normalizeInput),
@@ -417,7 +420,7 @@ function normalizeVariant(
 }
 
 function normalizeOption(
-  option: StaticCatalogOption,
+  option: DataProductCatalogOption,
   product: StaticEffectsProduct,
 ): ExplainOption {
   const variants = option.variants.map((variant, index) =>
@@ -1101,6 +1104,7 @@ function formatOption(result: OptionExplainResult): readonly string[] {
       `  - 变体 ${variant.index}：${variant.status ?? "未提供 status"}；target=${variant.target ?? "未提供"}；maximumLayers=${variant.maximumLayers ?? "未提供"}`,
       `    配置：${variant.configuration === null ? "未提供" : JSON.stringify(variant.configuration)}`,
       `    effectIds：${variant.effectIds.length === 0 ? "无" : variant.effectIds.join(", ")}`,
+      `    机制：${variant.mechanism === null ? "无" : JSON.stringify(variant.mechanism)}`,
       `    差异：${variant.differences.length === 0 ? "无" : variant.differences.map((difference) => difference.differenceId).join(", ")}`,
     )
     if (variant.inputs.length === 0) lines.push("    输入：无")

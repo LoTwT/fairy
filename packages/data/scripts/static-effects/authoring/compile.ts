@@ -536,6 +536,10 @@ function assertSelectedEntriesExpressible(
         `Selected option ${optionId} is not present in the baseline`,
       )
     const mechanismKind = group.records[0]?.mechanism.kind
+    const expectedMechanism =
+      mechanismKind === "independent-settlement"
+        ? independentSettlementFields(group).mechanism
+        : undefined
     for (const field of Object.keys(option))
       if (!EXPRESSIBLE_OPTION_FIELDS.has(field))
         throw new Error(
@@ -547,23 +551,32 @@ function assertSelectedEntriesExpressible(
           throw new Error(
             `Authoring layer cannot express baseline option ${optionId} variant field ${field}`,
           )
-      const baselineMechanismKind = variant.mechanism?.kind
-      // 作者记录决定编译时写入哪个 arm；基线变体的 arm 必须一致，
-      // 否则 compileVariant 会按 authoring 的 kind 静默替换 arm。
-      if (mechanismKind === "independent-settlement") {
-        if (baselineMechanismKind === undefined)
+      const baselineMechanism = variant.mechanism
+      // 作者记录决定编译时写入哪个 arm；基线变体必须与作者层的 arm 和
+      // 全部字段一致，否则 compileVariant 会静默丢弃 completeState、
+      // isolateDamageItems 或额外的 damageItemRequirements。
+      if (expectedMechanism === undefined) {
+        if (baselineMechanism !== undefined)
           throw new Error(
-            `Baseline variant ${variantIndex} of option ${optionId} must declare an independent-settlement mechanism to match its authoring records`,
+            `Authoring layer only models the independent-settlement variant mechanism; baseline option ${optionId} variant ${variantIndex} declares ${baselineMechanism.kind}`,
           )
-        if (baselineMechanismKind !== "independent-settlement")
-          throw new Error(
-            `Baseline variant ${variantIndex} of option ${optionId} declares ${baselineMechanismKind} mechanism, but its authoring records only express independent-settlement`,
-          )
-      } else if (baselineMechanismKind !== undefined) {
-        throw new Error(
-          `Authoring layer only models the independent-settlement variant mechanism; baseline option ${optionId} variant ${variantIndex} declares ${baselineMechanismKind}`,
-        )
+        continue
       }
+      if (baselineMechanism === undefined)
+        throw new Error(
+          `Baseline variant ${variantIndex} of option ${optionId} must declare an independent-settlement mechanism to match its authoring records`,
+        )
+      if (baselineMechanism.kind !== expectedMechanism.kind)
+        throw new Error(
+          `Baseline variant ${variantIndex} of option ${optionId} declares ${baselineMechanism.kind} mechanism, but its authoring records only express independent-settlement`,
+        )
+      if (
+        stableStringify(baselineMechanism) !==
+        stableStringify(expectedMechanism)
+      )
+        throw new Error(
+          `Baseline variant ${variantIndex} of option ${optionId} mechanism cannot be expressed by its authoring records: baseline ${stableStringify(baselineMechanism)}, expected ${stableStringify(expectedMechanism)}`,
+        )
     }
   }
 

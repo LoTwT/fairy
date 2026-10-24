@@ -32,6 +32,8 @@ export interface ArtifactHash {
 export interface FormalAuthoringVerification {
   readonly baselineDirectory: string
   readonly outputDirectory: string
+  /** 调用方显式提供输出目录时为 true；自动创建的临时目录验证后删除。 */
+  readonly outputRetained: boolean
   readonly recordCount: number
   readonly summary: string
   readonly equivalent: boolean
@@ -81,6 +83,7 @@ export async function verifyFormalAuthoring(
     return {
       baselineDirectory,
       outputDirectory,
+      outputRetained: !createdOutput,
       recordCount: MIGRATED_AUTHORING_RECORDS.length,
       summary: summarizeCompilation(compilation),
       equivalent: comparison.equivalent,
@@ -88,9 +91,8 @@ export async function verifyFormalAuthoring(
       byteIdentical: hashes.every((hash) => hash.baseline === hash.candidate),
       hashes,
     }
-  } catch (error) {
+  } finally {
     if (createdOutput) rmSync(outputDirectory, { recursive: true, force: true })
-    throw error
   }
 }
 
@@ -103,7 +105,9 @@ async function main(args: readonly string[]): Promise<number> {
   console.log(`Migrated authoring records: ${result.recordCount} records`)
   console.log(`Compiled: ${result.summary}`)
   console.log(`Baseline: ${result.baselineDirectory}`)
-  console.log(`Output:   ${result.outputDirectory}`)
+  console.log(
+    `Output:   ${result.outputDirectory}${result.outputRetained ? "" : " (removed after verification)"}`,
+  )
   console.log(
     `Semantic comparison: ${result.equivalent ? "PASS" : "FAIL"} (${result.differences.length} differences)`,
   )

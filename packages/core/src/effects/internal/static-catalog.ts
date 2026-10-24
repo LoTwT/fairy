@@ -280,16 +280,104 @@ function conditionConsumesElementFlag(
   )
 }
 
-const VARIANT_MECHANISM_KINDS = [
-  "complete-state",
-  "holder-level",
-  "independent-settlement",
-  "declared-teammate-beneficiary",
-  "squad-unique",
-  "windswept-direct",
-  "element-buff-inputs",
-  "luminize-proficiency-mapping",
-] as const
+const VARIANT_MECHANISM_KIND_SET = {
+  "complete-state": true,
+  "holder-level": true,
+  "independent-settlement": true,
+  "declared-teammate-beneficiary": true,
+  "squad-unique": true,
+  "windswept-direct": true,
+  "element-buff-inputs": true,
+  "luminize-proficiency-mapping": true,
+} as const satisfies Record<StaticCatalogVariantMechanism["kind"], true>
+
+type VariantMechanismKind = keyof typeof VARIANT_MECHANISM_KIND_SET
+
+function isVariantMechanismKind(value: unknown): value is VariantMechanismKind {
+  return (
+    typeof value === "string" &&
+    Object.hasOwn(VARIANT_MECHANISM_KIND_SET, value)
+  )
+}
+
+function assertNeverVariantMechanism(value: never): never {
+  throw new Error(`Unhandled variant mechanism: ${JSON.stringify(value)}`)
+}
+
+interface VariantMechanismProjection {
+  readonly layerCountInputName?: string
+  readonly holderLevelInputName?: string
+  readonly declaredTeammateBeneficiary: boolean
+  readonly windsweptMetadata?: StaticCatalogWindsweptDirectDamage
+  readonly elementBuffInputs?: readonly StaticCatalogElementBuffInput[]
+  readonly damageItemRequirements?: readonly StaticCatalogDamageItemRequirement[]
+  readonly exclusiveDamageItem: boolean
+  readonly squadUniqueEffect: boolean
+  readonly parameterMapping?: StaticCatalogParameterMapping
+}
+
+const EMPTY_VARIANT_MECHANISM_PROJECTION: VariantMechanismProjection = {
+  declaredTeammateBeneficiary: false,
+  exclusiveDamageItem: false,
+  squadUniqueEffect: false,
+}
+
+/**
+ * 把判别联合投影为校验/执行共用的一组字段。新增 arm 时记录表会先要求
+ * 补齐，`assertNever` 再防止 switch 漏分支。
+ */
+function projectVariantMechanism(
+  mechanism: StaticCatalogVariantMechanism | undefined,
+): VariantMechanismProjection {
+  if (mechanism === undefined) return EMPTY_VARIANT_MECHANISM_PROJECTION
+  switch (mechanism.kind) {
+    case "complete-state":
+      return {
+        ...EMPTY_VARIANT_MECHANISM_PROJECTION,
+        layerCountInputName: mechanism.layerCountInputName,
+      }
+    case "holder-level":
+      return {
+        ...EMPTY_VARIANT_MECHANISM_PROJECTION,
+        holderLevelInputName: mechanism.holderLevelInputName,
+      }
+    case "independent-settlement":
+      return {
+        ...EMPTY_VARIANT_MECHANISM_PROJECTION,
+        ...(mechanism.completeState === undefined
+          ? {}
+          : {
+              layerCountInputName: mechanism.completeState.layerCountInputName,
+            }),
+        damageItemRequirements: mechanism.damageItemRequirements,
+        exclusiveDamageItem: mechanism.isolateDamageItems === true,
+      }
+    case "declared-teammate-beneficiary":
+      return {
+        ...EMPTY_VARIANT_MECHANISM_PROJECTION,
+        declaredTeammateBeneficiary: true,
+      }
+    case "squad-unique":
+      return { ...EMPTY_VARIANT_MECHANISM_PROJECTION, squadUniqueEffect: true }
+    case "windswept-direct":
+      return {
+        ...EMPTY_VARIANT_MECHANISM_PROJECTION,
+        windsweptMetadata: mechanism.metadata,
+      }
+    case "element-buff-inputs":
+      return {
+        ...EMPTY_VARIANT_MECHANISM_PROJECTION,
+        elementBuffInputs: mechanism.inputs,
+      }
+    case "luminize-proficiency-mapping":
+      return {
+        ...EMPTY_VARIANT_MECHANISM_PROJECTION,
+        parameterMapping: mechanism.mapping,
+      }
+    default:
+      return assertNeverVariantMechanism(mechanism)
+  }
+}
 
 const ORIGINAL_ANOMALY_ATTRIBUTES = [
   "fire",
@@ -758,11 +846,12 @@ function parseVariantMechanism(
   const mechanism = expectObject(value, checks, "variant mechanism")
   if (!mechanism) return undefined
   const kind = mechanism["kind"]
-  if (
-    typeof kind !== "string" ||
-    !VARIANT_MECHANISM_KINDS.some((known) => known === kind)
-  ) {
-    collector.report("INVALID_DEFINITION", pointer, "Unknown variant mechanism")
+  if (!isVariantMechanismKind(kind)) {
+    collector.report(
+      "INVALID_DEFINITION",
+      `${pointer}/kind`,
+      "Unknown variant mechanism",
+    )
     return undefined
   }
   switch (kind) {
@@ -835,7 +924,7 @@ function parseVariantMechanism(
       const isolateDamageItems = mechanism["isolateDamageItems"]
       if (isolateDamageItems !== undefined && isolateDamageItems !== true)
         collector.report(
-          "INVALID_INPUT",
+          "INVALID_DEFINITION",
           `${pointer}/isolateDamageItems`,
           "Expected the literal true",
         )
@@ -911,6 +1000,8 @@ function parseVariantMechanism(
       )
       return mapping === undefined ? undefined : { kind, mapping }
     }
+    default:
+      return assertNeverVariantMechanism(kind)
   }
 }
 
@@ -1549,33 +1640,16 @@ export function validateStaticCatalog(
               `${vp}/mechanism`,
               collector,
             )
-      const layerCountInputName =
-        mechanism?.kind === "complete-state"
-          ? mechanism.layerCountInputName
-          : mechanism?.kind === "independent-settlement"
-            ? mechanism.completeState?.layerCountInputName
-            : undefined
-      const holderLevelInputName =
-        mechanism?.kind === "holder-level"
-          ? mechanism.holderLevelInputName
-          : undefined
-      const declaredTeammateBeneficiary =
-        mechanism?.kind === "declared-teammate-beneficiary"
-      const windsweptMetadata =
-        mechanism?.kind === "windswept-direct" ? mechanism.metadata : undefined
-      const elementBuffInputs =
-        mechanism?.kind === "element-buff-inputs" ? mechanism.inputs : undefined
-      const damageItemRequirements =
-        mechanism?.kind === "independent-settlement"
-          ? mechanism.damageItemRequirements
-          : undefined
-      const exclusiveDamageItem =
-        mechanism?.kind === "independent-settlement" &&
-        mechanism.isolateDamageItems === true
-      const parameterMapping =
-        mechanism?.kind === "luminize-proficiency-mapping"
-          ? mechanism.mapping
-          : undefined
+      const {
+        layerCountInputName,
+        holderLevelInputName,
+        declaredTeammateBeneficiary,
+        windsweptMetadata,
+        elementBuffInputs,
+        damageItemRequirements,
+        exclusiveDamageItem,
+        parameterMapping,
+      } = projectVariantMechanism(mechanism)
       // 完整状态层数桥接：声明的 count 输入名必须真实对应所引用贡献里消费
       // 的 count 输入；该贡献必须是一次 supplied 完整状态（maximumLayers 1），
       // 防止把普通叠层选项静默改成单实例。详细校验在 effectIds 解析后进行。
@@ -2702,34 +2776,17 @@ export function calculateOrdinaryStaticDamageFromCatalog(
     const variant = variants[0]!,
       configuration = variant.configuration
     const mechanism = variant.mechanism
-    const windsweptMetadata =
-      mechanism?.kind === "windswept-direct" ? mechanism.metadata : undefined
-    const elementBuffInputs =
-      mechanism?.kind === "element-buff-inputs" ? mechanism.inputs : undefined
-    const holderLevelInputName =
-      mechanism?.kind === "holder-level"
-        ? mechanism.holderLevelInputName
-        : undefined
-    const declaredTeammateBeneficiary =
-      mechanism?.kind === "declared-teammate-beneficiary"
-    const damageItemRequirements =
-      mechanism?.kind === "independent-settlement"
-        ? mechanism.damageItemRequirements
-        : undefined
-    const exclusiveDamageItem =
-      mechanism?.kind === "independent-settlement" &&
-      mechanism.isolateDamageItems === true
-    const squadUniqueEffect = mechanism?.kind === "squad-unique"
-    const layerCountInputName =
-      mechanism?.kind === "complete-state"
-        ? mechanism.layerCountInputName
-        : mechanism?.kind === "independent-settlement"
-          ? mechanism.completeState?.layerCountInputName
-          : undefined
-    const parameterMapping =
-      mechanism?.kind === "luminize-proficiency-mapping"
-        ? mechanism.mapping
-        : undefined
+    const {
+      windsweptMetadata,
+      elementBuffInputs,
+      holderLevelInputName,
+      declaredTeammateBeneficiary,
+      damageItemRequirements,
+      exclusiveDamageItem,
+      squadUniqueEffect,
+      layerCountInputName,
+      parameterMapping,
+    } = projectVariantMechanism(mechanism)
     const explain = `${option.optionId}; source ${variant.references.map((r) => r.pointer).join(", ")}`
     if (variant.status === "unsupported") {
       collector.report(

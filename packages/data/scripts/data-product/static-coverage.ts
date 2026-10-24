@@ -116,7 +116,7 @@ export interface StaticCoverage {
   readonly deferredMechanisms: readonly StaticCoverageDeferredMechanism[]
 }
 
-export interface StaticCatalogInput {
+export interface DataProductCatalogInput {
   readonly name: string
   readonly unit: string
   readonly description: string
@@ -124,30 +124,31 @@ export interface StaticCatalogInput {
 }
 
 /**
- * explain 需要展示的变体字段。status、configuration、references 与
- * inputs 只做形状读取，具体领域语义仍由正式类型与生成器维护。
+ * explain 需要展示的变体字段。status、configuration、references、
+ * inputs 与 mechanism 只做形状读取，具体领域语义仍由正式类型与生成器维护。
  */
-export interface StaticCatalogVariant {
+export interface DataProductCatalogVariant {
   readonly target?: string
   readonly configuration?: Readonly<Record<string, unknown>>
   readonly status?: string
   readonly references?: readonly StaticSourceReference[]
   readonly effectIds: readonly string[]
   readonly maximumLayers?: number
-  readonly inputs?: readonly StaticCatalogInput[]
+  readonly inputs?: readonly DataProductCatalogInput[]
+  readonly mechanism?: Readonly<Record<string, unknown>>
   readonly differences: readonly string[]
   readonly reason?: string
   readonly explanation?: string
 }
 
-export interface StaticCatalogOption {
+export interface DataProductCatalogOption {
   readonly optionId: string
   readonly catalogEntityId: string
   readonly name: string
   readonly conditionDescription: string
   readonly target: string
   readonly exclusiveGroup?: string
-  readonly variants: readonly StaticCatalogVariant[]
+  readonly variants: readonly DataProductCatalogVariant[]
 }
 
 export interface StaticCatalogDifference {
@@ -164,7 +165,7 @@ export interface StaticCatalog {
   readonly entityCount: number
   readonly mechanismCount: number
   readonly differences: readonly StaticCatalogDifference[]
-  readonly options: readonly StaticCatalogOption[]
+  readonly options: readonly DataProductCatalogOption[]
   readonly skillTargets: readonly StaticSkillTarget[]
 }
 
@@ -606,7 +607,10 @@ export function parseStaticCoverage(
   }
 }
 
-function parseCatalogInput(value: unknown, label: string): StaticCatalogInput {
+function parseCatalogInput(
+  value: unknown,
+  label: string,
+): DataProductCatalogInput {
   const input = expectRecord(value, label)
   const preset = Object.hasOwn(input, "preset")
     ? expectNumber(input.preset, `${label}.preset`)
@@ -625,7 +629,7 @@ function parseCatalogInput(value: unknown, label: string): StaticCatalogInput {
 function parseCatalogVariant(
   value: unknown,
   label: string,
-): StaticCatalogVariant {
+): DataProductCatalogVariant {
   const variant = expectRecord(value, label)
   const target = optionalString(variant, "target", label)
   const configuration = Object.hasOwn(variant, "configuration")
@@ -643,6 +647,9 @@ function parseCatalogVariant(
         parseCatalogInput(entry, `${label}.inputs[${index}]`),
       )
     : undefined
+  const mechanism = Object.hasOwn(variant, "mechanism")
+    ? expectRecord(variant.mechanism, `${label}.mechanism`)
+    : undefined
   const reason = optionalString(variant, "reason", label)
   const explanation = optionalString(variant, "explanation", label)
   return {
@@ -656,6 +663,7 @@ function parseCatalogVariant(
     ),
     ...(maximumLayers === undefined ? {} : { maximumLayers }),
     ...(inputs === undefined ? {} : { inputs }),
+    ...(mechanism === undefined ? {} : { mechanism }),
     differences: expectStringArray(
       expectField(variant, "differences", label),
       `${label}.differences`,
@@ -668,7 +676,7 @@ function parseCatalogVariant(
 function parseCatalogOption(
   value: unknown,
   label: string,
-): StaticCatalogOption {
+): DataProductCatalogOption {
   const option = expectRecord(value, label)
   assertKnownKeys(option, staticCatalogOptionKeys, label)
   const exclusiveGroup = optionalString(option, "exclusiveGroup", label)
