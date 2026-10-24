@@ -1,6 +1,6 @@
 # Phase 4 P4-2：目录变体机制判别联合
 
-- 状态：实施完成，等待合并验收。
+- 状态：已合并 #303（`1b111b58`）；P4-2 hardening 见文末第 10 节。
 - 基线：`origin/main @ d8a8f202`（P4-0 审计已合并）。
 - 分支：`data/phase4-catalog-mechanism-union`；独立 worktree，不修改主工作区。
 - 契约：公开 `StaticCatalogVariant` 与 `static-catalog.json` 的原子破坏性变更；不保留旧字段兼容读取。
@@ -181,3 +181,45 @@ shared 类型、core 校验/执行、converter/supplements、三个 effects 制�
   本批只做 `independent-settlement` 最小支持。
 - P4-3：目录根部 `mechanisms` envelope；本批不动。
 - 规则层 `activation` / `triggered` / `continuous` / `instant` 收敛继续不做，直到有真实数据。
+
+## 10. P4-2 hardening
+
+#303 合并后 review 发现三处安全/诊断缺口；本 follow-up 只修复这些缺口，不改变迁移
+结果（旧目录机械映射后与新目录仍然完全相等），也不改正式 effects 制品、`integrated`、
+`dist`、`snapshotId`、publication/manifests 或公开契约形状。
+
+- **authoring 基线 arm 校验**：[compile.ts](../../packages/data/scripts/static-effects/authoring/compile.ts)
+  的 `assertSelectedEntriesExpressible` 同时校验基线变体的 arm。作者记录为
+  `independent-settlement` 时，每个基线变体都必须声明
+  `mechanism.kind === "independent-settlement"`；缺失或其他 arm 明确抛错，不再让
+  `compileVariant` 静默替换。作者记录为其他 kind 时，任何基线变体都不得携带
+  `mechanism`。负例覆盖“独立结算 + complete-state”“独立结算 + 无 mechanism”与
+  既有的“非独立结算 + mechanism”。
+- **data-product 逐制品 schemaVersion**：`loadStaticEffectsProduct` 显式断言
+  `static.json` 为 1、`static-catalog.json` 为 2、`static-coverage.json` 为 1；
+  错误包含制品路径与期望/实际值，不恢复三制品共享版本假设。合成负例覆盖 catalog
+  1/3、coverage 2 与 static 2。
+- **叶子级错误指针**：[static-catalog.ts](../../packages/core/src/effects/internal/static-catalog.ts)
+  的机制解析把 complete-state 桥接、complete-state / holder-level arm、windswept
+  metadata、element-buff input 与 parameter mapping 的错误指回具体字段；错误码语义
+  保持不变。负例覆盖 completeState、windswept metadata、element-buff input 与
+  parameter mapping 四类叶子路径，并补充两个 arm 与 windswept 子字段。
+
+### 验证
+
+| 入口                                                                                  | 结果                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `pnpm --filter @randomplay/data authoring:verify`                                     | 19 records、1 supplement、0 differences、三制品字节一致                        |
+| `pnpm --filter @randomplay/data typecheck`                                            | 通过                                                                           |
+| `pnpm --filter @randomplay/data check:source`                                         | 通过（108 files、4,717 tests）                                                 |
+| `pnpm --filter @randomplay/core build && pnpm --filter @randomplay/core check:source` | 通过（98 files、5,683 passed、24 skipped）                                     |
+| `pnpm check:quality`                                                                  | 通过                                                                           |
+| `pnpm --filter @randomplay/data verify:pack`                                          | 通过（2 tests）                                                                |
+| `pnpm --filter @randomplay/core verify:pack`                                          | 通过（1 test）                                                                 |
+| `pnpm --filter @randomplay/data verify:nanoka:current integrated`                     | `verified: true`、`phase: idle`；`indexSha256` 与 `integrated/index.json` 一致 |
+
+新增负例先在修复前的源文件上实际失败，再在修复后通过；测试计数：data
+`static-effects-authoring.test.ts` 21 项、`data-product.test.ts` 28 项，core
+`static-catalog.test.ts` 60 项。`packages/data/definitions`、`integrated` 与 `dist`
+的 diff 为空，`snapshotId` 保持
+`sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0`。

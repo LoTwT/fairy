@@ -1854,7 +1854,7 @@ Nanoka 3.2 冻结资料 `agents/1611/details.zh.json` 的
 
 通过同名的 `@randomplay/data/definitions/effects/*.json` 显式子路径发布。根入口仍不加载定义 JSON，不增加运行时 core/effects 依赖；构建与解包继续逐文件字节复验。旧 starter / automatic 制品继续独立使用，新静态制品是完整消费单位；消费示例不得把它与重复定义同一机制的旧规则集直接拼接。
 
-目录的逻辑结构固定为 `schemaVersion: 2`、`ruleSetId`、`revision`、`source`、`entities`、`options`、`skillTargets`、`mechanisms`、`differences`；变体机制只存在于判别联合 `variant.mechanism`，不再接受并列 optional 字段。`source` 记录固定提交及资源摘要；实体保留 Fairy 身份或明确的未匹配状态、上游身份及本次适用性所需资料。选项使用稳定 `optionId`，记录来源引用、作用对象、培养条件、开关/层数/互斥关系、必需输入、可用性及其 `effectIds`；耀变精通换算等由 core 求值的部分使用明确登记的参数映射，并按同样规则追踪来源、培养选值与唯一性，不开放任意字段路径写入。缺失档位或未支持原因保留在相应选项上。共享规则与目录的正式类型维护在 [shared 效果契约](../../../packages/shared/src/effects.ts)，由 core 重导出；引擎输入输出由 [core 类型](../../../packages/core/src/effects/types.ts)维护，不在文档或 data 中复制定义。
+目录的逻辑结构固定为 `schemaVersion: 2`、`ruleSetId`、`revision`、`source`、`entities`、`options`、`skillTargets`、`mechanisms`、`differences`；变体机制只存在于判别联合 `variant.mechanism`，不再接受并列 optional 字段。revision ≤51 的历史修订段沿用当时的旧字段名；当前契约使用 `variant.mechanism`。`source` 记录固定提交及资源摘要；实体保留 Fairy 身份或明确的未匹配状态、上游身份及本次适用性所需资料。选项使用稳定 `optionId`，记录来源引用、作用对象、培养条件、开关/层数/互斥关系、必需输入、可用性及其 `effectIds`；耀变精通换算等由 core 求值的部分使用明确登记的参数映射，并按同样规则追踪来源、培养选值与唯一性，不开放任意字段路径写入。缺失档位或未支持原因保留在相应选项上。共享规则与目录的正式类型维护在 [shared 效果契约](../../../packages/shared/src/effects.ts)，由 core 重导出；引擎输入输出由 [core 类型](../../../packages/core/src/effects/types.ts)维护，不在文档或 data 中复制定义。
 
 core 提供目录消费入口 `calculateStaticDamageFromCatalog`，组合目录校验、选项准备和 `calculateStaticDamage`：
 
