@@ -587,7 +587,7 @@ describe("holder level bridge definition and derivation boundaries", () => {
     variant(input).layerCountInputName = levelInput
     rejected(
       input,
-      "INVALID_DEFINITION",
+      "INVALID_INPUT",
       variantPointer(input, "layerCountInputName"),
     )
   })
