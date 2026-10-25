@@ -16,6 +16,7 @@ import type {
   StaticCatalogVariantMechanism,
   StaticEffectCatalog,
 } from "@randomplay/shared"
+import { COMPLETE_STATE_OPTIONS } from "../semantics.ts"
 import { stableStringify } from "./canonical.ts"
 import type {
   AuthoringSupplementalRecord,
@@ -319,6 +320,7 @@ export function compileAuthoringArtifacts(
   assertSupplementalEffectIds(
     supplementalRecords,
     baseline,
+    compiledOptions,
     new Set(compiledRules.keys()),
   )
 
@@ -381,21 +383,40 @@ function collectAuthoringSupplementalRecords(
   return collected
 }
 
-/** effectIds 必须指向本次编译生成的规则或基线已有规则。 */
+/**
+ * effectIds 必须指向本次编译生成的规则或基线已有规则，并且属于补充记录声明的
+ * 选项。多变体选项可以只声明覆盖其中一个变体的补充记录，因此这里校验子集，
+ * 而不是要求等于全部变体的并集。
+ */
 function assertSupplementalEffectIds(
   supplements: readonly CollectedSupplementalRecord[],
   baseline: StaticArtifacts,
+  compiledOptions: ReadonlyMap<string, StaticCatalogOption>,
   compiledRuleIds: ReadonlySet<string>,
 ): void {
   const baselineRuleIds = new Set<string>(
     baseline.definitions.effects.map((rule) => rule.effectId),
   )
-  for (const { recordKey, supplement } of supplements)
-    for (const effectId of supplement.effectIds ?? [])
+  for (const { recordKey, supplement } of supplements) {
+    const compiledOption = compiledOptions.get(supplement.optionId)
+    if (!compiledOption)
+      throw new Error(
+        `Supplement ${supplement.supplementId} of authoring record ${recordKey} references option ${supplement.optionId} that is not compiled`,
+      )
+    const optionEffectIds = new Set<string>(
+      compiledOption.variants.flatMap((variant) => variant.effectIds),
+    )
+    for (const effectId of supplement.effectIds ?? []) {
       if (!compiledRuleIds.has(effectId) && !baselineRuleIds.has(effectId))
         throw new Error(
           `Supplement ${supplement.supplementId} of authoring record ${recordKey} references unknown effect ID ${effectId}`,
         )
+      if (!optionEffectIds.has(effectId))
+        throw new Error(
+          `Supplement ${supplement.supplementId} of authoring record ${recordKey} references effect ID ${effectId} outside option ${supplement.optionId}`,
+        )
+    }
+  }
 }
 
 function requireValidAuthoringRecords(
@@ -731,22 +752,64 @@ function validateMechanismCardinality(
   group: OptionGroup,
   mechanismKind: EffectAuthoringRecord["mechanism"]["kind"],
 ): void {
+  const [first] = group.records
+  if (!first) throw new Error(`Empty authoring group: ${group.optionId}`)
+  const variants = first.option.variants
+  const completeStateRegistration = COMPLETE_STATE_OPTIONS.find(
+    (registration) => registration.optionId === group.optionId,
+  )
+  if (mechanismKind === "complete-state") {
+    if (!completeStateRegistration)
+      throw new Error(
+        `complete-state group ${group.optionId} must be registered in COMPLETE_STATE_OPTIONS`,
+      )
+    if (group.records.length < 2)
+      throw new Error(
+        `complete-state group ${group.optionId} must contain at least two records`,
+      )
+  } else if (completeStateRegistration) {
+    throw new Error(
+      `Complete-state option ${group.optionId} must use the complete-state mechanism kind, not ${mechanismKind}`,
+    )
+  }
   if (mechanismKind === "single-rule" && group.records.length !== 1)
     throw new Error(
       `single-rule group ${group.optionId} must contain exactly one record`,
     )
-  if (mechanismKind === "single-rule-per-variant" && group.records.length < 2)
-    throw new Error(
-      `single-rule-per-variant group ${group.optionId} must contain at least two records`,
-    )
-  if (mechanismKind === "multi-rule" && group.records.length < 2)
-    throw new Error(
-      `multi-rule group ${group.optionId} must contain at least two records`,
-    )
-  if (mechanismKind === "complete-state" && group.records.length < 2)
-    throw new Error(
-      `complete-state group ${group.optionId} must contain at least two records`,
-    )
+  if (mechanismKind === "single-rule-per-variant") {
+    if (group.records.length < 2)
+      throw new Error(
+        `single-rule-per-variant group ${group.optionId} must contain at least two records`,
+      )
+    if (variants.length !== group.records.length)
+      throw new Error(
+        `single-rule-per-variant group ${group.optionId} must declare one variant per record (${group.records.length} records, ${variants.length} variants)`,
+      )
+    for (const [index, variant] of variants.entries())
+      if (variant.effectKeys.length !== 1)
+        throw new Error(
+          `single-rule-per-variant group ${group.optionId} variant ${index} must reference exactly one record`,
+        )
+    const referenceCounts = new Map<string, number>()
+    for (const variant of variants)
+      for (const key of variant.effectKeys)
+        referenceCounts.set(key, (referenceCounts.get(key) ?? 0) + 1)
+    for (const record of group.records)
+      if (referenceCounts.get(record.key) !== 1)
+        throw new Error(
+          `single-rule-per-variant group ${group.optionId} must reference record ${record.key} exactly once`,
+        )
+  }
+  if (mechanismKind === "multi-rule") {
+    if (group.records.length < 2)
+      throw new Error(
+        `multi-rule group ${group.optionId} must contain at least two records`,
+      )
+    if (!variants.some((variant) => variant.effectKeys.length >= 2))
+      throw new Error(
+        `multi-rule group ${group.optionId} must have at least one variant that references two or more records`,
+      )
+  }
   if (mechanismKind === "unsupported" && group.records.length !== 1)
     throw new Error(
       `unsupported group ${group.optionId} must contain exactly one record`,

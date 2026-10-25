@@ -303,6 +303,25 @@ describe("authoring supplemental records", () => {
     ).toThrow(/references unknown effect ID agent:0000:unknown:effect/u)
   })
 
+  it("rejects supplemental effect IDs that belong to another option", () => {
+    const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
+    const foreignEffectId = baseline.definitions.effects.find(
+      (rule) =>
+        rule.effectId ===
+        "agent:1021:zzz-hp:legacy-self-dmgBonus:blk-legacy:mindscape:0",
+    )?.effectId
+    if (!foreignEffectId) throw new Error("Missing foreign baseline effect")
+    const records = attachSupplements(cloneRecords(), "miyabi-frostburn-main", [
+      {
+        ...MIYABI_SUPPLEMENT,
+        effectIds: [foreignEffectId],
+      },
+    ])
+    expect(() => compileAuthoringRecords(records, baseline)).toThrow(
+      new RegExp(`references effect ID ${foreignEffectId} outside option`, "u"),
+    )
+  })
+
   it("reports a path error for a missing supplemental field", () => {
     const { computationTarget: _omitted, ...incomplete } = MIYABI_SUPPLEMENT
     const records = attachSupplements(cloneRecords(), "miyabi-frostburn-main", [
