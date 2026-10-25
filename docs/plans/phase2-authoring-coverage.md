@@ -29,11 +29,11 @@
 
 ## 实现
 
-[`records.ts`](../../../packages/data/scripts/static-effects/authoring/records.ts) 现在导出 `MIGRATED_AUTHORING_RECORDS`（不再保留 `CORRECTED_AUTHORING_RECORDS` 别名）。19 条记录的选项描述、规则语义、来源引用、状态归属与 coverage 位置都是正式转录；多规则选项共享同一选项常量。生成路径不 import `pilot-records.ts` / `pilot-options.ts`，P2-1 试点文件继续只服务试点测试。
+[`records.ts`](../../packages/data/scripts/static-effects/authoring/records.ts) 现在导出 `MIGRATED_AUTHORING_RECORDS`（不再保留 `CORRECTED_AUTHORING_RECORDS` 别名）。19 条记录的选项描述、规则语义、来源引用、状态归属与 coverage 位置都是正式转录；多规则选项共享同一选项常量。生成路径不 import `pilot-records.ts` / `pilot-options.ts`，P2-1 试点文件继续只服务试点测试。
 
-[`compile.ts`](../../../packages/data/scripts/static-effects/authoring/compile.ts) 只做一处最小扩展：替换规则、选项变体与 coverage 行时，按基底条目的键序写出对象。键序是序列化细节，不承载作者语义；作者值仍来自记录，语义比较仍按内容执行。这样候选与正式制品在字段次序不一致的历史条目（本批的 Remiel 完整状态与霜灼·破独立结算选项）上也能保持字节一致，而不需要改动正式制品或把字段次序复制进每条作者记录。
+[`compile.ts`](../../packages/data/scripts/static-effects/authoring/compile.ts) 只做一处最小扩展：替换规则、选项变体与 coverage 行时，按基底条目的键序写出对象。键序是序列化细节，不承载作者语义；作者值仍来自记录，语义比较仍按内容执行。这样候选与正式制品在字段次序不一致的历史条目（本批的 Remiel 完整状态与霜灼·破独立结算选项）上也能保持字节一致，而不需要改动正式制品或把字段次序复制进每条作者记录。
 
-[`generate-static-effects.ts`](../../../packages/data/scripts/generate-static-effects.ts)、[`run-migration.ts`](../../../packages/data/scripts/static-effects/authoring/run-migration.ts) 与测试已切换到新导出名。默认 authoring、显式 `converter-fallback`、失败不自动回退、候选写入前语义门禁均保持 P2-2 行为。
+[`generate-static-effects.ts`](../../packages/data/scripts/generate-static-effects.ts)、[`run-migration.ts`](../../packages/data/scripts/static-effects/authoring/run-migration.ts) 与测试已切换到新导出名。默认 authoring、显式 `converter-fallback`、失败不自动回退、候选写入前语义门禁均保持 P2-2 行为。
 
 没有新增 authoring schema、operation、condition 或 mechanism；没有新增依赖。
 

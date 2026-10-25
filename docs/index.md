@@ -43,7 +43,7 @@
 - [Phase 2 P2-4h 洛克茜初始回能转化](plans/phase2-multi-rule-supplement-authoring.md)：把一个变体下两条规则纳入 authoring，新增 `multi-rule` 分组，累计 64/68 条作者化、剩余 4 条 integrated / 33 条 out-of-scope。
 - [Phase 2 P2-4i 最后 4 条专用结算补充选项](plans/phase2-special-operation-supplement-authoring.md)：补齐露西、爱丽丝、叶瞬光专用 operation，integrated 补充记录达到 68/68，剩余 33 条 out-of-scope。
 - [Phase 2 authoring 分组不变量与专用 operation 负例](plans/phase2-authoring-group-invariants.md)：为三种多记录分组补齐结构不变量、把补充记录 effectIds 绑定到所属选项，并增加专用 operation 的字段、单位与范围负例。
-- [转换器与作者层边界决策](plans/converter-authoring-boundary-decision.md)：保留 converter 为唯一事实来源，把 authoring 冻结为独立断言层；记录 99/931 覆盖、33 条 out-of-scope、备选方案与重新评估条件。
+- [转换器与作者层边界决策](plans/converter-authoring-boundary-decision.md)：保留 converter 为唯一语义事实来源，把 authoring 冻结为独立断言层；记录 99/931 覆盖、33 条 out-of-scope、备选方案与重新评估条件。
 - [静态计算端到端对照验收](plans/static-e2e-acceptance.md)：九个完整配装场景、固定上游独立参考、差异说明和追加案例格式。
 - [上游测试用例迁移复核](plans/upstream-test-backport.md)：2026-10-20 从 ZZZ-HP 与 ZZZ Calculator 迁移的回归用例、上游可复现性限制及未裁定的跨实现差异。
 - [ZZZ Calculator 对照验收](plans/zzz-calculator-comparison.md)：固定双方版本的公式、数据与上游测试对照，包含迁移到 Fairy 的离线样本、已确认差异及后续 PR 拆分。

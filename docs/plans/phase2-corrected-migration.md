@@ -27,17 +27,17 @@
 
 ## 实现
 
-新增 [`authoring/records.ts`](../../../packages/data/scripts/static-effects/authoring/records.ts)：8 条正式作者记录。规则语义、来源引用、状态归属、option 元数据和 coverage 位置都是一次性转录，生成路径不读取 `definitions/effects` 的选中条目来填充这些字段。
+新增 [`authoring/records.ts`](../../packages/data/scripts/static-effects/authoring/records.ts)：8 条正式作者记录。规则语义、来源引用、状态归属、option 元数据和 coverage 位置都是一次性转录，生成路径不读取 `definitions/effects` 的选中条目来填充这些字段。
 
-[`generate-static-effects.ts`](../../../packages/data/scripts/generate-static-effects.ts) 在 converter 输出之后、`parseEffectRuleSet` / `validateStaticCatalog` 与候选写入之前调用 `applyStaticEffectsAuthoring`：
+[`generate-static-effects.ts`](../../packages/data/scripts/generate-static-effects.ts) 在 converter 输出之后、`parseEffectRuleSet` / `validateStaticCatalog` 与候选写入之前调用 `applyStaticEffectsAuthoring`：
 
 1. 默认 `authoring` 模式校验并编译正式记录；
-2. 用 [`canonical.ts`](../../../packages/data/scripts/static-effects/authoring/canonical.ts) 比较 converter baseline 与 authoring-applied 三制品，任何语义差异都抛错；
+2. 用 [`canonical.ts`](../../packages/data/scripts/static-effects/authoring/canonical.ts) 比较 converter baseline 与 authoring-applied 三制品，任何语义差异都抛错；
 3. 通过后才进入 core 校验与候选目录写入；失败不创建候选，也不替换正式目录。
 
 `authoring: converter-fallback` 是显式回滚路径，只跳过 authoring 覆盖，仍走原有 converter 输出与全部校验。CLI 提供 `--fallback-converter`，也接受 `FAIRY_STATIC_EFFECTS_AUTHORING=converter-fallback`；authoring 失败不会自动退回 fallback。
 
-新增 [`run-migration.ts`](../../../packages/data/scripts/static-effects/authoring/run-migration.ts) 与 `authoring:verify`：编译到临时目录，按正式生成相同的 oxfmt 格式化后比较三制品语义与 SHA-256。默认输出到系统临时目录；写入仍受 `writeStaticArtifacts` 的受管 `definitions`/`integrated`/`dist` 保护。
+新增 [`run-migration.ts`](../../packages/data/scripts/static-effects/authoring/run-migration.ts) 与 `authoring:verify`：编译到临时目录，按正式生成相同的 oxfmt 格式化后比较三制品语义与 SHA-256。默认输出到系统临时目录；写入仍受 `writeStaticArtifacts` 的受管 `definitions`/`integrated`/`dist` 保护。
 
 ## 验收结果
 
