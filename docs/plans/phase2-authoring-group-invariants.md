@@ -38,7 +38,9 @@ P2-4c 到 P2-4i 把 68/68 条 integrated 补充记录纳入 authoring。Sunna �
 - 新增负例覆盖露西继承单位、爱丽丝倍率、叶瞬光上限、未知字段，以及
   `stun-damage-adjustment` 的单位。
 - 打包测试在离线安装失败时输出子进程 stdout/stderr，避免 CI 只留下
-  `Command failed` 而丢失 pnpm 诊断。
+  `Command failed` 而丢失 pnpm 诊断；checkout 的离线安装显式使用父进程
+  的 pnpm store，避免 corepack 在 CI runner 上解析到不含 `string-argv` 的
+  默认 store。
 
 ## 4. 验证
 
