@@ -205,6 +205,19 @@ describe("static effects authoring migration records", () => {
         }),
       ]),
     )
+    const baselineIntegratedSupplementIds = new Set(
+      baseline.coverage.supplementalRecords
+        .filter((record) => record.status === "integrated")
+        .map((record) => record.supplementId),
+    )
+    const authoredSupplementIds = new Set(
+      MIGRATED_AUTHORING_RECORDS.flatMap((record) =>
+        (record.supplementalRecords ?? []).map(
+          (supplement) => supplement.supplementId,
+        ),
+      ),
+    )
+    expect(authoredSupplementIds).toEqual(baselineIntegratedSupplementIds)
 
     const recordsByOption = new Map<string, EffectAuthoringRecord[]>()
     for (const record of MIGRATED_AUTHORING_RECORDS) {
@@ -358,6 +371,119 @@ describe("static effects authoring migration records", () => {
     ).toThrow(/multi-rule group .* must contain at least two records/u)
   })
 
+  it("rejects a single-rule-per-variant variant that references two records", () => {
+    const records = cloneRecords()
+    const sample = records.find(
+      (candidate) => candidate.mechanism.kind === "single-rule-per-variant",
+    )
+    if (!sample) throw new Error("Missing multi-variant authoring record")
+    const group = records.filter(
+      (candidate) => candidate.ids.optionId === sample.ids.optionId,
+    )
+    const [first, second] = group
+    if (!first || !second) throw new Error("Missing multi-variant record pair")
+    const mutableGroup = group as unknown as Array<{
+      option: { variants: Array<{ effectKeys: string[] }> }
+    }>
+    for (const record of mutableGroup) {
+      const [firstVariant, secondVariant] = record.option.variants
+      if (!firstVariant || !secondVariant)
+        throw new Error("Missing multi-variant option")
+      firstVariant.effectKeys = [first.key, second.key]
+      secondVariant.effectKeys = [second.key]
+    }
+    expect(() =>
+      compileAuthoringRecords(records, readStaticArtifacts(BASELINE_DIRECTORY)),
+    ).toThrow(
+      new RegExp(
+        `single-rule-per-variant group ${sample.ids.optionId} variant 0 must reference exactly one record`,
+        "u",
+      ),
+    )
+  })
+
+  it("does not accept a multi-rule label for a single-rule-per-variant group", () => {
+    const records = cloneRecords()
+    const sample = records.find(
+      (candidate) => candidate.mechanism.kind === "single-rule-per-variant",
+    )
+    if (!sample) throw new Error("Missing multi-variant authoring record")
+    for (const record of records.filter(
+      (candidate) => candidate.ids.optionId === sample.ids.optionId,
+    )) {
+      const mutable = record as unknown as {
+        mechanism: EffectAuthoringRecord["mechanism"]
+      }
+      mutable.mechanism = { kind: "multi-rule" }
+    }
+    expect(() =>
+      compileAuthoringRecords(records, readStaticArtifacts(BASELINE_DIRECTORY)),
+    ).toThrow(
+      /must have at least one variant that references two or more records/u,
+    )
+  })
+
+  it("does not accept a single-rule-per-variant label for a multi-rule group", () => {
+    const records = cloneRecords()
+    const sample = records.find(
+      (candidate) => candidate.mechanism.kind === "multi-rule",
+    )
+    if (!sample) throw new Error("Missing multi-rule authoring record")
+    for (const record of records.filter(
+      (candidate) => candidate.ids.optionId === sample.ids.optionId,
+    )) {
+      const mutable = record as unknown as {
+        mechanism: EffectAuthoringRecord["mechanism"]
+      }
+      mutable.mechanism = { kind: "single-rule-per-variant" }
+    }
+    expect(() =>
+      compileAuthoringRecords(records, readStaticArtifacts(BASELINE_DIRECTORY)),
+    ).toThrow(/must declare one variant per record/u)
+  })
+
+  it("binds the complete-state label to the registered option", () => {
+    const completeStateRecords = cloneRecords()
+    const registered = completeStateRecords.find(
+      (candidate) => candidate.mechanism.kind === "complete-state",
+    )
+    if (!registered) throw new Error("Missing complete-state authoring record")
+    for (const record of completeStateRecords.filter(
+      (candidate) => candidate.ids.optionId === registered.ids.optionId,
+    )) {
+      const mutable = record as unknown as {
+        mechanism: EffectAuthoringRecord["mechanism"]
+      }
+      mutable.mechanism = { kind: "multi-rule" }
+    }
+    expect(() =>
+      compileAuthoringRecords(
+        completeStateRecords,
+        readStaticArtifacts(BASELINE_DIRECTORY),
+      ),
+    ).toThrow(/must use the complete-state mechanism kind/u)
+
+    const unregistered = cloneRecords()
+    const multiRule = unregistered.find(
+      (candidate) => candidate.mechanism.kind === "multi-rule",
+    )
+    if (!multiRule) throw new Error("Missing multi-rule authoring record")
+    for (const record of unregistered.filter(
+      (candidate) => candidate.ids.optionId === multiRule.ids.optionId,
+    )) {
+      const mutable = record as unknown as {
+        mechanism: EffectAuthoringRecord["mechanism"]
+      }
+      mutable.mechanism = { kind: "complete-state" }
+    }
+    expect(() =>
+      compileAuthoringRecords(
+        unregistered,
+        readStaticArtifacts(BASELINE_DIRECTORY),
+      ),
+    ).toThrow(/must be registered in COMPLETE_STATE_OPTIONS/u)
+  })
+
   it("rejects a malformed specialized operation payload", () => {
     const record = MIGRATED_AUTHORING_RECORDS.find(
       (candidate): candidate is EffectAuthoringRuleRecord =>
@@ -377,6 +503,121 @@ describe("static effects authoring migration records", () => {
       expect(result.issues).toContainEqual({
         path: "[0]/operation/multiplier/value",
         message: "expected the literal 3",
+      })
+  })
+
+  it("rejects a non-multiplier Lucy cheer multiplier unit", () => {
+    const record = MIGRATED_AUTHORING_RECORDS.find(
+      (candidate): candidate is EffectAuthoringRuleRecord =>
+        "operation" in candidate &&
+        candidate.operation.kind === "lucy-guard-boar-inheritance",
+    )
+    if (!record) throw new Error("Missing Lucy inheritance authoring record")
+    const mutated = structuredClone(record) as unknown as {
+      operation: { cheerMultiplier: { unit: string } }
+    }
+    mutated.operation.cheerMultiplier.unit = "ratio"
+    const result = validateAuthoringRecords([
+      mutated as unknown as EffectAuthoringRecord,
+    ])
+    expect(result.ok).toBe(false)
+    if (!result.ok)
+      expect(result.issues).toContainEqual({
+        path: "[0]/operation/cheerMultiplier/unit",
+        message: "expected one of: multiplier",
+      })
+  })
+
+  it("rejects an Alice periodic ratio other than 0.025", () => {
+    const record = MIGRATED_AUTHORING_RECORDS.find(
+      (candidate): candidate is EffectAuthoringRuleRecord =>
+        "operation" in candidate &&
+        candidate.operation.kind === "alice-core-periodic-damage",
+    )
+    if (!record) throw new Error("Missing Alice periodic authoring record")
+    const mutated = structuredClone(record) as unknown as {
+      operation: { ratio: { value: number } }
+    }
+    mutated.operation.ratio.value = 0.03
+    const result = validateAuthoringRecords([
+      mutated as unknown as EffectAuthoringRecord,
+    ])
+    expect(result.ok).toBe(false)
+    if (!result.ok)
+      expect(result.issues).toContainEqual({
+        path: "[0]/operation/ratio/value",
+        message: "expected the literal 0.025",
+      })
+  })
+
+  it("rejects a stun replacement maximum bonus outside [0, 2]", () => {
+    const record = MIGRATED_AUTHORING_RECORDS.find(
+      (candidate): candidate is EffectAuthoringRuleRecord =>
+        "operation" in candidate &&
+        candidate.operation.kind === "stun-damage-replacement",
+    )
+    if (!record) throw new Error("Missing stun replacement authoring record")
+    const mutated = structuredClone(record) as unknown as {
+      operation: { maximumBonus: unknown }
+    }
+    mutated.operation.maximumBonus = {
+      kind: "literal",
+      unit: "ratio",
+      value: 2.5,
+    }
+    const result = validateAuthoringRecords([
+      mutated as unknown as EffectAuthoringRecord,
+    ])
+    expect(result.ok).toBe(false)
+    if (!result.ok)
+      expect(result.issues).toContainEqual({
+        path: "[0]/operation/maximumBonus/value",
+        message: "expected a number within [0, 2]",
+      })
+  })
+
+  it("rejects an unknown field on a specialized operation", () => {
+    const record = MIGRATED_AUTHORING_RECORDS.find(
+      (candidate): candidate is EffectAuthoringRuleRecord =>
+        "operation" in candidate &&
+        candidate.operation.kind === "lucy-guard-boar-m6-damage",
+    )
+    if (!record) throw new Error("Missing Lucy M6 authoring record")
+    const mutated = structuredClone(record) as unknown as {
+      operation: Record<string, unknown>
+    }
+    mutated.operation.extra = true
+    const result = validateAuthoringRecords([
+      mutated as unknown as EffectAuthoringRecord,
+    ])
+    expect(result.ok).toBe(false)
+    if (!result.ok)
+      expect(result.issues).toContainEqual({
+        path: "[0]/operation/extra",
+        message: "unknown operation field",
+      })
+  })
+
+  it("rejects a stun damage adjustment with a ratio unit", () => {
+    const record = MIGRATED_AUTHORING_RECORDS.find(
+      (candidate): candidate is EffectAuthoringRuleRecord =>
+        "operation" in candidate &&
+        candidate.operation.kind === "factor-contribution" &&
+        candidate.operation.channel === "stun-damage-adjustment",
+    )
+    if (!record) throw new Error("Missing stun damage adjustment record")
+    const mutated = structuredClone(record) as unknown as {
+      operation: { value: { unit: string } }
+    }
+    mutated.operation.value.unit = "ratio"
+    const result = validateAuthoringRecords([
+      mutated as unknown as EffectAuthoringRecord,
+    ])
+    expect(result.ok).toBe(false)
+    if (!result.ok)
+      expect(result.issues).toContainEqual({
+        path: "[0]/operation/value/unit",
+        message: 'expected "multiplier" but found "ratio"',
       })
   })
 

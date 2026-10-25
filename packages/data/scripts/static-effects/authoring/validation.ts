@@ -191,6 +191,17 @@ function objectAt(
   return value
 }
 
+function rejectUnknownFields(
+  value: JsonObject,
+  allowed: readonly string[],
+  path: string,
+  collector: Collector,
+): void {
+  for (const key of Object.keys(value))
+    if (!allowed.includes(key))
+      collector.add(`${path}/${key}`, "unknown operation field")
+}
+
 function arrayAt(
   value: unknown,
   path: string,
@@ -775,13 +786,25 @@ function validateOperation(
     return
   }
   if (kind === "astra-yao-m4-quick-assist-damage") {
+    rejectUnknownFields(operation, ["kind", "multiplier"], path, collector)
     const multiplier = objectAt(
       operation["multiplier"],
       `${path}/multiplier`,
       collector,
     )
     if (multiplier) {
-      unitAt(multiplier["unit"], `${path}/multiplier/unit`, collector)
+      rejectUnknownFields(
+        multiplier,
+        ["unit", "value"],
+        `${path}/multiplier`,
+        collector,
+      )
+      enumAt(
+        multiplier["unit"],
+        ["multiplier"] as const,
+        `${path}/multiplier/unit`,
+        collector,
+      )
       const value = numberAt(
         multiplier["value"],
         `${path}/multiplier/value`,
@@ -793,12 +816,19 @@ function validateOperation(
     return
   }
   if (kind === "lucy-guard-boar-inheritance") {
+    rejectUnknownFields(operation, ["kind", "cheerMultiplier"], path, collector)
     const cheer = objectAt(
       operation["cheerMultiplier"],
       `${path}/cheerMultiplier`,
       collector,
     )
     if (!cheer) return
+    rejectUnknownFields(
+      cheer,
+      ["kind", "rank", "unit", "values"],
+      `${path}/cheerMultiplier`,
+      collector,
+    )
     enumAt(
       cheer["kind"],
       ["by-rank"] as const,
@@ -811,7 +841,12 @@ function validateOperation(
       `${path}/cheerMultiplier/rank`,
       collector,
     )
-    unitAt(cheer["unit"], `${path}/cheerMultiplier/unit`, collector)
+    enumAt(
+      cheer["unit"],
+      ["multiplier"] as const,
+      `${path}/cheerMultiplier/unit`,
+      collector,
+    )
     const values = objectAt(
       cheer["values"],
       `${path}/cheerMultiplier/values`,
@@ -840,13 +875,30 @@ function validateOperation(
     return
   }
   if (kind === "lucy-guard-boar-m6-damage") {
+    rejectUnknownFields(
+      operation,
+      ["kind", "multiplier", "element", "damageKind", "skillCategory"],
+      path,
+      collector,
+    )
     const multiplier = objectAt(
       operation["multiplier"],
       `${path}/multiplier`,
       collector,
     )
     if (multiplier) {
-      unitAt(multiplier["unit"], `${path}/multiplier/unit`, collector)
+      rejectUnknownFields(
+        multiplier,
+        ["unit", "value"],
+        `${path}/multiplier`,
+        collector,
+      )
+      enumAt(
+        multiplier["unit"],
+        ["multiplier"] as const,
+        `${path}/multiplier/unit`,
+        collector,
+      )
       const value = numberAt(
         multiplier["value"],
         `${path}/multiplier/value`,
@@ -876,27 +928,50 @@ function validateOperation(
     return
   }
   if (kind === "alice-core-periodic-damage") {
+    rejectUnknownFields(operation, ["kind", "ratio"], path, collector)
     const ratio = objectAt(operation["ratio"], `${path}/ratio`, collector)
     if (!ratio) return
+    rejectUnknownFields(
+      ratio,
+      ["kind", "unit", "value"],
+      `${path}/ratio`,
+      collector,
+    )
     enumAt(ratio["kind"], ["literal"] as const, `${path}/ratio/kind`, collector)
-    unitAt(ratio["unit"], `${path}/ratio/unit`, collector)
+    enumAt(ratio["unit"], ["ratio"] as const, `${path}/ratio/unit`, collector)
     const value = numberAt(ratio["value"], `${path}/ratio/value`, collector)
     if (value !== undefined && value !== 0.025)
       collector.add(`${path}/ratio/value`, "expected the literal 0.025")
     return
   }
   if (kind === "stun-damage-replacement") {
-    validateExpression(operation["bonus"], `${path}/bonus`, "ratio", collector)
-    validateExpression(
-      operation["maximumBonus"],
-      `${path}/maximumBonus`,
-      "ratio",
+    rejectUnknownFields(
+      operation,
+      ["kind", "bonus", "maximumBonus"],
+      path,
       collector,
     )
+    for (const name of ["bonus", "maximumBonus"] as const) {
+      validateExpression(operation[name], `${path}/${name}`, "ratio", collector)
+      const expression = operation[name]
+      if (!isObject(expression) || expression["kind"] !== "literal") continue
+      const literalValue = expression["value"]
+      if (typeof literalValue !== "number" || !Number.isFinite(literalValue))
+        continue
+      if (literalValue < 0)
+        collector.add(`${path}/${name}/value`, "expected a non-negative number")
+      if (name === "maximumBonus" && literalValue > 2)
+        collector.add(
+          `${path}/${name}/value`,
+          "expected a number within [0, 2]",
+        )
+    }
     return
   }
-  if (kind === "guaranteed-critical")
+  if (kind === "guaranteed-critical") {
+    rejectUnknownFields(operation, ["kind", "itemId"], path, collector)
     stringAt(operation["itemId"], `${path}/itemId`, collector)
+  }
 }
 
 function validateReference(
