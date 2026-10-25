@@ -2,7 +2,7 @@
 
 - 状态：草稿，未发布；用户已明确暂缓发布，等待后续授权。
 - 日期：2026-10-25
-- 基线：`origin/main @ 4f69e508`
+- 基线：`origin/main @ b5cf0462`（含 docs-only #318/#320；代码与制品基线 `4f69e508`）
 - 范围：0.5.0 的公开契约变更、制品事实、验证证据、已知限制与发布检查清单。
 - 非范围：发布、打 tag、修改版本号、发布 npm 制品、创建 GitHub Release。
 
@@ -104,7 +104,7 @@
 | 入口                                                                                  | 结果                                                                                                 |
 | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `pnpm --filter @randomplay/data authoring:verify`                                     | 99 records、89 options、24 coverage positions、68 supplements、0 differences、三制品字节一致         |
-| `pnpm --filter @randomplay/data check:source`                                         | 通过（108 files、4,735 tests）                                                                       |
+| `pnpm --filter @randomplay/data check:source`                                         | 通过（108 files、4,736 tests）                                                                       |
 | `pnpm --filter @randomplay/core build && pnpm --filter @randomplay/core check:source` | 通过（98 files、5,696 passed、24 skipped）                                                           |
 | `pnpm --filter @randomplay/data verify:pack`                                          | 通过（2 tests）                                                                                      |
 | `pnpm --filter @randomplay/core verify:pack`                                          | 通过（1 test）                                                                                       |
@@ -112,7 +112,7 @@
 | CI                                                                                    | #303、#304、#305、#306、#309、#310、#311、#312、#313、#314、#315、#316、#317、#319 各 6/6 项检查通过 |
 | 数据管理状态                                                                          | `phase: idle`；`indexSha256` `d68ad1d8…` 与 `packages/data/integrated/index.json` 一致               |
 
-> 2026-10-25 P0/P1/P4-1/P2-4c/P2-4d/P2-4e/P2-4f/P2-4g/P2-4h/P2-4i 后复验：data 108 files / 4,735 tests；core 98 files / 5,696 passed + 24 skipped；
+> 2026-10-25 P0/P1/P4-1/P2-4c/P2-4d/P2-4e/P2-4f/P2-4g/P2-4h/P2-4i 后复验：data 108 files / 4,736 tests；core 98 files / 5,696 passed + 24 skipped；
 > `authoring:verify` 99 records / 68 supplements 字节一致、`check:quality` 通过。
 
 相关 PR：
@@ -146,6 +146,8 @@
   [转换器与作者层边界决策](converter-authoring-boundary-decision.md)。
 - authoring 分组标签与补充记录 `effectIds` 已由结构不变量约束，见
   [P2 分组不变量记录](phase2-authoring-group-invariants.md)。
+- CI 只验证 authoring 与已提交制品一致，不重新运行 converter；转换器当前输出的一致性需要
+  持有固定 raw 重新生成核对。
 - 33 条 out-of-scope 补充记录带 `reason`，作者层仍不表达该字段，继续由 converter 生成。
 - P4-3（目录根部 `mechanisms` envelope）后置。
 - 规则层 `activation` / `triggered` / `continuous` / `instant` / `modification` 收敛（P4-5）不做；Phase 3 公共 manifest 外壳继续暂缓。
@@ -162,6 +164,7 @@ P4-1 已完成：8 个机制 arm 与全部 30 个机制变体均纳入 authoring
 | 步骤                                                      | 状态   |
 | --------------------------------------------------------- | ------ |
 | 确认 `main` 工作区干净，且待发布提交已进入 `main`         | 未执行 |
+| 持有固定 raw 时重新生成三制品并核对字节                   | 未执行 |
 | 确认根包 / core / data 的 `0.5.0` 版本与发布授权          | 未执行 |
 | 打 `v0.5.0` tag 并推送到已核实的目标仓库                  | 未执行 |
 | 发布 `@randomplay/core@0.5.0` 与 `@randomplay/data@0.5.0` | 未执行 |

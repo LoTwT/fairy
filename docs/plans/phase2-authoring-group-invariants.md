@@ -28,15 +28,21 @@ P2-4c 到 P2-4i 把 68/68 条 integrated 补充记录纳入 authoring。Sunna �
 补充记录的 `effectIds` 现在必须属于其 `optionId` 已编译变体的 effectId 集合。
 多变体选项允许补充记录只覆盖其中一个变体，因此校验子集而不是全部并集。
 
+作者层 `complete-state` 标签绑定 `COMPLETE_STATE_OPTIONS`，与目录变体上的
+`mechanism.kind = "complete-state"`（由 `catalogMechanism` 表达）是不同概念。
+例如莱特的 elation 选项在作者层是 `single-rule`，目录变体是 `complete-state`；
+两者不得按名称互相推断。
+
 ## 3. 专用 operation 校验
 
 - 拒绝专用 operation 及其嵌套载荷的未知字段。
 - 锁定单位：露西继承、露西 M6、耀嘉音 M4 为 `multiplier`；爱丽丝周期附伤为
   `ratio`。
-- `stun-damage-replacement` 的 literal `bonus` 必须非负，literal
-  `maximumBonus` 必须在 `[0, 2]`。
-- 新增负例覆盖露西继承单位、爱丽丝倍率、叶瞬光上限、未知字段，以及
-  `stun-damage-adjustment` 的单位。
+- `stun-damage-replacement` 的 literal 或 `parameter`（constant / by-rank）
+  `bonus` 必须非负，`maximumBonus` 必须在 `[0, 2]`；`input` 等运行时表达式由
+  core 在求值时校验。
+- 新增负例覆盖露西继承单位、爱丽丝倍率、叶瞬光 literal 上限、叶瞬光真实
+  by-rank 参数越界、未知字段，以及 `stun-damage-adjustment` 的单位。
 - 打包测试在离线安装失败时输出子进程 stdout/stderr，避免 CI 只留下
   `Command failed` 而丢失 pnpm 诊断；checkout 的离线安装显式使用父进程
   的 pnpm store，避免 corepack 在 CI runner 上解析到不含 `string-argv` 的
@@ -47,12 +53,12 @@ P2-4c 到 P2-4i 把 68/68 条 integrated 补充记录纳入 authoring。Sunna �
 | 入口                                              | 结果                                                                                                           |
 | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `pnpm --filter @randomplay/data authoring:verify` | 99 records、89 options、24 coverage positions、19 skill targets、68 supplements；0 differences、三制品字节一致 |
-| 定向 `static-effects-authoring` 测试              | 3 个文件、64 个测试通过                                                                                        |
+| 定向 `static-effects-authoring` 测试              | 3 个文件、65 个测试通过                                                                                        |
 | `pnpm --filter @randomplay/data typecheck`        | 通过                                                                                                           |
-| `pnpm --filter @randomplay/data check:source`     | 待运行                                                                                                         |
-| `pnpm --filter @randomplay/core check:source`     | 待运行                                                                                                         |
-| `pnpm check:quality`                              | 待运行                                                                                                         |
-| 数据管理状态                                      | 待复查                                                                                                         |
+| `pnpm --filter @randomplay/data check:source`     | 通过（108 files、4,736 tests）                                                                                 |
+| `pnpm --filter @randomplay/core check:source`     | 通过（98 files、5,696 passed、24 skipped）                                                                     |
+| `pnpm check:quality`                              | 通过                                                                                                           |
+| 数据管理状态                                      | `phase: idle`；`indexSha256 d68ad1d8…` 与实际索引一致                                                          |
 
 三制品摘要保持：
 
@@ -69,3 +75,11 @@ P2-4c 到 P2-4i 把 68/68 条 integrated 补充记录纳入 authoring。Sunna �
 - 33 条 out-of-scope 补充记录继续由 converter 维护。
 - `complete-state` 与 `multi-rule` 仍可通过改写记录内容触发字节差异；本批保证
   的是标签不能在没有登记或结构不满足时静默通过。
+
+## 6. P2 review follow-up
+
+2026-10-25 的 Sunna 窄范围 review 指出：`stun-damage-replacement` 的范围校验只覆盖
+literal，唯一的真实记录使用 by-rank 参数，因此 `maximumBonus` 越界不会被编译期拦截。
+本批补充 `parameter`（constant / by-rank）范围校验，并新增真实形状负例；同时更新
+converter / authoring 边界、CI 范围、冻结流程与过期验证记录。具体见
+[转换器与作者层边界决策](converter-authoring-boundary-decision.md)。

@@ -703,10 +703,45 @@ function validateTargetSelector(
   )
 }
 
+function validateStunBonusRange(
+  expression: unknown,
+  path: string,
+  field: "bonus" | "maximumBonus",
+  parametersValue: unknown,
+  parametersPath: string,
+  collector: Collector,
+): void {
+  if (!isObject(expression)) return
+  const checkValue = (value: unknown, valuePath: string) => {
+    if (typeof value !== "number" || !Number.isFinite(value)) return
+    if (value < 0) collector.add(valuePath, "expected a non-negative number")
+    if (field === "maximumBonus" && value > 2)
+      collector.add(valuePath, "expected a number within [0, 2]")
+  }
+  if (expression["kind"] === "literal") {
+    checkValue(expression["value"], `${path}/value`)
+    return
+  }
+  if (expression["kind"] !== "parameter") return
+  const parameterName = expression["name"]
+  if (typeof parameterName !== "string" || !isObject(parametersValue)) return
+  const parameter = parametersValue[parameterName]
+  if (!isObject(parameter)) return
+  if (parameter["kind"] === "constant") {
+    checkValue(parameter["value"], `${parametersPath}/${parameterName}/value`)
+    return
+  }
+  if (parameter["kind"] !== "by-rank" || !isObject(parameter["values"])) return
+  for (const [rank, value] of Object.entries(parameter["values"]))
+    checkValue(value, `${parametersPath}/${parameterName}/values/${rank}`)
+}
+
 function validateOperation(
   value: unknown,
   path: string,
   collector: Collector,
+  parametersValue?: unknown,
+  parametersPath = "",
 ): void {
   const operation = objectAt(value, path, collector)
   if (!operation) return
@@ -952,19 +987,17 @@ function validateOperation(
       collector,
     )
     for (const name of ["bonus", "maximumBonus"] as const) {
-      validateExpression(operation[name], `${path}/${name}`, "ratio", collector)
+      const expressionPath = `${path}/${name}`
       const expression = operation[name]
-      if (!isObject(expression) || expression["kind"] !== "literal") continue
-      const literalValue = expression["value"]
-      if (typeof literalValue !== "number" || !Number.isFinite(literalValue))
-        continue
-      if (literalValue < 0)
-        collector.add(`${path}/${name}/value`, "expected a non-negative number")
-      if (name === "maximumBonus" && literalValue > 2)
-        collector.add(
-          `${path}/${name}/value`,
-          "expected a number within [0, 2]",
-        )
+      validateExpression(expression, expressionPath, "ratio", collector)
+      validateStunBonusRange(
+        expression,
+        expressionPath,
+        name,
+        parametersValue,
+        parametersPath,
+        collector,
+      )
     }
     return
   }
@@ -1913,7 +1946,13 @@ function validateRecord(
     validateCondition(record["when"], `${path}/when`, "contribution", collector)
   else collector.add(`${path}/when`, "required for a rule record")
   if (Object.hasOwn(record, "operation"))
-    validateOperation(record["operation"], `${path}/operation`, collector)
+    validateOperation(
+      record["operation"],
+      `${path}/operation`,
+      collector,
+      record["parameters"],
+      `${path}/parameters`,
+    )
   else collector.add(`${path}/operation`, "required for a rule record")
   const scope = record["scope"]
   const operation = record["operation"]

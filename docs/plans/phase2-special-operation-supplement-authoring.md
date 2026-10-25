@@ -74,7 +74,8 @@ P2-4h 后只剩 4 条 integrated 补充记录，均使用 authoring 尚未开放
 - 33 条 out-of-scope 记录带 `reason`，作者层仍不表达该字段，继续由 converter 生成。
 - 这不等于 converter 已退出：作者层当前覆盖 99/931 条规则、89/986 个选项；固定来源
   records/variants 与 33 条 out-of-scope 补充记录仍由 converter 产生，作者层通过
-  `authoring:verify` 与它们保持字节等价，但本身不是事实来源。
+  `authoring:verify` 与已提交三制品保持字节等价；与 converter 当前输出的一致性
+  只在持有固定来源重新生成时校验。作者层本身不是事实来源。
 - P4-3（目录根部 `mechanisms` envelope）仍按触发条件后置；P4-5 不做；Phase 3 暂缓。
 
 ## 6. 明确不改

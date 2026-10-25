@@ -48,25 +48,35 @@ authoring 已覆盖 99 条规则、89 个选项和全部 68 条 integrated 补�
 
 ## 4. 决策
 
-1. **converter 是正式 effects 三制品的唯一事实来源。** `convert.ts`、`supplements.ts`、
+1. **converter 是正式 effects 三制品的唯一语义事实来源。** `convert.ts`、`supplements.ts`、
    `semantics.ts` 与相关机制登记继续维护全部规则、选项、变体与补充记录。
-2. **authoring 是独立断言层，不是第二份主数据。** 它只覆盖已经证明需要具名保护的高风险条目，
-   当前范围冻结在 99 条记录 / 89 个 option groups / 68 条 integrated 补充记录。
+2. **authoring 是独立断言层，不是第二份语义主数据。** 它只覆盖已经证明需要具名保护的高风险条目，
+   当前范围是冻结上限：99 条记录 / 89 个 option groups / 68 条 integrated 补充记录。
 3. **停止按覆盖率扩张 authoring。** 新增作者记录必须说明它保护的具名不变量、漂移时的失败方式
    与对应负例；没有这些收益时只改 converter。
-4. **33 条 out-of-scope 不迁入 authoring。** 不为了 101/101 的数字增加 `reason` 表达能力。
-5. **authoring 不进入公开契约。** 脚本、类型与记录都不进入 npm `files`、exports 或
+4. **已覆盖条目必须双改。** 修改已进入 authoring 的规则时，同一个 PR 必须同步修改 converter
+   与 authoring；未覆盖条目只改 converter。没有具名不变量的历史记录可以移出 authoring，
+   但必须同步 `authoring:verify` 计数与测试计数。
+5. **33 条 out-of-scope 不迁入 authoring。** 不为了 101/101 的数字增加 `reason` 表达能力。
+6. **authoring 不进入公开契约。** 脚本、类型与记录都不进入 npm `files`、exports 或
    core/data 运行时。
-6. **P4-3 继续后置。** 目录根部 `mechanisms` envelope 仍等待第 5 个具名机制或第二个消费者。
-7. **发布路径不变。** 0.5.0 仍按 converter + authoring 等价验证发布；本决策不改变制品、
+7. **P4-3 继续后置。** 目录根部 `mechanisms` envelope 仍等待第 5 个具名机制或第二个消费者。
+8. **发布路径不变。** 0.5.0 仍按 converter + authoring 等价验证发布；本决策不改变制品、
    版本或计算契约。
+
+生成器先由 converter 产出基线，语义等价通过后返回 authoring 编译结果。因此，选中断言条目的
+序列化顺序由 authoring 决定，但不得改变语义；若要让 converter 决定这些条目的字节，必须在持有
+固定 raw 时重新生成并重新验收三制品。
 
 规范表述见 [ZZZ-HP 静态增益数据接入 · 转换器与作者层边界](../specs/data/zzz-hp-static-effects.md#转换器与作者层边界)。
 
 ## 5. 后果
 
-- 后续数据修正默认只改 converter 与其证据；不会再为每个新选项补一份 authoring 转录。
-- `authoring:verify` 继续作为 CI 门禁，防止已断言条目漂移。
+- 未覆盖条目只改 converter 与其证据；已覆盖条目按双改流程处理，不会再为每个新选项补一份
+  authoring 转录。
+- `authoring:verify` 继续作为 CI 门禁，防止已断言条目漂移。它只比较 authoring 与已提交制品，
+  不重新运行 converter；converter 当前输出的一致性只在持有固定 raw 重新生成时校验。
+- 发布前若持有 raw，应重新生成三制品并核对字节；该步骤已加入发布检查清单。
 - 33 条 out-of-scope、剩余 832 条规则与 897 个选项继续由 converter 维护。
 - 若将来确实需要 authoring 独立发布，必须先完成全量迁移设计，不能在当前覆盖面上直接切换。
 - 当前工作重心可以转向 0.5.0 发布准备、converter 正确性与消费者能力，而不是继续扩大转录面。
@@ -75,14 +85,16 @@ authoring 已覆盖 99 条规则、89 个选项和全部 68 条 integrated 补�
 
 出现以下任一情况时，重新开启“converter 是否退出”的决策：
 
-1. 连续两个数据批次需要在不修改 converter 的前提下发布规则，例如固定来源不可用、许可限制
-   或紧急修正。
-2. converter 无法表达已确认的必要机制，而 authoring 已能表达，且连续两个批次受阻。
+1. 连续两个发布周期的数据更新需要在不修改 converter 的前提下发布规则，例如固定来源不可用、
+   许可限制或紧急修正。数据更新指一次固定来源变更并重新生成三制品。
+2. converter 为表达某个已确认机制需要新增特例，或至少一个 PR 因 converter 无法表达而搁置；
+   这类事件在每次发布准备时复核记录。
 3. 出现第二个消费者，要求 authoring 记录作为可编辑输入或公开数据源。
-4. 发布流程因 authoring 与 converter 漂移反复失败，双份维护成本超过全量迁移成本。
+4. 同一发布周期内出现 2 次及以上因 converter / authoring 双改造成的返工；每次发布准备时
+   复核并记录次数。
 
-重新开启时必须同时给出全量规则迁移、来源证据归属、回滚路径与发布验证方案；不接受只迁移
-一部分后把两个来源同时当作事实来源。
+每次发布准备时复核上述事件并记录结论。重新开启时必须同时给出全量规则迁移、来源证据归属、
+回滚路径与发布验证方案；不接受只迁移一部分后把两个来源同时当作事实来源。
 
 ## 7. 明确不做
 

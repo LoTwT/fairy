@@ -576,6 +576,36 @@ describe("static effects authoring migration records", () => {
       })
   })
 
+  it("rejects out-of-range stun replacement parameter values", () => {
+    const record = MIGRATED_AUTHORING_RECORDS.find(
+      (candidate): candidate is EffectAuthoringRuleRecord =>
+        "operation" in candidate &&
+        candidate.operation.kind === "stun-damage-replacement",
+    )
+    if (!record) throw new Error("Missing stun replacement authoring record")
+    const mutated = structuredClone(record) as unknown as {
+      parameters: {
+        maximumVeilBonus: { values: Record<string, number> }
+      }
+    }
+    mutated.parameters.maximumVeilBonus.values["6"] = 2.5
+    mutated.parameters.maximumVeilBonus.values["0"] = -1
+    const result = validateAuthoringRecords([
+      mutated as unknown as EffectAuthoringRecord,
+    ])
+    expect(result.ok).toBe(false)
+    if (!result.ok) {
+      expect(result.issues).toContainEqual({
+        path: "[0]/parameters/maximumVeilBonus/values/6",
+        message: "expected a number within [0, 2]",
+      })
+      expect(result.issues).toContainEqual({
+        path: "[0]/parameters/maximumVeilBonus/values/0",
+        message: "expected a non-negative number",
+      })
+    }
+  })
+
   it("rejects an unknown field on a specialized operation", () => {
     const record = MIGRATED_AUTHORING_RECORDS.find(
       (candidate): candidate is EffectAuthoringRuleRecord =>

@@ -1907,17 +1907,20 @@ effects 的新增通道、属性读取或组合归约只能服务已核实的来
 
 ### 转换器与作者层边界
 
-正式 effects 三制品（`static.json`、`static-catalog.json`、`static-coverage.json`）的唯一事实来源是
+正式 effects 三制品（`static.json`、`static-catalog.json`、`static-coverage.json`）的唯一语义事实来源是
 固定 ZZZ-HP 输入、Nanoka 副本与 `convert.ts`、`supplements.ts`、`semantics.ts` 及相关机制登记组成的
-转换器。authoring 是选中的独立断言层，不是第二事实来源：
+转换器。authoring 是选中的独立断言层，不是第二语义事实来源：
 
 - 生成始终先由转换器产出基线，再由 authoring 按 `key` / `optionId` / `supplementId` 原位替换；
-  两者语义不等价时拒绝生成。
-- authoring 覆盖范围按“是否存在具名语义断言”决定，不按规则百分比扩张。当前范围冻结在
-  99 条记录、89 个 option groups 与 68 条 integrated 补充记录。
+  两者语义不等价时拒绝生成。语义等价通过后，生成器返回 authoring 编译结果，因此选中断言条目的
+  序列化顺序由 authoring 决定，但不得改变语义。
+- authoring 覆盖范围按“是否存在具名语义断言”决定，不按规则百分比扩张。当前范围是冻结上限：
+  99 条记录、89 个 option groups 与 68 条 integrated 补充记录；没有具名不变量的历史记录可以移出。
 - 未进入 authoring 的规则、选项与 33 条 out-of-scope 补充记录继续由转换器维护；其 `reason`
   不复制到 authoring。
 - authoring 脚本与记录不进入 npm 包、公开 exports 或 core/data 运行时。
+- CI 的 `authoring:verify` 只比较 authoring 编译结果与已提交制品，不重新运行转换器。转换器当前
+  输出的一致性需要持有固定 raw 重新生成并核对三制品字节。
 
 重新评估条件、备选方案与后果见[转换器与作者层边界决策](../../plans/converter-authoring-boundary-decision.md)。
 
