@@ -67,4 +67,5 @@
 - P4-1 当时有 67 条 integrated 补充记录、33 条 out-of-scope 补充记录仍由 converter 维护；
   本批只把 1 条既有补充记录保持作者化。后续
   [P2-4c](phase2-supplement-authoring-batch.md) 已把 23 条已有作者选项的 integrated
-  记录迁入作者层，当前剩余 44 条 integrated。
+  记录迁入作者层，[P2-4d](phase2-w-engine-supplement-authoring.md) 又把 16 条音擎
+  选项纳入作者层，当前剩余 28 条 integrated。
