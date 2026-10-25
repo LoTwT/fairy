@@ -74,3 +74,9 @@ converter 维护。
 `packages/data/scripts/static-effects/convert.ts`、`packages/data/definitions/effects/*`、
 `packages/data/integrated/*`、`packages/data/dist/*`、`snapshotId`、publication/manifests、
 公开 exports 与 core/shared 运行时均保持原样。
+
+## 7. 后续状态
+
+[P2-4i](phase2-special-operation-supplement-authoring.md) 已把最后 4 条专用结算补充
+选项纳入 authoring。**integrated 补充记录已达到 68/68 全部作者化**；33 条
+out-of-scope 记录仍由 converter 维护。本页的“剩余 4 条”保留 P2-4h 当时事实。

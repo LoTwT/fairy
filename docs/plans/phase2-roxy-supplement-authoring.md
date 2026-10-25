@@ -85,6 +85,6 @@ authoring operation 表达；本批同时扩展两个 factor channel：
 ## 7. 后续状态
 
 [P2-4h](phase2-multi-rule-supplement-authoring.md) 已把洛克茜
-`initial-energy-regen-conversion` 纳入 authoring。当前已作者化补充记录为 64/68 条；
-剩余 4 条 integrated 记录仍缺专用 operation，33 条 out-of-scope 记录仍由 converter
-维护。本页的“剩余 5 条”保留 P2-4g 当时事实。
+`initial-energy-regen-conversion` 纳入 authoring，[P2-4i](phase2-special-operation-supplement-authoring.md)
+又补齐最后 4 条专用结算。**integrated 补充记录已达到 68/68 全部作者化**；33 条
+out-of-scope 记录仍由 converter 维护。本页的“剩余 5 条”保留 P2-4g 当时事实。

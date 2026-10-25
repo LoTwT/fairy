@@ -2,7 +2,7 @@
 
 - 状态：草稿，未发布；等待发布决策。
 - 日期：2026-10-25
-- 基线：`origin/main @ 015833b1`
+- 基线：`origin/main @ 8d6935a5`
 - 范围：0.5.0 的公开契约变更、制品事实、验证证据、已知限制与发布检查清单。
 - 非范围：发布、打 tag、修改版本号、发布 npm 制品、创建 GitHub Release。
 
@@ -84,35 +84,36 @@
 | 目录变体          | 1,467 个                                                                          | [`static-catalog.json`](../../packages/data/definitions/effects/static-catalog.json)   |
 | 机制变体          | 30 个                                                                             | 同上                                                                                   |
 | 机制 arm 分布     | 22 个 `independent-settlement`、2 个 `element-buff-inputs`，其余 6 个 arm 各 1 个 | 同上                                                                                   |
-| 补充记录          | 101 条（68 条 integrated、33 条 out-of-scope；其中 64 条已作者化）                | [`static-coverage.json`](../../packages/data/definitions/effects/static-coverage.json) |
+| 补充记录          | 101 条（68 条 integrated、33 条 out-of-scope；68 条 integrated 已全部作者化）     | [`static-coverage.json`](../../packages/data/definitions/effects/static-coverage.json) |
 | 目录实体 / 选择项 | 196 / 986                                                                         | `static-catalog.json`                                                                  |
 
 `independent-settlement` 中 7 个变体启用 `isolateDamageItems`，2 个南宫羽变体启用 `completeState`。
-已作者化的 64 条补充记录中，首条由
+68 条 integrated 补充记录已全部作者化。首条由
 [P2-4b-lite 记录](phase2-miyabi-supplement-migration.md)迁移；23 条由
 [P2-4c 批量迁移](phase2-supplement-authoring-batch.md)迁入；16 条音擎选项由
 [P2-4d 音擎批次](phase2-w-engine-supplement-authoring.md)迁入；10 条单变体
 代理人/驱动盘选项由[P2-4e 代理人批次](phase2-agent-supplement-authoring.md)迁入；
 5 个多 variant 选项由[P2-4f 多 variant 批次](phase2-multi-variant-supplement-authoring.md)
 迁入；8 条洛克茜选项由[P2-4g 洛克茜批次](phase2-roxy-supplement-authoring.md)迁入；
-洛克茜初始回能转化由[P2-4h 多规则批次](phase2-multi-rule-supplement-authoring.md)迁入。
-剩余 4 条 integrated 补充记录仍缺专用 operation，33 条 out-of-scope 记录仍由 converter 维护。
+洛克茜初始回能转化由[P2-4h 多规则批次](phase2-multi-rule-supplement-authoring.md)迁入；
+最后 4 条专用结算由[P2-4i 专用结算批次](phase2-special-operation-supplement-authoring.md)
+迁入。33 条 out-of-scope 记录仍由 converter 维护。
 
 ## 6. 验证证据
 
 | 入口                                                                                  | 结果                                                                                         |
 | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `pnpm --filter @randomplay/data authoring:verify`                                     | 95 records、85 options、24 coverage positions、64 supplements、0 differences、三制品字节一致 |
-| `pnpm --filter @randomplay/data check:source`                                         | 通过（108 files、4,724 tests）                                                               |
+| `pnpm --filter @randomplay/data authoring:verify`                                     | 99 records、89 options、24 coverage positions、68 supplements、0 differences、三制品字节一致 |
+| `pnpm --filter @randomplay/data check:source`                                         | 通过（108 files、4,725 tests）                                                               |
 | `pnpm --filter @randomplay/core build && pnpm --filter @randomplay/core check:source` | 通过（98 files、5,696 passed、24 skipped）                                                   |
 | `pnpm --filter @randomplay/data verify:pack`                                          | 通过（2 tests）                                                                              |
 | `pnpm --filter @randomplay/core verify:pack`                                          | 通过（1 test）                                                                               |
 | `pnpm check:quality`                                                                  | 通过                                                                                         |
-| CI                                                                                    | #303、#304、#305、#306、#309、#310、#311、#312、#313、#314、#315 各 6/6 项检查通过           |
+| CI                                                                                    | #303、#304、#305、#306、#309、#310、#311、#312、#313、#314、#315、#316 各 6/6 项检查通过     |
 | 数据管理状态                                                                          | `phase: idle`；`indexSha256` `d68ad1d8…` 与 `packages/data/integrated/index.json` 一致       |
 
-> 2026-10-25 P0/P1/P4-1/P2-4c/P2-4d/P2-4e/P2-4f/P2-4g/P2-4h 后复验：data 108 files / 4,724 tests；core 98 files / 5,696 passed + 24 skipped；
-> `authoring:verify` 95 records / 64 supplements 字节一致、`check:quality` 通过。
+> 2026-10-25 P0/P1/P4-1/P2-4c/P2-4d/P2-4e/P2-4f/P2-4g/P2-4h/P2-4i 后复验：data 108 files / 4,725 tests；core 98 files / 5,696 passed + 24 skipped；
+> `authoring:verify` 99 records / 68 supplements 字节一致、`check:quality` 通过。
 
 相关 PR：
 
@@ -129,15 +130,16 @@
 | #313 | P2-4e 单变体代理人/驱动盘补充选项                       | `b20de333` |
 | #314 | P2-4f 多 variant 补充选项                               | `a9eeeaa4` |
 | #315 | P2-4g 洛克茜补充选项                                    | `015833b1` |
+| #316 | P2-4h 洛克茜初始回能转化                                | `8d6935a5` |
 
 数据管理状态的维护流程见[来源数据整合规范](../specs/data/integration.md#数据管理状态的同步维护)。
 本 PR 只改文档，不修改 `integrated`、definitions、`dist` 或管理记录。
 
 ## 7. 已知限制
 
-- 4 条 integrated 补充记录仍由 converter 生成，尚未进入 authoring；其专用
-  operation 尚未纳入作者层。
-- 33 条 out-of-scope 补充记录带 `reason`，仍不可作者化。
+- 68 条 integrated 补充记录已全部作者化；固定来源 records/variants 仍由 converter
+  产生，authoring 通过字节等价验证与它们保持一致。
+- 33 条 out-of-scope 补充记录带 `reason`，作者层仍不表达该字段，继续由 converter 生成。
 - P4-3（目录根部 `mechanisms` envelope）后置。
 - 规则层 `activation` / `triggered` / `continuous` / `instant` / `modification` 收敛（P4-5）不做；Phase 3 公共 manifest 外壳继续暂缓。
 
@@ -167,6 +169,7 @@ P4-1 已完成：8 个机制 arm 与全部 30 个机制变体均纳入 authoring
 - [P2-4f 多 variant 补充选项](phase2-multi-variant-supplement-authoring.md)：5 个 corrected/converted 双 variant 选项作者化、累计 55 条与字节等价验证。
 - [P2-4g 洛克茜补充选项](phase2-roxy-supplement-authoring.md)：8 条洛克茜单规则选项作者化、累计 63 条与字节等价验证。
 - [P2-4h 洛克茜初始回能转化](phase2-multi-rule-supplement-authoring.md)：一个变体下两条规则作者化、累计 64 条与字节等价验证。
+- [P2-4i 最后 4 条专用结算补充选项](phase2-special-operation-supplement-authoring.md)：68/68 integrated 补充记录作者化、累计 68 条与字节等价验证。
 - [P4-1 authoring 机制覆盖](phase4-authoring-mechanism-coverage.md)：8 个 arm、30 个变体与字节等价验证。
 - [P4-2 目录变体机制判别联合](phase4-catalog-mechanism-union.md)：正式形状、迁移映射、验证与回滚边界。
 - [包边界与联动发布](../specs/packages.md)：同版发布规则、安装与发布操作。

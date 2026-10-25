@@ -52,6 +52,19 @@ export type AuthoringOperation =
       ContributionOperation,
       { readonly kind: "astra-yao-m4-quick-assist-damage" }
     >
+  | Extract<
+      ContributionOperation,
+      { readonly kind: "lucy-guard-boar-inheritance" }
+    >
+  | Extract<
+      ContributionOperation,
+      { readonly kind: "lucy-guard-boar-m6-damage" }
+    >
+  | Extract<
+      ContributionOperation,
+      { readonly kind: "alice-core-periodic-damage" }
+    >
+  | Extract<ContributionOperation, { readonly kind: "stun-damage-replacement" }>
   | Extract<ContributionOperation, { readonly kind: "guaranteed-critical" }>
 
 /** 试点只使用调用方显式声明的 supplied 状态。 */
