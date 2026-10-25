@@ -163,15 +163,30 @@ describe("packed package", () => {
       CI: "true",
     }
     delete checkoutEnvironment.pnpm_config_verify_deps_before_run
-    execFileSync(
-      "corepack",
-      ["pnpm", "install", "--offline", "--frozen-lockfile", "--ignore-scripts"],
-      {
-        cwd: checkout,
-        stdio: "pipe",
-        env: checkoutEnvironment,
-      },
-    )
+    try {
+      execFileSync(
+        "corepack",
+        [
+          "pnpm",
+          "install",
+          "--offline",
+          "--frozen-lockfile",
+          "--ignore-scripts",
+        ],
+        {
+          cwd: checkout,
+          stdio: "pipe",
+          env: checkoutEnvironment,
+          encoding: "utf8",
+        },
+      )
+    } catch (error) {
+      const failure = error as { stdout?: string; stderr?: string }
+      throw new Error(
+        `Offline install failed in ${checkout}\nstdout:\n${failure.stdout ?? ""}\nstderr:\n${failure.stderr ?? ""}`,
+        { cause: error },
+      )
+    }
     expect(lstatSync(join(checkout, "node_modules")).isSymbolicLink()).toBe(
       false,
     )
