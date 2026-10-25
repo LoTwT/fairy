@@ -24,6 +24,14 @@ export type AuthoringValidationResult =
   | { readonly ok: true; readonly records: readonly EffectAuthoringRecord[] }
   | { readonly ok: false; readonly issues: readonly AuthoringValidationIssue[] }
 
+/**
+ * 正式 effectId 的实体前缀通常等于 source identity kind；驱动盘是唯一例外：
+ * identity kind 为 `drive-disc`，正式 ID 前缀沿用 `disc`（与 stableIds 一致）。
+ */
+const EFFECT_ID_PREFIX_OVERRIDES: Readonly<Record<string, string>> = {
+  "drive-disc": "disc",
+}
+
 const CONDITION_KINDS = [
   "constant",
   "all",
@@ -1557,18 +1565,24 @@ function validateRecord(
       `${path}/ids/effectId`,
       collector,
     )
-    const identityKind =
+    const identityKindValue =
       entity && isObject(entity["identity"])
         ? entity["identity"]["kind"]
         : undefined
+    const identityKind =
+      typeof identityKindValue === "string" ? identityKindValue : undefined
+    const expectedEffectIdPrefix =
+      identityKind === undefined
+        ? undefined
+        : (EFFECT_ID_PREFIX_OVERRIDES[identityKind] ?? identityKind)
     if (
       effectId !== undefined &&
-      identityKind !== undefined &&
-      !effectId.startsWith(`${identityKind}:`)
+      expectedEffectIdPrefix !== undefined &&
+      !effectId.startsWith(`${expectedEffectIdPrefix}:`)
     )
       collector.add(
         `${path}/ids/effectId`,
-        `expected an effect ID starting with "${identityKind}:"`,
+        `expected an effect ID starting with "${expectedEffectIdPrefix}:"`,
       )
   }
 

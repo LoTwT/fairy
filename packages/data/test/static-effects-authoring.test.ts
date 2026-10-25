@@ -21,6 +21,7 @@ import {
 import { fixedSourceIds } from "../scripts/static-effects/authoring/ids.ts"
 import { P4_1_MECHANISM_AUTHORING_RECORDS } from "../scripts/static-effects/authoring/mechanism-records.ts"
 import { PILOT_AUTHORING_RECORDS } from "../scripts/static-effects/authoring/pilot-records.ts"
+import { P2_4E_AGENT_AUTHORING_RECORDS } from "../scripts/static-effects/authoring/agent-supplement-records.ts"
 import type {
   EffectAuthoringRecord,
   EffectAuthoringRuleRecord,
@@ -94,6 +95,30 @@ describe("authoring pilot records", () => {
     expect(result.records).toHaveLength(12)
     expect(new Set(result.records.map((record) => record.key)).size).toBe(12)
     expect(unsupportedRecordCount(result.records)).toBe(3)
+  })
+
+  it("accepts the canonical disc effect ID and rejects a mismatched prefix", () => {
+    const driveDisc = P2_4E_AGENT_AUTHORING_RECORDS.find((record) =>
+      record.ids.effectId.startsWith("disc:"),
+    )
+    if (!driveDisc) throw new Error("Missing drive-disc authoring record")
+    expect(validateAuthoringRecords([driveDisc]).ok).toBe(true)
+
+    const mismatched = validateAuthoringRecords([
+      {
+        ...driveDisc,
+        ids: {
+          ...driveDisc.ids,
+          effectId: "w-engine:31200:nanoka:two-piece-impact-percent",
+        },
+      } as unknown as EffectAuthoringRecord,
+    ])
+    expect(mismatched.ok).toBe(false)
+    if (!mismatched.ok)
+      expect(mismatched.issues).toContainEqual({
+        path: "[0]/ids/effectId",
+        message: 'expected an effect ID starting with "disc:"',
+      })
   })
 
   it.each([

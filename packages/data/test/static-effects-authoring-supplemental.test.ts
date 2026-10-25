@@ -75,18 +75,18 @@ function supplementalIndex(coverage: StaticCoverageDocument): number {
 }
 
 describe("authoring supplemental records", () => {
-  it("declares 40 real supplemental records matching the baseline", () => {
-    expect(MIGRATED_AUTHORING_RECORDS).toHaveLength(65)
+  it("declares 50 real supplemental records matching the baseline", () => {
+    expect(MIGRATED_AUTHORING_RECORDS).toHaveLength(75)
     const declared = MIGRATED_AUTHORING_RECORDS.flatMap((record) =>
       (record.supplementalRecords ?? []).map((supplement) => ({
         recordKey: record.key,
         supplement,
       })),
     )
-    expect(declared).toHaveLength(40)
+    expect(declared).toHaveLength(50)
     expect(
       new Set(declared.map(({ supplement }) => supplement.supplementId)).size,
-    ).toBe(40)
+    ).toBe(50)
     expect(declared[0]?.recordKey).toBe("miyabi-frostburn-main")
 
     const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
