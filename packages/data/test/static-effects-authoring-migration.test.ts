@@ -227,9 +227,16 @@ describe("static effects authoring migration records", () => {
     expect(compilation.ruleIds).toHaveLength(49)
     expect(compilation.optionIds).toHaveLength(45)
     expect(compilation.coverageKeys).toHaveLength(19)
-    expect(compilation.supplementalRecordIds).toEqual([
+    const declaredSupplementIds = MIGRATED_AUTHORING_RECORDS.flatMap((record) =>
+      (record.supplementalRecords ?? []).map(
+        (supplement) => supplement.supplementId,
+      ),
+    )
+    expect(declaredSupplementIds).toHaveLength(24)
+    expect(compilation.supplementalRecordIds).toEqual(declaredSupplementIds)
+    expect(compilation.supplementalRecordIds).toContain(
       "nanoka:agents:miyabi:frostburn-break-damage",
-    ])
+    )
     expect(compilation.skillTargetIds).toHaveLength(19)
 
     const groups = new Map<string, EffectAuthoringRuleRecord[]>()
@@ -644,7 +651,7 @@ describe("static effects authoring migration records", () => {
     expect(existsSync(result.outputDirectory)).toBe(false)
     expect(result.recordCount).toBe(49)
     expect(result.summary).toBe(
-      "rules: 49, options: 45, coverage positions: 19, skill targets: 19, supplemental records: 1",
+      "rules: 49, options: 45, coverage positions: 19, skill targets: 19, supplemental records: 24",
     )
     expect(result.equivalent).toBe(true)
     expect(result.differences).toEqual([])

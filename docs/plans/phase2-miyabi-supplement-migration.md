@@ -83,3 +83,10 @@ worktree 没有 `packages/data/.integrated.fairy-state`，属于静态工作区�
 ## 明确不改
 
 `packages/data/scripts/static-effects/convert.ts`、`packages/data/definitions/effects/*`、`packages/data/integrated/*`、`packages/data/dist/*`、`snapshotId`、publication/manifests、公开 exports 与 core/shared 运行时均保持原样。正式生成仍先由 converter 产生基线，再由作者层按 `supplementId` 原位替换；本批替换值与基线逐字段一致，所以三制品字节不变。
+
+## 后续状态
+
+[P2-4c](phase2-supplement-authoring-batch.md) 已把另外 23 条已有作者选项的 `integrated`
+补充记录迁入作者层。当前已作者化补充记录为 24/68 条；剩余 44 条 integrated
+记录的选项还没有作者记录，33 条 out-of-scope 记录仍由 converter 维护。
+本页的“67 条剩余”与“1 条已迁移”保留 P2-4b-lite 当时事实。

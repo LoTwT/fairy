@@ -64,5 +64,7 @@
 
 - 本批不新增正式机制、不改 shared/core 类型或执行语义；只补齐作者层能力与转录。
 - P4-3（目录根部 `mechanisms` envelope）与 P4-5（规则层 activation 收敛）继续后置。
-- 67 条 integrated 补充记录、33 条 out-of-scope 补充记录仍由 converter 维护；
-  本批只把 1 条既有补充记录保持作者化。
+- P4-1 当时有 67 条 integrated 补充记录、33 条 out-of-scope 补充记录仍由 converter 维护；
+  本批只把 1 条既有补充记录保持作者化。后续
+  [P2-4c](phase2-supplement-authoring-batch.md) 已把 23 条已有作者选项的 integrated
+  记录迁入作者层，当前剩余 44 条 integrated。

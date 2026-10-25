@@ -1,8 +1,8 @@
 # v5（0.5.0）发布说明草稿
 
 - 状态：草稿，未发布；等待发布决策。
-- 日期：2026-10-24
-- 基线：`origin/main @ 36a8e799`
+- 日期：2026-10-25
+- 基线：`origin/main @ 29ab5777`
 - 范围：0.5.0 的公开契约变更、制品事实、验证证据、已知限制与发布检查清单。
 - 非范围：发布、打 tag、修改版本号、发布 npm 制品、创建 GitHub Release。
 
@@ -84,28 +84,30 @@
 | 目录变体          | 1,467 个                                                                          | [`static-catalog.json`](../../packages/data/definitions/effects/static-catalog.json)   |
 | 机制变体          | 30 个                                                                             | 同上                                                                                   |
 | 机制 arm 分布     | 22 个 `independent-settlement`、2 个 `element-buff-inputs`，其余 6 个 arm 各 1 个 | 同上                                                                                   |
-| 补充记录          | 101 条（68 条 integrated、33 条 out-of-scope；其中 1 条已作者化）                 | [`static-coverage.json`](../../packages/data/definitions/effects/static-coverage.json) |
+| 补充记录          | 101 条（68 条 integrated、33 条 out-of-scope；其中 24 条已作者化）                | [`static-coverage.json`](../../packages/data/definitions/effects/static-coverage.json) |
 | 目录实体 / 选择项 | 196 / 986                                                                         | `static-catalog.json`                                                                  |
 
 `independent-settlement` 中 7 个变体启用 `isolateDamageItems`，2 个南宫羽变体启用 `completeState`。
-唯一已作者化的补充记录是 `nanoka:agents:miyabi:frostburn-break-damage`，见
-[P2-4b-lite 记录](phase2-miyabi-supplement-migration.md)。
+已作者化的 24 条补充记录中，首条由
+[P2-4b-lite 记录](phase2-miyabi-supplement-migration.md)迁移；其余 23 条由
+[P2-4c 批量迁移](phase2-supplement-authoring-batch.md)迁入。剩余 44 条 integrated
+补充记录仍缺作者选项，33 条 out-of-scope 记录仍由 converter 维护。
 
 ## 6. 验证证据
 
-| 入口                                                                                  | 结果                                                                                   |
-| ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `pnpm --filter @randomplay/data authoring:verify`                                     | 49 records、45 options、19 skill targets、1 supplement、0 differences、三制品字节一致  |
-| `pnpm --filter @randomplay/data check:source`                                         | 通过（108 files、4,721 tests）                                                         |
-| `pnpm --filter @randomplay/core build && pnpm --filter @randomplay/core check:source` | 通过（98 files、5,696 passed、24 skipped）                                             |
-| `pnpm --filter @randomplay/data verify:pack`                                          | 通过（2 tests）                                                                        |
-| `pnpm --filter @randomplay/core verify:pack`                                          | 通过（1 test）                                                                         |
-| `pnpm check:quality`                                                                  | 通过                                                                                   |
-| CI                                                                                    | #303、#304、#305、#306、#309 各 6/6 项检查通过                                         |
-| 数据管理状态                                                                          | `phase: idle`；`indexSha256` `d68ad1d8…` 与 `packages/data/integrated/index.json` 一致 |
+| 入口                                                                                  | 结果                                                                                    |
+| ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `pnpm --filter @randomplay/data authoring:verify`                                     | 49 records、45 options、19 skill targets、24 supplements、0 differences、三制品字节一致 |
+| `pnpm --filter @randomplay/data check:source`                                         | 通过（108 files、4,721 tests）                                                          |
+| `pnpm --filter @randomplay/core build && pnpm --filter @randomplay/core check:source` | 通过（98 files、5,696 passed、24 skipped）                                              |
+| `pnpm --filter @randomplay/data verify:pack`                                          | 通过（2 tests）                                                                         |
+| `pnpm --filter @randomplay/core verify:pack`                                          | 通过（1 test）                                                                          |
+| `pnpm check:quality`                                                                  | 通过                                                                                    |
+| CI                                                                                    | #303、#304、#305、#306、#309、#310 各 6/6 项检查通过                                    |
+| 数据管理状态                                                                          | `phase: idle`；`indexSha256` `d68ad1d8…` 与 `packages/data/integrated/index.json` 一致  |
 
-> 2026-10-24 P0/P1/P4-1 后复验：data 108 files / 4,721 tests；core 98 files / 5,696 passed + 24 skipped；
-> `authoring:verify` 49 records 字节一致、`check:quality` 通过。
+> 2026-10-25 P0/P1/P4-1/P2-4c 后复验：data 108 files / 4,721 tests；core 98 files / 5,696 passed + 24 skipped；
+> `authoring:verify` 49 records / 24 supplements 字节一致、`check:quality` 通过。
 
 相关 PR：
 
@@ -116,13 +118,15 @@
 | #305 | CI 显式校验 authoring 等价性与制品依赖图                | `4822a054` |
 | #306 | PR04 重型用例拆分，稳定 core 测试                       | `a74f340f` |
 | #309 | 机制诊断、authoring guard 与文档收口                    | `36a8e799` |
+| #310 | P4-1 authoring 机制覆盖                                 | `29ab5777` |
 
 数据管理状态的维护流程见[来源数据整合规范](../specs/data/integration.md#数据管理状态的同步维护)。
 本 PR 只改文档，不修改 `integrated`、definitions、`dist` 或管理记录。
 
 ## 7. 已知限制
 
-- 67 条 integrated 补充记录仍由 converter 生成，尚未进入 authoring。
+- 44 条 integrated 补充记录仍由 converter 生成，尚未进入 authoring；其 `optionId`
+  还没有对应作者记录。
 - 33 条 out-of-scope 补充记录带 `reason`，仍不可作者化。
 - P4-3（目录根部 `mechanisms` envelope）后置。
 - 规则层 `activation` / `triggered` / `continuous` / `instant` / `modification` 收敛（P4-5）不做；Phase 3 公共 manifest 外壳继续暂缓。
@@ -147,6 +151,7 @@ P4-1 已完成：8 个机制 arm 与全部 30 个机制变体均纳入 authoring
 
 ## 9. 相关文档
 
+- [P2-4c 补充记录批量迁移](phase2-supplement-authoring-batch.md)：24 条 integrated 补充记录作者化、剩余 44 条与字节等价验证。
 - [P4-1 authoring 机制覆盖](phase4-authoring-mechanism-coverage.md)：8 个 arm、30 个变体与字节等价验证。
 - [P4-2 目录变体机制判别联合](phase4-catalog-mechanism-union.md)：正式形状、迁移映射、验证与回滚边界。
 - [包边界与联动发布](../specs/packages.md)：同版发布规则、安装与发布操作。

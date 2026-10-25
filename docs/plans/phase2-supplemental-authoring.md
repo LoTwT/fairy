@@ -92,4 +92,4 @@
 
 ## 后续
 
-P2-4b-lite 已按本条路径迁移 `nanoka:agents:miyabi:frostburn-break-damage`，见[迁移计划](phase2-miyabi-supplement-migration.md)；扩大补充记录覆盖、表达 `reason` / `boundary` 与迁移剩余 67 条 integrated 记录仍留待后续批次。
+P2-4b-lite 已按本条路径迁移 `nanoka:agents:miyabi:frostburn-break-damage`，见[迁移计划](phase2-miyabi-supplement-migration.md)；P2-4c 已把另外 23 条已有作者选项的 integrated 记录迁入作者层，见[批量迁移记录](phase2-supplement-authoring-batch.md)。当前已作者化 24/68 条，剩余 44 条 integrated 需要先补作者选项；表达 `reason` / `boundary` 与 33 条 out-of-scope 记录仍留待后续批次。
