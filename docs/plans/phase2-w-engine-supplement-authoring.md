@@ -84,6 +84,6 @@ factor channel，露西、爱丽丝与叶瞬光使用尚不在 authoring operati
 ## 7. 后续状态
 
 [P2-4e](phase2-agent-supplement-authoring.md) 已把 10 条单变体代理人/驱动盘选项纳入
-authoring。当前已作者化补充记录为 50/68 条；剩余 18 条 integrated 记录仍缺作者
-选项，33 条 out-of-scope 记录仍由 converter 维护。本页的“剩余 28 条”保留 P2-4d
-当时事实。
+authoring，[P2-4f](phase2-multi-variant-supplement-authoring.md) 又纳入 5 个多 variant
+选项。当前已作者化补充记录为 55/68 条；剩余 13 条 integrated 记录仍缺作者选项，
+33 条 out-of-scope 记录仍由 converter 维护。本页的“剩余 28 条”保留 P2-4d 当时事实。

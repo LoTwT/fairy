@@ -68,15 +68,18 @@ function coverageKey(record: {
 }
 
 describe("static effects authoring migration records", () => {
-  it("accepts the 75 migrated records and their mechanism mix", () => {
+  it("accepts the 85 migrated records and their mechanism mix", () => {
     const result = validateAuthoringRecords(MIGRATED_AUTHORING_RECORDS)
     expect(result.ok).toBe(true)
     if (!result.ok) return
-    expect(result.records).toHaveLength(75)
-    expect(new Set(result.records.map((record) => record.key)).size).toBe(75)
+    expect(result.records).toHaveLength(85)
+    expect(new Set(result.records.map((record) => record.key)).size).toBe(85)
 
     const mechanisms = result.records.map((record) => record.mechanism.kind)
     expect(mechanisms.filter((kind) => kind === "single-rule")).toHaveLength(48)
+    expect(
+      mechanisms.filter((kind) => kind === "single-rule-per-variant"),
+    ).toHaveLength(10)
     expect(mechanisms.filter((kind) => kind === "complete-state")).toHaveLength(
       2,
     )
@@ -86,8 +89,8 @@ describe("static effects authoring migration records", () => {
     expect(mechanisms.filter((kind) => kind === "unsupported")).toHaveLength(0)
 
     const statuses = result.records.map((record) => record.coverage.status)
-    expect(statuses.filter((status) => status === "corrected")).toHaveLength(18)
-    expect(statuses.filter((status) => status === "converted")).toHaveLength(57)
+    expect(statuses.filter((status) => status === "corrected")).toHaveLength(23)
+    expect(statuses.filter((status) => status === "converted")).toHaveLength(62)
     for (const record of result.records) {
       if (record.mechanism.kind === "independent-settlement")
         expect(record.coverage.status).toBe("converted")
@@ -159,19 +162,19 @@ describe("static effects authoring migration records", () => {
     })
   })
 
-  it("selects 71 option groups with 19 fixed-source coverage positions", () => {
+  it("selects 76 option groups with 24 fixed-source coverage positions", () => {
     const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
     const selectedOptionIds = new Set(
       MIGRATED_AUTHORING_RECORDS.map((record) => record.ids.optionId),
     )
-    expect(selectedOptionIds.size).toBe(71)
+    expect(selectedOptionIds.size).toBe(76)
     const selectedCoverage = baseline.coverage.records.filter((record) =>
       selectedOptionIds.has(record.optionId),
     )
-    expect(selectedCoverage).toHaveLength(19)
+    expect(selectedCoverage).toHaveLength(24)
     expect(
       selectedCoverage.filter((record) => record.status === "corrected"),
-    ).toHaveLength(15)
+    ).toHaveLength(20)
     expect(
       selectedCoverage.filter((record) => record.status === "converted"),
     ).toHaveLength(4)
@@ -191,7 +194,7 @@ describe("static effects authoring migration records", () => {
           record.optionId !== undefined &&
           selectedOptionIds.has(record.optionId),
       )
-    expect(selectedSupplementalRecords).toHaveLength(50)
+    expect(selectedSupplementalRecords).toHaveLength(55)
     expect(selectedSupplementalRecords).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -202,37 +205,48 @@ describe("static effects authoring migration records", () => {
       ]),
     )
 
+    const recordsByOption = new Map<string, EffectAuthoringRecord[]>()
     for (const record of MIGRATED_AUTHORING_RECORDS) {
+      const records = recordsByOption.get(record.ids.optionId) ?? []
+      records.push(record)
+      recordsByOption.set(record.ids.optionId, records)
+    }
+    for (const [optionId, records] of recordsByOption) {
       const baselineRows = baseline.coverage.records.filter(
-        (row) => row.optionId === record.ids.optionId,
+        (row) => row.optionId === optionId,
       )
-      expect(baselineRows).toHaveLength(record.coverage.positions.length)
-      for (const position of record.coverage.positions) {
-        const baselineRow = baselineRows.find(
-          (row) => row.pointer === position.pointer,
-        )
-        expect(baselineRow?.catalogEntityId).toBe(record.entity.catalogEntityId)
-        expect(baselineRow?.status).toBe(record.coverage.status)
-        expect(baselineRow?.effectIds).toEqual([record.ids.effectId])
+      const positions = records.flatMap((record) => record.coverage.positions)
+      expect(baselineRows).toHaveLength(positions.length)
+      for (const record of records) {
+        for (const position of record.coverage.positions) {
+          const baselineRow = baselineRows.find(
+            (row) => row.pointer === position.pointer,
+          )
+          expect(baselineRow?.catalogEntityId).toBe(
+            record.entity.catalogEntityId,
+          )
+          expect(baselineRow?.status).toBe(record.coverage.status)
+          expect(baselineRow?.effectIds).toEqual([record.ids.effectId])
+        }
       }
     }
   })
 
-  it("projects 75 records to 75 rules, 71 options and 19 skill targets", () => {
+  it("projects 85 records to 85 rules, 76 options and 24 coverage positions", () => {
     const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
     const compilation = compileAuthoringRecords(
       MIGRATED_AUTHORING_RECORDS,
       baseline,
     )
-    expect(compilation.ruleIds).toHaveLength(75)
-    expect(compilation.optionIds).toHaveLength(71)
-    expect(compilation.coverageKeys).toHaveLength(19)
+    expect(compilation.ruleIds).toHaveLength(85)
+    expect(compilation.optionIds).toHaveLength(76)
+    expect(compilation.coverageKeys).toHaveLength(24)
     const declaredSupplementIds = MIGRATED_AUTHORING_RECORDS.flatMap((record) =>
       (record.supplementalRecords ?? []).map(
         (supplement) => supplement.supplementId,
       ),
     )
-    expect(declaredSupplementIds).toHaveLength(50)
+    expect(declaredSupplementIds).toHaveLength(55)
     expect(compilation.supplementalRecordIds).toEqual(declaredSupplementIds)
     expect(compilation.supplementalRecordIds).toContain(
       "nanoka:agents:miyabi:frostburn-break-damage",
@@ -253,22 +267,31 @@ describe("static effects authoring migration records", () => {
         (candidate) => candidate.optionId === optionId,
       )
       expect(option?.catalogEntityId).toBe(first.entity.catalogEntityId)
-      expect(option?.variants).toHaveLength(1)
-      const variant = option?.variants[0]
-      expect(variant?.status).toBe(first.coverage.status)
-      expect(variant?.effectIds).toEqual(
-        records.map((record) => record.ids.effectId),
-      )
-      expect(variant?.differences).toEqual([
-        ...new Set(records.flatMap((record) => record.coverage.differenceIds)),
-      ])
-      expect(variant?.references).toEqual(first.option.variants[0]?.references)
-      expect(variant?.configuration).toEqual(
-        first.option.variants[0]?.configuration,
-      )
-      expect(variant?.maximumLayers).toBe(
-        first.option.variants[0]?.maximumLayers,
-      )
+      expect(option?.variants).toHaveLength(first.option.variants.length)
+      for (const [index, authoringVariant] of first.option.variants.entries()) {
+        const contributing = authoringVariant.effectKeys.map((key) => {
+          const record = records.find((candidate) => candidate.key === key)
+          if (!record)
+            throw new Error(`Missing record ${key} in option ${optionId}`)
+          return record
+        })
+        const [contributingFirst] = contributing
+        if (!contributingFirst)
+          throw new Error(`Variant ${index} of ${optionId} has no records`)
+        const variant = option?.variants[index]
+        expect(variant?.status).toBe(contributingFirst.coverage.status)
+        expect(variant?.effectIds).toEqual(
+          contributing.map((record) => record.ids.effectId),
+        )
+        expect(variant?.differences).toEqual([
+          ...new Set(
+            contributing.flatMap((record) => record.coverage.differenceIds),
+          ),
+        ])
+        expect(variant?.references).toEqual(authoringVariant.references)
+        expect(variant?.configuration).toEqual(authoringVariant.configuration)
+        expect(variant?.maximumLayers).toBe(authoringVariant.maximumLayers)
+      }
 
       for (const authoring of records) {
         const rule = compilation.artifacts.definitions.effects.find(
@@ -304,6 +327,21 @@ describe("static effects authoring migration records", () => {
         }
       }
     }
+  })
+
+  it("requires at least two records for single-rule-per-variant", () => {
+    const record = MIGRATED_AUTHORING_RECORDS.find(
+      (candidate) => candidate.mechanism.kind === "single-rule-per-variant",
+    )
+    if (!record) throw new Error("Missing multi-variant authoring record")
+    expect(() =>
+      compileAuthoringRecords(
+        [record],
+        readStaticArtifacts(BASELINE_DIRECTORY),
+      ),
+    ).toThrow(
+      /single-rule-per-variant group .* must contain at least two records/u,
+    )
   })
 
   it("keeps the complete-state option as one team/holder pair", () => {
@@ -649,9 +687,9 @@ describe("static effects authoring migration records", () => {
     const result = await verifyFormalAuthoring()
     expect(result.outputRetained).toBe(false)
     expect(existsSync(result.outputDirectory)).toBe(false)
-    expect(result.recordCount).toBe(75)
+    expect(result.recordCount).toBe(85)
     expect(result.summary).toBe(
-      "rules: 75, options: 71, coverage positions: 19, skill targets: 19, supplemental records: 50",
+      "rules: 85, options: 76, coverage positions: 24, skill targets: 19, supplemental records: 55",
     )
     expect(result.equivalent).toBe(true)
     expect(result.differences).toEqual([])

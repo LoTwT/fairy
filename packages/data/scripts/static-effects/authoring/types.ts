@@ -200,6 +200,7 @@ export interface AuthoringSkillTarget {
 
 export const AUTHORING_MECHANISM_KINDS = [
   "single-rule",
+  "single-rule-per-variant",
   "complete-state",
   "independent-settlement",
   "unsupported",
@@ -207,6 +208,8 @@ export const AUTHORING_MECHANISM_KINDS = [
 
 export type AuthoringMechanism =
   | { readonly kind: "single-rule" }
+  /** 同一选项的多个变体各由一条规则记录表达。 */
+  | { readonly kind: "single-rule-per-variant" }
   | { readonly kind: "complete-state" }
   | {
       readonly kind: "independent-settlement"

@@ -79,3 +79,10 @@ P2-4d 完成后仍有 28 条 integrated 补充记录缺少作者选项。其中 
 `packages/data/scripts/static-effects/convert.ts`、`packages/data/definitions/effects/*`、
 `packages/data/integrated/*`、`packages/data/dist/*`、`snapshotId`、publication/manifests、
 公开 exports 与 core/shared 运行时均保持原样。
+
+## 7. 后续状态
+
+[P2-4f](phase2-multi-variant-supplement-authoring.md) 已把 5 个 corrected/converted
+双 variant 选项纳入 authoring。当前已作者化补充记录为 55/68 条；剩余 13 条
+integrated 记录仍缺作者选项，33 条 out-of-scope 记录仍由 converter 维护。本页的
+“剩余 18 条”保留 P2-4e 当时事实。
