@@ -68,15 +68,15 @@ function coverageKey(record: {
 }
 
 describe("static effects authoring migration records", () => {
-  it("accepts the 65 migrated records and their mechanism mix", () => {
+  it("accepts the 75 migrated records and their mechanism mix", () => {
     const result = validateAuthoringRecords(MIGRATED_AUTHORING_RECORDS)
     expect(result.ok).toBe(true)
     if (!result.ok) return
-    expect(result.records).toHaveLength(65)
-    expect(new Set(result.records.map((record) => record.key)).size).toBe(65)
+    expect(result.records).toHaveLength(75)
+    expect(new Set(result.records.map((record) => record.key)).size).toBe(75)
 
     const mechanisms = result.records.map((record) => record.mechanism.kind)
-    expect(mechanisms.filter((kind) => kind === "single-rule")).toHaveLength(38)
+    expect(mechanisms.filter((kind) => kind === "single-rule")).toHaveLength(48)
     expect(mechanisms.filter((kind) => kind === "complete-state")).toHaveLength(
       2,
     )
@@ -87,7 +87,7 @@ describe("static effects authoring migration records", () => {
 
     const statuses = result.records.map((record) => record.coverage.status)
     expect(statuses.filter((status) => status === "corrected")).toHaveLength(18)
-    expect(statuses.filter((status) => status === "converted")).toHaveLength(47)
+    expect(statuses.filter((status) => status === "converted")).toHaveLength(57)
     for (const record of result.records) {
       if (record.mechanism.kind === "independent-settlement")
         expect(record.coverage.status).toBe("converted")
@@ -159,12 +159,12 @@ describe("static effects authoring migration records", () => {
     })
   })
 
-  it("selects 61 option groups with 19 fixed-source coverage positions", () => {
+  it("selects 71 option groups with 19 fixed-source coverage positions", () => {
     const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
     const selectedOptionIds = new Set(
       MIGRATED_AUTHORING_RECORDS.map((record) => record.ids.optionId),
     )
-    expect(selectedOptionIds.size).toBe(61)
+    expect(selectedOptionIds.size).toBe(71)
     const selectedCoverage = baseline.coverage.records.filter((record) =>
       selectedOptionIds.has(record.optionId),
     )
@@ -191,7 +191,7 @@ describe("static effects authoring migration records", () => {
           record.optionId !== undefined &&
           selectedOptionIds.has(record.optionId),
       )
-    expect(selectedSupplementalRecords).toHaveLength(40)
+    expect(selectedSupplementalRecords).toHaveLength(50)
     expect(selectedSupplementalRecords).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -218,21 +218,21 @@ describe("static effects authoring migration records", () => {
     }
   })
 
-  it("projects 65 records to 65 rules, 61 options and 19 skill targets", () => {
+  it("projects 75 records to 75 rules, 71 options and 19 skill targets", () => {
     const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
     const compilation = compileAuthoringRecords(
       MIGRATED_AUTHORING_RECORDS,
       baseline,
     )
-    expect(compilation.ruleIds).toHaveLength(65)
-    expect(compilation.optionIds).toHaveLength(61)
+    expect(compilation.ruleIds).toHaveLength(75)
+    expect(compilation.optionIds).toHaveLength(71)
     expect(compilation.coverageKeys).toHaveLength(19)
     const declaredSupplementIds = MIGRATED_AUTHORING_RECORDS.flatMap((record) =>
       (record.supplementalRecords ?? []).map(
         (supplement) => supplement.supplementId,
       ),
     )
-    expect(declaredSupplementIds).toHaveLength(40)
+    expect(declaredSupplementIds).toHaveLength(50)
     expect(compilation.supplementalRecordIds).toEqual(declaredSupplementIds)
     expect(compilation.supplementalRecordIds).toContain(
       "nanoka:agents:miyabi:frostburn-break-damage",
@@ -649,9 +649,9 @@ describe("static effects authoring migration records", () => {
     const result = await verifyFormalAuthoring()
     expect(result.outputRetained).toBe(false)
     expect(existsSync(result.outputDirectory)).toBe(false)
-    expect(result.recordCount).toBe(65)
+    expect(result.recordCount).toBe(75)
     expect(result.summary).toBe(
-      "rules: 65, options: 61, coverage positions: 19, skill targets: 19, supplemental records: 40",
+      "rules: 75, options: 71, coverage positions: 19, skill targets: 19, supplemental records: 50",
     )
     expect(result.equivalent).toBe(true)
     expect(result.differences).toEqual([])

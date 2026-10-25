@@ -3,6 +3,7 @@ import { BUFF_RESOURCE, SOURCE_COMMIT } from "../source.ts"
 import { fixedSourceIds, stableIds } from "./ids.ts"
 import { P4_1_MECHANISM_AUTHORING_RECORDS } from "./mechanism-records.ts"
 import { P2_4D_W_ENGINE_AUTHORING_RECORDS } from "./w-engine-records.ts"
+import { P2_4E_AGENT_AUTHORING_RECORDS } from "./agent-supplement-records.ts"
 import type {
   AuthoringOption,
   AuthoringSupplementalRecord,
@@ -2547,4 +2548,5 @@ export const MIGRATED_AUTHORING_RECORDS: readonly EffectAuthoringRecord[] = [
   ...P4_2_AUTHORING_RECORDS,
   ...P4_1_MECHANISM_AUTHORING_RECORDS,
   ...P2_4D_W_ENGINE_AUTHORING_RECORDS,
+  ...P2_4E_AGENT_AUTHORING_RECORDS,
 ]
