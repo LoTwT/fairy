@@ -1905,6 +1905,22 @@ effects 的新增通道、属性读取或组合归约只能服务已核实的来
           effects 目录消费入口 → 现有 core 公式
 ```
 
+### 转换器与作者层边界
+
+正式 effects 三制品（`static.json`、`static-catalog.json`、`static-coverage.json`）的唯一事实来源是
+固定 ZZZ-HP 输入、Nanoka 副本与 `convert.ts`、`supplements.ts`、`semantics.ts` 及相关机制登记组成的
+转换器。authoring 是选中的独立断言层，不是第二事实来源：
+
+- 生成始终先由转换器产出基线，再由 authoring 按 `key` / `optionId` / `supplementId` 原位替换；
+  两者语义不等价时拒绝生成。
+- authoring 覆盖范围按“是否存在具名语义断言”决定，不按规则百分比扩张。当前范围冻结在
+  99 条记录、89 个 option groups 与 68 条 integrated 补充记录。
+- 未进入 authoring 的规则、选项与 33 条 out-of-scope 补充记录继续由转换器维护；其 `reason`
+  不复制到 authoring。
+- authoring 脚本与记录不进入 npm 包、公开 exports 或 core/data 运行时。
+
+重新评估条件、备选方案与后果见[转换器与作者层边界决策](../../plans/converter-authoring-boundary-decision.md)。
+
 转换语义或固定来源变化时，以同次生成的三个 JSON 作为验收和安装单位，并同步相关消费逻辑与测试。
 
 验收要求：
