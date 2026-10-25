@@ -1,4 +1,29 @@
 import type { EffectAuthoringRecord } from "./types.ts"
+import {
+  P2_4C_NANOKA_AGENTS_1621_M6_GIANT_WINDSTORM_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_1621_ADDITIONAL_LEVEL_DAMAGE_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_1621_ADDITIONAL_WEATHERED_DIRECT_DAMAGE_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_YIXUAN_M2_TALISMAN_SUPPRESSION_BREAK_DAMAGE_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_YIXUAN_M1_FALLING_THUNDER_DAMAGE_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_YIXUAN_AA_FALLING_THUNDER_DAMAGE_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_1621_CORE_ELEMENT_CRITICAL_DAMAGE_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_1621_CORE_ELEMENT_SHARP_CRITICAL_DAMAGE_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_ASTRAYAO_M4_QUICK_ASSIST_BONUS_DAMAGE_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_GRACE_M6_SPECIAL_GRENADES_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_GRACE_M6_EX_SPECIAL_GRENADES_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_EVELYN_M6_LUNALUX_GARROTE_FOLLOW_UP_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_S0ANBY_M6_ELECTROMAGNETIC_VORTEX_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_DIALYN_M6_AFTERTONE_ECHO_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_LIGHTER_MINDSCAPE_4_FRONTLINE_ENERGY_REGEN_SUPPLEMENT,
+  P2_4C_NANOKA_W_ENGINES_14162_SQUAD_DAMAGE_BONUS_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_NANGONGYU_M6_VIBRATO_MODIFIED_NONPHYSICAL_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_NANGONGYU_M6_VIBRATO_MODIFIED_PHYSICAL_SUPPLEMENT,
+  P2_4C_NANOKA_W_ENGINES_13112_RETALIATION_DEFENSE_DAMAGE_SUPPLEMENT,
+  P2_4C_NANOKA_W_ENGINES_14001_CRITICAL_HIT_BONUS_DAMAGE_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_BENBIGGER_M2_BLOCK_COUNTER_DEFENSE_DAMAGE_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_JANE_M6_PROFICIENCY_DAMAGE_SUPPLEMENT,
+  P2_4C_NANOKA_AGENTS_ALICE_M6_PROFICIENCY_DAMAGE_SUPPLEMENT,
+} from "./supplement-records.ts"
 
 /**
  * P4-1 一次性转录：revision 52 的 28 个未作者化机制选项。
@@ -1205,6 +1230,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1621:nanoka:m6-giant-windstorm",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_1621_M6_GIANT_WINDSTORM_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:Roxy",
@@ -1428,6 +1456,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1621:nanoka:additional-level-damage",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_1621_ADDITIONAL_LEVEL_DAMAGE_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:Roxy",
@@ -1737,6 +1768,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1621:nanoka:additional-weathered-direct-damage",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_1621_ADDITIONAL_WEATHERED_DIRECT_DAMAGE_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:Roxy",
@@ -2028,6 +2062,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1371:nanoka:m2-talisman-suppression-break-damage:mindscape:2",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_YIXUAN_M2_TALISMAN_SUPPRESSION_BREAK_DAMAGE_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:yixuan",
@@ -2198,6 +2235,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1371:nanoka:m1-falling-thunder-damage:mindscape:1",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_YIXUAN_M1_FALLING_THUNDER_DAMAGE_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:yixuan",
@@ -2367,6 +2407,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1371:nanoka:aa-falling-thunder-damage:mindscape:0",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_YIXUAN_AA_FALLING_THUNDER_DAMAGE_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:yixuan",
@@ -2693,6 +2736,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1621:nanoka:core-element-critical-damage",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_1621_CORE_ELEMENT_CRITICAL_DAMAGE_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:Roxy",
@@ -3244,6 +3290,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1621:nanoka:core-element-sharp-critical-damage",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_1621_CORE_ELEMENT_SHARP_CRITICAL_DAMAGE_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:Roxy",
@@ -3795,6 +3844,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1311:nanoka:m4-quick-assist-bonus-damage:mindscape:4",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_ASTRAYAO_M4_QUICK_ASSIST_BONUS_DAMAGE_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:astrayao",
@@ -3958,6 +4010,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1181:nanoka:m6-special-grenades:mindscape:6",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_GRACE_M6_SPECIAL_GRENADES_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:grace",
@@ -4327,6 +4382,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1181:nanoka:m6-ex-special-grenades:mindscape:6",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_GRACE_M6_EX_SPECIAL_GRENADES_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:grace",
@@ -4696,6 +4754,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1321:nanoka:m6-lunalux-garrote-follow-up:mindscape:6",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_EVELYN_M6_LUNALUX_GARROTE_FOLLOW_UP_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:evelyn",
@@ -4954,6 +5015,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1381:nanoka:m6-electromagnetic-vortex:mindscape:6",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_S0ANBY_M6_ELECTROMAGNETIC_VORTEX_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:s0anby",
@@ -5114,6 +5178,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1481:nanoka:m6-aftertone-echo:mindscape:6",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_DIALYN_M6_AFTERTONE_ECHO_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:dialyn",
@@ -5272,6 +5339,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1161:nanoka:mindscape-4-frontline-energy-regen:mindscape:4",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_LIGHTER_MINDSCAPE_4_FRONTLINE_ENERGY_REGEN_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:lighter",
@@ -5402,6 +5472,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "w-engine:14162:nanoka:squad-damage-bonus",
+    supplementalRecords: [
+      P2_4C_NANOKA_W_ENGINES_14162_SQUAD_DAMAGE_BONUS_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "w-engines:Crimson_Moon_Casket",
@@ -5566,6 +5639,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1511:nanoka:m6-vibrato-modified-nonphysical:mindscape:6",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_NANGONGYU_M6_VIBRATO_MODIFIED_NONPHYSICAL_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:nangongyu",
@@ -5753,6 +5829,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1511:nanoka:m6-vibrato-modified-physical:mindscape:6",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_NANGONGYU_M6_VIBRATO_MODIFIED_PHYSICAL_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:nangongyu",
@@ -5940,6 +6019,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "w-engine:13112:nanoka:retaliation-defense-damage",
+    supplementalRecords: [
+      P2_4C_NANOKA_W_ENGINES_13112_RETALIATION_DEFENSE_DAMAGE_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "w-engines:Big_Cylinder",
@@ -6341,6 +6423,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "w-engine:14001:nanoka:critical-hit-bonus-damage",
+    supplementalRecords: [
+      P2_4C_NANOKA_W_ENGINES_14001_CRITICAL_HIT_BONUS_DAMAGE_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "w-engines:Cannon_Rotor",
@@ -6550,6 +6635,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1121:nanoka:m2-block-counter-defense-damage:mindscape:2",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_BENBIGGER_M2_BLOCK_COUNTER_DEFENSE_DAMAGE_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:benbigger",
@@ -6709,6 +6797,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1261:nanoka:m6-proficiency-damage:mindscape:6",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_JANE_M6_PROFICIENCY_DAMAGE_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:jane",
@@ -6885,6 +6976,9 @@ export const P4_1_MECHANISM_AUTHORING_RECORDS = [
   },
   {
     key: "agent:1401:nanoka:m6-proficiency-damage:mindscape:6",
+    supplementalRecords: [
+      P2_4C_NANOKA_AGENTS_ALICE_M6_PROFICIENCY_DAMAGE_SUPPLEMENT,
+    ],
     entity: {
       sourceId: "nanoka-integrated",
       catalogEntityId: "agents:alice",

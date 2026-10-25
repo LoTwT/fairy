@@ -75,7 +75,7 @@ function supplementalIndex(coverage: StaticCoverageDocument): number {
 }
 
 describe("authoring supplemental records", () => {
-  it("declares exactly one real supplemental record matching the baseline", () => {
+  it("declares 24 real supplemental records matching the baseline", () => {
     expect(MIGRATED_AUTHORING_RECORDS).toHaveLength(49)
     const declared = MIGRATED_AUTHORING_RECORDS.flatMap((record) =>
       (record.supplementalRecords ?? []).map((supplement) => ({
@@ -83,18 +83,32 @@ describe("authoring supplemental records", () => {
         supplement,
       })),
     )
-    expect(declared).toHaveLength(1)
+    expect(declared).toHaveLength(24)
+    expect(
+      new Set(declared.map(({ supplement }) => supplement.supplementId)).size,
+    ).toBe(24)
     expect(declared[0]?.recordKey).toBe("miyabi-frostburn-main")
 
     const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
-    const baselineRecord = baseline.coverage.supplementalRecords.find(
-      (record) => record.supplementId === MIYABI_SUPPLEMENT_ID,
+    const baselineById = new Map(
+      baseline.coverage.supplementalRecords.map((record) => [
+        record.supplementId,
+        record,
+      ]),
     )
-    expect(baselineRecord).toBeDefined()
-    expect(declared[0]?.supplement).toEqual(baselineRecord)
+    const miyabiRecord = baselineById.get(MIYABI_SUPPLEMENT_ID)
+    expect(miyabiRecord).toBeDefined()
+    expect(declared[0]?.supplement).toEqual(miyabiRecord)
     expect(Object.keys(declared[0]?.supplement ?? {})).toEqual(
-      Object.keys(baselineRecord ?? {}),
+      Object.keys(miyabiRecord ?? {}),
     )
+
+    for (const { supplement } of declared) {
+      const baselineRecord = baselineById.get(supplement.supplementId)
+      expect(baselineRecord).toBeDefined()
+      expect(supplement).toEqual(baselineRecord)
+      expect(Object.keys(supplement)).toEqual(Object.keys(baselineRecord ?? {}))
+    }
   })
 
   it("replaces the real Miyabi supplemental record in place", () => {
@@ -103,9 +117,11 @@ describe("authoring supplemental records", () => {
     const baselineRecord = baseline.coverage.supplementalRecords[index]
     expect(baselineRecord).toEqual(MIYABI_SUPPLEMENT)
 
-    const records = attachSupplements(cloneRecords(), "miyabi-frostburn-main", [
-      MIYABI_SUPPLEMENT,
-    ])
+    const records = attachSupplements(
+      cloneRecordsWithoutSupplements(),
+      "miyabi-frostburn-main",
+      [MIYABI_SUPPLEMENT],
+    )
     const compilation = compileAuthoringRecords(records, baseline)
     const supplementalRecords =
       compilation.artifacts.coverage.supplementalRecords
@@ -151,9 +167,11 @@ describe("authoring supplemental records", () => {
       coverage: mutatedCoverage as unknown as StaticCoverageDocument,
     }
 
-    const records = attachSupplements(cloneRecords(), "miyabi-frostburn-main", [
-      MIYABI_SUPPLEMENT,
-    ])
+    const records = attachSupplements(
+      cloneRecordsWithoutSupplements(),
+      "miyabi-frostburn-main",
+      [MIYABI_SUPPLEMENT],
+    )
     const compilation = compileAuthoringRecords(records, mutatedBaseline)
     const compiled = compilation.artifacts.coverage.supplementalRecords[index]
     expect(compiled).toEqual(MIYABI_SUPPLEMENT)
