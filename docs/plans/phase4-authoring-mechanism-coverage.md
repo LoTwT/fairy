@@ -72,4 +72,5 @@
   代理人/驱动盘选项，[P2-4f](phase2-multi-variant-supplement-authoring.md) 又纳入 5 个
   多 variant 选项，[P2-4g](phase2-roxy-supplement-authoring.md) 又纳入 8 条洛克茜
   单规则选项，[P2-4h](phase2-multi-rule-supplement-authoring.md) 又纳入洛克茜初始
-  回能转化，当前剩余 4 条 integrated。
+  回能转化，[P2-4i](phase2-special-operation-supplement-authoring.md) 又补齐最后
+  4 条专用结算；integrated 补充记录已达到 68/68 全部作者化，剩 33 条 out-of-scope。

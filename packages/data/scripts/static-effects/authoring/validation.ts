@@ -58,6 +58,10 @@ const OPERATION_KINDS = [
   "stat-adjustment",
   "hit-adjustment",
   "astra-yao-m4-quick-assist-damage",
+  "lucy-guard-boar-inheritance",
+  "lucy-guard-boar-m6-damage",
+  "alice-core-periodic-damage",
+  "stun-damage-replacement",
   "guaranteed-critical",
 ] as const
 
@@ -118,6 +122,16 @@ const DAMAGE_KINDS = [
   "luminize",
 ] as const
 const TARGET_STATES = ["stunned", "not-stunned"] as const
+
+const LUCY_CHEER_MULTIPLIERS = {
+  "1": 1.4,
+  "2": 1.5,
+  "3": 1.6,
+  "4": 1.7,
+  "5": 1.8,
+  "6": 1.9,
+  "7": 2,
+} as const
 
 const DIRECT_STATS = new Set([
   "criticalRate",
@@ -776,6 +790,109 @@ function validateOperation(
       if (value !== undefined && value !== 3)
         collector.add(`${path}/multiplier/value`, "expected the literal 3")
     }
+    return
+  }
+  if (kind === "lucy-guard-boar-inheritance") {
+    const cheer = objectAt(
+      operation["cheerMultiplier"],
+      `${path}/cheerMultiplier`,
+      collector,
+    )
+    if (!cheer) return
+    enumAt(
+      cheer["kind"],
+      ["by-rank"] as const,
+      `${path}/cheerMultiplier/kind`,
+      collector,
+    )
+    enumAt(
+      cheer["rank"],
+      ["coreSkillLevel"] as const,
+      `${path}/cheerMultiplier/rank`,
+      collector,
+    )
+    unitAt(cheer["unit"], `${path}/cheerMultiplier/unit`, collector)
+    const values = objectAt(
+      cheer["values"],
+      `${path}/cheerMultiplier/values`,
+      collector,
+    )
+    if (values) {
+      for (const [rank, expected] of Object.entries(LUCY_CHEER_MULTIPLIERS)) {
+        const value = numberAt(
+          values[rank],
+          `${path}/cheerMultiplier/values/${rank}`,
+          collector,
+        )
+        if (value !== undefined && value !== expected)
+          collector.add(
+            `${path}/cheerMultiplier/values/${rank}`,
+            `expected the literal ${expected}`,
+          )
+      }
+      for (const rank of Object.keys(values))
+        if (!Object.hasOwn(LUCY_CHEER_MULTIPLIERS, rank))
+          collector.add(
+            `${path}/cheerMultiplier/values/${rank}`,
+            "unexpected core rank",
+          )
+    }
+    return
+  }
+  if (kind === "lucy-guard-boar-m6-damage") {
+    const multiplier = objectAt(
+      operation["multiplier"],
+      `${path}/multiplier`,
+      collector,
+    )
+    if (multiplier) {
+      unitAt(multiplier["unit"], `${path}/multiplier/unit`, collector)
+      const value = numberAt(
+        multiplier["value"],
+        `${path}/multiplier/value`,
+        collector,
+      )
+      if (value !== undefined && value !== 3)
+        collector.add(`${path}/multiplier/value`, "expected the literal 3")
+    }
+    enumAt(
+      operation["element"],
+      ["fire"] as const,
+      `${path}/element`,
+      collector,
+    )
+    enumAt(
+      operation["damageKind"],
+      ["regular"] as const,
+      `${path}/damageKind`,
+      collector,
+    )
+    enumAt(
+      operation["skillCategory"],
+      ["uncategorized"] as const,
+      `${path}/skillCategory`,
+      collector,
+    )
+    return
+  }
+  if (kind === "alice-core-periodic-damage") {
+    const ratio = objectAt(operation["ratio"], `${path}/ratio`, collector)
+    if (!ratio) return
+    enumAt(ratio["kind"], ["literal"] as const, `${path}/ratio/kind`, collector)
+    unitAt(ratio["unit"], `${path}/ratio/unit`, collector)
+    const value = numberAt(ratio["value"], `${path}/ratio/value`, collector)
+    if (value !== undefined && value !== 0.025)
+      collector.add(`${path}/ratio/value`, "expected the literal 0.025")
+    return
+  }
+  if (kind === "stun-damage-replacement") {
+    validateExpression(operation["bonus"], `${path}/bonus`, "ratio", collector)
+    validateExpression(
+      operation["maximumBonus"],
+      `${path}/maximumBonus`,
+      "ratio",
+      collector,
+    )
     return
   }
   if (kind === "guaranteed-critical")

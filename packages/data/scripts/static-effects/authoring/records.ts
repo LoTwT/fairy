@@ -7,6 +7,7 @@ import { P2_4E_AGENT_AUTHORING_RECORDS } from "./agent-supplement-records.ts"
 import { P2_4F_MULTI_VARIANT_AUTHORING_RECORDS } from "./multi-variant-supplement-records.ts"
 import { P2_4G_ROXY_AUTHORING_RECORDS } from "./roxy-supplement-records.ts"
 import { P2_4H_MULTI_RULE_AUTHORING_RECORDS } from "./multi-rule-supplement-records.ts"
+import { P2_4I_SPECIAL_OPERATION_AUTHORING_RECORDS } from "./special-operation-supplement-records.ts"
 import type {
   AuthoringOption,
   AuthoringSupplementalRecord,
@@ -2555,4 +2556,5 @@ export const MIGRATED_AUTHORING_RECORDS: readonly EffectAuthoringRecord[] = [
   ...P2_4F_MULTI_VARIANT_AUTHORING_RECORDS,
   ...P2_4G_ROXY_AUTHORING_RECORDS,
   ...P2_4H_MULTI_RULE_AUTHORING_RECORDS,
+  ...P2_4I_SPECIAL_OPERATION_AUTHORING_RECORDS,
 ]

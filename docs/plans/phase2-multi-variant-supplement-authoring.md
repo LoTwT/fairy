@@ -92,9 +92,10 @@
 ## 7. 后续状态
 
 [P2-4g](phase2-roxy-supplement-authoring.md) 已把洛克茜 8 条单规则选项纳入 authoring，
-[P2-4h](phase2-multi-rule-supplement-authoring.md) 又纳入洛克茜初始回能转化。
-当前已作者化补充记录为 64/68 条；剩余 4 条 integrated 记录仍缺专用 operation，33 条
-out-of-scope 记录仍由 converter 维护。本页的“剩余 13 条”保留 P2-4f 当时事实。
+[P2-4h](phase2-multi-rule-supplement-authoring.md) 又纳入洛克茜初始回能转化，
+[P2-4i](phase2-special-operation-supplement-authoring.md) 又补齐最后 4 条专用结算。
+**integrated 补充记录已达到 68/68 全部作者化**；33 条 out-of-scope 记录仍由 converter 维护。
+本页的“剩余 13 条”保留 P2-4f 当时事实。
 
 ## 8. 明确不改
 
