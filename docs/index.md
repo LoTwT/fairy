@@ -40,6 +40,7 @@
 - [Phase 2 P2-4e 单变体代理人/驱动盘补充选项](plans/phase2-agent-supplement-authoring.md)：把 10 条单变体代理人/驱动盘 integrated 补充记录对应的选项纳入 authoring，累计 50/68 条作者化、剩余 18 条 integrated / 33 条 out-of-scope，并修复驱动盘 `disc:` effectId 前缀校验。
 - [Phase 2 P2-4f 多 variant 补充选项](plans/phase2-multi-variant-supplement-authoring.md)：把 5 个 corrected/converted 双 variant 选项纳入 authoring，新增 `single-rule-per-variant` 分组，累计 55/68 条作者化、剩余 13 条 integrated / 33 条 out-of-scope。
 - [Phase 2 P2-4g 洛克茜补充选项](plans/phase2-roxy-supplement-authoring.md)：把 8 条洛克茜单规则选项纳入 authoring，新增 `target-resistance-reduction`、`stun-damage-adjustment` channel，累计 63/68 条作者化、剩余 5 条 integrated / 33 条 out-of-scope。
+- [Phase 2 P2-4h 洛克茜初始回能转化](plans/phase2-multi-rule-supplement-authoring.md)：把一个变体下两条规则纳入 authoring，新增 `multi-rule` 分组，累计 64/68 条作者化、剩余 4 条 integrated / 33 条 out-of-scope。
 - [静态计算端到端对照验收](plans/static-e2e-acceptance.md)：九个完整配装场景、固定上游独立参考、差异说明和追加案例格式。
 - [上游测试用例迁移复核](plans/upstream-test-backport.md)：2026-10-20 从 ZZZ-HP 与 ZZZ Calculator 迁移的回归用例、上游可复现性限制及未裁定的跨实现差异。
 - [ZZZ Calculator 对照验收](plans/zzz-calculator-comparison.md)：固定双方版本的公式、数据与上游测试对照，包含迁移到 Fairy 的离线样本、已确认差异及后续 PR 拆分。
