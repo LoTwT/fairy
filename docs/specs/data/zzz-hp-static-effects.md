@@ -1433,8 +1433,8 @@ revision 36 仅移除三条错误规则：883 规则、916 选项、117 目标�
 revision 37 保持 883 规则、916 选项、117 目标、191 目录实体、1290 固定来源记录与
 88 补充。只有此条从 converted 转为 corrected，原 raw/normalized 来源值保留；
 动作文件与技能 registry 不变，技能 manifest 联动目录摘要。
-永久验证见[来源守卫](../../../packages/data/test/pr22-hugo-stun-teammates-conversion.test.ts)、
-[七档人数矩阵与计算入口](../../../packages/data/test/pr22-hugo-stun-teammates-entry.test.ts)；
+revision 37 当时的验收入口为 `packages/data/test/pr22-hugo-stun-teammates-conversion.test.ts`
+与 `packages/data/test/pr22-hugo-stun-teammates-entry.test.ts`（均已移除）；
 [消费夹具](../../../packages/data/test/fixtures/hugo-stun-teammates-consumer.ts)覆盖安装包和浏览器。
 这些结果验证固定文本下的项目计算，不代表游戏实测或编队、战斗生命周期模拟。
 
@@ -2099,9 +2099,7 @@ C4 此时为实施／待协调者交付，不能据本节认定已合并。
 上游资源 `zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json`
 （SHA-256 `c9bc4cfdb0cf3117c56885e1afa4afd3ac9dc81aa0282119f0c64a27f19e5b01`）。
 
-- **来源边界**：补充层由 [d4-325.ts](../../../packages/data/scripts/static-effects/d4-325.ts)
-  按实体裁剪、[d4-merge.ts](../../../packages/data/scripts/static-effects/d4-merge.ts)
-  合并；每条规则/选项的 `zzz-hp` 引用版本改写为 `2628b32`，实体带
+- **来源边界**：补充层由 `d4-325.ts` 按实体裁剪、`d4-merge.ts` 合并（D4 层已移除）；每条规则/选项的 `zzz-hp` 引用版本改写为 `2628b32`，实体带
   `supplementProvenance`，不冒充 fac62407。`coverage.summary` 的固定源分母保持
   187/1,061/1,290，补充层在 `coverage.supplementalSource` 单独记账
   （1 实体、7 pack、26 条原始效果、20 条规则、36 个选项）。目录实体与选项进入正式制品，
@@ -2139,8 +2137,7 @@ C4 此时为实施／待协调者交付，不能据本节认定已合并。
   异放结算，留待 D4-1b 按 `anomaly-settlement-critical-damage` 绑定；M2 的[灼烧]持续
   时间 `+2` 秒被上游挂在 turbulence 上（`eff-mvdz21so-s2au9j`），不采信该编码。另有
   7 条资源、动作替换、抗打断、免死回复与每 8 秒独立火伤条款登记为不可选
-  `formula-out-of-scope` 入口，见
-  [d4-pheony.ts](../../../packages/data/scripts/static-effects/d4-pheony.ts)。
+  `formula-out-of-scope` 入口，见 `d4-pheony.ts`（D4 层已移除）。
 - **覆盖状态**：固定源 187/1,061/1,290 与 1,126 converted、143 corrected、21 unsupported
   不变；规则 899 → 919、选项 932 → 968。补充层 1 实体、7 pack、26 条原始效果、20 条规则、
   36 个选项；104 条 Nanoka 补充记录不变。
@@ -2151,7 +2148,7 @@ C4 此时为实施／待协调者交付，不能据本节认定已合并。
   `sha256:55a4abfe08dca0e193a52a64211dc3eccaed6e4d78ac6f3b99235ed7ad6aea9f`。
   `static-e2e.test.ts`、`static-team-differential.test.ts`、`zzz-calculator-snapshot-chain.test.ts`
   与三份比较夹具的当前快照钉锚同步更新；固定源参考位置与历史请求保持原样。
-- **独立验收**：data 侧 [d4-pheony-core.test.ts](../../../packages/data/test/d4-pheony-core.test.ts)
+- **独立验收**：data 侧 `d4-pheony-core.test.ts`（已移除）
   断言 12/16/17 条记录的累计完整状态与互斥组、四条异常通道与 M0/M1/M2 规则门槛、异常精通 85 与 M6
   独立、六个记录级 `semantic-conflict` 缺口、七条 `formula-out-of-scope` 缺口及
   补充来源 provenance；core 侧
@@ -2212,7 +2209,7 @@ Nanoka integrated 3.2。
   `sha256:af010a6d22d9be4f5d7c46df913af76d9c8cd61840fec9cca4f6753370fdd678`。
   三份比较夹具的当前快照钉锚与刷新链同步追加 revision 48 条目；固定源参考位置与
   历史请求保持原样。
-- **独立验收**：data 侧 [d4-pheony-m4.test.ts](../../../packages/data/test/d4-pheony-m4.test.ts)
+- **独立验收**：data 侧 `d4-pheony-m4.test.ts`（已移除）
   断言六条选项的归一倍率、M4 门槛、独立目标、零初始倍率、`anomaly-source`
   伤害项要求、3.3.12 中英文引用与旧 `eff-9` 不可选；core 侧
   [pr-d4b-pheony-m4.test.ts](../../../packages/core/test/effects/pr-d4b-pheony-m4.test.ts)
@@ -2250,7 +2247,7 @@ Nanoka integrated 3.2。
   技能清单只更新 `staticCatalogSha256`，计算快照更新为
   `sha256:7deb3558e409e99bf54486c57db8010559062477d916290ff9e186d200ec2d24`。
   三份比较夹具的当前快照钉锚与刷新链同步追加 revision 49 条目。
-- **独立验收**：data 侧 [d4-plume.test.ts](../../../packages/data/test/d4-plume.test.ts)
+- **独立验收**：data 侧 `d4-plume.test.ts`（已移除）
   断言五档精通/火伤选项、常量值、火元素条件、补充实体溯源与基础面板清单；core 侧
   [pr-d4c-plume.test.ts](../../../packages/core/test/effects/pr-d4c-plume.test.ts)
   断言五档精通读数、火伤只作用于火命中、精通与触发声明独立、绑定/选项精炼不匹配
@@ -2286,7 +2283,7 @@ Nanoka integrated 3.2。
   技能清单只更新 `staticCatalogSha256`，计算快照更新为
   `sha256:f0b69dbd03774adaf13c769e6738fda55afc1f80d6266701da3849cfb5c63f1d`。
   三份比较夹具的当前快照钉锚与刷新链同步追加 revision 50 条目。
-- **独立验收**：data 侧 [d4-severian.test.ts](../../../packages/data/test/d4-severian.test.ts)
+- **独立验收**：data 侧 `d4-severian.test.ts`（已移除）
   断言两个实体/不可选选项、17 条赛维里安技能、四实体基础面板与
   `externalDefPercent: 32` 清单；core 侧
   [pr-d4d-severian-grip.test.ts](../../../packages/core/test/effects/pr-d4d-severian-grip.test.ts)

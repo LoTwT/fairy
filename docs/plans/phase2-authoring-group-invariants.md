@@ -1,6 +1,6 @@
 # Phase 2 authoring 分组不变量与专用 operation 负例
 
-- 状态：已合并 #319（squash merge `4f69e508`）；基线 `origin/main @ 828ce5a9`（P2-4i #317 已合并）。
+- 状态：已合并 #319（squash merge `4f69e508`）；P2 follow-up 已合并 #321（`6a138847`）；基线 `origin/main @ 828ce5a9`（P2-4i #317 已合并）。
 - 分支：`data/authoring-group-invariants`。
 - 范围：只改 authoring 编译器、校验器与定向测试；不改 converter、正式 effects
   制品、`integrated`、`dist`、`snapshotId`、publication/manifests、公开 exports

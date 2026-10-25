@@ -4,18 +4,18 @@
 
 ## 范围与位置
 
-新增内部脚本目录 [`packages/data/scripts/static-effects/authoring/`](../../../packages/data/scripts/static-effects/authoring/)：
+新增内部脚本目录 [`packages/data/scripts/static-effects/authoring/`](../../packages/data/scripts/static-effects/authoring/)：
 
-| 文件                                                                                           | 职责                                                                                             |
-| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| [`types.ts`](../../../packages/data/scripts/static-effects/authoring/types.ts)                 | `EffectAuthoringRecord`、封闭 `operation` / `condition` / `mechanism` 联合、coverage/option 类型 |
-| [`ids.ts`](../../../packages/data/scripts/static-effects/authoring/ids.ts)                     | 复用正式 ID 语法的固定来源 / 稳定 ID 构造                                                        |
-| [`validation.ts`](../../../packages/data/scripts/static-effects/authoring/validation.ts)       | 不抛裸异常的运行时结构校验，返回带字段路径的问题                                                 |
-| [`compile.ts`](../../../packages/data/scripts/static-effects/authoring/compile.ts)             | 以正式三制品为基线，只替换被选中条目的编译器                                                     |
-| [`canonical.ts`](../../../packages/data/scripts/static-effects/authoring/canonical.ts)         | 稳定 canonicalization、集合索引与差异路径                                                        |
-| [`pilot-options.ts`](../../../packages/data/scripts/static-effects/authoring/pilot-options.ts) | 一次性转录的选中选项展示/证据元数据                                                              |
-| [`pilot-records.ts`](../../../packages/data/scripts/static-effects/authoring/pilot-records.ts) | 12 条作者记录（规则语义、状态归属、coverage 位置）                                               |
-| [`run-pilot.ts`](../../../packages/data/scripts/static-effects/authoring/run-pilot.ts)         | 编译到临时目录并与正式三制品比较的试点入口                                                       |
+| 文件                                                                                        | 职责                                                                                             |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| [`types.ts`](../../packages/data/scripts/static-effects/authoring/types.ts)                 | `EffectAuthoringRecord`、封闭 `operation` / `condition` / `mechanism` 联合、coverage/option 类型 |
+| [`ids.ts`](../../packages/data/scripts/static-effects/authoring/ids.ts)                     | 复用正式 ID 语法的固定来源 / 稳定 ID 构造                                                        |
+| [`validation.ts`](../../packages/data/scripts/static-effects/authoring/validation.ts)       | 不抛裸异常的运行时结构校验，返回带字段路径的问题                                                 |
+| [`compile.ts`](../../packages/data/scripts/static-effects/authoring/compile.ts)             | 以正式三制品为基线，只替换被选中条目的编译器                                                     |
+| [`canonical.ts`](../../packages/data/scripts/static-effects/authoring/canonical.ts)         | 稳定 canonicalization、集合索引与差异路径                                                        |
+| [`pilot-options.ts`](../../packages/data/scripts/static-effects/authoring/pilot-options.ts) | 一次性转录的选中选项展示/证据元数据                                                              |
+| [`pilot-records.ts`](../../packages/data/scripts/static-effects/authoring/pilot-records.ts) | 12 条作者记录（规则语义、状态归属、coverage 位置）                                               |
+| [`run-pilot.ts`](../../packages/data/scripts/static-effects/authoring/run-pilot.ts)         | 编译到临时目录并与正式三制品比较的试点入口                                                       |
 
 入口命令：
 
@@ -46,7 +46,7 @@ node --disable-warning=ExperimentalWarning \
 
 `coverage` 支持 `converted` / `corrected` / `unsupported`、`differenceIds`、`reason`、`explanation` 与来源位置。来源位置记录 pointer、rank、rankKind、stat、raw/normalized 值与规范化变更；完整状态派生规则和补充来源选项可以没有位置，此时编译器不替换 coverage 条目，只把状态与差异投影到目录变体。
 
-新增机制必须同时补 `types.ts`、`validation.ts`、`compile.ts` 与测试。运行时校验与 TypeScript 类型共同拒绝未知的 `operation` / `condition` / `mechanism`；类型反例见 [`static-effects-authoring.typecheck.ts`](../../../packages/data/test/static-effects-authoring.typecheck.ts)。
+新增机制必须同时补 `types.ts`、`validation.ts`、`compile.ts` 与测试。运行时校验与 TypeScript 类型共同拒绝未知的 `operation` / `condition` / `mechanism`；类型反例见 [`static-effects-authoring.typecheck.ts`](../../packages/data/test/static-effects-authoring.typecheck.ts)。
 
 ## 试点记录
 
@@ -88,11 +88,11 @@ node --disable-warning=ExperimentalWarning \
 - 输出目录不能等于或位于 `packages/data/definitions`、`integrated`、`dist`；写入前先校验，失败不创建目录。
 - 输出文件为 `static.json`、`static-catalog.json`、`static-coverage.json`，只写调用方指定的临时目录。
 
-ID 构造复用 [`convert.ts`](../../../packages/data/scripts/static-effects/convert.ts) 的 `idPart`。为复用该唯一实现，只把既有的内部常量改为导出；没有行为变化，也没有修改转换器逻辑。这是本 PR 对 `convert.ts` 的唯一改动。
+ID 构造复用 [`convert.ts`](../../packages/data/scripts/static-effects/convert.ts) 的 `idPart`。为复用该唯一实现，只把既有的内部常量改为导出；没有行为变化，也没有修改转换器逻辑。这是本 PR 对 `convert.ts` 的唯一改动。
 
 ## 语义等价 harness
 
-[`canonical.ts`](../../../packages/data/scripts/static-effects/authoring/canonical.ts) 不比较字节：
+[`canonical.ts`](../../packages/data/scripts/static-effects/authoring/canonical.ts) 不比较字节：
 
 - 对象键始终排序；
 - 数组默认按稳定序列化排序；

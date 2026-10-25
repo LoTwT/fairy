@@ -1,7 +1,7 @@
 # 转换器与作者层边界决策
 
-- 状态：已定案（2026-10-25）。
-- 基线：`origin/main @ f7cc871f`（#318、#319 已合并）。
+- 状态：已合并 #320（squash merge `b5cf0462`）；P2 follow-up #321（`6a138847`）。
+- 基线：`origin/main @ f7cc871f`（决策时；#318、#319 已合并）。
 - 规范入口：[ZZZ-HP 静态增益数据接入 · 转换器与作者层边界](../specs/data/zzz-hp-static-effects.md#转换器与作者层边界)。
 - 范围：只记录边界与后续工作方式；不改代码、正式 effects 制品、`integrated`、
   `dist`、`snapshotId`、publication/manifests 或公开 exports。

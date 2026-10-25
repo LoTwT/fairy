@@ -11,7 +11,7 @@
 
 ## 唯一记录
 
-[`records.ts`](../../../packages/data/scripts/static-effects/authoring/records.ts) 的 `MIYABI_FROSTBURN_SUPPLEMENT` 与 `miyabi-frostburn-main` 声明：
+[`records.ts`](../../packages/data/scripts/static-effects/authoring/records.ts) 的 `MIYABI_FROSTBURN_SUPPLEMENT` 与 `miyabi-frostburn-main` 声明：
 
 ```json
 {
@@ -52,8 +52,8 @@ Byte comparison: PASS
 
 ## 测试调整
 
-- [`static-effects-authoring-migration.test.ts`](../../../packages/data/test/static-effects-authoring-migration.test.ts)：`supplementalRecordIds` 现为该 `supplementId`，摘要为 `supplemental records: 1`；“未选中条目不变”改为排除已声明补充记录后逐条比较，其余 100 条保持基线值。
-- [`static-effects-authoring-supplemental.test.ts`](../../../packages/data/test/static-effects-authoring-supplemental.test.ts)：新增真实记录用例，断言 19 条作者记录恰好声明 1 条补充记录、挂在 `miyabi-frostburn-main` 上，并与基线条目逐字段及键序一致；“未声明时不变”用例改为先从克隆记录移除声明再断言。
+- [`static-effects-authoring-migration.test.ts`](../../packages/data/test/static-effects-authoring-migration.test.ts)：`supplementalRecordIds` 现为该 `supplementId`，摘要为 `supplemental records: 1`；“未选中条目不变”改为排除已声明补充记录后逐条比较，其余 100 条保持基线值。
+- [`static-effects-authoring-supplemental.test.ts`](../../packages/data/test/static-effects-authoring-supplemental.test.ts)：新增真实记录用例，断言 19 条作者记录恰好声明 1 条补充记录、挂在 `miyabi-frostburn-main` 上，并与基线条目逐字段及键序一致；“未声明时不变”用例改为先从克隆记录移除声明再断言。
 - 定向套件 3 个文件、44 个用例通过（18 试点 + 13 迁移 + 13 补充记录）；除“未声明时不变”用例预期计数为 0 外，未发现其他硬编码 `supplemental records: 0` 或 `supplementalRecordIds: []` 断言。
 
 ## 验证结果

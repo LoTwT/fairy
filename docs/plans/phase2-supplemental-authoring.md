@@ -12,9 +12,9 @@
 
 ## 类型与校验
 
-[`types.ts`](../../../packages/data/scripts/static-effects/authoring/types.ts) 新增 `AuthoringSupplementalRecord`，`AuthoringRecordBase` 增加可选 `supplementalRecords`。补充记录挂在声明它的作者记录上，因此归属关系与 `optionId` 一致性都由该记录决定；作者层不表达 `boundary`，其形状要求 `optionId` 与 `supportedRanks` 必填。`compile.ts` 的本地读取类型仍允许这两个字段缺省，因为正式 coverage 可能包含没有它们的 `boundary` 记录。
+[`types.ts`](../../packages/data/scripts/static-effects/authoring/types.ts) 新增 `AuthoringSupplementalRecord`，`AuthoringRecordBase` 增加可选 `supplementalRecords`。补充记录挂在声明它的作者记录上，因此归属关系与 `optionId` 一致性都由该记录决定；作者层不表达 `boundary`，其形状要求 `optionId` 与 `supportedRanks` 必填。`compile.ts` 的本地读取类型仍允许这两个字段缺省，因为正式 coverage 可能包含没有它们的 `boundary` 记录。
 
-[`validation.ts`](../../../packages/data/scripts/static-effects/authoring/validation.ts) 增加：
+[`validation.ts`](../../packages/data/scripts/static-effects/authoring/validation.ts) 增加：
 
 - 必填字段的逐项类型校验：`supplementId`、`source`、`optionId`、`supportedRanks`、`computationTarget` 必须是非空字符串；`kind`、`status` 必须在封闭词表内。
 - `supplementId` 在整批作者输入中全局唯一；重复项报告到 `[记录下标]/supplementalRecords[下标]/supplementId`。
@@ -22,11 +22,11 @@
 - `effectIds` 可选；声明时逐项要求非空字符串。是否存在于编译结果或基线属于编译期检查，因为结构校验没有基线上下文。
 - 缺失字段由既有字段路径校验负责，例如缺少 `computationTarget` 报 `[记录下标]/supplementalRecords[0]/computationTarget: expected a string`。
 
-[`static-effects-authoring.typecheck.ts`](../../../packages/data/test/static-effects-authoring.typecheck.ts) 增加未知 `kind`、未知 `status`、缺少 `computationTarget` 与缺少 `optionId` 的类型反例，并断言作者形状可赋值给正式补充记录类型。
+[`static-effects-authoring.typecheck.ts`](../../packages/data/test/static-effects-authoring.typecheck.ts) 增加未知 `kind`、未知 `status`、缺少 `computationTarget` 与缺少 `optionId` 的类型反例，并断言作者形状可赋值给正式补充记录类型。
 
 ## 编译
 
-[`compile.ts`](../../../packages/data/scripts/static-effects/authoring/compile.ts) 新增导出的 `replaceSupplementalRecords(baseline, compiled)`：
+[`compile.ts`](../../packages/data/scripts/static-effects/authoring/compile.ts) 新增导出的 `replaceSupplementalRecords(baseline, compiled)`：
 
 1. 按 `supplementId` 建立作者索引；重复 ID 直接抛错。
 2. 遍历基线数组，命中时原位替换；保留数组顺序，并用基线条目的键序写出替换对象，保证字节比较仍是有效门禁。
@@ -39,7 +39,7 @@
 
 ## 测试
 
-新增 [`static-effects-authoring-supplemental.test.ts`](../../../packages/data/test/static-effects-authoring-supplemental.test.ts)，12 个用例（[P2-4b-lite](phase2-miyabi-supplement-migration.md) 新增真实记录用例后为 13 个）：
+新增 [`static-effects-authoring-supplemental.test.ts`](../../packages/data/test/static-effects-authoring-supplemental.test.ts)，12 个用例（[P2-4b-lite](phase2-miyabi-supplement-migration.md) 新增真实记录用例后为 13 个）：
 
 | 用例                         | 断言                                                                                                         |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------ |

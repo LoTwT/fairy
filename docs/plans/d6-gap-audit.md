@@ -3,7 +3,7 @@
 日期：2026-10-22
 
 本页记录 D6-2 oracle 补齐后的剩余缺口审计。逐条权威数据仍是
-[静态覆盖报告](../../../packages/data/definitions/effects/static-coverage.json)；
+[静态覆盖报告](../../packages/data/definitions/effects/static-coverage.json)；
 本页只记录分类、决定和后续触发条件，不复制每条记录的完整说明。
 
 ## 当前计数
