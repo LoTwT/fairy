@@ -13,6 +13,7 @@ import type {
   RuleSet,
   StaticCatalogOption,
   StaticCatalogVariant,
+  StaticCatalogVariantMechanism,
   StaticEffectCatalog,
 } from "@randomplay/shared"
 import { stableStringify } from "./canonical.ts"
@@ -514,6 +515,7 @@ const EXPRESSIBLE_RULE_FIELDS = new Set([
   "beneficiary",
   "when",
   "operation",
+  "uniqueness",
 ])
 
 /**
@@ -536,10 +538,13 @@ function assertSelectedEntriesExpressible(
         `Selected option ${optionId} is not present in the baseline`,
       )
     const mechanismKind = group.records[0]?.mechanism.kind
-    const expectedMechanism =
-      mechanismKind === "independent-settlement"
-        ? independentSettlementFields(group).mechanism
-        : undefined
+    const authoringOption = group.records[0]?.option
+    if (authoringOption === undefined)
+      throw new Error(`Empty authoring group: ${optionId}`)
+    if (authoringOption.variants.length !== option.variants.length)
+      throw new Error(
+        `Authoring option ${optionId} has ${authoringOption.variants.length} variants, but the baseline has ${option.variants.length}`,
+      )
     for (const field of Object.keys(option))
       if (!EXPRESSIBLE_OPTION_FIELDS.has(field))
         throw new Error(
@@ -551,31 +556,41 @@ function assertSelectedEntriesExpressible(
           throw new Error(
             `Authoring layer cannot express baseline option ${optionId} variant field ${field}`,
           )
+      const authoringVariant = authoringOption.variants[variantIndex]
+      if (authoringVariant === undefined)
+        throw new Error(
+          `Authoring option ${optionId} is missing baseline variant ${variantIndex}`,
+        )
+      const expectedMechanism = authoringVariantMechanism(
+        group,
+        authoringVariant,
+        mechanismKind,
+      )
       const baselineMechanism = variant.mechanism
-      // 作者记录决定编译时写入哪个 arm；基线变体必须与作者层的 arm 和
-      // 全部字段一致，否则 compileVariant 会静默丢弃 completeState、
+      // 作者变体声明决定编译时写入哪个 arm；基线变体必须与作者层的
+      // arm 和全部字段一致，否则 compileVariant 会静默丢弃 completeState、
       // isolateDamageItems 或额外的 damageItemRequirements。
       if (expectedMechanism === undefined) {
         if (baselineMechanism !== undefined)
           throw new Error(
-            `Authoring layer only models the independent-settlement variant mechanism; baseline option ${optionId} variant ${variantIndex} declares ${baselineMechanism.kind}`,
+            `Baseline variant ${variantIndex} of option ${optionId} declares ${baselineMechanism.kind}, but its authoring option does not declare a catalog mechanism`,
           )
         continue
       }
       if (baselineMechanism === undefined)
         throw new Error(
-          `Baseline variant ${variantIndex} of option ${optionId} must declare an independent-settlement mechanism to match its authoring records`,
+          `Baseline variant ${variantIndex} of option ${optionId} must declare ${expectedMechanism.kind} to match its authoring option`,
         )
       if (baselineMechanism.kind !== expectedMechanism.kind)
         throw new Error(
-          `Baseline variant ${variantIndex} of option ${optionId} declares ${baselineMechanism.kind} mechanism, but its authoring records only express independent-settlement`,
+          `Baseline variant ${variantIndex} of option ${optionId} declares ${baselineMechanism.kind}, but its authoring option declares ${expectedMechanism.kind}`,
         )
       if (
         stableStringify(baselineMechanism) !==
         stableStringify(expectedMechanism)
       )
         throw new Error(
-          `Baseline variant ${variantIndex} of option ${optionId} mechanism cannot be expressed by its authoring records: baseline ${stableStringify(baselineMechanism)}, expected ${stableStringify(expectedMechanism)}`,
+          `Baseline variant ${variantIndex} of option ${optionId} mechanism cannot be expressed by its authoring option: baseline ${stableStringify(baselineMechanism)}, expected ${stableStringify(expectedMechanism)}`,
         )
     }
   }
@@ -695,7 +710,10 @@ function compileOptionGroup(
   compiledOptions.set(option.optionId, option)
 
   for (const record of group.records) {
-    if (record.mechanism.kind === "independent-settlement") {
+    if (
+      record.mechanism.kind === "independent-settlement" &&
+      record.mechanism.skillTarget !== undefined
+    ) {
       const target = record.mechanism.skillTarget
       const existing = compiledTargets.get(target.targetId)
       if (existing && stableStringify(existing) !== stableStringify(target))
@@ -752,6 +770,9 @@ function compileRule(record: EffectAuthoringRuleRecord): ContributionRule {
     beneficiary: record.beneficiary,
     when: record.when,
     operation: record.operation,
+    ...(record.uniqueness === undefined
+      ? {}
+      : { uniqueness: record.uniqueness }),
   } as ContributionRule
 }
 
@@ -875,10 +896,7 @@ function compileVariant(
     for (const differenceId of record.coverage.differenceIds)
       if (!differences.includes(differenceId)) differences.push(differenceId)
 
-  const independent =
-    mechanismKind === "independent-settlement"
-      ? independentSettlementFields(group)
-      : {}
+  const mechanism = authoringVariantMechanism(group, variant, mechanismKind)
 
   return {
     ...(variant.target === undefined ? {} : { target: variant.target }),
@@ -892,7 +910,7 @@ function compileVariant(
     inputs: variant.inputs,
     differences,
     applicability: variant.applicability,
-    ...independent,
+    ...(mechanism === undefined ? {} : { mechanism }),
   } as StaticCatalogVariant
 }
 
@@ -911,6 +929,58 @@ function singleCoverageField(
       `Option ${group.optionId} has conflicting coverage ${field} values`,
     )
   return [...values][0]
+}
+
+/**
+ * 解析作者变体要写入目录的 mechanism。显式 catalogMechanism 是完整来源；
+ * 省略时保留 P4-2 的最小兼容：independent-settlement 由记录级 damageItem
+ * 推导，其余分组不写 mechanism。independent-settlement 的显式 payload 必须
+ * 与记录级 damageItem/exclusiveDamageItem 一致，避免两处声明漂移。
+ */
+function authoringVariantMechanism(
+  group: OptionGroup,
+  variant: AuthoringOptionVariant,
+  mechanismKind: EffectAuthoringRecord["mechanism"]["kind"],
+): StaticCatalogVariantMechanism | undefined {
+  const catalogMechanism = variant.catalogMechanism
+  if (catalogMechanism === undefined) {
+    return mechanismKind === "independent-settlement"
+      ? independentSettlementFields(group).mechanism
+      : undefined
+  }
+  const [first] = group.records
+  if (!first) throw new Error(`Empty authoring group: ${group.optionId}`)
+  if (mechanismKind === "independent-settlement") {
+    if (first.mechanism.kind !== "independent-settlement")
+      throw new Error(
+        `Option ${group.optionId} cannot combine a catalog mechanism with a non-independent authoring record`,
+      )
+    if (catalogMechanism.kind !== "independent-settlement")
+      throw new Error(
+        `Option ${group.optionId} authoring record is independent-settlement, but its catalog mechanism is ${catalogMechanism.kind}`,
+      )
+    const [requirement] = catalogMechanism.damageItemRequirements
+    if (
+      catalogMechanism.damageItemRequirements.length !== 1 ||
+      requirement === undefined ||
+      stableStringify(requirement) !==
+        stableStringify(first.mechanism.damageItem)
+    )
+      throw new Error(
+        `Option ${group.optionId} catalog mechanism damageItemRequirements must equal its authoring damageItem`,
+      )
+    const authoringIsolate = first.mechanism.exclusiveDamageItem === true
+    const catalogIsolate = catalogMechanism.isolateDamageItems === true
+    if (authoringIsolate !== catalogIsolate)
+      throw new Error(
+        `Option ${group.optionId} catalog mechanism isolateDamageItems must match authoring exclusiveDamageItem`,
+      )
+  } else if (catalogMechanism.kind === "independent-settlement") {
+    throw new Error(
+      `Option ${group.optionId} authoring record is ${mechanismKind}, but its catalog mechanism is independent-settlement`,
+    )
+  }
+  return catalogMechanism
 }
 
 function independentSettlementFields(

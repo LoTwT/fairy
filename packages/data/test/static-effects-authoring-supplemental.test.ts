@@ -76,7 +76,7 @@ function supplementalIndex(coverage: StaticCoverageDocument): number {
 
 describe("authoring supplemental records", () => {
   it("declares exactly one real supplemental record matching the baseline", () => {
-    expect(MIGRATED_AUTHORING_RECORDS).toHaveLength(19)
+    expect(MIGRATED_AUTHORING_RECORDS).toHaveLength(49)
     const declared = MIGRATED_AUTHORING_RECORDS.flatMap((record) =>
       (record.supplementalRecords ?? []).map((supplement) => ({
         recordKey: record.key,

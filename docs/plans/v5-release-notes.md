@@ -2,7 +2,7 @@
 
 - 状态：草稿，未发布；等待发布决策。
 - 日期：2026-10-24
-- 基线：`origin/main @ a74f340f`
+- 基线：`origin/main @ 36a8e799`
 - 范围：0.5.0 的公开契约变更、制品事实、验证证据、已知限制与发布检查清单。
 - 非范围：发布、打 tag、修改版本号、发布 npm 制品、创建 GitHub Release。
 
@@ -69,7 +69,7 @@
 - **`@randomplay/core`**：类型、目录解析/校验与运行时执行改为按 `mechanism.kind` 分派；错误指针落到
   具体 arm 字段。旧字段输入被拒绝。
 - **`@randomplay/data`**：`./definitions/effects/static-catalog.json` 子路径的消费方按新形状读取；
-  authoring 编译器只接受 `mechanism`，其中 `independent-settlement` 是本批唯一可作者化的 arm。
+  authoring 编译器只接受 `mechanism`；P4-1 后 8 个 arm 与全部 30 个机制变体均可作者化。
 - **不受影响**：规则层 `activation` / `triggered` / `continuous` / `instant` / `modification`、
   目录根部 `mechanisms` envelope、`variant.target` / `status` / `reason` / `explanation`、
   `integrated` 归档与 `publication.json`。
@@ -95,17 +95,17 @@
 
 | 入口                                                                                  | 结果                                                                                   |
 | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `pnpm --filter @randomplay/data authoring:verify`                                     | 19 records、1 supplement、0 differences、三制品字节一致                                |
-| `pnpm --filter @randomplay/data check:source`                                         | 通过（108 files、4,719 tests）                                                         |
+| `pnpm --filter @randomplay/data authoring:verify`                                     | 49 records、45 options、19 skill targets、1 supplement、0 differences、三制品字节一致  |
+| `pnpm --filter @randomplay/data check:source`                                         | 通过（108 files、4,721 tests）                                                         |
 | `pnpm --filter @randomplay/core build && pnpm --filter @randomplay/core check:source` | 通过（98 files、5,696 passed、24 skipped）                                             |
 | `pnpm --filter @randomplay/data verify:pack`                                          | 通过（2 tests）                                                                        |
 | `pnpm --filter @randomplay/core verify:pack`                                          | 通过（1 test）                                                                         |
 | `pnpm check:quality`                                                                  | 通过                                                                                   |
-| CI                                                                                    | #303、#304、#305、#306 各 6/6 项检查通过                                               |
+| CI                                                                                    | #303、#304、#305、#306、#309 各 6/6 项检查通过                                         |
 | 数据管理状态                                                                          | `phase: idle`；`indexSha256` `d68ad1d8…` 与 `packages/data/integrated/index.json` 一致 |
 
-> 2026-10-24 P0/P1 硬化后复验：data 108 files / 4,719 tests；core 98 files / 5,696 passed + 24 skipped；
-> `authoring:verify` 字节一致、`check:quality` 通过。
+> 2026-10-24 P0/P1/P4-1 后复验：data 108 files / 4,721 tests；core 98 files / 5,696 passed + 24 skipped；
+> `authoring:verify` 49 records 字节一致、`check:quality` 通过。
 
 相关 PR：
 
@@ -115,6 +115,7 @@
 | #304 | P4-2 hardening：基线 arm 校验、逐制品版本、叶子错误指针 | `ee85d2e6` |
 | #305 | CI 显式校验 authoring 等价性与制品依赖图                | `4822a054` |
 | #306 | PR04 重型用例拆分，稳定 core 测试                       | `a74f340f` |
+| #309 | 机制诊断、authoring guard 与文档收口                    | `36a8e799` |
 
 数据管理状态的维护流程见[来源数据整合规范](../specs/data/integration.md#数据管理状态的同步维护)。
 本 PR 只改文档，不修改 `integrated`、definitions、`dist` 或管理记录。
@@ -123,11 +124,12 @@
 
 - 67 条 integrated 补充记录仍由 converter 生成，尚未进入 authoring。
 - 33 条 out-of-scope 补充记录带 `reason`，仍不可作者化。
-- 10 个机制变体不在当前 19 条作者记录内；本批只支持 `independent-settlement` 的最小 authoring。
-- P4-1（其余机制 arm 的作者层覆盖）与 P4-3（目录根部 `mechanisms` envelope）后置。
+- P4-3（目录根部 `mechanisms` envelope）后置。
 - 规则层 `activation` / `triggered` / `continuous` / `instant` / `modification` 收敛（P4-5）不做；Phase 3 公共 manifest 外壳继续暂缓。
 
-以上限制沿用 [P4-2 计划第 4 节](phase4-catalog-mechanism-union.md#4-生成与作者层)、
+P4-1 已完成：8 个机制 arm 与全部 30 个机制变体均纳入 authoring，见
+[P4-1 实施记录](phase4-authoring-mechanism-coverage.md)。其余限制沿用
+[P4-2 计划第 4 节](phase4-catalog-mechanism-union.md#4-生成与作者层)、
 [第 9 节](phase4-catalog-mechanism-union.md#9-后置事项)与 [P2-4b-lite 记录](phase2-miyabi-supplement-migration.md)。
 
 ## 8. 发布检查清单
@@ -145,6 +147,7 @@
 
 ## 9. 相关文档
 
+- [P4-1 authoring 机制覆盖](phase4-authoring-mechanism-coverage.md)：8 个 arm、30 个变体与字节等价验证。
 - [P4-2 目录变体机制判别联合](phase4-catalog-mechanism-union.md)：正式形状、迁移映射、验证与回滚边界。
 - [包边界与联动发布](../specs/packages.md)：同版发布规则、安装与发布操作。
 - [静态效果数据接入](../specs/data/zzz-hp-static-effects.md)：当前覆盖事实与规则修订。

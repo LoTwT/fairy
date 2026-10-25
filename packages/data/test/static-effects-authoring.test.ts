@@ -19,6 +19,7 @@ import {
   unsupportedRecordCount,
 } from "../scripts/static-effects/authoring/compile.ts"
 import { fixedSourceIds } from "../scripts/static-effects/authoring/ids.ts"
+import { P4_1_MECHANISM_AUTHORING_RECORDS } from "../scripts/static-effects/authoring/mechanism-records.ts"
 import { PILOT_AUTHORING_RECORDS } from "../scripts/static-effects/authoring/pilot-records.ts"
 import type {
   EffectAuthoringRecord,
@@ -130,6 +131,28 @@ describe("authoring pilot records", () => {
     expect(result.ok).toBe(false)
     if (result.ok) return
     expect(result.issues.some((issue) => issue.path.endsWith(path))).toBe(true)
+  })
+
+  it("rejects an unknown field inside an explicit catalog mechanism", () => {
+    const [first] = P4_1_MECHANISM_AUTHORING_RECORDS
+    if (!first) throw new Error("P4-1 records are empty")
+    const mutated = structuredClone(first) as unknown as {
+      option: {
+        variants: Array<{ catalogMechanism?: Record<string, unknown> }>
+      }
+    }
+    const variant = mutated.option.variants[0]
+    if (!variant?.catalogMechanism)
+      throw new Error("Expected a catalog mechanism")
+    variant.catalogMechanism["unexpected"] = true
+    const result = validateAuthoringRecords([mutated])
+    expect(result.ok).toBe(false)
+    if (result.ok) return
+    expect(
+      result.issues.some((issue) =>
+        issue.path.endsWith("/catalogMechanism/unexpected"),
+      ),
+    ).toBe(true)
   })
 
   it("rejects unsupported coverage without a migration mechanism", () => {
@@ -365,7 +388,7 @@ describe("authoring compiler and semantic harness", () => {
         ...baseline,
         catalog: catalog as unknown as typeof baseline.catalog,
       }),
-    ).toThrow(/only models the independent-settlement variant mechanism/u)
+    ).toThrow(/does not declare a catalog mechanism/u)
   })
 
   it("rejects an independent-settlement baseline variant with another arm", () => {
@@ -381,7 +404,9 @@ describe("authoring compiler and semantic harness", () => {
     )
     expect(() =>
       compileAuthoringArtifacts(PILOT_AUTHORING_RECORDS, baseline),
-    ).toThrow(/declares complete-state mechanism/u)
+    ).toThrow(
+      /declares complete-state, but its authoring option declares independent-settlement/u,
+    )
   })
 
   it("rejects an independent-settlement baseline variant without a mechanism", () => {
@@ -395,7 +420,7 @@ describe("authoring compiler and semantic harness", () => {
     )
     expect(() =>
       compileAuthoringArtifacts(PILOT_AUTHORING_RECORDS, baseline),
-    ).toThrow(/must declare an independent-settlement mechanism/u)
+    ).toThrow(/must declare independent-settlement/u)
   })
 
   it("rejects baseline mechanism fields the authoring record cannot express", () => {
