@@ -34,7 +34,7 @@
 - [Phase 2 P2-2 小批量 corrected 正式迁移](plans/phase2-corrected-migration.md)：8 条 corrected 记录的正式 authoring 输入、生成链覆盖、语义/字节验收、fallback 与数据管理状态。
 - [Phase 2 P2-3 authoring 覆盖扩展](plans/phase2-authoring-coverage.md)：正式记录扩展到 19 条、complete-state/independent-settlement 与新增 corrected、键序对齐、语义/字节验收与剩余未迁移项。
 - [Phase 2 P2-4a 补充记录作者层](plans/phase2-supplemental-authoring.md)：`supplementalRecords` 的封闭作者形状、运行时校验、按 `supplementId` 原位替换、针对性等价测试与“能力具备但不迁移数据”的边界。
-- [Phase 2 P2-4b-lite 首条真实补充记录迁移](plans/phase2-miyabi-supplement-migration.md)：只迁移 `nanoka:agents:miyabi:frostburn-break-damage` 一条、作者声明位置、逐字段基线对照、字节验收与剩余 67 条 integrated / 33 条 boundary 的限制。
+- [Phase 2 P2-4b-lite 首条真实补充记录迁移](plans/phase2-miyabi-supplement-migration.md)：只迁移 `nanoka:agents:miyabi:frostburn-break-damage` 一条、作者声明位置、逐字段基线对照、字节验收与剩余 67 条 integrated / 33 条 out-of-scope 的限制。
 - [Phase 2 P2-4c 已有作者选项的补充记录批量迁移](plans/phase2-supplement-authoring-batch.md)：把 23 条已有作者选项的 integrated 补充记录迁入作者层，累计 24 条作者化、剩余 44 条 integrated / 33 条 out-of-scope，三制品字节不变。
 - [Phase 2 P2-4d 音擎补充选项批量作者化](plans/phase2-w-engine-supplement-authoring.md)：把 16 条音擎 integrated 补充记录对应的选项纳入 authoring，累计 40/68 条作者化、剩余 28 条 integrated / 33 条 out-of-scope，三制品字节不变。
 - [Phase 2 P2-4e 单变体代理人/驱动盘补充选项](plans/phase2-agent-supplement-authoring.md)：把 10 条单变体代理人/驱动盘 integrated 补充记录对应的选项纳入 authoring，累计 50/68 条作者化、剩余 18 条 integrated / 33 条 out-of-scope，并修复驱动盘 `disc:` effectId 前缀校验。
