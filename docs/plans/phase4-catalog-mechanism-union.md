@@ -184,7 +184,7 @@ shared 类型、core 校验/执行、converter/supplements、三个 effects 制�
 
 ## 10. P4-2 hardening
 
-- 状态：已合并 #304（merge commit `ee85d2e6`）；hardening 基线 `origin/main @ 1b111b58`。
+- 状态：已合并 #304（squash merge `ee85d2e6`）；hardening 基线 `origin/main @ 1b111b58`。
 
 #303 合并后 review 发现三处安全/诊断缺口；本 follow-up 只修复这些缺口，不改变迁移
 结果（旧目录机械映射后与新目录仍然完全相等），也不改正式 effects 制品、`integrated`、

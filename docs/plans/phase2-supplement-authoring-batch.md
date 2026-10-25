@@ -1,6 +1,6 @@
 # Phase 2 P2-4c：已有作者选项的补充记录批量迁移
 
-- 状态：已实现；基线 `origin/main @ 29ab5777`（P4-1 #310 已合并）。
+- 状态：已合并 #311（squash merge `6c2177b3`）；基线 `origin/main @ 29ab5777`（P4-1 #310 已合并）。
 - 分支：`data/p2-4c-supplement-authoring`。
 - 范围：只把已有作者选项对应的 23 条 `integrated` 补充记录迁入作者层；
   不改 converter、正式 effects 制品、`integrated`、`dist`、`snapshotId`、

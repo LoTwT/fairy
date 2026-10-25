@@ -1,6 +1,6 @@
 # Phase 2 P2-4f：多 variant 补充选项
 
-- 状态：已实现；基线 `origin/main @ b20de333`（P2-4e #313 已合并）。
+- 状态：已合并 #314（squash merge `a9eeeaa4`）；基线 `origin/main @ b20de333`（P2-4e #313 已合并）。
 - 分支：`data/p2-4f-multi-variant-supplements`。
 - 范围：把 5 个 corrected/converted 双 variant 选项纳入 authoring；不改 converter、
   正式 effects 制品、`integrated`、`dist`、`snapshotId`、publication/manifests、

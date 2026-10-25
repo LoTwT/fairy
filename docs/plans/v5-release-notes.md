@@ -1,8 +1,8 @@
 # v5（0.5.0）发布说明草稿
 
-- 状态：草稿，未发布；等待发布决策。
+- 状态：草稿，未发布；用户已明确暂缓发布，等待后续授权。
 - 日期：2026-10-25
-- 基线：`origin/main @ 8d6935a5`
+- 基线：`origin/main @ 828ce5a9`
 - 范围：0.5.0 的公开契约变更、制品事实、验证证据、已知限制与发布检查清单。
 - 非范围：发布、打 tag、修改版本号、发布 npm 制品、创建 GitHub Release。
 
@@ -101,16 +101,16 @@
 
 ## 6. 验证证据
 
-| 入口                                                                                  | 结果                                                                                         |
-| ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `pnpm --filter @randomplay/data authoring:verify`                                     | 99 records、89 options、24 coverage positions、68 supplements、0 differences、三制品字节一致 |
-| `pnpm --filter @randomplay/data check:source`                                         | 通过（108 files、4,725 tests）                                                               |
-| `pnpm --filter @randomplay/core build && pnpm --filter @randomplay/core check:source` | 通过（98 files、5,696 passed、24 skipped）                                                   |
-| `pnpm --filter @randomplay/data verify:pack`                                          | 通过（2 tests）                                                                              |
-| `pnpm --filter @randomplay/core verify:pack`                                          | 通过（1 test）                                                                               |
-| `pnpm check:quality`                                                                  | 通过                                                                                         |
-| CI                                                                                    | #303、#304、#305、#306、#309、#310、#311、#312、#313、#314、#315、#316 各 6/6 项检查通过     |
-| 数据管理状态                                                                          | `phase: idle`；`indexSha256` `d68ad1d8…` 与 `packages/data/integrated/index.json` 一致       |
+| 入口                                                                                  | 结果                                                                                           |
+| ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `pnpm --filter @randomplay/data authoring:verify`                                     | 99 records、89 options、24 coverage positions、68 supplements、0 differences、三制品字节一致   |
+| `pnpm --filter @randomplay/data check:source`                                         | 通过（108 files、4,725 tests）                                                                 |
+| `pnpm --filter @randomplay/core build && pnpm --filter @randomplay/core check:source` | 通过（98 files、5,696 passed、24 skipped）                                                     |
+| `pnpm --filter @randomplay/data verify:pack`                                          | 通过（2 tests）                                                                                |
+| `pnpm --filter @randomplay/core verify:pack`                                          | 通过（1 test）                                                                                 |
+| `pnpm check:quality`                                                                  | 通过                                                                                           |
+| CI                                                                                    | #303、#304、#305、#306、#309、#310、#311、#312、#313、#314、#315、#316、#317 各 6/6 项检查通过 |
+| 数据管理状态                                                                          | `phase: idle`；`indexSha256` `d68ad1d8…` 与 `packages/data/integrated/index.json` 一致         |
 
 > 2026-10-25 P0/P1/P4-1/P2-4c/P2-4d/P2-4e/P2-4f/P2-4g/P2-4h/P2-4i 后复验：data 108 files / 4,725 tests；core 98 files / 5,696 passed + 24 skipped；
 > `authoring:verify` 99 records / 68 supplements 字节一致、`check:quality` 通过。
@@ -131,14 +131,16 @@
 | #314 | P2-4f 多 variant 补充选项                               | `a9eeeaa4` |
 | #315 | P2-4g 洛克茜补充选项                                    | `015833b1` |
 | #316 | P2-4h 洛克茜初始回能转化                                | `8d6935a5` |
+| #317 | P2-4i 最后 4 条专用结算补充选项                         | `828ce5a9` |
 
 数据管理状态的维护流程见[来源数据整合规范](../specs/data/integration.md#数据管理状态的同步维护)。
-本 PR 只改文档，不修改 `integrated`、definitions、`dist` 或管理记录。
+本次收尾只改文档，不修改 `integrated`、definitions、`dist` 或管理记录。
 
 ## 7. 已知限制
 
-- 68 条 integrated 补充记录已全部作者化；固定来源 records/variants 仍由 converter
-  产生，authoring 通过字节等价验证与它们保持一致。
+- 68 条 integrated 补充记录已全部作者化；作者层当前覆盖 99/931 条规则、89/986 个
+  选项。固定来源 records/variants 与 33 条 out-of-scope 补充记录仍由 converter 产生；
+  authoring 是这些条目的独立断言层，不是主数据来源。
 - 33 条 out-of-scope 补充记录带 `reason`，作者层仍不表达该字段，继续由 converter 生成。
 - P4-3（目录根部 `mechanisms` envelope）后置。
 - 规则层 `activation` / `triggered` / `continuous` / `instant` / `modification` 收敛（P4-5）不做；Phase 3 公共 manifest 外壳继续暂缓。

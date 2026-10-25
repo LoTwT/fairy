@@ -1,6 +1,6 @@
 # Phase 2 P2-4i：最后 4 条专用结算补充选项
 
-- 状态：已实现；基线 `origin/main @ 8d6935a5`（P2-4h #316 已合并）。
+- 状态：已合并 #317（squash merge `828ce5a9`）；基线 `origin/main @ 8d6935a5`（P2-4h #316 已合并）。
 - 分支：`data/p2-4i-special-operations`。
 - 范围：把露西、爱丽丝、叶瞬光剩余 4 条 integrated 补充记录纳入 authoring；
   不改 converter、正式 effects 制品、`integrated`、`dist`、`snapshotId`、
@@ -72,8 +72,9 @@ P2-4h 后只剩 4 条 integrated 补充记录，均使用 authoring 尚未开放
 
 - **integrated 补充记录已全部作者化（68/68）**；这是补充记录迁移的完成点。
 - 33 条 out-of-scope 记录带 `reason`，作者层仍不表达该字段，继续由 converter 生成。
-- 这不等于 converter 已退出：固定来源 records/variants 仍由 converter 产生，作者层
-  通过 `authoring:verify` 与它们保持字节等价。
+- 这不等于 converter 已退出：作者层当前覆盖 99/931 条规则、89/986 个选项；固定来源
+  records/variants 与 33 条 out-of-scope 补充记录仍由 converter 产生，作者层通过
+  `authoring:verify` 与它们保持字节等价，但本身不是事实来源。
 - P4-3（目录根部 `mechanisms` envelope）仍按触发条件后置；P4-5 不做；Phase 3 暂缓。
 
 ## 6. 明确不改
