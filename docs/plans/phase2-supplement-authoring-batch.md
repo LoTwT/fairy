@@ -81,3 +81,10 @@ P2-4b-lite 已证明补充记录的按 `supplementId` 原位替换路径可用�
 `packages/data/scripts/static-effects/convert.ts`、`packages/data/definitions/effects/*`、
 `packages/data/integrated/*`、`packages/data/dist/*`、`snapshotId`、publication/manifests、
 公开 exports 与 core/shared 运行时均保持原样。
+
+## 7. 后续状态
+
+[P2-4d](phase2-w-engine-supplement-authoring.md) 已把 16 条音擎 integrated 补充记录
+对应的选项纳入 authoring。当前已作者化补充记录为 40/68 条；剩余 28 条 integrated
+记录仍缺作者选项，33 条 out-of-scope 记录仍由 converter 维护。本页的“23 条新增”
+与“剩余 44 条”保留 P2-4c 当时事实。
