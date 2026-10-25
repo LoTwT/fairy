@@ -70,4 +70,5 @@
   记录迁入作者层，[P2-4d](phase2-w-engine-supplement-authoring.md) 又把 16 条音擎
   选项纳入作者层，[P2-4e](phase2-agent-supplement-authoring.md) 又纳入 10 条单变体
   代理人/驱动盘选项，[P2-4f](phase2-multi-variant-supplement-authoring.md) 又纳入 5 个
-  多 variant 选项，当前剩余 13 条 integrated。
+  多 variant 选项，[P2-4g](phase2-roxy-supplement-authoring.md) 又纳入 8 条洛克茜
+  单规则选项，当前剩余 5 条 integrated。

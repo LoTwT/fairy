@@ -83,6 +83,7 @@ P2-4d 完成后仍有 28 条 integrated 补充记录缺少作者选项。其中 
 ## 7. 后续状态
 
 [P2-4f](phase2-multi-variant-supplement-authoring.md) 已把 5 个 corrected/converted
-双 variant 选项纳入 authoring。当前已作者化补充记录为 55/68 条；剩余 13 条
-integrated 记录仍缺作者选项，33 条 out-of-scope 记录仍由 converter 维护。本页的
-“剩余 18 条”保留 P2-4e 当时事实。
+双 variant 选项纳入 authoring，[P2-4g](phase2-roxy-supplement-authoring.md) 又纳入
+8 条洛克茜单规则选项。当前已作者化补充记录为 63/68 条；剩余 5 条 integrated
+记录仍缺作者选项，33 条 out-of-scope 记录仍由 converter 维护。本页的“剩余 18 条”
+保留 P2-4e 当时事实。

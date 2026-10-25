@@ -130,6 +130,8 @@ const FACTOR_CHANNEL_UNITS = {
   "damage-bonus": "ratio",
   "anomaly-damage-bonus": "ratio",
   "attacker-resistance-ignore": "ratio",
+  "target-resistance-reduction": "ratio",
+  "stun-damage-adjustment": "multiplier",
   "sheer-damage-bonus": "ratio",
   "windswept-direct-damage-coefficient-increase": "ratio",
   "luminize-proficiency-input": "anomaly-proficiency-points",

@@ -27,6 +27,8 @@ export const AUTHORING_FACTOR_CHANNELS = [
   "damage-bonus",
   "anomaly-damage-bonus",
   "attacker-resistance-ignore",
+  "target-resistance-reduction",
+  "stun-damage-adjustment",
   "sheer-damage-bonus",
   "windswept-direct-damage-coefficient-increase",
   "luminize-proficiency-input",

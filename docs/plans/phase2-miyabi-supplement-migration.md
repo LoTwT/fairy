@@ -90,6 +90,7 @@ worktree 没有 `packages/data/.integrated.fairy-state`，属于静态工作区�
 补充记录迁入作者层；[P2-4d](phase2-w-engine-supplement-authoring.md) 又把 16 条音擎
 选项纳入作者层，[P2-4e](phase2-agent-supplement-authoring.md) 又纳入 10 条单变体
 代理人/驱动盘选项，[P2-4f](phase2-multi-variant-supplement-authoring.md) 又纳入 5 个
-多 variant 选项。当前已作者化补充记录为 55/68 条；剩余 13 条 integrated
-记录的选项还没有作者记录，33 条 out-of-scope 记录仍由 converter 维护。
-本页的“67 条剩余”与“1 条已迁移”保留 P2-4b-lite 当时事实。
+多 variant 选项，[P2-4g](phase2-roxy-supplement-authoring.md) 又纳入 8 条洛克茜
+单规则选项。当前已作者化补充记录为 63/68 条；剩余 5 条 integrated 记录的选项
+还没有作者记录，33 条 out-of-scope 记录仍由 converter 维护。本页的“67 条剩余”
+与“1 条已迁移”保留 P2-4b-lite 当时事实。

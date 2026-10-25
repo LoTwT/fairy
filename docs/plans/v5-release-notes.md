@@ -2,7 +2,7 @@
 
 - 状态：草稿，未发布；等待发布决策。
 - 日期：2026-10-25
-- 基线：`origin/main @ b20de333`
+- 基线：`origin/main @ a9eeeaa4`
 - 范围：0.5.0 的公开契约变更、制品事实、验证证据、已知限制与发布检查清单。
 - 非范围：发布、打 tag、修改版本号、发布 npm 制品、创建 GitHub Release。
 
@@ -84,33 +84,34 @@
 | 目录变体          | 1,467 个                                                                          | [`static-catalog.json`](../../packages/data/definitions/effects/static-catalog.json)   |
 | 机制变体          | 30 个                                                                             | 同上                                                                                   |
 | 机制 arm 分布     | 22 个 `independent-settlement`、2 个 `element-buff-inputs`，其余 6 个 arm 各 1 个 | 同上                                                                                   |
-| 补充记录          | 101 条（68 条 integrated、33 条 out-of-scope；其中 55 条已作者化）                | [`static-coverage.json`](../../packages/data/definitions/effects/static-coverage.json) |
+| 补充记录          | 101 条（68 条 integrated、33 条 out-of-scope；其中 63 条已作者化）                | [`static-coverage.json`](../../packages/data/definitions/effects/static-coverage.json) |
 | 目录实体 / 选择项 | 196 / 986                                                                         | `static-catalog.json`                                                                  |
 
 `independent-settlement` 中 7 个变体启用 `isolateDamageItems`，2 个南宫羽变体启用 `completeState`。
-已作者化的 55 条补充记录中，首条由
+已作者化的 63 条补充记录中，首条由
 [P2-4b-lite 记录](phase2-miyabi-supplement-migration.md)迁移；23 条由
 [P2-4c 批量迁移](phase2-supplement-authoring-batch.md)迁入；16 条音擎选项由
 [P2-4d 音擎批次](phase2-w-engine-supplement-authoring.md)迁入；10 条单变体
 代理人/驱动盘选项由[P2-4e 代理人批次](phase2-agent-supplement-authoring.md)迁入；
 5 个多 variant 选项由[P2-4f 多 variant 批次](phase2-multi-variant-supplement-authoring.md)
-迁入。剩余 13 条 integrated 补充记录仍缺作者选项，33 条 out-of-scope 记录仍由 converter 维护。
+迁入；8 条洛克茜选项由[P2-4g 洛克茜批次](phase2-roxy-supplement-authoring.md)迁入。
+剩余 5 条 integrated 补充记录仍缺作者选项，33 条 out-of-scope 记录仍由 converter 维护。
 
 ## 6. 验证证据
 
 | 入口                                                                                  | 结果                                                                                         |
 | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `pnpm --filter @randomplay/data authoring:verify`                                     | 85 records、76 options、24 coverage positions、55 supplements、0 differences、三制品字节一致 |
+| `pnpm --filter @randomplay/data authoring:verify`                                     | 93 records、84 options、24 coverage positions、63 supplements、0 differences、三制品字节一致 |
 | `pnpm --filter @randomplay/data check:source`                                         | 通过（108 files、4,723 tests）                                                               |
 | `pnpm --filter @randomplay/core build && pnpm --filter @randomplay/core check:source` | 通过（98 files、5,696 passed、24 skipped）                                                   |
 | `pnpm --filter @randomplay/data verify:pack`                                          | 通过（2 tests）                                                                              |
 | `pnpm --filter @randomplay/core verify:pack`                                          | 通过（1 test）                                                                               |
 | `pnpm check:quality`                                                                  | 通过                                                                                         |
-| CI                                                                                    | #303、#304、#305、#306、#309、#310、#311、#312、#313 各 6/6 项检查通过                       |
+| CI                                                                                    | #303、#304、#305、#306、#309、#310、#311、#312、#313、#314 各 6/6 项检查通过                 |
 | 数据管理状态                                                                          | `phase: idle`；`indexSha256` `d68ad1d8…` 与 `packages/data/integrated/index.json` 一致       |
 
-> 2026-10-25 P0/P1/P4-1/P2-4c/P2-4d/P2-4e/P2-4f 后复验：data 108 files / 4,723 tests；core 98 files / 5,696 passed + 24 skipped；
-> `authoring:verify` 85 records / 55 supplements 字节一致、`check:quality` 通过。
+> 2026-10-25 P0/P1/P4-1/P2-4c/P2-4d/P2-4e/P2-4f/P2-4g 后复验：data 108 files / 4,723 tests；core 98 files / 5,696 passed + 24 skipped；
+> `authoring:verify` 93 records / 63 supplements 字节一致、`check:quality` 通过。
 
 相关 PR：
 
@@ -125,13 +126,14 @@
 | #311 | P2-4c 补充记录批量迁移                                  | `6c2177b3` |
 | #312 | P2-4d 音擎补充选项批量作者化                            | `6163ac8d` |
 | #313 | P2-4e 单变体代理人/驱动盘补充选项                       | `b20de333` |
+| #314 | P2-4f 多 variant 补充选项                               | `a9eeeaa4` |
 
 数据管理状态的维护流程见[来源数据整合规范](../specs/data/integration.md#数据管理状态的同步维护)。
 本 PR 只改文档，不修改 `integrated`、definitions、`dist` 或管理记录。
 
 ## 7. 已知限制
 
-- 13 条 integrated 补充记录仍由 converter 生成，尚未进入 authoring；其 `optionId`
+- 5 条 integrated 补充记录仍由 converter 生成，尚未进入 authoring；其 `optionId`
   还没有对应作者记录。
 - 33 条 out-of-scope 补充记录带 `reason`，仍不可作者化。
 - P4-3（目录根部 `mechanisms` envelope）后置。
@@ -161,6 +163,7 @@ P4-1 已完成：8 个机制 arm 与全部 30 个机制变体均纳入 authoring
 - [P2-4d 音擎补充选项批量作者化](phase2-w-engine-supplement-authoring.md)：16 条音擎选项作者化、累计 40 条与字节等价验证。
 - [P2-4e 单变体代理人/驱动盘补充选项](phase2-agent-supplement-authoring.md)：10 条代理人/驱动盘选项作者化、累计 50 条与字节等价验证。
 - [P2-4f 多 variant 补充选项](phase2-multi-variant-supplement-authoring.md)：5 个 corrected/converted 双 variant 选项作者化、累计 55 条与字节等价验证。
+- [P2-4g 洛克茜补充选项](phase2-roxy-supplement-authoring.md)：8 条洛克茜单规则选项作者化、累计 63 条与字节等价验证。
 - [P4-1 authoring 机制覆盖](phase4-authoring-mechanism-coverage.md)：8 个 arm、30 个变体与字节等价验证。
 - [P4-2 目录变体机制判别联合](phase4-catalog-mechanism-union.md)：正式形状、迁移映射、验证与回滚边界。
 - [包边界与联动发布](../specs/packages.md)：同版发布规则、安装与发布操作。
