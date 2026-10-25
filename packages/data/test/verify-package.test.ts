@@ -156,6 +156,17 @@ describe("packed package", () => {
     const metadataBefore = dependencyMetadata.map((path) =>
       existsSync(path) ? readFileSync(path) : undefined,
     )
+    // The child install must read the same content-addressable store as the
+    // workspace install; corepack's default store can differ on CI runners.
+    const pnpmStoreDirectory = execFileSync(
+      "corepack",
+      ["pnpm", "store", "path"],
+      {
+        cwd: workspaceDirectory,
+        encoding: "utf8",
+        env: process.env,
+      },
+    ).trim()
     // A direct/IDE runner need not inherit pnpm's script environment. Its child
     // installs must own their dependencies, including under CI's noninteractive mode.
     const checkoutEnvironment: NodeJS.ProcessEnv = {
@@ -172,6 +183,8 @@ describe("packed package", () => {
           "--offline",
           "--frozen-lockfile",
           "--ignore-scripts",
+          "--store-dir",
+          pnpmStoreDirectory,
         ],
         {
           cwd: checkout,
@@ -183,7 +196,7 @@ describe("packed package", () => {
     } catch (error) {
       const failure = error as { stdout?: string; stderr?: string }
       throw new Error(
-        `Offline install failed in ${checkout}\nstdout:\n${failure.stdout ?? ""}\nstderr:\n${failure.stderr ?? ""}`,
+        `Offline install failed in ${checkout} (store: ${pnpmStoreDirectory})\nstdout:\n${failure.stdout ?? ""}\nstderr:\n${failure.stderr ?? ""}`,
         { cause: error },
       )
     }
