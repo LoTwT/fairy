@@ -2319,7 +2319,9 @@ effectId、optionId、来源引用与 `integrated` 归档不变。
 - **生成与作者层**：`convert.ts`、`supplements.ts` 与全部补充/语义登记只产出联合；
   authoring 的 `EXPRESSIBLE_VARIANT_FIELDS` 只接受 `mechanism`，当前 19 条记录中
   只有猫又爪印与星见雅霜灼·破的 `independent-settlement` 需要该 arm；其余无法表达
-  的 10 个机制变体均不在当前 19 条记录内，完整覆盖后置到 P4-1。
+  的 10 个机制变体均不在当前 19 条记录内，完整覆盖后置到 P4-1。P4-1 已完成：
+  8 个 arm 与全部 30 个机制变体均已纳入 authoring，且不改正式制品，见
+  [P4-1 实施记录](../../plans/phase4-authoring-mechanism-coverage.md)。
 - **版本**：`StaticEffectCatalog.schemaVersion` 1 → 2；
   `CALCULATION_CONTRACT_VERSION` 2 → 3；根包、`@randomplay/core` 与
   `@randomplay/data` 0.4.0 → 0.5.0；`@randomplay/shared` 保持私有 `0.0.0`。

@@ -44,5 +44,6 @@
 - [首批自动效果规则接入记录](plans/effects-pr6-prompt.md)：已完成接入的 Git 记录与维护入口。
 - [v4 数据瘦身范围说明与实施记录](plans/v4-data-slimming-scope.md)：v3 归档与 v4 发布索引的派生边界、实测体积、验证结果及 0.4.0 发布说明草稿。
 - [Phase 4 P4-0 机制 schema 盘点与收敛设计](plans/phase4-mechanism-schema-audit.md)：当前规则/激活/目录变体机制字段与制品统计、消费者地图、推荐判别联合、迁移拆分与开放问题。
+- [Phase 4 P4-1 authoring 机制覆盖](plans/phase4-authoring-mechanism-coverage.md)：8 个目录机制 arm 的作者层表达、30 个机制变体全量转录、新增 operation/channel/uniqueness 支持、49 条记录与字节等价验证。
 - [Phase 4 P4-2 目录变体机制判别联合](plans/phase4-catalog-mechanism-union.md)：公开契约原子迁移、30 个变体的 arm 映射、schemaVersion/revision/contractVersion 版本、authoring 最小支持、验证与回滚边界，以及已合并 #304（`ee85d2e6`）的机制加固（基线 arm 校验、逐制品 schemaVersion、叶子级错误指针）。
 - [v5（0.5.0）发布说明草稿](plans/v5-release-notes.md)：待发布版本与契约、破坏性变更与迁移映射、数据事实、验证证据、已知限制和全部未执行的发布检查清单。

@@ -14,7 +14,9 @@ import type {
   StaticCatalogInputRequirement,
   StaticCatalogUnavailableReason,
   StaticCatalogVariant,
+  StaticCatalogVariantMechanism,
   TargetSelector,
+  UniquenessPolicy,
 } from "@randomplay/shared"
 
 /**
@@ -26,6 +28,8 @@ export const AUTHORING_FACTOR_CHANNELS = [
   "anomaly-damage-bonus",
   "attacker-resistance-ignore",
   "sheer-damage-bonus",
+  "windswept-direct-damage-coefficient-increase",
+  "luminize-proficiency-input",
 ] as const
 
 export type AuthoringFactorChannel = (typeof AUTHORING_FACTOR_CHANNELS)[number]
@@ -42,6 +46,11 @@ export type AuthoringOperation =
   | AuthoringFactorOperation
   | Extract<ContributionOperation, { readonly kind: "stat-adjustment" }>
   | Extract<ContributionOperation, { readonly kind: "hit-adjustment" }>
+  | Extract<
+      ContributionOperation,
+      { readonly kind: "astra-yao-m4-quick-assist-damage" }
+    >
+  | Extract<ContributionOperation, { readonly kind: "guaranteed-critical" }>
 
 /** 试点只使用调用方显式声明的 supplied 状态。 */
 export type AuthoringActivation = Extract<
@@ -159,6 +168,15 @@ export interface AuthoringOptionVariant {
   /** 引用同一选项下的作者记录 key；编译后变成稳定 effectId。 */
   readonly effectKeys: readonly string[]
   readonly target?: "self" | "team"
+  /**
+   * 该目录变体的正式 mechanism。作者层用它表达 complete-state、
+   * holder-level、windswept-direct、element-buff-inputs、
+   * declared-teammate-beneficiary、squad-unique、
+   * luminize-proficiency-mapping，以及 independent-settlement 的
+   * isolateDamageItems/completeState 组合。省略时按记录级 authoring
+   * mechanism 推导（仅 independent-settlement 会生成目录 mechanism）。
+   */
+  readonly catalogMechanism?: StaticCatalogVariantMechanism
 }
 
 export interface AuthoringOption {
@@ -192,8 +210,10 @@ export type AuthoringMechanism =
   | { readonly kind: "complete-state" }
   | {
       readonly kind: "independent-settlement"
-      readonly skillTarget: AuthoringSkillTarget
+      /** 需要新增/替换目录 skillTarget 时声明；无独立技能标签时省略。 */
+      readonly skillTarget?: AuthoringSkillTarget
       readonly damageItem: StaticCatalogDamageItemRequirement
+      /** 旧记录的最小写法；新记录可用 variant.catalogMechanism 表达。 */
       readonly exclusiveDamageItem?: true
     }
   | { readonly kind: "unsupported" }
@@ -219,6 +239,7 @@ interface AuthoringRuleFieldsBase {
   readonly beneficiary: TargetSelector
   readonly when: AuthoringCondition<"contribution">
   readonly parameters: Readonly<Record<string, AnyParameter>>
+  readonly uniqueness?: UniquenessPolicy
 }
 
 type AuthoringRuleFields = AuthoringRuleFieldsBase &

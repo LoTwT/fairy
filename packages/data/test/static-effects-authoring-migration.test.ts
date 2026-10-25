@@ -68,26 +68,26 @@ function coverageKey(record: {
 }
 
 describe("static effects authoring migration records", () => {
-  it("accepts the 19 migrated records and their mechanism mix", () => {
+  it("accepts the 49 migrated records and their mechanism mix", () => {
     const result = validateAuthoringRecords(MIGRATED_AUTHORING_RECORDS)
     expect(result.ok).toBe(true)
     if (!result.ok) return
-    expect(result.records).toHaveLength(19)
-    expect(new Set(result.records.map((record) => record.key)).size).toBe(19)
+    expect(result.records).toHaveLength(49)
+    expect(new Set(result.records.map((record) => record.key)).size).toBe(49)
 
     const mechanisms = result.records.map((record) => record.mechanism.kind)
-    expect(mechanisms.filter((kind) => kind === "single-rule")).toHaveLength(14)
+    expect(mechanisms.filter((kind) => kind === "single-rule")).toHaveLength(22)
     expect(mechanisms.filter((kind) => kind === "complete-state")).toHaveLength(
       2,
     )
     expect(
       mechanisms.filter((kind) => kind === "independent-settlement"),
-    ).toHaveLength(3)
+    ).toHaveLength(25)
     expect(mechanisms.filter((kind) => kind === "unsupported")).toHaveLength(0)
 
     const statuses = result.records.map((record) => record.coverage.status)
-    expect(statuses.filter((status) => status === "corrected")).toHaveLength(16)
-    expect(statuses.filter((status) => status === "converted")).toHaveLength(3)
+    expect(statuses.filter((status) => status === "corrected")).toHaveLength(18)
+    expect(statuses.filter((status) => status === "converted")).toHaveLength(31)
     for (const record of result.records) {
       if (record.mechanism.kind === "independent-settlement")
         expect(record.coverage.status).toBe("converted")
@@ -95,24 +95,86 @@ describe("static effects authoring migration records", () => {
       expect(rule.activation.kind).toBe("supplied")
       expect(["entity", "hit"]).toContain(rule.scope)
     }
+    expect(
+      result.records.filter(
+        (record) => "uniqueness" in record && record.uniqueness !== undefined,
+      ),
+    ).toHaveLength(2)
+    expect(
+      new Set(
+        result.records
+          .map((record) => ruleRecord(record).operation.kind)
+          .filter(
+            (kind) =>
+              kind === "guaranteed-critical" ||
+              kind === "astra-yao-m4-quick-assist-damage",
+          ),
+      ),
+    ).toEqual(
+      new Set(["guaranteed-critical", "astra-yao-m4-quick-assist-damage"]),
+    )
   })
 
-  it("selects 17 option groups with 15 fixed-source coverage positions", () => {
+  it("covers all 30 catalog mechanism variants across every arm", () => {
     const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
     const selectedOptionIds = new Set(
       MIGRATED_AUTHORING_RECORDS.map((record) => record.ids.optionId),
     )
-    expect(selectedOptionIds.size).toBe(17)
+    const mechanismOptions = baseline.catalog.options.filter((option) =>
+      option.variants.some((variant) => variant.mechanism !== undefined),
+    )
+    expect(mechanismOptions).toHaveLength(30)
+    expect(
+      mechanismOptions.filter(
+        (option) => !selectedOptionIds.has(option.optionId),
+      ),
+    ).toEqual([])
+
+    const armCounts = new Map<string, number>()
+    for (const option of mechanismOptions) {
+      for (const variant of option.variants) {
+        if (variant.mechanism === undefined) continue
+        armCounts.set(
+          variant.mechanism.kind,
+          (armCounts.get(variant.mechanism.kind) ?? 0) + 1,
+        )
+      }
+      const records = MIGRATED_AUTHORING_RECORDS.filter(
+        (record) => record.ids.optionId === option.optionId,
+      )
+      expect(records.length).toBeGreaterThan(0)
+      const declared = records[0]?.option.variants[0]?.catalogMechanism
+      if (declared !== undefined)
+        expect(declared).toEqual(option.variants[0]?.mechanism)
+    }
+    expect(Object.fromEntries(armCounts)).toEqual({
+      "independent-settlement": 22,
+      "element-buff-inputs": 2,
+      "complete-state": 1,
+      "holder-level": 1,
+      "windswept-direct": 1,
+      "declared-teammate-beneficiary": 1,
+      "squad-unique": 1,
+      "luminize-proficiency-mapping": 1,
+    })
+  })
+
+  it("selects 45 option groups with 19 fixed-source coverage positions", () => {
+    const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
+    const selectedOptionIds = new Set(
+      MIGRATED_AUTHORING_RECORDS.map((record) => record.ids.optionId),
+    )
+    expect(selectedOptionIds.size).toBe(45)
     const selectedCoverage = baseline.coverage.records.filter((record) =>
       selectedOptionIds.has(record.optionId),
     )
-    expect(selectedCoverage).toHaveLength(15)
+    expect(selectedCoverage).toHaveLength(19)
     expect(
       selectedCoverage.filter((record) => record.status === "corrected"),
-    ).toHaveLength(14)
+    ).toHaveLength(15)
     expect(
       selectedCoverage.filter((record) => record.status === "converted"),
-    ).toHaveLength(1)
+    ).toHaveLength(4)
     expect(
       baseline.coverage.records.filter(
         (record) => record.status === "corrected",
@@ -123,19 +185,22 @@ describe("static effects authoring migration records", () => {
         (record) => record.status === "converted",
       ),
     ).toHaveLength(1167)
-    expect(
+    const selectedSupplementalRecords =
       baseline.coverage.supplementalRecords.filter(
         (record) =>
           record.optionId !== undefined &&
           selectedOptionIds.has(record.optionId),
-      ),
-    ).toEqual([
-      expect.objectContaining({
-        supplementId: "nanoka:agents:miyabi:frostburn-break-damage",
-        optionId: "nanoka:agents:miyabi:frostburn-break-damage",
-        status: "integrated",
-      }),
-    ])
+      )
+    expect(selectedSupplementalRecords).toHaveLength(24)
+    expect(selectedSupplementalRecords).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          supplementId: "nanoka:agents:miyabi:frostburn-break-damage",
+          optionId: "nanoka:agents:miyabi:frostburn-break-damage",
+          status: "integrated",
+        }),
+      ]),
+    )
 
     for (const record of MIGRATED_AUTHORING_RECORDS) {
       const baselineRows = baseline.coverage.records.filter(
@@ -153,19 +218,19 @@ describe("static effects authoring migration records", () => {
     }
   })
 
-  it("projects 19 records to 19 rules, 17 options and 2 skill targets", () => {
+  it("projects 49 records to 49 rules, 45 options and 19 skill targets", () => {
     const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
     const compilation = compileAuthoringRecords(
       MIGRATED_AUTHORING_RECORDS,
       baseline,
     )
-    expect(compilation.ruleIds).toHaveLength(19)
-    expect(compilation.optionIds).toHaveLength(17)
-    expect(compilation.coverageKeys).toHaveLength(15)
+    expect(compilation.ruleIds).toHaveLength(49)
+    expect(compilation.optionIds).toHaveLength(45)
+    expect(compilation.coverageKeys).toHaveLength(19)
     expect(compilation.supplementalRecordIds).toEqual([
       "nanoka:agents:miyabi:frostburn-break-damage",
     ])
-    expect(compilation.skillTargetIds).toHaveLength(2)
+    expect(compilation.skillTargetIds).toHaveLength(19)
 
     const groups = new Map<string, EffectAuthoringRuleRecord[]>()
     for (const record of MIGRATED_AUTHORING_RECORDS) {
@@ -577,9 +642,9 @@ describe("static effects authoring migration records", () => {
     const result = await verifyFormalAuthoring()
     expect(result.outputRetained).toBe(false)
     expect(existsSync(result.outputDirectory)).toBe(false)
-    expect(result.recordCount).toBe(19)
+    expect(result.recordCount).toBe(49)
     expect(result.summary).toBe(
-      "rules: 19, options: 17, coverage positions: 15, skill targets: 2, supplemental records: 1",
+      "rules: 49, options: 45, coverage positions: 19, skill targets: 19, supplemental records: 1",
     )
     expect(result.equivalent).toBe(true)
     expect(result.differences).toEqual([])

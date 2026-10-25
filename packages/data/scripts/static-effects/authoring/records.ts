@@ -1,6 +1,7 @@
 import type { NonEmpty, SourceReference } from "@randomplay/shared"
 import { BUFF_RESOURCE, SOURCE_COMMIT } from "../source.ts"
 import { fixedSourceIds, stableIds } from "./ids.ts"
+import { P4_1_MECHANISM_AUTHORING_RECORDS } from "./mechanism-records.ts"
 import type {
   AuthoringOption,
   AuthoringSupplementalRecord,
@@ -425,7 +426,7 @@ const MIYABI_FROSTBURN_MECHANISM = {
   exclusiveDamageItem: true,
 } as const
 
-export const MIGRATED_AUTHORING_RECORDS: readonly EffectAuthoringRecord[] = [
+export const P4_2_AUTHORING_RECORDS: readonly EffectAuthoringRecord[] = [
   // claret-core-critical-rate
   {
     key: "claret-core-critical-rate",
@@ -2539,4 +2540,9 @@ export const MIGRATED_AUTHORING_RECORDS: readonly EffectAuthoringRecord[] = [
     },
     mechanism: { kind: "single-rule" },
   },
+]
+
+export const MIGRATED_AUTHORING_RECORDS: readonly EffectAuthoringRecord[] = [
+  ...P4_2_AUTHORING_RECORDS,
+  ...P4_1_MECHANISM_AUTHORING_RECORDS,
 ]

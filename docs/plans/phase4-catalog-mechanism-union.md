@@ -121,7 +121,8 @@ export type StaticCatalogVariantMechanism =
   `compileVariant` 只对 `independent-settlement` 生成该 arm（含可选
   `isolateDamageItems`）；其余 arm 继续明确拒绝。
 - 当前 19 条作者记录中只有猫又爪印与星见雅霜灼·破的 2 个选项需要该 arm；其余
-  无法表达的 10 个机制变体均不在当前 19 条记录内。完整作者层覆盖（P4-1）后置。
+  无法表达的 10 个机制变体均不在当前 19 条记录内。完整作者层覆盖由
+  [P4-1](phase4-authoring-mechanism-coverage.md) 接续完成；本批制品不变。
 
 ## 5. 版本与身份
 
@@ -175,10 +176,9 @@ shared 类型、core 校验/执行、converter/supplements、三个 effects 制�
 
 ## 9. 后置事项
 
-- P4-1：为剩余机制 arm 扩展 authoring（`complete-state`、`holder-level`、
-  `windswept-direct`、`element-buff-inputs`、`declared-teammate-beneficiary`、
-  `squad-unique`、`luminize-proficiency-mapping`），并覆盖当前 30 个机制变体；
-  本批只做 `independent-settlement` 最小支持。
+- P4-1：已完成。8 个机制 arm 均已纳入 authoring，当前 30 个机制变体全部覆盖；
+  见[P4-1 实施记录](phase4-authoring-mechanism-coverage.md)。本批当时只做
+  `independent-settlement` 最小支持，后续记录不回写本批制品。
 - P4-3：目录根部 `mechanisms` envelope；本批不动。
 - 规则层 `activation` / `triggered` / `continuous` / `instant` 收敛继续不做，直到有真实数据。
 

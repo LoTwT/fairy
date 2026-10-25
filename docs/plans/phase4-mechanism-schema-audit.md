@@ -306,14 +306,14 @@ interface StaticCatalogVariant {
 
 ### 5.2 建议的 PR 序列
 
-| 步骤 | 主题                              | 输入                                                                     | 输出                                                                                     | 主要风险                                | 回滚边界                           | 建议                          |
-| ---- | --------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | --------------------------------------- | ---------------------------------- | ----------------------------- |
-| P4-0 | 本盘点                            | 当前代码/制品                                                            | 本文档 + 索引入口                                                                        | 无                                      | 仅 docs                            | 现在                          |
-| P4-1 | authoring 机制覆盖（完整）        | `authoring/types.ts`、`compile.ts`、当前 19 条记录                       | 作者层可表达 30 个机制变体；具名机制元数据保持基线；等价 harness 仍 0 diff；不改正式制品 | canonical 视图、未建模字段拒绝          | 纯 scripts/tests，回滚无制品影响   | **后置**（P4-2 已含最小支持） |
-| P4-2 | 目录变体 `mechanism` 联合（原子） | shared、core `static-catalog.ts`、convert/supplements、三个 effects 制品 | 30 个变体迁移；删除 9 个旧字段；`schemaVersion` 2、`revision` 52、`snapshotId` 更新      | 公开契约、golden、snapshot 链           | 整个 PR（含制品）一起回滚          | **已完成**                    |
-| P4-3 | 目录根部 `mechanisms` envelope    | 4 个具名机制、core 四个 validator、converter                             | 统一 `binding` 与引用闭合；payload 保持具名                                              | 具名机制、data-product `mechanismCount` | 只影响 `mechanisms` 块，可独立回滚 | 后做/条件做                   |
-| P4-4 | 文档与发布                        | 规范、修订记录、消费文档、release notes                                  | revision 52 记录、contractVersion 说明、0.5.0 发布说明                                   | 文档漂移、计数过期                      | docs/release only                  | 与 P4-2 同批或紧随            |
-| P4-5 | activation/instant/triggered 收敛 | 规则类型、evaluator                                                      | 不实施                                                                                   | 无数据验证                              | 不做                               | **不做**                      |
+| 步骤 | 主题                              | 输入                                                                     | 输出                                                                                     | 主要风险                                | 回滚边界                           | 建议                           |
+| ---- | --------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | --------------------------------------- | ---------------------------------- | ------------------------------ |
+| P4-0 | 本盘点                            | 当前代码/制品                                                            | 本文档 + 索引入口                                                                        | 无                                      | 仅 docs                            | 现在                           |
+| P4-1 | authoring 机制覆盖（完整）        | `authoring/types.ts`、`compile.ts`、当前 19 条记录                       | 作者层可表达 30 个机制变体；具名机制元数据保持基线；等价 harness 仍 0 diff；不改正式制品 | canonical 视图、未建模字段拒绝          | 纯 scripts/tests，回滚无制品影响   | **已完成**（见 P4-1 实施记录） |
+| P4-2 | 目录变体 `mechanism` 联合（原子） | shared、core `static-catalog.ts`、convert/supplements、三个 effects 制品 | 30 个变体迁移；删除 9 个旧字段；`schemaVersion` 2、`revision` 52、`snapshotId` 更新      | 公开契约、golden、snapshot 链           | 整个 PR（含制品）一起回滚          | **已完成**                     |
+| P4-3 | 目录根部 `mechanisms` envelope    | 4 个具名机制、core 四个 validator、converter                             | 统一 `binding` 与引用闭合；payload 保持具名                                              | 具名机制、data-product `mechanismCount` | 只影响 `mechanisms` 块，可独立回滚 | 后做/条件做                    |
+| P4-4 | 文档与发布                        | 规范、修订记录、消费文档、release notes                                  | revision 52 记录、contractVersion 说明、0.5.0 发布说明                                   | 文档漂移、计数过期                      | docs/release only                  | 与 P4-2 同批或紧随             |
+| P4-5 | activation/instant/triggered 收敛 | 规则类型、evaluator                                                      | 不实施                                                                                   | 无数据验证                              | 不做                               | **不做**                       |
 
 临时双形状窗口未获采用；P4-2 以单个原子 PR 完成。若未来重新评估兼容窗口，
 必须同时给出删除截止点，且最终状态不得保留旧字段。
@@ -323,8 +323,9 @@ interface StaticCatalogVariant {
 - **已做**：P4-2。当前唯一同时满足“有真实数据、重复校验、authoring 断层”的收敛点；
   同批包含 `independent-settlement` 的最小 authoring 支持，当前 19 条记录中只有
   猫又爪印与星见雅霜灼·破的 2 个选项需要它。
-- **后置**：P4-1 完整覆盖。为全部 30 个机制变体补齐 authoring 能力留待后续；
-  当前无法表达的 10 个机制变体均不在当前 19 条记录内，因此不阻塞 P4-2。
+- **已完成**：P4-1 完整覆盖。全部 30 个机制变体已纳入 authoring，8 个 arm 均可表达；
+  见[P4-1 实施记录](phase4-authoring-mechanism-coverage.md)。该批不改正式制品，
+  仅扩展 scripts/tests。
 - **后做/条件做**：P4-3。只有出现第 5 个具名机制、第二个 `mechanisms` 消费者，
   或需要跨机制统一查询时再做。
 - **不做**：P4-5；把 `activation.exclusiveGroup`、`option.exclusiveGroup`、

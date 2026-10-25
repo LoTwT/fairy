@@ -2,6 +2,7 @@ import {
   DAMAGE_ELEMENTS,
   SKILL_CATEGORIES,
   STAT_UNIT_MAP,
+  type FactorChannelUnitMap,
 } from "@randomplay/shared"
 import {
   AUTHORING_COVERAGE_POSITION_KINDS,
@@ -48,6 +49,19 @@ const OPERATION_KINDS = [
   "factor-contribution",
   "stat-adjustment",
   "hit-adjustment",
+  "astra-yao-m4-quick-assist-damage",
+  "guaranteed-critical",
+] as const
+
+const CATALOG_MECHANISM_KINDS = [
+  "complete-state",
+  "holder-level",
+  "independent-settlement",
+  "declared-teammate-beneficiary",
+  "squad-unique",
+  "windswept-direct",
+  "element-buff-inputs",
+  "luminize-proficiency-mapping",
 ] as const
 
 const OPERATORS = ["eq", "neq", "lt", "lte", "gt", "gte"] as const
@@ -104,13 +118,16 @@ const DIRECT_STATS = new Set([
   "sharpCriticalDamage",
 ])
 
-const FACTOR_CHANNEL_UNITS: Readonly<Record<AuthoringFactorChannel, "ratio">> =
-  {
-    "damage-bonus": "ratio",
-    "anomaly-damage-bonus": "ratio",
-    "attacker-resistance-ignore": "ratio",
-    "sheer-damage-bonus": "ratio",
-  }
+const FACTOR_CHANNEL_UNITS = {
+  "damage-bonus": "ratio",
+  "anomaly-damage-bonus": "ratio",
+  "attacker-resistance-ignore": "ratio",
+  "sheer-damage-bonus": "ratio",
+  "windswept-direct-damage-coefficient-increase": "ratio",
+  "luminize-proficiency-input": "anomaly-proficiency-points",
+} as const satisfies {
+  readonly [C in AuthoringFactorChannel]: FactorChannelUnitMap[C]
+}
 
 const ALLOWED_UNITS = new Set<string>([
   ...Object.values(STAT_UNIT_MAP),
@@ -119,6 +136,7 @@ const ALLOWED_UNITS = new Set<string>([
   "seconds",
   "meters",
   "count",
+  "anomaly-proficiency-points",
 ])
 
 const STAT_NAMES = new Set(Object.keys(STAT_UNIT_MAP))
@@ -730,7 +748,28 @@ function validateOperation(
       "multiplier",
       collector,
     )
+    return
   }
+  if (kind === "astra-yao-m4-quick-assist-damage") {
+    const multiplier = objectAt(
+      operation["multiplier"],
+      `${path}/multiplier`,
+      collector,
+    )
+    if (multiplier) {
+      unitAt(multiplier["unit"], `${path}/multiplier/unit`, collector)
+      const value = numberAt(
+        multiplier["value"],
+        `${path}/multiplier/value`,
+        collector,
+      )
+      if (value !== undefined && value !== 3)
+        collector.add(`${path}/multiplier/value`, "expected the literal 3")
+    }
+    return
+  }
+  if (kind === "guaranteed-critical")
+    stringAt(operation["itemId"], `${path}/itemId`, collector)
 }
 
 function validateReference(
@@ -889,6 +928,196 @@ function validateApplicability(
   }
 }
 
+function validateCatalogMechanism(
+  value: unknown,
+  path: string,
+  collector: Collector,
+): void {
+  const mechanism = objectAt(value, path, collector)
+  if (!mechanism) return
+  const kind = enumAt(
+    mechanism["kind"],
+    CATALOG_MECHANISM_KINDS,
+    `${path}/kind`,
+    collector,
+  )
+  if (kind === undefined) return
+  const only = (keys: readonly string[]) => {
+    for (const key of Object.keys(mechanism))
+      if (!keys.includes(key))
+        collector.add(`${path}/${key}`, "unknown catalog mechanism field")
+  }
+  switch (kind) {
+    case "complete-state":
+      only(["kind", "layerCountInputName"])
+      stringAt(
+        mechanism["layerCountInputName"],
+        `${path}/layerCountInputName`,
+        collector,
+      )
+      return
+    case "holder-level":
+      only(["kind", "holderLevelInputName"])
+      stringAt(
+        mechanism["holderLevelInputName"],
+        `${path}/holderLevelInputName`,
+        collector,
+      )
+      return
+    case "independent-settlement": {
+      only([
+        "kind",
+        "damageItemRequirements",
+        "isolateDamageItems",
+        "completeState",
+      ])
+      const requirements = nonEmptyArrayAt(
+        mechanism["damageItemRequirements"],
+        `${path}/damageItemRequirements`,
+        collector,
+      )
+      for (const [index, requirement] of (requirements ?? []).entries())
+        validateDamageItem(
+          requirement,
+          `${path}/damageItemRequirements[${index}]`,
+          collector,
+        )
+      if (
+        Object.hasOwn(mechanism, "isolateDamageItems") &&
+        mechanism["isolateDamageItems"] !== true
+      )
+        collector.add(
+          `${path}/isolateDamageItems`,
+          "only literal true is accepted",
+        )
+      if (Object.hasOwn(mechanism, "completeState")) {
+        const bridge = objectAt(
+          mechanism["completeState"],
+          `${path}/completeState`,
+          collector,
+        )
+        if (bridge) {
+          for (const key of Object.keys(bridge))
+            if (key !== "layerCountInputName")
+              collector.add(
+                `${path}/completeState/${key}`,
+                "unknown complete-state bridge field",
+              )
+          stringAt(
+            bridge["layerCountInputName"],
+            `${path}/completeState/layerCountInputName`,
+            collector,
+          )
+        }
+      }
+      return
+    }
+    case "declared-teammate-beneficiary":
+    case "squad-unique":
+      only(["kind"])
+      return
+    case "windswept-direct": {
+      only(["kind", "metadata"])
+      const metadata = objectAt(
+        mechanism["metadata"],
+        `${path}/metadata`,
+        collector,
+      )
+      if (!metadata) return
+      for (const key of Object.keys(metadata))
+        if (
+          ![
+            "applicabilityInputName",
+            "applierTeam",
+            "singleActiveSourceGroup",
+          ].includes(key)
+        )
+          collector.add(
+            `${path}/metadata/${key}`,
+            "unknown windswept metadata field",
+          )
+      stringAt(
+        metadata["applicabilityInputName"],
+        `${path}/metadata/applicabilityInputName`,
+        collector,
+      )
+      enumAt(
+        metadata["applierTeam"],
+        ["holder"] as const,
+        `${path}/metadata/applierTeam`,
+        collector,
+      )
+      if (Object.hasOwn(metadata, "singleActiveSourceGroup"))
+        stringAt(
+          metadata["singleActiveSourceGroup"],
+          `${path}/metadata/singleActiveSourceGroup`,
+          collector,
+        )
+      return
+    }
+    case "element-buff-inputs": {
+      only(["kind", "inputs"])
+      const inputs = nonEmptyArrayAt(
+        mechanism["inputs"],
+        `${path}/inputs`,
+        collector,
+      )
+      for (const [index, entry] of (inputs ?? []).entries()) {
+        const input = objectAt(entry, `${path}/inputs[${index}]`, collector)
+        if (!input) continue
+        for (const key of Object.keys(input))
+          if (key !== "element" && key !== "inputName")
+            collector.add(
+              `${path}/inputs[${index}]/${key}`,
+              "unknown element-buff field",
+            )
+        enumAt(
+          input["element"],
+          DAMAGE_ELEMENTS,
+          `${path}/inputs[${index}]/element`,
+          collector,
+        )
+        stringAt(
+          input["inputName"],
+          `${path}/inputs[${index}]/inputName`,
+          collector,
+        )
+      }
+      return
+    }
+    case "luminize-proficiency-mapping": {
+      only(["kind", "mapping"])
+      const mapping = objectAt(
+        mechanism["mapping"],
+        `${path}/mapping`,
+        collector,
+      )
+      if (!mapping) return
+      for (const key of Object.keys(mapping))
+        if (!["kind", "rate", "source", "inputName"].includes(key))
+          collector.add(
+            `${path}/mapping/${key}`,
+            "unknown parameter mapping field",
+          )
+      enumAt(
+        mapping["kind"],
+        ["luminize-proficiency"] as const,
+        `${path}/mapping/kind`,
+        collector,
+      )
+      numberAt(mapping["rate"], `${path}/mapping/rate`, collector)
+      enumAt(
+        mapping["source"],
+        ["holder-current", "holder-initial", "input"] as const,
+        `${path}/mapping/source`,
+        collector,
+      )
+      if (Object.hasOwn(mapping, "inputName"))
+        stringAt(mapping["inputName"], `${path}/mapping/inputName`, collector)
+    }
+  }
+}
+
 function validateOptionVariant(
   value: unknown,
   path: string,
@@ -923,6 +1152,12 @@ function validateOptionVariant(
     `${path}/applicability`,
     collector,
   )
+  if (Object.hasOwn(variant, "catalogMechanism"))
+    validateCatalogMechanism(
+      variant["catalogMechanism"],
+      `${path}/catalogMechanism`,
+      collector,
+    )
   const effectKeys = stringArrayAt(
     variant["effectKeys"],
     `${path}/effectKeys`,
@@ -1055,6 +1290,53 @@ function validateSkillTarget(
   booleanAt(target["countsAsFollowUp"], `${path}/countsAsFollowUp`, collector)
 }
 
+function validateUniqueness(
+  value: unknown,
+  path: string,
+  collector: Collector,
+): void {
+  const policy = objectAt(value, path, collector)
+  if (!policy) return
+  for (const key of Object.keys(policy))
+    if (!["key", "scope", "select"].includes(key))
+      collector.add(`${path}/${key}`, "unknown uniqueness field")
+  stringAt(policy["key"], `${path}/key`, collector)
+  enumAt(
+    policy["scope"],
+    ["team", "global"] as const,
+    `${path}/scope`,
+    collector,
+  )
+  const select = objectAt(policy["select"], `${path}/select`, collector)
+  if (!select) return
+  const kind = enumAt(
+    select["kind"],
+    [
+      "single-source-only",
+      "highest-value",
+      "latest-activation",
+      "priority",
+    ] as const,
+    `${path}/select/kind`,
+    collector,
+  )
+  for (const key of Object.keys(select))
+    if (key !== "kind" && key !== "priority")
+      collector.add(`${path}/select/${key}`, "unknown uniqueness selector")
+  if (kind === "priority")
+    validateExpression(
+      select["priority"],
+      `${path}/select/priority`,
+      "count",
+      collector,
+    )
+  else if (Object.hasOwn(select, "priority"))
+    collector.add(
+      `${path}/select/priority`,
+      "only a priority selector may declare priority",
+    )
+}
+
 function validateMechanism(
   value: unknown,
   path: string,
@@ -1069,11 +1351,12 @@ function validateMechanism(
     collector,
   )
   if (kind !== "independent-settlement") return
-  validateSkillTarget(
-    mechanism["skillTarget"],
-    `${path}/skillTarget`,
-    collector,
-  )
+  if (Object.hasOwn(mechanism, "skillTarget"))
+    validateSkillTarget(
+      mechanism["skillTarget"],
+      `${path}/skillTarget`,
+      collector,
+    )
   validateDamageItem(mechanism["damageItem"], `${path}/damageItem`, collector)
   if (Object.hasOwn(mechanism, "exclusiveDamageItem")) {
     const exclusive = booleanAt(
@@ -1370,6 +1653,7 @@ function validateRecord(
       "when",
       "operation",
       "parameters",
+      "uniqueness",
     ]) {
       if (Object.hasOwn(record, field))
         collector.add(`${path}/${field}`, "not valid for an unsupported record")
@@ -1446,6 +1730,8 @@ function validateRecord(
     for (const [name, parameter] of Object.entries(parameters ?? {}))
       validateParameter(parameter, `${path}/parameters/${name}`, collector)
   } else collector.add(`${path}/parameters`, "required for a rule record")
+  if (Object.hasOwn(record, "uniqueness"))
+    validateUniqueness(record["uniqueness"], `${path}/uniqueness`, collector)
 }
 
 /**
