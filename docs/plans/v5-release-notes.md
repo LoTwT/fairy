@@ -142,7 +142,8 @@
 
 - 68 条 integrated 补充记录已全部作者化；作者层当前覆盖 99/931 条规则、89/986 个
   选项。固定来源 records/variants 与 33 条 out-of-scope 补充记录仍由 converter 产生；
-  authoring 是这些条目的独立断言层，不是主数据来源。
+  authoring 是这些条目的独立断言层，不是主数据来源；边界与重新评估条件见
+  [转换器与作者层边界决策](converter-authoring-boundary-decision.md)。
 - authoring 分组标签与补充记录 `effectIds` 已由结构不变量约束，见
   [P2 分组不变量记录](phase2-authoring-group-invariants.md)。
 - 33 条 out-of-scope 补充记录带 `reason`，作者层仍不表达该字段，继续由 converter 生成。
@@ -176,6 +177,7 @@ P4-1 已完成：8 个机制 arm 与全部 30 个机制变体均纳入 authoring
 - [P2-4g 洛克茜补充选项](phase2-roxy-supplement-authoring.md)：8 条洛克茜单规则选项作者化、累计 63 条与字节等价验证。
 - [P2-4h 洛克茜初始回能转化](phase2-multi-rule-supplement-authoring.md)：一个变体下两条规则作者化、累计 64 条与字节等价验证。
 - [P2-4i 最后 4 条专用结算补充选项](phase2-special-operation-supplement-authoring.md)：68/68 integrated 补充记录作者化、累计 68 条与字节等价验证。
+- [转换器与作者层边界决策](converter-authoring-boundary-decision.md)：converter 作为唯一事实来源、authoring 冻结为断言层及重新评估条件。
 - [P4-1 authoring 机制覆盖](phase4-authoring-mechanism-coverage.md)：8 个 arm、30 个变体与字节等价验证。
 - [P4-2 目录变体机制判别联合](phase4-catalog-mechanism-union.md)：正式形状、迁移映射、验证与回滚边界。
 - [包边界与联动发布](../specs/packages.md)：同版发布规则、安装与发布操作。
