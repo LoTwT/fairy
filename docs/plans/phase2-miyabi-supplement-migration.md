@@ -1,6 +1,6 @@
 # Phase 2 P2-4b-lite：首条真实补充记录迁移
 
-状态：已实现并通过验收。基线为 `origin/main@9a53591b`（P2-4a 与 `optionId` follow-up 已合并），迁移分支为 `data/phase2-miyabi-supplement-authoring`。本批只把 1 条真实 `supplementalRecords` 从 converter 基线迁入作者层，证明 P2-4a 的端到端替换路径可用；不扩大作者层覆盖，不改 converter，也不改任何正式制品。
+状态：已合并 #301（squash merge `0d94fadd`）。基线为 `origin/main@9a53591b`（P2-4a 与 `optionId` follow-up 已合并），迁移分支为 `data/phase2-miyabi-supplement-authoring`。本批只把 1 条真实 `supplementalRecords` 从 converter 基线迁入作者层，证明 P2-4a 的端到端替换路径可用；不扩大作者层覆盖，不改 converter，也不改任何正式制品。
 
 ## 范围
 

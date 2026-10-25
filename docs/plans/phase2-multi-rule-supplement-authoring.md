@@ -1,6 +1,6 @@
 # Phase 2 P2-4h：洛克茜初始回能转化
 
-- 状态：已实现；基线 `origin/main @ 015833b1`（P2-4g #315 已合并）。
+- 状态：已合并 #316（squash merge `8d6935a5`）；基线 `origin/main @ 015833b1`（P2-4g #315 已合并）。
 - 分支：`data/p2-4h-multi-rule-supplement`。
 - 范围：把洛克茜 `initial-energy-regen-conversion` 纳入 authoring；不改 converter、
   正式 effects 制品、`integrated`、`dist`、`snapshotId`、publication/manifests、

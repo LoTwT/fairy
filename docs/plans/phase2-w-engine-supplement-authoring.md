@@ -1,6 +1,6 @@
 # Phase 2 P2-4d：音擎补充选项批量作者化
 
-- 状态：已实现；基线 `origin/main @ 6c2177b3`（P2-4c #311 已合并）。
+- 状态：已合并 #312（squash merge `6163ac8d`）；基线 `origin/main @ 6c2177b3`（P2-4c #311 已合并）。
 - 分支：`data/p2-4d-supplement-options`。
 - 范围：把 16 条仅有补充来源的音擎选项纳入 authoring；不改 converter、正式
   effects 制品、`integrated`、`dist`、`snapshotId`、publication/manifests、公开

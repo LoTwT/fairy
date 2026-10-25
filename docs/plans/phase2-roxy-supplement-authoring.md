@@ -1,6 +1,6 @@
 # Phase 2 P2-4g：洛克茜补充选项
 
-- 状态：已实现；基线 `origin/main @ a9eeeaa4`（P2-4f #314 已合并）。
+- 状态：已合并 #315（squash merge `015833b1`）；基线 `origin/main @ a9eeeaa4`（P2-4f #314 已合并）。
 - 分支：`data/p2-4g-roxy-supplements`。
 - 范围：把洛克茜 8 条单规则、单变体补充选项纳入 authoring；不改 converter、
   正式 effects 制品、`integrated`、`dist`、`snapshotId`、publication/manifests、

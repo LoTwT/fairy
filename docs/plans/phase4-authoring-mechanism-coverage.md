@@ -1,6 +1,6 @@
 # Phase 4 P4-1：authoring 机制覆盖
 
-- 状态：已实现；基线 `origin/main @ 36a8e799`（P0/P1 hardening 已合并）。
+- 状态：已合并 #310（squash merge `29ab5777`）；基线 `origin/main @ 36a8e799`（P0/P1 hardening 已合并）。
 - 范围：只改 `packages/data/scripts/static-effects/authoring` 与对应测试/文档；
   不改正式 effects 制品、`integrated`、`dist`、`publication.json`、`snapshotId`、
   shared/core 运行时或公开契约形状。

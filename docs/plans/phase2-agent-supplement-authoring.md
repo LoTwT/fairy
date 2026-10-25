@@ -1,6 +1,6 @@
 # Phase 2 P2-4e：单变体代理人/驱动盘补充选项
 
-- 状态：已实现；基线 `origin/main @ 6163ac8d`（P2-4d #312 已合并）。
+- 状态：已合并 #313（squash merge `b20de333`）；基线 `origin/main @ 6163ac8d`（P2-4d #312 已合并）。
 - 分支：`data/p2-4e-agent-supplement-options`。
 - 范围：把 10 条单变体、仅有补充来源的代理人/驱动盘选项纳入 authoring；
   不改 converter、正式 effects 制品、`integrated`、`dist`、`snapshotId`、
