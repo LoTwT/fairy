@@ -735,6 +735,10 @@ function validateMechanismCardinality(
     throw new Error(
       `single-rule group ${group.optionId} must contain exactly one record`,
     )
+  if (mechanismKind === "single-rule-per-variant" && group.records.length < 2)
+    throw new Error(
+      `single-rule-per-variant group ${group.optionId} must contain at least two records`,
+    )
   if (mechanismKind === "complete-state" && group.records.length < 2)
     throw new Error(
       `complete-state group ${group.optionId} must contain at least two records`,
