@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "rulesVersion": "agent-actions/2",
+  "rulesVersion": "agent-actions/3",
   "sourceVersion": "3.3.12+19634983",
   "members": [
     "1011",
@@ -834,7 +834,7 @@
     "agents/1191.json": "322aed3e92e535cf9575f9b0399a714c594daa6977df4fec7b89302017f8a419",
     "agents/1201.json": "915d98a47c79d84e506f7ee3209ce992169292e817de8f710475a8f6743d4388",
     "agents/1211.json": "b6b05f18e84cb2cf65f2dc01019e5d502f53bcad192104008897c42a6637d409",
-    "agents/1221.json": "5c88a2d4d18f5fc3d735e0db2c8b7695025a9891881315b4cbb829ef4513f97a",
+    "agents/1221.json": "5e157ad50da3fd207de8d69eec2cd43af69cf27187e64018049c81983e7be4ec",
     "agents/1241.json": "22c778a1146327b7bd9cebc6e57705b612b87195df103d9374ea6236b099d2a3",
     "agents/1251.json": "716af627b637c828cd12024b9177b462c063342df3d2661287417b5be06664a2",
     "agents/1261.json": "8d86f8ff9df5c6165d6a81da164adb7a7d6389c2a869453358f1468bff38868b",
@@ -856,7 +856,7 @@
     "agents/1421.json": "df244a6a5ccc7ac8ce02224933d997aead534699ca8ad44df4825a9fedab72e7",
     "agents/1431.json": "b0ebe085e9496c6355f21d0aa430149db91fbfe956e642dbb46d5c5e89fc3266",
     "agents/1441.json": "5efd3ba4ab1526ddded61119418d724cf2463600f22c3a78008f925658db84f6",
-    "agents/1451.json": "5db5119ad589eaf51de0b488c25e74c63fb9ea8da91f2d1a55bbb06e7205e146",
+    "agents/1451.json": "4b63bbc52b076f132ebd7bd45ffe65e0b942833129f1ddb4966bc42a0d7a4cc6",
     "agents/1461.json": "1e439a897e21cd5ff232644f53f24895f705a5e6c259534fce32e0dda2db1eba",
     "agents/1471.json": "9e18208719b7a2bb24307efda047062f7a391f97672e0d1637e661a7698b52b9",
     "agents/1481.json": "3ec9631182dc6f4d1684ad09126fb717878c23a7aa1d1fa34d8b9aa6a00ad2f5",
@@ -877,21 +877,21 @@
     "agents/1641.json": "350c560fcacd90a2ee5af4ce546f1ece24ea01d35ae6c51028e1812c82baf000"
   },
   "evidence": {
-    "zzzHpCommit": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
+    "zzzHpCommit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
     "resources": [
       {
         "resource": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-        "sha256": "34b8dbeef2f710fd27379502d248f850da5a8c19dc6a0a7568ef51fb4c4fe19c",
+        "sha256": "f1df0144ee962138cd09dbdd36511eab46fb3d6016ec638ddab7fc4a01737095",
         "purpose": "动作语义、增益锚点、命破职业与耀变倍率的固定参考"
       },
       {
         "resource": "zzz-hp-backend/scripts/import-nanoka-skills.mjs",
-        "sha256": "4721ed276d5fae69b7289d1e04b7024ef01a36097f59159d5b6b9cd09b5c2cb5",
+        "sha256": "294f9e1214ac26aa6246d13a378334f522244ff8c7750443e1801df540c324a1",
         "purpose": "Nanoka 技能等级线性成长的来源实现及复合参数导入差异"
       },
       {
         "resource": "zzz-hp/src/utils/skillTalentLevels.ts",
-        "sha256": "0391667fba8f39c868ab6bc8aa3609c2b72313e0ae00bd273ccb220de06faa6d",
+        "sha256": "f52244106f7a95cf621e375b5c654d71019d8a86eb80c55727561983ab4c71f4",
         "purpose": "五类技能等级、影画边界与独立耀变等级归属"
       },
       {
@@ -901,17 +901,17 @@
       },
       {
         "resource": "zzz-hp/src/utils/resolvedHit.ts",
-        "sha256": "b5f4a0692cb2277728d77bc2c34f5416d092d93a39144a77396c11939687de00",
+        "sha256": "3a4fa6ddd0bc21c4214369932adb86710c4bfc803b573033113ade1be6038597",
         "purpose": "命中构造与技能上下文：实际传递技能匹配坐标"
       },
       {
         "resource": "zzz-hp/src/utils/buffEffect.ts",
-        "sha256": "944d263a8bb3ed8531799792b7a3296bfb9e904002209442883039cf87f4ad95",
+        "sha256": "b344c82c6015ac31f72197e8ee968cfc9bf60be5e85403b455008f8dbfa763bf",
         "purpose": "增益坐标匹配：逐 category/subcategory 比较技能上下文"
       }
     ]
   },
-  "registrySha256": "2900a1c9e38bf0c566194b0cbf3580a5ec96f13f8f41a27951ecb8027325c083",
+  "registrySha256": "962c1c6ca4fe674d3dc988cc0817f785ce93f4ec4f4b5add159d7c8d0f46300e",
   "staticCatalogSha256": "3a26131e9d4561701f51c67959ff1e16a2b35931edea60d0435b757851a5d8b3",
   "coverage": {
     "agents": 62,
@@ -931,7 +931,7 @@
     "没有自动施加减防、影画伤害增益、核心属性转化或装备效果；沿用现有静态效果与后续面板适配。",
     "失衡倍率独立于伤害倍率；耀变基础倍率独立于攻击力直伤，实际结算复用现有 core/effects 公式。",
     "动作可用性与命中身份可由潜能等级与调用方显式额外能力事实决定；未提供、未解锁或事实非法时拒绝，不插值、不复用最高档。",
-    "1631、1641 的动作目录尚未登记，当前只发布空动作清单；待后续批次补齐。"
+    "新增来源技能若只有状态触发或额外段、没有对应 Nanoka 动作行，不生成独立可选动作；无动作引用的孤立子类不引入。"
   ],
   "discrepancies": [
     {
@@ -1066,34 +1066,6 @@
       "upstream": "2.153",
       "adopted": "4.306",
       "reason": "保留本来源行的完整表达式；上游导入只提取首个参数，且没有保留全部分摊、求和与重复项。"
-    },
-    {
-      "actionId": "action:agent:1041:action:0006",
-      "field": "element",
-      "upstream": "火",
-      "adopted": "physical",
-      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
-    },
-    {
-      "actionId": "action:agent:1041:action:0007",
-      "field": "element",
-      "upstream": "火",
-      "adopted": "physical",
-      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
-    },
-    {
-      "actionId": "action:agent:1041:action:0008",
-      "field": "element",
-      "upstream": "火",
-      "adopted": "physical",
-      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
-    },
-    {
-      "actionId": "action:agent:1041:action:0009",
-      "field": "element",
-      "upstream": "火",
-      "adopted": "physical",
-      "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
     },
     {
       "actionId": "action:agent:1041:action:0020",

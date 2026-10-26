@@ -15,7 +15,7 @@ import {
 } from "../panel-attributes/manifest.ts"
 import evidence from "./evidence.json" with { type: "json" }
 
-export const rulesVersion = "agent-actions/2"
+export const rulesVersion = "agent-actions/3"
 export const limitations = [
   "动作与分支须显式选择，不根据入场、蓄力或前序招式推断战斗状态，不自动相加互斥档位。",
   "只解析有限的线性倍率语法；来源 CAL 特殊机制及 potential 分支逐项标记，不将缺失数据视为零。",
@@ -25,7 +25,7 @@ export const limitations = [
   "没有自动施加减防、影画伤害增益、核心属性转化或装备效果；沿用现有静态效果与后续面板适配。",
   "失衡倍率独立于伤害倍率；耀变基础倍率独立于攻击力直伤，实际结算复用现有 core/effects 公式。",
   "动作可用性与命中身份可由潜能等级与调用方显式额外能力事实决定；未提供、未解锁或事实非法时拒绝，不插值、不复用最高档。",
-  "1631、1641 的动作目录尚未登记，当前只发布空动作清单；待后续批次补齐。",
+  "新增来源技能若只有状态触发或额外段、没有对应 Nanoka 动作行，不生成独立可选动作；无动作引用的孤立子类不引入。",
 ] as const
 
 export function actionSourceContract(index: IntegratedSnapshotIndex) {

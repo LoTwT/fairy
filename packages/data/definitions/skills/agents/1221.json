@@ -1020,7 +1020,7 @@
       },
       "inputs": [],
       "limitations": [],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-yanagi-nk-1221016-额外附加"
     },
     {
       "actionId": "action:agent:1221:action:0019",
@@ -1366,7 +1366,7 @@
       },
       "inputs": [],
       "limitations": [],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-yanagi-nk-1221022-额外附加"
     }
   ]
 }

@@ -65,7 +65,7 @@
       "packageVersion": "0.5.0",
       "contractVersion": 3,
       "gameVersion": "3.3",
-      "snapshotId": "sha256:faad0c75d86773f6070daa9f4516efbf9186a81a4e37a308210a4b5bebd435e7"
+      "snapshotId": "sha256:7a4206e5e1e1d1f1dfb7318d3ddc967754caf3d89011eab4ab9aab0e7d121198"
     },
     "fairyCalculationSources": {
       "packages/core/src/static/calculate.ts": "c1e6d073f7b8eb62241bf640da8d3e1a878aa8de9a703636c490f113a126441e",
@@ -80494,7 +80494,7 @@
           "packages/data/definitions/effects/static-catalog.json": "ca8b4f0b810c0720f46e410ae4318b37a491c9e2afe3012c5643b4e0baa4a2d0"
         }
       },
-      "currentSnapshotId": "sha256:faad0c75d86773f6070daa9f4516efbf9186a81a4e37a308210a4b5bebd435e7"
+      "currentSnapshotId": "sha256:7a4206e5e1e1d1f1dfb7318d3ddc967754caf3d89011eab4ab9aab0e7d121198"
     }
   ]
 }

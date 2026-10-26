@@ -2,6 +2,7 @@
 
 `@randomplay/data` 提供 Nanoka 3.3.12+19634983 全部 62 名角色的独立动作目录、伤害与失衡成长曲线、
 影画技能等级提升和纯解析函数。1631、1641 的动作目录已在 D6 补齐，当前 62 名成员均发布非空动作清单。
+当前技能证据固定为 ZZZ-HP `991bb0e`，规则版本为 `agent-actions/3`。下文保留的 `0df40c5b` 链接是当时证据，当前来源以 `991bb0e` 为准。
 完整面板组装、装备及常驻转化由 core 的[静态计算入口](../core/static-calculation.md)提供。
 共同类型由 [shared 动作契约](../../../packages/shared/src/skills.ts)维护；data 的 [`src/skills/types.ts`](../../../packages/data/src/skills/types.ts) 重导出这些类型并维护来源清单。
 
@@ -156,7 +157,7 @@ Nanoka 的莱特 `/talent/1/desc` 与奥菲丝 `/passive/level/1301507/desc/0` �
 完整 actionId 前缀为 `action:agent:1621:action:`，branchId 均为
 `agent:1621:branch:special-10`，培养组仍为 special。Nanoka 3.2 中英文
 `/skill/special/description/4/desc` 说明爆鸣造成一次伤害、两种风旋均持续1秒；
-对应失衡行2/4与伤害曲线独立保留。上游 seed 的 /skills/843、844、845 分别为巨型、
+对应失衡行2/4与伤害曲线独立保留。上游 seed 的 /skills/863、864、865 分别为巨型、
 微型、爆鸣，L12 的 baseMult/factor100 为4.174、1.049、1.049。
 完整原条款和参数见[来源夹具](../../../packages/data/test/fixtures/roxy-wind-eye-source.json)。
 
@@ -183,20 +184,19 @@ Nanoka 的莱特 `/talent/1/desc` 与奥菲丝 `/passive/level/1301507/desc/0` �
 1/12/16 级倍率分别为 92.5%/186%/220%、127.5%/255.1%/301.5%、175%/351%/415% 与
 250%/500.8%/592%。三种武器与回旋挥击各自独立选择，不把相邻行相加成三段。
 
-固定 ZZZ-HP 技能来源 `0df40c5b` 的资源 `zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json`
-（sha256 `34b8dbeef2f710fd27379502d248f850da5a8c19dc6a0a7568ef51fb4c4fe19c`）中
-`/skills/489`—`492` 四行均登记 `agentId: "lucy"`、`element: "火"`、`damageType: "direct"`、
+当前技能来源 `991bb0e` 的资源 `zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json`
+`/skills/520`—`523` 四行均登记 `agentId: "lucy"`、`element: "火"`、`damageType: "direct"`、
 `skillTypes: ["basic"]`，`buffAnchorId`、`ownerGroupId` 为 `null`，`settlementMult: 0`、
 `baseMultFactor: 100`。动作、来源行与 12 级 `baseMult` 逐一对应如下：
 
 | 动作                                     | 来源行        | 12 级 `baseMult` |
 | ---------------------------------------- | ------------- | ---------------- |
-| `action:agent:1151:action:0011` 棒球棍   | `/skills/492` | 186              |
-| `action:agent:1151:action:0012` 拳套     | `/skills/491` | 255.1            |
-| `action:agent:1151:action:0013` 弹弓     | `/skills/490` | 351              |
-| `action:agent:1151:action:0014` 回旋挥击 | `/skills/489` | 500.8            |
+| `action:agent:1151:action:0011` 棒球棍   | `/skills/523` | 186              |
+| `action:agent:1151:action:0012` 拳套     | `/skills/522` | 255.1            |
+| `action:agent:1151:action:0013` 弹弓     | `/skills/521` | 351              |
+| `action:agent:1151:action:0014` 回旋挥击 | `/skills/520` | 500.8            |
 
-该来源的实际计算路径中，[伤害页](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp/src/composables/useDamageProcessEvents.ts#L106)
+历史来源 `0df40c5b` 的实际计算路径中，[伤害页](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp/src/composables/useDamageProcessEvents.ts#L106)
 以 `requirePanel: true` 求值；[命中解析](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp/src/utils/resolvedHit.ts#L75)
 只有异常类才要求第二个角色与属性提供者；[最优分配](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp/src/utils/optimalAffixAlloc.ts#L807)
 取 `ownerAgent.element`、经 `ownerExternal`/`computeFinalPanel` 得到露西面板、抗性取本体槽位，末尾按
@@ -243,13 +243,13 @@ Nanoka 的莱特 `/talent/1/desc` 与奥菲丝 `/passive/level/1301507/desc/0` �
 32.5%/65.5%/77.5% 与 137.5%/206.8%/232%。五类培养等级 +2 的来源仍为 `/talent/3/desc`
 与 `/talent/5/desc`。
 
-`skillCategory: "uncategorized"` 是来源注记支持的具名修正，不把来源临时归类当成事实：固定 ZZZ-HP
-技能来源 `0df40c5bc38f8da7ed0f9eed6be87fb8155b8357` 与增益来源
-`fac62407f3d3995f8200a66be0038f292b1455fa` 的 `zzz-hp-calculator-buffs.json`
-`/agents/44/mindscapeBuffs/0/effectBlocks/0/note` 都写明[微域气旋]与[广域气旋]只是方便处理列入
+`skillCategory: "uncategorized"` 是来源注记支持的具名修正，不把来源临时归类当成事实：在技能来源
+`0df40c5b` 与增益来源 `fac62407f3d3995f8200a66be0038f292b1455fa` 的
+`zzz-hp-calculator-buffs.json` `/agents/44/mindscapeBuffs/0/effectBlocks/0/note` 都写明
+[微域气旋]与[广域气旋]只是方便处理列入
 [特殊技]大类、实则不属于任何类型；目录中 `/skillSubcategories/80`（微域）与 `/79`（广域）已是
 `categoryId` 转为 `uncategorized`、`countsAsFollowUp: false`，两个独立目标不附加 `special` 大类条件。
-`/skills/922`（`sk-velina-nk-1561021-main`）登记 `direct`、风、`baseMult 65.5`、
+当前来源 `991bb0e` 的 `/skills/1042`（`sk-velina-nk-1561021-main`）仍登记 `direct`、风、`baseMult 65.5`、
 `settlementMult 0`、`buffAnchorId velina-special-ms4tnsha`。上游原始运行数据仍带临时 `special`
 坐标；本约定不声称上游运行时已使用 `uncategorized`，也不冒称游戏内实测或逐命中拆分。
 
@@ -277,7 +277,7 @@ Nanoka 的莱特 `/talent/1/desc` 与奥菲丝 `/passive/level/1301507/desc/0` �
 仍拒绝这些合计动作，`repeat: 1` 不代表已确认内部仅一次命中。
 
 证据来自 Nanoka `3.2` 的 `agents/1611/details.zh.json` 与 `details.en.json`（Pointer 逐行对应），
-并核对固定 ZZZ-HP 技能来源 `0df40c5b` 的 25 行：全部登记 `agentId: "claret"`、`element: "电"`、
+并核对历史技能来源 `0df40c5b` 的 25 行：全部登记 `agentId: "claret"`、`element: "电"`、
 `damageType: "direct"`、`settlementMult: 0`、`baseMultFactor: 100`、`multSource: "nanoka"`。12 级
 `baseMult` 抽样对照如下（完整逐行对照见
 [agent-actions 测试](../../../packages/data/test/agent-actions.test.ts)）：
@@ -322,11 +322,11 @@ Nanoka 的莱特 `/talent/1/desc` 与奥菲丝 `/passive/level/1301507/desc/0` �
 400.4%/800.8%/946.4% 与 121.0%/181.5%/203.5%。五类培养等级 +2 的来源为各角色 `/talent/3/desc`
 与 `/talent/5/desc`。
 
-固定 ZZZ-HP 技能来源 `0df40c5b` 的 `zzz-hp-calculator-buffs.json` 中，`/skills/1091`
+当前技能来源 `991bb0e` 的 `zzz-hp-calculator-buffs.json` 中，`/skills/1226`
 （`sk-zhao-nk-1341015-main`）登记 `direct`、`skillTypes: ["assist"]`、冰、`buffAnchorId: null`、
-12 级 `baseMult 1361.2`、`baseMultFactor 100`、`settlementMult 0`；`/skills/1010`
+12 级 `baseMult 1361.2`、`baseMultFactor 100`、`settlementMult 0`；`/skills/1141`
 （`sk-yeshunguang-direct-mtsgty6b`）同样登记 generic assist 与空锚点，物理、12 级 `baseMult 800.8`。
-两条行在技能固定提交与增益固定提交 `fac62407` 的同一份文件中都存在。实际匹配链只读固定
+两条行在技能固定提交 `991bb0e` 与增益固定提交 `fac62407` 的同一份文件中都存在。实际匹配链只读固定
 Git 对象核对：`zzz-hp/src/utils/skillTypes.ts` 的 `SKILL_TYPE_COORD` 与 `buildSkillMatchCoords`
 把 `assist` 映射为 `{ category: "assist", subcategoryId: null }`；`resolvedHit.ts`
 在命中构造与 `buildSkillContextFromHit` 传递该坐标；`buffEffect.ts` 的
@@ -368,11 +368,12 @@ PR4 跳过此项实现，仅记录为已知限制。当前[卢西娅动作定义
 英文为 `f431cf4a9dbe99d977b672a08d3d83e750ad3eca839c9dad4ea66f84b46381e8`。
 原文适用于所有 `[合唱]`，此处以破晓两行定位缺口；其他 `[合唱]` 动作也未因此获得这份附加伤害支持。
 
-固定 ZZZ-HP 技能来源 `0df40c5b` 与增益来源 `fac62407` 均未实现该项。
-技能目录 `zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json` 的 `/skills/469` 只记录破晓主倍率，
-12 级为 1277.2%；[导入器](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp-backend/scripts/import-nanoka-skills.mjs#L159)
-跳过没有技能参数 ID 的倍率行，[伤害公式](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp/src/utils/damageCalc.ts#L378)
-也没有补算这份生命值附加项。固定上游结果不能作为该项伤害的独立期望值。
+技能来源 `991bb0e` 已登记两条破晓行：`/skills/498`（`sk-lucia-nk-1451011-main`）只记录破晓主倍率，
+12 级为 1277.2%；`/skills/499`（`sk-lucia-nk-1451011-合唱-额外`）记录 `[合唱]` 额外倍率，
+12 级为 0.7%、`damagePercentage` 37、成长 3。后者只描述最大生命值比例，仍不含可解析的生命值读取
+时点与完整乘区；`action:agent:1451:action:0025` 的 `upstreamSkillId` 已指向该行，但动作保持
+`unavailable`。[导入器](https://github.com/Nie7bai/ZZZ-HP/blob/991bb0ef2a00387f8a1fa18293bbda17256d7270/zzz-hp-backend/scripts/import-nanoka-skills.mjs#L159)
+仍不会把这份生命值附加项变成普通攻击力伤害，固定上游结果也不能作为该项伤害的独立期望值。
 
 后续重新处理时，须先取得独立机制资料或受控实测，确认附加项的结算位置、生命值读取时点及适用的
 暴击、增伤、防御和抗性等乘区，再明确附加行与主动作的组合及选择契约，避免重复计入。
@@ -402,11 +403,14 @@ PR4 跳过此项实现，仅记录为已知限制。当前[卢西娅动作定义
 中文文件 SHA-256 为 `d4ea98a1be0229d2d8014659ec367bac45a0d37410ad11ec42b0b0f2e26fad02`，
 英文为 `7d919f7a6b5fadd419fcaf958bc1a4aad23448377f1d38d64c9b71ce84c85e61`。
 
-固定 ZZZ-HP 技能来源 `0df40c5b` 与增益来源 `fac62407` 均未实现这份精通附加结算。
-资源 `zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json` 的
+技能来源 `991bb0e` 已登记两条额外附加行：`/skills/1108`（`sk-yanagi-nk-1221016-额外附加`）与
+`/skills/1093`（`sk-yanagi-nk-1221022-额外附加`），12 级 `baseMult` 均为 32、
+`damagePercentage` 725、成长 225。两条动作的 `upstreamSkillId` 已分别指向这两行，但仍因
+`special-mechanic` 与 `unsupported-expression` 保持 `unavailable`：来源行只描述柳异常精通对应的系数，
+不能当普通攻击力倍率、完整极性紊乱或零贡献使用。资源
+`zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json` 的
 `/agents/28/mindscapeBuffs/0/effectBlocks/2/note` 虽写明 15%、3200.0% 异常精通和不清除异常，
-但[导入器](https://github.com/Nie7bai/ZZZ-HP/blob/0df40c5bc38f8da7ed0f9eed6be87fb8155b8357/zzz-hp-backend/scripts/import-nanoka-skills.mjs#L159)
-跳过没有技能参数 ID 的倍率行；[伤害公式](https://github.com/Nie7bai/ZZZ-HP/blob/fac62407f3d3995f8200a66be0038f292b1455fa/zzz-hp/src/utils/damageCalc.ts#L828)
+但[伤害公式](https://github.com/Nie7bai/ZZZ-HP/blob/991bb0ef2a00387f8a1fa18293bbda17256d7270/zzz-hp/src/utils/damageCalc.ts#L828)
 仍走通用紊乱，没有独立的柳精通附加项。默认路径先对基础倍率应用修正，再加时间补偿，
 不能据此认定完整原紊乱的 15% 已正确结算。描述文字和通用倍率配置不能作为完整伤害的独立期望值。
 补查上游提交 [`0fcd8a1`](https://github.com/Nie7bai/ZZZ-HP/blob/0fcd8a1fb70cc9dbe5c3423f4015f85ca8faa5ba/zzz-hp/src/utils/damageCalc.ts#L832)
@@ -491,12 +495,29 @@ hit-adjustment 一次赋值，影画门槛 `minimumMindscape` 2/1、额外能力
 1641 为火属性、含普通攻击裁生四段、焚罪、熔毁、三组招架失衡行、快速支援、支援突击、连携、终结、
 烬火追魂、冲刺、闪避反击、特殊技与三条强化特殊技。
 
-固定技能来源 `0df40c5bc38f8da7ed0f9eed6be87fb8155b8357` 早于这两个实体，未登记对应技能行，
-因此全部动作的 `upstreamSkillId` 为 `null`，倍率只按 Nanoka 冻结参数行生成，不伪造上游技能身份。
+D6-1 最初在固定技能来源 `0df40c5b` 基线上补齐这两个实体；该来源早于 1631/1641，未登记对应技能行，
+因此当时全部动作的 `upstreamSkillId` 为 `null`，倍率只按 Nanoka 冻结参数行生成。当前技能证据已升级到
+`991bb0e`，该提交已包含这些技能行；本批仍保留 D6 动作的既有 `null` 身份，三条额外结算行另按
+[技能修订 53](#技能修订-53991bb0e-技能证据升级)回填，避免把 40 条 D6 动作的身份迁移混入证据升级。
 1631 的登场技按[通用 assist 登场技直伤约定](#具名约定通用-assist-登场技直伤)登记为通用 `assist`；
 1641 的普通攻击焚罪与烬火追魂只登记直接伤害行，同段 `{CAL}` 异放倍率是独立结算事件，作为具名限制保留，
 不并入直接伤害、不模拟异常状态、异放暴击、生命回复或生命周期。两人的 M3/M5 五类技能等级 +2
 仍按 `/talent/3/desc` 与 `/talent/5/desc` 逐角色核验。
+
+## 技能修订 53：991bb0e 技能证据升级
+
+技能证据从 `0df40c5b` 切换到 `991bb0e`，六个固定资源的 SHA-256 与 manifest evidence 同步更新。
+新来源的 `/skills` 新增大量按异常分支展开的 `disorder`、`anomalyRelease` 与 `-main` 行；本批只处理与
+现有动作目录直接相关的三条额外结算来源：
+
+- `action:agent:1221:action:0018` → `sk-yanagi-nk-1221016-额外附加`
+- `action:agent:1221:action:0024` → `sk-yanagi-nk-1221022-额外附加`
+- `action:agent:1451:action:0025` → `sk-lucia-nk-1451011-合唱-额外`
+
+三条动作仍保持 `unavailable`（特殊机制/未支持表达式），只补 `upstreamSkillId`，不把额外结算当作普通
+攻击力伤害。Burnice 的[余烬]/[余烬-特殊]是[燃油特调]状态触发与额外段，没有对应的 Nanoka 动作行，
+不生成新的可选动作，也不自动追加到普攻或支援动作。安比新增的 `1011-basic-mvhir0y7` 子类没有动作引用，
+按孤立子类处理，不引入。动作数仍为 1,348，仅 1221/1451 两个成员文件与 manifest 改变。
 
 ## 覆盖、证据与生成
 
@@ -510,7 +531,7 @@ hit-adjustment 一次赋值，影画门槛 `minimumMindscape` 2/1、额外能力
 意义，生成期对每个代理人执行 zh/en 数值投影等价校验（数值叶子按路径逐一比对，本地化文本不参与）：
 任何一侧数值缺失、多出或取值不同都会拒绝生成，并在离线回归中以同一规则守护全部成员。
 
-ZZZ-HP 固定提交 `0df40c5bc38f8da7ed0f9eed6be87fb8155b8357` 为语义参考，文件摘要在
+ZZZ-HP 固定提交 `991bb0ef2a00387f8a1fa18293bbda17256d7270` 为语义参考，文件摘要在
 [`evidence.json`](../../../packages/data/scripts/skills/evidence.json)。具名差异随 manifest 发布，包括角色默认属性
 误用于物理招式、只提取复合倍率首项等。运行与普通构建不需要 ZZZ-HP 工作区或网络。
 

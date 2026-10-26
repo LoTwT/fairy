@@ -8279,7 +8279,7 @@
     "skillCategory": "ultimate",
     "element": "electric",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-yanagi-nk-1221016-额外附加",
     "skillTargetIds": [],
     "issues": [
       {
@@ -8386,7 +8386,7 @@
     "skillCategory": "enhanced-special",
     "element": "electric",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-yanagi-nk-1221022-额外附加",
     "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
     "issues": [
       {
@@ -16777,7 +16777,7 @@
     "skillCategory": "enhanced-special",
     "element": "ether",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-lucia-nk-1451011-合唱-额外",
     "skillTargetIds": ["zzz-hp:skill:all-special-ms0fcqv7"],
     "issues": [
       {
