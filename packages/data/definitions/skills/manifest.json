@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "rulesVersion": "agent-actions/3",
+  "rulesVersion": "agent-actions/4",
   "sourceVersion": "3.3.12+19634983",
   "members": [
     "1011",
@@ -873,8 +873,8 @@
     "agents/1591.json": "8e671e68d9600814812c2b044c398974af7407a6ba142d2a5cd73cf834084978",
     "agents/1611.json": "8914791496672f301b020717b70bab506af1dccf1e6d2308db51ca61502a1471",
     "agents/1621.json": "95dac5716c042c8e519fbec7fb38db14daca4e2d19eea96afeb2500c6daf9c80",
-    "agents/1631.json": "2bcb6fa321d3c793def7d6f5460bc06149ae458683e80899149a455080a8c81b",
-    "agents/1641.json": "350c560fcacd90a2ee5af4ce546f1ece24ea01d35ae6c51028e1812c82baf000"
+    "agents/1631.json": "bc61f15d5fc3025e6d562e618ed51aaf6f6779d8d53c73123818931061cc8a40",
+    "agents/1641.json": "3beb9a890dcd7860da4c93be9039f9953723158a20498414e9bd64a526f8ac46"
   },
   "evidence": {
     "zzzHpCommit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
@@ -911,7 +911,7 @@
       }
     ]
   },
-  "registrySha256": "962c1c6ca4fe674d3dc988cc0817f785ce93f4ec4f4b5add159d7c8d0f46300e",
+  "registrySha256": "ac2377f0a3de86d72873ce9e3b9ff46a36140e2748949f759ebc7f7d7c5722eb",
   "staticCatalogSha256": "3a26131e9d4561701f51c67959ff1e16a2b35931edea60d0435b757851a5d8b3",
   "coverage": {
     "agents": 62,
@@ -2074,6 +2074,13 @@
       "upstream": "冰",
       "adopted": "physical",
       "reason": "按具名招式的 Nanoka 说明核对；不把角色属性自动赋给所有招式，并保留特殊属性身份。"
+    },
+    {
+      "actionId": "action:agent:1641:action:0014",
+      "field": "skillCategory",
+      "upstream": "chain",
+      "adopted": "ultimate",
+      "reason": "按具名招式的来源说明确认伤害分类，不将倍率所属培养类别直接作为伤害类别。"
     }
   ]
 }

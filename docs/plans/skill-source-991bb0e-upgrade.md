@@ -28,8 +28,9 @@
   不把额外结算当作普通攻击力伤害。
 - Burnice 的[余烬]/[余烬-特殊]是[燃油特调]状态触发与额外段，Nanoka 没有独立动作行；
   不生成新的可选动作，也不自动追加到普攻或支援动作。
-- 三见闻（1631）与菲欧妮（1641）的 20 条动作继续保留既有 `upstreamSkillId: null`；
+- 三见闻（1631）与菲欧妮（1641）的 20 条动作在本批继续保留既有 `upstreamSkillId: null`；
   991bb0e 虽然已包含这些来源行，全量 provenance 回填留待后续批次，避免本批扩大身份迁移。
+  后续[技能修订 54](d6-action-provenance-backfill.md)已回填 34 条直伤动作，6 条招架仅失衡仍为 `null`。
 - `1011-basic-mvhir0y7` 没有动作引用，不引入；孤立子类不因为没有引用而制造虚假动作。
 
 ## 制品变化
@@ -58,8 +59,10 @@ pnpm --filter @randomplay/data verify:nanoka:current integrated
 `authoring:verify` 通过；制品依赖检查为 730 个节点、915 条边、0 个违规；身份审计
 `outcome: matched`、`newProblems: []`。`verify:nanoka:current integrated` 返回 `verified: true`，
 `state.json` 摘要仍为 `f4310abb…`、`maintenance.json` 为 `fe19c577…`，`lock.sqlite` 为空且未留下
-事务 journal。计算数据快照更新为
-`sha256:7a4206e5e1e1d1f1dfb7318d3ddc967754caf3d89011eab4ab9aab0e7d121198`。
+事务 journal。当时计算数据快照更新为
+`sha256:7a4206e5e1e1d1f1dfb7318d3ddc967754caf3d89011eab4ab9aab0e7d121198`；后续
+[技能修订 54](d6-action-provenance-backfill.md)再次更新为
+`sha256:ccb28367195fe2f2b4183623a3332119fbc742ffc484b40cd9be89be645623ae`。
 
 新增测试：
 

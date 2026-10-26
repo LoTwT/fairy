@@ -49,6 +49,7 @@
 - [ZZZ Calculator 对照验收](plans/zzz-calculator-comparison.md)：固定双方版本的公式、数据与上游测试对照，包含迁移到 Fairy 的离线样本、已确认差异及后续 PR 拆分。
 - [ZZZ-HP 991bb0e 升级审计](plans/zzz-hp-991bb0e-upgrade-audit.md)：`2628b32` → `991bb0e` 的逐条裁定、ID 规范化、预期制品变化、验证与回退边界。
 - [技能来源 991bb0e 升级](plans/skill-source-991bb0e-upgrade.md)：技能证据切换、柳/卢西娅三条额外结算来源回填、Burnice 触发段与安比孤立子类的边界。
+- [D6 动作来源身份回填](plans/d6-action-provenance-backfill.md)：1631/1641 共 34 条直伤动作的来源 ID、6 条招架仅失衡保留 `null`、菲欧妮分类差异与 `agent-actions/4`。
 - [维琳娜异常增伤范围修正](plans/velina-anomaly-scope-correction.md)：修订 54 收窄宽口径 `anomalyDmgBonus`，消除乱流重复计入并保留公开 ID。
 - [宽口径异常增伤审计](plans/anomaly-broad-scope-audit.md)：修订 55 收窄格莉丝、薇薇安、爱丽丝、简与琳琅鎏心的命名异常子类，消除剩余乱流重复计入与越界命中。
 - [怒目金刚精炼 2 贯穿伤害修正](plans/wrathful-vajra-r2-sheer-correction.md)：修订 56 修正 14147 精炼 2 的上游 `turbulenceDmgBonus` 字段笔误，恢复火属性贯穿伤害并保留公开 ID。

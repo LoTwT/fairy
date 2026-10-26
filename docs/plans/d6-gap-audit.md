@@ -10,7 +10,7 @@
 
 - 静态 effects（revision 56）：1,149 converted、134 corrected、92 unsupported。
 - 补充来源：102 条记录，68 条已整合，34 条 out-of-scope。
-- 技能动作：62 名成员、1,348 条动作；4 条 unavailable；技能证据 ZZZ-HP `991bb0e`。
+- 技能动作：62 名成员、1,348 条动作；4 条 unavailable；技能证据 ZZZ-HP `991bb0e`；D6 的 34 条直伤动作已回填来源，6 条招架仅失衡保留 `null`。
 - core oracle：1,688 条 case，覆盖全部 1,149 个 converted 来源位置。
 
 ## 92 条 unsupported

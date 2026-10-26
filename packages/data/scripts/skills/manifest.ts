@@ -15,7 +15,7 @@ import {
 } from "../panel-attributes/manifest.ts"
 import evidence from "./evidence.json" with { type: "json" }
 
-export const rulesVersion = "agent-actions/3"
+export const rulesVersion = "agent-actions/4"
 export const limitations = [
   "动作与分支须显式选择，不根据入场、蓄力或前序招式推断战斗状态，不自动相加互斥档位。",
   "只解析有限的线性倍率语法；来源 CAL 特殊机制及 potential 分支逐项标记，不将缺失数据视为零。",
