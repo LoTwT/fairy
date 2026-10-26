@@ -183,12 +183,12 @@ describe("static effects authoring migration records", () => {
       baseline.coverage.records.filter(
         (record) => record.status === "corrected",
       ),
-    ).toHaveLength(121)
+    ).toHaveLength(133)
     expect(
       baseline.coverage.records.filter(
         (record) => record.status === "converted",
       ),
-    ).toHaveLength(1162)
+    ).toHaveLength(1150)
     const selectedSupplementalRecords =
       baseline.coverage.supplementalRecords.filter(
         (record) =>

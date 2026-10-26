@@ -48,6 +48,7 @@ import {
   type CompleteStateOptionRegistration,
   type CompleteStateSourceRecord,
   type CoreSkillLevelSemantics,
+  type DamageKindScopeCorrectionFields,
   type DeveloperRevisionEvidence,
   type SourceSemantics,
 } from "./semantics.ts"
@@ -2179,7 +2180,8 @@ function verifySettlementElementScopeRecord(
  */
 function verifyDamageKindScopeCorrectionRecord(
   record: SourceRecord,
-  semantics: Extract<SourceSemantics, { kind: "damage-kind-scope-correction" }>,
+  semantics: DamageKindScopeCorrectionFields,
+  differenceId: string,
 ): void {
   for (const [label, document] of [
     ["raw", record.raw],
@@ -2187,7 +2189,7 @@ function verifyDamageKindScopeCorrectionRecord(
   ] as const) {
     if (document === undefined)
       throw new Error(
-        `Damage-kind scope correction ${semantics.differenceId} lost the ${label} record at ${record.pointer}`,
+        `Damage-kind scope correction ${differenceId} lost the ${label} record at ${record.pointer}`,
       )
     for (const [field, expected] of Object.entries(semantics.expectedEncoding))
       if (
@@ -2199,7 +2201,7 @@ function verifyDamageKindScopeCorrectionRecord(
         ) !== JSON.stringify(expectedShapeFieldValue(expected, field))
       )
         throw new Error(
-          `Damage-kind scope correction ${semantics.differenceId} ${label} field drift at ${record.pointer}: ${field}`,
+          `Damage-kind scope correction ${differenceId} ${label} field drift at ${record.pointer}: ${field}`,
         )
   }
   for (const [label, note] of [
@@ -2208,8 +2210,38 @@ function verifyDamageKindScopeCorrectionRecord(
   ] as const)
     if (note !== semantics.expectedSourceBlockNote)
       throw new Error(
-        `Damage-kind scope correction ${semantics.differenceId} ${label} block note drift at ${record.pointer}`,
+        `Damage-kind scope correction ${differenceId} ${label} block note drift at ${record.pointer}`,
       )
+}
+
+/** 按登记把已生成的 hit.damageKind 条件收窄；映射漂移时拒绝生成。 */
+function narrowDamageKindCondition(
+  when: Condition<"contribution">,
+  semantics: DamageKindScopeCorrectionFields,
+  differenceId: string,
+  pointer: string,
+): Condition<"contribution"> {
+  if (when.kind !== "all") {
+    throw new Error(
+      `Damage-kind scope correction ${differenceId} expected an all condition at ${pointer}; the when shape drifted`,
+    )
+  }
+  const damageKindIndex = when.conditions.findIndex(
+    (condition) =>
+      condition.kind === "one-of" &&
+      condition.fact === "hit.damageKind" &&
+      JSON.stringify(condition.values) ===
+        JSON.stringify(semantics.expectedDamageKinds),
+  )
+  if (damageKindIndex < 0)
+    throw new Error(
+      `Damage-kind scope correction ${differenceId} lost the registered damage-kind condition ${JSON.stringify(semantics.expectedDamageKinds)} at ${pointer}`,
+    )
+  const conditions = [...when.conditions]
+  conditions[damageKindIndex] = oneOf("hit.damageKind", [
+    ...semantics.correctedDamageKinds,
+  ])
+  return { kind: "all", conditions }
 }
 
 /**
@@ -2367,7 +2399,20 @@ function compile(
   // 伤害种类范围修正：登记编码与冻结块 note 的校验同样早于通用
   // unsupported 降级（源漂移不能被降级掩盖）。
   if (semantics?.kind === "damage-kind-scope-correction")
-    verifyDamageKindScopeCorrectionRecord(record, semantics)
+    verifyDamageKindScopeCorrectionRecord(
+      record,
+      semantics,
+      semantics.differenceId,
+    )
+  if (
+    semantics?.kind === "potential-level" &&
+    semantics.damageKindScope !== undefined
+  )
+    verifyDamageKindScopeCorrectionRecord(
+      record,
+      semantics.damageKindScope,
+      semantics.damageKindScope.differenceId,
+    )
   // [颤音：改]共存排除：登记编码与冻结块 note 的校验同样早于通用
   // unsupported 降级（独立登记与 stagger-recovery 扩展字段共用）。
   if (semantics?.kind === "exclude-settlement-target")
@@ -3319,27 +3364,12 @@ function compile(
     // 通道与稳定 ID，只按登记收窄已经生成的 hit.damageKind 条件。找不到
     // 登记集合即拒绝（编码守卫已核对 stat/value，此处缺失说明映射漂移，
     // 不能静默跳过或把范围留宽）。
-    if (when.kind !== "all") {
-      throw new Error(
-        `Damage-kind scope correction ${semantics.differenceId} expected an all condition at ${record.pointer}; the when shape drifted`,
-      )
-    }
-    const damageKindIndex = when.conditions.findIndex(
-      (condition) =>
-        condition.kind === "one-of" &&
-        condition.fact === "hit.damageKind" &&
-        JSON.stringify(condition.values) ===
-          JSON.stringify(semantics.expectedDamageKinds),
+    when = narrowDamageKindCondition(
+      when,
+      semantics,
+      semantics.differenceId,
+      record.pointer,
     )
-    if (damageKindIndex < 0)
-      throw new Error(
-        `Damage-kind scope correction ${semantics.differenceId} lost the registered damage-kind condition ${JSON.stringify(semantics.expectedDamageKinds)} at ${record.pointer}`,
-      )
-    const conditions = [...when.conditions]
-    conditions[damageKindIndex] = oneOf("hit.damageKind", [
-      ...semantics.correctedDamageKinds,
-    ])
-    when = { kind: "all", conditions }
     variant = {
       ...variant,
       status: "corrected",
@@ -3354,6 +3384,27 @@ function compile(
             ),
           ].map((ref) => [JSON.stringify(ref), ref]),
         ).values(),
+      ],
+    }
+  }
+  if (
+    semantics?.kind === "potential-level" &&
+    semantics.damageKindScope !== undefined
+  ) {
+    // 潜能档位记录与伤害种类收窄组合：档位参数已在前面应用，这里只收窄
+    // 同一记录的 hit.damageKind；证据已由 potential-level 分支登记。
+    when = narrowDamageKindCondition(
+      when,
+      semantics.damageKindScope,
+      semantics.damageKindScope.differenceId,
+      record.pointer,
+    )
+    variant = {
+      ...variant,
+      status: "corrected",
+      differences: [
+        ...variant.differences,
+        semantics.damageKindScope.differenceId,
       ],
     }
   }
@@ -5649,7 +5700,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "54",
+    revision: "55",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: effects.some(
@@ -5899,6 +5950,70 @@ export function convertSource(
           option.variants
             .filter((variant) =>
               variant.differences.includes("velina-anomaly-damage-kind-scope"),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "grace-anomaly-damage-kind-scope",
+        explanation:
+          "格莉丝额外能力的块 note 与 Nanoka 中英文只提升目标受到的[感电]（普通电属性异常）伤害，最多 2 层；固定源 anomalyDmgBonus 宽映射同时覆盖异放、乱流与耀变。修正保留记录、数值、层数与公开 ID，只把 hit.damageKind 收窄为 anomaly，异放/乱流/耀变不再被该记录扩大。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes("grace-anomaly-damage-kind-scope"),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "vivian-m0-anomaly-damage-kind-scope",
+        explanation:
+          "薇薇安 M0 额外能力的块 note 与 Nanoka 中英文只把 12% 指向[侵蚀]（普通以太异常）伤害和[侵蚀]状态被结算的[紊乱]伤害；固定源 anomalyDmgBonus 宽映射同时覆盖异放、乱流与耀变。修正保留记录、数值与公开 ID，只把 anomalyDmgBonus 收窄为 anomaly，紊乱由独立 disorderDmgBonus 承担。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes(
+                "vivian-m0-anomaly-damage-kind-scope",
+              ),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "alice-anomaly-damage-kind-scope",
+        explanation:
+          "爱丽丝 M2 的块 note 与 Nanoka 中英文只指向[强击]（普通物理异常）伤害和物理异常状态下被结算的[紊乱]伤害；固定源 anomalyDmgBonus 宽映射同时覆盖异放、乱流与耀变。修正保留记录、数值与公开 ID，只把 anomalyDmgBonus 收窄为 anomaly，紊乱由独立 disorderDmgBonus 承担；新增的 turbulenceDmgBonus/anomalyReleaseDmgBonus 仍登记为 semantic-conflict，不生成贡献。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes("alice-anomaly-damage-kind-scope"),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "jane-anomaly-critical-kind-scope",
+        explanation:
+          "简核心被动与影画 2 的块 note 与 Nanoka 中英文只把暴击率/暴击伤害指向[强击]伤害；固定源 anomalyCritRate/anomalyCritDmg 宽映射同时覆盖异放与乱流。修正保留记录、数值、潜能档位与公开 ID，只把相关记录的 hit.damageKind 收窄为 anomaly；新增的 turbulence/anomalyRelease 暴击记录仍登记为 semantic-conflict，不生成贡献。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes("jane-anomaly-critical-kind-scope"),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "joyau-dore-anomaly-damage-kind-scope",
+        explanation:
+          "琳琅鎏心精炼 1—5 的块 note 与 Nanoka 中英文同时提升[乱流]和[风化]伤害；固定源把同一句拆成 anomalyDmgBonus 与 turbulenceDmgBonus 两条，Fairy 的 anomalyDmgBonus 宽映射同时命中 vortex，会与 turbulenceDmgBonus 在同一乱流命中上重复计入。修正保留两条记录、数值、层数与公开 ID，只把 anomalyDmgBonus 收窄为 anomaly（风化），vortex 由 turbulenceDmgBonus 承担。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes(
+                "joyau-dore-anomaly-damage-kind-scope",
+              ),
             )
             .flatMap((variant) => variant.references),
         ),

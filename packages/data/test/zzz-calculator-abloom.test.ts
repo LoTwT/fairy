@@ -405,15 +405,23 @@ function explainedFairyReadings(record: FrozenRecord): Readings {
     scenario.trigger === "aria" && scenario.event === "release"
       ? flooredEquipmentMastery / u.equipmentMastery
       : 1
+  // Revision 55 narrows Vivian M0 to [侵蚀] (ordinary ether anomaly); the
+  // upstream broad anomalyDamage modifier must not apply to explicit release.
+  const vivianReleaseOrdinaryCorrection =
+    scenario.trigger === "vivian" &&
+    scenario.event === "release" &&
+    scenario.ordinaryBonus === true
   const damageRatio =
     ((u.attack + sourceAttackDifference) / u.attack) *
     defenseRatio *
-    masteryRatio
+    masteryRatio *
+    (vivianReleaseOrdinaryCorrection ? 1 / 1.12 : 1)
   return {
     ...u,
     equipmentAttack: u.equipmentAttack + attackDifference,
     equipmentMastery: flooredEquipmentMastery,
     attack: u.attack + sourceAttackDifference,
+    anomalyBonus: vivianReleaseOrdinaryCorrection ? 1 : u.anomalyBonus,
     multiplier: u.multiplier * masteryRatio,
     defense: u.defense * defenseRatio,
     criticalRate: u.criticalRate + rateDifference,
@@ -732,11 +740,12 @@ describe("ZZZ Calculator explicit abloom / historical source comparison", () => 
       if (!isDifferent(explained.expected, native.expected)) equalDamage++
     }
     expect({ common, differences, equalDamage }).toEqual({
-      common: 520,
-      differences: 182,
+      common: 518,
+      differences: 184,
       equalDamage: 10,
     })
     expect(byField).toEqual({
+      anomalyBonus: 2,
       equipmentAttack: 39,
       attack: 17,
       defense: 2,
@@ -772,13 +781,6 @@ describe("ZZZ Calculator explicit abloom / historical source comparison", () => 
           ordinary.result,
           ordinaryKey,
         )
-        expect(contributions).toHaveLength(1)
-        expect(contributions[0]!.address).toMatchObject({
-          kind: "factor",
-          channel: "anomaly-damage-bonus",
-          entityId: `entity:${trigger}`,
-        })
-        close(contributions[0]!.value.value, trigger === "vivian" ? 0.12 : 0.1)
         const nativeModifiers = recordFor(get(1, 0).id).upstream.result.inCombat
           .buffTotals.damageModifiers
         const nativeModifier = nativeModifiers.find(
@@ -789,15 +791,33 @@ describe("ZZZ Calculator explicit abloom / historical source comparison", () => 
               : "vitality-hit-anomaly-dmg"),
         )
         expect(nativeModifier).toBeDefined()
-        close(nativeModifier!.value, contributions[0]!.value.value)
-        close(
-          ordinary.result.expected / off.result.expected,
-          trigger === "vivian" ? 1.12 : 1.1,
-        )
-        close(
-          both.result.expected / exclusive.result.expected,
-          trigger === "vivian" ? 1.12 : 1.1,
-        )
+        if (trigger === "vivian" && event === "release") {
+          // Revision 55 narrows Vivian M0 to [侵蚀] (ordinary ether anomaly);
+          // the upstream broad modifier must not leak into explicit release.
+          expect(contributions).toHaveLength(0)
+          close(ordinary.result.expected / off.result.expected, 1)
+          close(both.result.expected / exclusive.result.expected, 1)
+        } else {
+          expect(contributions).toHaveLength(1)
+          expect(contributions[0]!.address).toMatchObject({
+            kind: "factor",
+            channel: "anomaly-damage-bonus",
+            entityId: `entity:${trigger}`,
+          })
+          close(
+            contributions[0]!.value.value,
+            trigger === "vivian" ? 0.12 : 0.1,
+          )
+          close(nativeModifier!.value, contributions[0]!.value.value)
+          close(
+            ordinary.result.expected / off.result.expected,
+            trigger === "vivian" ? 1.12 : 1.1,
+          )
+          close(
+            both.result.expected / exclusive.result.expected,
+            trigger === "vivian" ? 1.12 : 1.1,
+          )
+        }
         const exclusiveKey =
           trigger === "vivian" ? "vivianYield" : "ariaCritRate"
         if (event === "attribute") {
