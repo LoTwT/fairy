@@ -50,6 +50,7 @@
 - [ZZZ-HP 991bb0e 升级审计](plans/zzz-hp-991bb0e-upgrade-audit.md)：`2628b32` → `991bb0e` 的逐条裁定、ID 规范化、预期制品变化、验证与回退边界。
 - [维琳娜异常增伤范围修正](plans/velina-anomaly-scope-correction.md)：修订 54 收窄宽口径 `anomalyDmgBonus`，消除乱流重复计入并保留公开 ID。
 - [宽口径异常增伤审计](plans/anomaly-broad-scope-audit.md)：修订 55 收窄格莉丝、薇薇安、爱丽丝、简与琳琅鎏心的命名异常子类，消除剩余乱流重复计入与越界命中。
+- [怒目金刚精炼 2 贯穿伤害修正](plans/wrathful-vajra-r2-sheer-correction.md)：修订 56 修正 14147 精炼 2 的上游 `turbulenceDmgBonus` 字段笔误，恢复火属性贯穿伤害并保留公开 ID。
 - [PR A 实施与交接](plans/level-60-panel-attributes-pr-a.md)：属性实现的评审处理、当时的验收记录与后续衔接结果。
 - [ZZZ-HP 静态数据来源盘点](plans/zzz-hp-static-inventory.md)：固定来源的身份映射、未匹配项、读取语义及正式覆盖报告入口。
 - [ZZZ-HP 静态数据接入记录](plans/zzz-hp-static-data-prompt.md)：已完成接入的 Git 记录与维护入口。

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "55",
+  "revision": "56",
   "effects": [
     {
       "kind": "contribution",
@@ -80069,6 +80069,20 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/42/refinementBuffs/1/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "w-engines/14147/details.zh.json",
+            "pointer": "/talents/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "w-engines/14147/details.en.json",
+            "pointer": "/talents/2/desc"
           }
         ]
       },
@@ -80112,7 +80126,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["vortex"]
+            "values": ["sheer"]
           },
           {
             "kind": "one-of",
@@ -80123,7 +80137,7 @@
       },
       "operation": {
         "kind": "factor-contribution",
-        "channel": "anomaly-damage-bonus",
+        "channel": "sheer-damage-bonus",
         "value": {
           "kind": "parameter",
           "unit": "ratio",

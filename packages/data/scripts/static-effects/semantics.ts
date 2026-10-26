@@ -179,7 +179,10 @@ export type SourceSemantics =
        * 原始 stat 与数值保留在覆盖报告与固定源引用中；只覆盖登记身份。
        */
       readonly kind: "source-stat-correction"
-      readonly correctedStat: "critDmg" | "directDmgMultFactor"
+      readonly correctedStat:
+        | "critDmg"
+        | "directDmgMultFactor"
+        | "pierceDmgBonus"
       readonly expectedProfession: string
       readonly expectedEncoding: Readonly<Record<string, unknown>>
       readonly expectedSourceBlockNote: string
@@ -889,6 +892,10 @@ const joyauDoreDetailsZhSha =
   "b7145001a4ee1fd0fd165e83e8d6f6491f46501e10324a0472b0a59989acc9cd"
 const joyauDoreDetailsEnSha =
   "5e352682548743fbad843c91f4e53f4b2474191867e704b302e1f89608b0834c"
+const wrathfulVajraDetailsZhSha =
+  "dcbfe378af09f3b56f55605005f50976e0aeb8dfadd29ab067d36e932bb6b111"
+const wrathfulVajraDetailsEnSha =
+  "380167ac516b7e14c9c6c4e8a086eacddf41118280c566a35a539d63b914714e"
 
 const anbyTalentEvidence = (rank: 2 | 6) =>
   [
@@ -989,6 +996,19 @@ const joyauDoreRefinementEvidence = [
     path: "w-engines/14156/details.en.json",
     pointer: "/talents/5/desc",
     sha256: joyauDoreDetailsEnSha,
+  },
+] as const
+
+const wrathfulVajraRefinement2Evidence = [
+  {
+    path: "w-engines/14147/details.zh.json",
+    pointer: "/talents/2/desc",
+    sha256: wrathfulVajraDetailsZhSha,
+  },
+  {
+    path: "w-engines/14147/details.en.json",
+    pointer: "/talents/2/desc",
+    sha256: wrathfulVajraDetailsEnSha,
   },
 ] as const
 
@@ -2889,6 +2909,7 @@ export const SOURCE_COMMIT_991BB0E_SEMANTICS: ReadonlySet<string> = new Set([
   "agents/jane/mindscape/0/blk-ms34gorp-m9dlxw/eff-ms34gorp-xrbl8x",
   "agents/anby/mindscape/2/blk-ms47xm3l-3pumvj/eff-ms47xm3l-nf7ga7",
   "agents/anby/mindscape/6/blk-legacy/legacy-self-skillDmgBonus",
+  "w-engines/Wrathful_Vajra/refinement/2/blk-legacy/legacy-self-turbulenceDmgBonus",
   "w-engines/Plume_of_Rebirth/refinement/5/blk-mviwn8gu-b8fedl/eff-mviwn8gu-8wi5ap",
 ])
 
@@ -3026,6 +3047,36 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     verification:
       "固定来源 fac62407 的焰心桂冠 R5 萎靡记录误写 stat=dmgBonus，但所属块 note 与 Nanoka 3.2 中英文 /talents/5/desc 一致写明冰、火伤害的暴击伤害每层提升 2.4%，最多 20 层；五档原文均为暴伤，R1—4 已编码为 critDmg。仅该完整来源身份改用 critDmg 映射（criticalDamage direct 加数），保留 2.4%、20 层、团队与既有受益角色元素筛选、击破装备适配及公开 option/effect ID；历史 ID 中的 dmgBonus 保留作兼容身份，不再表示落点。来源 stat 与 Pointer 保留在覆盖报告，R5 标记 corrected，R1—4 的 1.5/1.72/1.95/2.17 数值不改。普通攻击只是施加萎靡的触发；有效状态与层数仍由调用方显式声明，30 秒、刷新及全队唯一不新增通用模拟。此为按一致描述纠错，未作游戏实测或混合元素命中契约扩展。",
   },
+  "w-engines/Wrathful_Vajra/refinement/2/blk-legacy/legacy-self-turbulenceDmgBonus":
+    {
+      kind: "source-stat-correction",
+      correctedStat: "pierceDmgBonus",
+      expectedProfession: "命破",
+      expectedEncoding: {
+        stat: "turbulenceDmgBonus",
+        kind: "stacked",
+        value: 0,
+        stackable: false,
+        valuePerStack: 10.35,
+        maxStacks: 2,
+        applyTarget: "self",
+        applySituation: "global",
+        applyProfession: null,
+        teamProfession: null,
+        teamProfessionValues: null,
+        teamProfessionMinCount: null,
+        elementFilter: ["火"],
+        skillSubcategoryId: null,
+        appliesToAnomaly: true,
+        note: "",
+      },
+      expectedSourceBlockNote:
+        "暴击率提升23%；装备者发动[强化特殊技]时，装备者造成的火属性贯穿伤害提升10.35%，最多叠加2层，持续20秒，每层效果单独结算持续时间。",
+      differenceId: "wrathful-vajra-r2-fire-sheer-stat",
+      evidence: wrathfulVajraRefinement2Evidence,
+      verification:
+        "Nanoka w-engines/14147 /talents/2/desc 中英文同文：精炼 2 只提升火属性贯穿伤害 10.35%，最多 2 层；固定源误写 stat=turbulenceDmgBonus，精炼 1/3/4/5 同位置均为 pierceDmgBonus。仅该完整来源身份改用 pierceDmgBonus 映射（sheer-damage-bonus 加数），保留 10.35%、2 层、火元素筛选与公开 option/effect ID；历史 ID 中的 turbulenceDmgBonus 保留为兼容身份。",
+    },
   "agents/yuzuha/mindscape/0/blk-ms38y9v7-07td4j/eff-ms38y9v7-2ded3l":
     yuzuhaPartialState(0, "anomalyDmgBonus", true),
   "agents/yuzuha/mindscape/0/blk-ms38y9v7-07td4j/eff-ms3969fx-lmmkyw":

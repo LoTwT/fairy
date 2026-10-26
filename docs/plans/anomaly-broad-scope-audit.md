@@ -101,15 +101,15 @@ pnpm --filter @randomplay/data verify:nanoka:current integrated
 `pnpm --filter @randomplay/data verify:nanoka:current integrated` 并按
 [来源数据整合规范](../specs/data/integration.md#数据管理状态的同步维护)复核管理状态。
 
-## 单独发现（本批未修）
+## 单独发现（已由修订 56 修正）
 
 - `w-engine:14147`（怒目金刚）精炼 2 的固定源
   `/wengines/42/refinementBuffs/1/effectBlocks/0/effects/1` 的块 note 写
   “火属性贯穿伤害提升 10.35%”，但 `stat` 被上游写成
   `turbulenceDmgBonus`；精炼 1/3/4/5 同位置均为 `pierceDmgBonus`。
-  当前制品把精炼 2 映射为 `vortex` 异常增伤，疑似上游字段笔误。
-  这属于来源 stat 修正，不是宽口径异常通道问题，需单独登记与验证，
-  本批不顺手修改。
+  该来源 stat 修正已单独落地为修订 56，详见
+  [怒目金刚精炼 2 贯穿伤害修正](wrathful-vajra-r2-sheer-correction.md)；
+  本页保留发现记录，不回写该批次的 converted/corrected 计数。
 
 ## 回退
 

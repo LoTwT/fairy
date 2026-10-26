@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "55",
+  "revision": "56",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
@@ -47081,7 +47081,7 @@
     {
       "optionId": "w-engines:Wrathful_Vajra:refinement:blk-legacy:legacy-self-turbulenceDmgBonus",
       "catalogEntityId": "w-engines:Wrathful_Vajra",
-      "name": "精2 · turbulenceDmgBonus",
+      "name": "精2 · pierceDmgBonus",
       "conditionDescription": "暴击率提升23%；装备者发动[强化特殊技]时，装备者造成的火属性贯穿伤害提升10.35%，最多叠加2层，持续20秒，每层效果单独结算持续时间。",
       "target": "self",
       "variants": [
@@ -47089,7 +47089,7 @@
           "configuration": {
             "refinements": [2]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -47097,6 +47097,20 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/42/refinementBuffs/1/effectBlocks/0/effects/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "w-engines/14147/details.zh.json",
+              "pointer": "/talents/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "w-engines/14147/details.en.json",
+              "pointer": "/talents/2/desc"
             }
           ],
           "effectIds": [
@@ -47104,7 +47118,7 @@
           ],
           "maximumLayers": 2,
           "inputs": [],
-          "differences": [],
+          "differences": ["wrathful-vajra-r2-fire-sheer-stat"],
           "applicability": {}
         }
       ]
@@ -56550,6 +56564,26 @@
           "locale": "en",
           "resourcePath": "w-engines/14116/details.en.json",
           "pointer": "/talents/5/desc"
+        }
+      ]
+    },
+    {
+      "differenceId": "wrathful-vajra-r2-fire-sheer-stat",
+      "explanation": "Nanoka w-engines/14147 /talents/2/desc 中英文同文：精炼 2 只提升火属性贯穿伤害 10.35%，最多 2 层；固定源误写 stat=turbulenceDmgBonus，精炼 1/3/4/5 同位置均为 pierceDmgBonus。仅该完整来源身份改用 pierceDmgBonus 映射（sheer-damage-bonus 加数），保留 10.35%、2 层、火元素筛选与公开 option/effect ID；历史 ID 中的 turbulenceDmgBonus 保留为兼容身份。",
+      "references": [
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.3.12+19634983",
+          "locale": "zh",
+          "resourcePath": "w-engines/14147/details.zh.json",
+          "pointer": "/talents/2/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.3.12+19634983",
+          "locale": "en",
+          "resourcePath": "w-engines/14147/details.en.json",
+          "pointer": "/talents/2/desc"
         }
       ]
     },

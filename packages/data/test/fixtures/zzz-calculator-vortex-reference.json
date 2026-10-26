@@ -65,7 +65,7 @@
       "packageVersion": "0.5.0",
       "contractVersion": 3,
       "gameVersion": "3.3",
-      "snapshotId": "sha256:0d5a9837cb2f93ad874693aad41c6682edbdeadcb016b09c8818ebfd46997165"
+      "snapshotId": "sha256:faad0c75d86773f6070daa9f4516efbf9186a81a4e37a308210a4b5bebd435e7"
     }
   },
   "inputLayer": "externally-declared-resolved-source-state",
@@ -107451,6 +107451,18 @@
         }
       },
       "currentSnapshotId": "sha256:0d5a9837cb2f93ad874693aad41c6682edbdeadcb016b09c8818ebfd46997165"
+    },
+    {
+      "reason": "Revision 56 corrects Wrathful Vajra's refinement 2 source stat from turbulenceDmgBonus to pierceDmgBonus. The fire sheer bonus keeps its 10.35% value, two-layer gate and public IDs, while fire vortex no longer receives the anomaly contribution. One coverage position moves from converted to corrected; only the static/catalog bytes and current snapshot advance.",
+      "implementationBase": "b65cddb6",
+      "previous": {
+        "snapshotId": "sha256:0d5a9837cb2f93ad874693aad41c6682edbdeadcb016b09c8818ebfd46997165",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "285dfa01ef6087d45740e9784e466e06953543d8e336fbf860c2e5efe46abe6d",
+          "packages/data/definitions/effects/static-catalog.json": "ca8b4f0b810c0720f46e410ae4318b37a491c9e2afe3012c5643b4e0baa4a2d0"
+        }
+      },
+      "currentSnapshotId": "sha256:faad0c75d86773f6070daa9f4516efbf9186a81a4e37a308210a4b5bebd435e7"
     }
   ]
 }
