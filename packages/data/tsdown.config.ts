@@ -59,12 +59,21 @@ export default defineConfig(async (options) => {
         false,
       ),
     )
+    const nodeCatalogImport = "../.generated/catalog.ts"
+    const browserCatalogImport = "../.generated/browser-catalog.ts"
+    const browserIndexSource = (
+      await readFile(join(buildDirectory, "src/index.ts"), "utf8")
+    ).replaceAll(nodeCatalogImport, browserCatalogImport)
+    if (
+      browserIndexSource.includes(nodeCatalogImport) ||
+      !browserIndexSource.includes(browserCatalogImport)
+    )
+      throw new Error(
+        `Browser entry rewrite failed: src/index.ts must import ${nodeCatalogImport} so src/index.browser.ts can import ${browserCatalogImport}`,
+      )
     await writeFile(
       join(buildDirectory, "src/index.browser.ts"),
-      (await readFile(join(buildDirectory, "src/index.ts"), "utf8")).replaceAll(
-        "../.generated/catalog.ts",
-        "../.generated/browser-catalog.ts",
-      ),
+      browserIndexSource,
     )
     // 私有 tsconfig：include 与相对导入都解析到本次构建的副本，
     // 类型处理不得跟随包目录下 typecheck 生成的 .generated。
