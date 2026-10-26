@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "53",
+  "revision": "54",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
@@ -18032,7 +18032,7 @@
       "effectIds": [
         "agent:1561:zzz-hp:eff-ms4tpxkp-9jh4ly:blk-ms4tpxkp-f964lw:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 10,
       "normalizedValue": 10
@@ -18137,7 +18137,7 @@
       "effectIds": [
         "agent:1561:zzz-hp:legacy-self-anomalyDmgBonus:blk-legacy:mindscape:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 15,
       "normalizedValue": 15
@@ -18182,7 +18182,7 @@
       "effectIds": [
         "agent:1561:zzz-hp:eff-ms4u9q0d-6p259j:blk-ms4u9q0d-b63z88:mindscape:6"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -33049,8 +33049,8 @@
     "rawEffects": 1375,
     "rules": 931,
     "options": 1002,
-    "converted": 1165,
-    "corrected": 118,
+    "converted": 1162,
+    "corrected": 121,
     "unsupported": 92,
     "supplements": {
       "records": 102,

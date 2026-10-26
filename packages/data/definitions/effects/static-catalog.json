@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "53",
+  "revision": "54",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
@@ -21237,7 +21237,7 @@
             "minimumMindscape": 0,
             "coreSkillLevels": [1, 2, 3, 4, 5, 6, 7]
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -21294,6 +21294,13 @@
               "locale": "zh",
               "resourcePath": "agents/1561/details.zh.json",
               "pointer": "/passive/level/1561507/desc/1"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1561/details.en.json",
+              "pointer": "/passive/level/1561507/desc/1"
             }
           ],
           "effectIds": [
@@ -21301,7 +21308,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["velina-anomaly-damage-kind-scope"],
           "applicability": {}
         }
       ]
@@ -21615,7 +21622,7 @@
           "configuration": {
             "minimumMindscape": 2
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -21623,6 +21630,20 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1561/details.zh.json",
+              "pointer": "/talent/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1561/details.en.json",
+              "pointer": "/talent/2/desc"
             }
           ],
           "effectIds": [
@@ -21630,7 +21651,7 @@
           ],
           "maximumLayers": 1,
           "inputs": [],
-          "differences": [],
+          "differences": ["velina-anomaly-damage-kind-scope"],
           "applicability": {}
         }
       ]
@@ -21708,7 +21729,7 @@
           "configuration": {
             "minimumMindscape": 6
           },
-          "status": "converted",
+          "status": "corrected",
           "references": [
             {
               "sourceId": "zzz-hp",
@@ -21716,6 +21737,20 @@
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/45/mindscapeBuffs/6/effectBlocks/0/effects/0"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1561/details.zh.json",
+              "pointer": "/talent/6/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1561/details.en.json",
+              "pointer": "/talent/6/desc"
             }
           ],
           "effectIds": [
@@ -21723,7 +21758,7 @@
           ],
           "maximumLayers": 16,
           "inputs": [],
-          "differences": [],
+          "differences": ["velina-anomaly-damage-kind-scope"],
           "applicability": {}
         }
       ]
@@ -57532,6 +57567,117 @@
           "version": "3.3.12+19634983",
           "locale": "en",
           "resourcePath": "agents/1011/details.en.json",
+          "pointer": "/talent/6/desc"
+        }
+      ]
+    },
+    {
+      "differenceId": "velina-anomaly-damage-kind-scope",
+      "explanation": "维琳娜 M0/M2/M6 的块 note 与 Nanoka 同文只把增伤指向[风化]（M0/M2 另含[乱流]），固定源却把同一句拆成 anomalyDmgBonus 与 turbulenceDmgBonus 两条。Fairy 的 anomalyDmgBonus 宽映射同时命中 vortex，会和 turbulenceDmgBonus 重复计入；修正保留两条记录、数值、通道与公开 ID，只把 anomalyDmgBonus 收窄到[风化]（anomaly），vortex 由 turbulenceDmgBonus 承担，异放与耀变不再被该宽映射扩大。",
+      "references": [
+        {
+          "sourceId": "zzz-hp",
+          "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.3.12+19634983",
+          "locale": "zh",
+          "resourcePath": "agents/1561/details.zh.json",
+          "pointer": "/passive/level/1561501/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.3.12+19634983",
+          "locale": "zh",
+          "resourcePath": "agents/1561/details.zh.json",
+          "pointer": "/passive/level/1561502/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.3.12+19634983",
+          "locale": "zh",
+          "resourcePath": "agents/1561/details.zh.json",
+          "pointer": "/passive/level/1561503/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.3.12+19634983",
+          "locale": "zh",
+          "resourcePath": "agents/1561/details.zh.json",
+          "pointer": "/passive/level/1561504/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.3.12+19634983",
+          "locale": "zh",
+          "resourcePath": "agents/1561/details.zh.json",
+          "pointer": "/passive/level/1561505/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.3.12+19634983",
+          "locale": "zh",
+          "resourcePath": "agents/1561/details.zh.json",
+          "pointer": "/passive/level/1561506/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.3.12+19634983",
+          "locale": "zh",
+          "resourcePath": "agents/1561/details.zh.json",
+          "pointer": "/passive/level/1561507/desc/1"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.3.12+19634983",
+          "locale": "en",
+          "resourcePath": "agents/1561/details.en.json",
+          "pointer": "/passive/level/1561507/desc/1"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.3.12+19634983",
+          "locale": "zh",
+          "resourcePath": "agents/1561/details.zh.json",
+          "pointer": "/talent/2/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.3.12+19634983",
+          "locale": "en",
+          "resourcePath": "agents/1561/details.en.json",
+          "pointer": "/talent/2/desc"
+        },
+        {
+          "sourceId": "zzz-hp",
+          "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+          "locale": "zh",
+          "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+          "pointer": "/agents/45/mindscapeBuffs/6/effectBlocks/0/effects/0"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.3.12+19634983",
+          "locale": "zh",
+          "resourcePath": "agents/1561/details.zh.json",
+          "pointer": "/talent/6/desc"
+        },
+        {
+          "sourceId": "nanoka-integrated",
+          "version": "3.3.12+19634983",
+          "locale": "en",
+          "resourcePath": "agents/1561/details.en.json",
           "pointer": "/talent/6/desc"
         }
       ]

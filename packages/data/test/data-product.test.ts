@@ -361,9 +361,9 @@ describe("data product manifests", () => {
     expect(manifest.product).toBe("static-effects")
     expect(manifest.schemaVersion).toBe(1)
     expect(manifest.rulesVersion).toEqual({
-      label: "zzz-hp-static-effects/53",
+      label: "zzz-hp-static-effects/54",
       ruleSetId: "zzz-hp-static-effects",
-      revision: "53",
+      revision: "54",
     })
     expect(manifest.source).toEqual({
       repository: structureBaseline.effects.sourceRepository,
@@ -384,8 +384,8 @@ describe("data product manifests", () => {
       structureBaseline.effects.staticCoverage.recordCount,
     )
     expect(manifest.coverage.statusCounts).toEqual({
-      converted: 1165,
-      corrected: 118,
+      converted: 1162,
+      corrected: 121,
       unsupported: 92,
     })
     expect(manifest.coverage.supplementalCount).toBe(

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b",
+  "snapshotId": "sha256:9f56c4647bb6d33bdafe084134fa12a125e988cfb4f80300e5738035f4c36be2",
   "integrated": {
     "indexSha256": "d68ad1d80b203b9633f2cd6d176e4051c15c52f2ea3c0d71a2d2310c8b1a1b6d",
     "sourceVersion": "3.3.12+19634983",
@@ -91,7 +91,7 @@
     "artifactFileSetSha256": "b7bb787fbdb4c18a2b6031274408312eaa56b2a53688c68d928c793d41ab148c"
   },
   "skills": {
-    "manifestSha256": "706066c0215510331421860a2405c657ab784ffc5ed562f74afca3bb20da44a4",
+    "manifestSha256": "38baea509c50d7959224d2698dd59dc8c44f003b225343c42675f1cbd7fe333c",
     "sourceVersion": "3.3.12+19634983",
     "rulesVersion": "agent-actions/2",
     "topLevelKeys": [
@@ -117,9 +117,9 @@
     "sourceRepository": "LoTwT/ZZZ-HP",
     "sourceCommit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
     "static": {
-      "sha256": "f92a28d490bf640a4332fd8117589aeb901c8bdc9ff6ffcad8fd2f9032c68424",
+      "sha256": "1af6cc927d5a64fb5fe50943444263ed990f485e417cca80acde80af3934d8ec",
       "ruleSetId": "zzz-hp-static-effects",
-      "revision": "53",
+      "revision": "54",
       "topLevelKeys": [
         "actions",
         "effects",
@@ -133,9 +133,9 @@
       "actionCount": 1
     },
     "staticCatalog": {
-      "sha256": "e6da1a47356054611280a3edd7e3c93406facf28ac17138df294fef3945c0e83",
+      "sha256": "28a603be5dc2a47d5b817e46a5cc3d4ad06b5e0bb976886ba237998e4cbf4fdb",
       "ruleSetId": "zzz-hp-static-effects",
-      "revision": "53",
+      "revision": "54",
       "topLevelKeys": [
         "differences",
         "entities",
@@ -152,12 +152,12 @@
       "entityCount": 196,
       "skillTargetCount": 131,
       "mechanismCount": 4,
-      "differenceCount": 43
+      "differenceCount": 44
     },
     "staticCoverage": {
-      "sha256": "31d11cc3b85efe13868c7880100af6872448a22ef16146cf1d75e09d34532144",
+      "sha256": "e1f11d172cf4c4540650a4e5bd9af4bfe45c9910cc2864644d700ec65172361d",
       "ruleSetId": "zzz-hp-static-effects",
-      "revision": "53",
+      "revision": "54",
       "topLevelKeys": [
         "deferredMechanisms",
         "entities",

@@ -2171,6 +2171,48 @@ function verifySettlementElementScopeRecord(
 }
 
 /**
+ * 伤害种类范围修正（damage-kind-scope-correction）的防漂移前置校验：
+ * raw 与 normalized 两份记录按登记编码逐字段核对，所属块 note 与冻结
+ * 完整原文逐字核对；normalized 缺失、任一字段漂移或 note 追加/替换/
+ * 缺失都拒绝生成。必须在 compile 的通用 unsupported 降级之前执行，
+ * 降级不能掩盖范围修正的源漂移。
+ */
+function verifyDamageKindScopeCorrectionRecord(
+  record: SourceRecord,
+  semantics: Extract<SourceSemantics, { kind: "damage-kind-scope-correction" }>,
+): void {
+  for (const [label, document] of [
+    ["raw", record.raw],
+    ["normalized", record.normalized],
+  ] as const) {
+    if (document === undefined)
+      throw new Error(
+        `Damage-kind scope correction ${semantics.differenceId} lost the ${label} record at ${record.pointer}`,
+      )
+    for (const [field, expected] of Object.entries(semantics.expectedEncoding))
+      if (
+        JSON.stringify(
+          sourceShapeFieldValue(
+            document as unknown as Record<string, unknown>,
+            field,
+          ),
+        ) !== JSON.stringify(expectedShapeFieldValue(expected, field))
+      )
+        throw new Error(
+          `Damage-kind scope correction ${semantics.differenceId} ${label} field drift at ${record.pointer}: ${field}`,
+        )
+  }
+  for (const [label, note] of [
+    ["raw", record.blockNote],
+    ["normalized", record.normalizedBlockNote],
+  ] as const)
+    if (note !== semantics.expectedSourceBlockNote)
+      throw new Error(
+        `Damage-kind scope correction ${semantics.differenceId} ${label} block note drift at ${record.pointer}`,
+      )
+}
+
+/**
  * [颤音：改]共存排除（exclude-settlement-target 与 stagger-recovery-settlement
  * 的 vibratoModifiedExclusion）的防漂移前置校验：raw 与 normalized 两份表示
  * 的登记编码逐字段一致、所属块 note 与冻结全文逐字一致；normalized 缺失、
@@ -2322,6 +2364,10 @@ function compile(
   // unsupported 降级（源漂移不能被降级掩盖）。
   if (semantics?.kind === "settlement-element-scope")
     verifySettlementElementScopeRecord(record, semantics)
+  // 伤害种类范围修正：登记编码与冻结块 note 的校验同样早于通用
+  // unsupported 降级（源漂移不能被降级掩盖）。
+  if (semantics?.kind === "damage-kind-scope-correction")
+    verifyDamageKindScopeCorrectionRecord(record, semantics)
   // [颤音：改]共存排除：登记编码与冻结块 note 的校验同样早于通用
   // unsupported 降级（独立登记与 stagger-recovery 扩展字段共用）。
   if (semantics?.kind === "exclude-settlement-target")
@@ -3265,6 +3311,49 @@ function compile(
         ...semantics.evidence.map((ref) =>
           nanokaReference(ref.path, ref.pointer),
         ),
+      ],
+    }
+  }
+  if (semantics?.kind === "damage-kind-scope-correction") {
+    // stat 的全局映射覆盖了比块 note 更宽的伤害种类：保留记录、数值、
+    // 通道与稳定 ID，只按登记收窄已经生成的 hit.damageKind 条件。找不到
+    // 登记集合即拒绝（编码守卫已核对 stat/value，此处缺失说明映射漂移，
+    // 不能静默跳过或把范围留宽）。
+    if (when.kind !== "all") {
+      throw new Error(
+        `Damage-kind scope correction ${semantics.differenceId} expected an all condition at ${record.pointer}; the when shape drifted`,
+      )
+    }
+    const damageKindIndex = when.conditions.findIndex(
+      (condition) =>
+        condition.kind === "one-of" &&
+        condition.fact === "hit.damageKind" &&
+        JSON.stringify(condition.values) ===
+          JSON.stringify(semantics.expectedDamageKinds),
+    )
+    if (damageKindIndex < 0)
+      throw new Error(
+        `Damage-kind scope correction ${semantics.differenceId} lost the registered damage-kind condition ${JSON.stringify(semantics.expectedDamageKinds)} at ${record.pointer}`,
+      )
+    const conditions = [...when.conditions]
+    conditions[damageKindIndex] = oneOf("hit.damageKind", [
+      ...semantics.correctedDamageKinds,
+    ])
+    when = { kind: "all", conditions }
+    variant = {
+      ...variant,
+      status: "corrected",
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        variant.references[0],
+        ...new Map(
+          [
+            ...variant.references.slice(1),
+            ...semantics.evidence.map((ref) =>
+              nanokaReference(ref.path, ref.pointer),
+            ),
+          ].map((ref) => [JSON.stringify(ref), ref]),
+        ).values(),
       ],
     }
   }
@@ -5560,7 +5649,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "53",
+    revision: "54",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: effects.some(
@@ -5798,6 +5887,18 @@ export function convertSource(
           option.variants
             .filter((variant) =>
               variant.differences.includes("anby-m6-all-basic-skill-targets"),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "velina-anomaly-damage-kind-scope",
+        explanation:
+          "维琳娜 M0/M2/M6 的块 note 与 Nanoka 同文只把增伤指向[风化]（M0/M2 另含[乱流]），固定源却把同一句拆成 anomalyDmgBonus 与 turbulenceDmgBonus 两条。Fairy 的 anomalyDmgBonus 宽映射同时命中 vortex，会和 turbulenceDmgBonus 重复计入；修正保留两条记录、数值、通道与公开 ID，只把 anomalyDmgBonus 收窄到[风化]（anomaly），vortex 由 turbulenceDmgBonus 承担，异放与耀变不再被该宽映射扩大。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes("velina-anomaly-damage-kind-scope"),
             )
             .flatMap((variant) => variant.references),
         ),
