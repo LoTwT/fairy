@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "54",
+  "revision": "55",
   "effects": [
     {
       "kind": "contribution",
@@ -12329,6 +12329,20 @@
             "locale": "zh",
             "resourcePath": "agents/1181/details.zh.json",
             "pointer": "/passive/level/1181514/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1181/details.zh.json",
+            "pointer": "/passive/level/1181501/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1181/details.en.json",
+            "pointer": "/passive/level/1181501/desc/1"
           }
         ]
       },
@@ -12372,7 +12386,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
+            "values": ["anomaly"]
           }
         ]
       },
@@ -18350,6 +18364,13 @@
             "locale": "zh",
             "resourcePath": "agents/1261/details.zh.json",
             "pointer": "/passive/level/1261507/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1261/details.en.json",
+            "pointer": "/passive/level/1261507/desc/0"
           }
         ]
       },
@@ -18393,7 +18414,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly", "anomaly-settlement", "vortex"]
+            "values": ["anomaly"]
           }
         ]
       },
@@ -18429,6 +18450,13 @@
             "version": "3.3.12+19634983",
             "locale": "zh",
             "resourcePath": "agents/1261/details.zh.json",
+            "pointer": "/passive/level/1261507/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1261/details.en.json",
             "pointer": "/passive/level/1261507/desc/0"
           }
         ]
@@ -18473,7 +18501,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly", "anomaly-settlement", "vortex"]
+            "values": ["anomaly"]
           }
         ]
       },
@@ -18509,6 +18537,13 @@
             "version": "3.3.12+19634983",
             "locale": "zh",
             "resourcePath": "agents/1261/details.zh.json",
+            "pointer": "/passive/level/1261507/desc/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1261/details.en.json",
             "pointer": "/passive/level/1261507/desc/0"
           }
         ]
@@ -18563,7 +18598,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly", "anomaly-settlement", "vortex"]
+            "values": ["anomaly"]
           }
         ]
       },
@@ -18745,7 +18780,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly", "anomaly-settlement", "vortex"]
+            "values": ["anomaly"]
           },
           {
             "kind": "one-of",
@@ -19172,6 +19207,20 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/44/mindscapeBuffs/2/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1261/details.zh.json",
+            "pointer": "/talent/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1261/details.en.json",
+            "pointer": "/talent/2/desc"
           }
         ]
       },
@@ -19215,7 +19264,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly", "anomaly-settlement", "vortex"]
+            "values": ["anomaly"]
           }
         ]
       },
@@ -25395,6 +25444,20 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1331/details.zh.json",
+            "pointer": "/passive/level/1331501/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1331/details.en.json",
+            "pointer": "/passive/level/1331501/desc/1"
           }
         ]
       },
@@ -25438,7 +25501,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
+            "values": ["anomaly"]
           }
         ]
       },
@@ -31252,6 +31315,20 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1401/details.zh.json",
+            "pointer": "/talent/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1401/details.en.json",
+            "pointer": "/talent/2/desc"
           }
         ]
       },
@@ -31295,7 +31372,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
+            "values": ["anomaly"]
           }
         ]
       },
@@ -82886,11 +82963,67 @@
             "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "w-engines/14156/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "w-engines/14156/details.en.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "w-engines/14156/details.zh.json",
+            "pointer": "/talents/5/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "w-engines/14156/details.en.json",
+            "pointer": "/talents/5/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "w-engines/14156/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "w-engines/14156/details.en.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "w-engines/14156/details.zh.json",
+            "pointer": "/talents/5/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "w-engines/14156/details.en.json",
+            "pointer": "/talents/5/desc"
           },
           {
             "sourceId": "zzz-hp",
@@ -82900,6 +83033,34 @@
             "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/1"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "w-engines/14156/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "w-engines/14156/details.en.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "w-engines/14156/details.zh.json",
+            "pointer": "/talents/5/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "w-engines/14156/details.en.json",
+            "pointer": "/talents/5/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
             "locale": "zh",
@@ -82907,11 +83068,67 @@
             "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/1"
           },
           {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "w-engines/14156/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "w-engines/14156/details.en.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "w-engines/14156/details.zh.json",
+            "pointer": "/talents/5/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "w-engines/14156/details.en.json",
+            "pointer": "/talents/5/desc"
+          },
+          {
             "sourceId": "zzz-hp",
             "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "w-engines/14156/details.zh.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "w-engines/14156/details.en.json",
+            "pointer": "/talents/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "w-engines/14156/details.zh.json",
+            "pointer": "/talents/5/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "w-engines/14156/details.en.json",
+            "pointer": "/talents/5/desc"
           }
         ]
       },
@@ -82951,7 +83168,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
+            "values": ["anomaly"]
           },
           {
             "kind": "one-of",

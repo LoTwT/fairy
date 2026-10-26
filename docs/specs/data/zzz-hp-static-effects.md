@@ -1,4 +1,4 @@
-**当前状态（静态 effects 修订 54；技能目录 D6-1/技能修订 52）**：固定 ZZZ-HP 来源已切换到 `991bb0e`，Nanoka 参考版本为 `3.3.12+19634983`，计算数据 `gameVersion` 为 3.3。以下静态效果计数读取自 `static.json`、`static-catalog.json` 与 `static-coverage.json` 的实际制品：正式覆盖报告包含 196 个实体（195 个来源实体 + 1 个占位实体 `w-engines:none`）、1,118 个 pack（397 个空 pack）、1,375 条原始效果，生成 931 条规则与 1,002 个选择项。覆盖状态按两个粒度分别记录：coverage 记录为 1,162 条 converted、121 条 corrected、92 条 unsupported（共 1,375 条）；catalog 变体为 1,230 条 converted、127 条 corrected、126 条 unsupported（共 1,483 个）。两组口径不同：catalog 变体包含 101 个仅引用补充来源的变体与 6 个合并的完整状态变体，因此总数与 coverage 记录不同。补充来源共 102 条（68 条已整合、34 条越界登记），生成 72 条规则与 63 个选择项。D4 补充生成层与四个实体转换文件已移除，菲欧妮/赛维里安等改由固定来源记录直接转换；D4 冻结证据仅保留为仍在使用来源修正的溯源材料，不进入发布制品。技能修订 52（D6-1）补齐赛维里安（1631）与菲欧妮（1641）各 20 条动作，技能覆盖为 62 名成员、1,348 条动作；以下历史段落保留当时状态供追溯。
+**当前状态（静态 effects 修订 55；技能目录 D6-1/技能修订 52）**：固定 ZZZ-HP 来源已切换到 `991bb0e`，Nanoka 参考版本为 `3.3.12+19634983`，计算数据 `gameVersion` 为 3.3。以下静态效果计数读取自 `static.json`、`static-catalog.json` 与 `static-coverage.json` 的实际制品：正式覆盖报告包含 196 个实体（195 个来源实体 + 1 个占位实体 `w-engines:none`）、1,118 个 pack（397 个空 pack）、1,375 条原始效果，生成 931 条规则与 1,002 个选择项。覆盖状态按两个粒度分别记录：coverage 记录为 1,150 条 converted、133 条 corrected、92 条 unsupported（共 1,375 条）；catalog 变体为 1,218 条 converted、139 条 corrected、126 条 unsupported（共 1,483 个）。两组口径不同：catalog 变体包含 101 个仅引用补充来源的变体与 6 个合并的完整状态变体，因此总数与 coverage 记录不同。补充来源共 102 条（68 条已整合、34 条越界登记），生成 72 条规则与 63 个选择项。D4 补充生成层与四个实体转换文件已移除，菲欧妮/赛维里安等改由固定来源记录直接转换；D4 冻结证据仅保留为仍在使用来源修正的溯源材料，不进入发布制品。技能修订 52（D6-1）补齐赛维里安（1631）与菲欧妮（1641）各 20 条动作，技能覆盖为 62 名成员、1,348 条动作；以下历史段落保留当时状态供追溯。
 
 # ZZZ-HP 静态增益数据接入
 
@@ -11,6 +11,18 @@
 ### 修订 54：维琳娜异常增伤伤害种类收窄
 
 维琳娜 M0/M2/M6 的块 note 与 Nanoka 同文只把增伤指向[风化]（M0/M2 另含[乱流]），固定源却把同一句拆成 `anomalyDmgBonus` 与 `turbulenceDmgBonus` 两条。Fairy 的 `anomalyDmgBonus` 宽映射同时命中 `vortex`，与 `turbulenceDmgBonus` 重复计入：乱流命中在 M0 为 20%、M2 为 30%，M6 的 2.5%/层也错误扩到乱流。修订 54 新增 `damage-kind-scope-correction`，保留三条记录、数值、通道与全部公开 ID，只把 `anomalyDmgBonus` 的命中伤害种类收窄为 `anomaly`（风化）；`vortex` 继续由 `turbulenceDmgBonus` 承担，异放与耀变不再被该宽映射扩大。证据为 Nanoka `agents/1561` 的 `/passive/level/1561507/desc/1`、`/talent/2/desc` 与 `/talent/6/desc` 中英文；负例覆盖“宽口径单独在乱流不生效”“宽口径与乱流记录合计仍为 10%/15%”“M6 不作用于乱流、异放或紊乱”。详细裁定见[维琳娜异常增伤范围修正](../../plans/velina-anomaly-scope-correction.md)。
+
+### 修订 55：宽口径异常增伤/暴击范围收窄
+
+本修订把块 note 与 Nanoka 中英文只指向单一异常子类的宽口径记录收窄，覆盖 5 个实体、12 个来源位置：
+
+- 格莉丝 M0：`anomalyDmgBonus` 只提升[感电]（普通电属性异常）伤害，最多 2 层；收窄为 `anomaly`。
+- 薇薇安 M0：`anomalyDmgBonus` 只提升[侵蚀]（普通以太异常）伤害；收窄为 `anomaly`，[紊乱]由独立 `disorderDmgBonus` 承担。
+- 爱丽丝 M2：`anomalyDmgBonus` 只提升[强击]（普通物理异常）伤害；收窄为 `anomaly`，[紊乱]由独立 `disorderDmgBonus` 承担。
+- 简核心被动与 M2：`anomalyCritRate`/`anomalyCritDmg`（含异常精通转化与潜能档位暴伤）只提升[强击]伤害的暴击；收窄为 `anomaly`。
+- 琳琅鎏心（14156）精炼 1—5：`anomalyDmgBonus` 只提升[风化]伤害；收窄为 `anomaly`，[乱流]由同块 `turbulenceDmgBonus` 承担，消除同一乱流命中的重复计入。
+
+修正沿用 `damage-kind-scope-correction`，保留记录、数值、通道、潜能/精炼档位与全部公开 `optionId`/`effectId`，只改写 `hit.damageKind`；简的潜能暴伤记录通过 `potential-level` 的可选 `damageKindScope` 组合执行。爱丽丝/简新增的乱流/异放子类记录继续登记为 `semantic-conflict`，不激活。证据为 Nanoka `agents/1181`、`agents/1331`、`agents/1401`、`agents/1261` 与 `w-engines/14156` 的中英文对应 Pointer；负例覆盖宽口径在异放/乱流不生效、薇薇安 12% 不进入异放结算、简潜能暴伤不扩到异放/乱流、琳琅鎏心乱流只计一次 7%/层。详细裁定见[宽口径异常增伤审计](../../plans/anomaly-broad-scope-audit.md)。
 
 ## 实际覆盖与使用限制
 
@@ -40,7 +52,7 @@
 修订 19 新增 `complete-state-elation-correction`（莱特[昂扬]完整状态与目录层数桥接，见[修订 19](#修订-19莱特昂扬完整状态与目录层数桥接)），规则集 revision 递增为 `19`；
 修订 20 新增 `yuzuha-additional-ability-complete-state`（柚叶额外能力完整状态与影画 1 强化，见[修订 20](#修订-20柚叶额外能力完整状态与影画-1-强化)）；修订 21 不新增具名差异，六项代理人冲击力与回能补充按既有 Nanoka 补充来源机制登记，并为“受益者是持有者同队的另一名实体”引入声明式同队受益者选择契约（见[修订 21](#修订-21代理人冲击力与回能补充批次-06)）；修订 22 不新增具名差异，洛克茜初始回能转化与绯月银棺三条款按补充实体机制登记，并为“伤害提升效果全队唯一”引入全队唯一效果的选择阶段跨绑定契约（见[修订 22](#修订-22洛克茜初始回能转化与绯月银棺批次-07)）；修订 23 新增 `evelyn-lunalux-multiplier-scope`（伊芙琳核心被动 125% 具名倍率范围修正，见[修订 23](#修订-23三个影画-6-独立追击批次-08)）；修订 24 新增 `nangongyu-vibrato-modified-exclusivity`（南宫羽普通颤音四规则对[颤音：改]独立结算目标的共存排除，见[修订 24](#修订-24南宫羽影画-6-颤音改一次异放结算批次-09)）；修订 25 不新增具名差异，31 条未支持增益条款按既有 Nanoka 补充来源机制登记为不可选越界选项（见[修订 25](#修订-25未支持增益条款覆盖登记批次-10)），修订 26 新增 `blazing-laurel-r5-wilt-critical-damage`（焰心桂冠 R5 萎靡暴伤乘区修正，见[修订 26](#修订-26焰心桂冠-r5-萎靡暴击伤害乘区修正)）；修订 27 不新增具名差异，两条音擎附伤补充按既有 Nanoka 补充来源机制登记（见[修订 27](#修订-27比格气缸与加农转子附伤批次-12)）；修订 28 不新增具名差异，本影画 2 格挡反击附伤按既有 Nanoka 补充来源机制登记（见[修订 28](#修订-28本影画-2-格挡反击附伤批次-13)）；修订 29 新增 `miyabi-frost-settlement-element-scope`（星见雅两条 ice-only 元素过滤按烈霜结算证据扩展为 [ice, frost]，见[修订 29](#修订-29星见雅霜灼破与影画-4批次-14)），修订 30 按补充来源机制接入简与爱丽丝影画六精通附伤（见[修订 30](#修订-30简与爱丽丝影画六精通附伤批次-15)）；修订 47 新增 `pheony-abrasion-complete-state` 与 `pheony-abrasion-first-hit-critical-assumption` 两个具名差异（见[修订 47](#修订-47菲欧妮灼蚀核心与-325-补充来源层批次-28)）；当前规则集 revision 见[静态快照规范](../effects/static-snapshot.md#来源与固定基线)。
 
-固定输入重复生成的三个制品字节一致。core 独立参考夹具（`packages/core/test/effects/fixtures/zzz-hp-static-catalog.json`）当前保留 1,688 条 case，覆盖 1,256 个来源位置，其中全部 1,162 个 converted 来源位置均已纳入；可直接按来源数值比对的位置逐条比对，corrected、迁移与隔离位置由本夹具或其他具名用例验证（包括核心档位扩展、猩红渴望元素范围修正、壳中之灵开发者修订、血髓秘匣说明修正、嚣枪喧焰精炼 2—5、喵运当头位置、修订 23 的伊芙琳 125% 位置、修订 26 的焰心桂冠 R5 位置、修订 29 的星见雅元素范围位置、修订 45 的克拉蕾影画一位置、修订 36 的三条柳极性紊乱旧映射、潜能位置、蕾米埃尔影画 2 忽防位置与影画 1 的两条半状态记录、莱特[昂扬]的四条部分记录（见[修订 19](#修订-19莱特昂扬完整状态与目录层数桥接)）、柚叶额外能力的八条部分记录（见[修订 20](#修订-20柚叶额外能力完整状态与影画-1-强化)）、青溟笼舍五档贯穿增伤位置、修订 16 的批次纠错位置、修订 18 的比利影画 4 与流光咏叹四件套两个纠错位置，以及修订 42 的三条爱芮精度位置）；corrected 的扩展行为另验，配合最终伤害、培养边界、历史属性、多来源、多个时间派生伤害项与打包消费测试。它验证原始上游函数，不表示完成 ZZZ-HP 整应用差分或游戏实测。
+固定输入重复生成的三个制品字节一致。core 独立参考夹具（`packages/core/test/effects/fixtures/zzz-hp-static-catalog.json`）当前保留 1,688 条 case，覆盖 1,256 个来源位置，其中全部 1,150 个 converted 来源位置均已纳入；可直接按来源数值比对的位置逐条比对，corrected、迁移与隔离位置由本夹具或其他具名用例验证（包括核心档位扩展、猩红渴望元素范围修正、壳中之灵开发者修订、血髓秘匣说明修正、嚣枪喧焰精炼 2—5、喵运当头位置、修订 23 的伊芙琳 125% 位置、修订 26 的焰心桂冠 R5 位置、修订 29 的星见雅元素范围位置、修订 45 的克拉蕾影画一位置、修订 36 的三条柳极性紊乱旧映射、潜能位置、蕾米埃尔影画 2 忽防位置与影画 1 的两条半状态记录、莱特[昂扬]的四条部分记录（见[修订 19](#修订-19莱特昂扬完整状态与目录层数桥接)）、柚叶额外能力的八条部分记录（见[修订 20](#修订-20柚叶额外能力完整状态与影画-1-强化)）、青溟笼舍五档贯穿增伤位置、修订 16 的批次纠错位置、修订 18 的比利影画 4 与流光咏叹四件套两个纠错位置，以及修订 42 的三条爱芮精度位置）；corrected 的扩展行为另验，配合最终伤害、培养边界、历史属性、多来源、多个时间派生伤害项与打包消费测试。它验证原始上游函数，不表示完成 ZZZ-HP 整应用差分或游戏实测。
 
 ### 修订 2：转化边界与核心档位
 
@@ -1169,7 +1181,7 @@ EX 原式 `{Skill:1181006, Prop:1001}*2` 已包含两颗，不能再次乘 2；2
 
 ### ID 语法与不透明性
 
-`optionId`、`effectId` 与 `catalogEntityId` 是三类语法不同的标识。`optionId` 与 `effectId` 对消费者不透明：不得按前缀解析、拆段比较或推断实体归属，选项的实体归属唯一权威是选项上的 `catalogEntityId` 字段。当前制品（revision 54）1,002 个选项中有 111 个的 `optionId` 不以其自身 `catalogEntityId` 为前缀：14 个来自实体 slug 的百分号编码差异（奥菲丝&「鬼火」10 个、折枝剑歌 3 个、喵运当头 1 个），96 个是挂在固定来源实体下的 `nanoka:` 前缀补充选项（如 `agents:lucy` 名下的 `nanoka:agents:lucy:guard-boar-inheritance` 与 `nanoka:agents:lucy:m6-boar-rain`）。按前缀过滤或拆段匹配会漏掉或错配这些选项。
+`optionId`、`effectId` 与 `catalogEntityId` 是三类语法不同的标识。`optionId` 与 `effectId` 对消费者不透明：不得按前缀解析、拆段比较或推断实体归属，选项的实体归属唯一权威是选项上的 `catalogEntityId` 字段。当前制品（revision 55）1,002 个选项中有 111 个的 `optionId` 不以其自身 `catalogEntityId` 为前缀：14 个来自实体 slug 的百分号编码差异（奥菲丝&「鬼火」10 个、折枝剑歌 3 个、喵运当头 1 个），96 个是挂在固定来源实体下的 `nanoka:` 前缀补充选项（如 `agents:lucy` 名下的 `nanoka:agents:lucy:guard-boar-inheritance` 与 `nanoka:agents:lucy:m6-boar-rain`）。按前缀过滤或拆段匹配会漏掉或错配这些选项。
 
 固定来源的选项与规则 ID 由[转换器](../../../packages/data/scripts/static-effects/convert.ts)生成，`idPart` 即 `encodeURIComponent`，表中 `<enc(…)>` 标记经其编码的段：
 

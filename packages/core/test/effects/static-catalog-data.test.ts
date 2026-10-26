@@ -1054,7 +1054,7 @@ describe("fixed-source catalog conformance", () => {
     },
   )
   it.each(["anomaly", "anomaly-settlement", "vortex", "disorder"] as const)(
-    "consumes generic anomaly critical contributions in the final %s damage path",
+    "limits Jane's critical contributions to the %s damage path",
     (kind) => {
       const input = referenceInput(
         "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
@@ -1070,15 +1070,15 @@ describe("fixed-source catalog conformance", () => {
       }
       const selected = calculateCatalogResult(request)
       const disabled = calculateCatalogResult({ ...request, selections: [] })
-      // Jane's explicit 40% anomaly critical rate and 50% damage are summed once.
-      expect(selected.criticalRate).toBe(kind === "disorder" ? 0 : 0.4)
+      // Jane's explicit 40%/50% critical channels only apply to assault.
+      expect(selected.criticalRate).toBe(kind === "anomaly" ? 0.4 : 0)
       expect(selected.expected / disabled.expected).toBeCloseTo(
-        kind === "disorder" ? 1 : 1 + 0.4 * 0.5,
+        kind === "anomaly" ? 1 + 0.4 * 0.5 : 1,
         12,
       )
     },
   )
-  it("keeps an explicit anomaly scope narrower than a generic anomaly bonus", () => {
+  it("narrows Alice's M2 bonus to the assault damage path", () => {
     const input = referenceInput(
       "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0",
     )
@@ -1087,8 +1087,87 @@ describe("fixed-source catalog conformance", () => {
       const request = { ...input, damage: { ...input.damage, kind } }
       const selected = calculateCatalogResult(request)
       const disabled = calculateCatalogResult({ ...request, selections: [] })
-      expect(selected.expected / disabled.expected).toBeCloseTo(1.15, 12)
+      expect(selected.expected / disabled.expected).toBeCloseTo(
+        kind === "anomaly" ? 1.15 : 1,
+        12,
+      )
     }
+  })
+  it("keeps Grace and Vivian's named anomaly bonuses off other anomaly kinds", () => {
+    const pointers = [
+      "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0",
+      "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0",
+    ]
+    for (const pointer of pointers) {
+      const input = referenceInput(pointer)
+      if (input.damage.kind !== "anomaly") throw new Error("fixture")
+      const ratio = (kind: StaticCatalogDamageInput["damage"]["kind"]) => {
+        const request = {
+          ...input,
+          damage: { ...input.damage, kind },
+        } as StaticCatalogDamageInput
+        const selected = calculateCatalogResult(request)
+        const disabled = calculateCatalogResult({
+          ...request,
+          selections: [],
+        })
+        return selected.expected / disabled.expected
+      }
+      expect(ratio("anomaly"), pointer).toBeGreaterThan(1)
+      for (const kind of ["anomaly-settlement", "vortex"] as const)
+        expect(ratio(kind), `${pointer} ${kind}`).toBeCloseTo(1, 12)
+    }
+  })
+  it("narrows Jane's potential critical damage to the assault damage path", () => {
+    const input = withPotentialLevel(
+      referenceInput("/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/0"),
+      2,
+    )
+    if (input.damage.kind !== "anomaly") throw new Error("fixture")
+    const effectId =
+      "agent:1261:zzz-hp:eff-ms34gorp-xrbl8x:blk-ms34gorp-m9dlxw:mindscape:0"
+    const applies = (kind: StaticCatalogDamageInput["damage"]["kind"]) =>
+      calculateCatalogResult({
+        ...input,
+        damage: { ...input.damage, kind },
+      } as StaticCatalogDamageInput).evaluation.contributions.some(
+        (contribution) => contribution.origin.effectId === effectId,
+      )
+    expect(applies("anomaly")).toBe(true)
+    for (const kind of ["anomaly-settlement", "vortex"] as const)
+      expect(applies(kind), kind).toBe(false)
+  })
+  it("does not double count Joyau Dore's Windswept and Vortex bonuses", () => {
+    const broad = referenceInput(
+      "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1",
+    )
+    const vortex = referenceInput(
+      "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/2",
+    )
+    if (broad.damage.kind !== "anomaly") throw new Error("fixture")
+    const ratio = (
+      input: StaticCatalogDamageInput,
+      kind: StaticCatalogDamageInput["damage"]["kind"],
+    ) => {
+      const request = {
+        ...input,
+        damage: { ...input.damage, kind },
+      } as StaticCatalogDamageInput
+      const selected = calculateCatalogResult(request)
+      const disabled = calculateCatalogResult({
+        ...request,
+        selections: [],
+      })
+      return selected.expected / disabled.expected
+    }
+    // Broad anomalyDmgBonus is narrowed to Windswept; it must not hit Vortex.
+    expect(ratio(broad, "vortex")).toBeCloseTo(1, 12)
+    const combined = {
+      ...broad,
+      selections: [...broad.selections, ...vortex.selections],
+    }
+    // The explicit turbulence record contributes 7% once; no duplicate 7%.
+    expect(ratio(combined, "vortex")).toBeCloseTo(1.07, 12)
   })
   it("consumes Burnice's skill multiplier only for the selected matching hit", () => {
     const input = referenceInput(
@@ -2248,7 +2327,7 @@ describe("fixed-source catalog conformance", () => {
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
     it("exposes one complete option with the original rules and migration evidence", () => {
-      expect(catalog.revision).toBe("54")
+      expect(catalog.revision).toBe("55")
       expect(
         catalog.differences.some((d) => d.differenceId === differenceId),
         differenceId,

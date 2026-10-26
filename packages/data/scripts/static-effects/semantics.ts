@@ -80,6 +80,22 @@ export const HUGO_ATTACK_COUNT_DIFFERENCE_ID = "hugo-other-stun-teammate-count"
 export const HUGO_ATTACK_COUNT_DESCRIPTION =
   "调用方声明其他击破队友人数：0 关闭，1/2 人分别获得对应核心档的一倍/三倍固定攻击力；不自动计数，不要求失衡或暗渊回响。旧 3 层须迁移为新 2 人；核心 7 的旧 2 层 +600 改为二人 +900，一人仍 +300。"
 
+/**
+ * 伤害种类范围修正的共享字段：既用于独立的 damage-kind-scope-correction，
+ * 也允许嵌套在 potential-level 等已有语义上组合执行，避免同一记录因已有
+ * 潜能档位修正而无法再登记宽口径收窄。
+ */
+export interface DamageKindScopeCorrectionFields {
+  /** 防漂移：登记时来源记录（raw 与 normalized）应逐字段保持的编码。 */
+  readonly expectedEncoding: Readonly<Record<string, unknown>>
+  /** 全局映射当前生成的伤害种类集合；用于定位待改写的条件。 */
+  readonly expectedDamageKinds: readonly DamageKind[]
+  /** 按块 note 与 Nanoka 同文收窄后的伤害种类集合。 */
+  readonly correctedDamageKinds: readonly DamageKind[]
+  /** 防漂移：固定来源 raw/normalized 块的真实完整 note 原文。 */
+  readonly expectedSourceBlockNote: string
+}
+
 export type SourceSemantics =
   | {
       /**
@@ -331,6 +347,13 @@ export type SourceSemantics =
       }[]
       /** 选项实际适用的激活层数上限；省略表示单次状态。 */
       readonly maximumLayers?: number
+      /**
+       * 潜能档位记录仍可能使用比块 note 更宽的全局伤害种类映射。
+       * 与 potential-level 组合执行：先按档位取参，再收窄 damageKind。
+       */
+      readonly damageKindScope?: DamageKindScopeCorrectionFields & {
+        readonly differenceId: string
+      }
       readonly evidence: readonly SemanticsEvidenceReference[]
       readonly verification: string
     }
@@ -372,7 +395,7 @@ export type SourceSemantics =
       readonly evidence: readonly SemanticsEvidenceReference[]
       readonly verification: string
     }
-  | {
+  | (DamageKindScopeCorrectionFields & {
       /**
        * stat 的全局伤害种类映射比块 note 与 Nanoka 同文更宽（维琳娜
        * M0/M2/M6 的 `anomalyDmgBonus` 同时覆盖 vortex，与同块的
@@ -382,18 +405,10 @@ export type SourceSemantics =
        * normalized 的登记编码、完整块 note 任一漂移即拒绝生成。
        */
       readonly kind: "damage-kind-scope-correction"
-      /** 防漂移：登记时来源记录（raw 与 normalized）应逐字段保持的编码。 */
-      readonly expectedEncoding: Readonly<Record<string, unknown>>
-      /** 全局映射当前生成的伤害种类集合；用于定位待改写的条件。 */
-      readonly expectedDamageKinds: readonly DamageKind[]
-      /** 按块 note 与 Nanoka 同文收窄后的伤害种类集合。 */
-      readonly correctedDamageKinds: readonly DamageKind[]
-      /** 防漂移：固定来源 raw/normalized 块的真实完整 note 原文。 */
-      readonly expectedSourceBlockNote: string
       readonly differenceId: string
       readonly evidence: readonly SemanticsEvidenceReference[]
       readonly verification: string
-    }
+    })
   | {
       /**
        * 记录按固定来源字段转换，但来源自身的字段与块说明文字存在具名差异
@@ -862,6 +877,18 @@ const aliceDetailsEnSha =
   "14bd2589be83c8bf80a9de3c8dcf467ce9bab78b630240c56ca6db7bdaff1091"
 const janeDetailsEnSha =
   "f463218618d5a9bc5abffa440146ff262d343c027e2a469066c63d7bb0dc024c"
+const graceDetailsZhSha =
+  "0752c155856afbbe7212ecb80b1f5a38b4a5fdfff3eeb8ccf0d48c770d2ff9d7"
+const graceDetailsEnSha =
+  "ddb6e608d413216ab2d6bcb681dedca27ca38447bdf17a1d1bfa3183110f6ad1"
+const vivianDetailsZhSha =
+  "77b0fe60b82de02636b055772a227dd9a78f45256a25c149a9704fcf02592cbf"
+const vivianDetailsEnSha =
+  "f46db3dc80b96e0bc2430d3d5364bb94c103f2fb42c8b7d3daf8eacb900d75fc"
+const joyauDoreDetailsZhSha =
+  "b7145001a4ee1fd0fd165e83e8d6f6491f46501e10324a0472b0a59989acc9cd"
+const joyauDoreDetailsEnSha =
+  "5e352682548743fbad843c91f4e53f4b2474191867e704b302e1f89608b0834c"
 
 const anbyTalentEvidence = (rank: 2 | 6) =>
   [
@@ -913,6 +940,55 @@ const janeMindscape2Evidence = [
     path: "agents/1261/details.en.json",
     pointer: "/talent/2/desc",
     sha256: janeDetailsEnSha,
+  },
+] as const
+
+const graceAdditionalAbilityEvidence = [
+  {
+    path: "agents/1181/details.zh.json",
+    pointer: "/passive/level/1181501/desc/1",
+    sha256: graceDetailsZhSha,
+  },
+  {
+    path: "agents/1181/details.en.json",
+    pointer: "/passive/level/1181501/desc/1",
+    sha256: graceDetailsEnSha,
+  },
+] as const
+
+const vivianAdditionalAbilityEvidence = [
+  {
+    path: "agents/1331/details.zh.json",
+    pointer: "/passive/level/1331501/desc/1",
+    sha256: vivianDetailsZhSha,
+  },
+  {
+    path: "agents/1331/details.en.json",
+    pointer: "/passive/level/1331501/desc/1",
+    sha256: vivianDetailsEnSha,
+  },
+] as const
+
+const joyauDoreRefinementEvidence = [
+  {
+    path: "w-engines/14156/details.zh.json",
+    pointer: "/talents/1/desc",
+    sha256: joyauDoreDetailsZhSha,
+  },
+  {
+    path: "w-engines/14156/details.en.json",
+    pointer: "/talents/1/desc",
+    sha256: joyauDoreDetailsEnSha,
+  },
+  {
+    path: "w-engines/14156/details.zh.json",
+    pointer: "/talents/5/desc",
+    sha256: joyauDoreDetailsZhSha,
+  },
+  {
+    path: "w-engines/14156/details.en.json",
+    pointer: "/talents/5/desc",
+    sha256: joyauDoreDetailsEnSha,
   },
 ] as const
 
@@ -1112,6 +1188,263 @@ const velinaAnomalyScopeCorrections = (): Record<string, SourceSemantics> => ({
       "Nanoka agents/1561 /talent/6/desc 中英文同文：该条款只提升再次施加[风化]时此次[风化]的伤害，每 1 秒剩余持续时间 +2.5%，最多 +40%。固定源 anomalyDmgBonus 宽映射同时命中 vortex；修正只收窄到 [anomaly]（风化），不改变 2.5%/层与 16 层上限。",
   },
 })
+
+const graceAnomalyDamageBlockNote =
+  "队伍中存在与自身属性或阵营相同的角色或其他[异常]角色时触发：\n格莉丝[强化特殊技]命中敌人时，目标下次被施加[感电]效果时，受到的[感电]伤害提升18%，最多叠加2层，同一招式内每个敌人最多触发一次效果，[感电]状态结束时效果重置。"
+const vivianAnomalyDamageBlockNote =
+  "队伍中存在其他[异常]角色或与自身属性相同的角色时触发：\n全队角色造成的[侵蚀]伤害和[侵蚀]状态被结算的[紊乱]伤害提升12%。"
+const aliceAnomalyDamageBlockNote =
+  "全队角色造成的[强击]伤害提升15%；\n物理异常状态下的敌人被结算的[紊乱]伤害提升15%；"
+const janeCoreAnomalyCriticalBlockNote =
+  "简攻击命中敌人时，会使其陷入[啮咬]状态，持续10秒；\n队伍中任意角色对处于[啮咬]状态下的敌人触发[强击]并施加[畏缩]效果时，[畏缩]效果的持续时间提升5秒；\n对处于[啮咬]状态下的敌人造成的[强击]伤害有概率触发暴击，基础暴击率为40%，暴击伤害为50%，简的每点异常精通会使该效果的暴击率额外提升0.16%。"
+const janeMindscape2AnomalyCriticalBlockNote =
+  "简攻击命中处于[啮咬]状态下的敌人，或队伍中任意角色对处于[啮咬]状态下的敌人触发[强击]时，将会无视其15%防御力，当[强击]伤害触发暴击时，其暴击伤害额外提升50%。"
+const janePotentialAnomalyCriticalBlockNote =
+  "简触发[强击]时，其暴击伤害额外提升。"
+const joyauDoreAnomalyDamageBlockNote = (
+  mastery: number,
+  percent: number,
+  teamMastery: number,
+) =>
+  `装备者的异常精通提升${mastery}点；装备者发动[强化特殊技]造成风属性伤害时，自身造成的[乱流]和[风化]伤害提升${percent}%，持续40秒，最多叠加2层，重复触发时刷新持续时间，同一招式内最多触发一次，拥有2层该效果时，全队代理人的异常精通提升${teamMastery}点，该效果全队唯一。`
+
+const graceAnomalyDamageEncoding = {
+  id: "eff-ms4o80e9-lgnv30",
+  applyTarget: "team",
+  applySituation: "global",
+  elementFilter: ["电"],
+  kind: "stacked",
+  stat: "anomalyDmgBonus",
+  value: 0,
+  maxStacks: 2,
+  valuePerStack: 18,
+  defaultStacks: 2,
+  appliesToAnomaly: true,
+} as const
+
+const vivianAnomalyDamageEncoding = {
+  id: "legacy-team-anomalyDmgBonus",
+  applyTarget: "team",
+  applySituation: "global",
+  elementFilter: ["以太"],
+  kind: "fixed",
+  stat: "anomalyDmgBonus",
+  value: 12,
+  maxStacks: 1,
+  valuePerStack: 0,
+  defaultStacks: 1,
+  appliesToAnomaly: true,
+} as const
+
+const aliceAnomalyDamageEncoding = {
+  id: "legacy-team-anomalyDmgBonus",
+  applyTarget: "team",
+  applySituation: "global",
+  elementFilter: ["物理"],
+  kind: "fixed",
+  stat: "anomalyDmgBonus",
+  value: 15,
+  maxStacks: 1,
+  valuePerStack: 0,
+  defaultStacks: 1,
+} as const
+
+const janeCoreAnomalyCriticalRateEncoding = {
+  id: "eff-ms34bcgu-8f1m63",
+  applyTarget: "team",
+  applySituation: "global",
+  elementFilter: ["物理"],
+  kind: "fixed",
+  stat: "anomalyCritRate",
+  value: 40,
+  maxStacks: 1,
+  valuePerStack: 0,
+  defaultStacks: 1,
+  appliesToAnomaly: true,
+} as const
+
+const janeCoreAnomalyCriticalDamageEncoding = {
+  id: "eff-ms34c40c-3b3j3z",
+  applyTarget: "team",
+  applySituation: "global",
+  elementFilter: ["物理"],
+  kind: "fixed",
+  stat: "anomalyCritDmg",
+  value: 50,
+  maxStacks: 1,
+  valuePerStack: 0,
+  defaultStacks: 1,
+  appliesToAnomaly: true,
+} as const
+
+const janeCoreAnomalyCriticalRateConversionEncoding = {
+  id: "eff-ms34ci0p-usidux",
+  applyTarget: "team",
+  applySituation: "global",
+  elementFilter: ["物理"],
+  kind: "convert",
+  stat: "anomalyCritRate",
+  value: 0,
+  maxStacks: 1,
+  valuePerStack: 0,
+  defaultStacks: 1,
+  appliesToAnomaly: true,
+} as const
+
+const janeMindscape2AnomalyCriticalDamageEncoding = {
+  id: "legacy-team-anomalyCritDmg",
+  applyTarget: "team",
+  applySituation: "global",
+  elementFilter: ["物理"],
+  kind: "fixed",
+  stat: "anomalyCritDmg",
+  value: 50,
+  maxStacks: 1,
+  valuePerStack: 0,
+  defaultStacks: 1,
+  appliesToAnomaly: true,
+} as const
+
+const joyauDoreAnomalyDamageEncoding = {
+  id: "legacy-self-anomalyDmgBonus",
+  applyTarget: "self",
+  applySituation: "global",
+  elementFilter: ["风"],
+  kind: "stacked",
+  stat: "anomalyDmgBonus",
+  value: 0,
+  maxStacks: 2,
+  valuePerStack: 7,
+  defaultStacks: 2,
+  appliesToAnomaly: true,
+} as const
+
+const broadAnomalyDamageKinds = [
+  "anomaly",
+  "anomaly-settlement",
+  "vortex",
+  "luminize",
+] as const
+const broadAnomalyCriticalKinds = [
+  "anomaly",
+  "anomaly-settlement",
+  "vortex",
+] as const
+
+const broadAnomalyScopeCorrections = (): Record<string, SourceSemantics> => ({
+  "agents/grace/mindscape/0/blk-ms4o80e9-dqsih3/eff-ms4o80e9-lgnv30": {
+    kind: "damage-kind-scope-correction",
+    expectedEncoding: graceAnomalyDamageEncoding,
+    expectedDamageKinds: broadAnomalyDamageKinds,
+    correctedDamageKinds: ["anomaly"],
+    expectedSourceBlockNote: graceAnomalyDamageBlockNote,
+    differenceId: "grace-anomaly-damage-kind-scope",
+    evidence: graceAdditionalAbilityEvidence,
+    verification:
+      "Nanoka agents/1181 /passive/level/1181501/desc/1 中英文同文：格莉丝额外能力只提升目标受到的[感电]（普通电属性异常）伤害，最多 2 层。固定源 anomalyDmgBonus 宽映射同时覆盖异放、乱流与耀变；修正保留记录、数值、层数与公开 ID，只把 hit.damageKind 收窄为 anomaly。",
+  },
+  "agents/vivian/mindscape/0/blk-legacy/legacy-team-anomalyDmgBonus": {
+    kind: "damage-kind-scope-correction",
+    expectedEncoding: vivianAnomalyDamageEncoding,
+    expectedDamageKinds: broadAnomalyDamageKinds,
+    correctedDamageKinds: ["anomaly"],
+    expectedSourceBlockNote: vivianAnomalyDamageBlockNote,
+    differenceId: "vivian-m0-anomaly-damage-kind-scope",
+    evidence: vivianAdditionalAbilityEvidence,
+    verification:
+      "Nanoka agents/1331 /passive/level/1331501/desc/1 中英文同文：薇薇安额外能力只提升[侵蚀]（普通以太异常）伤害与[侵蚀]状态被结算的[紊乱]伤害。固定源 anomalyDmgBonus 宽映射同时覆盖异放、乱流与耀变；修正保留记录、数值与公开 ID，只把 anomalyDmgBonus 收窄为 anomaly，紊乱由独立 disorderDmgBonus 承担。",
+  },
+  "agents/alice/mindscape/2/blk-legacy/legacy-team-anomalyDmgBonus": {
+    kind: "damage-kind-scope-correction",
+    expectedEncoding: aliceAnomalyDamageEncoding,
+    expectedDamageKinds: broadAnomalyDamageKinds,
+    correctedDamageKinds: ["anomaly"],
+    expectedSourceBlockNote: aliceAnomalyDamageBlockNote,
+    differenceId: "alice-anomaly-damage-kind-scope",
+    evidence: aliceMindscape2Evidence,
+    verification:
+      "Nanoka agents/1401 /talent/2/desc 中英文同文：爱丽丝 M2 只提升[强击]（普通物理异常）伤害与物理异常状态下被结算的[紊乱]伤害。固定源 anomalyDmgBonus 宽映射同时覆盖异放、乱流与耀变；修正保留记录、数值与公开 ID，只把 anomalyDmgBonus 收窄为 anomaly，紊乱由独立 disorderDmgBonus 承担，新增子类记录仍为 semantic-conflict。",
+  },
+  "agents/jane/mindscape/0/blk-ms349twy-zgu7b6/eff-ms34bcgu-8f1m63": {
+    kind: "damage-kind-scope-correction",
+    expectedEncoding: janeCoreAnomalyCriticalRateEncoding,
+    expectedDamageKinds: broadAnomalyCriticalKinds,
+    correctedDamageKinds: ["anomaly"],
+    expectedSourceBlockNote: janeCoreAnomalyCriticalBlockNote,
+    differenceId: "jane-anomaly-critical-kind-scope",
+    evidence: janeCorePassiveEvidence,
+    verification:
+      "Nanoka agents/1261 核心被动 /passive/level/1261507/desc/0 中英文同文：[强击]伤害的暴击率 40% 只作用于普通物理异常。固定源 anomalyCritRate 宽映射同时覆盖异放与乱流；修正保留记录、数值与公开 ID，只把 hit.damageKind 收窄为 anomaly。",
+  },
+  "agents/jane/mindscape/0/blk-ms349twy-zgu7b6/eff-ms34c40c-3b3j3z": {
+    kind: "damage-kind-scope-correction",
+    expectedEncoding: janeCoreAnomalyCriticalDamageEncoding,
+    expectedDamageKinds: broadAnomalyCriticalKinds,
+    correctedDamageKinds: ["anomaly"],
+    expectedSourceBlockNote: janeCoreAnomalyCriticalBlockNote,
+    differenceId: "jane-anomaly-critical-kind-scope",
+    evidence: janeCorePassiveEvidence,
+    verification:
+      "Nanoka agents/1261 核心被动 /passive/level/1261507/desc/0 中英文同文：[强击]伤害的暴击伤害 50% 只作用于普通物理异常。固定源 anomalyCritDmg 宽映射同时覆盖异放与乱流；修正保留记录、数值与公开 ID，只把 hit.damageKind 收窄为 anomaly。",
+  },
+  "agents/jane/mindscape/0/blk-ms349twy-zgu7b6/eff-ms34ci0p-usidux": {
+    kind: "damage-kind-scope-correction",
+    expectedEncoding: janeCoreAnomalyCriticalRateConversionEncoding,
+    expectedDamageKinds: broadAnomalyCriticalKinds,
+    correctedDamageKinds: ["anomaly"],
+    expectedSourceBlockNote: janeCoreAnomalyCriticalBlockNote,
+    differenceId: "jane-anomaly-critical-kind-scope",
+    evidence: janeCorePassiveEvidence,
+    verification:
+      "Nanoka agents/1261 核心被动 /passive/level/1261507/desc/0 中英文同文：异常精通转化的暴击率同样只强化[强击]伤害。固定源 anomalyCritRate 宽映射同时覆盖异放与乱流；修正保留转换表达式、数值与公开 ID，只把 hit.damageKind 收窄为 anomaly。",
+  },
+  "agents/jane/mindscape/2/blk-legacy/legacy-team-anomalyCritDmg": {
+    kind: "damage-kind-scope-correction",
+    expectedEncoding: janeMindscape2AnomalyCriticalDamageEncoding,
+    expectedDamageKinds: broadAnomalyCriticalKinds,
+    correctedDamageKinds: ["anomaly"],
+    expectedSourceBlockNote: janeMindscape2AnomalyCriticalBlockNote,
+    differenceId: "jane-anomaly-critical-kind-scope",
+    evidence: janeMindscape2Evidence,
+    verification:
+      "Nanoka agents/1261 /talent/2/desc 中英文同文：M2 额外 50% 暴击伤害只在[强击]伤害触发暴击时生效。固定源 anomalyCritDmg 宽映射同时覆盖异放与乱流；修正保留记录、数值与公开 ID，只把 hit.damageKind 收窄为 anomaly。",
+  },
+})
+
+const joyauDoreRefinementValues = [
+  { mastery: 70, percent: 7, teamMastery: 60 },
+  { mastery: 80, percent: 8, teamMastery: 69 },
+  { mastery: 90, percent: 9, teamMastery: 78 },
+  { mastery: 100, percent: 10, teamMastery: 87 },
+  { mastery: 110, percent: 11, teamMastery: 96 },
+] as const
+
+const joyauDoreAnomalyDamageScopes = (): Record<string, SourceSemantics> =>
+  Object.fromEntries(
+    joyauDoreRefinementValues.map(
+      ({ mastery, percent, teamMastery }, index) => [
+        `w-engines/Joyau_Dore/refinement/${String(index + 1)}/blk-legacy/legacy-self-anomalyDmgBonus`,
+        {
+          kind: "damage-kind-scope-correction",
+          expectedEncoding: {
+            ...joyauDoreAnomalyDamageEncoding,
+            valuePerStack: percent,
+          },
+          expectedDamageKinds: broadAnomalyDamageKinds,
+          correctedDamageKinds: ["anomaly"],
+          expectedSourceBlockNote: joyauDoreAnomalyDamageBlockNote(
+            mastery,
+            percent,
+            teamMastery,
+          ),
+          differenceId: "joyau-dore-anomaly-damage-kind-scope",
+          evidence: joyauDoreRefinementEvidence,
+          verification:
+            "Nanoka w-engines/14156 /talents/1—5/desc 中英文同文：琳琅鎏心精炼 1—5 同时提升[乱流]和[风化]伤害，每层 7/8/9/10/11%，最多 2 层。固定源把同一句拆成 anomalyDmgBonus 与 turbulenceDmgBonus 两条；Fairy 的 anomalyDmgBonus 宽映射同时命中 vortex，会与 turbulenceDmgBonus 重复。修正保留两条记录、数值、层数与公开 ID，只把 anomalyDmgBonus 收窄为 anomaly（风化），vortex 由 turbulenceDmgBonus 承担。",
+        } satisfies SourceSemantics,
+      ],
+    ),
+  )
 
 const allSpecialSkillLevels: readonly SpecialSkillLevel[] = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
@@ -2551,6 +2884,9 @@ const janeSubtypeConflicts = (): Record<string, SourceSemantics> => {
 export const SOURCE_COMMIT_991BB0E_SEMANTICS: ReadonlySet<string> = new Set([
   ...Object.keys(aliceM2SubtypeConflicts()),
   ...Object.keys(janeSubtypeConflicts()),
+  ...Object.keys(broadAnomalyScopeCorrections()),
+  ...Object.keys(joyauDoreAnomalyDamageScopes()),
+  "agents/jane/mindscape/0/blk-ms34gorp-m9dlxw/eff-ms34gorp-xrbl8x",
   "agents/anby/mindscape/2/blk-ms47xm3l-3pumvj/eff-ms47xm3l-nf7ga7",
   "agents/anby/mindscape/6/blk-legacy/legacy-self-skillDmgBonus",
   "w-engines/Plume_of_Rebirth/refinement/5/blk-mviwn8gu-b8fedl/eff-mviwn8gu-8wi5ap",
@@ -2561,6 +2897,8 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
   ...aliceM2SubtypeConflicts(),
   ...janeSubtypeConflicts(),
   ...velinaAnomalyScopeCorrections(),
+  ...broadAnomalyScopeCorrections(),
+  ...joyauDoreAnomalyDamageScopes(),
   "agents/anby/mindscape/2/blk-ms47xm3l-3pumvj/eff-ms47xm3l-nf7ga7": {
     kind: "beneficiary-target-correction",
     expectedApplyTarget: "team",
@@ -3024,6 +3362,25 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
         values: { "2": 0.1, "3": 0.15, "4": 0.2, "5": 0.25, "6": 0.3 },
       },
     ],
+    damageKindScope: {
+      differenceId: "jane-anomaly-critical-kind-scope",
+      expectedEncoding: {
+        id: "eff-ms34gorp-xrbl8x",
+        applyTarget: "self",
+        applySituation: "global",
+        elementFilter: ["物理"],
+        kind: "fixed",
+        stat: "anomalyCritDmg",
+        value: 10,
+        maxStacks: 1,
+        valuePerStack: 0,
+        defaultStacks: 1,
+        appliesToAnomaly: true,
+      },
+      expectedDamageKinds: broadAnomalyCriticalKinds,
+      correctedDamageKinds: ["anomaly"],
+      expectedSourceBlockNote: janePotentialAnomalyCriticalBlockNote,
+    },
     evidence: janePotentialEvidence,
     verification:
       "Nanoka potentialDetail 126101—126105（level 2—6）明确：简触发[强击]时，该次[强击]的暴击伤害额外提升 10/15/20/25/30%。上游把固定 +10% 与 +5%/层、最多 4 层拆成两条独立记录，总和 10—30% 与档位值一致；本条改为完整档位值，maximumLayers 归一为 1，自潜能 2 起可用。",

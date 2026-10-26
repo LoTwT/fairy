@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "54",
+  "revision": "55",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
@@ -11617,7 +11617,7 @@
       "effectIds": [
         "agent:1401:zzz-hp:legacy-team-anomalyDmgBonus:blk-legacy:mindscape:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 15,
       "normalizedValue": 15
@@ -13405,7 +13405,7 @@
       "effectIds": [
         "agent:1181:zzz-hp:eff-ms4o80e9-lgnv30:blk-ms4o80e9-dqsih3:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -13823,7 +13823,7 @@
       "effectIds": [
         "agent:1261:zzz-hp:eff-ms34bcgu-8f1m63:blk-ms349twy-zgu7b6:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 40,
       "normalizedValue": 40
@@ -13838,7 +13838,7 @@
       "effectIds": [
         "agent:1261:zzz-hp:eff-ms34c40c-3b3j3z:blk-ms349twy-zgu7b6:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 50,
       "normalizedValue": 50
@@ -13853,7 +13853,7 @@
       "effectIds": [
         "agent:1261:zzz-hp:eff-ms34ci0p-usidux:blk-ms349twy-zgu7b6:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -14093,7 +14093,7 @@
       "effectIds": [
         "agent:1261:zzz-hp:legacy-team-anomalyCritDmg:blk-legacy:mindscape:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 50,
       "normalizedValue": 50
@@ -18197,7 +18197,7 @@
       "effectIds": [
         "agent:1331:zzz-hp:legacy-team-anomalyDmgBonus:blk-legacy:mindscape:0"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 12,
       "normalizedValue": 12
@@ -25440,7 +25440,7 @@
       "effectIds": [
         "w-engine:14156:zzz-hp:legacy-self-anomalyDmgBonus:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -25455,7 +25455,7 @@
       "effectIds": [
         "w-engine:14156:zzz-hp:legacy-self-anomalyDmgBonus:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -25470,7 +25470,7 @@
       "effectIds": [
         "w-engine:14156:zzz-hp:legacy-self-anomalyDmgBonus:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -25485,7 +25485,7 @@
       "effectIds": [
         "w-engine:14156:zzz-hp:legacy-self-anomalyDmgBonus:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -25500,7 +25500,7 @@
       "effectIds": [
         "w-engine:14156:zzz-hp:legacy-self-anomalyDmgBonus:blk-legacy:refinement"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -33049,8 +33049,8 @@
     "rawEffects": 1375,
     "rules": 931,
     "options": 1002,
-    "converted": 1162,
-    "corrected": 121,
+    "converted": 1150,
+    "corrected": 133,
     "unsupported": 92,
     "supplements": {
       "records": 102,

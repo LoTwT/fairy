@@ -65,7 +65,7 @@
       "packageVersion": "0.5.0",
       "contractVersion": 3,
       "gameVersion": "3.3",
-      "snapshotId": "sha256:9f56c4647bb6d33bdafe084134fa12a125e988cfb4f80300e5738035f4c36be2"
+      "snapshotId": "sha256:0d5a9837cb2f93ad874693aad41c6682edbdeadcb016b09c8818ebfd46997165"
     },
     "fairyCalculationSources": {
       "packages/core/src/static/calculate.ts": "c1e6d073f7b8eb62241bf640da8d3e1a878aa8de9a703636c490f113a126441e",
@@ -80471,6 +80471,18 @@
         }
       },
       "currentSnapshotId": "sha256:9f56c4647bb6d33bdafe084134fa12a125e988cfb4f80300e5738035f4c36be2"
+    },
+    {
+      "reason": "Revision 55 narrows broad anomaly damage and critical records whose block notes and Nanoka text name only one anomaly subtype. Grace, Vivian M0, Alice M2, Jane and Joyau Dore keep their IDs, values and progression gates; twelve coverage positions move from converted to corrected so their records no longer hit release, vortex or radiance outside the named text. Rules and option IDs remain stable; only the static/catalog bytes and current snapshot advance.",
+      "implementationBase": "4b6063b6",
+      "previous": {
+        "snapshotId": "sha256:9f56c4647bb6d33bdafe084134fa12a125e988cfb4f80300e5738035f4c36be2",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "1af6cc927d5a64fb5fe50943444263ed990f485e417cca80acde80af3934d8ec",
+          "packages/data/definitions/effects/static-catalog.json": "28a603be5dc2a47d5b817e46a5cc3d4ad06b5e0bb976886ba237998e4cbf4fdb"
+        }
+      },
+      "currentSnapshotId": "sha256:0d5a9837cb2f93ad874693aad41c6682edbdeadcb016b09c8818ebfd46997165"
     }
   ]
 }
