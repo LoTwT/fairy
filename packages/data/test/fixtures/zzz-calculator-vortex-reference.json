@@ -65,7 +65,7 @@
       "packageVersion": "0.5.0",
       "contractVersion": 3,
       "gameVersion": "3.3",
-      "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
+      "snapshotId": "sha256:9f56c4647bb6d33bdafe084134fa12a125e988cfb4f80300e5738035f4c36be2"
     }
   },
   "inputLayer": "externally-declared-resolved-source-state",
@@ -107427,6 +107427,18 @@
         }
       },
       "currentSnapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
+    },
+    {
+      "reason": "Revision 54 narrows Velina's anomalyDmgBonus to Windswept damage so the existing turbulenceDmgBonus record is not counted twice on vortex hits. Rules and option IDs stay stable; three coverage records move from converted to corrected, and only the static/catalog bytes and current snapshot advance.",
+      "implementationBase": "c9d191fa",
+      "previous": {
+        "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "f92a28d490bf640a4332fd8117589aeb901c8bdc9ff6ffcad8fd2f9032c68424",
+          "packages/data/definitions/effects/static-catalog.json": "e6da1a47356054611280a3edd7e3c93406facf28ac17138df294fef3945c0e83"
+        }
+      },
+      "currentSnapshotId": "sha256:9f56c4647bb6d33bdafe084134fa12a125e988cfb4f80300e5738035f4c36be2"
     }
   ]
 }

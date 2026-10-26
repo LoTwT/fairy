@@ -65,11 +65,11 @@
       "packageVersion": "0.5.0",
       "contractVersion": 3,
       "gameVersion": "3.3",
-      "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
+      "snapshotId": "sha256:9f56c4647bb6d33bdafe084134fa12a125e988cfb4f80300e5738035f4c36be2"
     },
     "fairyCalculationSources": {
       "packages/core/src/static/calculate.ts": "c1e6d073f7b8eb62241bf640da8d3e1a878aa8de9a703636c490f113a126441e",
-      "packages/data/.generated/calculation-data.ts": "0ffa64f21dae36ce5ebaaeda0519b1389de1ec3758f7d34a9c50b1e7d071a312",
+      "packages/data/.generated/calculation-data.ts": "ac95cea1d86856ecb735784a3fcc10fa6be614ee899727adf18074497deebb12",
       "packages/data/integrated/agents/1611/data.json": "2ef4f6dcb7283d61e2709634b38822ae79b358808220688487e888336b045255",
       "packages/data/integrated/agents/1611/details.zh.json": "470030f71d009a3dd3d4c9ab66aa4d33c0361e5b00038ef4d0a96ba38762a61e",
       "packages/data/scripts/claret-panel-conversion.ts": "9a2e0d70d0de8e3b9a46761cb18b6102dc48bcac60bcd2bce29c2981a4bd8d77",
@@ -80459,6 +80459,18 @@
         }
       },
       "currentSnapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
+    },
+    {
+      "reason": "Revision 54 narrows Velina's anomalyDmgBonus to Windswept damage so the existing turbulenceDmgBonus record is not counted twice on vortex hits. Rules and option IDs stay stable; three coverage records move from converted to corrected, and only the static/catalog bytes and current snapshot advance.",
+      "implementationBase": "c9d191fa",
+      "previous": {
+        "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "f92a28d490bf640a4332fd8117589aeb901c8bdc9ff6ffcad8fd2f9032c68424",
+          "packages/data/definitions/effects/static-catalog.json": "e6da1a47356054611280a3edd7e3c93406facf28ac17138df294fef3945c0e83"
+        }
+      },
+      "currentSnapshotId": "sha256:9f56c4647bb6d33bdafe084134fa12a125e988cfb4f80300e5738035f4c36be2"
     }
   ]
 }

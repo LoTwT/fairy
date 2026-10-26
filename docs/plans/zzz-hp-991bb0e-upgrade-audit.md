@@ -65,12 +65,16 @@
 原始效果、规则、选项、converted/corrected/unsupported 与补充来源计数同步写入
 `docs/specs/data/zzz-hp-static-effects.md` 的“当前状态”。
 
-### 实施结果（当前）
+### 实施结果（revision 53）
 
 规则集 revision `53`。实际制品为 196 个实体、1,118 个 pack、1,375 条原始效果、
 931 条规则、1,002 个选项；coverage 为 1,165 converted / 118 corrected / 92
 unsupported；catalog 变体为 1,233 converted / 124 corrected / 126 unsupported
 （共 1,483 个）；补充来源 102 条（68 integrated / 34 out-of-scope）。
+
+后续 revision 54 修正了维琳娜异常增伤的宽口径重复计入，当前计数见
+[修订 54](../specs/data/zzz-hp-static-effects.md#修订-54维琳娜异常增伤伤害种类收窄)；
+本页保留 revision 53 的批次结果。
 
 按 effectId 比较，规则语义变化只有简 M2 减防的 `damageKinds` 收窄；安比 M2/M6
 的规则只发生来源版本、section 与引用 Pointer 变化。新增 16 个选项：Alice 2、

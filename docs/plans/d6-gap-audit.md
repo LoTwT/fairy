@@ -8,10 +8,10 @@
 
 ## 当前计数
 
-- 静态 effects（revision 53）：1,165 converted、118 corrected、92 unsupported。
+- 静态 effects（revision 54）：1,162 converted、121 corrected、92 unsupported。
 - 补充来源：102 条记录，68 条已整合，34 条 out-of-scope。
 - 技能动作：62 名成员、1,348 条动作；4 条 unavailable。
-- core oracle：1,688 条 case，覆盖全部 1,165 个 converted 来源位置。
+- core oracle：1,688 条 case，覆盖全部 1,162 个 converted 来源位置。
 
 ## 92 条 unsupported
 
@@ -23,7 +23,7 @@
 
 **决定**：不强行把 unsupported 改成 converted。当前计算范围只覆盖已核实的伤害乘区；没有独立证据时不新增公式。
 
-## 118 条 corrected
+## 121 条 corrected
 
 这些记录已有明确修正来源，并登记在 31 个 `differenceId` 中。数量较大的类别包括：
 

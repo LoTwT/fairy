@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "53",
+  "revision": "54",
   "effects": [
     {
       "kind": "contribution",
@@ -46111,6 +46111,13 @@
             "locale": "zh",
             "resourcePath": "agents/1561/details.zh.json",
             "pointer": "/passive/level/1561507/desc/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1561/details.en.json",
+            "pointer": "/passive/level/1561507/desc/1"
           }
         ]
       },
@@ -46154,7 +46161,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
+            "values": ["anomaly"]
           },
           {
             "kind": "one-of",
@@ -46526,6 +46533,20 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/45/mindscapeBuffs/6/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1561/details.zh.json",
+            "pointer": "/talent/6/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1561/details.en.json",
+            "pointer": "/talent/6/desc"
           }
         ]
       },
@@ -46569,7 +46590,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
+            "values": ["anomaly"]
           },
           {
             "kind": "one-of",
@@ -46821,6 +46842,20 @@
             "locale": "zh",
             "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
             "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/0"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1561/details.zh.json",
+            "pointer": "/talent/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1561/details.en.json",
+            "pointer": "/talent/2/desc"
           }
         ]
       },
@@ -46864,7 +46899,7 @@
           {
             "kind": "one-of",
             "fact": "hit.damageKind",
-            "values": ["anomaly", "anomaly-settlement", "vortex", "luminize"]
+            "values": ["anomaly"]
           },
           {
             "kind": "one-of",

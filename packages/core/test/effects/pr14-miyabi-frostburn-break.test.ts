@@ -299,7 +299,7 @@ function frostburnInput(
 
 describe("batch 14 Miyabi frostburn break and mindscape 4 rupture", () => {
   it("registers the independent target, option, and both rules under revision 29 beside the preserved fixed-source options", () => {
-    expect(catalog.revision).toBe("53")
+    expect(catalog.revision).toBe("54")
     const target = catalog.skillTargets.find(
       (t) => t.targetId === FROSTBURN_TARGET,
     )!

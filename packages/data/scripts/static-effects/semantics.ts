@@ -374,6 +374,28 @@ export type SourceSemantics =
     }
   | {
       /**
+       * stat 的全局伤害种类映射比块 note 与 Nanoka 同文更宽（维琳娜
+       * M0/M2/M6 的 `anomalyDmgBonus` 同时覆盖 vortex，与同块的
+       * `turbulenceDmgBonus` 记录重复计入同一乱流命中）。转换器保留
+       * 记录、数值、通道与稳定 ID，只把 `hit.damageKind` 条件从
+       * `expectedDamageKinds` 收窄为 `correctedDamageKinds`；raw 与
+       * normalized 的登记编码、完整块 note 任一漂移即拒绝生成。
+       */
+      readonly kind: "damage-kind-scope-correction"
+      /** 防漂移：登记时来源记录（raw 与 normalized）应逐字段保持的编码。 */
+      readonly expectedEncoding: Readonly<Record<string, unknown>>
+      /** 全局映射当前生成的伤害种类集合；用于定位待改写的条件。 */
+      readonly expectedDamageKinds: readonly DamageKind[]
+      /** 按块 note 与 Nanoka 同文收窄后的伤害种类集合。 */
+      readonly correctedDamageKinds: readonly DamageKind[]
+      /** 防漂移：固定来源 raw/normalized 块的真实完整 note 原文。 */
+      readonly expectedSourceBlockNote: string
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
        * 记录按固定来源字段转换，但来源自身的字段与块说明文字存在具名差异
        * （如克拉蕾[残锋]锐暴提升的 applyTarget=self 与说明"全队[锋御]"）：
        * 转换遵循来源字段，不凭文字扩大受益范围或改写落点；差异记录在目录
@@ -970,6 +992,126 @@ const velinaEvidence = [
     sha256: "f2da8dfc1357ffb98dcb775d0febbe0df55828d4c61e38701df39040766a3b6f",
   },
 ] as const
+
+const velinaDetailsEnSha =
+  "55ca8648c4cbf5baa91c0102da4cd61ef02b04d700d1875be077367112dbd28d"
+
+const velinaAnomalyScopeEvidence = (pointer: string) =>
+  [
+    {
+      path: "agents/1561/details.zh.json",
+      pointer,
+      sha256:
+        "f2da8dfc1357ffb98dcb775d0febbe0df55828d4c61e38701df39040766a3b6f",
+    },
+    {
+      path: "agents/1561/details.en.json",
+      pointer,
+      sha256: velinaDetailsEnSha,
+    },
+  ] as const
+
+const velinaM0AnomalyBlockNote =
+  "维琳娜造成的[风化]和[乱流]伤害提升10%，[终结技]重击命中处于风属性异常状态下的敌人时，会对目标造成一次[异放]伤害：额外结算一次属性异常伤害，固定结算680%倍率的风属性异常伤害；"
+const velinaM2AnomalyBlockNote =
+  "[额外能力：茶会礼仪]中，维琳娜造成的[风化]和[乱流]伤害提升效果额外提升15%。"
+const velinaM6AnomalyBlockNote =
+  "当维琳娜对处于[风化]状态的敌人再次施加[风化]时，会根据上一次[风化]的剩余持续时间提升此次[风化]的伤害，每1秒剩余持续时间会使伤害提升2.5%，最多提升40%。"
+
+const velinaM0AnomalyEncoding = {
+  id: "eff-ms4tpxkp-9jh4ly",
+  origin: "",
+  scope: "general",
+  applyTarget: "self",
+  applySituation: "global",
+  applyProfession: null,
+  teamProfession: null,
+  teamProfessionValues: null,
+  teamProfessionMinCount: null,
+  skillCategory: null,
+  skillSubcategoryId: null,
+  skillTargets: null,
+  elementFilter: ["风"],
+  kind: "fixed",
+  stat: "anomalyDmgBonus",
+  value: 10,
+  stackable: false,
+  maxStacks: 1,
+  valuePerStack: 0,
+  defaultStacks: 1,
+  appliesToAnomaly: null,
+  enabledDefault: true,
+  convert: null,
+  note: "",
+} as const
+
+const velinaM2AnomalyEncoding = {
+  ...velinaM0AnomalyEncoding,
+  id: "legacy-self-anomalyDmgBonus",
+  value: 15,
+  appliesToAnomaly: true,
+} as const
+
+const velinaM6AnomalyEncoding = {
+  ...velinaM0AnomalyEncoding,
+  id: "eff-ms4u9q0d-6p259j",
+  kind: "stacked",
+  value: 0,
+  maxStacks: 16,
+  valuePerStack: 2.5,
+  defaultStacks: 16,
+} as const
+
+const velinaAnomalyScopeCorrections = (): Record<string, SourceSemantics> => ({
+  "agents/velina/mindscape/0/blk-ms4tpxkp-f964lw/eff-ms4tpxkp-9jh4ly": {
+    kind: "damage-kind-scope-correction",
+    expectedEncoding: velinaM0AnomalyEncoding,
+    expectedDamageKinds: [
+      "anomaly",
+      "anomaly-settlement",
+      "vortex",
+      "luminize",
+    ],
+    correctedDamageKinds: ["anomaly"],
+    expectedSourceBlockNote: velinaM0AnomalyBlockNote,
+    differenceId: "velina-anomaly-damage-kind-scope",
+    evidence: velinaAnomalyScopeEvidence("/passive/level/1561507/desc/1"),
+    verification:
+      "Nanoka agents/1561 /passive/level/1561507/desc/1 中英文同文：维琳娜造成的[风化]和[乱流]伤害提升10%。固定源把同一 10% 拆成 anomalyDmgBonus 与 turbulenceDmgBonus 两条；Fairy 的 anomalyDmgBonus 宽映射同时命中 vortex，会与 turbulenceDmgBonus 重复。修正保留两条记录、数值与公开 ID，只把 anomalyDmgBonus 收窄到 [anomaly]（风化），vortex 由 turbulenceDmgBonus 承担；不含异放与耀变。防漂移：raw/normalized 编码与块 note 逐字核对。",
+  },
+  "agents/velina/mindscape/2/blk-legacy/legacy-self-anomalyDmgBonus": {
+    kind: "damage-kind-scope-correction",
+    expectedEncoding: velinaM2AnomalyEncoding,
+    expectedDamageKinds: [
+      "anomaly",
+      "anomaly-settlement",
+      "vortex",
+      "luminize",
+    ],
+    correctedDamageKinds: ["anomaly"],
+    expectedSourceBlockNote: velinaM2AnomalyBlockNote,
+    differenceId: "velina-anomaly-damage-kind-scope",
+    evidence: velinaAnomalyScopeEvidence("/talent/2/desc"),
+    verification:
+      "Nanoka agents/1561 /talent/2/desc 中英文同文：茶会礼仪中维琳娜造成的[风化]和[乱流]伤害提升效果额外提升15%。固定源同样拆成 anomalyDmgBonus 与 turbulenceDmgBonus 两条；修正保留两条记录、数值与公开 ID，只把 anomalyDmgBonus 收窄到 [anomaly]（风化），vortex 由 turbulenceDmgBonus 承担。",
+  },
+  "agents/velina/mindscape/6/blk-ms4u9q0d-b63z88/eff-ms4u9q0d-6p259j": {
+    kind: "damage-kind-scope-correction",
+    expectedEncoding: velinaM6AnomalyEncoding,
+    expectedDamageKinds: [
+      "anomaly",
+      "anomaly-settlement",
+      "vortex",
+      "luminize",
+    ],
+    correctedDamageKinds: ["anomaly"],
+    expectedSourceBlockNote: velinaM6AnomalyBlockNote,
+    differenceId: "velina-anomaly-damage-kind-scope",
+    evidence: velinaAnomalyScopeEvidence("/talent/6/desc"),
+    verification:
+      "Nanoka agents/1561 /talent/6/desc 中英文同文：该条款只提升再次施加[风化]时此次[风化]的伤害，每 1 秒剩余持续时间 +2.5%，最多 +40%。固定源 anomalyDmgBonus 宽映射同时命中 vortex；修正只收窄到 [anomaly]（风化），不改变 2.5%/层与 16 层上限。",
+  },
+})
 
 const allSpecialSkillLevels: readonly SpecialSkillLevel[] = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
@@ -2418,6 +2560,7 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
   ...ariaAbloomPrecisionCorrections,
   ...aliceM2SubtypeConflicts(),
   ...janeSubtypeConflicts(),
+  ...velinaAnomalyScopeCorrections(),
   "agents/anby/mindscape/2/blk-ms47xm3l-3pumvj/eff-ms47xm3l-nf7ga7": {
     kind: "beneficiary-target-correction",
     expectedApplyTarget: "team",

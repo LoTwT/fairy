@@ -2248,7 +2248,7 @@ describe("fixed-source catalog conformance", () => {
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
     it("exposes one complete option with the original rules and migration evidence", () => {
-      expect(catalog.revision).toBe("53")
+      expect(catalog.revision).toBe("54")
       expect(
         catalog.differences.some((d) => d.differenceId === differenceId),
         differenceId,
@@ -4779,6 +4779,66 @@ describe("anomaly multipliers and hit scoping", () => {
     const atCap = sums(calculateCatalogResult(energyInput(2.88)))
     expect(atCap.bonus).toBeCloseTo(0.35, 9)
     expect(atCap.control).toBeCloseTo(84, 6)
+  })
+
+  it("does not double count Velina's Windswept and Vortex bonuses", () => {
+    const ratio = (
+      input: StaticCatalogDamageInput,
+      damageKind: StaticCatalogDamageInput["damage"]["kind"],
+    ) => {
+      const request = {
+        ...input,
+        damage: { ...input.damage, kind: damageKind },
+      } as StaticCatalogDamageInput
+      const selected = calculateCatalogResult(request)
+      const disabled = calculateCatalogResult({ ...request, selections: [] })
+      return selected.expected / disabled.expected
+    }
+
+    const m0Wide = referenceInput(
+      "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
+    )
+    const m0Vortex = referenceInput(
+      "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/1",
+    )
+    if (m0Wide.damage.kind !== "anomaly") throw new Error("fixture")
+    // 宽口径记录已收窄到风化：单独选择它在乱流命中上不应生效。
+    expect(ratio(m0Wide, "vortex")).toBeCloseTo(1, 12)
+    // 同时选择宽口径与乱流记录，乱流只吃 10%，不是 20%。
+    expect(
+      ratio(
+        {
+          ...m0Wide,
+          selections: [...m0Wide.selections, ...m0Vortex.selections],
+        },
+        "vortex",
+      ),
+    ).toBeCloseTo(1.1, 12)
+
+    const m2Wide = referenceInput(
+      "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/0",
+    )
+    const m2Vortex = referenceInput(
+      "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/1",
+    )
+    if (m2Wide.damage.kind !== "anomaly") throw new Error("fixture")
+    expect(ratio(m2Wide, "vortex")).toBeCloseTo(1, 12)
+    expect(
+      ratio(
+        {
+          ...m2Wide,
+          selections: [...m2Wide.selections, ...m2Vortex.selections],
+        },
+        "vortex",
+      ),
+    ).toBeCloseTo(1.15, 12)
+
+    const m6Wide = referenceInput(
+      "/agents/45/mindscapeBuffs/6/effectBlocks/0/effects/0",
+    )
+    if (m6Wide.damage.kind !== "anomaly") throw new Error("fixture")
+    for (const kind of ["vortex", "anomaly-settlement", "disorder"] as const)
+      expect(ratio(m6Wide, kind), kind).toBeCloseTo(1, 12)
   })
 })
 
