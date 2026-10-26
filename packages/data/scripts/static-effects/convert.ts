@@ -50,6 +50,7 @@ import {
   type CoreSkillLevelSemantics,
   type DamageKindScopeCorrectionFields,
   type DeveloperRevisionEvidence,
+  type SemanticsEvidenceReference,
   type SourceSemantics,
 } from "./semantics.ts"
 import { buildRemielleSpecialVoidflareMechanism } from "./mechanisms.ts"
@@ -2347,6 +2348,1625 @@ function verifyRegisteredCompleteStateRecord(
         )
 }
 
+type SemanticsKind = SourceSemantics["kind"]
+type SemanticsOfKind<Kind extends SemanticsKind> = Extract<
+  SourceSemantics,
+  { kind: Kind }
+>
+type SemanticsAlternativeVariant = StaticCatalogVariant | undefined | void
+
+/**
+ * 语义处理表分阶段读取的来源字段。每个阶段只描述该 kind 对通用编译
+ * 输入的影响；未返回的字段仍走既有映射与降级规则。
+ */
+interface SemanticsCompileOverrides {
+  readonly effectiveSourceEffect?: SourceEffect
+  readonly effectiveStat?: string
+  readonly fieldMapping?: FieldMapping
+  readonly exemptFromCoreDependent?: boolean
+  readonly conversionRate?: number
+  readonly valueCorrection?: {
+    readonly expected: number
+    readonly corrected: number
+  }
+  readonly potentialGate?: number
+  /** 最终规则激活层数上限的覆盖；省略时使用变体声明的上限。 */
+  readonly activationMaximumLayers?: number
+}
+
+interface SemanticsVariantContext {
+  readonly record: SourceRecord
+  variant: StaticCatalogVariant
+}
+
+interface SemanticsExpressionContext {
+  readonly record: SourceRecord
+  readonly identity: SourceIdentity | null
+  readonly effectId: EffectId
+  readonly declaredSkillTargets: StaticEffectCatalog["skillTargets"][number][]
+  readonly e: SourceEffect
+  readonly mapping: FieldMapping
+  readonly amountUnit: Unit
+  readonly compiledValue: number
+  variant: StaticCatalogVariant
+  parameters: Record<string, AnyParameter>
+  requirements: StaticCatalogVariant["inputs"][number][]
+  expression: NumericExpression<Unit, "contribution">
+  conversionInput: NumericExpression<Unit, "contribution"> | undefined
+}
+
+interface SemanticsContributionContext extends SemanticsExpressionContext {
+  operation: ContributionOperation
+  when: Condition<"contribution">
+}
+
+/**
+ * 每种 semantics.kind 的处理器。`verifySourceRecord` 在通用 unsupported
+ * 降级之前执行；其余钩子按 compile 的固定阶段调用。返回变体的钩子表示
+ * 以该变体终止编译（不生成规则）。
+ */
+interface SemanticsCompileHandler<Semantics extends SourceSemantics> {
+  readonly verifySourceRecord?: (
+    record: SourceRecord,
+    semantics: Semantics,
+  ) => void
+  readonly resolveSource?: (
+    record: SourceRecord,
+    semantics: Semantics,
+  ) => SemanticsCompileOverrides
+  readonly verifyAfterVariant?: (
+    context: SemanticsVariantContext,
+    semantics: Semantics,
+  ) => void
+  readonly exitBeforeIdentity?: (
+    context: SemanticsVariantContext,
+    semantics: Semantics,
+  ) => SemanticsAlternativeVariant
+  readonly exitAfterIdentity?: (
+    context: SemanticsVariantContext,
+    semantics: Semantics,
+  ) => SemanticsAlternativeVariant
+  readonly verifyBeforeNormalized?: (
+    context: SemanticsVariantContext,
+    semantics: Semantics,
+  ) => void
+  readonly exitBeforeNormalized?: (
+    context: SemanticsVariantContext,
+    semantics: Semantics,
+  ) => SemanticsAlternativeVariant
+  readonly exitAfterMappingReason?: (
+    context: SemanticsVariantContext,
+    semantics: Semantics,
+  ) => SemanticsAlternativeVariant
+  readonly applyBeforeOperation?: (
+    context: SemanticsExpressionContext,
+    semantics: Semantics,
+  ) => SemanticsAlternativeVariant
+  readonly applyAfterOperation?: (
+    context: SemanticsContributionContext,
+    semantics: Semantics,
+  ) => SemanticsAlternativeVariant
+  readonly finalize?: (
+    context: SemanticsContributionContext,
+    semantics: Semantics,
+  ) => SemanticsAlternativeVariant
+}
+
+type SemanticsCompileHandlerTable = {
+  readonly [Kind in SemanticsKind]: SemanticsCompileHandler<
+    SemanticsOfKind<Kind>
+  >
+}
+
+/**
+ * 分派边界只做一次类型擦除：运行时键无法把联合类型收窄到表项的判别成员，
+ * 但表本身以 `SemanticsKind` 穷尽，每个处理器仍在自己的定义处保留精确类型。
+ */
+function semanticsHandlerFor(
+  semantics: SourceSemantics,
+): SemanticsCompileHandler<SourceSemantics> {
+  return SEMANTICS_COMPILE_HANDLERS[
+    semantics.kind
+  ] as SemanticsCompileHandler<SourceSemantics>
+}
+
+function nanokaEvidenceReferences(
+  semanticsEvidence: readonly SemanticsEvidenceReference[],
+): SourceReference[] {
+  return semanticsEvidence.map((ref) => nanokaReference(ref.path, ref.pointer))
+}
+
+/** 统一的 corrected 变体：追加具名差异与 Nanoka 证据引用。 */
+function correctedVariantWithEvidence(
+  variant: StaticCatalogVariant,
+  differenceId: string,
+  semanticsEvidence: readonly SemanticsEvidenceReference[],
+): StaticCatalogVariant {
+  return {
+    ...variant,
+    status: "corrected",
+    differences: [...variant.differences, differenceId],
+    references: [
+      ...variant.references,
+      ...nanokaEvidenceReferences(semanticsEvidence),
+    ],
+  }
+}
+
+function unsupportedVariant(
+  context: SemanticsVariantContext,
+  reason: NonNullable<StaticCatalogVariant["reason"]>,
+  explanation: string,
+): StaticCatalogVariant {
+  return {
+    ...context.variant,
+    effectIds: [],
+    status: "unsupported",
+    reason,
+    explanation,
+  }
+}
+
+/** 撤掉 applyBeforeOperation 中检出的空档位，不生成规则。 */
+function missingCoreRankEvidenceVariant(
+  context: SemanticsExpressionContext,
+): StaticCatalogVariant {
+  return {
+    ...context.variant,
+    effectIds: [],
+    status: "unsupported",
+    reason: "missing-rank-evidence",
+    explanation: "必需核心参数与逐档证据没有共同支持的档位",
+  }
+}
+
+type CoreSkillLevelContributionSemantics =
+  | SemanticsOfKind<"core-skill-level">
+  | SemanticsOfKind<"hugo-stun-teammate-count">
+
+function applyCoreSkillLevelContribution(
+  context: SemanticsExpressionContext,
+  semantics: CoreSkillLevelContributionSemantics,
+): StaticCatalogVariant | undefined {
+  const resolved = resolveCoreRankParameters(
+    { ...semantics, kind: "core-skill-level" },
+    context.amountUnit,
+  )
+  if (resolved.levels.length === 0)
+    return missingCoreRankEvidenceVariant(context)
+  Object.assign(context.parameters, resolved.parameters)
+  const formula = semantics.formula
+  if (formula.kind === "amount")
+    context.expression = param(context.amountUnit, "amount")
+  else if (formula.kind === "proportional-increment")
+    context.expression = {
+      kind: "multiply",
+      unit: context.amountUnit,
+      value: param(context.amountUnit, "amount"),
+      coefficient: param("multiplier", "incrementCoefficient"),
+    }
+  else {
+    if (
+      !context.conversionInput ||
+      context.requirements.length !== 1 ||
+      context.requirements[0]!.unit !== "attack-points"
+    )
+      throw new Error(
+        `Core conversion requires explicit initial attack: ${context.record.pointer}`,
+      )
+    context.requirements[0] = {
+      ...context.requirements[0]!,
+      description:
+        "效果施加时来源角色的初始攻击力；与基础/影画项组合时提供同一读数，不使用预设或当前面板",
+    }
+    const capped = (
+      rate: NumericExpression<"multiplier", "contribution">,
+      cap: string,
+    ): NumericExpression<Unit, "contribution"> => ({
+      kind: "minimum",
+      unit: context.mapping.unit,
+      operands: [
+        {
+          kind: "convert",
+          unit: context.mapping.unit,
+          input: context.conversionInput!,
+          rate,
+        },
+        param(context.mapping.unit, cap),
+      ],
+    })
+    const base = capped(param("multiplier", "rate"), "cap")
+    context.expression =
+      formula.kind === "capped-conversion"
+        ? base
+        : {
+            kind: "add",
+            unit: context.mapping.unit,
+            operands: [
+              capped(
+                {
+                  kind: "add",
+                  unit: "multiplier",
+                  operands: [
+                    param("multiplier", "rate"),
+                    param("multiplier", "rateIncrease"),
+                  ],
+                },
+                "enhancedCap",
+              ),
+              {
+                kind: "multiply",
+                unit: context.mapping.unit,
+                value: base,
+                coefficient: literal("multiplier", -1),
+              },
+            ],
+          }
+  }
+  context.variant = {
+    ...context.variant,
+    status: "corrected",
+    configuration: {
+      ...context.variant.configuration,
+      coreSkillLevels: resolved.levels,
+    },
+    differences: [
+      ...context.variant.differences,
+      "core-skill-level-parameters",
+      ...(formula.kind === "proportional-increment" ||
+      formula.kind === "capped-conversion-increment"
+        ? ["core-enhancement-independent-increment"]
+        : []),
+    ],
+    references: [
+      context.variant.references[0],
+      ...new Map(
+        [...context.variant.references.slice(1), ...resolved.references].map(
+          (ref) => [JSON.stringify(ref), ref],
+        ),
+      ).values(),
+    ],
+  }
+  if (semantics.kind === "hugo-stun-teammate-count") {
+    const count: NumericExpression<"count", "contribution"> = {
+      kind: "input",
+      unit: "count",
+      name: semantics.layerCountInputName,
+    }
+    context.expression = {
+      kind: "multiply",
+      unit: "attack-points",
+      value: param("attack-points", "amount"),
+      coefficient: {
+        kind: "convert",
+        unit: "multiplier",
+        rate: literal("multiplier", 1),
+        input: {
+          kind: "add",
+          unit: "count",
+          operands: [
+            count,
+            {
+              kind: "maximum",
+              unit: "count",
+              operands: [
+                literal("count", 0),
+                {
+                  kind: "add",
+                  unit: "count",
+                  operands: [count, literal("count", -1)],
+                },
+              ],
+            },
+          ],
+        },
+      },
+    }
+    context.variant = {
+      ...context.variant,
+      maximumLayers: 2,
+      mechanism: {
+        kind: "complete-state",
+        layerCountInputName: semantics.layerCountInputName,
+      },
+      differences: [...context.variant.differences, semantics.differenceId],
+      references: [reference(context.record.pointer), ...resolved.references],
+    }
+  }
+  return undefined
+}
+
+function applySpecialSkillLevelContribution(
+  context: SemanticsExpressionContext,
+  semantics: SemanticsOfKind<"special-skill-level">,
+): void {
+  for (const spec of semantics.parameters) {
+    const existing = context.parameters[spec.name]
+    if (!existing)
+      throw new Error(
+        `Semantics references unknown parameter "${spec.name}" at ${context.record.pointer}`,
+      )
+    if (existing.unit !== spec.unit)
+      throw new Error(
+        `Semantics unit mismatch for "${spec.name}" at ${context.record.pointer}`,
+      )
+    context.parameters[spec.name] = {
+      kind: "by-rank",
+      rank: "specialSkillLevel",
+      unit: spec.unit,
+      values: Object.fromEntries(
+        semantics.levels.map((level) => [
+          level,
+          levelValue(spec.base, spec.growth, level),
+        ]),
+      ),
+    } as AnyParameter
+  }
+  context.variant = {
+    ...context.variant,
+    status: "corrected",
+    configuration: {
+      ...context.variant.configuration,
+      specialSkillLevels: [...semantics.levels],
+    },
+    differences: [
+      ...context.variant.differences,
+      "special-skill-level-expression",
+    ],
+    references: [
+      ...context.variant.references,
+      ...nanokaEvidenceReferences(semantics.evidence),
+    ],
+  }
+}
+
+function applyPotentialBranchContribution(
+  context: SemanticsExpressionContext,
+  semantics: SemanticsOfKind<"potential-branch">,
+): void {
+  // 潜能分支记录：规则与变体同时声明潜能门槛，未开启潜能时不可用。
+  context.variant = {
+    ...context.variant,
+    status: "corrected",
+    configuration: {
+      ...context.variant.configuration,
+      potentialLevels: [1, 2, 3, 4, 5, 6],
+    },
+    differences: [...context.variant.differences, "potential-branch-gate"],
+    references: [
+      ...context.variant.references,
+      ...nanokaEvidenceReferences(semantics.evidence),
+    ],
+  }
+}
+
+function applyPotentialLevelContribution(
+  context: SemanticsExpressionContext,
+  semantics: SemanticsOfKind<"potential-level">,
+): void {
+  for (const spec of semantics.parameters) {
+    const existing = context.parameters[spec.name]
+    if (!existing)
+      throw new Error(
+        `Semantics references unknown parameter "${spec.name}" at ${context.record.pointer}`,
+      )
+    if (existing.unit !== spec.unit)
+      throw new Error(
+        `Semantics unit mismatch for "${spec.name}" at ${context.record.pointer}`,
+      )
+    context.parameters[spec.name] = {
+      kind: "by-rank",
+      rank: "potentialLevel",
+      unit: spec.unit,
+      values: spec.values,
+    } as AnyParameter
+  }
+  context.variant = {
+    ...context.variant,
+    status: "corrected",
+    maximumLayers: semantics.maximumLayers ?? 1,
+    configuration: {
+      ...context.variant.configuration,
+      potentialLevels: [...semantics.levels] as PotentialLevel[],
+    },
+    differences: [...context.variant.differences, "potential-level-expression"],
+    references: [
+      ...context.variant.references,
+      ...nanokaEvidenceReferences(semantics.evidence),
+    ],
+  }
+}
+
+function applyStackedMechanismCorrection(
+  context: SemanticsExpressionContext,
+  semantics: SemanticsOfKind<"stacked-mechanism-correction">,
+): void {
+  // 防漂移：原始与规范化记录都必须仍是登记过的“固定单次”编码且数值一致；
+  // 上游修正或记录漂移时拒绝生成，不静默按层编译另一份含义。
+  for (const [label, document] of [
+    ["raw", context.record.raw],
+    ["normalized", context.record.normalized],
+  ] as const) {
+    if (
+      document === undefined ||
+      document.kind !== "fixed" ||
+      document.stackable !== false ||
+      document.maxStacks !== 1 ||
+      document.valuePerStack !== 0 ||
+      document.value !== semantics.expectedSourceValue
+    )
+      throw new Error(
+        `Stacked mechanism correction expects the registered fixed encoding at ${context.record.pointer} (${label}): value=${semantics.expectedSourceValue}, maxStacks=1`,
+      )
+  }
+  // 按层编译：每层值保持来源 value（描述的单层百分比），激活层数上限改用
+  // 登记值；条件、稳定 effectId / optionId 与参数表不动。
+  context.variant = {
+    ...context.variant,
+    status: "corrected",
+    maximumLayers: semantics.maximumLayers,
+    differences: [...context.variant.differences, semantics.differenceId],
+    references: [
+      ...context.variant.references,
+      ...nanokaEvidenceReferences(semantics.evidence),
+    ],
+  }
+}
+
+function applyExplicitSelectionState(
+  context: SemanticsExpressionContext,
+  semantics: SemanticsOfKind<"explicit-selection-state">,
+): void {
+  context.variant = {
+    ...context.variant,
+    references: [
+      ...context.variant.references,
+      ...nanokaEvidenceReferences(semantics.evidence),
+    ],
+  }
+}
+
+function applyNamedSourceDiscrepancy(
+  context: SemanticsExpressionContext,
+  semantics: SemanticsOfKind<"named-source-discrepancy">,
+): void {
+  // 遵循来源字段转换，只登记字段与说明文字的具名差异；状态条件仍由选择断言。
+  context.variant = {
+    ...context.variant,
+    differences: [...context.variant.differences, semantics.differenceId],
+    references: [
+      ...context.variant.references,
+      ...nanokaEvidenceReferences(semantics.evidence),
+    ],
+  }
+}
+
+function applyDeveloperRevisedStat(
+  context: SemanticsExpressionContext,
+  semantics: SemanticsOfKind<"developer-revised-stat">,
+): void {
+  // 开发者修订后的字段映射已在映射查找前生效；这里登记修正状态、具名
+  // 差异与修订证据。原始 stat、原值与固定源 Pointer 保留在覆盖报告和
+  // 第一条 reference 中，修订证据独立成来源，不伪装成固定提交的一部分。
+  context.variant = {
+    ...context.variant,
+    status: "corrected",
+    differences: [...context.variant.differences, semantics.differenceId],
+    references: [
+      ...context.variant.references,
+      ...semantics.evidence.map((ref) => developerRevisionReference(ref)),
+    ],
+  }
+}
+
+function markSourceCorrectionVariant(
+  context: { variant: StaticCatalogVariant },
+  semantics: {
+    readonly differenceId: string
+    readonly evidence: readonly SemanticsEvidenceReference[]
+  },
+): void {
+  context.variant = correctedVariantWithEvidence(
+    context.variant,
+    semantics.differenceId,
+    semantics.evidence,
+  )
+}
+
+function applyAttributeAnomalyBeneficiaryScope(
+  context: SemanticsContributionContext,
+  semantics: SemanticsOfKind<"attribute-anomaly-beneficiary-scope">,
+): void {
+  // 来源记录未编码块 note 与 Nanoka 同文已明确的受益职业与伤害类别：
+  // general 会放行全部伤害种类，且只有 applyProfession 非空才检查职业。
+  // 记录出现任一与登记不符的编码时拒绝生成，不静默叠加或改写。
+  if (
+    !isGeneralScope(context.e.scope) ||
+    context.e.conditions?.damageTypes !== undefined ||
+    context.e.applyTarget !== "team" ||
+    (context.e.applyProfession ?? "").trim() !== ""
+  )
+    throw new Error(
+      `Source field already encodes the beneficiary scope at ${context.record.pointer}: scope=${String(context.e.scope)}, applyTarget=${context.e.applyTarget}, applyProfession=${String(context.e.applyProfession)}`,
+    )
+  context.when = {
+    kind: "all",
+    conditions: [
+      context.when,
+      oneOf("hit.damageKind", [...semantics.damageKinds]),
+    ],
+  }
+  context.variant = {
+    ...correctedVariantWithEvidence(
+      context.variant,
+      semantics.differenceId,
+      semantics.evidence,
+    ),
+    applicability: {
+      ...context.variant.applicability,
+      beneficiaryProfession: semantics.profession,
+    },
+  }
+}
+
+function applyExplicitElementScope(
+  context: SemanticsContributionContext,
+  semantics: SemanticsOfKind<"explicit-element-scope">,
+): void {
+  // 上游 elementFilter=all 未编码正式文本的元素限制：补显式元素条件。
+  context.when = {
+    kind: "all",
+    conditions: [context.when, oneOf("hit.element", [semantics.element])],
+  }
+  context.variant = correctedVariantWithEvidence(
+    context.variant,
+    semantics.differenceId,
+    semantics.evidence,
+  )
+}
+
+function applySettlementElementScope(
+  context: SemanticsContributionContext,
+  semantics: SemanticsOfKind<"settlement-element-scope">,
+): void {
+  // 上游 elementFilter 只登记了目录实体固有元素（ice），而同分支结算证据
+  // （烈霜按冰属性结算伤害与增益）与正式动作目录证明该条款必须覆盖 frost
+  // 命中：保留登记元素并显式追加补充元素。元素条件来自 whenFor 的
+  // elementFilter 展开（self + 数组过滤），按事实改写该 one-of 的值集；
+  // 找不到登记元素条件即拒绝（编码守卫已核对 elementFilter，此处缺失
+  // 说明展开逻辑漂移，不能静默跳过）。
+  if (context.when.kind !== "all") {
+    throw new Error(
+      `Settlement element scope correction ${semantics.differenceId} expected an element condition at ${context.record.pointer}; the when shape drifted`,
+    )
+  }
+  const expectedElements = (
+    context.record.raw.elementFilter as readonly string[]
+  )
+    .map((element) => elementMap[element]!)
+    .filter((element) => element !== "lumiflux")
+  const elementIndex = context.when.conditions.findIndex(
+    (condition) =>
+      condition.kind === "one-of" &&
+      condition.fact === "hit.element" &&
+      JSON.stringify(condition.values) === JSON.stringify(expectedElements),
+  )
+  if (elementIndex < 0)
+    throw new Error(
+      `Settlement element scope correction ${semantics.differenceId} lost the registered element condition ${JSON.stringify(expectedElements)} at ${context.record.pointer}`,
+    )
+  const conditions = [...context.when.conditions]
+  conditions[elementIndex] = oneOf("hit.element", [
+    ...new Set([...expectedElements, semantics.additionalElement]),
+  ])
+  context.when = { kind: "all", conditions }
+  context.variant = correctedVariantWithEvidence(
+    context.variant,
+    semantics.differenceId,
+    semantics.evidence,
+  )
+}
+
+function applyDamageKindScopeCorrection(
+  context: SemanticsContributionContext,
+  semantics: DamageKindScopeCorrectionFields & {
+    readonly differenceId: string
+    readonly evidence: readonly SemanticsEvidenceReference[]
+  },
+): void {
+  // stat 的全局映射覆盖了比块 note 更宽的伤害种类：保留记录、数值、
+  // 通道与稳定 ID，只按登记收窄已经生成的 hit.damageKind 条件。找不到
+  // 登记集合即拒绝（编码守卫已核对 stat/value，此处缺失说明映射漂移，
+  // 不能静默跳过或把范围留宽）。
+  context.when = narrowDamageKindCondition(
+    context.when,
+    semantics,
+    semantics.differenceId,
+    context.record.pointer,
+  )
+  context.variant = {
+    ...context.variant,
+    status: "corrected",
+    differences: [...context.variant.differences, semantics.differenceId],
+    references: [
+      context.variant.references[0],
+      ...new Map(
+        [
+          ...context.variant.references.slice(1),
+          ...nanokaEvidenceReferences(semantics.evidence),
+        ].map((ref) => [JSON.stringify(ref), ref]),
+      ).values(),
+    ],
+  }
+}
+
+function applyPotentialLevelDamageKindScope(
+  context: SemanticsContributionContext,
+  semantics: SemanticsOfKind<"potential-level">,
+): void {
+  if (semantics.damageKindScope === undefined) return
+  // 潜能档位记录与伤害种类收窄组合：档位参数已在前面应用，这里只收窄
+  // 同一记录的 hit.damageKind；证据已由 potential-level 分支登记。
+  context.when = narrowDamageKindCondition(
+    context.when,
+    semantics.damageKindScope,
+    semantics.damageKindScope.differenceId,
+    context.record.pointer,
+  )
+  context.variant = {
+    ...context.variant,
+    status: "corrected",
+    differences: [
+      ...context.variant.differences,
+      semantics.damageKindScope.differenceId,
+    ],
+  }
+}
+
+function applySettlementTargetExclusion(
+  context: SemanticsContributionContext,
+  exclusion: {
+    readonly excludedTargetId: string
+    readonly differenceId: string
+  },
+  semanticsEvidence: readonly SemanticsEvidenceReference[] | undefined,
+): void {
+  context.when = {
+    kind: "all",
+    conditions: [
+      context.when,
+      {
+        kind: "not",
+        condition: oneOf("hit.skillTag", [
+          `zzz-hp:skill:${exclusion.excludedTargetId}`,
+        ]),
+      },
+    ],
+  }
+  context.variant = {
+    ...context.variant,
+    status: "corrected",
+    differences: [...context.variant.differences, exclusion.differenceId],
+    ...(semanticsEvidence === undefined
+      ? {}
+      : {
+          references: [
+            ...context.variant.references,
+            ...nanokaEvidenceReferences(semanticsEvidence),
+          ],
+        }),
+  }
+}
+
+function applyStaggerRecoverySettlement(
+  context: SemanticsContributionContext,
+  semantics: SemanticsOfKind<"stagger-recovery-settlement">,
+): void {
+  // 移除 applySituation: stagger 带来的 targetState 条件；
+  // 是否失衡仍独立影响实际失衡乘区（由其他规则照常表达）。
+  if (context.when.kind === "all") {
+    const filtered = context.when.conditions.filter(
+      (condition) =>
+        !(condition.kind === "one-of" && condition.fact === "hit.targetState"),
+    )
+    context.when = { kind: "all", conditions: filtered }
+  }
+  context.variant = {
+    ...context.variant,
+    status: "corrected",
+    differences: [
+      ...context.variant.differences,
+      "stagger-recovery-settlement",
+    ],
+    references: [
+      ...context.variant.references,
+      ...nanokaEvidenceReferences(semantics.evidence),
+    ],
+  }
+  if (semantics.vibratoModifiedExclusion !== undefined)
+    applySettlementTargetExclusion(
+      context,
+      semantics.vibratoModifiedExclusion,
+      undefined,
+    )
+}
+
+function applyExcludeSettlementTarget(
+  context: SemanticsContributionContext,
+  semantics: SemanticsOfKind<"exclude-settlement-target">,
+): void {
+  // [颤音：改]共存排除（批次 09）：独立登记的记录追加对独立结算目标的
+  // 排除——携带该目标的命中不吃本普通颤音贡献，普通颤音结算保持原行为；
+  // 防漂移校验已在 compile 开头先行执行。
+  applySettlementTargetExclusion(context, semantics, semantics.evidence)
+}
+
+function applyFlatEnergyRegen(
+  context: SemanticsContributionContext,
+  semantics: SemanticsOfKind<"flat-energy-regen">,
+): void {
+  context.variant = correctedVariantWithEvidence(
+    context.variant,
+    semantics.differenceId,
+    semantics.evidence,
+  )
+}
+
+function applyTriggerConditionsNotBenefitScope(
+  context: SemanticsContributionContext,
+  semantics: SemanticsOfKind<"trigger-conditions-not-benefit-scope">,
+): void {
+  // 触发条件不是受益筛选：先核对来源编码未漂移，再移除登记的命中条件。
+  for (const [label, document] of [
+    ["raw", context.record.raw],
+    ["normalized", context.record.normalized],
+  ] as const) {
+    if (document === undefined)
+      throw new Error(
+        `Trigger scope correction lost the ${label} record at ${context.record.pointer}`,
+      )
+    if (
+      JSON.stringify(document.elementFilter) !==
+      JSON.stringify(semantics.expectedElementFilter)
+    )
+      throw new Error(
+        `Trigger scope correction expects elementFilter ${JSON.stringify(semantics.expectedElementFilter)} at ${context.record.pointer} (${label})`,
+      )
+    const categories = (document.skillTargets ?? []).map((t) => t.category)
+    if (
+      JSON.stringify(categories) !==
+      JSON.stringify(semantics.expectedSkillTargetCategories)
+    )
+      throw new Error(
+        `Trigger scope correction expects skill target categories ${JSON.stringify(semantics.expectedSkillTargetCategories)} at ${context.record.pointer} (${label})`,
+      )
+  }
+  const conditions =
+    context.when.kind === "all" ? context.when.conditions : [context.when]
+  let removedElementConditions = 0
+  let removedSkillTargetConditions = 0
+  const keptConditions = conditions.filter((condition) => {
+    if (
+      semantics.removeElementCondition &&
+      condition.kind === "one-of" &&
+      condition.fact === "hit.element"
+    ) {
+      removedElementConditions += 1
+      return false
+    }
+    if (
+      semantics.removeSkillTargetConditions &&
+      condition.kind === "any" &&
+      condition.conditions.every(
+        (child) =>
+          child.kind === "all" &&
+          child.conditions.every(
+            (leaf) => leaf.kind === "one-of" && leaf.fact === "hit.skillTag",
+          ),
+      )
+    ) {
+      removedSkillTargetConditions += 1
+      return false
+    }
+    return true
+  })
+  if (
+    (semantics.removeElementCondition &&
+      semantics.expectedElementFilter !== "all" &&
+      removedElementConditions !== 1) ||
+    (semantics.removeSkillTargetConditions &&
+      semantics.expectedSkillTargetCategories.length > 0 &&
+      removedSkillTargetConditions !== 1)
+  )
+    throw new Error(
+      `Trigger scope correction did not find the registered trigger conditions at ${context.record.pointer}`,
+    )
+  context.when = { kind: "all", conditions: keptConditions }
+  context.variant = correctedVariantWithEvidence(
+    context.variant,
+    semantics.differenceId,
+    semantics.evidence,
+  )
+}
+
+function applyBeneficiaryTargetCorrection(
+  context: SemanticsContributionContext,
+  semantics: SemanticsOfKind<"beneficiary-target-correction">,
+): void {
+  // 受益对象纠错：来源 applyTarget 与块 note / Nanoka 同文矛盾；规则
+  // beneficiary 与目录 target 同步按登记修正，其余条件与数值不变。
+  for (const [label, document] of [
+    ["raw", context.record.raw],
+    ["normalized", context.record.normalized],
+  ] as const) {
+    if (document === undefined)
+      throw new Error(
+        `Beneficiary target correction lost the ${label} record at ${context.record.pointer}`,
+      )
+    if (document.applyTarget !== semantics.expectedApplyTarget)
+      throw new Error(
+        `Beneficiary target correction expects applyTarget ${semantics.expectedApplyTarget} at ${context.record.pointer} (${label}), found ${document.applyTarget}`,
+      )
+    const actual =
+      document.kind === "stacked" || document.stackable === true
+        ? (document.valuePerStack ?? document.value)
+        : document.value
+    if (actual !== semantics.expectedSourceValue)
+      throw new Error(
+        `Beneficiary target correction expects ${semantics.expectedSourceValue} at ${context.record.pointer} (${label}), found ${String(actual)}`,
+      )
+  }
+  context.variant = correctedVariantWithEvidence(
+    context.variant,
+    semantics.differenceId,
+    semantics.evidence,
+  )
+}
+
+function applySkillTargetScopeCorrection(
+  context: SemanticsExpressionContext,
+  semantics: SemanticsOfKind<"skill-target-scope-correction">,
+): void {
+  // 普攻目标范围修正：上游把“普通攻击”收窄到单个子类；effectiveSourceEffect
+  // 已按登记替换目标，这里只记录 corrected 状态与证据。
+  context.variant = correctedVariantWithEvidence(
+    context.variant,
+    semantics.differenceId,
+    semantics.evidence,
+  )
+}
+
+function applyRefinementValueDescription(
+  context: SemanticsContributionContext,
+  semantics: SemanticsOfKind<"refinement-value-description">,
+): void {
+  // 共享说明只描述精炼 1（T01）：块 note 漂移即拒绝；说明由选项组装覆盖。
+  if (context.record.blockNote !== semantics.expectedBlockNote)
+    throw new Error(
+      `Refinement-value-description block note drift at ${context.record.pointer}: ${JSON.stringify(context.record.blockNote)}`,
+    )
+  context.variant = correctedVariantWithEvidence(
+    context.variant,
+    semantics.differenceId,
+    semantics.evidence,
+  )
+}
+
+function applyHitScopeDirectStatInput(
+  context: SemanticsContributionContext,
+  semantics: SemanticsOfKind<"hit-scope-direct-stat-input">,
+): void {
+  // 防漂移：原始与规范化记录都必须仍是登记的来源编码；上游修正或漂移
+  // 时拒绝生成，不静默把另一份含义编译成命中局部属性。
+  for (const [label, document] of [
+    ["raw", context.record.raw],
+    ["normalized", context.record.normalized],
+  ] as const) {
+    if (document === undefined)
+      throw new Error(
+        `Hit-scope direct-stat correction lost the ${label} record at ${context.record.pointer}`,
+      )
+    for (const [field, value] of Object.entries(semantics.expectedEncoding)) {
+      const actual =
+        field === "scope"
+          ? effectiveSourceScope(document)
+          : document[field as keyof SourceEffect]
+      const expected =
+        field === "scope" && typeof value === "string"
+          ? effectiveSourceScope({ scope: value })
+          : value
+      if (JSON.stringify(actual) !== JSON.stringify(expected))
+        throw new Error(
+          `Hit-scope direct-stat correction ${label} field drift at ${context.record.pointer}: ${field}=${JSON.stringify(actual)}`,
+        )
+    }
+  }
+  // 层数编码废除：参数改为空，数值由显式输入按登记上下限钳制；激活层数
+  // 上限取登记值，旧层数用法在目录层被拒绝并由具名差异说明迁移。
+  const inputName = `${context.effectId}:source`
+  for (const key of Object.keys(context.parameters))
+    delete context.parameters[key]
+  context.requirements.push({
+    name: inputName,
+    unit: "ratio",
+    description: semantics.inputDescription,
+  })
+  context.operation = {
+    kind: "stat-adjustment",
+    stat: semantics.stat,
+    stage: "direct",
+    value: {
+      kind: "minimum",
+      unit: "ratio",
+      operands: [
+        {
+          kind: "maximum",
+          unit: "ratio",
+          operands: [
+            literal("ratio", semantics.minimum),
+            { kind: "input", unit: "ratio", name: inputName },
+          ],
+        },
+        literal("ratio", semantics.maximum),
+      ],
+    },
+  } as ContributionOperation
+  context.variant = {
+    ...context.variant,
+    status: "corrected",
+    maximumLayers: semantics.maximumLayers,
+    differences: [...context.variant.differences, semantics.differenceId],
+    references: [
+      ...context.variant.references,
+      ...nanokaEvidenceReferences(semantics.evidence),
+    ],
+  }
+}
+
+function applyCompleteStateElation(
+  context: SemanticsContributionContext,
+  semantics: SemanticsOfKind<"complete-state-elation">,
+): void {
+  // 原始/规范化存在性、登记编码与块 note 关键条款已在 compile 入口由
+  // verifyRegisteredCompleteStateRecord 校验（早于任何通用 unsupported 降级）；
+  // 这里只补需要映射信息的每层基础增益核对。
+  // 每层基础增益必须与来源记录一致（M0 1.25%、影画 2 复制记录 0.25%）。
+  const registeredPerLayerGain =
+    (context.record.normalized ?? context.record.raw).kind === "stacked"
+      ? ((context.record.normalized ?? context.record.raw).valuePerStack ??
+          (context.record.normalized ?? context.record.raw).value) *
+        context.mapping.scale
+      : undefined
+  if (
+    semantics.role === "base" &&
+    registeredPerLayerGain !== semantics.perLayerGain
+  )
+    throw new Error(
+      `Complete-state elation per-layer gain drift at ${context.record.pointer}: ${String(registeredPerLayerGain)} != ${semantics.perLayerGain}`,
+    )
+  context.variant = {
+    ...context.variant,
+    // 旧选项不再接受独立选择：四条记录都迁移为带说明的语义冲突入口，
+    // 由完整状态选项统一取代（基础记录改写出的规则只由完整状态引用）。
+    status: "unsupported",
+    reason: "semantic-conflict",
+    explanation: `该来源记录是[昂扬]完整状态的一部分，已被完整状态选项取代：块 note 与 Nanoka 同文说明[昂扬]总增益按同一层数与同一获得时冲击力整体计算（影画 2 的 120% 是同一状态的比例强化）。请改选昂扬 · 完整状态；本记录不再单独生成按层增益。来源 ${context.record.pointer}。`,
+    effectIds: [],
+    maximumLayers:
+      semantics.role === "base" ? 1 : context.variant.maximumLayers,
+    differences: [...context.variant.differences, semantics.differenceId],
+    references: [
+      ...context.variant.references,
+      ...nanokaEvidenceReferences(semantics.evidence),
+    ],
+  }
+  if (semantics.role === "base") {
+    // 完整状态表达式：min(maximum, (perLayerGain + max(0, 冲击力 − 阈值)
+    // × perPointGain) × 层数)；层数由目录按登记的 count 输入名派生。
+    const unit = context.mapping.unit
+    const impactInput: NumericExpression<Unit, "contribution"> = {
+      kind: "input",
+      unit: "impact-points",
+      name: semantics.impactInputName,
+    }
+    // 完整状态按正文表达“冰属性伤害和火属性伤害”受益：命中元素条件显式
+    // 编入规则本身（目录 guard 的元素过滤只对持续通道启用，这里是命中
+    // 局部的通用增伤，必须在 when 里限制）；登记的补充命中元素（烈霜按
+    // 冰属性结算）一并覆盖，命中枚举本身保持精确比较。
+    const completeElementFilter = context.record.raw.elementFilter
+    if (
+      context.record.raw.applyTarget === "team" &&
+      Array.isArray(completeElementFilter) &&
+      completeElementFilter.length > 0
+    )
+      context.when = {
+        kind: "all",
+        conditions: [
+          context.when,
+          oneOf("hit.element", [
+            ...new Set([
+              ...completeElementFilter.map((element) => elementMap[element]!),
+              ...semantics.additionalHitElements,
+            ]),
+          ]),
+        ],
+      }
+    // 完整状态表达式：min(0.75, (0.0125 + max(0, 冲击力 − 170) × 每点
+    // 0.00025) × 层数)；参数用规范单位字面量，不经过来源百分数缩放。
+    // 阈值在表达式里以负数常量参与 add：登记的阈值是点数值（170）。
+    context.parameters["threshold"] = {
+      kind: "constant",
+      unit: "impact-points",
+      value: -semantics.threshold,
+    }
+    Object.assign(context.operation, {
+      kind: "factor-contribution",
+      channel: context.mapping.channel!,
+      value: {
+        kind: "minimum",
+        unit,
+        operands: [
+          literal(unit, semantics.maximum),
+          {
+            kind: "multiply",
+            unit,
+            value: {
+              kind: "add",
+              unit,
+              operands: [
+                literal(unit, semantics.perLayerGain),
+                {
+                  kind: "convert",
+                  unit,
+                  input: {
+                    kind: "maximum",
+                    unit: "impact-points",
+                    operands: [
+                      literal("impact-points", 0),
+                      {
+                        kind: "add",
+                        unit: "impact-points",
+                        operands: [
+                          impactInput,
+                          param("impact-points", "threshold"),
+                        ],
+                      },
+                    ],
+                  },
+                  rate: literal("multiplier", semantics.perPointGain),
+                },
+              ],
+            },
+            coefficient: {
+              kind: "convert",
+              unit: "multiplier",
+              input: {
+                kind: "input",
+                unit: "count",
+                name: semantics.layerCountInputName,
+              },
+              rate: literal("multiplier", 1),
+            },
+          },
+        ],
+      },
+    })
+    context.requirements.push({
+      name: semantics.impactInputName,
+      unit: "impact-points",
+      description:
+        "莱特获得[昂扬]时的冲击力（显式快照读数，手工输入）；与同一状态的其余部分共用同一读数，不使用预设或当前面板",
+    })
+  }
+}
+
+function applyTriggeredStateNotBenefitCondition(
+  context: SemanticsContributionContext,
+  semantics: SemanticsOfKind<"triggered-state-not-benefit-condition">,
+): void {
+  // 防漂移：登记字段的来源编码变化即拒绝；进入失衡只是触发事实。
+  for (const [label, document] of [
+    ["raw", context.record.raw],
+    ["normalized", context.record.normalized],
+  ] as const) {
+    if (document === undefined)
+      throw new Error(
+        `Triggered-state correction lost the ${label} record at ${context.record.pointer}`,
+      )
+    if (document.applySituation !== semantics.expectedApplySituation)
+      throw new Error(
+        `Triggered-state correction expects applySituation ${semantics.expectedApplySituation} at ${context.record.pointer} (${label}), found ${String(document.applySituation)}`,
+      )
+    if (
+      document.stat !== semantics.expectedStat ||
+      document.value !== semantics.expectedValue
+    )
+      throw new Error(
+        `Triggered-state correction expects ${semantics.expectedStat} ${semantics.expectedValue} at ${context.record.pointer} (${label}), found ${document.stat} ${String(document.value)}`,
+      )
+  }
+  // 移除 applySituation: stagger 派生的目标当前失衡条件；限时状态是否仍
+  // 有效由调用方显式选择 supplied 实例声明，当前失衡但未声明不自动获得。
+  if (context.when.kind === "all") {
+    const filtered = context.when.conditions.filter(
+      (condition) =>
+        !(condition.kind === "one-of" && condition.fact === "hit.targetState"),
+    )
+    context.when = { kind: "all", conditions: filtered }
+  }
+  context.variant = correctedVariantWithEvidence(
+    context.variant,
+    semantics.differenceId,
+    semantics.evidence,
+  )
+}
+
+function applyExcludeSkillTargetScope(
+  context: SemanticsContributionContext,
+  semantics: SemanticsOfKind<"exclude-skill-target-scope">,
+): void {
+  // 具名倍率范围修正：倍率只描述具名技能，固定来源编为整个技能大类。
+  // 防漂移核对（完整 skillTargets 元组与核心块冻结 note）已在 compile
+  // 开头先行执行并早于通用 unsupported 降级；此处只追加对登记独立目标
+  // 的排除——普通大类命中保持原行为（25% 照常），携带独立目标的命中
+  // 不再放大。
+  context.when = {
+    kind: "all",
+    conditions: [
+      context.when,
+      {
+        kind: "not",
+        condition: oneOf("hit.skillTag", [
+          `zzz-hp:skill:${semantics.excludedTargetId}`,
+        ]),
+      },
+    ],
+  }
+  context.variant = correctedVariantWithEvidence(
+    context.variant,
+    semantics.differenceId,
+    semantics.evidence,
+  )
+}
+
+function applyDamageItemTargeting(
+  context: SemanticsContributionContext,
+  semantics: SemanticsOfKind<"damage-item-targeting">,
+): void {
+  const requirement = semantics.requirement
+  // 倍率只作用于声明身份的伤害项：由 itemIds 精确绑定，缺项时求值层报 MISSING_REFERENCE。
+  context.operation = {
+    kind: "hit-adjustment",
+    field: "damageMultiplier",
+    operator: "add",
+    itemIds: [requirement.itemId],
+    value: context.expression as NumericExpression<
+      "multiplier",
+      "contribution"
+    >,
+  }
+  context.variant = {
+    ...context.variant,
+    ...(semantics.minimumPotential === undefined
+      ? {}
+      : {
+          configuration: {
+            ...context.variant.configuration,
+            potentialLevels: [1, 2, 3, 4, 5, 6] as PotentialLevel[],
+          },
+          differences: [
+            ...context.variant.differences,
+            "potential-branch-gate",
+          ],
+        }),
+    mechanism: {
+      kind: "independent-settlement",
+      damageItemRequirements: [
+        {
+          itemId: requirement.itemId,
+          stat: requirement.stat,
+          role: requirement.role,
+          allowedModes: [...requirement.allowedModes],
+          source: requirement.source,
+          ...(requirement.originalAnomalyAttribute === undefined
+            ? {}
+            : {
+                originalAnomalyAttribute: requirement.originalAnomalyAttribute,
+              }),
+          ...(requirement.requiredDirectMultiplier === undefined
+            ? {}
+            : {
+                requiredDirectMultiplier: requirement.requiredDirectMultiplier,
+              }),
+          ...(requirement.requiredSkillCategory === undefined
+            ? {}
+            : { requiredSkillCategory: requirement.requiredSkillCategory }),
+        },
+      ],
+    },
+    references: [
+      ...context.variant.references,
+      ...nanokaEvidenceReferences(semantics.evidence),
+    ],
+  }
+  if (semantics.independentHit) {
+    // 独立命中契约：规则只匹配声明的独立目标、证据元素与既有伤害种类，
+    // 普通动作上下文（不含该目标）不能借用独立项；目录同时登记目标条目。
+    // 来源 elementFilter 已注入的元素条件不重复追加。
+    const independentHit = semantics.independentHit
+    const conditions =
+      context.when.kind === "all" ? context.when.conditions : [context.when]
+    const hasElementCondition = conditions.some(
+      (condition) =>
+        condition.kind === "one-of" &&
+        condition.fact === "hit.element" &&
+        condition.values.length === 1 &&
+        condition.values[0] === independentHit.element,
+    )
+    context.when = {
+      kind: "all",
+      conditions: [
+        ...conditions,
+        oneOf("hit.skillTag", [`zzz-hp:skill:${independentHit.targetId}`]),
+        ...(hasElementCondition
+          ? []
+          : [oneOf("hit.element", [independentHit.element])]),
+      ],
+    }
+    context.variant = {
+      ...context.variant,
+      differences: [...context.variant.differences, "independent-hit-contract"],
+    }
+    if (context.identity)
+      context.declaredSkillTargets.push({
+        targetId: `zzz-hp:skill:${independentHit.targetId}`,
+        upstreamId: null,
+        agentEntityId: context.identity.entityId,
+        category: independentHit.category,
+        name: independentHit.name,
+        countsAsFollowUp: false,
+      })
+  }
+}
+
+const SEMANTICS_COMPILE_HANDLERS: SemanticsCompileHandlerTable = {
+  "declared-unsupported": {
+    exitBeforeIdentity(context, semantics) {
+      if (
+        semantics.expectedEncoding !== undefined ||
+        semantics.expectedSourceBlockNote !== undefined
+      ) {
+        // 只核对 raw：fac62407 的加载规范化会把 3.2.5 的 turbulence/radiance
+        // 暴击通道降级为 dmgBonus、并丢弃未识别的 conditions；该条款不执行，
+        // 以原始记录为准，normalized 漂移不改变“缺口”结论。
+        if (
+          semantics.expectedSourceBlockNote !== undefined &&
+          context.record.blockNote !== semantics.expectedSourceBlockNote
+        )
+          throw new Error(
+            `Declared unsupported clause block note drift at ${context.record.pointer}`,
+          )
+        if (semantics.expectedEncoding !== undefined)
+          for (const [field, expected] of Object.entries(
+            semantics.expectedEncoding,
+          )) {
+            const actual = (
+              context.record.raw as unknown as Record<string, unknown>
+            )[field]
+            if (JSON.stringify(actual) !== JSON.stringify(expected))
+              throw new Error(
+                `Declared unsupported clause raw field drift at ${context.record.pointer}: ${field}=${JSON.stringify(actual)}`,
+              )
+          }
+      }
+      return unsupportedVariant(
+        context,
+        semantics.reason,
+        semantics.explanation,
+      )
+    },
+  },
+  "supplemental-flat-source": {
+    resolveSource() {
+      return { exemptFromCoreDependent: true }
+    },
+  },
+  "settlement-critical-channel": {
+    verifyAfterVariant(context, semantics) {
+      if (
+        context.record.raw.stat !== semantics.expectedRawStat ||
+        context.record.raw.value !== semantics.expectedValue
+      )
+        throw new Error(
+          `Settlement critical channel registration expects ${semantics.expectedRawStat}=${String(semantics.expectedValue)} at ${context.record.pointer}`,
+        )
+    },
+    resolveSource(_, semantics) {
+      return {
+        effectiveStat: semantics.correctedStat,
+        exemptFromCoreDependent: true,
+      }
+    },
+  },
+  "source-conversion-rate-correction": {
+    verifySourceRecord(record, semantics) {
+      for (const [label, document, note] of [
+        ["raw", record.raw, record.blockNote],
+        ["normalized", record.normalized, record.normalizedBlockNote],
+      ] as const) {
+        if (!document || note !== semantics.expectedSourceBlockNote)
+          throw new Error(
+            `Conversion-rate correction ${label} record/note drift at ${record.pointer}`,
+          )
+        verifySourceRecordShape(
+          document,
+          semantics.expectedEncoding,
+          semantics.differenceId,
+          `${label} ${record.pointer}`,
+          true,
+        )
+      }
+    },
+    resolveSource(_, semantics) {
+      return { conversionRate: semantics.correctedRate }
+    },
+    applyBeforeOperation: markSourceCorrectionVariant,
+  },
+  "hugo-stun-teammate-count": {
+    resolveSource() {
+      return { activationMaximumLayers: 1 }
+    },
+    applyBeforeOperation: applyCoreSkillLevelContribution,
+  },
+  "isolated-polarity-disorder": {
+    exitAfterIdentity(context, semantics) {
+      return {
+        ...context.variant,
+        status: "unsupported",
+        reason: "semantic-conflict",
+        effectIds: [],
+        explanation: semantics.verification,
+        differences: [semantics.differenceId],
+        references: [
+          ...context.variant.references,
+          ...nanokaEvidenceReferences(semantics.evidence),
+        ],
+      }
+    },
+  },
+  "source-stat-correction": {
+    verifySourceRecord(record, semantics) {
+      verifySourceStatCorrectionRecord(record, semantics)
+    },
+    resolveSource(_, semantics) {
+      return { effectiveStat: semantics.correctedStat }
+    },
+    applyBeforeOperation: markSourceCorrectionVariant,
+  },
+  "complete-state-tanuki-wish": {
+    verifySourceRecord(record, semantics) {
+      verifyRegisteredCompleteStateRecord(record, semantics)
+    },
+    exitBeforeNormalized(context, semantics) {
+      return {
+        ...context.variant,
+        effectIds: [],
+        status: "unsupported",
+        reason: "semantic-conflict",
+        explanation: `该正转化或负数抵消记录已迁移至 ${YUZUHA_COMPLETE_STATE_OPTION_ID}（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 ${context.record.pointer}。`,
+        inputs: [],
+        differences: [YUZUHA_COMPLETE_STATE_DIFFERENCE_ID],
+        references: [
+          ...context.variant.references,
+          ...nanokaEvidenceReferences(semantics.evidence),
+        ],
+      }
+    },
+  },
+  "core-skill-level": {
+    applyBeforeOperation: applyCoreSkillLevelContribution,
+  },
+  "explicit-selection-state": {
+    applyBeforeOperation: applyExplicitSelectionState,
+  },
+  "special-skill-level": {
+    applyBeforeOperation: applySpecialSkillLevelContribution,
+  },
+  "stagger-recovery-settlement": {
+    verifySourceRecord(record, semantics) {
+      if (semantics.vibratoModifiedExclusion !== undefined)
+        verifySettlementExclusionRecord(
+          record,
+          semantics.vibratoModifiedExclusion,
+        )
+    },
+    applyAfterOperation: applyStaggerRecoverySettlement,
+  },
+  "exclude-settlement-target": {
+    verifySourceRecord(record, semantics) {
+      verifySettlementExclusionRecord(record, semantics)
+    },
+    applyAfterOperation: applyExcludeSettlementTarget,
+  },
+  "damage-item-targeting": {
+    resolveSource(_, semantics) {
+      return semantics.minimumPotential === undefined
+        ? {}
+        : { potentialGate: semantics.minimumPotential }
+    },
+    applyAfterOperation: applyDamageItemTargeting,
+  },
+  "independent-target": {},
+  "potential-branch": {
+    resolveSource(_, semantics) {
+      return { potentialGate: semantics.minimumPotential }
+    },
+    applyBeforeOperation: applyPotentialBranchContribution,
+  },
+  "potential-level": {
+    verifySourceRecord(record, semantics) {
+      if (semantics.damageKindScope !== undefined)
+        verifyDamageKindScopeCorrectionRecord(
+          record,
+          semantics.damageKindScope,
+          semantics.damageKindScope.differenceId,
+        )
+    },
+    resolveSource(_, semantics) {
+      return { potentialGate: semantics.minimumPotential }
+    },
+    applyBeforeOperation: applyPotentialLevelContribution,
+    applyAfterOperation: applyPotentialLevelDamageKindScope,
+  },
+  "merged-partial-record": {
+    exitAfterMappingReason(context, semantics) {
+      return {
+        ...context.variant,
+        effectIds: [],
+        status: "unsupported" as const,
+        reason: "semantic-conflict" as const,
+        explanation: `该部分记录已合并至完整状态选项 ${semantics.mergedIntoOptionId}；不得与完整值重复选择。`,
+        maximumLayers: 1,
+        configuration: {
+          ...context.variant.configuration,
+          potentialLevels: [...semantics.levels] as PotentialLevel[],
+        },
+        references: [
+          ...context.variant.references,
+          ...nanokaEvidenceReferences(semantics.evidence),
+        ],
+      }
+    },
+  },
+  "settlement-element-scope": {
+    verifySourceRecord(record, semantics) {
+      verifySettlementElementScopeRecord(record, semantics)
+    },
+    applyAfterOperation: applySettlementElementScope,
+  },
+  "damage-kind-scope-correction": {
+    verifySourceRecord(record, semantics) {
+      verifyDamageKindScopeCorrectionRecord(
+        record,
+        semantics,
+        semantics.differenceId,
+      )
+    },
+    applyAfterOperation: applyDamageKindScopeCorrection,
+  },
+  "named-source-discrepancy": {
+    applyBeforeOperation: applyNamedSourceDiscrepancy,
+  },
+  "explicit-element-scope": {
+    applyAfterOperation: applyExplicitElementScope,
+  },
+  "attribute-anomaly-beneficiary-scope": {
+    applyAfterOperation: applyAttributeAnomalyBeneficiaryScope,
+  },
+  "developer-revised-stat": {
+    verifySourceRecord(record, semantics) {
+      if (record.raw.stat !== semantics.originalStat)
+        throw new Error(
+          `Developer revision expects stat ${semantics.originalStat} at ${record.pointer}, found ${record.raw.stat}`,
+        )
+      if (record.raw.value !== semantics.revisedValue)
+        throw new Error(
+          `Developer revision value mismatch at ${record.pointer}: ${record.raw.value} ≠ ${semantics.revisedValue}`,
+        )
+    },
+    resolveSource(_, semantics) {
+      return { effectiveStat: semantics.revisedStat }
+    },
+    applyBeforeOperation: applyDeveloperRevisedStat,
+  },
+  "stacked-mechanism-correction": {
+    applyBeforeOperation: applyStackedMechanismCorrection,
+  },
+  "flat-energy-regen": {
+    verifySourceRecord(record, semantics) {
+      for (const [label, document] of [
+        ["raw", record.raw],
+        ["normalized", record.normalized],
+      ] as const) {
+        if (
+          document === undefined ||
+          document.stat !== "energyRegen" ||
+          document.kind !== "fixed" ||
+          document.stackable === true ||
+          document.value !== semantics.expectedSourceValue
+        )
+          throw new Error(
+            `Flat energy regen correction expects the registered fixed energyRegen encoding at ${record.pointer} (${label}): value=${semantics.expectedSourceValue}`,
+          )
+      }
+    },
+    resolveSource() {
+      return { fieldMapping: FLAT_ENERGY_REGEN_MAPPING }
+    },
+    applyAfterOperation: applyFlatEnergyRegen,
+  },
+  "source-value-correction": {
+    resolveSource(_, semantics) {
+      return {
+        valueCorrection: {
+          expected: semantics.expectedSourceValue,
+          corrected: semantics.correctedValue,
+        },
+      }
+    },
+    applyBeforeOperation: markSourceCorrectionVariant,
+  },
+  "beneficiary-target-correction": {
+    applyAfterOperation: applyBeneficiaryTargetCorrection,
+  },
+  "trigger-conditions-not-benefit-scope": {
+    resolveSource(_, semantics) {
+      return semantics.valueCorrection === undefined
+        ? {}
+        : {
+            valueCorrection: {
+              expected: semantics.valueCorrection.expectedSourceValue,
+              corrected: semantics.valueCorrection.correctedValue,
+            },
+          }
+    },
+    applyAfterOperation: applyTriggerConditionsNotBenefitScope,
+  },
+  "refinement-value-description": {
+    applyAfterOperation: applyRefinementValueDescription,
+  },
+  "hit-scope-direct-stat-input": {
+    applyAfterOperation: applyHitScopeDirectStatInput,
+  },
+  "triggered-state-not-benefit-condition": {
+    applyAfterOperation: applyTriggeredStateNotBenefitCondition,
+  },
+  "exclude-skill-target-scope": {
+    verifySourceRecord(record, semantics) {
+      verifyExcludeSkillTargetScopeRecord(record, semantics)
+    },
+    applyAfterOperation: applyExcludeSkillTargetScope,
+  },
+  "skill-target-scope-correction": {
+    verifySourceRecord(record, semantics) {
+      verifySkillTargetScopeCorrectionRecord(record, semantics)
+    },
+    resolveSource(record, semantics) {
+      return { effectiveSourceEffect: effectiveSourceEffect(record, semantics) }
+    },
+    applyBeforeOperation: applySkillTargetScopeCorrection,
+  },
+  "complete-state-elation": {
+    verifyBeforeNormalized(context, semantics) {
+      verifyRegisteredCompleteStateRecord(context.record, semantics)
+    },
+    applyAfterOperation: applyCompleteStateElation,
+    finalize(context, semantics) {
+      return semantics.role === "replaced" ? context.variant : undefined
+    },
+  },
+}
+
 function compile(
   record: SourceRecord,
   identity: SourceIdentity | null,
@@ -2362,78 +3982,17 @@ function compile(
     !SOURCE_COMMIT_991BB0E_SEMANTICS.has(semanticsKey)
       ? SOURCE_SEMANTICS[semanticsKey]
       : undefined
-  const e = effectiveSourceEffect(record, semantics)
+  const semanticsHandler =
+    semantics === undefined ? undefined : semanticsHandlerFor(semantics)
+  const sourceOverrides =
+    semantics === undefined
+      ? {}
+      : (semanticsHandler?.resolveSource?.(record, semantics) ?? {})
+  const e =
+    sourceOverrides.effectiveSourceEffect ?? record.normalized ?? record.raw
   // 本组必须在字段映射和通用 unsupported 之前核验；降级不能掩盖源漂移。
-  if (semantics?.kind === "source-conversion-rate-correction") {
-    for (const [label, document, note] of [
-      ["raw", record.raw, record.blockNote],
-      ["normalized", record.normalized, record.normalizedBlockNote],
-    ] as const) {
-      if (!document || note !== semantics.expectedSourceBlockNote)
-        throw new Error(
-          `Conversion-rate correction ${label} record/note drift at ${record.pointer}`,
-        )
-      verifySourceRecordShape(
-        document,
-        semantics.expectedEncoding,
-        semantics.differenceId,
-        `${label} ${record.pointer}`,
-        true,
-      )
-    }
-  }
-  if (semantics?.kind === "source-stat-correction")
-    verifySourceStatCorrectionRecord(record, semantics)
-  if (semantics?.kind === "complete-state-tanuki-wish")
-    verifyRegisteredCompleteStateRecord(record, semantics)
-  // 具名倍率范围修正：完整 skillTargets 与核心块冻结 note 的校验同样早于
-  // 通用 unsupported 降级——normalized 删除不能再静默绕过登记。
-  if (semantics?.kind === "exclude-skill-target-scope")
-    verifyExcludeSkillTargetScopeRecord(record, semantics)
-  if (semantics?.kind === "skill-target-scope-correction")
-    verifySkillTargetScopeCorrectionRecord(record, semantics)
-  // 烈霜结算元素范围修正：登记编码与冻结块 note 的校验同样早于通用
-  // unsupported 降级（源漂移不能被降级掩盖）。
-  if (semantics?.kind === "settlement-element-scope")
-    verifySettlementElementScopeRecord(record, semantics)
-  // 伤害种类范围修正：登记编码与冻结块 note 的校验同样早于通用
-  // unsupported 降级（源漂移不能被降级掩盖）。
-  if (semantics?.kind === "damage-kind-scope-correction")
-    verifyDamageKindScopeCorrectionRecord(
-      record,
-      semantics,
-      semantics.differenceId,
-    )
-  if (
-    semantics?.kind === "potential-level" &&
-    semantics.damageKindScope !== undefined
-  )
-    verifyDamageKindScopeCorrectionRecord(
-      record,
-      semantics.damageKindScope,
-      semantics.damageKindScope.differenceId,
-    )
-  // [颤音：改]共存排除：登记编码与冻结块 note 的校验同样早于通用
-  // unsupported 降级（独立登记与 stagger-recovery 扩展字段共用）。
-  if (semantics?.kind === "exclude-settlement-target")
-    verifySettlementExclusionRecord(record, semantics)
-  if (
-    semantics?.kind === "stagger-recovery-settlement" &&
-    semantics.vibratoModifiedExclusion !== undefined
-  )
-    verifySettlementExclusionRecord(record, semantics.vibratoModifiedExclusion)
-  // 开发者定点修订：仅登记过的记录按修订后的字段查映射；来源原始编码或
-  // 数值与登记不符即拒绝生成，不静默套用，也不波及其他 special 记录。
-  if (semantics?.kind === "developer-revised-stat") {
-    if (record.raw.stat !== semantics.originalStat)
-      throw new Error(
-        `Developer revision expects stat ${semantics.originalStat} at ${record.pointer}, found ${record.raw.stat}`,
-      )
-    if (record.raw.value !== semantics.revisedValue)
-      throw new Error(
-        `Developer revision value mismatch at ${record.pointer}: ${record.raw.value} ≠ ${semantics.revisedValue}`,
-      )
-  }
+  if (semantics !== undefined)
+    semanticsHandler?.verifySourceRecord?.(record, semantics)
   // 3.2.5 引入的 turbulence/radiance 暴击通道在 fac62407 的加载规范化中
   // 仍按未知 stat 降级为 dmgBonus；D4 补充层按未改写的 raw stat 编译，
   // 只对这四个登记通道生效，不改变固定源其他记录的归一语义。
@@ -2444,40 +4003,13 @@ function compile(
     "radianceCritDmg",
   ])
   const effectiveStat =
-    semantics?.kind === "developer-revised-stat"
-      ? semantics.revisedStat
-      : semantics?.kind === "source-stat-correction"
-        ? semantics.correctedStat
-        : semantics?.kind === "settlement-critical-channel"
-          ? semantics.correctedStat
-          : supplemental &&
-              supplementalSubtypeStats.has(record.raw.stat) &&
-              e.stat !== record.raw.stat
-            ? record.raw.stat
-            : e.stat
-  // C05 固定回能：登记过的 energyRegen 记录按固定点数/秒编译；编码或数值
-  // 与登记不符即拒绝生成，不静默套用到其他 energyRegen 记录。
-  if (semantics?.kind === "flat-energy-regen") {
-    for (const [label, document] of [
-      ["raw", record.raw],
-      ["normalized", record.normalized],
-    ] as const) {
-      if (
-        document === undefined ||
-        document.stat !== "energyRegen" ||
-        document.kind !== "fixed" ||
-        document.stackable === true ||
-        document.value !== semantics.expectedSourceValue
-      )
-        throw new Error(
-          `Flat energy regen correction expects the registered fixed energyRegen encoding at ${record.pointer} (${label}): value=${semantics.expectedSourceValue}`,
-        )
-    }
-  }
-  const mapping =
-    semantics?.kind === "flat-energy-regen"
-      ? FLAT_ENERGY_REGEN_MAPPING
-      : FIELD_MAPPINGS[effectiveStat]
+    sourceOverrides.effectiveStat ??
+    (supplemental &&
+    supplementalSubtypeStats.has(record.raw.stat) &&
+    e.stat !== record.raw.stat
+      ? record.raw.stat
+      : e.stat)
+  const mapping = sourceOverrides.fieldMapping ?? FIELD_MAPPINGS[effectiveStat]
   if (!mapping)
     throw new Error(`Unregistered stat at ${record.pointer}: ${effectiveStat}`)
   const enhancesCissiaCore =
@@ -2517,8 +4049,7 @@ function compile(
   // 其语义（显式状态选择、特殊技等级表达式）改由 SOURCE_SEMANTICS 登记。
   const coreDependent =
     record.category === "agents" &&
-    semantics?.kind !== "supplemental-flat-source" &&
-    semantics?.kind !== "settlement-critical-channel" &&
+    sourceOverrides.exemptFromCoreDependent !== true &&
     (enhancesCissiaCore ||
       (record.rank === 0 && record.blockName.includes("核心被动")))
   const requirements: StaticCatalogVariant["inputs"][number][] = []
@@ -2594,122 +4125,42 @@ function compile(
         ),
       ],
     }
+  const variantContext: SemanticsVariantContext = { record, variant }
   const unsupported = (
     reason: NonNullable<StaticCatalogVariant["reason"]>,
     explanation: string,
-  ) => ({
-    variant: {
-      ...variant,
-      effectIds: [],
-      status: "unsupported" as const,
-      reason,
-      explanation,
-    },
-  })
-  if (semantics?.kind === "settlement-critical-channel") {
-    if (
-      record.raw.stat !== semantics.expectedRawStat ||
-      record.raw.value !== semantics.expectedValue
-    )
-      throw new Error(
-        `Settlement critical channel registration expects ${semantics.expectedRawStat}=${String(semantics.expectedValue)} at ${record.pointer}`,
-      )
-  }
-  if (semantics?.kind === "declared-unsupported") {
-    if (
-      semantics.expectedEncoding !== undefined ||
-      semantics.expectedSourceBlockNote !== undefined
-    ) {
-      // 只核对 raw：fac62407 的加载规范化会把 3.2.5 的 turbulence/radiance
-      // 暴击通道降级为 dmgBonus、并丢弃未识别的 conditions；该条款不执行，
-      // 以原始记录为准，normalized 漂移不改变“缺口”结论。
-      if (
-        semantics.expectedSourceBlockNote !== undefined &&
-        record.blockNote !== semantics.expectedSourceBlockNote
-      )
-        throw new Error(
-          `Declared unsupported clause block note drift at ${record.pointer}`,
-        )
-      if (semantics.expectedEncoding !== undefined)
-        for (const [field, expected] of Object.entries(
-          semantics.expectedEncoding,
-        )) {
-          const actual = (record.raw as unknown as Record<string, unknown>)[
-            field
-          ]
-          if (JSON.stringify(actual) !== JSON.stringify(expected))
-            throw new Error(
-              `Declared unsupported clause raw field drift at ${record.pointer}: ${field}=${JSON.stringify(actual)}`,
-            )
-        }
-    }
-    return unsupported(semantics.reason, semantics.explanation)
-  }
+  ) => ({ variant: unsupportedVariant(variantContext, reason, explanation) })
+  if (semantics !== undefined)
+    semanticsHandler?.verifyAfterVariant?.(variantContext, semantics)
+  const beforeIdentityVariant =
+    semantics === undefined
+      ? undefined
+      : semanticsHandler?.exitBeforeIdentity?.(variantContext, semantics)
+  if (beforeIdentityVariant) return { variant: beforeIdentityVariant }
   if (!identity)
     return unsupported("missing-identity", "当前 Fairy 没有已核实的来源实体 ID")
-  if (semantics?.kind === "isolated-polarity-disorder")
-    return {
-      variant: {
-        ...variant,
-        status: "unsupported",
-        reason: "semantic-conflict",
-        effectIds: [],
-        explanation: semantics.verification,
-        differences: [semantics.differenceId],
-        references: [
-          ...variant.references,
-          ...semantics.evidence.map((ref) =>
-            nanokaReference(ref.path, ref.pointer),
-          ),
-        ],
-      },
-    }
+  const afterIdentityVariant =
+    semantics === undefined
+      ? undefined
+      : semanticsHandler?.exitAfterIdentity?.(variantContext, semantics)
+  if (afterIdentityVariant) return { variant: afterIdentityVariant }
   // 具名登记的完整状态记录先做防漂移校验，早于任何通用 unsupported 降级：
   // 规范化删除或编码变义必须终止生成，不能被当作“已迁移”入口。
-  if (semantics?.kind === "complete-state-elation")
-    verifyRegisteredCompleteStateRecord(record, semantics)
-  if (semantics?.kind === "complete-state-tanuki-wish")
-    return {
-      variant: {
-        ...variant,
-        effectIds: [],
-        status: "unsupported",
-        reason: "semantic-conflict",
-        explanation: `该正转化或负数抵消记录已迁移至 ${YUZUHA_COMPLETE_STATE_OPTION_ID}（狸之愿 · 额外能力完整状态）；八条旧部分选项及其低层贡献均不可再执行，请改选完整状态并提供柚叶异常掌控，M1 强化随绑定自动生效一次。来源 ${record.pointer}。`,
-        inputs: [],
-        differences: [YUZUHA_COMPLETE_STATE_DIFFERENCE_ID],
-        references: [
-          ...variant.references,
-          ...semantics.evidence.map((ref) =>
-            nanokaReference(ref.path, ref.pointer),
-          ),
-        ],
-      },
-    }
+  if (semantics !== undefined)
+    semanticsHandler?.verifyBeforeNormalized?.(variantContext, semantics)
+  const beforeNormalizedVariant =
+    semantics === undefined
+      ? undefined
+      : semanticsHandler?.exitBeforeNormalized?.(variantContext, semantics)
+  if (beforeNormalizedVariant) return { variant: beforeNormalizedVariant }
   if (!record.normalized)
     return unsupported("semantic-conflict", "上游加载规范化移除了该原始记录")
   if (mapping.reason) return unsupported("formula-out-of-scope", mapping.reason)
-  if (semantics?.kind === "merged-partial-record")
-    return {
-      variant: {
-        ...variant,
-        effectIds: [],
-        status: "unsupported" as const,
-        reason: "semantic-conflict" as const,
-        explanation: `该部分记录已合并至完整状态选项 ${semantics.mergedIntoOptionId}；不得与完整值重复选择。`,
-        maximumLayers: 1,
-        configuration: {
-          ...variant.configuration,
-          potentialLevels: [...semantics.levels] as PotentialLevel[],
-        },
-        references: [
-          ...variant.references,
-          ...semantics.evidence.map((ref) =>
-            nanokaReference(ref.path, ref.pointer),
-          ),
-        ],
-      },
-    }
+  const afterMappingReasonVariant =
+    semantics === undefined
+      ? undefined
+      : semanticsHandler?.exitAfterMappingReason?.(variantContext, semantics)
+  if (afterMappingReasonVariant) return { variant: afterMappingReasonVariant }
   if (coreDependent && !proof)
     return unsupported(
       "missing-rank-evidence",
@@ -2720,19 +4171,7 @@ function compile(
     e.kind === "stacked" || e.stackable ? (e.valuePerStack ?? e.value) : e.value
   const amountUnit = mapping.basePercentage ? "ratio" : mapping.unit
   // C01/C10 的来源数值纠错：原始与规范化记录都必须仍是登记的原值。
-  const valueCorrection =
-    semantics?.kind === "source-value-correction"
-      ? {
-          expected: semantics.expectedSourceValue,
-          corrected: semantics.correctedValue,
-        }
-      : semantics?.kind === "trigger-conditions-not-benefit-scope" &&
-          semantics.valueCorrection
-        ? {
-            expected: semantics.valueCorrection.expectedSourceValue,
-            corrected: semantics.valueCorrection.correctedValue,
-          }
-        : undefined
+  const valueCorrection = sourceOverrides.valueCorrection
   if (valueCorrection) {
     for (const [label, document] of [
       ["raw", record.raw],
@@ -2748,23 +4187,6 @@ function compile(
         throw new Error(
           `Value correction expects ${valueCorrection.expected} at ${record.pointer} (${label}), found ${String(actual)}`,
         )
-    }
-  }
-  if (
-    semantics?.kind === "source-value-correction" ||
-    semantics?.kind === "source-stat-correction" ||
-    semantics?.kind === "source-conversion-rate-correction"
-  ) {
-    variant = {
-      ...variant,
-      status: "corrected",
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
     }
   }
   const compiledValue = valueCorrection ? valueCorrection.corrected : value
@@ -2824,9 +4246,8 @@ function compile(
       kind: "constant",
       unit: "multiplier",
       value:
-        semantics?.kind === "source-conversion-rate-correction"
-          ? semantics.correctedRate
-          : ((conversion.ratioPercent / 100) * mapping.scale) / from.scale,
+        sourceOverrides.conversionRate ??
+        ((conversion.ratioPercent / 100) * mapping.scale) / from.scale,
     }
     if (
       record.entityId === "astrayao" &&
@@ -2901,322 +4322,27 @@ function compile(
     }
     expression = param(amountUnit, "amount")
   }
-  if (
-    semantics?.kind === "core-skill-level" ||
-    semantics?.kind === "hugo-stun-teammate-count"
-  ) {
-    const resolved = resolveCoreRankParameters(
-      { ...semantics, kind: "core-skill-level" },
-      amountUnit,
-    )
-    if (resolved.levels.length === 0)
-      return unsupported(
-        "missing-rank-evidence",
-        "必需核心参数与逐档证据没有共同支持的档位",
-      )
-    Object.assign(parameters, resolved.parameters)
-    const formula = semantics.formula
-    if (formula.kind === "amount") expression = param(amountUnit, "amount")
-    else if (formula.kind === "proportional-increment")
-      expression = {
-        kind: "multiply",
-        unit: amountUnit,
-        value: param(amountUnit, "amount"),
-        coefficient: param("multiplier", "incrementCoefficient"),
-      }
-    else {
-      if (
-        !conversionInput ||
-        requirements.length !== 1 ||
-        requirements[0]!.unit !== "attack-points"
-      )
-        throw new Error(
-          `Core conversion requires explicit initial attack: ${record.pointer}`,
-        )
-      requirements[0] = {
-        ...requirements[0]!,
-        description:
-          "效果施加时来源角色的初始攻击力；与基础/影画项组合时提供同一读数，不使用预设或当前面板",
-      }
-      const capped = (
-        rate: NumericExpression<"multiplier", "contribution">,
-        cap: string,
-      ): NumericExpression<Unit, "contribution"> => ({
-        kind: "minimum",
-        unit: mapping.unit,
-        operands: [
-          {
-            kind: "convert",
-            unit: mapping.unit,
-            input: conversionInput!,
-            rate,
-          },
-          param(mapping.unit, cap),
-        ],
-      })
-      const base = capped(param("multiplier", "rate"), "cap")
-      expression =
-        formula.kind === "capped-conversion"
-          ? base
-          : {
-              kind: "add",
-              unit: mapping.unit,
-              operands: [
-                capped(
-                  {
-                    kind: "add",
-                    unit: "multiplier",
-                    operands: [
-                      param("multiplier", "rate"),
-                      param("multiplier", "rateIncrease"),
-                    ],
-                  },
-                  "enhancedCap",
-                ),
-                {
-                  kind: "multiply",
-                  unit: mapping.unit,
-                  value: base,
-                  coefficient: literal("multiplier", -1),
-                },
-              ],
-            }
-    }
-    variant = {
-      ...variant,
-      status: "corrected",
-      configuration: {
-        ...variant.configuration,
-        coreSkillLevels: resolved.levels,
-      },
-      differences: [
-        ...variant.differences,
-        "core-skill-level-parameters",
-        ...(formula.kind === "proportional-increment" ||
-        formula.kind === "capped-conversion-increment"
-          ? ["core-enhancement-independent-increment"]
-          : []),
-      ],
-      references: [
-        variant.references[0],
-        ...new Map(
-          [...variant.references.slice(1), ...resolved.references].map(
-            (ref) => [JSON.stringify(ref), ref],
-          ),
-        ).values(),
-      ],
-    }
-    if (semantics.kind === "hugo-stun-teammate-count") {
-      const count: NumericExpression<"count", "contribution"> = {
-        kind: "input",
-        unit: "count",
-        name: semantics.layerCountInputName,
-      }
-      expression = {
-        kind: "multiply",
-        unit: "attack-points",
-        value: param("attack-points", "amount"),
-        coefficient: {
-          kind: "convert",
-          unit: "multiplier",
-          rate: literal("multiplier", 1),
-          input: {
-            kind: "add",
-            unit: "count",
-            operands: [
-              count,
-              {
-                kind: "maximum",
-                unit: "count",
-                operands: [
-                  literal("count", 0),
-                  {
-                    kind: "add",
-                    unit: "count",
-                    operands: [count, literal("count", -1)],
-                  },
-                ],
-              },
-            ],
-          },
-        },
-      }
-      variant = {
-        ...variant,
-        maximumLayers: 2,
-        mechanism: {
-          kind: "complete-state",
-          layerCountInputName: semantics.layerCountInputName,
-        },
-        differences: [...variant.differences, semantics.differenceId],
-        references: [reference(record.pointer), ...resolved.references],
-      }
-    }
+  const expressionContext: SemanticsExpressionContext = {
+    record,
+    identity,
+    effectId,
+    declaredSkillTargets,
+    e,
+    mapping,
+    amountUnit,
+    compiledValue,
+    variant,
+    parameters,
+    requirements,
+    expression,
+    conversionInput,
   }
-  if (semantics?.kind === "special-skill-level") {
-    for (const spec of semantics.parameters) {
-      const existing = parameters[spec.name]
-      if (!existing)
-        throw new Error(
-          `Semantics references unknown parameter "${spec.name}" at ${record.pointer}`,
-        )
-      if (existing.unit !== spec.unit)
-        throw new Error(
-          `Semantics unit mismatch for "${spec.name}" at ${record.pointer}`,
-        )
-      parameters[spec.name] = {
-        kind: "by-rank",
-        rank: "specialSkillLevel",
-        unit: spec.unit,
-        values: Object.fromEntries(
-          semantics.levels.map((level) => [
-            level,
-            levelValue(spec.base, spec.growth, level),
-          ]),
-        ),
-      } as AnyParameter
-    }
-    variant = {
-      ...variant,
-      status: "corrected",
-      configuration: {
-        ...variant.configuration,
-        specialSkillLevels: [...semantics.levels],
-      },
-      differences: [...variant.differences, "special-skill-level-expression"],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  if (semantics?.kind === "potential-branch") {
-    // 潜能分支记录：规则与变体同时声明潜能门槛，未开启潜能时不可用。
-    variant = {
-      ...variant,
-      status: "corrected",
-      configuration: {
-        ...variant.configuration,
-        potentialLevels: [1, 2, 3, 4, 5, 6],
-      },
-      differences: [...variant.differences, "potential-branch-gate"],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  if (semantics?.kind === "potential-level") {
-    for (const spec of semantics.parameters) {
-      const existing = parameters[spec.name]
-      if (!existing)
-        throw new Error(
-          `Semantics references unknown parameter "${spec.name}" at ${record.pointer}`,
-        )
-      if (existing.unit !== spec.unit)
-        throw new Error(
-          `Semantics unit mismatch for "${spec.name}" at ${record.pointer}`,
-        )
-      parameters[spec.name] = {
-        kind: "by-rank",
-        rank: "potentialLevel",
-        unit: spec.unit,
-        values: spec.values,
-      } as AnyParameter
-    }
-    variant = {
-      ...variant,
-      status: "corrected",
-      maximumLayers: semantics.maximumLayers ?? 1,
-      configuration: {
-        ...variant.configuration,
-        potentialLevels: [...semantics.levels] as PotentialLevel[],
-      },
-      differences: [...variant.differences, "potential-level-expression"],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  if (semantics?.kind === "stacked-mechanism-correction") {
-    // 防漂移：原始与规范化记录都必须仍是登记过的“固定单次”编码且数值一致；
-    // 上游修正或记录漂移时拒绝生成，不静默按层编译另一份含义。
-    for (const [label, document] of [
-      ["raw", record.raw],
-      ["normalized", record.normalized],
-    ] as const) {
-      if (
-        document === undefined ||
-        document.kind !== "fixed" ||
-        document.stackable !== false ||
-        document.maxStacks !== 1 ||
-        document.valuePerStack !== 0 ||
-        document.value !== semantics.expectedSourceValue
-      )
-        throw new Error(
-          `Stacked mechanism correction expects the registered fixed encoding at ${record.pointer} (${label}): value=${semantics.expectedSourceValue}, maxStacks=1`,
-        )
-    }
-    // 按层编译：每层值保持来源 value（描述的单层百分比），激活层数上限改用
-    // 登记值；条件、稳定 effectId / optionId 与参数表不动。
-    variant = {
-      ...variant,
-      status: "corrected",
-      maximumLayers: semantics.maximumLayers,
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  if (semantics?.kind === "explicit-selection-state") {
-    variant = {
-      ...variant,
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  if (semantics?.kind === "named-source-discrepancy") {
-    // 遵循来源字段转换，只登记字段与说明文字的具名差异；状态条件仍由选择断言。
-    variant = {
-      ...variant,
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  if (semantics?.kind === "developer-revised-stat") {
-    // 开发者修订后的字段映射已在映射查找前生效；这里登记修正状态、具名
-    // 差异与修订证据。原始 stat、原值与固定源 Pointer 保留在覆盖报告和
-    // 第一条 reference 中，修订证据独立成来源，不伪装成固定提交的一部分。
-    variant = {
-      ...variant,
-      status: "corrected",
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) => developerRevisionReference(ref)),
-      ],
-    }
-  }
+  const beforeOperationVariant =
+    semantics === undefined
+      ? undefined
+      : semanticsHandler?.applyBeforeOperation?.(expressionContext, semantics)
+  if (beforeOperationVariant) return { variant: beforeOperationVariant }
+  expression = expressionContext.expression
   if (mapping.basePercentage)
     expression = {
       kind: "multiply",
@@ -3238,771 +4364,45 @@ function compile(
       value: expression,
       coefficient: literal("multiplier", -1),
     }
-  let operation = mapping.stat
-    ? {
-        kind: "stat-adjustment",
-        stat: mapping.stat,
-        stage: mapping.stage,
-        value: expression,
-      }
-    : {
-        kind: "factor-contribution",
-        channel: mapping.channel,
-        value: expression,
-      }
-  if (variant.mechanism?.kind === "luminize-proficiency-mapping")
+  let operation = (
+    mapping.stat
+      ? {
+          kind: "stat-adjustment",
+          stat: mapping.stat,
+          stage: mapping.stage,
+          value: expression,
+        }
+      : {
+          kind: "factor-contribution",
+          channel: mapping.channel,
+          value: expression,
+        }
+  ) as ContributionOperation
+  if (
+    expressionContext.variant.mechanism?.kind === "luminize-proficiency-mapping"
+  )
     operation = {
       kind: "factor-contribution",
       channel: "luminize-proficiency-input",
       value: expression,
-    }
-  const potentialGate =
-    semantics?.kind === "potential-branch"
-      ? semantics.minimumPotential
-      : semantics?.kind === "potential-level"
-        ? semantics.minimumPotential
-        : semantics?.kind === "damage-item-targeting" &&
-            semantics.minimumPotential !== undefined
-          ? semantics.minimumPotential
-          : undefined
+    } as ContributionOperation
+  const potentialGate = sourceOverrides.potentialGate
   let when = whenFor(e, mapping, record, supplemental)
-  if (semantics?.kind === "attribute-anomaly-beneficiary-scope") {
-    // 来源记录未编码块 note 与 Nanoka 同文已明确的受益职业与伤害类别：
-    // general 会放行全部伤害种类，且只有 applyProfession 非空才检查职业。
-    // 记录出现任一与登记不符的编码时拒绝生成，不静默叠加或改写。
-    if (
-      !isGeneralScope(e.scope) ||
-      e.conditions?.damageTypes !== undefined ||
-      e.applyTarget !== "team" ||
-      (e.applyProfession ?? "").trim() !== ""
-    )
-      throw new Error(
-        `Source field already encodes the beneficiary scope at ${record.pointer}: scope=${e.scope}, applyTarget=${e.applyTarget}, applyProfession=${String(e.applyProfession)}`,
-      )
-    when = {
-      kind: "all",
-      conditions: [when, oneOf("hit.damageKind", [...semantics.damageKinds])],
-    }
-    variant = {
-      ...variant,
-      status: "corrected",
-      applicability: {
-        ...variant.applicability,
-        beneficiaryProfession: semantics.profession,
-      },
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
+  const contributionContext: SemanticsContributionContext = {
+    ...expressionContext,
+    variant: expressionContext.variant,
+    parameters: expressionContext.parameters,
+    requirements: expressionContext.requirements,
+    expression,
+    conversionInput: expressionContext.conversionInput,
+    operation,
+    when,
   }
-  if (semantics?.kind === "explicit-element-scope") {
-    // 上游 elementFilter=all 未编码正式文本的元素限制：补显式元素条件。
-    when = {
-      kind: "all",
-      conditions: [when, oneOf("hit.element", [semantics.element])],
-    }
-    variant = {
-      ...variant,
-      status: "corrected",
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  if (semantics?.kind === "settlement-element-scope") {
-    // 上游 elementFilter 只登记了目录实体固有元素（ice），而同分支结算证据
-    // （烈霜按冰属性结算伤害与增益）与正式动作目录证明该条款必须覆盖 frost
-    // 命中：保留登记元素并显式追加补充元素。元素条件来自 whenFor 的
-    // elementFilter 展开（self + 数组过滤），按事实改写该 one-of 的值集；
-    // 找不到登记元素条件即拒绝（编码守卫已核对 elementFilter，此处缺失
-    // 说明展开逻辑漂移，不能静默跳过）。
-    if (when.kind !== "all") {
-      throw new Error(
-        `Settlement element scope correction ${semantics.differenceId} expected an element condition at ${record.pointer}; the when shape drifted`,
-      )
-    }
-    const expectedElements = (record.raw.elementFilter as readonly string[])
-      .map((element) => elementMap[element]!)
-      .filter((element) => element !== "lumiflux")
-    const elementIndex = when.conditions.findIndex(
-      (condition) =>
-        condition.kind === "one-of" &&
-        condition.fact === "hit.element" &&
-        JSON.stringify(condition.values) === JSON.stringify(expectedElements),
-    )
-    if (elementIndex < 0)
-      throw new Error(
-        `Settlement element scope correction ${semantics.differenceId} lost the registered element condition ${JSON.stringify(expectedElements)} at ${record.pointer}`,
-      )
-    const conditions = [...when.conditions]
-    conditions[elementIndex] = oneOf("hit.element", [
-      ...new Set([...expectedElements, semantics.additionalElement]),
-    ])
-    when = { kind: "all", conditions }
-    variant = {
-      ...variant,
-      status: "corrected",
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  if (semantics?.kind === "damage-kind-scope-correction") {
-    // stat 的全局映射覆盖了比块 note 更宽的伤害种类：保留记录、数值、
-    // 通道与稳定 ID，只按登记收窄已经生成的 hit.damageKind 条件。找不到
-    // 登记集合即拒绝（编码守卫已核对 stat/value，此处缺失说明映射漂移，
-    // 不能静默跳过或把范围留宽）。
-    when = narrowDamageKindCondition(
-      when,
-      semantics,
-      semantics.differenceId,
-      record.pointer,
-    )
-    variant = {
-      ...variant,
-      status: "corrected",
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        variant.references[0],
-        ...new Map(
-          [
-            ...variant.references.slice(1),
-            ...semantics.evidence.map((ref) =>
-              nanokaReference(ref.path, ref.pointer),
-            ),
-          ].map((ref) => [JSON.stringify(ref), ref]),
-        ).values(),
-      ],
-    }
-  }
-  if (
-    semantics?.kind === "potential-level" &&
-    semantics.damageKindScope !== undefined
-  ) {
-    // 潜能档位记录与伤害种类收窄组合：档位参数已在前面应用，这里只收窄
-    // 同一记录的 hit.damageKind；证据已由 potential-level 分支登记。
-    when = narrowDamageKindCondition(
-      when,
-      semantics.damageKindScope,
-      semantics.damageKindScope.differenceId,
-      record.pointer,
-    )
-    variant = {
-      ...variant,
-      status: "corrected",
-      differences: [
-        ...variant.differences,
-        semantics.damageKindScope.differenceId,
-      ],
-    }
-  }
-  if (semantics?.kind === "stagger-recovery-settlement") {
-    // 移除 applySituation: stagger 带来的 targetState 条件；
-    // 是否失衡仍独立影响实际失衡乘区（由其他规则照常表达）。
-    if (when.kind === "all") {
-      const filtered = when.conditions.filter(
-        (condition) =>
-          !(
-            condition.kind === "one-of" && condition.fact === "hit.targetState"
-          ),
-      )
-      when = { kind: "all", conditions: filtered }
-    }
-    variant = {
-      ...variant,
-      status: "corrected",
-      differences: [...variant.differences, "stagger-recovery-settlement"],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  // [颤音：改]共存排除（批次 09）：独立登记的记录或声明扩展字段的
-  // stagger-recovery 记录都追加对独立结算目标的排除——携带该目标的命中
-  // 不吃本普通颤音贡献，普通颤音结算保持原行为；防漂移校验已在 compile
-  // 开头先行执行。
-  {
-    const exclusion =
-      semantics?.kind === "exclude-settlement-target"
-        ? semantics
-        : semantics?.kind === "stagger-recovery-settlement"
-          ? semantics.vibratoModifiedExclusion
-          : undefined
-    if (exclusion !== undefined) {
-      when = {
-        kind: "all",
-        conditions: [
-          when,
-          {
-            kind: "not",
-            condition: oneOf("hit.skillTag", [
-              `zzz-hp:skill:${exclusion.excludedTargetId}`,
-            ]),
-          },
-        ],
-      }
-      variant = {
-        ...variant,
-        status: "corrected",
-        differences: [...variant.differences, exclusion.differenceId],
-        // 扩展字段路径的证据引用已由 stagger-recovery 处理器随完整
-        // evidence 数组追加；独立登记路径在此追加自己的证据引用。
-        references:
-          semantics?.kind === "exclude-settlement-target"
-            ? [
-                ...variant.references,
-                ...semantics.evidence.map((ref) =>
-                  nanokaReference(ref.path, ref.pointer),
-                ),
-              ]
-            : variant.references,
-      }
-    }
-  }
-  if (semantics?.kind === "flat-energy-regen") {
-    variant = {
-      ...variant,
-      status: "corrected",
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  if (semantics?.kind === "trigger-conditions-not-benefit-scope") {
-    // 触发条件不是受益筛选：先核对来源编码未漂移，再移除登记的命中条件。
-    for (const [label, document] of [
-      ["raw", record.raw],
-      ["normalized", record.normalized],
-    ] as const) {
-      if (document === undefined)
-        throw new Error(
-          `Trigger scope correction lost the ${label} record at ${record.pointer}`,
-        )
-      if (
-        JSON.stringify(document.elementFilter) !==
-        JSON.stringify(semantics.expectedElementFilter)
-      )
-        throw new Error(
-          `Trigger scope correction expects elementFilter ${JSON.stringify(semantics.expectedElementFilter)} at ${record.pointer} (${label})`,
-        )
-      const categories = (document.skillTargets ?? []).map((t) => t.category)
-      if (
-        JSON.stringify(categories) !==
-        JSON.stringify(semantics.expectedSkillTargetCategories)
-      )
-        throw new Error(
-          `Trigger scope correction expects skill target categories ${JSON.stringify(semantics.expectedSkillTargetCategories)} at ${record.pointer} (${label})`,
-        )
-    }
-    const conditions = when.kind === "all" ? when.conditions : [when]
-    let removedElementConditions = 0
-    let removedSkillTargetConditions = 0
-    const keptConditions = conditions.filter((condition) => {
-      if (
-        semantics.removeElementCondition &&
-        condition.kind === "one-of" &&
-        condition.fact === "hit.element"
-      ) {
-        removedElementConditions += 1
-        return false
-      }
-      if (
-        semantics.removeSkillTargetConditions &&
-        condition.kind === "any" &&
-        condition.conditions.every(
-          (child) =>
-            child.kind === "all" &&
-            child.conditions.every(
-              (leaf) => leaf.kind === "one-of" && leaf.fact === "hit.skillTag",
-            ),
-        )
-      ) {
-        removedSkillTargetConditions += 1
-        return false
-      }
-      return true
-    })
-    if (
-      (semantics.removeElementCondition &&
-        semantics.expectedElementFilter !== "all" &&
-        removedElementConditions !== 1) ||
-      (semantics.removeSkillTargetConditions &&
-        semantics.expectedSkillTargetCategories.length > 0 &&
-        removedSkillTargetConditions !== 1)
-    )
-      throw new Error(
-        `Trigger scope correction did not find the registered trigger conditions at ${record.pointer}`,
-      )
-    when = { kind: "all", conditions: keptConditions }
-    variant = {
-      ...variant,
-      status: "corrected",
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  if (semantics?.kind === "beneficiary-target-correction") {
-    // 受益对象纠错：来源 applyTarget 与块 note / Nanoka 同文矛盾；规则
-    // beneficiary 与目录 target 同步按登记修正，其余条件与数值不变。
-    for (const [label, document] of [
-      ["raw", record.raw],
-      ["normalized", record.normalized],
-    ] as const) {
-      if (document === undefined)
-        throw new Error(
-          `Beneficiary target correction lost the ${label} record at ${record.pointer}`,
-        )
-      if (document.applyTarget !== semantics.expectedApplyTarget)
-        throw new Error(
-          `Beneficiary target correction expects applyTarget ${semantics.expectedApplyTarget} at ${record.pointer} (${label}), found ${document.applyTarget}`,
-        )
-      const actual =
-        document.kind === "stacked" || document.stackable === true
-          ? (document.valuePerStack ?? document.value)
-          : document.value
-      if (actual !== semantics.expectedSourceValue)
-        throw new Error(
-          `Beneficiary target correction expects ${semantics.expectedSourceValue} at ${record.pointer} (${label}), found ${String(actual)}`,
-        )
-    }
-    variant = {
-      ...variant,
-      status: "corrected",
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  if (semantics?.kind === "skill-target-scope-correction") {
-    // 普攻目标范围修正：上游把“普通攻击”收窄到单个子类；effectiveSourceEffect
-    // 已按登记替换目标，这里只记录 corrected 状态与证据。
-    variant = {
-      ...variant,
-      status: "corrected",
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  if (semantics?.kind === "refinement-value-description") {
-    // 共享说明只描述精炼 1（T01）：块 note 漂移即拒绝；说明由选项组装覆盖。
-    if (record.blockNote !== semantics.expectedBlockNote)
-      throw new Error(
-        `Refinement-value-description block note drift at ${record.pointer}: ${JSON.stringify(record.blockNote)}`,
-      )
-    variant = {
-      ...variant,
-      status: "corrected",
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  if (semantics?.kind === "hit-scope-direct-stat-input") {
-    // 防漂移：原始与规范化记录都必须仍是登记的来源编码；上游修正或漂移
-    // 时拒绝生成，不静默把另一份含义编译成命中局部属性。
-    for (const [label, document] of [
-      ["raw", record.raw],
-      ["normalized", record.normalized],
-    ] as const) {
-      if (document === undefined)
-        throw new Error(
-          `Hit-scope direct-stat correction lost the ${label} record at ${record.pointer}`,
-        )
-      for (const [field, value] of Object.entries(semantics.expectedEncoding)) {
-        const actual =
-          field === "scope"
-            ? effectiveSourceScope(document)
-            : document[field as keyof SourceEffect]
-        const expected =
-          field === "scope" && typeof value === "string"
-            ? effectiveSourceScope({ scope: value })
-            : value
-        if (JSON.stringify(actual) !== JSON.stringify(expected))
-          throw new Error(
-            `Hit-scope direct-stat correction ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(actual)}`,
-          )
-      }
-    }
-    // 层数编码废除：参数改为空，数值由显式输入按登记上下限钳制；激活层数
-    // 上限取登记值，旧层数用法在目录层被拒绝并由具名差异说明迁移。
-    const inputName = `${effectId}:source`
-    for (const key of Object.keys(parameters)) delete parameters[key]
-    requirements.push({
-      name: inputName,
-      unit: "ratio",
-      description: semantics.inputDescription,
-    })
-    operation = {
-      kind: "stat-adjustment",
-      stat: semantics.stat,
-      stage: "direct",
-      value: {
-        kind: "minimum",
-        unit: "ratio",
-        operands: [
-          {
-            kind: "maximum",
-            unit: "ratio",
-            operands: [
-              literal("ratio", semantics.minimum),
-              { kind: "input", unit: "ratio", name: inputName },
-            ],
-          },
-          literal("ratio", semantics.maximum),
-        ],
-      },
-    } as typeof operation
-    variant = {
-      ...variant,
-      status: "corrected",
-      maximumLayers: semantics.maximumLayers,
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  if (semantics?.kind === "complete-state-elation") {
-    // 原始/规范化存在性、登记编码与块 note 关键条款已在 compile 入口由
-    // verifyRegisteredCompleteStateRecord 校验（早于任何通用 unsupported 降级）；
-    // 这里只补需要映射信息的每层基础增益核对。
-    // 每层基础增益必须与来源记录一致（M0 1.25%、影画 2 复制记录 0.25%）。
-    const registeredPerLayerGain =
-      (record.normalized ?? record.raw).kind === "stacked"
-        ? ((record.normalized ?? record.raw).valuePerStack ??
-            (record.normalized ?? record.raw).value) * mapping.scale
-        : undefined
-    if (
-      semantics.role === "base" &&
-      registeredPerLayerGain !== semantics.perLayerGain
-    )
-      throw new Error(
-        `Complete-state elation per-layer gain drift at ${record.pointer}: ${String(registeredPerLayerGain)} != ${semantics.perLayerGain}`,
-      )
-    variant = {
-      ...variant,
-      // 旧选项不再接受独立选择：四条记录都迁移为带说明的语义冲突入口，
-      // 由完整状态选项统一取代（基础记录改写出的规则只由完整状态引用）。
-      status: "unsupported",
-      reason: "semantic-conflict",
-      explanation: `该来源记录是[昂扬]完整状态的一部分，已被完整状态选项取代：块 note 与 Nanoka 同文说明[昂扬]总增益按同一层数与同一获得时冲击力整体计算（影画 2 的 120% 是同一状态的比例强化）。请改选昂扬 · 完整状态；本记录不再单独生成按层增益。来源 ${record.pointer}。`,
-      effectIds: [],
-      maximumLayers: semantics.role === "base" ? 1 : variant.maximumLayers,
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-    if (semantics.role === "base") {
-      // 完整状态表达式：min(maximum, (perLayerGain + max(0, 冲击力 − 阈值)
-      // × perPointGain) × 层数)；层数由目录按登记的 count 输入名派生。
-      const unit = mapping.unit
-      const impactInput: NumericExpression<Unit, "contribution"> = {
-        kind: "input",
-        unit: "impact-points",
-        name: semantics.impactInputName,
-      }
-      // 完整状态按正文表达“冰属性伤害和火属性伤害”受益：命中元素条件显式
-      // 编入规则本身（目录 guard 的元素过滤只对持续通道启用，这里是命中
-      // 局部的通用增伤，必须在 when 里限制）；登记的补充命中元素（烈霜按
-      // 冰属性结算）一并覆盖，命中枚举本身保持精确比较。
-      const completeElementFilter = record.raw.elementFilter
-      if (
-        record.raw.applyTarget === "team" &&
-        Array.isArray(completeElementFilter) &&
-        completeElementFilter.length > 0
-      )
-        when = {
-          kind: "all",
-          conditions: [
-            when,
-            oneOf("hit.element", [
-              ...new Set([
-                ...completeElementFilter.map((element) => elementMap[element]!),
-                ...semantics.additionalHitElements,
-              ]),
-            ]),
-          ],
-        }
-      // 完整状态表达式：min(0.75, (0.0125 + max(0, 冲击力 − 170) × 每点
-      // 0.00025) × 层数)；参数用规范单位字面量，不经过来源百分数缩放。
-      // 阈值在表达式里以负数常量参与 add：登记的阈值是点数值（170）。
-      parameters["threshold"] = {
-        kind: "constant",
-        unit: "impact-points",
-        value: -semantics.threshold,
-      }
-      Object.assign(operation, {
-        kind: "factor-contribution",
-        channel: mapping.channel!,
-        value: {
-          kind: "minimum",
-          unit,
-          operands: [
-            literal(unit, semantics.maximum),
-            {
-              kind: "multiply",
-              unit,
-              value: {
-                kind: "add",
-                unit,
-                operands: [
-                  literal(unit, semantics.perLayerGain),
-                  {
-                    kind: "convert",
-                    unit,
-                    input: {
-                      kind: "maximum",
-                      unit: "impact-points",
-                      operands: [
-                        literal("impact-points", 0),
-                        {
-                          kind: "add",
-                          unit: "impact-points",
-                          operands: [
-                            impactInput,
-                            param("impact-points", "threshold"),
-                          ],
-                        },
-                      ],
-                    },
-                    rate: literal("multiplier", semantics.perPointGain),
-                  },
-                ],
-              },
-              coefficient: {
-                kind: "convert",
-                unit: "multiplier",
-                input: {
-                  kind: "input",
-                  unit: "count",
-                  name: semantics.layerCountInputName,
-                },
-                rate: literal("multiplier", 1),
-              },
-            },
-          ],
-        },
-      })
-      requirements.push({
-        name: semantics.impactInputName,
-        unit: "impact-points",
-        description:
-          "莱特获得[昂扬]时的冲击力（显式快照读数，手工输入）；与同一状态的其余部分共用同一读数，不使用预设或当前面板",
-      })
-    }
-  }
-  if (semantics?.kind === "triggered-state-not-benefit-condition") {
-    // 防漂移：登记字段的来源编码变化即拒绝；进入失衡只是触发事实。
-    for (const [label, document] of [
-      ["raw", record.raw],
-      ["normalized", record.normalized],
-    ] as const) {
-      if (document === undefined)
-        throw new Error(
-          `Triggered-state correction lost the ${label} record at ${record.pointer}`,
-        )
-      if (document.applySituation !== semantics.expectedApplySituation)
-        throw new Error(
-          `Triggered-state correction expects applySituation ${semantics.expectedApplySituation} at ${record.pointer} (${label}), found ${String(document.applySituation)}`,
-        )
-      if (
-        document.stat !== semantics.expectedStat ||
-        document.value !== semantics.expectedValue
-      )
-        throw new Error(
-          `Triggered-state correction expects ${semantics.expectedStat} ${semantics.expectedValue} at ${record.pointer} (${label}), found ${document.stat} ${String(document.value)}`,
-        )
-    }
-    // 移除 applySituation: stagger 派生的目标当前失衡条件；限时状态是否仍
-    // 有效由调用方显式选择 supplied 实例声明，当前失衡但未声明不自动获得。
-    if (when.kind === "all") {
-      const filtered = when.conditions.filter(
-        (condition) =>
-          !(
-            condition.kind === "one-of" && condition.fact === "hit.targetState"
-          ),
-      )
-      when = { kind: "all", conditions: filtered }
-    }
-    variant = {
-      ...variant,
-      status: "corrected",
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  if (semantics?.kind === "exclude-skill-target-scope") {
-    // 具名倍率范围修正：倍率只描述具名技能，固定来源编为整个技能大类。
-    // 防漂移核对（完整 skillTargets 元组与核心块冻结 note）已在 compile
-    // 开头先行执行并早于通用 unsupported 降级；此处只追加对登记独立目标
-    // 的排除——普通大类命中保持原行为（25% 照常），携带独立目标的命中
-    // 不再放大。
-    when = {
-      kind: "all",
-      conditions: [
-        when,
-        {
-          kind: "not",
-          condition: oneOf("hit.skillTag", [
-            `zzz-hp:skill:${semantics.excludedTargetId}`,
-          ]),
-        },
-      ],
-    }
-    variant = {
-      ...variant,
-      status: "corrected",
-      differences: [...variant.differences, semantics.differenceId],
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-  }
-  if (semantics?.kind === "damage-item-targeting") {
-    const requirement = semantics.requirement
-    // 倍率只作用于声明身份的伤害项：由 itemIds 精确绑定，缺项时求值层报 MISSING_REFERENCE。
-    operation = {
-      kind: "hit-adjustment",
-      field: "damageMultiplier",
-      operator: "add",
-      itemIds: [requirement.itemId],
-      value: expression as NumericExpression<"multiplier", "contribution">,
-    } as unknown as typeof operation
-    variant = {
-      ...variant,
-      ...(semantics.minimumPotential === undefined
-        ? {}
-        : {
-            configuration: {
-              ...variant.configuration,
-              potentialLevels: [1, 2, 3, 4, 5, 6] as PotentialLevel[],
-            },
-            differences: [...variant.differences, "potential-branch-gate"],
-          }),
-      mechanism: {
-        kind: "independent-settlement",
-        damageItemRequirements: [
-          {
-            itemId: requirement.itemId,
-            stat: requirement.stat,
-            role: requirement.role,
-            allowedModes: [...requirement.allowedModes],
-            source: requirement.source,
-            ...(requirement.originalAnomalyAttribute === undefined
-              ? {}
-              : {
-                  originalAnomalyAttribute:
-                    requirement.originalAnomalyAttribute,
-                }),
-            ...(requirement.requiredDirectMultiplier === undefined
-              ? {}
-              : {
-                  requiredDirectMultiplier:
-                    requirement.requiredDirectMultiplier,
-                }),
-            ...(requirement.requiredSkillCategory === undefined
-              ? {}
-              : { requiredSkillCategory: requirement.requiredSkillCategory }),
-          },
-        ],
-      },
-      references: [
-        ...variant.references,
-        ...semantics.evidence.map((ref) =>
-          nanokaReference(ref.path, ref.pointer),
-        ),
-      ],
-    }
-    if (semantics.independentHit) {
-      // 独立命中契约：规则只匹配声明的独立目标、证据元素与既有伤害种类，
-      // 普通动作上下文（不含该目标）不能借用独立项；目录同时登记目标条目。
-      // 来源 elementFilter 已注入的元素条件不重复追加。
-      const independentHit = semantics.independentHit
-      const conditions = when.kind === "all" ? when.conditions : [when]
-      const hasElementCondition = conditions.some(
-        (condition) =>
-          condition.kind === "one-of" &&
-          condition.fact === "hit.element" &&
-          condition.values.length === 1 &&
-          condition.values[0] === independentHit.element,
-      )
-      when = {
-        kind: "all",
-        conditions: [
-          ...conditions,
-          oneOf("hit.skillTag", [`zzz-hp:skill:${independentHit.targetId}`]),
-          ...(hasElementCondition
-            ? []
-            : [oneOf("hit.element", [independentHit.element])]),
-        ],
-      }
-      variant = {
-        ...variant,
-        differences: [...variant.differences, "independent-hit-contract"],
-      }
-      if (identity)
-        declaredSkillTargets.push({
-          targetId: `zzz-hp:skill:${independentHit.targetId}`,
-          upstreamId: null,
-          agentEntityId: identity.entityId,
-          category: independentHit.category,
-          name: independentHit.name,
-          countsAsFollowUp: false,
-        })
-    }
-  }
+  const afterOperationVariant =
+    semantics === undefined
+      ? undefined
+      : semanticsHandler?.applyAfterOperation?.(contributionContext, semantics)
+  if (afterOperationVariant) return { variant: afterOperationVariant }
   if (
     record.entityId === "remiel" &&
     Array.isArray(e.elementFilter) &&
@@ -4018,51 +4418,54 @@ function compile(
       kind: "all",
       conditions: [when, oneOf("hit.element", ["lumiflux"])],
     }
-    variant = {
-      ...variant,
+    contributionContext.when = when
+    contributionContext.variant = {
+      ...contributionContext.variant,
       status: "corrected",
-      differences: [...variant.differences, "luminize-explicit-element"],
+      differences: [
+        ...contributionContext.variant.differences,
+        "luminize-explicit-element",
+      ],
     }
   }
+  const finalizedVariant =
+    semantics === undefined
+      ? undefined
+      : semanticsHandler?.finalize?.(contributionContext, semantics)
+  if (finalizedVariant) return { variant: finalizedVariant }
   // 被完整状态取代的来源记录不再生成可执行贡献：只有 unsupported 迁移
   // 入口（variant）与覆盖报告去向保留，旧 effectId 在规则集里不存在。
-  if (
-    semantics?.kind === "complete-state-elation" &&
-    semantics.role === "replaced"
-  )
-    return { variant }
   return {
-    variant,
+    variant: contributionContext.variant,
     rule: {
       kind: "contribution",
       effectId,
       source: {
         identity,
         section: record.blockName,
-        references: variant.references,
+        references: contributionContext.variant.references,
       },
       config: withPotentialGate(configFor(record), potentialGate),
-      parameters,
+      parameters: contributionContext.parameters,
       activation: {
         kind: "supplied",
         maximumLayers: literal(
           "count",
-          semantics?.kind === "hugo-stun-teammate-count"
-            ? 1
-            : variant.maximumLayers,
+          sourceOverrides.activationMaximumLayers ??
+            contributionContext.variant.maximumLayers,
         ),
       },
       scope:
         mapping.stat &&
         isGeneralScope(e.scope) &&
-        !JSON.stringify(when).includes("hit.")
+        !JSON.stringify(contributionContext.when).includes("hit.")
           ? "entity"
           : "hit",
       beneficiary: {
         kind: effectiveApplyTarget(record) === "team" ? "team" : "holder",
       },
-      when,
-      operation: operation as ContributionOperation,
+      when: contributionContext.when,
+      operation: contributionContext.operation,
     } as ContributionRule,
   }
 }
