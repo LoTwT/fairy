@@ -1071,18 +1071,27 @@ describe("Velina Condensed Cyclone convention", () => {
       kind: "unavailable",
       issues: [{ code: "unknown-element" }],
     })
-    for (const [id, suffix] of [
-      ["1221", "0018"],
-      ["1221", "0024"],
-      ["1451", "0025"],
+    for (const [id, suffix, upstreamSkillId] of [
+      ["1221", "0018", "sk-yanagi-nk-1221016-额外附加"],
+      ["1221", "0024", "sk-yanagi-nk-1221022-额外附加"],
+      ["1451", "0025", "sk-lucia-nk-1451011-合唱-额外"],
     ] as const) {
       const other = await agent(id)
-      expect(
-        other.actions.find(
-          (entry) => entry.actionId === `action:agent:${id}:action:${suffix}`,
-        )!.calculation.kind,
-      ).toBe("unavailable")
+      const action = other.actions.find(
+        (entry) => entry.actionId === `action:agent:${id}:action:${suffix}`,
+      )!
+      expect(action.calculation.kind).toBe("unavailable")
+      expect(action.upstreamSkillId).toBe(upstreamSkillId)
     }
+  })
+
+  it("does not fabricate actions for source-only procs or the isolated Anby subcategory", async () => {
+    const burnice = await agent("1171")
+    expect(burnice.actions.some((entry) => entry.name.includes("余烬"))).toBe(
+      false,
+    )
+    const anby = await agent("1011")
+    expect(JSON.stringify(anby)).not.toContain("1011-basic-mvhir0y7")
   })
 })
 

@@ -93,7 +93,7 @@ const expectedCurrentSnapshotIds = [
   "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b",
   "sha256:9f56c4647bb6d33bdafe084134fa12a125e988cfb4f80300e5738035f4c36be2",
   "sha256:0d5a9837cb2f93ad874693aad41c6682edbdeadcb016b09c8818ebfd46997165",
-  "sha256:faad0c75d86773f6070daa9f4516efbf9186a81a4e37a308210a4b5bebd435e7",
+  "sha256:7a4206e5e1e1d1f1dfb7318d3ddc967754caf3d89011eab4ab9aab0e7d121198",
 ] as const
 
 /** 本次逐条核对过的 static-effects 制品摘要；entry 5 保留 PR-D 改写前的 catalog 值，entry 6 记录本次刷新前的字节。 */

@@ -1,4 +1,4 @@
-**当前状态（静态 effects 修订 56；技能目录 D6-1/技能修订 52）**：固定 ZZZ-HP 来源已切换到 `991bb0e`，Nanoka 参考版本为 `3.3.12+19634983`，计算数据 `gameVersion` 为 3.3。以下静态效果计数读取自 `static.json`、`static-catalog.json` 与 `static-coverage.json` 的实际制品：正式覆盖报告包含 196 个实体（195 个来源实体 + 1 个占位实体 `w-engines:none`）、1,118 个 pack（397 个空 pack）、1,375 条原始效果，生成 931 条规则与 1,002 个选择项。覆盖状态按两个粒度分别记录：coverage 记录为 1,149 条 converted、134 条 corrected、92 条 unsupported（共 1,375 条）；catalog 变体为 1,217 条 converted、140 条 corrected、126 条 unsupported（共 1,483 个）。两组口径不同：catalog 变体包含 101 个仅引用补充来源的变体与 6 个合并的完整状态变体，因此总数与 coverage 记录不同。补充来源共 102 条（68 条已整合、34 条越界登记），生成 72 条规则与 63 个选择项。D4 补充生成层与四个实体转换文件已移除，菲欧妮/赛维里安等改由固定来源记录直接转换；D4 冻结证据仅保留为仍在使用来源修正的溯源材料，不进入发布制品。技能修订 52（D6-1）补齐赛维里安（1631）与菲欧妮（1641）各 20 条动作，技能覆盖为 62 名成员、1,348 条动作；以下历史段落保留当时状态供追溯。
+**当前状态（静态 effects 修订 56；技能目录 991bb0e/技能修订 53）**：固定 ZZZ-HP 来源已切换到 `991bb0e`，Nanoka 参考版本为 `3.3.12+19634983`，计算数据 `gameVersion` 为 3.3。以下静态效果计数读取自 `static.json`、`static-catalog.json` 与 `static-coverage.json` 的实际制品：正式覆盖报告包含 196 个实体（195 个来源实体 + 1 个占位实体 `w-engines:none`）、1,118 个 pack（397 个空 pack）、1,375 条原始效果，生成 931 条规则与 1,002 个选择项。覆盖状态按两个粒度分别记录：coverage 记录为 1,149 条 converted、134 条 corrected、92 条 unsupported（共 1,375 条）；catalog 变体为 1,217 条 converted、140 条 corrected、126 条 unsupported（共 1,483 个）。两组口径不同：catalog 变体包含 101 个仅引用补充来源的变体与 6 个合并的完整状态变体，因此总数与 coverage 记录不同。补充来源共 102 条（68 条已整合、34 条越界登记），生成 72 条规则与 63 个选择项。D4 补充生成层与四个实体转换文件已移除，菲欧妮/赛维里安等改由固定来源记录直接转换；D4 冻结证据仅保留为仍在使用来源修正的溯源材料，不进入发布制品。技能修订 52（D6-1）补齐赛维里安（1631）与菲欧妮（1641）各 20 条动作，技能覆盖为 62 名成员、1,348 条动作；以下历史段落保留当时状态供追溯。
 
 # ZZZ-HP 静态增益数据接入
 
@@ -2385,8 +2385,8 @@ effectId、optionId、来源引用与 `integrated` 归档不变。
 赛维里安（1631）与菲欧妮（1641）的动作目录从冻结 Nanoka `3.3.12+19634983`
 的 `agents/1631/details.zh.json`、`agents/1641/details.zh.json` 补齐，各 20 条。
 1631 为风属性，1641 为火属性；两人的三组招架支援仍以仅失衡动作发布，M3/M5
-五类技能等级 +2 按 `/talent/3/desc` 与 `/talent/5/desc` 逐角色核验。固定技能来源
-`0df40c5bc38f8da7ed0f9eed6be87fb8155b8357` 早于这两个实体，未登记对应技能行，
+五类技能等级 +2 按 `/talent/3/desc` 与 `/talent/5/desc` 逐角色核验。D6-1 补目录时使用的
+技能来源 `0df40c5bc38f8da7ed0f9eed6be87fb8155b8357` 早于这两个实体，未登记对应技能行，
 因此全部动作的 `upstreamSkillId` 为 `null`；1631 的登场技采用通用 assist 登场技
 直伤约定，1641 的焚罪/烬火追魂只登记直接伤害行，同段 `{CAL}` 异放倍率作为独立
 结算限制保留，不并入直接伤害。
@@ -2402,6 +2402,14 @@ effectId、optionId、来源引用与 `integrated` 归档不变。
   `integrated`、static effects 与规则 revision 51 不变。
 - **验收**：data unit 4,155 条、integration 425 条通过；core 5,248 条通过，
   D4 覆盖层的 24 条旧测试继续以 `describe.skip` 保留，待其 overlay 选项契约重建后恢复。
+
+## 技能修订 53：991bb0e 技能证据升级
+
+技能证据从 `0df40c5b` 切换到 `991bb0e`，六个固定资源摘要与 manifest evidence 更新。柳的
+`action:agent:1221:action:0018`、`0024` 与卢西娅的 `action:agent:1451:action:0025` 三条额外结算动作
+回填新的 `upstreamSkillId`，但仍保持 `unavailable`；Burnice 的[余烬]触发段与安比孤立子类
+`1011-basic-mvhir0y7` 不生成动作。动作数仍为 1,348，规则版本升为 `agent-actions/3`。详细裁定见
+[技能来源 991bb0e 升级](../../plans/skill-source-991bb0e-upgrade.md)。
 
 ## 修订 51：D5-2 固定源切换与 D4 补充层移除（批次 32）
 
