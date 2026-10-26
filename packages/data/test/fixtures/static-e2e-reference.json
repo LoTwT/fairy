@@ -1,14 +1,14 @@
 {
   "provenance": {
     "repository": "LoTwT/ZZZ-HP",
-    "commit": "2628b32cece086e371bafa05518a9a12650d9f74",
+    "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
     "fairyBaseline": "bae8aaa278632e731440e29d22fe38067c8fb99b",
     "gameVersion": "3.3",
     "method": "Pinned upstream pure functions + independently reproduced direct-damage and sharpen chains; precise Nanoka inputs, explicit Ben and Claret permanent-conversion supplements and existing Astra M2 correction. Not the upstream application.",
     "resources": [
       {
         "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-        "sha256": "c9bc4cfdb0cf3117c56885e1afa4afd3ac9dc81aa0282119f0c64a27f19e5b01"
+        "sha256": "f1df0144ee962138cd09dbdd36511eab46fb3d6016ec638ddab7fc4a01737095"
       },
       {
         "path": "zzz-hp/src/utils/calculatorUi.ts",
@@ -40,7 +40,7 @@
       },
       {
         "path": "zzz-hp/src/utils/calcNumberFormat.ts",
-        "sha256": "1e8b3a819df03de2911f210988501f3d8ae47d7abf05c2d9558a7e6c7478c03a"
+        "sha256": "21ca4409aed25475f3d3f883f9ffd728dd702aaf763c846f14431a95f111962c"
       },
       {
         "path": "zzz-hp/src/utils/buffEffect.ts",

@@ -5912,6 +5912,44 @@ const astraYaoMindscape4QuickAssistDamage: Supplement = {
   },
 }
 
+/**
+ * 安比影画 2 同句的失衡值部分：强化特殊技命中未失衡敌人时，招式造成的
+ * 失衡值提升 10%。失衡值不在当前静态伤害计算承诺内，登记为不可选声明。
+ */
+const anbyMindscape2DazeBoundary: Supplement = {
+  kind: "unsupported-option",
+  supplementId: "nanoka:agents:anby:m2-enhanced-special-daze",
+  source: "nanoka-integrated@3.3.12+19634983 agents/1011 /talent/2/desc",
+  catalogEntityId: "agents:anby",
+  optionId: "nanoka:agents:anby:m2-enhanced-special-daze",
+  name: "影画2 · enhancedSpecialDaze",
+  conditionDescription:
+    "强化特殊技命中未处于失衡状态下的敌人时，招式造成的失衡值提升10%。",
+  target: "self",
+  configuration: { minimumMindscape: 2 },
+  reason: "formula-out-of-scope",
+  explanation:
+    "影画 2 同一句的失衡值部分：强化特殊技命中未失衡敌人时，失衡值提升 10%。失衡值与伤害、冲击力是不同量纲；当前完整静态入口不计算最终失衡值，本批不新增失衡公式，也不把该条款折算为增伤或冲击力。显式选择本选项会得到本错误。",
+  supportedRanks: "影画 2 及以上（不可选）",
+  computationTarget: "declared unavailable option on the mapped agent entity",
+  evidence: [
+    {
+      path: "agents/1011/details.zh.json",
+      pointer: "/talent/2/desc",
+      sha256:
+        "e15c3b72f3aeaa68824cb0229b591989ce9fc1a729c6c2864346e8315257d67d",
+    },
+    {
+      path: "agents/1011/details.en.json",
+      pointer: "/talent/2/desc",
+      sha256:
+        "440b38afbea149b22c69aab93a06dfae06e9e0b92da8aba74f8f7b0f2bb581c2",
+    },
+  ],
+  verification:
+    "Nanoka agents/1011 /talent/2/desc 中英文核对：同句包含“强化特殊技命中未处于失衡状态下的敌人时，招式造成的失衡值提升10%”；固定来源 991bb0e 的 M2 块 note 也含该句，但块内只有 skillDmgBonus 机器记录，没有失衡值效果。仅登记该失衡值条款，不重述或替换已可执行的 30% 增伤。",
+}
+
 export const SUPPLEMENTS: readonly Supplement[] = [
   ...ROXY_MINDSCAPE_SUPPLEMENTS,
   ...ROXY_ADDITIONAL_SUPPLEMENTS,
@@ -5920,6 +5958,7 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   ...ROXY_CORE_ELEMENT_SUPPLEMENTS,
   ...LUCY_GUARD_BOAR_SUPPLEMENTS,
   astraYaoMindscape4QuickAssistDamage,
+  anbyMindscape2DazeBoundary,
   aliceCorePeriodicDamage,
   yeshunguangVeilVulnerability,
   graceMindscape6Grenades(false),

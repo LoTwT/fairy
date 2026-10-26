@@ -745,16 +745,15 @@ describe("fixed-panel team differential fixtures", () => {
     }
     // 数据版本与固定来源：历史独立参考与当前消费快照分别断言。
     // 参考文件由 generate-static-team-differential-reference.mjs 从固定上游
-    // 再生，其 provenance 是冻结时的历史事实（基线 c77e549a、快照 e946d6、
-    // revision 14），不随当前制品演进改写；当前加载的数据用自身快照断言。
-    // 参考数值仍然有效：固定效果提交未变（下行断言），且本批 59 槽位不消费
-    // revision 15 与 16 改动的规则（逐槽数值对照在后续用例中锁定）。
+    // 再生，其 provenance 保留独立参考的冻结基线（基线 c77e549a、快照 e946d6、
+    // revision 14）；当前加载的数据用自身快照断言。参考数值在 991bb0e 下仍
+    // 有效，本批 59 槽位不消费修订 15/16 或本轮新增的冲突登记。
     expect(loaded.version).toEqual({
       packageVersion: "0.5.0",
       contractVersion: 3,
       gameVersion: "3.3",
       snapshotId:
-        "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0",
+        "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b",
     })
     expect(loaded.catalog.source.commit).toBe(
       reference.provenance.effectSource.commit,

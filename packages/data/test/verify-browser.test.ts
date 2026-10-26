@@ -1381,7 +1381,7 @@ function defineScenarios(counts: {
             )
             expect(result.rate).toBeCloseTo(0.13)
             expect(result.expected).toBeGreaterThan(result.nonCritical)
-            expect(result.records).toBe(1360)
+            expect(result.records).toBe(1375)
           },
           sources: [
             "definitions/effects/static.json",

@@ -262,6 +262,30 @@
     },
     {
       "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:jane/核心被动：洞察 · anomalyReleaseCritRate",
+      "details": {
+        "catalogEntityId": "agents:jane",
+        "name": "核心被动：洞察 · anomalyReleaseCritRate",
+        "optionIds": [
+          "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-mvjcx1mw-6",
+          "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-mvjcx8vt-c"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:jane/核心被动：洞察 · turbulenceCritRate",
+      "details": {
+        "catalogEntityId": "agents:jane",
+        "name": "核心被动：洞察 · turbulenceCritRate",
+        "optionIds": [
+          "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-mvjcx1mw-5",
+          "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-mvjcx8vt-b"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
       "id": "duplicate-option-name/agents:jane/潜能觉醒：致命舞步 · anomalyCritDmg",
       "details": {
         "catalogEntityId": "agents:jane",
@@ -269,6 +293,30 @@
         "optionIds": [
           "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-ms34gorp-xrbl8x",
           "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-ms34hzuh-214aho"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:jane/潜能觉醒：致命舞步 · anomalyReleaseCritDmg",
+      "details": {
+        "catalogEntityId": "agents:jane",
+        "name": "潜能觉醒：致命舞步 · anomalyReleaseCritDmg",
+        "optionIds": [
+          "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-mvhhtmvu-4",
+          "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-mvhhtu2b-8"
+        ]
+      }
+    },
+    {
+      "check": "duplicate-option-name",
+      "id": "duplicate-option-name/agents:jane/潜能觉醒：致命舞步 · turbulenceCritDmg",
+      "details": {
+        "catalogEntityId": "agents:jane",
+        "name": "潜能觉醒：致命舞步 · turbulenceCritDmg",
+        "optionIds": [
+          "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-mvhhtmvu-3",
+          "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-mvhhtu2b-7"
         ]
       }
     },
@@ -851,6 +899,13 @@
           "w-engines:Weeping_Cradle:refinement:blk-legacy:eff-ms1pf9g0-dp26ep",
           "w-engines:Weeping_Cradle:refinement:blk-legacy:legacy-self-dmgBonus"
         ]
+      }
+    },
+    {
+      "check": "identity-mapping-extra",
+      "id": "identity-mapping-extra/w-engines:Drill_Rig_Red_Axis",
+      "details": {
+        "catalogEntityId": "w-engines:Drill_Rig_Red_Axis"
       }
     },
     {

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0",
+  "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b",
   "integrated": {
     "indexSha256": "d68ad1d80b203b9633f2cd6d176e4051c15c52f2ea3c0d71a2d2310c8b1a1b6d",
     "sourceVersion": "3.3.12+19634983",
@@ -91,7 +91,7 @@
     "artifactFileSetSha256": "b7bb787fbdb4c18a2b6031274408312eaa56b2a53688c68d928c793d41ab148c"
   },
   "skills": {
-    "manifestSha256": "b059afc2ae5f86d0442dd607d4fa5496f94527ee2b1e25385fca7941d772060b",
+    "manifestSha256": "706066c0215510331421860a2405c657ab784ffc5ed562f74afca3bb20da44a4",
     "sourceVersion": "3.3.12+19634983",
     "rulesVersion": "agent-actions/2",
     "topLevelKeys": [
@@ -115,11 +115,11 @@
   },
   "effects": {
     "sourceRepository": "LoTwT/ZZZ-HP",
-    "sourceCommit": "2628b32cece086e371bafa05518a9a12650d9f74",
+    "sourceCommit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
     "static": {
-      "sha256": "94466666e043a2b1ae8f803b4cbb9bc815c958e2113d57f13f81686411771922",
+      "sha256": "f92a28d490bf640a4332fd8117589aeb901c8bdc9ff6ffcad8fd2f9032c68424",
       "ruleSetId": "zzz-hp-static-effects",
-      "revision": "52",
+      "revision": "53",
       "topLevelKeys": [
         "actions",
         "effects",
@@ -133,9 +133,9 @@
       "actionCount": 1
     },
     "staticCatalog": {
-      "sha256": "58bc6f51fbf3ca999da80df7d953cbbd282bf92ecc2a3e61362567b2a5ed3e14",
+      "sha256": "e6da1a47356054611280a3edd7e3c93406facf28ac17138df294fef3945c0e83",
       "ruleSetId": "zzz-hp-static-effects",
-      "revision": "52",
+      "revision": "53",
       "topLevelKeys": [
         "differences",
         "entities",
@@ -147,17 +147,17 @@
         "skillTargets",
         "source"
       ],
-      "optionCount": 986,
-      "variantCount": 1467,
+      "optionCount": 1002,
+      "variantCount": 1483,
       "entityCount": 196,
       "skillTargetCount": 131,
       "mechanismCount": 4,
-      "differenceCount": 41
+      "differenceCount": 43
     },
     "staticCoverage": {
-      "sha256": "978b5e99b58a2b6be218c555d14b2db5b52359c24caaf469540d5c286d341e54",
+      "sha256": "31d11cc3b85efe13868c7880100af6872448a22ef16146cf1d75e09d34532144",
       "ruleSetId": "zzz-hp-static-effects",
-      "revision": "52",
+      "revision": "53",
       "topLevelKeys": [
         "deferredMechanisms",
         "entities",
@@ -172,9 +172,9 @@
         "summary",
         "supplementalRecords"
       ],
-      "recordCount": 1360,
+      "recordCount": 1375,
       "packCount": 1118,
-      "supplementalRecordCount": 101
+      "supplementalRecordCount": 102
     }
   }
 }

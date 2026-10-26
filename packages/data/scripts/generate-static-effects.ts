@@ -305,7 +305,7 @@ export async function generateStaticEffects(
           )
       }
     if (
-      result.coverage.summary.rawEffects !== 1360 ||
+      result.coverage.summary.rawEffects !== 1375 ||
       result.coverage.summary.entities !== 196 ||
       result.coverage.summary.packs !== 1118
     )

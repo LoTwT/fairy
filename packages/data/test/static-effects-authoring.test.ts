@@ -11,7 +11,11 @@ import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 import { afterAll, describe, expect, it } from "vitest"
 import { parseEffectRuleSet } from "../../core/src/effects/index.ts"
-import { compareStaticArtifacts } from "../scripts/static-effects/authoring/canonical.ts"
+import {
+  canonicalize,
+  compareStaticArtifacts,
+  stableStringify,
+} from "../scripts/static-effects/authoring/canonical.ts"
 import {
   compileAuthoringArtifacts,
   compileAuthoringPilot,
@@ -288,6 +292,11 @@ describe("authoring ID construction", () => {
 })
 
 describe("authoring compiler and semantic harness", () => {
+  it("treats negative zero as zero in semantic comparison", () => {
+    expect(canonicalize(-0)).toBe(0)
+    expect(stableStringify({ value: -0 })).toBe(stableStringify({ value: 0 }))
+  })
+
   it("compiles selected entries to a temp directory and matches all three artifacts", () => {
     const outputDirectory = temporaryDirectory("fairy-authoring-pass-")
     const compilation = compileAuthoringPilot({
@@ -328,10 +337,10 @@ describe("authoring compiler and semantic harness", () => {
     expect(selectedCoverage).toHaveLength(12)
     expect(
       selectedCoverage.filter((record) => record.status === "converted"),
-    ).toHaveLength(7)
+    ).toHaveLength(6)
     expect(
       selectedCoverage.filter((record) => record.status === "corrected"),
-    ).toHaveLength(2)
+    ).toHaveLength(3)
     expect(
       selectedCoverage.filter((record) => record.status === "unsupported"),
     ).toHaveLength(3)

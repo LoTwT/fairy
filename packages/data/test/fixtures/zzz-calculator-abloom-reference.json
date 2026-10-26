@@ -132,16 +132,16 @@
       "packageVersion": "0.5.0",
       "contractVersion": 3,
       "gameVersion": "3.3",
-      "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+      "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
     },
     "files": [
       {
         "file": "packages/data/definitions/effects/static.json",
-        "sha256": "94466666e043a2b1ae8f803b4cbb9bc815c958e2113d57f13f81686411771922"
+        "sha256": "f92a28d490bf640a4332fd8117589aeb901c8bdc9ff6ffcad8fd2f9032c68424"
       },
       {
         "file": "packages/data/definitions/effects/static-catalog.json",
-        "sha256": "58bc6f51fbf3ca999da80df7d953cbbd282bf92ecc2a3e61362567b2a5ed3e14"
+        "sha256": "e6da1a47356054611280a3edd7e3c93406facf28ac17138df294fef3945c0e83"
       },
       {
         "file": "packages/data/definitions/attributes/drive-disc-affixes.json",
@@ -181,15 +181,15 @@
       },
       {
         "file": "packages/core/src/effects/internal/static-catalog.ts",
-        "sha256": "14d4399e7a6a64536a7ccdaa8dacd9de863e9ca162ab671a0f825f79b478adac"
+        "sha256": "be3ea13ef5ae780c786c105b7c57c5a02c432426ef0551627269a7fd3490babf"
       },
       {
         "file": "packages/core/src/effects/internal/static-damage.ts",
-        "sha256": "f196b37ed3f0dcd4b351b4082be4b7d39eed88dd65a26cb596ec667ba798c37a"
+        "sha256": "2cc7ac4e0e2f575a0323d8b33cea10bb78358f706e468c727225c99f152fc4ed"
       },
       {
         "file": "packages/core/src/static/calculate.ts",
-        "sha256": "c1e6d073f7b8eb62241bf640da8d3e1a878aa8de9a703636c490f113a126441e"
+        "sha256": "11fd92b14eddf22a2f84d9304c6e2d50bfb16be79f53576b8dde6e539ed99f2d"
       },
       {
         "file": "packages/core/src/factors/defense.ts",
@@ -1537,7 +1537,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/404",
+      "pointer": "/options/418",
       "value": {
         "optionId": "agents:soldier11:mindscape:0:blk-ms0etqtb-lx74vp:eff-ms0euhcc-auiadr",
         "catalogEntityId": "agents:soldier11",
@@ -1554,7 +1554,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/1/effects/1"
@@ -1623,7 +1623,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/402",
+      "pointer": "/options/416",
       "value": {
         "optionId": "agents:soldier11:mindscape:0:blk-legacy:legacy-self-skillDmgBonus",
         "catalogEntityId": "agents:soldier11",
@@ -1640,7 +1640,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/agents/0/mindscapeBuffs/0/effectBlocks/0/effects/0"
@@ -1667,7 +1667,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/410",
+      "pointer": "/options/424",
       "value": {
         "optionId": "agents:soukaku:mindscape:4:blk-legacy:legacy-team-resPen",
         "catalogEntityId": "agents:soukaku",
@@ -1683,7 +1683,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/agents/49/mindscapeBuffs/4/effectBlocks/0/effects/0"
@@ -1705,7 +1705,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/411",
+      "pointer": "/options/425",
       "value": {
         "optionId": "agents:soukaku:mindscape:6:blk-legacy:legacy-self-skillDmgBonus",
         "catalogEntityId": "agents:soukaku",
@@ -1721,7 +1721,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/agents/49/mindscapeBuffs/6/effectBlocks/0/effects/0"
@@ -1741,7 +1741,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/616",
+      "pointer": "/options/630",
       "value": {
         "optionId": "w-engines:Bunny_Band:refinement:blk-legacy:eff-ms1qjmkp-iwe49k",
         "catalogEntityId": "w-engines:Bunny_Band",
@@ -1757,7 +1757,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/wengines/20/refinementBuffs/3/effectBlocks/0/effects/1"
@@ -1777,7 +1777,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/24",
+      "pointer": "/options/26",
       "value": {
         "optionId": "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36k7q1-vqttu0",
         "catalogEntityId": "agents:aria",
@@ -1794,7 +1794,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/1"
@@ -1835,7 +1835,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/23",
+      "pointer": "/options/25",
       "value": {
         "optionId": "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36jo9z-7gl5e0",
         "catalogEntityId": "agents:aria",
@@ -1852,7 +1852,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/0"
@@ -1879,7 +1879,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/30",
+      "pointer": "/options/32",
       "value": {
         "optionId": "agents:aria:mindscape:0:blk-ms36joa0-0vxxo8:eff-ms36s2o3-l3fi3g",
         "catalogEntityId": "agents:aria",
@@ -1896,7 +1896,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/7"
@@ -1923,7 +1923,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/32",
+      "pointer": "/options/34",
       "value": {
         "optionId": "agents:aria:mindscape:1:blk-legacy:eff-ms36xf73-q2nimy",
         "catalogEntityId": "agents:aria",
@@ -1939,7 +1939,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/2"
@@ -1959,7 +1959,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/33",
+      "pointer": "/options/35",
       "value": {
         "optionId": "agents:aria:mindscape:1:blk-legacy:eff-ms36z5gn-gdbybu",
         "catalogEntityId": "agents:aria",
@@ -1975,7 +1975,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/3"
@@ -1995,7 +1995,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/35",
+      "pointer": "/options/37",
       "value": {
         "optionId": "agents:aria:mindscape:1:blk-legacy:legacy-self-anomalyReleaseCritRate",
         "catalogEntityId": "agents:aria",
@@ -2011,7 +2011,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/0"
@@ -2031,7 +2031,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/34",
+      "pointer": "/options/36",
       "value": {
         "optionId": "agents:aria:mindscape:1:blk-legacy:legacy-self-anomalyReleaseCritDmg",
         "catalogEntityId": "agents:aria",
@@ -2047,7 +2047,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/1"
@@ -2067,7 +2067,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/37",
+      "pointer": "/options/39",
       "value": {
         "optionId": "agents:aria:mindscape:2:blk-legacy:legacy-self-reduceDefense",
         "catalogEntityId": "agents:aria",
@@ -2083,7 +2083,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/agents/39/mindscapeBuffs/2/effectBlocks/0/effects/0"
@@ -2103,7 +2103,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/36",
+      "pointer": "/options/38",
       "value": {
         "optionId": "agents:aria:mindscape:2:blk-legacy:eff-ms371amr-rg003c",
         "catalogEntityId": "agents:aria",
@@ -2119,7 +2119,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/agents/39/mindscapeBuffs/2/effectBlocks/0/effects/1"
@@ -2139,7 +2139,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/567",
+      "pointer": "/options/581",
       "value": {
         "optionId": "drive-discs:SuitSavior:setPieces:4:blk-legacy:legacy-self-dmgBonus",
         "catalogEntityId": "drive-discs:SuitSavior",
@@ -2155,7 +2155,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/driveDiscs/15/fourPieceBuffs/effectBlocks/0/effects/1"
@@ -2175,7 +2175,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/566",
+      "pointer": "/options/580",
       "value": {
         "optionId": "drive-discs:SuitSavior:setPieces:2:blk-ms0f3yyh-s1e5iy:eff-ms0f3yyh-c28cgy",
         "catalogEntityId": "drive-discs:SuitSavior",
@@ -2191,7 +2191,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/driveDiscs/15/twoPieceEffectBlocks/0/effects/0"
@@ -2211,7 +2211,7 @@
     {
       "system": "fairy",
       "file": "packages/data/definitions/effects/static-catalog.json",
-      "pointer": "/options/564",
+      "pointer": "/options/578",
       "value": {
         "optionId": "drive-discs:SuitPufferElectro:setPieces:4:blk-legacy:legacy-self-inCombatAtkPercent",
         "catalogEntityId": "drive-discs:SuitPufferElectro",
@@ -2227,7 +2227,7 @@
             "references": [
               {
                 "sourceId": "zzz-hp",
-                "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+                "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
                 "locale": "zh",
                 "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
                 "pointer": "/driveDiscs/14/fourPieceBuffs/effectBlocks/0/effects/0"
@@ -2260,7 +2260,7 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/4/mindscapeBuffs/1/effectBlocks/0/effects/0"
@@ -2341,7 +2341,7 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/54/mindscapeBuffs/4/effectBlocks/0/effects/0"
@@ -2455,7 +2455,7 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/54/mindscapeBuffs/6/effectBlocks/0/effects/1"
@@ -2533,7 +2533,7 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/54/mindscapeBuffs/1/effectBlocks/0/effects/1"
@@ -2611,7 +2611,7 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/29/refinementBuffs/2/effectBlocks/0/effects/2"
@@ -2691,7 +2691,7 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/1"
@@ -2836,7 +2836,7 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/0"
@@ -2916,7 +2916,7 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/39/mindscapeBuffs/0/effectBlocks/1/effects/7"
@@ -3006,7 +3006,7 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/2"
@@ -3125,7 +3125,7 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/3"
@@ -3203,7 +3203,7 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/0"
@@ -3281,7 +3281,7 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/39/mindscapeBuffs/1/effectBlocks/0/effects/1"
@@ -3359,7 +3359,7 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/39/mindscapeBuffs/2/effectBlocks/0/effects/0"
@@ -3446,7 +3446,7 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/agents/39/mindscapeBuffs/2/effectBlocks/0/effects/1"
@@ -3533,28 +3533,28 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/94/refinementBuffs/1/effectBlocks/0/effects/0"
             },
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/94/refinementBuffs/2/effectBlocks/0/effects/0"
             },
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/94/refinementBuffs/3/effectBlocks/0/effects/0"
             },
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/94/refinementBuffs/4/effectBlocks/0/effects/0"
@@ -3621,7 +3621,7 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/94/refinementBuffs/4/effectBlocks/0/effects/2"
@@ -3701,7 +3701,7 @@
           "references": [
             {
               "sourceId": "zzz-hp",
-              "version": "2628b32cece086e371bafa05518a9a12650d9f74",
+              "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               "locale": "zh",
               "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
               "pointer": "/wengines/94/refinementBuffs/2/effectBlocks/0/effects/2"
@@ -3823,7 +3823,7 @@
         "packageVersion": "0.5.0",
         "contractVersion": 3,
         "gameVersion": "3.3",
-        "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+        "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
       },
       "request": {
         "actors": [
@@ -4089,7 +4089,7 @@
         "packageVersion": "0.5.0",
         "contractVersion": 3,
         "gameVersion": "3.3",
-        "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+        "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
       },
       "request": {
         "actors": [
@@ -4361,7 +4361,7 @@
         "packageVersion": "0.5.0",
         "contractVersion": 3,
         "gameVersion": "3.3",
-        "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+        "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
       },
       "request": {
         "actors": [
@@ -4625,7 +4625,7 @@
         "packageVersion": "0.5.0",
         "contractVersion": 3,
         "gameVersion": "3.3",
-        "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+        "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
       },
       "request": {
         "actors": [
@@ -6777,7 +6777,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -9245,7 +9245,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -11769,7 +11769,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -14441,7 +14441,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -16148,7 +16148,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -17931,7 +17931,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -19728,7 +19728,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -21715,7 +21715,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -24329,7 +24329,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -27098,7 +27098,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -29744,7 +29744,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -32338,7 +32338,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -34932,7 +34932,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -37526,7 +37526,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -40120,7 +40120,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -42714,7 +42714,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -45584,7 +45584,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -48194,7 +48194,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:true",
         "request": {
@@ -50788,7 +50788,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -53346,7 +53346,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -56142,7 +56142,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -58778,7 +58778,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -61600,7 +61600,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -63595,7 +63595,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -65642,7 +65642,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -67485,7 +67485,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -69558,7 +69558,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -72400,7 +72400,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -75559,7 +75559,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -78558,7 +78558,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -81453,7 +81453,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -84348,7 +84348,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -87243,7 +87243,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -90138,7 +90138,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -93033,7 +93033,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -96204,7 +96204,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -99115,7 +99115,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:true",
         "request": {
@@ -102010,7 +102010,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -104745,7 +104745,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -107602,7 +107602,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "vivian:false",
         "request": {
@@ -110664,7 +110664,7 @@
           "packageVersion": "0.5.0",
           "contractVersion": 3,
           "gameVersion": "3.3",
-          "snapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+          "snapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
         },
         "equipmentId": "aria:false",
         "request": {
@@ -138316,7 +138316,7 @@
           "packages/data/definitions/effects/static-catalog.json": "c8455d57b00a0329da50841e4d1a0bcc7e35bc28fd2b4319520dba01ab1c670c"
         }
       },
-      "currentSnapshotId": "sha256:a971140ac2ddcb0bf5f7c1e4dfa4763269ba1550ad1395fa7965a2741abe1de0"
+      "currentSnapshotId": "sha256:8d23a7d2e64a07fd546f9982cd40a1a7890b8a71c2e942a59b9ebfb54d07965b"
     }
   ]
 }

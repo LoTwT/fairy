@@ -39,6 +39,7 @@ import { verifyRoxyCoreWindRegistrations } from "./roxy-core-wind.ts"
 import { verifyYixuanThunderRegistrations } from "./yixuan-thunder.ts"
 import {
   COMPLETE_STATE_OPTIONS,
+  SOURCE_COMMIT_991BB0E_SEMANTICS,
   SOURCE_SEMANTICS,
   YANAGI_POLARITY_DIFFERENCE_ID,
   YANAGI_POLARITY_EXPLANATION,
@@ -75,6 +76,11 @@ import {
   type SourceNormalization,
   type SourcePack,
 } from "./source.ts"
+import {
+  normalizeSourceIds,
+  SOURCE_ID_NORMALIZATIONS,
+} from "./source-id-normalization.ts"
+import { isLoadedSourceData } from "./source-data-marker.ts"
 
 const identityMap: Readonly<Record<string, string | null>> = identities
 
@@ -96,6 +102,7 @@ export const SOURCE_ENTITY_ALIASES: Readonly<
   "w-engines:Weeping_Gemini": "w-engines:Weapon_A_Common_08",
   "w-engines:The_Restrained": "w-engines:Weapon_S_1141",
   "w-engines:Promotion_Stats": "w-engines:Promotion Stats",
+  "w-engines:Drill_Rig_Red_Axis": "w-engines:Drill_Rig_Red-Axis",
 }
 
 /**
@@ -1836,6 +1843,26 @@ function whenFor(
   return { kind: "all", conditions }
 }
 
+/**
+ * 编译时使用的有效来源效果：目前只有目标范围修正会替换 skillTargets，
+ * 其余语义仍直接使用规范化后的来源记录。
+ */
+function effectiveSourceEffect(
+  record: SourceRecord,
+  semantics: SourceSemantics | undefined,
+): SourceEffect {
+  const base = record.normalized ?? record.raw
+  return semantics?.kind === "skill-target-scope-correction"
+    ? {
+        ...base,
+        skillTargets: semantics.correctedSkillTargets.map((target) => ({
+          category: target.category,
+          subcategoryId: target.subcategoryId,
+        })),
+      }
+    : base
+}
+
 /** 语义登记键：category/entityId/rankKind/rank/blockId/effectId 稳定组合。 */
 const semanticsKeyFor = (record: SourceRecord): string =>
   `${record.category}/${record.entityId}/${record.rankKind}/${record.rank}/${record.blockId}/${record.raw.id}`
@@ -2040,6 +2067,67 @@ function verifyExcludeSkillTargetScopeRecord(
 }
 
 /**
+ * 普攻目标范围修正的防漂移前置校验：raw/normalized 的 stat、数值、完整
+ * skillTargets 目标元组与块 note 全部按登记核对；normalized 缺失或任一
+ * 漂移即拒绝生成。必须在通用 unsupported 降级之前执行。
+ */
+function verifySkillTargetScopeCorrectionRecord(
+  record: SourceRecord,
+  semantics: Extract<
+    SourceSemantics,
+    { kind: "skill-target-scope-correction" }
+  >,
+): void {
+  const targetTuples = (document: SourceEffect) =>
+    (document.skillTargets ?? [])
+      .map((target) => ({
+        category: target.category,
+        subcategoryId: target.subcategoryId ?? null,
+      }))
+      .toSorted((left, right) =>
+        JSON.stringify(left).localeCompare(JSON.stringify(right)),
+      )
+  const expectedTuples = semantics.expectedSkillTargets
+    .map((target) => ({
+      category: target.category,
+      subcategoryId: target.subcategoryId,
+    }))
+    .toSorted((left, right) =>
+      JSON.stringify(left).localeCompare(JSON.stringify(right)),
+    )
+  const effectiveScope = (document: SourceEffect): SourceEffect["scope"] =>
+    document.scope === undefined && hasSkillTargets(document)
+      ? "skill"
+      : document.scope
+  for (const [label, document] of [
+    ["raw", record.raw],
+    ["normalized", record.normalized],
+  ] as const) {
+    if (document === undefined)
+      throw new Error(
+        `Skill-target scope correction ${semantics.differenceId} lost the ${label} record at ${record.pointer}`,
+      )
+    if (
+      document.stat !== semantics.expectedStat ||
+      document.value !== semantics.expectedValue ||
+      effectiveScope(document) !== "skill" ||
+      JSON.stringify(targetTuples(document)) !== JSON.stringify(expectedTuples)
+    )
+      throw new Error(
+        `Skill-target scope correction ${semantics.differenceId} expects ${semantics.expectedStat} ${String(semantics.expectedValue)} with ${JSON.stringify(semantics.expectedSkillTargets)} at ${record.pointer} (${label}); re-review the clause instead of silently re-scoping`,
+      )
+  }
+  for (const [label, note] of [
+    ["raw", record.blockNote],
+    ["normalized", record.normalizedBlockNote],
+  ] as const)
+    if (note !== semantics.expectedSourceBlockNote)
+      throw new Error(
+        `Skill-target scope correction ${semantics.differenceId} expects the registered block note at ${record.pointer} (${label}); the frozen clause text drifted`,
+      )
+}
+
+/**
  * 烈霜结算元素范围修正（settlement-element-scope）的防漂移前置校验：
  * raw 与 normalized 两份记录按登记编码逐字段核对（含 elementFilter 与完整
  * skillTargets 元组），所属块 note 与冻结完整原文逐字核对；normalized 缺失、
@@ -2192,9 +2280,15 @@ function compile(
   declaredSkillTargets: StaticEffectCatalog["skillTargets"][number][],
   migratedSourceRecords: ReadonlyMap<string, FixedSourceSupplementMigration>,
   supplemental = false,
+  sourceCommitSensitiveSemantics = true,
 ): { rule?: ContributionRule; variant: StaticCatalogVariant } {
-  const e = record.normalized ?? record.raw
-  const semantics = SOURCE_SEMANTICS[semanticsKeyFor(record)]
+  const semanticsKey = semanticsKeyFor(record)
+  const semantics =
+    sourceCommitSensitiveSemantics ||
+    !SOURCE_COMMIT_991BB0E_SEMANTICS.has(semanticsKey)
+      ? SOURCE_SEMANTICS[semanticsKey]
+      : undefined
+  const e = effectiveSourceEffect(record, semantics)
   // 本组必须在字段映射和通用 unsupported 之前核验；降级不能掩盖源漂移。
   if (semantics?.kind === "source-conversion-rate-correction") {
     for (const [label, document, note] of [
@@ -2222,6 +2316,8 @@ function compile(
   // 通用 unsupported 降级——normalized 删除不能再静默绕过登记。
   if (semantics?.kind === "exclude-skill-target-scope")
     verifyExcludeSkillTargetScopeRecord(record, semantics)
+  if (semantics?.kind === "skill-target-scope-correction")
+    verifySkillTargetScopeCorrectionRecord(record, semantics)
   // 烈霜结算元素范围修正：登记编码与冻结块 note 的校验同样早于通用
   // unsupported 降级（源漂移不能被降级掩盖）。
   if (semantics?.kind === "settlement-element-scope")
@@ -3365,6 +3461,21 @@ function compile(
       ],
     }
   }
+  if (semantics?.kind === "skill-target-scope-correction") {
+    // 普攻目标范围修正：上游把“普通攻击”收窄到单个子类；effectiveSourceEffect
+    // 已按登记替换目标，这里只记录 corrected 状态与证据。
+    variant = {
+      ...variant,
+      status: "corrected",
+      differences: [...variant.differences, semantics.differenceId],
+      references: [
+        ...variant.references,
+        ...semantics.evidence.map((ref) =>
+          nanokaReference(ref.path, ref.pointer),
+        ),
+      ],
+    }
+  }
   if (semantics?.kind === "refinement-value-description") {
     // 共享说明只描述精炼 1（T01）：块 note 漂移即拒绝；说明由选项组装覆盖。
     if (record.blockNote !== semantics.expectedBlockNote)
@@ -4469,6 +4580,7 @@ export function convertSource(
   completeStateOptions: readonly CompleteStateOptionRegistration[] = COMPLETE_STATE_OPTIONS,
   conversionOptions: { readonly supplemental?: boolean } = {},
 ) {
+  data = normalizeSourceIds(data, SOURCE_ID_NORMALIZATIONS, SOURCE_COMMIT, true)
   const collected = collectSource(data, functions),
     effects: EffectRule[] = [],
     options: StaticCatalogOption[] = [],
@@ -4627,6 +4739,7 @@ export function convertSource(
         declaredSkillTargets,
         migratedSourceRecords,
         conversionOptions.supplemental === true,
+        isLoadedSourceData(data),
       )
       if (compiled.rule) effects.push(compiled.rule)
       variants.push({
@@ -5447,7 +5560,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "52",
+    revision: "53",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: effects.some(
@@ -5664,6 +5777,30 @@ export function convertSource(
           reference("/agents/34/mindscapeBuffs/0/effectBlocks/0/effects/0"),
           reference("/agents/34/mindscapeBuffs/0/effectBlocks/0/effects/1"),
         ],
+      },
+      {
+        differenceId: "anby-m2-beneficiary-target",
+        explanation:
+          "安比 M2 的 30% 招式增伤在 Nanoka /talent/2/desc 中只描述落雷命中失衡敌人时安比自己的招式伤害；991bb0e 把受益对象记为 team。修正保留 self、数值与公开 ID，只登记受益对象差异。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes("anby-m2-beneficiary-target"),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
+        differenceId: "anby-m6-all-basic-skill-targets",
+        explanation:
+          "安比 M6 的 45% 招式增伤在 Nanoka /talent/6/desc 中覆盖[普通攻击]或[冲刺攻击]命中；991bb0e 把 basic 收窄到 anby-basic-ms47yaat。修正保留全部 basic + all-dodge 目标、数值与公开 ID，只登记目标范围差异。",
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes("anby-m6-all-basic-skill-targets"),
+            )
+            .flatMap((variant) => variant.references),
+        ),
       },
       {
         differenceId: "evelyn-lunalux-multiplier-scope",

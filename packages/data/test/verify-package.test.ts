@@ -767,7 +767,7 @@ for (const [id, suffix, element, multiplier] of [["1341", "0001", "ice", 13.612]
 const staticDefinitions = (await import("@randomplay/data/definitions/effects/static.json", { with: { type: "json" } })).default
 const staticCatalog = (await import("@randomplay/data/definitions/effects/static-catalog.json", { with: { type: "json" } })).default
 const staticCoverage = (await import("@randomplay/data/definitions/effects/static-coverage.json", { with: { type: "json" } })).default
-assert.equal(staticCoverage.summary.rawEffects, 1360)
+assert.equal(staticCoverage.summary.rawEffects, 1375)
 const staticResult = value(calculateStaticDamageFromCatalog({ ...${readFileSync(new URL("./fixtures/static-catalog-consumer.json", import.meta.url), "utf8")}, definitions: staticDefinitions, catalog: staticCatalog }))
 assert.ok(Math.abs(staticResult.criticalRate - 0.13) < 1e-12)
 assert.ok(staticResult.expected > staticResult.nonCritical)

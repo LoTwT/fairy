@@ -15,12 +15,12 @@ assert(
   repository && output,
   "Provide the upstream Git repository and a NEW output file",
 )
-const commit = "2628b32cece086e371bafa05518a9a12650d9f74"
+const commit = "991bb0ef2a00387f8a1fa18293bbda17256d7270"
 const fairyBaseline = "bae8aaa278632e731440e29d22fe38067c8fb99b"
 const buffResource = "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json"
 const digests = {
   [buffResource]:
-    "c9bc4cfdb0cf3117c56885e1afa4afd3ac9dc81aa0282119f0c64a27f19e5b01",
+    "f1df0144ee962138cd09dbdd36511eab46fb3d6016ec638ddab7fc4a01737095",
   "damageCalc.ts":
     "763c7447cf6ab208c48f5412516de430b1e2ba1669e90bf37ecb83526bc0629d",
   "affixPanelCalc.ts":

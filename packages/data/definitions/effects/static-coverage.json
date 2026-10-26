@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "52",
+  "revision": "53",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
-    "commit": "2628b32cece086e371bafa05518a9a12650d9f74",
+    "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
     "files": [
       {
         "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-        "sha256": "c9bc4cfdb0cf3117c56885e1afa4afd3ac9dc81aa0282119f0c64a27f19e5b01"
+        "sha256": "f1df0144ee962138cd09dbdd36511eab46fb3d6016ec638ddab7fc4a01737095"
       },
       {
         "path": "zzz-hp/scripts/test-mult-factor-percent.mjs",
@@ -16,7 +16,7 @@
       },
       {
         "path": "zzz-hp/src/components/calculator/BuffEffectPickerModal.vue",
-        "sha256": "c3fd011b038f9ef489d31c02797aa5e03ea47895132f7568ff4a2319deabc92c"
+        "sha256": "9d12d524ec4778e690b3d03be3be73bba9af832a2a6bbe0ff76b7139e6372321"
       },
       {
         "path": "zzz-hp/src/data/calculatorBuffDefaults.ts",
@@ -28,7 +28,7 @@
       },
       {
         "path": "zzz-hp/src/types/calculator.ts",
-        "sha256": "faaf30fc79a62771e709c037398003c70d423f0d25188e80a03354be87b73442"
+        "sha256": "f91b663d56f1de52246138f763c2f308dad649b72490a9c9a556583ca05f8934"
       },
       {
         "path": "zzz-hp/src/utils/buffDamageTypes.ts",
@@ -40,7 +40,7 @@
       },
       {
         "path": "zzz-hp/src/utils/calcNumberFormat.ts",
-        "sha256": "1e8b3a819df03de2911f210988501f3d8ae47d7abf05c2d9558a7e6c7478c03a"
+        "sha256": "21ca4409aed25475f3d3f883f9ffd728dd702aaf763c846f14431a95f111962c"
       },
       {
         "path": "zzz-hp/src/utils/calculatorUi.ts",
@@ -52,7 +52,7 @@
       },
       {
         "path": "zzz-hp/src/utils/damageEvent.ts",
-        "sha256": "07351cde731289ce39670c74cf1b2a31d02c42e50e17b39f2d663df40ad774ad"
+        "sha256": "19c79f170fc97a030491ede06f0b5d660b03786d85096b847d247603b13ebfcb"
       },
       {
         "path": "zzz-hp/src/utils/multFactorPercent.ts",
@@ -76,7 +76,7 @@
       },
       {
         "path": "zzz-hp/src/utils/resolvedHit.ts",
-        "sha256": "d9b390149ea911191b7ef1a99c01c4ab8541e9020a972e65274211ae7d019203"
+        "sha256": "3a4fa6ddd0bc21c4214369932adb86710c4bfc803b573033113ade1be6038597"
       },
       {
         "path": "zzz-hp/src/utils/skillTalentLevels.ts",
@@ -4585,7 +4585,7 @@
       "catalogEntityId": "agents:alice",
       "rank": 2,
       "rankKind": "mindscape",
-      "count": 2,
+      "count": 4,
       "status": "has-effect-record"
     },
     {
@@ -4905,7 +4905,7 @@
       "catalogEntityId": "agents:jane",
       "rank": 0,
       "rankKind": "mindscape",
-      "count": 7,
+      "count": 17,
       "status": "has-effect-record"
     },
     {
@@ -4921,7 +4921,7 @@
       "catalogEntityId": "agents:jane",
       "rank": 2,
       "rankKind": "mindscape",
-      "count": 2,
+      "count": 4,
       "status": "has-effect-record"
     },
     {
@@ -8737,7 +8737,7 @@
       "catalogEntityId": "w-engines:Plume_of_Rebirth",
       "rank": 5,
       "rankKind": "refinement",
-      "count": 2,
+      "count": 3,
       "status": "has-effect-record"
     },
     {
@@ -11578,6 +11578,36 @@
       "normalizedValue": 20
     },
     {
+      "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/1",
+      "catalogEntityId": "agents:alice",
+      "rank": 2,
+      "rankKind": "mindscape",
+      "stat": "turbulenceDmgBonus",
+      "optionId": "agents:alice:mindscape:2:blk-legacy:eff-mvhhq6pm-b",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "爱丽丝 M2 的 turbulenceDmgBonus 15% 没有独立文本依据：Nanoka /talent/2/desc 只有“强击伤害提升15%”和“紊乱伤害提升15%”，而 Fairy 的宽口径 anomalyDmgBonus 已覆盖异放与乱流。本记录先登记为待口径裁定的冲突，不生成贡献。",
+      "normalizationChanges": [],
+      "rawValue": 15,
+      "normalizedValue": 15
+    },
+    {
+      "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/3",
+      "catalogEntityId": "agents:alice",
+      "rank": 2,
+      "rankKind": "mindscape",
+      "stat": "anomalyReleaseDmgBonus",
+      "optionId": "agents:alice:mindscape:2:blk-legacy:eff-mvhhq6pm-d",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "爱丽丝 M2 的 anomalyReleaseDmgBonus 15% 没有独立文本依据：Nanoka /talent/2/desc 只有“强击伤害提升15%”和“紊乱伤害提升15%”，而 Fairy 的宽口径 anomalyDmgBonus 已覆盖异放与乱流。本记录先登记为待口径裁定的冲突，不生成贡献。",
+      "normalizationChanges": [],
+      "rawValue": 15,
+      "normalizedValue": 15
+    },
+    {
       "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0",
       "catalogEntityId": "agents:alice",
       "rank": 2,
@@ -11593,7 +11623,7 @@
       "normalizedValue": 15
     },
     {
-      "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/1",
+      "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/2",
       "catalogEntityId": "agents:alice",
       "rank": 2,
       "rankKind": "mindscape",
@@ -11632,7 +11662,7 @@
       "effectIds": [
         "agent:1011:zzz-hp:eff-ms47xm3l-nf7ga7:blk-ms47xm3l-3pumvj:mindscape:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 30,
       "normalizedValue": 30
@@ -11647,7 +11677,7 @@
       "effectIds": [
         "agent:1011:zzz-hp:legacy-self-skillDmgBonus:blk-legacy:mindscape:6"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 45,
       "normalizedValue": 45
@@ -13799,7 +13829,7 @@
       "normalizedValue": 40
     },
     {
-      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/2",
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
       "catalogEntityId": "agents:jane",
       "rank": 0,
       "rankKind": "mindscape",
@@ -13814,7 +13844,7 @@
       "normalizedValue": 50
     },
     {
-      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/3",
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/7",
       "catalogEntityId": "agents:jane",
       "rank": 0,
       "rankKind": "mindscape",
@@ -13824,6 +13854,96 @@
         "agent:1261:zzz-hp:eff-ms34ci0p-usidux:blk-ms349twy-zgu7b6:mindscape:0"
       ],
       "status": "converted",
+      "normalizationChanges": [],
+      "rawValue": 0,
+      "normalizedValue": 0
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/2",
+      "catalogEntityId": "agents:jane",
+      "rank": 0,
+      "rankKind": "mindscape",
+      "stat": "turbulenceCritRate",
+      "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-mvjcx1mw-5",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "简的 turbulenceCritRate 记录是“强击伤害”宽口径的展开版；Fairy 的 anomalyCritRate/anomalyCritDmg 已覆盖异放与乱流。先登记为待口径裁定的冲突，不生成可执行贡献。",
+      "normalizationChanges": [],
+      "rawValue": 40,
+      "normalizedValue": 40
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/3",
+      "catalogEntityId": "agents:jane",
+      "rank": 0,
+      "rankKind": "mindscape",
+      "stat": "anomalyReleaseCritRate",
+      "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-mvjcx1mw-6",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "简的 anomalyReleaseCritRate 记录是“强击伤害”宽口径的展开版；Fairy 的 anomalyCritRate/anomalyCritDmg 已覆盖异放与乱流。先登记为待口径裁定的冲突，不生成可执行贡献。",
+      "normalizationChanges": [],
+      "rawValue": 40,
+      "normalizedValue": 40
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/5",
+      "catalogEntityId": "agents:jane",
+      "rank": 0,
+      "rankKind": "mindscape",
+      "stat": "turbulenceCritDmg",
+      "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-mvjcx52e-9",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "简的 turbulenceCritDmg 记录是“强击伤害”宽口径的展开版；Fairy 的 anomalyCritRate/anomalyCritDmg 已覆盖异放与乱流。先登记为待口径裁定的冲突，不生成可执行贡献。",
+      "normalizationChanges": [],
+      "rawValue": 50,
+      "normalizedValue": 50
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/6",
+      "catalogEntityId": "agents:jane",
+      "rank": 0,
+      "rankKind": "mindscape",
+      "stat": "anomalyReleaseCritDmg",
+      "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-mvjcx52e-a",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "简的 anomalyReleaseCritDmg 记录是“强击伤害”宽口径的展开版；Fairy 的 anomalyCritRate/anomalyCritDmg 已覆盖异放与乱流。先登记为待口径裁定的冲突，不生成可执行贡献。",
+      "normalizationChanges": [],
+      "rawValue": 50,
+      "normalizedValue": 50
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/8",
+      "catalogEntityId": "agents:jane",
+      "rank": 0,
+      "rankKind": "mindscape",
+      "stat": "turbulenceCritRate",
+      "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-mvjcx8vt-b",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "简的 turbulenceCritRate 记录是“强击伤害”宽口径的展开版；Fairy 的 anomalyCritRate/anomalyCritDmg 已覆盖异放与乱流。先登记为待口径裁定的冲突，不生成可执行贡献。",
+      "normalizationChanges": [],
+      "rawValue": 0,
+      "normalizedValue": 0
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/9",
+      "catalogEntityId": "agents:jane",
+      "rank": 0,
+      "rankKind": "mindscape",
+      "stat": "anomalyReleaseCritRate",
+      "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-mvjcx8vt-c",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "简的 anomalyReleaseCritRate 记录是“强击伤害”宽口径的展开版；Fairy 的 anomalyCritRate/anomalyCritDmg 已覆盖异放与乱流。先登记为待口径裁定的冲突，不生成可执行贡献。",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -13844,7 +13964,7 @@
       "normalizedValue": 10
     },
     {
-      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/1",
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/3",
       "catalogEntityId": "agents:jane",
       "rank": 0,
       "rankKind": "mindscape",
@@ -13854,6 +13974,66 @@
       "status": "unsupported",
       "reason": "semantic-conflict",
       "explanation": "该部分记录已合并至完整状态选项 agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-ms34gorp-xrbl8x；不得与完整值重复选择。",
+      "normalizationChanges": [],
+      "rawValue": 0,
+      "normalizedValue": 0
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/1",
+      "catalogEntityId": "agents:jane",
+      "rank": 0,
+      "rankKind": "mindscape",
+      "stat": "turbulenceCritDmg",
+      "optionId": "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-mvhhtmvu-3",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "简的 turbulenceCritDmg 记录是“强击伤害”宽口径的展开版；Fairy 的 anomalyCritRate/anomalyCritDmg 已覆盖异放与乱流。先登记为待口径裁定的冲突，不生成可执行贡献。",
+      "normalizationChanges": [],
+      "rawValue": 10,
+      "normalizedValue": 10
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/2",
+      "catalogEntityId": "agents:jane",
+      "rank": 0,
+      "rankKind": "mindscape",
+      "stat": "anomalyReleaseCritDmg",
+      "optionId": "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-mvhhtmvu-4",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "简的 anomalyReleaseCritDmg 记录是“强击伤害”宽口径的展开版；Fairy 的 anomalyCritRate/anomalyCritDmg 已覆盖异放与乱流。先登记为待口径裁定的冲突，不生成可执行贡献。",
+      "normalizationChanges": [],
+      "rawValue": 10,
+      "normalizedValue": 10
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/4",
+      "catalogEntityId": "agents:jane",
+      "rank": 0,
+      "rankKind": "mindscape",
+      "stat": "turbulenceCritDmg",
+      "optionId": "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-mvhhtu2b-7",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "简的 turbulenceCritDmg 记录是“强击伤害”宽口径的展开版；Fairy 的 anomalyCritRate/anomalyCritDmg 已覆盖异放与乱流。先登记为待口径裁定的冲突，不生成可执行贡献。",
+      "normalizationChanges": [],
+      "rawValue": 0,
+      "normalizedValue": 0
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/5",
+      "catalogEntityId": "agents:jane",
+      "rank": 0,
+      "rankKind": "mindscape",
+      "stat": "anomalyReleaseCritDmg",
+      "optionId": "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-mvhhtu2b-8",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "简的 anomalyReleaseCritDmg 记录是“强击伤害”宽口径的展开版；Fairy 的 anomalyCritRate/anomalyCritDmg 已覆盖异放与乱流。先登记为待口径裁定的冲突，不生成可执行贡献。",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -13872,6 +14052,36 @@
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/2/effectBlocks/0/effects/2",
+      "catalogEntityId": "agents:jane",
+      "rank": 2,
+      "rankKind": "mindscape",
+      "stat": "turbulenceCritDmg",
+      "optionId": "agents:jane:mindscape:2:blk-legacy:eff-mvhhs5hr-l",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "简的 turbulenceCritDmg 记录是“强击伤害”宽口径的展开版；Fairy 的 anomalyCritRate/anomalyCritDmg 已覆盖异放与乱流。先登记为待口径裁定的冲突，不生成可执行贡献。",
+      "normalizationChanges": [],
+      "rawValue": 50,
+      "normalizedValue": 50
+    },
+    {
+      "pointer": "/agents/44/mindscapeBuffs/2/effectBlocks/0/effects/3",
+      "catalogEntityId": "agents:jane",
+      "rank": 2,
+      "rankKind": "mindscape",
+      "stat": "anomalyReleaseCritDmg",
+      "optionId": "agents:jane:mindscape:2:blk-legacy:eff-mvhhs5hr-m",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "简的 anomalyReleaseCritDmg 记录是“强击伤害”宽口径的展开版；Fairy 的 anomalyCritRate/anomalyCritDmg 已覆盖异放与乱流。先登记为待口径裁定的冲突，不生成可执行贡献。",
+      "normalizationChanges": [],
+      "rawValue": 50,
+      "normalizedValue": 50
     },
     {
       "pointer": "/agents/44/mindscapeBuffs/2/effectBlocks/0/effects/1",
@@ -15560,7 +15770,7 @@
         "agent:1641:zzz-hp:eff-0:blk-mindscapeBuffs-0-1:mindscape:0"
       ],
       "status": "converted",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 85,
       "normalizedValue": 85
     },
@@ -15573,14 +15783,14 @@
       "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-1",
       "effectIds": [],
       "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 30,
       "normalizedValue": 30,
       "reason": "semantic-conflict",
       "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/1。"
     },
     {
-      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/9",
+      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/14",
       "catalogEntityId": "agents:pheony",
       "rank": 0,
       "rankKind": "mindscape",
@@ -15590,12 +15800,12 @@
       "status": "unsupported",
       "reason": "semantic-conflict",
       "explanation": "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team anomalyReleaseCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 15,
       "normalizedValue": 15
     },
     {
-      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/10",
+      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/15",
       "catalogEntityId": "agents:pheony",
       "rank": 0,
       "rankKind": "mindscape",
@@ -15605,12 +15815,12 @@
       "status": "unsupported",
       "reason": "semantic-conflict",
       "explanation": "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team turbulenceCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 15,
       "normalizedValue": 15
     },
     {
-      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/11",
+      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/16",
       "catalogEntityId": "agents:pheony",
       "rank": 0,
       "rankKind": "mindscape",
@@ -15620,12 +15830,12 @@
       "status": "unsupported",
       "reason": "semantic-conflict",
       "explanation": "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team radianceCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 15,
       "normalizedValue": 15
     },
     {
-      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/12",
+      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/2",
       "catalogEntityId": "agents:pheony",
       "rank": 0,
       "rankKind": "mindscape",
@@ -15633,99 +15843,9 @@
       "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-13",
       "effectIds": [],
       "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 30,
       "normalizedValue": 30,
-      "reason": "semantic-conflict",
-      "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/12。"
-    },
-    {
-      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/13",
-      "catalogEntityId": "agents:pheony",
-      "rank": 0,
-      "rankKind": "mindscape",
-      "stat": "turbulenceCritRate",
-      "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-14",
-      "effectIds": [],
-      "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
-      "rawValue": 30,
-      "normalizedValue": 30,
-      "reason": "semantic-conflict",
-      "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/13。"
-    },
-    {
-      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/14",
-      "catalogEntityId": "agents:pheony",
-      "rank": 0,
-      "rankKind": "mindscape",
-      "stat": "radianceCritRate",
-      "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-15",
-      "effectIds": [],
-      "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
-      "rawValue": 30,
-      "normalizedValue": 30,
-      "reason": "semantic-conflict",
-      "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/14。"
-    },
-    {
-      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/15",
-      "catalogEntityId": "agents:pheony",
-      "rank": 0,
-      "rankKind": "mindscape",
-      "stat": "anomalyReleaseCritRate",
-      "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-16",
-      "effectIds": [],
-      "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
-      "rawValue": 0,
-      "normalizedValue": 0,
-      "reason": "semantic-conflict",
-      "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/15。"
-    },
-    {
-      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/16",
-      "catalogEntityId": "agents:pheony",
-      "rank": 0,
-      "rankKind": "mindscape",
-      "stat": "turbulenceCritRate",
-      "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-17",
-      "effectIds": [],
-      "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
-      "rawValue": 0,
-      "normalizedValue": 0,
-      "reason": "semantic-conflict",
-      "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/16。"
-    },
-    {
-      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17",
-      "catalogEntityId": "agents:pheony",
-      "rank": 0,
-      "rankKind": "mindscape",
-      "stat": "radianceCritRate",
-      "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-18",
-      "effectIds": [],
-      "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
-      "rawValue": 0,
-      "normalizedValue": 0,
-      "reason": "semantic-conflict",
-      "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17。"
-    },
-    {
-      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/2",
-      "catalogEntityId": "agents:pheony",
-      "rank": 0,
-      "rankKind": "mindscape",
-      "stat": "anomalyCritDmg",
-      "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-2",
-      "effectIds": [],
-      "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
-      "rawValue": 25,
-      "normalizedValue": 25,
       "reason": "semantic-conflict",
       "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/2。"
     },
@@ -15734,18 +15854,108 @@
       "catalogEntityId": "agents:pheony",
       "rank": 0,
       "rankKind": "mindscape",
-      "stat": "anomalyCritRate",
-      "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-3",
+      "stat": "turbulenceCritRate",
+      "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-14",
       "effectIds": [],
       "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
-      "rawValue": 0,
-      "normalizedValue": 0,
+      "normalizationChanges": [],
+      "rawValue": 30,
+      "normalizedValue": 30,
       "reason": "semantic-conflict",
       "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/3。"
     },
     {
       "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/4",
+      "catalogEntityId": "agents:pheony",
+      "rank": 0,
+      "rankKind": "mindscape",
+      "stat": "radianceCritRate",
+      "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-15",
+      "effectIds": [],
+      "status": "unsupported",
+      "normalizationChanges": [],
+      "rawValue": 30,
+      "normalizedValue": 30,
+      "reason": "semantic-conflict",
+      "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/4。"
+    },
+    {
+      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/10",
+      "catalogEntityId": "agents:pheony",
+      "rank": 0,
+      "rankKind": "mindscape",
+      "stat": "anomalyReleaseCritRate",
+      "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-16",
+      "effectIds": [],
+      "status": "unsupported",
+      "normalizationChanges": [],
+      "rawValue": 0,
+      "normalizedValue": 0,
+      "reason": "semantic-conflict",
+      "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/10。"
+    },
+    {
+      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/11",
+      "catalogEntityId": "agents:pheony",
+      "rank": 0,
+      "rankKind": "mindscape",
+      "stat": "turbulenceCritRate",
+      "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-17",
+      "effectIds": [],
+      "status": "unsupported",
+      "normalizationChanges": [],
+      "rawValue": 0,
+      "normalizedValue": 0,
+      "reason": "semantic-conflict",
+      "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/11。"
+    },
+    {
+      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/12",
+      "catalogEntityId": "agents:pheony",
+      "rank": 0,
+      "rankKind": "mindscape",
+      "stat": "radianceCritRate",
+      "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-18",
+      "effectIds": [],
+      "status": "unsupported",
+      "normalizationChanges": [],
+      "rawValue": 0,
+      "normalizedValue": 0,
+      "reason": "semantic-conflict",
+      "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/12。"
+    },
+    {
+      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/5",
+      "catalogEntityId": "agents:pheony",
+      "rank": 0,
+      "rankKind": "mindscape",
+      "stat": "anomalyCritDmg",
+      "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-2",
+      "effectIds": [],
+      "status": "unsupported",
+      "normalizationChanges": [],
+      "rawValue": 25,
+      "normalizedValue": 25,
+      "reason": "semantic-conflict",
+      "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/5。"
+    },
+    {
+      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/9",
+      "catalogEntityId": "agents:pheony",
+      "rank": 0,
+      "rankKind": "mindscape",
+      "stat": "anomalyCritRate",
+      "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-3",
+      "effectIds": [],
+      "status": "unsupported",
+      "normalizationChanges": [],
+      "rawValue": 0,
+      "normalizedValue": 0,
+      "reason": "semantic-conflict",
+      "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/9。"
+    },
+    {
+      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/13",
       "catalogEntityId": "agents:pheony",
       "rank": 0,
       "rankKind": "mindscape",
@@ -15755,7 +15965,7 @@
       "status": "unsupported",
       "reason": "semantic-conflict",
       "explanation": "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team anomalyCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 15,
       "normalizedValue": 15
     },
@@ -15768,7 +15978,7 @@
       "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-6",
       "effectIds": [],
       "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 25,
       "normalizedValue": 25,
       "reason": "semantic-conflict",
@@ -15783,7 +15993,7 @@
       "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-7",
       "effectIds": [],
       "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 25,
       "normalizedValue": 25,
       "reason": "semantic-conflict",
@@ -15798,14 +16008,14 @@
       "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-8",
       "effectIds": [],
       "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 25,
       "normalizedValue": 25,
       "reason": "semantic-conflict",
       "explanation": "该记录已并入完整状态选项 agents:pheony:mindscape:0:abrasion-core-state（行为修正 pheony-abrasion-complete-state）：[灼蚀]核心与影画1/2记录属于同一敌人状态；目录拒绝把 M1/M2 的 effectId 放进 M0 选项（报 CONTEXT_MISMATCH），因此按影画累计为 M0/M1/M2 三档互斥选项：M0 只核心12条、M1 核心12+M1 4条、M2 核心12+M1 4+M2 1条。同一绑定只能选一档，M1/M2 档自带核心记录，未选核心也不会形成半状态；旧单项全部迁移为不可选入口。；独立单选、两项齐选或与完整选项混选都不再接受，请改选完整状态选项。来源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/8。"
     },
     {
-      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/5",
+      "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17",
       "catalogEntityId": "agents:pheony",
       "rank": 0,
       "rankKind": "mindscape",
@@ -15815,7 +16025,7 @@
       "status": "unsupported",
       "reason": "semantic-conflict",
       "explanation": "M4 的“该次[异放]效果触发暴击时，其暴击伤害额外提升40%”只属于 M4 触发的异放结算；固定记录是自身常驻 anomalyReleaseCritDmg +40。D4-1a 暂不把它当常驻异放暴伤执行，D4-1b 将按 anomaly-settlement-critical-damage 通道绑定到 M4 600% 结算选项。",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 40,
       "normalizedValue": 40
     },
@@ -15828,7 +16038,7 @@
       "optionId": "agents:pheony:mindscape:1:blk-mindscapeBuffs-1-1:eff-19",
       "effectIds": [],
       "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 25,
       "normalizedValue": 25,
       "reason": "semantic-conflict",
@@ -15843,7 +16053,7 @@
       "optionId": "agents:pheony:mindscape:1:blk-mindscapeBuffs-1-1:eff-20",
       "effectIds": [],
       "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 25,
       "normalizedValue": 25,
       "reason": "semantic-conflict",
@@ -15858,7 +16068,7 @@
       "optionId": "agents:pheony:mindscape:1:blk-mindscapeBuffs-1-1:eff-21",
       "effectIds": [],
       "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 25,
       "normalizedValue": 25,
       "reason": "semantic-conflict",
@@ -15873,7 +16083,7 @@
       "optionId": "agents:pheony:mindscape:1:blk-mindscapeBuffs-1-1:eff-5",
       "effectIds": [],
       "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 25,
       "normalizedValue": 25,
       "reason": "semantic-conflict",
@@ -15888,7 +16098,7 @@
       "optionId": "agents:pheony:mindscape:2:blk-mindscapeBuffs-2-1:eff-6",
       "effectIds": [],
       "status": "unsupported",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 30,
       "normalizedValue": 30,
       "reason": "semantic-conflict",
@@ -15920,7 +16130,7 @@
         "agent:1641:zzz-hp:eff-7:blk-mindscapeBuffs-6-1:mindscape:6"
       ],
       "status": "converted",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 15,
       "normalizedValue": 15
     },
@@ -15935,7 +16145,7 @@
         "agent:1641:zzz-hp:eff-8:blk-mindscapeBuffs-6-1:mindscape:6"
       ],
       "status": "converted",
-      "normalizationChanges": ["skillTargets"],
+      "normalizationChanges": [],
       "rawValue": 40,
       "normalizedValue": 40
     },
@@ -27246,6 +27456,21 @@
       "normalizedValue": 52
     },
     {
+      "pointer": "/wengines/60/refinementBuffs/4/effectBlocks/1/effects/0",
+      "catalogEntityId": "w-engines:Plume_of_Rebirth",
+      "rank": 5,
+      "rankKind": "refinement",
+      "stat": "dmgBonus",
+      "optionId": "w-engines:Plume_of_Rebirth:refinement:blk-mviwn8gu-b8fedl:eff-mviwn8gu-8wi5ap",
+      "effectIds": [],
+      "status": "unsupported",
+      "reason": "semantic-conflict",
+      "explanation": "991bb0e 在涅槃初翎精炼 5 新增一个 dmgBonus:0 的空效果块；Nanoka 五档天赋只写异常精通与火属性增伤，没有零值条款。该记录不生成可执行贡献，登记为待来源复核的冲突。",
+      "normalizationChanges": [],
+      "rawValue": 0,
+      "normalizedValue": 0
+    },
+    {
       "pointer": "/wengines/22/refinementBuffs/0/effectBlocks/0/effects/0",
       "catalogEntityId": "w-engines:Practiced_Perfection",
       "rank": 1,
@@ -31957,6 +32182,16 @@
       "status": "integrated"
     },
     {
+      "supplementId": "nanoka:agents:anby:m2-enhanced-special-daze",
+      "source": "nanoka-integrated@3.3.12+19634983 agents/1011 /talent/2/desc",
+      "kind": "unsupported-option",
+      "optionId": "nanoka:agents:anby:m2-enhanced-special-daze",
+      "supportedRanks": "影画 2 及以上（不可选）",
+      "computationTarget": "declared unavailable option on the mapped agent entity",
+      "status": "out-of-scope",
+      "reason": "影画 2 同一句的失衡值部分：强化特殊技命中未失衡敌人时，失衡值提升 10%。失衡值与伤害、冲击力是不同量纲；当前完整静态入口不计算最终失衡值，本批不新增失衡公式，也不把该条款折算为增伤或冲击力。显式选择本选项会得到本错误。"
+    },
+    {
       "supplementId": "nanoka:agents:alice:core-periodic-damage",
       "source": "nanoka-integrated@3.3.12+19634983 agents/1401 /passive/level/1401501—1401507/desc/0",
       "kind": "option",
@@ -32811,19 +33046,19 @@
     "entities": 196,
     "packs": 1118,
     "emptyPacks": 397,
-    "rawEffects": 1360,
+    "rawEffects": 1375,
     "rules": 931,
-    "options": 986,
-    "converted": 1167,
-    "corrected": 116,
-    "unsupported": 77,
+    "options": 1002,
+    "converted": 1165,
+    "corrected": 118,
+    "unsupported": 92,
     "supplements": {
-      "records": 101,
+      "records": 102,
       "rules": 72,
       "options": 63,
       "entities": 0,
       "integrated": 68,
-      "outOfScope": 33
+      "outOfScope": 34
     }
   },
   "reverseGaps": [],
