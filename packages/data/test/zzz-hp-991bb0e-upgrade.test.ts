@@ -156,8 +156,8 @@ describe("ZZZ-HP 991bb0e source upgrade", () => {
       rawEffects: 1375,
       rules: 931,
       options: 1002,
-      converted: 1150,
-      corrected: 133,
+      converted: 1149,
+      corrected: 134,
       unsupported: 92,
     })
     expect(

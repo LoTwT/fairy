@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "55",
+  "revision": "56",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
@@ -31680,7 +31680,7 @@
       "effectIds": [
         "w-engine:14147:zzz-hp:legacy-self-turbulenceDmgBonus:blk-legacy:refinement:2"
       ],
-      "status": "converted",
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 0,
       "normalizedValue": 0
@@ -33049,8 +33049,8 @@
     "rawEffects": 1375,
     "rules": 931,
     "options": 1002,
-    "converted": 1150,
-    "corrected": 133,
+    "converted": 1149,
+    "corrected": 134,
     "unsupported": 92,
     "supplements": {
       "records": 102,

@@ -1169,6 +1169,37 @@ describe("fixed-source catalog conformance", () => {
     // The explicit turbulence record contributes 7% once; no duplicate 7%.
     expect(ratio(combined, "vortex")).toBeCloseTo(1.07, 12)
   })
+  it("corrects Wrathful Vajra R2 from vortex to fire sheer", () => {
+    const pointer = "/wengines/42/refinementBuffs/1/effectBlocks/0/effects/1"
+    const effectId =
+      "w-engine:14147:zzz-hp:legacy-self-turbulenceDmgBonus:blk-legacy:refinement:2"
+    const input = referenceInput(pointer)
+    const positive = calculateCatalogResult(input)
+    const positiveContribution = positive.evaluation.contributions.find(
+      (contribution) => contribution.origin.effectId === effectId,
+    )
+    expect(positiveContribution?.address).toMatchObject({
+      kind: "factor",
+      channel: "sheer-damage-bonus",
+    })
+    expect(positiveContribution?.value).toMatchObject({
+      unit: "ratio",
+      value: 0.1035,
+    })
+    const vortexDamage = (
+      oracle.tables.damage as StaticCatalogDamageInput["damage"][]
+    ).find((damage) => damage.kind === "vortex")
+    if (!vortexDamage) throw new Error("fixture")
+    const vortex = calculateCatalogResult({
+      ...input,
+      damage: vortexDamage,
+    } as StaticCatalogDamageInput)
+    expect(
+      vortex.evaluation.contributions.some(
+        (contribution) => contribution.origin.effectId === effectId,
+      ),
+    ).toBe(false)
+  })
   it("consumes Burnice's skill multiplier only for the selected matching hit", () => {
     const input = referenceInput(
       "/agents/26/mindscapeBuffs/0/effectBlocks/1/effects/0",
@@ -2327,7 +2358,7 @@ describe("fixed-source catalog conformance", () => {
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
     it("exposes one complete option with the original rules and migration evidence", () => {
-      expect(catalog.revision).toBe("55")
+      expect(catalog.revision).toBe("56")
       expect(
         catalog.differences.some((d) => d.differenceId === differenceId),
         differenceId,

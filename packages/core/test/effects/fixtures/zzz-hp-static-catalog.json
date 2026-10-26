@@ -45125,7 +45125,7 @@
       "input": {
         "world": 0,
         "hit": 13,
-        "damage": 10,
+        "damage": 4,
         "bindings": 653,
         "selections": 761,
         "actorSources": 7,

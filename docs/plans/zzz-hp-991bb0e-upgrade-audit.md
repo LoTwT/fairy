@@ -43,7 +43,8 @@
 后续 revision 55 已完成该审计：格莉丝、薇薇安 M0、爱丽丝 M2、简和琳琅鎏心
 按块 note 与 Nanoka 中英文把命名子类的宽口径记录收窄为 `anomaly`，详见
 [宽口径异常增伤审计](anomaly-broad-scope-audit.md)。菲欧妮的全部相关记录仍为
-`semantic-conflict`；`w-engine:14147` 精炼 2 的上游 `stat` 笔误单独留待后续。
+`semantic-conflict`；`w-engine:14147` 精炼 2 的上游 `stat` 笔误已由
+[修订 56](wrathful-vajra-r2-sheer-correction.md) 单独修正。
 
 ## 预期制品变化
 
