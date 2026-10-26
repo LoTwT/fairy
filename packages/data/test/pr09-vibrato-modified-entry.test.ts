@@ -49,7 +49,7 @@ describe("batch 09 Nangongyu vibrato-modified through the published data package
     )
     if (!definitions.ok) throw new Error(JSON.stringify(definitions.issues))
     const catalog = calculationData.catalog as StaticEffectCatalog
-    expect(catalog.revision).toBe("52")
+    expect(catalog.revision).toBe("53")
     for (const optionId of [M6_NONPHYSICAL, M6_PHYSICAL])
       expect(
         catalog.options.some((o) => o.optionId === optionId),

@@ -8,12 +8,12 @@
 
 ## 当前计数
 
-- 静态 effects：1,167 converted、116 corrected、77 unsupported。
-- 补充来源：101 条记录，68 条已整合，33 条 out-of-scope。
+- 静态 effects（revision 53）：1,165 converted、118 corrected、92 unsupported。
+- 补充来源：102 条记录，68 条已整合，34 条 out-of-scope。
 - 技能动作：62 名成员、1,348 条动作；4 条 unavailable。
-- core oracle：1,688 条 case，覆盖全部 1,167 个 converted 来源位置。
+- core oracle：1,688 条 case，覆盖全部 1,165 个 converted 来源位置。
 
-## 77 条 unsupported
+## 92 条 unsupported
 
 全部 `reason` 均为 `semantic-conflict`，不是转换器漏读。主要包括：
 
@@ -23,7 +23,7 @@
 
 **决定**：不强行把 unsupported 改成 converted。当前计算范围只覆盖已核实的伤害乘区；没有独立证据时不新增公式。
 
-## 116 条 corrected
+## 118 条 corrected
 
 这些记录已有明确修正来源，并登记在 31 个 `differenceId` 中。数量较大的类别包括：
 
@@ -35,7 +35,7 @@
 
 **决定**：保持 corrected；每条修正继续由具名测试和 coverage 解释约束，不把修正结果伪装成固定源原值。
 
-## 33 条 out-of-scope 补充来源
+## 34 条 out-of-scope 补充来源
 
 这些条款不属于当前“己方对敌伤害”输出：
 

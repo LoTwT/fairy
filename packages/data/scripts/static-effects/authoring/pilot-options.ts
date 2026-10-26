@@ -3,9 +3,9 @@ import type { AuthoringOption } from "./types.ts"
 export const ANBY_M2_OPTION = {
   optionId: "agents:anby:mindscape:2:blk-ms47xm3l-3pumvj:eff-ms47xm3l-nf7ga7",
   catalogEntityId: "agents:anby",
-  name: "影画2  · skillDmgBonus",
+  name: "2 影 · skillDmgBonus",
   conditionDescription:
-    "[普通攻击：落雷]命中处于失衡状态下的敌人时，招式造成的伤害提升30%",
+    "原文：[普通攻击：落雷]命中处于失衡状态下的敌人时，招式造成的伤害提升30%；[强化特殊技]命中未处于失衡状态下的敌人时，招式造成的失衡值提升10%。\n[关键字] 属性=招式增伤 元素=无 动作=提升 数值=30 单位=% 目标=全队 条件=无法提取 作用域=招式 层数=无 时长=无 对象=无\n作用域：招式",
   target: "self",
   variants: [
     {
@@ -15,11 +15,25 @@ export const ANBY_M2_OPTION = {
       references: [
         {
           sourceId: "zzz-hp",
-          version: "2628b32cece086e371bafa05518a9a12650d9f74",
+          version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
           locale: "zh",
           resourcePath:
             "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
           pointer: "/agents/16/mindscapeBuffs/2/effectBlocks/0/effects/0",
+        },
+        {
+          sourceId: "nanoka-integrated",
+          version: "3.3.12+19634983",
+          locale: "zh",
+          resourcePath: "agents/1011/details.zh.json",
+          pointer: "/talent/2/desc",
+        },
+        {
+          sourceId: "nanoka-integrated",
+          version: "3.3.12+19634983",
+          locale: "en",
+          resourcePath: "agents/1011/details.en.json",
+          pointer: "/talent/2/desc",
         },
       ],
       maximumLayers: 1,
@@ -46,7 +60,7 @@ export const QINGMING_CRIT_RATE_OPTION = {
       references: [
         {
           sourceId: "zzz-hp",
-          version: "2628b32cece086e371bafa05518a9a12650d9f74",
+          version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
           locale: "zh",
           resourcePath:
             "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -65,7 +79,7 @@ export const QINGMING_CRIT_RATE_OPTION = {
       references: [
         {
           sourceId: "zzz-hp",
-          version: "2628b32cece086e371bafa05518a9a12650d9f74",
+          version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
           locale: "zh",
           resourcePath:
             "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -84,7 +98,7 @@ export const QINGMING_CRIT_RATE_OPTION = {
       references: [
         {
           sourceId: "zzz-hp",
-          version: "2628b32cece086e371bafa05518a9a12650d9f74",
+          version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
           locale: "zh",
           resourcePath:
             "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -103,7 +117,7 @@ export const QINGMING_CRIT_RATE_OPTION = {
       references: [
         {
           sourceId: "zzz-hp",
-          version: "2628b32cece086e371bafa05518a9a12650d9f74",
+          version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
           locale: "zh",
           resourcePath:
             "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -122,7 +136,7 @@ export const QINGMING_CRIT_RATE_OPTION = {
       references: [
         {
           sourceId: "zzz-hp",
-          version: "2628b32cece086e371bafa05518a9a12650d9f74",
+          version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
           locale: "zh",
           resourcePath:
             "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -152,7 +166,7 @@ export const MIYABI_TERMINAL_OPTION = {
       references: [
         {
           sourceId: "zzz-hp",
-          version: "2628b32cece086e371bafa05518a9a12650d9f74",
+          version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
           locale: "zh",
           resourcePath:
             "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -197,7 +211,7 @@ export const MIYABI_BASIC_OPTION = {
       references: [
         {
           sourceId: "zzz-hp",
-          version: "2628b32cece086e371bafa05518a9a12650d9f74",
+          version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
           locale: "zh",
           resourcePath:
             "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -291,7 +305,7 @@ export const REMIEL_COMPLETE_OPTION = {
       references: [
         {
           sourceId: "zzz-hp",
-          version: "2628b32cece086e371bafa05518a9a12650d9f74",
+          version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
           locale: "zh",
           resourcePath:
             "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -299,7 +313,7 @@ export const REMIEL_COMPLETE_OPTION = {
         },
         {
           sourceId: "zzz-hp",
-          version: "2628b32cece086e371bafa05518a9a12650d9f74",
+          version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
           locale: "zh",
           resourcePath:
             "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -332,7 +346,7 @@ export const REMIEL_OLD_TEAM_OPTION = {
       references: [
         {
           sourceId: "zzz-hp",
-          version: "2628b32cece086e371bafa05518a9a12650d9f74",
+          version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
           locale: "zh",
           resourcePath:
             "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -362,7 +376,7 @@ export const REMIEL_OLD_HOLDER_OPTION = {
       references: [
         {
           sourceId: "zzz-hp",
-          version: "2628b32cece086e371bafa05518a9a12650d9f74",
+          version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
           locale: "zh",
           resourcePath:
             "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -394,7 +408,7 @@ export const LIGHTER_OLD_OPTION = {
       references: [
         {
           sourceId: "zzz-hp",
-          version: "2628b32cece086e371bafa05518a9a12650d9f74",
+          version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
           locale: "zh",
           resourcePath:
             "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -540,7 +554,7 @@ export const NEKOMATA_CLAW_OPTION = {
       references: [
         {
           sourceId: "zzz-hp",
-          version: "2628b32cece086e371bafa05518a9a12650d9f74",
+          version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
           locale: "zh",
           resourcePath:
             "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",

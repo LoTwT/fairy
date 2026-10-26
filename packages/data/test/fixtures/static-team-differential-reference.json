@@ -4,9 +4,9 @@
     "snapshotId": "sha256:e946d6b30b9747a3daeaac034fc14a4dc127c7e550ab63f0c54b1e1d4bf693c4",
     "effectsRevision": 14,
     "effectSource": {
-      "commit": "2628b32cece086e371bafa05518a9a12650d9f74",
+      "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
       "resource": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-      "sha256": "57c4aacca5455aa20f75f21967e294d8506ec1970a06e9c808557bdb3a91e20f"
+      "sha256": "f1df0144ee962138cd09dbdd36511eab46fb3d6016ec638ddab7fc4a01737095"
     },
     "skillSource": {
       "commit": "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357",
@@ -20,8 +20,8 @@
     "resources": [
       {
         "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
-        "commit": "2628b32cece086e371bafa05518a9a12650d9f74",
-        "sha256": "57c4aacca5455aa20f75f21967e294d8506ec1970a06e9c808557bdb3a91e20f"
+        "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+        "sha256": "f1df0144ee962138cd09dbdd36511eab46fb3d6016ec638ddab7fc4a01737095"
       },
       {
         "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -30,37 +30,37 @@
       },
       {
         "path": "zzz-hp/src/utils/calcNumberFormat.ts",
-        "commit": "2628b32cece086e371bafa05518a9a12650d9f74",
-        "sha256": "1e8b3a819df03de2911f210988501f3d8ae47d7abf05c2d9558a7e6c7478c03a"
+        "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+        "sha256": "21ca4409aed25475f3d3f883f9ffd728dd702aaf763c846f14431a95f111962c"
       },
       {
         "path": "zzz-hp/src/utils/skillTalentLevels.ts",
-        "commit": "2628b32cece086e371bafa05518a9a12650d9f74",
+        "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
         "sha256": "0391667fba8f39c868ab6bc8aa3609c2b72313e0ae00bd273ccb220de06faa6d"
       },
       {
         "path": "zzz-hp/src/utils/buffEffect.ts",
-        "commit": "2628b32cece086e371bafa05518a9a12650d9f74",
+        "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
         "sha256": "88c850fc2dce5017905a624357b169b41b5586a1f5d76218e48a61baff7c9909"
       },
       {
         "path": "zzz-hp/src/utils/panelBuffCalc.ts",
-        "commit": "2628b32cece086e371bafa05518a9a12650d9f74",
+        "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
         "sha256": "43ec23eafa28b8d0748636ab9885e1497fab8cd11e458268acd746c9adc40c09"
       },
       {
         "path": "zzz-hp/src/utils/damageCalc.ts",
-        "commit": "2628b32cece086e371bafa05518a9a12650d9f74",
+        "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
         "sha256": "2ef2e81cd11af03a3f9a5df82622c238ae3b6f9596346eee97136b7a2b427a71"
       },
       {
         "path": "zzz-hp/src/utils/calculatorUi.ts",
-        "commit": "2628b32cece086e371bafa05518a9a12650d9f74",
+        "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
         "sha256": "e61bf67fab73920889338997d77d12190b45d29cfd5cb49703802a0953fb1cfe"
       },
       {
         "path": "zzz-hp/src/utils/remielUtils.ts",
-        "commit": "2628b32cece086e371bafa05518a9a12650d9f74",
+        "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
         "sha256": "1cb8084a981115924b0cdc64961a67f937c280fe82babe2710758c7b279d8773"
       }
     ],

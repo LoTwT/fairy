@@ -43,6 +43,9 @@ function preservesArrayOrder(path: string): boolean {
 }
 
 export function canonicalize(value: unknown, path = ""): unknown {
+  // JSON 输出不区分 -0 与 0；作者层与转换器对同一数值的符号零差异不应
+  // 被语义比较器误报为真实差异。
+  if (typeof value === "number") return Object.is(value, -0) ? 0 : value
   if (Array.isArray(value)) {
     const items = value.map((entry, index) =>
       canonicalize(entry, `${path}[${index}]`),

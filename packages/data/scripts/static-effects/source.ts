@@ -4,9 +4,10 @@ import { join } from "node:path"
 import { runInNewContext } from "node:vm"
 import ts from "typescript"
 import manifest from "./source-manifest.json" with { type: "json" }
+import { markLoadedSourceData } from "./source-data-marker.ts"
 
 export const SOURCE_REPOSITORY = "LoTwT/ZZZ-HP"
-export const SOURCE_COMMIT = "2628b32cece086e371bafa05518a9a12650d9f74"
+export const SOURCE_COMMIT = "991bb0ef2a00387f8a1fa18293bbda17256d7270"
 export const BUFF_RESOURCE =
   "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json"
 export interface SourceEffect {
@@ -253,6 +254,7 @@ export async function loadSource(root: string): Promise<{
     throw new Error(
       "Default-agent loading changes the fixed coverage; explicit source accounting is required",
     )
+  markLoadedSourceData(data)
   return {
     data,
     functions: { ...buff, ...store, ...panel } as unknown as SourceFunctions,

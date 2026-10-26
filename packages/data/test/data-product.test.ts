@@ -361,9 +361,9 @@ describe("data product manifests", () => {
     expect(manifest.product).toBe("static-effects")
     expect(manifest.schemaVersion).toBe(1)
     expect(manifest.rulesVersion).toEqual({
-      label: "zzz-hp-static-effects/52",
+      label: "zzz-hp-static-effects/53",
       ruleSetId: "zzz-hp-static-effects",
-      revision: "52",
+      revision: "53",
     })
     expect(manifest.source).toEqual({
       repository: structureBaseline.effects.sourceRepository,
@@ -384,16 +384,16 @@ describe("data product manifests", () => {
       structureBaseline.effects.staticCoverage.recordCount,
     )
     expect(manifest.coverage.statusCounts).toEqual({
-      converted: 1167,
-      corrected: 116,
-      unsupported: 77,
+      converted: 1165,
+      corrected: 118,
+      unsupported: 92,
     })
     expect(manifest.coverage.supplementalCount).toBe(
       structureBaseline.effects.staticCoverage.supplementalRecordCount,
     )
     expect(manifest.coverage.supplementalStatusCounts).toEqual({
       "integrated": 68,
-      "out-of-scope": 33,
+      "out-of-scope": 34,
     })
     expect(manifest.discrepancies).toHaveLength(
       structureBaseline.effects.staticCatalog.differenceCount,
@@ -606,7 +606,7 @@ describe("static coverage query", () => {
 
   it("filters records by status and keeps unsupported reasons", () => {
     const unsupported = matchesFor({ status: "unsupported" })
-    expect(unsupported.matches).toHaveLength(77)
+    expect(unsupported.matches).toHaveLength(92)
     for (const match of unsupported.matches) {
       if (match.group !== "records") throw new Error("expected record")
       expect(match.status).toBe("unsupported")
@@ -622,7 +622,7 @@ describe("static coverage query", () => {
     ).toBe(true)
 
     const outOfScope = matchesFor({ status: "out-of-scope" })
-    expect(outOfScope.matches).toHaveLength(33)
+    expect(outOfScope.matches).toHaveLength(34)
     for (const match of outOfScope.matches) {
       if (match.group !== "supplementalRecords")
         throw new Error("expected supplemental record")

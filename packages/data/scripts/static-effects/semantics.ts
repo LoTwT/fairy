@@ -652,6 +652,29 @@ export type SourceSemantics =
     }
   | {
       /**
+       * 固定来源把普通攻击范围错误收窄到单个子类，而块 note 与 Nanoka
+       * 同文说明覆盖全部普通攻击（可另带冲刺攻击目标）。转换器保留原
+       * 稳定 ID 与数值，只按登记替换 skillTargets；raw/normalized 的
+       * stat、数值、目标元组与完整块 note 任一漂移即拒绝生成。
+       */
+      readonly kind: "skill-target-scope-correction"
+      readonly expectedStat: string
+      readonly expectedValue: number
+      readonly expectedSkillTargets: readonly {
+        readonly category: string
+        readonly subcategoryId: string | null
+      }[]
+      readonly correctedSkillTargets: readonly {
+        readonly category: string
+        readonly subcategoryId: string | null
+      }[]
+      readonly expectedSourceBlockNote: string
+      readonly differenceId: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
        * 固定来源把同一按层状态的各条款拆成多条可独立切换的记录（莱特
        * [昂扬]：基础每层 1.25% 的 stacked 记录 + 冲击力转化的 convert
        * 记录 + 影画 2 的两条复制记录），而块 note 与 Nanoka 同文说明它们
@@ -806,6 +829,68 @@ const aliceEvidence = [
     path: "agents/1401/details.zh.json",
     pointer: "/passive/level/1401507/desc/0",
     sha256: "2fa6f4711a3138251c777d4b2b402ea414f03ee38c988ae92e588f26d8ecf41b",
+  },
+] as const
+
+const anbyDetailsSha =
+  "e15c3b72f3aeaa68824cb0229b591989ce9fc1a729c6c2864346e8315257d67d"
+const anbyDetailsEnSha =
+  "440b38afbea149b22c69aab93a06dfae06e9e0b92da8aba74f8f7b0f2bb581c2"
+const aliceDetailsEnSha =
+  "14bd2589be83c8bf80a9de3c8dcf467ce9bab78b630240c56ca6db7bdaff1091"
+const janeDetailsEnSha =
+  "f463218618d5a9bc5abffa440146ff262d343c027e2a469066c63d7bb0dc024c"
+
+const anbyTalentEvidence = (rank: 2 | 6) =>
+  [
+    {
+      path: "agents/1011/details.zh.json",
+      pointer: `/talent/${String(rank)}/desc`,
+      sha256: anbyDetailsSha,
+    },
+    {
+      path: "agents/1011/details.en.json",
+      pointer: `/talent/${String(rank)}/desc`,
+      sha256: anbyDetailsEnSha,
+    },
+  ] as const
+
+const aliceMindscape2Evidence = [
+  {
+    path: "agents/1401/details.zh.json",
+    pointer: "/talent/2/desc",
+    sha256: "2fa6f4711a3138251c777d4b2b402ea414f03ee38c988ae92e588f26d8ecf41b",
+  },
+  {
+    path: "agents/1401/details.en.json",
+    pointer: "/talent/2/desc",
+    sha256: aliceDetailsEnSha,
+  },
+] as const
+
+const janeCorePassiveEvidence = [
+  {
+    path: "agents/1261/details.zh.json",
+    pointer: "/passive/level/1261507/desc/0",
+    sha256: "9961f4a46fe6c388901117810885964a5f38268462d24fa7e6c17a5c9865ae11",
+  },
+  {
+    path: "agents/1261/details.en.json",
+    pointer: "/passive/level/1261507/desc/0",
+    sha256: janeDetailsEnSha,
+  },
+] as const
+
+const janeMindscape2Evidence = [
+  {
+    path: "agents/1261/details.zh.json",
+    pointer: "/talent/2/desc",
+    sha256: "9961f4a46fe6c388901117810885964a5f38268462d24fa7e6c17a5c9865ae11",
+  },
+  {
+    path: "agents/1261/details.en.json",
+    pointer: "/talent/2/desc",
+    sha256: janeDetailsEnSha,
   },
 ] as const
 
@@ -2150,8 +2235,248 @@ const d4Evidence = (pointer: string): SemanticsEvidenceReference => ({
   sha256: "5826e29d7527e8013299c8cc9cee8a4d2725d3a522719893b3c7b123f611edca",
 })
 
+const aliceM2SubtypeConflicts = (): Record<string, SourceSemantics> =>
+  Object.fromEntries(
+    [
+      ["eff-mvhhq6pm-b", "turbulenceDmgBonus"],
+      ["eff-mvhhq6pm-d", "anomalyReleaseDmgBonus"],
+    ].map(([effectId, stat]) => [
+      `agents/alice/mindscape/2/blk-legacy/${effectId}`,
+      {
+        kind: "declared-unsupported",
+        reason: "semantic-conflict",
+        explanation: `爱丽丝 M2 的 ${stat} 15% 没有独立文本依据：Nanoka /talent/2/desc 只有“强击伤害提升15%”和“紊乱伤害提升15%”，而 Fairy 的宽口径 anomalyDmgBonus 已覆盖异放与乱流。本记录先登记为待口径裁定的冲突，不生成贡献。`,
+        expectedEncoding: {
+          applyTarget: "team",
+          elementFilter: ["物理"],
+          kind: "fixed",
+          stat,
+          value: 15,
+        },
+        evidence: aliceMindscape2Evidence,
+        verification:
+          "Nanoka agents/1401 /talent/2/desc 中英文核对；新增子类记录与宽口径 anomalyDmgBonus 重复，原文没有单列乱流或异放。",
+      } satisfies SourceSemantics,
+    ]),
+  )
+
+const janeSubtypeConflicts = (): Record<string, SourceSemantics> => {
+  const row = (
+    rank: 0 | 2,
+    blockId: string,
+    effectId: string,
+    stat: string,
+    kind: "fixed" | "stacked" | "convert",
+    value: number,
+    extra: Readonly<Record<string, unknown>> = {},
+  ): [string, SourceSemantics] => [
+    `agents/jane/mindscape/${String(rank)}/${blockId}/${effectId}`,
+    {
+      kind: "declared-unsupported",
+      reason: "semantic-conflict",
+      explanation: `简的 ${stat} 记录是“强击伤害”宽口径的展开版；Fairy 的 anomalyCritRate/anomalyCritDmg 已覆盖异放与乱流。先登记为待口径裁定的冲突，不生成可执行贡献。`,
+      expectedEncoding: {
+        applyTarget: "team",
+        elementFilter: ["物理"],
+        kind,
+        stat,
+        value,
+        ...extra,
+      },
+      evidence: rank === 0 ? janeCorePassiveEvidence : janeMindscape2Evidence,
+      verification:
+        "Nanoka agents/1261 核心被动 /passive/level/1261507/desc/0 与 /talent/2/desc 中英文核对；原文只写[强击]伤害，新增子类记录与宽口径异常暴击通道重复。",
+    } satisfies SourceSemantics,
+  ]
+  return Object.fromEntries([
+    row(2, "blk-legacy", "eff-mvhhs5hr-l", "turbulenceCritDmg", "fixed", 50, {
+      applyTarget: "team",
+    }),
+    row(
+      2,
+      "blk-legacy",
+      "eff-mvhhs5hr-m",
+      "anomalyReleaseCritDmg",
+      "fixed",
+      50,
+      {
+        applyTarget: "team",
+      },
+    ),
+    row(
+      0,
+      "blk-ms349twy-zgu7b6",
+      "eff-mvjcx1mw-5",
+      "turbulenceCritRate",
+      "fixed",
+      40,
+    ),
+    row(
+      0,
+      "blk-ms349twy-zgu7b6",
+      "eff-mvjcx1mw-6",
+      "anomalyReleaseCritRate",
+      "fixed",
+      40,
+    ),
+    row(
+      0,
+      "blk-ms349twy-zgu7b6",
+      "eff-mvjcx52e-9",
+      "turbulenceCritDmg",
+      "fixed",
+      50,
+    ),
+    row(
+      0,
+      "blk-ms349twy-zgu7b6",
+      "eff-mvjcx52e-a",
+      "anomalyReleaseCritDmg",
+      "fixed",
+      50,
+    ),
+    row(
+      0,
+      "blk-ms349twy-zgu7b6",
+      "eff-mvjcx8vt-b",
+      "turbulenceCritRate",
+      "convert",
+      0,
+    ),
+    row(
+      0,
+      "blk-ms349twy-zgu7b6",
+      "eff-mvjcx8vt-c",
+      "anomalyReleaseCritRate",
+      "convert",
+      0,
+    ),
+    row(
+      0,
+      "blk-ms34gorp-m9dlxw",
+      "eff-mvhhtmvu-3",
+      "turbulenceCritDmg",
+      "fixed",
+      10,
+      {
+        applyTarget: "self",
+      },
+    ),
+    row(
+      0,
+      "blk-ms34gorp-m9dlxw",
+      "eff-mvhhtmvu-4",
+      "anomalyReleaseCritDmg",
+      "fixed",
+      10,
+      {
+        applyTarget: "self",
+      },
+    ),
+    row(
+      0,
+      "blk-ms34gorp-m9dlxw",
+      "eff-mvhhtu2b-7",
+      "turbulenceCritDmg",
+      "stacked",
+      0,
+      {
+        applyTarget: "self",
+        maxStacks: 4,
+        valuePerStack: 5,
+      },
+    ),
+    row(
+      0,
+      "blk-ms34gorp-m9dlxw",
+      "eff-mvhhtu2b-8",
+      "anomalyReleaseCritDmg",
+      "stacked",
+      0,
+      {
+        applyTarget: "self",
+        maxStacks: 4,
+        valuePerStack: 5,
+      },
+    ),
+  ])
+}
+
+/**
+ * 仅在 991bb0e 完整固定源中启用的登记。局部真实源夹具仍使用旧冻结形状，
+ * 不能让新提交的 beneficiary/target 守卫对它们执行“应命中”校验。
+ */
+export const SOURCE_COMMIT_991BB0E_SEMANTICS: ReadonlySet<string> = new Set([
+  ...Object.keys(aliceM2SubtypeConflicts()),
+  ...Object.keys(janeSubtypeConflicts()),
+  "agents/anby/mindscape/2/blk-ms47xm3l-3pumvj/eff-ms47xm3l-nf7ga7",
+  "agents/anby/mindscape/6/blk-legacy/legacy-self-skillDmgBonus",
+  "w-engines/Plume_of_Rebirth/refinement/5/blk-mviwn8gu-b8fedl/eff-mviwn8gu-8wi5ap",
+])
+
 export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
   ...ariaAbloomPrecisionCorrections,
+  ...aliceM2SubtypeConflicts(),
+  ...janeSubtypeConflicts(),
+  "agents/anby/mindscape/2/blk-ms47xm3l-3pumvj/eff-ms47xm3l-nf7ga7": {
+    kind: "beneficiary-target-correction",
+    expectedApplyTarget: "team",
+    correctedOptionTarget: "self",
+    expectedSourceValue: 30,
+    differenceId: "anby-m2-beneficiary-target",
+    evidence: anbyTalentEvidence(2),
+    verification:
+      "Nanoka agents/1011 /talent/2/desc 中英文只写“普通攻击：落雷命中失衡敌人时，招式造成的伤害提升30%”；上游把受益对象记为 team。保留 self，公开 ID 与数值不变。",
+  },
+  "w-engines/Plume_of_Rebirth/refinement/5/blk-mviwn8gu-b8fedl/eff-mviwn8gu-8wi5ap":
+    {
+      kind: "declared-unsupported",
+      reason: "semantic-conflict",
+      explanation:
+        "991bb0e 在涅槃初翎精炼 5 新增一个 dmgBonus:0 的空效果块；Nanoka 五档天赋只写异常精通与火属性增伤，没有零值条款。该记录不生成可执行贡献，登记为待来源复核的冲突。",
+      expectedEncoding: {
+        applyTarget: "self",
+        elementFilter: "all",
+        kind: "fixed",
+        stat: "dmgBonus",
+        value: 0,
+      },
+      evidence: [
+        {
+          path: "w-engines/14164/details.zh.json",
+          pointer: "/talents/5/desc",
+          sha256:
+            "610efdcce529cf93fe578fe0c3e29d1b875dabf0a904bb831449cb34a05d091d",
+        },
+        {
+          path: "w-engines/14164/details.en.json",
+          pointer: "/talents/5/desc",
+          sha256:
+            "b40ac9148fbd2433eaa9e896009c5e9bf4607b855eed5719060f4d8547c9b383",
+        },
+      ],
+      verification:
+        "Nanoka w-engines/14164 /talents/5/desc 中英文核对：精炼 5 只有异常精通 126 与火属性伤害 56% 两个条款；991bb0e 的空 dmgBonus:0 块没有文本依据，登记为 semantic-conflict，不生成规则。",
+    },
+  "agents/anby/mindscape/6/blk-legacy/legacy-self-skillDmgBonus": {
+    kind: "skill-target-scope-correction",
+    expectedStat: "skillDmgBonus",
+    expectedValue: 45,
+    expectedSkillTargets: [
+      { category: "basic", subcategoryId: "anby-basic-ms47yaat" },
+      { category: "dodge", subcategoryId: "all-dodge-ms0dnpmr" },
+    ],
+    correctedSkillTargets: [
+      { category: "basic", subcategoryId: null },
+      { category: "dodge", subcategoryId: "all-dodge-ms0dnpmr" },
+    ],
+    expectedSourceBlockNote:
+      "原文：发动[强化特殊技]时，安比获得8层充能（上限8层）；[普通攻击]或[冲刺攻击]命中敌人时，消耗1层充能，使当前招式造成的伤害提升45%。\n[关键字] 属性=招式增伤 元素=无 动作=提升 数值=45 单位=% 目标=无 条件=无法提取 作用域=招式 层数=无 时长=无 对象=当前招式",
+    differenceId: "anby-m6-all-basic-skill-targets",
+    evidence: anbyTalentEvidence(6),
+    verification:
+      "Nanoka agents/1011 /talent/6/desc 中英文写[普通攻击]或[冲刺攻击]命中，未限定落雷；上游把 basic 收窄到 anby-basic-ms47yaat。保留所有 basic 与 all-dodge 目标，公开 ID 与数值不变。",
+  },
 
   "agents/yanagi/mindscape/2/blk-ms4qhaez-8sfxa3/eff-ms4qhaez-6zbkbm":
     yanagiPolarityIsolation(

@@ -127,7 +127,7 @@ describe("authoring supplemental records", () => {
       compilation.artifacts.coverage.supplementalRecords
 
     expect(compilation.supplementalRecordIds).toEqual([MIYABI_SUPPLEMENT_ID])
-    expect(supplementalRecords).toHaveLength(101)
+    expect(supplementalRecords).toHaveLength(102)
     expect(supplementalRecords[index]).toEqual(MIYABI_SUPPLEMENT)
     expect(Object.keys(supplementalRecords[index] ?? {})).toEqual(
       Object.keys(baselineRecord ?? {}),

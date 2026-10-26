@@ -35,7 +35,7 @@ assert(
 )
 
 // ── 固定来源 ──────────────────────────────────────────────────────────────
-const effectSourceCommit = "2628b32cece086e371bafa05518a9a12650d9f74"
+const effectSourceCommit = "991bb0ef2a00387f8a1fa18293bbda17256d7270"
 const skillSourceCommit = "0df40c5bc38f8da7ed0f9eed6be87fb8155b8357"
 // 本轮再生时的 Fairy 基线：#201 合并后的 main；数值与来源事实与首版一致。
 const fairyBaseline = "c77e549a6c503e257f554126203380295814fc40"
@@ -44,7 +44,7 @@ const snapshotId =
 const buffResource = "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json"
 const digests = {
   [`${buffResource}@${effectSourceCommit}`]:
-    "c9bc4cfdb0cf3117c56885e1afa4afd3ac9dc81aa0282119f0c64a27f19e5b01",
+    "f1df0144ee962138cd09dbdd36511eab46fb3d6016ec638ddab7fc4a01737095",
   [`${buffResource}@${skillSourceCommit}`]:
     "34b8dbeef2f710fd27379502d248f850da5a8c19dc6a0a7568ef51fb4c4fe19c",
   "zzz-hp/src/utils/panelBuffCalc.ts":
@@ -58,7 +58,7 @@ const digests = {
   "zzz-hp/src/utils/skillTalentLevels.ts":
     "f52244106f7a95cf621e375b5c654d71019d8a86eb80c55727561983ab4c71f4",
   "zzz-hp/src/utils/calcNumberFormat.ts":
-    "1e8b3a819df03de2911f210988501f3d8ae47d7abf05c2d9558a7e6c7478c03a",
+    "21ca4409aed25475f3d3f883f9ffd728dd702aaf763c846f14431a95f111962c",
   "zzz-hp/src/utils/remielUtils.ts":
     "1cb8084a981115924b0cdc64961a67f937c280fe82babe2710758c7b279d8773",
 }

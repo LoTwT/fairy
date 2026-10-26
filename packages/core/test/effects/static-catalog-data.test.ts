@@ -1060,7 +1060,7 @@ describe("fixed-source catalog conformance", () => {
         "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
       )
       const criticalDamage = referenceInput(
-        "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/2",
+        "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
       )
       if (input.damage.kind !== "anomaly") throw new Error("fixture")
       const request = {
@@ -2148,7 +2148,7 @@ describe("fixed-source catalog conformance", () => {
           skillTags: [],
         },
         damage: {
-          kind: "disorder",
+          kind: "anomaly",
           damageBonus: { settledMultiplier: 1 },
           anomalySource: {
             ...statSource,
@@ -2248,7 +2248,7 @@ describe("fixed-source catalog conformance", () => {
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
     it("exposes one complete option with the original rules and migration evidence", () => {
-      expect(catalog.revision).toBe("52")
+      expect(catalog.revision).toBe("53")
       expect(
         catalog.differences.some((d) => d.differenceId === differenceId),
         differenceId,
@@ -5132,12 +5132,12 @@ describe("velina cyclone catalog linkage", () => {
       // C4 额外能力第三条再增一个独立风化系数规则及选项。
       // 批次 27 再增仪玄影画 2[符法千重-破]与影画 1、额外能力两道落雷
       // 三条独立结算补充（单规则单选项，影画门槛/额外能力队伍资格）。
-      records: 101,
+      records: 102,
       integrated: 68,
       rules: 72,
       options: 63,
       entities: 0,
-      outOfScope: 33,
+      outOfScope: 34,
     })
   })
 

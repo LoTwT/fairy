@@ -30,7 +30,7 @@ export const P2_4F_MULTI_VARIANT_AUTHORING_RECORDS = [
     references: [
       {
         sourceId: "zzz-hp",
-        version: "2628b32cece086e371bafa05518a9a12650d9f74",
+        version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
         locale: "zh",
         resourcePath:
           "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -150,7 +150,7 @@ export const P2_4F_MULTI_VARIANT_AUTHORING_RECORDS = [
           references: [
             {
               sourceId: "zzz-hp",
-              version: "2628b32cece086e371bafa05518a9a12650d9f74",
+              version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               locale: "zh",
               resourcePath:
                 "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -320,7 +320,7 @@ export const P2_4F_MULTI_VARIANT_AUTHORING_RECORDS = [
           references: [
             {
               sourceId: "zzz-hp",
-              version: "2628b32cece086e371bafa05518a9a12650d9f74",
+              version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               locale: "zh",
               resourcePath:
                 "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -396,7 +396,7 @@ export const P2_4F_MULTI_VARIANT_AUTHORING_RECORDS = [
     references: [
       {
         sourceId: "zzz-hp",
-        version: "2628b32cece086e371bafa05518a9a12650d9f74",
+        version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
         locale: "zh",
         resourcePath:
           "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -600,7 +600,7 @@ export const P2_4F_MULTI_VARIANT_AUTHORING_RECORDS = [
           references: [
             {
               sourceId: "zzz-hp",
-              version: "2628b32cece086e371bafa05518a9a12650d9f74",
+              version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               locale: "zh",
               resourcePath:
                 "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -826,7 +826,7 @@ export const P2_4F_MULTI_VARIANT_AUTHORING_RECORDS = [
           references: [
             {
               sourceId: "zzz-hp",
-              version: "2628b32cece086e371bafa05518a9a12650d9f74",
+              version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               locale: "zh",
               resourcePath:
                 "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -942,7 +942,7 @@ export const P2_4F_MULTI_VARIANT_AUTHORING_RECORDS = [
     references: [
       {
         sourceId: "zzz-hp",
-        version: "2628b32cece086e371bafa05518a9a12650d9f74",
+        version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
         locale: "zh",
         resourcePath:
           "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -1154,7 +1154,7 @@ export const P2_4F_MULTI_VARIANT_AUTHORING_RECORDS = [
           references: [
             {
               sourceId: "zzz-hp",
-              version: "2628b32cece086e371bafa05518a9a12650d9f74",
+              version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               locale: "zh",
               resourcePath:
                 "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -1332,7 +1332,7 @@ export const P2_4F_MULTI_VARIANT_AUTHORING_RECORDS = [
           references: [
             {
               sourceId: "zzz-hp",
-              version: "2628b32cece086e371bafa05518a9a12650d9f74",
+              version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               locale: "zh",
               resourcePath:
                 "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -1404,7 +1404,7 @@ export const P2_4F_MULTI_VARIANT_AUTHORING_RECORDS = [
     references: [
       {
         sourceId: "zzz-hp",
-        version: "2628b32cece086e371bafa05518a9a12650d9f74",
+        version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
         locale: "zh",
         resourcePath:
           "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -1576,7 +1576,7 @@ export const P2_4F_MULTI_VARIANT_AUTHORING_RECORDS = [
           references: [
             {
               sourceId: "zzz-hp",
-              version: "2628b32cece086e371bafa05518a9a12650d9f74",
+              version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               locale: "zh",
               resourcePath:
                 "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -1751,7 +1751,7 @@ export const P2_4F_MULTI_VARIANT_AUTHORING_RECORDS = [
           references: [
             {
               sourceId: "zzz-hp",
-              version: "2628b32cece086e371bafa05518a9a12650d9f74",
+              version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               locale: "zh",
               resourcePath:
                 "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -1823,7 +1823,7 @@ export const P2_4F_MULTI_VARIANT_AUTHORING_RECORDS = [
     references: [
       {
         sourceId: "zzz-hp",
-        version: "2628b32cece086e371bafa05518a9a12650d9f74",
+        version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
         locale: "zh",
         resourcePath:
           "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -1995,7 +1995,7 @@ export const P2_4F_MULTI_VARIANT_AUTHORING_RECORDS = [
           references: [
             {
               sourceId: "zzz-hp",
-              version: "2628b32cece086e371bafa05518a9a12650d9f74",
+              version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               locale: "zh",
               resourcePath:
                 "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -2170,7 +2170,7 @@ export const P2_4F_MULTI_VARIANT_AUTHORING_RECORDS = [
           references: [
             {
               sourceId: "zzz-hp",
-              version: "2628b32cece086e371bafa05518a9a12650d9f74",
+              version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
               locale: "zh",
               resourcePath:
                 "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",

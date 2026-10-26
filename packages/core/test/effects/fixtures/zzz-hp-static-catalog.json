@@ -1,5 +1,5 @@
 {
-  "sourceCommit": "2628b32cece086e371bafa05518a9a12650d9f74",
+  "sourceCommit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
   "method": "固定提交的 normalize / resolveEffectBaseValue / resolveConvertValue 独立求值结果；D6-2 新增的 456 个 converted 位置为 fixed/stacked 记录，按同一固定源原值与目录单位归一生成，输入上下文由规则条件选择；转化读取 500 来源单位，贯穿力来源 700；source 舍入误差按单位比例单独容忍。",
   "tables": {
     "world": [
@@ -25750,7 +25750,7 @@
       }
     },
     {
-      "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/1",
+      "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/2",
       "expected": 0.15,
       "unit": "ratio",
       "effectIds": [
@@ -27884,7 +27884,7 @@
       }
     },
     {
-      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/2",
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
       "expected": 0.5,
       "unit": "ratio",
       "effectIds": [
@@ -27901,7 +27901,7 @@
       }
     },
     {
-      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/3",
+      "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/7",
       "expected": 0.6,
       "unit": "ratio",
       "effectIds": [
@@ -27978,7 +27978,7 @@
       "input": {
         "world": 1,
         "hit": 43,
-        "damage": 0,
+        "damage": 2,
         "bindings": 71,
         "selections": 148,
         "actorSources": 23,

@@ -17,7 +17,7 @@ import type {
   EffectAuthoringUnsupportedRecord,
 } from "./types.ts"
 
-const ZZZ_HP_VERSION = "2628b32cece086e371bafa05518a9a12650d9f74"
+const ZZZ_HP_VERSION = "991bb0ef2a00387f8a1fa18293bbda17256d7270"
 const NANOKA_VERSION = "3.3.12+19634983"
 const ZZZ_HP_PATH = "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json"
 
@@ -331,8 +331,12 @@ export const PILOT_AUTHORING_RECORDS: readonly EffectAuthoringRecord[] = [
       rankKind: "mindscape",
       rank: 2,
     }),
-    section: "影画2 ",
-    references: [zzzHp(ANBY_POINTER)],
+    section: "2 影",
+    references: [
+      zzzHp(ANBY_POINTER),
+      nanokaZh("agents/1011/details.zh.json", "/talent/2/desc"),
+      nanokaEn("agents/1011/details.en.json", "/talent/2/desc"),
+    ],
     config: compareMindscape(2),
     activation: SUPPLIED_ONCE,
     beneficiary: { kind: "holder" },
@@ -376,8 +380,8 @@ export const PILOT_AUTHORING_RECORDS: readonly EffectAuthoringRecord[] = [
       amount: { kind: "constant", unit: "ratio", value: 0.3 },
     },
     coverage: {
-      status: "converted",
-      differenceIds: [],
+      status: "corrected",
+      differenceIds: ["anby-m2-beneficiary-target"],
       positions: [
         {
           pointer: ANBY_POINTER,
