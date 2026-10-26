@@ -22,7 +22,7 @@ export type {
 
 export interface AgentActionManifest {
   readonly schemaVersion: 1
-  readonly rulesVersion: "agent-actions/3"
+  readonly rulesVersion: "agent-actions/4"
   readonly sourceVersion: string
   readonly members: readonly string[]
   readonly inputs: readonly { readonly path: string; readonly sha256: string }[]

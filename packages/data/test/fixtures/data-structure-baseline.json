@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "snapshotId": "sha256:7a4206e5e1e1d1f1dfb7318d3ddc967754caf3d89011eab4ab9aab0e7d121198",
+  "snapshotId": "sha256:ccb28367195fe2f2b4183623a3332119fbc742ffc484b40cd9be89be645623ae",
   "integrated": {
     "indexSha256": "d68ad1d80b203b9633f2cd6d176e4051c15c52f2ea3c0d71a2d2310c8b1a1b6d",
     "sourceVersion": "3.3.12+19634983",
@@ -91,9 +91,9 @@
     "artifactFileSetSha256": "b7bb787fbdb4c18a2b6031274408312eaa56b2a53688c68d928c793d41ab148c"
   },
   "skills": {
-    "manifestSha256": "8d7454bac2c6398b67005bc1460daba32b28bd09eb9e298222ed71d63bb80d23",
+    "manifestSha256": "a8137f9510a563ac8cbfed9b44505019e6c3888a9a91ec3be16232c391212d80",
     "sourceVersion": "3.3.12+19634983",
-    "rulesVersion": "agent-actions/3",
+    "rulesVersion": "agent-actions/4",
     "topLevelKeys": [
       "artifacts",
       "coverage",
@@ -111,7 +111,7 @@
     "memberCount": 62,
     "actionCount": 1348,
     "fileCount": 63,
-    "artifactFileSetSha256": "1f4cb3f674ccbc86f171a9268373917067bbfee22dc36c641effcf47f554f5ce"
+    "artifactFileSetSha256": "4ba95b97aa750eae7a7b2330733f1a9ab05585ecbb2a5dcd7b63ac7ab3ba6ae8"
   },
   "effects": {
     "sourceRepository": "LoTwT/ZZZ-HP",

@@ -22819,7 +22819,7 @@
     "skillCategory": "quick-assist",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631014-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -22887,7 +22887,7 @@
     "skillCategory": "assist-follow-up",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631018-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -22904,7 +22904,7 @@
     "skillCategory": "assist",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631019-main",
     "skillTargetIds": [],
     "issues": [],
     "limitations": [
@@ -22924,7 +22924,7 @@
     "skillCategory": "basic",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631001-一段",
     "skillTargetIds": [],
     "issues": []
   },
@@ -22941,7 +22941,7 @@
     "skillCategory": "basic",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631002-二段",
     "skillTargetIds": [],
     "issues": []
   },
@@ -22958,7 +22958,7 @@
     "skillCategory": "basic",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631003-三段",
     "skillTargetIds": [],
     "issues": []
   },
@@ -22975,7 +22975,7 @@
     "skillCategory": "basic",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631004-四段",
     "skillTargetIds": [],
     "issues": []
   },
@@ -22992,7 +22992,7 @@
     "skillCategory": "basic",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631020-四段极限闪避成功时",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23009,7 +23009,7 @@
     "skillCategory": "basic",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631005-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23026,7 +23026,7 @@
     "skillCategory": "basic",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631006-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23043,7 +23043,7 @@
     "skillCategory": "chain",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631012-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23060,7 +23060,7 @@
     "skillCategory": "ultimate",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631013-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23077,7 +23077,7 @@
     "skillCategory": "dash",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631010-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23094,7 +23094,7 @@
     "skillCategory": "dodge-counter",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631011-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23111,7 +23111,7 @@
     "skillCategory": "special",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631007-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23128,7 +23128,7 @@
     "skillCategory": "enhanced-special",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631008-组合技",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23145,7 +23145,7 @@
     "skillCategory": "enhanced-special",
     "element": "wind",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-severian-nk-1631009-风刃最大",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23162,7 +23162,7 @@
     "skillCategory": "quick-assist",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641014-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23230,7 +23230,7 @@
     "skillCategory": "assist-follow-up",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641018-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23247,7 +23247,7 @@
     "skillCategory": "basic",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641001-一段",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23264,7 +23264,7 @@
     "skillCategory": "basic",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641002-二段",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23281,7 +23281,7 @@
     "skillCategory": "basic",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641003-三段",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23298,7 +23298,7 @@
     "skillCategory": "basic",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641004-四段",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23315,7 +23315,7 @@
     "skillCategory": "basic",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641005-main",
     "skillTargetIds": [],
     "issues": [],
     "limitations": [
@@ -23335,7 +23335,7 @@
     "skillCategory": "basic",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641006-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23352,7 +23352,7 @@
     "skillCategory": "chain",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641012-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23369,7 +23369,7 @@
     "skillCategory": "ultimate",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641013-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23386,7 +23386,7 @@
     "skillCategory": "ultimate",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641019-main",
     "skillTargetIds": [],
     "issues": [],
     "limitations": [
@@ -23406,7 +23406,7 @@
     "skillCategory": "dash",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641010-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23423,7 +23423,7 @@
     "skillCategory": "dodge-counter",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641011-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23440,7 +23440,7 @@
     "skillCategory": "special",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641007-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23457,7 +23457,7 @@
     "skillCategory": "enhanced-special",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641023-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23474,7 +23474,7 @@
     "skillCategory": "enhanced-special",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641008-main",
     "skillTargetIds": [],
     "issues": []
   },
@@ -23491,7 +23491,7 @@
     "skillCategory": "enhanced-special",
     "element": "fire",
     "damageKind": "regular",
-    "upstreamSkillId": null,
+    "upstreamSkillId": "sk-pheony-nk-1641009-main",
     "skillTargetIds": [],
     "issues": []
   }

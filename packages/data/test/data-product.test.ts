@@ -332,7 +332,7 @@ describe("data product manifests", () => {
   it("normalizes the agent actions manifest coverage counts", () => {
     const manifest = aggregate.agentActions
     expect(manifest.product).toBe("agent-actions")
-    expect(manifest.rulesVersion.label).toBe("agent-actions/3")
+    expect(manifest.rulesVersion.label).toBe("agent-actions/4")
     expect(manifest.source.version).toBe("3.3.12+19634983")
     expect(manifest.extensions.evidence.zzzHpCommit).toBe(
       "991bb0ef2a00387f8a1fa18293bbda17256d7270",
@@ -352,7 +352,7 @@ describe("data product manifests", () => {
       structureBaseline.skills.memberCount,
     )
     expect(manifest.limitations).toHaveLength(9)
-    expect(manifest.discrepancies).toHaveLength(163)
+    expect(manifest.discrepancies).toHaveLength(164)
     expect(manifest.extensions.members).toHaveLength(
       structureBaseline.skills.memberCount,
     )

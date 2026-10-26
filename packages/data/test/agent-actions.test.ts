@@ -1511,6 +1511,64 @@ describe("D6 1631/1641 action catalogs", () => {
     }
   })
 
+  it("links every direct D6 action to its 991bb0e source row and leaves parry daze rows null", async () => {
+    const expected: Record<string, string[]> = {
+      "1631": [
+        "sk-severian-nk-1631014-main",
+        "sk-severian-nk-1631018-main",
+        "sk-severian-nk-1631019-main",
+        "sk-severian-nk-1631001-一段",
+        "sk-severian-nk-1631002-二段",
+        "sk-severian-nk-1631003-三段",
+        "sk-severian-nk-1631004-四段",
+        "sk-severian-nk-1631020-四段极限闪避成功时",
+        "sk-severian-nk-1631005-main",
+        "sk-severian-nk-1631006-main",
+        "sk-severian-nk-1631012-main",
+        "sk-severian-nk-1631013-main",
+        "sk-severian-nk-1631010-main",
+        "sk-severian-nk-1631011-main",
+        "sk-severian-nk-1631007-main",
+        "sk-severian-nk-1631008-组合技",
+        "sk-severian-nk-1631009-风刃最大",
+      ],
+      "1641": [
+        "sk-pheony-nk-1641014-main",
+        "sk-pheony-nk-1641018-main",
+        "sk-pheony-nk-1641001-一段",
+        "sk-pheony-nk-1641002-二段",
+        "sk-pheony-nk-1641003-三段",
+        "sk-pheony-nk-1641004-四段",
+        "sk-pheony-nk-1641005-main",
+        "sk-pheony-nk-1641006-main",
+        "sk-pheony-nk-1641012-main",
+        "sk-pheony-nk-1641013-main",
+        "sk-pheony-nk-1641019-main",
+        "sk-pheony-nk-1641010-main",
+        "sk-pheony-nk-1641011-main",
+        "sk-pheony-nk-1641007-main",
+        "sk-pheony-nk-1641023-main",
+        "sk-pheony-nk-1641008-main",
+        "sk-pheony-nk-1641009-main",
+      ],
+    }
+    for (const [id, upstreamSkillIds] of Object.entries(expected)) {
+      const data = await agent(id)
+      expect(
+        data.actions
+          .filter((action) => action.calculation.kind === "damage")
+          .map((action) => action.upstreamSkillId),
+        id,
+      ).toEqual(upstreamSkillIds)
+      expect(
+        data.actions
+          .filter((action) => action.calculation.kind === "daze-only")
+          .every((action) => action.upstreamSkillId === null),
+        id,
+      ).toBe(true)
+    }
+  })
+
   it("resolves representative 12-level direct rows from the frozen Nanoka source", async () => {
     const severian = await agent("1631")
     for (const [actionId, group, expected] of [

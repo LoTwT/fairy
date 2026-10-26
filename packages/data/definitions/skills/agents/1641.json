@@ -81,7 +81,7 @@
       "limitations": [
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641014-main"
     },
     {
       "actionId": "action:agent:1641:action:0002",
@@ -247,7 +247,7 @@
       "limitations": [
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641018-main"
     },
     {
       "actionId": "action:agent:1641:action:0006",
@@ -308,7 +308,7 @@
       "limitations": [
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641001-一段"
     },
     {
       "actionId": "action:agent:1641:action:0007",
@@ -369,7 +369,7 @@
       "limitations": [
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641002-二段"
     },
     {
       "actionId": "action:agent:1641:action:0008",
@@ -430,7 +430,7 @@
       "limitations": [
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641003-三段"
     },
     {
       "actionId": "action:agent:1641:action:0009",
@@ -491,7 +491,7 @@
       "limitations": [
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641004-四段"
     },
     {
       "actionId": "action:agent:1641:action:0010",
@@ -553,7 +553,7 @@
         "本动作只计算所选招式的直接伤害；同段[异放]倍率是独立结算事件，当前不并入本动作，也不模拟异常状态、异放暴击加成、生命值回复或生命周期。",
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641005-main"
     },
     {
       "actionId": "action:agent:1641:action:0011",
@@ -614,7 +614,7 @@
       "limitations": [
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641006-main"
     },
     {
       "actionId": "action:agent:1641:action:0012",
@@ -675,7 +675,7 @@
       "limitations": [
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641012-main"
     },
     {
       "actionId": "action:agent:1641:action:0013",
@@ -736,7 +736,7 @@
       "limitations": [
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641013-main"
     },
     {
       "actionId": "action:agent:1641:action:0014",
@@ -798,7 +798,7 @@
         "本动作只计算所选招式的直接伤害；同段[异放]倍率是独立结算事件，当前不并入本动作，也不模拟异常状态、异放暴击加成、生命值回复或生命周期。",
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641019-main"
     },
     {
       "actionId": "action:agent:1641:action:0015",
@@ -859,7 +859,7 @@
       "limitations": [
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641010-main"
     },
     {
       "actionId": "action:agent:1641:action:0016",
@@ -920,7 +920,7 @@
       "limitations": [
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641011-main"
     },
     {
       "actionId": "action:agent:1641:action:0017",
@@ -981,7 +981,7 @@
       "limitations": [
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641007-main"
     },
     {
       "actionId": "action:agent:1641:action:0018",
@@ -1042,7 +1042,7 @@
       "limitations": [
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641023-main"
     },
     {
       "actionId": "action:agent:1641:action:0019",
@@ -1103,7 +1103,7 @@
       "limitations": [
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641008-main"
     },
     {
       "actionId": "action:agent:1641:action:0020",
@@ -1164,7 +1164,7 @@
       "limitations": [
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
-      "upstreamSkillId": null
+      "upstreamSkillId": "sk-pheony-nk-1641009-main"
     }
   ]
 }
