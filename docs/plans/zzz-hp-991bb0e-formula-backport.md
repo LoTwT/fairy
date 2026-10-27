@@ -137,17 +137,21 @@
 | `test-disorder-radiance-crit.mjs` |         61 |            5 | 5 通过      | 异常暴击区 1 / 1.5、期望组合、暴伤上限。                             |
 | 合计                              |        176 |           61 | **61 通过** | 不计入缓存、UI、优化器、方案包与外部方案断言。                       |
 
+其中冰 9.8 秒的紊乱倍率 5.175 是上游直接断言的倍率（`test-formula-align-compare.mjs:242`）；
+火 9.8 秒的 14、以太 10 秒的 17、物理 10.2 秒的 5.25 是按 Fairy 补偿模型推导的对照值，
+上游对应位置只断言有效时长 19 / 20 / 10（`:44-47`、`:259-261`）。
+
 ## 迁移清单
 
-本轮新增 4 条测试，包含 16 条数值断言；全部注明上游文件与行号，版本均为
+本轮新增 4 条测试，包含 14 条数值断言；全部注明上游文件与行号，版本均为
 `991bb0ef2a00387f8a1fa18293bbda17256d7270`。
 
-| Fairy 测试                                                                                                                             | 上游依据                                                          | 性质 |
-| -------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ---- |
-| [`zzz-hp-991bb0e-formula-backport.test.ts`](../../packages/core/test/zzz-hp-991bb0e-formula-backport.test.ts)：失衡期直伤/异常完整结算 | `zzz-hp/scripts/test-formula-align-compare.mjs:90-206`            | 迁移 |
-| 同上：固定穿透达到敌防时的防御区饱和                                                                                                   | `zzz-hp/scripts/test-defense-zone-clamp.mjs:55-70`                | 迁移 |
-| [`anomaly-damage.test.ts`](../../packages/core/test/anomaly-damage.test.ts)：半秒属性先换算再取整                                      | `zzz-hp/scripts/test-formula-align-compare.mjs:44-47`、`:241-261` | 迁移 |
-| [`anomaly-damage-level.test.ts`](../../packages/core/test/anomaly-damage-level.test.ts)：59 级倍率截断                                 | `zzz-hp/scripts/test-formula-align-compare.mjs:36-37`             | 迁移 |
+| Fairy 测试                                                                                                                             | 上游依据                                                       | 性质 |
+| -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ---- |
+| [`zzz-hp-991bb0e-formula-backport.test.ts`](../../packages/core/test/zzz-hp-991bb0e-formula-backport.test.ts)：失衡期直伤/异常完整结算 | `zzz-hp/scripts/test-formula-align-compare.mjs:90-206`         | 迁移 |
+| 同上：固定穿透 953 / 2859 达到敌防后的防御区饱和与相等                                                                                 | `zzz-hp/scripts/test-defense-zone-clamp.mjs:39-46`、`:59-69`   | 迁移 |
+| [`anomaly-damage.test.ts`](../../packages/core/test/anomaly-damage.test.ts)：火 9.8 秒的 19 个半秒补偿段                               | `zzz-hp/scripts/test-formula-align-compare.mjs:45`、`:259-261` | 迁移 |
+| [`anomaly-damage-level.test.ts`](../../packages/core/test/anomaly-damage-level.test.ts)：59 级倍率截断                                 | `zzz-hp/scripts/test-formula-align-compare.mjs:36-37`          | 迁移 |
 
 具体断言：
 
@@ -155,22 +159,22 @@
   暴击 11542.5、期望 8656.875，取整 `8657`。
 - 异常：同一面板下使用精通 300、异常倍率区 5、异常等级 60、易伤 1.6，失衡期望 205200；
   非失衡失衡区 1.25，期望 135000。
-- 防御：敌防 953，固定穿透 953 与 1350 均使有效防御为 0，防御区为 1；这与“只对乘算部分取 max”的旧错误不同。
-- 紊乱时长：火 9.8 秒先 `floor(9.8 / 0.5) = 19` 再乘 0.5，得到 14；若先取整会得到 13.5。
-  冰 9.8 秒为 5.175，物理 10.2 秒为 5.25。
+- 防御：敌防 953，固定穿透 953 与 `953 × 3 = 2859` 均使有效防御为 0，防御区同为 1；这与“只对乘算部分取 max”的旧错误不同。
+- 紊乱时长：火 9.8 秒对应上游断言的有效时长 `floor(9.8 / 0.5) = 19`；Fairy 测试断言其补偿模型推导值 `4.5 + 19 × 0.5 = 14`，
+  并注明 14 不是上游直接断言的倍率。
 - 等级倍率：59 级截断为 `1.983`，不是四舍五入的 `1.9831`。
 
 ## 已覆盖但未重复迁移
 
 以下上游数值在 Fairy 现有测试中已有同口径断言，本轮只做对照，不重复新增：
 
-| 上游场景                                        | Fairy 现有覆盖                                                              |
-| ----------------------------------------------- | --------------------------------------------------------------------------- |
-| 锐暴区、溢出层、非锐化路径与锐化增伤            | `sharp-critical.test.ts:44-113`、`static-damage.test.ts:1507-1594`          |
-| 紊乱 / 耀变暴击子类与旧异常暴击回退             | `static-damage.test.ts:383-455`、`:572-720`                                 |
-| 紊乱倍率修正作用于完整准备区                    | `static-catalog.test.ts:245-268`（#268 迁移）                               |
-| Sunna、Cissia、血髓秘匣、青衣、卢西娅的转模曲线 | `static-catalog-data.test.ts:348-470`                                       |
-| 异常等级 60、常见紊乱时长档位                   | `anomaly-damage-level.test.ts`、`zzz-calculator-comparison.test.ts:284-315` |
+| 上游场景                                        | Fairy 现有覆盖                                                                                                    |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| 锐暴区、溢出层、非锐化路径与锐化增伤            | `packages/core/test/sharp-critical.test.ts:44-113`、`packages/core/test/effects/static-damage.test.ts:1507-1594`  |
+| 紊乱 / 耀变暴击子类与旧异常暴击回退             | `packages/core/test/effects/static-damage.test.ts:383-455`、`:572-720`                                            |
+| 紊乱倍率修正作用于完整准备区                    | `packages/core/test/effects/static-catalog.test.ts:245-268`（#268 迁移）                                          |
+| Sunna、Cissia、血髓秘匣、青衣、卢西娅的转模曲线 | `packages/core/test/effects/static-catalog-data.test.ts:348-520`、`:7656-7707`                                    |
+| 异常等级 60、常见紊乱时长档位                   | `packages/core/test/anomaly-damage-level.test.ts`、`packages/core/test/zzz-calculator-comparison.test.ts:242-276` |
 
 ## 跨实现差异与未覆盖边界
 
@@ -194,8 +198,10 @@
    这属于 ZZZ-HP 技能栏/面板组合语义，未迁移。
 6. **紊乱/耀变暴击率超过 100%**：上游注释写“critRate 不 clamp”，期望为 `preCrit × (1 + 率 × 爆伤)`；
    Fairy 在期望组合处把有效暴击率夹到 `[0, 1]`
-   （[`static-damage.ts:1185`](../../packages/core/src/effects/internal/static-damage.ts#L1185)）。上游当前 61 项
-   只使用 0%、50%、100%，没有实际触发该差异；登记为边界差异，不据此改写断言。
+   （[`static-damage.ts:1185`](../../packages/core/src/effects/internal/static-damage.ts#L1185)）。上游普通暴击区
+   本身也把暴击率夹到 `[0, 1]`（`damageCalc.ts:476`），只有异常类子区未夹（`damageCalc.ts:755-772`），
+   因此 Fairy 行为与上游普通直伤暴击区一致。上游当前 61 项只使用 0%、50%、100%，没有实际触发该差异；
+   登记为边界差异，不据此改写断言。
 7. **耀嘉音 2 影转模曲线**：`test-buff-conversions` 的 `[0, -1200]`、`[2000, 580]`、`[3428.56, 1599.996]` 等值
    是 ZZZ-HP 的原始曲线；Fairy 保留已验收的具名修正 `astra-mindscape-2`
    （见[耀嘉音 2 影的具名差异](../specs/effects/examples.md#zzz-hp-的参考边界)与 `static-catalog.json` 的 `differences`）。
@@ -209,6 +215,15 @@
 10. **优化器、方案包、路由与后端并发**：`test-affix-optimizer`、`test-affix-sweep-caps`、`test-game-affix-rules`、
     `test-scheme-pack-merge`、`test-shared-scheme-pack`、`test-mode-panel-routes`、`test-agent-save-stale` 等
     属于应用层能力，未纳入公式迁移。
+11. **防御百分比调整为负时的单调性**：`calculateTargetEffectiveDefense` 没有把
+    `(1 + 防御百分比调整)` 夹到 ≥ 0。敌防 953、`defensePercentageAdjustments: [-1.2]`、
+    `penetrationRatios: [1.2]` 时有效防御为 `38.12`（两个负因子相乘），防御区约 `0.954`；
+    只给 `penetrationRatios: [1.2]` 时有效防御为 `0`、防御区为 `1`。即增加减防反而让防御区变差，
+    违反单调性，实战输入域罕见但边界不成立。
+    上游把每个百分比先夹到 `[0, 0.95]` / `[0, 1]`，再以 `max(0, 1 − ignore − reduce)` 计算，
+    因此不会出现双负相乘：减防 120% 映射为 0，仅穿透率 120% 映射为 47.65（穿透率夹到 95%）。
+    审查记录中的“上游亦为 0”对应把 120% 映射到减防/无视防御；若映射到穿透率，则受 95% 上限影响为 47.65。
+    待用户裁定：另开修复 PR，或声明为不支持的输入域。本轮不修改生产代码、不加断言。
 
 ## 验证记录
 
@@ -226,8 +241,16 @@ Fairy 对照与回归：
   通过，3 个文件、133 项。
 - `pnpm --filter @randomplay/core typecheck` 通过（先执行 `pnpm --filter @randomplay/core build` 生成 `dist`）。
 - `pnpm check`：通过。core 99 个文件、5683 项通过（另 3 个文件、24 项 skipped）；data 110 个文件、4755 项通过；
-  打包消费验收 2 项通过；lint、format 与 spec-types 检查均通过。
+  打包消费验收 2 项通过；lint、format 与 spec-types 检查均通过。该结果来自本轮审查修复前的同一套测试文件；
+  第 1 轮审查修复只调整测试断言与文档，未改生产代码或数据，因此复用该结果，并重新运行定向测试与格式检查。
 - `pnpm format:check`：独立复跑通过（2922 个文件）。
+
+第 1 轮审查修复（覆盖 `198a8407`）：
+
+- 时长用例只保留火 9.8 秒样本，并注明 14 是 Fairy 补偿模型推导值、上游只断言有效时长 19。
+- 防御用例改用上游实际比较的 953 与 `953 × 3 = 2859`，并断言两个穿透值的防御区相等。
+- 修正 `zzz-calculator-comparison.test.ts` 与 `effects/` 下测试文件的路径和行号。
+- 登记 `calculateTargetEffectiveDefense` 在负防御百分比调整下的单调性边界，未改代码、未加断言。
 
 ## 复现
 

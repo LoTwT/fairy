@@ -97,7 +97,7 @@ describe("ZZZ-HP 991bb0e formula backport", () => {
   })
 
   it("clamps the defense zone when flat penetration reaches the target defense", () => {
-    // ZZZ-HP 991bb0e zzz-hp/scripts/test-defense-zone-clamp.mjs:55-70
+    // ZZZ-HP 991bb0e zzz-hp/scripts/test-defense-zone-clamp.mjs:39-46, :59-69
     const atTargetDefense = calculateTargetEffectiveDefense({
       targetBaseDefense: 953,
       defensePercentageAdjustments: [],
@@ -108,15 +108,20 @@ describe("ZZZ-HP 991bb0e formula backport", () => {
       targetBaseDefense: 953,
       defensePercentageAdjustments: [],
       penetrationRatios: [],
-      penetrationValues: [1350],
+      penetrationValues: [2859],
+    })
+    const atTargetZone = defenseFactor.calculate({
+      attackerLevelBase: 794,
+      targetEffectiveDefense: atTargetDefense,
+    })
+    const beyondTargetZone = defenseFactor.calculate({
+      attackerLevelBase: 794,
+      targetEffectiveDefense: beyondTargetDefense,
     })
     expect(atTargetDefense).toBe(0)
     expect(beyondTargetDefense).toBe(0)
-    expect(
-      defenseFactor.calculate({
-        attackerLevelBase: 794,
-        targetEffectiveDefense: atTargetDefense,
-      }),
-    ).toBe(1)
+    expect(atTargetZone).toBe(1)
+    // 上游 :64 的饱和语义：穿透 953 与 ENEMY_DEF × 3 = 2859 的防御区相同。
+    expect(beyondTargetZone).toBe(atTargetZone)
   })
 })
