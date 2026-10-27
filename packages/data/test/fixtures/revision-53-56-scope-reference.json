@@ -15,12 +15,12 @@
         "sha256": "763c7447cf6ab208c48f5412516de430b1e2ba1669e90bf37ecb83526bc0629d"
       }
     ],
-    "generatorSha256": "f5427bf58bc2c3cf3368178d6e5b1a25a68e69e5167d81475960dfca3086b74d",
+    "generatorSha256": "e2d6cbb8bcfeccc52b61a2bd35ab038fe1fd5fbe4f4663251341cb0efef572e3",
     "precision": "Reference and difference assertions use max(1e-9, abs(reference) * 1e-12). This batch has no upstream integer projection; upstream values are the pinned raw-record/zone projection.",
     "layers": [
       "Nanoka zh/en text and the revision 54—56 correction documents declare the corrected values and damage-kind scope in the case fixture.",
       "Pinned ZZZ-HP 991bb0e raw records freeze the upstream encoding; the pinned damageCalc.ts zone expressions are asserted verbatim and replayed, not executed as an app.",
-      "An independent exact-decimal rational chain uses a neutral 1,000-attack panel, level 1, zero defense/resistance, 100 anomaly proficiency and zero crit rate; all other factors are one."
+      "An independent exact-decimal rational chain uses a neutral 1,000-attack panel, level 1, zero target defense/resistance, 100 anomaly proficiency and zero crit rate; all other factors are one."
     ]
   },
   "cases": {

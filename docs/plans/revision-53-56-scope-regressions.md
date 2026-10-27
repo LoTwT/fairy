@@ -57,8 +57,9 @@ CI 结构或 `docs/HISTORY.md`。
    `zzz-hp/src/utils/damageCalc.ts`，核对 SHA-256
    （`f1df0144…7095`、`763c7447…629d`），逐字段核对原始记录，并要求
    `damageCalc.ts` 包含本批使用的异常、异放、乱流、耀变、贯穿与异常暴击乘区
-   表达式原文，包括上游独立的异常暴伤上限 `clamp(…, 0, 20)`。上游值是该版本
-   原始记录与固定乘区表达式的重放，不执行上游应用，也不是整应用差分或游戏实测。
+   表达式原文，包括上游不截断的异常暴击率与独立的异常暴伤上限
+   `clamp(…, 0, 20)`。上游值是该版本原始记录与固定乘区表达式的重放，不执行
+   上游应用，也不是整应用差分或游戏实测。
 3. **独立算式**：使用精确十进制有理数（+ − × ÷ 精确，除法与输出按 40 位有效
    数字 ROUND_HALF_EVEN）。中立面板为攻击 1,000、等级 1、目标防御 0、
    目标抗性 0、异常精通 100、暴击率 0、暴伤 0；除列出的效果外全部乘区为 1。普通异常与
@@ -127,9 +128,9 @@ CI 结构或 `docs/HISTORY.md`。
 - `pnpm --filter @randomplay/data typecheck:prepared`：通过。
 - 本批文件定向 `oxlint`：0 警告、0 错误；全仓 `oxfmt --check`：通过。
 - 参考生成器连续执行两次，输出逐字节一致。冻结参考 SHA-256
-  `09fb4ab96d72e58df2e73f160fdfe61259afbbca70aee9f1160e725d4c7da0be`
-  （3,029 行 / 84,142 字节）；输入夹具 `95dc9d47…675e`、回归 `f8de6eff…7016`、
-  生成器 `f5427bf5…b74d`。
+  `60c5432196c04125e365ae9eba51acef6c23a52d53bfbeb2cb34df3e24e9904e`
+  （3,029 行 / 84,149 字节）；输入夹具 `95dc9d47…675e`、回归 `f8de6eff…7016`、
+  生成器 `e2d6cbb8…72e3`。
 - 有界扰动（只改 `.generated` 未跟踪副本，随后用 `prepare:consumer` 恢复）：
   - 把维琳娜 M0 宽口径加回 `vortex`：2 项乱流案例失败。
   - 把简核心暴击与 M2 加回 `vortex`：3 项反例失败。
@@ -144,26 +145,37 @@ CI 结构或 `docs/HISTORY.md`。
 
 ## 整仓门禁
 
-上一提交 `5fed5048` 的根 `pnpm check` 通过（Exit 0）：包边界、lint、格式检查、
-spec 类型检查、core 与 data 的类型与测试、data 打包验收全部通过。其中 core 为
-98 个测试文件 5,679 项通过、24 项跳过，另有打包 1 项通过；data 为 111 个测试
-文件 4,804 项通过，另有打包 2 项通过。`oxlint` 全仓报告 131 条既有 warning、
-0 错误；本批新增文件定向检查为 0 warning、0 错误。
+最近一次根 `pnpm check` 整跑在 `5fed5048` 上通过（Exit 0）：包边界、lint、
+格式检查、spec 类型检查、core 与 data 的类型与测试、data 打包验收全部通过。
+其中 core 为 98 个测试文件 5,679 项通过、24 项跳过，另有打包 1 项通过；data 为
+111 个测试文件 4,804 项通过，另有打包 2 项通过。`oxlint` 全仓报告 131 条既有
+warning、0 错误；本批新增文件定向检查为 0 warning、0 错误。
 
-本轮审查修正只改测试、夹具、生成器与文档，没有改生产代码或正式数据，因此复用
-上述根 `pnpm check` 结果；并重新运行定向测试、`typecheck:prepared`、定向
-`oxlint` 与全仓 `format:check`。重新生成参考两次逐字节一致。
+两轮审查修正（`f6ff82db` 与后续提交）都只改测试、夹具、生成器与文档，没有改
+生产代码或正式数据，因此复用上述根 `pnpm check` 结果；每轮重新运行定向测试、
+`typecheck:prepared`、定向 `oxlint` 与全仓 `format:check`，并重新生成参考两次
+确认逐字节一致。
 
-### 审查修正（2026-10-27）
+### 第一轮审查修正（2026-10-27）
 
 - 上游异常暴伤投影改用 991bb0e 的 `clamp(…, 0, 20)` 上限，并把该表达式加入
-  固定原文校验；生成器另加 2 与 20 上限的自检。现有案例数值不变。
+  固定原文校验；现有案例数值不变。
 - 冻结参考删除测试未读取的 `upstream.factors`、`upstream.sources` 与选择项的
   `source.stat`／`recordElementFilter`／`upstreamKinds`；这些可由固定提交与
   指针重建。保留 `upstream` 四项合计、`source.pointer` 与来源摘要。
 - 注释改为“目标防御 0”；删除未使用的 `ScopeSelection.potentialLevel`、
   `scopePanel.penetrationValue`、`scopePanel.damageBonuses` 与
   `holderEntity` 包装；贡献值断言统一使用 `close()`。
+
+### 第二轮审查修正（2026-10-27）
+
+- 上游异常暴击率按 991bb0e 原文 `bonusPanel.anomalyCritRate / 100` 不截断，
+  与 Fairy 的 `[0, 1]` 上限分开；该原文加入固定校验。当前最大上游暴击率
+  0.56，48 案例数值不变。
+- 异常暴伤上限改为常量：Fairy `2`、上游 `20`；固定原文由常量拼出，投影直接
+  使用常量，并以常量差异断言替代旧自检，避免字面量再次漂移。
+- 生成器注释与参考 provenance 更新为“目标防御 0 / 目标抗性 0”和
+  `zero target defense/resistance`；参考重新生成两次逐字节一致。
 
 ## 边界
 

@@ -11,9 +11,9 @@
 //   2. 固定 ZZZ-HP 991bb0e 的原始记录给出上游同一选择下的编码（stat、数值、
 //      层数、元素筛选）；本脚本逐字段核对，并按该版本 damageCalc.ts 的乘区
 //      表达式重放上游结果来源指针与公式。不执行上游应用。
-//   3. 伤害链用独立十进制有理数算式重建：中立面板攻击 1,000、等级 1、防御 0、
-//      抗性 0、异常精通 100、暴击率 0，其余乘区恒为 1。期望值不使用 Fairy
-//      实际输出、既有对比结果或上游取整整数回填。
+//   3. 伤害链用独立十进制有理数算式重建：中立面板攻击 1,000、等级 1、
+//      目标防御 0、目标抗性 0、异常精通 100、暴击率 0，其余乘区恒为 1。
+//      期望值不使用 Fairy 实际输出、既有对比结果或上游取整整数回填。
 import assert from "node:assert/strict"
 import { execFileSync } from "node:child_process"
 import { createHash } from "node:crypto"
@@ -55,13 +55,24 @@ const damageCalc = upstreamFile(damageCalcResource)
 const generatorPath = fileURLToPath(import.meta.url)
 const generatorSha256 = hash(readFileSync(generatorPath))
 
+// Fairy 与 991bb0e 的上游异常暴击上限不同；常量同时用于乘区重放与原文校验，
+// 避免上限只在一处被悄悄改掉。
+const FAIRY_ANOMALY_CRITICAL_DAMAGE_CEILING = 2
+const UPSTREAM_ANOMALY_CRITICAL_DAMAGE_CEILING = 20
+assert.notEqual(
+  UPSTREAM_ANOMALY_CRITICAL_DAMAGE_CEILING,
+  FAIRY_ANOMALY_CRITICAL_DAMAGE_CEILING,
+  "upstream anomaly critical damage ceiling must differ from Fairy's",
+)
+
 // 上游 991bb0e 的乘区表达式。逐条固定到源码文本，任何漂移都拒绝生成。
 const upstreamFormulas = {
   anomaly: "const anomalyDmgBonusZone = 1 + bonusPanel.anomalyDmgBonus / 100",
   anomalyCritical:
     "const anomalyCritZone = 1 + anomalyCritRateRatio * anomalyCritDmgRatio",
-  anomalyCriticalDamage:
-    "const anomalyCritDmgRatio = clamp(bonusPanel.anomalyCritDmg / 100, 0, 20)",
+  anomalyCriticalRate:
+    "const anomalyCritRateRatio = bonusPanel.anomalyCritRate / 100",
+  anomalyCriticalDamage: `const anomalyCritDmgRatio = clamp(bonusPanel.anomalyCritDmg / 100, 0, ${UPSTREAM_ANOMALY_CRITICAL_DAMAGE_CEILING})`,
   anomalyRelease:
     "1 + (bonusPanel.anomalyReleaseDmgBonus + bonusPanel.anomalyDmgBonus) / 100",
   turbulence:
@@ -352,11 +363,12 @@ function channelTotals(entries) {
 }
 
 /**
- * Fairy 的异常暴伤上限是 2；991bb0e 的 damageCalc.ts 对 `anomalyCritDmg`
- * 使用 0—20 的独立上限。两者只在超出低上限时才产生差值，本批现有案例都在
- * 低上限内，因此数值不变，但上游投影仍按上游上限计算。
+ * Fairy 把异常暴击率截到 [0, 1]、暴伤截到 [0, 2]；991bb0e 的
+ * damageCalc.ts 不截断异常暴击率，并对 `anomalyCritDmg` 使用 0—20 的
+ * 独立上限。两者只在超出 Fairy 上限时才产生差值，本批现有案例都在范围内，
+ * 因此数值不变，但上游投影仍按上游语义计算。
  */
-function factorsFor(kind, channels, anomalyCriticalDamageCeiling) {
+function factorsFor(kind, channels, options) {
   if (kind === "sheer") {
     const sheer = add(ONE, channels["sheer-damage-bonus"])
     return {
@@ -372,11 +384,13 @@ function factorsFor(kind, channels, anomalyCriticalDamageCeiling) {
     }
   }
   const damageBonus = add(ONE, channels["anomaly-damage-bonus"])
-  const rate = clampRational(channels["anomaly-critical-rate"], ZERO, ONE)
+  const rate = options.clampCriticalRate
+    ? clampRational(channels["anomaly-critical-rate"], ZERO, ONE)
+    : channels["anomaly-critical-rate"]
   const damage = clampRational(
     channels["anomaly-critical-damage"],
     ZERO,
-    fromDecimal(anomalyCriticalDamageCeiling),
+    fromDecimal(options.anomalyCriticalDamageCeiling),
   )
   const nonCriticalValue = mul(fromDecimal(scopePanel.attack), damageBonus)
   const criticalFactor = add(ONE, damage)
@@ -407,16 +421,6 @@ function factorsFor(kind, channels, anomalyCriticalDamageCeiling) {
     expectedValue,
   }
 }
-
-// 防止把 Fairy 的 2 点上限误用到上游：同一 5 点异常暴伤在两种上限下必须不同。
-const highAnomalyCriticalDamage = channelTotals([
-  { channel: "anomaly-critical-damage", value: fromDecimal(5) },
-])
-assert(
-  toNumber(factorsFor("anomaly", highAnomalyCriticalDamage, 20).criticalValue) >
-    toNumber(factorsFor("anomaly", highAnomalyCriticalDamage, 2).criticalValue),
-  "upstream anomaly critical damage must use its own 0-20 ceiling",
-)
 
 const decimalMap = (record) =>
   Object.fromEntries(
@@ -470,10 +474,16 @@ for (const caseEntry of scopeCases) {
   const expected = factorsFor(
     caseEntry.hit.kind,
     channelTotals(correctedEntries),
-    2,
+    {
+      clampCriticalRate: true,
+      anomalyCriticalDamageCeiling: FAIRY_ANOMALY_CRITICAL_DAMAGE_CEILING,
+    },
   )
   const upstream = caseEntry.upstreamProjection
-    ? factorsFor(caseEntry.hit.kind, channelTotals(upstreamEntries), 20)
+    ? factorsFor(caseEntry.hit.kind, channelTotals(upstreamEntries), {
+        clampCriticalRate: false,
+        anomalyCriticalDamageCeiling: UPSTREAM_ANOMALY_CRITICAL_DAMAGE_CEILING,
+      })
     : null
   cases[caseEntry.caseId] = {
     correction: caseEntry.correction,
@@ -538,7 +548,7 @@ const reference = {
     layers: [
       "Nanoka zh/en text and the revision 54—56 correction documents declare the corrected values and damage-kind scope in the case fixture.",
       "Pinned ZZZ-HP 991bb0e raw records freeze the upstream encoding; the pinned damageCalc.ts zone expressions are asserted verbatim and replayed, not executed as an app.",
-      "An independent exact-decimal rational chain uses a neutral 1,000-attack panel, level 1, zero defense/resistance, 100 anomaly proficiency and zero crit rate; all other factors are one.",
+      "An independent exact-decimal rational chain uses a neutral 1,000-attack panel, level 1, zero target defense/resistance, 100 anomaly proficiency and zero crit rate; all other factors are one.",
     ],
   },
   cases,
