@@ -32,8 +32,6 @@ export interface ScopeSelection {
   readonly optionId: string
   readonly layers: number
   readonly channel: ScopeChannel
-  /** 只用于简的潜能档位选择；该档位的独立期望来自游戏原文。 */
-  readonly potentialLevel?: 2 | 5
   /** 游戏原文在面板异常精通 100 / 对应档位下的每层贡献（比例）。 */
   readonly perLayer: number
   /** 固定来源原始记录按同一层数折算的每层贡献；仅用于核对上游投影。 */
@@ -83,7 +81,7 @@ export interface ScopeCase {
   readonly upstreamProjection: boolean
 }
 
-/** 中立面板：攻击 1,000、异常精通 100、等级 1、防御 0、抗性 0、暴击率 0。 */
+/** 中立面板：攻击 1,000、异常精通 100、等级 1、目标防御 0、目标抗性 0、暴击率 0。 */
 export const scopePanel = {
   attack: 1_000,
   health: 10_000,
@@ -95,9 +93,7 @@ export const scopePanel = {
   criticalRate: 0,
   criticalDamage: 0,
   penetrationRatio: 0,
-  penetrationValue: 0,
   sharpCriticalDamage: 0,
-  damageBonuses: {},
 } as const
 
 export const scopeTarget = {
@@ -334,10 +330,7 @@ const janeCoreConversion = (): ScopeSelection => ({
   },
 })
 
-const janePotential = (
-  perLayer: number,
-  potentialLevel: 2 | 5,
-): ScopeSelection => ({
+const janePotential = (perLayer: number): ScopeSelection => ({
   optionId: "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-ms34gorp-xrbl8x",
   layers: 1,
   channel: "anomaly-critical-damage",
@@ -356,7 +349,6 @@ const janePotential = (
     elementFilter: ["物理"],
     applyTarget: "self",
   },
-  potentialLevel,
 })
 
 const janeM2 = (): ScopeSelection => ({
@@ -783,7 +775,7 @@ export const scopeCases: readonly ScopeCase[] = [
     holder: { ...janeHolder, potentialLevel: 2 },
     wEngine: null,
     hit: { kind: "anomaly", element: "physical" },
-    selections: [janeCoreRate(), janeCoreDamage(), janePotential(0.1, 2)],
+    selections: [janeCoreRate(), janeCoreDamage(), janePotential(0.1)],
     upstreamProjection: true,
   },
   {
@@ -792,7 +784,7 @@ export const scopeCases: readonly ScopeCase[] = [
     holder: { ...janeHolder, potentialLevel: 2 },
     wEngine: null,
     hit: { kind: "vortex", element: "physical" },
-    selections: [janeCoreRate(), janeCoreDamage(), janePotential(0.1, 2)],
+    selections: [janeCoreRate(), janeCoreDamage(), janePotential(0.1)],
     upstreamProjection: true,
   },
   {
@@ -801,7 +793,7 @@ export const scopeCases: readonly ScopeCase[] = [
     holder: { ...janeHolder, potentialLevel: 5 },
     wEngine: null,
     hit: { kind: "anomaly", element: "physical" },
-    selections: [janeCoreRate(), janeCoreDamage(), janePotential(0.25, 5)],
+    selections: [janeCoreRate(), janeCoreDamage(), janePotential(0.25)],
     upstreamProjection: false,
   },
   {

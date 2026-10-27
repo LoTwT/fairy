@@ -15,7 +15,7 @@
         "sha256": "763c7447cf6ab208c48f5412516de430b1e2ba1669e90bf37ecb83526bc0629d"
       }
     ],
-    "generatorSha256": "c8c80ece0d0f7b534e92ecd5e104acc7261a8f333dfa6e6e762d545aea97b476",
+    "generatorSha256": "f5427bf58bc2c3cf3368178d6e5b1a25a68e69e5167d81475960dfca3086b74d",
     "precision": "Reference and difference assertions use max(1e-9, abs(reference) * 1e-12). This batch has no upstream integer projection; upstream values are the pinned raw-record/zone projection.",
     "layers": [
       "Nanoka zh/en text and the revision 54—56 correction documents declare the corrected values and damage-kind scope in the case fixture.",
@@ -48,15 +48,7 @@
           "correctedElements": ["wind"],
           "differenceId": "velina-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0"
           }
         }
       ],
@@ -79,29 +71,7 @@
         "nonCritical": "1100",
         "critical": "1100",
         "expected": "1100",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.1"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 10,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.1"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "0",
@@ -134,15 +104,7 @@
           "correctedElements": ["wind"],
           "differenceId": "velina-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0"
           }
         }
       ],
@@ -165,29 +127,7 @@
         "nonCritical": "1100",
         "critical": "1100",
         "expected": "1100",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.1"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 10,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.1"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-100",
@@ -220,15 +160,7 @@
           "correctedElements": ["wind"],
           "differenceId": "velina-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0"
           }
         },
         {
@@ -240,10 +172,7 @@
           "correctedElements": null,
           "differenceId": null,
           "source": {
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "turbulenceDmgBonus",
-            "recordElementFilter": "all",
-            "upstreamKinds": ["vortex"]
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/1"
           }
         }
       ],
@@ -266,40 +195,7 @@
         "nonCritical": "1200",
         "critical": "1200",
         "expected": "1200",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.2"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 10,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.1"
-          },
-          {
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "turbulenceDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 10,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": "all",
-            "upstreamRatioPerLayer": "0.1"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-100",
@@ -332,15 +228,7 @@
           "correctedElements": ["wind"],
           "differenceId": "velina-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0"
           }
         }
       ],
@@ -363,29 +251,7 @@
         "nonCritical": "1100",
         "critical": "1100",
         "expected": "1100",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.1"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 10,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.1"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-100",
@@ -418,15 +284,7 @@
           "correctedElements": ["wind"],
           "differenceId": "velina-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0"
           }
         }
       ],
@@ -447,27 +305,7 @@
         "nonCritical": "1100",
         "critical": null,
         "expected": "1100",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.1"
-          },
-          "critical": null
-        },
-        "sources": [
-          {
-            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 10,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.1"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-100",
@@ -500,15 +338,7 @@
           "correctedElements": ["wind"],
           "differenceId": "velina-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/0"
           }
         }
       ],
@@ -531,29 +361,7 @@
         "nonCritical": "1150",
         "critical": "1150",
         "expected": "1150",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.15"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 15,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.15"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "0",
@@ -586,15 +394,7 @@
           "correctedElements": ["wind"],
           "differenceId": "velina-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/0"
           }
         },
         {
@@ -606,10 +406,7 @@
           "correctedElements": null,
           "differenceId": null,
           "source": {
-            "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/1",
-            "stat": "turbulenceDmgBonus",
-            "recordElementFilter": "all",
-            "upstreamKinds": ["vortex"]
+            "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -632,40 +429,7 @@
         "nonCritical": "1300",
         "critical": "1300",
         "expected": "1300",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.3"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 15,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.15"
-          },
-          {
-            "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/1",
-            "stat": "turbulenceDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 15,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": "all",
-            "upstreamRatioPerLayer": "0.15"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-150",
@@ -698,15 +462,7 @@
           "correctedElements": ["wind"],
           "differenceId": "velina-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/45/mindscapeBuffs/6/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/45/mindscapeBuffs/6/effectBlocks/0/effects/0"
           }
         }
       ],
@@ -729,29 +485,7 @@
         "nonCritical": "1100",
         "critical": "1100",
         "expected": "1100",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.1"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/45/mindscapeBuffs/6/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 2.5,
-            "maxStacks": 16,
-            "defaultStacks": 16,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.025"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "0",
@@ -784,15 +518,7 @@
           "correctedElements": ["wind"],
           "differenceId": "velina-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/45/mindscapeBuffs/6/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/45/mindscapeBuffs/6/effectBlocks/0/effects/0"
           }
         }
       ],
@@ -815,29 +541,7 @@
         "nonCritical": "1100",
         "critical": "1100",
         "expected": "1100",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.1"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/45/mindscapeBuffs/6/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 2.5,
-            "maxStacks": 16,
-            "defaultStacks": 16,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.025"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-100",
@@ -870,15 +574,7 @@
           "correctedElements": null,
           "differenceId": "grace-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["电"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0"
           }
         }
       ],
@@ -901,29 +597,7 @@
         "nonCritical": "1360",
         "critical": "1360",
         "expected": "1360",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.36"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 18,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["电"],
-            "upstreamRatioPerLayer": "0.18"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "0",
@@ -956,15 +630,7 @@
           "correctedElements": null,
           "differenceId": "grace-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["电"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0"
           }
         }
       ],
@@ -987,29 +653,7 @@
         "nonCritical": "1360",
         "critical": "1360",
         "expected": "1360",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.36"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 18,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["电"],
-            "upstreamRatioPerLayer": "0.18"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-360",
@@ -1042,15 +686,7 @@
           "correctedElements": null,
           "differenceId": "grace-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["电"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0"
           }
         }
       ],
@@ -1073,29 +709,7 @@
         "nonCritical": "1360",
         "critical": "1360",
         "expected": "1360",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.36"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 18,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["电"],
-            "upstreamRatioPerLayer": "0.18"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-360",
@@ -1128,15 +742,7 @@
           "correctedElements": null,
           "differenceId": "grace-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["电"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0"
           }
         }
       ],
@@ -1157,27 +763,7 @@
         "nonCritical": "1360",
         "critical": null,
         "expected": "1360",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.36"
-          },
-          "critical": null
-        },
-        "sources": [
-          {
-            "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 18,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["电"],
-            "upstreamRatioPerLayer": "0.18"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-360",
@@ -1210,15 +796,7 @@
           "correctedElements": null,
           "differenceId": "vivian-m0-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["以太"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0"
           }
         }
       ],
@@ -1241,29 +819,7 @@
         "nonCritical": "1120",
         "critical": "1120",
         "expected": "1120",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.12"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 12,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["以太"],
-            "upstreamRatioPerLayer": "0.12"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "0",
@@ -1296,15 +852,7 @@
           "correctedElements": null,
           "differenceId": "vivian-m0-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["以太"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0"
           }
         }
       ],
@@ -1327,29 +875,7 @@
         "nonCritical": "1120",
         "critical": "1120",
         "expected": "1120",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.12"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 12,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["以太"],
-            "upstreamRatioPerLayer": "0.12"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-120",
@@ -1382,15 +908,7 @@
           "correctedElements": null,
           "differenceId": "vivian-m0-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["以太"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0"
           }
         }
       ],
@@ -1413,29 +931,7 @@
         "nonCritical": "1120",
         "critical": "1120",
         "expected": "1120",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.12"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 12,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["以太"],
-            "upstreamRatioPerLayer": "0.12"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-120",
@@ -1468,15 +964,7 @@
           "correctedElements": null,
           "differenceId": "vivian-m0-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["以太"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0"
           }
         }
       ],
@@ -1497,27 +985,7 @@
         "nonCritical": "1120",
         "critical": null,
         "expected": "1120",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.12"
-          },
-          "critical": null
-        },
-        "sources": [
-          {
-            "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 12,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["以太"],
-            "upstreamRatioPerLayer": "0.12"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-120",
@@ -1550,15 +1018,7 @@
           "correctedElements": null,
           "differenceId": "alice-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0"
           }
         }
       ],
@@ -1581,29 +1041,7 @@
         "nonCritical": "1150",
         "critical": "1150",
         "expected": "1150",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.15"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 15,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.15"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "0",
@@ -1636,15 +1074,7 @@
           "correctedElements": null,
           "differenceId": "alice-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0"
           }
         }
       ],
@@ -1667,29 +1097,7 @@
         "nonCritical": "1150",
         "critical": "1150",
         "expected": "1150",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.15"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 15,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.15"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-150",
@@ -1722,15 +1130,7 @@
           "correctedElements": null,
           "differenceId": "alice-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0"
           }
         }
       ],
@@ -1753,29 +1153,7 @@
         "nonCritical": "1150",
         "critical": "1150",
         "expected": "1150",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.15"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 15,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.15"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-150",
@@ -1808,15 +1186,7 @@
           "correctedElements": null,
           "differenceId": "alice-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0"
           }
         }
       ],
@@ -1837,27 +1207,7 @@
         "nonCritical": "1150",
         "critical": null,
         "expected": "1150",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.15"
-          },
-          "critical": null
-        },
-        "sources": [
-          {
-            "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "fixed",
-            "rawValue": 15,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.15"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-150",
@@ -1890,10 +1240,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "anomalyCritRate",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1"
           }
         },
         {
@@ -1905,10 +1252,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
-            "stat": "anomalyCritDmg",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4"
           }
         },
         {
@@ -1920,10 +1264,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/7",
-            "stat": "anomalyCritRate",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/7"
           }
         }
       ],
@@ -1946,51 +1287,7 @@
         "nonCritical": "1000",
         "critical": "1500",
         "expected": "1280",
-        "criticalRate": "0.56",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1"
-          },
-          "critical": {
-            "anomalyCritical": "1.5"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "anomalyCritRate",
-            "rawKind": "fixed",
-            "rawValue": 40,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.4"
-          },
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
-            "stat": "anomalyCritDmg",
-            "rawKind": "fixed",
-            "rawValue": 50,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.5"
-          },
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/7",
-            "stat": "anomalyCritRate",
-            "rawKind": "convert",
-            "rawValue": 0,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.16"
-          }
-        ]
+        "criticalRate": "0.56"
       },
       "difference": {
         "nonCritical": "0",
@@ -2023,10 +1320,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "anomalyCritRate",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1"
           }
         },
         {
@@ -2038,10 +1332,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
-            "stat": "anomalyCritDmg",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4"
           }
         },
         {
@@ -2053,10 +1344,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/7",
-            "stat": "anomalyCritRate",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/7"
           }
         }
       ],
@@ -2079,51 +1367,7 @@
         "nonCritical": "1000",
         "critical": "1000",
         "expected": "1000",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "anomalyCritRate",
-            "rawKind": "fixed",
-            "rawValue": 40,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.4"
-          },
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
-            "stat": "anomalyCritDmg",
-            "rawKind": "fixed",
-            "rawValue": 50,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.5"
-          },
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/7",
-            "stat": "anomalyCritRate",
-            "rawKind": "convert",
-            "rawValue": 0,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.16"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "0",
@@ -2156,10 +1400,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "anomalyCritRate",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1"
           }
         },
         {
@@ -2171,10 +1412,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
-            "stat": "anomalyCritDmg",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4"
           }
         },
         {
@@ -2186,10 +1424,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/7",
-            "stat": "anomalyCritRate",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/7"
           }
         }
       ],
@@ -2212,51 +1447,7 @@
         "nonCritical": "1000",
         "critical": "1000",
         "expected": "1000",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "anomalyCritRate",
-            "rawKind": "fixed",
-            "rawValue": 40,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.4"
-          },
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
-            "stat": "anomalyCritDmg",
-            "rawKind": "fixed",
-            "rawValue": 50,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.5"
-          },
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/7",
-            "stat": "anomalyCritRate",
-            "rawKind": "convert",
-            "rawValue": 0,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.16"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "0",
@@ -2289,10 +1480,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "anomalyCritRate",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1"
           }
         },
         {
@@ -2304,10 +1492,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
-            "stat": "anomalyCritDmg",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4"
           }
         },
         {
@@ -2319,10 +1504,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/2/effectBlocks/0/effects/1",
-            "stat": "anomalyCritDmg",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/2/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -2345,51 +1527,7 @@
         "nonCritical": "1000",
         "critical": "2000",
         "expected": "1400",
-        "criticalRate": "0.4",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1"
-          },
-          "critical": {
-            "anomalyCritical": "2"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "anomalyCritRate",
-            "rawKind": "fixed",
-            "rawValue": 40,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.4"
-          },
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
-            "stat": "anomalyCritDmg",
-            "rawKind": "fixed",
-            "rawValue": 50,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.5"
-          },
-          {
-            "pointer": "/agents/44/mindscapeBuffs/2/effectBlocks/0/effects/1",
-            "stat": "anomalyCritDmg",
-            "rawKind": "fixed",
-            "rawValue": 50,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.5"
-          }
-        ]
+        "criticalRate": "0.4"
       },
       "difference": {
         "nonCritical": "0",
@@ -2422,10 +1560,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "anomalyCritRate",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1"
           }
         },
         {
@@ -2437,10 +1572,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
-            "stat": "anomalyCritDmg",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4"
           }
         },
         {
@@ -2452,10 +1584,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/2/effectBlocks/0/effects/1",
-            "stat": "anomalyCritDmg",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/2/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -2478,51 +1607,7 @@
         "nonCritical": "1000",
         "critical": "1000",
         "expected": "1000",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "anomalyCritRate",
-            "rawKind": "fixed",
-            "rawValue": 40,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.4"
-          },
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
-            "stat": "anomalyCritDmg",
-            "rawKind": "fixed",
-            "rawValue": 50,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.5"
-          },
-          {
-            "pointer": "/agents/44/mindscapeBuffs/2/effectBlocks/0/effects/1",
-            "stat": "anomalyCritDmg",
-            "rawKind": "fixed",
-            "rawValue": 50,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.5"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "0",
@@ -2555,10 +1640,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "anomalyCritRate",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1"
           }
         },
         {
@@ -2570,10 +1652,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
-            "stat": "anomalyCritDmg",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4"
           }
         },
         {
@@ -2585,10 +1664,7 @@
           "correctedElements": ["physical"],
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/0",
-            "stat": "anomalyCritDmg",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/0"
           }
         }
       ],
@@ -2611,51 +1687,7 @@
         "nonCritical": "1000",
         "critical": "1600",
         "expected": "1240",
-        "criticalRate": "0.4",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1"
-          },
-          "critical": {
-            "anomalyCritical": "1.6"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "anomalyCritRate",
-            "rawKind": "fixed",
-            "rawValue": 40,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.4"
-          },
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
-            "stat": "anomalyCritDmg",
-            "rawKind": "fixed",
-            "rawValue": 50,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.5"
-          },
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/0",
-            "stat": "anomalyCritDmg",
-            "rawKind": "fixed",
-            "rawValue": 10,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.1"
-          }
-        ]
+        "criticalRate": "0.4"
       },
       "difference": {
         "nonCritical": "0",
@@ -2688,10 +1720,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "anomalyCritRate",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1"
           }
         },
         {
@@ -2703,10 +1732,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
-            "stat": "anomalyCritDmg",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4"
           }
         },
         {
@@ -2718,10 +1744,7 @@
           "correctedElements": ["physical"],
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/0",
-            "stat": "anomalyCritDmg",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/0"
           }
         }
       ],
@@ -2744,51 +1767,7 @@
         "nonCritical": "1000",
         "critical": "1000",
         "expected": "1000",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "anomalyCritRate",
-            "rawKind": "fixed",
-            "rawValue": 40,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.4"
-          },
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
-            "stat": "anomalyCritDmg",
-            "rawKind": "fixed",
-            "rawValue": 50,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.5"
-          },
-          {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/0",
-            "stat": "anomalyCritDmg",
-            "rawKind": "fixed",
-            "rawValue": 10,
-            "rawValuePerStack": 0,
-            "maxStacks": 1,
-            "defaultStacks": 1,
-            "elementFilter": ["物理"],
-            "upstreamRatioPerLayer": "0.1"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "0",
@@ -2821,10 +1800,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1",
-            "stat": "anomalyCritRate",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1"
           }
         },
         {
@@ -2836,10 +1812,7 @@
           "correctedElements": null,
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4",
-            "stat": "anomalyCritDmg",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4"
           }
         },
         {
@@ -2851,10 +1824,7 @@
           "correctedElements": ["physical"],
           "differenceId": "jane-anomaly-critical-kind-scope",
           "source": {
-            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/0",
-            "stat": "anomalyCritDmg",
-            "recordElementFilter": ["物理"],
-            "upstreamKinds": ["anomaly"]
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/0"
           }
         }
       ],
@@ -2903,15 +1873,7 @@
           "correctedElements": ["wind"],
           "differenceId": "joyau-dore-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -2934,29 +1896,7 @@
         "nonCritical": "1070",
         "critical": "1070",
         "expected": "1070",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.07"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 7,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.07"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "0",
@@ -2992,15 +1932,7 @@
           "correctedElements": ["wind"],
           "differenceId": "joyau-dore-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -3023,29 +1955,7 @@
         "nonCritical": "1080",
         "critical": "1080",
         "expected": "1080",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.08"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 8,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.08"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "0",
@@ -3081,15 +1991,7 @@
           "correctedElements": ["wind"],
           "differenceId": "joyau-dore-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -3112,29 +2014,7 @@
         "nonCritical": "1090",
         "critical": "1090",
         "expected": "1090",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.09"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 9,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.09"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "0",
@@ -3170,15 +2050,7 @@
           "correctedElements": ["wind"],
           "differenceId": "joyau-dore-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -3201,29 +2073,7 @@
         "nonCritical": "1100",
         "critical": "1100",
         "expected": "1100",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.1"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 10,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.1"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "0",
@@ -3259,15 +2109,7 @@
           "correctedElements": ["wind"],
           "differenceId": "joyau-dore-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -3290,29 +2132,7 @@
         "nonCritical": "1110",
         "critical": "1110",
         "expected": "1110",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.11"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 11,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.11"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "0",
@@ -3348,15 +2168,7 @@
           "correctedElements": ["wind"],
           "differenceId": "joyau-dore-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -3379,29 +2191,7 @@
         "nonCritical": "1070",
         "critical": "1070",
         "expected": "1070",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.07"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 7,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.07"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-70",
@@ -3437,15 +2227,7 @@
           "correctedElements": ["wind"],
           "differenceId": "joyau-dore-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -3468,29 +2250,7 @@
         "nonCritical": "1080",
         "critical": "1080",
         "expected": "1080",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.08"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 8,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.08"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-80",
@@ -3526,15 +2286,7 @@
           "correctedElements": ["wind"],
           "differenceId": "joyau-dore-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -3557,29 +2309,7 @@
         "nonCritical": "1090",
         "critical": "1090",
         "expected": "1090",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.09"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 9,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.09"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-90",
@@ -3615,15 +2345,7 @@
           "correctedElements": ["wind"],
           "differenceId": "joyau-dore-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -3646,29 +2368,7 @@
         "nonCritical": "1100",
         "critical": "1100",
         "expected": "1100",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.1"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 10,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.1"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-100",
@@ -3704,15 +2404,7 @@
           "correctedElements": ["wind"],
           "differenceId": "joyau-dore-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -3735,29 +2427,7 @@
         "nonCritical": "1110",
         "critical": "1110",
         "expected": "1110",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.11"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 11,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.11"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-110",
@@ -3793,15 +2463,7 @@
           "correctedElements": ["wind"],
           "differenceId": "joyau-dore-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1"
           }
         },
         {
@@ -3813,10 +2475,7 @@
           "correctedElements": null,
           "differenceId": null,
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/2",
-            "stat": "turbulenceDmgBonus",
-            "recordElementFilter": "all",
-            "upstreamKinds": ["vortex"]
+            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/2"
           }
         }
       ],
@@ -3839,40 +2498,7 @@
         "nonCritical": "1140",
         "critical": "1140",
         "expected": "1140",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.14"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 7,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.07"
-          },
-          {
-            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/2",
-            "stat": "turbulenceDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 7,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": "all",
-            "upstreamRatioPerLayer": "0.07"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-70",
@@ -3908,15 +2534,7 @@
           "correctedElements": ["wind"],
           "differenceId": "joyau-dore-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/1"
           }
         },
         {
@@ -3928,10 +2546,7 @@
           "correctedElements": null,
           "differenceId": null,
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/2",
-            "stat": "turbulenceDmgBonus",
-            "recordElementFilter": "all",
-            "upstreamKinds": ["vortex"]
+            "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/2"
           }
         }
       ],
@@ -3954,40 +2569,7 @@
         "nonCritical": "1160",
         "critical": "1160",
         "expected": "1160",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.16"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 8,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.08"
-          },
-          {
-            "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/2",
-            "stat": "turbulenceDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 8,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": "all",
-            "upstreamRatioPerLayer": "0.08"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-80",
@@ -4023,15 +2605,7 @@
           "correctedElements": ["wind"],
           "differenceId": "joyau-dore-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/1"
           }
         },
         {
@@ -4043,10 +2617,7 @@
           "correctedElements": null,
           "differenceId": null,
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/2",
-            "stat": "turbulenceDmgBonus",
-            "recordElementFilter": "all",
-            "upstreamKinds": ["vortex"]
+            "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/2"
           }
         }
       ],
@@ -4069,40 +2640,7 @@
         "nonCritical": "1180",
         "critical": "1180",
         "expected": "1180",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.18"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 9,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.09"
-          },
-          {
-            "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/2",
-            "stat": "turbulenceDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 9,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": "all",
-            "upstreamRatioPerLayer": "0.09"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-90",
@@ -4138,15 +2676,7 @@
           "correctedElements": ["wind"],
           "differenceId": "joyau-dore-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/1"
           }
         },
         {
@@ -4158,10 +2688,7 @@
           "correctedElements": null,
           "differenceId": null,
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/2",
-            "stat": "turbulenceDmgBonus",
-            "recordElementFilter": "all",
-            "upstreamKinds": ["vortex"]
+            "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/2"
           }
         }
       ],
@@ -4184,40 +2711,7 @@
         "nonCritical": "1200",
         "critical": "1200",
         "expected": "1200",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.2"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 10,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.1"
-          },
-          {
-            "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/2",
-            "stat": "turbulenceDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 10,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": "all",
-            "upstreamRatioPerLayer": "0.1"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-100",
@@ -4253,15 +2747,7 @@
           "correctedElements": ["wind"],
           "differenceId": "joyau-dore-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/1"
           }
         },
         {
@@ -4273,10 +2759,7 @@
           "correctedElements": null,
           "differenceId": null,
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/2",
-            "stat": "turbulenceDmgBonus",
-            "recordElementFilter": "all",
-            "upstreamKinds": ["vortex"]
+            "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/2"
           }
         }
       ],
@@ -4299,40 +2782,7 @@
         "nonCritical": "1220",
         "critical": "1220",
         "expected": "1220",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.22"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 11,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.11"
-          },
-          {
-            "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/2",
-            "stat": "turbulenceDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 11,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": "all",
-            "upstreamRatioPerLayer": "0.11"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-110",
@@ -4368,15 +2818,7 @@
           "correctedElements": ["wind"],
           "differenceId": "joyau-dore-anomaly-damage-kind-scope",
           "source": {
-            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "recordElementFilter": ["风"],
-            "upstreamKinds": [
-              "anomaly",
-              "anomaly-settlement",
-              "vortex",
-              "luminize"
-            ]
+            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -4397,27 +2839,7 @@
         "nonCritical": "1070",
         "critical": null,
         "expected": "1070",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.07"
-          },
-          "critical": null
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1",
-            "stat": "anomalyDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 7,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["风"],
-            "upstreamRatioPerLayer": "0.07"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-70",
@@ -4453,10 +2875,7 @@
           "correctedElements": ["fire"],
           "differenceId": "wrathful-vajra-r2-fire-sheer-stat",
           "source": {
-            "pointer": "/wengines/42/refinementBuffs/1/effectBlocks/0/effects/1",
-            "stat": "turbulenceDmgBonus",
-            "recordElementFilter": ["火"],
-            "upstreamKinds": ["vortex"]
+            "pointer": "/wengines/42/refinementBuffs/1/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -4479,29 +2898,7 @@
         "nonCritical": "1000",
         "critical": "1000",
         "expected": "1000",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "sheerDamageBonus": "1"
-          },
-          "critical": {
-            "critical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/42/refinementBuffs/1/effectBlocks/0/effects/1",
-            "stat": "turbulenceDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 10.35,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["火"],
-            "upstreamRatioPerLayer": "0.1035"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "103.5",
@@ -4537,10 +2934,7 @@
           "correctedElements": ["fire"],
           "differenceId": "wrathful-vajra-r2-fire-sheer-stat",
           "source": {
-            "pointer": "/wengines/42/refinementBuffs/1/effectBlocks/0/effects/1",
-            "stat": "turbulenceDmgBonus",
-            "recordElementFilter": ["火"],
-            "upstreamKinds": ["vortex"]
+            "pointer": "/wengines/42/refinementBuffs/1/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -4563,29 +2957,7 @@
         "nonCritical": "1000",
         "critical": "1000",
         "expected": "1000",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "sheerDamageBonus": "1"
-          },
-          "critical": {
-            "critical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/42/refinementBuffs/1/effectBlocks/0/effects/1",
-            "stat": "turbulenceDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 10.35,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["火"],
-            "upstreamRatioPerLayer": "0.1035"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "0",
@@ -4621,10 +2993,7 @@
           "correctedElements": ["fire"],
           "differenceId": "wrathful-vajra-r2-fire-sheer-stat",
           "source": {
-            "pointer": "/wengines/42/refinementBuffs/1/effectBlocks/0/effects/1",
-            "stat": "turbulenceDmgBonus",
-            "recordElementFilter": ["火"],
-            "upstreamKinds": ["vortex"]
+            "pointer": "/wengines/42/refinementBuffs/1/effectBlocks/0/effects/1"
           }
         }
       ],
@@ -4647,29 +3016,7 @@
         "nonCritical": "1103.5",
         "critical": "1103.5",
         "expected": "1103.5",
-        "criticalRate": "0",
-        "factors": {
-          "nonCritical": {
-            "baseDamage": "1000",
-            "anomalyDamageBonus": "1.1035"
-          },
-          "critical": {
-            "anomalyCritical": "1"
-          }
-        },
-        "sources": [
-          {
-            "pointer": "/wengines/42/refinementBuffs/1/effectBlocks/0/effects/1",
-            "stat": "turbulenceDmgBonus",
-            "rawKind": "stacked",
-            "rawValue": 0,
-            "rawValuePerStack": 10.35,
-            "maxStacks": 2,
-            "defaultStacks": 2,
-            "elementFilter": ["火"],
-            "upstreamRatioPerLayer": "0.1035"
-          }
-        ]
+        "criticalRate": "0"
       },
       "difference": {
         "nonCritical": "-103.5",

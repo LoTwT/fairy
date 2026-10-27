@@ -60,6 +60,8 @@ const upstreamFormulas = {
   anomaly: "const anomalyDmgBonusZone = 1 + bonusPanel.anomalyDmgBonus / 100",
   anomalyCritical:
     "const anomalyCritZone = 1 + anomalyCritRateRatio * anomalyCritDmgRatio",
+  anomalyCriticalDamage:
+    "const anomalyCritDmgRatio = clamp(bonusPanel.anomalyCritDmg / 100, 0, 20)",
   anomalyRelease:
     "1 + (bonusPanel.anomalyReleaseDmgBonus + bonusPanel.anomalyDmgBonus) / 100",
   turbulence:
@@ -337,7 +339,7 @@ function validateSelection(caseEntry, selection) {
     toNumber(recordRatio),
     `${caseEntry.caseId}: declared sourcePerLayer does not match the raw record`,
   )
-  return { record, upstreamScope, recordRatio }
+  return { upstreamScope, recordRatio }
 }
 
 function channelTotals(entries) {
@@ -349,7 +351,12 @@ function channelTotals(entries) {
   return totals
 }
 
-function factorsFor(kind, channels) {
+/**
+ * Fairy 的异常暴伤上限是 2；991bb0e 的 damageCalc.ts 对 `anomalyCritDmg`
+ * 使用 0—20 的独立上限。两者只在超出低上限时才产生差值，本批现有案例都在
+ * 低上限内，因此数值不变，但上游投影仍按上游上限计算。
+ */
+function factorsFor(kind, channels, anomalyCriticalDamageCeiling) {
   if (kind === "sheer") {
     const sheer = add(ONE, channels["sheer-damage-bonus"])
     return {
@@ -369,7 +376,7 @@ function factorsFor(kind, channels) {
   const damage = clampRational(
     channels["anomaly-critical-damage"],
     ZERO,
-    fromDecimal(2),
+    fromDecimal(anomalyCriticalDamageCeiling),
   )
   const nonCriticalValue = mul(fromDecimal(scopePanel.attack), damageBonus)
   const criticalFactor = add(ONE, damage)
@@ -400,6 +407,16 @@ function factorsFor(kind, channels) {
     expectedValue,
   }
 }
+
+// 防止把 Fairy 的 2 点上限误用到上游：同一 5 点异常暴伤在两种上限下必须不同。
+const highAnomalyCriticalDamage = channelTotals([
+  { channel: "anomaly-critical-damage", value: fromDecimal(5) },
+])
+assert(
+  toNumber(factorsFor("anomaly", highAnomalyCriticalDamage, 20).criticalValue) >
+    toNumber(factorsFor("anomaly", highAnomalyCriticalDamage, 2).criticalValue),
+  "upstream anomaly critical damage must use its own 0-20 ceiling",
+)
 
 const decimalMap = (record) =>
   Object.fromEntries(
@@ -453,9 +470,10 @@ for (const caseEntry of scopeCases) {
   const expected = factorsFor(
     caseEntry.hit.kind,
     channelTotals(correctedEntries),
+    2,
   )
   const upstream = caseEntry.upstreamProjection
-    ? factorsFor(caseEntry.hit.kind, channelTotals(upstreamEntries))
+    ? factorsFor(caseEntry.hit.kind, channelTotals(upstreamEntries), 20)
     : null
   cases[caseEntry.caseId] = {
     correction: caseEntry.correction,
@@ -470,30 +488,20 @@ for (const caseEntry of scopeCases) {
       correctedKinds: selection.correctedKinds,
       correctedElements: selection.correctedElements ?? null,
       differenceId: selection.differenceId,
-      source: {
-        pointer: selection.source.pointer,
-        stat: selection.source.stat,
-        recordElementFilter: selection.source.elementFilter,
-        upstreamKinds: UPSTREAM_STAT_SCOPE[selection.source.stat].kinds,
-      },
+      source: { pointer: selection.source.pointer },
     })),
     expected: totalsJson(expected),
     upstream:
       upstream === null
         ? null
         : {
-            ...totalsJson(upstream),
-            sources: validated.map(({ selection, record, recordRatio }) => ({
-              pointer: selection.source.pointer,
-              stat: record.stat,
-              rawKind: record.kind,
-              rawValue: record.value,
-              rawValuePerStack: record.valuePerStack,
-              maxStacks: record.maxStacks,
-              defaultStacks: record.defaultStacks,
-              elementFilter: record.elementFilter,
-              upstreamRatioPerLayer: decimalString(recordRatio),
-            })),
+            nonCritical: decimalString(upstream.nonCriticalValue),
+            critical:
+              upstream.criticalValue === null
+                ? null
+                : decimalString(upstream.criticalValue),
+            expected: decimalString(upstream.expectedValue),
+            criticalRate: decimalString(upstream.criticalRate),
           },
     difference:
       upstream === null

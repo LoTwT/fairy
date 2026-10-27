@@ -62,29 +62,15 @@ interface ReferenceCase {
     correctedKinds: readonly ScopeDamageKind[]
     correctedElements: readonly DamageElement[] | null
     differenceId: string | null
-    source: {
-      pointer: string
-      stat: string
-      recordElementFilter: readonly string[] | "all"
-      upstreamKinds: readonly string[]
-    }
+    source: { pointer: string }
   }[]
   expected: ReferenceTotals
-  upstream:
-    | (ReferenceTotals & {
-        sources: readonly {
-          pointer: string
-          stat: string
-          rawKind: string
-          rawValue: number
-          rawValuePerStack: number
-          maxStacks: number
-          defaultStacks: number
-          elementFilter: readonly string[] | "all"
-          upstreamRatioPerLayer: string
-        }[]
-      })
-    | null
+  upstream: {
+    nonCritical: string
+    critical: string | null
+    expected: string
+    criticalRate: string
+  } | null
   difference: {
     nonCritical: string
     critical: string | null
@@ -157,7 +143,7 @@ function directStat(value: number): DirectStatInput {
   return { baseValue: value, additions: [] }
 }
 
-function actorEntity() {
+function holderEntity() {
   return {
     kind: "actor" as const,
     entityId: HOLDER_ID,
@@ -178,9 +164,6 @@ function actorEntity() {
       sharpCriticalDamage: directStat(scopePanel.sharpCriticalDamage),
     },
   }
-}
-function holderEntity() {
-  return actorEntity()
 }
 function targetEntity() {
   return {
@@ -627,10 +610,11 @@ describe("revision 53–56 scope regressions", () => {
           if (contribution.address.kind !== "factor") return sum
           return sum + contribution.value.value
         }, 0)
-        expect(
+        close(
           total,
+          selection.perLayer * selection.layers,
           `${caseEntry.caseId} ${selection.optionId} value`,
-        ).toBeCloseTo(selection.perLayer * selection.layers, 12)
+        )
       }
 
       if (frozen.upstream === null || frozen.difference === null) {
