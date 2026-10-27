@@ -179,7 +179,7 @@
 
 ## 跨实现差异与未覆盖边界
 
-以下项目没有迁移为相等断言。第 1–10 条属于 ZZZ-HP 应用层能力或测试可复现性边界，不是 Fairy 缺陷；第 11、12 条是 Fairy 的输入域边界。
+以下项目没有迁移为相等断言。第 1–10 条属于 ZZZ-HP 应用层能力或测试可复现性边界，不是 Fairy 缺陷；第 11 条已在后续修复 PR 中处理并补充回归，第 12 条仍是 Fairy 的输入域边界。
 
 1. **仓库外方案库**：`test-buff-build-parity`、`test-damage-zone-routing` 第 6 节、`test-legacy-effect-contracts`
    依赖 `ZZZ_SCHEME_FILE` / `ZZZ_DEV_ROOT` 指向的方案 JSON。干净导出下分别中止；没有为运行它们伪造方案文件。
@@ -216,14 +216,15 @@
 10. **优化器、方案包、路由与后端并发**：`test-affix-optimizer`、`test-affix-sweep-caps`、`test-game-affix-rules`、
     `test-scheme-pack-merge`、`test-shared-scheme-pack`、`test-mode-panel-routes`、`test-agent-save-stale` 等
     属于应用层能力，未纳入公式迁移。
-11. **防御百分比调整为负时的单调性**：`calculateTargetEffectiveDefense` 没有把
-    `(1 + 防御百分比调整)` 夹到 ≥ 0。敌防 953、`defensePercentageAdjustments: [-1.2]`、
-    `penetrationRatios: [1.2]` 时有效防御为 `38.12`（两个负因子相乘），防御区约 `0.954`；
-    只给 `penetrationRatios: [1.2]` 时有效防御为 `0`、防御区为 `1`。即增加减防反而让防御区变差，
-    违反单调性，实战输入域罕见但边界不成立。
+11. **防御百分比调整为负时的单调性（已修复）**：`calculateTargetEffectiveDefense` 曾没有把
+    `(1 + 防御百分比调整)` 夹到 ≥ 0，导致敌防 953、`defensePercentageAdjustments: [-1.2]`、
+    `penetrationRatios: [1.2]` 时两个负因子相乘、有效防御为 `38.12`，增加减防反而让防御区变差。
+    现已按[目标有效防御规范](../specs/core/factors/defense.md#目标有效防御)在乘算穿透倍率前把防御
+    调整倍率钳制到不低于 `0`，并在钳制前检查有限性；最终非负钳制保持不变。回归见
+    `packages/core/test/defense.test.ts` 的负调整倍率与单调性用例。
     上游 `damageCalc.ts:312-335` 先把穿透率夹到 `[0, 0.95]`、减防与无视防御各夹到 `[0, 1]`，
     再计算 `max(0, 1 − ignore − reduce) × (1 − penRate)`，因此不会出现双负相乘。
-    用户已裁定另开修复 PR。本轮不修改生产代码、不加断言。
+    穿透率缺少 95% 上限仍是第 12 条差异。
 12. **Fairy 穿透率没有 95% 上限**：Fairy 的 `penetrationRatios` 不夹到 `0.95`。敌防 953、
     只给 `penetrationRatios: [1.2]` 时有效防御为 `0`、防御区为 `1`；上游 `damageCalc.ts:312-335`
     将穿透率夹到 `0.95`，同一输入得到 `953 × 0.05 = 47.65`、防御区约 `0.943`。
