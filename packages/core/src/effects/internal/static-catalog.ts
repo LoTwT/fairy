@@ -2070,6 +2070,7 @@ export function validateStaticCatalog(
             "beneficiaryElements",
             "teamProfession",
             "otherTeammateProfessions",
+            "otherTeammateAgentEntityIds",
           ],
           checks(`${vp}/applicability`),
           "applicability",
@@ -2118,6 +2119,31 @@ export function validateStaticCatalog(
                 profession,
                 checks(`${pointer}/${index}`),
                 "profession",
+              )
+          }
+        }
+        if (applies["otherTeammateAgentEntityIds"] !== undefined) {
+          const pointer = `${vp}/applicability/otherTeammateAgentEntityIds`
+          const agentEntityIds = expectArray(
+            applies["otherTeammateAgentEntityIds"],
+            checks(pointer),
+            "other teammate agent entity ids",
+          )
+          if (agentEntityIds) {
+            if (
+              !agentEntityIds.length ||
+              new Set(agentEntityIds).size !== agentEntityIds.length
+            )
+              collector.report(
+                "INVALID_INPUT",
+                pointer,
+                "Expected nonempty unique agent entity ids",
+              )
+            for (const [index, agentEntityId] of agentEntityIds.entries())
+              expectNonEmptyString(
+                agentEntityId,
+                checks(`${pointer}/${index}`),
+                "agent entity id",
               )
           }
         }
@@ -3275,15 +3301,29 @@ export function calculateOrdinaryStaticDamageFromCatalog(
     }
     const gate = variant.applicability.teamProfession
     const otherProfessions = variant.applicability.otherTeammateProfessions
+    const otherAgentEntityIds =
+      variant.applicability.otherTeammateAgentEntityIds
+    // 两条队友资格取 OR；两者都要求同一持有者队伍且不是 holder 本人。
+    // actorSources 只登记已核实的目录代理人身份，这里不按实体 ID 字符串或
+    // 显示名猜职业/阵营，也不向受益职业、元素或队内人数等其他筛选取 OR。
+    const requiresQualifyingTeammate =
+      otherProfessions !== undefined || otherAgentEntityIds !== undefined
     const hasQualifyingTeammate =
-      otherProfessions === undefined ||
-      [...actors].some(
-        ([id, entity]) =>
-          id !== binding.holderId &&
-          world.actors.get(id)?.teamId === holderActor.teamId &&
+      !requiresQualifyingTeammate ||
+      [...actors].some(([id, entity]) => {
+        if (id === binding.holderId) return false
+        if (world.actors.get(id)?.teamId !== holderActor.teamId) return false
+        const professionQualifies =
           entity.profession !== null &&
-          otherProfessions.includes(entity.profession),
-      )
+          otherProfessions !== undefined &&
+          otherProfessions.includes(entity.profession)
+        const agentIdentity = entity.identity?.entityId
+        const entityQualifies =
+          agentIdentity !== undefined &&
+          otherAgentEntityIds !== undefined &&
+          otherAgentEntityIds.includes(agentIdentity)
+        return professionQualifies || entityQualifies
+      })
     const count = gate
       ? [...actors].filter(
           ([id, e]) =>

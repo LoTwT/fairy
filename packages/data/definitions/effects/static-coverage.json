@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "56",
+  "revision": "57",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
@@ -15796,10 +15796,10 @@
       "rankKind": "mindscape",
       "stat": "anomalyReleaseCritDmg",
       "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-10",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "semantic-conflict",
-      "explanation": "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team anomalyReleaseCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
+      "effectIds": [
+        "agent:1641:zzz-hp:eff-10:blk-mindscapeBuffs-0-1:mindscape:0"
+      ],
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 15,
       "normalizedValue": 15
@@ -15811,10 +15811,10 @@
       "rankKind": "mindscape",
       "stat": "turbulenceCritDmg",
       "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-11",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "semantic-conflict",
-      "explanation": "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team turbulenceCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
+      "effectIds": [
+        "agent:1641:zzz-hp:eff-11:blk-mindscapeBuffs-0-1:mindscape:0"
+      ],
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 15,
       "normalizedValue": 15
@@ -15826,10 +15826,10 @@
       "rankKind": "mindscape",
       "stat": "radianceCritDmg",
       "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-12",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "semantic-conflict",
-      "explanation": "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team radianceCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
+      "effectIds": [
+        "agent:1641:zzz-hp:eff-12:blk-mindscapeBuffs-0-1:mindscape:0"
+      ],
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 15,
       "normalizedValue": 15
@@ -15961,10 +15961,10 @@
       "rankKind": "mindscape",
       "stat": "anomalyCritDmg",
       "optionId": "agents:pheony:mindscape:0:blk-mindscapeBuffs-0-1:eff-4",
-      "effectIds": [],
-      "status": "unsupported",
-      "reason": "semantic-conflict",
-      "explanation": "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team anomalyCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
+      "effectIds": [
+        "agent:1641:zzz-hp:eff-4:blk-mindscapeBuffs-0-1:mindscape:0"
+      ],
+      "status": "corrected",
       "normalizationChanges": [],
       "rawValue": 15,
       "normalizedValue": 15
@@ -33047,11 +33047,11 @@
     "packs": 1118,
     "emptyPacks": 397,
     "rawEffects": 1375,
-    "rules": 931,
+    "rules": 935,
     "options": 1002,
     "converted": 1149,
-    "corrected": 134,
-    "unsupported": 92,
+    "corrected": 138,
+    "unsupported": 88,
     "supplements": {
       "records": 102,
       "rules": 72,

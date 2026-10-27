@@ -1103,6 +1103,7 @@ function validateApplicability(
     "excludedBeneficiaryProfession",
     "beneficiaryElements",
     "otherTeammateProfessions",
+    "otherTeammateAgentEntityIds",
     "teamProfession",
   ])
   for (const key of Object.keys(applicability))
@@ -1138,6 +1139,12 @@ function validateApplicability(
     stringArrayAt(
       applicability["otherTeammateProfessions"],
       `${path}/otherTeammateProfessions`,
+      collector,
+    )
+  if (Object.hasOwn(applicability, "otherTeammateAgentEntityIds"))
+    stringArrayAt(
+      applicability["otherTeammateAgentEntityIds"],
+      `${path}/otherTeammateAgentEntityIds`,
       collector,
     )
   if (Object.hasOwn(applicability, "teamProfession")) {
