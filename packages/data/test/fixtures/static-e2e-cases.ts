@@ -310,6 +310,77 @@ const claret: AcceptanceBuild = {
   },
 }
 
+/**
+ * 洛克茜（1621）M6 完整配装：四件激素朋克 + 二件啄木鸟，主词条生命/攻击/防御/
+ * 暴伤/风伤/攻击%，副词条沿用妮可的攻击向完整 rolls 模板。14162 绯月银棺 R1
+ * 提供基础攻击、能量自动回复与两条常驻选项；初始回能由装备面板独立推导为 1.92。
+ */
+const roxy: AcceptanceBuild = {
+  agentName: "Roxy",
+  wEngineName: "Crimson Moon Casket",
+  upstreamAgentId: "roxy",
+  upstreamWEngineId: "Crimson-Moon-Casket",
+  upstreamSets: ["hormone", "woodpecker"],
+  actor: {
+    entityId: "entity:roxy",
+    teamId: "team:players",
+    agentEntityId: "1621",
+    coreSkillLevel: 7,
+    mindscapeRank: 6,
+    wEngine: { entityId: "14162", refinement: 1, eligible: true },
+    panel: { mode: "equipment" },
+    driveDiscs: discs(
+      ["31400", "31400", "31400", "31400", "31000", "31000"],
+      [
+        { attribute: "health" },
+        { attribute: "attack" },
+        { attribute: "defense" },
+        { attribute: "criticalDamage" },
+        { attribute: "damageBonus", element: "wind" },
+        { attribute: "attack" },
+      ],
+      [
+        [
+          percent("attack", 3),
+          critical("criticalRate", 3),
+          critical("criticalDamage", 2),
+          flat("penetrationValue", 1),
+        ],
+        [
+          percent("attack", 3),
+          critical("criticalRate", 3),
+          critical("criticalDamage", 2),
+          flat("health", 1),
+        ],
+        [
+          percent("attack", 3),
+          critical("criticalRate", 3),
+          critical("criticalDamage", 2),
+          flat("health", 1),
+        ],
+        [
+          percent("attack", 3),
+          critical("criticalRate", 3),
+          flat("attack", 2),
+          flat("penetrationValue", 1),
+        ],
+        [
+          percent("attack", 3),
+          critical("criticalRate", 3),
+          critical("criticalDamage", 2),
+          flat("attack", 1),
+        ],
+        [
+          critical("criticalRate", 3),
+          critical("criticalDamage", 3),
+          flat("attack", 2),
+          flat("health", 1),
+        ],
+      ],
+    ),
+  },
+}
+
 const remielDiscs = discs(
   ["34100", "34100", "34100", "34100", "31300", "31300"],
   [
@@ -401,6 +472,7 @@ export const builds: Record<string, AcceptanceBuild> = {
   },
   remielM4: { ...remiel, actor: { ...remiel.actor, mindscapeRank: 4 } },
   remielM6: { ...remiel, actor: { ...remiel.actor, mindscapeRank: 6 } },
+  roxy,
 }
 
 // Each pointer identifies the actual pinned upstream effect, not a value derived from Fairy.
@@ -496,17 +568,87 @@ export const effects = {
       "agents:claret:mindscape:0:blk-mtrgmqhd-srsnon:eff-mtrgmqhd-jgzfvq",
     pointer: "/agents/6/mindscapeBuffs/0/effectBlocks/1/effects/0",
   },
+  claretMindscape1: {
+    holderId: "entity:claret",
+    optionId:
+      "agents:claret:mindscape:1:blk-mtrkovf7-dqmjh3:eff-mtse9xm8-q641yp",
+    pointer: "/agents/6/mindscapeBuffs/1/effectBlocks/0/effects/0",
+  },
   claretMindscape4: {
     holderId: "entity:claret",
     optionId:
       "agents:claret:mindscape:4:blk-mtseebl3-k0eoh9:eff-mtseebl3-6j53ci",
     pointer: "/agents/6/mindscapeBuffs/4/effectBlocks/0/effects/0",
   },
+  crimsonCritical: {
+    holderId: "entity:claret",
+    optionId:
+      "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h4q1t-4jb1zr",
+    pointer: "/wengines/71/refinementBuffs/0/effectBlocks/0/effects/0",
+  },
+  crimsonDamage: {
+    holderId: "entity:claret",
+    optionId:
+      "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h4zop-e2ecfr",
+    pointer: "/wengines/71/refinementBuffs/0/effectBlocks/0/effects/1",
+  },
   crimsonSharpen: {
     holderId: "entity:claret",
     optionId:
       "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h5g2r-zj4y8t",
     pointer: "/wengines/71/refinementBuffs/0/effectBlocks/0/effects/2",
+  },
+  roxyInitialEnergy: {
+    holderId: "entity:roxy",
+    optionId: "nanoka:agents:1621:initial-energy-regen-conversion",
+    nanoka: {
+      path: "agents/1621/details.zh.json",
+      pointers: ["/passive/level/1621507/desc/0"],
+    },
+  },
+  roxyM1CriticalDamage: {
+    holderId: "entity:roxy",
+    optionId: "nanoka:agents:1621:m1-critical-damage",
+    nanoka: {
+      path: "agents/1621/details.zh.json",
+      pointers: ["/talent/1/desc"],
+    },
+  },
+  roxyM6GiantWindstorm: {
+    holderId: "entity:roxy",
+    optionId: "nanoka:agents:1621:m6-giant-windstorm",
+    nanoka: {
+      path: "agents/1621/details.zh.json",
+      pointers: [
+        "/talent/6/desc",
+        "/skill/special/description/4/desc",
+        "/skill/special/description/9/param/3",
+      ],
+    },
+  },
+  roxyM6WindIgnore: {
+    holderId: "entity:roxy",
+    optionId: "nanoka:agents:1621:m6-wind-resistance-ignore",
+    nanoka: {
+      path: "agents/1621/details.zh.json",
+      pointers: ["/talent/6/desc"],
+    },
+  },
+  crimsonMoonCritical: {
+    holderId: "entity:roxy",
+    optionId: "nanoka:w-engines:14162:crit-rate",
+    nanoka: {
+      path: "w-engines/14162/details.zh.json",
+      pointers: ["/talents/1/desc"],
+    },
+  },
+  crimsonMoonWindIgnore: {
+    holderId: "entity:roxy",
+    optionId: "nanoka:w-engines:14162:wind-resistance-ignore",
+    nanoka: {
+      path: "w-engines/14162/details.zh.json",
+      pointers: ["/talents/1/desc"],
+    },
   },
   remielMutationConvert: {
     holderId: "entity:remiel",
@@ -577,6 +719,16 @@ export interface AcceptanceScenario {
   >
   target: StaticActionCalculationInput["target"]
   buffs: { effect: keyof typeof effects; layers: number }[]
+  /**
+   * 调用方显式提供的选择输入；binding 由 effect.holderId 对应的 actor 推导。
+   * 回能转化等选项必填且无默认值，参考生成器会核对声明值与独立装备面板一致。
+   */
+  explicitInputs?: {
+    effect: keyof typeof effects
+    name: string
+    unit: "energy-per-second"
+    value: number
+  }[]
   /**
    * 蕾米埃尔自身特殊虚曜耀变；测试按显式耀变契约组装 luminize 输入。
    * equivalentElementResistance 是调用方按固定上游"循环下一位非流明队友、
@@ -729,6 +881,54 @@ export const scenarios: AcceptanceScenario[] = [
       buff("claretRemnantEdge"),
       buff("claretMindscape4"),
       buff("crimsonSharpen"),
+    ],
+  },
+  {
+    id: "roxy-m6-giant-windstorm",
+    label: "洛克茜 M6 巨型风旋一秒合计、M6 风抗忽视与绯月银棺 R1",
+    buildIds: ["roxy"],
+    actionId: "action:agent:1621:action:0024",
+    levels: { special: { mode: "effective", value: 12 } },
+    target: {
+      ...normalTarget,
+      baseDefense: 953,
+      resistances: { wind: 0 },
+    },
+    buffs: [
+      buff("roxyInitialEnergy"),
+      buff("roxyM1CriticalDamage"),
+      buff("roxyM6GiantWindstorm"),
+      buff("roxyM6WindIgnore"),
+      buff("crimsonMoonCritical"),
+      buff("crimsonMoonWindIgnore"),
+    ],
+    explicitInputs: [
+      {
+        effect: "roxyInitialEnergy",
+        name: "roxy:initial-energy-regen:source",
+        unit: "energy-per-second",
+        value: 1.92,
+      },
+    ],
+  },
+  {
+    id: "claret-m6-maim",
+    label: "克拉蕾 M6 显式追加毁伤、M1 倍率与猩红渴望 R1",
+    buildIds: ["claret"],
+    actionId: "action:agent:1611:action:0027",
+    levels: { special: { mode: "effective", value: 12 } },
+    target: {
+      ...normalTarget,
+      baseDefense: 953,
+      resistances: { electric: 0 },
+    },
+    buffs: [
+      buff("claretStateCritical"),
+      buff("claretRemnantEdge"),
+      buff("crimsonSharpen"),
+      buff("claretMindscape1"),
+      buff("crimsonCritical"),
+      buff("crimsonDamage"),
     ],
   },
   {

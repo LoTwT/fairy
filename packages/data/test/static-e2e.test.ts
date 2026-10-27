@@ -33,6 +33,8 @@ interface ReferenceDamage {
     effectiveLevel: number
     element: string
     individual: boolean
+    /** 目录倍率经显式倍率选项后的实际结算倍率；缺省等于目录倍率。 */
+    settlementMultipliers?: number[]
   }
   conversionBase: number | null
   contributions: {
@@ -40,7 +42,11 @@ interface ReferenceDamage {
     holderId: string
     pointer: string
     stat: string
-    sourceValue: number
+    sourceValue: number | null
+    /** 同一选项包含多条效果时用于精确配对；缺省按选项 variants 的 effectIds 匹配。 */
+    effectId?: string
+    /** 贡献显示值的换算除数；缺省沿用 atk 为 1、其余为 100 的百分比口径。 */
+    divisor?: number
   }[]
   finalStats: Record<string, number>
   factors: Record<string, number>
@@ -154,6 +160,23 @@ async function inputFor(
           },
         }
       : undefined
+  const explicitInputs = (scenario.explicitInputs ?? []).map(
+    ({ effect, name, unit, value }) => {
+      const holderId = effects[effect].holderId
+      const holder = selected.find((b) => b.actor.entityId === holderId)
+      if (holder === undefined)
+        throw new Error(`Missing explicit-input holder for ${effect}`)
+      return {
+        bindingId: staticSourceBindingId(
+          holderId,
+          "agent",
+          holder.actor.agentEntityId,
+        ),
+        name,
+        value: { unit, value },
+      }
+    },
+  )
   return {
     data,
     actors: selected.map((b) => b.actor),
@@ -173,27 +196,40 @@ async function inputFor(
       optionId: effects[effect].optionId,
       layers,
     })),
-    inputs: luminize
-      ? [
-          {
-            bindingId: staticSourceBindingId(
-              actor.entityId,
-              "agent",
-              actor.agentEntityId,
-            ),
-            name: "agent:1581:zzz-hp:eff-ms7td2gs-4vbpdh:blk-ms7td2gs-rk1vtd:mindscape:0:source",
-            value: { unit: "attack-points", value: expected.conversionBase! },
-          },
-        ]
-      : expected.conversionBase === null
-        ? []
-        : [
-            {
-              bindingId: staticSourceBindingId("entity:astra", "agent", "1311"),
-              name: "agent:1311:zzz-hp:eff-ms38hwcr-m9hn4v:blk-ms38hwcr-q7y9sx:mindscape:0:source",
-              value: { unit: "attack-points", value: expected.conversionBase },
-            },
-          ],
+    inputs:
+      explicitInputs.length > 0
+        ? explicitInputs
+        : luminize
+          ? [
+              {
+                bindingId: staticSourceBindingId(
+                  actor.entityId,
+                  "agent",
+                  actor.agentEntityId,
+                ),
+                name: "agent:1581:zzz-hp:eff-ms7td2gs-4vbpdh:blk-ms7td2gs-rk1vtd:mindscape:0:source",
+                value: {
+                  unit: "attack-points",
+                  value: expected.conversionBase!,
+                },
+              },
+            ]
+          : expected.conversionBase === null
+            ? []
+            : [
+                {
+                  bindingId: staticSourceBindingId(
+                    "entity:astra",
+                    "agent",
+                    "1311",
+                  ),
+                  name: "agent:1311:zzz-hp:eff-ms38hwcr-m9hn4v:blk-ms38hwcr-q7y9sx:mindscape:0:source",
+                  value: {
+                    unit: "attack-points",
+                    value: expected.conversionBase,
+                  },
+                },
+              ],
     requireIndividualHits: expected.action.individual,
     ...(luminize ? { luminize } : {}),
   }
@@ -261,6 +297,45 @@ function close(
   expect(Math.abs(actual! - expected), label).toBeLessThanOrEqual(
     Math.max(1e-9, Math.abs(expected) * 1e-12),
   )
+}
+type DamageResult = Extract<StaticActionCalculationResult, { kind: "damage" }>
+function sharpCriticalExpectedZone(criticalRate: number, bonus: number) {
+  const r = Math.min(2, Math.max(0, criticalRate))
+  const weight = Math.min(1, Math.max(0, r))
+  const overflow = Math.max(0, r - 1)
+  return 1 - weight + weight * (1 + bonus) * (1 + bonus * overflow)
+}
+function damageContributions(result: DamageResult) {
+  return result.segments.flatMap(
+    (segment) => segment.damage.evaluation.contributions,
+  )
+}
+function effectContributions(result: DamageResult, effectId: string) {
+  return damageContributions(result).filter(
+    (contribution) => contribution.origin.effectId === effectId,
+  )
+}
+function expectEffectContribution(
+  result: DamageResult,
+  effectId: string,
+  address: Record<string, unknown>,
+  value: number,
+) {
+  const matches = effectContributions(result, effectId)
+  expect(matches, effectId).toHaveLength(1)
+  expect(matches[0]!.address).toMatchObject(address)
+  close(matches[0]!.value.value, value, effectId)
+}
+function settledInput(
+  input: StaticActionCalculationInput,
+  buildId: string,
+): StaticActionCalculationInput {
+  return {
+    ...input,
+    actors: input.actors.map((actor) =>
+      settledActor(actor, reference.builds[buildId]!.panel),
+    ),
+  }
 }
 
 describe("complete static configurations against an independent pinned ZZZ-HP reference", () => {
@@ -509,6 +584,16 @@ describe("complete static configurations against an independent pinned ZZZ-HP re
           ]!,
           "final scaling stat",
         )
+        if (expected.action.settlementMultipliers !== undefined) {
+          expect(expected.action.settlementMultipliers).toHaveLength(
+            expected.action.multipliers.length,
+          )
+          close(
+            item.damageMultiplier,
+            expected.action.settlementMultipliers[0]!,
+            "settlement multiplier",
+          )
+        }
         for (const [factor, value] of Object.entries(expected.factors)) {
           if (factor === "expectedCritical")
             close(
@@ -543,17 +628,23 @@ describe("complete static configurations against an independent pinned ZZZ-HP re
           const option = input.data.catalog.options.find(
             (o) => o.optionId === contribution.optionId,
           )!
-          const ids = new Set(option.variants.flatMap((v) => v.effectIds))
+          const ids = new Set(
+            contribution.effectId === undefined
+              ? option.variants.flatMap((v) => v.effectIds)
+              : [contribution.effectId],
+          )
           const received = damage.evaluation.contributions.filter(
             (c) =>
               ids.has(c.origin.effectId) &&
               c.origin.beneficiaryId === input.actorId,
           )
           expect(received.length, contribution.optionId).toBeGreaterThan(0)
+          const divisor =
+            contribution.divisor ?? (contribution.stat === "atk" ? 1 : 100)
           const amount =
-            (contribution.sourceValue *
+            ((contribution.sourceValue ?? 0) *
               (contribution.stat === "reduceDefense" ? -1 : 1)) /
-            (contribution.stat === "atk" ? 1 : 100)
+            divisor
           close(
             received.reduce((sum, c) => sum + c.value.value, 0),
             amount,
@@ -645,6 +736,468 @@ describe("complete static configurations against an independent pinned ZZZ-HP re
       expect(selected.panels).toEqual(disabled.panels)
     },
   )
+})
+
+describe("Roxy M6 giant windstorm one-second aggregate", () => {
+  const scenarioId = "roxy-m6-giant-windstorm"
+  const scenario = scenarios.find((entry) => entry.id === scenarioId)!
+  const effectsSix = [
+    {
+      effectId: "agent:1621:nanoka:initial-energy-regen-conversion:attack",
+      address: { kind: "stat", stat: "attack", stage: "final-fixed" },
+      value: 360,
+    },
+    {
+      effectId: "agent:1621:nanoka:m1-critical-damage",
+      address: { kind: "stat", stat: "criticalDamage", stage: "direct" },
+      value: 0.4,
+    },
+    {
+      effectId: "agent:1621:nanoka:m6-giant-windstorm",
+      address: {
+        kind: "hit",
+        field: "damageMultiplier",
+        itemId: "action:agent:1621:action:0024:base",
+      },
+      value: 2.5,
+    },
+    {
+      effectId: "agent:1621:nanoka:m6-wind-resistance-ignore",
+      address: { kind: "factor", channel: "attacker-resistance-ignore" },
+      value: 0.15,
+    },
+    {
+      effectId: "w-engine:14162:nanoka:crit-rate",
+      address: { kind: "stat", stat: "criticalRate", stage: "direct" },
+      value: 0.24,
+    },
+    {
+      effectId: "w-engine:14162:nanoka:wind-resistance-ignore",
+      address: { kind: "factor", channel: "attacker-resistance-ignore" },
+      value: 0.15,
+    },
+  ] as const
+
+  it("keeps six contributions, 4.174 → 10.435, and both panel paths on one event", async () => {
+    const input = await inputFor(scenario)
+    const expected = reference.cases[scenarioId]!.reference
+    const result = calculate(input)
+    const baseline = reference.builds["roxy"]!.panel
+    const panel = result.panels[0]!
+    for (const [stat, value] of Object.entries(baseline.stats))
+      close(panel.stats[stat as keyof StaticPanelValues]?.value, value, stat)
+    close(
+      panel.penetrationValue,
+      baseline.penetrationValue,
+      "panel penetration",
+    )
+    close(panel.damageBonuses.wind, baseline.damageBonuses.wind, "panel wind")
+    close(panel.stats.energyRegen!.value, 1.92, "equipment energy regen")
+
+    if (!input.action.ok || input.action.calculation.kind !== "damage")
+      throw new Error("Expected the giant windstorm damage action")
+    close(input.action.sourceDamageMultiplier, 4.174, "catalog multiplier")
+    expect(expected.action.multipliers).toEqual([4.174])
+    expect(expected.action.settlementMultipliers).toEqual([10.435])
+    expect(result.segments).toHaveLength(1)
+    const segment = result.segments[0]!
+    expect(segment.granularity).toBe("aggregate")
+    expect(segment.repetition).toBe(1)
+    const item = segment.damage.evaluation.hit!.damageItems[0]!
+    close(item.damageMultiplier, 10.435, "settled giant multiplier")
+    close(result.totals.nonCritical, segment.damage.nonCritical, "one event")
+
+    // The energy option also derives +28.8 Impact, but the direct-damage path does
+    // not read Impact. The six consumed contributions are the six checked here.
+    expect(damageContributions(result)).toHaveLength(6)
+    for (const entry of effectsSix)
+      expectEffectContribution(
+        result,
+        entry.effectId,
+        entry.address,
+        entry.value,
+      )
+    const ignores = damageContributions(result).filter(
+      (contribution) =>
+        contribution.address.kind === "factor" &&
+        contribution.address.channel === "attacker-resistance-ignore",
+    )
+    expect(ignores).toHaveLength(2)
+    close(
+      ignores.reduce((sum, contribution) => sum + contribution.value.value, 0),
+      0.3,
+      "two independent wind ignores",
+    )
+    expect(
+      effectContributions(
+        result,
+        "agent:1621:nanoka:initial-energy-regen-conversion:impact",
+      ),
+    ).toHaveLength(0)
+
+    const settled = calculate(settledInput(input, "roxy"))
+    for (const field of ["nonCritical", "critical", "expected"] as const)
+      close(settled.totals[field], result.totals[field]!, `settled ${field}`)
+    const settledItem =
+      settled.segments[0]!.damage.evaluation.hit!.damageItems[0]!
+    close(
+      settledItem.damageMultiplier,
+      item.damageMultiplier,
+      "settled multiplier",
+    )
+    for (const entry of effectsSix)
+      expectEffectContribution(
+        settled,
+        entry.effectId,
+        entry.address,
+        entry.value,
+      )
+  })
+
+  it("restores the 4.174 catalog multiplier and divides the result by 2.5 when M6 is off", async () => {
+    const input = await inputFor(scenario)
+    const full = calculate(input)
+    const off = calculate({
+      ...input,
+      selections: input.selections.filter(
+        (selection) =>
+          selection.optionId !== effects.roxyM6GiantWindstorm.optionId,
+      ),
+    })
+    const offItem = off.segments[0]!.damage.evaluation.hit!.damageItems[0]!
+    close(offItem.damageMultiplier, 4.174, "catalog multiplier")
+    expect(
+      effectContributions(off, "agent:1621:nanoka:m6-giant-windstorm"),
+    ).toHaveLength(0)
+    close(
+      full.segments[0]!.damage.evaluation.hit!.damageItems[0]!
+        .damageMultiplier / offItem.damageMultiplier,
+      2.5,
+      "multiplier ratio",
+    )
+    close(
+      full.totals.nonCritical / off.totals.nonCritical,
+      2.5,
+      "non-critical ratio",
+    )
+  })
+
+  it("rejects M6 selections below M6 and on the non-giant wind-eye actions", async () => {
+    const input = await inputFor(scenario)
+    const m5 = calculateStaticActionDamage({
+      ...input,
+      actors: input.actors.map((actor) => ({
+        ...actor,
+        mindscapeRank: 5 as const,
+      })),
+    })
+    expect(m5.ok).toBe(false)
+    if (!m5.ok)
+      expect(
+        m5.issues.some((issue) => issue.code === "CONTEXT_MISMATCH"),
+        JSON.stringify(m5.issues),
+      ).toBe(true)
+
+    const actions = input.data.agents.find(
+      (entry) => entry.actions.entityId === "1621",
+    )!.actions
+    for (const suffix of ["0022", "0023"] as const) {
+      const action = resolveAgentAction({
+        agent: actions,
+        actionId: `action:agent:1621:action:${suffix}`,
+        mindscapeRank: 6,
+        levels: { special: { mode: "effective", value: 12 } },
+      })
+      const rejected = calculateStaticActionDamage({ ...input, action })
+      expect(rejected.ok, suffix).toBe(false)
+      if (!rejected.ok)
+        expect(
+          rejected.issues.some((issue) => issue.code === "MISSING_REFERENCE"),
+          JSON.stringify(rejected.issues),
+        ).toBe(true)
+    }
+  })
+
+  it("requires the explicit initial energy input and never expands to three events", async () => {
+    const input = await inputFor(scenario)
+    const missing = calculateStaticActionDamage({ ...input, inputs: [] })
+    expect(missing.ok).toBe(false)
+    if (!missing.ok)
+      expect(
+        missing.issues.some((issue) => issue.code === "MISSING_FACT"),
+        JSON.stringify(missing.issues),
+      ).toBe(true)
+    const result = calculate(input)
+    expect(result.segments).toHaveLength(1)
+    expect(result.segments.every((segment) => segment.repetition === 1)).toBe(
+      true,
+    )
+    close(
+      result.totals.nonCritical,
+      result.segments[0]!.damage.nonCritical,
+      "single aggregate event",
+    )
+  })
+})
+
+describe("Claret explicit additional Maim at M6", () => {
+  const scenarioId = "claret-m6-maim"
+  const scenario = scenarios.find((entry) => entry.id === scenarioId)!
+  const m1Effect =
+    "agent:1611:zzz-hp:eff-mtse9xm8-q641yp:blk-mtrkovf7-dqmjh3:mindscape:1"
+  const stateEffect =
+    "agent:1611:zzz-hp:eff-mtrf598z-80y7hh:blk-mtrf598z-wr4jqt:mindscape:0"
+  const remnantEffect =
+    "agent:1611:zzz-hp:eff-mtrgmqhd-jgzfvq:blk-mtrgmqhd-srsnon:mindscape:0"
+  const m4Effect =
+    "agent:1611:zzz-hp:eff-mtseebl3-6j53ci:blk-mtseebl3-k0eoh9:mindscape:4"
+  const sharpenEffect =
+    "w-engine:14161:zzz-hp:eff-mv3h5g2r-zj4y8t:blk-mv3h4q1t-3m3v1q:refinement"
+  const criticalEffect =
+    "w-engine:14161:zzz-hp:eff-mv3h4q1t-4jb1zr:blk-mv3h4q1t-3m3v1q:refinement"
+  const damageEffect =
+    "w-engine:14161:zzz-hp:eff-mv3h4zop-e2ecfr:blk-mv3h4q1t-3m3v1q:refinement"
+
+  it("settles the six explicit selections at 16.256 → 21.1328", async () => {
+    const input = await inputFor(scenario)
+    const expected = reference.cases[scenarioId]!.reference
+    const result = calculate(input)
+    if (!input.action.ok || input.action.calculation.kind !== "damage")
+      throw new Error("Expected the Maim damage action")
+    close(input.action.sourceDamageMultiplier, 16.256, "catalog multiplier")
+    expect(expected.action.multipliers).toEqual([16.256])
+    expect(expected.action.settlementMultipliers).toEqual([21.1328])
+    expect(result.segments).toHaveLength(1)
+    const segment = result.segments[0]!
+    expect(segment.damage.criticalSemantics).toBe(
+      "sharp-critical-forced-first-layer",
+    )
+    close(
+      segment.damage.evaluation.hit!.damageItems[0]!.damageMultiplier,
+      21.1328,
+      "settled M1 multiplier",
+    )
+    expect(damageContributions(result)).toHaveLength(6)
+    expectEffectContribution(
+      result,
+      stateEffect,
+      { kind: "stat", stat: "criticalRate" },
+      0.3,
+    )
+    expectEffectContribution(
+      result,
+      remnantEffect,
+      { kind: "stat", stat: "sharpCriticalDamage" },
+      0.25,
+    )
+    expectEffectContribution(
+      result,
+      sharpenEffect,
+      { kind: "factor", channel: "sharpen-damage-bonus" },
+      0.1,
+    )
+    expectEffectContribution(
+      result,
+      m1Effect,
+      { kind: "factor", channel: "base-multiplier-increase" },
+      0.3,
+    )
+    expectEffectContribution(
+      result,
+      criticalEffect,
+      { kind: "stat", stat: "criticalRate" },
+      0.25,
+    )
+    expectEffectContribution(
+      result,
+      damageEffect,
+      { kind: "factor", channel: "damage-bonus" },
+      0.15,
+    )
+    close(segment.damage.factors.nonCritical.damageBonus!, 1.45, "damage bonus")
+    close(
+      segment.damage.factors.critical!.sharpCritical!,
+      7.2150375,
+      "sharp critical zone",
+    )
+    close(
+      segment.damage.factors.nonCritical.defense!,
+      794 / (794 + 953 - 18),
+      "defense zone",
+    )
+    const settled = calculate(settledInput(input, "claret"))
+    for (const field of ["nonCritical", "critical", "expected"] as const)
+      close(settled.totals[field], result.totals[field]!, `settled ${field}`)
+  })
+
+  it("restores 16.256 and divides non-critical by 1.3 when M1 is off, without moving the damage-bonus zone", async () => {
+    const input = await inputFor(scenario)
+    const full = calculate(input)
+    const off = calculate({
+      ...input,
+      selections: input.selections.filter(
+        (selection) => selection.optionId !== effects.claretMindscape1.optionId,
+      ),
+    })
+    const offItem = off.segments[0]!.damage.evaluation.hit!.damageItems[0]!
+    close(offItem.damageMultiplier, 16.256, "catalog multiplier")
+    close(
+      full.segments[0]!.damage.evaluation.hit!.damageItems[0]!
+        .damageMultiplier / offItem.damageMultiplier,
+      1.3,
+      "M1 multiplier ratio",
+    )
+    close(
+      full.totals.nonCritical / off.totals.nonCritical,
+      1.3,
+      "non-critical ratio",
+    )
+    close(
+      off.segments[0]!.damage.factors.nonCritical.damageBonus!,
+      full.segments[0]!.damage.factors.nonCritical.damageBonus!,
+      "damage bonus unchanged",
+    )
+    expect(effectContributions(off, m1Effect)).toHaveLength(0)
+  })
+
+  it("keeps Maim independent from M4, and turning off the core state or remnant edge changes only its own critical property", async () => {
+    const input = await inputFor(scenario)
+    const full = calculate(input)
+    const expected = reference.cases[scenarioId]!.reference
+
+    const withM4 = calculate({
+      ...input,
+      selections: [
+        ...input.selections,
+        {
+          holderId: "entity:claret",
+          optionId: effects.claretMindscape4.optionId,
+          layers: 1,
+        },
+      ],
+    })
+    for (const field of ["nonCritical", "critical", "expected"] as const)
+      close(withM4.totals[field], full.totals[field]!, `M4 ${field}`)
+    expect(effectContributions(withM4, m4Effect)).toHaveLength(0)
+
+    const fullRate = expected.finalStats.criticalRate!
+    const fullBonus = expected.finalStats.sharpCriticalDamage!
+
+    const withoutState = calculate({
+      ...input,
+      selections: input.selections.filter(
+        (selection) =>
+          selection.optionId !== effects.claretStateCritical.optionId,
+      ),
+    })
+    close(
+      withoutState.totals.nonCritical,
+      full.totals.nonCritical,
+      "state noncritical",
+    )
+    close(
+      withoutState.totals.critical,
+      full.totals.nonCritical *
+        sharpCriticalExpectedZone(fullRate - 0.3, fullBonus),
+      "state critical",
+    )
+    close(
+      withoutState.totals.expected,
+      full.totals.nonCritical *
+        sharpCriticalExpectedZone(fullRate - 0.3, fullBonus),
+      "state expected",
+    )
+    expect(effectContributions(withoutState, stateEffect)).toHaveLength(0)
+    expectEffectContribution(
+      withoutState,
+      remnantEffect,
+      { kind: "stat", stat: "sharpCriticalDamage" },
+      0.25,
+    )
+    expect(
+      withoutState.segments[0]!.damage.factors.nonCritical.damageBonus,
+    ).toBe(full.segments[0]!.damage.factors.nonCritical.damageBonus)
+
+    const withoutRemnant = calculate({
+      ...input,
+      selections: input.selections.filter(
+        (selection) =>
+          selection.optionId !== effects.claretRemnantEdge.optionId,
+      ),
+    })
+    close(
+      withoutRemnant.totals.nonCritical,
+      full.totals.nonCritical,
+      "remnant noncritical",
+    )
+    close(
+      withoutRemnant.totals.critical,
+      full.totals.nonCritical *
+        sharpCriticalExpectedZone(fullRate, fullBonus - 0.25),
+      "remnant critical",
+    )
+    close(
+      withoutRemnant.totals.expected,
+      full.totals.nonCritical *
+        sharpCriticalExpectedZone(fullRate, fullBonus - 0.25),
+      "remnant expected",
+    )
+    expect(effectContributions(withoutRemnant, remnantEffect)).toHaveLength(0)
+    expectEffectContribution(
+      withoutRemnant,
+      stateEffect,
+      { kind: "stat", stat: "criticalRate" },
+      0.3,
+    )
+    expect(
+      withoutRemnant.segments[0]!.damage.factors.nonCritical.damageBonus,
+    ).toBe(full.segments[0]!.damage.factors.nonCritical.damageBonus)
+  })
+
+  it("does not attach Maim to 0019 and does not gate the ordinary Maim on M6", async () => {
+    const input = await inputFor(scenario)
+    const actions = input.data.agents.find(
+      (entry) => entry.actions.entityId === "1611",
+    )!.actions
+    const ultimate = resolveAgentAction({
+      agent: actions,
+      actionId: "action:agent:1611:action:0019",
+      mindscapeRank: 6,
+      levels: { chain: { mode: "effective", value: 12 } },
+    })
+    const withM1 = calculate({ ...input, action: ultimate })
+    expect(withM1.segments).toHaveLength(1)
+    expect(withM1.segments[0]!.segmentId).toBe(
+      "action:agent:1611:action:0019:total",
+    )
+    close(
+      withM1.segments[0]!.damage.evaluation.hit!.damageItems[0]!
+        .damageMultiplier,
+      45.048,
+      "ultimate catalog multiplier",
+    )
+    expect(effectContributions(withM1, m1Effect)).toHaveLength(0)
+    const withoutM1 = calculate({
+      ...input,
+      action: ultimate,
+      selections: input.selections.filter(
+        (selection) => selection.optionId !== effects.claretMindscape1.optionId,
+      ),
+    })
+    close(withM1.totals.expected, withoutM1.totals.expected, "0019 unchanged")
+
+    for (const rank of [0, 6] as const) {
+      const resolved = resolveAgentAction({
+        agent: actions,
+        actionId: "action:agent:1611:action:0027",
+        mindscapeRank: rank,
+        levels: { special: { mode: "effective", value: 12 } },
+      })
+      expect(resolved.ok, `M${rank}`).toBe(true)
+      if (resolved.ok && resolved.calculation.kind === "damage")
+        close(resolved.sourceDamageMultiplier, 16.256, `M${rank} multiplier`)
+    }
+  })
 })
 
 describe("remielle special Voidflare scenarios against the independent reference", () => {

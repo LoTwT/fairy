@@ -40,7 +40,7 @@ const digests = {
   "multFactorPercent.ts":
     "eee1f52bfa9c128d0e278c5890717c6aa1e897695237a9c6573751489ad311cb",
   "calcNumberFormat.ts":
-    "1e8b3a819df03de2911f210988501f3d8ae47d7abf05c2d9558a7e6c7478c03a",
+    "21ca4409aed25475f3d3f883f9ffd728dd702aaf763c846f14431a95f111962c",
   "remielUtils.ts":
     "1cb8084a981115924b0cdc64961a67f937c280fe82babe2710758c7b279d8773",
 }
@@ -400,13 +400,21 @@ function buildReference(build) {
   const sourceWeapon = upstreamData.wengines.find(
     (w) => w.id === build.upstreamWEngineId,
   )
-  const exportedBasePanelResult = upstream.computeExternalPanelFromAffixes({
-    ...input,
-    agentBase: sourceAgent.basePanel,
-    wengineBaseAtk: sourceWeapon.baseAtk,
-    ...(sourceWeapon.baseDef ? { wengineBaseDef: sourceWeapon.baseDef } : {}),
-    wengineAdvanced: sourceWeapon.advancedStats,
-  })
+  // The pinned effects source has no Roxy entity or Crimson Moon Casket entry.
+  // Keep the explicitly sourced Nanoka build usable, and record the absent
+  // upstream projection instead of fabricating one.
+  const exportedBasePanelResult =
+    sourceAgent === undefined || sourceWeapon === undefined
+      ? null
+      : upstream.computeExternalPanelFromAffixes({
+          ...input,
+          agentBase: sourceAgent.basePanel,
+          wengineBaseAtk: sourceWeapon.baseAtk,
+          ...(sourceWeapon.baseDef
+            ? { wengineBaseDef: sourceWeapon.baseDef }
+            : {}),
+          wengineAdvanced: sourceWeapon.advancedStats,
+        })
   const stats = Object.fromEntries(
     Object.entries(panelKeys).map(([stat, key]) => [
       stat,
@@ -439,7 +447,7 @@ const buildResults = Object.fromEntries(
 function actionReference(scenario, build) {
   const id = build.actor.agentEntityId
   assert(
-    ["1031", "1121", "1371", "1611", "1581"].includes(id),
+    ["1031", "1121", "1371", "1611", "1581", "1621"].includes(id),
     "Audit the action source and extend this fixture generator before adding another agent",
   )
   if (id === "1581") {
@@ -488,14 +496,77 @@ function actionReference(scenario, build) {
       luminize: true,
     }
   }
-  const [group, section, parameter] =
-    id === "1031"
-      ? ["basic", 3, 0]
-      : id === "1121"
-        ? ["assist", 3, 0]
-        : id === "1611"
-          ? ["chain", 3, 0]
-          : ["special", 6, 0]
+  if (id === "1621") {
+    // 风眼动作没有固定 effects/skills 记录；倍率只从 Nanoka 原始参数行独立计算，
+    // 并核对风眼描述中的一秒合计边界。计算约定来自项目已登记的固定主仓
+    // 7a4f2776 normal-ATK/special/wind 映射，不冒充上游技能记录。
+    assert.equal(scenario.actionId, "action:agent:1621:action:0024")
+    const details = nanoka("agents/1621/details.zh.json")
+    const windEyeDescription = details.skill.special.description[4].desc
+    assert.match(windEyeDescription, /巨型风旋[^。]*持续1秒/u)
+    const row = details.skill.special.description[9].param[3]
+    assert.equal(row.name, "巨型风旋每秒伤害倍率")
+    const parameterId = Object.keys(row.param)[0]
+    assert.equal(parameterId, "1621020")
+    const p = row.param[parameterId]
+    assert.equal(p.damagePercentage, 20840)
+    assert.equal(p.damagePercentageGrowth, 1900)
+    const levelInput = scenario.levels.special
+    assert(levelInput && levelInput.mode === "effective")
+    const level = levelInput.value
+    const multiplier =
+      (p.damagePercentage + p.damagePercentageGrowth * (level - 1)) / 10000
+    return {
+      effectiveLevel: level,
+      source: {
+        path: "agents/1621/details.zh.json",
+        pointer: "/skill/special/description/9/param/3",
+        expression: row.desc,
+        parameters: {
+          [parameterId]: {
+            damagePercentage: p.damagePercentage,
+            damagePercentageGrowth: p.damagePercentageGrowth,
+          },
+        },
+        descriptionPointer: "/skill/special/description/4/desc",
+      },
+      upstreamSkill: null,
+      upstreamSkillNote:
+        "Pinned 991bb0e has no Roxy skill record; the action contract follows the project's fixed 7a4f2776 normal-ATK/special/wind convention.",
+      multipliers: [multiplier],
+      element: "wind",
+      individual: false,
+      sharpen: false,
+      luminize: false,
+    }
+  }
+  let group
+  let section
+  let parameter
+  let skillId
+  if (id === "1031") {
+    ;[group, section, parameter] = ["basic", 3, 0]
+    skillId = "sk-nicole-nk-1031001-一段"
+  } else if (id === "1121") {
+    ;[group, section, parameter] = ["assist", 3, 0]
+    skillId = "sk-benbigger-nk-1121016-main"
+  } else if (id === "1611") {
+    if (scenario.actionId === "action:agent:1611:action:0019") {
+      ;[group, section, parameter] = ["chain", 3, 0]
+      skillId = "sk-claret-nk-1611021-main"
+    } else {
+      assert.equal(
+        scenario.actionId,
+        "action:agent:1611:action:0027",
+        "Audit the Claret action source before adding another action",
+      )
+      ;[group, section, parameter] = ["special", 6, 4]
+      skillId = "sk-claret-nk-1611013-毁伤"
+    }
+  } else {
+    ;[group, section, parameter] = ["special", 6, 0]
+    skillId = "sk-yixuan-nk-1371022-蓄力期间总"
+  }
   const details = nanoka(`agents/${id}/details.zh.json`)
   const row = details.skill[group].description[section].param[parameter]
   const levelInput = scenario.levels[group]
@@ -513,14 +584,6 @@ function actionReference(scenario, build) {
     id === "1031"
       ? [coefficient("1031001"), ...Array(3).fill(coefficient("1031003") / 3)]
       : [coefficient(Object.keys(row.param)[0])]
-  const skillId =
-    id === "1031"
-      ? "sk-nicole-nk-1031001-一段"
-      : id === "1121"
-        ? "sk-benbigger-nk-1121016-main"
-        : id === "1611"
-          ? "sk-claret-nk-1611021-main"
-          : "sk-yixuan-nk-1371022-蓄力期间总"
   const sourceSkill = upstreamData.skills.find((skill) => skill.id === skillId)
   assert(sourceSkill, skillId)
   const nativeCoefficient =
@@ -563,6 +626,266 @@ function actionReference(scenario, build) {
   }
 }
 
+function assertMindscapeRank(build, minimum, label) {
+  assert(
+    build.actor.mindscapeRank >= minimum,
+    `${label} requires mindscape ${minimum}`,
+  )
+}
+function nanokaContribution({
+  effectId,
+  mapping,
+  pointer,
+  stat,
+  sourceValue,
+  divisor,
+  unit,
+}) {
+  return {
+    effectId,
+    optionId: mapping.optionId,
+    holderId: mapping.holderId,
+    pointer,
+    stat,
+    sourceValue,
+    divisor,
+    unit,
+  }
+}
+/**
+ * Nanoka-only selections cannot be read from the pinned ZZZ-HP buff JSON.
+ * Each resolver reads the frozen game text/param row, derives its own value,
+ * and returns explicit panel/multiplier contributions. The Fairy catalog is
+ * never consulted for numbers.
+ */
+const nanokaSelectionResolvers = {
+  roxyInitialEnergy({ scenario, build, reference, mapping, selection }) {
+    const declared = scenario.explicitInputs?.find(
+      (entry) => entry.effect === selection.effect,
+    )
+    assert(declared, "Roxy initial energy requires an explicit caller input")
+    assert.equal(declared.unit, "energy-per-second")
+    // The explicit input is grounded in the independently computed equipment panel.
+    assert.equal(reference.precise.energyRegen, declared.value)
+    const details = nanoka("agents/1621/details.zh.json")
+    const core = build.actor.coreSkillLevel
+    assert(Number.isInteger(core) && core >= 1 && core <= 7, "core 1-7")
+    const key = `162150${core}`
+    const row = details.passive.level[key]
+    assert(row, key)
+    const text = row.desc[0]
+    const match = text.match(
+      /大于1\.2时，超过部分每超过0\.01，攻击力提升([\d.]+)点，最多提升<color=#2BAD00>([\d.]+)<\/color>点，冲击力提升([\d.]+)点，最多提升<color=#2BAD00>([\d.]+)<\/color>点/u,
+    )
+    assert(match, text)
+    const [, attackRateRaw, attackCapRaw, impactRateRaw, impactCapRaw] = match
+    // Text is "per 0.01 Energy Regen"; convert the stated points per 0.01 into
+    // points per 1.0 energy-per-second (500 and 40 for the pinned rows).
+    const attackRate = Number(attackRateRaw) / 0.01
+    const attackCap = Number(attackCapRaw)
+    const impactRate = Number(impactRateRaw) / 0.01
+    const impactCap = Number(impactCapRaw)
+    const excess = Math.max(0, declared.value - 1.2)
+    const attack = Math.min(attackCap, excess * attackRate)
+    const impact = Math.min(impactCap, excess * impactRate)
+    const pointer = `/passive/level/${key}/desc/0`
+    return {
+      panel: [{ stat: "atk", value: attack }],
+      derivedInputs: {
+        initialEnergyRegen: declared.value,
+        convertedAttack: attack,
+        convertedImpact: impact,
+        impactConsumedByDamagePath: false,
+      },
+      contributions: [
+        nanokaContribution({
+          effectId: "agent:1621:nanoka:initial-energy-regen-conversion:attack",
+          mapping,
+          pointer,
+          stat: "atk",
+          sourceValue: attack,
+          divisor: 1,
+          unit: "attack-points",
+        }),
+      ],
+      formula: `ATK = min(${attackCap}, max(0, ${declared.value} - 1.2) × ${attackRate}) = ${attack}; Impact = min(${impactCap}, max(0, ${declared.value} - 1.2) × ${impactRate}) = ${impact} (impact is not read by the direct-damage path)`,
+    }
+  },
+  roxyM1CriticalDamage({ build, mapping }) {
+    assertMindscapeRank(build, 1, "Roxy M1 critical damage")
+    const text = nanoka("agents/1621/details.zh.json").talent["1"].desc
+    const match = text.match(/自身暴击伤害提升([\d.]+)%/u)
+    assert(match, text)
+    const value = Number(match[1])
+    const pointer = "/talent/1/desc"
+    return {
+      panel: [{ stat: "critDmg", value }],
+      contributions: [
+        nanokaContribution({
+          effectId: "agent:1621:nanoka:m1-critical-damage",
+          mapping,
+          pointer,
+          stat: "critDmg",
+          sourceValue: value,
+          divisor: 100,
+          unit: "ratio",
+        }),
+      ],
+      formula: `CRIT DMG +${value} percentage points`,
+    }
+  },
+  roxyM6WindIgnore({ build, mapping }) {
+    assertMindscapeRank(build, 6, "Roxy M6 wind resistance ignore")
+    const text = nanoka("agents/1621/details.zh.json").talent["6"].desc
+    const match = text.match(
+      /无视目标([\d.]+)%<color=#A6C5FD>风属性伤害抗性<\/color>/u,
+    )
+    assert(match, text)
+    const value = Number(match[1])
+    const pointer = "/talent/6/desc"
+    return {
+      panel: [{ stat: "resPen", value }],
+      contributions: [
+        nanokaContribution({
+          effectId: "agent:1621:nanoka:m6-wind-resistance-ignore",
+          mapping,
+          pointer,
+          stat: "resPen",
+          sourceValue: value,
+          divisor: 100,
+          unit: "ratio",
+        }),
+      ],
+      formula: `Attacker wind resistance ignore +${value} percentage points`,
+    }
+  },
+  roxyM6GiantWindstorm({ build, mapping }) {
+    assertMindscapeRank(build, 6, "Roxy M6 giant windstorm")
+    const text = nanoka("agents/1621/details.zh.json").talent["6"].desc
+    const match = text.match(/巨型风旋造成的伤害倍率提升至原本的([\d.]+)%/u)
+    assert(match, text)
+    const percent = Number(match[1])
+    const scale = percent / 100
+    const pointer = "/talent/6/desc"
+    return {
+      multiplierFactor: scale,
+      contributions: [
+        nanokaContribution({
+          effectId: "agent:1621:nanoka:m6-giant-windstorm",
+          mapping,
+          pointer,
+          stat: "damageMultiplier",
+          sourceValue: scale,
+          divisor: 1,
+          unit: "multiplier",
+        }),
+      ],
+      formula: `Giant Windstorm base item × ${percent}% = × ${scale}`,
+    }
+  },
+  crimsonMoonCritical({ build, mapping }) {
+    const details = nanoka("w-engines/14162/details.zh.json")
+    const refinement = build.actor.wEngine.refinement
+    assert(Number.isInteger(refinement) && refinement >= 1 && refinement <= 5)
+    const text = details.talents[String(refinement)].desc
+    const match = text.match(/暴击率提升<color=#2BAD00>([\d.]+)%/u)
+    assert(match, text)
+    const value = Number(match[1])
+    const pointer = `/talents/${refinement}/desc`
+    return {
+      panel: [{ stat: "critRate", value }],
+      contributions: [
+        nanokaContribution({
+          effectId: "w-engine:14162:nanoka:crit-rate",
+          mapping,
+          pointer,
+          stat: "critRate",
+          sourceValue: value,
+          divisor: 100,
+          unit: "ratio",
+        }),
+      ],
+      formula: `Crimson Moon Casket R${refinement}: CRIT Rate +${value} percentage points`,
+    }
+  },
+  crimsonMoonWindIgnore({ build, mapping }) {
+    const details = nanoka("w-engines/14162/details.zh.json")
+    const refinement = build.actor.wEngine.refinement
+    assert(Number.isInteger(refinement) && refinement >= 1 && refinement <= 5)
+    const text = details.talents[String(refinement)].desc
+    const match = text.match(
+      /造成的伤害无视目标<color=#2BAD00>([\d.]+)%<\/color><color=#A6C5FD>风属性伤害抗性/u,
+    )
+    assert(match, text)
+    const value = Number(match[1])
+    const pointer = `/talents/${refinement}/desc`
+    return {
+      panel: [{ stat: "resPen", value }],
+      contributions: [
+        nanokaContribution({
+          effectId: "w-engine:14162:nanoka:wind-resistance-ignore",
+          mapping,
+          pointer,
+          stat: "resPen",
+          sourceValue: value,
+          divisor: 100,
+          unit: "ratio",
+        }),
+      ],
+      formula: `Crimson Moon Casket R${refinement}: Wind RES ignore +${value} percentage points`,
+    }
+  },
+  claretMindscape1({ build, mapping, corrected }) {
+    assertMindscapeRank(build, 1, "Claret M1 Maim multiplier")
+    const effect = atPointer(
+      upstreamData,
+      "/agents/6/mindscapeBuffs/1/effectBlocks/0/effects/0",
+    )
+    assert(effect && effect.id, "Claret M1 source effect")
+    const text = nanoka("agents/1611/details.zh.json").talent["1"].desc
+    const match = text.match(/\[毁伤\]造成的伤害倍率提升至原本的([\d.]+)%/u)
+    assert(match, text)
+    const percent = Number(match[1])
+    // The pinned source encodes the same clause as skillDmgBonus +30. Revision 45
+    // corrects that encoding to a base-multiplier increase. Verify both readings
+    // agree before choosing the corrected multiplier semantics.
+    assert.equal(effect.stat, "skillDmgBonus")
+    assert.equal(effect.value, percent - 100)
+    const increase = (percent - 100) / 100
+    const pointer = "/agents/6/mindscapeBuffs/1/effectBlocks/0/effects/0"
+    if (!corrected)
+      return {
+        panel: [{ stat: "skillDmgBonus", value: effect.value }],
+        contributions: [
+          {
+            optionId: mapping.optionId,
+            holderId: mapping.holderId,
+            pointer,
+            stat: "skillDmgBonus",
+            sourceValue: effect.value,
+          },
+        ],
+        formula: `Pinned-source encoding: DMG bonus +${effect.value} percentage points`,
+      }
+    return {
+      multiplierFactor: 1 + increase,
+      contributions: [
+        nanokaContribution({
+          effectId:
+            "agent:1611:zzz-hp:eff-mtse9xm8-q641yp:blk-mtrkovf7-dqmjh3:mindscape:1",
+          mapping,
+          pointer,
+          stat: "baseMultiplierIncrease",
+          sourceValue: increase,
+          divisor: 1,
+          unit: "ratio",
+        }),
+      ],
+      formula: `Corrected base multiplier × ${percent}% = × ${1 + increase}`,
+    }
+  },
+}
+
 function evaluateScenario(scenario, corrected, roundedPanel) {
   const build = builds[scenario.buildIds[0]]
   const reference = buildResults[scenario.buildIds[0]]
@@ -572,9 +895,29 @@ function evaluateScenario(scenario, corrected, roundedPanel) {
   const panel = roundedPanel ? reference.rounded : reference.precise
   const mods = upstream.createEmptyBuffStatModifiers()
   const contributions = []
+  const formulas = []
+  const derivedInputs = {}
+  let multiplierFactor = 1
   let conversionBase = null
   for (const selection of scenario.buffs) {
     const mapping = effects[selection.effect]
+    const resolver = nanokaSelectionResolvers[selection.effect]
+    if (resolver) {
+      const resolved = resolver({
+        scenario,
+        build,
+        reference,
+        mapping,
+        selection,
+        corrected,
+      })
+      for (const delta of resolved.panel ?? []) mods[delta.stat] += delta.value
+      multiplierFactor *= resolved.multiplierFactor ?? 1
+      contributions.push(...resolved.contributions)
+      Object.assign(derivedInputs, resolved.derivedInputs ?? {})
+      if (resolved.formula) formulas.push(resolved.formula)
+      continue
+    }
     const effect = atPointer(upstreamData, mapping.pointer)
     assert(effect && effect.id, mapping.pointer)
     let value
@@ -616,9 +959,11 @@ function evaluateScenario(scenario, corrected, roundedPanel) {
   ]
   assert(resistanceType)
   const sharpen = action.sharpen
-  const sourceMainAgent = upstreamData.agents.find(
-    (a) => a.id === build.upstreamAgentId,
-  )
+  const sourceMainAgent = sharpen
+    ? upstreamData.agents.find((a) => a.id === build.upstreamAgentId)
+    : undefined
+  if (sharpen)
+    assert(sourceMainAgent, `sharpen source agent ${build.upstreamAgentId}`)
   const parts = upstream.computeGeneralAndAnomalyBase({
     panel: final,
     piercePower: sheerForce,
@@ -654,9 +999,11 @@ function evaluateScenario(scenario, corrected, roundedPanel) {
   // r = clamp(critRate%/100, 0, 2), B = 锐暴伤害%/100；
   // forced first layer r ≤ 1: 1 + B，r > 1: (1 + B) × (1 + B × (r − 1))；
   // expectation = (1 − min(1, r)) + min(1, r) × forced.
-  const sharpCriticalDamageBonus =
-    (sourceMainAgent.basePanel.sharpenCritDmgBonus + mods.sharpenCritDmgBonus) /
-    100
+  const sharpCriticalDamageBonus = sharpen
+    ? (sourceMainAgent.basePanel.sharpenCritDmgBonus +
+        mods.sharpenCritDmgBonus) /
+      100
+    : 0
   const sharpRate = Math.min(2, Math.max(0, final.critRate / 100))
   const sharpOverflow = Math.max(0, sharpRate - 1)
   const sharpWeight = Math.min(1, Math.max(0, sharpRate))
@@ -670,22 +1017,49 @@ function evaluateScenario(scenario, corrected, roundedPanel) {
     parts.directVulnerableMultiplier *
     parts.specialMultiplier *
     (sharpen ? parts.sharpenDmgMultiplier : parts.pierceDmgMultiplier)
-  const hits = action.multipliers.map((multiplier) => ({
-    nonCritical: baseChain * multiplier,
-    critical:
-      baseChain *
-      multiplier *
-      (sharpen ? sharpCriticalForcedZone : 1 + parts.critDmgRatio),
-    expected:
-      baseChain *
-      multiplier *
-      (sharpen ? sharpCriticalExpectedZone : parts.critMultiplier),
-  }))
+  const settledMultipliers = action.multipliers.map(
+    (multiplier) => multiplier * multiplierFactor,
+  )
+  const hits = action.multipliers.map((multiplier, index) => {
+    const settledMultiplier = settledMultipliers[index]
+    return {
+      nonCritical: baseChain * settledMultiplier,
+      critical:
+        baseChain *
+        settledMultiplier *
+        (sharpen ? sharpCriticalForcedZone : 1 + parts.critDmgRatio),
+      expected:
+        baseChain *
+        settledMultiplier *
+        (sharpen ? sharpCriticalExpectedZone : parts.critMultiplier),
+    }
+  })
   const total = (key) => hits.reduce((sum, hit) => sum + hit[key], 0)
   return {
-    action,
+    action:
+      multiplierFactor === 1
+        ? action
+        : { ...action, settlementMultipliers: settledMultipliers },
     conversionBase,
     contributions,
+    ...(Object.keys(derivedInputs).length === 0 ? {} : { derivedInputs }),
+    ...(multiplierFactor === 1 && formulas.length === 0
+      ? {}
+      : {
+          formula: {
+            multiplierFactor,
+            catalogMultipliers: action.multipliers,
+            settlementMultipliers: settledMultipliers,
+            baseChain,
+            criticalFactor: sharpen
+              ? sharpCriticalForcedZone
+              : 1 + parts.critDmgRatio,
+            expectedFactor: sharpen
+              ? sharpCriticalExpectedZone
+              : parts.critMultiplier,
+            notes: formulas,
+          },
+        }),
     finalStats: {
       attack: final.atk,
       health: final.hp,
@@ -898,6 +1272,26 @@ function evaluateVoidflareScenario(scenario, build, reference, action) {
     upstreamStyleIntegerExpected: Math.round(value),
   }
 }
+const scenarioEvidence = {
+  "roxy-m6-giant-windstorm": {
+    upstreamEvidence: "pinned-project-convention-only",
+    boundaries: [
+      "只计算一次 aggregate 巨型风旋的一秒合计；不累计风能、风眼生成、余响每 3 秒/额外 2 次、逐击拆分或 M6 失衡提升。",
+      "M6 倍率只作用于 action:agent:1621:action:0024:base；0022/0023 及其他 special 项保留原倍率，不能自动变成三次事件。",
+      "初始回能 1.92 由装备面板独立推导并在调用方显式提供；选项不读取面板当前回能，缺少输入返回 MISSING_FACT。",
+      "未选择 M6 风抗忽视时不自动附带；M1 暴伤、14162 暴击率与两项风抗忽视互相独立。",
+    ],
+  },
+  "claret-m6-maim": {
+    upstreamEvidence: "pinned-source-record-and-correction",
+    boundaries: [
+      "调用方显式选择 action:agent:1611:action:0027 表示一次独立追加毁伤；不实现连携/终结后的自动触发、残痕消耗或事件时序。",
+      "M1 倍率乘区只作用于特殊技大类下的毁伤目标；0019 终结技不自动附加 0027，普通毁伤也不是 M6 专属动作。",
+      "M4 只作用于锻星第三段、连携与终结，不作用于毁伤；切换 M4 不改变毁伤结果。",
+      "M6 构建不等于自动触发毁伤；动作在 M0—M6 均可用，本场景不声称实现 M6 的自动追加。",
+    ],
+  },
+}
 const cases = {}
 for (const scenario of scenarios) {
   const reference = evaluateScenario(scenario, true, false)
@@ -908,6 +1302,7 @@ for (const scenario of scenarios) {
     upstreamAlignedTotals: upstreamAligned.totals,
     upstreamRoundedTotals: upstreamRounded.totals,
     upstreamStyleIntegerExpected: upstreamRounded.upstreamStyleIntegerExpected,
+    ...scenarioEvidence[scenario.id],
   }
 }
 const fixture = {
@@ -917,7 +1312,7 @@ const fixture = {
     fairyBaseline,
     gameVersion: "3.3",
     method:
-      "Pinned upstream pure functions + independently reproduced direct-damage and sharpen chains; precise Nanoka inputs, explicit Ben and Claret permanent-conversion supplements and existing Astra M2 correction. Not the upstream application.",
+      "Pinned upstream pure functions + independently reproduced direct-damage and sharpen chains; precise Nanoka inputs, explicit Ben and Claret permanent-conversion supplements, existing Astra M2 correction, and the Roxy M6 / Claret M1 multiplier corrections from frozen Nanoka text. Not the upstream application.",
     resources,
     extraction,
     nanokaSources: [...nanokaSources.values()],
@@ -935,12 +1330,15 @@ const fixture = {
                 result.initialCriticalRateConversion,
             }),
         affixCounts: result.affixCounts,
-        upstreamExportedPanel: Object.fromEntries(
-          [...Object.values(panelKeys), "dmgBonus", "pen"].map((key) => [
-            key,
-            result.exportedBasePanelResult[key],
-          ]),
-        ),
+        upstreamExportedPanel:
+          result.exportedBasePanelResult === null
+            ? null
+            : Object.fromEntries(
+                [...Object.values(panelKeys), "dmgBonus", "pen"].map((key) => [
+                  key,
+                  result.exportedBasePanelResult[key],
+                ]),
+              ),
         upstreamRoundedAlignedPanel: Object.fromEntries(
           [...Object.values(panelKeys), "dmgBonus", "pen"].map((key) => [
             key,
