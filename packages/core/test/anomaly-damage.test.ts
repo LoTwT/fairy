@@ -398,6 +398,16 @@ describe("calculateStandardDisorderDamageMultiplier", () => {
     ).toBe(14)
   })
 
+  it("keeps the upstream ice 9.8-second disorder multiplier", () => {
+    // ZZZ-HP 991bb0e zzz-hp/scripts/test-formula-align-compare.mjs:240-242
+    expect(
+      calculateStandardDisorderDamageMultiplier({
+        originalAnomalyAttribute: "ice",
+        remainingAnomalyDurationInSeconds: 9.8,
+      }),
+    ).toBe(5.175)
+  })
+
   it.each([
     ["fire", 4.5],
     ["electric", 4.5],

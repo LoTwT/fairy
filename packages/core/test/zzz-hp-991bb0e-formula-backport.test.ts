@@ -97,13 +97,14 @@ describe("ZZZ-HP 991bb0e formula backport", () => {
   })
 
   it("clamps the defense zone when flat penetration reaches the target defense", () => {
-    // ZZZ-HP 991bb0e zzz-hp/scripts/test-defense-zone-clamp.mjs:39-46, :59-69
+    // ZZZ-HP 991bb0e zzz-hp/scripts/test-defense-zone-clamp.mjs:39-46
     const atTargetDefense = calculateTargetEffectiveDefense({
       targetBaseDefense: 953,
       defensePercentageAdjustments: [],
       penetrationRatios: [],
       penetrationValues: [953],
     })
+    // ZZZ-HP 991bb0e zzz-hp/scripts/test-defense-zone-clamp.mjs:59-69
     const beyondTargetDefense = calculateTargetEffectiveDefense({
       targetBaseDefense: 953,
       defensePercentageAdjustments: [],
@@ -118,6 +119,7 @@ describe("ZZZ-HP 991bb0e formula backport", () => {
       attackerLevelBase: 794,
       targetEffectiveDefense: beyondTargetDefense,
     })
+    // 上游 :43 只断言有效防御 ≥ 0；0 是 Fairy 整体钳制后的推导值。
     expect(atTargetDefense).toBe(0)
     expect(beyondTargetDefense).toBe(0)
     expect(atTargetZone).toBe(1)

@@ -143,15 +143,15 @@
 
 ## 迁移清单
 
-本轮新增 4 条测试，包含 14 条数值断言；全部注明上游文件与行号，版本均为
+本轮新增 5 条测试，包含 15 条数值断言；全部注明上游文件与行号，版本均为
 `991bb0ef2a00387f8a1fa18293bbda17256d7270`。
 
-| Fairy 测试                                                                                                                             | 上游依据                                                       | 性质 |
-| -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- | ---- |
-| [`zzz-hp-991bb0e-formula-backport.test.ts`](../../packages/core/test/zzz-hp-991bb0e-formula-backport.test.ts)：失衡期直伤/异常完整结算 | `zzz-hp/scripts/test-formula-align-compare.mjs:90-206`         | 迁移 |
-| 同上：固定穿透 953 / 2859 达到敌防后的防御区饱和与相等                                                                                 | `zzz-hp/scripts/test-defense-zone-clamp.mjs:39-46`、`:59-69`   | 迁移 |
-| [`anomaly-damage.test.ts`](../../packages/core/test/anomaly-damage.test.ts)：火 9.8 秒的 19 个半秒补偿段                               | `zzz-hp/scripts/test-formula-align-compare.mjs:45`、`:259-261` | 迁移 |
-| [`anomaly-damage-level.test.ts`](../../packages/core/test/anomaly-damage-level.test.ts)：59 级倍率截断                                 | `zzz-hp/scripts/test-formula-align-compare.mjs:36-37`          | 迁移 |
+| Fairy 测试                                                                                                                                             | 上游依据                                                                   | 性质 |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------- | ---- |
+| [`zzz-hp-991bb0e-formula-backport.test.ts`](../../packages/core/test/zzz-hp-991bb0e-formula-backport.test.ts)：失衡期直伤/异常完整结算                 | `zzz-hp/scripts/test-formula-align-compare.mjs:90-206`                     | 迁移 |
+| 同上：固定穿透 953（`:39-46`）/ 2859（`:59-69`）的防御区饱和与相等；`toBe(0)` 为 Fairy 钳制推导值（上游只断言 ≥ 0）                                    | `zzz-hp/scripts/test-defense-zone-clamp.mjs:39-46`、`:59-69`               | 迁移 |
+| [`anomaly-damage.test.ts`](../../packages/core/test/anomaly-damage.test.ts)：火 9.8 秒的 19 个半秒补偿段（14 为推导值）；冰 9.8 秒 → 5.175（上游原值） | `zzz-hp/scripts/test-formula-align-compare.mjs:45`、`:259-261`、`:240-242` | 迁移 |
+| [`anomaly-damage-level.test.ts`](../../packages/core/test/anomaly-damage-level.test.ts)：59 级倍率截断                                                 | `zzz-hp/scripts/test-formula-align-compare.mjs:36-37`                      | 迁移 |
 
 具体断言：
 
@@ -159,9 +159,10 @@
   暴击 11542.5、期望 8656.875，取整 `8657`。
 - 异常：同一面板下使用精通 300、异常倍率区 5、异常等级 60、易伤 1.6，失衡期望 205200；
   非失衡失衡区 1.25，期望 135000。
-- 防御：敌防 953，固定穿透 953 与 `953 × 3 = 2859` 均使有效防御为 0，防御区同为 1；这与“只对乘算部分取 max”的旧错误不同。
+- 防御：敌防 953，固定穿透 953 与 `953 × 3 = 2859` 均使有效防御为 0，防御区同为 1；上游只对有效防御断言 ≥ 0，
+  0 是 Fairy 整体钳制后的推导值。该结果与“只对乘算部分取 max”的旧错误不同。
 - 紊乱时长：火 9.8 秒对应上游断言的有效时长 `floor(9.8 / 0.5) = 19`；Fairy 测试断言其补偿模型推导值 `4.5 + 19 × 0.5 = 14`，
-  并注明 14 不是上游直接断言的倍率。
+  并注明 14 不是上游直接断言的倍率。冰 9.8 秒的倍率 5.175 是上游直接断言值（`:240-242`）。
 - 等级倍率：59 级截断为 `1.983`，不是四舍五入的 `1.9831`。
 
 ## 已覆盖但未重复迁移
@@ -170,10 +171,10 @@
 
 | 上游场景                                        | Fairy 现有覆盖                                                                                                    |
 | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| 锐暴区、溢出层、非锐化路径与锐化增伤            | `packages/core/test/sharp-critical.test.ts:44-113`、`packages/core/test/effects/static-damage.test.ts:1507-1594`  |
-| 紊乱 / 耀变暴击子类与旧异常暴击回退             | `packages/core/test/effects/static-damage.test.ts:383-455`、`:572-720`                                            |
-| 紊乱倍率修正作用于完整准备区                    | `packages/core/test/effects/static-catalog.test.ts:245-268`（#268 迁移）                                          |
-| Sunna、Cissia、血髓秘匣、青衣、卢西娅的转模曲线 | `packages/core/test/effects/static-catalog-data.test.ts:348-520`、`:7656-7707`                                    |
+| 锐暴区、溢出层、非锐化路径与锐化增伤            | `packages/core/test/sharp-critical.test.ts:44-120`、`packages/core/test/effects/static-damage.test.ts:1507-1592`  |
+| 紊乱 / 耀变暴击子类与旧异常暴击回退             | `packages/core/test/effects/static-damage.test.ts:369-469`、`:572-713`                                            |
+| 紊乱倍率修正作用于完整准备区                    | `packages/core/test/effects/static-catalog.test.ts:245-269`（#268 迁移）                                          |
+| Sunna、Cissia、血髓秘匣、青衣、卢西娅的转模曲线 | `packages/core/test/effects/static-catalog-data.test.ts:341-522`、`:7656-7707`                                    |
 | 异常等级 60、常见紊乱时长档位                   | `packages/core/test/anomaly-damage-level.test.ts`、`packages/core/test/zzz-calculator-comparison.test.ts:242-276` |
 
 ## 跨实现差异与未覆盖边界
@@ -183,8 +184,8 @@
 1. **仓库外方案库**：`test-buff-build-parity`、`test-damage-zone-routing` 第 6 节、`test-legacy-effect-contracts`
    依赖 `ZZZ_SCHEME_FILE` / `ZZZ_DEV_ROOT` 指向的方案 JSON。干净导出下分别中止；没有为运行它们伪造方案文件。
    这是测试可复现性限制，不是计算错误。
-2. **防御百分比上限**：ZZZ-HP `computeDefenseZone` 把穿透率夹到 95%，把无视防御与减防各夹到 100%
-   （[`damageCalc.ts:318-321`](https://github.com/Nie7bai/ZZZ-HP/blob/991bb0ef2a00387f8a1fa18293bbda17256d7270/zzz-hp/src/utils/damageCalc.ts#L318-L321)）。
+2. **无视防御与减防上限**：ZZZ-HP `computeDefenseZone` 把无视防御与减防各夹到 100%
+   （[`damageCalc.ts:319-320`](https://github.com/Nie7bai/ZZZ-HP/blob/991bb0ef2a00387f8a1fa18293bbda17256d7270/zzz-hp/src/utils/damageCalc.ts#L319-L320)）。
    Fairy `calculateTargetEffectiveDefense` 不施加这些 UI 上限，只夹最终有效防御 ≥ 0。上游当前用例都在界内，
    因此不影响对照；超界输入属于输入域差异，未编码为断言。
 3. **命破防御区**：上游 `isMb` 路径把防御区固定为 1。Fairy 静态公式不建模“命破主控”这一 UI 状态，
@@ -220,10 +221,14 @@
     `penetrationRatios: [1.2]` 时有效防御为 `38.12`（两个负因子相乘），防御区约 `0.954`；
     只给 `penetrationRatios: [1.2]` 时有效防御为 `0`、防御区为 `1`。即增加减防反而让防御区变差，
     违反单调性，实战输入域罕见但边界不成立。
-    上游把每个百分比先夹到 `[0, 0.95]` / `[0, 1]`，再以 `max(0, 1 − ignore − reduce)` 计算，
-    因此不会出现双负相乘：减防 120% 映射为 0，仅穿透率 120% 映射为 47.65（穿透率夹到 95%）。
-    审查记录中的“上游亦为 0”对应把 120% 映射到减防/无视防御；若映射到穿透率，则受 95% 上限影响为 47.65。
+    上游 `damageCalc.ts:312-335` 先把穿透率夹到 `[0, 0.95]`、减防与无视防御各夹到 `[0, 1]`，
+    再计算 `max(0, 1 − ignore − reduce) × (1 − penRate)`，因此不会出现双负相乘。
     待用户裁定：另开修复 PR，或声明为不支持的输入域。本轮不修改生产代码、不加断言。
+12. **Fairy 穿透率没有 95% 上限**：Fairy 的 `penetrationRatios` 不夹到 `0.95`。敌防 953、
+    只给 `penetrationRatios: [1.2]` 时有效防御为 `0`、防御区为 `1`；上游 `damageCalc.ts:312-335`
+    将穿透率夹到 `0.95`，同一输入得到 `953 × 0.05 = 47.65`、防御区约 `0.943`。
+    这是与第 11 条独立的输入域差异；待用户裁定是否另开修复 PR 或声明为不支持输入域。
+    本轮不修改生产代码、不加断言。
 
 ## 验证记录
 
@@ -238,7 +243,7 @@ Fairy 对照与回归：
 
 - 公式对照：61 项通过，0 项失败（`/tmp/fairy-991-compare.mjs`）。
 - 定向测试：`pnpm --filter @randomplay/core exec vitest run test/zzz-hp-991bb0e-formula-backport.test.ts test/anomaly-damage.test.ts test/anomaly-damage-level.test.ts`
-  通过，3 个文件、133 项。
+  通过，3 个文件、134 项。
 - `pnpm --filter @randomplay/core typecheck` 通过（先执行 `pnpm --filter @randomplay/core build` 生成 `dist`）。
 - `pnpm check`：通过。core 99 个文件、5683 项通过（另 3 个文件、24 项 skipped）；data 110 个文件、4755 项通过；
   打包消费验收 2 项通过；lint、format 与 spec-types 检查均通过。该结果来自本轮审查修复前的同一套测试文件；
@@ -251,6 +256,13 @@ Fairy 对照与回归：
 - 防御用例改用上游实际比较的 953 与 `953 × 3 = 2859`，并断言两个穿透值的防御区相等。
 - 修正 `zzz-calculator-comparison.test.ts` 与 `effects/` 下测试文件的路径和行号。
 - 登记 `calculateTargetEffectiveDefense` 在负防御百分比调整下的单调性边界，未改代码、未加断言。
+
+第 2 轮审查修复（覆盖 `4850152d`）：
+
+- 恢复冰 9.8 秒 → 5.175 的上游直接断言，引用 `test-formula-align-compare.mjs:240-242`。
+- 防御用例拆开 953 与 2859 的引用，并注明 `toBe(0)` 是 Fairy 钳制推导值、上游只断言 ≥ 0。
+- “已覆盖”表的行号边界逐条对齐到 `it` 块起止。
+- 第 11 条改为直接陈述事实与上游 `damageCalc.ts:312-335` 依据；新增第 12 条独立登记穿透率缺少 95% 上限。
 
 ## 复现
 
