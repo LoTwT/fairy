@@ -158,12 +158,15 @@ export declare const defenseFactor: Factor<DefenseFactorInput>
 防御调整倍率
 = 1 + Σ defensePercentageAdjustments
 
+钳制后防御调整倍率
+= max(防御调整倍率, 0)
+
 穿透倍率
 = 1 - Σ penetrationRatios
 
 未钳制有效防御
 = targetBaseDefense
-  * 防御调整倍率
+  * 钳制后防御调整倍率
   * 穿透倍率
   - Σ penetrationValues
 
@@ -175,11 +178,14 @@ export declare const defenseFactor: Factor<DefenseFactorInput>
 - `penetrationRatios` 使用已经转换为小数的有符号穿透率贡献；游戏文本中的 `24%` 以 `0.24` 传入。
 - `penetrationValues` 使用有符号固定值贡献，与防御值使用相同数值单位。
 
-防御降低和无视防御通过负数进入同一个防御调整数组，再与穿透率乘算，最后减去穿透值。调用方负责
-确定每项效果是否适用，不得把同一项调整预先计入 `targetBaseDefense` 后再次放入调整数组。
+防御降低和无视防御通过负数进入同一个防御调整数组。防御调整倍率先钳制到不低于 `0`，再与穿透倍率
+乘算，最后减去穿透值。这样，减防合计低于 `-100%` 且穿透率高于 `100%` 时，不会因两个负因子相乘
+得到正的有效防御；最终结果仍按非负钳制。调用方负责确定每项效果是否适用，不得把同一项调整预先
+计入 `targetBaseDefense` 后再次放入调整数组。
 
-钳制前必须检查未钳制有效防御是否有限，避免 `max` 把 `-Infinity` 转换为有限的 `0`。结果不执行
-取整或截断。
+钳制前必须检查防御调整倍率是否有限，避免求和溢出产生的 `-Infinity` 被 `max` 转换为有限的 `0`；
+同样必须在最终钳制前检查未钳制有效防御是否有限，避免其溢出被转换为有限的 `0`。结果不执行取整或
+截断。
 
 三个数组具有相同的集合语义：
 
@@ -203,27 +209,27 @@ export declare const defenseFactor: Factor<DefenseFactorInput>
 
 ## 有效性与失败行为
 
-| 公开 API                          | 失败条件                                       | 行为              |
-| --------------------------------- | ---------------------------------------------- | ----------------- |
-| `defenseFactor.calculate`         | 输入不是非数组对象或为 `null`                  | 抛出 `TypeError`  |
-| `defenseFactor.calculate`         | 任一字段不是 `number`                          | 抛出 `TypeError`  |
-| `defenseFactor.calculate`         | 任一字段不是有限数值                           | 抛出 `RangeError` |
-| `defenseFactor.calculate`         | 攻击方等级基数不大于 `0`                       | 抛出 `RangeError` |
-| `defenseFactor.calculate`         | 目标有效防御小于 `0`                           | 抛出 `RangeError` |
-| `defenseFactor.calculate`         | 最终结果不在 `(0, 1]`                          | 抛出 `RangeError` |
-| `calculateDefenseLevelBase`       | 等级不是 `number`                              | 抛出 `TypeError`  |
-| `calculateDefenseLevelBase`       | 等级不是有限整数或小于 `1`                     | 抛出 `RangeError` |
-| `calculateTargetBaseDefense`      | 参数不是非数组对象或为 `null`                  | 抛出 `TypeError`  |
-| `calculateTargetBaseDefense`      | 任一字段不是 `number`                          | 抛出 `TypeError`  |
-| `calculateTargetBaseDefense`      | 任一字段不是有限数值                           | 抛出 `RangeError` |
-| `calculateTargetBaseDefense`      | 目标等级基数不大于 `0` 或 1 级基础防御小于 `0` | 抛出 `RangeError` |
-| `calculateTargetBaseDefense`      | 结果不是有限数值                               | 抛出 `RangeError` |
-| `calculateTargetEffectiveDefense` | 参数不是非数组对象或为 `null`                  | 抛出 `TypeError`  |
-| `calculateTargetEffectiveDefense` | 任一调整字段不是数组                           | 抛出 `TypeError`  |
-| `calculateTargetEffectiveDefense` | 基础防御或任一数组成员不是 `number`            | 抛出 `TypeError`  |
-| `calculateTargetEffectiveDefense` | 基础防御或任一数组成员不是有限数值             | 抛出 `RangeError` |
-| `calculateTargetEffectiveDefense` | 基础防御小于 `0`                               | 抛出 `RangeError` |
-| `calculateTargetEffectiveDefense` | 钳制前有效防御或最终结果不是有限数值           | 抛出 `RangeError` |
+| 公开 API                          | 失败条件                                                 | 行为              |
+| --------------------------------- | -------------------------------------------------------- | ----------------- |
+| `defenseFactor.calculate`         | 输入不是非数组对象或为 `null`                            | 抛出 `TypeError`  |
+| `defenseFactor.calculate`         | 任一字段不是 `number`                                    | 抛出 `TypeError`  |
+| `defenseFactor.calculate`         | 任一字段不是有限数值                                     | 抛出 `RangeError` |
+| `defenseFactor.calculate`         | 攻击方等级基数不大于 `0`                                 | 抛出 `RangeError` |
+| `defenseFactor.calculate`         | 目标有效防御小于 `0`                                     | 抛出 `RangeError` |
+| `defenseFactor.calculate`         | 最终结果不在 `(0, 1]`                                    | 抛出 `RangeError` |
+| `calculateDefenseLevelBase`       | 等级不是 `number`                                        | 抛出 `TypeError`  |
+| `calculateDefenseLevelBase`       | 等级不是有限整数或小于 `1`                               | 抛出 `RangeError` |
+| `calculateTargetBaseDefense`      | 参数不是非数组对象或为 `null`                            | 抛出 `TypeError`  |
+| `calculateTargetBaseDefense`      | 任一字段不是 `number`                                    | 抛出 `TypeError`  |
+| `calculateTargetBaseDefense`      | 任一字段不是有限数值                                     | 抛出 `RangeError` |
+| `calculateTargetBaseDefense`      | 目标等级基数不大于 `0` 或 1 级基础防御小于 `0`           | 抛出 `RangeError` |
+| `calculateTargetBaseDefense`      | 结果不是有限数值                                         | 抛出 `RangeError` |
+| `calculateTargetEffectiveDefense` | 参数不是非数组对象或为 `null`                            | 抛出 `TypeError`  |
+| `calculateTargetEffectiveDefense` | 任一调整字段不是数组                                     | 抛出 `TypeError`  |
+| `calculateTargetEffectiveDefense` | 基础防御或任一数组成员不是 `number`                      | 抛出 `TypeError`  |
+| `calculateTargetEffectiveDefense` | 基础防御或任一数组成员不是有限数值                       | 抛出 `RangeError` |
+| `calculateTargetEffectiveDefense` | 基础防御小于 `0`                                         | 抛出 `RangeError` |
+| `calculateTargetEffectiveDefense` | 钳制前防御调整倍率、钳制前有效防御或最终结果不是有限数值 | 抛出 `RangeError` |
 
 `defineFactor` 按公共契约检查防御区最终结果是否有限。其他返回数值的 helper 必须在各自公开返回前执行
 同样的有限性检查。

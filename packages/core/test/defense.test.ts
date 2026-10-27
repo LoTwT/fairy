@@ -479,6 +479,45 @@ describe("calculateTargetEffectiveDefense", () => {
     ).toBe(0)
   })
 
+  it("clamps the defense adjustment multiplier before applying the penetration multiplier", () => {
+    expect(
+      calculateTargetEffectiveDefense({
+        targetBaseDefense: 953,
+        defensePercentageAdjustments: [-1.2],
+        penetrationRatios: [1.2],
+        penetrationValues: [],
+      }),
+    ).toBe(0)
+  })
+
+  it("does not increase effective defense as defense reduction grows past 100%", () => {
+    const lessReducedDefense = calculateTargetEffectiveDefense({
+      targetBaseDefense: 953,
+      defensePercentageAdjustments: [-1.1],
+      penetrationRatios: [1.2],
+      penetrationValues: [],
+    })
+    const moreReducedDefense = calculateTargetEffectiveDefense({
+      targetBaseDefense: 953,
+      defensePercentageAdjustments: [-1.2],
+      penetrationRatios: [1.2],
+      penetrationValues: [],
+    })
+
+    expect(moreReducedDefense).toBeLessThanOrEqual(lessReducedDefense)
+    expect(
+      defenseFactor.calculate({
+        attackerLevelBase: 794,
+        targetEffectiveDefense: moreReducedDefense,
+      }),
+    ).toBeGreaterThanOrEqual(
+      defenseFactor.calculate({
+        attackerLevelBase: 794,
+        targetEffectiveDefense: lessReducedDefense,
+      }),
+    )
+  })
+
   it("does not impose an unconfirmed finite upper bound", () => {
     expect(
       calculateTargetEffectiveDefense({
@@ -646,6 +685,17 @@ describe("calculateTargetEffectiveDefense", () => {
       ).toThrow(RangeError)
     },
   )
+
+  it("rejects a non-finite defense adjustment multiplier before clamping it", () => {
+    expect(() =>
+      calculateTargetEffectiveDefense({
+        targetBaseDefense: 100,
+        defensePercentageAdjustments: [-Number.MAX_VALUE, -Number.MAX_VALUE],
+        penetrationRatios: [],
+        penetrationValues: [],
+      }),
+    ).toThrow(RangeError)
+  })
 
   it("rejects an unclamped result made non-finite by multiplication", () => {
     expect(() =>

@@ -106,9 +106,21 @@ export function calculateTargetEffectiveDefense(
     "Penetration values",
   )
 
+  const defenseAdjustmentMultiplier = 1 + defensePercentageAdjustment
+
+  assertFiniteResult(
+    defenseAdjustmentMultiplier,
+    "Defense adjustment multiplier",
+  )
+
+  const clampedDefenseAdjustmentMultiplier = Math.max(
+    defenseAdjustmentMultiplier,
+    0,
+  )
+
   const unclampedTargetEffectiveDefense =
     targetBaseDefense *
-      (1 + defensePercentageAdjustment) *
+      clampedDefenseAdjustmentMultiplier *
       (1 - penetrationRatio) -
     penetrationValue
 
