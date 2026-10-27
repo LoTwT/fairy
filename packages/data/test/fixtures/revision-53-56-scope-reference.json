@@ -1,0 +1,3029 @@
+{
+  "provenance": {
+    "fairyBaseline": "a2015864",
+    "effectsRevision": 56,
+    "zzzHpCommit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+    "resources": [
+      {
+        "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+        "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+        "sha256": "f1df0144ee962138cd09dbdd36511eab46fb3d6016ec638ddab7fc4a01737095"
+      },
+      {
+        "path": "zzz-hp/src/utils/damageCalc.ts",
+        "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+        "sha256": "763c7447cf6ab208c48f5412516de430b1e2ba1669e90bf37ecb83526bc0629d"
+      }
+    ],
+    "generatorSha256": "e2d6cbb8bcfeccc52b61a2bd35ab038fe1fd5fbe4f4663251341cb0efef572e3",
+    "precision": "Reference and difference assertions use max(1e-9, abs(reference) * 1e-12). This batch has no upstream integer projection; upstream values are the pinned raw-record/zone projection.",
+    "layers": [
+      "Nanoka zh/en text and the revision 54—56 correction documents declare the corrected values and damage-kind scope in the case fixture.",
+      "Pinned ZZZ-HP 991bb0e raw records freeze the upstream encoding; the pinned damageCalc.ts zone expressions are asserted verbatim and replayed, not executed as an app.",
+      "An independent exact-decimal rational chain uses a neutral 1,000-attack panel, level 1, zero target defense/resistance, 100 anomaly proficiency and zero crit rate; all other factors are one."
+    ]
+  },
+  "cases": {
+    "velina-m0-anomaly": {
+      "correction": "revision-54",
+      "hit": {
+        "kind": "anomaly",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:velina:mindscape:0:blk-ms4tpxkp-f964lw:eff-ms4tpxkp-9jh4ly",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.1",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "velina-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1100",
+        "critical": "1100",
+        "expected": "1100",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1100",
+        "critical": "1100",
+        "expected": "1100",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "velina-m0-vortex-broad-only": {
+      "correction": "revision-54",
+      "hit": {
+        "kind": "vortex",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:velina:mindscape:0:blk-ms4tpxkp-f964lw:eff-ms4tpxkp-9jh4ly",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.1",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "velina-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1100",
+        "critical": "1100",
+        "expected": "1100",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-100",
+        "critical": "-100",
+        "expected": "-100",
+        "criticalRate": "0"
+      }
+    },
+    "velina-m0-vortex-both": {
+      "correction": "revision-54",
+      "hit": {
+        "kind": "vortex",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:velina:mindscape:0:blk-ms4tpxkp-f964lw:eff-ms4tpxkp-9jh4ly",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.1",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "velina-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0"
+          }
+        },
+        {
+          "optionId": "agents:velina:mindscape:0:blk-ms4tpxkp-f964lw:eff-ms4tqvx2-vzordz",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.1",
+          "correctedKinds": ["vortex"],
+          "correctedElements": null,
+          "differenceId": null,
+          "source": {
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1100",
+        "critical": "1100",
+        "expected": "1100",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1200",
+        "critical": "1200",
+        "expected": "1200",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-100",
+        "critical": "-100",
+        "expected": "-100",
+        "criticalRate": "0"
+      }
+    },
+    "velina-m0-anomaly-settlement": {
+      "correction": "revision-54",
+      "hit": {
+        "kind": "anomaly-settlement",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:velina:mindscape:0:blk-ms4tpxkp-f964lw:eff-ms4tpxkp-9jh4ly",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.1",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "velina-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1100",
+        "critical": "1100",
+        "expected": "1100",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-100",
+        "critical": "-100",
+        "expected": "-100",
+        "criticalRate": "0"
+      }
+    },
+    "velina-m0-luminize": {
+      "correction": "revision-54",
+      "hit": {
+        "kind": "luminize",
+        "element": "lumiflux"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:velina:mindscape:0:blk-ms4tpxkp-f964lw:eff-ms4tpxkp-9jh4ly",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.1",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "velina-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/45/mindscapeBuffs/0/effectBlocks/1/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": null,
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": null
+        }
+      },
+      "upstream": {
+        "nonCritical": "1100",
+        "critical": null,
+        "expected": "1100",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-100",
+        "critical": null,
+        "expected": "-100",
+        "criticalRate": "0"
+      }
+    },
+    "velina-m2-anomaly": {
+      "correction": "revision-54",
+      "hit": {
+        "kind": "anomaly",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 2,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:velina:mindscape:2:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.15",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "velina-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1150",
+        "critical": "1150",
+        "expected": "1150",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.15"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1150",
+        "critical": "1150",
+        "expected": "1150",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "velina-m2-vortex-both": {
+      "correction": "revision-54",
+      "hit": {
+        "kind": "vortex",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 2,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:velina:mindscape:2:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.15",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "velina-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/0"
+          }
+        },
+        {
+          "optionId": "agents:velina:mindscape:2:blk-legacy:legacy-self-turbulenceDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.15",
+          "correctedKinds": ["vortex"],
+          "correctedElements": null,
+          "differenceId": null,
+          "source": {
+            "pointer": "/agents/45/mindscapeBuffs/2/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1150",
+        "critical": "1150",
+        "expected": "1150",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.15"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1300",
+        "critical": "1300",
+        "expected": "1300",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-150",
+        "critical": "-150",
+        "expected": "-150",
+        "criticalRate": "0"
+      }
+    },
+    "velina-m6-anomaly": {
+      "correction": "revision-54",
+      "hit": {
+        "kind": "anomaly",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 6,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:velina:mindscape:6:blk-ms4u9q0d-b63z88:eff-ms4u9q0d-6p259j",
+          "layers": 4,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.025",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "velina-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/45/mindscapeBuffs/6/effectBlocks/0/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1100",
+        "critical": "1100",
+        "expected": "1100",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1100",
+        "critical": "1100",
+        "expected": "1100",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "velina-m6-vortex": {
+      "correction": "revision-54",
+      "hit": {
+        "kind": "vortex",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 6,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:velina:mindscape:6:blk-ms4u9q0d-b63z88:eff-ms4u9q0d-6p259j",
+          "layers": 4,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.025",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "velina-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/45/mindscapeBuffs/6/effectBlocks/0/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1100",
+        "critical": "1100",
+        "expected": "1100",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-100",
+        "critical": "-100",
+        "expected": "-100",
+        "criticalRate": "0"
+      }
+    },
+    "grace-anomaly": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly",
+        "element": "electric"
+      },
+      "holder": {
+        "agentName": "Grace",
+        "element": "electric",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:grace:mindscape:0:blk-ms4o80e9-dqsih3:eff-ms4o80e9-lgnv30",
+          "layers": 2,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.18",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "grace-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1360",
+        "critical": "1360",
+        "expected": "1360",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.36"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1360",
+        "critical": "1360",
+        "expected": "1360",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "grace-anomaly-settlement": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly-settlement",
+        "element": "electric"
+      },
+      "holder": {
+        "agentName": "Grace",
+        "element": "electric",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:grace:mindscape:0:blk-ms4o80e9-dqsih3:eff-ms4o80e9-lgnv30",
+          "layers": 2,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.18",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "grace-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1360",
+        "critical": "1360",
+        "expected": "1360",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-360",
+        "critical": "-360",
+        "expected": "-360",
+        "criticalRate": "0"
+      }
+    },
+    "grace-vortex": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "vortex",
+        "element": "electric"
+      },
+      "holder": {
+        "agentName": "Grace",
+        "element": "electric",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:grace:mindscape:0:blk-ms4o80e9-dqsih3:eff-ms4o80e9-lgnv30",
+          "layers": 2,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.18",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "grace-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1360",
+        "critical": "1360",
+        "expected": "1360",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-360",
+        "critical": "-360",
+        "expected": "-360",
+        "criticalRate": "0"
+      }
+    },
+    "grace-luminize": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "luminize",
+        "element": "lumiflux"
+      },
+      "holder": {
+        "agentName": "Grace",
+        "element": "electric",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:grace:mindscape:0:blk-ms4o80e9-dqsih3:eff-ms4o80e9-lgnv30",
+          "layers": 2,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.18",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "grace-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/29/mindscapeBuffs/0/effectBlocks/1/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": null,
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": null
+        }
+      },
+      "upstream": {
+        "nonCritical": "1360",
+        "critical": null,
+        "expected": "1360",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-360",
+        "critical": null,
+        "expected": "-360",
+        "criticalRate": "0"
+      }
+    },
+    "vivian-m0-anomaly": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly",
+        "element": "ether"
+      },
+      "holder": {
+        "agentName": "Vivian",
+        "element": "ether",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:vivian:mindscape:0:blk-legacy:legacy-team-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.12",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "vivian-m0-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1120",
+        "critical": "1120",
+        "expected": "1120",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.12"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1120",
+        "critical": "1120",
+        "expected": "1120",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "vivian-m0-anomaly-settlement": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly-settlement",
+        "element": "ether"
+      },
+      "holder": {
+        "agentName": "Vivian",
+        "element": "ether",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:vivian:mindscape:0:blk-legacy:legacy-team-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.12",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "vivian-m0-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1120",
+        "critical": "1120",
+        "expected": "1120",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-120",
+        "critical": "-120",
+        "expected": "-120",
+        "criticalRate": "0"
+      }
+    },
+    "vivian-m0-vortex": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "vortex",
+        "element": "ether"
+      },
+      "holder": {
+        "agentName": "Vivian",
+        "element": "ether",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:vivian:mindscape:0:blk-legacy:legacy-team-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.12",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "vivian-m0-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1120",
+        "critical": "1120",
+        "expected": "1120",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-120",
+        "critical": "-120",
+        "expected": "-120",
+        "criticalRate": "0"
+      }
+    },
+    "vivian-m0-luminize": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "luminize",
+        "element": "lumiflux"
+      },
+      "holder": {
+        "agentName": "Vivian",
+        "element": "ether",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:vivian:mindscape:0:blk-legacy:legacy-team-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.12",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "vivian-m0-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/54/mindscapeBuffs/0/effectBlocks/0/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": null,
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": null
+        }
+      },
+      "upstream": {
+        "nonCritical": "1120",
+        "critical": null,
+        "expected": "1120",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-120",
+        "critical": null,
+        "expected": "-120",
+        "criticalRate": "0"
+      }
+    },
+    "alice-m2-anomaly": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly",
+        "element": "physical"
+      },
+      "holder": {
+        "agentName": "Alice",
+        "element": "physical",
+        "mindscapeRank": 2,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:alice:mindscape:2:blk-legacy:legacy-team-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.15",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "alice-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1150",
+        "critical": "1150",
+        "expected": "1150",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.15"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1150",
+        "critical": "1150",
+        "expected": "1150",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "alice-m2-anomaly-settlement": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly-settlement",
+        "element": "physical"
+      },
+      "holder": {
+        "agentName": "Alice",
+        "element": "physical",
+        "mindscapeRank": 2,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:alice:mindscape:2:blk-legacy:legacy-team-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.15",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "alice-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1150",
+        "critical": "1150",
+        "expected": "1150",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-150",
+        "critical": "-150",
+        "expected": "-150",
+        "criticalRate": "0"
+      }
+    },
+    "alice-m2-vortex": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "vortex",
+        "element": "physical"
+      },
+      "holder": {
+        "agentName": "Alice",
+        "element": "physical",
+        "mindscapeRank": 2,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:alice:mindscape:2:blk-legacy:legacy-team-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.15",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "alice-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1150",
+        "critical": "1150",
+        "expected": "1150",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-150",
+        "critical": "-150",
+        "expected": "-150",
+        "criticalRate": "0"
+      }
+    },
+    "alice-m2-luminize": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "luminize",
+        "element": "lumiflux"
+      },
+      "holder": {
+        "agentName": "Alice",
+        "element": "physical",
+        "mindscapeRank": 2,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:alice:mindscape:2:blk-legacy:legacy-team-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.15",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "alice-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/agents/38/mindscapeBuffs/2/effectBlocks/0/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": null,
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": null
+        }
+      },
+      "upstream": {
+        "nonCritical": "1150",
+        "critical": null,
+        "expected": "1150",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-150",
+        "critical": null,
+        "expected": "-150",
+        "criticalRate": "0"
+      }
+    },
+    "jane-core-anomaly": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly",
+        "element": "physical"
+      },
+      "holder": {
+        "agentName": "Jane",
+        "element": "physical",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34bcgu-8f1m63",
+          "layers": 1,
+          "channel": "anomaly-critical-rate",
+          "perLayer": "0.4",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1"
+          }
+        },
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34c40c-3b3j3z",
+          "layers": 1,
+          "channel": "anomaly-critical-damage",
+          "perLayer": "0.5",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4"
+          }
+        },
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34ci0p-usidux",
+          "layers": 1,
+          "channel": "anomaly-critical-rate",
+          "perLayer": "0.16",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/7"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1500",
+        "expected": "1280",
+        "criticalRate": "0.56",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1.5"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1000",
+        "critical": "1500",
+        "expected": "1280",
+        "criticalRate": "0.56"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "jane-core-anomaly-settlement": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly-settlement",
+        "element": "physical"
+      },
+      "holder": {
+        "agentName": "Jane",
+        "element": "physical",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34bcgu-8f1m63",
+          "layers": 1,
+          "channel": "anomaly-critical-rate",
+          "perLayer": "0.4",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1"
+          }
+        },
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34c40c-3b3j3z",
+          "layers": 1,
+          "channel": "anomaly-critical-damage",
+          "perLayer": "0.5",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4"
+          }
+        },
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34ci0p-usidux",
+          "layers": 1,
+          "channel": "anomaly-critical-rate",
+          "perLayer": "0.16",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/7"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "jane-core-vortex": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "vortex",
+        "element": "physical"
+      },
+      "holder": {
+        "agentName": "Jane",
+        "element": "physical",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34bcgu-8f1m63",
+          "layers": 1,
+          "channel": "anomaly-critical-rate",
+          "perLayer": "0.4",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1"
+          }
+        },
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34c40c-3b3j3z",
+          "layers": 1,
+          "channel": "anomaly-critical-damage",
+          "perLayer": "0.5",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4"
+          }
+        },
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34ci0p-usidux",
+          "layers": 1,
+          "channel": "anomaly-critical-rate",
+          "perLayer": "0.16",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/7"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "jane-m2-anomaly": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly",
+        "element": "physical"
+      },
+      "holder": {
+        "agentName": "Jane",
+        "element": "physical",
+        "mindscapeRank": 2,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34bcgu-8f1m63",
+          "layers": 1,
+          "channel": "anomaly-critical-rate",
+          "perLayer": "0.4",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1"
+          }
+        },
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34c40c-3b3j3z",
+          "layers": 1,
+          "channel": "anomaly-critical-damage",
+          "perLayer": "0.5",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4"
+          }
+        },
+        {
+          "optionId": "agents:jane:mindscape:2:blk-legacy:legacy-team-anomalyCritDmg",
+          "layers": 1,
+          "channel": "anomaly-critical-damage",
+          "perLayer": "0.5",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/2/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "2000",
+        "expected": "1400",
+        "criticalRate": "0.4",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "2"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1000",
+        "critical": "2000",
+        "expected": "1400",
+        "criticalRate": "0.4"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "jane-m2-vortex": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "vortex",
+        "element": "physical"
+      },
+      "holder": {
+        "agentName": "Jane",
+        "element": "physical",
+        "mindscapeRank": 2,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34bcgu-8f1m63",
+          "layers": 1,
+          "channel": "anomaly-critical-rate",
+          "perLayer": "0.4",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1"
+          }
+        },
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34c40c-3b3j3z",
+          "layers": 1,
+          "channel": "anomaly-critical-damage",
+          "perLayer": "0.5",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4"
+          }
+        },
+        {
+          "optionId": "agents:jane:mindscape:2:blk-legacy:legacy-team-anomalyCritDmg",
+          "layers": 1,
+          "channel": "anomaly-critical-damage",
+          "perLayer": "0.5",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/2/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "jane-potential-anomaly": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly",
+        "element": "physical"
+      },
+      "holder": {
+        "agentName": "Jane",
+        "element": "physical",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 2
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34bcgu-8f1m63",
+          "layers": 1,
+          "channel": "anomaly-critical-rate",
+          "perLayer": "0.4",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1"
+          }
+        },
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34c40c-3b3j3z",
+          "layers": 1,
+          "channel": "anomaly-critical-damage",
+          "perLayer": "0.5",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4"
+          }
+        },
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-ms34gorp-xrbl8x",
+          "layers": 1,
+          "channel": "anomaly-critical-damage",
+          "perLayer": "0.1",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["physical"],
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1600",
+        "expected": "1240",
+        "criticalRate": "0.4",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1.6"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1000",
+        "critical": "1600",
+        "expected": "1240",
+        "criticalRate": "0.4"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "jane-potential-vortex": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "vortex",
+        "element": "physical"
+      },
+      "holder": {
+        "agentName": "Jane",
+        "element": "physical",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 2
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34bcgu-8f1m63",
+          "layers": 1,
+          "channel": "anomaly-critical-rate",
+          "perLayer": "0.4",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1"
+          }
+        },
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34c40c-3b3j3z",
+          "layers": 1,
+          "channel": "anomaly-critical-damage",
+          "perLayer": "0.5",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4"
+          }
+        },
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-ms34gorp-xrbl8x",
+          "layers": 1,
+          "channel": "anomaly-critical-damage",
+          "perLayer": "0.1",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["physical"],
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "jane-potential-v-anomaly": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly",
+        "element": "physical"
+      },
+      "holder": {
+        "agentName": "Jane",
+        "element": "physical",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 5
+      },
+      "wEngine": null,
+      "selections": [
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34bcgu-8f1m63",
+          "layers": 1,
+          "channel": "anomaly-critical-rate",
+          "perLayer": "0.4",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/1"
+          }
+        },
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms349twy-zgu7b6:eff-ms34c40c-3b3j3z",
+          "layers": 1,
+          "channel": "anomaly-critical-damage",
+          "perLayer": "0.5",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": null,
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/1/effects/4"
+          }
+        },
+        {
+          "optionId": "agents:jane:mindscape:0:blk-ms34gorp-m9dlxw:eff-ms34gorp-xrbl8x",
+          "layers": 1,
+          "channel": "anomaly-critical-damage",
+          "perLayer": "0.25",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["physical"],
+          "differenceId": "jane-anomaly-critical-kind-scope",
+          "source": {
+            "pointer": "/agents/44/mindscapeBuffs/0/effectBlocks/2/effects/0"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1750",
+        "expected": "1300",
+        "criticalRate": "0.4",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1.75"
+          }
+        }
+      },
+      "upstream": null,
+      "difference": null
+    },
+    "joyau-r1-anomaly": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Joyau Dore",
+        "refinement": 1
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.07",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "joyau-dore-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1070",
+        "critical": "1070",
+        "expected": "1070",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.07"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1070",
+        "critical": "1070",
+        "expected": "1070",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "joyau-r2-anomaly": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Joyau Dore",
+        "refinement": 2
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.08",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "joyau-dore-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1080",
+        "critical": "1080",
+        "expected": "1080",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.08"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1080",
+        "critical": "1080",
+        "expected": "1080",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "joyau-r3-anomaly": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Joyau Dore",
+        "refinement": 3
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.09",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "joyau-dore-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1090",
+        "critical": "1090",
+        "expected": "1090",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.09"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1090",
+        "critical": "1090",
+        "expected": "1090",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "joyau-r4-anomaly": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Joyau Dore",
+        "refinement": 4
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.1",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "joyau-dore-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1100",
+        "critical": "1100",
+        "expected": "1100",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1100",
+        "critical": "1100",
+        "expected": "1100",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "joyau-r5-anomaly": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Joyau Dore",
+        "refinement": 5
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.11",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "joyau-dore-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1110",
+        "critical": "1110",
+        "expected": "1110",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.11"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1110",
+        "critical": "1110",
+        "expected": "1110",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "joyau-r1-anomaly-settlement": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly-settlement",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Joyau Dore",
+        "refinement": 1
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.07",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "joyau-dore-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1070",
+        "critical": "1070",
+        "expected": "1070",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-70",
+        "critical": "-70",
+        "expected": "-70",
+        "criticalRate": "0"
+      }
+    },
+    "joyau-r2-anomaly-settlement": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly-settlement",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Joyau Dore",
+        "refinement": 2
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.08",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "joyau-dore-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1080",
+        "critical": "1080",
+        "expected": "1080",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-80",
+        "critical": "-80",
+        "expected": "-80",
+        "criticalRate": "0"
+      }
+    },
+    "joyau-r3-anomaly-settlement": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly-settlement",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Joyau Dore",
+        "refinement": 3
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.09",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "joyau-dore-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1090",
+        "critical": "1090",
+        "expected": "1090",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-90",
+        "critical": "-90",
+        "expected": "-90",
+        "criticalRate": "0"
+      }
+    },
+    "joyau-r4-anomaly-settlement": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly-settlement",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Joyau Dore",
+        "refinement": 4
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.1",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "joyau-dore-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1100",
+        "critical": "1100",
+        "expected": "1100",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-100",
+        "critical": "-100",
+        "expected": "-100",
+        "criticalRate": "0"
+      }
+    },
+    "joyau-r5-anomaly-settlement": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "anomaly-settlement",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Joyau Dore",
+        "refinement": 5
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.11",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "joyau-dore-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1110",
+        "critical": "1110",
+        "expected": "1110",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-110",
+        "critical": "-110",
+        "expected": "-110",
+        "criticalRate": "0"
+      }
+    },
+    "joyau-r1-vortex-both": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "vortex",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Joyau Dore",
+        "refinement": 1
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.07",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "joyau-dore-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1"
+          }
+        },
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-turbulenceDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.07",
+          "correctedKinds": ["vortex"],
+          "correctedElements": null,
+          "differenceId": null,
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/2"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1070",
+        "critical": "1070",
+        "expected": "1070",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.07"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1140",
+        "critical": "1140",
+        "expected": "1140",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-70",
+        "critical": "-70",
+        "expected": "-70",
+        "criticalRate": "0"
+      }
+    },
+    "joyau-r2-vortex-both": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "vortex",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Joyau Dore",
+        "refinement": 2
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.08",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "joyau-dore-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/1"
+          }
+        },
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-turbulenceDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.08",
+          "correctedKinds": ["vortex"],
+          "correctedElements": null,
+          "differenceId": null,
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/1/effectBlocks/0/effects/2"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1080",
+        "critical": "1080",
+        "expected": "1080",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.08"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1160",
+        "critical": "1160",
+        "expected": "1160",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-80",
+        "critical": "-80",
+        "expected": "-80",
+        "criticalRate": "0"
+      }
+    },
+    "joyau-r3-vortex-both": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "vortex",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Joyau Dore",
+        "refinement": 3
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.09",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "joyau-dore-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/1"
+          }
+        },
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-turbulenceDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.09",
+          "correctedKinds": ["vortex"],
+          "correctedElements": null,
+          "differenceId": null,
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/2/effectBlocks/0/effects/2"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1090",
+        "critical": "1090",
+        "expected": "1090",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.09"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1180",
+        "critical": "1180",
+        "expected": "1180",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-90",
+        "critical": "-90",
+        "expected": "-90",
+        "criticalRate": "0"
+      }
+    },
+    "joyau-r4-vortex-both": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "vortex",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Joyau Dore",
+        "refinement": 4
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.1",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "joyau-dore-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/1"
+          }
+        },
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-turbulenceDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.1",
+          "correctedKinds": ["vortex"],
+          "correctedElements": null,
+          "differenceId": null,
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/3/effectBlocks/0/effects/2"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1100",
+        "critical": "1100",
+        "expected": "1100",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1200",
+        "critical": "1200",
+        "expected": "1200",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-100",
+        "critical": "-100",
+        "expected": "-100",
+        "criticalRate": "0"
+      }
+    },
+    "joyau-r5-vortex-both": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "vortex",
+        "element": "wind"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Joyau Dore",
+        "refinement": 5
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.11",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "joyau-dore-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/1"
+          }
+        },
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-turbulenceDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.11",
+          "correctedKinds": ["vortex"],
+          "correctedElements": null,
+          "differenceId": null,
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/4/effectBlocks/0/effects/2"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1110",
+        "critical": "1110",
+        "expected": "1110",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1.11"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1220",
+        "critical": "1220",
+        "expected": "1220",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-110",
+        "critical": "-110",
+        "expected": "-110",
+        "criticalRate": "0"
+      }
+    },
+    "joyau-r1-luminize": {
+      "correction": "revision-55",
+      "hit": {
+        "kind": "luminize",
+        "element": "lumiflux"
+      },
+      "holder": {
+        "agentName": "Velina",
+        "element": "wind",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Joyau Dore",
+        "refinement": 1
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Joyau_Dore:refinement:blk-legacy:legacy-self-anomalyDmgBonus",
+          "layers": 1,
+          "channel": "anomaly-damage-bonus",
+          "perLayer": "0.07",
+          "correctedKinds": ["anomaly"],
+          "correctedElements": ["wind"],
+          "differenceId": "joyau-dore-anomaly-damage-kind-scope",
+          "source": {
+            "pointer": "/wengines/74/refinementBuffs/0/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": null,
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": null
+        }
+      },
+      "upstream": {
+        "nonCritical": "1070",
+        "critical": null,
+        "expected": "1070",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-70",
+        "critical": null,
+        "expected": "-70",
+        "criticalRate": "0"
+      }
+    },
+    "wrathful-r2-fire-sheer": {
+      "correction": "revision-56",
+      "hit": {
+        "kind": "sheer",
+        "element": "fire"
+      },
+      "holder": {
+        "agentName": "Banyue",
+        "element": "fire",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Wrathful Vajra",
+        "refinement": 2
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Wrathful_Vajra:refinement:blk-legacy:legacy-self-turbulenceDmgBonus",
+          "layers": 1,
+          "channel": "sheer-damage-bonus",
+          "perLayer": "0.1035",
+          "correctedKinds": ["sheer"],
+          "correctedElements": ["fire"],
+          "differenceId": "wrathful-vajra-r2-fire-sheer-stat",
+          "source": {
+            "pointer": "/wengines/42/refinementBuffs/1/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1103.5",
+        "critical": "1103.5",
+        "expected": "1103.5",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "sheerDamageBonus": "1.1035"
+          },
+          "critical": {
+            "critical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "103.5",
+        "critical": "103.5",
+        "expected": "103.5",
+        "criticalRate": "0"
+      }
+    },
+    "wrathful-r2-ice-sheer": {
+      "correction": "revision-56",
+      "hit": {
+        "kind": "sheer",
+        "element": "ice"
+      },
+      "holder": {
+        "agentName": "Banyue",
+        "element": "fire",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Wrathful Vajra",
+        "refinement": 2
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Wrathful_Vajra:refinement:blk-legacy:legacy-self-turbulenceDmgBonus",
+          "layers": 1,
+          "channel": "sheer-damage-bonus",
+          "perLayer": "0.1035",
+          "correctedKinds": ["sheer"],
+          "correctedElements": ["fire"],
+          "differenceId": "wrathful-vajra-r2-fire-sheer-stat",
+          "source": {
+            "pointer": "/wengines/42/refinementBuffs/1/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "sheerDamageBonus": "1"
+          },
+          "critical": {
+            "critical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "0",
+        "critical": "0",
+        "expected": "0",
+        "criticalRate": "0"
+      }
+    },
+    "wrathful-r2-fire-vortex": {
+      "correction": "revision-56",
+      "hit": {
+        "kind": "vortex",
+        "element": "fire"
+      },
+      "holder": {
+        "agentName": "Banyue",
+        "element": "fire",
+        "mindscapeRank": 0,
+        "coreSkillLevel": 7,
+        "potentialLevel": 0
+      },
+      "wEngine": {
+        "name": "Wrathful Vajra",
+        "refinement": 2
+      },
+      "selections": [
+        {
+          "optionId": "w-engines:Wrathful_Vajra:refinement:blk-legacy:legacy-self-turbulenceDmgBonus",
+          "layers": 1,
+          "channel": "sheer-damage-bonus",
+          "perLayer": "0.1035",
+          "correctedKinds": ["sheer"],
+          "correctedElements": ["fire"],
+          "differenceId": "wrathful-vajra-r2-fire-sheer-stat",
+          "source": {
+            "pointer": "/wengines/42/refinementBuffs/1/effectBlocks/0/effects/1"
+          }
+        }
+      ],
+      "expected": {
+        "nonCritical": "1000",
+        "critical": "1000",
+        "expected": "1000",
+        "criticalRate": "0",
+        "factors": {
+          "nonCritical": {
+            "baseDamage": "1000",
+            "anomalyDamageBonus": "1"
+          },
+          "critical": {
+            "anomalyCritical": "1"
+          }
+        }
+      },
+      "upstream": {
+        "nonCritical": "1103.5",
+        "critical": "1103.5",
+        "expected": "1103.5",
+        "criticalRate": "0"
+      },
+      "difference": {
+        "nonCritical": "-103.5",
+        "critical": "-103.5",
+        "expected": "-103.5",
+        "criticalRate": "0"
+      }
+    }
+  }
+}
