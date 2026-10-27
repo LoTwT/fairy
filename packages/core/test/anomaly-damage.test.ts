@@ -386,6 +386,28 @@ describe("calculateStandardDisorderDamageMultiplier", () => {
     },
   )
 
+  it("floors a 9.8-second fire duration into 19 half-second compensation steps", () => {
+    // ZZZ-HP 991bb0e zzz-hp/scripts/test-formula-align-compare.mjs:45, :259-261
+    // 上游只断言有效时长 floor(9.8 / 0.5) = 19；14 是 Fairy 补偿模型
+    // （基础 4.5 + 19 × 0.5）的推导值，不是上游断言的倍率。
+    expect(
+      calculateStandardDisorderDamageMultiplier({
+        originalAnomalyAttribute: "fire",
+        remainingAnomalyDurationInSeconds: 9.8,
+      }),
+    ).toBe(14)
+  })
+
+  it("keeps the upstream ice 9.8-second disorder multiplier", () => {
+    // ZZZ-HP 991bb0e zzz-hp/scripts/test-formula-align-compare.mjs:240-242
+    expect(
+      calculateStandardDisorderDamageMultiplier({
+        originalAnomalyAttribute: "ice",
+        remainingAnomalyDurationInSeconds: 9.8,
+      }),
+    ).toBe(5.175)
+  })
+
   it.each([
     ["fire", 4.5],
     ["electric", 4.5],
