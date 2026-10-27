@@ -174,12 +174,12 @@
 | 锐暴区、溢出层、非锐化路径与锐化增伤            | `packages/core/test/sharp-critical.test.ts:44-120`、`packages/core/test/effects/static-damage.test.ts:1507-1592`  |
 | 紊乱 / 耀变暴击子类与旧异常暴击回退             | `packages/core/test/effects/static-damage.test.ts:369-469`、`:572-713`                                            |
 | 紊乱倍率修正作用于完整准备区                    | `packages/core/test/effects/static-catalog.test.ts:245-269`（#268 迁移）                                          |
-| Sunna、Cissia、血髓秘匣、青衣、卢西娅的转模曲线 | `packages/core/test/effects/static-catalog-data.test.ts:341-522`、`:7656-7707`                                    |
+| Sunna、Cissia、血髓秘匣、青衣、卢西娅的转模曲线 | `packages/core/test/effects/static-catalog-data.test.ts:341-522`、`:7656-7708`                                    |
 | 异常等级 60、常见紊乱时长档位                   | `packages/core/test/anomaly-damage-level.test.ts`、`packages/core/test/zzz-calculator-comparison.test.ts:242-276` |
 
 ## 跨实现差异与未覆盖边界
 
-以下项目没有迁移为相等断言。它们不是本轮发现的 Fairy 缺陷，但需要后续由协调者或游戏证据决定是否补能力。
+以下项目没有迁移为相等断言。第 1–10 条属于 ZZZ-HP 应用层能力或测试可复现性边界，不是 Fairy 缺陷；第 11、12 条是 Fairy 的输入域边界。
 
 1. **仓库外方案库**：`test-buff-build-parity`、`test-damage-zone-routing` 第 6 节、`test-legacy-effect-contracts`
    依赖 `ZZZ_SCHEME_FILE` / `ZZZ_DEV_ROOT` 指向的方案 JSON。干净导出下分别中止；没有为运行它们伪造方案文件。
@@ -223,11 +223,11 @@
     违反单调性，实战输入域罕见但边界不成立。
     上游 `damageCalc.ts:312-335` 先把穿透率夹到 `[0, 0.95]`、减防与无视防御各夹到 `[0, 1]`，
     再计算 `max(0, 1 − ignore − reduce) × (1 − penRate)`，因此不会出现双负相乘。
-    待用户裁定：另开修复 PR，或声明为不支持的输入域。本轮不修改生产代码、不加断言。
+    用户已裁定另开修复 PR。本轮不修改生产代码、不加断言。
 12. **Fairy 穿透率没有 95% 上限**：Fairy 的 `penetrationRatios` 不夹到 `0.95`。敌防 953、
     只给 `penetrationRatios: [1.2]` 时有效防御为 `0`、防御区为 `1`；上游 `damageCalc.ts:312-335`
     将穿透率夹到 `0.95`，同一输入得到 `953 × 0.05 = 47.65`、防御区约 `0.943`。
-    这是与第 11 条独立的输入域差异；待用户裁定是否另开修复 PR 或声明为不支持输入域。
+    这是与第 11 条独立的输入域差异；用户裁定暂不修改，待取得游戏依据后再定。
     本轮不修改生产代码、不加断言。
 
 ## 验证记录
