@@ -186,8 +186,8 @@
    这是测试可复现性限制，不是计算错误。
 2. **无视防御与减防上限**：ZZZ-HP `computeDefenseZone` 把无视防御与减防各夹到 100%
    （[`damageCalc.ts:319-320`](https://github.com/Nie7bai/ZZZ-HP/blob/991bb0ef2a00387f8a1fa18293bbda17256d7270/zzz-hp/src/utils/damageCalc.ts#L319-L320)）。
-   Fairy `calculateTargetEffectiveDefense` 不施加这些 UI 上限，只夹最终有效防御 ≥ 0。上游当前用例都在界内，
-   因此不影响对照；超界输入属于输入域差异，未编码为断言。
+   Fairy `calculateTargetEffectiveDefense` 不施加上游逐项的无视防御/减防 100% UI 上限；防御调整倍率与
+   最终有效防御的非负钳制见第 11 条与[防御区规范](../specs/core/factors/defense.md#目标有效防御)。上游当前用例都在界内，因此不影响对照。
 3. **命破防御区**：上游 `isMb` 路径把防御区固定为 1。Fairy 静态公式不建模“命破主控”这一 UI 状态，
    未迁移该分支。
 4. **通用乱流倍率**：`test-mult-factor-zone` 第 5、6 节使用通用 `turbulenceBaseMult = 12.5` 与 7.5%/秒补偿，
