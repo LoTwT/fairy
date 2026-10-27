@@ -386,6 +386,35 @@ describe("calculateStandardDisorderDamageMultiplier", () => {
     },
   )
 
+  it("converts half-second attributes before flooring sub-second durations", () => {
+    // ZZZ-HP 991bb0e zzz-hp/scripts/test-formula-align-compare.mjs:44-47, :241-261
+    expect(
+      calculateStandardDisorderDamageMultiplier({
+        originalAnomalyAttribute: "fire",
+        remainingAnomalyDurationInSeconds: 9.8,
+      }),
+    ).toBe(14)
+    // floor(9.8 / 0.5) = 19；若先 floor 再换算会得到 18 个补偿段（13.5）。
+    expect(
+      calculateStandardDisorderDamageMultiplier({
+        originalAnomalyAttribute: "fire",
+        remainingAnomalyDurationInSeconds: 9.8,
+      }),
+    ).not.toBe(13.5)
+    expect(
+      calculateStandardDisorderDamageMultiplier({
+        originalAnomalyAttribute: "ice",
+        remainingAnomalyDurationInSeconds: 9.8,
+      }),
+    ).toBe(5.175)
+    expect(
+      calculateStandardDisorderDamageMultiplier({
+        originalAnomalyAttribute: "physical",
+        remainingAnomalyDurationInSeconds: 10.2,
+      }),
+    ).toBe(5.25)
+  })
+
   it.each([
     ["fire", 4.5],
     ["electric", 4.5],

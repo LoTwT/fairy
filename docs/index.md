@@ -46,6 +46,7 @@
 - [转换器与作者层边界决策](plans/converter-authoring-boundary-decision.md)：保留 converter 为唯一语义事实来源，把 authoring 冻结为独立断言层；记录 99/931 覆盖、33 条 out-of-scope、备选方案与重新评估条件。
 - [静态计算端到端对照验收](plans/static-e2e-acceptance.md)：九个完整配装场景、固定上游独立参考、差异说明和追加案例格式。
 - [上游测试用例迁移复核](plans/upstream-test-backport.md)：2026-10-20 从 ZZZ-HP 与 ZZZ Calculator 迁移的回归用例、上游可复现性限制及未裁定的跨实现差异。
+- [ZZZ-HP 991bb0e 公式测试迁移](plans/zzz-hp-991bb0e-formula-backport.md)：78 个上游脚本的分类与实际执行、61 项公式数值对照、4 条迁移用例及未覆盖边界。
 - [ZZZ Calculator 对照验收](plans/zzz-calculator-comparison.md)：固定双方版本的公式、数据与上游测试对照，包含迁移到 Fairy 的离线样本、已确认差异及后续 PR 拆分。
 - [ZZZ-HP 991bb0e 升级审计](plans/zzz-hp-991bb0e-upgrade-audit.md)：`2628b32` → `991bb0e` 的逐条裁定、ID 规范化、预期制品变化、验证与回退边界。
 - [技能来源 991bb0e 升级](plans/skill-source-991bb0e-upgrade.md)：技能证据切换、柳/卢西娅三条额外结算来源回填、Burnice 触发段与安比孤立子类的边界。

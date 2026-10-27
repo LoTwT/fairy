@@ -51,6 +51,11 @@ describe("anomalyDamageLevelFactor", () => {
     expect(anomalyDamageLevelFactor.calculate(2)).not.toBe(1.017)
   })
 
+  it("truncates the level 59 multiplier", () => {
+    // ZZZ-HP 991bb0e zzz-hp/scripts/test-formula-align-compare.mjs:36-37
+    expect(anomalyDamageLevelFactor.calculate(59)).toBe(1.983)
+  })
+
   it.each([
     ["string", "1"],
     ["boolean", true],
