@@ -55,6 +55,7 @@ import {
 } from "./semantics.ts"
 import { buildRemielleSpecialVoidflareMechanism } from "./mechanisms.ts"
 import { PHEONY_ADDITIONAL_ABILITY_TEAM_CONDITION_DIFFERENCE_ID } from "./pheony-additional.ts"
+import { verifyPheonyM4Registrations } from "./pheony-m4.ts"
 import {
   SUPPLEMENTS,
   SOURCE_RECORD_SHAPE_FIELDS,
@@ -5188,6 +5189,7 @@ export function convertSource(
   verifyRoxyAdditionalRegistrations(supplements)
   verifyRoxyCoreWindRegistrations(supplements)
   verifyYixuanThunderRegistrations(supplements)
+  verifyPheonyM4Registrations(supplements)
   verifyYanagiPolarityIsolation(collected.records, collected.entities)
   // 缺失条款与共存记录先验证，再编译普通记录；未知 stat / unsupported
   // 不得抢先掩盖完整来源上下文的漂移。实体缺失仍由补充身份校验拒绝。
@@ -6158,7 +6160,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "57",
+    revision: "58",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: effects.some(

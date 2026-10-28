@@ -6,8 +6,10 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest"
 import {
   verifyCompleteStateOptionEvidence,
   verifyStaticEffectsEvidence,
+  verifySupplementEvidence,
 } from "../scripts/generate-static-effects.ts"
 import { preparePublication } from "../scripts/prepare-publication.ts"
+import { PHEONY_M4_SUPPLEMENTS } from "../scripts/static-effects/pheony-m4.ts"
 import { COMPLETE_STATE_OPTIONS } from "../scripts/static-effects/semantics.ts"
 
 const integratedDirectory = fileURLToPath(
@@ -144,13 +146,13 @@ describe("static effects evidence path", () => {
       "nanoka:agents:benbigger:m2-block-counter-defense-damage",
       // 批次 14：星见雅霜灼·破（核心被动七行被动 rank 映射 + 影画 4 天赋）。
       "nanoka:agents:miyabi:frostburn-break-damage",
+      // PR-B2：菲欧妮影画 4 六元素独立异放（/talent/4/desc 中英文）。
+      ...PHEONY_M4_SUPPLEMENTS.map((supplement) => supplement.supplementId),
     ])
       expect(verified).toContain(`supplement:${supplementId}`)
   })
 
   it("rejects a stale digest or a missing pointer for the complete state option", async () => {
-    // 有效登记（默认即生产登记）通过；变更后的登记副本只改一处，用于
-    // 单独核对摘要与 Pointer 的拒绝行为。
     await expect(
       verifyCompleteStateOptionEvidence(verifiedPublication),
     ).resolves.toContain(label)
@@ -172,5 +174,31 @@ describe("static effects evidence path", () => {
         },
       ]),
     ).rejects.toThrow(new RegExp(`Evidence pointer missing: ${label}`))
+  })
+
+  it("rejects stale or misplaced Pheony M4 evidence", async () => {
+    const registration = PHEONY_M4_SUPPLEMENTS[0]!
+    const m4Label = `supplement:${registration.supplementId}`
+    await expect(
+      verifySupplementEvidence(verifiedPublication),
+    ).resolves.toContain(m4Label)
+    await expect(
+      verifySupplementEvidence(verifiedPublication, [
+        {
+          ...registration,
+          evidence: [{ ...registration.evidence[0]!, sha256: "0".repeat(64) }],
+        },
+      ]),
+    ).rejects.toThrow(new RegExp(`Evidence file changed: ${m4Label}`))
+    await expect(
+      verifySupplementEvidence(verifiedPublication, [
+        {
+          ...registration,
+          evidence: [
+            { ...registration.evidence[0]!, pointer: "/talent/4/missing" },
+          ],
+        },
+      ]),
+    ).rejects.toThrow(new RegExp(`Evidence pointer missing: ${m4Label}`))
   })
 })

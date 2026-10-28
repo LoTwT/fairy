@@ -13,11 +13,19 @@ import type {
 import { general, inputFor } from "./static-fixtures.ts"
 
 /**
- * D4-1b：菲欧妮影画 4[生命尽头与冷酷仙境]的六元素异放结算。600% 固定
- * 倍率按固定提交 publicAnomalySkills.ts 的原异常系数归一：
+ * PR-B2：菲欧妮影画 4[生命尽头与冷酷仙境]的六元素异放结算。
+ *
+ * [烬火追魂]或[普通攻击：焚罪]终结一击命中处于异常状态的敌人时，额外触发
+ * 一次[异放]，固定结算 600% 倍率的对应属性异常伤害。ZZZ-HP 的
+ * `anomalyBaseExpected` 不含原异常系数，因此最终倍率等于原异常系数 × 6：
  * 物理 7.13×6=42.78、火 0.5×6=3、冰 5×6=30、电 1.25×6=7.5、
- * 以太 0.625×6=3.75、风 12.5×6=75。该次异放暴击时额外暴伤 40% 只进入
- * anomaly-settlement 通道；触发招式与异常状态由调用方声明。
+ * 以太 0.625×6=3.75、风 12.5×6=75。
+ *
+ * 每个元素选项是一条 `independent-settlement` 目录变体：独立
+ * `uncategorized` 目标、共享零初始倍率伤害项、`anomaly-source` 属性来源；
+ * 该次异放暴击时额外暴伤 40% 只进入 `anomaly-settlement-critical-damage`。
+ * 固定源常驻 40% 旧位置（rank0 eff-9）保持 semantic-conflict 迁移入口，
+ * 不生成常驻贡献。触发招式、异常状态与命中时点由调用方声明。
  */
 const read = (path: string) =>
   JSON.parse(readFileSync(new URL(path, import.meta.url), "utf8"))
@@ -32,7 +40,10 @@ const catalog = read(
 
 const M4_TARGET = "zzz-hp:skill:pheony-m4-anomaly-settlement"
 const M4_ITEM = "pheony:m4-anomaly-settlement"
-const M2_STATE = "agents:pheony:mindscape:2:abrasion-mindscape-2-state"
+const OTHER_SETTLEMENT_TARGET = "zzz-hp:skill:big-cylinder-retaliation"
+const ABRASION_M0 = "agents:pheony:mindscape:0:abrasion-core-state"
+const ABRASION_M1 = "agents:pheony:mindscape:1:abrasion-mindscape-1-state"
+const M6_DEFENSE = "agents:pheony:mindscape:6:blk-mindscapeBuffs-6-1:eff-8"
 
 const cases = [
   { element: "physical", multiplier: 42.78 },
@@ -49,7 +60,7 @@ const effectId = (element: string) =>
   `agent:1641:nanoka:m4-anomaly-settlement-${element}:mindscape:4`
 const critEffectId = (element: string) => `${effectId(element)}-crit-damage`
 
-const generalDamage = {
+const generalDamage = () => ({
   damageBonus: { settledMultiplier: 1 },
   defense: {
     attackerLevel: 60,
@@ -75,21 +86,39 @@ const generalDamage = {
   refringe: { mode: "settled" as const, multiplier: 1 },
   anomalyCriticalRate: 0,
   anomalyCriticalDamage: [],
-}
+})
+
+type DamageItem = StaticCatalogDamageInput["hit"]["damageItems"][number]
+
+const damageItem = (options: {
+  readonly itemId?: string
+  readonly multiplier?: number
+  readonly statSourceEntityId?: `entity:${string}`
+}): DamageItem => ({
+  mode: "direct",
+  role: "base",
+  itemId: options.itemId ?? M4_ITEM,
+  stat: "attack",
+  statSource: { entityId: options.statSourceEntityId ?? "entity:source" },
+  damageMultiplier: options.multiplier ?? 0,
+})
 
 function request(options: {
-  element: string
-  mindscapeRank?: 0 | 3 | 4 | 5 | 6
-  selections?: StaticCatalogDamageInput["selections"]
-  itemMultiplier?: number
-  skillCategory?: StaticCatalogDamageInput["hit"]["skillCategory"]
-  statSourceEntityId?: `entity:${string}`
-  itemId?: string
+  readonly element: string
+  readonly mindscapeRank?: 0 | 3 | 4 | 5 | 6
+  readonly selections?: StaticCatalogDamageInput["selections"]
+  readonly itemMultiplier?: number
+  readonly skillCategory?: StaticCatalogDamageInput["hit"]["skillCategory"]
+  readonly statSourceEntityId?: `entity:${string}`
+  readonly itemId?: string
+  readonly targetIds?: readonly string[]
+  readonly items?: readonly [DamageItem, ...DamageItem[]]
+  readonly definitions?: typeof definitions
+  readonly catalog?: StaticEffectCatalog
 }): StaticCatalogDamageInput {
   const element = options.element as DamageElement
   const holder = "entity:pheony" as const
   const source = "entity:source" as const
-  const sourceEntityId = options.statSourceEntityId ?? source
   const selections = options.selections ?? [
     {
       optionId: optionId(options.element),
@@ -99,8 +128,8 @@ function request(options: {
   ]
   return {
     ...inputFor(),
-    definitions,
-    catalog,
+    definitions: options.definitions ?? definitions,
+    catalog: options.catalog ?? catalog,
     actorSources: [
       { entityId: holder, agentEntityId: "1641" },
       { entityId: source, agentEntityId: "1301" },
@@ -168,22 +197,23 @@ function request(options: {
       actionId: "action:test",
       skillCategory: options.skillCategory ?? "uncategorized",
       element,
-      skillTargetIds: [M4_TARGET],
+      skillTargetIds: options.targetIds ?? [M4_TARGET],
       skillTags: [],
-      damageItems: [
-        {
-          mode: "direct",
-          role: "base",
-          itemId: options.itemId ?? M4_ITEM,
-          stat: "attack",
-          statSource: { entityId: sourceEntityId },
-          damageMultiplier: options.itemMultiplier ?? 0,
-        },
+      damageItems: options.items ?? [
+        damageItem({
+          ...(options.itemId === undefined ? {} : { itemId: options.itemId }),
+          ...(options.itemMultiplier === undefined
+            ? {}
+            : { multiplier: options.itemMultiplier }),
+          ...(options.statSourceEntityId === undefined
+            ? {}
+            : { statSourceEntityId: options.statSourceEntityId }),
+        }),
       ],
     },
     damage: {
       kind: "anomaly-settlement",
-      ...generalDamage,
+      ...generalDamage(),
       anomalySource: { entityId: source, level: 52 },
       anomalySettlementCriticalRate: 0,
       anomalySettlementCriticalDamage: [],
@@ -197,21 +227,28 @@ function calculate(value: StaticCatalogDamageInput): StaticDamageResult {
   return result.value
 }
 
-function settledItem(result: StaticDamageResult) {
+function settledItem(result: StaticDamageResult, itemId = M4_ITEM) {
   const item = result.evaluation.hit!.damageItems.find(
-    (entry) => entry.itemId === M4_ITEM,
+    (entry) => entry.itemId === itemId,
   )
-  if (!item) throw new Error("missing M4 item")
+  if (!item) throw new Error(`missing damage item ${itemId}`)
   return item
 }
 
+const contributions = (result: StaticDamageResult, id: string) =>
+  result.evaluation.contributions.filter(
+    (entry) => entry.origin.effectId === id,
+  )
+
 const contribution = (result: StaticDamageResult, id: string) =>
+  contributions(result, id).reduce((sum, entry) => sum + entry.value.value, 0)
+
+const totalFor = (result: StaticDamageResult, effectIdPart: string) =>
   result.evaluation.contributions
-    .filter((entry) => entry.origin.effectId === id)
+    .filter((entry) => entry.origin.effectId.includes(`:${effectIdPart}:`))
     .reduce((sum, entry) => sum + entry.value.value, 0)
 
-// D5-2 移除 D4 覆盖层；对应固定源实体动作/缺口在 D6 重建后恢复。
-describe.skip("D4 Pheony M4 six-element anomaly settlement", () => {
+describe("Pheony M4 six-element independent anomaly settlement", () => {
   it.each(cases)(
     "settles $element at the normalized 600% multiplier",
     ({ element, multiplier }) => {
@@ -224,26 +261,48 @@ describe.skip("D4 Pheony M4 six-element anomaly settlement", () => {
         6,
       )
       expect(result.criticalRate).toBe(0)
+      expect(contribution(result, critEffectId(element))).toBeCloseTo(0.4, 9)
     },
   )
 
-  it("applies the independent 40% crit damage only to the M4 settlement", () => {
+  it("applies the independent 40% crit damage only when M4 is selected", () => {
     const withM4 = calculate(request({ element: "physical" }))
     expect(contribution(withM4, critEffectId("physical"))).toBeCloseTo(0.4, 9)
 
     const withoutM4 = calculate(
-      request({ element: "physical", selections: [] }),
+      request({
+        element: "physical",
+        selections: [
+          { optionId: ABRASION_M0, bindingId: "binding:pheony", layers: 1 },
+        ],
+      }),
     )
     expect(settledItem(withoutM4).damageMultiplier).toBe(0)
     expect(contribution(withoutM4, critEffectId("physical"))).toBe(0)
+    expect(
+      withoutM4.factors.critical?.anomalyCritical ?? 1,
+      "the permanent eff-9 record must stay out of the settlement",
+    ).toBeCloseTo(1.25, 9)
   })
 
-  it("adds the 40% on top of the abrasion core and M1 crit damage", () => {
+  it("does not give another anomaly settlement the M4 multiplier or 40%", () => {
+    const other = calculate(
+      request({
+        element: "fire",
+        targetIds: [OTHER_SETTLEMENT_TARGET],
+      }),
+    )
+    expect(settledItem(other).damageMultiplier).toBe(0)
+    expect(contribution(other, critEffectId("fire"))).toBe(0)
+    expect(contribution(other, effectId("fire"))).toBe(0)
+  })
+
+  it("adds core 25%, M1 25% and M4 40% once in the dedicated channel", () => {
     const result = calculate(
       request({
         element: "fire",
         selections: [
-          { optionId: M2_STATE, bindingId: "binding:pheony", layers: 1 },
+          { optionId: ABRASION_M1, bindingId: "binding:pheony", layers: 1 },
           {
             optionId: optionId("fire"),
             bindingId: "binding:pheony",
@@ -252,34 +311,74 @@ describe.skip("D4 Pheony M4 six-element anomaly settlement", () => {
         ],
       }),
     )
-    const ids = result.evaluation.contributions.map(
-      (entry) => entry.origin.effectId,
-    )
-    expect(ids.some((id) => id.includes("eff-6:blk-mindscapeBuffs-0-1"))).toBe(
-      true,
-    )
-    expect(ids.some((id) => id.includes("eff-19:blk-mindscapeBuffs-1-1"))).toBe(
-      true,
-    )
-    expect(contribution(result, critEffectId("fire"))).toBeCloseTo(0.4, 9)
+    expect(totalFor(result, "eff-6")).toBeCloseTo(0.25, 12)
+    expect(totalFor(result, "eff-19")).toBeCloseTo(0.25, 12)
+    expect(totalFor(result, "eff-10")).toBe(0)
+    expect(contributions(result, critEffectId("fire"))).toHaveLength(1)
+    expect(contribution(result, critEffectId("fire"))).toBeCloseTo(0.4, 12)
+    expect(result.factors.critical?.anomalyCritical).toBeCloseTo(1.9, 9)
+    for (const [id, value] of [
+      ["eff-6", 0.25],
+      ["eff-19", 0.25],
+      [critEffectId("fire"), 0.4],
+    ] as const) {
+      expect(totalFor(result, id) || contribution(result, id), id).toBeCloseTo(
+        value,
+        9,
+      )
+    }
+    for (const part of ["eff-6", "eff-19"])
+      for (const entry of result.evaluation.contributions.filter((entry) =>
+        entry.origin.effectId.includes(`:${part}:`),
+      ))
+        expect(entry.address).toMatchObject({
+          kind: "factor",
+          channel: "anomaly-settlement-critical-damage",
+        })
+    for (const entry of contributions(result, critEffectId("fire")))
+      expect(entry.address).toMatchObject({
+        kind: "factor",
+        channel: "anomaly-settlement-critical-damage",
+      })
   })
 
-  it("keeps the six element options mutually exclusive by hit element", () => {
-    const result = calculate(
+  it("applies the M6 settlement defense adjustment exactly once", () => {
+    const withoutM6 = calculate(request({ element: "fire", mindscapeRank: 6 }))
+    const withM6 = calculate(
       request({
-        element: "wind",
-        selections: cases.map(({ element }) => ({
-          optionId: optionId(element),
-          bindingId: "binding:pheony" as const,
-          layers: 1,
-        })),
+        element: "fire",
+        mindscapeRank: 6,
+        selections: [
+          { optionId: M6_DEFENSE, bindingId: "binding:pheony", layers: 1 },
+          {
+            optionId: optionId("fire"),
+            bindingId: "binding:pheony",
+            layers: 1,
+          },
+        ],
       }),
     )
-    expect(settledItem(result).damageMultiplier).toBeCloseTo(75, 9)
-    for (const { element } of cases)
-      if (element !== "wind")
-        expect(contribution(result, critEffectId(element))).toBe(0)
+    expect(
+      withoutM6.evaluation.contributions.filter((entry) =>
+        entry.origin.effectId.includes(":eff-8:"),
+      ),
+    ).toHaveLength(0)
+    expect(
+      withM6.evaluation.contributions.filter((entry) =>
+        entry.origin.effectId.includes(":eff-8:"),
+      ),
+    ).toHaveLength(1)
+    expect(totalFor(withM6, "eff-8")).toBeCloseTo(-0.4, 12)
+    expect(settledItem(withM6).damageMultiplier).toBeCloseTo(3, 9)
   })
+
+  it.each([4, 5, 6] as const)(
+    "unlocks the settlement at mindscape %s",
+    (mindscapeRank) => {
+      const result = calculate(request({ element: "fire", mindscapeRank }))
+      expect(settledItem(result).damageMultiplier).toBeCloseTo(3, 9)
+    },
+  )
 
   it.each([0, 3] as const)("rejects M4 below the unlock rank (%s)", (rank) => {
     const result = calculateStaticDamageFromCatalog(
@@ -338,5 +437,90 @@ describe.skip("D4 Pheony M4 six-element anomaly settlement", () => {
       expect(
         result.issues.some((issue) => issue.code === "CONTEXT_MISMATCH"),
       ).toBe(true)
+  })
+
+  it("does not apply the selected element to another hit element", () => {
+    const result = calculate(request({ element: "fire" }))
+    const mismatched = calculate(
+      request({
+        element: "wind",
+        selections: [
+          {
+            optionId: optionId("fire"),
+            bindingId: "binding:pheony",
+            layers: 1,
+          },
+        ],
+      }),
+    )
+    expect(settledItem(result).damageMultiplier).toBeCloseTo(3, 9)
+    expect(settledItem(mismatched).damageMultiplier).toBe(0)
+    expect(contribution(mismatched, critEffectId("fire"))).toBe(0)
+  })
+
+  it("scales only the declared M4 item, not another damage item", () => {
+    const baseItemId = "action:agent:1641:action:0001:base"
+    const result = calculate(
+      request({
+        element: "fire",
+        items: [
+          damageItem({ itemId: baseItemId, multiplier: 2 }),
+          damageItem({ multiplier: 0 }),
+        ],
+      }),
+    )
+    expect(settledItem(result, baseItemId).damageMultiplier).toBe(2)
+    expect(settledItem(result).damageMultiplier).toBeCloseTo(3, 9)
+    expect(contribution(result, critEffectId("fire"))).toBeCloseTo(0.4, 9)
+  })
+
+  it("proves the element multiplier and separate 40% rule are necessary (ablation)", () => {
+    const mutableCatalog = structuredClone(catalog) as StaticEffectCatalog
+    const physical = mutableCatalog.options.find(
+      (option) => option.optionId === optionId("physical"),
+    )!
+    const variant = physical.variants[0] as unknown as {
+      effectIds: string[]
+      status: string
+      reason?: string
+    }
+    const mutableDefinitions = structuredClone(definitions) as unknown as {
+      effects: { effectId: string }[]
+    }
+    variant.effectIds = variant.effectIds.filter(
+      (id) => id !== critEffectId("physical"),
+    )
+    mutableDefinitions.effects = mutableDefinitions.effects.filter(
+      (rule) => rule.effectId !== critEffectId("physical"),
+    )
+    const withoutCrit = calculate(
+      request({
+        element: "physical",
+        catalog: mutableCatalog,
+        definitions: mutableDefinitions as unknown as typeof definitions,
+      }),
+    )
+    expect(settledItem(withoutCrit).damageMultiplier).toBeCloseTo(42.78, 9)
+    expect(withoutCrit.factors.critical?.anomalyCritical).toBeCloseTo(1, 9)
+    expect(contribution(withoutCrit, critEffectId("physical"))).toBe(0)
+
+    variant.effectIds = variant.effectIds.filter(
+      (id) => id !== effectId("physical"),
+    )
+    mutableDefinitions.effects = mutableDefinitions.effects.filter(
+      (rule) => rule.effectId !== effectId("physical"),
+    )
+    variant.status = "unsupported"
+    variant.reason = "semantic-conflict"
+    const withoutMultiplier = calculateStaticDamageFromCatalog(
+      request({
+        element: "physical",
+        catalog: mutableCatalog,
+        definitions: mutableDefinitions as unknown as typeof definitions,
+      }),
+    )
+    expect(withoutMultiplier.ok).toBe(false)
+    if (!withoutMultiplier.ok)
+      expect(withoutMultiplier.issues.length).toBeGreaterThan(0)
   })
 })

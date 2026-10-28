@@ -365,9 +365,9 @@ describe("data product manifests", () => {
     expect(manifest.product).toBe("static-effects")
     expect(manifest.schemaVersion).toBe(1)
     expect(manifest.rulesVersion).toEqual({
-      label: "zzz-hp-static-effects/57",
+      label: "zzz-hp-static-effects/58",
       ruleSetId: "zzz-hp-static-effects",
-      revision: "57",
+      revision: "58",
     })
     expect(manifest.source).toEqual({
       repository: structureBaseline.effects.sourceRepository,
@@ -396,7 +396,7 @@ describe("data product manifests", () => {
       structureBaseline.effects.staticCoverage.supplementalRecordCount,
     )
     expect(manifest.coverage.supplementalStatusCounts).toEqual({
-      "integrated": 68,
+      "integrated": 74,
       "out-of-scope": 34,
     })
     expect(manifest.discrepancies).toHaveLength(
@@ -618,7 +618,7 @@ describe("static coverage query", () => {
       expect(match.explanation).toBeTruthy()
     }
     const integrated = matchesFor({ status: "integrated" })
-    expect(integrated.matches).toHaveLength(68)
+    expect(integrated.matches).toHaveLength(74)
     expect(
       integrated.matches.every(
         (match) => match.group === "supplementalRecords",

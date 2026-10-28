@@ -1,4 +1,5 @@
 import { LUCY_GUARD_BOAR_SUPPLEMENTS } from "./lucy-guard-boar.ts"
+import { PHEONY_M4_SUPPLEMENTS } from "./pheony-m4.ts"
 import { ROXY_MINDSCAPE_SUPPLEMENTS } from "./roxy-mindscapes.ts"
 import { ROXY_ADDITIONAL_SUPPLEMENTS } from "./roxy-additional.ts"
 import { YIXUAN_THUNDER_SUPPLEMENTS } from "./yixuan-thunder.ts"
@@ -6013,4 +6014,5 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   miyabiFrostburnBreakDamage,
   janeMindscape6ProficiencyDamage,
   aliceMindscape6ProficiencyDamage,
+  ...PHEONY_M4_SUPPLEMENTS,
 ]

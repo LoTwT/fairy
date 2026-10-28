@@ -4185,7 +4185,7 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     kind: "declared-unsupported",
     reason: "semantic-conflict",
     explanation:
-      "M4 的“该次[异放]效果触发暴击时，其暴击伤害额外提升40%”只属于 M4 触发的异放结算；固定记录是自身常驻 anomalyReleaseCritDmg +40。D4-1a 暂不把它当常驻异放暴伤执行，D4-1b 将按 anomaly-settlement-critical-damage 通道绑定到 M4 600% 结算选项。",
+      "M4 的“该次[异放]效果触发暴击时，其暴击伤害额外提升40%”只属于 M4 触发的异放结算；固定记录是自身常驻 anomalyReleaseCritDmg +40。该位置继续保持 semantic-conflict 迁移入口，不生成常驻异放暴伤；M4 六元素独立结算选项的附加规则把同一 40% 只追加到本次 anomaly-settlement-critical-damage。",
     expectedEncoding: {
       stat: "anomalyReleaseCritDmg",
       value: 40,
@@ -4195,7 +4195,7 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     },
     evidence: [d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note")],
     verification:
-      "ZZZ-HP 2628b32 菲欧妮 rank0 块 note 的 M4 分句；常驻异放暴伤会错误作用于所有异放，D4-1a 只登记缺口。",
+      "ZZZ-HP 991bb0e 菲欧妮 rank0 块 note 的 M4 分句；常驻异放暴伤会错误作用于所有异放。PR-B2 只把该 40% 作为 six-element [异放]选项的附加规则，本位置保持 unsupported/semantic-conflict，不变成常驻贡献。",
   },
   "agents/pheony/mindscape/2/blk-mindscapeBuffs-2-1/eff-mvdz21so-s2au9j": {
     kind: "declared-unsupported",

@@ -55,8 +55,8 @@
       "packages/data/definitions/attributes/w-engines/14158.json": "fde7df53350091da522a4c9a32887f1c1f6c33f9697dfdbb4edcb898c874b5c9",
       "packages/data/definitions/attributes/w-engines/14161.json": "c5e5c581357aed82a80d9bb045ee5fd1e2badd38ee946a655f4303e7b053360a",
       "packages/data/definitions/attributes/w-engines/14162.json": "24e6b4da7546670fde391a73ed85117acefb98f3a7a27259029ecc0432ba2fe5",
-      "packages/data/definitions/effects/static-catalog.json": "635bd3ff5bc6fd3d5710ef885dd6cff0e47640126b3ec1e339b4355177fe04fa",
-      "packages/data/definitions/effects/static.json": "2d9253de5254bdd9a261b631d73e99032e032cc503472d833016b3691927564d",
+      "packages/data/definitions/effects/static-catalog.json": "88179ad92a621e194a9338c9acea31d02b7c94172cbe581d72326054421f2550",
+      "packages/data/definitions/effects/static.json": "887dceb6d52758dc8cc4da9aa4e17b5c6c2b670071c7c38a9d215352ed1ee1e5",
       "packages/data/definitions/skills/agents/1041.json": "8a1b8454b9e0fb2d8b3b737af92188d00df116477a95a28f80e8502601eb3c7d",
       "packages/data/definitions/skills/agents/1371.json": "b02acd4ec219eec8d20a16ca3ff2948ca008cd92763f30148dcfd3a8e44e8cae",
       "packages/data/definitions/skills/agents/1611.json": "8914791496672f301b020717b70bab506af1dccf1e6d2308db51ca61502a1471"
@@ -65,7 +65,7 @@
       "packageVersion": "0.5.0",
       "contractVersion": 3,
       "gameVersion": "3.3",
-      "snapshotId": "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da"
+      "snapshotId": "sha256:2e805a9fa7482071cd595c01da41e1c5e95723c6d0d5178b4320e523a8edf731"
     },
     "fairyCalculationSources": {
       "packages/core/src/static/calculate.ts": "c1e6d073f7b8eb62241bf640da8d3e1a878aa8de9a703636c490f113a126441e",
@@ -80506,7 +80506,7 @@
           "packages/data/definitions/effects/static-catalog.json": "3a26131e9d4561701f51c67959ff1e16a2b35931edea60d0435b757851a5d8b3"
         }
       },
-      "currentSnapshotId": "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da"
+      "currentSnapshotId": "sha256:2e805a9fa7482071cd595c01da41e1c5e95723c6d0d5178b4320e523a8edf731"
     }
   ]
 }

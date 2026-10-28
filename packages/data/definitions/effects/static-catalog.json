@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "57",
+  "revision": "58",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
@@ -16707,7 +16707,7 @@
           "differences": [],
           "applicability": {},
           "reason": "semantic-conflict",
-          "explanation": "M4 的“该次[异放]效果触发暴击时，其暴击伤害额外提升40%”只属于 M4 触发的异放结算；固定记录是自身常驻 anomalyReleaseCritDmg +40。D4-1a 暂不把它当常驻异放暴伤执行，D4-1b 将按 anomaly-settlement-critical-damage 通道绑定到 M4 600% 结算选项。"
+          "explanation": "M4 的“该次[异放]效果触发暴击时，其暴击伤害额外提升40%”只属于 M4 触发的异放结算；固定记录是自身常驻 anomalyReleaseCritDmg +40。该位置继续保持 semantic-conflict 迁移入口，不生成常驻异放暴伤；M4 六元素独立结算选项的附加规则把同一 40% 只追加到本次 anomaly-settlement-critical-damage。"
         }
       ]
     },
@@ -55460,6 +55460,330 @@
           }
         }
       ]
+    },
+    {
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-physical",
+      "catalogEntityId": "agents:pheony",
+      "name": "影画4 · 异放结算（物理）",
+      "conditionDescription": "影画4：[烬火追魂]或[普通攻击：焚罪]终结一击命中处于异常状态的敌人时，额外触发一次[异放]，固定结算 600% 倍率的物理属性异常伤害（本项目归一基础倍率 42.78 = 原异常系数 × 6；ZZZ-HP 的 anomalyBaseExpected 不含原异常系数）。本选项只覆盖物理元素：调用方声明本次触发与命中元素，命中以 uncategorized 分类携带独立目标、以 anomaly-settlement 结算，伤害项从 0 倍率开始由规则一次赋值，statSource 与 damage.anomalySource 一致；该次异放暴击时额外 40% 暴伤只进入 anomaly-settlement-critical-damage。其他元素、其他结算目标与未选择本项均不获得该倍率或 40%。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 4
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/talent/4/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1641:nanoka:m4-anomaly-settlement-physical:mindscape:4",
+            "agent:1641:nanoka:m4-anomaly-settlement-physical:mindscape:4-crit-damage"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "pheony:m4-anomaly-settlement",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "anomaly-source",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-fire",
+      "catalogEntityId": "agents:pheony",
+      "name": "影画4 · 异放结算（火）",
+      "conditionDescription": "影画4：[烬火追魂]或[普通攻击：焚罪]终结一击命中处于异常状态的敌人时，额外触发一次[异放]，固定结算 600% 倍率的火属性异常伤害（本项目归一基础倍率 3 = 原异常系数 × 6；ZZZ-HP 的 anomalyBaseExpected 不含原异常系数）。本选项只覆盖火元素：调用方声明本次触发与命中元素，命中以 uncategorized 分类携带独立目标、以 anomaly-settlement 结算，伤害项从 0 倍率开始由规则一次赋值，statSource 与 damage.anomalySource 一致；该次异放暴击时额外 40% 暴伤只进入 anomaly-settlement-critical-damage。其他元素、其他结算目标与未选择本项均不获得该倍率或 40%。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 4
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/talent/4/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1641:nanoka:m4-anomaly-settlement-fire:mindscape:4",
+            "agent:1641:nanoka:m4-anomaly-settlement-fire:mindscape:4-crit-damage"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "pheony:m4-anomaly-settlement",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "anomaly-source",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-ice",
+      "catalogEntityId": "agents:pheony",
+      "name": "影画4 · 异放结算（冰）",
+      "conditionDescription": "影画4：[烬火追魂]或[普通攻击：焚罪]终结一击命中处于异常状态的敌人时，额外触发一次[异放]，固定结算 600% 倍率的冰属性异常伤害（本项目归一基础倍率 30 = 原异常系数 × 6；ZZZ-HP 的 anomalyBaseExpected 不含原异常系数）。本选项只覆盖冰元素：调用方声明本次触发与命中元素，命中以 uncategorized 分类携带独立目标、以 anomaly-settlement 结算，伤害项从 0 倍率开始由规则一次赋值，statSource 与 damage.anomalySource 一致；该次异放暴击时额外 40% 暴伤只进入 anomaly-settlement-critical-damage。其他元素、其他结算目标与未选择本项均不获得该倍率或 40%。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 4
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/talent/4/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1641:nanoka:m4-anomaly-settlement-ice:mindscape:4",
+            "agent:1641:nanoka:m4-anomaly-settlement-ice:mindscape:4-crit-damage"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "pheony:m4-anomaly-settlement",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "anomaly-source",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-electric",
+      "catalogEntityId": "agents:pheony",
+      "name": "影画4 · 异放结算（电）",
+      "conditionDescription": "影画4：[烬火追魂]或[普通攻击：焚罪]终结一击命中处于异常状态的敌人时，额外触发一次[异放]，固定结算 600% 倍率的电属性异常伤害（本项目归一基础倍率 7.5 = 原异常系数 × 6；ZZZ-HP 的 anomalyBaseExpected 不含原异常系数）。本选项只覆盖电元素：调用方声明本次触发与命中元素，命中以 uncategorized 分类携带独立目标、以 anomaly-settlement 结算，伤害项从 0 倍率开始由规则一次赋值，statSource 与 damage.anomalySource 一致；该次异放暴击时额外 40% 暴伤只进入 anomaly-settlement-critical-damage。其他元素、其他结算目标与未选择本项均不获得该倍率或 40%。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 4
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/talent/4/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1641:nanoka:m4-anomaly-settlement-electric:mindscape:4",
+            "agent:1641:nanoka:m4-anomaly-settlement-electric:mindscape:4-crit-damage"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "pheony:m4-anomaly-settlement",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "anomaly-source",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-ether",
+      "catalogEntityId": "agents:pheony",
+      "name": "影画4 · 异放结算（以太）",
+      "conditionDescription": "影画4：[烬火追魂]或[普通攻击：焚罪]终结一击命中处于异常状态的敌人时，额外触发一次[异放]，固定结算 600% 倍率的以太属性异常伤害（本项目归一基础倍率 3.75 = 原异常系数 × 6；ZZZ-HP 的 anomalyBaseExpected 不含原异常系数）。本选项只覆盖以太元素：调用方声明本次触发与命中元素，命中以 uncategorized 分类携带独立目标、以 anomaly-settlement 结算，伤害项从 0 倍率开始由规则一次赋值，statSource 与 damage.anomalySource 一致；该次异放暴击时额外 40% 暴伤只进入 anomaly-settlement-critical-damage。其他元素、其他结算目标与未选择本项均不获得该倍率或 40%。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 4
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/talent/4/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1641:nanoka:m4-anomaly-settlement-ether:mindscape:4",
+            "agent:1641:nanoka:m4-anomaly-settlement-ether:mindscape:4-crit-damage"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "pheony:m4-anomaly-settlement",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "anomaly-source",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-wind",
+      "catalogEntityId": "agents:pheony",
+      "name": "影画4 · 异放结算（风）",
+      "conditionDescription": "影画4：[烬火追魂]或[普通攻击：焚罪]终结一击命中处于异常状态的敌人时，额外触发一次[异放]，固定结算 600% 倍率的风属性异常伤害（本项目归一基础倍率 75 = 原异常系数 × 6；ZZZ-HP 的 anomalyBaseExpected 不含原异常系数）。本选项只覆盖风元素：调用方声明本次触发与命中元素，命中以 uncategorized 分类携带独立目标、以 anomaly-settlement 结算，伤害项从 0 倍率开始由规则一次赋值，statSource 与 damage.anomalySource 一致；该次异放暴击时额外 40% 暴伤只进入 anomaly-settlement-critical-damage。其他元素、其他结算目标与未选择本项均不获得该倍率或 40%。",
+      "target": "self",
+      "variants": [
+        {
+          "target": "self",
+          "configuration": {
+            "minimumMindscape": 4
+          },
+          "status": "converted",
+          "references": [
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/talent/4/desc"
+            }
+          ],
+          "effectIds": [
+            "agent:1641:nanoka:m4-anomaly-settlement-wind:mindscape:4",
+            "agent:1641:nanoka:m4-anomaly-settlement-wind:mindscape:4-crit-damage"
+          ],
+          "maximumLayers": 1,
+          "inputs": [],
+          "applicability": {},
+          "differences": [],
+          "mechanism": {
+            "kind": "independent-settlement",
+            "damageItemRequirements": [
+              {
+                "itemId": "pheony:m4-anomaly-settlement",
+                "stat": "attack",
+                "role": "base",
+                "allowedModes": ["direct"],
+                "source": "anomaly-source",
+                "requiredDirectMultiplier": 0,
+                "requiredSkillCategory": "uncategorized"
+              }
+            ]
+          }
+        }
+      ]
     }
   ],
   "skillTargets": [
@@ -56077,6 +56401,14 @@
       "agentEntityId": "1641",
       "category": "basic",
       "name": "普通攻击：焚罪",
+      "countsAsFollowUp": false
+    },
+    {
+      "targetId": "zzz-hp:skill:pheony-m4-anomaly-settlement",
+      "upstreamId": null,
+      "agentEntityId": "1641",
+      "category": "uncategorized",
+      "name": "影画4异放结算",
       "countsAsFollowUp": false
     },
     {
