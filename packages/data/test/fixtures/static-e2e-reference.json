@@ -4,7 +4,7 @@
     "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
     "fairyBaseline": "bae8aaa278632e731440e29d22fe38067c8fb99b",
     "gameVersion": "3.3",
-    "method": "Pinned upstream pure functions + independently reproduced direct-damage and sharpen chains; precise Nanoka inputs, explicit Ben and Claret permanent-conversion supplements and existing Astra M2 correction. Not the upstream application.",
+    "method": "Pinned upstream pure functions + independently reproduced direct-damage and sharpen chains; precise Nanoka inputs, explicit Ben and Claret permanent-conversion supplements, existing Astra M2 correction, and the Roxy M6 / Claret M1 multiplier corrections from frozen Nanoka text. Not the upstream application.",
     "resources": [
       {
         "path": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
@@ -483,12 +483,28 @@
         "sha256": "d712018704c4a6c61026c705c7a4c40dbec8698e628b4b50fe6ad05573e5c3c9"
       },
       {
+        "path": "agents/1621/data.json",
+        "sha256": "887cd398e0b32b07ca2c7752e220af1802410889303440b2efe4410ff5fd7b57"
+      },
+      {
+        "path": "w-engines/14162/data.json",
+        "sha256": "830411317d3b65514d077e9ce4344344c8e8cda9f48cdf962bd954ddf5cfdbb3"
+      },
+      {
+        "path": "w-engines/14162/details.zh.json",
+        "sha256": "bc7c46871ff259a1c249fe62493ff69d22aa279273e084efcb0783bc4f48a456"
+      },
+      {
         "path": "agents/1031/details.zh.json",
         "sha256": "a35b72056c57ba7eba71300e2e51691190c052362c4cc55e8bccfb9787cdab71"
       },
       {
         "path": "agents/1371/details.zh.json",
         "sha256": "bcf0924fe9fbdc799e4118e5590aef75e2b9bd1d0b0e0cf964179bfabcd77a01"
+      },
+      {
+        "path": "agents/1621/details.zh.json",
+        "sha256": "4b4f267a85665ace084d57c47d7202d5687009a98f2c0873b0c89e8124b329e3"
       },
       {
         "path": "agents/1581/details.zh.json",
@@ -1224,6 +1240,55 @@
         "penRate": 0,
         "dmgBonus": 0,
         "pen": 0
+      }
+    },
+    "roxy": {
+      "panel": {
+        "stats": {
+          "health": 10954.1437,
+          "attack": 3102.85323,
+          "defense": 825.6281,
+          "impact": 100,
+          "anomalyProficiency": 63,
+          "anomalyMastery": 110,
+          "energyRegen": 1.92,
+          "criticalRate": 0.706,
+          "criticalDamage": 1.508,
+          "penetrationRatio": 0,
+          "sharpCriticalDamage": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": {
+          "wind": 0.3
+        }
+      },
+      "permanentConversion": 0,
+      "affixCounts": {
+        "hpFlat": 3,
+        "hpPercent": 0,
+        "atkFlat": 5,
+        "atkPercent": 15,
+        "defFlat": 0,
+        "defPercent": 0,
+        "pen": 2,
+        "critRate": 18,
+        "critDmg": 11,
+        "mastery": 0
+      },
+      "upstreamExportedPanel": null,
+      "upstreamRoundedAlignedPanel": {
+        "hp": 10954.14,
+        "atk": 3102.85,
+        "def": 825.63,
+        "impact": 0,
+        "mastery": 63,
+        "anomalyControl": 110,
+        "energyRegen": 1.92,
+        "critRate": 70.6,
+        "critDmg": 150.8,
+        "penRate": 0,
+        "dmgBonus": 30,
+        "pen": 18
       }
     }
   },
@@ -2402,6 +2467,310 @@
         "displayedCritical": null
       },
       "upstreamStyleIntegerExpected": 431589
+    },
+    "roxy-m6-giant-windstorm": {
+      "reference": {
+        "action": {
+          "effectiveLevel": 12,
+          "source": {
+            "path": "agents/1621/details.zh.json",
+            "pointer": "/skill/special/description/9/param/3",
+            "expression": "{Skill:1621020, Prop:1001}",
+            "parameters": {
+              "1621020": {
+                "damagePercentage": 20840,
+                "damagePercentageGrowth": 1900
+              }
+            },
+            "descriptionPointer": "/skill/special/description/4/desc"
+          },
+          "upstreamSkill": null,
+          "upstreamSkillNote": "Pinned 991bb0e has no Roxy skill record; the action contract follows the project's fixed 7a4f2776 normal-ATK/special/wind convention.",
+          "multipliers": [4.174],
+          "element": "wind",
+          "individual": false,
+          "sharpen": false,
+          "luminize": false,
+          "settlementMultipliers": [10.435]
+        },
+        "conversionBase": null,
+        "contributions": [
+          {
+            "effectId": "agent:1621:nanoka:initial-energy-regen-conversion:attack",
+            "optionId": "nanoka:agents:1621:initial-energy-regen-conversion",
+            "holderId": "entity:roxy",
+            "pointer": "/passive/level/1621507/desc/0",
+            "stat": "atk",
+            "sourceValue": 360,
+            "divisor": 1,
+            "unit": "attack-points"
+          },
+          {
+            "effectId": "agent:1621:nanoka:m1-critical-damage",
+            "optionId": "nanoka:agents:1621:m1-critical-damage",
+            "holderId": "entity:roxy",
+            "pointer": "/talent/1/desc",
+            "stat": "critDmg",
+            "sourceValue": 40,
+            "divisor": 100,
+            "unit": "ratio"
+          },
+          {
+            "effectId": "agent:1621:nanoka:m6-giant-windstorm",
+            "optionId": "nanoka:agents:1621:m6-giant-windstorm",
+            "holderId": "entity:roxy",
+            "pointer": "/talent/6/desc",
+            "stat": "damageMultiplier",
+            "sourceValue": 2.5,
+            "divisor": 1,
+            "unit": "multiplier"
+          },
+          {
+            "effectId": "agent:1621:nanoka:m6-wind-resistance-ignore",
+            "optionId": "nanoka:agents:1621:m6-wind-resistance-ignore",
+            "holderId": "entity:roxy",
+            "pointer": "/talent/6/desc",
+            "stat": "resPen",
+            "sourceValue": 15,
+            "divisor": 100,
+            "unit": "ratio"
+          },
+          {
+            "effectId": "w-engine:14162:nanoka:crit-rate",
+            "optionId": "nanoka:w-engines:14162:crit-rate",
+            "holderId": "entity:roxy",
+            "pointer": "/talents/1/desc",
+            "stat": "critRate",
+            "sourceValue": 24,
+            "divisor": 100,
+            "unit": "ratio"
+          },
+          {
+            "effectId": "w-engine:14162:nanoka:wind-resistance-ignore",
+            "optionId": "nanoka:w-engines:14162:wind-resistance-ignore",
+            "holderId": "entity:roxy",
+            "pointer": "/talents/1/desc",
+            "stat": "resPen",
+            "sourceValue": 15,
+            "divisor": 100,
+            "unit": "ratio"
+          }
+        ],
+        "derivedInputs": {
+          "initialEnergyRegen": 1.92,
+          "convertedAttack": 360,
+          "convertedImpact": 28.799999999999997,
+          "impactConsumedByDamagePath": false
+        },
+        "formula": {
+          "multiplierFactor": 2.5,
+          "catalogMultipliers": [4.174],
+          "settlementMultipliers": [10.435],
+          "baseChain": 2687.4865443654144,
+          "criticalFactor": 2.9080000000000004,
+          "expectedFactor": 2.804968,
+          "notes": [
+            "ATK = min(960, max(0, 1.92 - 1.2) × 500) = 360; Impact = min(76.8, max(0, 1.92 - 1.2) × 40) = 28.799999999999997 (impact is not read by the direct-damage path)",
+            "CRIT DMG +40 percentage points",
+            "Giant Windstorm base item × 250% = × 2.5",
+            "Attacker wind resistance ignore +15 percentage points",
+            "Crimson Moon Casket R1: CRIT Rate +24 percentage points",
+            "Crimson Moon Casket R1: Wind RES ignore +15 percentage points"
+          ]
+        },
+        "finalStats": {
+          "attack": 3462.85323,
+          "health": 10954.1437,
+          "criticalRate": 0.946,
+          "criticalDamage": 1.9080000000000001
+        },
+        "factors": {
+          "damageBonus": 1.3,
+          "critical": 2.9080000000000004,
+          "expectedCritical": 2.804968,
+          "defense": 0.459224985540775,
+          "resistance": 1.3,
+          "stunDamage": 1,
+          "damageTaken": 1
+        },
+        "hits": [
+          {
+            "nonCritical": 28043.9220904531,
+            "critical": 81551.72543903762,
+            "expected": 78662.30405821405
+          }
+        ],
+        "totals": {
+          "nonCritical": 28043.9220904531,
+          "critical": 81551.72543903762,
+          "expected": 78662.30405821405,
+          "displayedNonCritical": null,
+          "displayedCritical": null
+        },
+        "upstreamStyleIntegerExpected": 78662
+      },
+      "upstreamAlignedTotals": {
+        "nonCritical": 28043.9220904531,
+        "critical": 81551.72543903762,
+        "expected": 78662.30405821405,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamRoundedTotals": {
+        "nonCritical": 28043.89593229324,
+        "critical": 81551.64937110875,
+        "expected": 78662.23068541271,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamStyleIntegerExpected": 78662,
+      "upstreamEvidence": "pinned-project-convention-only",
+      "boundaries": [
+        "只计算一次 aggregate 巨型风旋的一秒合计；不累计风能、风眼生成、余响每 3 秒/额外 2 次、逐击拆分或 M6 失衡提升。",
+        "M6 倍率只作用于 action:agent:1621:action:0024:base；0022/0023 及其他 special 项保留原倍率，不能自动变成三次事件。",
+        "初始回能 1.92 由装备面板独立推导并在调用方显式提供；选项不读取面板当前回能，缺少输入返回 MISSING_FACT。",
+        "未选择 M6 风抗忽视时不自动附带；M1 暴伤、14162 暴击率与两项风抗忽视互相独立。"
+      ]
+    },
+    "claret-m6-maim": {
+      "reference": {
+        "action": {
+          "effectiveLevel": 12,
+          "source": {
+            "path": "agents/1611/details.zh.json",
+            "pointer": "/skill/special/description/6/param/4",
+            "expression": "{Skill:1611013, Prop:1001}",
+            "parameters": {
+              "1611013": {
+                "damagePercentage": 81270,
+                "damagePercentageGrowth": 7390
+              }
+            }
+          },
+          "upstreamSkill": {
+            "id": "sk-claret-nk-1611013-毁伤",
+            "element": "电",
+            "multiplier": 16.256
+          },
+          "multipliers": [16.256],
+          "element": "electric",
+          "individual": false,
+          "sharpen": true,
+          "settlementMultipliers": [21.1328]
+        },
+        "conversionBase": null,
+        "contributions": [
+          {
+            "optionId": "agents:claret:mindscape:0:blk-mtrf598z-wr4jqt:eff-mtrf598z-80y7hh",
+            "holderId": "entity:claret",
+            "pointer": "/agents/6/mindscapeBuffs/0/effectBlocks/0/effects/0",
+            "stat": "critRate",
+            "sourceValue": 30
+          },
+          {
+            "optionId": "agents:claret:mindscape:0:blk-mtrgmqhd-srsnon:eff-mtrgmqhd-jgzfvq",
+            "holderId": "entity:claret",
+            "pointer": "/agents/6/mindscapeBuffs/0/effectBlocks/1/effects/0",
+            "stat": "sharpenCritDmgBonus",
+            "sourceValue": 25
+          },
+          {
+            "optionId": "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h5g2r-zj4y8t",
+            "holderId": "entity:claret",
+            "pointer": "/wengines/71/refinementBuffs/0/effectBlocks/0/effects/2",
+            "stat": "sharpenDmgBonus",
+            "sourceValue": 10
+          },
+          {
+            "effectId": "agent:1611:zzz-hp:eff-mtse9xm8-q641yp:blk-mtrkovf7-dqmjh3:mindscape:1",
+            "optionId": "agents:claret:mindscape:1:blk-mtrkovf7-dqmjh3:eff-mtse9xm8-q641yp",
+            "holderId": "entity:claret",
+            "pointer": "/agents/6/mindscapeBuffs/1/effectBlocks/0/effects/0",
+            "stat": "baseMultiplierIncrease",
+            "sourceValue": 0.3,
+            "divisor": 1,
+            "unit": "ratio"
+          },
+          {
+            "optionId": "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h4q1t-4jb1zr",
+            "holderId": "entity:claret",
+            "pointer": "/wengines/71/refinementBuffs/0/effectBlocks/0/effects/0",
+            "stat": "critRate",
+            "sourceValue": 25
+          },
+          {
+            "optionId": "w-engines:Scarlet-Craving:refinement:blk-mv3h4q1t-3m3v1q:eff-mv3h4zop-e2ecfr",
+            "holderId": "entity:claret",
+            "pointer": "/wengines/71/refinementBuffs/0/effectBlocks/0/effects/1",
+            "stat": "dmgBonus",
+            "sourceValue": 15
+          }
+        ],
+        "formula": {
+          "multiplierFactor": 1.3,
+          "catalogMultipliers": [16.256],
+          "settlementMultipliers": [21.1328],
+          "baseChain": 1540.4871366668597,
+          "criticalFactor": 7.2150375,
+          "expectedFactor": 7.2150375,
+          "notes": ["Corrected base multiplier × 130% = × 1.3"]
+        },
+        "finalStats": {
+          "attack": 1287.4365400000002,
+          "health": 8187.5949,
+          "defense": 2103.1579,
+          "criticalRate": 1.9278,
+          "criticalDamage": 1.508,
+          "sharpCriticalDamage": 1.75
+        },
+        "factors": {
+          "damageBonus": 1.45,
+          "sharpCritical": 7.2150375,
+          "expectedCritical": 7.2150375,
+          "defense": 0.459224985540775,
+          "resistance": 1,
+          "stunDamage": 1,
+          "damageTaken": 1,
+          "sharpenDamageBonus": 1.1
+        },
+        "hits": [
+          {
+            "nonCritical": 32554.806561753412,
+            "critical": 234884.15014829693,
+            "expected": 234884.15014829693
+          }
+        ],
+        "totals": {
+          "nonCritical": 32554.806561753412,
+          "critical": 234884.15014829693,
+          "expected": 234884.15014829693,
+          "displayedNonCritical": null,
+          "displayedCritical": null
+        },
+        "upstreamStyleIntegerExpected": 234884
+      },
+      "upstreamAlignedTotals": {
+        "nonCritical": 30223.29521648195,
+        "critical": 218062.2083604879,
+        "expected": 218062.2083604879,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamRoundedTotals": {
+        "nonCritical": 30223.32539439676,
+        "critical": 218062.42609527492,
+        "expected": 218062.42609527492,
+        "displayedNonCritical": null,
+        "displayedCritical": null
+      },
+      "upstreamStyleIntegerExpected": 218062,
+      "upstreamEvidence": "pinned-source-record-and-correction",
+      "boundaries": [
+        "调用方显式选择 action:agent:1611:action:0027 表示一次独立追加毁伤；不实现连携/终结后的自动触发、残痕消耗或事件时序。",
+        "M1 倍率乘区只作用于特殊技大类下的毁伤目标；0019 终结技不自动附加 0027，普通毁伤也不是 M6 专属动作。",
+        "M4 只作用于锻星第三段、连携与终结，不作用于毁伤；切换 M4 不改变毁伤结果。",
+        "M6 构建不等于自动触发毁伤；动作在 M0—M6 均可用，本场景不声称实现 M6 的自动追加。"
+      ]
     },
     "remiel-voidflare": {
       "reference": {
