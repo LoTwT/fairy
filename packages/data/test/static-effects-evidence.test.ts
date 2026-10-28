@@ -67,6 +67,13 @@ describe("static effects evidence path", () => {
     expect(verified).toContain(
       "semantics:agents/miyabi/mindscape/0/blk-ms4msho4-fuuot6/eff-ms4mu14z-vj4c3r",
     )
+    // 菲欧妮额外能力的 camp 12 成员集合由同一 integrated 索引派生并核验。
+    expect(verified).toContain(
+      "applicability:pheony-additional-ability:same-faction",
+    )
+    expect(verified).toContain(
+      "semantics:agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-10",
+    )
     // 批次 06 的六项补充证据（含被动行 rank 与 data.json level 元数据的映射）
     // 也由同一入口逐条核验。
     for (const supplementId of [

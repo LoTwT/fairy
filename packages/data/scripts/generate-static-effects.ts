@@ -1,4 +1,8 @@
 import { LUCY_GUARD_BOAR_FACTION } from "./static-effects/lucy-guard-boar.ts"
+import {
+  PHEONY_ADDITIONAL_ABILITY_INDEX_EVIDENCE,
+  verifyPheonyAdditionalAbilitySameFactionIndex,
+} from "./static-effects/pheony-additional.ts"
 import { createHash } from "node:crypto"
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises"
 import { dirname, join, resolve } from "node:path"
@@ -184,6 +188,19 @@ export async function verifyStaticEffectsEvidence(
     if (!jsonPointerExists(JSON.parse(factionBytes.toString("utf8")), pointer))
       throw new Error(`Lucy faction evidence pointer missing: ${pointer}`)
   verified.push("mechanism:lucy-guard-boar:faction")
+  if (
+    PHEONY_ADDITIONAL_ABILITY_INDEX_EVIDENCE.path !==
+      LUCY_GUARD_BOAR_FACTION.path ||
+    PHEONY_ADDITIONAL_ABILITY_INDEX_EVIDENCE.sha256 !==
+      LUCY_GUARD_BOAR_FACTION.sha256
+  )
+    throw new Error(
+      "Pheony additional ability faction evidence must reference the same verified Nanoka index",
+    )
+  verifyPheonyAdditionalAbilitySameFactionIndex(
+    JSON.parse(factionBytes.toString("utf8")),
+  )
+  verified.push("applicability:pheony-additional-ability:same-faction")
   for (const [key, entry] of Object.entries(evidence)) {
     await verifyEvidenceReferences(
       publication,
