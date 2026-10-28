@@ -55,8 +55,10 @@ import {
 } from "./semantics.ts"
 import { buildRemielleSpecialVoidflareMechanism } from "./mechanisms.ts"
 import { PHEONY_ADDITIONAL_ABILITY_TEAM_CONDITION_DIFFERENCE_ID } from "./pheony-additional.ts"
+import { verifyPheonyM4Registrations } from "./pheony-m4.ts"
 import {
   SUPPLEMENTS,
+  SUPPLEMENT_SHARED_SKILL_TARGETS,
   SOURCE_RECORD_SHAPE_FIELDS,
   type ClauseContextGuardEntry,
   type Supplement,
@@ -5188,6 +5190,7 @@ export function convertSource(
   verifyRoxyAdditionalRegistrations(supplements)
   verifyRoxyCoreWindRegistrations(supplements)
   verifyYixuanThunderRegistrations(supplements)
+  verifyPheonyM4Registrations(supplements)
   verifyYanagiPolarityIsolation(collected.records, collected.entities)
   // 缺失条款与共存记录先验证，再编译普通记录；未知 stat / unsupported
   // 不得抢先掩盖完整来源上下文的漂移。实体缺失仍由补充身份校验拒绝。
@@ -5619,6 +5622,45 @@ export function convertSource(
   const supplementEntities: StaticCatalogEntity[] = []
   const supplementSkillTargets: StaticEffectCatalog["skillTargets"][number][] =
     []
+  /**
+   * 具名技能目标登记：单个补充可携带自己的目标，多个选项共享的目标由
+   * SUPPLEMENT_SHARED_SKILL_TARGETS 在选项处理前独立登记，避免目标存在性
+   * 依赖某一个元素的补充是否仍在。
+   */
+  const registerSupplementSkillTarget = (
+    declared: NonNullable<Supplement["skillTarget"]>,
+    label: string,
+  ) => {
+    const targetId =
+      label === "nanoka:agents:lucy:m6-boar-rain"
+        ? "nanoka:lucy-m6-boar-rain"
+        : `zzz-hp:skill:${declared.targetId}`
+    if (supplementSkillTargets.some((t) => t.targetId === targetId))
+      throw new Error(
+        `Supplement ${label} repeats the declared skill target ${targetId}`,
+      )
+    supplementSkillTargets.push({
+      targetId,
+      upstreamId: null,
+      agentEntityId: declared.agentEntityId,
+      category: declared.category,
+      name: declared.name,
+      // 真实追加攻击身份（如零号·安比电磁涡流）随目标展开 follow-up 标签；
+      // 普通独立目标保持 false。
+      countsAsFollowUp: declared.countsAsFollowUp === true,
+    })
+  }
+  for (const target of SUPPLEMENT_SHARED_SKILL_TARGETS) {
+    if (
+      !target.supplementIds.some((supplementId) =>
+        supplements.some(
+          (supplement) => supplement.supplementId === supplementId,
+        ),
+      )
+    )
+      continue
+    registerSupplementSkillTarget(target, "shared-supplement-target")
+  }
   // 补充实体索引与固定源迁移：先按全部实体类补充（独立实体补充，或
   // unsupported 声明为反向缺项条款携带的实体）建立 catalog ID 索引，不依赖
   // 登记数组顺序（后续 option 类补充可指向补充实体）。固定来源已补出同一
@@ -5714,27 +5756,11 @@ export function convertSource(
     }
     // 补充条款的具名技能目标（upstreamId 为 null）：登记进目录供技能生成器
     // 绑定与消费端显式选中；同 ID 目标重复登记即拒绝。
-    if (supplement.skillTarget) {
-      const declared = supplement.skillTarget
-      const targetId =
-        supplement.supplementId === "nanoka:agents:lucy:m6-boar-rain"
-          ? "nanoka:lucy-m6-boar-rain"
-          : `zzz-hp:skill:${declared.targetId}`
-      if (supplementSkillTargets.some((t) => t.targetId === targetId))
-        throw new Error(
-          `Supplement ${supplement.supplementId} repeats the declared skill target ${targetId}`,
-        )
-      supplementSkillTargets.push({
-        targetId,
-        upstreamId: null,
-        agentEntityId: declared.agentEntityId,
-        category: declared.category,
-        name: declared.name,
-        // 真实追加攻击身份（如零号·安比电磁涡流）随目标展开 follow-up 标签；
-        // 普通独立目标保持 false。
-        countsAsFollowUp: declared.countsAsFollowUp === true,
-      })
-    }
+    if (supplement.skillTarget)
+      registerSupplementSkillTarget(
+        supplement.skillTarget,
+        supplement.supplementId,
+      )
     if (supplement.kind === "unsupported-option") {
       // 如实不可选的声明选项：登记 formula-out-of-scope 变体与越界去向，
       // 不创建规则；生成期核对实体映射、配置域与取值、选项身份，并按实体
@@ -5790,16 +5816,20 @@ export function convertSource(
       })
       continue
     }
-    const buildSupplementRule = (spec: SupplementRuleSpec): EffectRule =>
-      ({
+    const buildSupplementRule = (spec: SupplementRuleSpec): EffectRule => {
+      const references =
+        spec.references ?? supplement.evidence.map(supplementReference)
+      if (references.length === 0)
+        throw new Error(
+          `Supplement ${supplement.supplementId} rule ${spec.effectId} has no source references`,
+        )
+      return {
         kind: "contribution",
         effectId: spec.effectId,
         source: {
           identity: spec.identity,
           section: spec.section,
-          references: supplement.evidence.map(
-            supplementReference,
-          ) as unknown as NonEmpty<SourceReference>,
+          references: references as unknown as NonEmpty<SourceReference>,
         },
         config: spec.config,
         parameters: spec.parameters,
@@ -5817,7 +5847,8 @@ export function convertSource(
         ...(spec.uniqueness === undefined
           ? {}
           : { uniqueness: spec.uniqueness }),
-      }) as ContributionRule
+      } as ContributionRule
+    }
     // 同一选项的多条完整状态规则：全部规则共用同一变体、输入与层数上限；
     // 层数上限不一致即拒绝（0 层同时关闭、1 层同时生效，不提供半状态）。
     const ruleSpecs = [supplement.rule, ...(supplement.additionalRules ?? [])]
@@ -6158,7 +6189,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "57",
+    revision: "58",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: effects.some(

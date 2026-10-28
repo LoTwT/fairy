@@ -1,4 +1,8 @@
 import { LUCY_GUARD_BOAR_SUPPLEMENTS } from "./lucy-guard-boar.ts"
+import {
+  PHEONY_M4_SHARED_SKILL_TARGETS,
+  PHEONY_M4_SUPPLEMENTS,
+} from "./pheony-m4.ts"
 import { ROXY_MINDSCAPE_SUPPLEMENTS } from "./roxy-mindscapes.ts"
 import { ROXY_ADDITIONAL_SUPPLEMENTS } from "./roxy-additional.ts"
 import { YIXUAN_THUNDER_SUPPLEMENTS } from "./yixuan-thunder.ts"
@@ -16,6 +20,7 @@ import type {
   PotentialLevel,
   SkillCategory,
   SourceIdentity,
+  SourceReference,
   SpecialSkillLevel,
   StaticCatalogEntity,
   StaticCatalogInputRequirement,
@@ -132,6 +137,12 @@ export interface SupplementRuleSpec {
   readonly when: Condition<"contribution">
   readonly operation: ContributionOperation
   readonly maximumLayers: number
+  /**
+   * 该规则自己的来源引用；省略时沿用补充条目的 evidence。用于同一选项的
+   * 多条规则必须绑定不同条款证据的情况（如主倍率与同事件附加暴伤），
+   * 规则级引用必须非空，且生成时逐条核对。
+   */
+  readonly references?: readonly SourceReference[]
   /** 透传既有规则唯一性；省略时保留原加算语义。 */
   readonly uniqueness?: UniquenessPolicy
   /**
@@ -179,6 +190,27 @@ export interface SupplementVariantSpec {
    */
   readonly layerCountMaximumLayers?: number
 }
+
+/**
+ * 多个补充选项共享的具名技能目标。目标登记与单个选项解耦：移除任一选项
+ * 不影响其余选项解析同一目标；生产登记仍只写入一次。
+ */
+export type SupplementSharedSkillTarget = {
+  readonly targetId: string
+  readonly agentEntityId: string | null
+  readonly category: SkillCategory
+  readonly name: string
+  readonly countsAsFollowUp?: boolean
+  /**
+   * 共享该目标的全部补充；任一条仍在传入集合中时登记目标。用于子集转换
+   * 不引入无关目标，同时保证移除单个共享者不影响其余选项解析。
+   */
+  readonly supplementIds: readonly string[]
+}
+
+/** 同一技能目标绑定多个补充选项时的共享登记；见 SupplementSharedSkillTarget。 */
+export const SUPPLEMENT_SHARED_SKILL_TARGETS: readonly SupplementSharedSkillTarget[] =
+  [...PHEONY_M4_SHARED_SKILL_TARGETS]
 
 /**
  * 单个培养位置的具名来源上下文守卫条目：见 SupplementBase.clauseContextGuard
@@ -6013,4 +6045,5 @@ export const SUPPLEMENTS: readonly Supplement[] = [
   miyabiFrostburnBreakDamage,
   janeMindscape6ProficiencyDamage,
   aliceMindscape6ProficiencyDamage,
+  ...PHEONY_M4_SUPPLEMENTS,
 ]

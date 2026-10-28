@@ -119,7 +119,7 @@ describe("static effects authoring migration records", () => {
     )
   })
 
-  it("covers all 30 catalog mechanism variants across every arm", () => {
+  it("covers the 30 frozen authoring mechanism variants across every arm", () => {
     const baseline = readStaticArtifacts(BASELINE_DIRECTORY)
     const selectedOptionIds = new Set(
       MIGRATED_AUTHORING_RECORDS.map((record) => record.ids.optionId),
@@ -127,12 +127,21 @@ describe("static effects authoring migration records", () => {
     const mechanismOptions = baseline.catalog.options.filter((option) =>
       option.variants.some((variant) => variant.mechanism !== undefined),
     )
-    expect(mechanismOptions).toHaveLength(30)
+    // PR-B2 的六条 M4 独立结算选项由 converter 维护，明确不扩张 authoring
+    // 覆盖；其余机制选项必须仍由冻结的作者记录完整覆盖。
+    expect(mechanismOptions).toHaveLength(36)
+    const pheonyM4OptionIds = new Set(
+      mechanismOptions
+        .map((option) => option.optionId)
+        .filter((optionId) => optionId.startsWith("nanoka:agents:1641:m4-")),
+    )
+    expect(pheonyM4OptionIds.size).toBe(6)
     expect(
-      mechanismOptions.filter(
-        (option) => !selectedOptionIds.has(option.optionId),
-      ),
-    ).toEqual([])
+      mechanismOptions
+        .map((option) => option.optionId)
+        .filter((optionId) => !selectedOptionIds.has(optionId))
+        .sort(),
+    ).toEqual([...pheonyM4OptionIds].sort())
 
     const armCounts = new Map<string, number>()
     for (const option of mechanismOptions) {
@@ -146,13 +155,17 @@ describe("static effects authoring migration records", () => {
       const records = MIGRATED_AUTHORING_RECORDS.filter(
         (record) => record.ids.optionId === option.optionId,
       )
+      if (pheonyM4OptionIds.has(option.optionId)) {
+        expect(records).toHaveLength(0)
+        continue
+      }
       expect(records.length).toBeGreaterThan(0)
       const declared = records[0]?.option.variants[0]?.catalogMechanism
       if (declared !== undefined)
         expect(declared).toEqual(option.variants[0]?.mechanism)
     }
     expect(Object.fromEntries(armCounts)).toEqual({
-      "independent-settlement": 22,
+      "independent-settlement": 28,
       "element-buff-inputs": 2,
       "complete-state": 1,
       "holder-level": 1,
@@ -217,7 +230,19 @@ describe("static effects authoring migration records", () => {
         ),
       ),
     )
-    expect(authoredSupplementIds).toEqual(baselineIntegratedSupplementIds)
+    const pheonyM4SupplementIds = new Set(
+      baseline.catalog.options
+        .map((option) => option.optionId)
+        .filter((optionId) =>
+          optionId.startsWith("nanoka:agents:1641:m4-anomaly-settlement-"),
+        ),
+    )
+    expect(
+      [...pheonyM4SupplementIds].filter((id) => authoredSupplementIds.has(id)),
+    ).toEqual([])
+    expect(
+      new Set([...authoredSupplementIds, ...pheonyM4SupplementIds]),
+    ).toEqual(baselineIntegratedSupplementIds)
 
     const recordsByOption = new Map<string, EffectAuthoringRecord[]>()
     for (const record of MIGRATED_AUTHORING_RECORDS) {

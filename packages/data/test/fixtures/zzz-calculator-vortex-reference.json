@@ -50,8 +50,8 @@
       "examples/ye_shunguang_panel.example.json": "76888787b94ac026ec2ddd6e4e441452e3d2f12e2bfec9cf3b1e77fa04471b86"
     },
     "fairySources": {
-      "packages/data/definitions/effects/static.json": "e12ca8aa8f1497052c42965465bdebc8409dfe4206ff00b91944fc47bf3ef11a",
-      "packages/data/definitions/effects/static-catalog.json": "6ab706d8cefbf16e9f0b21ac41746df3bbc5f5cf1a3326e58b2c5f638b9ad228",
+      "packages/data/definitions/effects/static.json": "f7bada47889112f3d0bf806484e4c9d4317d2c5828c4388760c08d0f59e2de1e",
+      "packages/data/definitions/effects/static-catalog.json": "00c0334588313403bca0a432c6a970651b0051f3a55b82c5cc64557aac4b78c6",
       "packages/data/integrated/agents/1561/details.zh.json": "f2da8dfc1357ffb98dcb775d0febbe0df55828d4c61e38701df39040766a3b6f",
       "packages/core/src/formulas/anomaly-damage.ts": "f4cf30476254e86e65a2c8e436817d31af1cb210bec979a5d11ce7898e3058f9",
       "packages/core/src/effects/internal/static-catalog.ts": "14d4399e7a6a64536a7ccdaa8dacd9de863e9ca162ab671a0f825f79b478adac",
@@ -65,7 +65,7 @@
       "packageVersion": "0.5.0",
       "contractVersion": 3,
       "gameVersion": "3.3",
-      "snapshotId": "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da"
+      "snapshotId": "sha256:32f3756be0e5384a0a7ed8cdd6d9d8e493eb2159265147ff80d9312367568541"
     }
   },
   "inputLayer": "externally-declared-resolved-source-state",
@@ -107475,6 +107475,18 @@
         }
       },
       "currentSnapshotId": "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da"
+    },
+    {
+      "reason": "Revision 58 restores Pheony M4 six-element independent settlements on the current independent-settlement contract. The review fix binds the 600% multiplier and the 40% crit-damage rule to their own Nanoka clauses, isolates the M4 damage item so mixed hits cannot leak the 40%, and decouples the shared skill target from the physical element. Comparison scenarios never select these options, so native upstream captures and all numeric results stay frozen; only the current consumption snapshot and changed Fairy artifact digests are refreshed. B1 revision 57 and its 0554bf chain entry are preserved unchanged.",
+      "implementationBase": "f412c038",
+      "previous": {
+        "snapshotId": "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "c1b964b49c3c2eb6673032f79fe4f26deaf551fdbc981a373a1f4a3ecd7a27e7",
+          "packages/data/definitions/effects/static-catalog.json": "703618006eeaa8746afb8455b5206f127ccc6717b42d6988c8af683123ba514c"
+        }
+      },
+      "currentSnapshotId": "sha256:32f3756be0e5384a0a7ed8cdd6d9d8e493eb2159265147ff80d9312367568541"
     }
   ]
 }

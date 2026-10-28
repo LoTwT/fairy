@@ -1,7 +1,9 @@
 # 菲欧妮静态伤害链补全（5 PR）
 
-- 状态：PR-B1 已实施并本地提交，等待独立审查；未推送、未建 PR、未合并。
-- 基线：`origin/main @ 075822e2a2fb5f861df84074f0ca31b8d100fdf2`。
+- 状态：PR-B1 已 squash 合并；PR-B2 已实施，完成第 1 轮独立审查修复并本地
+  提交，等待第 2 轮审查；未推送、未建 PR、未合并。
+- 基线：`origin/main @ abd395d8dc1c1d2cb6026888eb04450243bd1b01`
+  （PR-B2 第 1 轮修复起点；B1 基线为 `0d2957790dcbf817d5b15078c03d30fc4e6c1dd1`）。
 - 固定来源：Nanoka `3.3.12+19634983`；ZZZ-HP
   `991bb0ef2a00387f8a1fa18293bbda17256d7270`（只读 Git 对象）。
 - 规范入口：[静态增益数据接入](../specs/data/zzz-hp-static-effects.md)、
@@ -166,3 +168,143 @@ camp 12 成员集合为 `1341 / 1471 / 1481 / 1541 / 1641`。生成期从固定
   既有规范页或 `docs/HISTORY.md`；未创建或重写数据管理记录。core/M1/额外能力
   组合与四通道计数由本 PR 回归固定，后续事件专用暴伤由后续 PR 在同一专用通道
   追加。
+
+## 4. PR-B2：M4 六元素独立异放
+
+### 4.1 原文与归一
+
+Nanoka `3.3.12+19634983` 的 `agents/1641/details.zh.json` 与
+`details.en.json` `/talent/4/desc` 同文：
+
+> [烬火追魂]以及[普通攻击：焚罪]终结一击命中处于异常状态的敌人时，额外触发
+> 一次[异放]效果，固定结算600%倍率的对应属性的属性异常伤害。
+
+ZZZ-HP 的 `anomalyBaseExpected` **不含**原异常系数，因此六元素最终倍率是
+原异常系数 × 6，而不是再乘一次原异常系数：
+
+| 元素 | 原异常系数 | 最终倍率 |
+| ---- | ---------: | -------: |
+| 物理 |       7.13 |    42.78 |
+| 火   |       0.50 |        3 |
+| 冰   |       5.00 |       30 |
+| 电   |       1.25 |      7.5 |
+| 以太 |      0.625 |     3.75 |
+| 风   |      12.50 |       75 |
+
+后续基础 CAL 不在本 PR 处理；CAL 本身不乘原异常系数，也不复用本 PR 的
+M4 倍率或 40% 规则。
+
+40% 额外暴伤不在 `/talent/4/desc`：该处只写固定 600% 异放。40% 的来源是
+同一 1641 详情文件的 `/skill/basic/description/1/desc` 与
+`/skill/chain/description/2/desc` 中英文同文（“该次[异放]效果触发暴击时，
+其暴击伤害额外提升40%”）。固定 ZZZ-HP rank0 `eff-9` 的
+`anomalyReleaseCritDmg: 40` 与该条款语义一致；主倍率与 40% 规则分别绑定各自
+的 references，不复用 `/talent/4/desc` 作为 40% 证据。
+
+### 4.2 当前机制契约
+
+六条选项沿用 D4 的稳定身份，但改用当前
+`variant.mechanism.kind = "independent-settlement"` 契约，不恢复旧 D4
+overlay、`nanoka-raw` 专用包或旧平铺 `damageItemRequirements` 字段：
+
+- `optionId`：`nanoka:agents:1641:m4-anomaly-settlement-<element>`；
+- 主 `effectId`：`agent:1641:nanoka:m4-anomaly-settlement-<element>:mindscape:4`；
+- 附加 40% `effectId`：同主身份加 `-crit-damage`；
+- 共享独立目标：`zzz-hp:skill:pheony-m4-anomaly-settlement`
+  （`upstreamId` 为 null、`agentEntityId` 为 1641、`uncategorized`）；
+  目标由独立的共享登记写入，不依赖任一元素选项；
+- 共享独立项：`pheony:m4-anomaly-settlement`，`attack` / `base` /
+  `direct` / `anomaly-source`，`requiredDirectMultiplier: 0`，
+  `requiredSkillCategory: "uncategorized"`；变体声明
+  `isolateDamageItems: true`，混合非 M4 项按 `CONTEXT_MISMATCH` 拒绝；
+- 每个选项一条最终倍率规则（`hit-adjustment damageMultiplier/add`，
+  `itemIds` 只含上述独立项）和一条同目标、同元素的
+  `anomaly-settlement-critical-damage` 附加规则，值固定 0.4；两条规则
+  分别绑定主倍率与 40% 的 references；
+- 变体 `configuration.minimumMindscape: 4`、`maximumLayers: 1`；
+  M0/M3 拒绝，M4—M6 可用；未选或 0 层关闭，不自动启用。
+
+固定源 `/agents/52/mindscapeBuffs/4` 当前是真实空 pack。补充登记
+`clauseContextGuard`（rank 4、`expectsEmptyPack: true`、直接/异放倍率
+stat 家族）：该位置出现任何新编码即拒绝生成并要求重新核对。
+
+固定源 `/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17`
+（`eff-9`，原始 `anomalyReleaseCritDmg: 40`）继续保持
+`unsupported` / `semantic-conflict` 迁移入口，不生成常驻贡献；40% 只由
+M4 选项的附加规则进入专用通道。
+
+### 4.3 第 1 轮独立审查修复
+
+- **混合结算泄漏**：M4 变体声明 `isolateDamageItems: true`。同一
+  anomaly-settlement 请求若同时携带非 M4 项与零倍率 M4 项，按
+  `CONTEXT_MISMATCH` 拒绝，40% 不再作用于整次 hit；单一项请求保持
+  火 3000 基础值与 40% 暴伤。
+- **快照链就地改写**：不再改写 B1 的 revision 57 链尾。以 B1 快照夹具为
+  输入，恢复第 17 条 `currentSnapshotId: 0554bf…`，并追加第 18 条 B2 条目
+  （`previous: 0554bf…`、`current: 32f3756b…`、前序制品 rev57
+  `c1b964b4…` / `70361800…`）。三份夹具都是 18 条；B1 的 17 条历史链
+  另有 SHA-256 冻结断言，任何就地改写都会失败。
+- **40% 来源引用**：主 600% 规则只引用 `/talent/4/desc`；40% 规则引用
+  `/skill/basic/description/1/desc`、`/skill/chain/description/2/desc`
+  中英文及固定源 `eff-9` Pointer。`eff-9` 继续是
+  `unsupported` / `semantic-conflict` 迁移入口。
+- **共享目标依赖首项**：共享目标改为独立登记
+  `SUPPLEMENT_SHARED_SKILL_TARGETS`，不再挂在 physical 补充上。移除任一
+  元素补充后，目标仍只登记一次，其余五条选项均通过实际目录结算。
+
+### 4.4 覆盖与制品
+
+- effects revision：`58`。
+- 规则 `935 → 947`；选项 `1,002 → 1,008`；catalog 变体
+  `1,483 → 1,489`；skill targets `131 → 132`。
+- coverage：`1,149 converted / 138 corrected / 88 unsupported`
+  （`1,375` 条）不变；catalog 变体 `1,223 converted / 144 corrected /
+122 unsupported`。
+- 补充记录：`102 → 108`（`68 → 74` integrated、34 out-of-scope），
+  补充规则 `72 → 84`、补充选项 `63 → 69`；catalog `differences` 保持 51。
+- 三份 effects 制品由固定来源连续生成两次，逐字节一致后安装；技能清单
+  `staticCatalogSha256` 由 `generate:agent-actions` 同步，60 个动作文件
+  与 registry 字节不变。计算快照为 `32f3756b…`。
+
+## 5. PR-B2 验证记录
+
+- 红测：未修代码上恢复并启用 core
+  `packages/core/test/effects/pr-d4b-pheony-m4.test.ts`，`19 failed /
+0 passed`（六选项、独立目标与 40% 规则均不存在）；新增 data
+  `pr-b2-pheony-m4-conversion.test.ts` 为 `9 failed / 1 passed`（唯一通过
+  的是固定 `eff-9` 仍为 semantic-conflict）。实施后 core `20 passed`，
+  data 转换 `11 passed`、发布制品消费 `2 passed`。
+- 第 1 轮审查红测：新增四条回归在未修代码上得到 core `1 failed /
+19 passed`、data `4 failed / 12 passed`，分别覆盖混合项 40% 泄漏、
+  revision 57 链尾被改写、40% 规则误引 `/talent/4/desc`、移除元素后共享
+  目标消失。修复后对应 core `20 passed`、data `12 passed`。
+- 消融：逐元素移除一条补充后该元素选项消失、其余五个仍在且都能实际
+  结算；移除 `-crit-damage` 附加规则后同配置 `anomalyCritical` 由 1.4
+  降为 1.0；移除元素主规则后该选项不能再结算；混合非 M4 项与 M4 项同
+  hit 请求按 `CONTEXT_MISMATCH` 拒绝；未选 M4 时独立项倍率为 0 且没有
+  40%，其他独立结算目标也不获得 M4 倍率或 40%。固定 `eff-9` 没有生成
+  可执行规则，证明常驻 40% 不能被错误复用。
+- 制品与快照链：固定源 `991bb0e` 重复生成的 `static.json` /
+  `static-catalog.json` / `static-coverage.json` 两两 `cmp` 一致，且与
+  安装后的正式制品逐字节一致。摘要：static `f7bada47…`、
+  catalog `00c03345…`、coverage `c0a9d5e3…`。三份 calculator 夹具均为
+  18 条；B1 的 17 条历史链摘要保持原样，新增 SHA-256 冻结断言防止就地改写。
+- 定向回归：core `20 passed`；data 转换 `12 passed`、发布制品消费
+  `2 passed`、快照链 `4 passed`、static-e2e `45 passed`，
+  static-team-differential 与三份 zzz-calculator 合计 `400 passed`；
+  evidence 集成用例 `3 passed`，覆盖六条 Nanoka 证据、陈旧摘要与缺失
+  Pointer。data unit 全量 `114 files / 4,844 passed`。
+- 生成期门禁：`authoring:verify` 99 条记录、89 个 option group、24 个
+  coverage 位置、19 个技能目标、68 条补充记录；语义差异 0，三制品字节比较
+  通过。`verify:artifact-dependencies` 730 个节点、915 条边、0 个违规。
+  `audit:data-identity` 为 `matched`，91 条既有问题，`newProblems=[]`、
+  `resolvedProblems=[]`。
+- `pnpm check`：退出码 0。core `101 passed / 2 skipped` 文件、
+  `5,724 passed / 11 skipped` 用例；data `114 files / 4,844 passed`；
+  core 打包消费 `1 passed`、data 打包消费 `2 passed`。`pnpm lint` 0 error
+  （137 条既有 warning）。
+- `pnpm format:check`：2,936 个文件格式通过，退出 0。
+- 边界：未修改 core/shared 生产代码、`packages/data/integrated`、动作目录、
+  来源版本、版本号、CI、既有规范页或 `docs/HISTORY.md`；未扩张 authoring
+  覆盖，未创建或重写数据管理记录。触发招式、异常状态与命中时点由调用方
+  声明；本 PR 不模拟异常积蓄、持续时间或动作时间线。

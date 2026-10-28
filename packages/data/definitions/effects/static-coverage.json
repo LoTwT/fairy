@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "57",
+  "revision": "58",
   "source": {
     "repository": "LoTwT/ZZZ-HP",
     "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
@@ -16024,7 +16024,7 @@
       "effectIds": [],
       "status": "unsupported",
       "reason": "semantic-conflict",
-      "explanation": "M4 的“该次[异放]效果触发暴击时，其暴击伤害额外提升40%”只属于 M4 触发的异放结算；固定记录是自身常驻 anomalyReleaseCritDmg +40。D4-1a 暂不把它当常驻异放暴伤执行，D4-1b 将按 anomaly-settlement-critical-damage 通道绑定到 M4 600% 结算选项。",
+      "explanation": "M4 的“该次[异放]效果触发暴击时，其暴击伤害额外提升40%”只属于 M4 触发的异放结算；固定记录是自身常驻 anomalyReleaseCritDmg +40。该位置继续保持 semantic-conflict 迁移入口，不生成常驻异放暴伤；M4 六元素独立结算选项的附加规则把同一 40% 只追加到本次 anomaly-settlement-critical-damage。",
       "normalizationChanges": [],
       "rawValue": 40,
       "normalizedValue": 40
@@ -33040,6 +33040,84 @@
       "supportedRanks": "影画 6；层数 0—1",
       "computationTarget": "catalog option on the mapped agent entity",
       "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:1641:m4-anomaly-settlement-physical",
+      "source": "nanoka-integrated@3.3.12+19634983 agents/1641 /talent/4/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-physical",
+      "effectIds": [
+        "agent:1641:nanoka:m4-anomaly-settlement-physical:mindscape:4",
+        "agent:1641:nanoka:m4-anomaly-settlement-physical:mindscape:4-crit-damage"
+      ],
+      "supportedRanks": "影画 4—6；层数 0—1",
+      "computationTarget": "catalog option on the mapped agent entity; the independent settlement reuses the original anomaly source",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:1641:m4-anomaly-settlement-fire",
+      "source": "nanoka-integrated@3.3.12+19634983 agents/1641 /talent/4/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-fire",
+      "effectIds": [
+        "agent:1641:nanoka:m4-anomaly-settlement-fire:mindscape:4",
+        "agent:1641:nanoka:m4-anomaly-settlement-fire:mindscape:4-crit-damage"
+      ],
+      "supportedRanks": "影画 4—6；层数 0—1",
+      "computationTarget": "catalog option on the mapped agent entity; the independent settlement reuses the original anomaly source",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:1641:m4-anomaly-settlement-ice",
+      "source": "nanoka-integrated@3.3.12+19634983 agents/1641 /talent/4/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-ice",
+      "effectIds": [
+        "agent:1641:nanoka:m4-anomaly-settlement-ice:mindscape:4",
+        "agent:1641:nanoka:m4-anomaly-settlement-ice:mindscape:4-crit-damage"
+      ],
+      "supportedRanks": "影画 4—6；层数 0—1",
+      "computationTarget": "catalog option on the mapped agent entity; the independent settlement reuses the original anomaly source",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:1641:m4-anomaly-settlement-electric",
+      "source": "nanoka-integrated@3.3.12+19634983 agents/1641 /talent/4/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-electric",
+      "effectIds": [
+        "agent:1641:nanoka:m4-anomaly-settlement-electric:mindscape:4",
+        "agent:1641:nanoka:m4-anomaly-settlement-electric:mindscape:4-crit-damage"
+      ],
+      "supportedRanks": "影画 4—6；层数 0—1",
+      "computationTarget": "catalog option on the mapped agent entity; the independent settlement reuses the original anomaly source",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:1641:m4-anomaly-settlement-ether",
+      "source": "nanoka-integrated@3.3.12+19634983 agents/1641 /talent/4/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-ether",
+      "effectIds": [
+        "agent:1641:nanoka:m4-anomaly-settlement-ether:mindscape:4",
+        "agent:1641:nanoka:m4-anomaly-settlement-ether:mindscape:4-crit-damage"
+      ],
+      "supportedRanks": "影画 4—6；层数 0—1",
+      "computationTarget": "catalog option on the mapped agent entity; the independent settlement reuses the original anomaly source",
+      "status": "integrated"
+    },
+    {
+      "supplementId": "nanoka:agents:1641:m4-anomaly-settlement-wind",
+      "source": "nanoka-integrated@3.3.12+19634983 agents/1641 /talent/4/desc",
+      "kind": "option",
+      "optionId": "nanoka:agents:1641:m4-anomaly-settlement-wind",
+      "effectIds": [
+        "agent:1641:nanoka:m4-anomaly-settlement-wind:mindscape:4",
+        "agent:1641:nanoka:m4-anomaly-settlement-wind:mindscape:4-crit-damage"
+      ],
+      "supportedRanks": "影画 4—6；层数 0—1",
+      "computationTarget": "catalog option on the mapped agent entity; the independent settlement reuses the original anomaly source",
+      "status": "integrated"
     }
   ],
   "summary": {
@@ -33047,17 +33125,17 @@
     "packs": 1118,
     "emptyPacks": 397,
     "rawEffects": 1375,
-    "rules": 935,
-    "options": 1002,
+    "rules": 947,
+    "options": 1008,
     "converted": 1149,
     "corrected": 138,
     "unsupported": 88,
     "supplements": {
-      "records": 102,
-      "rules": 72,
-      "options": 63,
+      "records": 108,
+      "rules": 84,
+      "options": 69,
       "entities": 0,
-      "integrated": 68,
+      "integrated": 74,
       "outOfScope": 34
     }
   },

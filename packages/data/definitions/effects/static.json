@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "57",
+  "revision": "58",
   "effects": [
     {
       "kind": "contribution",
@@ -54237,6 +54237,1152 @@
           "kind": "literal",
           "unit": "ratio",
           "value": 0.15
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1641:nanoka:m4-anomaly-settlement-electric:mindscape:4",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1641"
+        },
+        "section": "影画4：生命尽头与冷酷仙境（异放结算）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/talent/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/talent/4/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["electric"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:pheony-m4-anomaly-settlement"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "add",
+        "itemIds": ["pheony:m4-anomaly-settlement"],
+        "value": {
+          "kind": "literal",
+          "unit": "multiplier",
+          "value": 7.5
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1641:nanoka:m4-anomaly-settlement-electric:mindscape:4-crit-damage",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1641"
+        },
+        "section": "影画4：生命尽头与冷酷仙境（异放暴伤）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "zzz-hp",
+            "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["electric"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:pheony-m4-anomaly-settlement"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "anomaly-settlement-critical-damage",
+        "value": {
+          "kind": "literal",
+          "unit": "ratio",
+          "value": 0.4
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1641:nanoka:m4-anomaly-settlement-ether:mindscape:4",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1641"
+        },
+        "section": "影画4：生命尽头与冷酷仙境（异放结算）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/talent/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/talent/4/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["ether"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:pheony-m4-anomaly-settlement"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "add",
+        "itemIds": ["pheony:m4-anomaly-settlement"],
+        "value": {
+          "kind": "literal",
+          "unit": "multiplier",
+          "value": 3.75
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1641:nanoka:m4-anomaly-settlement-ether:mindscape:4-crit-damage",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1641"
+        },
+        "section": "影画4：生命尽头与冷酷仙境（异放暴伤）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "zzz-hp",
+            "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["ether"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:pheony-m4-anomaly-settlement"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "anomaly-settlement-critical-damage",
+        "value": {
+          "kind": "literal",
+          "unit": "ratio",
+          "value": 0.4
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1641:nanoka:m4-anomaly-settlement-fire:mindscape:4",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1641"
+        },
+        "section": "影画4：生命尽头与冷酷仙境（异放结算）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/talent/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/talent/4/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["fire"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:pheony-m4-anomaly-settlement"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "add",
+        "itemIds": ["pheony:m4-anomaly-settlement"],
+        "value": {
+          "kind": "literal",
+          "unit": "multiplier",
+          "value": 3
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1641:nanoka:m4-anomaly-settlement-fire:mindscape:4-crit-damage",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1641"
+        },
+        "section": "影画4：生命尽头与冷酷仙境（异放暴伤）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "zzz-hp",
+            "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["fire"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:pheony-m4-anomaly-settlement"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "anomaly-settlement-critical-damage",
+        "value": {
+          "kind": "literal",
+          "unit": "ratio",
+          "value": 0.4
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1641:nanoka:m4-anomaly-settlement-ice:mindscape:4",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1641"
+        },
+        "section": "影画4：生命尽头与冷酷仙境（异放结算）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/talent/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/talent/4/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["ice"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:pheony-m4-anomaly-settlement"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "add",
+        "itemIds": ["pheony:m4-anomaly-settlement"],
+        "value": {
+          "kind": "literal",
+          "unit": "multiplier",
+          "value": 30
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1641:nanoka:m4-anomaly-settlement-ice:mindscape:4-crit-damage",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1641"
+        },
+        "section": "影画4：生命尽头与冷酷仙境（异放暴伤）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "zzz-hp",
+            "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["ice"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:pheony-m4-anomaly-settlement"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "anomaly-settlement-critical-damage",
+        "value": {
+          "kind": "literal",
+          "unit": "ratio",
+          "value": 0.4
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1641:nanoka:m4-anomaly-settlement-physical:mindscape:4",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1641"
+        },
+        "section": "影画4：生命尽头与冷酷仙境（异放结算）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/talent/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/talent/4/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["physical"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:pheony-m4-anomaly-settlement"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "add",
+        "itemIds": ["pheony:m4-anomaly-settlement"],
+        "value": {
+          "kind": "literal",
+          "unit": "multiplier",
+          "value": 42.78
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1641:nanoka:m4-anomaly-settlement-physical:mindscape:4-crit-damage",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1641"
+        },
+        "section": "影画4：生命尽头与冷酷仙境（异放暴伤）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "zzz-hp",
+            "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["physical"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:pheony-m4-anomaly-settlement"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "anomaly-settlement-critical-damage",
+        "value": {
+          "kind": "literal",
+          "unit": "ratio",
+          "value": 0.4
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1641:nanoka:m4-anomaly-settlement-wind:mindscape:4",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1641"
+        },
+        "section": "影画4：生命尽头与冷酷仙境（异放结算）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/talent/4/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/talent/4/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["wind"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:pheony-m4-anomaly-settlement"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "hit-adjustment",
+        "field": "damageMultiplier",
+        "operator": "add",
+        "itemIds": ["pheony:m4-anomaly-settlement"],
+        "value": {
+          "kind": "literal",
+          "unit": "multiplier",
+          "value": 75
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1641:nanoka:m4-anomaly-settlement-wind:mindscape:4-crit-damage",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1641"
+        },
+        "section": "影画4：生命尽头与冷酷仙境（异放暴伤）",
+        "references": [
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "zzz-hp",
+            "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 4
+        }
+      },
+      "parameters": {},
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "holder"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["anomaly-settlement"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["wind"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.skillTag",
+            "values": ["zzz-hp:skill:pheony-m4-anomaly-settlement"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "anomaly-settlement-critical-damage",
+        "value": {
+          "kind": "literal",
+          "unit": "ratio",
+          "value": 0.4
         }
       }
     },

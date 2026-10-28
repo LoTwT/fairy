@@ -158,7 +158,7 @@ describe("static data conversion", () => {
       ],
     }
     const result = convertSource(source, functions, [], [])
-    expect(result.definitions.revision).toBe("57")
+    expect(result.definitions.revision).toBe("58")
     for (const option of result.catalog.options) {
       const variant = option.variants[0]!
       const sameBlock = option.optionId.endsWith("unverified-same-block")
@@ -414,7 +414,7 @@ const remielData = (): SourceData => ({
 describe("remielle mindscape 2 attribute anomaly scope revision", () => {
   it("adds the [异常] profession and attribute anomaly damage scope from the reviewed text", () => {
     const result = convertSource(remielData(), functions, [], [])
-    expect(result.definitions.revision).toBe("57")
+    expect(result.definitions.revision).toBe("58")
     const option = result.catalog.options.find((o) =>
       o.optionId.includes("eff-ms7tlurw-vhelyf"),
     )!
@@ -564,7 +564,7 @@ describe("remielle mindscape 1 complete anomaly state", () => {
     "agents:remiel:mindscape:1:blk-legacy:eff-ms7tjyzo-3v31wa"
   it("merges the team and holder records into one corrected complete option", () => {
     const result = convertSource(remielMindscape1Data(), functions, [], [])
-    expect(result.definitions.revision).toBe("57")
+    expect(result.definitions.revision).toBe("58")
     const option = result.catalog.options.find((o) => o.optionId === optionId)!
     expect(option.name).toBe("相变时流 · 其他角色属性异常伤害")
     expect(option.conditionDescription).toBe(
@@ -2974,7 +2974,7 @@ describe("agent batch 06 impact and energy regen supplements", () => {
       integrated: 6,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("57")
+    expect(result.definitions.revision).toBe("58")
 
     const caesar = result.catalog.options.find(
       (o) => o.optionId === "nanoka:agents:caesar:stance-switch-impact",
@@ -3505,7 +3505,7 @@ describe("batch 07 Roxy and Crimson Moon Casket supplements", () => {
       integrated: 4,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("57")
+    expect(result.definitions.revision).toBe("58")
     const entities = result.catalog.entities.filter((e) =>
       ["nanoka:agents:1621", "nanoka:w-engines:14162"].includes(
         e.catalogEntityId,
@@ -4007,7 +4007,7 @@ describe("batch 08 M6 independent follow-up supplements", () => {
       integrated: 3,
       outOfScope: 0,
     })
-    expect(result.definitions.revision).toBe("57")
+    expect(result.definitions.revision).toBe("58")
     const expected: readonly (readonly [
       optionId: string,
       effectId: string,
@@ -4901,7 +4901,7 @@ describe("batch 09 Nangongyu M6 vibrato-modified supplements", () => {
       [],
       batch09Supplements,
     )
-    expect(result.definitions.revision).toBe("57")
+    expect(result.definitions.revision).toBe("58")
     expect(result.coverage.summary.supplements).toMatchObject({
       records: 2,
       rules: 2,
@@ -6441,7 +6441,7 @@ describe("claret mindscape 1 multiplier encoding correction", () => {
     const before = structuredClone(input)
     const result = convertSource(input, functions, [], [])
     expect(input).toEqual(before)
-    expect(result.definitions.revision).toBe("57")
+    expect(result.definitions.revision).toBe("58")
     const rule = result.definitions.effects.find(
       (entry): entry is ContributionRule =>
         entry.kind === "contribution" && entry.effectId === effectId,
