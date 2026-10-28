@@ -458,9 +458,9 @@ describe("Pheony M4 six-element independent anomaly settlement", () => {
     expect(contribution(mismatched, critEffectId("fire"))).toBe(0)
   })
 
-  it("scales only the declared M4 item, not another damage item", () => {
+  it("rejects a mixed settlement that would leak the 40% to non-M4 damage", () => {
     const baseItemId = "action:agent:1641:action:0001:base"
-    const result = calculate(
+    const mixed = calculateStaticDamageFromCatalog(
       request({
         element: "fire",
         items: [
@@ -469,9 +469,23 @@ describe("Pheony M4 six-element independent anomaly settlement", () => {
         ],
       }),
     )
-    expect(settledItem(result, baseItemId).damageMultiplier).toBe(2)
-    expect(settledItem(result).damageMultiplier).toBeCloseTo(3, 9)
-    expect(contribution(result, critEffectId("fire"))).toBeCloseTo(0.4, 9)
+    expect(
+      mixed.ok,
+      "mixed M4 settlements must not apply the 40% to the whole hit",
+    ).toBe(false)
+    if (!mixed.ok)
+      expect(
+        mixed.issues.some(
+          (issue) =>
+            issue.code === "CONTEXT_MISMATCH" &&
+            issue.message.includes("sole damage item"),
+        ),
+      ).toBe(true)
+
+    const single = calculate(request({ element: "fire" }))
+    expect(settledItem(single).damageMultiplier).toBeCloseTo(3, 9)
+    expect(single.factors.nonCritical.baseDamage).toBeCloseTo(3000, 9)
+    expect(single.factors.critical?.anomalyCritical).toBeCloseTo(1.4, 9)
   })
 
   it("proves the element multiplier and separate 40% rule are necessary (ablation)", () => {

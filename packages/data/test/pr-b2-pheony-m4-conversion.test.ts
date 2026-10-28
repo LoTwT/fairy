@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest"
 import type { ContributionRule } from "@randomplay/shared"
+import {
+  calculateStaticDamageFromCatalog,
+  parseEffectRuleSet,
+} from "../../core/src/effects/index.ts"
+import type {
+  StaticCatalogDamageInput,
+  StaticEffectCatalog,
+} from "../../core/src/effects/index.ts"
 import { convertSource } from "../scripts/static-effects/convert.ts"
 import {
   PHEONY_M4_SUPPLEMENTS,
@@ -42,6 +50,14 @@ const effectId = (element: string) =>
 const critEffectId = (element: string) => `${effectId(element)}-crit-damage`
 const targetId = "zzz-hp:skill:pheony-m4-anomaly-settlement"
 const itemId = "pheony:m4-anomaly-settlement"
+
+const nanokaReference = (locale: "zh" | "en", pointer: string) => ({
+  sourceId: "nanoka-integrated",
+  version: "3.3.12+19634983",
+  locale,
+  resourcePath: `agents/1641/details.${locale}.json`,
+  pointer,
+})
 
 const functions: SourceNormalization = {
   normalizeAgent: (entity) => ({
@@ -101,6 +117,133 @@ const ruleFor = (output: ReturnType<typeof convert>, id: string) => {
   return rule as ContributionRule
 }
 
+const general = (baseValue: number) => ({
+  baseValue,
+  initialPercentage: [],
+  initialFixed: [],
+  finalPercentage: [],
+  finalFixed: [],
+})
+
+const settleConverted = (
+  output: ReturnType<typeof convert>,
+  element: string,
+  multiplier: number,
+) => {
+  const parsed = parseEffectRuleSet(output.definitions)
+  if (!parsed.ok) throw new Error(JSON.stringify(parsed.issues))
+  // 本合成输入只包含菲欧妮实体；converter 仍会携带其他固定来源机制目录
+  // 条目，其代理人不在此夹具中。结算时移除这些无关机制，只验证 M4 选项
+  // 与共享目标本身。
+  const catalog = {
+    ...(output.catalog as unknown as StaticEffectCatalog),
+    mechanisms: [],
+  } as StaticEffectCatalog
+  const input: StaticCatalogDamageInput = {
+    definitions: parsed.value,
+    catalog,
+    bindings: [
+      {
+        bindingId: "binding:pheony",
+        kind: "agent",
+        holderId: "entity:pheony",
+        sourceEntityId: "1641",
+        eligible: true,
+        configuration: { mindscapeRank: 4, coreSkillLevel: 7 },
+      },
+    ],
+    actorSources: [{ entityId: "entity:pheony", agentEntityId: "1641" }],
+    selections: [
+      { optionId: optionId(element), bindingId: "binding:pheony", layers: 1 },
+    ],
+    world: {
+      entities: [
+        {
+          kind: "actor",
+          entityId: "entity:pheony",
+          teamId: "team:players",
+          generalStats: {
+            attack: general(1000),
+            anomalyProficiency: general(115),
+            anomalyMastery: general(200),
+          },
+          directStats: {
+            criticalRate: { baseValue: 0.28, additions: [] },
+            criticalDamage: { baseValue: 1.2, additions: [] },
+            penetrationRatio: { baseValue: 0.42, additions: [] },
+          },
+        },
+        {
+          kind: "actor",
+          entityId: "entity:enemy",
+          teamId: "team:enemies",
+          generalStats: {},
+          directStats: {},
+        },
+      ],
+      states: [],
+      distances: [],
+    },
+    hit: {
+      actorId: "entity:pheony",
+      targetId: "entity:enemy",
+      actionId: "action:m4-subset",
+      skillCategory: "uncategorized",
+      element: element as StaticCatalogDamageInput["hit"]["element"],
+      skillTargetIds: [targetId],
+      skillTags: [],
+      damageItems: [
+        {
+          mode: "direct",
+          role: "base",
+          itemId,
+          stat: "attack",
+          statSource: { entityId: "entity:pheony" },
+          damageMultiplier: 0,
+        },
+      ],
+    },
+    damage: {
+      kind: "anomaly-settlement",
+      damageBonus: { settledMultiplier: 1 },
+      anomalySource: { entityId: "entity:pheony", level: 60 },
+      defense: {
+        attackerLevel: 60,
+        targetBaseDefense: 0,
+        defensePercentageAdjustments: [],
+        penetrationValues: [],
+      },
+      resistance: {
+        targetResistance: 0,
+        targetResistanceReductions: [],
+        attackerResistanceIgnoreValues: [],
+      },
+      damageTaken: {
+        targetDamageTakenIncreases: [],
+        targetDamageTakenReductions: [],
+      },
+      stunDamage: {
+        isTargetStunned: false,
+        targetBaseStunDamageMultiplier: 1,
+        targetStunDamageMultiplierAdjustments: [],
+      },
+      anomalyDamageBonus: [],
+      refringe: { mode: "settled", multiplier: 1 },
+      anomalyCriticalRate: 0,
+      anomalyCriticalDamage: [],
+      anomalySettlementCriticalRate: 0,
+      anomalySettlementCriticalDamage: [],
+    } as unknown as StaticCatalogDamageInput["damage"],
+  }
+  const result = calculateStaticDamageFromCatalog(input)
+  expect(result.ok, `${element}: ${JSON.stringify(result)}`).toBe(true)
+  if (!result.ok) throw new Error(JSON.stringify(result.issues))
+  expect(result.value.factors.nonCritical.baseDamage, element).toBeCloseTo(
+    multiplier * 1000,
+    6,
+  )
+}
+
 describe("Pheony M4 six-element independent settlement conversion", () => {
   it("generates six converted independent-settlement options with stable identities", () => {
     const output = convert()
@@ -132,6 +275,7 @@ describe("Pheony M4 six-element independent settlement conversion", () => {
       ])
       expect(variant!.mechanism, element).toEqual({
         kind: "independent-settlement",
+        isolateDamageItems: true,
         damageItemRequirements: [
           {
             itemId,
@@ -184,6 +328,35 @@ describe("Pheony M4 six-element independent settlement conversion", () => {
       expect(crit.when).toEqual(main.when)
     },
   )
+
+  it("binds the 600% multiplier and the 40% crit damage to their own references", () => {
+    const output = convert()
+    const main = ruleFor(output, effectId("fire"))
+    const crit = ruleFor(output, critEffectId("fire"))
+    expect(main.source.references).toEqual([
+      nanokaReference("zh", "/talent/4/desc"),
+      nanokaReference("en", "/talent/4/desc"),
+    ])
+    expect(crit.source.references).toEqual([
+      nanokaReference("zh", "/skill/basic/description/1/desc"),
+      nanokaReference("en", "/skill/basic/description/1/desc"),
+      nanokaReference("zh", "/skill/chain/description/2/desc"),
+      nanokaReference("en", "/skill/chain/description/2/desc"),
+      {
+        sourceId: "zzz-hp",
+        version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+        locale: "zh",
+        resourcePath:
+          "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+        pointer: "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17",
+      },
+    ])
+    for (const reference of crit.source.references)
+      expect(
+        reference.pointer,
+        "40% must not cite the 600% talent clause",
+      ).not.toBe("/talent/4/desc")
+  })
 
   it("keeps the fixed-source permanent 40% record as a semantic-conflict entry", () => {
     const output = convert()
@@ -248,14 +421,22 @@ describe("Pheony M4 six-element independent settlement conversion", () => {
         ),
         element,
       ).toBe(false)
+      expect(
+        output.catalog.skillTargets.filter(
+          (target) => target.targetId === targetId,
+        ),
+        element,
+      ).toHaveLength(1)
       for (const other of elements)
-        if (other.element !== element)
+        if (other.element !== element) {
           expect(
             output.catalog.options.some(
               (option) => option.optionId === optionId(other.element),
             ),
             `${element} -> ${other.element}`,
           ).toBe(true)
+          settleConverted(output, other.element, other.multiplier)
+        }
     }
   })
 

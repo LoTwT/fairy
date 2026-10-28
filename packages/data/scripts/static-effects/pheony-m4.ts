@@ -1,9 +1,15 @@
 import { isDeepStrictEqual } from "node:util"
-import type { Condition, DamageElement, EffectId } from "@randomplay/shared"
+import type {
+  Condition,
+  DamageElement,
+  EffectId,
+  SourceReference,
+} from "@randomplay/shared"
 import type {
   Supplement,
   SupplementEvidenceReference,
   SupplementOption,
+  SupplementSharedSkillTarget,
 } from "./supplements.ts"
 
 /**
@@ -45,11 +51,52 @@ const pheonyM4EvidenceSha256 = {
   en: "1102a848035a054bafe6f570d38f8313686e33c9e6c965b7c000e6849852485e",
 } as const
 
-const evidence = (locale: "zh" | "en"): SupplementEvidenceReference => ({
+const pheonyM4EvidencePointers = {
+  talent: "/talent/4/desc",
+  basic: "/skill/basic/description/1/desc",
+  chain: "/skill/chain/description/2/desc",
+} as const
+
+const evidence = (
+  locale: "zh" | "en",
+  pointer: (typeof pheonyM4EvidencePointers)[keyof typeof pheonyM4EvidencePointers],
+): SupplementEvidenceReference => ({
   path: `agents/1641/details.${locale}.json`,
-  pointer: "/talent/4/desc",
+  pointer,
   sha256: pheonyM4EvidenceSha256[locale],
 })
+
+const nanokaReference = (
+  locale: "zh" | "en",
+  pointer: (typeof pheonyM4EvidencePointers)[keyof typeof pheonyM4EvidencePointers],
+): SourceReference => ({
+  sourceId: "nanoka-integrated",
+  version: "3.3.12+19634983",
+  locale,
+  resourcePath: `agents/1641/details.${locale}.json`,
+  pointer,
+})
+
+const fixedCritDamageReference: SourceReference = {
+  sourceId: "zzz-hp",
+  version: "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+  locale: "zh",
+  resourcePath: "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+  pointer: "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17",
+}
+
+const multiplierReferences: readonly SourceReference[] = [
+  nanokaReference("zh", pheonyM4EvidencePointers.talent),
+  nanokaReference("en", pheonyM4EvidencePointers.talent),
+]
+
+const critDamageReferences: readonly SourceReference[] = [
+  nanokaReference("zh", pheonyM4EvidencePointers.basic),
+  nanokaReference("en", pheonyM4EvidencePointers.basic),
+  nanokaReference("zh", pheonyM4EvidencePointers.chain),
+  nanokaReference("en", pheonyM4EvidencePointers.chain),
+  fixedCritDamageReference,
+]
 
 const mindscapeAtLeast = (minimum: number): Condition<"configuration"> => ({
   kind: "compare-number",
@@ -101,7 +148,7 @@ const critEffectId = (element: string) =>
   `${effectId(element)}-crit-damage` as EffectId
 
 export const PHEONY_M4_SUPPLEMENTS: readonly SupplementOption[] =
-  PHEONY_M4_ELEMENTS.map((spec, index) => {
+  PHEONY_M4_ELEMENTS.map((spec) => {
     const when = pheonyM4When(spec.element)
     return {
       kind: "option",
@@ -120,22 +167,20 @@ export const PHEONY_M4_SUPPLEMENTS: readonly SupplementOption[] =
         stats: fixedSourceContextStats,
         expectsEmptyPack: true,
       },
-      ...(index === 0
-        ? {
-            skillTarget: {
-              targetId: PHEONY_M4_TARGET_SLUG,
-              agentEntityId: "1641",
-              category: "uncategorized" as const,
-              name: "影画4异放结算",
-            },
-          }
-        : {}),
-      evidence: [evidence("zh"), evidence("en")],
-      verification: `Nanoka 3.3.12+19634983 的 agents/1641/details.zh.json、details.en.json 的 /talent/4/desc 同文确认：[烬火追魂]或[普通攻击：焚罪]终结一击命中处于异常状态的敌人时，额外触发一次[异放]，固定结算 600% 倍率的对应属性异常伤害（英文：When the Finishing Move of Soul-Searching Blaze or Basic Attack: Purifying Flame hits an enemy affected by an Anomaly, it triggers 1 additional instance of Abloom, resolving the corresponding Attribute Anomaly at a fixed 600% multiplier）。ZZZ-HP 的 anomalyBaseExpected 不含原异常系数，因此本项目把最终倍率归一为原异常系数 × 6：物理 7.13×6=42.78、火 0.5×6=3、冰 5×6=30、电 1.25×6=7.5、以太 0.625×6=3.75、风 12.5×6=75；${spec.label}为 ${spec.multiplier}。原异常系数来自固定提交 991bb0ef2a00387f8a1fa18293bbda17256d7270 的 publicAnomalySkills.ts（物理 713%、火 50%、冰 500%、电 125%、以太 62.5%、风 1250%）；该归一推导未经游戏实测。固定源 /agents/52/mindscapeBuffs/4 是真实空 pack，本批登记 rank4 空位守卫：出现任何新编码即拒绝生成。固定源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17（eff-9）把“该次异放触发暴击时暴伤额外+40%”编为自身常驻 anomalyReleaseCritDmg 40；本批不把该记录变成常驻贡献，继续保留为 semantic-conflict 迁移入口，并以本选项的附加规则只对同一 M4 独立目标、同一元素的本次异放追加 anomaly-settlement-critical-damage 0.4。六条选项共用独立目标 ${PHEONY_M4_TARGET_ID}、伤害项 ${PHEONY_M4_ITEM_ID} 与零初始倍率，按 hit.element 裁决：其他元素、其他结算目标、未选择本项均不获得该倍率或 40% 规则。伤害项必须由调用方以 attack/base/direct、anomaly-source 提供，且 statSource 与 damage.anomalySource 的实体与快照一致；异放复用原异常虚拟来源的攻击、异常精通、等级与穿透，菲欧妮是本次效果持有者与结算角色，不因此改用她的实时面板。独立目标、零初始倍率、逐次声明与 uncategorized 分类要求是本项目采用的独立结算契约，不是原始游戏证据；触发招式、异常状态与命中时点由调用方显式声明，不模拟异常积蓄、持续时间或动作时间线。`,
+      evidence: [
+        evidence("zh", pheonyM4EvidencePointers.talent),
+        evidence("en", pheonyM4EvidencePointers.talent),
+        evidence("zh", pheonyM4EvidencePointers.basic),
+        evidence("en", pheonyM4EvidencePointers.basic),
+        evidence("zh", pheonyM4EvidencePointers.chain),
+        evidence("en", pheonyM4EvidencePointers.chain),
+      ],
+      verification: `Nanoka 3.3.12+19634983 的 agents/1641/details.zh.json、details.en.json 的 /talent/4/desc 同文确认：[烬火追魂]或[普通攻击：焚罪]终结一击命中处于异常状态的敌人时，额外触发一次[异放]，固定结算 600% 倍率的对应属性异常伤害（英文：When the Finishing Move of Soul-Searching Blaze or Basic Attack: Purifying Flame hits an enemy affected by an Anomaly, it triggers 1 additional instance of Abloom, resolving the corresponding Attribute Anomaly at a fixed 600% multiplier）。ZZZ-HP 的 anomalyBaseExpected 不含原异常系数，因此本项目把最终倍率归一为原异常系数 × 6：物理 7.13×6=42.78、火 0.5×6=3、冰 5×6=30、电 1.25×6=7.5、以太 0.625×6=3.75、风 12.5×6=75；${spec.label}为 ${spec.multiplier}。原异常系数来自固定提交 991bb0ef2a00387f8a1fa18293bbda17256d7270 的 publicAnomalySkills.ts（物理 713%、火 50%、冰 500%、电 125%、以太 62.5%、风 1250%）；该归一推导未经游戏实测。固定源 /agents/52/mindscapeBuffs/4 是真实空 pack，本批登记 rank4 空位守卫：出现任何新编码即拒绝生成。40% 额外暴伤来自同一 1641 详情文件的 /skill/basic/description/1/desc 与 /skill/chain/description/2/desc 中英文同文（“该次[异放]效果触发暴击时，其暴击伤害额外提升40%”）；/talent/4/desc 只证明固定 600% 异放，不作为 40% 引用。固定源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17（eff-9）把该 40% 编为自身常驻 anomalyReleaseCritDmg 40；本批不把该记录变成常驻贡献，继续保留为 semantic-conflict 迁移入口，并以本选项的附加规则只对同一 M4 独立目标、同一元素的本次异放追加 anomaly-settlement-critical-damage 0.4。六条选项共用独立目标 ${PHEONY_M4_TARGET_ID}、伤害项 ${PHEONY_M4_ITEM_ID} 与零初始倍率，按 hit.element 裁决：其他元素、其他结算目标、未选择本项均不获得该倍率或 40% 规则。该变体声明 isolateDamageItems：命中必须只携带本独立项，混合非 M4 项会按 CONTEXT_MISMATCH 拒绝，避免整次 hit 的 40% 泄漏到其他伤害。伤害项必须由调用方以 attack/base/direct、anomaly-source 提供，且 statSource 与 damage.anomalySource 的实体与快照一致；异放复用原异常虚拟来源的攻击、异常精通、等级与穿透，菲欧妮是本次效果持有者与结算角色，不因此改用她的实时面板。独立目标、零初始倍率、逐次声明与 uncategorized 分类要求是本项目采用的独立结算契约，不是原始游戏证据；触发招式、异常状态与命中时点由调用方显式声明，不模拟异常积蓄、持续时间或动作时间线。`,
       rule: {
         effectId: effectId(spec.element),
         identity: { kind: "agent", entityId: "1641" },
         section: "影画4：生命尽头与冷酷仙境（异放结算）",
+        references: multiplierReferences,
         config: mindscapeAtLeast(4),
         parameters: {},
         scope: "hit",
@@ -158,6 +203,7 @@ export const PHEONY_M4_SUPPLEMENTS: readonly SupplementOption[] =
           effectId: critEffectId(spec.element),
           identity: { kind: "agent", entityId: "1641" },
           section: "影画4：生命尽头与冷酷仙境（异放暴伤）",
+          references: critDamageReferences,
           config: mindscapeAtLeast(4),
           parameters: {},
           scope: "hit",
@@ -176,6 +222,7 @@ export const PHEONY_M4_SUPPLEMENTS: readonly SupplementOption[] =
         applicability: {},
         mechanism: {
           kind: "independent-settlement",
+          isolateDamageItems: true,
           damageItemRequirements: [
             {
               itemId: PHEONY_M4_ITEM_ID,
@@ -194,6 +241,24 @@ export const PHEONY_M4_SUPPLEMENTS: readonly SupplementOption[] =
       },
     } satisfies SupplementOption
   })
+
+/**
+ * 六条选项共享的独立异放目标。登记与具体元素选项解耦：移除任一元素
+ * 补充后，其余选项仍能解析同一目标；生产目录仍只登记一次。子集转换只在
+ * 至少一条共享选项仍在时登记，避免无关的子集测试凭空多出目标。
+ */
+export const PHEONY_M4_SHARED_SKILL_TARGETS: readonly SupplementSharedSkillTarget[] =
+  [
+    {
+      targetId: PHEONY_M4_TARGET_SLUG,
+      agentEntityId: "1641",
+      category: "uncategorized",
+      name: "影画4异放结算",
+      supplementIds: PHEONY_M4_SUPPLEMENTS.map(
+        (supplement) => supplement.supplementId,
+      ),
+    },
+  ]
 
 /**
  * 生成期登记守卫：任一保留 supplementId / optionId / effectId 命中时，整条

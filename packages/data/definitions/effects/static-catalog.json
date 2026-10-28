@@ -55488,6 +55488,34 @@
               "locale": "en",
               "resourcePath": "agents/1641/details.en.json",
               "pointer": "/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/skill/basic/description/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/skill/basic/description/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/skill/chain/description/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/skill/chain/description/2/desc"
             }
           ],
           "effectIds": [
@@ -55500,6 +55528,7 @@
           "differences": [],
           "mechanism": {
             "kind": "independent-settlement",
+            "isolateDamageItems": true,
             "damageItemRequirements": [
               {
                 "itemId": "pheony:m4-anomaly-settlement",
@@ -55542,6 +55571,34 @@
               "locale": "en",
               "resourcePath": "agents/1641/details.en.json",
               "pointer": "/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/skill/basic/description/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/skill/basic/description/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/skill/chain/description/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/skill/chain/description/2/desc"
             }
           ],
           "effectIds": [
@@ -55554,6 +55611,7 @@
           "differences": [],
           "mechanism": {
             "kind": "independent-settlement",
+            "isolateDamageItems": true,
             "damageItemRequirements": [
               {
                 "itemId": "pheony:m4-anomaly-settlement",
@@ -55596,6 +55654,34 @@
               "locale": "en",
               "resourcePath": "agents/1641/details.en.json",
               "pointer": "/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/skill/basic/description/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/skill/basic/description/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/skill/chain/description/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/skill/chain/description/2/desc"
             }
           ],
           "effectIds": [
@@ -55608,6 +55694,7 @@
           "differences": [],
           "mechanism": {
             "kind": "independent-settlement",
+            "isolateDamageItems": true,
             "damageItemRequirements": [
               {
                 "itemId": "pheony:m4-anomaly-settlement",
@@ -55650,6 +55737,34 @@
               "locale": "en",
               "resourcePath": "agents/1641/details.en.json",
               "pointer": "/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/skill/basic/description/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/skill/basic/description/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/skill/chain/description/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/skill/chain/description/2/desc"
             }
           ],
           "effectIds": [
@@ -55662,6 +55777,7 @@
           "differences": [],
           "mechanism": {
             "kind": "independent-settlement",
+            "isolateDamageItems": true,
             "damageItemRequirements": [
               {
                 "itemId": "pheony:m4-anomaly-settlement",
@@ -55704,6 +55820,34 @@
               "locale": "en",
               "resourcePath": "agents/1641/details.en.json",
               "pointer": "/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/skill/basic/description/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/skill/basic/description/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/skill/chain/description/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/skill/chain/description/2/desc"
             }
           ],
           "effectIds": [
@@ -55716,6 +55860,7 @@
           "differences": [],
           "mechanism": {
             "kind": "independent-settlement",
+            "isolateDamageItems": true,
             "damageItemRequirements": [
               {
                 "itemId": "pheony:m4-anomaly-settlement",
@@ -55758,6 +55903,34 @@
               "locale": "en",
               "resourcePath": "agents/1641/details.en.json",
               "pointer": "/talent/4/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/skill/basic/description/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/skill/basic/description/1/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "zh",
+              "resourcePath": "agents/1641/details.zh.json",
+              "pointer": "/skill/chain/description/2/desc"
+            },
+            {
+              "sourceId": "nanoka-integrated",
+              "version": "3.3.12+19634983",
+              "locale": "en",
+              "resourcePath": "agents/1641/details.en.json",
+              "pointer": "/skill/chain/description/2/desc"
             }
           ],
           "effectIds": [
@@ -55770,6 +55943,7 @@
           "differences": [],
           "mechanism": {
             "kind": "independent-settlement",
+            "isolateDamageItems": true,
             "damageItemRequirements": [
               {
                 "itemId": "pheony:m4-anomaly-settlement",

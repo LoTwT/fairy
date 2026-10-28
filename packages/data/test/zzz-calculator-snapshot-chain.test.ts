@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto"
 import { readFileSync } from "node:fs"
 import { describe, expect, it } from "vitest"
 
@@ -57,6 +58,7 @@ const expectedImplementationBases = [
   "4b6063b6",
   "b65cddb6",
   "075822e2",
+  "f412c038",
 ] as const
 
 const expectedPreviousSnapshotIds = [
@@ -77,6 +79,7 @@ const expectedPreviousSnapshotIds = [
   "sha256:9f56c4647bb6d33bdafe084134fa12a125e988cfb4f80300e5738035f4c36be2",
   "sha256:0d5a9837cb2f93ad874693aad41c6682edbdeadcb016b09c8818ebfd46997165",
   "sha256:ccb28367195fe2f2b4183623a3332119fbc742ffc484b40cd9be89be645623ae",
+  "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da",
 ] as const
 
 const expectedCurrentSnapshotIds = [
@@ -96,7 +99,8 @@ const expectedCurrentSnapshotIds = [
   "sha256:9f56c4647bb6d33bdafe084134fa12a125e988cfb4f80300e5738035f4c36be2",
   "sha256:0d5a9837cb2f93ad874693aad41c6682edbdeadcb016b09c8818ebfd46997165",
   "sha256:ccb28367195fe2f2b4183623a3332119fbc742ffc484b40cd9be89be645623ae",
-  "sha256:2e805a9fa7482071cd595c01da41e1c5e95723c6d0d5178b4320e523a8edf731",
+  "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da",
+  "sha256:32f3756be0e5384a0a7ed8cdd6d9d8e493eb2159265147ff80d9312367568541",
 ] as const
 
 /** 本次逐条核对过的 static-effects 制品摘要；entry 5 保留 PR-D 改写前的 catalog 值，entry 6 记录本次刷新前的字节。 */
@@ -169,13 +173,24 @@ const expectedArtifactSha256 = [
     "9a042e60aba4c385172b67f18a6c2a010dcf1744c87f35a1de8a51d002c02043",
     "3a26131e9d4561701f51c67959ff1e16a2b35931edea60d0435b757851a5d8b3",
   ],
+  [
+    "c1b964b49c3c2eb6673032f79fe4f26deaf551fdbc981a373a1f4a3ecd7a27e7",
+    "703618006eeaa8746afb8455b5206f127ccc6717b42d6988c8af683123ba514c",
+  ],
 ] as const
 
+/** B1 已完成链（17 条）的冻结摘要；B2 只能在其后追加，不能改写历史条目。 */
+const expectedHistoricalChainSha256 = {
+  abloom: "67106cf095d8648cea4911add58c54699f94633284fa28d7367dfdd21ac7c790",
+  static: "6017ab56b183510124e4afbffe79225939c3ba3d37d7a0c330c6529ffe7753be",
+  vortex: "6017ab56b183510124e4afbffe79225939c3ba3d37d7a0c330c6529ffe7753be",
+} as const
+
 describe("ZZZ Calculator 快照刷新链", () => {
-  it("三份夹具均为 17 条，相邻条目首尾相接，末条等于当前消费快照", () => {
+  it("三份夹具均为 18 条，相邻条目首尾相接，末条等于当前消费快照", () => {
     for (const [name, fixture] of Object.entries(fixtures)) {
       const entries = fixture.fairySnapshotRefreshes
-      expect(entries, name).toHaveLength(17)
+      expect(entries, name).toHaveLength(18)
       entries.forEach((entry, index) => {
         expect(entry.implementationBase, `${name} entry ${index}`).toBe(
           expectedImplementationBases[index],
@@ -196,6 +211,32 @@ describe("ZZZ Calculator 快照刷新链", () => {
         fixture.provenance?.fairyCalculationDataVersion?.snapshotId
       expect(snapshotId, name).toBe(expectedCurrentSnapshotIds.at(-1))
       expect(entries.at(-1)!.currentSnapshotId, name).toBe(snapshotId)
+      expect(entries.at(-1)!.reason, name).toContain("Revision 58")
+    }
+  })
+
+  it("只追加 B2 条目，不改写 B1 的 17 条历史链", () => {
+    for (const [name, fixture] of Object.entries(fixtures)) {
+      const entries = fixture.fairySnapshotRefreshes
+      expect(
+        createHash("sha256")
+          .update(JSON.stringify(entries.slice(0, 17)))
+          .digest("hex"),
+        `${name} historical chain`,
+      ).toBe(
+        expectedHistoricalChainSha256[
+          name as keyof typeof expectedHistoricalChainSha256
+        ],
+      )
+      expect(entries[16]!.currentSnapshotId, `${name} B1 tail`).toBe(
+        "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da",
+      )
+      expect(entries[17]!.previous.snapshotId, `${name} B2 previous`).toBe(
+        entries[16]!.currentSnapshotId,
+      )
+      expect(entries[17]!.currentSnapshotId, `${name} B2 current`).not.toBe(
+        entries[16]!.currentSnapshotId,
+      )
     }
   })
 

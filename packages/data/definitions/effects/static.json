@@ -54341,14 +54341,35 @@
             "version": "3.3.12+19634983",
             "locale": "zh",
             "resourcePath": "agents/1641/details.zh.json",
-            "pointer": "/talent/4/desc"
+            "pointer": "/skill/basic/description/1/desc"
           },
           {
             "sourceId": "nanoka-integrated",
             "version": "3.3.12+19634983",
             "locale": "en",
             "resourcePath": "agents/1641/details.en.json",
-            "pointer": "/talent/4/desc"
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "zzz-hp",
+            "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17"
           }
         ]
       },
@@ -54511,14 +54532,35 @@
             "version": "3.3.12+19634983",
             "locale": "zh",
             "resourcePath": "agents/1641/details.zh.json",
-            "pointer": "/talent/4/desc"
+            "pointer": "/skill/basic/description/1/desc"
           },
           {
             "sourceId": "nanoka-integrated",
             "version": "3.3.12+19634983",
             "locale": "en",
             "resourcePath": "agents/1641/details.en.json",
-            "pointer": "/talent/4/desc"
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "zzz-hp",
+            "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17"
           }
         ]
       },
@@ -54681,14 +54723,35 @@
             "version": "3.3.12+19634983",
             "locale": "zh",
             "resourcePath": "agents/1641/details.zh.json",
-            "pointer": "/talent/4/desc"
+            "pointer": "/skill/basic/description/1/desc"
           },
           {
             "sourceId": "nanoka-integrated",
             "version": "3.3.12+19634983",
             "locale": "en",
             "resourcePath": "agents/1641/details.en.json",
-            "pointer": "/talent/4/desc"
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "zzz-hp",
+            "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17"
           }
         ]
       },
@@ -54851,14 +54914,35 @@
             "version": "3.3.12+19634983",
             "locale": "zh",
             "resourcePath": "agents/1641/details.zh.json",
-            "pointer": "/talent/4/desc"
+            "pointer": "/skill/basic/description/1/desc"
           },
           {
             "sourceId": "nanoka-integrated",
             "version": "3.3.12+19634983",
             "locale": "en",
             "resourcePath": "agents/1641/details.en.json",
-            "pointer": "/talent/4/desc"
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "zzz-hp",
+            "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17"
           }
         ]
       },
@@ -55021,14 +55105,35 @@
             "version": "3.3.12+19634983",
             "locale": "zh",
             "resourcePath": "agents/1641/details.zh.json",
-            "pointer": "/talent/4/desc"
+            "pointer": "/skill/basic/description/1/desc"
           },
           {
             "sourceId": "nanoka-integrated",
             "version": "3.3.12+19634983",
             "locale": "en",
             "resourcePath": "agents/1641/details.en.json",
-            "pointer": "/talent/4/desc"
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "zzz-hp",
+            "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17"
           }
         ]
       },
@@ -55191,14 +55296,35 @@
             "version": "3.3.12+19634983",
             "locale": "zh",
             "resourcePath": "agents/1641/details.zh.json",
-            "pointer": "/talent/4/desc"
+            "pointer": "/skill/basic/description/1/desc"
           },
           {
             "sourceId": "nanoka-integrated",
             "version": "3.3.12+19634983",
             "locale": "en",
             "resourcePath": "agents/1641/details.en.json",
-            "pointer": "/talent/4/desc"
+            "pointer": "/skill/basic/description/1/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/skill/chain/description/2/desc"
+          },
+          {
+            "sourceId": "zzz-hp",
+            "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/52/mindscapeBuffs/0/effectBlocks/0/effects/17"
           }
         ]
       },

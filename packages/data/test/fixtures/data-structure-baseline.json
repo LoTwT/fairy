@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "snapshotId": "sha256:2e805a9fa7482071cd595c01da41e1c5e95723c6d0d5178b4320e523a8edf731",
+  "snapshotId": "sha256:32f3756be0e5384a0a7ed8cdd6d9d8e493eb2159265147ff80d9312367568541",
   "integrated": {
     "indexSha256": "d68ad1d80b203b9633f2cd6d176e4051c15c52f2ea3c0d71a2d2310c8b1a1b6d",
     "sourceVersion": "3.3.12+19634983",
@@ -91,7 +91,7 @@
     "artifactFileSetSha256": "b7bb787fbdb4c18a2b6031274408312eaa56b2a53688c68d928c793d41ab148c"
   },
   "skills": {
-    "manifestSha256": "7e2fb279b76b7504e9a7660a9dbbd3e35efea390bb75ee4084858ece79787d00",
+    "manifestSha256": "5c57b3937a8f751783ab53804fc19fa2eb9b21e0997608b54cb71ddd804eec67",
     "sourceVersion": "3.3.12+19634983",
     "rulesVersion": "agent-actions/4",
     "topLevelKeys": [
@@ -117,7 +117,7 @@
     "sourceRepository": "LoTwT/ZZZ-HP",
     "sourceCommit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
     "static": {
-      "sha256": "887dceb6d52758dc8cc4da9aa4e17b5c6c2b670071c7c38a9d215352ed1ee1e5",
+      "sha256": "f7bada47889112f3d0bf806484e4c9d4317d2c5828c4388760c08d0f59e2de1e",
       "ruleSetId": "zzz-hp-static-effects",
       "revision": "58",
       "topLevelKeys": [
@@ -133,7 +133,7 @@
       "actionCount": 1
     },
     "staticCatalog": {
-      "sha256": "88179ad92a621e194a9338c9acea31d02b7c94172cbe581d72326054421f2550",
+      "sha256": "00c0334588313403bca0a432c6a970651b0051f3a55b82c5cc64557aac4b78c6",
       "ruleSetId": "zzz-hp-static-effects",
       "revision": "58",
       "topLevelKeys": [
