@@ -50,8 +50,8 @@
       "examples/ye_shunguang_panel.example.json": "76888787b94ac026ec2ddd6e4e441452e3d2f12e2bfec9cf3b1e77fa04471b86"
     },
     "fairySources": {
-      "packages/data/definitions/effects/static.json": "68d3dc3a89b7c9f9a3d8b2195e5ef397b290bf9a993709463f8832aebdafc1fc",
-      "packages/data/definitions/effects/static-catalog.json": "6a083a704004305646e9235aba45fa328963e074fb1633ba35b3245aab9b43d5",
+      "packages/data/definitions/effects/static.json": "4f946094358d365e7eb37ab9419302fcb90413bb00baccd7436dd9d5c68602eb",
+      "packages/data/definitions/effects/static-catalog.json": "6f3fe439c216d10feb594a84ac5565f16a984554c367868c6650124eec820f73",
       "packages/data/integrated/agents/1561/details.zh.json": "f2da8dfc1357ffb98dcb775d0febbe0df55828d4c61e38701df39040766a3b6f",
       "packages/core/src/formulas/anomaly-damage.ts": "f4cf30476254e86e65a2c8e436817d31af1cb210bec979a5d11ce7898e3058f9",
       "packages/core/src/effects/internal/static-catalog.ts": "14d4399e7a6a64536a7ccdaa8dacd9de863e9ca162ab671a0f825f79b478adac",
@@ -65,7 +65,7 @@
       "packageVersion": "0.5.0",
       "contractVersion": 3,
       "gameVersion": "3.3",
-      "snapshotId": "sha256:c5663dcbcba57d9da3ccf8897a62acc324aac76e39c2af18554ebecb49d6c8b0"
+      "snapshotId": "sha256:8663cbf01382c31f854fc38a2b552ed45fba0c11020c11fff465b5399e9b5349"
     }
   },
   "inputLayer": "externally-declared-resolved-source-state",
@@ -107499,6 +107499,18 @@
         }
       },
       "currentSnapshotId": "sha256:c5663dcbcba57d9da3ccf8897a62acc324aac76e39c2af18554ebecb49d6c8b0"
+    },
+    {
+      "reason": "Revision 60 publishes Pheony's base CAL and M4 additional anomaly settlements as four independent skill actions. Comparison scenarios never select these actions or options, so native upstream captures and all numeric results stay frozen; only the current consumption snapshot and changed Fairy artifact digests are refreshed. B1 revision 57, B2 revision 58 and B3 revision 59 chain entries are preserved unchanged.",
+      "implementationBase": "3bd08931",
+      "previous": {
+        "snapshotId": "sha256:c5663dcbcba57d9da3ccf8897a62acc324aac76e39c2af18554ebecb49d6c8b0",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "68d3dc3a89b7c9f9a3d8b2195e5ef397b290bf9a993709463f8832aebdafc1fc",
+          "packages/data/definitions/effects/static-catalog.json": "6a083a704004305646e9235aba45fa328963e074fb1633ba35b3245aab9b43d5"
+        }
+      },
+      "currentSnapshotId": "sha256:8663cbf01382c31f854fc38a2b552ed45fba0c11020c11fff465b5399e9b5349"
     }
   ]
 }

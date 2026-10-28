@@ -55,8 +55,8 @@
       "packages/data/definitions/attributes/w-engines/14158.json": "fde7df53350091da522a4c9a32887f1c1f6c33f9697dfdbb4edcb898c874b5c9",
       "packages/data/definitions/attributes/w-engines/14161.json": "c5e5c581357aed82a80d9bb045ee5fd1e2badd38ee946a655f4303e7b053360a",
       "packages/data/definitions/attributes/w-engines/14162.json": "24e6b4da7546670fde391a73ed85117acefb98f3a7a27259029ecc0432ba2fe5",
-      "packages/data/definitions/effects/static-catalog.json": "6a083a704004305646e9235aba45fa328963e074fb1633ba35b3245aab9b43d5",
-      "packages/data/definitions/effects/static.json": "68d3dc3a89b7c9f9a3d8b2195e5ef397b290bf9a993709463f8832aebdafc1fc",
+      "packages/data/definitions/effects/static-catalog.json": "6f3fe439c216d10feb594a84ac5565f16a984554c367868c6650124eec820f73",
+      "packages/data/definitions/effects/static.json": "4f946094358d365e7eb37ab9419302fcb90413bb00baccd7436dd9d5c68602eb",
       "packages/data/definitions/skills/agents/1041.json": "8a1b8454b9e0fb2d8b3b737af92188d00df116477a95a28f80e8502601eb3c7d",
       "packages/data/definitions/skills/agents/1371.json": "b02acd4ec219eec8d20a16ca3ff2948ca008cd92763f30148dcfd3a8e44e8cae",
       "packages/data/definitions/skills/agents/1611.json": "8914791496672f301b020717b70bab506af1dccf1e6d2308db51ca61502a1471"
@@ -65,7 +65,7 @@
       "packageVersion": "0.5.0",
       "contractVersion": 3,
       "gameVersion": "3.3",
-      "snapshotId": "sha256:c5663dcbcba57d9da3ccf8897a62acc324aac76e39c2af18554ebecb49d6c8b0"
+      "snapshotId": "sha256:8663cbf01382c31f854fc38a2b552ed45fba0c11020c11fff465b5399e9b5349"
     },
     "fairyCalculationSources": {
       "packages/core/src/static/calculate.ts": "c1e6d073f7b8eb62241bf640da8d3e1a878aa8de9a703636c490f113a126441e",
@@ -80531,6 +80531,18 @@
         }
       },
       "currentSnapshotId": "sha256:c5663dcbcba57d9da3ccf8897a62acc324aac76e39c2af18554ebecb49d6c8b0"
+    },
+    {
+      "reason": "Revision 60 publishes Pheony's base CAL and M4 additional anomaly settlements as four independent skill actions. Comparison scenarios never select these actions or options, so native upstream captures and all numeric results stay frozen; only the current consumption snapshot and changed Fairy artifact digests are refreshed. B1 revision 57, B2 revision 58 and B3 revision 59 chain entries are preserved unchanged.",
+      "implementationBase": "3bd08931",
+      "previous": {
+        "snapshotId": "sha256:c5663dcbcba57d9da3ccf8897a62acc324aac76e39c2af18554ebecb49d6c8b0",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "68d3dc3a89b7c9f9a3d8b2195e5ef397b290bf9a993709463f8832aebdafc1fc",
+          "packages/data/definitions/effects/static-catalog.json": "6a083a704004305646e9235aba45fa328963e074fb1633ba35b3245aab9b43d5"
+        }
+      },
+      "currentSnapshotId": "sha256:8663cbf01382c31f854fc38a2b552ed45fba0c11020c11fff465b5399e9b5349"
     }
   ]
 }

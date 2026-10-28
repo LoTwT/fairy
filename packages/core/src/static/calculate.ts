@@ -38,6 +38,7 @@ import type {
   EntityObservation,
   Result,
   StaticCatalogDamageInput,
+  StaticCatalogDamageParameters,
   StaticDamageParameters,
   WorldObservation,
   Issue,
@@ -960,6 +961,14 @@ function calculateOrdinaryStaticActionDamage(
       "Resolved action must match the configured agent and mindscape rank",
       "CONTEXT_MISMATCH",
     )
+    requireValue(
+      action.calculation.kind === "anomaly-settlement"
+        ? input.anomalySettlement !== undefined && input.luminize === undefined
+        : input.anomalySettlement === undefined,
+      "/anomalySettlement",
+      "Only an anomaly-settlement action accepts the independent anomaly settlement input",
+      "CONTEXT_MISMATCH",
+    )
     const record = input.data.agents.find(
       (a) => a.attributes.entityId === selectedActor.agentEntityId,
     )
@@ -970,6 +979,15 @@ function calculateOrdinaryStaticActionDamage(
       catalogAction && catalogAction.skillCategory === action.skillCategory,
       "/action/actionId",
       "Action and actor identity disagree",
+      "CONTEXT_MISMATCH",
+    )
+    requireValue(
+      catalogAction.minimumMindscapeRank === undefined ||
+        (selectedActor.mindscapeRank >= catalogAction.minimumMindscapeRank &&
+          action.resolutionContext.mindscapeRank >=
+            catalogAction.minimumMindscapeRank),
+      "/action/minimumMindscapeRank",
+      "Resolved action does not meet the action's minimum mindscape rank",
       "CONTEXT_MISMATCH",
     )
     const actorPotentialLevel = selectedActor.potentialLevel ?? 0
@@ -1044,6 +1062,97 @@ function calculateOrdinaryStaticActionDamage(
           "CONTEXT_MISMATCH",
         )
       }
+    }
+    if (catalogAction.calculation.kind === "anomaly-settlement") {
+      requireValue(
+        action.calculation.kind === "anomaly-settlement",
+        "/action/calculation",
+        "Resolved action must be an anomaly settlement",
+        "CONTEXT_MISMATCH",
+      )
+      const source = catalogAction.calculation
+      const resolved = action.calculation
+      const request = input.anomalySettlement!
+      requireValue(
+        request !== null &&
+          typeof request === "object" &&
+          request.damage !== null &&
+          typeof request.damage === "object" &&
+          request.damage.kind === "anomaly-settlement",
+        "/anomalySettlement/damage",
+        "Anomaly settlement parameters are required",
+        "INVALID_INPUT",
+      )
+      requireValue(
+        JSON.stringify(source.elements) === JSON.stringify(resolved.elements),
+        "/action/calculation/elements",
+        "Resolved anomaly elements must match the loaded record",
+        "CONTEXT_MISMATCH",
+      )
+      requireValue(
+        source.elements.includes(request.element),
+        "/anomalySettlement/element",
+        "The requested element is not registered by this anomaly settlement action",
+        "CONTEXT_MISMATCH",
+      )
+      const anomalySource = request.anomalySource
+      requireValue(
+        anomalySource !== null &&
+          typeof anomalySource === "object" &&
+          Number.isInteger(anomalySource.level) &&
+          anomalySource.level >= 1 &&
+          anomalySource.level <= 60,
+        "/anomalySettlement/anomalySource/level",
+        "The original anomaly source level must be an integer within 1–60",
+        "INVALID_INPUT",
+      )
+      requireValue(
+        input.actors.some((actor) => actor.entityId === anomalySource.entityId),
+        "/anomalySettlement/anomalySource",
+        "The original anomaly source must be a configured actor",
+        "MISSING_REFERENCE",
+      )
+      requireValue(
+        source.items.length > 0 &&
+          source.items.length === resolved.damageItems.length &&
+          source.items.every(
+            (item, index) =>
+              item.itemId === resolved.damageItems[index]?.itemId &&
+              item.stat === resolved.damageItems[index]?.stat,
+          ),
+        "/action/calculation/items",
+        "Resolved anomaly damage items must match the loaded record",
+        "CONTEXT_MISMATCH",
+      )
+      const expectedMultipliers = source.items.map((item) => {
+        const curve = item.coefficient
+        if (curve.base === 0 && curve.growth === 0) return 0
+        const level = action.levels[curve.levelGroup]
+        if (level === undefined) return Number.NaN
+        return curve.base + curve.growth * (level.effective - 1)
+      })
+      requireValue(
+        resolved.damageItems.every(
+          (item, index) => item.damageMultiplier === expectedMultipliers[index],
+        ),
+        "/action/calculation/items",
+        "Resolved anomaly multipliers must match the loaded record and resolved levels",
+        "CONTEXT_MISMATCH",
+      )
+      requireValue(
+        source.anomalySettlementCriticalDamage ===
+          resolved.anomalySettlementCriticalDamage,
+        "/action/calculation/anomalySettlementCriticalDamage",
+        "Resolved anomaly critical damage must match the loaded record",
+        "CONTEXT_MISMATCH",
+      )
+      requireValue(
+        request.damage.anomalySettlementCriticalDamage === undefined ||
+          request.damage.anomalySettlementCriticalDamage.length === 0,
+        "/anomalySettlement/damage/anomalySettlementCriticalDamage",
+        "The event's anomaly critical damage is carried by the action or its catalog option; do not prefill it",
+        "CONTEXT_MISMATCH",
+      )
     }
     // 按每个角色自己的输入解析显式技能等级；不借用动作等级、默认值或队友等级。
     const skillLevelsByActor = new Map<
@@ -1187,6 +1296,56 @@ function calculateOrdinaryStaticActionDamage(
       skillCategory: action.skillCategory,
       skillTags: action.skillTags,
       skillTargetIds: action.skillTargetIds,
+    }
+    if (action.calculation.kind === "anomaly-settlement") {
+      const request = input.anomalySettlement!
+      const anomalySource = request.anomalySource
+      const statSource = {
+        entityId: anomalySource.entityId,
+        ...(anomalySource.snapshotId === undefined
+          ? {}
+          : { snapshotId: anomalySource.snapshotId }),
+      }
+      const damage = {
+        ...request.damage,
+        anomalySource,
+        anomalySettlementCriticalRate:
+          request.damage.anomalySettlementCriticalRate ?? 0,
+        anomalySettlementCriticalDamage: [
+          action.calculation.anomalySettlementCriticalDamage,
+        ],
+      } as StaticCatalogDamageParameters
+      const damageResult = unwrapActionCatalogDamage(
+        calculateStaticDamageFromCatalog({
+          ...common,
+          hit: {
+            ...hit,
+            element: request.element,
+            damageItems: action.calculation.damageItems.map((item) => ({
+              mode: "direct",
+              role: "base",
+              itemId: item.itemId,
+              stat: item.stat,
+              statSource,
+              damageMultiplier: item.damageMultiplier,
+            })) as unknown as StaticCatalogDamageInput["hit"]["damageItems"],
+          },
+          damage,
+        }),
+      )
+      return {
+        ok: true,
+        value: {
+          kind: "anomaly-settlement",
+          panels,
+          element: request.element,
+          anomalySource: structuredClone(anomalySource),
+          settlementCriticalDamage:
+            action.calculation.anomalySettlementCriticalDamage,
+          damage: damageResult,
+          limitations: action.limitations,
+        },
+      }
     }
     if (action.calculation.kind === "luminize") {
       requireValue(

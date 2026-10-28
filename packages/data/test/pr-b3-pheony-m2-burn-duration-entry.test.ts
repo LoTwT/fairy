@@ -308,7 +308,7 @@ describe("PR-B3 Pheony M2 burn duration through the published data package", () 
   it("publishes the corrected M2 option and the holder source requirement", async () => {
     const calculationData = await data()
     const catalog = calculationData.catalog as StaticEffectCatalog
-    expect(catalog.revision).toBe("59")
+    expect(catalog.revision).toBe("60")
     const option = catalog.options.find((entry) => entry.optionId === OPTION_ID)
     expect(option).toBeDefined()
     expect(option!.variants[0]).toMatchObject({

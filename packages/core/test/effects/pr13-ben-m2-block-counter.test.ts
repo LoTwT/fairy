@@ -277,7 +277,7 @@ function benInput(overrides: BenInputOverrides = {}): StaticCatalogDamageInput {
 
 describe("batch 13 Ben mindscape 2 block counter additional damage", () => {
   it("registers the independent target, option, and rule under revision 28 beside the preserved fixed-source options", () => {
-    expect(catalog.revision).toBe("59")
+    expect(catalog.revision).toBe("60")
     const target = catalog.skillTargets.find(
       (t) => t.targetId === BEN_M2_TARGET,
     )!

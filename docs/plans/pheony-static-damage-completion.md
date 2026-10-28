@@ -1,9 +1,10 @@
 # 菲欧妮静态伤害链补全（5 PR）
 
-- 状态：PR-B1、PR-B2 已 squash 合并；PR-B3 已实施并本地提交，等待独立
-  审查；未推送、未建 PR、未合并。
-- 基线：`origin/main @ b17a1f8aa083c9fa51995623480906f60f516f24`
-  （PR-B3 起点；B2 审查修复起点为 `abd395d8dc1c1d2cb6026888eb04450243bd1b01`，
+- 状态：PR-B1、PR-B2、PR-B3 已 squash 合并；PR-B4 已实施并本地提交，等待
+  独立审查；未推送、未建 PR、未合并。
+- 基线：`origin/main @ 3bd089318fa3677f6469932079b9c99136ff3eee`
+  （PR-B4 起点；B3 起点为 `b17a1f8aa083c9fa51995623480906f60f516f24`，
+  B2 审查修复起点为 `abd395d8dc1c1d2cb6026888eb04450243bd1b01`，
   B1 基线为 `0d2957790dcbf817d5b15078c03d30fc4e6c1dd1`）。
 - 固定来源：Nanoka `3.3.12+19634983`；ZZZ-HP
   `991bb0ef2a00387f8a1fa18293bbda17256d7270`（只读 Git 对象）。
@@ -439,3 +440,186 @@ Nanoka `3.3.12+19634983` 的 `agents/1641/details.zh.json` 与
   既有规范页或 `docs/HISTORY.md`；未扩张 authoring 覆盖，未创建或重写数据
   管理记录。M2 的 option target 保持 team 只为队友消费菲欧妮施加的灼烧；
   `holder-anomaly-source` 才决定施加者归属。
+
+## 8. PR-B4：基础 CAL 与 M4 独立动作、高层结算与完整配装
+
+### 8.1 原文、动作身份与倍率锚点
+
+Nanoka `3.3.12+19634983` 的三处原文分别给出两类事件：
+
+- `/skill/basic/description/1/desc`：焚罪终结一击触发一次[异放]，结算
+  `{CAL:225+20*(AvatarSkillLevel(0)-1),1,2}%`，并写明“该次[异放]效果触发
+  暴击时，其暴击伤害额外提升40%”；
+- `/skill/chain/description/2/desc`：烬火追魂终结一击触发一次[异放]，结算
+  `{CAL:300+27*(AvatarSkillLevel(3)-1),1,2}%`，同样自带该次异放的 40%；
+- `/talent/4/desc`：[烬火追魂]或[普通攻击：焚罪]终结一击命中异常敌人时额外
+  触发一次[异放]，固定 600%；该倍率与 40% 的归属和归一继续按 B2 处理。
+
+固定 ZZZ-HP `991bb0e` 的 `/skills` 中，`sk-pheony-nk-1641005-异放倍率`
+（12 级 445%）与 `sk-pheony-nk-1641019-异放倍率`（12 级 597%）是两条独立的
+`anomalyRelease` 行；`-main` 直伤行仍是另一条记录。动作目录新增四个独立
+动作，原 20 个动作不变：
+
+| 事件                | actionId                        | 培养组 | 倍率来源                 | 40% 归属 | 门槛 / 目标          |
+| ------------------- | ------------------------------- | ------ | ------------------------ | -------- | -------------------- |
+| 基础焚罪异放        | `action:agent:1641:action:0021` | basic  | CAL `2.25 + 0.2 × (L−1)` | 本动作   | 无 / 无目标          |
+| 基础烬火追魂异放    | `action:agent:1641:action:0022` | chain  | CAL `3 + 0.27 × (L−1)`   | 本动作   | 无 / 无目标          |
+| M4 焚罪追加异放     | `action:agent:1641:action:0023` | basic  | 零初始；B2 选项一次赋值  | B2 选项  | 影画 4 / M4 共享目标 |
+| M4 烬火追魂追加异放 | `action:agent:1641:action:0024` | chain  | 零初始；B2 选项一次赋值  | B2 选项  | 影画 4 / M4 共享目标 |
+
+CAL 锚点：焚罪 L1/L12/L14/M6-L16 = `2.25 / 4.45 / 4.85 / 5.25`；烬火追魂
+`3 / 5.97 / 6.51 / 7.05`。CAL 就是异放倍率，不再乘六元素原异常系数。M4 火
+元素仍按 B2 的 `0.5 × 600% = 3` 归一；其他元素沿用 B2 的
+`42.78 / 30 / 7.5 / 3.75 / 75`。基础 CAL 与 M4 是两次独立事件，倍率与 40%
+规则不共享。
+
+`0010`（焚罪）与 `0014`（烬火追魂）的段、倍率、分类和 direct totals 全部
+保持不变；`0014` 仍为 `ultimate`。调用方必须显式选择独立异放动作；本 PR
+不自动追加事件，不模拟异常状态、积蓄、持续时间或战斗时间线。
+
+### 8.2 公开契约
+
+`AgentActionCalculation` / `ResolvedAgentAction.calculation` 新增
+`anomaly-settlement` 分支：
+
+```ts
+{
+  kind: "anomaly-settlement"
+  elements: readonly ActionDamageElement[]
+  items: readonly ActionDamageItem[]            // resolved: damageItems
+  anomalySettlementCriticalDamage: number       // 0.4 或 0
+}
+```
+
+`AgentAction` 另增可选的 `minimumMindscapeRank`（当前仅两个 M4 动作使用 4）。
+data 解析按 CAL 或零倍率求值；零倍率项不要求技能等级，也不伪造等级输入。
+
+core 的高层输入新增：
+
+```ts
+anomalySettlement?: {
+  element: DamageElement
+  anomalySource: { entityId; snapshotId?; level }
+  damage: { kind: "anomaly-settlement"; ...异常参数，不含 anomalySource }
+}
+```
+
+`calculateStaticActionDamage` 返回独立分支：
+
+```ts
+{
+  kind: "anomaly-settlement"
+  element
+  anomalySource
+  settlementCriticalDamage
+  damage: StaticDamageResult
+}
+```
+
+该分支不产生 `totals`，也不并入任何 direct 动作的 totals。验证规则：
+
+- 动作种类、元素集合、伤害项 itemId/stat、倍率与 40% 必须和已加载动作逐项
+  一致；篡改解析结果返回 `CONTEXT_MISMATCH`；
+- 请求元素必须在该动作登记集合内；来源必须是已配置 actor，等级为 1—60 的
+  整数；攻击项 `statSource` 强制等于原异常来源，异常精通、等级和穿透率由
+  该来源读取；
+- 事件 40% 由动作或 B2 选项携带，调用方不得在 `damage` 中预填
+  `anomalySettlementCriticalDamage`；高层强制写入动作值并显式提供
+  `anomalySettlementCriticalRate`（缺省 0），从而只走
+  `anomaly-settlement-critical-*` 专用通道；
+- M4 动作的零倍率项由所选 B2 选项赋值；未选时倍率与 40% 均为 0。M0—M3
+  在 data 解析阶段即拒绝 M4 动作，core 复核动作与 actor 的最低影画；
+- 异放暴伤、倍率与目标不跨事件复用；基础 CAL 的 40% 不进入 M4 或普通异放，
+  M4 的 40% 也不进入基础 CAL。
+
+### 8.3 覆盖与制品
+
+- effects revision：`59 → 60`；三份制品只有 `revision` 字段变化，规则
+  `948`、选项 `1,008`、目录变体 `1,489`、skill targets `132`、differences
+  `52`、补充记录 `108` 均不变。
+- 摘要：static `4f946094…`、catalog `6f3fe439…`、coverage `d8cb11a2…`。
+- 技能规则版本：`agent-actions/4 → agent-actions/5`；动作
+  `1,348 → 1,352`，新增 `anomalySettlement: 4`；其余计数
+  `1,166 damage / 174 daze-only / 4 luminize / 4 unavailable / 1 individual`
+  不变。1641 文件由 20 条增至 24 条，前 20 条逐字段等价。
+- `definitions/skills/manifest.json` 摘要
+  `45240cd5…`，artifact set `a8bb735d…`；`staticCatalogSha256` 同步为
+  `6f3fe439…`。
+- 计算快照：`8663cbf0…`；三份 calculator 夹具的 B4 刷新记录追加为第 20 条，
+  B1 的 17 条、B2 的第 18 条与 B3 的第 19 条历史链保持原样。
+- effects 与 actions 生成器均由固定来源连续运行两次，输出逐字节一致后安装。
+- authoring 覆盖、integrated、来源版本、包版本、CI 与 `docs/HISTORY.md` 均未
+  修改。
+
+### 8.4 组合完整配装 E2E
+
+冻结夹具 `packages/data/test/fixtures/pheony-cal-static-settlement.json`
+登记参考推导与具名差异；测试
+`packages/data/test/pheony-cal-static-settlement.test.ts` 走
+`loadStaticCalculationData → resolveAgentAction → calculateStaticActionDamage`。
+
+配装：菲欧妮 60 级、M4、核心 F；涅槃初翎 14164 R1；法厄同之歌 33000 四件 +
+自由蓝调 31300 两件；主词条生命/攻击/防御/异常精通/火伤/异常掌控，副词条
+逐槽显式登记。普攻与 chain 最终等级 14；杜拉罕 70 级、防御 `921.04`、六元素
+抗性 0、未失衡。Dialyn 1481（camp 12、非异常）既是原异常来源又是同阵营队友；
+队友换到异队后只移除额外能力的 15%。
+
+独立推导的装备面板：攻击 `2,711.1843`（初始固定值在百分比之后加入）、生命
+`10,209.7042`、防御 `796.6038`、异常精通 `240`、异常掌控 `255`（stat-value
+向下取整）、暴击率 `0.482`、暴伤 `1.028`、穿透值 `18`、火伤 `0.3`。
+equipment 与 out-of-combat 两条路径逐项一致。
+
+| 事件            |   倍率 |   nonCritical |      critical |      expected |        无队友 critical |
+| --------------- | -----: | ------------: | ------------: | ------------: | ---------------------: |
+| 直伤 `0010`     | 11.947 | 19,701.063934 | 39,953.757658 | 29,462.862309 | 同左（异常增益不适用） |
+| 基础 CAL `0021` |   4.85 | 21,009.787867 | 43,070.065127 | 43,070.065127 |          39,918.596947 |
+| M4 火 `0023`    |      3 | 12,995.745072 | 26,641.277398 | 26,641.277398 |          24,691.915638 |
+
+异放乘区：异常精通 `3.21`、异常伤害等级 `2`、防御
+`794 / (921.04 × 0.9 − 25 + 794) = 0.496890989376`、增伤 `1.1`；核心 25% +
+M1 25% + 额外能力 15% + 事件 40% = `1.05`，异放暴击倍率 `2.05`；无队友时
+仅少 15%，为 `1.9`。暴击率由核心 30% + 初始异常掌控转化 70% 得到 1，因此
+期望等于暴击分支。测试逐项计数核心/M1/额外能力/事件规则各一次，并断言
+M4 事件的 40% 只来自 B2 选项、基础 CAL 不获得 M4 规则。
+
+M2 的 +2 秒只在合格火紊乱的 `preparations` 中出现（`11.5 → 13.5`）；
+CAL 结果没有持续时间准备项，也不把 M2 当作异放倍率。
+
+### 8.5 消融实验
+
+| 场景                           | 现有契约结果                                     | 替代方案结果                                      | 结论                      |
+| ------------------------------ | ------------------------------------------------ | ------------------------------------------------- | ------------------------- |
+| 用 regular 直伤段承载 CAL 4.85 | 独立异放：原异常来源、异常精通/等级、专用 40%    | 使用触发者面板、普通暴击与 direct 合计            | 直伤段不能表达该事件      |
+| 移除四个动作中的任一个         | 该 actionId 变为 Unknown action，其余三个仍可选  | 单个合并动作无法区分被移除的触发/等级组           | 四个动作都是独立事件身份  |
+| 合并两个基础 CAL 动作          | 2.25/4.45/4.85/5.25 与 3/5.97/6.51/7.05 分属两类 | 只能保留一条曲线与一个培养组                      | 基础事件不能合并          |
+| 合并两个 M4 动作               | 各自保留焚罪/烬火追魂触发身份                    | 共享倍率但丢失触发来源                            | M4 事件也不能合并         |
+| 用基础动作承载 M4              | M4 在 M0—M3 拒绝；选中选项后 0→3、0→40%          | 基础动作在 M0 即可给出 4.85 与自带 40%            | 门槛与倍率归属不可互换    |
+| 不选 M4 的 B2 选项             | 零初始倍率保持 0，40% 不出现                     | 若动作自带 600% 会绕过 B2 的六元素归一与 40% 归属 | M4 最终倍率必须由选项提供 |
+
+## 9. PR-B4 验证记录
+
+- 红测：未修代码上新增 `pr-b4-pheony-cal-actions.test.ts` 与
+  `pheony-cal-static-settlement.test.ts`，合计 `11 failed / 2 passed`；E2E
+  单文件 `3 failed / 1 passed`，失败为 `Unknown action:
+action:agent:1641:action:0021/0023/0024`。此时 data/core 尚无
+  `anomaly-settlement` 分支，新增高层输入只会被旧入口拒绝。
+- 实施后定向：动作目录 `10 passed`；完整配装 E2E `8 passed`（含 equipment /
+  out-of-combat、队内/异队、M2 preparation、来源替换、篡改拒绝、直伤段消融、
+  四个动作消融与 M4 零初始消融）。
+- 生成链：固定源连续两次生成 effects，`static.json` / `static-catalog.json` /
+  `static-coverage.json` 两两 `cmp` 一致；动作生成器连续两次 `diff -r` 一致。
+  两批均与安装后的正式制品逐字节一致（effects 三份摘要与 skills manifest
+  摘要见 8.3）。
+- `authoring:verify`：99 条记录、89 个 option group、24 个 coverage 位置、
+  19 个技能目标、68 条补充记录；语义差异 0，三制品字节比较通过。
+- `verify:artifact-dependencies`：730 个节点、915 条边、0 个违规。
+  `audit:data-identity`：`matched`，91 条既有问题，`newProblems=[]`、
+  `resolvedProblems=[]`。
+- `pnpm check`：退出码 0。core `102 passed / 2 skipped` 文件、
+  `5,733 passed / 11 skipped` 用例；data `118 files / 4,905 passed`；core
+  打包消费 `1 passed`、data 打包消费 `2 passed`；lint 0 error（138 条既有
+  warning）。
+- `pnpm format:check`：2,944 个文件格式通过，退出 0。
+- 边界：未修改 `packages/data/integrated`、来源版本、包版本、CI、
+  `docs/HISTORY.md` 或 authoring 覆盖；未创建或重写数据管理记录；未推送、
+  未建 PR、未合并。

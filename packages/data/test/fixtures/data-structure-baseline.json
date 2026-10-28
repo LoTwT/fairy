@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "snapshotId": "sha256:c5663dcbcba57d9da3ccf8897a62acc324aac76e39c2af18554ebecb49d6c8b0",
+  "snapshotId": "sha256:8663cbf01382c31f854fc38a2b552ed45fba0c11020c11fff465b5399e9b5349",
   "integrated": {
     "indexSha256": "d68ad1d80b203b9633f2cd6d176e4051c15c52f2ea3c0d71a2d2310c8b1a1b6d",
     "sourceVersion": "3.3.12+19634983",
@@ -91,9 +91,9 @@
     "artifactFileSetSha256": "b7bb787fbdb4c18a2b6031274408312eaa56b2a53688c68d928c793d41ab148c"
   },
   "skills": {
-    "manifestSha256": "80f2b065d8f46af9fb8f3f1bf6ab8700cfac210751e3998a0afa2beb9cb9dfa1",
+    "manifestSha256": "45240cd568fd0fcdb923cc76e686e4e1896a835929ad4ca26a7bf7ad06c65ec2",
     "sourceVersion": "3.3.12+19634983",
-    "rulesVersion": "agent-actions/4",
+    "rulesVersion": "agent-actions/5",
     "topLevelKeys": [
       "artifacts",
       "coverage",
@@ -109,17 +109,17 @@
       "staticCatalogSha256"
     ],
     "memberCount": 62,
-    "actionCount": 1348,
+    "actionCount": 1352,
     "fileCount": 63,
-    "artifactFileSetSha256": "4ba95b97aa750eae7a7b2330733f1a9ab05585ecbb2a5dcd7b63ac7ab3ba6ae8"
+    "artifactFileSetSha256": "a8bb735d813faa408b05701a6a5a556db1ac72490e36b19e0caec2c13cba3dce"
   },
   "effects": {
     "sourceRepository": "LoTwT/ZZZ-HP",
     "sourceCommit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
     "static": {
-      "sha256": "68d3dc3a89b7c9f9a3d8b2195e5ef397b290bf9a993709463f8832aebdafc1fc",
+      "sha256": "4f946094358d365e7eb37ab9419302fcb90413bb00baccd7436dd9d5c68602eb",
       "ruleSetId": "zzz-hp-static-effects",
-      "revision": "59",
+      "revision": "60",
       "topLevelKeys": [
         "actions",
         "effects",
@@ -133,9 +133,9 @@
       "actionCount": 1
     },
     "staticCatalog": {
-      "sha256": "6a083a704004305646e9235aba45fa328963e074fb1633ba35b3245aab9b43d5",
+      "sha256": "6f3fe439c216d10feb594a84ac5565f16a984554c367868c6650124eec820f73",
       "ruleSetId": "zzz-hp-static-effects",
-      "revision": "59",
+      "revision": "60",
       "topLevelKeys": [
         "differences",
         "entities",
@@ -155,9 +155,9 @@
       "differenceCount": 52
     },
     "staticCoverage": {
-      "sha256": "8711250a1b699be898ae13aa72d36a615b094bd1df909b73134ff187865f3e49",
+      "sha256": "d8cb11a2265745b0b31d6c9bdfd4b4ce2f094387f5aec49b78904d5ef85fb8cc",
       "ruleSetId": "zzz-hp-static-effects",
-      "revision": "59",
+      "revision": "60",
       "topLevelKeys": [
         "deferredMechanisms",
         "entities",

@@ -60,6 +60,13 @@ export function resolveAgentAction(
   )
   if (!action) throw new RangeError(`Unknown action: ${input.actionId}`)
   if (
+    action.minimumMindscapeRank !== undefined &&
+    input.mindscapeRank < action.minimumMindscapeRank
+  )
+    throw new RangeError(
+      `Action ${action.actionId} requires mindscape rank ${action.minimumMindscapeRank}`,
+    )
+  if (
     action.potentialLevels &&
     !action.potentialLevels.includes(potentialLevel)
   )
@@ -105,9 +112,20 @@ export function resolveAgentAction(
       throw new RangeError(`Invalid ${curve.levelGroup} coefficient`)
     return result
   }
+  /** 零倍率项由目录选项从零赋值；它不读取技能等级，也不伪造等级输入。 */
+  const evaluateAnomalyItem = (curve: SkillCoefficientCurve): number =>
+    curve.base === 0 && curve.growth === 0 ? 0 : evaluate(curve)
   const calculation = action.calculation
   if (calculation.kind === "unavailable")
     return { ok: false, issues: structuredClone(calculation.issues) }
+  if (
+    calculation.kind === "anomaly-settlement" &&
+    (!Array.isArray(calculation.elements) ||
+      calculation.elements.length === 0 ||
+      !Number.isFinite(calculation.anomalySettlementCriticalDamage) ||
+      calculation.anomalySettlementCriticalDamage < 0)
+  )
+    throw new TypeError(`Invalid anomaly settlement: ${action.actionId}`)
   if (
     input.requireIndividualHits &&
     calculation.kind === "damage" &&
@@ -160,12 +178,28 @@ export function resolveAgentAction(
             })),
           })),
         }
-      : calculation.kind === "luminize"
+      : calculation.kind === "anomaly-settlement"
         ? {
-            kind: "luminize" as const,
-            multiplier: evaluate(calculation.multiplier),
+            kind: "anomaly-settlement" as const,
+            elements: [...calculation.elements],
+            damageItems: calculation.items.map((item) => ({
+              itemId: item.itemId,
+              stat: item.stat,
+              damageMultiplier:
+                evaluateAnomalyItem(item.coefficient) *
+                (item.multiplyByInput === undefined
+                  ? 1
+                  : values[item.multiplyByInput]!),
+            })),
+            anomalySettlementCriticalDamage:
+              calculation.anomalySettlementCriticalDamage,
           }
-        : { kind: "daze-only" as const }
+        : calculation.kind === "luminize"
+          ? {
+              kind: "luminize" as const,
+              multiplier: evaluate(calculation.multiplier),
+            }
+          : { kind: "daze-only" as const }
   return {
     ok: true,
     resolutionContext: {

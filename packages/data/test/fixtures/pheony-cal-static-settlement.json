@@ -1,0 +1,327 @@
+{
+  "schemaVersion": 1,
+  "provenance": {
+    "nanokaVersion": "3.3.12+19634983",
+    "zzzHpCommit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+    "cal": {
+      "basic": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/basic/description/1/desc",
+        "expression": "{CAL:225+20*(AvatarSkillLevel(0)-1),1,2}%",
+        "upstreamSkillId": "sk-pheony-nk-1641005-异放倍率",
+        "level12BaseMult": 445
+      },
+      "chain": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/chain/description/2/desc",
+        "expression": "{CAL:300+27*(AvatarSkillLevel(3)-1),1,2}%",
+        "upstreamSkillId": "sk-pheony-nk-1641019-异放倍率",
+        "level12BaseMult": 597
+      }
+    },
+    "m4": {
+      "path": "agents/1641/details.zh.json",
+      "pointer": "/talent/4/desc",
+      "fixedPercent": 600,
+      "normalization": {
+        "physical": 42.78,
+        "fire": 3,
+        "ice": 30,
+        "electric": 7.5,
+        "ether": 3.75,
+        "wind": 75
+      },
+      "originalAnomalyCoefficients": {
+        "physical": 7.13,
+        "fire": 0.5,
+        "ice": 5,
+        "electric": 1.25,
+        "ether": 0.625,
+        "wind": 12.5
+      }
+    },
+    "fortyPercent": {
+      "basic": "/skill/basic/description/1/desc",
+      "chain": "/skill/chain/description/2/desc"
+    }
+  },
+  "build": {
+    "pheony": {
+      "entityId": "entity:pheony",
+      "teamId": "team:players",
+      "agentEntityId": "1641",
+      "level": 60,
+      "coreSkillLevel": 7,
+      "mindscapeRank": 4,
+      "wEngine": {
+        "entityId": "14164",
+        "refinement": 1,
+        "eligible": true
+      },
+      "driveDiscs": {
+        "1": {
+          "setEntityId": "33000",
+          "mainStat": { "attribute": "health" },
+          "substats": [
+            {
+              "attribute": "attack",
+              "operation": "initial-percentage",
+              "rolls": 3
+            },
+            {
+              "attribute": "criticalRate",
+              "operation": "ratio-add",
+              "rolls": 3
+            },
+            {
+              "attribute": "criticalDamage",
+              "operation": "ratio-add",
+              "rolls": 2
+            },
+            {
+              "attribute": "penetrationValue",
+              "operation": "initial-fixed",
+              "rolls": 1
+            }
+          ]
+        },
+        "2": {
+          "setEntityId": "33000",
+          "mainStat": { "attribute": "attack" },
+          "substats": [
+            {
+              "attribute": "attack",
+              "operation": "initial-percentage",
+              "rolls": 3
+            },
+            {
+              "attribute": "criticalRate",
+              "operation": "ratio-add",
+              "rolls": 3
+            },
+            {
+              "attribute": "criticalDamage",
+              "operation": "ratio-add",
+              "rolls": 2
+            },
+            { "attribute": "health", "operation": "initial-fixed", "rolls": 1 }
+          ]
+        },
+        "3": {
+          "setEntityId": "33000",
+          "mainStat": { "attribute": "defense" },
+          "substats": [
+            {
+              "attribute": "attack",
+              "operation": "initial-percentage",
+              "rolls": 3
+            },
+            {
+              "attribute": "criticalRate",
+              "operation": "ratio-add",
+              "rolls": 3
+            },
+            {
+              "attribute": "criticalDamage",
+              "operation": "ratio-add",
+              "rolls": 2
+            },
+            { "attribute": "health", "operation": "initial-fixed", "rolls": 1 }
+          ]
+        },
+        "4": {
+          "setEntityId": "33000",
+          "mainStat": { "attribute": "anomalyProficiency" },
+          "substats": [
+            {
+              "attribute": "attack",
+              "operation": "initial-percentage",
+              "rolls": 3
+            },
+            {
+              "attribute": "criticalRate",
+              "operation": "ratio-add",
+              "rolls": 3
+            },
+            { "attribute": "attack", "operation": "initial-fixed", "rolls": 2 },
+            {
+              "attribute": "penetrationValue",
+              "operation": "initial-fixed",
+              "rolls": 1
+            }
+          ]
+        },
+        "5": {
+          "setEntityId": "31300",
+          "mainStat": { "attribute": "damageBonus", "element": "fire" },
+          "substats": [
+            {
+              "attribute": "attack",
+              "operation": "initial-percentage",
+              "rolls": 3
+            },
+            {
+              "attribute": "criticalRate",
+              "operation": "ratio-add",
+              "rolls": 3
+            },
+            {
+              "attribute": "criticalDamage",
+              "operation": "ratio-add",
+              "rolls": 2
+            },
+            { "attribute": "attack", "operation": "initial-fixed", "rolls": 1 }
+          ]
+        },
+        "6": {
+          "setEntityId": "31300",
+          "mainStat": { "attribute": "anomalyMastery" },
+          "substats": [
+            {
+              "attribute": "criticalRate",
+              "operation": "ratio-add",
+              "rolls": 3
+            },
+            {
+              "attribute": "criticalDamage",
+              "operation": "ratio-add",
+              "rolls": 3
+            },
+            { "attribute": "attack", "operation": "initial-fixed", "rolls": 2 },
+            { "attribute": "health", "operation": "initial-fixed", "rolls": 1 }
+          ]
+        }
+      },
+      "panel": {
+        "stats": {
+          "health": 10209.7042,
+          "attack": 2711.1843,
+          "defense": 796.6038,
+          "impact": 86,
+          "anomalyProficiency": 240,
+          "anomalyMastery": 255,
+          "energyRegen": 1.2,
+          "criticalRate": 0.482,
+          "criticalDamage": 1.028,
+          "penetrationRatio": 0
+        },
+        "penetrationValue": 18,
+        "damageBonuses": { "fire": 0.3 }
+      }
+    },
+    "dialyn": {
+      "entityId": "entity:dialyn",
+      "teamId": "team:players",
+      "agentEntityId": "1481",
+      "level": 60,
+      "coreSkillLevel": 1,
+      "mindscapeRank": 0,
+      "panel": {
+        "stats": {
+          "health": 10000,
+          "attack": 1234.5,
+          "defense": 500,
+          "impact": 80,
+          "anomalyProficiency": 321,
+          "anomalyMastery": 100,
+          "energyRegen": 1.2,
+          "criticalRate": 0.05,
+          "criticalDamage": 0.5,
+          "penetrationRatio": 0.1
+        },
+        "penetrationValue": 25,
+        "damageBonuses": { "fire": 0.1 }
+      }
+    }
+  },
+  "target": {
+    "entityId": "entity:durand",
+    "teamId": "team:enemies",
+    "baseDefense": 921.04,
+    "resistances": {
+      "physical": 0,
+      "fire": 0,
+      "ice": 0,
+      "electric": 0,
+      "ether": 0,
+      "wind": 0
+    },
+    "isStunned": false,
+    "baseStunDamageMultiplier": 1
+  },
+  "references": {
+    "direct": {
+      "actionId": "action:agent:1641:action:0010",
+      "levelGroup": "basic",
+      "effectiveLevel": 14,
+      "multiplier": 11.947,
+      "defenseFactor": 0.46787347381322775,
+      "nonCritical": 19701.063933963615,
+      "critical": 39953.75765807821,
+      "expected": 29462.862308986852
+    },
+    "baseCal": {
+      "actionId": "action:agent:1641:action:0021",
+      "levelGroup": "basic",
+      "effectiveLevel": 14,
+      "multiplier": 4.85,
+      "nonCritical": 21009.787867035975,
+      "critical": 43070.065127423746,
+      "expected": 43070.065127423746,
+      "withoutTeamCritical": 39918.59694736835
+    },
+    "m4": {
+      "actionId": "action:agent:1641:action:0023",
+      "multiplier": 3,
+      "nonCritical": 12995.745072393387,
+      "critical": 26641.27739840644,
+      "expected": 26641.27739840644,
+      "withoutTeamCritical": 24691.915637547434
+    },
+    "anomalyFactors": {
+      "defenseTargetEffective": 803.936,
+      "defense": 0.4968909893762954,
+      "anomalyProficiency": 3.21,
+      "anomalyDamageLevel": 2,
+      "damageBonus": 1.1,
+      "anomalySettlementCriticalDamageWithTeam": 1.05,
+      "anomalySettlementCriticalFactorWithTeam": 2.05,
+      "anomalySettlementCriticalFactorWithoutTeam": 1.9,
+      "anomalySettlementCriticalRate": 1
+    },
+    "m2Preparation": {
+      "optionId": "agents:pheony:mindscape:2:blk-mindscapeBuffs-2-1:eff-mvdz21so-s2au9j",
+      "durationAdjustment": 2,
+      "preparedMultiplier": 13.5
+    }
+  },
+  "derivation": {
+    "pheonyPanel": [
+      "attack = (797.574 base + 75 core F + 713.76 Plume of Rebirth) × (1 + 0.45 attack% substats) + 316 slot-2 main + 95 flat substats = 2711.1843; initial-fixed stats are added after the percentage",
+      "health = 7673.7042 + 2200 slot-1 main + 336 flat substats = 10209.7042",
+      "defense = 612.6038 + 184 slot-3 main = 796.6038",
+      "anomalyProficiency = 118 + 92 slot-4 main + 30 Freedom Blues two-piece = 240",
+      "anomalyMastery = (116 + 36 core F) × (1 + 0.30 Plume advanced + 0.30 slot-6 main) + 0.08 × 152 Phaethon's Melody two-piece = 255.36, floored by the stat-value contract to 255",
+      "criticalRate = 0.05 + 18 × 0.024 = 0.482",
+      "criticalDamage = 0.5 + 11 × 0.048 = 1.028",
+      "fire damage bonus = 0.30 slot-5 main; penetrationValue = 2 × 9 = 18"
+    ],
+    "direct": [
+      "damageCoefficient L14 = 5.473 + 0.498 × 13 = 11.947",
+      "defense = 794 / (921.04 − 18 + 794)",
+      "nonCritical = 11.947 × 2711.1843 × (1 + 0.30) × defense",
+      "critical = nonCritical × (1 + 1.028); expected = 0.518 × nonCritical + 0.482 × critical"
+    ],
+    "anomaly": [
+      "Base CAL L14 = 2.25 + 0.20 × 13 = 4.85; M4 fire = 0.5 × 600% = 3",
+      "base = multiplier × Dialyn attack 1234.5; anomaly proficiency = 321 / 100 = 3.21; level 60 = 2",
+      "damageBonus = 1 + Dialyn fire panel 0.10 = 1.10; anomalyDamageBonus = 1",
+      "defense = 794 / (921.04 × (1 − 0.10) − 25 + 794)",
+      "anomaly critical damage = core 0.25 + M1 0.25 + additional ability 0.15 + event 0.40 = 1.05; rate = 1, so expected = critical",
+      "without a same-team teammate only the additional ability 0.15 is removed: 0.25 + 0.25 + 0.40 = 0.90"
+    ],
+    "m2": [
+      "M2 adds two seconds only to the prepared fire disorder multiplier: 10s burn, 3s elapsed, 4.5 + floor(7/0.5) × 0.5 = 11.5; with +2: 4.5 + floor(9/0.5) × 0.5 = 13.5"
+    ]
+  }
+}

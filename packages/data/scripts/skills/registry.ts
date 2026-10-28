@@ -4,6 +4,7 @@ import type {
 } from "../../src/integration/agent-types.ts"
 import type {
   ActionDamageElement,
+  ActionSourceReference,
   AgentActionId,
   ActionIssue,
   ActionSkillCategory,
@@ -11,7 +12,9 @@ import type {
 } from "../../src/skills/types.ts"
 import { sha256 } from "../nanoka-integration/files.ts"
 
-export interface ActionRegistryEntry {
+export interface ParameterActionRegistryEntry {
+  /** 参数行动作；省略 kind 以保持既有 registry 的形状。 */
+  readonly kind?: "parameter-row"
   readonly actionId: AgentActionId
   readonly branchId: string
   readonly entityId: string
@@ -52,10 +55,132 @@ export interface ActionRegistryEntry {
   readonly additionalBase?: "zhao-charge"
 }
 
+/**
+ * 独立异放动作：不消费技能参数行，而是从说明或影画原文派生一次独立结算。
+ * `source` 与 `descriptionSources` 都是固定语言文件中的 JSON Pointer；签名同时
+ * 覆盖原文与登记断言，任何一边漂移都拒绝生成。
+ */
+export interface AnomalySettlementActionRegistryEntry {
+  readonly kind: "anomaly-settlement"
+  readonly actionId: AgentActionId
+  readonly branchId: string
+  readonly entityId: string
+  readonly name: string
+  readonly rowName: string
+  readonly levelGroup: SkillLevelGroup
+  readonly skillCategory: ActionSkillCategory
+  /** 调用方必须显式选择其中一个原异常元素。 */
+  readonly elements: readonly ActionDamageElement[]
+  /** 零初始倍率由目录选项赋值时设置；基础 CAL 不设置。 */
+  readonly minimumMindscapeRank?: number
+  /** 事件自身携带的异放暴伤；目录选项提供时为 0。 */
+  readonly anomalySettlementCriticalDamage: number
+  readonly multiplier:
+    | {
+        readonly kind: "cal"
+        readonly expression: string
+        readonly base: number
+        readonly growth: number
+      }
+    | {
+        readonly kind: "catalog-option"
+        readonly itemId: string
+      }
+  readonly sourceExpression: string
+  readonly source: ActionSourceReference
+  readonly descriptionSources: readonly string[]
+  readonly sourceSignature: string
+  readonly upstreamSkillId: string | null
+  readonly skillTargetIds: readonly string[]
+  readonly issues: readonly ActionIssue[]
+  readonly limitations?: readonly string[]
+}
+
+export type ActionRegistryEntry =
+  | ParameterActionRegistryEntry
+  | AnomalySettlementActionRegistryEntry
+
+export function isAnomalySettlementAction(
+  entry: ActionRegistryEntry,
+): entry is AnomalySettlementActionRegistryEntry {
+  return entry.kind === "anomaly-settlement"
+}
+
+/** 读取 details 中的 JSON Pointer；任何缺失层级都返回 undefined。 */
+export function readActionSourcePointer(
+  details: AgentDetails,
+  pointer: string,
+): unknown {
+  let current: unknown = details
+  for (const raw of pointer.split("/").slice(1)) {
+    const token = raw.replaceAll("~1", "/").replaceAll("~0", "~")
+    if (Array.isArray(current)) {
+      const index = Number(token)
+      if (!Number.isInteger(index) || index < 0 || index >= current.length)
+        return undefined
+      current = current[index]
+      continue
+    }
+    if (current !== null && typeof current === "object") {
+      const record = current as Record<string, unknown>
+      if (!Object.hasOwn(record, token)) return undefined
+      current = record[token]
+      continue
+    }
+    return undefined
+  }
+  return current
+}
+
+/** 独立异放动作的来源与登记断言签名；原文和动作语义都进入摘要。 */
+export function anomalySettlementActionSignature(
+  details: AgentDetails,
+  entry: AnomalySettlementActionRegistryEntry,
+): string {
+  const sourceText = readActionSourcePointer(details, entry.source.pointer)
+  if (typeof sourceText !== "string")
+    throw new Error(
+      `Missing anomaly settlement source: ${entry.actionId} ${entry.source.pointer}`,
+    )
+  const descriptions = entry.descriptionSources.map((pointer) => {
+    const text = readActionSourcePointer(details, pointer)
+    if (typeof text !== "string")
+      throw new Error(
+        `Missing anomaly settlement description: ${entry.actionId} ${pointer}`,
+      )
+    return { pointer, text }
+  })
+  return sha256(
+    Buffer.from(
+      JSON.stringify({
+        kind: entry.kind,
+        actionId: entry.actionId,
+        branchId: entry.branchId,
+        entityId: entry.entityId,
+        name: entry.name,
+        rowName: entry.rowName,
+        levelGroup: entry.levelGroup,
+        skillCategory: entry.skillCategory,
+        elements: entry.elements,
+        minimumMindscapeRank: entry.minimumMindscapeRank ?? null,
+        anomalySettlementCriticalDamage: entry.anomalySettlementCriticalDamage,
+        multiplier: entry.multiplier,
+        sourceExpression: entry.sourceExpression,
+        source: { pointer: entry.source.pointer, text: sourceText },
+        descriptions,
+        upstreamSkillId: entry.upstreamSkillId,
+        skillTargetIds: entry.skillTargetIds,
+        issues: entry.issues,
+        limitations: entry.limitations ?? [],
+      }),
+    ),
+  )
+}
+
 export function sourceRows(
   details: AgentDetails,
   entry: Pick<
-    ActionRegistryEntry,
+    ParameterActionRegistryEntry,
     | "levelGroup"
     | "sectionIndex"
     | "rowIndex"
@@ -146,7 +271,7 @@ const potentialLevelsFromValues = (
 export function declaredPotentialLevels(
   details: AgentDetails,
   entry: Pick<
-    ActionRegistryEntry,
+    ParameterActionRegistryEntry,
     | "actionId"
     | "levelGroup"
     | "sectionIndex"
@@ -216,7 +341,10 @@ const potentialLevelMapping = (
 /** 显式登记的关联被动证据；正文、名称与潜能条件全部进入签名。 */
 const relatedPassiveEvidence = (
   details: AgentDetails,
-  entry: Pick<ActionRegistryEntry, "relatedPassiveEvidence" | "actionId">,
+  entry: Pick<
+    ParameterActionRegistryEntry,
+    "relatedPassiveEvidence" | "actionId"
+  >,
 ) =>
   (entry.relatedPassiveEvidence ?? []).map(({ id, descIndex }) => {
     const passive = details.passive.level[id]
@@ -250,7 +378,7 @@ const relatedPassiveEvidence = (
 export function actionSourceSignature(
   details: AgentDetails,
   entry: Pick<
-    ActionRegistryEntry,
+    ParameterActionRegistryEntry,
     | "actionId"
     | "levelGroup"
     | "sectionIndex"

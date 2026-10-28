@@ -120,7 +120,7 @@ const nanokaReference = (locale: "zh" | "en") => ({
 describe("Pheony M2 burn duration conversion", () => {
   it("generates a corrected independent-settlement option with a holder source requirement", () => {
     const output = convert()
-    expect(output.definitions.revision).toBe("59")
+    expect(output.definitions.revision).toBe("60")
     const option = optionFor(output)
     expect(option.target).toBe("team")
     const [variant] = option.variants

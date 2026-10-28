@@ -165,7 +165,7 @@ describe("batch 27 Yixuan thunder settlements through the published data package
     expect(definitions.ok, JSON.stringify(definitions)).toBe(true)
     if (!definitions.ok) throw new Error(JSON.stringify(definitions.issues))
     const catalog = calculationData.catalog as StaticEffectCatalog
-    expect(catalog.revision).toBe("59")
+    expect(catalog.revision).toBe("60")
     for (const target of [M2_TARGET, M1_TARGET, AA_TARGET])
       expect(catalog.skillTargets.some((t) => t.targetId === target)).toBe(true)
     for (const option of [M2_OPTION, M1_OPTION, AA_OPTION])

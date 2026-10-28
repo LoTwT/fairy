@@ -81,6 +81,7 @@ function agentActionsManifest(): Record<string, unknown> {
       damage: 0,
       dazeOnly: 0,
       luminize: 0,
+      anomalySettlement: 0,
       unavailable: 0,
       individualHitActions: 0,
     },

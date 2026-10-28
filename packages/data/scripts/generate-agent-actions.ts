@@ -21,7 +21,10 @@ import {
   rulesVersion,
   verifyAgentActions,
 } from "./skills/manifest.ts"
-import type { ActionRegistryEntry } from "./skills/registry.ts"
+import {
+  isAnomalySettlementAction,
+  type ActionRegistryEntry,
+} from "./skills/registry.ts"
 import evidence from "./skills/evidence.json" with { type: "json" }
 import registryData from "./skills/registry.json" with { type: "json" }
 
@@ -137,7 +140,9 @@ export async function generateAgentActions(
       )
     for (const id of [
       ...entry.skillTargetIds,
-      ...(entry.conditionalIdentity?.skillTargetIds ?? []),
+      ...(isAnomalySettlementAction(entry)
+        ? []
+        : (entry.conditionalIdentity?.skillTargetIds ?? [])),
     ]) {
       const target = staticCatalog.skillTargets.find(
         (value) => value.targetId === id,
