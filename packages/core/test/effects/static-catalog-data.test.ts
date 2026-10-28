@@ -2358,7 +2358,7 @@ describe("fixed-source catalog conformance", () => {
       "agent:1581:zzz-hp:eff-ms7tjyzo-3v31wa:blk-legacy:mindscape:1"
 
     it("exposes one complete option with the original rules and migration evidence", () => {
-      expect(catalog.revision).toBe("59")
+      expect(catalog.revision).toBe("60")
       expect(
         catalog.differences.some((d) => d.differenceId === differenceId),
         differenceId,

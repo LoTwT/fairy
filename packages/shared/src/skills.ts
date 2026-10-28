@@ -73,6 +73,20 @@ export interface ActionDamageSegment {
   readonly items: readonly ActionDamageItem[]
 }
 
+/**
+ * 独立异放结算的倍率与暴伤规则。倍率项按原异常来源缩放，倍率本身就是
+ * 异放倍率；基础 CAL 不再乘原异常系数，M4 的固定 600% 已按目录归一到对应
+ * 元素倍率。与触发招式的直伤分段、合计和分类完全分开。
+ */
+export interface ActionAnomalySettlement {
+  /** 调用方必须显式声明的原异常元素；只能取这里登记的元素。 */
+  readonly elements: readonly ActionDamageElement[]
+  /** 本次异放的倍率项；零倍率项由目录选项提供最终倍率（M4）。 */
+  readonly items: readonly ActionDamageItem[]
+  /** 该事件自带的异放暴伤，只进入异放专用暴伤通道；0 表示由目录选项提供。 */
+  readonly anomalySettlementCriticalDamage: number
+}
+
 export type AgentActionCalculation =
   | {
       readonly kind: "damage"
@@ -80,6 +94,9 @@ export type AgentActionCalculation =
     }
   | { readonly kind: "daze-only" }
   | { readonly kind: "luminize"; readonly multiplier: SkillCoefficientCurve }
+  | ({
+      readonly kind: "anomaly-settlement"
+    } & ActionAnomalySettlement)
   | { readonly kind: "unavailable"; readonly issues: readonly ActionIssue[] }
 
 export interface AgentAction {
@@ -95,6 +112,8 @@ export interface AgentAction {
   readonly skillTags: readonly string[]
   /** 该动作仅在列出的潜能等级可用；省略表示与潜能无关，解析上下文不记录潜能。 */
   readonly potentialLevels?: readonly number[]
+  /** 该动作仅在达到该影画等级后可用；省略表示与影画无关。 */
+  readonly minimumMindscapeRank?: number
   /** 基础身份之外、满足潜能与额外能力条件时追加的命中身份。 */
   readonly conditionalIdentity?: AgentActionConditionalIdentity
   readonly source: ActionSourceReference
@@ -149,17 +168,28 @@ export interface ResolveAgentActionInput {
   readonly additionalAbilityActive?: boolean
 }
 
+export interface ResolvedActionMultiplierInput {
+  /** 来源动作声明的输入名；必须同时存在于 action.inputs。 */
+  readonly inputId: string
+  /** data 已解析并验证过的显式输入值；core 用同一值复核最终倍率。 */
+  readonly value: number
+}
+
+export interface ResolvedActionDamageItem {
+  readonly itemId: string
+  readonly stat: ActionScalingStat
+  readonly damageMultiplier: number
+  /** 仅当来源项声明 multiplyByInput 时出现；倍率已乘入 value。 */
+  readonly multiplyByInput?: ResolvedActionMultiplierInput
+}
+
 export interface ResolvedActionSegment {
   readonly segmentId: string
   readonly damageKind: "regular" | "sheer" | "sharpen"
   readonly element: ActionDamageElement
   readonly granularity: "individual" | "aggregate"
   readonly repeat: number
-  readonly damageItems: readonly {
-    readonly itemId: string
-    readonly stat: ActionScalingStat
-    readonly damageMultiplier: number
-  }[]
+  readonly damageItems: readonly ResolvedActionDamageItem[]
 }
 
 export type ResolvedAgentAction =
@@ -189,6 +219,12 @@ export type ResolvedAgentAction =
         | {
             readonly kind: "damage"
             readonly segments: readonly ResolvedActionSegment[]
+          }
+        | {
+            readonly kind: "anomaly-settlement"
+            readonly elements: readonly ActionDamageElement[]
+            readonly damageItems: readonly ResolvedActionDamageItem[]
+            readonly anomalySettlementCriticalDamage: number
           }
         | { readonly kind: "daze-only" }
         | { readonly kind: "luminize"; readonly multiplier: number }

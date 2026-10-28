@@ -332,7 +332,7 @@ describe("data product manifests", () => {
   it("normalizes the agent actions manifest coverage counts", () => {
     const manifest = aggregate.agentActions
     expect(manifest.product).toBe("agent-actions")
-    expect(manifest.rulesVersion.label).toBe("agent-actions/4")
+    expect(manifest.rulesVersion.label).toBe("agent-actions/5")
     expect(manifest.source.version).toBe("3.3.12+19634983")
     expect(manifest.extensions.evidence.zzzHpCommit).toBe(
       "991bb0ef2a00387f8a1fa18293bbda17256d7270",
@@ -344,6 +344,7 @@ describe("data product manifests", () => {
       damage: 1166,
       dazeOnly: 174,
       luminize: 4,
+      anomalySettlement: 4,
       unavailable: 4,
     })
     expect(manifest.coverage.supplementalCount).toBe(0)
@@ -365,9 +366,9 @@ describe("data product manifests", () => {
     expect(manifest.product).toBe("static-effects")
     expect(manifest.schemaVersion).toBe(1)
     expect(manifest.rulesVersion).toEqual({
-      label: "zzz-hp-static-effects/59",
+      label: "zzz-hp-static-effects/60",
       ruleSetId: "zzz-hp-static-effects",
-      revision: "59",
+      revision: "60",
     })
     expect(manifest.source).toEqual({
       repository: structureBaseline.effects.sourceRepository,

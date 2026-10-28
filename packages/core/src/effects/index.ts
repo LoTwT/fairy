@@ -140,6 +140,8 @@ export type {
   StaticCatalogDamageInput,
   StaticCatalogDamageItem,
   StaticCatalogDamageItemRequirement,
+  StaticCatalogAnomalyDamage,
+  StaticCatalogAnomalySettlementParameters,
   StaticCatalogDamageParameters,
   StaticCatalogDefenseInput,
   StaticCatalogLuminizeDamageBranch,

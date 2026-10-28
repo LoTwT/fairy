@@ -11,18 +11,21 @@ export type {
   ActionIssue,
   ActionDamageItem,
   ActionDamageSegment,
+  ActionAnomalySettlement,
   AgentActionCalculation,
   AgentAction,
   AgentActions,
   ResolvedSkillLevel,
   ResolveAgentActionInput,
+  ResolvedActionDamageItem,
+  ResolvedActionMultiplierInput,
   ResolvedActionSegment,
   ResolvedAgentAction,
 } from "@randomplay/shared"
 
 export interface AgentActionManifest {
   readonly schemaVersion: 1
-  readonly rulesVersion: "agent-actions/4"
+  readonly rulesVersion: "agent-actions/5"
   readonly sourceVersion: string
   readonly members: readonly string[]
   readonly inputs: readonly { readonly path: string; readonly sha256: string }[]
@@ -43,6 +46,7 @@ export interface AgentActionManifest {
     readonly damage: number
     readonly dazeOnly: number
     readonly luminize: number
+    readonly anomalySettlement: number
     readonly unavailable: number
     readonly individualHitActions: number
   }

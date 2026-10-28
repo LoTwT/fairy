@@ -120,6 +120,7 @@ export interface AgentActionsCoverageCounts {
   readonly damage: number
   readonly dazeOnly: number
   readonly luminize: number
+  readonly anomalySettlement: number
   readonly unavailable: number
   readonly individualHitActions: number
 }
@@ -263,6 +264,7 @@ const skillsManifestKeys = [
 const skillsCoverageKeys = [
   "actions",
   "agents",
+  "anomalySettlement",
   "damage",
   "dazeOnly",
   "individualHitActions",
@@ -498,6 +500,10 @@ function parseAgentActionsManifest(
       expectField(coverage, "luminize", coverageLabel),
       `${coverageLabel}.luminize`,
     ),
+    anomalySettlement: expectInteger(
+      expectField(coverage, "anomalySettlement", coverageLabel),
+      `${coverageLabel}.anomalySettlement`,
+    ),
     unavailable: expectInteger(
       expectField(coverage, "unavailable", coverageLabel),
       `${coverageLabel}.unavailable`,
@@ -589,6 +595,7 @@ function parseAgentActionsManifest(
         damage: coverageCounts.damage,
         dazeOnly: coverageCounts.dazeOnly,
         luminize: coverageCounts.luminize,
+        anomalySettlement: coverageCounts.anomalySettlement,
         unavailable: coverageCounts.unavailable,
       },
       supplementalCount: 0,

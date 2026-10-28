@@ -23494,5 +23494,137 @@
     "upstreamSkillId": "sk-pheony-nk-1641009-main",
     "skillTargetIds": [],
     "issues": []
+  },
+  {
+    "kind": "anomaly-settlement",
+    "actionId": "action:agent:1641:action:0021",
+    "branchId": "agent:1641:branch:basic-4-anomaly-settlement",
+    "entityId": "1641",
+    "name": "普通攻击：焚罪 · 异放",
+    "rowName": "异放倍率",
+    "levelGroup": "basic",
+    "skillCategory": "uncategorized",
+    "elements": ["physical", "fire", "ice", "electric", "ether", "wind"],
+    "anomalySettlementCriticalDamage": 0.4,
+    "multiplier": {
+      "kind": "cal",
+      "expression": "{CAL:225+20*(AvatarSkillLevel(0)-1),1,2}%",
+      "base": 2.25,
+      "growth": 0.2
+    },
+    "sourceExpression": "{CAL:225+20*(AvatarSkillLevel(0)-1),1,2}%",
+    "source": {
+      "path": "agents/1641/details.zh.json",
+      "pointer": "/skill/basic/description/1/desc"
+    },
+    "descriptionSources": ["/skill/basic/description/1/desc"],
+    "sourceSignature": "55e8b2fae1be33cb6e3b97f6989f230863e2c79743f4ca85ffb72cdaaa314137",
+    "upstreamSkillId": "sk-pheony-nk-1641005-异放倍率",
+    "skillTargetIds": [],
+    "issues": [],
+    "limitations": [
+      "本动作只结算[普通攻击：焚罪]终结一击触发的一次独立[异放]；调用方须显式选择本动作并声明原异常元素、原异常来源与命中。不会自动追加到直接动作0010，也不模拟异常状态、异常积蓄、持续时间或战斗时间线。",
+      "CAL 倍率就是本次异放倍率，不再乘六元素原异常系数；该次异放的40%暴伤只属于本动作，不进入M4追加异放或普通异放。"
+    ]
+  },
+  {
+    "kind": "anomaly-settlement",
+    "actionId": "action:agent:1641:action:0022",
+    "branchId": "agent:1641:branch:chain-5-anomaly-settlement",
+    "entityId": "1641",
+    "name": "烬火追魂 · 异放",
+    "rowName": "异放倍率",
+    "levelGroup": "chain",
+    "skillCategory": "uncategorized",
+    "elements": ["physical", "fire", "ice", "electric", "ether", "wind"],
+    "anomalySettlementCriticalDamage": 0.4,
+    "multiplier": {
+      "kind": "cal",
+      "expression": "{CAL:300+27*(AvatarSkillLevel(3)-1),1,2}%",
+      "base": 3,
+      "growth": 0.27
+    },
+    "sourceExpression": "{CAL:300+27*(AvatarSkillLevel(3)-1),1,2}%",
+    "source": {
+      "path": "agents/1641/details.zh.json",
+      "pointer": "/skill/chain/description/2/desc"
+    },
+    "descriptionSources": ["/skill/chain/description/2/desc"],
+    "sourceSignature": "5b010f84b7375a2c2f86a14a40c1fd4d5786b76391b22ac36f8fc757c012ab15",
+    "upstreamSkillId": "sk-pheony-nk-1641019-异放倍率",
+    "skillTargetIds": [],
+    "issues": [],
+    "limitations": [
+      "本动作只结算[烬火追魂]终结一击触发的一次独立[异放]；调用方须显式选择本动作并声明原异常元素、原异常来源与命中。不会自动追加到直接动作0014，也不模拟异常状态、异常积蓄、持续时间或战斗时间线。",
+      "CAL 倍率就是本次异放倍率，不再乘六元素原异常系数；该次异放的40%暴伤只属于本动作，不进入M4追加异放或普通异放。"
+    ]
+  },
+  {
+    "kind": "anomaly-settlement",
+    "actionId": "action:agent:1641:action:0023",
+    "branchId": "agent:1641:branch:basic-4-anomaly-settlement-m4",
+    "entityId": "1641",
+    "name": "普通攻击：焚罪 · 影画4追加异放",
+    "rowName": "追加异放倍率",
+    "levelGroup": "basic",
+    "skillCategory": "uncategorized",
+    "elements": ["physical", "fire", "ice", "electric", "ether", "wind"],
+    "minimumMindscapeRank": 4,
+    "anomalySettlementCriticalDamage": 0,
+    "multiplier": {
+      "kind": "catalog-option",
+      "itemId": "pheony:m4-anomaly-settlement"
+    },
+    "sourceExpression": "600%",
+    "source": {
+      "path": "agents/1641/details.zh.json",
+      "pointer": "/talent/4/desc"
+    },
+    "descriptionSources": [
+      "/skill/basic/description/1/desc",
+      "/skill/chain/description/2/desc"
+    ],
+    "sourceSignature": "a7ea84a66d137f822a3a29b310cbae3c401461373bed5444d7be56920902bbc8",
+    "upstreamSkillId": null,
+    "skillTargetIds": ["zzz-hp:skill:pheony-m4-anomaly-settlement"],
+    "issues": [],
+    "limitations": [
+      "本动作只结算[普通攻击：焚罪]终结一击在影画4触发的追加[异放]；调用方须显式选择本动作、对应元素的 B2 选项并声明原异常元素、原异常来源与命中。未选择选项时倍率为0，最低影画4。",
+      "最终倍率由 B2 六元素选项提供，40%暴伤也只由该选项进入异放专用通道；本动作不携带基础 CAL 的倍率或40%规则，也不自动追加到直接动作0010。"
+    ]
+  },
+  {
+    "kind": "anomaly-settlement",
+    "actionId": "action:agent:1641:action:0024",
+    "branchId": "agent:1641:branch:chain-5-anomaly-settlement-m4",
+    "entityId": "1641",
+    "name": "烬火追魂 · 影画4追加异放",
+    "rowName": "追加异放倍率",
+    "levelGroup": "chain",
+    "skillCategory": "uncategorized",
+    "elements": ["physical", "fire", "ice", "electric", "ether", "wind"],
+    "minimumMindscapeRank": 4,
+    "anomalySettlementCriticalDamage": 0,
+    "multiplier": {
+      "kind": "catalog-option",
+      "itemId": "pheony:m4-anomaly-settlement"
+    },
+    "sourceExpression": "600%",
+    "source": {
+      "path": "agents/1641/details.zh.json",
+      "pointer": "/talent/4/desc"
+    },
+    "descriptionSources": [
+      "/skill/basic/description/1/desc",
+      "/skill/chain/description/2/desc"
+    ],
+    "sourceSignature": "c077ee961bea452d4c4d6aecede2661dbda1ae49846dd5640150e5786e9e8a8c",
+    "upstreamSkillId": null,
+    "skillTargetIds": ["zzz-hp:skill:pheony-m4-anomaly-settlement"],
+    "issues": [],
+    "limitations": [
+      "本动作只结算[烬火追魂]终结一击在影画4触发的追加[异放]；调用方须显式选择本动作、对应元素的 B2 选项并声明原异常元素、原异常来源与命中。未选择选项时倍率为0，最低影画4。",
+      "最终倍率由 B2 六元素选项提供，40%暴伤也只由该选项进入异放专用通道；本动作不携带基础 CAL 的倍率或40%规则，也不自动追加到直接动作0014。"
+    ]
   }
 ]

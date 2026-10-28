@@ -111,6 +111,7 @@ describe("agent action semantics", () => {
         (entry) =>
           entry.entityId === id &&
           entry.levelGroup === group &&
+          entry.kind !== "anomaly-settlement" &&
           entry.additionalDescriptionIndices?.includes(index),
       )
       expect(related.length).toBeGreaterThan(0)
@@ -1471,7 +1472,7 @@ describe("D6 1631/1641 action catalogs", () => {
       ["1641", "fire"],
     ] as const) {
       const data = await agent(id)
-      expect(data.actions, id).toHaveLength(20)
+      expect(data.actions, id).toHaveLength(id === "1631" ? 20 : 24)
       expect(
         data.actions.filter(
           (action) => action.calculation.kind === "daze-only",
@@ -1482,6 +1483,7 @@ describe("D6 1631/1641 action catalogs", () => {
         data.actions.every(
           (action) =>
             action.calculation.kind === "daze-only" ||
+            action.calculation.kind === "anomaly-settlement" ||
             (action.calculation.kind === "damage" &&
               action.calculation.segments[0]!.element === element),
         ),

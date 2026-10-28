@@ -19,7 +19,9 @@ import type {
 import type {
   EffectNumericInput,
   ResolvedContribution,
+  StaticCatalogAnomalySettlementParameters,
   StaticCatalogDamageInput,
+  StaticCatalogPlainAnomalySource,
   StaticDamageResult,
   StaticTargetWindsweptState,
   WorldObservation,
@@ -120,6 +122,15 @@ export interface StaticActionCalculationInput {
     /** 原样交给目录校验的有效元素增益集合；不从动作或敌人状态推断。 */
     readonly activeBuffElements?: readonly DamageElement[]
   }[]
+  /**
+   * 独立异放事件：显式元素、原异常来源、动作携带的伤害项与显式异常参数。
+   * 不并入触发招式的直伤；无效或不匹配输入返回结构化失败，不以零伤害代替。
+   */
+  readonly anomalySettlement?: {
+    readonly element: DamageElement
+    readonly anomalySource: StaticCatalogPlainAnomalySource
+    readonly damage: StaticCatalogAnomalySettlementParameters
+  }
   readonly inputs?: readonly EffectNumericInput[]
   readonly observedWorld?: Pick<WorldObservation, "states" | "distances">
   readonly snapshots?: StaticCatalogDamageInput["snapshots"]
@@ -178,5 +189,13 @@ export type StaticActionCalculationResult = {
         readonly displayedNonCritical: number | null
         readonly displayedCritical: number | null
       }
+    }
+  | {
+      readonly kind: "anomaly-settlement"
+      readonly element: DamageElement
+      readonly anomalySource: StaticCatalogPlainAnomalySource
+      /** 动作自带的异放暴伤；M4 由目录选项提供时为 0。 */
+      readonly settlementCriticalDamage: number
+      readonly damage: StaticDamageResult
     }
 )

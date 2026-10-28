@@ -46,10 +46,11 @@ describe("action publication contract", () => {
     const manifest = await verifyAgentActions(actions, index, catalog)
     expect(manifest.coverage).toEqual({
       agents: 62,
-      actions: 1348,
+      actions: 1352,
       damage: 1166,
       dazeOnly: 174,
       luminize: 4,
+      anomalySettlement: 4,
       unavailable: 4,
       individualHitActions: 1,
     })

@@ -60,6 +60,7 @@ const expectedImplementationBases = [
   "075822e2",
   "f412c038",
   "b17a1f8a",
+  "3bd08931",
 ] as const
 
 const expectedPreviousSnapshotIds = [
@@ -82,6 +83,7 @@ const expectedPreviousSnapshotIds = [
   "sha256:ccb28367195fe2f2b4183623a3332119fbc742ffc484b40cd9be89be645623ae",
   "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da",
   "sha256:32f3756be0e5384a0a7ed8cdd6d9d8e493eb2159265147ff80d9312367568541",
+  "sha256:c5663dcbcba57d9da3ccf8897a62acc324aac76e39c2af18554ebecb49d6c8b0",
 ] as const
 
 const expectedCurrentSnapshotIds = [
@@ -104,6 +106,7 @@ const expectedCurrentSnapshotIds = [
   "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da",
   "sha256:32f3756be0e5384a0a7ed8cdd6d9d8e493eb2159265147ff80d9312367568541",
   "sha256:c5663dcbcba57d9da3ccf8897a62acc324aac76e39c2af18554ebecb49d6c8b0",
+  "sha256:8663cbf01382c31f854fc38a2b552ed45fba0c11020c11fff465b5399e9b5349",
 ] as const
 
 /** 本次逐条核对过的 static-effects 制品摘要；entry 5 保留 PR-D 改写前的 catalog 值，entry 6 记录本次刷新前的字节。 */
@@ -184,6 +187,10 @@ const expectedArtifactSha256 = [
     "f7bada47889112f3d0bf806484e4c9d4317d2c5828c4388760c08d0f59e2de1e",
     "00c0334588313403bca0a432c6a970651b0051f3a55b82c5cc64557aac4b78c6",
   ],
+  [
+    "68d3dc3a89b7c9f9a3d8b2195e5ef397b290bf9a993709463f8832aebdafc1fc",
+    "6a083a704004305646e9235aba45fa328963e074fb1633ba35b3245aab9b43d5",
+  ],
 ] as const
 
 /** B1 已完成链（17 条）的冻结摘要；B2/B3 只能在其后追加，不能改写历史条目。 */
@@ -200,11 +207,26 @@ const expectedB2ChainSha256 = {
   vortex: "eac4ccb0f89544bd164353fc14fb32b53fc7a594015e2ec27fc58f41a5205542",
 } as const
 
+/** B1+B2+B3 已完成链（19 条）的冻结摘要；B4 只能在其后追加。 */
+const expectedB3ChainSha256 = {
+  abloom: "787be157a219e167a35d0f2a92a423fdbc2db55ea7957601a8260f3963b592ce",
+  static: "93bb1fcc4c8dccecbe3036422105c326ca8ce314c8be294e7b8c0c23518c4307",
+  vortex: "93bb1fcc4c8dccecbe3036422105c326ca8ce314c8be294e7b8c0c23518c4307",
+} as const
+
+const expectedB3SnapshotId =
+  "sha256:c5663dcbcba57d9da3ccf8897a62acc324aac76e39c2af18554ebecb49d6c8b0"
+
+const expectedB3ArtifactSha256 = {
+  static: "f7bada47889112f3d0bf806484e4c9d4317d2c5828c4388760c08d0f59e2de1e",
+  catalog: "00c0334588313403bca0a432c6a970651b0051f3a55b82c5cc64557aac4b78c6",
+} as const
+
 describe("ZZZ Calculator 快照刷新链", () => {
   it("三份夹具均为 19 条，相邻条目首尾相接，末条等于当前消费快照", () => {
     for (const [name, fixture] of Object.entries(fixtures)) {
       const entries = fixture.fairySnapshotRefreshes
-      expect(entries, name).toHaveLength(19)
+      expect(entries, name).toHaveLength(20)
       entries.forEach((entry, index) => {
         expect(entry.implementationBase, `${name} entry ${index}`).toBe(
           expectedImplementationBases[index],
@@ -225,11 +247,11 @@ describe("ZZZ Calculator 快照刷新链", () => {
         fixture.provenance?.fairyCalculationDataVersion?.snapshotId
       expect(snapshotId, name).toBe(expectedCurrentSnapshotIds.at(-1))
       expect(entries.at(-1)!.currentSnapshotId, name).toBe(snapshotId)
-      expect(entries.at(-1)!.reason, name).toContain("Revision 59")
+      expect(entries.at(-1)!.reason, name).toContain("Revision 60")
     }
   })
 
-  it("只追加 B2/B3 条目，不改写 B1/B2 历史链", () => {
+  it("只追加 B2/B3/B4 条目，不改写 B1/B2/B3 历史链", () => {
     for (const [name, fixture] of Object.entries(fixtures)) {
       const entries = fixture.fairySnapshotRefreshes
       expect(
@@ -248,6 +270,12 @@ describe("ZZZ Calculator 快照刷新链", () => {
           .digest("hex"),
         `${name} B2 chain`,
       ).toBe(expectedB2ChainSha256[name as keyof typeof expectedB2ChainSha256])
+      expect(
+        createHash("sha256")
+          .update(JSON.stringify(entries.slice(0, 19)))
+          .digest("hex"),
+        `${name} B3 chain`,
+      ).toBe(expectedB3ChainSha256[name as keyof typeof expectedB3ChainSha256])
       expect(entries[16]!.currentSnapshotId, `${name} B1 tail`).toBe(
         "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da",
       )
@@ -262,6 +290,22 @@ describe("ZZZ Calculator 快照刷新链", () => {
       )
       expect(entries[18]!.currentSnapshotId, `${name} B3 current`).not.toBe(
         entries[17]!.currentSnapshotId,
+      )
+      expect(entries[18]!.currentSnapshotId, `${name} B3 frozen current`).toBe(
+        expectedB3SnapshotId,
+      )
+      expect(
+        entries[18]!.previous.artifactSha256,
+        `${name} B3 frozen artifacts`,
+      ).toStrictEqual({
+        [staticPath]: expectedB3ArtifactSha256.static,
+        [catalogPath]: expectedB3ArtifactSha256.catalog,
+      })
+      expect(entries[19]!.previous.snapshotId, `${name} B4 previous`).toBe(
+        entries[18]!.currentSnapshotId,
+      )
+      expect(entries[19]!.currentSnapshotId, `${name} B4 current`).not.toBe(
+        entries[18]!.currentSnapshotId,
       )
     }
   })

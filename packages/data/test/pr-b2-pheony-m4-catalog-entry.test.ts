@@ -87,7 +87,7 @@ describe("PR-B2 Pheony M4 six-element settlement through the published data pack
     )
     if (!parsed.ok) throw new Error(JSON.stringify(parsed.issues))
     const catalog = calculationData.catalog as StaticEffectCatalog
-    expect(catalog.revision).toBe("59")
+    expect(catalog.revision).toBe("60")
     expect(
       catalog.skillTargets.filter((target) => target.targetId === M4_TARGET),
     ).toHaveLength(1)
@@ -226,6 +226,15 @@ describe("PR-B2 Pheony M4 six-element settlement through the published data pack
         continue
       }
       if (!resolved.ok) continue
+      if (resolved.calculation.kind === "anomaly-settlement") {
+        // B4 keeps the M4 target only on the two gated additional actions; the
+        // base CAL actions and all direct actions remain free of it.
+        expect(
+          resolved.skillTargetIds.includes(M4_TARGET),
+          action.actionId,
+        ).toBe(action.minimumMindscapeRank === 4)
+        continue
+      }
       expect(resolved.skillTargetIds, action.actionId).not.toContain(M4_TARGET)
       if (resolved.calculation.kind !== "damage") continue
       resolvedDamageActions += 1

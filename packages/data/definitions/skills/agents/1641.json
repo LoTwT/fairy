@@ -1165,6 +1165,212 @@
         "合计倍率已确认，内部命中数尚未核实；仅适用于各次命中乘区一致且无逐次额外加伤的场景，显示取整可有合理误差。"
       ],
       "upstreamSkillId": "sk-pheony-nk-1641009-main"
+    },
+    {
+      "actionId": "action:agent:1641:action:0021",
+      "branchId": "agent:1641:branch:basic-4-anomaly-settlement",
+      "name": "普通攻击：焚罪 · 异放",
+      "rowName": "异放倍率",
+      "levelGroup": "basic",
+      "skillCategory": "uncategorized",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/basic/description/1/desc"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        }
+      ],
+      "description": "足够时，消耗90点[燔焰]，长按  发动：\n菲欧妮掷出武器，对前方范围的敌人造成大量火属性伤害；\n终结一击命中处于冰属性异常状态、以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、风属性异常状态的敌人时，触发1次[异放]效果，结算{CAL:225+20*(AvatarSkillLevel(0)-1),1,2}%倍率的对应属性的属性异常伤害；\n该次[异放]效果触发暴击时，其暴击伤害额外提升40%；\n招式发动期间拥有无敌效果。",
+      "parameterIds": [],
+      "sourceExpression": "{CAL:225+20*(AvatarSkillLevel(0)-1),1,2}%",
+      "damageCoefficient": {
+        "levelGroup": "basic",
+        "base": 2.25,
+        "growth": 0.2
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "anomaly-settlement",
+        "elements": ["physical", "fire", "ice", "electric", "ether", "wind"],
+        "items": [
+          {
+            "itemId": "action:agent:1641:action:0021:base",
+            "stat": "attack",
+            "coefficient": {
+              "levelGroup": "basic",
+              "base": 2.25,
+              "growth": 0.2
+            }
+          }
+        ],
+        "anomalySettlementCriticalDamage": 0.4
+      },
+      "inputs": [],
+      "limitations": [
+        "本动作只结算[普通攻击：焚罪]终结一击触发的一次独立[异放]；调用方须显式选择本动作并声明原异常元素、原异常来源与命中。不会自动追加到直接动作0010，也不模拟异常状态、异常积蓄、持续时间或战斗时间线。",
+        "CAL 倍率就是本次异放倍率，不再乘六元素原异常系数；该次异放的40%暴伤只属于本动作，不进入M4追加异放或普通异放。"
+      ],
+      "upstreamSkillId": "sk-pheony-nk-1641005-异放倍率"
+    },
+    {
+      "actionId": "action:agent:1641:action:0022",
+      "branchId": "agent:1641:branch:chain-5-anomaly-settlement",
+      "name": "烬火追魂 · 异放",
+      "rowName": "异放倍率",
+      "levelGroup": "chain",
+      "skillCategory": "uncategorized",
+      "skillTargetIds": [],
+      "skillTags": [],
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/skill/chain/description/2/desc"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/chain/description/2/desc"
+        }
+      ],
+      "description": "当菲欧妮处于[生竭]状态时，下一次普通换入、快速支援、招架支援换入前场时发动：\n周身环绕火焰，对周围敌人造成火属性伤害，视为[终结技]伤害，并退出[生竭]状态，回复[终结技：万死重明]消耗的所有生命值，并额外回复自身10%生命值上限的生命值；\n终结一击命中处于冰属性异常状态、以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、风属性异常状态的敌人时，触发1次[异放]效果，结算{CAL:300+27*(AvatarSkillLevel(3)-1),1,2}%倍率的对应属性的属性异常伤害；\n该次[异放]效果触发暴击时，其暴击伤害额外提升40%；\n当处于[生竭]状态的菲欧妮通过[连携技：绝处逢生]、[终结技：万死重明]入场时，也会触发上述生命值回复与[异放]效果；\n招式发动期间拥有无敌效果，点按  可衔接第三段[普通攻击]。",
+      "parameterIds": [],
+      "sourceExpression": "{CAL:300+27*(AvatarSkillLevel(3)-1),1,2}%",
+      "damageCoefficient": {
+        "levelGroup": "chain",
+        "base": 3,
+        "growth": 0.27
+      },
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "anomaly-settlement",
+        "elements": ["physical", "fire", "ice", "electric", "ether", "wind"],
+        "items": [
+          {
+            "itemId": "action:agent:1641:action:0022:base",
+            "stat": "attack",
+            "coefficient": {
+              "levelGroup": "chain",
+              "base": 3,
+              "growth": 0.27
+            }
+          }
+        ],
+        "anomalySettlementCriticalDamage": 0.4
+      },
+      "inputs": [],
+      "limitations": [
+        "本动作只结算[烬火追魂]终结一击触发的一次独立[异放]；调用方须显式选择本动作并声明原异常元素、原异常来源与命中。不会自动追加到直接动作0014，也不模拟异常状态、异常积蓄、持续时间或战斗时间线。",
+        "CAL 倍率就是本次异放倍率，不再乘六元素原异常系数；该次异放的40%暴伤只属于本动作，不进入M4追加异放或普通异放。"
+      ],
+      "upstreamSkillId": "sk-pheony-nk-1641019-异放倍率"
+    },
+    {
+      "actionId": "action:agent:1641:action:0023",
+      "branchId": "agent:1641:branch:basic-4-anomaly-settlement-m4",
+      "name": "普通攻击：焚罪 · 影画4追加异放",
+      "rowName": "追加异放倍率",
+      "levelGroup": "basic",
+      "skillCategory": "uncategorized",
+      "skillTargetIds": ["zzz-hp:skill:pheony-m4-anomaly-settlement"],
+      "skillTags": [],
+      "minimumMindscapeRank": 4,
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/talent/4/desc"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        },
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/chain/description/2/desc"
+        }
+      ],
+      "description": "足够时，消耗90点[燔焰]，长按  发动：\n菲欧妮掷出武器，对前方范围的敌人造成大量火属性伤害；\n终结一击命中处于冰属性异常状态、以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、风属性异常状态的敌人时，触发1次[异放]效果，结算{CAL:225+20*(AvatarSkillLevel(0)-1),1,2}%倍率的对应属性的属性异常伤害；\n该次[异放]效果触发暴击时，其暴击伤害额外提升40%；\n招式发动期间拥有无敌效果。\n当菲欧妮处于[生竭]状态时，下一次普通换入、快速支援、招架支援换入前场时发动：\n周身环绕火焰，对周围敌人造成火属性伤害，视为[终结技]伤害，并退出[生竭]状态，回复[终结技：万死重明]消耗的所有生命值，并额外回复自身10%生命值上限的生命值；\n终结一击命中处于冰属性异常状态、以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、风属性异常状态的敌人时，触发1次[异放]效果，结算{CAL:300+27*(AvatarSkillLevel(3)-1),1,2}%倍率的对应属性的属性异常伤害；\n该次[异放]效果触发暴击时，其暴击伤害额外提升40%；\n当处于[生竭]状态的菲欧妮通过[连携技：绝处逢生]、[终结技：万死重明]入场时，也会触发上述生命值回复与[异放]效果；\n招式发动期间拥有无敌效果，点按  可衔接第三段[普通攻击]。",
+      "parameterIds": [],
+      "sourceExpression": "600%",
+      "damageCoefficient": null,
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "anomaly-settlement",
+        "elements": ["physical", "fire", "ice", "electric", "ether", "wind"],
+        "items": [
+          {
+            "itemId": "pheony:m4-anomaly-settlement",
+            "stat": "attack",
+            "coefficient": {
+              "levelGroup": "basic",
+              "base": 0,
+              "growth": 0
+            }
+          }
+        ],
+        "anomalySettlementCriticalDamage": 0
+      },
+      "inputs": [],
+      "limitations": [
+        "本动作只结算[普通攻击：焚罪]终结一击在影画4触发的追加[异放]；调用方须显式选择本动作、对应元素的 B2 选项并声明原异常元素、原异常来源与命中。未选择选项时倍率为0，最低影画4。",
+        "最终倍率由 B2 六元素选项提供，40%暴伤也只由该选项进入异放专用通道；本动作不携带基础 CAL 的倍率或40%规则，也不自动追加到直接动作0010。"
+      ],
+      "upstreamSkillId": null
+    },
+    {
+      "actionId": "action:agent:1641:action:0024",
+      "branchId": "agent:1641:branch:chain-5-anomaly-settlement-m4",
+      "name": "烬火追魂 · 影画4追加异放",
+      "rowName": "追加异放倍率",
+      "levelGroup": "chain",
+      "skillCategory": "uncategorized",
+      "skillTargetIds": ["zzz-hp:skill:pheony-m4-anomaly-settlement"],
+      "skillTags": [],
+      "minimumMindscapeRank": 4,
+      "source": {
+        "path": "agents/1641/details.zh.json",
+        "pointer": "/talent/4/desc"
+      },
+      "descriptionSources": [
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/basic/description/1/desc"
+        },
+        {
+          "path": "agents/1641/details.zh.json",
+          "pointer": "/skill/chain/description/2/desc"
+        }
+      ],
+      "description": "足够时，消耗90点[燔焰]，长按  发动：\n菲欧妮掷出武器，对前方范围的敌人造成大量火属性伤害；\n终结一击命中处于冰属性异常状态、以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、风属性异常状态的敌人时，触发1次[异放]效果，结算{CAL:225+20*(AvatarSkillLevel(0)-1),1,2}%倍率的对应属性的属性异常伤害；\n该次[异放]效果触发暴击时，其暴击伤害额外提升40%；\n招式发动期间拥有无敌效果。\n当菲欧妮处于[生竭]状态时，下一次普通换入、快速支援、招架支援换入前场时发动：\n周身环绕火焰，对周围敌人造成火属性伤害，视为[终结技]伤害，并退出[生竭]状态，回复[终结技：万死重明]消耗的所有生命值，并额外回复自身10%生命值上限的生命值；\n终结一击命中处于冰属性异常状态、以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、风属性异常状态的敌人时，触发1次[异放]效果，结算{CAL:300+27*(AvatarSkillLevel(3)-1),1,2}%倍率的对应属性的属性异常伤害；\n该次[异放]效果触发暴击时，其暴击伤害额外提升40%；\n当处于[生竭]状态的菲欧妮通过[连携技：绝处逢生]、[终结技：万死重明]入场时，也会触发上述生命值回复与[异放]效果；\n招式发动期间拥有无敌效果，点按  可衔接第三段[普通攻击]。",
+      "parameterIds": [],
+      "sourceExpression": "600%",
+      "damageCoefficient": null,
+      "dazeCoefficient": null,
+      "calculation": {
+        "kind": "anomaly-settlement",
+        "elements": ["physical", "fire", "ice", "electric", "ether", "wind"],
+        "items": [
+          {
+            "itemId": "pheony:m4-anomaly-settlement",
+            "stat": "attack",
+            "coefficient": {
+              "levelGroup": "chain",
+              "base": 0,
+              "growth": 0
+            }
+          }
+        ],
+        "anomalySettlementCriticalDamage": 0
+      },
+      "inputs": [],
+      "limitations": [
+        "本动作只结算[烬火追魂]终结一击在影画4触发的追加[异放]；调用方须显式选择本动作、对应元素的 B2 选项并声明原异常元素、原异常来源与命中。未选择选项时倍率为0，最低影画4。",
+        "最终倍率由 B2 六元素选项提供，40%暴伤也只由该选项进入异放专用通道；本动作不携带基础 CAL 的倍率或40%规则，也不自动追加到直接动作0014。"
+      ],
+      "upstreamSkillId": null
     }
   ]
 }

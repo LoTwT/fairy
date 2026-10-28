@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "rulesVersion": "agent-actions/4",
+  "rulesVersion": "agent-actions/5",
   "sourceVersion": "3.3.12+19634983",
   "members": [
     "1011",
@@ -874,7 +874,7 @@
     "agents/1611.json": "8914791496672f301b020717b70bab506af1dccf1e6d2308db51ca61502a1471",
     "agents/1621.json": "95dac5716c042c8e519fbec7fb38db14daca4e2d19eea96afeb2500c6daf9c80",
     "agents/1631.json": "bc61f15d5fc3025e6d562e618ed51aaf6f6779d8d53c73123818931061cc8a40",
-    "agents/1641.json": "3beb9a890dcd7860da4c93be9039f9953723158a20498414e9bd64a526f8ac46"
+    "agents/1641.json": "3c4397eae88156632e0714c2b771187a381c59de5c913953a0b7be8a23a6a59e"
   },
   "evidence": {
     "zzzHpCommit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
@@ -911,14 +911,15 @@
       }
     ]
   },
-  "registrySha256": "ac2377f0a3de86d72873ce9e3b9ff46a36140e2748949f759ebc7f7d7c5722eb",
-  "staticCatalogSha256": "6a083a704004305646e9235aba45fa328963e074fb1633ba35b3245aab9b43d5",
+  "registrySha256": "9dd6d2a9a7efbb6f83245f3a25a00b56be394660904e1a3f16f949b24aaf4288",
+  "staticCatalogSha256": "6f3fe439c216d10feb594a84ac5565f16a984554c367868c6650124eec820f73",
   "coverage": {
     "agents": 62,
-    "actions": 1348,
+    "actions": 1352,
     "damage": 1166,
     "dazeOnly": 174,
     "luminize": 4,
+    "anomalySettlement": 4,
     "unavailable": 4,
     "individualHitActions": 1
   },

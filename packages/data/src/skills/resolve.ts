@@ -1,5 +1,8 @@
 import type { MindscapeRank } from "@randomplay/shared"
-import { resolveAgentSkillLevelFromBonuses } from "@randomplay/shared"
+import {
+  DAMAGE_ELEMENTS,
+  resolveAgentSkillLevelFromBonuses,
+} from "@randomplay/shared"
 import type {
   AgentActions,
   ResolveAgentActionInput,
@@ -20,6 +23,85 @@ function integer(
     throw new RangeError(
       `${label} must be an integer within ${minimum}–${maximum}`,
     )
+}
+
+const SKILL_LEVEL_GROUPS: readonly SkillLevelGroup[] = [
+  "basic",
+  "dodge",
+  "assist",
+  "special",
+  "chain",
+]
+
+const ACTION_SCALING_STATS = [
+  "attack",
+  "health",
+  "defense",
+  "sheerForce",
+] as const
+
+/** 独立异放动作即使来自已发布 JSON，也在解析前完整拒绝畸形结构。 */
+function validateAnomalySettlementCalculation(
+  calculation: {
+    readonly elements: readonly unknown[]
+    readonly items: readonly unknown[]
+    readonly anomalySettlementCriticalDamage: number
+  },
+  actionId: string,
+): void {
+  const elements = calculation.elements
+  if (
+    !Array.isArray(elements) ||
+    elements.length === 0 ||
+    new Set(elements).size !== elements.length ||
+    elements.some(
+      (element) =>
+        typeof element !== "string" ||
+        !(DAMAGE_ELEMENTS as readonly string[]).includes(element),
+    )
+  )
+    throw new TypeError(`Invalid anomaly settlement elements: ${actionId}`)
+  if (!Array.isArray(calculation.items) || calculation.items.length === 0)
+    throw new TypeError(`Invalid anomaly settlement items: ${actionId}`)
+  for (const rawItem of calculation.items) {
+    if (rawItem === null || typeof rawItem !== "object")
+      throw new TypeError(`Invalid anomaly settlement item: ${actionId}`)
+    const item = rawItem as {
+      readonly itemId?: unknown
+      readonly stat?: unknown
+      readonly coefficient?: {
+        readonly levelGroup?: unknown
+        readonly base?: unknown
+        readonly growth?: unknown
+      }
+      readonly multiplyByInput?: unknown
+    }
+    if (
+      typeof item.itemId !== "string" ||
+      item.itemId.length === 0 ||
+      typeof item.stat !== "string" ||
+      !(ACTION_SCALING_STATS as readonly string[]).includes(item.stat) ||
+      item.coefficient === null ||
+      typeof item.coefficient !== "object" ||
+      !SKILL_LEVEL_GROUPS.includes(
+        item.coefficient.levelGroup as SkillLevelGroup,
+      ) ||
+      typeof item.coefficient.base !== "number" ||
+      !Number.isFinite(item.coefficient.base) ||
+      typeof item.coefficient.growth !== "number" ||
+      !Number.isFinite(item.coefficient.growth) ||
+      (item.multiplyByInput !== undefined &&
+        (typeof item.multiplyByInput !== "string" ||
+          item.multiplyByInput.length === 0))
+    )
+      throw new TypeError(`Invalid anomaly settlement item: ${actionId}`)
+  }
+  if (
+    typeof calculation.anomalySettlementCriticalDamage !== "number" ||
+    !Number.isFinite(calculation.anomalySettlementCriticalDamage) ||
+    calculation.anomalySettlementCriticalDamage < 0
+  )
+    throw new TypeError(`Invalid anomaly settlement: ${actionId}`)
 }
 
 export function resolveAgentSkillLevel(input: {
@@ -59,6 +141,13 @@ export function resolveAgentAction(
     (entry) => entry.actionId === input.actionId,
   )
   if (!action) throw new RangeError(`Unknown action: ${input.actionId}`)
+  if (
+    action.minimumMindscapeRank !== undefined &&
+    input.mindscapeRank < action.minimumMindscapeRank
+  )
+    throw new RangeError(
+      `Action ${action.actionId} requires mindscape rank ${action.minimumMindscapeRank}`,
+    )
   if (
     action.potentialLevels &&
     !action.potentialLevels.includes(potentialLevel)
@@ -105,9 +194,14 @@ export function resolveAgentAction(
       throw new RangeError(`Invalid ${curve.levelGroup} coefficient`)
     return result
   }
+  /** 零倍率项由目录选项从零赋值；它不读取技能等级，也不伪造等级输入。 */
+  const evaluateAnomalyItem = (curve: SkillCoefficientCurve): number =>
+    curve.base === 0 && curve.growth === 0 ? 0 : evaluate(curve)
   const calculation = action.calculation
   if (calculation.kind === "unavailable")
     return { ok: false, issues: structuredClone(calculation.issues) }
+  if (calculation.kind === "anomaly-settlement")
+    validateAnomalySettlementCalculation(calculation, action.actionId)
   if (
     input.requireIndividualHits &&
     calculation.kind === "damage" &&
@@ -139,6 +233,20 @@ export function resolveAgentAction(
         `${requirement.inputId} must be within ${requirement.minimum}–${requirement.maximum}`,
       )
   }
+  const multiplierInput = (
+    itemId: string,
+    inputId: string | undefined,
+  ): { readonly inputId: string; readonly value: number } | undefined => {
+    if (inputId === undefined) return undefined
+    if (!action.inputs.some((entry) => entry.inputId === inputId))
+      throw new TypeError(
+        `Unknown multiplier input ${inputId} on ${itemId}; declare it in action.inputs`,
+      )
+    const value = values[inputId]
+    if (typeof value !== "number" || !Number.isFinite(value))
+      throw new RangeError(`Multiplier input ${inputId} must be finite`)
+    return { inputId, value }
+  }
   const resolvedCalculation =
     calculation.kind === "damage"
       ? {
@@ -149,23 +257,53 @@ export function resolveAgentAction(
             element: segment.element,
             granularity: segment.granularity,
             repeat: segment.repeat,
-            damageItems: segment.items.map((item) => ({
-              itemId: item.itemId,
-              stat: item.stat,
-              damageMultiplier:
-                evaluate(item.coefficient) *
-                (item.multiplyByInput === undefined
-                  ? 1
-                  : values[item.multiplyByInput]!),
-            })),
+            damageItems: segment.items.map((item) => {
+              const multiplierInputValue = multiplierInput(
+                item.itemId,
+                item.multiplyByInput,
+              )
+              return {
+                itemId: item.itemId,
+                stat: item.stat,
+                damageMultiplier:
+                  evaluate(item.coefficient) *
+                  (multiplierInputValue?.value ?? 1),
+                ...(multiplierInputValue
+                  ? { multiplyByInput: multiplierInputValue }
+                  : {}),
+              }
+            }),
           })),
         }
-      : calculation.kind === "luminize"
+      : calculation.kind === "anomaly-settlement"
         ? {
-            kind: "luminize" as const,
-            multiplier: evaluate(calculation.multiplier),
+            kind: "anomaly-settlement" as const,
+            elements: [...calculation.elements],
+            damageItems: calculation.items.map((item) => {
+              const multiplierInputValue = multiplierInput(
+                item.itemId,
+                item.multiplyByInput,
+              )
+              return {
+                itemId: item.itemId,
+                stat: item.stat,
+                damageMultiplier:
+                  evaluateAnomalyItem(item.coefficient) *
+                  (multiplierInputValue?.value ?? 1),
+                ...(multiplierInputValue
+                  ? { multiplyByInput: multiplierInputValue }
+                  : {}),
+              }
+            }),
+            anomalySettlementCriticalDamage:
+              calculation.anomalySettlementCriticalDamage,
           }
-        : { kind: "daze-only" as const }
+        : calculation.kind === "luminize"
+          ? {
+              kind: "luminize" as const,
+              multiplier: evaluate(calculation.multiplier),
+            }
+          : { kind: "daze-only" as const }
   return {
     ok: true,
     resolutionContext: {

@@ -1173,6 +1173,23 @@ export type StaticCatalogDamageParameters =
       : never
     : never
 
+/**
+ * 目录异常（anomaly/disorder/vortex/anomaly-settlement）的公共参数形状；调用方
+ * 另以 `kind` 选择具体结算。用于高层独立异放入口排除 luminize 分支。
+ */
+export type StaticCatalogAnomalyDamage = Extract<
+  StaticCatalogDamageParameters,
+  { readonly anomalyCriticalRate: number }
+>
+
+/** 高层独立异放参数：排除已由 `anomalySettlement.anomalySource` 提供来源的字段。 */
+export type StaticCatalogAnomalySettlementParameters = Omit<
+  StaticCatalogAnomalyDamage,
+  "anomalySource" | "kind"
+> & {
+  readonly kind: "anomaly-settlement"
+}
+
 export interface StaticCatalogDamageInput {
   readonly targetWindswept?: StaticTargetWindsweptState
   readonly mechanism?: never
