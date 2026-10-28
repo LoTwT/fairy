@@ -100,7 +100,7 @@ const ruleFor = (output: ReturnType<typeof convert>, optionId: string) => {
 describe("Pheony additional ability conversion", () => {
   it("generates four corrected options with the OR eligibility contract", () => {
     const output = convert()
-    expect(output.definitions.revision).toBe("58")
+    expect(output.definitions.revision).toBe("59")
     for (const [key, optionId] of Object.entries(options)) {
       const option = output.catalog.options.find(
         (entry) => entry.optionId === optionId,

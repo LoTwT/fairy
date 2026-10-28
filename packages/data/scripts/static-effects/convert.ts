@@ -55,6 +55,14 @@ import {
 } from "./semantics.ts"
 import { buildRemielleSpecialVoidflareMechanism } from "./mechanisms.ts"
 import { PHEONY_ADDITIONAL_ABILITY_TEAM_CONDITION_DIFFERENCE_ID } from "./pheony-additional.ts"
+import {
+  PHEONY_M2_BURN_DURATION_DIFFERENCE_EXPLANATION,
+  PHEONY_M2_BURN_DURATION_DIFFERENCE_ID,
+  PHEONY_M2_BURN_DURATION_EXPECTED_RAW_ENCODING,
+  PHEONY_M2_BURN_DURATION_NORMALIZATION_FIELDS,
+  PHEONY_M2_BURN_DURATION_RAW_ID,
+  verifyPheonyM2BurnDurationArtifacts,
+} from "./pheony-m2.ts"
 import { verifyPheonyM4Registrations } from "./pheony-m4.ts"
 import {
   SUPPLEMENTS,
@@ -3532,6 +3540,129 @@ function applyExcludeSkillTargetScope(
   )
 }
 
+function verifyHolderAnomalyDurationRecord(
+  record: SourceRecord,
+  semantics: SemanticsOfKind<"holder-anomaly-duration">,
+): void {
+  const expected = semantics.expectedEncoding
+  const expectedKeys = Object.keys(expected).sort()
+  // 归一化会为每条来源记录补四个执行字段；只有值仍为 undefined 才表示未参与执行。
+  const normalizationFields = new Set<string>(
+    PHEONY_M2_BURN_DURATION_NORMALIZATION_FIELDS,
+  )
+  const verifyShape = (
+    label: "raw" | "normalized",
+    document: Record<string, unknown> | undefined,
+  ): void => {
+    if (document === undefined)
+      throw new Error(
+        `Holder anomaly duration registration lost the ${label} record at ${record.pointer}`,
+      )
+    const allowedKeys =
+      label === "raw"
+        ? new Set(expectedKeys)
+        : new Set([...expectedKeys, ...normalizationFields])
+    const unexpected = Object.keys(document)
+      .filter((field) => !allowedKeys.has(field))
+      .sort()
+    if (unexpected.length > 0)
+      throw new Error(
+        `Holder anomaly duration registration ${label} record gained unexpected execution field(s) at ${record.pointer}: ${unexpected.join(", ")}`,
+      )
+    const missing = expectedKeys.filter(
+      (field) => !Object.hasOwn(document, field),
+    )
+    if (missing.length > 0)
+      throw new Error(
+        `Holder anomaly duration registration ${label} record lost execution field(s) at ${record.pointer}: ${missing.join(", ")}`,
+      )
+    if (label === "normalized")
+      for (const field of normalizationFields)
+        if (Object.hasOwn(document, field) && document[field] !== undefined)
+          throw new Error(
+            `Holder anomaly duration registration normalized execution field must remain undefined at ${record.pointer}: ${field}=${JSON.stringify(document[field])}`,
+          )
+    for (const [field, value] of Object.entries(expected))
+      if (JSON.stringify(document[field]) !== JSON.stringify(value))
+        throw new Error(
+          `Holder anomaly duration registration ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(document[field])}`,
+        )
+  }
+  verifyShape("raw", record.raw as unknown as Record<string, unknown>)
+  verifyShape(
+    "normalized",
+    record.normalized as unknown as Record<string, unknown> | undefined,
+  )
+  if (record.blockNote !== semantics.expectedSourceBlockNote)
+    throw new Error(
+      `Holder anomaly duration registration raw block note drift at ${record.pointer}`,
+    )
+  if (record.normalizedBlockNote !== semantics.expectedSourceBlockNote)
+    throw new Error(
+      `Holder anomaly duration registration normalized block note drift at ${record.pointer}`,
+    )
+}
+
+function applyHolderAnomalyDuration(
+  context: SemanticsContributionContext,
+  semantics: SemanticsOfKind<"holder-anomaly-duration">,
+): void {
+  if (
+    context.operation.kind !== "factor-contribution" ||
+    context.operation.channel !== "anomaly-duration-addition"
+  )
+    throw new Error(
+      `Holder anomaly duration registration expects the anomaly-duration-addition factor at ${context.record.pointer}`,
+    )
+  const requirement = semantics.requirement
+  if (requirement.source !== "holder-anomaly-source")
+    throw new Error(
+      `Holder anomaly duration registration must require holder-anomaly-source at ${context.record.pointer}`,
+    )
+  context.when = {
+    kind: "all",
+    conditions: [
+      oneOf("hit.damageKind", semantics.damageKinds),
+      oneOf("hit.element", [semantics.element]),
+    ],
+  }
+  context.variant = {
+    ...context.variant,
+    status: "corrected",
+    mechanism: {
+      kind: "independent-settlement",
+      isolateDamageItems: true,
+      damageItemRequirements: [
+        {
+          itemId: requirement.itemId,
+          stat: requirement.stat,
+          role: requirement.role,
+          allowedModes: [...requirement.allowedModes],
+          source: requirement.source,
+          ...(requirement.originalAnomalyAttribute === undefined
+            ? {}
+            : {
+                originalAnomalyAttribute: requirement.originalAnomalyAttribute,
+              }),
+          ...(requirement.requiredDirectMultiplier === undefined
+            ? {}
+            : {
+                requiredDirectMultiplier: requirement.requiredDirectMultiplier,
+              }),
+          ...(requirement.requiredSkillCategory === undefined
+            ? {}
+            : { requiredSkillCategory: requirement.requiredSkillCategory }),
+        },
+      ],
+    },
+    differences: [...context.variant.differences, semantics.differenceId],
+    references: [
+      ...context.variant.references,
+      ...nanokaEvidenceReferences(semantics.evidence),
+    ],
+  }
+}
+
 function applyDamageItemTargeting(
   context: SemanticsContributionContext,
   semantics: SemanticsOfKind<"damage-item-targeting">,
@@ -3852,6 +3983,12 @@ const SEMANTICS_COMPILE_HANDLERS: SemanticsCompileHandlerTable = {
         : { potentialGate: semantics.minimumPotential }
     },
     applyAfterOperation: applyDamageItemTargeting,
+  },
+  "holder-anomaly-duration": {
+    verifySourceRecord(record, semantics) {
+      verifyHolderAnomalyDurationRecord(record, semantics)
+    },
+    applyAfterOperation: applyHolderAnomalyDuration,
   },
   "independent-target": {},
   "potential-branch": {
@@ -6189,7 +6326,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "58",
+    revision: "59",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: effects.some(
@@ -6867,6 +7004,19 @@ export function convertSource(
         ),
       },
       {
+        differenceId: PHEONY_M2_BURN_DURATION_DIFFERENCE_ID,
+        explanation: PHEONY_M2_BURN_DURATION_DIFFERENCE_EXPLANATION,
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes(
+                PHEONY_M2_BURN_DURATION_DIFFERENCE_ID,
+              ),
+            )
+            .flatMap((variant) => variant.references),
+        ),
+      },
+      {
         differenceId: "miyabi-frost-settlement-element-scope",
         explanation:
           "星见雅（1091）两条基线规则的命中元素过滤只登记了目录实体固有元素 ice，而该属性的结算分支证据与正式动作目录证明其合法受益命中还包含 frost：烈霜属性基于冰属性结算伤害与增益效果（agents/1091/details.zh.json 与 details.en.json 的 /specialElementType/desc 中英文同文），正式技能目录中星见雅的全部元素伤害行（霜月 0011—0013、风花后三段 0008—0010、快速/支援 0001/0005、连携 0014、终结 0015、闪反 0017、特殊/强化特殊 0018—0020 共 14 行）使用命中枚举 frost，其余为 physical 3 行与招架支援 daze-only 3 行，没有任何 ice 命中行——两条规则在真实 frost 命中上零贡献（批次 14 红测复现）。Fairy 按具名登记只修正这两条完整身份：终结技后自身冰属性伤害 +30%（/agents/22/mindscapeBuffs/0/effectBlocks/0/effects/0）与额外能力[普通攻击：霜月]无视 30% 冰属性伤害抗性（/agents/22/mindscapeBuffs/0/effectBlocks/1/effects/1，保留 basic+霜月精确目标），都在命中元素条件里保留 ice 并显式加入 frost；数值、通道、其余条件与稳定 ID 不变，不改全局元素归并、不扫描修全角色，同块的霜月 +60% 增伤记录（elementFilter=all）与星见雅其余五条影画记录不在登记内。防漂移：raw 与 normalized 两份记录编码（含 elementFilter 与完整 skillTargets 元组）与所属块冻结完整 note 逐字核对，先于通用 unsupported 降级拒绝；未来偏移的记录不再静默纠正。证据级别为同文结算分支映射与正式动作目录枚举，未经游戏实测。",
@@ -6890,6 +7040,41 @@ export function convertSource(
       s,
       coverage.filter((r) => r.status === s).length,
     ]),
+  )
+  const pheonyM2Records = collected.records.filter(
+    (record) =>
+      record.raw.id === PHEONY_M2_BURN_DURATION_RAW_ID ||
+      (record.entityId === "pheony" &&
+        (record.raw.stat ===
+          PHEONY_M2_BURN_DURATION_EXPECTED_RAW_ENCODING.stat ||
+          (JSON.stringify(record.raw.elementFilter) ===
+            JSON.stringify(
+              PHEONY_M2_BURN_DURATION_EXPECTED_RAW_ENCODING.elementFilter,
+            ) &&
+            JSON.stringify(record.raw.conditions) ===
+              JSON.stringify(
+                PHEONY_M2_BURN_DURATION_EXPECTED_RAW_ENCODING.conditions,
+              )))),
+  )
+  verifyPheonyM2BurnDurationArtifacts(
+    definitions,
+    catalog,
+    pheonyM2Records.length > 0
+      ? {
+          kind: "present",
+          records: pheonyM2Records.map((record) => ({
+            category: record.category,
+            entityId: record.entityId,
+            rankKind: record.rankKind,
+            rank: record.rank,
+            blockId: record.blockId,
+            rawId: record.raw.id,
+            stat: record.raw.stat,
+          })),
+        }
+      : isLoadedSourceData(data)
+        ? { kind: "absent-required" }
+        : { kind: "absent-subset" },
   )
   return {
     definitions,

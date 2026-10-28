@@ -59,6 +59,7 @@ const expectedImplementationBases = [
   "b65cddb6",
   "075822e2",
   "f412c038",
+  "b17a1f8a",
 ] as const
 
 const expectedPreviousSnapshotIds = [
@@ -80,6 +81,7 @@ const expectedPreviousSnapshotIds = [
   "sha256:0d5a9837cb2f93ad874693aad41c6682edbdeadcb016b09c8818ebfd46997165",
   "sha256:ccb28367195fe2f2b4183623a3332119fbc742ffc484b40cd9be89be645623ae",
   "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da",
+  "sha256:32f3756be0e5384a0a7ed8cdd6d9d8e493eb2159265147ff80d9312367568541",
 ] as const
 
 const expectedCurrentSnapshotIds = [
@@ -101,6 +103,7 @@ const expectedCurrentSnapshotIds = [
   "sha256:ccb28367195fe2f2b4183623a3332119fbc742ffc484b40cd9be89be645623ae",
   "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da",
   "sha256:32f3756be0e5384a0a7ed8cdd6d9d8e493eb2159265147ff80d9312367568541",
+  "sha256:c5663dcbcba57d9da3ccf8897a62acc324aac76e39c2af18554ebecb49d6c8b0",
 ] as const
 
 /** 本次逐条核对过的 static-effects 制品摘要；entry 5 保留 PR-D 改写前的 catalog 值，entry 6 记录本次刷新前的字节。 */
@@ -177,20 +180,31 @@ const expectedArtifactSha256 = [
     "c1b964b49c3c2eb6673032f79fe4f26deaf551fdbc981a373a1f4a3ecd7a27e7",
     "703618006eeaa8746afb8455b5206f127ccc6717b42d6988c8af683123ba514c",
   ],
+  [
+    "f7bada47889112f3d0bf806484e4c9d4317d2c5828c4388760c08d0f59e2de1e",
+    "00c0334588313403bca0a432c6a970651b0051f3a55b82c5cc64557aac4b78c6",
+  ],
 ] as const
 
-/** B1 已完成链（17 条）的冻结摘要；B2 只能在其后追加，不能改写历史条目。 */
+/** B1 已完成链（17 条）的冻结摘要；B2/B3 只能在其后追加，不能改写历史条目。 */
 const expectedHistoricalChainSha256 = {
   abloom: "67106cf095d8648cea4911add58c54699f94633284fa28d7367dfdd21ac7c790",
   static: "6017ab56b183510124e4afbffe79225939c3ba3d37d7a0c330c6529ffe7753be",
   vortex: "6017ab56b183510124e4afbffe79225939c3ba3d37d7a0c330c6529ffe7753be",
 } as const
 
+/** B1+B2 已完成链（18 条）的冻结摘要；B3 只能在其后追加。 */
+const expectedB2ChainSha256 = {
+  abloom: "d7ef78253d0077d16f268eec6a76c04304f787c8fdd48514dcf942de464287eb",
+  static: "eac4ccb0f89544bd164353fc14fb32b53fc7a594015e2ec27fc58f41a5205542",
+  vortex: "eac4ccb0f89544bd164353fc14fb32b53fc7a594015e2ec27fc58f41a5205542",
+} as const
+
 describe("ZZZ Calculator 快照刷新链", () => {
-  it("三份夹具均为 18 条，相邻条目首尾相接，末条等于当前消费快照", () => {
+  it("三份夹具均为 19 条，相邻条目首尾相接，末条等于当前消费快照", () => {
     for (const [name, fixture] of Object.entries(fixtures)) {
       const entries = fixture.fairySnapshotRefreshes
-      expect(entries, name).toHaveLength(18)
+      expect(entries, name).toHaveLength(19)
       entries.forEach((entry, index) => {
         expect(entry.implementationBase, `${name} entry ${index}`).toBe(
           expectedImplementationBases[index],
@@ -211,11 +225,11 @@ describe("ZZZ Calculator 快照刷新链", () => {
         fixture.provenance?.fairyCalculationDataVersion?.snapshotId
       expect(snapshotId, name).toBe(expectedCurrentSnapshotIds.at(-1))
       expect(entries.at(-1)!.currentSnapshotId, name).toBe(snapshotId)
-      expect(entries.at(-1)!.reason, name).toContain("Revision 58")
+      expect(entries.at(-1)!.reason, name).toContain("Revision 59")
     }
   })
 
-  it("只追加 B2 条目，不改写 B1 的 17 条历史链", () => {
+  it("只追加 B2/B3 条目，不改写 B1/B2 历史链", () => {
     for (const [name, fixture] of Object.entries(fixtures)) {
       const entries = fixture.fairySnapshotRefreshes
       expect(
@@ -228,6 +242,12 @@ describe("ZZZ Calculator 快照刷新链", () => {
           name as keyof typeof expectedHistoricalChainSha256
         ],
       )
+      expect(
+        createHash("sha256")
+          .update(JSON.stringify(entries.slice(0, 18)))
+          .digest("hex"),
+        `${name} B2 chain`,
+      ).toBe(expectedB2ChainSha256[name as keyof typeof expectedB2ChainSha256])
       expect(entries[16]!.currentSnapshotId, `${name} B1 tail`).toBe(
         "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da",
       )
@@ -236,6 +256,12 @@ describe("ZZZ Calculator 快照刷新链", () => {
       )
       expect(entries[17]!.currentSnapshotId, `${name} B2 current`).not.toBe(
         entries[16]!.currentSnapshotId,
+      )
+      expect(entries[18]!.previous.snapshotId, `${name} B3 previous`).toBe(
+        entries[17]!.currentSnapshotId,
+      )
+      expect(entries[18]!.currentSnapshotId, `${name} B3 current`).not.toBe(
+        entries[17]!.currentSnapshotId,
       )
     }
   })

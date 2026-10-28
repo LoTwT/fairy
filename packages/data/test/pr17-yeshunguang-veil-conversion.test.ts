@@ -154,7 +154,7 @@ describe("Ye Shunguang veil fixed source guards", () => {
     expect(supplements).toHaveLength(1)
     const before = convertSource(source(), functions, [], [])
     const after = convert()
-    expect(after.definitions.revision).toBe("58")
+    expect(after.definitions.revision).toBe("59")
     expect(after.definitions.effects).toHaveLength(
       before.definitions.effects.length + 1,
     )

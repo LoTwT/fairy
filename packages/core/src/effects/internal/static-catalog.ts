@@ -430,7 +430,11 @@ function isDamagePreparationMode(
 function isDamageItemRequirementSource(
   value: unknown,
 ): value is DamageItemRequirementSource {
-  return value === "holder-current" || value === "anomaly-source"
+  return (
+    value === "holder-current" ||
+    value === "anomaly-source" ||
+    value === "holder-anomaly-source"
+  )
 }
 
 function isDamageItemRequirementSkillCategory(
@@ -3245,6 +3249,24 @@ export function calculateOrdinaryStaticDamageFromCatalog(
               "CONTEXT_MISMATCH",
               p,
               `Damage item "${requirement.itemId}" must read from the declared anomaly source; ${explain}`,
+            )
+        }
+        if (requirement.source === "holder-anomaly-source") {
+          if (disorderAttributeSource === undefined)
+            collector.report(
+              "MISSING_FACT",
+              p,
+              `Damage item "${requirement.itemId}" requires an explicit anomaly source applied by the bound holder; ${explain}`,
+            )
+          else if (
+            disorderAttributeSource.entityId !== binding.holderId ||
+            statSource.entityId !== binding.holderId ||
+            statSource.snapshotId !== disorderAttributeSource.snapshotId
+          )
+            collector.report(
+              "CONTEXT_MISMATCH",
+              p,
+              `Damage item "${requirement.itemId}" must read the bound holder's applied anomaly source and matching snapshot; ${explain}`,
             )
         }
       }
