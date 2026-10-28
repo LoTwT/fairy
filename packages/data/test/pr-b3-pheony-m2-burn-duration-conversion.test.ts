@@ -56,7 +56,10 @@ const nonPheonyCompleteStateOptions = COMPLETE_STATE_OPTIONS.filter(
   (entry) => entry.catalogEntityId !== "agents:pheony",
 )
 
-const convert = (agent: SourceEntity = cloneAgent()) =>
+const convert = (
+  agent: SourceEntity = cloneAgent(),
+  normalization: SourceNormalization = functions,
+) =>
   convertSource(
     {
       agents: [agent],
@@ -65,7 +68,7 @@ const convert = (agent: SourceEntity = cloneAgent()) =>
       skillSubcategories: [],
       followUpSkillRules: [],
     } satisfies SourceData,
-    functions,
+    normalization,
     [],
     [],
     nonPheonyCompleteStateOptions,
@@ -131,6 +134,7 @@ describe("Pheony M2 burn duration conversion", () => {
     })
     expect(variant!.mechanism).toEqual({
       kind: "independent-settlement",
+      isolateDamageItems: true,
       damageItemRequirements: [
         {
           itemId: ITEM_ID,
@@ -252,6 +256,87 @@ describe("Pheony M2 burn duration conversion", () => {
     mutate(agent)
     expect(() => convert(agent)).toThrow()
   })
+
+  it.each([
+    [
+      "renamed block",
+      (agent: SourceEntity) => {
+        m2Block(agent).id = "blk-renamed-m2-burn-duration"
+      },
+    ],
+    [
+      "record moved to another block",
+      (agent: SourceEntity) => {
+        const sourceBlock = m2Block(agent)
+        const movedRecord = sourceBlock.effects![1]!
+        sourceBlock.effects = sourceBlock.effects!.filter(
+          (_, index) => index !== 1,
+        )
+        agent.mindscapeBuffs![2]!.effectBlocks!.push({
+          id: "blk-extra-m2-burn-duration",
+          name: "extra",
+          effects: [movedRecord],
+        })
+      },
+    ],
+    [
+      "record moved to another rank",
+      (agent: SourceEntity) => {
+        const rankBlock = m2Block(agent)
+        agent.mindscapeBuffs![2]!.effectBlocks = []
+        agent.mindscapeBuffs![3]!.effectBlocks = [rankBlock]
+      },
+    ],
+  ] as const)(
+    "rejects a fixed M2 %s instead of falling back to the generic encoding",
+    (_label, mutate) => {
+      const agent = cloneAgent()
+      mutate(agent)
+      expect(() => convert(agent)).toThrow(/Pheony M2 burn duration/)
+    },
+  )
+
+  it("rejects added, removed or unknown execution fields in the raw record", () => {
+    const added = cloneAgent()
+    ;(m2Record(added) as unknown as Record<string, unknown>).appliesToAnomaly =
+      false
+    expect(() => convert(added)).toThrow(/Holder anomaly duration registration/)
+
+    const unknown = cloneAgent()
+    ;(
+      m2Record(unknown) as unknown as Record<string, unknown>
+    ).futureExecutionField = true
+    expect(() => convert(unknown)).toThrow(
+      /Holder anomaly duration registration/,
+    )
+
+    const removed = cloneAgent()
+    delete (m2Record(removed) as unknown as Record<string, unknown>).stackable
+    expect(() => convert(removed)).toThrow(
+      /Holder anomaly duration registration/,
+    )
+  })
+
+  it("rejects added or unknown execution fields in the normalized record", () => {
+    const normalizeWith = (
+      fields: Record<string, unknown>,
+    ): SourceNormalization => ({
+      ...functions,
+      normalizeAgent: (entity) => {
+        const normalized = structuredClone(functions.normalizeAgent(entity))
+        const record =
+          normalized.mindscapeBuffs![2]!.effectBlocks![0]!.effects![1]!
+        Object.assign(record, fields)
+        return normalized
+      },
+    })
+    expect(() =>
+      convert(cloneAgent(), normalizeWith({ appliesToAnomaly: false })),
+    ).toThrow(/Holder anomaly duration registration/)
+    expect(() =>
+      convert(cloneAgent(), normalizeWith({ futureExecutionField: true })),
+    ).toThrow(/Holder anomaly duration registration/)
+  })
 })
 
 type ConvertedOutput = ReturnType<typeof convert>
@@ -290,6 +375,21 @@ const mutableRule = (output: ConvertedOutput): MutableRule => {
   return rule as unknown as MutableRule
 }
 
+const presentSourceState = {
+  kind: "present",
+  records: [
+    {
+      category: "agents",
+      entityId: "pheony",
+      rankKind: "mindscape",
+      rank: 2,
+      blockId: "blk-mindscapeBuffs-2-1",
+      rawId: "eff-mvdz21so-s2au9j",
+      stat: "anomalyDuration",
+    },
+  ],
+} as const
+
 describe("Pheony M2 burn duration generation guard", () => {
   it("accepts the frozen corrected artifact shape", () => {
     const output = convert()
@@ -297,9 +397,33 @@ describe("Pheony M2 burn duration generation guard", () => {
       verifyPheonyM2BurnDurationArtifacts(
         output.definitions,
         output.catalog,
-        true,
+        presentSourceState,
       ),
     ).not.toThrow()
+  })
+
+  it("rejects a missing fixed record in the production source", () => {
+    const output = convert()
+    expect(() =>
+      verifyPheonyM2BurnDurationArtifacts(output.definitions, output.catalog, {
+        kind: "absent-required",
+      }),
+    ).toThrow()
+  })
+
+  it("rejects a fixed record location outside the reviewed block", () => {
+    const output = convert()
+    expect(() =>
+      verifyPheonyM2BurnDurationArtifacts(output.definitions, output.catalog, {
+        kind: "present",
+        records: [
+          {
+            ...presentSourceState.records[0],
+            blockId: "blk-renamed-m2-burn-duration",
+          },
+        ],
+      }),
+    ).toThrow()
   })
 
   it("skips the guard when the fixed M2 block is absent from a synthetic subset", () => {
@@ -307,11 +431,9 @@ describe("Pheony M2 burn duration generation guard", () => {
     ;(output.catalog as unknown as { options: unknown[] }).options =
       output.catalog.options.filter((entry) => entry.optionId !== OPTION_ID)
     expect(() =>
-      verifyPheonyM2BurnDurationArtifacts(
-        output.definitions,
-        output.catalog,
-        false,
-      ),
+      verifyPheonyM2BurnDurationArtifacts(output.definitions, output.catalog, {
+        kind: "absent-subset",
+      }),
     ).not.toThrow()
   })
 
@@ -440,7 +562,7 @@ describe("Pheony M2 burn duration generation guard", () => {
       verifyPheonyM2BurnDurationArtifacts(
         output.definitions,
         output.catalog,
-        true,
+        presentSourceState,
       ),
     ).toThrow()
   })

@@ -94,6 +94,11 @@ interface RequestOptions {
   readonly statSourceSnapshotId?: `snapshot:${string}`
   readonly selected?: boolean
   readonly layers?: number
+  readonly itemId?: string
+  readonly extraItem?: {
+    readonly itemId: string
+    readonly statSourceEntityId: `entity:${string}`
+  }
 }
 
 function request(options: RequestOptions = {}): StaticCatalogDamageInput {
@@ -115,14 +120,18 @@ function request(options: RequestOptions = {}): StaticCatalogDamageInput {
       : { snapshotId: options.anomalySourceSnapshotId }),
     level: 60,
   }
-  const item =
+  const declaredItemId = options.itemId ?? ITEM_ID
+  const buildItem = (
+    itemId: string,
+    source: { entityId: string; snapshotId?: string },
+  ) =>
     mode === "standard-disorder"
       ? {
           mode,
           role: "base" as const,
-          itemId: ITEM_ID,
+          itemId,
           stat: "attack" as const,
-          statSource,
+          statSource: source,
           originalAnomalyAttribute,
           baseDurationSeconds: 10,
           elapsedSeconds: options.elapsedSeconds ?? 3,
@@ -130,12 +139,21 @@ function request(options: RequestOptions = {}): StaticCatalogDamageInput {
       : {
           mode,
           role: "base" as const,
-          itemId: ITEM_ID,
+          itemId,
           stat: "attack" as const,
-          statSource,
+          statSource: source,
           profile,
           baseDurationSeconds: 10,
         }
+  const item = buildItem(declaredItemId, statSource)
+  const extraItems =
+    options.extraItem === undefined
+      ? []
+      : [
+          buildItem(options.extraItem.itemId, {
+            entityId: options.extraItem.statSourceEntityId,
+          }),
+        ]
   const element =
     mode === "standard-disorder"
       ? originalAnomalyAttribute
@@ -153,6 +171,7 @@ function request(options: RequestOptions = {}): StaticCatalogDamageInput {
     differences: [],
     mechanism: {
       kind: "independent-settlement",
+      isolateDamageItems: true,
       damageItemRequirements: [
         requirement(options.source ?? "holder-anomaly-source"),
       ],
@@ -279,7 +298,10 @@ function request(options: RequestOptions = {}): StaticCatalogDamageInput {
       skillCategory: "uncategorized",
       element,
       skillTags: [],
-      damageItems: [item] as StaticCatalogDamageInput["hit"]["damageItems"],
+      damageItems: [
+        item,
+        ...extraItems,
+      ] as StaticCatalogDamageInput["hit"]["damageItems"],
     },
     ...(options.anomalySourceSnapshotId !== undefined &&
     options.statSourceSnapshotId === options.anomalySourceSnapshotId
@@ -454,6 +476,42 @@ describe("Pheony M2 holder-applied burn duration", () => {
     const shock = settle(request({ mode: "standard-vortex", profile: "shock" }))
     expect(durationAdjustment(shock)).toBe(0)
     expect(preparedMultiplier(shock)).toBeCloseTo(19, 10)
+  })
+
+  it("rejects a mixed second fire item instead of granting the duration to both", () => {
+    const mixed = calculateStaticDamageFromCatalog(
+      request({
+        extraItem: {
+          itemId: "unqualified",
+          statSourceEntityId: "entity:teammate",
+        },
+      }),
+    )
+    expect(mixed.ok).toBe(false)
+    if (!mixed.ok)
+      expect(
+        mixed.issues.some(
+          (issue) =>
+            issue.code === "CONTEXT_MISMATCH" &&
+            issue.message.includes("sole damage item"),
+        ),
+      ).toBe(true)
+
+    const onlyUnqualified = calculateStaticDamageFromCatalog(
+      request({
+        itemId: "unqualified",
+        statSourceEntityId: "entity:teammate",
+      }),
+    )
+    expect(onlyUnqualified.ok).toBe(false)
+    if (!onlyUnqualified.ok)
+      expect(
+        onlyUnqualified.issues.some(
+          (issue) => issue.code === "MISSING_REFERENCE",
+        ),
+      ).toBe(true)
+
+    expect(durationAdjustment(settle(request()))).toBe(2)
   })
 
   it("rejects a fire anomaly applied by another actor or a mismatched source", () => {

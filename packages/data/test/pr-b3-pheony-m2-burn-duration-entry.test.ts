@@ -50,6 +50,11 @@ interface RequestOptions {
   readonly statSourceEntityId?: `entity:${string}`
   readonly anomalySourceSnapshotId?: `snapshot:${string}`
   readonly statSourceSnapshotId?: `snapshot:${string}`
+  readonly itemId?: string
+  readonly extraItem?: {
+    readonly itemId: string
+    readonly statSourceEntityId: `entity:${string}`
+  }
 }
 
 const damageFor = (
@@ -112,14 +117,18 @@ async function request(
       : { snapshotId: options.anomalySourceSnapshotId }),
     level: 60,
   }
-  const item =
+  const declaredItemId = options.itemId ?? ITEM_ID
+  const buildItem = (
+    itemId: string,
+    source: { entityId: string; snapshotId?: string },
+  ) =>
     category === "disorder"
       ? {
           mode: "standard-disorder" as const,
           role: "base" as const,
-          itemId: ITEM_ID,
+          itemId,
           stat: "attack" as const,
-          statSource,
+          statSource: source,
           originalAnomalyAttribute,
           baseDurationSeconds: 10,
           elapsedSeconds: options.elapsedSeconds ?? 3,
@@ -127,12 +136,21 @@ async function request(
       : {
           mode: "standard-vortex" as const,
           role: "base" as const,
-          itemId: ITEM_ID,
+          itemId,
           stat: "attack" as const,
-          statSource,
+          statSource: source,
           profile,
           baseDurationSeconds: 10,
         }
+  const item = buildItem(declaredItemId, statSource)
+  const extraItems =
+    options.extraItem === undefined
+      ? []
+      : [
+          buildItem(options.extraItem.itemId, {
+            entityId: options.extraItem.statSourceEntityId,
+          }),
+        ]
   const element =
     category === "disorder"
       ? originalAnomalyAttribute
@@ -252,7 +270,10 @@ async function request(
       skillCategory: "uncategorized",
       element,
       skillTags: [],
-      damageItems: [item] as StaticCatalogDamageInput["hit"]["damageItems"],
+      damageItems: [
+        item,
+        ...extraItems,
+      ] as StaticCatalogDamageInput["hit"]["damageItems"],
     },
     damage: damageFor(
       category,
@@ -295,6 +316,7 @@ describe("PR-B3 Pheony M2 burn duration through the published data package", () 
       configuration: { minimumMindscape: 2 },
       mechanism: {
         kind: "independent-settlement",
+        isolateDamageItems: true,
         damageItemRequirements: [
           {
             itemId: ITEM_ID,
@@ -341,6 +363,42 @@ describe("PR-B3 Pheony M2 burn duration through the published data package", () 
         channel: "anomaly-duration-addition",
       })
     expect(JSON.stringify(contributions)).not.toContain("turbulence")
+  })
+
+  it("rejects a mixed second fire item instead of granting the duration to both", async () => {
+    const mixed = calculateStaticDamageFromCatalog(
+      await request({
+        extraItem: {
+          itemId: "unqualified",
+          statSourceEntityId: "entity:teammate",
+        },
+      }),
+    )
+    expect(mixed.ok).toBe(false)
+    if (!mixed.ok)
+      expect(
+        mixed.issues.some(
+          (issue) =>
+            issue.code === "CONTEXT_MISMATCH" &&
+            issue.message.includes("sole damage item"),
+        ),
+      ).toBe(true)
+
+    const onlyUnqualified = calculateStaticDamageFromCatalog(
+      await request({
+        itemId: "unqualified",
+        statSourceEntityId: "entity:teammate",
+      }),
+    )
+    expect(onlyUnqualified.ok).toBe(false)
+    if (!onlyUnqualified.ok)
+      expect(
+        onlyUnqualified.issues.some(
+          (issue) => issue.code === "MISSING_REFERENCE",
+        ),
+      ).toBe(true)
+
+    expect(durationAdjustment(settle(await request()))).toBe(2)
   })
 
   it("does not contribute to a non-fire original anomaly", async () => {

@@ -753,7 +753,7 @@ describe("fixed-panel team differential fixtures", () => {
       contractVersion: 3,
       gameVersion: "3.3",
       snapshotId:
-        "sha256:24018cd06aeef3da77feef03dfda0e675e4eb17349bac6be20b4ab1f6ebba8e9",
+        "sha256:c5663dcbcba57d9da3ccf8897a62acc324aac76e39c2af18554ebecb49d6c8b0",
     })
     expect(loaded.catalog.source.commit).toBe(
       reference.provenance.effectSource.commit,

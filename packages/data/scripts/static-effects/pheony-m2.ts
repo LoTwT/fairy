@@ -83,6 +83,38 @@ export const PHEONY_M2_BURN_DURATION_REQUIREMENT: StaticCatalogDamageItemRequire
     source: "holder-anomaly-source",
   }
 
+export const PHEONY_M2_BURN_DURATION_RAW_ID =
+  PHEONY_M2_BURN_DURATION_EXPECTED_RAW_ENCODING.id
+export const PHEONY_M2_BURN_DURATION_BLOCK_ID = "blk-mindscapeBuffs-2-1"
+export const PHEONY_M2_BURN_DURATION_NORMALIZATION_FIELDS = [
+  "appliesToAnomaly",
+  "convert",
+  "skillCategory",
+  "skillTargets",
+] as const
+
+export interface PheonyM2SourceLocation {
+  readonly category: string
+  readonly entityId: string
+  readonly rankKind: string
+  readonly rank: number
+  readonly blockId: string
+  readonly rawId: string
+  readonly stat: string
+}
+
+/**
+ * 生产固定源必须命中该记录；合成子集可显式声明缺少该记录，不能把
+ * “未参与本次转换”误当成“固定源已删除”。
+ */
+export type PheonyM2SourceState =
+  | { readonly kind: "absent-subset" }
+  | { readonly kind: "absent-required" }
+  | {
+      readonly kind: "present"
+      readonly records: readonly PheonyM2SourceLocation[]
+    }
+
 export const PHEONY_M2_BURN_DURATION_ELEMENT: DamageElement = "fire"
 export const PHEONY_M2_BURN_DURATION_DAMAGE_KINDS = [
   "disorder",
@@ -106,19 +138,40 @@ export const PHEONY_M2_BURN_DURATION_WHEN = {
 } as const
 
 export const PHEONY_M2_BURN_DURATION_DIFFERENCE_EXPLANATION =
-  "菲欧妮（1641）影画 2[好奇心害不死猫]的 Nanoka 原文为“菲欧妮对敌人施加[灼烧]效果时，该效果的持续时间提升2秒”（英文：When Phoenix applies Burn to an enemy, its duration is increased by 2s.），限定施加者是菲欧妮本人。固定 ZZZ-HP 991bb0ef2a00387f8a1fa18293bbda17256d7270 的 /agents/52/mindscapeBuffs/2/effectBlocks/0/effects/1 把同一句编成 anomalyDuration +2、elementFilter 火，但附加 conditions.damageTypes=turbulence 并以 applyTarget=team 无条件放行全队。Fairy 不采信“乱流持续+2”或“任意队友的火异常都+2”：记录改为具名 corrected，保留原 Pointer、数值与公开 optionId/effectId；目录变体改用 independent-settlement 伤害项要求（source=holder-anomaly-source），伤害项必须同时满足 binding.holderId = damage.anomalySource.entityId = damageItem.statSource.entityId，且 statSource 与 anomalySource 的 snapshotId 相同（都省略表示当前属性）。火属性原异常（standard-disorder 的 originalAnomalyAttribute=fire）或燃烧 profile 的标准乱流（standard-vortex profile=burn）才能读取该 +2 秒；非火原异常规则条件不成立，零贡献；队友施加的火异常或跨快照来源按 CONTEXT_MISMATCH 拒绝。option target 仍为 team 仅表示队伍中任何角色结算菲欧妮施加的灼烧时都能读取该持续时间，不表示任意队友施加的异常也能获得加成。持续秒数继续进入既有 anomaly-duration-addition 准备通道，不新增机制 arm，不模拟异常积蓄、持续时间刷新或动作时间线；M0/M1 因 minimumMindscape=2 不可选，M2—M6 合法，层数上限 1，+2 只计算一次，经过时间超过原时长时按既有 max(0,…) 钳制。"
+  "菲欧妮（1641）影画 2[好奇心害不死猫]的 Nanoka 原文为“菲欧妮对敌人施加[灼烧]效果时，该效果的持续时间提升2秒”（英文：When Phoenix applies Burn to an enemy, its duration is increased by 2s.），限定施加者是菲欧妮本人。固定 ZZZ-HP 991bb0ef2a00387f8a1fa18293bbda17256d7270 的 /agents/52/mindscapeBuffs/2/effectBlocks/0/effects/1 把同一句编成 anomalyDuration +2、elementFilter 火，但附加 conditions.damageTypes=turbulence 并以 applyTarget=team 无条件放行全队。Fairy 不采信“乱流持续+2”或“任意队友的火异常都+2”：记录改为具名 corrected，保留原 Pointer、数值与公开 optionId/effectId；目录变体改用 independent-settlement 伤害项要求（source=holder-anomaly-source）并声明 isolateDamageItems，伤害项必须同时满足 binding.holderId = damage.anomalySource.entityId = damageItem.statSource.entityId，且 statSource 与 anomalySource 的 snapshotId 相同（都省略表示当前属性）。混合第二个伤害项的请求按既有 sole damage item 校验整体拒绝，防止未合格项复用同一持续选择。火属性原异常（standard-disorder 的 originalAnomalyAttribute=fire）或燃烧 profile 的标准乱流（standard-vortex profile=burn）才能读取该 +2 秒；非火原异常规则条件不成立，零贡献；队友施加的火异常或跨快照来源按 CONTEXT_MISMATCH 拒绝。option target 仍为 team 仅表示队伍中任何角色结算菲欧妮施加的灼烧时都能读取该持续时间，不表示任意队友施加的异常也能获得加成。持续秒数继续进入既有 anomaly-duration-addition 准备通道，不新增机制 arm，不模拟异常积蓄、持续时间刷新或动作时间线；M0/M1 因 minimumMindscape=2 不可选，M2—M6 合法，层数上限 1，+2 只计算一次，经过时间超过原时长时按既有 max(0,…) 钳制。"
 
 /**
- * 生成期冻结：菲欧妮 M2 块一旦仍包含来源记录，就必须生成上述 corrected
- * 选项与规则。任何来源 Pointer、元素、证据 Pointer、机制要求或规则结构
- * 漂移都拒绝生成，不能退化成普通全队异常持续或乱流专属通道。
+ * 生成期冻结：生产完整来源必须仍包含固定 M2 记录，且记录必须位于审核过的
+ * 块/层级与 raw ID；合成子集可显式跳过。任何来源 Pointer、元素、证据 Pointer、
+ * 机制要求或规则结构漂移都拒绝生成，不能退化成普通全队异常持续或乱流专属通道。
  */
 export function verifyPheonyM2BurnDurationArtifacts(
   definitions: RuleSet,
   catalog: StaticEffectCatalog,
-  m2BlockPresent: boolean,
+  sourceState: PheonyM2SourceState,
 ): void {
-  if (!m2BlockPresent) return
+  if (sourceState.kind === "absent-subset") return
+  if (sourceState.kind === "absent-required")
+    throw new Error(
+      "Pheony M2 burn duration: the fixed source record is missing; the block may have been removed, renamed, or moved without a reviewed correction",
+    )
+  if (sourceState.records.length !== 1)
+    throw new Error(
+      `Pheony M2 burn duration: expected exactly one fixed source record, found ${String(sourceState.records.length)}; re-review the fixed block identity`,
+    )
+  const [source] = sourceState.records
+  if (
+    source.category !== "agents" ||
+    source.entityId !== "pheony" ||
+    source.rankKind !== "mindscape" ||
+    source.rank !== 2 ||
+    source.blockId !== PHEONY_M2_BURN_DURATION_BLOCK_ID ||
+    source.rawId !== PHEONY_M2_BURN_DURATION_RAW_ID ||
+    source.stat !== PHEONY_M2_BURN_DURATION_EXPECTED_RAW_ENCODING.stat
+  )
+    throw new Error(
+      `Pheony M2 burn duration: the fixed record moved or was renamed (${JSON.stringify(source)}); the generic anomalyDuration conversion must not replace the reviewed correction`,
+    )
   const option = catalog.options.find(
     (entry) => entry.optionId === PHEONY_M2_BURN_DURATION_OPTION_ID,
   )
@@ -165,6 +218,7 @@ export function verifyPheonyM2BurnDurationArtifacts(
     JSON.stringify(variant.mechanism) !==
     JSON.stringify({
       kind: "independent-settlement",
+      isolateDamageItems: true,
       damageItemRequirements: [PHEONY_M2_BURN_DURATION_REQUIREMENT],
     })
   )

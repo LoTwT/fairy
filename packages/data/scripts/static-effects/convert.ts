@@ -58,6 +58,9 @@ import { PHEONY_ADDITIONAL_ABILITY_TEAM_CONDITION_DIFFERENCE_ID } from "./pheony
 import {
   PHEONY_M2_BURN_DURATION_DIFFERENCE_EXPLANATION,
   PHEONY_M2_BURN_DURATION_DIFFERENCE_ID,
+  PHEONY_M2_BURN_DURATION_EXPECTED_RAW_ENCODING,
+  PHEONY_M2_BURN_DURATION_NORMALIZATION_FIELDS,
+  PHEONY_M2_BURN_DURATION_RAW_ID,
   verifyPheonyM2BurnDurationArtifacts,
 } from "./pheony-m2.ts"
 import { verifyPheonyM4Registrations } from "./pheony-m4.ts"
@@ -3541,39 +3544,55 @@ function verifyHolderAnomalyDurationRecord(
   record: SourceRecord,
   semantics: SemanticsOfKind<"holder-anomaly-duration">,
 ): void {
-  for (const [label, document] of [
-    ["raw", record.raw as unknown as Record<string, unknown>],
-    [
-      "normalized",
-      record.normalized as unknown as Record<string, unknown> | undefined,
-    ],
-  ] as const) {
+  const expected = semantics.expectedEncoding
+  const expectedKeys = Object.keys(expected).sort()
+  // 归一化会为每条来源记录补四个执行字段；只有值仍为 undefined 才表示未参与执行。
+  const normalizationFields = new Set<string>(
+    PHEONY_M2_BURN_DURATION_NORMALIZATION_FIELDS,
+  )
+  const verifyShape = (
+    label: "raw" | "normalized",
+    document: Record<string, unknown> | undefined,
+  ): void => {
     if (document === undefined)
       throw new Error(
         `Holder anomaly duration registration lost the ${label} record at ${record.pointer}`,
       )
-    for (const [field, expected] of Object.entries(
-      semantics.expectedEncoding,
-    )) {
-      // 规范化可能丢弃未识别的 conditions；存在时必须保持原编码，
-      // 不能把 turbulence 限定悄悄改宽或改窄。
-      if (label === "normalized" && field === "conditions") continue
-      const actual = document[field]
-      if (JSON.stringify(actual) !== JSON.stringify(expected))
-        throw new Error(
-          `Holder anomaly duration registration ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(actual)}`,
-        )
-    }
-  }
-  const normalizedConditions = record.normalized?.conditions
-  if (
-    normalizedConditions !== undefined &&
-    JSON.stringify(normalizedConditions) !==
-      JSON.stringify(semantics.expectedEncoding["conditions"])
-  )
-    throw new Error(
-      `Holder anomaly duration registration normalized conditions drift at ${record.pointer}`,
+    const allowedKeys =
+      label === "raw"
+        ? new Set(expectedKeys)
+        : new Set([...expectedKeys, ...normalizationFields])
+    const unexpected = Object.keys(document)
+      .filter((field) => !allowedKeys.has(field))
+      .sort()
+    if (unexpected.length > 0)
+      throw new Error(
+        `Holder anomaly duration registration ${label} record gained unexpected execution field(s) at ${record.pointer}: ${unexpected.join(", ")}`,
+      )
+    const missing = expectedKeys.filter(
+      (field) => !Object.hasOwn(document, field),
     )
+    if (missing.length > 0)
+      throw new Error(
+        `Holder anomaly duration registration ${label} record lost execution field(s) at ${record.pointer}: ${missing.join(", ")}`,
+      )
+    if (label === "normalized")
+      for (const field of normalizationFields)
+        if (Object.hasOwn(document, field) && document[field] !== undefined)
+          throw new Error(
+            `Holder anomaly duration registration normalized execution field must remain undefined at ${record.pointer}: ${field}=${JSON.stringify(document[field])}`,
+          )
+    for (const [field, value] of Object.entries(expected))
+      if (JSON.stringify(document[field]) !== JSON.stringify(value))
+        throw new Error(
+          `Holder anomaly duration registration ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(document[field])}`,
+        )
+  }
+  verifyShape("raw", record.raw as unknown as Record<string, unknown>)
+  verifyShape(
+    "normalized",
+    record.normalized as unknown as Record<string, unknown> | undefined,
+  )
   if (record.blockNote !== semantics.expectedSourceBlockNote)
     throw new Error(
       `Holder anomaly duration registration raw block note drift at ${record.pointer}`,
@@ -3612,6 +3631,7 @@ function applyHolderAnomalyDuration(
     status: "corrected",
     mechanism: {
       kind: "independent-settlement",
+      isolateDamageItems: true,
       damageItemRequirements: [
         {
           itemId: requirement.itemId,
@@ -7021,17 +7041,40 @@ export function convertSource(
       coverage.filter((r) => r.status === s).length,
     ]),
   )
+  const pheonyM2Records = collected.records.filter(
+    (record) =>
+      record.raw.id === PHEONY_M2_BURN_DURATION_RAW_ID ||
+      (record.entityId === "pheony" &&
+        (record.raw.stat ===
+          PHEONY_M2_BURN_DURATION_EXPECTED_RAW_ENCODING.stat ||
+          (JSON.stringify(record.raw.elementFilter) ===
+            JSON.stringify(
+              PHEONY_M2_BURN_DURATION_EXPECTED_RAW_ENCODING.elementFilter,
+            ) &&
+            JSON.stringify(record.raw.conditions) ===
+              JSON.stringify(
+                PHEONY_M2_BURN_DURATION_EXPECTED_RAW_ENCODING.conditions,
+              )))),
+  )
   verifyPheonyM2BurnDurationArtifacts(
     definitions,
     catalog,
-    collected.records.some(
-      (record) =>
-        record.category === "agents" &&
-        record.entityId === "pheony" &&
-        record.rankKind === "mindscape" &&
-        record.rank === 2 &&
-        record.blockId === "blk-mindscapeBuffs-2-1",
-    ),
+    pheonyM2Records.length > 0
+      ? {
+          kind: "present",
+          records: pheonyM2Records.map((record) => ({
+            category: record.category,
+            entityId: record.entityId,
+            rankKind: record.rankKind,
+            rank: record.rank,
+            blockId: record.blockId,
+            rawId: record.raw.id,
+            stat: record.raw.stat,
+          })),
+        }
+      : isLoadedSourceData(data)
+        ? { kind: "absent-required" }
+        : { kind: "absent-subset" },
   )
   return {
     definitions,

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "snapshotId": "sha256:24018cd06aeef3da77feef03dfda0e675e4eb17349bac6be20b4ab1f6ebba8e9",
+  "snapshotId": "sha256:c5663dcbcba57d9da3ccf8897a62acc324aac76e39c2af18554ebecb49d6c8b0",
   "integrated": {
     "indexSha256": "d68ad1d80b203b9633f2cd6d176e4051c15c52f2ea3c0d71a2d2310c8b1a1b6d",
     "sourceVersion": "3.3.12+19634983",
@@ -91,7 +91,7 @@
     "artifactFileSetSha256": "b7bb787fbdb4c18a2b6031274408312eaa56b2a53688c68d928c793d41ab148c"
   },
   "skills": {
-    "manifestSha256": "6ac445abf8af6fa1131145e7363051c2cfd1f6af15c1cf03925e26d327dc151c",
+    "manifestSha256": "80f2b065d8f46af9fb8f3f1bf6ab8700cfac210751e3998a0afa2beb9cb9dfa1",
     "sourceVersion": "3.3.12+19634983",
     "rulesVersion": "agent-actions/4",
     "topLevelKeys": [
@@ -133,7 +133,7 @@
       "actionCount": 1
     },
     "staticCatalog": {
-      "sha256": "862c5151d4c70b1968ad3a6f780da876a8869472613342ab0bfecf1ddb6a5f47",
+      "sha256": "6a083a704004305646e9235aba45fa328963e074fb1633ba35b3245aab9b43d5",
       "ruleSetId": "zzz-hp-static-effects",
       "revision": "59",
       "topLevelKeys": [

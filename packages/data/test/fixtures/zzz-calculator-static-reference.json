@@ -55,7 +55,7 @@
       "packages/data/definitions/attributes/w-engines/14158.json": "fde7df53350091da522a4c9a32887f1c1f6c33f9697dfdbb4edcb898c874b5c9",
       "packages/data/definitions/attributes/w-engines/14161.json": "c5e5c581357aed82a80d9bb045ee5fd1e2badd38ee946a655f4303e7b053360a",
       "packages/data/definitions/attributes/w-engines/14162.json": "24e6b4da7546670fde391a73ed85117acefb98f3a7a27259029ecc0432ba2fe5",
-      "packages/data/definitions/effects/static-catalog.json": "862c5151d4c70b1968ad3a6f780da876a8869472613342ab0bfecf1ddb6a5f47",
+      "packages/data/definitions/effects/static-catalog.json": "6a083a704004305646e9235aba45fa328963e074fb1633ba35b3245aab9b43d5",
       "packages/data/definitions/effects/static.json": "68d3dc3a89b7c9f9a3d8b2195e5ef397b290bf9a993709463f8832aebdafc1fc",
       "packages/data/definitions/skills/agents/1041.json": "8a1b8454b9e0fb2d8b3b737af92188d00df116477a95a28f80e8502601eb3c7d",
       "packages/data/definitions/skills/agents/1371.json": "b02acd4ec219eec8d20a16ca3ff2948ca008cd92763f30148dcfd3a8e44e8cae",
@@ -65,7 +65,7 @@
       "packageVersion": "0.5.0",
       "contractVersion": 3,
       "gameVersion": "3.3",
-      "snapshotId": "sha256:24018cd06aeef3da77feef03dfda0e675e4eb17349bac6be20b4ab1f6ebba8e9"
+      "snapshotId": "sha256:c5663dcbcba57d9da3ccf8897a62acc324aac76e39c2af18554ebecb49d6c8b0"
     },
     "fairyCalculationSources": {
       "packages/core/src/static/calculate.ts": "c1e6d073f7b8eb62241bf640da8d3e1a878aa8de9a703636c490f113a126441e",
@@ -80530,7 +80530,7 @@
           "packages/data/definitions/effects/static-catalog.json": "00c0334588313403bca0a432c6a970651b0051f3a55b82c5cc64557aac4b78c6"
         }
       },
-      "currentSnapshotId": "sha256:24018cd06aeef3da77feef03dfda0e675e4eb17349bac6be20b4ab1f6ebba8e9"
+      "currentSnapshotId": "sha256:c5663dcbcba57d9da3ccf8897a62acc324aac76e39c2af18554ebecb49d6c8b0"
     }
   ]
 }

@@ -332,8 +332,10 @@ Nanoka `3.3.12+19634983` 的 `agents/1641/details.zh.json` 与
   拒绝直接照抄。
 - 记录改为具名 corrected，保留原 Pointer、数值、公开 optionId / effectId；
   具名差异 `pheony-m2-holder-burn-duration` 说明修正理由。
-- 目录变体使用 `independent-settlement`，伤害项要求：
-  `itemId: "pheony:m2-burn-duration"`、`stat: attack`、`role: base`、
+- 目录变体使用 `independent-settlement` 且 `isolateDamageItems: true`：合格伤害项
+  必须是请求中的唯一伤害项；混入第二个火异常项时整单拒绝，不能复用 qualification
+  让未合格项共享 `durationSelections` 并获得 +2。
+- 伤害项要求：`itemId: "pheony:m2-burn-duration"`、`stat: attack`、`role: base`、
   `allowedModes: ["standard-disorder", "standard-vortex"]`、
   `source: "holder-anomaly-source"`。
 - `holder-anomaly-source` 要求 `binding.holderId` =
@@ -349,6 +351,10 @@ Nanoka `3.3.12+19634983` 的 `agents/1641/details.zh.json` 与
   层数上限 1，+2 只计算一次；经过时间超过原时长时沿用现有 `max(0,…)` 钳制。
 - option target 仍为 `team`，只表示队伍中任何角色结算菲欧妮施加的灼烧时都能
   读取该持续时间；`holder-anomaly-source` 阻止其他施加者或跨快照冒充。
+- 生成期守卫把固定 M2 记录视为必须存在且唯一：生产完整来源中记录缺失、块/记录
+  改名或移动到其他块/层级、出现多条同类候选，均拒绝生成；只有合成子集（非完整
+  来源且无候选）跳过。raw 与 normalized 记录按完整执行字段键集校验，增删字段、
+  未知字段或归一化专用字段出现非 `undefined` 值均拒绝。
 
 ### 6.3 覆盖与制品
 
@@ -360,21 +366,22 @@ Nanoka `3.3.12+19634983` 的 `agents/1641/details.zh.json` 与
 - 补充记录 `108`（74 integrated / 34 out-of-scope）、补充规则 `84`、补充选项
   `69` 不变。
 - 三份 effects 制品由固定来源连续生成两次，逐字节一致后安装。摘要：
-  static `68d3dc3a…`、catalog `862c5151…`、coverage `8711250a…`。
+  static `68d3dc3a…`、catalog `6a083a70…`、coverage `8711250a…`。
 - 技能清单 `staticCatalogSha256` 由 `generate:agent-actions` 同步为
-  `862c5151…`；60 个动作文件与 registry 字节不变。
-- 计算快照：`24018cd0…`；三份 calculator 夹具追加第 19 条 B3 刷新记录，
+  `6a083a70…`；60 个动作文件与 registry 字节不变。
+- 计算快照：`c5663dcb…`；三份 calculator 夹具的第 19 条 B3 刷新记录同步更新，
   B1 的 17 条与 B2 的第 18 条历史链保持原样。
 
 ### 6.4 消融实验
 
-| 场景                           | 现有契约结果 | 替代方案结果                         | 结论                    |
-| ------------------------------ | ------------ | ------------------------------------ | ----------------------- |
-| 菲欧妮施加火灼烧，队友触发紊乱 | +2 生效      | 仅元素/职业条件无法区分施加者        | 仍需 holder 来源约束    |
-| 简（异常职业）施加火异常       | 拒绝         | 仅按火元素或 `anomaly-source` 会误计 | 元素/职业不能替代       |
-| 同一实体、不同异常来源快照     | 拒绝         | 仅比较实体会误计                     | 必须同时核对快照        |
-| 非火原异常                     | 零贡献       | 保留 turbulence 会变成乱流专属       | 元素条件必须保留        |
-| 燃烧 profile 的标准乱流        | +2 生效      | 删除 turbulence 后放行全队仍错误     | 需要 holder 来源 + 元素 |
+| 场景                           | 现有契约结果 | 替代方案结果                            | 结论                    |
+| ------------------------------ | ------------ | --------------------------------------- | ----------------------- |
+| 菲欧妮施加火灼烧，队友触发紊乱 | +2 生效      | 仅元素/职业条件无法区分施加者           | 仍需 holder 来源约束    |
+| 简（异常职业）施加火异常       | 拒绝         | 仅按火元素或 `anomaly-source` 会误计    | 元素/职业不能替代       |
+| 同一实体、不同异常来源快照     | 拒绝         | 仅比较实体会误计                        | 必须同时核对快照        |
+| 非火原异常                     | 零贡献       | 保留 turbulence 会变成乱流专属          | 元素条件必须保留        |
+| 燃烧 profile 的标准乱流        | +2 生效      | 删除 turbulence 后放行全队仍错误        | 需要 holder 来源 + 元素 |
+| 合格项 + 第二个火异常项        | 整单拒绝     | 复用 durationSelections 会让未合格项 +2 | 必须隔离伤害项          |
 
 因此 `holder-anomaly-source` 是表达“只有绑定持有者亲自施加的原异常”的最小
 契约；`anomaly-source`、元素筛选和职业条件都不能替代。详细命令与结果见第
@@ -389,6 +396,13 @@ Nanoka `3.3.12+19634983` 的 `agents/1641/details.zh.json` 与
   漂移未被拒绝；新增发布制品消费回归 `9 failed / 0 passed`，均命中固定
   M2 `semantic-conflict`。实施后 core `8 passed`、data 转换 `26 passed`、
   发布制品消费 `9 passed`。
+- 复审修复红测（未修第二版代码）：core 混合项 `1 failed / 8 passed`；data 转换
+  `5 failed / 26 passed`（当轮 31 条，覆盖块改名、记录移到其他块/层级、raw 增
+  字段、raw 删字段、normalized 非 `undefined` 归一化字段）；发布制品消费
+  `2 failed / 8 passed`（M2 机制缺 `isolateDamageItems`、混合项未拒绝）。修复后
+  core `9 passed`、data 转换 `33 passed`、发布制品消费 `10 passed`。新增的两个
+  verifier 直接回归分别确认 `absent-required` 抛错和错误固定位置抛错；合成子集
+  的 `absent-subset` 仍跳过。
 - 持续数值：10 秒灼烧、已过 3 秒时剩余 `7 → 9`。现有 core 火紊乱公式为
   `4.5 + floor(剩余秒数 / 0.5) × 0.5`，因此倍率实测 `11.5 → 13.5`；任务
   描述中的 `8 → 9` 与现有公式不一致，本 PR 未修改该公式。已过 11 秒时
@@ -404,21 +418,23 @@ Nanoka `3.3.12+19634983` 的 `agents/1641/details.zh.json` 与
   合法持有者来源下零贡献；`burn` 乱流可读取 +2，`shock` 乱流零贡献。
 - 生成期门禁：固定源生成两次，`static.json` / `static-catalog.json` /
   `static-coverage.json` 两两 `cmp` 一致，且与安装后的正式制品逐字节一致。
-  新增生成期守卫覆盖来源 raw/normalized 编码、块 note、固定 Pointer、
-  Nanoka 证据 Pointer、元素、机制要求、规则通道/数值/条件与具名差异；
-  任一漂移即拒绝生成。证据入口 `static-effects-evidence.test.ts` 为
-  `3 passed`，包含 M2 语义键。
+  新增生成期守卫覆盖来源 raw/normalized 完整执行字段键集、固定记录位置与唯一性、
+  块 note、固定 Pointer、Nanoka 证据 Pointer、元素、机制要求（含
+  `isolateDamageItems`）、规则通道/数值/条件与具名差异；任一漂移即拒绝生成。
+  证据入口 `static-effects-evidence.test.ts` 为 `3 passed`，包含 M2 语义键。
 - `authoring:verify`：99 条记录、89 个 option group、24 个 coverage 位置、
   19 个技能目标、68 条补充记录；语义差异 0，三制品字节比较通过。
 - `verify:artifact-dependencies`：730 个节点、915 条边、0 个违规。
   `audit:data-identity`：`matched`，91 条既有问题，`newProblems=[]`、
   `resolvedProblems=[]`。
-- 定向回归：core `7 files / 1,979 passed`；data `10 files / 220 passed`。
-  data unit 全量 `101 files / 4,453 passed`；随后 `pnpm check` 全量通过。
+- 定向回归（复审）：core `4 files / 1,879 passed`（B3、static-catalog、
+  pr-d4b、static-catalog-data）；data `10 files / 180 passed`（B3 转换/发布制品
+  消费、B1/B2、快照链、data-product、baseline、authoring、revision）。data unit
+  全量 `101 files / 4,461 passed`；随后 `pnpm check` 全量通过。
 - `pnpm check`：退出码 0。core `102 passed / 2 skipped` 文件、
-  `5,732 passed / 11 skipped` 用例；data `116 files / 4,879 passed`；
+  `5,733 passed / 11 skipped` 用例；data `116 files / 4,887 passed`；
   core 打包消费 `1 passed`、data 打包消费 `2 passed`；`pnpm lint` 0 error
-  （136 条既有 warning）；`pnpm format:check` 2,941 个文件通过。
+  （138 条 warning）；`pnpm format:check` 2,941 个文件通过。
 - 边界：未修改动作目录、`packages/data/integrated`、来源版本、包版本、CI、
   既有规范页或 `docs/HISTORY.md`；未扩张 authoring 覆盖，未创建或重写数据
   管理记录。M2 的 option target 保持 team 只为队友消费菲欧妮施加的灼烧；
