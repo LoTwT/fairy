@@ -7,6 +7,11 @@ import type {
   Unit,
 } from "@randomplay/shared"
 import type { SourceRecordShape } from "./supplements.ts"
+import {
+  PHEONY_ADDITIONAL_ABILITY_INDEX_EVIDENCE,
+  PHEONY_ADDITIONAL_ABILITY_SAME_FACTION_AGENT_ENTITY_IDS,
+  PHEONY_ADDITIONAL_ABILITY_TEAM_CONDITION_DIFFERENCE_ID,
+} from "./pheony-additional.ts"
 
 /**
  * 本轮新增的来源记录语义登记。只描述对固定来源记录的已核实解释及其证据，
@@ -141,6 +146,26 @@ export type SourceSemantics =
         | "anomalyReleaseCritDmg"
       readonly expectedValue: number
       readonly explanation: string
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
+       * 固定记录缺少题注中已明文的条件（如菲欧妮额外能力的同队资格）。
+       * 转换器按登记补齐 applicability 候选资格并标为 corrected；raw 与
+       * normalized 的冻结字段、块 note 关键条款与“不得新增 conditions”
+       * 任一漂移即拒绝生成。`correctedStat` 只用于同一条款同时需要改投
+       * 专用通道的已核对记录。
+       */
+      readonly kind: "teammate-eligibility-correction"
+      /** 生成错误的稳定主题前缀，避免通用处理器硬编码某个角色的名称。 */
+      readonly sourceLabel: string
+      readonly expectedEncoding: Readonly<Record<string, unknown>>
+      readonly expectedSourceBlockNoteIncludes: string
+      readonly otherTeammateProfessions: readonly string[]
+      readonly otherTeammateAgentEntityIds: readonly string[]
+      readonly correctedStat?: "anomalySettlementCritDmg"
+      readonly differenceId: string
       readonly evidence: readonly SemanticsEvidenceReference[]
       readonly verification: string
     }
@@ -2898,6 +2923,87 @@ const janeSubtypeConflicts = (): Record<string, SourceSemantics> => {
 }
 
 /**
+ * 菲欧妮额外能力[黑枝王牌]的固定记录守卫。四条记录在 991bb0e 中都是
+ * 无条件 team 记录；块注（以及 Nanoka 七档 desc/1）明确要求敌人处于
+ * [灼蚀]，且队伍中存在另一名[异常]角色或另一名同阵营角色。
+ */
+const PHEONY_ADDITIONAL_ABILITY_BLOCK_NOTE_INCLUDES =
+  "队伍中存在其他[异常]角色或同阵营角色时触发：\n状态下的敌人受到属性异常伤害的暴击伤害提升15%。"
+const PHEONY_ADDITIONAL_ABILITY_DETAILS_SHA256 = {
+  zh: "d1aff9ae32d0a60fbf30cf41a998bd3a5cdee82daf2c6d78c6ae6a1863869a14",
+  en: "1102a848035a054bafe6f570d38f8313686e33c9e6c965b7c000e6849852485e",
+} as const
+
+function pheonyAdditionalAbilityEvidence(): SemanticsEvidenceReference[] {
+  return [
+    ...(["zh", "en"] as const).flatMap((locale) =>
+      Array.from({ length: 7 }, (_, index) => ({
+        path: `agents/1641/details.${locale}.json`,
+        pointer: `/passive/level/${1641501 + index}/desc/1`,
+        sha256: PHEONY_ADDITIONAL_ABILITY_DETAILS_SHA256[locale],
+      })),
+    ),
+    ...PHEONY_ADDITIONAL_ABILITY_INDEX_EVIDENCE.pointers.map((pointer) => ({
+      path: PHEONY_ADDITIONAL_ABILITY_INDEX_EVIDENCE.path,
+      pointer,
+      sha256: PHEONY_ADDITIONAL_ABILITY_INDEX_EVIDENCE.sha256,
+    })),
+  ]
+}
+
+function pheonyAdditionalAbilityEncoding(
+  id: string,
+  stat: string,
+): Readonly<Record<string, unknown>> {
+  return {
+    id,
+    origin: "",
+    applyTarget: "team",
+    applySituation: "global",
+    applyProfession: null,
+    teamProfession: null,
+    teamProfessionValues: null,
+    teamProfessionMinCount: null,
+    skillSubcategoryId: null,
+    elementFilter: "all",
+    kind: "fixed",
+    stat,
+    value: 15,
+    stackable: false,
+    maxStacks: 1,
+    valuePerStack: 0,
+    defaultStacks: 1,
+    appliesToAnomaly: true,
+    enabledDefault: true,
+    note: "目标默认：条件为敌人状态、未限定施放者",
+    groupId: "grp-mviwkip4-4",
+  }
+}
+
+function pheonyAdditionalAbilitySemantics(
+  id: string,
+  stat: string,
+  correctedStat?: "anomalySettlementCritDmg",
+): Extract<SourceSemantics, { kind: "teammate-eligibility-correction" }> {
+  return {
+    kind: "teammate-eligibility-correction",
+    sourceLabel: "Pheony additional ability",
+    expectedEncoding: pheonyAdditionalAbilityEncoding(id, stat),
+    expectedSourceBlockNoteIncludes:
+      PHEONY_ADDITIONAL_ABILITY_BLOCK_NOTE_INCLUDES,
+    otherTeammateProfessions: ["异常"],
+    otherTeammateAgentEntityIds: [
+      ...PHEONY_ADDITIONAL_ABILITY_SAME_FACTION_AGENT_ENTITY_IDS,
+    ],
+    ...(correctedStat === undefined ? {} : { correctedStat }),
+    differenceId: PHEONY_ADDITIONAL_ABILITY_TEAM_CONDITION_DIFFERENCE_ID,
+    evidence: pheonyAdditionalAbilityEvidence(),
+    verification:
+      "固定源 /agents/52/mindscapeBuffs/0/effectBlocks/0/effects/13—16 的四条 15% 暴伤记录没有机器条件且 enabledDefault=true；块注的额外能力分句与 Nanoka /passive/level/1641501—1641507/desc/1 中英文同文要求敌人处于[灼蚀]，且队伍中存在另一名[异常]角色或同阵营角色。同队资格由目录 applicability 的两条 OR 候选在编队事实上判定，排除 holder 本人；异放 15% 按 C1 专用通道改为 anomaly-settlement-critical-damage。",
+  }
+}
+
+/**
  * 仅在 991bb0e 完整固定源中启用的登记。局部真实源夹具仍使用旧冻结形状，
  * 不能让新提交的 beneficiary/target 守卫对它们执行“应命中”校验。
  */
@@ -4062,71 +4168,19 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
     verification:
       "ZZZ-HP 2628b32 菲欧妮 rank1 块 note 与记录逐条核对；本登记只覆盖该记录。",
   },
-  // —— D4：菲欧妮额外能力 15% 暴伤四条与 M4 40% 暴伤暂不执行 ——
-  "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-4": {
-    kind: "declared-unsupported",
-    reason: "semantic-conflict",
-    explanation:
-      "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team anomalyCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
-    expectedEncoding: {
-      stat: "anomalyCritDmg",
-      value: 15,
-      applyTarget: "team",
-      elementFilter: "all",
-      kind: "fixed",
-    },
-    evidence: [d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note")],
-    verification:
-      "ZZZ-HP 2628b32 菲欧妮 rank0 块 note 的额外能力分句明确要求其他[异常]角色或同阵营角色；当前没有 C6 的同队条件事实，D4-1a 只登记该缺口，不生成无条件贡献。",
-  },
-  "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-10": {
-    kind: "declared-unsupported",
-    reason: "semantic-conflict",
-    explanation:
-      "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team anomalyReleaseCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
-    expectedEncoding: {
-      stat: "anomalyReleaseCritDmg",
-      value: 15,
-      applyTarget: "team",
-      elementFilter: "all",
-      kind: "fixed",
-    },
-    evidence: [d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note")],
-    verification:
-      "同 eff-4 的额外能力同队条件缺口；异放暴伤记录在 C6 前不生成贡献。",
-  },
-  "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-11": {
-    kind: "declared-unsupported",
-    reason: "semantic-conflict",
-    explanation:
-      "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team turbulenceCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
-    expectedEncoding: {
-      stat: "turbulenceCritDmg",
-      value: 15,
-      applyTarget: "team",
-      elementFilter: "all",
-      kind: "fixed",
-    },
-    evidence: [d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note")],
-    verification:
-      "同 eff-4 的额外能力同队条件缺口；乱流暴伤记录在 C6 前不生成贡献。",
-  },
-  "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-12": {
-    kind: "declared-unsupported",
-    reason: "semantic-conflict",
-    explanation:
-      "额外能力[黑枝王牌]的 15% 暴伤只在“队伍中存在其他[异常]角色或同阵营角色”时成立；固定记录是无条件的 team radianceCritDmg +15。同队条件尚未建模（C6），D4 不无条件应用。",
-    expectedEncoding: {
-      stat: "radianceCritDmg",
-      value: 15,
-      applyTarget: "team",
-      elementFilter: "all",
-      kind: "fixed",
-    },
-    evidence: [d4Evidence("/agents/0/mindscapeBuffs/0/effectBlocks/0/note")],
-    verification:
-      "同 eff-4 的额外能力同队条件缺口；耀变暴伤记录在 C6 前不生成贡献。",
-  },
+  // —— 额外能力[黑枝王牌]：四条 15% 暴伤按具名同队资格执行 ——
+  "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-4":
+    pheonyAdditionalAbilitySemantics("eff-4", "anomalyCritDmg"),
+  "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-10":
+    pheonyAdditionalAbilitySemantics(
+      "eff-10",
+      "anomalyReleaseCritDmg",
+      "anomalySettlementCritDmg",
+    ),
+  "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-11":
+    pheonyAdditionalAbilitySemantics("eff-11", "turbulenceCritDmg"),
+  "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-12":
+    pheonyAdditionalAbilitySemantics("eff-12", "radianceCritDmg"),
   "agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-9": {
     kind: "declared-unsupported",
     reason: "semantic-conflict",

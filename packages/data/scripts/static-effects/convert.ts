@@ -54,6 +54,7 @@ import {
   type SourceSemantics,
 } from "./semantics.ts"
 import { buildRemielleSpecialVoidflareMechanism } from "./mechanisms.ts"
+import { PHEONY_ADDITIONAL_ABILITY_TEAM_CONDITION_DIFFERENCE_ID } from "./pheony-additional.ts"
 import {
   SUPPLEMENTS,
   SOURCE_RECORD_SHAPE_FIELDS,
@@ -3688,6 +3689,60 @@ const SEMANTICS_COMPILE_HANDLERS: SemanticsCompileHandlerTable = {
       }
     },
   },
+  "teammate-eligibility-correction": {
+    verifySourceRecord(record, semantics) {
+      for (const [label, document, note] of [
+        ["raw", record.raw, record.blockNote],
+        ["normalized", record.normalized, record.normalizedBlockNote],
+      ] as const) {
+        if (document === undefined || note === undefined)
+          throw new Error(
+            `${semantics.sourceLabel} lost the ${label} record or block note at ${record.pointer}`,
+          )
+        if (!note.includes(semantics.expectedSourceBlockNoteIncludes))
+          throw new Error(
+            `${semantics.sourceLabel} ${label} block note drift at ${record.pointer}`,
+          )
+        if (document.conditions !== undefined)
+          throw new Error(
+            `${semantics.sourceLabel} ${label} gained source conditions at ${record.pointer}; the fixed record was reviewed as condition-free and must be re-reviewed instead of copied or merged`,
+          )
+        for (const [field, expected] of Object.entries(
+          semantics.expectedEncoding,
+        )) {
+          const actual = (document as unknown as Record<string, unknown>)[field]
+          if (JSON.stringify(actual) !== JSON.stringify(expected))
+            throw new Error(
+              `${semantics.sourceLabel} ${label} field drift at ${record.pointer}: ${field}=${JSON.stringify(actual)}`,
+            )
+        }
+      }
+    },
+    resolveSource(_, semantics) {
+      return {
+        exemptFromCoreDependent: true,
+        ...(semantics.correctedStat === undefined
+          ? {}
+          : { effectiveStat: semantics.correctedStat }),
+      }
+    },
+    applyAfterOperation(context, semantics) {
+      context.variant = correctedVariantWithEvidence(
+        {
+          ...context.variant,
+          applicability: {
+            ...context.variant.applicability,
+            otherTeammateProfessions: [...semantics.otherTeammateProfessions],
+            otherTeammateAgentEntityIds: [
+              ...semantics.otherTeammateAgentEntityIds,
+            ],
+          },
+        },
+        semantics.differenceId,
+        semantics.evidence,
+      )
+    },
+  },
   "source-conversion-rate-correction": {
     verifySourceRecord(record, semantics) {
       for (const [label, document, note] of [
@@ -6103,7 +6158,7 @@ export function convertSource(
   const definitions: RuleSet = {
     schemaVersion: 1,
     ruleSetId: "zzz-hp-static-effects",
-    revision: "56",
+    revision: "57",
     effects: effects.toSorted((a, b) => a.effectId.localeCompare(b.effectId)),
     states: [],
     actions: effects.some(
@@ -6765,6 +6820,20 @@ export function convertSource(
         explanation:
           "来源只写“队伍中任意角色对敌人造成属性异常伤害时，会使其陷入[灼蚀]”，没有明文说明施加[灼蚀]的那一次属性异常伤害是否已经享受暴击。Fairy 把[灼蚀]完整状态作为调用方声明的当前敌人状态：调用方选中该选项即声明本次结算的敌人已处于[灼蚀]；不自动推断首次施加的同次伤害是否暴击，也不把该假设写成游戏实测结论。",
         references: [],
+      },
+      {
+        differenceId: PHEONY_ADDITIONAL_ABILITY_TEAM_CONDITION_DIFFERENCE_ID,
+        explanation:
+          '菲欧妮（1641）额外能力[黑枝王牌]的四条 15% 暴伤在固定 991bb0e 中被编为无条件 team 记录（anomalyCritDmg / anomalyReleaseCritDmg / turbulenceCritDmg / radianceCritDmg，enabledDefault=true），但同块 note 与 Nanoka `/passive/level/1641501—1641507/desc/1` 中英文同文明确：敌人处于[灼蚀]，且队伍中存在另一名[异常]角色或另一名同阵营角色时触发；英文 `another character` 排除菲欧妮本人。Fairy 按具名登记把这些记录改为 corrected，并在目录 applicability 同时声明 `otherTeammateProfessions: ["异常"]` 与 camp 12 的 `otherTeammateAgentEntityIds`；两条资格取 OR，再与受益职业/元素/队内人数等其他条件取 AND，同队且非 holder 是共同前提。camp 12 成员集合 1341/1471/1481/1541/1641 在生成期由固定 integrated 索引的 sourceRecord/camp Pointer 派生并精确核对，不接受手填集合。异放 15% 同时从通用 anomaly-release 通道改入 anomaly-settlement-critical-damage，使核心 25%、影画1 25%、额外能力 15% 与后续事件专用暴伤在同一专用字段下加算一次。四条记录保留原固定 Pointer、数值与公开 optionId；不改变其他来源记录或不扩张 authoring。',
+        references: options.flatMap((option) =>
+          option.variants
+            .filter((variant) =>
+              variant.differences.includes(
+                PHEONY_ADDITIONAL_ABILITY_TEAM_CONDITION_DIFFERENCE_ID,
+              ),
+            )
+            .flatMap((variant) => variant.references),
+        ),
       },
       {
         differenceId: "miyabi-frost-settlement-element-scope",

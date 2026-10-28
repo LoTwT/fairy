@@ -113,7 +113,7 @@ const AA_OPTION = "nanoka:agents:yixuan:aa-falling-thunder-damage"
 describe("batch 27 Yixuan thunder supplement conversion", () => {
   it("registers the three options, targets, and rules beside the preserved fixed-source clauses", () => {
     const result = convert(yixuanData())
-    expect(result.definitions.revision).toBe("56")
+    expect(result.definitions.revision).toBe("57")
     // 既有条款照常转换（公开 ID 与 effectId 保持，机器记录身份不变）。
     for (const [optionId, effectId, recordId] of [
       [
@@ -419,7 +419,7 @@ describe("batch 27 Yixuan thunder supplement conversion", () => {
         ],
       }),
     )
-    expect(result.definitions.revision).toBe("56")
+    expect(result.definitions.revision).toBe("57")
     expect(result.catalog.options.some((o) => o.optionId === M2_OPTION)).toBe(
       true,
     )

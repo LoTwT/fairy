@@ -1,0 +1,123 @@
+{
+  "source": {
+    "repository": "LoTwT/ZZZ-HP",
+    "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+    "resource": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+    "agentIndex": 52
+  },
+  "agent": {
+    "id": "pheony",
+    "name": "菲欧妮",
+    "profession": "异常",
+    "element": "火",
+    "mindscapeBuffs": [
+      {
+        "effectBlocks": [
+          {
+            "id": "blk-mindscapeBuffs-0-1",
+            "name": "核心被动",
+            "note": "原文：菲欧妮的异常精通提升85点；\n队伍中任意角色对敌人造成属性异常伤害时，会使其陷入[灼蚀]状态，持续20秒，重复触发刷新持续时间；[灼蚀]状态下的敌人受到属性异常伤害时有概率触发暴击，基础暴击率为30%，暴击伤害为25%，若菲欧妮的初始异常掌控大于155点，每点超过的异常掌控会使得该效果的暴击率额外提升0.7%；\n当菲欧妮的初始异常掌控达到255点时，[灼蚀]状态下的敌人受到属性异常伤害的暴击率达到最大值；\n[灼蚀]状态下的敌人每8秒受到菲欧妮50%攻击力的火属性伤害，该伤害视为[强化特殊技]伤害；\n[燃烧攻击]发动期间，抗打断等级提升，造成伤害时，会回复[燔焰]，菲欧妮最多拥有120点[燔焰]；\n[燃烧攻击]发动后，点按 可跳过[特殊技：掠火]以及[强化特殊技：燎斩]的后撤动作，直接衔接上挑攻击；\n菲欧妮受到致命伤害时不会战败退场，可触发[重明]效果，下一次普通换入、快速支援、招架支援换入前场时会回复50%最大生命值，在勘域模式中此效果1200秒内最多触发一次；\n菲欧妮触发完美格挡效果时，获得5点[燔焰]，10秒内最多触发一次；\n菲欧妮发动[强化特殊技]时，进入[枯荣]状态，持续20秒，[燃烧攻击]命中敌人或重复施加时刷新持续时间；\n[枯荣]状态下，发动[强化特殊技：眩焰]后，下次发动[强化特殊技：眩焰]会替换为发动[强化特殊技：坠阳]。\n\n原文：队伍中存在其他[异常]角色或同阵营角色时触发：\n状态下的敌人受到属性异常伤害的暴击伤害提升15%。\n\n原文：足够时，消耗90点[燔焰]，长按 发动：\n菲欧妮掷出武器，对前方范围的敌人造成大量火属性伤害；\n终结一击命中处于冰属性异常状态、以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、风属性异常状态的敌人时，触发1次[异放]效果，结算%倍率的对应属性的属性异常伤害；\n该次[异放]效果触发暴击时，其暴击伤害额外提升40%；\n招式发动期间拥有无敌效果。\n[关键字] 属性=异常精通 元素=无 动作=提升 数值=85 单位=点 目标=自身 条件=无 作用域=无 层数=无 时长=无 对象=无\n[关键字] 属性=异常暴击率 元素=无 动作=提升 数值=30 单位=% 目标=全队 条件=无 作用域=无 层数=无 时长=无 对象=无\n[关键字] 属性=异常暴击伤害 元素=无 动作=提升 数值=25 单位=% 目标=全队 条件=无 作用域=无 层数=无 时长=无 对象=无\n[关键字] 属性=异常暴击率 元素=无 动作=转化 数值=无 单位=无 目标=全队 条件=无 作用域=无 层数=无 时长=无 对象=无 读取属性=anomalyControl 取哪一层=external 折算比例=0.7 基础值=155 上限=无\n[关键字] 属性=异常暴击伤害 元素=无 动作=提升 数值=15 单位=% 目标=全队 条件=无 作用域=无 层数=无 时长=无 对象=无\n[关键字] 属性=异放暴击伤害 元素=无 动作=提升 数值=40 单位=% 目标=无 条件=无 作用域=无 层数=无 时长=无 对象=无",
+            "enabledDefault": true,
+            "effects": [
+              {
+                "id": "eff-4",
+                "origin": "",
+                "applyTarget": "team",
+                "applySituation": "global",
+                "applyProfession": null,
+                "teamProfession": null,
+                "teamProfessionValues": null,
+                "teamProfessionMinCount": null,
+                "skillSubcategoryId": null,
+                "elementFilter": "all",
+                "kind": "fixed",
+                "stat": "anomalyCritDmg",
+                "value": 15,
+                "stackable": false,
+                "maxStacks": 1,
+                "valuePerStack": 0,
+                "defaultStacks": 1,
+                "appliesToAnomaly": true,
+                "enabledDefault": true,
+                "note": "目标默认：条件为敌人状态、未限定施放者",
+                "groupId": "grp-mviwkip4-4"
+              },
+              {
+                "id": "eff-10",
+                "origin": "",
+                "applyTarget": "team",
+                "applySituation": "global",
+                "applyProfession": null,
+                "teamProfession": null,
+                "teamProfessionValues": null,
+                "teamProfessionMinCount": null,
+                "skillSubcategoryId": null,
+                "elementFilter": "all",
+                "kind": "fixed",
+                "stat": "anomalyReleaseCritDmg",
+                "value": 15,
+                "stackable": false,
+                "maxStacks": 1,
+                "valuePerStack": 0,
+                "defaultStacks": 1,
+                "appliesToAnomaly": true,
+                "enabledDefault": true,
+                "note": "目标默认：条件为敌人状态、未限定施放者",
+                "groupId": "grp-mviwkip4-4"
+              },
+              {
+                "id": "eff-11",
+                "origin": "",
+                "applyTarget": "team",
+                "applySituation": "global",
+                "applyProfession": null,
+                "teamProfession": null,
+                "teamProfessionValues": null,
+                "teamProfessionMinCount": null,
+                "skillSubcategoryId": null,
+                "elementFilter": "all",
+                "kind": "fixed",
+                "stat": "turbulenceCritDmg",
+                "value": 15,
+                "stackable": false,
+                "maxStacks": 1,
+                "valuePerStack": 0,
+                "defaultStacks": 1,
+                "appliesToAnomaly": true,
+                "enabledDefault": true,
+                "note": "目标默认：条件为敌人状态、未限定施放者",
+                "groupId": "grp-mviwkip4-4"
+              },
+              {
+                "id": "eff-12",
+                "origin": "",
+                "applyTarget": "team",
+                "applySituation": "global",
+                "applyProfession": null,
+                "teamProfession": null,
+                "teamProfessionValues": null,
+                "teamProfessionMinCount": null,
+                "skillSubcategoryId": null,
+                "elementFilter": "all",
+                "kind": "fixed",
+                "stat": "radianceCritDmg",
+                "value": 15,
+                "stackable": false,
+                "maxStacks": 1,
+                "valuePerStack": 0,
+                "defaultStacks": 1,
+                "appliesToAnomaly": true,
+                "enabledDefault": true,
+                "note": "目标默认：条件为敌人状态、未限定施放者",
+                "groupId": "grp-mviwkip4-4"
+              }
+            ]
+          }
+        ],
+        "effects": [],
+        "selfMods": {},
+        "teamMods": {}
+      }
+    ]
+  }
+}

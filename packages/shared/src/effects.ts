@@ -946,6 +946,12 @@ export interface StaticCatalogApplicability {
   readonly beneficiaryElements?: readonly DamageElement[]
   /** 当前同队的另一名 actor 任一职业匹配即满足资格；不筛选受益者职业。 */
   readonly otherTeammateProfessions?: readonly string[]
+  /**
+   * 当前同队的另一名已登记身份 actor；任一来源代理人实体 ID 匹配即满足
+   * 资格。与 `otherTeammateProfessions` 取 OR，两者都要求同队且排除
+   * holder 本人；不与受益职业、元素、队内人数等既有筛选取 OR。
+   */
+  readonly otherTeammateAgentEntityIds?: readonly string[]
   readonly teamProfession?: {
     readonly profession: string
     readonly counts: readonly number[]

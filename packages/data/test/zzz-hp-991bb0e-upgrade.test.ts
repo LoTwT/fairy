@@ -154,11 +154,11 @@ describe("ZZZ-HP 991bb0e source upgrade", () => {
   it("records the new conflict/corrected positions in the coverage report", () => {
     expect(coverage.summary).toMatchObject({
       rawEffects: 1375,
-      rules: 931,
+      rules: 935,
       options: 1002,
       converted: 1149,
-      corrected: 134,
-      unsupported: 92,
+      corrected: 138,
+      unsupported: 88,
     })
     expect(
       coverageRecord(

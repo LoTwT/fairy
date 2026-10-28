@@ -65,7 +65,7 @@
       "packageVersion": "0.5.0",
       "contractVersion": 3,
       "gameVersion": "3.3",
-      "snapshotId": "sha256:ccb28367195fe2f2b4183623a3332119fbc742ffc484b40cd9be89be645623ae"
+      "snapshotId": "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da"
     }
   },
   "inputLayer": "externally-declared-resolved-source-state",
@@ -107463,6 +107463,18 @@
         }
       },
       "currentSnapshotId": "sha256:ccb28367195fe2f2b4183623a3332119fbc742ffc484b40cd9be89be645623ae"
+    },
+    {
+      "reason": "Revision 57 makes Pheony's additional ability executable under its real team conditions and moves its anomaly-release 15% into anomaly-settlement-critical-damage. The four 15% records now require another same-team Anomaly character or another camp-12 character (holder excluded), with the camp-12 membership verified from the fixed Nanoka index. The comparison scenarios never select these options, so native upstream captures and all numeric results stay frozen; only the current consumption snapshot and changed Fairy artifact digests are refreshed.",
+      "implementationBase": "075822e2",
+      "previous": {
+        "snapshotId": "sha256:ccb28367195fe2f2b4183623a3332119fbc742ffc484b40cd9be89be645623ae",
+        "artifactSha256": {
+          "packages/data/definitions/effects/static.json": "9a042e60aba4c385172b67f18a6c2a010dcf1744c87f35a1de8a51d002c02043",
+          "packages/data/definitions/effects/static-catalog.json": "3a26131e9d4561701f51c67959ff1e16a2b35931edea60d0435b757851a5d8b3"
+        }
+      },
+      "currentSnapshotId": "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da"
     }
   ]
 }

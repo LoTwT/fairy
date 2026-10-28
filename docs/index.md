@@ -55,6 +55,7 @@
 - [宽口径异常增伤审计](plans/anomaly-broad-scope-audit.md)：修订 55 收窄格莉丝、薇薇安、爱丽丝、简与琳琅鎏心的命名异常子类，消除剩余乱流重复计入与越界命中。
 - [怒目金刚精炼 2 贯穿伤害修正](plans/wrathful-vajra-r2-sheer-correction.md)：修订 56 修正 14147 精炼 2 的上游 `turbulenceDmgBonus` 字段笔误，恢复火属性贯穿伤害并保留公开 ID。
 - [revision 53—56 伤害种类范围回归](plans/revision-53-56-scope-regressions.md)：修订 54—56 的公开链路正反例、固定上游投影、已知差异与精度边界。
+- [菲欧妮静态伤害链补全（5 PR）](plans/pheony-static-damage-completion.md)：用户批准的 5 PR 总体边界、PR-B1 的额外能力同队 OR 资格、异放专用暴伤通道、camp 12 生成期核验与验证记录。
 - [PR A 实施与交接](plans/level-60-panel-attributes-pr-a.md)：属性实现的评审处理、当时的验收记录与后续衔接结果。
 - [ZZZ-HP 静态数据来源盘点](plans/zzz-hp-static-inventory.md)：固定来源的身份映射、未匹配项、读取语义及正式覆盖报告入口。
 - [ZZZ-HP 静态数据接入记录](plans/zzz-hp-static-data-prompt.md)：已完成接入的 Git 记录与维护入口。
