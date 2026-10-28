@@ -1590,7 +1590,9 @@ function calculateOrdinaryStaticActionDamage(
                 ...hit,
                 element: segment.element,
                 damageItems: segment.damageItems.map((item) => ({
-                  ...item,
+                  itemId: item.itemId,
+                  stat: item.stat,
+                  damageMultiplier: item.damageMultiplier,
                   role: "base",
                   mode: "direct",
                   statSource: { entityId: input.actorId },

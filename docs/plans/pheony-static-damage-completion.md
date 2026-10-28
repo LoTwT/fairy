@@ -630,6 +630,20 @@ M2 的 +2 秒只在合格火紊乱的 `preparations` 中出现（`11.5 → 13.5`
   `multiplyByInput` 被 core 拒绝、core 畸形暴伤/暴击率探针未按字段失败、data
   畸形动作未在解析前拒绝。修复后定向三文件 `27 passed`。
 
+### 8.7 第 2 轮独立复审修复
+
+- 普通 `damage` 动作进入低层目录前，伤害项曾通过 `...item` 把解析元数据
+  `multiplyByInput: { inputId, value }` 一并带入；低层目录白名单拒绝该未知
+  字段，导致照的 `0006`/`0012`/`0013` 在合法 `chargeSeconds`（含 0）下失败。
+- 修复只收敛普通分支的映射：显式传递 `itemId`、`stat`、`damageMultiplier`，
+  再补 `role`/`mode`/`statSource`，不把解析元数据交给目录。anomaly-settlement
+  分支继续携带元数据供 core 复核；未扩大低层白名单，未改普通动作字段、倍率
+  或计算。
+- 新增照三条动作的公开高层回归，分别覆盖 `chargeSeconds=0` 与 `5`，核对
+  基础/生命项倍率、非暴击合计与 expected。修复前 `3 failed`，错误均为
+  `/hit/damageItems/1/multiplyByInput` 未知字段；修复后 `3 passed`。
+- CAL/M4 的独立异放路径与 40% 归属未变；普通动作不回归。
+
 ## 9. PR-B4 验证记录
 
 - 红测：未修代码上新增 `pr-b4-pheony-cal-actions.test.ts` 与
@@ -650,7 +664,7 @@ action:agent:1641:action:0021/0023/0024`。此时 data/core 尚无
   `audit:data-identity`：`matched`，91 条既有问题，`newProblems=[]`、
   `resolvedProblems=[]`。
 - `pnpm check`：退出码 0。core `102 passed / 2 skipped` 文件、
-  `5,733 passed / 11 skipped` 用例；data `118 files / 4,910 passed`；core
+  `5,733 passed / 11 skipped` 用例；data `119 files / 4,913 passed`；core
   打包消费 `1 passed`、data 打包消费 `2 passed`；lint 0 error（138 条既有
   warning）。
 - 第 1 轮审查定向：动作目录 `11 passed`；完整配装 E2E `12 passed`（原 8 项
@@ -660,7 +674,13 @@ action:agent:1641:action:0021/0023/0024`。此时 data/core 尚无
   `audit:data-identity` 与 `format:check` 均退出 0；effects 三份摘要仍为
   `4f946094…` / `6f3fe439…` / `d8cb11a2…`，revision 保持 60，skills 保持
   `agent-actions/5`，快照保持 `8663cbf0…`。
-- `pnpm format:check`：2,944 个文件格式通过，退出 0。
+- 第 2 轮红测：照 `0006`/`0012`/`0013` 在 `chargeSeconds=0` 与 `5` 下均
+  `3 failed`，错误为 `/hit/damageItems/1/multiplyByInput` 未知字段；修复普通
+  分支显式映射后三条 `3 passed`。
+- 第 2 轮定向：新增照回归 `3 passed`；动作目录 `11 passed`、完整配装 E2E
+  `12 passed`、快照链 `4 passed`，四文件合计 `30 passed`。effects/skills
+  制品、manifest、快照夹具与 revision 均无变化。
+- `pnpm format:check`：2,945 个文件格式通过，退出 0。
 - 边界：未修改 `packages/data/integrated`、来源版本、包版本、CI、
   `docs/HISTORY.md` 或 authoring 覆盖；未创建或重写数据管理记录；未推送、
   未建 PR、未合并。
