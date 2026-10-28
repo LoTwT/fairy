@@ -76,6 +76,11 @@ describe("static effects evidence path", () => {
     expect(verified).toContain(
       "semantics:agents/pheony/mindscape/0/blk-mindscapeBuffs-0-1/eff-10",
     )
+    // PR-B3 的 M2[灼烧]持续时间证据（Nanoka 天赋 2 中英文）同样经生成入口
+    // 逐条核对 path/Pointer/摘要，陈旧摘要不会被忽略。
+    expect(verified).toContain(
+      "semantics:agents/pheony/mindscape/2/blk-mindscapeBuffs-2-1/eff-mvdz21so-s2au9j",
+    )
     // 批次 06 的六项补充证据（含被动行 rank 与 data.json level 元数据的映射）
     // 也由同一入口逐条核验。
     for (const supplementId of [

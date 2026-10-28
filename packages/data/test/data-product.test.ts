@@ -365,9 +365,9 @@ describe("data product manifests", () => {
     expect(manifest.product).toBe("static-effects")
     expect(manifest.schemaVersion).toBe(1)
     expect(manifest.rulesVersion).toEqual({
-      label: "zzz-hp-static-effects/58",
+      label: "zzz-hp-static-effects/59",
       ruleSetId: "zzz-hp-static-effects",
-      revision: "58",
+      revision: "59",
     })
     expect(manifest.source).toEqual({
       repository: structureBaseline.effects.sourceRepository,
@@ -389,8 +389,8 @@ describe("data product manifests", () => {
     )
     expect(manifest.coverage.statusCounts).toEqual({
       converted: 1149,
-      corrected: 138,
-      unsupported: 88,
+      corrected: 139,
+      unsupported: 87,
     })
     expect(manifest.coverage.supplementalCount).toBe(
       structureBaseline.effects.staticCoverage.supplementalRecordCount,
@@ -610,7 +610,7 @@ describe("static coverage query", () => {
 
   it("filters records by status and keeps unsupported reasons", () => {
     const unsupported = matchesFor({ status: "unsupported" })
-    expect(unsupported.matches).toHaveLength(88)
+    expect(unsupported.matches).toHaveLength(87)
     for (const match of unsupported.matches) {
       if (match.group !== "records") throw new Error("expected record")
       expect(match.status).toBe("unsupported")

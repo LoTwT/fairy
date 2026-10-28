@@ -1,0 +1,96 @@
+{
+  "source": {
+    "repository": "LoTwT/ZZZ-HP",
+    "commit": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+    "resource": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json"
+  },
+  "agent": {
+    "id": "pheony",
+    "name": "菲欧妮",
+    "profession": "异常",
+    "element": "火",
+    "mindscapeBuffs": [
+      {
+        "effectBlocks": [],
+        "effects": []
+      },
+      {
+        "effectBlocks": [],
+        "effects": []
+      },
+      {
+        "effectBlocks": [
+          {
+            "id": "blk-mindscapeBuffs-2-1",
+            "name": "2 影",
+            "enabledDefault": true,
+            "note": "原文：菲欧妮对敌人施加[灼烧]效果时，该效果的持续时间提升2秒；\n菲欧妮对[灼蚀]状态下的敌人造成的伤害提升30%。\n[关键字] 属性=增伤 元素=无 动作=提升 数值=30 单位=% 目标=自身 条件=无 作用域=无 层数=无 时长=无 对象=无",
+            "effects": [
+              {
+                "id": "eff-6",
+                "origin": "",
+                "applyTarget": "self",
+                "applySituation": "global",
+                "applyProfession": null,
+                "teamProfession": null,
+                "teamProfessionValues": null,
+                "teamProfessionMinCount": null,
+                "skillSubcategoryId": null,
+                "elementFilter": "all",
+                "kind": "fixed",
+                "stat": "dmgBonus",
+                "value": 30,
+                "stackable": false,
+                "maxStacks": 1,
+                "valuePerStack": 0,
+                "defaultStacks": 1,
+                "appliesToAnomaly": true,
+                "enabledDefault": true,
+                "note": ""
+              },
+              {
+                "id": "eff-mvdz21so-s2au9j",
+                "origin": "",
+                "applyTarget": "team",
+                "applySituation": "global",
+                "applyProfession": null,
+                "teamProfession": null,
+                "teamProfessionValues": null,
+                "teamProfessionMinCount": null,
+                "skillSubcategoryId": null,
+                "elementFilter": ["火"],
+                "kind": "fixed",
+                "stat": "anomalyDuration",
+                "value": 2,
+                "stackable": false,
+                "maxStacks": 1,
+                "valuePerStack": 0,
+                "defaultStacks": 1,
+                "enabledDefault": true,
+                "note": "",
+                "conditions": { "damageTypes": ["turbulence"] }
+              }
+            ]
+          }
+        ],
+        "effects": []
+      },
+      {
+        "effectBlocks": [],
+        "effects": []
+      },
+      {
+        "effectBlocks": [],
+        "effects": []
+      },
+      {
+        "effectBlocks": [],
+        "effects": []
+      },
+      {
+        "effectBlocks": [],
+        "effects": []
+      }
+    ]
+  }
+}

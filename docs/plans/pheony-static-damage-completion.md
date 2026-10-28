@@ -1,9 +1,10 @@
 # 菲欧妮静态伤害链补全（5 PR）
 
-- 状态：PR-B1 已 squash 合并；PR-B2 已实施，完成第 1 轮独立审查修复并本地
-  提交，等待第 2 轮审查；未推送、未建 PR、未合并。
-- 基线：`origin/main @ abd395d8dc1c1d2cb6026888eb04450243bd1b01`
-  （PR-B2 第 1 轮修复起点；B1 基线为 `0d2957790dcbf817d5b15078c03d30fc4e6c1dd1`）。
+- 状态：PR-B1、PR-B2 已 squash 合并；PR-B3 已实施并本地提交，等待独立
+  审查；未推送、未建 PR、未合并。
+- 基线：`origin/main @ b17a1f8aa083c9fa51995623480906f60f516f24`
+  （PR-B3 起点；B2 审查修复起点为 `abd395d8dc1c1d2cb6026888eb04450243bd1b01`，
+  B1 基线为 `0d2957790dcbf817d5b15078c03d30fc4e6c1dd1`）。
 - 固定来源：Nanoka `3.3.12+19634983`；ZZZ-HP
   `991bb0ef2a00387f8a1fa18293bbda17256d7270`（只读 Git 对象）。
 - 规范入口：[静态增益数据接入](../specs/data/zzz-hp-static-effects.md)、
@@ -308,3 +309,117 @@ M4 选项的附加规则进入专用通道。
   来源版本、版本号、CI、既有规范页或 `docs/HISTORY.md`；未扩张 authoring
   覆盖，未创建或重写数据管理记录。触发招式、异常状态与命中时点由调用方
   声明；本 PR 不模拟异常积蓄、持续时间或动作时间线。
+
+## 6. PR-B3：M2 施加者灼烧持续时间
+
+### 6.1 原文与语义
+
+Nanoka `3.3.12+19634983` 的 `agents/1641/details.zh.json` 与
+`details.en.json` `/talent/2/desc` 同文：
+
+> 菲欧妮对敌人施加[灼烧]效果时，该效果的持续时间提升2秒。
+> （When Phoenix applies Burn to an enemy, its duration is increased by 2s.）
+
+限定施加者是菲欧妮本人；不是任意队友施加的火异常，也不是乱流专属效果。
+
+### 6.2 修正契约
+
+固定 ZZZ-HP `/agents/52/mindscapeBuffs/2/effectBlocks/0/effects/1`：
+
+- 原始记录：`anomalyDuration: 2`、`elementFilter: ["火"]`、
+  `applyTarget: "team"`、`conditions.damageTypes: ["turbulence"]`。
+- 原编码把“菲欧妮施加”放成全队任意火异常，并错误限定为乱流；Fairy 继续
+  拒绝直接照抄。
+- 记录改为具名 corrected，保留原 Pointer、数值、公开 optionId / effectId；
+  具名差异 `pheony-m2-holder-burn-duration` 说明修正理由。
+- 目录变体使用 `independent-settlement`，伤害项要求：
+  `itemId: "pheony:m2-burn-duration"`、`stat: attack`、`role: base`、
+  `allowedModes: ["standard-disorder", "standard-vortex"]`、
+  `source: "holder-anomaly-source"`。
+- `holder-anomaly-source` 要求 `binding.holderId` =
+  `damage.anomalySource.entityId` = `damageItem.statSource.entityId`，且
+  `statSource.snapshotId` = `anomalySource.snapshotId`（都省略表示当前属性）。
+- 元素限制沿用目录 `applicability.beneficiaryElements: ["fire"]` 与规则的
+  `hit.element: fire`：火属性原异常紊乱（`originalAnomalyAttribute: fire`）
+  或燃烧 profile 的标准乱流（`standard-vortex profile: burn`）读取 +2 秒；
+  非火原异常规则条件不成立，零贡献。
+- 持续秒数进入既有 `anomaly-duration-addition` 准备通道，不新增机制 arm，
+  不模拟异常积蓄、持续时间刷新或动作时间线。
+- 变体 `minimumMindscape: 2`、`maximumLayers: 1`：M0/M1 拒绝，M2—M6 可用，
+  层数上限 1，+2 只计算一次；经过时间超过原时长时沿用现有 `max(0,…)` 钳制。
+- option target 仍为 `team`，只表示队伍中任何角色结算菲欧妮施加的灼烧时都能
+  读取该持续时间；`holder-anomaly-source` 阻止其他施加者或跨快照冒充。
+
+### 6.3 覆盖与制品
+
+- effects revision：`59`。
+- 规则 `947 → 948`；选项 `1,008` 不变；catalog 变体 `1,489` 总数不变，
+  状态为 `1,223 converted / 145 corrected / 121 unsupported`。
+- coverage：`1,149 converted / 139 corrected / 87 unsupported`（`1,375` 条）。
+- catalog `differences`：`51 → 52`。
+- 补充记录 `108`（74 integrated / 34 out-of-scope）、补充规则 `84`、补充选项
+  `69` 不变。
+- 三份 effects 制品由固定来源连续生成两次，逐字节一致后安装。摘要：
+  static `68d3dc3a…`、catalog `862c5151…`、coverage `8711250a…`。
+- 技能清单 `staticCatalogSha256` 由 `generate:agent-actions` 同步为
+  `862c5151…`；60 个动作文件与 registry 字节不变。
+- 计算快照：`24018cd0…`；三份 calculator 夹具追加第 19 条 B3 刷新记录，
+  B1 的 17 条与 B2 的第 18 条历史链保持原样。
+
+### 6.4 消融实验
+
+| 场景                           | 现有契约结果 | 替代方案结果                         | 结论                    |
+| ------------------------------ | ------------ | ------------------------------------ | ----------------------- |
+| 菲欧妮施加火灼烧，队友触发紊乱 | +2 生效      | 仅元素/职业条件无法区分施加者        | 仍需 holder 来源约束    |
+| 简（异常职业）施加火异常       | 拒绝         | 仅按火元素或 `anomaly-source` 会误计 | 元素/职业不能替代       |
+| 同一实体、不同异常来源快照     | 拒绝         | 仅比较实体会误计                     | 必须同时核对快照        |
+| 非火原异常                     | 零贡献       | 保留 turbulence 会变成乱流专属       | 元素条件必须保留        |
+| 燃烧 profile 的标准乱流        | +2 生效      | 删除 turbulence 后放行全队仍错误     | 需要 holder 来源 + 元素 |
+
+因此 `holder-anomaly-source` 是表达“只有绑定持有者亲自施加的原异常”的最小
+契约；`anomaly-source`、元素筛选和职业条件都不能替代。详细命令与结果见第
+7 节。
+
+## 7. PR-B3 验证记录
+
+- 红测：未修代码上新增 core 回归 `8 failed / 0 passed`，失败原因为目录以
+  `INVALID_INPUT / Unknown damage item source restriction` 拒绝
+  `holder-anomaly-source`；新增 data 转换回归 `5 failed / 6 passed`，失败项为
+  M2 仍为 `unsupported`、缺规则、缺具名差异、缺 Nanoka 证据，以及块 note
+  漂移未被拒绝；新增发布制品消费回归 `9 failed / 0 passed`，均命中固定
+  M2 `semantic-conflict`。实施后 core `8 passed`、data 转换 `26 passed`、
+  发布制品消费 `9 passed`。
+- 持续数值：10 秒灼烧、已过 3 秒时剩余 `7 → 9`。现有 core 火紊乱公式为
+  `4.5 + floor(剩余秒数 / 0.5) × 0.5`，因此倍率实测 `11.5 → 13.5`；任务
+  描述中的 `8 → 9` 与现有公式不一致，本 PR 未修改该公式。已过 11 秒时
+  剩余 `0 → 1`，已过 12 秒时仍为 `0`；`durationAdjustment` 恒为 `2`，
+  证明 +2 只计算一次。燃烧 profile 乱流由 `19 → 21`。
+- 来源约束：队友施加的火异常、`statSource` 与 `anomalySource` 实体不一致、
+  快照不一致均返回 `CONTEXT_MISMATCH`；实体与快照都等于绑定持有者时正常
+  +2。队友触发紊乱但 `anomalySource` 仍为菲欧妮时正常 +2，证明 team
+  target 只影响消费范围。
+- 消融：把要求从 `holder-anomaly-source` 换回 `anomaly-source` 后，简
+  （同为[异常]职业）施加的火紊乱获得 +2，证明元素/职业条件不能替代持有者
+  来源约束；恢复 `holder-anomaly-source` 后同一输入被拒绝。非火原异常在
+  合法持有者来源下零贡献；`burn` 乱流可读取 +2，`shock` 乱流零贡献。
+- 生成期门禁：固定源生成两次，`static.json` / `static-catalog.json` /
+  `static-coverage.json` 两两 `cmp` 一致，且与安装后的正式制品逐字节一致。
+  新增生成期守卫覆盖来源 raw/normalized 编码、块 note、固定 Pointer、
+  Nanoka 证据 Pointer、元素、机制要求、规则通道/数值/条件与具名差异；
+  任一漂移即拒绝生成。证据入口 `static-effects-evidence.test.ts` 为
+  `3 passed`，包含 M2 语义键。
+- `authoring:verify`：99 条记录、89 个 option group、24 个 coverage 位置、
+  19 个技能目标、68 条补充记录；语义差异 0，三制品字节比较通过。
+- `verify:artifact-dependencies`：730 个节点、915 条边、0 个违规。
+  `audit:data-identity`：`matched`，91 条既有问题，`newProblems=[]`、
+  `resolvedProblems=[]`。
+- 定向回归：core `7 files / 1,979 passed`；data `10 files / 220 passed`。
+  data unit 全量 `101 files / 4,453 passed`；随后 `pnpm check` 全量通过。
+- `pnpm check`：退出码 0。core `102 passed / 2 skipped` 文件、
+  `5,732 passed / 11 skipped` 用例；data `116 files / 4,879 passed`；
+  core 打包消费 `1 passed`、data 打包消费 `2 passed`；`pnpm lint` 0 error
+  （136 条既有 warning）；`pnpm format:check` 2,941 个文件通过。
+- 边界：未修改动作目录、`packages/data/integrated`、来源版本、包版本、CI、
+  既有规范页或 `docs/HISTORY.md`；未扩张 authoring 覆盖，未创建或重写数据
+  管理记录。M2 的 option target 保持 team 只为队友消费菲欧妮施加的灼烧；
+  `holder-anomaly-source` 才决定施加者归属。

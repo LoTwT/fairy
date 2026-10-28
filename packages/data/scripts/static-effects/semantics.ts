@@ -4,6 +4,7 @@ import type {
   MindscapeRank,
   SkillCategory,
   SpecialSkillLevel,
+  StaticCatalogDamageItemRequirement,
   Unit,
 } from "@randomplay/shared"
 import type { SourceRecordShape } from "./supplements.ts"
@@ -12,6 +13,15 @@ import {
   PHEONY_ADDITIONAL_ABILITY_SAME_FACTION_AGENT_ENTITY_IDS,
   PHEONY_ADDITIONAL_ABILITY_TEAM_CONDITION_DIFFERENCE_ID,
 } from "./pheony-additional.ts"
+import {
+  PHEONY_M2_BURN_DURATION_DAMAGE_KINDS,
+  PHEONY_M2_BURN_DURATION_DIFFERENCE_ID,
+  PHEONY_M2_BURN_DURATION_ELEMENT,
+  PHEONY_M2_BURN_DURATION_EVIDENCE,
+  PHEONY_M2_BURN_DURATION_EXPECTED_BLOCK_NOTE,
+  PHEONY_M2_BURN_DURATION_EXPECTED_RAW_ENCODING,
+  PHEONY_M2_BURN_DURATION_REQUIREMENT,
+} from "./pheony-m2.ts"
 
 /**
  * 本轮新增的来源记录语义登记。只描述对固定来源记录的已核实解释及其证据，
@@ -334,6 +344,27 @@ export type SourceSemantics =
         readonly element: DamageElement
         readonly name: string
       }
+      readonly evidence: readonly SemanticsEvidenceReference[]
+      readonly verification: string
+    }
+  | {
+      /**
+       * 固定来源把“持有者亲自施加的原异常持续时间 +N 秒”编成全队或仅某
+       * 伤害种类的持续记录：修正为具名 corrected，并通过独立结算伤害项
+       * 要求 `holder-anomaly-source` 验证明细绑定持有者、本次
+       * `damage.anomalySource` 与伤害项 `statSource` 的实体与快照身份完全
+       * 一致。秒数继续进入既有 `anomaly-duration-addition` 通道，只允许
+       * 声明的伤害种类与元素读取；不新增机制 arm，也不模拟时间线。
+       */
+      readonly kind: "holder-anomaly-duration"
+      readonly requirement: StaticCatalogDamageItemRequirement
+      readonly damageKinds: readonly ("disorder" | "vortex")[]
+      readonly element: DamageElement
+      /** 防漂移：原始记录逐字段保持的固定源编码。 */
+      readonly expectedEncoding: Readonly<Record<string, unknown>>
+      /** 防漂移：所属固定源块的完整 note 原文。 */
+      readonly expectedSourceBlockNote: string
+      readonly differenceId: string
       readonly evidence: readonly SemanticsEvidenceReference[]
       readonly verification: string
     }
@@ -4198,21 +4229,19 @@ export const SOURCE_SEMANTICS: Readonly<Record<string, SourceSemantics>> = {
       "ZZZ-HP 991bb0e 菲欧妮 rank0 块 note 的 M4 分句；常驻异放暴伤会错误作用于所有异放。PR-B2 只把该 40% 作为 six-element [异放]选项的附加规则，本位置保持 unsupported/semantic-conflict，不变成常驻贡献。",
   },
   "agents/pheony/mindscape/2/blk-mindscapeBuffs-2-1/eff-mvdz21so-s2au9j": {
-    kind: "declared-unsupported",
-    reason: "semantic-conflict",
-    explanation:
-      "M2 的“[灼烧]持续时间提升2秒”被固定来源挂在 turbulence 的 anomalyDuration 上；正文明确是火属性灼烧持续时间，不是乱流。D4 不采信该编码，也不改写成其他持续通道。",
-    expectedEncoding: {
-      stat: "anomalyDuration",
-      value: 2,
-      applyTarget: "team",
-      elementFilter: ["火"],
-      kind: "fixed",
-      conditions: { damageTypes: ["turbulence"] },
-    },
-    evidence: [d4Evidence("/agents/0/mindscapeBuffs/2/effectBlocks/0/note")],
+    kind: "holder-anomaly-duration",
+    requirement: PHEONY_M2_BURN_DURATION_REQUIREMENT,
+    damageKinds: [...PHEONY_M2_BURN_DURATION_DAMAGE_KINDS],
+    element: PHEONY_M2_BURN_DURATION_ELEMENT,
+    expectedEncoding: PHEONY_M2_BURN_DURATION_EXPECTED_RAW_ENCODING,
+    expectedSourceBlockNote: PHEONY_M2_BURN_DURATION_EXPECTED_BLOCK_NOTE,
+    differenceId: PHEONY_M2_BURN_DURATION_DIFFERENCE_ID,
+    evidence: [
+      PHEONY_M2_BURN_DURATION_EVIDENCE.zh,
+      PHEONY_M2_BURN_DURATION_EVIDENCE.en,
+    ],
     verification:
-      "ZZZ-HP 2628b32 菲欧妮 rank2 块 note 与记录对照：note 是[灼烧]持续时间 +2 秒，记录 conditions.damageTypes 却是 turbulence；该编码不采信，保持 unsupported，等待来源修正。",
+      "Nanoka 3.3.12+19634983 的 agents/1641/details.zh.json 与 details.en.json /talent/2/desc 同文确认：菲欧妮对敌人施加[灼烧]效果时，该效果的持续时间提升2秒（英文：When Phoenix applies Burn to an enemy, its duration is increased by 2s.），施加者限定为菲欧妮本人。固定 ZZZ-HP 991bb0e 的 /agents/52/mindscapeBuffs/2/effectBlocks/0/effects/1 把同一句编成 anomalyDuration 2、elementFilter 火，却附加 conditions.damageTypes=turbulence 并以 applyTarget=team 放行全队。本登记保留原 Pointer、数值与公开 optionId/effectId，把记录改为具名 corrected：目录变体使用 independent-settlement 与 holder-anomaly-source 伤害项要求，binding.holderId、damage.anomalySource.entityId、damageItem.statSource.entityId 必须一致且快照身份相同；火属性原异常紊乱或燃烧 profile 的标准乱流读取既有 anomaly-duration-addition 的 +2 秒，非火原异常零贡献，队友施加的火异常或跨快照来源拒绝。团队目标只表示任何队友结算该灼烧时都能读取，不代表其他施加者也获得加成。M0/M1 拒绝，M2—M6 可用；+2 只计算一次，经过时间超过原时长时沿用 max(0,…) 钳制。",
   },
 }
 

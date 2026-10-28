@@ -971,9 +971,16 @@ export interface StaticCatalogDamageItemRequirement {
   )[]
   /**
    * holder-current：statSource 必须是绑定 holder 且无 snapshotId 的当前属性；
-   * anomaly-source：statSource 必须与本次 damage.anomalySource 的实体与快照一致。
+   * anomaly-source：statSource 必须与本次 damage.anomalySource 的实体与快照一致；
+   * holder-anomaly-source：damage.anomalySource 与 statSource 都必须是绑定
+   * holder 的同一实体，且两者的 snapshotId 一致（都省略表示当前属性）。
+   * 用于“持有者亲自施加的原异常”这类只能归给施加者的持续/派生效果，
+   * 不能由任意队友或另一异常来源快照冒充。
    */
-  readonly source?: "holder-current" | "anomaly-source"
+  readonly source?:
+    | "holder-current"
+    | "anomaly-source"
+    | "holder-anomaly-source"
   /** 仅 direct 模式：要求消费端输入的基础倍率为 0，实际倍率由关联规则贡献一次。 */
   readonly requiredDirectMultiplier?: 0
   /**

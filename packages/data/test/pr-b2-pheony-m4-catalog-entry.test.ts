@@ -87,7 +87,7 @@ describe("PR-B2 Pheony M4 six-element settlement through the published data pack
     )
     if (!parsed.ok) throw new Error(JSON.stringify(parsed.issues))
     const catalog = calculationData.catalog as StaticEffectCatalog
-    expect(catalog.revision).toBe("58")
+    expect(catalog.revision).toBe("59")
     expect(
       catalog.skillTargets.filter((target) => target.targetId === M4_TARGET),
     ).toHaveLength(1)

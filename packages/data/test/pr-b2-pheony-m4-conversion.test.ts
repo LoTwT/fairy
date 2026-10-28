@@ -247,7 +247,7 @@ const settleConverted = (
 describe("Pheony M4 six-element independent settlement conversion", () => {
   it("generates six converted independent-settlement options with stable identities", () => {
     const output = convert()
-    expect(output.definitions.revision).toBe("58")
+    expect(output.definitions.revision).toBe("59")
     expect(
       output.catalog.skillTargets.filter(
         (target) => target.targetId === targetId,

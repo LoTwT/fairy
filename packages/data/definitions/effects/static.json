@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "ruleSetId": "zzz-hp-static-effects",
-  "revision": "58",
+  "revision": "59",
   "effects": [
     {
       "kind": "contribution",
@@ -57887,6 +57887,98 @@
             "unit": "multiplier",
             "value": -1
           }
+        }
+      }
+    },
+    {
+      "kind": "contribution",
+      "effectId": "agent:1641:zzz-hp:eff-mvdz21so-s2au9j:blk-mindscapeBuffs-2-1:mindscape:2",
+      "source": {
+        "identity": {
+          "kind": "agent",
+          "entityId": "1641"
+        },
+        "section": "2 影",
+        "references": [
+          {
+            "sourceId": "zzz-hp",
+            "version": "991bb0ef2a00387f8a1fa18293bbda17256d7270",
+            "locale": "zh",
+            "resourcePath": "zzz-hp-backend/scripts/data/zzz-hp-calculator-buffs.json",
+            "pointer": "/agents/52/mindscapeBuffs/2/effectBlocks/0/effects/1"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "zh",
+            "resourcePath": "agents/1641/details.zh.json",
+            "pointer": "/talent/2/desc"
+          },
+          {
+            "sourceId": "nanoka-integrated",
+            "version": "3.3.12+19634983",
+            "locale": "en",
+            "resourcePath": "agents/1641/details.en.json",
+            "pointer": "/talent/2/desc"
+          }
+        ]
+      },
+      "config": {
+        "kind": "compare-number",
+        "unit": "count",
+        "operator": "gte",
+        "left": {
+          "kind": "configuration-number",
+          "unit": "count",
+          "field": "mindscapeRank"
+        },
+        "right": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 2
+        }
+      },
+      "parameters": {
+        "amount": {
+          "kind": "constant",
+          "unit": "seconds",
+          "value": 2
+        }
+      },
+      "activation": {
+        "kind": "supplied",
+        "maximumLayers": {
+          "kind": "literal",
+          "unit": "count",
+          "value": 1
+        }
+      },
+      "scope": "hit",
+      "beneficiary": {
+        "kind": "team"
+      },
+      "when": {
+        "kind": "all",
+        "conditions": [
+          {
+            "kind": "one-of",
+            "fact": "hit.damageKind",
+            "values": ["disorder", "vortex"]
+          },
+          {
+            "kind": "one-of",
+            "fact": "hit.element",
+            "values": ["fire"]
+          }
+        ]
+      },
+      "operation": {
+        "kind": "factor-contribution",
+        "channel": "anomaly-duration-addition",
+        "value": {
+          "kind": "parameter",
+          "unit": "seconds",
+          "name": "amount"
         }
       }
     },
