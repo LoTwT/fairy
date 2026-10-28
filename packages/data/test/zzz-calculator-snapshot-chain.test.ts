@@ -207,6 +207,21 @@ const expectedB2ChainSha256 = {
   vortex: "eac4ccb0f89544bd164353fc14fb32b53fc7a594015e2ec27fc58f41a5205542",
 } as const
 
+/** B1+B2+B3 已完成链（19 条）的冻结摘要；B4 只能在其后追加。 */
+const expectedB3ChainSha256 = {
+  abloom: "787be157a219e167a35d0f2a92a423fdbc2db55ea7957601a8260f3963b592ce",
+  static: "93bb1fcc4c8dccecbe3036422105c326ca8ce314c8be294e7b8c0c23518c4307",
+  vortex: "93bb1fcc4c8dccecbe3036422105c326ca8ce314c8be294e7b8c0c23518c4307",
+} as const
+
+const expectedB3SnapshotId =
+  "sha256:c5663dcbcba57d9da3ccf8897a62acc324aac76e39c2af18554ebecb49d6c8b0"
+
+const expectedB3ArtifactSha256 = {
+  static: "f7bada47889112f3d0bf806484e4c9d4317d2c5828c4388760c08d0f59e2de1e",
+  catalog: "00c0334588313403bca0a432c6a970651b0051f3a55b82c5cc64557aac4b78c6",
+} as const
+
 describe("ZZZ Calculator 快照刷新链", () => {
   it("三份夹具均为 19 条，相邻条目首尾相接，末条等于当前消费快照", () => {
     for (const [name, fixture] of Object.entries(fixtures)) {
@@ -236,7 +251,7 @@ describe("ZZZ Calculator 快照刷新链", () => {
     }
   })
 
-  it("只追加 B2/B3 条目，不改写 B1/B2 历史链", () => {
+  it("只追加 B2/B3/B4 条目，不改写 B1/B2/B3 历史链", () => {
     for (const [name, fixture] of Object.entries(fixtures)) {
       const entries = fixture.fairySnapshotRefreshes
       expect(
@@ -255,6 +270,12 @@ describe("ZZZ Calculator 快照刷新链", () => {
           .digest("hex"),
         `${name} B2 chain`,
       ).toBe(expectedB2ChainSha256[name as keyof typeof expectedB2ChainSha256])
+      expect(
+        createHash("sha256")
+          .update(JSON.stringify(entries.slice(0, 19)))
+          .digest("hex"),
+        `${name} B3 chain`,
+      ).toBe(expectedB3ChainSha256[name as keyof typeof expectedB3ChainSha256])
       expect(entries[16]!.currentSnapshotId, `${name} B1 tail`).toBe(
         "sha256:0554bf39203d0b3e9bc3c6021d3e1be140503ad76b506e48ef2a57277bc8c7da",
       )
@@ -270,6 +291,16 @@ describe("ZZZ Calculator 快照刷新链", () => {
       expect(entries[18]!.currentSnapshotId, `${name} B3 current`).not.toBe(
         entries[17]!.currentSnapshotId,
       )
+      expect(entries[18]!.currentSnapshotId, `${name} B3 frozen current`).toBe(
+        expectedB3SnapshotId,
+      )
+      expect(
+        entries[18]!.previous.artifactSha256,
+        `${name} B3 frozen artifacts`,
+      ).toStrictEqual({
+        [staticPath]: expectedB3ArtifactSha256.static,
+        [catalogPath]: expectedB3ArtifactSha256.catalog,
+      })
       expect(entries[19]!.previous.snapshotId, `${name} B4 previous`).toBe(
         entries[18]!.currentSnapshotId,
       )

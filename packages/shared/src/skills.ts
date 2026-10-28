@@ -168,17 +168,28 @@ export interface ResolveAgentActionInput {
   readonly additionalAbilityActive?: boolean
 }
 
+export interface ResolvedActionMultiplierInput {
+  /** 来源动作声明的输入名；必须同时存在于 action.inputs。 */
+  readonly inputId: string
+  /** data 已解析并验证过的显式输入值；core 用同一值复核最终倍率。 */
+  readonly value: number
+}
+
+export interface ResolvedActionDamageItem {
+  readonly itemId: string
+  readonly stat: ActionScalingStat
+  readonly damageMultiplier: number
+  /** 仅当来源项声明 multiplyByInput 时出现；倍率已乘入 value。 */
+  readonly multiplyByInput?: ResolvedActionMultiplierInput
+}
+
 export interface ResolvedActionSegment {
   readonly segmentId: string
   readonly damageKind: "regular" | "sheer" | "sharpen"
   readonly element: ActionDamageElement
   readonly granularity: "individual" | "aggregate"
   readonly repeat: number
-  readonly damageItems: readonly {
-    readonly itemId: string
-    readonly stat: ActionScalingStat
-    readonly damageMultiplier: number
-  }[]
+  readonly damageItems: readonly ResolvedActionDamageItem[]
 }
 
 export type ResolvedAgentAction =
@@ -212,11 +223,7 @@ export type ResolvedAgentAction =
         | {
             readonly kind: "anomaly-settlement"
             readonly elements: readonly ActionDamageElement[]
-            readonly damageItems: readonly {
-              readonly itemId: string
-              readonly stat: ActionScalingStat
-              readonly damageMultiplier: number
-            }[]
+            readonly damageItems: readonly ResolvedActionDamageItem[]
             readonly anomalySettlementCriticalDamage: number
           }
         | { readonly kind: "daze-only" }

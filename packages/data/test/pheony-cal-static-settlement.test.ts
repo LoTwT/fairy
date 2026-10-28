@@ -198,6 +198,14 @@ function equipmentActor(build: BuildFixture): StaticActorConfiguration {
       build.coreSkillLevel as StaticActorConfiguration["coreSkillLevel"],
     mindscapeRank:
       build.mindscapeRank as StaticActorConfiguration["mindscapeRank"],
+    ...(build.agentEntityId === "1641"
+      ? {
+          skillLevels: {
+            basic: { mode: "effective" as const, value: 14 },
+            chain: { mode: "effective" as const, value: 14 },
+          },
+        }
+      : {}),
     wEngine: build.wEngine,
     driveDiscs: structuredClone(build.driveDiscs),
     panel: { mode: "equipment" },
@@ -216,6 +224,14 @@ function settledActor(
       build.coreSkillLevel as StaticActorConfiguration["coreSkillLevel"],
     mindscapeRank:
       build.mindscapeRank as StaticActorConfiguration["mindscapeRank"],
+    ...(build.agentEntityId === "1641"
+      ? {
+          skillLevels: {
+            basic: { mode: "effective" as const, value: 14 },
+            chain: { mode: "effective" as const, value: 14 },
+          },
+        }
+      : {}),
     wEngine: null,
     driveDiscs: emptyDiscs,
     panel: {
@@ -226,6 +242,13 @@ function settledActor(
     },
     ...extra,
   }
+}
+
+function withoutSkillLevels(
+  actor: StaticActorConfiguration,
+): StaticActorConfiguration {
+  const { skillLevels: _ignored, ...rest } = actor
+  return rest
 }
 
 const dialyn = settledActor(fixture.build.dialyn)
@@ -338,6 +361,13 @@ function expectContextMismatch(input: StaticActionCalculationInput) {
   ).toBe(true)
 }
 
+function failureIssues(input: StaticActionCalculationInput) {
+  const result = calculateStaticActionDamage(input)
+  expect(result.ok, JSON.stringify(result)).toBe(false)
+  if (result.ok) throw new Error("expected a rejected request")
+  return result.issues
+}
+
 function withAction(
   input: StaticActionCalculationInput,
   action: StaticActionCalculationInput["action"],
@@ -347,6 +377,7 @@ function withAction(
 
 function selections(
   withM4: boolean,
+  withM2 = false,
 ): StaticActionCalculationInput["selections"] {
   return [
     { holderId: PHEONY, optionId: ABRASION_M1, layers: 1 },
@@ -356,6 +387,15 @@ function selections(
           {
             holderId: PHEONY,
             optionId: M4_FIRE_OPTION,
+            layers: 1,
+          } as const,
+        ]
+      : []),
+    ...(withM2
+      ? [
+          {
+            holderId: PHEONY,
+            optionId: fixture.references.m2Preparation.optionId,
             layers: 1,
           } as const,
         ]
@@ -1066,22 +1106,68 @@ describe("Pheony CAL and M4 independent events against the frozen reference", ()
     )
   })
 
-  it("keeps M2 at a preparation-only +2s and out of the CAL totals", async () => {
+  it("keeps M2 on its prepared disorder request and rejects merging it into CAL", async () => {
     const data = await loadData()
     const actions = await pheonyActions()
     const baseCal = resolvedAction(actions, BASE_CAL_ACTION, {
       basic: { mode: "effective", value: 14 },
     })
+    const actors = [settledActor(fixture.build.pheony), dialyn]
     const base = anomalyResultOf(
       await inputData(
         anomalyInput({
           action: baseCal,
-          actors: [settledActor(fixture.build.pheony), dialyn],
+          actors,
           selections: selections(false),
         }),
       ),
     )
-    expect(base.damage.preparations ?? []).toHaveLength(0)
+    close(
+      base.damage.expected,
+      fixture.references.baseCal.expected,
+      "CAL without M2 expected",
+    )
+    const withM2Input = await inputData(
+      anomalyInput({
+        action: baseCal,
+        actors,
+        selections: selections(false, true),
+      }),
+    )
+    const withM2Result = calculateStaticActionDamage(withM2Input)
+    expect(withM2Result.ok, JSON.stringify(withM2Result)).toBe(false)
+    if (withM2Result.ok) throw new Error("expected M2+CAL rejection")
+    expect(withM2Result.issues).toContainEqual(
+      expect.objectContaining({
+        pointer: "/selections/2",
+        code: "MISSING_REFERENCE",
+      }),
+    )
+
+    // 若把 M2 的持续项误塞进 CAL 异放动作，core 的伤害项成员校验必须拒绝，
+    // 而不是把 +2 秒静默带入异放合计。
+    const sabotaged = structuredClone(baseCal) as typeof baseCal
+    if (sabotaged.calculation.kind !== "anomaly-settlement")
+      throw new Error("expected anomaly settlement")
+    ;(
+      sabotaged.calculation.damageItems as unknown as {
+        itemId: string
+        stat: string
+        damageMultiplier: number
+      }[]
+    ).push({
+      itemId: "pheony:m2-burn-duration",
+      stat: "attack",
+      damageMultiplier: 0,
+    })
+    const sabotagedInput = await inputData(
+      anomalyInput({
+        action: sabotaged,
+        actors,
+        selections: selections(false),
+      }),
+    )
+    expectContextMismatch(sabotagedInput)
 
     const bindingId = staticSourceBindingId(PHEONY, "agent", "1641")
     const damage = {
@@ -1216,5 +1302,254 @@ describe("Pheony CAL and M4 independent events against the frozen reference", ()
       fixture.references.m2Preparation.preparedMultiplier,
       "M2 prepared multiplier",
     )
+  })
+
+  it("rejects forged CAL levels without independent actor skill levels", async () => {
+    const actions = await pheonyActions()
+    const forged = structuredClone(
+      resolvedAction(actions, BASE_CAL_ACTION, {
+        basic: { mode: "effective", value: 14 },
+      }),
+    ) as any
+    if (forged.calculation.kind !== "anomaly-settlement")
+      throw new Error("expected anomaly settlement")
+    forged.levels.basic = { trained: 16, bonus: 0, effective: 16 }
+    forged.calculation.damageItems[0].damageMultiplier = 5.25
+    const issues = failureIssues(
+      await inputData(
+        anomalyInput({
+          action: forged,
+          actors: [
+            withoutSkillLevels(settledActor(fixture.build.pheony)),
+            dialyn,
+          ],
+          selections: selections(false),
+        }),
+      ),
+    )
+    expect(issues).toContainEqual(
+      expect.objectContaining({
+        code: "INVALID_INPUT",
+        pointer: `/actors/${PHEONY}/skillLevels/basic`,
+      }),
+    )
+  })
+
+  it("cross-checks actor levels against forged action levels and multipliers", async () => {
+    const actions = await pheonyActions()
+    const forgedLevel = structuredClone(
+      resolvedAction(actions, BASE_CAL_ACTION, {
+        basic: { mode: "effective", value: 14 },
+      }),
+    ) as any
+    if (forgedLevel.calculation.kind !== "anomaly-settlement")
+      throw new Error("expected anomaly settlement")
+    forgedLevel.levels.basic = { trained: 16, bonus: 0, effective: 16 }
+    forgedLevel.calculation.damageItems[0].damageMultiplier = 5.25
+    expectContextMismatch(
+      await inputData(
+        anomalyInput({
+          action: forgedLevel,
+          actors: [settledActor(fixture.build.pheony), dialyn],
+          selections: selections(false),
+        }),
+      ),
+    )
+
+    const forgedMultiplier = structuredClone(
+      resolvedAction(actions, BASE_CAL_ACTION, {
+        basic: { mode: "effective", value: 14 },
+      }),
+    ) as any
+    forgedMultiplier.calculation.damageItems[0].damageMultiplier = 5.25
+    const issues = failureIssues(
+      await inputData(
+        anomalyInput({
+          action: forgedMultiplier,
+          actors: [settledActor(fixture.build.pheony), dialyn],
+          selections: selections(false),
+        }),
+      ),
+    )
+    expect(issues).toContainEqual(
+      expect.objectContaining({
+        code: "CONTEXT_MISMATCH",
+        pointer: "/action/calculation/items",
+      }),
+    )
+
+    const correct = anomalyResultOf(
+      await inputData(
+        anomalyInput({
+          action: resolvedAction(actions, BASE_CAL_ACTION, {
+            basic: { mode: "effective", value: 14 },
+          }),
+          actors: [settledActor(fixture.build.pheony), dialyn],
+          selections: selections(false),
+        }),
+      ),
+    )
+    close(
+      correct.damage.evaluation.hit!.damageItems[0]!.damageMultiplier,
+      4.85,
+      "correct CAL level 14 multiplier",
+    )
+    close(
+      correct.damage.expected,
+      fixture.references.baseCal.expected,
+      "correct CAL level 14 expected",
+    )
+
+    const m4WithoutLevels = anomalyResultOf(
+      await inputData(
+        anomalyInput({
+          action: resolvedAction(actions, M4_ACTION),
+          actors: [
+            withoutSkillLevels(settledActor(fixture.build.pheony)),
+            dialyn,
+          ],
+          selections: selections(true),
+        }),
+      ),
+    )
+    close(
+      m4WithoutLevels.damage.evaluation.hit!.damageItems[0]!.damageMultiplier,
+      fixture.references.m4.multiplier,
+      "M4 zero-initial multiplier does not require a skill level",
+    )
+  })
+
+  it("recomputes multiplyByInput in core and rejects missing or tampered values", async () => {
+    const data = await loadData()
+    const mutated = structuredClone(data)
+    const agentRecord = mutated.agents.find(
+      (entry) => entry.attributes.entityId === "1641",
+    )!
+    const sourceAction = agentRecord.actions.actions.find(
+      (entry) => entry.actionId === BASE_CAL_ACTION,
+    )!
+    ;(
+      sourceAction.inputs as unknown as {
+        inputId: string
+        name: string
+        minimum: number
+        maximum: number
+      }[]
+    ).push({
+      inputId: "charges",
+      name: "charges",
+      minimum: 0,
+      maximum: 10,
+    })
+    ;(
+      sourceAction.calculation as unknown as {
+        items: { multiplyByInput?: string }[]
+      }
+    ).items[0]!.multiplyByInput = "charges"
+    const action = resolveAgentAction({
+      agent: agentRecord.actions,
+      actionId: BASE_CAL_ACTION,
+      mindscapeRank: 4,
+      levels: { basic: { mode: "effective", value: 14 } },
+      inputs: { charges: 2 },
+    })
+    expect(action.ok, JSON.stringify(action)).toBe(true)
+    if (!action.ok || action.calculation.kind !== "anomaly-settlement")
+      throw new Error("unexpected resolution")
+    const requested = anomalyInput({
+      action,
+      actors: [settledActor(fixture.build.pheony), dialyn],
+      selections: selections(false),
+    })
+    const result = anomalyResultOf({
+      ...requested,
+      data: mutated,
+    })
+    close(
+      result.damage.evaluation.hit!.damageItems[0]!.damageMultiplier,
+      9.7,
+      "multiplyByInput CAL multiplier",
+    )
+
+    expect(() =>
+      resolveAgentAction({
+        agent: agentRecord.actions,
+        actionId: BASE_CAL_ACTION,
+        mindscapeRank: 4,
+        levels: { basic: { mode: "effective", value: 14 } },
+      }),
+    ).toThrow(/charges/)
+
+    const tampered = structuredClone(action)
+    if (tampered.calculation.kind !== "anomaly-settlement")
+      throw new Error("expected anomaly settlement")
+    ;(
+      tampered.calculation.damageItems[0] as unknown as {
+        multiplyByInput?: { inputId: string; value: number }
+      }
+    ).multiplyByInput!.value = 3
+    const tamperedIssues = failureIssues({
+      ...requested,
+      data: mutated,
+      action: tampered,
+    })
+    expect(tamperedIssues).toContainEqual(
+      expect.objectContaining({
+        code: "CONTEXT_MISMATCH",
+        pointer: "/action/calculation/items",
+      }),
+    )
+  })
+
+  it("rejects malformed anomaly critical parameters at the exact field", async () => {
+    const actions = await pheonyActions()
+    const base = await inputData(
+      anomalyInput({
+        action: resolvedAction(actions, BASE_CAL_ACTION, {
+          basic: { mode: "effective", value: 14 },
+        }),
+        actors: [settledActor(fixture.build.pheony), dialyn],
+        selections: selections(false),
+      }),
+    )
+    const cases = [
+      {
+        label: "empty-string critical damage",
+        pointer: "/anomalySettlement/damage/anomalySettlementCriticalDamage",
+        patch: { anomalySettlementCriticalDamage: "" },
+      },
+      {
+        label: "length-zero object critical damage",
+        pointer: "/anomalySettlement/damage/anomalySettlementCriticalDamage",
+        patch: { anomalySettlementCriticalDamage: { length: 0 } },
+      },
+      {
+        label: "null critical damage",
+        pointer: "/anomalySettlement/damage/anomalySettlementCriticalDamage",
+        patch: { anomalySettlementCriticalDamage: null },
+      },
+      {
+        label: "null critical rate",
+        pointer: "/anomalySettlement/damage/anomalySettlementCriticalRate",
+        patch: { anomalySettlementCriticalRate: null },
+      },
+    ] as const
+    for (const entry of cases) {
+      const damage = {
+        ...base.anomalySettlement!.damage,
+        ...entry.patch,
+      }
+      const issues = failureIssues({
+        ...base,
+        anomalySettlement: {
+          ...base.anomalySettlement!,
+          damage,
+        } as NonNullable<StaticActionCalculationInput["anomalySettlement"]>,
+      })
+      expect(
+        issues.some((issue) => issue.pointer === entry.pointer),
+        `${entry.label}: ${JSON.stringify(issues)}`,
+      ).toBe(true)
+    }
   })
 })

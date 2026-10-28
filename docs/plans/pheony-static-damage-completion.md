@@ -531,6 +531,15 @@ anomalySettlement?: {
   在 data 解析阶段即拒绝 M4 动作，core 复核动作与 actor 的最低影画；
 - 异放暴伤、倍率与目标不跨事件复用；基础 CAL 的 40% 不进入 M4 或普通异放，
   M4 的 40% 也不进入基础 CAL。
+- 第 1 轮审查修复后，基础 CAL 的每个非零倍率培养组必须由 actor
+  `skillLevels` 独立提供；core 按来源加成表重算 `trained/bonus/effective`，
+  与解析动作逐项比较，并使用独立 effective 重算倍率。省略等级、伪造动作等级
+  或只伪造倍率均拒绝；M4 零倍率不要求培养组；
+- 来源项 `multiplyByInput` 在解析结果中携带 `{ inputId, value }`，core 按
+  `action.inputs` 的声明与范围重算同一倍率，缺失/越界/篡改拒绝；
+- 请求暴伤只接受 `undefined` 或空数组，暴击率只接受 `undefined` 或有限
+  非负数；`null`、字符串、`{ length: 0 }` 等按字段拒绝。data 解析也会拒绝
+  非枚举/重复元素、空 items 和缺少 levelGroup 的零倍率项。
 
 ### 8.3 覆盖与制品
 
@@ -582,8 +591,9 @@ M1 25% + 额外能力 15% + 事件 40% = `1.05`，异放暴击倍率 `2.05`；�
 期望等于暴击分支。测试逐项计数核心/M1/额外能力/事件规则各一次，并断言
 M4 事件的 40% 只来自 B2 选项、基础 CAL 不获得 M4 规则。
 
-M2 的 +2 秒只在合格火紊乱的 `preparations` 中出现（`11.5 → 13.5`）；
-CAL 结果没有持续时间准备项，也不把 M2 当作异放倍率。
+M2 的 +2 秒只在合格火紊乱的 `preparations` 中出现（`11.5 → 13.5`）；同选 M2 与 CAL 时，
+既有目录契约会因缺少 `pheony:m2-burn-duration` 伤害项在 selection 处明确拒绝，不进入 CAL
+合计。回归同时把 M2 项误塞进 CAL 动作的消融断言为 `CONTEXT_MISMATCH`。
 
 ### 8.5 消融实验
 
@@ -595,6 +605,30 @@ CAL 结果没有持续时间准备项，也不把 M2 当作异放倍率。
 | 合并两个 M4 动作               | 各自保留焚罪/烬火追魂触发身份                    | 共享倍率但丢失触发来源                            | M4 事件也不能合并         |
 | 用基础动作承载 M4              | M4 在 M0—M3 拒绝；选中选项后 0→3、0→40%          | 基础动作在 M0 即可给出 4.85 与自带 40%            | 门槛与倍率归属不可互换    |
 | 不选 M4 的 B2 选项             | 零初始倍率保持 0，40% 不出现                     | 若动作自带 600% 会绕过 B2 的六元素归一与 40% 归属 | M4 最终倍率必须由选项提供 |
+
+### 8.6 第 1 轮独立审查修复
+
+- Medium：基础 CAL 不再仅依赖 `action.levels` 计算倍率。对每个非零倍率曲线，
+  必须存在 actor 对应培养组；core 用 actor 自己的加成表独立解析并按
+  `trained/bonus/effective` 全量比较，再用独立 effective 重算倍率。回归覆盖
+  省略 `skillLevels` 的伪造动作、actor L14 对伪造 L16、仅伪造倍率与正确 L14；
+- Medium：公开 [技能动作规范](../../specs/data/skill-actions.md) 更新为
+  `agent-actions/5`，新增 `anomaly-settlement` 动作语义、四个动作、独立结果、
+  来源/培养/错误边界；[静态计算规范](../../specs/core/static-calculation.md)
+  补充公开输入、返回分支、M4 选项与畸形值拒绝；
+- Low：`multiplyByInput` 在 data 解析结果中保留 `{ inputId, value }`，core
+  按声明输入与范围复核并计算同一倍率；回归覆盖 `charges=2 → 9.7`、缺输入与
+  篡改；零倍率项仍完整校验 levelGroup；
+- Low：core 对暴伤字符串/空字符串/`{ length: 0 }`/`null` 与 `null` 暴击率
+  返回字段级失败；data 解析拒绝 `[null]`、未知/重复元素、空 items 与缺少
+  levelGroup 的零倍率曲线；
+- Low：M2 回归改用真实 M2 选择，断言同选 CAL 时按既有目录契约拒绝、M2 项误入
+  CAL 时 `CONTEXT_MISMATCH`；快照链新增 19 条 B3 链摘要、B3 当前快照与两个
+  制品摘要冻结，B4 仅追加。
+- 红测：新增回归初跑 `5 failed / 22 passed`；其中 M2 用例暴露既有目录会拒绝
+  同选 CAL，改为断言拒绝；其余四项分别证明缺少 actor 等级仍返回 `ok: true`、
+  `multiplyByInput` 被 core 拒绝、core 畸形暴伤/暴击率探针未按字段失败、data
+  畸形动作未在解析前拒绝。修复后定向三文件 `27 passed`。
 
 ## 9. PR-B4 验证记录
 
@@ -616,9 +650,16 @@ action:agent:1641:action:0021/0023/0024`。此时 data/core 尚无
   `audit:data-identity`：`matched`，91 条既有问题，`newProblems=[]`、
   `resolvedProblems=[]`。
 - `pnpm check`：退出码 0。core `102 passed / 2 skipped` 文件、
-  `5,733 passed / 11 skipped` 用例；data `118 files / 4,905 passed`；core
+  `5,733 passed / 11 skipped` 用例；data `118 files / 4,910 passed`；core
   打包消费 `1 passed`、data 打包消费 `2 passed`；lint 0 error（138 条既有
   warning）。
+- 第 1 轮审查定向：动作目录 `11 passed`；完整配装 E2E `12 passed`（原 8 项
+  - 新增 4 项）；快照链 `4 passed`，连同 `pheony-cal-static-settlement` 共
+    `27 passed`。新增 M4 无培养等级正例，确认零倍率不误要求等级。
+- 第 1 轮审查 `authoring:verify`、`verify:artifact-dependencies`、
+  `audit:data-identity` 与 `format:check` 均退出 0；effects 三份摘要仍为
+  `4f946094…` / `6f3fe439…` / `d8cb11a2…`，revision 保持 60，skills 保持
+  `agent-actions/5`，快照保持 `8663cbf0…`。
 - `pnpm format:check`：2,944 个文件格式通过，退出 0。
 - 边界：未修改 `packages/data/integrated`、来源版本、包版本、CI、
   `docs/HISTORY.md` 或 authoring 覆盖；未创建或重写数据管理记录；未推送、

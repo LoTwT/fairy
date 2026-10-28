@@ -360,6 +360,78 @@ describe("Pheony CAL anomaly-settlement actions", () => {
     expect(() => resolve(m4Actions[0].actionId, 0)).toThrow(/mindscape rank/i)
   })
 
+  it("rejects malformed anomaly settlement registrations before evaluation", () => {
+    const malformedCases: readonly {
+      readonly label: string
+      readonly actionId: string
+      readonly levels: Readonly<
+        Record<string, { mode: "effective"; value: number }>
+      >
+      readonly mutate: (calculation: Record<string, unknown>) => void
+    }[] = [
+      {
+        label: "null element",
+        actionId: baseActions[0].actionId,
+        levels: { basic: { mode: "effective", value: 14 } },
+        mutate: (calculation) => {
+          calculation.elements = [null]
+        },
+      },
+      {
+        label: "unknown element",
+        actionId: baseActions[0].actionId,
+        levels: { basic: { mode: "effective", value: 14 } },
+        mutate: (calculation) => {
+          calculation.elements = ["quantum"]
+        },
+      },
+      {
+        label: "duplicate element",
+        actionId: baseActions[0].actionId,
+        levels: { basic: { mode: "effective", value: 14 } },
+        mutate: (calculation) => {
+          calculation.elements = ["fire", "fire"]
+        },
+      },
+      {
+        label: "empty items",
+        actionId: baseActions[0].actionId,
+        levels: { basic: { mode: "effective", value: 14 } },
+        mutate: (calculation) => {
+          calculation.items = []
+        },
+      },
+      {
+        label: "zero multiplier without a level group",
+        actionId: m4Actions[0].actionId,
+        levels: {},
+        mutate: (calculation) => {
+          const items = calculation.items as {
+            coefficient: { levelGroup?: string }
+          }[]
+          delete items[0]!.coefficient.levelGroup
+        },
+      },
+    ]
+    for (const entry of malformedCases) {
+      const malformed = structuredClone(actions)
+      const action = malformed.actions.find(
+        (candidate) => candidate.actionId === entry.actionId,
+      )!
+      entry.mutate(action.calculation as unknown as Record<string, unknown>)
+      expect(
+        () =>
+          resolveAgentAction({
+            agent: malformed,
+            actionId: entry.actionId,
+            mindscapeRank: 4,
+            levels: entry.levels,
+          }),
+        entry.label,
+      ).toThrow()
+    }
+  })
+
   it("loads the four actions through the public agent loader", async () => {
     const loaded = await loadAgentActions("Phoenix")
     if (!loaded) throw new Error("Pheony was not published")

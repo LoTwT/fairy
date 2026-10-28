@@ -104,6 +104,8 @@ export type {
   ActionSourceReference,
   ResolveAgentActionInput,
   ResolvedAgentAction,
+  ResolvedActionDamageItem,
+  ResolvedActionMultiplierInput,
   ResolvedActionSegment,
   ResolvedSkillLevel,
   SkillCoefficientCurve,

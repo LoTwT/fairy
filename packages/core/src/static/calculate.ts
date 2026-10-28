@@ -13,6 +13,7 @@ import type {
   EffectId,
   PanelAttributeBonus,
   ResolvedSkillLevel,
+  SkillCoefficientCurve,
   SkillLevelGroup,
   SourceBinding,
   SpecialSkillLevel,
@@ -1063,97 +1064,6 @@ function calculateOrdinaryStaticActionDamage(
         )
       }
     }
-    if (catalogAction.calculation.kind === "anomaly-settlement") {
-      requireValue(
-        action.calculation.kind === "anomaly-settlement",
-        "/action/calculation",
-        "Resolved action must be an anomaly settlement",
-        "CONTEXT_MISMATCH",
-      )
-      const source = catalogAction.calculation
-      const resolved = action.calculation
-      const request = input.anomalySettlement!
-      requireValue(
-        request !== null &&
-          typeof request === "object" &&
-          request.damage !== null &&
-          typeof request.damage === "object" &&
-          request.damage.kind === "anomaly-settlement",
-        "/anomalySettlement/damage",
-        "Anomaly settlement parameters are required",
-        "INVALID_INPUT",
-      )
-      requireValue(
-        JSON.stringify(source.elements) === JSON.stringify(resolved.elements),
-        "/action/calculation/elements",
-        "Resolved anomaly elements must match the loaded record",
-        "CONTEXT_MISMATCH",
-      )
-      requireValue(
-        source.elements.includes(request.element),
-        "/anomalySettlement/element",
-        "The requested element is not registered by this anomaly settlement action",
-        "CONTEXT_MISMATCH",
-      )
-      const anomalySource = request.anomalySource
-      requireValue(
-        anomalySource !== null &&
-          typeof anomalySource === "object" &&
-          Number.isInteger(anomalySource.level) &&
-          anomalySource.level >= 1 &&
-          anomalySource.level <= 60,
-        "/anomalySettlement/anomalySource/level",
-        "The original anomaly source level must be an integer within 1–60",
-        "INVALID_INPUT",
-      )
-      requireValue(
-        input.actors.some((actor) => actor.entityId === anomalySource.entityId),
-        "/anomalySettlement/anomalySource",
-        "The original anomaly source must be a configured actor",
-        "MISSING_REFERENCE",
-      )
-      requireValue(
-        source.items.length > 0 &&
-          source.items.length === resolved.damageItems.length &&
-          source.items.every(
-            (item, index) =>
-              item.itemId === resolved.damageItems[index]?.itemId &&
-              item.stat === resolved.damageItems[index]?.stat,
-          ),
-        "/action/calculation/items",
-        "Resolved anomaly damage items must match the loaded record",
-        "CONTEXT_MISMATCH",
-      )
-      const expectedMultipliers = source.items.map((item) => {
-        const curve = item.coefficient
-        if (curve.base === 0 && curve.growth === 0) return 0
-        const level = action.levels[curve.levelGroup]
-        if (level === undefined) return Number.NaN
-        return curve.base + curve.growth * (level.effective - 1)
-      })
-      requireValue(
-        resolved.damageItems.every(
-          (item, index) => item.damageMultiplier === expectedMultipliers[index],
-        ),
-        "/action/calculation/items",
-        "Resolved anomaly multipliers must match the loaded record and resolved levels",
-        "CONTEXT_MISMATCH",
-      )
-      requireValue(
-        source.anomalySettlementCriticalDamage ===
-          resolved.anomalySettlementCriticalDamage,
-        "/action/calculation/anomalySettlementCriticalDamage",
-        "Resolved anomaly critical damage must match the loaded record",
-        "CONTEXT_MISMATCH",
-      )
-      requireValue(
-        request.damage.anomalySettlementCriticalDamage === undefined ||
-          request.damage.anomalySettlementCriticalDamage.length === 0,
-        "/anomalySettlement/damage/anomalySettlementCriticalDamage",
-        "The event's anomaly critical damage is carried by the action or its catalog option; do not prefill it",
-        "CONTEXT_MISMATCH",
-      )
-    }
     // 按每个角色自己的输入解析显式技能等级；不借用动作等级、默认值或队友等级。
     const skillLevelsByActor = new Map<
       EntityId,
@@ -1195,6 +1105,191 @@ function calculateOrdinaryStaticActionDamage(
             },
           ])
       }
+    }
+    if (catalogAction.calculation.kind === "anomaly-settlement") {
+      requireValue(
+        action.calculation.kind === "anomaly-settlement",
+        "/action/calculation",
+        "Resolved action must be an anomaly settlement",
+        "CONTEXT_MISMATCH",
+      )
+      const source = catalogAction.calculation
+      const resolved = action.calculation
+      const request = input.anomalySettlement!
+      requireValue(
+        request !== null &&
+          typeof request === "object" &&
+          request.damage !== null &&
+          typeof request.damage === "object" &&
+          request.damage.kind === "anomaly-settlement",
+        "/anomalySettlement/damage",
+        "Anomaly settlement parameters are required",
+        "INVALID_INPUT",
+      )
+      requireValue(
+        Array.isArray(source.elements) &&
+          Array.isArray(resolved.elements) &&
+          JSON.stringify(source.elements) === JSON.stringify(resolved.elements),
+        "/action/calculation/elements",
+        "Resolved anomaly elements must match the loaded record",
+        "CONTEXT_MISMATCH",
+      )
+      requireValue(
+        source.elements.includes(request.element),
+        "/anomalySettlement/element",
+        "The requested element is not registered by this anomaly settlement action",
+        "CONTEXT_MISMATCH",
+      )
+      const anomalySource = request.anomalySource
+      requireValue(
+        anomalySource !== null &&
+          typeof anomalySource === "object" &&
+          Number.isInteger(anomalySource.level) &&
+          anomalySource.level >= 1 &&
+          anomalySource.level <= 60,
+        "/anomalySettlement/anomalySource/level",
+        "The original anomaly source level must be an integer within 1–60",
+        "INVALID_INPUT",
+      )
+      requireValue(
+        input.actors.some((actor) => actor.entityId === anomalySource.entityId),
+        "/anomalySettlement/anomalySource",
+        "The original anomaly source must be a configured actor",
+        "MISSING_REFERENCE",
+      )
+      requireValue(
+        Array.isArray(source.items) &&
+          source.items.length > 0 &&
+          Array.isArray(resolved.damageItems) &&
+          source.items.length === resolved.damageItems.length &&
+          source.items.every(
+            (item, index) =>
+              item !== null &&
+              typeof item === "object" &&
+              resolved.damageItems[index] !== null &&
+              typeof resolved.damageItems[index] === "object" &&
+              item.itemId === resolved.damageItems[index]?.itemId &&
+              item.stat === resolved.damageItems[index]?.stat,
+          ),
+        "/action/calculation/items",
+        "Resolved anomaly damage items must match the loaded record",
+        "CONTEXT_MISMATCH",
+      )
+      const expectedMultipliers = source.items.map((item, index) => {
+        const curve: SkillCoefficientCurve = item.coefficient
+        const resolvedItem = resolved.damageItems[index]!
+        requireValue(
+          curve !== null &&
+            typeof curve === "object" &&
+            typeof curve.base === "number" &&
+            Number.isFinite(curve.base) &&
+            typeof curve.growth === "number" &&
+            Number.isFinite(curve.growth),
+          `/action/calculation/items/${index}/coefficient`,
+          "Anomaly damage coefficients must be finite",
+          "CONTEXT_MISMATCH",
+        )
+        let expectedCurveMultiplier = 0
+        if (curve.base !== 0 || curve.growth !== 0) {
+          requireValue(
+            actingSkillLevels !== undefined,
+            `/actors/${input.actorId}/skillLevels/${curve.levelGroup}`,
+            "Anomaly settlement requires independently provided skill levels for every curve it consumes",
+            "INVALID_INPUT",
+          )
+          const independentLevel = actingSkillLevels[curve.levelGroup]
+          requireValue(
+            independentLevel !== undefined,
+            `/actors/${input.actorId}/skillLevels/${curve.levelGroup}`,
+            "Anomaly settlement skill levels must include every curve's level group",
+            "INVALID_INPUT",
+          )
+          const actionLevel = action.levels[curve.levelGroup]
+          requireValue(
+            actionLevel !== undefined &&
+              JSON.stringify(actionLevel) === JSON.stringify(independentLevel),
+            `/action/levels/${curve.levelGroup}`,
+            "Resolved anomaly levels must match the independently configured actor levels",
+            "CONTEXT_MISMATCH",
+          )
+          expectedCurveMultiplier =
+            curve.base + curve.growth * (independentLevel.effective - 1)
+          requireValue(
+            Number.isFinite(expectedCurveMultiplier) &&
+              expectedCurveMultiplier >= 0,
+            `/action/calculation/items/${index}/coefficient`,
+            "Anomaly multiplier must be finite and non-negative",
+            "CONTEXT_MISMATCH",
+          )
+        }
+        if (item.multiplyByInput === undefined) {
+          requireValue(
+            resolvedItem.multiplyByInput === undefined,
+            `/action/calculation/items/${index}/multiplyByInput`,
+            "Anomaly multiplier input must match the loaded record",
+            "CONTEXT_MISMATCH",
+          )
+          return expectedCurveMultiplier
+        }
+        const multiplierInput = resolvedItem.multiplyByInput
+        requireValue(
+          multiplierInput !== null &&
+            typeof multiplierInput === "object" &&
+            multiplierInput.inputId === item.multiplyByInput &&
+            typeof multiplierInput.value === "number" &&
+            Number.isFinite(multiplierInput.value),
+          `/action/calculation/items/${index}/multiplyByInput`,
+          "Anomaly multiplier input must be present and finite",
+          "CONTEXT_MISMATCH",
+        )
+        const requirement = catalogAction.inputs.find(
+          (entry) => entry.inputId === item.multiplyByInput,
+        )
+        requireValue(
+          requirement !== undefined &&
+            multiplierInput.value >= requirement.minimum &&
+            multiplierInput.value <= requirement.maximum,
+          `/action/calculation/items/${index}/multiplyByInput`,
+          "Anomaly multiplier input must match a declared action input within its range",
+          "CONTEXT_MISMATCH",
+        )
+        return expectedCurveMultiplier * multiplierInput.value
+      })
+      requireValue(
+        resolved.damageItems.every(
+          (item, index) => item.damageMultiplier === expectedMultipliers[index],
+        ),
+        "/action/calculation/items",
+        "Resolved anomaly multipliers must match the loaded record, independent levels and declared inputs",
+        "CONTEXT_MISMATCH",
+      )
+      requireValue(
+        source.anomalySettlementCriticalDamage ===
+          resolved.anomalySettlementCriticalDamage,
+        "/action/calculation/anomalySettlementCriticalDamage",
+        "Resolved anomaly critical damage must match the loaded record",
+        "CONTEXT_MISMATCH",
+      )
+      const prefilledCriticalDamage =
+        request.damage.anomalySettlementCriticalDamage
+      requireValue(
+        prefilledCriticalDamage === undefined ||
+          (Array.isArray(prefilledCriticalDamage) &&
+            prefilledCriticalDamage.length === 0),
+        "/anomalySettlement/damage/anomalySettlementCriticalDamage",
+        "The event's anomaly critical damage is carried by the action or its catalog option; do not prefill it",
+        "CONTEXT_MISMATCH",
+      )
+      const requestedCriticalRate = request.damage.anomalySettlementCriticalRate
+      requireValue(
+        requestedCriticalRate === undefined ||
+          (typeof requestedCriticalRate === "number" &&
+            Number.isFinite(requestedCriticalRate) &&
+            requestedCriticalRate >= 0),
+        "/anomalySettlement/damage/anomalySettlementCriticalRate",
+        "Anomaly settlement critical rate must be a finite non-negative number when provided",
+        "INVALID_INPUT",
+      )
     }
     const bindings = input.actors.flatMap((a) =>
       sourceBindings(a, skillLevelsByActor.get(a.entityId)),
@@ -1310,7 +1405,9 @@ function calculateOrdinaryStaticActionDamage(
         ...request.damage,
         anomalySource,
         anomalySettlementCriticalRate:
-          request.damage.anomalySettlementCriticalRate ?? 0,
+          request.damage.anomalySettlementCriticalRate === undefined
+            ? 0
+            : request.damage.anomalySettlementCriticalRate,
         anomalySettlementCriticalDamage: [
           action.calculation.anomalySettlementCriticalDamage,
         ],

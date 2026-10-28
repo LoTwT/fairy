@@ -17,6 +17,8 @@ export type {
   AgentActions,
   ResolvedSkillLevel,
   ResolveAgentActionInput,
+  ResolvedActionDamageItem,
+  ResolvedActionMultiplierInput,
   ResolvedActionSegment,
   ResolvedAgentAction,
 } from "@randomplay/shared"

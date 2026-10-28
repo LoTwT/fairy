@@ -324,6 +324,63 @@ aggregate 保留合计结果和限制，显示取整总值为 null；要求逐�
 整行倍率以最终防御缩放、电属性、`sharpen` 伤害种类聚合结算，暴击改按锐暴区；反制支援使用
 `counter-assist` 分类，在目录匹配中属于支援。
 
+### 独立异放结算
+
+`calculateStaticActionDamage` 对 `calculation.kind: "anomaly-settlement"` 的动作使用独立的
+`input.anomalySettlement`，不经过直伤段，也不返回 totals：
+
+```ts
+const input = {
+  data,
+  actors,
+  actorId,
+  action, // data 解析出的 anomaly-settlement 动作
+  target,
+  selections,
+  anomalySettlement: {
+    element: "fire",
+    anomalySource: { entityId: "entity:source", level: 60 },
+    damage: {
+      kind: "anomaly-settlement",
+      // 显式异常参数；不含 anomalySource，也不预填事件暴伤
+      anomalyCriticalRate: 0,
+      anomalyCriticalDamage: [],
+      // ...damageBonus、defense、resistance、damageTaken、stunDamage 等
+    },
+  },
+}
+```
+
+返回分支为：
+
+```ts
+{
+  kind: "anomaly-settlement"
+  element
+  anomalySource
+  settlementCriticalDamage
+  damage: StaticDamageResult
+}
+```
+
+动作的 `elements` 必须包含请求元素；`anomalySource` 必须是已配置 actor，等级为 1—60 的整数。
+伤害项的 `itemId`、`stat`、倍率与事件暴伤必须与已加载动作一致，`statSource` 强制来自原异常来源，
+因此异放的面板、异常精通、异常等级与穿透读取都来自来源而不是触发者。`damage.anomalySource` 由高层
+覆盖；`damage.anomalySettlementCriticalDamage` 只接受省略或空数组，`anomalySettlementCriticalRate`
+只接受省略或有限非负数。字符串、`{ length: 0 }`、`null` 等畸形值按字段返回失败，不按空数组或缺省放过。
+
+基础 CAL 动作的每个非零倍率曲线都要求调用方在 `actor.skillLevels` 中独立提供对应培养组。core 复用
+来源的 `skillLevelBonuses` 解析并交叉核对 `trained/bonus/effective`，再用该独立 `effective` 重算倍率；
+省略等级、伪造动作等级或只同步伪造倍率都会拒绝。M4 的零初始倍率不要求培养等级，最终倍率与事件 40%
+只由 B2 目录选项提供。来源项带 `multiplyByInput` 时，解析结果携带 `{ inputId, value }`，core 按
+`action.inputs` 的声明与范围重新计算同一倍率；缺失或篡改拒绝。
+
+菲欧妮的四个动作 `0021`—`0024` 分别对应基础焚罪 CAL、基础烬火追魂 CAL、M4 焚罪追加异放与
+M4 烬火追魂追加异放；`0010`/`0014` 的直伤段与合计不受影响。调用方必须显式选择事件，不自动追加，
+也不模拟异常状态、积蓄、持续时间或战斗时间线。完整来源、锚点、消融与配装数值见
+[技能动作规范](../data/skill-actions.md#菲欧妮基础-cal-与影画-4-追加异放)和
+[PR-B4 计划](../../plans/pheony-static-damage-completion.md#84-组合完整配装-e2e)。
+
 ### 特殊技最终等级
 
 agent 来源绑定支持可选的 `specialSkillLevel`（整数域 1—16），含义严格为已含影画的特殊技最终等级；
@@ -335,6 +392,8 @@ agent 来源绑定支持可选的 `specialSkillLevel`（整数域 1—16），�
 
 只有选中的效果实际依赖特殊技最终等级时才要求提供：依赖它的目录选项声明有证据支持的 `specialSkillLevels`，
 缺少输入或等级无证据键返回 `MISSING_RANK`；未选择该效果不阻断同角色的独立已支持效果。
+独立异放动作的倍率曲线是例外：基础 CAL 使用哪个培养组，就必须完整提供该组的 `skillLevels`，
+不能以动作解析结果代替调用方配置；M4 的零初始倍率不读取培养等级。
 显式提供 `skillLevels` 时，对与 `action.levels` 重叠的类别比较解析结果，不一致返回 `CONTEXT_MISMATCH`；
 没有显式增益等级时不借用动作等级、默认值、核心档位或队友等级。
 底层目录接口只消费调用方已解析的最终等级并验证 1—16 及支持表，不声称凭一个整数重建训练进度；
